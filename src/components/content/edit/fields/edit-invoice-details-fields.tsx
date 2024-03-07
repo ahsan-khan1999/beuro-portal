@@ -16,7 +16,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-5",
+      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
@@ -35,7 +35,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               inputType: "text",
               id: "invoiceContent.title",
               name: "invoiceContent.title",
-              placeholder: "Text for Invoice",
+              placeholder: translate("content.details.invoice_title"),
               register,
             },
           },
@@ -53,9 +53,9 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.description",
 
               control,
-              value:
-                contentDetails?.id &&
-                contentDetails?.invoiceContent?.description,
+              // value:
+              //   contentDetails?.id &&
+              //   contentDetails?.invoiceContent?.description,
             },
           },
 
@@ -73,7 +73,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.invoiceContent?.body,
+              // value: contentDetails?.id && contentDetails?.invoiceContent?.body,
             },
           },
 
@@ -106,7 +106,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",

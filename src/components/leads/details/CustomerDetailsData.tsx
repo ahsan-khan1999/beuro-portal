@@ -19,7 +19,7 @@ const customerDetailData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10"
         id={translate("leads.tabs_headings.customer")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
@@ -38,7 +38,7 @@ const customerDetailData = ({
             viewBox="0 0 21 21"
             fill="none"
           >
-            <g clip-path="url(#clip0_1241_60323)">
+            <g clipPath="url(#clip0_1241_60323)">
               <path
                 d="M16.4138 10.197C15.953 10.197 15.5806 10.5704 15.5806 11.0303V17.697C15.5806 18.1561 15.2072 18.5303 14.7473 18.5303H3.08057C2.62051 18.5303 2.24728 18.1561 2.24728 17.697V6.03027C2.24728 5.57114 2.62051 5.19699 3.08057 5.19699H9.74728C10.2081 5.19699 10.5806 4.82361 10.5806 4.36371C10.5806 3.90366 10.2081 3.53027 9.74728 3.53027H3.08057C1.70224 3.53027 0.580566 4.65195 0.580566 6.03027V17.697C0.580566 19.0753 1.70224 20.197 3.08057 20.197H14.7473C16.1256 20.197 17.2473 19.0753 17.2473 17.697V11.0303C17.2473 10.5695 16.8747 10.197 16.4138 10.197Z"
                 fill="#4A13E7"
@@ -67,8 +67,6 @@ const customerDetailData = ({
         </button>
       </div>
 
-      <hr className="opacity-20 mb-5" />
-
       <div className="mt-5">
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3  gap-y-5">
           <div>
@@ -76,9 +74,11 @@ const customerDetailData = ({
               {translate("leads.customer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {getKeyByValue(
-                staticEnums["CustomerType"],
-                leadDetails?.customerDetail?.customerType
+              {translate(
+                `customer_type.${getKeyByValue(
+                  staticEnums["CustomerType"],
+                  leadDetails?.customerDetail?.customerType
+                )}`
               )}
             </div>
           </div>
@@ -126,6 +126,14 @@ const customerDetailData = ({
               {leadDetails?.customerDetail?.mobileNumber}
             </div>
           </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("customers.details.gender")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              {translate(`gender.${leadDetails?.customerDetail?.gender}`)}
+            </div>
+          </div>
         </div>
 
         <div className="mt-5">
@@ -154,7 +162,9 @@ const customerDetailData = ({
                 {translate("leads.customer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {leadDetails?.customerDetail?.address?.country}
+                {translate(
+                  `countries.${leadDetails?.customerDetail?.address?.country}`
+                )}
               </div>
             </div>
           </div>

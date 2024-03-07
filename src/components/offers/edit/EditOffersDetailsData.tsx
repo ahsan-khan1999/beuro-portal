@@ -6,10 +6,9 @@ import AddressEditDetails from "./AddressEditDetails";
 import AditionalEditDetails from "./AditionalEditDetails";
 import ServiceEditDetails from "./ServiceEditDetails";
 import OfferTabs from "@/base-components/ui/tab/OfferTabs";
-import { OffersTableRowTypes } from "@/types/offers";
 import { useRouter } from "next/router";
-import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export enum EditComponentsType {
   offerEdit,
@@ -37,6 +36,7 @@ const EditOffersDetailsData = ({
   );
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const { offerDetails } = useAppSelector((state) => state.offer);
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -90,9 +90,12 @@ const EditOffersDetailsData = ({
       name: `${translate("offers.tabs_heading.additional")}`,
     },
   ];
+
   const handleNextTab = (currentComponent: EditComponentsType) => {
     if (tabType === EditComponentsType.additionalEdit) {
-      router.push("/offers");
+      router.push(
+        `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
+      );
       return;
     }
     setTabType(currentComponent);
@@ -132,6 +135,7 @@ const EditOffersDetailsData = ({
               index={index + 1}
               icon={item.icon}
               selectedTab={index}
+              key={index}
             />
           ))}
         </div>

@@ -20,6 +20,8 @@ import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
 import RejectOffer from "@/base-components/ui/modals1/RejectOffer";
 import { smoothScrollToSection } from "@/utils/utility";
+import { EditDate } from "@/base-components/ui/modals1/editDate";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 export const SignPdf = <T,>({
   newPageData,
@@ -30,6 +32,7 @@ export const SignPdf = <T,>({
   action,
   emailTemplateSettings,
   systemSettings,
+  setOfferData
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
@@ -39,6 +42,7 @@ export const SignPdf = <T,>({
   action?: string;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings: SystemSetting | null;
+  setOfferData?: SetStateAction<any>
 }) => {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
@@ -70,6 +74,9 @@ export const SignPdf = <T,>({
     router.push("https://staging.buero365.cloudmeshsolutions.com/");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+  const editDateHandler = () => {
+    dispatch(updateModalType({ type: ModalType.EDIT_DATE }));
+  };
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.UPDATE_SUCCESS]: (
@@ -98,6 +105,15 @@ export const SignPdf = <T,>({
         routeHandler={onSuccess}
       />
     ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={onClose}
+      />
+    ),
+    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} setOfferData={setOfferData} pdfData={pdfData} />,
   };
 
   useEffect(() => {
@@ -121,6 +137,7 @@ export const SignPdf = <T,>({
             isOffer={pdfData.isOffer}
             emailTemplateSettings={emailTemplateSettings}
             systemSettings={systemSettings}
+            handleEditDateModal={editDateHandler}
           />
         )}
         {newPageData.slice(1).map((pageItems, index) => (
@@ -150,16 +167,19 @@ export const SignPdf = <T,>({
           handleDescriptionUpdate={
             pdfData.movingDetails?.handleDescriptionUpdate
           }
-          signature={pdfData?.signature}
-          isCanvas={action === "Reject" ? false : pdfData?.isCanvas}
+          signature={offerSignature as string}
+          isCanvas={pdfData?.isCanvas}
           setIsSignatureDone={setIsSignatureDone as SetStateAction<boolean>}
           isSignatureDone={isSignatureDone}
           emailTemplateSettings={emailTemplateSettings}
           setOfferSignature={setOfferSignature}
           systemSettings={systemSettings}
+          pdfData={pdfData}
+          setComponentMounted={() => setComponentMounted(true)}
+
         />
       </div>
-      <OfferSignedPdf
+      {/* <OfferSignedPdf
         {...{
           emailTemplateSettings,
           signature: offerSignature,
@@ -169,7 +189,7 @@ export const SignPdf = <T,>({
           showContractSign: !!offerSignature,
           onComponentMounted: () => setComponentMounted(true),
         }}
-      />
+      /> */}
 
       {renderModal()}
     </div>

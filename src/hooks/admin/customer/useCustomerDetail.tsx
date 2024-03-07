@@ -67,7 +67,7 @@ export default function useCustomerDetailAdmin() {
       <CreationCreated
         heading={translate("common.are_you_sure_modal.success")}
         subHeading={translate(
-          "admin.customers_details.card_content.customer_free"
+          "common.modals.update_success"
         )}
         onClose={onClose}
         route={route}

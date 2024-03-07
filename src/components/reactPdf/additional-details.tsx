@@ -1,4 +1,5 @@
 import { AdditionalDetailsProps } from "@/types/pdf";
+import { replaceClassesWithInlineStyles } from "@/utils/utility";
 import { Text, View, StyleSheet, Image, Font } from "@react-pdf/renderer";
 import { useRouter } from "next/router";
 import { useState, useMemo } from "react";
@@ -21,20 +22,20 @@ const styles = StyleSheet.create({
     "> *": {
       // Styles for direct children (Text elements) of the container
       // Add your specific styles for the Text elements here
-      fontSize: 10,
+      fontSize: 7,
       color: "blue",
     },
   },
   heading: {
     marginBottom: 2,
-    fontSize: 14,
+    fontSize: 7,
   },
   description: {
-    fontSize: 12,
+    fontSize: 7,
     fontWeight: "normal",
   },
   shareHeading: {
-    fontSize: 14,
+    fontSize: 7,
     fontWeight: "medium",
     color: "#000",
     marginTop: 30,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
 
   dateText: {
     paddingTop: 12,
-    fontSize: 12,
+    fontSize: 7,
     fontWeight: 400,
     color: "#000",
   },
@@ -70,64 +71,70 @@ const styles = StyleSheet.create({
 
 const stylesheet: HtmlStyles = {
   body: {
-    fontFamily: 'Poppins',
+    fontFamily: "Poppins",
   },
   p: {
     margin: 0,
-    fontSize: 10,
+    fontSize: 7,
     color: "#272727",
   },
   h1: {
     margin: 0,
     padding: 0,
-    fontSize: 16,
+    fontSize: 7,
   },
   h2: {
     margin: 0,
     padding: 0,
-    fontSize: 14,
+    fontSize: 7,
   },
   h3: {
     margin: 0,
     padding: 0,
-    fontSize: 12,
+    fontSize: 7,
   },
   h4: {
     margin: 0,
     padding: 0,
-    fontSize: 12,
+    fontSize: 7,
   },
   h5: {
     margin: 0,
     padding: 0,
-    fontSize: 10,
+    fontSize: 7,
   },
   h6: {
     margin: 0,
     padding: 0,
-    fontSize: 10,
+    fontSize: 7,
   },
-  ul: { marginLeft: 16 },
+  ul: { marginLeft: 0 ,
+    marginTop:6,
+  
+  },
   li: {
-    fontSize: 10,
+    fontSize: 7,
     marginLeft: 0,
+    marginRight: 10,
+    marginTop:0,
+
     listStyle: "outside",
   },
   blockquote: {
     borderLeft: 5,
     borderColor: "#ccc",
     borderStyle: "solid",
+
     marginLeft: 0,
     marginRight: 0,
     overflow: "hidden",
     paddingLeft: "20px",
-
     "blockqoute p": {
-      margin: 0,
+      margin: 10,
     },
   },
   strong: {
-    fontSize: 14,
+    fontSize: 7,
     fontWeight: 700,
     fontStyle: "bold",
   },
@@ -140,23 +147,28 @@ export const AdditionalDetails = ({
   description?: string;
   signature?: any;
 }) => {
-  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-  const onFileChange = () => {
-    if (signature) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader?.result);
-      };
-      reader.readAsDataURL(signature);
-    }
-  };
+  // const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
+  // const onFileChange = () => {
+  //   if (signature) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImageSrc(reader?.result);
+  //     };
+  //     reader.readAsDataURL(signature);
+  //   }
+  // };
 
-  useMemo(() => signature && onFileChange(), [signature]);
+  // useMemo(() => signature && onFileChange(), [signature]);
+
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
-        <Html resetStyles={true} stylesheet={stylesheet} style={{ fontFamily: "Poppins" }}>
-          {description || ""}
+        <Html
+          resetStyles={false}
+          stylesheet={stylesheet}
+          style={{ fontFamily: "Poppins" }}
+        >
+          {replaceClassesWithInlineStyles(description ?? "")}
         </Html>
       </View>
     </View>

@@ -32,7 +32,9 @@ const PdfPriview = () => {
     onClose,
     onSuccess,
     systemSetting,
+    offerDetails,
   } = useOfferPdf();
+
   const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -43,18 +45,26 @@ const PdfPriview = () => {
         route={onSuccess}
       />
     ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
+    ),
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
   return (
     <>
-      {loading || loadingGlobal ? (
+      {loading ? (
         <LoadingState />
       ) : (
         <div className="">
           <EmailCard
-            emailStatus={offerData?.emailHeader?.emailStatus}
+            emailStatus={offerDetails?.emailStatus}
             offerNo={offerData?.emailHeader?.offerNo}
             onEmailSend={handleEmailSend}
             loading={loading}
@@ -82,7 +92,6 @@ const PdfPriview = () => {
             setPdfFile={setPdfFile}
             systemSetting={systemSetting}
             showContractSign={true}
-
           />
 
           {renderModal()}

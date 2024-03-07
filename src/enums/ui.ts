@@ -8,15 +8,17 @@ export enum DropDownKeys {
   DROP_DOWN_TEXT_CLASS_NAME = "dropDownTextClassName",
   DROP_DOWN_ICON_CLASS_NAME = "dropDownIconClassName",
   DROP_DOWN_ITEMS_Container_CLASS_NAME = "dropDownItemsContainerClassName",
-  DROP_DOWN_DISABLED = 'dropDownDisabled',
-  SHOULD_NOT_SELECT_ITEM = 'shouldNotSelectItem',
+  DROP_DOWN_DISABLED = "dropDownDisabled",
+  SHOULD_NOT_SELECT_ITEM = "shouldNotSelectItem",
 }
-
 
 export enum ModalType {
   NONE,
   CONFIRM_DELETION,
   CREATION,
+  UPLOAD_FILE,
+  OFFER_ACCEPTED,
+  OFFER_REJECTED,
   ADD_POSTSPONED_NOTE,
   ADD_REMARKS,
   FOLLOW_UPS,
@@ -27,6 +29,7 @@ export enum ModalType {
   SELECTED_LEADS_DETAIL,
   FOLLOW_UPS_DETAILS,
   INFO_DELETED,
+  CONFIRM_DELETE_NOTE,
   PASSWORD_CHANGE_SUCCESSFULLY,
   PASSWORD_SET,
   LINK_SEND_TO_EMAIL,
@@ -36,7 +39,9 @@ export enum ModalType {
   INVOICE_CREATED_SUCCESSFULLY,
   EXISTING_NOTES,
   ADD_NOTE,
+  EDIT_NOTE,
   SHARE_IMAGES,
+  DOCUMENT_VIEWER,
   ARE_YOU_SURE,
   PASSWORD_CHANGE,
   ADD_TAX,
@@ -57,16 +62,14 @@ export enum ModalType {
   INVOICE_UPDATE,
   EMAIL_CONFIRMATION,
   RECURRING_INVOICE_UPDATE,
-  REJECT_OFFER
-
-
-
+  REJECT_OFFER,
+  UPDATE_ADDITIONAL_DETAILS,
+  EDIT_DATE,
 }
+
 export type ModalConfigType = {
   [key in ModalType]?: JSX.Element;
 };
-
-
 
 export enum EmptyStateType {
   hasNoData,

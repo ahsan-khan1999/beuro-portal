@@ -27,6 +27,7 @@ import { readContent } from "@/api/slices/content/contentSlice";
 import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
+import { ContentTableRowTypes } from "@/types/content";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -77,7 +78,10 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     if (type && customerID)
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID }, paginate: 0 },
+          params: {
+            filter: { customerID: customerID, status: [0, 1, 3] },
+            paginate: 0,
+          },
         })
       );
   }, [customerID]);
@@ -97,9 +101,13 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
         mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
         content: offerDetails?.content?.id,
-        title: offerDetails?.title,
+        title:
+          offerDetails?.title || offerDetails?.content?.offerContent?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
+        gender:
+          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.time,
       });
     }
   }, [offerDetails?.id]);
@@ -111,31 +119,50 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     control,
     name: "date",
   });
+  console.log(offerDetails, "offerDetails");
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if (selectedCustomers) {
+      dispatch(setCustomerDetails(selectedCustomers));
 
-    reset({
-      ...selectedCustomers[0],
-      customerID: selectedCustomers[0]?.id,
-      type: type,
-      content: selectedContent,
-      leadID: "",
-    });
+      reset({
+        ...selectedCustomers,
+        customerID: selectedCustomers?.id,
+        type: type,
+        content: selectedContent,
+        leadID: "",
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+      });
+    }
   };
-  const handleContentSelect = () => { };
+  const handleContentSelect = () => {};
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
+    if (offerDetails?.id) {
+      if (filteredContent)
+        setValue("title", filteredContent?.offerContent?.title);
+    } else {
+      const filteredLead = lead.find((item) => item.id === leadID);
+      if (filteredLead) {
+        const content = filteredLead?.requiredService as ContentTableRowTypes;
 
-    if (filteredContent)
-      setValue("title", filteredContent?.offerContent?.title);
-  }, [selectedContent]);
+        if (selectedContent !== content?.id) {
+          setValue("content", selectedContent);
+          setValue("title", filteredContent?.offerContent?.title);
+        } else {
+          setValue("content", content?.id);
+          setValue("title", content?.offerContent?.title);
+        }
+      } else {
+        setValue("content", selectedContent);
+        setValue("title", filteredContent?.offerContent?.title);
+      }
+    }
+  }, [selectedContent, leadID]);
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -170,7 +197,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-        title: null
+        // title: null,
+        gender: null,
       });
     } else if (type === "Existing Customer" && offerDetails?.id) {
       reset({
@@ -186,16 +214,20 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
         mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
         content: offerDetails?.content?.id,
-        title: offerDetails?.title,
+        title:
+          offerDetails?.title || offerDetails?.content?.offerContent?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
+        gender:
+          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.time,
       });
-    } else if(type === "Existing Customer" && !offerDetails?.id){
-      dispatch(setLeads([]))
-      dispatch(setCustomerDetails(DEFAULT_CUSTOMER))
-      setValue("content", null)
-      setValue("title", null)
-      setValue("leadID", null)
+    } else if (type === "Existing Customer" && !offerDetails?.id) {
+      dispatch(setLeads([]));
+      dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+      setValue("content", null);
+      setValue("title", null);
+      setValue("leadID", null);
     }
   }, [type]);
 
@@ -204,7 +236,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
-    offerDetails,
+    loading,
     control
   );
   const submit = AddOfferDetailsSubmitFormField(
@@ -221,7 +253,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       const apiData: any = {
         ...data,
         step: 1,
-        offerId: offerDetails?.id,
+        offerId: offerDetails?.id === "convert" ? null : offerDetails?.id,
         stage: ComponentsType.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
@@ -271,5 +303,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
+    offerDetails,
   };
 };

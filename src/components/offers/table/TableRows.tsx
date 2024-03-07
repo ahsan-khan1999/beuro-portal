@@ -9,11 +9,16 @@ import {
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { staticEnums } from "@/utils/static";
+import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   dataToAdd,
   openModal,
   handleImageUpload,
+  handleOfferStatusUpdate,
+  handlePaymentStatusUpdate,
 }: {
   dataToAdd: OffersTableRowTypes[];
   openModal: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
@@ -21,16 +26,41 @@ const TableRows = ({
     item: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
+  handleOfferStatusUpdate: (id: string, status: string, type: string) => void;
+  handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
+  const itemsValue = [
+    `${translate("offer_status.Open")}`,
+    `${translate("offer_status.Accepted")}`,
+    `${translate("offer_status.Expired")}`,
+    `${translate("offer_status.Rejected")}`,
+  ];
+
   return (
-    <div>
+    <div className="overflow-y-visible">
       {dataToAdd?.map((item, index) => {
         return (
           <div
+            onClick={() =>
+              // router.push(
+              //   `/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`
+              // )
+
+              router.push({
+                pathname: `/offers/pdf-preview`,
+                query: { ...router.query, offerID: item?.id, isMail: true },
+              })
+            }
             key={index}
-            className="items-center hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_3fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(110px,_100%)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(150px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(60px,_3fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(60px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(70px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item.offerNumber}</span>
             <span className="py-4 truncate">
@@ -49,31 +79,99 @@ const TableRows = ({
               <div
                 className={`bg-[${getEmailColor(
                   item.emailStatus
-                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
-                {translate(item?.emailStatus)}
+                {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
 
-            <span className="py-4 flex justify-center items-center">
+            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+              <DropDown
+                items={Object.keys(staticEnums["PaymentType"]).map(
+                  (item, index) => ({
+                    item: {
+                      label: paymentMethod[index],
+                      value: item,
+                    },
+                  })
+                )}
+                selectedItem={translate(`payment_method.${item.paymentType}`)}
+                onItemSelected={(status) => {
+                  handlePaymentStatusUpdate(item.id, status, "offer");
+                }}
+                dropDownClassName={`${
+                  staticEnums["PaymentType"][item.paymentType] === 0
+                    ? "bg-[#45C769]"
+                    : "bg-[#4A13E7]"
+                } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                dropDownTextClassName="text-white text-base font-medium"
+                dropDownIconClassName={`text-[#fff]`}
+                dropDownItemsContainerClassName="w-full"
+                isSecondLastIndex={index === dataToAdd?.length - 2}
+                isLastIndex={index === dataToAdd?.length - 1}
+              />
+            </span> */}
+
+            <span className="py-4 flex justify-center items-center mx-1">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
-                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm`}
+                  } text-white px-2 py-1 text-center rounded-md w-full text-sm`}
               >
-                {item.paymentType}
+                {translate(`payment_method.${item.paymentType}`)}
               </div>
             </span>
 
             <span className="py-4 flex justify-center items-center">
               <div
-                style={{
-                  backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
-                }}
-                className="text-white px-2 py-1 text-center rounded-md min-w-[70px] text-sm"
+                className={`bg-[${getOfferStatusColor(item.offerStatus)}]
+                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
-                {item.offerStatus}
+                {translate(`offer_status.${item.offerStatus}`)}
               </div>
             </span>
+
+            {/* {item.offerStatus === "Accepted" ? (
+              <span className="py-4 ml-1">
+                <div
+                  style={{
+                    backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
+                  }}
+                  className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm"
+                >
+                  {translate(`offer_status.${item.offerStatus}`)}
+                </div>
+              </span>
+            ) : (
+              <div className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+                <DropDown
+                  items={Object.keys(staticEnums["OfferStatus"]).map(
+                    (item, index) => ({
+                      item: { label: itemsValue[index], value: item },
+                    })
+                  )}
+                  selectedItem={translate(`offer_status.${item.offerStatus}`)}
+                  key={item.id}
+                  onItemSelected={(status) => {
+                    handleOfferStatusUpdate(item.id, status, "offer");
+                  }}
+                  dropDownClassName={`${
+                    staticEnums["OfferStatus"][item.offerStatus] === 0
+                      ? "bg-[#4A13E7]"
+                      : staticEnums["OfferStatus"][item.offerStatus] === 1
+                      ? "bg-[#45C769]"
+                      : staticEnums["OfferStatus"][item.offerStatus] === 2
+                      ? "bg-[#FF376F]"
+                      : "bg-[#FF0000]"
+                  } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                  dropDownIconClassName={"text-white"}
+                  dropDownTextClassName="text-white text-base font-medium"
+                  dropDownItemsContainerClassName="w-full"
+                  isSecondLastIndex={index === dataToAdd?.length - 2}
+                  isLastIndex={index === dataToAdd?.length - 1}
+                  isOffer={true}
+                />
+              </div>
+            )} */}
 
             <span
               className="py-4 flex justify-center items-center cursor-pointer"
@@ -132,27 +230,27 @@ const TableRows = ({
                   height="31"
                   rx="7.5"
                   fill="white"
-                  stroke={item.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                  stroke={item.isNoteCreated ? "#FF0000" : "#4A13E7"}
                 />
                 <path
                   d="M20.0838 15.499C20.0838 15.1576 19.8071 14.8809 19.4657 14.8809H13.0991C12.7577 14.8809 12.481 15.1576 12.481 15.499C12.481 15.8404 12.7577 16.1171 13.0991 16.1171H19.4657C19.8071 16.1171 20.0838 15.8404 20.0838 15.499Z"
-                  fill={item.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                  fill={item.isNoteCreated ? "#FF0000" : "#4A13E7"}
                 />
                 <path
                   d="M13.0991 17.3535C12.7577 17.3535 12.481 17.6302 12.481 17.9716C12.481 18.313 12.7577 18.5897 13.0991 18.5897H16.9657C17.3071 18.5897 17.5838 18.313 17.5838 17.9716C17.5838 17.6302 17.3071 17.3535 16.9657 17.3535H13.0991Z"
-                  fill={item.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                  fill={item.isNoteCreated ? "#FF0000" : "#4A13E7"}
                 />
                 <path
                   d="M14.5505 23.2877H12.4832C11.8015 23.2877 11.247 22.7332 11.247 22.0515V11.1727C11.247 10.491 11.8015 9.93643 12.4832 9.93643H20.0826C20.7643 9.93643 21.3188 10.491 21.3188 11.1727V14.9741C21.3188 15.3155 21.5956 15.5922 21.937 15.5922C22.2783 15.5922 22.5551 15.3155 22.5551 14.9741V11.1727C22.5551 9.80934 21.4459 8.7002 20.0826 8.7002H12.4832C11.1199 8.7002 10.0107 9.80934 10.0107 11.1727V22.0515C10.0107 23.4148 11.1199 24.524 12.4832 24.524H14.5505C14.8919 24.524 15.1686 24.2472 15.1686 23.9059C15.1686 23.5645 14.8919 23.2877 14.5505 23.2877Z"
-                  fill={item.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                  fill={item.isNoteCreated ? "#FF0000" : "#4A13E7"}
                 />
                 <path
                   d="M23.6495 17.6498C22.9265 16.9267 21.7501 16.9267 21.0275 17.6493L17.634 21.0353C17.5619 21.1072 17.5087 21.1958 17.4791 21.2932L16.7401 23.7263C16.6746 23.942 16.7316 24.1762 16.8891 24.3376C17.007 24.4585 17.1672 24.5241 17.3316 24.5241C17.3865 24.5241 17.442 24.5167 17.4965 24.5016L19.9914 23.8105C20.0941 23.7821 20.1877 23.7276 20.2631 23.6523L23.6495 20.2722C24.3725 19.5492 24.3725 18.3728 23.6495 17.6498ZM19.5048 22.6626L18.2496 23.0102L18.6169 21.8009L20.9067 19.5162L21.781 20.3905L19.5048 22.6626ZM22.7758 19.3977L22.656 19.5172L21.7819 18.6431L21.9012 18.524C22.1422 18.283 22.5344 18.283 22.7754 18.524C23.0164 18.765 23.0164 19.1571 22.7758 19.3977Z"
-                  fill={item.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                  fill={item.isNoteCreated ? "#FF0000" : "#4A13E7"}
                 />
                 <path
                   d="M19.4657 12.4092H13.0991C12.7577 12.4092 12.481 12.6859 12.481 13.0273C12.481 13.3687 12.7577 13.6454 13.0991 13.6454H19.4657C19.8071 13.6454 20.0838 13.3687 20.0838 13.0273C20.0838 12.6859 19.8071 12.4092 19.4657 12.4092Z"
-                  fill={item.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                  fill={item.isNoteCreated ? "#FF0000" : "#4A13E7"}
                 />
               </svg>
             </span>
@@ -183,10 +281,9 @@ const TableRows = ({
             <span
               className="flex justify-center items-center cursor-pointer rounded-md"
               onClick={() =>
-                router.push({
-                  pathname: "/offers/details",
-                  query: { offer: item?.id },
-                })
+                router.push(
+                  `/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`
+                )
               }
             >
               <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">

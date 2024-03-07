@@ -31,7 +31,11 @@ import { Service } from "./service";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
-import { InvoiceTableRowTypes, SubInvoiceTableRowTypes } from "./invoice";
+import {
+  InvoiceDetailTableRowTypes,
+  InvoiceTableRowTypes,
+  SubInvoiceTableRowTypes,
+} from "./invoice";
 import { contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
@@ -205,7 +209,8 @@ export type GenerateFormAddressField = (
 export type ImageUploadFormFieldType = (
   loading: boolean,
   control?: Control<FieldValues>,
-  onClick?: Function
+  onClick?: Function,
+  setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
 
 // accounting setting formfield
@@ -214,7 +219,8 @@ export type GenerateAccountSettingFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
-  user?: User
+  user?: User,
+  handleRestore?: () => void
 ) => FormField[];
 
 // change mail setting formfield
@@ -242,7 +248,9 @@ export type GenerateEmailTemplateFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   emailSettings: EmailSetting | null,
-  control?: Control<FieldValues>
+  control?: Control<FieldValues>,
+  setValue?: UseFormSetValue<FieldValues>,
+  data?: any
 ) => FormField[];
 
 // edit payment details formfield
@@ -354,7 +362,7 @@ export type GenerateOfferFormField = (
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: OffersTableRowTypes,
-  moreEmail?: { isCc: boolean, isBcc: boolean },
+  moreEmail?: { isCc: boolean; isBcc: boolean },
   setMoreEmail?: SetStateAction<any>,
   setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
@@ -370,10 +378,9 @@ export type GenerateContractFormField = (
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: contractTableTypes,
-  moreEmail?: { isCc: boolean, isBcc: boolean },
+  moreEmail?: { isCc: boolean; isBcc: boolean },
   setMoreEmail?: SetStateAction<any>,
   setValue?: UseFormSetValue<FieldValues>
-
 ) => FormField[];
 export type GenerateInvoiceEmailFormField = (
   register: UseFormRegister<FieldValues>,
@@ -387,10 +394,10 @@ export type GenerateInvoiceEmailFormField = (
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   details?: SubInvoiceTableRowTypes,
-  moreEmail?: { isCc: boolean, isBcc: boolean },
+  moreEmail?: { isCc: boolean; isBcc: boolean },
   setMoreEmail?: SetStateAction<any>,
-  setValue?: UseFormSetValue<FieldValues>
-
+  setValue?: UseFormSetValue<FieldValues>,
+  contentLoading?: boolean
 ) => FormField[];
 // Contract formfield
 export type GenerateOffersFormField = (
@@ -414,9 +421,17 @@ export type GenerateOffersFormField = (
     onContentSelect?: (id: string) => void;
     offerDetails?: OffersTableRowTypes;
     selectedContent?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
   },
   setValue?: SetFieldValue<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
+// Generate Euit date form-field
+export type GenerateEditDateFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>
 ) => FormField[];
 
 export type GenerateOfferServiceFormField = (
@@ -445,6 +460,7 @@ export type GenerateOfferServiceFormField = (
     total?: Total;
     tax?: TaxSetting[] | null;
     currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
   },
 
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
@@ -465,8 +481,9 @@ export type GenerateOfferDateFormField = (
   onClick: UseFieldArrayAppend<FieldValues, "date">,
   count: number,
   handleRemoveDateField: UseFieldArrayRemove,
-  offerDetails: OffersTableRowTypes,
-  control?: Control<FieldValues>
+  loading?: boolean,
+  control?: Control<FieldValues>,
+  wordDates?: { startDate: string, endDate: string }[]
 ) => FormField[];
 // Contract formfield
 export type GenerateLeadsFormField = (
@@ -475,7 +492,7 @@ export type GenerateLeadsFormField = (
   control: Control<FieldValues>,
   onClick?: Function,
   trigger?: UseFormTrigger<FieldValues>,
-  service?: Service[],
+  content?: ContentTableRowTypes[],
   leadDetails?: Lead,
   systemSettings?: SystemSetting | null
 ) => FormField[];
@@ -526,6 +543,30 @@ export type GenerateLeadsCustomerFormField = (
     handleContentSelect?: () => void;
     selectedContent?: string;
     leadID?: string;
+    gender?: number;
+  },
+  setValue: SetFieldValue<FieldValues>
+) => FormField[];
+
+export type GenerateInvoiceCustomerFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  properties: {
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+    customerType: string;
+    type: string;
+    customer: Customers[];
+    onCustomerSelect: (id: string) => void;
+    customerDetails: Customers;
+    onCancel: () => void;
+    leadDetails: Lead;
+    lead?: Lead[];
+    content?: ContentTableRowTypes[];
+    handleContentSelect?: () => void;
+    selectedContent?: string;
+    leadID?: string;
+    gender?: number;
   },
   setValue: SetFieldValue<FieldValues>
 ) => FormField[];
@@ -543,7 +584,12 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  data: { customer: Customers[]; lead: Lead[]; followUps: FollowUp | null, onCustomerSelect?: (id: string) => void },
+  data: {
+    customer: Customers[];
+    lead: Lead[];
+    followUps: FollowUp | null;
+    onCustomerSelect?: (id: string) => void;
+  },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
@@ -577,6 +623,7 @@ export interface PaginationProps {
   itemsPerPage: number;
   onPageChange: (page: number) => void;
   containerClassName?: string;
+  currentPage: number
 }
 
 export interface PaginationItemProps {
@@ -627,9 +674,7 @@ export interface MoreFilterType {
   email?: string[] | string;
   price?: string[];
   payment?: string;
-  leadSource?: string[] | string
-
-
+  leadSource?: string[] | string;
 }
 export interface FilterProps {
   filter: FilterType;
@@ -657,7 +702,9 @@ export interface DocumentHeaderDetailsProps {
   createdBy: string;
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
-  fileType?: "contract" | "invoice" | "receipt"
+  fileType?: "contract" | "invoice" | "receipt";
+  companyName?: string;
+  isReverseLogo?: boolean;
 }
 
 export interface ProductItemFooterProps {
@@ -665,26 +712,33 @@ export interface ProductItemFooterProps {
   tax: string;
   discount: string;
   grandTotal: string;
-  invoiceStatus?: keyof typeof staticEnums["InvoiceStatus"];
+  invoiceStatus?: keyof (typeof staticEnums)["InvoiceStatus"];
   invoiceAmount?: string;
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
   isShowExtraAmount?: boolean;
   systemSettings?: SystemSetting | null;
-  discountType?:keyof typeof staticEnums["DiscountType"];
-  taxType?:keyof typeof staticEnums["TaxType"];
-
+  discountType?: keyof (typeof staticEnums)["DiscountType"];
+  taxType?: keyof (typeof staticEnums)["TaxType"];
+  serviceDiscountSum?: number;
+  isTax?: boolean;
+  isDiscount?: boolean;
+  discountDescription?: string;
 }
 
 export interface ContactDetailsProps {
   address: {
     name: string;
+    companyName: string;
     streetWithNumber: string;
     postalCode: string;
     city: string;
   };
   email: string;
   phone: string;
+  gender?: string;
+  mobile?: string;
+  isReverseInfo?: boolean;
 }
 export interface MovingDetailsProps {
   header: string;
@@ -694,6 +748,9 @@ export interface MovingDetailsProps {
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
   addressLabels?: string[];
+  handleEditDateModal?: () => void;
+  time?: string;
+  isReverseAddress?: boolean;
 }
 export interface ProductItemProps {
   title: string;
@@ -775,7 +832,7 @@ export interface TemplateSettigsSecondColumn {
   postCode: string;
   bankName: string;
   accountNumber: string;
-  iban: string
+  iban: string;
 }
 export interface TemplateSettigsThirdColumn {
   isRow1: boolean;
@@ -788,7 +845,6 @@ export interface TemplateSettigsThirdColumn {
   row3: string;
   row4: string;
   row5: string;
-
 }
 export interface TemplateSettigsFourthColumn {
   isRow1: boolean;
@@ -801,7 +857,6 @@ export interface TemplateSettigsFourthColumn {
   row3: string;
   row4: string;
   row5: string;
-
 }
 export interface TemplateType {
   firstColumn: TemplateSettigsFirstColumn;
@@ -812,6 +867,7 @@ export interface TemplateType {
   isSecondColumn: boolean;
   isThirdColumn: boolean;
   isFourthColumn: boolean;
+  order: boolean;
 }
 interface Template {
   Template: TemplateType;
@@ -834,7 +890,7 @@ export interface EmailHeaderProps {
   onPrint: () => void;
   handleSendByPost: () => void;
   activeButtonId: string | null;
-  offerId?:string
+  offerId?: string;
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;
@@ -907,6 +963,7 @@ export interface PurchasedItemsDetailsProps extends Omit<PdfProps, "qrCode"> {
   totalPages: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings?: SystemSetting | null;
+  handleEditDateModal?: () => void;
 }
 export interface PurchasedItemDetailsNextPageProps {
   headerDetails: DocumentHeaderDetailsProps;
@@ -967,9 +1024,11 @@ export interface AggrementProps {
   isCanvas?: boolean;
   setIsSignatureDone?: SetStateAction<boolean>;
   isSignatureDone?: boolean;
-  emailTemplateSettings?: EmailTemplate | null;
-  setOfferSignature?: SetStateAction<any>;
-  systemSettings?: SystemSetting | null;
+  emailTemplateSettings: EmailTemplate | null;
+  setOfferSignature: SetStateAction<any>;
+  systemSettings: SystemSetting | null;
+  pdfData: PdfProps<any>;
+  setComponentMounted: () => void;
 }
 
 export interface FiltersComponentProps {

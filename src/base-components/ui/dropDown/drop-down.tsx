@@ -18,7 +18,10 @@ export const DropDown = ({
   dropDownIconClassName,
   dropDownDisabled = false,
   shouldNotSelectItem = false,
-}: DropDownProps) => {
+  isLastIndex,
+  isSecondLastIndex,
+  isOffer
+}: DropDownProps & { isLastIndex?: boolean; isSecondLastIndex?: boolean ,isOffer?:boolean}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
@@ -27,16 +30,20 @@ export const DropDown = ({
     !shouldNotSelectItem && setSelectedItem(item);
     setIsOpen((prevState) => !prevState);
   };
+
   useEffect(() => {
     setSelectedItem(defaultSelectedItem);
   }, [defaultSelectedItem]);
+
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =
-    "flex items-center bg-white px-3 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
+    "flex items-center bg-white px-3 py-[10px] w-full min-h-8 border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
   const textClasses = combineClasses(
-    `text-sm font-medium text-dark ${dropDownDisabled ? "text-lightGray" : ""}`,
+    `text-sm font-medium text-white ${
+      dropDownDisabled ? "text-lightGray" : ""
+    }`,
     dropDownTextClassName
   );
 
@@ -69,6 +76,9 @@ export const DropDown = ({
               items={items}
               onItemClick={toggleDropDown}
               containerClassName={dropDownItemsContainerClassName}
+              isLastIndex={isLastIndex}
+              isSecondLastIndex={isSecondLastIndex}
+              isOffer={isOffer}
             />
           )}
         </AnimatePresence>

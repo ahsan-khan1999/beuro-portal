@@ -1,10 +1,10 @@
 import React from "react";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { EmployeeDetail } from "@/types/employee";
 import moment from "moment";
 import { useTranslation } from "next-i18next";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 
 const DetailsData = ({
   date,
@@ -18,7 +18,7 @@ const DetailsData = ({
   const { t: translate } = useTranslation();
   return (
     <>
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10  pb-5">
         <div className="flex items-center">
           {isUpdate && router.pathname === "/employees/details" && (
             <span
@@ -52,37 +52,42 @@ const DetailsData = ({
             {translate("employees.card_content.heading")}
           </h1>
         </div>
-        <div className="flex items-center gap-x-5">
+        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
           <Image
             src={deleteIcon}
             alt="deleteIcon"
             className="cursor-pointer"
             onClick={handleDelete}
+            width={16}
+            height={20}
           />
-        </div>
+        </span>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div>
-        <div className="flex justify-between items-center max-w-[600px]">
-          <h3 className="text-[#4D4D4D] ">
-            {translate("employees.card_content.employee_id")}:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{refID}
+
+      <div className="mt-5">
+        <div className="flex flex-col lg:flex-row gap-y-4 lg:justify-between lg:items-center lg:max-w-[600px]">
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D]">
+              {translate("employees.card_content.employee_id")}:
             </span>
-          </h3>
-          <h3 className="text-[#4D4D4D] ">
-            {translate("employees.card_content.created_by")}:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{name}
+            <span className="text-[#4B4B4B] font-medium">{refID}</span>
+          </div>
+
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D]">
+              {translate("employees.card_content.created_by")}:
             </span>
-          </h3>
+            <span className="text-[#4B4B4B] font-medium">{name}</span>
+          </div>
         </div>
-        <h3 className="text-[#4D4D4D] mt-4">
-          {translate("employees.card_content.created_date")}:
-          <span className="text-[#4B4B4B] font-medium">
-            &nbsp;&nbsp;{moment(date).format("DD/MM/YYYY")}
+        <div className="flex items-center gap-x-3 mt-4">
+          <span className="text-[#4D4D4D]">
+            {translate("employees.card_content.created_date")}:
           </span>
-        </h3>
+          <span className="text-[#4B4B4B] font-medium">
+            {moment(date).format("DD/MM/YYYY")}
+          </span>
+        </div>
       </div>
     </>
   );

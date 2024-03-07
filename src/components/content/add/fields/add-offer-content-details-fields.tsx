@@ -37,23 +37,23 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
         inputType: "text",
         id: "contentName",
         name: "contentName",
-        placeholder: "Text for Offer",
+        placeholder: translate("common.content_name"),
         register,
       },
     },
 
-    {
-      containerClass: "mt-5",
-      //@ts-expect-error
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
-        children:
-          count &&
-          generateAddressChildren(register, count, translate, append, remove),
-      },
-    },
+    // {
+    //   containerClass: "mt-5",
+    //   //@ts-expect-error
+    //   field: {
+    //     type: Field.div,
+    //     id: "div-field",
+    //     className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
+    //     children:
+    //       count &&
+    //       generateAddressChildren(register, count, translate, append, remove),
+    //   },
+    // },
     {
       containerClass: "mt-5",
       field: {
@@ -74,7 +74,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
               inputType: "text",
               id: "offerContent.title",
               name: "offerContent.title",
-              placeholder: "Text for Offer",
+              placeholder: translate("common.content_text"),
               register,
             },
           },
@@ -91,10 +91,10 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
               name: "offerContent.description",
 
               control,
-              value:
-                (contentDetails?.id &&
-                  contentDetails?.offerContent?.description) ||
-                "",
+              // value:
+              //   (contentDetails?.id &&
+              //     contentDetails?.offerContent?.description) ||
+              //   "",
             },
           },
           {
@@ -112,9 +112,9 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
 
               control,
 
-              value:
-                (contentDetails?.id && contentDetails?.offerContent?.body) ||
-                "",
+              // value:
+              //   (contentDetails?.id && contentDetails?.offerContent?.body) ||
+              //   "",
             },
           },
 
@@ -143,7 +143,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-6",
+      containerClass: "mb-0 mt-6 float-right",
       field: {
         type: Field.button,
         id: "button",

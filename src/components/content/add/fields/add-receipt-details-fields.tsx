@@ -35,7 +35,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               inputType: "text",
               id: "receiptContent.title",
               name: "receiptContent.title",
-              placeholder: "Text for Receipt",
+              placeholder: translate("content.details.receipt_title"),
               register,
             },
           },
@@ -53,9 +53,6 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.description",
 
               control,
-              value:
-                contentDetails?.id &&
-                contentDetails?.receiptContent?.description,
             },
           },
 
@@ -73,7 +70,6 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.body,
             },
           },
 
@@ -105,7 +101,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0 ",

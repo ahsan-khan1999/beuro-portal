@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
-import toggle_active from "@/assets/svgs/toggle_active.svg";
-import toggle_inactive from "@/assets/svgs/toggle_inactive.svg";
-import deleteIcon from "@/assets/svgs/delete.svg";
+import React from "react";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { Form } from "@/base-components/form/form";
 import useAddReason from "@/hooks/setting/useAddReason";
-import { useTranslation } from "next-i18next";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
 import { Button } from "@/base-components/ui/button/button";
 import { ToggleButton } from "@/base-components/ui/button/toggle-button";
 import { FollowUpProp } from "@/types/settings";
@@ -76,7 +69,6 @@ const FollowUpSetting = () => {
       </section>
 
       <section className="grid grid-cols-3 mt-3 gap-x-2 gap-y-2 xl:gap-y-0">
-        {/* Form */}
         <div className="rounded-md bg-white pl-[32px] pr-[27px] pt-4 col-span-3 xl:col-span-1">
           <span className="text-[#4B4B4B] text-base font-medium">
             {translate("setting.follow_up_setting.add_follow_up.heading")}
@@ -90,7 +82,6 @@ const FollowUpSetting = () => {
           />
         </div>
 
-        {/* List of reasonData */}
         <div className="rounded-md bg-white p-3 col-span-3 xl:col-span-2">
           <div
             className="overflow-y-auto custom-scrollbar"
@@ -111,7 +102,9 @@ const FollowUpSetting = () => {
                 <Image
                   src={deleteIcon}
                   alt="delete_icon"
-                  className="cursor-pointer mr-5"
+                  width={14}
+                  height={18}
+                  className="cursor-pointer mr-5 w-[14px] h-[18px]"
                   onClick={() => handleRemoveReason(index)}
                 />
               </div>
@@ -122,7 +115,7 @@ const FollowUpSetting = () => {
       <Button
         id="setting"
         inputType="button"
-        className="mt-5 px-4 text-white text-base font-medium rounded-md  bg-[#4A13E7] "
+        className="mt-5 px-4 text-white text-base font-medium rounded-md bg-[#4A13E7] float-right"
         text={translate("setting.save_setting")}
         loading={loading}
         onClick={handleSaveSetings}

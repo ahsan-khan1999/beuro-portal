@@ -5,7 +5,6 @@ import {
   PDFViewer,
   Page,
   StyleSheet,
-  Text,
   View,
 } from "@react-pdf/renderer";
 import { Header } from "./header";
@@ -16,8 +15,8 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
-import { blobToFile } from "@/utils/utility";
 import { AggrementSignature } from "./aggrement-signature";
+import { ServiceTableDiscountRow } from "./service-table-discount";
 
 Font.register({
   family: "Poppins",
@@ -25,6 +24,11 @@ Font.register({
     {
       src: "/assets/fonts/Poppins-Thin.ttf",
       fontStyle: "thin",
+      fontWeight: 100,
+    },
+    {
+      src: "/assets/fonts/Poppins-ThinItalic.ttf",
+      fontStyle: "italic",
       fontWeight: 100,
     },
     {
@@ -38,8 +42,18 @@ Font.register({
       fontWeight: 300,
     },
     {
+      src: "/assets/fonts/Poppins-LightItalic.ttf",
+      fontStyle: "italic",
+      fontWeight: 300,
+    },
+    {
       src: "/assets/fonts/Poppins-Medium.ttf",
       fontStyle: "medium",
+      fontWeight: 500,
+    },
+    {
+      src: "/assets/fonts/Poppins-MediumItalic.ttf",
+      fontStyle: "italic",
       fontWeight: 500,
     },
     {
@@ -48,13 +62,28 @@ Font.register({
       fontWeight: 600,
     },
     {
+      src: "/assets/fonts/Poppins-SemiBoldItalic.ttf",
+      fontStyle: "italic",
+      fontWeight: 600,
+    },
+    {
       src: "/assets/fonts/Poppins-Bold.ttf",
       fontStyle: "bold",
       fontWeight: 700,
     },
     {
+      src: "/assets/fonts/Poppins-BoldItalic.ttf",
+      fontStyle: "italic",
+      fontWeight: 700,
+    },
+    {
       src: "/assets/fonts/Poppins-Black.ttf",
       fontStyle: "black",
+      fontWeight: 800,
+    },
+    {
+      src: "/assets/fonts/Poppins-BlackItalic.ttf",
+      fontStyle: "italic",
       fontWeight: 800,
     },
   ],
@@ -66,20 +95,33 @@ const OfferPdfPreview = ({
   emailTemplateSettings,
   systemSetting,
   showContractSign,
-  pdfFile,
-  setPdfFile,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
-  const { address, header, workDates } = data?.movingDetails || {};
+  const { address, header, workDates, time } = data?.movingDetails || {};
   const contactAddress = data?.contactAddress;
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+  const disscountTableRow = {
+    serviceTitle: "Rabatt",
+    price: Number(serviceItemFooter?.discount),
+    unit: "-",
+    totalPrice: Number(serviceItemFooter?.discount),
+    serviceType: "",
+    description: serviceItemFooter?.discountDescription,
+    count: "-",
+    pagebreak: true,
+    discount: Number(serviceItemFooter?.discount),
+    totalDiscount: serviceItemFooter?.serviceDiscountSum,
+    isGlobalDiscount:serviceItemFooter?.isDiscount
+  }
+  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
+  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
 
   return (
-    <PDFViewer  style={{ width: "100%",height:"100vh" }}>
-      <Document title={data?.headerDetails?.offerNo || ""}>
+    <PDFViewer style={{ width: "100%", height: "100vh" }} >
+      <Document title={data?.headerDetails?.offerNo || ""} >
         <Page style={styles.body} dpi={72}>
           <Header {...headerDetails} />
           <View
@@ -92,16 +134,26 @@ const OfferPdfPreview = ({
           >
             <ContactAddress {...{ ...contactAddress }} />
 
-            <AddressDetails {...{ address, header, workDates }} />
+            <AddressDetails {...{ address, header, workDates, time }} />
 
-            <ServiceTableHederRow />
+            <ServiceTableHederRow
+              isDiscount={isDiscount}
+            />
             {serviceItem?.map((item, index, arr) => (
               <ServiceTableRow
                 {...item}
                 key={index}
-                pagebreak={index === arr.length - 1}
+                pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1:false}
+                isDiscount={isDiscount}
               />
             ))}
+            {
+              (isDiscount || serviceItemFooter?.isDiscount) &&
+              <ServiceTableDiscountRow {...disscountTableRow} key={Math.random()}
+                pagebreak={true}
+                isDiscount={isDiscount}
+              />
+            }
             <ServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}
@@ -118,7 +170,7 @@ const OfferPdfPreview = ({
 
         {/* Additional details */}
         <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
-          <View style={{marginBottom: 10}} fixed>
+          <View style={{ marginBottom: 10 }} fixed>
             <Header {...headerDetails} />
           </View>
           {/* <View

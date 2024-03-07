@@ -44,7 +44,7 @@ function parseCustomDate(dateString: string) {
 }
 
 export const countryList: countryType = {
-  [Country.Swizterland]: {
+  [Country.Switzerland]: {
     [State.state]: [
       {
         label: "Zürich",
@@ -588,6 +588,7 @@ export const staticEnums: Record<string, any> = {
   },
   LeadStatus: {
     Open: 0,
+    InProcess: 3,
     Close: 1,
     Expired: 2,
   },
@@ -607,7 +608,7 @@ export const staticEnums: Record<string, any> = {
   },
   OfferStatus: {
     Open: 0,
-    Signed: 1,
+    Accepted: 1,
     Expired: 2,
     Rejected: 3,
   },
@@ -705,9 +706,40 @@ export const staticEnums: Record<string, any> = {
     "29": 29,
     "30": 30,
   },
+  remainderDays: {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "11": 11,
+    "12": 12,
+    "13": 13,
+    "14": 14,
+    "15": 15,
+    "16": 16,
+    "17": 17,
+    "18": 18,
+    "20": 20,
+    "21": 21,
+    "22": 22,
+    "23": 23,
+    "24": 24,
+    "25": 25,
+    "26": 26,
+    "27": 27,
+    "28": 28,
+    "29": 29,
+    "30": 30,
+  },
   SettingStatus: {},
   Country: {
-    Swizterland: "countries.swiz",
+    Switzerland: "countries.swiz",
     Germany: "countries.ger",
     Austria: "countries.aust",
     Italy: "countries.ita",
@@ -717,22 +749,36 @@ export const staticEnums: Record<string, any> = {
     pending: 0,
     resolved: 1,
   },
+  Gender: {
+    Mr: 0,
+    Mrs: 1,
+  },
+  // RejectReason: {
+  //   "Cost Concerns": "Cost Concerns",
+  //   "Hidden Fees": "Hidden Fees",
+  //   "Service Scope": "Service Scope",
+  //   "Negative Reviews": "Negative Reviews",
+  //   "Unreliable Schedule": "Unreliable Schedule",
+  //   "Customer Service": "Customer Service",
+  //   "Inadequate Equipment": "Inadequate Equipment",
+  //   Other: "Other",
+  // },
   RejectReason: {
-    "Cost Concerns": "Cost Concerns",
-    "Hidden Fees": "Hidden Fees",
-    "Service Scope": "Service Scope",
-    "Negative Reviews": "Negative Reviews",
-    "Unreliable Schedule": "Unreliable Schedule",
-    "Customer Service": "Customer Service",
-    "Inadequate Equipment": "Inadequate Equipment",
-    Other: "Other",
+    "Cost Concerns": "Kostenaspekte",
+    "Hidden Fees": "Versteckte Gebühren",
+    "Service Scope": "Umfang der Dienstleistung",
+    "Negative Reviews": "Negative Bewertunge",
+    "Unreliable Schedule": "Unzuverlässiger Zeitplan",
+    "Customer Service": "Kundenbetreuung",
+    "Inadequate Equipment": "Unzureichende Ausrüstung",
+    Other: "Andere",
   },
   LeadSource: {
     Umzugsfuchs: "Umzugsfuchs",
     Webvermarktung: "Webvermarktung",
     "Offerten-365": "Offerten-365",
     Umzugshero: "Umzugshero",
-    "Via Call": "Via Call",
+    "Via Call": "via_phone",
   },
 };
 
@@ -1254,27 +1300,31 @@ export const sideBar: SideBar[] = [
     icon: "Leads",
     title: "sidebar.customer.leads.leads",
     pathname: "/leads",
+    query: "None",
     role: [1, 2],
     inner: [
       {
         title: "sidebar.customer.leads.open",
         pathname: "/leads",
-        query: "Open",
-
+        query: "0",
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.leads.InProcess",
+        pathname: "/leads",
+        query: "3",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.leads.close",
         pathname: "/leads",
-        query: "Close",
-
+        query: "1",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.leads.expire",
         pathname: "/leads",
-        query: "Expired",
-
+        query: "2",
         role: [1, 2],
       },
     ],
@@ -1284,30 +1334,30 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.offers.offers",
     role: [1, 2],
     pathname: "/offers",
-
+    query: "None",
     inner: [
       {
         title: "sidebar.customer.offers.open",
         pathname: "/offers",
-        query: "Open",
+        query: "0",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.offers.signed",
         pathname: "/offers",
-        query: "Signed",
+        query: "1",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.offers.expired",
         pathname: "/offers",
-        query: "Expired",
+        query: "2",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.offers.rejected",
-        query: "Rejected",
         pathname: "/offers",
+        query: "3",
         role: [1, 2],
       },
     ],
@@ -1317,24 +1367,24 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.contracts.contracts",
     role: [1, 2],
     pathname: "/contract",
-
+    query: "None",
     inner: [
       {
         title: "sidebar.customer.contracts.open",
-        query: "Open",
         pathname: "/contract",
+        query: "0",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.contracts.confirmed",
-        query: "Confirmed",
         pathname: "/contract",
+        query: "1",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.contracts.cancelled",
-        query: "Cancelled",
         pathname: "/contract",
+        query: "2",
         role: [1, 2],
       },
     ],
@@ -1344,30 +1394,30 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.invoices.invoices",
     role: [1, 2],
     pathname: "/invoices",
-
+    query: "None",
     inner: [
       {
         title: "sidebar.customer.invoices.pending",
-        query: "Pending",
         pathname: "/invoices",
+        query: "0",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.invoices.open",
-        query: "Open",
         pathname: "/invoices",
+        query: "3",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.invoices.overdue",
-        query: "Overdue",
         pathname: "/invoices",
+        query: "1",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.invoices.paid",
-        query: "Paid",
         pathname: "/invoices",
+        query: "2",
         role: [1, 2],
       },
     ],
@@ -1629,8 +1679,19 @@ export const DEFAULT_INVOICE = {
   type: "",
 };
 
+export const HeaderLabelNr = {
+  contract: "Vertrag ",
+  invoice: "Rechnung ",
+  receipt: "Quittung ",
+};
+
 export const HeaderLabel = {
-  contract: "Verträge",
+  contract: "Erstell",
   invoice: "Rechnung",
   receipt: "Quittung",
+};
+
+export const GenderLabel = {
+  Mr: "Herr",
+  Mrs: "Frau",
 };

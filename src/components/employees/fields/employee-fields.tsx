@@ -98,15 +98,15 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: `!border-[#BFBFBF] focus:!border-primary ${
+              type: Field.input,
+              className: `!px-4 !border-[#BFBFBF] focus:!border-primary ${
                 !isUpdate && "!border-light"
               }`,
               id: "phoneNumber",
               name: "phoneNumber",
               disabled: isUpdate,
-              control,
-              country: "ch",
+              inputType:"tel",
+              register,
               value: employeeDetails && employeeDetails?.phoneNumber,
             },
           },
@@ -118,15 +118,16 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: `!border-[#BFBFBF] focus:!border-primary ${
+              type: Field.input,
+              className: `!px-4 !border-[#BFBFBF] focus:!border-primary ${
                 !isUpdate && "!border-light"
               }`,
               id: "mobileNumber",
               name: "mobileNumber",
+              inputType:"tel",
+
               disabled: isUpdate,
-              control,
-              country: "ch",
+              register,
               value: employeeDetails && employeeDetails?.mobileNumber,
             },
           },
@@ -139,7 +140,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px] ",
         children: [
           {
             containerClass: "mb-0",

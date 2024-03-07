@@ -20,6 +20,9 @@ export default function Offers() {
     setFilter,
     handleFilterChange,
     loading,
+    handleOfferStatusUpdate,
+    handlePaymentStatusUpdate,
+    currentPage,
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
@@ -27,13 +30,15 @@ export default function Offers() {
       dataToAdd={currentPageRows}
       openModal={handleNotes}
       handleImageUpload={handleImageUpload}
+      handleOfferStatusUpdate={handleOfferStatusUpdate}
+      handlePaymentStatusUpdate={handlePaymentStatusUpdate}
     />,
     currentPageRows?.length > 0,
     loading
   );
 
   return (
-    <>
+    <div>
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
@@ -43,15 +48,13 @@ export default function Offers() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
-
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       {renderModal()}
-    </>
+    </div>
   );
 }

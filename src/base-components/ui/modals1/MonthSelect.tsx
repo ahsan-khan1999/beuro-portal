@@ -72,7 +72,12 @@ const MonthSelect = ({ onClose, handleDownload }: MonthSelectModalProps) => {
 
             <div className="flex justify-between items-center ">
               <DropDown
-                items={years.map((y) => ({ item: String(y) }))}
+                items={years.map((y) => ({
+                  item: {
+                    label: String(y),
+                    value: String(y),
+                  },
+                }))}
                 onItemSelected={(selectedYear) =>
                   setYear(parseInt(selectedYear))
                 }

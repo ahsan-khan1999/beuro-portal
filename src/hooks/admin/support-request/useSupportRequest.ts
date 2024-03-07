@@ -71,5 +71,6 @@ export default function useSupportRequest() {
     setFilter,
     handleFilterChange,
     loading,
+    currentPage
   };
 }

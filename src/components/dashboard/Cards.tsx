@@ -16,7 +16,7 @@ interface DashboardCard {
   open: string;
   closed: string;
   expired: string;
-  route: Function;
+  route?: Function;
 }
 const DashboardCard = ({
   icon,
@@ -33,65 +33,67 @@ const DashboardCard = ({
   route,
 }: DashboardCard) => {
   const { t: translate } = useTranslation();
-  const datatest2 = {
-    labels: [
-      `${translate("admin.months.jan")}`,
-      `${translate("admin.months.feb")}`,
-      `${translate("admin.months.mar")}`,
-      `${translate("admin.months.apr")}`,
-    ],
-    datasets: [
-      {
-        label: "",
-        data: [10, 11.5, 11, 12.5],
-        tension: 0.4,
-        borderColor: "white",
-        backgroundColor: chartPointColor,
-        // borderColor: Utils.CHART_COLORS.red,
-        // backgroundColor: Utils.CHART_COLORS.red,
-      },
-    ],
-  };
-  useEffect(() => {
-    var existingChart = Chart.getChart(id);
-    if (existingChart) {
-      existingChart.destroy();
-    }
-    //@ts-expect-error
-    const ctx = document.getElementById(id)?.getContext("2d");
+  // const datatest2 = {
+  //   labels: [
+  //     `${translate("admin.months.jan")}`,
+  //     `${translate("admin.months.feb")}`,
+  //     `${translate("admin.months.mar")}`,
+  //     `${translate("admin.months.apr")}`,
+  //   ],
+  //   datasets: [
+  //     {
+  //       label: "",
+  //       data: [10, 11.5, 11, 12.5],
+  //       tension: 0.4,
+  //       borderColor: "white",
+  //       backgroundColor: chartPointColor,
+  //       // borderColor: Utils.CHART_COLORS.red,
+  //       // backgroundColor: Utils.CHART_COLORS.red,
+  //     },
+  //   ],
+  // };
+  // useEffect(() => {
+  //   var existingChart = Chart.getChart(id);
+  //   if (existingChart) {
+  //     existingChart.destroy();
+  //   }
+  //   //@ts-expect-error
+  //   const ctx = document.getElementById(id)?.getContext("2d");
 
-    const wavesChart2 = new Chart(ctx, {
-      type: "line",
-      data: datatest2,
-      //@ts-expect-error
-      fill: true,
-      options: {
-        plugins: {
-          legend: {
-            display: false, // Hide the legend
-          },
-        },
+  //   const wavesChart2 = new Chart(ctx, {
+  //     type: "line",
+  //     data: datatest2,
+  //     //@ts-expect-error
+  //     fill: true,
+  //     options: {
+  //       plugins: {
+  //         legend: {
+  //           display: false, // Hide the legend
+  //         },
+  //       },
 
-        scales: {
-          x: {
-            display: false,
-          },
-          y: {
-            display: false,
-          },
-        },
-      },
-    });
+  //       scales: {
+  //         x: {
+  //           display: false,
+  //         },
+  //         y: {
+  //           display: false,
+  //         },
+  //       },
+  //     },
+  //   });
 
-    return () => {
-      wavesChart2.destroy();
-    };
-  }, []);
+  //   return () => {
+  //     wavesChart2.destroy();
+  //   };
+  // }, []);
 
   return (
     <div
-      onClick={() => route()}
-      className={`cursor-pointer rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
+      onClick={() => route?.()}
+      className={`${
+        title === "Sales" ? "cursor-default" : "cursor-pointer"
+      } rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
     >
       <div className="flex items-center mb-8">
         <Image src={icon} alt={alt} />
@@ -105,7 +107,7 @@ const DashboardCard = ({
           <span className="text-xl font-medium text-white">{id}</span>
           <span className="text-white ml-[10px]">{salePercent}</span>
         </div>
-        <canvas id={id} className="max-w-[78px] max-h-[50px]" />
+        {/* <canvas id={id} className="max-w-[78px] max-h-[50px]" /> */}
       </div>
       <div className="flex items-center justify-between mt-8">
         <div className="flex items-center">

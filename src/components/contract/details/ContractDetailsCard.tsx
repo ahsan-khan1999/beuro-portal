@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import cofirmation_icon from "@/assets/svgs/confirmation_icon.svg";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
 import {
   formatDateTimeToDate,
@@ -10,12 +10,13 @@ import {
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { ContractDetailCardProps } from "@/types/contract";
-import { formatDateToCustomString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
+import editIcon from "@/assets/svgs/edit_primary.svg";
+import { updateQuery } from "@/utils/update-query";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -25,6 +26,9 @@ const ContractDetailsCard = ({
   handleStatusUpdate,
   offerDeleteHandler,
   handleSendEmail,
+  isSendEmail,
+  handleUpdateAdditionalDetailsModal,
+  handleEditDateModal,
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -34,13 +38,32 @@ const ContractDetailsCard = ({
   const handlePrint = () => {
     window.open(contractDetails?.attachement);
   };
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
+  const contractStatus = [
+    `${translate("contract_status.Open")}`,
+    `${translate("contract_status.Confirmed")}`,
+    `${translate("contract_status.Cancelled")}`,
+  ];
+
+  const handleBack = () => {
+    router.pathname = "/contract";
+    delete router.query["contract"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
-    <>
-      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-20">
+    <div className="min-h-[218px]">
+      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
         <div className="flex items-center">
           <span
             className="cursor-pointer"
-            onClick={() => router.push("/contract")}
+            // onClick={() => router.push("/contract")}
+            onClick={handleBack}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +92,7 @@ const ContractDetailsCard = ({
           </p>
         </div>
 
-        <div className="flex gap-x-[22px]">
+        <div className="flex justify-end gap-x-[22px]">
           <button
             onClick={handleSendEmail}
             className="w-fit border-[1px] border-primary rounded-lg flex items-center px-4 py-[6px]"
@@ -80,32 +103,27 @@ const ContractDetailsCard = ({
             </span>
           </button>
 
-          <PrimaryPDF
-            onClick={() =>
-              router.push({
-                pathname: "/contract/pdf-preview",
-                query: { offerID: contractDetails?.id },
-              })
-            }
-          />
-          {/* <Image
-            src={downloadIcon}
-            alt="downloadIcon"
-            className="cursor-pointer"
-            onClick={handleDonwload}
-          />
-          <Image
-            src={printerIcon}
-            alt="printerIcon"
-            className="cursor-pointer"
-            onClick={handlePrint}
-          /> */}
-          <Image
-            src={deleteIcon}
-            alt="deleteIcon"
-            className="cursor-pointer"
-            onClick={offerDeleteHandler}
-          />
+          {isSendEmail && (
+            <PrimaryPDF
+              onClick={() =>
+                router.push({
+                  pathname: "/contract/pdf-preview",
+                  query: { offerID: contractDetails?.id, isMail: true },
+                })
+              }
+            />
+          )}
+
+          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
+            <Image
+              src={deleteIcon}
+              alt="deleteIcon"
+              className="cursor-pointer"
+              onClick={offerDeleteHandler}
+              width={16}
+              height={20}
+            />
+          </span>
         </div>
       </div>
 
@@ -119,7 +137,7 @@ const ContractDetailsCard = ({
               {contractDetails.contractNumber}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          <div className="flex gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.offer_title")}:
             </span>
@@ -128,7 +146,7 @@ const ContractDetailsCard = ({
               {contractDetails.offerID?.title}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          <div className="flex gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.worker")}:
             </span>
@@ -138,16 +156,16 @@ const ContractDetailsCard = ({
           </div>
         </div>
 
-        <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)] gap-y-2">
-          <div>
-            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
+        <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_3fr)_minmax(450px,_100%)] gap-y-2">
+          <div className="flex gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.offer_id")}:
             </span>
             <span className="text-base font-medium text-[#4A13E7]">
               {contractDetails.offerID?.offerNumber}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          {/* <div className="flex gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.created_date")}:
             </span>
@@ -156,20 +174,42 @@ const ContractDetailsCard = ({
                 {formatDateToCustomString(contractDetails.createdAt)}
               </span>
             </div>
-          </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base font-normal text-[#4D4D4D]">
+          </div> */}
+          <div className="flex gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
               {translate("contracts.card_content.service_date")}:
             </span>
-            <div>
+            <div className="flex items-center gap-x-3">
               <span className="text-base font-medium text-[#4B4B4B]">
                 {contractDetails?.offerID?.date?.map(
-                  (item) =>
-                    `${formatDateTimeToDate(
-                      item.startDate
-                    )} to ${formatDateTimeToDate(item.endDate)}`
+                  (item, index) =>
+                    `${formatDateTimeToDate(item.startDate)}${
+                      item.endDate
+                        ? ` ${translate("contracts.card_content.to")} ` +
+                          formatDateTimeToDate(item.endDate) +
+                          ((contractDetails?.offerID?.date?.length - 1 !=
+                            index &&
+                            ", ") ||
+                            ".")
+                        : (contractDetails?.offerID?.date?.length - 1 !=
+                            index &&
+                            ", ") ||
+                          "."
+                    }`
                 )}
+                {contractDetails?.offerID?.time &&
+                  ` ${translate("common.at")} ` +
+                    contractDetails?.offerID?.time +
+                    ` ${translate("common.clock")} `}
               </span>
+              <Image
+                src={editIcon}
+                alt="edit date"
+                width={16}
+                height={16}
+                className="cursor-pointer"
+                onClick={handleEditDateModal}
+              />
             </div>
           </div>
         </div>
@@ -179,16 +219,18 @@ const ContractDetailsCard = ({
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.email_status")}:
             </span>
-            <div
-              className={`text-base font-medium border border-[${getEmailColor(
-                contractDetails?.emailStatus
-              )}] rounded-lg px-4 py-[3px] cursor-default`}
-              style={{
-                color: `${getEmailColor(contractDetails?.emailStatus)}`,
-              }}
-            >
-              {translate(contractDetails?.emailStatus)}
-            </div>
+            {contractDetails?.emailStatus && (
+              <div
+                className={`text-base font-medium border border-[${getEmailColor(
+                  contractDetails?.emailStatus
+                )}] rounded-lg px-4 py-[3px] cursor-default`}
+                style={{
+                  color: `${getEmailColor(contractDetails?.emailStatus)}`,
+                }}
+              >
+                {translate(`contract_status.${contractDetails?.emailStatus}`)}
+              </div>
+            )}
           </div>
 
           {/* <div className="flex items-center gap-[11px]">
@@ -204,25 +246,34 @@ const ContractDetailsCard = ({
             <span className="text-[#4D4D4D] font-normal text-base ">
               {translate("contracts.card_content.payment_method")}:
             </span>
-            <span>
-              <DropDown
-                items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
-                  item: item,
-                }))}
-                selectedItem={contractDetails?.paymentType}
-                onItemSelected={handlePaymentStatusUpdate}
-                dropDownClassName={`border border-[${getPaymentTypeColor(
-                  contractDetails?.paymentType
-                )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
-                dropDownTextClassName={`text-[${getPaymentTypeColor(
-                  contractDetails?.paymentType
-                )}] text-base font-medium me-1`}
-                dropDownItemsContainerClassName="w-full"
-                dropDownIconClassName={`text-[${getPaymentTypeColor(
-                  contractDetails?.paymentType
-                )}]`}
-              />
-            </span>
+            {contractDetails?.paymentType && (
+              <span>
+                <DropDown
+                  items={Object.keys(staticEnums["PaymentType"]).map(
+                    (item, index) => ({
+                      item: {
+                        label: paymentMethod[index],
+                        value: item,
+                      },
+                    })
+                  )}
+                  selectedItem={translate(
+                    `payment_method.${contractDetails?.paymentType}`
+                  )}
+                  onItemSelected={handlePaymentStatusUpdate}
+                  dropDownClassName={`border border-[${getPaymentTypeColor(
+                    contractDetails?.paymentType
+                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center`}
+                  dropDownTextClassName={`text-[${getPaymentTypeColor(
+                    contractDetails?.paymentType
+                  )}] text-base font-medium me-1`}
+                  dropDownItemsContainerClassName="w-full"
+                  dropDownIconClassName={`text-[${getPaymentTypeColor(
+                    contractDetails?.paymentType
+                  )}]`}
+                />
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
@@ -234,9 +285,16 @@ const ContractDetailsCard = ({
               ] !== 3 && (
                 <DropDown
                   items={Object.keys(staticEnums["ContractStatus"]).map(
-                    (item) => ({ item: item })
+                    (item, index) => ({
+                      item: {
+                        label: contractStatus[index],
+                        value: item,
+                      },
+                    })
                   )}
-                  selectedItem={contractDetails?.contractStatus}
+                  selectedItem={translate(
+                    `contract_status.${contractDetails?.contractStatus}`
+                  )}
                   onItemSelected={handleStatusUpdate}
                   dropDownClassName={`border border-[${getContractStatusColor(
                     contractDetails?.contractStatus
@@ -248,21 +306,7 @@ const ContractDetailsCard = ({
                     contractDetails?.contractStatus
                   )}]`}
                 />
-              )) || (
-                <span
-                  className="border w-auto rounded-lg px-4 py-[3px] flex items-center text-base font-medium"
-                  style={{
-                    borderColor: `${getContractStatusColor(
-                      contractDetails?.contractStatus
-                    )}`,
-                    color: `${getContractStatusColor(
-                      contractDetails?.contractStatus
-                    )}`,
-                  }}
-                >
-                  {contractDetails?.contractStatus}
-                </span>
-              )}
+              )) || <></>}
             </span>
           </div>
 
@@ -282,7 +326,7 @@ const ContractDetailsCard = ({
               /> */}
               <WriteIcon
                 pathClass={
-                  contractDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"
+                  contractDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
                 }
               />
             </div>
@@ -333,7 +377,7 @@ const ContractDetailsCard = ({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

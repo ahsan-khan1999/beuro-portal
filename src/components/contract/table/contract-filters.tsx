@@ -1,13 +1,13 @@
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { Button } from "@/base-components/ui/button/button";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import React, { useRef } from "react";
 import ContractFilter from "@/base-components/filter/contracts-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useRouter } from "next/router";
 export default function ContractFilters({
   filter,
   setFilter,
@@ -15,6 +15,7 @@ export default function ContractFilters({
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const checkbox: CheckBoxType[] = [
     {
@@ -34,15 +35,44 @@ export default function ContractFilters({
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
+
+      const newStatus = updatedStatus.map(Number);
+
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       } else {
         const index = updatedStatus.indexOf(value);
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       }
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
@@ -68,6 +98,7 @@ export default function ContractFilters({
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
@@ -76,7 +107,7 @@ export default function ContractFilters({
   };
 
   return (
-    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
+    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
@@ -116,7 +147,10 @@ export default function ContractFilters({
               label: `${translate("filters.sort_by.oldest")}`,
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+            {
+              label: `${translate("filters.sort_by.a_z")}`,
+              value: "customerDetail.fullName",
+            },
           ]}
           label={translate("common.sort_button")}
         />

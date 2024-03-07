@@ -103,7 +103,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex space-x-[18px] mt-5",
+          className: "flex justify-end items-center space-x-[18px] mt-5",
           children: [
             {
               containerClass: "mb-0",

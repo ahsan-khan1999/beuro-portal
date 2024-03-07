@@ -22,7 +22,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
-import { DEFAULT_CUSTOMER } from "@/utils/static";
+import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
 import { updateQuery } from "@/utils/update-query";
@@ -122,7 +122,11 @@ export default function useCustomerDetail(stage: boolean) {
     }
   }, [id]);
   useMemo(() => {
-    if (customerDetails && stage) reset({ ...customerDetails });
+    if (customerDetails && stage)
+      reset({
+        ...customerDetails,
+        gender: staticEnums["Gender"][customerDetails?.gender],
+      });
   }, [customerDetails.id]);
 
   const handleUpdateCancel = () => {

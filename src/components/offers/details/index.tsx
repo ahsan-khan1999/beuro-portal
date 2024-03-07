@@ -22,6 +22,10 @@ const OfferDetails = () => {
     handleSendByPost,
     handleUpdateDiscount,
     systemSettings,
+    handleImageSlider,
+    handleUploadImages,
+    shareImgModal,
+    handleUploadFile,
   } = useOfferDetails();
 
   return (
@@ -29,7 +33,7 @@ const OfferDetails = () => {
       {/* {loading ? (
         <LoadingState />
       ) : ( */}
-      <div className="bg-white rounded-md px-5 pt-5 pb-10 2xl:fixed offerCardCalWidth z-10 2xl:-mt-[294px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
+      <div className="bg-white rounded-md px-5 pt-5 pb-10 2xl:fixed offerCardCalWidth z-auto 2xl:-mt-[314px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
         <OfferDetailsCard
           offerDetails={offerDetails}
           offerDeleteHandler={offerDeleteHandler}
@@ -41,9 +45,11 @@ const OfferDetails = () => {
           isSendEmail={isSendEmail}
           handleSendByPost={handleSendByPost}
           loading={loading}
+          onFileUpload={handleUploadFile}
         />
       </div>
-      <div className="2xl:mt-[375px] w-full 2xl:block">
+
+      <div className="2xl:mt-[395px] w-full 2xl:block mb-10">
         {isSendEmail ? (
           <div className="mt-5">
             <ComposeMail
@@ -57,6 +63,9 @@ const OfferDetails = () => {
             loading={loading}
             handleUpdateDiscount={handleUpdateDiscount}
             currency={systemSettings?.currency}
+            shareImgModal={shareImgModal}
+            handleImagesUpload={handleUploadImages}
+            handleImageSlider={handleImageSlider}
           />
         )}
       </div>

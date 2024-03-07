@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
   SubmitHandler,
+  UseFieldArrayRemove,
   useFieldArray,
   useForm,
 } from "react-hook-form";
@@ -10,15 +11,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddLeadAddressDetailsFormField } from "@/components/leads/fields/Add-lead-address-fields";
 import { generateLeadsAddressEditDetailsValidation } from "@/validation/leadsSchema";
-import {
-  getValueForKeyInArray,
-  senitizeDataForm,
-  transformAddressFormValues,
-} from "@/utils/utility";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { useEffect, useMemo, useState } from "react";
-import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useAddLeadAddressDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void
@@ -50,14 +45,13 @@ export const useAddLeadAddressDetails = (
 
   useEffect(() => {
     if (leadDetails?.id) {
-      console.log(leadDetails);
       reset({
         address: leadDetails?.addressID
           ? leadDetails?.addressID?.address?.map((item, index) => ({
               ...item,
-              label: item?.label ? item?.label : `Address ${++index}`,
+              label: item?.label ? item?.label : `Adresse ${++index}`,
             }))
-          : [{ label: `Address ${addressCount}` }],
+          : [{ label: `Adresse ${addressCount}`,...leadDetails?.customerDetail?.address }],
       });
     }
   }, [leadDetails?.id]);
@@ -71,7 +65,7 @@ export const useAddLeadAddressDetails = (
   useMemo(() => {
     if (addressFields.length === 0) return;
     setAddressCount(addressFields.length);
-  }, [addressFields]);
+  }, [addressFields.length]);
 
   const handleFieldTypeChange = (index: number) => {
     const updatedAddressType = [...addressType];
@@ -82,6 +76,7 @@ export const useAddLeadAddressDetails = (
   const handleBack = () => {
     onHandleNext(ComponentsType.customerAdd);
   };
+
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,
@@ -108,7 +103,7 @@ export const useAddLeadAddressDetails = (
       ...data,
       step: 2,
       id: leadDetails?.id,
-      stage: ComponentsType.serviceAdd,
+      stage: ComponentsType.addressAdd,
     };
 
     const response = await dispatch(

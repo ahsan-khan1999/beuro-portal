@@ -7,6 +7,7 @@ import {
 } from "react-hook-form";
 import { OffersTableRowTypes } from "./offers";
 import { Plan } from "./admin/plans";
+import { Company } from "./company";
 
 export interface CustomerTable {
   currentPageRows: Customers[];
@@ -35,6 +36,7 @@ export interface Customers {
   phoneNumber: string;
   date: string;
   mobileNumber: string;
+  gender: number
 
   status?: string;
   editImg?: string;
@@ -45,16 +47,16 @@ export interface Customers {
   address: CustomerAddress;
   edit?: boolean;
   lead: CustomerLeadDetail;
-  logo:string
-  plan?:Plan
-  createdBy?:User
+  logo: string
+  plan?: Plan
+  createdBy?: User
 }
 
 export interface CustomerAddress {
   streetNumber: string;
   country: string;
   postalCode: string;
-  city?:string
+  city?: string
 }
 
 

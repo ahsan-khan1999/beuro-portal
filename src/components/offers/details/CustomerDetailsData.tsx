@@ -38,8 +38,7 @@ const CustomerDetailsData = ({
         </button>
       </div>
 
-      <hr className="opacity-20 mb-5" />
-      <div className="mt-5">
+      <div className="pt-5 border-t border-t-[#000] border-opacity-10">
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mb-5">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
@@ -55,9 +54,11 @@ const CustomerDetailsData = ({
               {translate("offers.offer_details.customer_type")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
-              {getKeyByValue(
-                staticEnums["CustomerType"],
-                offerDetails?.leadID?.customerDetail?.customerType
+              {translate(
+                `customer_type.${getKeyByValue(
+                  staticEnums["CustomerType"],
+                  offerDetails?.leadID?.customerDetail?.customerType
+                )}`
               )}
             </div>
           </div>
@@ -105,6 +106,22 @@ const CustomerDetailsData = ({
               {offerDetails?.leadID?.customerDetail?.mobileNumber}
             </div>
           </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("customers.details.gender")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              {offerDetails?.leadID?.customerDetail?.gender}
+            </div>
+          </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("common.lead")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              {offerDetails?.leadID?.refID}
+            </div>
+          </div>
         </div>
 
         <div className="mt-5">
@@ -132,8 +149,10 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-                {offerDetails?.leadID?.customerDetail?.address?.country}
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                {translate(
+                  `countries.${offerDetails?.leadID?.customerDetail?.address?.country}`
+                )}
               </div>
             </div>
           </div>

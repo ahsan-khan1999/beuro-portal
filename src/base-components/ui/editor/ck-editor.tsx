@@ -1,18 +1,20 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+import CustomEditor from '@/base-components/ui/editor/ckeditor/build/ckeditor';
 
 const ClassicCKEditor = ({
   data,
   onChange,
 }: {
   data: string;
-  onChange: (event: any, editor: ClassicEditor) => void;
+  onChange: (event: any, editor: CustomEditor) => void;
 }) => {
-  
+
   return (
     <CKEditor
-      editor={ClassicEditor}
+      editor={CustomEditor}
       data={data}
       onReady={(editor) => { }}
       onChange={(event, editor) => {
@@ -22,6 +24,7 @@ const ClassicCKEditor = ({
       onBlur={(event, editor) => { }}
       onFocus={(event, editor) => { }}
       config={{
+       
         //   toolbar: [
         //     "undo",
         //     "redo",
@@ -35,6 +38,7 @@ const ClassicCKEditor = ({
         //     "blockQuote",
         //   ],
         toolbar: {
+
           items: [
             "undo",
             "redo",
@@ -42,7 +46,7 @@ const ClassicCKEditor = ({
             "heading",
             "|",
             // "fontfamily",
-            // "fontsize",
+            "fontsize",
             // "fontColor",
             // "fontBackgroundColor",
             "|",

@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { ContentTableRowTypes } from "@/types/content";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
@@ -9,11 +10,13 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
   control,
   onHandleBack,
   trigger,
-  service,
+  content,
   leadDetails,
   systemSettings
 ) => {
   const { t: translate } = useTranslation();
+  const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
+
   const formField: FormField[] = [
     {
       containerClass: "mt-6",
@@ -35,11 +38,11 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
-              value: (leadDetails?.id && leadDetails?.requiredService) || "",
+              value: "",
               options:
-                (service &&
-                  service?.map((item) => ({
-                    label: item.serviceName,
+                (content &&
+                  content?.map((item) => ({
+                    label: item.contentName,
                     value: item.id,
                   }))) ||
                 [],
@@ -80,16 +83,16 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               name: "contactAvailability",
               options: [
                 {
-                  value: "Morning(8am to  12pm)",
-                  label: "Morning(8am to  12pm)",
+                  value: "Morning(9am to 12am)",
+                  label: `${translate("common.morning")}(9am to 12pm)`,
                 },
                 {
-                  value: "Evening(5pm to 8pm)",
-                  label: "Evening(5pm to 8pm)",
+                  value: "Afternoon(1pm to 5pm)",
+                  label: `${translate("common.afternoon")}(1am to 5pm)`,
                 },
                 {
-                  value: "Night(9pm to 12am)",
-                  label: "Night(9pm to 12am)",
+                  value: "Evening(6pm to 8pm)",
+                  label: `${translate("common.evening")}(6pm to 8pm)`,
                 },
               ],
               control,
@@ -111,8 +114,12 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               name: "flexibility",
               options: [
                 {
+                  value: "0",
+                  label: `${translate("common.flexible")}`,
+                },
+                {
                   value: "1",
-                  label: `1 ${translate("common.days")}`,
+                  label: `1 ${translate("common.day")}`,
                 },
                 {
                   value: "2",
@@ -175,50 +182,64 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
                   value: "Via Post",
                   label: `${translate("common.via_post")}`,
                 },
+                {
+                  value: "Via Internet",
+                  label: `${translate("common.via_internet")}`,
+                },
               ],
               control,
             },
           },
-          {
-            containerClass: "mb-0",
-            label: {
-              text: `${translate("leads.service_details.budget")}`,
-              htmlFor: "budget",
-              className: "mb-[10px]",
-            },
-            field: {
-              className:
-                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
-              type: Field.select,
-              id: "budget",
-              name: "budget",
-              value: (leadDetails?.id && leadDetails?.budget) || "",
+          // {
+          //   containerClass: "mb-0",
+          //   label: {
+          //     text: `${translate("leads.service_details.budget")}`,
+          //     htmlFor: "budget",
+          //     className: "mb-[10px]",
+          //   },
+          //   field: {
+          //     className:
+          //       "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+          //     type: Field.select,
+          //     id: "budget",
+          //     name: "budget",
+          //     value: (leadDetails?.id && leadDetails?.budget) || "",
 
-              options: [
-                {
-                  value: `Less then 5000${systemSettings?.currency}`,
-                  label: `Less then 5000${systemSettings?.currency}`,
-                },
-                {
-                  value: `Less then 2500${systemSettings?.currency}`,
-                  label: `Less then 2500${systemSettings?.currency}`,
-                },
-                {
-                  value: `Less then 1500${systemSettings?.currency}`,
-                  label: `Less then 1500${systemSettings?.currency}`,
-                },
-                {
-                  value: `Less then 1000${systemSettings?.currency}`,
-                  label: `Less then 1000${systemSettings?.currency}`,
-                },
-                {
-                  value: `Less then 500${systemSettings?.currency}`,
-                  label: `Less then 500${systemSettings?.currency}`,
-                },
-              ],
-              control,
-            },
-          },
+          //     options: [
+          //       {
+          //         value: `Less then 500 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 500${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 1000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 1000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 1500 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 1500${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 2000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 2000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 5000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 5000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //     ],
+          //     control,
+          //   },
+          // },
           {
             containerClass: "xl:col-span-1 mb-0",
             label: {
@@ -235,7 +256,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
               options: Object.keys(staticEnums["LeadSource"]).map((item) => ({
-                label: item,
+                label: translate(`common.lead_source.${item}`),
                 value: item,
               })),
               control,
@@ -243,7 +264,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
           },
 
           {
-            containerClass: "xl:col-span-2 mb-0",
+            containerClass: "xl:col-span-3 mb-0",
             label: {
               text: `${translate("leads.service_details.other_services")}`,
               htmlFor: "otherServices",
@@ -256,10 +277,10 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
                 "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
               id: "otherServices",
               name: "otherServices",
-              value: (leadDetails?.id && leadDetails?.otherServices) || [""],
+              value: contentList?.map((item) => item.id),
               options:
-                service?.map((item) => ({
-                  label: item.serviceName,
+                content?.map((item) => ({
+                  label: item.contentName,
                   value: item.id,
                 })) || [],
 
@@ -276,7 +297,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px]",
+        className: "flex items-center justify-end space-x-[18px]",
         children: [
           {
             containerClass: "mb-0",

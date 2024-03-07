@@ -13,7 +13,7 @@ const RecurringInvoice = ({
   onClose: () => void;
   invoiceCreated: () => void;
 }) => {
-  const defaultClassName = "mt-0  ";
+  const defaultClassName = "mt-6";
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
     useRecurringInvoice(invoiceCreated);
   return (
@@ -23,17 +23,18 @@ const RecurringInvoice = ({
         containerClassName="max-w-[400px] lg:max-w-[474.447px] min-h-fit "
       >
         <div className="relative flex flex-col lg:px-[39px] lg:pb-[40px] lg:pt-[24px] px-4 py-6 ">
-          <Image
-            src={crossIcon}
-            onClick={onClose}
-            alt="cross_icon"
-            className="absolute right-5 top-5 cursor-pointer"
-          />
-          <p className="text-[#000] font-medium text-2xl mb-5">
-            {translate("invoice.create_invoice_modal.button")}
-          </p>
+          <div className="border-b border-b-[#000] border-opacity-10 ">
+            <Image
+              src={crossIcon}
+              onClick={onClose}
+              alt="cross_icon"
+              className="absolute right-5 top-5 cursor-pointer"
+            />
+            <p className="text-[#000] font-medium text-2xl mb-5">
+              {translate("invoice.create_invoice_modal.button")}
+            </p>
+          </div>
 
-          <hr className="opacity-25 mb-[23px]" />
           <Form
             formFields={fields}
             handleSubmit={handleSubmit}

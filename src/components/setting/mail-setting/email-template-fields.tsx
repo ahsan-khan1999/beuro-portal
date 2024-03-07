@@ -6,7 +6,9 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
   register,
   loading,
   emailSettings,
-  control
+  control,
+  setValue,
+  data
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -63,7 +65,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               inputType: "email",
               id: "email",
               name: "email",
-              placeholder: "test@gmail.com",
+              placeholder: "email@domain.com",
               register,
             },
           },
@@ -74,15 +76,15 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
                 "setting.mail_setting.template_form_fields.phone_number"
               )}`,
               htmlFor: "phoneNumber",
-              className: "mb-[10px] text-sm font-normal text-[#393939]",
+              className: " mb-[10px] text-sm font-normal text-[#393939]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
               id: "phoneNumber",
               name: "phoneNumber",
-              className: "!border-[#BFBFBF] focus:!border-primary",
-              control,
-              country: "ch",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+              inputType:"tel",
+              register,
               value: emailSettings?.phoneNumber || "",
             },
           },
@@ -96,12 +98,12 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
+              inputType:"tel",
               id: "mobileNumber",
               name: "mobileNumber",
-              className: "!border-[#BFBFBF] focus:!border-primary",
-              control,
-              country: "ch",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+              register,
               value: emailSettings?.mobileNumber || "",
             },
           },
@@ -138,13 +140,14 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
             field: {
-              type: Field.input,
+              type: Field.colorPicker,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              inputType: "text",
               id: "FooterColour",
               name: "FooterColour",
               placeholder: "45Dkk6",
               register,
+              setValue,
+              value: data?.footerColor,
             },
           },
           {
@@ -157,13 +160,14 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               className: "mb-[10px] text-sm font-normal text-[#393939]",
             },
             field: {
-              type: Field.input,
+              type: Field.colorPicker,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              inputType: "text",
               id: "textColour",
               name: "textColour",
               placeholder: "45Dkk6",
+              value: data?.textColor,
               register,
+              setValue,
             },
           },
         ],
@@ -171,7 +175,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mb-0 mt-[30px] flex justify-end items-center",
       field: {
         type: Field.button,
         id: "button",
@@ -180,7 +184,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
         )}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
         loading,
       },
     },

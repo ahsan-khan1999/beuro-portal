@@ -188,6 +188,8 @@ interface FollowUp {
   type: string;
   updatedAt: string;
   _id: string
+  id: string
+
 }
 interface Activity {
   company: string;

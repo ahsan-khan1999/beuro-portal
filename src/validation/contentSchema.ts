@@ -26,7 +26,7 @@ export const generateOfferEditContentDetailsValidation = (
         .required(translate("validationMessages.required")),
       [OfferEditContentDetails.attachments]: yup
         .array().of(yup.string().notRequired()).notRequired(),
-      [OfferEditContentDetails.address]: yup.array().of(yup.object().shape({ value: yup.string().required(translate("validationMessages.required")) })).required()
+      // [OfferEditContentDetails.address]: yup.array().of(yup.object().shape({ value: yup.string().required(translate("validationMessages.required")) })).required()
     })
 
 

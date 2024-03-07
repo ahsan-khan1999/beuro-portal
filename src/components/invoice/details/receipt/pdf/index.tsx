@@ -48,6 +48,7 @@ const ReceiptPdfPreview = () => {
     onClose,
     onSuccess,
     dispatch,
+    collectiveInvoiceDetails
   } = useReceiptPdf();
 
   const { t: translate } = useTranslation();
@@ -56,18 +57,17 @@ const ReceiptPdfPreview = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_email_sent")}
-        subHeading={translate("common.modals.email_sent_des")}
+        subHeading={translate("common.modals.receipt_update")}
         route={onSuccess}
       />
     ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading={translate("common.modals.update_contract_heading")}
-        subHeading={translate("common.modals.email_sent_des")}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
-          router.back();
         }}
       />
     ),
@@ -78,12 +78,13 @@ const ReceiptPdfPreview = () => {
 
   return (
     <>
-      {loading || loadingGlobal ? (
+      {loading ? (
         <LoadingState />
       ) : (
         <>
           <InvoiceEmailHeader
             {...receiptData?.emailHeader}
+            contractStatus={collectiveInvoiceDetails?.emailStatus}
             contentName={receiptData?.emailHeader.contentName}
             onEmailSend={handleEmailSend}
             loading={loading}

@@ -18,6 +18,7 @@ export default function Services() {
     handleFilterChange,
     translate,
     loading,
+    currentPage
   } = useService();
 
   const CurrentComponent = useEmptyStates(
@@ -38,13 +39,12 @@ export default function Services() {
         <TableHeadings />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
     </>
   );
 }

@@ -8,7 +8,7 @@ export const BaseModal = ({
   containerClassName,
 }: IBaseModalProps) => {
   const defaultContainerClasses =
-    "rounded-lg bg-white w-[964px] max-w-[964px] min-h-[615px] max-h-[615px] ";
+    "rounded-lg bg-white w-[964px] max-w-[964px] min-h-[615px] max-h-[615px]";
   const containerClasses = combineClasses(
     defaultContainerClasses,
     containerClassName
@@ -21,7 +21,8 @@ export const BaseModal = ({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.3 }}
-        className={`${containerClasses}`}>
+        className={`${containerClasses}`}
+      >
         {children}
       </motion.div>
     </Backdrop>

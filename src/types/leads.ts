@@ -1,6 +1,7 @@
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { Customers } from "./customer";
 import { User } from ".";
+import { ContentTableRowTypes } from "./content";
 
 // Leads Table
 export interface Lead {
@@ -8,7 +9,7 @@ export interface Lead {
   refID: string;
   customerDetail: Customers;
   lead: CustomerLeadDetail;
-  leadStatus: "Open" | "Close" | "Expired";
+  leadStatus: "Open" | "Close" | "Expired" | "InProcess";
   customerID: string;
   images: string[];
   createdAt: string;
@@ -21,10 +22,11 @@ export interface Lead {
   preferredContact: string;
   budget: string;
   leadSource: string;
-  otherServices: string[];
-  requiredService: string;
+  otherServices: string[] | ContentTableRowTypes[];
+  requiredService: string | ContentTableRowTypes;
   additionalDetails: string;
   createdBy: User;
+  isNoteCreated: boolean;
 }
 interface CustomerDetails {
   Customer: Customers;
@@ -46,7 +48,7 @@ export interface CustomerAddress {
   country: string;
   postalCode: string;
   description: string;
-  label:string
+  label: string;
 }
 
 export interface LeadService {

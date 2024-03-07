@@ -39,6 +39,7 @@ import { blobToFile } from "@/utils/utility";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { AggrementSignature } from "../reactPdf/aggrement-signature";
+import { useTranslation } from "next-i18next";
 
 Font.register({
   family: "Poppins",
@@ -85,13 +86,16 @@ export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
 interface SignPdfProps {
-  offerData?: PdfProps<EmailHeaderProps>;
+  offerData: PdfProps<EmailHeaderProps>;
   signature: any;
   templateSettings: TemplateType | null;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings: SystemSetting | null;
   showContractSign?: boolean;
   onComponentMounted: () => void;
+  handleClear: () => void
+  isSubmitted: boolean;
+  handleSave: (signedFile:any) => void
 }
 
 const OfferSignedPdf = ({
@@ -102,6 +106,9 @@ const OfferSignedPdf = ({
   offerData,
   showContractSign,
   onComponentMounted,
+  isSubmitted,
+  handleClear,
+  handleSave
 }: SignPdfProps) => {
   const { loading: offerLoading } = useAppSelector((state) => state.offer);
   const headerDetails = offerData?.headerDetails;
@@ -113,7 +120,7 @@ const OfferSignedPdf = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
-
+  const { t: translate } = useTranslation()
   const acceptButtonRef = useRef<HTMLDivElement>(null);
 
   const pdfDoc = (
@@ -134,7 +141,10 @@ const OfferSignedPdf = ({
 
           <ServiceTableHederRow />
           {serviceItem?.map((item, index) => (
-            <ServiceTableRow {...item} key={index} />
+            <ServiceTableRow {...item} key={index}
+              pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
+
+            />
           ))}
           <ServicesTotalAmount
             {...serviceItemFooter}
@@ -153,7 +163,7 @@ const OfferSignedPdf = ({
           <Header {...headerDetails} />
         </View>
 
-        <ContactAddress {...{ ...contactAddress }} />
+        {/* <ContactAddress {...{ ...contactAddress }} /> */}
         <AdditionalDetails
           description={aggrementDetails}
           signature={signature}
@@ -177,22 +187,31 @@ const OfferSignedPdf = ({
   }, [signature]);
 
   const acceptOffer = async (file: any) => {
-    const convertedFile = blobToFile(file, "offer.pdf");
-    if (!signature) {
-      toast.error("please sign first");
-      return;
-    }
+    const result = handleSave(file)
 
-    const formData = new FormData();
-    formData.append("signature", convertedFile);
+    // if(result) {
+    //   const convertedFile = blobToFile(file, `${headerDetails?.offerNo + "-" + headerDetails?.companyName}.pdf` || "offer.pdf");
+    //   if (!signature) {
+    //     toast.error("please sign first");
+    //     return;
+    //   }
 
-    const data = {
-      id: offerData?.id,
-    };
-    const response = await dispatch(signOffer({ data, formData }));
-    if (response?.payload) {
-      dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
-    }
+    //   const formData = new FormData();
+    //   formData.append("signature", convertedFile);
+
+    //   const data = {
+    //     id: offerData?.id,
+    //   };
+    //   const response = await dispatch(signOffer({ data, formData }));
+    //   if (response?.payload) {
+    //     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+    //   }
+    // }else{
+    //   if (!signature) {
+    //     toast.error("please sign first");
+    //     return;
+    //   }
+    // }
   };
   const rejectOffer = async () => {
     dispatch(updateModalType({ type: ModalType.REJECT_OFFER }));
@@ -207,24 +226,36 @@ const OfferSignedPdf = ({
       className="download-link flex justify-center max-w-[1040px] w-full"
       id="gohere"
     >
-      <BlobProvider document={pdfDoc}>
+      {/* <BlobProvider document={pdfDoc}>
         {({ blob, url, loading, error }) => {
           return (
-            <Button
-              className={`mt-[55px] w-full  ${pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
-                } rounded-[4px] shadow-md  text-center text-white`}
-              onClick={() =>
-                pdfAction === "Reject" ? rejectOffer() : acceptOffer(blob)
-              }
-              inputType="button"
-              id="signature"
-              loading={offerLoading}
-              text={pdfAction as string}
-            />
+            <div className="flex justify-between gap-x-3 my-2">
+              <Button
+                disabled={isSubmitted}
+                className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md w-full"
+
+                inputType="button"
+                id="signature"
+                onClick={handleClear}
+                text={translate("pdf.clear")}
+              />
+              <Button
+                className={`mt-[0px] w-full  ${pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
+                  } rounded-[4px] shadow-md  text-center text-white`}
+                onClick={() =>
+                  pdfAction === "Reject" ? rejectOffer() : handleSave(blob)
+                }
+                inputType="button"
+                id="signature"
+                loading={offerLoading}
+                text={pdfAction as string}
+              />
+              <a href={url}>link</a>
+            </div>
 
           );
         }}
-      </BlobProvider>
+      </BlobProvider> */}
     </div>
   );
 };

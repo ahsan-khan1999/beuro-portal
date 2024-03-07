@@ -9,12 +9,9 @@ import logoutImage from "@/assets/svgs/Group 41120.svg";
 import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import logo from "@/assets/svgs/logo.svg";
-import { getUser, logout } from "@/utils/auth.util";
 import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
-import localStoreUtil from "@/utils/localstore.util";
-import { isJSON } from "@/utils/functions";
-import { User } from "@/types";
+import { logout } from "@/utils/auth.util";
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -22,18 +19,18 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     await dispatch(logoutUser());
     logout();
-    router.push("/")
-    // router.push({ pathname: "/pdf", query: { offerID: "65a9290dae93a8c5b8e0612b", action: "Accept" } })
+    router.push("/");
+    // router.push({ pathname: "/pdf", query: { offerID: "65df3a25d09467582a2564de", action: "Accept" } })
   };
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {
       dispatch(readSystemSettings());
     }
   }, [user]);
- 
+
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (

@@ -33,6 +33,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
     reset,
     formState: { errors },
     setError,
+    resetField
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -42,6 +43,11 @@ export default function useSettingProfile(handleChangePassword: Function) {
       ...user,
     });
   }, []);
+  const handleRestore = () => {
+    reset({
+      ...user,
+    });
+  }
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -55,7 +61,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
       <RecordCreateSuccess
         onClose={onClose}
         modelHeading={translate("common.modals.admin_setting")}
-        modelSubHeading={translate("common.modals.email_sent_des")}
+        modelSubHeading={translate("common.modals.setting_update")}
         routeHandler={onClose}
       />
     ),
@@ -69,7 +75,8 @@ export default function useSettingProfile(handleChangePassword: Function) {
     loading,
     control,
     handleChangePassword,
-    user
+    user,
+    handleRestore
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

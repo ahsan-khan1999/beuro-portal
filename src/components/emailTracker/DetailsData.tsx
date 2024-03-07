@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
-import { formatDateReverse, getMailStatusColor } from "@/utils/utility";
+import { formatDateReverse, getFileNameFromUrl, getMailStatusColor } from "@/utils/utility";
 import Link from "next/link";
+import { Pdf } from '../../types/emailTracker';
 
 const DetailsData = ({
   handleConfirmDeletion,
@@ -20,7 +21,7 @@ const DetailsData = ({
 
   return (
     <>
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
           <span
             onClick={() => router.push("/email-tracker")}
@@ -52,17 +53,19 @@ const DetailsData = ({
             {translate("email_tracker.card_content.main_heading")}
           </h1>
         </div>
-        <div className="flex items-center gap-x-5">
+        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
           <Image
             src={deleteIcon}
             alt="deleteIcon"
             className="cursor-pointer"
             onClick={() => handleConfirmDeletion()}
+            width={16}
+            height={20}
           />
-        </div>
+        </span>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div className="xl:w-11/12 w-full">
+
+      <div className="xl:w-11/12 w-full mt-5">
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-5">
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
@@ -82,7 +85,7 @@ const DetailsData = ({
                   emailDetails?.mailStatus || ""
                 )}]`}
               >
-                {translate(emailDetails?.mailStatus || "")}
+                {translate(`mail_tracker_status.${emailDetails?.mailStatus}`)}
               </span>
             )}
           </div>
@@ -94,6 +97,7 @@ const DetailsData = ({
               {emailDetails?.subject}
             </span>
           </div>
+
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.recipient")}:
@@ -102,6 +106,26 @@ const DetailsData = ({
               {emailDetails?.email}
             </span>
           </div>
+          {emailDetails?.cc && (
+            <div>
+              <span className="font-normal text-[#4D4D4D] text-base mr-5">
+                Cc:
+              </span>
+              <span className="font-medium text-[#4B4B4B] text-base break-all">
+                {emailDetails?.cc}
+              </span>
+            </div>
+          )}
+          {emailDetails?.bcc && (
+            <div>
+              <span className="font-normal text-[#4D4D4D] text-base mr-5">
+                Bcc:
+              </span>
+              <span className="font-medium text-[#4B4B4B] text-base break-all">
+                {emailDetails?.bcc}
+              </span>
+            </div>
+          )}
           <div>
             <span className="font-normal text-[#4D4D4D] text-base mr-5">
               {translate("email_tracker.card_content.send_at")}:
@@ -115,7 +139,7 @@ const DetailsData = ({
               {translate("email_tracker.card_content.viewed_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
-              {formatDateReverse(emailDetails?.viewedAt as string)}
+              {formatDateReverse(emailDetails?.viewedAt as string) || "-"}
             </span>
           </div>
         </div>
@@ -127,12 +151,10 @@ const DetailsData = ({
         </div>
         <div className="mt-5 flex items-end">
           {emailDetails?.attachments?.map((item) => {
-            let length = item?.href?.split("/")?.length - 1;
-
             return (
               <>
                 <Link
-                  href={item?.href || ""}
+                  href={typeof item === "string" ? item : item?.href}
                   target="_blank"
                   className="border-[1px] py-2 px-[10px] rounded-lg border-[#C7C7C7] flex items-center"
                 >
@@ -142,7 +164,7 @@ const DetailsData = ({
                     className=" mr-[11px]"
                   />
                   <span className="text-[#BFBFBF] text-base font-normal">
-                    {item.href?.split("/")[length]}
+                    {getFileNameFromUrl(typeof item === "string" ? item : item?.href, typeof item === "string" ? item?.length : item?.href?.length)}
                   </span>
                 </Link>
                 &nbsp;&nbsp;

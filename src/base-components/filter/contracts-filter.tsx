@@ -44,7 +44,7 @@ export default function ContractsFilter({
           $gte: moreFilter.date && moreFilter.date.$gte,
           $lte: moreFilter.date && moreFilter.date.$lte,
         },
-        leadSource: moreFilter?.leadSource
+        leadSource: moreFilter?.leadSource,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -94,7 +94,7 @@ export default function ContractsFilter({
   };
 
   return (
-    <div className="relative flex my-auto cursor-pointer " ref={ref}>
+    <div className="relative flex my-auto cursor-pointer z-50" ref={ref}>
       <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
@@ -165,11 +165,11 @@ export default function ContractsFilter({
                     label2={translate("filters.extra_filters.to")}
                     dateFrom={formatDateForDatePicker(
                       (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                      FiltersDefaultValues.$gte
+                        FiltersDefaultValues.$gte
                     )}
                     dateTo={formatDateForDatePicker(
                       (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                      FiltersDefaultValues.$lte
+                        FiltersDefaultValues.$lte
                     )}
                     onChangeFrom={(val) => handleDateChange("$gte", val)}
                     onChangeTo={(val) => handleDateChange("$lte", val)}
@@ -250,30 +250,22 @@ export default function ContractsFilter({
                   </label>
                 </div>
                 <div className="grid grid-cols-2 gap-2 mt-4  ">
-
-                  {
-                    Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
-                      <EmailCheckField
-                        key={idx}
-                        checkboxFilter={moreFilter as unknown as FilterType}
-                        setCheckBoxFilter={setMoreFilter}
-                        type={"leadSource"}
-                        label={item}
-                        value={item}
-                        onChange={(value, isChecked) =>
-                          handleStatusChange(value, isChecked)
-                        }
-                      />
-                    ))
-                  }
-
-
+                  {Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
+                    <EmailCheckField
+                      key={idx}
+                      checkboxFilter={moreFilter as unknown as FilterType}
+                      setCheckBoxFilter={setMoreFilter}
+                      type={"leadSource"}
+                      label={item}
+                      value={item}
+                      onChange={(value, isChecked) =>
+                        handleStatusChange(value, isChecked)
+                      }
+                    />
+                  ))}
                 </div>
-                <div>
-
-                </div>
+                <div></div>
               </div>
-
             </div>
             <div>
               <BaseButton

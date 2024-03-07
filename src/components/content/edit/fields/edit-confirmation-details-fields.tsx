@@ -17,7 +17,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mt-5",
+        containerClass: "",
         field: {
           type: Field.div,
           id: "div-field",
@@ -36,7 +36,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 inputType: "text",
                 id: "confirmationContent.title",
                 name: "confirmationContent.title",
-                placeholder: "Text for Confirmation",
+                placeholder: translate("content.details.confirmation_title"),
                 register,
               },
             },
@@ -54,9 +54,9 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 name: "confirmationContent.description",
 
                 control,
-                value:
-                  contentDetails?.id &&
-                  contentDetails?.confirmationContent?.description,
+                // value:
+                //   contentDetails?.id &&
+                //   contentDetails?.confirmationContent?.description,
               },
             },
 
@@ -74,9 +74,9 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
                 name: "confirmationContent.body",
 
                 control,
-                value:
-                  contentDetails?.id &&
-                  contentDetails?.confirmationContent?.body,
+                // value:
+                //   contentDetails?.id &&
+                //   contentDetails?.confirmationContent?.body,
               },
             },
 
@@ -108,7 +108,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex items-center space-x-[18px] ",
+          className: "flex items-center justify-end space-x-[18px] ",
           children: [
             {
               containerClass: "mb-0",

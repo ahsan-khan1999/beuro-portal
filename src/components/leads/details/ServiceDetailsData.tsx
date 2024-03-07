@@ -6,6 +6,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { Service } from "@/types/service";
 import { filterLead, formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { ContentTableRowTypes } from "@/types/content";
 
 const ServiceDetailsData = ({
   onClick,
@@ -15,14 +16,9 @@ const ServiceDetailsData = ({
   const { leadDetails } = useAppSelector((state) => state.lead);
   const { service } = useAppSelector((state) => state.service);
 
-  let requiredService = filterLead(
-    leadDetails?.requiredService,
-    service
-  ) as Service;
-  let otherServices = filterLead(
-    leadDetails?.otherServices,
-    service
-  ) as Service[];
+
+  const content = leadDetails?.requiredService as ContentTableRowTypes;
+  const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
 
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -47,7 +43,7 @@ const ServiceDetailsData = ({
             viewBox="0 0 21 21"
             fill="none"
           >
-            <g clip-path="url(#clip0_1241_60323)">
+            <g clipPath="url(#clip0_1241_60323)">
               <path
                 d="M16.4138 10.197C15.953 10.197 15.5806 10.5704 15.5806 11.0303V17.697C15.5806 18.1561 15.2072 18.5303 14.7473 18.5303H3.08057C2.62051 18.5303 2.24728 18.1561 2.24728 17.697V6.03027C2.24728 5.57114 2.62051 5.19699 3.08057 5.19699H9.74728C10.2081 5.19699 10.5806 4.82361 10.5806 4.36371C10.5806 3.90366 10.2081 3.53027 9.74728 3.53027H3.08057C1.70224 3.53027 0.580566 4.65195 0.580566 6.03027V17.697C0.580566 19.0753 1.70224 20.197 3.08057 20.197H14.7473C16.1256 20.197 17.2473 19.0753 17.2473 17.697V11.0303C17.2473 10.5695 16.8747 10.197 16.4138 10.197Z"
                 fill="#4A13E7"
@@ -84,7 +80,7 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.required_service")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {requiredService?.serviceName}
+              {content?.contentName}
             </div>
           </div>
           <div>
@@ -109,8 +105,8 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.flexibility")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {leadDetails?.flexibility || "" + " "}
-              {translate("leads.service_details.days")}
+              {leadDetails?.flexibility === "0" ? translate("common.flexible") : leadDetails?.flexibility}
+              {leadDetails?.flexibility == "0" ? "" : leadDetails?.flexibility == "1" ? translate("common.day") : translate("common.days")}
             </div>
           </div>
           <div>
@@ -137,7 +133,7 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.lead_source")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
-              {leadDetails?.leadSource}
+              {translate(`common.lead_source.${leadDetails?.leadSource}`)}
             </div>
           </div>
           <div className="xl:col-span-2">
@@ -146,8 +142,8 @@ const ServiceDetailsData = ({
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap min-h-[58px]">
               <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis ">
-                {Array.isArray(otherServices) &&
-                  otherServices?.map((item) => item.serviceName + ", ")}
+                {Array.isArray(contentList) &&
+                  contentList?.map((item) => item?.contentName + ", ")}
               </span>
             </div>
           </div>

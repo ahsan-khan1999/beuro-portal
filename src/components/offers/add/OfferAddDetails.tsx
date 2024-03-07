@@ -7,12 +7,20 @@ import { useRouter } from "next/router";
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useAddOfferDetails(onHandleNext);
+  const {
+    fields,
+    control,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    translate,
+    offerDetails,
+  } = useAddOfferDetails(onHandleNext);
   return (
     <FormCard>
       <div
-        className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-20"
+        className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-10"
         id={translate("offers.tabs_heading.offer")}
       >
         <div className="flex items-center gap-x-[26px]">
@@ -43,7 +51,8 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
             </svg>
           </span>
           <p className="font-medium text-[24px] leading-6 ">
-            {translate("offers.offer_details.heading")}
+            {translate("offers.offer_details.heading")}{" "}
+            {offerDetails?.id && offerDetails?.offerNumber}
           </p>
         </div>
         <button

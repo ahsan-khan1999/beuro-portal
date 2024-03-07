@@ -28,7 +28,7 @@ export default function OffersFilters({
     },
     {
       label: translate("offers.table_functions.signed"),
-      type: `${staticEnums.OfferStatus.Signed}`,
+      type: `${staticEnums.OfferStatus.Accepted}`,
     },
     {
       label: translate("offers.table_functions.expire"),
@@ -40,38 +40,46 @@ export default function OffersFilters({
     },
   ];
 
-  // const handleStatusChange = (value: string, isChecked: boolean) => {
-  //   setFilter((prev: FilterType) => {
-  //     const updatedStatus = prev.status ? [...prev.status] : [];
-  //     if (isChecked) {
-  //       if (!updatedStatus.includes(value)) {
-  //         updatedStatus.push(value);
-  //       }
-  //     } else {
-  //       const index = updatedStatus.indexOf(value);
-  //       if (index > -1) {
-  //         updatedStatus.splice(index, 1);
-  //       }
-  //     }
-  //     const status = updatedStatus.length > 0 ? updatedStatus : "";
-  //     const updatedFilter = { ...prev, status: status };
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
-
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
+      const newStatus = updatedStatus.map(Number);
+
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       } else {
         const index = updatedStatus.indexOf(value);
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       }
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
@@ -84,6 +92,7 @@ export default function OffersFilters({
   const handleInputChange = (value: string) => {
     setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
+
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -145,7 +154,10 @@ export default function OffersFilters({
               label: `${translate("filters.sort_by.oldest")}`,
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+            {
+              label: `${translate("filters.sort_by.a_z")}`,
+              value: "leadID.customerDetail.fullName",
+            },
           ]}
           label={translate("common.sort_button")}
         />

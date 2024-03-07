@@ -17,57 +17,7 @@ import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { smoothScrollToSection } from "@/utils/utility";
 import { Container } from "@/components/pdf/container";
 
-export const DUMMY_DATA: PdfProps = {
-  emailHeader: { emailStatus: "pending", offerNo: "23-A" },
-  headerDetails: {
-    offerNo: "O-4040 Umzugsfuchs",
-    offerDate: "22.09.2023",
-    createdBy: "Heiniger Michèle",
-    logo: "",
-    emailTemplateSettings: null,
-  },
-  contactAddress: {
-    address: {
-      name: "Frau Natalie Semeli",
-      city: "Buren an der Aare",
-      postalCode: "3294",
-      streetWithNumber: "Erlenweg 8",
-    },
-    email: "karinsch242@gmail.com",
-    phone: "031 350 15 15",
-  },
-  movingDetails: {
-    header: "Anger fur Ihren Umzug, Entsogung inkl. Ein- und Auspacken",
-    address: [
-      {
-        country: "",
-        description: "",
-        postalCode: "",
-        streetNumber: "",
-        label: "",
-      },
-    ],
-    workDates: [{ startDate: "30-11-2023", endDate: " 07-11-2023" }],
-  },
-  serviceItem: [],
-  serviceItemFooter: {
-    subTotal: "2000CHF",
-    tax: "100CHF (7.7%)",
-    discount: "100.50 CHF",
-    grandTotal: "2100.50 CHF",
-  },
-  footerDetails: {
-    firstColumn: {},
-    secondColumn: {},
-    thirdColumn: {},
-    fourthColumn: {},
-    columnSettings: null,
-    currPage: 0,
-    totalPages: 0,
-    emailTemplateSettings: null,
-  },
-  aggrementDetails: "",
-};
+
 interface ActionType {
   payload: PublicOffersTableRowTypes;
   type: string;
@@ -118,6 +68,9 @@ const SignPdfPreview = () => {
                 createdBy: offerDetails?.Offer?.createdBy?.fullName,
                 logo: offerDetails?.Mail?.logo,
                 emailTemplateSettings: offerDetails?.Mail,
+                companyName:
+                  offerDetails?.Offer?.createdBy?.company?.companyName,
+                // isReverseLogo: offerDetails?.Template?.order,
               },
               contactAddress: {
                 address: {
@@ -130,14 +83,21 @@ const SignPdfPreview = () => {
                   streetWithNumber:
                     offerDetails?.Offer?.leadID?.customerDetail?.address
                       ?.streetNumber,
+                      companyName:offerDetails?.Offer?.leadID?.customerDetail?.companyName
                 },
                 email: offerDetails?.Offer?.leadID?.customerDetail?.email,
                 phone: offerDetails?.Offer?.leadID?.customerDetail?.phoneNumber,
+                gender:
+                  offerDetails?.Offer?.leadID?.customerDetail?.gender?.toString(),
+                mobile:
+                  offerDetails?.Offer?.leadID?.customerDetail?.mobileNumber,
+                // isReverseInfo: offerDetails?.Template?.order,
               },
               movingDetails: {
                 address: offerDetails?.Offer?.addressID?.address,
                 header: offerDetails?.Offer?.title,
                 workDates: offerDetails?.Offer?.date,
+                time: offerDetails?.Offer?.time,
               },
               serviceItem: offerDetails?.Offer?.serviceDetail?.serviceDetail,
               serviceItemFooter: {
@@ -145,48 +105,67 @@ const SignPdfPreview = () => {
                 tax: offerDetails?.Offer?.taxAmount?.toString(),
                 discount: offerDetails?.Offer?.discountAmount?.toString(),
                 grandTotal: offerDetails?.Offer?.total?.toString(),
-                discountType:offerDetails?.Offer?.discountType,
-                taxType:offerDetails?.Offer?.taxType
+                discountType: offerDetails?.Offer?.discountType,
+                taxType: offerDetails?.Offer?.taxType,
+                serviceDiscountSum:
+                  offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce(
+                    (acc, service) => {
+                      const price = service?.discount || 0;
+                      return acc + price;
+                    },
+                    0
+                  ),
+                isTax: offerDetails?.Offer?.isTax,
+                isDiscount: offerDetails?.Offer?.isDiscount,
+                discountDescription: offerDetails?.Offer?.discountDescription,
               },
+
               footerDetails: {
                 firstColumn: {
                   companyName:
-                    offerDetails?.Offer?.createdBy?.company?.companyName,
-                  email: offerDetails?.Offer?.createdBy?.email,
+                    offerDetails?.Template?.firstColumn?.companyName,
+                  email: offerDetails?.Template?.firstColumn?.email,
                   phoneNumber:
-                    offerDetails?.Offer?.createdBy?.company?.phoneNumber,
-                  taxNumber: offerDetails?.Offer?.createdBy?.company?.taxNumber,
-                  website: offerDetails?.Offer?.createdBy?.company?.website,
+                    offerDetails?.Template?.firstColumn?.phoneNumber,
+                  taxNumber: Number(offerDetails?.Template?.firstColumn?.taxNumber) as number,
+                  website: offerDetails?.Template?.firstColumn?.website,
                 },
                 secondColumn: {
                   address: {
                     postalCode:
-                      offerDetails?.Offer?.createdBy?.company.address
-                        .postalCode,
+                      offerDetails?.Template?.secondColumn?.postCode
+                        ,
                     streetNumber:
-                      offerDetails?.Offer?.createdBy?.company.address
-                        .streetNumber,
+                      offerDetails?.Template?.secondColumn
+                        ?.streetNumber,
                   },
                   bankDetails: {
                     accountNumber:
-                      offerDetails?.Offer?.createdBy?.company.bankDetails
-                        .accountNumber,
+                      offerDetails?.Template?.secondColumn
+                        ?.accountNumber,
                     bankName:
-                      offerDetails?.Offer?.createdBy?.company.bankDetails
-                        .bankName,
+                      offerDetails?.Template?.secondColumn
+                        ?.bankName,
                     ibanNumber:
-                      offerDetails?.Offer?.createdBy?.company.bankDetails
-                        .ibanNumber,
+                      offerDetails?.Template?.secondColumn
+                        ?.iban,
                   },
                 },
                 thirdColumn: {
-                  row1: "Standorte",
-                  row2: "bern-Solothurn",
-                  row3: "Aargau-Luzern",
-                  row4: "Basel-Zürich",
-                  row5: "",
+                  row1: offerDetails?.Template?.thirdColumn?.row1,
+                  row2: offerDetails?.Template?.thirdColumn?.row2,
+                  row3: offerDetails?.Template?.thirdColumn?.row3,
+                  row4: offerDetails?.Template?.thirdColumn?.row4,
+                  row5: offerDetails?.Template?.thirdColumn?.row5,
                 },
-                fourthColumn: {},
+                fourthColumn: {
+                  row1: offerDetails?.Template?.fourthColumn?.row1,
+                  row2: offerDetails?.Template?.fourthColumn?.row2,
+                  row3: offerDetails?.Template?.fourthColumn?.row3,
+                  row4: offerDetails?.Template?.fourthColumn?.row4,
+                  row5: offerDetails?.Template?.fourthColumn?.row5,
+
+                },
                 columnSettings: null,
                 currPage: 1,
                 totalPages: calculateTotalPages,
@@ -238,6 +217,7 @@ const SignPdfPreview = () => {
                 isThirdColumn,
                 secondColumn,
                 thirdColumn,
+                order,
               }: TemplateType = offerDetails?.Template;
 
               setTemplateSettings(() => ({
@@ -249,6 +229,7 @@ const SignPdfPreview = () => {
                 isFourthColumn,
                 isSecondColumn,
                 isThirdColumn,
+                order,
               }));
             }
             if (offerDetails?.Mail) {
@@ -294,6 +275,7 @@ const SignPdfPreview = () => {
           action={action as string}
           emailTemplateSettings={emailTemplateSettings}
           systemSettings={systemSetting}
+          setOfferData={setOfferData}
         />
       </Container>
     )

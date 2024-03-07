@@ -96,6 +96,10 @@ export const useEditOfferDetails = ({
             address: res?.payload?.leadID?.customerDetail?.address,
             date: res?.payload?.date,
             customerID: res?.payload?.leadID?.customerID,
+            gender: staticEnums["Gender"][res?.payload?.leadID?.customerDetail?.gender],
+            time: res?.payload?.time,
+
+
           });
         }
       );
@@ -115,7 +119,7 @@ export const useEditOfferDetails = ({
     if (type && customerID) {
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID, paginate: 0 } },
+          params: { filter: { customerID: customerID, status: [0, 1,3] }, paginate: 0 },
         })
       );
     }
@@ -135,6 +139,7 @@ export const useEditOfferDetails = ({
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
+        gender: null
       });
     } else {
       reset({
@@ -153,6 +158,10 @@ export const useEditOfferDetails = ({
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
         customerID: offerDetails?.leadID?.customerID,
+        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.time,
+
+
       })
     }
   }, [type]);
@@ -167,18 +176,23 @@ export const useEditOfferDetails = ({
   });
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if (selectedCustomers) {
+      dispatch(
+        setCustomerDetails(selectedCustomers)
+      );
 
-    reset({
-      ...selectedCustomers[0],
-      type: type,
-      content: selectedContent,
-      customerID: selectedCustomers[0]?.id,
-      leadID: "",
-    });
+      reset({
+        ...selectedCustomers,
+        type: type,
+        content: selectedContent,
+        customerID: selectedCustomers?.id,
+        leadID: "",
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+
+      });
+
+    }
   };
   useMemo(() => {
     const filteredContent = content?.find(
@@ -215,7 +229,7 @@ export const useEditOfferDetails = ({
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
-    offerDetails,
+    loading,
     control
   );
 
@@ -266,5 +280,6 @@ export const useEditOfferDetails = ({
     errors,
     error,
     translate,
+    offerDetails
   };
 };

@@ -9,7 +9,6 @@ import { contractTableTypes } from "@/types/contract";
 import { useTranslation } from "next-i18next";
 
 const ImageSlider = ({ onClose, details }: { onClose: () => void, details: string[] }) => {
-  // const { leadDetails } = useAppSelector(state => state.lead)
   
   const SLIDER_IMAGES_DATA = {
     noOfThumbNails: 8,

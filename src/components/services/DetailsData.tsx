@@ -1,5 +1,5 @@
 import React from "react";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
@@ -19,7 +19,7 @@ const DetailsData = ({
   const { t: translate } = useTranslation();
   return (
     <>
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10  pb-5">
         <div className="flex items-center">
           {isUpdate && (
             <span
@@ -55,30 +55,36 @@ const DetailsData = ({
               : `${translate("services.card_content.main_heading")}`}
           </h1>
         </div>
-        <div className="flex items-center gap-5">
+        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
           <Image
             src={deleteIcon}
             alt="deleteIcon"
             onClick={deleteHandler}
             className="cursor-pointer"
+            width={16}
+            height={20}
           />
-        </div>
+        </span>
       </div>
-      <hr className="w-full h-[1px] text-black opacity-10 my-5" />
-      <div>
+
+      <div className="mt-5">
         <div className="flex justify-between items-center max-w-[600px]">
-          <h3 className="text-[#4D4D4D] ">
-            {translate("services.card_content.customer_id")}:
-            <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{serviceDetail?.refID}
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D]">
+              {translate("services.card_content.customer_id")}:
             </span>
-          </h3>
-          <h3 className="text-[#4D4D4D] ">
-            {translate("services.card_content.created_by")}:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{serviceDetail?.createdBy?.fullName}
+              {serviceDetail?.refID}
             </span>
-          </h3>
+          </div>
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D]">
+              {translate("services.card_content.created_by")}:
+            </span>
+            <span className="text-[#4B4B4B] font-medium">
+              {serviceDetail?.createdBy?.fullName}
+            </span>
+          </div>
         </div>
         {isUpdate && (
           <h3 className="text-[#4D4D4D] mt-4">

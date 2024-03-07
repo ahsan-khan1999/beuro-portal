@@ -47,6 +47,7 @@ const DetailsPdfPriview = () => {
     dispatch,
     onClose,
     onSuccess,
+    collectiveInvoiceDetails
   } = useInvoicePdf();
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -54,18 +55,17 @@ const DetailsPdfPriview = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_email_sent")}
-        subHeading={translate("common.modals.email_sent_des")}
+        subHeading={translate("common.modals.invoice_update")}
         route={onSuccess}
       />
     ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading={translate("common.modals.offer_email_sent")}
-        subHeading={translate("common.modals.email_sent_des")}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
-          router.back();
         }}
       />
     ),
@@ -75,12 +75,13 @@ const DetailsPdfPriview = () => {
   };
   return (
     <>
-      {loading || loadingGlobal ? (
+      {loading  ? (
         <LoadingState />
       ) : (
         <>
           <InvoiceEmailHeader
             {...invoiceData?.emailHeader}
+            contractStatus={collectiveInvoiceDetails?.emailStatus}
             contentName={invoiceData?.emailHeader.contentName}
             onEmailSend={handleEmailSend}
             loading={loading}

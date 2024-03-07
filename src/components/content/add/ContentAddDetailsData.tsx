@@ -97,7 +97,10 @@ const ContentAddDetailsData = () => {
       <AddInoviceContentDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addReceiptContent]: (
-      <AddReceiptContentDetails onHandleNext={handleNextTab} />
+      <AddReceiptContentDetails 
+      onHandleBack={onHandleBack}
+      
+      onHandleNext={handleNextTab} />
     ),
   };
 
@@ -183,6 +186,7 @@ const ContentAddDetailsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              key={item.name}
             />
           ))}
         </div>

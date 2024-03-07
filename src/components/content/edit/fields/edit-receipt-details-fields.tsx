@@ -16,7 +16,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-5",
+      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
@@ -35,7 +35,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               inputType: "text",
               id: "receiptContent.title",
               name: "receiptContent.title",
-              placeholder: "Text for Receipt",
+              placeholder: translate("content.details.receipt_title"),
               register,
             },
           },
@@ -53,9 +53,9 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.description",
 
               control,
-              value:
-                contentDetails?.id &&
-                contentDetails?.receiptContent?.description,
+              // value:
+              //   contentDetails?.id &&
+              //   contentDetails?.receiptContent?.description,
             },
           },
 
@@ -73,7 +73,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.body,
+              // value: contentDetails?.id && contentDetails?.receiptContent?.body,
             },
           },
 
@@ -106,7 +106,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center gap-x-[18px]",
+        className: "flex items-center justify-end gap-x-[18px]",
         children: [
           {
             containerClass: "mb-0",

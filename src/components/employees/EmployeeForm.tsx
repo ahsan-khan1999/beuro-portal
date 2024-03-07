@@ -24,12 +24,12 @@ const EmployeeForm = ({
         !isUpdate ? "border-primary" : "border-none"
       } w-full h-fit`}
     >
-      <div className="flex flex-col mlg:flex-row justify-between mlg:items-center pb-5 border-b border-black border-opacity-20 gap-y-3">
+      <div className="flex flex-col mlg:flex-row justify-between mlg:items-center pb-5 border-b border-black border-opacity-10 gap-y-3">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("employees.details.main_heading")}
         </h2>
         {isUpdate ? (
-          <div className="flex gap-x-5">
+          <div className="flex items-center justify-end gap-x-5">
             <BaseButton
               buttonText={translate("employees.details.edit_password")}
               onClick={() => handlePasswordReset()}

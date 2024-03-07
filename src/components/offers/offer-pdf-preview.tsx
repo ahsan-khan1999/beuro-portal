@@ -257,6 +257,17 @@ const OfferPdf = ({
   const serviceItemFooter = offerData?.serviceItemFooter;
   const aggrementDetails = offerData?.aggrementDetails;
   const footerDetails = offerData?.footerDetails;
+  const disscountTableRow = {
+    serviceTitle: "Discount",
+    price: Number(serviceItemFooter?.discount),
+    unit: "-",
+    totalPrice: Number(serviceItemFooter?.discount),
+    serviceType: "",
+    description: serviceItemFooter?.discountDescription,
+    count: Number("-"),
+    pagebreak: true,
+    discount: Number(serviceItemFooter?.discount)
+  }
   return (
     <PDFViewer width={A4_WIDTH} height={A4_HEIGHT}>
       <Document>
@@ -276,8 +287,16 @@ const OfferPdf = ({
 
             <ServiceTableHederRow />
             {serviceItem?.map((item, index) => (
-              <ServiceTableRow {...item} key={index} />
+              <ServiceTableRow {...item} key={index}
+                pagebreak={false}
+
+              />
             ))}
+
+            <ServiceTableRow {...disscountTableRow} key={Math.random()}
+              pagebreak={true}
+
+            />
             <ServicesTotalAmount {...serviceItemFooter} />
           </View>
           <Footer

@@ -21,7 +21,8 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const dispatch = useAppDispatch();
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
   let taxPercentage = 0
-
+  const remainingAmount = invoiceDetails?.total
+  
   const {
     register,
     handleSubmit,
@@ -48,32 +49,32 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
 
 
   useMemo(() => {
-    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - invoiceDetails?.invoiceCreatedAmount
 
     taxPercentage = calculateTax(Number(remainingAmount), amount)
     if (type === '0') {
       if (remainingAmount < amount) {
-        setValue("amount", invoiceDetails?.paidAmount)
-        setValue("remainingAmount", remainingAmount - amount)
+        setValue("amount", remainingAmount?.toFixed(2))
+        setValue("remainingAmount", (remainingAmount - amount).toFixed(2))
 
       } else if (invoiceDetails?.paidAmount === amount) {
-        setValue("remainingAmount", remainingAmount)
+        setValue("remainingAmount", remainingAmount.toFixed(2))
 
       } else {
-        setValue("remainingAmount", remainingAmount - amount)
+        setValue("remainingAmount", (remainingAmount - amount).toFixed(2))
+
 
       }
     }
     else if (type === '1') {
       if (Number(remainingAmount) < taxPercentage) {
-        setValue("remainingAmount", remainingAmount)
+        setValue("remainingAmount", (remainingAmount).toFixed(2))
         setValue("amount", 100)
 
       } else {
-        setValue("remainingAmount", Number(remainingAmount) - taxPercentage)
+        setValue("remainingAmount", (Number(remainingAmount) - taxPercentage).toFixed(2))
       }
     } else {
-      setValue("remainingAmount", remainingAmount)
+      setValue("remainingAmount", remainingAmount.toFixed(2))
 
     }
   }, [amount, type]);
@@ -92,7 +93,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const onSubmit: SubmitHandler<FieldValues> = async (reqData) => {
     const apiData = {
       ...reqData, ["paymentType"]: staticEnums["PaymentType"][reqData.paymentType], id: data?.id, isInvoiceRecurring: invoiceDetails?.isInvoiceRecurring || false,
-      amount: data?.type === "1" ? taxPercentage : data?.amount
+      amount: reqData?.type === "1" ? calculateTax(Number(reqData?.remainingAmount),reqData?.amount) : reqData?.amount
 
     }
 

@@ -5,16 +5,29 @@ import React from "react";
 import { useRouter } from "next/router";
 import { ComponentsType } from "./AddOffersDetailsData";
 
-const ServiceAddDetails = ({ onHandleNext }: { onHandleNext: (currentComponent: ComponentsType) => void }) => {
+const ServiceAddDetails = ({
+  onHandleNext,
+}: {
+  onHandleNext: (currentComponent: ComponentsType) => void;
+}) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate ,systemSettings} =
-    useAddServiceDetails(onHandleNext);
+  const {
+    fields,
+    control,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    translate,
+    systemSettings,
+    offerDetails
+  } = useAddServiceDetails(onHandleNext);
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 ">
         <h2 className="text-[#393939] text-lg font-medium">
-         {translate("offers.service_details.main_heading")}
+          {translate("offers.service_details.main_heading")}  {offerDetails?.id && (offerDetails?.offerNumber)}
         </h2>
         <button
           onClick={() => router.push("/offers")}

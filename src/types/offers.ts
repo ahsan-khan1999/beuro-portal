@@ -16,6 +16,7 @@ export interface OffersTableRowTypes {
   email: string;
   phoneNumber: string;
   date: DateRangeProps[];
+  time: string;
   mobileNumber: string;
   status: string;
   editImg?: string;
@@ -42,7 +43,7 @@ export interface OffersTableRowTypes {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: keyof typeof staticEnums["DiscountType"];
+  discountType: keyof (typeof staticEnums)["DiscountType"];
   mail: {
     mailStatus: "open" | "failed" | "pending";
   };
@@ -50,7 +51,7 @@ export interface OffersTableRowTypes {
   isDiscount: boolean;
   isTax: boolean;
   offerNumber: string;
-  offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
+  offerStatus: "Open" | "Accepted" | "Expired" | "Rejected";
   paymentType: "Cash" | "Online";
   taxType: "Include" | "Exclude";
   taxAmount: number;
@@ -66,6 +67,7 @@ export interface OffersTableRowTypes {
   signature?: string;
   attachement?: string;
   isNoteCreated: boolean;
+  reason: string;
 }
 
 export interface PublicOffersTableRowTypes {
@@ -179,8 +181,12 @@ export interface ServiceList {
   totalPrice: number;
   serviceType: string;
   description: string;
-  count: number;
+  count: number | string;
   pagebreak: boolean;
+  discount: number;
+  isDiscount?: boolean;
+  totalDiscount?: number;
+  isGlobalDiscount?: boolean;
 }
 export interface EmailStatus {
   Pending: number;
@@ -240,6 +246,7 @@ export interface OfferDetailCardProps {
   isSendEmail: boolean;
   handleSendByPost: () => void;
   loading: boolean;
+  onFileUpload: (id: string) => void;
 }
 
 export interface OfferActivity {

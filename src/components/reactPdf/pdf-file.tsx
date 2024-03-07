@@ -2,6 +2,7 @@ import { PdfPreviewProps } from "@/types";
 import {
   Document,
   Font,
+  PDFViewer,
   Page,
   StyleSheet,
   Text,
@@ -15,6 +16,7 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
+import { ServiceTableDiscountRow } from "./service-table-discount";
 
 Font.register({
   family: "Poppins",
@@ -62,15 +64,33 @@ const PdfFile = ({
   templateSettings,
   emailTemplateSettings,
   systemSetting,
-
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
-  const { address, header, workDates } = data?.movingDetails || {};
+  const { address, header, workDates, time } = data?.movingDetails || {};
   const contactAddress = data?.contactAddress;
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+  const disscountTableRow = {
+    serviceTitle: "Rabatt",
+    price: Number(serviceItemFooter?.discount),
+    unit: "-",
+    totalPrice: Number(serviceItemFooter?.discount),
+    serviceType: "",
+    description: serviceItemFooter?.discountDescription,
+    count: "-",
+    pagebreak: true,
+    discount: Number(serviceItemFooter?.discount),
+    totalDiscount: serviceItemFooter?.serviceDiscountSum,
+    isGlobalDiscount: serviceItemFooter?.isDiscount,
+  };
+  const isDiscount =
+    serviceItemFooter?.serviceDiscountSum &&
+    Number(serviceItemFooter?.serviceDiscountSum) > 0
+      ? true
+      : false || false;
+  const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
   return (
     <Document title={headerDetails?.offerNo || ""}>
       <Page style={styles.body} dpi={72}>
@@ -85,16 +105,31 @@ const PdfFile = ({
         >
           <ContactAddress {...{ ...contactAddress }} />
 
-          <AddressDetails {...{ address, header, workDates }} />
+          <AddressDetails {...{ address, header, workDates, time }} />
 
-          <ServiceTableHederRow />
-          {serviceItem?.map((item, index, arr) => (
+          <ServiceTableHederRow isDiscount={isDiscount} />
+          {serviceItem?.map((item, index) => (
             <ServiceTableRow
               {...item}
               key={index}
-              pagebreak={index === arr.length - 1}
+              pagebreak={
+                !pageBreakCondition
+                  ? serviceItem?.length === 1
+                    ? false
+                    : index === serviceItem?.length - 1
+                  : false
+              }
+              isDiscount={isDiscount}
             />
           ))}
+          {(isDiscount || serviceItemFooter?.isDiscount) && (
+            <ServiceTableDiscountRow
+              {...disscountTableRow}
+              key={Math.random()}
+              pagebreak={true}
+              isDiscount={isDiscount}
+            />
+          )}
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSetting}
@@ -137,6 +172,7 @@ const PdfFile = ({
 
 const styles = StyleSheet.create({
   body: {
+    fontFamily: "Poppins",
     paddingBottom: 100,
   },
 });

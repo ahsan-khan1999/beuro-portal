@@ -17,6 +17,7 @@ export default function Content() {
     setFilter,
     handleFilterChange,
     loading,
+    currentPage
   } = useContent();
 
   const CurrentComponent = useEmptyStates(
@@ -35,13 +36,12 @@ export default function Content() {
         <TableHeadings />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
     </>
   );
 }

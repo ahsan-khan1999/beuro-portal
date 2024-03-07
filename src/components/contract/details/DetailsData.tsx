@@ -2,8 +2,6 @@ import Image from "next/image";
 import React from "react";
 import editIcon from "@/assets/svgs/name-input.svg";
 import watchIcon from "@/assets/svgs/time.svg";
-import colorFullPDFIcon from "@/assets/svgs/color_pdf_icon.svg";
-import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { contractTableTypes } from "@/types/contract";
 import { formatDateToCustomString } from "@/utils/functions";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
@@ -16,13 +14,13 @@ const DetailsData = ({
   contractDetails: contractTableTypes;
   handleViewPdf: () => void;
 }) => {
-
   const colorPicker = {
     [staticEnums.ContractSignedStatus.Deprecated]: "#FF0000",
     [staticEnums.ContractSignedStatus.Active]: "#45C769",
   };
+
   return (
-    <div className="flex flex-col gap-y-3">
+    <div className="flex flex-col-reverse gap-y-3 ">
       {contractDetails?.signedContracts?.map((item) => (
         <div className="flex bg-white justify-between items-center flex-wrap gap-y-2 rounded-md py-5 px-5">
           <div className="text-[#4D4D4D] text-base font-medium">

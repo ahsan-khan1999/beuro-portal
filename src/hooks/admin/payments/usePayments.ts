@@ -26,5 +26,6 @@ export default function usePayments() {
     totalItems,
     handlePageChange,
     itemsPerPage,
+    currentPage
   };
 }

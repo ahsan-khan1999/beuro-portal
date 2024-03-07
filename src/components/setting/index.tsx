@@ -71,7 +71,7 @@ const Setting = () => {
       <RecordCreateSuccess
         onClose={onClose}
         modelHeading={translate("common.modals.admin_setting")}
-        modelSubHeading={translate("common.modals.email_sent_des")}
+        modelSubHeading={translate("common.modals.setting_update")}
         routeHandler={onClose}
       />
     ),
@@ -87,9 +87,9 @@ const Setting = () => {
     2: <Templates />,
     3: <FollowUpSetting />,
 
-    4: <Billing handleEditPayment={handleEditPayment} />,
-    5: <MailSetting handleCreation={handleCreation} />,
-    6: <QRSettings handleCreation={handleCreation} />,
+    // 4: <Billing handleEditPayment={handleEditPayment} />,
+    4: <MailSetting handleCreation={handleCreation} />,
+    5: <QRSettings handleCreation={handleCreation} />,
   };
   return (
     <div className="mb-5">

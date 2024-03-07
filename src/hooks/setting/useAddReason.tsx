@@ -64,6 +64,8 @@ export default function useAddReason() {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
+    resetField,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -77,6 +79,7 @@ export default function useAddReason() {
       reason: [...followUp?.reason, data],
     };
     setToggleObj({ ...followUp });
+    resetField("reason");
   };
   const handleRemoveReason = (index: number) => {
     if (!toggleObj?.reason) return;

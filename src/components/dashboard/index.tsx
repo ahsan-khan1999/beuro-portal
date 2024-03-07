@@ -19,6 +19,7 @@ import leadsPngIcon from "@/assets/pngs/leads.png";
 import offersPngIcon from "@/assets/pngs/offers.png";
 import invoiceIcon from "@/assets/pngs/invoice.png";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { getCurrentMonth } from "@/utils/utility";
 
 interface ActionType {
   type: string;
@@ -53,7 +54,7 @@ const AdminDashboard = () => {
   });
 
   const [filter, setFilter] = useState<FilterType>({
-    month: 1,
+    month: getCurrentMonth(),
   });
   const dispatch = useAppDispatch();
 
@@ -93,7 +94,12 @@ const AdminDashboard = () => {
         dashboard?.Lead?.totalLeads +
         ` ${translate("dashboard_detail.cards_title.leads")}`,
       id: dashboard?.Lead?.filterCount,
-      salePercent: "+" + dashboard?.Lead?.percentage + "%",
+      salePercent:
+        (dashboard?.Lead?.percentage && dashboard?.Lead?.percentage > 0
+          ? "+"
+          : "") +
+        dashboard?.Lead?.percentage +
+        "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
       open:
@@ -115,7 +121,12 @@ const AdminDashboard = () => {
         dashboard?.Offer?.totalOffers +
         ` ${translate("dashboard_detail.cards_title.offer")}`,
       id: dashboard?.Offer?.filterCount,
-      salePercent: "+" + dashboard?.Offer?.percentage + "%",
+      salePercent:
+        (dashboard?.Offer?.percentage && dashboard?.Offer?.percentage > 0
+          ? "+"
+          : "") +
+        dashboard?.Offer?.percentage +
+        "%",
       backgroundColor: "bg-dashboardCard2-gradient",
       chartPointColor: "#FC3576",
       open:
@@ -137,7 +148,12 @@ const AdminDashboard = () => {
         dashboard?.Contract?.totalContract +
         ` ${translate("dashboard_detail.cards_title.contracts")}`,
       id: dashboard?.Contract?.filterCount,
-      salePercent: "+" + dashboard?.Contract?.percentage + "%",
+      salePercent:
+        (dashboard?.Contract?.percentage && dashboard?.Contract?.percentage > 0
+          ? "+"
+          : "") +
+        dashboard?.Contract?.percentage +
+        "%",
       backgroundColor: "bg-dashboardCard3-gradient",
       chartPointColor: "#FE8D46",
       open:
@@ -159,7 +175,12 @@ const AdminDashboard = () => {
         dashboard?.Sales?.totalSales +
         ` ${translate("dashboard_detail.cards_title.sales")}`,
       id: dashboard?.Sales?.filterCount,
-      salePercent: "+" + dashboard?.Sales?.percentage + "%",
+      salePercent:
+        (dashboard?.Sales?.percentage && dashboard?.Sales?.percentage > 0
+          ? "+"
+          : "") +
+        dashboard?.Sales?.percentage +
+        "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
       open:
@@ -171,7 +192,7 @@ const AdminDashboard = () => {
       expired:
         dashboard?.Sales?.paid +
         ` ${translate("dashboard_detail.cards_status.paid")}`,
-      route: () => router.push("/dashboard"),
+      route: () => router.push("/invoices"),
     },
   ];
 
@@ -250,7 +271,7 @@ const AdminDashboard = () => {
               );
             })}
           </div>
-         
+
           <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
             <div className="hidden 2xl:block">
               <FollowUpNotificationBar dashboard={dashboard} />

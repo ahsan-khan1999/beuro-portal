@@ -12,7 +12,7 @@ import {
 import { CustomerPromiseActionType } from "@/types/customer";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
@@ -23,19 +23,31 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { staticEnums } from "@/utils/static";
 import { readImage } from "@/api/slices/imageSlice/image";
 import localStoreUtil from "@/utils/localstore.util";
+import { EditDate } from "@/base-components/ui/modals1/editDate";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  const router = useRouter();
+  const id = router.query.contract;
+  const isMail = Boolean(router.query?.isMail);
+
   const { images } = useAppSelector((state) => state.image);
-  const [isSendEmail, setIsSendEmail] = useState(false);
-  const { systemSettings } = useAppSelector(state => state.settings)
+  const [isSendEmail, setIsSendEmail] = useState(isMail || false);
+  const { systemSettings } = useAppSelector((state) => state.settings);
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
   const { t: translate } = useTranslation();
-  const router = useRouter();
-  const id = router.query.contract;
+
+  useEffect(() => {
+    if (contractDetails?.id)
+      dispatch(
+        readImage({ params: { type: "contractID", id: contractDetails?.id } })
+      );
+  }, [contractDetails?.id]);
 
   useEffect(() => {
     localStoreUtil.remove_data("contractComposeEmail");
@@ -48,6 +60,7 @@ export default function useContractDetail() {
       );
     }
   }, [id]);
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -68,6 +81,7 @@ export default function useContractDetail() {
   const routeHandler = () => {
     dispatch(deleteContract({ data: contractDetails, router, translate }));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
@@ -78,7 +92,6 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
-  // function for hnadling the add note
   const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
@@ -88,10 +101,24 @@ export default function useContractDetail() {
     );
   };
 
-  // function for hnadling the add note
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleEditNote = (id: string, note: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "contract", data: note },
+      })
+    );
+  };
+
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleImageUpload = (
@@ -108,6 +135,24 @@ export default function useContractDetail() {
   const onSuccess = () => {
     router.push("/contract");
     dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
+  const editDateHandler = () => {
+    dispatch(updateModalType({ type: ModalType.EDIT_DATE }));
+  };
+
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
+  const shareImgModal = () => {
+    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -132,10 +177,33 @@ export default function useContractDetail() {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={contractDetails}
+        onEditNote={handleEditNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
+      />
+    ),
+
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <ConfirmDeleteNote
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        onDeleteNote={handleDeleteNote}
+        loading={loading}
+        onCancel={handleCancelNote}
       />
     ),
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.update_note")}
+      />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
@@ -144,14 +212,14 @@ export default function useContractDetail() {
         type="Contract"
       />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
-    ),
+    // [ModalType.IMAGE_SLIDER]: (
+    //   <ImageSlider onClose={onClose} details={images} />
+    // ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading={translate("common.modals.update_contract_heading")}
-        subHeading={translate("common.modals.update_des")}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),
@@ -163,13 +231,20 @@ export default function useContractDetail() {
         route={onSuccess}
       />
     ),
+    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} />,
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={contractDetails?.id} />
+    ),
   };
+
   const handleSendEmail = async () => {
     setIsSendEmail(!isSendEmail);
   };
+
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -199,9 +274,14 @@ export default function useContractDetail() {
   const onNextHandle = () => {
     router.pathname = "/contract/pdf-preview";
   };
+
   const handleViewPdf = () => {
     window.open(contractDetails?.attachement as string);
   };
+  const handleUpdateAdditionalDetailsModal = () => {
+    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
+  };
+
   return {
     contractDetails,
     renderModal,
@@ -216,6 +296,10 @@ export default function useContractDetail() {
     handleSendEmail,
     loading,
     handleViewPdf,
-    systemSettings
+    systemSettings,
+    handleUpdateAdditionalDetailsModal,
+    editDateHandler,
+    shareImgModal,
+    handleImageSlider,
   };
 }

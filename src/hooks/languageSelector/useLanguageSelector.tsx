@@ -10,7 +10,7 @@ const FLAG_LIST = [
   },
   {
     code: FlagType.de,
-    name: "German",
+    name: "Deutsch",
   },
 ];
 

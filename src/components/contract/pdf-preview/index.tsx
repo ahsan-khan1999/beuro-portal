@@ -29,6 +29,7 @@ const PdfPriview = () => {
     handleSendByPost,
     onClose,
     onSuccess,
+    contractDetails
   } = useContractPdf();
 
   const { t: translate } = useTranslation();
@@ -37,7 +38,7 @@ const PdfPriview = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_email_sent")}
-        subHeading={translate("common.modals.email_sent_des")}
+        subHeading={translate("common.modals.updating_contract")}
         route={onSuccess}
       />
     ),
@@ -45,7 +46,7 @@ const PdfPriview = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.update_contract_heading")}
-        subHeading={translate("common.modals.email_sent_des")}
+        subHeading={translate("common.modals.updating_contract")}
         route={() => {
           dispatch(updateModalType({ type: ModalType.NONE }));
           router.back();
@@ -59,12 +60,12 @@ const PdfPriview = () => {
 
   return (
     <>
-      {loading || loadingGlobal ? (
+      {loading  ? (
         <LoadingState />
       ) : (
         <>
           <EmailCard
-            contractStatus={contractData?.emailHeader?.emailStatus}
+            contractStatus={contractDetails?.emailStatus}
             contractNo={contractData?.emailHeader?.offerNo}
             onEmailSend={handleEmailSend}
             loading={loading}

@@ -30,7 +30,8 @@ import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
-
+import "moment/locale/de";
+import { TFunction } from "next-i18next";
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -143,13 +144,14 @@ export function setErrors(
         }
       });
       setError(key, newObj);
-    } else
+    } else {
       setError(key, {
         message: formatStrings(
           translate(`validationMessages.${value?.split(":")[0]}`),
           value?.split(":").slice(1)
         ),
       });
+    }
   }
 }
 export function setErrorMessage(
@@ -400,22 +402,37 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 }
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY hh:mm:ss");
+  return moment(date).format("DD/MM/YYYY HH:MM");
 }
 export function formatDateReverse(date: string) {
   if (!date) return;
-  return moment(date).format("hh:mm:ss, DD/MM/YYYY");
+  return moment(date).format("HH:MM, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
+  if (!date) return null;
+  return moment(date).format("DD-MM-YYYY");
+}
+
+export function pdfDateFormat(date: string, locale: string) {
+  if (!date) return null;
+  return moment(date).locale(locale).format("DD. MMMM YYYY");
+}
+
+export function formatDateTimeToDateMango(date: string) {
+  if (!date) return null;
   return moment(date).format("YYYY-MM-DD");
 }
 export function formatDateTimeToTime(date: string) {
-  return moment(date).format("hh:mm: A");
+  return moment(date).format("HH:mm");
 }
 
 export function getStatusColor(status: string) {
   if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"])
     return "#4A13E7";
+  else if (
+    staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["InProcess"]
+  )
+    return "#45C769";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
   )
@@ -552,10 +569,10 @@ export const transformAttachments = (attachmemts: string[]) => {
   return list;
 };
 
-export function getFileNameFromUrl(url: string) {
-  const urlParts = url.split("/");
-  const fileName = urlParts[urlParts.length - 1];
-  return fileName;
+export function getFileNameFromUrl(url: string, count?: number) {
+  const urlParts = url?.split("/");
+  const fileName = urlParts[urlParts?.length - 1];
+  return fileName?.slice(0, count ? count : 28);
 }
 
 export function getEmailColor(status: string) {
@@ -574,6 +591,16 @@ export function getEmailColor(status: string) {
   else return "#FF376F";
 }
 
+export function getLeadStatusColor(status: string) {
+  if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"])
+    return "#4A13E7";
+  else if (
+    staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
+  )
+    return "#45C769";
+  else return "#FF376F";
+}
+
 export function getPaymentTypeColor(status: string) {
   if (staticEnums["PaymentType"][status] == staticEnums["PaymentType"]["Cash"])
     return "#45C769";
@@ -588,7 +615,7 @@ export function getOfferStatusColor(status: string) {
   if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Open"])
     return "#4A13E7";
   else if (
-    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Signed"]
+    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Accepted"]
   )
     return "#45C769";
   else if (
@@ -796,4 +823,79 @@ export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
 
   const pdfBytes = await mergedPdf.save();
   return new Blob([pdfBytes], { type: "application/pdf" });
+};
+
+export const replaceClassesWithInlineStyles = (htmlContent: string): string => {
+  const classToStyleMap: { [className: string]: string } = {
+    "text-tiny": "font-size: 8px;",
+    "text-small": "font-size: 10px",
+    "text-big": "font-size: 19.6px",
+    "text-huge": "font-size: 24px;",
+    "ck-link_selected": "background-color: rgba(31,176,255,.1)",
+    "ck-list-bogus-paragraph": "display: block;",
+  };
+
+  return htmlContent.replace(/class="([^"]*)"/g, (match, classNames) => {
+    const classes: string[] = classNames.split(/\s+/);
+    const styleRules = classes
+      .map((className: string) => classToStyleMap[className] || "")
+      .join(" ");
+    return styleRules ? `style="${styleRules}"` : "";
+  });
+};
+
+export function validateUrl(url: string, translate: TFunction) {
+  const regexp = new RegExp(
+    "((http|https)\\://)?[a-zA-Z0-9\\./\\?\\:@\\-_=#]+\\.([a-zA-Z]){2,6}([a-zA-Z0-9\\.\\&/\\?\\:@\\-_=#])*"
+  );
+  if (!regexp.test(url)) {
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_format"),
+    };
+  }
+  return { isValid: true, message: "" };
+}
+
+export function validateNumber(number: string, translate: TFunction) {
+  const regexp = /^\+41\d{9}$/;
+  if (!regexp.test(number)) {
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_format"),
+    };
+  }
+  return { isValid: true, message: "" };
+}
+
+export function validateEmail(email: string, translate: TFunction) {
+  const regexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!regexp.test(email)) {
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_email"),
+    };
+  }
+  return { isValid: true, message: "" };
+}
+
+export const getCurrentMonth = () => {
+  const currentDate = new Date();
+  return currentDate.getMonth() + 1;
+};
+
+export const downloadFile = (url: string) => {
+  fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = getFileNameFromUrl(url);
+      link.click();
+      URL.revokeObjectURL(blobUrl);
+    })
+    .catch((error) => {
+      console.error("Error downloading file:", error);
+    });
 };

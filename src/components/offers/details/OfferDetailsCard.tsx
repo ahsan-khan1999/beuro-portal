@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import colorFullEmailIcon from "@/assets/svgs/color_ful_input_email.svg";
-import imageIcon from "@/assets/svgs/edit_image.svg";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
@@ -13,12 +12,13 @@ import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import {
+  formatDateTimeToDate,
   getEmailColor,
   getOfferStatusColor,
   getPaymentTypeColor,
 } from "@/utils/utility";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
-import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { updateQuery } from "@/utils/update-query";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -31,6 +31,7 @@ const OfferDetailsCard = ({
   isSendEmail,
   handleSendByPost,
   loading,
+  onFileUpload,
 }: OfferDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -40,19 +41,41 @@ const OfferDetailsCard = ({
   const handlePrint = () => {
     window.open(offerDetails?.attachement);
   };
+
+  const itemsValue = [
+    `${translate("offer_status.Open")}`,
+    `${translate("offer_status.Accepted")}`,
+    `${translate("offer_status.Expired")}`,
+    `${translate("offer_status.Rejected")}`,
+  ];
+
+  const items = Object.keys(staticEnums["OfferStatus"]).map((item, index) => ({
+    item: { label: itemsValue[index], value: item },
+  }));
+
+  const paymentMethod = [
+    `${translate("payment_method.Cash")}`,
+    `${translate("payment_method.Online")}`,
+  ];
+
+  const handleBack = () => {
+    router.pathname = "/offers";
+    delete router.query["offer"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
-    <>
+    <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
-        <div
-          onClick={() => router.push("/offers")}
-          className="flex items-center cursor-pointer"
-        >
+        <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="41"
             height="40"
             viewBox="0 0 41 40"
             fill="none"
+            className="cursor-pointer"
+            onClick={handleBack}
           >
             <rect
               x="0.750977"
@@ -73,11 +96,11 @@ const OfferDetailsCard = ({
           </p>
         </div>
 
-        <div className="flex gap-[22px]">
+        <div className="flex items-center justify-end gap-[22px]">
           <BaseButton
             buttonText={translate("offers.card_content.send_via_post")}
             onClick={handleSendByPost}
-            containerClassName="flex items-center group gap-x-3 row-reverse border  border-primary"
+            containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
             textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
             loading={loading}
             loaderColor="#4A13E7"
@@ -86,25 +109,31 @@ const OfferDetailsCard = ({
           </BaseButton>
 
           <div
-            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer ${
+            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer group ${
               isSendEmail && "hidden"
             }`}
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
-            <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px] flex items-center ">
-              {translate("offers.card_content.send_button")}
+            <p className="font-medium text-[16px] text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
+              {offerDetails &&
+                (offerDetails.emailStatus === "Sent" ? (
+                  <>{translate("common.send_again")}</>
+                ) : (
+                  <>{translate("offers.card_content.send_button")}</>
+                ))}
             </p>
           </div>
-
-          <PrimaryPDF
-            onClick={() =>
-              router.push({
-                pathname: "/offers/pdf-preview",
-                query: { offerID: offerDetails?.id },
-              })
-            }
-          />
+          {isSendEmail && (
+            <PrimaryPDF
+              onClick={() =>
+                router.push({
+                  pathname: `/offers/pdf-preview`,
+                  query: { offerID: offerDetails?.id, isMail: true },
+                })
+              }
+            />
+          )}
           {/* <Image
             src={downloadIcon}
             alt="downloadIcon"
@@ -117,16 +146,21 @@ const OfferDetailsCard = ({
             className="cursor-pointer"
             onClick={handlePrint}
           /> */}
-          <Image
-            src={deleteIcon}
-            alt="deleteIcon"
-            className="cursor-pointer"
-            onClick={offerDeleteHandler}
-          />
+
+          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center">
+            <Image
+              src={deleteIcon}
+              alt="deleteIcon"
+              className="cursor-pointer"
+              onClick={offerDeleteHandler}
+              width={16}
+              height={20}
+            />
+          </span>
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-5">
-        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-1">
+        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
           <div>
             <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
               {translate("offers.card_content.offer_id")}:
@@ -154,85 +188,111 @@ const OfferDetailsCard = ({
           </div>
         </div>
 
-        <div className="grid gap-y-1 mlg:grid-cols-2 xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_450px)_minmax(130px,_100%)]">
-          <div>
-            <span className="text-base  font-normal text-[#4D4D4D] mr-[10px]">
+        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
+          <div className="flex gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.created_date")}:
             </span>
             <span className="text-base font-medium text-[#4B4B4B]">
               {formatDateString(offerDetails?.createdAt)}
             </span>
           </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D]">
+          <div className="flex gap-3">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
               {translate("offers.card_content.service_date")}:
             </span>
-            <div className="flex gap-1">
+            <div>
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
-                  (item) =>
-                    `${item?.startDate} ${
-                      item?.endDate && `to ${item?.endDate} ,`
-                    }  `
+                  (item, index) =>
+                    `${formatDateTimeToDate(item.startDate)}${
+                      item.endDate
+                        ? ` ${translate("contracts.card_content.to")} ` +
+                          formatDateTimeToDate(item.endDate) +
+                          ((offerDetails?.date?.length - 1 != index && ", ") ||
+                            ".")
+                        : (offerDetails?.date?.length - 1 != index && ", ") ||
+                          "."
+                    }`
                 )}
+                {offerDetails?.time &&
+                  ` ${translate("common.at")} ` +
+                    offerDetails?.time +
+                    ` ${translate("common.clock")} `}
               </span>
             </div>
           </div>
+
+          <BaseButton
+            buttonText="Upload File"
+            onClick={() => onFileUpload(offerDetails?.id)}
+            containerClassName="w-fit bg-primary"
+            textClassName="text-white"
+          />
         </div>
 
-        <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(300px,_100%)_minmax(250px,_250px)_minmax(150px,_100%)] gap-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
             </span>
-            <span
-              className={`text-base font-medium border border-[${getEmailColor(
-                offerDetails?.emailStatus
-              )}] rounded-lg px-4 py-[3px]`}
-              style={{
-                color: `${getEmailColor(offerDetails?.emailStatus)}`,
-              }}
-            >
-              {translate(offerDetails?.emailStatus)}
-            </span>
+            {offerDetails?.emailStatus && (
+              <span
+                className={`text-base font-medium border border-[${getEmailColor(
+                  offerDetails?.emailStatus
+                )}] rounded-lg px-4 py-[3px]`}
+                style={{
+                  color: `${getEmailColor(offerDetails?.emailStatus)}`,
+                }}
+              >
+                {translate(`email_status.${offerDetails?.emailStatus}`)}
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.payment_method")}:
             </span>
             <span>
-              <DropDown
-                items={Object.keys(staticEnums["PaymentType"]).map((item) => ({
-                  item: item,
-                }))}
-                selectedItem={offerDetails?.paymentType}
-                onItemSelected={handlePaymentStatusUpdate}
-                dropDownClassName={`border border-[${getPaymentTypeColor(
-                  offerDetails?.paymentType
-                )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
-                dropDownTextClassName={`text-[${getPaymentTypeColor(
-                  offerDetails?.paymentType
-                )}] text-base font-medium me-1`}
-                dropDownItemsContainerClassName="w-full"
-                dropDownIconClassName={`text-[${getPaymentTypeColor(
-                  offerDetails?.paymentType
-                )}]`}
-              />
+              {offerDetails?.paymentType && (
+                <DropDown
+                  items={Object.keys(staticEnums["PaymentType"]).map(
+                    (item, index) => ({
+                      item: {
+                        label: paymentMethod[index],
+                        value: item,
+                      },
+                    })
+                  )}
+                  selectedItem={translate(
+                    `payment_method.${offerDetails?.paymentType}`
+                  )}
+                  onItemSelected={handlePaymentStatusUpdate}
+                  dropDownClassName={`border border-[${getPaymentTypeColor(
+                    offerDetails?.paymentType
+                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                  dropDownTextClassName={`text-[${getPaymentTypeColor(
+                    offerDetails?.paymentType
+                  )}] text-base font-medium me-1`}
+                  dropDownItemsContainerClassName="w-full"
+                  dropDownIconClassName={`text-[${getPaymentTypeColor(
+                    offerDetails?.paymentType
+                  )}]`}
+                />
+              )}
             </span>
           </div>
-          <div className="flex items-center gap-[11px] ">
+          <div className="flex items-center gap-[11px]">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.status")}:
             </span>
             <span>
               {(staticEnums["OfferStatus"][offerDetails?.offerStatus] !== 1 && (
                 <DropDown
-                  items={Object.keys(staticEnums["OfferStatus"]).map(
-                    (item) => ({
-                      item: item,
-                    })
+                  items={items}
+                  selectedItem={translate(
+                    `offer_status.${offerDetails?.offerStatus}`
                   )}
-                  selectedItem={offerDetails?.offerStatus}
                   onItemSelected={handleStatusUpdate}
                   dropDownClassName={`border border-[${getOfferStatusColor(
                     offerDetails?.offerStatus
@@ -240,6 +300,7 @@ const OfferDetailsCard = ({
                   dropDownTextClassName={`text-[${getOfferStatusColor(
                     offerDetails?.offerStatus
                   )}] text-base font-medium me-1`}
+                  dropDownItemsContainerClassName="w-fit"
                 />
               )) || (
                 <span
@@ -251,13 +312,22 @@ const OfferDetailsCard = ({
                     color: `${getOfferStatusColor(offerDetails?.offerStatus)}`,
                   }}
                 >
-                  {offerDetails?.offerStatus}
+                  {translate(`offer_status.${offerDetails?.offerStatus}`)}
                 </span>
               )}
             </span>
           </div>
-
-          <div className="flex justify-between items-center">
+          {offerDetails?.offerStatus === "Rejected" && (
+            <div className="flex items-center gap-[11px] ">
+              <span className="text-[#4D4D4D] font-normal text-base">
+                {translate("offers.card_content.reason")}:
+              </span>
+              <span className="text-base font-medium text-[#4B4B4B]">
+                {offerDetails?.reason || "-"}
+              </span>
+            </div>
+          )}
+          <div className="flex justify-between gap-x-3 items-center mt-2 md:mt-0">
             <div
               className="flex items-center gap-[11px] cursor-pointer"
               onClick={(e) => handleNotes(offerDetails?.id, e)}
@@ -266,7 +336,7 @@ const OfferDetailsCard = ({
                 {translate("offers.card_content.notes")}:
               </span>
               <WriteIcon
-                pathClass={offerDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"}
+                pathClass={offerDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"}
               />
             </div>
             <div className="flex items-center gap-[11px]">
@@ -280,8 +350,8 @@ const OfferDetailsCard = ({
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="34"
-                  height="33"
+                  width="26"
+                  height="26"
                   viewBox="0 0 34 33"
                   fill="none"
                 >
@@ -316,7 +386,7 @@ const OfferDetailsCard = ({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

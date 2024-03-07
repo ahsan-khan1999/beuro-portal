@@ -36,7 +36,7 @@ export interface LabelProps {
 }
 
 export interface InputProps extends BaseFieldProps<Field.input> {
-  inputType: "text" | "email" | "number";
+  inputType: "text" | "email" | "number" | "tel";
   value?: string;
   success?: boolean;
   register: UseFormRegister<FieldValues>;
@@ -51,6 +51,14 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   onChange?: (value?: number) => void;
   percentage?: string;
   step?: string;
+}
+
+export interface ColorPickerProps extends BaseFieldProps<Field.colorPicker> {
+  value?: string;
+  register: UseFormRegister<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
 }
 
 // textarea added
@@ -212,6 +220,8 @@ export interface ImageUploadFieldProps
   control?: Control<FieldValues>;
   onClick?: Function;
   value?: string;
+  index?: number;
+  setValue?: UseFormSetValue<FieldValues>
 }
 
 // Interface for the input field copy
@@ -225,6 +235,15 @@ export interface InputWithCopyProps
   disabled?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
 }
+
+export interface SecurityTokenFieldProps {
+  inputType: "text" | "email" | "number" | "password";
+  value?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  onChange: (value: string) => void
+}
+
 
 export interface PhoneProps extends BaseFieldProps<Field.phone> {
   country: string;
@@ -258,6 +277,9 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   success?: boolean;
   onRemove?: () => void;
   dateType?: string;
+  min?:string;
+  max?:string;
+
 }
 
 export interface SpanProps {
@@ -306,6 +328,7 @@ export type FieldPropsWithChildren = FieldProps & {
 
 export type FieldType =
   | Field.input
+  | Field.colorPicker
   | Field.textArea
   | Field.ckEditor
   // | Field.creditCardNumberInput
@@ -330,6 +353,7 @@ export type FieldType =
 
 export type FieldProps =
   | InputProps
+  | ColorPickerProps
   | TextAreaProps
   | CKEditorProps
   | InputWithCopyProps
@@ -363,6 +387,7 @@ export interface FormField {
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
+  colorPicker: React.FC<ColorPickerProps>;
   textArea: React.FC<TextAreaProps>;
   ckEditor: React.FC<CKEditorProps>;
   // ckEditorBox: React.FC<CKEditorBoxProps>;

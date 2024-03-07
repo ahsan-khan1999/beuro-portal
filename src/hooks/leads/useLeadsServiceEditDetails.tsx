@@ -9,15 +9,16 @@ import { generateLeadsServiceEditDetailsValidation } from "@/validation/leadsSch
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { useEffect, useMemo } from "react";
 import { readService } from "@/api/slices/service/serviceSlice";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { formatDateTimeToDate, formatDateTimeToDateMango } from "@/utils/utility";
 import { updateLead } from "@/api/slices/lead/leadSlice";
+import { ContentTableRowTypes } from "@/types/content";
 
 export const useLeadsServiceEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
-  const { service } = useAppSelector((state) => state.service);
+  const { content } = useAppSelector((state) => state.content);
 
   const handleBack = () => {
     onClick(2, ComponentsType.service);
@@ -38,13 +39,16 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const otherServices = watch("otherServices");
+  const selectedContent = leadDetails?.requiredService as ContentTableRowTypes;
+  const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
 
   useMemo(() => {
     if (leadDetails.id) {
       reset({
         ...leadDetails,
-        desireDate: formatDateTimeToDate(leadDetails?.desireDate),
+        desireDate: formatDateTimeToDateMango(leadDetails?.desireDate),
+        requiredService: selectedContent?.id,
+        otherServices: contentList?.map((item) => item.id)
       });
     }
   }, [leadDetails.id])
@@ -55,12 +59,12 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     control,
     handleBack,
     trigger,
-    service,
+    content,
     leadDetails,
     systemSettings
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
+    const apiData = { ...data,  step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
     const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
     if (response?.payload) onClick(2, ComponentsType.service);
 

@@ -14,6 +14,7 @@ const InputField = forwardRef(
       containerClassName,
       iconDisplay,
       bgColor,
+      placeholder,
     }: InputFieldProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
@@ -43,7 +44,7 @@ const InputField = forwardRef(
             id="searchBar"
             type="text"
             value={value}
-            placeholder={translate("common.search")}
+            placeholder={placeholder ? placeholder : translate("common.search")}
             className={inputClasses}
             onChange={(e) => handleChange(e.target.value)}
             onKeyDown={handleKeyDown}

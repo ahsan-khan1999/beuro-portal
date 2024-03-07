@@ -17,13 +17,13 @@ const TableHeading = () => {
       <span className="font-medium text-[#8F8F8F]">
         {translate("invoice.table_headings.price")}
       </span>
-      <span className="font-medium text-[#8F8F8F] flex justify-center items-center">
+      <span className="font-medium text-[#8F8F8F] flex justify-center items-center mr-1">
         {translate("invoice.table_headings.email_status")}
       </span>
-      <span className="flex justify-center items-center font-medium text-[#8F8F8F]  ">
+      <span className="flex justify-center items-center font-medium text-[#8F8F8F]">
         {translate("invoice.table_headings.paid")}
       </span>
-      <span className="flex justify-center items-center font-medium text-[#8F8F8F]  ">
+      <span className="font-medium text-[#8F8F8F] ml-1">
         {translate("invoice.table_headings.status")}
       </span>
 

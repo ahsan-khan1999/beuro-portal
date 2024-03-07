@@ -3,11 +3,11 @@ import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { CheckBoxType, FilterType } from "@/types";
 import React, { SetStateAction, useRef } from "react";
-import { Button } from "@/base-components/ui/button/button";
 import InvoicesFilter from "@/base-components/filter/invoices-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function InvoicesFilters({
   filter,
@@ -20,6 +20,9 @@ export default function InvoicesFilters({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { t: translate } = useTranslation();
+
+  const router = useRouter();
+
   const checkbox: CheckBoxType[] = [
     {
       label: `${translate("filters.extra_filters.pending")}`,
@@ -37,22 +40,50 @@ export default function InvoicesFilters({
       label: `${translate("filters.extra_filters.paid")}`,
       type: `${staticEnums.InvoiceStatus.Paid}`,
     },
-
   ];
 
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
+      const newStatus = updatedStatus.map(Number);
+
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       } else {
         const index = updatedStatus.indexOf(value);
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       }
+
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
       const updatedFilter = { ...prev, status: status };
@@ -124,7 +155,10 @@ export default function InvoicesFilters({
               label: `${translate("filters.sort_by.oldest")}`,
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+            {
+              label: `${translate("filters.sort_by.a_z")}`,
+              value: "customerDetial.fullName",
+            },
           ]}
           label={translate("common.sort_button")}
         />

@@ -5,7 +5,6 @@ import DetailsSwitchBtn from "./DetailsSwitchBtn";
 import InvoiceDetailsTable from "./invoice/table";
 import ReceiptDetailsTable from "./receipt/table";
 import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
-
 import { useEmptyStates } from "@/utils/hooks";
 
 const InvoiceDetails = () => {
@@ -28,6 +27,7 @@ const InvoiceDetails = () => {
     handleRecurringInvoiceEdit,
     loading,
     systemSettings,
+    handleInvoiceUpdate,
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -76,6 +76,7 @@ const InvoiceDetails = () => {
             handleStopInvoiceCreation={handleStopInvoiceCreation}
             handleSendEmail={handleSendEmail}
             currency={systemSettings?.currency}
+            handleInvoiceEdit={handleInvoiceUpdate}
           />
         </InvoiceCardLayout>
 

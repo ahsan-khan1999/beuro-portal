@@ -5,6 +5,7 @@ import {
   GenerateOfferFormField,
 } from "@/types";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export const OfferEmailFormField: GenerateOfferFormField = (
   register,
@@ -15,19 +16,23 @@ export const OfferEmailFormField: GenerateOfferFormField = (
   content,
   contentDetails,
   onContentSelect,
-  attachements, setAttachements,
+  attachements,
+  setAttachements,
   offerDetails,
   isMoreEmail,
   setIsMoreEmail,
   setValue
 ) => {
+  const router = useRouter()
+  const isMail = router?.query?.isMail
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
+        className:
+          "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
         children: [
           {
             containerClass: "mb-0 col-span-4",
@@ -58,15 +63,19 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                   field: {
                     type: Field.span,
                     text: `Cc`,
-                    containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    containerClassName:
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "cc",
                     onClick: () => {
                       if (setValue) {
-                        setValue("cc", "")
+                        setValue("cc", "");
                       }
 
-                      setIsMoreEmail({ ...isMoreEmail, "isCc": !isMoreEmail?.isCc })
-                    }
+                      setIsMoreEmail({
+                        ...isMoreEmail,
+                        isCc: !isMoreEmail?.isCc,
+                      });
+                    },
                   },
                 },
 
@@ -75,18 +84,22 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                   field: {
                     type: Field.span,
                     text: `Bcc`,
-                    containerClassName: "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                    containerClassName:
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
                     id: "bcc",
                     onClick: () => {
                       if (setValue) {
-                        setValue("bcc", "")
+                        setValue("bcc", "");
                       }
-                      setIsMoreEmail({ ...isMoreEmail, "isBcc": !isMoreEmail?.isBcc })
-                    }
+                      setIsMoreEmail({
+                        ...isMoreEmail,
+                        isBcc: !isMoreEmail?.isBcc,
+                      });
+                    },
                   },
                 },
-              ]
-            }
+              ],
+            },
           },
 
           {
@@ -108,10 +121,13 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                 })) || [],
               control,
               onItemChange: onContentSelect,
-              value: contentDetails?.id && contentDetails?.id || offerDetails?.content?.id || ""
+              value:
+                (contentDetails?.id && contentDetails?.id) ||
+                offerDetails?.content?.id ||
+                "",
             },
           },
-          isMoreEmail?.isCc && {
+          (isMoreEmail?.isCc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
               text: `Cc`,
@@ -124,12 +140,10 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "cc",
               name: "cc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          } || {
+          }) || {
             containerClass: "hidden",
             label: {
               text: `Cc`,
@@ -142,13 +156,11 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "cc",
               name: "cc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
           },
-          isMoreEmail?.isBcc && {
+          (isMoreEmail?.isBcc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
               text: `Bcc`,
@@ -161,13 +173,10 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "bcc",
               name: "bcc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          }
-          || {
+          }) || {
             containerClass: "hidden",
             label: {
               text: `Bcc`,
@@ -180,34 +189,60 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "email",
               id: "bcc",
               name: "bcc",
-              placeholder:
-                "email@domain.com",
+              placeholder: "email@domain.com",
               register,
-
             },
-          }
+          },
         ],
       },
     },
-
     {
-      containerClass: "mb-0 mt-5",
-      label: {
-        text: `${translate("contracts.contract_email_preview.subject")}`,
-        htmlFor: "subject",
-        className: "mb-[10px]",
-      },
+      containerClass: "",
       field: {
-        type: Field.input,
-        className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
-        inputType: "text",
-        id: "subject",
-        name: "subject",
-        placeholder:
-          "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
-        register,
-      },
+        type: Field.div,
+        id:"titlefield",
+        className: "grid grid-cols-2 gap-x-3",
+        children: [
+          {
+            containerClass: "mb-0 mt-5 col-span-2",
+            label: {
+              text: `${translate("contracts.contract_email_preview.subject")}`,
+              htmlFor: "subject",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+              inputType: "text",
+              id: "subject",
+              name: "subject",
+              placeholder:
+                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+              register,
+            },
+          },
+          // {
+          //   containerClass: "mb-0 mt-5",
+          //   label: {
+          //     text: `${translate("contracts.contract_email_preview.title")}`,
+          //     htmlFor: "title",
+          //     className: "mb-[10px]",
+          //   },
+          //   field: {
+          //     type: Field.input,
+          //     className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+          //     inputType: "text",
+          //     id: "title",
+          //     name: "title",
+          //     placeholder:
+          //       "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+          //     register,
+          //   },
+          // },
+        ]
+      }
     },
+   
 
     {
       containerClass: "mb-0 mt-5",
@@ -218,7 +253,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
       },
       field: {
         type: Field.ckEditor,
-        className: "!p-4 !border-dark focus:!border-primary",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "description",
         name: "description",
         control,
@@ -227,6 +262,23 @@ export const OfferEmailFormField: GenerateOfferFormField = (
           offerDetails?.content?.offerContent?.body,
       },
     },
+
+    // {
+    //   containerClass: "mb-0 mt-5",
+    //   label: {
+    //     text: `${translate("contracts.contract_email_preview.additional_details")}`,
+    //     htmlFor: "additionalDetails",
+    //     className: "mb-[10px]",
+    //   },
+    //   field: {
+    //     type: Field.ckEditor,
+    //     className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+    //     id: "additionalDetails",
+    //     name: "additionalDetails",
+    //     control,
+
+    //   },
+    // },
 
     {
       containerClass: " mt-5",
@@ -253,28 +305,30 @@ export const OfferEmailFormField: GenerateOfferFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px] ",
         children: [
+          // {
+          //   containerClass: "mb-0",
+          //   field: {
+          //     type: Field.button,
+          //     id: "button",
+          //     text: `${translate(
+          //       "contracts.contract_email_preview.back_button"
+          //     )}`,
+          //     inputType: "button",
+          //     className:
+          //       "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+          //     onClick: onBack,
+          //   },
+          // },
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
               id: "button",
-              text: `${translate(
-                "contracts.contract_email_preview.back_button"
-              )}`,
-              inputType: "button",
-              className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
-              onClick: onBack,
-            },
-          },
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              text: `${translate(
+              text: isMail && `${translate(
+                "contracts.contract_email_preview.send"
+              )}` || `${translate(
                 "contracts.contract_email_preview.next_button"
               )}`,
               inputType: "submit",

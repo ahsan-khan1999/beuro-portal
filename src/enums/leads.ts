@@ -12,7 +12,8 @@ export enum LeadsCustomerEditDetails {
   country = "country",
   address = "address",
   type = "type",
-  customer = "customerID"
+  customer = "customerID",
+  gender="gender"
 
 }
 

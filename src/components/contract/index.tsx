@@ -20,6 +20,9 @@ export default function Contract() {
     filter,
     setFilter,
     loading,
+    handleContractStatusUpdate,
+    handlePaymentStatusUpdate,
+    currentPage
   } = useContract();
 
   const CurrentComponent = useEmptyStates(
@@ -27,30 +30,37 @@ export default function Contract() {
       dataToAdd={currentPageRows}
       handleImageUpload={handleImageUpload}
       openModal={handleNotes}
+      handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+      handleContractStatusUpdate={handleContractStatusUpdate}
     />,
     currentPageRows.length > 0,
     loading
   );
 
   return (
-    <>
+    <div>
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeadings />
-        {CurrentComponent}
-      </TableLayout>
-      {currentPageRows.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
+
+      <div className="relative">
+        <TableLayout>
+          <TableHeadings />
+
+          {CurrentComponent}
+        </TableLayout>
+        <div className="absolute right-0 mt-1">
+          <Pagination
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
+        </div>
+      </div>
       {renderModal()}
-    </>
+    </div>
   );
 }

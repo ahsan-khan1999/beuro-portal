@@ -158,11 +158,13 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
               id: "phoneNumber",
               name: "phoneNumber",
-              control,
-              country: "ch",
+              inputType:"tel",
+              register,
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+
               value: user && user?.company?.phoneNumber,
             },
           },
@@ -175,13 +177,13 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
+              inputType:"tel",
               id: "mobileNumber",
               name: "mobileNumber",
-              control,
-              country: "ch",
+              register,
               value: user && user?.company?.mobileNumber,
-              className: "h-42",
+              className: "!px-4 h-42",
             },
           },
           {
@@ -218,7 +220,7 @@ export const detailScreensFormField: GenerateCompanyProfileFormField = (
             },
             field: {
               type: Field.input,
-              inputType: "number",
+              inputType: "text",
               id: "taxNumber",
               name: "taxNumber",
               placeholder: "Enter Your MwST Number",

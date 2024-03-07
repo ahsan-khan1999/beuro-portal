@@ -1,15 +1,23 @@
 import { UsePaginationProps } from "@/types";
-import { useState, useCallback } from "react";
+import { useRouter } from "next/router";
+import { useState, useCallback, useEffect } from "react";
 
 const PAGE_LIMIT = 5;
 export const dots = "•••";
 
-export const usePagination = ({ totalItems, itemsPerPage, onPageChange }: UsePaginationProps) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+export const usePagination = ({
+  totalItems,
+  itemsPerPage,
+  onPageChange,
+  currentPage: defaultPage,
+}: UsePaginationProps) => {
+  const [currentPage, setCurrentPage] = useState<number>(defaultPage || 1);
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const isFirst = currentPage === 1;
   const isLast = currentPage === totalPages;
+
+  const router = useRouter();
 
   const handlePrevClick = useCallback(() => {
     handlePageClick(currentPage - 1);
@@ -19,9 +27,28 @@ export const usePagination = ({ totalItems, itemsPerPage, onPageChange }: UsePag
     handlePageClick(currentPage + 1);
   }, [currentPage]);
 
+  // useEffect(() => {
+  //   router.replace({
+  //     pathname: router.pathname,
+  //     query: { ...router.query, page: currentPage },
+  //   });
+  // }, [currentPage]);
+
   const handlePageClick = useCallback(
     (page: number) => {
       if (page >= 1 && page <= totalPages) {
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              ...router.query,
+              page: page,
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+
         setCurrentPage(page);
         onPageChange(page);
       }
@@ -29,7 +56,6 @@ export const usePagination = ({ totalItems, itemsPerPage, onPageChange }: UsePag
     [totalPages, onPageChange]
   );
 
-  // Calculate the range of page numbers to show.
   const startPage = Math.max(2, currentPage - Math.floor(PAGE_LIMIT / 2));
   const endPage = Math.min(totalPages - 1, startPage + PAGE_LIMIT - 1);
 
@@ -43,16 +69,14 @@ export const usePagination = ({ totalItems, itemsPerPage, onPageChange }: UsePag
   ];
   const uniquePagesToShow = [...new Set(pagesToShow)];
 
-
-  
   return {
     currentPage,
     isFirst,
-    isLast: totalPages < currentPage ? true:isLast,
-    pagesToShow: totalPages > 0 ?uniquePagesToShow: [],
+    isLast: totalPages < currentPage ? true : isLast,
+    pagesToShow: totalPages > 0 ? uniquePagesToShow : [],
     dots,
     handlePrevClick,
     handleNextClick,
     handlePageClick,
   };
-}
+};

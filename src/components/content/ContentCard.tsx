@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import deleteIcon from "@/assets/svgs/delete_icon.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { ContentTableRowTypes } from "@/types/content";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
@@ -17,7 +17,7 @@ const ContentCard = ({
   const { t: translate } = useTranslation();
   return (
     <div className="rounded-md bg-white w-full">
-      <div className="flex justify-between items-center border-b border-[#000] border-opacity-20 pb-5">
+      <div className="flex justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
           <span
             className="cursor-pointer"
@@ -49,12 +49,16 @@ const ContentCard = ({
             {translate("content.content_card_detail.heading")}
           </h1>
         </div>
-        <Image
-          src={deleteIcon}
-          alt="deleteIcon"
-          className="cursor-pointer"
-          onClick={contentDeleteHandler}
-        />
+        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
+          <Image
+            src={deleteIcon}
+            alt="deleteIcon"
+            className="cursor-pointer"
+            onClick={contentDeleteHandler}
+            width={16}
+            height={20}
+          />
+        </span>
       </div>
       <div className="grid  maxSize:grid-cols-2 gap-y-3 gap-x-6 mt-5">
         <div className="flex justify-between items-start">

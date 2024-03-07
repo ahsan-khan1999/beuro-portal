@@ -6,7 +6,7 @@ import { deleteContract } from "@/api/slices/contract/contractSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
@@ -32,6 +32,8 @@ import RecurringInvoiceFrequency from "@/base-components/ui/modals1/InvoiceFrequ
 import InvoiceUpdate from "@/base-components/ui/modals1/InvoiceUpdate";
 import RecurringInvoiceUpdate from "@/base-components/ui/modals1/RecurringInvoiceUpdate";
 import { readContent } from "@/api/slices/content/contentSlice";
+import { updateQuery } from "@/utils/update-query";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
   const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -108,12 +110,15 @@ export default function useInvoiceDetail() {
   const invoiceCreated = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const handleRecurringInvoiceCreation = () => {
     dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE }));
   };
+
   const handleStopInvoiceCreation = () => {
     dispatch(updateModalType({ type: ModalType.ARE_YOU_SURE }));
   };
+
   const handleEditInvoiceFrequencyCreation = () => {
     dispatch(updateModalType({ type: ModalType.RECURRING_INVOICE_FREQUENCY }));
   };
@@ -148,6 +153,23 @@ export default function useInvoiceDetail() {
       })
     );
   };
+
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleEditNote = (id: string, note: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: { id: id, type: "invoice", data: note },
+      })
+    );
+  };
+
   const handleRecurringSuccess = async () => {
     const res = await dispatch(
       stopRecurringInvoices({
@@ -176,6 +198,16 @@ export default function useInvoiceDetail() {
     );
   };
 
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -183,6 +215,16 @@ export default function useInvoiceDetail() {
         handleDelete={handleDelete}
         modelHeading={translate("common.modals.confirm_invoice_id")}
         subHeading={translate("common.modals.enter_invoice_id")}
+      />
+    ),
+
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <ConfirmDeleteNote
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        onDeleteNote={handleDeleteNote}
+        loading={loading}
+        onCancel={handleCancelNote}
       />
     ),
     [ModalType.INFO_DELETED]: (
@@ -198,18 +240,35 @@ export default function useInvoiceDetail() {
         handleAddNote={handleAddNote}
         onClose={onClose}
         leadDetails={invoiceDetails}
+        onEditNote={handleEditNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
+
+    [ModalType.EDIT_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.update_note")}
+      />
+    ),
+
     [ModalType.ADD_NOTE]: (
-      <AddNewNote onClose={onClose} handleNotes={handleNotes} />
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        heading={translate("common.add_note")}
+      />
     ),
 
     [ModalType.INVOICE_CREATE]: (
       <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated} />
     ),
+
     [ModalType.INVOICE_UPDATE]: (
       <InvoiceUpdate onClose={onClose} invoiceCreated={invoiceCreated} />
     ),
+
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
@@ -234,7 +293,7 @@ export default function useInvoiceDetail() {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_email_sent")}
-        subHeading={translate("common.modals.email_sent_des")}
+        subHeading={translate("common.modals.invoice_update")}
         route={onSuccess}
       />
     ),
@@ -246,12 +305,15 @@ export default function useInvoiceDetail() {
       />
     ),
   };
+
   const offerCreatedHandler = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const handleInvoiceStatusUpdate = async (
     id: string,
     status: string,
@@ -281,6 +343,7 @@ export default function useInvoiceDetail() {
           offerCreatedHandler();
     }
   };
+
   const handlePaymentStatusUpdate = async (
     id: string,
     status: string,
@@ -302,8 +365,15 @@ export default function useInvoiceDetail() {
       if (res?.payload) offerCreatedHandler();
     }
   };
+
   const onNextHandle = () => {
     router.pathname = "/offers/pdf-preview";
+  };
+
+  const handleInvoiceUpdate = () => {
+    router.pathname = "/invoices/update-invoice";
+    router.query = { invoice: invoiceDetails?.id };
+    updateQuery(router, router.locale as string);
   };
   return {
     invoiceDetails,
@@ -328,5 +398,6 @@ export default function useInvoiceDetail() {
     handleRecurringInvoiceEdit,
     loading,
     systemSettings,
+    handleInvoiceUpdate,
   };
 }

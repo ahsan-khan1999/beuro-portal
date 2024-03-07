@@ -102,7 +102,7 @@ export const useContractPdf = () => {
   const maxItemsPerPage = 10;
 
   const router = useRouter();
-  const { offerID } = router.query;
+  const { offerID, isMail } = router.query;
 
   useEffect(() => {
     (async () => {
@@ -128,6 +128,7 @@ export const useContractPdf = () => {
             isThirdColumn,
             secondColumn,
             thirdColumn,
+            order,
           }: TemplateType = template.payload.Template;
 
           setTemplateSettings(() => ({
@@ -139,6 +140,7 @@ export const useContractPdf = () => {
             isFourthColumn,
             isSecondColumn,
             isThirdColumn,
+            order,
           }));
         }
         if (emailTemplate?.payload) {
@@ -168,12 +170,15 @@ export const useContractPdf = () => {
               createdBy: contractDetails?.offerID?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType: "contract"
+              fileType: "contract",
+              isReverseLogo: template.payload.Template?.order,
             },
             contactAddress: {
               address: {
                 name: contractDetails?.offerID?.leadID?.customerDetail
                   ?.fullName,
+                companyName:
+                  contractDetails?.offerID?.leadID?.customerDetail?.companyName,
                 city: contractDetails?.offerID?.leadID?.customerDetail?.address
                   ?.country,
                 postalCode:
@@ -186,6 +191,12 @@ export const useContractPdf = () => {
               email: contractDetails?.offerID?.leadID?.customerDetail?.email,
               phone:
                 contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber,
+              mobile:
+                contractDetails?.offerID?.leadID?.customerDetail?.mobileNumber,
+
+              gender:
+                contractDetails?.offerID?.leadID?.customerDetail?.gender?.toString(),
+              isReverseInfo: template.payload.Template?.order,
             },
             movingDetails: {
               address: contractDetails?.offerID?.addressID?.address,
@@ -193,15 +204,28 @@ export const useContractPdf = () => {
               workDates: contractDetails?.offerID?.date,
               handleTitleUpdate: handleTitleUpdate,
               handleDescriptionUpdate: handleDescriptionUpdate,
+              time: contractDetails?.offerID?.time,
             },
             serviceItem: contractDetails?.offerID?.serviceDetail?.serviceDetail,
             serviceItemFooter: {
+              isTax: contractDetails?.offerID?.isTax,
+              isDiscount: contractDetails?.offerID?.isDiscount,
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
               tax: contractDetails?.offerID?.taxAmount?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
-              discountType:contractDetails?.offerID?.discountType,
-              taxType:contractDetails?.offerID?.taxType
+              discountType: contractDetails?.offerID?.discountType,
+              taxType: contractDetails?.offerID?.taxType,
+              serviceDiscountSum:
+                contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce(
+                  (acc, service) => {
+                    const price = service?.discount || 0;
+                    return acc + price;
+                  },
+                  0
+                ),
+              discountDescription:
+                contractDetails?.offerID?.discountDescription,
             },
             footerDetails: {
               firstColumn: {
@@ -338,36 +362,51 @@ export const useContractPdf = () => {
   const handleEmailSend = async () => {
     try {
       const formData = new FormData();
-      setActiveButtonId("email");
-
-      const data = await localStoreUtil.get_data("contractComposeEmail");
       if (!mergedFile) return;
       formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
-      if (data) {
-        let apiData = { ...data, pdf: fileUrl?.payload };
-
-        delete apiData["content"];
-        const res = await dispatch(sendContractEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-        }
+      if (fileUrl?.payload) {
+        localStoreUtil.store_data("pdf", fileUrl?.payload);
+      }
+      if (isMail) {
+        router.push(
+          `/contract/details?offer=${contractDetails?.id}&isMail=${isMail}`
+        );
       } else {
-        let apiData = {
-          email: contractDetails?.offerID?.leadID?.customerDetail?.email,
-          content: contractDetails?.offerID?.content?.id,
-          subject:
-            contractDetails?.title +" "+ contractDetails?.contractNumber +" "+ contractDetails?.offerID?.createdBy?.company?.companyName,
-          description:
-            contractDetails?.offerID?.content?.confirmationContent?.body,
-          attachments:
-            contractDetails?.offerID?.content?.confirmationContent?.attachments,
-          id: contractDetails?.id,
-          pdf: fileUrl?.payload,
-        };
-        const res = await dispatch(sendContractEmail({ data: apiData }));
-        if (res?.payload) {
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        setActiveButtonId("email");
+
+        const data = await localStoreUtil.get_data("contractComposeEmail");
+
+        if (data) {
+          let apiData = { ...data, pdf: fileUrl?.payload };
+
+          delete apiData["content"];
+          const res = await dispatch(sendContractEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
+        } else {
+          let apiData = {
+            email: contractDetails?.offerID?.leadID?.customerDetail?.email,
+            content: contractDetails?.offerID?.content?.id,
+            subject:
+              contractDetails?.title +
+              " " +
+              contractDetails?.contractNumber +
+              " " +
+              contractDetails?.offerID?.createdBy?.company?.companyName,
+            description:
+              contractDetails?.offerID?.content?.confirmationContent?.body,
+            attachments:
+              contractDetails?.offerID?.content?.confirmationContent
+                ?.attachments,
+            id: contractDetails?.id,
+            pdf: fileUrl?.payload,
+          };
+          const res = await dispatch(sendContractEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
         }
       }
     } catch (error) {
@@ -379,15 +418,18 @@ export const useContractPdf = () => {
 
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `${contractDetails?.contractNumber + "-" + contractDetails?.offerID?.createdBy?.company?.companyName}.pdf`;
+      a.download = `${
+        contractDetails?.contractNumber +
+        "-" +
+        contractDetails?.offerID?.createdBy?.company?.companyName
+      }.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
 
       URL.revokeObjectURL(url);
-
     }
   };
   const handlePrint = () => {
@@ -452,5 +494,6 @@ export const useContractPdf = () => {
     handleEmailSend,
     handlePrint,
     handleSendByPost,
+    contractDetails,
   };
 };

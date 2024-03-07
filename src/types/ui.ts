@@ -5,7 +5,13 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Fields } from "@/enums";
 import { DropDownKeys } from "@/enums/ui";
 import { Field } from "@/enums/form";
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import {
+  FieldValues,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from "react-hook-form";
+import { FormField } from ".";
+import { Maybe } from "yup";
 
 export interface ContainerProps {
   children: ReactNode;
@@ -13,9 +19,12 @@ export interface ContainerProps {
   childClassName?: string;
 }
 export interface DropDownItem {
-  item: string;
-  value?: string;
+  item: {
+    label: string;
+    value: string;
+  };
 }
+
 export interface DropDownProps {
   [DropDownKeys.LABEL]?: string;
   [DropDownKeys.ITEMS]: DropDownItem[];
@@ -29,6 +38,14 @@ export interface DropDownProps {
   [DropDownKeys.DROP_DOWN_DISABLED]?: boolean;
   [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
   [DropDownKeys.SHOULD_NOT_SELECT_ITEM]?: boolean;
+}
+
+export interface SelectDropDownProps {
+  [DropDownKeys.ITEMS]: DropDownItem[];
+  [DropDownKeys.ON_ITEM_SELECTED]: (data: string) => void;
+  [DropDownKeys.SELECTED_ITEM]: string;
+  [DropDownKeys.DROP_DOWN_CLASS_NAME]?: string;
+  [DropDownKeys.DROP_DOWN_ITEMS_Container_CLASS_NAME]?: string;
 }
 
 export interface DropDownItemsProps {
@@ -164,7 +181,7 @@ export interface BreadcrumbItem {
   children?: BreadcrumbItem[]; // children is also optional
 }
 export interface countryType {
-  [Country.Swizterland]: {
+  [Country.Switzerland]: {
     [State.state]: CountryObject[];
   };
   [Country.Germany]: {
@@ -182,7 +199,7 @@ export interface countryType {
 }
 
 export interface CountryType {
-  [Country.Swizterland]: string;
+  [Country.Switzerland]: string;
   [Country.Germany]: string;
   [Country.Austria]: string;
   [Country.Italy]: string;
@@ -288,6 +305,7 @@ interface SliderBaseProps {
 // types for slider
 export interface MainImageSliderProps extends SliderBaseProps {
   imageSrc: string;
+  containerClassName?: string;
   handleMouseMove?: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
@@ -304,6 +322,9 @@ interface SliderImagesData {
 export interface SliderImagesDataProps {
   noOfThumbNails: number;
   images: SliderImagesData[];
+  activeIndex?: number;
+  containerClasses?: string;
+  mainImgSliderClasses?: string;
 }
 
 export interface ThumbnailSliderProps extends SliderBaseProps {
@@ -332,8 +353,28 @@ export interface UsePaginationProps {
   totalItems: number;
   itemsPerPage: number;
   onPageChange: (page: number) => void;
+  currentPage:number
 }
 
 export interface ChildrenProp {
   children?: ReactNode;
+}
+
+export interface LinkUploadProps {
+  inputLink: string;
+  onAddLink: (e?: React.FormEvent<HTMLFormElement>) => void;
+  enteredLinks: string[];
+  onLinkDelete: (linkToDelete: number) => void;
+  setEnteredLink: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface ShareImagesViaWhatsapp {
+  inputNumber: string;
+  setEnteredNumber: React.Dispatch<React.SetStateAction<string>>;
+  onSend: (e?: React.FormEvent<HTMLFormElement>) => void;
+}
+export interface ShareImagesViaEmail {
+  inputEmail: string;
+  setEnteredEmail: React.Dispatch<React.SetStateAction<string>>;
+  onSend: (e?: React.FormEvent<HTMLFormElement>) => void;
 }

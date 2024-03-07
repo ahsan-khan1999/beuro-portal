@@ -7,6 +7,8 @@ import { Button } from "@/base-components/ui/button/button";
 import recurring from "@/assets/svgs/recurring icon.svg";
 import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
+import { BaseButton } from "@/base-components/ui/button/base-button";
+import { updateQuery } from "@/utils/update-query";
 
 const InvoiceDetailsData = ({
   handleInvoiceCreation,
@@ -17,18 +19,22 @@ const InvoiceDetailsData = ({
   handleStopInvoiceCreation,
   handleSendEmail,
   currency,
+  handleInvoiceEdit,
 }: InvoiceCardContentProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
+  const handleBack = () => {
+    router.pathname = "/invoices";
+    delete router.query["invoice"];
+    updateQuery(router, router.locale as string);
+  };
 
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-y-3 mb-5">
         <div className="flex items-center">
-          <span
-            onClick={() => router.push("/invoices")}
-            className="cursor-pointer"
-          >
+          <span onClick={handleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
@@ -55,8 +61,32 @@ const InvoiceDetailsData = ({
             {translate("invoice.card_content.heading")}
           </p>
         </div>
+
         {(!invoiceDetails?.isInvoiceRecurring2 && (
           <div className="flex space-x-2">
+            <BaseButton
+              buttonText={translate("invoice.receipt_card.edit_invoice")}
+              onClick={() => handleInvoiceEdit && handleInvoiceEdit()}
+              containerClassName="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+              textClassName="text-white"
+              id="editInvoice"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="17"
+                viewBox="0 0 18 17"
+                fill="none"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M11.8694 2.52921C12.2787 2.1441 12.8246 1.93506 13.3849 1.93506C13.9453 1.93506 14.4912 2.1441 14.9005 2.52921L14.9005 2.52929L15.0224 2.64396L15.0225 2.64403C15.4332 3.03072 15.6731 3.56517 15.6731 4.13277C15.6731 4.70037 15.4332 5.23482 15.0225 5.62151L15.0224 5.62159L13.9028 6.67529C13.8999 6.67806 13.897 6.68081 13.8941 6.68352L6.81563 13.3456C6.71969 13.4359 6.60165 13.4993 6.47339 13.5295L3.64006 14.1962C3.38351 14.2565 3.11411 14.1778 2.93043 13.9888C2.74675 13.7998 2.67575 13.5283 2.74341 13.2736L3.45175 10.6069C3.48767 10.4717 3.5607 10.3492 3.66259 10.2533L10.742 3.59029C10.7449 3.5875 10.7479 3.58473 10.7508 3.582L11.8693 2.52929L11.8694 2.52921ZM11.2599 5.16271L4.84652 11.1989L4.51432 12.4495L5.93405 12.1154L12.2906 6.13277L11.2599 5.16271ZM13.3849 5.10284L12.3543 4.13277L12.8973 3.62167C12.8973 3.62164 12.8974 3.62162 12.8974 3.62159C13.0194 3.50683 13.194 3.43506 13.3849 3.43506C13.5759 3.43506 13.7505 3.50683 13.8725 3.62159C13.8725 3.62162 13.8726 3.62164 13.8726 3.62167L13.9943 3.73618C14.1147 3.84956 14.1731 3.99327 14.1731 4.13277C14.1731 4.27225 14.1147 4.41592 13.9943 4.52929C13.9943 4.52932 13.9943 4.52934 13.9943 4.52937L13.3849 5.10284ZM9.09328 13.4661C9.09328 13.0519 9.42906 12.7161 9.84328 12.7161H15.5099C15.9242 12.7161 16.2599 13.0519 16.2599 13.4661C16.2599 13.8803 15.9242 14.2161 15.5099 14.2161H9.84328C9.42906 14.2161 9.09328 13.8803 9.09328 13.4661Z"
+                  fill="#fff"
+                />
+              </svg>
+            </BaseButton>
+
             <Button
               className="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
               inputType="button"
@@ -76,6 +106,14 @@ const InvoiceDetailsData = ({
           </div>
         )) || (
           <div className="flex space-x-2">
+            <Button
+              className="px-[13px] !h-[32px] bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+              inputType="button"
+              text={translate("invoice.receipt_card.edit_invoice")}
+              id="editInvoice"
+              icon={plusIcon}
+              onClick={handleInvoiceEdit}
+            />
             <Button
               className="px-[13px] !h-[32px]  bg-[#4A13E7] text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
               inputType="button"
@@ -99,7 +137,7 @@ const InvoiceDetailsData = ({
         )}
       </div>
 
-      <div className="flex flex-col maxSize:flex-row justify-between maxSize:items-center gap-y-3 border-t border-[#000] border-opacity-20 pt-4">
+      <div className="flex flex-col maxSize:flex-row justify-between maxSize:items-center gap-y-3 border-t border-[#000] border-opacity-10 pt-4">
         <div className="flex flex-col gap-[17px]">
           <div className="flex gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
@@ -114,7 +152,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.contract_id")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
-              {invoiceDetails.contractID?.contractNumber}
+              {"V-" + invoiceDetails.invoiceNumber?.split("-")[1]}
             </span>
           </div>
           <div className="flex gap-2">
@@ -122,7 +160,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.offer_id")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
-              {invoiceDetails.contractID?.offerID?.offerNumber}
+              {"A-" + invoiceDetails.invoiceNumber?.split("-")[1]}
             </span>
           </div>
         </div>
@@ -176,7 +214,7 @@ const InvoiceDetailsData = ({
               </span>
               <WriteIcon
                 pathClass={
-                  invoiceDetails?.isNoteCreated ? "#FE9244" : "#4A13E7"
+                  invoiceDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
                 }
               />
             </div>
@@ -189,7 +227,7 @@ const InvoiceDetailsData = ({
               {translate("invoice.card_content.total_amount")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
-              {invoiceDetails?.contractID?.offerID?.total?.toFixed(2)}
+              {invoiceDetails?.total?.toFixed(2)}
             </span>
           </div>
           <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
@@ -206,8 +244,7 @@ const InvoiceDetailsData = ({
             </span>
             <span className="text-[#393939] font-medium text-base">
               {(
-                invoiceDetails?.contractID?.offerID?.total -
-                Number(invoiceDetails?.paidAmount)
+                invoiceDetails?.total - Number(invoiceDetails?.paidAmount)
               )?.toFixed(2)}{" "}
               {currency}
             </span>

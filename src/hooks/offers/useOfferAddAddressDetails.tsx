@@ -52,18 +52,18 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
 
   useEffect(() => {
     if (offerDetails.id) {
-
       reset({
         address: offerDetails?.addressID
-          ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` }))
+          ? offerDetails?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Adresse ${++index}` }))
           : offerDetails?.leadID?.addressID ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({ ...item, label: item?.label ? item?.label : `Address ${++index}` })) :
-            addressType?.map((item, index) => ({
-              streetNumber: "",
-              postalCode: "",
-              country: "Swizterland",
-              description: "",
-              label: `Address ${++index}`
-            })),
+            offerDetails?.leadID?.customerDetail?.address ? [{ ...offerDetails?.leadID?.customerDetail?.address, label: `Adresse ${1}` }] :
+              addressType?.map((item, index) => ({
+                streetNumber: "",
+                postalCode: "",
+                country: "Switzerland",
+                description: "",
+                label: `Adresse ${++index}`
+              })),
       });
     }
   }, [offerDetails?.id])
@@ -96,5 +96,6 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
+    offerDetails
   };
 };
