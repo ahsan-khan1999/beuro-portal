@@ -41,9 +41,7 @@ export const DropDown = ({
     "flex items-center bg-white px-3 py-[10px] w-full min-h-8 border border-lightGray rounded-lg";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
   const textClasses = combineClasses(
-    `text-sm font-medium text-white ${
-      dropDownDisabled ? "text-lightGray" : ""
-    }`,
+    `text-sm font-medium`,
     dropDownTextClassName
   );
 
