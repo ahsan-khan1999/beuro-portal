@@ -53,19 +53,14 @@ const useInvoice = () => {
   const [isSendEmail, setIsSendEmail] = useState(false);
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-  // useMemo(() => {
-  //   setFilter({
-  //     ...filter,
-  //     status: query?.filter as string,
-  //   });
-  // }, [query?.filter]);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
-    });
+    setCurrentPage(1);
+    // dispatch(
+    //   readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
+    // });
   };
 
   const onClose = () => {
@@ -193,20 +188,23 @@ const useInvoice = () => {
               .split(",")
               .filter((item) => item !== "None");
 
-      setFilter({
-        ...filter,
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
         status: filteredStatus,
-        text: searchQuery,
-      });
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
 
       dispatch(
         readInvoice({
           params: {
-            filter: {
-              ...filter,
-              status: filteredStatus,
-              text: searchQuery,
-            },
+            filter: updatedFilter,
             page: currentPage,
             size: 10,
           },
@@ -215,21 +213,27 @@ const useInvoice = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
     }
-  }, [currentPage, query]);
+  }, [query]);
 
   // useEffect(() => {
   //   const queryStatus = query?.status;
-  //   if (queryStatus) {
+  //   const searchQuery = query?.text as string;
+
+  //   const queryParams = queryStatus || searchQuery;
+
+  //   if (queryParams !== undefined) {
   //     const filteredStatus =
   //       query?.status === "None"
   //         ? "None"
-  //         : queryStatus
+  //         : queryParams
   //             .toString()
   //             .split(",")
   //             .filter((item) => item !== "None");
+
   //     setFilter({
   //       ...filter,
   //       status: filteredStatus,
+  //       text: searchQuery,
   //     });
 
   //     dispatch(
@@ -238,73 +242,8 @@ const useInvoice = () => {
   //           filter: {
   //             ...filter,
   //             status: filteredStatus,
+  //             text: searchQuery,
   //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-  //     });
-  //     return;
-  //   }
-  // }, [currentPage, query]);
-
-  // useEffect(() => {
-  //   if (query?.filter || query?.status) {
-  //     const queryStatus = query?.status;
-
-  //     if (queryStatus) {
-  //       setFilter({
-  //         ...filter,
-  //         status: queryStatus.toString().split(","),
-  //       });
-
-  //       dispatch(
-  //         readInvoice({
-  //           params: {
-  //             filter: {
-  //               ...filter,
-  //               status: queryStatus.toString().split(","),
-  //             },
-  //             page: currentPage,
-  //             size: 10,
-  //           },
-  //         })
-  //       ).then((response: any) => {
-  //         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-  //       });
-  //       return;
-  //     }
-
-  //     const statusValue = staticEnums["InvoiceStatus"][query?.filter as string];
-  //     setFilter({
-  //       ...filter,
-  //       status: [statusValue?.toString()],
-  //     });
-  //     dispatch(
-  //       readInvoice({
-  //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: [staticEnums["InvoiceStatus"][query?.filter as string]],
-  //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-  //     });
-  //   } else {
-  //     setFilter({
-  //       ...filter,
-  //       status: "None",
-  //     });
-  //     dispatch(
-  //       readInvoice({
-  //         params: {
-  //           filter: { ...filter, status: "None" },
   //           page: currentPage,
   //           size: 10,
   //         },
@@ -313,7 +252,7 @@ const useInvoice = () => {
   //       if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
   //     });
   //   }
-  // }, [currentPage, query?.filter, query?.status]);
+  // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -339,7 +278,6 @@ const useInvoice = () => {
     itemsPerPage,
     handleNotes,
     renderModal,
-    // handleImageUpload,
     handleFilterChange,
     filter,
     setFilter,

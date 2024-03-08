@@ -5,6 +5,7 @@ import { ContentTableRowTypes } from "@/types/content";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
+import { updateQuery } from "@/utils/update-query";
 
 const ContentCard = ({
   contentDetails,
@@ -15,14 +16,18 @@ const ContentCard = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
+  const handleBack = () => {
+    router.pathname = "/content";
+    delete router.query["content"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <div className="rounded-md bg-white w-full">
       <div className="flex justify-between items-center border-b border-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
-          <span
-            className="cursor-pointer"
-            onClick={() => router.push("/content")}
-          >
+          <span className="cursor-pointer" onClick={handleBack}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"

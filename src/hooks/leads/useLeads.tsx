@@ -64,13 +64,14 @@ const useLeads = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readLead({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Lead);
-      }
-    });
+    setCurrentPage(1);
+    // dispatch(
+    //   readLead({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Lead);
+    //   }
+    // });
   };
 
   const onClose = () => {
@@ -206,7 +207,6 @@ const useLeads = () => {
   useEffect(() => {
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
-    console.log(searchQuery);
 
     const queryParams = queryStatus || searchQuery;
 
@@ -219,20 +219,23 @@ const useLeads = () => {
               .split(",")
               .filter((item) => item !== "None");
 
-      setFilter({
-        ...filter,
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
         status: filteredStatus,
-        text: searchQuery,
-      });
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
 
       dispatch(
         readLead({
           params: {
-            filter: {
-              ...filter,
-              status: filteredStatus,
-              text: searchQuery,
-            },
+            filter: updatedFilter,
             page: currentPage,
             size: 10,
           },
@@ -241,81 +244,46 @@ const useLeads = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
       });
     }
-  }, [currentPage, query]);
+  }, [query]);
 
   // useEffect(() => {
   //   const queryStatus = query?.status;
-  //   const searchQuery = query?.search;
+  //   const searchQuery = query?.text as string;
+  //   console.log(searchQuery);
 
   //   const queryParams = queryStatus || searchQuery;
 
-  //   // if (queryStatus) {
-  //   const filteredStatus =
-  //     query?.status === "None"
-  //       ? "None"
-  //       : queryParams
-  //           .toString()
-  //           .split(",")
-  //           .filter((item) => item !== "None");
-  //   setFilter({
-  //     ...filter,
-  //     status: filteredStatus,
-  //   });
+  //   if (queryParams !== undefined) {
+  //     const filteredStatus =
+  //       query?.status === "None"
+  //         ? "None"
+  //         : queryParams
+  //             .toString()
+  //             .split(",")
+  //             .filter((item) => item !== "None");
 
-  //   dispatch(
-  //     readLead({
-  //       params: {
-  //         filter: {
-  //           ...filter,
-  //           status: filteredStatus,
+  //     setFilter({
+  //       ...filter,
+  //       status: filteredStatus,
+  //       text: searchQuery,
+  //     });
+
+  //     dispatch(
+  //       readLead({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: filteredStatus,
+  //             text: searchQuery,
+  //           },
+  //           page: currentPage,
+  //           size: 10,
   //         },
-  //         page: currentPage,
-  //         size: 10,
-  //       },
-  //     })
-  //   ).then((response: any) => {
-  //     if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-  //   });
-  //   return;
-  //   // }
-
-  //   // const statusValue = staticEnums["LeadStatus"][query?.filter as string];
-  //   // setFilter({
-  //   //   ...filter,
-  //   //   status: [statusValue?.toString()],
-  //   // });
-
-  //   // dispatch(
-  //   //   readLead({
-  //   //     params: {
-  //   //       filter: {
-  //   //         ...filter,
-  //   //         status: [staticEnums["LeadStatus"][query?.filter as string]],
-  //   //       },
-  //   //       page: currentPage,
-  //   //       size: 10,
-  //   //     },
-  //   //   })
-  //   // ).then((response: any) => {
-  //   //   if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-  //   // });
-  //   // } else {
-  //   //   setFilter({
-  //   //     ...filter,
-  //   //     status: "None",
-  //   //   });
-  //   //   dispatch(
-  //   //     readLead({
-  //   //       params: {
-  //   //         filter: { ...filter, status: "None" },
-  //   //         page: currentPage,
-  //   //         size: 10,
-  //   //       },
-  //   //     })
-  //   //   ).then((response: any) => {
-  //   //     if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-  //   //   });
-  //   // }
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+  //     });
+  //   }
   // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {

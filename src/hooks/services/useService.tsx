@@ -22,13 +22,14 @@ const useService = () => {
   });
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readService({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Service);
-      }
-    });
+    setCurrentPage(1);
+    // dispatch(
+    //   readService({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Service);
+    //   }
+    // });
   };
 
   const dispatch = useAppDispatch();
@@ -56,41 +57,73 @@ const useService = () => {
     const queryParams = queryStatus || searchQuery;
 
     if (queryParams !== undefined) {
-      setFilter({
-        ...filter,
-        status: queryStatus,
-        text: searchQuery,
-      });
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
+        status: filteredStatus,
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
 
       dispatch(
         readService({
           params: {
-            filter: {
-              ...filter,
-              status: queryStatus,
-              text: searchQuery,
-            },
+            filter: updatedFilter,
             page: currentPage,
             size: 10,
           },
         })
-      ).then((res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.Service);
-        }
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Service);
       });
     }
-  }, [currentPage, query]);
+  }, [query]);
 
   // useEffect(() => {
-  //   dispatch(
-  //     readService({ params: { filter: filter, page: currentPage, size: 10 } })
-  //   ).then((res: any) => {
-  //     if (res?.payload) {
-  //       setCurrentPageRows(res?.payload?.Service);
-  //     }
-  //   });
-  // }, [currentPage]);
+  //   const queryStatus = query?.status;
+  //   const searchQuery = query?.text as string;
+
+  //   const queryParams = queryStatus || searchQuery;
+
+  //   if (queryParams !== undefined) {
+  //     setFilter({
+  //       ...filter,
+  //       status: queryStatus,
+  //       text: searchQuery,
+  //     });
+
+  //     dispatch(
+  //       readService({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: queryStatus,
+  //             text: searchQuery,
+  //           },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((res: any) => {
+  //       if (res?.payload) {
+  //         setCurrentPageRows(res?.payload?.Service);
+  //       }
+  //     });
+  //   }
+  // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
