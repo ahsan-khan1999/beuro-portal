@@ -82,9 +82,7 @@ const useLeads = () => {
     if (e) {
       e.stopPropagation();
     }
-
     const filteredLead = lead?.filter((item_) => item_.id === item);
-
     if (filteredLead?.length === 1) {
       dispatch(setLeadDetails(filteredLead[0]));
       dispatch(
