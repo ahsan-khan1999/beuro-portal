@@ -151,7 +151,7 @@ export default function useOfferDetails() {
   };
 
   const onSuccess = () => {
-    router.push("/offers");
+    router.push("/offers?status=None");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -392,6 +392,6 @@ export default function useOfferDetails() {
     shareImgModal,
     handleUploadImages,
     handleImageSlider,
-    handleUploadFile
+    handleUploadFile,
   };
 }

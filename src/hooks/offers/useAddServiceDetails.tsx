@@ -82,7 +82,6 @@ export const useAddServiceDetails = (
     trigger,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
-    
   });
 
   const isTax = watch("isTax");
@@ -117,7 +116,7 @@ export const useAddServiceDetails = (
     setTimeout(() => {
       let totalPrice =
         Number(data?.serviceDetail[index]?.price) *
-        Number(data?.serviceDetail[index]?.count) -
+          Number(data?.serviceDetail[index]?.count) -
         Number(data?.serviceDetail[index]?.discount || 0);
       setValue(`serviceDetail.${index}.totalPrice`, totalPrice?.toFixed(2));
       generateGrandTotal();
@@ -127,8 +126,7 @@ export const useAddServiceDetails = (
   const generateGrandTotal = () => {
     const data = getValues();
     const totalPrices = data?.serviceDetail?.reduce(
-      (acc: number, element: any) =>
-        acc + parseFloat(element.totalPrice || 0),
+      (acc: number, element: any) => acc + parseFloat(element.totalPrice || 0),
       0
     );
 
@@ -136,8 +134,8 @@ export const useAddServiceDetails = (
       isTax && String(taxType) == "0"
         ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
         : isTax && String(taxType) == "1"
-          ? calculateTax(totalPrices, data?.taxAmount || 0)
-          : 0;
+        ? calculateTax(totalPrices, data?.taxAmount || 0)
+        : 0;
     let discount = 0;
     if (isDiscount && discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
@@ -153,8 +151,10 @@ export const useAddServiceDetails = (
     } else {
       setValue("discountAmount", prevDisAmount);
     }
-    const grandTotal = String(taxType) === "0" ? totalPrices - discount : totalPrices + taxAmount - discount;
-
+    const grandTotal =
+      String(taxType) === "0"
+        ? totalPrices - discount
+        : totalPrices + taxAmount - discount;
 
     if (discountAmount === "") {
       setValue("discountAmount", "");
@@ -181,16 +181,18 @@ export const useAddServiceDetails = (
       //   grandTotal: offerDetails?.total,
       // });
       reset({
-        serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [{
-          serviceTitle: "",
-          price: "",
-          unit: "",
-          count: "",
-          description: "",
-          totalPrice: "",
-          serviceType: "Existing Service",
-          discount: 0,
-        }],
+        serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [
+          {
+            serviceTitle: "",
+            price: "",
+            unit: "",
+            count: "",
+            description: "",
+            totalPrice: "",
+            serviceType: "Existing Service",
+            discount: 0,
+          },
+        ],
         isTax: offerDetails?.isTax,
         isDiscount: offerDetails?.isDiscount,
         discountType: staticEnums["DiscountType"][offerDetails?.discountType],
@@ -213,7 +215,6 @@ export const useAddServiceDetails = (
   });
 
   useMemo(() => {
-
     const currentLength = serviceType?.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
 
@@ -225,9 +226,8 @@ export const useAddServiceDetails = (
         ),
       ]);
     } else if (newLength < currentLength) {
-
       setServiceType(serviceType.slice(0, newLength));
-    } 
+    }
   }, [serviceFields?.length]);
 
   const onServiceSelectType = (index: number) => {
@@ -270,13 +270,13 @@ export const useAddServiceDetails = (
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-      "New Service"
+        "New Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-      "New Service"
+        "New Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
       setValue(`serviceDetail.${index}.price`, ``);
@@ -288,13 +288,13 @@ export const useAddServiceDetails = (
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-      "Existing Service"
+        "Existing Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-      "Existing Service"
+        "Existing Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
       setValue(`serviceDetail.${index}.price`, ``);
@@ -395,6 +395,6 @@ export const useAddServiceDetails = (
     error,
     translate,
     systemSettings,
-    offerDetails
+    offerDetails,
   };
 };
