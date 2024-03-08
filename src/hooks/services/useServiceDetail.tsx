@@ -88,7 +88,7 @@ const useServiceDetail = (stage: boolean) => {
     dispatch(deleteService({ serviceDetails, router, setError, translate }));
   };
   const changeRouterHandler = () => {
-    router.pathname = "/services";
+    router.pathname = "/services?status=None";
     updateQuery(router, router.locale as string);
     onClose();
   };
@@ -199,7 +199,7 @@ const useServiceDetail = (stage: boolean) => {
 
       if (res?.payload) handleCreateSuccess();
     } else if (stage) {
-      handleUpdate({...data});
+      handleUpdate({ ...data });
     }
   };
 

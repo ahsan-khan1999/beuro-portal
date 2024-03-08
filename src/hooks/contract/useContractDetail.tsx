@@ -133,7 +133,7 @@ export default function useContractDetail() {
   };
 
   const onSuccess = () => {
-    router.push("/contract");
+    router.push("/contract?status=None");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

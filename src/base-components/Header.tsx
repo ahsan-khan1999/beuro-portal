@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import createOfferIcon from "@/assets/svgs/create-offer.svg";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
@@ -12,6 +12,7 @@ import logo from "@/assets/svgs/logo.svg";
 import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
 import { logout } from "@/utils/auth.util";
+import { useTranslation } from "next-i18next";
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -25,11 +26,14 @@ const Header = () => {
     router.push("/");
     // router.push({ pathname: "/pdf", query: { offerID: "65df3a25d09467582a2564de", action: "Accept" } })
   };
+
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {
       dispatch(readSystemSettings());
     }
   }, [user]);
+
+  const { t: translate } = useTranslation();
 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">

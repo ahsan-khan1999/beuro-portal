@@ -1097,6 +1097,9 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "user_rule": "Company",
+    "invoice_total": "Total",
+    "page_sum": "Page Sum",
     "upload_file": "Upload File",
     "view_docs": "View Documents",
     "share_on_whatsapp": "Share on whatsapp",

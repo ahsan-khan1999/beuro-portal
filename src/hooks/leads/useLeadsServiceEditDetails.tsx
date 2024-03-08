@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -7,9 +6,8 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { LeadsServiceDetailsFormField } from "@/components/leads/fields/Leads-service-details-fields";
 import { generateLeadsServiceEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
-import { useEffect, useMemo } from "react";
-import { readService } from "@/api/slices/service/serviceSlice";
-import { formatDateTimeToDate, formatDateTimeToDateMango } from "@/utils/utility";
+import { useMemo } from "react";
+import { formatDateTimeToDateMango } from "@/utils/utility";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ContentTableRowTypes } from "@/types/content";
 
@@ -23,8 +21,8 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
   const handleBack = () => {
     onClick(2, ComponentsType.service);
   };
-  const { systemSettings } = useAppSelector((state) => state.settings);
 
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   const {
@@ -48,10 +46,10 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
         ...leadDetails,
         desireDate: formatDateTimeToDateMango(leadDetails?.desireDate),
         requiredService: selectedContent?.id,
-        otherServices: contentList?.map((item) => item.id)
+        otherServices: contentList?.map((item) => item.id),
       });
     }
-  }, [leadDetails.id])
+  }, [leadDetails.id]);
 
   const fields = LeadsServiceDetailsFormField(
     register,
@@ -64,10 +62,16 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     systemSettings
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data,  step: 3, id: leadDetails?.id, stage: ComponentsType.additionalEdit }
-    const response = await dispatch(updateLead({ data: apiData, router, setError, translate }));
+    const apiData = {
+      ...data,
+      step: 3,
+      id: leadDetails?.id,
+      stage: ComponentsType.additionalEdit,
+    };
+    const response = await dispatch(
+      updateLead({ data: apiData, router, setError, translate })
+    );
     if (response?.payload) onClick(2, ComponentsType.service);
-
   };
   return {
     fields,

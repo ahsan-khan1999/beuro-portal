@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -7,14 +6,9 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddLeadServiceDetailsFormField } from "@/components/leads/fields/Add-lead-service-details";
 import { generateLeadsServiceEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { readService } from "@/api/slices/service/serviceSlice";
 import { useEffect, useMemo } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
-import {
-  formatDate,
-  formatDateTimeToDate,
-  formatDateTimeToDateMango,
-} from "@/utils/utility";
+import { formatDateTimeToDateMango } from "@/utils/utility";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { ContentTableRowTypes } from "@/types/content";
 

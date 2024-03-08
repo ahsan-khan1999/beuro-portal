@@ -317,7 +317,7 @@ export const useOfferPdf = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
-    router.push("/offers");
+    router.push("/offers?status=None");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
