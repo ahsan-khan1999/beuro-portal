@@ -75,13 +75,14 @@ const useOffers = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readOffer({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Offer);
-      }
-    });
+    setCurrentPage(1)
+    // dispatch(
+    //   readOffer({ params: { filter: query, page: 1, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Offer);
+    //   }
+    // });
   };
 
   useEffect(() => {
@@ -329,7 +330,7 @@ const useOffers = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       });
     }
-  }, [currentPage, query]);
+  }, [query]);
 
   // useEffect(() => {
   //   const queryStatus = query?.status;
