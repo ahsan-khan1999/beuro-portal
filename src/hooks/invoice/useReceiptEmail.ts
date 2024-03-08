@@ -37,21 +37,23 @@ export const useReceiptEmail = (
   const { loading, error, collectiveInvoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
-  const { modal } = useAppSelector(
-    (state) => state.global
-  );
+  const { modal } = useAppSelector((state) => state.global);
   const isMail = router.query?.isMail;
 
-  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
+  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
 
-  const { content, contentDetails, loading: loadingContent } = useAppSelector((state) => state.content);
+  const {
+    content,
+    contentDetails,
+    loading: loadingContent,
+  } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
       transformAttachments(
-        collectiveInvoiceDetails?.invoiceID?.content
-          ?.receiptContent?.attachments as string[]
+        collectiveInvoiceDetails?.invoiceID?.content?.receiptContent
+          ?.attachments as string[]
       )) ||
-    []
+      []
   );
   const { invoiceID } = router.query;
   const schema = generateContractEmailValidationSchema(translate);
@@ -66,7 +68,8 @@ export const useReceiptEmail = (
     resolver: yupResolver<FieldValues>(schema),
   });
   useEffect(() => {
-    if (content?.length === 0) dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+    if (content?.length === 0)
+      dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
   useEffect(() => {
@@ -76,22 +79,23 @@ export const useReceiptEmail = (
       ).then((res: any) => {
         setAttachements(
           transformAttachments(
-            res?.payload?.invoiceID?.content
-              ?.receiptContent?.attachments as string[]
+            res?.payload?.invoiceID?.content?.receiptContent
+              ?.attachments as string[]
           ) || []
         );
         reset({
-          email:
-            res?.payload?.invoiceID?.customerDetail
-              ?.email,
+          email: res?.payload?.invoiceID?.customerDetail?.email,
           content: res?.payload?.invoiceID?.content?.id,
           subject:
-            res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.createdBy?.company?.companyName,
+            res?.payload?.title ||
+            "" +
+              " " +
+              res?.payload?.invoiceNumber +
+              " " +
+              res?.payload?.invoiceID?.createdBy?.company?.companyName,
           description:
-            res?.payload?.invoiceID?.content
-              ?.receiptContent?.body || "",
-          pdf: res?.payload?.invoiceID?.content
-            ?.receiptContent?.attachments,
+            res?.payload?.invoiceID?.content?.receiptContent?.body || "",
+          pdf: res?.payload?.invoiceID?.content?.receiptContent?.attachments,
           // title: res?.payload?.title,
           // additionalDetails: res?.payload?.additionalDetails || "",
         });
@@ -103,11 +107,16 @@ export const useReceiptEmail = (
     const selectedContent = content.find((item) => item.id === id);
     if (selectedContent) {
       reset({
-        email:
-          collectiveInvoiceDetails?.invoiceID
-            ?.customerDetail?.email,
+        email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.receiptContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName,
+        subject:
+          selectedContent?.receiptContent?.title ||
+          "" +
+            " " +
+            collectiveInvoiceDetails?.invoiceNumber +
+            " " +
+            collectiveInvoiceDetails?.invoiceID?.createdBy?.company
+              ?.companyName,
         description: selectedContent?.receiptContent?.body || "",
         pdf: selectedContent?.receiptContent?.attachments,
         // title: collectiveInvoiceDetails?.title,
@@ -124,9 +133,9 @@ export const useReceiptEmail = (
   const onSuccess = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
     router.push({
-      pathname: "/invoices/details",
+      pathname: "/invoices?status=None/details",
       query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
-    })
+    });
   };
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -157,7 +166,7 @@ export const useReceiptEmail = (
     // const response = await dispatch(updateInvoiceContent({ data: apiData }));
     // if (response?.payload) {
     if (isMail) {
-      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string)
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
       let apiData = { ...data, id: invoiceID, pdf: fileUrl };
 
       const res = await dispatch(sendInvoiceEmail({ data: apiData }));
@@ -198,6 +207,6 @@ export const useReceiptEmail = (
     loadingContent,
     modal,
     onSuccess,
-    onClose
+    onClose,
   };
 };

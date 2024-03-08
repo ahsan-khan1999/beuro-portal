@@ -11,7 +11,10 @@ import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
 
-export const useAddContentReceiptDetails = (onHandleBack:Function,onHandleNext: Function) => {
+export const useAddContentReceiptDetails = (
+  onHandleBack: Function,
+  onHandleNext: Function
+) => {
   const { t: translate } = useTranslation();
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
@@ -41,18 +44,18 @@ export const useAddContentReceiptDetails = (onHandleBack:Function,onHandleNext: 
     resolver: yupResolver<FieldValues>(schema),
   });
   const handleSuccess = () => {
-    router.push("/content");
+    router.push("/content?status=None");
   };
   useEffect(() => {
     if (contentDetails.id) {
       reset({
-        receiptContent:{
+        receiptContent: {
           ...contentDetails?.receiptContent,
           // attachments:
           //   (contentDetails?.receiptContent?.attachments?.length > 0 &&
           //     contentDetails?.receiptContent?.attachments[0]) ||
           //   null,
-        }
+        },
       });
     }
   }, [contentDetails.id]);

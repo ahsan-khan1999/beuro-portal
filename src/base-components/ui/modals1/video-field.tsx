@@ -111,6 +111,7 @@ export const VideoField = ({
       setAttachements && setAttachements(newAttachement);
     }
   };
+
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
   };

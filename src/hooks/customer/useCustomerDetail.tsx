@@ -91,7 +91,7 @@ export default function useCustomerDetail(stage: boolean) {
     dispatch(deleteCustomer({ customerDetails, router, setError, translate }));
   };
   const changeRouterHandler = () => {
-    router.pathname = "/customers";
+    router.pathname = "/customers?status=None";
     updateQuery(router, router.locale as string);
     onClose();
   };
@@ -171,7 +171,7 @@ export default function useCustomerDetail(stage: boolean) {
     if (res?.payload) {
       dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
       onClose();
-      (router.pathname = "/customers"), (router.query = {});
+      (router.pathname = "/customers?status=None"), (router.query = {});
       updateQuery(router, router.locale as string);
     } else {
       onClose();
@@ -214,7 +214,7 @@ export default function useCustomerDetail(stage: boolean) {
     ),
   };
   const handlePreviousClick = () => {
-    router.push("/customers");
+    router.push("/customers?status=None");
   };
 
   return {

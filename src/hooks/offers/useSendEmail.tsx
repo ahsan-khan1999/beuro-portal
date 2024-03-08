@@ -1,27 +1,19 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
-import { ContractEmailPreviewFormField } from "@/components/contract/fields/contract-email-fields";
-import { useEffect, useMemo, useState } from "react";
-import {
-  readContent,
-  setContentDetails,
-} from "@/api/slices/content/contentSlice";
+import { useEffect, useState } from "react";
+import { setContentDetails } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import { sendOfferEmail, updateOfferContent } from "@/api/slices/offer/offerSlice";
+import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { ModalType } from "@/enums/ui";
 import { updateQuery } from "@/utils/update-query";
 import { OfferEmailFormField } from "@/components/offers/compose-mail/fields";
 import localStoreUtil from "@/utils/localstore.util";
-import { CompanySettingsActionType, TemplateType } from "@/types";
-import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
 
 export const useSendEmail = (
   backRouteHandler: Function,
@@ -35,7 +27,7 @@ export const useSendEmail = (
   );
   const isMail = router.query?.isMail;
 
-  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
+  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
 
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -43,9 +35,8 @@ export const useSendEmail = (
       transformAttachments(
         offerDetails?.content?.offerContent?.attachments as string[]
       )) ||
-    []
+      []
   );
- 
 
   const schema = generateContractEmailValidationSchema(translate);
   const {
@@ -55,7 +46,7 @@ export const useSendEmail = (
     setError,
     reset,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -64,17 +55,20 @@ export const useSendEmail = (
     reset({
       email: offerDetails?.leadID?.customerDetail?.email,
       content: offerDetails?.content?.id,
-      subject: offerDetails?.title || "" + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
+      subject:
+        offerDetails?.title ||
+        "" +
+          " " +
+          offerDetails?.offerNumber +
+          " " +
+          offerDetails?.createdBy?.company?.companyName,
 
       description: offerDetails?.content?.offerContent?.body || "",
       attachments: offerDetails?.content?.offerContent?.attachments,
       title: offerDetails?.title,
       additionalDetails: offerDetails?.additionalDetails || "",
-
     });
-
   }, []);
-
 
   const onContentSelect = (id: string) => {
     const selectedContent = content.find((item) => item.id === id);
@@ -82,15 +76,23 @@ export const useSendEmail = (
       reset({
         email: offerDetails?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.offerContent?.title || "" + " " + offerDetails?.offerNumber + " " + offerDetails?.createdBy?.company?.companyName,
+        subject:
+          selectedContent?.offerContent?.title ||
+          "" +
+            " " +
+            offerDetails?.offerNumber +
+            " " +
+            offerDetails?.createdBy?.company?.companyName,
         description: selectedContent?.offerContent?.body || "",
         attachments: selectedContent?.offerContent?.attachments,
         title: offerDetails?.title,
         additionalDetails: offerDetails?.additionalDetails || "",
       });
-      setAttachements(transformAttachments(
-        selectedContent?.offerContent?.attachments as string[]
-      ) || [])
+      setAttachements(
+        transformAttachments(
+          selectedContent?.offerContent?.attachments as string[]
+        ) || []
+      );
       dispatch(setContentDetails(selectedContent));
     }
   };
@@ -111,7 +113,6 @@ export const useSendEmail = (
     setValue
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
     // const apiData = {
     //   id: offerDetails?.id,
     //   title: data?.title,
@@ -121,7 +122,7 @@ export const useSendEmail = (
     // const response = await dispatch(updateOfferContent({ data: apiData }));
     // if (response?.payload) {
     if (isMail) {
-      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string)
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
       let apiData = { ...data, id: offerDetails?.id, pdf: fileUrl };
 
       const res = await dispatch(sendOfferEmail({ data: apiData }));
@@ -129,7 +130,6 @@ export const useSendEmail = (
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
       }
     } else {
-
       const updatedData = {
         ...data,
         id: offerDetails?.id,
@@ -144,7 +144,6 @@ export const useSendEmail = (
     // } else {
 
     // }
-
   };
   return {
     fields,

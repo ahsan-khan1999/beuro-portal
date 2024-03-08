@@ -64,13 +64,14 @@ const useContract = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(
-      readContract({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Contract);
-      }
-    });
+    setCurrentPage(1);
+    // dispatch(
+    //   readContract({ params: { filter: filter, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Contract);
+    //   }
+    // });
   };
 
   const onClose = () => {
@@ -227,20 +228,23 @@ const useContract = () => {
               .split(",")
               .filter((item) => item !== "None");
 
-      setFilter({
-        ...filter,
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
         status: filteredStatus,
-        text: searchQuery,
-      });
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
 
       dispatch(
         readContract({
           params: {
-            filter: {
-              ...filter,
-              status: filteredStatus,
-              text: searchQuery,
-            },
+            filter: updatedFilter,
             page: currentPage,
             size: 10,
           },
@@ -249,21 +253,27 @@ const useContract = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
       });
     }
-  }, [currentPage, query]);
+  }, [query]);
 
   // useEffect(() => {
   //   const queryStatus = query?.status;
-  //   if (queryStatus) {
+  //   const searchQuery = query?.text as string;
+
+  //   const queryParams = queryStatus || searchQuery;
+
+  //   if (queryParams !== undefined) {
   //     const filteredStatus =
   //       query?.status === "None"
   //         ? "None"
-  //         : queryStatus
+  //         : queryParams
   //             .toString()
   //             .split(",")
   //             .filter((item) => item !== "None");
+
   //     setFilter({
   //       ...filter,
   //       status: filteredStatus,
+  //       text: searchQuery,
   //     });
 
   //     dispatch(
@@ -272,76 +282,8 @@ const useContract = () => {
   //           filter: {
   //             ...filter,
   //             status: filteredStatus,
+  //             text: searchQuery,
   //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-  //     });
-  //     return;
-  //   }
-  // }, [currentPage, query]);
-
-  // useEffect(() => {
-  //   if (query?.filter || query?.status) {
-  //     const queryStatus = query?.status;
-
-  //     if (queryStatus) {
-  //       setFilter({
-  //         ...filter,
-  //         status: queryStatus.toString().split(","),
-  //       });
-
-  //       dispatch(
-  //         readContract({
-  //           params: {
-  //             filter: {
-  //               ...filter,
-  //               status: queryStatus.toString().split(","),
-  //             },
-  //             page: currentPage,
-  //             size: 10,
-  //           },
-  //         })
-  //       ).then((response: any) => {
-  //         if (response?.payload)
-  //           setCurrentPageRows(response?.payload?.Contract);
-  //       });
-  //       return;
-  //     }
-
-  //     const statusValue =
-  //       staticEnums["ContractStatus"][query?.filter as string];
-  //     setFilter({
-  //       ...filter,
-  //       status: [statusValue?.toString()],
-  //     });
-
-  //     dispatch(
-  //       readContract({
-  //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: [staticEnums["ContractStatus"][query?.filter as string]],
-  //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-  //     });
-  //   } else {
-  //     setFilter({
-  //       ...filter,
-  //       status: "None",
-  //     });
-  //     dispatch(
-  //       readContract({
-  //         params: {
-  //           filter: { ...filter, status: "None" },
   //           page: currentPage,
   //           size: 10,
   //         },
@@ -350,7 +292,7 @@ const useContract = () => {
   //       if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
   //     });
   //   }
-  // }, [currentPage, query?.filter, query?.status]);
+  // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

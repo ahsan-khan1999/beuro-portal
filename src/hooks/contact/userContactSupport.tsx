@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -17,7 +16,7 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.contactSupport);
-  const user: User = isJSON(getUser())
+  const user: User = isJSON(getUser());
   const schema = generateContactSupportValidation(translate);
   const {
     register,
@@ -25,7 +24,7 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
     control,
     formState: { errors },
     setError,
-    reset
+    reset,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -33,15 +32,15 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
     reset({
       fullName: user?.fullName,
       email: user?.email,
-
-    })
-  }, [])
+    });
+  }, []);
 
   const fields = ContactSupportFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const response = await dispatch(createContactSupport({ data, router, setError, translate }));
+    const response = await dispatch(
+      createContactSupport({ data, router, setError, translate })
+    );
     if (response?.payload) requestSubmitHandler();
-
   };
   return {
     fields,
@@ -50,6 +49,6 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

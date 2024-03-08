@@ -34,9 +34,10 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   }, []);
 
   const onCancel = () => {
-    router.pathname = "/leads";
+    router.pathname = "/leads?status=None";
     updateQuery(router, router.locale as string);
   };
+
   const schema = generateAddNewLeadCustomerDetailsValidation(translate);
 
   const {
@@ -60,16 +61,13 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
-      dispatch(
-        setCustomerDetails(selectedCustomers)
-      );
+      dispatch(setCustomerDetails(selectedCustomers));
 
       reset({
         ...selectedCustomers,
         type: type,
         gender: staticEnums["Gender"][selectedCustomers?.gender],
       });
-
     }
   };
 
@@ -90,7 +88,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         address: leadDetails?.customerDetail?.address,
         companyName: leadDetails?.customerDetail?.companyName,
         gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
-
       });
     }
   }, [leadDetails.id]);
@@ -107,13 +104,12 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       customerDetails,
       onCancel,
       leadDetails,
-      gender
+      gender,
     },
     setValue
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
     if (leadDetails?.id) {
       let apiData: any = {
         ...data,

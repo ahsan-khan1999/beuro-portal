@@ -53,24 +53,32 @@ export const SingleFielAttachmentField = ({
     e.preventDefault();
   };
 
-  // const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
-  //   e.preventDefault();
+  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-  //   if (e.target instanceof HTMLInputElement && e.target.files) {
-  //     setAttachements && setAttachements(e.target.files[0]);
-  //     setFileUploaded(true);
-  //   }
-  // };
+    if (e.dataTransfer && e.dataTransfer.items.length > 0) {
+      const file = e.dataTransfer.items[0].getAsFile();
+
+      if (file) {
+        setAttachements && setAttachements([]);
+
+        formdata.set("file", file);
+
+        setFileUploaded(true);
+      }
+    }
+  };
 
   return (
     <>
       <label
         htmlFor={id}
         onDragOver={handleDragOver}
-        onDrop={handleFileInput}
+        onDrop={handleDrop}
         className={`flex flex-col items-center justify-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto ${
           fileUploaded ? "cursor-not-allowed" : "cursor-pointer"
-        } px-[25px] pt-6 pb-3`}
+        } px-[25px] py-10`}
       >
         <div className="flex flex-col items-center gap-x-3">
           <svg

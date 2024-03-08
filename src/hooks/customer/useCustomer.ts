@@ -45,31 +45,15 @@ export default function useCustomer() {
   }, []);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readCustomer({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Customer);
-      }
-    });
+    setCurrentPage(1);
+    // dispatch(
+    //   readCustomer({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Customer);
+    //   }
+    // });
   };
-
-  // useEffect(() => {
-  //   console.log("render");
-  //   dispatch(
-  //     readCustomer({
-  //       params: {
-  //         filter: filter,
-  //         page: currentPage,
-  //         size: 10,
-  //       },
-  //     })
-  //   ).then((res: any) => {
-  //     if (res?.payload) {
-  //       setCurrentPageRows(res?.payload?.Customer);
-  //     }
-  //   });
-  // }, [filter, currentPage]);
 
   useEffect(() => {
     const queryStatus = query?.status;
@@ -78,31 +62,73 @@ export default function useCustomer() {
     const queryParams = queryStatus || searchQuery;
 
     if (queryParams !== undefined) {
-      setFilter({
-        ...filter,
-        status: queryStatus,
-        text: searchQuery,
-      });
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
+        status: filteredStatus,
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
 
       dispatch(
         readCustomer({
           params: {
-            filter: {
-              ...filter,
-              status: queryStatus,
-              text: searchQuery,
-            },
+            filter: updatedFilter,
             page: currentPage,
             size: 10,
           },
         })
-      ).then((res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.Customer);
-        }
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Customer);
       });
     }
-  }, [currentPage, query]);
+  }, [query]);
+
+  // useEffect(() => {
+  //   const queryStatus = query?.status;
+  //   const searchQuery = query?.text as string;
+
+  //   const queryParams = queryStatus || searchQuery;
+
+  //   if (queryParams !== undefined) {
+  //     setFilter({
+  //       ...filter,
+  //       status: queryStatus,
+  //       text: searchQuery,
+  //     });
+
+  //     dispatch(
+  //       readCustomer({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: queryStatus,
+  //             text: searchQuery,
+  //           },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((res: any) => {
+  //       if (res?.payload) {
+  //         setCurrentPageRows(res?.payload?.Customer);
+  //       }
+  //     });
+  //   }
+  // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
