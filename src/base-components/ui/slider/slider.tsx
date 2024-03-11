@@ -28,8 +28,6 @@ export const Slider = ({
 
   const mainSliderContainer = combineClasses(`relative`, containerClasses);
 
-  // Usage example:
-
   return (
     <div className={mainSliderContainer}>
       <div className="absolute right-0 -top-12">

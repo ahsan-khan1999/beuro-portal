@@ -15,6 +15,7 @@ const AddLeadServiceDetails = ({
   const defaultClassName = "pt-5";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddLeadServiceDetails({ onHandleBack, onHandleNext });
+
   const router = useRouter();
   return (
     <FormCard>

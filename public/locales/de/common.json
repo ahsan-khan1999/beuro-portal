@@ -208,6 +208,7 @@
       "leads": {
         "leads": "Anfragen",
         "open": "Offen",
+        "InProcess": "Bearbeitung",
         "close": "Geschlossen",
         "expire": "Abgelaufen"
       },
@@ -909,6 +910,7 @@
     "side_images_heading": "Bilder",
     "table_functions": {
       "open": "Anfragen offen",
+      "inProcess": "Anfragen Bearbeitung",
       "close": "Anfragen geschlossen",
       "expire": "Anfragen abgelaufen"
     },
@@ -1087,7 +1089,9 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
-
+    "user_rule": "Unternehmen",
+    "invoice_total": "Insgesamt",
+    "page_sum": "Seite Summe",
     "upload_file": "Datei hochladen",
     "view_docs": "Dokumente anzeigen",
     "share_on_whatsapp": "Auf Whatsapp teilen",
@@ -1178,7 +1182,6 @@
     "drag_table": "Zum Scrollen in der Tabelle ziehen",
     "sort_button": "Sortieren nach",
     "source": "Leadquellen",
-
     "privacy": "Datenschutzbestimmungen",
     "copy_right": "Urheberrecht 2024",
     "better_management": "Besseres Management",
@@ -2007,6 +2010,7 @@
   },
   "lead_status": {
     "Open": "Offen",
+    "InProcess": "Bearbeitung",
     "Close": "Geschlossen",
     "Expired": "Abgelaufen"
   },

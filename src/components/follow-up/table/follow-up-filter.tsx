@@ -17,6 +17,7 @@ export default function FollowUpFilter({
   //@ts-expect-error
   const { handleFilterReset } = useFilter(filter, setFilter);
   const { t: translate } = useTranslation();
+
   return (
     <div className="flex">
       <InputField

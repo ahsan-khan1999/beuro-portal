@@ -137,7 +137,7 @@ const TableRows = ({
                 } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
-                dropDownItemsContainerClassName="w-full"
+                dropDownItemsContainerClassName="w-fit"
                 key={item.id}
                 isSecondLastIndex={
                   collectiveInvoice?.length <= 2

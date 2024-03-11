@@ -3,6 +3,8 @@ import Image from "next/image";
 import React from "react";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useTranslation } from "next-i18next";
+import { updateQuery } from "@/utils/update-query";
+import { useRouter } from "next/router";
 
 const DetailsData = ({
   date,
@@ -12,11 +14,20 @@ const DetailsData = ({
   handleDelete,
 }: CustomerDetail) => {
   const { t: translate } = useTranslation();
+
+  const router = useRouter();
+
+  const handleBack = () => {
+    router.pathname = "/customers";
+    delete router.query["customer"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <>
       <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
-          <div onClick={handlePreviousClick} className="cursor-pointer">
+          <div onClick={handleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"

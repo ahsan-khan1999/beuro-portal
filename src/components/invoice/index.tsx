@@ -6,6 +6,7 @@ import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
 import useInvoice from "@/hooks/invoice/useInvoice";
 import { useEmptyStates } from "@/utils/hooks";
+import { useTranslation } from "next-i18next";
 
 export default function Invoices() {
   const {
@@ -29,6 +30,8 @@ export default function Invoices() {
     loading
   );
 
+  const { t: translate } = useTranslation();
+
   return (
     <>
       <TableFunctions
@@ -39,13 +42,19 @@ export default function Invoices() {
 
       <div className="flex justify-center items-center gap-x-5 my-5">
         <div className="bg-white shadow-lg px-6 py-3 flex flex-col gap-y-1 items-center">
-          <span>Total</span>
+          <span className="text-base font-medium">
+            {translate("common.invoice_total")}
+          </span>
           <span className="font-semibold">{invoiceSum?.sumOfAllPages} CHf</span>
         </div>
 
         <div className="bg-white shadow-lg px-5 py-3 flex flex-col gap-y-1 items-center">
-          <span>Page Sum</span>
-          <span className="font-semibold">{invoiceSum?.sumOfTotalsPerPage} CHf</span>
+          <span className="text-base font-medium">
+            {translate("common.page_sum")}
+          </span>
+          <span className="font-semibold">
+            {invoiceSum?.sumOfTotalsPerPage} CHf
+          </span>
         </div>
       </div>
 

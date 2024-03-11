@@ -91,9 +91,7 @@ const DashboardCard = ({
   return (
     <div
       onClick={() => route?.()}
-      className={`${
-        title === "Sales" ? "cursor-default" : "cursor-pointer"
-      } rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
+      className={`cursor-pointer rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
     >
       <div className="flex items-center mb-8">
         <Image src={icon} alt={alt} />

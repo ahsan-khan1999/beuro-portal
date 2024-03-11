@@ -253,12 +253,6 @@ const leadSlice = createSlice({
     builder.addCase(createLeadNotes.rejected, (state) => {
       state.loading = false;
     });
-
-
-  
-
-
-
   },
 });
 

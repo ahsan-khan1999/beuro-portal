@@ -588,6 +588,7 @@ export const staticEnums: Record<string, any> = {
   },
   LeadStatus: {
     Open: 0,
+    InProcess: 3,
     Close: 1,
     Expired: 2,
   },
@@ -1288,6 +1289,7 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.customers",
     pathname: "/customers",
     role: [1, 2],
+    query: "None",
   },
   {
     icon: "Customers",
@@ -1299,27 +1301,31 @@ export const sideBar: SideBar[] = [
     icon: "Leads",
     title: "sidebar.customer.leads.leads",
     pathname: "/leads",
+    query: "None",
     role: [1, 2],
     inner: [
       {
         title: "sidebar.customer.leads.open",
         pathname: "/leads",
-        query: "Open",
-
+        query: "0",
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.leads.InProcess",
+        pathname: "/leads",
+        query: "3",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.leads.close",
         pathname: "/leads",
-        query: "Close",
-
+        query: "1",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.leads.expire",
         pathname: "/leads",
-        query: "Expired",
-
+        query: "2",
         role: [1, 2],
       },
     ],
@@ -1329,30 +1335,30 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.offers.offers",
     role: [1, 2],
     pathname: "/offers",
-
+    query: "None",
     inner: [
       {
         title: "sidebar.customer.offers.open",
         pathname: "/offers",
-        query: "Open",
+        query: "0",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.offers.signed",
         pathname: "/offers",
-        query: "Accepted",
+        query: "1",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.offers.expired",
         pathname: "/offers",
-        query: "Expired",
+        query: "2",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.offers.rejected",
-        query: "Rejected",
         pathname: "/offers",
+        query: "3",
         role: [1, 2],
       },
     ],
@@ -1362,24 +1368,24 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.contracts.contracts",
     role: [1, 2],
     pathname: "/contract",
-
+    query: "None",
     inner: [
       {
         title: "sidebar.customer.contracts.open",
-        query: "Open",
         pathname: "/contract",
+        query: "0",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.contracts.confirmed",
-        query: "Confirmed",
         pathname: "/contract",
+        query: "1",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.contracts.cancelled",
-        query: "Cancelled",
         pathname: "/contract",
+        query: "2",
         role: [1, 2],
       },
     ],
@@ -1389,30 +1395,30 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.invoices.invoices",
     role: [1, 2],
     pathname: "/invoices",
-
+    query: "None",
     inner: [
       {
         title: "sidebar.customer.invoices.pending",
-        query: "Pending",
         pathname: "/invoices",
+        query: "0",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.invoices.open",
-        query: "Open",
         pathname: "/invoices",
+        query: "3",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.invoices.overdue",
-        query: "Overdue",
         pathname: "/invoices",
+        query: "1",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.invoices.paid",
-        query: "Paid",
         pathname: "/invoices",
+        query: "2",
         role: [1, 2],
       },
     ],
@@ -1422,24 +1428,28 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.services",
     pathname: "/services",
     role: [1, 2],
+    query: "None",
   },
   {
     icon: "Employees",
     title: "sidebar.customer.employees",
     pathname: "/employees",
     role: [1],
+    query: "None",
   },
   {
     icon: "Content",
     title: "sidebar.customer.content",
     pathname: "/content",
     role: [1, 2],
+    query: "None",
   },
   {
     icon: "MailTracker",
     title: "sidebar.customer.mail_tracker",
     pathname: "/email-tracker",
     role: [1, 2],
+    query: "None",
   },
   {
     icon: "Settings",

@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
   readContract,
-  readContractDetails,
   setContractDetails,
   updateContractPaymentStatus,
   updateContractStatus,
@@ -22,20 +21,30 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
     useAppSelector((state) => state.contract);
-  const { images } = useAppSelector((state) => state.image);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
-  const { t: translate } = useTranslation();
 
   const { query } = useRouter();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [query]);
+
+  const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -47,30 +56,35 @@ const useContract = () => {
     status: FiltersDefaultValues.None,
     leadSource: FiltersDefaultValues.None,
   });
-  const totalItems = totalCount;
 
+  const totalItems = totalCount;
   const itemsPerPage = 10;
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(
-      readContract({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Contract);
-      }
-    });
+    setCurrentPage(1);
+    // dispatch(
+    //   readContract({ params: { filter: filter, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Contract);
+    //   }
+    // });
   };
+
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+
   const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
     if (e) {
       e.stopPropagation();
     }
+
     const filteredLead = contract?.filter((item_) => item_.id === item);
+
     if (filteredLead?.length === 1) {
       dispatch(setContractDetails(filteredLead[0]));
       dispatch(
@@ -200,36 +214,37 @@ const useContract = () => {
   };
 
   useEffect(() => {
-    if (query?.filter) {
-      const statusValue =
-        staticEnums["ContractStatus"][query?.filter as string];
-      setFilter({
-        ...filter,
-        status: [statusValue?.toString()],
-      });
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+
+    const queryParams = queryStatus || searchQuery;
+
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
+        status: filteredStatus,
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
+
       dispatch(
         readContract({
           params: {
-            filter: {
-              ...filter,
-              status: [staticEnums["ContractStatus"][query?.filter as string]],
-            },
-            page: currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-      });
-    } else {
-      // setFilter({
-      //   ...filter,
-      //   status: "None",
-      // });
-      dispatch(
-        readContract({
-          params: {
-            filter: { ...filter },
+            filter: updatedFilter,
             page: currentPage,
             size: 10,
           },
@@ -238,7 +253,46 @@ const useContract = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
       });
     }
-  }, [currentPage, query?.filter]);
+  }, [query]);
+
+  // useEffect(() => {
+  //   const queryStatus = query?.status;
+  //   const searchQuery = query?.text as string;
+
+  //   const queryParams = queryStatus || searchQuery;
+
+  //   if (queryParams !== undefined) {
+  //     const filteredStatus =
+  //       query?.status === "None"
+  //         ? "None"
+  //         : queryParams
+  //             .toString()
+  //             .split(",")
+  //             .filter((item) => item !== "None");
+
+  //     setFilter({
+  //       ...filter,
+  //       status: filteredStatus,
+  //       text: searchQuery,
+  //     });
+
+  //     dispatch(
+  //       readContract({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: filteredStatus,
+  //             text: searchQuery,
+  //           },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+  //     });
+  //   }
+  // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

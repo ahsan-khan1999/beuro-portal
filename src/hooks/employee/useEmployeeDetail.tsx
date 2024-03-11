@@ -82,9 +82,9 @@ const useEmployeeDetail = (stage: boolean) => {
     setIsUpdate(!isUpdate);
   };
   const handleUpdateSuccess = () => {
-    router.pathname = "/employees";
+    router.pathname = "/employees?status=None";
     updateQuery(router, router.locale as string);
-    onClose()
+    onClose();
   };
   const handleCreateSuccess = (email: string) => {
     dispatch(
@@ -112,7 +112,7 @@ const useEmployeeDetail = (stage: boolean) => {
     );
     if (res?.payload) {
       onClose();
-      router.pathname = "/employees";
+      router.pathname = "/employees?status=None";
       updateQuery(router, router.locale as string);
     }
   };
@@ -174,12 +174,13 @@ const useEmployeeDetail = (stage: boolean) => {
       res = await dispatch(
         updateEmployee({ data, router, setError, translate })
       );
-      if (res.payload) dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+      if (res.payload)
+        dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     }
   };
 
   const handlePreviousClick = () => {
-    router.push("/employees");
+    router.push("/employees?status=None");
   };
 
   return {

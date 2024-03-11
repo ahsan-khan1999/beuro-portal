@@ -439,7 +439,7 @@ export const useContractPdf = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
-    router.push("/contract");
+    router.push("/contract?status=None");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

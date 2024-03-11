@@ -4,7 +4,7 @@ import {
   DEFAULT_OFFER,
   staticEnums,
 } from "@/utils/static";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -17,7 +17,6 @@ import { FilterType } from "@/types";
 import localStoreUtil from "@/utils/localstore.util";
 import {
   readOffer,
-  readOfferDetails,
   setOfferDetails,
   updateOfferStatus,
   updatePaymentStatus,
@@ -27,7 +26,6 @@ import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
-import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
@@ -40,12 +38,23 @@ const useOffers = () => {
     (state) => state.offer
   );
 
+  const { query } = useRouter();
+
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (query && query.page) {
+      const parsedPage = parseInt(query.page as string, 10);
+      if (!isNaN(parsedPage)) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [query]);
+
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
     []
   );
   const { t: translate } = useTranslation();
-  const { query } = useRouter();
 
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,
@@ -66,13 +75,14 @@ const useOffers = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readOffer({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Offer);
-      }
-    });
+    setCurrentPage(1);
+    // dispatch(
+    //   readOffer({ params: { filter: query, page: 1, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Offer);
+    //   }
+    // });
   };
 
   useEffect(() => {
@@ -80,15 +90,6 @@ const useOffers = () => {
     dispatch(setOfferDetails(DEFAULT_OFFER));
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
     dispatch(setLeadDetails(DEFAULT_LEAD));
-
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: {}, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-    // dispatch(readOffer({ params: queryParams })).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Offer);
-    //   }
-    // });
   }, []);
 
   const onClose = () => {
@@ -284,35 +285,37 @@ const useOffers = () => {
   };
 
   useEffect(() => {
-    if (query?.filter) {
-      const statusValue = staticEnums["OfferStatus"][query?.filter as string];
-      setFilter({
-        ...filter,
-        status: [statusValue?.toString()],
-      });
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+
+    const queryParams = queryStatus || searchQuery;
+
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
+        status: filteredStatus,
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
+
       dispatch(
         readOffer({
           params: {
-            filter: {
-              ...filter,
-              status: [staticEnums["OfferStatus"][query?.filter as string]],
-            },
-            page: currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
-      });
-    } else {
-      // setFilter({
-      //   ...filter,
-      //   status: "None",
-      // });
-      dispatch(
-        readOffer({
-          params: {
-            filter: { ...filter },
+            filter: updatedFilter,
             page: currentPage,
             size: 10,
           },
@@ -321,7 +324,46 @@ const useOffers = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
       });
     }
-  }, [currentPage, query?.filter]);
+  }, [query]);
+
+  // useEffect(() => {
+  //   const queryStatus = query?.status;
+  //   const searchQuery = query?.text as string;
+
+  //   const queryParams = queryStatus || searchQuery;
+
+  //   if (queryParams !== undefined) {
+  //     const filteredStatus =
+  //       query?.status === "None"
+  //         ? "None"
+  //         : queryParams
+  //             .toString()
+  //             .split(",")
+  //             .filter((item) => item !== "None");
+
+  //     setFilter({
+  //       ...filter,
+  //       status: filteredStatus,
+  //       text: searchQuery,
+  //     });
+
+  //     dispatch(
+  //       readOffer({
+  //         params: {
+  //           filter: {
+  //             ...filter,
+  //             status: filteredStatus,
+  //             text: searchQuery,
+  //           },
+  //           page: currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
+  //     });
+  //   }
+  // }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

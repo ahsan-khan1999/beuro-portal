@@ -25,10 +25,12 @@ interface ActionType {
   type: string;
   payload: Dashboard;
 }
+
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const { dashboard } = useAppSelector((state) => state.auth);
+
   const [pieData, setPieData] = useState({
     datasets: [
       {
@@ -56,6 +58,7 @@ const AdminDashboard = () => {
   const [filter, setFilter] = useState<FilterType>({
     month: getCurrentMonth(),
   });
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -98,7 +101,7 @@ const AdminDashboard = () => {
         (dashboard?.Lead?.percentage && dashboard?.Lead?.percentage > 0
           ? "+"
           : "") +
-        dashboard?.Lead?.percentage +
+        Math.round(dashboard?.Lead?.percentage! * 100) / 100 +
         "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
@@ -111,7 +114,7 @@ const AdminDashboard = () => {
       expired:
         dashboard?.Lead?.expired +
         ` ${translate("dashboard_detail.cards_status.expire")}`,
-      route: () => router.push("/leads"),
+      route: () => router.push("/leads?status=None"),
     },
     {
       icon: offersIcon,
@@ -125,7 +128,7 @@ const AdminDashboard = () => {
         (dashboard?.Offer?.percentage && dashboard?.Offer?.percentage > 0
           ? "+"
           : "") +
-        dashboard?.Offer?.percentage +
+        Math.round(dashboard?.Offer?.percentage! * 100) / 100 +
         "%",
       backgroundColor: "bg-dashboardCard2-gradient",
       chartPointColor: "#FC3576",
@@ -138,7 +141,7 @@ const AdminDashboard = () => {
       expired:
         dashboard?.Offer?.expired +
         ` ${translate("dashboard_detail.cards_status.expire")}`,
-      route: () => router.push("/offers"),
+      route: () => router.push("/offers?status=None"),
     },
     {
       icon: contractsIcon,
@@ -152,7 +155,7 @@ const AdminDashboard = () => {
         (dashboard?.Contract?.percentage && dashboard?.Contract?.percentage > 0
           ? "+"
           : "") +
-        dashboard?.Contract?.percentage +
+        Math.round(dashboard?.Contract?.percentage! * 100) / 100 +
         "%",
       backgroundColor: "bg-dashboardCard3-gradient",
       chartPointColor: "#FE8D46",
@@ -165,7 +168,7 @@ const AdminDashboard = () => {
       expired:
         dashboard?.Contract?.cancelled +
         ` ${translate("dashboard_detail.cards_status.cancel")}`,
-      route: () => router.push("/contract"),
+      route: () => router.push("/contract?status=None"),
     },
     {
       icon: salesIcon,
@@ -179,7 +182,7 @@ const AdminDashboard = () => {
         (dashboard?.Sales?.percentage && dashboard?.Sales?.percentage > 0
           ? "+"
           : "") +
-        dashboard?.Sales?.percentage +
+        Math.round(dashboard?.Sales?.percentage! * 100) / 100 +
         "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
@@ -192,7 +195,7 @@ const AdminDashboard = () => {
       expired:
         dashboard?.Sales?.paid +
         ` ${translate("dashboard_detail.cards_status.paid")}`,
-      route: () => router.push("/invoices"),
+      route: () => router.push("/invoices?status=None"),
     },
   ];
 

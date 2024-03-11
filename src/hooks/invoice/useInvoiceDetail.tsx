@@ -127,7 +127,7 @@ export default function useInvoiceDetail() {
     setIsSendEmail(!isSendEmail);
   };
   const onSuccess = () => {
-    router.push("/invoice");
+    router.push("/invoice?status=None");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

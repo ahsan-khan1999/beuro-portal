@@ -11,7 +11,7 @@ export const Pagination = React.memo(
     itemsPerPage,
     onPageChange,
     containerClassName,
-    currentPage
+    currentPage,
   }: PaginationProps) => {
     const {
       isFirst,
@@ -21,11 +21,13 @@ export const Pagination = React.memo(
       handlePrevClick,
       handleNextClick,
       handlePageClick,
-    } = usePagination({ totalItems, itemsPerPage, onPageChange,currentPage });
+    } = usePagination({ totalItems, itemsPerPage, onPageChange, currentPage });
+
     const combineContainerClass = combineClasses(
       "flex justify-end gap-x-2",
       containerClassName
     );
+
     return (
       <div className={combineContainerClass}>
         <PaginationItem
