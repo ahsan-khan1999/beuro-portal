@@ -123,8 +123,10 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     const response = await dispatch(
       updateOffer({ data: apiData, router, setError, translate })
     );
-    if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
+
+      if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
   };
+
   return {
     fields,
     onSubmit,

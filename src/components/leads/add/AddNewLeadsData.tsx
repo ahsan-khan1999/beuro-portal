@@ -109,8 +109,9 @@ const AddNewLeadsData = () => {
   };
 
   const routeHandler = () => {
-    onClose();
-    router.push("/leads?status=None");
+    router.pathname = "/leads";
+    router.query = { status: "None", page: "1" };
+    updateQuery(router, router.locale as string);
   };
 
   const leadCreatedHandler = () => {
@@ -125,7 +126,8 @@ const AddNewLeadsData = () => {
 
   const handleImageSlider = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
-    router.pathname = "/leads?status=None";
+    router.pathname = "/leads";
+    router.query = { status: "None", page: "1" };
     updateQuery(router, router.locale as string);
   };
 

@@ -64,7 +64,7 @@ export default function useCustomer() {
     }
 
     setFilter(updatedFilter);
-    console.log(parsedPage, "parsedPage");
+
     if (parsedPage) {
       dispatch(
         readCustomer({
