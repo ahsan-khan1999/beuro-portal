@@ -1289,7 +1289,8 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.customers",
     pathname: "/customers",
     role: [1, 2],
-    query: "None",
+    query: "1",
+    queryName:"page"
   },
   {
     icon: "Customers",
@@ -1303,12 +1304,14 @@ export const sideBar: SideBar[] = [
     pathname: "/leads",
     query: "None",
     role: [1, 2],
+    queryName:"status",
     inner: [
       {
         title: "sidebar.customer.leads.open",
         pathname: "/leads",
         query: "0",
         role: [1, 2],
+        queryName:"status"
       },
       {
         title: "sidebar.customer.leads.InProcess",
@@ -1336,6 +1339,7 @@ export const sideBar: SideBar[] = [
     role: [1, 2],
     pathname: "/offers",
     query: "None",
+    queryName:"status",
     inner: [
       {
         title: "sidebar.customer.offers.open",

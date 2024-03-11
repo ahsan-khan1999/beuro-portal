@@ -168,10 +168,10 @@ export default function useCustomerDetail(stage: boolean) {
     let res = await dispatch(
       updateCustomer({ data, router, setError, translate })
     );
-    if (res?.payload) {
+    if (res.payload) {
       dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
       onClose();
-      (router.pathname = "/customers?status=None"), (router.query = {});
+      router.pathname = "/customers";
       updateQuery(router, router.locale as string);
     } else {
       onClose();
