@@ -16,10 +16,8 @@ export default function useCustomer() {
   );
 
   const { query } = useRouter();
-  const page = query?.page as unknown as number
+  const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-
-
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -58,8 +56,8 @@ export default function useCustomer() {
     const queryParams = searchQuery;
 
     let updatedFilter = {
-      text: ""
-    }
+      text: "",
+    };
 
     if (searchQuery) {
       updatedFilter.text = searchQuery;

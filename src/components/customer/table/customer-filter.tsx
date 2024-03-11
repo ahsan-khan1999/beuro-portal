@@ -1,7 +1,7 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FilterType, FiltersComponentProps } from "@/types";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { useRouter } from "next/router";
@@ -16,10 +16,22 @@ export default function CustomerFilter({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState<string>("");
 
-  // const handleInputChange = (value: string) => {
-  //   setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
-  // };
+  useEffect(() => {
+    const savedInputValue = localStorage.getItem("inputValue");
+    if (savedInputValue) {
+      setInputValue(savedInputValue);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("inputValue", inputValue);
+  }, [inputValue]);
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
 
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
@@ -58,9 +70,9 @@ export default function CustomerFilter({
   return (
     <div className="flex gap-x-4 items-center">
       <InputField
-        handleChange={(value) => {}}
+        handleChange={handleInputChange}
         ref={inputRef}
-        // value={inputValue || ""}
+        value={inputValue}
         iconDisplay={false}
         onEnterPress={onEnterPress}
       />

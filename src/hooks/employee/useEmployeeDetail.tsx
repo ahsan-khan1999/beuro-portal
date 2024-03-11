@@ -19,7 +19,6 @@ import {
   setEmployeeDetails,
   updateEmployee,
 } from "@/api/slices/employee/emplyeeSlice";
-import LinkSendToEmail from "@/base-components/ui/modals1/LinkSendToEmail";
 import { updateQuery } from "@/utils/update-query";
 import { CustomerPromiseActionType } from "@/types/customer";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
@@ -82,7 +81,8 @@ const useEmployeeDetail = (stage: boolean) => {
     setIsUpdate(!isUpdate);
   };
   const handleUpdateSuccess = () => {
-    router.pathname = "/employees?status=None";
+    router.pathname = "/employees";
+    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     onClose();
   };
@@ -112,10 +112,11 @@ const useEmployeeDetail = (stage: boolean) => {
     );
     if (res?.payload) {
       onClose();
-      router.pathname = "/employees?status=None";
+      router.pathname = "/employees";
       updateQuery(router, router.locale as string);
     }
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -180,7 +181,7 @@ const useEmployeeDetail = (stage: boolean) => {
   };
 
   const handlePreviousClick = () => {
-    router.push("/employees?status=None");
+    router.push("/employees");
   };
 
   return {
