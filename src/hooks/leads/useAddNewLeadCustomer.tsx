@@ -11,12 +11,12 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNewCustomerLeadFormField } from "@/components/leads/fields/Add-customer-lead-fields";
 import { generateAddNewLeadCustomerDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   readCustomer,
   setCustomerDetails,
 } from "@/api/slices/customer/customerSlice";
-import { createLead, updateLead } from "@/api/slices/lead/leadSlice";
+import { createLead } from "@/api/slices/lead/leadSlice";
 import { updateQuery } from "@/utils/update-query";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -34,7 +34,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   }, []);
 
   const onCancel = () => {
-    router.pathname = "/leads?status=None";
+    router.pathname = "/leads";
+    router.query = { status: "None", page: "1" };
     updateQuery(router, router.locale as string);
   };
 
@@ -132,6 +133,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       if (res?.payload) onHandleNext(ComponentsType.addressAdd);
     }
   };
+
   return {
     fields,
     onSubmit,

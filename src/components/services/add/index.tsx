@@ -5,14 +5,18 @@ import TabSection from "@/base-components/ui/tab";
 import { Layout } from "@/layout";
 import AddServiceForm from "../fields/add-services-fields";
 import { useTranslation } from "next-i18next";
+import { updateQuery } from "@/utils/update-query";
 type ComponentLookupType = Record<string, JSX.Element>;
 
 const AddService = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<string>("Service Details");
+
   const handleCancel = () => {
-    router.push("/services");
+    router.pathname = "/services";
+    router.query = { page: "1" };
+    updateQuery(router, router.locale as string);
   };
 
   const tabSection: tabArrayTypes[] = [

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     marginBottom: 2,
-    fontSize: 7,
+    // fontSize: 7,
   },
   description: {
     fontSize: 7,
@@ -81,32 +81,32 @@ const stylesheet: HtmlStyles = {
   h1: {
     margin: 0,
     padding: 0,
-    fontSize: 7,
+    // fontSize: 7,
   },
   h2: {
     margin: 0,
     padding: 0,
-    fontSize: 7,
+    // fontSize: 7,
   },
   h3: {
     margin: 0,
     padding: 0,
-    fontSize: 7,
+    // fontSize: 7,
   },
   h4: {
     margin: 0,
     padding: 0,
-    fontSize: 7,
+    // fontSize: 7,
   },
   h5: {
     margin: 0,
     padding: 0,
-    fontSize: 7,
+    // fontSize: 7,
   },
   h6: {
     margin: 0,
     padding: 0,
-    fontSize: 7,
+    // fontSize: 7,
   },
   ul: { marginLeft: 0 ,
     marginTop:6,
@@ -134,7 +134,7 @@ const stylesheet: HtmlStyles = {
     },
   },
   strong: {
-    fontSize: 7,
+    // fontSize: 7,
     fontWeight: 700,
     fontStyle: "bold",
   },
@@ -168,7 +168,7 @@ export const AdditionalDetails = ({
           stylesheet={stylesheet}
           style={{ fontFamily: "Poppins" }}
         >
-          {replaceClassesWithInlineStyles(description ?? "")}
+          {description ?? ""}
         </Html>
       </View>
     </View>

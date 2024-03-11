@@ -1,8 +1,6 @@
-import { ContentTableRowTypes } from "@/types/content";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { setServiceDetails } from "@/api/slices/service/serviceSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
 import {
   deleteContent,
