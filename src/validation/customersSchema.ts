@@ -10,7 +10,7 @@ export const generateCustomerValidation = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [CustomerDetailsFields.gender]: yup
-      .string()
+      .number()
       .required(translate("validationMessages.required")),
     [CustomerDetailsFields.companyName]: yup.string().when("customerType", {
       is: (customerType: string) => customerType === "company",

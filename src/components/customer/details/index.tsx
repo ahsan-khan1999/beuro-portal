@@ -22,6 +22,8 @@ const CustomerDetails = () => {
     loading,
   } = useCustomerDetail(true);
 
+  console.log(customerDetail);
+
   return (
     <Layout>
       <DetailsCard>

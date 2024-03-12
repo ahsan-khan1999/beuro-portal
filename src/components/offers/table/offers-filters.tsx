@@ -4,7 +4,7 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import OfferFilter from "@/base-components/filter/offer-filter";
@@ -19,6 +19,8 @@ export default function OffersFilters({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const [inputValue, setInputValue] = useState<string>("");
 
   const checkbox: CheckBoxType[] = [
     {
@@ -88,10 +90,6 @@ export default function OffersFilters({
     });
   };
 
-  const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
-  };
-
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -100,7 +98,16 @@ export default function OffersFilters({
     });
   };
 
-  const handlePressEnter = () => {
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
+
+  const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
 
     router.push(
@@ -112,12 +119,13 @@ export default function OffersFilters({
         },
       },
       undefined,
-      { shallow: true }
+      { shallow: false }
     );
 
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
@@ -144,10 +152,11 @@ export default function OffersFilters({
       </div>
       <div className="flex gap-[14px] items-center">
         <InputField
-          handleChange={(value) => {}}
-          // value={filter?.text || ""}
-          onEnterPress={handlePressEnter}
+          handleChange={handleInputChange}
           ref={inputRef}
+          value={inputValue}
+          iconDisplay={false}
+          onEnterPress={onEnterPress}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

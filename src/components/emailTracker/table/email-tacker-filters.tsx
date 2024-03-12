@@ -4,7 +4,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function EmailTrackerFilters({
   filter,
@@ -15,19 +15,27 @@ export default function EmailTrackerFilters({
   const { t: translate } = useTranslation();
   const router = useRouter();
 
+  const [inputValue, setInputValue] = useState<string>("");
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
+    setInputValue(value);
   };
 
-  const hanldeSortChange = (value: string) => {
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["sort"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
+  // const hanldeSortChange = (value: string) => {
+  //   setFilter((prev: FilterType) => {
+  //     const updatedFilter = { ...prev, ["sort"]: value };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
 
-  const handleEnterPress = () => {
+  const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
 
     router.push(
@@ -53,15 +61,35 @@ export default function EmailTrackerFilters({
     });
   };
 
+  const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["sort"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
     <div className="flex">
       <div className="flex items-center space-x-4">
         <InputField
-          handleChange={(value) => {}}
-          // value={filter?.text}
-          iconDisplay={true}
-          onEnterPress={handleEnterPress}
+          handleChange={handleInputChange}
           ref={inputRef}
+          value={inputValue}
+          iconDisplay={false}
+          onEnterPress={onEnterPress}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

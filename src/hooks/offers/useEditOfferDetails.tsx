@@ -58,8 +58,10 @@ export const useEditOfferDetails = ({
 
   const onCancel = () => {
     router.pathname = "/offers";
+    router.query = { status: "None", page: "1" };
     updateQuery(router, router.locale as string);
   };
+
   const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,
@@ -73,6 +75,8 @@ export const useEditOfferDetails = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  
   useEffect(() => {
     if (offer) {
       dispatch(readOfferDetails({ params: { filter: offer } })).then(

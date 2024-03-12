@@ -5,7 +5,7 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { staticEnums } from "@/utils/static";
@@ -19,25 +19,7 @@ export default function LeadsFilter({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const checkbox: CheckBoxType[] = [
-    {
-      label: translate("leads.table_functions.open"),
-      type: `${staticEnums.LeadStatus.Open}`,
-    },
-    {
-      label: translate("leads.table_functions.inProcess"),
-      type: `${staticEnums.LeadStatus.InProcess}`,
-    },
-    {
-      label: translate("leads.table_functions.close"),
-      type: `${staticEnums.LeadStatus.Close}`,
-    },
-    {
-      label: translate("leads.table_functions.expire"),
-      type: `${staticEnums.LeadStatus.Expired}`,
-    },
-  ];
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
@@ -91,10 +73,6 @@ export default function LeadsFilter({
     });
   };
 
-  const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
-  };
-
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -103,8 +81,38 @@ export default function LeadsFilter({
     });
   };
 
-  const handlePressEnter = () => {
+  const checkbox: CheckBoxType[] = [
+    {
+      label: translate("leads.table_functions.open"),
+      type: `${staticEnums.LeadStatus.Open}`,
+    },
+    {
+      label: translate("leads.table_functions.inProcess"),
+      type: `${staticEnums.LeadStatus.InProcess}`,
+    },
+    {
+      label: translate("leads.table_functions.close"),
+      type: `${staticEnums.LeadStatus.Close}`,
+    },
+    {
+      label: translate("leads.table_functions.expire"),
+      type: `${staticEnums.LeadStatus.Expired}`,
+    },
+  ];
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
+
+  const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
     router.push(
       {
         pathname: router.pathname,
@@ -114,7 +122,7 @@ export default function LeadsFilter({
         },
       },
       undefined,
-      { shallow: true }
+      { shallow: false }
     );
 
     if (inputValue === "") {
@@ -147,10 +155,11 @@ export default function LeadsFilter({
       </div>
       <div className="flex flex-col lg:flex-row lg:items-center gap-4">
         <InputField
-          handleChange={(value) => {}}
-          // value={filter.text}
-          onEnterPress={handlePressEnter}
+          handleChange={handleInputChange}
           ref={inputRef}
+          value={inputValue}
+          iconDisplay={false}
+          onEnterPress={onEnterPress}
         />
         <div className="flex items-center gap-4">
           <SelectField

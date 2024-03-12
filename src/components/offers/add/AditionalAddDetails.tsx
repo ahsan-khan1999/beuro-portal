@@ -4,6 +4,7 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import { ComponentsType } from "./AddOffersDetailsData";
+import { updateQuery } from "@/utils/update-query";
 
 const AditionalAddDetails = ({
   onHandleNext,
@@ -24,6 +25,13 @@ const AditionalAddDetails = ({
     translate,
     offerDetails,
   } = useOfferAditionalDetails(onHandleNext, onHandleBack);
+
+  const handleCancel = () => {
+    router.pathname = "/offers";
+    router.query = { status: "None", page: "1" };
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10">
@@ -32,7 +40,7 @@ const AditionalAddDetails = ({
           {offerDetails?.id && offerDetails?.offerNumber}
         </h2>
         <button
-          onClick={() => router.push("/offers")}
+          onClick={handleCancel}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full"
         >
           {translate("offers.additional_details.cancel_button")}

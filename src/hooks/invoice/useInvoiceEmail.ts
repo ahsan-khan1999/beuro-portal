@@ -151,7 +151,7 @@ export const useInvoiceEmail = (
   const onSuccess = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
     router.push({
-      pathname: "/invoices?status=None/details",
+      pathname: "/invoices/details",
       query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
     });
   };

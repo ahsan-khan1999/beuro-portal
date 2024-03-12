@@ -10,7 +10,6 @@ const LinkSendToEmail = ({
   onClose,
   createNewPswHandler,
 }: LinkSendToEmailModal) => {
-
   const { t: translate } = useTranslation();
   return (
     <>
@@ -27,7 +26,7 @@ const LinkSendToEmail = ({
           <p className="text-[#000] font-medium text-[24px] leading-7 text-center mb-[13px]">
             {translate("employees.link_send_modal.main_heading")}
           </p>
-          <p className="text-[#1E1E1E] text-sm font-normal text-center ">
+          <p className="text-[#1E1E1E] text-sm font-normal flex items-center justify-center text-center px-6">
             {translate("employees.link_send_modal.sub_heading")}
           </p>
 

@@ -28,6 +28,7 @@ const EditOffersDetailsData = () => {
   const [tabType, setTabType] = useState<ComponentsType>(
     offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded
   );
+
   useEffect(() => {
     setTabType(
       offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded

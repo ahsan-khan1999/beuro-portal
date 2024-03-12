@@ -6,7 +6,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { Lead } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { FilterType } from "@/types";
 import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
@@ -26,17 +26,8 @@ const useLeads = () => {
   );
 
   const { query } = useRouter();
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    if (query && query.page) {
-      const parsedPage = parseInt(query.page as string, 10);
-      if (!isNaN(parsedPage)) {
-        setCurrentPage(parsedPage);
-      }
-    }
-  }, [query]);
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { t: translate } = useTranslation();
@@ -203,6 +194,15 @@ const useLeads = () => {
   };
 
   useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
 
@@ -234,7 +234,7 @@ const useLeads = () => {
         readLead({
           params: {
             filter: updatedFilter,
-            page: currentPage,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })
@@ -243,46 +243,6 @@ const useLeads = () => {
       });
     }
   }, [query]);
-
-  // useEffect(() => {
-  //   const queryStatus = query?.status;
-  //   const searchQuery = query?.text as string;
-  //   console.log(searchQuery);
-
-  //   const queryParams = queryStatus || searchQuery;
-
-  //   if (queryParams !== undefined) {
-  //     const filteredStatus =
-  //       query?.status === "None"
-  //         ? "None"
-  //         : queryParams
-  //             .toString()
-  //             .split(",")
-  //             .filter((item) => item !== "None");
-
-  //     setFilter({
-  //       ...filter,
-  //       status: filteredStatus,
-  //       text: searchQuery,
-  //     });
-
-  //     dispatch(
-  //       readLead({
-  //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: filteredStatus,
-  //             text: searchQuery,
-  //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-  //     });
-  //   }
-  // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

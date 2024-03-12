@@ -36,53 +36,42 @@ const useService = () => {
   const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
   const { t: translate } = useTranslation();
   const { query } = useRouter();
-  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  useEffect(() => {
-    if (query && query.page) {
-      const parsedPage = parseInt(query.page as string, 10);
-      if (!isNaN(parsedPage)) {
-        setCurrentPage(parsedPage);
-      }
-    }
-  }, [query]);
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
   useEffect(() => {
-    const queryStatus = query?.status;
+    const parsedPage = parseInt(query.page as string, 10);
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    }
+
     const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
 
-    const queryParams = queryStatus || searchQuery;
+    const queryParams = searchQuery || sortedValue;
 
-    if (queryParams !== undefined) {
-      const filteredStatus =
-        query?.status === "None"
-          ? "None"
-          : queryParams
-              .toString()
-              .split(",")
-              .filter((item) => item !== "None");
+    let updatedFilter = {
+      text: "",
+      sort: "",
+    };
 
-      let updatedFilter: {
-        status: string | string[];
-        text?: string;
-      } = {
-        status: filteredStatus,
-      };
+    if (searchQuery || sortedValue) {
+      updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
+    }
 
-      if (searchQuery) {
-        updatedFilter.text = searchQuery;
-      }
+    setFilter(updatedFilter);
 
-      setFilter(updatedFilter);
-
+    if (parsedPage) {
       dispatch(
         readService({
           params: {
-            filter: updatedFilter,
-            page: currentPage,
+            filter: queryParams ? updatedFilter : {},
+            page: Number(parsedPage) || currentPage,
             size: 10,
           },
         })
@@ -93,37 +82,38 @@ const useService = () => {
   }, [query]);
 
   // useEffect(() => {
-  //   const queryStatus = query?.status;
+  //   const parsedPage = parseInt(query.page as string, 10);
+  //   if (!isNaN(parsedPage)) {
+  //     setCurrentPage(parsedPage);
+  //   }
   //   const searchQuery = query?.text as string;
 
-  //   const queryParams = queryStatus || searchQuery;
+  //   const queryParams = searchQuery;
 
-  //   if (queryParams !== undefined) {
-  //     setFilter({
-  //       ...filter,
-  //       status: queryStatus,
-  //       text: searchQuery,
-  //     });
+  //   let updatedFilter = {
+  //     text: "",
+  //   };
 
+  //   if (searchQuery) {
+  //     updatedFilter.text = searchQuery;
+  //   }
+
+  //   setFilter(updatedFilter);
+  //   console.log(parsedPage, "parsedPage");
+  //   if (parsedPage) {
   //     dispatch(
   //       readService({
   //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: queryStatus,
-  //             text: searchQuery,
-  //           },
-  //           page: currentPage,
+  //           filter: queryParams ? updatedFilter : {},
+  //           page: Number(parsedPage) || currentPage,
   //           size: 10,
   //         },
   //       })
-  //     ).then((res: any) => {
-  //       if (res?.payload) {
-  //         setCurrentPageRows(res?.payload?.Service);
-  //       }
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Service);
   //     });
   //   }
-  // }, [currentPage, query]);
+  // }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

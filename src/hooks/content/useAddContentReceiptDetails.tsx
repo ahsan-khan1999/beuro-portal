@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
+import { updateQuery } from "@/utils/update-query";
 
 export const useAddContentReceiptDetails = (
   onHandleBack: Function,
@@ -43,9 +44,13 @@ export const useAddContentReceiptDetails = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const handleSuccess = () => {
-    router.push("/content?status=None");
+
+  const changeRouterHandler = () => {
+    router.pathname = "/content";
+    router.query = { page: "1" };
+    updateQuery(router, router.locale as string);
   };
+
   useEffect(() => {
     if (contentDetails.id) {
       reset({
@@ -90,6 +95,7 @@ export const useAddContentReceiptDetails = (
     );
     if (res?.payload) onHandleNext();
   };
+
   return {
     fields,
     onSubmit,

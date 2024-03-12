@@ -1,7 +1,7 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FilterType, FiltersComponentProps } from "@/types";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
@@ -18,19 +18,20 @@ export default function EmployeesFilters({
   const { t: translate } = useTranslation();
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState<string>("");
+  // const [selectedSortLabel, setSelectedSortLabel] = useState<string>("");
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
 
   const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
-  };
-  const hanldeSortChange = (value: string) => {
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["sort"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
+    setInputValue(value);
   };
 
-  const handleEnterPress = () => {
+  const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
 
     router.push(
@@ -56,18 +57,59 @@ export default function EmployeesFilters({
     });
   };
 
+  // useEffect(() => {
+  //   const sortOption = router.query.sort;
+  //   if (typeof sortOption === "string") {
+  //     const selectedLabel = getSelectedSortLabel(sortOption);
+  //     setSelectedSortLabel(selectedLabel);
+  //   }
+  // }, [router.query.sort]);
+
+  // const getSelectedSortLabel = (value: string): string => {
+  //   switch (value) {
+  //     case "createdAt":
+  //       return translate("filters.sort_by.date");
+  //     case "-createdAt":
+  //       return translate("filters.sort_by.latest");
+  //     case "fullName":
+  //       return translate("filters.sort_by.a_z");
+  //     default:
+  //       return "";
+  //   }
+  // };
+
+  const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["sort"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
     <div className="flex items-center space-x-4">
       <InputField
-        handleChange={(value) => {}}
-        // value={filter.text}
-        iconDisplay={true}
+        handleChange={handleInputChange}
         ref={inputRef}
-        onEnterPress={handleEnterPress}
+        value={inputValue}
+        iconDisplay={false}
+        onEnterPress={onEnterPress}
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value=""
+        value={filter?.sort || ""}
         dropDownIconClassName=""
         options={[
           { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },
