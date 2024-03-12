@@ -28,17 +28,8 @@ const useEmployee = () => {
   const { t: translate } = useTranslation();
 
   const { query } = useRouter();
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    if (query && query.page) {
-      const parsedPage = parseInt(query.page as string, 10);
-      if (!isNaN(parsedPage)) {
-        setCurrentPage(parsedPage);
-      }
-    }
-  }, [query]);
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -56,38 +47,30 @@ const useEmployee = () => {
   };
 
   useEffect(() => {
-    const queryStatus = query?.status;
+    const parsedPage = parseInt(query.page as string, 10);
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    }
     const searchQuery = query?.text as string;
 
-    const queryParams = queryStatus || searchQuery;
+    const queryParams = searchQuery;
 
-    if (queryParams !== undefined) {
-      const filteredStatus =
-        query?.status === "None"
-          ? "None"
-          : queryParams
-              .toString()
-              .split(",")
-              .filter((item) => item !== "None");
+    let updatedFilter = {
+      text: "",
+    };
 
-      let updatedFilter: {
-        status: string | string[];
-        text?: string;
-      } = {
-        status: filteredStatus,
-      };
+    if (searchQuery) {
+      updatedFilter.text = searchQuery;
+    }
 
-      if (searchQuery) {
-        updatedFilter.text = searchQuery;
-      }
-
-      setFilter(updatedFilter);
-
+    setFilter(updatedFilter);
+    console.log(parsedPage, "parsedPage");
+    if (parsedPage) {
       dispatch(
         readEmployee({
           params: {
-            filter: updatedFilter,
-            page: currentPage,
+            filter: queryParams ? updatedFilter : {},
+            page: Number(parsedPage) || currentPage,
             size: 10,
           },
         })
@@ -96,39 +79,6 @@ const useEmployee = () => {
       });
     }
   }, [query]);
-
-  // useEffect(() => {
-  //   const queryStatus = query?.status;
-  //   const searchQuery = query?.text as string;
-
-  //   const queryParams = queryStatus || searchQuery;
-
-  //   if (queryParams !== undefined) {
-  //     setFilter({
-  //       ...filter,
-  //       status: queryStatus,
-  //       text: searchQuery,
-  //     });
-
-  //     dispatch(
-  //       readEmployee({
-  //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: queryStatus,
-  //             text: searchQuery,
-  //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((res: any) => {
-  //       if (res?.payload) {
-  //         setCurrentPageRows(res?.payload?.Employee);
-  //       }
-  //     });
-  //   }
-  // }, [currentPage, query]);
 
   return {
     currentPageRows,

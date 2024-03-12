@@ -19,8 +19,12 @@ const AddEmployeeDetails = () => {
   const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<string>("Employee Details");
   const router = useRouter();
+
   const handleCancel = () => {
-    router.push("/employees");
+    router.pathname = "/employees";
+    router.query = { page: "1" };
+    updateQuery(router, router.locale as string);
+    onClose();
   };
 
   const tabSection: tabArrayTypes[] = [
@@ -47,8 +51,10 @@ const AddEmployeeDetails = () => {
   const linkSendHandler = () => {
     dispatch(updateModalType(ModalType.LINK_SEND_TO_EMAIL));
   };
+
   const createRouteChange = () => {
     router.pathname = "/employees";
+    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

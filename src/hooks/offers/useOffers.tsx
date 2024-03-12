@@ -40,20 +40,13 @@ const useOffers = () => {
 
   const { query } = useRouter();
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    if (query && query.page) {
-      const parsedPage = parseInt(query.page as string, 10);
-      if (!isNaN(parsedPage)) {
-        setCurrentPage(parsedPage);
-      }
-    }
-  }, [query]);
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
     []
   );
+
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -285,6 +278,11 @@ const useOffers = () => {
   };
 
   useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    }
+
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
 
@@ -315,8 +313,8 @@ const useOffers = () => {
       dispatch(
         readOffer({
           params: {
-            filter: updatedFilter,
-            page: currentPage,
+            filter: queryParams ? updatedFilter : {},
+            page: Number(parsedPage) || currentPage,
             size: 10,
           },
         })
@@ -325,45 +323,6 @@ const useOffers = () => {
       });
     }
   }, [query]);
-
-  // useEffect(() => {
-  //   const queryStatus = query?.status;
-  //   const searchQuery = query?.text as string;
-
-  //   const queryParams = queryStatus || searchQuery;
-
-  //   if (queryParams !== undefined) {
-  //     const filteredStatus =
-  //       query?.status === "None"
-  //         ? "None"
-  //         : queryParams
-  //             .toString()
-  //             .split(",")
-  //             .filter((item) => item !== "None");
-
-  //     setFilter({
-  //       ...filter,
-  //       status: filteredStatus,
-  //       text: searchQuery,
-  //     });
-
-  //     dispatch(
-  //       readOffer({
-  //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: filteredStatus,
-  //             text: searchQuery,
-  //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Offer);
-  //     });
-  //   }
-  // }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

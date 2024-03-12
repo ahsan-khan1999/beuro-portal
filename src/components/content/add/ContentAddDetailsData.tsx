@@ -12,7 +12,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import { smoothScrollToSection } from "@/utils/utility";
+import { updateQuery } from "@/utils/update-query";
 
 export enum ComponentsType {
   addOffer,
@@ -28,6 +28,7 @@ const ContentAddDetailsData = () => {
   const [tabType, setTabType] = useState<number>(
     (contentDetails?.id && contentDetails?.stage) || ComponentsType.addOffer
   );
+
   useEffect(() => {
     setTabType(
       (contentDetails?.id && contentDetails?.stage) || ComponentsType.addOffer
@@ -40,12 +41,14 @@ const ContentAddDetailsData = () => {
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
+
   const onCloseRoute = () => {
-    router.push("/content");
+    router.pathname = "/content";
+    router.query = { page: "1" };
+    updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  // Function for handling the modal for exiting notes
   const handleContentCreated = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -54,8 +57,9 @@ const ContentAddDetailsData = () => {
 
   const route = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
-
-    router.push("/content");
+    router.pathname = "/content";
+    router.query = { page: "1" };
+    updateQuery(router, router.locale as string);
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -97,10 +101,10 @@ const ContentAddDetailsData = () => {
       <AddInoviceContentDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addReceiptContent]: (
-      <AddReceiptContentDetails 
-      onHandleBack={onHandleBack}
-      
-      onHandleNext={handleNextTab} />
+      <AddReceiptContentDetails
+        onHandleBack={onHandleBack}
+        onHandleNext={handleNextTab}
+      />
     ),
   };
 
@@ -191,10 +195,7 @@ const ContentAddDetailsData = () => {
           ))}
         </div>
       </div>
-      <div
-        className="w-full break-all xLarge:mt-[145px] flex"
-        ref={ref}
-      >
+      <div className="w-full break-all xLarge:mt-[145px] flex" ref={ref}>
         <div className="max-w-[300px] w-full hidden xLarge:block"></div>
         {componentsLookUp[tabType as keyof typeof componentsLookUp]}
       </div>

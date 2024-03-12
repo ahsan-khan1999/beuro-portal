@@ -45,9 +45,11 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
 
   const onCancel = () => {
-    router.pathname = "/offers?status=None";
+    router.pathname = "/offers";
+    router.query = { status: "None", page: "1" };
     updateQuery(router, router.locale as string);
   };
+
   const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,

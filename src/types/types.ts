@@ -46,6 +46,7 @@ export interface SideBar {
   title: string;
   pathname?: string;
   query?: string;
+  queryName: string;
   role: number[];
   inner?: SideBar[];
   className?: string;

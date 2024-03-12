@@ -3,6 +3,7 @@ import { useAddOfferDetails } from "@/hooks/offers/useAddOfferDetails";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { updateQuery } from "@/utils/update-query";
 
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
@@ -17,6 +18,13 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
     translate,
     offerDetails,
   } = useAddOfferDetails(onHandleNext);
+
+  const handleCancel = () => {
+    router.pathname = "/offers";
+    router.query = { status: "None", page: "1" };
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <FormCard>
       <div
@@ -24,10 +32,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
         id={translate("offers.tabs_heading.offer")}
       >
         <div className="flex items-center gap-x-[26px]">
-          <span
-            className="cursor-pointer"
-            onClick={() => router.push("/offers")}
-          >
+          <span className="cursor-pointer" onClick={handleCancel}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
@@ -56,7 +61,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
           </p>
         </div>
         <button
-          onClick={() => router.push("/offers")}
+          onClick={handleCancel}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full"
         >
           {translate("offers.offer_details.cancel_button")}
