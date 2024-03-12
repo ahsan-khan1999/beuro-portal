@@ -22,7 +22,6 @@ export default function useCustomer() {
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
-    // type: FiltersDefaultValues.None,
   });
 
   const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customer);
@@ -37,13 +36,6 @@ export default function useCustomer() {
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
-    // dispatch(
-    //   readCustomer({ params: { filter: query, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Customer);
-    //   }
-    // });
   };
 
   useEffect(() => {
@@ -51,16 +43,20 @@ export default function useCustomer() {
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
     }
-    const searchQuery = query?.text as string;
 
-    const queryParams = searchQuery;
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+
+    const queryParams = searchQuery || sortedValue;
 
     let updatedFilter = {
       text: "",
+      sort: "",
     };
 
-    if (searchQuery) {
+    if (searchQuery || sortedValue) {
       updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
     }
 
     setFilter(updatedFilter);
@@ -79,39 +75,6 @@ export default function useCustomer() {
       });
     }
   }, [query]);
-
-  // useEffect(() => {
-  //   const queryStatus = query?.status;
-  //   const searchQuery = query?.text as string;
-
-  //   const queryParams = queryStatus || searchQuery;
-
-  //   if (queryParams !== undefined) {
-  //     setFilter({
-  //       ...filter,
-  //       status: queryStatus,
-  //       text: searchQuery,
-  //     });
-
-  //     dispatch(
-  //       readCustomer({
-  //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: queryStatus,
-  //             text: searchQuery,
-  //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((res: any) => {
-  //       if (res?.payload) {
-  //         setCurrentPageRows(res?.payload?.Customer);
-  //       }
-  //     });
-  //   }
-  // }, [currentPage, query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

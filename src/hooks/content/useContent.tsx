@@ -65,20 +65,24 @@ const useContent = () => {
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
     }
-    const searchQuery = query?.text as string;
 
-    const queryParams = searchQuery;
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+
+    const queryParams = searchQuery || sortedValue;
 
     let updatedFilter = {
       text: "",
+      sort: "",
     };
 
-    if (searchQuery) {
+    if (searchQuery || sortedValue) {
       updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
     }
 
     setFilter(updatedFilter);
-    console.log(parsedPage, "parsedPage");
+
     if (parsedPage) {
       dispatch(
         readContent({
@@ -93,6 +97,40 @@ const useContent = () => {
       });
     }
   }, [query]);
+
+  // useEffect(() => {
+  //   const parsedPage = parseInt(query.page as string, 10);
+  //   if (!isNaN(parsedPage)) {
+  //     setCurrentPage(parsedPage);
+  //   }
+  //   const searchQuery = query?.text as string;
+
+  //   const queryParams = searchQuery;
+
+  //   let updatedFilter = {
+  //     text: "",
+  //   };
+
+  //   if (searchQuery) {
+  //     updatedFilter.text = searchQuery;
+  //   }
+
+  //   setFilter(updatedFilter);
+  //   console.log(parsedPage, "parsedPage");
+  //   if (parsedPage) {
+  //     dispatch(
+  //       readContent({
+  //         params: {
+  //           filter: queryParams ? updatedFilter : {},
+  //           page: Number(parsedPage) || currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Content);
+  //     });
+  //   }
+  // }, [query]);
 
   return {
     currentPageRows,

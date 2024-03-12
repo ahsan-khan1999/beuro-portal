@@ -19,6 +19,7 @@ export default function EmployeesFilters({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
+  // const [selectedSortLabel, setSelectedSortLabel] = useState<string>("");
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -28,14 +29,6 @@ export default function EmployeesFilters({
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
-  };
-
-  const hanldeSortChange = (value: string) => {
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["sort"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
   };
 
   const onEnterPress = () => {
@@ -64,6 +57,47 @@ export default function EmployeesFilters({
     });
   };
 
+  // useEffect(() => {
+  //   const sortOption = router.query.sort;
+  //   if (typeof sortOption === "string") {
+  //     const selectedLabel = getSelectedSortLabel(sortOption);
+  //     setSelectedSortLabel(selectedLabel);
+  //   }
+  // }, [router.query.sort]);
+
+  // const getSelectedSortLabel = (value: string): string => {
+  //   switch (value) {
+  //     case "createdAt":
+  //       return translate("filters.sort_by.date");
+  //     case "-createdAt":
+  //       return translate("filters.sort_by.latest");
+  //     case "fullName":
+  //       return translate("filters.sort_by.a_z");
+  //     default:
+  //       return "";
+  //   }
+  // };
+
+  const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["sort"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
     <div className="flex items-center space-x-4">
       <InputField
@@ -75,7 +109,7 @@ export default function EmployeesFilters({
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value=""
+        value={filter?.sort || ""}
         dropDownIconClassName=""
         options={[
           { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },

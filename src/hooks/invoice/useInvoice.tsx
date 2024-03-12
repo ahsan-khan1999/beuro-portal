@@ -30,16 +30,8 @@ const useInvoice = () => {
 
   const { query } = useRouter();
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    if (query && query.page) {
-      const parsedPage = parseInt(query.page as string, 10);
-      if (!isNaN(parsedPage)) {
-        setCurrentPage(parsedPage);
-      }
-    }
-  }, [query]);
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -47,6 +39,7 @@ const useInvoice = () => {
     email: FiltersDefaultValues.None,
     status: FiltersDefaultValues.None,
   });
+
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
@@ -173,7 +166,33 @@ const useInvoice = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleSendEmail = async () => {
+    setIsSendEmail(!isSendEmail);
+  };
+
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: invoiceDetails?.id,
+    };
+    const response = await dispatch(sendOfferByPost({ data: apiData }));
+    if (response?.payload) invoiceCreatedHandler();
+  };
+
   useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
 
@@ -205,7 +224,7 @@ const useInvoice = () => {
         readInvoice({
           params: {
             filter: updatedFilter,
-            page: currentPage,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })
@@ -214,62 +233,6 @@ const useInvoice = () => {
       });
     }
   }, [query]);
-
-  // useEffect(() => {
-  //   const queryStatus = query?.status;
-  //   const searchQuery = query?.text as string;
-
-  //   const queryParams = queryStatus || searchQuery;
-
-  //   if (queryParams !== undefined) {
-  //     const filteredStatus =
-  //       query?.status === "None"
-  //         ? "None"
-  //         : queryParams
-  //             .toString()
-  //             .split(",")
-  //             .filter((item) => item !== "None");
-
-  //     setFilter({
-  //       ...filter,
-  //       status: filteredStatus,
-  //       text: searchQuery,
-  //     });
-
-  //     dispatch(
-  //       readInvoice({
-  //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: filteredStatus,
-  //             text: searchQuery,
-  //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-  //     });
-  //   }
-  // }, [currentPage, query]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleSendEmail = async () => {
-    setIsSendEmail(!isSendEmail);
-  };
-
-  const handleSendByPost = async () => {
-    const apiData = {
-      emailStatus: 2,
-      id: invoiceDetails?.id,
-    };
-    const response = await dispatch(sendOfferByPost({ data: apiData }));
-    if (response?.payload) invoiceCreatedHandler();
-  };
 
   return {
     currentPageRows,

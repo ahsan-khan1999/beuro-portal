@@ -22,21 +22,6 @@ export default function OffersFilters({
 
   const [inputValue, setInputValue] = useState<string>("");
 
-  useEffect(() => {
-    const savedInputValue = localStorage.getItem("inputValue");
-    if (savedInputValue) {
-      setInputValue(savedInputValue);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("inputValue", inputValue);
-  }, [inputValue]);
-
-  const handleInputChange = (value: string) => {
-    setInputValue(value);
-  };
-
   const checkbox: CheckBoxType[] = [
     {
       label: translate("offers.table_functions.open"),
@@ -111,6 +96,15 @@ export default function OffersFilters({
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
+  };
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
   };
 
   const onEnterPress = () => {

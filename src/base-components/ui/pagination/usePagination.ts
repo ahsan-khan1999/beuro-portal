@@ -1,6 +1,6 @@
 import { UsePaginationProps } from "@/types";
 import { useRouter } from "next/router";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 
 const PAGE_LIMIT = 5;
 export const dots = "•••";
@@ -67,6 +67,7 @@ export const usePagination = ({
     ),
     totalPages,
   ];
+
   const uniquePagesToShow = [...new Set(pagesToShow)];
 
   return {

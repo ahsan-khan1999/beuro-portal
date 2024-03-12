@@ -6,7 +6,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { Lead } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { FilterType } from "@/types";
 import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
@@ -195,8 +195,12 @@ const useLeads = () => {
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
     }
 
     const queryStatus = query?.status;
@@ -230,7 +234,7 @@ const useLeads = () => {
         readLead({
           params: {
             filter: updatedFilter,
-            page: Number(parsedPage) || currentPage,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })

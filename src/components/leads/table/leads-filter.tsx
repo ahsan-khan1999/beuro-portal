@@ -19,42 +19,7 @@ export default function LeadsFilter({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [inputValue, setInputValue] = useState<string>("");
-
-  const checkbox: CheckBoxType[] = [
-    {
-      label: translate("leads.table_functions.open"),
-      type: `${staticEnums.LeadStatus.Open}`,
-    },
-    {
-      label: translate("leads.table_functions.inProcess"),
-      type: `${staticEnums.LeadStatus.InProcess}`,
-    },
-    {
-      label: translate("leads.table_functions.close"),
-      type: `${staticEnums.LeadStatus.Close}`,
-    },
-    {
-      label: translate("leads.table_functions.expire"),
-      type: `${staticEnums.LeadStatus.Expired}`,
-    },
-  ];
-
-  useEffect(() => {
-    const savedInputValue = localStorage.getItem("inputValue");
-    if (savedInputValue) {
-      setInputValue(savedInputValue);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("inputValue", inputValue);
-  }, [inputValue]);
-
-  const handleInputChange = (value: string) => {
-    setInputValue(value);
-  };
 
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
@@ -114,6 +79,35 @@ export default function LeadsFilter({
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
+  };
+
+  const checkbox: CheckBoxType[] = [
+    {
+      label: translate("leads.table_functions.open"),
+      type: `${staticEnums.LeadStatus.Open}`,
+    },
+    {
+      label: translate("leads.table_functions.inProcess"),
+      type: `${staticEnums.LeadStatus.InProcess}`,
+    },
+    {
+      label: translate("leads.table_functions.close"),
+      type: `${staticEnums.LeadStatus.Close}`,
+    },
+    {
+      label: translate("leads.table_functions.expire"),
+      type: `${staticEnums.LeadStatus.Expired}`,
+    },
+  ];
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
   };
 
   const onEnterPress = () => {

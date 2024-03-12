@@ -69,7 +69,10 @@ export const useInoviceEditAdditionalDetails = ({
     const filteredContent = content?.find((item) => item.id === id);
     if (filteredContent) {
       dispatch(setContentDetails(filteredContent));
-      setValue("additionalDetails", filteredContent?.invoiceContent?.description);
+      setValue(
+        "additionalDetails",
+        filteredContent?.invoiceContent?.description
+      );
       trigger("additionalDetails");
     }
   };
@@ -109,6 +112,6 @@ export const useInoviceEditAdditionalDetails = ({
     errors,
     error,
     translate,
-    invoiceDetails
+    invoiceDetails,
   };
 };
