@@ -36,9 +36,16 @@ import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsDa
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { generateInvoiceDetailsValidationSchema } from "@/validation/invoiceSchema";
-import { createInvoiceDetial, readInvoiceDetails, setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
+import {
+  createInvoiceDetial,
+  readInvoiceDetails,
+  setInvoiceDetails,
+} from "@/api/slices/invoice/invoiceSlice";
 import { AddInvoiceDetailsFormField } from "@/components/invoice/edit/fields/add-offer-details-fields";
-import { InvoiceDetailTableRowTypes, InvoiceTableRowTypes } from "@/types/invoice";
+import {
+  InvoiceDetailTableRowTypes,
+  InvoiceTableRowTypes,
+} from "@/types/invoice";
 
 export const useEditInvoiceDetails = ({
   handleNext,
@@ -49,7 +56,6 @@ export const useEditInvoiceDetails = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { invoice } = router.query;
-
 
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
@@ -104,9 +110,6 @@ export const useEditInvoiceDetails = ({
             gender: staticEnums["Gender"][res?.payload?.customerDetail?.gender],
             time: res?.payload?.time,
             companyName: res?.payload?.customerDetail?.companyName,
-
-
-
           });
         }
       );
@@ -148,13 +151,12 @@ export const useEditInvoiceDetails = ({
         content: invoiceDetails?.content?.id,
         gender: null,
         companyName: null,
-
       });
     } else {
       const type = getKeyByValue(
         staticEnums["CustomerType"],
         invoiceDetails?.customerDetail?.customerType
-      )
+      );
 
       reset({
         type: "Existing Customer",
@@ -173,8 +175,7 @@ export const useEditInvoiceDetails = ({
         customerID: invoiceDetails?.customerID,
         gender: staticEnums["Gender"][invoiceDetails?.customerDetail?.gender],
         time: invoiceDetails?.time,
-
-      })
+      });
     }
   }, [type]);
 
@@ -190,9 +191,7 @@ export const useEditInvoiceDetails = ({
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
-      dispatch(
-        setCustomerDetails(selectedCustomers)
-      );
+      dispatch(setCustomerDetails(selectedCustomers));
 
       reset({
         ...selectedCustomers,
@@ -201,9 +200,7 @@ export const useEditInvoiceDetails = ({
         customerID: selectedCustomers?.id,
         // leadID: "",
         gender: staticEnums["Gender"][selectedCustomers?.gender],
-
       });
-
     }
   };
   useMemo(() => {
@@ -214,7 +211,7 @@ export const useEditInvoiceDetails = ({
     if (filteredContent)
       setValue("title", filteredContent?.invoiceContent?.title);
   }, [selectedContent]);
-  const handleContentSelect = () => { }
+  const handleContentSelect = () => {};
   const offerFields = AddInvoiceDetailsFormField(
     register,
     loading,
@@ -292,6 +289,6 @@ export const useEditInvoiceDetails = ({
     errors,
     error,
     translate,
-    invoiceDetails
+    invoiceDetails,
   };
 };

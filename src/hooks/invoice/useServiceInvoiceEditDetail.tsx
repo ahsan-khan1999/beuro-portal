@@ -62,9 +62,7 @@ export const useServiceInvoiceEditDetail = ({
   const { tax } = useAppSelector((state) => state.settings);
 
   useEffect(() => {
-    dispatch(
-      readService({ params: { filter: {}, paginate: 0 } })
-    );
+    dispatch(readService({ params: { filter: {}, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
 
@@ -109,18 +107,9 @@ export const useServiceInvoiceEditDetail = ({
         `serviceDetail.${index}.description`,
         selectedService[0].description
       );
-      setValue(
-        `serviceDetail.${index}.discount`,
-        0
-      );
-      setValue(
-        `serviceDetail.${index}.totalPrice`,
-        0
-      );
-      setValue(
-        `serviceDetail.${index}.count`,
-        0
-      );
+      setValue(`serviceDetail.${index}.discount`, 0);
+      setValue(`serviceDetail.${index}.totalPrice`, 0);
+      setValue(`serviceDetail.${index}.count`, 0);
     }
   };
 
@@ -158,15 +147,14 @@ export const useServiceInvoiceEditDetail = ({
     const data = getValues();
     setTimeout(() => {
       let totalPrice =
-        (Number(data?.serviceDetail[index]?.price) *
-          Number(data?.serviceDetail[index]?.count) - Number(data?.serviceDetail[index]?.discount || 0));
+        Number(data?.serviceDetail[index]?.price) *
+          Number(data?.serviceDetail[index]?.count) -
+        Number(data?.serviceDetail[index]?.discount || 0);
 
       if (data?.serviceDetail[index]?.discount > totalPrice) {
         setValue(`serviceDetail.${index}.totalPrice`, 0);
-
       } else {
         setValue(`serviceDetail.${index}.totalPrice`, totalPrice?.toFixed(2));
-
       }
       generateGrandTotal();
     }, 10);
@@ -251,8 +239,10 @@ export const useServiceInvoiceEditDetail = ({
       }
     }
 
-    const grandTotal = String(taxType) === "0" ? totalPrices - discount : totalPrices + taxAmount - discount;
-
+    const grandTotal =
+      String(taxType) === "0"
+        ? totalPrices - discount
+        : totalPrices + taxAmount - discount;
 
     if (discountAmount === "") {
       setValue("discountAmount", "");
@@ -281,16 +271,18 @@ export const useServiceInvoiceEditDetail = ({
       // });
 
       reset({
-        serviceDetail: invoiceDetails?.serviceDetail?.serviceDetail || [{
-          serviceTitle: "",
-          price: "",
-          unit: "",
-          count: "",
-          description: "",
-          totalPrice: "",
-          serviceType: "Existing Service",
-          discount: 0,
-        }],
+        serviceDetail: invoiceDetails?.serviceDetail?.serviceDetail || [
+          {
+            serviceTitle: "",
+            price: "",
+            unit: "",
+            count: "",
+            description: "",
+            totalPrice: "",
+            serviceType: "Existing Service",
+            discount: 0,
+          },
+        ],
         isTax: invoiceDetails?.isTax,
         isDiscount: invoiceDetails?.isDiscount,
         discountType: staticEnums["DiscountType"][invoiceDetails?.discountType],
@@ -338,13 +330,13 @@ export const useServiceInvoiceEditDetail = ({
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
       invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-      "New Service"
+        "New Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-      "New Service"
+        "New Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
       setValue(`serviceDetail.${index}.price`, ``);
@@ -353,17 +345,16 @@ export const useServiceInvoiceEditDetail = ({
       setValue(`serviceDetail.${index}.totalPrice`, ``);
       setValue(`serviceDetail.${index}.description`, ``);
       setValue(`serviceDetail.${index}.discount`, ``);
-
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
       invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-      "Existing Service"
+        "Existing Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.NEW_SERVICE &&
       invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-      "Existing Service"
+        "Existing Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
       setValue(`serviceDetail.${index}.price`, ``);
@@ -372,7 +363,6 @@ export const useServiceInvoiceEditDetail = ({
       setValue(`serviceDetail.${index}.totalPrice`, ``);
       setValue(`serviceDetail.${index}.description`, ``);
       setValue(`serviceDetail.${index}.discount`, ``);
-
     }
   };
 
@@ -463,6 +453,6 @@ export const useServiceInvoiceEditDetail = ({
     error,
     translate,
     systemSettings,
-    invoiceDetails
+    invoiceDetails,
   };
 };
