@@ -29,6 +29,18 @@ export default function CustomerFilter({
   };
 
   const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
       handleFilterChange(updatedFilter);
@@ -73,7 +85,7 @@ export default function CustomerFilter({
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value={filter?.sort || ""}
+        value={filter.sort || ""}
         dropDownIconClassName=""
         options={[
           { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },
@@ -89,6 +101,7 @@ export default function CustomerFilter({
         ]}
         label={translate("common.sort_button")}
       />
+
       {/* <CustomerFilters
         filter={filter}
         setFilter={setFilter}

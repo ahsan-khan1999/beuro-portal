@@ -2,7 +2,7 @@ import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { CheckBoxType, FilterType } from "@/types";
-import React, { SetStateAction, useRef } from "react";
+import React, { SetStateAction, useEffect, useRef, useState } from "react";
 import InvoicesFilter from "@/base-components/filter/invoices-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
@@ -20,8 +20,8 @@ export default function InvoicesFilters({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { t: translate } = useTranslation();
-
   const router = useRouter();
+  const [inputValue, setInputValue] = useState<string>("");
 
   const checkbox: CheckBoxType[] = [
     {
@@ -92,8 +92,14 @@ export default function InvoicesFilters({
     });
   };
 
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
+    setInputValue(value);
   };
 
   const hanldeSortChange = (value: string) => {
@@ -104,8 +110,9 @@ export default function InvoicesFilters({
     });
   };
 
-  const handlePressEnter = () => {
+  const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
     router.push(
       {
         pathname: router.pathname,
@@ -115,7 +122,7 @@ export default function InvoicesFilters({
         },
       },
       undefined,
-      { shallow: true }
+      { shallow: false }
     );
 
     if (inputValue === "") {
@@ -149,10 +156,11 @@ export default function InvoicesFilters({
 
       <div className="flex gap-x-4 items-center">
         <InputField
-          handleChange={(value) => {}}
-          // value={filter?.text}
-          onEnterPress={handlePressEnter}
+          handleChange={handleInputChange}
           ref={inputRef}
+          value={inputValue}
+          iconDisplay={false}
+          onEnterPress={onEnterPress}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

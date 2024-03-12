@@ -1308,8 +1308,8 @@ export const sideBar: SideBar[] = [
     icon: "Leads",
     title: "sidebar.customer.leads.leads",
     pathname: "/leads",
-    query: "None",
     role: [1, 2],
+    query: "None",
     queryName: "status",
     inner: [
       {

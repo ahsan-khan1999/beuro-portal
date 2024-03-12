@@ -48,20 +48,24 @@ const useService = () => {
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
     }
-    const searchQuery = query?.text as string;
 
-    const queryParams = searchQuery;
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+
+    const queryParams = searchQuery || sortedValue;
 
     let updatedFilter = {
       text: "",
+      sort: "",
     };
 
-    if (searchQuery) {
+    if (searchQuery || sortedValue) {
       updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
     }
 
     setFilter(updatedFilter);
-    console.log(parsedPage, "parsedPage");
+
     if (parsedPage) {
       dispatch(
         readService({
@@ -78,37 +82,38 @@ const useService = () => {
   }, [query]);
 
   // useEffect(() => {
-  //   const queryStatus = query?.status;
+  //   const parsedPage = parseInt(query.page as string, 10);
+  //   if (!isNaN(parsedPage)) {
+  //     setCurrentPage(parsedPage);
+  //   }
   //   const searchQuery = query?.text as string;
 
-  //   const queryParams = queryStatus || searchQuery;
+  //   const queryParams = searchQuery;
 
-  //   if (queryParams !== undefined) {
-  //     setFilter({
-  //       ...filter,
-  //       status: queryStatus,
-  //       text: searchQuery,
-  //     });
+  //   let updatedFilter = {
+  //     text: "",
+  //   };
 
+  //   if (searchQuery) {
+  //     updatedFilter.text = searchQuery;
+  //   }
+
+  //   setFilter(updatedFilter);
+  //   console.log(parsedPage, "parsedPage");
+  //   if (parsedPage) {
   //     dispatch(
   //       readService({
   //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: queryStatus,
-  //             text: searchQuery,
-  //           },
-  //           page: currentPage,
+  //           filter: queryParams ? updatedFilter : {},
+  //           page: Number(parsedPage) || currentPage,
   //           size: 10,
   //         },
   //       })
-  //     ).then((res: any) => {
-  //       if (res?.payload) {
-  //         setCurrentPageRows(res?.payload?.Service);
-  //       }
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Service);
   //     });
   //   }
-  // }, [currentPage, query]);
+  // }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

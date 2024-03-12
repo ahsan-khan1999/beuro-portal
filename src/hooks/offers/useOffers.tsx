@@ -279,13 +279,16 @@ const useOffers = () => {
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
     }
 
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
-
     const queryParams = queryStatus || searchQuery;
 
     if (queryParams !== undefined) {
@@ -314,7 +317,7 @@ const useOffers = () => {
         readOffer({
           params: {
             filter: queryParams ? updatedFilter : {},
-            page: Number(parsedPage) || currentPage,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })

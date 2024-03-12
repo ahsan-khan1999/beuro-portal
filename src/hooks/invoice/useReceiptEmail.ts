@@ -132,14 +132,17 @@ export const useReceiptEmail = (
   };
   const onSuccess = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
+
     router.push({
-      pathname: "/invoices?status=None/details",
+      pathname: "/invoices/details",
       query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
     });
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const fields = InvoiceEmailPreviewFormField(
     register,
     loading,
