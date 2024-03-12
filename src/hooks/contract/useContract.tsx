@@ -27,24 +27,14 @@ const useContract = () => {
   const { lastPage, contract, loading, totalCount, contractDetails } =
     useAppSelector((state) => state.contract);
 
+  const { t: translate } = useTranslation();
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
 
   const { query } = useRouter();
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    if (query && query.page) {
-      const parsedPage = parseInt(query.page as string, 10);
-      if (!isNaN(parsedPage)) {
-        setCurrentPage(parsedPage);
-      }
-    }
-  }, [query]);
-
-  const { t: translate } = useTranslation();
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -213,87 +203,6 @@ const useContract = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  useEffect(() => {
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-
-    const queryParams = queryStatus || searchQuery;
-
-    if (queryParams !== undefined) {
-      const filteredStatus =
-        query?.status === "None"
-          ? "None"
-          : queryParams
-              .toString()
-              .split(",")
-              .filter((item) => item !== "None");
-
-      let updatedFilter: {
-        status: string | string[];
-        text?: string;
-      } = {
-        status: filteredStatus,
-      };
-
-      if (searchQuery) {
-        updatedFilter.text = searchQuery;
-      }
-
-      setFilter(updatedFilter);
-
-      dispatch(
-        readContract({
-          params: {
-            filter: updatedFilter,
-            page: currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-      });
-    }
-  }, [query]);
-
-  // useEffect(() => {
-  //   const queryStatus = query?.status;
-  //   const searchQuery = query?.text as string;
-
-  //   const queryParams = queryStatus || searchQuery;
-
-  //   if (queryParams !== undefined) {
-  //     const filteredStatus =
-  //       query?.status === "None"
-  //         ? "None"
-  //         : queryParams
-  //             .toString()
-  //             .split(",")
-  //             .filter((item) => item !== "None");
-
-  //     setFilter({
-  //       ...filter,
-  //       status: filteredStatus,
-  //       text: searchQuery,
-  //     });
-
-  //     dispatch(
-  //       readContract({
-  //         params: {
-  //           filter: {
-  //             ...filter,
-  //             status: filteredStatus,
-  //             text: searchQuery,
-  //           },
-  //           page: currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-  //     });
-  //   }
-  // }, [currentPage, query]);
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -334,6 +243,57 @@ const useContract = () => {
       if (res?.payload) contractHandler();
     }
   };
+
+  useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+
+    const queryParams = queryStatus || searchQuery;
+
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
+        status: filteredStatus,
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
+
+      dispatch(
+        readContract({
+          params: {
+            filter: updatedFilter,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+      });
+    }
+  }, [query]);
 
   return {
     currentPageRows,
