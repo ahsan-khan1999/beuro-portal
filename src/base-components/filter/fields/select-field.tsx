@@ -1,11 +1,12 @@
 import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
 import { OptionsFieldProps } from "@/types/global";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { combineClasses } from "@/utils/utility";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function SelectField({
   title,
@@ -24,23 +25,36 @@ export default function SelectField({
     containerClassName
   );
 
+  const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
   const [isOpen, setIsOpen] = useState(false);
+  const { query } = useRouter();
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
   };
+
   const hanldeClose = () => {
     setIsOpen(false);
   };
 
+  const handleItemSelected = (selectedValue: string) => {
+    options.forEach(({ label, value }) => {
+      if (selectedValue === value) {
+        setSelectedLabel(label);
+        handleChange(selectedValue);
+      }
+    });
+  };
+
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+
   return (
     <div className={containerClasses} ref={ref}>
       <div
         className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg min-w-[105px] w-fit"
         onClick={handleToggle}
       >
-        <span className="text-dark text-sm font-normal">{label}</span>
+        <span className="text-dark text-sm font-normal">{selectedLabel}</span>
         <DropDownNonFillIcon
           label={label}
           isOpen={isOpen}
@@ -82,7 +96,7 @@ export default function SelectField({
                     className="flex justify-start px-2 py-1 hover:bg-[#eaebec] rounded-sm cursor-pointer mr-1 hoverTransetion"
                     key={idx}
                     onClick={() => {
-                      handleChange(value);
+                      handleItemSelected(value);
                       setIsOpen(false);
                     }}
                   >
