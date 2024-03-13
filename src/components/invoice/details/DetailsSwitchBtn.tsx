@@ -9,6 +9,7 @@ const DetailsSwitchBtn = ({
   setSwitchDetails: (item: string) => void;
 }) => {
   const { t: translate } = useTranslation();
+
   return (
     <div className="flex gap-[2px]">
       <button

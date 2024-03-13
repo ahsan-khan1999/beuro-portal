@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import ChangePassword from "@/base-components/ui/modals1/ChangePassword";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -8,19 +8,22 @@ import SettingTopDataButtons from "./SettingTopDataButtons";
 import SystemSettingDetails from "./system-setting/SystemSettingDetails";
 import AddTax from "@/base-components/ui/modals1/AddTax";
 import MailSetting from "./mail-setting";
-import Billing from "./billing";
 import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
 import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useTranslation } from "next-i18next";
 import QRSettings from "./qr-settings";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { useRouter } from "next/router";
 
 const Setting = () => {
+  const { query } = useRouter();
   const { t: translate } = useTranslation();
-  const [switchDetails, setSwitchDetails] = useState(0);
+
+  const tab = query.tab;
+  const [switchDetails, setSwitchDetails] = useState<number>(0);
+
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
@@ -76,7 +79,8 @@ const Setting = () => {
       />
     ),
   };
-  const settingsLookup = {
+
+  const settingsLookup: { [key: number]: JSX.Element } = {
     0: <SettingProfile handleChangePassword={handleChangePassword} />,
     1: (
       <SystemSettingDetails
@@ -86,11 +90,18 @@ const Setting = () => {
     ),
     2: <Templates />,
     3: <FollowUpSetting />,
-
-    // 4: <Billing handleEditPayment={handleEditPayment} />,
     4: <MailSetting handleCreation={handleCreation} />,
     5: <QRSettings handleCreation={handleCreation} />,
   };
+
+  useEffect(() => {
+    if (tab && !Array.isArray(tab) && !isNaN(Number(tab))) {
+      setSwitchDetails(parseInt(tab as string, 10));
+    } else {
+      setSwitchDetails(0);
+    }
+  }, [query]);
+
   return (
     <div className="mb-5">
       <h1 className="text-[#222B45] font-normal text-xl">
@@ -104,7 +115,7 @@ const Setting = () => {
       </div>
 
       <div className="mt-4">
-        {settingsLookup[switchDetails as keyof typeof settingsLookup]}
+        {switchDetails !== undefined && settingsLookup[switchDetails]}
       </div>
 
       {renderModal()}

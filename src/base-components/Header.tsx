@@ -87,7 +87,7 @@ const Header = () => {
             </span>
             <span className="flex justify-between space-x-2">
               <span className=" text-sm tracking-[0.4 px] text-[#8F8F8F] block">
-                {user?.role}
+                {translate(`admin_role.${user?.role}`)}
               </span>
               <span className="px-2 cursor-pointer" onClick={handleLogout}>
                 <Image src={logoutImage} alt="logout" />
