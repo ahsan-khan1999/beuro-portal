@@ -21,9 +21,8 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useLeads = () => {
-  const { lastPage, lead, loading, totalCount, leadDetails } = useAppSelector(
-    (state) => state.lead
-  );
+  const { lastPage, lead, loading, isLoading, totalCount, leadDetails } =
+    useAppSelector((state) => state.lead);
 
   const { query } = useRouter();
   const page = query?.page as unknown as number;
@@ -205,8 +204,9 @@ const useLeads = () => {
 
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
 
-    const queryParams = queryStatus || searchQuery;
+    const queryParams = queryStatus || searchQuery || sortedValue;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -220,12 +220,14 @@ const useLeads = () => {
       let updatedFilter: {
         status: string | string[];
         text?: string;
+        sort?: string;
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery) {
+      if (searchQuery || sortedValue) {
         updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
       }
 
       setFilter(updatedFilter);
@@ -261,6 +263,7 @@ const useLeads = () => {
     filter,
     setFilter,
     loading,
+    isLoading,
     currentPage,
   };
 };

@@ -11,6 +11,7 @@ import { ModalType } from "@/enums/ui";
 interface ContractState {
   contract: contractTableTypes[];
   loading: boolean;
+  isLoading: boolean;
   error: Record<string, object>;
   lastPage: number;
   totalCount: number;
@@ -20,6 +21,7 @@ interface ContractState {
 const initialState: ContractState = {
   contract: [],
   loading: false,
+  isLoading: true,
   error: {},
   lastPage: 1,
   totalCount: 10,
@@ -208,16 +210,16 @@ const ContractSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(readContract.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(readContract.fulfilled, (state, action) => {
       state.contract = action.payload.Contract;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
-      state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(readContract.rejected, (state) => {
-      state.loading = false;
+      state.isLoading = false;
     });
 
     builder.addCase(readContractDetails.pending, (state) => {

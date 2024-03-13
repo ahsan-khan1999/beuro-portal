@@ -34,9 +34,8 @@ import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useOffers = () => {
-  const { lastPage, offer, loading, totalCount, offerDetails } = useAppSelector(
-    (state) => state.offer
-  );
+  const { lastPage, offer, loading, isLoading, totalCount, offerDetails } =
+    useAppSelector((state) => state.offer);
 
   const { query } = useRouter();
 
@@ -289,7 +288,9 @@ const useOffers = () => {
 
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
-    const queryParams = queryStatus || searchQuery;
+    const sortedValue = query?.sort as string;
+
+    const queryParams = queryStatus || searchQuery || sortedValue;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -303,12 +304,14 @@ const useOffers = () => {
       let updatedFilter: {
         status: string | string[];
         text?: string;
+        sort?: string;
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery) {
+      if (searchQuery || sortedValue) {
         updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
       }
 
       setFilter(updatedFilter);
@@ -377,6 +380,7 @@ const useOffers = () => {
     filter,
     setFilter,
     loading,
+    isLoading,
     handleOfferStatusUpdate,
     handlePaymentStatusUpdate,
     currentPage,

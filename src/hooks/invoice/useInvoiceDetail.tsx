@@ -49,6 +49,7 @@ export default function useInvoiceDetail() {
     collectiveInvoice,
     collectiveReciept,
   } = useAppSelector((state) => state.invoice);
+
   const { t: translate } = useTranslation();
   const router = useRouter();
   const id = router.query.invoice;

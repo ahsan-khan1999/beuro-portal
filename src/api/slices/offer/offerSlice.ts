@@ -1,5 +1,5 @@
 import apiServices from "@/services/requestHandler";
-import { setErrors, transformValidationMessages } from "@/utils/utility";
+import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   OfferActivity,
@@ -15,13 +15,11 @@ import axios from "axios";
 import { BASEURL } from "@/services/HttpProvider";
 import { getRefreshToken, getToken } from "@/utils/auth.util";
 import toast from "react-hot-toast";
-import { EmailTemplate } from "@/types/settings";
-import { TemplateType } from "@/types";
-import { SystemSetting } from "../settingSlice/settings";
 
 interface OfferState {
   offer: OffersTableRowTypes[];
   loading: boolean;
+  isLoading: boolean;
   error: Record<string, object>;
   lastPage: number;
   totalCount: number;
@@ -34,6 +32,7 @@ interface OfferState {
 const initialState: OfferState = {
   offer: [],
   loading: false,
+  isLoading: true,
   error: {},
   lastPage: 1,
   totalCount: 10,
@@ -362,16 +361,16 @@ const OfferSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(readOffer.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(readOffer.fulfilled, (state, action) => {
       state.offer = action.payload.Offer;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
-      state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(readOffer.rejected, (state) => {
-      state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(createOffer.pending, (state) => {
       state.loading = true;

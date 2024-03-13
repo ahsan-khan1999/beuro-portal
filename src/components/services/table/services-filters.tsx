@@ -79,6 +79,7 @@ export default function ServicesFilters({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           text: inputValue,
         },
       },

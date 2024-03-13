@@ -18,13 +18,14 @@ export default function Services() {
     handleFilterChange,
     translate,
     loading,
-    currentPage
+    isLoading,
+    currentPage,
   } = useService();
 
   const CurrentComponent = useEmptyStates(
     <TableRowServices servicesData={currentPageRows} />,
     currentPageRows.length > 0,
-    loading
+    isLoading
   );
 
   return (
@@ -39,12 +40,12 @@ export default function Services() {
         <TableHeadings />
         {CurrentComponent}
       </TableLayout>
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
     </>
   );
 }
