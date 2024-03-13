@@ -7,7 +7,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
 const useEmailTracker = () => {
-  const { email, lastPage, totalCount, loading } = useAppSelector(
+  const { email, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.emailSlice
   );
 
@@ -125,6 +125,7 @@ const useEmailTracker = () => {
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
     currentPage,
   };
 };

@@ -17,7 +17,7 @@ const useEmployee = () => {
     },
   });
 
-  const { employee, lastPage, totalCount, loading } = useAppSelector(
+  const { employee, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.employee
   );
 
@@ -128,6 +128,7 @@ const useEmployee = () => {
     handleFilterChange,
     translate,
     loading,
+    isLoading,
     currentPage,
   };
 };

@@ -8,7 +8,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
 const useService = () => {
-  const { service, lastPage, totalCount, loading } = useAppSelector(
+  const { service, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.service
   );
 
@@ -129,6 +129,7 @@ const useService = () => {
     setFilter,
     translate,
     loading,
+    isLoading,
     currentPage,
   };
 };

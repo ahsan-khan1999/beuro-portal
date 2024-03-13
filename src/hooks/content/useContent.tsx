@@ -13,7 +13,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
 const useContent = () => {
-  const { content, lastPage, totalCount, loading } = useAppSelector(
+  const { content, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.content
   );
 
@@ -142,6 +142,7 @@ const useContent = () => {
     setFilter,
     translate,
     loading,
+    isLoading,
     currentPage,
   };
 };

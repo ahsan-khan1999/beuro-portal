@@ -24,8 +24,14 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useContract = () => {
-  const { lastPage, contract, loading, totalCount, contractDetails } =
-    useAppSelector((state) => state.contract);
+  const {
+    lastPage,
+    contract,
+    loading,
+    isLoading,
+    totalCount,
+    contractDetails,
+  } = useAppSelector((state) => state.contract);
 
   const { t: translate } = useTranslation();
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
@@ -256,8 +262,9 @@ const useContract = () => {
 
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
 
-    const queryParams = queryStatus || searchQuery;
+    const queryParams = queryStatus || searchQuery || sortedValue;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -271,12 +278,14 @@ const useContract = () => {
       let updatedFilter: {
         status: string | string[];
         text?: string;
+        sort?: string;
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery) {
+      if (searchQuery || sortedValue) {
         updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
       }
 
       setFilter(updatedFilter);
@@ -307,6 +316,7 @@ const useContract = () => {
     filter,
     setFilter,
     loading,
+    isLoading,
     handleContractStatusUpdate,
     handlePaymentStatusUpdate,
     currentPage,

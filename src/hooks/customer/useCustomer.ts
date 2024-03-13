@@ -11,7 +11,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
 export default function useCustomer() {
-  const { customer, lastPage, totalCount, loading } = useAppSelector(
+  const { customer, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.customer
   );
 
@@ -89,6 +89,7 @@ export default function useCustomer() {
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
     currentPage,
   };
 }

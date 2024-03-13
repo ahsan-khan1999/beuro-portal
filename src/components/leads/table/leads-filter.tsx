@@ -21,6 +21,16 @@ export default function LeadsFilter({
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
+
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
@@ -73,13 +83,13 @@ export default function LeadsFilter({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["sort"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
+  // const hanldeSortChange = (value: string) => {
+  //   setFilter((prev: FilterType) => {
+  //     const updatedFilter = { ...prev, ["sort"]: value };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
 
   const checkbox: CheckBoxType[] = [
     {
@@ -99,16 +109,6 @@ export default function LeadsFilter({
       type: `${staticEnums.LeadStatus.Expired}`,
     },
   ];
-
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
-
-  const handleInputChange = (value: string) => {
-    setInputValue(value);
-  };
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
@@ -133,6 +133,26 @@ export default function LeadsFilter({
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
       return updatedValue;
+    });
+  };
+
+  const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["sort"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
     });
   };
 

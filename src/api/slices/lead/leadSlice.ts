@@ -12,6 +12,7 @@ import { ModalType } from "@/enums/ui";
 interface LeadState {
   lead: Lead[];
   loading: boolean;
+  isLoading: boolean;
   error: Record<string, object>;
   lastPage: number;
   totalCount: number;
@@ -22,6 +23,7 @@ interface LeadState {
 const initialState: LeadState = {
   lead: [],
   loading: false,
+  isLoading: true,
   error: {},
   lastPage: 1,
   totalCount: 10,
@@ -184,16 +186,16 @@ const leadSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(readLead.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(readLead.fulfilled, (state, action) => {
       state.lead = action.payload.Lead;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
-      state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(readLead.rejected, (state) => {
-      state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(readLeadDetails.pending, (state) => {
       state.loadingDetails = true;

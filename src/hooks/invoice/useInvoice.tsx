@@ -20,8 +20,15 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 
 const useInvoice = () => {
-  const { lastPage, invoice, loading, totalCount, invoiceDetails, invoiceSum } =
-    useAppSelector((state) => state.invoice);
+  const {
+    lastPage,
+    invoice,
+    loading,
+    isLoading,
+    totalCount,
+    invoiceDetails,
+    invoiceSum,
+  } = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
 
   const [currentPageRows, setCurrentPageRows] = useState<
@@ -195,8 +202,9 @@ const useInvoice = () => {
 
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
 
-    const queryParams = queryStatus || searchQuery;
+    const queryParams = queryStatus || searchQuery || sortedValue;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -210,12 +218,14 @@ const useInvoice = () => {
       let updatedFilter: {
         status: string | string[];
         text?: string;
+        sort?: string;
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery) {
+      if (searchQuery || sortedValue) {
         updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
       }
 
       setFilter(updatedFilter);
@@ -245,6 +255,7 @@ const useInvoice = () => {
     filter,
     setFilter,
     loading,
+    isLoading,
     isSendEmail,
     handleSendEmail,
     handleSendByPost,

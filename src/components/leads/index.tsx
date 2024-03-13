@@ -21,6 +21,7 @@ export default function Leads() {
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
     currentPage,
   } = useLeads();
 
@@ -31,7 +32,7 @@ export default function Leads() {
       handleImageUpload={handleImageUpload}
     />,
     currentPageRows.length > 0,
-    loading
+    isLoading
   );
 
   return (

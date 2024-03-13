@@ -17,13 +17,14 @@ export default function Employees() {
     handleFilterChange,
     setFilter,
     loading,
-    currentPage
+    isLoading,
+    currentPage,
   } = useEmployee();
 
   const CurrentComponent = useEmptyStates(
     <TableRows employsData={currentPageRows} />,
     currentPageRows?.length > 0,
-    loading
+    isLoading
   );
 
   return (
@@ -37,12 +38,12 @@ export default function Employees() {
         <TableHeadings />
         {CurrentComponent}
       </TableLayout>
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
     </>
   );
 }
