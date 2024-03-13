@@ -44,8 +44,12 @@ const useEmailTracker = () => {
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
     }
 
     const searchQuery = query?.text as string;
@@ -70,7 +74,7 @@ const useEmailTracker = () => {
         readEmail({
           params: {
             filter: queryParams ? updatedFilter : {},
-            page: Number(parsedPage) || currentPage,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })

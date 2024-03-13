@@ -43,6 +43,7 @@ export default function EmailTrackerFilters({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           text: inputValue,
         },
       },

@@ -31,6 +31,25 @@ export default function LeadsFilter({
     setInputValue(value);
   };
 
+  const checkbox: CheckBoxType[] = [
+    {
+      label: translate("leads.table_functions.open"),
+      type: `${staticEnums.LeadStatus.Open}`,
+    },
+    {
+      label: translate("leads.table_functions.inProcess"),
+      type: `${staticEnums.LeadStatus.InProcess}`,
+    },
+    {
+      label: translate("leads.table_functions.close"),
+      type: `${staticEnums.LeadStatus.Close}`,
+    },
+    {
+      label: translate("leads.table_functions.expire"),
+      type: `${staticEnums.LeadStatus.Expired}`,
+    },
+  ];
+
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
@@ -41,6 +60,7 @@ export default function LeadsFilter({
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+
         router.push(
           {
             pathname: router.pathname,
@@ -59,6 +79,7 @@ export default function LeadsFilter({
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+
         router.push(
           {
             pathname: router.pathname,
@@ -91,25 +112,6 @@ export default function LeadsFilter({
   //   });
   // };
 
-  const checkbox: CheckBoxType[] = [
-    {
-      label: translate("leads.table_functions.open"),
-      type: `${staticEnums.LeadStatus.Open}`,
-    },
-    {
-      label: translate("leads.table_functions.inProcess"),
-      type: `${staticEnums.LeadStatus.InProcess}`,
-    },
-    {
-      label: translate("leads.table_functions.close"),
-      type: `${staticEnums.LeadStatus.Close}`,
-    },
-    {
-      label: translate("leads.table_functions.expire"),
-      type: `${staticEnums.LeadStatus.Expired}`,
-    },
-  ];
-
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
 
@@ -118,6 +120,7 @@ export default function LeadsFilter({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           text: inputValue,
         },
       },

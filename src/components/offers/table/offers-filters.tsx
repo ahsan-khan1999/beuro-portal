@@ -108,6 +108,7 @@ export default function OffersFilters({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           text: inputValue,
         },
       },

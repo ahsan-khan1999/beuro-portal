@@ -38,6 +38,7 @@ export default function ContentFilters({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           text: inputValue,
         },
       },
