@@ -1,11 +1,10 @@
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import useFilter from "@/hooks/filter/hook";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import OfferFilter from "@/base-components/filter/offer-filter";
@@ -20,6 +19,8 @@ export default function OffersFilters({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const [inputValue, setInputValue] = useState<string>("");
 
   const checkbox: CheckBoxType[] = [
     {
@@ -40,38 +41,46 @@ export default function OffersFilters({
     },
   ];
 
-  // const handleStatusChange = (value: string, isChecked: boolean) => {
-  //   setFilter((prev: FilterType) => {
-  //     const updatedStatus = prev.status ? [...prev.status] : [];
-  //     if (isChecked) {
-  //       if (!updatedStatus.includes(value)) {
-  //         updatedStatus.push(value);
-  //       }
-  //     } else {
-  //       const index = updatedStatus.indexOf(value);
-  //       if (index > -1) {
-  //         updatedStatus.splice(index, 1);
-  //       }
-  //     }
-  //     const status = updatedStatus.length > 0 ? updatedStatus : "";
-  //     const updatedFilter = { ...prev, status: status };
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
-
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
+      const newStatus = updatedStatus.map(Number);
+
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       } else {
         const index = updatedStatus.indexOf(value);
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       }
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
@@ -79,10 +88,6 @@ export default function OffersFilters({
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
-  };
-
-  const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
   };
 
   const hanldeSortChange = (value: string) => {
@@ -93,11 +98,34 @@ export default function OffersFilters({
     });
   };
 
-  const handlePressEnter = () => {
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
+
+  const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
@@ -124,10 +152,11 @@ export default function OffersFilters({
       </div>
       <div className="flex gap-[14px] items-center">
         <InputField
-          handleChange={(value) => {}}
-          // value={filter?.text || ""}
-          onEnterPress={handlePressEnter}
+          handleChange={handleInputChange}
           ref={inputRef}
+          value={inputValue}
+          iconDisplay={false}
+          onEnterPress={onEnterPress}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

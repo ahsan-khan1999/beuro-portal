@@ -1,16 +1,13 @@
 import React from "react";
-import Image from "next/image";
-import downloadIcon from "@/assets/svgs/download_icon.svg";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import PdfCardLayout from "@/components/content/pdfPriview/PdfCardLayout";
-import { ContractEmailHeaderProps, EmailHeaderProps } from "@/types";
+import { ContractEmailHeaderProps } from "@/types";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useAppSelector } from "@/hooks/useRedux";
-import { ContractsIcon } from "@/assets/svgs/components/sideBar/Contracts";
 
 const PdfCard = ({
   contractNo,
@@ -27,6 +24,15 @@ const PdfCard = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { contractDetails } = useAppSelector((state) => state.contract);
+
+  const handleBackToDetail = () => {
+    const { status, text } = router.query;
+
+    router.push({
+      pathname: "/contract/details",
+      query: { status, text, contract: contractDetails?.id },
+    });
+  };
 
   return (
     <div className="mb-5">
@@ -66,12 +72,14 @@ const PdfCard = ({
               </span> */}
 
             <div
-              onClick={() => {
-                router.push({
-                  pathname: "/contract/details",
-                  query: { contract: contractDetails?.id },
-                });
-              }}
+              // onClick={() => {
+              //   router.push({
+              //     pathname: "/contract/details",
+              //     query: { contract: contractDetails?.id },
+              //   });
+              // }}
+
+              onClick={handleBackToDetail}
               className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer w-fit"
             >
               <svg

@@ -22,7 +22,7 @@ const TableRows = ({
             onClick={() =>
               router.push({
                 pathname: "/invoices/details",
-                query: { invoice: item.id },
+                query: { ...router.query, invoice: item.id },
               })
             }
             className="hover:bg-[#E9E1FF] cursor-pointer items-center bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)] mt-2 rounded-md"
@@ -36,13 +36,13 @@ const TableRows = ({
             </span>
             <span className="py-4 truncate">{item?.total}</span>
 
-            <span className="py-4 flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center mr-1">
               <div
                 className={`${
                   item.sentEmail === item.totalEmail
                     ? "bg-[#FE9244]"
                     : "bg-[#4A13E7]"
-                } text-white px-2 py-1 text-center rounded-md w-fit text-sm`}
+                } text-white px-2 py-1 text-center rounded-md w-full text-sm`}
               >
                 {item.sentEmail + "/" + item.totalEmail + " Sent"}
               </div>
@@ -66,7 +66,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 flex justify-center items-center">
+            <span className="py-4 flex justify-center items-center ml-1">
               <div
                 className={`bg-[${getInvoiceStatusColor(
                   item.invoiceStatus

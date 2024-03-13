@@ -310,10 +310,13 @@ export const useEmptyStates = (
   const lookup = {
     [EmptyStateType.hasData]: CurrentComponent,
     [EmptyStateType.loading]: <LoadingState />,
-    [EmptyStateType.hasNoData]: <NoDataEmptyState />,
-    
+    [EmptyStateType.hasNoData]: (
+      <div className="mt-6">
+        <NoDataEmptyState />
+      </div>
+    ),
   };
   // const data = useMemo(() => lookup[isEmpty], [isEmpty]);
-  const data = lookup[isEmpty]
+  const data = lookup[isEmpty];
   return data;
 };

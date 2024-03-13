@@ -4,6 +4,7 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import { ComponentsType } from "./AddNewLeadsData";
+import { updateQuery } from "@/utils/update-query";
 
 const AddLeadServiceDetails = ({
   onHandleBack,
@@ -16,6 +17,13 @@ const AddLeadServiceDetails = ({
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddLeadServiceDetails({ onHandleBack, onHandleNext });
   const router = useRouter();
+
+  const handleCancel = () => {
+    router.pathname = "/leads";
+    router.query = { status: "None", page: "1" };
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <FormCard>
       <div
@@ -26,7 +34,7 @@ const AddLeadServiceDetails = ({
           {translate("leads.service_details.heading")}
         </h2>
         <button
-          onClick={() => router.push("/leads")}
+          onClick={handleCancel}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full"
         >
           {translate("leads.service_details.cancel_button")}

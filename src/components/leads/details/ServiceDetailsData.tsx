@@ -16,7 +16,6 @@ const ServiceDetailsData = ({
   const { leadDetails } = useAppSelector((state) => state.lead);
   const { service } = useAppSelector((state) => state.service);
 
-
   const content = leadDetails?.requiredService as ContentTableRowTypes;
   const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
 
@@ -105,8 +104,14 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.flexibility")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {leadDetails?.flexibility === "0" ? translate("common.flexible") : leadDetails?.flexibility}
-              {leadDetails?.flexibility == "0" ? "" : leadDetails?.flexibility == "1" ? translate("common.day") : translate("common.days")}
+              {leadDetails?.flexibility === "0"
+                ? translate("common.flexible")
+                : leadDetails?.flexibility}
+              {leadDetails?.flexibility == "0"
+                ? ""
+                : leadDetails?.flexibility == "1"
+                ? translate("common.day")
+                : translate("common.days")}
             </div>
           </div>
           <div>
@@ -117,14 +122,14 @@ const ServiceDetailsData = ({
               {leadDetails?.preferredContact}
             </div>
           </div>
-          <div>
+          {/* <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.budget")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.budget}
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-x-3">

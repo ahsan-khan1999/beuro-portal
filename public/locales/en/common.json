@@ -208,6 +208,7 @@
       "leads": {
         "leads": "Leads",
         "open": "Open",
+        "InProcess": "InProcess",
         "close": "Close",
         "expire": "Expire"
       },
@@ -916,6 +917,7 @@
     "side_images_heading": "Images",
     "table_functions": {
       "open": "Open Leads",
+      "inProcess": "InProcess Leads",
       "close": "Close Leads",
       "expire": "Expire Leads"
     },
@@ -1095,6 +1097,9 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "user_rule": "Company",
+    "invoice_total": "Total",
+    "page_sum": "Page Sum",
     "upload_file": "Upload File",
     "view_docs": "View Documents",
     "share_on_whatsapp": "Share on whatsapp",
@@ -2011,6 +2016,7 @@
   },
   "lead_status": {
     "Open": "Open",
+    "InProcess": "InProcress",
     "Close": "Close",
     "Expired": "Expired"
   },

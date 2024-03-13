@@ -17,7 +17,7 @@ export default function Customers() {
     setFilter,
     handleFilterChange,
     loading,
-    currentPage
+    currentPage,
   } = useCustomer();
 
   const CurrentComponent = useEmptyStates(

@@ -1,7 +1,6 @@
 import React from "react";
 import EmployeesFilters from "./employees-filters";
 import { FiltersComponentProps } from "../../../types/types";
-import { SetStateAction } from "react";
 import { useTranslation } from "next-i18next";
 
 const TableFunctions = ({

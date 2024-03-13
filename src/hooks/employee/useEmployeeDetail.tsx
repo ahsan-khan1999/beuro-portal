@@ -19,7 +19,6 @@ import {
   setEmployeeDetails,
   updateEmployee,
 } from "@/api/slices/employee/emplyeeSlice";
-import LinkSendToEmail from "@/base-components/ui/modals1/LinkSendToEmail";
 import { updateQuery } from "@/utils/update-query";
 import { CustomerPromiseActionType } from "@/types/customer";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
@@ -83,8 +82,9 @@ const useEmployeeDetail = (stage: boolean) => {
   };
   const handleUpdateSuccess = () => {
     router.pathname = "/employees";
+    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
-    onClose()
+    onClose();
   };
   const handleCreateSuccess = (email: string) => {
     dispatch(
@@ -116,6 +116,7 @@ const useEmployeeDetail = (stage: boolean) => {
       updateQuery(router, router.locale as string);
     }
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -174,7 +175,8 @@ const useEmployeeDetail = (stage: boolean) => {
       res = await dispatch(
         updateEmployee({ data, router, setError, translate })
       );
-      if (res.payload) dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+      if (res.payload)
+        dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     }
   };
 

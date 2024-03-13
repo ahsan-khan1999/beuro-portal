@@ -126,8 +126,11 @@ export default function useInvoiceDetail() {
   const handleSendEmail = async () => {
     setIsSendEmail(!isSendEmail);
   };
+
   const onSuccess = () => {
-    router.push("/invoice");
+    router.pathname = "/invoice";
+    router.query = { status: "None", page: "1" };
+    updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

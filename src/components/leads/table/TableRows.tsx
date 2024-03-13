@@ -19,16 +19,16 @@ const TableRows = ({
   const { t: translate } = useTranslation();
 
   const router = useRouter();
+
   return (
     <div>
       {dataToAdd?.map((item: Lead, index: number) => {
         return (
           <div
-            // onClick={() => router.push("/leads/details")}
             onClick={() =>
               router.push({
                 pathname: "/leads/details",
-                query: { lead: item?.id },
+                query: { ...router.query, lead: item?.id },
               })
             }
             key={index}
@@ -55,7 +55,7 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getStatusColor(item.leadStatus)}`,
                 }}
-                className={`text-white px-2 py-1 text-center rounded-md min-w-[70px] w-fit text-sm`}
+                className={`text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
                 {translate(`lead_status.${item.leadStatus}`)}
               </div>

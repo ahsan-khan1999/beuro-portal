@@ -56,6 +56,7 @@ export const useLeadAdditionalDetails = (onClick: Function) => {
     );
     if (response?.payload) onClick(3, ComponentsType.additional);
   };
+
   return {
     fields,
     onSubmit,

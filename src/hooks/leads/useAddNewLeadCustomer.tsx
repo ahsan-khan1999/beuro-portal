@@ -11,12 +11,12 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNewCustomerLeadFormField } from "@/components/leads/fields/Add-customer-lead-fields";
 import { generateAddNewLeadCustomerDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   readCustomer,
   setCustomerDetails,
 } from "@/api/slices/customer/customerSlice";
-import { createLead, updateLead } from "@/api/slices/lead/leadSlice";
+import { createLead } from "@/api/slices/lead/leadSlice";
 import { updateQuery } from "@/utils/update-query";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -35,8 +35,10 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
 
   const onCancel = () => {
     router.pathname = "/leads";
+    router.query = { status: "None", page: "1" };
     updateQuery(router, router.locale as string);
   };
+
   const schema = generateAddNewLeadCustomerDetailsValidation(translate);
 
   const {
@@ -60,16 +62,13 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
-      dispatch(
-        setCustomerDetails(selectedCustomers)
-      );
+      dispatch(setCustomerDetails(selectedCustomers));
 
       reset({
         ...selectedCustomers,
         type: type,
         gender: staticEnums["Gender"][selectedCustomers?.gender],
       });
-
     }
   };
 
@@ -90,7 +89,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         address: leadDetails?.customerDetail?.address,
         companyName: leadDetails?.customerDetail?.companyName,
         gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
-
       });
     }
   }, [leadDetails.id]);
@@ -107,13 +105,12 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       customerDetails,
       onCancel,
       leadDetails,
-      gender
+      gender,
     },
     setValue
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
     if (leadDetails?.id) {
       let apiData: any = {
         ...data,
@@ -136,6 +133,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       if (res?.payload) onHandleNext(ComponentsType.addressAdd);
     }
   };
+
   return {
     fields,
     onSubmit,

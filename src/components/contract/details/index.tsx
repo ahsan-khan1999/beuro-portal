@@ -72,7 +72,7 @@ const ContractDetails = () => {
           </div>
         </>
       ) : (
-        <div className={`2xl:mt-[390px] w-full 2xl:block`}>
+        <div className={`2xl:mt-[390px] w-full 2xl:block mb-10`}>
           <div className="mb-4 mt-5 2xl:mt-0 max-h-[150px] overflow-y-scroll">
             {contractDetails?.signedContracts &&
               contractDetails?.signedContracts?.length > 0 && (

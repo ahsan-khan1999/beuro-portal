@@ -1,7 +1,7 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FilterType, FiltersComponentProps } from "@/types";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
@@ -17,11 +17,53 @@ export default function ServicesFilters({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState<string>("");
+  // const [selectedSortLabel, setSelectedSortLabel] = useState<string>("");
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
 
   const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
+    setInputValue(value);
   };
+
+  // useEffect(() => {
+  //   const sortOption = router.query.sort;
+  //   if (typeof sortOption === "string") {
+  //     const selectedLabel = getSelectedSortLabel(sortOption);
+  //     setSelectedSortLabel(selectedLabel);
+  //   }
+  // }, [router.query.sort]);
+
+  // const getSelectedSortLabel = (value: string): string => {
+  //   switch (value) {
+  //     case "createdAt":
+  //       return translate("filters.sort_by.date");
+  //     case "-createdAt":
+  //       return translate("filters.sort_by.latest");
+  //     case "title":
+  //       return translate("filters.sort_by.a_z");
+  //     default:
+  //       return "";
+  //   }
+  // };
+
   const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
       handleFilterChange(updatedFilter);
@@ -29,28 +71,44 @@ export default function ServicesFilters({
     });
   };
 
-  const handlePressEnter = () => {
+  const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
       return updatedValue;
     });
   };
+
   return (
     <div className="flex items-center space-x-4">
       <InputField
-        handleChange={(value) => {}}
-        // value={filter.text}
-        onEnterPress={handlePressEnter}
+        handleChange={handleInputChange}
         ref={inputRef}
+        value={inputValue}
+        iconDisplay={false}
+        onEnterPress={onEnterPress}
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value=""
+        value={filter.sort || ""}
         dropDownIconClassName=""
         options={[
           { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },

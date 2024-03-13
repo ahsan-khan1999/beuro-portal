@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
@@ -16,7 +15,7 @@ import {
   mergeSchemas,
 } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
-import { useMemo, useState,useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   generateAddressFields,
   setAddressFieldValues,
@@ -45,7 +44,6 @@ export const useOfferContentEditDetails = (onClick: Function) => {
       []
   );
 
- 
   const handleAddAddressField = () => {
     setAddressCount(addressCount + 1);
   };
@@ -64,7 +62,7 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
   const handleBack = () => {
-   onClick(0, ComponentsType.offerContent)
+    onClick(0, ComponentsType.offerContent);
   };
   useEffect(() => {
     if (contentDetails?.id) {

@@ -1,13 +1,13 @@
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { Button } from "@/base-components/ui/button/button";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ContractFilter from "@/base-components/filter/contracts-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useRouter } from "next/router";
 export default function ContractFilters({
   filter,
   setFilter,
@@ -15,6 +15,8 @@ export default function ContractFilters({
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const [inputValue, setInputValue] = useState<string>("");
 
   const checkbox: CheckBoxType[] = [
     {
@@ -34,15 +36,44 @@ export default function ContractFilters({
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
+
+      const newStatus = updatedStatus.map(Number);
+
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       } else {
         const index = updatedStatus.indexOf(value);
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       }
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
@@ -52,9 +83,6 @@ export default function ContractFilters({
     });
   };
 
-  const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
-  };
   const hanldeSortChange = (value: string) => {
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
@@ -63,11 +91,35 @@ export default function ContractFilters({
     });
   };
 
-  const handlePressEnter = () => {
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
+
+  const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
@@ -94,10 +146,11 @@ export default function ContractFilters({
       </div>
       <div className="flex gap-x-4 items-center">
         <InputField
-          handleChange={(value) => {}}
-          // value={filter.text}
-          onEnterPress={handlePressEnter}
+          handleChange={handleInputChange}
           ref={inputRef}
+          value={inputValue}
+          iconDisplay={false}
+          onEnterPress={onEnterPress}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

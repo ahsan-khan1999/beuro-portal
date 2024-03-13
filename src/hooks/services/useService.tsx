@@ -2,19 +2,16 @@ import { useEffect, useState } from "react";
 import { Service } from "@/types/service";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
-import {
-  readService,
-  setServiceDetails,
-} from "@/api/slices/service/serviceSlice";
+import { readService } from "@/api/slices/service/serviceSlice";
 import { useTranslation } from "next-i18next";
-import { DEFAULT_SERVICE } from "@/utils/static";
-import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useRouter } from "next/router";
 
 const useService = () => {
   const { service, lastPage, totalCount, loading } = useAppSelector(
     (state) => state.service
   );
+
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
@@ -23,36 +20,105 @@ const useService = () => {
       $lte: FiltersDefaultValues.$lte,
     },
   });
+
+  const handleFilterChange = (query: FilterType) => {
+    setCurrentPage(1);
+    // dispatch(
+    //   readService({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Service);
+    //   }
+    // });
+  };
+
   const dispatch = useAppDispatch();
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
   const { t: translate } = useTranslation();
+  const { query } = useRouter();
+
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
   useEffect(() => {
-    dispatch(
-      readService({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Service);
-      }
-    });
-  }, [currentPage]);
+    const parsedPage = parseInt(query.page as string, 10);
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    }
+
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+
+    const queryParams = searchQuery || sortedValue;
+
+    let updatedFilter = {
+      text: "",
+      sort: "",
+    };
+
+    if (searchQuery || sortedValue) {
+      updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
+    }
+
+    setFilter(updatedFilter);
+
+    if (parsedPage) {
+      dispatch(
+        readService({
+          params: {
+            filter: queryParams ? updatedFilter : {},
+            page: Number(parsedPage) || currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Service);
+      });
+    }
+  }, [query]);
+
+  // useEffect(() => {
+  //   const parsedPage = parseInt(query.page as string, 10);
+  //   if (!isNaN(parsedPage)) {
+  //     setCurrentPage(parsedPage);
+  //   }
+  //   const searchQuery = query?.text as string;
+
+  //   const queryParams = searchQuery;
+
+  //   let updatedFilter = {
+  //     text: "",
+  //   };
+
+  //   if (searchQuery) {
+  //     updatedFilter.text = searchQuery;
+  //   }
+
+  //   setFilter(updatedFilter);
+  //   console.log(parsedPage, "parsedPage");
+  //   if (parsedPage) {
+  //     dispatch(
+  //       readService({
+  //         params: {
+  //           filter: queryParams ? updatedFilter : {},
+  //           page: Number(parsedPage) || currentPage,
+  //           size: 10,
+  //         },
+  //       })
+  //     ).then((response: any) => {
+  //       if (response?.payload) setCurrentPageRows(response?.payload?.Service);
+  //     });
+  //   }
+  // }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readService({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Service);
-      }
-    });
-  };
+
   return {
     currentPageRows,
     handlePageChange,
@@ -63,7 +129,7 @@ const useService = () => {
     setFilter,
     translate,
     loading,
-    currentPage
+    currentPage,
   };
 };
 

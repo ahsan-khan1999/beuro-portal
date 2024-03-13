@@ -1,19 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { Lead } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { FilterType } from "@/types";
-import {
-  readLead,
-  setLeadDetails,
-  updateLeadStatus,
-} from "@/api/slices/lead/leadSlice";
+import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
@@ -29,9 +25,11 @@ const useLeads = () => {
     (state) => state.lead
   );
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { query } = useRouter();
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
+
+  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -43,28 +41,11 @@ const useLeads = () => {
     },
     status: FiltersDefaultValues.None,
   });
-  // useMemo(() => {
-  //   setFilter({
-  //     ...filter,
-  //     status: query?.filter as string[],
-  //   });
-  // }, [query?.filter]);
+
   useEffect(() => {
     localStoreUtil.remove_data("lead");
     dispatch(setLeadDetails(DEFAULT_LEAD));
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-
-    // const queryParams = areFiltersEmpty(filter)
-    //   ? { filter: null, page: 1, size: 10 }
-    //   : { filter: filter, page: 1, size: 10 };
-
-    // dispatch(
-    //   readLead({ params: { filter: queryParams, page: 1, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Lead);
-    //   }
-    // });
   }, []);
 
   const totalItems = totalCount;
@@ -74,13 +55,14 @@ const useLeads = () => {
   const { modal } = useAppSelector((state) => state.global);
 
   const handleFilterChange = (query: FilterType) => {
-    dispatch(
-      readLead({ params: { filter: query, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Lead);
-      }
-    });
+    setCurrentPage(1);
+    // dispatch(
+    //   readLead({ params: { filter: query, page: currentPage, size: 10 } })
+    // ).then((res: any) => {
+    //   if (res?.payload) {
+    //     setCurrentPageRows(res?.payload?.Lead);
+    //   }
+    // });
   };
 
   const onClose = () => {
@@ -212,37 +194,47 @@ const useLeads = () => {
   };
 
   useEffect(() => {
-    // Update rows for the current page
-    if (query?.filter) {
-      const statusValue = staticEnums["LeadStatus"][query?.filter as string];
-      setFilter({
-        ...filter,
-        status: [statusValue?.toString()],
-      });
-      dispatch(
-        readLead({
-          params: {
-            filter: {
-              ...filter,
-              status: [staticEnums["LeadStatus"][query?.filter as string]],
-            },
-            page: currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-      });
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
     } else {
-      setFilter({
-        ...filter,
-        status: "None",
-      });
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+
+    const queryParams = queryStatus || searchQuery;
+
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+      } = {
+        status: filteredStatus,
+      };
+
+      if (searchQuery) {
+        updatedFilter.text = searchQuery;
+      }
+
+      setFilter(updatedFilter);
+
       dispatch(
         readLead({
           params: {
-            filter: { ...filter, status: "None" },
-            page: currentPage,
+            filter: updatedFilter,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })
@@ -250,7 +242,7 @@ const useLeads = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
       });
     }
-  }, [currentPage, query?.filter]);
+  }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

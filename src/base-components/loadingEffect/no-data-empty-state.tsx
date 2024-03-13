@@ -5,8 +5,9 @@ import { useTranslation } from "next-i18next";
 
 export default function NoDataEmptyState() {
   const { t: translate } = useTranslation();
+
   return (
-    <div className="w-full mt-6 flex flex-col gap-y-4 justify-center items-center rounded-lg">
+    <div className="w-full flex flex-col gap-y-4 justify-center items-center rounded-lg">
       <Image src={emptyState} alt="empty state" width={165} height={165} />
       <h1 className="text-dark font-semibold text-xl">
         {translate("empty_state.heading")}

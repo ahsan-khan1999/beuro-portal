@@ -46,6 +46,7 @@ export interface SideBar {
   title: string;
   pathname?: string;
   query?: string;
+  queryName: string;
   role: number[];
   inner?: SideBar[];
   className?: string;
@@ -483,7 +484,7 @@ export type GenerateOfferDateFormField = (
   handleRemoveDateField: UseFieldArrayRemove,
   loading?: boolean,
   control?: Control<FieldValues>,
-  wordDates?: { startDate: string, endDate: string }[]
+  wordDates?: { startDate: string; endDate: string }[]
 ) => FormField[];
 // Contract formfield
 export type GenerateLeadsFormField = (
@@ -623,7 +624,7 @@ export interface PaginationProps {
   itemsPerPage: number;
   onPageChange: (page: number) => void;
   containerClassName?: string;
-  currentPage: number
+  currentPage: number;
 }
 
 export interface PaginationItemProps {

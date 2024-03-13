@@ -68,6 +68,7 @@ export const loginUser: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const resetPassword: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("reset/user", async (args, thunkApi) => {
     const { router, data } = args as any;
@@ -87,6 +88,7 @@ export const resetPassword: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const forgotPassword: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("forgot/user", async (args, thunkApi) => {
     const { translate, data, setError } = args as any;

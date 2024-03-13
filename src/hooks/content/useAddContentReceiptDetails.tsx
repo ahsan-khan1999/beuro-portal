@@ -10,8 +10,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
+import { updateQuery } from "@/utils/update-query";
 
-export const useAddContentReceiptDetails = (onHandleBack:Function,onHandleNext: Function) => {
+export const useAddContentReceiptDetails = (
+  onHandleBack: Function,
+  onHandleNext: Function
+) => {
   const { t: translate } = useTranslation();
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
@@ -40,19 +44,23 @@ export const useAddContentReceiptDetails = (onHandleBack:Function,onHandleNext: 
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const handleSuccess = () => {
-    router.push("/content");
+
+  const changeRouterHandler = () => {
+    router.pathname = "/content";
+    router.query = { page: "1" };
+    updateQuery(router, router.locale as string);
   };
+
   useEffect(() => {
     if (contentDetails.id) {
       reset({
-        receiptContent:{
+        receiptContent: {
           ...contentDetails?.receiptContent,
           // attachments:
           //   (contentDetails?.receiptContent?.attachments?.length > 0 &&
           //     contentDetails?.receiptContent?.attachments[0]) ||
           //   null,
-        }
+        },
       });
     }
   }, [contentDetails.id]);
@@ -87,6 +95,7 @@ export const useAddContentReceiptDetails = (onHandleBack:Function,onHandleNext: 
     );
     if (res?.payload) onHandleNext();
   };
+
   return {
     fields,
     onSubmit,

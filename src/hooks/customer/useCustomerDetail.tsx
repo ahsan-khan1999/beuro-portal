@@ -90,8 +90,10 @@ export default function useCustomerDetail(stage: boolean) {
   const routeHandler = () => {
     dispatch(deleteCustomer({ customerDetails, router, setError, translate }));
   };
+
   const changeRouterHandler = () => {
     router.pathname = "/customers";
+    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     onClose();
   };
@@ -165,18 +167,22 @@ export default function useCustomerDetail(stage: boolean) {
     setError: UseFormSetError<FieldValues>;
     translate: Function;
   }) => {
+
+    
     let res = await dispatch(
       updateCustomer({ data, router, setError, translate })
     );
-    if (res?.payload) {
+
+    if (res.payload) {
       dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
       onClose();
-      (router.pathname = "/customers"), (router.query = {});
+      router.pathname = "/customers";
       updateQuery(router, router.locale as string);
     } else {
       onClose();
     }
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1

@@ -58,8 +58,10 @@ export const useEditOfferDetails = ({
 
   const onCancel = () => {
     router.pathname = "/offers";
+    router.query = { status: "None", page: "1" };
     updateQuery(router, router.locale as string);
   };
+
   const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,
@@ -73,6 +75,8 @@ export const useEditOfferDetails = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  
   useEffect(() => {
     if (offer) {
       dispatch(readOfferDetails({ params: { filter: offer } })).then(
@@ -96,10 +100,11 @@ export const useEditOfferDetails = ({
             address: res?.payload?.leadID?.customerDetail?.address,
             date: res?.payload?.date,
             customerID: res?.payload?.leadID?.customerID,
-            gender: staticEnums["Gender"][res?.payload?.leadID?.customerDetail?.gender],
+            gender:
+              staticEnums["Gender"][
+                res?.payload?.leadID?.customerDetail?.gender
+              ],
             time: res?.payload?.time,
-
-
           });
         }
       );
@@ -119,7 +124,10 @@ export const useEditOfferDetails = ({
     if (type && customerID) {
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID, status: [0, 1] }, paginate: 0 },
+          params: {
+            filter: { customerID: customerID, status: [0, 1, 3] },
+            paginate: 0,
+          },
         })
       );
     }
@@ -139,7 +147,7 @@ export const useEditOfferDetails = ({
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-        gender: null
+        gender: null,
       });
     } else {
       reset({
@@ -158,11 +166,10 @@ export const useEditOfferDetails = ({
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
         customerID: offerDetails?.leadID?.customerID,
-        gender: staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        gender:
+          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
         time: offerDetails?.time,
-
-
-      })
+      });
     }
   }, [type]);
 
@@ -178,9 +185,7 @@ export const useEditOfferDetails = ({
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
-      dispatch(
-        setCustomerDetails(selectedCustomers)
-      );
+      dispatch(setCustomerDetails(selectedCustomers));
 
       reset({
         ...selectedCustomers,
@@ -189,9 +194,7 @@ export const useEditOfferDetails = ({
         customerID: selectedCustomers?.id,
         leadID: "",
         gender: staticEnums["Gender"][selectedCustomers?.gender],
-
       });
-
     }
   };
   useMemo(() => {
@@ -202,7 +205,7 @@ export const useEditOfferDetails = ({
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);
   }, [selectedContent]);
-  const handleContentSelect = () => { }
+  const handleContentSelect = () => {};
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -280,6 +283,6 @@ export const useEditOfferDetails = ({
     errors,
     error,
     translate,
-    offerDetails
+    offerDetails,
   };
 };

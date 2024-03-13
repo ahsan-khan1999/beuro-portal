@@ -12,9 +12,10 @@ const CustomerEditDetails = ({
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useLeadCustomerEditDetails(onClick);
+
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-[#e5e5e5]">
+      <div className="flex justify-between  items-center pb-5 border-b border-[#e5e5e5]">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("leads.customer_details.heading")}
         </h2>

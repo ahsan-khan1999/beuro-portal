@@ -31,7 +31,7 @@ const LeadsDetails = () => {
               onStatusUpdate={handleStatusUpdate}
             />
           </div>
-          <div className="xlg:mt-[330px] w-full xlg:block">
+          <div className="xlg:mt-[330px] w-full xlg:block mb-10">
             <LeadsDetailsData
               loading={loading}
               shareImgModal={shareImgModal}

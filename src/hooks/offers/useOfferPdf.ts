@@ -13,22 +13,15 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EmailTemplate } from "@/types/settings";
-import {
-  AcknowledgementSlipProps,
-  ContractEmailHeaderProps,
-  PayableToProps,
-  PdfProps,
-  TemplateType,
-} from "@/types";
-import { OffersTableRowTypes, ServiceList } from "@/types/offers";
+import { ContractEmailHeaderProps, PdfProps, TemplateType } from "@/types";
+import { OffersTableRowTypes } from "@/types/offers";
 import localStoreUtil from "@/utils/localstore.util";
 import {
   updateModalType,
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
-import { calculateTax } from "@/utils/utility";
-import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { updateQuery } from "@/utils/update-query";
 
 let contractPdfInfo = {
   subject: "",
@@ -317,7 +310,9 @@ export const useOfferPdf = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
-    router.push("/offers");
+    router.pathname = "/offers";
+    router.query = { status: "None", page: "1" };
+    updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

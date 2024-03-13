@@ -1,10 +1,10 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { Button } from "@/base-components/ui/button/button";
 import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
-import React, { useRef } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function EmailTrackerFilters({
   filter,
@@ -13,11 +13,67 @@ export default function EmailTrackerFilters({
 }: FiltersComponentProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { t: translate } = useTranslation();
+  const router = useRouter();
+
+  const [inputValue, setInputValue] = useState<string>("");
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
 
   const handleInputChange = (value: string) => {
-    setFilter((prev: FilterType) => ({ ...prev, ["text"]: value }));
+    setInputValue(value);
   };
+
+  // const hanldeSortChange = (value: string) => {
+  //   setFilter((prev: FilterType) => {
+  //     const updatedFilter = { ...prev, ["sort"]: value };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
+
+  const onEnterPress = () => {
+    let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    if (inputValue === "") {
+      inputValue = FiltersDefaultValues.None;
+    }
+
+    setFilter((prev: FilterType) => {
+      const updatedValue = { ...prev, ["text"]: inputValue };
+      handleFilterChange(updatedValue);
+      return updatedValue;
+    });
+  };
+
   const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
       handleFilterChange(updatedFilter);
@@ -25,26 +81,15 @@ export default function EmailTrackerFilters({
     });
   };
 
-  const handleEnterPress = () => {
-    let inputValue = inputRef?.current?.value;
-    if (inputValue === "") {
-      inputValue = FiltersDefaultValues.None;
-    }
-    setFilter((prev: FilterType) => {
-      const updatedValue = { ...prev, ["text"]: inputValue };
-      handleFilterChange(updatedValue);
-      return updatedValue;
-    });
-  };
   return (
     <div className="flex">
       <div className="flex items-center space-x-4">
         <InputField
-          handleChange={(value) => {}}
-          // value={filter?.text}
-          iconDisplay={true}
-          onEnterPress={handleEnterPress}
+          handleChange={handleInputChange}
           ref={inputRef}
+          value={inputValue}
+          iconDisplay={false}
+          onEnterPress={onEnterPress}
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

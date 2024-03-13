@@ -34,23 +34,24 @@ export const useInvoiceEmail = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, collectiveInvoiceDetails, invoiceDetails } = useAppSelector(
-    (state) => state.invoice
-  );
-  const { modal } = useAppSelector(
-    (state) => state.global
-  );
-  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false })
+  const { loading, error, collectiveInvoiceDetails, invoiceDetails } =
+    useAppSelector((state) => state.invoice);
+  const { modal } = useAppSelector((state) => state.global);
+  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
   const isMail = router.query?.isMail;
 
-  const { content, contentDetails, loading: loadingContent } = useAppSelector((state) => state.content);
+  const {
+    content,
+    contentDetails,
+    loading: loadingContent,
+  } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (collectiveInvoiceDetails?.id &&
       transformAttachments(
-        collectiveInvoiceDetails?.invoiceID?.content
-          ?.invoiceContent?.attachments as string[]
+        collectiveInvoiceDetails?.invoiceID?.content?.invoiceContent
+          ?.attachments as string[]
       )) ||
-    []
+      []
   );
   const { invoiceID } = router.query;
   const schema = generateContractEmailValidationSchema(translate);
@@ -61,37 +62,38 @@ export const useInvoiceEmail = (
     setError,
     formState: { errors },
     reset,
-    setValue
+    setValue,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-
   useEffect(() => {
     if (invoiceID) {
-      if (content?.length === 0) dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+      if (content?.length === 0)
+        dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
       dispatch(
         readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
       ).then((res: any) => {
         if (res?.payload) {
           setAttachements(
             transformAttachments(
-              res?.payload?.invoiceID?.content
-                ?.invoiceContent?.attachments as string[]
+              res?.payload?.invoiceID?.content?.invoiceContent
+                ?.attachments as string[]
             ) || []
           );
           reset({
-            email:
-              res?.payload?.invoiceID?.customerDetail
-                ?.email,
+            email: res?.payload?.invoiceID?.customerDetail?.email,
             content: res?.payload?.invoiceID?.content?.id,
             subject:
-              res?.payload?.title || "" + " " + res?.payload?.invoiceNumber + " " + res?.payload?.invoiceID?.createdBy?.company?.companyName,
+              res?.payload?.title ||
+              "" +
+                " " +
+                res?.payload?.invoiceNumber +
+                " " +
+                res?.payload?.invoiceID?.createdBy?.company?.companyName,
             description:
-              res?.payload?.invoiceID?.content
-                ?.invoiceContent?.body || "",
-            pdf: res?.payload?.invoiceID?.content
-              ?.invoiceContent?.attachments,
+              res?.payload?.invoiceID?.content?.invoiceContent?.body || "",
+            pdf: res?.payload?.invoiceID?.content?.invoiceContent?.attachments,
 
             // title: res?.payload?.title,
             // additionalDetails: res?.payload?.additionalDetails || "",
@@ -105,11 +107,16 @@ export const useInvoiceEmail = (
     const selectedContent = content.find((item) => item.id === id);
     if (selectedContent) {
       reset({
-        email:
-          collectiveInvoiceDetails?.invoiceID
-            ?.customerDetail?.email,
+        email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.invoiceContent?.title || "" + " " + collectiveInvoiceDetails?.invoiceNumber + " " + collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName,
+        subject:
+          selectedContent?.invoiceContent?.title ||
+          "" +
+            " " +
+            collectiveInvoiceDetails?.invoiceNumber +
+            " " +
+            collectiveInvoiceDetails?.invoiceID?.createdBy?.company
+              ?.companyName,
         description: selectedContent?.invoiceContent?.body || "",
         pdf: selectedContent?.invoiceContent?.attachments,
         // title: collectiveInvoiceDetails?.title,
@@ -146,11 +153,10 @@ export const useInvoiceEmail = (
     router.push({
       pathname: "/invoices/details",
       query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
-    })
+    });
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
     // const apiData = {
     //   id: collectiveInvoiceDetails?.id,
     //   title: data?.title,
@@ -160,7 +166,7 @@ export const useInvoiceEmail = (
     // const response = await dispatch(updateInvoiceContent({ data: apiData }));
     // if (response?.payload) {
     if (isMail) {
-      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string)
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
       let apiData = { ...data, id: invoiceID, pdf: fileUrl };
 
       const res = await dispatch(sendInvoiceEmail({ data: apiData }));
@@ -169,8 +175,6 @@ export const useInvoiceEmail = (
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
       }
     } else {
-
-
       const updatedData = {
         ...data,
         id: collectiveInvoiceDetails?.id,
@@ -202,7 +206,6 @@ export const useInvoiceEmail = (
     loading,
     onClose,
     onSuccess,
-    modal
-
+    modal,
   };
 };

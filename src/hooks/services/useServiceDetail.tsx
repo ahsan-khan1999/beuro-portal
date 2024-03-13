@@ -41,6 +41,7 @@ const useServiceDetail = (stage: boolean) => {
   const { modal } = useAppSelector((state) => state.global);
   const [isUpdate, setIsUpdate] = useState<boolean>(stage);
   const id = router.query.service;
+
   const onClose = () => {
     dispatch(
       updateModalType({
@@ -48,9 +49,11 @@ const useServiceDetail = (stage: boolean) => {
       })
     );
   };
+
   const handleUpdateConfirm = (data: any) => {
     dispatch(updateService({ data, router, setError, translate }));
   };
+
   const handleCreateSuccess = () => {
     dispatch(
       updateModalType({
@@ -87,11 +90,14 @@ const useServiceDetail = (stage: boolean) => {
   const routeHandler = () => {
     dispatch(deleteService({ serviceDetails, router, setError, translate }));
   };
+
   const changeRouterHandler = () => {
     router.pathname = "/services";
+    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     onClose();
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -167,6 +173,7 @@ const useServiceDetail = (stage: boolean) => {
     isUpdate,
     handleUpdateCancel
   );
+
   const confrimUpdate = async ({
     data,
     router,
@@ -184,12 +191,13 @@ const useServiceDetail = (stage: boolean) => {
     if (res?.payload) {
       dispatch(setServiceDetails(DEFAULT_SERVICE));
       onClose();
-      (router.pathname = "/services"), (router.query = {});
+      (router.pathname = "/services"), (router.query = { page: "1" });
       updateQuery(router, router.locale as string);
     } else {
       onClose();
     }
   };
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let res;
     if (!stage) {
@@ -199,7 +207,7 @@ const useServiceDetail = (stage: boolean) => {
 
       if (res?.payload) handleCreateSuccess();
     } else if (stage) {
-      handleUpdate({...data});
+      handleUpdate({ ...data });
     }
   };
 
@@ -217,4 +225,5 @@ const useServiceDetail = (stage: boolean) => {
     loading,
   };
 };
+
 export default useServiceDetail;

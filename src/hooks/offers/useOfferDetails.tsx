@@ -32,6 +32,7 @@ import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
+import { updateQuery } from "@/utils/update-query";
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -151,7 +152,9 @@ export default function useOfferDetails() {
   };
 
   const onSuccess = () => {
-    router.push("/offers");
+    router.pathname = "/offers";
+    router.query = { status: "None", page: "1" };
+    updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -392,6 +395,6 @@ export default function useOfferDetails() {
     shareImgModal,
     handleUploadImages,
     handleImageSlider,
-    handleUploadFile
+    handleUploadFile,
   };
 }
