@@ -65,9 +65,9 @@ export const SingleFielAttachmentField = ({
     if (response?.payload) {
       const name = getFileNameFromUrl(response?.payload);
       newAttachement = { name, value: response?.payload };
+      setAttachements && setAttachements(newAttachement);
+      setFileUploaded(true);
     }
-
-    setAttachements && setAttachements(newAttachement);
   };
 
   return (
