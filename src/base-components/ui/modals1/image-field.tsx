@@ -48,6 +48,7 @@ export const ImageField = ({
   const router = useRouter();
   const formdata = new FormData();
   const dispatch = useAppDispatch();
+
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
@@ -82,6 +83,7 @@ export const ImageField = ({
       setAttachements && setAttachements(newAttachement);
     }
   };
+
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
   };
