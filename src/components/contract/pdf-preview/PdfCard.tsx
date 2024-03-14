@@ -25,12 +25,33 @@ const PdfCard = ({
   const { t: translate } = useTranslation();
   const { contractDetails } = useAppSelector((state) => state.contract);
 
+  // const handleBackToDetail = () => {
+  //   const { status, page, text, sort } = router.query;
+
+  //   router.push({
+  //     pathname: "/contract/details",
+  //     query: { status, page, text, sort, contract: contractDetails?.id },
+  //   });
+  // };
+
   const handleBackToDetail = () => {
-    const { status, text } = router.query;
+    const { status, page, text, sort } = router.query;
+
+    const queryParams = Object.entries({
+      status,
+      page,
+      text,
+      sort,
+    }).reduce((acc, [key, value]) => {
+      if (value) {
+        acc[key] = value;
+      }
+      return acc;
+    }, {});
 
     router.push({
       pathname: "/contract/details",
-      query: { status, text, contract: contractDetails?.id },
+      query: { ...queryParams, offer: contractDetails?.id },
     });
   };
 
