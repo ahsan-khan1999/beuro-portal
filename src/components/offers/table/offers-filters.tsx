@@ -191,7 +191,7 @@ export default function OffersFilters({
             },
             {
               label: `${translate("filters.sort_by.a_z")}`,
-              value: "leadID.customerDetail.fullName",
+              value: "customerDetail.fullName",
             },
           ]}
           label={translate("common.sort_button")}

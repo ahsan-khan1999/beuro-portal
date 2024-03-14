@@ -64,6 +64,7 @@ const OfferDetailsCard = ({
     updateQuery(router, router.locale as string);
   };
 
+  
   return (
     <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">

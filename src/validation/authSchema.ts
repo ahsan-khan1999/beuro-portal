@@ -60,9 +60,9 @@ export const detailScreensValidation = (translate: Function) => {
     [CompanyFields.websiteUrl]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [CompanyFields.mwstNumber]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    // [CompanyFields.mwstNumber]: yup
+    //   .string()
+    //   .required(translate("validationMessages.required")),
     [CompanyFields.companyLogo]: yup.string().required(),
   });
 };
@@ -193,7 +193,6 @@ export const generateChangePasswordValidationSchema = (translate: Function) => {
       .required(translate("validationMessages.required")),
   });
 };
-
 
 export const generateProfileChangePasswordValidationSchema = (
   translate: Function

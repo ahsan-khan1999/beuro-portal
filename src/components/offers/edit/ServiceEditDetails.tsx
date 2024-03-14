@@ -22,6 +22,7 @@ const ServiceEditDetails = ({
     translate,
     offerDetails,
   } = useServiceOfferEditDetail({ handleNext });
+
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10">
