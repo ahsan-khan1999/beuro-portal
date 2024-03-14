@@ -2,7 +2,7 @@ import Image from "next/image";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { useState } from "react";
-import { uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
+import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { getFileNameFromUrl } from "@/utils/utility";
 
@@ -56,22 +56,18 @@ export const SingleFielAttachmentField = ({
   };
 
   const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    for (let item of e.dataTransfer.files) {
-      formdata.append("file", item);
+    const file = e.dataTransfer.files[0];
+    formdata.append("file", file);
+
+    const response = await dispatch(uploadFileToFirebase(formdata));
+    let newAttachement = attachements || [];
+
+    if (response?.payload) {
+      const name = getFileNameFromUrl(response?.payload);
+      newAttachement = { name, value: response?.payload };
     }
 
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
-        });
-      });
-      setAttachements && setAttachements(newAttachement);
-    }
+    setAttachements && setAttachements(newAttachement);
   };
 
   return (
