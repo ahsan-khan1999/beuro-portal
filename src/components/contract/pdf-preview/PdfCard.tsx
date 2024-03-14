@@ -44,7 +44,7 @@ const PdfCard = ({
       sort,
     }).reduce((acc, [key, value]) => {
       if (value) {
-        acc[key] = value;
+        (acc as { [key: string]: string | string[] })[key] = value;
       }
       return acc;
     }, {});
