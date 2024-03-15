@@ -61,7 +61,7 @@ export const useEditOfferAddressDetails = ({
           : offerDetails?.leadID?.addressID
           ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
               ...item,
-              label: item?.label ? item?.label : `Address ${++index}`,
+              label: item?.label ? item?.label : `Adresse ${++index}`,
             }))
           : offerDetails?.leadID?.customerDetail?.address
           ? [

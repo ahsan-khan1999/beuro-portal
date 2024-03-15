@@ -51,15 +51,15 @@ export const generateLoginValidation = (translate: Function) => {
 export const detailScreensValidation = (translate: Function) => {
   return yup.object().shape({
     [CompanyFields.name]: yup.string().required("tdguy"),
-    [CompanyFields.phoneNumber]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [CompanyFields.mobileNumber]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [CompanyFields.websiteUrl]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    // [CompanyFields.phoneNumber]: yup
+    //   .string()
+    //   .required(translate("validationMessages.required")),
+    // [CompanyFields.mobileNumber]: yup
+    //   .string()
+    //   .required(translate("validationMessages.required")),
+    // [CompanyFields.websiteUrl]: yup
+    //   .string()
+    //   .required(translate("validationMessages.required")),
     // [CompanyFields.mwstNumber]: yup
     //   .string()
     //   .required(translate("validationMessages.required")),

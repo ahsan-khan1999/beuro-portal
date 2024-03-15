@@ -1,9 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateLeadAddressFormField,
-  GenerateOffersFormField,
-} from "@/types";
+import { FormField, GenerateLeadAddressFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
 import editIcon from "@/assets/svgs/edit_primary.svg";
 
@@ -64,7 +60,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `address.${i}.label`,
                 name: `address.${i}.label`,
                 register,
-                value: `Address ${++valueIndex}`,
+                value: `Adresse ${++valueIndex}`,
                 setValue,
               },
             }) || {
@@ -76,7 +72,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 id: `address.${i}.label`,
                 name: `address.${i}.label`,
                 register,
-                value: `Address ${++valueIndex}`,
+                value: `Adresse ${++valueIndex}`,
                 disabled: true,
                 className:
                   "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",

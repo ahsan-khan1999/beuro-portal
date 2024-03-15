@@ -2100,7 +2100,7 @@
     "December": "December"
   },
   "admin_role": {
-    "Admin": "Admin",
+    "Employee": "Employee",
     "Company": "Company"
   },
   "header_alignment": {
