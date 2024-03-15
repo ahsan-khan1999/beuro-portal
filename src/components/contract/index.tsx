@@ -20,9 +20,10 @@ export default function Contract() {
     filter,
     setFilter,
     loading,
+    isLoading,
     handleContractStatusUpdate,
     handlePaymentStatusUpdate,
-    currentPage
+    currentPage,
   } = useContract();
 
   const CurrentComponent = useEmptyStates(
@@ -34,7 +35,7 @@ export default function Contract() {
       handleContractStatusUpdate={handleContractStatusUpdate}
     />,
     currentPageRows.length > 0,
-    loading
+    isLoading
   );
 
   return (

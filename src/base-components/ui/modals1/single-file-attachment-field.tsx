@@ -1,8 +1,10 @@
 import Image from "next/image";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
-import { useRouter } from "next/router";
 import { useState } from "react";
+import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { getFileNameFromUrl } from "@/utils/utility";
 
 export const SingleFielAttachmentField = ({
   id,
@@ -22,7 +24,7 @@ export const SingleFielAttachmentField = ({
   isAttachement?: boolean;
 }) => {
   const formdata = new FormData();
-
+  const dispatch = useAppDispatch();
   const [fileUploaded, setFileUploaded] = useState(false);
 
   const handleFileInput = async (
@@ -53,20 +55,18 @@ export const SingleFielAttachmentField = ({
     e.preventDefault();
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
+    const file = e.dataTransfer.files[0];
+    formdata.append("file", file);
 
-    if (e.dataTransfer && e.dataTransfer.items.length > 0) {
-      const file = e.dataTransfer.items[0].getAsFile();
+    const response = await dispatch(uploadFileToFirebase(formdata));
+    let newAttachement = attachements || [];
 
-      if (file) {
-        setAttachements && setAttachements([]);
-
-        formdata.set("file", file);
-
-        setFileUploaded(true);
-      }
+    if (response?.payload) {
+      const name = getFileNameFromUrl(response?.payload);
+      newAttachement = { name, value: response?.payload };
+      setAttachements && setAttachements(newAttachement);
+      setFileUploaded(true);
     }
   };
 

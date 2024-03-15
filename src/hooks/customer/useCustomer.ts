@@ -11,7 +11,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
 export default function useCustomer() {
-  const { customer, lastPage, totalCount, loading } = useAppSelector(
+  const { customer, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.customer
   );
 
@@ -40,8 +40,12 @@ export default function useCustomer() {
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
     }
 
     const searchQuery = query?.text as string;
@@ -66,7 +70,7 @@ export default function useCustomer() {
         readCustomer({
           params: {
             filter: queryParams ? updatedFilter : {},
-            page: Number(parsedPage) || currentPage,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })
@@ -89,6 +93,7 @@ export default function useCustomer() {
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
     currentPage,
   };
 }

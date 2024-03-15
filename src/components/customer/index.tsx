@@ -17,13 +17,14 @@ export default function Customers() {
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
     currentPage,
   } = useCustomer();
 
   const CurrentComponent = useEmptyStates(
     <TableRow currentPageRows={currentPageRows} />,
     currentPageRows?.length > 0,
-    loading
+    isLoading
   );
 
   return (

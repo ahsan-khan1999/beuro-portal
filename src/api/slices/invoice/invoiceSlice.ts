@@ -13,6 +13,7 @@ import localStoreUtil from "@/utils/localstore.util";
 interface InvoiceState {
   invoice: InvoiceTableRowTypes[];
   loading: boolean;
+  isLoading: boolean;
   error: Record<string, object>;
   lastPage: number;
   totalCount: number;
@@ -30,6 +31,7 @@ interface InvoiceState {
 const initialState: InvoiceState = {
   invoice: [],
   loading: false,
+  isLoading: true,
   error: {},
   lastPage: 1,
   totalCount: 10,
@@ -376,7 +378,7 @@ const InvoiceSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(readInvoice.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(readInvoice.fulfilled, (state, action) => {
       state.invoice = action.payload.Invoice;
@@ -384,10 +386,10 @@ const InvoiceSlice = createSlice({
       state.totalCount = action.payload.totalCount;
       state.invoiceSum.sumOfAllPages = action.payload.sumOfAllPages;
       state.invoiceSum.sumOfTotalsPerPage = action.payload.sumOfTotalsPerPage;
-      state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(readInvoice.rejected, (state) => {
-      state.loading = false;
+      state.isLoading = false;
     });
 
     builder.addCase(readInvoiceDetails.pending, (state) => {

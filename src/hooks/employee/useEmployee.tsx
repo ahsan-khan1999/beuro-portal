@@ -17,7 +17,7 @@ const useEmployee = () => {
     },
   });
 
-  const { employee, lastPage, totalCount, loading } = useAppSelector(
+  const { employee, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.employee
   );
 
@@ -48,8 +48,12 @@ const useEmployee = () => {
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
     }
 
     const searchQuery = query?.text as string;
@@ -74,7 +78,7 @@ const useEmployee = () => {
         readEmployee({
           params: {
             filter: queryParams ? updatedFilter : {},
-            page: Number(parsedPage) || currentPage,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })
@@ -128,6 +132,7 @@ const useEmployee = () => {
     handleFilterChange,
     translate,
     loading,
+    isLoading,
     currentPage,
   };
 };

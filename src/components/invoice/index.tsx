@@ -18,6 +18,7 @@ export default function Invoices() {
     renderModal,
     filter,
     loading,
+    isLoading,
     setFilter,
     handleFilterChange,
     currentPage,
@@ -27,7 +28,7 @@ export default function Invoices() {
   const CurrentComponent = useEmptyStates(
     <TableRows dataToAdd={currentPageRows} handleNotes={handleNotes} />,
     currentPageRows.length > 0,
-    loading
+    isLoading
   );
 
   const { t: translate } = useTranslation();

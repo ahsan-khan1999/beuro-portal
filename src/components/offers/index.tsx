@@ -20,6 +20,7 @@ export default function Offers() {
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
     handleOfferStatusUpdate,
     handlePaymentStatusUpdate,
     currentPage,
@@ -34,7 +35,7 @@ export default function Offers() {
       handlePaymentStatusUpdate={handlePaymentStatusUpdate}
     />,
     currentPageRows?.length > 0,
-    loading
+    isLoading
   );
 
   return (

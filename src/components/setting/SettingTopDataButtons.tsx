@@ -1,27 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SettingLayout from "./SettingLayout";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const SettingTopDataButtons = ({
   switchDetails,
   setSwitchDetails,
 }: {
-  switchDetails: number; // Change the type to number
-  setSwitchDetails: (item: number) => void; // Change the type to number
+  switchDetails: number;
+  setSwitchDetails: (item: number) => void;
 }) => {
+  const router = useRouter();
   const { t: translate } = useTranslation();
+  const [selectedTab, setSelectedTab] = useState<number | null>(switchDetails);
+
+  const tab = router.query.tab;
+
+  useEffect(() => {
+    if (tab && !Array.isArray(tab) && !isNaN(Number(tab))) {
+      setSwitchDetails(parseInt(tab as string, 10));
+      setSelectedTab(parseInt(tab as string, 10));
+    } else {
+      setSwitchDetails(0);
+      setSelectedTab(0);
+    }
+  }, [router.query]);
+
   const buttonsData: string[] = [
     `${translate("setting.steps_heading.account_setting")}`,
     `${translate("setting.steps_heading.system_setting")}`,
     `${translate("setting.steps_heading.templates")}`,
     `${translate("setting.steps_heading.follow_up_setting")}`,
-    // `${translate("setting.steps_heading.billing")}`,
     `${translate("setting.steps_heading.mail_setting")}`,
     `${translate("setting.steps_heading.qr_settings")}`,
   ];
 
-  // State to track the active button index (set to 0 for the first item by default)
-  const [activeButton, setActiveButton] = useState(0);
+  const handleTabClick = (index: number) => {
+    setSelectedTab(index);
+    setSwitchDetails(index);
+    router.push(`?tab=${index}`, undefined, { shallow: true });
+  };
 
   return (
     <SettingLayout containerClassName="bg-white py-3">
@@ -30,12 +48,12 @@ const SettingTopDataButtons = ({
           <div className="flex justify-center" key={index}>
             <button
               className={`px-4 py-[10px] whitespace-nowrap text-[#4B4B4B] font-medium text-base ${
-                switchDetails === index
+                selectedTab === index
                   ? "bg-[#4A13E7] text-white rounded-md"
                   : ""
               }`}
               key={index}
-              onClick={() => setSwitchDetails(index)}
+              onClick={() => handleTabClick(index)}
             >
               {item}
             </button>

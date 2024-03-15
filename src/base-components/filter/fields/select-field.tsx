@@ -1,12 +1,11 @@
 import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
 import { OptionsFieldProps } from "@/types/global";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { combineClasses } from "@/utils/utility";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 export default function SelectField({
   title,
@@ -27,7 +26,6 @@ export default function SelectField({
 
   const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
   const [isOpen, setIsOpen] = useState(false);
-  const { query } = useRouter();
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -37,9 +35,9 @@ export default function SelectField({
     setIsOpen(false);
   };
 
-  const handleItemSelected = (selectedValue: string) => {
-    options.forEach(({ label, value }) => {
-      if (selectedValue === value) {
+  const handleItemSelected = (selectedValue: string, selectedIndex: number) => {
+    options.forEach(({ label, value }, index) => {
+      if (selectedIndex === index) {
         setSelectedLabel(label);
         handleChange(selectedValue);
       }
@@ -96,7 +94,7 @@ export default function SelectField({
                     className="flex justify-start px-2 py-1 hover:bg-[#eaebec] rounded-sm cursor-pointer mr-1 hoverTransetion"
                     key={idx}
                     onClick={() => {
-                      handleItemSelected(value);
+                      handleItemSelected(value, idx);
                       setIsOpen(false);
                     }}
                   >

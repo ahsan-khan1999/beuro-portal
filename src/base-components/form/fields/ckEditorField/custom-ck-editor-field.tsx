@@ -1,11 +1,9 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditorBoxProps } from "@/types";
 
 import CustomEditor from "@/base-components/ui/editor/ckeditor/build/ckeditor";
-import { replaceClassesWithInlineStyles } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 
 const CustomCKEditor = ({

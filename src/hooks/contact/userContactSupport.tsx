@@ -36,12 +36,14 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
   }, []);
 
   const fields = ContactSupportFormField(register, loading, control);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(
       createContactSupport({ data, router, setError, translate })
     );
     if (response?.payload) requestSubmitHandler();
   };
+
   return {
     fields,
     onSubmit,

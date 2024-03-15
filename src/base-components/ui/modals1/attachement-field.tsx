@@ -77,6 +77,7 @@ export const AttachementField = ({
       setAttachements && setAttachements(newAttachement);
     }
   };
+
   const handleDeleteFile = (index: number) => {
     const list = attachements && [...attachements];
     list?.splice(index, 1);
