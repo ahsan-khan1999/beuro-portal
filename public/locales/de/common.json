@@ -565,8 +565,8 @@
       }
     },
     "follow_up_setting": {
-      "on_offer_expire": "Nachverfolgung bei Ablauf des Angebots erstellen",
-      "on_lead_create": "Nachverfolgung bei Anfragen-Erstellung erstellen",
+      "on_offer_expire": "Nachverfolgung beim Angebot",
+      "on_lead_create": "Nachverfolgung für Anfragen",
       "add_follow_up": {
         "heading": "Gründe für die Nachverfolgung",
         "add_label": "Gründe hinzufügen",
@@ -2100,7 +2100,7 @@
     "December": "Dezember"
   },
   "admin_role": {
-    "Admin": "Verwaltung",
+    "Employee": "Mitarbeiter",
     "Company": "Unternehmen"
   },
   "header_alignment": {
