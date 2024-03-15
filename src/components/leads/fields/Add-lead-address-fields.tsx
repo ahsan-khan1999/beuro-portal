@@ -39,7 +39,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            value: `Address ${i + 1}`,
+            value: `Adresse ${i + 1}`,
             setValue,
           },
         }
@@ -52,7 +52,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            value: `Address ${i + 1}`,
+            value: `Adresse ${i + 1}`,
             disabled: true,
             className:
               "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
@@ -79,7 +79,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
         containerClass: "mt-2",
         field: {
           type: Field.div,
-          className: "flex  space-x-2",
+          className: "flex space-x-2",
           id: `address-labels-${i}`,
           children: [
             // (!(addressType && !addressType[i - 1]) && {

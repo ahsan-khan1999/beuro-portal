@@ -34,6 +34,7 @@ export default function useAddReason() {
     },
     reason: followUps?.reason || [],
   });
+
   const dispatch = useAppDispatch();
   const schema = generateAddReasonValidation(translate);
   const { modal } = useAppSelector((state) => state.global);
@@ -58,7 +59,8 @@ export default function useAddReason() {
         });
       }
     });
-  }, []);
+  }, [dispatch, translate]);
+
   const {
     register,
     handleSubmit,
@@ -105,9 +107,11 @@ export default function useAddReason() {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const handleSaveSetings = async () => {
     const data = getValues();
     let apiData = {
@@ -122,9 +126,11 @@ export default function useAddReason() {
     );
     if (response?.payload) handleSuccess();
   };
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleAddReason(data?.reason);
   };
+
   return {
     error,
     handleSubmit,
