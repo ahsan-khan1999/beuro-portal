@@ -9,6 +9,7 @@ import { SignPdf } from "@/components/pdf/sign-pdf";
 import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
+import { staticEnums } from "@/utils/static";
 
 interface ActionType {
   payload: PublicOffersTableRowTypes;
@@ -45,11 +46,27 @@ const SignPdfPreview = () => {
         (response: ActionType) => {
           if (response?.payload) {
             const offerDetails: PublicOffersTableRowTypes = response?.payload;
-            // calculate discount percentage
-            const discountPercentage =
-              (offerDetails?.Offer?.discountAmount /
-                offerDetails?.Offer?.subTotal) *
-              100;
+            const newCalculatedValue =
+              (offerDetails?.Offer?.subTotal / 100) *
+              offerDetails?.Offer?.discountAmount;
+
+            console.log(offerDetails?.Offer?.discountType);
+
+            let discountPercentage;
+            if (
+              staticEnums["DiscountType"][
+                offerDetails?.Offer
+                  ?.discountType as keyof (typeof staticEnums)["DiscountType"]
+              ] === 1
+            ) {
+              discountPercentage =
+                (offerDetails?.Offer?.discountAmount /
+                  offerDetails?.Offer?.subTotal) *
+                100;
+            } else {
+              discountPercentage =
+                (newCalculatedValue / offerDetails?.Offer?.subTotal) * 100;
+            }
 
             let formatData: PdfProps = {
               isCanvas: true,
@@ -105,6 +122,7 @@ const SignPdfPreview = () => {
                 discountPercentage: discountPercentage?.toString(),
                 grandTotal: offerDetails?.Offer?.total?.toString(),
                 discountType: offerDetails?.Offer?.discountType,
+                updatedDiscountAmount: newCalculatedValue.toString(),
                 taxType: offerDetails?.Offer?.taxType,
                 serviceDiscountSum:
                   offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce(
