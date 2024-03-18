@@ -92,6 +92,8 @@ const OfferPdfDownload = ({
     isGlobalDiscount: serviceItemFooter?.isDiscount,
   };
 
+  console.log(serviceItem);
+
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
     Number(serviceItemFooter?.serviceDiscountSum) > 0

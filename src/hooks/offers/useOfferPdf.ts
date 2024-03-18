@@ -22,6 +22,7 @@ import {
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { updateQuery } from "@/utils/update-query";
+import { staticEnums } from "@/utils/static";
 
 let contractPdfInfo = {
   subject: "",
@@ -105,9 +106,23 @@ export const useOfferPdf = () => {
         if (offerData?.payload) {
           const offerDetails: OffersTableRowTypes = offerData?.payload;
 
-          // calculate discount percentage
-          const discountPercentage =
-            (offerDetails?.discountAmount / offerDetails?.subTotal) * 100;
+          const newCalculatedValue =
+            (offerDetails?.subTotal / 100) * offerDetails?.discountAmount;
+
+          console.log(offerDetails?.discountType);
+
+          let discountPercentage;
+          if (
+            staticEnums["DiscountType"][
+              offerDetails?.discountType as keyof (typeof staticEnums)["DiscountType"]
+            ] === 1
+          ) {
+            discountPercentage =
+              (offerDetails?.discountAmount / offerDetails?.subTotal) * 100;
+          } else {
+            discountPercentage =
+              (newCalculatedValue / offerDetails?.subTotal) * 100;
+          }
 
           let formatData: PdfProps<ContractEmailHeaderProps> = {
             id: offerDetails?.id,
@@ -158,6 +173,7 @@ export const useOfferPdf = () => {
               tax: offerDetails?.taxAmount?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
               discountPercentage: discountPercentage.toString(),
+              updatedDiscountAmount: newCalculatedValue.toString(),
               grandTotal: offerDetails?.total?.toString(),
               discountType: offerDetails?.discountType,
               taxType: offerDetails?.taxType,
