@@ -1,6 +1,5 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { ServiceList } from "@/types/offers";
-import { ProductItemProps } from "@/types/types";
 
 export const ProductDiscountItem = ({
   count,
@@ -14,6 +13,7 @@ export const ProductDiscountItem = ({
   totalDiscount,
   pagebreak,
   isGlobalDiscount,
+  discountPercentage,
 }: ServiceList) => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (
@@ -41,15 +41,16 @@ export const ProductDiscountItem = ({
             {isGlobalDiscount ? price : totalDiscount}{" "}
           </span>
           {/* {isDiscount && ( */}
-            <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
-              {isGlobalDiscount ? discount : totalDiscount || "-"}{" "}
-            </span>
+          <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
+            {isGlobalDiscount ? discount : totalDiscount || "-"}{" "}
+          </span>
           {/* )} */}
 
           <span className="text-sm font-semibold text-[#000] min-w-[50px] break-all">
             {isGlobalDiscount
               ? Number(discount || 0) + Number(totalDiscount || 0)
-              : totalDiscount}
+              : totalDiscount}{" "}
+            ({discountPercentage?.toFixed(2)} %)
           </span>
         </div>
       </div>
