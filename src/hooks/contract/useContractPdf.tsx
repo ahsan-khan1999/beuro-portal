@@ -155,6 +155,11 @@ export const useContractPdf = () => {
         }
         if (offerData?.payload) {
           const contractDetails: contractTableTypes = offerData?.payload;
+          const discountPercentage =
+            (contractDetails?.offerID?.discountAmount /
+              contractDetails?.offerID?.subTotal) *
+            100;
+
           let formatData: PdfProps<ContractEmailHeaderProps> = {
             id: contractDetails?.id,
             attachement: contractDetails?.attachement,
@@ -212,6 +217,7 @@ export const useContractPdf = () => {
               isDiscount: contractDetails?.offerID?.isDiscount,
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
               tax: contractDetails?.offerID?.taxAmount?.toString(),
+              discountPercentage: discountPercentage.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
               discountType: contractDetails?.offerID?.discountType,

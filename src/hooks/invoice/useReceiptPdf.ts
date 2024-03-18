@@ -150,6 +150,11 @@ export const useReceiptPdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
+          // calculate discount percentage
+          const discountPercentage =
+            (invoiceDetails?.invoiceID?.discountAmount /
+              invoiceDetails?.invoiceID?.subTotal) *
+            100;
 
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
@@ -205,8 +210,8 @@ export const useReceiptPdf = () => {
               isDiscount: invoiceDetails?.invoiceID?.isDiscount,
               subTotal: invoiceDetails?.invoiceID?.subTotal?.toString(),
               tax: invoiceDetails?.invoiceID?.taxAmount?.toString(),
-
               discount: invoiceDetails?.invoiceID?.discountAmount?.toString(),
+              discountPercentage: discountPercentage.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount.toString(),

@@ -72,6 +72,7 @@ const PdfFile = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+
   const disscountTableRow = {
     serviceTitle: "Rabatt",
     price: Number(serviceItemFooter?.discount),
@@ -85,6 +86,7 @@ const PdfFile = ({
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
     isGlobalDiscount: serviceItemFooter?.isDiscount,
   };
+
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
     Number(serviceItemFooter?.serviceDiscountSum) > 0

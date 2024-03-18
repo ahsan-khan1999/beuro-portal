@@ -60,6 +60,7 @@ export const ServiceTableDiscountRow = ({
   isDiscount,
   totalDiscount,
   isGlobalDiscount,
+  discountPercentage,
 }: Partial<ServiceList>) => {
   return (
     <View style={styles.headerContainer} break={pagebreak}>
@@ -83,7 +84,8 @@ export const ServiceTableDiscountRow = ({
           <Text style={styles.headerText}>
             {isGlobalDiscount
               ? Number(discount || 0) + Number(totalDiscount || 0)
-              : totalDiscount}
+              : totalDiscount}{" "}
+            ({discountPercentage?.toFixed(2)} %)
           </Text>
         </View>
       </View>

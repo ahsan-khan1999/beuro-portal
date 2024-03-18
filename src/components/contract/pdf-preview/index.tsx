@@ -29,7 +29,7 @@ const PdfPriview = () => {
     handleSendByPost,
     onClose,
     onSuccess,
-    contractDetails
+    contractDetails,
   } = useContractPdf();
 
   const { t: translate } = useTranslation();
@@ -60,7 +60,7 @@ const PdfPriview = () => {
 
   return (
     <>
-      {loading  ? (
+      {loading ? (
         <LoadingState />
       ) : (
         <>

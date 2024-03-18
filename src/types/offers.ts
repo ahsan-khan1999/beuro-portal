@@ -184,6 +184,7 @@ export interface ServiceList {
   count: number | string;
   pagebreak: boolean;
   discount: number;
+  discountPercentage: number;
   isDiscount?: boolean;
   totalDiscount?: number;
   isGlobalDiscount?: boolean;
