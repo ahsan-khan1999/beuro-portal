@@ -160,6 +160,8 @@ export const useContractPdf = () => {
               contractDetails?.offerID?.subTotal) *
             100;
 
+          console.log(contractDetails?.offerID?.discountAmount);
+
           let formatData: PdfProps<ContractEmailHeaderProps> = {
             id: contractDetails?.id,
             attachement: contractDetails?.attachement,

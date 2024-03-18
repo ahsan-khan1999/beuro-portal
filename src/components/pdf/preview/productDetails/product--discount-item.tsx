@@ -15,6 +15,8 @@ export const ProductDiscountItem = ({
   isGlobalDiscount,
   discountPercentage,
 }: ServiceList) => {
+  console.log(discount, "discount", totalDiscount, isGlobalDiscount);
+
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (
     <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] py-3 mb-3  pl-3">
@@ -40,17 +42,17 @@ export const ProductDiscountItem = ({
           <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
             {isGlobalDiscount ? price : totalDiscount}{" "}
           </span>
-          {/* {isDiscount && ( */}
-          <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
-            {isGlobalDiscount ? discount : totalDiscount || "-"}{" "}
-          </span>
-          {/* )} */}
+          {isDiscount && (
+            <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
+              {!isGlobalDiscount ? discount : totalDiscount || "-"}{" "}
+            </span>
+          )}
 
-          <span className="text-sm font-semibold text-[#000] min-w-[50px] break-all">
+          <span className="text-sm font-semibold text-[#000] min-w-[70px] break-all">
             {isGlobalDiscount
               ? Number(discount || 0) + Number(totalDiscount || 0)
               : totalDiscount}{" "}
-            ({discountPercentage?.toFixed(2)} %)
+            ({discountPercentage?.toFixed(1)}%)
           </span>
         </div>
       </div>

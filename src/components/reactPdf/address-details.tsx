@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   header: {
-    fontSize: 9,
-    fontWeight: 600,
+    fontSize: 12,
+    fontWeight: 700,
     fontStyle: "semibold",
     color: "#000",
     paddingBottom: 3,
