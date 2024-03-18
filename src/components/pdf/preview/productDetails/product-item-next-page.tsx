@@ -30,6 +30,8 @@ export const ProductItemNewPage = ({
     count: "-",
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
+    discountType: serviceItemFooter?.discountType,
+    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
     discountPercentage: Number(serviceItemFooter?.discountPercentage),
     totalDiscount: Number(serviceItemFooter?.serviceDiscountSum),
     isGlobalDiscount: serviceItemFooter?.isDiscount,
