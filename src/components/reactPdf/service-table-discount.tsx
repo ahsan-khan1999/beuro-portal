@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
     // marginRight: 5,
   },
   descriptionText: {
-    color: "#404040",
+    color: "#000",
     fontSize: 6,
-    fontWeight: 400,
-    fontStyle: "normal",
+    fontWeight: 500,
+    fontStyle: "medium",
     width: 180,
     // marginRight: 5,
   },
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     width: 216,
   },
   headerText: {
-    color: "#404040",
+    color: "#000",
     fontSize: 6,
-    fontWeight: 400,
-    fontStyle: "normal",
+    fontWeight: 500,
+    fontStyle: "medium",
     width: 50,
   },
 });
