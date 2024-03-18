@@ -1,4 +1,5 @@
 import { ServiceList } from "@/types/offers";
+import { staticEnums } from "@/utils/static";
 import { View, Text } from "@react-pdf/renderer";
 import { StyleSheet } from "@react-pdf/renderer";
 
@@ -45,6 +46,14 @@ const styles = StyleSheet.create({
     fontStyle: "medium",
     width: 50,
   },
+
+  totalDiscountText: {
+    color: "#000",
+    fontSize: 6,
+    fontWeight: 500,
+    fontStyle: "medium",
+    width: 50,
+  },
 });
 
 export const ServiceTableDiscountRow = ({
@@ -61,6 +70,8 @@ export const ServiceTableDiscountRow = ({
   totalDiscount,
   isGlobalDiscount,
   discountPercentage,
+  discountType,
+  updatedDiscountAmount,
 }: Partial<ServiceList>) => {
   return (
     <View style={styles.headerContainer} break={pagebreak}>
@@ -70,7 +81,6 @@ export const ServiceTableDiscountRow = ({
         <View style={styles.priceHeader}>
           <Text style={styles.headerText}>{count}</Text>
           <Text style={styles.headerText}>{unit}</Text>
-
           <Text style={styles.headerText}>
             {isGlobalDiscount ? price : totalDiscount}
           </Text>
@@ -81,12 +91,24 @@ export const ServiceTableDiscountRow = ({
             </Text>
           )}
 
-          <Text style={styles.headerText}>
-            {isGlobalDiscount
-              ? Number(discount || 0) + Number(totalDiscount || 0)
-              : totalDiscount}{" "}
-            ({discountPercentage?.toFixed(1)}%)
-          </Text>
+          {staticEnums["DiscountType"][
+            discountType as keyof (typeof staticEnums)["DiscountType"]
+          ] === 0 ? (
+            <Text style={styles.totalDiscountText}>
+              {isGlobalDiscount
+                ? Number(totalDiscount || 0) +
+                  Number(updatedDiscountAmount || 0)
+                : updatedDiscountAmount}{" "}
+              ({discountPercentage?.toFixed(1)}%)
+            </Text>
+          ) : (
+            <Text style={styles.totalDiscountText}>
+              {isGlobalDiscount
+                ? Number(discount || 0) + Number(totalDiscount || 0)
+                : totalDiscount}{" "}
+              ({discountPercentage?.toFixed(1)}%)
+            </Text>
+          )}
         </View>
       </View>
     </View>

@@ -83,6 +83,7 @@ const PdfFile = ({
     count: "-",
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
+    discountType: serviceItemFooter?.discountType,
     discountPercentage: Number(serviceItemFooter?.discountPercentage),
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
     isGlobalDiscount: serviceItemFooter?.isDiscount,

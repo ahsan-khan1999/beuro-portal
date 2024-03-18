@@ -114,8 +114,10 @@ const OfferPdfPreview = ({
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
     discountPercentage: Number(serviceItemFooter?.discountPercentage),
+    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
     isGlobalDiscount: serviceItemFooter?.isDiscount,
+    discountType: serviceItemFooter?.discountType,
   };
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
