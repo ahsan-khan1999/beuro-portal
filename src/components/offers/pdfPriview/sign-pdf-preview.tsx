@@ -45,6 +45,11 @@ const SignPdfPreview = () => {
         (response: ActionType) => {
           if (response?.payload) {
             const offerDetails: PublicOffersTableRowTypes = response?.payload;
+            // calculate discount percentage
+            const discountPercentage =
+              (offerDetails?.Offer?.discountAmount /
+                offerDetails?.Offer?.subTotal) *
+              100;
 
             let formatData: PdfProps = {
               isCanvas: true,
@@ -97,6 +102,7 @@ const SignPdfPreview = () => {
                 subTotal: offerDetails?.Offer?.subTotal?.toString(),
                 tax: offerDetails?.Offer?.taxAmount?.toString(),
                 discount: offerDetails?.Offer?.discountAmount?.toString(),
+                discountPercentage: discountPercentage?.toString(),
                 grandTotal: offerDetails?.Offer?.total?.toString(),
                 discountType: offerDetails?.Offer?.discountType,
                 taxType: offerDetails?.Offer?.taxType,
