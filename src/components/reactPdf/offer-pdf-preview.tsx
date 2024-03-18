@@ -113,15 +113,20 @@ const OfferPdfPreview = ({
     count: "-",
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
+    discountPercentage: Number(serviceItemFooter?.discountPercentage),
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
-    isGlobalDiscount:serviceItemFooter?.isDiscount
-  }
-  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
-  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
+    isGlobalDiscount: serviceItemFooter?.isDiscount,
+  };
+  const isDiscount =
+    serviceItemFooter?.serviceDiscountSum &&
+    Number(serviceItemFooter?.serviceDiscountSum) > 0
+      ? true
+      : false || false;
+  const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
   return (
-    <PDFViewer style={{ width: "100%", height: "100vh" }} >
-      <Document title={data?.headerDetails?.offerNo || ""} >
+    <PDFViewer style={{ width: "100%", height: "100vh" }}>
+      <Document title={data?.headerDetails?.offerNo || ""}>
         <Page style={styles.body} dpi={72}>
           <Header {...headerDetails} />
           <View
@@ -136,24 +141,29 @@ const OfferPdfPreview = ({
 
             <AddressDetails {...{ address, header, workDates, time }} />
 
-            <ServiceTableHederRow
-              isDiscount={isDiscount}
-            />
+            <ServiceTableHederRow isDiscount={isDiscount} />
             {serviceItem?.map((item, index, arr) => (
               <ServiceTableRow
                 {...item}
                 key={index}
-                pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1:false}
+                pagebreak={
+                  !pageBreakCondition
+                    ? serviceItem?.length === 1
+                      ? false
+                      : index === serviceItem?.length - 1
+                    : false
+                }
                 isDiscount={isDiscount}
               />
             ))}
-            {
-              (isDiscount || serviceItemFooter?.isDiscount) &&
-              <ServiceTableDiscountRow {...disscountTableRow} key={Math.random()}
+            {(isDiscount || serviceItemFooter?.isDiscount) && (
+              <ServiceTableDiscountRow
+                {...disscountTableRow}
+                key={Math.random()}
                 pagebreak={true}
                 isDiscount={isDiscount}
               />
-            }
+            )}
             <ServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}
@@ -169,7 +179,7 @@ const OfferPdfPreview = ({
         </Page>
 
         {/* Additional details */}
-        <Page style={{ paddingBottom: 145, fontFamily: 'Poppins' }}>
+        <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
           <View style={{ marginBottom: 10 }} fixed>
             <Header {...headerDetails} />
           </View>

@@ -72,6 +72,7 @@ const PdfFile = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+
   const disscountTableRow = {
     serviceTitle: "Rabatt",
     price: Number(serviceItemFooter?.discount),
@@ -82,9 +83,11 @@ const PdfFile = ({
     count: "-",
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
+    discountPercentage: Number(serviceItemFooter?.discountPercentage),
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
     isGlobalDiscount: serviceItemFooter?.isDiscount,
   };
+
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
     Number(serviceItemFooter?.serviceDiscountSum) > 0

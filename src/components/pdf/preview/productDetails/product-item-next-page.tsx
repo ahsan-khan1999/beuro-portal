@@ -18,7 +18,7 @@ export const ProductItemNewPage = ({
   emailTemplateSettings,
   systemSettings,
 }: Partial<PurchasedItemDetailsNextPageProps>) => {
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
 
   const disscountTableRow = {
     serviceTitle: translate("pdf_preview.discount"),
@@ -30,13 +30,16 @@ export const ProductItemNewPage = ({
     count: "-",
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
+    discountPercentage: Number(serviceItemFooter?.discountPercentage),
     totalDiscount: Number(serviceItemFooter?.serviceDiscountSum),
-    isGlobalDiscount: serviceItemFooter?.isDiscount
-
-
-  }
-  const isDiscount = serviceItemFooter?.serviceDiscountSum && Number(serviceItemFooter?.serviceDiscountSum) > 0 ? true : false || false
-  const pageBreakCondition = (isDiscount || serviceItemFooter?.isDiscount)
+    isGlobalDiscount: serviceItemFooter?.isDiscount,
+  };
+  const isDiscount =
+    serviceItemFooter?.serviceDiscountSum &&
+    Number(serviceItemFooter?.serviceDiscountSum) > 0
+      ? true
+      : false || false;
+  const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
   return (
     <div>
       <DocumentHeader
@@ -45,15 +48,27 @@ export const ProductItemNewPage = ({
       />
       <div className="px-[80px] flex flex-col bg-white py-2">
         {serviceItem?.map((item, index) => (
-          <ProductItem {...item} key={index}
+          <ProductItem
+            {...item}
+            key={index}
             isDiscount={isDiscount}
-            pagebreak={!pageBreakCondition ? serviceItem?.length === 1 ? false : index === serviceItem?.length - 1 : false}
+            pagebreak={
+              !pageBreakCondition
+                ? serviceItem?.length === 1
+                  ? false
+                  : index === serviceItem?.length - 1
+                : false
+            }
           />
         ))}
-        {
-          (isDiscount || serviceItemFooter?.isDiscount) &&
-          <ProductDiscountItem {...disscountTableRow} key={Math.random()} pagebreak={true} isDiscount={isDiscount} />
-        }
+        {(isDiscount || serviceItemFooter?.isDiscount) && (
+          <ProductDiscountItem
+            {...disscountTableRow}
+            key={Math.random()}
+            pagebreak={true}
+            isDiscount={isDiscount}
+          />
+        )}
         {isShowTotal && (
           <ProductItemFooter
             {...serviceItemFooter}

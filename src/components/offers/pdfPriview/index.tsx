@@ -57,6 +57,9 @@ const PdfPriview = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
+  console.log(offerData?.serviceItemFooter.discountPercentage);
+
   return (
     <>
       {loading ? (

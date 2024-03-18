@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 6,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: "#000",
-    fontSize: 6,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 180,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: "#000",
-    fontSize: 6,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 50,
@@ -60,6 +60,7 @@ export const ServiceTableDiscountRow = ({
   isDiscount,
   totalDiscount,
   isGlobalDiscount,
+  discountPercentage,
 }: Partial<ServiceList>) => {
   return (
     <View style={styles.headerContainer} break={pagebreak}>
@@ -83,7 +84,8 @@ export const ServiceTableDiscountRow = ({
           <Text style={styles.headerText}>
             {isGlobalDiscount
               ? Number(discount || 0) + Number(totalDiscount || 0)
-              : totalDiscount}
+              : totalDiscount}{" "}
+            ({discountPercentage?.toFixed(1)}%)
           </Text>
         </View>
       </View>

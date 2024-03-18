@@ -1,22 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import {
-  readOfferPublicDetails,
-  sendOfferEmail,
-} from "@/api/slices/offer/offerSlice";
+import { readOfferPublicDetails } from "@/api/slices/offer/offerSlice";
 import { useRouter } from "next/router";
 import { PublicOffersTableRowTypes, ServiceList } from "@/types/offers";
 import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
-import localStoreUtil from "@/utils/localstore.util";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalType } from "@/enums/ui";
 import { SignPdf } from "@/components/pdf/sign-pdf";
 import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
-import { smoothScrollToSection } from "@/utils/utility";
 import { Container } from "@/components/pdf/container";
-
 
 interface ActionType {
   payload: PublicOffersTableRowTypes;
@@ -53,6 +45,11 @@ const SignPdfPreview = () => {
         (response: ActionType) => {
           if (response?.payload) {
             const offerDetails: PublicOffersTableRowTypes = response?.payload;
+            // calculate discount percentage
+            const discountPercentage =
+              (offerDetails?.Offer?.discountAmount /
+                offerDetails?.Offer?.subTotal) *
+              100;
 
             let formatData: PdfProps = {
               isCanvas: true,
@@ -83,7 +80,8 @@ const SignPdfPreview = () => {
                   streetWithNumber:
                     offerDetails?.Offer?.leadID?.customerDetail?.address
                       ?.streetNumber,
-                      companyName:offerDetails?.Offer?.leadID?.customerDetail?.companyName
+                  companyName:
+                    offerDetails?.Offer?.leadID?.customerDetail?.companyName,
                 },
                 email: offerDetails?.Offer?.leadID?.customerDetail?.email,
                 phone: offerDetails?.Offer?.leadID?.customerDetail?.phoneNumber,
@@ -104,6 +102,7 @@ const SignPdfPreview = () => {
                 subTotal: offerDetails?.Offer?.subTotal?.toString(),
                 tax: offerDetails?.Offer?.taxAmount?.toString(),
                 discount: offerDetails?.Offer?.discountAmount?.toString(),
+                discountPercentage: discountPercentage?.toString(),
                 grandTotal: offerDetails?.Offer?.total?.toString(),
                 discountType: offerDetails?.Offer?.discountType,
                 taxType: offerDetails?.Offer?.taxType,
@@ -122,33 +121,25 @@ const SignPdfPreview = () => {
 
               footerDetails: {
                 firstColumn: {
-                  companyName:
-                    offerDetails?.Template?.firstColumn?.companyName,
+                  companyName: offerDetails?.Template?.firstColumn?.companyName,
                   email: offerDetails?.Template?.firstColumn?.email,
-                  phoneNumber:
-                    offerDetails?.Template?.firstColumn?.phoneNumber,
-                  taxNumber: Number(offerDetails?.Template?.firstColumn?.taxNumber) as number,
+                  phoneNumber: offerDetails?.Template?.firstColumn?.phoneNumber,
+                  taxNumber: Number(
+                    offerDetails?.Template?.firstColumn?.taxNumber
+                  ) as number,
                   website: offerDetails?.Template?.firstColumn?.website,
                 },
                 secondColumn: {
                   address: {
-                    postalCode:
-                      offerDetails?.Template?.secondColumn?.postCode
-                        ,
+                    postalCode: offerDetails?.Template?.secondColumn?.postCode,
                     streetNumber:
-                      offerDetails?.Template?.secondColumn
-                        ?.streetNumber,
+                      offerDetails?.Template?.secondColumn?.streetNumber,
                   },
                   bankDetails: {
                     accountNumber:
-                      offerDetails?.Template?.secondColumn
-                        ?.accountNumber,
-                    bankName:
-                      offerDetails?.Template?.secondColumn
-                        ?.bankName,
-                    ibanNumber:
-                      offerDetails?.Template?.secondColumn
-                        ?.iban,
+                      offerDetails?.Template?.secondColumn?.accountNumber,
+                    bankName: offerDetails?.Template?.secondColumn?.bankName,
+                    ibanNumber: offerDetails?.Template?.secondColumn?.iban,
                   },
                 },
                 thirdColumn: {
@@ -164,14 +155,12 @@ const SignPdfPreview = () => {
                   row3: offerDetails?.Template?.fourthColumn?.row3,
                   row4: offerDetails?.Template?.fourthColumn?.row4,
                   row5: offerDetails?.Template?.fourthColumn?.row5,
-
                 },
                 columnSettings: null,
                 currPage: 1,
                 totalPages: calculateTotalPages,
               },
-              aggrementDetails:
-                offerDetails?.Offer?.content?.offerContent?.description || "",
+              aggrementDetails: offerDetails?.Offer?.additionalDetails || "",
               isOffer: true,
             };
             const distributeItems = (): ServiceList[][] => {

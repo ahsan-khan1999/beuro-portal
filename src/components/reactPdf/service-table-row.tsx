@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 6,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: "#000",
-    fontSize: 6,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 180,
@@ -38,12 +38,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: 216,
     color: "#000",
-
   },
   headerText: {
     color: "#000",
-    
-    fontSize: 6,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 50,

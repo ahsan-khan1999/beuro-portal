@@ -712,6 +712,7 @@ export interface ProductItemFooterProps {
   subTotal: string;
   tax: string;
   discount: string;
+  discountPercentage: string;
   grandTotal: string;
   invoiceStatus?: keyof (typeof staticEnums)["InvoiceStatus"];
   invoiceAmount?: string;

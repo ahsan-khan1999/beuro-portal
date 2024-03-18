@@ -26,7 +26,7 @@ export const ProcutItemHeader = ({ isDiscount }: { isDiscount?: boolean }) => {
               {translation("pdf.discount")}
             </span>
           )}
-          <span className="text-sm font-medium text-white min-w-[50px]">
+          <span className="text-sm font-medium text-white min-w-[70px]">
             {translation("pdf.total")}
           </span>
         </div>
