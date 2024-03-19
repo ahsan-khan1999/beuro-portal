@@ -10,7 +10,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useRouter } from "next/router";
 import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
-import { SetStateAction, forwardRef, useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { EmailTemplate } from "@/types/settings";
 const OfferSignedPdf = dynamic(() => import("../offers/signed-pdf"), {
   ssr: false,
@@ -32,7 +32,7 @@ export const SignPdf = <T,>({
   action,
   emailTemplateSettings,
   systemSettings,
-  setOfferData
+  setOfferData,
 }: {
   pdfData: PdfProps<T>;
   newPageData: ServiceList[][];
@@ -42,7 +42,7 @@ export const SignPdf = <T,>({
   action?: string;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings: SystemSetting | null;
-  setOfferData?: SetStateAction<any>
+  setOfferData?: SetStateAction<any>;
 }) => {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
@@ -113,7 +113,13 @@ export const SignPdf = <T,>({
         route={onClose}
       />
     ),
-    [ModalType.EDIT_DATE]: <EditDate onClose={onClose} setOfferData={setOfferData} pdfData={pdfData} />,
+    [ModalType.EDIT_DATE]: (
+      <EditDate
+        onClose={onClose}
+        setOfferData={setOfferData}
+        pdfData={pdfData}
+      />
+    ),
   };
 
   useEffect(() => {
@@ -176,7 +182,6 @@ export const SignPdf = <T,>({
           systemSettings={systemSettings}
           pdfData={pdfData}
           setComponentMounted={() => setComponentMounted(true)}
-
         />
       </div>
       {/* <OfferSignedPdf
