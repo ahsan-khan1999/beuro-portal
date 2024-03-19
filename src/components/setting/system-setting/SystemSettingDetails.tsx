@@ -147,7 +147,7 @@ const SystemSettingDetails = ({
             }))}
             onItemSelected={handleItemSelected}
             selectedItem={systemSetting?.currency}
-            dropDownTextClassName="custom-text-style "
+            dropDownTextClassName="custom-text-style text-black"
             dropDownIconClassName="custom-icon-style"
             dropDownDisabled={false}
             shouldNotSelectItem={false}
