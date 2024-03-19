@@ -87,7 +87,7 @@ const InvoiceSection = ({
                 )}
                 onItemSelected={handleItemSelected}
                 selectedItem={systemSetting?.daysLimit?.toString()}
-                dropDownTextClassName="custom-text-style"
+                dropDownTextClassName="custom-text-style text-black"
                 dropDownIconClassName="custom-icon-style"
                 dropDownDisabled={false}
                 shouldNotSelectItem={false}
