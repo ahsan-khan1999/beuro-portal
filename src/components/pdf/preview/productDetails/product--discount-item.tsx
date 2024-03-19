@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { ServiceList } from "@/types/offers";
-import { ProductItemProps } from "@/types/types";
+import { staticEnums } from "@/utils/static";
 
 export const ProductDiscountItem = ({
   count,
@@ -14,6 +14,9 @@ export const ProductDiscountItem = ({
   totalDiscount,
   pagebreak,
   isGlobalDiscount,
+  discountPercentage,
+  discountType,
+  updatedDiscountAmount,
 }: ServiceList) => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (
@@ -40,17 +43,41 @@ export const ProductDiscountItem = ({
           <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
             {isGlobalDiscount ? price : totalDiscount}{" "}
           </span>
-          {/* {isDiscount && ( */}
+          {isDiscount && (
             <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
-              {isGlobalDiscount ? discount : totalDiscount || "-"}{" "}
+              {!isGlobalDiscount ? discount : totalDiscount || "-"}{" "}
             </span>
-          {/* )} */}
+          )}
 
-          <span className="text-sm font-semibold text-[#000] min-w-[50px] break-all">
-            {isGlobalDiscount
+          {/* <span className="text-sm font-semibold min-w-[70px] break-all"> */}
+          {/* {isGlobalDiscount
               ? Number(discount || 0) + Number(totalDiscount || 0)
-              : totalDiscount}
-          </span>
+              : totalDiscount}{" "}
+            ({discountPercentage?.toFixed(1)}%) */}
+
+          {staticEnums["DiscountType"][
+            discountType as keyof (typeof staticEnums)["DiscountType"]
+          ] === 0 ? (
+            <span className="text-xs font-semibold min-w-[70px] break-all">
+              {isGlobalDiscount
+                ? (
+                    Number(totalDiscount || 0) +
+                    Number(updatedDiscountAmount || 0)
+                  ).toFixed(1)
+                : updatedDiscountAmount}{" "}
+              ({discountPercentage?.toFixed(1)}%)
+            </span>
+          ) : (
+            <span className="text-xs font-semibold min-w-[70px] break-all">
+              {isGlobalDiscount
+                ? (Number(discount || 0) + Number(totalDiscount || 0)).toFixed(
+                    1
+                  )
+                : totalDiscount}{" "}
+              ({discountPercentage?.toFixed(1)}%)
+            </span>
+          )}
+          {/* </span> */}
         </div>
       </div>
     </div>

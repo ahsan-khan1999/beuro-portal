@@ -40,12 +40,12 @@ export const ProductItem = ({
             {price}
           </span>
           {isDiscount && (
-          <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
-            {discount || "-"}{" "}
-          </span>
-          )} 
+            <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
+              {discount || "-"}{" "}
+            </span>
+          )}
 
-          <span className="text-sm font-semibold text-[#000] min-w-[50px] break-all">
+          <span className="text-sm font-semibold text-[#000] min-w-[70px] break-all">
             {pagebreak
               ? Number(discount || 0) + Number(totalDiscount || 0)
               : totalPrice}
