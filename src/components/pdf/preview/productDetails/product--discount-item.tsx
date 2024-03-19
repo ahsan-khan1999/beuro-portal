@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { ServiceList } from "@/types/offers";
+import { staticEnums } from "@/utils/static";
 
 export const ProductDiscountItem = ({
   count,
@@ -14,9 +15,9 @@ export const ProductDiscountItem = ({
   pagebreak,
   isGlobalDiscount,
   discountPercentage,
+  discountType,
+  updatedDiscountAmount,
 }: ServiceList) => {
-  console.log(discount, "discount", totalDiscount, isGlobalDiscount);
-
   const { systemSettings } = useAppSelector((state) => state.settings);
   return (
     <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] py-3 mb-3  pl-3">
@@ -48,12 +49,35 @@ export const ProductDiscountItem = ({
             </span>
           )}
 
-          <span className="text-sm font-semibold text-[#000] min-w-[70px] break-all">
-            {isGlobalDiscount
+          {/* <span className="text-sm font-semibold min-w-[70px] break-all"> */}
+          {/* {isGlobalDiscount
               ? Number(discount || 0) + Number(totalDiscount || 0)
               : totalDiscount}{" "}
-            ({discountPercentage?.toFixed(1)}%)
-          </span>
+            ({discountPercentage?.toFixed(1)}%) */}
+
+          {staticEnums["DiscountType"][
+            discountType as keyof (typeof staticEnums)["DiscountType"]
+          ] === 0 ? (
+            <span className="text-xs font-semibold min-w-[70px] break-all">
+              {isGlobalDiscount
+                ? (
+                    Number(totalDiscount || 0) +
+                    Number(updatedDiscountAmount || 0)
+                  ).toFixed(1)
+                : updatedDiscountAmount}{" "}
+              ({discountPercentage?.toFixed(1)}%)
+            </span>
+          ) : (
+            <span className="text-xs font-semibold min-w-[70px] break-all">
+              {isGlobalDiscount
+                ? (Number(discount || 0) + Number(totalDiscount || 0)).toFixed(
+                    1
+                  )
+                : totalDiscount}{" "}
+              ({discountPercentage?.toFixed(1)}%)
+            </span>
+          )}
+          {/* </span> */}
         </div>
       </div>
     </div>

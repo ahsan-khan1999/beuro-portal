@@ -59,8 +59,6 @@ export const ServiceTableRow = ({
   unit,
   discount,
   isDiscount,
-  totalDiscount,
-  isGlobalDiscount,
 }: Partial<ServiceList>) => {
   return (
     <View style={styles.headerContainer} break={pagebreak}>

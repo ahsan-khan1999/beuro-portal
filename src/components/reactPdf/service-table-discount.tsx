@@ -96,15 +96,19 @@ export const ServiceTableDiscountRow = ({
           ] === 0 ? (
             <Text style={styles.totalDiscountText}>
               {isGlobalDiscount
-                ? Number(totalDiscount || 0) +
-                  Number(updatedDiscountAmount || 0)
+                ? (
+                    Number(totalDiscount || 0) +
+                    Number(updatedDiscountAmount || 0)
+                  ).toFixed(1)
                 : updatedDiscountAmount}{" "}
               ({discountPercentage?.toFixed(1)}%)
             </Text>
           ) : (
             <Text style={styles.totalDiscountText}>
               {isGlobalDiscount
-                ? Number(discount || 0) + Number(totalDiscount || 0)
+                ? (Number(discount || 0) + Number(totalDiscount || 0)).toFixed(
+                    1
+                  )
                 : totalDiscount}{" "}
               ({discountPercentage?.toFixed(1)}%)
             </Text>

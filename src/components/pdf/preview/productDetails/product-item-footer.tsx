@@ -12,11 +12,15 @@ export const ProductItemFooter = ({
   discountType,
   taxType,
   isDiscount,
-  isTax
-}: Partial<ProductItemFooterProps>) => {
 
-  const calculatedDiscount = discountType && discountType === "Amount" ? discount : calculateTax(Number(discount), Number(subTotal))
-  const calculatedTax = taxType && calculateTax(Number(tax), Number(subTotal)) || 0
+  isTax,
+}: Partial<ProductItemFooterProps>) => {
+  const calculatedDiscount =
+    discountType && discountType === "Amount"
+      ? discount
+      : calculateTax(Number(discount), Number(subTotal));
+  const calculatedTax =
+    (taxType && calculateTax(Number(tax), Number(subTotal))) || 0;
   const { t: translate } = useTranslation();
   return (
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">
@@ -46,12 +50,14 @@ export const ProductItemFooter = ({
             <span className="text-[#1E1E1E] text-sm font-medium">
               {translate("pdf.tax")}:
             </span>
-            <span className="text-[#1E1E1E] text-sm font-medium ">{
-              isTax &&
-              <>
-                {Number(calculatedTax).toFixed(2)}  ({tax}%)
-              </> || 0
-            } </span>
+            <span className="text-[#1E1E1E] text-sm font-medium ">
+              {(isTax && (
+                <>
+                  {Number(calculatedTax).toFixed(2)} ({tax}%)
+                </>
+              )) ||
+                0}{" "}
+            </span>
           </div>
           {/* <div className="flex justify-between">
             <span className="text-[#1E1E1E] text-sm font-medium">
@@ -67,7 +73,8 @@ export const ProductItemFooter = ({
             {translate("pdf.grand_total")}:
           </span>
           <span className="text-sm font-semibold text-[#fff]">
-            {grandTotal}{" " + systemSettings?.currency}
+            {grandTotal}
+            {" " + systemSettings?.currency}
           </span>
         </div>
       </div>

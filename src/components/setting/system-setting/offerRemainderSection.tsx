@@ -91,7 +91,7 @@ export const OfferRemainderSection = ({
               }))}
               onItemSelected={handleItemSelected}
               selectedItem={systemSetting?.offerReminderFrequency?.toString()}
-              dropDownTextClassName="custom-text-style"
+              dropDownTextClassName="custom-text-style text-black"
               dropDownIconClassName="custom-icon-style"
               dropDownDisabled={false}
               shouldNotSelectItem={false}

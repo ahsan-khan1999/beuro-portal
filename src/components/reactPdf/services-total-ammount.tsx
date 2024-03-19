@@ -1,11 +1,7 @@
-import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { ProductItemFooterProps } from "@/types";
-import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
-import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
-import { calculatePercentage, calculateTax } from "@/utils/utility";
+import { calculateTax } from "@/utils/utility";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-import { useTranslation } from "next-i18next";
 
 const styles = StyleSheet.create({
   container: {
@@ -86,13 +82,13 @@ export const ServicesTotalAmount = ({
       : calculateTax(Number(discount), Number(subTotal));
   const calculatedTax =
     (taxType && calculateTax(Number(tax), Number(subTotal))) || 0;
-  console.log(calculatedTax, "calculatedTax", taxType, "subTotal", subTotal);
 
   const totalDiscount = !isDiscount
     ? serviceDiscountSum
     : (serviceDiscountSum &&
         (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2)) ||
       Number(calculatedDiscount).toFixed(2);
+
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>

@@ -19,23 +19,11 @@ import { ServicesTotalAmount } from "../reactPdf/services-total-ammount";
 import { Footer } from "../reactPdf/footer";
 import { AdditionalDetails } from "../reactPdf/additional-details";
 import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
-import Link from "next/link";
-import {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-} from "react";
-import { Button } from "@/base-components/ui/button/button";
+import { useEffect, useMemo, useRef } from "react";
 import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-import { rejectOfferPublic, signOffer } from "@/api/slices/offer/offerSlice";
-import localStoreUtil from "@/utils/localstore.util";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { blobToFile } from "@/utils/utility";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { AggrementSignature } from "../reactPdf/aggrement-signature";
@@ -93,9 +81,9 @@ interface SignPdfProps {
   systemSettings: SystemSetting | null;
   showContractSign?: boolean;
   onComponentMounted: () => void;
-  handleClear: () => void
+  handleClear: () => void;
   isSubmitted: boolean;
-  handleSave: (signedFile:any) => void
+  handleSave: (signedFile: any) => void;
 }
 
 const OfferSignedPdf = ({
@@ -108,7 +96,7 @@ const OfferSignedPdf = ({
   onComponentMounted,
   isSubmitted,
   handleClear,
-  handleSave
+  handleSave,
 }: SignPdfProps) => {
   const { loading: offerLoading } = useAppSelector((state) => state.offer);
   const headerDetails = offerData?.headerDetails;
@@ -120,7 +108,7 @@ const OfferSignedPdf = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
-  const { t: translate } = useTranslation()
+  const { t: translate } = useTranslation();
   const acceptButtonRef = useRef<HTMLDivElement>(null);
 
   const pdfDoc = (
@@ -141,9 +129,14 @@ const OfferSignedPdf = ({
 
           <ServiceTableHederRow />
           {serviceItem?.map((item, index) => (
-            <ServiceTableRow {...item} key={index}
-              pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
-
+            <ServiceTableRow
+              {...item}
+              key={index}
+              pagebreak={
+                serviceItem?.length === 1
+                  ? false
+                  : index === serviceItem?.length - 1
+              }
             />
           ))}
           <ServicesTotalAmount
@@ -187,7 +180,7 @@ const OfferSignedPdf = ({
   }, [signature]);
 
   const acceptOffer = async (file: any) => {
-    const result = handleSave(file)
+    const result = handleSave(file);
 
     // if(result) {
     //   const convertedFile = blobToFile(file, `${headerDetails?.offerNo + "-" + headerDetails?.companyName}.pdf` || "offer.pdf");

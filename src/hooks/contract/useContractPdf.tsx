@@ -29,12 +29,10 @@ import {
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
-import { TAX_PERCENTAGE } from "@/services/HttpProvider";
-import { blobToFile, calculateTax, mergePDFs } from "@/utils/utility";
 
-import { pdf as reactPdf } from "@react-pdf/renderer";
 // import { PdfFile } from "@/components/reactPdf/pdf-file";
 import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
+import { staticEnums } from "@/utils/static";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -68,6 +66,7 @@ const qrCodePayableToData: PayableToProps = {
   },
   additionalInformation: "R-2000 Umzugsfuchs",
 };
+
 let contractPdfInfo = {
   subject: "",
   description: "",
@@ -155,12 +154,37 @@ export const useContractPdf = () => {
         }
         if (offerData?.payload) {
           const contractDetails: contractTableTypes = offerData?.payload;
-          const discountPercentage =
-            (contractDetails?.offerID?.discountAmount /
-              contractDetails?.offerID?.subTotal) *
-            100;
 
-          console.log(contractDetails?.offerID?.discountAmount);
+          let serviceDiscountSum =
+            contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce(
+              (acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              },
+              0
+            );
+
+          const updatedTotalDiscount =
+            (contractDetails?.offerID?.subTotal / 100) *
+            contractDetails?.offerID?.discountAmount;
+
+          let discountPercentage;
+          if (
+            staticEnums["DiscountType"][
+              contractDetails?.offerID
+                ?.discountType as keyof (typeof staticEnums)["DiscountType"]
+            ] === 1
+          ) {
+            discountPercentage =
+              ((contractDetails?.offerID?.discountAmount + serviceDiscountSum) /
+                contractDetails?.offerID?.subTotal) *
+              100;
+          } else {
+            discountPercentage =
+              ((updatedTotalDiscount + serviceDiscountSum) /
+                contractDetails?.offerID?.subTotal) *
+              100;
+          }
 
           let formatData: PdfProps<ContractEmailHeaderProps> = {
             id: contractDetails?.id,
@@ -219,10 +243,11 @@ export const useContractPdf = () => {
               isDiscount: contractDetails?.offerID?.isDiscount,
               subTotal: contractDetails?.offerID?.subTotal?.toString(),
               tax: contractDetails?.offerID?.taxAmount?.toString(),
-              discountPercentage: discountPercentage.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
-              grandTotal: contractDetails?.offerID?.total?.toString(),
               discountType: contractDetails?.offerID?.discountType,
+              discountPercentage: discountPercentage.toString(),
+              updatedDiscountAmount: updatedTotalDiscount.toString(),
+              grandTotal: contractDetails?.offerID?.total?.toString(),
               taxType: contractDetails?.offerID?.taxType,
               serviceDiscountSum:
                 contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce(

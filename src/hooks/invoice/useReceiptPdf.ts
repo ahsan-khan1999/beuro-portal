@@ -21,16 +21,14 @@ import {
   PdfProps,
   TemplateType,
 } from "@/types";
-import { ServiceList } from "@/types/offers";
 import localStoreUtil from "@/utils/localstore.util";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
 import { EmailTemplate } from "@/types/settings";
 import { PdfSubInvoiceTypes } from "@/types/invoice";
-import { calculateTax } from "@/utils/utility";
-import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
+import { staticEnums } from "@/utils/static";
 
 const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
   accountDetails: {
@@ -150,11 +148,37 @@ export const useReceiptPdf = () => {
         }
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
-          // calculate discount percentage
-          const discountPercentage =
-            (invoiceDetails?.invoiceID?.discountAmount /
-              invoiceDetails?.invoiceID?.subTotal) *
-            100;
+          let serviceDiscountSum =
+            invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
+              (acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              },
+              0
+            );
+
+          const updatedTotalDiscount =
+            (invoiceDetails?.invoiceID?.subTotal / 100) *
+            invoiceDetails?.invoiceID?.discountAmount;
+
+          let discountPercentage;
+          if (
+            staticEnums["DiscountType"][
+              invoiceDetails?.invoiceID
+                ?.discountType as keyof (typeof staticEnums)["DiscountType"]
+            ] === 1
+          ) {
+            discountPercentage =
+              ((invoiceDetails?.invoiceID?.discountAmount +
+                serviceDiscountSum) /
+                invoiceDetails?.invoiceID?.subTotal) *
+              100;
+          } else {
+            discountPercentage =
+              ((updatedTotalDiscount + serviceDiscountSum) /
+                invoiceDetails?.invoiceID?.subTotal) *
+              100;
+          }
 
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
@@ -211,14 +235,15 @@ export const useReceiptPdf = () => {
               subTotal: invoiceDetails?.invoiceID?.subTotal?.toString(),
               tax: invoiceDetails?.invoiceID?.taxAmount?.toString(),
               discount: invoiceDetails?.invoiceID?.discountAmount?.toString(),
+              discountType: invoiceDetails?.invoiceID?.discountType,
               discountPercentage: discountPercentage.toString(),
+              updatedDiscountAmount: updatedTotalDiscount.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
               invoiceAmount: invoiceDetails?.amount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
-              discountType: invoiceDetails?.invoiceID?.discountType,
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:
                 invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(

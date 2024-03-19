@@ -1,8 +1,3 @@
-import { DocumentHeader } from "../document-header";
-import { ContactDetails } from "../contact-details";
-import { AggrementTerms } from "./aggrement-terms";
-import { SignaturePad } from "./signature-pad";
-import { Footer } from "../../footer";
 import { AggrementProps } from "@/types/types";
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -68,7 +63,10 @@ export const EditableAggrement = ({
           />
         </div>
       ) : (
-        <div className="html-content" dangerouslySetInnerHTML={{ __html: editedText }}></div>
+        <div
+          className="html-content"
+          dangerouslySetInnerHTML={{ __html: editedText }}
+        ></div>
       )}
 
       {isEditing && (
