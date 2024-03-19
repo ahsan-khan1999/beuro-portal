@@ -85,6 +85,7 @@ const PdfFile = ({
     discount: Number(serviceItemFooter?.discount),
     discountType: serviceItemFooter?.discountType,
     discountPercentage: Number(serviceItemFooter?.discountPercentage),
+    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
     isGlobalDiscount: serviceItemFooter?.isDiscount,
   };

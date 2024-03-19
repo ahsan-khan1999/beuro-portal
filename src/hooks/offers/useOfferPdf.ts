@@ -106,22 +106,34 @@ export const useOfferPdf = () => {
         if (offerData?.payload) {
           const offerDetails: OffersTableRowTypes = offerData?.payload;
 
-          const newCalculatedValue =
-            (offerDetails?.subTotal / 100) * offerDetails?.discountAmount;
+          let serviceDiscountSum =
+            offerDetails?.serviceDetail?.serviceDetail?.reduce(
+              (acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              },
+              0
+            );
 
-          console.log(offerDetails?.discountType);
+          const updatedTotalDiscount =
+            (offerDetails?.subTotal / 100) * offerDetails?.discountAmount;
 
           let discountPercentage;
           if (
             staticEnums["DiscountType"][
-              offerDetails?.discountType as keyof (typeof staticEnums)["DiscountType"]
+              offerData?.payload
+                ?.discountType as keyof (typeof staticEnums)["DiscountType"]
             ] === 1
           ) {
             discountPercentage =
-              (offerDetails?.discountAmount / offerDetails?.subTotal) * 100;
+              ((offerDetails?.discountAmount + serviceDiscountSum) /
+                offerDetails?.subTotal) *
+              100;
           } else {
             discountPercentage =
-              (newCalculatedValue / offerDetails?.subTotal) * 100;
+              ((updatedTotalDiscount + serviceDiscountSum) /
+                offerDetails?.subTotal) *
+              100;
           }
 
           let formatData: PdfProps<ContractEmailHeaderProps> = {
@@ -173,7 +185,7 @@ export const useOfferPdf = () => {
               tax: offerDetails?.taxAmount?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
               discountPercentage: discountPercentage.toString(),
-              updatedDiscountAmount: newCalculatedValue.toString(),
+              updatedDiscountAmount: updatedTotalDiscount.toString(),
               grandTotal: offerDetails?.total?.toString(),
               discountType: offerDetails?.discountType,
               taxType: offerDetails?.taxType,

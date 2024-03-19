@@ -1,11 +1,7 @@
-import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { ProductItemFooterProps } from "@/types";
-import { OfferDetails, ServicesTotalAmountProps } from "@/types/pdf";
-import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
-import { calculatePercentage, calculateTax } from "@/utils/utility";
+import { calculateTax } from "@/utils/utility";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-import { useTranslation } from "next-i18next";
 
 const styles = StyleSheet.create({
   container: {

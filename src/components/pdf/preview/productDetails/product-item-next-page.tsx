@@ -31,11 +31,12 @@ export const ProductItemNewPage = ({
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
     discountType: serviceItemFooter?.discountType,
-    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
     discountPercentage: Number(serviceItemFooter?.discountPercentage),
+    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
     totalDiscount: Number(serviceItemFooter?.serviceDiscountSum),
     isGlobalDiscount: serviceItemFooter?.isDiscount,
   };
+
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
     Number(serviceItemFooter?.serviceDiscountSum) > 0
