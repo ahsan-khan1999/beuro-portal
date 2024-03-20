@@ -12,7 +12,7 @@ const initialState: GlobalState = {
   file: null,
   modal: {
     type: ModalType.NONE,
-    data: ""
+    data: "",
   },
 };
 
@@ -20,7 +20,10 @@ const initialState: GlobalState = {
 export const uploadFileToFirebase: any = createAsyncThunk(
   "file/upload",
   async (data) => {
-    const [authToken, refreshToken] = await Promise.all([getToken(), getRefreshToken()])
+    const [authToken, refreshToken] = await Promise.all([
+      getToken(),
+      getRefreshToken(),
+    ]);
     try {
       const response = await axios.post(
         BASEURL + "/integrations/aws/storage/upload",
@@ -32,7 +35,6 @@ export const uploadFileToFirebase: any = createAsyncThunk(
             "Access-Control-Allow-Origin": "*",
             accessToken: authToken,
             refreshToken: refreshToken,
-
           },
         }
       );
@@ -50,7 +52,10 @@ export const uploadFileToFirebase: any = createAsyncThunk(
 export const uploadMultiFileToFirebase: any = createAsyncThunk(
   "file/upload/multi",
   async (data) => {
-    const [authToken, refreshToken] = await Promise.all([getToken(), getRefreshToken()])
+    const [authToken, refreshToken] = await Promise.all([
+      getToken(),
+      getRefreshToken(),
+    ]);
     try {
       const response = await axios.post(
         BASEURL + "/integrations/aws/storage/upload-multiple",
@@ -62,7 +67,6 @@ export const uploadMultiFileToFirebase: any = createAsyncThunk(
             "Access-Control-Allow-Origin": "*",
             accessToken: authToken,
             refreshToken: refreshToken,
-
           },
         }
       );
@@ -83,7 +87,6 @@ const globalSlice = createSlice({
     updateModalType: (state, action) => {
       state.modal.type = action.payload.type;
       state.modal.data = action.payload.data;
-
     },
   },
   extraReducers: (builder) => {

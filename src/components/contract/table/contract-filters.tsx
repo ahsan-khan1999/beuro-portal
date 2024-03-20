@@ -83,14 +83,6 @@ export default function ContractFilters({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["sort"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
-
   useEffect(() => {
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
@@ -109,6 +101,7 @@ export default function ContractFilters({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           text: inputValue,
         },
       },
@@ -124,6 +117,26 @@ export default function ContractFilters({
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
       return updatedValue;
+    });
+  };
+
+  const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["sort"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
     });
   };
 

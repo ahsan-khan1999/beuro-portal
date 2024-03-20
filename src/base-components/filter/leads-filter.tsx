@@ -1,28 +1,29 @@
-import React, { SetStateAction, useState } from "react";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import React from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import InputField from "./fields/input-field";
-import { FilterProps, FilterType } from "@/types";
+import { FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
-import { date } from "yup";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function LeadsFilter({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
+  const router = useRouter();
+
   const moreFilters = {
     date: {
       $gte: FiltersDefaultValues.$gte,
       $lte: FiltersDefaultValues.$lte,
     },
   };
+
   const {
     extraFilterss,
     moreFilter,
@@ -35,7 +36,20 @@ export default function LeadsFilter({
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   const { t: translate } = useTranslation();
+
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          date: JSON.stringify(moreFilters.date),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: any) => {
       const updatedFilter = {
         ...prev,
@@ -47,6 +61,7 @@ export default function LeadsFilter({
       onFilterChange(updatedFilter);
       return updatedFilter;
     });
+
     handleExtraFiltersClose();
   };
 

@@ -16,14 +16,17 @@ export default function EmailTracker() {
     filter,
     setFilter,
     handleFilterChange,
-    loading,currentPage
+    loading,
+    isLoading,
+    currentPage,
   } = useEmailTracker();
 
   const CurrentComponent = useEmptyStates(
     <TableRow dataToAdd={currentPageRows} />,
     currentPageRows?.length > 0,
-    loading
+    isLoading
   );
+
   return (
     <>
       <TableFunctions
@@ -35,12 +38,12 @@ export default function EmailTracker() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
     </>
   );
 }

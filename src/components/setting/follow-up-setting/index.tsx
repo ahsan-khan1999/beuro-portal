@@ -3,15 +3,13 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { Form } from "@/base-components/form/form";
 import useAddReason from "@/hooks/setting/useAddReason";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useAppSelector } from "@/hooks/useRedux";
 import { Button } from "@/base-components/ui/button/button";
 import { ToggleButton } from "@/base-components/ui/button/toggle-button";
 import { FollowUpProp } from "@/types/settings";
 
 const FollowUpSetting = () => {
-  const defaultClassName = "mt-0  ";
-  const dispatch = useAppDispatch();
-
+  const defaultClassName = "mt-0";
   const { loading, followUps } = useAppSelector((state) => state.settings);
   const {
     toggleObj,

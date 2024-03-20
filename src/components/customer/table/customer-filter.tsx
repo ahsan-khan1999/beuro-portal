@@ -29,6 +29,8 @@ export default function CustomerFilter({
   };
 
   const hanldeSortChange = (value: string) => {
+    console.log(value);
+
     router.push(
       {
         pathname: router.pathname,
@@ -56,6 +58,7 @@ export default function CustomerFilter({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           text: inputValue,
         },
       },

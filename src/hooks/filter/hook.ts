@@ -28,6 +28,7 @@ export default function useFilter({
   ) => {
     setMoreFilter((prev) => ({ ...prev, [key]: value }));
   };
+
   const handleFilterResetToInitial = () => {
     setMoreFilter(moreFilters);
   };

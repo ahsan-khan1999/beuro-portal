@@ -235,7 +235,7 @@ const OfferDetailsCard = ({
 
         <div className="grid grid-cols-1 md:grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
           <div className="flex items-center gap-[11px]">
-            <span className="text-[#4D4D4D] font-normal text-base">
+            <span className="text-[#4D4D4D] font-normal text-base ">
               {translate("offers.card_content.email_status")}:
             </span>
             {offerDetails?.emailStatus && (

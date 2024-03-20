@@ -18,7 +18,7 @@ const TableHeadings = () => {
         {translate("leads.table_headings.phone")}
       </span>
       <span className="font-medium text-[#8F8F8F] block mlg:hidden xMaxSize:block xLarge:block">
-        {translate("leads.table_headings.desire_date")}
+        {translate("leads.table_headings.creation_date")}
       </span>
       <span className="font-medium text-[#8F8F8F]">
         {translate("leads.table_headings.location")}

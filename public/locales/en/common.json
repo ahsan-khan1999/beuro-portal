@@ -927,6 +927,7 @@
       "email": "Email",
       "phone": "Phone",
       "desire_date": "Desire Date",
+      "creation_date": "Creation Date",
       "location": "Location",
       "status": "Status",
       "images": "Images",
@@ -2099,7 +2100,7 @@
     "December": "December"
   },
   "admin_role": {
-    "Admin": "Admin",
+    "Employee": "Employee",
     "Company": "Company"
   },
   "header_alignment": {

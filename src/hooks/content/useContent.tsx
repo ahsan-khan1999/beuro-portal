@@ -13,7 +13,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
 const useContent = () => {
-  const { content, lastPage, totalCount, loading } = useAppSelector(
+  const { content, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.content
   );
 
@@ -62,8 +62,12 @@ const useContent = () => {
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
     }
 
     const searchQuery = query?.text as string;
@@ -88,7 +92,7 @@ const useContent = () => {
         readContent({
           params: {
             filter: queryParams ? updatedFilter : {},
-            page: Number(parsedPage) || currentPage,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
             size: 10,
           },
         })
@@ -142,6 +146,7 @@ const useContent = () => {
     setFilter,
     translate,
     loading,
+    isLoading,
     currentPage,
   };
 };
