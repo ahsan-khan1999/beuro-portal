@@ -67,8 +67,10 @@ export const ContactDetails = ({
         <>
           <div className="flex flex-col gap-[0px] col-span-3">
             <span className="text-[#000] text-sm font-medium">
+              {companyName && companyName}
+            </span>
+            <span className="text-[#000] text-sm font-medium">
               {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}{" "}
-              {companyName && "c/o" + " " + companyName}
             </span>
             <span className="text-[#000] text-sm font-medium">
               {streetWithNumber}

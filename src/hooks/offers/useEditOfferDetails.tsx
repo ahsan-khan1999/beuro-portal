@@ -76,7 +76,6 @@ export const useEditOfferDetails = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  
   useEffect(() => {
     if (offer) {
       dispatch(readOfferDetails({ params: { filter: offer } })).then(

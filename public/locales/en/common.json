@@ -1024,7 +1024,7 @@
       "confirm_button": "Confirm"
     },
     "leads_created_modal": {
-      "main_heading": "Lead Created Successful",
+      "main_heading": "Lead Created Successfully",
       "sub_heading": "Thanks for creating offer we are happy to have you.",
       "add_button": "Add Images",
       "without_images": "Continue without Images"
@@ -1098,6 +1098,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "offer_created": "Offer Created Successfully",
     "user_rule": "Company",
     "invoice_total": "Total",
     "page_sum": "Page Sum",

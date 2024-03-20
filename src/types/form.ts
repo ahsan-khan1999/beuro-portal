@@ -187,7 +187,7 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   disabled?: boolean;
   onClick?: () => void;
   onChange?: (value: string, index?: number) => void;
-  fieldIndex?: number
+  fieldIndex?: number;
 }
 
 export interface DragAndDropFileFieldProps
@@ -211,7 +211,7 @@ export interface ProfileUploadFieldProps
   extends BaseFieldProps<Field.profileUploadField> {
   control?: Control<FieldValues>;
   iconClasses?: string;
-  disabled?: boolean
+  disabled?: boolean;
 }
 
 // interface for the Image upload
@@ -221,7 +221,7 @@ export interface ImageUploadFieldProps
   onClick?: Function;
   value?: string;
   index?: number;
-  setValue?: UseFormSetValue<FieldValues>
+  setValue?: UseFormSetValue<FieldValues>;
 }
 
 // Interface for the input field copy
@@ -241,9 +241,8 @@ export interface SecurityTokenFieldProps {
   value?: string;
   placeholder?: string;
   disabled?: boolean;
-  onChange: (value: string) => void
+  onChange: (value: string) => void;
 }
-
 
 export interface PhoneProps extends BaseFieldProps<Field.phone> {
   country: string;
@@ -277,9 +276,9 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   success?: boolean;
   onRemove?: () => void;
   dateType?: string;
-  min?:string;
-  max?:string;
-
+  min?: string;
+  max?: string;
+  disable?: boolean;
 }
 
 export interface SpanProps {
