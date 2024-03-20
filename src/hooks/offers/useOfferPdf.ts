@@ -22,6 +22,7 @@ import {
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { updateQuery } from "@/utils/update-query";
+import { staticEnums } from "@/utils/static";
 
 let contractPdfInfo = {
   subject: "",
@@ -104,6 +105,37 @@ export const useOfferPdf = () => {
         }
         if (offerData?.payload) {
           const offerDetails: OffersTableRowTypes = offerData?.payload;
+
+          let serviceDiscountSum =
+            offerDetails?.serviceDetail?.serviceDetail?.reduce(
+              (acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              },
+              0
+            );
+
+          const updatedTotalDiscount =
+            (offerDetails?.subTotal / 100) * offerDetails?.discountAmount;
+
+          let discountPercentage;
+          if (
+            staticEnums["DiscountType"][
+              offerData?.payload
+                ?.discountType as keyof (typeof staticEnums)["DiscountType"]
+            ] === 1
+          ) {
+            discountPercentage =
+              ((offerDetails?.discountAmount + serviceDiscountSum) /
+                offerDetails?.subTotal) *
+              100;
+          } else {
+            discountPercentage =
+              ((updatedTotalDiscount + serviceDiscountSum) /
+                offerDetails?.subTotal) *
+              100;
+          }
+
           let formatData: PdfProps<ContractEmailHeaderProps> = {
             id: offerDetails?.id,
             attachement: offerDetails?.attachement,
@@ -152,6 +184,8 @@ export const useOfferPdf = () => {
               subTotal: offerDetails?.subTotal?.toString(),
               tax: offerDetails?.taxAmount?.toString(),
               discount: offerDetails?.discountAmount?.toString(),
+              discountPercentage: discountPercentage.toString(),
+              updatedDiscountAmount: updatedTotalDiscount.toString(),
               grandTotal: offerDetails?.total?.toString(),
               discountType: offerDetails?.discountType,
               taxType: offerDetails?.taxType,
@@ -159,6 +193,7 @@ export const useOfferPdf = () => {
                 offerDetails?.serviceDetail?.serviceDetail?.reduce(
                   (acc, service) => {
                     const price = service?.discount || 0;
+
                     return acc + price;
                   },
                   0

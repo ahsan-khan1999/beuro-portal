@@ -30,9 +30,8 @@ import {
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
-import { calculateTax } from "@/utils/utility";
-import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
+import { staticEnums } from "@/utils/static";
 
 let invoiceInfoObj = {
   subject: "",
@@ -130,6 +129,38 @@ export const useInvoicePdf = () => {
         if (offerData?.payload) {
           const invoiceDetails: PdfSubInvoiceTypes = offerData?.payload;
 
+          let serviceDiscountSum =
+            invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
+              (acc, service) => {
+                const price = service?.discount || 0;
+                return acc + price;
+              },
+              0
+            );
+
+          const updatedTotalDiscount =
+            (invoiceDetails?.invoiceID?.subTotal / 100) *
+            invoiceDetails?.invoiceID?.discountAmount;
+
+          let discountPercentage;
+          if (
+            staticEnums["DiscountType"][
+              invoiceDetails?.invoiceID
+                ?.discountType as keyof (typeof staticEnums)["DiscountType"]
+            ] === 1
+          ) {
+            discountPercentage =
+              ((invoiceDetails?.invoiceID?.discountAmount +
+                serviceDiscountSum) /
+                invoiceDetails?.invoiceID?.subTotal) *
+              100;
+          } else {
+            discountPercentage =
+              ((updatedTotalDiscount + serviceDiscountSum) /
+                invoiceDetails?.invoiceID?.subTotal) *
+              100;
+          }
+
           let formatData: PdfProps<InvoiceEmailHeaderProps> = {
             attachement: invoiceDetails?.attachement,
             emailHeader: {
@@ -184,8 +215,10 @@ export const useInvoicePdf = () => {
               isDiscount: invoiceDetails?.invoiceID?.isDiscount,
               subTotal: invoiceDetails?.invoiceID?.subTotal?.toString(),
               tax: invoiceDetails?.invoiceID?.taxAmount?.toString(),
-
               discount: invoiceDetails?.invoiceID?.discountAmount?.toString(),
+              discountType: invoiceDetails?.invoiceID?.discountType,
+              discountPercentage: discountPercentage.toString(),
+              updatedDiscountAmount: updatedTotalDiscount.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               invoiceCreatedAmount:
                 invoiceDetails?.invoiceID?.invoiceCreatedAmount.toString(),
@@ -194,7 +227,6 @@ export const useInvoicePdf = () => {
               isShowExtraAmount: true,
               invoiceAmount: invoiceDetails?.amount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
-              discountType: invoiceDetails?.invoiceID?.discountType,
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:
                 invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(

@@ -1,6 +1,5 @@
-import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
+import { pdfDateFormat } from "@/utils/utility";
 import { Image, StyleSheet, Text, View } from "@react-pdf/renderer";
-import moment from "moment";
 import { useMemo, useState } from "react";
 
 const styles = StyleSheet.create({
@@ -64,10 +63,10 @@ export const AggrementSignature = ({
       reader.readAsDataURL(signature);
     }
   };
-  
+
   useMemo(() => signature && onFileChange(), [signature]);
-  const date = pdfDateFormat(new Date().toString(),"de")
-  
+  const date = pdfDateFormat(new Date().toString(), "de");
+
   return (
     <View style={styles.wrapper}>
       {showContractSign && (
@@ -80,9 +79,11 @@ export const AggrementSignature = ({
             <View
               style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}
             >
-              { <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
-                {date}
-              </Text>}
+              {
+                <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
+                  {date}
+                </Text>
+              }
               <Text style={styles.dateText}>Datum</Text>
             </View>
 

@@ -7,14 +7,12 @@ import React, {
 } from "react";
 import SignPad from "signature_pad";
 import { SignatureSubmittedSuccessFully } from "./signature-submitted-success";
-import localStoreUtil from "@/utils/localstore.util";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
   updateModalType,
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
-import Image from "next/image";
 import {
   blobToFile,
   dataURLtoBlob,
@@ -156,6 +154,7 @@ export const SignaturePad = ({
       signaturePad.fromData(data);
     }
   };
+
   const { loading: offerLoading } = useAppSelector((state) => state.offer);
   const headerDetails = pdfData?.headerDetails;
   const { address, header, workDates, time } = pdfData?.movingDetails || {};
@@ -166,6 +165,7 @@ export const SignaturePad = ({
   const router = useRouter();
   const { action: pdfAction } = router.query;
   const acceptButtonRef = useRef<HTMLDivElement>(null);
+
   const disscountTableRow = {
     serviceTitle: "Discount",
     price: Number(serviceItemFooter?.discount),
@@ -176,9 +176,13 @@ export const SignaturePad = ({
     count: "-",
     pagebreak: true,
     discount: Number(serviceItemFooter?.discount),
+    discountType: serviceItemFooter?.discountType,
+    discountPercentage: Number(serviceItemFooter?.discountPercentage),
+    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
     totalDiscount: serviceItemFooter?.serviceDiscountSum,
     isGlobalDiscount: serviceItemFooter?.isDiscount,
   };
+
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
     Number(serviceItemFooter?.serviceDiscountSum) > 0

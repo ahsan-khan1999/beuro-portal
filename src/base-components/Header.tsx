@@ -24,7 +24,10 @@ const Header = () => {
     await dispatch(logoutUser());
     logout();
     router.push("/");
-    // router.push({ pathname: "/pdf", query: { offerID: "65df3a25d09467582a2564de", action: "Accept" } })
+    // router.push({
+    //   pathname: "/pdf",
+    //   query: { offerID: "65ef3d462f26df6c3b0f1f97", action: "Accept" },
+    // });
   };
 
   useEffect(() => {

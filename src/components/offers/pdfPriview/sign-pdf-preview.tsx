@@ -9,6 +9,7 @@ import { SignPdf } from "@/components/pdf/sign-pdf";
 import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
+import { staticEnums } from "@/utils/static";
 
 interface ActionType {
   payload: PublicOffersTableRowTypes;
@@ -45,6 +46,37 @@ const SignPdfPreview = () => {
         (response: ActionType) => {
           if (response?.payload) {
             const offerDetails: PublicOffersTableRowTypes = response?.payload;
+
+            let serviceDiscountSum =
+              offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce(
+                (acc, service) => {
+                  const price = service?.discount || 0;
+                  return acc + price;
+                },
+                0
+              );
+
+            const updatedTotalDiscount =
+              (offerDetails?.Offer?.subTotal / 100) *
+              offerDetails?.Offer?.discountAmount;
+
+            let discountPercentage;
+            if (
+              staticEnums["DiscountType"][
+                offerDetails?.Offer
+                  ?.discountType as keyof (typeof staticEnums)["DiscountType"]
+              ] === 1
+            ) {
+              discountPercentage =
+                ((offerDetails?.Offer?.discountAmount + serviceDiscountSum) /
+                  offerDetails?.Offer?.subTotal) *
+                100;
+            } else {
+              discountPercentage =
+                ((updatedTotalDiscount + serviceDiscountSum) /
+                  offerDetails?.Offer?.subTotal) *
+                100;
+            }
 
             let formatData: PdfProps = {
               isCanvas: true,
@@ -97,9 +129,11 @@ const SignPdfPreview = () => {
                 subTotal: offerDetails?.Offer?.subTotal?.toString(),
                 tax: offerDetails?.Offer?.taxAmount?.toString(),
                 discount: offerDetails?.Offer?.discountAmount?.toString(),
-                grandTotal: offerDetails?.Offer?.total?.toString(),
+                discountPercentage: discountPercentage?.toString(),
                 discountType: offerDetails?.Offer?.discountType,
+                updatedDiscountAmount: updatedTotalDiscount.toString(),
                 taxType: offerDetails?.Offer?.taxType,
+                grandTotal: offerDetails?.Offer?.total?.toString(),
                 serviceDiscountSum:
                   offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce(
                     (acc, service) => {

@@ -184,6 +184,9 @@ export interface ServiceList {
   count: number | string;
   pagebreak: boolean;
   discount: number;
+  discountType?: keyof (typeof staticEnums)["DiscountType"];
+  discountPercentage: number;
+  updatedDiscountAmount: number;
   isDiscount?: boolean;
   totalDiscount?: number;
   isGlobalDiscount?: boolean;

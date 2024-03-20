@@ -51,7 +51,7 @@ export const WarningDays = ({
             }))}
             onItemSelected={handleSecondWarningSelected}
             selectedItem={systemSetting?.secondWarningDays?.toString()}
-            dropDownTextClassName="custom-text-style"
+            dropDownTextClassName="custom-text-style text-black    "
             dropDownIconClassName="custom-icon-style"
             dropDownDisabled={false}
             shouldNotSelectItem={false}
@@ -81,7 +81,7 @@ export const WarningDays = ({
             }))}
             onItemSelected={handlethirdWarningSelected}
             selectedItem={systemSetting?.thirdWarningDays?.toString()}
-            dropDownTextClassName="custom-text-style"
+            dropDownTextClassName="custom-text-style text-black "
             dropDownIconClassName="custom-icon-style"
             dropDownDisabled={false}
             shouldNotSelectItem={false}

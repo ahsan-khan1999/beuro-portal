@@ -20,29 +20,30 @@ const styles = StyleSheet.create({
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 6,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
     // marginRight: 5,
   },
   descriptionText: {
-    color: "#404040",
-    fontSize: 6,
-    fontWeight: 400,
-    fontStyle: "normal",
+    color: "#000",
+    fontSize: 8,
+    fontWeight: 500,
+    fontStyle: "medium",
     width: 180,
     // marginRight: 5,
   },
   priceHeader: {
     flexDirection: "row",
     width: 216,
+    color: "#000",
   },
   headerText: {
-    color: "#404040",
-    fontSize: 6,
-    fontWeight: 400,
-    fontStyle: "normal",
+    color: "#000",
+    fontSize: 8,
+    fontWeight: 500,
+    fontStyle: "medium",
     width: 50,
   },
 });
@@ -58,8 +59,6 @@ export const ServiceTableRow = ({
   unit,
   discount,
   isDiscount,
-  totalDiscount,
-  isGlobalDiscount,
 }: Partial<ServiceList>) => {
   return (
     <View style={styles.headerContainer} break={pagebreak}>
