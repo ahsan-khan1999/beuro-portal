@@ -137,6 +137,7 @@ const AddNewLeadsData = () => {
         imageUploadHandler={imageUploadHandler}
         onClose={onClose}
         routeHandler={routeHandler}
+        heading={translate("leads.leads_created_modal.main_heading")}
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (

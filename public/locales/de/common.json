@@ -1016,7 +1016,7 @@
       "confirm_button": "Bestätigen"
     },
     "leads_created_modal": {
-      "main_heading": "Anfragen erfolgreich erstellt",
+      "main_heading": "Lead erfolgreich erstellt",
       "sub_heading": "Vielen Dank, dass Sie ein Angebot erstellt haben, wir freuen uns, Sie zu haben.",
       "add_button": "Bilder hinzufügen",
       "without_images": "Ohne Bilder fortfahren"
@@ -1090,6 +1090,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "offer_created": "Angebote erfolgreich erstellt",
     "user_rule": "Unternehmen",
     "invoice_total": "Insgesamt",
     "page_sum": "Seite Summe",

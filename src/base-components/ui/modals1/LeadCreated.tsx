@@ -9,10 +9,12 @@ const LeadCreated = ({
   imageUploadHandler,
   onClose,
   routeHandler,
+  heading
 }: {
   imageUploadHandler: Function;
   onClose: () => void;
   routeHandler: Function;
+  heading:string
 }) => {
   const { t: translate } = useTranslation();
   return (
@@ -34,7 +36,7 @@ const LeadCreated = ({
             className="mb-[40px] mt-[43px]"
           />
           <p className="text-[#000] font-medium text-2xl text-center mb-4">
-            {translate("leads.leads_created_modal.main_heading")}
+            {heading}
           </p>
           <p className="text-[#1E1E1E] text-sm font-normal text-center mb-4">
             {translate("leads.leads_created_modal.sub_heading")}
