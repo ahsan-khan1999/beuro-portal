@@ -3,12 +3,17 @@ import axios from "axios";
 import { getRefreshToken, getToken, logout } from "../utils/auth.util";
 import toast from "react-hot-toast";
 
-const STAGING_API_URL = "https://www.staging.buero-365.cloudmeshsolutions.com/api";
-export const GOOGLE_REDIRECT_URL = "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login/oauth/google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
-export const FB_REDIRECT_URL = "https://www.facebook.com/v15.0/dialog/oauth?client_id=898431498260472&redirect_uri=http://localhost:3000/login/oauth/facebook&scope=email&response_type=code&auth_type=rerequest&display=popup";
-export const DOMAIN = "https://new.buero-365.com/api"
-export const GOOGLE_CONNECT_REDIRECT_URL = "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/user-account-settings/login-and-security-settings?provider=google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
-export const FB_CONNECT_REDIRECT_URL = "https://www.facebook.com/v15.0/dialog/oauth?client_id=898431498260472&redirect_uri=http://localhost:3000/user-account-settings/login-and-security-settings?provider=facebook&scope=email&response_type=code&auth_type=rerequest&display=popup";
+const STAGING_API_URL =
+  "https://www.staging.buero-365.cloudmeshsolutions.com/api";
+export const GOOGLE_REDIRECT_URL =
+  "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login/oauth/google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
+export const FB_REDIRECT_URL =
+  "https://www.facebook.com/v15.0/dialog/oauth?client_id=898431498260472&redirect_uri=http://localhost:3000/login/oauth/facebook&scope=email&response_type=code&auth_type=rerequest&display=popup";
+export const DOMAIN = "https://staging.buero-365.cloudmeshsolutions.com/api";
+export const GOOGLE_CONNECT_REDIRECT_URL =
+  "http://accounts.google.com/o/oauth2/v2/auth?client_id=718932924527-4em9535lb3p3nijpdvr41g6aubpqlfmr.apps.googleusercontent.com&redirect_uri=http://localhost:3000/user-account-settings/login-and-security-settings?provider=google&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code&access_type=offline&prompt=consent";
+export const FB_CONNECT_REDIRECT_URL =
+  "https://www.facebook.com/v15.0/dialog/oauth?client_id=898431498260472&redirect_uri=http://localhost:3000/user-account-settings/login-and-security-settings?provider=facebook&scope=email&response_type=code&auth_type=rerequest&display=popup";
 export const BASEURL = DOMAIN;
 export const TAX_PERCENTAGE = "8.1";
 export async function getApiRequestHeader() {
@@ -48,7 +53,7 @@ export async function request({ method, url, data, headers }) {
   try {
     response = await promise;
   } catch (error) {
-    toast.error((error?.response?.data?.message));
+    toast.error(error?.response?.data?.message);
 
     if (error?.response?.data?.code === 401) {
       logout();
@@ -128,7 +133,6 @@ export async function get(url, params, featureAndAction, config) {
       queryParams[key] = otherParams[key];
     }
   }
-  
 
   const queryString = new URLSearchParams(queryParams).toString();
   const fullUrl = queryString ? `${url}?${queryString}` : url;

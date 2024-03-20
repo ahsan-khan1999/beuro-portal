@@ -1,4 +1,5 @@
 import { ServiceList } from "@/types/offers";
+import { staticEnums } from "@/utils/static";
 import { View, Text } from "@react-pdf/renderer";
 import { StyleSheet } from "@react-pdf/renderer";
 
@@ -20,17 +21,17 @@ const styles = StyleSheet.create({
   },
   descriptionTextTitle: {
     color: "#000",
-    fontSize: 6,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
     // marginRight: 5,
   },
   descriptionText: {
-    color: "#404040",
-    fontSize: 6,
-    fontWeight: 400,
-    fontStyle: "normal",
+    color: "#000",
+    fontSize: 8,
+    fontWeight: 500,
+    fontStyle: "medium",
     width: 180,
     // marginRight: 5,
   },
@@ -39,10 +40,18 @@ const styles = StyleSheet.create({
     width: 216,
   },
   headerText: {
-    color: "#404040",
+    color: "#000",
+    fontSize: 8,
+    fontWeight: 500,
+    fontStyle: "medium",
+    width: 50,
+  },
+
+  totalDiscountText: {
+    color: "#000",
     fontSize: 6,
-    fontWeight: 400,
-    fontStyle: "normal",
+    fontWeight: 500,
+    fontStyle: "medium",
     width: 50,
   },
 });
@@ -60,6 +69,9 @@ export const ServiceTableDiscountRow = ({
   isDiscount,
   totalDiscount,
   isGlobalDiscount,
+  discountPercentage,
+  discountType,
+  updatedDiscountAmount,
 }: Partial<ServiceList>) => {
   return (
     <View style={styles.headerContainer} break={pagebreak}>
@@ -69,7 +81,6 @@ export const ServiceTableDiscountRow = ({
         <View style={styles.priceHeader}>
           <Text style={styles.headerText}>{count}</Text>
           <Text style={styles.headerText}>{unit}</Text>
-
           <Text style={styles.headerText}>
             {isGlobalDiscount ? price : totalDiscount}
           </Text>
@@ -80,11 +91,28 @@ export const ServiceTableDiscountRow = ({
             </Text>
           )}
 
-          <Text style={styles.headerText}>
-            {isGlobalDiscount
-              ? Number(discount || 0) + Number(totalDiscount || 0)
-              : totalDiscount}
-          </Text>
+          {staticEnums["DiscountType"][
+            discountType as keyof (typeof staticEnums)["DiscountType"]
+          ] === 0 ? (
+            <Text style={styles.totalDiscountText}>
+              {isGlobalDiscount
+                ? (
+                    Number(totalDiscount || 0) +
+                    Number(updatedDiscountAmount || 0)
+                  ).toFixed(1)
+                : updatedDiscountAmount}{" "}
+              ({discountPercentage?.toFixed(1)}%)
+            </Text>
+          ) : (
+            <Text style={styles.totalDiscountText}>
+              {isGlobalDiscount
+                ? (Number(discount || 0) + Number(totalDiscount || 0)).toFixed(
+                    1
+                  )
+                : totalDiscount}{" "}
+              ({discountPercentage?.toFixed(1)}%)
+            </Text>
+          )}
         </View>
       </View>
     </View>

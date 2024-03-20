@@ -57,6 +57,7 @@ const PdfPriview = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return (
     <>
       {loading ? (
