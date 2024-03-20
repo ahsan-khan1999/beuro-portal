@@ -47,12 +47,35 @@ const styles = StyleSheet.create({
     width: 50,
   },
 
-  totalDiscountText: {
+  normalTotalDiscountText: {
     color: "#000",
-    fontSize: 6,
+    fontSize: 7,
     fontWeight: 500,
     fontStyle: "medium",
     width: 50,
+  },
+
+  smallTotalDiscountText: {
+    color: "#000",
+    fontSize: 6,
+    fontWeight: 400,
+    fontStyle: "normal",
+    width: 50,
+  },
+
+  extraSmallTotalDiscountText: {
+    color: "#000",
+    fontSize: 5,
+    fontWeight: 400,
+    fontStyle: "normal",
+    width: 50,
+  },
+
+  discountPercentageText: {
+    color: "#000",
+    fontSize: 5,
+    fontWeight: 400,
+    fontStyle: "normal",
   },
 });
 
@@ -73,6 +96,16 @@ export const ServiceTableDiscountRow = ({
   discountType,
   updatedDiscountAmount,
 }: Partial<ServiceList>) => {
+  const totalAmount =
+    Number(totalDiscount || 0) + Number(updatedDiscountAmount || 0);
+
+  const discountAmountTextStyle =
+    totalAmount >= 10000
+      ? styles.extraSmallTotalDiscountText
+      : totalAmount >= 1000
+      ? styles.smallTotalDiscountText
+      : styles.normalTotalDiscountText;
+
   return (
     <View style={styles.headerContainer} break={pagebreak}>
       <View style={styles.headerRow}>
@@ -94,23 +127,27 @@ export const ServiceTableDiscountRow = ({
           {staticEnums["DiscountType"][
             discountType as keyof (typeof staticEnums)["DiscountType"]
           ] === 0 ? (
-            <Text style={styles.totalDiscountText}>
+            <Text style={discountAmountTextStyle}>
               {isGlobalDiscount
                 ? (
                     Number(totalDiscount || 0) +
                     Number(updatedDiscountAmount || 0)
                   ).toFixed(1)
                 : updatedDiscountAmount}{" "}
-              ({discountPercentage?.toFixed(1)}%)
+              <Text style={styles.discountPercentageText}>
+                ({discountPercentage?.toFixed(1)}%)
+              </Text>
             </Text>
           ) : (
-            <Text style={styles.totalDiscountText}>
+            <Text style={discountAmountTextStyle}>
               {isGlobalDiscount
                 ? (Number(discount || 0) + Number(totalDiscount || 0)).toFixed(
                     1
                   )
                 : totalDiscount}{" "}
-              ({discountPercentage?.toFixed(1)}%)
+              <Text style={styles.discountPercentageText}>
+                ({discountPercentage?.toFixed(1)}%)
+              </Text>
             </Text>
           )}
         </View>
