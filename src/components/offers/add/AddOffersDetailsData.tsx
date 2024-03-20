@@ -12,6 +12,10 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
+import { updateQuery } from "@/utils/update-query";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
+import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 
 export enum ComponentsType {
   customerAdded,
@@ -95,10 +99,6 @@ const EditOffersDetailsData = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const offerCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
-
   const router = useRouter();
 
   const route = () => {
@@ -108,7 +108,39 @@ const EditOffersDetailsData = () => {
     onClose();
   };
 
+  const offerCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE_SUCCESSFULLY }));
+  };
+
+  const handleImageUpload = () => {
+    dispatch(setImages([]));
+
+    dispatch(
+      readImage({ params: { type: "leadID", id: offerDetails?.leadID?.id } })
+    );
+    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+  };
+
+  const handleOfferCreated = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
+      <LeadCreated
+        imageUploadHandler={handleImageUpload}
+        onClose={onClose}
+        routeHandler={route}
+        heading={translate("common.offer_created")}
+      />
+    ),
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer
+        onClose={onClose}
+        handleImageSlider={handleOfferCreated}
+        type={"Offer"}
+      />
+    ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}

@@ -587,7 +587,7 @@ export function getEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
   )
-    return "#4A13E7";
+    return "#45C769";
   else return "#FF376F";
 }
 

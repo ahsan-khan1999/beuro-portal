@@ -19,6 +19,12 @@ export const ProductDiscountItem = ({
   updatedDiscountAmount,
 }: ServiceList) => {
   const { systemSettings } = useAppSelector((state) => state.settings);
+
+  const totalUpdatedAmount =
+    Number(totalDiscount || 0) + Number(updatedDiscountAmount || 0);
+
+  const totalAmount = Number(discount || 0) + Number(totalDiscount || 0);
+
   return (
     <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] py-3 mb-3  pl-3">
       <div className="grid grid-cols-3 items-center">
@@ -58,23 +64,43 @@ export const ProductDiscountItem = ({
           {staticEnums["DiscountType"][
             discountType as keyof (typeof staticEnums)["DiscountType"]
           ] === 0 ? (
-            <span className="text-xs font-semibold min-w-[70px] break-all">
+            <span
+              className={`${
+                totalUpdatedAmount >= 10000
+                  ? "text-[9px]"
+                  : totalUpdatedAmount >= 1000
+                  ? "text-[10px]"
+                  : "text-xs"
+              } font-semibold min-w-[70px] break-all`}
+            >
               {isGlobalDiscount
                 ? (
                     Number(totalDiscount || 0) +
                     Number(updatedDiscountAmount || 0)
                   ).toFixed(1)
                 : updatedDiscountAmount}{" "}
-              ({discountPercentage?.toFixed(1)}%)
+              <span className="text-[8px]">
+                ({discountPercentage?.toFixed(1)}%)
+              </span>
             </span>
           ) : (
-            <span className="text-xs font-semibold min-w-[70px] break-all">
+            <span
+              className={`${
+                totalAmount >= 10000
+                  ? "text-[9px]"
+                  : totalAmount >= 1000
+                  ? "text-[10px]"
+                  : "text-xs"
+              } font-semibold min-w-[70px] break-all`}
+            >
               {isGlobalDiscount
                 ? (Number(discount || 0) + Number(totalDiscount || 0)).toFixed(
                     1
                   )
                 : totalDiscount}{" "}
-              ({discountPercentage?.toFixed(1)}%)
+              <span className="text-[8px]">
+                ({discountPercentage?.toFixed(1)}%)
+              </span>
             </span>
           )}
           {/* </span> */}

@@ -167,7 +167,8 @@ export const useUploadImageOffer = (
       const response = await dispatch(
         createImage({ data: apiData, router, translate })
       );
-      if (response?.payload) handleOnClose();
+      // if (response?.payload) handleOnClose();
+      if (response?.payload) handleImageSlider();
     } else if (type === "Contract") {
       // const filteredList = Object.values(data)
       //   ?.filter((value) => value)

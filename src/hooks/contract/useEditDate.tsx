@@ -51,7 +51,7 @@ export const useEditDate = (
     setError,
     formState: { errors },
     setValue,
-    trigger
+    trigger,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -73,11 +73,9 @@ export const useEditDate = (
     );
     setValue(
       "time",
-      isOffer
-        ? pdfData?.movingDetails?.time
-        : contractDetails?.offerID?.time
+      isOffer ? pdfData?.movingDetails?.time : contractDetails?.offerID?.time
     );
-    trigger("time")
+    trigger("time");
   }, []);
   const fields = AddDateFormFieldContract(
     register,
@@ -86,7 +84,7 @@ export const useEditDate = (
     remove,
     isOffer ? loadingPublicOffer : loading,
     control,
-    isOffer &&pdfData?.movingDetails?.workDates || undefined
+    (isOffer && pdfData?.movingDetails?.workDates) || undefined
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -106,7 +104,6 @@ export const useEditDate = (
             ...pdfData?.movingDetails,
             workDates: response?.payload?.date,
             time: response?.payload?.time,
-
           },
         });
         handleSuccessModal();
