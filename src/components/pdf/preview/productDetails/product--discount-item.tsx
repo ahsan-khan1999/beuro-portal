@@ -20,8 +20,10 @@ export const ProductDiscountItem = ({
 }: ServiceList) => {
   const { systemSettings } = useAppSelector((state) => state.settings);
 
-  const totalAmount =
+  const totalUpdatedAmount =
     Number(totalDiscount || 0) + Number(updatedDiscountAmount || 0);
+
+  const totalAmount = Number(discount || 0) + Number(totalDiscount || 0);
 
   return (
     <div className="flex flex-col bg-[#F6F7F8] rounded-[4px] py-3 mb-3  pl-3">
@@ -64,9 +66,9 @@ export const ProductDiscountItem = ({
           ] === 0 ? (
             <span
               className={`${
-                totalAmount >= 10000
+                totalUpdatedAmount >= 10000
                   ? "text-[9px]"
-                  : totalAmount >= 1000
+                  : totalUpdatedAmount >= 1000
                   ? "text-[10px]"
                   : "text-xs"
               } font-semibold min-w-[70px] break-all`}

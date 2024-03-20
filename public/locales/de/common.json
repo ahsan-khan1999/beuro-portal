@@ -2054,7 +2054,7 @@
     "Company": "Unternehmen"
   },
   "email_status": {
-    "Post": "Beitrag",
+    "Post": "Gesendet",
     "Pending": "Entwurf",
     "Sent": "Gesendet",
     "Failed": "Gescheitert"

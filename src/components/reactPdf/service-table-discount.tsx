@@ -96,8 +96,17 @@ export const ServiceTableDiscountRow = ({
   discountType,
   updatedDiscountAmount,
 }: Partial<ServiceList>) => {
-  const totalAmount =
+  const totalUpdatedAmount =
     Number(totalDiscount || 0) + Number(updatedDiscountAmount || 0);
+
+  const discountUpdatedAmountTextStyle =
+    totalUpdatedAmount >= 10000
+      ? styles.extraSmallTotalDiscountText
+      : totalUpdatedAmount >= 1000
+      ? styles.smallTotalDiscountText
+      : styles.normalTotalDiscountText;
+
+  const totalAmount = Number(discount || 0) + Number(totalDiscount || 0);
 
   const discountAmountTextStyle =
     totalAmount >= 10000
@@ -127,7 +136,7 @@ export const ServiceTableDiscountRow = ({
           {staticEnums["DiscountType"][
             discountType as keyof (typeof staticEnums)["DiscountType"]
           ] === 0 ? (
-            <Text style={discountAmountTextStyle}>
+            <Text style={discountUpdatedAmountTextStyle}>
               {isGlobalDiscount
                 ? (
                     Number(totalDiscount || 0) +

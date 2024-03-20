@@ -7,6 +7,7 @@ import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { useTranslation } from "next-i18next";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { getEmailColor } from "@/utils/utility";
 
 const EmailCard = ({
   emailStatus,
@@ -140,12 +141,18 @@ const EmailCard = ({
           <span className="text-[#4D4D4D] text-base font-normal">
             {translate("offer_pdf_card.email_status")}:
           </span>
+
           {emailStatus && (
-            <div className="border-[#FE9244] border rounded-md px-[8px] text-center w-fit">
-              <span className="text-[#FE9244] text-base font-medium">
-                {translate(`email_status.${emailStatus}`)}
-              </span>
-            </div>
+            <span
+              className={`text-base font-medium border border-[${getEmailColor(
+                emailStatus
+              )}] rounded-lg px-4 py-[3px]`}
+              style={{
+                color: `${getEmailColor(emailStatus)}`,
+              }}
+            >
+              {translate(`email_status.${emailStatus}`)}
+            </span>
           )}
         </div>
       </div>
