@@ -9,21 +9,21 @@ import { useEmptyStates } from "@/utils/hooks";
 
 export default function Offers() {
   const {
-    currentPageRows,
-    handlePageChange,
-    totalItems,
-    itemsPerPage,
-    handleNotes,
-    handleImageUpload,
-    renderModal,
-    filter,
-    setFilter,
-    handleFilterChange,
-    loading,
-    isLoading,
-    handleOfferStatusUpdate,
-    handlePaymentStatusUpdate,
     currentPage,
+    currentPageRows,
+    filter,
+    handleFilterChange,
+    handleImageUpload,
+    handleNotes,
+    handleOfferStatusUpdate,
+    handlePageChange,
+    handlePaymentStatusUpdate,
+    isLoading,
+    itemsPerPage,
+    loading,
+    renderModal,
+    setFilter,
+    totalItems,
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
@@ -39,9 +39,9 @@ export default function Offers() {
   );
 
   return (
-    <div>
+    <>
       <TableFunctions
-        filter={filter}
+        filter={filter} 
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
@@ -49,13 +49,15 @@ export default function Offers() {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
+
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
         currentPage={currentPage}
       />
+
       {renderModal()}
-    </div>
+    </>
   );
 }

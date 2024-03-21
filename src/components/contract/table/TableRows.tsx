@@ -1,12 +1,7 @@
 import { contractTableTypes } from "@/types/contract";
 import React from "react";
 import { useRouter } from "next/router";
-import {
-  getContractStatusColor,
-  getEmailColor,
-  getMailStatusColor,
-  getPaymentTypeColor,
-} from "@/utils/utility";
+import { getEmailColor, getMailStatusColor } from "@/utils/utility";
 import { formatDateString } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
@@ -52,7 +47,11 @@ const TableRows = ({
   ];
 
   return (
-    <div className="overflow-y-visible">
+    <div
+      className={`overflow-y-visible ${
+        dataToAdd && dataToAdd.length <= 4 ? "h-[500px]" : ""
+      }`}
+    >
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
@@ -91,7 +90,7 @@ const TableRows = ({
                 {translate(`email_status.${item?.emailStatus}`)}
               </div>
             </span>
-            {/* <span className="py-4" onClick={(e) => e.stopPropagation()}>
+            <span className="py-4" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
@@ -113,20 +112,28 @@ const TableRows = ({
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
-                isSecondLastIndex={index === dataToAdd?.length - 2}
-                isLastIndex={index === dataToAdd?.length - 1}
+                isSecondLastIndex={
+                  dataToAdd &&
+                  dataToAdd.length > 5 &&
+                  index === dataToAdd.length - 2
+                }
+                isLastIndex={
+                  dataToAdd &&
+                  dataToAdd.length > 5 &&
+                  index === dataToAdd.length - 1
+                }
               />
-            </span> */}
-            <span className="py-4 flex justify-center items-center mr-1">
+            </span>
+            {/* <span className="py-4 flex justify-center items-center mr-1">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md w-full text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span>
+            </span> */}
 
-            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["ContractStatus"]).map(
                   (item, index) => ({
@@ -158,16 +165,16 @@ const TableRows = ({
                 isSecondLastIndex={index === dataToAdd?.length - 2}
                 isLastIndex={index === dataToAdd?.length - 1}
               />
-            </span> */}
+            </span>
 
-            <span className="flex justify-center items-center">
+            {/* <span className="flex justify-center items-center">
               <div
                 className={`bg-[${getContractStatusColor(item.contractStatus)}]
                   } text-white px-2 py-1 text-center rounded-md text-sm min-w-[90px] w-full`}
               >
                 {translate(`contract_status.${item.contractStatus}`)}
               </div>
-            </span>
+            </span> */}
 
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "

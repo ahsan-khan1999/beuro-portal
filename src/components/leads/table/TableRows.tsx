@@ -3,36 +3,56 @@ import React from "react";
 import { useRouter } from "next/router";
 import { formatDate, getStatusColor } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { staticEnums } from "@/utils/static";
 
-const TableRows = ({
-  dataToAdd,
-  openModal,
-  handleImageUpload,
-}: {
+export interface LeadTableProps {
   dataToAdd: Lead[];
   openModal: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
   handleImageUpload: (
     item: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
-}) => {
-  const { t: translate } = useTranslation();
+  onStatusChange: (id: string, status: string, type: string) => void;
+}
 
+const TableRows = ({
+  dataToAdd,
+  openModal,
+  handleImageUpload,
+  onStatusChange,
+}: LeadTableProps) => {
+  const { t: translate } = useTranslation();
   const router = useRouter();
 
+  const itemsValue = [
+    `${translate("lead_status.Open")}`,
+    `${translate("lead_status.InProcess")}`,
+    `${translate("lead_status.Close")}`,
+    `${translate("lead_status.Expired")}`,
+  ];
+
+  const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
+    item: { label: itemsValue[index], value: item },
+  }));
+
   return (
-    <div>
+    <div
+      className={`overflow-y-visible ${
+        dataToAdd && dataToAdd.length <= 4 ? "h-[550px]" : ""
+      }`}
+    >
       {dataToAdd?.map((item: Lead, index: number) => {
         return (
           <div
-            onClick={() =>
+            onClick={() => {
               router.push({
                 pathname: "/leads/details",
                 query: { ...router.query, lead: item?.id },
-              })
-            }
+              });
+            }}
             key={index}
-            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white  px-6 shadow-tableRow gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(80px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(80px,_3fr)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(90px,_100%)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(100px,4fr)_minmax(130px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white  px-6 shadow-tableRow gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(170px,_170px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(80px,_3fr)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(80px,_3fr)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(130px,_130px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(90px,_100%)_minmax(80px,_80px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(70px,_70px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(100px,4fr)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mt-2 rounded-md"
           >
             <span className="py-4 truncate">{item?.refID}</span>
             <span className="py-4 truncate">
@@ -50,7 +70,7 @@ const TableRows = ({
             <span className="py-4 truncate">
               {translate(`countries.${item.customerDetail?.address?.country}`)}
             </span>
-            <span className={`py-4 flex items-center`}>
+            {/* <span className={`py-4 flex items-center`}>
               <div
                 style={{
                   backgroundColor: `${getStatusColor(item.leadStatus)}`,
@@ -59,6 +79,36 @@ const TableRows = ({
               >
                 {translate(`lead_status.${item.leadStatus}`)}
               </div>
+            </span> */}
+            <span
+              className="py-4 flex items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <DropDown
+                key={item.id}
+                items={items}
+                selectedItem={translate(`lead_status.${item?.leadStatus}`)}
+                onItemSelected={(status) => {
+                  onStatusChange(item.id, status, "lead");
+                }}
+                dropDownClassName={`bg-[${getStatusColor(
+                  item?.leadStatus
+                )}] w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                dropDownTextClassName={`text-white text-base font-medium me-1`}
+                dropDownItemsContainerClassName="w-full"
+                dropDownIconClassName={"text-white"}
+                isSecondLastIndex={
+                  dataToAdd &&
+                  dataToAdd.length > 5 &&
+                  index === dataToAdd.length - 2
+                }
+                isLastIndex={
+                  dataToAdd &&
+                  dataToAdd.length > 5 &&
+                  index === dataToAdd.length - 1
+                }
+                isLead={true}
+              />
             </span>
             <span
               className="py-4 flex justify-center items-center cursor-pointer"
@@ -147,7 +197,7 @@ const TableRows = ({
               onClick={() =>
                 router.push({
                   pathname: "/leads/details",
-                  query: { lead: item?.id },
+                  query: { ...router.query, lead: item?.id },
                 })
               }
             >
