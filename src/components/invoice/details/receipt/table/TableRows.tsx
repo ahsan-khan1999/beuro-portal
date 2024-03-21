@@ -8,10 +8,8 @@ import {
 } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { updateQuery } from "@/utils/update-query";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
-import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 
 const TableRows = ({
   collectiveInvoice,

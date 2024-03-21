@@ -79,8 +79,6 @@ export default function useLeadDetail() {
   };
 
   const handleStatusUpdate = async (leadStatus: string) => {
-    console.log(staticEnums["LeadStatus"][leadStatus]);
-
     const res = await dispatch(
       updateLeadStatus({
         data: {

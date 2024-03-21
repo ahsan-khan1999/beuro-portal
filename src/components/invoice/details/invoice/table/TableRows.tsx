@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { SubInvoiceTableRowTypes } from "@/types/invoice";
 import { useRouter } from "next/router";
@@ -11,7 +10,6 @@ import {
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
-import { SelectDropDown } from "@/base-components/ui/selectDropDown/select-drop-down";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
 const TableRows = ({
@@ -54,7 +52,7 @@ const TableRows = ({
   return (
     <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
-        return (
+        return (  
           <div
             key={index}
             onClick={() => handleInvoicePdfPreview(item?.id)}

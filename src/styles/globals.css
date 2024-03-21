@@ -636,7 +636,4 @@ input[type="number"] {
   cursor: pointer;
 }
 
-.select_dropdown_items:hover {
-  color: white;
-  background-color: #bfbfbf;
-}
+

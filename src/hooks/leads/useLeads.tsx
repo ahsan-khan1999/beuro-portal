@@ -6,10 +6,14 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { Lead } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
-import { DEFAULT_CUSTOMER, DEFAULT_LEAD } from "@/utils/static";
+import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { FilterType } from "@/types";
-import { readLead, setLeadDetails } from "@/api/slices/lead/leadSlice";
+import {
+  readLead,
+  setLeadDetails,
+  updateLeadStatus,
+} from "@/api/slices/lead/leadSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { useRouter } from "next/router";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
@@ -246,71 +250,26 @@ const useLeads = () => {
     }
   }, [query]);
 
-  // useEffect(() => {
-  //   const parsedPage = parseInt(query.page as string, 10);
-  //   let resetPage = null;
-  //   if (!isNaN(parsedPage)) {
-  //     setCurrentPage(parsedPage);
-  //   } else {
-  //     resetPage = 1;
-  //     setCurrentPage(1);
-  //   }
-
-  //   const queryStatus = query?.status;
-  //   const searchQuery = query?.text as string;
-  //   const sortedValue = query?.sort as string;
-  //   const extraFiltered = query?.date as string;
-
-  //   const queryParams =
-  //     queryStatus || searchQuery || sortedValue || extraFiltered;
-
-  //   if (queryParams !== undefined) {
-  //     const filteredStatus =
-  //       query?.status === "None"
-  //         ? "None"
-  //         : queryParams
-  //             .toString()
-  //             .split(",")
-  //             .filter((item) => item !== "None");
-
-  //     let updatedFilter: {
-  //       status: string | string[];
-  //       text?: string;
-  //       sort?: string;
-  //       date?: {
-  //         $gte?: string;
-  //         $lte?: string;
-  //       };
-  //     } = {
-  //       status: filteredStatus,
-  //     };
-
-  //     if (searchQuery || sortedValue || extraFiltered) {
-  //       updatedFilter.text = searchQuery;
-  //       updatedFilter.sort = sortedValue;
-
-  //       // Parse extraFiltered into an object with $gte and $lte properties
-  //       const dateObj = JSON.parse(extraFiltered);
-  //       updatedFilter.date = dateObj;
-  //     }
-
-  //     setFilter(updatedFilter);
-
-  //     dispatch(
-  //       readLead({
-  //         params: {
-  //           filter: updatedFilter,
-  //           page: (Number(parsedPage) || resetPage) ?? currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-  //     });
-  //   }
-  // }, [query]);
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const handleLeadStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "lead") {
+      const res = await dispatch(
+        updateLeadStatus({
+          data: {
+            id: id,
+            leadStatus: staticEnums["LeadStatus"][status],
+          },
+        })
+      );
+      if (res?.payload) if (res?.payload) defaultUpdateModal();
+    }
   };
 
   return {
@@ -328,6 +287,7 @@ const useLeads = () => {
     loading,
     isLoading,
     currentPage,
+    handleLeadStatusUpdate,
   };
 };
 
