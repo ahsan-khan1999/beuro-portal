@@ -6,9 +6,10 @@ import {
   getEmailColor,
   getMailStatusColor,
   getOfferStatusColor,
-  getPaymentTypeColor,
 } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { staticEnums } from "@/utils/static";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
 const TableRows = ({
   dataToAdd,
@@ -42,15 +43,15 @@ const TableRows = ({
   ];
 
   return (
-    <div className="overflow-y-visible">
+    <div
+      className={`overflow-y-visible ${
+        dataToAdd && dataToAdd.length <= 4 ? "h-[500px]" : ""
+      }`}
+    >
       {dataToAdd?.map((item, index) => {
         return (
           <div
             onClick={() =>
-              // router.push(
-              //   `/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`
-              // )
-
               router.push({
                 pathname: `/offers/pdf-preview`,
                 query: { ...router.query, offerID: item?.id, isMail: true },
@@ -82,7 +83,7 @@ const TableRows = ({
               </div>
             </span>
 
-            {/* <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+            <span className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["PaymentType"]).map(
                   (item, index) => ({
@@ -104,30 +105,38 @@ const TableRows = ({
                 dropDownTextClassName="text-white text-base font-medium"
                 dropDownIconClassName={`text-[#fff]`}
                 dropDownItemsContainerClassName="w-full"
-                isSecondLastIndex={index === dataToAdd?.length - 2}
-                isLastIndex={index === dataToAdd?.length - 1}
+                isSecondLastIndex={
+                  dataToAdd &&
+                  dataToAdd.length > 5 &&
+                  index === dataToAdd.length - 2
+                }
+                isLastIndex={
+                  dataToAdd &&
+                  dataToAdd.length > 5 &&
+                  index === dataToAdd.length - 1
+                }
               />
-            </span> */}
+            </span>
 
-            <span className="py-4 flex justify-center items-center mx-1">
+            {/* <span className="py-4 flex justify-center items-center mx-1">
               <div
                 className={`bg-[${getPaymentTypeColor(item.paymentType)}]
                   } text-white px-2 py-1 text-center rounded-md w-full text-sm`}
               >
                 {translate(`payment_method.${item.paymentType}`)}
               </div>
-            </span>
+            </span> */}
 
-            <span className="py-4 flex justify-center items-center">
+            {/* <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getOfferStatusColor(item.offerStatus)}]
                   } text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
                 {translate(`offer_status.${item.offerStatus}`)}
               </div>
-            </span>
+            </span> */}
 
-            {/* {item.offerStatus === "Accepted" ? (
+            {item.offerStatus === "Accepted" ? (
               <span className="py-4 ml-1">
                 <div
                   style={{
@@ -163,12 +172,20 @@ const TableRows = ({
                   dropDownIconClassName={"text-white"}
                   dropDownTextClassName="text-white text-base font-medium"
                   dropDownItemsContainerClassName="w-full"
-                  isSecondLastIndex={index === dataToAdd?.length - 2}
-                  isLastIndex={index === dataToAdd?.length - 1}
+                  isSecondLastIndex={
+                    dataToAdd &&
+                    dataToAdd.length > 5 &&
+                    index === dataToAdd.length - 2
+                  }
+                  isLastIndex={
+                    dataToAdd &&
+                    dataToAdd.length > 5 &&
+                    index === dataToAdd.length - 1
+                  }
                   isOffer={true}
                 />
               </div>
-            )} */}
+            )}
 
             <span
               className="py-4 flex justify-center items-center cursor-pointer"
@@ -278,9 +295,10 @@ const TableRows = ({
             <span
               className="flex justify-center items-center cursor-pointer rounded-md"
               onClick={() =>
-                router.push(
-                  `/offers/pdf-preview?offerID=${item?.id}&isMail=${true}`
-                )
+                router.push({
+                  pathname: `/offers/pdf-preview`,
+                  query: { ...router.query, offerID: item?.id, isMail: true },
+                })
               }
             >
               <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">

@@ -20,10 +20,12 @@ export const DropDown = ({
   shouldNotSelectItem = false,
   isLastIndex,
   isSecondLastIndex,
+  isLead,
   isOffer,
 }: DropDownProps & {
   isLastIndex?: boolean;
   isSecondLastIndex?: boolean;
+  isLead?: boolean;
   isOffer?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -83,6 +85,7 @@ export const DropDown = ({
               isLastIndex={isLastIndex}
               isSecondLastIndex={isSecondLastIndex}
               isOffer={isOffer}
+              isLead={isLead}
             />
           )}
         </AnimatePresence>

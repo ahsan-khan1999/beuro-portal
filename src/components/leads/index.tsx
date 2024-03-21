@@ -23,6 +23,7 @@ export default function Leads() {
     loading,
     isLoading,
     currentPage,
+    handleLeadStatusUpdate,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
@@ -30,6 +31,7 @@ export default function Leads() {
       dataToAdd={currentPageRows}
       openModal={handleNotes}
       handleImageUpload={handleImageUpload}
+      onStatusChange={handleLeadStatusUpdate}
     />,
     currentPageRows.length > 0,
     isLoading

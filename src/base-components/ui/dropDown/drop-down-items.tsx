@@ -1,7 +1,6 @@
 import { DropDownItemsProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
 import { motion } from "framer-motion";
-import dropdownIcon from "@/assets/pngs/drop-down-icon.png";
 
 export const DropDownItems = ({
   items,
@@ -9,19 +8,24 @@ export const DropDownItems = ({
   containerClassName,
   isLastIndex,
   isSecondLastIndex,
-  isOffer
+  isOffer,
+  isLead,
 }: DropDownItemsProps & {
   isLastIndex?: boolean;
   isSecondLastIndex?: boolean;
+  isLead?: boolean;
   isOffer?: boolean;
 }) => {
   const handleItemClick = (item: string) => {
     onItemClick(item);
   };
-  console.log(isOffer);
-  
-  const containerDefaultClasses =
-    `absolute  ${(isOffer && (isLastIndex || isSecondLastIndex)) && "!-top-40" || (isLastIndex || isSecondLastIndex) && "!-top-20"}  z-10 w-fit border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg max-h-52 overflow-y-auto`;
+
+  const containerDefaultClasses = `absolute  ${
+    (isLead && (isLastIndex || isSecondLastIndex) && "!-top-[170px]") ||
+    (isOffer && (isLastIndex || isSecondLastIndex) && "!-top-40") ||
+    ((isLastIndex || isSecondLastIndex) && "!-top-20")
+  }  z-10 w-fit border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg max-h-52 overflow-y-auto`;
+
   let containerClasses = combineClasses(
     containerDefaultClasses,
     containerClassName

@@ -31,7 +31,7 @@ export default function FollowUpFilter({
         id="Apply"
         inputType="submit"
         onClick={handleFilterChange}
-        className="!h-[36px]  px-5 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-5 whitespace-nowrap"
+        className="!h-[36px] px-5 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-5 whitespace-nowrap"
       />
     </div>
   );
