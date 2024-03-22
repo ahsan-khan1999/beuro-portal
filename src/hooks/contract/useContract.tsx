@@ -219,19 +219,29 @@ const useContract = () => {
     type: string
   ) => {
     if (type === "contracts") {
-      const res = await dispatch(
-        updateContractStatus({
-          data: {
-            id: id,
-            contractStatus: staticEnums["ContractStatus"][status],
-          },
-        })
-      );
-      if (res?.payload)
-        // dispatch(
-        //   readContractDetails({ params: { filter: contractDetails?.id } })
-        // ),
-        contractHandler();
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (!currentItem || currentItem.contractStatus !== status) {
+        const res = await dispatch(
+          updateContractStatus({
+            data: {
+              id: id,
+              contractStatus: staticEnums["ContractStatus"][status],
+            },
+          })
+        );
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            contractHandler();
+          }
+        }
+      }
     }
   };
 
@@ -241,12 +251,27 @@ const useContract = () => {
     type: string
   ) => {
     if (type === "contracts") {
-      const res = await dispatch(
-        updateContractPaymentStatus({
-          data: { id: id, paymentType: staticEnums["PaymentType"][status] },
-        })
-      );
-      if (res?.payload) contractHandler();
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (!currentItem || currentItem.paymentType !== status) {
+        const res = await dispatch(
+          updateContractPaymentStatus({
+            data: { id: id, paymentType: staticEnums["PaymentType"][status] },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            contractHandler();
+          }
+        }
+      }
     }
   };
 

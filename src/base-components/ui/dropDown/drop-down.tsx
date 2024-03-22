@@ -33,7 +33,7 @@ export const DropDown = ({
 
   const toggleDropDown = (item: string) => {
     onItemSelected(item);
-    !shouldNotSelectItem && setSelectedItem(item);
+    // !shouldNotSelectItem && setSelectedItem(item);
     setIsOpen((prevState) => !prevState);
   };
 

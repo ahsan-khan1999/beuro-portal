@@ -128,7 +128,7 @@ export const updateLeadStatus: AsyncThunk<boolean, object, object> | any =
     try {
       const response = await apiServices.updateLeadStatus(data);
       thunkApi.dispatch(setLeadDetails(response?.data?.Lead));
-      return true;
+      return response?.data?.Lead;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;

@@ -184,7 +184,7 @@ export default function LeadsFilter({
           iconDisplay={false}
           onEnterPress={onEnterPress}
         />
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 z-10">
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
             value=""
