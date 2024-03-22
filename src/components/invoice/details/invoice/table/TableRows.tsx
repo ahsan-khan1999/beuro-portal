@@ -52,7 +52,7 @@ const TableRows = ({
   return (
     <div className="h-screen">
       {collectiveInvoice?.map((item, index: number) => {
-        return (  
+        return (
           <div
             key={index}
             onClick={() => handleInvoicePdfPreview(item?.id)}
@@ -129,7 +129,7 @@ const TableRows = ({
                       value: item,
                     },
                   }))}
-                selectedItem={item.invoiceStatus}
+                selectedItem={translate(`invoice_status.${item.invoiceStatus}`)}
                 onItemSelected={(status) => {
                   if (item.invoiceStatus !== status) {
                     handleInvoiceStatusUpdate(item.id, status, "invoice");

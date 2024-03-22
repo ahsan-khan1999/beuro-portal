@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -260,15 +260,30 @@ const useLeads = () => {
     type: string
   ) => {
     if (type === "lead") {
-      const res = await dispatch(
-        updateLeadStatus({
-          data: {
-            id: id,
-            leadStatus: staticEnums["LeadStatus"][status],
-          },
-        })
-      );
-      if (res?.payload) if (res?.payload) defaultUpdateModal();
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (!currentItem || currentItem.leadStatus !== status) {
+        const res = await dispatch(
+          updateLeadStatus({
+            data: {
+              id: id,
+              leadStatus: staticEnums["LeadStatus"][status],
+            },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            defaultUpdateModal();
+          }
+        }
+      }
     }
   };
 

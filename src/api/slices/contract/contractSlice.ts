@@ -121,7 +121,7 @@ export const updateContractStatus: AsyncThunk<boolean, object, object> | any =
     try {
       const response = await apiServices.updateContractStatus(data);
       thunkApi.dispatch(setContractDetails(response?.data?.Contract));
-      return true;
+      return response?.data?.Contract;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
@@ -138,7 +138,7 @@ export const updateContractPaymentStatus:
     try {
       const response = await apiServices.updateContractPaymentStatus(data);
       thunkApi.dispatch(setContractDetails(response?.data?.Contract));
-      return true;
+      return response?.data?.Contract;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;

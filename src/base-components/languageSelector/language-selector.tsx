@@ -69,7 +69,7 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
                 }
                 ${
                   selectedLanguage?.code === language.code
-                    ? "text-dark  font-medium "
+                    ? "text-dark font-medium"
                     : "text-dark"
                 }   text-left items-center flex justify-between hover:bg-gray-100 ${
                     index % 2 === 0 ? "rounded-r" : "rounded-l"
