@@ -208,7 +208,7 @@
       "leads": {
         "leads": "Anfragen",
         "open": "Offen",
-        "InProcess": "Bearbeitung",
+        "InProcess": "In Bearbeitung",
         "close": "Geschlossen",
         "expire": "Abgelaufen"
       },

@@ -153,7 +153,7 @@ export const updateOfferStatus: AsyncThunk<boolean, object, object> | any =
     try {
       const response = await apiServices.updateOfferStatus(data);
       thunkApi.dispatch(setOfferDetails(response?.data?.Offer));
-      return true;
+      return response?.data?.Offer;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
@@ -167,7 +167,7 @@ export const updatePaymentStatus: AsyncThunk<boolean, object, object> | any =
     try {
       const response = await apiServices.updatePaymentStatus(data);
       thunkApi.dispatch(setOfferDetails(response?.data?.Offer));
-      return true;
+      return response?.data?.Offer;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;

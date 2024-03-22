@@ -340,16 +340,30 @@ const useOffers = () => {
     type: string
   ) => {
     if (type === "offer") {
-      const res = await dispatch(
-        updateOfferStatus({
-          data: {
-            id: id,
-            offerStatus: staticEnums["OfferStatus"][status],
-          },
-        })
-      );
-      if (res?.payload)
-        offerCreatedHandler(staticEnums["OfferStatus"][status], id);
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (!currentItem || currentItem.offerStatus !== status) {
+        const res = await dispatch(
+          updateOfferStatus({
+            data: {
+              id: id,
+              offerStatus: staticEnums["OfferStatus"][status],
+            },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            offerCreatedHandler(staticEnums["OfferStatus"][status], id);
+          }
+        }
+      }
     }
   };
 
@@ -359,12 +373,27 @@ const useOffers = () => {
     type: string
   ) => {
     if (type === "offer") {
-      const res = await dispatch(
-        updatePaymentStatus({
-          data: { id: id, paymentType: staticEnums["PaymentType"][status] },
-        })
-      );
-      if (res?.payload) defaultOfferCreatedHandler();
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (!currentItem || currentItem.paymentType !== status) {
+        const res = await dispatch(
+          updatePaymentStatus({
+            data: { id: id, paymentType: staticEnums["PaymentType"][status] },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            defaultOfferCreatedHandler();
+          }
+        }
+      }
     }
   };
 
