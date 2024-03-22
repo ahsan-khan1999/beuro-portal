@@ -18,7 +18,6 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { staticEnums } from "@/utils/static";
 import { readImage } from "@/api/slices/imageSlice/image";
@@ -33,7 +32,6 @@ export default function useContractDetail() {
   const router = useRouter();
   const id = router.query.contract;
   const isMail = Boolean(router.query?.isMail);
-
   const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { systemSettings } = useAppSelector((state) => state.settings);
@@ -260,6 +258,7 @@ export default function useContractDetail() {
     );
     if (res?.payload) offerCreatedHandler();
   };
+
   const handleStatusUpdate = async (offerStatus: string) => {
     const res = await dispatch(
       updateContractStatus({
@@ -271,6 +270,7 @@ export default function useContractDetail() {
     );
     if (res?.payload) offerCreatedHandler();
   };
+
   const onNextHandle = () => {
     router.pathname = "/contract/pdf-preview";
   };
@@ -278,6 +278,7 @@ export default function useContractDetail() {
   const handleViewPdf = () => {
     window.open(contractDetails?.attachement as string);
   };
+
   const handleUpdateAdditionalDetailsModal = () => {
     dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
   };

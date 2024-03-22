@@ -50,7 +50,7 @@ export const Header = ({
         >
           <Text
             style={{
-              fontSize: 7,
+              fontSize: 8,
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
@@ -64,7 +64,7 @@ export const Header = ({
           </Text>
           <Text
             style={{
-              fontSize: 7,
+              fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
               // color: `#${textColour}`,
@@ -82,7 +82,7 @@ export const Header = ({
         >
           <Text
             style={{
-              fontSize: 7,
+              fontSize: 8,
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
@@ -95,7 +95,7 @@ export const Header = ({
           </Text>
           <Text
             style={{
-              fontSize: 7,
+              fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
               // color: `#${textColour}`,
@@ -107,7 +107,7 @@ export const Header = ({
         <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>
           <Text
             style={{
-              fontSize: 7,
+              fontSize: 8,
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
@@ -118,7 +118,7 @@ export const Header = ({
           </Text>
           <Text
             style={{
-              fontSize: 7,
+              fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
               // color: `#${textColour}`,
