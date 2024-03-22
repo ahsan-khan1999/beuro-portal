@@ -43,7 +43,7 @@ export default function LeadsFilter({
         pathname: router.pathname,
         query: {
           ...router.query,
-          date: JSON.stringify(moreFilters.date),
+          date: JSON.stringify(moreFilter.date),
         },
       },
       undefined,
@@ -74,7 +74,7 @@ export default function LeadsFilter({
   };
 
   return (
-    <div className="relative flex my-auto cursor-pointer z-10" ref={ref}>
+    <div className="relative flex my-auto cursor-pointer" ref={ref}>
       <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
@@ -181,14 +181,13 @@ export default function LeadsFilter({
                 />
               </div> */}
             </div>
-            <div>
-              <BaseButton
-                buttonText={translate("common.save_button")}
-                onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-apply_buttonprimary my-2 px-8 py-2"
+              textClassName="text-white"
+            />
           </motion.div>
         )}
       </AnimatePresence>

@@ -104,14 +104,6 @@ export default function LeadsFilter({
     });
   };
 
-  // const hanldeSortChange = (value: string) => {
-  //   setFilter((prev: FilterType) => {
-  //     const updatedFilter = { ...prev, ["sort"]: value };
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
-
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
 

@@ -75,7 +75,7 @@ export const {
   },
   textBase: {
     color: "#000",
-    fontSize: 7,
+    fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
   },
