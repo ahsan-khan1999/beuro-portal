@@ -51,7 +51,7 @@ export const ProductPurchasedItemsDetails = ({
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
   return (
-    <div className="">
+    <div>
       <DocumentHeader
         {...headerDetails}
         emailTemplateSettings={emailTemplateSettings}

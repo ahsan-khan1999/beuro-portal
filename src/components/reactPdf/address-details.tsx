@@ -145,7 +145,7 @@ export const AddressDetails = ({
               <GridItem width={labelWidth}>
                 <Text
                   style={{
-                    fontSize: 7,
+                    fontSize: 8,
                     fontWeight: 500,
                     fontStyle: "medium",
                     color: "#000",
@@ -157,7 +157,7 @@ export const AddressDetails = ({
               <GridItem width={valueWidth}>
                 <Text
                   style={{
-                    fontSize: 7,
+                    fontSize: 8,
                     fontWeight: 400,
                     fontStyle: "normal",
                     color: "#000",
