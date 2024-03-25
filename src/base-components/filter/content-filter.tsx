@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
@@ -33,8 +33,8 @@ export default function ContentFilter({
   } = useFilter({ filter, setFilter, moreFilters });
   const { t: translate } = useTranslation();
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-
   const router = useRouter();
+
   const handleSave = () => {
     router.push(
       {
@@ -72,7 +72,7 @@ export default function ContentFilter({
   };
 
   return (
-    <div className="relative flex my-auto cursor-pointer " ref={ref}>
+    <div className="relative flex my-auto cursor-pointer" ref={ref}>
       <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ export default function ContentFilter({
                 {translate("filters.extra_filters.heading")}
               </span>
               <span
-                className=" text-base text-red cursor-pointer"
+                className="text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
                 {translate("filters.extra_filters.reset_all")}
@@ -155,14 +155,20 @@ export default function ContentFilter({
               </div>
             </div>
 
-            <div>
-              <BaseButton
-                buttonText={translate("common.apply_button")}
-                onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-primary my-2 px-8 py-2"
+              textClassName="text-white"
+            />
+
+            {/* <Button
+              text={translate("common.apply_button")}
+              onClick={handleSave}
+              className="bg-primary my-2 px-8 py-2 text-white"
+              id="apply"
+              inputType="button"
+            /> */}
           </motion.div>
         )}
       </AnimatePresence>
