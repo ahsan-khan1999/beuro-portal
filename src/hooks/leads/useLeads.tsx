@@ -270,10 +270,6 @@ const useLeads = () => {
         };
       } = {
         status: filteredStatus,
-        date: searchedDate as {
-          $gte?: string;
-          $lte?: string;
-        },
       };
 
       if (searchQuery || sortedValue || searchedDate) {

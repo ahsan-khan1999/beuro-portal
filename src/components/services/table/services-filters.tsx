@@ -30,27 +30,6 @@ export default function ServicesFilters({
     setInputValue(value);
   };
 
-  // useEffect(() => {
-  //   const sortOption = router.query.sort;
-  //   if (typeof sortOption === "string") {
-  //     const selectedLabel = getSelectedSortLabel(sortOption);
-  //     setSelectedSortLabel(selectedLabel);
-  //   }
-  // }, [router.query.sort]);
-
-  // const getSelectedSortLabel = (value: string): string => {
-  //   switch (value) {
-  //     case "createdAt":
-  //       return translate("filters.sort_by.date");
-  //     case "-createdAt":
-  //       return translate("filters.sort_by.latest");
-  //     case "title":
-  //       return translate("filters.sort_by.a_z");
-  //     default:
-  //       return "";
-  //   }
-  // };
-
   const hanldeSortChange = (value: string) => {
     router.push(
       {

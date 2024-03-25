@@ -8,6 +8,7 @@ import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function ContentFilter({
   filter,
@@ -20,6 +21,7 @@ export default function ContentFilter({
       $lte: FiltersDefaultValues.$lte,
     },
   };
+
   const {
     extraFilterss,
     moreFilter,
@@ -31,7 +33,22 @@ export default function ContentFilter({
   } = useFilter({ filter, setFilter, moreFilters });
   const { t: translate } = useTranslation();
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
+
+  const router = useRouter();
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          date: JSON.stringify(moreFilter.date),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: any) => {
       const updatedFilters = {
         ...prev,
@@ -120,28 +137,27 @@ export default function ContentFilter({
                     {translate("filters.extra_filters.reset")}
                   </label>
                 </div>
-                <div>
-                  <DatePicker
-                    label={translate("filters.extra_filters.from")}
-                    label2={translate("filters.extra_filters.to")}
-                    dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                        FiltersDefaultValues.$gte
-                    )}
-                    dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                        FiltersDefaultValues.$lte
-                    )}
-                    onChangeFrom={(val) => handleDateChange("$gte", val)}
-                    onChangeTo={(val) => handleDateChange("$lte", val)}
-                  />
-                </div>
+
+                <DatePicker
+                  label={translate("filters.extra_filters.from")}
+                  label2={translate("filters.extra_filters.to")}
+                  dateFrom={formatDateForDatePicker(
+                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                      FiltersDefaultValues.$gte
+                  )}
+                  dateTo={formatDateForDatePicker(
+                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                      FiltersDefaultValues.$lte
+                  )}
+                  onChangeFrom={(val) => handleDateChange("$gte", val)}
+                  onChangeTo={(val) => handleDateChange("$lte", val)}
+                />
               </div>
             </div>
 
             <div>
               <BaseButton
-                buttonText={translate("common.save_button")}
+                buttonText={translate("common.apply_button")}
                 onClick={handleSave}
                 containerClassName="bg-primary my-2 px-8 py-2"
                 textClassName="text-white"

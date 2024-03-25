@@ -33,13 +33,15 @@ const EmailCard = ({
   // };
 
   const handleBackToDetail = () => {
-    const { status, page, text, sort } = router.query;
+    const { status, page, text, sort, date, leadSource } = router.query;
 
     const queryParams = Object.entries({
       status,
       page,
       text,
       sort,
+      date,
+      leadSource,
     }).reduce((acc, [key, value]) => {
       if (value) {
         (acc as { [key: string]: string | string[] })[key] = value;

@@ -8,6 +8,7 @@ import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function EmployeesFilter({
   filter,
@@ -30,7 +31,23 @@ export default function EmployeesFilter({
     extraFilterss,
   } = useFilter({ filter, setFilter, moreFilters });
   const { t: translate } = useTranslation();
+
+  const router = useRouter();
+
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          date: JSON.stringify(moreFilter.date),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: any) => {
       const updatedFilter = {
         ...prev,
@@ -44,6 +61,7 @@ export default function EmployeesFilter({
     });
     handleExtraFiltersClose();
   };
+
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
     const dateTime = new Date(val);
     setMoreFilter((prev) => ({
@@ -52,6 +70,7 @@ export default function EmployeesFilter({
     }));
   };
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
+
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
@@ -162,7 +181,7 @@ export default function EmployeesFilter({
             </div>
             <div>
               <BaseButton
-                buttonText={translate("common.save_button")}
+                buttonText={translate("common.apply_button")}
                 onClick={handleSave}
                 containerClassName="bg-primary my-6 px-8 py-2"
                 textClassName="text-white"
