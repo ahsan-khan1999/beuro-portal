@@ -52,7 +52,7 @@ const ContractDetailsCard = ({
 
   const handleBack = () => {
     router.pathname = "/contract";
-    delete router.query["contract"];
+    delete router.query["offer"];
     updateQuery(router, router.locale as string);
   };
 

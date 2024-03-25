@@ -60,8 +60,6 @@ const fieldComponents: FieldComponents = {
   link: LinkField,
   multiSelect: MultiSelectField,
   toggleButton: ToggleButton,
-
-
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -103,7 +101,7 @@ export function isFieldType(type: any): type is FieldType {
     "link",
     "multiSelect",
     "addField",
-    "toggleButton"
+    "toggleButton",
   ].includes(type);
 }
 
@@ -155,7 +153,6 @@ export const formatCardNumber = (cardNumber: string, format: number[]) => {
 //     />
 //   );
 // };
-
 
 export const renderField = (
   fieldData: FormField,

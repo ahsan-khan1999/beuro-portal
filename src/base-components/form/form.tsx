@@ -3,10 +3,12 @@ import { FormField, FormProps } from "@/types";
 import { getTypedFieldComponent, isFieldType } from "./helpers";
 import { combineClasses } from "@/utils/utility";
 
-
 export const Form = React.memo(
   ({ formFields, handleSubmit, onSubmit, errors, className }: FormProps) => {
-    const renderField = (fieldData: FormField, error: string, errors?: Record<string, any>
+    const renderField = (
+      fieldData: FormField,
+      error: string,
+      errors?: Record<string, any>
     ) => {
       if (!fieldData?.field || !isFieldType(fieldData?.field?.type)) {
         return null;
@@ -18,7 +20,7 @@ export const Form = React.memo(
         errors
       );
     };
-      
+
     return (
       <form className={className} onSubmit={handleSubmit(onSubmit)}>
         {formFields?.map((fieldData, index) => {
@@ -36,7 +38,7 @@ export const Form = React.memo(
             fieldData?.label?.className
           );
           return (
-            <div key={index} className={`${containerClasses }`}>
+            <div key={index} className={`${containerClasses}`}>
               {fieldData.label && (
                 <label
                   htmlFor={fieldData.label.htmlFor}
