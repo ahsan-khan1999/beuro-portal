@@ -203,8 +203,10 @@ const useInvoice = () => {
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
+    const searchEmail = query?.email;
 
-    const queryParams = queryStatus || searchQuery || sortedValue;
+    const queryParams =
+      queryStatus || searchQuery || sortedValue || searchEmail;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -219,13 +221,15 @@ const useInvoice = () => {
         status: string | string[];
         text?: string;
         sort?: string;
+        email?: string | string[];
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery || sortedValue) {
+      if (searchQuery || sortedValue || searchEmail) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
+        updatedFilter.email = searchEmail;
       }
 
       setFilter(updatedFilter);

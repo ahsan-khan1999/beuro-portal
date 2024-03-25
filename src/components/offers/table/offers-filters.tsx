@@ -50,6 +50,7 @@ export default function OffersFilters({
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+
         router.push(
           {
             pathname: router.pathname,

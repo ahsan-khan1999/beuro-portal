@@ -43,6 +43,7 @@ export default function LeadsFilter({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           date: JSON.stringify(moreFilter.date),
         },
       },
@@ -120,7 +121,7 @@ export default function LeadsFilter({
                 {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
-            <div className="">
+            <div>
               <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
@@ -139,22 +140,21 @@ export default function LeadsFilter({
                     {translate("filters.extra_filters.reset")}
                   </label>
                 </div>
-                <div>
-                  <DatePicker
-                    label={translate("filters.extra_filters.from")}
-                    label2={translate("filters.extra_filters.to")}
-                    dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                        FiltersDefaultValues.$gte
-                    )}
-                    dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                        FiltersDefaultValues.$lte
-                    )}
-                    onChangeFrom={(val) => handleDateChange("$gte", val)}
-                    onChangeTo={(val) => handleDateChange("$lte", val)}
-                  />
-                </div>
+
+                <DatePicker
+                  label={translate("filters.extra_filters.from")}
+                  label2={translate("filters.extra_filters.to")}
+                  dateFrom={formatDateForDatePicker(
+                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                      FiltersDefaultValues.$gte
+                  )}
+                  dateTo={formatDateForDatePicker(
+                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                      FiltersDefaultValues.$lte
+                  )}
+                  onChangeFrom={(val) => handleDateChange("$gte", val)}
+                  onChangeTo={(val) => handleDateChange("$lte", val)}
+                />
               </div>
               {/* <div>
                 <div className="flex justify-between mt-6">
@@ -185,7 +185,7 @@ export default function LeadsFilter({
             <BaseButton
               buttonText={translate("common.apply_button")}
               onClick={handleSave}
-              containerClassName="bg-apply_buttonprimary my-2 px-8 py-2"
+              containerClassName="bg-primary my-2 px-8 py-2"
               textClassName="text-white"
             />
           </motion.div>

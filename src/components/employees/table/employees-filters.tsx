@@ -16,7 +16,6 @@ export default function EmployeesFilters({
 }: FiltersComponentProps) {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   // const [selectedSortLabel, setSelectedSortLabel] = useState<string>("");

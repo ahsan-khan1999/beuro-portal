@@ -53,7 +53,6 @@ export default function LeadsFilter({
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
-
       const newStatus = updatedStatus;
 
       if (isChecked) {

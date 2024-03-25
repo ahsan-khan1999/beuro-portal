@@ -199,11 +199,11 @@ export default function InvoicesFilters({
           ]}
           label={translate("common.sort_button")}
         />
-        <InvoicesFilter
+        {/* <InvoicesFilter
           filter={filter}
           setFilter={setFilter}
           onFilterChange={handleFilterChange}
-        />
+        /> */}
 
         {/* <Button
           id="apply"

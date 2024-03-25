@@ -60,7 +60,6 @@ const useOffers = () => {
   });
 
   const totalItems = totalCount;
-
   const itemsPerPage = 10;
 
   const dispatch = useDispatch();
@@ -92,6 +91,7 @@ const useOffers = () => {
     if (e) {
       e.stopPropagation();
     }
+
     const filteredLead = offer?.filter((item_) => item_.id === item);
     if (filteredLead?.length === 1) {
       dispatch(setOfferDetails(filteredLead[0]));
@@ -289,8 +289,15 @@ const useOffers = () => {
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
+    const searchDate = query?.date as string;
+    const searchLeadSource = query?.leadSource;
 
-    const queryParams = queryStatus || searchQuery || sortedValue;
+    const queryParams =
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchDate ||
+      searchLeadSource;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -305,13 +312,24 @@ const useOffers = () => {
         status: string | string[];
         text?: string;
         sort?: string;
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+        leadSource?: string | string[];
       } = {
         status: filteredStatus,
+        // date: searchDate as {
+        //   $gte?: string;
+        //   $lte?: string;
+        // },
       };
 
-      if (searchQuery || sortedValue) {
+      if (searchQuery || sortedValue || searchDate || searchLeadSource) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
+        updatedFilter.date = searchDate && JSON.parse(searchDate);
+        updatedFilter.leadSource = query?.leadSource;
       }
 
       setFilter(updatedFilter);

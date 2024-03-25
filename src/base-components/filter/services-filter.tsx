@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import { PriceInputField } from "./fields/price-input-field";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function ServicesFilter({
   filter,
@@ -31,7 +31,22 @@ export default function ServicesFilter({
     extraFilterss,
   } = useFilter({ filter, setFilter, moreFilters });
   const { t: translate } = useTranslation();
+  const router = useRouter();
+
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          date: JSON.stringify(moreFilter.date),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: FilterType) => {
       const updatedFilters = {
         ...prev,
@@ -64,6 +79,7 @@ export default function ServicesFilter({
       date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
     }));
   };
+
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
@@ -172,7 +188,7 @@ export default function ServicesFilter({
             </div> */}
             <div>
               <BaseButton
-                buttonText={translate("common.save_button")}
+                buttonText={translate("common.apply_button")}
                 onClick={handleSave}
                 containerClassName="bg-primary mt-4 mb-1 px-8 py-2"
                 textClassName="text-white"

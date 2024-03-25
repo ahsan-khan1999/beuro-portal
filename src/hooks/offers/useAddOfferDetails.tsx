@@ -64,6 +64,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
@@ -121,7 +122,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     control,
     name: "date",
   });
-  console.log(offerDetails, "offerDetails");
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
