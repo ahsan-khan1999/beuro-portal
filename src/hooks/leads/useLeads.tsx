@@ -246,9 +246,10 @@ const useLeads = () => {
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
-    // const searchedDate = query?.date as string;
+    const searchedDate = query?.date as string;
 
-    const queryParams = queryStatus || searchQuery || sortedValue;
+    const queryParams =
+      queryStatus || searchQuery || sortedValue || searchedDate;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -263,16 +264,22 @@ const useLeads = () => {
         status: string | string[];
         text?: string;
         sort?: string;
-        // date?: string;
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
       } = {
         status: filteredStatus,
-        // date: searchedDate,
+        date: searchedDate as {
+          $gte?: string;
+          $lte?: string;
+        },
       };
 
-      if (searchQuery || sortedValue) {
+      if (searchQuery || sortedValue || searchedDate) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
-        // updatedFilter.date = searchedDate;
+        updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
 
       setFilter(updatedFilter);
