@@ -122,7 +122,7 @@ const TableRows = ({
               onClick={() =>
                 router.push({
                   pathname: "/invoices/details",
-                  query: { invoice: item.id },
+                  query: { ...router.query, invoice: item.id },
                 })
               }
             >

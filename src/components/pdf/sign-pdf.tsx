@@ -12,9 +12,11 @@ import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSucces
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { SetStateAction, useEffect, useState } from "react";
 import { EmailTemplate } from "@/types/settings";
+
 const OfferSignedPdf = dynamic(() => import("../offers/signed-pdf"), {
   ssr: false,
 });
+
 import dynamic from "next/dynamic";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
@@ -48,7 +50,6 @@ export const SignPdf = <T,>({
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.offer);
   const [offerSignature, setOfferSignature] = useState<string | null>(null);
-
   const { modal } = useAppSelector((state) => state.global);
   const router = useRouter();
   const { action: pdfAction } = router.query;
@@ -70,10 +71,12 @@ export const SignPdf = <T,>({
     if (res?.payload)
       dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
+
   const onSuccess = () => {
-    router.push("https://staging.buero365.cloudmeshsolutions.com/");
+    router.push("https://buero-365.com/");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const editDateHandler = () => {
     dispatch(updateModalType({ type: ModalType.EDIT_DATE }));
   };

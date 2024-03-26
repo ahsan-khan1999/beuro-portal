@@ -269,13 +269,22 @@ const TableRows = ({
               </svg>
             </span>
 
-            <span className="py-4 flex justify-center items-center">
+            <span
+              onClick={(e) => e.stopPropagation()}
+              className="py-4 flex justify-center items-center"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="29"
                 height="29"
                 viewBox="0 0 29 29"
                 fill="none"
+                onClick={() =>
+                  router.push({
+                    pathname: `/offers/details`,
+                    query: { ...router.query, offer: item?.id },
+                  })
+                }
               >
                 <path
                   opacity="1"

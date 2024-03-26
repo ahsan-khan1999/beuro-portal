@@ -4,8 +4,6 @@ import { AggrementTerms } from "./aggrement-terms";
 import { SignaturePad } from "./signature-pad";
 import { Footer } from "../../footer";
 import { AggrementProps } from "@/types/types";
-import { EditableAggrement } from "./editable-aggrement";
-import moment from "moment";
 import { SetStateAction } from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
@@ -42,6 +40,7 @@ export const Aggrement = ({
   const date = pdfDateFormat(currentDate, router.locale as string);
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
+
   const rejectOffer = async () => {
     dispatch(updateModalType({ type: ModalType.REJECT_OFFER }));
   };

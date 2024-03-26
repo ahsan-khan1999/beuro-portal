@@ -114,7 +114,7 @@ const customerDetailData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.phone_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.customerDetail?.phoneNumber}
             </div>
           </div>
@@ -122,7 +122,7 @@ const customerDetailData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.mobile_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {leadDetails?.customerDetail?.mobileNumber}
             </div>
           </div>
@@ -130,7 +130,7 @@ const customerDetailData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("customers.details.gender")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {translate(`gender.${leadDetails?.customerDetail?.gender}`)}
             </div>
           </div>
@@ -145,7 +145,7 @@ const customerDetailData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.customer_details.street_no")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {leadDetails?.customerDetail?.address?.streetNumber}
               </div>
             </div>
@@ -153,7 +153,7 @@ const customerDetailData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.customer_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {leadDetails?.customerDetail?.address?.postalCode}
               </div>
             </div>
@@ -161,7 +161,7 @@ const customerDetailData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.customer_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
                 {translate(
                   `countries.${leadDetails?.customerDetail?.address?.country}`
                 )}

@@ -30,7 +30,7 @@ export default function useContractDetail() {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const router = useRouter();
-  const id = router.query.contract;
+  const id = router.query.offer;
   const isMail = Boolean(router.query?.isMail);
   const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
@@ -49,7 +49,6 @@ export default function useContractDetail() {
 
   useEffect(() => {
     localStoreUtil.remove_data("contractComposeEmail");
-    console.log({ id });
 
     if (id) {
       dispatch(readContractDetails({ params: { filter: id } })).then(

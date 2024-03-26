@@ -11,10 +11,6 @@ const DetailsTab = ({
   onScroll,
 }: leadsTabsSectionTypes) => {
   const handleClickScroll = (name: string) => {
-    // const element = document.getElementById(name);
-    // if (element) {
-    //   element.scrollIntoView({ behavior: "smooth", block: "start" });
-    // }
     onScroll && onScroll(selectedTab);
     setTabType(selectedTab);
   };

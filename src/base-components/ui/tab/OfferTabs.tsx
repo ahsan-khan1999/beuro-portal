@@ -17,6 +17,8 @@ const OfferTabs = ({
       element.setAttribute("data-scroll-target", "true");
       element.scrollIntoView({ behavior: "smooth", block: "start" });
       setTabType(selectedTab);
+    } else {
+      setTabType(selectedTab);
     }
   };
 
