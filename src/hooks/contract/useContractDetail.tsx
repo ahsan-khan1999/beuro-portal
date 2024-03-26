@@ -49,6 +49,7 @@ export default function useContractDetail() {
 
   useEffect(() => {
     localStoreUtil.remove_data("contractComposeEmail");
+    console.log({ id });
 
     if (id) {
       dispatch(readContractDetails({ params: { filter: id } })).then(

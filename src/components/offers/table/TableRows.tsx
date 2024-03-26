@@ -292,12 +292,15 @@ const TableRows = ({
                 />
               </svg>
             </span>
-            <span className="flex justify-center items-center cursor-pointer rounded-md">
+            <span
+              onClick={(e) => e.stopPropagation()}
+              className="flex justify-center items-center cursor-pointer rounded-md"
+            >
               <div
                 onClick={() =>
                   router.push({
-                    pathname: `/offers/pdf-preview`,
-                    query: { ...router.query, offerID: item?.id, isMail: true },
+                    pathname: `/offers/details`,
+                    query: { ...router.query, offer: item?.id },
                   })
                 }
                 className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center"

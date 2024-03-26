@@ -57,10 +57,6 @@ const TableRows = ({
           <div
             key={index}
             onClick={() =>
-              // router.push({
-              //   pathname: "/contract/pdf-preview",
-              //   query: { offerID: item?.id, isMail: true },
-              // })
               router.push({
                 pathname: `/contract/pdf-preview`,
                 query: { ...router.query, offerID: item?.id, isMail: true },
@@ -307,12 +303,15 @@ const TableRows = ({
               </svg>
             </span>
 
-            <span className="flex justify-center items-center cursor-pointer">
+            <span
+              onClick={(e) => e.stopPropagation()}
+              className="flex justify-center items-center cursor-pointer"
+            >
               <div
                 onClick={() =>
                   router.push({
-                    pathname: "/contract/pdf-preview",
-                    query: { offerID: item?.id, isMail: true },
+                    pathname: "/contract/details",
+                    query: { ...router.query, offer: item?.id },
                   })
                 }
                 className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center"

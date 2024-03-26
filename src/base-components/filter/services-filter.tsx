@@ -122,7 +122,7 @@ export default function ServicesFilter({
                 {translate("filters.extra_filters.heading")}
               </span>
               <span
-                className=" text-base text-red cursor-pointer"
+                className="text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
                 {translate("filters.extra_filters.reset_all")}
@@ -146,22 +146,21 @@ export default function ServicesFilter({
                   {translate("filters.extra_filters.reset")}
                 </label>
               </div>
-              <div>
-                <DatePicker
-                  label={translate("filters.extra_filters.from")}
-                  label2={translate("filters.extra_filters.to")}
-                  dateFrom={formatDateForDatePicker(
-                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                      FiltersDefaultValues.$gte
-                  )}
-                  dateTo={formatDateForDatePicker(
-                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                      FiltersDefaultValues.$lte
-                  )}
-                  onChangeFrom={(val) => handleDateChange("$gte", val)}
-                  onChangeTo={(val) => handleDateChange("$lte", val)}
-                />
-              </div>
+
+              <DatePicker
+                label={translate("filters.extra_filters.from")}
+                label2={translate("filters.extra_filters.to")}
+                dateFrom={formatDateForDatePicker(
+                  (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                    FiltersDefaultValues.$gte
+                )}
+                dateTo={formatDateForDatePicker(
+                  (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                    FiltersDefaultValues.$lte
+                )}
+                onChangeFrom={(val) => handleDateChange("$gte", val)}
+                onChangeTo={(val) => handleDateChange("$lte", val)}
+              />
             </div>
             {/* <div className="mt-5 mb-2">
               <div className="flex justify-between mb-2">
@@ -186,14 +185,13 @@ export default function ServicesFilter({
                 onLowPriceChange={handleLowPriceChange}
               />
             </div> */}
-            <div>
-              <BaseButton
-                buttonText={translate("common.apply_button")}
-                onClick={handleSave}
-                containerClassName="bg-primary mt-4 mb-1 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-primary mt-4 mb-1 px-8 py-2"
+              textClassName="text-white"
+            />
           </motion.div>
         )}
       </AnimatePresence>
