@@ -115,7 +115,7 @@ export default function LeadsFilter({
                 {translate("filters.extra_filters.heading")}
               </span>
               <span
-                className=" text-base text-red cursor-pointer"
+                className="text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
                 {translate("filters.extra_filters.reset_all")}
