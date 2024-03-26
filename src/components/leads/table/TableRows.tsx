@@ -26,10 +26,10 @@ const TableRows = ({
   const router = useRouter();
 
   const itemsValue = [
-    `${translate("lead_status.Open")}`,
-    `${translate("lead_status.InProcess")}`,
-    `${translate("lead_status.Close")}`,
-    `${translate("lead_status.Expired")}`,
+    `${translate("leads.lead_dropdown_status.Open")}`,
+    `${translate("leads.lead_dropdown_status.InProcess")}`,
+    `${translate("leads.lead_dropdown_status.Close")}`,
+    `${translate("leads.lead_dropdown_status.Expired")}`,
   ];
 
   const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
@@ -77,7 +77,7 @@ const TableRows = ({
                 }}
                 className={`text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
               >
-                {translate(`lead_status.${item.leadStatus}`)}
+                {translate(`leads.lead_dropdown_status.${item.leadStatus}`)}
               </div>
             </span> */}
             <span
@@ -87,7 +87,9 @@ const TableRows = ({
               <DropDown
                 key={item.id}
                 items={items}
-                selectedItem={translate(`lead_status.${item?.leadStatus}`)}
+                selectedItem={translate(
+                  `leads.lead_dropdown_status.${item?.leadStatus}`
+                )}
                 onItemSelected={(status) => {
                   onStatusChange(item.id, status, "lead");
                 }}
