@@ -1,6 +1,6 @@
 import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
 import { OptionsFieldProps } from "@/types/global";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { combineClasses } from "@/utils/utility";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
@@ -45,6 +45,10 @@ export default function SelectField({
   };
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+
+  useEffect(() => {
+    setSelectedLabel(label || "");
+  }, [label]);
 
   return (
     <div className={containerClasses} ref={ref}>

@@ -142,7 +142,7 @@ export default function OfferFilter({
                 {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
-            <div className="">
+            <div>
               <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
@@ -322,14 +322,13 @@ export default function OfferFilter({
                 </div>
               </div>
             </div>
-            <div>
-              <BaseButton
-                buttonText={translate("common.apply_button")}
-                onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-primary my-2 px-8 py-2"
+              textClassName="text-white"
+            />
           </motion.div>
         )}
       </AnimatePresence>

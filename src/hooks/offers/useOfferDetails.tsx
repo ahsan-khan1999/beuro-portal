@@ -41,10 +41,8 @@ export default function useOfferDetails() {
     (state) => state.offer
   );
   const router = useRouter();
-
   const { systemSettings } = useAppSelector((state) => state.settings);
   const isMail = Boolean(router.query?.isMail);
-
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { t: translate } = useTranslation();
   const id = router.query.offer;

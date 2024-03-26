@@ -32,6 +32,7 @@ export default function CheckField({
     }
     return false;
   })();
+
   return (
     <>
       <label

@@ -914,6 +914,12 @@
       "close": "Anfragen geschlossen",
       "expire": "Anfragen abgelaufen"
     },
+    "lead_dropdown_status": {
+      "Open": "Offen",
+      "InProcess": "editieren",
+      "Close": "Geschlossen",
+      "Expired": "Abgelaufen"
+    },
     "table_headings": {
       "id": "ID",
       "name": "Name",

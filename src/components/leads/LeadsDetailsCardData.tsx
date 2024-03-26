@@ -28,10 +28,10 @@ const LeadsDetailsCardData = ({
   const dispatch = useAppDispatch();
 
   const itemsValue = [
-    `${translate("lead_status.Open")}`,
-    `${translate("lead_status.InProcess")}`,
-    `${translate("lead_status.Close")}`,
-    `${translate("lead_status.Expired")}`,
+    `${translate("leads.lead_dropdown_status.Open")}`,
+    `${translate("leads.lead_dropdown_status.InProcess")}`,
+    `${translate("leads.lead_dropdown_status.Close")}`,
+    `${translate("leads.lead_dropdown_status.Expired")}`,
   ];
 
   const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
@@ -43,8 +43,6 @@ const LeadsDetailsCardData = ({
     delete router.query["lead"];
     updateQuery(router, router.locale as string);
   };
-
-  console.log(leadDetails?.leadStatus, "leadDetails?.leadStatus");
 
   return (
     <div className="bg-white rounded-md w-full">
@@ -136,13 +134,15 @@ const LeadsDetailsCardData = ({
           </span>
           {/* {leadDetails.leadStatus && (
             <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  min-w-[70px] w-fit">
-              {translate(`lead_status.${leadDetails.leadStatus}`)}
+              {translate(`leads.lead_dropdown_status.${leadDetails.leadStatus}`)}
             </span>
           )} */}
 
           <DropDown
             items={items}
-            selectedItem={translate(`lead_status.${leadDetails?.leadStatus}`)}
+            selectedItem={translate(
+              `leads.lead_dropdown_status.${leadDetails?.leadStatus}`
+            )}
             onItemSelected={onStatusUpdate}
             dropDownClassName={`border border-[${getStatusColor(
               leadDetails?.leadStatus

@@ -51,7 +51,7 @@ const PdfCard = ({
   return (
     <div className="mb-5">
       <PdfCardLayout>
-        <div className=" rounded-md bg-white w-full h-fit">
+        <div className="rounded-md bg-white w-full h-fit">
           <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-10">
             {/* <span
                 className="cursor-pointer"

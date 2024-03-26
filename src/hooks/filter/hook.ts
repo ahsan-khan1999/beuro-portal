@@ -1,4 +1,5 @@
 import { FilterType, MoreFilterType } from "@/types";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 
 export default function useFilter({
@@ -11,8 +12,8 @@ export default function useFilter({
   moreFilters: MoreFilterType;
 }) {
   const [extraFilterss, setExtraFilters] = useState(false);
-
   const [moreFilter, setMoreFilter] = useState<MoreFilterType>(moreFilters);
+  const router = useRouter();
 
   const handleExtraFilterToggle = () => {
     setExtraFilters((prev) => !prev);
@@ -27,10 +28,26 @@ export default function useFilter({
     value: string | string[] | {}
   ) => {
     setMoreFilter((prev) => ({ ...prev, [key]: value }));
+    const { pathname, query } = router;
+    delete query[key];
+
+    router.replace({
+      pathname,
+      query,
+    });
   };
 
   const handleFilterResetToInitial = () => {
     setMoreFilter(moreFilters);
+    const { pathname, query } = router;
+    if (query.date || query.leadSource) {
+      delete query.date;
+      delete query.leadSource;
+    }
+    router.replace({
+      pathname,
+      query,
+    });
   };
 
   return {
