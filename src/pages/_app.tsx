@@ -4,7 +4,7 @@ import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { appWithTranslation } from "next-i18next";
 import ErrorBoundary from "./error-boundry";
-import { ToastProvider } from "./toast-provider";
+import ToastProvider from "./toast-provider";
 function App({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>

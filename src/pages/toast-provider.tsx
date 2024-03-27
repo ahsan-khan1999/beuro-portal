@@ -13,7 +13,7 @@ declare global {
 }
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
-export const ToastProvider = ({ children }: { children: ReactNode }) => {
+const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toast, setToast] = useState<{
     type: ToastType;
     message: string;
@@ -45,6 +45,8 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     </ToastContext.Provider>
   );
 };
+
+export default ToastProvider;
 
 export const useToast = (): ToastContextType => {
   const context = useContext(ToastContext);
