@@ -33,13 +33,15 @@ const EmailCard = ({
   // };
 
   const handleBackToDetail = () => {
-    const { status, page, text, sort } = router.query;
+    const { status, page, text, sort, date, leadSource } = router.query;
 
     const queryParams = Object.entries({
       status,
       page,
       text,
       sort,
+      date,
+      leadSource,
     }).reduce((acc, [key, value]) => {
       if (value) {
         (acc as { [key: string]: string | string[] })[key] = value;
@@ -72,7 +74,7 @@ const EmailCard = ({
               fill="#4A13E7"
             />
           </svg>
-          <span className=" text-xl font-medium">
+          <span className="text-xl font-medium">
             {translate("offers.table_headings.edit")}
           </span>
         </button>

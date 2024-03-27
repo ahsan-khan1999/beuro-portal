@@ -364,7 +364,11 @@ export const useReceiptPdf = () => {
       }
       if (isMail) {
         router.push(
-          `/invoices/receipt-email?invoiceID=${invoiceID}&isMail=${isMail}`
+          {
+            pathname: `/invoices/receipt-email`,
+            query: { ...router.query, invoiceID: invoiceID, isMail: isMail },
+          }
+          // `/invoices/receipt-email?invoiceID=${invoiceID}&isMail=${isMail}`
         );
       } else {
         setActiveButtonId("email");

@@ -21,7 +21,7 @@ const MailDetailsCard = () => {
             onClick={() => {
               router.push({
                 pathname: "/invoices/details",
-                query: { invoice: invoiceDetails?.id },
+                query: { ...router.query, invoice: invoiceDetails?.id },
               });
             }}
           >
@@ -57,6 +57,7 @@ const MailDetailsCard = () => {
               router.push({
                 pathname: "/invoices/invoice-pdf-preview/",
                 query: {
+                  ...router.query,
                   invoiceID: collectiveInvoiceDetails?.id,
                   isMail: true,
                 },

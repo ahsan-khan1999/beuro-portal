@@ -50,6 +50,7 @@ export default function OffersFilters({
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+
         router.push(
           {
             pathname: router.pathname,
@@ -89,12 +90,6 @@ export default function OffersFilters({
       return updatedFilter;
     });
   };
-
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -146,6 +141,12 @@ export default function OffersFilters({
       return updatedFilter;
     });
   };
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
 
   return (
     <div className="flex flex-col xLarge:flex-row xLarge:items-center w-full xl:w-fit gap-4">

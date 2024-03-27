@@ -10,6 +10,7 @@ import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import CheckField from "./fields/check-field";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function InvoicesFilter({
   filter,
@@ -29,6 +30,7 @@ export default function InvoicesFilter({
     handleFilterResetToInitial,
     handleFilterReset,
   } = useFilter({ filter, setFilter, moreFilters });
+  const router = useRouter();
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   const { t: translate } = useTranslation();
@@ -48,6 +50,18 @@ export default function InvoicesFilter({
   ];
 
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          email: moreFilter.email?.toString(),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: any) => {
       const updatedFilters = {
         ...prev,
@@ -58,6 +72,7 @@ export default function InvoicesFilter({
     });
     handleExtraFiltersClose();
   };
+
   // const handleEmailChange = (value: string, isChecked: boolean) => {
   //   console.log(value);
   //   if (moreFilter.email) {
@@ -126,6 +141,7 @@ export default function InvoicesFilter({
       price: prev.price && [prev.price[0], val],
     }));
   };
+
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
@@ -173,7 +189,7 @@ export default function InvoicesFilter({
                 {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
-            <div className="">
+            <div>
               <div className="mt-5 my-5">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
@@ -229,14 +245,13 @@ export default function InvoicesFilter({
                 />
               </div> */}
             </div>
-            <div>
-              <BaseButton
-                buttonText={translate("common.save_button")}
-                onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-primary my-2 px-8 py-2"
+              textClassName="text-white"
+            />
           </motion.div>
         )}
       </AnimatePresence>

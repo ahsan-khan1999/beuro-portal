@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
@@ -8,6 +8,7 @@ import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export default function ContentFilter({
   filter,
@@ -20,6 +21,7 @@ export default function ContentFilter({
       $lte: FiltersDefaultValues.$lte,
     },
   };
+
   const {
     extraFilterss,
     moreFilter,
@@ -31,7 +33,22 @@ export default function ContentFilter({
   } = useFilter({ filter, setFilter, moreFilters });
   const { t: translate } = useTranslation();
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
+  const router = useRouter();
+
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          date: JSON.stringify(moreFilter.date),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: any) => {
       const updatedFilters = {
         ...prev,
@@ -47,15 +64,19 @@ export default function ContentFilter({
   };
 
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
-    const dateTime = new Date(val);
+    let dateTime: string | undefined = undefined;
+
+    if (val && !isNaN(new Date(val).getTime())) {
+      dateTime = new Date(val).toISOString();
+    }
+
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime },
     }));
   };
-
   return (
-    <div className="relative flex my-auto cursor-pointer " ref={ref}>
+    <div className="relative flex my-auto cursor-pointer" ref={ref}>
       <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
@@ -95,13 +116,13 @@ export default function ContentFilter({
                 {translate("filters.extra_filters.heading")}
               </span>
               <span
-                className=" text-base text-red cursor-pointer"
+                className="text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
                 {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
-            <div className="">
+            <div>
               <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
@@ -120,33 +141,38 @@ export default function ContentFilter({
                     {translate("filters.extra_filters.reset")}
                   </label>
                 </div>
-                <div>
-                  <DatePicker
-                    label={translate("filters.extra_filters.from")}
-                    label2={translate("filters.extra_filters.to")}
-                    dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                        FiltersDefaultValues.$gte
-                    )}
-                    dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                        FiltersDefaultValues.$lte
-                    )}
-                    onChangeFrom={(val) => handleDateChange("$gte", val)}
-                    onChangeTo={(val) => handleDateChange("$lte", val)}
-                  />
-                </div>
+
+                <DatePicker
+                  label={translate("filters.extra_filters.from")}
+                  label2={translate("filters.extra_filters.to")}
+                  dateFrom={formatDateForDatePicker(
+                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                      FiltersDefaultValues.$gte
+                  )}
+                  dateTo={formatDateForDatePicker(
+                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                      FiltersDefaultValues.$lte
+                  )}
+                  onChangeFrom={(val) => handleDateChange("$gte", val)}
+                  onChangeTo={(val) => handleDateChange("$lte", val)}
+                />
               </div>
             </div>
 
-            <div>
-              <BaseButton
-                buttonText={translate("common.save_button")}
-                onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-primary my-2 px-8 py-2"
+              textClassName="text-white"
+            />
+
+            {/* <Button
+              text={translate("common.apply_button")}
+              onClick={handleSave}
+              className="bg-primary my-2 px-8 py-2 text-white"
+              id="apply"
+              inputType="button"
+            /> */}
           </motion.div>
         )}
       </AnimatePresence>

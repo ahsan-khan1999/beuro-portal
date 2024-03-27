@@ -45,10 +45,10 @@ const useContract = () => {
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
-    // date: {
-    //   $gte: FiltersDefaultValues.None,
-    //   $lte: FiltersDefaultValues.None,
-    // },
+    date: {
+      $gte: FiltersDefaultValues.None,
+      $lte: FiltersDefaultValues.None,
+    },
     status: FiltersDefaultValues.None,
     leadSource: FiltersDefaultValues.None,
   });
@@ -288,8 +288,15 @@ const useContract = () => {
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
+    const searchDate = query?.date as string;
+    const searchLeadSource = query?.leadSource;
 
-    const queryParams = queryStatus || searchQuery || sortedValue;
+    const queryParams =
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchDate ||
+      searchLeadSource;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -304,13 +311,24 @@ const useContract = () => {
         status: string | string[];
         text?: string;
         sort?: string;
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+        leadSource?: string | string[];
       } = {
         status: filteredStatus,
+        date: searchDate as {
+          $gte?: string;
+          $lte?: string;
+        },
       };
 
-      if (searchQuery || sortedValue) {
+      if (searchQuery || sortedValue || searchDate || searchLeadSource) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
+        updatedFilter.date = searchDate && JSON.parse(searchDate);
+        updatedFilter.leadSource = query?.leadSource;
       }
 
       setFilter(updatedFilter);

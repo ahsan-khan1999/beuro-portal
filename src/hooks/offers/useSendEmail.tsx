@@ -26,9 +26,7 @@ export const useSendEmail = (
     (state) => state.offer
   );
   const isMail = router.query?.isMail;
-
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
-
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (offerDetails?.id &&
@@ -138,12 +136,9 @@ export const useSendEmail = (
       localStoreUtil.store_data("contractComposeEmail", updatedData);
 
       router.pathname = "/offers/pdf-preview";
-      router.query = { offerID: offerDetails?.id };
+      router.query = { ...router.query, offerID: offerDetails?.id };
       updateQuery(router, router.locale as string);
     }
-    // } else {
-
-    // }
   };
   return {
     fields,

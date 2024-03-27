@@ -1,11 +1,12 @@
 import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
 import { OptionsFieldProps } from "@/types/global";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { combineClasses } from "@/utils/utility";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function SelectField({
   title,
@@ -26,6 +27,7 @@ export default function SelectField({
 
   const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -34,6 +36,8 @@ export default function SelectField({
   const hanldeClose = () => {
     setIsOpen(false);
   };
+
+  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
 
   const handleItemSelected = (selectedValue: string, selectedIndex: number) => {
     options.forEach(({ label, value }, index) => {
@@ -44,7 +48,17 @@ export default function SelectField({
     });
   };
 
-  const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  useEffect(() => {
+    const queryValue = router.query.sort as string;
+    const selectedOption = options.find(
+      (option) => option.value === queryValue
+    );
+    if (selectedOption) {
+      setSelectedLabel(selectedOption.label);
+    } else {
+      setSelectedLabel(label || "");
+    }
+  }, [router.query.sort, label, options]);
 
   return (
     <div className={containerClasses} ref={ref}>

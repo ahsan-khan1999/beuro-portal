@@ -3,13 +3,13 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { appWithTranslation } from "next-i18next";
-import { Toaster } from "react-hot-toast";
 import ErrorBoundary from "./error-boundry";
+import ToastProvider from "./toast-provider";
 function App({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
       <Provider store={store}>
-        <Toaster
+        {/* <Toaster
           position="top-right"
           toastOptions={{
             iconTheme: {
@@ -18,9 +18,11 @@ function App({ Component, pageProps }: AppProps) {
             },
             duration: 3000,
           }}
-        />
+        /> */}
 
-        <Component {...pageProps} />
+        <ToastProvider>
+          <Component {...pageProps} />
+        </ToastProvider>
       </Provider>
     </ErrorBoundary>
   );

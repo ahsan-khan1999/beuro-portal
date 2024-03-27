@@ -25,23 +25,16 @@ const PdfCard = ({
   const { t: translate } = useTranslation();
   const { contractDetails } = useAppSelector((state) => state.contract);
 
-  // const handleBackToDetail = () => {
-  //   const { status, page, text, sort } = router.query;
-
-  //   router.push({
-  //     pathname: "/contract/details",
-  //     query: { status, page, text, sort, contract: contractDetails?.id },
-  //   });
-  // };
-
   const handleBackToDetail = () => {
-    const { status, page, text, sort } = router.query;
+    const { status, page, text, sort, date, leadSource } = router.query;
 
     const queryParams = Object.entries({
       status,
       page,
       text,
       sort,
+      date,
+      leadSource,
     }).reduce((acc, [key, value]) => {
       if (value) {
         (acc as { [key: string]: string | string[] })[key] = value;
@@ -58,7 +51,7 @@ const PdfCard = ({
   return (
     <div className="mb-5">
       <PdfCardLayout>
-        <div className=" rounded-md bg-white w-full h-fit">
+        <div className="rounded-md bg-white w-full h-fit">
           <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-5 border-b pb-5 border-[#000] border-opacity-10">
             {/* <span
                 className="cursor-pointer"

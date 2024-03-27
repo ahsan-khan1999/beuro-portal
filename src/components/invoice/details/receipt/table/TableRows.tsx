@@ -27,7 +27,7 @@ const TableRows = ({
   const handleReceiptPreview = (id?: string) => {
     router.push({
       pathname: "/invoices/receipt-pdf-preview",
-      query: { invoiceID: id, isMail: true },
+      query: { ...router.query, invoiceID: id, isMail: true },
     });
   };
 

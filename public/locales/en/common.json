@@ -921,6 +921,12 @@
       "close": "Close Leads",
       "expire": "Expire Leads"
     },
+    "lead_dropdown_status": {
+      "Open": "Open",
+      "InProcess": "InProcess",
+      "Close": "Close",
+      "Expired": "Expired"
+    },
     "table_headings": {
       "id": "ID",
       "name": "Name",
@@ -2018,7 +2024,7 @@
   },
   "lead_status": {
     "Open": "Open",
-    "InProcess": "InProcress",
+    "InProcess": "InProcess",
     "Close": "Close",
     "Expired": "Expired"
   },

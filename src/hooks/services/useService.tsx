@@ -55,17 +55,25 @@ const useService = () => {
 
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
+    const searchDate = query?.date as string;
 
-    const queryParams = searchQuery || sortedValue;
+    const queryParams = searchQuery || sortedValue || searchDate;
 
-    let updatedFilter = {
+    let updatedFilter: {
+      text?: string;
+      sort?: string;
+      date?: {
+        $gte?: string;
+        $lte?: string;
+      };
+    } = {
       text: "",
-      sort: "",
     };
 
-    if (searchQuery || sortedValue) {
+    if (searchQuery || sortedValue || searchDate) {
       updatedFilter.text = searchQuery;
       updatedFilter.sort = sortedValue;
+      updatedFilter.date = searchDate && JSON.parse(searchDate);
     }
 
     setFilter(updatedFilter);
@@ -84,40 +92,6 @@ const useService = () => {
       });
     }
   }, [query]);
-
-  // useEffect(() => {
-  //   const parsedPage = parseInt(query.page as string, 10);
-  //   if (!isNaN(parsedPage)) {
-  //     setCurrentPage(parsedPage);
-  //   }
-  //   const searchQuery = query?.text as string;
-
-  //   const queryParams = searchQuery;
-
-  //   let updatedFilter = {
-  //     text: "",
-  //   };
-
-  //   if (searchQuery) {
-  //     updatedFilter.text = searchQuery;
-  //   }
-
-  //   setFilter(updatedFilter);
-  //   console.log(parsedPage, "parsedPage");
-  //   if (parsedPage) {
-  //     dispatch(
-  //       readService({
-  //         params: {
-  //           filter: queryParams ? updatedFilter : {},
-  //           page: Number(parsedPage) || currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Service);
-  //     });
-  //   }
-  // }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

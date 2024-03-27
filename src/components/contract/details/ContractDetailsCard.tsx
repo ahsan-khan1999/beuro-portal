@@ -32,9 +32,11 @@ const ContractDetailsCard = ({
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
   const handleDonwload = () => {
     window.open(contractDetails?.attachement);
   };
+
   const handlePrint = () => {
     window.open(contractDetails?.attachement);
   };
@@ -52,7 +54,7 @@ const ContractDetailsCard = ({
 
   const handleBack = () => {
     router.pathname = "/contract";
-    delete router.query["contract"];
+    delete router.query["offer"];
     updateQuery(router, router.locale as string);
   };
 
@@ -87,7 +89,7 @@ const ContractDetailsCard = ({
               />
             </svg>
           </span>
-          <p className="font-medium text-[24px] leading-6 ml-[27px]">
+          <p className="font-medium text-2xl ml-[27px]">
             {translate("contracts.card_content.heading")}
           </p>
         </div>
@@ -108,13 +110,17 @@ const ContractDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: "/contract/pdf-preview",
-                  query: { offerID: contractDetails?.id, isMail: true },
+                  query: {
+                    ...router.query,
+                    offerID: contractDetails?.id,
+                    isMail: true,
+                  },
                 })
               }
             />
           )}
 
-          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
+          {/* <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
             <Image
               src={deleteIcon}
               alt="deleteIcon"
@@ -123,7 +129,7 @@ const ContractDetailsCard = ({
               width={16}
               height={20}
             />
-          </span>
+          </span> */}
         </div>
       </div>
 

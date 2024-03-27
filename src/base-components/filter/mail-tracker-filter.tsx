@@ -47,6 +47,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
     }));
     handleExtraFiltersClose();
   };
+
   const handleEmailChange = (value: string, isChecked: boolean) => {
     const updatedEmails = isChecked
       ? [...moreFilter.email, value]
@@ -54,6 +55,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
 
     setMoreFilter({ ...moreFilter, email: updatedEmails });
   };
+
   const handleLowPriceChange = (val: string) => {
     setMoreFilter((prev) => ({
       ...prev,
@@ -67,6 +69,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
       price: [prev.price[0], val],
     }));
   };
+
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
@@ -168,14 +171,13 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
               </div>
               {/* Price section  */}
             </div>
-            <div>
-              <BaseButton
-                buttonText="Save"
-                onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+
+            <BaseButton
+              buttonText="Save"
+              onClick={handleSave}
+              containerClassName="bg-primary my-2 px-8 py-2"
+              textClassName="text-white"
+            />
           </motion.div>
         )}
       </AnimatePresence>

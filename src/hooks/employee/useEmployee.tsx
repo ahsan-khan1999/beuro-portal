@@ -58,17 +58,25 @@ const useEmployee = () => {
 
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
+    const searchDate = query?.date as string;
 
-    const queryParams = searchQuery || sortedValue;
+    const queryParams = searchQuery || sortedValue || searchDate;
 
-    let updatedFilter = {
+    let updatedFilter: {
+      text?: string;
+      sort?: string;
+      date?: {
+        $gte?: string;
+        $lte?: string;
+      };
+    } = {
       text: "",
-      sort: "",
     };
 
-    if (searchQuery || sortedValue) {
+    if (searchQuery || sortedValue || searchDate) {
       updatedFilter.text = searchQuery;
       updatedFilter.sort = sortedValue;
+      updatedFilter.date = searchDate && JSON.parse(searchDate);
     }
 
     setFilter(updatedFilter);

@@ -403,7 +403,16 @@ export const useContractPdf = () => {
       }
       if (isMail) {
         router.push(
-          `/contract/details?offer=${contractDetails?.id}&isMail=${isMail}`
+          {
+            pathname: `/contract/details`,
+            query: {
+              ...router.query,
+              offer: contractDetails?.id,
+              isMail: isMail,
+            },
+          }
+
+          // `/contract/details?offer=${contractDetails?.id}&isMail=${isMail}`
         );
       } else {
         setActiveButtonId("email");

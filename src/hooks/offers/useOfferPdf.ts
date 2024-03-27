@@ -267,7 +267,12 @@ export const useOfferPdf = () => {
       }
       if (isMail) {
         router.push(
-          `/offers/details?offer=${offerDetails?.id}&isMail=${isMail}`
+          {
+            pathname: `/offers/details`,
+            query: { ...router.query, offer: offerDetails?.id, isMail: isMail },
+          }
+
+          // `/offers/details?offer=${offerDetails?.id}&isMail=${isMail}`
         );
       } else {
         setActiveButtonId("email");

@@ -656,6 +656,7 @@ export interface FilterType {
     $gte?: string;
     $lte?: string;
   };
+
   payment?: string;
   email?: string[] | string;
   price?: string[];
