@@ -18,11 +18,17 @@ export default function SelectField({
   dropDownIconClassName,
   containerClassName,
   isSearch,
+  labelClassName,
 }: OptionsFieldProps) {
   const defaultClasses = `flex items-center`;
   const containerClasses = combineClasses(
     "relative flex items-center justify-center min-w-[120px] w-fit",
     containerClassName
+  );
+
+  const labelDefualtClasses = combineClasses(
+    "text-dark text-sm font-normal w-fit",
+    labelClassName
   );
 
   const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
@@ -66,7 +72,7 @@ export default function SelectField({
         className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg min-w-[105px] w-fit"
         onClick={handleToggle}
       >
-        <span className="text-dark text-sm font-normal">{selectedLabel}</span>
+        <span className={labelDefualtClasses}>{selectedLabel}</span>
         <DropDownNonFillIcon
           label={label}
           isOpen={isOpen}

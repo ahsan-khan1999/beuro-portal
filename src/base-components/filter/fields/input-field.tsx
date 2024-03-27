@@ -27,7 +27,7 @@ const InputField = forwardRef(
     const inputClasses = combineClasses(
       `${
         bgColor ? "bg-[#F4F4F4]" : "bg-white"
-      } w-full text-sm rounded-lg  pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-white focus:border-[#6665FF]`,
+      } text-sm rounded-lg pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-white focus:border-[#6665FF]`,
       textClassName
     );
 
@@ -36,10 +36,11 @@ const InputField = forwardRef(
       "min-w-[274px]",
       containerClassName
     );
+
     const router = useRouter();
     return (
       <div className={containerClasses}>
-        <div className="relative flex ">
+        <div className="relative flex">
           <input
             id="searchBar"
             type="text"

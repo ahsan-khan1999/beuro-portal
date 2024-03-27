@@ -68,9 +68,10 @@ export interface OptionsFieldProps {
   border?: number;
   handleChange: (value: string) => void;
   options: { label: string; value: string }[];
-  dropDownIconClassName: string;
+  dropDownIconClassName?: string;
   containerClassName?: string;
   isSearch?: boolean;
+  labelClassName?: string;
 }
 
 export interface GlobalApiResponseType {

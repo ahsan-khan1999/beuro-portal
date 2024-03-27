@@ -89,31 +89,24 @@ export const useAddNewNote = ({
         case "offer":
           const isFilterOffer = offer.find((item) => item.id === id);
           if (!isFilterOffer?.isNoteCreated && handleFilterChange) {
-
-            handleFilterChange(filter || {})
-            handleNotes(offerDetails?.id)
-          }
-          else {
+            handleFilterChange(filter || {});
+            handleNotes(offerDetails?.id);
+          } else {
             dispatch(setOfferDetails({ ...offerDetails, isNoteCreated: true }));
             handleNotes(offerDetails?.id);
           }
-
-
 
           break;
         case "contract":
           const isFilterContract = contract.find((item) => item.id === id);
           if (!isFilterContract?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-            handleNotes(contractDetails?.id)
-
-
-          }
-          else {
+            handleNotes(contractDetails?.id);
+          } else {
             dispatch(
               setContractDetails({ ...contractDetails, isNoteCreated: true })
             );
-            handleNotes(contractDetails?.id)
+            handleNotes(contractDetails?.id);
           }
 
           break;
@@ -121,17 +114,12 @@ export const useAddNewNote = ({
           const isFilterInvoice = invoice.find((item) => item.id === id);
           if (!isFilterInvoice?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-            handleNotes(invoiceDetails?.id)
-
-
-          }
-          else {
+            handleNotes(invoiceDetails?.id);
+          } else {
             dispatch(
               setInvoiceDetails({ ...invoiceDetails, isNoteCreated: true })
             );
-            handleNotes(invoiceDetails?.id)
-
-
+            handleNotes(invoiceDetails?.id);
           }
 
           break;

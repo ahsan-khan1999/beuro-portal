@@ -151,8 +151,8 @@ export default function LeadsFilter({
   };
 
   return (
-    <div className="flex flex-col xMaxLarge:flex-row xMaxLarge:items-center w-full xl:w-fit gap-4">
-      <div className="flex flex-col lg:flex-row lg:items-center gap-[14px] ">
+    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4">
+      <div className="flex items-center gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
             key={idx}
@@ -167,7 +167,7 @@ export default function LeadsFilter({
           />
         ))}
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+      <div className="flex flex-col xMaxSize:flex-row xMaxSize:items-center gap-4">
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}
@@ -175,37 +175,91 @@ export default function LeadsFilter({
           iconDisplay={false}
           onEnterPress={onEnterPress}
         />
-        <div className="flex items-center gap-4 z-10">
-          <SelectField
-            handleChange={(value) => hanldeSortChange(value)}
-            value=""
-            dropDownIconClassName=""
-            options={[
-              {
-                label: `${translate("filters.sort_by.date")}`,
-                value: "createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.latest")}`,
-                value: "-createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.oldest")}`,
-                value: "createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.a_z")}`,
-                value: "customerDetail.fullName",
-              },
-            ]}
-            label={translate("common.sort_button")}
-          />
-          <LeadsFilters
-            filter={filter}
-            setFilter={setFilter}
-            onFilterChange={handleFilterChange}
-          />
+        <div className="flex flex-col lg:flex-row lg:items-center gap-4 z-10">
+          <div className="flex items-center gap-x-4">
+            <SelectField
+              handleChange={(value) => hanldeSortChange(value)}
+              value=""
+              options={[
+                {
+                  label: `${translate("filters.sort_by.date")}`,
+                  value: "createdAt",
+                },
+                {
+                  label: `${translate("filters.sort_by.latest")}`,
+                  value: "-createdAt",
+                },
+                {
+                  label: `${translate("filters.sort_by.oldest")}`,
+                  value: "createdAt",
+                },
+                {
+                  label: `${translate("filters.sort_by.a_z")}`,
+                  value: "customerDetail.fullName",
+                },
+              ]}
+              label={translate("common.sort_button")}
+            />
+            <div className="flex items-center gap-x-3">
+              <span className="text-[#4B4B4B] font-semibold text-base">
+                {translate("global_search.notes")}
+              </span>
+              <SelectField
+                handleChange={() => {}}
+                value=""
+                dropDownIconClassName=""
+                containerClassName="min-w-[255px]"
+                labelClassName="w-[255px]"
+                options={[
+                  {
+                    value: "All Notes",
+                    label: `${translate("add_note_dropdown.all_notes")}`,
+                  },
+                  {
+                    value: "Sending pictures",
+                    label: `${translate("add_note_dropdown.sending_picture")}`,
+                  },
+                  {
+                    value: "Viewing date",
+                    label: `${translate("add_note_dropdown.view_date")}`,
+                  },
+                  {
+                    value: "Approximate Offer open",
+                    label: `${translate(
+                      "add_note_dropdown.approximate_offer_open"
+                    )}`,
+                  },
+                  {
+                    value: "Will contact us",
+                    label: `${translate("add_note_dropdown.contact_us")}`,
+                  },
+                  {
+                    value: "Individual Note",
+                    label: `${translate("add_note_dropdown.individual_note")}`,
+                  },
+                ]}
+                label={translate("add_note_dropdown.all_notes")}
+              />
+            </div>
+          </div>
+          <div className="flex items-center gap-x-4">
+            <LeadsFilters
+              filter={filter}
+              setFilter={setFilter}
+              onFilterChange={handleFilterChange}
+            />
+            <Button
+              inputType="button"
+              onClick={() => router.push("/leads/add")}
+              className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+              icon={addIcon}
+              text={translate("leads.add_button")}
+              id="add"
+              iconAlt="add button"
+            />
+          </div>
         </div>
+
         {/* <Button
           id="apply"
           inputType="button"
@@ -213,16 +267,6 @@ export default function LeadsFilter({
           onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         /> */}
-
-        <Button
-          inputType="button"
-          onClick={() => router.push("/leads/add")}
-          className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-          icon={addIcon}
-          text={translate("leads.add_button")}
-          id="add"
-          iconAlt="add button"
-        />
       </div>
     </div>
   );
