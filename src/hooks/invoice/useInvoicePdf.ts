@@ -352,7 +352,11 @@ export const useInvoicePdf = () => {
       }
       if (isMail) {
         router.push(
-          `/invoices/compose-mail?invoiceID=${invoiceID}&isMail=${isMail}`
+          {
+            pathname: `/invoices/compose-mail`,
+            query: { ...router.query, invoiceID: invoiceID, isMail: isMail },
+          }
+          // `/invoices/compose-mail?invoiceID=${invoiceID}&isMail=${isMail}`
         );
       } else {
         const data = await localStoreUtil.get_data("invoiceComposeEmail");

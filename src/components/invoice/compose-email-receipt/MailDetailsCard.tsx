@@ -1,10 +1,8 @@
 import React from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import { getInvoiceStatusColor } from "@/utils/utility";
-import PDFIcon from "@/assets/svgs/PDF_ICON.svg";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 
 const MailDetailsCard = () => {
@@ -50,7 +48,10 @@ const MailDetailsCard = () => {
             onClick={() =>
               router.push({
                 pathname: "/invoices/receipt-pdf-preview",
-                query: { invoiceID: collectiveInvoiceDetails?.id },
+                query: {
+                  ...router.query,
+                  invoiceID: collectiveInvoiceDetails?.id,
+                },
               })
             }
           />

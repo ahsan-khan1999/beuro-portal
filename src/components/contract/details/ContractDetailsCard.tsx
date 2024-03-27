@@ -32,9 +32,11 @@ const ContractDetailsCard = ({
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
   const handleDonwload = () => {
     window.open(contractDetails?.attachement);
   };
+
   const handlePrint = () => {
     window.open(contractDetails?.attachement);
   };
@@ -87,7 +89,7 @@ const ContractDetailsCard = ({
               />
             </svg>
           </span>
-          <p className="font-medium text-[24px] leading-6 ml-[27px]">
+          <p className="font-medium text-2xl ml-[27px]">
             {translate("contracts.card_content.heading")}
           </p>
         </div>
@@ -108,7 +110,11 @@ const ContractDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: "/contract/pdf-preview",
-                  query: { offerID: contractDetails?.id, isMail: true },
+                  query: {
+                    ...router.query,
+                    offerID: contractDetails?.id,
+                    isMail: true,
+                  },
                 })
               }
             />

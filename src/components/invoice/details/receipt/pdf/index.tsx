@@ -5,7 +5,6 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
-import { useId } from "react";
 import { useTranslation } from "next-i18next";
 
 // const InvoicePdfPreview = dynamic(

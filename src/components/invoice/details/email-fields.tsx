@@ -21,10 +21,10 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
   invoiceDetails,
   isMoreEmail,
   setIsMoreEmail,
-  setValue,
+  setValue
 ) => {
-  const router = useRouter()
-  const isMail = router?.query?.isMail
+  const router = useRouter();
+  const isMail = router?.query?.isMail;
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
@@ -121,9 +121,9 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
               control,
               onItemChange: onContentSelect,
               value:
-                contentDetails?.id && contentDetails?.id as string ||
-                invoiceDetails?.invoiceID?.contractID?.offerID?.content?.id as string
-              ,
+                (contentDetails?.id && (contentDetails?.id as string)) ||
+                (invoiceDetails?.invoiceID?.contractID?.offerID?.content
+                  ?.id as string),
             },
           },
           (isMoreEmail?.isCc && {
@@ -239,8 +239,8 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
           //     register,
           //   },
           // },
-        ]
-      }
+        ],
+      },
     },
 
     {
@@ -276,7 +276,6 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
     //   },
     // },
 
-
     {
       containerClass: " mt-5",
       label: {
@@ -304,20 +303,18 @@ export const InvoiceEmailPreviewFormField: GenerateInvoiceEmailFormField = (
         id: "div-field",
         className: "flex items-center justify-end space-x-[18px]",
         children: [
-
           {
             containerClass: "mb-0",
             field: {
               type: Field.button,
               id: "button",
-              text: isMail && `${translate(
-                "contracts.contract_email_preview.send"
-              )}` || `${translate(
-                "contracts.contract_email_preview.next_button"
-              )}`,
+              text:
+                (isMail &&
+                  `${translate("contracts.contract_email_preview.send")}`) ||
+                `${translate("contracts.contract_email_preview.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ",
               loading,
             },
           },

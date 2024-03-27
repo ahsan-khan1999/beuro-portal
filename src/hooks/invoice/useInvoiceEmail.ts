@@ -4,14 +4,13 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   readContent,
   setContentDetails,
 } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { InvoiceEmailPreviewFormField } from "@/components/invoice/details/email-fields";
@@ -25,7 +24,6 @@ import {
 } from "@/api/slices/invoice/invoiceSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
-import { CustomerPromiseActionType } from "@/types/customer";
 
 export const useInvoiceEmail = (
   backRouteHandler: Function,
@@ -150,9 +148,14 @@ export const useInvoiceEmail = (
 
   const onSuccess = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
+
+    const { status } = router.query;
     router.push({
       pathname: "/invoices/details",
-      query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
+      query: {
+        status,
+        invoice: collectiveInvoiceDetails?.invoiceID?.id,
+      },
     });
   };
 
@@ -186,7 +189,10 @@ export const useInvoiceEmail = (
       await localStoreUtil.store_data("invoiceComposeEmail", updatedData);
 
       router.pathname = "/invoices/invoice-pdf-preview";
-      router.query = { invoiceID: collectiveInvoiceDetails?.id };
+      router.query = {
+        ...router.query,
+        invoiceID: collectiveInvoiceDetails?.id,
+      };
       updateQuery(router, router.locale as string);
     }
     // }
@@ -194,6 +200,7 @@ export const useInvoiceEmail = (
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   return {
     fields,
     onSubmit,

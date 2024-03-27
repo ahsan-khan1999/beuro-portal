@@ -30,7 +30,7 @@ const InvoiceDetailsData = ({
     updateQuery(router, router.locale as string);
   };
 
-  console.log({ invoiceDetails });
+  console.log("invoiceStatus:", invoiceDetails.invoiceStatus);
 
   return (
     <>
@@ -59,7 +59,7 @@ const InvoiceDetailsData = ({
               />
             </svg>
           </span>
-          <p className="font-medium text-[24px] leading-6 ml-[27px]">
+          <p className="font-medium text-2xl ml-[27px]">
             {translate("invoice.card_content.heading")}
           </p>
         </div>

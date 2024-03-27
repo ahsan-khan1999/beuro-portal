@@ -115,7 +115,7 @@ const OfferDetailsCard = ({
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
-            <p className="font-medium text-[16px] text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
+            <p className="font-medium text-base text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
               {offerDetails &&
                 (offerDetails.emailStatus === "Sent" ? (
                   <>{translate("common.send_again")}</>
@@ -129,7 +129,11 @@ const OfferDetailsCard = ({
               onClick={() =>
                 router.push({
                   pathname: `/offers/pdf-preview`,
-                  query: { offerID: offerDetails?.id, isMail: true },
+                  query: {
+                    ...router.query,
+                    offerID: offerDetails?.id,
+                    isMail: true,
+                  },
                 })
               }
             />
