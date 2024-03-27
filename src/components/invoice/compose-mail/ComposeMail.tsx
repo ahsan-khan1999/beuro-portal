@@ -1,8 +1,6 @@
 import { Form } from "@/base-components/form/form";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import { useContractEmail } from "@/hooks/contract/useContractEmail";
 import { useInvoiceEmail } from "@/hooks/invoice/useInvoiceEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
 import { useRouter } from "next/router";
@@ -13,9 +11,11 @@ const ComposeMail = () => {
   const onNextHandle = () => {
     router.push("/contract/pdf-preview");
   };
+
   const backRouteHandler = () => {
     router.push("/contract/details");
   };
+
   const defaultClassName = "pt-5";
   const {
     fields,

@@ -22,6 +22,7 @@ export default function OfferFilter({
       $lte: FiltersDefaultValues.$lte,
     },
   };
+
   const {
     extraFilterss,
     handleFilterReset,
@@ -34,7 +35,6 @@ export default function OfferFilter({
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   const { t: translate } = useTranslation();
-
   const router = useRouter();
 
   const handleSave = () => {
@@ -65,13 +65,17 @@ export default function OfferFilter({
   };
 
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
-    const dateTime = new Date(val);
+    let dateTime: string | undefined = undefined;
+
+    if (val && !isNaN(new Date(val).getTime())) {
+      dateTime = new Date(val).toISOString();
+    }
+
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime },
     }));
   };
-
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setMoreFilter((prev: FilterType) => {
       let updatedStatus = new Set(
@@ -88,8 +92,6 @@ export default function OfferFilter({
         updatedStatus.size > 0
           ? Array.from(updatedStatus)
           : FiltersDefaultValues.None;
-
-      console.log(emailStatus);
 
       return { ...prev, leadSource: emailStatus };
     });

@@ -73,10 +73,15 @@ export default function ServicesFilter({
   };
 
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
-    const dateTime = new Date(val);
+    let dateTime: string | undefined = undefined;
+
+    if (val && !isNaN(new Date(val).getTime())) {
+      dateTime = new Date(val).toISOString();
+    }
+
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime },
     }));
   };
 

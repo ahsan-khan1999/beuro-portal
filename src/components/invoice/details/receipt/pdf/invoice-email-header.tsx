@@ -1,11 +1,5 @@
 import React from "react";
 import PdfCardLayout from "./PdfCardLayout";
-import Image from "next/image";
-import backIcon from "@/assets/svgs/back_icon.svg";
-import postIcon from "@/assets/svgs/post_icon.svg";
-import emailIcon from "@/assets/svgs/color_ful_input_email.svg";
-import downloadIcon from "@/assets/svgs/download_icon.svg";
-import printerIcon from "@/assets/svgs/printer_icon.svg";
 import { useRouter } from "next/router";
 import { InvoiceEmailHeaderProps } from "@/types";
 import { BaseButton } from "@/base-components/ui/button/base-button";
@@ -14,7 +8,6 @@ import { useTranslation } from "next-i18next";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { useAppSelector } from "@/hooks/useRedux";
 import { getInvoiceStatusColor } from "@/utils/utility";
-import { InvoicesIcon } from "@/assets/svgs/components/sideBar/Invoices";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 
 export const InvoiceEmailHeader = ({
@@ -59,7 +52,10 @@ export const InvoiceEmailHeader = ({
             onClick={() => {
               router.push({
                 pathname: "/invoices/details",
-                query: { invoice: collectiveInvoiceDetails?.invoiceID?.id },
+                query: {
+                  ...router.query,
+                  invoice: collectiveInvoiceDetails?.invoiceID?.id,
+                },
               });
             }}
             className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer w-fit"

@@ -47,6 +47,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
     }));
     handleExtraFiltersClose();
   };
+
   const handleEmailChange = (value: string, isChecked: boolean) => {
     const updatedEmails = isChecked
       ? [...moreFilter.email, value]
@@ -54,6 +55,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
 
     setMoreFilter({ ...moreFilter, email: updatedEmails });
   };
+
   const handleLowPriceChange = (val: string) => {
     setMoreFilter((prev) => ({
       ...prev,
@@ -67,6 +69,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
       price: [prev.price[0], val],
     }));
   };
+
   return (
     <div className="relative flex my-auto cursor-pointer " ref={ref}>
       <svg
