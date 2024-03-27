@@ -22,6 +22,7 @@ export interface contractTableTypes {
   emailStatus: string;
   signedContracts?: signedContracts[];
   isNoteCreated: boolean;
+  isImageAdded: boolean;
 }
 
 export interface signedContracts {

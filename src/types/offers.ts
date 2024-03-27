@@ -67,6 +67,7 @@ export interface OffersTableRowTypes {
   signature?: string;
   attachement?: string;
   isNoteCreated: boolean;
+  isImageAdded: boolean;
   reason: string;
 }
 
