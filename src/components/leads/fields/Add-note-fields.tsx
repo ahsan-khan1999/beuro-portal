@@ -21,9 +21,9 @@ export const AddNoteFormField: GenerateNotesFormField = (
       field: {
         className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
         type: Field.select,
-        id: "contactAvailability",
+        id: "noteType",
         value: "",
-        name: "contactAvailability",
+        name: "noteType",
         options: [
           {
             value: "All Notes",

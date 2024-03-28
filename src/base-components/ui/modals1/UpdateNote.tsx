@@ -3,10 +3,10 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
-import { useAddNewNote } from "@/hooks/modals/useAddNewNote";
 import { FilterType } from "@/types";
+import { useUpdateNote } from "@/hooks/modals/useUpdateNote";
 
-const AddNewNote = ({
+export const UpdateNote = ({
   onClose,
   handleNotes,
   handleFilterChange,
@@ -20,9 +20,9 @@ const AddNewNote = ({
   heading: string;
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useAddNewNote({ handleNotes, handleFilterChange, filter });
+    useUpdateNote({ handleNotes, handleFilterChange, filter });
 
-  return (  
+  return (
     <>
       <BaseModal
         onClose={onClose}
@@ -54,5 +54,3 @@ const AddNewNote = ({
     </>
   );
 };
-
-export default AddNewNote;

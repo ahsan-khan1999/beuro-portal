@@ -1,5 +1,10 @@
 // enum for add new note
 export enum AddNewNote {
+  noteType = "noteType",
+  noteMessage = "description",
+}
+
+export enum UpdateNoteId {
   noteMessage = "description",
 }
 
@@ -23,5 +28,3 @@ export enum EditPaymentDetails {
   cardNumber = "cardNumber",
   cvv = "cvv",
 }
-
-

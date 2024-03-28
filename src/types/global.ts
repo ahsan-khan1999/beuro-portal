@@ -1,6 +1,5 @@
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
-import { Dispatch, SetStateAction } from "react";
 import { FilterType } from ".";
 import { StaticImageData } from "next/image";
 

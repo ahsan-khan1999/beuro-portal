@@ -32,6 +32,7 @@ import { useTranslation } from "next-i18next";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 const useOffers = () => {
   const { lastPage, offer, loading, isLoading, totalCount, offerDetails } =
@@ -202,7 +203,7 @@ const useOffers = () => {
       />
     ),
     [ModalType.EDIT_NOTE]: (
-      <AddNewNote
+      <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}

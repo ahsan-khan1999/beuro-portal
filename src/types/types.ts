@@ -330,6 +330,14 @@ export type GenerateNotesFormField = (
   onClick?: Function
 ) => FormField[];
 
+export type GenerateUpdateNoteFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
 // Servcies formfield
 export type GenerateServicesFormField = (
   register: UseFormRegister<FieldValues>,
