@@ -149,7 +149,7 @@ export default function OffersFilters({
   }, [router.query.text]);
 
   return (
-    <div className="flex flex-col xLarge:flex-row xLarge:items-center w-full xl:w-fit gap-4">
+    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
@@ -165,60 +165,99 @@ export default function OffersFilters({
           />
         ))}
       </div>
-      <div className="flex gap-[14px] items-center">
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={false}
-          onEnterPress={onEnterPress}
-        />
-        <SelectField
-          handleChange={(value) => hanldeSortChange(value)}
-          value=""
-          dropDownIconClassName=""
-          options={[
-            {
-              label: `${translate("filters.sort_by.date")}`,
-              value: "createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.latest")}`,
-              value: "-createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.oldest")}`,
-              value: "createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.a_z")}`,
-              value: "customerDetail.fullName",
-            },
-          ]}
-          label={translate("common.sort_button")}
-        />
-        <OfferFilter
-          filter={filter}
-          setFilter={setFilter}
-          onFilterChange={handleFilterChange}
-        />
-        {/* <Button
-          id="apply"
-          inputType="button"
-          text="Apply"
-          onClick={() => handleFilterChange(filter)}
-          className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        /> */}
+      <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
+        <div className="flex items-center gap-x-3">
+          <InputField
+            handleChange={handleInputChange}
+            ref={inputRef}
+            value={inputValue}
+            iconDisplay={false}
+            onEnterPress={onEnterPress}
+          />
+          <SelectField
+            handleChange={(value) => hanldeSortChange(value)}
+            value=""
+            dropDownIconClassName=""
+            options={[
+              {
+                label: `${translate("filters.sort_by.date")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.latest")}`,
+                value: "-createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.oldest")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.a_z")}`,
+                value: "customerDetail.fullName",
+              },
+            ]}
+            label={translate("common.sort_button")}
+          />
+        </div>
 
-        <Button
-          inputType="button"
-          onClick={() => router.push("/offers/add")}
-          className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-          icon={addIcon}
-          text={translate("offers.add_button")}
-          id="add"
-          iconAlt="add button"
-        />
+        <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4B4B4B] font-semibold text-base">
+              {translate("global_search.notes")}
+            </span>
+            <SelectField
+              handleChange={() => {}}
+              value=""
+              dropDownIconClassName=""
+              containerClassName="w-[225px]"
+              labelClassName="w-[225px]"
+              options={[
+                {
+                  value: "All Notes",
+                  label: `${translate("add_note_dropdown.all_notes")}`,
+                },
+                {
+                  value: "Sending pictures",
+                  label: `${translate("add_note_dropdown.sending_picture")}`,
+                },
+                {
+                  value: "Viewing date",
+                  label: `${translate("add_note_dropdown.view_date")}`,
+                },
+                {
+                  value: "Approximate Offer open",
+                  label: `${translate(
+                    "add_note_dropdown.approximate_offer_open"
+                  )}`,
+                },
+                {
+                  value: "Will contact us",
+                  label: `${translate("add_note_dropdown.contact_us")}`,
+                },
+                {
+                  value: "Individual Note",
+                  label: `${translate("add_note_dropdown.individual_note")}`,
+                },
+              ]}
+              label={translate("add_note_dropdown.all_notes")}
+            />
+          </div>
+          <OfferFilter
+            filter={filter}
+            setFilter={setFilter}
+            onFilterChange={handleFilterChange}
+          />
+
+          <Button
+            inputType="button"
+            onClick={() => router.push("/offers/add")}
+            className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+            icon={addIcon}
+            text={translate("offers.add_button")}
+            id="add"
+            iconAlt="add button"
+          />
+        </div>
       </div>
     </div>
   );

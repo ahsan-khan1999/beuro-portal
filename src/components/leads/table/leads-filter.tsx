@@ -151,7 +151,7 @@ export default function LeadsFilter({
   };
 
   return (
-    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4">
+    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex items-center gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
@@ -175,7 +175,7 @@ export default function LeadsFilter({
           iconDisplay={false}
           onEnterPress={onEnterPress}
         />
-        <div className="flex flex-col lg:flex-row lg:items-center gap-4 z-10">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-4">
           <div className="flex items-center gap-x-4">
             <SelectField
               handleChange={(value) => hanldeSortChange(value)}
@@ -208,8 +208,8 @@ export default function LeadsFilter({
                 handleChange={() => {}}
                 value=""
                 dropDownIconClassName=""
-                containerClassName="min-w-[255px]"
-                labelClassName="w-[255px]"
+                containerClassName="w-[225px]"
+                labelClassName="w-[225px]"
                 options={[
                   {
                     value: "All Notes",
@@ -241,23 +241,22 @@ export default function LeadsFilter({
                 label={translate("add_note_dropdown.all_notes")}
               />
             </div>
-          </div>
-          <div className="flex items-center gap-x-4">
             <LeadsFilters
               filter={filter}
               setFilter={setFilter}
               onFilterChange={handleFilterChange}
             />
-            <Button
-              inputType="button"
-              onClick={() => router.push("/leads/add")}
-              className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-              icon={addIcon}
-              text={translate("leads.add_button")}
-              id="add"
-              iconAlt="add button"
-            />
           </div>
+
+          <Button
+            inputType="button"
+            onClick={() => router.push("/leads/add")}
+            className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+            icon={addIcon}
+            text={translate("leads.add_button")}
+            id="add"
+            iconAlt="add button"
+          />
         </div>
 
         {/* <Button

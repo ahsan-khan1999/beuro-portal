@@ -10,7 +10,7 @@ const TableFunctions = ({
 }: FiltersComponentProps) => {
   const { t: translate } = useTranslation();
   return (
-    <div className="flex flex-col 2xl:flex-row 2xl:justify-between 2xl:items-center mb-4 gap-y-3 2xl:gap-y-0">
+    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:justify-between xMaxProLarge:items-center mb-4 gap-y-3 xMaxProLarge:gap-y-0">
       <h1 className="text-xl text-[#222B45] ">
         {translate("offers.main_heading")}
       </h1>
