@@ -916,7 +916,7 @@
     },
     "lead_dropdown_status": {
       "Open": "Offen",
-      "InProcess": "editieren",
+      "InProcess": "In Bearbeitung",
       "Close": "Geschlossen",
       "Expired": "Abgelaufen"
     },

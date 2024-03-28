@@ -48,7 +48,7 @@ export const ContactAddress = ({
         </Text>
         <Text style={textBase}>{address?.streetWithNumber}</Text>
         <Text style={textBase}>{`${address?.postalCode} ${
-          Country[address?.city as keyof typeof Country] || ""
+          [address?.city as keyof typeof Country] || ""
         }`}</Text>
       </View>
       <View

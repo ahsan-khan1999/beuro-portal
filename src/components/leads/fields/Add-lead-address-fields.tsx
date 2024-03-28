@@ -1,11 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateLeadAddressFormField,
-  GenerateLeadsFormField,
-} from "@/types";
-import { ComponentsType } from "../add/AddNewLeadsData";
-import { staticEnums } from "@/utils/static";
+import { FormField, GenerateLeadAddressFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import editIcon from "@/assets/svgs/edit_primary.svg";
 import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";

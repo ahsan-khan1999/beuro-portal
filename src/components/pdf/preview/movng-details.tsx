@@ -102,7 +102,7 @@ export const MovingDetails = ({
             <span className="text-[#141414] text-sm font-normal max-w-[850px] break-all">
               <strong>
                 {formatAddress({
-                  country: Country[item?.country as keyof typeof Country],
+                  country: item?.country,
                   postalCode: item.postalCode,
                   streetNumber: item.streetNumber,
                 })}
