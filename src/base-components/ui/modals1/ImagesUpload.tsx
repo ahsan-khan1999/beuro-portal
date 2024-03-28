@@ -3,7 +3,6 @@ import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { useUploadImage } from "@/hooks/modals/useUploadImage";
-import { Form } from "@/base-components/form/form";
 import { LinkUpload } from "../link-upload";
 import { BaseButton } from "../button/base-button";
 import { AttachementField } from "./attachement-field";
@@ -43,6 +42,7 @@ const ImagesUpload = ({
     loading,
     loadingGlobal,
   } = useUploadImage(handleImageSlider);
+
   const attachementLookUp = {
     img_tab: (
       <div className="h-[415px] overflow-y-auto overflow-x-hidden">
@@ -85,7 +85,7 @@ const ImagesUpload = ({
         <VideoField
           id="attachement"
           attachements={enteredLinks?.video}
-          fileSupported="MP4, MOV, AVI, WEBM "
+          fileSupported="MP4, MOV, AVI, WEBM"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_video")}
@@ -125,7 +125,7 @@ const ImagesUpload = ({
         <AttachementField
           id="attachement"
           attachements={enteredLinks?.attachements}
-          fileSupported="Pdf, ODT, DOC, XLXS "
+          fileSupported="Pdf, ODT, DOC, XLXS"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_attachment")}
@@ -153,11 +153,12 @@ const ImagesUpload = ({
             {translate("common.images_modal.heading")}
           </p>
 
-          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5] ">
+          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
             {attachementTabs.map((item, index) => (
               <button
+                key={index}
                 className={`${
-                  activeTab === item ? "text-primary" : "text-[#393939] "
+                  activeTab === item ? "text-primary" : "text-[#393939]"
                 } text-base font-medium pb-[10px] ${
                   activeTab === item ? "border-b-2 border-primary" : ""
                 }`}

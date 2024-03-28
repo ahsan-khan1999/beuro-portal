@@ -94,16 +94,19 @@ const EditOffersDetailsData = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  const router = useRouter();
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const router = useRouter();
-
   const route = () => {
     router.push(
-      `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
+      {
+        pathname: `/offers/pdf-preview`,
+        query: { status: "None", offerID: offerDetails?.id, isMail: true },
+      }
+      // `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
     );
     onClose();
   };
