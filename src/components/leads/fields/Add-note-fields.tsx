@@ -17,6 +17,45 @@ export const AddNoteFormField: GenerateNotesFormField = (
         htmlFor: "description",
         className: "mb-[10px] text-[#8F8F8F]",
       },
+
+      field: {
+        className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
+        type: Field.select,
+        id: "noteType",
+        value: "",
+        name: "noteType",
+        options: [
+          {
+            value: "All Notes",
+            label: `${translate("add_note_dropdown.all_notes")}`,
+          },
+          {
+            value: "Sending pictures",
+            label: `${translate("add_note_dropdown.sending_picture")}`,
+          },
+          {
+            value: "Viewing date",
+            label: `${translate("add_note_dropdown.view_date")}`,
+          },
+          {
+            value: "Approximate Offer open",
+            label: `${translate("add_note_dropdown.approximate_offer_open")}`,
+          },
+          {
+            value: "Will contact us",
+            label: `${translate("add_note_dropdown.contact_us")}`,
+          },
+          {
+            value: "Individual Note",
+            label: `${translate("add_note_dropdown.individual_note")}`,
+          },
+        ],
+        control,
+      },
+    },
+
+    {
+      containerClass: "mt-5",
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
@@ -27,7 +66,7 @@ export const AddNoteFormField: GenerateNotesFormField = (
     },
 
     {
-      containerClass: "mt-[30px] ",
+      containerClass: "mt-[30px]",
       field: {
         type: Field.button,
         id: "button",

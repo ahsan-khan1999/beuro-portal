@@ -909,10 +909,10 @@
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
     "table_functions": {
-      "open": "Anfragen offen",
+      "open": "offen",
       "inProcess": "In Bearbeitung",
-      "close": "Anfragen geschlossen",
-      "expire": "Anfragen abgelaufen"
+      "close": "geschlossen",
+      "expire": "abgelaufen"
     },
     "lead_dropdown_status": {
       "Open": "Offen",
@@ -1188,7 +1188,7 @@
     "note": "Hinweis",
     "search": "Suchen...",
     "drag_table": "Zum Scrollen in der Tabelle ziehen",
-    "sort_button": "Sortieren nach",
+    "sort_button": "Sortieren",
     "source": "Leadquellen",
     "privacy": "Datenschutzbestimmungen",
     "copy_right": "Urheberrecht 2024",
@@ -2133,5 +2133,13 @@
       "Inadequate Equipment": "Unzureichende Ausrüstung",
       "Other": "Andere"
     }
+  },
+  "add_note_dropdown": {
+    "all_notes": "Alle Notizen",
+    "sending_picture": "Sendet Fotos",
+    "view_date": "Besichtigungs Termin",
+    "approximate_offer_open": "Schätzoﬀerte Oﬀen",
+    "contact_us": "Meldet sich noch",
+    "individual_note": "Individuelle Notiz"
   }
 }

@@ -28,7 +28,7 @@ module.exports = {
         maxSize: "1280px",
         xMaxSize: "1400px",
         xLarge: "1460px",
-        maxLarge: "1530px",
+        maxLarge: "1600px",
         xMaxLarge: "1680px",
         xMaxProLarge: "1780px",
       },

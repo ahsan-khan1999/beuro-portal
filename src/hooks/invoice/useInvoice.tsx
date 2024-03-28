@@ -18,6 +18,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 const useInvoice = () => {
   const {
@@ -152,7 +153,7 @@ const useInvoice = () => {
     ),
 
     [ModalType.EDIT_NOTE]: (
-      <AddNewNote
+      <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
         heading={translate("common.update_note")}

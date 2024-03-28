@@ -22,6 +22,7 @@ import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 const useContract = () => {
   const {
@@ -171,7 +172,7 @@ const useContract = () => {
       />
     ),
     [ModalType.EDIT_NOTE]: (
-      <AddNewNote
+      <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}

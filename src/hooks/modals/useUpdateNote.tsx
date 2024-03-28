@@ -3,15 +3,16 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
-import { generateAddNewNoteValidation } from "@/validation/modalsSchema";
-import { createNote } from "@/api/slices/noteSlice/noteSlice";
+import { generateUpdateNoteValidation } from "@/validation/modalsSchema";
+import { updateNote } from "@/api/slices/noteSlice/noteSlice";
 import { FilterType } from "@/types";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
 import { setContractDetails } from "@/api/slices/contract/contractSlice";
 import { setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
+import { useEffect } from "react";
+import { UpdateNoteFormField } from "@/components/leads/fields/update-note-form-fields";
 
-export const useAddNewNote = ({
+export const useUpdateNote = ({
   handleNotes,
   handleFilterChange,
   filter,
@@ -29,6 +30,7 @@ export const useAddNewNote = ({
   const { contract, contractDetails } = useAppSelector(
     (state) => state.contract
   );
+
   const { invoice, invoiceDetails } = useAppSelector((state) => state.invoice);
 
   const {
@@ -37,7 +39,7 @@ export const useAddNewNote = ({
     },
   } = useAppSelector((state) => state.global);
 
-  const schema = generateAddNewNoteValidation(translate);
+  const schema = generateUpdateNoteValidation(translate);
   const {
     register,
     handleSubmit,
@@ -49,19 +51,23 @@ export const useAddNewNote = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const fields = AddNoteFormField(register, loading, control);
+  useEffect(() => {
+    if (data) setValue("description", data);
+  }, [data]);
+
+  const fields = UpdateNoteFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     let res;
-    if (!data) {
-      res = await dispatch(
-        createNote({
-          data: { ...formData, id: id, type: type },
-          router,
-          setError,
-          translate,
-        })
-      );
-    }
+
+    res = await dispatch(
+      updateNote({
+        data: { ...formData, id: id, type: type },
+        router,
+        setError,
+        translate,
+      })
+    );
+
     if (res?.payload) {
       switch (type) {
         case "lead":
