@@ -140,6 +140,26 @@ export default function ContractFilters({
     });
   };
 
+  const hanldeNoteType = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          noteType: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["noteType"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
     <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
@@ -198,7 +218,7 @@ export default function ContractFilters({
               {translate("global_search.notes")}
             </span>
             <SelectField
-              handleChange={() => {}}
+              handleChange={(value) => hanldeNoteType(value)}
               value=""
               dropDownIconClassName=""
               containerClassName="w-[225px]"

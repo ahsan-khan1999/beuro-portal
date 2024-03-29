@@ -56,6 +56,7 @@ export const useOfferAditionalDetails = (
   const handleBack = () => {
     onHandleBack(ComponentsType.serviceAdded);
   };
+
   const onContentSelect = (id: string) => {
     const filteredContent = content?.find((item) => item.id === id);
     if (filteredContent) {
@@ -64,6 +65,7 @@ export const useOfferAditionalDetails = (
       trigger("additionalDetails");
     }
   };
+
   const fields = AddOfferAdditionalDetailsFormField(
     register,
     loading,
@@ -80,6 +82,7 @@ export const useOfferAditionalDetails = (
     setValue,
     trigger
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       ...data,
@@ -92,6 +95,7 @@ export const useOfferAditionalDetails = (
     );
     if (response?.payload) onHandleNext(ComponentsType.additionalAdded);
   };
+
   return {
     fields,
     onSubmit,

@@ -1,7 +1,6 @@
 import React from "react";
 import ContractFilters from "./contract-filters";
 import { FiltersComponentProps } from "@/types";
-
 import { useTranslation } from "next-i18next";
 
 const TableFunctions = ({

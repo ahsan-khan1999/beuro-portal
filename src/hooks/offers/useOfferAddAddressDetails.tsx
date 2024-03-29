@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
@@ -12,10 +11,8 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
-import { useMemo, useState, useEffect } from "react";
-import { senitizeDataForm, transformAddressFormValues } from "@/utils/utility";
+import { useState, useEffect } from "react";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
-import { addressObject } from "../../components/offers/add/fields/add-address-details-fields";
 
 export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -33,6 +30,7 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
       ? Array.from(offerDetails?.leadID?.addressID?.address, () => false)
       : [false] || [false]
   );
+
   const handleBack = () => {
     onHandleNext(ComponentsType.customerAdded);
   };
@@ -124,7 +122,7 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
       updateOffer({ data: apiData, router, setError, translate })
     );
 
-      if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
+    if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
   };
 
   return {

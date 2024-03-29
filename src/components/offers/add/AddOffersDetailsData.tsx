@@ -33,12 +33,6 @@ const EditOffersDetailsData = () => {
     offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded
   );
 
-  useEffect(() => {
-    setTabType(
-      offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded
-    );
-  }, [offerDetails?.id]);
-
   const tabSection: tabArrayTypes[] = [
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill=${
@@ -154,10 +148,6 @@ const EditOffersDetailsData = () => {
     ),
   };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
   const handleNextTab = (currentComponent: ComponentsType) => {
     if (tabType === ComponentsType.additionalAdded) {
       offerCreatedHandler();
@@ -168,6 +158,10 @@ const EditOffersDetailsData = () => {
 
   const onHandleBack = (currentComponent: ComponentsType) => {
     setTabType(currentComponent);
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   const componentsLookUp = {
@@ -188,9 +182,15 @@ const EditOffersDetailsData = () => {
     ),
   };
 
+  useEffect(() => {
+    setTabType(
+      offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded
+    );
+  }, [offerDetails?.id]);
+
   return (
-    <div>
-      <div className="xLarge:fixed mb-5">
+    <>
+      <div className="xLarge:fixed mb-5 mt-[40px]">
         <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full">
           {tabSection.map((item, index) => (
             <OfferTabs
@@ -209,11 +209,14 @@ const EditOffersDetailsData = () => {
 
       <div className="w-full break-all flex">
         <div className="max-w-[330px] w-full hidden xLarge:block"></div>
-        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+
+        <div className="w-full xLarge:max-w-[861px] my-[40px]">
+          {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        </div>
       </div>
 
       {renderModal()}
-    </div>
+    </>
   );
 };
 

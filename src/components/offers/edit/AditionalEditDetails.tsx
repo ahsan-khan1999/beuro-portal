@@ -13,7 +13,7 @@ const AditionalEditDetails = ({
   handleBack: (currentComponent: EditComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "pt-5";
+  const defaultClassName = "";
   const {
     fields,
     control,
@@ -24,6 +24,7 @@ const AditionalEditDetails = ({
     translate,
     offerDetails,
   } = useOfferEditAdditionalDetails({ handleNext, handleBack });
+
   return (
     <FormCard>
       <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10">

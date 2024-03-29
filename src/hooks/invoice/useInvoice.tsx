@@ -43,6 +43,7 @@ const useInvoice = () => {
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
+    noteType: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
     email: FiltersDefaultValues.None,
     status: FiltersDefaultValues.None,
@@ -205,9 +206,14 @@ const useInvoice = () => {
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
     const searchEmail = query?.email;
+    const searchNoteType = query?.noteType as string;
 
     const queryParams =
-      queryStatus || searchQuery || sortedValue || searchEmail;
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchEmail ||
+      searchNoteType;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -222,15 +228,17 @@ const useInvoice = () => {
         status: string | string[];
         text?: string;
         sort?: string;
+        noteType?: string;
         email?: string | string[];
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery || sortedValue || searchEmail) {
+      if (searchQuery || sortedValue || searchEmail || searchNoteType) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.email = searchEmail;
+        updatedFilter.noteType = searchNoteType;
       }
 
       setFilter(updatedFilter);
