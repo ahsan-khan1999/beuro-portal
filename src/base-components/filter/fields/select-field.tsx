@@ -55,16 +55,28 @@ export default function SelectField({
   };
 
   useEffect(() => {
-    const queryValue = router.query.sort as string;
-    const selectedOption = options.find(
-      (option) => option.value === queryValue
+    const querySort = router.query.sort as string;
+    const queryNoteType = router.query.noteType as string;
+
+    const selectedSortOption = options.find(
+      (option) => option.value === querySort
     );
-    if (selectedOption) {
-      setSelectedLabel(selectedOption.label);
+    const selectedNoteTypeOption = options.find(
+      (option) => option.value === queryNoteType
+    );
+
+    if (selectedSortOption && selectedNoteTypeOption) {
+      setSelectedLabel(
+        `${selectedSortOption.label}, ${selectedNoteTypeOption.label}`
+      );
+    } else if (selectedSortOption) {
+      setSelectedLabel(selectedSortOption.label);
+    } else if (selectedNoteTypeOption) {
+      setSelectedLabel(selectedNoteTypeOption.label);
     } else {
       setSelectedLabel(label || "");
     }
-  }, [router.query.sort, label, options]);
+  }, [router.query.sort, router.query.noteType, label, options]);
 
   return (
     <div className={containerClasses} ref={ref}>

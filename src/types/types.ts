@@ -657,6 +657,7 @@ export interface CheckBoxType {
 export interface FilterType {
   text?: string;
   sort?: string;
+  noteType?: string;
   type?: string;
   location?: string;
   status?: string[] | string;

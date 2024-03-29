@@ -142,6 +142,26 @@ export default function OffersFilters({
     });
   };
 
+  const hanldeNoteType = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          noteType: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["noteType"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   useEffect(() => {
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
@@ -206,7 +226,7 @@ export default function OffersFilters({
               {translate("global_search.notes")}
             </span>
             <SelectField
-              handleChange={() => {}}
+              handleChange={(value) => hanldeNoteType(value)}
               value=""
               dropDownIconClassName=""
               containerClassName="w-[225px]"

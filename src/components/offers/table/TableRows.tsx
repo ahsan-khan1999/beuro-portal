@@ -42,8 +42,6 @@ const TableRows = ({
     `${translate("offer_status.Rejected")}`,
   ];
 
-  console.log(dataToAdd[0]);
-
   return (
     <div
       className={`overflow-y-visible ${

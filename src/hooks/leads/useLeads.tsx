@@ -37,6 +37,7 @@ const useLeads = () => {
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
+    noteType: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
     date: {
       $gte: FiltersDefaultValues.$gte,
@@ -246,9 +247,14 @@ const useLeads = () => {
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
     const searchedDate = query?.date as string;
+    const searchNoteType = query?.noteType as string;
 
     const queryParams =
-      queryStatus || searchQuery || sortedValue || searchedDate;
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchedDate ||
+      searchNoteType;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -263,6 +269,7 @@ const useLeads = () => {
         status: string | string[];
         text?: string;
         sort?: string;
+        noteType?: string;
         date?: {
           $gte?: string;
           $lte?: string;
@@ -271,9 +278,10 @@ const useLeads = () => {
         status: filteredStatus,
       };
 
-      if (searchQuery || sortedValue || searchedDate) {
+      if (searchQuery || sortedValue || searchedDate || searchNoteType) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
+        updatedFilter.noteType = searchNoteType;
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
 
