@@ -33,6 +33,7 @@ import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 import { updateQuery } from "@/utils/update-query";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -240,7 +241,7 @@ export default function useOfferDetails() {
     ),
 
     [ModalType.EDIT_NOTE]: (
-      <AddNewNote
+      <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
         heading={translate("common.update_note")}
