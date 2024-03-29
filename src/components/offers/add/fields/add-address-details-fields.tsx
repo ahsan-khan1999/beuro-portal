@@ -31,65 +31,71 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
     let valueIndex = i;
     formField.push(
       {
-        containerClass: "mb-0 relative -top-1 right-0 float-right",
-        field: {
-          type: Field.button,
-          id: "button",
-          text: `${translate("common.remove_button")}`,
-          inputType: "button",
-          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none mt-1 ${
-            i === 0 && "hidden"
-          }`,
-          onClick: () => handleRemoveAddress && handleRemoveAddress(i),
-        },
-      },
-      {
-        containerClass: "mt-2",
+        containerClass: "my-2",
         field: {
           type: Field.div,
-          className: "flex  space-x-2",
-          id: `address-labels-${i}`,
+          id: `div-field`,
+          className: "flex justify-between items-center",
           children: [
-            (!(addressType && !addressType[i]) && {
-              containerClass: "",
-
+            {
               field: {
-                type: Field.input,
-                className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
-                inputType: "text",
-                id: `address.${i}.label`,
-                name: `address.${i}.label`,
-                register,
-                value: `Adresse ${++valueIndex}`,
-                setValue,
-              },
-            }) || {
-              containerClass: "",
-
-              field: {
-                type: Field.input,
-                inputType: "text",
-                id: `address.${i}.label`,
-                name: `address.${i}.label`,
-                register,
-                value: `Adresse ${++valueIndex}`,
-                disabled: true,
-                className:
-                  "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
-                setValue,
+                type: Field.div,
+                className: "flex space-x-2",
+                id: `address-labels-${i}`,
+                children: [
+                  (!(addressType && !addressType[i]) && {
+                    field: {
+                      type: Field.input,
+                      className:
+                        "!px-2 !border-[#BFBFBF] focus:!border-primary",
+                      inputType: "text",
+                      id: `address.${i}.label`,
+                      name: `address.${i}.label`,
+                      register,
+                      value: `Adresse ${++valueIndex}`,
+                      setValue,
+                    },
+                  }) || {
+                    field: {
+                      type: Field.input,
+                      inputType: "text",
+                      id: `address.${i}.label`,
+                      name: `address.${i}.label`,
+                      register,
+                      value: `Adresse ${++valueIndex}`,
+                      disabled: true,
+                      className:
+                        "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
+                      setValue,
+                    },
+                  },
+                  {
+                    containerClass: "",
+                    field: {
+                      type: Field.button,
+                      className: "bg-white hover:bg-white",
+                      id: `address.${i}.type`,
+                      name: `address.${i}.type`,
+                      inputType: "button",
+                      icon: editIcon,
+                      onClick: () =>
+                        handleFieldTypeChange && handleFieldTypeChange(i),
+                    },
+                  },
+                ],
               },
             },
             {
-              containerClass: "",
+              containerClass: "mb-0",
               field: {
                 type: Field.button,
-                className: "bg-white hover:bg-white",
-                id: `address.${i}.type`,
-                name: `address.${i}.type`,
+                id: "button",
+                text: `${translate("common.remove_button")}`,
                 inputType: "button",
-                icon: editIcon,
-                onClick: () =>
-                  handleFieldTypeChange && handleFieldTypeChange(i),
+                className: `rounded-md px-[6px] py-1 bg-transparent !h-[30px] text-dark-red text-base font-semibold border-2 rounded-[6px] border-[#C31313] hover-bg-none mt-1 ${
+                  i === 0 && "hidden"
+                }`,
+                onClick: () => handleRemoveAddress && handleRemoveAddress(i),
               },
             },
           ],
@@ -97,19 +103,14 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
       },
 
       {
-        containerClass: "mt-6 ",
-        // label: {
-        //   text: `Address ${i} Details`,
-        //   htmlFor: `address-${i}-details`,
-        //   className: "mb-[10px] text-[#8F8F8F]",
-        // },
         field: {
           type: Field.div,
           id: `div-field-${i}`,
-          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+          className:
+            "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
           children: [
             {
-              containerClass: "mb-0 ",
+              containerClass: "mb-0",
               label: {
                 text: translate("offers.address_details.street_no"),
                 htmlFor: `address.${i}.streetNumber`,
@@ -134,7 +135,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
                 id: `address.${i}.postalCode`,
                 name: `address.${i}.postalCode`,
@@ -150,7 +151,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 className: "mb-[10px]",
               },
               field: {
-                className: "pl-4 !border-[#BFBFBF]  ",
+                className: "pl-4 !border-[#BFBFBF]",
                 type: Field.select,
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
@@ -165,33 +166,53 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
           ],
         },
       },
+
       {
-        containerClass: "mt-6 relative",
+        containerClass: "rounded-b-lg px-2 py-3 bg-[#EDF4FF]",
+        label: {
+          text: translate("offers.address_details.description"),
+          htmlFor: `address.${i}.description`,
+          className: "mb-[10px]",
+        },
         field: {
-          type: Field.div,
-          id: "div-field",
-          className: "grid grid-cols-1 relative w-full space-x-[18px] ",
-          children: [
-            {
-              containerClass: "mt-5 mb-0 pb-10 border-b-2 border-lightGray",
-              label: {
-                text: translate("offers.address_details.description"),
-                htmlFor: `address.${i}.description`,
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.textArea,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-                rows: 2,
-                id: `address.${i}.description`,
-                name: `address.${i}.description`,
-                placeholder: "",
-                register,
-              },
-            },
-          ],
+          type: Field.textArea,
+          className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+          rows: 2,
+          id: `address.${i}.description`,
+          name: `address.${i}.description`,
+          placeholder: "",
+          register,
         },
       }
+
+      // {
+      //   containerClass:
+      //     "mt-6 relative rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
+      //   field: {
+      //     type: Field.div,
+      //     id: "div-field",
+      //     className: "grid grid-cols-1 relative w-full space-x-[18px]",
+      //     children: [
+      //       {
+      //         containerClass: "mt-5",
+      //         label: {
+      //           text: translate("offers.address_details.description"),
+      //           htmlFor: `address.${i}.description`,
+      //           className: "mb-[10px]",
+      //         },
+      //         field: {
+      //           type: Field.textArea,
+      //           className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+      //           rows: 2,
+      //           id: `address.${i}.description`,
+      //           name: `address.${i}.description`,
+      //           placeholder: "",
+      //           register,
+      //         },
+      //       },
+      //     ],
+      //   },
+      // }
     );
   }
 

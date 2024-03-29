@@ -33,7 +33,7 @@ const ServiceAddDetails = ({
 
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 ">
+      <div className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("offers.service_details.main_heading")}{" "}
           {offerDetails?.id && offerDetails?.offerNumber}
@@ -45,7 +45,7 @@ const ServiceAddDetails = ({
           {translate("offers.service_details.cancel_button")}
         </button>
       </div>
-      <hr className="opacity-20 mb-5" />
+
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

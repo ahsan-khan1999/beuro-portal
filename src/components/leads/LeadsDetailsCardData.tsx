@@ -147,9 +147,7 @@ const LeadsDetailsCardData = ({
             dropDownClassName={`border border-[${getStatusColor(
               leadDetails?.leadStatus
             )}] w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
-            dropDownTextClassName={`text-[${getStatusColor(
-              leadDetails?.leadStatus
-            )}] text-base font-medium me-1`}
+            dropDownTextClassName={`text-[#FF376F] text-base font-medium me-1`}
             dropDownItemsContainerClassName="w-full"
           />
         </div>

@@ -916,7 +916,7 @@
     },
     "lead_dropdown_status": {
       "Open": "Offen",
-      "InProcess": "editieren",
+      "InProcess": "In Bearbeitung",
       "Close": "Geschlossen",
       "Expired": "Abgelaufen"
     },
@@ -1096,6 +1096,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "service": "Dienst",
     "offer_created": "Angebote erfolgreich erstellt",
     "user_rule": "Unternehmen",
     "invoice_total": "Insgesamt",

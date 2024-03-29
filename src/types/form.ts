@@ -182,6 +182,7 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   value?: string;
   containerClassName?: string;
   textClassName?: string;
+  colorClasses?: string;
   checked?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
   disabled?: boolean;

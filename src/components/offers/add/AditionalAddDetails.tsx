@@ -14,7 +14,7 @@ const AditionalAddDetails = ({
   onHandleBack: (currentComponent: ComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "pt-5";
+  const defaultClassName = "";
   const {
     fields,
     control,

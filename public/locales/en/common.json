@@ -1104,6 +1104,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "service": "Service",
     "offer_created": "Offer Created Successfully",
     "user_rule": "Company",
     "invoice_total": "Total",
