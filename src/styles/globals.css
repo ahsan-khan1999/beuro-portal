@@ -636,4 +636,12 @@ input[type="number"] {
   cursor: pointer;
 }
 
+input[type="date"] {
+  font-size: 10px;
+}
 
+@media (max-width: 1460px) {
+  input[type="date"] {
+    font-size: 14px;
+  }
+}

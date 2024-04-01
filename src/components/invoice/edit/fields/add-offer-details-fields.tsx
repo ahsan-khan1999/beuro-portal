@@ -3,22 +3,17 @@ import {
   DivProps,
   FormField,
   GenerateInvoiceCustomerFormField,
-  GenerateLeadsCustomerFormField,
   GenerateOfferDateFormField,
   GenerateOffersFormField,
 } from "@/types";
-import icon from "@/assets/svgs/Vector.svg";
 import {
   Control,
-  FieldValue,
   FieldValues,
   UseFieldArrayAppend,
   UseFieldArrayRemove,
   UseFormRegister,
-  UseFormWatch,
 } from "react-hook-form";
 import { staticEnums } from "@/utils/static";
-import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
 export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
@@ -46,11 +41,12 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
 
   let formField: FormField[] = [
     {
-      containerClass: "mt-6",
+      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             label: {
@@ -73,6 +69,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
                     name: "type",
                     register,
                     checked: type === "New Customer",
+                    colorClasses: "bg-transparent",
                   },
                 },
                 {
@@ -85,6 +82,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
                     name: "type",
                     register,
                     checked: type === "Existing Customer",
+                    colorClasses: "bg-transparent",
                   },
                 },
               ],
@@ -97,7 +95,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: `pl-4 !border-[#BFBFBF]  focus:!border-primary `,
+              className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -111,10 +109,12 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
 
               control,
               value:
-                (invoiceDetails && getKeyByValue(
-                  staticEnums["CustomerType"],
-                  invoiceDetails?.customerDetail?.customerType
-                )) || customerType,
+                (invoiceDetails &&
+                  getKeyByValue(
+                    staticEnums["CustomerType"],
+                    invoiceDetails?.customerDetail?.customerType
+                  )) ||
+                customerType,
             },
           },
           {
@@ -146,7 +146,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "fullName",
               name: "fullName",
@@ -188,14 +188,14 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
-              inputType:"tel",
+              inputType: "tel",
               register,
               value:
                 type === "New Customer"
                   ? ""
                   : invoiceDetails?.id
-                    ? invoiceDetails?.customerDetail?.phoneNumber
-                    : customerDetails && customerDetails?.phoneNumber,
+                  ? invoiceDetails?.customerDetail?.phoneNumber
+                  : customerDetails && customerDetails?.phoneNumber,
             },
           },
           {
@@ -207,7 +207,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"tel",
+              inputType: "tel",
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
@@ -216,19 +216,19 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
                 type === "New Customer"
                   ? ""
                   : invoiceDetails?.id
-                    ? invoiceDetails?.customerDetail?.mobileNumber
-                    : customerDetails && customerDetails?.mobileNumber,
+                  ? invoiceDetails?.customerDetail?.mobileNumber
+                  : customerDetails && customerDetails?.mobileNumber,
             },
           },
         ],
       },
     },
     {
-      containerClass: "mt-5",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2  xl:grid-cols-3 gap-x-3 gap-y-5 ",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0 col-span-1",
@@ -238,7 +238,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "content",
               name: "content",
@@ -263,7 +263,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "title",
               name: "title",
@@ -279,13 +279,14 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
       label: {
         text: `${translate("offers.offer_details.customer_address")}`,
         htmlFor: "name",
-        className: "mb-[10px] text-[#8F8F8F]",
+        className: "mb-[10px] text-[#1E1E1E] text-base font-semibold",
       },
 
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -304,7 +305,8 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               placeholder: `${translate("offers.placeholders.street")}`,
               register,
               value:
-                invoiceDetails && invoiceDetails?.customerDetail?.address?.streetNumber,
+                invoiceDetails &&
+                invoiceDetails?.customerDetail?.address?.streetNumber,
             },
           },
 
@@ -326,7 +328,8 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
 
               register,
               value:
-                invoiceDetails && invoiceDetails?.customerDetail?.address?.postalCode,
+                invoiceDetails &&
+                invoiceDetails?.customerDetail?.address?.postalCode,
             },
           },
           {
@@ -348,7 +351,8 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               })),
               control,
               value:
-                (invoiceDetails && invoiceDetails?.customerDetail?.address?.country) ||
+                (invoiceDetails &&
+                  invoiceDetails?.customerDetail?.address?.country) ||
                 Object.keys(staticEnums.Country)[0],
             },
           },

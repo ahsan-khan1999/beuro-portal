@@ -10,28 +10,16 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
   AddDateFormField,
-  AddOfferDetailsFormField,
   AddOfferDetailsSubmitFormField,
 } from "@/components/offers/add/fields/add-offer-details-fields";
-import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   setCustomerDetails,
   setCustomers,
 } from "@/api/slices/customer/customerSlice";
-import { updateQuery } from "@/utils/update-query";
-import { readLead, setLeads } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
-import {
-  createOffer,
-  readOfferDetails,
-  setOfferDetails,
-} from "@/api/slices/offer/offerSlice";
-import {
-  CustomerPromiseActionType,
-  OfferPromiseActionType,
-} from "@/types/customer";
+
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -42,10 +30,7 @@ import {
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
 import { AddInvoiceDetailsFormField } from "@/components/invoice/edit/fields/add-offer-details-fields";
-import {
-  InvoiceDetailTableRowTypes,
-  InvoiceTableRowTypes,
-} from "@/types/invoice";
+import { InvoiceDetailTableRowTypes } from "@/types/invoice";
 
 export const useEditInvoiceDetails = ({
   handleNext,
@@ -60,17 +45,19 @@ export const useEditInvoiceDetails = ({
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
-  const { content } = useAppSelector((state) => state.content);
 
+  const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
 
   const onCancel = () => {
     router.back();
     // updateQuery(router, router.locale as string);
   };
+
   const schema = generateInvoiceDetailsValidationSchema(translate);
   const {
     register,
@@ -84,6 +71,7 @@ export const useEditInvoiceDetails = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     if (invoice) {
       dispatch(readInvoiceDetails({ params: { filter: invoice } })).then(
@@ -115,8 +103,8 @@ export const useEditInvoiceDetails = ({
       );
     }
   }, [invoice]);
-  const type = watch("type");
 
+  const type = watch("type");
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
@@ -187,6 +175,7 @@ export const useEditInvoiceDetails = ({
     control,
     name: "date",
   });
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
@@ -211,7 +200,9 @@ export const useEditInvoiceDetails = ({
     if (filteredContent)
       setValue("title", filteredContent?.invoiceContent?.title);
   }, [selectedContent]);
+
   const handleContentSelect = () => {};
+
   const offerFields = AddInvoiceDetailsFormField(
     register,
     loading,

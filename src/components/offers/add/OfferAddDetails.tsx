@@ -18,7 +18,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
     translate,
     offerDetails,
   } = useAddOfferDetails(onHandleNext);
-
+  
   const handleCancel = () => {
     router.pathname = "/offers";
     router.query = { status: "None", page: "1" };

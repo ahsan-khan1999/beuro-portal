@@ -22,9 +22,7 @@ import { staticEnums } from "@/utils/static";
 import {
   AddOfferDetailsServiceSubmitFormField,
   AddOfferServiceDetailsDescriptionFormField,
-  AddOfferServiceDetailsFormField,
 } from "@/components/offers/add/fields/add-offer-service-details-fields";
-import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
@@ -45,12 +43,12 @@ export const useServiceInvoiceEditDetail = ({
     taxAmount: 0,
   });
 
-  const { systemSettings } = useAppSelector((state) => state.settings);
-
   const dispatch = useAppDispatch();
+  const { systemSettings } = useAppSelector((state) => state.settings);
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
   const [serviceType, setServiceType] = useState<ServiceType[]>(
     invoiceDetails?.serviceDetail?.serviceDetail?.map((item) =>
       item.serviceType === "New Service"
@@ -58,6 +56,7 @@ export const useServiceInvoiceEditDetail = ({
         : ServiceType.EXISTING_SERVICE
     ) || [ServiceType.EXISTING_SERVICE]
   );
+
   const { service, serviceDetails } = useAppSelector((state) => state.service);
   const { tax } = useAppSelector((state) => state.settings);
 
