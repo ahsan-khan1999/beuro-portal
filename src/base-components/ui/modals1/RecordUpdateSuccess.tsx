@@ -43,7 +43,7 @@ const RecordUpdateSuccess = ({
               loading={loading}
               onClick={confirmHandler}
               text={translate("leads.confirm_lead_modal.confirm_button")}
-              className="bg-[#4A13E7] cursor-pointer px-5 min-w-[150px] w-fit rounded-lg  text-white text-base font-medium"
+              className="bg-[#4A13E7] cursor-pointer px-5 min-w-[150px] w-fit rounded-lg text-white text-base font-medium"
             />
           </div>
         </div>

@@ -22,8 +22,8 @@ const TableRows = ({
   handleImageUpload,
   onStatusChange,
 }: LeadTableProps) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const itemsValue = [
     `${translate("leads.lead_dropdown_status.Open")}`,
@@ -52,7 +52,7 @@ const TableRows = ({
               });
             }}
             key={index}
-            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(170px,_170px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(50px,_3fr)_minmax(80px,_80px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(50px,_3fr)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(50px,_100%)_minmax(60px,_60px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(40px,_100%)_minmax(70px,_70px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(70px,4fr)_minmax(70px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="cursor-pointer items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(170px,_170px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(50px,_3fr)_minmax(80px,_80px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(50px,_3fr)_minmax(90px,_90px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(50px,_100%)_minmax(60px,_60px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(40px,_100%)_minmax(70px,_70px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(70px,4fr)_minmax(70px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item?.refID}</span>
             <span className="py-4 truncate">
@@ -67,7 +67,7 @@ const TableRows = ({
             <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
               {formatDate(item.createdAt)}
             </span>
-            <span className="py-4 truncate">
+            <span className="py-4 truncate xlg:hidden maxSize:block">
               {translate(`countries.${item.customerDetail?.address?.country}`)}
             </span>
             {/* <span className={`py-4 flex items-center`}>

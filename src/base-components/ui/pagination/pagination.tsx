@@ -24,7 +24,7 @@ export const Pagination = React.memo(
     } = usePagination({ totalItems, itemsPerPage, onPageChange, currentPage });
 
     const combineContainerClass = combineClasses(
-      "flex justify-end gap-x-2",
+      "flex justify-end gap-x-2 mt-6",
       containerClassName
     );
 
