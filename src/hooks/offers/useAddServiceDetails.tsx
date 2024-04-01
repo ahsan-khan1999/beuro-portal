@@ -40,12 +40,13 @@ export const useAddServiceDetails = (
     grandTotal: 0,
     taxAmount: 0,
   });
-  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const dispatch = useAppDispatch();
+  const { systemSettings } = useAppSelector((state) => state.settings);
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
   const [serviceType, setServiceType] = useState<ServiceType[]>(
     offerDetails?.serviceDetail?.serviceDetail?.map((item) =>
       item.serviceType === "New Service"

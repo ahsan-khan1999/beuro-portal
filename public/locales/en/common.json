@@ -181,12 +181,11 @@
     "oauth_account_in_use": "Account already in use",
     "user_profile_commercial_seller_request_already_filed": "User profile commercial seller application already submitted",
     "value_max": "value_max",
-
     "mail_sent_maybe": "Email Sent",
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "You are running out of your plan!",
     "mixed": {
-      "required": "This is required field ",
+      "required": "This is required field",
       "oneOf": "Password must match ",
       "notOneOf": "Passwort muss different"
     },
@@ -199,7 +198,8 @@
     },
     "user_profile_already_complete": "User Profile is already completed",
     "offer_not_open": "This offer is already closed or signed",
-    "discountLessThanTotalPrice": "must be less than total price"
+    "discountLessThanTotalPrice": "must be less than total price",
+    "offer_already_signed": "This offer has already been signed."
   },
   "sidebar": {
     "customer": {
@@ -2040,7 +2040,8 @@
     "Sent": "Sent",
     "Confirmed": "Confirmed",
     "Cancelled": "Cancelled",
-    "Pending": "Pending"
+    "Pending": "Pending",
+    "Post": "Post"
   },
   "invoice_status": {
     "Pending": "Pending",

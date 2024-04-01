@@ -74,7 +74,7 @@ export const ServiceTableRow = ({
             <Text style={styles.headerText}>{discount || "-"}</Text>
           )}
 
-          <Text style={styles.headerText}>{totalPrice}</Text>
+          <Text style={styles.headerText}>{totalPrice?.toFixed(2)}</Text>
         </View>
       </View>
     </View>

@@ -369,6 +369,7 @@ export const useServiceOfferEditDetail = ({
     serviceFields,
     setValue
   );
+
   const submitFields = AddOfferDetailsServiceSubmitFormField(
     loading,
     handleBack
