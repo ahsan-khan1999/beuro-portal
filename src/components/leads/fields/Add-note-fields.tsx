@@ -22,13 +22,9 @@ export const AddNoteFormField: GenerateNotesFormField = (
         className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
         type: Field.select,
         id: "noteType",
-        value: "",
+        value: "Sending pictures",
         name: "noteType",
         options: [
-          // {
-          //   value: "All Notes",
-          //   label: `${translate("add_note_dropdown.all_notes")}`,
-          // },
           {
             value: "Sending pictures",
             label: `${translate("add_note_dropdown.sending_picture")}`,
@@ -50,6 +46,7 @@ export const AddNoteFormField: GenerateNotesFormField = (
             label: `${translate("add_note_dropdown.individual_note")}`,
           },
         ],
+
         control,
       },
     },

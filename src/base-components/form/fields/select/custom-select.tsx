@@ -5,7 +5,7 @@ import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
@@ -26,6 +26,8 @@ export const SelectBox = ({
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
+
+  console.log(defaultValue);
 
   useEffect(() => {
     // setOption(options);
@@ -65,14 +67,14 @@ export const SelectBox = ({
   const classes = combineClasses(defaultClasses, className);
   const { t: translate } = useTranslation();
   return (
-    <div id={id} ref={selectBoxRef} className="relative focus:border-primary  ">
+    <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
         // placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className={`${classes} `}
+        className={`${classes}`}
       >
         {(field && getLabelByValue(field.value, option)) ||
           getLabelByValue(defaultValue, option)}
