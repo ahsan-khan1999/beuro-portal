@@ -5,7 +5,6 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { LinkUploadProps } from "@/types";
 import { validateUrl } from "@/utils/utility";
 import { useState } from "react";
-import error from "@/assets/pngs/error.png";
 import Link from "next/link";
 
 export const LinkUpload = ({
@@ -21,6 +20,7 @@ export const LinkUpload = ({
     setEnteredLink(event.target.value);
     setValidation(validateUrl(event.target.value, translate));
   };
+
   function test() {
     console.error("invalid url");
   }

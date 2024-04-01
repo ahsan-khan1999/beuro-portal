@@ -25,10 +25,10 @@ export const AddNoteFormField: GenerateNotesFormField = (
         value: "",
         name: "noteType",
         options: [
-          {
-            value: "All Notes",
-            label: `${translate("add_note_dropdown.all_notes")}`,
-          },
+          // {
+          //   value: "All Notes",
+          //   label: `${translate("add_note_dropdown.all_notes")}`,
+          // },
           {
             value: "Sending pictures",
             label: `${translate("add_note_dropdown.sending_picture")}`,

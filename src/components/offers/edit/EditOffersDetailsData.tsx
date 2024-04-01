@@ -94,15 +94,22 @@ const EditOffersDetailsData = ({
   const handleNextTab = (currentComponent: EditComponentsType) => {
     if (tabType === EditComponentsType.additionalEdit) {
       router.push(
-        `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
+        {
+          pathname: `/offers/pdf-preview`,
+          query: { status: "None", offerID: offerDetails?.id, isMail: true },
+        }
+
+        // `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
       );
       return;
     }
     setTabType(currentComponent);
   };
+
   const handlePreviousTab = (currentComponent: EditComponentsType) => {
     setTabType(currentComponent);
   };
+
   const componentsLookUp = {
     [EditComponentsType.offerEdit]: (
       <OfferEditDetails handleNext={handleNextTab} />
@@ -123,7 +130,7 @@ const EditOffersDetailsData = ({
 
   return (
     <>
-      <div className="xLarge:fixed mb-5">
+      <div className="xLarge:fixed mb-5 mt-[40px]">
         <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full mb-5">
           {tabSection.map((item, index) => (
             <OfferTabs
@@ -149,7 +156,9 @@ const EditOffersDetailsData = ({
 
       <div className="w-full break-all flex">
         <div className="max-w-[330px] w-full hidden xLarge:block"></div>
-        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        <div className="w-full xLarge:max-w-[861px] my-[40px]">
+          {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        </div>
       </div>
     </>
   );

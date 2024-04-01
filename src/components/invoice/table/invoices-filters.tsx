@@ -233,10 +233,10 @@ export default function InvoicesFilters({
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
             options={[
-              {
-                value: "All Notes",
-                label: `${translate("add_note_dropdown.all_notes")}`,
-              },
+              // {
+              //   value: "All Notes",
+              //   label: `${translate("add_note_dropdown.all_notes")}`,
+              // },
               {
                 value: "Sending pictures",
                 label: `${translate("add_note_dropdown.sending_picture")}`,

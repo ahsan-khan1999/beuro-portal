@@ -1,10 +1,8 @@
-import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
-import { useRouter } from "next/router";
 import React from "react";
+import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { ComponentsType } from "./LeadsDetailsData";
 import { useAppSelector } from "@/hooks/useRedux";
-import { Service } from "@/types/service";
-import { filterLead, formatDateTimeToDate } from "@/utils/utility";
+import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { ContentTableRowTypes } from "@/types/content";
 
@@ -14,12 +12,8 @@ const ServiceDetailsData = ({
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
   const { leadDetails } = useAppSelector((state) => state.lead);
-  const { service } = useAppSelector((state) => state.service);
-
   const content = leadDetails?.requiredService as ContentTableRowTypes;
   const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
-
-  const router = useRouter();
   const { t: translate } = useTranslation();
 
   return (
@@ -138,7 +132,7 @@ const ServiceDetailsData = ({
               {translate("leads.service_details.lead_source")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
-              {translate(`common.lead_source.${leadDetails?.leadSource}`)}
+              {leadDetails?.leadSource}
             </div>
           </div>
           <div className="xl:col-span-2">

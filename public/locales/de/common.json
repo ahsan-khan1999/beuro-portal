@@ -183,7 +183,7 @@
     "mail_sent_maybe": "E-Mail Gesendet",
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "Ihr Plan läuft aus!",
-
+    "offer_already_signed": "Dieses Angebot ist bereits unterzeichnet.",
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",
@@ -2034,7 +2034,8 @@
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgebrochen",
     "Sent": "Gesendet",
-    "Pending": "Entwurf"
+    "Pending": "Entwurf",
+    "Post": "Gesendet"
   },
   "invoice_status": {
     "Pending": "Ausstehend",
