@@ -1,5 +1,5 @@
-import { Lead } from "@/types/leads";
 import React from "react";
+import { Lead } from "@/types/leads";
 import { useRouter } from "next/router";
 import { formatDate, getStatusColor } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
@@ -67,7 +67,7 @@ const TableRows = ({
             <span className="py-4 flex items-center">
               {formatDate(item.createdAt)}
             </span>
-            <span className="py-4 truncate">
+            <span className="py-4 truncate mlg:hidden xMaxSize:block">
               {item.customerDetail?.address?.country}
             </span>
             {/* <span className={`py-4 flex items-center`}>
