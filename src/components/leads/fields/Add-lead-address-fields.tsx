@@ -1,11 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateLeadAddressFormField,
-  GenerateLeadsFormField,
-} from "@/types";
-import { ComponentsType } from "../add/AddNewLeadsData";
-import { staticEnums } from "@/utils/static";
+import { FormField, GenerateLeadAddressFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import editIcon from "@/assets/svgs/edit_primary.svg";
 import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
@@ -182,17 +176,25 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 htmlFor: `address.${i}.country`,
                 className: "mb-[10px]",
               },
+              // field: {
+              //   className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
+              //   type: Field.select,
+              //   id: `address.${i}.country`,
+              //   name: `address.${i}.country`,
+              //   options: Object.keys(staticEnums.Country).map((item) => ({
+              //     value: item,
+              //     label: translate(`countries.${item}`),
+              //   })),
+              //   control,
+              //   value: Object.keys(staticEnums.Country)[0],
+              // },
               field: {
-                className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
-                type: Field.select,
+                type: Field.input,
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+                inputType: "text",
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
-                options: Object.keys(staticEnums.Country).map((item) => ({
-                  value: item,
-                  label: translate(`countries.${item}`),
-                })),
-                control,
-                value: Object.keys(staticEnums.Country)[0],
+                register,
               },
             },
           ],

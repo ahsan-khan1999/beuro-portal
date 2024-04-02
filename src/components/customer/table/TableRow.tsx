@@ -31,7 +31,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 flex items-center truncate">
-              {translate(`countries.${item?.address?.country}`)}
+              {item?.address?.country}
             </span>
             <span className="py-4 flex items-center">
               {translate(`customer_type.${item.customerType}`)}

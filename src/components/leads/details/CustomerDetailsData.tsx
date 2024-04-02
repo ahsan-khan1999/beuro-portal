@@ -1,8 +1,6 @@
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import React from "react";
 import { ComponentsType } from "./LeadsDetailsData";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
-import Image from "next/image";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
@@ -161,10 +159,8 @@ const customerDetailData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.customer_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-                {translate(
-                  `countries.${leadDetails?.customerDetail?.address?.country}`
-                )}
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
+                {leadDetails?.customerDetail?.address?.country}
               </div>
             </div>
           </div>

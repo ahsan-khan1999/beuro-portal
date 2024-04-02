@@ -1022,7 +1022,7 @@
       "cancel_button": "Cancel",
       "back_button": "Back",
       "save_button": "Save"
-    },
+    },  
     "confirm_lead_modal": {
       "main_heading": "Please confirm Lead ID",
       "sub_heading": "Enter Lead ID",

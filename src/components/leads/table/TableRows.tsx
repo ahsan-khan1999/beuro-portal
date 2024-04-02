@@ -67,8 +67,8 @@ const TableRows = ({
             <span className="py-4 flex items-center">
               {formatDate(item.createdAt)}
             </span>
-            <span className="py-4 truncate mlg:hidden xMaxSize:block">
-              {translate(`countries.${item.customerDetail?.address?.country}`)}
+            <span className="py-4 truncate">
+              {item.customerDetail?.address?.country}
             </span>
             {/* <span className={`py-4 flex items-center`}>
               <div

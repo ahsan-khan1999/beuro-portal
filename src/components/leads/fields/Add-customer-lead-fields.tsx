@@ -119,7 +119,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
               control,
               value:
-                (leadDetails?.id && staticEnums["Gender"][leadDetails?.customerDetail?.gender]) ||
+                (leadDetails?.id &&
+                  staticEnums["Gender"][leadDetails?.customerDetail?.gender]) ||
                 gender,
             },
           },
@@ -190,7 +191,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"tel",
+              inputType: "tel",
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
@@ -267,21 +268,30 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
+            // field: {
+            //   className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
+            //   type: Field.select,
+            //   id: "address.country",
+            //   name: "address.country",
+            //   options: Object.keys(staticEnums.Country).map((item) => ({
+            //     value: item,
+            //     label: translate(`countries.${item}`),
+            //   })),
+
+            //   control,
+            //   value:
+            //     (leadDetails &&
+            //       leadDetails?.customerDetail?.address?.country) ||
+            //     Object.keys(staticEnums.Country)[0],
+            // },
+
             field: {
-              className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
-              type: Field.select,
+              type: Field.input,
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+              inputType: "text",
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => ({
-                value: item,
-                label: translate(`countries.${item}`),
-              })),
-
-              control,
-              value:
-                (leadDetails &&
-                  leadDetails?.customerDetail?.address?.country) ||
-                Object.keys(staticEnums.Country)[0],
+              register,
             },
           },
         ],

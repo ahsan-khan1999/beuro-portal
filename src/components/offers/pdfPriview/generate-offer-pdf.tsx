@@ -98,6 +98,7 @@ const OfferPdfDownload = ({
       ? true
       : false || false;
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
+  console.log(address);
 
   return (
     <div className="download-link">
