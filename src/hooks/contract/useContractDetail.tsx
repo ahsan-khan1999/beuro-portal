@@ -25,6 +25,7 @@ import localStoreUtil from "@/utils/localstore.util";
 import { EditDate } from "@/base-components/ui/modals1/editDate";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
@@ -197,7 +198,7 @@ export default function useContractDetail() {
       />
     ),
     [ModalType.EDIT_NOTE]: (
-      <AddNewNote
+      <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
         heading={translate("common.update_note")}

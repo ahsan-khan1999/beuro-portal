@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getFileNameFromUrl } from "@/utils/utility";
 import { createImage } from "@/api/slices/imageSlice/image";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -167,10 +167,28 @@ export const useUploadImage = (handleImageSlider: Function) => {
     const response = await dispatch(
       createImage({ data: apiData, router, translate })
     );
-    
+
     if (response?.payload) handleImageSlider();
     // else handleOnClose();
   };
+
+  useEffect(() => {
+    if (enteredLinks) {
+      const { images, links, attachements, video } = enteredLinks;
+
+      if (images && images.length > 0) {
+        setActiveTab("img_tab");
+      } else if (video && video.length > 0) {
+        setActiveTab("video_tab");
+      } else if (attachements && attachements.length > 0) {
+        setActiveTab("attachement_tab");
+      } else if (links && links.length > 0) {
+        setActiveTab("link_tab");
+      } else {
+        setActiveTab(attachementTabs[0]);
+      }
+    }
+  }, [enteredLinks]);
 
   return {
     // fields,

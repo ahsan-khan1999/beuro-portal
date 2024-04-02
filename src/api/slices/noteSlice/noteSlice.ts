@@ -4,6 +4,7 @@ import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 interface Note {
   description: string;
+  noteType: string;
   createdBy: User;
   refID: string;
   id: string;
@@ -31,6 +32,7 @@ export const readNotes: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.readNotes(params);
+
       return response?.data?.data;
       return true;
     } catch (e: any) {
@@ -52,7 +54,8 @@ export const createNote: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
-  export const updateNote: AsyncThunk<boolean, object, object> | any =
+
+export const updateNote: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("note/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
 
@@ -65,6 +68,7 @@ export const createNote: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const deleteNotes: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("note/delete", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -109,7 +113,6 @@ const NoteSlice = createSlice({
     builder.addCase(createNote.rejected, (state) => {
       state.loading = false;
     });
-
 
     builder.addCase(deleteNotes.pending, (state) => {
       state.loading = true;

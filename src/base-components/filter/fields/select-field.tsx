@@ -18,11 +18,17 @@ export default function SelectField({
   dropDownIconClassName,
   containerClassName,
   isSearch,
+  labelClassName,
 }: OptionsFieldProps) {
   const defaultClasses = `flex items-center`;
   const containerClasses = combineClasses(
-    "relative flex items-center justify-center min-w-[120px] w-fit",
+    "relative flex items-center justify-center w-[120px]",
     containerClassName
+  );
+
+  const labelDefualtClasses = combineClasses(
+    "text-dark text-sm font-normal w-fit",
+    labelClassName
   );
 
   const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
@@ -49,16 +55,28 @@ export default function SelectField({
   };
 
   useEffect(() => {
-    const queryValue = router.query.sort as string;
-    const selectedOption = options.find(
-      (option) => option.value === queryValue
+    const querySort = router.query.sort as string;
+    const queryNoteType = router.query.noteType as string;
+
+    const selectedSortOption = options.find(
+      (option) => option.value === querySort
     );
-    if (selectedOption) {
-      setSelectedLabel(selectedOption.label);
+    const selectedNoteTypeOption = options.find(
+      (option) => option.value === queryNoteType
+    );
+
+    if (selectedSortOption && selectedNoteTypeOption) {
+      setSelectedLabel(
+        `${selectedSortOption.label}, ${selectedNoteTypeOption.label}`
+      );
+    } else if (selectedSortOption) {
+      setSelectedLabel(selectedSortOption.label);
+    } else if (selectedNoteTypeOption) {
+      setSelectedLabel(selectedNoteTypeOption.label);
     } else {
       setSelectedLabel(label || "");
     }
-  }, [router.query.sort, label, options]);
+  }, [router.query.sort, router.query.noteType, label, options]);
 
   return (
     <div className={containerClasses} ref={ref}>
@@ -66,7 +84,7 @@ export default function SelectField({
         className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg min-w-[105px] w-fit"
         onClick={handleToggle}
       >
-        <span className="text-dark text-sm font-normal">{selectedLabel}</span>
+        <span className={labelDefualtClasses}>{selectedLabel}</span>
         <DropDownNonFillIcon
           label={label}
           isOpen={isOpen}
@@ -77,7 +95,7 @@ export default function SelectField({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="bg-white flex-col absolute top-[36px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2 shadow-lg"
+            className="bg-white flex-col absolute top-[40px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2 shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

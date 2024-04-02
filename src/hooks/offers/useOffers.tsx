@@ -32,6 +32,7 @@ import { useTranslation } from "next-i18next";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 const useOffers = () => {
   const { lastPage, offer, loading, isLoading, totalCount, offerDetails } =
@@ -51,6 +52,7 @@ const useOffers = () => {
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,
     sort: FiltersDefaultValues.None,
+    noteType: FiltersDefaultValues.None,
     date: {
       $gte: FiltersDefaultValues.$gte,
       $lte: FiltersDefaultValues.$lte,
@@ -202,7 +204,7 @@ const useOffers = () => {
       />
     ),
     [ModalType.EDIT_NOTE]: (
-      <AddNewNote
+      <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
@@ -291,13 +293,15 @@ const useOffers = () => {
     const sortedValue = query?.sort as string;
     const searchDate = query?.date as string;
     const searchLeadSource = query?.leadSource;
+    const searchNoteType = query?.noteType as string;
 
     const queryParams =
       queryStatus ||
       searchQuery ||
       sortedValue ||
       searchDate ||
-      searchLeadSource;
+      searchLeadSource ||
+      searchNoteType;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -312,6 +316,7 @@ const useOffers = () => {
         status: string | string[];
         text?: string;
         sort?: string;
+        noteType?: string;
         date?: {
           $gte?: string;
           $lte?: string;
@@ -319,17 +324,20 @@ const useOffers = () => {
         leadSource?: string | string[];
       } = {
         status: filteredStatus,
-        // date: searchDate as {
-        //   $gte?: string;
-        //   $lte?: string;
-        // },
       };
 
-      if (searchQuery || sortedValue || searchDate || searchLeadSource) {
+      if (
+        searchQuery ||
+        sortedValue ||
+        searchDate ||
+        searchLeadSource ||
+        searchNoteType
+      ) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.date = searchDate && JSON.parse(searchDate);
-        updatedFilter.leadSource = query?.leadSource;
+        updatedFilter.leadSource = searchLeadSource;
+        updatedFilter.noteType = searchNoteType;
       }
 
       setFilter(updatedFilter);

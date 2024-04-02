@@ -34,6 +34,7 @@ import RecurringInvoiceUpdate from "@/base-components/ui/modals1/RecurringInvoic
 import { readContent } from "@/api/slices/content/contentSlice";
 import { updateQuery } from "@/utils/update-query";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
   const [switchDetails, setSwitchDetails] = useState("Invoice");
@@ -250,7 +251,7 @@ export default function useInvoiceDetail() {
     ),
 
     [ModalType.EDIT_NOTE]: (
-      <AddNewNote
+      <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
         heading={translate("common.update_note")}

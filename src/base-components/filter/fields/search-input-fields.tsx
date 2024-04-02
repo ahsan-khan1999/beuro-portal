@@ -139,7 +139,7 @@ export default function SearchInputFiled({
             )}
           </AnimatePresence> */}
         </div>
-        <div className="absolute right-0 border-l border-[#BFBFBF] z-0  ">
+        <div className="absolute right-4 border-l border-[#BFBFBF] z-0 ">
           <SelectField
             handleChange={(value) => console.log(value)}
             value=""

@@ -183,7 +183,7 @@
     "mail_sent_maybe": "E-Mail Gesendet",
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "Ihr Plan läuft aus!",
-
+    "offer_already_signed": "Dieses Angebot ist bereits unterzeichnet.",
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",
@@ -909,10 +909,10 @@
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
     "table_functions": {
-      "open": "Anfragen offen",
+      "open": "offen",
       "inProcess": "In Bearbeitung",
-      "close": "Anfragen geschlossen",
-      "expire": "Anfragen abgelaufen"
+      "close": "geschlossen",
+      "expire": "abgelaufen"
     },
     "lead_dropdown_status": {
       "Open": "Offen",
@@ -1096,6 +1096,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "service": "Dienst",
     "offer_created": "Angebote erfolgreich erstellt",
     "user_rule": "Unternehmen",
     "invoice_total": "Insgesamt",
@@ -1188,7 +1189,7 @@
     "note": "Hinweis",
     "search": "Suchen...",
     "drag_table": "Zum Scrollen in der Tabelle ziehen",
-    "sort_button": "Sortieren nach",
+    "sort_button": "Sortieren",
     "source": "Leadquellen",
     "privacy": "Datenschutzbestimmungen",
     "copy_right": "Urheberrecht 2024",
@@ -2033,7 +2034,8 @@
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgebrochen",
     "Sent": "Gesendet",
-    "Pending": "Entwurf"
+    "Pending": "Entwurf",
+    "Post": "Gesendet"
   },
   "invoice_status": {
     "Pending": "Ausstehend",
@@ -2133,5 +2135,13 @@
       "Inadequate Equipment": "Unzureichende Ausrüstung",
       "Other": "Andere"
     }
+  },
+  "add_note_dropdown": {
+    "all_notes": "Alle Notizen",
+    "sending_picture": "Sendet Fotos",
+    "view_date": "Besichtigungs Termin",
+    "approximate_offer_open": "Schätzoﬀerte Oﬀen",
+    "contact_us": "Meldet sich noch",
+    "individual_note": "Individuelle Notiz"
   }
 }

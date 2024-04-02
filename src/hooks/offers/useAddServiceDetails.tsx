@@ -40,12 +40,13 @@ export const useAddServiceDetails = (
     grandTotal: 0,
     taxAmount: 0,
   });
-  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const dispatch = useAppDispatch();
+  const { systemSettings } = useAppSelector((state) => state.settings);
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
   const [serviceType, setServiceType] = useState<ServiceType[]>(
     offerDetails?.serviceDetail?.serviceDetail?.map((item) =>
       item.serviceType === "New Service"
@@ -53,6 +54,7 @@ export const useAddServiceDetails = (
         : ServiceType.EXISTING_SERVICE
     ) || [ServiceType.EXISTING_SERVICE]
   );
+
   const { tax } = useAppSelector((state) => state.settings);
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
@@ -68,6 +70,7 @@ export const useAddServiceDetails = (
   const handleNext = () => {
     onHandleNext(ComponentsType.additionalAdded);
   };
+
   const schema = generateAddfferServiceDetailsValidation(translate);
   const {
     register,
@@ -85,7 +88,6 @@ export const useAddServiceDetails = (
   });
 
   const isTax = watch("isTax");
-
   const isDiscount = watch("isDiscount");
   const taxType = watch("taxType");
   const discountType = watch("discountType");

@@ -26,7 +26,7 @@ const AddressAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
 
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 ">
+      <div className="flex justify-between items-center pb-5">
         <h2 className="text-[#393939] text-lg font-medium">
           {translate("offers.address_details.main_heading")}{" "}
           {offerDetails?.id && offerDetails?.offerNumber}

@@ -23,6 +23,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 const useLeads = () => {
   const { lastPage, lead, loading, isLoading, totalCount, leadDetails } =
@@ -31,12 +32,12 @@ const useLeads = () => {
   const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
+    noteType: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
     date: {
       $gte: FiltersDefaultValues.$gte,
@@ -82,7 +83,6 @@ const useLeads = () => {
       dispatch(
         readNotes({ params: { type: "lead", id: filteredLead[0]?.id } })
       );
-
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
     } else {
       dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -153,7 +153,7 @@ const useLeads = () => {
       />
     ),
     [ModalType.EDIT_NOTE]: (
-      <AddNewNote
+      <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
@@ -247,9 +247,14 @@ const useLeads = () => {
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
     const searchedDate = query?.date as string;
+    const searchNoteType = query?.noteType as string;
 
     const queryParams =
-      queryStatus || searchQuery || sortedValue || searchedDate;
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchedDate ||
+      searchNoteType;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -264,6 +269,7 @@ const useLeads = () => {
         status: string | string[];
         text?: string;
         sort?: string;
+        noteType?: string;
         date?: {
           $gte?: string;
           $lte?: string;
@@ -272,9 +278,10 @@ const useLeads = () => {
         status: filteredStatus,
       };
 
-      if (searchQuery || sortedValue || searchedDate) {
+      if (searchQuery || sortedValue || searchedDate || searchNoteType) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
+        updatedFilter.noteType = searchNoteType;
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
 

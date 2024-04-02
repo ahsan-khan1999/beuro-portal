@@ -1,6 +1,6 @@
 import { RadioButtonProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
-import React, { useEffect } from "react";
+import React from "react";
 
 export const RadioButtonField = ({
   id,
@@ -14,28 +14,28 @@ export const RadioButtonField = ({
   disabled,
   onClick,
   onChange,
-  fieldIndex
-
+  fieldIndex,
+  colorClasses,
 }: RadioButtonProps) => {
-  const defaultClasses = `border-2 border-lightGray rounded-lg w-5 h-5 px-4 py-3 text-primary bg-secondary  cursor-pointer`;
+  const defaultClasses = `border-2 border-lightGray rounded-lg w-5 h-5 px-4 py-3 text-primary bg-secondary cursor-pointer`;
   const classes = combineClasses(defaultClasses, className);
-  // useEffect(() => {
-  //   if (value && setValue) setValue(name, value)
 
-  // }, [value])
+  const defaultColorClasses = combineClasses(
+    "flex gap-x-2 items-center bg-white",
+    colorClasses
+  );
+
   const { onChange: registerOnChange } = register(name);
   const conditionalOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
     if (onChange) {
-      onChange(e.target.value,fieldIndex);
+      onChange(e.target.value, fieldIndex);
     } else {
-
       registerOnChange(e);
     }
   };
 
   return (
-    <div className="flex gap-x-2 items-center  bg-white">
+    <div className={defaultColorClasses}>
       <input
         id={id}
         type="radio"

@@ -181,12 +181,11 @@
     "oauth_account_in_use": "Account already in use",
     "user_profile_commercial_seller_request_already_filed": "User profile commercial seller application already submitted",
     "value_max": "value_max",
-
     "mail_sent_maybe": "Email Sent",
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "You are running out of your plan!",
     "mixed": {
-      "required": "This is required field ",
+      "required": "This is required field",
       "oneOf": "Password must match ",
       "notOneOf": "Passwort muss different"
     },
@@ -199,7 +198,8 @@
     },
     "user_profile_already_complete": "User Profile is already completed",
     "offer_not_open": "This offer is already closed or signed",
-    "discountLessThanTotalPrice": "must be less than total price"
+    "discountLessThanTotalPrice": "must be less than total price",
+    "offer_already_signed": "This offer has already been signed."
   },
   "sidebar": {
     "customer": {
@@ -916,10 +916,10 @@
     "add_button": "Add New",
     "side_images_heading": "Images",
     "table_functions": {
-      "open": "Open Leads",
-      "inProcess": "InProcess Leads",
-      "close": "Close Leads",
-      "expire": "Expire Leads"
+      "open": "Open",
+      "inProcess": "InProcess",
+      "close": "Close",
+      "expire": "Expire"
     },
     "lead_dropdown_status": {
       "Open": "Open",
@@ -1104,6 +1104,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "service": "Service",
     "offer_created": "Offer Created Successfully",
     "user_rule": "Company",
     "invoice_total": "Total",
@@ -2039,7 +2040,8 @@
     "Sent": "Sent",
     "Confirmed": "Confirmed",
     "Cancelled": "Cancelled",
-    "Pending": "Pending"
+    "Pending": "Pending",
+    "Post": "Post"
   },
   "invoice_status": {
     "Pending": "Pending",
@@ -2133,5 +2135,13 @@
       "Inadequate Equipment": "Inadequate Equipment",
       "Other": "Other"
     }
+  },
+  "add_note_dropdown": {
+    "all_notes": "All Notes",
+    "sending_picture": "Sending pictures",
+    "view_date": "Viewing date",
+    "approximate_offer_open": "Approximate Offer open",
+    "contact_us": "Will contact us",
+    "individual_note": "Individual Note"
   }
 }

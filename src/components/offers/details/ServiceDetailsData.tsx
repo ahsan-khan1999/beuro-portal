@@ -52,19 +52,21 @@ const ServiceDetailsData = ({
             <span className="text-[14px] font-medium text-[#8F8F8F]">
               {translate("offers.service_details.detail_headings.title")}
             </span>
-            <span className="text-[14px] font-medium text-[#8F8F8F] mx-2   ">
+            <span className="text-[14px] font-medium text-[#8F8F8F] mx-2">
               {translate("offers.service_details.detail_headings.description")}
             </span>
+
             <span>
-              {translate("offers.service_details.detail_headings.price")}(
-              {currency})
+              {translate("offers.service_details.detail_headings.count")}
             </span>
             <span>
               {translate("offers.service_details.detail_headings.unit")}
             </span>
             <span>
-              {translate("offers.service_details.detail_headings.count")}
+              {translate("offers.service_details.detail_headings.price")}(
+              {currency})
             </span>
+
             <span>
               {translate("offers.service_details.detail_headings.discount")}
             </span>
@@ -85,20 +87,24 @@ const ServiceDetailsData = ({
               <span className="text-base font-medium text-[#4B4B4B] break-all mx-2">
                 {item?.description}
               </span>
-              <span className="text-base font-medium text-[#4B4B4B]">
-                {item?.price}
-              </span>
-              <span className="text-base font-medium text-[#4B4B4B]">
-                {item?.unit}
-              </span>
+
               <span className="text-base font-medium text-[#4B4B4B]">
                 {item?.count}
               </span>
+
+              <span className="text-base font-medium text-[#4B4B4B]">
+                {item?.unit}
+              </span>
+
+              <span className="text-base font-medium text-[#4B4B4B]">
+                {item?.price}
+              </span>
+
               <span className="text-base font-medium text-[#4B4B4B]">
                 {item?.discount}
               </span>
               <span className="text-base font-medium text-[#4B4B4B]">
-                {item?.totalPrice}
+                {item?.totalPrice.toFixed(2)}
               </span>
             </div>
           ))}

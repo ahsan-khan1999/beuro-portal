@@ -92,12 +92,6 @@ export default function InvoicesFilters({
     });
   };
 
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
-
   const handleInputChange = (value: string) => {
     setInputValue(value);
   };
@@ -149,8 +143,35 @@ export default function InvoicesFilters({
     });
   };
 
+  const hanldeNoteType = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          noteType: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["noteType"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   return (
-    <div className="flex flex-col maxSize:flex-row maxSize:items-center w-full xl:w-fit gap-4">
+    <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
@@ -167,38 +188,82 @@ export default function InvoicesFilters({
         ))}
       </div>
 
-      <div className="flex gap-x-4 items-center">
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={false}
-          onEnterPress={onEnterPress}
-        />
-        <SelectField
-          handleChange={(value) => hanldeSortChange(value)}
-          value=""
-          dropDownIconClassName=""
-          options={[
-            {
-              label: `${translate("filters.sort_by.date")}`,
-              value: "createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.latest")}`,
-              value: "-createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.oldest")}`,
-              value: "createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.a_z")}`,
-              value: "customerDetial.fullName",
-            },
-          ]}
-          label={translate("common.sort_button")}
-        />
+      <div className="flex flex-col xlg:flex-row gap-4 xlg:items-center">
+        <div className="flex items-center gap-x-3">
+          <InputField
+            handleChange={handleInputChange}
+            ref={inputRef}
+            value={inputValue}
+            iconDisplay={false}
+            onEnterPress={onEnterPress}
+          />
+          <SelectField
+            handleChange={(value) => hanldeSortChange(value)}
+            value=""
+            dropDownIconClassName=""
+            options={[
+              {
+                label: `${translate("filters.sort_by.date")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.latest")}`,
+                value: "-createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.oldest")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.a_z")}`,
+                value: "customerDetial.fullName",
+              },
+            ]}
+            label={translate("common.sort_button")}
+          />
+        </div>
+
+        <div className="flex items-center gap-x-3">
+          <span className="text-[#4B4B4B] font-semibold text-base">
+            {translate("global_search.notes")}
+          </span>
+          <SelectField
+            handleChange={(value) => hanldeNoteType(value)}
+            value=""
+            dropDownIconClassName=""
+            containerClassName="w-[225px]"
+            labelClassName="w-[225px]"
+            options={[
+              {
+                value: "None",
+                label: `${translate("add_note_dropdown.all_notes")}`,
+              },
+              {
+                value: "Sending pictures",
+                label: `${translate("add_note_dropdown.sending_picture")}`,
+              },
+              {
+                value: "Viewing date",
+                label: `${translate("add_note_dropdown.view_date")}`,
+              },
+              {
+                value: "Approximate Offer open",
+                label: `${translate(
+                  "add_note_dropdown.approximate_offer_open"
+                )}`,
+              },
+              {
+                value: "Will contact us",
+                label: `${translate("add_note_dropdown.contact_us")}`,
+              },
+              {
+                value: "Individual Note",
+                label: `${translate("add_note_dropdown.individual_note")}`,
+              },
+            ]}
+            label={translate("add_note_dropdown.all_notes")}
+          />
+        </div>
         {/* <InvoicesFilter
           filter={filter}
           setFilter={setFilter}

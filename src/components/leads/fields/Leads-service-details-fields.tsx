@@ -58,7 +58,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.date,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "desireDate",
               name: "desireDate",
               register,

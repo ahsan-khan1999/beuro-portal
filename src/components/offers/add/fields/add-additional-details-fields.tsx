@@ -15,14 +15,14 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 ",
+      containerClass: "mt-3 mb-0 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
       label: {
         text: `${translate("offers.additional_details.choose")}`,
         htmlFor: "content",
-        className: "mb-[10px]",
+        className: "mb-[10px] text-[#344054] text-base font-medium",
       },
       field: {
-        className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+        className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
         type: Field.select,
         id: "content",
         name: "content",
@@ -38,20 +38,18 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       },
     },
     {
-      containerClass: "mt-5",
+      containerClass: "rounded-t-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("offers.additional_details.add_new")}`,
         htmlFor: "additionalDetails",
-        className: "mb-[10px] text-[#4D4D4D]",
+        className: "mb-[10px] text-[#344054] text-base font-medium",
       },
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "additionalDetails",
         name: "additionalDetails",
-
         control,
-        // value:  contentDetails?.id && contentDetails?.offerContent?.description || offerDetails?.additionalDetails,
         trigger,
       },
     },
@@ -60,7 +58,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex justify-end items-center space-x-[18px] ",
+        className: "flex justify-end items-center space-x-[18px]",
         children: [
           {
             containerClass: "mb-0 mt-[30px]",
