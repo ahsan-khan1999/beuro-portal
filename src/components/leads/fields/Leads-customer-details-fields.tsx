@@ -206,20 +206,28 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
+            // field: {
+            //   className: "!p-4 !border-[#BFBFBF]",
+            //   type: Field.select,
+            //   id: "address.country",
+            //   name: "address.country",
+            //   options: Object.keys(staticEnums.Country).map((item) => ({
+            //     value: item,
+            //     label: translate(`countries.${item}`),
+            //   })),
+            //   control,
+            //   value:
+            //     (leadDetails?.id &&
+            //       leadDetails?.customerDetail?.address?.country) ||
+            //     Object.keys(staticEnums.Country)[0],
+            // },
             field: {
-              className: "!p-4 !border-[#BFBFBF]",
-              type: Field.select,
+              type: Field.input,
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+              inputType: "text",
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => ({
-                value: item,
-                label: translate(`countries.${item}`),
-              })),
-              control,
-              value:
-                (leadDetails?.id &&
-                  leadDetails?.customerDetail?.address?.country) ||
-                Object.keys(staticEnums.Country)[0],
+              register,
             },
           },
         ],
