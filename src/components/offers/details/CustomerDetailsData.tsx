@@ -150,9 +150,7 @@ const CustomerDetailsData = ({
                 {translate("offers.offer_details.country")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                {translate(
-                  `countries.${offerDetails?.leadID?.customerDetail?.address?.country}`
-                )}
+                {offerDetails?.leadID?.customerDetail?.address?.country}
               </div>
             </div>
           </div>

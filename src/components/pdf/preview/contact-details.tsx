@@ -58,7 +58,7 @@ export const ContactDetails = ({
                 {streetWithNumber}
               </span>
               <span className="text-[#000] text-sm font-medium">
-                {postalCode} {Country[city as keyof typeof Country] || ""}
+                {postalCode} {[city as keyof typeof Country] || ""}
               </span>
             </div>
           </div>
@@ -76,7 +76,7 @@ export const ContactDetails = ({
               {streetWithNumber}
             </span>
             <span className="text-[#000] text-sm font-medium">
-              {postalCode} {Country[city as keyof typeof Country] || ""}
+              {postalCode} {city || ""}
             </span>
           </div>
 

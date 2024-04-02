@@ -178,7 +178,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               inputType: "text",
               id: "address.streetNumber",
               name: "address.streetNumber",
-
               placeholder: `${translate(
                 "customers.add_customer_placeholders.street"
               )}`,
@@ -216,18 +215,28 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
+            // field: {
+            //   className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+            //   type: Field.select,
+            //   id: "address.country",
+            //   name: "address.country",
+            //   options: Object.keys(staticEnums.Country).map((item) => ({
+            //     value: item,
+            //     label: translate(`countries.${item}`),
+            //   })),
+            //   control,
+            //   disabled: isUpdate,
+            //   value: Object.keys(staticEnums.Country)[0],
+            // },
+
             field: {
+              type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              type: Field.select,
+              inputType: "text",
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => ({
-                value: item,
-                label: translate(`countries.${item}`),
-              })),
-              control,
+              register,
               disabled: isUpdate,
-              value: Object.keys(staticEnums.Country)[0],
             },
           },
         ],

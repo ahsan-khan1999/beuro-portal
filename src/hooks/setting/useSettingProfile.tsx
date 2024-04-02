@@ -33,7 +33,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
     reset,
     formState: { errors },
     setError,
-    resetField
+    resetField,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -47,7 +47,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
     reset({
       ...user,
     });
-  }
+  };
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));

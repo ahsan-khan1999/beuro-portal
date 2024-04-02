@@ -72,6 +72,7 @@ export const AddressDetails = ({
 
   const labelWidth = (MaxLength < 15 && 15 * 6) || MaxLength * 6;
   const valueWidth = 595 - labelWidth;
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
@@ -165,7 +166,7 @@ export const AddressDetails = ({
                   }}
                 >
                   {`${address.streetNumber}, ${address.postalCode}, ${
-                    Country[address.country as keyof typeof Country] || ""
+                    [address.country as keyof typeof Country] || ""
                   }`}
                   {address.description && ` - ${address.description}`}
                 </Text>
