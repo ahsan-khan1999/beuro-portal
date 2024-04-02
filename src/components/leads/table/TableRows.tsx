@@ -52,22 +52,22 @@ const TableRows = ({
               });
             }}
             key={index}
-            className="cursor-pointer items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(170px,_170px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(50px,_3fr)_minmax(80px,_80px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(50px,_3fr)_minmax(90px,_90px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(50px,_100%)_minmax(60px,_60px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(40px,_100%)_minmax(70px,_70px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(70px,4fr)_minmax(70px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(90px,_90px)] border-t border-t-[#E7EAEE]"
+            className="cursor-pointer items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(170px,_170px)_minmax(70px,_70px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(130px,_130px)_minmax(190px,_190px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(130px,_130px)_minmax(190px,_190px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(190px,_190px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(70px,4fr)_minmax(70px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item?.refID}</span>
             <span className="py-4 truncate">
               {item.customerDetail?.fullName}
             </span>
-            <span className="py-4 maxSize:block truncate">
+            <span className="py-4 truncate block mlg:hidden maxSize:block">
               {item.customerDetail?.email}
             </span>
-            <span className="py-4 mlg:hidden xlg:block truncate">
+            <span className="py-4 truncate mlg:hidden xLarge:block">
               {item.customerDetail?.phoneNumber}
             </span>
-            <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
+            <span className="py-4 flex items-center">
               {formatDate(item.createdAt)}
             </span>
-            <span className="py-4 truncate xlg:hidden maxSize:block">
+            <span className="py-4 truncate mlg:hidden xMaxSize:block">
               {translate(`countries.${item.customerDetail?.address?.country}`)}
             </span>
             {/* <span className={`py-4 flex items-center`}>
