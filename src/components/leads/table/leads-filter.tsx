@@ -156,6 +156,7 @@ export default function LeadsFilter({
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           noteType: value,
         },
       },
