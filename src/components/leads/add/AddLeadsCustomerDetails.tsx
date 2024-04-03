@@ -10,11 +10,11 @@ const AddLeadsCustomerDetails = ({
 }: {
   onHandleNext: Function;
 }) => {
-  const defaultClassName = "pt-5";
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewLeadCustomer(onHandleNext);
-  const router = useRouter();
 
+  const router = useRouter();
   const handleCancel = () => {
     router.pathname = "/leads";
     router.query = { status: "None", page: "1" };

@@ -1,10 +1,10 @@
-import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
-import { useRouter } from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
 import { OffersTableRowTypes } from "@/types/offers";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
+import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const CustomerDetailsData = ({
@@ -18,7 +18,7 @@ const CustomerDetailsData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center pb-5"
         id={translate("offers.tabs_heading.offer")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
@@ -38,8 +38,8 @@ const CustomerDetailsData = ({
         </button>
       </div>
 
-      <div className="pt-5 border-t border-t-[#000] border-opacity-10">
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mb-5">
+      <div className="pt-3 border-t border-t-[#000] border-opacity-10">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.offer_title")}
@@ -125,10 +125,10 @@ const CustomerDetailsData = ({
         </div>
 
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">
+          <h4 className="text-base font-semibold text-[#1E1E1E] mb-[10px]">
             {translate("offers.offer_details.customer_address")}
           </h4>
-          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-b-lg px-2 py-3 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.street_no")}

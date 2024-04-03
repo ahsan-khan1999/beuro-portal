@@ -12,10 +12,10 @@ const OfferContentEditDetails = ({
   onClick: (index: number, component: ComponentsType) => void;
   contentDetail: ContentTableRowTypes;
 }) => {
-  const defaultClassName =
-    "border border-primary pl-[29px] pr-[25px] pt-[22px] pb-[39px]";
+  const defaultClassName = "border border-primary px-5 py-3";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useOfferContentEditDetails(onClick);
+
   return (
     <div className="rounded-md border-none bg-white w-full h-fit">
       <div className="flex justify-between items-center pt-[17px] pb-[22px] pl-[29px] pr-6 border-b border-black border-opacity-10 bg-[#4A13E7] rounded-t-lg">

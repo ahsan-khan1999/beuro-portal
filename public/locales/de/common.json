@@ -648,7 +648,7 @@
       "company_name": "Firmenname",
       "iban_number": "IBAN",
       "house_no": "Hausnummer",
-      "street_no": "Strasse",
+      "street_no": "Strasse+Nr",
       "post_code": "Plz",
       "city": "Stadt"
     }
@@ -1096,6 +1096,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "description_placeholder": "Bitte tragen Sie hier Ihre Angaben ein...",
     "actions": "Aktion",
     "service": "Dienst",
     "offer_created": "Angebote erfolgreich erstellt",
@@ -2143,6 +2144,8 @@
     "view_date": "Besichtigungs Termin",
     "approximate_offer_open": "Schätzoﬀerte Oﬀen",
     "contact_us": "Meldet sich noch",
-    "individual_note": "Individuelle Notiz"
+    "individual_note": "Individuelle Notiz",
+    "note_reached": "Nicht erreicht",
+    "other": "Andere"
   }
 }

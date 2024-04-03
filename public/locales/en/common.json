@@ -655,7 +655,7 @@
       "company_name": "Company Name",
       "iban_number": "Iban No",
       "house_no": "House Number",
-      "street_no": "Street Number",
+      "street_no": "Street No",
       "post_code": "Postal Code",
       "city": "City"
     }
@@ -1022,7 +1022,7 @@
       "cancel_button": "Cancel",
       "back_button": "Back",
       "save_button": "Save"
-    },  
+    },
     "confirm_lead_modal": {
       "main_heading": "Please confirm Lead ID",
       "sub_heading": "Enter Lead ID",
@@ -1104,6 +1104,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "description_placeholder": "Please write your detail here...",
     "actions": "Actions",
     "service": "Service",
     "offer_created": "Offer Created Successfully",
@@ -2143,6 +2144,8 @@
     "view_date": "Viewing date",
     "approximate_offer_open": "Approximate Offer open",
     "contact_us": "Will contact us",
-    "individual_note": "Individual Note"
+    "individual_note": "Individual Note",
+    "note_reached": "Not Reached",
+    "other": "Other"
   }
 }

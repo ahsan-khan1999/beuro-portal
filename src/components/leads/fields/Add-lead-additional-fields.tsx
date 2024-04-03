@@ -8,7 +8,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mb-0 mt-6",
+        containerClass: "mb-0 mt-3 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         field: {
           type: Field.ckEditor,
           className: "!p-4 !border-[#BFBFBF] focus:!border-primary",

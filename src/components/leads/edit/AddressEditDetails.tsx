@@ -9,7 +9,7 @@ const AddressEditDetails = ({
 }: {
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const defaultClassName = "pt-5";
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useLeadsAddressEditDetails(onClick);
   return (

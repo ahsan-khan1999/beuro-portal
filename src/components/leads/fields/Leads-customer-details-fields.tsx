@@ -21,11 +21,12 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-6",
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -67,7 +68,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               register,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -84,7 +84,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               register,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -104,7 +103,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 leadDetails?.id && leadDetails?.customerDetail?.phoneNumber,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -123,7 +121,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
                 leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
             },
           },
-
           {
             containerClass: "mb-0",
             label: {
@@ -153,14 +150,15 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
       label: {
         text: `${translate("leads.customer_details.address_details")}`,
         htmlFor: "name",
-        className: "mb-[10px] text-[#8F8F8F]",
+        className: "mb-[10px] text-[#1E1E1E] text-base font-semibold",
       },
 
       field: {
         type: Field.div,
         id: "div-field",
 
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",

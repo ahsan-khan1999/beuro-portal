@@ -19,7 +19,7 @@ const ServiceDetailsData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10"
         id={translate("leads.tabs_headings.service")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
@@ -64,10 +64,9 @@ const ServiceDetailsData = ({
           {translate("leads.service_details.edit_button")}
         </button>
       </div>
-      <hr className="opacity-20 mb-5" />
 
-      <div className="mt-5">
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
+      <div className="mt-3">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.required_service")}
@@ -126,7 +125,7 @@ const ServiceDetailsData = ({
           </div> */}
         </div>
 
-        <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-x-3">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]">
           <div className="xl:col-span-1">
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.lead_source")}

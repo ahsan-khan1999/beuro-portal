@@ -13,14 +13,15 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-6",
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex justify-between items-center gap-3",
+        className:
+          "grid grid-cols-2 lg:grid-cols-3 items-center gap-y-5 gap-x-3 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
-            containerClass: "w-[67%] mb-0",
+            containerClass: "col-span-2 mb-0",
             label: {
               text: `${translate("employees.details.full_name")}`,
               htmlFor: "fullName",
@@ -40,7 +41,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             },
           },
           {
-            containerClass: "w-[33%] mb-0",
+            containerClass: "col-span-1 mb-0",
             label: {
               text: `${translate("employees.details.designation")}`,
               htmlFor: "designation",
@@ -59,17 +60,6 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               disabled: isUpdate,
             },
           },
-        ],
-      },
-    },
-
-    {
-      containerClass: "mt-5",
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "grid grid-cols-2 mlg:grid-cols-3 gap-4",
-        children: [
           {
             containerClass: "mb-0",
             label: {
@@ -105,7 +95,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
               disabled: isUpdate,
-              inputType:"tel",
+              inputType: "tel",
               register,
               value: employeeDetails && employeeDetails?.phoneNumber,
             },
@@ -124,7 +114,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               }`,
               id: "mobileNumber",
               name: "mobileNumber",
-              inputType:"tel",
+              inputType: "tel",
 
               disabled: isUpdate,
               register,
@@ -135,12 +125,84 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
       },
     },
 
+    // {
+    //   containerClass: "mt-5",
+    //   field: {
+    //     type: Field.div,
+    //     id: "div-field",
+    //     className: "grid grid-cols-2 mlg:grid-cols-3 gap-4",
+    //     children: [
+    //       {
+    //         containerClass: "mb-0",
+    //         label: {
+    //           text: `${translate("employees.details.email_address")}`,
+    //           htmlFor: "email",
+    //           className: "mb-[10px]",
+    //         },
+    //         field: {
+    //           type: Field.input,
+    //           className: `!p-4 !border-[#BFBFBF] focus:!border-primary ${
+    //             !isUpdate && "!border-light"
+    //           }`,
+    //           inputType: "text",
+    //           id: "email",
+    //           name: "email",
+    //           placeholder: "rahal.ahmad@gmail.com",
+    //           register,
+    //           disabled: isUpdate,
+    //         },
+    //       },
+    //       {
+    //         containerClass: "mb-0",
+    //         label: {
+    //           text: `${translate("employees.details.phone_number")}`,
+    //           htmlFor: "phoneNumber",
+    //           className: "mb-[10px]",
+    //         },
+    //         field: {
+    //           type: Field.input,
+    //           className: `!px-4 !border-[#BFBFBF] focus:!border-primary ${
+    //             !isUpdate && "!border-light"
+    //           }`,
+    //           id: "phoneNumber",
+    //           name: "phoneNumber",
+    //           disabled: isUpdate,
+    //           inputType: "tel",
+    //           register,
+    //           value: employeeDetails && employeeDetails?.phoneNumber,
+    //         },
+    //       },
+    //       {
+    //         containerClass: "mb-0",
+    //         label: {
+    //           text: `${translate("employees.details.mobile_number")}`,
+    //           htmlFor: "mobileNumber",
+    //           className: "mb-[10px]",
+    //         },
+    //         field: {
+    //           type: Field.input,
+    //           className: `!px-4 !border-[#BFBFBF] focus:!border-primary ${
+    //             !isUpdate && "!border-light"
+    //           }`,
+    //           id: "mobileNumber",
+    //           name: "mobileNumber",
+    //           inputType: "tel",
+
+    //           disabled: isUpdate,
+    //           register,
+    //           value: employeeDetails && employeeDetails?.mobileNumber,
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
+
     {
       containerClass: "mt-6",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center justify-end space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px]",
         children: [
           {
             containerClass: "mb-0",

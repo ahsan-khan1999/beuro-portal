@@ -219,7 +219,9 @@ const AddNewLeadsData = () => {
 
       <div className="w-full break-all xLarge:mt-[145px] flex">
         <div className="max-w-[270px] w-full hidden xLarge:block"></div>
-        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        <div className="w-full xLarge:max-w-[1060px]">
+          {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        </div>
       </div>
       {renderModal()}
     </div>
