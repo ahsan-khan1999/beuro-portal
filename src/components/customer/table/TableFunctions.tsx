@@ -1,7 +1,6 @@
-import React, { SetStateAction, useState } from "react";
-
-import CustomerFilter from "./customer-filter";
 import { FilterType } from "@/types";
+import React, { SetStateAction } from "react";
+import CustomerFilter from "./customer-filter";
 import { useTranslation } from "next-i18next";
 
 const TableFunctions = ({
@@ -19,7 +18,7 @@ const TableFunctions = ({
       <h1 className="text-xl text-[#222B45] ">
         {translate("customers.title")}
       </h1>
-      <div className="flex items-center ">
+      <div className="flex items-center">
         <div className="flex items-center space-x-4">
           <CustomerFilter
             filter={filter}
