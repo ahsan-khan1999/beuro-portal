@@ -10,8 +10,8 @@ const AdditionalDetails = ({
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
   const { leadDetails } = useAppSelector((state) => state.lead);
-
   const { t: translate } = useTranslation();
+
   return (
     <LeadsCardLayout>
       <div
@@ -61,9 +61,9 @@ const AdditionalDetails = ({
         </button>
       </div>
 
-      <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 mt-6 break-all">
+      <div className="mt-3 rounded-lg px-2 py-3 bg-[#EDF4FF]">
         <div
-          className="html-content text-[#4B4B4B] font-normal text-base "
+          className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
           dangerouslySetInnerHTML={{ __html: leadDetails?.additionalDetails }}
         />
       </div>

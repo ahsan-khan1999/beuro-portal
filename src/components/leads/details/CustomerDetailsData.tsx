@@ -12,8 +12,8 @@ const customerDetailData = ({
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
   const { leadDetails } = useAppSelector((state) => state.lead);
-
   const { t: translate } = useTranslation();
+
   return (
     <LeadsCardLayout>
       <div
@@ -65,8 +65,8 @@ const customerDetailData = ({
         </button>
       </div>
 
-      <div className="mt-5">
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3  gap-y-5">
+      <div className="mt-3">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.customer_type")}
@@ -135,15 +135,15 @@ const customerDetailData = ({
         </div>
 
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">
+          <h4 className="text-[#1E1E1E] text-base font-semibold mb-[10px]">
             {translate("leads.customer_details.address_details")}
           </h4>
-          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.customer_details.street_no")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
                 {leadDetails?.customerDetail?.address?.streetNumber}
               </div>
             </div>
@@ -151,7 +151,7 @@ const customerDetailData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.customer_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
                 {leadDetails?.customerDetail?.address?.postalCode}
               </div>
             </div>

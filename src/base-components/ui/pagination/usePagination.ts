@@ -19,21 +19,6 @@ export const usePagination = ({
 
   const router = useRouter();
 
-  const handlePrevClick = useCallback(() => {
-    handlePageClick(currentPage - 1);
-  }, [currentPage]);
-
-  const handleNextClick = useCallback(() => {
-    handlePageClick(currentPage + 1);
-  }, [currentPage]);
-
-  // useEffect(() => {
-  //   router.replace({
-  //     pathname: router.pathname,
-  //     query: { ...router.query, page: currentPage },
-  //   });
-  // }, [currentPage]);
-
   const handlePageClick = useCallback(
     (page: number) => {
       if (page >= 1 && page <= totalPages) {
@@ -55,6 +40,21 @@ export const usePagination = ({
     },
     [totalPages, onPageChange]
   );
+
+  const handlePrevClick = () => {
+    handlePageClick(currentPage - 1);
+  };
+
+  const handleNextClick = () => {
+    handlePageClick(currentPage + 1);
+  };
+
+  // useEffect(() => {
+  //   router.replace({
+  //     pathname: router.pathname,
+  //     query: { ...router.query, page: currentPage },
+  //   });
+  // }, [currentPage]);
 
   const startPage = Math.max(2, currentPage - Math.floor(PAGE_LIMIT / 2));
   const endPage = Math.min(totalPages - 1, startPage + PAGE_LIMIT - 1);

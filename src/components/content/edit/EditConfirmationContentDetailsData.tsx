@@ -12,8 +12,7 @@ const EditConfirmationContentDetailsData = ({
   onClick: (index: number, component: ComponentsType) => void;
   contentDetail: ContentTableRowTypes;
 }) => {
-  const defaultClassName =
-    "border border-primary pl-[29px] pr-[25px] pt-[22px] pb-[39px]";
+  const defaultClassName = "border border-primary px-5 py-3";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useEditConfirmationContentDetails(onClick);
   return (

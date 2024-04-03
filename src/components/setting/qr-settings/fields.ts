@@ -1,10 +1,6 @@
 import { Field } from "@/enums/form";
 import { getQrObject } from "@/hooks/setting/useQRSettings";
-import {
-  FormField,
-  GenerateChangeMailSettingFormField,
-  GenerateQRCodeSettingFormField,
-} from "@/types";
+import { FormField, GenerateQRCodeSettingFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
 export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
@@ -91,7 +87,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                     inputType: "text",
                     id: `QrCodeDetail.${i}.ibanNumber`,
                     name: `QrCodeDetail.${i}.ibanNumber`,
@@ -102,26 +98,26 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                     disabled: true,
                   },
                 },
-                {
-                  containerClass: "mb-0",
-                  label: {
-                    text: `${translate("setting.qr_settings.house_no")}`,
-                    htmlFor: `QrCodeDetail.${i}.address.houseNumber`,
-                    className: "mb-[10px]",
-                  },
-                  field: {
-                    type: Field.input,
-                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-                    inputType: "text",
-                    id: `QrCodeDetail.${i}.address.houseNumber`,
-                    name: `QrCodeDetail.${i}.address.houseNumber`,
-                    placeholder: `${translate(
-                      "admin.settings.placeholders.mail_port"
-                    )}`,
-                    register,
-                    disabled: i === 0 ? true : false,
-                  },
-                },
+                // {
+                //   containerClass: "mb-0",
+                //   label: {
+                //     text: `${translate("setting.qr_settings.house_no")}`,
+                //     htmlFor: `QrCodeDetail.${i}.address.houseNumber`,
+                //     className: "mb-[10px]",
+                //   },
+                //   field: {
+                //     type: Field.input,
+                //     className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+                //     inputType: "text",
+                //     id: `QrCodeDetail.${i}.address.houseNumber`,
+                //     name: `QrCodeDetail.${i}.address.houseNumber`,
+                //     placeholder: `${translate(
+                //       "admin.settings.placeholders.mail_port"
+                //     )}`,
+                //     register,
+                //     disabled: i === 0 ? true : false,
+                //   },
+                // },
                 {
                   containerClass: "mb-0",
                   label: {

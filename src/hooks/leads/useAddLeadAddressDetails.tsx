@@ -2,7 +2,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
   SubmitHandler,
-  UseFieldArrayRemove,
   useFieldArray,
   useForm,
 } from "react-hook-form";
@@ -51,7 +50,12 @@ export const useAddLeadAddressDetails = (
               ...item,
               label: item?.label ? item?.label : `Adresse ${++index}`,
             }))
-          : [{ label: `Adresse ${addressCount}`,...leadDetails?.customerDetail?.address }],
+          : [
+              {
+                label: `Adresse ${addressCount}`,
+                ...leadDetails?.customerDetail?.address,
+              },
+            ],
       });
     }
   }, [leadDetails?.id]);

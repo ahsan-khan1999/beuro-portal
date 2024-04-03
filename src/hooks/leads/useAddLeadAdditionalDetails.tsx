@@ -57,7 +57,6 @@ export const useAddLeadAdditionalDetails = ({
     if (response?.payload) onHandleNext(ComponentsType.additionalAdd);
   };
 
-  
   return {
     fields,
     onSubmit,

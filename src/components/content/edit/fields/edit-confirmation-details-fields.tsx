@@ -17,11 +17,12 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "",
+        containerClass: "mt-3",
         field: {
           type: Field.div,
           id: "div-field",
-          className: "grid grid-cols-1 gap-4",
+          className:
+            "grid grid-cols-1 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
           children: [
             {
               containerClass: "mb-0",
@@ -32,7 +33,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
                 id: "confirmationContent.title",
                 name: "confirmationContent.title",
@@ -41,7 +42,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
               },
             },
             {
-              containerClass: "mb-0 mt-5",
+              containerClass: "mb-0",
               label: {
                 text: translate("content.details.Confirmation_description"),
                 htmlFor: "confirmationContent.description",
@@ -49,7 +50,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.ckEditor,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 id: "confirmationContent.description",
                 name: "confirmationContent.description",
 
@@ -61,7 +62,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
             },
 
             {
-              containerClass: "mb-0 mt-5",
+              containerClass: "mb-0",
               label: {
                 text: "Email Body",
                 htmlFor: translate("content.details.email_body"),
@@ -69,7 +70,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
               },
               field: {
                 type: Field.ckEditor,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 id: "confirmationContent.body",
                 name: "confirmationContent.body",
 
@@ -81,7 +82,7 @@ export const EditConfirmationContentDetailsFormField: GenerateContentFormField =
             },
 
             {
-              containerClass: "mb-0 mt-5",
+              containerClass: "mb-0",
               label: {
                 text: translate("content.details.attachments"),
                 htmlFor: "confirmationContent.attachments",

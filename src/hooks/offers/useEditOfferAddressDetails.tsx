@@ -73,7 +73,7 @@ export const useEditOfferAddressDetails = ({
           : addressType?.map((item, index) => ({
               streetNumber: "",
               postalCode: "",
-              country: "Switzerland",
+              country: "Schweiz",
               description: "",
               label: `Adresse ${++index}`,
             })),

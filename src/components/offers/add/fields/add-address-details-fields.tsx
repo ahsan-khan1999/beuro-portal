@@ -1,13 +1,12 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadAddressFormField } from "@/types";
-import { staticEnums } from "@/utils/static";
 import editIcon from "@/assets/svgs/edit_primary.svg";
 
 import { useTranslation } from "next-i18next";
 export const addressObject = {
   streetNumber: "",
   postalCode: "",
-  country: "Switzerland",
+  country: "Schweiz",
   description: "",
 };
 export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (

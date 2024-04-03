@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateLeadAddressFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import editIcon from "@/assets/svgs/edit_primary.svg";
+import { FormField, GenerateLeadAddressFormField } from "@/types";
 import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
@@ -28,7 +28,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
           containerClass: "",
           field: {
             type: Field.input,
-            className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+            className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
             inputType: "text",
             id: `address.${i}.label`,
             name: `address.${i}.label`,
@@ -49,19 +49,19 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             value: `Adresse ${i + 1}`,
             disabled: true,
             className:
-              "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+              "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
             setValue,
           },
         };
     formField.push(
       {
-        containerClass: "mb-0 relative -top-1 right-0 float-right",
+        containerClass: "mb-0 relative top-3.5 right-0 float-right",
         field: {
           type: Field.button,
           id: "button",
           text: `${translate("common.remove_button")}`,
           inputType: "button",
-          className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
+          className: `rounded-md px-[6px] py-1 bg-transparent !h-[30px] text-dark-red text-base font-semibold border-2 rounded-[6px] border-[#C31313] hover-bg-none mt-1 ${
             i === 0 && "hidden"
           }`,
           onClick: () => {
@@ -69,6 +69,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
           },
         },
       },
+
       {
         containerClass: "mt-2",
         field: {
@@ -124,19 +125,15 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
       },
 
       {
-        containerClass: "mt-6 ",
-        // label: {
-        //   text: `${translate("leads.address_details.heading")} ${i}`,
-        //   htmlFor: `address-${i}-details`,
-        //   className: "mb-[10px] text-[#8F8F8F]",
-        // },
+        containerClass: "mt-3",
         field: {
           type: Field.div,
           id: `div-field-${i}`,
-          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+          className:
+            "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
           children: [
             {
-              containerClass: "mb-0 ",
+              containerClass: "mb-0",
               label: {
                 text: translate("leads.address_details.street_no"),
                 htmlFor: `address.${i}.streetNumber`,
@@ -153,7 +150,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
             },
             {
-              containerClass: "mb-0 ",
+              containerClass: "mb-0",
               label: {
                 text: translate("leads.address_details.post_code"),
                 htmlFor: `address.${i}.postalCode`,
@@ -201,31 +198,20 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
         },
       },
       {
-        containerClass: "mt-6",
+        containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
+        label: {
+          text: translate("leads.address_details.description"),
+          htmlFor: `address.${i}.description`,
+          className: "mb-[10px]",
+        },
         field: {
-          type: Field.div,
-          id: "div-field",
-          className: "grid grid-cols-1 relative w-full space-x-[18px] ",
-          children: [
-            {
-              containerClass: "mt-5 mb-0 pb-10 border-b-2 border-lightGray",
-              label: {
-                text: translate("leads.address_details.description"),
-                htmlFor: `address.${i}.description`,
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.textArea,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-                rows: 2,
-                id: `address.${i}.description`,
-                name: `address.${i}.description`,
-                placeholder:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                register,
-              },
-            },
-          ],
+          type: Field.textArea,
+          className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+          rows: 2,
+          id: `address.${i}.description`,
+          name: `address.${i}.description`,
+          placeholder: translate("common.description_placeholder"),
+          register,
         },
       }
     );

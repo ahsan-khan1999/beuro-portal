@@ -45,6 +45,14 @@ export const AddNoteFormField: GenerateNotesFormField = (
             value: "Individual Note",
             label: `${translate("add_note_dropdown.individual_note")}`,
           },
+          {
+            value: "Not Reached",
+            label: `${translate("add_note_dropdown.note_reached")}`,
+          },
+          {
+            value: "Other",
+            label: `${translate("add_note_dropdown.other")}`,
+          },
         ],
 
         control,
