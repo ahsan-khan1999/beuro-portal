@@ -21,10 +21,10 @@ const AddressDetailsData = ({
 
       {contractDetails.offerID?.addressID?.address?.map((item, key) => (
         <div className="my-5" key={key}>
-          <h4 className="text-[#8F8F8F] mb-[10px]">
+          <h4 className="text-[#1E1E1E] text-base font-semibold mb-[10px]">
             {translate("contracts.address_details.main_heading")}
           </h4>
-          <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5">
+          <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.address_details.street_no")}.
@@ -51,7 +51,7 @@ const AddressDetailsData = ({
             </div>
           </div>
 
-          <div className="mt-5 w-full">
+          <div className="w-full rounded-t-lg px-2 pb-3 bg-[#EDF4FF]">
             <label className="text-[#4D4D4D] mb-[10px] block text-sm">
               {translate("contracts.address_details.description")}
             </label>

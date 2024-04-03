@@ -108,7 +108,7 @@ const ServiceDetailsData = ({
             </div>
           ))}
 
-          <div className="border-t border-t-[#000] border-opacity-10 mt-5">
+          <div className="border-t border-t-[#000] border-opacity-10">
             <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5 bg-white">
               <div className="grid grid-cols-3">
                 <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">

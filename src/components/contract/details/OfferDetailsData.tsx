@@ -20,8 +20,8 @@ const OfferDetailsData = ({
         {translate("contracts.customer_details.heading")}
       </h2>
 
-      <div className="mt-5">
-        <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5">
+      <div className="mt-3">
+        <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("contracts.customer_details.customer_type")}
@@ -96,11 +96,12 @@ const OfferDetailsData = ({
             </div>
           </div>
         </div>
+
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">
+          <h4 className="text-[#1E1E1E] text-base font-semibold mb-[10px]">
             {translate("contracts.customer_details.address_details")}
           </h4>
-          <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5">
+          <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.customer_details.street_no")}
