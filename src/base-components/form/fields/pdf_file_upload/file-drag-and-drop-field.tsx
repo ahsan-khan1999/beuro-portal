@@ -72,7 +72,7 @@ export const PdfFileUpload = ({
   return (
     <div className="grid grid-cols-3 gap-x-3">
       <label htmlFor={id} onDragOver={handleFileInput} onDrop={handleFileInput}>
-        <div className="flex gap-3">
+        <div className="flex gap-3 bg-white">
           <div className="flex flex-col items-center border border-[#8F8F8F] border-dashed rounded-lg w-full h-auto cursor-pointer px-[25px] pt-6 pb-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ export const PdfFileUpload = ({
             {attachements &&
               attachements?.map((item, index) => (
                 <div
-                  className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+                  className={`relative flex flex-col gap-3 h-fit bg-white border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
                     isOpenedFile ? "cursor-pointer" : "cursor-default"
                   }`}
                   key={index}

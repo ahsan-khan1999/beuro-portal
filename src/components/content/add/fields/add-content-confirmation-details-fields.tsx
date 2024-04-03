@@ -1,6 +1,6 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateContentFormField } from "@/types";
 import { useTranslation } from "next-i18next";
+import { FormField, GenerateContentFormField } from "@/types";
 
 export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
   (
@@ -17,14 +17,15 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "",
+        containerClass: "mt-3",
         field: {
           type: Field.div,
           id: "div-field",
-          className: "grid grid-cols-1 gap-4",
+          className:
+            "grid grid-cols-1 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
           children: [
             {
-              containerClass: "mb-0 mt-5",
+              containerClass: "mb-0",
               label: {
                 text: translate("content.details.confirmation_title"),
                 htmlFor: "confirmationContent.title",
@@ -41,7 +42,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
               },
             },
             {
-              containerClass: "mb-0 mt-5",
+              containerClass: "mb-0",
               label: {
                 text: translate("content.details.Confirmation_description"),
                 htmlFor: "confirmationContent.description",
@@ -59,9 +60,8 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
                 //   contentDetails?.confirmationContent?.description,
               },
             },
-
             {
-              containerClass: "mb-0 mt-5",
+              containerClass: "mb-0",
               label: {
                 text: translate("content.details.email_body"),
                 htmlFor: "confirmationContent.body",
@@ -79,9 +79,8 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
                 //   contentDetails?.confirmationContent?.body,
               },
             },
-
             {
-              containerClass: "mb-0 mt-5 ",
+              containerClass: "mb-0",
               label: {
                 text: translate("content.details.attachments"),
                 htmlFor: "confirmationContent.attachments",

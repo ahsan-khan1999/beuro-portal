@@ -37,9 +37,11 @@ const AddressDetailsData = ({
       </div>
 
       {offerDetails?.addressID?.address?.map((item, index) => (
-        <div className="my-5" key={index}>
-          <h4 className="text-[#8F8F8F] mb-[10px]">{item?.label}</h4>
-          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
+        <div className="mt-3" key={index}>
+          <h4 className="text-base font-semibold text-[#1E1E1E] mb-[10px]">
+            {item?.label}
+          </h4>
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.address_details.street_no")}
@@ -66,11 +68,11 @@ const AddressDetailsData = ({
             </div>
           </div>
 
-          <div className="mt-5 w-full">
+          <div className="w-full rounded-b-lg px-2 pb-3 bg-[#EDF4FF]">
             <label className="text-[#4D4D4D] mb-[10px] block text-sm">
               {translate("offers.address_details.description")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium break-all">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium break-all min-h-[58px]">
               {item?.description}
             </div>
           </div>

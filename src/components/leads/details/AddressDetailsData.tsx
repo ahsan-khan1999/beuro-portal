@@ -62,9 +62,11 @@ const AddressDetailsData = ({
       </div>
 
       {leadDetails?.addressID?.address?.map((item, index) => (
-        <div className="mt-5" key={index}>
-          <h4 className="text-[#8F8F8F] mb-[10px]">{item?.label}</h4>
-          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
+        <div className="mt-3" key={index}>
+          <h4 className="text-[#1E1E1E] text-base font-semibold mb-[10px]">
+            {item?.label}
+          </h4>
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("leads.address_details.street_no")}
@@ -91,7 +93,7 @@ const AddressDetailsData = ({
             </div>
           </div>
 
-          <div className="mt-5 w-full">
+          <div className="w-full rounded-b-lg px-2 pb-3 bg-[#EDF4FF]">
             <label className="text-[#4D4D4D] mb-[10px] block text-sm">
               {translate("leads.address_details.description")}
             </label>

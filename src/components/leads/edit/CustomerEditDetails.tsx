@@ -1,7 +1,7 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { useLeadCustomerEditDetails } from "@/hooks/leads/useLeadCustomerEditDetails";
 import FormCard from "@/layout/customers/FormCard";
-import React from "react";
 import { ComponentsType } from "../details/LeadsDetailsData";
 
 const CustomerEditDetails = ({

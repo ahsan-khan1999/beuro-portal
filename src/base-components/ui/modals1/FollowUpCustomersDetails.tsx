@@ -10,9 +10,11 @@ type details = {
   value: string;
 };
 
-const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) => {
+const FollowUpCustomersDetails = ({
+  onClose,
+}: FollowUpCustomersDetailsProps) => {
   const { t: translate } = useTranslation();
-  
+
   const customersData: details[] = [
     {
       label: `${translate("follow_up.customer_details_modal.first_name")}`,
@@ -72,7 +74,7 @@ const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) =>
 
           <div className="flex flex-col">
             <h2 className="font-medium text-[18px] text-[#393939] mb-[26px]">
-            {translate("follow_up.customer_detail_heading")}
+              {translate("follow_up.customer_detail_heading")}
             </h2>
 
             <hr className="opacity-10" />
@@ -94,7 +96,9 @@ const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) =>
             {/* Address 1 details */}
             <div className="flex flex-col mt-5">
               <p className="text-base font-normal text-[#8F8F8F] mb-[10px]">
-              {translate("follow_up.customer_details_modal.address_one_heading")}
+                {translate(
+                  "follow_up.customer_details_modal.address_one_heading"
+                )}
               </p>
               <div className="grid grid-cols-3 gap-x-3 ">
                 {addressData.map((item, index) => (
@@ -112,7 +116,9 @@ const FollowUpCustomersDetails = ({ onClose }: FollowUpCustomersDetailsProps) =>
             {/* Address 2 details */}
             <div className="flex flex-col mt-5">
               <p className="text-base font-normal text-[#8F8F8F] mb-[10px]">
-              {translate("follow_up.customer_details_modal.address_two_heading")}
+                {translate(
+                  "follow_up.customer_details_modal.address_two_heading"
+                )}
               </p>
               <div className="grid grid-cols-3 gap-x-3 ">
                 {addressData.map((item, index) => (

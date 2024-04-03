@@ -195,9 +195,11 @@ const ContentAddDetailsData = () => {
           ))}
         </div>
       </div>
-      <div className="w-full break-all xLarge:mt-[145px] flex" ref={ref}>
+      <div className="w-full break-all xLarge:mt-[145px] flex mb-10" ref={ref}>
         <div className="max-w-[300px] w-full hidden xLarge:block"></div>
-        {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        <div className="w-full xLarge:max-w-[1060px]">
+          {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        </div>
       </div>
 
       {renderModal()}

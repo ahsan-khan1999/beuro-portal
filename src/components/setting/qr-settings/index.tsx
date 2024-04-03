@@ -9,6 +9,7 @@ const QRSettings = ({ handleCreation }: { handleCreation: Function }) => {
     useQRSettings({
       handleCreation,
     });
+
   return (
     <FormCard>
       <Form
