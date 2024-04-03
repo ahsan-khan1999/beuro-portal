@@ -6,6 +6,7 @@ import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useCustomer from "@/hooks/customer/useCustomer";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Customers() {
   const {
@@ -34,10 +35,12 @@ export default function Customers() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeading />
-        {CurrentComponent}
-      </TableLayout>
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeading />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

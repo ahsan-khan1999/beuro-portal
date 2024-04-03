@@ -6,6 +6,7 @@ import TableHeading from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import useOffers from "@/hooks/offers/useOffers";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Offers() {
   const {
@@ -41,14 +42,17 @@ export default function Offers() {
   return (
     <>
       <TableFunctions
-        filter={filter} 
+        filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeading />
-        {CurrentComponent}
-      </TableLayout>
+
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeading />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
 
       <Pagination
         totalItems={totalItems}

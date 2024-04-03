@@ -1096,6 +1096,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "actions": "Aktion",
     "service": "Dienst",
     "offer_created": "Angebote erfolgreich erstellt",
     "user_rule": "Unternehmen",

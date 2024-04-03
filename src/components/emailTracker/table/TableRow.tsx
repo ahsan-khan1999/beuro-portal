@@ -1,6 +1,6 @@
-import { TableRowEmailTracker } from "@/types/emailTracker";
-import { useRouter } from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
+import { TableRowEmailTracker } from "@/types/emailTracker";
 import {
   formatDateTimeToDate,
   formatDateTimeToTime,
@@ -24,7 +24,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               })
             }
             key={item.id}
-            className="cursor-pointer hover:bg-[#E9E1FF] items-center px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(130px,_130px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(160px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] mt-2 bg-white rounded-md"
+            className="cursor-pointer hover:bg-[#E9E1FF] items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(130px,_130px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(160px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">
               {item?.id && item.id.slice(-5)}

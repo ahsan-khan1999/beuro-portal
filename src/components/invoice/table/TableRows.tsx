@@ -1,8 +1,8 @@
-import { InvoiceTableRowTypes } from "@/types/invoice";
 import React from "react";
 import { useRouter } from "next/router";
-import { getInvoiceStatusColor } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { InvoiceTableRowTypes } from "@/types/invoice";
+import { getInvoiceStatusColor } from "@/utils/utility";
 const TableRows = ({
   dataToAdd,
   handleNotes,
@@ -25,18 +25,20 @@ const TableRows = ({
                 query: { ...router.query, invoice: item.id },
               })
             }
-            className="hover:bg-[#E9E1FF] cursor-pointer items-center bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(80px,_80px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="gap-x-3 hover:bg-[#E9E1FF] cursor-pointer items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(200px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(50px,_50px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)_minmax(50px,_50px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
-            <span className="py-4 truncate mr-1">
+            <span className="py-4 truncate">
               {item?.customerDetail?.fullName}
             </span>
-            <span className="py-4 mr-1 mlg:hidden maxSize:block truncate">
+            <span className="py-4 mlg:hidden maxSize:block truncate">
               {item?.title}
             </span>
-            <span className="py-4 truncate">{item?.total}</span>
+            <span className="py-4 truncate mlg:hidden xMaxSize:block">
+              {item?.total}
+            </span>
 
-            <span className="py-4 flex justify-center items-center mr-1">
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`${
                   item.sentEmail === item.totalEmail
@@ -50,14 +52,14 @@ const TableRows = ({
             <span className="py-4 flex justify-center items-center">
               <div className="flex justify-center items-center rounded-md w-full">
                 <div
-                  className={` bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm`}
+                  className={`bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm`}
                 >
                   {!Number.isInteger(item?.paidAmount)
                     ? Number(item?.paidAmount)?.toFixed(2)
                     : item?.paidAmount}
                 </div>
                 <div
-                  className={` bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
+                  className={`bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
                 >
                   {!Number.isInteger(item?.remainingAmount)
                     ? Number(item?.remainingAmount)?.toFixed(2)
@@ -66,7 +68,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 flex justify-center items-center ml-1">
+            <span className="py-4 flex justify-center items-center">
               <div
                 className={`bg-[${getInvoiceStatusColor(
                   item.invoiceStatus
@@ -77,7 +79,7 @@ const TableRows = ({
             </span>
             <span
               onClick={(e) => handleNotes(item?.id, e)}
-              className="py-4 cursor-pointer flex justify-center items-center   "
+              className="py-4 cursor-pointer flex justify-center items-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +120,7 @@ const TableRows = ({
               </svg>
             </span>
             <span
-              className="cursor-pointer flex justify-center items-center "
+              className="cursor-pointer flex justify-center items-center"
               onClick={() =>
                 router.push({
                   pathname: "/invoices/details",
