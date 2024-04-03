@@ -7,14 +7,14 @@ const TableLayout = ({ children }: detailScreenCardsLayout) => {
 
   return (
     <div className="overflow-x-hidden">
-      <p className="text-[16px] mlg:hidden block mb-2 mt-3">
+      <p className="text-[16px] mlg:hidden block mb-5">
         <span className="text-red-600 font-bold">
           {translate("common.note")}:{" "}
         </span>
         {translate("common.drag_table")}
       </p>
 
-      <div className="overflow-x-scroll ">
+      <div className="overflow-x-scroll">
         <div className="xs:w-[1120px] md:w-auto rounded-md">{children}</div>
       </div>
     </div>

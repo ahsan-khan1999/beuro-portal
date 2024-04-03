@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import {
   formatDateTimeToDate,
   getInvoiceEmailColor,
-  getInvoiceStatusColor,
   getMailStatusColor,
 } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
@@ -50,29 +49,33 @@ const TableRows = ({
   ];
 
   return (
-    <div className="h-screen">
+    <div
+      className={`overflow-y-visible ${
+        dataToAdd && dataToAdd.length <= 4 ? "h-[550px]" : ""
+      }`}
+    >
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div
             key={index}
             onClick={() => handleInvoicePdfPreview(item?.id)}
-            className="cursor-pointer hover:bg-[#E9E1FF] items-center bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(70px,_70px)_minmax(40px,_40px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(70px,_70px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(80px,_80px)_minmax(100px,_4fr)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(80px,_4fr)_minmax(120px,_3fr)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] xLarge:grid-cols-[minmax(80px,_80px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(170px,_170px)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(60px,_60px)_minmax(40px,_40px)] mt-2 rounded-md"
+            className="gap-x-3 cursor-pointer hover:bg-[#E9E1FF] items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(80px,_4fr)_minmax(120px,_3fr)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xLarge:grid-cols-[minmax(80px,_80px),minmax(100px,_3fr)_minmax(130px,_4fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xMaxLarge:grid-cols-[minmax(80px,_80px),minmax(100px,_3fr)_minmax(130px,_4fr)_minmax(150px,_150px)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
               {item.invoiceID?.customerDetail?.fullName}
             </span>
-            <span className="py-4 mlg:hidden maxSize:block truncate mr-1">
+            <span className="py-4 truncate mlg:hidden xMaxSize:block">
               {item?.title}
             </span>
-            <span className="py-4 truncate mlg:hidden xLarge:block">
+            <span className="py-4 truncate mlg:hidden xMaxLarge:block">
               {formatDateTimeToDate(item.createdAt)}
             </span>
-            <span className="py-4 truncate mlg:hidden xMaxSize:block">
+            <span className="py-4 truncate mlg:hidden maxSize:block">
               {item.amount + " " + systemSettings?.currency}
             </span>
 
-            <span className="py-4 flex justify-center items-center">
+            <span className="py-4">
               <div
                 style={{
                   backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
@@ -83,7 +86,7 @@ const TableRows = ({
               </div>
             </span>
 
-            <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
+            <span className="py-4" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center">
                 <DropDown
                   items={Object.keys(staticEnums["PaymentType"]).map(
@@ -119,7 +122,7 @@ const TableRows = ({
                 />
               </div>
             </span>
-            <span className="py-4 mx-1" onClick={(e) => e.stopPropagation()}>
+            <span className="py-4" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)

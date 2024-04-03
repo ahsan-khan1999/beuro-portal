@@ -6,6 +6,7 @@ import TableRows from "./table/TableRows";
 import TableHeadings from "./table/TableHeadings";
 import useLeads from "@/hooks/leads/useLeads";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Leads() {
   const {
@@ -44,10 +45,12 @@ export default function Leads() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeadings />
-        {CurrentComponent}
-      </TableLayout>
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeadings />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

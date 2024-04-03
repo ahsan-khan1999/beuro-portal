@@ -116,6 +116,11 @@ export interface detailScreenCardsLayout {
   containerClassName?: string;
 }
 
+export interface TableCardLayoutProps {
+  children: ReactNode;
+  containerClassName?: string;
+}
+
 export interface successPopup {
   heading: string;
   description: string;

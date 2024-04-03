@@ -1,8 +1,9 @@
 import React from "react";
+import TableRows from "./TableRows";
 import TableLayout from "@/layout/TableLayout";
 import TableHeading from "./TableHeading";
-import TableRows from "./TableRows";
 import { InvoiceDetailsTableProps } from "@/types/invoice";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function InvoiceDetailsTable({
   collectiveInvoice,
@@ -12,10 +13,9 @@ export default function InvoiceDetailsTable({
   handleRecurringInvoiceEdit,
 }: InvoiceDetailsTableProps) {
   return (
-    <>
+    <TableCardLayout>
       <TableLayout>
         <TableHeading />
-
         <TableRows
           dataToAdd={collectiveInvoice}
           handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
@@ -24,6 +24,6 @@ export default function InvoiceDetailsTable({
           handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
         />
       </TableLayout>
-    </>
+    </TableCardLayout>
   );
 }

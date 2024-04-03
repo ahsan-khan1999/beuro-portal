@@ -2,10 +2,8 @@ import React from "react";
 import TableLayout from "@/layout/TableLayout";
 import TableHeading from "./TableHeading";
 import TableRows from "./TableRows";
-import {
-  ReceiptDetailsTableRowTypes,
-  SubInvoiceTableRowTypes,
-} from "@/types/invoice";
+import { SubInvoiceTableRowTypes } from "@/types/invoice";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function ReceiptDetailsTable({
   collectiveInvoice,
@@ -17,7 +15,7 @@ export default function ReceiptDetailsTable({
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
 }) {
   return (
-    <>
+    <TableCardLayout>
       <TableLayout>
         <TableHeading />
         <TableRows
@@ -26,6 +24,6 @@ export default function ReceiptDetailsTable({
           handlePaymentStatusUpdate={handlePaymentStatusUpdate}
         />
       </TableLayout>
-    </>
+    </TableCardLayout>
   );
 }
