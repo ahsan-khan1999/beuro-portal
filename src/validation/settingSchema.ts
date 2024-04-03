@@ -69,9 +69,9 @@ export const generateQRCodeValdiation = (translate: Function) => {
           address: yup
             .object()
             .shape({
-              houseNumber: yup
-                .string()
-                .required(translate("validationMessages.required")),
+              // houseNumber: yup
+              //   .string()
+              //   .required(translate("validationMessages.required")),
               streetNumber: yup
                 .string()
                 .required(translate("validationMessages.required")),

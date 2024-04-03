@@ -19,11 +19,12 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
 
   const formField: FormField[] = [
     {
-      containerClass: "mt-6",
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -34,7 +35,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               className:
-                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",

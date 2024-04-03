@@ -16,11 +16,11 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "",
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 gap-4",
+        className: "grid grid-cols-1 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -40,7 +40,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
             },
           },
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.receipt_description"),
               htmlFor: "receiptContent.description",
@@ -60,7 +60,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
           },
 
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.email_body"),
               htmlFor: "receiptContent.body",
@@ -78,7 +78,7 @@ export const EditReceiptContentDetailsFormField: GenerateContentFormField = (
           },
 
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.attachments"),
               htmlFor: "receiptContent.attachments",

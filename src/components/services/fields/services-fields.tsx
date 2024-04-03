@@ -11,11 +11,12 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-6",
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 gap-x-3",
+        className:
+          "grid grid-cols-3 gap-x-3 rounded-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "col-span-2 mb-0",
@@ -61,22 +62,22 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3",
+        className: "grid grid-cols-3 px-2 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "col-span-1 mb-0",
             label: {
               text: `${translate("services.detail.price")}`,
               htmlFor: "price",
-              className: "mb-[10px] ",
+              className: "mb-[10px]",
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "number",
               id: "price",
               name: "price",
@@ -91,7 +92,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-5",
+      containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("services.detail.description")}`,
         htmlFor: "description",
@@ -99,18 +100,18 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
         id: "description",
         name: "description",
-        placeholder: "Lorem Ipsum, sometimes referred to as 'lipsum'..",
+        placeholder: translate("common.description_placeholder"),
         register,
         disabled: isUpdate,
       },
     },
 
     {
-      containerClass: "mt-[30px]",
+      containerClass: `${isUpdate ? "mt-0" : "mt-[30px]"} `,
       field: {
         type: Field.div,
         id: "div-field",

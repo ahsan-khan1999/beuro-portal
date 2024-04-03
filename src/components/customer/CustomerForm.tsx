@@ -12,7 +12,7 @@ const CustomerForm = ({
   handleSubmit,
   errors,
 }: FormDataProps) => {
-  const defaultClassName = "mt-[30px]";
+  const defaultClassName = "";
   const { t: translate } = useTranslation();
 
   return (

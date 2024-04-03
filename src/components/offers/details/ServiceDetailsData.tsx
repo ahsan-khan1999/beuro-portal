@@ -1,11 +1,10 @@
+import React from "react";
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
-import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
-import { calculateTax, filterService } from "@/utils/utility";
+import { calculateTax } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import TableLayout from "@/layout/TableLayout";
-import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const ServiceDetailsData = ({
@@ -46,9 +45,9 @@ const ServiceDetailsData = ({
           {translate("offers.service_details.edit_button")}
         </button>
       </div>
-      <TableLayout>
-        <div className="mt-[23px] border-b border-[#e5e5e5] mb-10">
-          <div className="bg-white grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-[28px]">
+      <div className="mt-3 rounded-lg px-2 pt-3 bg-[#EDF4FF]">
+        <TableLayout>
+          <div className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] pb-5">
             <span className="text-[14px] font-medium text-[#8F8F8F]">
               {translate("offers.service_details.detail_headings.title")}
             </span>
@@ -78,7 +77,7 @@ const ServiceDetailsData = ({
 
           {offerDetails?.serviceDetail?.serviceDetail.map((item, index) => (
             <div
-              className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-[18px] text-[14px] font-medium text-[#4B4B4B]"
+              className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] text-[14px] font-medium text-[#4B4B4B] border-t border-t-[#000] border-opacity-10 py-5"
               key={index}
             >
               <span className="text-base font-medium text-[#4B4B4B]">
@@ -109,61 +108,63 @@ const ServiceDetailsData = ({
             </div>
           ))}
 
-          <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5">
-            <div className="grid grid-cols-3">
-              <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
-                <span className="text-[#4D4D4D] text-[14px] font-normal">
+          <div className="border-t border-t-[#000] border-opacity-10">
+            <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5 bg-white">
+              <div className="grid grid-cols-3">
+                <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
+                  <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    {translate(
+                      "offers.service_details.detail_headings.sub_total"
+                    )}
+                  </span>
+                  <span className="text-[#4B4B4B] text-base font-medium">
+                    {offerDetails?.subTotal}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-2 ml-5 pr-5 border-r-[2px] border-r-[#EBEBEB]">
+                  <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    {translate("offers.service_details.detail_headings.tax")}
+                  </span>
+                  <span className="text-[#4B4B4B] text-base font-medium">
+                    {calculateTax(
+                      offerDetails?.total,
+                      Number(offerDetails?.taxAmount)
+                    )}{" "}
+                    ({offerDetails?.taxAmount}%)
+                  </span>
+                </div>
+                <div className="flex flex-col gap-2 ml-5">
+                  <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    {translate(
+                      "offers.service_details.detail_headings.discount"
+                    )}
+                  </span>
+                  <span className="text-[#4B4B4B] text-base font-medium">
+                    {offerDetails?.discountType === "Amount"
+                      ? offerDetails?.discountAmount + totalDiscount
+                      : calculateTax(
+                          offerDetails?.subTotal,
+                          Number(offerDetails?.discountAmount)
+                        ) + totalDiscount}
+                  </span>
+                </div>
+              </div>
+
+              <div className="float-right mt-3 border-t border-t-[#000] border-opacity-10 pt-3">
+                <span className="text-[#1E1E1E] text-base font-semibold">
                   {translate(
-                    "offers.service_details.detail_headings.sub_total"
+                    "offers.service_details.detail_headings.grand_total"
                   )}
+                  :
                 </span>
-                <span className="text-[#4B4B4B] text-base font-medium">
-                  {offerDetails?.subTotal}
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 ml-5 pr-5 border-r-[2px] border-r-[#EBEBEB]">
-                <span className="text-[#4D4D4D] text-[14px] font-normal">
-                  {translate("offers.service_details.detail_headings.tax")}
-                </span>
-                <span className="text-[#4B4B4B] text-base font-medium">
-                  {calculateTax(
-                    offerDetails?.total,
-                    Number(offerDetails?.taxAmount)
-                  )}{" "}
-                  ({offerDetails?.taxAmount}%)
+                <span className="text-[#1E1E1E] text-base font-semibold ml-3">
+                  {offerDetails?.total} {currency}
                 </span>
               </div>
-              <div className="flex flex-col gap-2 ml-5">
-                <span className="text-[#4D4D4D] text-[14px] font-normal">
-                  {translate("offers.service_details.detail_headings.discount")}
-                </span>
-                <span className="text-[#4B4B4B] text-base font-medium">
-                  {offerDetails?.discountType === "Amount"
-                    ? offerDetails?.discountAmount + totalDiscount
-                    : calculateTax(
-                        offerDetails?.subTotal,
-                        Number(offerDetails?.discountAmount)
-                      ) + totalDiscount}
-                </span>
-              </div>
-            </div>
-
-            <hr className="opacity-20 mt-2" />
-
-            <div className="grid grid-cols-2 mt-3">
-              <span className="text-[#1E1E1E] text-base font-semibold">
-                {translate(
-                  "offers.service_details.detail_headings.grand_total"
-                )}
-                :
-              </span>
-              <span className="text-[#1E1E1E] text-base font-semibold ml-5">
-                {offerDetails?.total} {currency}
-              </span>
             </div>
           </div>
-        </div>
-      </TableLayout>
+        </TableLayout>
+      </div>
     </LeadsCardLayout>
   );
 };

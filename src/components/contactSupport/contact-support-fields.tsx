@@ -12,10 +12,12 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 lg:grid-cols-3 gap-x-3 ",
+        className:
+          "grid grid-cols-2 lg:grid-cols-3 gap-x-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -61,7 +63,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"tel",
+              inputType: "tel",
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
@@ -75,11 +77,11 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     },
 
     {
-      containerClass: "mt-[25px]",
+      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3",
+        className: "grid grid-cols-3 px-2 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0 col-span-2",
@@ -136,7 +138,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       },
     },
     {
-      containerClass: "mb-0 mt-[22px]",
+      containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("contact_support.form_fields.message")}`,
         htmlFor: "message",

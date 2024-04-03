@@ -6,6 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableRows from "./table/TableRows";
 import useContract from "@/hooks/contract/useContract";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Contract() {
   const {
@@ -39,29 +40,27 @@ export default function Contract() {
   );
 
   return (
-    <div>
+    <>
       <TableFunctions
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
 
-      <div className="relative">
+      <TableCardLayout>
         <TableLayout>
           <TableHeadings />
-
           {CurrentComponent}
         </TableLayout>
-        <div className="absolute right-0 mt-1">
-          <Pagination
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-            currentPage={currentPage}
-          />
-        </div>
-      </div>
+      </TableCardLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
+
       {renderModal()}
-    </div>
+    </>
   );
 }

@@ -38,7 +38,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       },
     },
     {
-      containerClass: "rounded-t-lg px-2 pb-3 bg-[#EDF4FF]",
+      containerClass: "rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("offers.additional_details.add_new")}`,
         htmlFor: "additionalDetails",

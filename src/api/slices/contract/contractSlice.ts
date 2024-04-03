@@ -1,7 +1,6 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { GlobalApiResponseType } from "@/types/global";
 import { contractTableTypes } from "@/types/contract";
 import { DEFAULT_CONTRACT } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";

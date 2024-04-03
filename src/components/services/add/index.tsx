@@ -55,7 +55,10 @@ const AddService = () => {
             tabType={tabType}
           />
         </div>
-        {componentLookup[tabType]}
+
+        <div className="w-full xLarge:max-w-[1060px]">
+          {componentLookup[tabType]}
+        </div>
       </div>
     </Layout>
   );

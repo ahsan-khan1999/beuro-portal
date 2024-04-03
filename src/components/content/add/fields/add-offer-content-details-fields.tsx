@@ -25,44 +25,31 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 mt-5",
-      label: {
-        text: `${translate("content.details.content_name")}`,
-        htmlFor: "contentName",
-        className: "mb-[10px]",
-      },
-      field: {
-        type: Field.input,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-        inputType: "text",
-        id: "contentName",
-        name: "contentName",
-        placeholder: translate("common.content_name"),
-        register,
-      },
-    },
-
-    // {
-    //   containerClass: "mt-5",
-    //   //@ts-expect-error
-    //   field: {
-    //     type: Field.div,
-    //     id: "div-field",
-    //     className: "grid grid-cols-2 xl:grid-cols-3 gap-4",
-    //     children:
-    //       count &&
-    //       generateAddressChildren(register, count, translate, append, remove),
-    //   },
-    // },
-    {
-      containerClass: "mt-5",
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 gap-4",
+        className: "grid grid-cols-1 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("content.details.content_name")}`,
+              htmlFor: "contentName",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              inputType: "text",
+              id: "contentName",
+              name: "contentName",
+              placeholder: translate("common.content_name"),
+              register,
+            },
+          },
+          {
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.offer_title"),
               htmlFor: "offerContent.title",
@@ -79,7 +66,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
           },
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.offer_description"),
               htmlFor: "offerContent.description",
@@ -98,7 +85,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
           },
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.email_body"),
               htmlFor: "offerContent.body",
@@ -119,7 +106,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
           },
 
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.attachments"),
               htmlFor: "offerContent.attachments",
@@ -143,14 +130,14 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-6 float-right",
+      containerClass: "my-6 float-right",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("content.details.next_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
         loading,
       },
     },

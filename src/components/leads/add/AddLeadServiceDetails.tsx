@@ -13,7 +13,7 @@ const AddLeadServiceDetails = ({
   onHandleBack: (currentComponent: ComponentsType) => void;
   onHandleNext: (currentComponent: ComponentsType) => void;
 }) => {
-  const defaultClassName = "pt-5";
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddLeadServiceDetails({ onHandleBack, onHandleNext });
   const router = useRouter();

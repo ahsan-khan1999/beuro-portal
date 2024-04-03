@@ -59,49 +59,53 @@ const InoviceContentDetails = ({
         </button>
       </div>
 
-      <div className="pl-[29px] pr-[25px] pt-[22px] pb-[39px]">
-        <div>
-          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
-            {translate("content.details.invoice_title")}
-          </p>
-          <p className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
-            {contentDetail?.invoiceContent?.title}
-          </p>
-        </div>
+      <div className="px-5 py-3">
+        <div className="grid grid-cols-1 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
+          <div>
+            <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
+              {translate("content.details.invoice_title")}
+            </p>
+            <p className="border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
+              {contentDetail?.invoiceContent?.title}
+            </p>
+          </div>
 
-        <div className="flex flex-col mt-5">
-          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
-            {translate("content.details.invoice_description")}
-          </p>
+          <div className="flex flex-col">
+            <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
+              {translate("content.details.invoice_description")}
+            </p>
 
-          <div
-            className="html-content border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
-            dangerouslySetInnerHTML={{
-              __html: contentDetail?.invoiceContent?.description,
-            }}
-          />
-        </div>
-        <div className="flex flex-col mt-5">
-          <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
-            {translate("content.details.email_body")}
-          </p>
-          <div
-            className="html-content border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
-            dangerouslySetInnerHTML={{
-              __html: contentDetail?.invoiceContent?.body,
-            }}
-          />
-        </div>
+            <div
+              className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
+              dangerouslySetInnerHTML={{
+                __html: contentDetail?.invoiceContent?.description,
+              }}
+            />
+          </div>
 
-        {/* attachments is here */}
-        <div className="mt-5 w-full xl:w-[90%]">
-          <span className="text-[#1E1E1E] font-semibold text-[14px] ">
-            {translate("content.details.attachments")}
-          </span>
-          <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">
-            {contentDetail?.invoiceContent?.attachments?.map((item, index) => (
-              <AttachmentsFiles fileName={item} key={index} />
-            ))}
+          <div className="flex flex-col">
+            <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
+              {translate("content.details.email_body")}
+            </p>
+            <div
+              className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
+              dangerouslySetInnerHTML={{
+                __html: contentDetail?.invoiceContent?.body,
+              }}
+            />
+          </div>
+
+          <div className="w-full xl:w-[90%]">
+            <span className="text-[#1E1E1E] font-semibold text-[14px] ">
+              {translate("content.details.attachments")}
+            </span>
+            <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">
+              {contentDetail?.invoiceContent?.attachments?.map(
+                (item, index) => (
+                  <AttachmentsFiles fileName={item} key={index} />
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>

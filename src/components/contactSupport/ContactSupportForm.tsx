@@ -8,7 +8,7 @@ const ContactSupportForm = ({
 }: {
   requestSubmitHandler: Function;
 }) => {
-  const defaultClassName = "mt-[30px]";
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     userContactSupport(requestSubmitHandler);
 

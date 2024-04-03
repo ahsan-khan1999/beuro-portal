@@ -215,7 +215,7 @@ const ContentDetailsData = () => {
           ))}
         </div>
       </div>
-      <div className="w-full break-all flex">
+      <div className="w-full break-all flex mb-10">
         <div className="max-w-[280px] w-full hidden maxSize:block"></div>
         <div className="flex flex-col gap-y-5 w-full">
           {renderComponent.map((component, index) => (

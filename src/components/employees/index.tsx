@@ -6,6 +6,7 @@ import TableHeadings from "./table/TableHeadings";
 import TableFunctions from "./table/TableFunctions";
 import useEmployee from "@/hooks/employee/useEmployee";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Employees() {
   const {
@@ -34,10 +35,12 @@ export default function Employees() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeadings />
-        {CurrentComponent}
-      </TableLayout>
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeadings />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

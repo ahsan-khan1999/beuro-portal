@@ -1,6 +1,6 @@
+import React from "react";
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
-import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
@@ -17,7 +17,7 @@ const AdditionalDetails = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center pb-5 border-b border-b-[#e5e5e5]"
         id={translate("offers.tabs_heading.additional")}
       >
         <h2 className="text-[#393939] text-lg font-medium">
@@ -37,12 +37,14 @@ const AdditionalDetails = ({
         </button>
       </div>
 
-      <hr className="opacity-20 mb-5" />
-
-      <div className="py-[25px] px-[30px]">
+      <div className="mt-3 rounded-lg px-2 py-3 bg-[#EDF4FF]">
         <div
           className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
-          dangerouslySetInnerHTML={{ __html: replaceClassesWithInlineStyles(offerDetails?.additionalDetails || "") }}
+          dangerouslySetInnerHTML={{
+            __html: replaceClassesWithInlineStyles(
+              offerDetails?.additionalDetails || ""
+            ),
+          }}
         />
       </div>
     </LeadsCardLayout>

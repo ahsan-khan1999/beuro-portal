@@ -19,7 +19,6 @@ const AddLeadAdditionalDetails = ({
     useAddLeadAdditionalDetails({ onHandleBack, onHandleNext });
 
   const router = useRouter();
-
   const handleCancel = () => {
     router.pathname = "/leads";
     router.query = { status: "None", page: "1" };
