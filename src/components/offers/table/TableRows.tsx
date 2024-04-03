@@ -58,19 +58,17 @@ const TableRows = ({
               })
             }
             key={index}
-            className="cursor-pointer items-center hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(60px,_3fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(70px,_70px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(70px,_70px),minmax(60px,_100%)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(70px,_100%)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(90px,_90px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(70px,_70px)_minmax(60px,_60px)_minmax(90px,_90px)] mt-2 rounded-md"
+            className="gap-x-4 mlg:gap-x-2 xMaxSize:gap-x-3 cursor-pointer items-center hover:bg-[#E9E1FF] xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_3fr)_minmax(300px,_4fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_3fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(80px,_80px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(70px,_70px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(70px,_70px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)_minmax(90px,_90px)_minmax(90px,_90px)_minmax(170px,_170px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item.offerNumber}</span>
-            <span className="py-4 truncate">
+            <span className="py-4 truncate mr-1">
               {item.leadID?.customerDetail?.fullName}
             </span>
-            <span className="mr-1 py-4 xs:block mlg:hidden xlg:hidden maxSize:hidden xMaxSize:block truncate">
+            <span className="mr-1 py-4 xs:block mlg:hidden xLarge:block truncate">
               {item?.title}
             </span>
-            <span className="py-4 truncate mlg:hidden xlg:block">
-              {item.total}
-            </span>
-            <span className="py-4 mlg:hidden xLarge:block truncate">
+            <span className="py-4 truncate block mlg:hidden">{item.total}</span>
+            <span className="py-4 mlg:hidden xMaxSize:block truncate">
               {formatDateString(item.createdAt)}
             </span>
             <span className="py-4 flex justify-center items-center">
@@ -137,7 +135,7 @@ const TableRows = ({
             </span> */}
 
             {item.offerStatus === "Accepted" ? (
-              <span className="py-4 ml-1">
+              <span className="py-4 ml-1 mr-3">
                 <div
                   style={{
                     backgroundColor: `${getOfferStatusColor(item.offerStatus)}`,
@@ -148,7 +146,10 @@ const TableRows = ({
                 </div>
               </span>
             ) : (
-              <div className="py-4 ml-1" onClick={(e) => e.stopPropagation()}>
+              <div
+                className="py-4 ml-1 mr-3"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <DropDown
                   items={Object.keys(staticEnums["OfferStatus"]).map(
                     (item, index) => ({

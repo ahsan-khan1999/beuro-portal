@@ -6,6 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import useService from "@/hooks/services/useService";
 import TableHeadings from "./table/TableHeadings";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Services() {
   const {
@@ -36,10 +37,12 @@ export default function Services() {
         handleFilterChange={handleFilterChange}
         translate={translate}
       />
-      <TableLayout>
-        <TableHeadings />
-        {CurrentComponent}
-      </TableLayout>
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeadings />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

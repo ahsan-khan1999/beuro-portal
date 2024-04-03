@@ -7,6 +7,7 @@ import TableRows from "./table/TableRows";
 import useInvoice from "@/hooks/invoice/useInvoice";
 import { useEmptyStates } from "@/utils/hooks";
 import { useTranslation } from "next-i18next";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Invoices() {
   const {
@@ -59,10 +60,12 @@ export default function Invoices() {
         </div>
       </div>
 
-      <TableLayout>
-        <TableHeading />
-        {CurrentComponent}
-      </TableLayout>
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeading />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

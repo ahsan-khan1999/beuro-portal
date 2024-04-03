@@ -43,22 +43,26 @@ const TableRows = ({
   ];
 
   return (
-    <div className="h-screen">
+    <div
+      className={`overflow-y-visible ${
+        collectiveInvoice && collectiveInvoice.length <= 4 ? "h-[550px]" : ""
+      }`}
+    >
       {collectiveInvoice?.map((item, index: number) => {
         return (
           <div
             key={index}
             onClick={() => handleReceiptPreview(item?.id)}
-            className="cursor-pointer hover:bg-[#E9E1FF] bg-white px-6 shadow-tableRow xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(160px,_160px)_minmax(130px,_130px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(80px,_3fr)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_60px)_minmax(30px,_30px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(60px,_60px)_minmax(30px,_30px)] mt-2 rounded-md"
+            className="gap-x-3 cursor-pointer hover:bg-[#E9E1FF] xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(160px,_160px)_minmax(130px,_130px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(70px,_70px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(50px,_50px)_minmax(40px,_40px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(50px,_50px)_minmax(40px,_40px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(50px,_50px)_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(50px,_50px)_minmax(40px,_40px)] xLarge:grid-cols-[minmax(90px,_90px),minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(50px,_50px)_minmax(40px,_40px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <span className="py-4 truncate">
               {item.invoiceID?.customerDetail?.fullName}
             </span>
-            <span className="py-4 truncate mr-1 mlg:hidden xMaxSize:block">
+            <span className="py-4 truncate mlg:hidden xMaxSize:block">
               {item?.title}
             </span>
-            <span className="py-4 truncate">
+            <span className="py-4 truncate mlg:hidden xLarge:block">
               {formatDateTimeToDate(item.createdAt)}
             </span>
             <span className="py-4 truncate mlg:hidden xlg:block">
@@ -70,7 +74,7 @@ const TableRows = ({
                 style={{
                   backgroundColor: `${getInvoiceEmailColor(item.emailStatus)}`,
                 }}
-                className="text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px] w-full mr-1"
+                className="text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px] w-full"
               >
                 {translate(item?.emailStatus)}
               </div>
@@ -110,7 +114,7 @@ const TableRows = ({
                 }
               />
             </span>
-            <span className="py-4 mx-2" onClick={(e) => e.stopPropagation()}>
+            <span className="py-4" onClick={(e) => e.stopPropagation()}>
               <DropDown
                 items={Object.keys(staticEnums["InvoiceStatus"])
                   ?.slice(0, -1)
