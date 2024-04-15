@@ -30,8 +30,6 @@ const InvoiceDetailsData = ({
     updateQuery(router, router.locale as string);
   };
 
-  console.log("invoiceStatus:", invoiceDetails.invoiceStatus);
-
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-y-3 mb-5">

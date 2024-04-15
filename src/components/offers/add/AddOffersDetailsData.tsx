@@ -13,7 +13,6 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
-import { updateQuery } from "@/utils/update-query";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 

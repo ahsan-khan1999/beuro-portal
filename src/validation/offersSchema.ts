@@ -108,6 +108,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       .required(translate("validationMessages.required")),
   });
 };
+
 export const generateOfferDetailsDateValidationSchema = (
   translate: Function,
   count: number

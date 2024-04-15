@@ -1,9 +1,9 @@
+import { Form } from "@/base-components/form/form";
+import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
-import { Form } from "@/base-components/form/form";
-import FormCard from "@/layout/customers/FormCard";
-import { useAddOfferDetails } from "@/hooks/offers/useAddOfferDetails";
+import { useCreateInvoiceCustomerDetails } from "@/hooks/invoice/useCreateInvoiceCustomerDetails";
 
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
@@ -17,10 +17,10 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
     error,
     translate,
     offerDetails,
-  } = useAddOfferDetails(onHandleNext);
-  
+  } = useCreateInvoiceCustomerDetails(onHandleNext);
+
   const handleCancel = () => {
-    router.pathname = "/offers";
+    router.pathname = "/invoices";
     router.query = { status: "None", page: "1" };
     updateQuery(router, router.locale as string);
   };
@@ -55,7 +55,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
               />
             </svg>
           </span>
-          <p className="font-medium text-[24px] leading-6 ">
+          <p className="font-medium text-2xl">
             {translate("offers.offer_details.heading")}{" "}
             {offerDetails?.id && offerDetails?.offerNumber}
           </p>

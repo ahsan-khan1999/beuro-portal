@@ -10,10 +10,9 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
   AddDateFormField,
-  AddOfferDetailsFormField,
+  AddInvoiceDetailsFormField,
   AddOfferDetailsSubmitFormField,
-} from "@/components/offers/add/fields/add-offer-details-fields";
-import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
+} from "@/components/invoice/edit/fields/add-offer-details-fields";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo } from "react";
 import {
@@ -28,8 +27,10 @@ import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
 import { ContentTableRowTypes } from "@/types/content";
+import { AddOfferDetailsFormField } from "@/components/invoice/createInvoice/fields/add-offer-details-fields";
+import { generateInvoiceDetailsValidationSchema } from "@/validation/invoiceSchema";
 
-export const useAddOfferDetails = (onHandleNext: Function) => {
+export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -46,12 +47,12 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
 
   const onCancel = () => {
-    router.pathname = "/offers";
+    router.pathname = "/invoices";
     router.query = { status: "None", page: "1" };
     updateQuery(router, router.locale as string);
   };
 
-  const schema = generateOfferDetailsValidationSchema(translate);
+  const schema = generateInvoiceDetailsValidationSchema(translate);
   const {
     register,
     handleSubmit,
@@ -167,6 +168,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       }
     }
   }, [selectedContent, leadID]);
+
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -187,6 +189,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     },
     setValue
   );
+
   useMemo(() => {
     if (type === "New Customer") {
       reset({
@@ -243,6 +246,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     loading,
     control
   );
+
   const submit = AddOfferDetailsSubmitFormField(
     register,
     loading,

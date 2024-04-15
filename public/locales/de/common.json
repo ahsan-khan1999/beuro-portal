@@ -1096,6 +1096,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "create_invoice": "Rechnung erstellen",
     "description_placeholder": "Bitte tragen Sie hier Ihre Angaben ein...",
     "actions": "Aktion",
     "service": "Dienst",

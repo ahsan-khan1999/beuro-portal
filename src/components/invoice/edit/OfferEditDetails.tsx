@@ -2,8 +2,8 @@ import React from "react";
 import { Form } from "@/base-components/form/form";
 import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
-import { EditComponentsType } from "./EditOffersDetailsData";
 import { useEditInvoiceDetails } from "@/hooks/invoice/useEditInvoiceDetails";
+import { EditComponentsType } from "@/enums/invoice";
 
 const OfferEditDetails = ({
   handleNext,
