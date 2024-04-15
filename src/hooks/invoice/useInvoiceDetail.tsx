@@ -35,10 +35,12 @@ import { readContent } from "@/api/slices/content/contentSlice";
 import { updateQuery } from "@/utils/update-query";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
-  const [switchDetails, setSwitchDetails] = useState("Invoice");
   const [isSendEmail, setIsSendEmail] = useState(false);
+  const [activeTab, setActiveTab] = useState("invoice_tab");
+  const invoiceDetailTabs = ["invoice_tab", "receipt_tab"];
 
   const { modal } = useAppSelector((state) => state.global);
   const { systemSettings } = useAppSelector((state) => state.settings);
@@ -84,6 +86,7 @@ export default function useInvoiceDetail() {
       );
     }
   }, [id]);
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -193,6 +196,7 @@ export default function useInvoiceDetail() {
     onSuccess: handleRecurringSuccess,
     loading: loading,
   };
+
   const handleInvoiceEdit = (item: any) => {
     dispatch(updateModalType({ type: ModalType.INVOICE_UPDATE, data: item }));
   };
@@ -380,13 +384,46 @@ export default function useInvoiceDetail() {
     router.query = { invoice: invoiceDetails?.id };
     updateQuery(router, router.locale as string);
   };
+
+  useEffect(() => {
+    const updateActiveTabFromQuery = () => {
+      const { tab } = router.query;
+      if (tab && invoiceDetailTabs.includes(tab as string)) {
+        setActiveTab(tab as string);
+      } else if (invoice) {
+        if (collectiveInvoice && collectiveInvoice.length > 0) {
+          setActiveTab("invoice_tab");
+        } else if (collectiveReciept && collectiveReciept.length > 0) {
+          setActiveTab("receipt_tab");
+        } else {
+          setActiveTab(invoiceDetailTabs[0]);
+        }
+      }
+    };
+
+    // Update active tab when component mounts
+    updateActiveTabFromQuery();
+
+    // Subscribe to route changes to update active tab
+    const handleRouteChange = () => {
+      updateActiveTabFromQuery();
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    // Clean up subscription
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [invoice, collectiveInvoice, collectiveReciept, router.query]);
+
   return {
     invoiceDetails,
     renderModal,
     offerDeleteHandler,
     handleNotes,
-    setSwitchDetails,
-    switchDetails,
+    activeTab,
+    setActiveTab,
     handleInvoiceCreation,
     collectiveInvoice,
     handleInvoiceStatusUpdate,

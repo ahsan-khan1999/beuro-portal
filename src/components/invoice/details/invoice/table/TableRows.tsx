@@ -33,7 +33,7 @@ const TableRows = ({
   const handleInvoicePdfPreview = (id?: string) => {
     router.push({
       pathname: "/invoices/invoice-pdf-preview",
-      query: { ...router.query, invoiceID: id, isMail: true },
+      query: { ...router.query, tab: "invoice", invoiceID: id, isMail: true },
     });
   };
 
