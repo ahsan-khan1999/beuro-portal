@@ -197,7 +197,7 @@ const ContentAddDetailsData = () => {
       </div>
       <div className="w-full break-all xLarge:mt-[145px] flex mb-10" ref={ref}>
         <div className="max-w-[300px] w-full hidden xLarge:block"></div>
-        <div className="w-full xLarge:max-w-[1060px]">
+        <div className="w-full xLarge:max-w-[80%]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>
