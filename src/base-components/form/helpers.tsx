@@ -69,6 +69,7 @@ export const getTypedFieldComponent = <T extends FieldProps>(
   errors?: Record<string, any>
 ): JSX.Element => {
   const Component = fieldComponents[type] as React.FC<Record<string, any>>;
+  console.log(errors);
 
   return (
     <>

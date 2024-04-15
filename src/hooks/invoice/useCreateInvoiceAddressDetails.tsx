@@ -73,7 +73,7 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
           : addressType?.map((item, index) => ({
               streetNumber: "",
               postalCode: "",
-              country: "Schweiz",
+              country: "",
               description: "",
               label: `Adresse ${++index}`,
             })),

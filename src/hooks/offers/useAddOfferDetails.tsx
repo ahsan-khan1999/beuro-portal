@@ -142,6 +142,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   };
 
   const handleContentSelect = () => {};
+
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
@@ -167,6 +168,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       }
     }
   }, [selectedContent, leadID]);
+
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -187,6 +189,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     },
     setValue
   );
+
   useMemo(() => {
     if (type === "New Customer") {
       reset({
@@ -243,6 +246,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     loading,
     control
   );
+
   const submit = AddOfferDetailsSubmitFormField(
     register,
     loading,

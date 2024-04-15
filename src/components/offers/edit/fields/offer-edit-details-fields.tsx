@@ -207,7 +207,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               inputType: "text",
               id: "country",
               name: "country",
-              placeholder: "Schweiz",
+              placeholder: "",
 
               register,
             },

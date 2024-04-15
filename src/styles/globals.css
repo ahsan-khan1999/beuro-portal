@@ -637,7 +637,7 @@ input[type="number"] {
 }
 
 input[type="date"] {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 @media (max-width: 1460px) {
