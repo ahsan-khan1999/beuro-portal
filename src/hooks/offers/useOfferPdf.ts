@@ -147,7 +147,7 @@ export const useOfferPdf = () => {
             },
             headerDetails: {
               offerNo: offerDetails?.offerNumber,
-              companyName: offerDetails?.leadID?.customerDetail?.companyName,
+              companyName: offerDetails?.createdBy.company.companyName,
               offerDate: offerDetails?.createdAt,
               createdBy: offerDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
