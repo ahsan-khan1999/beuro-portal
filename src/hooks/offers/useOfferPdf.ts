@@ -147,6 +147,7 @@ export const useOfferPdf = () => {
             },
             headerDetails: {
               offerNo: offerDetails?.offerNumber,
+              companyName: offerDetails?.leadID?.customerDetail?.companyName,
               offerDate: offerDetails?.createdAt,
               createdBy: offerDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
@@ -261,10 +262,13 @@ export const useOfferPdf = () => {
 
       if (!pdfFile) return;
       formData.append("file", pdfFile as any);
+
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
+
       if (fileUrl?.payload) {
         localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
+
       if (isMail) {
         router.push(
           {
@@ -315,6 +319,7 @@ export const useOfferPdf = () => {
       console.error("Error in handleEmailSend:", error);
     }
   };
+
   const handleSendByPost = async () => {
     setActiveButtonId("post");
 
@@ -326,6 +331,7 @@ export const useOfferPdf = () => {
     if (response?.payload)
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const handleDonwload = () => {
     if (pdfFile) {
       const url = URL.createObjectURL(pdfFile);
@@ -343,9 +349,11 @@ export const useOfferPdf = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   const handlePrint = () => {
     window.open(offerDetails?.attachement);
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

@@ -1,9 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateContractFormField,
-  GenerateOfferFormField,
-} from "@/types";
+import { FormField, GenerateOfferFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
@@ -23,8 +19,8 @@ export const OfferEmailFormField: GenerateOfferFormField = (
   setIsMoreEmail,
   setValue
 ) => {
-  const router = useRouter()
-  const isMail = router?.query?.isMail
+  const router = useRouter();
+  const isMail = router?.query?.isMail;
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
@@ -80,7 +76,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                 },
 
                 {
-                  containerClass: "mb-0  ",
+                  containerClass: "mb-0",
                   field: {
                     type: Field.span,
                     text: `Bcc`,
@@ -200,7 +196,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
       containerClass: "",
       field: {
         type: Field.div,
-        id:"titlefield",
+        id: "titlefield",
         className: "grid grid-cols-2 gap-x-3",
         children: [
           {
@@ -216,8 +212,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               inputType: "text",
               id: "subject",
               name: "subject",
-              placeholder:
-                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+              placeholder: "",
               register,
             },
           },
@@ -239,10 +234,9 @@ export const OfferEmailFormField: GenerateOfferFormField = (
           //     register,
           //   },
           // },
-        ]
-      }
+        ],
+      },
     },
-   
 
     {
       containerClass: "mb-0 mt-5",
@@ -326,14 +320,13 @@ export const OfferEmailFormField: GenerateOfferFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: isMail && `${translate(
-                "contracts.contract_email_preview.send"
-              )}` || `${translate(
-                "contracts.contract_email_preview.next_button"
-              )}`,
+              text:
+                (isMail &&
+                  `${translate("contracts.contract_email_preview.send")}`) ||
+                `${translate("contracts.contract_email_preview.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none",
               loading,
             },
           },

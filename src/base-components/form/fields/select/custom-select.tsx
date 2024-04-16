@@ -27,8 +27,6 @@ export const SelectBox = ({
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
 
-  console.log(defaultValue);
-
   useEffect(() => {
     // setOption(options);
     if (defaultValue) {
