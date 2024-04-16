@@ -12,15 +12,15 @@ const AddressDetailsData = ({
 
   return (
     <div
-      className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit"
+      className="rounded-md border-none bg-white w-full h-fit"
       id={translate("contracts.tabs_headings.address_details")}
     >
-      <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-10 pb-5">
+      <h2 className="text-[#fff] text-lg font-medium bg-[#FE9244] py-5 px-6 rounded-t-lg">
         {translate("contracts.address_details.main_heading")}
       </h2>
 
       {contractDetails.offerID?.addressID?.address?.map((item, key) => (
-        <div className="my-5" key={key}>
+        <div className="py-3 px-6" key={key}>
           <h4 className="text-[#1E1E1E] text-base font-semibold mb-[10px]">
             {translate("contracts.address_details.main_heading")}
           </h4>
@@ -29,7 +29,7 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.address_details.street_no")}.
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {item.streetNumber}
               </div>
             </div>
@@ -37,7 +37,7 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.address_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {item.postalCode}
               </div>
             </div>
@@ -45,8 +45,8 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.address_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {translate(`countries.${item.country}`)}
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                {item.country}
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@ const AddressDetailsData = ({
             <label className="text-[#4D4D4D] mb-[10px] block text-sm">
               {translate("contracts.address_details.description")}
             </label>
-            <div className="min-h-[52px] rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium break-all">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium break-all min-h-[58px]">
               {item.description}
             </div>
           </div>

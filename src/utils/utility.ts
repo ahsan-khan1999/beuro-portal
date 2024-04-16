@@ -432,16 +432,16 @@ export function getStatusColor(status: string) {
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["InProcess"]
   )
-    return "#45C769";
+    return "#d7c736";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
   )
-    return "#FE9244";
+    return "#45C769";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]
   )
-    return "#FF376F";
-  else return "#FF376F";
+    return "#FF0000";
+  else return "#FF0000";
 }
 
 type TransformedMessages = {
@@ -583,11 +583,11 @@ export function getEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
   )
-    return "#FE9244";
+    return "#45C769";
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
   )
-    return "#45C769";
+    return "#FE9244";
   else return "#FF376F";
 }
 

@@ -26,7 +26,7 @@ export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormF
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex items-center justify-end space-x-[18px] mt-[30px]",
+          className: "flex items-center justify-end space-x-[18px] my-[30px]",
           children: [
             {
               containerClass: "mb-0",

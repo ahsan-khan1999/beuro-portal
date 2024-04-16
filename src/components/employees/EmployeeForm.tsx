@@ -15,17 +15,17 @@ const EmployeeForm = ({
   errors,
   handlePasswordReset,
 }: FormDataProps) => {
-  const defaultClassName = "";
+  const defaultClassName = "mt-0";
   const { t: translate } = useTranslation();
 
   return (
     <div
-      className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
-        !isUpdate ? "border-primary" : "border-none"
+      className={`rounded-md bg-white ${
+        !isUpdate ? "border border-primary" : "border-none"
       } w-full h-fit`}
     >
-      <div className="flex flex-col mlg:flex-row justify-between mlg:items-center pb-5 border-b border-black border-opacity-10 gap-y-3">
-        <h2 className="text-[#393939] text-lg font-medium">
+      <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-3 bg-primary py-5 px-6 rounded-t-lg">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("employees.details.main_heading")}
         </h2>
         {isUpdate ? (
@@ -49,17 +49,20 @@ const EmployeeForm = ({
           <BaseButton
             buttonText={translate("employees.details.cancel_button")}
             onClick={() => setIsUpdate(!isUpdate)}
-            containerClassName="flex  items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[161px] w-full"
+            containerClassName="flex items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[161px] w-full"
           ></BaseButton>
         )}
       </div>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </div>
   );
 };

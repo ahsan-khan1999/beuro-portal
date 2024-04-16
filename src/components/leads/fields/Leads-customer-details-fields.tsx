@@ -236,7 +236,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex justify-end items-center space-x-[18px] mt-[30px]",
+        className: "flex justify-end items-center space-x-[18px] my-[30px]",
         children: [
           {
             containerClass: "mb-0",

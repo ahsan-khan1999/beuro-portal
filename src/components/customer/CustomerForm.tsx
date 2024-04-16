@@ -17,12 +17,12 @@ const CustomerForm = ({
 
   return (
     <div
-      className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
+      className={`rounded-lg bg-white border ${
         !isUpdate ? "border-primary" : "border-none"
       } w-full h-fit`}
     >
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10">
-        <h2 className="text-[#393939] text-lg font-medium">
+      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10 bg-[#4A13E7] py-[26px] pl-[32px] pr-[25px] rounded-t-lg">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("customers.details.heading")}
         </h2>
         {isUpdate ? (
@@ -72,13 +72,16 @@ const CustomerForm = ({
           />
         )}
       </div>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+
+      <div className="px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </div>
   );
 };

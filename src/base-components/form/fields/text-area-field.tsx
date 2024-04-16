@@ -17,7 +17,7 @@ export const TextAreaField = ({
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full  ${
     true ? "pl-4 pr-10" : "pl-10 pr-4"
-  } py-[10px] outline-none text-dark text-sm focus:border-primary  `;
+  } py-[10px] outline-none text-dark text-sm focus:border-primary bg-white`;
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
 

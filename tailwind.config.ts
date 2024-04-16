@@ -78,7 +78,6 @@ module.exports = {
         shadowColor: "#00000029",
         helpShadowColor: "#00000014",
         lightDark: "#393939",
-
         statusColor: "#AF2626",
         defaultBackground: "#f3f3f3",
       },

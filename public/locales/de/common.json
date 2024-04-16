@@ -207,21 +207,21 @@
       "customers": "Kunden",
       "leads": {
         "leads": "Anfragen",
-        "open": "Offen",
+        "open": "Geöffnet",
         "InProcess": "In Bearbeitung",
         "close": "Geschlossen",
         "expire": "Abgelaufen"
       },
       "offers": {
         "offers": "Angebote",
-        "open": "Offen",
+        "open": "Geöffnet",
         "signed": "Angenommen",
         "expired": "Abgelaufen",
         "rejected": "Abgelehnt"
       },
       "contracts": {
         "contracts": "Verträge",
-        "open": "Offen",
+        "open": "Geöffnet",
         "confirmed": "Bestätigt",
         "cancelled": "Abgebrochen"
       },
@@ -230,7 +230,7 @@
         "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
-        "open": "Offen"
+        "open": "Geöffnet"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -335,7 +335,7 @@
     "main_heading": "E-Mail Tracker",
     "email_detail_heading": "E-Mail",
     "table_functions": {
-      "open": "Offen",
+      "open": "Geöffnet",
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     },
@@ -673,7 +673,7 @@
       "edit_invoice": "Rechnung Bearbeiten"
     },
     "table_functions": {
-      "open": "Offen",
+      "open": "Geöffnet",
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     },
@@ -751,7 +751,7 @@
   "contracts": {
     "main_heading": "Verträge",
     "table_functions": {
-      "open": "Offen",
+      "open": "Geöffnet",
       "confirm": "Bestätigt",
       "cancel": "Abgebrochen"
     },
@@ -909,13 +909,13 @@
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
     "table_functions": {
-      "open": "offen",
+      "open": "Geöffnet",
       "inProcess": "In Bearbeitung",
       "close": "geschlossen",
       "expire": "abgelaufen"
     },
     "lead_dropdown_status": {
-      "Open": "Offen",
+      "Open": "Geöffnet",
       "InProcess": "In Bearbeitung",
       "Close": "Geschlossen",
       "Expired": "Abgelaufen"
@@ -1294,7 +1294,7 @@
     "main_heading": "Angebote",
     "add_button": "Neu Hinzufügen",
     "table_functions": {
-      "open": "Offen",
+      "open": "Geöffnet",
       "signed": "Angenommen",
       "expire": "Abgelaufen",
       "rejected": "Abgelehnt"
@@ -1867,7 +1867,7 @@
       "sales": "Rechnungen"
     },
     "cards_status": {
-      "open": "Offen",
+      "open": "Geöffnet",
       "close": "Geschlossen",
       "expire": "Abgelaufen",
       "signed": "Unterzeichnet",
@@ -1875,7 +1875,7 @@
       "cancel": "Abgebrochen",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
-      "pending": "Entwurf"
+      "pending": "Ausstehend"
     },
     "charts_labels": {
       "website": "Webseite",
@@ -1970,13 +1970,13 @@
       "to": "Bis",
       "email": "E-Mail",
       "send": "Senden",
-      "draft": "Entwurf",
+      "draft": "Ausstehend",
       "failed": "Fehlgeschlagen",
       "pending": "Ausstehend",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
       "leadSource": "Leadquellen",
-      "open": "Offen"
+      "open": "Geöffnet"
     }
   },
   "global_search": {
@@ -2014,40 +2014,40 @@
     "offer_id": "Angebot ID",
     "email_status": "E-Mail-Status"
   },
-  "Pending": "Entwurf",
+  "Pending": "Ausstehend",
   "Sent": "Gesendet",
   "gender": {
     "Mr": "Herr",
     "Mrs": "Frau"
   },
   "lead_status": {
-    "Open": "Offen",
+    "Open": "Geöffnet",
     "InProcess": "In Bearbeitung",
     "Close": "Geschlossen",
     "Expired": "Abgelaufen"
   },
   "offer_status": {
-    "Open": "Offen",
+    "Open": "Geöffnet",
     "Expired": "Abgeloffen",
     "Rejected": "Abgelehnt",
     "Accepted": "Angenommen"
   },
   "contract_status": {
-    "Open": "Offen",
+    "Open": "Geöffnet",
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgebrochen",
     "Sent": "Gesendet",
-    "Pending": "Entwurf",
+    "Pending": "Ausstehend",
     "Post": "Gesendet"
   },
   "invoice_status": {
     "Pending": "Ausstehend",
     "Overdue": "Überfällig",
     "Paid": "Bezahlt",
-    "Open": "Offen"
+    "Open": "Geöffnet"
   },
   "support_req_status": {
-    "pending": "Entwurf",
+    "pending": "Ausstehend",
     "resolved": "aufgelöst"
   },
   "payment_method": {
@@ -2067,17 +2067,17 @@
   },
   "email_status": {
     "Post": "Gesendet",
-    "Pending": "Entwurf",
+    "Pending": "Ausstehend",
     "Sent": "Gesendet",
     "Failed": "Gescheitert"
   },
   "mail_tracker_status": {
-    "pending": "Entwurf",
-    "opend": "Offen",
+    "pending": "Ausstehend",
+    "opend": "Geöffnet",
     "failed": "Fehlgeschlagen"
   },
   "support_request_status": {
-    "pending": "Entwurf",
+    "pending": "Ausstehend",
     "resolved": "aufgelöst"
   },
   "customer_type": {
@@ -2140,7 +2140,7 @@
     }
   },
   "add_note_dropdown": {
-    "all_notes": "Alle Notizen",
+    "all_notes": "Alle Anfragen",
     "sending_picture": "Sendet Fotos",
     "view_date": "Besichtigungs Termin",
     "approximate_offer_open": "Schätzoﬀerte Oﬀen",

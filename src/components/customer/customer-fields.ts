@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { DivProps, FormField, GenerateCustomerFormField } from "@/types";
-import { GenderLabel, staticEnums } from "@/utils/static";
+import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { DivProps, FormField, GenerateCustomerFormField } from "@/types";
 
 export const customerDetailsFormField: GenerateCustomerFormField = (
   register,
@@ -27,12 +27,12 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             label: {
               text: `${translate("customers.details.customer_type")}`,
               htmlFor: "customerType",
-              className: "mb-[10px] ",
+              className: "mb-[10px]",
             },
             field: {
               className: `!px-4 !border-[#BFBFBF] ${
                 !isUpdate && "!border-light"
-              } focus:!border-primary `,
+              } focus:!border-primary`,
               type: Field.select,
               id: "customerType",
               name: "customerType",
@@ -53,12 +53,12 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             label: {
               text: `${translate("customers.details.gender")}`,
               htmlFor: "gender",
-              className: "mb-[10px] ",
+              className: "mb-[10px]",
             },
             field: {
               className: `!px-4 !border-[#BFBFBF] ${
                 !isUpdate && "!border-light"
-              } focus:!border-primary `,
+              } focus:!border-primary`,
               type: Field.select,
               id: "gender",
               name: "gender",
@@ -81,11 +81,10 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "fullName",
               name: "fullName",
-
               placeholder: `${translate(
                 "customers.add_customer_placeholders.name"
               )}`,
@@ -233,7 +232,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
 
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "address.country",
               name: "address.country",
@@ -249,7 +248,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex justify-end items-center space-x-[18px] mt-8",
+        className: "flex justify-end items-center space-x-[18px] my-[30px]",
         children: [
           {
             field: {

@@ -211,7 +211,7 @@ const AdminDashboard = () => {
         </h1>
       </div>
 
-      <SearchInputFiled
+      {/* <SearchInputFiled
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter.text}
         iconDisplay={true}
@@ -243,7 +243,7 @@ const AdminDashboard = () => {
             service: "Umzug Cleaning Service",
           },
         ]}
-      />
+      /> */}
 
       {dashboard !== null ? (
         <>

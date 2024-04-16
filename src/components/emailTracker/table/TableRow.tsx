@@ -24,7 +24,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               })
             }
             key={item.id}
-            className="cursor-pointer hover:bg-[#E9E1FF] items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(130px,_130px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(160px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] border-t border-t-[#E7EAEE]"
+            className="gap-x-3 cursor-pointer hover:bg-[#E9E1FF] items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(130px,_130px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_4fr)_minmax(130px,_3fr)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(140px,_4fr)_minmax(130px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(160px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(90px,_90px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">
               {item?.id && item.id.slice(-5)}
@@ -37,7 +37,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               <span>{formatDateTimeToTime(item.createdAt)}</span>
               <span>{formatDateTimeToDate(item.createdAt)}</span>
             </div>
-            <div className="py-4 flex flex-col">
+            <div className="py-4 flex flex-col mlg:hidden xMaxSize:flex">
               {(item.viewedAt && (
                 <>
                   <span>{formatDateTimeToTime(item.viewedAt)}</span>
@@ -49,7 +49,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               <div
                 className={`bg-[${getMailStatusColor(
                   item?.mailStatus
-                )}] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px] w-fit`}
+                )}] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px] w-full`}
               >
                 {translate(`mail_tracker_status.${item?.mailStatus}`)}
               </div>

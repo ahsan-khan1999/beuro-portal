@@ -224,7 +224,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   }
 
   formField.push({
-    containerClass: "mt-10",
+    containerClass: "my-[30px]",
     field: {
       type: Field.div,
       id: "div-field",
