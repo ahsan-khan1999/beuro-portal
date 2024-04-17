@@ -21,7 +21,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -260,7 +259,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               )}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 min-w-[152px] w-fit h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

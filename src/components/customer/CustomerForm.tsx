@@ -21,7 +21,7 @@ const CustomerForm = ({
         !isUpdate ? "border-primary" : "border-none"
       } w-full h-fit`}
     >
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10 bg-[#4A13E7] py-[26px] pl-[32px] pr-[25px] rounded-t-lg">
+      <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
           {translate("customers.details.heading")}
         </h2>
@@ -73,7 +73,7 @@ const CustomerForm = ({
         )}
       </div>
 
-      <div className="px-6">
+      <div className="px-6 py-3">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

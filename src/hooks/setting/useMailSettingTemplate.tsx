@@ -46,12 +46,14 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
       footerColor: emailSettings?.FooterColour,
     }
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(
       updateEmailTemplateSetting({ data, router, setError, translate })
     );
     if (response?.payload) handleCreation();
   };
+
   return {
     fields,
     onSubmit,

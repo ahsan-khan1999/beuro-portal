@@ -836,7 +836,7 @@
       "back_button": "Zurück",
       "next_button": "Weiter",
       "title": "Titel",
-      "additional_details": "Zustäzliche Details",
+      "additional_details": "Zusätzliche Details",
       "send": "Senden"
     },
     "pdf_card_details": {
@@ -1007,7 +1007,7 @@
       "back_button": "Zurück"
     },
     "additional": {
-      "heading": "Zustäzliche Details",
+      "heading": "Zusätzliche Details",
       "edit_button": "Details Bearbeiten",
       "save_changes_button": "Änderungen speichern",
       "next_button": "Weiter",
@@ -1414,7 +1414,7 @@
     },
 
     "additional_details": {
-      "main_heading": "Zustäzliche Details",
+      "main_heading": "Zusätzliche Details",
       "edit_button": "Details Bearbeiten",
       "cancel_button": "Abbrechen",
       "save_button": "Speichern",
@@ -1717,7 +1717,7 @@
     "completed_button": "Abgeschlossen",
     "customer_detail_heading": "Kundendetails",
     "follow_up_detail_heading": "Details zur Nachverfolgung",
-    "additional_detail_heading": "Zustäzliche Details",
+    "additional_detail_heading": "Zusätzliche Details",
     "lead_detail_heading": "Anfragen-Details",
     "address_detail_heading": "Adressdetails",
     "follow_up_details": {
@@ -1779,7 +1779,7 @@
       "select_lead": "Anfragen auswählen",
       "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
       "follow_up_type": "Art der Nachverfolgung",
-      "additional_details": "Zustäzliche Details"
+      "additional_details": "Zusätzliche Details"
     },
     "customer_details_modal": {
       "heading": "Kundendetails",
@@ -1829,7 +1829,7 @@
       "budget": "Budget",
       "lead_source": "Leadquellen",
       "other_services": "Andere Leistungen",
-      "Additional_details": "Zustäzliche Details"
+      "Additional_details": "Zusätzliche Details"
     }
   },
   "dashboard_detail": {

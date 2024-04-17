@@ -152,9 +152,11 @@ const useEmployeeDetail = (stage: boolean) => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const fields = employeeDetailsFormField(
     register,
     loading,

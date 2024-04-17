@@ -1,9 +1,8 @@
-import { Form } from "@/base-components/form/form";
-import { useEditInvoiceContentDetails } from "@/hooks/content/useEditInvoiceContentDetails";
-import FormCard from "@/layout/customers/FormCard";
-import { ContentTableRowTypes } from "@/types/content";
 import React from "react";
+import { Form } from "@/base-components/form/form";
+import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "../details/ContentDetailsData";
+import { useEditInvoiceContentDetails } from "@/hooks/content/useEditInvoiceContentDetails";
 
 const EditInoviceContentDetails = ({
   onClick,
@@ -12,13 +11,13 @@ const EditInoviceContentDetails = ({
   onClick: (index: number, component: ComponentsType) => void;
   contentDetail: ContentTableRowTypes;
 }) => {
-  const defaultClassName = "border border-primary px-5 py-3";
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useEditInvoiceContentDetails(onClick);
 
   return (
-    <div className="rounded-md border-none bg-white w-full h-fit">
-      <div className="flex justify-between items-center pt-[17px] pb-[22px] pl-[29px] pr-6 border-b border-black border-opacity-10 bg-[#C50EE0] rounded-t-lg">
+    <div className="rounded-md border border-primary bg-white w-full h-fit">
+      <div className="flex justify-between items-center bg-[#C50EE0] rounded-t-lg py-5 px-6">
         <h2 className="text-white text-lg font-medium">
           {translate("content.details.invoice_heading")}
         </h2>
@@ -29,13 +28,15 @@ const EditInoviceContentDetails = ({
           {translate("content.details.cancel_button")}
         </button>
       </div>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </div>
   );
 };

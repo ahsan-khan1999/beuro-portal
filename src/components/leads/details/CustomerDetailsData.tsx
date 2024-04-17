@@ -17,7 +17,7 @@ const customerDetailData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10 bg-[#4A13E7] py-5 px-6 rounded-t-lg"
+        className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg"
         id={translate("leads.tabs_headings.customer")}
       >
         <h2 className="text-[#fff] text-lg font-medium">
@@ -71,7 +71,7 @@ const customerDetailData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.customer_type")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
               {translate(
                 `customer_type.${getKeyByValue(
                   staticEnums["CustomerType"],

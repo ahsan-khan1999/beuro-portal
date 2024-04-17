@@ -128,7 +128,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
       },
 
       {
-        containerClass: "mt-3",
         field: {
           type: Field.div,
           id: `div-field-${i}`,

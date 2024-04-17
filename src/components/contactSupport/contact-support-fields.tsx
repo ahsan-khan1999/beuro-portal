@@ -12,7 +12,6 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -156,7 +155,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     },
 
     {
-      containerClass: "mt-[30px] flex justify-end",
+      containerClass: "my-[30px] flex justify-end",
       field: {
         type: Field.button,
         id: "button",

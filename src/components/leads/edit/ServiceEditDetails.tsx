@@ -26,7 +26,7 @@ const ServiceEditDetails = ({
         </button>
       </div>
 
-      <div className="px-6">
+      <div className="px-6 py-3">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

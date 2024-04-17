@@ -15,7 +15,7 @@ const CustomerEditDetails = ({
 
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-[#e5e5e5] bg-[#4A13E7] py-5 px-6 rounded-t-lg">
+      <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
           {translate("leads.customer_details.heading")}
         </h2>
@@ -27,7 +27,7 @@ const CustomerEditDetails = ({
         </button>
       </div>
 
-      <div className="px-6">
+      <div className="px-6 py-3">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

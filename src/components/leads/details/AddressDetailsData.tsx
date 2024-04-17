@@ -15,7 +15,7 @@ const AddressDetailsData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10 bg-[#FE9244] py-5 px-6 rounded-t-lg"
+        className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg"
         id={translate("leads.tabs_headings.address")}
       >
         <h2 className="text-[#fff] text-lg font-medium">

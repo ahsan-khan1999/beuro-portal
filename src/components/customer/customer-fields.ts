@@ -15,7 +15,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   const { t: translate } = useTranslation();
   let formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -278,6 +277,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
     },
   ];
+
   const fieldIndex = formField.findIndex(
     (field) =>
       field?.field?.type === Field.div &&
