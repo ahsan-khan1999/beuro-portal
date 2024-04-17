@@ -29,7 +29,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
             <span className="py-4 truncate">
               {item?.id && item.id.slice(-5)}
             </span>
-            <span className="py-4 truncate ">{item.recipient}</span>
+            <span className="py-4 truncate">{item.recipient}</span>
             <span className="xs:block mlg:hidden xlg:hidden maxSize:block py-4 truncate mr-1">
               {item.subject}
             </span>

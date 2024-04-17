@@ -432,7 +432,7 @@ export function getStatusColor(status: string) {
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["InProcess"]
   )
-    return "#d7c736";
+    return "#ebd409";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
   )

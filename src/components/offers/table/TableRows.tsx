@@ -58,12 +58,19 @@ const TableRows = ({
               })
             }
             key={index}
-            className="gap-x-4 mlg:gap-x-2 xMaxSize:gap-x-3 cursor-pointer items-center hover:bg-[#E9E1FF] xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_3fr)_minmax(300px,_4fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_3fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(70px,_70px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] border-t border-t-[#E7EAEE]"
+            className="gap-x-4 mlg:gap-x-1 xMaxSize:gap-x-3 cursor-pointer items-center hover:bg-[#E9E1FF] xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_3fr)_minmax(300px,_4fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_3fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(60px,_60px)_minmax(70px,_70px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)_minmax(60px,_60px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item.offerNumber}</span>
-            <span className="py-4 truncate">
-              {item.leadID?.customerDetail?.fullName}
-            </span>
+            <div className="flex items-center gap-x-1">
+              <span className="py-4 truncate">
+                {item.leadID?.customerDetail?.fullName}
+              </span>
+              {item.leadID?.customerDetail?.companyName && (
+                <span className="py-4 truncate text-sm font-normal text-primary">
+                  ({item.leadID?.customerDetail?.companyName})
+                </span>
+              )}
+            </div>
             <span className="py-4 xs:block mlg:hidden xLarge:block truncate">
               {item?.title}
             </span>

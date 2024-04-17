@@ -44,7 +44,6 @@ const ContentAddDetailsData = () => {
 
   const onCloseRoute = () => {
     router.pathname = "/content";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -58,7 +57,6 @@ const ContentAddDetailsData = () => {
   const route = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
     router.pathname = "/content";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
   };
 
@@ -87,9 +85,16 @@ const ContentAddDetailsData = () => {
     setTabType(currentComponent);
   };
 
+  const handleCancel = () => {
+    router.push("/content");
+  };
+
   const componentsLookUp = {
     [ComponentsType.addOffer]: (
-      <OfferContentAddDetails onHandleNext={handleNextTab} />
+      <OfferContentAddDetails
+        onHandleNext={handleNextTab}
+        onCancel={handleCancel}
+      />
     ),
     [ComponentsType.addConfirmationContent]: (
       <AddConfirmationContentDetails

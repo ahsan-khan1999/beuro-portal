@@ -64,7 +64,7 @@ export const DropDown = ({
     >
       {label && <label className="text-sm text-gray">{label}</label>}
       <div className="relative w-full">
-        <button
+        <div
           aria-expanded={isOpen}
           className={`${buttonClasses}`}
           onClick={() => setIsOpen((prevState) => !prevState)}
@@ -77,7 +77,7 @@ export const DropDown = ({
               className={dropDownIconClassName}
             />
           </div>
-        </button>
+        </div>
         <AnimatePresence>
           {isOpen && (
             <DropDownItems

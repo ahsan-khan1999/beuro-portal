@@ -18,8 +18,6 @@ export const usePagination = ({
   const isLast = currentPage === totalPages;
   const router = useRouter();
 
-  console.log(currentPage, "<- just currentPage");
-
   const handlePageClick = useCallback(
     (page: number) => {
       if (page >= 1 && page <= totalPages) {

@@ -78,8 +78,9 @@ module.exports = {
         shadowColor: "#00000029",
         helpShadowColor: "#00000014",
         lightDark: "#393939",
-        statusColor: "#AF2626",
+        statusColor: "#ebd409",
         defaultBackground: "#f3f3f3",
+        inProgressStatus: "#ebd409",
       },
       boxShadow: (theme: any) => ({
         header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,

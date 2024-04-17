@@ -47,7 +47,6 @@ export const useAddContentReceiptDetails = (
 
   const changeRouterHandler = () => {
     router.pathname = "/content";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
   };
 

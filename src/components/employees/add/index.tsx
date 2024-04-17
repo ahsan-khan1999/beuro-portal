@@ -53,7 +53,6 @@ const AddEmployeeDetails = () => {
 
   const createRouteChange = () => {
     router.pathname = "/employees";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

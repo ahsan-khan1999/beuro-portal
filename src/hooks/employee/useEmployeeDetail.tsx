@@ -82,7 +82,6 @@ const useEmployeeDetail = (stage: boolean) => {
   };
   const handleUpdateSuccess = () => {
     router.pathname = "/employees";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     onClose();
   };

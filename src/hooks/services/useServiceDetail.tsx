@@ -93,7 +93,6 @@ const useServiceDetail = (stage: boolean) => {
 
   const changeRouterHandler = () => {
     router.pathname = "/services";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     onClose();
   };
