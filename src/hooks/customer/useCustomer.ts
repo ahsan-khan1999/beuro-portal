@@ -38,10 +38,15 @@ export default function useCustomer() {
     setCurrentPage(1);
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
-    if (!isNaN(parsedPage)) {
+
+    if (!isNaN(parsedPage) && parsedPage !== undefined) {
       setCurrentPage(parsedPage);
     } else {
       resetPage = 1;
@@ -50,22 +55,16 @@ export default function useCustomer() {
 
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
-
     const queryParams = searchQuery || sortedValue;
 
     let updatedFilter = {
-      text: "",
-      sort: "",
+      text: searchQuery || "",
+      sort: sortedValue || "",
     };
-
-    if (searchQuery || sortedValue) {
-      updatedFilter.text = searchQuery;
-      updatedFilter.sort = sortedValue;
-    }
 
     setFilter(updatedFilter);
 
-    if (parsedPage) {
+    if (parsedPage !== undefined) {
       dispatch(
         readCustomer({
           params: {
@@ -75,14 +74,12 @@ export default function useCustomer() {
           },
         })
       ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Customer);
+        if (response?.payload) {
+          setCurrentPageRows(response?.payload?.Customer);
+        }
       });
     }
   }, [query]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
 
   return {
     currentPageRows,

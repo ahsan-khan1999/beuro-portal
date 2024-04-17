@@ -115,7 +115,11 @@ const SideBar = () => {
                   <Link
                     href={{
                       pathname: item.pathname,
-                      query: { [item.queryName]: item.query },
+                      query: {
+                        ...(item.queryName && item.query
+                          ? { [item.queryName]: item.query }
+                          : {}),
+                      },
                     }}
                     onClick={() => routeChangeHandler(item)}
                     className={`hover:bg-[#E9E1FF] rounded-lg flex justify-between items-center px-3 py-2 w-full break-all ${
@@ -199,8 +203,12 @@ const SideBar = () => {
                               >
                                 <Link
                                   href={{
-                                    pathname: it.pathname,
-                                    query: { [item.queryName]: it.query },
+                                    pathname: item.pathname,
+                                    query: {
+                                      ...(item.queryName && item.query
+                                        ? { [item.queryName]: item.query }
+                                        : {}),
+                                    },
                                   }}
                                   onClick={() => filterHandler(it.query)}
                                   className={`text-[#4B4B4B] hover:bg-[#E9E1FF] rounded-lg font-medium tracking-[0.5px] px-3 py-2 w-full text-start block ${

@@ -17,7 +17,6 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mt-3",
         field: {
           type: Field.div,
           id: "div-field",
@@ -103,11 +102,11 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
       },
 
       {
-        containerClass: "mt-6",
+        containerClass: "my-[30px]",
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex justify-end items-center space-x-[18px] ",
+          className: "flex justify-end items-center space-x-[18px]",
           children: [
             {
               containerClass: "mb-0",
@@ -129,7 +128,7 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
                 text: translate("content.details.next_button"),
                 inputType: "submit",
                 className:
-                  "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
+                  "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
                 loading,
               },
             },

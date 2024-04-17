@@ -21,7 +21,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
 
   const handleCancel = () => {
     router.pathname = "/offers";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
 

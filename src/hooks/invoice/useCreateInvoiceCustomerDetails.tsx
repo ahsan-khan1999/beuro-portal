@@ -48,7 +48,7 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
 
   const onCancel = () => {
     router.pathname = "/invoices";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
 

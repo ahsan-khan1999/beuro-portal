@@ -25,7 +25,6 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -130,7 +129,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
     },
 
     {
-      containerClass: "my-6 float-right",
+      containerClass: "my-[30px] float-right",
       field: {
         type: Field.button,
         id: "button",

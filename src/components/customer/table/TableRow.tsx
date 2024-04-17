@@ -1,8 +1,8 @@
+import React from "react";
 import { CustomerTable } from "@/types/customer";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React from "react";
 
 const TableRow = ({ currentPageRows }: CustomerTable) => {
   const router = useRouter();
@@ -20,10 +20,17 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                 query: { ...router.query, customer: item.id },
               })
             }
-            className="cursor-pointer hover:bg-[#E9E1FF] grid items-center gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(80px,_80px),minmax(300px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(200px,_3fr)_minmax(140px,140px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)] border-t border-t-[#E7EAEE]"
+            className="cursor-pointer hover:bg-[#E9E1FF] grid items-center gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(80px,_80px),minmax(500px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(200px,_3fr)_minmax(140px,140px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(90px,_90px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item.refID}</span>
-            <span className="py-4 truncate">{item.fullName}</span>
+            <div className="flex items-center gap-x-1">
+              <span className="py-4 truncate">{item.fullName}</span>
+              {item.companyName && (
+                <span className="py-4 truncate text-sm font-normal text-primary">
+                  ({item.companyName})
+                </span>
+              )}
+            </div>
 
             <span className="py-4 truncate">{item.email}</span>
             <span className="py-4 truncate">{item.phoneNumber}</span>
@@ -41,7 +48,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
               onClick={() =>
                 router.push({
                   pathname: "/customers/details",
-                  query: { customer: item.id },
+                  query: { ...router.query, customer: item.id },
                 })
               }
             >

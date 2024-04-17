@@ -46,6 +46,7 @@ const useService = () => {
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
+
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
     } else {
@@ -67,7 +68,7 @@ const useService = () => {
         $lte?: string;
       };
     } = {
-      text: "",
+      text: searchQuery || "",
     };
 
     if (searchQuery || sortedValue || searchDate) {
@@ -78,7 +79,7 @@ const useService = () => {
 
     setFilter(updatedFilter);
 
-    if (parsedPage) {
+    if (parsedPage !== undefined) {
       dispatch(
         readService({
           params: {
@@ -88,7 +89,9 @@ const useService = () => {
           },
         })
       ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Service);
+        if (response?.payload) {
+          setCurrentPageRows(response?.payload?.Service);
+        }
       });
     }
   }, [query]);

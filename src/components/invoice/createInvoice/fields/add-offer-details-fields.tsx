@@ -41,7 +41,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
   let formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",

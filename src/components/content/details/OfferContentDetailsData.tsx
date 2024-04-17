@@ -16,7 +16,7 @@ const OfferContentDetailsData = ({
 
   return (
     <div
-      className="rounded-md border-none bg-white border w-full h-fit"
+      className="rounded-lg border-none bg-white border w-full h-fit"
       id={translate("content.tabs_headings.offer_content")}
     >
       <div className="flex justify-between items-center bg-[#4A13E7] rounded-t-lg pt-[17px] pb-[22px] pl-[29px] pr-6">

@@ -21,14 +21,14 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
 
   const handleCancel = () => {
     router.pathname = "/invoices";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
 
   return (
     <FormCard>
       <div
-        className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-10"
+        className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.offer")}
       >
         <div className="flex items-center gap-x-[26px]">
@@ -55,26 +55,27 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
               />
             </svg>
           </span>
-          <p className="font-medium text-2xl">
+          <p className="font-medium text-2xl text-white">
             {translate("offers.offer_details.heading")}{" "}
             {offerDetails?.id && offerDetails?.offerNumber}
           </p>
         </div>
         <button
           onClick={handleCancel}
-          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full"
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full bg-white"
         >
           {translate("offers.offer_details.cancel_button")}
         </button>
       </div>
-
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </FormCard>
   );
 };

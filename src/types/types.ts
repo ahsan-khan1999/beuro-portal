@@ -1,10 +1,5 @@
 import { svgs } from "./../base-components/SideBar";
-import {
-  Component,
-  ReactNode,
-  SetStateAction,
-  Dispatch as stateDispatch,
-} from "react";
+import { ReactNode, SetStateAction, Dispatch as stateDispatch } from "react";
 import { DateRangeProps, FormField } from "./form";
 import {
   Control,
@@ -21,14 +16,13 @@ import {
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
-import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
+import { ButtonClickFunction, CountryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
-import { Attachement, Status } from "./global";
+import { Attachement } from "./global";
 import { Employee } from "./employee";
 import { CustomerAddress, Lead } from "./leads";
 import { Service } from "./service";
-import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import {
@@ -41,12 +35,13 @@ import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
+
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
   pathname?: string;
   query?: string;
-  queryName: string;
+  queryName?: string;
   role: number[];
   inner?: SideBar[];
   className?: string;

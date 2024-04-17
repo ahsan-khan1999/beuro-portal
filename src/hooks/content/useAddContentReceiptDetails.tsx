@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddReceiptContentDetailsFormField } from "@/components/content/add/fields/add-receipt-details-fields";
 import { generateEditReceiptContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";

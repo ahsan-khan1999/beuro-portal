@@ -15,7 +15,7 @@ const EditConfirmationContentDetailsData = ({
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useEditConfirmationContentDetails(onClick);
   return (
-    <div className="rounded-md border border-primary bg-white w-full h-fit">
+    <div className="rounded-lg border border-primary bg-white w-full h-fit">
       <div className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg">
         <h2 className="text-white text-lg font-medium">
           {translate("content.details.confirmation_heading")}

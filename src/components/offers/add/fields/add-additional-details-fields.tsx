@@ -15,7 +15,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3 mb-0 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
+      containerClass: "mb-0 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
       label: {
         text: `${translate("offers.additional_details.choose")}`,
         htmlFor: "content",

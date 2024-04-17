@@ -15,7 +15,6 @@ const AddCustomer = () => {
 
   const handleCancel = () => {
     router.pathname = "/customers";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
   };
 

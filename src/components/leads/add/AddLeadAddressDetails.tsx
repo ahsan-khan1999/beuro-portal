@@ -21,7 +21,7 @@ const AddLeadAddressDetails = ({
 
   const handleCancel = () => {
     router.pathname = "/leads";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
 

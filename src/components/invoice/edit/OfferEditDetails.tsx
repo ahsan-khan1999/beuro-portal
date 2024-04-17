@@ -11,7 +11,7 @@ const OfferEditDetails = ({
   handleNext: (currentComponent: EditComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "pt-5";
+  const defaultClassName = "";
   const {
     fields,
     control,
@@ -24,26 +24,27 @@ const OfferEditDetails = ({
 
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">
+      <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("invoice.invoice_details")} (
           {invoiceDetails?.id && invoiceDetails?.invoiceNumber})
         </h2>
         <button
           onClick={() => router.back()}
-          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full"
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full bg-white"
         >
           {translate("offers.offer_details.cancel_button")}
         </button>
       </div>
-
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </FormCard>
   );
 };

@@ -27,6 +27,7 @@ const InvoiceDetailsData = ({
   const handleBack = () => {
     router.pathname = "/invoices";
     delete router.query["invoice"];
+    delete router.query["tab"];
     updateQuery(router, router.locale as string);
   };
 

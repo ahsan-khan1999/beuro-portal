@@ -41,7 +41,6 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
 
   let formField: FormField[] = [
     {
-      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
@@ -706,7 +705,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "float-right mb-0 mt-[30px]",
+      containerClass: "float-right my-[30px]",
       field: {
         type: Field.button,
         id: "button",

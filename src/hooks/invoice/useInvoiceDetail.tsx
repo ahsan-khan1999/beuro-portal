@@ -134,7 +134,7 @@ export default function useInvoiceDetail() {
 
   const onSuccess = () => {
     router.pathname = "/invoice";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
