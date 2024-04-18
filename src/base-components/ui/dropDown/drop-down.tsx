@@ -53,8 +53,6 @@ export const DropDown = ({
     dropDownTextClassName
   );
 
-  console.log(buttonClasses);
-
   return (
     <div
       className={`flex flex-col gap-y-2 w-full ${

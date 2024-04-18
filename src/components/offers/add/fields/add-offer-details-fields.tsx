@@ -578,8 +578,6 @@ export const generateDateChildren = (
       className:
         "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
       name: "time",
-      control,
-
       options: [
         { label: "00:00", value: "00:00" },
         { label: "00:15", value: "00:15" },
@@ -678,6 +676,8 @@ export const generateDateChildren = (
         { label: "23:30", value: "23:30" },
         { label: "23:45", value: "23:45" },
       ],
+      control,
+      
     },
   });
 

@@ -160,9 +160,7 @@ export const generateOfferAddressEditDetailsValidation = (
             .string()
             .required(translate("validationMessages.required")),
           [OfferAddressEditDetails.postCode]: yup.string().notRequired(),
-          [OfferAddressEditDetails.country]: yup
-            .string()
-            .required(translate("validationMessages.required")),
+          [OfferAddressEditDetails.country]: yup.string().notRequired(),
           [OfferAddressEditDetails.description]: yup.string().notRequired(),
           [OfferAddressEditDetails.label]: yup
             .string()

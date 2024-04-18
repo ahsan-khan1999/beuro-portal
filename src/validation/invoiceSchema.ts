@@ -111,9 +111,7 @@ export const generateInvoiceDetailsValidationSchema = (translate: Function) => {
         .string()
         .required(translate("validationMessages.required")),
       [EditOfferDetails.postCode]: yup.string().notRequired(),
-      [EditOfferDetails.country]: yup
-        .string()
-        .required(translate("validationMessages.required")),
+      [EditOfferDetails.country]: yup.string().notRequired(),
     }),
     [EditOfferDetails.date]: yup
       .array()
@@ -146,9 +144,7 @@ export const generateCreateInvoiceAddressDetailsValidation = (
             .string()
             .required(translate("validationMessages.required")),
           [CreateInvoiceAddressDetails.postCode]: yup.string().notRequired(),
-          [CreateInvoiceAddressDetails.country]: yup
-            .string()
-            .required(translate("validationMessages.required")),
+          [CreateInvoiceAddressDetails.country]: yup.string().notRequired(),
           [CreateInvoiceAddressDetails.description]: yup.string().notRequired(),
           [CreateInvoiceAddressDetails.label]: yup
             .string()
@@ -199,7 +195,7 @@ export const generateCreateInvoiceServiceDetailsValidation = (
             .typeError(translate("validationMessages.invalid_format")),
           [CreateInvoiceServiceOfferDetails.description]: yup
             .string()
-            .required(translate("validationMessages.required")),
+            .notRequired(),
         })
         .required(translate("validationMessages.required"))
     )

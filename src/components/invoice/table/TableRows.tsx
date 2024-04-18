@@ -16,8 +16,6 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
-        console.log(item);
-
         return (
           <div
             key={index}
@@ -58,24 +56,22 @@ const TableRows = ({
                 {item.sentEmail + "/" + item.totalEmail + " Sent"}
               </div>
             </span>
-            <span className="py-4 flex justify-center items-center">
-              <div className="flex justify-center items-center rounded-md w-full">
-                <div
-                  className={`bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm`}
-                >
-                  {!Number.isInteger(item?.paidAmount)
-                    ? Number(item?.paidAmount)?.toFixed(2)
-                    : item?.paidAmount}
-                </div>
-                <div
-                  className={`bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm`}
-                >
-                  {!Number.isInteger(item?.remainingAmount)
-                    ? Number(item?.remainingAmount)?.toFixed(2)
-                    : item?.remainingAmount}
-                </div>
-              </div>
-            </span>
+            <div className="py-4 flex justify-center items-center">
+              <span
+                className={`bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm overflow-hidden max-w-[100px]`}
+              >
+                {!Number.isInteger(item?.paidAmount)
+                  ? Number(item?.paidAmount)?.toFixed(2)
+                  : item?.paidAmount}
+              </span>
+              <span
+                className={`bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm overflow-hidden max-w-[100px]`}
+              >
+                {!Number.isInteger(item?.remainingAmount)
+                  ? Number(item?.remainingAmount)?.toFixed(2)
+                  : item?.remainingAmount}
+              </span>
+            </div>
 
             <span className="py-4 flex justify-center items-center">
               <div
