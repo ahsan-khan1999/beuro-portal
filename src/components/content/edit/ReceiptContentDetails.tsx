@@ -1,6 +1,5 @@
 import { Form } from "@/base-components/form/form";
 import { useEditReceiptDetails } from "@/hooks/content/useEditReceiptDetails";
-import FormCard from "@/layout/customers/FormCard";
 import { ContentTableRowTypes } from "@/types/content";
 import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
@@ -12,13 +11,13 @@ const EditReceiptContentDetails = ({
   onClick: (index: number, component: ComponentsType) => void;
   contentDetail: ContentTableRowTypes;
 }) => {
-  const defaultClassName = "border border-primary px-5 py-3";
+  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useEditReceiptDetails(onClick);
 
   return (
-    <div className="rounded-md border-none bg-white w-full h-fit">
-      <div className="flex justify-between items-center pt-[17px] pb-[22px] pl-[29px] pr-6 border-b border-black border-opacity-10 bg-[#45C769] rounded-t-lg">
+    <div className="rounded-lg border border-primary bg-white w-full h-fit">
+      <div className="flex justify-between items-center bg-[#45C769] rounded-t-lg py-5 px-6">
         <h2 className="text-white text-lg font-medium">
           {translate("content.tabs_headings.receipt_content")}
         </h2>
@@ -29,13 +28,16 @@ const EditReceiptContentDetails = ({
           {translate("content.details.cancel_button")}
         </button>
       </div>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </div>
   );
 };

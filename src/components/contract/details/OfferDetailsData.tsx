@@ -1,3 +1,4 @@
+import FormCard from "@/layout/customers/FormCard";
 import { contractTableTypes } from "@/types/contract";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -13,20 +14,20 @@ const OfferDetailsData = ({
 
   return (
     <div
-      className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit"
+      className="rounded-md border-none bg-white w-full h-fit"
       id={translate("contracts.tabs_headings.offer_details")}
     >
-      <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-10 pb-5">
+      <h2 className="text-[#fff] text-lg font-medium bg-[#4A13E7] py-5 px-6 rounded-t-lg">
         {translate("contracts.customer_details.heading")}
       </h2>
 
-      <div className="mt-3">
+      <div className="py-3 px-6">
         <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("contracts.customer_details.customer_type")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
               {translate(
                 `customer_type.${getKeyByValue(
                   staticEnums["CustomerType"],
@@ -39,7 +40,7 @@ const OfferDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("contracts.customer_details.full_name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {contractDetails.offerID?.leadID?.customerDetail?.fullName}
             </div>
           </div>
@@ -50,7 +51,7 @@ const OfferDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.customer_details.company_name")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {contractDetails?.offerID?.leadID?.customerDetail?.companyName}
               </div>
             </div>
@@ -59,7 +60,7 @@ const OfferDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("contracts.customer_details.email_address")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {contractDetails?.offerID?.leadID?.customerDetail?.email}
             </div>
           </div>
@@ -67,7 +68,7 @@ const OfferDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("contracts.customer_details.phone_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber}
             </div>
           </div>
@@ -75,7 +76,7 @@ const OfferDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("contracts.customer_details.mobile_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {contractDetails?.offerID?.leadID?.customerDetail?.mobileNumber}
             </div>
           </div>
@@ -83,7 +84,7 @@ const OfferDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("customers.details.gender")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
               {contractDetails?.offerID?.leadID?.customerDetail?.gender}
             </div>
           </div>
@@ -91,7 +92,7 @@ const OfferDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("login_detail.company_details.company_name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {contractDetails?.offerID?.leadID?.customerDetail?.companyName}
             </div>
           </div>
@@ -106,7 +107,7 @@ const OfferDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.customer_details.street_no")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {
                   contractDetails?.offerID?.leadID?.customerDetail?.address
                     ?.streetNumber
@@ -117,7 +118,7 @@ const OfferDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.customer_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {
                   contractDetails?.offerID?.leadID?.customerDetail?.address
                     ?.postalCode
@@ -128,10 +129,11 @@ const OfferDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("contracts.customer_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-                {translate(
-                  `countries.${contractDetails?.offerID?.leadID?.customerDetail?.address?.country}`
-                )}
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                {
+                  contractDetails?.offerID?.leadID?.customerDetail?.address
+                    ?.country
+                }
               </div>
             </div>
           </div>

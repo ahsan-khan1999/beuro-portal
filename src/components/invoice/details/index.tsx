@@ -13,8 +13,8 @@ const InvoiceDetails = () => {
     handleNotes,
     invoiceDetails,
     renderModal,
-    setSwitchDetails,
-    switchDetails,
+    activeTab,
+    setActiveTab,
     collectiveInvoice,
     handlePaymentStatusUpdate,
     handleInvoiceStatusUpdate,
@@ -31,7 +31,7 @@ const InvoiceDetails = () => {
   } = useInvoiceDetail();
 
   const invoiceComponent = {
-    Invoice: {
+    invoice_tab: {
       comp: (
         <InvoiceDetailsTable
           collectiveInvoice={collectiveInvoice}
@@ -43,7 +43,7 @@ const InvoiceDetails = () => {
       ),
       isData: collectiveInvoice?.length > 0,
     },
-    Receipt: {
+    receipt_tab: {
       comp: (
         <ReceiptDetailsTable
           collectiveInvoice={collectiveReciept}
@@ -56,8 +56,8 @@ const InvoiceDetails = () => {
   };
 
   const CurrentComponent = useEmptyStates(
-    invoiceComponent[switchDetails as keyof typeof invoiceComponent].comp,
-    invoiceComponent[switchDetails as keyof typeof invoiceComponent].isData,
+    invoiceComponent[activeTab as keyof typeof invoiceComponent].comp,
+    invoiceComponent[activeTab as keyof typeof invoiceComponent].isData,
     loading
   );
 
@@ -82,8 +82,8 @@ const InvoiceDetails = () => {
 
         <div className="flex mt-[12px] mb-[18px]">
           <DetailsSwitchBtn
-            switchDetails={switchDetails}
-            setSwitchDetails={setSwitchDetails}
+            activeTab={activeTab}
+            onComponentChange={setActiveTab}
           />
         </div>
         {CurrentComponent}

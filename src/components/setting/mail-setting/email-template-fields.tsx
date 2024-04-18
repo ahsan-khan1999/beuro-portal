@@ -57,11 +57,11 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
                 "setting.mail_setting.template_form_fields.email"
               )}`,
               htmlFor: "email",
-              className: "mb-[10px] text-sm font-normal text-[#393939]",
+              className: "mb-[10px] text-base font-normal text-[#393939]",
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "email",
               id: "email",
               name: "email",
@@ -83,7 +83,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
-              inputType:"tel",
+              inputType: "tel",
               register,
               value: emailSettings?.phoneNumber || "",
             },
@@ -99,7 +99,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
             },
             field: {
               type: Field.input,
-              inputType:"tel",
+              inputType: "tel",
               id: "mobileNumber",
               name: "mobileNumber",
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",

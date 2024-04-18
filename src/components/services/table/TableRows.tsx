@@ -32,7 +32,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
               onClick={() =>
                 router.push({
                   pathname: "/services/details",
-                  query: { service: item.id },
+                  query: { ...router.query, service: item.id },
                 })
               }
             >

@@ -1,7 +1,6 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { GlobalApiResponseType } from "@/types/global";
 import {
   InvoiceDetailTableRowTypes,
   InvoiceTableRowTypes,
@@ -129,6 +128,65 @@ export const updateInvoice: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
+// here we can create the main invoice
+export const createMainInvoice: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("invoice/create", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      const { invoiceId, step, stage } = data;
+      let apiData = { ...data, invoiceId: invoiceId, step: step };
+
+      apiData = {
+        ...apiData,
+        customerType: staticEnums["CustomerType"][data.customerType],
+      };
+      if (staticEnums["CustomerType"][data.customerType] == 0)
+        delete apiData["companyName"];
+      const response = await apiServices.createMainInvoice(apiData);
+      let objectToUpdate = {
+        ...response?.data?.data?.Invoice,
+        type: apiData?.type,
+        stage: stage,
+      };
+      localStoreUtil.store_data("invoice", objectToUpdate);
+      thunkApi.dispatch(setInvoiceDetails(objectToUpdate));
+
+      return response?.data?.data?.Invoice;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
+//  here we update the main invoice
+export const updateMainInvoice: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("invoice/update", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      const { stage } = data;
+
+      const response = await apiServices.updateMainInvoice(data);
+      const invoiceData = await localStoreUtil.get_data("invoice");
+      let objectToUpdate = {
+        ...response?.data?.Invoice,
+        type: invoiceData?.type,
+        stage: stage,
+      };
+
+      localStoreUtil.store_data("invoice", objectToUpdate);
+      thunkApi.dispatch(setInvoiceDetails(objectToUpdate));
+      return response?.data?.Invoice;
+    } catch (e: any) {
+      setErrors(setError, e?.data?.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
 export const deleteInvoice: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/delete", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

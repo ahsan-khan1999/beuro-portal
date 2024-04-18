@@ -14,28 +14,26 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "my-5 ",
+      containerClass: "my-5",
       field: {
         type: Field.div,
         id: "div-field",
         className:
-          "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-1 items-center ",
+          "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-1 items-center",
         children: [
           {
             containerClass: "",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.public_info")}`,
-              containerClassName: " text-[14px] text-[#393939] font-normal ",
+              containerClassName: "text-sm text-[#393939] font-normal",
               id: "info",
             },
           },
           {
             containerClass: "border-lightGray border-b-[1px]",
-
             field: {
               type: Field.span,
-              containerClassName: "  ",
               id: "border",
             },
           },
@@ -517,7 +515,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center justify-end space-x-[18px] mt-5",
+        className: "flex items-center justify-end space-x-[18px] my-[30px]",
         children: [
           {
             containerClass: "mb-0",

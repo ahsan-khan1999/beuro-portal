@@ -4,7 +4,7 @@ import React from "react";
 const TableHeadings = () => {
   const { t: translate } = useTranslation();
   return (
-    <div className="gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_250px)_minmax(250px,_100%)_minmax(160px,_160px)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(80px,_80px),minmax(150px,_150px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(80px,_80px)] xlg:grid-cols-[minmax(80px,_80px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(140px,_140px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(80px,_80px),minmax(200px,_4fr)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(140px,_140px)_minmax(80px,_80px)] pt-2 pb-5">
+    <div className="gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_250px)_minmax(250px,_100%)_minmax(160px,_160px)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(50px,_50px),minmax(100px,_3fr)_minmax(90px,_4fr)_minmax(90px,_90px)] xlg:grid-cols-[minmax(60px,_60px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(90px,_90px)] maxSize:grid-cols-[minmax(60px,_60px),minmax(140px,_4fr)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(90px,_90px)] xMaxSize:grid-cols-[minmax(60px,_60px),minmax(150px,_4fr)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(90px,_90px)] pt-2 pb-5">
       <span className="font-medium text-[#8F8F8F]">
         {translate("employees.table_headings.id")}
       </span>
@@ -20,7 +20,7 @@ const TableHeadings = () => {
       <span className="font-medium text-[#8F8F8F] mlg:hidden maxSize:block">
         {translate("employees.table_headings.designation")}
       </span>
-      <span className="font-medium text-[#8F8F8F]">
+      <span className="font-medium text-[#8F8F8F] mlg:hidden xlg:block">
         {translate("employees.table_headings.created_on")}
       </span>
 

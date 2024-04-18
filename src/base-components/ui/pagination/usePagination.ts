@@ -16,7 +16,6 @@ export const usePagination = ({
 
   const isFirst = currentPage === 1;
   const isLast = currentPage === totalPages;
-
   const router = useRouter();
 
   const handlePageClick = useCallback(
@@ -46,6 +45,8 @@ export const usePagination = ({
   };
 
   const handleNextClick = () => {
+    console.log({ currentPage });
+
     handlePageClick(currentPage + 1);
   };
 

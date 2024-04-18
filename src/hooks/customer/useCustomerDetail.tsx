@@ -93,7 +93,6 @@ export default function useCustomerDetail(stage: boolean) {
 
   const changeRouterHandler = () => {
     router.pathname = "/customers";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     onClose();
   };
@@ -167,8 +166,6 @@ export default function useCustomerDetail(stage: boolean) {
     setError: UseFormSetError<FieldValues>;
     translate: Function;
   }) => {
-
-    
     let res = await dispatch(
       updateCustomer({ data, router, setError, translate })
     );

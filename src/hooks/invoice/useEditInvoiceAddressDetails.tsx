@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   FieldValues,
@@ -9,12 +8,10 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { OfferAddressDetailsFormField } from "@/components/offers/edit/fields/Offer-address-edit-fields";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
-import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
 
 export const useEditInvoiceAddressDetails = ({
@@ -72,7 +69,7 @@ export const useEditInvoiceAddressDetails = ({
           : addressType?.map((item, index) => ({
               streetNumber: "",
               postalCode: "",
-              country: "Schweiz",
+              country: "",
               description: "",
               label: `Adresse ${++index}`,
             })),

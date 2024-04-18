@@ -4,9 +4,9 @@ import { User } from ".";
 import { ContentTableRowTypes } from "./content";
 import { DateRangeProps } from "./form";
 import { OfferServiceDetails } from "./offers";
-import { AddressID } from "./leads";
+import { AddressID, Lead } from "./leads";
 import { Plan } from "./admin/plans";
-import { Company } from "./company";
+import { ComponentsType } from "@/enums/invoice";
 
 // Inovice table layout
 export interface InvoiceTableRowTypes {
@@ -195,6 +195,8 @@ export interface InvoiceDetailTableRowTypes {
   discountDescription: string;
   discountType: 0 | 1;
   additionalDetails: string;
+  stage: ComponentsType;
+  leadID: Lead;
 }
 
 interface Customers {
@@ -207,7 +209,6 @@ interface Customers {
   date: string;
   mobileNumber: string;
   gender: number;
-
   status?: string;
   editImg?: string;
   editNote?: string;

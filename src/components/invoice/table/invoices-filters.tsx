@@ -3,11 +3,12 @@ import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { CheckBoxType, FilterType } from "@/types";
 import React, { SetStateAction, useEffect, useRef, useState } from "react";
-import InvoicesFilter from "@/base-components/filter/invoices-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { Button } from "@/base-components/ui/button/button";
+import addIcon from "@/assets/svgs/plus_icon.svg";
 
 export default function InvoicesFilters({
   filter,
@@ -171,7 +172,7 @@ export default function InvoicesFilters({
   }, [router.query.text]);
 
   return (
-    <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
+    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
         {checkbox.map((item, idx) => (
           <CheckField
@@ -188,7 +189,7 @@ export default function InvoicesFilters({
         ))}
       </div>
 
-      <div className="flex flex-col xlg:flex-row gap-4 xlg:items-center">
+      <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
         <div className="flex items-center gap-x-3">
           <InputField
             handleChange={handleInputChange}
@@ -271,20 +272,16 @@ export default function InvoicesFilters({
             ]}
             label={translate("add_note_dropdown.all_notes")}
           />
+          <Button
+            inputType="button"
+            onClick={() => router.push("/invoices/create-invoice")}
+            className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+            text={translate("common.create_invoice")}
+            id="add"
+            icon={addIcon}
+            iconAlt="add button"
+          />
         </div>
-        {/* <InvoicesFilter
-          filter={filter}
-          setFilter={setFilter}
-          onFilterChange={handleFilterChange}
-        /> */}
-
-        {/* <Button
-          id="apply"
-          inputType="button"
-          text="Apply"
-          onClick={() => handleFilterChange(filter)}
-          className="!h-[40px] p-2  flex items-center text-[13px] font-semibold bg-primary text-white rounded-md ml-5 whitespace-nowrap"
-        /> */}
       </div>
     </div>
   );

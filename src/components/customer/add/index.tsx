@@ -15,7 +15,6 @@ const AddCustomer = () => {
 
   const handleCancel = () => {
     router.pathname = "/customers";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
   };
 
@@ -45,7 +44,7 @@ const AddCustomer = () => {
             tabType={tabType}
           />
         </div>
-        <div className="w-full xLarge:max-w-[1060px]">
+        <div className="w-full xLarge:max-w-[80%]">
           {componentLookup[tabType]}
         </div>
       </div>

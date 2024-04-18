@@ -20,7 +20,6 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
 
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -288,11 +287,11 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
     },
 
     {
-      containerClass: "mt-6",
+      containerClass: "my-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center justify-end space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px]",
         children: [
           {
             containerClass: "mb-0",
@@ -304,7 +303,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               onClick: () =>
                 onHandleBack && onHandleBack(ComponentsType.addressAdd),
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
             },
           },
           {
@@ -315,7 +314,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               text: `${translate("leads.service_details.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

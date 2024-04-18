@@ -18,10 +18,10 @@ const CustomerDetailsData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5"
+        className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.offer")}
       >
-        <h2 className="text-[#393939] text-lg font-medium">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("offers.offer_details.heading")}
         </h2>
         <button
@@ -31,20 +31,20 @@ const CustomerDetailsData = ({
               query: { offer: offerDetails?.id, tab: 0 },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
         >
           <EditIcon />
           {translate("offers.offer_details.edit_button")}
         </button>
       </div>
 
-      <div className="pt-3 border-t border-t-[#000] border-opacity-10">
+      <div className="py-3 px-6">
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.offer_title")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium overflow-clip text-ellipsis min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.title}
             </div>
           </div>
@@ -66,7 +66,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.full_name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.fullName}
             </div>
           </div>
@@ -77,7 +77,7 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.company_name")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {offerDetails?.leadID?.customerDetail?.companyName}
               </div>
             </div>
@@ -86,7 +86,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.email_address")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.email}
             </div>
           </div>
@@ -94,7 +94,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.phone_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.phoneNumber}
             </div>
           </div>
@@ -102,7 +102,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.mobile_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.mobileNumber}
             </div>
           </div>
@@ -110,7 +110,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("customers.details.gender")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.gender}
             </div>
           </div>
@@ -118,7 +118,7 @@ const CustomerDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("common.lead")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.refID}
             </div>
           </div>
@@ -133,7 +133,7 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.street_no")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {offerDetails?.leadID?.customerDetail?.address?.streetNumber}
               </div>
             </div>
@@ -141,7 +141,7 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {offerDetails?.leadID?.customerDetail?.address?.postalCode}
               </div>
             </div>
@@ -149,7 +149,7 @@ const CustomerDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {offerDetails?.leadID?.customerDetail?.address?.country}
               </div>
             </div>
