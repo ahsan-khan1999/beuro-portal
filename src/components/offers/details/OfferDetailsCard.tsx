@@ -35,6 +35,7 @@ const OfferDetailsCard = ({
 }: OfferDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
   const handleDonwload = () => {
     window.open(offerDetails?.attachement);
   };

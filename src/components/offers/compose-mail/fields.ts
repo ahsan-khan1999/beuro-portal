@@ -1,9 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateContractFormField,
-  GenerateOfferFormField,
-} from "@/types";
+import { FormField, GenerateOfferFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
@@ -80,7 +76,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                 },
 
                 {
-                  containerClass: "mb-0  ",
+                  containerClass: "mb-0",
                   field: {
                     type: Field.span,
                     text: `Bcc`,
@@ -263,7 +259,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
     },
 
     {
-      containerClass: "mb-0 px-2 py-5 bg-[#EDF4FF]",
+      containerClass: "mb-0 px-2 pb-5 bg-[#EDF4FF]",
       label: {
         text: `${translate("contracts.contract_email_preview.description")}`,
         htmlFor: "description",
