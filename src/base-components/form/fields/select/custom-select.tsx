@@ -67,7 +67,7 @@ export const SelectBox = ({
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
-        placeholder={placeholder}
+        // placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);

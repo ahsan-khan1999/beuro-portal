@@ -76,19 +76,6 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     setAddressType(updatedAddressType);
   };
 
-  // const fields = LeadsAddressDetailsFormField(
-  //   register,
-  //   loading,
-  //   control,
-  //   handleBack,
-  //   leadDetails?.addressID?.address?.length || 1,
-  //   append,
-  //   remove,
-  //   [],
-  //   handleFieldTypeChange,
-  //   addressType
-  // );
-
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,

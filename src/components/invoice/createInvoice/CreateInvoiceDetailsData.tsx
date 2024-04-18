@@ -12,9 +12,6 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
-import { readImage, setImages } from "@/api/slices/imageSlice/image";
-import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { ComponentsType } from "@/enums/invoice";
 
 export const CreateInvoice = () => {

@@ -678,7 +678,6 @@ export const generateDateChildren = (
         { label: "23:30", value: "23:30" },
         { label: "23:45", value: "23:45" },
       ],
-      placeholder: { label: "08:00", value: "08:00" },
     },
   });
 
