@@ -95,7 +95,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         customerID: invoiceDetails?.customerID,
         customerType: getKeyByValue(
           staticEnums["CustomerType"],
-          invoiceDetails?.customerDetail?.customerType
+          invoiceDetails && invoiceDetails?.customerDetail?.customerType
         ),
         fullName: invoiceDetails?.customerDetail?.fullName,
         email: invoiceDetails?.customerDetail?.email,
@@ -124,6 +124,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
+
     if (selectedCustomers) {
       dispatch(setCustomerDetails(selectedCustomers));
 

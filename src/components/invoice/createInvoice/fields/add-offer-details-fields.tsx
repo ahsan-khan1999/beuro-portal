@@ -15,6 +15,7 @@ import {
 } from "react-hook-form";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { getKeyByValue } from "@/utils/auth.util";
 
 export const AddOfferDetailsFormField: GenerateInvoiceCustomerFormField = (
   register,
@@ -108,9 +109,12 @@ export const AddOfferDetailsFormField: GenerateInvoiceCustomerFormField = (
 
               control,
               value:
-                (invoiceDetails?.customerDetail &&
-                  invoiceDetails?.customerDetail?.customerType) ||
-                "",
+                (invoiceDetails &&
+                  getKeyByValue(
+                    staticEnums["CustomerType"],
+                    invoiceDetails?.customerDetail?.customerType
+                  )) ||
+                customerType,
             },
           },
           {
@@ -137,7 +141,7 @@ export const AddOfferDetailsFormField: GenerateInvoiceCustomerFormField = (
           {
             containerClass: "mb-0",
             label: {
-              text: translate("offers.offer_details.full_name"),
+              text: translate("customers.details.full_name"),
               htmlFor: "fullName",
               className: "mb-[10px]",
             },
@@ -150,7 +154,7 @@ export const AddOfferDetailsFormField: GenerateInvoiceCustomerFormField = (
 
               placeholder: `${translate("offers.placeholders.name")}`,
               register,
-              // value: leadDetails && leadDetails.customerDetail?.fullName
+              // value: invoiceDetails && invoiceDetails.customerDetail?.fullName,
             },
           },
           {
