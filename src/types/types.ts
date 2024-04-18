@@ -534,6 +534,7 @@ export type GenerateLeadAddressFormField = (
   setValue?: UseFormSetValue<FieldValues>,
   getValues?: UseFormGetValues<FieldValues>
 ) => FormField[] | null;
+
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

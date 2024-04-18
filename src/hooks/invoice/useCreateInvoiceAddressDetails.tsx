@@ -11,23 +11,23 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useState, useEffect } from "react";
-import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { generateCreateInvoiceAddressDetailsValidation } from "@/validation/invoiceSchema";
+import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
 
 export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, offerDetails } = useAppSelector(
-    (state) => state.offer
+  const { loading, error, invoiceDetails } = useAppSelector(
+    (state) => state.invoice
   );
 
   const [addressType, setAddressType] = useState(
-    offerDetails?.addressID
-      ? Array.from(offerDetails?.addressID?.address, () => false)
-      : offerDetails?.leadID?.addressID?.address
-      ? Array.from(offerDetails?.leadID?.addressID?.address, () => false)
+    invoiceDetails?.addressID
+      ? Array.from(invoiceDetails?.addressID?.address, () => false)
+      : invoiceDetails?.addressID?.address
+      ? Array.from(invoiceDetails?.addressID?.address, () => false)
       : [false] || [false]
   );
 
@@ -51,22 +51,22 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    if (offerDetails.id) {
+    if (invoiceDetails.id) {
       reset({
-        address: offerDetails?.addressID
-          ? offerDetails?.addressID?.address?.map((item, index) => ({
+        address: invoiceDetails?.addressID
+          ? invoiceDetails?.addressID?.address?.map((item, index) => ({
               ...item,
               label: item?.label ? item?.label : `Adresse ${++index}`,
             }))
-          : offerDetails?.leadID?.addressID
-          ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
+          : invoiceDetails?.addressID
+          ? invoiceDetails?.addressID?.address?.map((item, index) => ({
               ...item,
               label: item?.label ? item?.label : `Address ${++index}`,
             }))
-          : offerDetails?.leadID?.customerDetail?.address
+          : invoiceDetails?.customerDetail?.address
           ? [
               {
-                ...offerDetails?.leadID?.customerDetail?.address,
+                ...invoiceDetails?.customerDetail?.address,
                 label: `Adresse ${1}`,
               },
             ]
@@ -79,7 +79,7 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
             })),
       });
     }
-  }, [offerDetails?.id]);
+  }, [invoiceDetails?.id]);
 
   const {
     fields: addressFields,
@@ -115,11 +115,11 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     const apiData = {
       ...data,
       step: 2,
-      id: offerDetails?.id,
+      id: invoiceDetails?.id,
       stage: ComponentsType.serviceAdded,
     };
     const response = await dispatch(
-      updateOffer({ data: apiData, router, setError, translate })
+      updateMainInvoice({ data: apiData, router, setError, translate })
     );
 
     if (response?.payload) onHandleNext(ComponentsType.serviceAdded);
@@ -133,6 +133,6 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
-    offerDetails,
+    invoiceDetails,
   };
 };

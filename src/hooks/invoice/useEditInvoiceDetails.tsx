@@ -80,7 +80,6 @@ export const useEditInvoiceDetails = ({
           );
           reset({
             type: "Existing Customer",
-            // leadID: res?.payload?.leadID?.id,
             customerType: getKeyByValue(
               staticEnums["CustomerType"],
               res?.payload?.customerDetail?.customerType
@@ -112,16 +111,6 @@ export const useEditInvoiceDetails = ({
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
-
-  // useMemo(() => {
-  //   if (type && customerID) {
-  //     dispatch(
-  //       readLead({
-  //         params: { filter: { customerID: customerID, paginate: 0 } },
-  //       })
-  //     );
-  //   }
-  // }, [customerID]);
 
   useMemo(() => {
     if (type === "New Customer") {

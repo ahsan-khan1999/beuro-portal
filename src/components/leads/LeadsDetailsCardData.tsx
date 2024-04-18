@@ -77,35 +77,39 @@ const LeadsDetailsCardData = ({
         </div>
 
         <div className="flex items-center justify-end gap-[22px]">
-          <div
-            className="w-fit border-[1px] border-[#4A13E7] rounded-lg flex px-4 py-[6px] cursor-pointer"
-            onClick={() => {
-              localStoreUtil.remove_data("offer");
-              dispatch(
-                setOfferDetails({
-                  id: "convert",
-                  type: "Existing Customer",
-                  leadID: {
-                    ...leadDetails,
-                    customerID: leadDetails?.customerID,
-                  },
-                  serviceDetail: {
-                    serviceDetail: leadDetails?.otherServices,
-                  },
-                  addressID: { address: leadDetails?.addressID?.address },
-                  content: leadDetails?.requiredService,
-                })
-              );
-              dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }));
+          {leadDetails.leadStatus !== "Close" && (
+            <div
+              className="w-fit border-[1px] border-[#4A13E7] rounded-lg flex px-4 py-[6px] cursor-pointer"
+              onClick={() => {
+                localStoreUtil.remove_data("offer");
+                dispatch(
+                  setOfferDetails({
+                    id: "convert",
+                    type: "Existing Customer",
+                    leadID: {
+                      ...leadDetails,
+                      customerID: leadDetails?.customerID,
+                    },
+                    serviceDetail: {
+                      serviceDetail: leadDetails?.otherServices,
+                    },
+                    addressID: { address: leadDetails?.addressID?.address },
+                    content: leadDetails?.requiredService,
+                  })
+                );
+                dispatch(
+                  setCustomerDetails({ ...leadDetails?.customerDetail })
+                );
 
-              router.push("/offers/add");
-            }}
-          >
-            <Image src={createOfferIcon} alt="create_offer_icon" />
-            <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
-              {translate("leads.card_content.create_button")}
-            </p>
-          </div>
+                router.push("/offers/add");
+              }}
+            >
+              <Image src={createOfferIcon} alt="create_offer_icon" />
+              <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
+                {translate("leads.card_content.create_button")}
+              </p>
+            </div>
+          )}
           <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
             <Image
               src={deleteIcon}

@@ -3,7 +3,7 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
-import { useCreateInvoiceCustomerDetails } from "@/hooks/invoice/useCreateInvoiceCustomerDetails";
+import { useCreateInvoiceOfferDetails } from "@/hooks/invoice/useCreateInvoiceCustomerDetails";
 
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
@@ -16,8 +16,8 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
     errors,
     error,
     translate,
-    offerDetails,
-  } = useCreateInvoiceCustomerDetails(onHandleNext);
+    invoiceDetails,
+  } = useCreateInvoiceOfferDetails(onHandleNext);
 
   const handleCancel = () => {
     router.pathname = "/invoices";
@@ -57,7 +57,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
           </span>
           <p className="font-medium text-2xl text-white">
             {translate("offers.offer_details.heading")}{" "}
-            {offerDetails?.id && offerDetails?.offerNumber}
+            {invoiceDetails?.id && invoiceDetails?.invoiceNumber}
           </p>
         </div>
         <button

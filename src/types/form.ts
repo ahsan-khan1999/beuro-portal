@@ -128,6 +128,7 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   className?: string;
   disabled?: boolean;
   fieldIndex?: number;
+  placeholder?: string;
 }
 
 export interface SelectBoxProps {

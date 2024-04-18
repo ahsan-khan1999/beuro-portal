@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
   AddDateFormField,
-  AddInvoiceDetailsFormField,
   AddOfferDetailsSubmitFormField,
 } from "@/components/invoice/edit/fields/add-offer-details-fields";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
@@ -23,20 +22,19 @@ import {
 import { updateQuery } from "@/utils/update-query";
 import { readLead, setLeads } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
-import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
-import { ContentTableRowTypes } from "@/types/content";
-import { AddOfferDetailsFormField } from "@/components/invoice/createInvoice/fields/add-offer-details-fields";
 import { generateInvoiceDetailsValidationSchema } from "@/validation/invoiceSchema";
+import { createMainInvoice } from "@/api/slices/invoice/invoiceSlice";
+import { AddOfferDetailsFormField } from "@/components/invoice/createInvoice/fields/add-offer-details-fields";
 
-export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
+export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { loading, error, offerDetails } = useAppSelector(
-    (state) => state.offer
+  const { loading, error, invoiceDetails } = useAppSelector(
+    (state) => state.invoice
   );
 
   const { customer, customerDetails } = useAppSelector(
@@ -76,7 +74,7 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
-  const leadID = watch("leadID");
+  // const leadID = watch("leadID");
 
   useEffect(() => {
     if (type && customerID)
@@ -91,30 +89,28 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
   }, [customerID]);
 
   useEffect(() => {
-    if (offerDetails?.id) {
+    if (invoiceDetails?.id) {
       reset({
         type: "Existing Customer",
-        customerID: offerDetails?.leadID?.customerID,
-        leadID: offerDetails?.leadID?.id,
+        customerID: invoiceDetails?.customerID,
         customerType: getKeyByValue(
           staticEnums["CustomerType"],
-          offerDetails?.leadID?.customerDetail?.customerType
+          invoiceDetails?.customerDetail?.customerType
         ),
-        fullName: offerDetails?.leadID?.customerDetail?.fullName,
-        email: offerDetails?.leadID?.customerDetail?.email,
-        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
-        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
-        content: offerDetails?.content?.id,
+        fullName: invoiceDetails?.customerDetail?.fullName,
+        email: invoiceDetails?.customerDetail?.email,
+        phoneNumber: invoiceDetails?.customerDetail?.phoneNumber,
+        mobileNumber: invoiceDetails?.customerDetail?.mobileNumber,
+        content: invoiceDetails?.content?.id,
         title:
-          offerDetails?.title || offerDetails?.content?.offerContent?.title,
-        address: offerDetails?.leadID?.customerDetail?.address,
-        date: offerDetails?.date,
-        gender:
-          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
-        time: offerDetails?.time,
+          invoiceDetails?.title || invoiceDetails?.content?.offerContent?.title,
+        address: invoiceDetails?.customerDetail?.address,
+        date: invoiceDetails?.date,
+        gender: staticEnums["Gender"][invoiceDetails?.customerDetail?.gender],
+        time: invoiceDetails?.time,
       });
     }
-  }, [offerDetails?.id]);
+  }, [invoiceDetails?.id]);
 
   const {
     fields: testFields,
@@ -136,7 +132,6 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
         customerID: selectedCustomers?.id,
         type: type,
         content: selectedContent,
-        leadID: "",
         gender: staticEnums["Gender"][selectedCustomers?.gender],
       });
     }
@@ -147,29 +142,29 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    if (offerDetails?.id) {
+    if (invoiceDetails?.id) {
       if (filteredContent)
         setValue("title", filteredContent?.offerContent?.title);
     } else {
-      const filteredLead = lead.find((item) => item.id === leadID);
-      if (filteredLead) {
-        const content = filteredLead?.requiredService as ContentTableRowTypes;
+      // const filteredLead = lead.find((item) => item.id === leadID);
+      // if (filteredLead) {
+      //   const content = filteredLead?.requiredService as ContentTableRowTypes;
 
-        if (selectedContent !== content?.id) {
-          setValue("content", selectedContent);
-          setValue("title", filteredContent?.offerContent?.title);
-        } else {
-          setValue("content", content?.id);
-          setValue("title", content?.offerContent?.title);
-        }
-      } else {
-        setValue("content", selectedContent);
-        setValue("title", filteredContent?.offerContent?.title);
-      }
+      //   if (selectedContent !== content?.id) {
+      //     setValue("content", selectedContent);
+      //     setValue("title", filteredContent?.offerContent?.title);
+      //   } else {
+      //     setValue("content", content?.id);
+      //     setValue("title", content?.offerContent?.title);
+      //   }
+      // } else {
+      setValue("content", selectedContent);
+      setValue("title", filteredContent?.offerContent?.title);
     }
-  }, [selectedContent, leadID]);
+    // }
+  }, [selectedContent]);
 
-  const offerFields = AddOfferDetailsFormField(
+  const invoiceFields = AddOfferDetailsFormField(
     register,
     loading,
     control,
@@ -184,8 +179,8 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
       lead,
       content,
       handleContentSelect,
-      offerDetails,
-      leadID,
+      invoiceDetails,
+      // leadID,
     },
     setValue
   );
@@ -193,48 +188,44 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
   useMemo(() => {
     if (type === "New Customer") {
       reset({
-        ...offerDetails,
-        leadID: null,
+        ...invoiceDetails,
         customerType: null,
         fullName: null,
         email: null,
         phoneNumber: null,
         mobileNumber: null,
         address: null,
-        customerID: "",
         type: "New Customer",
-        content: offerDetails?.content?.id,
-        // title: null,
+        content: invoiceDetails?.content?.id,
         gender: null,
       });
-    } else if (type === "Existing Customer" && offerDetails?.id) {
+    } else if (type === "Existing Customer" && invoiceDetails?.id) {
       reset({
         type: "Existing Customer",
-        customerID: offerDetails?.leadID?.customerID,
-        leadID: offerDetails?.leadID?.id,
+        customerID: invoiceDetails?.customerID,
+        // leadID: invoiceDetails?.id,
         customerType: getKeyByValue(
           staticEnums["CustomerType"],
-          offerDetails?.leadID?.customerDetail?.customerType
+          invoiceDetails?.customerDetail?.customerType
         ),
-        fullName: offerDetails?.leadID?.customerDetail?.fullName,
-        email: offerDetails?.leadID?.customerDetail?.email,
-        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
-        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
-        content: offerDetails?.content?.id,
+        fullName: invoiceDetails.customerDetail?.fullName,
+        email: invoiceDetails?.customerDetail?.email,
+        phoneNumber: invoiceDetails?.customerDetail?.phoneNumber,
+        mobileNumber: invoiceDetails?.customerDetail?.mobileNumber,
+        content: invoiceDetails?.content?.id,
         title:
-          offerDetails?.title || offerDetails?.content?.offerContent?.title,
-        address: offerDetails?.leadID?.customerDetail?.address,
-        date: offerDetails?.date,
-        gender:
-          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
-        time: offerDetails?.time,
+          invoiceDetails?.title || invoiceDetails?.content?.offerContent?.title,
+        address: invoiceDetails?.customerDetail?.address,
+        date: invoiceDetails?.date,
+        gender: staticEnums["Gender"][invoiceDetails?.customerDetail?.gender],
+        time: invoiceDetails?.time,
       });
-    } else if (type === "Existing Customer" && !offerDetails?.id) {
+    } else if (type === "Existing Customer" && !invoiceDetails?.id) {
       dispatch(setLeads([]));
       dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
       setValue("content", null);
       setValue("title", null);
-      setValue("leadID", null);
+      // setValue("leadID", null);
     }
   }, [type]);
 
@@ -257,28 +248,29 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    if (offerDetails?.id) {
+    if (invoiceDetails?.id) {
       const apiData: any = {
         ...data,
         step: 1,
-        offerId: offerDetails?.id === "convert" ? null : offerDetails?.id,
+        invoiceId: invoiceDetails?.id === "convert" ? null : invoiceDetails?.id,
         stage: ComponentsType.addressAdded,
-        isLeadCreated: data?.leadID ? true : false,
+        // isLeadCreated: data?.leadID ? true : false,
       };
 
-      if (!apiData?.isLeadCreated) delete apiData["leadID"];
+      // if (!apiData?.isLeadCreated) delete apiData["leadID"];
       const res = await dispatch(
-        createOffer({ data: apiData, router, setError, translate })
+        createMainInvoice({ data: apiData, router, setError, translate })
       );
+
       if (res?.payload) {
         if (data?.type === "New Customer") {
-          dispatch(setLeads([...lead, res?.payload?.leadID]));
+          dispatch(setLeads([res?.payload]));
           dispatch(
             setCustomers([
               ...customer,
               {
-                ...res?.payload?.leadID?.customerDetail,
-                id: res?.payload?.leadID?.customerID,
+                ...res?.payload?.customerDetail,
+                // id: res?.payload?.customerID,
               },
             ])
           );
@@ -290,27 +282,28 @@ export const useCreateInvoiceCustomerDetails = (onHandleNext: Function) => {
       const apiData: any = {
         ...data,
         step: 1,
-        offerId: null,
+        invoiceId: null,
         stage: ComponentsType.addressAdded,
-        isLeadCreated: data?.leadID ? true : false,
       };
-      if (!apiData?.isLeadCreated) delete apiData["leadID"];
+      // if (!apiData?.isLeadCreated) delete apiData["leadID"];
 
       const res = await dispatch(
-        createOffer({ data: apiData, router, setError, translate })
+        createMainInvoice({ data: apiData, router, setError, translate })
       );
-      if (res?.payload) onHandleNext(ComponentsType.addressAdded);
+      if (res?.payload) {
+        onHandleNext(ComponentsType.addressAdded);
+      }
     }
   };
 
   return {
-    fields: [...offerFields, ...dateFields, ...submit],
+    fields: [...invoiceFields, ...dateFields, ...submit],
     onSubmit,
     control,
     handleSubmit,
     errors,
     error,
     translate,
-    offerDetails,
+    invoiceDetails,
   };
 };

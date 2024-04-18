@@ -22,7 +22,7 @@ const ServiceAddDetails = ({
     error,
     translate,
     systemSettings,
-    offerDetails,
+    invoiceDetails,
   } = useCreateInvoiceServiceDetails(onHandleNext);
 
   const handleCancel = () => {
@@ -35,8 +35,8 @@ const ServiceAddDetails = ({
     <FormCard>
       <div className="flex justify-between items-center bg-[#C50EE0] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
-          {translate("offers.service_details.main_heading")}
-          {offerDetails?.id && offerDetails?.offerNumber}
+          {translate("offers.service_details.main_heading")}{" "}
+          {invoiceDetails?.id && invoiceDetails?.invoiceNumber}
         </h2>
         <button
           onClick={handleCancel}

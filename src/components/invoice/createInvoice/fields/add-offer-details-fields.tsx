@@ -2,7 +2,7 @@ import { Field } from "@/enums/form";
 import {
   DivProps,
   FormField,
-  GenerateLeadsCustomerFormField,
+  GenerateInvoiceCustomerFormField,
   GenerateOfferDateFormField,
   GenerateOffersFormField,
 } from "@/types";
@@ -16,7 +16,7 @@ import {
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
-export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
+export const AddOfferDetailsFormField: GenerateInvoiceCustomerFormField = (
   register,
   loading,
   control,
@@ -32,7 +32,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     content,
     handleContentSelect,
     selectedContent,
-    offerDetails,
+    invoiceDetails,
     leadID,
   },
   setValue
@@ -108,7 +108,9 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               control,
               value:
-                (offerDetails && offerDetails.customerID?.customerType) || "",
+                (invoiceDetails?.customerDetail &&
+                  invoiceDetails?.customerDetail?.customerType) ||
+                "",
             },
           },
           {
@@ -165,7 +167,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               placeholder: `${translate("offers.placeholders.email")}`,
               register,
-              value: offerDetails && offerDetails.customerID?.email,
+              value: invoiceDetails && invoiceDetails?.customerDetail?.email,
             },
           },
           {
@@ -185,8 +187,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               value:
                 type === "New Customer"
                   ? ""
-                  : offerDetails?.id
-                  ? offerDetails?.leadID?.customerDetail?.phoneNumber
+                  : invoiceDetails?.id
+                  ? invoiceDetails?.customerDetail?.phoneNumber
                   : customerDetails && customerDetails?.phoneNumber,
             },
           },
@@ -207,8 +209,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               value:
                 type === "New Customer"
                   ? ""
-                  : offerDetails?.id
-                  ? offerDetails?.leadID?.customerDetail?.mobileNumber
+                  : invoiceDetails?.id
+                  ? invoiceDetails?.customerDetail?.mobileNumber
                   : customerDetails && customerDetails?.mobileNumber,
             },
           },
@@ -243,7 +245,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                   }))) ||
                 [],
               control,
-              value: (offerDetails?.id && offerDetails?.content?.id) || "",
+              value: (invoiceDetails?.id && invoiceDetails?.content?.id) || "",
               // onItemChange: handleContentSelect && handleContentSelect,
             },
           },
@@ -280,7 +282,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-5 bg-[#EDF4FF]",
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -299,7 +301,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               placeholder: `${translate("offers.placeholders.street")}`,
               register,
               value:
-                offerDetails && offerDetails?.customerID?.address?.streetNumber,
+                invoiceDetails &&
+                invoiceDetails?.customerDetail?.address?.streetNumber,
             },
           },
           {
@@ -320,7 +323,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
               register,
               value:
-                offerDetails && offerDetails?.customerID?.address?.postalCode,
+                invoiceDetails &&
+                invoiceDetails?.customerDetail?.address?.postalCode,
             },
           },
           {
@@ -330,21 +334,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
-            // field: {
-            //   className: "pl-4 !border-[#BFBFBF]",
-            //   type: Field.select,
-            //   id: "address.country",
-            //   name: "address.country",
 
-            //   options: Object.keys(staticEnums.Country).map((item) => ({
-            //     value: item,
-            //     label: translate(`countries.${item}`),
-            //   })),
-            //   control,
-            //   value:
-            //     (offerDetails && offerDetails?.customerID?.address?.country) ||
-            //     Object.keys(staticEnums.Country)[0],
-            // },
             field: {
               type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
@@ -385,7 +375,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         placeholder: "Please Enter Company Name",
         register,
         setValue: setValue,
-        value: offerDetails?.leadID?.customerDetail?.companyName || "",
+        value: invoiceDetails?.customerDetail?.companyName || "",
       },
     };
     const divField = formField[fieldIndex]?.field as DivProps;
@@ -425,7 +415,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        value: offerDetails?.id ? offerDetails?.leadID?.customerID : "",
+        value: invoiceDetails?.id ? invoiceDetails?.customerID : "",
         setValue,
       },
     };
@@ -433,48 +423,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps;
     if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
       divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField as any);
-    }
-  }
-
-  const fieldLeadIndex = formField.findIndex(
-    (field: any) =>
-      field?.field?.type === Field.div &&
-      Array.isArray(field?.field?.children) &&
-      field?.field?.children.some(
-        (child: any) => child?.field?.id == "customerID"
-      )
-  );
-
-  if (fieldLeadIndex !== -1 && type === "Existing Customer") {
-    const leadField = {
-      containerClass: "mb-0",
-      label: {
-        text: "Lead",
-        htmlFor: "leadID",
-        className: "mb-[10px]",
-      },
-      field: {
-        className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
-        type: Field.select,
-        id: "leadID",
-        name: "leadID",
-        options: lead?.map((item) => ({
-          value: item.id,
-          label: item.refID,
-        })),
-        control,
-        // value:""
-        value:
-          (offerDetails?.id && offerDetails?.leadID?.id) ||
-          (lead && lead?.length > 0 && lead?.at(0)?.id) ||
-          leadID ||
-          leadID,
-        // disabled: offerDetails?.leadID?.id ? true : false,
-      },
-    };
-    const divField = formField[fieldLeadIndex]?.field as DivProps;
-    if (divField && Array.isArray(divField.children)) {
-      divField.children.splice(fieldLeadIndex + 2, 0, leadField as any);
     }
   }
 
@@ -555,7 +503,7 @@ export const generateDateChildren = (
             field: {
               type: Field.date,
               className:
-                "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
+                "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               name: `date.${i}.endDate`,
               remove: i > 0 && `${translate("common.remove")}`,
               onRemove: () => handleRemoveDateField(i),
@@ -577,7 +525,7 @@ export const generateDateChildren = (
     field: {
       type: Field.select,
       className:
-        "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
+        "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
       name: "time",
       control,
       options: [
@@ -746,7 +694,7 @@ export const AddOfferDetailsDateFormField = (
       register,
       dateType: "date",
 
-      // value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.startDate
+      // value: invoiceDetails?.date?.length > 0 && invoiceDetails?.date[key]?.startDate
     },
   };
   const dateField2 = {
@@ -765,7 +713,7 @@ export const AddOfferDetailsDateFormField = (
       onRemove: () => handleRemoveDateField(count),
       register,
       dateType: "date",
-      // value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.endDate
+      // value: invoiceDetails?.date?.length > 0 && invoiceDetails?.date[key]?.endDate
     },
   };
   const fieldObj = { startDate: dateField, endDate: dateField2 };

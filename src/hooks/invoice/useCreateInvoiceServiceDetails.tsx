@@ -28,6 +28,7 @@ import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { generateCreateInvoiceServiceDetailsValidation } from "@/validation/invoiceSchema";
+import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
 
 let prevDisAmount: number | string = "";
 
@@ -44,12 +45,12 @@ export const useCreateInvoiceServiceDetails = (
 
   const dispatch = useAppDispatch();
   const { systemSettings } = useAppSelector((state) => state.settings);
-  const { loading, error, offerDetails } = useAppSelector(
-    (state) => state.offer
+  const { loading, error, invoiceDetails } = useAppSelector(
+    (state) => state.invoice
   );
 
   const [serviceType, setServiceType] = useState<ServiceType[]>(
-    offerDetails?.serviceDetail?.serviceDetail?.map((item) =>
+    invoiceDetails?.serviceDetail?.serviceDetail?.map((item) =>
       item.serviceType === "New Service"
         ? ServiceType.NEW_SERVICE
         : ServiceType.EXISTING_SERVICE
@@ -175,16 +176,9 @@ export const useCreateInvoiceServiceDetails = (
   }, [discountAmount, discountType, taxType, isTax, isDiscount, taxPercentage]);
 
   useMemo(() => {
-    if (offerDetails.id) {
-      // setTotal({
-      //   taxAmount: Number(
-      //     (offerDetails?.total - offerDetails?.subTotal).toFixed(2)
-      //   ),
-      //   subTotal: offerDetails?.subTotal,
-      //   grandTotal: offerDetails?.total,
-      // });
+    if (invoiceDetails.id) {
       reset({
-        serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [
+        serviceDetail: invoiceDetails?.serviceDetail?.serviceDetail || [
           {
             serviceTitle: "",
             price: "",
@@ -196,17 +190,16 @@ export const useCreateInvoiceServiceDetails = (
             discount: 0,
           },
         ],
-        isTax: offerDetails?.isTax,
-        isDiscount: offerDetails?.isDiscount,
-        discountType: staticEnums["DiscountType"][offerDetails?.discountType],
-        taxType: staticEnums["TaxType"][offerDetails?.taxType] || 0,
-        discountAmount: offerDetails?.discountAmount || "",
-        discountDescription: offerDetails?.discountDescription,
-        taxAmount: offerDetails?.taxAmount || 0,
+        isTax: invoiceDetails?.isTax,
+        isDiscount: invoiceDetails?.isDiscount,
+        discountType: staticEnums["DiscountType"][invoiceDetails?.discountType],
+        taxType: staticEnums["TaxType"][invoiceDetails?.taxType] || 0,
+        discountAmount: invoiceDetails?.discountAmount || "",
+        discountDescription: invoiceDetails?.discountDescription,
+        taxAmount: invoiceDetails?.taxAmount || 0,
       });
     }
-    // generateGrandTotal();
-  }, [offerDetails.id]);
+  }, [invoiceDetails.id]);
 
   const {
     fields: serviceFields,
@@ -236,31 +229,31 @@ export const useCreateInvoiceServiceDetails = (
   const onServiceSelectType = (index: number) => {
     setValue(
       `serviceDetail.${index}.price`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.price
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.price
     );
     setValue(
       `serviceDetail.${index}.unit`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.unit
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.unit
     );
     setValue(
       `serviceDetail.${index}.description`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.description
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.description
     );
     setValue(
       `serviceDetail.${index}.count`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.count
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.count
     );
     setValue(
       `serviceDetail.${index}.totalPrice`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.totalPrice
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.totalPrice
     );
     setValue(
       `serviceDetail.${index}.serviceTitle`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceTitle
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceTitle
     );
     setValue(
       `serviceDetail.${index}.discount`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.discount
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.discount
     );
   };
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
@@ -272,13 +265,13 @@ export const useCreateInvoiceServiceDetails = (
     const fieldNamePrefix = "serviceDetail";
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
         "New Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
         "New Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
@@ -290,13 +283,13 @@ export const useCreateInvoiceServiceDetails = (
       setValue(`serviceDetail.${index}.discount`, ``);
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
         "Existing Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.NEW_SERVICE &&
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+      invoiceDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
         "Existing Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
@@ -320,7 +313,7 @@ export const useCreateInvoiceServiceDetails = (
       onCustomerSelect: onServiceSelect,
       serviceDetails: serviceDetails,
       generatePrice: generateTotalPrice,
-      offerDetails,
+      invoiceDetails,
     },
     append,
     remove,
@@ -343,7 +336,7 @@ export const useCreateInvoiceServiceDetails = (
       generateTotal: generateGrandTotal,
       isTax,
       isDiscount,
-      offerDetails: offerDetails,
+      invoiceDetails: invoiceDetails,
       taxType: taxType,
       discountType,
       tax: tax,
@@ -366,7 +359,7 @@ export const useCreateInvoiceServiceDetails = (
       ...data,
       discountAmount: +data.discountAmount,
       step: 3,
-      id: offerDetails?.id,
+      id: invoiceDetails?.id,
       stage: ComponentsType.additionalAdded,
       taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
 
@@ -384,7 +377,7 @@ export const useCreateInvoiceServiceDetails = (
     }
 
     const response = await dispatch(
-      updateOffer({ data: apiData, router, setError, translate })
+      updateMainInvoice({ data: apiData, router, setError, translate })
     );
     if (response?.payload) handleNext();
   };
@@ -398,6 +391,6 @@ export const useCreateInvoiceServiceDetails = (
     error,
     translate,
     systemSettings,
-    offerDetails,
+    invoiceDetails,
   };
 };

@@ -27,8 +27,6 @@ export const SelectBox = ({
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
 
-  console.log(defaultValue);
-
   useEffect(() => {
     // setOption(options);
     if (defaultValue) {
@@ -69,7 +67,7 @@ export const SelectBox = ({
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
-        // placeholder={placeholder}
+        placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);

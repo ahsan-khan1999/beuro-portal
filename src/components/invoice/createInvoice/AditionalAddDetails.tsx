@@ -23,7 +23,7 @@ const AditionalAddDetails = ({
     errors,
     error,
     translate,
-    offerDetails,
+    invoiceDetails,
   } = useCreateInvoiceAdditionalDetails(onHandleNext, onHandleBack);
 
   const handleCancel = () => {
@@ -37,7 +37,7 @@ const AditionalAddDetails = ({
       <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
           {translate("offers.additional_details.main_heading")}{" "}
-          {offerDetails?.id && offerDetails?.offerNumber}
+          {invoiceDetails?.id && invoiceDetails?.invoiceNumber}
         </h2>
         <button
           onClick={handleCancel}

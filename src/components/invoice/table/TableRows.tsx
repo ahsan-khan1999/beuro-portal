@@ -16,6 +16,8 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
+        console.log(item);
+
         return (
           <div
             key={index}

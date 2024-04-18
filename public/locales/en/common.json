@@ -753,6 +753,11 @@
       "main_heading": "Invoice Created Successful ",
       "sub_heading": "Thanks for creating Invoice we are happy to have you. ",
       "button": "Preview PDF"
+    },
+    "main_invoice_created_modal": {
+      "main_heading": "Invoice Created Successfully",
+      "sub_heading": "Thanks for creating invoice we are happy to have you.",
+      "button": "Done"
     }
   },
   "contracts": {
@@ -1448,8 +1453,8 @@
       "cancel_button": "Cancel"
     },
     "offer_created_modal": {
-      "main_heading": "Offer Created Successful ",
-      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "main_heading": "Offer Created Successfully",
+      "sub_heading": "Thanks for creating offer we are happy to have you.",
       "button": "Done"
     },
     "placeholders": {

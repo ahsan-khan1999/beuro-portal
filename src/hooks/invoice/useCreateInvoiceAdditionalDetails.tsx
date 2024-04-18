@@ -9,9 +9,9 @@ import {
   readContent,
   setContentDetails,
 } from "@/api/slices/content/contentSlice";
-import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { generateCreateInvoiceAdditionalDetailsValidation } from "@/validation/invoiceSchema";
+import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
 
 export const useCreateInvoiceAdditionalDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void,
@@ -20,13 +20,13 @@ export const useCreateInvoiceAdditionalDetails = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, offerDetails } = useAppSelector(
-    (state) => state.offer
+  const { loading, error, invoiceDetails } = useAppSelector(
+    (state) => state.invoice
   );
   const { content, contentDetails } = useAppSelector((state) => state.content);
+
   useEffect(() => {
-    // setValue("additionalDetails", offerDetails?.additionalDetails || "<p>asd</p>");
-    setValue("content", offerDetails?.content?.id);
+    setValue("content", invoiceDetails?.content?.id);
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -47,10 +47,10 @@ export const useCreateInvoiceAdditionalDetails = (
   useMemo(() => {
     setValue(
       "additionalDetails",
-      offerDetails?.additionalDetails ||
-        offerDetails?.content?.offerContent?.description
+      invoiceDetails?.additionalDetails ||
+        invoiceDetails?.content?.offerContent?.description
     );
-  }, [offerDetails?.additionalDetails]);
+  }, [invoiceDetails?.additionalDetails]);
 
   const selectedContent = watch("content");
   const handleBack = () => {
@@ -75,7 +75,7 @@ export const useCreateInvoiceAdditionalDetails = (
     {
       content: content,
       contentDetails: contentDetails,
-      offerDetails,
+      invoiceDetails,
       onContentSelect,
       selectedContent,
     },
@@ -87,11 +87,11 @@ export const useCreateInvoiceAdditionalDetails = (
     const apiData = {
       ...data,
       step: 4,
-      id: offerDetails?.id,
+      id: invoiceDetails?.id,
       stage: ComponentsType.additionalAdded,
     };
     const response = await dispatch(
-      updateOffer({ data: apiData, router, setError, translate })
+      updateMainInvoice({ data: apiData, router, setError, translate })
     );
     if (response?.payload) onHandleNext(ComponentsType.additionalAdded);
   };
@@ -104,6 +104,6 @@ export const useCreateInvoiceAdditionalDetails = (
     errors,
     error,
     translate,
-    offerDetails,
+    invoiceDetails,
   };
 };

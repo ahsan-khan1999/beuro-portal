@@ -86,63 +86,32 @@ export const CreateInvoice = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const route = () => {
-    router.push(
-      {
-        pathname: `/offers/pdf-preview`,
-        query: { status: "None", offerID: invoiceDetails?.id, isMail: true },
-      }
-      // `/offers/pdf-preview?offerID=${invoiceDetails?.id}&isMail=${true}`
-    );
+  const handleRoute = () => {
+    router.push({
+      pathname: "/invoices",
+      query: { status: "None" },
+    });
     onClose();
   };
 
-  const offerCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE_SUCCESSFULLY }));
-  };
-
-  const handleImageUpload = () => {
-    dispatch(setImages([]));
-
-    dispatch(
-      readImage({ params: { type: "leadID", id: invoiceDetails?.leadID?.id } })
-    );
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
-  };
-
-  const handleOfferCreated = () => {
+  const handleInvoiceCreated = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
-      <LeadCreated
-        imageUploadHandler={handleImageUpload}
-        onClose={onClose}
-        routeHandler={route}
-        heading={translate("common.offer_created")}
-      />
-    ),
-    [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer
-        onClose={onClose}
-        handleImageSlider={handleOfferCreated}
-        type={"Offer"}
-      />
-    ),
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
-        heading={translate("offers.offer_created_modal.main_heading")}
-        subHeading={translate("offers.offer_created_modal.sub_heading")}
-        route={route}
+        heading={translate("invoice.main_invoice_created_modal.main_heading")}
+        subHeading={translate("invoice.main_invoice_created_modal.sub_heading")}
+        route={handleRoute}
       />
     ),
   };
 
   const handleNextTab = (currentComponent: ComponentsType) => {
     if (tabType === ComponentsType.additionalAdded) {
-      offerCreatedHandler();
+      handleInvoiceCreated();
       return;
     }
     setTabType(currentComponent);

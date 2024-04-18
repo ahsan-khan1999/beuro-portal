@@ -14,6 +14,7 @@ export const SelectField = ({
   className,
   disabled,
   fieldIndex,
+  placeholder,
 }: SelectProps) => {
   return (
     <Controller
@@ -33,6 +34,7 @@ export const SelectField = ({
           disabled={disabled}
           key={id}
           fieldIndex={fieldIndex}
+          placeholder={placeholder}
         />
       )}
     />

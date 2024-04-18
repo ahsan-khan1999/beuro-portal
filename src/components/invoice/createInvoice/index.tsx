@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "@/layout";
-import { CreateInvoice } from "./AddOffersDetailsData";
+import { CreateInvoice } from "./CreateInvoiceDetailsData";
 
 export const InvoiceCreateDetail = () => {
   return (

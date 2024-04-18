@@ -212,9 +212,7 @@ export const generateAddfferServiceDetailsValidation = (
             .number()
             .required(translate("validationMessages.required"))
             .typeError(translate("validationMessages.invalid_format")),
-          [AddServiceOfferDetails.description]: yup
-            .string()
-            .required(translate("validationMessages.required")),
+          [AddServiceOfferDetails.description]: yup.string().notRequired(),
         })
         .required(translate("validationMessages.required"))
     )

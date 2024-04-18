@@ -746,6 +746,11 @@
       "main_heading": "Rechnung erfolgreich erstellt",
       "sub_heading": "Danke, dass Sie eine Rechnung erstellt haben. Wir freuen uns, Sie zu haben.",
       "button": "PDF-Vorschau"
+    },
+    "main_invoice_created_modal": {
+      "main_heading": "Rechnung erfolgreich erstellt",
+      "sub_heading": "Vielen Dank für die Erstellung der Rechnung, wir freuen uns, dass Sie dabei sind.",
+      "button": "Done"
     }
   },
   "contracts": {

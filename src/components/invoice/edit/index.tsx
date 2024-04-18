@@ -19,11 +19,6 @@ const EditInvoiceDetails = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
 
-  // useEffect(() => {
-  //   if (invoiceDetails?.id) dispatch(readImage({ params: { type: "invoice", id: invoiceDetails?.id } }));
-
-  // }, [invoiceDetails?.id])
-
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -53,17 +48,12 @@ const EditInvoiceDetails = () => {
         type={"Offer"}
       />
     ),
-    // [ModalType.IMAGE_SLIDER]: (
-    //   <ImageSlider onClose={onClose} details={images} />
-    // ),
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  // const { handleImagesUpload } = useOffers();
-  // const handleImagesUpload = () => {};
   const router = useRouter();
   let tab: EditComponentsType | undefined;
 
