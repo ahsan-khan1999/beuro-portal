@@ -63,7 +63,7 @@ const PdfPriview = () => {
       {loading ? (
         <LoadingState />
       ) : (
-        <div className="">
+        <div>
           <EmailCard
             emailStatus={offerDetails?.emailStatus}
             offerNo={offerData?.emailHeader?.offerNo}

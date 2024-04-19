@@ -199,6 +199,48 @@ export interface InvoiceDetailTableRowTypes {
   leadID: Lead;
 }
 
+export interface MainInvoicePdfDetailTableRowTypes {
+  amount: number;
+  id: string;
+  invoiceNumber: string;
+  paidAmount: string;
+  remainingAmount: string;
+  attachement?: string;
+  totalEmail: string;
+  sentEmail: string;
+  createdAt: string;
+  contractID: contractTableTypes;
+  invoiceTitle: string;
+  totalPrice: string;
+  emailStatus: string;
+  invoiceStatus: string;
+  isInvoiceRecurring: boolean;
+  invoiceCreatedAmount: number;
+  createdBy: User;
+  title: string;
+  isInvoiceRecurring2: boolean;
+  isNoteCreated: boolean;
+  customerDetail: Customers;
+  content: ContentTableRowTypes;
+  customerID: string;
+  date: DateRangeProps[];
+  time: string;
+  serviceDetail: OfferServiceDetails;
+  subTotal: number;
+  total: number;
+  addressID: AddressID;
+  taxType: "Include" | "Exclude";
+  taxAmount: number;
+  isDiscount: boolean;
+  isTax: boolean;
+  discountAmount: number;
+  discountDescription: string;
+  discountType: 0 | 1;
+  additionalDetails: string;
+  stage: ComponentsType;
+  leadID: Lead;
+}
+
 interface Customers {
   id: string;
   refID: string;

@@ -24,6 +24,7 @@ const AditionalEditDetails = ({
     translate,
     invoiceDetails,
   } = useInoviceEditAdditionalDetails({ handleNext, handleBack });
+
   return (
     <FormCard>
       <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">

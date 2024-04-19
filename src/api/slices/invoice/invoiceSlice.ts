@@ -363,6 +363,18 @@ export const readQRCode: AsyncThunk<boolean, object, object> | any =
     }
   });
 
+export const readMainInvoiceQRCode: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("invoice/qr/code", async (args, thunkApi) => {
+    const { params, router, setError, translate } = args as any;
+    try {
+      const response = await apiServices.readMainQRCode(params);
+      return response?.data?.data?.qrcode;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
 export const createInvoiceDetial: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/create/detail", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

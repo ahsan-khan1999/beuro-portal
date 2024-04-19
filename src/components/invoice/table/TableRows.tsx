@@ -13,18 +13,24 @@ const TableRows = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
+  const handleInvoicePdfPreview = (id?: string) => {
+    router.push({
+      pathname: "/invoices/pdf-preview",
+      query: {
+        ...router.query,
+        invoice: id,
+        isMail: true,
+      },
+    });
+  };
+
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
         return (
           <div
             key={index}
-            onClick={() =>
-              router.push({
-                pathname: "/invoices/details",
-                query: { ...router.query, invoice: item.id },
-              })
-            }
+            onClick={() => handleInvoicePdfPreview(item?.id)}
             className="gap-x-3 hover:bg-[#E9E1FF] cursor-pointer items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(400px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(90px,_90px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(50px,_50px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(50px,_50px)_minmax(50px,_50px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)_minmax(50px,_50px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(50px,_50px)_minmax(50px,_50px)] border-t border-t-[#E7EAEE]"
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
@@ -125,15 +131,18 @@ const TableRows = ({
               </svg>
             </span>
             <span
+              onClick={(e) => e.stopPropagation()}
               className="cursor-pointer flex justify-center items-center"
-              onClick={() =>
-                router.push({
-                  pathname: "/invoices/details",
-                  query: { ...router.query, invoice: item.id },
-                })
-              }
             >
-              <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">
+              <div
+                onClick={() =>
+                  router.push({
+                    pathname: "/invoices/details",
+                    query: { ...router.query, invoice: item.id },
+                  })
+                }
+                className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8"

@@ -95,8 +95,8 @@ export const useContractPdf = () => {
     global: { modal, loading: loadingGlobal },
     contract: { error, loading, contractDetails },
   } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   const maxItemsFirstPage = 6;
   const maxItemsPerPage = 10;
 
