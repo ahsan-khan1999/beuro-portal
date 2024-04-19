@@ -39,7 +39,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#EBEBEB] focus:!border-primary ",
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
               inputType: "email",
               id: "email",
               name: "email",
@@ -60,7 +60,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                     type: Field.span,
                     text: `Cc`,
                     containerClassName:
-                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer",
                     id: "cc",
                     onClick: () => {
                       if (setValue) {

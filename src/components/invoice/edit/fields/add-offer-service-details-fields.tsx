@@ -255,27 +255,6 @@ export const AddInvoiceServiceDetailsFormField: GenerateOfferServiceFormField =
                     "mb-0 grid grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-5",
                   children: [
                     {
-                      containerClass: "mb-0",
-                      label: {
-                        text: `${translate("offers.service_details.price")}`,
-                        htmlFor: `serviceDetail.${i}.price`,
-                        className: "mb-[10px]",
-                      },
-                      field: {
-                        type: Field.input,
-                        className:
-                          "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-                        inputType: "number",
-                        id: `serviceDetail.${i}.price`,
-                        name: `serviceDetail.${i}.price`,
-                        placeholder: "10000",
-                        register,
-                        step: "0.01",
-
-                        onChange: () => generatePrice && generatePrice(i),
-                      },
-                    },
-                    {
                       containerClass: "mb-0 ",
                       label: {
                         text: `${translate(
@@ -287,11 +266,52 @@ export const AddInvoiceServiceDetailsFormField: GenerateOfferServiceFormField =
                       field: {
                         type: Field.input,
                         className:
-                          "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                          "!p-4 !border-[#BFBFBF] focus:!border-primary",
                         inputType: "number",
                         id: `serviceDetail.${i}.count`,
                         name: `serviceDetail.${i}.count`,
                         placeholder: "10",
+                        register,
+                        step: "0.01",
+
+                        onChange: () => generatePrice && generatePrice(i),
+                      },
+                    },
+                    {
+                      containerClass: "mb-0 ",
+                      label: {
+                        text: `${translate(
+                          "offers.service_details.detail_headings.unit"
+                        )}`,
+                        htmlFor: `serviceDetail.${i}.unit`,
+                        className: "mb-[10px]",
+                      },
+                      field: {
+                        type: Field.input,
+                        className:
+                          "!p-4 !border-[#BFBFBF] focus:!border-primary",
+                        inputType: "text",
+                        id: `serviceDetail.${i}.unit`,
+                        name: `serviceDetail.${i}.unit`,
+                        placeholder: "Std. ",
+                        register,
+                      },
+                    },
+                    {
+                      containerClass: "mb-0",
+                      label: {
+                        text: `${translate("offers.service_details.price")}`,
+                        htmlFor: `serviceDetail.${i}.price`,
+                        className: "mb-[10px]",
+                      },
+                      field: {
+                        type: Field.input,
+                        className:
+                          "!p-4 !border-[#BFBFBF] focus:!border-primary",
+                        inputType: "number",
+                        id: `serviceDetail.${i}.price`,
+                        name: `serviceDetail.${i}.price`,
+                        placeholder: "10000",
                         register,
                         step: "0.01",
 
@@ -321,26 +341,7 @@ export const AddInvoiceServiceDetailsFormField: GenerateOfferServiceFormField =
                         onChange: () => generatePrice && generatePrice(i),
                       },
                     },
-                    {
-                      containerClass: "mb-0 ",
-                      label: {
-                        text: `${translate(
-                          "offers.service_details.detail_headings.unit"
-                        )}`,
-                        htmlFor: `serviceDetail.${i}.unit`,
-                        className: "mb-[10px]",
-                      },
-                      field: {
-                        type: Field.input,
-                        className:
-                          "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-                        inputType: "text",
-                        id: `serviceDetail.${i}.unit`,
-                        name: `serviceDetail.${i}.unit`,
-                        placeholder: "Std. ",
-                        register,
-                      },
-                    },
+
                     {
                       containerClass: "mb-0 ",
                       label: {
@@ -353,7 +354,7 @@ export const AddInvoiceServiceDetailsFormField: GenerateOfferServiceFormField =
                       field: {
                         type: Field.input,
                         className:
-                          "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                          "!p-4 !border-[#BFBFBF] focus:!border-primary",
                         inputType: "number",
                         id: `serviceDetail.${i}.totalPrice`,
                         name: `serviceDetail.${i}.totalPrice`,

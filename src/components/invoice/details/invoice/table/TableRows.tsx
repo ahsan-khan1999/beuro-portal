@@ -30,6 +30,7 @@ const TableRows = ({
     (state) => state.invoice
   );
   const { systemSettings } = useAppSelector((state) => state.settings);
+
   const handleInvoicePdfPreview = (id?: string) => {
     router.push({
       pathname: "/invoices/invoice-pdf-preview",
@@ -55,6 +56,8 @@ const TableRows = ({
       }`}
     >
       {collectiveInvoice?.map((item, index: number) => {
+        console.log(item, "collectiveInvoices");
+
         return (
           <div
             key={index}

@@ -1,15 +1,13 @@
 import { Form } from "@/base-components/form/form";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import { useContractEmail } from "@/hooks/contract/useContractEmail";
 import { useReceiptEmail } from "@/hooks/invoice/useReceiptEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
 import { useRouter } from "next/router";
 import React from "react";
 
 const ComposeMail = () => {
-  const router = useRouter()
+  const router = useRouter();
   const defaultClassName = "";
   const onNextHandle = () => {
     router.push("/contract/pdf-preview");
@@ -17,8 +15,20 @@ const ComposeMail = () => {
   const backRouteHandler = () => {
     router.push("/contract/details");
   };
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate, loading, loadingContent, modal, onClose, onSuccess } =
-    useReceiptEmail(backRouteHandler, onNextHandle);
+  const {
+    fields,
+    control,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    translate,
+    loading,
+    loadingContent,
+    modal,
+    onClose,
+    onSuccess,
+  } = useReceiptEmail(backRouteHandler, onNextHandle);
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
@@ -28,7 +38,6 @@ const ComposeMail = () => {
         route={onSuccess}
       />
     ),
-
   };
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
@@ -36,19 +45,19 @@ const ComposeMail = () => {
   return (
     <>
       <ContractFormCard>
-        <h2 className="text-[#393939] text-lg font-medium">
+        <h2 className="text-[#fff] text-lg font-medium bg-[#4A13E7] py-5 px-6 rounded-t-lg">
           {translate("invoice.receipt_card.receipt_email_preview")}
         </h2>
 
-        <hr className="opacity-20 mt-[25px] mb-5" />
-
-        <Form
-          formFields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          className={`${defaultClassName}`}
-        />
+        <div className="py-3 px-6">
+          <Form
+            formFields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+            className={`${defaultClassName}`}
+          />
+        </div>
       </ContractFormCard>
       {renderModal()}
     </>

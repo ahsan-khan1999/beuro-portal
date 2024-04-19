@@ -106,13 +106,12 @@ const SERVICE_URLS = {
   sendByPost: "/offer/send-By-Post/",
   contractSendByPost: "/contract/send-By-Post/",
   invoiceSendByPost: "/invoice/invoice-collection/send-By-Post/",
-
   readOfferPublic: "/offer/public-read",
   rejectOfferPublic: "/offer/reject-offer",
   updateDiscount: "/offer/update-discount/",
   readContractQrCode: "/contract/generate-QrCode",
   readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf",
-
+  readMainInvoiceQrCode: "/invoice/generate-QrCode",
   settingsQrCode: "/setting/qrcode/qrCode-setting",
   offerContent: "/offer/update-content/",
   updateDate: "/offer/update-date/",
@@ -897,6 +896,14 @@ const readInvoiceQRCode = (params) =>
     { detail: true }
   );
 
+const readMainQRCode = (params) =>
+  get(
+    SERVICE_URLS.readMainInvoiceQrCode,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
 const readSettingsQrCode = (params) =>
   get(
     SERVICE_URLS.settingsQrCode,
@@ -1088,5 +1095,6 @@ const apiServices = {
   deleteTax,
   createMainInvoice,
   updateMainInvoice,
+  readMainQRCode,
 };
 export default apiServices;
