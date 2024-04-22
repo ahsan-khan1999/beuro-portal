@@ -249,6 +249,7 @@ export const useContractPdf = () => {
               updatedDiscountAmount: updatedTotalDiscount.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
               taxType: contractDetails?.offerID?.taxType,
+              isContractPDF: true,
               serviceDiscountSum:
                 contractDetails?.offerID?.serviceDetail?.serviceDetail?.reduce(
                   (acc, service) => {

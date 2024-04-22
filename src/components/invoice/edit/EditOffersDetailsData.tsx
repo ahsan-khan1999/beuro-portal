@@ -86,11 +86,12 @@ const EditOffersDetailsData = ({
 
   const handleNextTab = (currentComponent: EditComponentsType) => {
     if (tabType === EditComponentsType.additionalEdit) {
-      router.push(`/invoices/details?invoice=${invoiceDetails?.id}`);
-      // router.push({
-      //   pathname: `/invoices/details?invoice=${invoiceDetails?.id}`,
-      //   query: { status: "None" },
-      // });
+      // router.push(`/invoices/details?invoice=${invoiceDetails?.id}`);
+
+      router.push({
+        pathname: `/invoices/details`,
+        query: { ...router.query, invoice: invoiceDetails?.id, status: "None" },
+      });
       return;
     }
     setTabType(currentComponent);

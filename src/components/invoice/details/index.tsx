@@ -31,7 +31,7 @@ const InvoiceDetails = () => {
   } = useInvoiceDetail();
 
   const invoiceComponent = {
-    invoice_tab: {
+    invoice: {
       comp: (
         <InvoiceDetailsTable
           collectiveInvoice={collectiveInvoice}
@@ -43,7 +43,7 @@ const InvoiceDetails = () => {
       ),
       isData: collectiveInvoice?.length > 0,
     },
-    receipt_tab: {
+    receipt: {
       comp: (
         <ReceiptDetailsTable
           collectiveInvoice={collectiveReciept}

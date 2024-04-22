@@ -99,9 +99,7 @@ export const useMainInvoicePdf = () => {
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
-  const { loading, collectiveInvoiceDetails, invoiceDetails } = useAppSelector(
-    (state) => state.invoice
-  );
+  const { loading, invoiceDetails } = useAppSelector((state) => state.invoice);
 
   const maxItemsFirstPage = 6;
   const maxItemsPerPage = 10;
@@ -244,6 +242,9 @@ export const useMainInvoicePdf = () => {
               discountPercentage: discountPercentage.toString(),
               updatedDiscountAmount: updatedTotalDiscount.toString(),
               grandTotal: invoiceDetails?.total?.toString(),
+              invoicePaidAmount: invoiceDetails?.paidAmount.toString(),
+              invoiceAmount: invoiceDetails?.paidAmount.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               taxType: invoiceDetails?.taxType,
               serviceDiscountSum:
                 invoiceDetails?.serviceDetail?.serviceDetail?.reduce(
@@ -254,6 +255,7 @@ export const useMainInvoicePdf = () => {
                   0
                 ),
               discountDescription: invoiceDetails?.discountDescription,
+              isMainInvoice: true,
             },
             footerDetails: {
               firstColumn: {
