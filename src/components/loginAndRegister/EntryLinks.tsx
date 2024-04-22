@@ -52,7 +52,10 @@ const EntryLinks = () => {
       />
 
       <div className="flex justify-center">
-        <Link href="https://buero-365.com/" className="text-xs text-[#8F8F8F]">
+        <Link
+          href="https://buero-365.com/privacy-policy/"
+          className="text-xs text-[#8F8F8F]"
+        >
           {translate("common.privacy")}
         </Link>
       </div>

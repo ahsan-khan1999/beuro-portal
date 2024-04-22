@@ -83,9 +83,7 @@ export const generateLeadsAddressEditDetailsValidation = (
             .string()
             .required(translate("validationMessages.required")),
           [LeadsAddressEditDetails.postCode]: yup.string().notRequired(),
-          [LeadsAddressEditDetails.country]: yup
-            .string()
-            .required(translate("validationMessages.required")),
+          [LeadsAddressEditDetails.country]: yup.string().notRequired(),
           [LeadsAddressEditDetails.description]: yup.string().notRequired(),
           [LeadsAddressEditDetails.label]: yup
             .string()
