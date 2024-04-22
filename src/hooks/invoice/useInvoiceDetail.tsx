@@ -387,7 +387,6 @@ export default function useInvoiceDetail() {
 
   useEffect(() => {
     const { tab } = router.query;
-    console.log(tab);
 
     const updateActiveTabFromQuery = () => {
       if (tab && invoiceDetailTabs.includes(tab as string)) {

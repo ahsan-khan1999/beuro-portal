@@ -491,6 +491,7 @@ export type GenerateOfferDateFormField = (
   count: number,
   handleRemoveDateField: UseFieldArrayRemove,
   loading?: boolean,
+  // offerDetails?: OffersTableRowTypes,
   control?: Control<FieldValues>,
   wordDates?: { startDate: string; endDate: string }[]
 ) => FormField[];

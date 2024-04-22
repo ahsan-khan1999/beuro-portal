@@ -677,7 +677,6 @@ export const generateDateChildren = (
         { label: "23:45", value: "23:45" },
       ],
       control,
-      
     },
   });
 
