@@ -5,12 +5,13 @@ const nextConfig = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains: ["staging.buero-365.cloudmeshsolutions.com"],
+    domains: ["*"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "staging.buero-365.cloudmeshsolutions.com",
+        hostname: "*",
       },
+    
     ],
   },
   webpack: (config, { isServer }) => {
