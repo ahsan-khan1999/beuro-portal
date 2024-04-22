@@ -150,7 +150,7 @@ const InvoiceDetailsData = ({
               {invoiceDetails.invoiceNumber}
             </span>
           </div>
-          {invoiceDetails.invoiceNumber?.split("-")[1] && (
+          {invoiceDetails.contractID && (
             <div className="flex gap-2">
               <span className="text-base font-normal text-[#4D4D4D]">
                 {translate("invoice.card_content.contract_id")}:
@@ -160,7 +160,7 @@ const InvoiceDetailsData = ({
               </span>
             </div>
           )}
-          {invoiceDetails.invoiceNumber?.split("-")[1] && (
+          {invoiceDetails.contractID && (
             <div className="flex gap-2">
               <span className="text-base font-normal text-[#4D4D4D]">
                 {translate("invoice.card_content.offer_id")}:

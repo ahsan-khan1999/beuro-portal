@@ -31,6 +31,7 @@ export interface InvoiceTableRowTypes {
   customerDetail: Customers;
   total: number;
   content: ContentTableRowTypes;
+  time?: string;
 }
 
 // Inovice details table
