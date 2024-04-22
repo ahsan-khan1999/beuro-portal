@@ -2,6 +2,7 @@ import EmailCard from "./PdfCard";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+
 const OfferPdf = dynamic(
   () => import("@/components/reactPdf/offer-pdf-preview"),
   { ssr: false, loading: () => <LoadingState /> }
@@ -14,7 +15,7 @@ import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
 
-const PdfPriview = () => {
+const OfferPdfPriview = () => {
   const {
     offerData,
     activeButtonId,
@@ -102,4 +103,4 @@ const PdfPriview = () => {
   );
 };
 
-export default PdfPriview;
+export default OfferPdfPriview;

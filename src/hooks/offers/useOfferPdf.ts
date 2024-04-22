@@ -190,6 +190,7 @@ export const useOfferPdf = () => {
               grandTotal: offerDetails?.total?.toString(),
               discountType: offerDetails?.discountType,
               taxType: offerDetails?.taxType,
+              isOfferPDF: true,
               serviceDiscountSum:
                 offerDetails?.serviceDetail?.serviceDetail?.reduce(
                   (acc, service) => {

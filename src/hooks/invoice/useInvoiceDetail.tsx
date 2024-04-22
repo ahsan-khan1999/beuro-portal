@@ -39,8 +39,8 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
   const [isSendEmail, setIsSendEmail] = useState(false);
-  const [activeTab, setActiveTab] = useState("invoice_tab");
-  const invoiceDetailTabs = ["invoice_tab", "receipt_tab"];
+  const [activeTab, setActiveTab] = useState("invoice");
+  const invoiceDetailTabs = ["invoice", "receipt"];
 
   const { modal } = useAppSelector((state) => state.global);
   const { systemSettings } = useAppSelector((state) => state.settings);
@@ -386,32 +386,31 @@ export default function useInvoiceDetail() {
   };
 
   useEffect(() => {
+    const { tab } = router.query;
+    console.log(tab);
+
     const updateActiveTabFromQuery = () => {
-      const { tab } = router.query;
       if (tab && invoiceDetailTabs.includes(tab as string)) {
         setActiveTab(tab as string);
       } else if (invoice) {
         if (collectiveInvoice && collectiveInvoice.length > 0) {
-          setActiveTab("invoice_tab");
+          setActiveTab("invoice");
         } else if (collectiveReciept && collectiveReciept.length > 0) {
-          setActiveTab("receipt_tab");
+          setActiveTab("receipt");
         } else {
           setActiveTab(invoiceDetailTabs[0]);
         }
       }
     };
 
-    // Update active tab when component mounts
     updateActiveTabFromQuery();
 
-    // Subscribe to route changes to update active tab
     const handleRouteChange = () => {
       updateActiveTabFromQuery();
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
 
-    // Clean up subscription
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };

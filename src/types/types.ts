@@ -731,6 +731,11 @@ export interface ProductItemFooterProps {
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
   isShowExtraAmount?: boolean;
+  isSubInvoicePdf?: boolean;
+  isReceiptPdf?: boolean;
+  isOfferPDF?: boolean;
+  isContractPDF?: boolean;
+  isMainInvoice?: boolean;
   systemSettings?: SystemSetting | null;
   discountType?: keyof (typeof staticEnums)["DiscountType"];
   taxType?: keyof (typeof staticEnums)["TaxType"];
