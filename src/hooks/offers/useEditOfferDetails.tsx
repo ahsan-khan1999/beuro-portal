@@ -167,7 +167,7 @@ export const useEditOfferDetails = ({
         customerID: offerDetails?.leadID?.customerID,
         gender:
           staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
-        time: offerDetails?.time,
+        time: offerDetails?.id && offerDetails?.time,
       });
     }
   }, [type]);

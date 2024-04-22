@@ -147,22 +147,9 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
       if (filteredContent)
         setValue("title", filteredContent?.offerContent?.title);
     } else {
-      // const filteredLead = lead.find((item) => item.id === leadID);
-      // if (filteredLead) {
-      //   const content = filteredLead?.requiredService as ContentTableRowTypes;
-
-      //   if (selectedContent !== content?.id) {
-      //     setValue("content", selectedContent);
-      //     setValue("title", filteredContent?.offerContent?.title);
-      //   } else {
-      //     setValue("content", content?.id);
-      //     setValue("title", content?.offerContent?.title);
-      //   }
-      // } else {
       setValue("content", selectedContent);
       setValue("title", filteredContent?.offerContent?.title);
     }
-    // }
   }, [selectedContent]);
 
   const invoiceFields = AddOfferDetailsFormField(
