@@ -5,11 +5,11 @@ const nextConfig = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains:["kaufes-dev-v2.s3.me-south-1.amazonaws.com"],
+    domains: ["staging.buero-365.cloudmeshsolutions.com"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "kaufes-dev-v2.s3.me-south-1.amazonaws.com",
+        hostname: "staging.buero-365.cloudmeshsolutions.com",
       },
     ],
   },
@@ -23,6 +23,6 @@ const nextConfig = {
     }
     return config;
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

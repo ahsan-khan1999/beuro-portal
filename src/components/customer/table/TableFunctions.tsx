@@ -13,11 +13,13 @@ const TableFunctions = ({
   handleFilterChange: (query: FilterType) => void;
 }) => {
   const { t: translate } = useTranslation();
+
   return (
     <div className="flex flex-col mlg:flex-row justify-between mlg:items-center mb-4 gap-y-3">
       <h1 className="text-xl text-[#222B45] ">
         {translate("customers.title")}
       </h1>
+
       <div className="flex items-center">
         <div className="flex items-center space-x-4">
           <CustomerFilter
