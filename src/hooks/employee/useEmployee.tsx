@@ -37,98 +37,61 @@ const useEmployee = () => {
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
-    // dispatch(
-    //   readEmployee({ params: { filter: query, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Employee);
-    //   }
-    // });
   };
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
-    let resetPage = null;
-    if (!isNaN(parsedPage)) {
-      setCurrentPage(parsedPage);
-    } else {
-      resetPage = 1;
-      setCurrentPage(1);
-    }
+  const parsedPage = parseInt(query.page as string, 10);
+  let resetPage = null;
 
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchDate = query?.date as string;
+  if (!isNaN(parsedPage)) {
+    setCurrentPage(parsedPage);
+  } else {
+    resetPage = 1;
+    setCurrentPage(1);
+  }
 
-    const queryParams = searchQuery || sortedValue || searchDate;
+  const searchQuery = query?.text as string;
+  const sortedValue = query?.sort as string;
+  const searchDate = query?.date as string;
 
-    let updatedFilter: {
-      text?: string;
-      sort?: string;
-      date?: {
-        $gte?: string;
-        $lte?: string;
-      };
-    } = {
-      text: "",
+  const queryParams = searchQuery || sortedValue || searchDate;
+
+  let updatedFilter: {
+    text?: string;
+    sort?: string;
+    date?: {
+      $gte?: string;
+      $lte?: string;
     };
+  } = {
+    text: searchQuery || "",
+  };
 
-    if (searchQuery || sortedValue || searchDate) {
-      updatedFilter.text = searchQuery;
-      updatedFilter.sort = sortedValue;
-      updatedFilter.date = searchDate && JSON.parse(searchDate);
-    }
+  if (searchQuery || sortedValue || searchDate) {
+    updatedFilter.text = searchQuery;
+    updatedFilter.sort = sortedValue;
+    updatedFilter.date = searchDate ? JSON.parse(searchDate) : undefined;
+  }
 
-    setFilter(updatedFilter);
+  setFilter(updatedFilter);
 
-    if (parsedPage) {
-      dispatch(
-        readEmployee({
-          params: {
-            filter: queryParams ? updatedFilter : {},
-            page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Employee);
-      });
-    }
-  }, [query]);
+  if (parsedPage !== undefined) {
+    dispatch(
+      readEmployee({
+        params: {
+          filter: queryParams ? updatedFilter : {},
+          page: (Number(parsedPage) || resetPage) ?? currentPage,
+          size: 10,
+        },
+      })
+    ).then((response: any) => {
+      if (response?.payload) {
+        setCurrentPageRows(response?.payload?.Employee);
+      }
+    });
+  }
+}, [query]);
 
-  // useEffect(() => {
-  //   const parsedPage = parseInt(query.page as string, 10);
-  //   if (!isNaN(parsedPage)) {
-  //     setCurrentPage(parsedPage);
-  //   }
-  //   const searchQuery = query?.text as string;
-
-  //   const queryParams = searchQuery;
-
-  //   let updatedFilter = {
-  //     text: "",
-  //   };
-
-  //   if (searchQuery) {
-  //     updatedFilter.text = searchQuery;
-  //   }
-
-  //   setFilter(updatedFilter);
-  //   console.log(parsedPage, "parsedPage");
-  //   if (parsedPage) {
-  //     dispatch(
-  //       readEmployee({
-  //         params: {
-  //           filter: queryParams ? updatedFilter : {},
-  //           page: Number(parsedPage) || currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.Employee);
-  //     });
-  //   }
-  // }, [query]);
 
   return {
     currentPageRows,

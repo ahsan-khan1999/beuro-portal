@@ -16,11 +16,7 @@ import { ModalType } from "@/enums/ui";
 import { InvoiceEmailPreviewFormField } from "@/components/invoice/details/email-fields";
 import {
   readCollectiveInvoiceDetails,
-  readInvoiceDetails,
   sendInvoiceEmail,
-  setCollectiveInvoiceDetails,
-  setInvoiceDetails,
-  updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";

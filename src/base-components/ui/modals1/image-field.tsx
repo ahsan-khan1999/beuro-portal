@@ -119,6 +119,8 @@ export const ImageField = ({
     images: attachements?.map((item) => ({ imageSrc: item?.value })),
   };
 
+  console.log(attachements, "attachements");
+
   return (
     <>
       <label

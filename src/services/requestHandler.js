@@ -40,6 +40,7 @@ const SERVICE_URLS = {
   contract: "/contract",
   company: "/company",
   invoice: "/invoice",
+  mainInvoice: "/invoice/invoice-step/",
 
   contactSupport: "/contactSupport",
   employee: "/employee",
@@ -105,13 +106,12 @@ const SERVICE_URLS = {
   sendByPost: "/offer/send-By-Post/",
   contractSendByPost: "/contract/send-By-Post/",
   invoiceSendByPost: "/invoice/invoice-collection/send-By-Post/",
-
   readOfferPublic: "/offer/public-read",
   rejectOfferPublic: "/offer/reject-offer",
   updateDiscount: "/offer/update-discount/",
   readContractQrCode: "/contract/generate-QrCode",
   readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf",
-
+  readMainInvoiceQrCode: "/invoice/generate-QrCode",
   settingsQrCode: "/setting/qrcode/qrCode-setting",
   offerContent: "/offer/update-content/",
   updateDate: "/offer/update-date/",
@@ -406,6 +406,20 @@ const stopRecurringInvoice = (data) =>
   });
 const deleteInvoice = (data) =>
   del(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+
+// create main invoice
+const createMainInvoice = (data) => {
+  let route = data?.invoiceId ? data?.step + "/" + data?.invoiceId : data?.step;
+  return post(SERVICE_URLS.mainInvoice + route, data, {
+    feature: featureConstants.login,
+  });
+};
+
+// update main invoice
+const updateMainInvoice = (data) =>
+  put(SERVICE_URLS.mainInvoice + `${data?.step}/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
 
 const readContactSupport = (params) =>
   get(
@@ -882,6 +896,14 @@ const readInvoiceQRCode = (params) =>
     { detail: true }
   );
 
+const readMainQRCode = (params) =>
+  get(
+    SERVICE_URLS.readMainInvoiceQrCode,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
 const readSettingsQrCode = (params) =>
   get(
     SERVICE_URLS.settingsQrCode,
@@ -1071,5 +1093,8 @@ const apiServices = {
   updateInvoiceDetails,
   createInvoiceDetail,
   deleteTax,
+  createMainInvoice,
+  updateMainInvoice,
+  readMainQRCode,
 };
 export default apiServices;

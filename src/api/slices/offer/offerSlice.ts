@@ -121,6 +121,8 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
+  
 export const updateOffer: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

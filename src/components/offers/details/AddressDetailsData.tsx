@@ -16,10 +16,10 @@ const AddressDetailsData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10"
+        className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.address")}
       >
-        <h2 className="text-[#393939] text-lg font-medium">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("offers.address_details.main_heading")}
         </h2>
         <button
@@ -29,7 +29,7 @@ const AddressDetailsData = ({
               query: { offer: offerDetails?.id, tab: 1 },
             })
           }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
         >
           <EditIcon />
           {translate("offers.address_details.edit_button")}
@@ -37,7 +37,7 @@ const AddressDetailsData = ({
       </div>
 
       {offerDetails?.addressID?.address?.map((item, index) => (
-        <div className="mt-3" key={index}>
+        <div className="py-3 px-6" key={index}>
           <h4 className="text-base font-semibold text-[#1E1E1E] mb-[10px]">
             {item?.label}
           </h4>
@@ -46,7 +46,7 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.address_details.street_no")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {item?.streetNumber}
               </div>
             </div>
@@ -54,7 +54,7 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.address_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {item?.postalCode}
               </div>
             </div>
@@ -62,7 +62,7 @@ const AddressDetailsData = ({
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.address_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {item?.country}
               </div>
             </div>
@@ -72,7 +72,7 @@ const AddressDetailsData = ({
             <label className="text-[#4D4D4D] mb-[10px] block text-sm">
               {translate("offers.address_details.description")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium break-all min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium break-all min-h-[58px]">
               {item?.description}
             </div>
           </div>

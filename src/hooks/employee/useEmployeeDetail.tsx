@@ -82,7 +82,6 @@ const useEmployeeDetail = (stage: boolean) => {
   };
   const handleUpdateSuccess = () => {
     router.pathname = "/employees";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     onClose();
   };
@@ -152,9 +151,11 @@ const useEmployeeDetail = (stage: boolean) => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const fields = employeeDetailsFormField(
     register,
     loading,

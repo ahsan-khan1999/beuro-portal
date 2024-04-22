@@ -10,13 +10,7 @@ import {
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import { ModalType } from "@/enums/ui";
-import {
-  AcknowledgementSlipProps,
-  InvoiceEmailHeaderProps,
-  PayableToProps,
-  PdfProps,
-  TemplateType,
-} from "@/types";
+import { InvoiceEmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import { EmailTemplate } from "@/types/settings";
 import localStoreUtil from "@/utils/localstore.util";
 import { useEffect, useMemo, useState } from "react";
@@ -58,7 +52,7 @@ export const useInvoicePdf = () => {
 
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
-  const { loading, collectiveInvoiceDetails } = useAppSelector(
+  const { loading, collectiveInvoiceDetails, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
   const { modal, loading: loadingGlobal } = useAppSelector(
@@ -225,6 +219,7 @@ export const useInvoicePdf = () => {
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
+              isSubInvoicePdf: true,
               invoiceAmount: invoiceDetails?.amount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
@@ -488,5 +483,6 @@ export const useInvoicePdf = () => {
     onClose,
     onSuccess,
     collectiveInvoiceDetails,
+    invoiceDetails,
   };
 };

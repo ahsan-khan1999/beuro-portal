@@ -7,9 +7,9 @@ import {
   getMailStatusColor,
 } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
 const TableRows = ({
   collectiveInvoice,
@@ -27,7 +27,12 @@ const TableRows = ({
   const handleReceiptPreview = (id?: string) => {
     router.push({
       pathname: "/invoices/receipt-pdf-preview",
-      query: { ...router.query, invoiceID: id, isMail: true },
+      query: {
+        ...router.query,
+        tab: "receipt",
+        invoiceID: id,
+        isMail: true,
+      },
     });
   };
 

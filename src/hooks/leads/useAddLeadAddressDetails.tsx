@@ -21,12 +21,11 @@ export const useAddLeadAddressDetails = (
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
-  const { customerDetails } = useAppSelector((state) => state.customer);
   const [addressType, setAddressType] = useState([false, false]);
-
   const [addressCount, setAddressCount] = useState(
     leadDetails?.addressID?.address?.length || 1
   );
+
   const schema = generateLeadsAddressEditDetailsValidation(translate);
 
   const {

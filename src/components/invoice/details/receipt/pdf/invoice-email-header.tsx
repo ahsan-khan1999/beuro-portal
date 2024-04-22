@@ -27,6 +27,7 @@ export const InvoiceEmailHeader = ({
   const { t: translate } = useTranslation();
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
   const color = getInvoiceStatusColor(collectiveInvoiceDetails?.invoiceStatus);
+
   return (
     <div className="mb-5">
       <PdfCardLayout>

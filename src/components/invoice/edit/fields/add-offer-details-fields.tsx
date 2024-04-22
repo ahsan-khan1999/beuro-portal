@@ -16,6 +16,7 @@ import {
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
+import { InvoiceTableRowTypes } from "@/types/invoice";
 export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
   register,
   loading,
@@ -41,7 +42,6 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
 
   let formField: FormField[] = [
     {
-      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
@@ -339,21 +339,29 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
+            // field: {
+            //   className: "pl-4 !border-[#BFBFBF]",
+            //   type: Field.select,
+            //   id: "address.country",
+            //   name: "address.country",
+
+            //   options: Object.keys(staticEnums.Country).map((item) => ({
+            //     value: item,
+            //     label: translate(`countries.${item}`),
+            //   })),
+            //   control,
+            //   value:
+            //     (invoiceDetails &&
+            //       invoiceDetails?.customerDetail?.address?.country) ||
+            //     Object.keys(staticEnums.Country)[0],
+            // },
             field: {
-              className: "pl-4 !border-[#BFBFBF]",
-              type: Field.select,
+              type: Field.input,
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+              inputType: "text",
               id: "address.country",
               name: "address.country",
-
-              options: Object.keys(staticEnums.Country).map((item) => ({
-                value: item,
-                label: translate(`countries.${item}`),
-              })),
-              control,
-              value:
-                (invoiceDetails &&
-                  invoiceDetails?.customerDetail?.address?.country) ||
-                Object.keys(staticEnums.Country)[0],
+              register,
             },
           },
         ],
@@ -438,48 +446,6 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
     }
   }
 
-  // const fieldLeadIndex = formField.findIndex(
-  //   (field: any) =>
-  //     field?.field?.type === Field.div &&
-  //     Array.isArray(field?.field?.children) &&
-  //     field?.field?.children.some(
-  //       (child: any) => child?.field?.id == "customerID"
-  //     )
-  // );
-
-  // if (fieldLeadIndex !== -1 && type === "Existing Customer") {
-  //   const leadField = {
-  //     containerClass: "mb-0",
-  //     label: {
-  //       text: "Lead",
-  //       htmlFor: "leadID",
-  //       className: "mb-[10px]",
-  //     },
-  //     field: {
-  //       className: `pl-4 !border-[#BFBFBF]  focus:!border-primary `,
-  //       type: Field.select,
-  //       id: "leadID",
-  //       name: "leadID",
-  //       options: lead?.map((item) => ({
-  //         value: item.id,
-  //         label: item.refID,
-  //       })),
-  //       control,
-  //       // value:""
-  //       value:
-  //         (offerDetails?.id && offerDetails?.leadID?.id) ||
-  //         (lead && lead?.length > 0 && lead?.at(0)?.id) ||
-  //         leadID ||
-  //         leadID,
-  //       // disabled: offerDetails?.leadID?.id ? true : false,
-  //     },
-  //   };
-  //   const divField = formField[fieldLeadIndex]?.field as DivProps;
-  //   if (divField && Array.isArray(divField.children)) {
-  //     divField.children.splice(fieldLeadIndex + 2, 0, leadField as any);
-  //   }
-  // }
-
   return formField;
 };
 
@@ -493,7 +459,7 @@ export const AddDateFormField: GenerateOfferDateFormField = (
 ) => {
   const formField: FormField[] = [
     {
-      containerClass: "mt-5 relative",
+      containerClass: "relative rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       //@ts-expect-error
       field: {
         type: Field.div,
@@ -517,7 +483,8 @@ export const generateDateChildren = (
   count: number,
   OnClick: UseFieldArrayAppend<FieldValues, "date">,
   handleRemoveDateField: UseFieldArrayRemove,
-  control?: Control<FieldValues>
+  control?: Control<FieldValues>,
+  invoiceDetails?: InvoiceTableRowTypes
 ) => {
   const { t: translate } = useTranslation();
   const dateformFields = [];
@@ -582,6 +549,7 @@ export const generateDateChildren = (
         "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
       name: "time",
       control,
+      value: (invoiceDetails?.id && invoiceDetails?.time) || "08:00",
       options: [
         { label: "00:00", value: "00:00" },
         { label: "00:15", value: "00:15" },
@@ -706,7 +674,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "float-right mb-0 mt-[30px]",
+      containerClass: "float-right my-[30px]",
       field: {
         type: Field.button,
         id: "button",

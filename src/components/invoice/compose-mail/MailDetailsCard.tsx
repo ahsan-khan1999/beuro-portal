@@ -96,7 +96,7 @@ const MailDetailsCard = () => {
 
               {collectiveInvoiceDetails?.invoiceID?.invoiceStatus && (
                 <span
-                  className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}
+                  className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
                 >
                   {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
                 </span>

@@ -9,7 +9,7 @@ export interface Lead {
   refID: string;
   customerDetail: Customers;
   lead: CustomerLeadDetail;
-  leadStatus: "Open" | "Close" | "Expired" | "InProcess";
+  leadStatus: "Open" | "InProcess" | "Close" | "Expired";
   customerID: string;
   images: string[];
   createdAt: string;

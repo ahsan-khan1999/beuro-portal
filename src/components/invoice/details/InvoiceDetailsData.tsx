@@ -27,10 +27,9 @@ const InvoiceDetailsData = ({
   const handleBack = () => {
     router.pathname = "/invoices";
     delete router.query["invoice"];
+    delete router.query["tab"];
     updateQuery(router, router.locale as string);
   };
-
-  console.log("invoiceStatus:", invoiceDetails.invoiceStatus);
 
   return (
     <>
@@ -141,32 +140,36 @@ const InvoiceDetailsData = ({
         )}
       </div>
 
-      <div className="flex flex-col maxSize:flex-row justify-between maxSize:items-center gap-y-3 border-t border-[#000] border-opacity-10 pt-4">
+      <div className="flex flex-col maxSize:flex-row justify-between gap-y-3 border-t border-[#000] border-opacity-10 pt-4">
         <div className="flex flex-col gap-[17px]">
-          <div className="flex gap-2">
+          <div className="flex items-start gap-2">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("invoice.card_content.invoice_id")}:
             </span>
-            <span className="text-[#393939] font-medium text-base">
+            <span className="text-[#4A13E7] font-medium text-base">
               {invoiceDetails.invoiceNumber}
             </span>
           </div>
-          <div className="flex gap-2">
-            <span className="text-base font-normal text-[#4D4D4D]">
-              {translate("invoice.card_content.contract_id")}:
-            </span>
-            <span className="text-[#4A13E7] font-medium text-base">
-              {"V-" + invoiceDetails.invoiceNumber?.split("-")[1]}
-            </span>
-          </div>
-          <div className="flex gap-2">
-            <span className="text-base font-normal text-[#4D4D4D]">
-              {translate("invoice.card_content.offer_id")}:
-            </span>
-            <span className="text-[#4A13E7] font-medium text-base">
-              {"A-" + invoiceDetails.invoiceNumber?.split("-")[1]}
-            </span>
-          </div>
+          {invoiceDetails.contractID && (
+            <div className="flex gap-2">
+              <span className="text-base font-normal text-[#4D4D4D]">
+                {translate("invoice.card_content.contract_id")}:
+              </span>
+              <span className="text-[#4A13E7] font-medium text-base">
+                {"V-" + invoiceDetails.invoiceNumber?.split("-")[1]}
+              </span>
+            </div>
+          )}
+          {invoiceDetails.contractID && (
+            <div className="flex gap-2">
+              <span className="text-base font-normal text-[#4D4D4D]">
+                {translate("invoice.card_content.offer_id")}:
+              </span>
+              <span className="text-[#4A13E7] font-medium text-base">
+                {"A-" + invoiceDetails.invoiceNumber?.split("-")[1]}
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-[17px]">
@@ -225,8 +228,8 @@ const InvoiceDetailsData = ({
           </div>
         </div>
 
-        <div className="w-fit flex flex-col border border-[#dcdcdc] rounded-md shadow-md p-[18px]">
-          <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
+        <div className="w-fit flex flex-col border border-[#dcdcdc] rounded-md shadow-md px-[18px]">
+          <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-2">
             <span className="text-base font-normal text-[#4A13E7]">
               {translate("invoice.card_content.total_amount")}:
             </span>
@@ -234,7 +237,7 @@ const InvoiceDetailsData = ({
               {invoiceDetails?.total?.toFixed(2)}
             </span>
           </div>
-          <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-3">
+          <div className="flex gap-x-[10px] border-b border-[#000] border-opacity-10 py-2">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("invoice.card_content.paid_amount")}:
             </span>
@@ -242,7 +245,7 @@ const InvoiceDetailsData = ({
               {Number(invoiceDetails?.paidAmount)?.toFixed(2)} {currency}
             </span>
           </div>
-          <div className="flex gap-x-[10px] pt-3">
+          <div className="flex gap-x-[10px] py-2">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("invoice.card_content.unpaid_amount")}:
             </span>

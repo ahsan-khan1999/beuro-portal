@@ -13,7 +13,6 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
-import { updateQuery } from "@/utils/update-query";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 
@@ -210,7 +209,7 @@ const EditOffersDetailsData = () => {
       <div className="w-full break-all flex">
         <div className="max-w-[330px] w-full hidden xLarge:block"></div>
 
-        <div className="w-full xLarge:max-w-[1060px] my-[40px]">
+        <div className="w-full xLarge:max-w-[80%] my-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateProfileSettingValidation } from "@/validation/admin/settingSchema";
 import { changeProfileSettingFormField } from "@/components/admin/setting/fields/change-profile-setting-fields";
 import { useEffect } from "react";
@@ -47,6 +46,7 @@ export default function useSettingProfile() {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
@@ -57,11 +57,12 @@ export default function useSettingProfile() {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-  const fields = changeProfileSettingFormField(register, loading, control);
 
+  const fields = changeProfileSettingFormField(register, loading, control);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(
       updateAdminSetting({

@@ -11,20 +11,22 @@ const AdditionalDetails = ({
 
   return (
     <div
-      className="rounded-md border-none bg-white pt-6 px-[30px] pb-[23px] border w-full h-fit"
+      className="rounded-md border-none bg-white w-full h-fit"
       id={translate("contracts.tabs_headings.additional_details")}
     >
-      <h2 className="text-[#393939] text-lg font-medium border-b border-b-[#000] border-opacity-10 pb-5">
+      <h2 className="text-[#fff] text-lg font-medium bg-[#45C769] py-5 px-6 rounded-t-lg">
         {translate("contracts.additional_details.heading")}
       </h2>
 
-      <div className="mt-3 rounded-lg px-2 py-3 bg-[#EDF4FF]">
-        <div
-          className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
-          dangerouslySetInnerHTML={{
-            __html: contractDetails?.additionalDetails,
-          }}
-        />
+      <div className="px-6 py-3">
+        <div className="rounded-lg px-2 py-3 bg-[#EDF4FF]">
+          <div
+            className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
+            dangerouslySetInnerHTML={{
+              __html: contractDetails?.additionalDetails,
+            }}
+          />
+        </div>
       </div>
     </div>
   );

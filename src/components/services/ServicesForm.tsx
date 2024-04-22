@@ -19,12 +19,12 @@ const ServiceForm = ({
   const { t: translate } = useTranslation();
   return (
     <div
-      className={`rounded-md bg-white py-[26px] pl-[32px] pr-[25px] border ${
-        !isUpdate ? "border-primary" : "border-none"
+      className={`rounded-lg bg-white ${
+        !isUpdate ? "border border-primary" : "border-none"
       } h-fit`}
     >
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10">
-        <h2 className="text-[#393939] text-lg font-medium">
+      <div className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("services.detail.main_heading")}
         </h2>
         {isUpdate ? (
@@ -43,13 +43,16 @@ const ServiceForm = ({
           ></BaseButton>
         )}
       </div>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+
+      <div className="px-6 py-3">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </div>
   );
 };

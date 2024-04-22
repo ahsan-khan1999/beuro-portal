@@ -19,28 +19,28 @@ import {
   setCustomers,
 } from "@/api/slices/customer/customerSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
-
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
-import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
+import { getKeyByValue } from "@/utils/auth.util";
 import { generateInvoiceDetailsValidationSchema } from "@/validation/invoiceSchema";
 import {
   createInvoiceDetial,
   readInvoiceDetails,
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
-import { AddInvoiceDetailsFormField } from "@/components/invoice/edit/fields/add-offer-details-fields";
 import { InvoiceDetailTableRowTypes } from "@/types/invoice";
+import { AddInvoiceDetailsFormField } from "@/components/invoice/edit/fields/add-offer-details-fields";
+import OfferDetails from "@/components/offers/details";
 
 export const useEditInvoiceDetails = ({
   handleNext,
 }: {
   handleNext: (currentComponent: EditComponentsType) => void;
 }) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { invoice } = router.query;
+  const { t: translate } = useTranslation();
 
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
@@ -81,7 +81,6 @@ export const useEditInvoiceDetails = ({
           );
           reset({
             type: "Existing Customer",
-            // leadID: res?.payload?.leadID?.id,
             customerType: getKeyByValue(
               staticEnums["CustomerType"],
               res?.payload?.customerDetail?.customerType
@@ -108,20 +107,11 @@ export const useEditInvoiceDetails = ({
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
+
   useEffect(() => {
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
-
-  // useMemo(() => {
-  //   if (type && customerID) {
-  //     dispatch(
-  //       readLead({
-  //         params: { filter: { customerID: customerID, paginate: 0 } },
-  //       })
-  //     );
-  //   }
-  // }, [customerID]);
 
   useMemo(() => {
     if (type === "New Customer") {
@@ -152,7 +142,6 @@ export const useEditInvoiceDetails = ({
         customerType: type,
         fullName: invoiceDetails?.customerDetail?.fullName,
         companyName: invoiceDetails?.customerDetail?.companyName,
-
         email: invoiceDetails?.customerDetail?.email,
         phoneNumber: invoiceDetails?.customerDetail?.phoneNumber,
         mobileNumber: invoiceDetails?.customerDetail?.mobileNumber,
@@ -192,6 +181,7 @@ export const useEditInvoiceDetails = ({
       });
     }
   };
+
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent

@@ -23,7 +23,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -300,10 +299,11 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
     },
 
     {
+      containerClass: "my-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex justify-end items-center space-x-[18px] mt-8",
+        className: "flex justify-end items-center space-x-[18px]",
         children: [
           {
             field: {

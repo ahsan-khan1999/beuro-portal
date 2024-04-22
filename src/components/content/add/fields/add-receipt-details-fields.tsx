@@ -16,7 +16,6 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -97,7 +96,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
     },
 
     {
-      containerClass: "mt-6",
+      containerClass: "my-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
@@ -123,7 +122,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.save_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

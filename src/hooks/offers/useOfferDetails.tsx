@@ -152,7 +152,7 @@ export default function useOfferDetails() {
 
   const onSuccess = () => {
     router.pathname = "/offers";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

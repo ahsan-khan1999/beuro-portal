@@ -15,6 +15,7 @@ import {
 } from "react-hook-form";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { OffersTableRowTypes } from "@/types/offers";
 export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
@@ -516,7 +517,8 @@ export const generateDateChildren = (
   count: number,
   OnClick: UseFieldArrayAppend<FieldValues, "date">,
   handleRemoveDateField: UseFieldArrayRemove,
-  control?: Control<FieldValues>
+  control?: Control<FieldValues>,
+  offerDetails?: OffersTableRowTypes
 ) => {
   const { t: translate } = useTranslation();
   const dateformFields = [];
@@ -572,14 +574,13 @@ export const generateDateChildren = (
     label: {
       text: `${translate("common.time")}`,
       htmlFor: "time",
-      className: "",
     },
     field: {
       type: Field.select,
       className:
-        "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
+        "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
       name: "time",
-      control,
+      value: (offerDetails?.id && offerDetails?.time) || "08:00",
       options: [
         { label: "00:00", value: "00:00" },
         { label: "00:15", value: "00:15" },
@@ -678,6 +679,7 @@ export const generateDateChildren = (
         { label: "23:30", value: "23:30" },
         { label: "23:45", value: "23:45" },
       ],
+      control,
     },
   });
 

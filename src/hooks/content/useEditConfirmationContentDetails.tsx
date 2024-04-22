@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -8,15 +7,21 @@ import { EditConfirmationContentDetailsFormField } from "@/components/content/ed
 import { generateEditConfirmationContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
 import { Attachement } from "@/types/global";
-import { useMemo, useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { updateContent } from "@/api/slices/content/contentSlice";
 import { transformAttachments } from "@/utils/utility";
 
 export const useEditConfirmationContentDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
-  const { loading, error, contentDetails } = useAppSelector((state) => state.content);
+  const { loading, error, contentDetails } = useAppSelector(
+    (state) => state.content
+  );
 
-  const [attachements, setAttachements] = useState<Attachement[]>(contentDetails?.id && transformAttachments(contentDetails?.confirmationContent?.attachments) || [])
+  const [attachements, setAttachements] = useState<Attachement[]>(
+    (contentDetails?.id &&
+      transformAttachments(contentDetails?.confirmationContent?.attachments)) ||
+      []
+  );
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -41,19 +46,21 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     if (contentDetails.id) {
       reset({
         confirmationContent: {
-          ...contentDetails?.confirmationContent
-        }
-      })
+          ...contentDetails?.confirmationContent,
+        },
+      });
     }
-
-  }, [contentDetails?.id])
+  }, [contentDetails?.id]);
   const fields = EditConfirmationContentDetailsFormField(
     register,
     loading,
     control,
     handleBack,
-    trigger, 0, attachements, setAttachements, contentDetails
-
+    trigger,
+    0,
+    attachements,
+    setAttachements,
+    contentDetails
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -68,12 +75,12 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
       step: 2,
       stage: ComponentsType.confirmationContent,
       contentId: contentDetails?.id,
-      id: contentDetails?.id
-    }
-    const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
+      id: contentDetails?.id,
+    };
+    const res = await dispatch(
+      updateContent({ data: apiData, router, setError, translate })
+    );
     if (res?.payload) onClick(1, ComponentsType.confirmationContent);
-
-
   };
   return {
     fields,
@@ -82,6 +89,6 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

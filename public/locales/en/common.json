@@ -753,6 +753,11 @@
       "main_heading": "Invoice Created Successful ",
       "sub_heading": "Thanks for creating Invoice we are happy to have you. ",
       "button": "Preview PDF"
+    },
+    "main_invoice_created_modal": {
+      "main_heading": "Invoice Created Successfully",
+      "sub_heading": "Thanks for creating invoice we are happy to have you.",
+      "button": "Done"
     }
   },
   "contracts": {
@@ -1104,6 +1109,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "create_invoice": "Create Invoice",
     "description_placeholder": "Please write your detail here...",
     "actions": "Actions",
     "service": "Service",
@@ -1204,7 +1210,7 @@
     "privacy": "Privacy Policy",
     "copy_right": "Copyright 2024",
     "better_management": "Better management",
-    "better_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
+    "better_description": "Better Management brings unparalleled efficiency and strategic control to your fingertips. Boost your company's performance with process optimization, empowered decision-making, and intuitive tools that will lead to long-term success. ",
     "notes_modal": {
       "heading": "Notes",
       "button": "Add New Note"
@@ -1447,8 +1453,8 @@
       "cancel_button": "Cancel"
     },
     "offer_created_modal": {
-      "main_heading": "Offer Created Successful ",
-      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "main_heading": "Offer Created Successfully",
+      "sub_heading": "Thanks for creating offer we are happy to have you.",
       "button": "Done"
     },
     "placeholders": {

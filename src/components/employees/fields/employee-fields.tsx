@@ -13,7 +13,6 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -198,7 +197,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
     // },
 
     {
-      containerClass: "mt-6",
+      containerClass: "my-[30px]",
       field: {
         type: Field.div,
         id: "div-field",

@@ -1,9 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateContractFormField,
-  GenerateOfferFormField,
-} from "@/types";
+import { FormField, GenerateOfferFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
@@ -23,8 +19,8 @@ export const OfferEmailFormField: GenerateOfferFormField = (
   setIsMoreEmail,
   setValue
 ) => {
-  const router = useRouter()
-  const isMail = router?.query?.isMail
+  const router = useRouter();
+  const isMail = router?.query?.isMail;
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
@@ -32,7 +28,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0",
+          "grid grid-cols-1 xl:grid-cols-12 gap-x-3 gap-y-5 xl:gap-y-0 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0 col-span-4",
@@ -80,7 +76,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                 },
 
                 {
-                  containerClass: "mb-0  ",
+                  containerClass: "mb-0",
                   field: {
                     type: Field.span,
                     text: `Bcc`,
@@ -110,7 +106,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 !border-[#EBEBEB]  focus:!border-primary ",
+              className: "!p-4 !border-[#EBEBEB]  focus:!border-primary",
               type: Field.select,
               id: "content",
               name: "content",
@@ -127,6 +123,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                 "",
             },
           },
+
           (isMoreEmail?.isCc && {
             containerClass: "mb-0 mt-5 col-span-4",
             label: {
@@ -196,56 +193,73 @@ export const OfferEmailFormField: GenerateOfferFormField = (
         ],
       },
     },
-    {
-      containerClass: "",
-      field: {
-        type: Field.div,
-        id:"titlefield",
-        className: "grid grid-cols-2 gap-x-3",
-        children: [
-          {
-            containerClass: "mb-0 mt-5 col-span-2",
-            label: {
-              text: `${translate("contracts.contract_email_preview.subject")}`,
-              htmlFor: "subject",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
-              inputType: "text",
-              id: "subject",
-              name: "subject",
-              placeholder:
-                "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
-              register,
-            },
-          },
-          // {
-          //   containerClass: "mb-0 mt-5",
-          //   label: {
-          //     text: `${translate("contracts.contract_email_preview.title")}`,
-          //     htmlFor: "title",
-          //     className: "mb-[10px]",
-          //   },
-          //   field: {
-          //     type: Field.input,
-          //     className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
-          //     inputType: "text",
-          //     id: "title",
-          //     name: "title",
-          //     placeholder:
-          //       "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
-          //     register,
-          //   },
-          // },
-        ]
-      }
-    },
-   
+    // {
+    //   containerClass: "",
+    //   field: {
+    //     type: Field.div,
+    //     id: "titlefield",
+    //     className: "grid grid-cols-2 gap-x-3 ",
+    //     children: [
+    //       {
+    //         containerClass: "mb-0 col-span-2",
+    //         label: {
+    //           text: `${translate("contracts.contract_email_preview.subject")}`,
+    //           htmlFor: "subject",
+    //           className: "mb-[10px]",
+    //         },
+    //         field: {
+    //           type: Field.input,
+    //           className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+    //           inputType: "text",
+    //           id: "subject",
+    //           name: "subject",
+    //           placeholder:
+    //             "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+    //           register,
+    //         },
+    //       },
+    //       // {
+    //       //   containerClass: "mb-0 mt-5",
+    //       //   label: {
+    //       //     text: `${translate("contracts.contract_email_preview.title")}`,
+    //       //     htmlFor: "title",
+    //       //     className: "mb-[10px]",
+    //       //   },
+    //       //   field: {
+    //       //     type: Field.input,
+    //       //     className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+    //       //     inputType: "text",
+    //       //     id: "title",
+    //       //     name: "title",
+    //       //     placeholder:
+    //       //       "Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit Lorem Ipsum Dollar smith emit g Dollar smith emit Lorem Ipum dor.",
+    //       //     register,
+    //       //   },
+    //       // },
+    //     ],
+    //   },
+    // },
 
     {
-      containerClass: "mb-0 mt-5",
+      containerClass: "mb-0 col-span-2 px-2 pb-5 bg-[#EDF4FF]",
+      label: {
+        text: `${translate("contracts.contract_email_preview.subject")}`,
+        htmlFor: "subject",
+        className: "mb-[10px]",
+      },
+      field: {
+        type: Field.input,
+        className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
+        inputType: "text",
+        id: "subject",
+        name: "subject",
+        placeholder: "",
+        register,
+      },
+    },
+
+    {
+      containerClass: "mb-0 px-2 pb-5 bg-[#EDF4FF]",
       label: {
         text: `${translate("contracts.contract_email_preview.description")}`,
         htmlFor: "description",
@@ -281,7 +295,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
     // },
 
     {
-      containerClass: " mt-5",
+      containerClass: "px-2 rounded-b-lg pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("contracts.contract_email_preview.attachments")}`,
         htmlFor: "attachments",
@@ -301,11 +315,11 @@ export const OfferEmailFormField: GenerateOfferFormField = (
     },
 
     {
-      containerClass: "mt-6",
+      containerClass: "mt-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center justify-end space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px]",
         children: [
           // {
           //   containerClass: "mb-0",
@@ -326,14 +340,13 @@ export const OfferEmailFormField: GenerateOfferFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: isMail && `${translate(
-                "contracts.contract_email_preview.send"
-              )}` || `${translate(
-                "contracts.contract_email_preview.next_button"
-              )}`,
+              text:
+                (isMail &&
+                  `${translate("contracts.contract_email_preview.send")}`) ||
+                `${translate("contracts.contract_email_preview.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none",
               loading,
             },
           },

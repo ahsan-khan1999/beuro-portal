@@ -27,8 +27,6 @@ export const SelectBox = ({
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
 
-  console.log(defaultValue);
-
   useEffect(() => {
     // setOption(options);
     if (defaultValue) {
@@ -108,7 +106,7 @@ export const SelectBox = ({
                 <input
                   value={search.current}
                   onChange={(e) => handleChange(e.target.value)}
-                  placeholder="Search..."
+                  placeholder={translate("common.search")}
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>

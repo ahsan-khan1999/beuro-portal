@@ -1,10 +1,8 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { OfferEditAdditionalDetailsFormField } from "@/components/offers/edit/fields/Additional-details-fields";
 import { generateOfferAdditionalDetailsValidation } from "@/validation/offersSchema";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { useEffect, useMemo } from "react";
@@ -13,7 +11,6 @@ import {
   setContentDetails,
 } from "@/api/slices/content/contentSlice";
 import { AddOfferAdditionalDetailsFormField } from "@/components/offers/add/fields/add-additional-details-fields";
-import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
 
 export const useInoviceEditAdditionalDetails = ({

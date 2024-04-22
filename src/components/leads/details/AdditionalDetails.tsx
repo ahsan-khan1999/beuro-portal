@@ -15,15 +15,15 @@ const AdditionalDetails = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 border-b border-[#e5e5e5]"
+        className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg"
         id={translate("leads.tabs_headings.additional")}
       >
-        <h2 className="text-[#393939] text-lg font-medium">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("leads.additional.heading")}
         </h2>
         <button
           onClick={() => onClick(3, ComponentsType.additionalEdit)}
-          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-primary py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-primary py-[7px] px-4 min-w-[161px] w-fit bg-white"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,11 +61,13 @@ const AdditionalDetails = ({
         </button>
       </div>
 
-      <div className="mt-3 rounded-lg px-2 py-3 bg-[#EDF4FF]">
-        <div
-          className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
-          dangerouslySetInnerHTML={{ __html: leadDetails?.additionalDetails }}
-        />
+      <div className="py-3 px-6 bg-white">
+        <div className="rounded-lg px-2 py-3 bg-[#EDF4FF]">
+          <div
+            className="html-content w-full rounded-lg border border-[#EBEBEB] bg-white px-4 py-6 text-[#4B4B4B] font-normal text-base break-all"
+            dangerouslySetInnerHTML={{ __html: leadDetails?.additionalDetails }}
+          />
+        </div>
       </div>
     </LeadsCardLayout>
   );

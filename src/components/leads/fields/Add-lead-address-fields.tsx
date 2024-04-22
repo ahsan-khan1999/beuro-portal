@@ -19,6 +19,9 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
 ) => {
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
+
+  console.log(count);
+
   if (!fields) return null;
   for (let i = 0; i < count; i++) {
     const isEditable = addressType && addressType[i];
@@ -125,7 +128,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
       },
 
       {
-        containerClass: "mt-3",
         field: {
           type: Field.div,
           id: `div-field-${i}`,
@@ -218,7 +220,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   }
 
   formField.push({
-    containerClass: "mt-6",
+    containerClass: "my-[30px]",
     field: {
       type: Field.div,
       id: "div-field",
@@ -265,7 +267,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             text: `${translate("offers.address_details.add_new_address")}`,
             inputType: "button",
             className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none ${
-              count === 2 && "hidden"
+              count === 3 && "hidden"
             }`,
             onClick: () => {
               handleAddNewAddress && handleAddNewAddress(addressObject);

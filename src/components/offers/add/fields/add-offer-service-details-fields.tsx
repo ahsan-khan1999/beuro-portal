@@ -800,7 +800,7 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mt-[30px]",
+        containerClass: "my-[30px]",
         field: {
           type: Field.div,
           id: "div-field",

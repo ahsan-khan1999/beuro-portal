@@ -19,15 +19,15 @@ const ServiceDetailsData = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 border-b border-b-[#000] border-opacity-10"
+        className="flex justify-between items-center bg-[#C50EE0] py-5 px-6 rounded-t-lg"
         id={translate("leads.tabs_headings.service")}
       >
-        <h2 className="text-[#393939] text-lg font-medium">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("leads.service_details.heading")}
         </h2>
         <button
           onClick={() => onClick(2, ComponentsType.serviceEdit)}
-          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-primary py-[7px] px-4 min-w-[161px] w-fit"
+          className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-primary py-[7px] px-4 min-w-[161px] w-fit bg-white"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -65,13 +65,13 @@ const ServiceDetailsData = ({
         </button>
       </div>
 
-      <div className="mt-3">
+      <div className="py-3 px-6">
         <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.required_service")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {content?.contentName}
             </div>
           </div>
@@ -79,7 +79,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.desire_date")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {formatDateTimeToDate(leadDetails?.desireDate)}
             </div>
           </div>
@@ -88,7 +88,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.availability")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {leadDetails?.contactAvailability}
             </div>
           </div>
@@ -96,7 +96,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.flexibility")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {leadDetails?.flexibility === "0"
                 ? translate("common.flexible")
                 : leadDetails?.flexibility}
@@ -111,7 +111,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.prefer_contact")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {leadDetails?.preferredContact}
             </div>
           </div>
@@ -130,7 +130,7 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.lead_source")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {leadDetails?.leadSource}
             </div>
           </div>
@@ -138,8 +138,8 @@ const ServiceDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.other_services")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap min-h-[58px]">
-              <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis ">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 overflow-hidden whitespace-nowrap min-h-[58px] truncate">
+              <span className="overflow-hidden text-[#4B4B4B] font-medium text-overflow-ellipsis">
                 {Array.isArray(contentList) &&
                   contentList?.map((item) => item?.contentName + ", ")}
               </span>

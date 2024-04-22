@@ -52,7 +52,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
             },
           },
           {
-            containerClass: " mt-6",
+            containerClass: "mt-6",
             field: {
               type: Field.div,
               id: "div-field",
@@ -147,7 +147,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                     inputType: "text",
                     id: `QrCodeDetail.${i}.address.postalCode`,
                     name: `QrCodeDetail.${i}.address.postalCode`,

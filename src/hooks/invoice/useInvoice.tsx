@@ -19,6 +19,8 @@ import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import localStoreUtil from "@/utils/localstore.util";
+import { DEFAULT_INVOICE } from "@/utils/static";
 
 const useInvoice = () => {
   const {
@@ -58,12 +60,12 @@ const useInvoice = () => {
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
-    // dispatch(
-    //   readInvoice({ params: { filter: query, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) setCurrentPageRows(res?.payload?.Invoice);
-    // });
   };
+
+  useEffect(() => {
+    localStoreUtil.remove_data("invoice");
+    dispatch(setInvoiceDetails(DEFAULT_INVOICE));
+  }, []);
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -205,15 +207,10 @@ const useInvoice = () => {
     const queryStatus = query?.status;
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
-    const searchEmail = query?.email;
     const searchNoteType = query?.noteType as string;
 
     const queryParams =
-      queryStatus ||
-      searchQuery ||
-      sortedValue ||
-      searchEmail ||
-      searchNoteType;
+      queryStatus || searchQuery || sortedValue || searchNoteType;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -234,10 +231,9 @@ const useInvoice = () => {
         status: filteredStatus,
       };
 
-      if (searchQuery || sortedValue || searchEmail || searchNoteType) {
+      if (searchQuery || sortedValue || searchNoteType) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
-        updatedFilter.email = searchEmail;
         updatedFilter.noteType = searchNoteType;
       }
 
