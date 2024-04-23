@@ -1,17 +1,18 @@
 import React from "react";
 import { Form } from "@/base-components/form/form";
-import { useEditContractAdditionalDetails } from "@/hooks/contract/useEditContractAdditionalDetails";
 import FormCard from "@/layout/customers/FormCard";
-import { ComponentsType } from "../details/ContractDetailsData";
+import { useEditContractAdditionalDetails } from "@/hooks/contract/useEditContractAdditionalDetails";
 
 export const ContractAditionalEditDetails = ({
-  onEditDetail,
+  onClose,
+  onComponentChange,
 }: {
-  onEditDetail: (index: number, component: ComponentsType) => void;
+  onClose: () => void;
+  onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const defaultClassName = "mt-0";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useEditContractAdditionalDetails({ onClose });
+    useEditContractAdditionalDetails({ onClose, onComponentChange });
 
   return (
     <FormCard>
@@ -20,7 +21,7 @@ export const ContractAditionalEditDetails = ({
           {translate("leads.additional.heading")}
         </h2>
         <button
-          onClick={() => onEditDetail(3, ComponentsType.additional)}
+          onClick={() => onComponentChange(false)}
           className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full bg-white"
         >
           {translate("leads.additional.cancel_button")}

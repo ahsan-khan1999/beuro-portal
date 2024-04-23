@@ -4,10 +4,10 @@ import React from "react";
 
 const AdditionalDetails = ({
   contractDetails,
-  onEditDetail,
+  onComponentChange,
 }: {
   contractDetails: contractTableTypes;
-  onEditDetail: (id: string) => void;
+  onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { t: translate } = useTranslation();
 
@@ -21,8 +21,8 @@ const AdditionalDetails = ({
           {translate("contracts.additional_details.heading")}
         </h2>
 
-        {/* <button
-          onClick={() => onEditDetail(contractDetails.id)}
+        <button
+          onClick={() => onComponentChange(true)}
           className="flex gap-x-4 items-center text-[#4B4B4B] font-medium rounded-lg border border-primary py-[7px] px-4 min-w-[161px] w-fit bg-white"
         >
           <svg
@@ -58,7 +58,7 @@ const AdditionalDetails = ({
             </defs>
           </svg>
           {translate("leads.additional.edit_button")}
-        </button> */}
+        </button>
       </div>
 
       <div className="px-6 py-3">

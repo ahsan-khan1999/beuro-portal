@@ -9,6 +9,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import OfferEditImages from "@/components/offers/OfferEditImages";
+import { ContractAditionalEditDetails } from "../edit/editAdditionalDetails";
 
 export enum ComponentsType {
   customer,
@@ -23,6 +24,8 @@ const ContractDetailsData = ({
   handleImageUpload,
   handleImageSlider,
   onEditAdditionDetail,
+  isEditing,
+  onComponentChange,
 }: {
   loading: boolean;
   shareImgModal: Function;
@@ -31,21 +34,14 @@ const ContractDetailsData = ({
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
-  onEditAdditionDetail: (id: string) => void;
+  onEditAdditionDetail: () => void;
+  isEditing: boolean;
+  onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<number>(0);
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { systemSettings } = useAppSelector((state) => state.settings);
-
-  // const [data, setData] = useState<{
-  //   index: number;
-  //   component: ComponentsType;
-  // } | null>(null);
-
-  // const handleEdit = (index: number, component: ComponentsType) => {
-  //   setData({ index, component });
-  // };
 
   const componentArray = [
     <OfferDetailsData contractDetails={contractDetails} />,
@@ -54,47 +50,18 @@ const ContractDetailsData = ({
       contractDetails={contractDetails}
       currency={systemSettings?.currency}
     />,
-    <AdditionalDetails
-      contractDetails={contractDetails}
-      onEditDetail={onEditAdditionDetail}
-    />,
+    isEditing ? (
+      <ContractAditionalEditDetails
+        onClose={onEditAdditionDetail}
+        onComponentChange={onComponentChange}
+      />
+    ) : (
+      <AdditionalDetails
+        contractDetails={contractDetails}
+        onComponentChange={onComponentChange}
+      />
+    ),
   ];
-
-  // const [renderComponent, setRenderComponent] = useState(componentArray);
-
-  // const lookup = {
-  //   [ComponentsType.customer]: (
-  //     <OfferDetailsData contractDetails={contractDetails} />
-  //   ),
-  //   [ComponentsType.address]: (
-  //     <AddressDetailsData contractDetails={contractDetails} />
-  //   ),
-  //   [ComponentsType.service]: (
-  //     <ServiceDetailsData
-  //       contractDetails={contractDetails}
-  //       currency={systemSettings?.currency}
-  //     />
-  //   ),
-  //   [ComponentsType.additional]: (
-  //     <AdditionalDetails
-  //       contractDetails={contractDetails}
-  //       onEditDetail={handleEdit}
-  //     />
-  //   ),
-  //   [ComponentsType.editAdditionalDetails]: (
-  //     <ContractAditionalEditDetails onEditDetail={handleEdit} />
-  //   ),
-  // };
-
-  // useEffect(() => {
-  //   setRenderComponent((prev) => {
-  //     const updatedData = [...prev];
-  //     if (data) {
-  //       updatedData[data.index] = lookup[data.component];
-  //     }
-  //     return updatedData;
-  //   });
-  // }, [data]);
 
   const tabSection: tabArrayTypes[] = [
     {

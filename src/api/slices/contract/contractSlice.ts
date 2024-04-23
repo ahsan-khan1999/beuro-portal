@@ -87,6 +87,7 @@ export const updateContractDetail: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.updateContractDetails(data);
+      thunkApi.dispatch(setContractDetails({ ...response?.data?.Contract }));
       return response?.data?.Contract;
     } catch (e: any) {
       setErrors(setError, e?.data?.data, translate);

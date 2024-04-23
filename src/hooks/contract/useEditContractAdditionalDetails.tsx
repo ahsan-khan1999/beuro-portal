@@ -10,8 +10,10 @@ import { updateContractDetail } from "@/api/slices/contract/contractSlice";
 
 export const useEditContractAdditionalDetails = ({
   onClose,
+  onComponentChange,
 }: {
   onClose: () => void;
+  onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -19,6 +21,10 @@ export const useEditContractAdditionalDetails = ({
   const { loading, error, contractDetails } = useAppSelector(
     (state) => state.contract
   );
+
+  const onCancel = () => {
+    onComponentChange(false);
+  };
 
   const schema = generateContractEditAdditionalDetailsValidation(translate);
   const {
@@ -33,7 +39,7 @@ export const useEditContractAdditionalDetails = ({
   const fields = ContractEditAdditionalDetailsFormField(
     loading,
     control,
-    onClose,
+    onCancel,
     contractDetails
   );
 
@@ -52,7 +58,7 @@ export const useEditContractAdditionalDetails = ({
     const response = await dispatch(
       updateContractDetail({ data: apiData, router, setError, translate })
     );
-    if (response?.payload) onClose;
+    if (response?.payload) onClose();
   };
 
   return {

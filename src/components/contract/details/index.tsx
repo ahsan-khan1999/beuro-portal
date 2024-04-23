@@ -26,6 +26,8 @@ const ContractDetails = () => {
     handleImageSlider,
     shareImgModal,
     handleUpdateContractDetail,
+    isEditing,
+    setIsEditing,
   } = useContractDetail();
 
   return (
@@ -90,6 +92,8 @@ const ContractDetails = () => {
             handleImageUpload={handleImageUpload}
             handleImageSlider={handleImageSlider}
             onEditAdditionDetail={handleUpdateContractDetail}
+            isEditing={isEditing}
+            onComponentChange={setIsEditing}
           />
         </div>
       )}

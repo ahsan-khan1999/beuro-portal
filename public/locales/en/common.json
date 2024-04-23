@@ -1044,6 +1044,7 @@
   },
   "common": {
     "modals": {
+      "contract_updating_description": "Thanks for updating Contract we are happy to have you.",
       "offer_rejected_des": "Your change has been made successfully",
       "update_password": "Thanks for updating password, we are happy to have you.",
       "invoice_update": "Thanks for updating invoice, we are happy to have you.",

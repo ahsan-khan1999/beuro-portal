@@ -26,7 +26,6 @@ import { EditDate } from "@/base-components/ui/modals1/editDate";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
-import { EditContractAdditionalDetails } from "@/base-components/ui/modals1/EditContractAdditionalDetails";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
@@ -36,6 +35,7 @@ export default function useContractDetail() {
   const isMail = Boolean(router.query?.isMail);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { systemSettings } = useAppSelector((state) => state.settings);
+  const [isEditing, setIsEditing] = useState(false);
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
@@ -62,6 +62,11 @@ export default function useContractDetail() {
   }, [id]);
 
   const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
+  const onSuccessEditContarctDetail = () => {
+    setIsEditing(false);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -155,11 +160,10 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
 
-  const handleUpdateContractDetail = (id: string) => {
+  const handleUpdateContractDetail = () => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL,
-        data: id,
       })
     );
   };
@@ -214,12 +218,12 @@ export default function useContractDetail() {
         heading={translate("common.update_note")}
       />
     ),
-    [ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL]: (
-      <EditContractAdditionalDetails
-        onClose={onClose}
-        heading="Update Additional Details"
-      />
-    ),
+    // [ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL]: (
+    //   <EditContractAdditionalDetails
+    //     onClose={onClose}
+    //     heading="Update Additional Details"
+    //   />
+    // ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
         onClose={onClose}
@@ -236,6 +240,14 @@ export default function useContractDetail() {
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
         route={onClose}
+      />
+    ),
+    [ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.contract_updating_description")}
+        route={onSuccessEditContarctDetail}
       />
     ),
     [ModalType.EMAIL_CONFIRMATION]: (
@@ -300,14 +312,6 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
   };
 
-  // useEffect(() => {
-  //   dispatch(readContractDetails({ params: { id: contractDetails?.id } })).then(
-  //     (res: CustomerPromiseActionType) => {
-  //       dispatch(setContractDetails(res.payload));
-  //     }
-  //   );
-  // }, [contractDetails?.id]);
-
   return {
     contractDetails,
     renderModal,
@@ -328,5 +332,7 @@ export default function useContractDetail() {
     shareImgModal,
     handleImageSlider,
     handleUpdateContractDetail,
+    isEditing,
+    setIsEditing,
   };
 }
