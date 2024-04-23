@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateAccountSettingFormField } from "@/types";
-import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
 export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
@@ -470,7 +469,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.change_password")}`,
-              containerClassName: " text-[14px] text-[#393939] font-normal ",
+              containerClassName: " text-[14px] text-[#393939] font-normal",
               id: "info",
             },
           },

@@ -34,13 +34,11 @@ export interface signedContracts {
 export interface ContractOfferDetails {
   refID: string;
   id: string;
-
   fullName: string;
   email: string;
   phoneNumber: string;
   date: DateRangeProps[];
   time: string;
-
   mobileNumber: string;
   status: string;
   editImg?: string;
@@ -73,7 +71,6 @@ export interface ContractOfferDetails {
   offerNumber: string;
   contractStatus: "Open" | "Confirmed" | "Cancelled";
   offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
-
   paymentType: "Cash" | "Online";
   taxType: "Include" | "Exclude";
   taxAmount: number;
@@ -87,6 +84,12 @@ export interface ContractOfferDetails {
   discountAmount: number;
   discountDescription: string;
   signature?: string;
+}
+
+export interface Contract {
+  title: string;
+  id: string;
+  additionalDetails: string;
 }
 
 export interface ContractDetailCardProps {

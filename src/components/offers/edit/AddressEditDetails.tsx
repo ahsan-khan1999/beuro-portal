@@ -22,6 +22,7 @@ const AddressEditDetails = ({
     translate,
     offerDetails,
   } = useEditOfferAddressDetails({ handleNext });
+
   return (
     <FormCard>
       <div className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg">

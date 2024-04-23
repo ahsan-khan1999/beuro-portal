@@ -9,6 +9,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import OfferEditImages from "@/components/offers/OfferEditImages";
+import { ContractAditionalEditDetails } from "../edit/editAdditionalDetails";
 
 export enum ComponentsType {
   customer,
@@ -17,12 +18,7 @@ export enum ComponentsType {
   additional,
 }
 
-const ContractDetailsData = ({
-  loading,
-  shareImgModal,
-  handleImageUpload,
-  handleImageSlider,
-}: {
+export interface ContractDetailProps {
   loading: boolean;
   shareImgModal: Function;
   handleImageUpload: (
@@ -30,27 +26,57 @@ const ContractDetailsData = ({
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
-}) => {
+  onEditAdditionDetail: () => void;
+  isEditing: boolean;
+  onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onHandleChange: (data: any) => Promise<void>;
+  value: string;
+  onChangeValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ContractDetailsData = ({
+  loading,
+  shareImgModal,
+  handleImageUpload,
+  handleImageSlider,
+  onEditAdditionDetail,
+  isEditing,
+  onComponentChange,
+  onHandleChange,
+  value,
+  onChangeValue,
+}: ContractDetailProps) => {
+  const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<number>(0);
   const { contractDetails } = useAppSelector((state) => state.contract);
-  const { t: translate } = useTranslation();
   const { systemSettings } = useAppSelector((state) => state.settings);
 
-  useEffect(() => {
-    const elements = document.querySelectorAll("[data-scroll-target]");
-    if (elements.length > 0) {
-      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, []);
-
   const componentArray = [
-    <OfferDetailsData contractDetails={contractDetails} />,
+    <OfferDetailsData
+      contractDetails={contractDetails}
+      onEditAdditionDetails={onEditAdditionDetail}
+      isEditing={isEditing}
+      onComponentChange={onComponentChange}
+      onHandleChange={onHandleChange}
+      value={value}
+      onChangeValue={onChangeValue}
+    />,
     <AddressDetailsData contractDetails={contractDetails} />,
     <ServiceDetailsData
       contractDetails={contractDetails}
       currency={systemSettings?.currency}
     />,
-    <AdditionalDetails contractDetails={contractDetails} />,
+    isEditing ? (
+      <ContractAditionalEditDetails
+        onEditAdditionDetails={onEditAdditionDetail}
+        onComponentChange={onComponentChange}
+      />
+    ) : (
+      <AdditionalDetails
+        contractDetails={contractDetails}
+        onComponentChange={onComponentChange}
+      />
+    ),
   ];
 
   const tabSection: tabArrayTypes[] = [
@@ -122,6 +148,13 @@ const ContractDetailsData = ({
       window.scrollTo({ behavior: "smooth", top: 1450 });
     }
   };
+
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-scroll-target]");
+    if (elements.length > 0) {
+      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
 
   return (
     <>

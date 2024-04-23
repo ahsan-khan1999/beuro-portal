@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import cofirmation_icon from "@/assets/svgs/confirmation_icon.svg";
-import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
 import {
   formatDateTimeToDate,

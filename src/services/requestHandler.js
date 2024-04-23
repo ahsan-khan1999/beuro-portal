@@ -38,6 +38,7 @@ const SERVICE_URLS = {
   offer: "/offer/Offer-step/",
 
   contract: "/contract",
+  updateContract: "/contract/",
   company: "/company",
   invoice: "/invoice",
   mainInvoice: "/invoice/invoice-step/",
@@ -317,10 +318,12 @@ const updateOfferNotes = (data) =>
   put(SERVICE_URLS.offerNotes + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const updateOffer = (data) =>
   put(SERVICE_URLS.offer + `${data?.step}/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteOffer = (data) =>
   del(
     SERVICE_URLS.readOffer + `/${data?.id}`,
@@ -354,12 +357,20 @@ const readContractDetail = (params) =>
     { feature: featureConstants.login },
     { detail: true }
   );
+
 const createContract = (data) =>
   post(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+
 const updateContractDate = (data) =>
   put(SERVICE_URLS.updateDate + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
+const updateContractDetails = (data) =>
+  put(SERVICE_URLS.updateContract + `${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
 const updateContract = (data) =>
   put(SERVICE_URLS.contract, data, { feature: featureConstants.login });
 const updateContractStatus = (data) =>
@@ -1096,5 +1107,6 @@ const apiServices = {
   createMainInvoice,
   updateMainInvoice,
   readMainQRCode,
+  updateContractDetails,
 };
 export default apiServices;

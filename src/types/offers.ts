@@ -3,9 +3,8 @@ import { CustomerAddress, Customers } from "./customer";
 import { AddressID, Lead } from "./leads";
 import { DateRangeProps, TemplateType, User } from ".";
 import { ContentTableRowTypes } from "./content";
-import { EmailTemplate, Template, TemplateSettings } from "./settings";
+import { EmailTemplate } from "./settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
-import { InvoiceTableRowTypes } from "./invoice";
 import { staticEnums } from "@/utils/static";
 
 // types for offers
