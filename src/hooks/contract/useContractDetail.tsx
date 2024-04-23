@@ -6,6 +6,7 @@ import {
   deleteContract,
   readContractDetails,
   setContractDetails,
+  updateContractDetail,
   updateContractPaymentStatus,
   updateContractStatus,
 } from "@/api/slices/contract/contractSlice";
@@ -36,6 +37,7 @@ export default function useContractDetail() {
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { systemSettings } = useAppSelector((state) => state.settings);
   const [isEditing, setIsEditing] = useState(false);
+  const [value, setValue] = useState<string>("");
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
@@ -312,6 +314,19 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
   };
 
+  const handleChange = async () => {
+    const apiData = {
+      ...contractDetails,
+      id: contractDetails?.id,
+      title: value,
+    };
+
+    const response = await dispatch(
+      updateContractDetail({ data: apiData, router, translate })
+    );
+    if (response?.payload) handleUpdateContractDetail();
+  };
+
   return {
     contractDetails,
     renderModal,
@@ -334,5 +349,8 @@ export default function useContractDetail() {
     handleUpdateContractDetail,
     isEditing,
     setIsEditing,
+    handleChange,
+    value,
+    setValue,
   };
 }

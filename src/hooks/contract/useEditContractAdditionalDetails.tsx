@@ -9,10 +9,10 @@ import { ContractEditAdditionalDetailsFormField } from "@/components/contract/ed
 import { updateContractDetail } from "@/api/slices/contract/contractSlice";
 
 export const useEditContractAdditionalDetails = ({
-  onClose,
+  onEditAdditionDetails,
   onComponentChange,
 }: {
-  onClose: () => void;
+  onEditAdditionDetails: () => void;
   onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { t: translate } = useTranslation();
@@ -58,7 +58,7 @@ export const useEditContractAdditionalDetails = ({
     const response = await dispatch(
       updateContractDetail({ data: apiData, router, setError, translate })
     );
-    if (response?.payload) onClose();
+    if (response?.payload) onEditAdditionDetails();
   };
 
   return {

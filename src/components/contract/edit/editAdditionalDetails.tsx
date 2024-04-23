@@ -4,15 +4,18 @@ import FormCard from "@/layout/customers/FormCard";
 import { useEditContractAdditionalDetails } from "@/hooks/contract/useEditContractAdditionalDetails";
 
 export const ContractAditionalEditDetails = ({
-  onClose,
+  onEditAdditionDetails,
   onComponentChange,
 }: {
-  onClose: () => void;
+  onEditAdditionDetails: () => void;
   onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const defaultClassName = "mt-0";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useEditContractAdditionalDetails({ onClose, onComponentChange });
+    useEditContractAdditionalDetails({
+      onEditAdditionDetails,
+      onComponentChange,
+    });
 
   return (
     <FormCard>

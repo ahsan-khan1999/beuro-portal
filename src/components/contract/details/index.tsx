@@ -28,6 +28,9 @@ const ContractDetails = () => {
     handleUpdateContractDetail,
     isEditing,
     setIsEditing,
+    handleChange,
+    value,
+    setValue,
   } = useContractDetail();
 
   return (
@@ -94,6 +97,9 @@ const ContractDetails = () => {
             onEditAdditionDetail={handleUpdateContractDetail}
             isEditing={isEditing}
             onComponentChange={setIsEditing}
+            onHandleChange={handleChange}
+            value={value}
+            onChangeValue={setValue}
           />
         </div>
       )}

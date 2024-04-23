@@ -18,15 +18,7 @@ export enum ComponentsType {
   additional,
 }
 
-const ContractDetailsData = ({
-  loading,
-  shareImgModal,
-  handleImageUpload,
-  handleImageSlider,
-  onEditAdditionDetail,
-  isEditing,
-  onComponentChange,
-}: {
+export interface ContractDetailProps {
   loading: boolean;
   shareImgModal: Function;
   handleImageUpload: (
@@ -37,14 +29,38 @@ const ContractDetailsData = ({
   onEditAdditionDetail: () => void;
   isEditing: boolean;
   onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+  onHandleChange: (data: any) => Promise<void>;
+  value: string;
+  onChangeValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ContractDetailsData = ({
+  loading,
+  shareImgModal,
+  handleImageUpload,
+  handleImageSlider,
+  onEditAdditionDetail,
+  isEditing,
+  onComponentChange,
+  onHandleChange,
+  value,
+  onChangeValue,
+}: ContractDetailProps) => {
   const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<number>(0);
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { systemSettings } = useAppSelector((state) => state.settings);
 
   const componentArray = [
-    <OfferDetailsData contractDetails={contractDetails} />,
+    <OfferDetailsData
+      contractDetails={contractDetails}
+      onEditAdditionDetails={onEditAdditionDetail}
+      isEditing={isEditing}
+      onComponentChange={onComponentChange}
+      onHandleChange={onHandleChange}
+      value={value}
+      onChangeValue={onChangeValue}
+    />,
     <AddressDetailsData contractDetails={contractDetails} />,
     <ServiceDetailsData
       contractDetails={contractDetails}
@@ -52,7 +68,7 @@ const ContractDetailsData = ({
     />,
     isEditing ? (
       <ContractAditionalEditDetails
-        onClose={onEditAdditionDetail}
+        onEditAdditionDetails={onEditAdditionDetail}
         onComponentChange={onComponentChange}
       />
     ) : (

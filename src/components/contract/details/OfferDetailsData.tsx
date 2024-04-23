@@ -3,13 +3,29 @@ import { contractTableTypes } from "@/types/contract";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import editIcon from "@/assets/svgs/edit_primary.svg";
 import { Button } from "@/base-components/ui/button/button";
+
+export interface ContarctOfferDetailProps {
+  contractDetails: contractTableTypes;
+  onEditAdditionDetails: () => void;
+  isEditing: boolean;
+  onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onHandleChange: (data: any) => Promise<void>;
+  value: string;
+  onChangeValue: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const OfferDetailsData = ({
   contractDetails,
-}: {
-  contractDetails: contractTableTypes;
-}) => {
+  onEditAdditionDetails,
+  isEditing,
+  onComponentChange,
+  onHandleChange,
+  value,
+  onChangeValue,
+}: ContarctOfferDetailProps) => {
   const { t: translate } = useTranslation();
 
   return (
@@ -22,96 +38,127 @@ const OfferDetailsData = ({
       </h2>
 
       <div className="py-3 px-6">
-        <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("contracts.customer_details.customer_type")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
-              {translate(
-                `customer_type.${getKeyByValue(
-                  staticEnums["CustomerType"],
-                  contractDetails.offerID?.leadID?.customerDetail?.customerType
-                )}`
-              )}
-            </div>
-          </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("contracts.customer_details.full_name")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {contractDetails.offerID?.leadID?.customerDetail?.fullName}
-            </div>
-          </div>
-          {staticEnums["CustomerType"][
-            contractDetails?.offerID?.leadID?.customerDetail?.customerType
-          ] === 1 && (
-            <div>
-              <label className="text-[#4D4D4D] mb-3 block text-sm">
-                {translate("contracts.customer_details.company_name")}
-              </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                {contractDetails?.offerID?.leadID?.customerDetail?.companyName}
-              </div>
-            </div>
-          )}
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("contracts.customer_details.email_address")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {contractDetails?.offerID?.leadID?.customerDetail?.email}
-            </div>
-          </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("contracts.customer_details.phone_number")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber}
-            </div>
-          </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("contracts.customer_details.mobile_number")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {contractDetails?.offerID?.leadID?.customerDetail?.mobileNumber}
-            </div>
-          </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("customers.details.gender")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {contractDetails?.offerID?.leadID?.customerDetail?.gender}
-            </div>
-          </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("login_detail.company_details.company_name")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {contractDetails?.offerID?.leadID?.customerDetail?.companyName}
-            </div>
-          </div>
-          <div>
+        <div className="rounded-lg px-2 py-3 bg-[#EDF4FF]">
+          <div className="mb-5">
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("contracts.customer_details.title")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 min-h-[58px] truncate flex items-center justify-between">
-              <span className="text-[#4B4B4B] font-medium">
-                {contractDetails?.title}
-              </span>
-              <Button
-                onClick={() => {}}
-                className="!h-fit py-2 px-[10px] mt-0 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-                text={translate("setting.account_setting.change")}
-                id="apply"
-                inputType="button"
-                iconAlt="button"
-              />
+            <div className="rounded-lg border border-[#EBEBEB] bg-white min-h-[58px] truncate flex items-center justify-between pr-4">
+              {isEditing === false ? (
+                <span className="text-[#4B4B4B] font-medium px-4">
+                  {contractDetails?.title}
+                </span>
+              ) : (
+                <input
+                  type="text"
+                  defaultValue={contractDetails?.title}
+                  onChange={(e) => onChangeValue(e.target.value)}
+                  className="p-4 border border-[#4B4B4B] rounded-lg w-[80%] min-h-[58px] outline-none text-dark text-sm focus:border-primary"
+                  required
+                />
+              )}
+              <div className="flex items-center">
+                {isEditing === false ? (
+                  <Image
+                    src={editIcon}
+                    alt="edit"
+                    width={16}
+                    height={16}
+                    className="cursor-pointer"
+                    onClick={() => onComponentChange(true)}
+                  />
+                ) : (
+                  <Button
+                    onClick={onHandleChange}
+                    className="!h-fit py-2 px-[10px] mt-0 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+                    text={translate(
+                      "setting.account_setting.save_changes_button"
+                    )}
+                    id="apply"
+                    inputType="button"
+                    iconAlt="button"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5 ">
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("contracts.customer_details.customer_type")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium">
+                {translate(
+                  `customer_type.${getKeyByValue(
+                    staticEnums["CustomerType"],
+                    contractDetails.offerID?.leadID?.customerDetail
+                      ?.customerType
+                  )}`
+                )}
+              </div>
+            </div>
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("contracts.customer_details.full_name")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                {contractDetails.offerID?.leadID?.customerDetail?.fullName}
+              </div>
+            </div>
+            {staticEnums["CustomerType"][
+              contractDetails?.offerID?.leadID?.customerDetail?.customerType
+            ] === 1 && (
+              <div>
+                <label className="text-[#4D4D4D] mb-3 block text-sm">
+                  {translate("contracts.customer_details.company_name")}
+                </label>
+                <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                  {
+                    contractDetails?.offerID?.leadID?.customerDetail
+                      ?.companyName
+                  }
+                </div>
+              </div>
+            )}
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("contracts.customer_details.email_address")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                {contractDetails?.offerID?.leadID?.customerDetail?.email}
+              </div>
+            </div>
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("contracts.customer_details.phone_number")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                {contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber}
+              </div>
+            </div>
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("contracts.customer_details.mobile_number")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                {contractDetails?.offerID?.leadID?.customerDetail?.mobileNumber}
+              </div>
+            </div>
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("customers.details.gender")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+                {contractDetails?.offerID?.leadID?.customerDetail?.gender}
+              </div>
+            </div>
+            <div>
+              <label className="text-[#4D4D4D] mb-3 block text-sm">
+                {translate("login_detail.company_details.company_name")}
+              </label>
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                {contractDetails?.offerID?.leadID?.customerDetail?.companyName}
+              </div>
             </div>
           </div>
         </div>
