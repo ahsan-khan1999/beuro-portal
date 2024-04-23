@@ -134,6 +134,7 @@ const SignPdfPreview = () => {
                 updatedDiscountAmount: updatedTotalDiscount.toString(),
                 taxType: offerDetails?.Offer?.taxType,
                 grandTotal: offerDetails?.Offer?.total?.toString(),
+                isOfferPDF: true,
                 serviceDiscountSum:
                   offerDetails?.Offer?.serviceDetail?.serviceDetail?.reduce(
                     (acc, service) => {
