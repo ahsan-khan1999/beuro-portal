@@ -207,21 +207,21 @@
       "customers": "Kunden",
       "leads": {
         "leads": "Anfragen",
-        "open": "Geöffnet",
+        "open": "Offen",
         "InProcess": "In Bearbeitung",
         "close": "Geschlossen",
         "expire": "Abgelaufen"
       },
       "offers": {
         "offers": "Angebote",
-        "open": "Geöffnet",
+        "open": "Offen",
         "signed": "Angenommen",
         "expired": "Abgelaufen",
         "rejected": "Abgelehnt"
       },
       "contracts": {
         "contracts": "Verträge",
-        "open": "Geöffnet",
+        "open": "Offen",
         "confirmed": "Bestätigt",
         "cancelled": "Abgebrochen"
       },
@@ -230,7 +230,7 @@
         "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
-        "open": "Geöffnet"
+        "open": "Offen"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -756,7 +756,7 @@
   "contracts": {
     "main_heading": "Verträge",
     "table_functions": {
-      "open": "Geöffnet",
+      "open": "Offen",
       "confirm": "Bestätigt",
       "cancel": "Abgebrochen"
     },
@@ -914,13 +914,13 @@
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
     "table_functions": {
-      "open": "Geöffnet",
+      "open": "Offen",
       "inProcess": "In Bearbeitung",
       "close": "geschlossen",
       "expire": "abgelaufen"
     },
     "lead_dropdown_status": {
-      "Open": "Geöffnet",
+      "Open": "Offen",
       "InProcess": "In Bearbeitung",
       "Close": "Geschlossen",
       "Expired": "Abgelaufen"
@@ -1299,7 +1299,7 @@
     "main_heading": "Angebote",
     "add_button": "Neu Hinzufügen",
     "table_functions": {
-      "open": "Geöffnet",
+      "open": "Offen",
       "signed": "Angenommen",
       "expire": "Abgelaufen",
       "rejected": "Abgelehnt"
@@ -1981,7 +1981,7 @@
       "overdue": "Überfällig",
       "paid": "Bezahlt",
       "leadSource": "Leadquellen",
-      "open": "Geöffnet"
+      "open": "Offen"
     }
   },
   "global_search": {
@@ -2026,19 +2026,19 @@
     "Mrs": "Frau"
   },
   "lead_status": {
-    "Open": "Geöffnet",
+    "Open": "Offen",
     "InProcess": "In Bearbeitung",
     "Close": "Geschlossen",
     "Expired": "Abgelaufen"
   },
   "offer_status": {
-    "Open": "Geöffnet",
+    "Open": "Offen",
     "Expired": "Abgeloffen",
     "Rejected": "Abgelehnt",
     "Accepted": "Angenommen"
   },
   "contract_status": {
-    "Open": "Geöffnet",
+    "Open": "Offen",
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgebrochen",
     "Sent": "Gesendet",
@@ -2049,7 +2049,7 @@
     "Pending": "Ausstehend",
     "Overdue": "Überfällig",
     "Paid": "Bezahlt",
-    "Open": "Geöffnet"
+    "Open": "Offen"
   },
   "support_req_status": {
     "pending": "Ausstehend",
