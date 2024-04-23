@@ -53,7 +53,7 @@ const OfferDetailsData = ({
                   type="text"
                   defaultValue={contractDetails?.title}
                   onChange={(e) => onChangeValue(e.target.value)}
-                  className="p-4 border border-[#4B4B4B] rounded-lg w-[80%] min-h-[58px] outline-none text-dark text-sm focus:border-primary"
+                  className="p-4 border border-[#4B4B4B] rounded-lg w-[75%] min-h-[58px] outline-none text-dark text-sm focus:border-primary"
                   required
                 />
               )}
@@ -68,16 +68,24 @@ const OfferDetailsData = ({
                     onClick={() => onComponentChange(true)}
                   />
                 ) : (
-                  <Button
-                    onClick={onHandleChange}
-                    className="!h-fit py-2 px-[10px] mt-0 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-                    text={translate(
-                      "setting.account_setting.save_changes_button"
-                    )}
-                    id="apply"
-                    inputType="button"
-                    iconAlt="button"
-                  />
+                  <div className="flex items-center gap-x-2">
+                    <button
+                      onClick={() => onComponentChange(false)}
+                      className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full bg-white"
+                    >
+                      {translate("leads.additional.cancel_button")}
+                    </button>
+                    <Button
+                      onClick={onHandleChange}
+                      className="!h-fit py-2 px-[10px] mt-0 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+                      text={translate(
+                        "setting.account_setting.save_changes_button"
+                      )}
+                      id="apply"
+                      inputType="button"
+                      iconAlt="button"
+                    />
+                  </div>
                 )}
               </div>
             </div>

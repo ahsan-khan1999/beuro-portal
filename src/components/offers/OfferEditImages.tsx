@@ -23,7 +23,6 @@ const OfferEditImages = ({
 }) => {
   const { images } = useAppSelector((state) => state.image);
   const { offerDetails } = useAppSelector((state) => state.offer);
-
   const { t: translate } = useTranslation();
 
   return (
@@ -33,20 +32,18 @@ const OfferEditImages = ({
           <p className="text-lg font-normal text-[#4A13E7] ">
             {translate("offers.side_images.heading")}
           </p>
-          {images && images?.images?.length > 0 && (
-            <Image
-              src={shareIcon}
-              alt="shareIcon"
-              className={`${
-                images && images?.images?.length > 0
-                  ? "cursor-pointer"
-                  : "cursor-default"
-              }  `}
-              onClick={() =>
-                images && images?.images?.length > 0 && shareImgModal()
-              }
-            />
-          )}
+          {images &&
+            (images.images?.length > 0 ||
+              images.attachments?.length > 0 ||
+              images.videos?.length > 0 ||
+              images.links?.length > 0) && (
+              <Image
+                src={shareIcon}
+                alt="shareIcon"
+                className="cursor-pointer"
+                onClick={() => shareImgModal()}
+              />
+            )}
         </div>
 
         {images?.images && images?.images?.length > 0 ? (
