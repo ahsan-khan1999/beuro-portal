@@ -1,9 +1,9 @@
-import FormCard from "@/layout/customers/FormCard";
+import React from "react";
 import { contractTableTypes } from "@/types/contract";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
-import React from "react";
+import { Button } from "@/base-components/ui/button/button";
 
 const OfferDetailsData = ({
   contractDetails,
@@ -18,7 +18,7 @@ const OfferDetailsData = ({
       id={translate("contracts.tabs_headings.offer_details")}
     >
       <h2 className="text-[#fff] text-lg font-medium bg-[#4A13E7] py-5 px-6 rounded-t-lg">
-        {translate("contracts.customer_details.heading")}
+        {translate("contracts.card_content.heading")}
       </h2>
 
       <div className="py-3 px-6">
@@ -92,8 +92,26 @@ const OfferDetailsData = ({
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("login_detail.company_details.company_name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {contractDetails?.offerID?.leadID?.customerDetail?.companyName}
+            </div>
+          </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("contracts.customer_details.title")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white px-4 min-h-[58px] truncate flex items-center justify-between">
+              <span className="text-[#4B4B4B] font-medium">
+                {contractDetails?.title}
+              </span>
+              <Button
+                onClick={() => {}}
+                className="!h-fit py-2 px-[10px] mt-0 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+                text={translate("setting.account_setting.change")}
+                id="apply"
+                inputType="button"
+                iconAlt="button"
+              />
             </div>
           </div>
         </div>

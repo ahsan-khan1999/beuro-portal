@@ -30,7 +30,7 @@ import {
   InvoiceTableRowTypes,
   SubInvoiceTableRowTypes,
 } from "./invoice";
-import { contractTableTypes } from "./contract";
+import { Contract, contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
@@ -514,12 +514,21 @@ export type GenerateCustomerLeadFormField = (
   customerType?: string,
   setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
+
 export type GenerateLeadsAdditionalDetailsFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
   leadDetails?: Lead
 ) => FormField[];
+
+export type GenerateContractEditAdditionalDetailsFormField = (
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  contractDetails?: Contract
+) => FormField[];
+
 export type GenerateLeadAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

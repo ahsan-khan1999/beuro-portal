@@ -25,6 +25,7 @@ const ContractDetails = () => {
     editDateHandler,
     handleImageSlider,
     shareImgModal,
+    handleUpdateContractDetail,
   } = useContractDetail();
 
   return (
@@ -88,6 +89,7 @@ const ContractDetails = () => {
             shareImgModal={shareImgModal}
             handleImageUpload={handleImageUpload}
             handleImageSlider={handleImageSlider}
+            onEditAdditionDetail={handleUpdateContractDetail}
           />
         </div>
       )}

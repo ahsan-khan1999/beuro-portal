@@ -22,6 +22,7 @@ const ContractDetailsData = ({
   shareImgModal,
   handleImageUpload,
   handleImageSlider,
+  onEditAdditionDetail,
 }: {
   loading: boolean;
   shareImgModal: Function;
@@ -30,18 +31,21 @@ const ContractDetailsData = ({
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
+  onEditAdditionDetail: (id: string) => void;
 }) => {
+  const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<number>(0);
   const { contractDetails } = useAppSelector((state) => state.contract);
-  const { t: translate } = useTranslation();
   const { systemSettings } = useAppSelector((state) => state.settings);
 
-  useEffect(() => {
-    const elements = document.querySelectorAll("[data-scroll-target]");
-    if (elements.length > 0) {
-      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, []);
+  // const [data, setData] = useState<{
+  //   index: number;
+  //   component: ComponentsType;
+  // } | null>(null);
+
+  // const handleEdit = (index: number, component: ComponentsType) => {
+  //   setData({ index, component });
+  // };
 
   const componentArray = [
     <OfferDetailsData contractDetails={contractDetails} />,
@@ -50,8 +54,47 @@ const ContractDetailsData = ({
       contractDetails={contractDetails}
       currency={systemSettings?.currency}
     />,
-    <AdditionalDetails contractDetails={contractDetails} />,
+    <AdditionalDetails
+      contractDetails={contractDetails}
+      onEditDetail={onEditAdditionDetail}
+    />,
   ];
+
+  // const [renderComponent, setRenderComponent] = useState(componentArray);
+
+  // const lookup = {
+  //   [ComponentsType.customer]: (
+  //     <OfferDetailsData contractDetails={contractDetails} />
+  //   ),
+  //   [ComponentsType.address]: (
+  //     <AddressDetailsData contractDetails={contractDetails} />
+  //   ),
+  //   [ComponentsType.service]: (
+  //     <ServiceDetailsData
+  //       contractDetails={contractDetails}
+  //       currency={systemSettings?.currency}
+  //     />
+  //   ),
+  //   [ComponentsType.additional]: (
+  //     <AdditionalDetails
+  //       contractDetails={contractDetails}
+  //       onEditDetail={handleEdit}
+  //     />
+  //   ),
+  //   [ComponentsType.editAdditionalDetails]: (
+  //     <ContractAditionalEditDetails onEditDetail={handleEdit} />
+  //   ),
+  // };
+
+  // useEffect(() => {
+  //   setRenderComponent((prev) => {
+  //     const updatedData = [...prev];
+  //     if (data) {
+  //       updatedData[data.index] = lookup[data.component];
+  //     }
+  //     return updatedData;
+  //   });
+  // }, [data]);
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -122,6 +165,13 @@ const ContractDetailsData = ({
       window.scrollTo({ behavior: "smooth", top: 1450 });
     }
   };
+
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-scroll-target]");
+    if (elements.length > 0) {
+      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
 
   return (
     <>

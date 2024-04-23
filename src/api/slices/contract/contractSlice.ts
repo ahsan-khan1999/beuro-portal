@@ -6,6 +6,7 @@ import { DEFAULT_CONTRACT } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
+import localStoreUtil from "@/utils/localstore.util";
 
 interface ContractState {
   contract: contractTableTypes[];
@@ -65,6 +66,7 @@ export const createContract: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateContract: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("contract/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -78,6 +80,45 @@ export const updateContract: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
+export const updateContractDetail: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("contract/update", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      const response = await apiServices.updateContractDetails(data);
+      return response?.data?.Contract;
+    } catch (e: any) {
+      setErrors(setError, e?.data?.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+// export const updateContractDetail: AsyncThunk<boolean, object, object> | any =
+//   createAsyncThunk("contract/update", async (args, thunkApi) => {
+//     const { data, router, setError, translate } = args as any;
+
+//     try {
+//       const { stage } = data;
+
+//       const response = await apiServices.updateContractDetails(data);
+//       const contractData = await localStoreUtil.get_data("contract");
+//       let objectToUpdate = {
+//         ...response?.data?.Contract,
+//         type: contractData?.type,
+//       };
+
+//       localStoreUtil.store_data("contract", objectToUpdate);
+//       thunkApi.dispatch(setContractDetails(objectToUpdate));
+
+//       return response?.data?.Contract;
+//     } catch (e: any) {
+//       setErrors(setError, e?.data?.data, translate);
+//       thunkApi.dispatch(setErrorMessage(e?.data?.message));
+//       return false;
+//     }
+//   });
 
 export const updateContractDates: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("contract/update/dates", async (args, thunkApi) => {

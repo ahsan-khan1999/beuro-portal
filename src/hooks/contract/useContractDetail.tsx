@@ -26,6 +26,7 @@ import { EditDate } from "@/base-components/ui/modals1/editDate";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { EditContractAdditionalDetails } from "@/base-components/ui/modals1/EditContractAdditionalDetails";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
@@ -33,12 +34,12 @@ export default function useContractDetail() {
   const router = useRouter();
   const id = router.query.offer;
   const isMail = Boolean(router.query?.isMail);
-  const { images } = useAppSelector((state) => state.image);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
   const { systemSettings } = useAppSelector((state) => state.settings);
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
+
   const { t: translate } = useTranslation();
 
   useEffect(() => {
@@ -154,6 +155,15 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
 
+  const handleUpdateContractDetail = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL,
+        data: id,
+      })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -202,6 +212,12 @@ export default function useContractDetail() {
         onClose={onClose}
         handleNotes={handleNotes}
         heading={translate("common.update_note")}
+      />
+    ),
+    [ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL]: (
+      <EditContractAdditionalDetails
+        onClose={onClose}
+        heading="Update Additional Details"
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
@@ -284,6 +300,14 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
   };
 
+  // useEffect(() => {
+  //   dispatch(readContractDetails({ params: { id: contractDetails?.id } })).then(
+  //     (res: CustomerPromiseActionType) => {
+  //       dispatch(setContractDetails(res.payload));
+  //     }
+  //   );
+  // }, [contractDetails?.id]);
+
   return {
     contractDetails,
     renderModal,
@@ -303,5 +327,6 @@ export default function useContractDetail() {
     editDateHandler,
     shareImgModal,
     handleImageSlider,
+    handleUpdateContractDetail,
   };
 }

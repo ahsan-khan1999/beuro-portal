@@ -807,7 +807,8 @@
       "address_details": "Adressdetails",
       "street_no": "Strasse+Nr",
       "post_code": "Plz + Ort",
-      "country": "Land"
+      "country": "Land",
+      "title": "Titel Vertrags"
     },
     "address_details": {
       "main_heading": "Adressdetails",
@@ -2153,5 +2154,12 @@
     "individual_note": "Individuelle Notiz",
     "note_reached": "Nicht erreicht",
     "other": "Andere"
+  },
+  "thank_you_content": {
+    "heading": "Danke für die Unterzeichnung des Vertrags",
+    "valued_csutomer": "Sehr geehrter Kunde",
+    "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten. Übersetzt mit DeepL.com (kostenlose Version).",
+    "warm_regards": "Mit freundlichen Grüßen",
+    "team": "Das Buro-Team"
   }
 }
