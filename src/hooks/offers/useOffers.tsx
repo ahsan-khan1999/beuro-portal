@@ -69,13 +69,6 @@ const useOffers = () => {
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
-    // dispatch(
-    //   readOffer({ params: { filter: query, page: 1, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Offer);
-    //   }
-    // });
   };
 
   useEffect(() => {
@@ -99,7 +92,23 @@ const useOffers = () => {
       dispatch(setOfferDetails(filteredLead[0]));
       dispatch(
         readNotes({ params: { type: "offer", id: filteredLead[0]?.id } })
-      );
+      ).then((res: any) => {
+        if (res.payload.Note?.length > 0) {
+          setCurrentPageRows((prev) => {
+            const updatedOffers = prev.map((item) => {
+              if (item.id === filteredLead[0]?.id) {
+                const offer: OffersTableRowTypes = {
+                  ...item,
+                  isNoteCreated: true,
+                };
+                return offer;
+              }
+              return item;
+            });
+            return updatedOffers;
+          });
+        }
+      });
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
     }
   };
@@ -144,7 +153,22 @@ const useOffers = () => {
       dispatch(setOfferDetails(filteredLead));
       dispatch(
         readImage({ params: { type: "offerID", id: filteredLead?.id } })
-      );
+      ).then((res: any) => {
+        if (
+          res.payload?.images.length > 0 ||
+          res.payload?.attachments.length > 0 ||
+          res.payload?.videos.length > 0 ||
+          res.payload?.links.length > 0
+        ) {
+          setCurrentPageRows((prev) =>
+            prev.map((offer) => {
+              return offer.id === filteredLead?.id
+                ? { ...offer, isImageAdded: true }
+                : offer;
+            })
+          );
+        }
+      });
       dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
     }
   };

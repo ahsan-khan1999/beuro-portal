@@ -81,7 +81,23 @@ const useInvoice = () => {
       dispatch(setInvoiceDetails(filteredLead[0]));
       dispatch(
         readNotes({ params: { type: "invoice", id: filteredLead[0]?.id } })
-      );
+      ).then((res: any) => {
+        if (res.payload.Note?.length > 0) {
+          setCurrentPageRows((prev) => {
+            const updatedInvoices = prev.map((item) => {
+              if (item.id === filteredLead[0]?.id) {
+                const invoice: InvoiceTableRowTypes = {
+                  ...item,
+                  isNoteCreated: true,
+                };
+                return invoice;
+              }
+              return item;
+            });
+            return updatedInvoices;
+          });
+        }
+      });
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
     }
   };

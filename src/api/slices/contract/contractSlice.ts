@@ -6,7 +6,6 @@ import { DEFAULT_CONTRACT } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
-import localStoreUtil from "@/utils/localstore.util";
 
 interface ContractState {
   contract: contractTableTypes[];

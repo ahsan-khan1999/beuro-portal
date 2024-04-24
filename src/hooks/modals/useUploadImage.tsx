@@ -160,10 +160,10 @@ export const useUploadImage = (handleImageSlider: Function) => {
       links: formatLinks,
       attachments: formatAttachments,
       videos: formatVideos,
-
       id: leadDetails?.id,
       type: "leadID",
     };
+
     const response = await dispatch(
       createImage({ data: apiData, router, translate })
     );

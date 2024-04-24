@@ -17,11 +17,6 @@ const ImagesUpload = ({
   onClose: () => void;
 }) => {
   const {
-    // fields,
-    // control,
-    // onSubmit,
-    // handleSubmit,
-    // errors,
     error,
     translate,
     activeTab,
