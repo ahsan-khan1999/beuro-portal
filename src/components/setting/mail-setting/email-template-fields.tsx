@@ -32,19 +32,19 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
     },
 
     {
-      containerClass: "mt-[35px]",
+      containerClass: "mt-[35px] rounded-t-lg px-2 pt-3 bg-[#EDF4FF]",
       field: {
         type: Field.span,
         text: `${translate(
           "setting.mail_setting.template_form_fields.contact_setting_heading"
         )}`,
         name: Field.span,
-        containerClassName: "text-[#4B4B4B] text-base font-medium",
+        containerClassName: "text-[#1E1E1E] text-base font-medium",
         id: "",
       },
     },
     {
-      containerClass: "mt-8",
+      containerClass: "px-2 pt-8 bg-[#EDF4FF]",
       field: {
         type: Field.div,
         id: "div-field",
@@ -112,14 +112,14 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
     },
 
     {
-      containerClass: "my-8",
+      containerClass: "px-2 py-8 bg-[#EDF4FF]",
       field: {
         type: Field.span,
         text: `${translate(
           "setting.mail_setting.template_form_fields.color_setting"
         )}`,
         name: Field.span,
-        containerClassName: "text-[#4B4B4B] text-base font-medium",
+        containerClassName: "text-[#1E1E1E] text-base font-medium",
         id: "",
       },
     },
@@ -128,7 +128,8 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 lg:grid-cols-2 gap-y-5 gap-x-[42px]",
+        className:
+          "grid grid-cols-1 lg:grid-cols-2 gap-y-5 gap-x-[42px] rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",

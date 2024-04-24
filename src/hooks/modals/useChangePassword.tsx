@@ -16,13 +16,13 @@ export default function useChangePassword(onClose: Function) {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const schema = generatePasswordChangeValidationSchema(translate);
-  const user: User = isJSON(getUser())
+  const user: User = isJSON(getUser());
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError
+    setError,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -30,15 +30,23 @@ export default function useChangePassword(onClose: Function) {
   const fields = ChangePasswordFormField(register, loading);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const response = await dispatch(updateUserPassword({ data: { ...data, id: user?.id }, router, setError, translate }));
+    const response = await dispatch(
+      updateUserPassword({
+        data: { ...data, id: user?.id },
+        router,
+        setError,
+        translate,
+      })
+    );
     if (response?.payload) onClose();
   };
+
   return {
     error,
     handleSubmit,
     errors,
     fields,
     onSubmit,
-    translate
+    translate,
   };
 }

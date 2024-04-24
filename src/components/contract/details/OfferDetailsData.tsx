@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { contractTableTypes } from "@/types/contract";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -19,14 +19,18 @@ export interface ContarctOfferDetailProps {
 
 const OfferDetailsData = ({
   contractDetails,
-  onEditAdditionDetails,
   isEditing,
   onComponentChange,
   onHandleChange,
-  value,
   onChangeValue,
 }: ContarctOfferDetailProps) => {
   const { t: translate } = useTranslation();
+  const [isFieldModified, setIsFieldModified] = useState<boolean>(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeValue(e.target.value);
+    setIsFieldModified(true);
+  };
 
   return (
     <div
@@ -52,9 +56,8 @@ const OfferDetailsData = ({
                 <input
                   type="text"
                   defaultValue={contractDetails?.title}
-                  onChange={(e) => onChangeValue(e.target.value)}
+                  onChange={handleInputChange}
                   className="p-4 border border-[#4B4B4B] rounded-lg w-[75%] min-h-[58px] outline-none text-dark text-sm focus:border-primary"
-                  required
                 />
               )}
               <div className="flex items-center">
@@ -77,13 +80,18 @@ const OfferDetailsData = ({
                     </button>
                     <Button
                       onClick={onHandleChange}
-                      className="!h-fit py-2 px-[10px] mt-0 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+                      className={`!h-fit py-2 px-[10px] mt-0 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap ${
+                        isFieldModified
+                          ? "cursor-pointer hover:bg-buttonHover"
+                          : "cursor-not-allowed hover:bg-primary"
+                      }`}
                       text={translate(
                         "setting.account_setting.save_changes_button"
                       )}
                       id="apply"
                       inputType="button"
                       iconAlt="button"
+                      disabled={!isFieldModified}
                     />
                   </div>
                 )}

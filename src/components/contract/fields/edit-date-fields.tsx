@@ -21,6 +21,7 @@ export const AddDateFormFieldContract: GenerateOfferDateFormField = (
 
   const formField: FormField[] = [
     {
+      containerClass: "rounded-t-lg px-2 pt-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("common.time")}`,
         htmlFor: "time",
@@ -171,7 +172,8 @@ export const generateDateChildren = (
       containerClass: "mb-0",
       field: {
         type: Field.div,
-        className: "grid grid-cols-2 gap-x-3 mt-5",
+        className:
+          "grid grid-cols-2 gap-x-3 rounded-b-lg px-2 pb-3 pt-5 bg-[#EDF4FF]",
         id: `date`,
         children: [
           {

@@ -12,7 +12,9 @@ export default function useEmployeePasswordReset(
   passwordResetSuccessfully: Function
 ) {
   const router = useRouter();
-  const { loading, error, employeeDetails } = useAppSelector((state) => state.employee);
+  const { loading, error, employeeDetails } = useAppSelector(
+    (state) => state.employee
+  );
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -28,17 +30,14 @@ export default function useEmployeePasswordReset(
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const fields = EmployeeResetPasswordFieldsFormField(
-    register,
-    loading,
-
-  );
+  const fields = EmployeeResetPasswordFieldsFormField(register, loading);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    let apiData = { ...data, id: employeeDetails?.id }
-    const res = await dispatch(updateEmployeePassword({ apiData, router, setError, translate }));
-    if (res?.payload) passwordResetSuccessfully()
-
+    let apiData = { ...data, id: employeeDetails?.id };
+    const res = await dispatch(
+      updateEmployeePassword({ apiData, router, setError, translate })
+    );
+    if (res?.payload) passwordResetSuccessfully();
   };
   return {
     error,
