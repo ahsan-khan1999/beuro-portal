@@ -63,13 +63,6 @@ const useContract = () => {
 
   const handleFilterChange = (filter: FilterType) => {
     setCurrentPage(1);
-    // dispatch(
-    //   readContract({ params: { filter: filter, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Contract);
-    //   }
-    // });
   };
 
   const onClose = () => {
@@ -87,7 +80,23 @@ const useContract = () => {
       dispatch(setContractDetails(filteredLead[0]));
       dispatch(
         readNotes({ params: { type: "contract", id: filteredLead[0]?.id } })
-      );
+      ).then((res: any) => {
+        if (res.payload.Note?.length > 0) {
+          setCurrentPageRows((prev) => {
+            const updatedContracts = prev.map((item) => {
+              if (item.id === filteredLead[0]?.id) {
+                const contract: contractTableTypes = {
+                  ...item,
+                  isNoteCreated: true,
+                };
+                return contract;
+              }
+              return item;
+            });
+            return updatedContracts;
+          });
+        }
+      });
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
     }
   };
@@ -133,7 +142,22 @@ const useContract = () => {
       dispatch(setContractDetails(filteredLead));
       dispatch(
         readImage({ params: { type: "contractID", id: filteredLead?.id } })
-      );
+      ).then((res: any) => {
+        if (
+          res.payload?.images.length > 0 ||
+          res.payload?.attachments.length > 0 ||
+          res.payload?.videos.length > 0 ||
+          res.payload?.links.length > 0
+        ) {
+          setCurrentPageRows((prev) =>
+            prev.map((contract) => {
+              return contract.id === filteredLead?.id
+                ? { ...contract, isImageAdded: true }
+                : contract;
+            })
+          );
+        }
+      });
       dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
     }
   };

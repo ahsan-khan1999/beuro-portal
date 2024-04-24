@@ -43,8 +43,6 @@ const TableRows = ({
       }`}
     >
       {dataToAdd?.map((item: Lead, index: number) => {
-        console.log(getStatusColor(item?.leadStatus));
-
         return (
           <div
             onClick={() => {

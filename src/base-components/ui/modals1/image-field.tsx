@@ -55,7 +55,6 @@ export const ImageField = ({
     e.preventDefault();
 
     let file: any = [];
-    console.log(e, "event");
 
     if (e instanceof DragEvent && e.dataTransfer) {
       for (let item of e.dataTransfer.files) {
@@ -118,8 +117,6 @@ export const ImageField = ({
     noOfThumbNails: 8,
     images: attachements?.map((item) => ({ imageSrc: item?.value })),
   };
-
-  console.log(attachements, "attachements");
 
   return (
     <>

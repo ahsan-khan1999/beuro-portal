@@ -11,11 +11,11 @@ export const AddNoteFormField: GenerateNotesFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0",
+      containerClass: "mb-0 rounded-t-lg px-2 py-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("common.add_note_modal.label")}`,
         htmlFor: "description",
-        className: "mb-[10px] text-[#8F8F8F]",
+        className: "mb-[10px] text-[#1E1E1E]",
       },
 
       field: {
@@ -60,7 +60,7 @@ export const AddNoteFormField: GenerateNotesFormField = (
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "rounded-b-lg px-2 pt-5 pb-3 bg-[#EDF4FF]",
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",

@@ -11,6 +11,7 @@ const SettingProfile = ({
   const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, error, renderModal } =
     useSettingProfile(handleChangePassword);
+
   return (
     <FormCard>
       <div className="py-3 px-6">
