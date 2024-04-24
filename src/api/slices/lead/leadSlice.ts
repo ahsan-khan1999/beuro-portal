@@ -1,7 +1,6 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors, transformValidationMessages } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { GlobalApiResponseType } from "@/types/global";
 import { Lead } from "@/types/leads";
 import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
@@ -141,6 +140,7 @@ export const createLeadNotes: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.updateNotes(data);
+      thunkApi.dispatch(setLeadDetails({ ...response?.data?.Lead }));
       return response?.data?.Lead;
     } catch (e: any) {
       setErrors(setError, e?.data?.data, translate);

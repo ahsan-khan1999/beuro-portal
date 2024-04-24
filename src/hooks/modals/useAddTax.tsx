@@ -19,7 +19,7 @@ export default function useAddTax(onClose: Function) {
     register,
     handleSubmit,
     formState: { errors },
-    setError
+    setError,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -27,9 +27,15 @@ export default function useAddTax(onClose: Function) {
   const fields = addTaxFormField(register, loading);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const response = await dispatch(createTaxSetting({ data: { ...data, taxType: 1 }, router, setError, translate }));
-    if (response?.payload) onClose()
-
+    const response = await dispatch(
+      createTaxSetting({
+        data: { ...data, taxType: 1 },
+        router,
+        setError,
+        translate,
+      })
+    );
+    if (response?.payload) onClose();
   };
   return {
     error,

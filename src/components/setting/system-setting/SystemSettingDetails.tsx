@@ -134,26 +134,28 @@ const SystemSettingDetails = ({
       </div>
 
       <SettingLayout>
-        <div className="pt-[27px] pl-[31px] pr-6 pb-[35px] bg-white">
-          <p className="text-[#393939] font-normal text-lg mb-3">
-            {translate("setting.system_setting.currency")}
-          </p>
-          <DropDown
-            items={Object.keys(staticEnums["currency"]).map((item) => ({
-              item: {
-                label: item,
-                value: item,
-              },
-            }))}
-            onItemSelected={handleItemSelected}
-            selectedItem={systemSetting?.currency}
-            dropDownTextClassName="custom-text-style text-black"
-            dropDownIconClassName="custom-icon-style"
-            dropDownDisabled={false}
-            shouldNotSelectItem={false}
-            dropDownClassName="!h-[42px] justify-between"
-            dropDownItemsContainerClassName="w-full"
-          />
+        <div className="px-6 py-5 bg-white">
+          <div className="rounded-lg px-2 py-3 bg-[#EDF4FF]">
+            <p className="text-[#393939] font-normal text-lg mb-3">
+              {translate("setting.system_setting.currency")}
+            </p>
+            <DropDown
+              items={Object.keys(staticEnums["currency"]).map((item) => ({
+                item: {
+                  label: item,
+                  value: item,
+                },
+              }))}
+              onItemSelected={handleItemSelected}
+              selectedItem={systemSetting?.currency}
+              dropDownTextClassName="custom-text-style text-black"
+              dropDownIconClassName="custom-icon-style"
+              dropDownDisabled={false}
+              shouldNotSelectItem={false}
+              dropDownClassName="!h-[42px] justify-between"
+              dropDownItemsContainerClassName="w-full"
+            />
+          </div>
         </div>
       </SettingLayout>
 
