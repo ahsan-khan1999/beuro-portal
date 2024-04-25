@@ -230,7 +230,8 @@
         "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
-        "open": "Offen"
+        "open": "Offen",
+        "sending": "Senden"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -1983,7 +1984,10 @@
       "overdue": "Überfällig",
       "paid": "Bezahlt",
       "leadSource": "Leadquellen",
-      "open": "Offen"
+      "open": "Offen",
+      "online": "Online",
+      "cash": "Bar",
+      "sending": "Senden"
     }
   },
   "global_search": {

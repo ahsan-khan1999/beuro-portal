@@ -230,7 +230,8 @@
         "pending": "Pending",
         "overdue": "Overdue",
         "paid": "Paid",
-        "open": "Open"
+        "open": "Open",
+        "sending": "Sending"
       },
       "services": "Services",
       "employees": "Employees",
@@ -1989,7 +1990,10 @@
       "overdue": "Overdue",
       "paid": "Paid",
       "leadSource": "Lead Source",
-      "open": "Open"
+      "open": "Open",
+      "online": "Online",
+      "cash": "Cash",
+      "sending": "Sending"
     }
   },
   "global_search": {

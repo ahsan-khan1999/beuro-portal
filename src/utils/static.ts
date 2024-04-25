@@ -641,6 +641,7 @@ export const staticEnums: Record<string, any> = {
     Overdue: 1,
     Paid: 2,
     Open: 3,
+    sending: 5,
   },
   Frequency: {
     Weekly: 0,
@@ -1423,6 +1424,13 @@ export const sideBar: SideBar[] = [
         title: "sidebar.customer.invoices.pending",
         pathname: "/invoices",
         query: "0",
+        queryName: "status",
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.invoices.sending",
+        pathname: "/invoices",
+        query: "5",
         queryName: "status",
         role: [1, 2],
       },
