@@ -34,6 +34,7 @@ export default function CustomerFilter({
 
   const { t: translate } = useTranslation();
   const router = useRouter();
+
   const checkbox: CheckBoxType[] = [
     {
       label: `${translate("admin.customers_details.table_functions.active")}`,
@@ -44,6 +45,7 @@ export default function CustomerFilter({
       type: "0",
     },
   ];
+
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
     if (inputValue === "") {
@@ -68,15 +70,47 @@ export default function CustomerFilter({
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
+      const newStatus = updatedStatus;
+
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
+
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          {
+            shallow: true,
+          }
+        );
       } else {
         const index = updatedStatus.indexOf(value);
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
       }
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
