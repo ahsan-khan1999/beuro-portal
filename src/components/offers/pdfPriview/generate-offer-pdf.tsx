@@ -1,4 +1,3 @@
-import { PDFResponse } from "@/types/pdf";
 import {
   BlobProvider,
   Document,
