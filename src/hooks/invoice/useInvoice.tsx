@@ -310,6 +310,7 @@ const useInvoice = () => {
     invoiceDetails,
     currentPage,
     invoiceSum,
+    translate
   };
 };
 

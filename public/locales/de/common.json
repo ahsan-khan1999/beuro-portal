@@ -1091,8 +1091,9 @@
       "offer_ID": "Angebots-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
-      "offer_created": "Vorgang erfolgreich",
+      "offer_created": "Operation erfolgreich abgeschlossen",
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
       "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
@@ -1104,6 +1105,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "CSV_button": "Berichte herunterladen",
     "create_invoice": "Rechnung erstellen",
     "description_placeholder": "Bitte tragen Sie hier Ihre Angaben ein...",
     "actions": "Aktion",
