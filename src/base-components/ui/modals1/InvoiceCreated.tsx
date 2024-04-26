@@ -12,10 +12,10 @@ const InvoiceCreated = ({
   onClose: () => void;
   invoiceCreated: Function;
 }) => {
-  
-  const defaultClassName = "mt-0  ";
+  const defaultClassName = "mt-0";
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
     useInvoiceCreatedModal(invoiceCreated);
+
   return (
     <>
       <BaseModal
@@ -29,11 +29,10 @@ const InvoiceCreated = ({
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
           />
-          <p className="text-[#000] font-medium text-[24px] leading-7 mb-5">
+          <p className="text-[#000] font-medium text-2xl border-b border-b-[#000] border-opacity-10 pb-3">
             {translate("invoice.create_invoice_modal.button")}
           </p>
 
-          <hr className="opacity-25 mb-[23px]" />
           <Form
             formFields={fields}
             handleSubmit={handleSubmit}

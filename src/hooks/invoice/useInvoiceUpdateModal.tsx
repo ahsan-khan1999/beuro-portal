@@ -3,20 +3,16 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateCreateInvoiceValidationSchema } from "@/validation/invoiceSchema";
 import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
 import {
-  createInvoice,
   readInvoiceDetails,
-  updateInvoice,
   updateParentInvoice,
 } from "@/api/slices/invoice/invoiceSlice";
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import React, { useEffect } from "react";
-import { updateModalType } from "@/api/slices/globalSlice/global";
 export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   const router = useRouter();
   const { loading, error, invoiceDetails } = useAppSelector(
@@ -44,6 +40,7 @@ export default function useInvoiceUpdateModal(invoiceCreated: Function) {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(createdInvoiceSchema),
   });
+
   const amount = watch("amount");
   const type = watch("type");
 

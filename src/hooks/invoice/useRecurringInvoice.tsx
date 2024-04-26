@@ -16,6 +16,7 @@ export default function useRecurringInvoice(invoiceCreated: () => void) {
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const createdInvoiceSchema =

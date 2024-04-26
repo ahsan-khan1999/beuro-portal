@@ -75,7 +75,7 @@ const stylesheet: HtmlStyles = {
   },
   p: {
     margin: 0,
-    fontSize: 7,
+    // fontSize: 7,
     color: "#272727",
   },
   h1: {

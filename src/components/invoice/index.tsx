@@ -6,8 +6,9 @@ import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
 import useInvoice from "@/hooks/invoice/useInvoice";
 import { useEmptyStates } from "@/utils/hooks";
-import { useTranslation } from "next-i18next";
 import { TableCardLayout } from "@/layout/TableCardLayout";
+import { BaseButton } from "@/base-components/ui/button/base-button";
+import { CSVIcon } from "@/assets/svgs/components/csv-icon";
 
 export default function Invoices() {
   const {
@@ -24,6 +25,7 @@ export default function Invoices() {
     handleFilterChange,
     currentPage,
     invoiceSum,
+    translate,
   } = useInvoice();
 
   const CurrentComponent = useEmptyStates(
@@ -31,8 +33,6 @@ export default function Invoices() {
     currentPageRows.length > 0,
     isLoading
   );
-
-  const { t: translate } = useTranslation();
 
   return (
     <>
@@ -59,6 +59,19 @@ export default function Invoices() {
           </span>
         </div>
       </div>
+
+      {/* <div className="flex items-center justify-end mb-3">
+        <BaseButton
+          buttonText={translate("common.CSV_button")}
+          onClick={() => {}}
+          containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
+          textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+          loading={loading}
+          loaderColor="#4A13E7"
+        >
+          <CSVIcon className="text-primary group-hover:text-primary" />
+        </BaseButton>
+      </div> */}
 
       <TableCardLayout>
         <TableLayout>

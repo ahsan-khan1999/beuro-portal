@@ -28,9 +28,9 @@ export default function useFilter({
     value: string | string[] | {}
   ) => {
     setMoreFilter((prev) => ({ ...prev, [key]: value }));
+
     const { pathname, query } = router;
     delete query[key];
-
     router.replace({
       pathname,
       query,
@@ -40,11 +40,12 @@ export default function useFilter({
   const handleFilterResetToInitial = () => {
     setMoreFilter(moreFilters);
     const { pathname, query } = router;
-    if (query.date || query.leadSource) {
+    if (query.date || query.leadSource || query.paymentType) {
       delete query.date;
       delete query.leadSource;
+      delete query.paymentType;
     }
-    router.replace({  
+    router.replace({
       pathname,
       query,
     });

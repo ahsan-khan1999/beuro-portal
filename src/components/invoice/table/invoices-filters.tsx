@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { Button } from "@/base-components/ui/button/button";
 import addIcon from "@/assets/svgs/plus_icon.svg";
+import InvoicesFilter from "@/base-components/filter/invoices-filter";
 
 export default function InvoicesFilters({
   filter,
@@ -28,6 +29,10 @@ export default function InvoicesFilters({
     {
       label: `${translate("filters.extra_filters.pending")}`,
       type: `${staticEnums.InvoiceStatus.Pending}`,
+    },
+    {
+      label: `${translate("filters.extra_filters.sending")}`,
+      type: `${staticEnums.InvoiceStatus.sending}`,
     },
     {
       label: `${translate("filters.extra_filters.open")}`,
@@ -272,6 +277,13 @@ export default function InvoicesFilters({
             ]}
             label={translate("add_note_dropdown.all_notes")}
           />
+
+          <InvoicesFilter
+            filter={filter}
+            setFilter={setFilter}
+            onFilterChange={handleFilterChange}
+          />
+
           <Button
             inputType="button"
             onClick={() => router.push("/invoices/create-invoice")}

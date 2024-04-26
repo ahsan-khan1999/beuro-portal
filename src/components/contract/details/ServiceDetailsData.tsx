@@ -35,18 +35,18 @@ const ServiceDetailsData = ({
         <div className="rounded-lg px-2 pt-3 bg-[#EDF4FF]">
           <TableLayout>
             <div className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-5">
-              <span className="text-[14px] font-medium text-[#8F8F8F]">
+              <span className="text-sm font-medium text-[#8F8F8F]">
                 {translate("contracts.service_details.title")}
               </span>
-              <span className="text-[14px] font-medium text-[#8F8F8F] mr-1">
+              <span className="text-sm font-medium text-[#8F8F8F] mr-1">
                 {translate("contracts.service_details.description")}
               </span>
 
               <span>
                 {translate("contracts.service_details.price")}({currency})
               </span>
-              <span> {translate("contracts.service_details.unit")}</span>
-              <span> {translate("contracts.service_details.count")}</span>
+              <span>{translate("contracts.service_details.unit")}</span>
+              <span>{translate("contracts.service_details.count")}</span>
               <span>
                 {translate("offers.service_details.detail_headings.discount")}
               </span>
@@ -89,7 +89,7 @@ const ServiceDetailsData = ({
               <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5 bg-white">
                 <div className="grid grid-cols-3">
                   <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
-                    <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    <span className="text-[#4D4D4D] text-sm font-normal">
                       {translate("contracts.service_details.sub_total")}
                     </span>
                     <span className="text-[#4B4B4B] text-base font-medium">
@@ -97,7 +97,7 @@ const ServiceDetailsData = ({
                     </span>
                   </div>
                   <div className="flex flex-col gap-2 ml-5 pr-5 border-r-[2px] border-r-[#EBEBEB]">
-                    <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    <span className="text-[#4D4D4D] text-sm font-normal">
                       {translate("offers.service_details.detail_headings.tax")}
                     </span>
                     <span className="text-[#4B4B4B] text-base font-medium">
@@ -109,7 +109,7 @@ const ServiceDetailsData = ({
                     </span>
                   </div>
                   <div className="flex flex-col gap-2 ml-5">
-                    <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    <span className="text-[#4D4D4D] text-sm font-normal">
                       {translate(
                         "offers.service_details.detail_headings.discount"
                       )}
