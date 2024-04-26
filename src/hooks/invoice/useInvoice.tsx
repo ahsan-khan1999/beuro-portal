@@ -39,7 +39,6 @@ const useInvoice = () => {
   >([]);
 
   const { query } = useRouter();
-
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
@@ -257,7 +256,7 @@ const useInvoice = () => {
           $gte?: string;
           $lte?: string;
         };
-        paymentType?: string[] | string;
+        paymentType?: string | string[];
       } = {
         status: filteredStatus,
       };
@@ -273,7 +272,7 @@ const useInvoice = () => {
         updatedFilter.sort = sortedValue;
         updatedFilter.noteType = searchNoteType;
         updatedFilter.date = searchDate && JSON.parse(searchDate);
-        updatedFilter.paymentType = searchPayment ? searchPayment : undefined;
+        updatedFilter.paymentType = searchPayment;
       }
 
       setFilter(updatedFilter);

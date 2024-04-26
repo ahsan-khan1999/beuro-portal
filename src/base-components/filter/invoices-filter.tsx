@@ -114,35 +114,55 @@ export default function InvoicesFilter({
   //   });
   // };
 
+  // const handleStatusChange = (value: string, isChecked: boolean) => {
+  //   setMoreFilter((prev: FilterType) => {
+  //     // let updatedStatus = new Set(
+  //     //   prev.paymentType !== FiltersDefaultValues.None ? prev.paymentType : []
+  //     // );
+
+  //     // if (isChecked) {
+  //     //   updatedStatus.add(+value);
+  //     // } else {
+  //     //   updatedStatus.delete(+value);
+  //     // }
+
+  //     const paymentMethodSet: string[] = [];
+
+  //     if (typeof prev.paymentType === "object") {
+  //       const array = new Set([...prev.paymentType]);
+
+  //       if (isChecked) {
+  //         array.add(value);
+  //       } else {
+  //         array.delete(value);
+  //       }
+
+  //       paymentMethodSet.push(...array);
+  //     }
+
+  //     // const paymentStatus =
+  //     //   updatedStatus.size > 0 ? Array.from(updatedStatus) : value;
+  //     return { ...prev, paymentType: paymentMethodSet };
+  //   });
+  // };
+
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setMoreFilter((prev: FilterType) => {
-      // let updatedStatus = new Set(
-      //   prev.paymentType !== FiltersDefaultValues.None ? prev.paymentType : []
-      // );
+      let updatedStatus = new Set(
+        prev.paymentType !== FiltersDefaultValues.None ? prev.paymentType : []
+      );
 
-      // if (isChecked) {
-      //   updatedStatus.add(+value);
-      // } else {
-      //   updatedStatus.delete(+value);
-      // }
-
-      const paymentMethodSet: string[] = [];
-
-      if (typeof prev.paymentType === "object") {
-        const array = new Set([...prev.paymentType]);
-
-        if (isChecked) {
-          array.add(value);
-        } else {
-          array.delete(value);
-        }
-
-        paymentMethodSet.push(...array);
+      if (isChecked) {
+        updatedStatus.add(value);
+      } else {
+        updatedStatus.delete(value);
       }
 
-      // const paymentStatus =
-      //   updatedStatus.size > 0 ? Array.from(updatedStatus) : value;
-      return { ...prev, paymentType: paymentMethodSet };
+      const paymentStatus =
+        updatedStatus.size > 0
+          ? Array.from(updatedStatus)
+          : FiltersDefaultValues.None;
+      return { ...prev, paymentType: paymentStatus };
     });
   };
 
