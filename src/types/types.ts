@@ -671,6 +671,7 @@ export interface FilterType {
   type?: string;
   location?: string;
   status?: string[] | string;
+  sending?: string;
   date?: {
     $gte?: string;
     $lte?: string;

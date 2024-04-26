@@ -51,6 +51,7 @@ const useInvoice = () => {
       $lte: FiltersDefaultValues.None,
     },
     status: FiltersDefaultValues.None,
+    sending:FiltersDefaultValues.None,
     paymentType: "0",
   });
 
