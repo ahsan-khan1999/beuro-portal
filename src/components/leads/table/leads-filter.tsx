@@ -233,7 +233,8 @@ export default function LeadsFilter({
                 labelClassName="w-[225px]"
                 options={[
                   {
-                    value: "None",
+                    value:
+                      "Sending pictures,Viewing date,Approximate Offer open,Will contact us,Individual Note, Not Reached, other",
                     label: `${translate("add_note_dropdown.all_notes")}`,
                   },
                   {

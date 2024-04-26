@@ -176,11 +176,11 @@ export const FollowUpNotificationBar = ({
                 <div
                   onClick={() => handleFollowUpsDetails(item.id)}
                   key={index}
-                  className={`pt-[10px] px-4 cursor-pointer hover:bg-primary hover:bg-opacity-10  bg-opacity-10 `}
+                  className={`pt-[10px] px-4 cursor-pointer hover:bg-primary hover:bg-opacity-10  bg-opacity-10`}
                 >
-                  <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
+                  <div className="pb-[5px] flex items-center border-b border-[#000] border-opacity-10">
                     <div
-                      className=" mr-6"
+                      className="mr-6"
                       dangerouslySetInnerHTML={{ __html: item.svg }}
                     />
                     <div>
@@ -196,7 +196,7 @@ export const FollowUpNotificationBar = ({
                             alt="Time Icon"
                             className="mr-[6px]"
                           />
-                          <span className="text-[#393939] text-xs ">
+                          <span className="text-[#393939] text-xs">
                             {item.time},{item.date}
                           </span>
                         </div>
@@ -206,17 +206,17 @@ export const FollowUpNotificationBar = ({
                             alt="Id Icon"
                             className="mr-[6px]"
                           />
-                          <span className="text-[#4B4B4B] text-xs ">
+                          <span className="text-[#4B4B4B] text-xs">
                             {item.refID}
                           </span>
                         </div>
-                        <div className="flex ">
+                        <div className="flex">
                           <Image
                             src={dayIcon}
                             alt="Id Icon"
                             className="mr-[6px]"
                           />
-                          <span className="text-[#4B4B4B] text-xs ">
+                          <span className="text-[#4B4B4B] text-xs">
                             {item.day}
                           </span>
                         </div>
@@ -231,7 +231,7 @@ export const FollowUpNotificationBar = ({
               <div className="flex justify-center py-4">
                 <button
                   onClick={() => handleFollowUps()}
-                  className=" text-primary w-fit text-sm font-medium "
+                  className=" text-primary w-fit text-sm font-medium"
                 >
                   {translate("dashboard_detail.view_all")}
                 </button>

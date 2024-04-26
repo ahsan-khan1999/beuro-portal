@@ -24,11 +24,12 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
           >
             <span className="py-4 truncate">{item.refID}</span>
             <div className="flex items-center gap-x-1">
-              <span className="py-4 truncate">{item.fullName}</span>
-              {item.companyName && (
+              {item.companyName ? (
                 <span className="py-4 truncate text-sm font-normal text-primary">
                   ({item.companyName})
                 </span>
+              ) : (
+                <span className="py-4 truncate">{item.fullName}</span>
               )}
             </div>
 
@@ -52,7 +53,10 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                 })
               }
             >
-              <div className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center">
+              <div
+                className="p-[5px] rounded-md w-[27px] h-[27px] border border-primary flex justify-center items-center"
+                title={translate("customers.table_headings.edit")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8"
