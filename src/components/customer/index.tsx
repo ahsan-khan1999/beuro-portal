@@ -35,6 +35,7 @@ export default function Customers() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
+
       <TableCardLayout>
         <TableLayout>
           <TableHeading />

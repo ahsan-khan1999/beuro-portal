@@ -66,12 +66,13 @@ const TableRows = ({
           >
             <span className="py-4 truncate">{item.contractNumber}</span>
             <div className="flex items-center gap-x-1">
-              <span className="py-4 truncate">
-                {item.offerID?.leadID?.customerDetail?.fullName}
-              </span>
-              {item.offerID?.leadID?.customerDetail?.companyName && (
+              {item.offerID?.leadID?.customerDetail?.companyName ? (
                 <span className="py-4 truncate text-sm font-normal text-primary">
                   ({item.offerID?.leadID?.customerDetail?.companyName})
+                </span>
+              ) : (
+                <span className="py-4 truncate">
+                  {item.offerID?.leadID?.customerDetail?.fullName}
                 </span>
               )}
             </div>
@@ -182,6 +183,7 @@ const TableRows = ({
             <span
               className="py-4 flex justify-center items-center cursor-pointer  "
               onClick={(e) => handleImageUpload(item?.id, e)}
+              title={translate("offers.table_headings.images")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +221,6 @@ const TableRows = ({
             </span>
             {(item.signedContracts && item.signedContracts?.length > 0 && (
               <span
-                className="py-4 flex justify-center items-center cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   item.signedContracts &&
@@ -228,6 +229,8 @@ const TableRows = ({
                         ?.link
                     );
                 }}
+                title={translate("contracts.table_headings.pdf")}
+                className="py-4 flex justify-center items-center cursor-pointer"
               >
                 <PdfIcon
                   pathClass={
@@ -244,8 +247,9 @@ const TableRows = ({
               </span>
             )}
             <span
-              className="py-4 flex justify-center items-center cursor-pointer"
               onClick={(e) => openModal(item?.id, e)}
+              title={translate("contracts.table_headings.notes")}
+              className="py-4 flex justify-center items-center cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -288,6 +292,7 @@ const TableRows = ({
 
             <span
               onClick={(e) => e.stopPropagation()}
+              title={translate("common.mail")}
               className="py-4 flex justify-center items-center"
             >
               <svg
@@ -321,6 +326,7 @@ const TableRows = ({
 
             <span
               onClick={(e) => e.stopPropagation()}
+              title={translate("contracts.table_headings.edit")}
               className="flex justify-center items-center cursor-pointer"
             >
               <div

@@ -35,12 +35,13 @@ const TableRows = ({
           >
             <span className="py-4 truncate">{item.invoiceNumber}</span>
             <div className="flex items-center gap-x-1">
-              <span className="py-4 truncate">
-                {item?.customerDetail?.fullName}
-              </span>
-              {item?.customerDetail?.companyName && (
+              {item?.customerDetail?.companyName ? (
                 <span className="py-4 truncate text-sm font-normal text-primary">
                   ({item?.customerDetail?.companyName})
+                </span>
+              ) : (
+                <span className="py-4 truncate">
+                  {item?.customerDetail?.fullName}
                 </span>
               )}
             </div>
@@ -90,6 +91,7 @@ const TableRows = ({
             </span>
             <span
               onClick={(e) => handleNotes(item?.id, e)}
+              title={translate("contracts.table_headings.notes")}
               className="py-4 cursor-pointer flex justify-center items-center"
             >
               <svg
@@ -132,6 +134,7 @@ const TableRows = ({
             </span>
             <span
               onClick={(e) => e.stopPropagation()}
+              title={translate("contracts.table_headings.edit")}
               className="cursor-pointer flex justify-center items-center"
             >
               <div
