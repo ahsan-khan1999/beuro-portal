@@ -26,6 +26,7 @@ export default function Invoices() {
     currentPage,
     invoiceSum,
     translate,
+    handleDownloadInvoiceReport,
   } = useInvoice();
 
   const CurrentComponent = useEmptyStates(
@@ -60,10 +61,10 @@ export default function Invoices() {
         </div>
       </div>
 
-      {/* <div className="flex items-center justify-end mb-3">
+      <div className="flex items-center justify-end mb-3">
         <BaseButton
           buttonText={translate("common.CSV_button")}
-          onClick={() => {}}
+          onClick={handleDownloadInvoiceReport}
           containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
           textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
           loading={loading}
@@ -71,7 +72,7 @@ export default function Invoices() {
         >
           <CSVIcon className="text-primary group-hover:text-primary" />
         </BaseButton>
-      </div> */}
+      </div>
 
       <TableCardLayout>
         <TableLayout>

@@ -9,6 +9,7 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
+  downloadInvoiceReports,
   readInvoice,
   sendOfferByPost,
   setInvoiceDetails,
@@ -21,6 +22,7 @@ import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNot
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import localStoreUtil from "@/utils/localstore.util";
 import { DEFAULT_INVOICE } from "@/utils/static";
+import { downloadFile } from "@/utils/utility";
 
 const useInvoice = () => {
   const {
@@ -51,7 +53,7 @@ const useInvoice = () => {
       $lte: FiltersDefaultValues.None,
     },
     status: FiltersDefaultValues.None,
-    sending:FiltersDefaultValues.None,
+    sending: FiltersDefaultValues.None,
     paymentType: "0",
   });
 
@@ -214,6 +216,19 @@ const useInvoice = () => {
     if (response?.payload) invoiceCreatedHandler();
   };
 
+  const handleDownloadInvoiceReport = async () => {
+    const response = await dispatch(
+      downloadInvoiceReports({
+        params: {
+          filter: { date: filter["date"], paymentType: filter["paymentType"] },
+        },
+      })
+    );
+    if (response.payload) {
+      downloadFile(response.payload?.excelFile);
+    }
+  };
+
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
@@ -310,7 +325,8 @@ const useInvoice = () => {
     invoiceDetails,
     currentPage,
     invoiceSum,
-    translate
+    translate,
+    handleDownloadInvoiceReport,
   };
 };
 
