@@ -143,7 +143,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
                 id: `address.${i}.streetNumber`,
                 name: `address.${i}.streetNumber`,

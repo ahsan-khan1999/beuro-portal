@@ -8,7 +8,7 @@ import React from "react";
 const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, renderModal } =
-    useCustomerDetail(false);
+    useCustomerDetail({ detail: false, idAddNewCustomer: true });
 
   const { t: translate } = useTranslation();
 

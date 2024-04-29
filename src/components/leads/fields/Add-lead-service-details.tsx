@@ -267,7 +267,7 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
             field: {
               type: Field.multiSelect,
               //@ts-expect-error
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "otherServices",
               name: "otherServices",
               value: contentList?.map((item) => item.id),

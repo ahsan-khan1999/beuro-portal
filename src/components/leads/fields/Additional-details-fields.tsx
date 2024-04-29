@@ -1,10 +1,6 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateLeadsAdditionalDetailsFormField,
-  GenerateLeadsFormField,
-} from "@/types";
 import { useTranslation } from "next-i18next";
+import { FormField, GenerateLeadsAdditionalDetailsFormField } from "@/types";
 
 export const LeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFormField =
   (loading, control, onClick, leadDetails) => {
