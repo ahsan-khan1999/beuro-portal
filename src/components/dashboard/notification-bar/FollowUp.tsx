@@ -190,17 +190,17 @@ export const FollowUpNotificationBar = ({
                         </span>
                       </div>
                       <div className="flex items-center justify-between space-x-3 mt-1">
-                        <div className="flex ">
+                        <div className="flex items-center">
                           <Image
                             src={timeIcon}
                             alt="Time Icon"
                             className="mr-[6px]"
                           />
-                          <span className="text-[#393939] text-xs">
+                          <span className="text-[#4B4B4B] text-xs">
                             {item.time},{item.date}
                           </span>
                         </div>
-                        <div className="flex">
+                        <div className="flex items-center">
                           <Image
                             src={idIcon}
                             alt="Id Icon"
@@ -210,7 +210,7 @@ export const FollowUpNotificationBar = ({
                             {item.refID}
                           </span>
                         </div>
-                        <div className="flex">
+                        <div className="flex items-center">
                           <Image
                             src={dayIcon}
                             alt="Id Icon"

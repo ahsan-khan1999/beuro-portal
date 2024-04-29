@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     maxWidth: 531,
     width: "100%",
-    columnGap: 3,
+    // columnGap: 3,
   },
   descriptionTextTitle: {
     color: "#000",
@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 180,
-    // marginRight: 5,
+    width: 170,
+    marginRight: 10,
   },
   priceHeader: {
     flexDirection: "row",
