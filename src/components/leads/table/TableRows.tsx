@@ -121,7 +121,7 @@ const TableRows = ({
               </div>
             </div>
             {/* <div className="flex"> */}
-            <div className="grid grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)]">
+            <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) => handleImageUpload(item?.id, e)}

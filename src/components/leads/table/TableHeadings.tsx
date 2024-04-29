@@ -36,7 +36,7 @@ const TableHeadings = () => {
         </div>
       </div>
       {/* <div className="flex"> */}
-      <div className="grid grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)] pt-2 pb-5">
+      <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] pt-2 pb-5">
         <span className="font-medium text-[#8F8F8F] flex items-center justify-center">
           {translate("common.actions")}
         </span>
