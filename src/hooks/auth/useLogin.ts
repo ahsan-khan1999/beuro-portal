@@ -14,8 +14,8 @@ export const useLoginForm = () => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
   useEffect(() => {
-    dispatch(setErrorMessage(null))
-  }, [])
+    dispatch(setErrorMessage(null));
+  }, []);
 
   const schema = generateLoginValidation(translate);
   const {
@@ -28,6 +28,8 @@ export const useLoginForm = () => {
   });
   const fields = generateLoginFormField(register, loading);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
+
     dispatch(loginUser({ data, router, setError, translate }));
     // router.push("/dashboard")
   };

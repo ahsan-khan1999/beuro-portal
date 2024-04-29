@@ -45,86 +45,89 @@ const TableRows = ({
       {dataToAdd?.map((item: Lead, index: number) => {
         return (
           <div className="flex">
-            <div
-              onClick={() => {
-                router.push({
-                  pathname: "/leads/details",
-                  query: { ...router.query, lead: item?.id },
-                });
-              }}
-              key={index}
-              className={`cursor-pointer items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(400px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(170px,_170px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(130px,_130px)_minmax(190px,_190px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(130px,_130px)_minmax(190px,_190px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(190px,_190px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(190px,_190px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(70px,4fr)_minmax(70px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)] border-t border-t-[#E7EAEE]`}
-            >
-              <span className="py-4 truncate">{item?.refID}</span>
-              <div className="flex items-center gap-x-1">
-                {item.customerDetail.companyName ? (
-                  <span className="py-4 truncate text-sm font-normal text-primary">
-                    ({item.customerDetail.companyName})
-                  </span>
-                ) : (
-                  <span className="py-4 truncate">
-                    {item.customerDetail?.fullName}
-                  </span>
-                )}
-              </div>
-              <span className="py-4 truncate block mlg:hidden maxSize:block">
-                {item.customerDetail?.email}
-              </span>
-              <span className="py-4 truncate mlg:hidden xLarge:block">
-                {item.customerDetail?.phoneNumber}
-              </span>
-              <span className="py-4 flex items-center">
-                {formatDate(item.createdAt)}
-              </span>
-              <span className="py-4 truncate mlg:hidden xMaxSize:block">
-                {item.customerDetail?.address?.country}
-              </span>
-              <span
-                className="py-4 flex items-center"
-                onClick={(e) => e.stopPropagation()}
+            <div className="mlg:w-full">
+              <div
+                onClick={() => {
+                  router.push({
+                    pathname: "/leads/details",
+                    query: { ...router.query, lead: item?.id },
+                  });
+                }}
+                key={index}
+                className={`cursor-pointer items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(400px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(170px,_170px)] mlg:grid-cols-[minmax(50px,_50px)_minmax(50px,_4fr)_minmax(130px,_130px)_minmax(190px,_190px)] xlg:grid-cols-[minmax(50px,_50px)_minmax(80px,_4fr)_minmax(130px,_130px)_minmax(190px,_190px)] maxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(190px,_190px)] xMaxSize:grid-cols-[minmax(50px,_50px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(190px,_190px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(70px,4fr)_minmax(70px,_3fr)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)] border-t border-t-[#E7EAEE]`}
               >
-                <DropDown
-                  key={item.id}
-                  items={items}
-                  selectedItem={translate(
-                    `leads.lead_dropdown_status.${item?.leadStatus}`
+                <span className="py-4 truncate">{item?.refID}</span>
+                <div className="flex items-center gap-x-1">
+                  {item.customerDetail.companyName ? (
+                    <span className="py-4 truncate text-sm font-normal text-primary">
+                      ({item.customerDetail.companyName})
+                    </span>
+                  ) : (
+                    <span className="py-4 truncate">
+                      {item.customerDetail?.fullName}
+                    </span>
                   )}
-                  onItemSelected={(status) => {
-                    onStatusChange(item.id, status, "lead");
-                  }}
-                  dropDownClassName={`${
-                    item?.leadStatus === "Open"
-                      ? "bg-[#4A13E7]"
-                      : item?.leadStatus === "InProcess"
-                      ? "bg-[#f5d60f]"
-                      : item?.leadStatus === "Close"
-                      ? "bg-[#45C769]"
-                      : "bg-[#FF0000]"
-                  } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
-                  dropDownTextClassName={`text-white text-base font-medium me-1`}
-                  dropDownItemsContainerClassName="w-full"
-                  dropDownIconClassName={"text-white"}
-                  isSecondLastIndex={
-                    dataToAdd &&
-                    dataToAdd.length > 5 &&
-                    index === dataToAdd.length - 2
-                  }
-                  isLastIndex={
-                    dataToAdd &&
-                    dataToAdd.length > 5 &&
-                    index === dataToAdd.length - 1
-                  }
-                  isLead={true}
-                />
-              </span>
-            </div>
-            <div className="flex">
-              <div className="grid grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)]">
+                </div>
+                <span className="py-4 truncate block mlg:hidden maxSize:block">
+                  {item.customerDetail?.email}
+                </span>
+                <span className="py-4 truncate mlg:hidden xLarge:block">
+                  {item.customerDetail?.phoneNumber}
+                </span>
+                <span className="py-4 flex items-center">
+                  {formatDate(item.createdAt)}
+                </span>
+                <span className="py-4 truncate mlg:hidden xMaxSize:block">
+                  {item.customerDetail?.address?.country}
+                </span>
                 <span
-                  className="py-4 flex justify-center items-center cursor-pointer"
-                  onClick={(e) => handleImageUpload(item?.id, e)}
-                  title={translate("leads.table_headings.images")}
+                  className="py-4 flex items-center"
+                  onClick={(e) => e.stopPropagation()}
                 >
+                  <DropDown
+                    key={item.id}
+                    items={items}
+                    selectedItem={translate(
+                      `leads.lead_dropdown_status.${item?.leadStatus}`
+                    )}
+                    onItemSelected={(status) => {
+                      onStatusChange(item.id, status, "lead");
+                    }}
+                    dropDownClassName={`${
+                      item?.leadStatus === "Open"
+                        ? "bg-[#4A13E7]"
+                        : item?.leadStatus === "InProcess"
+                        ? "bg-[#f5d60f]"
+                        : item?.leadStatus === "Close"
+                        ? "bg-[#45C769]"
+                        : "bg-[#FF0000]"
+                    } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                    dropDownTextClassName={`text-white text-base font-medium me-1`}
+                    dropDownItemsContainerClassName="w-full"
+                    dropDownIconClassName={"text-white"}
+                    isSecondLastIndex={
+                      dataToAdd &&
+                      dataToAdd.length > 5 &&
+                      index === dataToAdd.length - 2
+                    }
+                    isLastIndex={
+                      dataToAdd &&
+                      dataToAdd.length > 5 &&
+                      index === dataToAdd.length - 1
+                    }
+                    isLead={true}
+                  />
+                </span>
+              </div>
+            </div>
+            {/* <div className="flex"> */}
+            <div className="grid grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(50px,_50px)]">
+              <span
+                className="py-3 flex justify-center items-center cursor-pointer"
+                onClick={(e) => handleImageUpload(item?.id, e)}
+                title={translate("leads.table_headings.images")}
+              >
+                <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="34"
@@ -159,12 +162,14 @@ const TableRows = ({
                     />
                   </svg>
                 </span>
+              </span>
 
-                <span
-                  className="py-4 flex justify-center items-center  cursor-pointer "
-                  onClick={(e) => openModal(item?.id, e)}
-                  title={translate("leads.table_headings.note")}
-                >
+              <span
+                className="py-3 flex justify-center items-center cursor-pointer"
+                onClick={(e) => openModal(item?.id, e)}
+                title={translate("leads.table_headings.note")}
+              >
+                <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="33"
@@ -203,17 +208,19 @@ const TableRows = ({
                     />
                   </svg>
                 </span>
+              </span>
 
-                <span
-                  className="flex justify-center items-center cursor-pointer"
-                  onClick={() =>
-                    router.push({
-                      pathname: "/leads/details",
-                      query: { ...router.query, lead: item?.id },
-                    })
-                  }
-                  title={translate("leads.table_headings.edit")}
-                >
+              <span
+                className="flex justify-center items-center cursor-pointer"
+                onClick={() =>
+                  router.push({
+                    pathname: "/leads/details",
+                    query: { ...router.query, lead: item?.id },
+                  })
+                }
+                title={translate("leads.table_headings.edit")}
+              >
+                <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
                   <div className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -228,9 +235,10 @@ const TableRows = ({
                       />
                     </svg>
                   </div>
-                </span>
-              </div>
+                </div>
+              </span>
             </div>
+            {/* </div> */}
           </div>
         );
       })}
