@@ -2,7 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateOffersFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
-export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
+export const AddInvoiceAdditionalDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
   control,
@@ -28,7 +28,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "content",
         options:
           content?.map((item) => ({
-            label: item.contentName,
+            label: item.invoiceContent.title,
             value: item.id,
           })) || [],
         control,

@@ -156,7 +156,7 @@ export function formatDateString(dateString) {
   // const minutes = String(date.getUTCMinutes()).padStart(2, '0');
   // const seconds = String(date.getUTCSeconds()).padStart(2, '0');
 
-  return `${day}-${month}-${year}`;
+  return `${day}/${month}/${year}`;
 }
 
 export function formatDateToCustomString(dateString, ShowUTC = true) {

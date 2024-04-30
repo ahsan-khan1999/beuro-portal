@@ -45,7 +45,9 @@ export default function OfferFilter({
           ...router.query,
           page: 1,
           date: JSON.stringify(moreFilter?.date),
-          leadSource: moreFilter?.leadSource,
+          ...(moreFilter?.leadSource && {
+            leadSource: moreFilter?.leadSource,
+          }),
         },
       },
       undefined,

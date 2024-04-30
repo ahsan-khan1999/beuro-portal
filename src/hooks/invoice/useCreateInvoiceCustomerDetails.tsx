@@ -76,6 +76,8 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   const selectedContent = watch("content");
   // const leadID = watch("leadID");
 
+  console.log({ customerType });
+
   useEffect(() => {
     if (type && customerID)
       dispatch(
@@ -110,6 +112,8 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         gender: staticEnums["Gender"][invoiceDetails?.customerDetail?.gender],
         time: invoiceDetails?.time,
       });
+    } else {
+      setValue("type", "New Customer");
     }
   }, [invoiceDetails?.id]);
 

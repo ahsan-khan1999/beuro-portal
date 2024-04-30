@@ -3,6 +3,7 @@ import { Button } from "@/base-components/ui/button/button";
 import followUpIcon from "@/assets/svgs/follow-up.svg";
 import timeIcon from "@/assets/svgs/time.svg";
 import idIcon from "@/assets/svgs/id.svg";
+import licenseIcon from "@/assets/svgs/driver-license-icon.svg";
 import dateIcon from "@/assets/svgs/Vector-date.svg";
 import deleteIcon from "@/assets/svgs/Vector-delete.svg";
 import Image from "next/image";
@@ -83,7 +84,7 @@ const FollowUpDropDown = () => {
                         </div>
                         <div className="flex items-center">
                           <Image
-                            src={idIcon}
+                            src={licenseIcon}
                             alt="Id Icon"
                             className="mr-[10px]"
                           />
@@ -103,16 +104,13 @@ const FollowUpDropDown = () => {
                         )}
                         {days > 0 ? (
                           <div
-                            className="flex items-center absolute right-5"
+                            className="flex items-center absolute right-5 top-4"
                             onClick={(e) => handleDeleteFollowUp(item.id, e)}
+                            title="delete"
                           >
-                            <div className="ml-2 border-2 border-red rounded-md p-1">
-                              <Image
-                                src={deleteIcon}
-                                alt="Id Icon"
-                                className=""
-                              />
-                            </div>
+                            {/* <div className="ml-2 border-2 border-red rounded-md p-1"> */}
+                            <Image src={deleteIcon} alt="Id Icon" />
+                            {/* </div> */}
                           </div>
                         ) : null}
                       </div>

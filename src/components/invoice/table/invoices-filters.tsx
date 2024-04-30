@@ -240,10 +240,11 @@ export default function InvoicesFilters({
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
             options={[
-              {
-                value: "None",
-                label: `${translate("add_note_dropdown.all_notes")}`,
-              },
+              // {
+              //   value:
+              //     "Sending pictures,Viewing date,Approximate Offer open,Will contact us,Individual Note,Not Reached,other",
+              //   label: `${translate("add_note_dropdown.all_notes")}`,
+              // },
               {
                 value: "Sending pictures",
                 label: `${translate("add_note_dropdown.sending_picture")}`,
