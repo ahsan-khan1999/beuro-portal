@@ -8,6 +8,7 @@ import ContractFilter from "@/base-components/filter/contracts-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
+
 export default function ContractFilters({
   filter,
   setFilter,
@@ -225,10 +226,10 @@ export default function ContractFilters({
               containerClassName="w-[225px]"
               labelClassName="w-[225px]"
               options={[
-                {
-                  value: "None",
-                  label: `${translate("add_note_dropdown.all_notes")}`,
-                },
+                // {
+                //   value: "None",
+                //   label: `${translate("add_note_dropdown.all_notes")}`,
+                // },
                 {
                   value: "Sending pictures",
                   label: `${translate("add_note_dropdown.sending_picture")}`,

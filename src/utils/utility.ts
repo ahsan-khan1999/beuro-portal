@@ -410,7 +410,7 @@ export function formatDateReverse(date: string) {
 }
 export function formatDateTimeToDate(date: string) {
   if (!date) return null;
-  return moment(date).format("DD-MM-YYYY");
+  return moment(date).format("DD/MM/YYYY");
 }
 
 export function pdfDateFormat(date: string, locale: string) {

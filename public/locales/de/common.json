@@ -1106,6 +1106,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "filters": "Filter",
     "CSV_button": "Berichte herunterladen",
     "create_invoice": "Rechnung erstellen",
     "description_placeholder": "Bitte tragen Sie hier Ihre Angaben ein...",

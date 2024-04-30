@@ -1114,6 +1114,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "filters":"Filters",
     "CSV_button": "Download Reports",
     "create_invoice": "Create Invoice",
     "description_placeholder": "Please write your detail here...",

@@ -1,10 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  FieldValues,
-  SubmitHandler,
-  UseFormRegister,
-  useForm,
-} from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -90,6 +85,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         companyName: leadDetails?.customerDetail?.companyName,
         gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
       });
+    } else {
+      setValue("type", "New Customer");
     }
   }, [leadDetails.id]);
 
