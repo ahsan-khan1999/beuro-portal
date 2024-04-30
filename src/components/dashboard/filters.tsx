@@ -2,7 +2,6 @@ import SelectField from "@/base-components/filter/fields/select-field";
 import { DashboardFiltersToggle } from "@/enums/dashboard";
 import { FiltersComponentProps } from "@/types";
 import { getKeyByValue } from "@/utils/auth.util";
-import { useOutsideClick } from "@/utils/hooks";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 

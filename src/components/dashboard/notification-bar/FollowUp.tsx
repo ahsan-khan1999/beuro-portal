@@ -25,6 +25,7 @@ import {
   getDaysDifference,
 } from "@/utils/utility";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import driverLicenseIcon from "@/assets/svgs/driver-license-icon.svg";
 
 export const FollowUpNotificationBar = ({
   dashboard,
@@ -103,7 +104,6 @@ export const FollowUpNotificationBar = ({
     dispatch(updateModalType(ModalType.SELECTED_LEADS_DETAIL));
   };
 
-  // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.FOLLOW_UPS]: (
       <FollowUps
@@ -164,7 +164,7 @@ export const FollowUpNotificationBar = ({
   return (
     <>
       <div className="bg-white rounded-[20px] h-[397.089px]">
-        <h1 className=" mb-3 ml-[40px] pt-5 text-[#18181B] font-medium">
+        <h1 className="mb-3 ml-[40px] pt-5 text-[#18181B] font-medium">
           {translate("dashboard_detail.follow_up_heading")}
         </h1>
 
@@ -176,47 +176,45 @@ export const FollowUpNotificationBar = ({
                 <div
                   onClick={() => handleFollowUpsDetails(item.id)}
                   key={index}
-                  className={`pt-[10px] px-4 cursor-pointer hover:bg-primary hover:bg-opacity-10  bg-opacity-10 `}
+                  className={`cursor-pointer mt-2`}
                 >
-                  <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
+                  <div className="py-2 px-5 rounded-md flex items-center bg-[#F1F1F1] hover:bg-primary hover:bg-opacity-10">
                     <div
-                      className=" mr-6"
+                      className="mr-6"
                       dangerouslySetInnerHTML={{ __html: item.svg }}
                     />
                     <div>
-                      <div>
-                        <span className="text-dark text-sm">
-                          {item.title}:{" "}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between space-x-3 mt-1">
-                        <div className="flex ">
+                      <span className="text-[#1E1E1E] text-sm font-medium">
+                        {item.title}
+                      </span>
+                      <div className="flex items-center justify-between space-x-3 mt-2">
+                        <div className="flex items-center">
                           <Image
                             src={timeIcon}
                             alt="Time Icon"
                             className="mr-[6px]"
                           />
-                          <span className="text-[#393939] text-xs ">
+                          <span className="text-[#4B4B4B] text-xs">
                             {item.time},{item.date}
                           </span>
                         </div>
-                        <div className="flex">
+                        <div className="flex items-center">
                           <Image
-                            src={idIcon}
+                            src={driverLicenseIcon}
                             alt="Id Icon"
                             className="mr-[6px]"
                           />
-                          <span className="text-[#4B4B4B] text-xs ">
+                          <span className="text-[#4B4B4B] text-xs">
                             {item.refID}
                           </span>
                         </div>
-                        <div className="flex ">
+                        <div className="flex items-center">
                           <Image
                             src={dayIcon}
                             alt="Id Icon"
                             className="mr-[6px]"
                           />
-                          <span className="text-[#4B4B4B] text-xs ">
+                          <span className="text-[#4B4B4B] text-xs">
                             {item.day}
                           </span>
                         </div>
@@ -231,7 +229,7 @@ export const FollowUpNotificationBar = ({
               <div className="flex justify-center py-4">
                 <button
                   onClick={() => handleFollowUps()}
-                  className=" text-primary w-fit text-sm font-medium "
+                  className=" text-primary w-fit text-sm font-medium"
                 >
                   {translate("dashboard_detail.view_all")}
                 </button>

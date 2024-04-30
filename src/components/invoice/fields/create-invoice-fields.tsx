@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateInvoiceFormField } from "@/types";
-import { disablePastDate } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
 
 export const CreateInvoiceFormField: GenerateInvoiceFormField = (
@@ -18,10 +17,12 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
     Number(invoiceDetails?.remainingAmount);
   const formField: FormField[] = [
     {
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 gap-[23px] ",
+        className:
+          "grid grid-cols-2 gap-[23px] rounded-t-lg px-2 pt-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -60,7 +61,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               name: "remainingAmount",
               value: totalAmount?.toFixed(2),
               register,
-              disabled:true
+              disabled: true,
             },
           },
         ],
@@ -68,7 +69,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
     },
 
     {
-      containerClass: "mt-4 mb-[12px]",
+      containerClass: "px-2 pt-4 bg-[#EDF4FF]",
       field: {
         type: Field.div,
         id: "div-field",
@@ -98,10 +99,11 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
                     name: "type",
                     register,
                     className: "text-sm",
+                    colorClasses: "bg-transparent",
                   },
                 },
                 {
-                  containerClass: "mb-0",
+                  containerClass: "mb-0 ",
                   field: {
                     type: Field.radio,
                     value: "1",
@@ -112,6 +114,7 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
                     name: "type",
                     register,
                     className: "text-sm",
+                    colorClasses: "bg-transparent",
                   },
                 },
               ],
@@ -122,53 +125,62 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
     },
 
     {
-      containerClass: "mb-0",
-
       field: {
-        type: Field.input,
-        className:
-          "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-        inputType: "number",
-        id: "amount",
-        name: "amount",
-        // placeholder: "20000 CHF",
-        register,
-        percentage: (type === "1" && "%") || "",
-        step: "0.01",
-      },
-    },
+        type: Field.div,
+        id: "div-field",
+        className: "flex flex-col gap-y-5 rounded-b-lg px-2 py-3 bg-[#EDF4FF]",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.input,
+              className:
+                "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-base font-normal",
+              inputType: "number",
+              id: "amount",
+              name: "amount",
+              register,
+              percentage: (type === "1" && "%") || "",
+              step: "0.01",
+            },
+          },
 
-    {
-      containerClass: "mb-0 mt-4",
-      label: {
-        text: `${translate("invoice.create_invoice_modal.payment_method")}`,
-        htmlFor: "paymentType",
-        className: "mb-[12px]",
-      },
-      field: {
-        className:
-          "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
-        type: Field.select,
-        value: data ? data?.paymentType : "",
-        id: "paymentType",
-        name: "paymentType",
+          {
+            containerClass: "mb-0",
+            label: {
+              text: `${translate(
+                "invoice.create_invoice_modal.payment_method"
+              )}`,
+              htmlFor: "paymentType",
+              className: "mb-[12px]",
+            },
+            field: {
+              className:
+                "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-base font-normal",
+              type: Field.select,
+              value: data ? data?.paymentType : "",
+              id: "paymentType",
+              name: "paymentType",
 
-        options: [
-          { value: "Online", label: `${translate("common.online")}` },
-          { value: "Cash", label: `${translate("common.cash")}` },
+              options: [
+                { value: "Online", label: `${translate("common.online")}` },
+                { value: "Cash", label: `${translate("common.cash")}` },
+              ],
+              control,
+            },
+          },
         ],
-        control,
       },
     },
-
-
 
     {
       containerClass: "mb-0 mt-[13px]",
       field: {
         type: Field.button,
         id: "button",
-        text: data ? `${translate("invoice.create_invoice_modal.update_invoice")}` : `${translate("invoice.create_invoice_modal.button")}`,
+        text: data
+          ? `${translate("invoice.create_invoice_modal.update_invoice")}`
+          : `${translate("invoice.create_invoice_modal.button")}`,
         inputType: "submit",
         className: "hover:bg-none",
         loading,

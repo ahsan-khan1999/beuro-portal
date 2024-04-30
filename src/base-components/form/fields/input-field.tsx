@@ -3,7 +3,6 @@ import { InputProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { InputEmail } from "@/assets/svgs/components/inputEmail";
 import addtionalDetailImg from "@/assets/pngs/addtional_details.png";
 import { useTranslation } from "next-i18next";
 
@@ -29,9 +28,9 @@ export const InputField = ({
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
   const { t: translate } = useTranslation();
-  const defaultClasses = `border border-borderColor rounded-lg w-full h-12 ${
+  const defaultClasses = `border border-borderColor rounded-lg w-full h-12 bg-white ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
-  } py-[10px] outline-none text-dark text-sm focus:border-primary bg-white`;
+  } py-[10px] outline-none text-dark text-sm focus:border-primary`;
 
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);

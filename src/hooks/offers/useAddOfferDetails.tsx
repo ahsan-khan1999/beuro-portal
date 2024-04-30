@@ -112,6 +112,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
           staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
         time: offerDetails?.time,
       });
+    } else {
+      setValue("type", "New Customer");
     }
   }, [offerDetails?.id]);
 

@@ -128,6 +128,7 @@ const EditOffersDetailsData = () => {
         onClose={onClose}
         routeHandler={route}
         heading={translate("common.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (

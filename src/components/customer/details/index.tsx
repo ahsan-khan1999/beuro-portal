@@ -1,10 +1,10 @@
 import { Layout } from "@/layout";
-import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
 import DetailsData from "../DetailsData";
 import CustomerForm from "../CustomerForm";
-import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import { formatDateTimeToDate } from "@/utils/utility";
+import DetailsCard from "@/layout/customers/DetailsCard";
+import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const CustomerDetails = () => {
@@ -20,9 +20,7 @@ const CustomerDetails = () => {
     deleteHandler,
     renderModal,
     loading,
-  } = useCustomerDetail(true);
-
-  console.log(customerDetail);
+  } = useCustomerDetail({ detail: true, idAddNewCustomer: false });
 
   return (
     <Layout>

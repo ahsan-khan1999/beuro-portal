@@ -230,7 +230,8 @@
         "pending": "Pending",
         "overdue": "Overdue",
         "paid": "Paid",
-        "open": "Open"
+        "open": "Open",
+        "sending": "Sending"
       },
       "services": "Services",
       "employees": "Employees",
@@ -785,6 +786,7 @@
       "confirm_button": "Send Confirmation",
       "contract_id": "Contarct ID",
       "offer_title": "Offer Title",
+      "invoice_title": "Invoice Title",
       "worker": "Worker",
       "email_status": "Email Status",
       "offer_id": "Offer ID",
@@ -1100,8 +1102,9 @@
       "offer_ID": "Enter Offer ID",
       "are_you_delete": "Are you sure you want to delete this Offer?",
       "delete_note": "Are you sure you want to delete this Note?",
-      "offer_created": "Operation Successful",
-      "offer_created_des": "Thanks for updating offer we are happy to have you. ",
+      "offer_created": "Operation Successfully",
+      "offer_created_des": "Thanks for updating offer we are happy to have you.",
+      "lead_created_des": "Thanks for creating Lead we are happy to have you.",
       "offer_email_sent": "Email Sent Successfully",
       "email_sent_des": "Thanks for updating offer we are happy to have you.",
       "updating_contract": "Thanks for updating contract we are happy to have you.",
@@ -1111,6 +1114,8 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "filters":"Filters",
+    "CSV_button": "Download Reports",
     "create_invoice": "Create Invoice",
     "description_placeholder": "Please write your detail here...",
     "actions": "Actions",
@@ -1989,7 +1994,10 @@
       "overdue": "Overdue",
       "paid": "Paid",
       "leadSource": "Lead Source",
-      "open": "Open"
+      "open": "Open",
+      "online": "Online",
+      "cash": "Cash",
+      "sending": "Sending"
     }
   },
   "global_search": {

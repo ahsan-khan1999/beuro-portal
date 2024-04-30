@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateInvoiceFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { FormField, GenerateInvoiceFormField } from "@/types";
 
 export const CreateRecurringInvoiceFrequencyFormField: GenerateInvoiceFormField =
   (register, loading, control, markItRecuring, invoiceDetails) => {
@@ -16,7 +16,7 @@ export const CreateRecurringInvoiceFrequencyFormField: GenerateInvoiceFormField 
         },
         field: {
           type: Field.date,
-          className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+          className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
           id: "dateOfNextInvoice",
           name: "dateOfNextInvoice",
           register,
@@ -24,7 +24,7 @@ export const CreateRecurringInvoiceFrequencyFormField: GenerateInvoiceFormField 
         },
       },
       {
-        containerClass: `mb-0 mt-4 `,
+        containerClass: `mb-0 mt-4`,
         label: {
           text: `${translate("invoice.create_invoice_modal.frequency")}`,
           htmlFor: "frequency",
@@ -32,7 +32,7 @@ export const CreateRecurringInvoiceFrequencyFormField: GenerateInvoiceFormField 
         },
         field: {
           className:
-            "!p-4 !h-[58px] !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
+            "!p-4 !h-[58px] !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-base font-normal",
           value: " ",
           type: Field.select,
           id: "frequency",

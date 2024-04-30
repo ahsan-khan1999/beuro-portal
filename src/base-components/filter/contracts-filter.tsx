@@ -11,6 +11,9 @@ import { useTranslation } from "next-i18next";
 import { staticEnums } from "@/utils/static";
 import EmailCheckField from "./fields/email-check-field";
 import { useRouter } from "next/router";
+import { Button } from "@/base-components/ui/button/button";
+import filtersIcon from "@/assets/pngs/filter_icon.png";
+
 export default function ContractsFilter({
   filter,
   setFilter,
@@ -44,7 +47,9 @@ export default function ContractsFilter({
           ...router.query,
           page: 1,
           date: JSON.stringify(moreFilter?.date),
-          leadSource: moreFilter?.leadSource,
+          ...(moreFilter?.leadSource && {
+            leadSource: moreFilter?.leadSource,
+          }),
         },
       },
       undefined,
@@ -115,7 +120,16 @@ export default function ContractsFilter({
 
   return (
     <div className="relative flex my-auto cursor-pointer z-50" ref={ref}>
-      <svg
+      <Button
+        inputType="button"
+        onClick={handleExtraFilterToggle}
+        className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+        icon={filtersIcon}
+        text={translate("common.filters")}
+        id="add"
+        iconAlt="fitlers"
+      />
+      {/* <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -139,7 +153,7 @@ export default function ContractsFilter({
             />
           </clipPath>
         </defs>
-      </svg>
+      </svg> */}
       <AnimatePresence>
         {extraFilterss && (
           <motion.div
@@ -160,129 +174,71 @@ export default function ContractsFilter({
                 {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
-            <div>
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    {translate("filters.extra_filters.date")}
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => {
-                      handleFilterReset("date", {
-                        $gte: FiltersDefaultValues.$gte,
-                        $lte: FiltersDefaultValues.$lte,
-                      });
-                    }}
-                  >
-                    {translate("filters.extra_filters.reset")}
-                  </label>
-                </div>
+            <div className="mt-5 mb-2">
+              <div className="flex justify-between">
+                <label htmlFor="type" className="font-medium text-base">
+                  {translate("filters.extra_filters.date")}
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => {
+                    handleFilterReset("date", {
+                      $gte: FiltersDefaultValues.$gte,
+                      $lte: FiltersDefaultValues.$lte,
+                    });
+                  }}
+                >
+                  {translate("filters.extra_filters.reset")}
+                </label>
+              </div>
 
-                <DatePicker
-                  label={translate("filters.extra_filters.from")}
-                  label2={translate("filters.extra_filters.to")}
-                  dateFrom={formatDateForDatePicker(
-                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                      FiltersDefaultValues.$gte
-                  )}
-                  dateTo={formatDateForDatePicker(
-                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                      FiltersDefaultValues.$lte
-                  )}
-                  onChangeFrom={(val) => handleDateChange("$gte", val)}
-                  onChangeTo={(val) => handleDateChange("$lte", val)}
-                />
-              </div>
-              {/* payment section  */}
-              {/* <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Payment
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("payment", "")}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div className="flex items-center gap-x-10 my-5">
-                  <RadioField
-                    lable="Cash"
-                    onChange={(val) =>
-                      setMoreFilter((prev) => ({ ...prev, payment: val }))
-                    }
-                    checked={moreFilter.payment === "Cash"}
-                  />
-                  <RadioField
-                    lable="Online"
-                    checked={moreFilter.payment === "Online"}
-                    onChange={(val) =>
-                      setMoreFilter((prev) => ({ ...prev, payment: val }))
-                    }
-                  />
-                </div>
-              </div>
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Price
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("price", ["0", "0"])}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div>
-                  <PriceInputField
-                    label="Low Price"
-                    label2="High Price"
-                    lowPrice={moreFilter.price && moreFilter.price[0]}
-                    highPrice={moreFilter.price && moreFilter.price[1]}
-                    onHighPriceChange={handleHighPriceChange}
-                    onLowPriceChange={handleLowPriceChange}
-                  />
-                </div>
-              </div> */}
+              <DatePicker
+                label={translate("filters.extra_filters.from")}
+                label2={translate("filters.extra_filters.to")}
+                dateFrom={formatDateForDatePicker(
+                  (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                    FiltersDefaultValues.$gte
+                )}
+                dateTo={formatDateForDatePicker(
+                  (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                    FiltersDefaultValues.$lte
+                )}
+                onChangeFrom={(val) => handleDateChange("$gte", val)}
+                onChangeTo={(val) => handleDateChange("$lte", val)}
+              />
             </div>
 
-            <div className="">
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    {translate("filters.extra_filters.leadSource")}
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => {
-                      handleFilterReset("leadSource", "None");
-                    }}
-                  >
-                    {translate("filters.extra_filters.reset")}
-                  </label>
-                </div>
-                <div className="grid grid-cols-2 gap-2 mt-4  ">
-                  {Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
-                    <EmailCheckField
-                      key={idx}
-                      checkboxFilter={moreFilter as unknown as FilterType}
-                      setCheckBoxFilter={setMoreFilter}
-                      type={"leadSource"}
-                      label={item}
-                      value={item}
-                      onChange={(value, isChecked) =>
-                        handleStatusChange(value, isChecked)
-                      }
-                    />
-                  ))}
-                </div>
+            <div className="mt-5 mb-2">
+              <div className="flex justify-between">
+                <label htmlFor="type" className="font-medium text-base">
+                  {translate("filters.extra_filters.leadSource")}
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => {
+                    handleFilterReset("leadSource", "None");
+                  }}
+                >
+                  {translate("filters.extra_filters.reset")}
+                </label>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 mt-4">
+                {Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
+                  <EmailCheckField
+                    key={idx}
+                    checkboxFilter={moreFilter as unknown as FilterType}
+                    setCheckBoxFilter={setMoreFilter}
+                    type={"leadSource"}
+                    label={item}
+                    value={item}
+                    onChange={(value, isChecked) =>
+                      handleStatusChange(value, isChecked)
+                    }
+                  />
+                ))}
               </div>
             </div>
 

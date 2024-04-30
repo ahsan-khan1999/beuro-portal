@@ -1,9 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateLeadAddressFormField,
-  GenerateLeadsFormField,
-} from "@/types";
+import { FormField, GenerateLeadAddressFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import editIcon from "@/assets/svgs/edit_primary.svg";
@@ -31,7 +27,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
           containerClass: "",
           field: {
             type: Field.input,
-            className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+            className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
             inputType: "text",
             id: `address.${i}.label`,
             name: `address.${i}.label`,
@@ -130,7 +126,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
                 id: `streetNumber-${i}`,
                 name: `streetNumber-${i}`,
@@ -147,7 +143,7 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
                 id: `postalCode-${i}`,
                 name: `postalCode-${i}`,
@@ -187,12 +183,11 @@ export const LeadsAddressDetailsFormField: GenerateLeadAddressFormField = (
         },
         field: {
           type: Field.textArea,
-          className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+          className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
           rows: 2,
           id: `description-${i}`,
           name: `description-${i}`,
-          placeholder:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+          placeholder: "",
           register,
         },
       }

@@ -129,7 +129,7 @@ const InvoiceDetailsData = ({
               invoiceDetails?.isInvoiceRecurring2
             ) && (
               <Button
-                className="px-[20px] !h-[32px]  bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
+                className="px-[20px] !h-[32px] bg-red text-white font-semibold text-[13px] leading-4 rounded-md flex gap-[5px]"
                 inputType="button"
                 text="Stop"
                 onClick={handleStopInvoiceCreation}

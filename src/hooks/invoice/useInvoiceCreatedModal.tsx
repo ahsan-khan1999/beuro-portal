@@ -3,14 +3,11 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateCreateInvoiceValidationSchema } from "@/validation/invoiceSchema";
 import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
 import {
   createInvoice,
   readInvoiceDetails,
-  updateInvoice,
-  updateParentInvoice,
 } from "@/api/slices/invoice/invoiceSlice";
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
@@ -42,6 +39,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(createdInvoiceSchema),
   });
+
   const amount = watch("amount");
   const type = watch("type");
   useEffect(() => {
@@ -57,6 +55,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     invoiceDetails,
     type
   );
+
   useMemo(() => {
     taxPercentage = calculateTax(Number(remainingAmount), amount);
 
@@ -107,6 +106,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
       invoiceCreated();
     }
   };
+
   return {
     error,
     handleSubmit,

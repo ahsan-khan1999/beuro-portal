@@ -58,6 +58,7 @@ export default function useRecurringInvoiceFrequency(
       invoiceCreated();
     }
   };
+
   return {
     error,
     handleSubmit,

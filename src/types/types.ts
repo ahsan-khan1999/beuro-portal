@@ -176,6 +176,7 @@ export type GenerateCustomerFormField = (
   handleUpdateCancel: () => void,
   properties: { customer?: Customers; customerType?: string },
   control?: Control<FieldValues>,
+  isAddNewCustomer?: boolean,
   setValue?: SetFieldValue<FieldValues>
 ) => FormField[];
 export interface CustomerProperties {
@@ -671,12 +672,12 @@ export interface FilterType {
   type?: string;
   location?: string;
   status?: string[] | string;
+  sending?: string;
   date?: {
     $gte?: string;
     $lte?: string;
   };
-
-  payment?: string;
+  paymentType?: string[] | string;
   email?: string[] | string;
   price?: string[];
   month?: number;
@@ -694,7 +695,7 @@ export interface MoreFilterType {
   };
   email?: string[] | string;
   price?: string[];
-  payment?: string;
+  paymentType?: string[] | string;
   leadSource?: string[] | string;
 }
 export interface FilterProps {

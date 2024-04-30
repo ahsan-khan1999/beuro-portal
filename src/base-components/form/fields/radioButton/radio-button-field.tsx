@@ -1,6 +1,6 @@
+import React from "react";
 import { RadioButtonProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
-import React from "react";
 
 export const RadioButtonField = ({
   id,
@@ -24,6 +24,8 @@ export const RadioButtonField = ({
     "flex gap-x-2 items-center bg-white",
     colorClasses
   );
+
+  console.log(checked);
 
   const { onChange: registerOnChange } = register(name);
   const conditionalOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

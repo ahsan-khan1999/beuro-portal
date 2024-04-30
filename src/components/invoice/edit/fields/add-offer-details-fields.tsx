@@ -245,7 +245,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               options:
                 (content &&
                   content?.map((item, key) => ({
-                    label: item?.contentName,
+                    label: item?.invoiceContent.title,
                     value: item?.id,
                   }))) ||
                 [],
@@ -257,7 +257,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
           {
             containerClass: "mb-0 col-span-2",
             label: {
-              text: `${translate("contracts.card_content.offer_title")}`,
+              text: `${translate("contracts.card_content.invoice_title")}`,
               htmlFor: "title",
               className: "mb-[10px]",
             },

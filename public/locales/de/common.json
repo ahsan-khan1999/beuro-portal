@@ -230,7 +230,8 @@
         "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
-        "open": "Offen"
+        "open": "Offen",
+        "sending": "Senden"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -286,7 +287,7 @@
       "cancel_button": "Abbrechen",
       "save_changes_button": "Änderungen speichern",
       "company_name": "Firmenname",
-      "save_button": "Speichern Sie"
+      "save_button": "Speichern"
     },
     "add_customer_placeholders": {
       "name": "Bitte geben Sie Ihren Namen ein",
@@ -777,7 +778,8 @@
       "heading": "Vertragsdetails",
       "confirm_button": "Bestätigung senden",
       "contract_id": "Vertrags-ID",
-      "offer_title": "Angebotstitel",
+      "offer_title": "Angebots Titel",
+      "invoice_title": "Rechnung Titel",
       "worker": "Arbeiter",
       "offer_id": "Angebots-ID",
       "email_status": "E-Mail-Status",
@@ -1090,8 +1092,9 @@
       "offer_ID": "Angebots-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
-      "offer_created": "Vorgang erfolgreich",
+      "offer_created": "Operation erfolgreich abgeschlossen",
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
       "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
@@ -1103,6 +1106,8 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "filters": "Filter",
+    "CSV_button": "Berichte herunterladen",
     "create_invoice": "Rechnung erstellen",
     "description_placeholder": "Bitte tragen Sie hier Ihre Angaben ein...",
     "actions": "Aktion",
@@ -1983,7 +1988,10 @@
       "overdue": "Überfällig",
       "paid": "Bezahlt",
       "leadSource": "Leadquellen",
-      "open": "Offen"
+      "open": "Offen",
+      "online": "Online",
+      "cash": "Bar",
+      "sending": "Senden"
     }
   },
   "global_search": {
@@ -2088,7 +2096,7 @@
     "resolved": "aufgelöst"
   },
   "customer_type": {
-    "individual": "individuell",
+    "individual": "Privat",
     "company": "Unternehmen"
   },
   "frequency": {

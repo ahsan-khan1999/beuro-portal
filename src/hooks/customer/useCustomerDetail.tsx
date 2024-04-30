@@ -27,8 +27,14 @@ import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSuccess";
 import { updateQuery } from "@/utils/update-query";
 
-export default function useCustomerDetail(stage: boolean) {
-  const [isUpdate, setIsUpdate] = useState<boolean>(stage);
+export default function useCustomerDetail({
+  detail,
+  idAddNewCustomer,
+}: {
+  detail: boolean;
+  idAddNewCustomer: boolean;
+}) {
+  const [isUpdate, setIsUpdate] = useState<boolean>(detail);
   const { loading, customerDetails } = useAppSelector(
     (state) => state.customer
   );
@@ -123,7 +129,7 @@ export default function useCustomerDetail(stage: boolean) {
     }
   }, [id]);
   useMemo(() => {
-    if (customerDetails && stage)
+    if (customerDetails && detail)
       reset({
         ...customerDetails,
         gender: staticEnums["Gender"][customerDetails?.gender],
@@ -141,17 +147,18 @@ export default function useCustomerDetail(stage: boolean) {
     handleUpdateCancel,
     { customer: customerDetails, customerType: customerType },
     control,
+    idAddNewCustomer,
     setValue
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let res;
-    if (!stage) {
+    if (!detail) {
       res = await dispatch(
         createCustomer({ data, router, setError, translate })
       );
       if (res.payload) handleCreateSuccess();
-    } else if (stage) {
+    } else if (detail) {
       handleUpdate(data);
     }
   };

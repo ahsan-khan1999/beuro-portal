@@ -9,6 +9,7 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
+  downloadInvoiceReports,
   readInvoice,
   sendOfferByPost,
   setInvoiceDetails,
@@ -21,6 +22,7 @@ import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNot
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import localStoreUtil from "@/utils/localstore.util";
 import { DEFAULT_INVOICE } from "@/utils/static";
+import { downloadFile } from "@/utils/utility";
 
 const useInvoice = () => {
   const {
@@ -39,7 +41,6 @@ const useInvoice = () => {
   >([]);
 
   const { query } = useRouter();
-
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
@@ -47,8 +48,13 @@ const useInvoice = () => {
     sort: FiltersDefaultValues.None,
     noteType: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
-    email: FiltersDefaultValues.None,
+    date: {
+      $gte: FiltersDefaultValues.None,
+      $lte: FiltersDefaultValues.None,
+    },
     status: FiltersDefaultValues.None,
+    sending: FiltersDefaultValues.None,
+    paymentType: "0",
   });
 
   const totalItems = totalCount;
@@ -210,6 +216,19 @@ const useInvoice = () => {
     if (response?.payload) invoiceCreatedHandler();
   };
 
+  const handleDownloadInvoiceReport = async () => {
+    const response = await dispatch(
+      downloadInvoiceReports({
+        params: {
+          filter: { date: filter["date"], paymentType: filter["paymentType"] },
+        },
+      })
+    );
+    if (response.payload) {
+      downloadFile(response.payload?.excelFile);
+    }
+  };
+
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
@@ -224,9 +243,16 @@ const useInvoice = () => {
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
     const searchNoteType = query?.noteType as string;
+    const searchDate = query?.date as string;
+    const searchPayment = query?.paymentType;
 
     const queryParams =
-      queryStatus || searchQuery || sortedValue || searchNoteType;
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchNoteType ||
+      searchDate ||
+      searchPayment;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -242,15 +268,27 @@ const useInvoice = () => {
         text?: string;
         sort?: string;
         noteType?: string;
-        email?: string | string[];
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+        paymentType?: string | string[];
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery || sortedValue || searchNoteType) {
+      if (
+        searchQuery ||
+        sortedValue ||
+        searchNoteType ||
+        searchDate ||
+        searchPayment
+      ) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.noteType = searchNoteType;
+        updatedFilter.date = searchDate && JSON.parse(searchDate);
+        updatedFilter.paymentType = searchPayment;
       }
 
       setFilter(updatedFilter);
@@ -287,6 +325,8 @@ const useInvoice = () => {
     invoiceDetails,
     currentPage,
     invoiceSum,
+    translate,
+    handleDownloadInvoiceReport,
   };
 };
 

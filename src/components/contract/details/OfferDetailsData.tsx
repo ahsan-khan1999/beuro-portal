@@ -49,7 +49,7 @@ const OfferDetailsData = ({
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white min-h-[58px] truncate flex items-center justify-between pr-4">
               {isEditing === false ? (
-                <span className="text-[#4B4B4B] font-medium px-4">
+                <span className="text-[#4B4B4B] font-medium px-4 truncate">
                   {contractDetails?.title}
                 </span>
               ) : (
@@ -57,7 +57,7 @@ const OfferDetailsData = ({
                   type="text"
                   defaultValue={contractDetails?.title}
                   onChange={handleInputChange}
-                  className="p-4 border border-[#4B4B4B] rounded-lg w-[75%] min-h-[58px] outline-none text-dark text-sm focus:border-primary"
+                  className="p-4 min-h-[58px] w-[70%] outline-none text-dark text-sm focus:border-primary truncate"
                 />
               )}
               <div className="flex items-center">

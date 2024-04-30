@@ -26,7 +26,6 @@ export enum ComponentsType {
 
 const AddNewLeadsData = () => {
   const { leadDetails } = useAppSelector((state) => state.lead);
-  const { images } = useAppSelector((state) => state.image);
 
   const [tabType, setTabType] = useState<ComponentsType>(
     (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
@@ -138,6 +137,7 @@ const AddNewLeadsData = () => {
         onClose={onClose}
         routeHandler={routeHandler}
         heading={translate("leads.leads_created_modal.main_heading")}
+        subHeading={translate("common.modals.lead_created_des")}
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (
@@ -150,7 +150,7 @@ const AddNewLeadsData = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.lead_created_des")}
         route={onClose}
       />
     ),
