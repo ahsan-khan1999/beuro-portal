@@ -57,7 +57,9 @@ export default function InvoicesFilter({
           ...router.query,
           page: 1,
           date: JSON.stringify(moreFilter?.date),
-          paymentType: moreFilter?.paymentType,
+          ...(moreFilter?.paymentType && {
+            paymentType: moreFilter.paymentType,
+          }),
         },
       },
       undefined,

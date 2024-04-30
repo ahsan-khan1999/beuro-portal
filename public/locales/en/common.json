@@ -786,6 +786,7 @@
       "confirm_button": "Send Confirmation",
       "contract_id": "Contarct ID",
       "offer_title": "Offer Title",
+      "invoice_title": "Invoice Title",
       "worker": "Worker",
       "email_status": "Email Status",
       "offer_id": "Offer ID",

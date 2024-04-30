@@ -30,7 +30,6 @@ import {
 } from "@/api/slices/invoice/invoiceSlice";
 import { InvoiceDetailTableRowTypes } from "@/types/invoice";
 import { AddInvoiceDetailsFormField } from "@/components/invoice/edit/fields/add-offer-details-fields";
-import OfferDetails from "@/components/offers/details";
 
 export const useEditInvoiceDetails = ({
   handleNext,
