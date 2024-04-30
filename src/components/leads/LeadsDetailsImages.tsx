@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import LeadsDetailImgLayout from "@/layout/Leads/LeadsDetailImgLayout";
-
 import { useTranslation } from "next-i18next";
+import LeadsDetailImgLayout from "@/layout/Leads/LeadsDetailImgLayout";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const LeadsDetailsImages = ({ images }: { images?: string[] }) => {
@@ -16,7 +15,7 @@ const LeadsDetailsImages = ({ images }: { images?: string[] }) => {
         </p>
         <div className="bg-[#4A13E7] h-1 "></div>
 
-        {images &&images?.length > 0 ? (
+        {images && images?.length > 0 ? (
           <div className="grid grid-cols-2 gap-[14px] py-[18px] px-3 ">
             {images?.map((item, index) => (
               <Image

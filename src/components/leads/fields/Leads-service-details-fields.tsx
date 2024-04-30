@@ -75,7 +75,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               className:
-                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "contactAvailability",
               value:
@@ -107,7 +107,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               className:
-                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary",
               type: Field.select,
               id: "flexibility",
               value: (leadDetails?.id && leadDetails?.flexibility) || "",
@@ -160,7 +160,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
 
             field: {
               className:
-                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "preferredContact",
               name: "preferredContact",
@@ -308,7 +308,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               inputType: "button",
               onClick: () => onHandleBack && onHandleBack(),
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
             },
           },
           {
@@ -319,7 +319,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               text: `${translate("leads.service_details.save_changes_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

@@ -15,11 +15,7 @@ import { readDashboard } from "@/api/slices/authSlice/auth";
 import { Dashboard, FilterType } from "@/types";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { getCurrentMonth } from "@/utils/utility";
-
-interface ActionType {
-  type: string;
-  payload: Dashboard;
-}
+import { DashboardActionType } from "@/types/dashboard";
 
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
@@ -58,7 +54,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     dispatch(readDashboard({ params: { filter: filter } })).then(
-      (response: ActionType) => {
+      (response: DashboardActionType) => {
         if (response?.payload) {
           setPieData({
             datasets: [

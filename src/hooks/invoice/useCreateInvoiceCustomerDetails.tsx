@@ -103,7 +103,8 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         mobileNumber: invoiceDetails?.customerDetail?.mobileNumber,
         content: invoiceDetails?.content?.id,
         title:
-          invoiceDetails?.title || invoiceDetails?.content?.offerContent?.title,
+          invoiceDetails?.title ||
+          invoiceDetails?.content?.invoiceContent?.title,
         address: invoiceDetails?.customerDetail?.address,
         date: invoiceDetails?.date,
         gender: staticEnums["Gender"][invoiceDetails?.customerDetail?.gender],
@@ -145,10 +146,10 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     );
     if (invoiceDetails?.id) {
       if (filteredContent)
-        setValue("title", filteredContent?.offerContent?.title);
+        setValue("title", filteredContent?.invoiceContent?.title);
     } else {
       setValue("content", selectedContent);
-      setValue("title", filteredContent?.offerContent?.title);
+      setValue("title", filteredContent?.invoiceContent?.title);
     }
   }, [selectedContent]);
 
@@ -202,7 +203,8 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         mobileNumber: invoiceDetails?.customerDetail?.mobileNumber,
         content: invoiceDetails?.content?.id,
         title:
-          invoiceDetails?.title || invoiceDetails?.content?.offerContent?.title,
+          invoiceDetails?.title ||
+          invoiceDetails?.content?.invoiceContent?.title,
         address: invoiceDetails?.customerDetail?.address,
         date: invoiceDetails?.date,
         gender: staticEnums["Gender"][invoiceDetails?.customerDetail?.gender],

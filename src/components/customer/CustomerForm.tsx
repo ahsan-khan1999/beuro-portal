@@ -1,7 +1,7 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FormDataProps } from "@/types/customer";
-import React from "react";
 import { useTranslation } from "next-i18next";
 
 const CustomerForm = ({

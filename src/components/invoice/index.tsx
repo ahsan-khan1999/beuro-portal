@@ -1,6 +1,5 @@
 import React from "react";
 import TableLayout from "@/layout/TableLayout";
-import { Pagination } from "@/base-components/ui/pagination/pagination";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRows from "./table/TableRows";
@@ -9,6 +8,7 @@ import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { CSVIcon } from "@/assets/svgs/components/csv-icon";
+import { Pagination } from "@/base-components/ui/pagination/pagination";
 
 export default function Invoices() {
   const {
@@ -26,6 +26,7 @@ export default function Invoices() {
     currentPage,
     invoiceSum,
     translate,
+    handleDownloadInvoiceReport,
   } = useInvoice();
 
   const CurrentComponent = useEmptyStates(
@@ -60,18 +61,18 @@ export default function Invoices() {
         </div>
       </div>
 
-      {/* <div className="flex items-center justify-end mb-3">
+      <div className="flex items-center justify-end mb-3">
         <BaseButton
           buttonText={translate("common.CSV_button")}
-          onClick={() => {}}
-          containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-          textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+          onClick={handleDownloadInvoiceReport}
+          containerClassName={`flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover`}
+          textClassName={`text-white font-medium`}
           loading={loading}
           loaderColor="#4A13E7"
         >
-          <CSVIcon className="text-primary group-hover:text-primary" />
+          <CSVIcon className="text-white group-hover:text-white" />
         </BaseButton>
-      </div> */}
+      </div>
 
       <TableCardLayout>
         <TableLayout>

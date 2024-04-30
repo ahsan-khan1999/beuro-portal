@@ -41,6 +41,7 @@ const SERVICE_URLS = {
   updateContract: "/contract/",
   company: "/company",
   invoice: "/invoice",
+  downloadInvoiceRoute: "/invoice/download-excel",
   mainInvoice: "/invoice/invoice-step/",
 
   contactSupport: "/contactSupport",
@@ -391,6 +392,14 @@ const deleteContract = (data) =>
 const readInvoice = (params) =>
   get(
     SERVICE_URLS.invoice,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const downloadInvoice = (params) =>
+  get(
+    SERVICE_URLS.downloadInvoiceRoute,
     params,
     { feature: featureConstants.login },
     { detail: false }
@@ -1108,5 +1117,6 @@ const apiServices = {
   updateMainInvoice,
   readMainQRCode,
   updateContractDetails,
+  downloadInvoice,
 };
 export default apiServices;

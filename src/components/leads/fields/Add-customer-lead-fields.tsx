@@ -321,7 +321,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "button",
               text: translate("leads.customer_details.next_button"),
               inputType: "submit",
-              className: `rounded-lg  px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none`,
+              className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none`,
               loading,
             },
           },

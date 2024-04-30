@@ -10,6 +10,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   handleUpdateCancel,
   { customer: customerDetails, customerType: customerType },
   control,
+  idAddNewCustomer,
   setValue
 ) => {
   const { t: translate } = useTranslation();
@@ -265,7 +266,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: `${translate("customers.details.save_changes_button")}`,
+              text: idAddNewCustomer
+                ? `${translate("customers.details.save_button")}`
+                : `${translate("customers.details.save_changes_button")}`,
               inputType: "submit",
               className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ${
                 isUpdate && "hidden"

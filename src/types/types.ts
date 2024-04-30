@@ -176,6 +176,7 @@ export type GenerateCustomerFormField = (
   handleUpdateCancel: () => void,
   properties: { customer?: Customers; customerType?: string },
   control?: Control<FieldValues>,
+  isAddNewCustomer?: boolean,
   setValue?: SetFieldValue<FieldValues>
 ) => FormField[];
 export interface CustomerProperties {
