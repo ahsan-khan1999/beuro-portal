@@ -1,10 +1,5 @@
 import { svgs } from "./../base-components/SideBar";
-import {
-  Component,
-  ReactNode,
-  SetStateAction,
-  Dispatch as stateDispatch,
-} from "react";
+import { ReactNode, SetStateAction, Dispatch as stateDispatch } from "react";
 import { DateRangeProps, FormField } from "./form";
 import {
   Control,
@@ -21,14 +16,13 @@ import {
 } from "react-hook-form";
 import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "./auth";
-import { ButtonClickFunction, CountryType, Image, countryType } from "./ui";
+import { ButtonClickFunction, CountryType } from "./ui";
 import { NextRouter } from "next/router";
 import { Customers } from "./customer";
-import { Attachement, Status } from "./global";
+import { Attachement } from "./global";
 import { Employee } from "./employee";
 import { CustomerAddress, Lead } from "./leads";
 import { Service } from "./service";
-import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { ContentTableRowTypes } from "./content";
 import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import {
@@ -36,17 +30,18 @@ import {
   InvoiceTableRowTypes,
   SubInvoiceTableRowTypes,
 } from "./invoice";
-import { contractTableTypes } from "./contract";
+import { Contract, contractTableTypes } from "./contract";
 import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
+
 export interface SideBar {
   icon?: keyof typeof svgs;
   title: string;
   pathname?: string;
   query?: string;
-  queryName: string;
+  queryName?: string;
   role: number[];
   inner?: SideBar[];
   className?: string;
@@ -181,6 +176,7 @@ export type GenerateCustomerFormField = (
   handleUpdateCancel: () => void,
   properties: { customer?: Customers; customerType?: string },
   control?: Control<FieldValues>,
+  isAddNewCustomer?: boolean,
   setValue?: SetFieldValue<FieldValues>
 ) => FormField[];
 export interface CustomerProperties {
@@ -519,12 +515,21 @@ export type GenerateCustomerLeadFormField = (
   customerType?: string,
   setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
+
 export type GenerateLeadsAdditionalDetailsFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onClick?: Function,
   leadDetails?: Lead
 ) => FormField[];
+
+export type GenerateContractEditAdditionalDetailsFormField = (
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  contractDetails?: Contract
+) => FormField[];
+
 export type GenerateLeadAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -539,6 +544,7 @@ export type GenerateLeadAddressFormField = (
   setValue?: UseFormSetValue<FieldValues>,
   getValues?: UseFormGetValues<FieldValues>
 ) => FormField[] | null;
+
 export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -666,12 +672,12 @@ export interface FilterType {
   type?: string;
   location?: string;
   status?: string[] | string;
+  sending?: string;
   date?: {
     $gte?: string;
     $lte?: string;
   };
-
-  payment?: string;
+  paymentType?: string[] | string;
   email?: string[] | string;
   price?: string[];
   month?: number;
@@ -689,7 +695,7 @@ export interface MoreFilterType {
   };
   email?: string[] | string;
   price?: string[];
-  payment?: string;
+  paymentType?: string[] | string;
   leadSource?: string[] | string;
 }
 export interface FilterProps {
@@ -735,6 +741,11 @@ export interface ProductItemFooterProps {
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
   isShowExtraAmount?: boolean;
+  isSubInvoicePdf?: boolean;
+  isReceiptPdf?: boolean;
+  isOfferPDF?: boolean;
+  isContractPDF?: boolean;
+  isMainInvoice?: boolean;
   systemSettings?: SystemSetting | null;
   discountType?: keyof (typeof staticEnums)["DiscountType"];
   taxType?: keyof (typeof staticEnums)["TaxType"];

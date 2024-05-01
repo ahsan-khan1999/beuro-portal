@@ -14,18 +14,20 @@ const ContactSupportForm = ({
 
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-[26px] border-b border-black border-opacity-10">
-        <h2 className="text-[#393939] text-lg font-medium">
+      <div className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("contact_support.main_heading")}
         </h2>
       </div>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </FormCard>
   );
 };

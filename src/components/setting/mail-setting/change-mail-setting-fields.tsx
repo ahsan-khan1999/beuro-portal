@@ -13,7 +13,8 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 lg:grid-cols-2 gap-y-5   lg:gap-x-[60px] ",
+        className:
+          "grid grid-cols-1 lg:grid-cols-2 gap-y-5 lg:gap-x-[60px] rounded-t-lg px-2 pt-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -188,7 +189,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[25px]",
+      containerClass: "mb-0 pt-[25px] rounded-b-lg px-2 bg-[#EDF4FF]",
       label: {
         text: `${translate("setting.mail_setting.mail_form_fields.email")}`,
         htmlFor: "testingMail",
@@ -204,10 +205,10 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       },
     },
     {
-      containerClass: "mt-2",
+      containerClass: "rounded-b-lg px-2 pb-3 pt-2 bg-[#EDF4FF]",
       field: {
         type: Field.input,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         inputType: "email",
         id: "testingMail",
         name: "testingMail",

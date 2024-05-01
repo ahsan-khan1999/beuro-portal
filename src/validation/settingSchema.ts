@@ -116,12 +116,8 @@ export const generateProfileSettingValidation = (translate: Function) => {
           .string()
           .required(translate("validationMessages.required")),
         [SettingProfile.postCode]: yup.string().notRequired(),
-        [SettingProfile.city]: yup
-          .string()
-          .required(translate("validationMessages.required")),
-        [SettingProfile.houseAddress]: yup
-          .string()
-          .required(translate("validationMessages.required")),
+        [SettingProfile.city]: yup.string().notRequired(),
+        [SettingProfile.houseAddress]: yup.string().notRequired(),
       }),
       bankDetails: yup.object().shape({
         [SettingProfile.bankName]: yup

@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateAccountSettingFormField } from "@/types";
-import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
 export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
@@ -14,28 +13,25 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "my-5 ",
+      containerClass: "my-5",
       field: {
         type: Field.div,
         id: "div-field",
         className:
-          "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-1 items-center ",
+          "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-1 items-center",
         children: [
           {
-            containerClass: "",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.public_info")}`,
-              containerClassName: " text-[14px] text-[#393939] font-normal ",
+              containerClassName: "text-sm text-[#393939] font-normal",
               id: "info",
             },
           },
           {
-            containerClass: "border-lightGray border-b-[1px]",
-
+            containerClass: "border-lightGray border-b",
             field: {
               type: Field.span,
-              containerClassName: "  ",
               id: "border",
             },
           },
@@ -65,7 +61,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.div,
               id: "div-field",
-              className: "grid grid-cols-2 gap-x-6 gap-y-5",
+              className:
+                "grid grid-cols-2 gap-x-6 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
               children: [
                 {
                   containerClass: "mb-0",
@@ -98,7 +95,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     id: "email",
                     name: "email",
                     disabled: true,
-                    className: "bg-[#F1F1F1] border-none focus-none ",
+                    className: "border-none focus-none ",
                     svg: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11" fill="none">
               <path d="M12.3107 0.703125H1.21449C0.563394 0.703125 0.03125 1.23293 0.03125 1.88637V8.98582C0.03125 9.6395 0.563736 10.1691 1.21449 10.1691H12.3107C12.9618 10.1691 13.4939 9.63926 13.4939 8.98582V1.88637C13.4939 1.23277 12.9615 0.703125 12.3107 0.703125ZM12.129 1.49195C11.7464 1.87577 7.25284 6.384 7.06823 6.56922C6.91404 6.72388 6.61121 6.72399 6.45694 6.56922L1.39619 1.49195H12.129ZM0.820078 8.84081V2.03138L4.21375 5.4361L0.820078 8.84081ZM1.39619 9.38024L4.77064 5.9948L5.89827 7.12611C6.36036 7.5897 7.16499 7.58952 7.62693 7.12611L8.75456 5.99482L12.129 9.38024H1.39619ZM12.7051 8.84081L9.31142 5.4361L12.7051 2.03138V8.84081Z" fill="#8F8F8F"/>
             </svg>
@@ -214,28 +211,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
                     register,
                   },
                 },
-                // {
-                //   containerClass: "mb-0",
-                //   label: {
-                //     text: `${translate("customers.details.gender")}`,
-                //     htmlFor: "gender",
-                //     className: "mb-[10px] ",
-                //   },
-                //   field: {
-                //     className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
-                //     type: Field.select,
-                //     id: "gender",
-                //     name: "gender",
-                //     options: Object.keys(staticEnums.Gender)
-                //       .map((item) => ({
-                //         value: staticEnums.Gender[item],
-                //         label: translate(`gender.${item}`),
-                //       })),
-
-                //     control,
-                //     value: "",
-                //   },
-                // },
               ],
             },
           },
@@ -244,15 +219,14 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
     },
 
     {
-      containerClass: "my-5 ",
+      containerClass: "my-5",
       field: {
         type: Field.div,
         id: "div-field",
         className:
-          "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-1 items-center ",
+          "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-1 items-center",
         children: [
           {
-            containerClass: "",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.private_info")}`,
@@ -261,11 +235,9 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             },
           },
           {
-            containerClass: "border-lightGray border-b-[1px]",
-
+            containerClass: "border-lightGray border-b",
             field: {
               type: Field.span,
-              containerClassName: "  ",
               id: "border",
             },
           },
@@ -277,7 +249,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-y-5 gap-x-[43px] ",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-y-5 gap-x-[43px] rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -465,23 +438,20 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)]  gap-x-4 items-center ",
+          "overflow-hidden grid grid-cols-[minmax(150px,_100%)_minmax(100%,_100%)]  gap-x-4 items-center",
         children: [
           {
-            containerClass: "",
             field: {
               type: Field.span,
               text: `${translate("setting.account_setting.change_password")}`,
-              containerClassName: " text-[14px] text-[#393939] font-normal ",
+              containerClassName: " text-[14px] text-[#393939] font-normal",
               id: "info",
             },
           },
           {
-            containerClass: "border-lightGray border-b-[1px]",
-
+            containerClass: "border-lightGray border-b",
             field: {
               type: Field.span,
-              containerClassName: "  ",
               id: "border",
             },
           },
@@ -490,8 +460,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
     },
 
     {
-      containerClass: "mb-0 ",
-
+      containerClass: "mb-0 rounded-lg px-2 py-3 bg-[#EDF4FF]",
       field: {
         type: Field.password,
         id: "changePassword",
@@ -517,7 +486,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center justify-end space-x-[18px] mt-5",
+        className: "flex items-center justify-end space-x-[18px] my-[30px]",
         children: [
           {
             containerClass: "mb-0",

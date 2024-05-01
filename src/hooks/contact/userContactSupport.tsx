@@ -28,6 +28,7 @@ export const userContactSupport = (requestSubmitHandler: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     reset({
       fullName: user?.fullName,

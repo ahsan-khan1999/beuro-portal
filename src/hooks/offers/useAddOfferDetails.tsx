@@ -37,16 +37,17 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
-  const { content } = useAppSelector((state) => state.content);
 
+  const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
 
   const onCancel = () => {
     router.pathname = "/offers";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
 
@@ -71,7 +72,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   }, []);
 
   const type = watch("type");
-
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
@@ -112,8 +112,11 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
           staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
         time: offerDetails?.time,
       });
+    } else {
+      setValue("type", "New Customer");
     }
   }, [offerDetails?.id]);
+
   const {
     fields: testFields,
     append,
@@ -139,7 +142,9 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       });
     }
   };
+
   const handleContentSelect = () => {};
+
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
@@ -165,6 +170,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       }
     }
   }, [selectedContent, leadID]);
+
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -185,6 +191,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     },
     setValue
   );
+
   useMemo(() => {
     if (type === "New Customer") {
       reset({
@@ -241,6 +248,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     loading,
     control
   );
+
   const submit = AddOfferDetailsSubmitFormField(
     register,
     loading,

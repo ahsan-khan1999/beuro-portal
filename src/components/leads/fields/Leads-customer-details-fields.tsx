@@ -21,7 +21,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -60,7 +59,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "fullName",
               name: "fullName",
@@ -236,7 +235,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex justify-end items-center space-x-[18px] mt-[30px]",
+        className: "flex justify-end items-center space-x-[18px] my-[30px]",
         children: [
           {
             containerClass: "mb-0",
@@ -260,7 +259,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               )}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 min-w-[152px] w-fit h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

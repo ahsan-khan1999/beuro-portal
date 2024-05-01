@@ -11,7 +11,6 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -62,7 +61,6 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
     },
 
     {
-      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
@@ -111,7 +109,7 @@ export const servicesDetailsFormField: GenerateServicesFormField = (
     },
 
     {
-      containerClass: `${isUpdate ? "mt-0" : "mt-[30px]"} `,
+      containerClass: `${isUpdate ? "mt-0" : "my-[30px]"} `,
       field: {
         type: Field.div,
         id: "div-field",

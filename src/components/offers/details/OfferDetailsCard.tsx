@@ -35,6 +35,7 @@ const OfferDetailsCard = ({
 }: OfferDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
   const handleDonwload = () => {
     window.open(offerDetails?.attachement);
   };
@@ -108,8 +109,8 @@ const OfferDetailsCard = ({
             <PostIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
 
-          <div
-            className={`w-fit border-[1px] border-primary rounded-lg flex px-4 py-[6px] cursor-pointer group ${
+          <button
+            className={`w-fit border border-primary rounded-lg flex items-center px-4 py-2 cursor-pointer group ${
               isSendEmail && "hidden"
             }`}
             onClick={handleSendEmail}
@@ -123,7 +124,8 @@ const OfferDetailsCard = ({
                   <>{translate("offers.card_content.send_button")}</>
                 ))}
             </p>
-          </div>
+          </button>
+
           {isSendEmail && (
             <PrimaryPDF
               onClick={() =>
@@ -163,6 +165,7 @@ const OfferDetailsCard = ({
           </span>
         </div>
       </div>
+
       <div className="flex flex-col gap-4 mt-5">
         <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
           <div>
@@ -324,7 +327,7 @@ const OfferDetailsCard = ({
             </span>
           </div>
           {offerDetails?.offerStatus === "Rejected" && (
-            <div className="flex items-center gap-[11px] ">
+            <div className="flex items-center gap-[11px]">
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("offers.card_content.reason")}:
               </span>

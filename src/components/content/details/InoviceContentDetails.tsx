@@ -19,7 +19,7 @@ const InoviceContentDetails = ({
       className="rounded-md border-none bg-white w-full h-fit"
       id={translate("content.tabs_headings.invoice_content")}
     >
-      <div className="flex justify-between items-center bg-[#C50EE0] rounded-t-lg pt-[17px] pb-[22px] pl-[29px] pr-6">
+      <div className="flex justify-between items-center bg-[#C50EE0] rounded-t-lg py-5 px-6">
         {/* <div className="flex space-x-2 items-center my-auto"> */}
         {/* <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -62,21 +62,21 @@ const InoviceContentDetails = ({
       <div className="px-5 py-3">
         <div className="grid grid-cols-1 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
-            <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
+            <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
               {translate("content.details.invoice_title")}
             </p>
-            <p className="border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
+            <p className="border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white truncate">
               {contentDetail?.invoiceContent?.title}
             </p>
           </div>
 
           <div className="flex flex-col">
-            <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
+            <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
               {translate("content.details.invoice_description")}
             </p>
 
             <div
-              className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
+              className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"
               dangerouslySetInnerHTML={{
                 __html: contentDetail?.invoiceContent?.description,
               }}
@@ -84,11 +84,11 @@ const InoviceContentDetails = ({
           </div>
 
           <div className="flex flex-col">
-            <p className="text-[#1E1E1E] font-semibold text-[14px] mb-[10px]">
+            <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
               {translate("content.details.email_body")}
             </p>
             <div
-              className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
+              className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"
               dangerouslySetInnerHTML={{
                 __html: contentDetail?.invoiceContent?.body,
               }}
@@ -96,7 +96,7 @@ const InoviceContentDetails = ({
           </div>
 
           <div className="w-full xl:w-[90%]">
-            <span className="text-[#1E1E1E] font-semibold text-[14px] ">
+            <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
             <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">

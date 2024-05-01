@@ -8,6 +8,7 @@ import { Locale } from "@/types";
 
 const index = () => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     localStoreUtil.get_data("offer").then((result) => {
       if (result) dispatch(setOfferDetails(result));
@@ -17,6 +18,7 @@ const index = () => {
       // dispatch(setLeadDetails(DEFAULT_LEAD))
     };
   }, []);
+
   return (
     <div>
       <OfferAddDetails />

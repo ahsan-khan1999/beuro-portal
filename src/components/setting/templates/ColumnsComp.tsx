@@ -51,50 +51,52 @@ const Column = ({
   ) => void;
 }) => {
   return (
-    <section className="px-[30px] pt-[20px] pb-[25px] rounded-md bg-white mb-6">
-      <div className="flex justify-between mb-3">
-        <span className="text-lg font-medium text-[#393939]">{title}</span>
-        <ToggleButton
-          isChecked={mainColumns[column]}
-          onChange={(value) => handleToggle(column, value.target.checked)}
-        />
-      </div>
-      {data.map((item, index) => (
-        <div className="mb-5" key={index}>
-          <div className="flex space-x-2">
-            <CheckBox
-              isChecked={item.data.value}
-              id={item.data.column + index.toString()}
-              key={index}
-              onChange={(value) =>
-                handleChange(item.data.column, item.data.type, value, index)
-              }
-            />
-            <span className="text-[#1E1E1E] text-sm font-normal">
-              {item.title}
-            </span>
-          </div>
-          <div className=" p-4 flex justify-between items-center mt-[10px]">
-            <InputField
-              containerClassName="w-full"
-              value={item.data.text}
-              textClassName="!p-4 border rounded-lg border-[#EBEBEB] "
-              handleChange={(value) =>
-                handleChangeInput(
-                  item.data.column,
-                  item.data.textType,
-                  value,
-                  index
-                )
-              }
-            />
-            {/* <span className="text-[#484848] text-base font-normal ">
+    <section className="px-6 py-5 rounded-md bg-white mb-6">
+      <div className="rounded-lg px-2 py-3 bg-[#EDF4FF]">
+        <div className="flex justify-between mb-3">
+          <span className="text-lg font-medium text-[#393939]">{title}</span>
+          <ToggleButton
+            isChecked={mainColumns[column]}
+            onChange={(value) => handleToggle(column, value.target.checked)}
+          />
+        </div>
+        {data.map((item, index) => (
+          <div className="mb-5" key={index}>
+            <div className="flex space-x-2">
+              <CheckBox
+                isChecked={item.data.value}
+                id={item.data.column + index.toString()}
+                key={index}
+                onChange={(value) =>
+                  handleChange(item.data.column, item.data.type, value, index)
+                }
+              />
+              <span className="text-[#1E1E1E] text-sm font-normal">
+                {item.title}
+              </span>
+            </div>
+            <div className=" p-4 flex justify-between items-center mt-[10px]">
+              <InputField
+                containerClassName="w-full"
+                value={item.data.text}
+                textClassName="!p-4 border rounded-lg border-[#EBEBEB] "
+                handleChange={(value) =>
+                  handleChangeInput(
+                    item.data.column,
+                    item.data.textType,
+                    value,
+                    index
+                  )
+                }
+              />
+              {/* <span className="text-[#484848] text-base font-normal ">
               
               {item.data.type}
             </span> */}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 };

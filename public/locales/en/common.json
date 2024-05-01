@@ -230,7 +230,8 @@
         "pending": "Pending",
         "overdue": "Overdue",
         "paid": "Paid",
-        "open": "Open"
+        "open": "Open",
+        "sending": "Sending"
       },
       "services": "Services",
       "employees": "Employees",
@@ -753,6 +754,11 @@
       "main_heading": "Invoice Created Successful ",
       "sub_heading": "Thanks for creating Invoice we are happy to have you. ",
       "button": "Preview PDF"
+    },
+    "main_invoice_created_modal": {
+      "main_heading": "Invoice Created Successfully",
+      "sub_heading": "Thanks for creating invoice we are happy to have you.",
+      "button": "Done"
     }
   },
   "contracts": {
@@ -780,6 +786,7 @@
       "confirm_button": "Send Confirmation",
       "contract_id": "Contarct ID",
       "offer_title": "Offer Title",
+      "invoice_title": "Invoice Title",
       "worker": "Worker",
       "email_status": "Email Status",
       "offer_id": "Offer ID",
@@ -809,7 +816,8 @@
       "address_details": "Address Details",
       "street_no": "Street No",
       "post_code": "Post Code + City",
-      "country": "Country"
+      "country": "Country",
+      "title": "Contract Title"
     },
     "address_details": {
       "main_heading": "Address Details",
@@ -1038,6 +1046,7 @@
   },
   "common": {
     "modals": {
+      "contract_updating_description": "Thanks for updating Contract we are happy to have you.",
       "offer_rejected_des": "Your change has been made successfully",
       "update_password": "Thanks for updating password, we are happy to have you.",
       "invoice_update": "Thanks for updating invoice, we are happy to have you.",
@@ -1093,8 +1102,9 @@
       "offer_ID": "Enter Offer ID",
       "are_you_delete": "Are you sure you want to delete this Offer?",
       "delete_note": "Are you sure you want to delete this Note?",
-      "offer_created": "Operation Successful",
-      "offer_created_des": "Thanks for updating offer we are happy to have you. ",
+      "offer_created": "Operation Successfully",
+      "offer_created_des": "Thanks for updating offer we are happy to have you.",
+      "lead_created_des": "Thanks for creating Lead we are happy to have you.",
       "offer_email_sent": "Email Sent Successfully",
       "email_sent_des": "Thanks for updating offer we are happy to have you.",
       "updating_contract": "Thanks for updating contract we are happy to have you.",
@@ -1104,6 +1114,9 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "filters":"Filters",
+    "CSV_button": "Download Reports",
+    "create_invoice": "Create Invoice",
     "description_placeholder": "Please write your detail here...",
     "actions": "Actions",
     "service": "Service",
@@ -1204,7 +1217,7 @@
     "privacy": "Privacy Policy",
     "copy_right": "Copyright 2024",
     "better_management": "Better management",
-    "better_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
+    "better_description": "Better Management brings unparalleled efficiency and strategic control to your fingertips. Boost your company's performance with process optimization, empowered decision-making, and intuitive tools that will lead to long-term success. ",
     "notes_modal": {
       "heading": "Notes",
       "button": "Add New Note"
@@ -1447,8 +1460,8 @@
       "cancel_button": "Cancel"
     },
     "offer_created_modal": {
-      "main_heading": "Offer Created Successful ",
-      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "main_heading": "Offer Created Successfully",
+      "sub_heading": "Thanks for creating offer we are happy to have you.",
       "button": "Done"
     },
     "placeholders": {
@@ -1981,7 +1994,10 @@
       "overdue": "Overdue",
       "paid": "Paid",
       "leadSource": "Lead Source",
-      "open": "Open"
+      "open": "Open",
+      "online": "Online",
+      "cash": "Cash",
+      "sending": "Sending"
     }
   },
   "global_search": {
@@ -2147,5 +2163,12 @@
     "individual_note": "Individual Note",
     "note_reached": "Not Reached",
     "other": "Other"
+  },
+  "thank_you_content": {
+    "heading": "Thanks for Signing the Contract",
+    "valued_csutomer": "Dear Valued Customer",
+    "description": "We are thrilled to inform you that we have successfully received your signed contract. Your trust in Buro to meet your needs is greatl appreciated, and we are committed to delivering excellence every step of the way. This marks the beginning of our official partnership, and we assure you that our team is dedicated to providing you with outstanding service and support. As we proceed, you will receive a comprehensive guide on how to maximize the benefits of our services. Should you have any questions or need assistance, please feel free to reach out to our customer support at any time. Your satisfaction is our priority, and we are here to ensure a smooth and beneficial experience for you. Thank you for choosing Buro. We look forward to a fruitful collaboration and are excited about the opportunities ahead.",
+    "warm_regards": "Warm Regards",
+    "team": "The Buro Team"
   }
 }

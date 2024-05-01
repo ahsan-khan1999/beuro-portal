@@ -58,7 +58,7 @@ export const useEditOfferDetails = ({
 
   const onCancel = () => {
     router.pathname = "/offers";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
 
@@ -167,7 +167,7 @@ export const useEditOfferDetails = ({
         customerID: offerDetails?.leadID?.customerID,
         gender:
           staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
-        time: offerDetails?.time,
+        time: offerDetails?.id && offerDetails?.time,
       });
     }
   }, [type]);

@@ -230,7 +230,8 @@
         "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
-        "open": "Offen"
+        "open": "Offen",
+        "sending": "Senden"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -286,7 +287,7 @@
       "cancel_button": "Abbrechen",
       "save_changes_button": "Änderungen speichern",
       "company_name": "Firmenname",
-      "save_button": "Speichern Sie"
+      "save_button": "Speichern"
     },
     "add_customer_placeholders": {
       "name": "Bitte geben Sie Ihren Namen ein",
@@ -335,7 +336,7 @@
     "main_heading": "E-Mail Tracker",
     "email_detail_heading": "E-Mail",
     "table_functions": {
-      "open": "Offen",
+      "open": "Geöffnet",
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     },
@@ -673,7 +674,7 @@
       "edit_invoice": "Rechnung Bearbeiten"
     },
     "table_functions": {
-      "open": "Offen",
+      "open": "Geöffnet",
       "overdue": "Überfällig",
       "paid": "Bezahlt"
     },
@@ -746,6 +747,11 @@
       "main_heading": "Rechnung erfolgreich erstellt",
       "sub_heading": "Danke, dass Sie eine Rechnung erstellt haben. Wir freuen uns, Sie zu haben.",
       "button": "PDF-Vorschau"
+    },
+    "main_invoice_created_modal": {
+      "main_heading": "Rechnung erfolgreich erstellt",
+      "sub_heading": "Vielen Dank für die Erstellung der Rechnung, wir freuen uns, dass Sie dabei sind.",
+      "button": "Done"
     }
   },
   "contracts": {
@@ -772,7 +778,8 @@
       "heading": "Vertragsdetails",
       "confirm_button": "Bestätigung senden",
       "contract_id": "Vertrags-ID",
-      "offer_title": "Angebotstitel",
+      "offer_title": "Angebots Titel",
+      "invoice_title": "Rechnung Titel",
       "worker": "Arbeiter",
       "offer_id": "Angebots-ID",
       "email_status": "E-Mail-Status",
@@ -802,7 +809,8 @@
       "address_details": "Adressdetails",
       "street_no": "Strasse+Nr",
       "post_code": "Plz + Ort",
-      "country": "Land"
+      "country": "Land",
+      "title": "Titel Vertrags"
     },
     "address_details": {
       "main_heading": "Adressdetails",
@@ -836,7 +844,7 @@
       "back_button": "Zurück",
       "next_button": "Weiter",
       "title": "Titel",
-      "additional_details": "Zustäzliche Details",
+      "additional_details": "Zusätzliche Details",
       "send": "Senden"
     },
     "pdf_card_details": {
@@ -909,7 +917,7 @@
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
     "table_functions": {
-      "open": "offen",
+      "open": "Offen",
       "inProcess": "In Bearbeitung",
       "close": "geschlossen",
       "expire": "abgelaufen"
@@ -1007,7 +1015,7 @@
       "back_button": "Zurück"
     },
     "additional": {
-      "heading": "Zustäzliche Details",
+      "heading": "Zusätzliche Details",
       "edit_button": "Details Bearbeiten",
       "save_changes_button": "Änderungen speichern",
       "next_button": "Weiter",
@@ -1030,6 +1038,7 @@
   },
   "common": {
     "modals": {
+      "contract_updating_description": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie da sind.",
       "offer_rejected_des": "Ihre Änderung wurde erfolgreich durchgeführt",
       "update_password": "Vielen Dank für die Aktualisierung des Passworts, wir freuen uns, dass Sie dabei sind.",
       "invoice_update": "Vielen Dank für die Aktualisierung der Rechnung, wir sind froh, dass wir Sie haben.",
@@ -1083,8 +1092,9 @@
       "offer_ID": "Angebots-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
-      "offer_created": "Vorgang erfolgreich",
+      "offer_created": "Operation erfolgreich abgeschlossen",
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
       "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
@@ -1096,6 +1106,9 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "filters": "Filter",
+    "CSV_button": "Berichte herunterladen",
+    "create_invoice": "Rechnung erstellen",
     "description_placeholder": "Bitte tragen Sie hier Ihre Angaben ein...",
     "actions": "Aktion",
     "service": "Dienst",
@@ -1196,7 +1209,7 @@
     "privacy": "Datenschutzbestimmungen",
     "copy_right": "Urheberrecht 2024",
     "better_management": "Besseres Management",
-    "better_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
+    "better_description": "Better Management bietet Ihnen beispiellose Effizienz und strategische Kontrolle auf Knopfdruck. Steigern Sie die Leistung Ihres Unternehmens durch Prozessoptimierung, fundierte Entscheidungsfindung und intuitive Tools, die zu langfristigem Erfolg führen.",
     "notes_modal": {
       "heading": "Notizen",
       "button": "Neue Notiz hinzufügen"
@@ -1413,7 +1426,7 @@
     },
 
     "additional_details": {
-      "main_heading": "Zustäzliche Details",
+      "main_heading": "Zusätzliche Details",
       "edit_button": "Details Bearbeiten",
       "cancel_button": "Abbrechen",
       "save_button": "Speichern",
@@ -1716,7 +1729,7 @@
     "completed_button": "Abgeschlossen",
     "customer_detail_heading": "Kundendetails",
     "follow_up_detail_heading": "Details zur Nachverfolgung",
-    "additional_detail_heading": "Zustäzliche Details",
+    "additional_detail_heading": "Zusätzliche Details",
     "lead_detail_heading": "Anfragen-Details",
     "address_detail_heading": "Adressdetails",
     "follow_up_details": {
@@ -1778,7 +1791,7 @@
       "select_lead": "Anfragen auswählen",
       "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
       "follow_up_type": "Art der Nachverfolgung",
-      "additional_details": "Zustäzliche Details"
+      "additional_details": "Zusätzliche Details"
     },
     "customer_details_modal": {
       "heading": "Kundendetails",
@@ -1828,7 +1841,7 @@
       "budget": "Budget",
       "lead_source": "Leadquellen",
       "other_services": "Andere Leistungen",
-      "Additional_details": "Zustäzliche Details"
+      "Additional_details": "Zusätzliche Details"
     }
   },
   "dashboard_detail": {
@@ -1866,7 +1879,7 @@
       "sales": "Rechnungen"
     },
     "cards_status": {
-      "open": "Offen",
+      "open": "Geöffnet",
       "close": "Geschlossen",
       "expire": "Abgelaufen",
       "signed": "Unterzeichnet",
@@ -1874,7 +1887,7 @@
       "cancel": "Abgebrochen",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
-      "pending": "Entwurf"
+      "pending": "Ausstehend"
     },
     "charts_labels": {
       "website": "Webseite",
@@ -1969,13 +1982,16 @@
       "to": "Bis",
       "email": "E-Mail",
       "send": "Senden",
-      "draft": "Entwurf",
+      "draft": "Ausstehend",
       "failed": "Fehlgeschlagen",
       "pending": "Ausstehend",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
       "leadSource": "Leadquellen",
-      "open": "Offen"
+      "open": "Offen",
+      "online": "Online",
+      "cash": "Bar",
+      "sending": "Senden"
     }
   },
   "global_search": {
@@ -2013,7 +2029,7 @@
     "offer_id": "Angebot ID",
     "email_status": "E-Mail-Status"
   },
-  "Pending": "Entwurf",
+  "Pending": "Ausstehend",
   "Sent": "Gesendet",
   "gender": {
     "Mr": "Herr",
@@ -2036,7 +2052,7 @@
     "Confirmed": "Bestätigt",
     "Cancelled": "Abgebrochen",
     "Sent": "Gesendet",
-    "Pending": "Entwurf",
+    "Pending": "Ausstehend",
     "Post": "Gesendet"
   },
   "invoice_status": {
@@ -2046,7 +2062,7 @@
     "Open": "Offen"
   },
   "support_req_status": {
-    "pending": "Entwurf",
+    "pending": "Ausstehend",
     "resolved": "aufgelöst"
   },
   "payment_method": {
@@ -2066,21 +2082,21 @@
   },
   "email_status": {
     "Post": "Gesendet",
-    "Pending": "Entwurf",
+    "Pending": "Ausstehend",
     "Sent": "Gesendet",
     "Failed": "Gescheitert"
   },
   "mail_tracker_status": {
-    "pending": "Entwurf",
-    "opend": "Offen",
+    "pending": "Ausstehend",
+    "opend": "Geöffnet",
     "failed": "Fehlgeschlagen"
   },
   "support_request_status": {
-    "pending": "Entwurf",
+    "pending": "Ausstehend",
     "resolved": "aufgelöst"
   },
   "customer_type": {
-    "individual": "individuell",
+    "individual": "Privat",
     "company": "Unternehmen"
   },
   "frequency": {
@@ -2139,7 +2155,7 @@
     }
   },
   "add_note_dropdown": {
-    "all_notes": "Alle Notizen",
+    "all_notes": "Alle Anfragen",
     "sending_picture": "Sendet Fotos",
     "view_date": "Besichtigungs Termin",
     "approximate_offer_open": "Schätzoﬀerte Oﬀen",
@@ -2147,5 +2163,12 @@
     "individual_note": "Individuelle Notiz",
     "note_reached": "Nicht erreicht",
     "other": "Andere"
+  },
+  "thank_you_content": {
+    "heading": "Danke für die Unterzeichnung des Vertrags",
+    "valued_csutomer": "Sehr geehrter Kunde",
+    "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten. Übersetzt mit DeepL.com (kostenlose Version).",
+    "warm_regards": "Mit freundlichen Grüßen",
+    "team": "Das Buro-Team"
   }
 }

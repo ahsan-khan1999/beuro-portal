@@ -2,6 +2,7 @@ import EmailCard from "./PdfCard";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+
 const OfferPdf = dynamic(
   () => import("@/components/reactPdf/offer-pdf-preview"),
   { ssr: false, loading: () => <LoadingState /> }
@@ -14,7 +15,7 @@ import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
 
-const PdfPriview = () => {
+const OfferPdfPriview = () => {
   const {
     offerData,
     activeButtonId,
@@ -60,46 +61,52 @@ const PdfPriview = () => {
 
   return (
     <>
-      {loading ? (
+      {/* {loading ? (
         <LoadingState />
-      ) : (
-        <div className="">
-          <EmailCard
-            emailStatus={offerDetails?.emailStatus}
-            offerNo={offerData?.emailHeader?.offerNo}
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onDownload={handleDonwload}
-            onPrint={handlePrint}
-            handleSendByPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-            offerId={offerData?.id}
-          />
+      ) : ( */}
+      <div>
+        <EmailCard
+          emailStatus={offerDetails?.emailStatus}
+          offerNo={offerData?.emailHeader?.offerNo}
+          onEmailSend={handleEmailSend}
+          loading={loading}
+          onDownload={handleDonwload}
+          onPrint={handlePrint}
+          handleSendByPost={handleSendByPost}
+          activeButtonId={activeButtonId}
+          offerId={offerData?.id}
+        />
 
-          <OfferPdf
-            data={offerData}
-            emailTemplateSettings={emailTemplateSettings}
-            templateSettings={templateSettings}
-            systemSetting={systemSetting}
-            showContractSign={true}
-            pdfFile={pdfFile}
-            setPdfFile={setPdfFile}
-          />
-          <OfferPdfDownload
-            data={offerData}
-            templateSettings={templateSettings}
-            emailTemplateSettings={emailTemplateSettings}
-            pdfFile={pdfFile}
-            setPdfFile={setPdfFile}
-            systemSetting={systemSetting}
-            showContractSign={true}
-          />
+        {loading ? (
+          <LoadingState />
+        ) : (
+          <div className="mt-5">
+            <OfferPdf
+              data={offerData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+              showContractSign={true}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+            />
+            <OfferPdfDownload
+              data={offerData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              systemSetting={systemSetting}
+              showContractSign={true}
+            />
+          </div>
+        )}
 
-          {renderModal()}
-        </div>
-      )}
+        {renderModal()}
+      </div>
+      {/* )} */}
     </>
   );
 };
 
-export default PdfPriview;
+export default OfferPdfPriview;

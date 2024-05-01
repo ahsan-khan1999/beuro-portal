@@ -9,6 +9,8 @@ import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { Button } from "@/base-components/ui/button/button";
+import filtersIcon from "@/assets/pngs/filter_icon.png";
 
 export default function EmployeesFilter({
   filter,
@@ -78,8 +80,17 @@ export default function EmployeesFilter({
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
   return (
-    <div className="relative flex my-auto cursor-pointer " ref={ref}>
-      <svg
+    <div className="relative flex my-auto cursor-pointer" ref={ref}>
+      <Button
+        inputType="button"
+        onClick={handleExtraFilterToggle}
+        className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+        icon={filtersIcon}
+        text={translate("common.filters")}
+        id="add"
+        iconAlt="fitlers"
+      />
+      {/* <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -103,7 +114,7 @@ export default function EmployeesFilter({
             />
           </clipPath>
         </defs>
-      </svg>
+      </svg> */}
       <AnimatePresence>
         {extraFilterss && (
           <motion.div

@@ -11,7 +11,7 @@ export const UpdateNoteFormField: GenerateUpdateNoteFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-5",
+      containerClass: "rounded-lg px-2 py-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("common.add_note_modal.label")}`,
         htmlFor: "description",

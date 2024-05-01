@@ -89,7 +89,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
         .string()
         .required(translate("validationMessages.required")),
       [EditOfferDetails.postCode]: yup.string().notRequired(),
-      [EditOfferDetails.country]: yup.string().notRequired(),
+      // [EditOfferDetails.country]: yup.string().notRequired(),
     }),
     [EditOfferDetails.date]: yup
       .array()
@@ -108,6 +108,7 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       .required(translate("validationMessages.required")),
   });
 };
+
 export const generateOfferDetailsDateValidationSchema = (
   translate: Function,
   count: number
@@ -159,9 +160,7 @@ export const generateOfferAddressEditDetailsValidation = (
             .string()
             .required(translate("validationMessages.required")),
           [OfferAddressEditDetails.postCode]: yup.string().notRequired(),
-          [OfferAddressEditDetails.country]: yup
-            .string()
-            .required(translate("validationMessages.required")),
+          // [OfferAddressEditDetails.country]: yup.string().notRequired(),
           [OfferAddressEditDetails.description]: yup.string().notRequired(),
           [OfferAddressEditDetails.label]: yup
             .string()
@@ -211,9 +210,7 @@ export const generateAddfferServiceDetailsValidation = (
             .number()
             .required(translate("validationMessages.required"))
             .typeError(translate("validationMessages.invalid_format")),
-          [AddServiceOfferDetails.description]: yup
-            .string()
-            .required(translate("validationMessages.required")),
+          [AddServiceOfferDetails.description]: yup.string().notRequired(),
         })
         .required(translate("validationMessages.required"))
     )

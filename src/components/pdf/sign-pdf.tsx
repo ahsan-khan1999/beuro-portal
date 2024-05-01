@@ -73,7 +73,8 @@ export const SignPdf = <T,>({
   };
 
   const onSuccess = () => {
-    router.push("https://buero-365.com/");
+    // router.push("https://buero-365.com/");
+    router.push("/thank-you");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

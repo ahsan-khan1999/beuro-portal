@@ -48,6 +48,7 @@ export const useSendEmail = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     // dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
     reset({
@@ -121,6 +122,7 @@ export const useSendEmail = (
     // if (response?.payload) {
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
+
       let apiData = { ...data, id: offerDetails?.id, pdf: fileUrl };
 
       const res = await dispatch(sendOfferEmail({ data: apiData }));

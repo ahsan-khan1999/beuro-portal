@@ -12,13 +12,15 @@ const QRSettings = ({ handleCreation }: { handleCreation: Function }) => {
 
   return (
     <FormCard>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
       {renderModal()}
     </FormCard>
   );

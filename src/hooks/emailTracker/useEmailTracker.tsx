@@ -29,13 +29,6 @@ const useEmailTracker = () => {
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
-    // dispatch(
-    //   readEmail({ params: { filter: filter, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.MailTracker);
-    //   }
-    // });
   };
 
   const handlePageChange = (page: number) => {
@@ -45,6 +38,7 @@ const useEmailTracker = () => {
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
+
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
     } else {
@@ -58,18 +52,13 @@ const useEmailTracker = () => {
     const queryParams = searchQuery || sortedValue;
 
     let updatedFilter = {
-      text: "",
-      sort: "",
+      text: searchQuery || "",
+      sort: sortedValue || "",
     };
-
-    if (searchQuery || sortedValue) {
-      updatedFilter.text = searchQuery;
-      updatedFilter.sort = sortedValue;
-    }
 
     setFilter(updatedFilter);
 
-    if (parsedPage) {
+    if (parsedPage !== undefined) {
       dispatch(
         readEmail({
           params: {
@@ -79,46 +68,12 @@ const useEmailTracker = () => {
           },
         })
       ).then((response: any) => {
-        if (response?.payload)
+        if (response?.payload) {
           setCurrentPageRows(response?.payload?.MailTracker);
+        }
       });
     }
   }, [query]);
-
-  // useEffect(() => {
-  //   const parsedPage = parseInt(query.page as string, 10);
-  //   if (!isNaN(parsedPage)) {
-  //     setCurrentPage(parsedPage);
-  //   }
-  //   const searchQuery = query?.text as string;
-
-  //   const queryParams = searchQuery;
-
-  //   let updatedFilter = {
-  //     text: "",
-  //   };
-
-  //   if (searchQuery) {
-  //     updatedFilter.text = searchQuery;
-  //   }
-
-  //   setFilter(updatedFilter);
-  //   console.log(parsedPage, "parsedPage");
-  //   if (parsedPage) {
-  //     dispatch(
-  //       readEmail({
-  //         params: {
-  //           filter: queryParams ? updatedFilter : {},
-  //           page: Number(parsedPage) || currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload)
-  //         setCurrentPageRows(response?.payload?.MailTracker);
-  //     });
-  //   }
-  // }, [query]);
 
   return {
     currentPageRows,

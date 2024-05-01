@@ -60,13 +60,6 @@ const useLeads = () => {
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
-    // dispatch(
-    //   readLead({ params: { filter: query, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Lead);
-    //   }
-    // });
   };
 
   const onClose = () => {
@@ -82,7 +75,23 @@ const useLeads = () => {
       dispatch(setLeadDetails(filteredLead[0]));
       dispatch(
         readNotes({ params: { type: "lead", id: filteredLead[0]?.id } })
-      );
+      ).then((res: any) => {
+        if (res.payload.Note?.length > 0) {
+          setCurrentPageRows((prev) => {
+            const updatedLeads = prev.map((item) => {
+              if (item.id === filteredLead[0]?.id) {
+                const lead: Lead = {
+                  ...item,
+                  isNoteCreated: true,
+                };
+                return lead;
+              }
+              return item;
+            });
+            return updatedLeads;
+          });
+        }
+      });
       dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
     } else {
       dispatch(updateModalType({ type: ModalType.CREATION }));
@@ -125,9 +134,27 @@ const useLeads = () => {
     e.stopPropagation();
     dispatch(setImages([]));
     const filteredLead = lead.find((item_) => item_.id === item);
+
     if (filteredLead) {
       dispatch(setLeadDetails(filteredLead));
-      dispatch(readImage({ params: { type: "leadID", id: filteredLead?.id } }));
+      dispatch(
+        readImage({ params: { type: "leadID", id: filteredLead?.id } })
+      ).then((res: any) => {
+        if (
+          res.payload?.images.length > 0 ||
+          res.payload?.attachments.length > 0 ||
+          res.payload?.videos.length > 0 ||
+          res.payload?.links.length > 0
+        ) {
+          setCurrentPageRows((prev) =>
+            prev.map((lead) => {
+              return lead.id === filteredLead?.id
+                ? { ...lead, isImageAdded: true }
+                : lead;
+            })
+          );
+        }
+      });
       dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
     }
   };

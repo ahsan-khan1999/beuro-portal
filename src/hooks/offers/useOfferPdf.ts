@@ -147,6 +147,7 @@ export const useOfferPdf = () => {
             },
             headerDetails: {
               offerNo: offerDetails?.offerNumber,
+              companyName: offerDetails?.createdBy.company.companyName,
               offerDate: offerDetails?.createdAt,
               createdBy: offerDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
@@ -189,6 +190,7 @@ export const useOfferPdf = () => {
               grandTotal: offerDetails?.total?.toString(),
               discountType: offerDetails?.discountType,
               taxType: offerDetails?.taxType,
+              isOfferPDF: true,
               serviceDiscountSum:
                 offerDetails?.serviceDetail?.serviceDetail?.reduce(
                   (acc, service) => {
@@ -261,10 +263,13 @@ export const useOfferPdf = () => {
 
       if (!pdfFile) return;
       formData.append("file", pdfFile as any);
+
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
+
       if (fileUrl?.payload) {
         localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
+
       if (isMail) {
         router.push(
           {
@@ -315,6 +320,7 @@ export const useOfferPdf = () => {
       console.error("Error in handleEmailSend:", error);
     }
   };
+
   const handleSendByPost = async () => {
     setActiveButtonId("post");
 
@@ -326,6 +332,7 @@ export const useOfferPdf = () => {
     if (response?.payload)
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const handleDonwload = () => {
     if (pdfFile) {
       const url = URL.createObjectURL(pdfFile);
@@ -343,15 +350,17 @@ export const useOfferPdf = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   const handlePrint = () => {
     window.open(offerDetails?.attachement);
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
   const onSuccess = () => {
     router.pathname = "/offers";
-    router.query = { status: "None", page: "1" };
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

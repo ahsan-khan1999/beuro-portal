@@ -38,8 +38,11 @@ const SERVICE_URLS = {
   offer: "/offer/Offer-step/",
 
   contract: "/contract",
+  updateContract: "/contract/",
   company: "/company",
   invoice: "/invoice",
+  downloadInvoiceRoute: "/invoice/download-excel",
+  mainInvoice: "/invoice/invoice-step/",
 
   contactSupport: "/contactSupport",
   employee: "/employee",
@@ -105,13 +108,12 @@ const SERVICE_URLS = {
   sendByPost: "/offer/send-By-Post/",
   contractSendByPost: "/contract/send-By-Post/",
   invoiceSendByPost: "/invoice/invoice-collection/send-By-Post/",
-
   readOfferPublic: "/offer/public-read",
   rejectOfferPublic: "/offer/reject-offer",
   updateDiscount: "/offer/update-discount/",
   readContractQrCode: "/contract/generate-QrCode",
   readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf",
-
+  readMainInvoiceQrCode: "/invoice/generate-QrCode",
   settingsQrCode: "/setting/qrcode/qrCode-setting",
   offerContent: "/offer/update-content/",
   updateDate: "/offer/update-date/",
@@ -317,10 +319,12 @@ const updateOfferNotes = (data) =>
   put(SERVICE_URLS.offerNotes + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const updateOffer = (data) =>
   put(SERVICE_URLS.offer + `${data?.step}/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteOffer = (data) =>
   del(
     SERVICE_URLS.readOffer + `/${data?.id}`,
@@ -354,12 +358,20 @@ const readContractDetail = (params) =>
     { feature: featureConstants.login },
     { detail: true }
   );
+
 const createContract = (data) =>
   post(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+
 const updateContractDate = (data) =>
   put(SERVICE_URLS.updateDate + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
+const updateContractDetails = (data) =>
+  put(SERVICE_URLS.updateContract + `${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
 const updateContract = (data) =>
   put(SERVICE_URLS.contract, data, { feature: featureConstants.login });
 const updateContractStatus = (data) =>
@@ -380,6 +392,14 @@ const deleteContract = (data) =>
 const readInvoice = (params) =>
   get(
     SERVICE_URLS.invoice,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const downloadInvoice = (params) =>
+  get(
+    SERVICE_URLS.downloadInvoiceRoute,
     params,
     { feature: featureConstants.login },
     { detail: false }
@@ -406,6 +426,20 @@ const stopRecurringInvoice = (data) =>
   });
 const deleteInvoice = (data) =>
   del(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+
+// create main invoice
+const createMainInvoice = (data) => {
+  let route = data?.invoiceId ? data?.step + "/" + data?.invoiceId : data?.step;
+  return post(SERVICE_URLS.mainInvoice + route, data, {
+    feature: featureConstants.login,
+  });
+};
+
+// update main invoice
+const updateMainInvoice = (data) =>
+  put(SERVICE_URLS.mainInvoice + `${data?.step}/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
 
 const readContactSupport = (params) =>
   get(
@@ -882,6 +916,14 @@ const readInvoiceQRCode = (params) =>
     { detail: true }
   );
 
+const readMainQRCode = (params) =>
+  get(
+    SERVICE_URLS.readMainInvoiceQrCode,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
 const readSettingsQrCode = (params) =>
   get(
     SERVICE_URLS.settingsQrCode,
@@ -1071,5 +1113,10 @@ const apiServices = {
   updateInvoiceDetails,
   createInvoiceDetail,
   deleteTax,
+  createMainInvoice,
+  updateMainInvoice,
+  readMainQRCode,
+  updateContractDetails,
+  downloadInvoice,
 };
 export default apiServices;

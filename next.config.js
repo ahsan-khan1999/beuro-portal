@@ -5,12 +5,13 @@ const nextConfig = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains:["kaufes-dev-v2.s3.me-south-1.amazonaws.com"],
+    domains: ["*"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "kaufes-dev-v2.s3.me-south-1.amazonaws.com",
+        hostname: "*",
       },
+    
     ],
   },
   webpack: (config, { isServer }) => {
@@ -23,6 +24,6 @@ const nextConfig = {
     }
     return config;
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

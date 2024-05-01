@@ -1,4 +1,3 @@
-import { PDFResponse } from "@/types/pdf";
 import {
   BlobProvider,
   Document,
@@ -72,6 +71,7 @@ const OfferPdfDownload = ({
   showContractSign,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
+
   const { address, header, workDates, time } = data?.movingDetails || {};
   const contactAddress = data?.contactAddress;
   const serviceItem = data?.serviceItem;
@@ -98,7 +98,6 @@ const OfferPdfDownload = ({
       ? true
       : false || false;
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
-  console.log(address);
 
   return (
     <div className="download-link">
@@ -195,7 +194,12 @@ const OfferPdfDownload = ({
       >
         {({ blob, url, loading, error }) => {
           if (blob && !pdfFile) {
-            setPdfFile(blobToFile(blob, `${headerDetails?.offerNo}.pdf`));
+            setPdfFile(
+              blobToFile(
+                blob,
+                `${headerDetails?.companyName} ${headerDetails?.offerNo}.pdf`
+              )
+            );
           }
           return <></>;
         }}

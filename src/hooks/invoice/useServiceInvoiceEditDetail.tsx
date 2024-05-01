@@ -50,7 +50,7 @@ export const useServiceInvoiceEditDetail = ({
   );
 
   const [serviceType, setServiceType] = useState<ServiceType[]>(
-    invoiceDetails?.serviceDetail?.serviceDetail?.map((item) =>
+    invoiceDetails?.serviceDetail?.serviceDetail?.map((item: any) =>
       item.serviceType === "New Service"
         ? ServiceType.NEW_SERVICE
         : ServiceType.EXISTING_SERVICE
@@ -159,48 +159,6 @@ export const useServiceInvoiceEditDetail = ({
     }, 10);
   };
 
-  // const generateGrandTotal = () => {
-  //   const data = getValues();
-  //   const totalPrices = data?.serviceDetail?.reduce(
-  //     (acc: number, element: any) =>
-  //       acc + parseFloat(element.totalPrice || 0),
-  //     0
-  //   );
-
-  //   let taxAmount =
-  //     isTax && String(taxType) === "0"
-  //       ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
-  //       : isTax && String(taxType) === "1"
-  //         ? calculateTax(totalPrices, data?.taxAmount || 0)
-  //         : 0;
-  //   let discount = 0;
-
-  //   if (isDiscount && discountAmount) {
-  //     discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
-  //     if (!+discountType && discountAmount > 100) {
-  //       setValue("discountAmount", 100);
-  //       console.info("Percentage should not be greater than 100%");
-  //     } else if (!!+discountType && discountAmount > totalPrices) {
-  //       setValue("discountAmount", totalPrices);
-  //       console.info("Amount should not be greater than total price");
-  //     } else if (!!+discountType && discountAmount === "") {
-  //     }
-  //   } else {
-  //     setValue("discountAmount", prevDisAmount);
-  //   }
-  //   const grandTotal = String(taxType) === "0" ? totalPrices - discount : totalPrices + taxAmount - discount;
-
-  //   if (discountAmount === "") {
-  //     setValue("discountAmount", "");
-  //   }
-  //   prevDisAmount = discountAmount === "" || discount === 0 ? "" : discount;
-  //   setTotal({
-  //     subTotal: totalPrices,
-  //     grandTotal: grandTotal,
-  //     taxAmount: taxAmount,
-  //   });
-  // };
-
   const generateGrandTotal = () => {
     const data = getValues();
     const totalPrices = data?.serviceDetail?.reduce(
@@ -210,8 +168,14 @@ export const useServiceInvoiceEditDetail = ({
 
     let discount = 0;
 
-    if (isDiscount && discountAmount) {
+    if (discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
+      console.log(
+        !+discountType && discountAmount > 100,
+        "test",
+        discountAmount
+      );
+
       if (!+discountType && discountAmount > 100) {
         setValue("discountAmount", 100);
         console.info("Percentage should not be greater than 100%");
@@ -222,10 +186,15 @@ export const useServiceInvoiceEditDetail = ({
         // Handle case where discountAmount is empty
       }
     } else {
-      setValue("discountAmount", prevDisAmount);
+      setValue(
+        "discountAmount",
+        discountAmount || invoiceDetails?.discountAmount
+      );
+    }
+    if (!isDiscount) {
+      setValue("discountAmount", 0);
     }
 
-    // Calculate grand total after applying discount
     const discountedTotal = totalPrices - discount;
 
     let taxAmount = 0;
@@ -262,13 +231,6 @@ export const useServiceInvoiceEditDetail = ({
 
   useMemo(() => {
     if (invoiceDetails.id) {
-      // const tax = calculateTax(offerDetails?.subTotal, offerDetails?.taxAmount )
-      // setTotal({
-      //   taxAmount: tax,
-      //   subTotal: offerDetails.subTotal,
-      //   grandTotal: offerDetails.total,
-      // });
-
       reset({
         serviceDetail: invoiceDetails?.serviceDetail?.serviceDetail || [
           {
@@ -291,7 +253,6 @@ export const useServiceInvoiceEditDetail = ({
         taxAmount: invoiceDetails?.taxAmount || 0,
       });
     }
-    // generateGrandTotal();
   }, [invoiceDetails.id]);
 
   const {

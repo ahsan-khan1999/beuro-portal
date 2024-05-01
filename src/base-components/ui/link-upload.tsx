@@ -16,6 +16,7 @@ export const LinkUpload = ({
 }: LinkUploadProps) => {
   const { t: translate } = useTranslation();
   const [validation, setValidation] = useState({ isValid: true, message: "" });
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredLink(event.target.value);
     setValidation(validateUrl(event.target.value, translate));
@@ -24,6 +25,7 @@ export const LinkUpload = ({
   function test() {
     console.error("invalid url");
   }
+
   return (
     <div className="mt-[10px]">
       <div className="flex items-center gap-x-4 mb-[10px]">

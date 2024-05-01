@@ -6,10 +6,9 @@ import { CopyField } from "../copy-field";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import { BaseButton } from "../button/base-button";
+import { ImagePreview } from "./image-preview";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useShareImages } from "@/hooks/modals/useShareImages";
-import { ImagePreview } from "./image-preview";
-import { useAppSelector } from "@/hooks/useRedux";
 
 export const ShareImages = ({
   onClose,
@@ -26,9 +25,8 @@ export const ShareImages = ({
     loading,
     loadingGlobal,
     isOpenedFile,
+    images,
   } = useShareImages();
-
-  const { images } = useAppSelector((state) => state.image);
 
   const handleFileLink = (fileName: string) => {
     window.open(fileName);

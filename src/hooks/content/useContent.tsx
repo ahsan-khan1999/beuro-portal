@@ -63,19 +63,20 @@ const useContent = () => {
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
+  
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
     } else {
       resetPage = 1;
       setCurrentPage(1);
     }
-
+  
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
     const searchDate = query?.date as string;
-
+  
     const queryParams = searchQuery || sortedValue || searchDate;
-
+  
     let updatedFilter: {
       text?: string;
       sort?: string;
@@ -84,18 +85,18 @@ const useContent = () => {
         $lte?: string;
       };
     } = {
-      text: "",
+      text: searchQuery || "",
     };
-
+  
     if (searchQuery || sortedValue || searchDate) {
       updatedFilter.text = searchQuery;
       updatedFilter.sort = sortedValue;
-      updatedFilter.date = searchDate && JSON.parse(searchDate);
+      updatedFilter.date = searchDate ? JSON.parse(searchDate) : undefined;
     }
-
+  
     setFilter(updatedFilter);
-
-    if (parsedPage) {
+  
+    if (parsedPage !== undefined) {
       dispatch(
         readContent({
           params: {
@@ -105,10 +106,13 @@ const useContent = () => {
           },
         })
       ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Content);
+        if (response?.payload) {
+          setCurrentPageRows(response?.payload?.Content);
+        }
       });
     }
   }, [query]);
+  
 
   return {
     currentPageRows,

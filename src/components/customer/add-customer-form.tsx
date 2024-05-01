@@ -8,14 +8,14 @@ import React from "react";
 const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, renderModal } =
-    useCustomerDetail(false);
+    useCustomerDetail({ detail: false, idAddNewCustomer: true });
 
   const { t: translate } = useTranslation();
 
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-10">
-        <h2 className="text-[#393939] text-lg font-medium">
+      <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("customers.details.heading")}
         </h2>
 
@@ -25,13 +25,16 @@ const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
           containerClassName="flex items-center justify-center text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[161px] w-full"
         />
       </div>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
       {renderModal()}
     </FormCard>
   );

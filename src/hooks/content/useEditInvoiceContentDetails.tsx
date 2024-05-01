@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -16,9 +15,15 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, contentDetails } = useAppSelector((state) => state.content);
+  const { loading, error, contentDetails } = useAppSelector(
+    (state) => state.content
+  );
 
-  const [attachements, setAttachements] = useState<Attachement[]>(contentDetails?.id && transformAttachments(contentDetails?.invoiceContent?.attachments) || [])
+  const [attachements, setAttachements] = useState<Attachement[]>(
+    (contentDetails?.id &&
+      transformAttachments(contentDetails?.invoiceContent?.attachments)) ||
+      []
+  );
   const handleBack = () => {
     onClick(2, ComponentsType.invoiceContent);
   };
@@ -40,18 +45,20 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
       reset({
         invoiceContent: {
           ...contentDetails?.invoiceContent,
-        }
-      })
+        },
+      });
     }
-
-  }, [contentDetails.id])
+  }, [contentDetails.id]);
   const fields = EditInvoiceContentDetailsFormField(
     register,
     loading,
     control,
     handleBack,
-    trigger, 0, attachements, setAttachements, contentDetails
-
+    trigger,
+    0,
+    attachements,
+    setAttachements,
+    contentDetails
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
@@ -65,11 +72,12 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
       step: 3,
       stage: ComponentsType.invoiceContent,
       contentId: contentDetails?.id,
-      id: contentDetails?.id
-    }
-    const res = await dispatch(updateContent({ data: apiData, router, setError, translate }));
+      id: contentDetails?.id,
+    };
+    const res = await dispatch(
+      updateContent({ data: apiData, router, setError, translate })
+    );
     if (res?.payload) onClick(2, ComponentsType.invoiceContent);
-
   };
   return {
     fields,
@@ -78,6 +86,6 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

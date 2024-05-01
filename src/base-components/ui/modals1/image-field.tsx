@@ -55,7 +55,6 @@ export const ImageField = ({
     e.preventDefault();
 
     let file: any = [];
-    console.log(e, "event");
 
     if (e instanceof DragEvent && e.dataTransfer) {
       for (let item of e.dataTransfer.files) {

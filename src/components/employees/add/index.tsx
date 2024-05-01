@@ -22,7 +22,6 @@ const AddEmployeeDetails = () => {
 
   const handleCancel = () => {
     router.pathname = "/employees";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     onClose();
   };
@@ -54,7 +53,6 @@ const AddEmployeeDetails = () => {
 
   const createRouteChange = () => {
     router.pathname = "/employees";
-    router.query = { page: "1" };
     updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -121,7 +119,7 @@ const AddEmployeeDetails = () => {
               tabType={tabType}
             />
           </div>
-          <div className="w-full xLarge:max-w-[1060px]">
+          <div className="w-full xLarge:max-w-[80%]">
             {componentLookup[tabType]}
           </div>
         </div>

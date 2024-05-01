@@ -12,15 +12,15 @@ const InvoiceUpdate = ({
   onClose: () => void;
   invoiceCreated: Function;
 }) => {
-  
-  const defaultClassName = "mt-0  ";
+  const defaultClassName = "mt-0";
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
-  useInvoiceUpdateModal(invoiceCreated);
+    useInvoiceUpdateModal(invoiceCreated);
+
   return (
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[400px] lg:max-w-[474.447px] min-h-fit "
+        containerClassName="max-w-[400px] lg:max-w-[474.447px] min-h-fit"
       >
         <div className="relative flex flex-col lg:px-[39px] lg:pb-[40px] lg:pt-[24px] px-4 py-6">
           <Image
@@ -29,11 +29,10 @@ const InvoiceUpdate = ({
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
           />
-          <p className="text-[#000] font-medium text-[24px] leading-7 mb-5">
+          <p className="text-[#000] font-medium text-2xl border-b border-b-[#000] border-opacity-10 pb-5">
             {translate("invoice.create_invoice_modal.update_invoice")}
           </p>
 
-          <hr className="opacity-25 mb-[23px]" />
           <Form
             formFields={fields}
             handleSubmit={handleSubmit}

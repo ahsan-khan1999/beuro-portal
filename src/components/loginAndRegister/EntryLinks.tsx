@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { useRouter } from "next/router";
@@ -53,7 +53,7 @@ const EntryLinks = () => {
 
       <div className="flex justify-center">
         <Link
-          href="https://staging.buero365.cloudmeshsolutions.com/"
+          href="https://buero-365.com/privacy-policy/"
           className="text-xs text-[#8F8F8F]"
         >
           {translate("common.privacy")}
@@ -61,10 +61,7 @@ const EntryLinks = () => {
       </div>
 
       <div className="flex justify-center">
-        <Link
-          href="https://staging.buero365.cloudmeshsolutions.com/"
-          className="text-xs text-[#8F8F8F]"
-        >
+        <Link href="https://buero-365.com/" className="text-xs text-[#8F8F8F]">
           {translate("common.copy_right")}
         </Link>
       </div>

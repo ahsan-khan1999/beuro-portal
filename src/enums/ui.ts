@@ -65,6 +65,7 @@ export enum ModalType {
   REJECT_OFFER,
   UPDATE_ADDITIONAL_DETAILS,
   EDIT_DATE,
+  EDIT_CONTRACT_ADDITIONAL_DETAIL
 }
 
 export type ModalConfigType = {

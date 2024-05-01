@@ -18,13 +18,13 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
   for (let i = 0; i < count; i++) {
     let indexValue = i;
     formField.push({
-      containerClass: "",
+      containerClass: "rounded-lg px-2 py-3 bg-[#EDF4FF]",
       field: {
         type: Field.div,
         id: `QrCodeDetail_${i}`,
         children: [
           {
-            containerClass: "mt-6",
+            containerClass: "",
             field: {
               type: Field.div,
               id: "div-field",
@@ -36,6 +36,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                     value: "1",
                     id: `QrCodeDetail.${i}.QrCodeStatus`,
                     type: Field.radio,
+                    colorClasses: "bg-transparent",
                     label: `${translate(
                       "setting.qr_settings.company_info"
                     )} ${++indexValue}`,
@@ -52,7 +53,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
             },
           },
           {
-            containerClass: " mt-6",
+            containerClass: "mt-6",
             field: {
               type: Field.div,
               id: "div-field",
@@ -147,7 +148,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                     inputType: "text",
                     id: `QrCodeDetail.${i}.address.postalCode`,
                     name: `QrCodeDetail.${i}.address.postalCode`,
@@ -252,7 +253,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
           //     },
           //   },
           {
-            containerClass: "  mt-6",
+            containerClass: "mt-6",
             field: {
               type: Field.div,
               id: "div-field",
@@ -324,7 +325,7 @@ export const QRCodeSettingsAddField: GenerateQRCodeSettingFormField = (
               text: `${translate("setting.save_setting")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

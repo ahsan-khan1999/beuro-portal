@@ -75,7 +75,7 @@ const stylesheet: HtmlStyles = {
   },
   p: {
     margin: 0,
-    fontSize: 7,
+    // fontSize: 7,
     color: "#272727",
   },
   h1: {
@@ -108,15 +108,12 @@ const stylesheet: HtmlStyles = {
     padding: 0,
     // fontSize: 7,
   },
-  ul: { marginLeft: 0 ,
-    marginTop:6,
-  
-  },
+  ul: { marginLeft: 0, marginTop: 6 },
   li: {
     fontSize: 7,
     marginLeft: 0,
     marginRight: 10,
-    marginTop:0,
+    marginTop: 0,
 
     listStyle: "outside",
   },

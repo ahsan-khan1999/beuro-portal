@@ -3,7 +3,6 @@ import React, { SetStateAction } from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
-
 import { useEditDate } from "@/hooks/contract/useEditDate";
 import { EmailHeaderProps, PdfProps } from "@/types";
 

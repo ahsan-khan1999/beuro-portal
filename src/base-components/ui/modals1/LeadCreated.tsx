@@ -9,12 +9,14 @@ const LeadCreated = ({
   imageUploadHandler,
   onClose,
   routeHandler,
-  heading
+  heading,
+  subHeading,
 }: {
   imageUploadHandler: Function;
   onClose: () => void;
   routeHandler: Function;
-  heading:string
+  heading: string;
+  subHeading: string;
 }) => {
   const { t: translate } = useTranslation();
   return (
@@ -39,7 +41,7 @@ const LeadCreated = ({
             {heading}
           </p>
           <p className="text-[#1E1E1E] text-sm font-normal text-center mb-4">
-            {translate("leads.leads_created_modal.sub_heading")}
+            {subHeading}
           </p>
 
           <div className="flex flex-col">

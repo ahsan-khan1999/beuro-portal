@@ -15,7 +15,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-3 mb-0 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
+      containerClass: "mb-0 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
       label: {
         text: `${translate("offers.additional_details.choose")}`,
         htmlFor: "content",
@@ -28,7 +28,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "content",
         options:
           content?.map((item) => ({
-            label: item.contentName,
+            label: item.invoiceContent.title,
             value: item.id,
           })) || [],
         control,
@@ -54,14 +54,14 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       },
     },
     {
-      containerClass: "mt-10",
+      containerClass: "my-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
         className: "flex justify-end items-center space-x-[18px]",
         children: [
           {
-            containerClass: "mb-0 mt-[30px]",
+            containerClass: "mb-0",
             field: {
               type: Field.button,
               id: "buttonBack",
@@ -73,14 +73,14 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
             },
           },
           {
-            containerClass: "mb-0 mt-[30px]",
+            containerClass: "mb-0",
             field: {
               type: Field.button,
               id: "button",
               text: translate("offers.additional_details.save_button"),
               inputType: "submit",
               className:
-                "rounded-lg bg-[#4A13E7] px-4  w-[152px] h-[50px] text-white hover-bg-none",
+                "rounded-lg bg-[#4A13E7] px-4 w-[152px] h-[50px] text-white hover-bg-none",
               loading,
             },
           },

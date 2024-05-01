@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
+import { useTranslation } from "next-i18next";
 import AddressDetailsData from "./AddressDetailsData";
 import CustomerDetailsData from "./CustomerDetailsData";
-import LeadsDetailsImages from "../LeadsDetailsImages";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
@@ -10,9 +10,6 @@ import AddressEditDetails from "../edit/AddressEditDetails";
 import CustomerEditDetails from "../edit/CustomerEditDetails";
 import ServiceEditDetails from "../edit/ServiceEditDetails";
 import AditionalEditDetails from "../edit/AditionalEditDetails";
-import { useAppSelector } from "@/hooks/useRedux";
-import { useTranslation } from "next-i18next";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import OfferEditImages from "@/components/offers/OfferEditImages";
 
 export enum ComponentsType {

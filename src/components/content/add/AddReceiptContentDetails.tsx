@@ -13,20 +13,24 @@ const AddReceiptContentDetails = ({
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddContentReceiptDetails(onHandleBack, onHandleNext);
+
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-10">
-        <h2 className="text-[#393939] text-lg font-medium">
+      <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("content.tabs_headings.receipt_content")}
         </h2>
       </div>
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </FormCard>
   );
 };

@@ -1,5 +1,3 @@
-import LoadingState from "@/base-components/loadingEffect/loading-state";
-
 export const RenderPdf = ({ mergedPdfUrl }: { mergedPdfUrl: string }) => {
   return (
     <>
