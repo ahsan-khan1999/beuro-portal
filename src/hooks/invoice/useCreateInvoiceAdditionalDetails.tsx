@@ -48,7 +48,7 @@ export const useCreateInvoiceAdditionalDetails = (
     setValue(
       "additionalDetails",
       invoiceDetails?.additionalDetails ||
-        invoiceDetails?.content?.offerContent?.description
+        invoiceDetails?.content?.invoiceContent?.description
     );
   }, [invoiceDetails?.additionalDetails]);
 
