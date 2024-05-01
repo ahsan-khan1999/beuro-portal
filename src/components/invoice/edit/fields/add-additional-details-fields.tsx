@@ -2,7 +2,7 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateOffersFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
-export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
+export const AddInvoiceAdditionalDetailsFormField: GenerateOffersFormField = (
   register,
   loading,
   control,
