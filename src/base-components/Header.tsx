@@ -21,13 +21,13 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogout = async () => {
-    await dispatch(logoutUser());
-    logout();
-    router.push("/");
-    // router.push({
-    //   pathname: "/pdf",
-    //   query: { offerID: "65ef3d462f26df6c3b0f1f97", action: "Accept" },
-    // });
+    // await dispatch(logoutUser());
+    // logout();
+    // router.push("/");
+    router.push({
+      pathname: "/pdf",
+      query: { offerID: "66310dc61c07d2ef92308e75", action: "Accept" },
+    });
   };
 
   useEffect(() => {
