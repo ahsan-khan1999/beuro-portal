@@ -11,7 +11,7 @@ const AddressEditDetails = ({
 }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useLeadsAddressEditDetails({ onClick: onClick, isAddNewLead: false });
+    useLeadsAddressEditDetails(onClick);
 
   return (
     <FormCard>
