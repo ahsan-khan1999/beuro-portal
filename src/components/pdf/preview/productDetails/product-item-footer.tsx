@@ -15,13 +15,21 @@ export const ProductItemFooter = ({
 
   isTax,
 }: Partial<ProductItemFooterProps>) => {
+  const { t: translate } = useTranslation();
+
   const calculatedDiscount =
     discountType && discountType === "Amount"
       ? discount
       : calculateTax(Number(discount), Number(subTotal));
+
   const calculatedTax =
-    (taxType && calculateTax(Number(tax), Number(subTotal))) || 0;
-  const { t: translate } = useTranslation();
+    (taxType &&
+      calculateTax(
+        Number(tax),
+        Number(Number(subTotal) - Number(isDiscount ? calculatedDiscount : 0))
+      )) ||
+    0;
+
   return (
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">
       <div className="flex flex-col gap-y-[10px]">

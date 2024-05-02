@@ -44,6 +44,7 @@ export const useAddLeadServiceDetails = ({
     resolver: yupResolver<FieldValues>(schema),
   });
   const selectedContent = leadDetails?.requiredService as ContentTableRowTypes;
+
   const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
   useMemo(() => {
     if (leadDetails.id) {
@@ -55,6 +56,7 @@ export const useAddLeadServiceDetails = ({
       });
     }
   }, [leadDetails.id]);
+
   const fields = AddLeadServiceDetailsFormField(
     register,
     loading,
@@ -65,6 +67,7 @@ export const useAddLeadServiceDetails = ({
     leadDetails,
     systemSettings
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       ...data,
@@ -77,6 +80,7 @@ export const useAddLeadServiceDetails = ({
     );
     if (response?.payload) onHandleNext(ComponentsType.additionalAdd);
   };
+
   return {
     fields,
     onSubmit,

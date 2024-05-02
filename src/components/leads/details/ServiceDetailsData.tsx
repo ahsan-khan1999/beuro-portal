@@ -83,7 +83,6 @@ const ServiceDetailsData = ({
               {formatDateTimeToDate(leadDetails?.desireDate)}
             </div>
           </div>
-
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.availability")}
@@ -115,6 +114,15 @@ const ServiceDetailsData = ({
               {leadDetails?.preferredContact}
             </div>
           </div>
+
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("leads.service_details.lead_source")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+              {leadDetails?.leadSource}
+            </div>
+          </div>
           {/* <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.budget")}
@@ -125,15 +133,15 @@ const ServiceDetailsData = ({
           </div> */}
         </div>
 
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]">
-          <div className="xl:col-span-1">
+        <div className="rounded-b-lg px-2 pb-3 bg-[#EDF4FF]">
+          {/* <div className="xl:col-span-1">
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.lead_source")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {leadDetails?.leadSource}
             </div>
-          </div>
+          </div> */}
           <div className="xl:col-span-2">
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.service_details.other_services")}

@@ -6,16 +6,20 @@ import { calculateTax } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import TableLayout from "@/layout/TableLayout";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+import { staticEnums } from "@/utils/static";
+
+export interface ServiceDetailDataProps {
+  offerDetails: OffersTableRowTypes;
+  currency?: string;
+}
 
 const ServiceDetailsData = ({
   offerDetails,
   currency,
-}: {
-  offerDetails: OffersTableRowTypes;
-  currency?: string;
-}) => {
+}: ServiceDetailDataProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+
   const totalDiscount = offerDetails?.serviceDetail?.serviceDetail?.reduce(
     (acc, service) => {
       const price = service?.discount || 0;
@@ -23,6 +27,53 @@ const ServiceDetailsData = ({
     },
     0
   );
+
+  let serviceDiscountSum = offerDetails?.serviceDetail?.serviceDetail?.reduce(
+    (acc, service) => {
+      const price = service?.discount || 0;
+      return acc + price;
+    },
+    0
+  );
+
+  const updatedTotalDiscount =
+    (offerDetails?.subTotal / 100) * offerDetails?.discountAmount;
+
+  let discountPercentage;
+  if (
+    staticEnums["DiscountType"][
+      offerDetails?.discountType as keyof (typeof staticEnums)["DiscountType"]
+    ] === 1
+  ) {
+    discountPercentage =
+      ((offerDetails?.discountAmount + serviceDiscountSum) /
+        offerDetails.subTotal) *
+      100;
+  } else {
+    discountPercentage =
+      ((updatedTotalDiscount + serviceDiscountSum) / offerDetails?.subTotal) *
+      100;
+  }
+
+  const calculatedDiscount =
+    offerDetails?.discountType && offerDetails?.discountType === "Amount"
+      ? offerDetails?.discountAmount
+      : calculateTax(
+          Number(offerDetails?.discountAmount),
+          Number(offerDetails?.subTotal)
+        );
+
+  const calculatedTax =
+    (offerDetails?.taxType &&
+      calculateTax(
+        Number(offerDetails?.taxAmount),
+        Number(
+          Number(offerDetails?.subTotal) -
+            Number(offerDetails?.isDiscount ? calculatedDiscount : 0)
+        )
+      )) ||
+    0;
+
   return (
     <LeadsCardLayout>
       <div
@@ -115,7 +166,7 @@ const ServiceDetailsData = ({
 
             <div className="border-t border-t-[#000] border-opacity-10">
               <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5 bg-white">
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-3 border-b border-b-[#000] border-opacity-10 pb-3">
                   <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
                     <span className="text-[#4D4D4D] text-[14px] font-normal">
                       {translate(
@@ -131,11 +182,12 @@ const ServiceDetailsData = ({
                       {translate("offers.service_details.detail_headings.tax")}
                     </span>
                     <span className="text-[#4B4B4B] text-base font-medium">
-                      {calculateTax(
+                      {/* {calculateTax(
                         offerDetails?.total,
                         Number(offerDetails?.taxAmount)
-                      )}{" "}
-                      ({offerDetails?.taxAmount}%)
+                      )} */}
+                      {Number(calculatedTax).toFixed(2)} (
+                      {offerDetails?.taxAmount}%)
                     </span>
                   </div>
                   <div className="flex flex-col gap-2 ml-5">
@@ -155,7 +207,7 @@ const ServiceDetailsData = ({
                   </div>
                 </div>
 
-                <div className="float-right mt-3 border-t border-t-[#000] border-opacity-10 pt-3">
+                <div className="float-right mt-3">
                   <span className="text-[#1E1E1E] text-base font-semibold">
                     {translate(
                       "offers.service_details.detail_headings.grand_total"
