@@ -58,9 +58,11 @@ const TableRows = ({
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <div className="flex items-center gap-x-1">
-                  {item.customerDetail.companyName ? (
+                  {(item?.customerDetail
+                    ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
+                  1 ? (
                     <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item.customerDetail.companyName})
+                      ({item?.customerDetail?.companyName})
                     </span>
                   ) : (
                     <span className="py-4 truncate">

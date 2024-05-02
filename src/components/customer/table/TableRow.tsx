@@ -3,6 +3,7 @@ import { CustomerTable } from "@/types/customer";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { staticEnums } from "@/utils/static";
 
 const TableRow = ({ currentPageRows }: CustomerTable) => {
   const router = useRouter();
@@ -26,7 +27,9 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
               >
                 <span className="py-4 truncate">{item.refID}</span>
                 <div className="flex items-center gap-x-1">
-                  {item.companyName ? (
+                  {staticEnums["CustomerType"][
+                    item?.customerType as keyof (typeof staticEnums)["CustomerType"]
+                  ] === 1 ? (
                     <span className="py-4 truncate text-sm font-normal text-primary">
                       ({item.companyName})
                     </span>

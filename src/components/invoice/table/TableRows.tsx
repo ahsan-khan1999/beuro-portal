@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { InvoiceTableRowTypes } from "@/types/invoice";
 import { getInvoiceStatusColor } from "@/utils/utility";
+import { staticEnums } from "@/utils/static";
 const TableRows = ({
   dataToAdd,
   handleNotes,
@@ -37,7 +38,9 @@ const TableRows = ({
               >
                 <span className="py-4 truncate">{item.invoiceNumber}</span>
                 <div className="flex items-center gap-x-1">
-                  {item?.customerDetail?.companyName ? (
+                  {(item?.customerDetail
+                    ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
+                  1 ? (
                     <span className="py-4 truncate text-sm font-normal text-primary">
                       ({item?.customerDetail?.companyName})
                     </span>

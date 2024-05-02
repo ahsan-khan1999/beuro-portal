@@ -34,6 +34,7 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   const customerType = watch("customerType");
   useMemo(() => {
     if (leadDetails.id) {
