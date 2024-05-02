@@ -13,6 +13,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
   loading,
   control,
+  isAddNewLead,
   onHandleBack,
   count,
   handleAddNewAddress,
