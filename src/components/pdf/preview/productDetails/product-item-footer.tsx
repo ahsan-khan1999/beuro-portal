@@ -36,7 +36,7 @@ export const ProductItemFooter = ({
         <span className="text-sm font-medium text-[#000]">
           {translate("pdf.condition_for_moving")}
         </span>
-        <span className="text-[#404040] font-normal text-sm">
+        <span className="text-[#404040] font-normal text-sm ">
           {translate("pdf.thanks_message")}
         </span>
         <span className="text-[#404040] font-normal text-sm max-w-[490px]">
