@@ -114,14 +114,14 @@ const ExistingNotes = ({
                 </div>
 
                 <div className="relative mx-[41px] border border-[#4B4B4B] rounded-lg">
-                  <p className="text-lightGray text-sm font-normal absolute bottom-2 left-2">
+                  <p className="text-primary text-sm font-normal absolute bottom-2 left-2">
                     {item?.noteType}
                   </p>
                   <div
                     className="text-[#4B4B4B] text-base font-normal p-[17px] break-all"
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   />
-                  <div className="p-2 flex justify-end text-sm text-lightGray">
+                  <div className="p-2 flex justify-end text-sm text-primary">
                     {formatDateReverse(item?.createdAt)}
                   </div>
                 </div>

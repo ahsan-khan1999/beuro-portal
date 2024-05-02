@@ -16,6 +16,7 @@ const AddLeadServiceDetails = ({
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddLeadServiceDetails({ onHandleBack, onHandleNext });
+
   const router = useRouter();
 
   const handleCancel = () => {

@@ -78,8 +78,8 @@ const LeadsDetailsCardData = ({
 
         <div className="flex items-center justify-end gap-[22px]">
           {leadDetails.leadStatus !== "Close" && (
-            <div
-              className="w-fit border-[1px] border-[#4A13E7] rounded-lg flex px-4 py-[6px] cursor-pointer"
+            <button
+              className="group w-fit border-[1px] border-[#4A13E7] rounded-lg flex items-center px-4 py-[6px] cursor-pointer"
               onClick={() => {
                 localStoreUtil.remove_data("offer");
                 dispatch(
@@ -105,10 +105,10 @@ const LeadsDetailsCardData = ({
               }}
             >
               <Image src={createOfferIcon} alt="create_offer_icon" />
-              <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px]">
+              <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px] group-hover:text-primary">
                 {translate("leads.card_content.create_button")}
               </p>
-            </div>
+            </button>
           )}
           <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
             <Image

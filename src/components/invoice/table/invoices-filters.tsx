@@ -28,23 +28,23 @@ export default function InvoicesFilters({
   const checkbox: CheckBoxType[] = [
     {
       label: `${translate("filters.extra_filters.pending")}`,
-      type: `${staticEnums.InvoiceStatus.Pending}`,
+      type: `${staticEnums.InvoiceMainStatus.Pending}`,
     },
     {
       label: `${translate("filters.extra_filters.sending")}`,
-      type: `${staticEnums.InvoiceStatus.sending}`,
+      type: `${staticEnums.InvoiceMainStatus.sending}`,
     },
     {
       label: `${translate("filters.extra_filters.open")}`,
-      type: `${staticEnums.InvoiceStatus.Open}`,
+      type: `${staticEnums.InvoiceMainStatus.Open}`,
     },
     {
       label: `${translate("filters.extra_filters.overdue")}`,
-      type: `${staticEnums.InvoiceStatus.Overdue}`,
+      type: `${staticEnums.InvoiceMainStatus.Overdue}`,
     },
     {
       label: `${translate("filters.extra_filters.paid")}`,
-      type: `${staticEnums.InvoiceStatus.Paid}`,
+      type: `${staticEnums.InvoiceMainStatus.Paid}`,
     },
   ];
 

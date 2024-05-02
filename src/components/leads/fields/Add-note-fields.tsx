@@ -60,7 +60,7 @@ export const AddNoteFormField: GenerateNotesFormField = (
     },
 
     {
-      containerClass: "rounded-b-lg px-2 pt-5 pb-3 bg-[#EDF4FF]",
+      containerClass: "rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",

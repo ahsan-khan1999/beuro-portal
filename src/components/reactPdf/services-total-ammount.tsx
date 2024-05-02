@@ -85,16 +85,20 @@ export const ServicesTotalAmount = ({
     discountType && discountType === "Amount"
       ? discount
       : calculateTax(Number(discount), Number(subTotal));
-      console.log(calculatedDiscount,"calculatedDiscount");
-      
+
   const calculatedTax =
-    (taxType && calculateTax(Number(tax), Number(Number(subTotal) - Number(isDiscount ? calculatedDiscount : 0)))) || 0;
+    (taxType &&
+      calculateTax(
+        Number(tax),
+        Number(Number(subTotal) - Number(isDiscount ? calculatedDiscount : 0))
+      )) ||
+    0;
 
   const totalDiscount = !isDiscount
     ? serviceDiscountSum
     : (serviceDiscountSum &&
-      (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2)) ||
-    Number(calculatedDiscount).toFixed(2);
+        (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2)) ||
+      Number(calculatedDiscount).toFixed(2);
 
   return (
     <View style={styles.container}>

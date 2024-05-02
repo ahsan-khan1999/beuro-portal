@@ -50,6 +50,7 @@ export const useAddNewNote = ({
   });
 
   const fields = AddNoteFormField(register, loading, control);
+
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     let res;
     if (!data) {
