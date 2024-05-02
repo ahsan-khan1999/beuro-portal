@@ -19,8 +19,11 @@ export const ProductItemFooter = ({
     discountType && discountType === "Amount"
       ? discount
       : calculateTax(Number(discount), Number(subTotal));
+  // const calculatedTax =
+  //   (taxType && calculateTax(Number(tax), Number(subTotal))) || 0;
   const calculatedTax =
-    (taxType && calculateTax(Number(tax), Number(subTotal))) || 0;
+    (taxType && calculateTax(Number(tax), Number(Number(subTotal) - Number(isDiscount ? calculatedDiscount : 0)))) || 0;
+
   const { t: translate } = useTranslation();
   return (
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">
