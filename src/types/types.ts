@@ -35,6 +35,7 @@ import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
+import { boolean } from "yup";
 
 export interface SideBar {
   icon?: keyof typeof svgs;
@@ -534,6 +535,7 @@ export type GenerateLeadAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
+  isAddNewLead: boolean,
   onClick: Function,
   count: number,
   handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,

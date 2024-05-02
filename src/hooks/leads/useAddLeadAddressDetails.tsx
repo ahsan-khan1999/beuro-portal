@@ -14,9 +14,13 @@ import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { useEffect, useMemo, useState } from "react";
 
-export const useAddLeadAddressDetails = (
-  onHandleNext: (currentComponent: ComponentsType) => void
-) => {
+export const useAddLeadAddressDetails = ({
+  onHandleNext,
+  isAddNewLead,
+}: {
+  onHandleNext: (currentComponent: ComponentsType) => void;
+  isAddNewLead: boolean;
+}) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -84,6 +88,7 @@ export const useAddLeadAddressDetails = (
     register,
     loading,
     control,
+    isAddNewLead,
     handleBack,
     addressCount,
     append,

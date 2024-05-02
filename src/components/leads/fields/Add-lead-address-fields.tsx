@@ -8,6 +8,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
   loading,
   control,
+  isAddNewLead,
   onHandleBack,
   count,
   handleAddNewAddress,
@@ -19,8 +20,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
 ) => {
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
-
-  console.log(count);
 
   if (!fields) return null;
   for (let i = 0; i < count; i++) {
@@ -237,7 +236,9 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 field: {
                   type: Field.button,
                   id: "button",
-                  text: `${translate("leads.address_details.back_button")}`,
+                  text: isAddNewLead
+                    ? `${translate("leads.address_details.back_button")}`
+                    : `${translate("common.cancel_button")}`,
                   inputType: "button",
                   className:
                     "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
@@ -249,7 +250,9 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 field: {
                   type: Field.button,
                   id: "button",
-                  text: `${translate("leads.address_details.next_button")}`,
+                  text: isAddNewLead
+                    ? `${translate("leads.address_details.next_button")}`
+                    : `${translate("customers.details.save_changes_button")}`,
                   inputType: "submit",
                   className:
                     "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",

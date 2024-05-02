@@ -15,7 +15,7 @@ const AddLeadAddressDetails = ({
 }) => {
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, translate } =
-    useAddLeadAddressDetails(onHandleBack);
+    useAddLeadAddressDetails({ onHandleNext, isAddNewLead: true });
 
   const router = useRouter();
 

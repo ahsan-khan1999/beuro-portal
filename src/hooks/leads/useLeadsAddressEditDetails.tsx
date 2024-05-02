@@ -14,7 +14,13 @@ import { useEffect, useMemo, useState } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { AddLeadAddressDetailsFormField } from "@/components/leads/fields/Add-lead-address-fields";
 
-export const useLeadsAddressEditDetails = (onClick: Function) => {
+export const useLeadsAddressEditDetails = ({
+  onClick,
+  isAddNewLead,
+}: {
+  onClick: (index: number, component: ComponentsType) => void;
+  isAddNewLead: boolean;
+}) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -80,6 +86,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     register,
     loading,
     control,
+    isAddNewLead,
     handleBack,
     addressCount,
     append,

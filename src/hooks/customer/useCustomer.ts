@@ -25,14 +25,14 @@ export default function useCustomer() {
   });
 
   const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customer);
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
-  useEffect(() => {
-    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+  // }, []);
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
@@ -57,10 +57,17 @@ export default function useCustomer() {
     const sortedValue = query?.sort as string;
     const queryParams = searchQuery || sortedValue;
 
-    let updatedFilter = {
+    let updatedFilter: {
+      text?: string;
+      sort?: string;
+    } = {
       text: searchQuery || "",
-      sort: sortedValue || "",
     };
+
+    if (searchQuery || sortedValue) {
+      updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
+    }
 
     setFilter(updatedFilter);
 
