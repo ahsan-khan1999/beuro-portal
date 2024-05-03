@@ -77,12 +77,12 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "offerTitle",
-              value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
+              value: "Office Cleaning",
               name: "offerTitle",
               options: [
                 {
-                  value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
-                  label: "Office Cleaning Munich Lorem ipsum dollar smith emit",
+                  value: "Office Cleaning",
+                  label: "Office Cleaning",
                 },
               ],
               control,
