@@ -5,20 +5,23 @@ import leadCreatedIcon from "@/assets/svgs/created_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { useTranslation } from "next-i18next";
 
+export interface LeadCreatedProps {
+  imageUploadHandler: Function;
+  onClose: () => void;
+  routeHandler: Function;
+  heading: string;
+  subHeading: string;
+}
+
 const LeadCreated = ({
   imageUploadHandler,
   onClose,
   routeHandler,
   heading,
   subHeading,
-}: {
-  imageUploadHandler: Function;
-  onClose: () => void;
-  routeHandler: Function;
-  heading: string;
-  subHeading: string;
-}) => {
+}: LeadCreatedProps) => {
   const { t: translate } = useTranslation();
+
   return (
     <>
       <BaseModal

@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import idIcon from "@/assets/svgs/id.svg";
-import Image from "next/image";
-import timeIcon from "@/assets/svgs/time.svg";
-import dayIcon from "@/assets/svgs/day-icon.svg";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -20,12 +16,12 @@ import { readFollowUpDetail } from "@/api/slices/followUp/followUp";
 import { useTranslation } from "next-i18next";
 import { Dashboard } from "@/types";
 import {
+  formatDateTime,
   formatDateTimeToDate,
   formatDateTimeToTime,
   getDaysDifference,
 } from "@/utils/utility";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import driverLicenseIcon from "@/assets/svgs/driver-license-icon.svg";
 
 export const FollowUpNotificationBar = ({
   dashboard,
@@ -69,8 +65,6 @@ export const FollowUpNotificationBar = ({
   };
 
   const handleFollowUpsDetails = (id: string) => {
-    console.log(id);
-
     if (id) dispatch(readFollowUpDetail({ params: { filter: id } }));
     dispatch(updateModalType({ type: ModalType.FOLLOW_UPS_DETAILS, data: id }));
   };
@@ -169,59 +163,84 @@ export const FollowUpNotificationBar = ({
         </h1>
 
         <hr className="opacity-20" />
-        {followUp && followUp?.length > 0 ? (
-          <div className="overflow-y-scroll max-h-[340px] dashboard_scrollbar pl-5 pr-[5px] pb-[14px] mr-1">
-            {followUp?.map((item, index) => {
+        {dashboard?.["FollowUp"] && dashboard?.["FollowUp"]?.length > 0 ? (
+          <div className="overflow-y-scroll max-h-[340px] dashboard_scrollbar px-3 pb-[14px] mr-1 mt-2 flex flex-col gap-y-3">
+            {dashboard?.["FollowUp"]?.map((item, index) => {
               return (
-                <div
-                  onClick={() => handleFollowUpsDetails(item.id)}
-                  key={index}
-                  className={`cursor-pointer mt-2`}
-                >
-                  <div className="py-2 px-5 rounded-md flex items-center bg-[#F1F1F1] hover:bg-primary hover:bg-opacity-10">
-                    <div
-                      className="mr-6"
-                      dangerouslySetInnerHTML={{ __html: item.svg }}
-                    />
-                    <div>
-                      <span className="text-[#1E1E1E] text-sm font-medium">
-                        {item.title}
+                <div className="py-3 px-4 bg-[#FFF2E9] rounded-2xl" key={index}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-x-[6px]">
+                      <span className="px-1 py-[2px] bg-primary rounded-lg text-white">
+                        {item.lead?.refID}
                       </span>
-                      <div className="flex items-center justify-between space-x-3 mt-2">
-                        <div className="flex items-center">
-                          <Image
-                            src={timeIcon}
-                            alt="Time Icon"
-                            className="mr-[6px]"
-                          />
-                          <span className="text-[#4B4B4B] text-xs">
-                            {item.time},{item.date}
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <Image
-                            src={driverLicenseIcon}
-                            alt="Id Icon"
-                            className="mr-[6px]"
-                          />
-                          <span className="text-[#4B4B4B] text-xs">
-                            {item.refID}
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <Image
-                            src={dayIcon}
-                            alt="Id Icon"
-                            className="mr-[6px]"
-                          />
-                          <span className="text-[#4B4B4B] text-xs">
-                            {item.day}
-                          </span>
-                        </div>
-                      </div>
+                      <span className="px-1 py-[2px] bg-[#FE9244] rounded-lg text-white">
+                        {item.status}
+                      </span>
                     </div>
+
+                    <span className="text-[#5E5E5E] font-medium text-xs">
+                      {formatDateTimeToTime(item?.dateTime)}
+                    </span>
+                  </div>
+
+                  <div className="mt-2">
+                    <p className="text-[#1E1E1E] text-sm font-medium">
+                      {item.title}
+                    </p>
+                    {/* <p className="text-[#1E1E1E] text-sm font-medium">
+                      {formatDateTime(item?.dateTime)}
+                    </p> */}
                   </div>
                 </div>
+                // <div
+                //   onClick={() => handleFollowUpsDetails(item.id)}
+                //   key={index}
+                //   className={`cursor-pointer mt-2`}
+                // >
+                //   <div className="py-2 px-5 rounded-md flex items-center bg-[#F1F1F1] hover:bg-primary hover:bg-opacity-10">
+                //     <div
+                //       className="mr-6"
+                //       dangerouslySetInnerHTML={{ __html: item.svg }}
+                //     />
+                //     <div>
+                //       <span className="text-[#1E1E1E] text-sm font-medium">
+                //         {item.title}
+                //       </span>
+                //       <div className="flex items-center justify-between space-x-3 mt-2">
+                //         <div className="flex items-center">
+                //           <Image
+                //             src={timeIcon}
+                //             alt="Time Icon"
+                //             className="mr-[6px]"
+                //           />
+                //           <span className="text-[#4B4B4B] text-xs">
+                //             {item.time},{item.date}
+                //           </span>
+                //         </div>
+                //         <div className="flex items-center">
+                //           <Image
+                //             src={driverLicenseIcon}
+                //             alt="Id Icon"
+                //             className="mr-[6px]"
+                //           />
+                //           <span className="text-[#4B4B4B] text-xs">
+                //             {item.refID}
+                //           </span>
+                //         </div>
+                //         <div className="flex items-center">
+                //           <Image
+                //             src={dayIcon}
+                //             alt="Id Icon"
+                //             className="mr-[6px]"
+                //           />
+                //           <span className="text-[#4B4B4B] text-xs">
+                //             {item.day}
+                //           </span>
+                //         </div>
+                //       </div>
+                //     </div>
+                //   </div>
+                // </div>
               );
             })}
 

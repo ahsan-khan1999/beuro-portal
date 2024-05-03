@@ -682,6 +682,7 @@
       "id": "ID",
       "customer": "Kunde",
       "title": "Rechnungstitel",
+      "work_date": "Arbeitsdatum",
       "price": "Gesamtpreis",
       "email_status": "E-Mail-Status",
       "paid": "Bezahlt",
@@ -1852,7 +1853,7 @@
     "lead_source": "Leadquellen",
     "activity": "Aktivitäten",
     "view_all": "Alle anzeigen",
-    "follow_up_heading": "Nachfassungen",
+    "follow_up_heading": "Die heutigen Follow-ups",
     "months": {
       "jan": "Januar",
       "feb": "Februar",

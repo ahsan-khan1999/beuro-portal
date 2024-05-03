@@ -1,12 +1,8 @@
 import { Customers } from "@/types/customer";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import {
-  readCustomer,
-  setCustomerDetails,
-} from "@/api/slices/customer/customerSlice";
+import { readCustomer } from "@/api/slices/customer/customerSlice";
 import { FilterType } from "@/types";
-import { DEFAULT_CUSTOMER } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
@@ -17,6 +13,7 @@ export default function useCustomer() {
 
   const { query } = useRouter();
   const page = query?.page as unknown as number;
+
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [filter, setFilter] = useState<FilterType>({
@@ -25,7 +22,6 @@ export default function useCustomer() {
   });
 
   const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customer);
-
   const dispatch = useAppDispatch();
   const totalItems = totalCount;
   const itemsPerPage = 10;

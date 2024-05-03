@@ -78,6 +78,12 @@ const ServiceDetailsData = ({
       )) ||
     0;
 
+  const percetageDiscountVal =
+    calculateTax(
+      contractDetails?.offerID?.subTotal,
+      Number(contractDetails?.offerID?.discountAmount)
+    ) + totalDiscount;
+
   return (
     <div
       className="rounded-md border-none bg-white w-full h-fit"
@@ -175,10 +181,7 @@ const ServiceDetailsData = ({
                       {contractDetails?.offerID?.discountType === "Amount"
                         ? contractDetails?.offerID?.discountAmount +
                           totalDiscount
-                        : calculateTax(
-                            contractDetails?.offerID?.subTotal,
-                            Number(contractDetails?.offerID?.discountAmount)
-                          ) + totalDiscount}
+                        : percetageDiscountVal.toFixed(2)}
                     </span>
                   </div>
                 </div>
