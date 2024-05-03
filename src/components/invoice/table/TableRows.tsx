@@ -55,7 +55,7 @@ const TableRows = ({
                   {item?.title}
                 </span>
                 <span className="py-4 mlg:hidden maxSize:block truncate">
-                  {formatDateString(item.date.map((item) => item.startDate))}
+                  {formatDateString(item.date[0].startDate)}
                 </span>
                 <span className="py-4 truncate mlg:hidden xMaxSize:block">
                   {item?.total}

@@ -452,7 +452,7 @@
     },
     "password_changed_modal": {
       "main_heading": "Password has been changes successfully",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Thanks for updating the password, we are happy to have you.",
       "button": "Done"
     },
     "link_send_modal": {
@@ -469,7 +469,7 @@
     },
     "password_set_modal": {
       "main_heading": "Your Password set Successfully",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Thanks for set up the password, we are happy to have you.",
       "button": "Done"
     }
   },
@@ -525,7 +525,7 @@
       "invoice_days_limit": "Invoice Over Due Days Limit",
       "currency": "Currency",
       "connect_with_buro": "Connect With Buro",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's  visit our",
+      "description": "",
       "allowed_domain": "Allowed Domain",
       "security_token": "Security Token",
 
@@ -587,7 +587,7 @@
       "next_renew": "Next Renew 24 september 2018",
       "card_type": "Visa",
       "package_name": "Silver",
-      "package_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's",
+      "package_description": "Büro 360 Silver includes reports, requests, simplicity, and affordability.",
       "request_services": {
         "heading": "Request",
         "managers": "Managers",
@@ -606,7 +606,7 @@
       },
       "upgrade_card": {
         "heading": "Upgrade To Gold Membership!",
-        "description": "You can use any of the given package on one month free trail. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+        "description": "You can use any of the given package on one month free trail.",
         "button": "Upgrade"
       },
       "edit_payment_modal": {
@@ -1472,7 +1472,7 @@
       "offer_title": "Please Enter Your Offer Title",
       "street": "Please Enter Street Number",
       "post_code": "Please Enter Your Post Code + City",
-      "address_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "address_description": "",
       "service_title": "Please Enter Your service Name"
     }
   },
@@ -1960,7 +1960,7 @@
       "silver": "Silver",
       "gold": "Gold",
       "diamond": "Diamond",
-      "description": "Lorem ipsum dollar smith sil dolem isplum sumip alpsum.",
+      "description": "Büro 360 Diamond includes 1000 requests, managers, reports and API access.",
       "request": "Requests",
       "employees": "Employees",
       "accounting": "Accounting Reports",
