@@ -689,6 +689,7 @@
       "id": "ID",
       "customer": "Customer",
       "title": "Invoice Title",
+      "work_date": "Work Date",
       "price": "Total Price",
       "email_status": "Email Status",
       "paid": "Paid",
@@ -1114,7 +1115,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
-    "filters":"Filters",
+    "filters": "Filters",
     "CSV_button": "Download Reports",
     "create_invoice": "Create Invoice",
     "description_placeholder": "Please write your detail here...",
@@ -1857,7 +1858,7 @@
     "lead_source": "Lead Source",
     "activity": "Activity",
     "view_all": "View all",
-    "follow_up_heading": "Follow Ups",
+    "follow_up_heading": "Today’s Follow ups",
     "months": {
       "jan": "January",
       "feb": "February",

@@ -24,7 +24,7 @@ export const Button = ({
       id={id}
       type={inputType}
       disabled={loading && disabled}
-      className={`${classes}   flex justify-center`}
+      className={`${classes} flex justify-center`}
     >
       <Loader
         height="50"

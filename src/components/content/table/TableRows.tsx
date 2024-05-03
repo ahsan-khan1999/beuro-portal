@@ -24,7 +24,7 @@ const TableRows = ({
                     query: { ...router.query, content: item.id },
                   })
                 }
-                className="gap-x-3 cursor-pointer hover:bg-[#E9E1FF] xs:w-fit items-center xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(300px,_4fr)_minmax(350px,_3fr)_minmax(150px,_150px)] mlg:grid-cols-[minmax(70px,_70px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(180px,_180px)] xlg:grid-cols-[minmax(80px,_80px),minmax(20px,_4fr)_minmax(180px,_3fr)_minmax(200px,_200px)] border-t border-t-[#E7EAEE]"
+                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 xs:w-fit items-center xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(300px,_4fr)_minmax(350px,_3fr)_minmax(150px,_150px)] mlg:grid-cols-[minmax(70px,_70px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(180px,_180px)] xlg:grid-cols-[minmax(80px,_80px),minmax(20px,_4fr)_minmax(180px,_3fr)_minmax(200px,_200px)] border-t border-t-[#E7EAEE]"
               >
                 <span className="py-4 truncate">{item.refID}</span>
                 <span className="py-4 truncate">{item.contentName}</span>

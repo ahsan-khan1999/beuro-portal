@@ -20,7 +20,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
                     query: { ...router.query, service: item.id },
                   })
                 }
-                className="gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 cursor-pointer hover:bg-[#E9E1FF] items-center xs:w-fit mlg:w-full xlg:w-auto grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(150px,_150px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(300px,300px)] mlg:grid-cols-[minmax(70px,_70px),minmax(130px,_130px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100%)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_4fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_3fr)] border-t border-t-[#E7EAEE]"
+                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 items-center xs:w-fit mlg:w-full xlg:w-auto grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(150px,_150px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(300px,300px)] mlg:grid-cols-[minmax(70px,_70px),minmax(130px,_130px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100%)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_4fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_3fr)] border-t border-t-[#E7EAEE]"
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <span className="py-4 truncate">{item.serviceName}</span>

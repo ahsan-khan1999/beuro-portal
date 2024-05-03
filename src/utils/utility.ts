@@ -426,6 +426,16 @@ export function formatDateTimeToTime(date: string) {
   return moment(date).format("HH:mm");
 }
 
+export function formatDateTime(item: string) {
+  const date = new Date(item);
+  const options: Intl.DateTimeFormatOptions = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  };
+  return date.toLocaleTimeString([], options);
+}
+
 export function getStatusColor(status: string) {
   if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"])
     return "#4A13E7";

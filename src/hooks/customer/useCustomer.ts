@@ -13,6 +13,7 @@ export default function useCustomer() {
 
   const { query } = useRouter();
   const page = query?.page as unknown as number;
+
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [filter, setFilter] = useState<FilterType>({
@@ -21,7 +22,6 @@ export default function useCustomer() {
   });
 
   const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customer);
-
   const dispatch = useAppDispatch();
   const totalItems = totalCount;
   const itemsPerPage = 10;
