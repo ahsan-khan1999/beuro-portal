@@ -12,9 +12,9 @@ const TableRows = ({
 
   return (
     <div>
-      {contentData?.map((item) => {
+      {contentData?.map((item, index) => {
         return (
-          <div className="flex">
+          <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
                 key={item.id}
@@ -43,7 +43,7 @@ const TableRows = ({
                     onClick={() =>
                       router.push({
                         pathname: "/content/details",
-                        query: { content: item.id },
+                        query: { ...router.query, content: item.id },
                       })
                     }
                     title={translate("contracts.table_headings.edit")}

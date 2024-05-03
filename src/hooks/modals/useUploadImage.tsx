@@ -9,9 +9,9 @@ import { ModalType } from "@/enums/ui";
 import { Attachement } from "@/types/global";
 
 export const useUploadImage = (handleImageSlider: Function) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const { error, leadDetails } = useAppSelector((state) => state.lead);
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
@@ -155,7 +155,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
     const formatLinks = enteredLinks?.links;
 
     const apiData = {
-      // images: filteredList,
       images: formatImages,
       links: formatLinks,
       attachments: formatAttachments,
@@ -191,11 +190,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
   }, [enteredLinks]);
 
   return {
-    // fields,
-    // onSubmit,
-    // control,
-    // handleSubmit,
-    // errors,
     error,
     translate,
     handleTabChange,

@@ -44,7 +44,7 @@ const TableRows = ({
     >
       {dataToAdd?.map((item: Lead, index: number) => {
         return (
-          <div className="flex">
+          <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
                 onClick={() => {

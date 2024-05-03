@@ -31,12 +31,6 @@ const AddNewLeadsData = () => {
     (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
   );
 
-  useEffect(() => {
-    setTabType(
-      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
-    );
-  }, [leadDetails?.id]);
-
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -195,6 +189,12 @@ const AddNewLeadsData = () => {
       />
     ),
   };
+
+  useEffect(() => {
+    setTabType(
+      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
+    );
+  }, [leadDetails?.id]);
 
   return (
     <div className="h-full">

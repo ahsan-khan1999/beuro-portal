@@ -13,7 +13,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
     <>
       {currentPageRows?.map((item, index) => {
         return (
-          <div className="flex">
+          <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
                 key={index}

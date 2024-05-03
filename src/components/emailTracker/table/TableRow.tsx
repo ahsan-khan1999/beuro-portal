@@ -16,7 +16,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
     <div>
       {dataToAdd?.map((item, index: number) => {
         return (
-          <div className="flex">
+          <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
                 onClick={() =>
