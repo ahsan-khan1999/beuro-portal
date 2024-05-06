@@ -6,23 +6,25 @@ import { Form } from "@/base-components/form/form";
 import { useAddNewNote } from "@/hooks/modals/useAddNewNote";
 import { FilterType } from "@/types";
 
+export interface AddNoteProps {
+  onClose: () => void;
+  handleNotes: (id: string) => void;
+  handleFilterChange?: (query: FilterType) => void;
+  filter?: FilterType;
+  heading: string;
+}
+
 const AddNewNote = ({
   onClose,
   handleNotes,
   handleFilterChange,
   filter,
   heading,
-}: {
-  onClose: () => void;
-  handleNotes: (id: string) => void;
-  handleFilterChange?: (query: FilterType) => void;
-  filter?: FilterType;
-  heading: string;
-}) => {
+}: AddNoteProps) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewNote({ handleNotes, handleFilterChange, filter });
 
-  return (  
+  return (
     <>
       <BaseModal
         onClose={onClose}

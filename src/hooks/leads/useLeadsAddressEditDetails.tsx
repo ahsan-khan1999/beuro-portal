@@ -12,7 +12,7 @@ import { generateLeadsAddressEditDetailsValidation } from "@/validation/leadsSch
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { useEffect, useMemo, useState } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
-import { AddLeadAddressDetailsFormField } from "@/components/leads/fields/Add-lead-address-fields";
+import { LeadsEditAddressDetailsFormField } from "@/components/leads/fields/Leads-address-details-fields";
 
 export const useLeadsAddressEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -76,7 +76,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     setAddressType(updatedAddressType);
   };
 
-  const fields = AddLeadAddressDetailsFormField(
+  const fields = LeadsEditAddressDetailsFormField(
     register,
     loading,
     control,

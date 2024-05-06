@@ -447,7 +447,7 @@
     },
     "password_changed_modal": {
       "main_heading": "Passwort wurde erfolgreich geändert",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Vielen Dank für die Aktualisierung des Passworts, wir freuen uns, dass Sie dabei sind.",
       "button": "Fertig"
     },
     "link_send_modal": {
@@ -464,7 +464,7 @@
     },
     "password_set_modal": {
       "main_heading": "Ihr Passwort wurde erfolgreich festgelegt",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Vielen Dank für die Einrichtung des Passworts, wir sind froh, Sie zu haben.",
       "button": "Fertig"
     }
   },
@@ -520,7 +520,7 @@
       "invoice_days_limit": "Frist für überfällige Rechnungen",
       "currency": "Währung",
       "connect_with_buro": "Mit Büro verbinden",
-      "description": "Lorem Ipsum ist einfach Dummy-Text der Druck- und Satzindustrie. Lorem Ipsum ist die Industrie's besuchen unsere",
+      "description": "",
       "allowed_domain": "Erlaubte Domäne",
       "security_token": "Sicherheitstoken",
       "tabs_tax": {
@@ -580,7 +580,7 @@
       "next_renew": "Nächste Erneuerung 24. January 2024",
       "card_type": "Visa",
       "package_name": "Silber",
-      "package_description": "Lorem Ipsum ist einfach Dummy-Text der Druck- und Satzindustrie. Lorem Ipsum ist die Industrie's",
+      "package_description": "Büro 360 Silver includes reports, requests, simplicity, and affordability.",
       "request_services": {
         "heading": "Anfrage",
         "managers": "Manager",
@@ -599,7 +599,7 @@
       },
       "upgrade_card": {
         "heading": "Auf Gold upgraden!",
-        "description": "Sie können jedes der angegebenen Pakete einen Monat lang kostenlos testen. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+        "description": "Sie können jedes der angegebenen Pakete einen Monat lang kostenlos testen.",
         "button": "Upgraden"
       },
       "edit_payment_modal": {
@@ -682,6 +682,7 @@
       "id": "ID",
       "customer": "Kunde",
       "title": "Rechnungstitel",
+      "work_date": "Arbeitsdatum",
       "price": "Gesamtpreis",
       "email_status": "E-Mail-Status",
       "paid": "Bezahlt",
@@ -1092,7 +1093,7 @@
       "offer_ID": "Angebots-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
-      "offer_created": "Operation erfolgreich abgeschlossen",
+      "offer_created": "Operation erfolgreich",
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
@@ -1464,7 +1465,7 @@
       "offer_title": "Bitte geben Sie Ihren Angebotenamen ein",
       "street": "Bitte geben Sie die Strasse+Nr ein",
       "post_code": "Bitte geben Sie Ihre Plz + Ort ein",
-      "address_description": "Lorem Ipsum ist einfach Blindtext der Druck- und Satzindustrie.",
+      "address_description": "",
       "service_title": "Bitte geben Sie Ihren Dienstnamen ein"
     }
   },
@@ -1852,7 +1853,7 @@
     "lead_source": "Leadquellen",
     "activity": "Aktivitäten",
     "view_all": "Alle anzeigen",
-    "follow_up_heading": "Nachfassungen",
+    "follow_up_heading": "Die heutigen Follow-ups",
     "months": {
       "jan": "Januar",
       "feb": "Februar",
@@ -1953,7 +1954,7 @@
       "silver": "Silber",
       "gold": "Gold",
       "diamond": "Diamant",
-      "description": "Lorem Ipsum Dollar Smith Sil Dolemm Isplum Sumip Alpsum.",
+      "description": "Büro 360 Diamond umfasst 1000 Anfragen, Manager, Berichte und API-Zugang.",
       "request": "Anfragen",
       "employees": "Mitarbeiter",
       "accounting": "Buchhaltungsberichte",

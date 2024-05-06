@@ -452,7 +452,7 @@
     },
     "password_changed_modal": {
       "main_heading": "Password has been changes successfully",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Thanks for updating the password, we are happy to have you.",
       "button": "Done"
     },
     "link_send_modal": {
@@ -469,7 +469,7 @@
     },
     "password_set_modal": {
       "main_heading": "Your Password set Successfully",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Thanks for set up the password, we are happy to have you.",
       "button": "Done"
     }
   },
@@ -525,7 +525,7 @@
       "invoice_days_limit": "Invoice Over Due Days Limit",
       "currency": "Currency",
       "connect_with_buro": "Connect With Buro",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's  visit our",
+      "description": "",
       "allowed_domain": "Allowed Domain",
       "security_token": "Security Token",
 
@@ -587,7 +587,7 @@
       "next_renew": "Next Renew 24 september 2018",
       "card_type": "Visa",
       "package_name": "Silver",
-      "package_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's",
+      "package_description": "Büro 360 Silver includes reports, requests, simplicity, and affordability.",
       "request_services": {
         "heading": "Request",
         "managers": "Managers",
@@ -606,7 +606,7 @@
       },
       "upgrade_card": {
         "heading": "Upgrade To Gold Membership!",
-        "description": "You can use any of the given package on one month free trail. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+        "description": "You can use any of the given package on one month free trail.",
         "button": "Upgrade"
       },
       "edit_payment_modal": {
@@ -689,6 +689,7 @@
       "id": "ID",
       "customer": "Customer",
       "title": "Invoice Title",
+      "work_date": "Work Date",
       "price": "Total Price",
       "email_status": "Email Status",
       "paid": "Paid",
@@ -1102,7 +1103,7 @@
       "offer_ID": "Enter Offer ID",
       "are_you_delete": "Are you sure you want to delete this Offer?",
       "delete_note": "Are you sure you want to delete this Note?",
-      "offer_created": "Operation Successfully",
+      "offer_created": "Operation Successful",
       "offer_created_des": "Thanks for updating offer we are happy to have you.",
       "lead_created_des": "Thanks for creating Lead we are happy to have you.",
       "offer_email_sent": "Email Sent Successfully",
@@ -1114,7 +1115,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
-    "filters":"Filters",
+    "filters": "Filters",
     "CSV_button": "Download Reports",
     "create_invoice": "Create Invoice",
     "description_placeholder": "Please write your detail here...",
@@ -1471,7 +1472,7 @@
       "offer_title": "Please Enter Your Offer Title",
       "street": "Please Enter Street Number",
       "post_code": "Please Enter Your Post Code + City",
-      "address_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "address_description": "",
       "service_title": "Please Enter Your service Name"
     }
   },
@@ -1857,7 +1858,7 @@
     "lead_source": "Lead Source",
     "activity": "Activity",
     "view_all": "View all",
-    "follow_up_heading": "Follow Ups",
+    "follow_up_heading": "Today’s Follow ups",
     "months": {
       "jan": "January",
       "feb": "February",
@@ -1959,7 +1960,7 @@
       "silver": "Silver",
       "gold": "Gold",
       "diamond": "Diamond",
-      "description": "Lorem ipsum dollar smith sil dolem isplum sumip alpsum.",
+      "description": "Büro 360 Diamond includes 1000 requests, managers, reports and API access.",
       "request": "Requests",
       "employees": "Employees",
       "accounting": "Accounting Reports",

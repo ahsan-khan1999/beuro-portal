@@ -22,8 +22,8 @@ const useEmailTracker = () => {
 
   const [currentPageRows, setCurrentPageRows] =
     useState<TableRowEmailTracker[]>(email);
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
@@ -51,10 +51,17 @@ const useEmailTracker = () => {
 
     const queryParams = searchQuery || sortedValue;
 
-    let updatedFilter = {
+    let updatedFilter: {
+      text?: string;
+      sort?: string;
+    } = {
       text: searchQuery || "",
-      sort: sortedValue || "",
     };
+
+    if (searchQuery || sortedValue) {
+      updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
+    }
 
     setFilter(updatedFilter);
 

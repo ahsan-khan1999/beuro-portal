@@ -12,6 +12,7 @@ const AddressEditDetails = ({
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useLeadsAddressEditDetails(onClick);
+
   return (
     <FormCard>
       <div className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg">

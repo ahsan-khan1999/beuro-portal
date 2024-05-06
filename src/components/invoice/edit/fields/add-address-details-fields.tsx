@@ -189,8 +189,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 rows: 2,
                 id: `address.${i}.description`,
                 name: `address.${i}.description`,
-                placeholder:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                placeholder: "",
                 register,
               },
             },

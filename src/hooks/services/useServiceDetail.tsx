@@ -1,11 +1,10 @@
 import { servicesDetailsFormField } from "@/components/services/fields/services-fields";
-import { Service } from "@/types/service";
 import { DEFAULT_SERVICE } from "@/utils/static";
 import { generateServicesValidation } from "@/validation/servicesSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "next-i18next";
 import { NextRouter, useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FieldValues,
   SubmitHandler,

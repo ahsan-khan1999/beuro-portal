@@ -71,7 +71,7 @@ const FollowUpServiceDetails = ({ onClose }: FollowUpServicesDetailsProps) => {
             <section className="grid grid-cols-3 gap-x-3 mt-[33px]">
               {detailsData.map((item, index) => (
                 <div className="flex flex-col gap-y-[10px] mb-5" key={index}>
-                  <p className="text-sm font-normal ">{item.label}</p>
+                  <p className="text-sm font-normal">{item.label}</p>
                   <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
                     {item.value}
                   </span>
@@ -83,16 +83,7 @@ const FollowUpServiceDetails = ({ onClose }: FollowUpServicesDetailsProps) => {
               <p className="text-sm font-normal ">
                 {translate("follow_up.additional_detail_heading")}
               </p>
-              <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has a been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took is
-                galley of type and scrambled it to make a type specimen book. It
-                has survived not only five lorm centuries, but also the leap
-                into electronic typesetting, remaining essentially unchanged. It
-                was popularised in the 1960s with the release of Letraset sheets
-                containing.
-              </span>
+              <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"></span>
             </section>
           </div>
         </div>

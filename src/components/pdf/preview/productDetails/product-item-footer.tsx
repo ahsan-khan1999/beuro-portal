@@ -15,23 +15,28 @@ export const ProductItemFooter = ({
 
   isTax,
 }: Partial<ProductItemFooterProps>) => {
+  const { t: translate } = useTranslation();
+
   const calculatedDiscount =
     discountType && discountType === "Amount"
       ? discount
       : calculateTax(Number(discount), Number(subTotal));
-  // const calculatedTax =
-  //   (taxType && calculateTax(Number(tax), Number(subTotal))) || 0;
-  const calculatedTax =
-    (taxType && calculateTax(Number(tax), Number(Number(subTotal) - Number(isDiscount ? calculatedDiscount : 0)))) || 0;
 
-  const { t: translate } = useTranslation();
+  const calculatedTax =
+    (taxType &&
+      calculateTax(
+        Number(tax),
+        Number(Number(subTotal) - Number(isDiscount ? calculatedDiscount : 0))
+      )) ||
+    0;
+
   return (
     <div className="flex justify-between items-center mb-[90px] mt-[44px]">
       <div className="flex flex-col gap-y-[10px]">
         <span className="text-sm font-medium text-[#000]">
           {translate("pdf.condition_for_moving")}
         </span>
-        <span className="text-[#404040] font-normal text-sm">
+        <span className="text-[#404040] font-normal text-sm ">
           {translate("pdf.thanks_message")}
         </span>
         <span className="text-[#404040] font-normal text-sm max-w-[490px]">

@@ -3,6 +3,7 @@ import { CustomerTable } from "@/types/customer";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { staticEnums } from "@/utils/static";
 
 const TableRow = ({ currentPageRows }: CustomerTable) => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
     <>
       {currentPageRows?.map((item, index) => {
         return (
-          <div className="flex">
+          <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
                 key={index}
@@ -22,11 +23,13 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                     query: { ...router.query, customer: item.id },
                   })
                 }
-                className="cursor-pointer hover:bg-[#E9E1FF] grid items-center gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(80px,_80px),minmax(500px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(200px,_3fr)_minmax(140px,140px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]"
+                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md grid items-center gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(80px,_80px),minmax(500px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(200px,_3fr)_minmax(140px,140px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]"
               >
                 <span className="py-4 truncate">{item.refID}</span>
                 <div className="flex items-center gap-x-1">
-                  {item.companyName ? (
+                  {staticEnums["CustomerType"][
+                    item?.customerType as keyof (typeof staticEnums)["CustomerType"]
+                  ] === 1 ? (
                     <span className="py-4 truncate text-sm font-normal text-primary">
                       ({item.companyName})
                     </span>
