@@ -311,6 +311,7 @@ export const useInvoicePdf = () => {
   }, [qrCodeUrl]);
 
   const fileName = invoiceData?.emailHeader?.contractId;
+
   const contractDataProps = useMemo(
     () => ({
       emailTemplateSettings,
@@ -484,5 +485,6 @@ export const useInvoicePdf = () => {
     onSuccess,
     collectiveInvoiceDetails,
     invoiceDetails,
+    systemSetting,
   };
 };

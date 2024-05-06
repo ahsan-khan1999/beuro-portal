@@ -3,6 +3,7 @@ import { MovingDetailsProps } from "@/types";
 import { GridItem } from "./grid-item";
 import { Row } from "./row";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { DateRow } from "./date-row";
 
 const styles = StyleSheet.create({
   container: {
@@ -152,7 +153,7 @@ export const AddressDetails = ({
                     color: "#000",
                   }}
                 >
-                  {address?.label}
+                  {address?.label}:
                 </Text>
               </GridItem>
               <GridItem width={valueWidth}>
@@ -188,7 +189,7 @@ export const AddressDetails = ({
         >
           Arbeitstermine:
         </Text> */}
-      <Row>
+      <DateRow>
         <GridItem width={labelWidth}>
           <Text
             style={{
@@ -198,7 +199,7 @@ export const AddressDetails = ({
               color: "#000",
             }}
           >
-            {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}
+            {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}:
           </Text>
         </GridItem>
 
@@ -219,7 +220,7 @@ export const AddressDetails = ({
           </Text>
         </GridItem>
         {/* </View> */}
-      </Row>
+      </DateRow>
       {/* </View> */}
     </View>
   );

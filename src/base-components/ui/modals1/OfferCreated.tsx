@@ -2,7 +2,6 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import Image from "next/image";
 import React from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
-import { useRouter } from "next/router";
 import { CreateSuccessProps } from "@/types/global";
 import { useTranslation } from "next-i18next";
 

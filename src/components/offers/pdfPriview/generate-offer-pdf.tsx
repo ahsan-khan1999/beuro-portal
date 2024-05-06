@@ -140,14 +140,14 @@ const OfferPdfDownload = ({
                     isDiscount={isDiscount}
                   />
                 ))}
-                {(isDiscount || serviceItemFooter?.isDiscount) && (
+                {/* {(isDiscount || serviceItemFooter?.isDiscount) && (
                   <ServiceTableDiscountRow
                     {...disscountTableRow}
                     key={Math.random()}
                     pagebreak={true}
                     isDiscount={isDiscount}
                   />
-                )}
+                )} */}
                 <ServicesTotalAmount
                   {...serviceItemFooter}
                   systemSettings={systemSetting}

@@ -78,14 +78,14 @@ export const ProductPurchasedItemsDetails = ({
             }
           />
         ))}
-        {(isDiscount || serviceItemFooter?.isDiscount) && (
+        {/* {(isDiscount || serviceItemFooter?.isDiscount) && (
           <ProductDiscountItem
             {...disscountTableRow}
             key={Math.random()}
             pagebreak={true}
             isDiscount={isDiscount}
           />
-        )}
+        )} */}
 
         {isShowTotal && (
           <ProductItemFooter
