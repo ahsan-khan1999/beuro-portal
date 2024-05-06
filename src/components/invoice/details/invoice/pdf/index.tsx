@@ -47,7 +47,8 @@ const DetailsPdfPriview = () => {
     dispatch,
     onClose,
     onSuccess,
-    collectiveInvoiceDetails
+    collectiveInvoiceDetails,
+    systemSetting
   } = useInvoicePdf();
 
   const MODAL_CONFIG: ModalConfigType = {

@@ -16,7 +16,6 @@ import {
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import {
-  readQRCode,
   sendContractEmail,
   sendOfferByPost,
   updateContractContent,

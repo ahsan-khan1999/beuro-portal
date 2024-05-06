@@ -28,7 +28,14 @@ export const useMergedPdfDownload = ({
           (systemSetting || true)
         ) {
           const localPdfBlob = await reactPdf(
-            <PdfFile {...{ data, emailTemplateSettings, templateSettings }} />
+            <PdfFile
+              {...{
+                data,
+                emailTemplateSettings,
+                templateSettings,
+                systemSetting,
+              }}
+            />
           ).toBlob();
           blobArray.push(localPdfBlob);
         }

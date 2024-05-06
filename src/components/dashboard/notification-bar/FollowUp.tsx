@@ -167,7 +167,11 @@ export const FollowUpNotificationBar = ({
           <div className="overflow-y-scroll max-h-[340px] dashboard_scrollbar px-3 pb-[14px] mr-1 mt-2 flex flex-col gap-y-3">
             {dashboard?.["FollowUp"]?.map((item, index) => {
               return (
-                <div className="py-3 px-4 bg-[#FFF2E9] rounded-2xl" key={index}>
+                <div
+                  className="py-3 px-4 bg-[#FFF2E9] rounded-2xl cursor-pointer"
+                  key={index}
+                  onClick={() => handleFollowUpsDetails(item.id)}
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-x-[6px]">
                       <span className="px-1 py-[2px] bg-primary rounded-lg text-white">
