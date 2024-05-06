@@ -31,8 +31,13 @@ export const ProductItemFooter = ({
     0;
 
   const discountAmount = (Number(discount) / 100) * Number(subTotal);
-  const totalAfterDiscount = Number(subTotal) - Number(discountAmount);
+  const totalAfterDiscount =
+    discountType && discountType === "Amount"
+      ? Number(subTotal) - Number(discount)
+      : Number(subTotal) - Number(discountAmount);
 
+  const discountValue =
+    discountType && discountType === "Amount" ? discount : discountAmount;
   return (
     <div className="flex flex-col mb-[90px] mt-[44px]">
       <div>
@@ -52,8 +57,9 @@ export const ProductItemFooter = ({
                 {translate("pdf.discount")}:
               </span>
               <span className="text-[#1E1E1E] text-sm font-medium self-end">
-                {discountAmount.toFixed(2)}
-                {systemSettings?.currency} ({discount}%)
+                {Number(discountValue).toFixed(2)}
+                {systemSettings?.currency}{" "}
+                {discountType && discountType === "Percent" && `(${discount}%)`}
               </span>
             </div>
           )}

@@ -99,7 +99,6 @@ export const ServicesTotalAmount = ({
 }: Partial<ProductItemFooterProps>) => {
   const isPaid =
     invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
-  console.log(systemSettings, "systemSetting");
 
   const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount);
 
@@ -164,11 +163,11 @@ export const ServicesTotalAmount = ({
             </View>
           )}
           <View style={styles.subSection}>
-            <Text style={styles.text}>Tax%: </Text>
+            <Text style={styles.text}>Mwst ({tax}%): </Text>
             {(isTax && (
               <Text style={styles.text}>
                 {Number(calculatedTax).toFixed(2)}
-                {systemSettings?.currency} ({tax}%)
+                {systemSettings?.currency}
               </Text>
             )) || <Text style={styles.text}>{0}</Text>}
           </View>
@@ -204,6 +203,34 @@ export const ServicesTotalAmount = ({
               </View>
             ))}
 
+          {isMainInvoice && (
+            <View>
+              <View style={styles.totalSection}>
+                <Text style={styles.grandTotalText}>Gesamtsumme:</Text>
+                <Text style={styles.grandTotalText}>
+                  {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
+                </Text>
+              </View>
+              {Number(invoiceAmount) > 0 && (
+                <View>
+                  <View style={styles.subSection}>
+                    <Text style={styles.text}>{"Bezahlt Menge"}:</Text>
+                    <Text style={styles.text}>
+                      -{Number(invoiceAmount).toFixed(2)}
+                      {systemSettings?.currency}
+                    </Text>
+                  </View>
+                  <View style={styles.subSection}>
+                    <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
+                    <Text style={styles.text}>
+                      {unPaidAmount.toFixed(2)} {systemSettings?.currency}
+                    </Text>
+                  </View>
+                </View>
+              )}
+            </View>
+          )}
+
           {isSubInvoicePdf &&
             (!isShowExtraAmount ? (
               <View style={styles.totalSection}>
@@ -217,7 +244,7 @@ export const ServicesTotalAmount = ({
                 <View style={styles.subSection}>
                   <Text style={styles.text}>{"Fälliger Betrag"}:</Text>
                   <Text style={styles.text}>
-                    {Number(invoiceAmount).toFixed(2)}{" "}
+                    -{Number(invoiceAmount).toFixed(2)}{" "}
                     {systemSettings?.currency}
                   </Text>
                 </View>
@@ -263,7 +290,7 @@ export const ServicesTotalAmount = ({
                   <View style={styles.subSection}>
                     <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
                     <Text style={styles.text}>
-                      {Number(invoiceAmount).toFixed(2)}
+                      -{Number(invoiceAmount).toFixed(2)}
                       {systemSettings?.currency}
                     </Text>
                   </View>
@@ -286,34 +313,6 @@ export const ServicesTotalAmount = ({
                 </View>
               </View>
             ))}
-
-          {isMainInvoice && (
-            <View>
-              <View style={styles.totalSection}>
-                <Text style={styles.grandTotalText}>Gesamtsumme:</Text>
-                <Text style={styles.grandTotalText}>
-                  {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
-                </Text>
-              </View>
-              {Number(invoiceAmount) > 0 && (
-                <View>
-                  <View style={styles.subSection}>
-                    <Text style={styles.text}>{"Bezahlt Menge"}:</Text>
-                    <Text style={styles.text}>
-                      {Number(invoiceAmount).toFixed(2)}
-                      {systemSettings?.currency}
-                    </Text>
-                  </View>
-                  <View style={styles.subSection}>
-                    <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
-                    <Text style={styles.text}>
-                      {unPaidAmount.toFixed(2)} {systemSettings?.currency}
-                    </Text>
-                  </View>
-                </View>
-              )}
-            </View>
-          )}
         </View>
 
         <View style={styles.bottomRow}>
