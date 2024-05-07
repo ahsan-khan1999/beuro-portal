@@ -425,6 +425,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                       rows: 2,
                       id: "discountDescription",
                       name: "discountDescription",
+                      maxLength: 100,
                       register,
                     },
                   },

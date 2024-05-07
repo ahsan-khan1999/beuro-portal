@@ -76,13 +76,12 @@ export const ProductItemFooter = ({
           )}
           <div className="flex justify-between w-full border-b border-b-[#ccc] pb-2">
             <span className="text-[#1E1E1E] text-sm font-medium">
-              {translate("pdf.tax")}:
+              Mwst ({tax}%):
             </span>
             <span className="text-[#1E1E1E] text-sm font-medium ">
               {(isTax && (
                 <>
-                  {Number(calculatedTax).toFixed(2)}
-                  {systemSettings?.currency} ({tax}%)
+                  {Number(calculatedTax).toFixed(2)} {systemSettings?.currency}
                 </>
               )) ||
                 0}{" "}
