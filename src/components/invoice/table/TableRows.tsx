@@ -5,7 +5,6 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { formatDateString } from "@/utils/functions";
-import Link from "next/link";
 const TableRows = ({
   dataToAdd,
   handleNotes,
@@ -33,16 +32,9 @@ const TableRows = ({
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
-              <Link
+              <div
                 key={index}
-                href={{
-                  pathname: "/invoices/pdf-preview",
-                  query: {
-                    ...router.query,
-                    invoice: item.id,
-                    isMail: true,
-                  },
-                }}
+                onClick={() => handleInvoicePdfPreview(item?.id)}
                 className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(400px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)] border-t border-t-[#E7EAEE]"
               >
                 <span className="py-4 truncate">{item.invoiceNumber}</span>
@@ -106,7 +98,7 @@ const TableRows = ({
                     {translate(`invoice_status.${item.invoiceStatus}`)}
                   </div>
                 </span>
-              </Link>
+              </div>
             </div>
 
             {/* <div className="flex"> */}
@@ -162,11 +154,13 @@ const TableRows = ({
                 className="cursor-pointer flex justify-center items-center"
               >
                 <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                  <Link
-                    href={{
-                      pathname: "/invoices/details",
-                      query: { ...router.query, invoice: item.id },
-                    }}
+                  <div
+                    onClick={() =>
+                      router.push({
+                        pathname: "/invoices/details",
+                        query: { ...router.query, invoice: item.id },
+                      })
+                    }
                     className="p-[5px] rounded-md w-[33px] h-[33px] border border-primary flex justify-center items-center"
                   >
                     <svg
@@ -181,7 +175,7 @@ const TableRows = ({
                         fill="#4A13E7"
                       />
                     </svg>
-                  </Link>
+                  </div>
                 </div>
               </span>
             </div>

@@ -7,7 +7,6 @@ import {
   getMailStatusColor,
 } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
-import Link from "next/link";
 
 const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
   const router = useRouter();
@@ -19,11 +18,13 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
-              <Link
-                href={{
-                  pathname: "/email-tracker/view-mail",
-                  query: { email: item?.id },
-                }}
+              <div
+                onClick={() =>
+                  router.push({
+                    pathname: "/email-tracker/view-mail",
+                    query: { email: item?.id },
+                  })
+                }
                 key={item.id}
                 className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(100px,_100px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_4fr)_minmax(130px,_3fr)_minmax(100px,_100px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(140px,_4fr)_minmax(130px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(160px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)] border-t border-t-[#E7EAEE]"
               >
@@ -55,17 +56,19 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                     {translate(`mail_tracker_status.${item?.mailStatus}`)}
                   </div>
                 </span>
-              </Link>
+              </div>
             </div>
 
             <div className="ml-2 grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
               <span className="py-3 flex justify-center items-center cursor-pointer">
-                <Link
+                <span
                   title={translate("email_tracker.table_headings.view_mail")}
-                  href={{
-                    pathname: "/email-tracker/view-mail",
-                    query: { email: item?.id },
-                  }}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/email-tracker/view-mail",
+                      query: { email: item?.id },
+                    })
+                  }
                   className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg"
                 >
                   <svg
@@ -89,7 +92,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                       fill={`${getMailStatusColor(item?.mailStatus)}`}
                     />
                   </svg>
-                </Link>
+                </span>
               </span>
 
               <span className="py-4 flex justify-center items-center cursor-pointer">
