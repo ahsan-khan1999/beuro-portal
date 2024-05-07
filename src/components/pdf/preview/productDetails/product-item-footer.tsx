@@ -12,7 +12,6 @@ export const ProductItemFooter = ({
   discountType,
   taxType,
   isDiscount,
-
   isTax,
 }: Partial<ProductItemFooterProps>) => {
   const { t: translate } = useTranslation();
@@ -31,6 +30,7 @@ export const ProductItemFooter = ({
     0;
 
   const discountAmount = (Number(discount) / 100) * Number(subTotal);
+
   const totalAfterDiscount =
     discountType && discountType === "Amount"
       ? Number(subTotal) - Number(discount)
@@ -38,6 +38,7 @@ export const ProductItemFooter = ({
 
   const discountValue =
     discountType && discountType === "Amount" ? discount : discountAmount;
+
   return (
     <div className="flex flex-col mb-[90px] mt-[44px]">
       <div>

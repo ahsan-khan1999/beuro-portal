@@ -1,7 +1,7 @@
 import React from "react";
 import { Lead } from "@/types/leads";
 import { useRouter } from "next/router";
-import { formatDate, getStatusColor } from "@/utils/utility";
+import { formatDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";

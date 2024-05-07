@@ -52,7 +52,6 @@ export const SignPdf = <T,>({
   const [offerSignature, setOfferSignature] = useState<string | null>(null);
   const { modal } = useAppSelector((state) => state.global);
   const router = useRouter();
-  const { action: pdfAction } = router.query;
   const [isSignatureDone, setIsSignatureDone] = useState(false);
   const [componentMounted, setComponentMounted] = useState(false);
 

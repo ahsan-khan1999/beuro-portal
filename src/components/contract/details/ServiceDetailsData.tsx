@@ -84,6 +84,16 @@ const ServiceDetailsData = ({
       Number(contractDetails?.offerID?.discountAmount)
     ) + totalDiscount;
 
+  const discountAmount =
+    (Number(contractDetails?.offerID?.discountAmount) / 100) *
+    Number(contractDetails?.offerID?.subTotal);
+
+  const discountValue =
+    contractDetails?.offerID?.discountType &&
+    contractDetails?.offerID?.discountType === "Amount"
+      ? contractDetails?.offerID?.discountAmount
+      : discountAmount;
+
   return (
     <div
       className="rounded-md border-none bg-white w-full h-fit"
@@ -178,10 +188,7 @@ const ServiceDetailsData = ({
                       )}
                     </span>
                     <span className="text-[#4B4B4B] text-base font-medium">
-                      {contractDetails?.offerID?.discountType === "Amount"
-                        ? contractDetails?.offerID?.discountAmount +
-                          totalDiscount
-                        : percetageDiscountVal.toFixed(2)}
+                      {discountValue && discountValue.toFixed(2)}
                     </span>
                   </div>
                 </div>

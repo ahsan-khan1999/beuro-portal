@@ -738,6 +738,7 @@ export interface ProductItemFooterProps {
   grandTotal: string;
   invoiceStatus?: keyof (typeof staticEnums)["InvoiceStatus"];
   invoiceAmount?: string;
+  dueAmount?: string;
   invoiceCreatedAmount?: string;
   invoicePaidAmount?: string;
   isShowExtraAmount?: boolean;
