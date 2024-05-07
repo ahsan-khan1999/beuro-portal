@@ -46,6 +46,12 @@ const styles = StyleSheet.create({
     fontStyle: "medium",
     color: "#1E1E1E",
   },
+  paidText: {
+    fontSize: 8,
+    fontWeight: 400,
+    fontStyle: "normal",
+    color: "#565656",
+  },
   discountDescriptionText: {
     fontSize: 8,
     fontWeight: 400,
@@ -292,6 +298,9 @@ export const ServicesTotalAmount = ({
                 {Number(invoiceAmount) > 0 && (
                   <View style={styles.subSection}>
                     <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
+                    <Text style={styles.paidText}>
+                      {"Der Betrag, den Sie beim letzten Mal bezahlt haben."}
+                    </Text>
                     <Text style={styles.text}>
                       -{Number(invoiceAmount).toFixed(2)}
                       {systemSettings?.currency}
@@ -305,6 +314,17 @@ export const ServicesTotalAmount = ({
                       {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                     </Text>
                   </View>
+                  {Number(invoiceAmount) > 0 && (
+                    <View style={styles.subSection}>
+                      <Text style={styles.text}>
+                        {"Gezahlter Gesamtbetrag"}:
+                      </Text>
+                      <Text style={styles.text}>
+                        {Number(invoiceAmount).toFixed(2)}
+                        {systemSettings?.currency}
+                      </Text>
+                    </View>
+                  )}
                   {Number(unPaidAmount) > 0 && (
                     <View style={styles.subSection}>
                       <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
