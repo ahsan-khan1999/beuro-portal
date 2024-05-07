@@ -220,7 +220,8 @@ export const useInvoicePdf = () => {
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
               isSubInvoicePdf: true,
-              invoiceAmount: invoiceDetails?.amount.toString(),
+              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
+              dueAmount: invoiceDetails?.amount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:

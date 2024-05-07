@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Employee } from "@/types/employee";
 import moment from "moment";
+import Link from "next/link";
 
 const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
   const router = useRouter();
@@ -12,14 +13,12 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
-              <div
+              <Link
                 key={item.id}
-                onClick={() =>
-                  router.push({
-                    pathname: "/employees/details",
-                    query: { ...router.query, employee: item.id },
-                  })
-                }
+                href={{
+                  pathname: "/employees/details",
+                  query: { ...router.query, employee: item.id },
+                }}
                 className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_250px)_minmax(250px,_100%)_minmax(160px,_160px)_minmax(150px,_150px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(50px,_50px),minmax(100px,_3fr)_minmax(90px,_4fr)] xlg:grid-cols-[minmax(60px,_60px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(60px,_60px),minmax(140px,_4fr)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(120px,_120px)] xMaxSize:grid-cols-[minmax(60px,_60px),minmax(150px,_4fr)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(130px,_130px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]"
               >
                 <span className="py-4 truncate">{item?.employeeID}</span>
@@ -34,20 +33,17 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
                 <span className="py-4 flex items-center mlg:hidden xlg:flex">
                   {moment(item?.creationDate).format("DD/MM/YYYY")}
                 </span>
-              </div>
+              </Link>
             </div>
 
-            {/* <div className="flex"> */}
             <div className="grid grid-cols-[minmax(90px,_90px)]">
               <span className="flex justify-center items-center cursor-pointer">
                 <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                  <div
-                    onClick={() =>
-                      router.push({
-                        pathname: "/employees/details",
-                        query: { ...router.query, employee: item.id },
-                      })
-                    }
+                  <Link
+                    href={{
+                      pathname: "/employees/details",
+                      query: { ...router.query, employee: item.id },
+                    }}
                     title={translate("contracts.table_headings.edit")}
                     className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center"
                   >
@@ -63,12 +59,11 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
                         fill="#4A13E7"
                       />
                     </svg>
-                  </div>
+                  </Link>
                 </div>
               </span>
             </div>
           </div>
-          // </div>
         );
       })}
     </div>

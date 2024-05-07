@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
 import { formatDateTimeToDate } from "@/utils/utility";
+import Link from "next/link";
 
 const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
   const router = useRouter();
@@ -12,14 +13,12 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
         return (
           <div className="flex">
             <div className="mlg:w-full">
-              <div
+              <Link
                 key={item.id}
-                onClick={() =>
-                  router.push({
-                    pathname: "/services/details",
-                    query: { ...router.query, service: item.id },
-                  })
-                }
+                href={{
+                  pathname: "/services/details",
+                  query: { ...router.query, service: item.id },
+                }}
                 className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 items-center xs:w-fit mlg:w-full xlg:w-auto grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(150px,_150px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(300px,300px)] mlg:grid-cols-[minmax(70px,_70px),minmax(130px,_130px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100%)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_4fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_3fr)] border-t border-t-[#E7EAEE]"
               >
                 <span className="py-4 truncate">{item?.refID}</span>
@@ -30,19 +29,17 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
                 <span className="py-4 ">{item.price}</span>
                 <span className="py-4">{item?.unit}</span>
                 <span className="py-4 mr-1 truncate">{item.description}</span>
-              </div>
+              </Link>
             </div>
 
             {/* <div className="flex"> */}
             <div className="grid grid-cols-[minmax(90px,_90px)]">
-              <span
+              <Link
                 className="flex justify-center items-center cursor-pointer"
-                onClick={() =>
-                  router.push({
-                    pathname: "/services/details",
-                    query: { ...router.query, service: item.id },
-                  })
-                }
+                href={{
+                  pathname: "/services/details",
+                  query: { ...router.query, service: item.id },
+                }}
               >
                 <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
                   <div
@@ -63,7 +60,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
                     </svg>
                   </div>
                 </div>
-              </span>
+              </Link>
             </div>
             {/* </div> */}
           </div>

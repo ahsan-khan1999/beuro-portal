@@ -96,6 +96,7 @@ export const ServicesTotalAmount = ({
   isOfferPDF,
   isContractPDF,
   discountDescription,
+  dueAmount,
 }: Partial<ProductItemFooterProps>) => {
   const isPaid =
     invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
@@ -245,8 +246,7 @@ export const ServicesTotalAmount = ({
                 <View style={styles.subSection}>
                   <Text style={styles.text}>{"Fälliger Betrag"}:</Text>
                   <Text style={styles.text}>
-                    {Number(invoiceAmount).toFixed(2)}{" "}
-                    {systemSettings?.currency}
+                    {Number(dueAmount).toFixed(2)} {systemSettings?.currency}
                   </Text>
                 </View>
                 <View>
@@ -265,16 +265,14 @@ export const ServicesTotalAmount = ({
                           {systemSettings?.currency}
                         </Text>
                       </View>
-                      {Number(unPaidAmount) > 0 && (
-                        <View style={styles.subSection}>
-                          <Text style={styles.text}>
-                            {"Unbezahlter Betrag"}:
-                          </Text>
-                          <Text style={styles.text}>
-                            {unPaidAmount.toFixed(2)} {systemSettings?.currency}
-                          </Text>
-                        </View>
-                      )}
+                      {/* {Number(unPaidAmount) > 0 && ( */}
+                      <View style={styles.subSection}>
+                        <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
+                        <Text style={styles.text}>
+                          {unPaidAmount.toFixed(2)} {systemSettings?.currency}
+                        </Text>
+                      </View>
+                      {/* )} */}
                     </View>
                   )}
                 </View>

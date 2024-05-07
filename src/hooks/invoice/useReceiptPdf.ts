@@ -252,7 +252,8 @@ export const useReceiptPdf = () => {
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
               isReceiptPdf: true,
-              invoiceAmount: invoiceDetails?.amount.toString(),
+              dueAmount: invoiceDetails?.amount.toString(),
+              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:

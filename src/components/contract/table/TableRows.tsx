@@ -7,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import Link from "next/link";
 
 const TableRows = ({
   dataToAdd,
@@ -56,14 +57,12 @@ const TableRows = ({
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
-              <div
+              <Link
                 key={index}
-                onClick={() =>
-                  router.push({
-                    pathname: `/contract/pdf-preview`,
-                    query: { ...router.query, offerID: item?.id, isMail: true },
-                  })
-                }
+                href={{
+                  pathname: `/contract/pdf-preview`,
+                  query: { ...router.query, offerID: item?.id, isMail: true },
+                }}
                 className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-5 mlg:gap-x-1 xMaxSize:gap-x-4 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(65px,_65px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(65px,_65px),minmax(110px,_3fr)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_150px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] maxLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]"
               >
                 <span className="py-4 truncate">{item.contractNumber}</span>
@@ -190,7 +189,7 @@ const TableRows = ({
                 {translate(`contract_status.${item.contractStatus}`)}
               </div>
             </span> */}
-              </div>
+              </Link>
             </div>
 
             {/* <div className="flex"> */}
@@ -319,19 +318,19 @@ const TableRows = ({
                 title={translate("common.mail")}
                 className="py-3 flex justify-center items-center cursor-pointer"
               >
-                <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
+                <Link
+                  href={{
+                    pathname: "/contract/details",
+                    query: { ...router.query, offer: item?.id },
+                  }}
+                  className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="34"
                     height="34"
                     viewBox="0 0 29 29"
                     fill="none"
-                    onClick={() =>
-                      router.push({
-                        pathname: "/contract/details",
-                        query: { ...router.query, offer: item?.id },
-                      })
-                    }
                   >
                     <path
                       opacity="1"
@@ -347,7 +346,7 @@ const TableRows = ({
                       fill={`${getMailStatusColor(item?.mail?.mailStatus)}`}
                     />
                   </svg>
-                </span>
+                </Link>
               </span>
 
               <div
@@ -356,13 +355,11 @@ const TableRows = ({
                 className="flex justify-center items-center cursor-pointer"
               >
                 <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                  <div
-                    onClick={() =>
-                      router.push({
-                        pathname: "/contract/details",
-                        query: { ...router.query, offer: item?.id },
-                      })
-                    }
+                  <Link
+                    href={{
+                      pathname: "/contract/details",
+                      query: { ...router.query, offer: item?.id },
+                    }}
                     className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center"
                   >
                     <svg
@@ -377,7 +374,7 @@ const TableRows = ({
                         fill="#4A13E7"
                       />
                     </svg>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
