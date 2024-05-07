@@ -1115,6 +1115,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "paid_amount_last": "The amount which you paid last time.",
     "filters": "Filters",
     "CSV_button": "Download Reports",
     "create_invoice": "Create Invoice",
