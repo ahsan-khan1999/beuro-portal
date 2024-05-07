@@ -2,7 +2,6 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DEFAULT_FOLLOWUP, staticEnums } from "@/utils/static";
-import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { FollowUps } from "@/types/follow-up";
@@ -33,6 +32,7 @@ export const readFollowUp: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.readFollowUp(params);
+
       return response?.data?.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));

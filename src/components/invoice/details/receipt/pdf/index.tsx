@@ -47,7 +47,8 @@ const ReceiptPdfPreview = () => {
     onClose,
     onSuccess,
     dispatch,
-    collectiveInvoiceDetails
+    collectiveInvoiceDetails,
+    systemSetting,
   } = useReceiptPdf();
 
   const { t: translate } = useTranslation();
