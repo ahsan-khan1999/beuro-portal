@@ -1,26 +1,13 @@
-import React, {
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { SetStateAction, useEffect, useRef, useState } from "react";
 import SignPad from "signature_pad";
 import { SignatureSubmittedSuccessFully } from "./signature-submitted-success";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import {
-  updateModalType,
-  uploadFileToFirebase,
-} from "@/api/slices/globalSlice/global";
+import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
-import {
-  blobToFile,
-  dataURLtoBlob,
-  smoothScrollToSection,
-} from "@/utils/utility";
+import { blobToFile, dataURLtoBlob } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
-import { EmailTemplate, Template, TemplateSettings } from "@/types/settings";
+import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { PdfProps, TemplateType } from "@/types";
 import toast from "react-hot-toast";
@@ -48,7 +35,6 @@ import { useRouter } from "next/router";
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 import { pdf as reactPdf } from "@react-pdf/renderer";
-import { ServiceTableDiscountRow } from "@/components/reactPdf/service-table-discount";
 
 Font.register({
   family: "Poppins",
@@ -220,14 +206,14 @@ export const SignaturePad = ({
               isDiscount={isDiscount}
             />
           ))}
-          {(isDiscount || serviceItemFooter?.isDiscount) && (
+          {/* {(isDiscount || serviceItemFooter?.isDiscount) && (
             <ServiceTableDiscountRow
               {...disscountTableRow}
               key={Math.random()}
               pagebreak={true}
               isDiscount={isDiscount}
             />
-          )}
+          )} */}
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSettings}
@@ -329,14 +315,14 @@ export const SignaturePad = ({
                     isDiscount={isDiscount}
                   />
                 ))}
-                {(isDiscount || serviceItemFooter?.isDiscount) && (
+                {/* {(isDiscount || serviceItemFooter?.isDiscount) && (
                   <ServiceTableDiscountRow
                     {...disscountTableRow}
                     key={Math.random()}
                     pagebreak={true}
                     isDiscount={isDiscount}
                   />
-                )}
+                )} */}
                 <ServicesTotalAmount
                   {...serviceItemFooter}
                   systemSettings={systemSettings}
