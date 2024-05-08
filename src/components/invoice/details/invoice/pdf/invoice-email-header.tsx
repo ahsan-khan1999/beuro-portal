@@ -9,6 +9,7 @@ import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { useAppSelector } from "@/hooks/useRedux";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { PrintIcon } from "@/assets/svgs/components/print-icon";
 
 export const InvoiceEmailHeader = ({
   contentName,
@@ -144,13 +145,8 @@ export const InvoiceEmailHeader = ({
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
+          <PrintIcon onClick={onPrint} />
           <DownloadIcon onClick={onDownload} />
-          {/* <Image
-            src={printerIcon}
-            alt="printerIcon"
-            className="cursor-pointer"
-            onClick={onPrint}
-          /> */}
         </div>
       </div>
       <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">

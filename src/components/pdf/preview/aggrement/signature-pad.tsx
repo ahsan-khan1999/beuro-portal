@@ -371,7 +371,8 @@ export const SignaturePad = ({
           }.pdf` || "offer.pdf"
         );
         if (!svgContent) {
-          toast.error("please sign first");
+          alert("true");
+          showError(translate("common.sign_first"));
           return false;
         }
 
@@ -383,6 +384,7 @@ export const SignaturePad = ({
         };
 
         const response = await dispatch(signOffer({ data, formData }));
+
         if (response?.payload) {
           dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
         }
@@ -394,7 +396,9 @@ export const SignaturePad = ({
         // Function to handle scrolling
 
         // window.scrollTo(0, document.body.scrollHeight - window.innerHeight);
-      } else toast.error("please sign first");
+      } else {
+        showError(translate("common.sign_first"));
+      }
       return false;
     } else return false;
   };
@@ -434,14 +438,14 @@ export const SignaturePad = ({
                   <div className="flex justify-between gap-x-3 my-2">
                     <Button
                       disabled={isSubmitted}
-                      className="bg-[#393939]  py-[7px] text-center text-white rounded-md shadow-md min-w-[220px]"
+                      className="bg-[#393939] py-[7px] text-center text-white rounded-md shadow-md min-w-[220px]"
                       inputType="button"
                       id="signature"
                       onClick={handleClear}
                       text={translate("pdf.clear")}
                     />
                     <Button
-                      className={`mt-[0px]   ${"bg-[#45C769] "} rounded-[4px] shadow-md  text-center text-white min-w-[220px]`}
+                      className={`mt-[0px] ${"bg-[#45C769]"} rounded-[4px] shadow-md text-center text-white min-w-[220px]`}
                       onClick={() => handleSave(blob, loading)}
                       inputType="button"
                       id="signature"

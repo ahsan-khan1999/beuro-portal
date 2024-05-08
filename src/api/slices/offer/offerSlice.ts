@@ -122,7 +122,6 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
     }
   });
 
-  
 export const updateOffer: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -257,8 +256,7 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
 
       return true;
     } catch (e: any) {
-      // toast.error(e?.response?.data?.message);
-      globalThis.showError(translate(e?.response?.data?.message));
+      showError(translate(e?.response?.data?.message));
       thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
       // setErrors(setError, e?.data.data, translate);
       return false;
@@ -342,7 +340,7 @@ export const uploadOfferPdf: AsyncThunk<boolean, object, object> | any =
 
       return true;
     } catch (e: any) {
-      toast.error(e?.response?.data?.message);
+      showError(e?.response?.data?.message);
       thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
       // setErrors(setError, e?.data.data, translate);
       return false;

@@ -36,13 +36,6 @@ const OfferDetailsCard = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const handleDonwload = () => {
-    window.open(offerDetails?.attachement);
-  };
-  const handlePrint = () => {
-    window.open(offerDetails?.attachement);
-  };
-
   const itemsValue = [
     `${translate("offer_status.Open")}`,
     `${translate("offer_status.Accepted")}`,

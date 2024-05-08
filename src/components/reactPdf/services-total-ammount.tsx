@@ -154,7 +154,7 @@ export const ServicesTotalAmount = ({
                 {discountDescription}
               </Text>
               <Text style={styles.text}>
-                {Number(discountValue).toFixed(2)}
+                -{Number(discountValue).toFixed(2)}
                 {systemSettings?.currency}{" "}
                 {discountType && discountType === "Percent" && `(${discount}%)`}
               </Text>
@@ -263,22 +263,20 @@ export const ServicesTotalAmount = ({
                     </Text>
                   </View>
                   {Number(invoiceAmount) > 0 && (
-                    <View>
-                      <View style={styles.subSection}>
-                        <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
-                        <Text style={styles.text}>
-                          -{Number(invoiceAmount).toFixed(2)}
-                          {systemSettings?.currency}
-                        </Text>
-                      </View>
-                      {/* {Number(unPaidAmount) > 0 && ( */}
-                      <View style={styles.subSection}>
-                        <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
-                        <Text style={styles.text}>
-                          {unPaidAmount.toFixed(2)} {systemSettings?.currency}
-                        </Text>
-                      </View>
-                      {/* )} */}
+                    <View style={styles.subSection}>
+                      <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
+                      <Text style={styles.text}>
+                        -{Number(invoiceAmount).toFixed(2)}
+                        {systemSettings?.currency}
+                      </Text>
+                    </View>
+                  )}
+                  {Number(unPaidAmount) > 0 && (
+                    <View style={styles.subSection}>
+                      <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
+                      <Text style={styles.text}>
+                        {unPaidAmount.toFixed(2)} {systemSettings?.currency}
+                      </Text>
                     </View>
                   )}
                 </View>
@@ -302,7 +300,7 @@ export const ServicesTotalAmount = ({
                       {"Der Betrag, den Sie beim letzten Mal bezahlt haben."}
                     </Text>
                     <Text style={styles.text}>
-                      -{Number(invoiceAmount).toFixed(2)}
+                      -{Number(dueAmount).toFixed(2)}
                       {systemSettings?.currency}
                     </Text>
                   </View>
@@ -320,7 +318,7 @@ export const ServicesTotalAmount = ({
                         {"Gezahlter Gesamtbetrag"}:
                       </Text>
                       <Text style={styles.text}>
-                        {Number(invoiceAmount).toFixed(2)}
+                        -{Number(invoiceAmount).toFixed(2)}
                         {systemSettings?.currency}
                       </Text>
                     </View>

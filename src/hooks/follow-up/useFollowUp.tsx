@@ -1,5 +1,5 @@
 import { deleteFollowUp, readFollowUp } from "@/api/slices/followUp/followUp";
-import { Action, FilterType } from "@/types";
+import { FilterType } from "@/types";
 import { FollowUps } from "@/types/follow-up";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -8,6 +8,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const useFollowUps = () => {
   const [filter, setFilter] = useState<FilterType>({
@@ -18,6 +19,9 @@ const useFollowUps = () => {
   const { followUp, totalCount, loading } = useAppSelector(
     (state) => state.followUp
   );
+
+  const { query } = useRouter();
+
   const {
     modal: { data },
   } = useAppSelector((state) => state.global);
@@ -79,6 +83,45 @@ const useFollowUps = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
+  useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const searchQuery = query?.text as string;
+
+    let updatedFilter: {
+      text?: string;
+    } = {
+      text: searchQuery || "",
+    };
+
+    if (searchQuery) {
+      updatedFilter.text = searchQuery;
+    }
+
+    setFilter(updatedFilter);
+
+    dispatch(
+      readFollowUp({
+        params: {
+          filter: searchQuery ? updatedFilter : {},
+          page: (Number(parsedPage) || resetPage) ?? currentPage,
+          size: 10,
+        },
+      })
+    ).then((res: any) => {
+      if (res?.payload) {
+        setCurrentPageRows(res?.payload?.FollowUp);
+      }
+    });
+  }, [query]);
 
   return {
     currentPageRows,

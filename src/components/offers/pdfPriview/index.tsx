@@ -55,6 +55,8 @@ const OfferPdfPriview = () => {
       />
     ),
   };
+
+  
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };

@@ -424,12 +424,21 @@ export const useMainInvoicePdf = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   const handlePrint = () => {
-    window.open(invoiceData?.attachement);
+    if (mergedPdfUrl) {
+      var printWindow = window.open(mergedPdfUrl, "_blank");
+      if (!printWindow) return;
+      printWindow.onload = function () {
+        printWindow?.print();
+      };
+    }
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const onSuccess = () => {
     router.push("/contract?status=None");
     dispatch(updateModalType({ type: ModalType.NONE }));
