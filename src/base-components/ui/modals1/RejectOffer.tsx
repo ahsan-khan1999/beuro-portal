@@ -2,10 +2,8 @@ import Image from "next/image";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
-import { useUploadImageOffer } from "@/hooks/modals/useUploadImageOffer";
 import { useRejectOffer } from "@/hooks/modals/useRejectOffer";
 import { CreateSuccessProps } from "@/types/global";
-import { useTranslation } from "next-i18next";
 
 const RejectOffer = ({
   onClose,
@@ -15,6 +13,7 @@ const RejectOffer = ({
 }: CreateSuccessProps) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useRejectOffer();
+
   return (
     <>
       <BaseModal

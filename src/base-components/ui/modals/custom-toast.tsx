@@ -34,7 +34,7 @@ const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
   return (
     <div className="toast-container fixed top-10 right-5 w-92 z-50">
       <div
-        className={`toast rounded-xl shadow-lg px-4 py-3 border ${
+        className={`toast rounded-xl shadow-lg px-4 py-3 border bg-white ${
           type === "error"
             ? "border-red"
             : type === "success"

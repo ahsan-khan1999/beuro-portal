@@ -1,21 +1,11 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
-import {
-  generateAddNewNoteValidation,
-  generateRejectOfferValidation,
-} from "@/validation/modalsSchema";
-import { createLeadNotes } from "@/api/slices/lead/leadSlice";
-import { createNote } from "@/api/slices/noteSlice/noteSlice";
+import { generateRejectOfferValidation } from "@/validation/modalsSchema";
 import { rejectOfferPublic } from "@/api/slices/offer/offerSlice";
-import {
-  RejectOfferFields,
-  RejectOfferTextFields,
-} from "@/components/offers/reject-offer-field";
+import { RejectOfferFields } from "@/components/offers/reject-offer-field";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 
@@ -30,6 +20,7 @@ export const useRejectOffer = () => {
   const {
     modal: { data },
   } = useAppSelector((state) => state.global);
+
   const onClose = () => {};
   const schema = generateRejectOfferValidation(translate);
   const {
@@ -43,8 +34,8 @@ export const useRejectOffer = () => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const reason = watch("reason");
 
+  const reason = watch("reason");
   const fields = RejectOfferFields(
     register,
     loading,
@@ -59,11 +50,13 @@ export const useRejectOffer = () => {
       id: offerID,
       reason: data?.reason === "Other" ? data?.reasonDescription : data?.reason,
     };
+
     const response = await dispatch(rejectOfferPublic({ params }));
     if (response?.payload)
       dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     else dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   return {
     fields,
     onSubmit,
