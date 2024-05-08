@@ -360,7 +360,7 @@ export default function useOfferDetails() {
 
   const handleUpdateDiscount = async (discount: number) => {
     if (discount < 0)
-      toast.error("Negative values are not applicable for discounts");
+      showError("Negative values are not applicable for discounts");
     else {
       const response = await dispatch(
         updateOfferDiscount({

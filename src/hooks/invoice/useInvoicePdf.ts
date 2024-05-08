@@ -220,8 +220,8 @@ export const useInvoicePdf = () => {
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
               isSubInvoicePdf: true,
-              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
               dueAmount: invoiceDetails?.amount.toString(),
+              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:
@@ -424,8 +424,15 @@ export const useInvoicePdf = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   const handlePrint = () => {
-    window.open(invoiceData?.attachement);
+    if (mergedPdfUrl) {
+      let printWindow = window.open(mergedPdfUrl, "_blank");
+      if (!printWindow) return;
+      printWindow.onload = function () {
+        printWindow?.print();
+      };
+    }
   };
 
   const onClose = () => {

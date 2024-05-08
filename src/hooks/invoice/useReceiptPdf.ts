@@ -459,8 +459,16 @@ export const useReceiptPdf = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   const handlePrint = () => {
-    window.open(receiptData?.attachement);
+    if (mergedPdfUrl) {
+      let printWindow = window.open(mergedPdfUrl, "_blank");
+      if (printWindow) {
+        printWindow.onload = function () {
+          printWindow?.print();
+        };
+      }
+    }
   };
 
   const onClose = () => {

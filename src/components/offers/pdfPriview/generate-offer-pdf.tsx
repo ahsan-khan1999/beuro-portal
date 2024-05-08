@@ -18,8 +18,6 @@ import { Footer } from "@/components/reactPdf/footer";
 import { AdditionalDetails } from "@/components/reactPdf/additional-details";
 import { blobToFile } from "@/utils/utility";
 import { AggrementSignature } from "@/components/reactPdf/aggrement-signature";
-import { ServiceTableDiscountRow } from "@/components/reactPdf/service-table-discount";
-
 Font.register({
   family: "Poppins",
   fonts: [
