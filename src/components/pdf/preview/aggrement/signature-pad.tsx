@@ -116,9 +116,7 @@ export const SignaturePad = ({
   const { t: translate } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [signaturePad, setSignaturePad] = useState<SignPad | null>(null);
-  const [signatureHolder, setsignatureHolder] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { loading } = useAppSelector((state) => state.global);
   const resizeCanvas = () => {
     if (canvasRef.current && signaturePad) {
       const rect = canvasRef.current.getBoundingClientRect();
