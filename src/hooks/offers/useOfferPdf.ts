@@ -37,9 +37,11 @@ export const useOfferPdf = () => {
 
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
+
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
+
   const [pdfFile, setPdfFile] = useState(null);
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
@@ -352,7 +354,15 @@ export const useOfferPdf = () => {
   };
 
   const handlePrint = () => {
-    window.open(offerDetails?.attachement);
+    if (pdfFile) {
+      const url = URL.createObjectURL(pdfFile);
+
+      let printWindow = window.open(url, "_blank");
+      if (!printWindow) return;
+      printWindow.onload = function () {
+        printWindow?.print();
+      };
+    }
   };
 
   const onClose = () => {

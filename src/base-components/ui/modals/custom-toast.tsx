@@ -21,7 +21,7 @@ const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
 
   const toastClasses = {
     error: "bg-white",
-    success: "bg-green-500",
+    susemiboldccess: "bg-green-500",
     info: "bg-blue-500",
   };
 
@@ -32,17 +32,27 @@ const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
   };
 
   return (
-    <div className="toast-container fixed top-10 right-5 w-92    z-50 ">
-      <div className="toast rounded-2xl shadow-lg  px-4 py-3">
-        <div className={`    `}>
+    <div className="toast-container fixed top-10 right-5 w-92 z-50">
+      <div
+        className={`toast rounded-xl shadow-lg px-4 py-3 border bg-white ${
+          type === "error"
+            ? "border-red"
+            : type === "success"
+            ? "border-green-700"
+            : "border-yellow-500"
+        }`}
+      >
+        <div>
           <div className="flex items-center justify-between space-x-2">
             <div className="flex items-center">
-              <span className={`mr-5   ${iconClasses[type]}`}>
+              <span className={`mr-5 ${iconClasses[type]}`}>
                 {type === "error" && <ErrorIcon />}
                 {type === "success" && <SuccessIcon />}
                 {type === "info" && <InfoIcon />}
               </span>
-              <p className=" text-base font-medium truncate">{message}</p>
+              <p className="text-base font-medium tracking-wider truncate">
+                {message}
+              </p>
             </div>
             {/* <button onClick={onClose}>
               <svg

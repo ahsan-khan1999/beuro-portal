@@ -319,6 +319,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
               rows: 2,
               id: "description",
               name: "description",
+              maxLength: 100,
               placeholder: "",
               register,
             },

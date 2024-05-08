@@ -78,6 +78,15 @@ const ServiceDetailsData = ({
     calculateTax(offerDetails?.subTotal, Number(offerDetails?.discountAmount)) +
     totalDiscount;
 
+  const discountAmount =
+    (Number(offerDetails?.discountAmount) / 100) *
+    Number(offerDetails?.subTotal);
+
+  const discountValue =
+    offerDetails?.discountType && offerDetails?.discountType === "Amount"
+      ? offerDetails?.discountAmount
+      : discountAmount;
+
   return (
     <LeadsCardLayout>
       <div
@@ -201,9 +210,7 @@ const ServiceDetailsData = ({
                       )}
                     </span>
                     <span className="text-[#4B4B4B] text-base font-medium">
-                      {offerDetails?.discountType === "Amount"
-                        ? offerDetails?.discountAmount + totalDiscount
-                        : percentageDiscountVal.toFixed(2)}
+                      {discountValue && discountValue.toFixed(2)}
                     </span>
                   </div>
                 </div>

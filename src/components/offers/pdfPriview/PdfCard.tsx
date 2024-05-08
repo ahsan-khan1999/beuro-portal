@@ -8,6 +8,7 @@ import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { useTranslation } from "next-i18next";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { getEmailColor } from "@/utils/utility";
+import { PrintIcon } from "@/assets/svgs/components/print-icon";
 
 const EmailCard = ({
   emailStatus,
@@ -122,11 +123,8 @@ const EmailCard = ({
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton>
 
+          <PrintIcon onClick={onPrint} />
           <DownloadIcon onClick={onDownload} />
-          {/* <IconOnlyButton
-            icon={<Image src={printerIcon} alt="printerIcon" />}
-            onClick={onPrint}
-          /> */}
         </div>
       </div>
       <div className="flex mt-5">

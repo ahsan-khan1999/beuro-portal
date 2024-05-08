@@ -8,6 +8,7 @@ import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useAppSelector } from "@/hooks/useRedux";
+import { PrintIcon } from "@/assets/svgs/components/print-icon";
 
 const PdfCard = ({
   contractNo,
@@ -159,13 +160,8 @@ const PdfCard = ({
                 <EmailIcon className="text-primary group-hover:text-primary" />
               </BaseButton>
 
+              <PrintIcon onClick={onPrint} />
               <DownloadIcon onClick={onDownload} />
-              {/* <Image
-              src={printerIcon}
-              alt="printerIcon"
-              className="cursor-pointer"
-              onClick={onPrint}
-            /> */}
             </div>
           </div>
           <div className="grid grid-cols-1 xMaxSize:grid-cols-2 gap-x-6 gap-y-3 mt-5">

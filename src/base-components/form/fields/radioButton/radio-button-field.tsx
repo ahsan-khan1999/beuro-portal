@@ -25,8 +25,6 @@ export const RadioButtonField = ({
     colorClasses
   );
 
-  console.log(checked);
-
   const { onChange: registerOnChange } = register(name);
   const conditionalOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {

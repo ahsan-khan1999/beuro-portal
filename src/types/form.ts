@@ -65,6 +65,7 @@ export interface ColorPickerProps extends BaseFieldProps<Field.colorPicker> {
 export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
   register: UseFormRegister<FieldValues>;
   rows?: number;
+  maxLength?: number;
   value?: string;
   placeholder?: string;
   disabled?: boolean;

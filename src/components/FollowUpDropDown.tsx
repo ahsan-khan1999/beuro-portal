@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "@/base-components/ui/button/button";
 import followUpIcon from "@/assets/svgs/follow-up.svg";
 import timeIcon from "@/assets/svgs/time.svg";
-import idIcon from "@/assets/svgs/id.svg";
 import licenseIcon from "@/assets/svgs/driver-license-icon.svg";
 import dateIcon from "@/assets/svgs/Vector-date.svg";
 import deleteIcon from "@/assets/svgs/Vector-delete.svg";

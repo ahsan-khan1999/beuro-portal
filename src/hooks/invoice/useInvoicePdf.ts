@@ -220,7 +220,8 @@ export const useInvoicePdf = () => {
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
               isSubInvoicePdf: true,
-              invoiceAmount: invoiceDetails?.amount.toString(),
+              dueAmount: invoiceDetails?.amount.toString(),
+              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:
@@ -311,6 +312,7 @@ export const useInvoicePdf = () => {
   }, [qrCodeUrl]);
 
   const fileName = invoiceData?.emailHeader?.contractId;
+
   const contractDataProps = useMemo(
     () => ({
       emailTemplateSettings,
@@ -422,8 +424,15 @@ export const useInvoicePdf = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   const handlePrint = () => {
-    window.open(invoiceData?.attachement);
+    if (mergedPdfUrl) {
+      let printWindow = window.open(mergedPdfUrl, "_blank");
+      if (!printWindow) return;
+      printWindow.onload = function () {
+        printWindow?.print();
+      };
+    }
   };
 
   const onClose = () => {
@@ -484,5 +493,6 @@ export const useInvoicePdf = () => {
     onSuccess,
     collectiveInvoiceDetails,
     invoiceDetails,
+    systemSetting,
   };
 };

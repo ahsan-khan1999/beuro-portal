@@ -28,10 +28,7 @@ import {
   readOfferDetails,
   setOfferDetails,
 } from "@/api/slices/offer/offerSlice";
-import {
-  CustomerPromiseActionType,
-  OfferPromiseActionType,
-} from "@/types/customer";
+import { OfferPromiseActionType } from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -52,8 +49,8 @@ export const useEditOfferDetails = ({
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
-  const { content } = useAppSelector((state) => state.content);
 
+  const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
 
   const onCancel = () => {
@@ -109,8 +106,8 @@ export const useEditOfferDetails = ({
       );
     }
   }, [offer]);
-  const type = watch("type");
 
+  const type = watch("type");
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
@@ -180,6 +177,7 @@ export const useEditOfferDetails = ({
     control,
     name: "date",
   });
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
@@ -196,6 +194,7 @@ export const useEditOfferDetails = ({
       });
     }
   };
+
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
@@ -204,6 +203,7 @@ export const useEditOfferDetails = ({
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);
   }, [selectedContent]);
+
   const handleContentSelect = () => {};
   const offerFields = AddOfferDetailsFormField(
     register,

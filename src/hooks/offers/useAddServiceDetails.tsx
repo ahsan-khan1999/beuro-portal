@@ -120,7 +120,12 @@ export const useAddServiceDetails = (
         Number(data?.serviceDetail[index]?.price) *
           Number(data?.serviceDetail[index]?.count) -
         Number(data?.serviceDetail[index]?.discount || 0);
-      setValue(`serviceDetail.${index}.totalPrice`, totalPrice?.toFixed(2));
+
+      if (data?.serviceDetail[index]?.discount > totalPrice) {
+        setValue(`serviceDetail.${index}.totalPrice`, 0);
+      } else {
+        setValue(`serviceDetail.${index}.totalPrice`, totalPrice?.toFixed(2));
+      }
       generateGrandTotal();
     }, 10);
   };
@@ -132,13 +137,8 @@ export const useAddServiceDetails = (
       0
     );
 
-    let taxAmount =
-      isTax && String(taxType) == "0"
-        ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
-        : isTax && String(taxType) == "1"
-        ? calculateTax(totalPrices, data?.taxAmount || 0)
-        : 0;
     let discount = 0;
+
     if (isDiscount && discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
       if (!+discountType && discountAmount > 100) {
@@ -148,11 +148,25 @@ export const useAddServiceDetails = (
         setValue("discountAmount", totalPrices);
         console.info("Amount should not be greater than total price");
       } else if (!!+discountType && discountAmount === "") {
-        // console.log("here");
+        // Handle case where discountAmount is empty
       }
     } else {
       setValue("discountAmount", prevDisAmount);
     }
+
+    // Calculate grand total after applying discount
+    const discountedTotal = totalPrices - discount;
+
+    let taxAmount = 0;
+
+    if (isTax) {
+      if (String(taxType) === "0") {
+        taxAmount = calculateTax(discountedTotal, Number(TAX_PERCENTAGE));
+      } else if (String(taxType) === "1") {
+        taxAmount = calculateTax(discountedTotal, data?.taxAmount || 0);
+      }
+    }
+
     const grandTotal =
       String(taxType) === "0"
         ? totalPrices - discount
@@ -161,7 +175,9 @@ export const useAddServiceDetails = (
     if (discountAmount === "") {
       setValue("discountAmount", "");
     }
+
     prevDisAmount = discountAmount === "" || discount === 0 ? "" : discount;
+
     setTotal({
       subTotal: totalPrices,
       grandTotal: grandTotal,
