@@ -11,7 +11,6 @@ const TableRows = ({
   return (
     <div>
       {currentPageRows?.map((item: FollowUps, index: number) => {
-
         return (
           <div
             key={index}
@@ -26,7 +25,7 @@ const TableRows = ({
             </span>
             <span className="flex items-center">{item.title}</span>
 
-            <span className="flex items-center justify-center ">
+            <span className="flex items-center justify-center">
               <div
                 className={`bg-[${
                   StatusColors[item.status]
