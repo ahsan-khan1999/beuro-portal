@@ -35,6 +35,7 @@ export default function ContractsFilter({
     handleExtraFilterToggle,
     handleExtraFiltersClose,
   } = useFilter({ filter, setFilter, moreFilters });
+
   const router = useRouter();
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   const { t: translate } = useTranslation();
