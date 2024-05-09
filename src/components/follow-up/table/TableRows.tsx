@@ -16,8 +16,8 @@ const TableRows = ({
             key={index}
             className="hover:bg-[#E9E1FF] bg-white border border-[#4A13E7] rounded-md shadow-tableRow grid grid-cols-[minmax(70px,_70px)_minmax(180px,_180px)_minmax(250px,_250px)_minmax(300px,_300px)_minmax(150px,_150px)_minmax(80px,_100%)_minmax(100px,_100px)] mt-2 p-4"
           >
-            <span className="flex items-center ">{item.customer?.refID}</span>
-            <span className=" flex items-center">
+            <span className="flex items-center">{item.customer?.refID}</span>
+            <span className="flex items-center truncate mr-2">
               {item.customer?.fullName}
             </span>
             <span className="flex items-center">

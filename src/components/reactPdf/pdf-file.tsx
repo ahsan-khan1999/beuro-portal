@@ -1,13 +1,5 @@
 import { PdfPreviewProps } from "@/types";
-import {
-  Document,
-  Font,
-  PDFViewer,
-  Page,
-  StyleSheet,
-  Text,
-  View,
-} from "@react-pdf/renderer";
+import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 import { Header } from "./header";
 import { ContactAddress } from "./contact-address";
 import { AddressDetails } from "./address-details";
@@ -16,7 +8,6 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
-import { ServiceTableDiscountRow } from "./service-table-discount";
 
 Font.register({
   family: "Poppins",
