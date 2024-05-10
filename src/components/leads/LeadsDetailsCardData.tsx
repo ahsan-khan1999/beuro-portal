@@ -13,6 +13,7 @@ import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
+import moment from "moment";
 
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
@@ -95,6 +96,14 @@ const LeadsDetailsCardData = ({
                     },
                     addressID: { address: leadDetails?.addressID?.address },
                     content: leadDetails?.requiredService,
+                    date: [
+                      {
+                        startDate: moment(leadDetails.desireDate).format(
+                          "YYYY-MM-DD"
+                        ),
+                        endDate: "",
+                      },
+                    ],
                   })
                 );
                 dispatch(

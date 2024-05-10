@@ -10,7 +10,7 @@ const TableFunctions = ({
 }: {
   filter: FilterType;
   setFilter: SetStateAction<any>;
-  handleFilterChange: () => void;
+  handleFilterChange: (text: FilterType) => void;
 }) => {
   const { t: translate } = useTranslation();
 

@@ -36,6 +36,7 @@ export const useRejectOffer = () => {
   });
 
   const reason = watch("reason");
+
   const fields = RejectOfferFields(
     register,
     loading,
@@ -53,7 +54,7 @@ export const useRejectOffer = () => {
 
     const response = await dispatch(rejectOfferPublic({ params }));
     if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+      dispatch(updateModalType({ type: ModalType.OFFER_REJECT_SUCCESS }));
     else dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

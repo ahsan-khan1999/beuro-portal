@@ -3,14 +3,9 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useRejectOffer } from "@/hooks/modals/useRejectOffer";
-import { CreateSuccessProps } from "@/types/global";
+import { onRejectProps } from "@/types/global";
 
-const RejectOffer = ({
-  onClose,
-  modelHeading,
-  modelSubHeading,
-  routeHandler,
-}: CreateSuccessProps) => {
+const RejectOffer = ({ onClose }: onRejectProps) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useRejectOffer();
 
@@ -27,11 +22,10 @@ const RejectOffer = ({
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <p className="text-2xl font-medium text-[#000]">
+          <p className="text-2xl font-medium border-b border-b-[#000] border-opacity-10 pb-2">
             {translate("rejected_offer.heading")}
           </p>
 
-          <div className="flex flex-col gap-y-2 my-2 border-t border-[#000] border-opacity-10 pt-5"></div>
           <Form
             formFields={fields}
             handleSubmit={handleSubmit}

@@ -522,6 +522,7 @@ export const generateDateChildren = (
 ) => {
   const { t: translate } = useTranslation();
   const dateformFields = [];
+
   for (let i = 0; i < count; i++) {
     dateformFields.push({
       containerClass: "mb-0 pt-5",

@@ -199,7 +199,8 @@
     "user_profile_already_complete": "User Profile is already completed",
     "offer_not_open": "This offer is already closed or signed",
     "discountLessThanTotalPrice": "must be less than total price",
-    "offer_already_signed": "This offer has already been signed."
+    "offer_already_signed": "This offer has already been signed.",
+    "validation_failed": "This Offer Already Signed"
   },
   "sidebar": {
     "customer": {

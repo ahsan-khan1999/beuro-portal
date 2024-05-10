@@ -184,6 +184,7 @@
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "Ihr Plan läuft aus!",
     "offer_already_signed": "Dieses Angebot ist bereits unterzeichnet.",
+    "validation_failed": "This Offer Already Signed",
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",

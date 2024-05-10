@@ -28,6 +28,7 @@ import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
 import { ContentTableRowTypes } from "@/types/content";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();

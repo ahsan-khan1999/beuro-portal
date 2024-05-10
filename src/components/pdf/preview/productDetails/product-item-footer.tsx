@@ -79,7 +79,7 @@ export const ProductItemFooter = ({
             <span className="text-[#1E1E1E] text-sm font-medium">
               Mwst ({tax}%):
             </span>
-            <span className="text-[#1E1E1E] text-sm font-medium ">
+            <span className="text-[#1E1E1E] text-sm font-medium">
               {(isTax && (
                 <>
                   {Number(calculatedTax).toFixed(2)} {systemSettings?.currency}
@@ -97,11 +97,11 @@ export const ProductItemFooter = ({
             </span>
           </div> */}
         </div>
-        <div className="flex justify-between w-full border-b border-b-[#ccc] py-2 ">
-          <span className="text-sm font-bold text-[#404F6A]">
+        <div className="flex justify-between w-full p-2 bg-[#404F6A] rounded-[4px]">
+          <span className="text-sm font-bold text-[#fff]">
             {translate("pdf.grand_total")}:
           </span>
-          <span className="text-sm font-bold text-[#404F6A]">
+          <span className="text-sm font-bold text-[#fff]">
             {grandTotal}
             {" " + systemSettings?.currency}
           </span>

@@ -402,7 +402,7 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 }
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY HH:MM");
+  return moment(date).format("DD/MM/YYYY hh:mm");
 }
 export function formatDateReverse(date: string) {
   if (!date) return;
