@@ -192,7 +192,8 @@ export const AdditionalDetails = ({
           stylesheet={stylesheet}
           style={{ fontFamily: "Poppins" }}
         >
-          {replaceFontSizes(description ?? "")}
+          {/* {replaceFontSizes(description ?? "")} */}
+          {description ?? ""}
         </Html>
       </View>
     </View>

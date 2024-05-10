@@ -22,17 +22,17 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   totalSection: {
-    // backgroundColor: "#404F6A",
-    // borderRadius: 4,
-    // padding: 8,
+    backgroundColor: "#404F6A",
+    borderRadius: 4,
+    padding: 8,
     // marginTop: 10,
     // columnGap: 16,
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottom: "1px",
-    borderBottomColor: "#ccc",
-    paddingBottom: 5,
-    marginBottom: 5,
+    // borderBottom: "1px",
+    // borderBottomColor: "#ccc",
+    // paddingBottom: 5,
+    // marginBottom: 5,
   },
   grandTotalText: {
     fontSize: 8,
@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
   },
   whiteText: {
     fontSize: 8,
-    fontWeight: "bold",
+    fontWeight: 600,
+    fontStyle: "bold",
     color: "#FFFFFF",
   },
   subSection: {
@@ -69,6 +70,46 @@ const styles = StyleSheet.create({
     borderBottom: "1px",
     borderBottomColor: "#ccc",
     paddingBottom: 5,
+    marginBottom: 5,
+  },
+  dueAmountSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderTop: "1px",
+    borderTopColor: "#ccc",
+  },
+  paidAmountSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottom: "1px",
+    borderBottomColor: "#ccc",
+    paddingTop: 5,
+    paddingBottom: 5,
+    marginBottom: 5,
+  },
+  subInvoicepaidAmountSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottom: "1px",
+    borderBottomColor: "#ccc",
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+
+  receiptPaidAmountSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderTop: "1px",
+    borderTopColor: "#ccc",
+    paddingTop: 5,
+    marginBottom: 5,
+  },
+
+  taxSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 5,
   },
   discountDescription: {
@@ -169,7 +210,7 @@ export const ServicesTotalAmount = ({
               </Text>
             </View>
           )}
-          <View style={styles.subSection}>
+          <View style={styles.taxSection}>
             <Text style={styles.text}>Mwst ({tax}%): </Text>
             {(isTax && (
               <Text style={styles.text}>
@@ -181,8 +222,8 @@ export const ServicesTotalAmount = ({
           {(isOfferPDF || isContractPDF) &&
             (!isShowExtraAmount ? (
               <View style={styles.totalSection}>
-                <Text style={styles.grandTotalText}>Gesamtsumme:</Text>
-                <Text style={styles.grandTotalText}>
+                <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                <Text style={styles.whiteText}>
                   {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                 </Text>
               </View>
@@ -212,14 +253,14 @@ export const ServicesTotalAmount = ({
           {isMainInvoice && (
             <View>
               <View style={styles.totalSection}>
-                <Text style={styles.grandTotalText}>Gesamtsumme:</Text>
-                <Text style={styles.grandTotalText}>
+                <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                <Text style={styles.whiteText}>
                   {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                 </Text>
               </View>
               {Number(invoiceAmount) > 0 && (
                 <View>
-                  <View style={styles.subSection}>
+                  <View style={styles.paidAmountSection}>
                     <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
                     <Text style={styles.text}>
                       -{Number(invoiceAmount).toFixed(2)}
@@ -249,7 +290,7 @@ export const ServicesTotalAmount = ({
               </View>
             ) : (
               <View>
-                <View style={styles.subSection}>
+                <View style={styles.dueAmountSection}>
                   <Text style={styles.text}>{"Fälliger Betrag"}:</Text>
                   <Text style={styles.text}>
                     {Number(dueAmount).toFixed(2)} {systemSettings?.currency}
@@ -257,13 +298,13 @@ export const ServicesTotalAmount = ({
                 </View>
                 <View>
                   <View style={styles.totalSection}>
-                    <Text style={styles.grandTotalText}>Gesamtsumme:</Text>
-                    <Text style={styles.grandTotalText}>
+                    <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                    <Text style={styles.whiteText}>
                       {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                     </Text>
                   </View>
                   {Number(invoiceAmount) > 0 && (
-                    <View style={styles.subSection}>
+                    <View style={styles.subInvoicepaidAmountSection}>
                       <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
                       <Text style={styles.text}>
                         -{Number(invoiceAmount).toFixed(2)}
@@ -272,7 +313,7 @@ export const ServicesTotalAmount = ({
                     </View>
                   )}
                   {Number(unPaidAmount) > 0 && (
-                    <View style={styles.subSection}>
+                    <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
                       <Text style={styles.text}>
                         {unPaidAmount.toFixed(2)} {systemSettings?.currency}
@@ -294,7 +335,7 @@ export const ServicesTotalAmount = ({
             ) : (
               <View>
                 {Number(invoiceAmount) > 0 && (
-                  <View style={styles.subSection}>
+                  <View style={styles.receiptPaidAmountSection}>
                     <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
                     <Text style={styles.paidText}>
                       {"Der Betrag, den Sie beim letzten Mal bezahlt haben."}
@@ -307,13 +348,13 @@ export const ServicesTotalAmount = ({
                 )}
                 <View>
                   <View style={styles.totalSection}>
-                    <Text style={styles.grandTotalText}>Gesamtsumme:</Text>
-                    <Text style={styles.grandTotalText}>
+                    <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                    <Text style={styles.whiteText}>
                       {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                     </Text>
                   </View>
                   {Number(invoiceAmount) > 0 && (
-                    <View style={styles.subSection}>
+                    <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>
                         {"Gezahlter Gesamtbetrag"}:
                       </Text>
