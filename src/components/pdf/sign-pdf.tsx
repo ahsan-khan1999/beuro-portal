@@ -71,8 +71,12 @@ export const SignPdf = <T,>({
       dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
 
+  const handleOfferReject = () => {
+    router.push("https://buero-365.com/");
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
   const onSuccess = () => {
-    // router.push("https://buero-365.com/");
     router.push("/thank-you");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -100,12 +104,20 @@ export const SignPdf = <T,>({
         routeHandler={onSuccess}
       />
     ),
+    [ModalType.OFFER_REJECT_SUCCESS]: (
+      <RecordCreateSuccess
+        onClose={onClose}
+        modelHeading={translate("common.modals.offer_created")}
+        modelSubHeading={translate("common.modals.admin_setting_des")}
+        routeHandler={handleOfferReject}
+      />
+    ),
     [ModalType.REJECT_OFFER]: (
       <RejectOffer
         onClose={onClose}
-        modelHeading={translate("common.modals.offer_update")}
-        modelSubHeading={translate("common.modals.admin_setting_des")}
-        routeHandler={onSuccess}
+        // modelHeading={translate("common.modals.offer_update")}
+        // modelSubHeading={translate("common.modals.admin_setting_des")}
+        // onReject={handleOfferReject}
       />
     ),
     [ModalType.CREATION]: (
