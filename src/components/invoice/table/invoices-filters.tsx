@@ -195,14 +195,15 @@ export default function InvoicesFilters({
       </div>
 
       <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
+        <InputField
+          handleChange={handleInputChange}
+          ref={inputRef}
+          value={inputValue}
+          iconDisplay={false}
+          onEnterPress={onEnterPress}
+        />
+
         <div className="flex items-center gap-x-3">
-          <InputField
-            handleChange={handleInputChange}
-            ref={inputRef}
-            value={inputValue}
-            iconDisplay={false}
-            onEnterPress={onEnterPress}
-          />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
             value=""
@@ -227,9 +228,6 @@ export default function InvoicesFilters({
             ]}
             label={translate("common.sort_button")}
           />
-        </div>
-
-        <div className="flex items-center gap-x-3">
           <span className="text-[#4B4B4B] font-semibold text-base">
             {translate("global_search.notes")}
           </span>
@@ -278,7 +276,8 @@ export default function InvoicesFilters({
             ]}
             label={translate("add_note_dropdown.all_notes")}
           />
-
+        </div>
+        <div className="flex items-center gap-x-4">
           <InvoicesFilter
             filter={filter}
             setFilter={setFilter}
