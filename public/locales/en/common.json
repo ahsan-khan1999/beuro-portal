@@ -1116,6 +1116,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "no_attachments": "No attachments found!",
     "sign_first": "Please Sign First",
     "paid_amount_last": "The amount which you paid last time.",
     "filters": "Filters",

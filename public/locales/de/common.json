@@ -1108,6 +1108,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "no_attachments": "Keine Anhänge gefunden!",
     "sign_first": "Bitte unterschreiben Sie zuerst",
     "paid_amount_last": "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
     "filters": "Filter",
