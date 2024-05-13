@@ -7,10 +7,10 @@ import { formatAddress } from "@/utils/utility";
 import moment from "moment";
 import { useTranslation } from "next-i18next";
 
-type details = {
+export interface details {
   label: string;
   value: string;
-};
+}
 
 const FollowUpDetails = ({
   onClose,
@@ -86,19 +86,19 @@ const FollowUpDetails = ({
   const addressDetails: details[] = [
     {
       label: translate("follow_up.address_details.street_no"),
-      value: followUpDetails?.customer?.address?.streetNumber,
+      value: followUpDetails?.lead?.customerDetail?.address?.streetNumber,
     },
     {
       label: translate("follow_up.address_details.post_code"),
-      value: followUpDetails?.customer?.address?.postalCode,
+      value: followUpDetails?.lead?.customerDetail?.address?.postalCode,
     },
     {
       label: translate("follow_up.address_details.country"),
-      value: followUpDetails?.customer?.address?.country,
+      value: followUpDetails?.lead?.customerDetail?.address?.country,
     },
     {
       label: translate("follow_up.address_details.description"),
-      value: followUpDetails?.customer?.address?.country,
+      value: followUpDetails?.lead?.customerDetail?.address?.description,
     },
   ];
 
@@ -117,7 +117,7 @@ const FollowUpDetails = ({
           />
 
           <div className="flex flex-col">
-            <section className="flex justify-between items-center mb-5">
+            <section className="flex justify-between items-center mb-5 border-b border-b-[#000] border-opacity-10 pb-5">
               <h2 className="font-medium text-2xl text-black">
                 {translate("follow_up.main_heading")}
               </h2>
@@ -145,6 +145,7 @@ const FollowUpDetails = ({
                     </span>
                   </>
                 )}
+
                 {!followUpDetails?.isCompleted && (
                   <span
                     onClick={() => handleAddRemarks()}
@@ -177,6 +178,7 @@ const FollowUpDetails = ({
                     {translate("follow_up.mark_as_complete")}
                   </span>
                 )}
+
                 {followUpDetails.isCompleted && (
                   <span className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-default ">
                     <svg
@@ -212,8 +214,6 @@ const FollowUpDetails = ({
                 )}
               </div>
             </section>
-
-            <hr className="opacity-10" />
 
             {followUpDetails?.isCompleted ? (
               <div className="flex flex-col gap-y-1 mt-1">
@@ -257,7 +257,7 @@ const FollowUpDetails = ({
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[48px]">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
                         {item.value}
                       </span>
                     </div>
@@ -270,8 +270,8 @@ const FollowUpDetails = ({
                   {translate("follow_up.follow_up_detail_heading")}
                 </h2>
 
-                <div className="grid grid-cols-2 gap-x-3 mt-[22px]">
-                  {/* {followUpDetails.map((item, index) => (
+                {/* <div className="grid grid-cols-2 gap-x-3 mt-[22px]"> */}
+                {/* {followUpDetails.map((item, index) => (
                     <div
                       className="flex flex-col gap-y-[10px] mb-5"
                       key={index}
@@ -284,13 +284,13 @@ const FollowUpDetails = ({
                       </span>
                     </div>
                   ))} */}
-                </div>
+                {/* </div> */}
 
                 <div className="flex flex-col gap-y-[10px] mb-5">
                   <p className="text-sm font-normal text-[#4D4D4D]">
                     {translate("follow_up.additional_detail_heading")}
                   </p>
-                  <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base min-h-[48px]">
+                  <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base min-h-[58px]">
                     {followUpDetails?.additionalDetails}
                   </p>
                 </div>
@@ -315,7 +315,7 @@ const FollowUpDetails = ({
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[48px]">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
                         {item.value}
                       </span>
                     </div>
@@ -333,7 +333,7 @@ const FollowUpDetails = ({
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[48px]">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
                         {item.value}
                       </span>
                     </div>

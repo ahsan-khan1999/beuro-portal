@@ -7,7 +7,6 @@ import {
 } from "react-hook-form";
 import { OffersTableRowTypes } from "./offers";
 import { Plan } from "./admin/plans";
-import { Company } from "./company";
 
 export interface CustomerTable {
   currentPageRows: Customers[];
@@ -18,7 +17,7 @@ export interface CustomerDetail {
   id?: string;
   name?: string;
   handlePreviousClick: () => void;
-  handleDelete: () => void
+  handleDelete: () => void;
 }
 export interface CustomerLeadDetail {
   id: string;
@@ -30,14 +29,13 @@ export interface CustomerLeadDetail {
 export interface Customers {
   id: string;
   refID: string;
-  createdAt: string
+  createdAt: string;
   fullName: string;
   email: string;
   phoneNumber: string;
   date: string;
   mobileNumber: string;
-  gender: number
-
+  gender: number;
   status?: string;
   editImg?: string;
   editNote?: string;
@@ -47,18 +45,17 @@ export interface Customers {
   address: CustomerAddress;
   edit?: boolean;
   lead: CustomerLeadDetail;
-  logo: string
-  plan?: Plan
-  createdBy?: User
+  logo: string;
+  plan?: Plan;
+  createdBy?: User;
 }
 
 export interface CustomerAddress {
   streetNumber: string;
   country: string;
   postalCode: string;
-  city?: string
+  description: string;
 }
-
 
 export interface CustomerField {
   customerDetail?: Customers;
@@ -74,13 +71,13 @@ export interface FormDataProps {
   onSubmit: SubmitHandler<FieldValues>;
 }
 export interface CustomerPromiseActionType {
-  type: string,
-  payload: any,
-  meta: object,
+  type: string;
+  payload: any;
+  meta: object;
 }
 
 export interface OfferPromiseActionType {
-  type: string,
-  payload: OffersTableRowTypes,
-  meta: object,
+  type: string;
+  payload: OffersTableRowTypes;
+  meta: object;
 }

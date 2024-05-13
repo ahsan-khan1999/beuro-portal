@@ -40,7 +40,7 @@ const InputField = forwardRef(
     const router = useRouter();
     return (
       <div className={containerClasses}>
-        <div className="relative flex">
+        <div className="relative flex w-full">
           <input
             id="searchBar"
             type="text"
