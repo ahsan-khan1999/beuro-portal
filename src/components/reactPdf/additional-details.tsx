@@ -180,8 +180,6 @@ export const AdditionalDetails = ({
     return replacedDescription;
   }
 
-  console.log("description");
-
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
