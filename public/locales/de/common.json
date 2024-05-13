@@ -1071,7 +1071,7 @@
       "service_confirm": "Bitte Bestätigen die Leistungen-ID",
       "service_ID": "Leistungen-ID",
       "delete_service": "Sind Sie sicher, dass Sie diesen Leistungen löschen möchten?",
-      "created_service": "Leistungen erfolgreich erstellt",
+      "created_service": "Dienst erfolgreich erstellt",
       "service_created_des": "Vielen Dank für die Erstellung des Leistungens. Wir freuen uns, Sie als Kunden zu haben.",
       "delete_record": "Möchten Sie diesen Datensatz aktualisieren?",
       "contract_done": "Vielen Dank für die Aktualisierung des Angebots. Wir freuen uns, Sie als Kunden zu haben.",
@@ -1108,6 +1108,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "no_attachments": "Keine Anhänge gefunden!",
     "sign_first": "Bitte unterschreiben Sie zuerst",
     "paid_amount_last": "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
     "filters": "Filter",
@@ -2172,7 +2173,7 @@
   "thank_you_content": {
     "heading": "Danke für die Unterzeichnung des Vertrags",
     "valued_csutomer": "Sehr geehrter Kunde",
-    "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten. Übersetzt mit DeepL.com (kostenlose Version).",
+    "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten.",
     "warm_regards": "Mit freundlichen Grüßen",
     "team": "Das Buro-Team"
   }
