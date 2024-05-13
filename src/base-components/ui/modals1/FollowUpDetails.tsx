@@ -9,7 +9,7 @@ import { useTranslation } from "next-i18next";
 
 export interface details {
   label: string;
-  value: string;
+  value?: string;
 }
 
 const FollowUpDetails = ({
