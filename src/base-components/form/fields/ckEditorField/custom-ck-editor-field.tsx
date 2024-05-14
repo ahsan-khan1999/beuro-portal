@@ -3,7 +3,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import { CKEditorBoxProps } from "@/types";
 
-import CustomEditor from "@/base-components/ui/editor/ckeditor/build/ckeditor";
+import CustomEditor from "@/base-components/ui/editor/ckeditor/build/ckeditor"
+// import CustomEditor from "@/base-components/ui/editor/ckeditor-updated-build/build/ckeditor";
 import { useTranslation } from "next-i18next";
 
 const CustomCKEditor = ({
@@ -37,6 +38,7 @@ const CustomCKEditor = ({
 
         toolbar: {
           items: [
+            "exportPdf",
             "undo",
             "redo",
             "|",
@@ -69,6 +71,25 @@ const CustomCKEditor = ({
           shouldNotGroupWhenFull: true,
         },
         placeholder: translate("common.editor_placeholder"),
+        exportPdf: {
+          stylesheets: [ 'EDITOR_STYLES' ],
+          fileName: 'talha.pdf',
+          converterUrl: 'https://pdf-converter.cke-cs.com/v1/convert',
+          converterOptions: {
+              format: 'A4',
+              margin_top: '10mm',
+              margin_bottom: '10mm',
+              margin_right: '10mm',
+              margin_left: '10mm',
+              page_orientation: 'portrait',
+              header_html: undefined,
+              footer_html: undefined,
+              header_and_footer_css: undefined,
+              wait_for_network: true,
+              wait_time: 0
+          },
+          dataCallback: ( editor ) => editor.getData()
+      }
       }}
     />
   );
