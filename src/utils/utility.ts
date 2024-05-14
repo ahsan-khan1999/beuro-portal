@@ -402,11 +402,12 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 }
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY hh:mm");
+  return moment(date).format("DD/MM/YYYY HH:mm");
 }
+
 export function formatDateReverse(date: string) {
   if (!date) return;
-  return moment(date).format("hh:mm, DD/MM/YYYY");
+  return moment(date).format("HH:mm, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
   if (!date) return null;
@@ -423,7 +424,7 @@ export function formatDateTimeToDateMango(date: string) {
   return moment(date).format("YYYY-MM-DD");
 }
 export function formatDateTimeToTime(date: string) {
-  return moment(date).format("hh:mm");
+  return moment(date).format("HH:mm");
 }
 
 export function formatDateTime(item: string) {
