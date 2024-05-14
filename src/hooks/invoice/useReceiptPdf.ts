@@ -10,8 +10,10 @@ import {
   updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import {
+  SystemSetting,
   getTemplateSettings,
   readEmailSettings,
+  readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { ModalType } from "@/enums/ui";
 import {
@@ -74,6 +76,11 @@ export const useReceiptPdf = () => {
   );
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
+
+  const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
+    null
+  );
+
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
   // const [pdfFile, setPdfFile] = useState(null);
@@ -100,14 +107,16 @@ export const useReceiptPdf = () => {
   useEffect(() => {
     (async () => {
       if (invoiceID) {
-        const [template, emailTemplate, offerData, qrCode] = await Promise.all([
-          dispatch(getTemplateSettings()),
-          dispatch(readEmailSettings()),
-          dispatch(
-            readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
-          ),
-          dispatch(readQRCode({ params: { filter: invoiceID } })),
-        ]);
+        const [template, emailTemplate, offerData, qrCode, settings] =
+          await Promise.all([
+            dispatch(getTemplateSettings()),
+            dispatch(readEmailSettings()),
+            dispatch(
+              readCollectiveInvoiceDetails({ params: { filter: invoiceID } })
+            ),
+            dispatch(readQRCode({ params: { filter: invoiceID } })),
+            dispatch(readSystemSettings()),
+          ]);
         if (qrCode?.payload) {
           setQrCodeUrl(qrCode.payload);
         }
@@ -242,8 +251,9 @@ export const useReceiptPdf = () => {
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount.toString(),
               isShowExtraAmount: true,
-              isSubInvoicePdf: true,
-              invoiceAmount: invoiceDetails?.amount.toString(),
+              isReceiptPdf: true,
+              dueAmount: invoiceDetails?.amount.toString(),
+              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:
@@ -303,6 +313,9 @@ export const useReceiptPdf = () => {
               ?.body as string,
           };
         }
+        if (settings?.payload?.Setting) {
+          setSystemSettings({ ...settings?.payload?.Setting });
+        }
       }
     })();
   }, [invoiceID]);
@@ -338,6 +351,7 @@ export const useReceiptPdf = () => {
       fileName,
       qrCode: qrCodeUrl,
       remoteFileBlob,
+      systemSetting,
     }),
     [
       emailTemplateSettings,
@@ -445,8 +459,16 @@ export const useReceiptPdf = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   const handlePrint = () => {
-    window.open(receiptData?.attachement);
+    if (mergedPdfUrl) {
+      let printWindow = window.open(mergedPdfUrl, "_blank");
+      if (printWindow) {
+        printWindow.onload = function () {
+          printWindow?.print();
+        };
+      }
+    }
   };
 
   const onClose = () => {
@@ -507,5 +529,6 @@ export const useReceiptPdf = () => {
     onSuccess,
     dispatch,
     collectiveInvoiceDetails,
+    systemSetting,
   };
 };

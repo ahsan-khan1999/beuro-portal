@@ -99,13 +99,19 @@ const ConfirmationContentDetailsData = ({
             <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
-            <div className="mt-5 grid grid-cols-3 gap-2">
-              {contentDetail?.confirmationContent?.attachments?.map(
-                (item, index) => (
-                  <AttachmentsFiles fileName={item} key={index} />
-                )
-              )}
-            </div>
+            {contentDetail?.offerContent?.attachments.length > 0 ? (
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {contentDetail?.confirmationContent?.attachments?.map(
+                  (item, index) => (
+                    <AttachmentsFiles fileName={item} key={index} />
+                  )
+                )}
+              </div>
+            ) : (
+              <p className="text-center text-xl font-medium text-primary">
+                {translate("common.no_attachments")}
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@ const PdfDownload = ({
   setPdfFile,
   fileName,
   qrCode: remotePdfFile,
-  systemSetting
+  systemSetting,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates } = data?.movingDetails || {};
@@ -97,10 +97,14 @@ const PdfDownload = ({
 
                 <ServiceTableHederRow />
                 {serviceItem?.map((item, index) => (
-                  <ServiceTableRow {...item} key={index}
-                    pagebreak={serviceItem?.length === 1 ? false : index === serviceItem?.length - 1}
-
-
+                  <ServiceTableRow
+                    {...item}
+                    key={index}
+                    pagebreak={
+                      serviceItem?.length === 1
+                        ? false
+                        : index === serviceItem?.length - 1
+                    }
                   />
                 ))}
                 <ServicesTotalAmount {...serviceItemFooter} />
@@ -155,8 +159,7 @@ export default PdfDownload;
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 95,
-    height: '895px',
+    height: "895px",
     fontFamily: "Poppins",
-
   },
 });

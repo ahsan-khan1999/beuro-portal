@@ -168,14 +168,14 @@ const OfferDetailsData = ({
                 {contractDetails?.offerID?.leadID?.customerDetail?.gender}
               </div>
             </div>
-            <div>
+            {/* <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("login_detail.company_details.company_name")}
               </label>
               <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {contractDetails?.offerID?.leadID?.customerDetail?.companyName}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 

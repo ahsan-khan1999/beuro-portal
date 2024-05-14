@@ -20,8 +20,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
 
-  console.log(count);
-
   if (!fields) return null;
   for (let i = 0; i < count; i++) {
     const isEditable = addressType && addressType[i];

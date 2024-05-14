@@ -88,6 +88,8 @@ export const useContractPdf = () => {
     null
   );
 
+  const [pdfFile, setPdfFile] = useState(null);
+
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
   const {
@@ -456,6 +458,7 @@ export const useContractPdf = () => {
       console.error("Error in handleEmailSend:", error);
     }
   };
+
   const handleDonwload = () => {
     // window.open(contractData?.attachement);
 
@@ -475,9 +478,17 @@ export const useContractPdf = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   const handlePrint = () => {
-    window.open(contractData?.attachement);
+    if (mergedPdfUrl) {
+      let printWindow = window.open(mergedPdfUrl, "_blank");
+      if (!printWindow) return;
+      printWindow.onload = function () {
+        printWindow?.print();
+      };
+    }
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

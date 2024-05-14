@@ -1,6 +1,6 @@
 import { UsePaginationProps } from "@/types";
 import { useRouter } from "next/router";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const PAGE_LIMIT = 5;
 export const dots = "•••";
@@ -45,17 +45,16 @@ export const usePagination = ({
   };
 
   const handleNextClick = () => {
-    console.log({ currentPage });
-
     handlePageClick(currentPage + 1);
   };
 
-  // useEffect(() => {
-  //   router.replace({
-  //     pathname: router.pathname,
-  //     query: { ...router.query, page: currentPage },
-  //   });
-  // }, [currentPage]);
+  useEffect(() => {
+    // router.replace({
+    //   pathname: router.pathname,
+    //   query: { ...router.query, page: currentPage },
+    // });
+    setCurrentPage(defaultPage);
+  }, [defaultPage]);
 
   const startPage = Math.max(2, currentPage - Math.floor(PAGE_LIMIT / 2));
   const endPage = Math.min(totalPages - 1, startPage + PAGE_LIMIT - 1);

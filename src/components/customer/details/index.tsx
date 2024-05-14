@@ -28,7 +28,7 @@ const CustomerDetails = () => {
         <DetailsData
           date={formatDateTimeToDate(customerDetail?.createdAt) as string}
           id={customerDetail?.refID}
-          name={customerDetail?.fullName}
+          name={customerDetail?.createdBy?.fullName}
           handlePreviousClick={handlePreviousClick}
           handleDelete={deleteHandler}
         />

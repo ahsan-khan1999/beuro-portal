@@ -31,12 +31,6 @@ const AddNewLeadsData = () => {
     (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
   );
 
-  useEffect(() => {
-    setTabType(
-      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
-    );
-  }, [leadDetails?.id]);
-
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -111,6 +105,7 @@ const AddNewLeadsData = () => {
     router.pathname = "/leads";
     router.query = { status: "None" };
     updateQuery(router, router.locale as string);
+    dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const leadCreatedHandler = () => {
@@ -124,10 +119,10 @@ const AddNewLeadsData = () => {
   };
 
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
     router.pathname = "/leads";
     router.query = { status: "None" };
     updateQuery(router, router.locale as string);
+    dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -195,6 +190,12 @@ const AddNewLeadsData = () => {
       />
     ),
   };
+
+  useEffect(() => {
+    setTabType(
+      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
+    );
+  }, [leadDetails?.id]);
 
   return (
     <div className="h-full">

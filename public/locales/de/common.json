@@ -184,6 +184,7 @@
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "Ihr Plan läuft aus!",
     "offer_already_signed": "Dieses Angebot ist bereits unterzeichnet.",
+    "validation_failed": "This Offer Already Signed",
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",
@@ -447,7 +448,7 @@
     },
     "password_changed_modal": {
       "main_heading": "Passwort wurde erfolgreich geändert",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Vielen Dank für die Aktualisierung des Passworts, wir freuen uns, dass Sie dabei sind.",
       "button": "Fertig"
     },
     "link_send_modal": {
@@ -464,7 +465,7 @@
     },
     "password_set_modal": {
       "main_heading": "Ihr Passwort wurde erfolgreich festgelegt",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Vielen Dank für die Einrichtung des Passworts, wir sind froh, Sie zu haben.",
       "button": "Fertig"
     }
   },
@@ -520,7 +521,7 @@
       "invoice_days_limit": "Frist für überfällige Rechnungen",
       "currency": "Währung",
       "connect_with_buro": "Mit Büro verbinden",
-      "description": "Lorem Ipsum ist einfach Dummy-Text der Druck- und Satzindustrie. Lorem Ipsum ist die Industrie's besuchen unsere",
+      "description": "",
       "allowed_domain": "Erlaubte Domäne",
       "security_token": "Sicherheitstoken",
       "tabs_tax": {
@@ -580,7 +581,7 @@
       "next_renew": "Nächste Erneuerung 24. January 2024",
       "card_type": "Visa",
       "package_name": "Silber",
-      "package_description": "Lorem Ipsum ist einfach Dummy-Text der Druck- und Satzindustrie. Lorem Ipsum ist die Industrie's",
+      "package_description": "Büro 360 Silver includes reports, requests, simplicity, and affordability.",
       "request_services": {
         "heading": "Anfrage",
         "managers": "Manager",
@@ -599,7 +600,7 @@
       },
       "upgrade_card": {
         "heading": "Auf Gold upgraden!",
-        "description": "Sie können jedes der angegebenen Pakete einen Monat lang kostenlos testen. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+        "description": "Sie können jedes der angegebenen Pakete einen Monat lang kostenlos testen.",
         "button": "Upgraden"
       },
       "edit_payment_modal": {
@@ -682,6 +683,7 @@
       "id": "ID",
       "customer": "Kunde",
       "title": "Rechnungstitel",
+      "work_date": "Arbeitsdatum",
       "price": "Gesamtpreis",
       "email_status": "E-Mail-Status",
       "paid": "Bezahlt",
@@ -1069,7 +1071,7 @@
       "service_confirm": "Bitte Bestätigen die Leistungen-ID",
       "service_ID": "Leistungen-ID",
       "delete_service": "Sind Sie sicher, dass Sie diesen Leistungen löschen möchten?",
-      "created_service": "Leistungen erfolgreich erstellt",
+      "created_service": "Dienst erfolgreich erstellt",
       "service_created_des": "Vielen Dank für die Erstellung des Leistungens. Wir freuen uns, Sie als Kunden zu haben.",
       "delete_record": "Möchten Sie diesen Datensatz aktualisieren?",
       "contract_done": "Vielen Dank für die Aktualisierung des Angebots. Wir freuen uns, Sie als Kunden zu haben.",
@@ -1092,7 +1094,7 @@
       "offer_ID": "Angebots-ID eingeben",
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
-      "offer_created": "Operation erfolgreich abgeschlossen",
+      "offer_created": "Operation erfolgreich",
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
@@ -1106,6 +1108,9 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "no_attachments": "Keine Anhänge gefunden!",
+    "sign_first": "Bitte unterschreiben Sie zuerst",
+    "paid_amount_last": "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
     "filters": "Filter",
     "CSV_button": "Berichte herunterladen",
     "create_invoice": "Rechnung erstellen",
@@ -1156,7 +1161,7 @@
     "drop_or_attach": "Hier können Sie Ihre Datei ablegen oder anhängen",
     "file_support": "Unterstützte Dateien: PDF, JPG, PNG, GIF",
     "online": "Online",
-    "cash": "Barzahlung",
+    "cash": "Bar",
     "start_date": "Startdatum",
     "end_date": "Enddatum",
     "month": "Monat",
@@ -1464,7 +1469,7 @@
       "offer_title": "Bitte geben Sie Ihren Angebotenamen ein",
       "street": "Bitte geben Sie die Strasse+Nr ein",
       "post_code": "Bitte geben Sie Ihre Plz + Ort ein",
-      "address_description": "Lorem Ipsum ist einfach Blindtext der Druck- und Satzindustrie.",
+      "address_description": "",
       "service_title": "Bitte geben Sie Ihren Dienstnamen ein"
     }
   },
@@ -1852,7 +1857,7 @@
     "lead_source": "Leadquellen",
     "activity": "Aktivitäten",
     "view_all": "Alle anzeigen",
-    "follow_up_heading": "Nachfassungen",
+    "follow_up_heading": "Die heutigen Follow-ups",
     "months": {
       "jan": "Januar",
       "feb": "Februar",
@@ -1923,8 +1928,9 @@
     "count": "Anzahl",
     "total": "Gesamt",
     "sub_total": "Zwischensumme",
-    "tax": "MwSt%",
+    "tax": "Steuer",
     "discount": "Rabatt",
+    "total_after_discount": "Gesamtsumme nach Rabatt",
     "grand_total": "Gesamtsumme",
     "paid_amount": "Bezahlter Betrag",
     "due_amount": "Ausstehender Betrag",
@@ -1953,7 +1959,7 @@
       "silver": "Silber",
       "gold": "Gold",
       "diamond": "Diamant",
-      "description": "Lorem Ipsum Dollar Smith Sil Dolemm Isplum Sumip Alpsum.",
+      "description": "Büro 360 Diamond umfasst 1000 Anfragen, Manager, Berichte und API-Zugang.",
       "request": "Anfragen",
       "employees": "Mitarbeiter",
       "accounting": "Buchhaltungsberichte",
@@ -2167,7 +2173,7 @@
   "thank_you_content": {
     "heading": "Danke für die Unterzeichnung des Vertrags",
     "valued_csutomer": "Sehr geehrter Kunde",
-    "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten. Übersetzt mit DeepL.com (kostenlose Version).",
+    "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten.",
     "warm_regards": "Mit freundlichen Grüßen",
     "team": "Das Buro-Team"
   }

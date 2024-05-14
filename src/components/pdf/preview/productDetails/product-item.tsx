@@ -1,6 +1,5 @@
 import { useAppSelector } from "@/hooks/useRedux";
 import { ServiceList } from "@/types/offers";
-import { ProductItemProps } from "@/types/types";
 
 export const ProductItem = ({
   count,
@@ -30,7 +29,7 @@ export const ProductItem = ({
         </div>
 
         <div className="col-span-1 flex space-x-2 items-center pr-[46px] w-full">
-          <span className="text-sm font-normal text-[#000] min-w-[50px] w-fit break-all">
+          <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
             {count}
           </span>
           <span className="text-sm font-normal text-[#000] w-[50px] break-all">
@@ -41,7 +40,7 @@ export const ProductItem = ({
           </span>
           {isDiscount && (
             <span className="text-sm font-normal text-[#000] min-w-[50px] break-all">
-              {discount || "-"}{" "}
+              {discount || "-"}
             </span>
           )}
 

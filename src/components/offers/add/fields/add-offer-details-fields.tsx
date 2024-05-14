@@ -522,6 +522,7 @@ export const generateDateChildren = (
 ) => {
   const { t: translate } = useTranslation();
   const dateformFields = [];
+
   for (let i = 0; i < count; i++) {
     dateformFields.push({
       containerClass: "mb-0 pt-5",
@@ -557,7 +558,7 @@ export const generateDateChildren = (
             field: {
               type: Field.date,
               className:
-                "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
+                "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               name: `date.${i}.endDate`,
               remove: i > 0 && `${translate("common.remove")}`,
               onRemove: () => handleRemoveDateField(i),

@@ -5,8 +5,12 @@ import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { PrintIcon } from "@/assets/svgs/components/print-icon";
 
-export const InvoiceEmailHeader = ({ onDownload }: InvoiceEmailHeaderProps) => {
+export const InvoiceEmailHeader = ({
+  onDownload,
+  onPrint,
+}: InvoiceEmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { invoiceDetails } = useAppSelector((state) => state.invoice);
@@ -75,7 +79,11 @@ export const InvoiceEmailHeader = ({ onDownload }: InvoiceEmailHeaderProps) => {
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton> */}
-        <DownloadIcon onClick={onDownload} />
+        <div className="flex items-center gap-x-5">
+          <PrintIcon onClick={onPrint} />
+          <DownloadIcon onClick={onDownload} />
+        </div>
+
         {/* </div> */}
       </div>
       <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">

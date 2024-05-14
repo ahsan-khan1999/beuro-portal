@@ -1,10 +1,7 @@
-import { AdditionalDetailsProps } from "@/types/pdf";
-import { replaceClassesWithInlineStyles } from "@/utils/utility";
-import { Text, View, StyleSheet, Image, Font } from "@react-pdf/renderer";
-import { useRouter } from "next/router";
-import { useState, useMemo } from "react";
-
+import { View, StyleSheet } from "@react-pdf/renderer";
 import Html, { HtmlStyles } from "react-pdf-html";
+
+type FontSizeMap = { [key: string]: string };
 
 const styles = StyleSheet.create({
   borderDiv: {
@@ -78,6 +75,7 @@ const stylesheet: HtmlStyles = {
     // fontSize: 7,
     color: "#272727",
   },
+
   h1: {
     margin: 0,
     padding: 0,
@@ -110,11 +108,11 @@ const stylesheet: HtmlStyles = {
   },
   ul: { marginLeft: 0, marginTop: 6 },
   li: {
-    fontSize: 7,
+    // fontSize: 7,
     marginLeft: 0,
     marginRight: 10,
     marginTop: 0,
-
+    marginBottom: 0,
     listStyle: "outside",
   },
   blockquote: {
@@ -157,6 +155,31 @@ export const AdditionalDetails = ({
 
   // useMemo(() => signature && onFileChange(), [signature]);
 
+  function replaceFontSizes(description: string | undefined | null): string {
+    if (!description) return "";
+
+    const replacements: FontSizeMap = {
+      "8px": "5.5px",
+      "9px": "6px",
+      "10px": "6.5px",
+      "11px": "7px",
+      "12px": "7.5px",
+      "13px": "8px",
+      "14px": "8.5px",
+    };
+
+    const fontSizeRegex = /(\d+px)/g;
+
+    const replacedDescription = description.replaceAll(
+      fontSizeRegex,
+      (match) => {
+        return replacements[match] || match;
+      }
+    );
+
+    return replacedDescription;
+  }
+
   return (
     <View style={styles.borderDiv}>
       <View style={styles.container}>
@@ -165,7 +188,8 @@ export const AdditionalDetails = ({
           stylesheet={stylesheet}
           style={{ fontFamily: "Poppins" }}
         >
-          {description ?? ""}
+          {replaceFontSizes(description ?? "")}
+          {/* {description ?? ""} */}
         </Html>
       </View>
     </View>

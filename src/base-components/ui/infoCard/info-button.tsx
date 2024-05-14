@@ -16,9 +16,7 @@ export const TooltipInfo = () => {
         onMouseEnter={handleToggleInfo}
         onMouseLeave={handleToggleInfo}
       >
-        {toggleInfo && (
-          <InfoCard info="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s." />
-        )}
+        {toggleInfo && <InfoCard info="" />}
       </button>
     </div>
   );

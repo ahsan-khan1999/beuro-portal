@@ -32,11 +32,6 @@ const AddRemarks = ({ onClose, handleFollowUpsDetails }: AddRemarksProps) => {
             {translate("follow_up.add_remarks_heading")}
           </p>
 
-          {/* <span className="text-[#1E1E1E] text-sm font-normal my-3">
-              Lorem Ipsum dollar smith
-            </span> */}
-          {/* </div> */}
-
           <Form
             formFields={fields}
             handleSubmit={handleSubmit}

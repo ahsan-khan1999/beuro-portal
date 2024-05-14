@@ -54,6 +54,7 @@ export default function useCustomerDetail({
       })
     );
   };
+
   const handleCreateSuccess = () => {
     dispatch(
       updateModalType({
@@ -61,6 +62,7 @@ export default function useCustomerDetail({
       })
     );
   };
+
   const handleUpdateCancle = () => {
     dispatch(
       updateModalType({
@@ -68,6 +70,7 @@ export default function useCustomerDetail({
       })
     );
   };
+
   const handleUpdate = (data: any) => {
     dispatch(
       updateModalType({
@@ -76,6 +79,7 @@ export default function useCustomerDetail({
       })
     );
   };
+
   const deleteHandler = () => {
     dispatch(
       updateModalType({
@@ -122,12 +126,14 @@ export default function useCustomerDetail({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   const customerType = watch("customerType");
   useEffect(() => {
     if (id) {
       dispatch(readCustomerDetail({ params: { filter: id } }));
     }
   }, [id]);
+
   useMemo(() => {
     if (customerDetails && detail)
       reset({
@@ -162,6 +168,8 @@ export default function useCustomerDetail({
       handleUpdate(data);
     }
   };
+
+
   const test = async ({
     data,
     router,
@@ -223,6 +231,8 @@ export default function useCustomerDetail({
       />
     ),
   };
+
+  
   const handlePreviousClick = () => {
     router.push("/customers");
   };
@@ -241,5 +251,6 @@ export default function useCustomerDetail({
     renderModal,
     handleCreateSuccess,
     loading,
+    translate,
   };
 }
