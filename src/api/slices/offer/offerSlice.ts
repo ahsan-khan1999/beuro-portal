@@ -140,8 +140,8 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setOfferDetails(objectToUpdate));
       return response?.data?.Offer;
     } catch (e: any) {
-      setErrors(setError, e?.data?.data, translate);
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data?.data, translate);
       return false;
     }
   });
@@ -207,8 +207,8 @@ export const createOfferNotes: AsyncThunk<boolean, object, object> | any =
       const response = await apiServices.updateOfferNotes(data);
       return response?.data?.Offer;
     } catch (e: any) {
-      setErrors(setError, e?.data?.data, translate);
       thunkApi.dispatch(setErrorMessage(e?.data?.data?.message));
+      setErrors(setError, e?.data?.data, translate);
       return false;
     }
   });
@@ -345,6 +345,7 @@ export const uploadOfferPdf: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 const OfferSlice = createSlice({
   name: "OfferSlice",
   initialState,
