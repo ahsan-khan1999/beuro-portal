@@ -51,7 +51,9 @@ export async function request({ method, url, data, headers }) {
   try {
     response = await promise;
   } catch (error) {
-    showError(error?.response?.data?.message);
+    showError(
+      translate(`validationMessages.${error?.response?.data?.message}`)
+    );
 
     if (error?.response?.data?.code === 401) {
       logout();

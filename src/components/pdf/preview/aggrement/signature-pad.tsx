@@ -383,8 +383,6 @@ export const SignaturePad = ({
 
         const response = await dispatch(signOffer({ data, formData }));
 
-        console.log(response);
-
         if (response?.payload) {
           dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
         }
