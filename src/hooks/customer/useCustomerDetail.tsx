@@ -132,6 +132,9 @@ export default function useCustomerDetail({
     if (id) {
       dispatch(readCustomerDetail({ params: { filter: id } }));
     }
+    return () => {
+      dispatch(readCustomerDetail({ ...DEFAULT_CUSTOMER }));
+    };
   }, [id]);
 
   useMemo(() => {
@@ -168,7 +171,6 @@ export default function useCustomerDetail({
       handleUpdate(data);
     }
   };
-
 
   const test = async ({
     data,
@@ -232,7 +234,6 @@ export default function useCustomerDetail({
     ),
   };
 
-  
   const handlePreviousClick = () => {
     router.push("/customers");
   };

@@ -200,7 +200,7 @@
     "offer_not_open": "This offer is already closed or signed",
     "discountLessThanTotalPrice": "Must be less than total price",
     "offer_already_signed": "This offer has already been signed",
-    "validation_failed": "This offer has already been rejected",
+    "validation_failed": "Validation failed",
     "auth_provider_mismatch": "Authentication Provider Mismatch",
     "otp_sent": "OPT Send",
     "otp_user_invalid_phone": "The provided phone number is invalid for OTP verification",
