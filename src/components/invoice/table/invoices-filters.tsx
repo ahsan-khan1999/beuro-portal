@@ -199,7 +199,7 @@ export default function InvoicesFilters({
           handleChange={handleInputChange}
           ref={inputRef}
           value={inputValue}
-          iconDisplay={false}
+          iconDisplay={true}
           onEnterPress={onEnterPress}
         />
 
