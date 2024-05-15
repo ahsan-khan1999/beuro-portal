@@ -83,7 +83,7 @@ export default function ServicesFilters({
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
-        iconDisplay={false}
+        iconDisplay={true}
         onEnterPress={onEnterPress}
       />
       <div className="flex items-center gap-x-4">

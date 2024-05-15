@@ -2,8 +2,6 @@ import { View, StyleSheet } from "@react-pdf/renderer";
 import Html, { HtmlStyles } from "react-pdf-html";
 import { transformHtmlToPdf } from "./convert-tags-react-pdf-components";
 
-type FontSizeMap = { [key: string]: string };
-
 const styles = StyleSheet.create({
   borderDiv: {
     // borderTop: 3,
@@ -156,40 +154,13 @@ export const AdditionalDetails = ({
 
   // useMemo(() => signature && onFileChange(), [signature]);
 
-  function replaceFontSizes(description: string | undefined | null): string {
-    if (!description) return "";
+  // console.log(transformHtmlToPdf(description ?? ''));
+  const content = transformHtmlToPdf(description ?? "");
+  //  const content = convertHtmlToPdf(description ?? '');
 
-    const replacements: FontSizeMap = {
-      "8px": "5.5px",
-      "9px": "6px",
-      "10px": "6.5px",
-      "11px": "7px",
-      "12px": "7.5px",
-      "13px": "8px",
-      "14px": "8.5px",
-    };
-
-    const fontSizeRegex = /(\d+px)/g;
-
-    const replacedDescription = description.replaceAll(
-      fontSizeRegex,
-      (match) => {
-        return replacements[match] || match;
-      }
-    );
-
-    return replacedDescription;
-  }
+  // const content = parseHTML(description ?? '');
 
   console.log(description);
-  
-
-  // console.log(transformHtmlToPdf(description ?? ''));
- const content = transformHtmlToPdf(description ?? '')
-//  const content = convertHtmlToPdf(description ?? '');
-  
-
-// const content = parseHTML(description ?? '');
 
   return (
     <View style={styles.borderDiv}>

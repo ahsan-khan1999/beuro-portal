@@ -193,7 +193,7 @@ export default function LeadsFilter({
           handleChange={handleInputChange}
           ref={inputRef}
           value={inputValue}
-          iconDisplay={false}
+          iconDisplay={true}
           onEnterPress={onEnterPress}
         />
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">

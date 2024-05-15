@@ -65,7 +65,7 @@ const InputField = forwardRef(
           {hasText && iconDisplay && (
             <div
               className={`absolute top-1/2 ${
-                router.pathname.includes("dashboard") ? "left-0" : "right-4"
+                router.pathname.includes("dashboard") ? "left-0" : "right-5"
               } transform -translate-y-1/2 cursor-pointer`}
               onClick={handleClearInput}
             >

@@ -1,66 +1,135 @@
 import React from "react";
-import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import { parseDocument } from "htmlparser2";
-
 import DOMPurify from "dompurify";
 
 const styles: any = StyleSheet.create({
-  p: {
-    fontSize: 8,
-    // marginBottom: 10,
-  },
   h1: {
-    fontSize: 14,
-    // marginBottom: 20,
+    fontSize: 11.5,
+    fontWeight: 600,
+    fontStyle: "semibold",
   },
   h2: {
-    fontSize: 12,
-    // marginBottom: 15,
+    fontSize: 9.5,
+    fontWeight: 600,
+    fontStyle: "semibold",
+  },
+  h3: {
+    fontSize: 8.5,
+  },
+  h4: {
+    fontSize: 7.5,
+  },
+  h5: {
+    fontSize: 7,
+  },
+  h6: {
+    fontSize: 7,
+  },
+  p: {
+    fontSize: 9.5,
+    fontWeight: 400,
+    fontStyle: "normal",
+  },
+  span: {
+    fontSize: 9.5,
+    fontWeight: 400,
+    fontStyle: "normal",
+  },
+  strong: {
+    fontWeight: 600,
+    fontStyle: "semibold",
   },
   li: {
-    fontSize: 10,
-    // marginBottom: 5,
+    fontSize: 9.5,
+    fontWeight: 400,
+    fontStyle: "normal",
     marginLeft: 6,
   },
   ul: {
-    // marginBottom: 10,
     paddingLeft: 8,
   },
   ol: {
-    // marginBottom: 10,
     paddingLeft: 8,
   },
   div: {
-    // marginBottom: 10,
+    fontSize: 9.5,
+    fontWeight: 400,
+    fontStyle: "normal",
   },
 });
 
 const tagMapping: any = {
-  p: (props: any) => <Text style={props.style}>{props.children}</Text>,
-  strong: (props: any) => <Text style={props.style}>{props.children}</Text>,
   h1: (props: any) => <Text style={props.style}>{props.children}</Text>,
   h2: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  h3: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  h4: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  h5: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  h6: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  p: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  strong: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  b: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  em: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  i: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  u: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  sup: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  sub: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  tr: (props: any) => <View style={props.style}>{props.children}</View>,
+  th: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  td: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  caption: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  label: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  cite: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  code: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  pre: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  iframe: (props: any) => <View style={props.style}>{props.children}</View>,
+  dl: (props: any) => <View style={props.style}>{props.children}</View>,
+  dt: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  dd: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  a: (props: any) => <Text style={props.style}>{props.children}</Text>,
+  s: (props: any) => <Text style={props.style}>{props.children}</Text>,
   ul: (props: any) => <View style={props.style}>{props.children}</View>,
   ol: (props: any) => <View style={props.style}>{props.children}</View>,
-  li: (props: any) => <Text style={props.style}>• {props.children}</Text>,
+  li: (props: any) => (
+    // <View
+    //   style={{
+    //     display: "flex",
+    //     flexDirection: "row",
+    //     alignItems: "center",
+    //     rowGap: 0.5,
+    //   }}
+    // >
+    //   <Text>•</Text>
+    <Text style={props.style}>• {props.children}</Text>
+    // </View>
+  ),
   div: (props: any) => <View style={props.style}>{props.children}</View>,
+  hr: (props: any) => <View style={props.style}>{props.children}</View>,
+  nav: (props: any) => <View style={props.style}>{props.children}</View>,
+  main: (props: any) => <View style={props.style}>{props.children}</View>,
+  section: (props: any) => <View style={props.style}>{props.children}</View>,
+  table: (props: any) => <View style={props.style}>{props.children}</View>,
   span: (props: any) => <Text style={props.style}>{props.children}</Text>,
   br: (props: any) => <Text style={props.style}>{"\n"}</Text>,
 };
 
-// const fontSizeMap: FontSizeMap = {
-//   "8px": "5.5px",
-//   "9px": "6px",
-//   "10px": "6.5px",
-//   "11px": "7px",
-//   "12px": "7.5px",
-//   "13px": "8px",
-//   "14px": "8.5px",
-// };
-
 const cssToJsStyleMap: any = {
   "font-size": "fontSize",
   "font-weight": "fontWeight",
+  "font-style": "fontStyle",
+  "line-height": "lineHeight",
+  "border-width": "borderwidth",
+  "border-color": "borderColor",
+  "border-style": "borderStyle",
+  "box-sizing": "boxSizing",
+  "font-family": "fontFamily",
+  "tab-size": "tabSize",
+  "flex-direction": "flexDirection",
+  "align-items": "alignItems",
+  "align-content": "alignContent",
+  "justify-content": "justifyContent",
+  "flex-end": "flexEnd",
+  "flex-start": "flexStart",
 };
 
 const valueMaps: any = {
@@ -72,10 +141,18 @@ const valueMaps: any = {
     "12px": "7.5px",
     "13px": "8px",
     "14px": "8.5px",
+    "16px": "9.5px",
+    "20px": "11.5px",
+    "24px": "12.5px",
   },
   fontWeight: {
-    bold: "bold",
-    normal: "normal",
+    thin: "100",
+    light: "300",
+    normal: "400",
+    medium: "500",
+    semibold: "600",
+    bold: "700",
+    bolder: "800",
   },
 };
 
@@ -142,8 +219,7 @@ export const transformHtmlToPdf = (htmlContent: string) => {
         </TagComponent>
       );
     } else if (node.type === "text") {
-      if (node.data.trim() === "")
-        return <Text>{"\n"}</Text>;
+      if (node.data.trim() === "") return <Text>{"\n"}</Text>;
       return node.data;
     } else {
       return null;
@@ -152,7 +228,7 @@ export const transformHtmlToPdf = (htmlContent: string) => {
 
   const traverse = (nodes: any) => {
     return nodes.map((node: any, index: number) =>
-      transformNode({ ...node, key: (Math.random() + index + node.name) })
+      transformNode({ ...node, key: Math.random() + index + node.name })
     );
   };
 
