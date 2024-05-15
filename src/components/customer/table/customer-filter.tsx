@@ -18,12 +18,6 @@ export default function CustomerFilter({
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
-
   const handleInputChange = (value: string) => {
     setInputValue(value);
   };
@@ -75,13 +69,19 @@ export default function CustomerFilter({
     });
   };
 
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   return (
     <div className="flex flex-col mlg:flex-row mlg:items-center gap-4">
       <InputField
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
-        iconDisplay={false}
+        iconDisplay={true}
         onEnterPress={onEnterPress}
       />
       <div className="flex items-center gap-x-4">
