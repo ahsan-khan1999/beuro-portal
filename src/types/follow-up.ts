@@ -40,7 +40,6 @@ export interface AllCustomers {
   phoneNumber: string;
   date: string;
   mobileNumber: string;
-
   status?: string;
   editImg?: string;
   editNote?: string;

@@ -1,5 +1,4 @@
 import { View, StyleSheet } from "@react-pdf/renderer";
-
 import Html, { HtmlStyles } from "react-pdf-html";
 
 type FontSizeMap = { [key: string]: string };
@@ -113,7 +112,7 @@ const stylesheet: HtmlStyles = {
     marginLeft: 0,
     marginRight: 10,
     marginTop: 0,
-
+    marginBottom: 0,
     listStyle: "outside",
   },
   blockquote: {
@@ -157,9 +156,8 @@ export const AdditionalDetails = ({
   // useMemo(() => signature && onFileChange(), [signature]);
 
   function replaceFontSizes(description: string | undefined | null): string {
-    if (!description) return ""; // Return empty string if description is undefined or null
+    if (!description) return "";
 
-    // Define a mapping for specific replacements
     const replacements: FontSizeMap = {
       "8px": "5.5px",
       "9px": "6px",
@@ -170,14 +168,12 @@ export const AdditionalDetails = ({
       "14px": "8.5px",
     };
 
-    // Regular expression to match font sizes in the format "Xpx"
     const fontSizeRegex = /(\d+px)/g;
 
-    // Replace font sizes using the map and regular expression
     const replacedDescription = description.replaceAll(
       fontSizeRegex,
       (match) => {
-        return replacements[match] || match; // Use replacement if found in map, otherwise keep the original value
+        return replacements[match] || match;
       }
     );
 
@@ -192,8 +188,8 @@ export const AdditionalDetails = ({
           stylesheet={stylesheet}
           style={{ fontFamily: "Poppins" }}
         >
-          {/* {replaceFontSizes(description ?? "")} */}
-          {description ?? ""}
+          {replaceFontSizes(description ?? "")}
+          {/* {description ?? ""} */}
         </Html>
       </View>
     </View>

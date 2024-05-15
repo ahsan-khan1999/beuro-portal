@@ -271,22 +271,24 @@ export default function LeadsFilter({
                 label={translate("add_note_dropdown.all_notes")}
               />
             </div>
+          </div>
+
+          <div className="flex items-center gap-x-4">
             <LeadsFilters
               filter={filter}
               setFilter={setFilter}
               onFilterChange={handleFilterChange}
             />
+            <Button
+              inputType="button"
+              onClick={() => router.push("/leads/add")}
+              className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+              icon={addIcon}
+              text={translate("leads.add_button")}
+              id="add"
+              iconAlt="add button"
+            />
           </div>
-
-          <Button
-            inputType="button"
-            onClick={() => router.push("/leads/add")}
-            className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
-            icon={addIcon}
-            text={translate("leads.add_button")}
-            id="add"
-            iconAlt="add button"
-          />
         </div>
 
         {/* <Button

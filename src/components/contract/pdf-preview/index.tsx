@@ -1,9 +1,9 @@
 import EmailCard from "./PdfCard";
-import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
+import dynamic from "next/dynamic";
+import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
-import dynamic from "next/dynamic";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
 import { useTranslation } from "next-i18next";
 
