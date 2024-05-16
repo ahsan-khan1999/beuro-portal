@@ -191,7 +191,7 @@ export default function OffersFilters({
           handleChange={handleInputChange}
           ref={inputRef}
           value={inputValue}
-          iconDisplay={false}
+          iconDisplay={true}
           onEnterPress={onEnterPress}
         />
 

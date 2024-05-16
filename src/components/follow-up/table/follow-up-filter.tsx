@@ -51,7 +51,7 @@ export default function FollowUpFilter({
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
-        iconDisplay={false}
+        iconDisplay={true}
       />
       <Button
         text={translate("common.apply_button")}

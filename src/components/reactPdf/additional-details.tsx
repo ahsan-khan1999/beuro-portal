@@ -1,7 +1,6 @@
 import { View, StyleSheet } from "@react-pdf/renderer";
 import Html, { HtmlStyles } from "react-pdf-html";
-
-type FontSizeMap = { [key: string]: string };
+import { transformHtmlToPdf } from "./convert-tags-react-pdf-components";
 
 const styles = StyleSheet.create({
   borderDiv: {
@@ -9,7 +8,7 @@ const styles = StyleSheet.create({
     // borderTopColor: "#000",
     marginLeft: 20,
     marginRight: 20,
-    paddingTop: 15,
+    // paddingTop: 15,
   },
   container: {
     fontFamily: "Poppins",
@@ -155,42 +154,25 @@ export const AdditionalDetails = ({
 
   // useMemo(() => signature && onFileChange(), [signature]);
 
-  function replaceFontSizes(description: string | undefined | null): string {
-    if (!description) return "";
+  // console.log(transformHtmlToPdf(description ?? ''));
+  const content = transformHtmlToPdf(description ?? "");
+  //  const content = convertHtmlToPdf(description ?? '');
 
-    const replacements: FontSizeMap = {
-      "8px": "5.5px",
-      "9px": "6px",
-      "10px": "6.5px",
-      "11px": "7px",
-      "12px": "7.5px",
-      "13px": "8px",
-      "14px": "8.5px",
-    };
+  // const content = parseHTML(description ?? '');
 
-    const fontSizeRegex = /(\d+px)/g;
-
-    const replacedDescription = description.replaceAll(
-      fontSizeRegex,
-      (match) => {
-        return replacements[match] || match;
-      }
-    );
-
-    return replacedDescription;
-  }
+  console.log(description);
 
   return (
     <View style={styles.borderDiv}>
-      <View style={styles.container}>
-        <Html
+      <View>
+        {/* <Html
           resetStyles={false}
           stylesheet={stylesheet}
           style={{ fontFamily: "Poppins" }}
         >
           {replaceFontSizes(description ?? "")}
-          {/* {description ?? ""} */}
-        </Html>
+        </Html> */}
+        {content}
       </View>
     </View>
   );
