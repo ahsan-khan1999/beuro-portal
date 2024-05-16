@@ -133,9 +133,7 @@ const EmailCard = ({
             {translate("offer_pdf_card.offer_id")}:
           </span>
 
-          <span className="text-[#4B4B4B] text-base font-medium">
-            {offerNo}
-          </span>
+          <span className="text-primary text-base font-medium">{offerNo}</span>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[#4D4D4D] text-base font-normal">

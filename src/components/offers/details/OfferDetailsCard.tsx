@@ -162,15 +162,15 @@ const OfferDetailsCard = ({
 
       <div className="flex flex-col gap-4 mt-5">
         <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
-          <div>
-            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
+          <div className="flex items-center gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.offer_id")}:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">
+            <span className="text-base font-medium text-primary">
               {offerDetails?.offerNumber}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.offer_title")}:
             </span>
@@ -179,7 +179,7 @@ const OfferDetailsCard = ({
               {offerDetails?.title}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.worker")}:
             </span>

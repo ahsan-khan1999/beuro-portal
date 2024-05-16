@@ -88,10 +88,10 @@ export const InvoiceEmailHeader = ({
       </div>
       <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
         <div className="flex items-center gap-[10px]">
-          <span className="text-base font-normal text-[#4D4D4D] mr-[10px] min-w-[130px]">
+          <span className="text-base font-normal text-[#4D4D4D] min-w-[130px]">
             {translate("invoice.card_content.invoice_number")}:
           </span>
-          <span className="text-base font-medium text-[#4B4B4B] min-w-[70px]">
+          <span className="text-base font-medium text-primary">
             {invoiceDetails?.invoiceNumber}
           </span>
         </div>
@@ -112,7 +112,7 @@ export const InvoiceEmailHeader = ({
 
           {invoiceDetails?.invoiceStatus && (
             <span
-              className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}
+              className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
             >
               {translate(`invoice_status.${invoiceDetails?.invoiceStatus}`)}
             </span>

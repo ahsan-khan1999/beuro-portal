@@ -70,7 +70,7 @@ const ContentCard = ({
           <span className="text-[#4D4D4D] text-base font-normal">
             {translate("content.content_card_detail.s_no")}:
           </span>
-          <span className="text-[#4B4B4B] text-base font-medium">
+          <span className="text-primary text-base font-medium">
             {contentDetails?.refID}
           </span>
         </div>

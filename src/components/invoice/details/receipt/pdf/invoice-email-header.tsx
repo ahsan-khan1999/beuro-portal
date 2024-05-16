@@ -133,7 +133,7 @@ export const InvoiceEmailHeader = ({
             <span className="text-base font-normal text-[#4D4D4D] mr-[10px] min-w-[130px]">
               {translate("invoice.card_content.receipt_number")}:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">
+            <span className="text-base font-medium text-primary">
               {collectiveInvoiceDetails?.invoiceID?.invoiceNumber}
             </span>
           </div>

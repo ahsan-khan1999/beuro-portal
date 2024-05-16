@@ -73,9 +73,9 @@ const DetailsData = ({
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
           <div className="flex items-center gap-x-2">
             <span className="font-normal text-[#4D4D4D] text-base">
-              {translate("email_tracker.card_content.id")}
+              {translate("email_tracker.card_content.id")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] text-base">
+            <span className="font-medium text-primary text-base">
               {emailDetails?.id && emailDetails.id.slice(-5)}
             </span>
           </div>

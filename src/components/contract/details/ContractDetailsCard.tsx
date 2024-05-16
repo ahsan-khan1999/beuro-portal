@@ -139,7 +139,7 @@ const ContractDetailsCard = ({
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.contract_id")}:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">
+            <span className="text-base font-medium text-primary">
               {contractDetails.contractNumber}
             </span>
           </div>

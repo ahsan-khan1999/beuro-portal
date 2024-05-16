@@ -78,7 +78,7 @@ const DetailsData = ({
             <span className="text-[#4D4D4D]">
               {translate("services.card_content.customer_id")}:
             </span>
-            <span className="text-[#4B4B4B] font-medium">
+            <span className="text-primary font-medium">
               {serviceDetail?.refID}
             </span>
           </div>
