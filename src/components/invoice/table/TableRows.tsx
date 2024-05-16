@@ -52,7 +52,7 @@ const TableRows = ({
                   )}
                 </div>
                 <span className="py-4 mlg:hidden maxSize:block truncate">
-                  {item?.title}
+                  {item?.content?.contentName}
                 </span>
                 <span className="py-4 mlg:hidden maxSize:block truncate">
                   {formatDateString(item.date[0].startDate)}

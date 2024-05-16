@@ -77,7 +77,7 @@ const TableRows = ({
                   )}
                 </div>
                 <span className="py-4 xs:block mlg:hidden xLarge:block truncate">
-                  {item?.title}
+                  {item?.content?.contentName}
                 </span>
                 <span className="py-4 truncate block mlg:hidden xMaxSize:block">
                   {item.total}

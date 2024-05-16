@@ -145,7 +145,7 @@ const ContractDetailsCard = ({
           </div>
           <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D] min-w-[120px]">
-              {translate("contracts.card_content.offer_title")}:
+              {translate("contracts.table_headings.title")}:
             </span>
 
             <span className="text-base font-medium text-[#4B4B4B] truncate">
@@ -249,7 +249,7 @@ const ContractDetailsCard = ({
           </div> */}
 
           <div className="flex items-center gap-[11px]">
-            <span className="text-[#4D4D4D] font-normal text-base ">
+            <span className="text-[#4D4D4D] font-normal text-base">
               {translate("contracts.card_content.payment_method")}:
             </span>
             {contractDetails?.paymentType && (

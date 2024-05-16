@@ -67,7 +67,7 @@ const TableRows = ({
                   {item.invoiceID?.customerDetail?.fullName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xMaxSize:block">
-                  {item?.title}
+                  {item?.invoiceID?.content?.contentName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
                   {formatDateTimeToDate(item.createdAt)}

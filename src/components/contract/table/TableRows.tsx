@@ -81,7 +81,7 @@ const TableRows = ({
                   )}
                 </div>
                 <span className="truncate mlg:hidden maxLarge:block py-4">
-                  {item?.title}
+                  {item?.offerID?.content?.contentName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
                   {item.offerID?.total}

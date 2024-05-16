@@ -171,7 +171,7 @@ const OfferDetailsCard = ({
             </span>
           </div>
           <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.offer_title")}:
             </span>
 
@@ -190,7 +190,7 @@ const OfferDetailsCard = ({
         </div>
 
         <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
-          <div className="flex gap-x-3">
+          <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.created_date")}:
             </span>
@@ -198,7 +198,7 @@ const OfferDetailsCard = ({
               {formatDateString(offerDetails?.createdAt)}
             </span>
           </div>
-          <div className="flex gap-3">
+          <div className="flex items-center gap-3">
             <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
               {translate("offers.card_content.service_date")}:
             </span>
@@ -235,8 +235,8 @@ const OfferDetailsCard = ({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
-          <div className="flex items-center gap-[11px]">
-            <span className="text-[#4D4D4D] font-normal text-base ">
+          <div className="flex items-center gap-3">
+            <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
             </span>
             {offerDetails?.emailStatus && (
@@ -285,7 +285,7 @@ const OfferDetailsCard = ({
               )}
             </span>
           </div>
-          <div className="flex items-center gap-[11px]">
+          <div className="flex items-center gap-3">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.status")}:
             </span>

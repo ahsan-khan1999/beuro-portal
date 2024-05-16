@@ -6,7 +6,7 @@ const TableHeadings = () => {
   return (
     <div className="flex">
       <div className="mlg:w-full">
-        <div className="gap-x-3 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(300px,_4fr)_minmax(350px,_3fr)_minmax(150px,_150px)] mlg:grid-cols-[minmax(70px,_70px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(180px,_180px)] xlg:grid-cols-[minmax(80px,_80px),minmax(20px,_4fr)_minmax(180px,_3fr)_minmax(200px,_200px)] pt-2 pb-5">
+        <div className="gap-x-3 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(300px,_3fr)_minmax(350px,_4fr)] mlg:grid-cols-[minmax(70px,_70px),minmax(250px,_250px)_minmax(100px,_100%)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_3fr)_minmax(180px,_4fr)] pt-2 pb-5">
           <span className="font-medium text-[#8F8F8F]">
             {translate("content.table_headings.id")}
           </span>
@@ -17,9 +17,9 @@ const TableHeadings = () => {
             {translate("content.table_headings.title")}
           </span>
 
-          <span className="font-medium text-[#8F8F8F]">
+          {/* <span className="font-medium text-[#8F8F8F]">
             {translate("content.table_headings.created_on")}
-          </span>
+          </span> */}
         </div>
       </div>
       <div className="grid grid-cols-[minmax(90px,_90px)] pt-2 pb-5">
