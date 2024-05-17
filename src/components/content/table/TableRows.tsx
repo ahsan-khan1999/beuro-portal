@@ -1,8 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { ContentTableRowTypes } from "@/types/content";
-import { formatDateString } from "@/utils/functions";
-import Link from "next/link";
 
 const TableRows = ({
   contentData,
@@ -17,31 +15,37 @@ const TableRows = ({
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
-              <Link
+              <div
                 key={item.id}
-                href={{
-                  pathname: "/content/details",
-                  query: { ...router.query, content: item.id },
+                onClick={() => {
+                  router.push({
+                    pathname: "/content/details",
+                    query: { ...router.query, content: item.id },
+                  });
                 }}
-                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 xs:w-fit items-center xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(300px,_4fr)_minmax(350px,_3fr)_minmax(150px,_150px)] mlg:grid-cols-[minmax(70px,_70px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(180px,_180px)] xlg:grid-cols-[minmax(80px,_80px),minmax(20px,_4fr)_minmax(180px,_3fr)_minmax(200px,_200px)] border-t border-t-[#E7EAEE]"
+                className={`${
+                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                } px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 xs:w-fit items-center xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(300px,_3fr)_minmax(350px,_4fr)] mlg:grid-cols-[minmax(70px,_70px),minmax(250px,_250px)_minmax(100px,_100%)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_3fr)_minmax(180px,_4fr)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item.refID}</span>
                 <span className="py-4 truncate">{item.contentName}</span>
                 <span className="py-4 truncate">{item.offerContent.title}</span>
 
-                <span className="py-4 flex items-center">
+                {/* <span className="py-4 flex items-center">
                   {formatDateString(item?.createdAt)}
-                </span>
-              </Link>
+                </span> */}
+              </div>
             </div>
 
             <div className="grid grid-cols-[minmax(90px,_90px)]">
               <span className="flex items-center justify-center cursor-pointer">
                 <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                  <Link
-                    href={{
-                      pathname: "/content/details",
-                      query: { ...router.query, content: item.id },
+                  <div
+                    onClick={() => {
+                      router.push({
+                        pathname: "/content/details",
+                        query: { ...router.query, content: item.id },
+                      });
                     }}
                     title={translate("contracts.table_headings.edit")}
                     className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center"
@@ -58,7 +62,7 @@ const TableRows = ({
                         fill="#4A13E7"
                       />
                     </svg>
-                  </Link>
+                  </div>
                 </div>
               </span>
             </div>

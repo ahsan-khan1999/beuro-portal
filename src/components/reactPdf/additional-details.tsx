@@ -160,8 +160,6 @@ export const AdditionalDetails = ({
 
   // const content = parseHTML(description ?? '');
 
-  console.log(description);
-
   return (
     <View style={styles.borderDiv}>
       <View>

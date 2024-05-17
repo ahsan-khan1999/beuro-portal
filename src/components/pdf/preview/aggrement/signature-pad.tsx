@@ -10,7 +10,6 @@ import dynamic from "next/dynamic";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { PdfProps, TemplateType } from "@/types";
-import toast from "react-hot-toast";
 import { signOffer } from "@/api/slices/offer/offerSlice";
 import { ModalType } from "@/enums/ui";
 import ReactPDF, {

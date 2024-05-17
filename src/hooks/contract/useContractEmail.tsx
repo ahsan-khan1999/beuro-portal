@@ -5,17 +5,14 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
 import { ContractEmailPreviewFormField } from "@/components/contract/fields/contract-email-fields";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   readContent,
   setContentDetails,
 } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import {
-  sendContractEmail,
-  updateContractContent,
-} from "@/api/slices/contract/contractSlice";
+import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import localStoreUtil from "@/utils/localstore.util";
