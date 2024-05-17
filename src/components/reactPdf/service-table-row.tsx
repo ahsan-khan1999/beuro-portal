@@ -61,7 +61,7 @@ export const ServiceTableRow = ({
   isDiscount,
 }: Partial<ServiceList>) => {
   return (
-    <View style={styles.headerContainer} break={pagebreak}>
+    <View style={styles.headerContainer} break={pagebreak} wrap={false}>
       <View style={styles.headerRow}>
         <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
         <Text style={styles.descriptionText}>{description}</Text>
