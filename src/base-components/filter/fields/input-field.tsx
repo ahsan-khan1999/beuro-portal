@@ -35,10 +35,7 @@ const InputField = forwardRef(
       textClassName
     );
 
-    const containerClasses = combineClasses(
-      "min-w-[274px]",
-      containerClassName
-    );
+    const containerClasses = combineClasses("w-fit", containerClassName);
 
     const handleInputChange = (newValue: string) => {
       handleChange(newValue);
