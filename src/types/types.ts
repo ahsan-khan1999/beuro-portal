@@ -289,6 +289,14 @@ export type GenerateAddTaxFormField = (
   onClick?: Function
 ) => FormField[];
 
+
+export type GenerateGeneralAddressFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+
 // contact-support formfield
 export type GenerateContactSupportFormField = (
   register: UseFormRegister<FieldValues>,
@@ -324,6 +332,13 @@ export type GenerateEmployeeFormField = (
 
 // Notes formfield
 export type GenerateNotesFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>,
+  onClick?: Function
+) => FormField[];
+export type GenerateGeneralNotesFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,

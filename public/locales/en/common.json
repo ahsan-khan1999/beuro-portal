@@ -533,7 +533,8 @@
       "follow_up_setting": "Follow Up Setting",
       "billing": "Billing",
       "mail_setting": "Mail Setting",
-      "qr_settings": "QR Settings"
+      "qr_settings": "QR Settings",
+      "general_setting": "General Setting"
     },
     "account_setting": {
       "public_info": "Public Information",
@@ -704,6 +705,10 @@
       "street_no": "Street No",
       "post_code": "Postal Code",
       "city": "City"
+    },
+    "general_setting": {
+      "address": "Address",
+      "notes": "Notes"
     }
   },
   "invoice": {
@@ -1160,6 +1165,17 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "note_title": "Note title",
+    "title": "Title",
+    "created_by": "Created by",
+    "add_new_notes": "Add New Notes",
+    "successful": "Successful",
+    "address_title_save": "Your Address title save successfully",
+    "note_save": "Your Notes save successfully",
+    "finish_button": "Finish",
+    "edit_address_title": "Edit address title",
+    "add_address_title": "Add address title",
+    "address_title": "Address Title",
     "no_invoice_created": "No Invoice Created",
     "no_invoice_des": "Sub invoice has not yet been created. Please create the sub invoice first",
     "no_attachments": "No attachments found!",
