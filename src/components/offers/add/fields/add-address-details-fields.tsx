@@ -31,6 +31,25 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
     let valueIndex = i;
     formField.push(
       {
+        containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
+        field: {
+          className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
+          type: Field.select,
+          id: `address.${i}.addressType`,
+          name: `address.${i}.addressType`,
+          value: "Select Address Type",
+          options: [
+            {
+              value: "Select Address Type",
+              label: `Select Address Type`,
+            },
+          ],
+
+          control,
+        },
+      },
+
+      {
         field: {
           type: Field.div,
           id: `div-field`,
@@ -84,8 +103,9 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 ],
               },
             },
+
             {
-              containerClass: "mb-0",
+              containerClass: "mb-0 relative right-0 float-right",
               field: {
                 type: Field.button,
                 id: "button",

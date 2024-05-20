@@ -289,7 +289,6 @@ export type GenerateAddTaxFormField = (
   onClick?: Function
 ) => FormField[];
 
-
 export type GenerateGeneralAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -452,6 +451,33 @@ export type GenerateOffersFormField = (
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
+export type GenerateCreateInvoiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: () => void | Function,
+  count: number,
+  properties: {
+    content?: ContentTableRowTypes[];
+    contentDetails?: ContentTableRowTypes;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string) => void;
+    customerDetails?: Customers;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    onContentSelect?: (id: string) => void;
+    offerDetails?: OffersTableRowTypes;
+    selectedContent?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+  },
+  setValue?: SetFieldValue<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
 // Generate Euit date form-field
 export type GenerateEditDateFormField = (
   register: UseFormRegister<FieldValues>,
@@ -487,7 +513,6 @@ export type GenerateOfferServiceFormField = (
     currency?: string;
     invoiceDetails?: InvoiceDetailTableRowTypes;
   },
-
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
   handleRemoveAddress: UseFieldArrayRemove,
   serviceType: ServiceType[],
@@ -496,12 +521,65 @@ export type GenerateOfferServiceFormField = (
   setValue?: SetFieldValue<FieldValues>,
   watch?: UseFormWatch<FieldValues>
 ) => FormField[];
+
+export type GenerateInvoiceServiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  properties: {
+    isTax?: boolean;
+    isDiscount?: boolean;
+    taxType?: number;
+    discountType?: number;
+    offerDetails?: OffersTableRowTypes;
+    generateTotal?: () => void;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string, index: number) => void;
+    serviceDetails?: Service;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    generatePrice?: (index: number) => void;
+    total?: Total;
+    tax?: TaxSetting[] | null;
+    currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+  },
+  handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
+  handleRemoveAddress: UseFieldArrayRemove,
+  serviceType: ServiceType[],
+  onServiceChange: (index: number, value: ServiceType) => void,
+  fields?: object[],
+  setValue?: SetFieldValue<FieldValues>,
+  watch?: UseFormWatch<FieldValues>
+) => FormField[];
+
 export type GenerateOffersServiceActionFormField = (
   loader: boolean,
   onClick: () => void
 ) => FormField[];
 
+export type GenerateInvoiceServiceActionFormField = (
+  loader: boolean,
+  onClick: () => void
+) => FormField[];
+
 export type GenerateOfferDateFormField = (
+  register: UseFormRegister<FieldValues>,
+  onClick: UseFieldArrayAppend<FieldValues, "date">,
+  count: number,
+  handleRemoveDateField: UseFieldArrayRemove,
+  loading?: boolean,
+  control?: Control<FieldValues>,
+  wordDates?: { startDate: string; endDate: string }[]
+) => FormField[];
+
+export type GenerateInvoiceDateFormField = (
   register: UseFormRegister<FieldValues>,
   onClick: UseFieldArrayAppend<FieldValues, "date">,
   count: number,
@@ -546,6 +624,36 @@ export type GenerateContractEditAdditionalDetailsFormField = (
 ) => FormField[];
 
 export type GenerateLeadAddressFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
+  handleRemoveAddress?: UseFieldArrayRemove,
+  fields?: object[],
+  handleFieldTypeChange?: (index: number) => void,
+  addressType?: boolean[],
+  setValue?: UseFormSetValue<FieldValues>,
+  getValues?: UseFormGetValues<FieldValues>
+) => FormField[] | null;
+
+export type GenerateEditInvoiceAddressFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
+  handleRemoveAddress?: UseFieldArrayRemove,
+  fields?: object[],
+  handleFieldTypeChange?: (index: number) => void,
+  addressType?: boolean[],
+  setValue?: UseFormSetValue<FieldValues>,
+  getValues?: UseFormGetValues<FieldValues>
+) => FormField[] | null;
+
+export type GenerateCreateInvoiceAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,

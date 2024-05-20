@@ -8,11 +8,11 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useState, useEffect } from "react";
 import { generateCreateInvoiceAddressDetailsValidation } from "@/validation/invoiceSchema";
 import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
+import { CreateInvoiceAddressDetailsFormField } from "@/components/invoice/createInvoice/fields/create-invoice-address-details-fields";
 
 export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -96,7 +96,7 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     setAddressType(address);
   };
 
-  const fields = AddOffAddressDetailsFormField(
+  const fields = CreateInvoiceAddressDetailsFormField(
     register,
     loading,
     control,
