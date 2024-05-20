@@ -1152,6 +1152,8 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "no_invoice_created": "Keine Rechnung erstellt",
+    "no_invoice_des": "Unterrechnung wurde noch nicht erstellt. Bitte erstellen Sie zunächst die Unterrechnung",
     "no_attachments": "Keine Anhänge gefunden!",
     "sign_first": "Bitte unterschreiben Sie zuerst",
     "paid_amount_last": "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
