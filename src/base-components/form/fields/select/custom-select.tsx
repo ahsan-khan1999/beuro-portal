@@ -74,8 +74,10 @@ export const SelectBox = ({
         }}
         className={`${classes}`}
       >
-        {(field && getLabelByValue(field.value, option)) ||
-          getLabelByValue(defaultValue, option)}
+        <span className="truncate">
+          {(field && getLabelByValue(field.value, option)) ||
+            getLabelByValue(defaultValue, option)}
+        </span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
           <span

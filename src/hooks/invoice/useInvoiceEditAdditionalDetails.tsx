@@ -73,6 +73,7 @@ export const useInoviceEditAdditionalDetails = ({
       trigger("additionalDetails");
     }
   };
+
   const fields = EditInvoiceAdditionalDetailsFormField(
     register,
     loading,

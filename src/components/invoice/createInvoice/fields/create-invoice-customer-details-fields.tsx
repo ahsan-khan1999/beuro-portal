@@ -16,6 +16,7 @@ import {
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
+import { InvoiceTableRowTypes } from "@/types/invoice";
 
 export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormField =
   (
@@ -478,7 +479,8 @@ export const generateDateChildren = (
   count: number,
   OnClick: UseFieldArrayAppend<FieldValues, "date">,
   handleRemoveDateField: UseFieldArrayRemove,
-  control?: Control<FieldValues>
+  control?: Control<FieldValues>,
+  invoiceDetails?: InvoiceTableRowTypes
 ) => {
   const { t: translate } = useTranslation();
   const dateformFields = [];
@@ -542,6 +544,7 @@ export const generateDateChildren = (
         "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
       name: "time",
       control,
+      value: (invoiceDetails?.id && invoiceDetails?.time) || "08:00",
       options: [
         { label: "00:00", value: "00:00" },
         { label: "00:15", value: "00:15" },
