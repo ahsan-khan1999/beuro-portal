@@ -89,6 +89,8 @@ const Setting = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     // }
   };
+
+  
   const handleNoteDelete = async (id: string, index: number) => {
     // if (!tax) return;
     // const response = await dispatch(deleteTaxSetting({ data: { id: id } }));
