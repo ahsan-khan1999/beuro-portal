@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
-    // marginRight: 5,
+    marginRight: 20,
   },
   descriptionText: {
     color: "#000",
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontStyle: "medium",
     width: 170,
-    marginRight: 10,
+    marginRight: 20,
   },
   priceHeader: {
     flexDirection: "row",
