@@ -29,9 +29,10 @@ const LeadsDetailsImages = ({ images }: { images?: string[] }) => {
             ))}
           </div>
         ) : (
-          <div className="-mt-6">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState
+            className="w-fit 2xl:w-[270px]"
+            containerClassName="py-0 px-2"
+          />
         )}
       </div>
     </LeadsDetailImgLayout>
