@@ -71,6 +71,10 @@ const Setting = () => {
     dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_ADDRESS }));
   };
 
+  const handleNoteGeneralSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_NOTES }));
+  };
+
   const handleAddGeneralNote = () => {
     dispatch(updateModalType({ type: ModalType.ADD_GENERAL_NOTE }));
   };
@@ -90,7 +94,6 @@ const Setting = () => {
     // }
   };
 
-  
   const handleNoteDelete = async (id: string, index: number) => {
     // if (!tax) return;
     // const response = await dispatch(deleteTaxSetting({ data: { id: id } }));
@@ -147,7 +150,7 @@ const Setting = () => {
     [ModalType.ADD_GENERAL_NOTE]: (
       <GeneralNote
         onClose={onClose}
-        onSuccess={handleAddressGeneralSuccess}
+        onSuccess={handleNoteGeneralSuccess}
         heading={translate("common.add_note")}
       />
     ),

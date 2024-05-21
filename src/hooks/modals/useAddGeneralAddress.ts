@@ -40,6 +40,7 @@ export default function useAddGeneralAddress({
     //   })
     // );
     // if (response?.payload) onSuccess();
+    onSuccess();
     console.log(data);
   };
   return {

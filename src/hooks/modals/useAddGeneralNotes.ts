@@ -41,6 +41,7 @@ export default function useAddGeneralNotes({
     //   })
     // );
     // if (response?.payload) onSuccess();
+    onSuccess();
     console.log(data);
   };
   return {
