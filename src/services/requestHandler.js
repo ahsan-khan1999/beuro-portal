@@ -680,6 +680,7 @@ const getTemplateSettings = (params) =>
   );
 const updateTemplateSettings = (params) =>
   put(SERVICE_URLS.templates, params, { feature: featureConstants.login });
+
 const getFollowUpSettings = (params) =>
   get(
     SERVICE_URLS.followUp,
@@ -719,14 +720,8 @@ const readTaxSettings = (params) =>
 const createTaxSettings = (params) =>
   post(SERVICE_URLS.tax, params, { feature: featureConstants.login });
 
-// create address setting
-const createAddressSettings = (params) =>
-  post(SERVICE_URLS.addressSetting, params, {
-    feature: featureConstants.login,
-  });
-
 // read addresses
-const readAddressSettings = (params) =>
+const getAddressSettings = (params) =>
   get(
     SERVICE_URLS.addressSetting,
     params,
@@ -735,8 +730,8 @@ const readAddressSettings = (params) =>
   );
 
 // update address
-const updateAddressSettings = (data) =>
-  put(SERVICE_URLS.addressSetting + `${data?.id}`, data, {
+const updateAddressSettings = (params) =>
+  post(SERVICE_URLS.addressSetting, params, {
     feature: featureConstants.login,
   });
 
@@ -1168,8 +1163,8 @@ const apiServices = {
   readMainQRCode,
   updateContractDetails,
   downloadInvoice,
-  createAddressSettings,
-  readAddressSettings,
+  getAddressSettings,
+  updateAddressSettings,
   createNotesSettings,
   readNotesSettings,
   updateNotesSettings,

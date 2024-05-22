@@ -9,6 +9,7 @@ export default function Document() {
           rel="stylesheet"
         />
         <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="nofollow" />
       </Head>
       <body>
         <Main />

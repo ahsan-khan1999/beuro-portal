@@ -13,15 +13,15 @@ export const addGeneralAddressFormField: GenerateGeneralAddressFormField = (
       containerClass: "mb-0 rounded-lg px-2 py-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("common.address_title")}`,
-        htmlFor: "TITTLE",
+        htmlFor: "addresses",
         className: "mb-[10px]",
       },
       field: {
         type: Field.input,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         inputType: "text",
-        id: "TITTLE",
-        name: "TITTLE",
+        id: "addresses",
+        name: "addresses",
         register,
       },
     },

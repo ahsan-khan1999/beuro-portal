@@ -122,7 +122,7 @@ export const generateAddGeneralAddressValidationSchema = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [AddGeneralAddressField.TITTLE]: yup
+    [AddGeneralAddressField.addresses]: yup
       .string()
       .required(translate("validationMessages.required")),
   });

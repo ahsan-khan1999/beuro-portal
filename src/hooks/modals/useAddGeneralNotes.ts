@@ -69,7 +69,7 @@ export default function useAddGeneralNotes({
 
   useEffect(() => {
     if (data?.data) {
-      setValue("id", data?.data?.id); // Ensure the id is set in form data
+      setValue("id", data?.data?.id);
       setValue("noteType", data?.data?.noteType);
       setValue("description", data?.data.description);
     }

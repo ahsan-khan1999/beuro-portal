@@ -26,7 +26,7 @@ export enum AddGeneralNoteField {
 }
 
 export enum AddGeneralAddressField {
-  TITTLE = "TITTLE",
+  addresses = "addresses",
 }
 
 // Edit payment details

@@ -7,6 +7,7 @@ import {
   EmailSetting,
   EmailTemplate,
   FollowUp,
+  GeneralAddress,
   TemplateSettings,
 } from "@/types/settings";
 import { setUser } from "../authSlice/auth";
@@ -42,6 +43,7 @@ interface SettingsState {
   emailTemplate: EmailTemplate | null;
   qrSettings: CompanyQrSettings | null;
   noteSettings: NoteSetting[] | null;
+  addressSettings: GeneralAddress | null;
 }
 
 export interface SystemSetting {
@@ -70,6 +72,7 @@ const initialState: SettingsState = {
   emailTemplate: null,
   qrSettings: null,
   noteSettings: null,
+  addressSettings: null,
 };
 
 export const updateAccountSettings: AsyncThunk<boolean, object, object> | any =
@@ -299,13 +302,26 @@ export const deleteTaxSetting: AsyncThunk<boolean, object, object> | any =
     }
   });
 
-export const createAddressSetting: AsyncThunk<boolean, object, object> | any =
+// read addresses
+export const readAddressSettings: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("user/address/setting", async (args, thunkApi) => {
+    try {
+      const response = await apiServices.getAddressSettings({});
+      return response?.data?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+// update address setting
+export const updateAddressSetting: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("user/address/settings", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
 
     try {
-      const res = await apiServices.createAddressSettings(data);
-      return res?.data?.data?.addresses;
+      const response = await apiServices.updateAddressSettings(data);
+      return response?.data?.data?.AddressSetting;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       setErrors(setError, e?.data.data, translate);

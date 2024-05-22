@@ -16,7 +16,7 @@ export const AddGeneralAddress = ({
 }) => {
   const defaultClassName = "mt-6";
   const { fields, onSubmit, handleSubmit, errors, error } =
-    useAddGeneralAddress({ onSuccess });
+    useAddGeneralAddress({ onSuccess, onClose });
 
   return (
     <>

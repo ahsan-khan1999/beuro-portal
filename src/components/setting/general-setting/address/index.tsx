@@ -6,15 +6,21 @@ import Image from "next/image";
 
 export interface GeneralAddressProps {
   onAddAddressTitle: () => void;
-  onEditAddressTitle: (id: string) => void;
-  onAddressDelete: (id: string, index: number) => void;
+  onEditAddressTitle: (id: number) => void;
+  addresses: {
+    addresses: string[];
+  };
+  onAddressDelete: (index: number) => void;
 }
 
 export const AddressDetailCard = ({
   onAddAddressTitle,
   onEditAddressTitle,
+  addresses,
   onAddressDelete,
 }: GeneralAddressProps) => {
+  console.log(addresses?.addresses);
+
   return (
     <div className="p-6 bg-white rounded-md">
       <div className="flex items-center justify-between pb-6 border-b border-b-[#000] border-opacity-10">
@@ -42,25 +48,30 @@ export const AddressDetailCard = ({
           </span>
         </div>
         <div className="flex flex-col gap-y-5">
-          <div className="py-3 px-4 border border-[#ccc] rounded-lg hover:bg-[#EDF4FF] flex items-center justify-between">
-            <span className="text-base font-medium text-[#4B4B4B]">
-              1:&nbsp; New house address
-            </span>
-            <div className="flex items-center gap-x-5">
-              <Image
-                src={editIcon}
-                alt="edit address"
-                className="cursor-pointer"
-                onClick={() => onEditAddressTitle("sd")}
-              />
-              <Image
-                src={delIcon}
-                alt="del address"
-                className="cursor-pointer"
-                onClick={() => onAddressDelete("AS", 2)}
-              />
+          {addresses?.addresses?.map((item, index) => (
+            <div
+              className="py-3 px-4 border border-[#ccc] rounded-lg hover:bg-[#EDF4FF] flex items-center justify-between"
+              key={index}
+            >
+              <span className="text-base font-medium text-[#4B4B4B]">
+                {index + 1}:&nbsp; {item}
+              </span>
+              <div className="flex items-center gap-x-5">
+                <Image
+                  src={editIcon}
+                  alt="edit address"
+                  className="cursor-pointer"
+                  onClick={() => onEditAddressTitle(index)}
+                />
+                <Image
+                  src={delIcon}
+                  alt="del address"
+                  className="cursor-pointer"
+                  onClick={() => onAddressDelete(index)}
+                />
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

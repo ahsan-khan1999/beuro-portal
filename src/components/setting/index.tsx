@@ -24,6 +24,7 @@ import {
   deleteNoteSetting,
   readNoteSettings,
 } from "@/api/slices/settingSlice/settings";
+import useAddGeneralAddress from "@/hooks/modals/useAddGeneralAddress";
 
 const Setting = () => {
   const { query } = useRouter();
@@ -65,20 +66,27 @@ const Setting = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
 
-  const handleAddGeneralAddress = () => {
-    dispatch(updateModalType({ type: ModalType.ADD_GENERAL_ADDRESS }));
-  };
-
-  const handleEditGeneralAddress = () => {
-    dispatch(updateModalType({ type: ModalType.EDIT_GENERAL_ADDRESS }));
-  };
-
   const handleAddressGeneralSuccess = () => {
     dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_ADDRESS }));
   };
 
   const handleNoteGeneralSuccess = () => {
     dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_NOTES }));
+  };
+
+  const handleAddGeneralAddress = () => {
+    dispatch(updateModalType({ type: ModalType.ADD_GENERAL_ADDRESS }));
+  };
+
+  const handleEditGeneralAddress = (id: number) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_GENERAL_ADDRESS,
+        data: {
+          id: id,
+        },
+      })
+    );
   };
 
   const handleAddressDelete = async (id: string) => {
@@ -118,12 +126,22 @@ const Setting = () => {
     if (!noteSettings) return;
     const response = await dispatch(deleteNoteSetting({ data: { id: id } }));
     if (response?.payload) {
-      const taxSettings = [...noteSettings];
-      taxSettings.splice(index, 1);
+      const noteSetting = [...noteSettings];
+      noteSetting.splice(index, 1);
       dispatch(readNoteSettings());
       dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     }
   };
+
+  const onSuccess = handleAddressGeneralSuccess;
+
+  const {
+    addressObj,
+    handleDeleteAddress,
+    handleSaveSetings,
+    handleCreateAddress,
+  } = useAddGeneralAddress({ onSuccess, onClose });
+  console.log(addressObj, "addressObj");
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
@@ -210,9 +228,12 @@ const Setting = () => {
         onEditAddressTitle={handleEditGeneralAddress}
         onAddNote={handleAddGeneralNote}
         onEditNote={handleEditGeneralNote}
-        onAddressDelete={handleAddressDelete}
         onNoteDelete={handleNoteDelete}
         noteSettings={noteSettings}
+        addresses={addressObj}
+        onAddressDelete={handleDeleteAddress}
+        onSaveSettings={handleSaveSetings}
+        loading={loading}
       />
     ),
   };

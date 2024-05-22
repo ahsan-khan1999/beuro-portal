@@ -8,15 +8,20 @@ import { NoteSetting } from "@/api/slices/settingSlice/settings";
 
 export interface GeneralSettingProps {
   onAddAddressTitle: () => void;
-  onEditAddressTitle: (id: string) => void;
+  onEditAddressTitle: (id: number) => void;
   onAddNote: () => void;
   onEditNote: (
     id: string,
     note: { noteType: string; description: string }
   ) => void;
-  onAddressDelete: (id: string, index: number) => void;
   onNoteDelete: (id: string, index: number) => void;
   noteSettings: NoteSetting[] | null;
+  addresses: {
+    addresses: string[];
+  };
+  onAddressDelete: (index: number) => void;
+  onSaveSettings: () => Promise<void>;
+  loading:boolean
 }
 
 export const GeneralSetting = ({
@@ -24,9 +29,12 @@ export const GeneralSetting = ({
   onEditAddressTitle,
   onAddNote,
   onEditNote,
-  onAddressDelete,
   onNoteDelete,
   noteSettings,
+  addresses,
+  onAddressDelete,
+  onSaveSettings,
+  loading
 }: GeneralSettingProps) => {
   const [currentComponent, setCurrentComponent] =
     useState<GeneralSettingComponentType>(GeneralSettingComponentType.ADDRESS);
@@ -40,6 +48,7 @@ export const GeneralSetting = ({
       <AddressDetailCard
         onAddAddressTitle={onAddAddressTitle}
         onEditAddressTitle={onEditAddressTitle}
+        addresses={addresses}
         onAddressDelete={onAddressDelete}
       />
     ),
@@ -91,7 +100,7 @@ export const GeneralSetting = ({
           className="mt-5 px-4 text-white text-base font-medium rounded-md bg-[#4A13E7] float-right"
           text={translate("setting.save_setting")}
           // loading={loading}
-          // onClick={handleSaveSetings}
+          onClick={onSaveSettings}
         />
       )}
     </div>
