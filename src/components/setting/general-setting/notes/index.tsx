@@ -4,7 +4,7 @@ import delIcon from "@/assets/pngs/address_del_icon.png";
 import editIcon from "@/assets/pngs/address_edit_icon.png";
 import Image from "next/image";
 import { useAppDispatch } from "@/hooks/useRedux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   NoteSetting,
   readNoteSettings,
@@ -12,7 +12,10 @@ import {
 
 export interface GeneralNotesProps {
   onAddNote: () => void;
-  onEditNote: (id: string) => void;
+  onEditNote: (
+    id: string,
+    note: { noteType: string; description: string }
+  ) => void;
   onNoteDelete: (id: string, index: number) => void;
   noteSettings: NoteSetting[] | null;
 }
@@ -24,10 +27,15 @@ export const NotesDetailCard = ({
   noteSettings,
 }: GeneralNotesProps) => {
   const dispatch = useAppDispatch();
+  const [openNoteIndex, setOpenNoteIndex] = useState<number | null>(null);
+
+  const handleDescription = (index: number) => {
+    setOpenNoteIndex(openNoteIndex === index ? null : index);
+  };
 
   useEffect(() => {
     dispatch(readNoteSettings());
-  }, [noteSettings]);
+  }, []);
 
   return (
     <div className="p-6 bg-white rounded-md">
@@ -64,31 +72,52 @@ export const NotesDetailCard = ({
         <div className="flex flex-col gap-y-5">
           {noteSettings?.map((item, index) => (
             <div
-              className="py-3 px-4 border border-[#ccc] rounded-lg hover:bg-[#EDF4FF] grid grid-cols-3 items-center"
+              className={`pt-3 border border-[#ccc] rounded-lg ${
+                openNoteIndex === index && "bg-[#EDF4FF]"
+              } hover:bg-[#EDF4FF]`}
               key={index}
+              onClick={() => handleDescription(index)}
             >
-              <span className="text-base font-medium text-[#4B4B4B] col-span-2 truncate">
-                1:&nbsp; {item.notes.noteType}
-              </span>
-              <div className="col-span-1 flex items-center justify-between">
-                <span className="text-[#717171] text-base font-medium truncate">
-                  Marvin Mckinney
+              <div
+                className={`grid grid-cols-3 items-center pb-[10px] mx-4  ${
+                  openNoteIndex === index &&
+                  "border-b border-b-[#000] border-opacity-20"
+                }`}
+              >
+                <span className="text-base font-medium text-[#4B4B4B] col-span-2 truncate">
+                  {index + 1}:&nbsp; {item.notes.noteType}
                 </span>
-                <div className="flex items-center gap-x-5">
-                  <Image
-                    src={editIcon}
-                    alt="edit notes"
-                    className="cursor-pointer"
-                    onClick={() => onEditNote(item?.id)}
-                  />
-                  <Image
-                    src={delIcon}
-                    alt="del note"
-                    className="cursor-pointer"
-                    onClick={() => onNoteDelete(item?.id, index)}
-                  />
+                <div className="col-span-1 flex items-center justify-between">
+                  <span className="text-[#717171] text-base font-medium truncate">
+                    {item?.createdBy?.fullName}
+                  </span>
+                  <div className="flex items-center gap-x-5">
+                    <Image
+                      src={editIcon}
+                      alt="edit notes"
+                      className="cursor-pointer"
+                      onClick={() => onEditNote(item?.id, item?.notes)}
+                    />
+                    <Image
+                      src={delIcon}
+                      alt="del note"
+                      className="cursor-pointer"
+                      onClick={() => onNoteDelete(item?.id, index)}
+                    />
+                  </div>
                 </div>
               </div>
+
+              {openNoteIndex === index && (
+                <div className="bg-[#EDF4FF] rounded-lg py-3 px-4">
+                  <p
+                    className="text-base font-normal text-[#4B4B4B]"
+                    dangerouslySetInnerHTML={{
+                      __html: item?.notes?.description,
+                    }}
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>

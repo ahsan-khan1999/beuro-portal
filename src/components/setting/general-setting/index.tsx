@@ -10,10 +10,13 @@ export interface GeneralSettingProps {
   onAddAddressTitle: () => void;
   onEditAddressTitle: (id: string) => void;
   onAddNote: () => void;
-  onEditNote: (id: string) => void;
+  onEditNote: (
+    id: string,
+    note: { noteType: string; description: string }
+  ) => void;
   onAddressDelete: (id: string, index: number) => void;
   onNoteDelete: (id: string, index: number) => void;
-  noteSettings: NoteSetting[] | null
+  noteSettings: NoteSetting[] | null;
 }
 
 export const GeneralSetting = ({
@@ -23,7 +26,7 @@ export const GeneralSetting = ({
   onEditNote,
   onAddressDelete,
   onNoteDelete,
-  noteSettings
+  noteSettings,
 }: GeneralSettingProps) => {
   const [currentComponent, setCurrentComponent] =
     useState<GeneralSettingComponentType>(GeneralSettingComponentType.ADDRESS);

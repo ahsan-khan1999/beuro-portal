@@ -7,7 +7,6 @@ import {
   EmailSetting,
   EmailTemplate,
   FollowUp,
-  QRSettings,
   TemplateSettings,
 } from "@/types/settings";
 import { setUser } from "../authSlice/auth";
@@ -26,6 +25,9 @@ export interface NoteSetting {
     description: string;
   };
   createdAt: string;
+  createdBy: {
+    fullName: string;
+  };
 }
 
 interface SettingsState {

@@ -20,7 +20,10 @@ import { GeneralSetting } from "./general-setting";
 import { AddGeneralAddress } from "@/base-components/ui/modals1/GeneralAddressTitle";
 import { GeneralSuccess } from "@/base-components/ui/modals1/GeneralSuccess";
 import { GeneralNote } from "@/base-components/ui/modals1/AddGeneralNotes";
-import { deleteNoteSetting } from "@/api/slices/settingSlice/settings";
+import {
+  deleteNoteSetting,
+  readNoteSettings,
+} from "@/api/slices/settingSlice/settings";
 
 const Setting = () => {
   const { query } = useRouter();
@@ -78,14 +81,6 @@ const Setting = () => {
     dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_NOTES }));
   };
 
-  const handleAddGeneralNote = () => {
-    dispatch(updateModalType({ type: ModalType.ADD_GENERAL_NOTE }));
-  };
-
-  const handleEditGeneralNote = (id: string) => {
-    dispatch(updateModalType({ type: ModalType.EDIT_GENERAL_NOTE, id: id }));
-  };
-
   const handleAddressDelete = async (id: string) => {
     // if (!tax) return;
     // const response = await dispatch(deleteTaxSetting({ data: { id: id } }));
@@ -97,12 +92,35 @@ const Setting = () => {
     // }
   };
 
+  const handleAddGeneralNote = () => {
+    dispatch(updateModalType({ type: ModalType.ADD_GENERAL_NOTE }));
+  };
+
+  const handleEditGeneralNote = (
+    id: string,
+    note: { noteType: string; description: string }
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_GENERAL_NOTE,
+        data: {
+          id: id,
+          data: {
+            noteType: note.noteType,
+            description: note.description,
+          },
+        },
+      })
+    );
+  };
+
   const handleNoteDelete = async (id: string, index: number) => {
     if (!noteSettings) return;
     const response = await dispatch(deleteNoteSetting({ data: { id: id } }));
     if (response?.payload) {
       const taxSettings = [...noteSettings];
       taxSettings.splice(index, 1);
+      dispatch(readNoteSettings());
       dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     }
   };
