@@ -21,8 +21,8 @@ export enum AddTaxField {
   taxRate = "taxRate",
 }
 export enum AddGeneralNoteField {
-  TITTLE = "TITTLE",
-  DESCRIPTION = "DESCRIPTION",
+  noteType = "noteType",
+  description = "description",
 }
 
 export enum AddGeneralAddressField {

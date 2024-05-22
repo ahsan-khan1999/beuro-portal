@@ -5,6 +5,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { generateAddGeneralNoteValidationSchema } from "@/validation/modalsSchema";
 import { AddGeneralNoteFormField } from "@/components/setting/fields/general-note-title-form-fields";
+import { createNotesSetting } from "@/api/slices/settingSlice/settings";
 
 export interface GeneralNotesFormProps {
   onSuccess: () => void;
@@ -32,17 +33,15 @@ export default function useAddGeneralNotes({
   const fields = AddGeneralNoteFormField(register, loading, control);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // const response = await dispatch(
-    //   createTaxSetting({
-    //     data: { ...data, taxType: 1 },
-    //     router,
-    //     setError,
-    //     translate,
-    //   })
-    // );
-    // if (response?.payload) onSuccess();
-    onSuccess();
-    console.log(data);
+    const response = await dispatch(
+      createNotesSetting({
+        data: { notes: { ...data } },
+        router,
+        setError,
+        translate,
+      })
+    );
+    if (response?.payload) onSuccess();
   };
   return {
     error,

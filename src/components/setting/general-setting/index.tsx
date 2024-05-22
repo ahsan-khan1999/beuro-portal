@@ -3,6 +3,8 @@ import { useState } from "react";
 import SettingLayout from "../SettingLayout";
 import { AddressDetailCard } from "./address";
 import { NotesDetailCard } from "./notes";
+import { Button } from "@/base-components/ui/button/button";
+import { NoteSetting } from "@/api/slices/settingSlice/settings";
 
 export interface GeneralSettingProps {
   onAddAddressTitle: () => void;
@@ -11,6 +13,7 @@ export interface GeneralSettingProps {
   onEditNote: (id: string) => void;
   onAddressDelete: (id: string, index: number) => void;
   onNoteDelete: (id: string, index: number) => void;
+  noteSettings: NoteSetting[] | null
 }
 
 export const GeneralSetting = ({
@@ -20,6 +23,7 @@ export const GeneralSetting = ({
   onEditNote,
   onAddressDelete,
   onNoteDelete,
+  noteSettings
 }: GeneralSettingProps) => {
   const [currentComponent, setCurrentComponent] =
     useState<GeneralSettingComponentType>(GeneralSettingComponentType.ADDRESS);
@@ -41,6 +45,7 @@ export const GeneralSetting = ({
         onAddNote={onAddNote}
         onEditNote={onEditNote}
         onNoteDelete={onNoteDelete}
+        noteSettings={noteSettings}
       />
     ),
   };
@@ -75,6 +80,17 @@ export const GeneralSetting = ({
       </SettingLayout>
 
       {componentLookup[currentComponent]}
+
+      {currentComponent === GeneralSettingComponentType.ADDRESS && (
+        <Button
+          id="setting"
+          inputType="button"
+          className="mt-5 px-4 text-white text-base font-medium rounded-md bg-[#4A13E7] float-right"
+          text={translate("setting.save_setting")}
+          // loading={loading}
+          // onClick={handleSaveSetings}
+        />
+      )}
     </div>
   );
 };

@@ -7,14 +7,12 @@ import { generateAddReasonValidation } from "@/validation/settingSchema";
 import { addReasonFormField } from "@/components/setting/fields/add-reason-fields";
 import {
   readFollowUpSettings,
-  setFollowUpSettings,
   updateFollowUpSetting,
 } from "@/api/slices/settingSlice/settings";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { useEffect, useState } from "react";
-import { FollowUpProp } from "@/types/settings";
 
 export default function useAddReason() {
   const router = useRouter();
@@ -73,6 +71,7 @@ export default function useAddReason() {
   });
 
   const fields = addReasonFormField(register, loading);
+
   const handleAddReason = (data: string) => {
     if (!toggleObj?.reason) return;
     let followUp = JSON.parse(JSON.stringify(toggleObj));
@@ -83,6 +82,7 @@ export default function useAddReason() {
     setToggleObj({ ...followUp });
     resetField("reason");
   };
+
   const handleRemoveReason = (index: number) => {
     if (!toggleObj?.reason) return;
     let followUp = JSON.parse(JSON.stringify(toggleObj));
@@ -93,6 +93,7 @@ export default function useAddReason() {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const handleSuccess = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };

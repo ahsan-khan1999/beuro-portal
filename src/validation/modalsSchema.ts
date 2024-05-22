@@ -129,10 +129,10 @@ export const generateAddGeneralAddressValidationSchema = (
 };
 export const generateAddGeneralNoteValidationSchema = (translate: Function) => {
   return yup.object().shape({
-    [AddGeneralNoteField.TITTLE]: yup
+    [AddGeneralNoteField.noteType]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [AddGeneralNoteField.DESCRIPTION]: yup
+    [AddGeneralNoteField.description]: yup
       .string()
       .required(translate("validationMessages.required")),
   });

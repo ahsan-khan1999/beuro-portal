@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState, useEffect, memo } from "react";
+import React, { SetStateAction, memo } from "react";
 import Image from "next/image";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import SettingLayout from "../SettingLayout";

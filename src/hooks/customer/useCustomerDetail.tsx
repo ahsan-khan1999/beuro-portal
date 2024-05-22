@@ -128,6 +128,7 @@ export default function useCustomerDetail({
   });
 
   const customerType = watch("customerType");
+
   useEffect(() => {
     if (id) {
       dispatch(readCustomerDetail({ params: { filter: id } }));

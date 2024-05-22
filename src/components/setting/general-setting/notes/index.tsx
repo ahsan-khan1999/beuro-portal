@@ -3,18 +3,32 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import delIcon from "@/assets/pngs/address_del_icon.png";
 import editIcon from "@/assets/pngs/address_edit_icon.png";
 import Image from "next/image";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { useEffect } from "react";
+import {
+  NoteSetting,
+  readNoteSettings,
+} from "@/api/slices/settingSlice/settings";
 
 export interface GeneralNotesProps {
   onAddNote: () => void;
   onEditNote: (id: string) => void;
   onNoteDelete: (id: string, index: number) => void;
+  noteSettings: NoteSetting[] | null;
 }
 
 export const NotesDetailCard = ({
   onAddNote,
   onEditNote,
   onNoteDelete,
+  noteSettings,
 }: GeneralNotesProps) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(readNoteSettings());
+  }, [noteSettings]);
+
   return (
     <div className="p-6 bg-white rounded-md">
       <div className="flex items-center justify-between pb-6 border-b border-b-[#000] border-opacity-10">
@@ -48,30 +62,35 @@ export const NotesDetailCard = ({
           </div>
         </div>
         <div className="flex flex-col gap-y-5">
-          <div className="py-3 px-4 border border-[#ccc] rounded-lg hover:bg-[#EDF4FF] grid grid-cols-3 items-center">
-            <span className="text-base font-medium text-[#4B4B4B] col-span-2 truncate">
-              1:&nbsp; New house address
-            </span>
-            <div className="col-span-1 flex items-center justify-between">
-              <span className="text-[#717171] text-base font-medium truncate">
-                Marvin Mckinney
+          {noteSettings?.map((item, index) => (
+            <div
+              className="py-3 px-4 border border-[#ccc] rounded-lg hover:bg-[#EDF4FF] grid grid-cols-3 items-center"
+              key={index}
+            >
+              <span className="text-base font-medium text-[#4B4B4B] col-span-2 truncate">
+                1:&nbsp; {item.notes.noteType}
               </span>
-              <div className="flex items-center gap-x-5">
-                <Image
-                  src={editIcon}
-                  alt="edit notes"
-                  className="cursor-pointer"
-                  onClick={() => onEditNote("dd")}
-                />
-                <Image
-                  src={delIcon}
-                  alt="del note"
-                  className="cursor-pointer"
-                  onClick={() => onNoteDelete("As", 0)}
-                />
+              <div className="col-span-1 flex items-center justify-between">
+                <span className="text-[#717171] text-base font-medium truncate">
+                  Marvin Mckinney
+                </span>
+                <div className="flex items-center gap-x-5">
+                  <Image
+                    src={editIcon}
+                    alt="edit notes"
+                    className="cursor-pointer"
+                    onClick={() => onEditNote(item?.id)}
+                  />
+                  <Image
+                    src={delIcon}
+                    alt="del note"
+                    className="cursor-pointer"
+                    onClick={() => onNoteDelete(item?.id, index)}
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
