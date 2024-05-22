@@ -16,7 +16,6 @@ import { readFollowUpDetail } from "@/api/slices/followUp/followUp";
 import { useTranslation } from "next-i18next";
 import { Dashboard } from "@/types";
 import {
-  formatDateTime,
   formatDateTimeToDate,
   formatDateTimeToTime,
   getDaysDifference,
@@ -260,7 +259,10 @@ export const FollowUpNotificationBar = ({
             )}
           </div>
         ) : (
-          <NoDataEmptyState />
+          <NoDataEmptyState
+            className="w-[90%] mx-auto my-3"
+            containerClassName="py-0"
+          />
         )}
       </div>
       {renderModal()}

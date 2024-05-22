@@ -56,7 +56,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
             </svg>
           </span>
           <p className="font-medium text-2xl text-white">
-            {translate("offers.offer_details.heading")}{" "}
+            {translate("invoice.invoice_details")}{" "}
             {invoiceDetails?.id && invoiceDetails?.invoiceNumber}
           </p>
         </div>

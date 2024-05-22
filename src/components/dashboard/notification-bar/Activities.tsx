@@ -35,7 +35,7 @@ const ActivitiesNotificationBar = ({
             return (
               <div
                 key={index}
-                className={`mt-3 cursor-pointer hover:bg-primary hover:bg-opacity-10 bg-opacity-10 `}
+                className={`mt-3 cursor-pointer hover:bg-primary hover:bg-opacity-10 bg-opacity-10`}
               >
                 <div className="mb-3">
                   <div>
@@ -51,7 +51,7 @@ const ActivitiesNotificationBar = ({
                         alt="Time Icon"
                         className="mr-[10px]"
                       />
-                      <span className="text-[#393939] text-xs ">
+                      <span className="text-[#393939] text-xs">
                         {item.time},{item.date}
                       </span>
                     </div>
@@ -90,7 +90,10 @@ const ActivitiesNotificationBar = ({
         </div> */}
         </div>
       ) : (
-        <NoDataEmptyState />
+        <NoDataEmptyState
+          className="w-[90%] mx-auto my-3"
+          containerClassName="py-0"
+        />
       )}
     </div>
   );

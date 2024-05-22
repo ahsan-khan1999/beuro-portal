@@ -45,6 +45,7 @@ export interface CustomerLeadDetail {
   expires?: string;
 }
 export interface CustomerAddress {
+  addressType: string;
   streetNumber: string;
   country: string;
   postalCode: string;

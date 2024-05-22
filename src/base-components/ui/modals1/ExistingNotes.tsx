@@ -130,7 +130,10 @@ const ExistingNotes = ({
           </div>
         ) : (
           <div className="flex justify-center items-center">
-            <NoDataEmptyState />
+            <NoDataEmptyState
+              className="w-fit"
+              containerClassName="py-5"
+            />
           </div>
         )}
       </div>

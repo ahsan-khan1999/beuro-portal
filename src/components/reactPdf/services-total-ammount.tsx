@@ -356,7 +356,7 @@ export const ServicesTotalAmount = ({
                   {Number(invoiceAmount) > 0 && (
                     <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>
-                        {"Gezahlter Gesamtbetrag"}:
+                        {"Bezahlte Gesamtbetrag"}:
                       </Text>
                       <Text style={styles.text}>
                         -{Number(invoiceAmount).toFixed(2)}

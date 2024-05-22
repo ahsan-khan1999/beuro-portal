@@ -8,11 +8,11 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { useEffect, useState } from "react";
-import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
+import { EditInvoiceAddressDetailsFormField } from "@/components/invoice/edit/fields/edit-invoice-address-details-fields";
+import { generateCreateInvoiceAddressDetailsValidation } from "@/validation/invoiceSchema";
 
 export const useEditInvoiceAddressDetails = ({
   handleNext,
@@ -37,7 +37,7 @@ export const useEditInvoiceAddressDetails = ({
     handleNext(EditComponentsType.offerEdit);
   };
 
-  const schema = generateOfferAddressEditDetailsValidation(translate);
+  const schema = generateCreateInvoiceAddressDetailsValidation(translate);
 
   const {
     register,
@@ -90,7 +90,8 @@ export const useEditInvoiceAddressDetails = ({
     address[index] = !address[index];
     setAddressType(address);
   };
-  const fields = AddOffAddressDetailsFormField(
+
+  const fields = EditInvoiceAddressDetailsFormField(
     register,
     loading,
     control,
@@ -116,6 +117,7 @@ export const useEditInvoiceAddressDetails = ({
     );
     if (response?.payload) handleNext(EditComponentsType.serviceEdit);
   };
+
   return {
     fields,
     onSubmit,

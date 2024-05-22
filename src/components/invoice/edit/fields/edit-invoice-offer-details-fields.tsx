@@ -2,9 +2,9 @@ import { Field } from "@/enums/form";
 import {
   DivProps,
   FormField,
+  GenerateCreateInvoiceFormField,
   GenerateInvoiceCustomerFormField,
-  GenerateOfferDateFormField,
-  GenerateOffersFormField,
+  GenerateInvoiceDateFormField,
 } from "@/types";
 import {
   Control,
@@ -17,7 +17,8 @@ import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
 import { InvoiceTableRowTypes } from "@/types/invoice";
-export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
+
+export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
   register,
   loading,
   control,
@@ -449,7 +450,7 @@ export const AddInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
   return formField;
 };
 
-export const AddDateFormField: GenerateOfferDateFormField = (
+export const EditInvoiceDateFormField: GenerateInvoiceDateFormField = (
   register,
   OnClick,
   count,
@@ -665,32 +666,28 @@ export const generateDateChildren = (
   return dateformFields;
 };
 
-export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
-  register,
-  loading,
-  control,
-  OnClick
-) => {
-  const { t: translate } = useTranslation();
-  const formField: FormField[] = [
-    {
-      containerClass: "float-right my-[30px]",
-      field: {
-        type: Field.button,
-        id: "button",
-        text: `${translate("offers.offer_details.next_button")}`,
-        inputType: "submit",
-        className:
-          "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
-        loading,
+export const EditInvoiceDetailsSubmitFormField: GenerateCreateInvoiceFormField =
+  (register, loading, control, OnClick) => {
+    const { t: translate } = useTranslation();
+    const formField: FormField[] = [
+      {
+        containerClass: "float-right my-[30px]",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: `${translate("offers.offer_details.next_button")}`,
+          inputType: "submit",
+          className:
+            "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+          loading,
+        },
       },
-    },
-  ];
+    ];
 
-  return formField;
-};
+    return formField;
+  };
 
-export const AddOfferDetailsDateFormField = (
+export const EditInvoiceDetailsDateFormField = (
   register: UseFormRegister<FieldValues>,
   OnClick: UseFieldArrayAppend<FieldValues, "date">,
   count: number,
