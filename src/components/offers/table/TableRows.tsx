@@ -60,7 +60,9 @@ const TableRows = ({
                   })
                 }
                 key={index}
-                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 mlg:gap-x-1 xMaxSize:gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_3fr)_minmax(300px,_4fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_3fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]"
+                className={`${
+                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                } px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 mlg:gap-x-1 xMaxSize:gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_3fr)_minmax(300px,_4fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_3fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item.offerNumber}</span>
                 <div className="flex items-center gap-x-1">
@@ -77,7 +79,7 @@ const TableRows = ({
                   )}
                 </div>
                 <span className="py-4 xs:block mlg:hidden xLarge:block truncate">
-                  {item?.title}
+                  {item?.content?.contentName}
                 </span>
                 <span className="py-4 truncate block mlg:hidden xMaxSize:block">
                   {item.total}

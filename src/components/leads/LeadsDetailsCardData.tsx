@@ -137,7 +137,7 @@ const LeadsDetailsCardData = ({
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.lead_id")}:
           </span>
-          <span className="font-medium text-[#4B4B4B] text-base">
+          <span className="font-medium text-primary text-base">
             {leadDetails?.refID}
           </span>
         </div>

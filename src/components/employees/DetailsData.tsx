@@ -26,7 +26,7 @@ const DetailsData = ({
 
   return (
     <>
-      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10  pb-5">
+      <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
           {isUpdate && router.pathname === "/employees/details" && (
             <span onClick={handleBack} className="cursor-pointer mr-6">
@@ -53,11 +53,11 @@ const DetailsData = ({
               </svg>
             </span>
           )}
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ">
+          <h1 className="text-[#4B4B4B] text-2xl font-medium">
             {translate("employees.card_content.heading")}
           </h1>
         </div>
-        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
+        <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center">
           <Image
             src={deleteIcon}
             alt="deleteIcon"
@@ -69,30 +69,28 @@ const DetailsData = ({
         </span>
       </div>
 
-      <div className="mt-5">
-        <div className="flex flex-col lg:flex-row gap-y-4 lg:justify-between lg:items-center lg:max-w-[600px]">
-          <div className="flex items-center gap-x-3">
-            <span className="text-[#4D4D4D]">
-              {translate("employees.card_content.employee_id")}:
-            </span>
-            <span className="text-[#4B4B4B] font-medium">{refID}</span>
-          </div>
-
-          <div className="flex items-center gap-x-3">
-            <span className="text-[#4D4D4D]">
-              {translate("employees.card_content.created_by")}:
-            </span>
-            <span className="text-[#4B4B4B] font-medium">{name}</span>
-          </div>
-        </div>
-        <div className="flex items-center gap-x-3 mt-4">
+      <div className="flex flex-col lg:flex-row gap-y-4 lg:justify-between lg:items-center lg:max-w-[600px] my-4">
+        <div className="flex items-center gap-x-3">
           <span className="text-[#4D4D4D]">
-            {translate("employees.card_content.created_date")}:
+            {translate("employees.card_content.employee_id")}:
           </span>
-          <span className="text-[#4B4B4B] font-medium">
-            {moment(date).format("DD/MM/YYYY")}
-          </span>
+          <span className="text-primary font-medium">{refID}</span>
         </div>
+
+        <div className="flex items-center gap-x-3">
+          <span className="text-[#4D4D4D]">
+            {translate("employees.card_content.created_by")}:
+          </span>
+          <span className="text-[#4B4B4B] font-medium">{name}</span>
+        </div>
+      </div>
+      <div className="flex items-center gap-x-3">
+        <span className="text-[#4D4D4D]">
+          {translate("employees.card_content.created_date")}:
+        </span>
+        <span className="text-[#4B4B4B] font-medium">
+          {moment(date).format("DD/MM/YYYY")}
+        </span>
       </div>
     </>
   );

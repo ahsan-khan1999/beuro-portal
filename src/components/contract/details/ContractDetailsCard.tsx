@@ -134,25 +134,25 @@ const ContractDetailsCard = ({
       </div>
 
       <div className="flex flex-col gap-4 mt-5">
-        <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-2">
-          <div>
-            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
+        <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-2 w-full">
+          <div className="flex items-center gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.contract_id")}:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">
+            <span className="text-base font-medium text-primary">
               {contractDetails.contractNumber}
             </span>
           </div>
-          <div className="flex gap-x-3">
-            <span className="text-base font-normal text-[#4D4D4D]">
-              {translate("contracts.card_content.offer_title")}:
+          <div className="flex items-center gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[120px]">
+              {translate("contracts.table_headings.title")}:
             </span>
 
-            <span className="text-base font-medium text-[#4B4B4B]">
+            <span className="text-base font-medium text-[#4B4B4B] truncate">
               {contractDetails.offerID?.title}
             </span>
           </div>
-          <div className="flex gap-x-3">
+          <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.worker")}:
             </span>
@@ -163,7 +163,7 @@ const ContractDetailsCard = ({
         </div>
 
         <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_3fr)_minmax(450px,_100%)] gap-y-2">
-          <div className="flex gap-x-3">
+          <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.offer_id")}:
             </span>
@@ -171,7 +171,7 @@ const ContractDetailsCard = ({
               {contractDetails.offerID?.offerNumber}
             </span>
           </div>
-          {/* <div className="flex gap-x-3">
+          {/* <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.card_content.created_date")}:
             </span>
@@ -181,7 +181,7 @@ const ContractDetailsCard = ({
               </span>
             </div>
           </div> */}
-          <div className="flex gap-x-3">
+          <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
               {translate("contracts.card_content.service_date")}:
             </span>
@@ -249,7 +249,7 @@ const ContractDetailsCard = ({
           </div> */}
 
           <div className="flex items-center gap-[11px]">
-            <span className="text-[#4D4D4D] font-normal text-base ">
+            <span className="text-[#4D4D4D] font-normal text-base">
               {translate("contracts.card_content.payment_method")}:
             </span>
             {contractDetails?.paymentType && (

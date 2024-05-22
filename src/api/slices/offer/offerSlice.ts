@@ -86,7 +86,7 @@ export const rejectOfferPublic: AsyncThunk<boolean, object, object> | any =
       await apiServices.rejectOfferPublic(params);
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
       return false;
     }
   });
@@ -235,7 +235,7 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
 
 export const signOffer: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/signOffer", async (args, thunkApi) => {
-    const { data, router, translate, formData } = args as any;
+    const { data, router, translate, formData, setError } = args as any;
 
     try {
       const [authToken, refreshToken] = await Promise.all([
@@ -255,9 +255,8 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
 
       return true;
     } catch (e: any) {
-      // showError(translate(e?.response?.data?.message));
       thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
-      // setErrors(setError, e?.data.data, translate);
+      setErrors(setError, e?.data.data, translate);
       return false;
     }
   });
@@ -272,6 +271,7 @@ export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
       return response?.data?.data?.OfferActivity;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
+
       // setErrors(setError, e?.data.data, translate);
       return false;
     }

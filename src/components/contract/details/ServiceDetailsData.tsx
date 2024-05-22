@@ -131,7 +131,7 @@ const ServiceDetailsData = ({
                   className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] text-sm font-medium text-[#4B4B4B] border-t border-t-[#000] border-opacity-10 py-5"
                   key={index}
                 >
-                  <span className="break-all text-base font-medium text-[#4B4B4B]">
+                  <span className="break-all text-base font-medium text-[#4B4B4B] mr-1">
                     {item.serviceTitle}
                   </span>
                   <span className="break-all text-base font-medium text-[#4B4B4B] mr-1">

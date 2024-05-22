@@ -1160,6 +1160,8 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "no_invoice_created": "No Invoice Created",
+    "no_invoice_des": "Sub invoice has not yet been created. Please create the sub invoice first",
     "no_attachments": "No attachments found!",
     "sign_first": "Please Sign First",
     "paid_amount_last": "The amount which you paid last time.",
