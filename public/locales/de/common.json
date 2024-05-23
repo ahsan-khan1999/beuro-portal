@@ -1,6 +1,6 @@
 {
   "register": {
-    "main_heading": "Anmelden bei Büro-365",
+    "main_heading": "Anmeldung bei Büro-3655",
     "sub_heading": "Verwalten Sie Ihr Unternehmen mit uns",
     "full_name": "Vollständiger Name",
     "email_label": "E-Mail",
@@ -244,7 +244,8 @@
     "Employee_has_been_created": "Der Mitarbeiter wurde erfolgreich angelegt",
     "Login_details_have_been_emailed_to_them": "Die Zugangsdaten wurden ihnen per E-Mail zugesandt",
     "Login_details_could_not_be_emailed_to_them": "Die Anmeldedaten konnten ihnen nicht per E-Mail zugesandt werden",
-    "Employee_password_has_changed": "Das Passwort des Mitarbeiters wurde erfolgreich geändert"
+    "Employee_password_has_changed": "Das Passwort des Mitarbeiters wurde erfolgreich geändert",
+    "passwordRegex": "Das Passwort muss aus 6 Zeichen bestehen und Großbuchstaben, Kleinbuchstaben, Zahlen und Sonderzeichen enthalten."
   },
   "sidebar": {
     "customer": {

@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "@/assets/svgs/logo.svg";
 import Image from "next/image";
-
 import EntryLinks from "../EntryLinks";
 import { Form } from "@/base-components/form/form";
 import useRegistration from "@/hooks/auth/useRegistration";
@@ -16,7 +15,7 @@ const Register = () => {
     <div className="w-[50%] px-7 flex flex-col justify-between">
       <Image src={logo} alt="Buro Logo" className="mt-5" />
       <div className="px-[32px] flex flex-col justify-center pt-3 ">
-        <div className=" max-w-[384px] w-full  ">
+        <div className=" max-w-[384px] w-full">
           <h1 className="font-semibold text-dark text-[26px] text-center">
             {translate("register.main_heading")}
           </h1>

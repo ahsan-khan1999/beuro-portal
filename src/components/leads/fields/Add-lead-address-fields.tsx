@@ -37,8 +37,8 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            value: `Adresse ${i + 1}`,
-            setValue,
+            // value: `Adresse ${i + 1}`,
+            // setValue,
           },
         }
       : {
@@ -50,11 +50,11 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            value: `Adresse ${i + 1}`,
+            // value: `Adresse ${i + 1}`,
             disabled: true,
             className:
               "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
-            setValue,
+            // setValue,
           },
         };
     formField.push(
@@ -65,7 +65,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
           type: Field.select,
           id: `address.${i}.addressType`,
           name: `address.${i}.addressType`,
-          value: addressSettings?.addresses?.[0] || "",
+          // value: addressSettings?.addresses?.[0] || "",
           options:
             addressSettings?.addresses?.map((item) => ({
               label: item,
@@ -291,7 +291,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               count === 3 && "hidden"
             }`,
             onClick: () => {
-              handleAddNewAddress && handleAddNewAddress(addressObject);
+              handleAddNewAddress && handleAddNewAddress();
             },
           },
         },

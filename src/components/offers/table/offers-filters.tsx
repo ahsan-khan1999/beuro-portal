@@ -238,10 +238,15 @@ export default function OffersFilters({
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
             options={
-              noteSettings?.map((item) => ({
-                label: item.notes.noteType,
-                value: item.notes.noteType,
-              })) || []
+              noteSettings
+                ? noteSettings
+                    .slice()
+                    .reverse()
+                    .map((item) => ({
+                      label: item.notes.noteType,
+                      value: item.notes.noteType,
+                    }))
+                : []
             }
             label={translate("add_note_dropdown.all_notes")}
           />

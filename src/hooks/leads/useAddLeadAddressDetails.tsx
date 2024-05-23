@@ -14,6 +14,7 @@ import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { useEffect, useMemo, useState } from "react";
 import { readAddressSettings } from "@/api/slices/settingSlice/settings";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useAddLeadAddressDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void
@@ -39,12 +40,14 @@ export const useAddLeadAddressDetails = (
     formState: { errors, isValid },
     getValues,
     setValue,
+    trigger,
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
-
   useEffect(() => {
     dispatch(readAddressSettings());
+  }, []);
+  useEffect(() => {
     if (leadDetails?.id) {
       reset({
         address: leadDetails?.addressID
@@ -54,13 +57,15 @@ export const useAddLeadAddressDetails = (
             }))
           : [
               {
-                label: `Adresse ${addressCount}`,
+                label:
+                  addressSettings?.addresses[0] || `Adresse ${addressCount}`,
+                addressType: addressSettings?.addresses[0] || "",
                 ...leadDetails?.customerDetail?.address,
               },
             ],
       });
     }
-  }, [leadDetails?.id]);
+  }, [leadDetails?.id, addressSettings?.id]);
 
   const {
     append,
@@ -68,9 +73,17 @@ export const useAddLeadAddressDetails = (
     remove,
   } = useFieldArray({ control, name: "address" });
 
+  const addressFieldsLength = addressFields.length || 1;
   useMemo(() => {
-    if (addressFields.length === 0) return;
-    setAddressCount(addressFields.length);
+    // if (addressFields.length === 0) return;
+    // setAddressCount(addressFields.length);
+    console.log(
+      addressFieldsLength,
+      "addressCount",
+      addressSettings?.addresses[addressFieldsLength]
+    );
+
+    // trigger();
   }, [addressFields.length]);
 
   const handleFieldTypeChange = (index: number) => {
@@ -86,15 +99,30 @@ export const useAddLeadAddressDetails = (
   const handleChangeLabel = (item: string, index: number) => {
     setValue(`address.${index}.label`, item);
   };
+  // console.log(addressFields, "addressFieldsLength");
 
+  const handleAddNewAddress = () => {
+    append(addressObject);
+    const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+    console.log(currentAddressItem, "currentAddressItem");
+
+    setValue(
+      `address.${addressFieldsLength}.addressType`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+    setValue(
+      `address.${addressFieldsLength}.label`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+  };
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
-    addressCount,
+    addressFieldsLength,
     handleChangeLabel,
-    append,
+    handleAddNewAddress,
     remove,
     addressFields,
     handleFieldTypeChange,

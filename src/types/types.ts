@@ -37,7 +37,11 @@ import {
   FollowUp,
   GeneralAddress,
 } from "./settings";
-import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
+import {
+  NoteSetting,
+  SystemSetting,
+  TaxSetting,
+} from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
 
@@ -339,9 +343,16 @@ export type GenerateNotesFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  trigger?: UseFormTrigger<FieldValues>,
-  onClick?: Function
+  properties: {
+    noteSetting?: NoteSetting[] | null;
+    onNoteSelect?: (id: string) => void;
+    selectedNote?: string;
+  },
+  onClick?: Function,
+  getValues?: UseFormGetValues<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
+
 export type GenerateGeneralNotesFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -635,7 +646,7 @@ export type GenerateLeadAddressFormField = (
   onClick: Function,
   count: number,
   handleChangeLabel: (item: string, index: number) => void,
-  handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
+  handleAddNewAddress?: () => void,
   handleRemoveAddress?: UseFieldArrayRemove,
   fields?: object[],
   handleFieldTypeChange?: (index: number) => void,
