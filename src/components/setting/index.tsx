@@ -24,7 +24,6 @@ import {
   deleteNoteSetting,
   readNoteSettings,
 } from "@/api/slices/settingSlice/settings";
-import useAddGeneralAddress from "@/hooks/modals/useAddGeneralAddress";
 
 const Setting = () => {
   const { query } = useRouter();
@@ -89,17 +88,6 @@ const Setting = () => {
     );
   };
 
-  const handleAddressDelete = async (id: string) => {
-    // if (!tax) return;
-    // const response = await dispatch(deleteTaxSetting({ data: { id: id } }));
-    // if (response?.payload) {
-    //   const taxSettings = [...tax];
-    //   taxSettings.splice(index, 1);
-    //   dispatch(setTaxSettings(taxSettings));
-    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
-    // }
-  };
-
   const handleAddGeneralNote = () => {
     dispatch(updateModalType({ type: ModalType.ADD_GENERAL_NOTE }));
   };
@@ -133,16 +121,6 @@ const Setting = () => {
     }
   };
 
-  const onSuccess = handleAddressGeneralSuccess;
-
-  const {
-    addressObj,
-    handleDeleteAddress,
-    handleSaveSetings,
-    handleCreateAddress,
-  } = useAddGeneralAddress({ onSuccess, onClose });
-  console.log(addressObj, "addressObj");
-
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_CHANGE]: <ChangePassword onClose={onClose} />,
     [ModalType.ADD_TAX]: (
@@ -160,14 +138,14 @@ const Setting = () => {
     [ModalType.ADD_GENERAL_ADDRESS]: (
       <AddGeneralAddress
         onClose={onClose}
-        onSuccess={handleAddressGeneralSuccess}
+        // onSuccess={handleAddressGeneralSuccess}
         heading={translate("common.add_address_title")}
       />
     ),
     [ModalType.EDIT_GENERAL_ADDRESS]: (
       <AddGeneralAddress
         onClose={onClose}
-        onSuccess={handleAddressGeneralSuccess}
+        // onSuccess={handleAddressGeneralSuccess}
         heading={translate("common.edit_address_title")}
       />
     ),
@@ -230,10 +208,8 @@ const Setting = () => {
         onEditNote={handleEditGeneralNote}
         onNoteDelete={handleNoteDelete}
         noteSettings={noteSettings}
-        addresses={addressObj}
-        onAddressDelete={handleDeleteAddress}
-        onSaveSettings={handleSaveSetings}
-        loading={loading}
+        onSuccess={handleAddressGeneralSuccess}
+        onClose={onClose}
       />
     ),
   };

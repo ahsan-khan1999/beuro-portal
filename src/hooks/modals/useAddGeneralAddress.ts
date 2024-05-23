@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -6,21 +5,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { generateAddGeneralAddressValidationSchema } from "@/validation/modalsSchema";
 import { addGeneralAddressFormField } from "@/components/setting/fields/general-address-title-field";
 import { useEffect, useState } from "react";
-import {
-  readAddressSettings,
-  updateAddressSetting,
-} from "@/api/slices/settingSlice/settings";
+import { setAddressSettings } from "@/api/slices/settingSlice/settings";
 
 export interface GeneralAddressFormProps {
-  onSuccess: () => void;
   onClose: () => void;
 }
 
 export default function useAddGeneralAddress({
-  onSuccess,
   onClose,
 }: GeneralAddressFormProps) {
-  const router = useRouter();
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const { loading, error, addressSettings } = useAppSelector(
@@ -35,71 +28,57 @@ export default function useAddGeneralAddress({
 
   const schema = generateAddGeneralAddressValidationSchema(translate);
 
-  useEffect(() => {
-    dispatch(readAddressSettings({})).then((response: any) => {
-      if (response?.payload) {
-        setAddressObj({
-          addresses: response?.payload?.AddressSetting?.addresses || [],
-        });
-      }
-    });
-  }, [dispatch, translate]);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
     setValue,
-    resetField,
+    reset,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = addGeneralAddressFormField(register, loading);
 
-  const handleCreateAddress = (data: string) => {
+  const handleCreateAddress = (item: string) => {
     if (!addressObj?.addresses) return;
     let address = JSON.parse(JSON.stringify(addressObj));
-    let newAddresses = [...address.addresses];
-    newAddresses.push(data);
+
     address = {
       ...address,
-      addresses: newAddresses,
+      addresses: [...address?.addresses, item],
     };
-
     setAddressObj({ ...address });
-
-    // resetField("addresses");
+    dispatch(setAddressSettings(address));
     onClose();
   };
 
-  const handleDeleteAddress = (index: number) => {
-    if (!addressObj?.addresses) return;
-    let address = JSON.parse(JSON.stringify(addressObj));
-    address?.addresses?.splice(index, 1);
-    setAddressObj({ ...address });
-  };
+  const handleEditAddress = (id: number, newData: string) => {
+    if (id === undefined || id === null) return;
 
-  const handleSaveSetings = async () => {
-    let apiData = {
-      reason: addressObj?.addresses,
-    };
-    const response = await dispatch(
-      updateAddressSetting({ data: apiData, router, translate })
+    if (!addressSettings || !Array.isArray(addressSettings.addresses)) return;
+
+    const newAddresses = addressSettings.addresses.map((address, index) =>
+      index === id ? newData : address
     );
-    if (response?.payload) onSuccess();
+    const updatedAddressObj = { ...addressSettings, addresses: newAddresses };
+
+    dispatch(setAddressSettings(updatedAddressObj));
+    onClose();
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    handleCreateAddress(data?.addresses);
+  const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
+    if (data?.id || data?.id === 0) {
+      handleEditAddress(data?.id, formData.addresses);
+    } else {
+      handleCreateAddress(formData.addresses);
+    }
   };
 
   useEffect(() => {
-    if (data?.data) {
-      setValue("title", data?.data.title);
-    }
-  }, [data?.data, setValue]);
+    setValue("addresses", addressSettings?.addresses[data?.id]);
+  }, [data?.id, setValue]);
 
   return {
     error,
@@ -109,8 +88,7 @@ export default function useAddGeneralAddress({
     loading,
     onSubmit,
     addressObj,
-    handleSaveSetings,
-    handleDeleteAddress,
     handleCreateAddress,
+    handleEditAddress,
   };
 }

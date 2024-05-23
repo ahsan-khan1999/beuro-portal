@@ -8,6 +8,8 @@ import ContractFilter from "@/base-components/filter/contracts-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function ContractFilters({
   filter,
@@ -18,6 +20,8 @@ export default function ContractFilters({
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [inputValue, setInputValue] = useState<string>("");
+  const { noteSettings } = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
 
   const checkbox: CheckBoxType[] = [
     {
@@ -161,6 +165,11 @@ export default function ContractFilters({
       return updatedFilter;
     });
   };
+  3;
+
+  useEffect(() => {
+    dispatch(readNoteSettings());
+  }, []);
 
   return (
     <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
@@ -225,42 +234,12 @@ export default function ContractFilters({
               dropDownIconClassName=""
               containerClassName="w-[225px]"
               labelClassName="w-[225px]"
-              options={[
-                // {
-                //   value: "None",
-                //   label: `${translate("add_note_dropdown.all_notes")}`,
-                // },
-                {
-                  value: "Sending pictures",
-                  label: `${translate("add_note_dropdown.sending_picture")}`,
-                },
-                {
-                  value: "Viewing date",
-                  label: `${translate("add_note_dropdown.view_date")}`,
-                },
-                {
-                  value: "Approximate Offer open",
-                  label: `${translate(
-                    "add_note_dropdown.approximate_offer_open"
-                  )}`,
-                },
-                {
-                  value: "Will contact us",
-                  label: `${translate("add_note_dropdown.contact_us")}`,
-                },
-                {
-                  value: "Individual Note",
-                  label: `${translate("add_note_dropdown.individual_note")}`,
-                },
-                {
-                  value: "Not Reached",
-                  label: `${translate("add_note_dropdown.note_reached")}`,
-                },
-                {
-                  value: "Other",
-                  label: `${translate("add_note_dropdown.other")}`,
-                },
-              ]}
+              options={
+                noteSettings?.map((item) => ({
+                  label: item.notes.noteType,
+                  value: item.notes.noteType,
+                })) || []
+              }
               label={translate("add_note_dropdown.all_notes")}
             />
           </div>

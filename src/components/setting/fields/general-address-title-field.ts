@@ -31,7 +31,7 @@ export const addGeneralAddressFormField: GenerateGeneralAddressFormField = (
       field: {
         type: Field.button,
         id: "button",
-        text: `${translate("common.add_new_address")}`,
+        text: `${translate("common.save_button")}`,
         inputType: "submit",
         className: "rounded-lg text-white hover:bg-none w-full",
         loading,

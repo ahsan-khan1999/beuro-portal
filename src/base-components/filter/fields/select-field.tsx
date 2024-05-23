@@ -26,6 +26,8 @@ export default function SelectField({
     containerClassName
   );
 
+  console.log(options);
+
   const labelDefualtClasses = combineClasses(
     "text-dark text-sm font-normal w-fit",
     labelClassName

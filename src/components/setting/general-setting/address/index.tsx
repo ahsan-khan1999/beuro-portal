@@ -3,24 +3,21 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import delIcon from "@/assets/pngs/address_del_icon.png";
 import editIcon from "@/assets/pngs/address_edit_icon.png";
 import Image from "next/image";
+import { GeneralAddress } from "@/types/settings";
 
 export interface GeneralAddressProps {
   onAddAddressTitle: () => void;
   onEditAddressTitle: (id: number) => void;
-  addresses: {
-    addresses: string[];
-  };
   onAddressDelete: (index: number) => void;
+  addresses: GeneralAddress | null;
 }
 
 export const AddressDetailCard = ({
   onAddAddressTitle,
   onEditAddressTitle,
-  addresses,
   onAddressDelete,
+  addresses,
 }: GeneralAddressProps) => {
-  console.log(addresses?.addresses);
-
   return (
     <div className="p-6 bg-white rounded-md">
       <div className="flex items-center justify-between pb-6 border-b border-b-[#000] border-opacity-10">

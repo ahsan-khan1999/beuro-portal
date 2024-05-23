@@ -402,6 +402,12 @@ const SettingSlice = createSlice({
     setSystemSettings: (state, action) => {
       state.systemSettings = action.payload;
     },
+    setAddressSettings: (state, action) => {
+      state.addressSettings = action.payload;
+    },
+    setNotesSettings: (state, action) => {
+      state.noteSettings = action.payload;
+    },
   },
   extraReducers(builder) {
     builder.addCase(updateAccountSettings.pending, (state) => {
@@ -624,6 +630,28 @@ const SettingSlice = createSlice({
     builder.addCase(deleteNoteSetting.rejected, (state) => {
       state.loading = false;
     });
+
+    builder.addCase(readAddressSettings.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readAddressSettings.fulfilled, (state, action) => {
+      state.addressSettings = action.payload?.AddressSetting;
+      state.loading = false;
+    });
+    builder.addCase(readAddressSettings.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(updateAddressSetting.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateAddressSetting.fulfilled, (state, action) => {
+      state.addressSettings = action?.payload;
+      state.loading = false;
+    });
+    builder.addCase(updateAddressSetting.rejected, (state) => {
+      state.loading = false;
+    });
   },
 });
 
@@ -633,4 +661,6 @@ export const {
   setTaxSettings,
   setFollowUpSettings,
   setSystemSettings,
+  setAddressSettings,
+  setNotesSettings,
 } = SettingSlice.actions;

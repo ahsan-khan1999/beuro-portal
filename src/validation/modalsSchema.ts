@@ -132,8 +132,6 @@ export const generateAddGeneralNoteValidationSchema = (translate: Function) => {
     [AddGeneralNoteField.noteType]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [AddGeneralNoteField.description]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    [AddGeneralNoteField.description]: yup.string().notRequired(),
   });
 };

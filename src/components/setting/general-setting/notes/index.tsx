@@ -91,7 +91,10 @@ export const NotesDetailCard = ({
                   <span className="text-[#717171] text-base font-medium truncate">
                     {item?.createdBy?.fullName}
                   </span>
-                  <div className="flex items-center gap-x-5">
+                  <div
+                    className="flex items-center gap-x-5"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <Image
                       src={editIcon}
                       alt="edit notes"
