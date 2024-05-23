@@ -13,6 +13,7 @@ import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
 import { useEffect, useMemo, useState } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { LeadsEditAddressDetailsFormField } from "@/components/leads/fields/Leads-address-details-fields";
+import { readAddressSettings } from "@/api/slices/settingSlice/settings";
 
 export const useLeadsAddressEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -23,6 +24,8 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
   const [addressCount, setAddressCount] = useState(
     leadDetails?.addressID?.address?.length || 1
   );
+
+  const { addressSettings } = useAppSelector((state) => state.settings);
 
   const handleBack = () => {
     onClick(1, ComponentsType.address);
@@ -36,12 +39,14 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     setError,
     formState: { errors },
     reset,
+    getValues,
     setValue,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
+    dispatch(readAddressSettings());
     if (leadDetails?.id) {
       reset({
         address: leadDetails?.addressID
@@ -76,18 +81,25 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     setAddressType(updatedAddressType);
   };
 
+  const handleChangeLabel = (item: string, index: number) => {
+    setValue(`address.${index}.label`, item);
+  };
+
   const fields = LeadsEditAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
     addressCount,
+    handleChangeLabel,
     append,
     remove,
     addressFields,
     handleFieldTypeChange,
     addressType,
-    setValue
+    setValue,
+    getValues,
+    addressSettings
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

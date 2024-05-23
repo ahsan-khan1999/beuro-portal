@@ -13,6 +13,7 @@ import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSc
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useState, useEffect } from "react";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
+import { readAddressSettings } from "@/api/slices/settingSlice/settings";
 
 export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -22,6 +23,8 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
+  const { addressSettings } = useAppSelector((state) => state.settings);
 
   const [addressType, setAddressType] = useState(
     offerDetails?.addressID
@@ -51,6 +54,7 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
+    dispatch(readAddressSettings());
     if (offerDetails.id) {
       reset({
         address: offerDetails?.addressID
@@ -96,19 +100,25 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     setAddressType(address);
   };
 
+  const handleChangeLabel = (item: string, index: number) => {
+    setValue(`address.${index}.label`, item);
+  };
+
   const fields = AddOffAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
+    handleChangeLabel,
     append,
     remove,
     addressFields,
     handleFieldTypeChange,
     addressType,
     setValue,
-    getValues
+    getValues,
+    addressSettings
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

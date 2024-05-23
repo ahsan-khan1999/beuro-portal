@@ -31,7 +31,12 @@ import {
   SubInvoiceTableRowTypes,
 } from "./invoice";
 import { Contract, contractTableTypes } from "./contract";
-import { EmailSetting, EmailTemplate, FollowUp } from "./settings";
+import {
+  EmailSetting,
+  EmailTemplate,
+  FollowUp,
+  GeneralAddress,
+} from "./settings";
 import { SystemSetting, TaxSetting } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
@@ -629,13 +634,15 @@ export type GenerateLeadAddressFormField = (
   control: Control<FieldValues>,
   onClick: Function,
   count: number,
+  handleChangeLabel: (item: string, index: number) => void,
   handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
   handleRemoveAddress?: UseFieldArrayRemove,
   fields?: object[],
   handleFieldTypeChange?: (index: number) => void,
   addressType?: boolean[],
   setValue?: UseFormSetValue<FieldValues>,
-  getValues?: UseFormGetValues<FieldValues>
+  getValues?: UseFormGetValues<FieldValues>,
+  addressSettings?: GeneralAddress | null
 ) => FormField[] | null;
 
 export type GenerateEditInvoiceAddressFormField = (
@@ -644,13 +651,15 @@ export type GenerateEditInvoiceAddressFormField = (
   control: Control<FieldValues>,
   onClick: Function,
   count: number,
+  handleChangeLabel: (item: string, index: number) => void,
   handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
   handleRemoveAddress?: UseFieldArrayRemove,
   fields?: object[],
   handleFieldTypeChange?: (index: number) => void,
   addressType?: boolean[],
   setValue?: UseFormSetValue<FieldValues>,
-  getValues?: UseFormGetValues<FieldValues>
+  getValues?: UseFormGetValues<FieldValues>,
+  addressSettings?: GeneralAddress | null
 ) => FormField[] | null;
 
 export type GenerateCreateInvoiceAddressFormField = (
@@ -659,13 +668,15 @@ export type GenerateCreateInvoiceAddressFormField = (
   control: Control<FieldValues>,
   onClick: Function,
   count: number,
+  handleChangeLabel: (item: string, index: number) => void,
   handleAddNewAddress?: UseFieldArrayAppend<FieldValues, "address">,
   handleRemoveAddress?: UseFieldArrayRemove,
   fields?: object[],
   handleFieldTypeChange?: (index: number) => void,
   addressType?: boolean[],
   setValue?: UseFormSetValue<FieldValues>,
-  getValues?: UseFormGetValues<FieldValues>
+  getValues?: UseFormGetValues<FieldValues>,
+  addressSettings?: GeneralAddress | null
 ) => FormField[] | null;
 
 export type GenerateLeadsCustomerFormField = (

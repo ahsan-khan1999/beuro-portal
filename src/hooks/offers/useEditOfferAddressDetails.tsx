@@ -13,6 +13,7 @@ import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsDa
 import { useEffect, useMemo, useState } from "react";
 import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
+import { readAddressSettings } from "@/api/slices/settingSlice/settings";
 
 export const useEditOfferAddressDetails = ({
   handleNext,
@@ -25,6 +26,9 @@ export const useEditOfferAddressDetails = ({
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
+  const { addressSettings } = useAppSelector((state) => state.settings);
+
   const [addressType, setAddressType] = useState(
     offerDetails?.addressID
       ? Array.from(offerDetails?.addressID?.address, () => false)
@@ -45,12 +49,14 @@ export const useEditOfferAddressDetails = ({
     setError,
     reset,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
+    dispatch(readAddressSettings());
     if (offerDetails.id) {
       reset({
         address: offerDetails?.addressID
@@ -94,18 +100,26 @@ export const useEditOfferAddressDetails = ({
     address[index] = !address[index];
     setAddressType(address);
   };
+
+  const handleChangeLabel = (item: string, index: number) => {
+    setValue(`address.${index}.label`, item);
+  };
+
   const fields = AddOffAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
+    handleChangeLabel,
     append,
     remove,
     addressFields,
     handleFieldTypeChange,
     addressType,
-    setValue
+    setValue,
+    getValues,
+    addressSettings
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

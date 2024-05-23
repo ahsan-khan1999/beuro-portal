@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import { generateCreateInvoiceAddressDetailsValidation } from "@/validation/invoiceSchema";
 import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
 import { CreateInvoiceAddressDetailsFormField } from "@/components/invoice/createInvoice/fields/create-invoice-address-details-fields";
+import { readAddressSettings } from "@/api/slices/settingSlice/settings";
 
 export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -22,6 +23,8 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
+  const { addressSettings } = useAppSelector((state) => state.settings);
 
   const [addressType, setAddressType] = useState(
     invoiceDetails?.addressID
@@ -51,6 +54,7 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
+    dispatch(readAddressSettings());
     if (invoiceDetails.id) {
       reset({
         address: invoiceDetails?.addressID
@@ -96,19 +100,25 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     setAddressType(address);
   };
 
+  const handleChangeLabel = (item: string, index: number) => {
+    setValue(`address.${index}.label`, item);
+  };
+
   const fields = CreateInvoiceAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
+    handleChangeLabel,
     append,
     remove,
     addressFields,
     handleFieldTypeChange,
     addressType,
     setValue,
-    getValues
+    getValues,
+    addressSettings
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
