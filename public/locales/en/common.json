@@ -1166,6 +1166,8 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "plan_detail": "Plan Details",
+    "new_plan": "Add new Plan",
     "yes_button": "Yes",
     "enter_company": "Enter Company Name",
     "note_title": "Note title",

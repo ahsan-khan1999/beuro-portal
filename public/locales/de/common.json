@@ -1158,6 +1158,8 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "plan_detail": "Plandetails",
+    "new_plan": "Neuen Plan hinzufügen",
     "yes_button": "Ja",
     "enter_company": "Firmenname eingeben",
     "note_title": "Titel notieren",

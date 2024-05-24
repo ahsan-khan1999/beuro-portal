@@ -7,7 +7,7 @@ const FormCard = ({
   containerClassName,
 }: detailScreenCardsLayout) => {
   const defaultClasses = combineClasses(
-    "rounded-lg bg-white border border-primary w-full h-full",
+    "rounded-lg bg-white w-full h-full",
     containerClassName
   );
   return <div className={defaultClasses}>{children}</div>;

@@ -49,7 +49,7 @@ const TableRow = ({
                     query: { customer: item.id },
                   })
                 }
-                className={` ${
+                className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
                 } hover:bg-[#E9E1FF] pl-4 pr-1 gap-x-4 items-center rounded-md cursor-pointer xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px),minmax(100px,_100px)_minmax(200px,_2fr)_minmax(200px,_2fr)_minmax(300px,_4fr)_minmax(120px,_120px)] mlg:grid-cols-[minmax(50px,_50px),minmax(80px,_80px)_minmax(150px,2fr)_minmax(100px,_3fr)_minmax(100px,_100px)] maxSize:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(150px,3fr)_minmax(150px,3fr)_minmax(100px,_4fr)_minmax(100px,_100px)] border-t border-t-[#E7EAEE]`}
               >

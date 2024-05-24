@@ -7,7 +7,7 @@ const TableLayout = ({ children }: detailScreenCardsLayout) => {
 
   return (
     <div className="overflow-x-hidden">
-      <p className="text-[16px] mlg:hidden block mb-5">
+      <p className="text-base mlg:hidden block mb-5">
         <span className="text-red-600 font-bold">
           {translate("common.note")}:{" "}
         </span>

@@ -39,8 +39,8 @@ const DeleteConfirmation_1 = ({
           alt="delete_icon"
           className="mt-[66px]"
         />
-        <p className="text-[#000] font-medium text-xl my-2">{modelHeading}</p>
-        <p className="text-[#4D4D4D] font-normal text-sm ">{subHeading}</p>
+        <p className="font-medium text-xl my-2">{modelHeading}</p>
+        <p className="text-[#4D4D4D] font-normal text-sm">{subHeading}</p>
         <div className="mt-[10px] w-[260px] p-4 rounded-lg border border-[#EBEBEB] text-[#4B4B4B] text-base font-medium">
           ID: &nbsp; {data?.refId}
         </div>
