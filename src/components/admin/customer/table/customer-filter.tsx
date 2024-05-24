@@ -121,8 +121,8 @@ export default function CustomerFilter({
   };
 
   return (
-    <div className="flex space-x-4">
-      <div className="flex gap-x-4 xl:w-fit">
+    <div className="flex flex-col mlg:flex-row gap-4">
+      <div className="flex items-center gap-x-4 xl:w-fit">
         {checkbox.map((item, idx) => (
           <CheckField
             key={idx}
@@ -137,32 +137,37 @@ export default function CustomerFilter({
           />
         ))}
       </div>
-      <InputField
-        handleChange={(value) => {}}
-        ref={inputRef}
-        // value={filter?.text || ""}
-        iconDisplay={true}
-        onEnterPress={onEnterPress}
-        options={[]}
-      />
-      <SelectField
-        handleChange={(value) => hanldeSortChange(value)}
-        value={filter?.sort || ""}
-        dropDownIconClassName=""
-        options={[
-          { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },
-          {
-            label: `${translate("filters.sort_by.latest")}`,
-            value: "-createdAt",
-          },
-          {
-            label: `${translate("filters.sort_by.oldest")}`,
-            value: "createdAt",
-          },
-          { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
-        ]}
-        label={translate("common.sort_button")}
-      />
+      <div className="flex items-center gap-x-4">
+        <InputField
+          handleChange={(value) => {}}
+          ref={inputRef}
+          // value={filter?.text || ""}
+          iconDisplay={true}
+          onEnterPress={onEnterPress}
+          options={[]}
+        />
+        <SelectField
+          handleChange={(value) => hanldeSortChange(value)}
+          value={filter?.sort || ""}
+          dropDownIconClassName=""
+          options={[
+            {
+              label: `${translate("filters.sort_by.date")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.latest")}`,
+              value: "-createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.oldest")}`,
+              value: "createdAt",
+            },
+            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+          ]}
+          label={translate("common.sort_button")}
+        />
+      </div>
       {/* <CustomerFilters
         filter={filter}
         setFilter={setFilter}

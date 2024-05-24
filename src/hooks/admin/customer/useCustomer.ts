@@ -1,24 +1,20 @@
 import {
   readCompany,
   setCompanyDetails,
+  updateCompanyStatus,
 } from "@/api/slices/company/companySlice";
-import {
-  readCustomer,
-  setCustomerDetails,
-} from "@/api/slices/customer/customerSlice";
+import { updateModalType } from "@/api/slices/globalSlice/global";
 import { FiltersDefaultValues } from "@/enums/static";
+import { ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { FilterType } from "@/types";
 import { CustomersAdmin } from "@/types/admin/customer";
-import { Company } from "@/types/company";
-import { Customers } from "@/types/customer";
-import { DEFAULT_CUSTOMER } from "@/utils/static";
+import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
 import { useEffect, useState } from "react";
 
 export default function useCustomer() {
-  const { company, lastPage, totalCount, loading } = useAppSelector(
-    (state) => state.company
-  );
+  const { company, lastPage, totalCount, loading, companyDetails } =
+    useAppSelector((state) => state.company);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [filter, setFilter] = useState<FilterType>({
@@ -37,7 +33,9 @@ export default function useCustomer() {
   useEffect(() => {
     dispatch(setCompanyDetails(DEFAULT_CUSTOMER));
     dispatch(
-      readCompany({ params: { filter: { ...filter, "role": "1" }, page: 1, size: 10 } })
+      readCompany({
+        params: { filter: { ...filter, role: "1" }, page: 1, size: 10 },
+      })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);
@@ -48,7 +46,9 @@ export default function useCustomer() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     dispatch(
-      readCompany({ params: { filter: { ...filter, "role": "1" }, page: page, size: 10 } })
+      readCompany({
+        params: { filter: { ...filter, role: "1" }, page: page, size: 10 },
+      })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);
@@ -57,13 +57,28 @@ export default function useCustomer() {
   };
   const handleFilterChange = (query: FilterType) => {
     dispatch(
-      readCompany({ params: { filter: { ...query, "role": "1" }, page: 1, size: 10 } })
+      readCompany({
+        params: { filter: { ...query, role: "1" }, page: 1, size: 10 },
+      })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.User);
       }
     });
   };
+
+  const handleStatusChange = async (value: string) => {
+    const res = await dispatch(
+      updateCompanyStatus({
+        data: {
+          id: companyDetails?.id,
+          status: staticEnums["User"]["accountStatus"][value],
+        },
+      })
+    );
+    if (res?.payload) dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   return {
     currentPageRows,
     totalItems,
@@ -73,7 +88,7 @@ export default function useCustomer() {
     setFilter,
     handleFilterChange,
     loading,
-    currentPage
-
+    currentPage,
+    handleStatusChange,
   };
 }

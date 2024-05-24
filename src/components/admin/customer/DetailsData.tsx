@@ -1,7 +1,7 @@
 import { CustomersAdmin } from "@/types/admin/customer";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { DropDownItem } from "@/types";
 import { formatDateTimeToDate } from "@/utils/utility";
@@ -73,14 +73,64 @@ const DetailsData = ({
             {translate("admin.customers_details.card_content.main_heading")}
           </h1>
         </div>
-        {/* <button
+        <button
           onClick={handleAreYouSure}
           className="flex items-center rounded-lg border border-[#C7C7C7] px-4 py-[11px] text-[#4B4B4B] font-medium gap-3"
         >
           {!isCustomerFree ? (
-            <Image src={unCheckedIcon} alt="unCheckedIcon" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <g clipPath="url(#clip0_1225_39586)">
+                <path
+                  d="M16.3104 0.874512H3.31461C1.65918 0.874512 0.3125 2.22119 0.3125 3.87662V16.8724C0.3125 18.5278 1.65918 19.8745 3.31461 19.8745H16.3104C17.9658 19.8745 19.3125 18.5278 19.3125 16.8724V3.87662C19.3125 2.22119 17.9658 0.874512 16.3104 0.874512ZM17.3111 16.8724C17.3111 17.4241 16.8621 17.8731 16.3104 17.8731H3.31461C2.76287 17.8731 2.31399 17.4241 2.31399 16.8724V3.87662C2.31399 3.32488 2.76292 2.876 3.31461 2.876H16.3104C16.8621 2.876 17.311 3.32493 17.311 3.87662V16.8724H17.3111Z"
+                  fill="#4A13E7"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1225_39586">
+                  <rect
+                    width="19"
+                    height="19"
+                    fill="white"
+                    transform="translate(0.3125 0.874512)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
           ) : (
-            <Image src={checkedIcon} alt="CheckedIcon" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <g clipPath="url(#clip0_1231_58187)">
+                <path
+                  d="M16.8563 0.117188H3.8605C2.20508 0.117188 0.858398 1.46387 0.858398 3.11929V16.1151C0.858398 17.7705 2.20508 19.1172 3.8605 19.1172H16.8563C18.5117 19.1172 19.8584 17.7705 19.8584 16.1151V3.11929C19.8584 1.46387 18.5117 0.117188 16.8563 0.117188ZM17.857 16.1151C17.857 16.6668 17.408 17.1157 16.8563 17.1157H3.8605C3.30877 17.1157 2.85989 16.6668 2.85989 16.1151V3.11929C2.85989 2.56755 3.30882 2.11868 3.8605 2.11868H16.8563C17.408 2.11868 17.8569 2.56761 17.8569 3.11929V16.1151H17.857Z"
+                  fill="#4A13E7"
+                />
+                <path
+                  d="M14.7096 5.53857C14.3698 5.53857 14.0504 5.67096 13.8101 5.91135L9.1035 10.6256L7.84906 9.3713C7.60889 9.13107 7.28956 8.99874 6.94989 8.99874C6.61017 8.99874 6.29083 9.13107 6.05061 9.37124C5.81045 9.61141 5.67822 9.93074 5.67822 10.2704C5.67822 10.6101 5.81045 10.9294 6.05061 11.1695L8.2045 13.3234C8.44467 13.5636 8.764 13.696 9.10372 13.696C9.44328 13.696 9.76272 13.5636 10.0032 13.3232L15.6088 7.70952C16.1045 7.21363 16.1044 6.40685 15.6088 5.91096C15.3686 5.67085 15.0492 5.53857 14.7096 5.53857Z"
+                  fill="#4A13E7"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1231_58187">
+                  <rect
+                    width="19"
+                    height="19"
+                    fill="white"
+                    transform="translate(0.858398 0.117188)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
           )}
           {isCustomerFree
             ? `${translate(
@@ -89,11 +139,11 @@ const DetailsData = ({
             : `${translate(
                 "admin.customers_details.card_content.make_button_unchecked"
               )}`}
-        </button> */}
+        </button>
       </div>
 
       <div className="border-t border-t-[#000] border-opacity-10 pt-5">
-        <div className="grid grid-cols-1 lg:grid-cols-2 xMaxSize:grid-cols-[minmax(200px,_200px)_minmax(200px,_200px)_minmax(200px,_300px)_minmax(200px,_200px)_minmax(250px,_100%)] gap-y-2">
+        <div className="grid gap-x-5 grid-cols-2 xLarge:grid-cols-[minmax(150px,_150px)_minmax(170px,_170px)_minmax(200px,_200px)_minmax(150px,_100%)_minmax(200px,_100%)] gap-y-2">
           <div className="flex items-center gap-x-3">
             <span className="text-[#4D4D4D] ">
               {translate("admin.customers_details.card_content.customer_id")}:
@@ -138,7 +188,6 @@ const DetailsData = ({
               )}
               :
             </span>
-
             <span className="text-[#4B4B4B] font-medium">
               {formatDateTimeToDate(customerDetail?.plan?.createdAt)}
             </span>
@@ -156,7 +205,7 @@ const DetailsData = ({
                 handleStatusChange(selectedItem)
               }
               selectedItem={customerDetail?.status}
-              dropDownClassName="min-w-[108.445px] w-fit border border-primary justify-between"
+              dropDownClassName="min-w-[108.445px] w-fit border border-primary justify-between py-1"
               dropDownTextClassName="text-primary font-medium"
               dropDownIconClassName="text-primary"
               dropDownItemsContainerClassName="border border-primary w-fit"
@@ -171,8 +220,8 @@ const DetailsData = ({
             <Image
               src={customerDetail?.company?.logo || userIcon}
               alt="company logo"
-              height={40}
-              width={100}
+              height={50}
+              width={50}
             />
           </div>
         </div>

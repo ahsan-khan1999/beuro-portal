@@ -361,6 +361,14 @@ export type GenerateGeneralNotesFormField = (
   onClick?: Function
 ) => FormField[];
 
+export type GenerateEnterCompanyNameFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick?: Function,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
 export type GenerateUpdateNoteFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

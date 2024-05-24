@@ -1166,6 +1166,8 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "yes_button": "Yes",
+    "enter_company": "Enter Company Name",
     "note_title": "Note title",
     "title": "Title",
     "created_by": "Created by",
@@ -1634,7 +1636,7 @@
       },
       "card_content": {
         "main_heading": "Customer Details",
-        "make_button_unchecked": "Make Infinite Free",
+        "make_button_unchecked": "Make Account Free",
         "make_button_checked": "Make Infinite",
         "customer_id": "Customer ID",
         "role": "Role",
@@ -1645,7 +1647,8 @@
         "company_logo": "Company Logo",
         "customer_status": {
           "active": "Active",
-          "block": "Block"
+          "block": "Block",
+          "unBlock": "Un Block"
         },
         "customer_free": "Your customer is now totally free."
       },

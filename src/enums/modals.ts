@@ -29,6 +29,10 @@ export enum AddGeneralAddressField {
   addresses = "addresses",
 }
 
+export enum EnterComponayNameField {
+  companyName = "companyName",
+}
+
 // Edit payment details
 export enum EditPaymentDetails {
   nameOnCard = "nameOnCard",

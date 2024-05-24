@@ -1,6 +1,11 @@
-import { readCompanyDetail, setCompanyDetails, updateCompanyStatus } from "@/api/slices/company/companySlice";
+import {
+  readCompanyDetail,
+  setCompanyDetails,
+  updateCompanyStatus,
+} from "@/api/slices/company/companySlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { AreYouSureMakeAccountFree } from "@/base-components/ui/modals1/SueAccountFree";
 import WarningModal from "@/base-components/ui/modals1/WarningModal";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
@@ -13,11 +18,9 @@ import { useEffect, useState } from "react";
 export default function useCustomerDetailAdmin() {
   const [isCustomerFree, setIsCustomerFree] = useState(false);
   const router = useRouter();
-  const { companyDetails, loading } = useAppSelector(state => state.company)
+  const { companyDetails, loading } = useAppSelector((state) => state.company);
 
-  const {
-    modal,
-  } = useAppSelector((state) => state.global);
+  const { modal } = useAppSelector((state) => state.global);
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
 
@@ -47,7 +50,7 @@ export default function useCustomerDetailAdmin() {
   };
 
   const handleAreYouSure = () => {
-    !isCustomerFree && dispatch(updateModalType({ type: ModalType.ARE_YOU_SURE_CUSTOMER }));
+    dispatch(updateModalType({ type: ModalType.ARE_YOU_SURE_CUSTOMER }));
   };
 
   const handleCreated = () => {
@@ -55,6 +58,12 @@ export default function useCustomerDetailAdmin() {
     setIsCustomerFree(true);
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
+  const handleMakeAccountFree = () => {
+    !isCustomerFree &&
+      dispatch(updateModalType({ type: ModalType.ARE_YOU_COMPANY }));
+  };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -63,23 +72,36 @@ export default function useCustomerDetailAdmin() {
     [ModalType.ARE_YOU_SURE_CUSTOMER]: (
       <WarningModal handleCreated={handleCreated} onClose={onClose} />
     ),
+    [ModalType.ARE_YOU_COMPANY]: (
+      <AreYouSureMakeAccountFree
+        onClose={onClose}
+        onSuccess={handleAreYouSure}
+        heading={translate("common.are_you_sure_modal.title")}
+        sub_heading={translate("common.are_you_sure_modal.sub_heading")}
+      />
+    ),
     [ModalType.CREATION]: (
       <CreationCreated
         heading={translate("common.are_you_sure_modal.success")}
-        subHeading={translate(
-          "common.modals.update_success"
-        )}
+        subHeading={translate("common.are_you_sure_modal.success_heading")}
         onClose={onClose}
         route={route}
       />
     ),
   };
-  const handleStatusChange = async (value: string) => {
-    const res = await dispatch(updateCompanyStatus({ data: { id: companyDetails?.id, status: staticEnums["User"]["accountStatus"][value] } }))
-    if (res?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
 
-  }
+  const handleStatusChange = async (value: string) => {
+    const res = await dispatch(
+      updateCompanyStatus({
+        data: {
+          id: companyDetails?.id,
+          status: staticEnums["User"]["accountStatus"][value],
+        },
+      })
+    );
+    if (res?.payload) dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   return {
     companyDetails,
     isCustomerFree,
@@ -92,6 +114,7 @@ export default function useCustomerDetailAdmin() {
     route,
     renderModal,
     handleStatusChange,
-    loading
+    loading,
+    handleMakeAccountFree,
   };
 }
