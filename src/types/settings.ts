@@ -107,6 +107,14 @@ export interface FollowUp {
   isCreateFollowUpOnLeadCreation: false;
 }
 
+export interface GeneralAddress {
+  id: string;
+  createdBy: string;
+  company: string;
+  addresses: string[];
+  createdAt: string;
+}
+
 export interface FollowUpProp {
   isCreateFollowUpOnLeadCreation: FolowUpTypeProps;
   isCreateFollowUpOnOfferExpire: FolowUpTypeProps;

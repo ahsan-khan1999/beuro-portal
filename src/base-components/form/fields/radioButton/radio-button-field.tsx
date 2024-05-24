@@ -1,6 +1,6 @@
+import React from "react";
 import { RadioButtonProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
-import React from "react";
 
 export const RadioButtonField = ({
   id,

@@ -6,7 +6,6 @@ import { ProductItem } from "./product-item";
 import { ProcutItemHeader } from "./product-item-header";
 import { ProductItemFooter } from "./product-item-footer";
 import { PurchasedItemsDetailsProps } from "@/types/types";
-import { ProductDiscountItem } from "./product--discount-item";
 import { useTranslation } from "next-i18next";
 
 export const ProductPurchasedItemsDetails = ({
@@ -48,6 +47,7 @@ export const ProductPurchasedItemsDetails = ({
     Number(serviceItemFooter?.serviceDiscountSum) > 0
       ? true
       : false || false;
+
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
   return (
@@ -78,14 +78,14 @@ export const ProductPurchasedItemsDetails = ({
             }
           />
         ))}
-        {(isDiscount || serviceItemFooter?.isDiscount) && (
+        {/* {(isDiscount || serviceItemFooter?.isDiscount) && (
           <ProductDiscountItem
             {...disscountTableRow}
             key={Math.random()}
             pagebreak={true}
             isDiscount={isDiscount}
           />
-        )}
+        )} */}
 
         {isShowTotal && (
           <ProductItemFooter

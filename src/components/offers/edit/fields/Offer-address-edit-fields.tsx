@@ -87,8 +87,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
         id: "description",
         name: "description",
         rows: 2,
-        placeholder:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+        placeholder: "",
         register,
       },
     },
@@ -173,8 +172,7 @@ export const OfferAddressDetailsFormField: GenerateOffersFormField = (
         id: "description",
         rows: 2,
         name: "description",
-        placeholder:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+        placeholder: "",
         register,
       },
     },

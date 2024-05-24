@@ -35,6 +35,7 @@ export const MainInvoicePdfDetail = () => {
     onClose,
     onSuccess,
     invoiceDetails,
+  
   } = useMainInvoicePdf();
 
   const MODAL_CONFIG: ModalConfigType = {

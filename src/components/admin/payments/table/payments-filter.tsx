@@ -30,13 +30,23 @@ export default function PaymentsFilter({
           />
         </svg>
       </button>
-      <InputField handleChange={(value) => console.log(value)} value="" options={[]}/>
+      <InputField
+        handleChange={(value) => console.log(value)}
+        value=""
+        options={[]}
+        iconDisplay={true}
+      />
       <SelectField
         handleChange={(value) => console.log(value)}
         value=""
         dropDownIconClassName=""
-
-        options={[{ label: "1", value: "1" }, { label: "2", value: "2" }, { label: "2", value: "2" }, { label: "2", value: "2" }, { label: "2", value: "2" }]}
+        options={[
+          { label: "1", value: "1" },
+          { label: "2", value: "2" },
+          { label: "2", value: "2" },
+          { label: "2", value: "2" },
+          { label: "2", value: "2" },
+        ]}
         label="Sort By"
       />
     </div>

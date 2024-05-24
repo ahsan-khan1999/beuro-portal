@@ -41,6 +41,7 @@ const SERVICE_URLS = {
   updateContract: "/contract/",
   company: "/company",
   invoice: "/invoice",
+  downloadInvoiceRoute: "/invoice/download-excel",
   mainInvoice: "/invoice/invoice-step/",
 
   contactSupport: "/contactSupport",
@@ -83,6 +84,8 @@ const SERVICE_URLS = {
   systemSetting: "/setting/system-setting/",
   templates: "/setting/template",
   tax: "/setting/tax",
+  addressSetting: "/setting/address-setting",
+  notesSetting: "/setting/notes-setting",
   followUp: "/setting/follow-up-setting",
   mail: "/mailtracker",
   offerSendEmail: "/offer/send-email/",
@@ -192,7 +195,6 @@ const profileNotification = (data) =>
   });
 
 // new Req method
-
 const readCustomer = (params) =>
   get(
     SERVICE_URLS.customer,
@@ -391,6 +393,14 @@ const deleteContract = (data) =>
 const readInvoice = (params) =>
   get(
     SERVICE_URLS.invoice,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const downloadInvoice = (params) =>
+  get(
+    SERVICE_URLS.downloadInvoiceRoute,
     params,
     { feature: featureConstants.login },
     { detail: false }
@@ -670,6 +680,7 @@ const getTemplateSettings = (params) =>
   );
 const updateTemplateSettings = (params) =>
   put(SERVICE_URLS.templates, params, { feature: featureConstants.login });
+
 const getFollowUpSettings = (params) =>
   get(
     SERVICE_URLS.followUp,
@@ -708,6 +719,49 @@ const readTaxSettings = (params) =>
   );
 const createTaxSettings = (params) =>
   post(SERVICE_URLS.tax, params, { feature: featureConstants.login });
+
+// read addresses
+const getAddressSettings = (params) =>
+  get(
+    SERVICE_URLS.addressSetting,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+// update address
+const updateAddressSettings = (params) =>
+  post(SERVICE_URLS.addressSetting, params, {
+    feature: featureConstants.login,
+  });
+
+// notes setting
+const createNotesSettings = (params) =>
+  post(SERVICE_URLS.notesSetting, params, {
+    feature: featureConstants.login,
+  });
+
+// read notes
+const readNotesSettings = (params) =>
+  get(
+    SERVICE_URLS.notesSetting,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+// update notes
+const updateNotesSettings = (data) =>
+  put(SERVICE_URLS.notesSetting + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+// delete notes
+const deleteNotesSettings = (data) =>
+  del(SERVICE_URLS.notesSetting + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
 const readMailSettings = (params) =>
   get(
     SERVICE_URLS.emailSettings,
@@ -1108,5 +1162,12 @@ const apiServices = {
   updateMainInvoice,
   readMainQRCode,
   updateContractDetails,
+  downloadInvoice,
+  getAddressSettings,
+  updateAddressSettings,
+  createNotesSettings,
+  readNotesSettings,
+  updateNotesSettings,
+  deleteNotesSettings,
 };
 export default apiServices;

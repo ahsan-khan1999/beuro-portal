@@ -5,8 +5,12 @@ import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { PrintIcon } from "@/assets/svgs/components/print-icon";
 
-export const InvoiceEmailHeader = ({ onDownload }: InvoiceEmailHeaderProps) => {
+export const InvoiceEmailHeader = ({
+  onDownload,
+  onPrint,
+}: InvoiceEmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { invoiceDetails } = useAppSelector((state) => state.invoice);
@@ -15,7 +19,7 @@ export const InvoiceEmailHeader = ({ onDownload }: InvoiceEmailHeaderProps) => {
 
   return (
     <div className="rounded-md bg-white py-[20px] px-[20px] w-full h-fit">
-      <div className="flex flex-col xlgg:flex-row xlgg:justify-between xlgg:items-center border-b border-[#000] border-opacity-10 pb-5 gap-y-5">
+      <div className="flex justify-between items-center border-b border-[#000] border-opacity-10 pb-5 gap-y-5">
         <button
           onClick={() => {
             router.push({
@@ -75,51 +79,52 @@ export const InvoiceEmailHeader = ({ onDownload }: InvoiceEmailHeaderProps) => {
           >
             <EmailIcon className="text-primary group-hover:text-primary" />
           </BaseButton> */}
-        <DownloadIcon onClick={onDownload} />
+        <div className="flex items-center gap-x-5">
+          <PrintIcon onClick={onPrint} />
+          <DownloadIcon onClick={onDownload} />
+        </div>
+
         {/* </div> */}
       </div>
       <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
-        <div className="flex justify-between">
-          <div>
-            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
-              {translate("invoice.card_content.invoice_number")}:
-            </span>
-            <span className="text-base font-medium text-[#4B4B4B]">
-              {invoiceDetails?.invoiceNumber}
-            </span>
-          </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D] break-all">
-              {translate("invoice.table_headings.title")}:
-            </span>
-
-            <span className="text-base font-medium text-[#4B4B4B] flex">
-              {invoiceDetails?.title}
-            </span>
-          </div>
+        <div className="flex items-center gap-[10px]">
+          <span className="text-base font-normal text-[#4D4D4D] min-w-[130px]">
+            {translate("invoice.card_content.invoice_number")}:
+          </span>
+          <span className="text-base font-medium text-primary">
+            {invoiceDetails?.invoiceNumber}
+          </span>
         </div>
-        <div className="flex justify-between items-center">
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
-              {translate("invoice.table_headings.status")}
-            </span>
+        <div className="flex items-center gap-[10px]">
+          <span className="text-base font-normal text-[#4D4D4D] min-w-[100px]">
+            {translate("invoice.table_headings.title")}:
+          </span>
 
-            {invoiceDetails?.invoiceStatus && (
-              <span
-                className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4  `}
-              >
-                {translate(`invoice_status.${invoiceDetails?.invoiceStatus}`)}
-              </span>
-            )}
-          </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[4D4D4D]">
-              {translate("invoice.card_content.worker")}:
+          <span className="text-base font-medium text-[#4B4B4B] truncate">
+            {invoiceDetails?.title}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-[10px]">
+          <span className="text-base font-normal text-[4D4D4D]">
+            {translate("invoice.table_headings.status")}
+          </span>
+
+          {invoiceDetails?.invoiceStatus && (
+            <span
+              className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
+            >
+              {translate(`invoice_status.${invoiceDetails?.invoiceStatus}`)}
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">
-              {invoiceDetails?.createdBy?.fullName}
-            </span>
-          </div>
+          )}
+        </div>
+        <div className="flex items-center gap-[10px]">
+          <span className="text-base font-normal text-[4D4D4D]">
+            {translate("invoice.card_content.worker")}:
+          </span>
+          <span className="text-base font-medium text-[#4B4B4B]">
+            {invoiceDetails?.createdBy?.fullName}
+          </span>
         </div>
       </div>
     </div>

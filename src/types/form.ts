@@ -65,6 +65,7 @@ export interface ColorPickerProps extends BaseFieldProps<Field.colorPicker> {
 export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
   register: UseFormRegister<FieldValues>;
   rows?: number;
+  maxLength?: number;
   value?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -121,7 +122,7 @@ export interface OptionType {
 export interface SelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
   options: OptionType[];
-  value: string;
+  value?: string;
   svg?: string;
   onItemChange?: (id: string, index?: number) => void;
   trigger?: UseFormTrigger<FieldValues>;

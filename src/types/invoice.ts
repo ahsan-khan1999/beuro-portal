@@ -11,6 +11,7 @@ import { ComponentsType } from "@/enums/invoice";
 // Inovice table layout
 export interface InvoiceTableRowTypes {
   id: string;
+  date: DateRangeProps[];
   invoiceNumber: string;
   paidAmount: string;
   remainingAmount: string;

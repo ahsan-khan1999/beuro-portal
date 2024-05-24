@@ -4,11 +4,11 @@ export const ProcutItemHeader = ({ isDiscount }: { isDiscount?: boolean }) => {
   const { t: translation } = useTranslation();
   return (
     <div className="bg-[#40506A] py-[8px] rounded-[4px] mb-3 pl-3">
-      <div className="grid grid-cols-3 items-center ">
-        <span className="col-span-1 text-white text-sm font-medium mr-1">
+      <div className="grid grid-cols-3 items-center">
+        <span className="col-span-1 text-white text-sm font-medium">
           {translation("pdf.service")}
         </span>
-        <span className="col-span-1 text-white text-sm font-medium mr-1">
+        <span className="col-span-1 text-white text-sm font-medium">
           {translation("pdf.description")}
         </span>
         <div className="col-span-1 flex space-x-2 items-center pr-[46px] w-full">

@@ -26,17 +26,10 @@ export enum ComponentsType {
 
 const AddNewLeadsData = () => {
   const { leadDetails } = useAppSelector((state) => state.lead);
-  const { images } = useAppSelector((state) => state.image);
 
   const [tabType, setTabType] = useState<ComponentsType>(
     (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
   );
-
-  useEffect(() => {
-    setTabType(
-      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
-    );
-  }, [leadDetails?.id]);
 
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -112,6 +105,7 @@ const AddNewLeadsData = () => {
     router.pathname = "/leads";
     router.query = { status: "None" };
     updateQuery(router, router.locale as string);
+    dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const leadCreatedHandler = () => {
@@ -125,10 +119,10 @@ const AddNewLeadsData = () => {
   };
 
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
     router.pathname = "/leads";
     router.query = { status: "None" };
     updateQuery(router, router.locale as string);
+    dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -138,6 +132,7 @@ const AddNewLeadsData = () => {
         onClose={onClose}
         routeHandler={routeHandler}
         heading={translate("leads.leads_created_modal.main_heading")}
+        subHeading={translate("common.modals.lead_created_des")}
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (
@@ -150,7 +145,7 @@ const AddNewLeadsData = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.lead_created_des")}
         route={onClose}
       />
     ),
@@ -195,6 +190,12 @@ const AddNewLeadsData = () => {
       />
     ),
   };
+
+  useEffect(() => {
+    setTabType(
+      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
+    );
+  }, [leadDetails?.id]);
 
   return (
     <div className="h-full">

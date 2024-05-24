@@ -59,10 +59,6 @@ const ContentDetailsData = () => {
 
   const [renderComponent, setRenderComponent] = useState(componentArray);
 
-  useEffect(() => {
-    setRenderComponent(componentArray);
-  }, [contentDetails]);
-
   const lookup = {
     [ComponentsType.offerContent]: (
       <OfferContentDetailsData
@@ -113,16 +109,6 @@ const ContentDetailsData = () => {
       />
     ),
   };
-
-  useEffect(() => {
-    setRenderComponent((prev) => {
-      const updatedData = [...prev];
-      if (data) {
-        updatedData[data.index] = lookup[data.component];
-      }
-      return updatedData;
-    });
-  }, [data]);
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -196,6 +182,20 @@ const ContentDetailsData = () => {
       window.scrollTo({ behavior: "smooth", top: 1950 });
     }
   };
+
+  useEffect(() => {
+    setRenderComponent(componentArray);
+  }, [contentDetails]);
+
+  useEffect(() => {
+    setRenderComponent((prev) => {
+      const updatedData = [...prev];
+      if (data) {
+        updatedData[data.index] = lookup[data.component];
+      }
+      return updatedData;
+    });
+  }, [data]);
 
   return (
     <>

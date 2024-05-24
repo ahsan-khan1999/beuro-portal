@@ -55,50 +55,58 @@ const OfferPdfPriview = () => {
       />
     ),
   };
+
+  
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
   return (
     <>
-      {loading ? (
+      {/* {loading ? (
         <LoadingState />
-      ) : (
-        <div>
-          <EmailCard
-            emailStatus={offerDetails?.emailStatus}
-            offerNo={offerData?.emailHeader?.offerNo}
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onDownload={handleDonwload}
-            onPrint={handlePrint}
-            handleSendByPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-            offerId={offerData?.id}
-          />
+      ) : ( */}
+      <div>
+        <EmailCard
+          emailStatus={offerDetails?.emailStatus}
+          offerNo={offerData?.emailHeader?.offerNo}
+          onEmailSend={handleEmailSend}
+          loading={loading}
+          onDownload={handleDonwload}
+          onPrint={handlePrint}
+          handleSendByPost={handleSendByPost}
+          activeButtonId={activeButtonId}
+          offerId={offerData?.id}
+        />
 
-          <OfferPdf
-            data={offerData}
-            emailTemplateSettings={emailTemplateSettings}
-            templateSettings={templateSettings}
-            systemSetting={systemSetting}
-            showContractSign={true}
-            pdfFile={pdfFile}
-            setPdfFile={setPdfFile}
-          />
-          <OfferPdfDownload
-            data={offerData}
-            templateSettings={templateSettings}
-            emailTemplateSettings={emailTemplateSettings}
-            pdfFile={pdfFile}
-            setPdfFile={setPdfFile}
-            systemSetting={systemSetting}
-            showContractSign={true}
-          />
+        {loading ? (
+          <LoadingState />
+        ) : (
+          <div className="mt-5">
+            <OfferPdf
+              data={offerData}
+              emailTemplateSettings={emailTemplateSettings}
+              templateSettings={templateSettings}
+              systemSetting={systemSetting}
+              showContractSign={true}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+            />
+            <OfferPdfDownload
+              data={offerData}
+              templateSettings={templateSettings}
+              emailTemplateSettings={emailTemplateSettings}
+              pdfFile={pdfFile}
+              setPdfFile={setPdfFile}
+              systemSetting={systemSetting}
+              showContractSign={true}
+            />
+          </div>
+        )}
 
-          {renderModal()}
-        </div>
-      )}
+        {renderModal()}
+      </div>
+      {/* )} */}
     </>
   );
 };

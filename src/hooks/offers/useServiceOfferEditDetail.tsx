@@ -43,12 +43,12 @@ export const useServiceOfferEditDetail = ({
     taxAmount: 0,
   });
 
-  const { systemSettings } = useAppSelector((state) => state.settings);
-
   const dispatch = useAppDispatch();
+  const { systemSettings } = useAppSelector((state) => state.settings);
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
   const [serviceType, setServiceType] = useState<ServiceType[]>(
     offerDetails?.serviceDetail?.serviceDetail?.map((item) =>
       item.serviceType === "New Service"
@@ -56,6 +56,7 @@ export const useServiceOfferEditDetail = ({
         : ServiceType.EXISTING_SERVICE
     ) || [ServiceType.EXISTING_SERVICE]
   );
+
   const { service, serviceDetails } = useAppSelector((state) => state.service);
   const { tax } = useAppSelector((state) => state.settings);
 

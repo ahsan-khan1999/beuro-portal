@@ -1,10 +1,6 @@
-import { AdditionalDetailsProps } from "@/types/pdf";
-import { replaceClassesWithInlineStyles } from "@/utils/utility";
-import { Text, View, StyleSheet, Image, Font } from "@react-pdf/renderer";
-import { useRouter } from "next/router";
-import { useState, useMemo } from "react";
-
+import { View, StyleSheet } from "@react-pdf/renderer";
 import Html, { HtmlStyles } from "react-pdf-html";
+import { transformHtmlToPdf } from "./convert-tags-react-pdf-components";
 
 const styles = StyleSheet.create({
   borderDiv: {
@@ -12,7 +8,7 @@ const styles = StyleSheet.create({
     // borderTopColor: "#000",
     marginLeft: 20,
     marginRight: 20,
-    paddingTop: 15,
+    // paddingTop: 15,
   },
   container: {
     fontFamily: "Poppins",
@@ -78,6 +74,7 @@ const stylesheet: HtmlStyles = {
     // fontSize: 7,
     color: "#272727",
   },
+
   h1: {
     margin: 0,
     padding: 0,
@@ -110,11 +107,11 @@ const stylesheet: HtmlStyles = {
   },
   ul: { marginLeft: 0, marginTop: 6 },
   li: {
-    fontSize: 7,
+    // fontSize: 7,
     marginLeft: 0,
     marginRight: 10,
     marginTop: 0,
-
+    marginBottom: 0,
     listStyle: "outside",
   },
   blockquote: {
@@ -157,16 +154,23 @@ export const AdditionalDetails = ({
 
   // useMemo(() => signature && onFileChange(), [signature]);
 
+  // console.log(transformHtmlToPdf(description ?? ''));
+  const content = transformHtmlToPdf(description ?? "");
+  //  const content = convertHtmlToPdf(description ?? '');
+
+  // const content = parseHTML(description ?? '');
+
   return (
     <View style={styles.borderDiv}>
-      <View style={styles.container}>
-        <Html
+      <View>
+        {/* <Html
           resetStyles={false}
           stylesheet={stylesheet}
           style={{ fontFamily: "Poppins" }}
         >
-          {description ?? ""}
-        </Html>
+          {replaceFontSizes(description ?? "")}
+        </Html> */}
+        {content}
       </View>
     </View>
   );

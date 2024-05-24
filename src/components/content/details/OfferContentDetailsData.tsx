@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "./ContentDetailsData";
@@ -97,11 +97,17 @@ const OfferContentDetailsData = ({
             <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
-            <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-              {contentDetail?.offerContent?.attachments.map((item, index) => (
-                <AttachmentsFiles fileName={item} key={index} />
-              ))}
-            </div>
+            {contentDetail?.offerContent?.attachments.length > 0 ? (
+              <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
+                {contentDetail?.offerContent?.attachments.map((item, index) => (
+                  <AttachmentsFiles fileName={item} key={index} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-xl font-medium text-primary">
+                {translate("common.no_attachments")}
+              </p>
+            )}
           </div>
         </div>
       </div>

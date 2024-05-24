@@ -8,6 +8,7 @@ import { EmailIcon } from "@/assets/svgs/components/email-icon";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useAppSelector } from "@/hooks/useRedux";
+import { PrintIcon } from "@/assets/svgs/components/print-icon";
 
 const PdfCard = ({
   contractNo,
@@ -108,7 +109,7 @@ const PdfCard = ({
                   fill="#4A13E7"
                 />
               </svg>
-              <span className=" text-xl font-medium">
+              <span className="text-xl font-medium">
                 {translate("offers.table_headings.edit")}
               </span>
             </div>
@@ -159,56 +160,48 @@ const PdfCard = ({
                 <EmailIcon className="text-primary group-hover:text-primary" />
               </BaseButton>
 
+              <PrintIcon onClick={onPrint} />
               <DownloadIcon onClick={onDownload} />
-              {/* <Image
-              src={printerIcon}
-              alt="printerIcon"
-              className="cursor-pointer"
-              onClick={onPrint}
-            /> */}
             </div>
           </div>
           <div className="grid grid-cols-1 xMaxSize:grid-cols-2 gap-x-6 gap-y-3 mt-5">
-            <div className="flex items-center justify-between">
-              <div className="flex gap-x-2">
-                <span className="text-[#4D4D4D] text-base font-normal">
-                  {translate("contracts.pdf_card_details.contract_id")}:
-                </span>
+            <div className="flex items-center gap-x-2">
+              <span className="text-[#4D4D4D] text-base font-normal min-w-[100px]">
+                {translate("contracts.pdf_card_details.contract_id")}:
+              </span>
 
-                <span className="text-[#4B4B4B] text-base font-medium">
-                  {contractNo}
-                </span>
-              </div>
-              <div className="flex gap-x-2">
-                <span className="text-[#4D4D4D] text-base font-normal">
-                  {translate("contracts.pdf_card_details.worker")}:
-                </span>
-
-                <span className="text-[#4B4B4B] text-base font-medium">
-                  {worker}
-                </span>
-              </div>
+              <span className="text-primary text-base font-medium">
+                {contractNo}
+              </span>
             </div>
-            <div className="flex justify-between items-center">
-              <div className="flex gap-x-2">
-                <span className="text-[#4D4D4D] text-base font-normal">
-                  {translate("contracts.pdf_card_details.content_name")}:
-                </span>
+            <div className="flex items-center gap-x-2">
+              <span className="text-[#4D4D4D] text-base font-normal">
+                {translate("contracts.pdf_card_details.worker")}:
+              </span>
 
-                <p className="text-[#4B4B4B] text-base font-medium xMaxSize:max-w-[200px] truncate">
-                  {contractTitle}
-                </p>
-              </div>
-              <div className="flex items-center gap-x-2">
-                <span className="text-[#4D4D4D] text-base font-normal">
-                  {translate("contracts.pdf_card_details.contract_status")}:
-                </span>
+              <span className="text-[#4B4B4B] text-base font-medium">
+                {worker}
+              </span>
+            </div>
 
-                <div className="border-[#FE9244] border rounded-lg px-[8px] ">
-                  <span className="text-[#FE9244] text-base font-medium">
-                    {translate(`contract_status.${contractStatus}`)}
-                  </span>
-                </div>
+            <div className="flex items-center gap-x-2">
+              <span className="text-[#4D4D4D] text-base font-normal">
+                {translate("contracts.pdf_card_details.content_name")}:
+              </span>
+
+              <p className="text-[#4B4B4B] text-base font-medium truncate">
+                {contractTitle}
+              </p>
+            </div>
+            <div className="flex items-center gap-x-2">
+              <span className="text-[#4D4D4D] text-base font-normal min-w-[130px]">
+                {translate("contracts.pdf_card_details.contract_status")}:
+              </span>
+
+              <div className="border-[#FE9244] border rounded-lg px-[8px]">
+                <span className="text-[#FE9244] text-base font-medium">
+                  {translate(`contract_status.${contractStatus}`)}
+                </span>
               </div>
             </div>
           </div>

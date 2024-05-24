@@ -10,21 +10,12 @@ import contractsIcon from "@/assets/svgs/contracts.svg";
 import salesIcon from "@/assets/svgs/sales.svg";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readDashboard } from "@/api/slices/authSlice/auth";
-import { Dashboard, FilterType } from "@/types";
-import customerIcon from "@/assets/pngs/customers.png";
-import leadsPngIcon from "@/assets/pngs/leads.png";
-import offersPngIcon from "@/assets/pngs/offers.png";
-import invoiceIcon from "@/assets/pngs/invoice.png";
+import { FilterType } from "@/types";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { getCurrentMonth } from "@/utils/utility";
-
-interface ActionType {
-  type: string;
-  payload: Dashboard;
-}
+import { DashboardActionType } from "@/types/dashboard";
 
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
@@ -63,7 +54,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     dispatch(readDashboard({ params: { filter: filter } })).then(
-      (response: ActionType) => {
+      (response: DashboardActionType) => {
         if (response?.payload) {
           setPieData({
             datasets: [

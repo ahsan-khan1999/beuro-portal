@@ -1,4 +1,3 @@
-import { ServiceDetailProps } from "@/types/pdf";
 import { View, Text } from "@react-pdf/renderer";
 import { StyleSheet } from "@react-pdf/renderer";
 
@@ -24,13 +23,15 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
+    marginRight: 20,
   },
   headerDescription: {
     color: "white",
     fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 180,
+    width: 170,
+    marginRight: 20,
   },
   priceHeader: {
     flexDirection: "row",

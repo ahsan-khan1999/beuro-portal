@@ -78,38 +78,42 @@ export default function ContentFilters({
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex flex-col mlg:flex-row mlg:items-center gap-4">
       <InputField
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
-        iconDisplay={false}
+        iconDisplay={true}
         onEnterPress={onEnterPress}
       />
-      <SelectField
-        handleChange={(value) => hanldeSortChange(value)}
-        value={filter?.sort || ""}
-        dropDownIconClassName=""
-        options={[
-          { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },
-          {
-            label: `${translate("filters.sort_by.latest")}`,
-            value: "-createdAt",
-          },
-          {
-            label: `${translate("filters.sort_by.oldest")}`,
-            value: "createdAt",
-          },
-          { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
-        ]}
-        label={translate("common.sort_button")}
-      />
-      <ContentFilter
-        filter={filter}
-        setFilter={setFilter}
-        onFilterChange={handleFilterChange}
-      />
-      {/* <Button
+      <div className="flex items-center gap-x-4">
+        <SelectField
+          handleChange={(value) => hanldeSortChange(value)}
+          value={filter?.sort || ""}
+          dropDownIconClassName=""
+          options={[
+            {
+              label: `${translate("filters.sort_by.date")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.latest")}`,
+              value: "-createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.oldest")}`,
+              value: "createdAt",
+            },
+            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+          ]}
+          label={translate("common.sort_button")}
+        />
+        <ContentFilter
+          filter={filter}
+          setFilter={setFilter}
+          onFilterChange={handleFilterChange}
+        />
+        {/* <Button
         onClick={handleFilterChange}
         className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
         text="Apply"
@@ -118,14 +122,15 @@ export default function ContentFilters({
         name=""
       /> */}
 
-      <Button
-        onClick={() => router.push("/content/add")}
-        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        text={translate("content.add_button")}
-        id="apply"
-        inputType="button"
-        icon={plusIcon}
-      />
+        <Button
+          onClick={() => router.push("/content/add")}
+          className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+          text={translate("content.add_button")}
+          id="apply"
+          inputType="button"
+          icon={plusIcon}
+        />
+      </div>
     </div>
   );
 }

@@ -1,10 +1,8 @@
 import apiServices from "@/services/requestHandler";
 import { Customers } from "@/types/customer";
-import { senitizePhone, setErrors } from "@/utils/utility";
+import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { GlobalApiResponseType } from "@/types/global";
 import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
-import { object } from "yup";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";

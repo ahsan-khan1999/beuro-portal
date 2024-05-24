@@ -16,7 +16,6 @@ import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
 import { AggrementSignature } from "./aggrement-signature";
-import { ServiceTableDiscountRow } from "./service-table-discount";
 
 Font.register({
   family: "Poppins",
@@ -159,14 +158,14 @@ const OfferPdfPreview = ({
                 isDiscount={isDiscount}
               />
             ))}
-            {(isDiscount || serviceItemFooter?.isDiscount) && (
+            {/* {(isDiscount || serviceItemFooter?.isDiscount) && (
               <ServiceTableDiscountRow
                 {...disscountTableRow}
                 key={Math.random()}
                 pagebreak={true}
                 isDiscount={isDiscount}
               />
-            )}
+            )} */}
             <ServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}

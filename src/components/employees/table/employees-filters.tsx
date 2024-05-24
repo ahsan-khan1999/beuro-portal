@@ -99,39 +99,43 @@ export default function EmployeesFilters({
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex flex-col mlg:flex-row mlg:items-center gap-4">
       <InputField
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
-        iconDisplay={false}
+        iconDisplay={true}
         onEnterPress={onEnterPress}
       />
-      <SelectField
-        handleChange={(value) => hanldeSortChange(value)}
-        value={filter?.sort || ""}
-        dropDownIconClassName=""
-        options={[
-          { label: `${translate("filters.sort_by.date")}`, value: "createdAt" },
-          {
-            label: `${translate("filters.sort_by.latest")}`,
-            value: "-createdAt",
-          },
-          {
-            label: `${translate("filters.sort_by.oldest")}`,
-            value: "createdAt",
-          },
-          { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
-        ]}
-        label={translate("common.sort_button")}
-      />
-      <EmployeesFilter
-        filter={filter}
-        setFilter={setFilter}
-        onFilterChange={handleFilterChange}
-      />
+      <div className="flex items-center gap-x-4">
+        <SelectField
+          handleChange={(value) => hanldeSortChange(value)}
+          value={filter?.sort || ""}
+          dropDownIconClassName=""
+          options={[
+            {
+              label: `${translate("filters.sort_by.date")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.latest")}`,
+              value: "-createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.oldest")}`,
+              value: "createdAt",
+            },
+            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+          ]}
+          label={translate("common.sort_button")}
+        />
+        <EmployeesFilter
+          filter={filter}
+          setFilter={setFilter}
+          onFilterChange={handleFilterChange}
+        />
 
-      {/* <Button
+        {/* <Button
         id="apply"
         inputType="button"
         text="Apply"
@@ -139,14 +143,15 @@ export default function EmployeesFilters({
         className="flex items-center gap-x-2 py-2 mr-2 !h-fit px-[10px]  text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
       /> */}
 
-      <Button
-        inputType="button"
-        onClick={() => router.push("/employees/add")}
-        className="flex items-center gap-x-2 py-2 !h-fit px-[10px] text-[13px] font-semibold hover:bg-[#7B18FF] bg-primary text-white rounded-md whitespace-nowrap"
-        icon={addIcon}
-        text={translate("services.add_button")}
-        id="add"
-      />
+        <Button
+          inputType="button"
+          onClick={() => router.push("/employees/add")}
+          className="flex items-center gap-x-2 py-2 !h-fit px-[10px] text-[13px] font-semibold hover:bg-[#7B18FF] bg-primary text-white rounded-md whitespace-nowrap"
+          icon={addIcon}
+          text={translate("services.add_button")}
+          id="add"
+        />
+      </div>
     </div>
   );
 }

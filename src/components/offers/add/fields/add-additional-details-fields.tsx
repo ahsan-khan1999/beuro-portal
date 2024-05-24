@@ -28,7 +28,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "content",
         options:
           content?.map((item) => ({
-            label: item.contentName,
+            label: item.offerContent?.title,
             value: item.id,
           })) || [],
         control,

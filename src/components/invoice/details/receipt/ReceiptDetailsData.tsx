@@ -39,7 +39,7 @@ const ReceiptDetailsData = () => {
               {translate("invoice.receipt_card.receipt_title")}:
             </span>
             <span className="text-base text-[#393939] font-medium">
-              Office Cleaning Munich Lorem Ipsum dollar
+              Office Cleaning
             </span>
           </div>
           <div className="flex gap-[13px]">

@@ -402,15 +402,16 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 }
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY HH:MM");
+  return moment(date).format("DD/MM/YYYY HH:mm");
 }
+
 export function formatDateReverse(date: string) {
   if (!date) return;
-  return moment(date).format("HH:MM, DD/MM/YYYY");
+  return moment(date).format("HH:mm, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
   if (!date) return null;
-  return moment(date).format("DD-MM-YYYY");
+  return moment(date).format("DD/MM/YYYY");
 }
 
 export function pdfDateFormat(date: string, locale: string) {
@@ -424,6 +425,16 @@ export function formatDateTimeToDateMango(date: string) {
 }
 export function formatDateTimeToTime(date: string) {
   return moment(date).format("HH:mm");
+}
+
+export function formatDateTime(item: string) {
+  const date = new Date(item);
+  const options: Intl.DateTimeFormatOptions = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  };
+  return date.toLocaleTimeString([], options);
 }
 
 export function getStatusColor(status: string) {

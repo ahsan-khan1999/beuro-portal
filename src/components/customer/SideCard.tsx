@@ -1,6 +1,6 @@
+import React from "react";
 import { Customers } from "@/types/customer";
 import { useTranslation } from "next-i18next";
-import React from "react";
 
 const SideCard = ({ customerDetail }: { customerDetail: Customers }) => {
   const { t: translate } = useTranslation();

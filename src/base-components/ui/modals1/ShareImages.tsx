@@ -38,9 +38,7 @@ export const ShareImages = ({
         {images?.images && images?.images?.length > 0 ? (
           <ImagePreview images={images?.images} />
         ) : (
-          <div className="-mt-6 pb-4">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
         )}
       </>
     ),
@@ -56,9 +54,7 @@ export const ShareImages = ({
               ))}
           </div>
         ) : (
-          <div className="-mt-6 pb-4">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
         )}
       </>
     ),
@@ -90,9 +86,7 @@ export const ShareImages = ({
             ))}
           </div>
         ) : (
-          <div className="-mt-6 pb-4">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
         )}
       </>
     ),
@@ -115,9 +109,7 @@ export const ShareImages = ({
             ))}
           </div>
         ) : (
-          <div className="-mt-6 pb-4">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
         )}
       </>
     ),

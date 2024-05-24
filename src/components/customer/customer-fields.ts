@@ -10,6 +10,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   handleUpdateCancel,
   { customer: customerDetails, customerType: customerType },
   control,
+  idAddNewCustomer,
   setValue
 ) => {
   const { t: translate } = useTranslation();
@@ -19,7 +20,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-3 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -196,7 +197,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
@@ -265,7 +265,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: `${translate("customers.details.save_changes_button")}`,
+              text: idAddNewCustomer
+                ? `${translate("customers.details.save_button")}`
+                : `${translate("customers.details.save_changes_button")}`,
               inputType: "submit",
               className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ${
                 isUpdate && "hidden"

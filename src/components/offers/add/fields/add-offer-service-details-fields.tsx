@@ -403,7 +403,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
         field: {
           type: Field.div,
           id: "div-field",
-          className: "grid grid-cols- mlg:grid-cols-2 gap-x-3",
+          className: "grid grid-cols-1 xlg:grid-cols-2 gap-x-3",
           children: [
             {
               field: {
@@ -425,6 +425,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                       rows: 2,
                       id: "discountDescription",
                       name: "discountDescription",
+                      maxLength: 100,
                       register,
                     },
                   },

@@ -8,11 +8,7 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import {
-  AddOfferDetailsServiceSubmitFormField,
-  AddOfferServiceDetailsDescriptionFormField,
-  AddOfferServiceDetailsFormField,
-} from "@/components/offers/add/fields/add-offer-service-details-fields";
+
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -28,6 +24,7 @@ import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { generateCreateInvoiceServiceDetailsValidation } from "@/validation/invoiceSchema";
 import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
+import { CreateInvoiceDetailsServiceSubmitFormField, CreateInvoiceServiceDetailsDescriptionFormField, CreateInvoiceServiceDetailsFormField } from "@/components/invoice/createInvoice/fields/create-invoice-service-details-fields";
 
 let prevDisAmount: number | string = "";
 
@@ -368,7 +365,7 @@ export const useCreateInvoiceServiceDetails = (
     }
   };
 
-  const fields = AddOfferServiceDetailsFormField(
+  const fields = CreateInvoiceServiceDetailsFormField(
     register,
     loading,
     control,
@@ -390,7 +387,7 @@ export const useCreateInvoiceServiceDetails = (
     watch
   );
 
-  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
+  const fieldsDescription = CreateInvoiceServiceDetailsDescriptionFormField(
     register,
     loading,
     control,
@@ -416,7 +413,7 @@ export const useCreateInvoiceServiceDetails = (
     setValue
   );
 
-  const submitFields = AddOfferDetailsServiceSubmitFormField(
+  const submitFields = CreateInvoiceDetailsServiceSubmitFormField(
     loading,
     handleBack
   );

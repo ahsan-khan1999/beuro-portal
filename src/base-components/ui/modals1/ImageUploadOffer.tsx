@@ -80,7 +80,7 @@ const ImagesUploadOffer = ({
         <VideoField
           id="attachement"
           attachements={enteredLinks?.video}
-          fileSupported="MP4, MOV, AVI, WEBM "
+          fileSupported="MP4, MOV, AVI, WEBM"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_video")}
@@ -120,7 +120,7 @@ const ImagesUploadOffer = ({
         <AttachementField
           id="attachement"
           attachements={enteredLinks?.attachements}
-          fileSupported="Pdf, ODT, DOC, XLXS "
+          fileSupported="Pdf, ODT, DOC, XLXS"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_attachment")}
@@ -147,11 +147,12 @@ const ImagesUploadOffer = ({
             {translate("common.images_modal.heading")}
           </p>
 
-          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5] ">
+          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
             {attachementTabs.map((item, index) => (
               <button
+                key={index}
                 className={`${
-                  activeTab === item ? "text-primary" : "text-[#393939] "
+                  activeTab === item ? "text-primary" : "text-[#393939]"
                 } text-base font-medium pb-[10px] ${
                   activeTab === item ? "border-b-2 border-primary" : ""
                 }`}

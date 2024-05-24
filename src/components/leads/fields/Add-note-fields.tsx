@@ -6,7 +6,9 @@ export const AddNoteFormField: GenerateNotesFormField = (
   register,
   loading,
   control,
-  onClick
+  { noteSetting, onNoteSelect, selectedNote },
+  onClick,
+  trigger
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -14,7 +16,7 @@ export const AddNoteFormField: GenerateNotesFormField = (
       containerClass: "mb-0 rounded-t-lg px-2 py-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("common.add_note_modal.label")}`,
-        htmlFor: "description",
+        htmlFor: "noteType",
         className: "mb-[10px] text-[#1E1E1E]",
       },
 
@@ -22,51 +24,35 @@ export const AddNoteFormField: GenerateNotesFormField = (
         className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
         type: Field.select,
         id: "noteType",
-        value: "Sending pictures",
         name: "noteType",
-        options: [
-          {
-            value: "Sending pictures",
-            label: `${translate("add_note_dropdown.sending_picture")}`,
-          },
-          {
-            value: "Viewing date",
-            label: `${translate("add_note_dropdown.view_date")}`,
-          },
-          {
-            value: "Approximate Offer open",
-            label: `${translate("add_note_dropdown.approximate_offer_open")}`,
-          },
-          {
-            value: "Will contact us",
-            label: `${translate("add_note_dropdown.contact_us")}`,
-          },
-          {
-            value: "Individual Note",
-            label: `${translate("add_note_dropdown.individual_note")}`,
-          },
-          {
-            value: "Not Reached",
-            label: `${translate("add_note_dropdown.note_reached")}`,
-          },
-          {
-            value: "Other",
-            label: `${translate("add_note_dropdown.other")}`,
-          },
-        ],
-
+        options: noteSetting
+          ? noteSetting
+              .slice()
+              .reverse()
+              .map((item) => ({
+                label: item.notes?.noteType,
+                value: item.notes?.noteType,
+              }))
+          : [],
         control,
+        value:
+          (noteSetting &&
+            noteSetting[noteSetting.length - 1].notes?.noteType) ||
+          "",
+        onItemChange: onNoteSelect,
+        trigger,
       },
     },
 
     {
-      containerClass: "rounded-b-lg px-2 pt-5 pb-3 bg-[#EDF4FF]",
+      containerClass: "rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       field: {
         type: Field.ckEditor,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         id: "description",
         name: "description",
         control,
+        trigger,
       },
     },
 

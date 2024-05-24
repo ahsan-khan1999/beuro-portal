@@ -5,7 +5,6 @@ import { GlobalState } from "@/types/global";
 import { getRefreshToken, getToken, logout } from "@/utils/auth.util";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getCookie } from "cookies-next";
 
 const initialState: GlobalState = {
   loading: false,

@@ -22,7 +22,6 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
   const { images } = useAppSelector((state) => state.image);
   const router = useRouter();
   const dispatch = useAppDispatch();
-
   const { offerID } = router.query;
 
   useEffect(() => {
@@ -36,9 +35,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
         {images?.images && images?.images?.length > 0 ? (
           <ImagePreview images={images?.images} />
         ) : (
-          <div className="-mt-6 pb-4">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
         )}
       </>
     ),
@@ -54,9 +51,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
               ))}
           </div>
         ) : (
-          <div className="-mt-6 pb-4">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
         )}
       </>
     ),
@@ -85,9 +80,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
             ))}
           </div>
         ) : (
-          <div className="-mt-6 pb-4">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
         )}
       </>
     ),
@@ -110,9 +103,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
             ))}
           </div>
         ) : (
-          <div className="-mt-6 pb-4">
-            <NoDataEmptyState />
-          </div>
+          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
         )}
       </>
     ),
@@ -136,12 +127,12 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
             {translate("common.view_docs")}
           </p>
 
-          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5] ">
+          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
             {attachementTabs.map((item, index) => (
               <button
                 key={index}
                 className={`${
-                  activeTab === item ? "text-primary" : "text-[#393939] "
+                  activeTab === item ? "text-primary" : "text-[#393939]"
                 } text-base font-medium pb-[10px] ${
                   activeTab === item ? "border-b-2 border-primary" : ""
                 }`}

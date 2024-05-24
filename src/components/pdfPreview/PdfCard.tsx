@@ -4,14 +4,8 @@ const EmailCard = () => {
   return (
     <section className="grid grid-cols-3 mb-[33px]">
       <div className="col-span-2 flex flex-col ga-y-1">
-        <h2 className="text-2xl font-semibold text-[#393939]">
-          Lorem Ipsum dollar smith emit lorem
-        </h2>
-        <p className="text-base font-normal text-[#393939]">
-          Nur die grosserbeit nach Aufwand smith emit lorem. Nur die
-          grossen.Arbeit nach Aufwand smith emit lorem Nur die grossrbeit nach
-          Aufwand smith emit lorem emit lorem Nur die
-        </p>
+        <h2 className="text-2xl font-semibold text-[#393939]"></h2>
+        <p className="text-base font-normal text-[#393939]"></p>
       </div>
 
       <div className="col-span-1 flex gap-x-[17px] justify-end">

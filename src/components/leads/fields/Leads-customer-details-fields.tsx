@@ -1,11 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  DivProps,
-  FormField,
-  GenerateCustomerLeadFormField,
-  GenerateLeadsFormField,
-} from "@/types";
-import { getKeyByValue, getValueByKey } from "@/utils/auth.util";
+import { DivProps, FormField, GenerateCustomerLeadFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
@@ -59,7 +53,7 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "fullName",
               name: "fullName",

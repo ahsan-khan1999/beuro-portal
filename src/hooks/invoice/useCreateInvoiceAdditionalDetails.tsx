@@ -3,7 +3,6 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddOfferAdditionalDetailsFormField } from "@/components/offers/add/fields/add-additional-details-fields";
 import { useEffect, useMemo } from "react";
 import {
   readContent,
@@ -12,6 +11,7 @@ import {
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { generateCreateInvoiceAdditionalDetailsValidation } from "@/validation/invoiceSchema";
 import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
+import { CreateInvoiceAdditionalDetailsFormField } from "@/components/invoice/createInvoice/fields/create-invoice-additional-details-fields";
 
 export const useCreateInvoiceAdditionalDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void,
@@ -23,6 +23,7 @@ export const useCreateInvoiceAdditionalDetails = (
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
   const { content, contentDetails } = useAppSelector((state) => state.content);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export const useCreateInvoiceAdditionalDetails = (
     setValue(
       "additionalDetails",
       invoiceDetails?.additionalDetails ||
-        invoiceDetails?.content?.offerContent?.description
+        invoiceDetails?.content?.invoiceContent?.description
     );
   }, [invoiceDetails?.additionalDetails]);
 
@@ -61,12 +62,15 @@ export const useCreateInvoiceAdditionalDetails = (
     const filteredContent = content?.find((item) => item.id === id);
     if (filteredContent) {
       dispatch(setContentDetails(filteredContent));
-      setValue("additionalDetails", filteredContent?.offerContent?.description);
+      setValue(
+        "additionalDetails",
+        filteredContent?.invoiceContent?.description
+      );
       trigger("additionalDetails");
     }
   };
 
-  const fields = AddOfferAdditionalDetailsFormField(
+  const fields = CreateInvoiceAdditionalDetailsFormField(
     register,
     loading,
     control,

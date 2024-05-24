@@ -25,11 +25,9 @@ export interface User {
   [UserResponse.role]: string;
   [UserResponse.email]: string;
   [UserResponse.role]: string;
-
   [UserResponse.bank]: string;
   [UserResponse.company]: UserCompany;
   [UserResponse.employee]: string;
-
   [UserResponse.addresses]: UserAddress;
   [UserResponse.isProfileComplete]: boolean;
   [UserResponse.isEmailVerified]: boolean;
@@ -46,7 +44,7 @@ export interface User {
   [UserResponse.oAuthIds]: UserOAuth;
   [UserResponse._isSocialLogin]: boolean;
   [UserResponse.isCommercialSellerRequested]: boolean;
-  plan:Plan
+  plan: Plan;
 }
 // [AddressType.primary]:{}
 
@@ -59,8 +57,6 @@ export interface UserCompany {
   [UserResponse.mobileNumber]: string;
   [UserResponse.addresses]: UserAddress;
   [UserResponse.bank]: UserBankDetail;
-
-
 }
 export interface UserAddress {
   [AddressTypes.city]: string;
@@ -68,7 +64,6 @@ export interface UserAddress {
   [AddressTypes.streetNumber]: string;
   [AddressTypes.houseNumber]: string;
   [AddressTypes.country]: string;
-
 }
 export interface UserBankDetail {
   [BankFields.bankName]?: string;
@@ -151,14 +146,14 @@ export interface AuthState {
   [AuthenticationState.fb]: boolean | null;
   [AuthenticationState.apple]: boolean | null;
   dashboard: Dashboard | null;
-  adminDashboard: AdminDashboard | null
+  adminDashboard: AdminDashboard | null;
 }
 export interface Dashboard {
   Lead: Lead;
   Offer: Offer;
   Contract: Contract;
   Sales: Invoice;
-  leadSource: LeadSource[]
+  leadSource: LeadSource[];
   FollowUp: FollowUp[];
   Activity: Activity;
 }
@@ -168,8 +163,6 @@ export interface AdminDashboard {
   Contract: Contract;
   Sales: Invoice;
   leadSource: LeadSource[];
-
-
 }
 interface FollowUp {
   additionalDetails: string;
@@ -181,15 +174,14 @@ interface FollowUp {
   isCompleted: boolean;
   isDeleted: boolean;
   isPostponed: boolean;
-  lead: string;
+  lead: Lead;
   refID: string;
   status: string;
   title: string;
   type: string;
   updatedAt: string;
-  _id: string
-  id: string
-
+  _id: string;
+  id: string;
 }
 interface Activity {
   company: string;
@@ -197,19 +189,19 @@ interface Activity {
   isDeleted: boolean;
   updatedAt: string;
   _id: string;
-  offerActivity: OfferActivity[]
+  offerActivity: OfferActivity[];
 }
 interface OfferActivity {
   contractNumber: string;
   dateTime: string;
   editedBy: string;
   message: string;
-  offerNumber: string
+  offerNumber: string;
 }
 interface Customer {
   _id: string;
   totalCustomers: number;
-  filterCustomers: number
+  filterCustomers: number;
 }
 interface Lead {
   _id: string;
@@ -219,8 +211,7 @@ interface Lead {
   opened: number;
   closed: number;
   expired: number;
-
-
+  refID?: string;
 }
 interface Offer {
   _id: string;
@@ -230,7 +221,7 @@ interface Offer {
   opened: number;
   signed: number;
   expired: number;
-  rejected: number
+  rejected: number;
 }
 interface Contract {
   _id: string;
@@ -253,7 +244,7 @@ interface Invoice {
 interface LeadSource {
   _id: string;
   totalLeadSource: number;
-  filterCount: number
+  filterCount: number;
 }
 export interface RemoveOAuth {
   router: NextRouter;

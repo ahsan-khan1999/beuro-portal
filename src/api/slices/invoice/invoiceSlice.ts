@@ -63,6 +63,20 @@ export const readInvoice: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
+export const downloadInvoiceReports: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("invoice/download-excel", async (args, thunkApi) => {
+    const { params } = args as any;
+
+    try {
+      const response = await apiServices.downloadInvoice(params);
+      return response?.data?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
 export const readInvoiceDetails: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/read/details", async (args, thunkApi) => {
     const { params } = args as any;
@@ -75,6 +89,7 @@ export const readInvoiceDetails: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createInvoice: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/create", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

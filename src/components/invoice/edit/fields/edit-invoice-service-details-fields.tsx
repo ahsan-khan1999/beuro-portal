@@ -1,8 +1,8 @@
 import { Field } from "@/enums/form";
 import {
   FormField,
-  GenerateOfferServiceFormField,
-  GenerateOffersServiceActionFormField,
+  GenerateInvoiceServiceActionFormField,
+  GenerateInvoiceServiceFormField,
 } from "@/types";
 import {
   Control,
@@ -26,7 +26,7 @@ const serviceObject = {
   discount: 0,
 };
 
-export const AddInvoiceServiceDetailsFormField: GenerateOfferServiceFormField =
+export const EditInvoiceServiceDetailsFormField: GenerateInvoiceServiceFormField =
   (
     register,
     loading,
@@ -375,7 +375,7 @@ export const AddInvoiceServiceDetailsFormField: GenerateOfferServiceFormField =
     return formField;
   };
 
-export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFormField =
+export const EditInvoiceServiceDetailsDescriptionFormField: GenerateInvoiceServiceFormField =
   (
     register,
     loading,
@@ -409,7 +409,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
         field: {
           type: Field.div,
           id: "div-field",
-          className: "grid grid-cols- mlg:grid-cols-2 gap-x-3",
+          className: "grid grid-cols-1 xlg:grid-cols-2 gap-x-3",
           children: [
             {
               containerClass: "",
@@ -419,7 +419,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                 className: "flex flex-col",
                 children: [
                   {
-                    containerClass: "mb-0",
+                    containerClass: "mb-0 p-2 bg-[#EDF4FF] rounded-md",
                     label: {
                       text: `${translate(
                         "offers.service_details.discount_description"
@@ -429,11 +429,11 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                     },
                     field: {
                       type: Field.textArea,
-                      className:
-                        "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                      className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                       rows: 2,
                       id: "discountDescription",
                       name: "discountDescription",
+                      maxLength: 100,
                       placeholder: `${translate(
                         "offers.placeholders.address_description"
                       )}`,
@@ -564,7 +564,7 @@ const generateServiceCalulationChildren = (
   }
 
   const calculationFields = {
-    containerClass: "mb-0 border-2 border-lightGray rounded-lg p-3",
+    containerClass: "mb-0 rounded-lg p-3 bg-[#EDF4FF]",
 
     field: {
       type: Field.div,
@@ -575,14 +575,14 @@ const generateServiceCalulationChildren = (
           containerClass: "pb-2 border-b border-lightGray",
           field: {
             type: Field.div,
-            className: "flex mx-10 space-x-5",
+            className: "flex justify-between items-center",
             id: "div2",
             children: [
               {
-                containerClass: "mb-0 pr-2 border-r border-lightGray",
+                containerClass: "mb-0",
                 field: {
                   type: Field.span,
-                  className: "!p-4  w-full",
+                  className: "text-sm font-medium text-[#344054]",
                   id: "span-field",
                   text: `${translate(
                     "offers.service_details.detail_headings.sub_total"
@@ -590,11 +590,10 @@ const generateServiceCalulationChildren = (
                 },
               },
               {
-                containerClass: "mb-0 ",
+                containerClass: "mb-0",
                 field: {
                   type: Field.span,
-                  className:
-                    "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
+                  className: "text-sm font-medium text-[#344054]",
                   id: "span-field",
                   text: `${total?.subTotal?.toFixed(2)} ${currency}`,
                 },
@@ -787,12 +786,24 @@ const generateServiceCalulationChildren = (
             ],
           },
         },
+        // {
+        //   containerClass: "mb-0 mt-3 flex justify-end",
+        //   field: {
+        //     type: Field.span,
+        //     containerClassName:
+        //       "!!border-[#BFBFBF] focus:!border-primary w-full text-dark font-bold",
+        //     id: "span-field",
+        //     text: `${translate(
+        //       "offers.service_details.detail_headings.grand_total"
+        //     )} : ${total?.grandTotal.toFixed(2)} ${currency}`,
+        //   },
+        // },
         {
-          containerClass: "mb-0 mt-3 ml-[35px]",
+          containerClass: "mb-0 mt-3 flex justify-end",
           field: {
             type: Field.span,
             containerClassName:
-              "!!border-[#BFBFBF] focus:!border-primary w-full text-dark font-bold",
+              "!!border-[#BFBFBF] focus:!border-primary text-dark font-bold",
             id: "span-field",
             text: `${translate(
               "offers.service_details.detail_headings.grand_total"
@@ -806,7 +817,7 @@ const generateServiceCalulationChildren = (
   return calculationFields;
 };
 
-export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionFormField =
+export const EditInvoiceDetailsServiceSubmitFormField: GenerateInvoiceServiceActionFormField =
   (loading, OnClick) => {
     const { t: translate } = useTranslation();
     const formField: FormField[] = [

@@ -1,27 +1,6 @@
 import { Country, State } from "@/enums/auth";
 import { SideBar, countryType } from "@/types";
-import { Customers } from "@/types/customer";
-import { Lead } from "@/types/leads";
-import editImage from "@/assets/svgs/edit_image.svg";
-import editNote from "@/assets/svgs/Edit_note.svg";
-import { OffersTableRowTypes } from "@/types/offers";
-import { contractTableTypes } from "@/types/contract";
-import { InvoiceTableRowTypes } from "@/types/invoice";
-import { ContentTableRowTypes } from "@/types/content";
-import { TableRowEmailTracker } from "@/types/emailTracker";
-import companyLogo from "@/assets/svgs/companyLogo.svg";
-import { CustomersAdmin } from "@/types/admin/customer";
 import { PaymentsAdmin } from "@/types/admin/payments";
-import { SupportRequestAdmin } from "@/types/admin/support-request";
-import { Service } from "@/types/service";
-import { Employee } from "@/types/employee";
-import { AllCustomers, AllLeads, FollowUps } from "@/types/follow-up";
-import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
-// import personalDetailsIcon from "@/assets/personel-details-icon.png";
-// import securityIcon from "@/assets/security-icon.png";
-// import locationIcon from "@/assets/location-icon.png";
-// import paymentIcon from "@/assets/payments-icon.png";
-// import notificationIcon from "@/assets/notifications-icon.png";
 
 // Function for handling the date format
 function parseCustomDate(dateString: string) {
@@ -636,6 +615,13 @@ export const staticEnums: Record<string, any> = {
     Active: 1,
   },
 
+  InvoiceMainStatus: {
+    Pending: 0,
+    Overdue: 1,
+    Paid: 2,
+    Open: 3,
+    sending: 10,
+  },
   InvoiceStatus: {
     Pending: 0,
     Overdue: 1,
@@ -781,322 +767,6 @@ export const staticEnums: Record<string, any> = {
     "Via Call": "via_phone",
   },
 };
-
-// export const customers: Customers[] = [
-//   {
-//     id: 1,
-//     fullName: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phoneNumber: "41343434353",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Germany",
-//       postalCode: "12345",
-//       streetNumber: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 2,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 3,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 4,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 5,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 6,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 7,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 8,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 9,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 10,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 11,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "0215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   {
-//     id: 12,
-//     name: "Rahal Ahmed",
-//     email: "Test12@gmail.com",
-//     phone: "412545214541",
-//     date: "25/08/2023",
-//     location: "Islamabad",
-//     customerType: "Individual",
-//     address: {
-//       country: "Switzerland",
-//       postCode: "12345",
-//       streetNo: "Zweibrückenstraße, 12",
-//     },
-//     companyName: "SwissHelden",
-//     mobile: "02154512120215451212",
-//     editImg: "",
-//     status: "",
-//     editNote: "",
-//     lead: {
-//       id: "054631",
-//       name: "Hassam",
-//       source: "Instagram",
-//       status: "Open",
-//       expires: "25/08/2023",
-//     },
-//   },
-//   // Add more rows as needed
-// ];
 
 export const paymentsAdminData: PaymentsAdmin[] = [
   {
@@ -1423,6 +1093,13 @@ export const sideBar: SideBar[] = [
         title: "sidebar.customer.invoices.pending",
         pathname: "/invoices",
         query: "0",
+        queryName: "status",
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.invoices.sending",
+        pathname: "/invoices",
+        query: "10",
         queryName: "status",
         role: [1, 2],
       },

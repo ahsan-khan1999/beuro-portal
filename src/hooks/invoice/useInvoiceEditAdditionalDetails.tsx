@@ -10,8 +10,8 @@ import {
   readContent,
   setContentDetails,
 } from "@/api/slices/content/contentSlice";
-import { AddOfferAdditionalDetailsFormField } from "@/components/offers/add/fields/add-additional-details-fields";
 import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
+import { EditInvoiceAdditionalDetailsFormField } from "@/components/invoice/edit/fields/edit-invoice-additional-details-fields";
 
 export const useInoviceEditAdditionalDetails = ({
   handleNext,
@@ -73,7 +73,8 @@ export const useInoviceEditAdditionalDetails = ({
       trigger("additionalDetails");
     }
   };
-  const fields = AddOfferAdditionalDetailsFormField(
+
+  const fields = EditInvoiceAdditionalDetailsFormField(
     register,
     loading,
     control,

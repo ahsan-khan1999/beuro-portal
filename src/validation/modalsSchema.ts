@@ -1,4 +1,6 @@
 import {
+  AddGeneralAddressField,
+  AddGeneralNoteField,
   AddNewNote,
   AddTaxField,
   ChangePasswordField,
@@ -112,5 +114,24 @@ export const generateImageValidation = (translate: Function) => {
     upload_image13: yup.string().notRequired(),
     upload_image14: yup.string().notRequired(),
     upload_image15: yup.string().notRequired(),
+  });
+};
+
+// Add general address validation
+export const generateAddGeneralAddressValidationSchema = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [AddGeneralAddressField.addresses]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+  });
+};
+export const generateAddGeneralNoteValidationSchema = (translate: Function) => {
+  return yup.object().shape({
+    [AddGeneralNoteField.noteType]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [AddGeneralNoteField.description]: yup.string().notRequired(),
   });
 };

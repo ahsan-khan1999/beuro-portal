@@ -28,7 +28,7 @@ const OfferEditImages = ({
   return (
     <LeadsDetailImgLayout>
       <div className={`flex flex-col max-h-[250px]`}>
-        <div className="flex justify-between items-center ml-6 mr-[14px] my-4">
+        <div className="flex justify-between items-center ml-6 mr-[14px] my-3">
           <p className="text-lg font-normal text-[#4A13E7] ">
             {translate("offers.side_images.heading")}
           </p>
@@ -47,7 +47,7 @@ const OfferEditImages = ({
         </div>
 
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid max-h-[400px] overflow-y-scroll grid-cols-2 gap-[14px] p-3 border-t-4 border-[#4A13E7]">
+          <div className="grid max-h-[400px] overflow-y-scroll grid-cols-2 gap-[14px] p-3 border-t-4 border-t-[#4A13E7]">
             {images?.images?.map((item, index) => (
               <Image
                 src={item}
@@ -60,8 +60,11 @@ const OfferEditImages = ({
             ))}
           </div>
         ) : (
-          <div className="-mt-6 pb-4 max-h-[400px] overflow-y-scroll">
-            <NoDataEmptyState />
+          <div className="pb-4 max-h-[400px] overflow-y-scroll border-t-4 border-t-[#4A13E7]">
+            <NoDataEmptyState
+              className="w-fit 2xl:w-[270px]"
+              containerClassName="py-0 px-2"
+            />
           </div>
         )}
 
