@@ -21,9 +21,11 @@ const MailSetting = () => {
   const handleTabSelect = (index: number) => {
     setSelectedTab(index);
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
@@ -41,8 +43,8 @@ const MailSetting = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
   return (
-    <SettingLayout>
-      <div className="ml-3 mb-3">
+    <SettingLayout containerClassName="pl-4 pr-4 mb-5">
+      <div className="mb-3">
         <div className="flex gap-[40px] mt-4 mb-[36px]">
           {tabsData.map((item, index) => (
             <div

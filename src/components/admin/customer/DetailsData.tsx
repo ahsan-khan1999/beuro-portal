@@ -44,7 +44,7 @@ const DetailsData = ({
 
   return (
     <>
-      <div className="flex justify-between items-center pb-5">
+      <div className="flex flex-col lg:flex-row gap-4 justify-between lg:items-center pb-5">
         <div className="flex items-center">
           <div onClick={handlePreviousClick} className="cursor-pointer">
             <svg
@@ -75,7 +75,7 @@ const DetailsData = ({
         </div>
         <button
           onClick={handleAreYouSure}
-          className="flex items-center rounded-lg border border-[#C7C7C7] px-4 py-[11px] text-[#4B4B4B] font-medium gap-3"
+          className="flex items-center rounded-lg border border-[#C7C7C7] px-4 py-[11px] text-[#4B4B4B] font-medium gap-3 w-fit"
         >
           {!isCustomerFree ? (
             <svg

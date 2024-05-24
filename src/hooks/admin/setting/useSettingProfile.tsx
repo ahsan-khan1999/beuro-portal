@@ -14,6 +14,7 @@ import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { User } from "@/types";
 import userImage from "@/assets/svgs/Group 480958610.svg";
+
 export default function useSettingProfile() {
   const router = useRouter();
   const user: User = isJSON(getUser());
@@ -63,6 +64,7 @@ export default function useSettingProfile() {
   };
 
   const fields = changeProfileSettingFormField(register, loading, control);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(
       updateAdminSetting({

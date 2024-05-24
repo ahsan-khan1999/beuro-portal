@@ -21,7 +21,7 @@ const PlansForm = ({
 
   return (
     <FormCard
-      containerClassName={`p-6 ${!isUpdate && "border border-primary"}`}
+      containerClassName={`px-4 py-6 ${!isUpdate && "border border-primary"}`}
     >
       <Form
         formFields={fields}

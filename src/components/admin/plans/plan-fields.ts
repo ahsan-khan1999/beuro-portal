@@ -18,7 +18,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
         id: "div-field",
 
         className:
-          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5",
+          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -96,12 +96,11 @@ export const planDetailsFormField: GeneratePlansFormField = (
       },
     },
     {
-      containerClass: "mt-5",
       field: {
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5",
+          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5 px-2 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0 xl:col-span-1",
@@ -147,7 +146,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 mt-5 gap-y-5",
+          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -160,7 +159,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center !px-4 py-3 border-[1px] rounded-lg !border-[#BFBFBF] focus:!border-primary",
+                "flex justify-between items-center !px-4 py-3 border-[1px] rounded-lg !border-[#BFBFBF] focus:!border-primary bg-white",
               children: [
                 {
                   field: {
@@ -195,7 +194,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center !!mb-0 py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary",
+                "flex justify-between items-center !!mb-0 py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary bg-white",
               children: [
                 {
                   field: {
@@ -230,7 +229,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary",
+                "flex justify-between items-center py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary bg-white",
               children: [
                 {
                   field: {
@@ -266,7 +265,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary",
+                "flex justify-between items-center py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary bg-white",
               children: [
                 {
                   field: {
