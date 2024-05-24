@@ -7,16 +7,14 @@ import useAddGeneralAddress from "@/hooks/modals/useAddGeneralAddress";
 
 export const AddGeneralAddress = ({
   onClose,
-  onSuccess,
   heading,
 }: {
   onClose: () => void;
-  onSuccess: () => void;
   heading: string;
 }) => {
   const defaultClassName = "mt-6";
   const { fields, onSubmit, handleSubmit, errors, error } =
-    useAddGeneralAddress({ onSuccess });
+    useAddGeneralAddress({ onClose });
 
   return (
     <>

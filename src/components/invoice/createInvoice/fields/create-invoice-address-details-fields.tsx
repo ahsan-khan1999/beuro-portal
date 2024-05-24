@@ -17,13 +17,15 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
     control,
     onHandleBack,
     count,
+    handleChangeLabel,
     handleAddNewAddress,
     handleRemoveAddress,
     fields,
     handleFieldTypeChange,
     addressType,
     setValue,
-    getValues
+    getValues,
+    addressSettings
   ) => {
     const formField: FormField[] = [];
     const { t: translate } = useTranslation();
@@ -31,24 +33,24 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
     for (let i = 0; i < count; i++) {
       let valueIndex = i;
       formField.push(
-        // {
-        //   containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
-        //   field: {
-        //     className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
-        //     type: Field.select,
-        //     id: `address.${i}.addressType`,
-        //     name: `address.${i}.addressType`,
-        //     value: "Select Address Type",
-        //     options: [
-        //       {
-        //         value: "Select Address Type",
-        //         label: `Select Address Type`,
-        //       },
-        //     ],
+        {
+          containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
+          field: {
+            className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
+            type: Field.select,
+            id: `address.${i}.addressType`,
+            name: `address.${i}.addressType`,
+            // value: addressSettings?.addresses?.[0] || "",
+            options:
+              addressSettings?.addresses?.map((item) => ({
+                label: item,
+                value: item,
+              })) || [],
 
-        //     control,
-        //   },
-        // },
+            control,
+            onItemChange: (item) => handleChangeLabel(item, i),
+          },
+        },
 
         {
           field: {
@@ -71,8 +73,8 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
                         id: `address.${i}.label`,
                         name: `address.${i}.label`,
                         register,
-                        value: `Adresse ${++valueIndex}`,
-                        setValue,
+                        // value: `Adresse ${++valueIndex}`,
+                        // setValue,
                       },
                     }) || {
                       field: {
@@ -81,11 +83,11 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
                         id: `address.${i}.label`,
                         name: `address.${i}.label`,
                         register,
-                        value: `Adresse ${++valueIndex}`,
+                        // value: `Adresse ${++valueIndex}`,
                         disabled: true,
                         className:
                           "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
-                        setValue,
+                        // setValue,
                       },
                     },
                     {
@@ -253,8 +255,7 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
               inputType: "button",
               className:
                 "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
-              onClick: () =>
-                handleAddNewAddress && handleAddNewAddress(addressObject),
+              onClick: () => handleAddNewAddress && handleAddNewAddress(),
             },
           },
         ],

@@ -20,10 +20,16 @@ import { GeneralSetting } from "./general-setting";
 import { AddGeneralAddress } from "@/base-components/ui/modals1/GeneralAddressTitle";
 import { GeneralSuccess } from "@/base-components/ui/modals1/GeneralSuccess";
 import { GeneralNote } from "@/base-components/ui/modals1/AddGeneralNotes";
+import {
+  deleteNoteSetting,
+  readNoteSettings,
+} from "@/api/slices/settingSlice/settings";
 
 const Setting = () => {
   const { query } = useRouter();
   const { t: translate } = useTranslation();
+
+  const { loading, noteSettings } = useAppSelector((state) => state.settings);
 
   const tab = query.tab;
   const [switchDetails, setSwitchDetails] = useState<number>(0);
@@ -59,14 +65,6 @@ const Setting = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
 
-  const handleAddGeneralAddress = () => {
-    dispatch(updateModalType({ type: ModalType.ADD_GENERAL_ADDRESS }));
-  };
-
-  const handleEditGeneralAddress = () => {
-    dispatch(updateModalType({ type: ModalType.EDIT_GENERAL_ADDRESS }));
-  };
-
   const handleAddressGeneralSuccess = () => {
     dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_ADDRESS }));
   };
@@ -75,34 +73,52 @@ const Setting = () => {
     dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_NOTES }));
   };
 
+  const handleAddGeneralAddress = () => {
+    dispatch(updateModalType({ type: ModalType.ADD_GENERAL_ADDRESS }));
+  };
+
+  const handleEditGeneralAddress = (id: number) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_GENERAL_ADDRESS,
+        data: {
+          id: id,
+        },
+      })
+    );
+  };
+
   const handleAddGeneralNote = () => {
     dispatch(updateModalType({ type: ModalType.ADD_GENERAL_NOTE }));
   };
 
-  const handleEditGeneralNote = () => {
-    dispatch(updateModalType({ type: ModalType.EDIT_GENERAL_NOTE }));
-  };
-
-  const handleAddressDelete = async (id: string, index: number) => {
-    // if (!tax) return;
-    // const response = await dispatch(deleteTaxSetting({ data: { id: id } }));
-    // if (response?.payload) {
-    //   const taxSettings = [...tax];
-    //   taxSettings.splice(index, 1);
-    //   dispatch(setTaxSettings(taxSettings));
-    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
-    // }
+  const handleEditGeneralNote = (
+    id: string,
+    note: { noteType: string; description: string }
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_GENERAL_NOTE,
+        data: {
+          id: id,
+          data: {
+            noteType: note.noteType,
+            description: note.description,
+          },
+        },
+      })
+    );
   };
 
   const handleNoteDelete = async (id: string, index: number) => {
-    // if (!tax) return;
-    // const response = await dispatch(deleteTaxSetting({ data: { id: id } }));
-    // if (response?.payload) {
-    //   const taxSettings = [...tax];
-    //   taxSettings.splice(index, 1);
-    //   dispatch(setTaxSettings(taxSettings));
-    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
-    // }
+    if (!noteSettings) return;
+    const response = await dispatch(deleteNoteSetting({ data: { id: id } }));
+    if (response?.payload) {
+      const noteSetting = [...noteSettings];
+      noteSetting.splice(index, 1);
+      dispatch(readNoteSettings());
+      dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+    }
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -122,14 +138,14 @@ const Setting = () => {
     [ModalType.ADD_GENERAL_ADDRESS]: (
       <AddGeneralAddress
         onClose={onClose}
-        onSuccess={handleAddressGeneralSuccess}
+        // onSuccess={handleAddressGeneralSuccess}
         heading={translate("common.add_address_title")}
       />
     ),
     [ModalType.EDIT_GENERAL_ADDRESS]: (
       <AddGeneralAddress
         onClose={onClose}
-        onSuccess={handleAddressGeneralSuccess}
+        // onSuccess={handleAddressGeneralSuccess}
         heading={translate("common.edit_address_title")}
       />
     ),
@@ -190,8 +206,10 @@ const Setting = () => {
         onEditAddressTitle={handleEditGeneralAddress}
         onAddNote={handleAddGeneralNote}
         onEditNote={handleEditGeneralNote}
-        onAddressDelete={handleAddressDelete}
         onNoteDelete={handleNoteDelete}
+        noteSettings={noteSettings}
+        onSuccess={handleAddressGeneralSuccess}
+        onClose={onClose}
       />
     ),
   };

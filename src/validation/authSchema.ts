@@ -15,6 +15,9 @@ import {
 } from "@/enums/registration";
 // import { PersonalDetailsProfile } from "@/enums/userAccount";
 
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/;
+
 export const generateValidation = (translate: Function) => {
   return yup.object().shape({
     [RegisterationFields.fullName]: yup
@@ -26,7 +29,7 @@ export const generateValidation = (translate: Function) => {
       .required(translate("validationMessages.required")),
     [RegisterationFields.password]: yup
       .string()
-      .min(6, translate("validationMessages.string.min"))
+      .matches(passwordRegex, translate("validationMessages.passwordRegex"))
       .required(translate("validationMessages.required")),
     [RegisterationFields.confirmPassword]: yup
       .string()

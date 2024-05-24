@@ -14,10 +14,10 @@ const AddLeadAddressDetails = ({
   onHandleNext: (currentComponent: ComponentsType) => void;
 }) => {
   const defaultClassName = "";
+  const router = useRouter();
+
   const { fields, control, onSubmit, handleSubmit, errors, translate } =
     useAddLeadAddressDetails(onHandleBack);
-
-  const router = useRouter();
 
   const handleCancel = () => {
     router.pathname = "/leads";

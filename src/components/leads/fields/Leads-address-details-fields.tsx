@@ -2,7 +2,6 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateLeadAddressFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import editIcon from "@/assets/svgs/edit_primary.svg";
-import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
@@ -10,12 +9,15 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
   control,
   handleBack,
   count,
+  handleChangeLabel,
   handleAddNewAddress,
   handleRemoveAddress,
   fields,
   handleFieldTypeChange,
   addressType,
-  setValue
+  setValue,
+  getValues,
+  addressSettings
 ) => {
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
@@ -34,8 +36,8 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            value: `Adresse ${i + 1}`,
-            setValue,
+            // value: `Adresse ${i + 1}`,
+            // setValue,
           },
         }
       : {
@@ -47,32 +49,33 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            value: `Adresse ${i + 1}`,
+            // value: `Adresse ${i + 1}`,
             disabled: true,
             className:
               "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
-            setValue,
+            // setValue,
           },
         };
     formField.push(
-      // {
-      //   containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
-      //   field: {
-      //     className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
-      //     type: Field.select,
-      //     id: `address.${i}.addressType`,
-      //     name: `address.${i}.addressType`,
-      //     value: "Select Address Type",
-      //     options: [
-      //       {
-      //         value: "Select Address Type",
-      //         label: `Select Address Type`,
-      //       },
-      //     ],
+      {
+        containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
+        field: {
+          className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
+          type: Field.select,
+          id: `address.${i}.addressType`,
+          name: `address.${i}.addressType`,
+          // value: addressSettings?.addresses?.[0] || "",
+          options:
+            addressSettings?.addresses?.map((item) => ({
+              label: item,
+              value: item,
+            })) || [],
 
-      //     control,
-      //   },
-      // },
+          control,
+          onItemChange: (item) => handleChangeLabel(item, i),
+        },
+      },
+
       {
         containerClass: "mb-0 relative right-0 float-right",
         field: {
@@ -248,7 +251,7 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
               count === 3 && "hidden"
             }`,
             onClick: () => {
-              handleAddNewAddress && handleAddNewAddress(addressObject);
+              handleAddNewAddress && handleAddNewAddress();
             },
           },
         },

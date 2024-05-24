@@ -1,6 +1,6 @@
 {
   "register": {
-    "main_heading": "Anmelden bei Büro-365",
+    "main_heading": "Anmeldung bei Büro-3655",
     "sub_heading": "Verwalten Sie Ihr Unternehmen mit uns",
     "full_name": "Vollständiger Name",
     "email_label": "E-Mail",
@@ -244,7 +244,8 @@
     "Employee_has_been_created": "Der Mitarbeiter wurde erfolgreich angelegt",
     "Login_details_have_been_emailed_to_them": "Die Zugangsdaten wurden ihnen per E-Mail zugesandt",
     "Login_details_could_not_be_emailed_to_them": "Die Anmeldedaten konnten ihnen nicht per E-Mail zugesandt werden",
-    "Employee_password_has_changed": "Das Passwort des Mitarbeiters wurde erfolgreich geändert"
+    "Employee_password_has_changed": "Das Passwort des Mitarbeiters wurde erfolgreich geändert",
+    "passwordRegex": "Das Passwort muss aus 6 Zeichen bestehen und Großbuchstaben, Kleinbuchstaben, Zahlen und Sonderzeichen enthalten."
   },
   "sidebar": {
     "customer": {
@@ -2224,13 +2225,13 @@
   },
   "add_note_dropdown": {
     "all_notes": "Alle Anfragen",
-    "sending_picture": "Sendet Fotos",
-    "view_date": "Besichtigungs Termin",
-    "approximate_offer_open": "Schätzoﬀerte Oﬀen",
-    "contact_us": "Meldet sich noch",
-    "individual_note": "Individuelle Notiz",
-    "note_reached": "Nicht erreicht",
-    "other": "Andere"
+    "Sending pictures": "Sendet Fotos",
+    "Viewing date": "Besichtigungs Termin",
+    "Approximate Offer open": "Schätzoﬀerte Oﬀen",
+    "Will contact us": "Meldet sich noch",
+    "Individual Note": "Individuelle Notiz",
+    "Not Reached": "Nicht erreicht",
+    "Other": "Andere"
   },
   "thank_you_content": {
     "heading": "Danke für die Unterzeichnung des Vertrags",

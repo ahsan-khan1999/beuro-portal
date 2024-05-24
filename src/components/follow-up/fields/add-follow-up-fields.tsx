@@ -14,7 +14,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
 
   const formField: FormField[] = [
     {
-      //@ts-expect-error
       field: {
         id: "div-field",
         type: Field.div,

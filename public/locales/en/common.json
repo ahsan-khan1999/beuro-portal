@@ -1,6 +1,6 @@
 {
   "register": {
-    "main_heading": "Sign in to Büro-365",
+    "main_heading": "Sign Up to Büro-365",
     "sub_heading": "Manage your business with us",
     "full_name": "Full Name",
     "email_label": "Email",
@@ -244,7 +244,8 @@
     "Employee_has_been_created": "The employee has been successfully created",
     "Login_details_have_been_emailed_to_them": "The login details have been emailed to them",
     "Login_details_could_not_be_emailed_to_them": "The login details could not be emailed to them",
-    "Employee_password_has_changed": "The employee's password has been changed successfully"
+    "Employee_password_has_changed": "The employee's password has been changed successfully",
+    "passwordRegex": "Password must be 6 characters & including uppercase, lowercase, number, & special character."
   },
   "sidebar": {
     "customer": {
@@ -2224,13 +2225,13 @@
   },
   "add_note_dropdown": {
     "all_notes": "All Notes",
-    "sending_picture": "Sending pictures",
-    "view_date": "Viewing date",
-    "approximate_offer_open": "Approximate Offer open",
-    "contact_us": "Will contact us",
-    "individual_note": "Individual Note",
-    "note_reached": "Not Reached",
-    "other": "Other"
+    "Sending pictures": "Sending pictures",
+    "Viewing date": "Viewing date",
+    "Approximate Offer open": "Approximate Offer open",
+    "Will contact us": "Will contact us",
+    "Individual Note": "Individual Note",
+    "Not Reached": "Not Reached",
+    "Other": "Other"
   },
   "thank_you_content": {
     "heading": "Thanks for Signing the Contract",

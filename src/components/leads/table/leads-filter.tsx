@@ -10,6 +10,8 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function LeadsFilter({
   filter,
@@ -20,6 +22,8 @@ export default function LeadsFilter({
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
+  const { noteSettings } = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -171,6 +175,20 @@ export default function LeadsFilter({
     });
   };
 
+  const noteLabel = [
+    `${translate("add_note_dropdown.sending_picture")}`,
+    `${translate("add_note_dropdown.view_date")}`,
+    `${translate("add_note_dropdown.approximate_offer_open")}`,
+    `${translate("add_note_dropdown.contact_us")}`,
+    `${translate("add_note_dropdown.individual_note")}`,
+    `${translate("add_note_dropdown.note_reached")}`,
+    `${translate("add_note_dropdown.other")}`,
+  ];
+
+  useEffect(() => {
+    dispatch(readNoteSettings());
+  }, []);
+
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex items-center gap-[14px]">
@@ -231,43 +249,19 @@ export default function LeadsFilter({
                 dropDownIconClassName=""
                 containerClassName="w-[225px]"
                 labelClassName="w-[225px]"
-                options={[
-                  // {
-                  //   value:
-                  //     "Sending pictures,Viewing date,Approximate Offer open,Will contact us,Individual Note, Not Reached, other",
-                  //   label: `${translate("add_note_dropdown.all_notes")}`,
-                  // },
-                  {
-                    value: "Sending pictures",
-                    label: `${translate("add_note_dropdown.sending_picture")}`,
-                  },
-                  {
-                    value: "Viewing date",
-                    label: `${translate("add_note_dropdown.view_date")}`,
-                  },
-                  {
-                    value: "Approximate Offer open",
-                    label: `${translate(
-                      "add_note_dropdown.approximate_offer_open"
-                    )}`,
-                  },
-                  {
-                    value: "Will contact us",
-                    label: `${translate("add_note_dropdown.contact_us")}`,
-                  },
-                  {
-                    value: "Individual Note",
-                    label: `${translate("add_note_dropdown.individual_note")}`,
-                  },
-                  {
-                    value: "Not Reached",
-                    label: `${translate("add_note_dropdown.note_reached")}`,
-                  },
-                  {
-                    value: "Other",
-                    label: `${translate("add_note_dropdown.other")}`,
-                  },
-                ]}
+                options={
+                  noteSettings
+                    ? noteSettings
+                        .slice()
+                        .reverse()
+                        .map((item) => ({
+                          label: translate(
+                            `add_note_dropdown.${item.notes.noteType}`
+                          ),
+                          value: item.notes.noteType,
+                        }))
+                    : []
+                }
                 label={translate("add_note_dropdown.all_notes")}
               />
             </div>

@@ -4,7 +4,6 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import useAddGeneralNotes from "@/hooks/modals/useAddGeneralNotes";
-
 export interface AddGeneralNoteProps {
   onSuccess: () => void;
   onClose: () => void;
