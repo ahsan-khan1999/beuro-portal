@@ -14,6 +14,7 @@ import { generateCreateInvoiceAddressDetailsValidation } from "@/validation/invo
 import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
 import { CreateInvoiceAddressDetailsFormField } from "@/components/invoice/createInvoice/fields/create-invoice-address-details-fields";
 import { readAddressSettings } from "@/api/slices/settingSlice/settings";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -55,6 +56,9 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
 
   useEffect(() => {
     dispatch(readAddressSettings());
+  }, []);
+
+  useEffect(() => {
     if (invoiceDetails.id) {
       reset({
         address: invoiceDetails?.addressID
@@ -71,7 +75,8 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
           ? [
               {
                 ...invoiceDetails?.customerDetail?.address,
-                label: `Adresse ${1}`,
+                label: addressSettings?.addresses[0] || `Adresse ${1}`,
+                addressType: addressSettings?.addresses[0] || "",
               },
             ]
           : addressType?.map((item, index) => ({
@@ -83,7 +88,7 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
             })),
       });
     }
-  }, [invoiceDetails?.id]);
+  }, [invoiceDetails?.id, addressSettings?.id]);
 
   const {
     fields: addressFields,
@@ -104,6 +109,22 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     setValue(`address.${index}.label`, item);
   };
 
+  const addressFieldsLength = addressFields.length || 1;
+
+  const handleAddNewAddress = () => {
+    append(addressObject);
+    const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+
+    setValue(
+      `address.${addressFieldsLength}.addressType`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+    setValue(
+      `address.${addressFieldsLength}.label`,
+      currentAddressItem || `Addresse ${addressFieldsLength}`
+    );
+  };
+
   const fields = CreateInvoiceAddressDetailsFormField(
     register,
     loading,
@@ -111,7 +132,8 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
     handleChangeLabel,
-    append,
+    handleAddNewAddress,
+    // append,
     remove,
     addressFields,
     handleFieldTypeChange,

@@ -14,6 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { LeadsEditAddressDetailsFormField } from "@/components/leads/fields/Leads-address-details-fields";
 import { readAddressSettings } from "@/api/slices/settingSlice/settings";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useLeadsAddressEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -47,6 +48,9 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
 
   useEffect(() => {
     dispatch(readAddressSettings());
+  }, []);
+
+  useEffect(() => {
     if (leadDetails?.id) {
       reset({
         address: leadDetails?.addressID
@@ -56,13 +60,15 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
             }))
           : [
               {
-                label: `Adresse ${addressCount}`,
+                label:
+                  addressSettings?.addresses[0] || `Adresse ${addressCount}`,
+                addressType: addressSettings?.addresses[0] || "",
                 ...leadDetails?.customerDetail?.address,
               },
             ],
       });
     }
-  }, [leadDetails?.id]);
+  }, [leadDetails?.id, addressSettings?.id]);
 
   const {
     append,
@@ -70,10 +76,10 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     remove,
   } = useFieldArray({ control, name: "address" });
 
-  useMemo(() => {
-    if (addressFields.length === 0) return;
-    setAddressCount(addressFields.length);
-  }, [addressFields]);
+  // useMemo(() => {
+  //   if (addressFields.length === 0) return;
+  //   setAddressCount(addressFields.length);
+  // }, [addressFields]);
 
   const handleFieldTypeChange = (index: number) => {
     const updatedAddressType = [...addressType];
@@ -85,14 +91,31 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     setValue(`address.${index}.label`, item);
   };
 
+  const addressFieldsLength = addressFields.length || 1;
+
+  const handleAddNewAddress = () => {
+    append(addressObject);
+    const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+
+    setValue(
+      `address.${addressFieldsLength}.addressType`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+    setValue(
+      `address.${addressFieldsLength}.label`,
+      currentAddressItem || `Addresse ${addressFieldsLength}`
+    );
+  };
+
   const fields = LeadsEditAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
-    addressCount,
+    // addressCount,
+    addressFieldsLength,
     handleChangeLabel,
-    append,
+    handleAddNewAddress,
     remove,
     addressFields,
     handleFieldTypeChange,
@@ -114,6 +137,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     );
     if (response?.payload) onClick(1, ComponentsType.address);
   };
+
   return {
     fields,
     onSubmit,

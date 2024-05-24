@@ -14,6 +14,7 @@ import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useState, useEffect } from "react";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { readAddressSettings } from "@/api/slices/settingSlice/settings";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -22,6 +23,10 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const dispatch = useAppDispatch();
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
+  );
+
+  const [addressCount, setAddressCount] = useState(
+    offerDetails?.leadID?.addressID?.address?.length || 1
   );
 
   const { addressSettings } = useAppSelector((state) => state.settings);
@@ -55,6 +60,9 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
 
   useEffect(() => {
     dispatch(readAddressSettings());
+  }, []);
+
+  useEffect(() => {
     if (offerDetails.id) {
       reset({
         address: offerDetails?.addressID
@@ -71,7 +79,9 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
           ? [
               {
                 ...offerDetails?.leadID?.customerDetail?.address,
-                label: `Adresse ${1}`,
+                label:
+                  addressSettings?.addresses[0] || `Addresse ${addressCount}`,
+                addressType: addressSettings?.addresses[0] || "",
               },
             ]
           : addressType?.map((item, index) => ({
@@ -83,7 +93,7 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
             })),
       });
     }
-  }, [offerDetails?.id]);
+  }, [offerDetails?.id, addressSettings?.id]);
 
   const {
     fields: addressFields,
@@ -104,6 +114,23 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     setValue(`address.${index}.label`, item);
   };
 
+  const addressFieldsLength = addressFields.length || 1;
+
+  const handleAddNewAddress = () => {
+    append(addressObject);
+    const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+    console.log(currentAddressItem, "currentAddressItem");
+
+    setValue(
+      `address.${addressFieldsLength}.addressType`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+    setValue(
+      `address.${addressFieldsLength}.label`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+  };
+
   const fields = AddOffAddressDetailsFormField(
     register,
     loading,
@@ -111,7 +138,8 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
     handleChangeLabel,
-    append,
+    handleAddNewAddress,
+    // append,
     remove,
     addressFields,
     handleFieldTypeChange,

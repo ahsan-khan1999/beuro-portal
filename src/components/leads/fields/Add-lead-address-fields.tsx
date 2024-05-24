@@ -2,7 +2,6 @@ import { Field } from "@/enums/form";
 import { useTranslation } from "next-i18next";
 import editIcon from "@/assets/svgs/edit_primary.svg";
 import { FormField, GenerateLeadAddressFormField } from "@/types";
-import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,

@@ -44,9 +44,11 @@ export const useAddLeadAddressDetails = (
   } = useForm({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     dispatch(readAddressSettings());
   }, []);
+
   useEffect(() => {
     if (leadDetails?.id) {
       reset({
@@ -74,17 +76,6 @@ export const useAddLeadAddressDetails = (
   } = useFieldArray({ control, name: "address" });
 
   const addressFieldsLength = addressFields.length || 1;
-  useMemo(() => {
-    // if (addressFields.length === 0) return;
-    // setAddressCount(addressFields.length);
-    console.log(
-      addressFieldsLength,
-      "addressCount",
-      addressSettings?.addresses[addressFieldsLength]
-    );
-
-    // trigger();
-  }, [addressFields.length]);
 
   const handleFieldTypeChange = (index: number) => {
     const updatedAddressType = [...addressType];
@@ -115,6 +106,7 @@ export const useAddLeadAddressDetails = (
       currentAddressItem || `Address ${addressFieldsLength}`
     );
   };
+
   const fields = AddLeadAddressDetailsFormField(
     register,
     loading,

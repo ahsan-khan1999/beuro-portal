@@ -14,6 +14,7 @@ import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
 import { EditInvoiceAddressDetailsFormField } from "@/components/invoice/edit/fields/edit-invoice-address-details-fields";
 import { generateCreateInvoiceAddressDetailsValidation } from "@/validation/invoiceSchema";
 import { readAddressSettings } from "@/api/slices/settingSlice/settings";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useEditInvoiceAddressDetails = ({
   handleNext,
@@ -57,6 +58,9 @@ export const useEditInvoiceAddressDetails = ({
 
   useEffect(() => {
     dispatch(readAddressSettings());
+  }, []);
+
+  useEffect(() => {
     if (invoiceDetails.id) {
       reset({
         address: invoiceDetails?.addressID
@@ -67,7 +71,8 @@ export const useEditInvoiceAddressDetails = ({
           : invoiceDetails?.customerDetail?.address
           ? [
               {
-                label: `Adresse ${1}`,
+                label: addressSettings?.addresses[0] || `Addresse ${1}`,
+                addressType: addressSettings?.addresses[0] || "",
                 ...invoiceDetails?.customerDetail?.address,
               },
             ]
@@ -80,7 +85,8 @@ export const useEditInvoiceAddressDetails = ({
             })),
       });
     }
-  }, [invoiceDetails.id]);
+  }, [invoiceDetails.id, addressSettings?.id]);
+
   const {
     fields: addressFields,
     append,
@@ -100,6 +106,22 @@ export const useEditInvoiceAddressDetails = ({
     setValue(`address.${index}.label`, item);
   };
 
+  const addressFieldsLength = addressFields.length || 1;
+
+  const handleAddNewAddress = () => {
+    append(addressObject);
+    const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+
+    setValue(
+      `address.${addressFieldsLength}.addressType`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+    setValue(
+      `address.${addressFieldsLength}.label`,
+      currentAddressItem || `Addresse ${addressFieldsLength}`
+    );
+  };
+
   const fields = EditInvoiceAddressDetailsFormField(
     register,
     loading,
@@ -107,7 +129,8 @@ export const useEditInvoiceAddressDetails = ({
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
     handleChangeLabel,
-    append,
+    handleAddNewAddress,
+    // append,
     remove,
     addressFields,
     handleFieldTypeChange,

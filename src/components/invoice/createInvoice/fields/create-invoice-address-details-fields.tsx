@@ -40,18 +40,17 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
             type: Field.select,
             id: `address.${i}.addressType`,
             name: `address.${i}.addressType`,
-            value: addressSettings?.addresses?.[0] || "",
+            // value: addressSettings?.addresses?.[0] || "",
             options:
               addressSettings?.addresses?.map((item) => ({
                 label: item,
                 value: item,
               })) || [],
-  
+
             control,
             onItemChange: (item) => handleChangeLabel(item, i),
           },
         },
-  
 
         {
           field: {
@@ -74,8 +73,8 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
                         id: `address.${i}.label`,
                         name: `address.${i}.label`,
                         register,
-                        value: `Adresse ${++valueIndex}`,
-                        setValue,
+                        // value: `Adresse ${++valueIndex}`,
+                        // setValue,
                       },
                     }) || {
                       field: {
@@ -84,11 +83,11 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
                         id: `address.${i}.label`,
                         name: `address.${i}.label`,
                         register,
-                        value: `Adresse ${++valueIndex}`,
+                        // value: `Adresse ${++valueIndex}`,
                         disabled: true,
                         className:
                           "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
-                        setValue,
+                        // setValue,
                       },
                     },
                     {
@@ -256,8 +255,7 @@ export const CreateInvoiceAddressDetailsFormField: GenerateCreateInvoiceAddressF
               inputType: "button",
               className:
                 "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
-              onClick: () =>
-                handleAddNewAddress && handleAddNewAddress(addressObject),
+              onClick: () => handleAddNewAddress && handleAddNewAddress(),
             },
           },
         ],
