@@ -5,12 +5,14 @@ import editIcon from "@/assets/pngs/address_edit_icon.png";
 import Image from "next/image";
 import { GeneralAddress } from "@/types/settings";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export interface GeneralAddressProps {
   onAddAddressTitle: () => void;
   onEditAddressTitle: (id: number) => void;
   onAddressDelete: (index: number) => void;
   addresses: GeneralAddress | null;
+  loading: boolean;
 }
 
 export const AddressDetailCard = ({
@@ -18,6 +20,7 @@ export const AddressDetailCard = ({
   onEditAddressTitle,
   onAddressDelete,
   addresses,
+  loading,
 }: GeneralAddressProps) => {
   return (
     <div className="p-6 bg-white rounded-md">
@@ -36,43 +39,47 @@ export const AddressDetailCard = ({
         />
       </div>
 
-      {addresses && addresses?.addresses.length > 0 ? (
-        <div className="flex flex-col">
-          <div className="flex items-center justify-between my-6">
-            <span className="text-sm text-[#8F8F8F] font-medium">
-              {translate("common.address_title")}
-            </span>
-            <span className="text-sm text-[#8F8F8F] font-medium flex items-center justify-start w-[110px]">
-              {translate("common.actions")}
-            </span>
-          </div>
-          <div className="flex flex-col gap-y-5">
-            {addresses?.addresses?.map((item, index) => (
-              <div
-                className="py-3 px-4 border border-[#ccc] rounded-lg hover:bg-[#EDF4FF] flex items-center justify-between"
-                key={index}
-              >
-                <span className="text-base font-medium text-[#4B4B4B]">
-                  {index + 1}:&nbsp; {item}
-                </span>
-                <div className="flex items-center gap-x-5">
-                  <Image
-                    src={editIcon}
-                    alt="edit address"
-                    className="cursor-pointer"
-                    onClick={() => onEditAddressTitle(index)}
-                  />
-                  <Image
-                    src={delIcon}
-                    alt="del address"
-                    className="cursor-pointer"
-                    onClick={() => onAddressDelete(index)}
-                  />
+      {addresses && addresses.addresses.length > 0 ? (
+        loading ? (
+          <LoadingState />
+        ) : (
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between my-6">
+              <span className="text-sm text-[#8F8F8F] font-medium">
+                {translate("common.address_title")}
+              </span>
+              <span className="text-sm text-[#8F8F8F] font-medium flex items-center justify-start w-[110px]">
+                {translate("common.actions")}
+              </span>
+            </div>
+            <div className="flex flex-col gap-y-5">
+              {addresses.addresses.map((item, index) => (
+                <div
+                  className="py-3 px-4 border border-[#ccc] rounded-lg hover:bg-[#EDF4FF] flex items-center justify-between"
+                  key={index}
+                >
+                  <span className="text-base font-medium text-[#4B4B4B]">
+                    {index + 1}:&nbsp; {item}
+                  </span>
+                  <div className="flex items-center gap-x-5">
+                    <Image
+                      src={editIcon}
+                      alt="edit address"
+                      className="cursor-pointer"
+                      onClick={() => onEditAddressTitle(index)}
+                    />
+                    <Image
+                      src={delIcon}
+                      alt="del address"
+                      className="cursor-pointer"
+                      onClick={() => onAddressDelete(index)}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )
       ) : (
         <NoDataEmptyState />
       )}

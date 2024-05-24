@@ -89,7 +89,6 @@ export const useAddLeadAddressDetails = (
   const handleChangeLabel = (item: string, index: number) => {
     setValue(`address.${index}.label`, item);
   };
-  // console.log(addressFields, "addressFieldsLength");
 
   const handleAddNewAddress = () => {
     append(addressObject);

@@ -49,6 +49,7 @@ export const GeneralSetting = ({
         onAddressDelete={handleDeleteAddress}
         onEditAddressTitle={onEditAddressTitle}
         addresses={addressSettings}
+        loading={loading}
       />
     ),
     [GeneralSettingComponentType.NOTES]: (
@@ -57,6 +58,7 @@ export const GeneralSetting = ({
         onEditNote={onEditNote}
         onNoteDelete={onNoteDelete}
         noteSettings={noteSettings}
+        loading={loading}
       />
     ),
   };
@@ -72,7 +74,7 @@ export const GeneralSetting = ({
           }`}
           onClick={() =>
             handleChangedComponent(GeneralSettingComponentType.ADDRESS)
-          }
+        }
         >
           {translate("setting.general_setting.address")}
         </button>

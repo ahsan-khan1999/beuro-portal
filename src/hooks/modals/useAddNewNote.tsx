@@ -55,6 +55,8 @@ export const useAddNewNote = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
+  const reversedNoteSettings = noteSettings?.slice().reverse() || [];
+
   const onNoteSelect = (id: string) => {
     const filteredNote = noteSettings?.find(
       (item: NoteSetting) => item.notes.noteType === id
@@ -135,7 +137,7 @@ export const useAddNewNote = ({
 
   useEffect(() => {
     if (noteSettings)
-      setValue("description", noteSettings[0]?.notes?.description);
+      setValue("description", reversedNoteSettings[0]?.notes?.description);
   }, []);
 
   return {

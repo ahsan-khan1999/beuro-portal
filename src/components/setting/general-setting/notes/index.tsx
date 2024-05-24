@@ -10,6 +10,7 @@ import {
   readNoteSettings,
 } from "@/api/slices/settingSlice/settings";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 export interface GeneralNotesProps {
   onAddNote: () => void;
@@ -19,6 +20,7 @@ export interface GeneralNotesProps {
   ) => void;
   onNoteDelete: (id: string, index: number) => void;
   noteSettings: NoteSetting[] | null;
+  loading: boolean;
 }
 
 export const NotesDetailCard = ({
@@ -26,6 +28,7 @@ export const NotesDetailCard = ({
   onEditNote,
   onNoteDelete,
   noteSettings,
+  loading,
 }: GeneralNotesProps) => {
   const dispatch = useAppDispatch();
   const [openNoteIndex, setOpenNoteIndex] = useState<number | null>(null);
@@ -37,6 +40,8 @@ export const NotesDetailCard = ({
   useEffect(() => {
     dispatch(readNoteSettings());
   }, []);
+
+  const reversedNoteSettings = noteSettings?.slice().reverse() || [];
 
   return (
     <div className="p-6 bg-white rounded-md">
@@ -56,77 +61,81 @@ export const NotesDetailCard = ({
       </div>
 
       {noteSettings && noteSettings?.length > 0 ? (
-        <div className="flex flex-col">
-          <div className="grid grid-cols-3 items-center my-6">
-            <span className="text-sm text-[#8F8F8F] font-medium col-span-2">
-              {translate("common.title")}
-            </span>
-            <div className="col-span-1 flex items-center justify-between">
-              <span className="text-sm text-[#8F8F8F] font-medium">
-                {translate("common.created_by")}
+        loading ? (
+          <LoadingState />
+        ) : (
+          <div className="flex flex-col">
+            <div className="grid grid-cols-3 items-center my-6">
+              <span className="text-sm text-[#8F8F8F] font-medium col-span-2">
+                {translate("common.title")}
               </span>
+              <div className="col-span-1 flex items-center justify-between">
+                <span className="text-sm text-[#8F8F8F] font-medium">
+                  {translate("common.created_by")}
+                </span>
 
-              <span className="text-sm text-[#8F8F8F] font-medium flex items-center justify-start w-[110px]">
-                {translate("common.actions")}
-              </span>
+                <span className="text-sm text-[#8F8F8F] font-medium flex items-center justify-start w-[110px]">
+                  {translate("common.actions")}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-y-5">
-            {noteSettings?.map((item, index) => (
-              <div
-                className={`pt-3 border border-[#ccc] rounded-lg ${
-                  openNoteIndex === index && "bg-[#EDF4FF]"
-                } hover:bg-[#EDF4FF]`}
-                key={index}
-                onClick={() => handleDescription(index)}
-              >
+            <div className="flex flex-col gap-y-5">
+              {reversedNoteSettings?.map((item, index) => (
                 <div
-                  className={`grid grid-cols-3 items-center pb-[10px] mx-4  ${
-                    openNoteIndex === index &&
-                    "border-b border-b-[#000] border-opacity-20"
-                  }`}
+                  className={`pt-3 border border-[#ccc] rounded-lg ${
+                    openNoteIndex === index && "bg-[#EDF4FF]"
+                  } hover:bg-[#EDF4FF]`}
+                  key={index}
+                  onClick={() => handleDescription(index)}
                 >
-                  <span className="text-base font-medium text-[#4B4B4B] col-span-2 truncate">
-                    {index + 1}:&nbsp; {item.notes.noteType}
-                  </span>
-                  <div className="col-span-1 flex items-center justify-between">
-                    <span className="text-[#717171] text-base font-medium truncate">
-                      {item?.createdBy?.fullName}
+                  <div
+                    className={`grid grid-cols-3 items-center pb-[10px] mx-4  ${
+                      openNoteIndex === index &&
+                      "border-b border-b-[#000] border-opacity-20"
+                    }`}
+                  >
+                    <span className="text-base font-medium text-[#4B4B4B] col-span-2 truncate">
+                      {index + 1}:&nbsp; {item.notes.noteType}
                     </span>
-                    <div
-                      className="flex items-center gap-x-5"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Image
-                        src={editIcon}
-                        alt="edit notes"
-                        className="cursor-pointer"
-                        onClick={() => onEditNote(item?.id, item?.notes)}
-                      />
-                      <Image
-                        src={delIcon}
-                        alt="del note"
-                        className="cursor-pointer"
-                        onClick={() => onNoteDelete(item?.id, index)}
-                      />
+                    <div className="col-span-1 flex items-center justify-between">
+                      <span className="text-[#717171] text-base font-medium truncate">
+                        {item?.createdBy?.fullName}
+                      </span>
+                      <div
+                        className="flex items-center gap-x-5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Image
+                          src={editIcon}
+                          alt="edit notes"
+                          className="cursor-pointer"
+                          onClick={() => onEditNote(item?.id, item?.notes)}
+                        />
+                        <Image
+                          src={delIcon}
+                          alt="del note"
+                          className="cursor-pointer"
+                          onClick={() => onNoteDelete(item?.id, index)}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {openNoteIndex === index && (
-                  <div className="bg-[#EDF4FF] rounded-lg py-3 px-4">
-                    <p
-                      className="text-base font-normal text-[#4B4B4B]"
-                      dangerouslySetInnerHTML={{
-                        __html: item?.notes?.description,
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
+                  {openNoteIndex === index && (
+                    <div className="bg-[#EDF4FF] rounded-lg py-3 px-4">
+                      <p
+                        className="text-base font-normal text-[#4B4B4B]"
+                        dangerouslySetInnerHTML={{
+                          __html: item?.notes?.description,
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )
       ) : (
         <NoDataEmptyState />
       )}

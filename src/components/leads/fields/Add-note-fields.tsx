@@ -35,7 +35,10 @@ export const AddNoteFormField: GenerateNotesFormField = (
               }))
           : [],
         control,
-        value: noteSetting?.[0].notes?.noteType || "",
+        value:
+          (noteSetting &&
+            noteSetting[noteSetting.length - 1].notes?.noteType) ||
+          "",
         onItemChange: onNoteSelect,
         trigger,
       },
