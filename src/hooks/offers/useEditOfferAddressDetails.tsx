@@ -11,7 +11,10 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { useEffect, useMemo, useState } from "react";
-import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
+import {
+  AddOffAddressDetailsFormField,
+  addressObject,
+} from "@/components/offers/add/fields/add-address-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { readAddressSettings } from "@/api/slices/settingSlice/settings";
 
@@ -57,6 +60,9 @@ export const useEditOfferAddressDetails = ({
 
   useEffect(() => {
     dispatch(readAddressSettings());
+  }, []);
+
+  useEffect(() => {
     if (offerDetails.id) {
       reset({
         address: offerDetails?.addressID
@@ -67,13 +73,14 @@ export const useEditOfferAddressDetails = ({
           : offerDetails?.leadID?.addressID
           ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
               ...item,
-              label: item?.label ? item?.label : `Adresse ${++index}`,
+              label: item?.label ? item?.label : `Address ${++index}`,
             }))
           : offerDetails?.leadID?.customerDetail?.address
           ? [
               {
                 ...offerDetails?.leadID?.customerDetail?.address,
-                label: `Adresse ${1}`,
+                label: addressSettings?.addresses[0] || `Addresse ${1}`,
+                addressType: addressSettings?.addresses[0] || "",
               },
             ]
           : addressType?.map((item, index) => ({
@@ -85,7 +92,8 @@ export const useEditOfferAddressDetails = ({
             })),
       });
     }
-  }, [offerDetails.id]);
+  }, [offerDetails?.id, addressSettings?.id]);
+
   const {
     fields: addressFields,
     append,
@@ -105,6 +113,23 @@ export const useEditOfferAddressDetails = ({
     setValue(`address.${index}.label`, item);
   };
 
+  const addressFieldsLength = addressFields.length || 1;
+
+  const handleAddNewAddress = () => {
+    append(addressObject);
+    const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+    console.log(currentAddressItem, "currentAddressItem");
+
+    setValue(
+      `address.${addressFieldsLength}.addressType`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+    setValue(
+      `address.${addressFieldsLength}.label`,
+      currentAddressItem || `Address ${addressFieldsLength}`
+    );
+  };
+
   const fields = AddOffAddressDetailsFormField(
     register,
     loading,
@@ -112,7 +137,8 @@ export const useEditOfferAddressDetails = ({
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
     handleChangeLabel,
-    append,
+    handleAddNewAddress,
+    // append,
     remove,
     addressFields,
     handleFieldTypeChange,

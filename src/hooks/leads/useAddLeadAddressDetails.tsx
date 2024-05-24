@@ -59,8 +59,7 @@ export const useAddLeadAddressDetails = (
             }))
           : [
               {
-                label:
-                  addressSettings?.addresses[0] || `Adresse ${addressCount}`,
+                label: addressSettings?.addresses[0] || `Adresse ${1}`,
                 addressType: addressSettings?.addresses[0] || "",
                 ...leadDetails?.customerDetail?.address,
               },

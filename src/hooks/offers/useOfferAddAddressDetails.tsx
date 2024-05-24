@@ -25,10 +25,6 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     (state) => state.offer
   );
 
-  const [addressCount, setAddressCount] = useState(
-    offerDetails?.leadID?.addressID?.address?.length || 1
-  );
-
   const { addressSettings } = useAppSelector((state) => state.settings);
 
   const [addressType, setAddressType] = useState(
@@ -79,8 +75,7 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
           ? [
               {
                 ...offerDetails?.leadID?.customerDetail?.address,
-                label:
-                  addressSettings?.addresses[0] || `Addresse ${addressCount}`,
+                label: addressSettings?.addresses[0] || `Addresse ${1}`,
                 addressType: addressSettings?.addresses[0] || "",
               },
             ]
