@@ -3,9 +3,8 @@ import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FiltersDefaultValues } from "@/enums/static";
 import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function CustomerFilter({
   filter,
@@ -13,26 +12,7 @@ export default function CustomerFilter({
   handleFilterChange,
 }: FiltersComponentProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  // const moreFilters: FilterType = {
-  //   text: FiltersDefaultValues.None,
-  //   status: FiltersDefaultValues.None,
-  //   sort: FiltersDefaultValues.None,
-  // };
-  // const {
-  //   handleFilterResetToInitial,
-  //   handleFilterReset,
-  //   extraFilterss,
-  //   handleExtraFilterToggle,
-  //   moreFilter,
-  //   handleExtraFiltersClose,
-  //   setMoreFilter,
-  // } = useFilter({
-  //   filter,
-  //   setFilter,
-  //   moreFilters,
-  // });
-
-  const { t: translate } = useTranslation();
+  const [inputValue, setInputValue] = useState<string>("");
   const router = useRouter();
 
   const checkbox: CheckBoxType[] = [
@@ -48,6 +28,20 @@ export default function CustomerFilter({
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
@@ -59,7 +53,23 @@ export default function CustomerFilter({
     });
   };
 
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
+
   const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
       handleFilterChange(updatedFilter);
@@ -120,8 +130,14 @@ export default function CustomerFilter({
     });
   };
 
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   return (
-    <div className="flex flex-col mlg:flex-row gap-4">
+    <div className="flex flex-col mlg:flex-row gap-4 z-10">
       <div className="flex items-center gap-x-4 xl:w-fit">
         {checkbox.map((item, idx) => (
           <CheckField
@@ -139,9 +155,9 @@ export default function CustomerFilter({
       </div>
       <div className="flex items-center gap-x-4">
         <InputField
-          handleChange={(value) => {}}
+          handleChange={handleInputChange}
           ref={inputRef}
-          // value={filter?.text || ""}
+          value={inputValue}
           iconDisplay={true}
           onEnterPress={onEnterPress}
           options={[]}

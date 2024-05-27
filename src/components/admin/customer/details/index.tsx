@@ -11,7 +11,7 @@ const CustomerDetails = () => {
     companyDetails,
     isCustomerFree,
     handleAreYouSure,
-    handlePreviousClick,
+    handleBack,
     renderModal,
     handleStatusChange,
     loading,
@@ -24,7 +24,7 @@ const CustomerDetails = () => {
         <DetailsCard>
           <DetailsData
             customerDetail={companyDetails}
-            handlePreviousClick={handlePreviousClick}
+            onHandleBack={handleBack}
             handleAreYouSure={handleMakeAccountFree}
             isCustomerFree={isCustomerFree}
             handleStatusChange={handleStatusChange}

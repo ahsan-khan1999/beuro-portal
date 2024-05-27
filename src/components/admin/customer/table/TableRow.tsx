@@ -12,7 +12,7 @@ const TableRow = ({
   onStatusChange,
 }: {
   currentPageRows: CustomersAdmin[];
-  onStatusChange: (value: string) => void;
+  onStatusChange: (id: string, status: string, type: string) => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -46,7 +46,7 @@ const TableRow = ({
                 onClick={() =>
                   router.push({
                     pathname: "/admin/customers/details",
-                    query: { customer: item.id },
+                    query: { ...router.query, customer: item.id },
                   })
                 }
                 className={`${
@@ -95,8 +95,8 @@ const TableRow = ({
               >
                 <DropDown
                   items={items}
-                  onItemSelected={(selectedItem) =>
-                    onStatusChange(selectedItem)
+                  onItemSelected={(status) =>
+                    onStatusChange(item.id, status, "customer")
                   }
                   selectedItem={translate(`customer_status.${item.status}`)}
                   dropDownClassName={`w-full rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-1 ${
@@ -124,7 +124,7 @@ const TableRow = ({
                 onClick={() =>
                   router.push({
                     pathname: "/admin/customers/details",
-                    query: { customer: item.id },
+                    query: { ...router.query, customer: item.id },
                   })
                 }
               >

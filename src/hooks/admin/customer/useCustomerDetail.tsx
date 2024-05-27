@@ -11,6 +11,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { staticEnums } from "@/utils/static";
+import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -36,8 +37,10 @@ export default function useCustomerDetailAdmin() {
     }
   }, [id]);
 
-  const handlePreviousClick = () => {
-    router.push("/admin/customers");
+  const handleBack = () => {
+    router.pathname = "/admin/customers";
+    delete router.query["customer"];
+    updateQuery(router, router.locale as string);
   };
 
   const onClose = () => {
@@ -56,6 +59,10 @@ export default function useCustomerDetailAdmin() {
   const handleCreated = () => {
     onClose();
     setIsCustomerFree(true);
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleDefaultModal = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
@@ -99,7 +106,7 @@ export default function useCustomerDetailAdmin() {
         },
       })
     );
-    if (res?.payload) dispatch(updateModalType({ type: ModalType.CREATION }));
+    if (res?.payload) handleDefaultModal();
   };
 
   return {
@@ -107,7 +114,7 @@ export default function useCustomerDetailAdmin() {
     isCustomerFree,
     modal,
     translate,
-    handlePreviousClick,
+    handleBack,
     handleAreYouSure,
     handleCreated,
     onClose,

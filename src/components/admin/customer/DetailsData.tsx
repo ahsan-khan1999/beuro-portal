@@ -1,27 +1,26 @@
 import { CustomersAdmin } from "@/types/admin/customer";
-import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import React from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { DropDownItem } from "@/types";
 import { formatDateTimeToDate } from "@/utils/utility";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
+import { useRouter } from "next/router";
 
 const DetailsData = ({
   customerDetail,
   isCustomerFree,
-  handlePreviousClick,
+  onHandleBack,
   handleAreYouSure,
   handleStatusChange,
 }: {
   customerDetail: CustomersAdmin;
   isCustomerFree: boolean;
-  handlePreviousClick: () => void;
+  onHandleBack: () => void;
   handleAreYouSure: () => void;
   handleStatusChange: (value: string) => void;
 }) => {
-  const { t: translate } = useTranslation();
-
+  const router = useRouter();
   const customerStatus = [
     `${translate("customer_status.unBlock")}`,
     `${translate("customer_status.block")}`,
@@ -46,7 +45,7 @@ const DetailsData = ({
     <>
       <div className="flex flex-col lg:flex-row gap-4 justify-between lg:items-center pb-5">
         <div className="flex items-center">
-          <div onClick={handlePreviousClick} className="cursor-pointer">
+          <div onClick={onHandleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
