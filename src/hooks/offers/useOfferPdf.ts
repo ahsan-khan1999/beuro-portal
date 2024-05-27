@@ -149,7 +149,7 @@ export const useOfferPdf = () => {
             },
             headerDetails: {
               offerNo: offerDetails?.offerNumber,
-              companyName: offerDetails?.createdBy.company.companyName,
+              companyName: offerDetails?.createdBy?.company?.companyName,
               offerDate: offerDetails?.createdAt,
               createdBy: offerDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
@@ -215,17 +215,18 @@ export const useOfferPdf = () => {
               secondColumn: {
                 address: {
                   postalCode:
-                    offerDetails?.createdBy?.company.address.postalCode,
+                    offerDetails?.createdBy?.company?.address?.postalCode,
                   streetNumber:
-                    offerDetails?.createdBy?.company.address.streetNumber,
+                    offerDetails?.createdBy?.company?.address?.streetNumber,
                 },
                 bankDetails: {
                   accountNumber:
-                    offerDetails?.createdBy?.company.bankDetails.accountNumber,
+                    offerDetails?.createdBy?.company?.bankDetails
+                      ?.accountNumber,
                   bankName:
-                    offerDetails?.createdBy?.company.bankDetails.bankName,
+                    offerDetails?.createdBy?.company?.bankDetails?.bankName,
                   ibanNumber:
-                    offerDetails?.createdBy?.company.bankDetails.ibanNumber,
+                    offerDetails?.createdBy?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {

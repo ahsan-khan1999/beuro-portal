@@ -54,6 +54,7 @@ export const useOfferAditionalDetails = (
   }, [offerDetails?.additionalDetails]);
 
   const selectedContent = watch("content");
+
   const handleBack = () => {
     onHandleBack(ComponentsType.serviceAdded);
   };

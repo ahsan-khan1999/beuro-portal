@@ -54,38 +54,65 @@ export const useEditInvoiceAddressDetails = ({
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
+    defaultValues: {
+      address: invoiceDetails?.addressID
+        ? invoiceDetails?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Adresse ${++index}`,
+          }))
+        : invoiceDetails?.addressID
+        ? invoiceDetails?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Addresse ${++index}`,
+          }))
+        : invoiceDetails?.customerDetail?.address
+        ? [
+            {
+              ...invoiceDetails?.customerDetail?.address,
+              label: `Adresse ${1}`,
+              addressType: "",
+            },
+          ]
+        : addressType?.map((item, index) => ({
+            streetNumber: "",
+            postalCode: "",
+            country: "",
+            description: "",
+            label: `Adresse ${++index}`,
+          })),
+    },
   });
 
   useEffect(() => {
     dispatch(readAddressSettings());
   }, []);
 
-  useEffect(() => {
-    if (invoiceDetails.id) {
-      reset({
-        address: invoiceDetails?.addressID
-          ? invoiceDetails?.addressID?.address?.map((item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Adresse ${++index}`,
-            }))
-          : invoiceDetails?.customerDetail?.address
-          ? [
-              {
-                label: addressSettings?.addresses[0] || `Addresse ${1}`,
-                addressType: addressSettings?.addresses[0] || "",
-                ...invoiceDetails?.customerDetail?.address,
-              },
-            ]
-          : addressType?.map((item, index) => ({
-              streetNumber: "",
-              postalCode: "",
-              country: "",
-              description: "",
-              label: `Adresse ${++index}`,
-            })),
-      });
-    }
-  }, [invoiceDetails.id, addressSettings?.id]);
+  // useEffect(() => {
+  //   if (invoiceDetails.id) {
+  //     reset({
+  //       address: invoiceDetails?.addressID
+  //         ? invoiceDetails?.addressID?.address?.map((item, index) => ({
+  //             ...item,
+  //             label: item?.label ? item?.label : `Adresse ${++index}`,
+  //           }))
+  //         : invoiceDetails?.customerDetail?.address
+  //         ? [
+  //             {
+  //               label: addressSettings?.addresses[0] || `Addresse ${1}`,
+  //               addressType: addressSettings?.addresses[0] || "",
+  //               ...invoiceDetails?.customerDetail?.address,
+  //             },
+  //           ]
+  //         : addressType?.map((item, index) => ({
+  //             streetNumber: "",
+  //             postalCode: "",
+  //             country: "",
+  //             description: "",
+  //             label: `Adresse ${++index}`,
+  //           })),
+  //     });
+  //   }
+  // }, [invoiceDetails.id, addressSettings?.id]);
 
   const {
     fields: addressFields,
@@ -110,15 +137,16 @@ export const useEditInvoiceAddressDetails = ({
 
   const handleAddNewAddress = () => {
     append(addressObject);
-    const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+    // const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
 
     setValue(
       `address.${addressFieldsLength}.addressType`,
-      currentAddressItem || `Address ${addressFieldsLength}`
+      ``
+      // currentAddressItem || `Address ${addressFieldsLength}`
     );
     setValue(
       `address.${addressFieldsLength}.label`,
-      currentAddressItem || `Addresse ${addressFieldsLength}`
+      `Addresse ${addressFieldsLength + 1}`
     );
   };
 

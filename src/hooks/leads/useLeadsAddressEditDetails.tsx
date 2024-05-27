@@ -22,9 +22,6 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
   const dispatch = useAppDispatch();
   const [addressType, setAddressType] = useState([false, false]);
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
-  const [addressCount, setAddressCount] = useState(
-    leadDetails?.addressID?.address?.length || 1
-  );
 
   const { addressSettings } = useAppSelector((state) => state.settings);
 
@@ -44,30 +41,45 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     setValue,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
+    defaultValues: {
+      address: leadDetails?.addressID
+        ? leadDetails?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Adresse ${++index}`,
+            addressType: item?.addressType,
+          }))
+        : [
+            {
+              label: `Adresse ${1}`,
+              addressType: "",
+              ...leadDetails?.customerDetail?.address,
+            },
+          ],
+    },
   });
 
   useEffect(() => {
     dispatch(readAddressSettings());
   }, []);
 
-  useEffect(() => {
-    if (leadDetails?.id) {
-      reset({
-        address: leadDetails?.addressID
-          ? leadDetails?.addressID?.address?.map((item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Adresse ${++index}`,
-            }))
-          : [
-              {
-                label: addressSettings?.addresses[0] || `Adresse ${1}`,
-                addressType: addressSettings?.addresses[0] || "",
-                ...leadDetails?.customerDetail?.address,
-              },
-            ],
-      });
-    }
-  }, [leadDetails?.id, addressSettings?.id]);
+  // useEffect(() => {
+  //   if (leadDetails?.id) {
+  //     reset({
+  //       address: leadDetails?.addressID
+  //         ? leadDetails?.addressID?.address?.map((item, index) => ({
+  //             ...item,
+  //             label: item?.label ? item?.label : `Adresse ${++index}`,
+  //           }))
+  //         : [
+  //             {
+  //               label: addressSettings?.addresses[0] || `Adresse ${1}`,
+  //               addressType: addressSettings?.addresses[0] || "",
+  //               ...leadDetails?.customerDetail?.address,
+  //             },
+  //           ],
+  //     });
+  //   }
+  // }, [leadDetails?.id, addressSettings?.id]);
 
   const {
     append,
@@ -94,15 +106,17 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
 
   const handleAddNewAddress = () => {
     append(addressObject);
-    const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+    // const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
 
     setValue(
       `address.${addressFieldsLength}.addressType`,
-      currentAddressItem || `Address ${addressFieldsLength}`
+      ``
+      // currentAddressItem || `Address ${addressFieldsLength}`
     );
+
     setValue(
       `address.${addressFieldsLength}.label`,
-      currentAddressItem || `Addresse ${addressFieldsLength}`
+      `Addresse ${addressFieldsLength + 1}`
     );
   };
 

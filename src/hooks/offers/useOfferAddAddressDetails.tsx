@@ -52,43 +52,70 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
+    defaultValues: {
+      address: offerDetails?.addressID
+        ? offerDetails?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Adresse ${++index}`,
+          }))
+        : offerDetails?.leadID?.addressID
+        ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Addresse ${++index}`,
+          }))
+        : offerDetails?.leadID?.customerDetail?.address
+        ? [
+            {
+              ...offerDetails?.leadID?.customerDetail?.address,
+              label: `Addresse ${1}`,
+              addressType: "",
+            },
+          ]
+        : addressType?.map((item, index) => ({
+            streetNumber: "",
+            postalCode: "",
+            country: "",
+            description: "",
+            label: `Adresse ${++index}`,
+          })),
+    },
   });
 
   useEffect(() => {
     dispatch(readAddressSettings());
   }, []);
 
-  useEffect(() => {
-    if (offerDetails.id) {
-      reset({
-        address: offerDetails?.addressID
-          ? offerDetails?.addressID?.address?.map((item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Adresse ${++index}`,
-            }))
-          : offerDetails?.leadID?.addressID
-          ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Address ${++index}`,
-            }))
-          : offerDetails?.leadID?.customerDetail?.address
-          ? [
-              {
-                ...offerDetails?.leadID?.customerDetail?.address,
-                label: addressSettings?.addresses[0] || `Addresse ${1}`,
-                addressType: addressSettings?.addresses[0] || "",
-              },
-            ]
-          : addressType?.map((item, index) => ({
-              streetNumber: "",
-              postalCode: "",
-              country: "",
-              description: "",
-              label: `Adresse ${++index}`,
-            })),
-      });
-    }
-  }, [offerDetails?.id, addressSettings?.id]);
+  // useEffect(() => {
+  //   if (offerDetails.id) {
+  //     reset({
+  //       address: offerDetails?.addressID
+  //         ? offerDetails?.addressID?.address?.map((item, index) => ({
+  //             ...item,
+  //             label: item?.label ? item?.label : `Adresse ${++index}`,
+  //           }))
+  //         : offerDetails?.leadID?.addressID
+  //         ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
+  //             ...item,
+  //             label: item?.label ? item?.label : `Addresse ${++index}`,
+  //           }))
+  //         : offerDetails?.leadID?.customerDetail?.address
+  //         ? [
+  //             {
+  //               ...offerDetails?.leadID?.customerDetail?.address,
+  //               label: `Addresse ${1}`,
+  //               addressType: "",
+  //             },
+  //           ]
+  //         : addressType?.map((item, index) => ({
+  //             streetNumber: "",
+  //             postalCode: "",
+  //             country: "",
+  //             description: "",
+  //             label: `Adresse ${++index}`,
+  //           })),
+  //     });
+  //   }
+  // }, [offerDetails?.id, addressSettings?.id]);
 
   const {
     fields: addressFields,
@@ -114,15 +141,16 @@ export const useOfferAddAddressDetails = (onHandleNext: Function) => {
   const handleAddNewAddress = () => {
     append(addressObject);
     const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
-    console.log(currentAddressItem, "currentAddressItem");
 
     setValue(
       `address.${addressFieldsLength}.addressType`,
-      currentAddressItem || `Address ${addressFieldsLength}`
+      ``
+      // currentAddressItem || `Address ${addressFieldsLength}`
     );
+
     setValue(
       `address.${addressFieldsLength}.label`,
-      currentAddressItem || `Address ${addressFieldsLength}`
+      `Addresse ${addressFieldsLength + 1}`
     );
   };
 
