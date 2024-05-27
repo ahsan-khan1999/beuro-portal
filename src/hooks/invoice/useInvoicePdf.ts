@@ -192,7 +192,7 @@ export const useInvoicePdf = () => {
               mobile: invoiceDetails?.invoiceID?.customerDetail?.mobileNumber,
               gender:
                 invoiceDetails?.invoiceID?.customerDetail?.gender?.toString(),
-              isReverseInfo: template.payload.Template?.order,
+              isReverseInfo: template?.payload?.Template?.order,
             },
             movingDetails: {
               address: invoiceDetails?.invoiceID?.addressID?.address,
@@ -211,18 +211,18 @@ export const useInvoicePdf = () => {
               tax: invoiceDetails?.invoiceID?.taxAmount?.toString(),
               discount: invoiceDetails?.invoiceID?.discountAmount?.toString(),
               discountType: invoiceDetails?.invoiceID?.discountType,
-              discountPercentage: discountPercentage.toString(),
-              updatedDiscountAmount: updatedTotalDiscount.toString(),
+              discountPercentage: discountPercentage?.toString(),
+              updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               invoiceCreatedAmount:
-                invoiceDetails?.invoiceID?.invoiceCreatedAmount.toString(),
+                invoiceDetails?.invoiceID?.invoiceCreatedAmount?.toString(),
               invoicePaidAmount:
-                invoiceDetails?.invoiceID?.paidAmount.toString(),
+                invoiceDetails?.invoiceID?.paidAmount?.toString(),
               isShowExtraAmount: true,
               isSubInvoicePdf: true,
-              dueAmount: invoiceDetails?.amount.toString(),
-              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
-              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
+              dueAmount: invoiceDetails?.amount?.toString(),
+              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount?.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus?.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:
                 invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
@@ -245,13 +245,13 @@ export const useInvoicePdf = () => {
               },
               secondColumn: {
                 address: {
-                  postalCode: user?.company.address.postalCode,
-                  streetNumber: user?.company.address.streetNumber,
+                  postalCode: user?.company?.address?.postalCode,
+                  streetNumber: user?.company?.address?.streetNumber,
                 },
                 bankDetails: {
-                  accountNumber: user?.company.bankDetails.accountNumber,
-                  bankName: user?.company.bankDetails.bankName,
-                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                  accountNumber: user?.company?.bankDetails?.accountNumber,
+                  bankName: user?.company?.bankDetails?.bankName,
+                  ibanNumber: user?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {
