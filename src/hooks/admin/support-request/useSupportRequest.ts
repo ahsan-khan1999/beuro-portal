@@ -1,16 +1,27 @@
 import {
   ContactSupport,
   readContactSupport,
+  updateContactSupport,
 } from "@/api/slices/contactSupport/contactSupportSlice";
 import { FiltersDefaultValues } from "@/enums/static";
+import { ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { FilterType } from "@/types";
+import { staticEnums } from "@/utils/static";
 import { useEffect, useState } from "react";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { useRouter } from "next/router";
 
 export default function useSupportRequest() {
-  const { contactSupport, lastPage, totalCount, loading } = useAppSelector(
-    (state) => state.contactSupport
-  );
+  const {
+    contactSupport,
+    contactSupportDetails,
+    lastPage,
+    totalCount,
+    loading,
+  } = useAppSelector((state) => state.contactSupport);
+  const router = useRouter();
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   // const [filter, setFilter] = useState<FilterType>({
   //   location: "",
@@ -30,6 +41,7 @@ export default function useSupportRequest() {
 
   const totalItems = totalCount;
   const itemsPerPage = 10;
+
   useEffect(() => {
     // dispatch(set(DEFAULT_CUSTOMER))
     dispatch(
@@ -51,6 +63,7 @@ export default function useSupportRequest() {
       }
     });
   };
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readContactSupport({
@@ -62,6 +75,22 @@ export default function useSupportRequest() {
       }
     });
   };
+
+  const handleStatusUpadte = async (value: string) => {
+    const response = await dispatch(
+      updateContactSupport({
+        data: {
+          id: contactSupportDetails?.id,
+          status: staticEnums["SupportRequest"][value],
+        },
+        router,
+        translate,
+      })
+    );
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   return {
     currentPageRows,
     totalItems,
@@ -71,6 +100,7 @@ export default function useSupportRequest() {
     setFilter,
     handleFilterChange,
     loading,
-    currentPage
+    currentPage,
+    handleStatusUpadte,
   };
 }

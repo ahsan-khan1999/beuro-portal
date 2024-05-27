@@ -319,3 +319,18 @@ export const useEmptyStates = (
   const data = lookup[isEmpty];
   return data;
 };
+
+export const useQueryParams = () => {
+  let queryParams = {} as any;
+  if (typeof window !== "undefined") {
+    queryParams = useMemo(() => {
+      const queryParamsObject = {} as { [x: string]: string | number };
+      const searchParams = new URLSearchParams(window.location.search);
+      for (const [key, value] of searchParams.entries()) {
+        queryParamsObject[key] = value;
+      }
+      return queryParamsObject;
+    }, [window.location.search]);
+  }
+  return queryParams;
+};

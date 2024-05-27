@@ -148,7 +148,7 @@ const AdminDashboard = () => {
           {translate("admin.main_heading")}
         </h1>
       </div>
-      <SearchInputFiled
+      {/* <SearchInputFiled
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter.text}
         iconDisplay={true}
@@ -180,7 +180,7 @@ const AdminDashboard = () => {
             service: "Umzug Cleaning Service",
           },
         ]}
-      />
+      /> */}
       <DashboardFunctions
         filter={filter}
         setFilter={setFilter}

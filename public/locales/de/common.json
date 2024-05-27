@@ -1158,6 +1158,10 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "plan_detail": "Plandetails",
+    "new_plan": "Neuen Plan hinzufügen",
+    "yes_button": "Ja",
+    "enter_company": "Firmenname eingeben",
     "note_title": "Titel notieren",
     "title": "Titel",
     "created_by": "Erstellt von",
@@ -1628,7 +1632,7 @@
       },
       "card_content": {
         "main_heading": "Kundendetails",
-        "make_button_unchecked": "Unendlich frei erstellen",
+        "make_button_unchecked": "Konto kostenlos erstellen",
         "make_button_checked": "Unendlich erstellen",
         "customer_id": "ID",
         "role": "Rolle",
@@ -1639,7 +1643,8 @@
         "company_logo": "Firmenlogo",
         "customer_status": {
           "active": "Aktiv",
-          "block": "Blockieren"
+          "block": "Blockieren",
+          "unBlock": "entsperren"
         },
         "customer_free": "Ihr Kunde ist jetzt völlig frei."
       },

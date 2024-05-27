@@ -5,6 +5,7 @@ import {
   AddTaxField,
   ChangePasswordField,
   EditPaymentDetails,
+  EnterComponayNameField,
   UpdateNoteId,
 } from "@/enums/modals";
 import * as yup from "yup";
@@ -133,5 +134,15 @@ export const generateAddGeneralNoteValidationSchema = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [AddGeneralNoteField.description]: yup.string().notRequired(),
+  });
+};
+
+export const generateEnterCompanyNameValidationSchema = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [EnterComponayNameField.companyName]: yup
+      .string()
+      .required(translate("validationMessages.required")),
   });
 };

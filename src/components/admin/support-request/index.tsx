@@ -7,6 +7,7 @@ import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useSupportRequest from "@/hooks/admin/support-request/useSupportRequest";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function SupportRequest() {
   const {
@@ -18,12 +19,15 @@ export default function SupportRequest() {
     setFilter,
     handleFilterChange,
     loading,
-    currentPage
-
+    currentPage,
+    handleStatusUpadte,
   } = useSupportRequest();
 
   const CurrentComponent = useEmptyStates(
-    <TableRow currentPageRows={currentPageRows} />,
+    <TableRow
+      currentPageRows={currentPageRows}
+      onStatusChange={handleStatusUpadte}
+    />,
     currentPageRows?.length > 0,
     loading
   );
@@ -35,16 +39,18 @@ export default function SupportRequest() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeading />
-        {CurrentComponent}
-      </TableLayout>
+
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeading />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
         currentPage={currentPage}
-
       />
     </Layout>
   );

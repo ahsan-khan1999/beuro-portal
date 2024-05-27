@@ -1,5 +1,3 @@
-import { SupportRequestAdmin } from "@/types/admin/support-request";
-import { useTranslation } from "next-i18next";
 import React from "react";
 import { useRouter } from "next/router";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
@@ -18,8 +16,6 @@ const DetailsData = ({
   handlePreviousClick: () => void;
   handleStatusUpadte: (value: string) => void;
 }) => {
-  const { t: translate } = useTranslation();
-
   const router = useRouter();
 
   const itemStatus: DropDownItem[] = [
@@ -112,22 +108,29 @@ const DetailsData = ({
           {translate("admin.support_requests.card_content.button")}
         </button>
       </div>
-      <div className="flex flex-col gap-y-3 md:flex-row md:space-x-20 md:items-center mt-5">
-        <h3 className="text-[#4D4D4D]">
-          {translate("admin.support_requests.card_content.customer_id")}:
-          <span className="text-[#4B4B4B] font-medium ml-3">
+      <div className="flex flex-col gap-y-3 mlg:flex-row mlg:space-x-20 mlg:items-center mt-5">
+        <div className="flex items-center gap-x-3">
+          <span className="text-base font-medium text-[#4D4D4D]">
+            {translate("admin.support_requests.card_content.customer_id")}:
+          </span>
+          <span className="text-primary font-medium">
             {supportDetail?.createdBy?.company?.refID}
           </span>
-        </h3>
-        <h3 className="text-[#4D4D4D]">
-          {translate("admin.support_requests.card_content.request_date")}:
-          <span className="ml-3 text-[#4B4B4B] font-medium">
+        </div>
+        <div className="flex items-center gap-x-3">
+          <span className="text-base font-medium text-[#4D4D4D]">
+            {translate("admin.support_requests.card_content.request_date")}:
+          </span>
+          <span className="text-primary font-medium">
             {supportDetail && formatDateTimeToDate(supportDetail?.createdAt)}
           </span>
-        </h3>
-        <h3 className="text-[#4D4D4D] flex items-center">
-          {translate("admin.support_requests.card_content.status")}:
-          <span className="ml-3 text-[#4B4B4B] font-medium">
+        </div>
+        <div className="flex items-center gap-x-3">
+          <span className="text-base font-medium text-[#4D4D4D]">
+            {translate("admin.support_requests.card_content.status")}:
+          </span>
+
+          <span>
             <DropDown
               items={itemStatus}
               onItemSelected={(selectedItem) =>
@@ -136,13 +139,13 @@ const DetailsData = ({
               selectedItem={translate(
                 `support_request_status.${supportDetail?.status}`
               )}
-              dropDownClassName="px-3 border border-primary justify-between"
+              dropDownClassName="px-3 border border-primary justify-between py-[3px]"
               dropDownTextClassName="text-primary font-medium"
               dropDownIconClassName="text-primary ml-2"
               dropDownItemsContainerClassName="border border-primary w-full"
             />
           </span>
-        </h3>
+        </div>
       </div>
     </>
   );

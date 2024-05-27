@@ -13,20 +13,26 @@ const CreatePlan = () => {
     onSubmit,
     errors,
     handlePreviousClick,
-    renderModal
+    renderModal,
   } = usePlanDetail(false);
 
   return (
     <Layout>
-      <PlansForm
-        isUpdate={isUpdate}
-        setIsUpdate={setIsUpdate}
-        fields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        planDetail={planDetails}
-      />
+      <div>
+        <h2 className="text-xl font-normal text-[#222B45] mb-4">
+          {translate("common.new_plan")}
+        </h2>
+        <PlansForm
+          isUpdate={isUpdate}
+          setIsUpdate={setIsUpdate}
+          fields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          planDetail={planDetails}
+        />
+      </div>
+
       {renderModal()}
     </Layout>
   );
