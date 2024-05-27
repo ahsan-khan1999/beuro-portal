@@ -4,26 +4,32 @@ import React from "react";
 const TableHeading = () => {
   const { t: translate } = useTranslation();
   return (
-    <div className="bg-white xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(200px,_100%)_minmax(340px,_100%)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(50px,_50px)] mlg:grid-cols-[minmax(80px,_80px),minmax(180px,_100%)_minmax(200px,_200px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(50px,_50px)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_100%)_minmax(200px,_100%)_minmax(150px,_150px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(50px,_50px)] rounded-md px-5 pt-[23px] pb-[17px]">
-      <span className="font-medium text-[#8F8F8F]">
-        {translate("admin.support_requests.table_headings.id")}
-      </span>
-      <span className="font-medium text-[#8F8F8F]">
-        {translate("admin.support_requests.table_headings.customer_name")}
-      </span>
-      <span className="font-medium text-[#8F8F8F] xs:block mlg:hidden xlg:block">
-        {translate("admin.support_requests.table_headings.email_address")}
-      </span>
-      <span className="font-medium text-[#8F8F8F]">
-        {translate("admin.support_requests.table_headings.phone_number")}
-      </span>
-      <span className="font-medium text-[#8F8F8F]">
-        {translate("admin.support_requests.table_headings.request_date")}
-      </span>
-      <span className="font-medium text-[#8F8F8F] flex justify-center items-center">
-        {translate("admin.support_requests.table_headings.status")}
-      </span>
-      <span className="font-medium text-[#8F8F8F] flex justify-center items-center"></span>
+    <div className="flex">
+      <div className="mlg:w-full">
+        <div className="bg-primary rounded-l-lg pl-4 gap-x-4 py-4 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px),minmax(200px,_3fr)_minmax(300px,_4fr)_minmax(160px,_160px)_minmax(140px,_140px)] mlg:grid-cols-[minmax(60px,_60px),minmax(100px,_100%)_minmax(160px,_160px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px),minmax(150px,_3fr)_minmax(150px,_4fr)_minmax(140px,_140px)_minmax(130px,_130px)]">
+          <span className="font-medium text-white">
+            {translate("admin.support_requests.table_headings.id")}
+          </span>
+          <span className="font-medium text-white">
+            {translate("admin.support_requests.table_headings.customer_name")}
+          </span>
+          <span className="font-medium text-white xs:block mlg:hidden xlg:block">
+            {translate("admin.support_requests.table_headings.email_address")}
+          </span>
+          <span className="font-medium text-white">
+            {translate("admin.support_requests.table_headings.phone_number")}
+          </span>
+          <span className="font-medium text-white">
+            {translate("admin.support_requests.table_headings.request_date")}
+          </span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-[minmax(100px,_100px)_minmax(50px,_50px)] bg-primary rounded-r-lg py-4">
+        <span className="font-semibold text-base text-white pl-3">
+          {translate("common.actions")}
+        </span>
+      </div>
     </div>
   );
 };

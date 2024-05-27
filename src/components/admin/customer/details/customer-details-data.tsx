@@ -12,7 +12,7 @@ const CustomerDetailsData = ({
   const { t: translate } = useTranslation();
   return (
     <LeadsCardLayout>
-      <div className="my-5 py-3 px-6">
+      <div className="my-5 p-6">
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">

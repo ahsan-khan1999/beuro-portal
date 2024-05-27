@@ -221,7 +221,7 @@ const DetailsData = ({
               src={customerDetail?.company?.logo || userIcon}
               alt="company logo"
               height={50}
-              width={50}
+              width={40}
             />
           </div>
         </div>
