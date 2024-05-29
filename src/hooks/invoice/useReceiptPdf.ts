@@ -353,6 +353,7 @@ export const useReceiptPdf = () => {
       qrCode: qrCodeUrl,
       remoteFileBlob,
       systemSetting,
+      companyName: receiptData?.headerDetails?.companyName,
     }),
     [
       emailTemplateSettings,

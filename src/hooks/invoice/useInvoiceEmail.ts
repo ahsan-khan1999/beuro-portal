@@ -166,6 +166,7 @@ export const useInvoiceEmail = (
     // if (response?.payload) {
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
+      console.log(fileUrl);
       let apiData = {
         ...data,
         id: invoiceID,

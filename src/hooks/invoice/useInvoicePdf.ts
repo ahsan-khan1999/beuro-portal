@@ -323,6 +323,7 @@ export const useInvoicePdf = () => {
       qrCode: qrCodeUrl,
       remoteFileBlob,
       systemSetting,
+      companyName: invoiceData?.headerDetails?.companyName,
     }),
     [
       emailTemplateSettings,
