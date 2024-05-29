@@ -1,6 +1,6 @@
 {
   "register": {
-    "main_heading": "Anmelden bei Büro-365",
+    "main_heading": "Anmeldung bei Büro-3655",
     "sub_heading": "Verwalten Sie Ihr Unternehmen mit uns",
     "full_name": "Vollständiger Name",
     "email_label": "E-Mail",
@@ -160,16 +160,17 @@
     "file": "Bitte wählen Sie ein gültiges Dateiformat"
   },
   "validationMessages": {
+    "unauthenticated": "Melden Sie sich an oder erstellen Sie ein Konto, um fortzufahren",
     "required": "Dieses Feld ist erforderlich",
     "nonexistent": "nicht existent",
     "already_exists": "{0} mit diesem {1} existiert bereits",
-    "not_found": "not_found:{0}:{1}",
+    "not_found": "Nicht gefunden:{0}:{1}",
     "password_length_error": "Das Passwort muss größer als 6 sein",
-    "password_missing_lower": "passwort_fehlt_unten",
-    "password_missing_upper": "passwort_fehlt_ober",
-    "password_missing_number": "passwort_fehlt_nummer",
-    "password_missing_special": "passwort_fehlt_besonders",
-    "invalid_datatype": "invalid_datatype:{0}:{1}",
+    "password_missing_lower": "Passwort fehlt unten",
+    "password_missing_upper": "Passwort fehlt ober",
+    "password_missing_number": "Passwort fehlt nummer",
+    "password_missing_special": "Passwort fehlt besonders",
+    "invalid_datatype": "Ungültiger Datentyp:{0}:{1}",
     "invalid_format": "Ungültige Formate",
     "invalid_option": "Bitte eine gültige Option auswählen",
     "auth_invalid_credentials": "Ungültige Anmeldeinformationen",
@@ -180,11 +181,15 @@
     "server_error": "Interner Serverfehler : 500",
     "oauth_account_in_use": "Bereits verwendetes Konto",
     "user_profile_commercial_seller_request_already_filed": "Benutzerprofil gewerblicher Verkäufer Antrag bereits eingereicht",
-    "mail_sent_maybe": "E-Mail Gesendet",
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "Ihr Plan läuft aus!",
+<<<<<<< HEAD
     "offer_already_signed": "Dieses Angebot ist bereits unterzeichnet.",
     "validation_failed": "This Offer Already Signed",
+=======
+    "offer_already_signed": "Dieses Angebot ist bereits unterzeichnet",
+    "validation_failed": "Überprüfung fehlgeschlagen",
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",
@@ -200,7 +205,52 @@
     "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
     "offer_not_open": "ZurückgehenDieses Angebote ist bereits geschlossen oder unterzeichnet",
     "value_max": "value_max",
-    "discountLessThanTotalPrice": "muss geringer sein als der Gesamtpreis"
+    "discountLessThanTotalPrice": "muss geringer sein als der Gesamtpreis",
+    "auth_provider_mismatch": "Authentication Provider Mismatch",
+    "otp_sent": "OPT Schicken",
+    "otp_user_invalid_phone": "Die angegebene Telefonnummer ist für die OTP-Verifizierung ungültig",
+    "otp_user_phone_mismatch": "Die OPT-Verifizierungs-Telefonnummer stimmt nicht überein",
+    "otp_user_phone_already_verified": "Die OPT-Telefonnummer wurde bereits bestätigt",
+    "token_invalid": "Das bereitgestellte Token ist ungültig",
+    "mail_sent_maybe": "E-Mail gesendet (ausstehend)",
+    "link_sent": "Link gesendet",
+    "link_invalid": "Der bereitgestellte Link ist ungültig",
+    "otp_user_email_already_verified": "Die OPT-E-Mail-Adresse wurde bereits bestätigt",
+    "user_not_found": "Benutzer nicht gefunden",
+    "user_same_password_not_allowed": "Bitte wählen Sie ein neues Passwort, das sich von Ihrem aktuellen unterscheidet",
+    "New_password_and_confirm_password_do_not_match": "Das neue Passwort und das Bestätigungspasswort stimmen nicht überein",
+    "user_profile_not_complete": "Benutzerprofil unvollständig",
+    "CompleteStep1": "Bitte schließen Sie den ersten Schritt ab",
+    "CompleteStep2": "Bitte schließen Sie den zweiten Schritt ab",
+    "user_profile_address_must_keep_one": "Bitte stellen Sie sicher, dass in Ihrem Profil mindestens eine Adresse angegeben ist",
+    "user_profile_address_invalid_index": "Bitte wählen Sie eine gültige Adresse aus der Liste aus",
+    "followup_is_already_marked_complete": "Die Nachverfolgung ist bereits als abgeschlossen markiert",
+    "followup_is_completed_cannot_be_postponed": "Die Nachbereitung ist abgeschlossen und kann nicht verschoben werden",
+    "Discount_cannot_be_greater_than_total_Amount": "Der Rabattbetrag darf den Gesamtbetrag nicht überschreiten",
+    "Discount_percentage_cannot_be_greater_than_100%": "Der Rabattprozentsatz darf nicht größer als 100 % sein",
+    "Tax_percentage_cannot_be_greater_than_100%": "Der Steuersatz darf nicht größer als 100 % sein",
+    "Paid_Amount_Cannot_Be_Greater_Than_Remaining_Amount": "Der gezahlte Betrag kann nicht größer sein als der Restbetrag",
+    "Alreday_Recurring_Invoice_Created_You_cant't_Create _Invoice": "Es wurde bereits eine bestehende wiederkehrende Rechnung erstellt. Sie können keine weitere Rechnung erstellen",
+    "Paid_Amount_Must_Be Equal_to_Remaining_Amount": "Der gezahlte Betrag muss dem Restbetrag entsprechen",
+    "invalidType": "Bitte geben Sie einen gültigen Typ für diesen Vorgang an",
+    "Recurring_Invoice_Can_Not_Be_start_Again": "Eine wiederkehrende Rechnung kann nicht neu gestartet werden, sobald sie begonnen hat",
+    "Cannot_Update_invoice_Becuase_Recuring_Invoice_is_not_created": "Sie können die Rechnung nicht aktualisieren, da noch keine wiederkehrende Rechnung erstellt wurde",
+    "mail_Not_Sent": "Die E-Mail wurde nicht gesendet",
+    "offer_already_rejected": "Das Angebot wurde bereits abgelehnt",
+    "cannot_change_offer": "Sie können das Angebot derzeit nicht ändern",
+    "cannot_choose_two_options": "Sie können nicht zwei Optionen gleichzeitig auswählen",
+    "choose_atleast_one_option": "Bitte wählen Sie mindestens eine Option",
+    "user_is_blocked": "Der Benutzer ist gesperrt und kann nicht aufgerufen werden",
+    "cannot_create_recurring_invoice": "Die Erstellung wiederkehrender Rechnungen ist derzeit nicht möglich",
+    "oauth_account_already_connected": "Der Benutzer mit diesem Konto ist bereits verbunden",
+    "oauth_account_not_connected": "Der Benutzer mit diesem Konto ist nicht verbunden",
+    "oauth_apple_strict_checking_failed": "Die strenge Prüfung der Apple-Authentifizierung ist fehlgeschlagen",
+    "oauth_invalid_code": "Der angegebene Authentifizierungscode ist ungültig",
+    "Employee_has_been_created": "Der Mitarbeiter wurde erfolgreich angelegt",
+    "Login_details_have_been_emailed_to_them": "Die Zugangsdaten wurden ihnen per E-Mail zugesandt",
+    "Login_details_could_not_be_emailed_to_them": "Die Anmeldedaten konnten ihnen nicht per E-Mail zugesandt werden",
+    "Employee_password_has_changed": "Das Passwort des Mitarbeiters wurde erfolgreich geändert",
+    "passwordRegex": "Das Passwort muss aus 6 Zeichen bestehen und Großbuchstaben, Kleinbuchstaben, Zahlen und Sonderzeichen enthalten."
   },
   "sidebar": {
     "customer": {
@@ -483,8 +533,9 @@
       "templates": "Vorlagen",
       "follow_up_setting": "Nachverfolgung",
       "billing": "Abrechnung",
-      "mail_setting": "Mail-EInstellungen",
-      "qr_settings": "QR-Einstellungen"
+      "mail_setting": "Mail-Einstellungen",
+      "qr_settings": "QR-Einstellungen",
+      "general_setting": "Allgemeine Einstellungen"
     },
     "account_setting": {
       "public_info": "Öffentliche Informationen",
@@ -653,6 +704,10 @@
       "street_no": "Strasse+Nr",
       "post_code": "Plz",
       "city": "Stadt"
+    },
+    "general_setting": {
+      "address": "Adresse",
+      "notes": "Notizen"
     }
   },
   "invoice": {
@@ -1108,6 +1163,26 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+<<<<<<< HEAD
+=======
+    "plan_detail": "Plandetails",
+    "new_plan": "Neuen Plan hinzufügen",
+    "yes_button": "Ja",
+    "enter_company": "Firmenname eingeben",
+    "note_title": "Titel notieren",
+    "title": "Titel",
+    "created_by": "Erstellt von",
+    "add_new_notes": "Neue Notizen hinzufügen",
+    "successful": "Erfolgreich",
+    "address_title_save": "Ihr Adresstitel wurde erfolgreich gespeichert",
+    "note_save": "Ihre Notizen wurden erfolgreich gespeichert",
+    "finish_button": "Fertigstellen",
+    "edit_address_title": "Adresstitel bearbeiten",
+    "add_address_title": "Adresstitel hinzufügen",
+    "address_title": "Adresse Titel",
+    "no_invoice_created": "Keine Rechnung erstellt",
+    "no_invoice_des": "Unterrechnung wurde noch nicht erstellt. Bitte erstellen Sie zunächst die Unterrechnung",
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
     "no_attachments": "Keine Anhänge gefunden!",
     "sign_first": "Bitte unterschreiben Sie zuerst",
     "paid_amount_last": "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
@@ -1565,7 +1640,7 @@
       },
       "card_content": {
         "main_heading": "Kundendetails",
-        "make_button_unchecked": "Unendlich frei erstellen",
+        "make_button_unchecked": "Konto kostenlos erstellen",
         "make_button_checked": "Unendlich erstellen",
         "customer_id": "ID",
         "role": "Rolle",
@@ -1576,7 +1651,8 @@
         "company_logo": "Firmenlogo",
         "customer_status": {
           "active": "Aktiv",
-          "block": "Blockieren"
+          "block": "Blockieren",
+          "unBlock": "entsperren"
         },
         "customer_free": "Ihr Kunde ist jetzt völlig frei."
       },
@@ -2162,13 +2238,13 @@
   },
   "add_note_dropdown": {
     "all_notes": "Alle Anfragen",
-    "sending_picture": "Sendet Fotos",
-    "view_date": "Besichtigungs Termin",
-    "approximate_offer_open": "Schätzoﬀerte Oﬀen",
-    "contact_us": "Meldet sich noch",
-    "individual_note": "Individuelle Notiz",
-    "note_reached": "Nicht erreicht",
-    "other": "Andere"
+    "Sending pictures": "Sendet Fotos",
+    "Viewing date": "Besichtigungs Termin",
+    "Approximate Offer open": "Schätzoﬀerte Oﬀen",
+    "Will contact us": "Meldet sich noch",
+    "Individual Note": "Individuelle Notiz",
+    "Not Reached": "Nicht erreicht",
+    "Other": "Andere"
   },
   "thank_you_content": {
     "heading": "Danke für die Unterzeichnung des Vertrags",

@@ -3,7 +3,6 @@ import { formatAddress, formatDateTimeToDate } from "@/utils/utility";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import React, { useState } from "react";
 import Image from "next/image";
-import { Country } from "@/components/reactPdf/address-details";
 import editIcon from "@/assets/svgs/edit_primary.svg";
 import { useTranslation } from "next-i18next";
 

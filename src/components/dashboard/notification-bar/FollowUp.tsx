@@ -260,7 +260,10 @@ export const FollowUpNotificationBar = ({
             )}
           </div>
         ) : (
-          <NoDataEmptyState />
+          <NoDataEmptyState
+            className="w-[90%] mx-auto my-3"
+            containerClassName="py-0"
+          />
         )}
       </div>
       {renderModal()}

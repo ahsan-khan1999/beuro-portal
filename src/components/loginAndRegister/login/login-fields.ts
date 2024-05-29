@@ -469,7 +469,6 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",

@@ -34,6 +34,7 @@ export const generateRecurringInvoiceValidationSchema = (
       .required(translate("validationMessages.required")),
   });
 };
+
 export const generateCreateRecurringInvoiceValidationSchema = (
   translate: Function
 ) => {

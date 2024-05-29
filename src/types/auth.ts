@@ -174,7 +174,7 @@ interface FollowUp {
   isCompleted: boolean;
   isDeleted: boolean;
   isPostponed: boolean;
-  lead: string;
+  lead: Lead;
   refID: string;
   status: string;
   title: string;
@@ -211,6 +211,7 @@ interface Lead {
   opened: number;
   closed: number;
   expired: number;
+  refID?: string;
 }
 interface Offer {
   _id: string;

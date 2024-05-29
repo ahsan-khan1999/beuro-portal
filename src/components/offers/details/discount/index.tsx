@@ -3,13 +3,9 @@ import Image from "next/image";
 import priceTaga from "@/assets/svgs/price_tag.svg";
 import calenderIcon from "@/assets/svgs/calender_with_point.svg";
 import { OffersDiscountDataTypes } from "@/types/offers";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useAppSelector } from "@/hooks/useRedux";
 import { formatDateTimeToDate } from "@/utils/utility";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import { updateOfferDiscount } from "@/api/slices/offer/offerSlice";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
 import { useTranslation } from "next-i18next";
 
@@ -92,9 +88,10 @@ const Discounts = ({
           ))}
         </div>
       ) : (
-        <div className="bg-white -mt-8 pt-4 2xl:max-h-[270px]">
-          <NoDataEmptyState />
-        </div>
+        <NoDataEmptyState
+          className="w-fit 2xl:w-[270px]"
+          containerClassName="py-0 px-2"
+        />
       )}
     </div>
   );

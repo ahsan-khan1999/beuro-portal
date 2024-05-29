@@ -91,6 +91,10 @@ export interface CreateSuccessProps {
   modelSubHeading: string;
   routeHandler: () => void;
 }
+export interface onRejectProps {
+  onClose: () => void;
+  onReject?: () => void;
+}
 export interface UpdateSuccessProps {
   onClose: () => void;
   modelHeading: string;

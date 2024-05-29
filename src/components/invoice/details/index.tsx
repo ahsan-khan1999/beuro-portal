@@ -6,6 +6,7 @@ import InvoiceDetailsTable from "./invoice/table";
 import ReceiptDetailsTable from "./receipt/table";
 import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
 import { useEmptyStates } from "@/utils/hooks";
+import { PendingInvoice } from "./PendingInvoice";
 
 const InvoiceDetails = () => {
   const {
@@ -61,6 +62,9 @@ const InvoiceDetails = () => {
     loading
   );
 
+  const shouldShowPendingInvoice =
+    !collectiveInvoice?.length && !collectiveReciept?.length;
+
   return (
     <>
       <Layout>
@@ -80,13 +84,18 @@ const InvoiceDetails = () => {
           />
         </InvoiceCardLayout>
 
-        <div className="flex mt-[12px] mb-[18px]">
+        <div className="flex my-3">
           <DetailsSwitchBtn
             activeTab={activeTab}
             onComponentChange={setActiveTab}
           />
         </div>
-        {CurrentComponent}
+
+        {shouldShowPendingInvoice ? (
+          <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />
+        ) : (
+          CurrentComponent
+        )}
       </Layout>
       {renderModal()}
     </>

@@ -153,7 +153,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       if (filteredContent)
         setValue("title", filteredContent?.offerContent?.title);
     } else {
-      const filteredLead = lead.find((item) => item.id === leadID);
+      const filteredLead = lead?.find((item) => item.id === leadID);
       if (filteredLead) {
         const content = filteredLead?.requiredService as ContentTableRowTypes;
 
@@ -264,7 +264,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         ...data,
         step: 1,
         offerId: offerDetails?.id === "convert" ? null : offerDetails?.id,
-        stage: ComponentsType.addressAdded,
+        stage: ComponentsType?.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
 
@@ -284,16 +284,16 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
               },
             ])
           );
-          onHandleNext(ComponentsType.addressAdded);
+          onHandleNext(ComponentsType?.addressAdded);
         }
-        onHandleNext(ComponentsType.addressAdded);
+        onHandleNext(ComponentsType?.addressAdded);
       }
     } else {
       const apiData: any = {
         ...data,
         step: 1,
         offerId: null,
-        stage: ComponentsType.addressAdded,
+        stage: ComponentsType?.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
       if (!apiData?.isLeadCreated) delete apiData["leadID"];

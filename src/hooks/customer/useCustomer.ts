@@ -5,6 +5,8 @@ import { readCustomer } from "@/api/slices/customer/customerSlice";
 import { FilterType } from "@/types";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
+import localStoreUtil from "@/utils/localstore.util";
+import { DEFAULT_CUSTOMER } from "@/utils/static";
 
 export default function useCustomer() {
   const { customer, lastPage, totalCount, loading, isLoading } = useAppSelector(
@@ -26,9 +28,16 @@ export default function useCustomer() {
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
   // }, []);
+=======
+  useEffect(() => {
+    localStoreUtil.remove_data("customers");
+    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+  }, []);
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);

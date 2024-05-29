@@ -8,12 +8,7 @@ import { updateTemplateSetting } from "@/api/slices/settingSlice/settings";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import {
-  ColumnStructure,
-  MainColumns,
-  Template,
-  colsData,
-} from "@/types/settings";
+import { ColumnStructure, MainColumns, colsData } from "@/types/settings";
 import { Button } from "@/base-components/ui/button/button";
 import InputField from "@/base-components/filter/fields/input-field";
 // import leftAlignTemplate from "@/assets/pngs/Left_alight.png";
@@ -79,7 +74,7 @@ const Column = ({
               <InputField
                 containerClassName="w-full"
                 value={item.data.text}
-                textClassName="!p-4 border rounded-lg border-[#EBEBEB] "
+                textClassName="!p-4 border rounded-lg border-[#EBEBEB]"
                 handleChange={(value) =>
                   handleChangeInput(
                     item.data.column,

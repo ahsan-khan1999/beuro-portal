@@ -37,9 +37,11 @@ export const useOfferPdf = () => {
 
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
+
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
+
   const [pdfFile, setPdfFile] = useState(null);
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
@@ -147,7 +149,7 @@ export const useOfferPdf = () => {
             },
             headerDetails: {
               offerNo: offerDetails?.offerNumber,
-              companyName: offerDetails?.createdBy.company.companyName,
+              companyName: offerDetails?.createdBy?.company?.companyName,
               offerDate: offerDetails?.createdAt,
               createdBy: offerDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
@@ -213,17 +215,18 @@ export const useOfferPdf = () => {
               secondColumn: {
                 address: {
                   postalCode:
-                    offerDetails?.createdBy?.company.address.postalCode,
+                    offerDetails?.createdBy?.company?.address?.postalCode,
                   streetNumber:
-                    offerDetails?.createdBy?.company.address.streetNumber,
+                    offerDetails?.createdBy?.company?.address?.streetNumber,
                 },
                 bankDetails: {
                   accountNumber:
-                    offerDetails?.createdBy?.company.bankDetails.accountNumber,
+                    offerDetails?.createdBy?.company?.bankDetails
+                      ?.accountNumber,
                   bankName:
-                    offerDetails?.createdBy?.company.bankDetails.bankName,
+                    offerDetails?.createdBy?.company?.bankDetails?.bankName,
                   ibanNumber:
-                    offerDetails?.createdBy?.company.bankDetails.ibanNumber,
+                    offerDetails?.createdBy?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {
@@ -352,7 +355,15 @@ export const useOfferPdf = () => {
   };
 
   const handlePrint = () => {
-    window.open(offerDetails?.attachement);
+    if (pdfFile) {
+      const url = URL.createObjectURL(pdfFile);
+
+      let printWindow = window.open(url, "_blank");
+      if (!printWindow) return;
+      printWindow.onload = function () {
+        printWindow?.print();
+      };
+    }
   };
 
   const onClose = () => {

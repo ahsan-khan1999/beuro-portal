@@ -164,16 +164,16 @@ const OfferDetailsCard = ({
 
       <div className="flex flex-col gap-4 mt-5">
         <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
-          <div>
-            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
+          <div className="flex items-center gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.offer_id")}:
             </span>
-            <span className="text-base font-medium text-[#4B4B4B]">
+            <span className="text-base font-medium text-primary">
               {offerDetails?.offerNumber}
             </span>
           </div>
-          <div className="flex gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D]">
+          <div className="flex items-center gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.offer_title")}:
             </span>
 
@@ -181,7 +181,7 @@ const OfferDetailsCard = ({
               {offerDetails?.title}
             </span>
           </div>
-          <div className="flex gap-[10px]">
+          <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.worker")}:
             </span>
@@ -192,7 +192,7 @@ const OfferDetailsCard = ({
         </div>
 
         <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
-          <div className="flex gap-x-3">
+          <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.created_date")}:
             </span>
@@ -200,7 +200,7 @@ const OfferDetailsCard = ({
               {formatDateString(offerDetails?.createdAt)}
             </span>
           </div>
-          <div className="flex gap-3">
+          <div className="flex items-center gap-3">
             <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
               {translate("offers.card_content.service_date")}:
             </span>
@@ -237,8 +237,8 @@ const OfferDetailsCard = ({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xlg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-[minmax(350px,_350px)_minmax(150px,_100%)_minmax(150px,_250px)_minmax(50px,_100%)_minmax(50px,_100%)] gap-y-2">
-          <div className="flex items-center gap-[11px]">
-            <span className="text-[#4D4D4D] font-normal text-base ">
+          <div className="flex items-center gap-3">
+            <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.email_status")}:
             </span>
             {offerDetails?.emailStatus && (
@@ -287,7 +287,7 @@ const OfferDetailsCard = ({
               )}
             </span>
           </div>
-          <div className="flex items-center gap-[11px]">
+          <div className="flex items-center gap-3">
             <span className="text-[#4D4D4D] font-normal text-base">
               {translate("offers.card_content.status")}:
             </span>
@@ -361,7 +361,10 @@ const OfferDetailsCard = ({
                 <ImageUploadIcon
                   pathClass={offerDetails?.isImageAdded ? "#FF0000" : "#4A13E7"}
                 />
+<<<<<<< HEAD
                
+=======
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
               </span>
             </div>
           </div>

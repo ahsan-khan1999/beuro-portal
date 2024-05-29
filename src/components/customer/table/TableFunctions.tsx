@@ -20,15 +20,21 @@ const TableFunctions = ({
         {translate("customers.title")}
       </h1>
 
+<<<<<<< HEAD
       {/* <div className="flex items-center">
         <div className="flex items-center space-x-4"> */}
+=======
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
       <CustomerFilter
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
+<<<<<<< HEAD
       {/* </div>
       </div> */}
+=======
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
     </div>
   );
 };

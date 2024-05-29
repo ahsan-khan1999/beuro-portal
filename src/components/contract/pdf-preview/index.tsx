@@ -1,11 +1,10 @@
 import EmailCard from "./PdfCard";
-import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
+import dynamic from "next/dynamic";
+import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
-import dynamic from "next/dynamic";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
-import { useTranslation } from "next-i18next";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -32,7 +31,6 @@ const PdfPriview = () => {
     contractDetails,
   } = useContractPdf();
 
-  const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
@@ -54,9 +52,12 @@ const PdfPriview = () => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
+  console.log(contractData);
 
   return (
     <>

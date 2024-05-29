@@ -10,6 +10,8 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function OffersFilters({
   filter,
@@ -19,6 +21,8 @@ export default function OffersFilters({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { noteSettings } = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
 
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -169,6 +173,10 @@ export default function OffersFilters({
     setInputValue(textValue || "");
   }, [router.query.text]);
 
+  useEffect(() => {
+    dispatch(readNoteSettings());
+  }, []);
+
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
@@ -191,7 +199,11 @@ export default function OffersFilters({
           handleChange={handleInputChange}
           ref={inputRef}
           value={inputValue}
+<<<<<<< HEAD
           iconDisplay={false}
+=======
+          iconDisplay={true}
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
           onEnterPress={onEnterPress}
         />
 
@@ -229,6 +241,7 @@ export default function OffersFilters({
             dropDownIconClassName=""
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
+<<<<<<< HEAD
             options={[
               // {
               //   value: "None",
@@ -265,6 +278,21 @@ export default function OffersFilters({
                 label: `${translate("add_note_dropdown.other")}`,
               },
             ]}
+=======
+            options={
+              noteSettings
+                ? noteSettings
+                    .slice()
+                    .reverse()
+                    .map((item) => ({
+                      label: translate(
+                        `add_note_dropdown.${item.notes.noteType}`
+                      ),
+                      value: item.notes.noteType,
+                    }))
+                : []
+            }
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
             label={translate("add_note_dropdown.all_notes")}
           />
         </div>

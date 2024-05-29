@@ -77,7 +77,12 @@ export const SignPdf = <T,>({
   };
 
   const onSuccess = () => {
+<<<<<<< HEAD
     router.push("/thank-you");
+=======
+    // router.push("/thank-you");
+    window.location.href = "/thank-you";
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 

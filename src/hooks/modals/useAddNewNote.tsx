@@ -10,6 +10,8 @@ import { FilterType } from "@/types";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
 import { setContractDetails } from "@/api/slices/contract/contractSlice";
 import { setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
+import { useEffect } from "react";
+import { NoteSetting } from "@/api/slices/settingSlice/settings";
 
 export const useAddNewNote = ({
   handleNotes,
@@ -30,6 +32,7 @@ export const useAddNewNote = ({
     (state) => state.contract
   );
   const { invoice, invoiceDetails } = useAppSelector((state) => state.invoice);
+  const { noteSettings } = useAppSelector((state) => state.settings);
 
   const {
     modal: {
@@ -43,13 +46,32 @@ export const useAddNewNote = ({
     handleSubmit,
     control,
     setError,
+    watch,
     setValue,
+    getValues,
+    trigger,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const fields = AddNoteFormField(register, loading, control);
+  const reversedNoteSettings = noteSettings?.slice().reverse() || [];
+
+  const onNoteSelect = (id: string) => {
+    const filteredNote = noteSettings?.find(
+      (item: NoteSetting) => item.notes.noteType === id
+    );
+    if (filteredNote) {
+      setValue("description", filteredNote?.notes?.description);
+      trigger("description");
+    }
+  };
+
+  const fields = AddNoteFormField(register, loading, control, {
+    noteSetting: noteSettings,
+    onNoteSelect,
+  });
+
   const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
     let res;
     if (!data) {
@@ -112,6 +134,11 @@ export const useAddNewNote = ({
       }
     }
   };
+
+  useEffect(() => {
+    if (noteSettings)
+      setValue("description", reversedNoteSettings[0]?.notes?.description);
+  }, []);
 
   return {
     fields,

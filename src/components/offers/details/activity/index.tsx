@@ -13,7 +13,7 @@ import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-stat
 const Activity = () => {
   const { offerActivity } = useAppSelector((state) => state.offer);
   //@ts-expect-error
-  const activityData:OffersActivityDataTypes[] | null =
+  const activityData: OffersActivityDataTypes[] | null =
     offerActivity &&
     offerActivity?.activity?.map((item) => ({
       activeTime: formatDateTimeToTime(item?.dateTime),
@@ -59,9 +59,10 @@ const Activity = () => {
           </div>
         ))
       ) : (
-        <div className="-mt-8 pt-4 2xl:max-h-[270px]">
-          <NoDataEmptyState />
-        </div>
+        <NoDataEmptyState
+          className="w-fit 2xl:w-[270px]"
+          containerClassName="py-0 px-2"
+        />
       )}
     </div>
   );

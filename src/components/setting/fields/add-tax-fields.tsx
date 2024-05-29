@@ -59,7 +59,7 @@ export const addTaxFormField: GenerateAddTaxFormField = (
         id: "button",
         text: `${translate("setting.tax_modal.button")}`,
         inputType: "submit",
-        className: "rounded-lg  text-white hover:bg-none ",
+        className: "rounded-lg text-white hover:bg-none",
         loading,
       },
     },

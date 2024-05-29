@@ -12,8 +12,8 @@ const CustomerDetailsData = ({
   const { t: translate } = useTranslation();
   return (
     <LeadsCardLayout>
-      <div className="mt-5">
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5">
+      <div className="my-5 p-6">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("admin.customers_details.customer_details.owner_name")}
@@ -84,7 +84,7 @@ const CustomerDetailsData = ({
           <h4 className="text-[#8F8F8F] mb-[10px]">
             {translate("admin.customers_details.customer_details.sub_heading")}
           </h4>
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate(

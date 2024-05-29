@@ -25,7 +25,11 @@ export const InputField = ({
   step,
 }: InputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
+<<<<<<< HEAD
   const defaultClasses = `border border-borderColor rounded-lg w-full h-12 bg-white ${
+=======
+  const defaultClasses = `border border-borderColor rounded-lg w-full h-12 !bg-white ${
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   } py-[10px] outline-none text-dark text-sm focus:border-primary`;
 

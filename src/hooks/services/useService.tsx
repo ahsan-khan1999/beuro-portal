@@ -23,13 +23,6 @@ const useService = () => {
 
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
-    // dispatch(
-    //   readService({ params: { filter: query, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Service);
-    //   }
-    // });
   };
 
   const dispatch = useAppDispatch();

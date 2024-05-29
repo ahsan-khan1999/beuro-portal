@@ -67,25 +67,28 @@ const DetailsData = ({
           </span>
         </div>
       </div>
-      <div>
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(200px,_1fr)_minmax(300px,_3fr)] items-center mt-5 gap-y-4">
-          <h3 className="text-[#4D4D4D]">
+
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(200px,_1fr)_minmax(300px,_3fr)] items-center my-4 gap-y-4">
+        <div className="flex items-center gap-x-3">
+          <span className="text-[#4B4B4B] font-medium">
             {translate("customers.card_content.customer_id")}:
-            <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{id}</span>
-          </h3>
-          <div className="text-[#4D4D4D] flex gap-x-2">
-            <span className="min-w-[100px]">
-              {translate("customers.card_content.created_by")}:
-            </span>
-            <div className="text-[#4B4B4B] font-medium truncate mr-1">
-              {name}
-            </div>
-          </div>
+          </span>
+          <span className="text-primary font-medium">{id}</span>
         </div>
-        <h3 className="text-[#4D4D4D] mt-4">
+
+        <div className="text-[#4D4D4D] flex items-center gap-x-3">
+          <span className="min-w-[100px]">
+            {translate("customers.card_content.created_by")}:
+          </span>
+          <div className="text-[#4B4B4B] font-medium">{name}</div>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-x-3">
+        <span className="text-[#4B4B4B] font-medium">
           {translate("customers.card_content.created_date")}:
-          <span className="text-[#4B4B4B] font-medium">&nbsp;&nbsp;{date}</span>
-        </h3>
+        </span>
+        <span className="text-primary font-medium">{date}</span>
       </div>
     </>
   );

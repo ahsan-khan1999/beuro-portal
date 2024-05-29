@@ -16,6 +16,7 @@ const PlanDetails = () => {
     handlePreviousClick,
     renderModal,
     loading,
+    translate,
   } = usePlanDetail(true);
 
   return (
@@ -23,15 +24,20 @@ const PlanDetails = () => {
       {loading ? (
         <LoadingState />
       ) : (
-        <PlansForm
-          isUpdate={isUpdate}
-          setIsUpdate={setIsUpdate}
-          fields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          planDetail={planDetails}
-        />
+        <div>
+          <h2 className="text-xl font-normal text-[#222B45] mb-4">
+            {translate("common.plan_detail")}
+          </h2>
+          <PlansForm
+            isUpdate={isUpdate}
+            setIsUpdate={setIsUpdate}
+            fields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+            planDetail={planDetails}
+          />
+        </div>
       )}
 
       {renderModal()}

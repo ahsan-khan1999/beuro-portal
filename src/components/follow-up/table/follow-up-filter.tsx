@@ -51,7 +51,11 @@ export default function FollowUpFilter({
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
+<<<<<<< HEAD
         iconDisplay={false}
+=======
+        iconDisplay={true}
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
       />
       <Button
         text={translate("common.apply_button")}

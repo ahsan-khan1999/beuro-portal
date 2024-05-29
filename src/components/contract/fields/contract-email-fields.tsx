@@ -55,7 +55,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
               id: "text",
               children: [
                 {
-                  containerClass: "mb-0  ",
+                  containerClass: "mb-0",
                   field: {
                     type: Field.span,
                     text: `Cc`,
@@ -80,7 +80,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                     type: Field.span,
                     text: `Bcc`,
                     containerClassName:
-                      "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                      "underline text-[14px] text-[#393939] font-normal cursor-pointer",
                     id: "bcc",
                     onClick: () => {
                       if (setValue) {
@@ -340,7 +340,7 @@ export const ContractEmailPreviewFormField: GenerateContractFormField = (
                 `${translate("contracts.contract_email_preview.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none",
               loading,
             },
           },

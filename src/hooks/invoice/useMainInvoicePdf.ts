@@ -204,7 +204,7 @@ export const useMainInvoicePdf = () => {
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "contract",
-              isReverseLogo: template.payload.Template?.order,
+              isReverseLogo: template?.payload?.Template?.order,
             },
             contactAddress: {
               address: {
@@ -220,7 +220,7 @@ export const useMainInvoicePdf = () => {
               mobile: invoiceDetails?.customerDetail?.mobileNumber,
 
               gender: invoiceDetails?.customerDetail?.gender?.toString(),
-              isReverseInfo: template.payload.Template?.order,
+              isReverseInfo: template?.payload?.Template?.order,
             },
             movingDetails: {
               address: invoiceDetails?.addressID?.address,
@@ -238,12 +238,12 @@ export const useMainInvoicePdf = () => {
               tax: invoiceDetails?.taxAmount?.toString(),
               discount: invoiceDetails?.discountAmount?.toString(),
               discountType: invoiceDetails?.discountType,
-              discountPercentage: discountPercentage.toString(),
-              updatedDiscountAmount: updatedTotalDiscount.toString(),
+              discountPercentage: discountPercentage?.toString(),
+              updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: invoiceDetails?.total?.toString(),
               invoicePaidAmount: invoiceDetails?.paidAmount.toString(),
-              invoiceAmount: invoiceDetails?.paidAmount.toString(),
-              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
+              invoiceAmount: invoiceDetails?.paidAmount?.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus?.toString(),
               taxType: invoiceDetails?.taxType,
               serviceDiscountSum:
                 invoiceDetails?.serviceDetail?.serviceDetail?.reduce(
@@ -266,13 +266,13 @@ export const useMainInvoicePdf = () => {
               },
               secondColumn: {
                 address: {
-                  postalCode: user?.company.address.postalCode,
-                  streetNumber: user?.company.address.streetNumber,
+                  postalCode: user?.company?.address?.postalCode,
+                  streetNumber: user?.company?.address?.streetNumber,
                 },
                 bankDetails: {
-                  accountNumber: user?.company.bankDetails.accountNumber,
-                  bankName: user?.company.bankDetails.bankName,
-                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                  accountNumber: user?.company?.bankDetails?.accountNumber,
+                  bankName: user?.company?.bankDetails?.bankName,
+                  ibanNumber: user?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {

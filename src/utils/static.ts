@@ -615,12 +615,18 @@ export const staticEnums: Record<string, any> = {
     Active: 1,
   },
 
-  InvoiceStatus: {
+  InvoiceMainStatus: {
     Pending: 0,
     Overdue: 1,
     Paid: 2,
     Open: 3,
     sending: 10,
+  },
+  InvoiceStatus: {
+    Pending: 0,
+    Overdue: 1,
+    Paid: 2,
+    Open: 3,
   },
   Frequency: {
     Weekly: 0,

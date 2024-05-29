@@ -86,7 +86,7 @@ export const rejectOfferPublic: AsyncThunk<boolean, object, object> | any =
       await apiServices.rejectOfferPublic(params);
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
       return false;
     }
   });
@@ -140,8 +140,8 @@ export const updateOffer: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setOfferDetails(objectToUpdate));
       return response?.data?.Offer;
     } catch (e: any) {
-      setErrors(setError, e?.data?.data, translate);
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data?.data, translate);
       return false;
     }
   });
@@ -207,8 +207,8 @@ export const createOfferNotes: AsyncThunk<boolean, object, object> | any =
       const response = await apiServices.updateOfferNotes(data);
       return response?.data?.Offer;
     } catch (e: any) {
-      setErrors(setError, e?.data?.data, translate);
       thunkApi.dispatch(setErrorMessage(e?.data?.data?.message));
+      setErrors(setError, e?.data?.data, translate);
       return false;
     }
   });
@@ -235,7 +235,7 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
 
 export const signOffer: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/signOffer", async (args, thunkApi) => {
-    const { data, router, translate, formData } = args as any;
+    const { data, router, translate, formData, setError } = args as any;
 
     try {
       const [authToken, refreshToken] = await Promise.all([
@@ -255,9 +255,12 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
 
       return true;
     } catch (e: any) {
+<<<<<<< HEAD
       // showError(translate(e?.response?.data?.message));
+=======
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
       thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
-      // setErrors(setError, e?.data.data, translate);
+      setErrors(setError, e?.data.data, translate);
       return false;
     }
   });
@@ -272,6 +275,7 @@ export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
       return response?.data?.data?.OfferActivity;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
+
       // setErrors(setError, e?.data.data, translate);
       return false;
     }
@@ -345,6 +349,7 @@ export const uploadOfferPdf: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 const OfferSlice = createSlice({
   name: "OfferSlice",
   initialState,

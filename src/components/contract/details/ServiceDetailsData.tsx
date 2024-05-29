@@ -106,51 +106,57 @@ const ServiceDetailsData = ({
       <div className="py-3 px-6">
         <div className="rounded-lg px-2 pt-3 bg-[#EDF4FF]">
           <TableLayout>
-            <div className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-5">
-              <span className="text-sm font-medium text-[#8F8F8F]">
+            <div className="grid xs:grid-cols-[minmax(300px,_100%)_minmax(400px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_3fr)_minmax(110px,_4fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] xlg:grid-cols-[minmax(120px,_3fr)_minmax(130px,_4fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_3fr)_minmax(120px,_4fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] mb-5">
+              <span className="text-sm font-medium text-[#8F8F8F] mr-2">
                 {translate("contracts.service_details.title")}
               </span>
-              <span className="text-sm font-medium text-[#8F8F8F] mr-1">
+              <span className="text-sm font-medium text-[#8F8F8F]">
                 {translate("contracts.service_details.description")}
               </span>
 
-              <span>
+              <span className="text-sm font-medium">
                 {translate("contracts.service_details.price")}({currency})
               </span>
-              <span>{translate("contracts.service_details.unit")}</span>
-              <span>{translate("contracts.service_details.count")}</span>
-              <span>
+              <span className="text-sm font-medium">
+                {translate("contracts.service_details.unit")}
+              </span>
+              <span className="text-sm font-medium">
+                {translate("contracts.service_details.count")}
+              </span>
+              <span className="text-sm font-medium">
                 {translate("offers.service_details.detail_headings.discount")}
               </span>
-              <span>{translate("contracts.service_details.total_price")}</span>
+              <span className="text-sm font-medium">
+                {translate("contracts.service_details.total_price")}
+              </span>
             </div>
 
             {contractDetails?.offerID?.serviceDetail?.serviceDetail.map(
               (item, index) => (
                 <div
-                  className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] text-sm font-medium text-[#4B4B4B] border-t border-t-[#000] border-opacity-10 py-5"
+                  className="grid xs:grid-cols-[minmax(300px,_100%)_minmax(400px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_3fr)_minmax(110px,_4fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] xlg:grid-cols-[minmax(120px,_3fr)_minmax(130px,_4fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_3fr)_minmax(120px,_4fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] border-t border-t-[#000] border-opacity-10 py-5"
                   key={index}
                 >
-                  <span className="break-all text-base font-medium text-[#4B4B4B]">
+                  <span className="break-all text-sm font-medium text-[#4B4B4B] mr-5">
                     {item.serviceTitle}
                   </span>
-                  <span className="break-all text-base font-medium text-[#4B4B4B] mr-1">
+                  <span className="break-all text-sm font-medium text-[#4B4B4B] mr-5">
                     {item.description}
                   </span>
 
-                  <span className="text-base font-medium text-[#4B4B4B]">
+                  <span className="text-sm font-medium text-[#4B4B4B]">
                     {item.price}
                   </span>
-                  <span className="text-base font-medium text-[#4B4B4B]">
+                  <span className="text-sm font-medium text-[#4B4B4B]">
                     {item.unit}
                   </span>
-                  <span className="text-base font-medium text-[#4B4B4B]">
+                  <span className="text-sm font-medium text-[#4B4B4B]">
                     {item.count}
                   </span>
-                  <span className="text-base font-medium text-[#4B4B4B]">
+                  <span className="text-sm font-medium text-[#4B4B4B]">
                     {item?.discount}
                   </span>
-                  <span className="text-base font-medium text-[#4B4B4B]">
+                  <span className="text-sm font-medium text-[#4B4B4B]">
                     {item.totalPrice}
                   </span>
                 </div>

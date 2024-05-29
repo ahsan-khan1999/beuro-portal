@@ -64,7 +64,13 @@ const TableRows = ({
                     query: { ...router.query, offerID: item?.id, isMail: true },
                   })
                 }
+<<<<<<< HEAD
                 className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-5 mlg:gap-x-1 xMaxSize:gap-x-4 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(65px,_65px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(65px,_65px),minmax(110px,_3fr)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_150px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] maxLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]"
+=======
+                className={`${
+                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-5 mlg:gap-x-1 xMaxSize:gap-x-4 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(65px,_65px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(65px,_65px),minmax(110px,_3fr)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_150px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] maxLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]`}
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
               >
                 <span className="py-4 truncate">{item.contractNumber}</span>
                 <div className="flex items-center gap-x-1">
@@ -81,7 +87,7 @@ const TableRows = ({
                   )}
                 </div>
                 <span className="truncate mlg:hidden maxLarge:block py-4">
-                  {item?.title}
+                  {item?.offerID?.content?.contentName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
                   {item.offerID?.total}
@@ -193,7 +199,6 @@ const TableRows = ({
               </div>
             </div>
 
-            {/* <div className="flex"> */}
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
@@ -381,7 +386,6 @@ const TableRows = ({
                 </div>
               </div>
             </div>
-            {/* </div> */}
           </div>
         );
       })}

@@ -8,10 +8,6 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import {
-  AddDateFormField,
-  AddOfferDetailsSubmitFormField,
-} from "@/components/offers/add/fields/add-offer-details-fields";
 import { useEffect, useMemo } from "react";
 import {
   readCustomer,
@@ -29,7 +25,11 @@ import {
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
 import { InvoiceDetailTableRowTypes } from "@/types/invoice";
-import { AddInvoiceDetailsFormField } from "@/components/invoice/edit/fields/add-offer-details-fields";
+import {
+  EditInvoiceDateFormField,
+  EditInvoiceDetailsFormField,
+  EditInvoiceDetailsSubmitFormField,
+} from "@/components/invoice/edit/fields/edit-invoice-offer-details-fields";
 
 export const useEditInvoiceDetails = ({
   handleNext,
@@ -192,7 +192,7 @@ export const useEditInvoiceDetails = ({
 
   const handleContentSelect = () => {};
 
-  const offerFields = AddInvoiceDetailsFormField(
+  const editInvoiceFields = EditInvoiceDetailsFormField(
     register,
     loading,
     control,
@@ -213,7 +213,7 @@ export const useEditInvoiceDetails = ({
     setValue
   );
 
-  const dateFields = AddDateFormField(
+  const dateFields = EditInvoiceDateFormField(
     register,
     append,
     testFields?.length ? testFields?.length : 1,
@@ -222,7 +222,7 @@ export const useEditInvoiceDetails = ({
     control
   );
 
-  const submit = AddOfferDetailsSubmitFormField(
+  const submit = EditInvoiceDetailsSubmitFormField(
     register,
     loading,
     control,
@@ -262,7 +262,7 @@ export const useEditInvoiceDetails = ({
   };
 
   return {
-    fields: [...offerFields, ...dateFields, ...submit],
+    fields: [...editInvoiceFields, ...dateFields, ...submit],
     onSubmit,
     control,
     handleSubmit,

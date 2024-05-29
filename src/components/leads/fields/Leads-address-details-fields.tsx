@@ -10,12 +10,19 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
   control,
   handleBack,
   count,
+  handleChangeLabel,
   handleAddNewAddress,
   handleRemoveAddress,
   fields,
   handleFieldTypeChange,
   addressType,
+<<<<<<< HEAD
   setValue
+=======
+  setValue,
+  getValues,
+  addressSettings
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
 ) => {
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
@@ -34,8 +41,13 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
+<<<<<<< HEAD
             value: `Adresse ${i + 1}`,
             setValue,
+=======
+            // value: `Adresse ${i + 1}`,
+            // setValue,
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
           },
         }
       : {
@@ -47,16 +59,47 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
+<<<<<<< HEAD
             value: `Adresse ${i + 1}`,
             disabled: true,
             className:
               "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
             setValue,
+=======
+            // value: `Adresse ${i + 1}`,
+            disabled: true,
+            className:
+              "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
+            // setValue,
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
           },
         };
     formField.push(
       {
+<<<<<<< HEAD
         containerClass: "mb-0 relative top-3.5 right-0 float-right",
+=======
+        containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
+        field: {
+          className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
+          type: Field.select,
+          id: `address.${i}.addressType`,
+          name: `address.${i}.addressType`,
+          // value: addressSettings?.addresses?.[0] || "",
+          options:
+            addressSettings?.addresses?.map((item) => ({
+              label: item,
+              value: item,
+            })) || [],
+
+          control,
+          onItemChange: (item) => handleChangeLabel(item, i),
+        },
+      },
+
+      {
+        containerClass: "mb-0 relative right-0 float-right",
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
         field: {
           type: Field.button,
           id: "button",
@@ -230,7 +273,11 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
               count === 3 && "hidden"
             }`,
             onClick: () => {
+<<<<<<< HEAD
               handleAddNewAddress && handleAddNewAddress(addressObject);
+=======
+              handleAddNewAddress && handleAddNewAddress();
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
             },
           },
         },

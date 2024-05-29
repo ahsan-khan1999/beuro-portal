@@ -33,6 +33,7 @@ const SettingTopDataButtons = ({
     `${translate("setting.steps_heading.follow_up_setting")}`,
     `${translate("setting.steps_heading.mail_setting")}`,
     `${translate("setting.steps_heading.qr_settings")}`,
+    `${translate("setting.steps_heading.general_setting")}`,
   ];
 
   const handleTabClick = (index: number) => {

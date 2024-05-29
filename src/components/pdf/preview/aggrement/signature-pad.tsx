@@ -10,7 +10,6 @@ import dynamic from "next/dynamic";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { PdfProps, TemplateType } from "@/types";
-import toast from "react-hot-toast";
 import { signOffer } from "@/api/slices/offer/offerSlice";
 import { ModalType } from "@/enums/ui";
 import ReactPDF, {
@@ -383,8 +382,11 @@ export const SignaturePad = ({
 
         const response = await dispatch(signOffer({ data, formData }));
 
+<<<<<<< HEAD
         console.log(response);
 
+=======
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
         if (response?.payload) {
           dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
         }

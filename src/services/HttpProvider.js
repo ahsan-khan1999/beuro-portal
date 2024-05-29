@@ -1,7 +1,5 @@
 import axios from "axios";
-
 import { getRefreshToken, getToken, logout } from "../utils/auth.util";
-import toast from "react-hot-toast";
 
 const STAGING_API_URL =
   "https://www.staging.buero-365.cloudmeshsolutions.com/api";
@@ -53,7 +51,9 @@ export async function request({ method, url, data, headers }) {
   try {
     response = await promise;
   } catch (error) {
-    toast.error(error?.response?.data?.message);
+    showError(
+      translate(`validationMessages.${error?.response?.data?.message}`)
+    );
 
     if (error?.response?.data?.code === 401) {
       logout();
@@ -73,7 +73,9 @@ export async function newRequest({ method, url, data, headers }) {
   try {
     response = await promise;
   } catch (error) {
-    toast.error(error?.response?.data?.message);
+    showError(
+      translate(`validationMessages.${error?.response?.data?.message}`)
+    );
 
     if (error?.response?.data?.code === 401) {
       logout();

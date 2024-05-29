@@ -128,10 +128,14 @@ export default function useCustomerDetail({
   });
 
   const customerType = watch("customerType");
+
   useEffect(() => {
     if (id) {
       dispatch(readCustomerDetail({ params: { filter: id } }));
     }
+    return () => {
+      dispatch(readCustomerDetail({ ...DEFAULT_CUSTOMER }));
+    };
   }, [id]);
 
   useMemo(() => {
@@ -169,7 +173,10 @@ export default function useCustomerDetail({
     }
   };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
   const test = async ({
     data,
     router,
@@ -232,7 +239,10 @@ export default function useCustomerDetail({
     ),
   };
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
   const handlePreviousClick = () => {
     router.push("/customers");
   };

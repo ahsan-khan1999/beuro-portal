@@ -12,12 +12,13 @@ export const planDetailsFormField: GeneratePlansFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-6",
+      containerClass: "mt-0",
       field: {
         type: Field.div,
         id: "div-field",
 
-        className: "grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -32,7 +33,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "text",
               id: "planName",
               name: "planName",
-              placeholder: "Please Enter Your Plan Name",
+              placeholder: "",
               register,
               disabled: isUpdate,
             },
@@ -50,7 +51,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "text",
               id: "monthlyPrice",
               name: "monthlyPrice",
-              placeholder: "Please Enter Monthly Pricing",
+              placeholder: "",
               register,
               disabled: isUpdate,
             },
@@ -67,7 +68,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               id: "discount",
               name: "discount",
               inputType: "text",
-              placeholder: "Please Enter Anually Discount",
+              placeholder: "",
               register,
               disabled: isUpdate,
             },
@@ -86,7 +87,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "number",
               id: "numberOfEmployees",
               name: "numberOfEmployees",
-              placeholder: "Enter Your Number Of Employs",
+              placeholder: "",
               register,
               disabled: isUpdate,
             },
@@ -95,11 +96,11 @@ export const planDetailsFormField: GeneratePlansFormField = (
       },
     },
     {
-      containerClass: "mt-5",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-4 gap-x-3",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5 px-2 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0 xl:col-span-1",
@@ -114,7 +115,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "number",
               id: "numberOfRequests",
               name: "numberOfRequests",
-              placeholder: "Enter Number Of Requests",
+              placeholder: "",
               register,
               disabled: isUpdate,
             },
@@ -132,7 +133,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               inputType: "text",
               id: "description",
               name: "description",
-              placeholder: "Enter Description",
+              placeholder: "",
               register,
               disabled: isUpdate,
             },
@@ -144,7 +145,8 @@ export const planDetailsFormField: GeneratePlansFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 mt-5 gap-y-5",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -157,7 +159,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center !px-4 py-3 border-[1px] rounded-lg !border-[#BFBFBF] focus:!border-primary",
+                "flex justify-between items-center !px-4 py-3 border-[1px] rounded-lg !border-[#BFBFBF] focus:!border-primary bg-white",
               children: [
                 {
                   field: {
@@ -192,7 +194,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center !!mb-0 py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary",
+                "flex justify-between items-center !!mb-0 py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary bg-white",
               children: [
                 {
                   field: {
@@ -227,7 +229,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary",
+                "flex justify-between items-center py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary bg-white",
               children: [
                 {
                   field: {
@@ -263,7 +265,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
               type: Field.div,
               id: "check",
               className:
-                "flex justify-between items-center py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary",
+                "flex justify-between items-center py-3 !px-4 border rounded-lg !border-[#BFBFBF] focus:!border-primary bg-white",
               children: [
                 {
                   field: {

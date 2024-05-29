@@ -88,7 +88,7 @@ const ContractDetailsData = ({
       <path d="M14.854 15C14.3056 15 13.8594 15.4462 13.8594 15.9946C13.8594 16.543 14.3055 16.9892 14.854 16.9892C15.4024 16.9892 15.8486 16.543 15.8486 15.9946C15.8486 15.4462 15.4024 15 14.854 15Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"/>
       <path d="M10.0805 8.63477C9.53211 8.63477 9.08594 9.08094 9.08594 9.62937C9.08594 10.1778 9.53211 10.624 10.0805 10.624C10.629 10.624 11.0752 10.1778 11.0752 9.62937C11.0751 9.08098 10.629 8.63477 10.0805 8.63477Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"/>
     </svg>`,
-      name: `${translate("contracts.tabs_headings.offer_details")}`,
+      name: `${translate("contracts.card_content.heading")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${

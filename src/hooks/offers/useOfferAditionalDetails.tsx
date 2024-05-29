@@ -24,6 +24,7 @@ export const useOfferAditionalDetails = (
     (state) => state.offer
   );
   const { content, contentDetails } = useAppSelector((state) => state.content);
+
   useEffect(() => {
     // setValue("additionalDetails", offerDetails?.additionalDetails || "<p>asd</p>");
     setValue("content", offerDetails?.content?.id);
@@ -53,6 +54,7 @@ export const useOfferAditionalDetails = (
   }, [offerDetails?.additionalDetails]);
 
   const selectedContent = watch("content");
+
   const handleBack = () => {
     onHandleBack(ComponentsType.serviceAdded);
   };
