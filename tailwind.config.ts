@@ -81,7 +81,7 @@ module.exports = {
         statusColor: "#ebd409",
         defaultBackground: "#f3f3f3",
         inProgressStatus: "#ebd409",
-        tableRowBg: "#f2f1f6",
+        tableRowBg: "#F4F8FD",
       },
       boxShadow: (theme: any) => ({
         header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,

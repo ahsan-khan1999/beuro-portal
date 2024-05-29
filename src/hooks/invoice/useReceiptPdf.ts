@@ -205,11 +205,12 @@ export const useReceiptPdf = () => {
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "receipt",
-              isReverseLogo: template.payload.Template?.order,
+              isReverseLogo: template?.payload?.Template?.order,
+              companyName: invoiceDetails?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {
-                name: invoiceDetails?.invoiceID?.customerDetail.fullName,
+                name: invoiceDetails?.invoiceID?.customerDetail?.fullName,
                 companyName:
                   invoiceDetails?.invoiceID?.customerDetail?.companyName,
                 city: invoiceDetails?.invoiceID?.customerDetail?.address
@@ -245,16 +246,16 @@ export const useReceiptPdf = () => {
               tax: invoiceDetails?.invoiceID?.taxAmount?.toString(),
               discount: invoiceDetails?.invoiceID?.discountAmount?.toString(),
               discountType: invoiceDetails?.invoiceID?.discountType,
-              discountPercentage: discountPercentage.toString(),
-              updatedDiscountAmount: updatedTotalDiscount.toString(),
+              discountPercentage: discountPercentage?.toString(),
+              updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               invoicePaidAmount:
-                invoiceDetails?.invoiceID?.paidAmount.toString(),
+                invoiceDetails?.invoiceID?.paidAmount?.toString(),
               isShowExtraAmount: true,
               isReceiptPdf: true,
               dueAmount: invoiceDetails?.amount.toString(),
-              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
-              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
+              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount?.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus?.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:
                 invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
@@ -277,13 +278,13 @@ export const useReceiptPdf = () => {
               },
               secondColumn: {
                 address: {
-                  postalCode: user?.company.address.postalCode,
-                  streetNumber: user?.company.address.streetNumber,
+                  postalCode: user?.company?.address?.postalCode,
+                  streetNumber: user?.company?.address?.streetNumber,
                 },
                 bankDetails: {
-                  accountNumber: user?.company.bankDetails.accountNumber,
-                  bankName: user?.company.bankDetails.bankName,
-                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                  accountNumber: user?.company?.bankDetails?.accountNumber,
+                  bankName: user?.company?.bankDetails?.bankName,
+                  ibanNumber: user?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {
@@ -352,6 +353,7 @@ export const useReceiptPdf = () => {
       qrCode: qrCodeUrl,
       remoteFileBlob,
       systemSetting,
+      companyName: receiptData?.headerDetails?.companyName,
     }),
     [
       emailTemplateSettings,

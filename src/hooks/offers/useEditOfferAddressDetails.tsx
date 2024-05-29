@@ -11,8 +11,12 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { useEffect, useMemo, useState } from "react";
-import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
+import {
+  AddOffAddressDetailsFormField,
+  addressObject,
+} from "@/components/offers/add/fields/add-address-details-fields";
 import { updateOffer } from "@/api/slices/offer/offerSlice";
+import { readAddressSettings } from "@/api/slices/settingSlice/settings";
 
 export const useEditOfferAddressDetails = ({
   handleNext,
@@ -25,6 +29,9 @@ export const useEditOfferAddressDetails = ({
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
+  const { addressSettings } = useAppSelector((state) => state.settings);
+
   const [addressType, setAddressType] = useState(
     offerDetails?.addressID
       ? Array.from(offerDetails?.addressID?.address, () => false)
@@ -45,41 +52,75 @@ export const useEditOfferAddressDetails = ({
     setError,
     reset,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
+    defaultValues: {
+      address: offerDetails?.addressID
+        ? offerDetails?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Adresse ${++index}`,
+          }))
+        : offerDetails?.leadID?.addressID
+        ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Addresse ${++index}`,
+          }))
+        : offerDetails?.leadID?.customerDetail?.address
+        ? [
+            {
+              ...offerDetails?.leadID?.customerDetail?.address,
+              label: `Addresse ${1}`,
+              addressType: "",
+            },
+          ]
+        : addressType?.map((item, index) => ({
+            streetNumber: "",
+            postalCode: "",
+            country: "",
+            description: "",
+            label: `Adresse ${++index}`,
+          })),
+    },
   });
 
   useEffect(() => {
-    if (offerDetails.id) {
-      reset({
-        address: offerDetails?.addressID
-          ? offerDetails?.addressID?.address?.map((item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Adresse ${++index}`,
-            }))
-          : offerDetails?.leadID?.addressID
-          ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Adresse ${++index}`,
-            }))
-          : offerDetails?.leadID?.customerDetail?.address
-          ? [
-              {
-                ...offerDetails?.leadID?.customerDetail?.address,
-                label: `Adresse ${1}`,
-              },
-            ]
-          : addressType?.map((item, index) => ({
-              streetNumber: "",
-              postalCode: "",
-              country: "",
-              description: "",
-              label: `Adresse ${++index}`,
-            })),
-      });
-    }
-  }, [offerDetails.id]);
+    dispatch(readAddressSettings());
+  }, []);
+
+  // useEffect(() => {
+  //   if (offerDetails.id) {
+  //     reset({
+  //       address: offerDetails?.addressID
+  //         ? offerDetails?.addressID?.address?.map((item, index) => ({
+  //             ...item,
+  //             label: item?.label ? item?.label : `Adresse ${++index}`,
+  //           }))
+  //         : offerDetails?.leadID?.addressID
+  //         ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
+  //             ...item,
+  //             label: item?.label ? item?.label : `Address ${++index}`,
+  //           }))
+  //         : offerDetails?.leadID?.customerDetail?.address
+  //         ? [
+  //             {
+  //               ...offerDetails?.leadID?.customerDetail?.address,
+  //               label: addressSettings?.addresses[0] || `Addresse ${1}`,
+  //               addressType: addressSettings?.addresses[0] || "",
+  //             },
+  //           ]
+  //         : addressType?.map((item, index) => ({
+  //             streetNumber: "",
+  //             postalCode: "",
+  //             country: "",
+  //             description: "",
+  //             label: `Adresse ${++index}`,
+  //           })),
+  //     });
+  //   }
+  // }, [offerDetails?.id, addressSettings?.id]);
+
   const {
     fields: addressFields,
     append,
@@ -94,18 +135,45 @@ export const useEditOfferAddressDetails = ({
     address[index] = !address[index];
     setAddressType(address);
   };
+
+  const handleChangeLabel = (item: string, index: number) => {
+    setValue(`address.${index}.label`, item);
+  };
+
+  const addressFieldsLength = addressFields.length || 1;
+
+  const handleAddNewAddress = () => {
+    append(addressObject);
+    // const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
+
+    setValue(
+      `address.${addressFieldsLength}.addressType`,
+      ``
+      // currentAddressItem || `Address ${addressFieldsLength}`
+    );
+
+    setValue(
+      `address.${addressFieldsLength}.label`,
+      `Addresse ${addressFieldsLength + 1}`
+    );
+  };
+
   const fields = AddOffAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
-    append,
+    handleChangeLabel,
+    handleAddNewAddress,
+    // append,
     remove,
     addressFields,
     handleFieldTypeChange,
     addressType,
-    setValue
+    setValue,
+    getValues,
+    addressSettings
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -120,6 +188,7 @@ export const useEditOfferAddressDetails = ({
     );
     if (response?.payload) handleNext(EditComponentsType.serviceEdit);
   };
+
   return {
     fields,
     onSubmit,

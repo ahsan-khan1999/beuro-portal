@@ -4,28 +4,22 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   readContent,
   setContentDetails,
 } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { InvoiceEmailPreviewFormField } from "@/components/invoice/details/email-fields";
 import {
   readCollectiveInvoiceDetails,
-  readInvoiceDetails,
   sendInvoiceEmail,
-  setCollectiveInvoiceDetails,
-  setInvoiceDetails,
-  updateInvoiceContent,
 } from "@/api/slices/invoice/invoiceSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
-import { CustomerPromiseActionType } from "@/types/customer";
 
 export const useReceiptEmail = (
   backRouteHandler: Function,
@@ -170,7 +164,14 @@ export const useReceiptEmail = (
     // if (response?.payload) {
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
-      let apiData = { ...data, id: invoiceID, pdf: fileUrl };
+      let apiData = {
+        ...data,
+        id: invoiceID,
+        pdf: fileUrl,
+        attachments: attachements.map((item) => {
+          return `${item.value}`;
+        }),
+      };
 
       const res = await dispatch(sendInvoiceEmail({ data: apiData }));
 

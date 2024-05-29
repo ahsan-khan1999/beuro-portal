@@ -142,7 +142,7 @@ export const Aggrement = ({
               <div className="flex flex-col  ">
                 <span className="font-medium text-sm mb-2">{date}</span>
                 <hr className="mb-[17px]" />
-                <span className="text-sm text-black font-normal ">Date</span>
+                <span className="text-sm text-black font-normal">Date</span>
               </div>
               <div className="flex flex-col gap-y-[18px]">
                 {signature && (

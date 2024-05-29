@@ -6,3 +6,4 @@ const DetailsCard = ({ children }: detailScreenCardsLayout) => {
 };
 
 export default DetailsCard;
+  

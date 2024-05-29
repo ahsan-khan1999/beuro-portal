@@ -1,6 +1,4 @@
-import ContractCardLayout from "@/layout/contractCard/ContractCardLayout";
 import { contractTableTypes } from "@/types/contract";
-import { useTranslation } from "next-i18next";
 import React from "react";
 
 const AddressDetailsData = ({
@@ -8,8 +6,6 @@ const AddressDetailsData = ({
 }: {
   contractDetails: contractTableTypes;
 }) => {
-  const { t: translate } = useTranslation();
-
   return (
     <div
       className="rounded-md border-none bg-white w-full h-fit"
@@ -22,7 +18,8 @@ const AddressDetailsData = ({
       {contractDetails.offerID?.addressID?.address?.map((item, key) => (
         <div className="py-3 px-6" key={key}>
           <h4 className="text-[#1E1E1E] text-base font-semibold mb-[10px]">
-            {translate("contracts.address_details.main_heading")}
+            {/* {translate("contracts.address_details.main_heading")} */}
+            {item?.label}
           </h4>
           <div className="grid grid-cols-2 mlg:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">
             <div>

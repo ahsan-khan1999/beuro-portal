@@ -205,6 +205,8 @@ export const useContractPdf = () => {
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "contract",
               isReverseLogo: template.payload.Template?.order,
+              companyName:
+                contractDetails?.offerID?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {
@@ -229,7 +231,7 @@ export const useContractPdf = () => {
 
               gender:
                 contractDetails?.offerID?.leadID?.customerDetail?.gender?.toString(),
-              isReverseInfo: template.payload.Template?.order,
+              isReverseInfo: template?.payload?.Template?.order,
             },
             movingDetails: {
               address: contractDetails?.offerID?.addressID?.address,
@@ -247,8 +249,8 @@ export const useContractPdf = () => {
               tax: contractDetails?.offerID?.taxAmount?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               discountType: contractDetails?.offerID?.discountType,
-              discountPercentage: discountPercentage.toString(),
-              updatedDiscountAmount: updatedTotalDiscount.toString(),
+              discountPercentage: discountPercentage?.toString(),
+              updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
               taxType: contractDetails?.offerID?.taxType,
               isContractPDF: true,
@@ -273,13 +275,13 @@ export const useContractPdf = () => {
               },
               secondColumn: {
                 address: {
-                  postalCode: user?.company.address.postalCode,
-                  streetNumber: user?.company.address.streetNumber,
+                  postalCode: user?.company?.address?.postalCode,
+                  streetNumber: user?.company?.address?.streetNumber,
                 },
                 bankDetails: {
-                  accountNumber: user?.company.bankDetails.accountNumber,
-                  bankName: user?.company.bankDetails.bankName,
-                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                  accountNumber: user?.company?.bankDetails?.accountNumber,
+                  bankName: user?.company?.bankDetails?.bankName,
+                  ibanNumber: user?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {
@@ -380,6 +382,7 @@ export const useContractPdf = () => {
       qrCode: qrCodeUrl,
       remoteFileBlob,
       systemSetting,
+      companyName: contractData?.headerDetails?.companyName,
     }),
     [
       emailTemplateSettings,

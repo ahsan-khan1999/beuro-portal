@@ -5,10 +5,10 @@ import React from "react";
 
 const PaymentSettings = () => {
   const defaultClassName = "  ";
-  const { fields, onSubmit, handleSubmit, errors } =
-    usePaymentSettings();
+  const { fields, onSubmit, handleSubmit, errors } = usePaymentSettings();
+
   return (
-    <FormCard>
+    <FormCard containerClassName="py-6 px-4">
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

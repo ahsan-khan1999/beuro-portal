@@ -1,6 +1,6 @@
 {
   "register": {
-    "main_heading": "Anmelden bei Büro-365",
+    "main_heading": "Anmeldung bei Büro-3655",
     "sub_heading": "Verwalten Sie Ihr Unternehmen mit uns",
     "full_name": "Vollständiger Name",
     "email_label": "E-Mail",
@@ -244,7 +244,8 @@
     "Employee_has_been_created": "Der Mitarbeiter wurde erfolgreich angelegt",
     "Login_details_have_been_emailed_to_them": "Die Zugangsdaten wurden ihnen per E-Mail zugesandt",
     "Login_details_could_not_be_emailed_to_them": "Die Anmeldedaten konnten ihnen nicht per E-Mail zugesandt werden",
-    "Employee_password_has_changed": "Das Passwort des Mitarbeiters wurde erfolgreich geändert"
+    "Employee_password_has_changed": "Das Passwort des Mitarbeiters wurde erfolgreich geändert",
+    "passwordRegex": "Das Passwort muss aus 6 Zeichen bestehen und Großbuchstaben, Kleinbuchstaben, Zahlen und Sonderzeichen enthalten."
   },
   "sidebar": {
     "customer": {
@@ -272,11 +273,11 @@
       },
       "invoices": {
         "invoices": "Rechnungen",
-        "pending": "Ausstehend",
+        "pending": "Entwurf",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
         "open": "Offen",
-        "sending": "Senden"
+        "sending": "Versandbereit"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -527,8 +528,9 @@
       "templates": "Vorlagen",
       "follow_up_setting": "Nachverfolgung",
       "billing": "Abrechnung",
-      "mail_setting": "Mail-EInstellungen",
-      "qr_settings": "QR-Einstellungen"
+      "mail_setting": "Mail-Einstellungen",
+      "qr_settings": "QR-Einstellungen",
+      "general_setting": "Allgemeine Einstellungen"
     },
     "account_setting": {
       "public_info": "Öffentliche Informationen",
@@ -697,6 +699,10 @@
       "street_no": "Strasse+Nr",
       "post_code": "Plz",
       "city": "Stadt"
+    },
+    "general_setting": {
+      "address": "Adresse",
+      "notes": "Notizen"
     }
   },
   "invoice": {
@@ -1152,6 +1158,29 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "invoice_fitlers": {
+      "pending": "Entwurf",
+      "sending": "Versandbereit",
+      "open": "Offen",
+      "overdue": "Überfällig",
+      "paid": "Bezahlt"
+    },
+    "address_type": "Bitte wählen Sie den Adresstyp",
+    "plan_detail": "Plandetails",
+    "new_plan": "Neuen Plan hinzufügen",
+    "yes_button": "Ja",
+    "enter_company": "Firmenname eingeben",
+    "note_title": "Titel notieren",
+    "title": "Titel",
+    "created_by": "Erstellt von",
+    "add_new_notes": "Neue Notizen hinzufügen",
+    "successful": "Erfolgreich",
+    "address_title_save": "Ihr Adresstitel wurde erfolgreich gespeichert",
+    "note_save": "Ihre Notizen wurden erfolgreich gespeichert",
+    "finish_button": "Fertigstellen",
+    "edit_address_title": "Adresstitel bearbeiten",
+    "add_address_title": "Adresstitel hinzufügen",
+    "address_title": "Adresse Titel",
     "no_invoice_created": "Keine Rechnung erstellt",
     "no_invoice_des": "Unterrechnung wurde noch nicht erstellt. Bitte erstellen Sie zunächst die Unterrechnung",
     "no_attachments": "Keine Anhänge gefunden!",
@@ -1611,7 +1640,7 @@
       },
       "card_content": {
         "main_heading": "Kundendetails",
-        "make_button_unchecked": "Unendlich frei erstellen",
+        "make_button_unchecked": "Konto kostenlos erstellen",
         "make_button_checked": "Unendlich erstellen",
         "customer_id": "ID",
         "role": "Rolle",
@@ -1622,7 +1651,8 @@
         "company_logo": "Firmenlogo",
         "customer_status": {
           "active": "Aktiv",
-          "block": "Blockieren"
+          "block": "Blockieren",
+          "unBlock": "entsperren"
         },
         "customer_free": "Ihr Kunde ist jetzt völlig frei."
       },
@@ -2108,7 +2138,7 @@
     "Post": "Gesendet"
   },
   "invoice_status": {
-    "Pending": "Ausstehend",
+    "Pending": "Entwurf",
     "Overdue": "Überfällig",
     "Paid": "Bezahlt",
     "Open": "Offen"
@@ -2208,13 +2238,13 @@
   },
   "add_note_dropdown": {
     "all_notes": "Alle Anfragen",
-    "sending_picture": "Sendet Fotos",
-    "view_date": "Besichtigungs Termin",
-    "approximate_offer_open": "Schätzoﬀerte Oﬀen",
-    "contact_us": "Meldet sich noch",
-    "individual_note": "Individuelle Notiz",
-    "note_reached": "Nicht erreicht",
-    "other": "Andere"
+    "Sending pictures": "Sendet Fotos",
+    "Viewing date": "Besichtigungs Termin",
+    "Approximate Offer open": "Schätzoﬀerte Oﬀen",
+    "Will contact us": "Meldet sich noch",
+    "Individual Note": "Individuelle Notiz",
+    "Not Reached": "Nicht erreicht",
+    "Other": "Andere"
   },
   "thank_you_content": {
     "heading": "Danke für die Unterzeichnung des Vertrags",

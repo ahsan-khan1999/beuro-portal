@@ -84,7 +84,7 @@ const InvoiceDetails = () => {
           />
         </InvoiceCardLayout>
 
-        <div className="flex mt-[12px] mb-[18px]">
+        <div className="flex my-3">
           <DetailsSwitchBtn
             activeTab={activeTab}
             onComponentChange={setActiveTab}

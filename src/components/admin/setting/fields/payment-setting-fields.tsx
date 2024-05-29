@@ -12,7 +12,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
     {
       field: {
         type: Field.div,
-        className: "flex ",
+        className: "flex",
         id: "paymentDiv",
         children: [
           {
@@ -33,14 +33,15 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                       "admin.settings.payment_setting.heading"
                     )}`,
                     containerClassName:
-                      "text-[20px] text-[#222B45] font-normal ",
+                      "text-[20px] text-[#222B45] font-normal",
                   },
                 },
                 {
                   containerClass: "w-full relative",
                   field: {
                     type: Field.div,
-                    className: "grid grid-cols-2 gap-x-6 gap-y-6 ",
+                    className:
+                      "grid grid-cols-2 gap-6 rounded-lg px-2 py-3 bg-[#EDF4FF]",
                     id: "paymentdiv",
 
                     children: [
@@ -54,7 +55,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                         },
                         field: {
                           className:
-                            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                            "!p-4 !border-[#BFBFBF] focus:!border-primary",
                           type: Field.input,
                           id: "publishableKey",
                           name: "publishableKey",
@@ -75,7 +76,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                         },
                         field: {
                           className:
-                            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                            "!p-4 !border-[#BFBFBF] focus:!border-primary",
                           type: Field.input,
                           id: "searchKey",
                           name: "searchKey",
@@ -97,7 +98,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                         },
                         field: {
                           className:
-                            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                            "!p-4 !border-[#BFBFBF] focus:!border-primary",
                           type: Field.select,
                           value: "False",
                           id: "testMode",
@@ -126,7 +127,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                         },
                         field: {
                           className:
-                            "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                            "!p-4 !border-[#BFBFBF] focus:!border-primary",
                           type: Field.select,
                           value: "True",
                           id: "active",
@@ -157,7 +158,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                     )}`,
                     inputType: "submit",
                     className:
-                      "rounded-lg p-4 w-fit h-[50px] text-white hover:bg-none ",
+                      "rounded-lg p-4 w-fit h-[50px] text-white hover:bg-none",
                     loading,
                     id: "paymentdiv",
                   },

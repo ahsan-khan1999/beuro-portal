@@ -20,6 +20,18 @@ export enum AddTaxField {
   name = "name",
   taxRate = "taxRate",
 }
+export enum AddGeneralNoteField {
+  noteType = "noteType",
+  description = "description",
+}
+
+export enum AddGeneralAddressField {
+  addresses = "addresses",
+}
+
+export enum EnterComponayNameField {
+  companyName = "companyName",
+}
 
 // Edit payment details
 export enum EditPaymentDetails {

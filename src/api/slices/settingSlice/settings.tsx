@@ -7,7 +7,7 @@ import {
   EmailSetting,
   EmailTemplate,
   FollowUp,
-  QRSettings,
+  GeneralAddress,
   TemplateSettings,
 } from "@/types/settings";
 import { setUser } from "../authSlice/auth";
@@ -17,6 +17,18 @@ export interface TaxSetting {
   name: string;
   taxRate: String;
   createdAt: string;
+}
+
+export interface NoteSetting {
+  id: string;
+  notes: {
+    noteType: string;
+    description: string;
+  };
+  createdAt: string;
+  createdBy: {
+    fullName: string;
+  };
 }
 
 interface SettingsState {
@@ -30,6 +42,8 @@ interface SettingsState {
   emailSettings: EmailSetting | null;
   emailTemplate: EmailTemplate | null;
   qrSettings: CompanyQrSettings | null;
+  noteSettings: NoteSetting[] | null;
+  addressSettings: GeneralAddress | null;
 }
 
 export interface SystemSetting {
@@ -57,6 +71,8 @@ const initialState: SettingsState = {
   emailSettings: null,
   emailTemplate: null,
   qrSettings: null,
+  noteSettings: null,
+  addressSettings: null,
 };
 
 export const updateAccountSettings: AsyncThunk<boolean, object, object> | any =
@@ -200,6 +216,7 @@ export const readEmailSettings: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateEmailSetting: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("user/email/settings/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -217,20 +234,20 @@ export const updateEmailSetting: AsyncThunk<boolean, object, object> | any =
 export const updateEmailTemplateSetting:
   | AsyncThunk<boolean, object, object>
   | any = createAsyncThunk(
-    "add/user/email/template/setting",
-    async (args, thunkApi) => {
-      const { data, router, setError, translate } = args as any;
+  "add/user/email/template/setting",
+  async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
 
-      try {
-        const response = await apiServices.createEmailTemplateSettings(data);
-        return response?.data?.data?.MailSetting;
-      } catch (e: any) {
-        thunkApi.dispatch(setErrorMessage(e?.data?.message));
-        setErrors(setError, e?.data.data, translate);
-        return false;
-      }
+    try {
+      const response = await apiServices.createEmailTemplateSettings(data);
+      return response?.data?.data?.MailSetting;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
     }
-  );
+  }
+);
 
 export const updateAdminSetting: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("admin/setting", async (args, thunkApi) => {
@@ -271,7 +288,6 @@ export const createQrCodeSetting: AsyncThunk<boolean, object, object> | any =
     }
   });
 
-
 export const deleteTaxSetting: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("delete/tax/setting", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -285,6 +301,91 @@ export const deleteTaxSetting: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
+// read addresses
+export const readAddressSettings: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("user/address/setting", async (args, thunkApi) => {
+    try {
+      const response = await apiServices.getAddressSettings({});
+      return response?.data?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+// update address setting
+export const updateAddressSetting: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("user/address/settings", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      const response = await apiServices.updateAddressSettings(data);
+      return response?.data?.data?.AddressSetting;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
+// create note setting
+export const createNotesSetting: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("user/notes/settings", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      const res = await apiServices.createNotesSettings(data);
+      return res?.data?.data?.NotesSetting;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
+// read note setting
+export const readNoteSettings: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("user/notes/setting", async (args, thunkApi) => {
+    try {
+      const response = await apiServices.readNotesSettings({});
+      return response?.data?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+// update note setting
+export const updateNoteSetting: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("update/notes/setting", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      await apiServices.updateNotesSettings(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
+// delete note setting
+export const deleteNoteSetting: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("delete/notes/setting", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      await apiServices.deleteNotesSettings(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
 const SettingSlice = createSlice({
   name: "SettingSlice",
   initialState,
@@ -300,6 +401,12 @@ const SettingSlice = createSlice({
     },
     setSystemSettings: (state, action) => {
       state.systemSettings = action.payload;
+    },
+    setAddressSettings: (state, action) => {
+      state.addressSettings = action.payload;
+    },
+    setNotesSettings: (state, action) => {
+      state.noteSettings = action.payload;
     },
   },
   extraReducers(builder) {
@@ -466,7 +573,6 @@ const SettingSlice = createSlice({
       state.loading = false;
     });
 
-
     builder.addCase(deleteTaxSetting.pending, (state) => {
       state.loading = true;
     });
@@ -474,6 +580,76 @@ const SettingSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(deleteTaxSetting.rejected, (state) => {
+      state.loading = false;
+    });
+
+    // create note setting cases
+    builder.addCase(createNotesSetting.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createNotesSetting.fulfilled, (state, action) => {
+      if (state.noteSettings && action.payload) {
+        state.noteSettings = [...state.noteSettings, action.payload];
+      }
+      state.loading = false;
+    });
+    builder.addCase(createNotesSetting.rejected, (state) => {
+      state.loading = false;
+    });
+
+    // read note setting cases
+    builder.addCase(readNoteSettings.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readNoteSettings.fulfilled, (state, action) => {
+      state.noteSettings = action.payload?.NotesSetting;
+      state.loading = false;
+    });
+    builder.addCase(readNoteSettings.rejected, (state) => {
+      state.loading = false;
+    });
+
+    // update note setting
+    builder.addCase(updateNoteSetting.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateNoteSetting.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(updateNoteSetting.rejected, (state) => {
+      state.loading = false;
+    });
+
+    // delete note setting
+    builder.addCase(deleteNoteSetting.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteNoteSetting.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(deleteNoteSetting.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(readAddressSettings.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readAddressSettings.fulfilled, (state, action) => {
+      state.addressSettings = action.payload?.AddressSetting;
+      state.loading = false;
+    });
+    builder.addCase(readAddressSettings.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(updateAddressSetting.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateAddressSetting.fulfilled, (state, action) => {
+      state.addressSettings = action?.payload;
+      state.loading = false;
+    });
+    builder.addCase(updateAddressSetting.rejected, (state) => {
       state.loading = false;
     });
   },
@@ -485,4 +661,6 @@ export const {
   setTaxSettings,
   setFollowUpSettings,
   setSystemSettings,
+  setAddressSettings,
+  setNotesSettings,
 } = SettingSlice.actions;

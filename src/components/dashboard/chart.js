@@ -51,7 +51,10 @@ const PieChart = ({ data }) => {
         !data.datasets ||
         data.datasets.length === 0 ||
         data.datasets[0].data.length === 0 ? (
-          <NoDataEmptyState />
+          <NoDataEmptyState
+            className="w-[90%] mx-auto my-3"
+            containerClassName="py-0"
+          />
         ) : (
           <div className="w-fit h-fit">
             <canvas className="asd" id="myPieChart" />

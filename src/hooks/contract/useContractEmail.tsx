@@ -57,7 +57,9 @@ export const useContractEmail = (
 
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+  }, []);
 
+  useEffect(() => {
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.id,
@@ -130,7 +132,15 @@ export const useContractEmail = (
 
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
-      let apiData = { ...data, id: contractDetails?.id, pdf: fileUrl };
+
+      let apiData = {
+        ...data,
+        id: contractDetails?.id,
+        pdf: fileUrl,
+        attachments: attachements.map((item) => {
+          return `${item.name}`;
+        }),
+      };
 
       const res = await dispatch(sendContractEmail({ data: apiData }));
       if (res?.payload) {

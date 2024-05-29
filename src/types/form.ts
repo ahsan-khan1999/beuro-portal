@@ -122,7 +122,7 @@ export interface OptionType {
 export interface SelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
   options: OptionType[];
-  value: string;
+  value?: string;
   svg?: string;
   onItemChange?: (id: string, index?: number) => void;
   trigger?: UseFormTrigger<FieldValues>;

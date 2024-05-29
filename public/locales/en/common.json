@@ -1,6 +1,6 @@
 {
   "register": {
-    "main_heading": "Sign in to Büro-365",
+    "main_heading": "Sign Up to Büro-365",
     "sub_heading": "Manage your business with us",
     "full_name": "Full Name",
     "email_label": "Email",
@@ -244,7 +244,8 @@
     "Employee_has_been_created": "The employee has been successfully created",
     "Login_details_have_been_emailed_to_them": "The login details have been emailed to them",
     "Login_details_could_not_be_emailed_to_them": "The login details could not be emailed to them",
-    "Employee_password_has_changed": "The employee's password has been changed successfully"
+    "Employee_password_has_changed": "The employee's password has been changed successfully",
+    "passwordRegex": "Password must be 6 characters & including uppercase, lowercase, number, & special character."
   },
   "sidebar": {
     "customer": {
@@ -533,7 +534,8 @@
       "follow_up_setting": "Follow Up Setting",
       "billing": "Billing",
       "mail_setting": "Mail Setting",
-      "qr_settings": "QR Settings"
+      "qr_settings": "QR Settings",
+      "general_setting": "General Setting"
     },
     "account_setting": {
       "public_info": "Public Information",
@@ -704,6 +706,10 @@
       "street_no": "Street No",
       "post_code": "Postal Code",
       "city": "City"
+    },
+    "general_setting": {
+      "address": "Address",
+      "notes": "Notes"
     }
   },
   "invoice": {
@@ -1160,6 +1166,29 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "invoice_fitlers": {
+      "pending": "Pending",
+      "sending": "Sending",
+      "open": "Open",
+      "overdue": "Overdue",
+      "paid": "Paid"
+    },
+    "address_type": "Please Select Address Type",
+    "plan_detail": "Plan Details",
+    "new_plan": "Add new Plan",
+    "yes_button": "Yes",
+    "enter_company": "Enter Company Name",
+    "note_title": "Note title",
+    "title": "Title",
+    "created_by": "Created by",
+    "add_new_notes": "Add New Notes",
+    "successful": "Successful",
+    "address_title_save": "Your Address title save successfully",
+    "note_save": "Your Notes save successfully",
+    "finish_button": "Finish",
+    "edit_address_title": "Edit address title",
+    "add_address_title": "Add address title",
+    "address_title": "Address Title",
     "no_invoice_created": "No Invoice Created",
     "no_invoice_des": "Sub invoice has not yet been created. Please create the sub invoice first",
     "no_attachments": "No attachments found!",
@@ -1617,7 +1646,7 @@
       },
       "card_content": {
         "main_heading": "Customer Details",
-        "make_button_unchecked": "Make Infinite Free",
+        "make_button_unchecked": "Make Account Free",
         "make_button_checked": "Make Infinite",
         "customer_id": "Customer ID",
         "role": "Role",
@@ -1628,7 +1657,8 @@
         "company_logo": "Company Logo",
         "customer_status": {
           "active": "Active",
-          "block": "Block"
+          "block": "Block",
+          "unBlock": "Un Block"
         },
         "customer_free": "Your customer is now totally free."
       },
@@ -2208,13 +2238,13 @@
   },
   "add_note_dropdown": {
     "all_notes": "All Notes",
-    "sending_picture": "Sending pictures",
-    "view_date": "Viewing date",
-    "approximate_offer_open": "Approximate Offer open",
-    "contact_us": "Will contact us",
-    "individual_note": "Individual Note",
-    "note_reached": "Not Reached",
-    "other": "Other"
+    "Sending pictures": "Sending pictures",
+    "Viewing date": "Viewing date",
+    "Approximate Offer open": "Approximate Offer open",
+    "Will contact us": "Will contact us",
+    "Individual Note": "Individual Note",
+    "Not Reached": "Not Reached",
+    "Other": "Other"
   },
   "thank_you_content": {
     "heading": "Thanks for Signing the Contract",

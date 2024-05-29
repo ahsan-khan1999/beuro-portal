@@ -11,6 +11,7 @@ export const useMergedPdfDownload = ({
   data,
   remoteFileBlob,
   fileName,
+  companyName,
 }: PdfPreviewProps) => {
   const [mergedFile, setMergedFile] = useState<File | null>(null);
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
@@ -51,7 +52,10 @@ export const useMergedPdfDownload = ({
           const url = URL.createObjectURL(convertedBlob);
 
           setMergedFile(
-            blobToFile(convertedBlob, `${fileName}.pdf` || "output.pdf")
+            blobToFile(
+              convertedBlob,
+              `${companyName} ${fileName}.pdf` || "output.pdf"
+            )
           );
           setMergedPdfUrl(url);
         }

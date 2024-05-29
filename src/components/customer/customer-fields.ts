@@ -197,7 +197,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",

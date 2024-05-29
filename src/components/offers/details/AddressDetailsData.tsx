@@ -2,7 +2,6 @@ import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
 import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
-import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const AddressDetailsData = ({
@@ -11,7 +10,6 @@ const AddressDetailsData = ({
   offerDetails: OffersTableRowTypes;
 }) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
 
   return (
     <LeadsCardLayout>
