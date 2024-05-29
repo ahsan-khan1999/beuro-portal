@@ -1166,6 +1166,13 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "invoice_fitlers": {
+      "pending": "Pending",
+      "sending": "Sending",
+      "open": "Open",
+      "overdue": "Overdue",
+      "paid": "Paid"
+    },
     "address_type": "Please Select Address Type",
     "plan_detail": "Plan Details",
     "new_plan": "Add new Plan",

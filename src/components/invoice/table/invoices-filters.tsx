@@ -31,23 +31,23 @@ export default function InvoicesFilters({
 
   const checkbox: CheckBoxType[] = [
     {
-      label: `${translate("filters.extra_filters.pending")}`,
+      label: `${translate("common.invoice_fitlers.pending")}`,
       type: `${staticEnums.InvoiceMainStatus.Pending}`,
     },
     {
-      label: `${translate("filters.extra_filters.sending")}`,
+      label: `${translate("common.invoice_fitlers.sending")}`,
       type: `${staticEnums.InvoiceMainStatus.sending}`,
     },
     {
-      label: `${translate("filters.extra_filters.open")}`,
+      label: `${translate("common.invoice_fitlers.open")}`,
       type: `${staticEnums.InvoiceMainStatus.Open}`,
     },
     {
-      label: `${translate("filters.extra_filters.overdue")}`,
+      label: `${translate("common.invoice_fitlers.overdue")}`,
       type: `${staticEnums.InvoiceMainStatus.Overdue}`,
     },
     {
-      label: `${translate("filters.extra_filters.paid")}`,
+      label: `${translate("common.invoice_fitlers.paid")}`,
       type: `${staticEnums.InvoiceMainStatus.Paid}`,
     },
   ];
@@ -251,9 +251,7 @@ export default function InvoicesFilters({
                     .slice()
                     .reverse()
                     .map((item) => ({
-                      label: translate(
-                        `add_note_dropdown.${item.notes.noteType}`
-                      ),
+                      label: item.notes.noteType,
                       value: item.notes.noteType,
                     }))
                 : []
