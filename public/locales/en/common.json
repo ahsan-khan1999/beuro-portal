@@ -1166,6 +1166,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "address_type": "Please Select Address Type",
     "plan_detail": "Plan Details",
     "new_plan": "Add new Plan",
     "yes_button": "Yes",

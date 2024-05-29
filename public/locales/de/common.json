@@ -273,11 +273,11 @@
       },
       "invoices": {
         "invoices": "Rechnungen",
-        "pending": "Ausstehend",
+        "pending": "Entwurf",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
         "open": "Offen",
-        "sending": "Senden"
+        "sending": "Versandbereit"
       },
       "services": "Dienstleistungen",
       "employees": "Mitarbeiter",
@@ -1158,6 +1158,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "address_type": "Bitte wählen Sie den Adresstyp",
     "plan_detail": "Plandetails",
     "new_plan": "Neuen Plan hinzufügen",
     "yes_button": "Ja",

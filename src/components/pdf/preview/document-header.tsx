@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import umzugsLogo from "@/assets/svgs/Umzug-fuchs-logo.svg";
 import { DocumentHeaderDetailsProps } from "@/types/types";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";

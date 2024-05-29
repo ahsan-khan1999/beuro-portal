@@ -1132,6 +1132,7 @@ export interface PdfPreviewProps {
   mergedPdfFileUrl?: string | null;
   isPdfRendering?: boolean;
   showContractSign?: boolean;
+  companyName?:string
 }
 
 export interface PdfPreviewFooterProps {

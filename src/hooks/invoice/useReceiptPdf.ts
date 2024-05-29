@@ -206,6 +206,7 @@ export const useReceiptPdf = () => {
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "receipt",
               isReverseLogo: template?.payload?.Template?.order,
+              companyName: invoiceDetails?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {

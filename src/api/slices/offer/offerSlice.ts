@@ -14,6 +14,7 @@ import { ModalType } from "@/enums/ui";
 import axios from "axios";
 import { BASEURL } from "@/services/HttpProvider";
 import { getRefreshToken, getToken } from "@/utils/auth.util";
+import toast from "react-hot-toast";
 
 interface OfferState {
   offer: OffersTableRowTypes[];
@@ -255,7 +256,9 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
 
       return true;
     } catch (e: any) {
+      showError(e?.response?.data?.message);
       thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
+      // toast.error(setErrorMessage(e?.response?.data?.message));
       setErrors(setError, e?.data.data, translate);
       return false;
     }

@@ -4,19 +4,14 @@ import {
   updateProfileStep3,
 } from "@/api/slices/authSlice/auth";
 import {
-  AddressType,
   ApiResponseType,
   CheckProps,
-  DateRangeProps,
-  DivProps,
   Errors,
-  FieldProps,
   FieldType,
   FilterType,
-  FormField,
   User,
 } from "@/types";
-import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
+import { AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
 import { DEFAULT_SERVICE, staticEnums } from "./static";
@@ -25,8 +20,6 @@ import moment from "moment";
 import { CustomerAddress } from "@/types/customer";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { Service } from "@/types/service";
-import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
-import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
