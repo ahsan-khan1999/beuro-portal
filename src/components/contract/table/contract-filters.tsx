@@ -240,9 +240,7 @@ export default function ContractFilters({
                       .slice()
                       .reverse()
                       .map((item) => ({
-                        label: translate(
-                          `add_note_dropdown.${item.notes.noteType}`
-                        ),
+                        label: item.notes.noteType,
                         value: item.notes.noteType,
                       }))
                   : []

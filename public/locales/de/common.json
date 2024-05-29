@@ -1158,6 +1158,13 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "invoice_fitlers": {
+      "pending": "Entwurf",
+      "sending": "Versandbereit",
+      "open": "Offen",
+      "overdue": "Überfällig",
+      "paid": "Bezahlt"
+    },
     "address_type": "Bitte wählen Sie den Adresstyp",
     "plan_detail": "Plandetails",
     "new_plan": "Neuen Plan hinzufügen",
@@ -2131,7 +2138,7 @@
     "Post": "Gesendet"
   },
   "invoice_status": {
-    "Pending": "Ausstehend",
+    "Pending": "Entwurf",
     "Overdue": "Überfällig",
     "Paid": "Bezahlt",
     "Open": "Offen"
