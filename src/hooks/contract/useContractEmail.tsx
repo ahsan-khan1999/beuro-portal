@@ -137,9 +137,9 @@ export const useContractEmail = (
         ...data,
         id: contractDetails?.id,
         pdf: fileUrl,
-        // attachments: attachements.map((item) => {
-        //   return `${contractDetails?.offerID?.createdBy?.company?.companyName}-${item.name}`;
-        // }),
+        attachments: attachements.map((item) => {
+          return `${item.name}`;
+        }),
       };
 
       const res = await dispatch(sendContractEmail({ data: apiData }));
