@@ -132,6 +132,7 @@ export const useContractEmail = (
 
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
+
       let apiData = {
         ...data,
         id: contractDetails?.id,
