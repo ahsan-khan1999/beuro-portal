@@ -64,7 +64,7 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
           type: Field.select,
           id: `address.${i}.addressType`,
           name: `address.${i}.addressType`,
-          // value: addressSettings?.addresses?.[0] || "",
+          // value: translate("common.address_type"),
           options:
             addressSettings?.addresses?.map((item) => ({
               label: item,

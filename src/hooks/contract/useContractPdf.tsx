@@ -205,6 +205,8 @@ export const useContractPdf = () => {
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "contract",
               isReverseLogo: template.payload.Template?.order,
+              companyName:
+                contractDetails?.offerID?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {
@@ -380,6 +382,7 @@ export const useContractPdf = () => {
       qrCode: qrCodeUrl,
       remoteFileBlob,
       systemSetting,
+      companyName: contractData?.headerDetails?.companyName,
     }),
     [
       emailTemplateSettings,

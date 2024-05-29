@@ -117,7 +117,8 @@ const Setting = () => {
       const noteSetting = [...noteSettings];
       noteSetting.splice(index, 1);
       dispatch(readNoteSettings());
-      dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+      // dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+      handleCreation();
     }
   };
 
@@ -173,7 +174,7 @@ const Setting = () => {
     [ModalType.EDIT_GENERAL_NOTE]: (
       <GeneralNote
         onClose={onClose}
-        onSuccess={handleAddressGeneralSuccess}
+        onSuccess={handleCreation}
         heading={translate("common.update_note")}
       />
     ),
@@ -208,7 +209,7 @@ const Setting = () => {
         onEditNote={handleEditGeneralNote}
         onNoteDelete={handleNoteDelete}
         noteSettings={noteSettings}
-        onSuccess={handleAddressGeneralSuccess}
+        onSuccess={handleCreation}
         onClose={onClose}
       />
     ),

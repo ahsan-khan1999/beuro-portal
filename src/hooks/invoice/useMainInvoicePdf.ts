@@ -205,6 +205,7 @@ export const useMainInvoicePdf = () => {
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "contract",
               isReverseLogo: template?.payload?.Template?.order,
+              companyName: invoiceDetails?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {

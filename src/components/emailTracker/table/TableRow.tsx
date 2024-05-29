@@ -22,7 +22,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                 onClick={() =>
                   router.push({
                     pathname: "/email-tracker/view-mail",
-                    query: { email: item?.id },
+                    query: { ...router.query, email: item?.id },
                   })
                 }
                 key={item.id}
@@ -103,7 +103,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                     onClick={() =>
                       router.push({
                         pathname: "/email-tracker/view-mail",
-                        query: { email: item?.id },
+                        query: { ...router.query, email: item?.id },
                       })
                     }
                     title={translate("email_tracker.table_headings.edit")}

@@ -172,6 +172,7 @@ export const useInvoicePdf = () => {
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "invoice",
               isReverseLogo: template.payload.Template?.order,
+              companyName: invoiceDetails?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {
@@ -322,6 +323,7 @@ export const useInvoicePdf = () => {
       qrCode: qrCodeUrl,
       remoteFileBlob,
       systemSetting,
+      companyName: invoiceData?.headerDetails?.companyName,
     }),
     [
       emailTemplateSettings,

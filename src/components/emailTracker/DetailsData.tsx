@@ -3,7 +3,6 @@ import Image from "next/image";
 import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
 import {
   formatDateReverse,
@@ -11,8 +10,7 @@ import {
   getMailStatusColor,
 } from "@/utils/utility";
 import Link from "next/link";
-import { Pdf } from "../../types/emailTracker";
-
+import { updateQuery } from "@/utils/update-query";
 const DetailsData = ({
   handleConfirmDeletion,
   emailDetails,
@@ -21,16 +19,17 @@ const DetailsData = ({
   emailDetails: TableRowEmailTracker | null;
 }) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
+
+  const handleBack = () => {
+    (router.pathname = "/email-tracker"), delete router.query["email"];
+    updateQuery(router, router.locale as string);
+  };
 
   return (
     <>
       <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
-          <span
-            onClick={() => router.push("/email-tracker")}
-            className="cursor-pointer"
-          >
+          <span onClick={handleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
@@ -145,12 +144,14 @@ const DetailsData = ({
         </div>
 
         <div className="mt-5">
-          <span className="text-[#4B4B4B] text-lg  font-semibold ">
+          <span className="text-[#4B4B4B] text-lg font-semibold">
             {translate("email_tracker.card_content.attachments")}:
           </span>
         </div>
         <div className="mt-5 flex items-end">
           {emailDetails?.attachments?.map((item) => {
+            console.log(item);
+
             return (
               <>
                 <Link
@@ -161,7 +162,7 @@ const DetailsData = ({
                   <Image
                     src={pdfFileIcon}
                     alt="PDF_FILE_ICON"
-                    className=" mr-[11px]"
+                    className="mr-[11px]"
                   />
                   <span className="text-[#BFBFBF] text-base font-normal">
                     {getFileNameFromUrl(

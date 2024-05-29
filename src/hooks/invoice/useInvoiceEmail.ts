@@ -166,7 +166,15 @@ export const useInvoiceEmail = (
     // if (response?.payload) {
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
-      let apiData = { ...data, id: invoiceID, pdf: fileUrl };
+      console.log(fileUrl);
+      let apiData = {
+        ...data,
+        id: invoiceID,
+        pdf: fileUrl,
+        attachments: attachements.map((item) => {
+          return `${invoiceDetails?.createdBy?.company?.companyName}-${item.name}`;
+        }),
+      };
 
       const res = await dispatch(sendInvoiceEmail({ data: apiData }));
 

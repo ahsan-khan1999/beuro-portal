@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import mailPopIcon from "@/assets/svgs/email-popup-image.svg";
-import { Button } from "@/base-components/ui/button/button";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useRouter } from "next/router";
 import {
@@ -12,7 +11,6 @@ import {
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { conditionHandlerProfile } from "@/utils/utility";
 import { isJSON } from "@/utils/functions";
 import { getUser } from "@/utils/auth.util";
 import { useTranslation } from "next-i18next";

@@ -29,6 +29,7 @@ const ComposeMail = () => {
     onClose,
     onSuccess,
   } = useReceiptEmail(backRouteHandler, onNextHandle);
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
