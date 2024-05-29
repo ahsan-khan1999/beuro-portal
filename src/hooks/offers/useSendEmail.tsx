@@ -123,14 +123,7 @@ export const useSendEmail = (
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
 
-      let apiData = {
-        ...data,
-        id: offerDetails?.id,
-        pdf: fileUrl,
-        attachments: attachements.map((item) => {
-          return `${offerDetails?.createdBy?.company?.companyName}-${item.name}`;
-        }),
-      };
+      let apiData = { ...data, id: offerDetails?.id, pdf: fileUrl };
 
       const res = await dispatch(sendOfferEmail({ data: apiData }));
       if (res?.payload) {
@@ -140,7 +133,7 @@ export const useSendEmail = (
       const updatedData = {
         ...data,
         id: offerDetails?.id,
-        attachments: attachements?.map((item) => `${item.value}`),
+        attachments: attachements?.map((item) => item.value),
       };
       localStoreUtil.store_data("contractComposeEmail", updatedData);
 

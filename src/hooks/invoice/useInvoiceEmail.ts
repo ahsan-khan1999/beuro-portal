@@ -171,9 +171,9 @@ export const useInvoiceEmail = (
         ...data,
         id: invoiceID,
         pdf: fileUrl,
-        attachments: attachements.map((item) => {
-          return `${invoiceDetails?.createdBy?.company?.companyName}-${item.name}`;
-        }),
+        // attachments: attachements.map((item) => {
+        //   return `${invoiceDetails?.createdBy?.company?.companyName}-${item.name}`;
+        // }),
       };
 
       const res = await dispatch(sendInvoiceEmail({ data: apiData }));
