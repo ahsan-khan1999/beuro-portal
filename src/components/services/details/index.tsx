@@ -5,6 +5,7 @@ import DetailsData from "../DetailsData";
 import useServiceDetail from "@/hooks/services/useServiceDetail";
 import ServicesForm from "../ServicesForm";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const ServicesDetails = () => {
   const {
@@ -30,7 +31,7 @@ const ServicesDetails = () => {
       </DetailsCard>
       <div className="w-full mt-8">
         {loading ? (
-          <LoadingState />
+          <CustomLoader />
         ) : (
           <ServicesForm
             isUpdate={isUpdate}

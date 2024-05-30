@@ -6,6 +6,7 @@ import { formatDateTimeToDate } from "@/utils/utility";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const CustomerDetails = () => {
   const {
@@ -34,7 +35,7 @@ const CustomerDetails = () => {
         />
       </DetailsCard>
       {loading ? (
-        <LoadingState />
+        <CustomLoader />
       ) : (
         <div className="w-full my-8">
           <CustomerForm

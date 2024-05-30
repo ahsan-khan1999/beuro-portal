@@ -3,8 +3,8 @@ import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import CustomerDetailsData from "./customer-details-data";
 import useCustomerDetailAdmin from "@/hooks/admin/customer/useCustomerDetail";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import DetailsData from "../DetailsData";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const CustomerDetails = () => {
   const {
@@ -32,7 +32,7 @@ const CustomerDetails = () => {
         </DetailsCard>
         <div className="mt-8">
           {loading ? (
-            <LoadingState />
+            <CustomLoader />
           ) : (
             <CustomerDetailsData customerDetail={companyDetails} />
           )}

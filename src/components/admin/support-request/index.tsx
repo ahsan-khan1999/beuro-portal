@@ -20,13 +20,13 @@ export default function SupportRequest() {
     handleFilterChange,
     loading,
     currentPage,
-    handleStatusUpadte,
+    handleStatusChange,
   } = useSupportRequest();
 
   const CurrentComponent = useEmptyStates(
     <TableRow
       currentPageRows={currentPageRows}
-      onStatusChange={handleStatusUpadte}
+      onStatusChange={handleStatusChange}
     />,
     currentPageRows?.length > 0,
     loading

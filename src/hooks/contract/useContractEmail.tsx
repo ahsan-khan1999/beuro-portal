@@ -138,7 +138,7 @@ export const useContractEmail = (
         id: contractDetails?.id,
         pdf: fileUrl,
         attachments: attachements.map((item) => {
-          return `${item.name}`;
+          return `${item.value}`;
         }),
       };
 

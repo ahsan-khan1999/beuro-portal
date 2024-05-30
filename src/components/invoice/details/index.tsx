@@ -7,6 +7,8 @@ import ReceiptDetailsTable from "./receipt/table";
 import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
 import { useEmptyStates } from "@/utils/hooks";
 import { PendingInvoice } from "./PendingInvoice";
+import { useEffect, useState } from "react";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const InvoiceDetails = () => {
   const {
@@ -29,6 +31,7 @@ const InvoiceDetails = () => {
     loading,
     systemSettings,
     handleInvoiceUpdate,
+    totalCount,
   } = useInvoiceDetail();
 
   const invoiceComponent = {

@@ -136,7 +136,6 @@ export const useSendEmail = (
         attachments: attachements?.map((item) => item.value),
       };
       localStoreUtil.store_data("contractComposeEmail", updatedData);
-
       router.pathname = "/offers/pdf-preview";
       router.query = { ...router.query, offerID: offerDetails?.id };
       updateQuery(router, router.locale as string);

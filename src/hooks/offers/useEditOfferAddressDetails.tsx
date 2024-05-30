@@ -65,13 +65,13 @@ export const useEditOfferAddressDetails = ({
         : offerDetails?.leadID?.addressID
         ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
             ...item,
-            label: item?.label ? item?.label : `Addresse ${++index}`,
+            label: item?.label ? item?.label : `Adresse ${++index}`,
           }))
         : offerDetails?.leadID?.customerDetail?.address
         ? [
             {
               ...offerDetails?.leadID?.customerDetail?.address,
-              label: `Addresse ${1}`,
+              label: `Adresse ${1}`,
               addressType: "",
             },
           ]
@@ -88,38 +88,6 @@ export const useEditOfferAddressDetails = ({
   useEffect(() => {
     dispatch(readAddressSettings());
   }, []);
-
-  // useEffect(() => {
-  //   if (offerDetails.id) {
-  //     reset({
-  //       address: offerDetails?.addressID
-  //         ? offerDetails?.addressID?.address?.map((item, index) => ({
-  //             ...item,
-  //             label: item?.label ? item?.label : `Adresse ${++index}`,
-  //           }))
-  //         : offerDetails?.leadID?.addressID
-  //         ? offerDetails?.leadID?.addressID?.address?.map((item, index) => ({
-  //             ...item,
-  //             label: item?.label ? item?.label : `Address ${++index}`,
-  //           }))
-  //         : offerDetails?.leadID?.customerDetail?.address
-  //         ? [
-  //             {
-  //               ...offerDetails?.leadID?.customerDetail?.address,
-  //               label: addressSettings?.addresses[0] || `Addresse ${1}`,
-  //               addressType: addressSettings?.addresses[0] || "",
-  //             },
-  //           ]
-  //         : addressType?.map((item, index) => ({
-  //             streetNumber: "",
-  //             postalCode: "",
-  //             country: "",
-  //             description: "",
-  //             label: `Adresse ${++index}`,
-  //           })),
-  //     });
-  //   }
-  // }, [offerDetails?.id, addressSettings?.id]);
 
   const {
     fields: addressFields,
@@ -154,7 +122,7 @@ export const useEditOfferAddressDetails = ({
 
     setValue(
       `address.${addressFieldsLength}.label`,
-      `Addresse ${addressFieldsLength + 1}`
+      `Adresse ${addressFieldsLength + 1}`
     );
   };
 

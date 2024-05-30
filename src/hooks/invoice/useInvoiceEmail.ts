@@ -176,11 +176,11 @@ export const useInvoiceEmail = (
         }),
       };
 
-      const res = await dispatch(sendInvoiceEmail({ data: apiData }));
+      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      await dispatch(sendInvoiceEmail({ data: apiData }));
 
-      if (res?.payload) {
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      }
+      // if (res?.payload) {
+      // }
     } else {
       const updatedData = {
         ...data,
@@ -201,6 +201,7 @@ export const useInvoiceEmail = (
     }
     // }
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };

@@ -376,10 +376,10 @@ export const useMainInvoicePdf = () => {
           let apiData = { ...data, pdf: fileUrl?.payload };
 
           delete apiData["content"];
-          const res = await dispatch(sendContractEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendContractEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         } else {
           let apiData = {
             email: invoiceDetails?.customerDetail?.email,
@@ -396,10 +396,10 @@ export const useMainInvoicePdf = () => {
             id: invoiceDetails?.id,
             pdf: fileUrl?.payload,
           };
-          const res = await dispatch(sendContractEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendContractEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         }
       }
     } catch (error) {

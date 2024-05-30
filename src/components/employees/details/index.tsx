@@ -6,6 +6,7 @@ import SideCard from "../SideCard";
 import useEmployeeDetail from "@/hooks/employee/useEmployeeDetail";
 import EmployeeForm from "../EmployeeForm";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const EmploysDetails = () => {
   const {
@@ -37,7 +38,7 @@ const EmploysDetails = () => {
         </DetailsCard>
         <div className="w-full mt-8 ">
           {loading ? (
-            <LoadingState />
+            <CustomLoader />
           ) : (
             <EmployeeForm
               isUpdate={isUpdate}

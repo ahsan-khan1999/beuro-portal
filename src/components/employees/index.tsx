@@ -20,11 +20,13 @@ export default function Employees() {
     loading,
     isLoading,
     currentPage,
+    totalCount,
   } = useEmployee();
 
   const CurrentComponent = useEmptyStates(
     <TableRows employsData={currentPageRows} />,
-    currentPageRows?.length > 0,
+    // currentPageRows?.length > 0,
+    totalCount !== 0,
     isLoading
   );
 

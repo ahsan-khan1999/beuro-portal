@@ -27,16 +27,6 @@ export default function useCustomerDetailAdmin() {
 
   const id = router.query.customer;
 
-  useEffect(() => {
-    if (id) {
-      dispatch(readCompanyDetail({ params: { filter: id } })).then(
-        (res: CustomerPromiseActionType) => {
-          dispatch(setCompanyDetails(res.payload));
-        }
-      );
-    }
-  }, [id]);
-
   const handleBack = () => {
     router.pathname = "/admin/customers";
     delete router.query["customer"];
@@ -97,17 +87,27 @@ export default function useCustomerDetailAdmin() {
     ),
   };
 
-  const handleStatusChange = async (value: string) => {
+  const handleStatusChange = async (custmerStatus: string) => {
     const res = await dispatch(
       updateCompanyStatus({
         data: {
           id: companyDetails?.id,
-          status: staticEnums["User"]["accountStatus"][value],
+          status: staticEnums["User"]["accountStatus"][custmerStatus],
         },
       })
     );
     if (res?.payload) handleDefaultModal();
   };
+
+  useEffect(() => {
+    if (id) {
+      dispatch(readCompanyDetail({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setCompanyDetails(res.payload));
+        }
+      );
+    }
+  }, [id]);
 
   return {
     companyDetails,

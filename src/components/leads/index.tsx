@@ -25,6 +25,7 @@ export default function Leads() {
     isLoading,
     currentPage,
     handleLeadStatusUpdate,
+    totalCount,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
@@ -34,7 +35,8 @@ export default function Leads() {
       handleImageUpload={handleImageUpload}
       onStatusChange={handleLeadStatusUpdate}
     />,
-    currentPageRows.length > 0,
+    // currentPageRows.length > 0,
+    totalCount !== 0,
     isLoading
   );
 
