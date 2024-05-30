@@ -125,10 +125,10 @@ export const useSendEmail = (
 
       let apiData = { ...data, id: offerDetails?.id, pdf: fileUrl };
 
-      const res = await dispatch(sendOfferEmail({ data: apiData }));
-      if (res?.payload) {
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      }
+      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      await dispatch(sendOfferEmail({ data: apiData }));
+      // if (res?.payload) {
+      // }
     } else {
       const updatedData = {
         ...data,
@@ -141,6 +141,7 @@ export const useSendEmail = (
       updateQuery(router, router.locale as string);
     }
   };
+
   return {
     fields,
     onSubmit,

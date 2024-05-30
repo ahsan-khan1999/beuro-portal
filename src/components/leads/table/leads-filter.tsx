@@ -8,10 +8,11 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
-import { staticEnums } from "@/utils/static";
+import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readNoteSettings } from "@/api/slices/settingSlice/settings";
+import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 
 export default function LeadsFilter({
   filter,
@@ -273,7 +274,10 @@ export default function LeadsFilter({
             />
             <Button
               inputType="button"
-              onClick={() => router.push("/leads/add")}
+              onClick={() => {
+                dispatch(setLeadDetails(DEFAULT_LEAD));
+                router.push("/leads/add");
+              }}
               className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
               icon={addIcon}
               text={translate("leads.add_button")}

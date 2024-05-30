@@ -38,13 +38,6 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
-  const [isSendEmail, setIsSendEmail] = useState(false);
-  const [activeTab, setActiveTab] = useState("invoice");
-  const invoiceDetailTabs = ["invoice", "receipt"];
-
-  const { modal } = useAppSelector((state) => state.global);
-  const { systemSettings } = useAppSelector((state) => state.settings);
-
   const {
     invoiceDetails,
     loading,
@@ -53,6 +46,13 @@ export default function useInvoiceDetail() {
     collectiveReciept,
     totalCount,
   } = useAppSelector((state) => state.invoice);
+
+  const [isSendEmail, setIsSendEmail] = useState(false);
+  const [activeTab, setActiveTab] = useState("invoice");
+  const invoiceDetailTabs = ["invoice", "receipt"];
+
+  const { modal } = useAppSelector((state) => state.global);
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const { t: translate } = useTranslation();
   const router = useRouter();
