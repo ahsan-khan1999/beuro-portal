@@ -23,14 +23,6 @@ export default function useSupportDetail() {
   const { modal } = useAppSelector((state) => state.global);
   const { t: translate } = useTranslation();
 
-  const items: DropDownItem[] = [
-    {
-      item: { label: "pending", value: "pending" },
-    },
-    {
-      item: { label: "resolved", value: "resolved" },
-    },
-  ];
   const id = router.query.supportRequest;
 
   useEffect(() => {
@@ -47,9 +39,14 @@ export default function useSupportDetail() {
     router.push("/admin/support-request");
   };
 
+  const handleDefaultModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -67,7 +64,6 @@ export default function useSupportDetail() {
     ),
   };
 
-  
   const handleStatusUpadte = async (value: string) => {
     const response = await dispatch(
       updateContactSupport({
@@ -79,12 +75,12 @@ export default function useSupportDetail() {
         translate,
       })
     );
-    if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+    if (response?.payload) handleDefaultModal();
   };
+
   return {
     contactSupportDetails,
-    status: items,
+    // status: items,
     handlePreviousClick,
     handleStatusUpadte,
     renderModal,

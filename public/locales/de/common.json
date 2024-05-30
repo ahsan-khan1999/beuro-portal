@@ -2209,7 +2209,7 @@
     "December": "Dezember"
   },
   "admin_role": {
-    "Employee": "Mitarbeiter",
+    "Admin": "Verwaltung",
     "Company": "Unternehmen"
   },
   "header_alignment": {

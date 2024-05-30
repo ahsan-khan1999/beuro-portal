@@ -11,7 +11,7 @@ const TableRow = ({
   onStatusChange,
 }: {
   currentPageRows: ContactSupport[];
-  onStatusChange: (value: string) => void;
+  onStatusChange: (id: string, status: string, type: string) => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -21,13 +21,11 @@ const TableRow = ({
     `${translate("support_request_status.resolved")}`,
   ];
 
-  const supportRequestStatus = staticEnums["supportRequestatus"];
-
-  const items =
-    supportRequestStatus &&
-    Object.keys(staticEnums["supportRequestatus"]).map((item, index) => ({
+  const items = Object.keys(staticEnums["SupportRequest"]).map(
+    (item, index) => ({
       item: { label: itemStatus[index], value: item },
-    }));
+    })
+  );
 
   return (
     <div
@@ -66,7 +64,7 @@ const TableRow = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(100px,_100px)_minmax(50px,_50px)]">
+            <div className="grid grid-cols-[minmax(140px,_140px)_minmax(50px,_50px)]">
               <span
                 className="py-4 flex justify-center items-center"
                 onClick={(e) => e.stopPropagation()}
@@ -80,13 +78,13 @@ const TableRow = ({
                 </div> */}
                 <DropDown
                   items={items}
-                  onItemSelected={(selectedItem) =>
-                    onStatusChange(selectedItem)
-                  }
+                  onItemSelected={(status) => {
+                    onStatusChange(item.id, status, "support_request");
+                  }}
                   selectedItem={translate(
                     `support_request_status.${item.status}`
                   )}
-                  dropDownClassName={`w-full rounded-lg px-4  flex items-center justify-center gap-x-1 ${
+                  dropDownClassName={`w-full rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-1 ${
                     item?.status == "resolved" ? "bg-[#4A13E7]" : "bg-[#FE9244]"
                   }`}
                   dropDownTextClassName="text-white"

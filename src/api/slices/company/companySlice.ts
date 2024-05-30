@@ -7,6 +7,7 @@ import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { CustomersAdmin } from "@/types/admin/customer";
 import { Plan } from "@/types/admin/plans";
+import { getKeyByValue } from "@/utils/auth.util";
 
 interface CompanyState {
   company: CustomersAdmin[];
@@ -175,7 +176,7 @@ export const updateCompanyStatus: AsyncThunk<boolean, object, object> | any =
 
     try {
       await apiServices.updateUserStatus(data);
-      return true;
+      return getKeyByValue(staticEnums["User"]["accountStatus"], data.status);
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       setErrors(setError, e?.data.data, translate);
@@ -311,6 +312,10 @@ const companySlice = createSlice({
     });
     builder.addCase(updateCompanyStatus.fulfilled, (state, action) => {
       state.loading = false;
+      state.companyDetails = {
+        ...state.companyDetails,
+        status: action.payload,
+      };
     });
     builder.addCase(updateCompanyStatus.rejected, (state) => {
       state.loading = false;
