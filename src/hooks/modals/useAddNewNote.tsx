@@ -12,6 +12,8 @@ import { setContractDetails } from "@/api/slices/contract/contractSlice";
 import { setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
 import { useEffect } from "react";
 import { NoteSetting } from "@/api/slices/settingSlice/settings";
+import { DEFAULT_LEAD } from "@/utils/static";
+import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 
 export const useAddNewNote = ({
   handleNotes,

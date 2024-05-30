@@ -142,10 +142,10 @@ export const useContractEmail = (
         }),
       };
 
-      const res = await dispatch(sendContractEmail({ data: apiData }));
-      if (res?.payload) {
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      }
+      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      await dispatch(sendContractEmail({ data: apiData }));
+      // if (res?.payload) {
+      // }
     } else {
       const updatedData = {
         ...data,
