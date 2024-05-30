@@ -20,11 +20,13 @@ export default function Content() {
     loading,
     isLoading,
     currentPage,
+    totalCount,
   } = useContent();
 
   const CurrentComponent = useEmptyStates(
     <TableRows contentData={currentPageRows} />,
-    currentPageRows.length > 0,
+    // currentPageRows.length > 0,
+    totalCount !== 0,
     isLoading
   );
   return (

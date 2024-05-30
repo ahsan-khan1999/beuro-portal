@@ -10,6 +10,7 @@ import { OffersTableRowTypes } from "@/types/offers";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import OfferEditImages from "../OfferEditImages";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export enum ComponentsType {
   customer,
@@ -156,7 +157,7 @@ const OffersDetailsData = ({
         <div className="max-w-[330px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
-            <LoadingState />
+            <CustomLoader />
           </div>
         ) : (
           <div className="flex flex-col gap-y-5 w-full">

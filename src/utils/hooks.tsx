@@ -10,7 +10,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { EmptyStateType, ModalType } from "@/enums/ui";
 import { getUser } from "./auth.util";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   callback: ButtonClickFunction
@@ -308,7 +308,7 @@ export const useEmptyStates = (
 
   const lookup = {
     [EmptyStateType.hasData]: CurrentComponent,
-    [EmptyStateType.loading]: <LoadingState />,
+    [EmptyStateType.loading]: <CustomLoader />,
     [EmptyStateType.hasNoData]: (
       <div className="mt-6">
         <NoDataEmptyState />

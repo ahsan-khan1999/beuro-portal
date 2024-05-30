@@ -21,11 +21,13 @@ export default function Services() {
     loading,
     isLoading,
     currentPage,
+    totalCount,
   } = useService();
 
   const CurrentComponent = useEmptyStates(
     <TableRowServices servicesData={currentPageRows} />,
-    currentPageRows.length > 0,
+    // currentPageRows.length > 0,
+    totalCount !== 0,
     isLoading
   );
 

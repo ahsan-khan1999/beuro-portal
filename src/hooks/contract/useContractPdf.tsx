@@ -429,10 +429,10 @@ export const useContractPdf = () => {
           let apiData = { ...data, pdf: fileUrl?.payload };
 
           delete apiData["content"];
-          const res = await dispatch(sendContractEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendContractEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         } else {
           let apiData = {
             email: contractDetails?.offerID?.leadID?.customerDetail?.email,
@@ -451,10 +451,10 @@ export const useContractPdf = () => {
             id: contractDetails?.id,
             pdf: fileUrl?.payload,
           };
-          const res = await dispatch(sendContractEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendContractEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         }
       }
     } catch (error) {
@@ -495,6 +495,7 @@ export const useContractPdf = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const onSuccess = () => {
     router.push("/contract?status=None");
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -511,6 +512,7 @@ export const useContractPdf = () => {
       return true;
     } else return false;
   };
+
   const handleDescriptionUpdate = async (value: string) => {
     const apiData = {
       id: offerID,
@@ -524,6 +526,7 @@ export const useContractPdf = () => {
       return true;
     } else return false;
   };
+
   const handleSendByPost = async () => {
     setActiveButtonId("post");
     const apiData = {

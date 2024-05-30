@@ -61,26 +61,6 @@ export const useAddLeadAddressDetails = (
     dispatch(readAddressSettings());
   }, []);
 
-  // useEffect(() => {
-  //   if (leadDetails?.id) {
-  //     reset({
-  //       address: leadDetails?.addressID
-  //         ? leadDetails?.addressID?.address?.map((item, index) => ({
-  //             ...item,
-  //             label: item?.label ? item?.label : `Adresse ${++index}`,
-  //             addressType: item?.addressType,
-  //           }))
-  //         : [
-  //             {
-  //               label: `Adresse ${1}`,
-  //               addressType: "",
-  //               ...leadDetails?.customerDetail?.address,
-  //             },
-  //           ],
-  //     });
-  //   }
-  // }, [leadDetails?.id, addressSettings?.id]);
-
   const {
     append,
     fields: addressFields,
@@ -110,7 +90,7 @@ export const useAddLeadAddressDetails = (
     setValue(`address.${addressFieldsLength}.addressType`, ``);
     setValue(
       `address.${addressFieldsLength}.label`,
-      `Addresse ${addressFieldsLength + 1}`
+      `Adresse ${addressFieldsLength + 1}`
     );
   };
 

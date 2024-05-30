@@ -61,7 +61,7 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
         : invoiceDetails?.addressID
         ? invoiceDetails?.addressID?.address?.map((item, index) => ({
             ...item,
-            label: item?.label ? item?.label : `Addresse ${++index}`,
+            label: item?.label ? item?.label : `Adresse ${++index}`,
           }))
         : invoiceDetails?.customerDetail?.address
         ? [
@@ -84,38 +84,6 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   useEffect(() => {
     dispatch(readAddressSettings());
   }, []);
-
-  // useEffect(() => {
-  //   if (invoiceDetails.id) {
-  //     reset({
-  //       address: invoiceDetails?.addressID
-  //         ? invoiceDetails?.addressID?.address?.map((item, index) => ({
-  //             ...item,
-  //             label: item?.label ? item?.label : `Adresse ${++index}`,
-  //           }))
-  //         : invoiceDetails?.addressID
-  //         ? invoiceDetails?.addressID?.address?.map((item, index) => ({
-  //             ...item,
-  //             label: item?.label ? item?.label : `Address ${++index}`,
-  //           }))
-  //         : invoiceDetails?.customerDetail?.address
-  //         ? [
-  //             {
-  //               ...invoiceDetails?.customerDetail?.address,
-  //               label: addressSettings?.addresses[0] || `Adresse ${1}`,
-  //               addressType: addressSettings?.addresses[0] || "",
-  //             },
-  //           ]
-  //         : addressType?.map((item, index) => ({
-  //             streetNumber: "",
-  //             postalCode: "",
-  //             country: "",
-  //             description: "",
-  //             label: `Adresse ${++index}`,
-  //           })),
-  //     });
-  //   }
-  // }, [invoiceDetails?.id, addressSettings?.id]);
 
   const {
     fields: addressFields,
@@ -149,7 +117,7 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     );
     setValue(
       `address.${addressFieldsLength}.label`,
-      `Addresse ${addressFieldsLength + 1}`
+      `Adresse ${addressFieldsLength + 1}`
     );
   };
 

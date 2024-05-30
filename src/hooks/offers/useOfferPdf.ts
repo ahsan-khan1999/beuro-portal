@@ -274,14 +274,10 @@ export const useOfferPdf = () => {
       }
 
       if (isMail) {
-        router.push(
-          {
-            pathname: `/offers/details`,
-            query: { ...router.query, offer: offerDetails?.id, isMail: isMail },
-          }
-
-          // `/offers/details?offer=${offerDetails?.id}&isMail=${isMail}`
-        );
+        router.push({
+          pathname: `/offers/details`,
+          query: { ...router.query, offer: offerDetails?.id, isMail: isMail },
+        });
       } else {
         setActiveButtonId("email");
 
@@ -293,10 +289,10 @@ export const useOfferPdf = () => {
           let apiData = { ...data, pdf: fileUrl?.payload };
           delete apiData["content"];
 
-          const res = await dispatch(sendOfferEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          dispatch(sendOfferEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         } else {
           let apiData = {
             email: offerDetails?.leadID?.customerDetail?.email,
@@ -313,10 +309,10 @@ export const useOfferPdf = () => {
             pdf: fileUrl?.payload,
             // pdf: res?.payload
           };
-          const res = await dispatch(sendOfferEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendOfferEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         }
       }
     } catch (error) {
@@ -369,6 +365,7 @@ export const useOfferPdf = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const onSuccess = () => {
     router.pathname = "/offers";
     router.query = { status: "None" };

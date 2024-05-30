@@ -10,6 +10,7 @@ import { EmailTemplate } from "@/types/settings";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
 import { staticEnums } from "@/utils/static";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 interface ActionType {
   payload: PublicOffersTableRowTypes;
@@ -281,7 +282,7 @@ const SignPdfPreview = () => {
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
   return loading ? (
-    <LoadingState />
+    <CustomLoader />
   ) : (
     offerData && (
       <Container>

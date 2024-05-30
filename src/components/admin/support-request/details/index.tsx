@@ -4,7 +4,7 @@ import React from "react";
 import DetailsData from "../DetailsData";
 import SupportDetailsData from "./support-request-data";
 import useSupportDetail from "@/hooks/admin/support-request/useSupportDetail";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const SupportRequestDetails = () => {
   const {
@@ -28,7 +28,7 @@ const SupportRequestDetails = () => {
       </DetailsCard>
       <div className="mt-8">
         {loading ? (
-          <LoadingState />
+          <CustomLoader />
         ) : (
           <SupportDetailsData supportDetail={contactSupportDetails} />
         )}

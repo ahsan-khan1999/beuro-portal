@@ -2,7 +2,7 @@ import { Layout } from "@/layout";
 import React from "react";
 import PlansForm from "../Form";
 import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const PlanDetails = () => {
   const {
@@ -22,7 +22,7 @@ const PlanDetails = () => {
   return (
     <Layout>
       {loading ? (
-        <LoadingState />
+        <CustomLoader />
       ) : (
         <div>
           <h2 className="text-xl font-normal text-[#222B45] mb-4">

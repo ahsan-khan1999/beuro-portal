@@ -45,38 +45,23 @@ const useContent = () => {
     dispatch(setContentDetails(DEFAULT_CONTENT));
   }, []);
 
-  const handleFilterChange = (filter: FilterType) => {
-    setCurrentPage(1);
-    // dispatch(
-    //   readContent({ params: { filter: filter, page: currentPage, size: 10 } })
-    // ).then((res: any) => {
-    //   if (res?.payload) {
-    //     setCurrentPageRows(res?.payload?.Content);
-    //   }
-    // });
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
-  
+
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
     } else {
       resetPage = 1;
       setCurrentPage(1);
     }
-  
+
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
     const searchDate = query?.date as string;
-  
+
     const queryParams = searchQuery || sortedValue || searchDate;
-  
+
     let updatedFilter: {
       text?: string;
       sort?: string;
@@ -87,15 +72,15 @@ const useContent = () => {
     } = {
       text: searchQuery || "",
     };
-  
+
     if (searchQuery || sortedValue || searchDate) {
       updatedFilter.text = searchQuery;
       updatedFilter.sort = sortedValue;
       updatedFilter.date = searchDate ? JSON.parse(searchDate) : undefined;
     }
-  
+
     setFilter(updatedFilter);
-  
+
     if (parsedPage !== undefined) {
       dispatch(
         readContent({
@@ -112,7 +97,14 @@ const useContent = () => {
       });
     }
   }, [query]);
-  
+
+  const handleFilterChange = (filter: FilterType) => {
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return {
     currentPageRows,
@@ -126,6 +118,7 @@ const useContent = () => {
     loading,
     isLoading,
     currentPage,
+    totalCount,
   };
 };
 
