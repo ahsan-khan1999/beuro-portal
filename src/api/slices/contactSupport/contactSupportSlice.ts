@@ -2,6 +2,8 @@ import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CustomersAdmin } from "@/types/admin/customer";
+import { getKeyByValue } from "@/utils/auth.util";
+import { DEFAULT_CONTACT_SUPPORT, staticEnums } from "@/utils/static";
 // import { ContactSupportTableRowTypes } from "@/types/ContactSupport";
 
 interface ContactSupportState {
@@ -72,12 +74,16 @@ export const createContactSupport: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateContactSupport: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("contactSupport/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
 
     try {
-      await apiServices.updateContactSupport(data);
+      const response = await apiServices.updateContactSupport(data);
+      thunkApi.dispatch(setSupportReqDetails(response?.data?.ContactSupport));
+      return response?.data?.ContactSupport;
+      // return getKeyByValue(staticEnums["SupportRequest"], data.status);
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -85,6 +91,7 @@ export const updateContactSupport: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const deleteContactSupport: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("contactSupport/delete", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

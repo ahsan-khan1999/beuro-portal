@@ -58,7 +58,7 @@ const useLeads = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
-  const handleFilterChange = (query: FilterType) => {
+  const handleFilterChange = () => {
     setCurrentPage(1);
   };
 

@@ -11,15 +11,14 @@ import { FilterType } from "@/types";
 import { CustomersAdmin } from "@/types/admin/customer";
 import { useQueryParams } from "@/utils/hooks";
 import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function useCustomer() {
   const { company, lastPage, totalCount, loading, companyDetails } =
     useAppSelector((state) => state.company);
 
-  const { query } = useRouter();
-  const page = query?.page as unknown as number;
+  const params = useQueryParams();
+  const page = params?.page as unknown as number;
 
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
@@ -28,7 +27,7 @@ export default function useCustomer() {
     text: FiltersDefaultValues.None,
     status: FiltersDefaultValues.None,
   });
-  const params = useQueryParams();
+
   const [currentPageRows, setCurrentPageRows] =
     useState<CustomersAdmin[]>(company);
 
@@ -50,17 +49,18 @@ export default function useCustomer() {
 
   const handleStatusChange = async (
     id: string,
-    status: string,
+    companyStatus: string,
     type: string
   ) => {
+    
     if (type === "customer") {
       const currentItem = currentPageRows.find((item) => item.id === id);
-      if (!currentItem || currentItem.status !== status) {
+      if (!currentItem || currentItem.status !== companyStatus) {
         const res = await dispatch(
           updateCompanyStatus({
             data: {
               id: id,
-              status: staticEnums["User"]["accountStatus"][status],
+              status: staticEnums["User"]["accountStatus"][companyStatus],
             },
           })
         );
@@ -89,7 +89,7 @@ export default function useCustomer() {
     const updatedStatus =
       params.status === "None" ? "None" : params.status?.split(",");
 
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(params.page as string, 10);
     let resetPage = null;
 
     if (!isNaN(parsedPage) && parsedPage !== undefined) {
@@ -99,12 +99,14 @@ export default function useCustomer() {
       setCurrentPage(1);
     }
 
-    setFilter({ ...filter, ...params, status: updatedStatus });
+    const { page, ...restParams } = params;
+
+    setFilter({ ...filter, ...restParams, status: updatedStatus });
     dispatch(setCompanyDetails(DEFAULT_CUSTOMER));
     dispatch(
       readCompany({
         params: {
-          filter: { ...params, role: "1", status: updatedStatus },
+          filter: { ...restParams, role: "1", status: updatedStatus },
           page: (Number(parsedPage) || resetPage) ?? currentPage,
           size: 10,
         },
@@ -115,61 +117,6 @@ export default function useCustomer() {
       }
     });
   }, [params]);
-
-  // useEffect(() => {
-  //   const parsedPage = parseInt(query.page as string, 10);
-  //   let resetPage = null;
-
-  //   if (!isNaN(parsedPage) && parsedPage !== undefined) {
-  //     setCurrentPage(parsedPage);
-  //   } else {
-  //     resetPage = 1;
-  //     setCurrentPage(1);
-  //   }
-
-  //   const searchStatus = query?.status;
-  //   const searchText = query?.text as string;
-  //   const searchSort = query?.sort as string;
-
-  //   const queryParams = searchStatus || searchText || searchSort;
-
-  //   if (queryParams !== undefined) {
-  //     const filteredStatus =
-  //       query?.status === "None"
-  //         ? "None"
-  //         : queryParams
-  //             .toString()
-  //             .split(",")
-  //             .filter((item) => item !== "None");
-
-  //     let updatedFilter: {
-  //       status: string | string[];
-  //       text?: string;
-  //       sort?: string;
-  //     } = {
-  //       status: filteredStatus,
-  //     };
-
-  //     if (searchText || searchSort) {
-  //       updatedFilter.text = searchText;
-  //       updatedFilter.sort = searchSort;
-  //     }
-
-  //     setFilter(updatedFilter);
-
-  //     dispatch(
-  //       readCompany({
-  //         params: {
-  //           filter: queryParams ? { ...updatedFilter, role: "1" } : {},
-  //           page: (Number(parsedPage) || resetPage) ?? currentPage,
-  //           size: 10,
-  //         },
-  //       })
-  //     ).then((response: any) => {
-  //       if (response?.payload) setCurrentPageRows(response?.payload?.User);
-  //     });
-  //   }
-  // }, [params]);
 
   return {
     currentPageRows,

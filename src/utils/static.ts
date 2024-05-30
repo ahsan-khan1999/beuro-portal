@@ -571,7 +571,6 @@ export const staticEnums: Record<string, any> = {
     Close: 1,
     Expired: 2,
   },
-
   mailStatus: {
     opend: 0,
     pending: 1,
@@ -1249,6 +1248,43 @@ export const DEFAULT_CUSTOMER = {
   },
 };
 
+// export const DEFAULT_CONTACT_SUPPORT = {
+//   reason: "",
+//   message: "",
+//   id: "",
+//   createdAt: "",
+//   createdBy: {
+//     id: "",
+//     email: "",
+//     status: "",
+//     role: "",
+//     employee: "",
+//     createdAt: "",
+//     company: "",
+//     fullName: "",
+//     isProfileComplete: false,
+//     isEmailVerified: false,
+//     refID: "",
+//     plan: {
+//       planName: "",
+//       monthlyPrice: 0,
+//       discount: 0,
+//       numberOfEmployees: 0,
+//       numberOfRequests: 0,
+//       accountingReport: false,
+//       customizedEmail: false,
+//       watermark: false,
+//       apiFeatures: false,
+//       description: "",
+//       id: "",
+//       refID: "",
+//       yearlyPrice: 0,
+//       createdAt: "",
+//     },
+//   },
+//   status: "",
+//   refID: "",
+// };
 export const DEFAULT_EMPLOYEE = {
   id: "001",
   fullName: "Rahal Ahmad",
@@ -1419,4 +1455,20 @@ export const HeaderLabel = {
 export const GenderLabel = {
   Mr: "Herr",
   Mrs: "Frau",
+};
+
+export const DEFAULT_CONTACT_SUPPORT = {
+  id: "",
+  message: "",
+  reason: "",
+  refID: "",
+  status: "",
+  createdBy: {
+    company: {
+      companyName: "",
+      id: "",
+    },
+    fullName: "",
+    id: "",
+  },
 };

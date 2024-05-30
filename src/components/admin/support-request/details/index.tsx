@@ -9,7 +9,7 @@ import LoadingState from "@/base-components/loadingEffect/loading-state";
 const SupportRequestDetails = () => {
   const {
     contactSupportDetails,
-    status,
+    // status,
     handlePreviousClick,
     handleStatusUpadte,
     renderModal,
@@ -21,7 +21,7 @@ const SupportRequestDetails = () => {
       <DetailsCard>
         <DetailsData
           supportDetail={contactSupportDetails}
-          status={status}
+          // status={status}
           handlePreviousClick={handlePreviousClick}
           handleStatusUpadte={handleStatusUpadte}
         />

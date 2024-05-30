@@ -4,34 +4,31 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { DropDownItem } from "@/types";
 import { ContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { staticEnums } from "@/utils/static";
 
 const DetailsData = ({
   supportDetail,
-  status,
+  // status,
   handlePreviousClick,
   handleStatusUpadte,
 }: {
   supportDetail: ContactSupport | null;
-  status: DropDownItem[];
+  // status: DropDownItem[];
   handlePreviousClick: () => void;
   handleStatusUpadte: (value: string) => void;
 }) => {
   const router = useRouter();
 
-  const itemStatus: DropDownItem[] = [
-    {
-      item: {
-        label: `${translate("support_request_status.pending")}`,
-        value: "pending",
-      },
-    },
-    {
-      item: {
-        label: `${translate("support_request_status.resolved")}`,
-        value: "resolved",
-      },
-    },
+  const itemStatus = [
+    `${translate("support_request_status.pending")}`,
+    `${translate("support_request_status.resolved")}`,
   ];
+
+  const items = Object.keys(staticEnums["SupportRequest"]).map(
+    (item, index) => ({
+      item: { label: itemStatus[index], value: item },
+    })
+  );
 
   return (
     <>
@@ -132,10 +129,8 @@ const DetailsData = ({
 
           <span>
             <DropDown
-              items={itemStatus}
-              onItemSelected={(selectedItem) =>
-                handleStatusUpadte(selectedItem)
-              }
+              items={items}
+              onItemSelected={handleStatusUpadte}
               selectedItem={translate(
                 `support_request_status.${supportDetail?.status}`
               )}
