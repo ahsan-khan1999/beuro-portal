@@ -62,25 +62,6 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     dispatch(readAddressSettings());
   }, []);
 
-  // useEffect(() => {
-  //   if (leadDetails?.id) {
-  //     reset({
-  //       address: leadDetails?.addressID
-  //         ? leadDetails?.addressID?.address?.map((item, index) => ({
-  //             ...item,
-  //             label: item?.label ? item?.label : `Adresse ${++index}`,
-  //           }))
-  //         : [
-  //             {
-  //               label: addressSettings?.addresses[0] || `Adresse ${1}`,
-  //               addressType: addressSettings?.addresses[0] || "",
-  //               ...leadDetails?.customerDetail?.address,
-  //             },
-  //           ],
-  //     });
-  //   }
-  // }, [leadDetails?.id, addressSettings?.id]);
-
   const {
     append,
     fields: addressFields,
@@ -116,7 +97,7 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
 
     setValue(
       `address.${addressFieldsLength}.label`,
-      `Addresse ${addressFieldsLength + 1}`
+      `Adresse ${addressFieldsLength + 1}`
     );
   };
 

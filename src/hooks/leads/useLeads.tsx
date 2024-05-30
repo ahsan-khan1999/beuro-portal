@@ -52,13 +52,81 @@ const useLeads = () => {
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
   }, []);
 
+  useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+    const searchedDate = query?.date as string;
+    const searchNoteType = query?.noteType as string;
+
+    const queryParams =
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchedDate ||
+      searchNoteType;
+
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+        sort?: string;
+        noteType?: string;
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+      } = {
+        status: filteredStatus,
+      };
+
+      if (searchQuery || sortedValue || searchedDate || searchNoteType) {
+        updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
+        updatedFilter.noteType = searchNoteType;
+        updatedFilter.date = searchedDate && JSON.parse(searchedDate);
+      }
+
+      setFilter(updatedFilter);
+
+      dispatch(
+        readLead({
+          params: {
+            filter: updatedFilter,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
+      });
+    }
+  }, [query]);
+
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
-  const handleFilterChange = (query: FilterType) => {
+  const handleFilterChange = () => {
     setCurrentPage(1);
   };
 
@@ -260,74 +328,6 @@ const useLeads = () => {
     }
   };
 
-  useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
-    let resetPage = null;
-    if (!isNaN(parsedPage)) {
-      setCurrentPage(parsedPage);
-    } else {
-      resetPage = 1;
-      setCurrentPage(1);
-    }
-
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchedDate = query?.date as string;
-    const searchNoteType = query?.noteType as string;
-
-    const queryParams =
-      queryStatus ||
-      searchQuery ||
-      sortedValue ||
-      searchedDate ||
-      searchNoteType;
-
-    if (queryParams !== undefined) {
-      const filteredStatus =
-        query?.status === "None"
-          ? "None"
-          : queryParams
-              .toString()
-              .split(",")
-              .filter((item) => item !== "None");
-
-      let updatedFilter: {
-        status: string | string[];
-        text?: string;
-        sort?: string;
-        noteType?: string;
-        date?: {
-          $gte?: string;
-          $lte?: string;
-        };
-      } = {
-        status: filteredStatus,
-      };
-
-      if (searchQuery || sortedValue || searchedDate || searchNoteType) {
-        updatedFilter.text = searchQuery;
-        updatedFilter.sort = sortedValue;
-        updatedFilter.noteType = searchNoteType;
-        updatedFilter.date = searchedDate && JSON.parse(searchedDate);
-      }
-
-      setFilter(updatedFilter);
-
-      dispatch(
-        readLead({
-          params: {
-            filter: updatedFilter,
-            page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
-      });
-    }
-  }, [query]);
-
   return {
     currentPageRows,
     totalItems,
@@ -344,6 +344,7 @@ const useLeads = () => {
     isLoading,
     currentPage,
     handleLeadStatusUpdate,
+    totalCount,
   };
 };
 

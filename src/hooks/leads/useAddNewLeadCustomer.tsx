@@ -50,7 +50,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
   const customerType = watch("customerType");
-  const customerID = watch("customerID");
+  // const customerID = watch("customerID");
 
   const type = watch("type");
   const gender = watch("gender");

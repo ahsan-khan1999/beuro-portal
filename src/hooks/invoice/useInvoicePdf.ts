@@ -365,11 +365,11 @@ export const useInvoicePdf = () => {
           let apiData = { ...data, pdf: fileUrl?.payload };
 
           delete apiData["content"];
-          const res = await dispatch(sendInvoiceEmail({ data: apiData }));
-          if (res?.payload) {
-            // await localStoreUtil.remove_data("invoiceComposeEmail");
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendInvoiceEmail({ data: apiData }));
+          // if (res?.payload) {
+          // await localStoreUtil.remove_data("invoiceComposeEmail");
+          // }
         } else {
           let apiData = {
             email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
@@ -389,9 +389,9 @@ export const useInvoicePdf = () => {
                 ?.attachments,
             id: collectiveInvoiceDetails?.invoiceID?.id,
           };
-          const res = await dispatch(sendInvoiceEmail({ apiData }));
-          if (res?.payload)
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendInvoiceEmail({ apiData }));
+          // if (res?.payload)
         }
       }
     } catch (error) {

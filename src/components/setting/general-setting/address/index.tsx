@@ -6,6 +6,7 @@ import Image from "next/image";
 import { GeneralAddress } from "@/types/settings";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export interface GeneralAddressProps {
   onAddAddressTitle: () => void;
@@ -41,7 +42,7 @@ export const AddressDetailCard = ({
 
       {addresses && addresses.addresses.length > 0 ? (
         loading ? (
-          <LoadingState />
+          <CustomLoader />
         ) : (
           <div className="flex flex-col">
             <div className="flex items-center justify-between my-6">

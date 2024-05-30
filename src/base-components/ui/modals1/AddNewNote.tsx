@@ -1,10 +1,12 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddNewNote } from "@/hooks/modals/useAddNewNote";
 import { FilterType } from "@/types";
+import { setLeadDetails } from "@/api/slices/lead/leadSlice";
+import { useAppDispatch } from "@/hooks/useRedux";
 
 export interface AddNoteProps {
   onClose: () => void;

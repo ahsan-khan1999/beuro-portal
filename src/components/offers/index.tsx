@@ -25,6 +25,7 @@ export default function Offers() {
     renderModal,
     setFilter,
     totalItems,
+    totalCount,
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
@@ -35,7 +36,7 @@ export default function Offers() {
       handleOfferStatusUpdate={handleOfferStatusUpdate}
       handlePaymentStatusUpdate={handlePaymentStatusUpdate}
     />,
-    currentPageRows?.length > 0,
+    totalCount !== 0,
     isLoading
   );
 

@@ -38,20 +38,21 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
-  const [isSendEmail, setIsSendEmail] = useState(false);
-  const [activeTab, setActiveTab] = useState("invoice");
-  const invoiceDetailTabs = ["invoice", "receipt"];
-
-  const { modal } = useAppSelector((state) => state.global);
-  const { systemSettings } = useAppSelector((state) => state.settings);
-
   const {
     invoiceDetails,
     loading,
     invoice,
     collectiveInvoice,
     collectiveReciept,
+    totalCount,
   } = useAppSelector((state) => state.invoice);
+
+  const [isSendEmail, setIsSendEmail] = useState(false);
+  const [activeTab, setActiveTab] = useState("invoice");
+  const invoiceDetailTabs = ["invoice", "receipt"];
+
+  const { modal } = useAppSelector((state) => state.global);
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -86,6 +87,36 @@ export default function useInvoiceDetail() {
       );
     }
   }, [id]);
+
+  useEffect(() => {
+    const { tab } = router.query;
+
+    const updateActiveTabFromQuery = () => {
+      if (tab && invoiceDetailTabs.includes(tab as string)) {
+        setActiveTab(tab as string);
+      } else if (invoice) {
+        if (collectiveInvoice && collectiveInvoice.length > 0) {
+          setActiveTab("invoice");
+        } else if (collectiveReciept && collectiveReciept.length > 0) {
+          setActiveTab("receipt");
+        } else {
+          setActiveTab(invoiceDetailTabs[0]);
+        }
+      }
+    };
+
+    updateActiveTabFromQuery();
+
+    const handleRouteChange = () => {
+      updateActiveTabFromQuery();
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [invoice, collectiveInvoice, collectiveReciept, router.query]);
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -385,36 +416,6 @@ export default function useInvoiceDetail() {
     updateQuery(router, router.locale as string);
   };
 
-  useEffect(() => {
-    const { tab } = router.query;
-
-    const updateActiveTabFromQuery = () => {
-      if (tab && invoiceDetailTabs.includes(tab as string)) {
-        setActiveTab(tab as string);
-      } else if (invoice) {
-        if (collectiveInvoice && collectiveInvoice.length > 0) {
-          setActiveTab("invoice");
-        } else if (collectiveReciept && collectiveReciept.length > 0) {
-          setActiveTab("receipt");
-        } else {
-          setActiveTab(invoiceDetailTabs[0]);
-        }
-      }
-    };
-
-    updateActiveTabFromQuery();
-
-    const handleRouteChange = () => {
-      updateActiveTabFromQuery();
-    };
-
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [invoice, collectiveInvoice, collectiveReciept, router.query]);
-
   return {
     invoiceDetails,
     renderModal,
@@ -439,5 +440,6 @@ export default function useInvoiceDetail() {
     loading,
     systemSettings,
     handleInvoiceUpdate,
+    totalCount,
   };
 }

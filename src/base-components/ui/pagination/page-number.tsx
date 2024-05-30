@@ -10,15 +10,17 @@ export const PageNumber = ({
   currentPage: number;
   pageNumber: number;
   handlePageClick: (pageNumber: number) => void;
-}) => (
-  <PaginationItem
-    key={pageNumber}
-    icon={pageNumber}
-    handlePageClick={() => handlePageClick(pageNumber)}
-    className={getButtonClass(
-      currentPage === pageNumber,
-      "bg-primary text-white",
-      "hover:bg-gray-200"
-    )}
-  />
-);
+}) => {
+  return (
+    <PaginationItem
+      key={pageNumber}
+      icon={pageNumber}
+      handlePageClick={() => handlePageClick(pageNumber)}
+      className={getButtonClass(
+        currentPage === pageNumber,
+        "bg-primary text-white",
+        "hover:bg-gray-200"
+      )}
+    />
+  );
+};

@@ -7,9 +7,9 @@ import ServiceDetailsData from "./ServiceDetailsData";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import OfferEditImages from "@/components/offers/OfferEditImages";
 import { ContractAditionalEditDetails } from "../edit/editAdditionalDetails";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export enum ComponentsType {
   customer,
@@ -188,7 +188,7 @@ const ContractDetailsData = ({
         <div className="max-w-[330px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
-            <LoadingState />
+            <CustomLoader />
           </div>
         ) : (
           <div className="flex flex-col gap-y-5 w-full">

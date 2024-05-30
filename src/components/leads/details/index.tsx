@@ -3,7 +3,7 @@ import React from "react";
 import LeadsDetailsCardData from "../LeadsDetailsCardData";
 import LeadsDetailsData from "./LeadsDetailsData";
 import useLeadDetail from "@/hooks/leads/useLeadDetail";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const LeadsDetails = () => {
   const {
@@ -21,7 +21,7 @@ const LeadsDetails = () => {
   return (
     <Layout>
       {loadingDetails ? (
-        <LoadingState />
+        <CustomLoader />
       ) : (
         <>
           <div className="bg-white rounded-md px-5 pt-5 pb-10 xlg:fixed xlg:-mt-[250px] maxSize:border-t-[14px] border-t-defaultBackground calWidth z-10">

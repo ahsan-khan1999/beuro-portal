@@ -27,14 +27,6 @@ const useEmailTracker = () => {
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
-  const handleFilterChange = (query: FilterType) => {
-    setCurrentPage(1);
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
@@ -82,6 +74,14 @@ const useEmailTracker = () => {
     }
   }, [query]);
 
+  const handleFilterChange = (query: FilterType) => {
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return {
     currentPageRows,
     totalItems,
@@ -93,6 +93,7 @@ const useEmailTracker = () => {
     loading,
     isLoading,
     currentPage,
+    totalCount,
   };
 };
 

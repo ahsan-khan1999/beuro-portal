@@ -3,12 +3,12 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { InvoiceEmailHeader } from "./email-header-card";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useMainInvoicePdf } from "@/hooks/invoice/useMainInvoicePdf";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
-  { ssr: false, loading: () => <LoadingState /> }
+  { ssr: false, loading: () => <CustomLoader /> }
 );
 
 const PdfDownload = dynamic(
@@ -35,7 +35,6 @@ export const MainInvoicePdfDetail = () => {
     onClose,
     onSuccess,
     invoiceDetails,
-  
   } = useMainInvoicePdf();
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -66,7 +65,7 @@ export const MainInvoicePdfDetail = () => {
   return (
     <>
       {loading ? (
-        <LoadingState />
+        <CustomLoader />
       ) : (
         <>
           <InvoiceEmailHeader

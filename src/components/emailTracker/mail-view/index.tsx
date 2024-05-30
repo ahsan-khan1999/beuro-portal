@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { deleteEmail, readEmailDetail } from "@/api/slices/emailTracker/email";
 import { CustomerPromiseActionType } from "@/types/customer";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 const ViewMails = () => {
   const { modal } = useAppSelector((state) => state.global);
   const { emailDetails, loading } = useAppSelector((state) => state.emailSlice);
@@ -91,7 +92,7 @@ const ViewMails = () => {
         <div className="mt-7">
           {loading ? (
             <div className="flex justify-center items-center">
-              <LoadingState />
+              <CustomLoader />
             </div>
           ) : (
             <EmailDetailsData emailDetails={emailDetails} />

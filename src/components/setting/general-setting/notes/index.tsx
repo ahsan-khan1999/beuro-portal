@@ -11,6 +11,7 @@ import {
 } from "@/api/slices/settingSlice/settings";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export interface GeneralNotesProps {
   onAddNote: () => void;
@@ -62,7 +63,7 @@ export const NotesDetailCard = ({
 
       {noteSettings && noteSettings?.length > 0 ? (
         loading ? (
-          <LoadingState />
+          <CustomLoader />
         ) : (
           <div className="flex flex-col">
             <div className="grid grid-cols-3 items-center my-6">

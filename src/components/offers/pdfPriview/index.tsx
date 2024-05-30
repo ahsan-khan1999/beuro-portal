@@ -1,11 +1,10 @@
 import EmailCard from "./PdfCard";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const OfferPdf = dynamic(
   () => import("@/components/reactPdf/offer-pdf-preview"),
-  { ssr: false, loading: () => <LoadingState /> }
+  { ssr: false, loading: () => <CustomLoader /> }
 );
 const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
   ssr: false,
@@ -14,6 +13,7 @@ const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
 import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const OfferPdfPriview = () => {
   const {
@@ -56,7 +56,6 @@ const OfferPdfPriview = () => {
     ),
   };
 
-  
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -64,7 +63,7 @@ const OfferPdfPriview = () => {
   return (
     <>
       {/* {loading ? (
-        <LoadingState />
+         <CustomLoader />
       ) : ( */}
       <div>
         <EmailCard
@@ -80,7 +79,7 @@ const OfferPdfPriview = () => {
         />
 
         {loading ? (
-          <LoadingState />
+          <CustomLoader />
         ) : (
           <div className="mt-5">
             <OfferPdf

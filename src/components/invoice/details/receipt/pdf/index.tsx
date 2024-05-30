@@ -2,10 +2,10 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { InvoiceEmailHeader } from "./invoice-email-header";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 // const InvoicePdfPreview = dynamic(
 //   () => import("@/components/reactPdf/pdf-layout"),
@@ -14,7 +14,7 @@ import { useTranslation } from "next-i18next";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
-  { ssr: false, loading: () => <LoadingState /> }
+  { ssr: false, loading: () => <CustomLoader /> }
 );
 
 // const PdfDownload = dynamic(
@@ -79,7 +79,7 @@ const ReceiptPdfPreview = () => {
   return (
     <>
       {loading ? (
-        <LoadingState />
+        <CustomLoader />
       ) : (
         <>
           <InvoiceEmailHeader

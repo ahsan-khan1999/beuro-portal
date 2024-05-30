@@ -22,14 +22,66 @@ const useEmployee = () => {
   );
 
   const dispatch = useAppDispatch();
+  const { query } = useRouter();
   const [currentPageRows, setCurrentPageRows] = useState<Employee[]>([]);
   const totalItems = totalCount;
   const itemsPerPage = 10;
   const { t: translate } = useTranslation();
-
-  const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
+
+  useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+    const searchDate = query?.date as string;
+
+    const queryParams = searchQuery || sortedValue || searchDate;
+
+    let updatedFilter: {
+      text?: string;
+      sort?: string;
+      date?: {
+        $gte?: string;
+        $lte?: string;
+      };
+    } = {
+      text: searchQuery || "",
+    };
+
+    if (searchQuery || sortedValue || searchDate) {
+      updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
+      updatedFilter.date = searchDate ? JSON.parse(searchDate) : undefined;
+    }
+
+    setFilter(updatedFilter);
+
+    if (parsedPage !== undefined) {
+      dispatch(
+        readEmployee({
+          params: {
+            filter: queryParams ? updatedFilter : {},
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) {
+          setCurrentPageRows(response?.payload?.Employee);
+        }
+      });
+    }
+  }, [query]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -38,60 +90,6 @@ const useEmployee = () => {
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
   };
-
-  useEffect(() => {
-  const parsedPage = parseInt(query.page as string, 10);
-  let resetPage = null;
-
-  if (!isNaN(parsedPage)) {
-    setCurrentPage(parsedPage);
-  } else {
-    resetPage = 1;
-    setCurrentPage(1);
-  }
-
-  const searchQuery = query?.text as string;
-  const sortedValue = query?.sort as string;
-  const searchDate = query?.date as string;
-
-  const queryParams = searchQuery || sortedValue || searchDate;
-
-  let updatedFilter: {
-    text?: string;
-    sort?: string;
-    date?: {
-      $gte?: string;
-      $lte?: string;
-    };
-  } = {
-    text: searchQuery || "",
-  };
-
-  if (searchQuery || sortedValue || searchDate) {
-    updatedFilter.text = searchQuery;
-    updatedFilter.sort = sortedValue;
-    updatedFilter.date = searchDate ? JSON.parse(searchDate) : undefined;
-  }
-
-  setFilter(updatedFilter);
-
-  if (parsedPage !== undefined) {
-    dispatch(
-      readEmployee({
-        params: {
-          filter: queryParams ? updatedFilter : {},
-          page: (Number(parsedPage) || resetPage) ?? currentPage,
-          size: 10,
-        },
-      })
-    ).then((response: any) => {
-      if (response?.payload) {
-        setCurrentPageRows(response?.payload?.Employee);
-      }
-    });
-  }
-}, [query]);
-
 
   return {
     currentPageRows,
@@ -105,6 +103,7 @@ const useEmployee = () => {
     loading,
     isLoading,
     currentPage,
+    totalCount,
   };
 };
 

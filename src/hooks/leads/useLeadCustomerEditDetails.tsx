@@ -55,6 +55,7 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
       });
     }
   }, [leadDetails.id]);
+
   const fields = LeadsCustomerDetailsFormField(
     register,
     loading,

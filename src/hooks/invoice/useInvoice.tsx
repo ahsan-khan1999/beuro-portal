@@ -35,12 +35,90 @@ const useInvoice = () => {
     invoiceSum,
   } = useAppSelector((state) => state.invoice);
   const { t: translate } = useTranslation();
+  const { query } = useRouter();
+
+  useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+    const searchNoteType = query?.noteType as string;
+    const searchDate = query?.date as string;
+    const searchPayment = query?.paymentType;
+
+    const queryParams =
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchNoteType ||
+      searchDate ||
+      searchPayment;
+
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+        sort?: string;
+        noteType?: string;
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+        paymentType?: string | string[];
+      } = {
+        status: filteredStatus,
+      };
+
+      if (
+        searchQuery ||
+        sortedValue ||
+        searchNoteType ||
+        searchDate ||
+        searchPayment
+      ) {
+        updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
+        updatedFilter.noteType = searchNoteType;
+        updatedFilter.date = searchDate && JSON.parse(searchDate);
+        updatedFilter.paymentType = searchPayment;
+      }
+
+      setFilter(updatedFilter);
+
+      dispatch(
+        readInvoice({
+          params: {
+            filter: updatedFilter,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+      });
+    }
+  }, [query]);
 
   const [currentPageRows, setCurrentPageRows] = useState<
     InvoiceTableRowTypes[]
   >([]);
 
-  const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
@@ -229,84 +307,6 @@ const useInvoice = () => {
     }
   };
 
-  useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
-    let resetPage = null;
-    if (!isNaN(parsedPage)) {
-      setCurrentPage(parsedPage);
-    } else {
-      resetPage = 1;
-      setCurrentPage(1);
-    }
-
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchNoteType = query?.noteType as string;
-    const searchDate = query?.date as string;
-    const searchPayment = query?.paymentType;
-
-    const queryParams =
-      queryStatus ||
-      searchQuery ||
-      sortedValue ||
-      searchNoteType ||
-      searchDate ||
-      searchPayment;
-
-    if (queryParams !== undefined) {
-      const filteredStatus =
-        query?.status === "None"
-          ? "None"
-          : queryParams
-              .toString()
-              .split(",")
-              .filter((item) => item !== "None");
-
-      let updatedFilter: {
-        status: string | string[];
-        text?: string;
-        sort?: string;
-        noteType?: string;
-        date?: {
-          $gte?: string;
-          $lte?: string;
-        };
-        paymentType?: string | string[];
-      } = {
-        status: filteredStatus,
-      };
-
-      if (
-        searchQuery ||
-        sortedValue ||
-        searchNoteType ||
-        searchDate ||
-        searchPayment
-      ) {
-        updatedFilter.text = searchQuery;
-        updatedFilter.sort = sortedValue;
-        updatedFilter.noteType = searchNoteType;
-        updatedFilter.date = searchDate && JSON.parse(searchDate);
-        updatedFilter.paymentType = searchPayment;
-      }
-
-      setFilter(updatedFilter);
-
-      dispatch(
-        readInvoice({
-          params: {
-            filter: updatedFilter,
-            page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-      });
-    }
-  }, [query]);
-
   return {
     currentPageRows,
     totalItems,
@@ -327,6 +327,7 @@ const useInvoice = () => {
     invoiceSum,
     translate,
     handleDownloadInvoiceReport,
+    totalCount,
   };
 };
 

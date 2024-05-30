@@ -2,10 +2,9 @@ import { CustomersAdmin } from "@/types/admin/customer";
 import Image from "next/image";
 import React from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { DropDownItem } from "@/types";
 import { formatDateTimeToDate } from "@/utils/utility";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
-import { useRouter } from "next/router";
+import { staticEnums } from "@/utils/static";
 
 const DetailsData = ({
   customerDetail,
@@ -18,28 +17,18 @@ const DetailsData = ({
   isCustomerFree: boolean;
   onHandleBack: () => void;
   handleAreYouSure: () => void;
-  handleStatusChange: (value: string) => void;
+  handleStatusChange: (id: string) => void;
 }) => {
-  const router = useRouter();
   const customerStatus = [
-    `${translate("customer_status.unBlock")}`,
     `${translate("customer_status.block")}`,
+    `${translate("customer_status.unBlock")}`,
   ];
 
-  const items: DropDownItem[] = [
-    {
-      item: {
-        label: customerStatus[0],
-        value: "unBlock",
-      },
-    },
-    {
-      item: {
-        label: customerStatus[1],
-        value: "block",
-      },
-    },
-  ];
+  const items = Object.keys(staticEnums["User"]["accountStatus"]).map(
+    (item, index) => ({
+      item: { label: customerStatus[index], value: item },
+    })
+  );
 
   return (
     <>
@@ -157,7 +146,7 @@ const DetailsData = ({
               {translate("admin.customers_details.card_content.role")}:
             </span>
 
-            <span className=" text-[#4B4B4B] font-medium">
+            <span className="text-[#4B4B4B] font-medium">
               {translate(`admin_role.${customerDetail?.role}`)}
             </span>
           </div>
@@ -200,14 +189,28 @@ const DetailsData = ({
 
             <DropDown
               items={items}
-              onItemSelected={(selectedItem) =>
-                handleStatusChange(selectedItem)
-              }
               selectedItem={customerDetail?.status}
-              dropDownClassName="min-w-[108.445px] w-fit border border-primary justify-between py-1"
-              dropDownTextClassName="text-primary font-medium"
-              dropDownIconClassName="text-primary"
-              dropDownItemsContainerClassName="border border-primary w-fit"
+              onItemSelected={handleStatusChange}
+              dropDownClassName={`w-fit border ${
+                customerDetail?.status === "block"
+                  ? "border-[#F00]"
+                  : "border-primary"
+              } px-4 py-[3px] flex items-center justify-center gap-x-1`}
+              dropDownTextClassName={`${
+                customerDetail?.status === "block"
+                  ? "text-[#F00]"
+                  : "text-primary"
+              } font-medium text-base`}
+              dropDownIconClassName={`${
+                customerDetail?.status === "block"
+                  ? "text-[#F00]"
+                  : "text-primary"
+              }`}
+              dropDownItemsContainerClassName={`border w-fit ${
+                customerDetail?.status === "block"
+                  ? "border-[#F00]"
+                  : "border-primary"
+              }`}
             />
           </div>
 

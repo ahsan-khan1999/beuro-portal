@@ -16,6 +16,7 @@ import { FilterType } from "@/types";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { getCurrentMonth } from "@/utils/utility";
 import { DashboardActionType } from "@/types/dashboard";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
@@ -275,7 +276,7 @@ const AdminDashboard = () => {
           </div>
         </>
       ) : (
-        <LoadingState />
+        <CustomLoader />
       )}
     </div>
   );

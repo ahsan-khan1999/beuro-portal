@@ -17,18 +17,14 @@ const TableRow = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const itemsValue = [
-    `${translate(
-      "admin.customers_details.card_content.customer_status.block"
-    )}`,
-    `${translate(
-      "admin.customers_details.card_content.customer_status.unBlock"
-    )}`,
+  const customerStatus = [
+    `${translate("customer_status.block")}`,
+    `${translate("customer_status.unBlock")}`,
   ];
 
   const items = Object.keys(staticEnums["User"]["accountStatus"]).map(
     (item, index) => ({
-      item: { label: itemsValue[index], value: item },
+      item: { label: customerStatus[index], value: item },
     })
   );
 

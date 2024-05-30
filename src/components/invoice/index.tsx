@@ -27,11 +27,13 @@ export default function Invoices() {
     invoiceSum,
     translate,
     handleDownloadInvoiceReport,
+    totalCount,
   } = useInvoice();
 
   const CurrentComponent = useEmptyStates(
     <TableRows dataToAdd={currentPageRows} handleNotes={handleNotes} />,
-    currentPageRows.length > 0,
+    // currentPageRows.length > 0,
+    totalCount !== 0,
     isLoading
   );
 
