@@ -16,11 +16,11 @@ const RecordCreateSuccess = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[564px] min-h-auto max-h-auto"
+        containerClassName="max-w-[320px] md:max-w-[480px] lg:max-w-[564px] min-h-auto max-h-auto"
       >
         <div className="relative flex flex-col items-center">
           <Image src={createdIcon} alt="delete_icon" className="mt-[47px]" />
-          <p className="text-[#000] font-medium text-2xl mt-[40px] text-center">
+          <p className="font-normal md:font-medium text-base md:text-2xl mt-[40px] text-center">
             {modelHeading}
           </p>
 

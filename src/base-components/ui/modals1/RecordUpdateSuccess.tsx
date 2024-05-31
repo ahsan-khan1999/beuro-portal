@@ -19,15 +19,15 @@ const RecordUpdateSuccess = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit"
+        containerClassName="max-w-[320px] md:max-w-[480px] lg:max-w-[624.862px] min-h-fit"
       >
         <div className="relative flex flex-col items-center">
           <Image src={createdIcon} alt="delete_icon" className="mt-[47px]" />
-          <p className="text-[#000] font-medium text-[24px] leading-7 mt-[40px]  text-center ">
+          <p className="font-normal md:font-medium text-base md:text-2xl md:mt-[40px] text-center">
             {modelHeading}
           </p>
 
-          <span className="text-[#1E1E1E] font-normal text-[14px] mt-[6px]">
+          <span className="text-[#1E1E1E] font-normal text-sm mt-[6px]">
             {modelSubHeading}
           </span>
           <div className="flex justify-between space-x-4 mt-[32px] mb-5 lg:mb-[68px]">
