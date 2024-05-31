@@ -15,7 +15,6 @@ const InvoiceDetails = () => {
     handleNotes,
     invoiceDetails,
     renderModal,
-    activeTab,
     setActiveTab,
     collectiveInvoice,
     handlePaymentStatusUpdate,
@@ -31,6 +30,7 @@ const InvoiceDetails = () => {
     systemSettings,
     handleInvoiceUpdate,
     totalCount,
+    activeTab,
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -64,7 +64,12 @@ const InvoiceDetails = () => {
     loading
   );
 
-  const shouldShowPendingInvoice = !loading && !collectiveInvoice?.length;
+  const shouldShowPendingInvoice =
+    activeTab === "invoice"
+      ? !collectiveReciept?.length &&
+        !collectiveInvoice.length ||
+        !collectiveReciept?.map((item) => item.invoiceStatus !== "Paid")
+      : false;
 
   return (
     <>
