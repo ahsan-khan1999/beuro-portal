@@ -24,7 +24,7 @@ const CreationCreated = ({
       >
         <div className="relative flex flex-col items-center">
           <Image src={createdIcon} alt="delete_icon" className="mt-[47px]" />
-          <p className="text-[#000] font-medium text-2xl mt-[40px] text-center ">
+          <p className="font-medium text-2xl mt-[40px] text-center">
             {heading}
           </p>
 
