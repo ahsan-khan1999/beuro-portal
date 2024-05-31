@@ -4,7 +4,10 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 const OfferPdf = dynamic(
   () => import("@/components/reactPdf/offer-pdf-preview"),
-  { ssr: false, loading: () => <CustomLoader /> }
+  {
+    ssr: false,
+    //  loading: () => <CustomLoader />
+  }
 );
 const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
   ssr: false,

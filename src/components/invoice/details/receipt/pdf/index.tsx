@@ -78,29 +78,25 @@ const ReceiptPdfPreview = () => {
 
   return (
     <>
-      {loading ? (
-        <CustomLoader />
-      ) : (
-        <>
-          <InvoiceEmailHeader
-            {...receiptData?.emailHeader}
-            contractStatus={collectiveInvoiceDetails?.emailStatus}
-            contentName={receiptData?.emailHeader.contentName}
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onDownload={handleDonwload}
-            onPrint={handlePrint}
-            onSendViaPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-            title={translate("invoice.receipt_details")}
-          />
-          <InvoicePdfPreview
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          />
-          {renderModal()}
-        </>
-      )}
+      <InvoiceEmailHeader
+        {...receiptData?.emailHeader}
+        contractStatus={collectiveInvoiceDetails?.emailStatus}
+        contentName={receiptData?.emailHeader.contentName}
+        onEmailSend={handleEmailSend}
+        loading={loading}
+        onDownload={handleDonwload}
+        onPrint={handlePrint}
+        onSendViaPost={handleSendByPost}
+        activeButtonId={activeButtonId}
+        title={translate("invoice.receipt_details")}
+      />
+
+      <InvoicePdfPreview
+        mergedPdfFileUrl={mergedPdfUrl}
+        isPdfRendering={isPdfRendering}
+      />
+
+      {renderModal()}
     </>
   );
 };
