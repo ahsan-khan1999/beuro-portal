@@ -67,7 +67,7 @@ export const AddressDetails = ({
 }: Partial<MovingDetailsProps>) => {
   let MaxLength = 0;
   for (const item of (address && address) || []) {
-    const labelLength = item?.label.length;
+    const labelLength = item?.label?.length;
     if (labelLength > MaxLength) MaxLength = labelLength;
   }
 

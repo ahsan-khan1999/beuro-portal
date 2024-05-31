@@ -25,6 +25,8 @@ interface InvoiceState {
     sumOfAllPages: number;
     sumOfTotalsPerPage: number;
   };
+  loadingInvoice: boolean;
+  loadingReceipt: boolean;
 }
 
 const initialState: InvoiceState = {
@@ -48,6 +50,8 @@ const initialState: InvoiceState = {
     sumOfAllPages: 0,
     sumOfTotalsPerPage: 0,
   },
+  loadingInvoice: true,
+  loadingReceipt: true,
 };
 
 export const readInvoice: AsyncThunk<boolean, object, object> | any =
@@ -523,16 +527,16 @@ const InvoiceSlice = createSlice({
     });
 
     builder.addCase(readCollectiveInvoice.pending, (state) => {
-      state.loading = true;
+      state.loadingInvoice = true;
     });
     builder.addCase(readCollectiveInvoice.fulfilled, (state, action) => {
       state.collectiveInvoice = action.payload.InvoiceCollection;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
-      state.loading = false;
+      state.loadingInvoice = false;
     });
     builder.addCase(readCollectiveInvoice.rejected, (state) => {
-      state.loading = false;
+      state.loadingInvoice = false;
     });
 
     builder.addCase(readCollectiveInvoiceDetails.pending, (state) => {
@@ -546,16 +550,16 @@ const InvoiceSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(readCollectiveReciept.pending, (state) => {
-      state.loading = true;
+      state.loadingReceipt = true;
     });
     builder.addCase(readCollectiveReciept.fulfilled, (state, action) => {
       state.collectiveReciept = action.payload.InvoiceCollection;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
-      state.loading = false;
+      state.loadingReceipt = false;
     });
     builder.addCase(readCollectiveReciept.rejected, (state) => {
-      state.loading = false;
+      state.loadingReceipt = false;
     });
     builder.addCase(updateInvoiceStatus.pending, (state) => {
       state.loading = true;
