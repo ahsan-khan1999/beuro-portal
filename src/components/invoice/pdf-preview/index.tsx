@@ -64,31 +64,31 @@ export const MainInvoicePdfDetail = () => {
 
   return (
     <>
-      {loading ? (
+      {/* {loading ? (
         <CustomLoader />
       ) : (
-        <>
-          <InvoiceEmailHeader
-            {...invoiceData?.emailHeader}
-            contractStatus={invoiceDetails?.emailStatus}
-            contentName={invoiceData?.emailHeader.contentName}
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onDownload={handleDonwload}
-            onPrint={handlePrint}
-            onSendViaPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-            title={translate("invoice.invoice_details")}
-          />
+        <> */}
+      <InvoiceEmailHeader
+        {...invoiceData?.emailHeader}
+        contractStatus={invoiceDetails?.emailStatus}
+        contentName={invoiceData?.emailHeader.contentName}
+        onEmailSend={handleEmailSend}
+        loading={loading}
+        onDownload={handleDonwload}
+        onPrint={handlePrint}
+        onSendViaPost={handleSendByPost}
+        activeButtonId={activeButtonId}
+        title={translate("invoice.invoice_details")}
+      />
 
-          <InvoicePdfPreview
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          />
+      <InvoicePdfPreview
+        mergedPdfFileUrl={mergedPdfUrl}
+        isPdfRendering={isPdfRendering}
+      />
 
-          {renderModal()}
-        </>
-      )}
+      {renderModal()}
+      {/* </>
+      )} */}
     </>
   );
 };

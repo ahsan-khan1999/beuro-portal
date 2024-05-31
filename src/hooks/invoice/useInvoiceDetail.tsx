@@ -45,6 +45,8 @@ export default function useInvoiceDetail() {
     collectiveInvoice,
     collectiveReciept,
     totalCount,
+    loadingInvoice,
+    loadingReceipt,
   } = useAppSelector((state) => state.invoice);
 
   const [isSendEmail, setIsSendEmail] = useState(false);
@@ -441,5 +443,7 @@ export default function useInvoiceDetail() {
     systemSettings,
     handleInvoiceUpdate,
     totalCount,
+    loadingInvoice,
+    loadingReceipt,
   };
 }

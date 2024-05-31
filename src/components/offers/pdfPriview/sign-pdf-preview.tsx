@@ -7,7 +7,6 @@ import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { SignPdf } from "@/components/pdf/sign-pdf";
 import { EmailTemplate } from "@/types/settings";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { Container } from "@/components/pdf/container";
 import { staticEnums } from "@/utils/static";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";

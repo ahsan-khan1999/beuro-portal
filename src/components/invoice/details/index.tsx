@@ -31,6 +31,8 @@ const InvoiceDetails = () => {
     systemSettings,
     handleInvoiceUpdate,
     totalCount,
+    loadingInvoice,
+    loadingReceipt,
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -64,7 +66,11 @@ const InvoiceDetails = () => {
     loading
   );
 
-  const shouldShowPendingInvoice = !loading && !collectiveInvoice?.length;
+  const shouldShowPendingInvoice =
+    !loading &&
+    !loadingInvoice &&
+    !loadingReceipt &&
+    !collectiveInvoice?.length;
 
   return (
     <>
@@ -91,7 +97,7 @@ const InvoiceDetails = () => {
             onComponentChange={setActiveTab}
           />
         </div>
-        {loading ? (
+        {loading || loadingInvoice || loadingReceipt ? (
           <CustomLoader />
         ) : shouldShowPendingInvoice ? (
           <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />
