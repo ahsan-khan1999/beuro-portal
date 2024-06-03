@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -59,10 +58,6 @@ const PdfPriview = () => {
 
   return (
     <>
-      {/* {loading ? (
-         <CustomLoader />
-      ) : ( */}
-      {/* <> */}
       <EmailCard
         contractStatus={contractDetails?.emailStatus}
         contractNo={contractData?.emailHeader?.offerNo}
@@ -75,17 +70,13 @@ const PdfPriview = () => {
         onSendViaPost={handleSendByPost}
         activeButtonId={activeButtonId}
       />
-      {loading ? (
-        <CustomLoader />
-      ) : (
-        <ContractPdfPreview
-          mergedPdfFileUrl={mergedPdfUrl}
-          isPdfRendering={isPdfRendering}
-        />
-      )}
+
+      <ContractPdfPreview
+        mergedPdfFileUrl={mergedPdfUrl}
+        isPdfRendering={isPdfRendering}
+      />
+
       {renderModal()}
-      {/* </> */}
-      {/* // )} */}
     </>
   );
 };

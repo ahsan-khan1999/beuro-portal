@@ -14,7 +14,11 @@ import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
-  { ssr: false, loading: () => <CustomLoader /> }
+  {
+    ssr: false,
+
+    // loading: () => <CustomLoader />
+  }
 );
 
 // const PdfDownload = dynamic(

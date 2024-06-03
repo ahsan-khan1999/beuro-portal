@@ -114,7 +114,7 @@ export const PdfPreviewSignatureDocument = () => {
                 25 December 2023
               </span>
               <hr className="mb-[17px]" />
-              <span className="text-base text-black font-normal ">Date</span>
+              <span className="text-base text-black font-normal">Date</span>
             </div>
           </div>
           <div>
