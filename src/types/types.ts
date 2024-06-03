@@ -1105,7 +1105,7 @@ export interface ContractEmailHeaderProps {
 }
 
 export interface ContentHeaderProps {
-  aggrementDetails: string;
+  aggrementDetails?: string;
 }
 
 export interface PdfProps<T = EmailHeaderProps> {

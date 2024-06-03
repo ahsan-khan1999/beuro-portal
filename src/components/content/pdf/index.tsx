@@ -18,7 +18,7 @@ export const ContentPdfPriview = () => {
         <CustomLoader />
       ) : (
         <div className="mt-5">
-          <ContentPdf />
+          <ContentPdf aggrementDetails={contentData?.aggrementDetails} />
         </div>
       )}
     </>

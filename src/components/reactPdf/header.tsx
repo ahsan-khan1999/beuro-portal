@@ -1,10 +1,7 @@
 import { DocumentHeaderDetailsProps } from "@/types";
-import { HeaderProps } from "@/types/pdf";
 import { HeaderLabel, HeaderLabelNr } from "@/utils/static";
 import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
-import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
+import { View, Text, Image } from "@react-pdf/renderer";
 
 export const Header = ({
   createdBy,

@@ -74,9 +74,6 @@ const InvoiceDetails = () => {
         !collectiveReciept?.map((item) => item.invoiceStatus !== "Paid")
       : false;
 
-  console.log(collectiveInvoice, "collectiveInvoice");
-  console.log(collectiveReciept, "collectiveReciept");
-
   return (
     <>
       <Layout>
