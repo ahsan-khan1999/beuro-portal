@@ -15,6 +15,7 @@ const InvoiceDetails = () => {
     handleNotes,
     invoiceDetails,
     renderModal,
+    activeTab,
     setActiveTab,
     collectiveInvoice,
     handlePaymentStatusUpdate,
@@ -30,7 +31,8 @@ const InvoiceDetails = () => {
     systemSettings,
     handleInvoiceUpdate,
     totalCount,
-    activeTab,
+    loadingInvoice,
+    loadingReceipt,
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -66,10 +68,14 @@ const InvoiceDetails = () => {
 
   const shouldShowPendingInvoice =
     activeTab === "invoice"
-      ? !collectiveReciept?.length &&
-        !collectiveInvoice.length ||
+      ? ((!loading || !loadingInvoice || !loadingReceipt) &&
+          !collectiveInvoice?.length &&
+          !collectiveReciept?.length) ||
         !collectiveReciept?.map((item) => item.invoiceStatus !== "Paid")
       : false;
+
+  console.log(collectiveInvoice, "collectiveInvoice");
+  console.log(collectiveReciept, "collectiveReciept");
 
   return (
     <>
@@ -96,7 +102,7 @@ const InvoiceDetails = () => {
             onComponentChange={setActiveTab}
           />
         </div>
-        {loading ? (
+        {loading || loadingInvoice || loadingReceipt ? (
           <CustomLoader />
         ) : shouldShowPendingInvoice ? (
           <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />

@@ -3,6 +3,7 @@ import React from "react";
 import ContentCard from "../ContentCard";
 import ContentDetailsData from "./ContentDetailsData";
 import useContentDetail from "@/hooks/content/useContentDetail";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const ContentDetails = () => {
   const { contentDetails, contentDeleteHandler, renderModal, loading } =
@@ -16,9 +17,13 @@ const ContentDetails = () => {
           contentDeleteHandler={contentDeleteHandler}
         />
       </div>
-      <div className="maxSize:mt-[320px] w-full maxSize:block">
-        <ContentDetailsData />
-      </div>
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <div className="maxSize:mt-[320px] w-full maxSize:block">
+          <ContentDetailsData />
+        </div>
+      )}
       {renderModal()}
     </Layout>
   );

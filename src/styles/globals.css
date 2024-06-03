@@ -645,3 +645,19 @@ input[type="date"] {
     font-size: 14px;
   }
 }
+
+.img_loader {
+  animation: puff 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+@keyframes puff {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}

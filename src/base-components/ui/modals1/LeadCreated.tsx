@@ -26,7 +26,7 @@ const LeadCreated = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] mlg:max-w-[624px] min-h-fit"
+        containerClassName="max-w-[360px] md:max-w-[480px] lg:max-w-[624.862px] min-h-fit"
       >
         <div className="relative flex items-center flex-col">
           <Image
@@ -38,10 +38,10 @@ const LeadCreated = ({
           <Image
             src={leadCreatedIcon}
             alt="request_submitted"
-            className="mb-[40px] mt-[43px]"
+            className="mb-[40px] mt-[43px] w-[70px] h-[70px] md:w-fit md:h-fit"
           />
           <div className="flex flex-col items-center justify-center px-10">
-            <p className="text-[#000] font-medium text-2xl text-center mb-4">
+            <p className="font-medium text-base md:text-2xl text-center mb-4">
               {heading}
             </p>
             <p className="text-[#1E1E1E] text-sm font-normal text-center mb-4">
@@ -52,13 +52,13 @@ const LeadCreated = ({
           <div className="flex flex-col">
             <button
               onClick={() => imageUploadHandler()}
-              className="bg-[#4A13E7] cursor-pointer mb-[21px] hover:bg-buttonHover w-[384px] rounded-lg p-4 text-white text-base font-medium"
+              className="bg-[#4A13E7] cursor-pointer mb-[21px] hover:bg-buttonHover w-full md:w-[384px] rounded-lg p-4 text-white text-base font-medium"
             >
               {translate("leads.leads_created_modal.add_button")}
             </button>
             <button
               onClick={() => routeHandler()}
-              className="bg-[#BFBFBF] cursor-pointer hover:bg-buttonHover w-[384px] rounded-lg p-4 mb-[33px] text-white text-base font-medium"
+              className="bg-[#BFBFBF] cursor-pointer hover:bg-buttonHover w-full md:w-[384px] rounded-lg p-4 mb-[33px] text-white text-base font-medium"
             >
               {translate("leads.leads_created_modal.without_images")}
             </button>

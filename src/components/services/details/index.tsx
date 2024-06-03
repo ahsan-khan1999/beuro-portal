@@ -1,10 +1,9 @@
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
+import ServicesForm from "../ServicesForm";
 import DetailsData from "../DetailsData";
 import useServiceDetail from "@/hooks/services/useServiceDetail";
-import ServicesForm from "../ServicesForm";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const ServicesDetails = () => {

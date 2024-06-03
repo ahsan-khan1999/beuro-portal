@@ -5,7 +5,6 @@ import CustomerForm from "../CustomerForm";
 import { formatDateTimeToDate } from "@/utils/utility";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const CustomerDetails = () => {
