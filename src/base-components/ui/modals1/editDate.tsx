@@ -22,7 +22,7 @@ export const EditDate = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[400px] lg:max-w-[624px] min-h-auto max-h-[600px] overflow-y-scroll "
+        containerClassName="max-w-[320px] md:max-w-[480px] lg:max-w-[624px] min-h-auto max-h-[600px] overflow-y-scroll"
       >
         <main className="relative pt-[18px] pb-[47px] pl-[32px] pr-[25px]">
           <Image
@@ -33,7 +33,7 @@ export const EditDate = ({
           />
 
           <div className="flex flex-col">
-            <h2 className="font-medium text-[18px] text-[#393939] mb-[10px] border-b border-b-[#000] border-opacity-10 pb-4">
+            <h2 className="text-base font-normal md:font-medium md:text-lg text-[#393939] mb-[10px] border-b border-b-[#000] border-opacity-10 pb-4">
               {translate("common.modals.date")}
             </h2>
 

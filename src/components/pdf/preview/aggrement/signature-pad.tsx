@@ -255,7 +255,6 @@ export const SignaturePad = ({
 
   useEffect(() => {
     if (canvasRef.current && !signaturePad) {
-
       const sigPad = new SignPad(canvasRef.current, {
         backgroundColor: "rgb(255, 255, 255)",
       });

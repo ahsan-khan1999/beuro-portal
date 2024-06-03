@@ -32,7 +32,7 @@ const ServiceAddDetails = ({
   };
 
   return (
-    <FormCard>
+    <>
       <div className="flex justify-between items-center bg-[#C50EE0] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
           {translate("offers.service_details.main_heading")}
@@ -46,16 +46,16 @@ const ServiceAddDetails = ({
         </button>
       </div>
 
-      <div className="px-6">
-        <Form
-          formFields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          className={`${defaultClassName}`}
-        />
-      </div>
-    </FormCard>
+      {/* <div className="px-6"> */}
+      <Form
+        formFields={fields}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+        className={`${defaultClassName}`}
+      />
+      {/* </div> */}
+    </>
   );
 };
 
