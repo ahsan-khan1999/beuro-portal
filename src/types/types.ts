@@ -326,7 +326,8 @@ export type GenerateContentFormField = (
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   contentDetails?: ContentTableRowTypes,
   append?: UseFieldArrayAppend<FieldValues, "offerContent.address">,
-  onRemove?: UseFieldArrayRemove
+  onRemove?: UseFieldArrayRemove,
+  offerDescriptionCount?: string
 ) => FormField[];
 // Employee formfield
 export type GenerateEmployeeFormField = (
@@ -1103,6 +1104,10 @@ export interface ContractEmailHeaderProps {
   onDownload: () => void;
 }
 
+export interface ContentHeaderProps {
+  aggrementDetails: string;
+}
+
 export interface PdfProps<T = EmailHeaderProps> {
   emailHeader: Partial<T>;
   headerDetails: DocumentHeaderDetailsProps;
@@ -1132,7 +1137,7 @@ export interface PdfPreviewProps {
   mergedPdfFileUrl?: string | null;
   isPdfRendering?: boolean;
   showContractSign?: boolean;
-  companyName?:string
+  companyName?: string;
 }
 
 export interface PdfPreviewFooterProps {

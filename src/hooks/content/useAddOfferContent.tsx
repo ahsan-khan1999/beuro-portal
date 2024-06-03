@@ -9,21 +9,11 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddOfferContentDetailsFormField } from "@/components/content/add/fields/add-offer-content-details-fields";
-import {
-  generateContentAddressValidationSchema,
-  generateOfferEditContentDetailsValidation,
-  mergeSchemas,
-} from "@/validation/contentSchema";
+import { generateOfferEditContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
-import { useMemo, useState, useEffect } from "react";
-import { FormField } from "@/types";
+import { useState, useEffect } from "react";
 import { Attachement } from "@/types/global";
-import {
-  generateAddressFields,
-  setAddressFieldValues,
-  transformAttachments,
-  transformFieldsToValues,
-} from "@/utils/utility";
+import { transformAttachments } from "@/utils/utility";
 import { createContent } from "@/api/slices/content/contentSlice";
 
 export const useAddOfferContentDetails = (onHandleNext: Function) => {
@@ -56,6 +46,8 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  const offerDescriptionCount = watch("offerContent.description");
 
   useEffect(() => {
     if (contentDetails.id) {
@@ -90,7 +82,8 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     setAttachements,
     contentDetails,
     append,
-    remove
+    remove,
+    offerDescriptionCount
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -113,19 +106,19 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
         ...apiData,
         contentId: contentDetails?.id,
       };
-      
+
       const res = await dispatch(
         createContent({ data: apiData, router, setError, translate })
       );
       if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
     } else {
-
       const res = await dispatch(
         createContent({ data: apiData, router, setError, translate })
       );
       if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
     }
   };
+
   return {
     fields,
     onSubmit,

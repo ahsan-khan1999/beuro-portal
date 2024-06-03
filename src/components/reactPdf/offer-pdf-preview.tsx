@@ -169,7 +169,7 @@ const OfferPdfPreview = ({
             <ServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}
-            />
+            />ContentPdfPreview
           </View>
           <Footer
             {...{

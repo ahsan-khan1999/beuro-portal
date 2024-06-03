@@ -4,6 +4,7 @@ import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "./ContentDetailsData";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+import { useRouter } from "next/router";
 
 const OfferContentDetailsData = ({
   onClick,
@@ -13,6 +14,7 @@ const OfferContentDetailsData = ({
   contentDetail: ContentTableRowTypes;
 }) => {
   const { t: translate } = useTranslation();
+  const router = useRouter();
 
   return (
     <div
@@ -70,9 +72,26 @@ const OfferContentDetailsData = ({
           </div>
 
           <div className="flex flex-col">
-            <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
-              {translate("content.details.offer_description")}
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
+                {translate("content.details.offer_description")}
+              </p>
+
+              <button
+                onClick={() =>
+                  router.push({
+                    pathname: `/content/pdf-preview`,
+                    query: {
+                      ...router.query,
+                      contentID: contentDetail?.id,
+                    },
+                  })
+                }
+                className="mb-[10px]"
+              >
+                PDF Preview
+              </button>
+            </div>
             <div
               className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"
               dangerouslySetInnerHTML={{

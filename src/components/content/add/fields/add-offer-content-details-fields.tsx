@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
-import icon from "@/assets/svgs/Vector.svg";
 import {
   FieldValues,
   UseFieldArrayAppend,
@@ -8,6 +7,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { useTranslation } from "next-i18next";
+import { getTextCount } from "@/utils/functions";
 
 export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   register,
@@ -20,9 +20,11 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   setAttachements,
   contentDetails,
   append,
-  remove
+  remove,
+  offerDescriptionCount
 ) => {
   const { t: translate } = useTranslation();
+
   const formField: FormField[] = [
     {
       field: {
@@ -39,7 +41,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "contentName",
               name: "contentName",
@@ -56,7 +58,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "offerContent.title",
               name: "offerContent.title",
@@ -75,12 +77,20 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
               type: Field.ckEditor,
               id: "offerContent.description",
               name: "offerContent.description",
-
               control,
               // value:
               //   (contentDetails?.id &&
               //     contentDetails?.offerContent?.description) ||
               //   "",
+            },
+          },
+          {
+            containerClass: "flex items-center justify-end",
+            field: {
+              type: Field.span,
+              text: getTextCount(offerDescriptionCount),
+              containerClassName: "text-sm text-[#393939] font-normal",
+              id: "",
             },
           },
           {
