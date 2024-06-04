@@ -5,6 +5,8 @@ import { ComponentsType } from "./ContentDetailsData";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 import { useRouter } from "next/router";
+import { Button } from "@/base-components/ui/button/button";
+import { ContentPDFComponents } from "@/enums/content";
 
 const OfferContentDetailsData = ({
   onClick,
@@ -77,20 +79,23 @@ const OfferContentDetailsData = ({
                 {translate("content.details.offer_description")}
               </p>
 
-              <button
+              <Button
+                inputType="button"
                 onClick={() =>
                   router.push({
                     pathname: `/content/pdf-preview`,
                     query: {
                       ...router.query,
                       contentID: contentDetail?.id,
+                      contentPdfType: ContentPDFComponents.OFFER_CONTENT_PDF,
                     },
                   })
                 }
-                className="mb-[10px]"
-              >
-                PDF Preview
-              </button>
+                className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap mb-[10px]"
+                text={translate("common.pdf_preview")}
+                id="pdf"
+                iconAlt="content PDF"
+              />
             </div>
             <div
               className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"

@@ -62,6 +62,7 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
       });
     }
   }, [contentDetails?.id]);
+
   const {
     fields: addressFields,
     append,

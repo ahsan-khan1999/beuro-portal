@@ -6,7 +6,7 @@ export enum OfferEditContentDetails {
   offerDescription = "description",
   emailBody = "body",
   attachments = "attachments",
-  address="address"
+  address = "address",
 }
 
 // enum for confirmation edit content details
@@ -30,4 +30,11 @@ export enum ReceiptEditContentDetails {
   receiptDescription = "description",
   emailBody = "body",
   attachments = "attachments",
+}
+
+export enum ContentPDFComponents {
+  OFFER_CONTENT_PDF = "OFFER_CONTENT_PDF",
+  CONFIRMATION_CONTENT_PDF = "CONFIRMATION_CONTENT_PDF",
+  INVOICE_CONTENT_PDF = "INVOICE_CONTENT_PDF",
+  RECEIPT_CONTENT_PDF = "RECEIPT_CONTENT_PDF",
 }

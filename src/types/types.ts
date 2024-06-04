@@ -990,8 +990,8 @@ export interface DocumentDetailFooterProps {
   thirdColumn: CompanyDetailsThirdColumn;
   fourthColumn: CompanyDetailsFourthColumn;
   columnSettings: TemplateType | null;
-  totalPages: number;
-  currPage: number;
+  totalPages?: number;
+  currPage?: number;
   emailTemplateSettings?: EmailTemplate | null;
 }
 export interface TemplateSettigsFirstColumn {
@@ -1105,7 +1105,15 @@ export interface ContractEmailHeaderProps {
 }
 
 export interface ContentHeaderProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  footerDetails?: DocumentDetailFooterProps;
   aggrementDetails?: string;
+}
+
+export interface ContentPdfPreviewerProps {
+  data?: ContentHeaderProps;
+  templateSettings: TemplateType | null;
+  emailTemplateSettings: EmailTemplate | null;
 }
 
 export interface PdfProps<T = EmailHeaderProps> {

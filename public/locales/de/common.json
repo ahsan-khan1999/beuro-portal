@@ -1158,6 +1158,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "pdf_preview": "PDF Vorschau",
     "invoice_fitlers": {
       "pending": "Entwurf",
       "sending": "Versandbereit",

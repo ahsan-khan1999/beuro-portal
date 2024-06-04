@@ -1166,6 +1166,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "pdf_preview": "PDF Preview",
     "invoice_fitlers": {
       "pending": "Pending",
       "sending": "Sending",

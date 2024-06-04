@@ -1,6 +1,8 @@
-import { ContentHeaderProps } from "@/types";
-import { Document, Font, PDFViewer, Page } from "@react-pdf/renderer";
+import { ContentPdfPreviewerProps } from "@/types";
+import { Document, Font, PDFViewer, Page, View } from "@react-pdf/renderer";
 import { AdditionalDetails } from "./additional-details";
+import { Header } from "./header";
+import { Footer } from "./footer";
 
 Font.register({
   family: "Poppins",
@@ -73,12 +75,32 @@ Font.register({
   ],
 });
 
-const ContentPdfPreview = ({ aggrementDetails }: ContentHeaderProps) => {
+const ContentPdfPreview = ({
+  data,
+  emailTemplateSettings,
+  templateSettings,
+}: ContentPdfPreviewerProps) => {
+  const headerDetails = data?.headerDetails;
+  const aggrementDetails = data?.aggrementDetails;
+  const footerDetails = data?.footerDetails;
+
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
       <Document>
         <Page style={{ fontFamily: "Poppins" }}>
+          <View style={{ marginBottom: 10 }} fixed>
+            <Header {...headerDetails} />
+          </View>
+
           <AdditionalDetails description={aggrementDetails} />
+
+          <Footer
+            {...{
+              documentDetails: footerDetails,
+              emailTemplateSettings,
+              templateSettings,
+            }}
+          />
         </Page>
       </Document>
     </PDFViewer>
