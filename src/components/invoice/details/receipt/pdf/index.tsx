@@ -14,7 +14,11 @@ import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
-  { ssr: false, loading: () => <CustomLoader /> }
+  {
+    ssr: false,
+
+    // loading: () => <CustomLoader />
+  }
 );
 
 // const PdfDownload = dynamic(
@@ -78,29 +82,25 @@ const ReceiptPdfPreview = () => {
 
   return (
     <>
-      {loading ? (
-        <CustomLoader />
-      ) : (
-        <>
-          <InvoiceEmailHeader
-            {...receiptData?.emailHeader}
-            contractStatus={collectiveInvoiceDetails?.emailStatus}
-            contentName={receiptData?.emailHeader.contentName}
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onDownload={handleDonwload}
-            onPrint={handlePrint}
-            onSendViaPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-            title={translate("invoice.receipt_details")}
-          />
-          <InvoicePdfPreview
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          />
-          {renderModal()}
-        </>
-      )}
+      <InvoiceEmailHeader
+        {...receiptData?.emailHeader}
+        contractStatus={collectiveInvoiceDetails?.emailStatus}
+        contentName={receiptData?.emailHeader.contentName}
+        onEmailSend={handleEmailSend}
+        loading={loading}
+        onDownload={handleDonwload}
+        onPrint={handlePrint}
+        onSendViaPost={handleSendByPost}
+        activeButtonId={activeButtonId}
+        title={translate("invoice.receipt_details")}
+      />
+
+      <InvoicePdfPreview
+        mergedPdfFileUrl={mergedPdfUrl}
+        isPdfRendering={isPdfRendering}
+      />
+
+      {renderModal()}
     </>
   );
 };

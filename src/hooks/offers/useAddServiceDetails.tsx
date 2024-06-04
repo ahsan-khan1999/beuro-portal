@@ -113,6 +113,7 @@ export const useAddServiceDetails = (
       setValue(`serviceDetail.${index}.count`, 0);
     }
   };
+
   const generateTotalPrice = (index: number) => {
     const data = getValues();
     setTimeout(() => {
@@ -278,6 +279,7 @@ export const useAddServiceDetails = (
       offerDetails?.serviceDetail?.serviceDetail[index]?.discount
     );
   };
+
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
     const updatedService = serviceType.map((type, i) =>
       i === index ? newServiceType : type

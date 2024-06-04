@@ -198,17 +198,11 @@ const LeadsDetailsData = ({
 
       <div className="w-full break-all flex">
         <div className={`max-w-[330px] w-full hidden xlg:block`}></div>
-        {/* {loading ? (
-          <div className="flex justify-center items-center w-full">
-             <CustomLoader />
-          </div>
-        ) : ( */}
         <div className="flex flex-col gap-y-5 w-full">
           {renderComponent.map((component, index) => (
             <div key={index}>{component}</div>
           ))}
         </div>
-        {/* )} */}
       </div>
     </div>
   );

@@ -67,10 +67,15 @@ const InvoiceDetails = () => {
   );
 
   const shouldShowPendingInvoice =
-    !loading &&
-    !loadingInvoice &&
-    !loadingReceipt &&
-    !collectiveInvoice?.length;
+    activeTab === "invoice"
+      ? ((!loading || !loadingInvoice || !loadingReceipt) &&
+          !collectiveInvoice?.length &&
+          !collectiveReciept?.length) ||
+        !collectiveReciept?.map((item) => item.invoiceStatus !== "Paid")
+      : false;
+
+  console.log(collectiveInvoice, "collectiveInvoice");
+  console.log(collectiveReciept, "collectiveReciept");
 
   return (
     <>

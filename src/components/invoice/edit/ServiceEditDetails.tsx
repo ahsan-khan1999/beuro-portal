@@ -1,6 +1,5 @@
 import React from "react";
 import { Form } from "@/base-components/form/form";
-import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
 import { useServiceInvoiceEditDetail } from "@/hooks/invoice/useServiceInvoiceEditDetail";
 import { EditComponentsType } from "@/enums/invoice";
@@ -24,7 +23,7 @@ const ServiceEditDetails = ({
   } = useServiceInvoiceEditDetail({ handleNext });
 
   return (
-    <FormCard>
+    <>
       <div className="flex justify-between items-center bg-[#C50EE0] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
           {translate("offers.service_details.main_heading")} (
@@ -38,21 +37,21 @@ const ServiceEditDetails = ({
         </button>
       </div>
 
-      <div className="py-3 px-6">
-        <Form
-          formFields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          className={`${defaultClassName}`}
-        />
-      </div>
+      {/* <div className="py-3 px-6"> */}
+      <Form
+        formFields={fields}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+        className={`${defaultClassName}`}
+      />
+      {/* </div> */}
       {errors?.taxAmount && (
         <span className="mt-[3px] text-red text-sm">
           {translate(errors?.taxAmount?.message as any)}
         </span>
       )}
-    </FormCard>
+    </>
   );
 };
 
