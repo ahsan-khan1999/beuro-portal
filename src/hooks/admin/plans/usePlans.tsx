@@ -23,6 +23,7 @@ export default function usePlans() {
     text: "",
     type: "",
   });
+
   const router = useRouter();
   const { t: translate } = useTranslation();
   const [currentPageRows, setCurrentPageRows] = useState<Plan[]>([]);
@@ -30,6 +31,7 @@ export default function usePlans() {
 
   const totalItems = totalCount;
   const itemsPerPage = 10;
+
   useEffect(() => {
     // dispatch(set(DEFAULT_CUSTOMER))
     dispatch(readPlan({ params: { filter: filter, page: 1, size: 10 } })).then(
@@ -51,6 +53,7 @@ export default function usePlans() {
       }
     });
   };
+
   const handleFilterChange = (filter: FilterType) => {
     dispatch(
       readPlan({ params: { filter: filter, page: currentPage, size: 10 } })
@@ -83,6 +86,7 @@ export default function usePlans() {
     const filteredPlan = plan?.find(
       (item) => item?.refID === modal?.data?.refId?.refId
     );
+
     const res = await dispatch(deletePlan({ data: { id: filteredPlan?.id } }));
     dispatch(
       readPlan({ params: { filter: filter, page: currentPage, size: 10 } })
@@ -94,6 +98,7 @@ export default function usePlans() {
     onClose();
     if (res?.payload) router.push("/admin/plans");
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -120,6 +125,7 @@ export default function usePlans() {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return {
     currentPageRows,
     totalItems,
@@ -131,6 +137,7 @@ export default function usePlans() {
     loading,
     handleDelete: handleConfirmDeletion,
     renderModal,
-    currentPage
+    currentPage,
+    totalCount,
   };
 }

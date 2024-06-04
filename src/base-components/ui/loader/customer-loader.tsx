@@ -1,11 +1,6 @@
 // import { LoaderType } from "@/types";
 import { CSSProperties } from "react";
-import { PuffLoader } from "react-spinners";
 import { CompanyLogoLoader } from "./company-logo-loader";
-
-const override: CSSProperties = {
-  border: "4px",
-};
 
 export default function CustomLoader() {
   return (
@@ -19,7 +14,7 @@ export default function CustomLoader() {
         wrapperStyle={{}}
         wrapperClass=""
       /> */}
-      {/* <PuffLoader color="#4A13E7" size={120} cssOverride={override} /> */}
+
       <CompanyLogoLoader />
     </div>
   );

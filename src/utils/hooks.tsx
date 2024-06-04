@@ -11,6 +11,7 @@ import { EmptyStateType, ModalType } from "@/enums/ui";
 import { getUser } from "./auth.util";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
 
 export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   callback: ButtonClickFunction
@@ -309,6 +310,31 @@ export const useEmptyStates = (
   const lookup = {
     [EmptyStateType.hasData]: CurrentComponent,
     [EmptyStateType.loading]: <CustomLoader />,
+    [EmptyStateType.hasNoData]: (
+      <div className="mt-6">
+        <NoDataEmptyState />
+      </div>
+    ),
+  };
+  // const data = useMemo(() => lookup[isEmpty], [isEmpty]);
+  const data = lookup[isEmpty];
+  return data;
+};
+
+export const useAdminEmptyStates = (
+  CurrentComponent: JSX.Element,
+  condition: boolean,
+  isLoading: boolean
+) => {
+  const isEmpty: EmptyStateType = isLoading
+    ? EmptyStateType.loading
+    : condition
+    ? EmptyStateType.hasData
+    : EmptyStateType.hasNoData;
+
+  const lookup = {
+    [EmptyStateType.hasData]: CurrentComponent,
+    [EmptyStateType.loading]: <CustomPuffLoader />,
     [EmptyStateType.hasNoData]: (
       <div className="mt-6">
         <NoDataEmptyState />

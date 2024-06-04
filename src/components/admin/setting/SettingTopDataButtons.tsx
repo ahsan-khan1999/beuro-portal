@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SettingLayout from "./SettingLayout";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const SettingTopDataButtons = ({
   switchDetails,
@@ -10,11 +11,32 @@ const SettingTopDataButtons = ({
   setSwitchDetails: (item: number) => void;
 }) => {
   const { t: translate } = useTranslation();
+  const [selectedTab, setSelectedTab] = useState<number | null>(switchDetails);
+
+  const router = useRouter();
   const buttonsData: string[] = [
     `${translate("admin.settings.tabs_heading.account")}`,
     `${translate("admin.settings.tabs_heading.payment")}`,
     `${translate("admin.settings.tabs_heading.mail")}`,
   ];
+
+  const tab = router.query.tab;
+
+  useEffect(() => {
+    if (tab && !Array.isArray(tab) && !isNaN(Number(tab))) {
+      setSwitchDetails(parseInt(tab as string, 10));
+      setSelectedTab(parseInt(tab as string, 10));
+    } else {
+      setSwitchDetails(0);
+      setSelectedTab(0);
+    }
+  }, [router.query]);
+
+  const handleTabClick = (index: number) => {
+    setSelectedTab(index);
+    setSwitchDetails(index);
+    router.push(`?tab=${index}`, undefined, { shallow: true });
+  };
 
   return (
     <SettingLayout>
@@ -27,7 +49,7 @@ const SettingTopDataButtons = ({
                 : ""
             }`}
             key={index}
-            onClick={() => setSwitchDetails(index)}
+            onClick={() => handleTabClick(index)}
           >
             {item}
           </button>

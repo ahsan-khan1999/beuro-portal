@@ -5,6 +5,8 @@ import {
 } from "@/api/slices/company/companySlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { AreYouSureMakeAccountFree } from "@/base-components/ui/modals1/SueAccountFree";
 import WarningModal from "@/base-components/ui/modals1/WarningModal";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -61,8 +63,26 @@ export default function useCustomerDetailAdmin() {
       dispatch(updateModalType({ type: ModalType.ARE_YOU_COMPANY }));
   };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
+  const deleteHandler = () => {
+    dispatch(
+      updateModalType({
+        type: ModalType.CONFIRM_DELETION,
+        data: { refId: companyDetails?.refID, id: companyDetails?.id },
+      })
+    );
+  };
+
+  const handleDelete = () => {
+    dispatch(
+      updateModalType({
+        type: ModalType.INFO_DELETED,
+      })
+    );
+  };
+
+  const routeHandler = () => {
+    // dispatch(deleteCustomer({ customerDetails, router, setError, translate }));
+    console.log("delete company");
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -85,6 +105,26 @@ export default function useCustomerDetailAdmin() {
         route={route}
       />
     ),
+    [ModalType.CONFIRM_DELETION]: (
+      <DeleteConfirmation_1
+        onClose={onClose}
+        handleDelete={handleDelete}
+        modelHeading={translate("common.modals.customer_confirm")}
+        subHeading={translate("common.modals.customer_ID")}
+      />
+    ),
+    [ModalType.INFO_DELETED]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_customer")}
+        routeHandler={routeHandler}
+        loading={loading}
+      />
+    ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   const handleStatusChange = async (custmerStatus: string) => {
@@ -123,5 +163,6 @@ export default function useCustomerDetailAdmin() {
     handleStatusChange,
     loading,
     handleMakeAccountFree,
+    deleteHandler,
   };
 }

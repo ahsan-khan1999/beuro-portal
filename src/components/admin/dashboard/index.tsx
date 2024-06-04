@@ -8,18 +8,11 @@ import activeSubscribersIcon from "@/assets/svgs/leads.svg";
 import pendingCompaniesIcon from "@/assets/svgs/pending-companies.svg";
 import customersIcon from "@/assets/svgs/customers-card.svg";
 import { useTranslation } from "next-i18next";
-import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
-import { Dashboard, FilterType } from "@/types";
+import { FilterType } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readAdminDashboard } from "@/api/slices/authSlice/auth";
-import customerIcon from "@/assets/pngs/customers.png";
-import leadsPngIcon from "@/assets/pngs/leads.png";
-import offersPngIcon from "@/assets/pngs/offers.png";
-import invoiceIcon from "@/assets/pngs/invoice.png";
-interface ActionType {
-  type: string;
-  payload: Dashboard;
-}
+import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
+
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
@@ -27,29 +20,31 @@ const AdminDashboard = () => {
   const [filter, setFilter] = useState<FilterType>({
     month: 1,
   });
-  const [pieData, setPieData] = useState({
-    datasets: [
-      {
-        data: [40, 10, 10, 10, 15, 15],
-        backgroundColor: [
-          "#FE9244",
-          "#FF376F",
-          "#4A13E7",
-          "#45C769",
-          "#7B18FF",
-          "#221177",
-        ],
-      },
-    ],
-    labels: [
-      `${translate("dashboard_detail.charts_labels.website")}`,
-      `${translate("dashboard_detail.charts_labels.google")}`,
-      `${translate("dashboard_detail.charts_labels.facebook")}`,
-      `${translate("dashboard_detail.charts_labels.insta")}`,
-      `${translate("dashboard_detail.charts_labels.pinterest")}`,
-      `${translate("dashboard_detail.charts_labels.whatsapp")}`,
-    ],
-  });
+
+  // const [pieData, setPieData] = useState({
+  //   datasets: [
+  //     {
+  //       data: [40, 10, 10, 10, 15, 15],
+  //       backgroundColor: [
+  //         "#FE9244",
+  //         "#FF376F",
+  //         "#4A13E7",
+  //         "#45C769",
+  //         "#7B18FF",
+  //         "#221177",
+  //       ],
+  //     },
+  //   ],
+  //   labels: [
+  //     `${translate("dashboard_detail.charts_labels.website")}`,
+  //     `${translate("dashboard_detail.charts_labels.google")}`,
+  //     `${translate("dashboard_detail.charts_labels.facebook")}`,
+  //     `${translate("dashboard_detail.charts_labels.insta")}`,
+  //     `${translate("dashboard_detail.charts_labels.pinterest")}`,
+  //     `${translate("dashboard_detail.charts_labels.whatsapp")}`,
+  //   ],
+  // });
+
   const dashboardCards = [
     {
       icon: activeSubscribersIcon,
@@ -88,7 +83,7 @@ const AdminDashboard = () => {
       readAdminDashboard({ params: { filter: { month: query?.month } } })
     );
   };
-  // Sample data for the pie chart
+
   const data = {
     datasets: [
       {
@@ -187,30 +182,36 @@ const AdminDashboard = () => {
         handleFilterChange={handleFilterChange}
       />
 
-      <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-5">
-        {dashboardCards.map((item, index) => {
-          return (
-            <DashboardCard
-              key={index}
-              icon={item.icon}
-              alt={item.alt}
-              backgroundColor={item.backgroundColor}
-              title={item.title}
-              id={item.id as string}
-              salePercent={item.salePercent}
-              chartPointColor={item.chartPointColor}
-            />
-          );
-        })}
-      </div>
-      <div className="my-[60px] grid-cols-1 grid lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5">
-        <div className="xl:col-span-2">
-          <WavesChart datatest={datatest} />
-        </div>
-        <div className="xl:col-span-1">
-          <PieChart data={data} />
-        </div>
-      </div>
+      {adminDashboard !== null ? (
+        <>
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-5">
+            {dashboardCards.map((item, index) => {
+              return (
+                <DashboardCard
+                  key={index}
+                  icon={item.icon}
+                  alt={item.alt}
+                  backgroundColor={item.backgroundColor}
+                  title={item.title}
+                  id={item.id as string}
+                  salePercent={item.salePercent}
+                  chartPointColor={item.chartPointColor}
+                />
+              );
+            })}
+          </div>
+          <div className="my-[60px] grid-cols-1 grid lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-5">
+            <div className="xl:col-span-2">
+              <WavesChart datatest={datatest} />
+            </div>
+            <div className="xl:col-span-1">
+              <PieChart data={data} />
+            </div>
+          </div>
+        </>
+      ) : (
+        <CustomPuffLoader />
+      )}
     </Layout>
   );
 };

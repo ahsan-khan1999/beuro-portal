@@ -9,7 +9,7 @@ const SettingProfile = () => {
     useSettingProfile();
 
   return (
-    <FormCard containerClassName="p-6">
+    <FormCard containerClassName="py-3 px-6">
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

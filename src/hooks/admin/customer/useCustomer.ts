@@ -52,7 +52,6 @@ export default function useCustomer() {
     companyStatus: string,
     type: string
   ) => {
-    
     if (type === "customer") {
       const currentItem = currentPageRows.find((item) => item.id === id);
       if (!currentItem || currentItem.status !== companyStatus) {
@@ -128,6 +127,7 @@ export default function useCustomer() {
     handleFilterChange,
     loading,
     currentPage,
+    totalCount,
     handleStatusChange,
   };
 }

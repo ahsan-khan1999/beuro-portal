@@ -4,14 +4,13 @@ import {
   updateContactSupport,
 } from "@/api/slices/contactSupport/contactSupportSlice";
 import { FiltersDefaultValues } from "@/enums/static";
-import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { FilterType } from "@/types";
 import { DEFAULT_CONTACT_SUPPORT, staticEnums } from "@/utils/static";
 import { useEffect, useState } from "react";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { useRouter } from "next/router";
 import { useQueryParams } from "@/utils/hooks";
+import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 export default function useSupportRequest() {
@@ -28,7 +27,6 @@ export default function useSupportRequest() {
     text: FiltersDefaultValues.None,
   });
 
-  const router = useRouter();
   const params = useQueryParams();
   const dispatch = useAppDispatch();
   const page = params?.page as unknown as number;
@@ -58,11 +56,20 @@ export default function useSupportRequest() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  // const MODAL_CONFIG: ModalConfigType = {
-  //   [ModalType.CREATION]: (
-  //     <CreationCrea
-  //   )
-  // };
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CREATION]: (
+      <CreationCreated
+        heading={translate("common.are_you_sure_modal.success")}
+        subHeading={translate("common.modals.update_success")}
+        onClose={onClose}
+        route={onClose}
+      />
+    ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
 
   const handleStatusChange = async (
     id: string,
@@ -96,10 +103,6 @@ export default function useSupportRequest() {
       }
     }
   };
-
-  // const renderModal = () => {
-  //   return MODAL_CONFIG[modal.type] || null;
-  // };
 
   useEffect(() => {
     // const updatedStatus =
@@ -145,5 +148,7 @@ export default function useSupportRequest() {
     loading,
     currentPage,
     handleStatusChange,
+    totalCount,
+    renderModal,
   };
 }

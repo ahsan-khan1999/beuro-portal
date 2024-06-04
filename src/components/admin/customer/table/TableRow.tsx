@@ -74,7 +74,7 @@ const TableRow = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(120px,_120px)_minmax(50px,_50px)]">
+            <div className="gap-x-4 grid grid-cols-[minmax(120px,_120px)_minmax(50px,_50px)]">
               {/* <span className="py-4 flex items-center">
                 <div
                   className={`${

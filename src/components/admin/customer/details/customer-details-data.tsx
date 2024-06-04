@@ -1,8 +1,8 @@
+import React from "react";
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { CustomersAdmin } from "@/types/admin/customer";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
-import React from "react";
 
 const CustomerDetailsData = ({
   customerDetail,
@@ -13,7 +13,7 @@ const CustomerDetailsData = ({
   return (
     <LeadsCardLayout>
       <div className="my-5 p-6">
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("admin.customers_details.customer_details.owner_name")}
@@ -81,10 +81,10 @@ const CustomerDetailsData = ({
         </div>
 
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">
+          <h4 className="text-[#1E1E1E] text-base font-semibold mb-[10px]">
             {translate("admin.customers_details.customer_details.sub_heading")}
           </h4>
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate(

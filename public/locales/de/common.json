@@ -291,7 +291,7 @@
       "customers": "Kunden",
       "plans": "Pläne",
       "payments": "Zahlungen",
-      "support_requests": "Unterstützunganfragen",
+      "support_requests": "Support",
       "Settings": "Einstellungen"
     }
   },
@@ -1643,7 +1643,7 @@
         "main_heading": "Kundendetails",
         "make_button_unchecked": "Konto kostenlos erstellen",
         "make_button_checked": "Unendlich erstellen",
-        "customer_id": "ID",
+        "customer_id": "Kunde ID",
         "role": "Rolle",
         "no_of_employee": "Anzahl der Mitarbeiter",
         "plan": "Plan",

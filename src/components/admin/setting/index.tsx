@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout";
 import SettingTopDataButtons from "./SettingTopDataButtons";
 import MailSetting from "./mail-setting";
 import SettingProfile from "./profile-form";
 import PaymentSettings from "./payment-settings";
-import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const AdminSettings = () => {
-  const [switchDetails, setSwitchDetails] = useState(0);
+  const { query } = useRouter();
+  const tab = query.tab;
+  const [switchDetails, setSwitchDetails] = useState<number>(0);
 
-  const { t: translate } = useTranslation();
+  useEffect(() => {
+    if (tab && !Array.isArray(tab) && !isNaN(Number(tab))) {
+      setSwitchDetails(parseInt(tab as string, 10));
+    } else {
+      setSwitchDetails(0);
+    }
+  }, [query]);
 
   return (
     <>

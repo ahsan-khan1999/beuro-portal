@@ -6,7 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useCustomer from "@/hooks/admin/customer/useCustomer";
-import { useEmptyStates } from "@/utils/hooks";
+import { useAdminEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Customers() {
@@ -21,14 +21,15 @@ export default function Customers() {
     setFilter,
     currentPage,
     handleStatusChange,
+    totalCount,
   } = useCustomer();
 
-  const CurrentComponent = useEmptyStates(
+  const CurrentComponent = useAdminEmptyStates(
     <TableRow
       currentPageRows={currentPageRows}
       onStatusChange={handleStatusChange}
     />,
-    currentPageRows?.length > 0,
+    totalCount !== 0,
     loading
   );
 

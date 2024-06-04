@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readDashboard } from "@/api/slices/authSlice/auth";
 import { FilterType } from "@/types";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { getCurrentMonth } from "@/utils/utility";
 import { DashboardActionType } from "@/types/dashboard";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
