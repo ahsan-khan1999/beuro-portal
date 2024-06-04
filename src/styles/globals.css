@@ -647,17 +647,15 @@ input[type="date"] {
 }
 
 .img_loader {
-  animation: puff 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  animation: puff 1s infinite;
 }
 
 @keyframes puff {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
+  0% {
+    transform: scale(0.1);
   }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.8;
+
+  100% {
+    transform: scale(1.5);
   }
 }
