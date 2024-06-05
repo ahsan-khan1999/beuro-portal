@@ -102,6 +102,7 @@ const OfferPdfPreview = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+
   const disscountTableRow = {
     serviceTitle: "Rabatt",
     price: Number(serviceItemFooter?.discount),
@@ -140,9 +141,7 @@ const OfferPdfPreview = ({
             }}
           >
             <ContactAddress {...{ ...contactAddress }} />
-
             <AddressDetails {...{ address, header, workDates, time }} />
-
             <ServiceTableHederRow isDiscount={isDiscount} />
             {serviceItem?.map((item, index, arr) => (
               <ServiceTableRow
@@ -169,7 +168,8 @@ const OfferPdfPreview = ({
             <ServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}
-            />ContentPdfPreview
+            />
+            ContentPdfPreview
           </View>
           <Footer
             {...{

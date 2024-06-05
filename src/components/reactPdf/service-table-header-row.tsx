@@ -54,16 +54,20 @@ export const ServiceTableHederRow = ({
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerRow}>
-        <Text style={styles.headerTitle}>{"Dienstleistung / Produkt"}</Text>
-        <Text style={styles.headerDescription}>{"Beschreibung"}</Text>
+        <Text style={styles.headerTitle}>{translate("pdf.service")}</Text>
+        <Text style={styles.headerDescription}>
+          {translate("pdf.description")}
+        </Text>
 
         <View style={styles.priceHeader}>
-          <Text style={styles.headerText}>{"Anzahl"}</Text>
-          <Text style={styles.headerText}>{"Einheit"}</Text>
-          <Text style={styles.headerText}>{"Preis"}</Text>
+          <Text style={styles.headerText}>{translate("pdf.count")}</Text>
+          <Text style={styles.headerText}>{translate("pdf.unit")}</Text>
+          <Text style={styles.headerText}>{translate("pdf.price")}</Text>
 
-          {isDiscount && <Text style={styles.headerText}>{"Rabatt"}</Text>}
-          <Text style={styles.headerText}>{"Gesamt"}</Text>
+          {isDiscount && (
+            <Text style={styles.headerText}>{translate("pdf.discount")}</Text>
+          )}
+          <Text style={styles.headerText}>{translate("pdf.total")}</Text>
         </View>
       </View>
     </View>

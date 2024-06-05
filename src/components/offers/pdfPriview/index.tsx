@@ -9,6 +9,7 @@ const OfferPdf = dynamic(
     //  loading: () => <CustomLoader />
   }
 );
+
 const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
   ssr: false,
 });

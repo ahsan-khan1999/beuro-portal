@@ -183,14 +183,14 @@ export const ServicesTotalAmount = ({
       <View style={styles.contentContainer}>
         <View style={styles.topRow}>
           <View style={styles.subSection}>
-            <Text style={styles.text}>Zwischensumme: </Text>
+            <Text style={styles.text}>{translate("pdf.sub_total")}: </Text>
             <Text style={styles.text}>
               {Number(subTotal).toFixed(2)} {systemSettings?.currency}
             </Text>
           </View>
           {isDiscount && (
             <View style={styles.subSection}>
-              <Text style={styles.text}>Rabatt: </Text>
+              <Text style={styles.text}>{translate("pdf.discount")}: </Text>
               <Text style={styles.discountDescriptionText}>
                 {discountDescription}
               </Text>
@@ -203,7 +203,9 @@ export const ServicesTotalAmount = ({
           )}
           {isDiscount && (
             <View style={styles.subSection}>
-              <Text style={styles.text}>Gesamtsumme nach Rabatt : </Text>
+              <Text style={styles.text}>
+                {translate("pdf.total_after_discount")}:{" "}
+              </Text>
               <Text style={styles.text}>
                 {Number(totalAfterDiscount).toFixed(2)}{" "}
                 {systemSettings?.currency}
@@ -222,7 +224,9 @@ export const ServicesTotalAmount = ({
           {(isOfferPDF || isContractPDF) &&
             (!isShowExtraAmount ? (
               <View style={styles.totalSection}>
-                <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                <Text style={styles.whiteText}>
+                  {translate("pdf.grand_total")}:
+                </Text>
                 <Text style={styles.whiteText}>
                   {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                 </Text>
@@ -230,7 +234,9 @@ export const ServicesTotalAmount = ({
             ) : (
               <View>
                 <View style={styles.subSection}>
-                  <Text style={styles.text}>Gesamtsumme:</Text>
+                  <Text style={styles.text}>
+                    {translate("pdf.grand_total")}:
+                  </Text>
                   <Text style={styles.text}>
                     {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                   </Text>
@@ -253,7 +259,9 @@ export const ServicesTotalAmount = ({
           {isMainInvoice && (
             <View>
               <View style={styles.totalSection}>
-                <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                <Text style={styles.whiteText}>
+                  {translate("pdf.grand_total")}:
+                </Text>
                 <Text style={styles.whiteText}>
                   {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                 </Text>
@@ -261,7 +269,9 @@ export const ServicesTotalAmount = ({
               {Number(invoiceAmount) > 0 && (
                 <View>
                   <View style={styles.paidAmountSection}>
-                    <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
+                    <Text style={styles.text}>
+                      {translate("pdf.paid_amount")}:
+                    </Text>
                     <Text style={styles.text}>
                       -{Number(invoiceAmount).toFixed(2)}
                       {systemSettings?.currency}
@@ -269,7 +279,9 @@ export const ServicesTotalAmount = ({
                   </View>
                   {Number(unPaidAmount) > 0 && (
                     <View style={styles.subSection}>
-                      <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
+                      <Text style={styles.text}>
+                        {translate("pdf.unpaid_amount")}:
+                      </Text>
                       <Text style={styles.text}>
                         {unPaidAmount.toFixed(2)} {systemSettings?.currency}
                       </Text>
@@ -283,7 +295,9 @@ export const ServicesTotalAmount = ({
           {isSubInvoicePdf &&
             (!isShowExtraAmount ? (
               <View style={styles.totalSection}>
-                <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                <Text style={styles.whiteText}>
+                  {translate("pdf.grand_total")}:
+                </Text>
                 <Text style={styles.whiteText}>
                   {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                 </Text>
@@ -291,21 +305,27 @@ export const ServicesTotalAmount = ({
             ) : (
               <View>
                 <View style={styles.dueAmountSection}>
-                  <Text style={styles.text}>{"Fälliger Betrag"}:</Text>
+                  <Text style={styles.text}>
+                    {translate("pdf.due_amount")}:
+                  </Text>
                   <Text style={styles.text}>
                     {Number(dueAmount).toFixed(2)} {systemSettings?.currency}
                   </Text>
                 </View>
                 <View>
                   <View style={styles.totalSection}>
-                    <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                    <Text style={styles.whiteText}>
+                      {translate("pdf.grand_total")}:
+                    </Text>
                     <Text style={styles.whiteText}>
                       {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                     </Text>
                   </View>
                   {Number(invoiceAmount) > 0 && (
                     <View style={styles.subInvoicepaidAmountSection}>
-                      <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
+                      <Text style={styles.text}>
+                        {translate("pdf.paid_amount")}:
+                      </Text>
                       <Text style={styles.text}>
                         -{Number(invoiceAmount).toFixed(2)}
                         {systemSettings?.currency}
@@ -314,7 +334,9 @@ export const ServicesTotalAmount = ({
                   )}
                   {Number(unPaidAmount) > 0 && (
                     <View style={styles.paidAmountSection}>
-                      <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
+                      <Text style={styles.text}>
+                        {translate("pdf.unpaid_amount")}:
+                      </Text>
                       <Text style={styles.text}>
                         {unPaidAmount.toFixed(2)} {systemSettings?.currency}
                       </Text>
@@ -327,7 +349,9 @@ export const ServicesTotalAmount = ({
           {isReceiptPdf &&
             (!isShowExtraAmount ? (
               <View style={styles.totalSection}>
-                <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                <Text style={styles.whiteText}>
+                  {translate("pdf.grand_total")}:
+                </Text>
                 <Text style={styles.whiteText}>
                   {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                 </Text>
@@ -336,9 +360,11 @@ export const ServicesTotalAmount = ({
               <View>
                 {Number(invoiceAmount) > 0 && (
                   <View style={styles.receiptPaidAmountSection}>
-                    <Text style={styles.text}>{"Bezahlt Betrag"}:</Text>
+                    <Text style={styles.text}>
+                      {translate("pdf.paid_amount")}:
+                    </Text>
                     <Text style={styles.paidText}>
-                      {"Der Betrag, den Sie beim letzten Mal bezahlt haben."}
+                      {translate("pdf.amount_paid_last")}
                     </Text>
                     <Text style={styles.text}>
                       -{Number(dueAmount).toFixed(2)}
@@ -348,7 +374,9 @@ export const ServicesTotalAmount = ({
                 )}
                 <View>
                   <View style={styles.totalSection}>
-                    <Text style={styles.whiteText}>Gesamtsumme:</Text>
+                    <Text style={styles.whiteText}>
+                      {translate("pdf.grand_total")}:
+                    </Text>
                     <Text style={styles.whiteText}>
                       {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                     </Text>
@@ -356,7 +384,7 @@ export const ServicesTotalAmount = ({
                   {Number(invoiceAmount) > 0 && (
                     <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>
-                        {"Bezahlte Gesamtbetrag"}:
+                        {translate("pdf.total_paid_amount")}:
                       </Text>
                       <Text style={styles.text}>
                         -{Number(invoiceAmount).toFixed(2)}
@@ -366,7 +394,9 @@ export const ServicesTotalAmount = ({
                   )}
                   {Number(unPaidAmount) > 0 && (
                     <View style={styles.subSection}>
-                      <Text style={styles.text}>{"Unbezahlter Betrag"}:</Text>
+                      <Text style={styles.text}>
+                        {translate("pdf.unpaid_amount")}:
+                      </Text>
                       <Text style={styles.text}>
                         {unPaidAmount.toFixed(2)} {systemSettings?.currency}
                       </Text>
@@ -388,12 +418,10 @@ export const ServicesTotalAmount = ({
                   color: "#000",
                 }}
               >
-                Allgemeine Geschäftsbedingungen
+                {translate("pdf.general_terms")}
               </Text>
               <Text style={styles.discountDescription}>
-                Unten finden Sie weitere Informationen zu den Richtlinien und
-                Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden
-                Geschäftsbedingungen zu verstehen.
+                {translate("pdf.terms_des")}
               </Text>
             </View>
           )}

@@ -13,6 +13,7 @@ export const Header = ({
 }: Partial<DocumentHeaderDetailsProps>) => {
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
   const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
+
   return (
     <View
       style={{
@@ -55,9 +56,9 @@ export const Header = ({
             }}
           >
             {(fileType &&
-              HeaderLabelNr[fileType as keyof typeof HeaderLabel]) ||
-              "Angebot "}
-            Nr :
+              translate(HeaderLabelNr[fileType as keyof typeof HeaderLabel])) ||
+              translate("pdf.label_nr_offer")}
+            {translate("pdf.no")}:
           </Text>
           <Text
             style={{
@@ -86,9 +87,10 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            {(fileType && HeaderLabel[fileType as keyof typeof HeaderLabel]) ||
-              "Erstell"}
-            datum :
+            {(fileType &&
+              translate(HeaderLabel[fileType as keyof typeof HeaderLabel])) ||
+              translate("pdf.label_contract")}{" "}
+            {translate("pdf.date")}:
           </Text>
           <Text
             style={{
@@ -111,7 +113,7 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            Erstellt von :
+            {translate("pdf.created_by")} :
           </Text>
           <Text
             style={{
