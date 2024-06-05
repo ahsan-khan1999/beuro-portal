@@ -92,7 +92,7 @@ const TableRow = ({
                 <DropDown
                   items={items}
                   onItemSelected={(status) =>
-                    onStatusChange(item.id, status, "customer")
+                    onStatusChange(item.id, status, "admin_customer")
                   }
                   selectedItem={translate(`customer_status.${item.status}`)}
                   dropDownClassName={`w-full rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-1 ${

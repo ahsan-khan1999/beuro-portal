@@ -94,6 +94,7 @@ const OfferPdfPreview = ({
   emailTemplateSettings,
   systemSetting,
   showContractSign,
+  lang,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates, time } = data?.movingDetails || {};
@@ -127,11 +128,13 @@ const OfferPdfPreview = ({
       : false || false;
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
+  console.log(lang, "language offer");
+
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
       <Document title={data?.headerDetails?.offerNo || ""}>
         <Page style={styles.body} dpi={72}>
-          <Header {...headerDetails} />
+          <Header {...headerDetails} language={lang} />
           <View
             style={{
               position: "absolute",

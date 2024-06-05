@@ -10,9 +10,48 @@ export const Header = ({
   offerNo,
   fileType,
   isReverseLogo,
+  language,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
   const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
+
+  const langContent = {
+    en: {
+      no: "No",
+      created_by: "Created By",
+      offer: "Offer ",
+      create: "Create",
+      date: "date",
+      HeaderLabelNr: {
+        offer: "Offer ",
+        contract: "Contract ",
+        invoice: "Invoice ",
+        receipt: "Receipt ",
+      },
+      HeaderLabel: {
+        contract: "Contract",
+        invoice: "Invoice",
+        receipt: "Receipt",
+      },
+    },
+    de: {
+      no: "Nr",
+      created_by: "Erstellt von",
+      create: "Erstell",
+      date: "datum",
+      HeaderLabelNr: {
+        offer: "Angebot ",
+        contract: "Vertrag ",
+        invoice: "Rechnung ",
+        receipt: "Quittung ",
+      },
+      HeaderLabel: {
+        contract: "Vertrag",
+        invoice: "Rechnung",
+        receipt: "Quittung",
+      },
+    },
+  };
 
   return (
     <View
@@ -56,9 +95,11 @@ export const Header = ({
             }}
           >
             {(fileType &&
-              translate(HeaderLabelNr[fileType as keyof typeof HeaderLabel])) ||
-              translate("pdf.label_nr_offer")}
-            {translate("pdf.no")}:
+              langContent[language]?.HeaderLabelNr[
+                fileType as keyof typeof HeaderLabel
+              ]) ||
+              langContent[language]?.offer}
+            {langContent[language]?.no}:{" "}
           </Text>
           <Text
             style={{
@@ -88,9 +129,11 @@ export const Header = ({
             }}
           >
             {(fileType &&
-              translate(HeaderLabel[fileType as keyof typeof HeaderLabel])) ||
-              translate("pdf.label_contract")}{" "}
-            {translate("pdf.date")}:
+              langContent[language]?.HeaderLabel[
+                fileType as keyof typeof HeaderLabel
+              ]) ||
+              langContent[language]?.create}{" "}
+            {langContent[language]?.date}:{" "}
           </Text>
           <Text
             style={{
@@ -113,7 +156,8 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            {translate("pdf.created_by")} :
+            {/* {translate("pdf.created_by")} : */}
+            {langContent[language]?.created_by}:{" "}
           </Text>
           <Text
             style={{
