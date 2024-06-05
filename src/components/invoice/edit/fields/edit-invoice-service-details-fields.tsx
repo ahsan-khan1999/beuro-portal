@@ -193,9 +193,9 @@ export const EditInvoiceServiceDetailsFormField: GenerateInvoiceServiceFormField
                             value: item?.serviceName,
                           })) || [],
                         control,
-                        value:
-                          offerDetails?.serviceDetail?.serviceDetail[i]
-                            ?.serviceTitle,
+                        // value:
+                        //   offerDetails?.serviceDetail?.serviceDetail[i]
+                        //     ?.serviceTitle,
                         onItemChange: onCustomerSelect,
                         fieldIndex: i,
                       },
