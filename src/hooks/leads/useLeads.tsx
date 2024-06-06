@@ -341,6 +341,7 @@ const useLeads = () => {
         );
 
         if (res?.payload) {
+
           let index = currentPageRows.findIndex(
             (item) => item.id === res.payload?.id
           );

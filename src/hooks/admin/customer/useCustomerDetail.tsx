@@ -29,6 +29,16 @@ export default function useCustomerDetailAdmin() {
 
   const id = router.query.customer;
 
+  useEffect(() => {
+    if (id) {
+      dispatch(readCompanyDetail({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setCompanyDetails(res.payload));
+        }
+      );
+    }
+  }, [id]);
+
   const handleBack = () => {
     router.pathname = "/admin/customers";
     delete router.query["customer"];
@@ -138,16 +148,6 @@ export default function useCustomerDetailAdmin() {
     );
     if (res?.payload) handleDefaultModal();
   };
-
-  useEffect(() => {
-    if (id) {
-      dispatch(readCompanyDetail({ params: { filter: id } })).then(
-        (res: CustomerPromiseActionType) => {
-          dispatch(setCompanyDetails(res.payload));
-        }
-      );
-    }
-  }, [id]);
 
   return {
     companyDetails,

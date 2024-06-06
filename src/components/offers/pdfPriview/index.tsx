@@ -18,6 +18,7 @@ import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const OfferPdfPriview = () => {
   const {
@@ -39,6 +40,8 @@ const OfferPdfPriview = () => {
     systemSetting,
     offerDetails,
   } = useOfferPdf();
+
+  const { currentLanguage } = useAppSelector((state) => state.global);
 
   const { t: translate } = useTranslation();
   const MODAL_CONFIG: ModalConfigType = {
@@ -90,6 +93,7 @@ const OfferPdfPriview = () => {
             showContractSign={true}
             pdfFile={pdfFile}
             setPdfFile={setPdfFile}
+            lang={currentLanguage}
           />
           <OfferPdfDownload
             data={offerData}

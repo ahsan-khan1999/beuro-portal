@@ -881,6 +881,7 @@ export interface DocumentHeaderDetailsProps {
   fileType?: "contract" | "invoice" | "receipt";
   companyName?: string;
   isReverseLogo?: boolean;
+  language?: string;
 }
 
 export interface ProductItemFooterProps {
@@ -1146,6 +1147,7 @@ export interface PdfPreviewProps {
   isPdfRendering?: boolean;
   showContractSign?: boolean;
   companyName?: string;
+  lang?: string | undefined;
 }
 
 export interface PdfPreviewFooterProps {

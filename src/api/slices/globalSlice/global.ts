@@ -13,6 +13,7 @@ const initialState: GlobalState = {
     type: ModalType.NONE,
     data: "",
   },
+  currentLanguage: "en",
 };
 
 // file upload connect with the firebase
@@ -87,7 +88,11 @@ const globalSlice = createSlice({
       state.modal.type = action.payload.type;
       state.modal.data = action.payload.data;
     },
+    updateCurrentLanguage: (state, action) => {
+      state.currentLanguage = action.payload;
+    },
   },
+
   extraReducers: (builder) => {
     builder.addCase(uploadFileToFirebase.pending, (state) => {
       state.loading = true;
@@ -114,4 +119,4 @@ const globalSlice = createSlice({
 });
 
 export default globalSlice.reducer;
-export const { updateModalType } = globalSlice.actions;
+export const { updateModalType, updateCurrentLanguage } = globalSlice.actions;

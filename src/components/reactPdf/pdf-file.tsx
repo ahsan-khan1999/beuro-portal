@@ -55,6 +55,7 @@ const PdfFile = ({
   templateSettings,
   emailTemplateSettings,
   systemSetting,
+  lang,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates, time } = data?.movingDetails || {};
@@ -86,11 +87,12 @@ const PdfFile = ({
     Number(serviceItemFooter?.serviceDiscountSum) > 0
       ? true
       : false || false;
+
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
   return (
     <Document title={headerDetails?.offerNo || ""}>
       <Page style={styles.body} dpi={72}>
-        <Header {...headerDetails} />
+        <Header {...headerDetails} language={lang} />
         <View
           style={{
             position: "absolute",
