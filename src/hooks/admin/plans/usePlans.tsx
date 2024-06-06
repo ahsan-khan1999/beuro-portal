@@ -94,6 +94,7 @@ export default function usePlans() {
     onClose();
     if (res?.payload) router.push("/admin/plans");
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -120,6 +121,7 @@ export default function usePlans() {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return {
     currentPageRows,
     totalItems,
@@ -131,6 +133,7 @@ export default function usePlans() {
     loading,
     handleDelete: handleConfirmDeletion,
     renderModal,
-    currentPage
+    currentPage,
+    totalCount,
   };
 }

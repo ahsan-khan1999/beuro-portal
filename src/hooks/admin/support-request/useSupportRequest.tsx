@@ -11,7 +11,6 @@ import { DEFAULT_CONTACT_SUPPORT, staticEnums } from "@/utils/static";
 import { useEffect, useState } from "react";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useRouter } from "next/router";
-import { useQueryParams } from "@/utils/hooks";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 export default function useSupportRequest() {
@@ -28,15 +27,13 @@ export default function useSupportRequest() {
     text: FiltersDefaultValues.None,
   });
 
-  const router = useRouter();
-  const params = useQueryParams();
-  const dispatch = useAppDispatch();
-  const page = params?.page as unknown as number;
-
+  const { query } = useRouter();
+  const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-
   const [currentPageRows, setCurrentPageRows] =
     useState<ContactSupport[]>(contactSupport);
+
+  const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
   const totalItems = totalCount;
@@ -58,11 +55,20 @@ export default function useSupportRequest() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  // const MODAL_CONFIG: ModalConfigType = {
-  //   [ModalType.CREATION]: (
-  //     <CreationCrea
-  //   )
-  // };
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CREATION]: (
+      <CreationCreated
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.record_update_des")}
+        onClose={onClose}
+        route={onClose}
+      />
+    ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
 
   const handleStatusChange = async (
     id: string,
@@ -97,32 +103,37 @@ export default function useSupportRequest() {
     }
   };
 
-  // const renderModal = () => {
-  //   return MODAL_CONFIG[modal.type] || null;
-  // };
-
   useEffect(() => {
-    // const updatedStatus =
-    //   params.status === "None" ? "None" : params.status?.split(",");
-
-    const parsedPage = parseInt(params.page as string, 10);
+    const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
-
-    if (!isNaN(parsedPage) && parsedPage !== undefined) {
+    if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
     } else {
       resetPage = 1;
       setCurrentPage(1);
     }
 
-    const { page, ...restParams } = params;
+    const queryText = query?.text as string;
+    const querySort = query?.sort as string;
 
-    setFilter({ ...filter, ...restParams });
+    let updatedFilter: {
+      text?: string;
+      sort?: string;
+    } = {
+      text: queryText || "",
+    };
+
+    if (queryText || querySort) {
+      updatedFilter.text = queryText;
+      updatedFilter.sort = querySort;
+    }
+
+    setFilter(updatedFilter);
     dispatch(readContactSupport(DEFAULT_CONTACT_SUPPORT));
     dispatch(
       readContactSupport({
         params: {
-          filter: { ...restParams },
+          filter: updatedFilter,
           page: (Number(parsedPage) || resetPage) ?? currentPage,
           size: 10,
         },
@@ -132,7 +143,7 @@ export default function useSupportRequest() {
         setCurrentPageRows(res?.payload?.ContactSupport);
       }
     });
-  }, [params]);
+  }, [query]);
 
   return {
     currentPageRows,
@@ -145,5 +156,7 @@ export default function useSupportRequest() {
     loading,
     currentPage,
     handleStatusChange,
+    renderModal,
+    totalCount,
   };
 }

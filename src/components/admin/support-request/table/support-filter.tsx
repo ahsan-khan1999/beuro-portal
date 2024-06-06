@@ -2,22 +2,38 @@ import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType, FiltersComponentProps } from "@/types";
-import { useTranslation } from "next-i18next";
-import React, { useRef, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 
-export default function PaymentsFilter({
+export default function SupportFilter({
   filter,
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { t: translate } = useTranslation();
+  const [inputValue, setInputValue] = useState<string>("");
+  const router = useRouter();
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          text: inputValue,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     if (inputValue === "") {
       inputValue = FiltersDefaultValues.None;
     }
+
     setFilter((prev: FilterType) => {
       const updatedValue = { ...prev, ["text"]: inputValue };
       handleFilterChange(updatedValue);
@@ -25,7 +41,23 @@ export default function PaymentsFilter({
     });
   };
 
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
+
   const hanldeSortChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["sort"]: value };
       handleFilterChange(updatedFilter);
@@ -33,12 +65,18 @@ export default function PaymentsFilter({
     });
   };
 
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-4 z-10">
       <InputField
-        handleChange={(value) => {}}
+        handleChange={handleInputChange}
         ref={inputRef}
-        // value=""
+        value={inputValue}
         iconDisplay={true}
         onEnterPress={onEnterPress}
         options={[]}

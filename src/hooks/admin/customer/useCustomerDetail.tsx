@@ -61,10 +61,6 @@ export default function useCustomerDetailAdmin() {
       dispatch(updateModalType({ type: ModalType.ARE_YOU_COMPANY }));
   };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.ARE_YOU_SURE_CUSTOMER]: (
       <WarningModal handleCreated={handleCreated} onClose={onClose} />
@@ -79,12 +75,16 @@ export default function useCustomerDetailAdmin() {
     ),
     [ModalType.CREATION]: (
       <CreationCreated
-        heading={translate("common.are_you_sure_modal.success")}
-        subHeading={translate("common.are_you_sure_modal.success_heading")}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.record_update_des")}
         onClose={onClose}
         route={route}
       />
     ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   const handleStatusChange = async (custmerStatus: string) => {

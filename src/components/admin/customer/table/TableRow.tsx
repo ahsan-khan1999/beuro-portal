@@ -115,17 +115,17 @@ const TableRow = ({
                 />
               </span>
 
-              <span
-                className="flex justify-center items-center"
-                onClick={() =>
-                  router.push({
-                    pathname: "/admin/customers/details",
-                    query: { ...router.query, customer: item.id },
-                  })
-                }
-              >
-                <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg cursor-pointer">
-                  <div className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center">
+              <div className="flex justify-center items-center">
+                <div
+                  onClick={() =>
+                    router.push({
+                      pathname: "/admin/customers/details",
+                      query: { ...router.query, customer: item.id },
+                    })
+                  }
+                  className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg cursor-pointer"
+                >
+                  <span className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="8"
@@ -138,9 +138,9 @@ const TableRow = ({
                         fill="#4A13E7"
                       />
                     </svg>
-                  </div>
+                  </span>
                 </div>
-              </span>
+              </div>
             </div>
           </div>
         );
