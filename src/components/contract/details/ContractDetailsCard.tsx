@@ -58,6 +58,13 @@ const ContractDetailsCard = ({
     updateQuery(router, router.locale as string);
   };
 
+  const customerType = contractDetails?.offerID?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
+      : contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+
   return (
     <div className="min-h-[218px]">
       <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
@@ -323,7 +330,7 @@ const ContractDetailsCard = ({
                 handleNotes(
                   contractDetails?.id,
                   contractDetails?.contractNumber,
-                  contractDetails?.offerID?.leadID?.customerDetail?.fullName,
+                  name,
                   e
                 )
               }
@@ -349,7 +356,7 @@ const ContractDetailsCard = ({
                   handleImageUpload(
                     contractDetails?.id,
                     contractDetails?.contractNumber,
-                    contractDetails?.offerID?.leadID?.customerDetail?.fullName,
+                    name,
                     e
                   )
                 }

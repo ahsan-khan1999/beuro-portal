@@ -58,6 +58,14 @@ const TableRows = ({
       }`}
     >
       {dataToAdd?.map((item, index) => {
+        const customerType = item?.leadID?.customerDetail
+          ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
+        const name =
+          customerType === 1
+            ? item?.leadID?.customerDetail?.companyName
+            : item?.leadID?.customerDetail?.fullName;
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -78,8 +86,8 @@ const TableRows = ({
                   {(item?.leadID?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item?.leadID?.customerDetail?.companyName})
+                    <span className="py-4 truncate font-normal text-primary">
+                      {item?.leadID?.customerDetail?.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">
@@ -218,17 +226,11 @@ const TableRows = ({
               </div>
             </div>
 
-            {/* <div className="flex"> */}
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleImageUpload(
-                    item?.id,
-                    item?.offerNumber,
-                    item?.leadID?.customerDetail?.fullName,
-                    e
-                  )
+                  handleImageUpload(item?.id, item?.offerNumber, name, e)
                 }
                 title={translate("offers.table_headings.images")}
               >
@@ -272,12 +274,7 @@ const TableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleNotes(
-                    item?.id,
-                    item?.offerNumber,
-                    item.leadID?.customerDetail?.fullName,
-                    e
-                  )
+                  handleNotes(item?.id, item?.offerNumber, name, e)
                 }
                 title={translate("offers.table_headings.note")}
               >
@@ -388,7 +385,6 @@ const TableRows = ({
                 </div>
               </span>
             </div>
-            {/* </div> */}
           </div>
         );
       })}

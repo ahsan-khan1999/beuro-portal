@@ -8,6 +8,7 @@ import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
 import OfferEditImages from "../OfferEditImages";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { staticEnums } from "@/utils/static";
 
 export enum ComponentsType {
   customer,
@@ -124,6 +125,13 @@ const OffersDetailsData = ({
     }
   };
 
+  const customerType = offerDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? offerDetails?.leadID?.customerDetail?.companyName
+      : offerDetails?.leadID?.customerDetail?.fullName;
+
   return (
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
@@ -149,7 +157,7 @@ const OffersDetailsData = ({
             tabType={tabType}
             id={offerDetails?.id}
             refID={offerDetails?.offerNumber}
-            name={offerDetails?.leadID?.customerDetail?.fullName}
+            name={name}
             handleImageSlider={handleImageSlider}
           />
         </div>

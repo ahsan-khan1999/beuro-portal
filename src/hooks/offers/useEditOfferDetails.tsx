@@ -14,7 +14,7 @@ import {
   AddOfferDetailsSubmitFormField,
 } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   setCustomerDetails,

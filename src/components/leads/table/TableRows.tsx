@@ -50,6 +50,13 @@ const TableRows = ({
       }`}
     >
       {dataToAdd?.map((item: Lead, index: number) => {
+        const customerType = item?.customerDetail
+          ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+        const name =
+          customerType === 1
+            ? item?.customerDetail?.companyName
+            : item?.customerDetail?.fullName;
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -70,8 +77,8 @@ const TableRows = ({
                   {(item?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item?.customerDetail?.companyName})
+                    <span className="py-4 truncate font-normal text-primary">
+                      {item?.customerDetail?.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">
@@ -144,12 +151,7 @@ const TableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleImageUpload(
-                    item?.id,
-                    item?.refID,
-                    item?.customerDetail?.fullName,
-                    e
-                  )
+                  handleImageUpload(item?.id, item?.refID, name, e)
                 }
                 title={translate("leads.table_headings.images")}
               >
@@ -192,14 +194,7 @@ const TableRows = ({
 
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) =>
-                  handleAddNote(
-                    item?.id,
-                    item?.refID,
-                    item?.customerDetail?.fullName,
-                    e
-                  )
-                }
+                onClick={(e) => handleAddNote(item?.id, item?.refID, name, e)}
                 title={translate("leads.table_headings.note")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">

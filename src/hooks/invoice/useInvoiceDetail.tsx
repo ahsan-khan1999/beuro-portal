@@ -332,7 +332,7 @@ export default function useInvoiceDetail() {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.admin_setting_des")}
+        subHeading={translate("common.modals.update_success")}
         route={route}
       />
     ),

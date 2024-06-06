@@ -140,9 +140,8 @@ const useLeads = () => {
     name?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    if (e) {
-      e.stopPropagation();
-    }
+    e?.stopPropagation();
+
     const filteredLead = lead?.filter((item_) => item_.id === id);
     if (filteredLead?.length === 1) {
       dispatch(setLeadDetails(filteredLead[0]));
@@ -309,7 +308,7 @@ const useLeads = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),

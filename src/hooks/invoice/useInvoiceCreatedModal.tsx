@@ -12,8 +12,7 @@ import {
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import React, { useEffect } from "react";
-import { updateModalType } from "@/api/slices/globalSlice/global";
+import  { useEffect } from "react";
 export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const router = useRouter();
   const { loading, error, invoiceDetails } = useAppSelector(

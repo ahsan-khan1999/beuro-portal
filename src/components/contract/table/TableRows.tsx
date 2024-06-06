@@ -62,6 +62,13 @@ const TableRows = ({
       }`}
     >
       {dataToAdd?.map((item, index: number) => {
+        const customerType = item?.offerID?.leadID?.customerDetail
+          ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+        const name =
+          customerType === 1
+            ? item?.offerID?.leadID?.customerDetail?.companyName
+            : item?.offerID?.leadID?.customerDetail?.fullName;
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -82,8 +89,8 @@ const TableRows = ({
                   {(item?.offerID?.leadID?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item?.offerID?.leadID?.customerDetail?.companyName})
+                    <span className="py-4 truncate font-normal text-primary">
+                      {item?.offerID?.leadID?.customerDetail?.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">
@@ -208,12 +215,7 @@ const TableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleImageUpload(
-                    item?.id,
-                    item?.contractNumber,
-                    item?.offerID?.leadID?.customerDetail?.fullName,
-                    e
-                  )
+                  handleImageUpload(item?.id, item?.contractNumber, name, e)
                 }
                 title={translate("offers.table_headings.images")}
               >
@@ -287,12 +289,7 @@ const TableRows = ({
 
               <span
                 onClick={(e) =>
-                  handleNotes(
-                    item?.id,
-                    item?.contractNumber,
-                    item?.offerID?.leadID?.customerDetail?.fullName,
-                    e
-                  )
+                  handleNotes(item?.id, item?.contractNumber, name, e)
                 }
                 title={translate("contracts.table_headings.notes")}
                 className="py-3 flex justify-center items-center cursor-pointer"

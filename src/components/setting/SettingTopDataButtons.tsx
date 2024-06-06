@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SettingLayout from "./SettingLayout";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 const SettingTopDataButtons = ({
@@ -11,9 +10,7 @@ const SettingTopDataButtons = ({
   setSwitchDetails: (item: number) => void;
 }) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<number | null>(switchDetails);
-
   const tab = router.query.tab;
 
   useEffect(() => {

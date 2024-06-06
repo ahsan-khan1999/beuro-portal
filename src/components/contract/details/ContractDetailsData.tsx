@@ -10,6 +10,7 @@ import { useTranslation } from "next-i18next";
 import OfferEditImages from "@/components/offers/OfferEditImages";
 import { ContractAditionalEditDetails } from "../edit/editAdditionalDetails";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { staticEnums } from "@/utils/static";
 
 export enum ComponentsType {
   customer,
@@ -158,6 +159,13 @@ const ContractDetailsData = ({
     }
   }, []);
 
+  const customerType = contractDetails?.offerID?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
+      : contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+
   return (
     <>
       <div className="2xl:fixed mb-5">
@@ -183,7 +191,7 @@ const ContractDetailsData = ({
             tabType={tabType}
             id={contractDetails?.id}
             refID={contractDetails?.contractNumber}
-            name={contractDetails?.offerID?.leadID?.customerDetail?.fullName}
+            name={name}
             handleImageSlider={handleImageSlider}
           />
         </div>
