@@ -29,7 +29,7 @@ export const Header = ({
         receipt: "Receipt ",
       },
       HeaderLabel: {
-        contract: "Contract",
+        contract: "Create",
         invoice: "Invoice",
         receipt: "Receipt",
       },
@@ -39,6 +39,7 @@ export const Header = ({
       created_by: "Erstellt von",
       create: "Erstell",
       date: "datum",
+      offer: "Angebot ",
       HeaderLabelNr: {
         offer: "Angebot ",
         contract: "Vertrag ",
@@ -46,7 +47,7 @@ export const Header = ({
         receipt: "Quittung ",
       },
       HeaderLabel: {
-        contract: "Vertrag",
+        contract: "Erstell",
         invoice: "Rechnung",
         receipt: "Quittung",
       },
