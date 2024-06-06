@@ -191,8 +191,16 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
-  const shareImgModal = () => {
-    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  const shareImgModal = (id: string, refID?: string, name?: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SHARE_IMAGES,
+        data: {
+          refID: refID,
+          name: name,
+        },
+      })
+    );
   };
 
   const handleUpdateContractDetail = () => {

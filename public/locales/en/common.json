@@ -1167,6 +1167,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "customer_name": "Customer Name",
     "invoice_fitlers": {
       "pending": "Pending",
       "sending": "Sending",
@@ -1305,7 +1306,7 @@
     },
     "add_note_modal": {
       "heading": "Add Notes",
-      "label": "Add your Note",
+      "label": "Note Title",
       "button": "Save"
     },
     "images_modal": {

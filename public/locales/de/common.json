@@ -1159,6 +1159,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "customer_name": "Kundenname",
     "invoice_fitlers": {
       "pending": "Entwurf",
       "sending": "Versandbereit",
@@ -1297,7 +1298,7 @@
     },
     "add_note_modal": {
       "heading": "Notizen hinzufügen",
-      "label": "Ihre Notiz hinzufügen",
+      "label": "Notiz Titel",
       "button": "Speichern"
     },
     "images_modal": {

@@ -145,14 +145,28 @@ const ImagesUploadOffer = ({
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <p className="text-2xl font-medium text-[#000] border-b-2 border-b-[#000] border-opacity-10 pb-5">
+          <p className="text-2xl font-medium">
             {translate("common.images_modal.heading")}
           </p>
 
-          <p>{refID}</p>
-          <p>{name}</p>
+          <div className="border-y border-y-[#000] border-opacity-10 py-[10px] my-5">
+            <div className="flex items-center gap-x-[34px]">
+              <div className="flex items-center gap-x-[14px]">
+                <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+                <span className="text-sm font-medium text-primary">
+                  {refID}
+                </span>
+              </div>
+              <div className="flex items-center gap-x-[14px]">
+                <span className="text-sm font-normal text-[#4D4D4D]">
+                  {translate("common.customer_name")}:
+                </span>
+                <span className="text-sm font-medium text-primary">{name}</span>
+              </div>
+            </div>
+          </div>
 
-          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
+          <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
             {attachementTabs.map((item, index) => (
               <button
                 key={index}

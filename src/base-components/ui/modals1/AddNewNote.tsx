@@ -1,12 +1,11 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { useAddNewNote } from "@/hooks/modals/useAddNewNote";
 import { FilterType } from "@/types";
-import { setLeadDetails } from "@/api/slices/lead/leadSlice";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export interface AddNoteProps {
   onClose: () => void;
@@ -25,6 +24,7 @@ const AddNewNote = ({
 }: AddNoteProps) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewNote({ handleNotes, handleFilterChange, filter });
+
   const { refID, name } = useAppSelector((state) => state.global.modal.data);
 
   return (
@@ -40,12 +40,26 @@ const AddNewNote = ({
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <div className="flex justify-between items-center mb-[19px] border-b border-b-[#000] border-opacity-10 pb-5">
+          <div className="flex justify-between items-center mb-[19px]">
             <p className="text-2xl font-medium text-[#000] ml-[38px]">
               {heading}
             </p>
-            <p>{refID}</p>
-            <p>{name}</p>
+          </div>
+          <div className="border-y border-y-[#000] border-opacity-10 py-[10px] mx-10 mb-5">
+            <div className="flex items-center gap-x-[34px]">
+              <div className="flex items-center gap-x-[14px]">
+                <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+                <span className="text-sm font-medium text-primary">
+                  {refID}
+                </span>
+              </div>
+              <div className="flex items-center gap-x-[14px]">
+                <span className="text-sm font-normal text-[#4D4D4D]">
+                  {translate("common.customer_name")}:
+                </span>
+                <span className="text-sm font-medium text-primary">{name}</span>
+              </div>
+            </div>
           </div>
 
           <div className="xl:mx-[42px] mx-4">
