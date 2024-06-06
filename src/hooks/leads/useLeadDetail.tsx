@@ -142,7 +142,7 @@ export default function useLeadDetail() {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),

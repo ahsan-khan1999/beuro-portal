@@ -11,6 +11,7 @@ import ServiceEditDetails from "../edit/ServiceEditDetails";
 import AditionalEditDetails from "../edit/AditionalEditDetails";
 import OfferEditImages from "@/components/offers/OfferEditImages";
 import { Lead } from "@/types/leads";
+import { staticEnums } from "@/utils/static";
 
 export enum ComponentsType {
   customer,
@@ -174,6 +175,13 @@ const LeadsDetailsData = ({
     }
   };
 
+  const customerType = leadDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? leadDetails?.customerDetail?.companyName
+      : leadDetails?.customerDetail?.fullName;
+
   return (
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
@@ -198,7 +206,7 @@ const LeadsDetailsData = ({
           tabType={tabType}
           id={leadDetails?.id}
           refID={leadDetails?.refID}
-          name={leadDetails?.customerDetail?.fullName}
+          name={name}
           handleImageSlider={handleImageSlider}
         />
       </div>

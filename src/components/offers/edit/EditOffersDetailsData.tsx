@@ -9,6 +9,7 @@ import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
+import { staticEnums } from "@/utils/static";
 
 export enum EditComponentsType {
   offerEdit,
@@ -130,6 +131,13 @@ const EditOffersDetailsData = ({
     ),
   };
 
+  const customerType = offerDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? offerDetails?.leadID?.customerDetail?.companyName
+      : offerDetails?.leadID?.customerDetail?.fullName;
+
   return (
     <>
       <div className="xLarge:fixed mb-5 mt-[40px]">
@@ -153,7 +161,7 @@ const EditOffersDetailsData = ({
           handleImagesUpload={handleImagesUpload}
           tabType={tabType}
           id={offerDetails?.id}
-          name={offerDetails?.leadID?.customerDetail?.fullName}
+          name={name}
           refID={offerDetails?.offerNumber}
           handleImageSlider={handleImageSlider}
         />
