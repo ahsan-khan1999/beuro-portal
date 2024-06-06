@@ -36,7 +36,7 @@ const useContract = () => {
   const { query } = useRouter();
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(query.page as string, 15);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -104,7 +104,7 @@ const useContract = () => {
           params: {
             filter: updatedFilter,
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {
@@ -134,7 +134,7 @@ const useContract = () => {
   });
 
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
@@ -147,12 +147,17 @@ const useContract = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
     if (e) {
       e.stopPropagation();
     }
 
-    const filteredLead = contract?.filter((item_) => item_.id === item);
+    const filteredLead = contract?.filter((item_) => item_.id === id);
 
     if (filteredLead?.length === 1) {
       dispatch(setContractDetails(filteredLead[0]));
@@ -175,15 +180,23 @@ const useContract = () => {
           });
         }
       });
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+      dispatch(
+        updateModalType({
+          type: ModalType.EXISTING_NOTES,
+          data: {
+            refID: refID,
+            name: name,
+          },
+        })
+      );
     }
   };
 
-  const handleAddNote = (id: string) => {
+  const handleAddNote = (id: string, refID: string, name: string) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "contract" },
+        data: { id: id, type: "contract", refID: refID, name: name },
       })
     );
   };
@@ -195,11 +208,22 @@ const useContract = () => {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "contract", data: note },
+        data: {
+          id: id,
+          type: "contract",
+          data: note,
+          refID: refID,
+          name: name,
+        },
       })
     );
   };
@@ -209,13 +233,15 @@ const useContract = () => {
   };
 
   const handleImageUpload = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
+    e?.stopPropagation();
     dispatch(setImages([]));
 
-    const filteredLead = contract?.find((item_) => item_.id === item);
+    const filteredLead = contract?.find((item_) => item_.id === id);
     if (filteredLead) {
       dispatch(setContractDetails(filteredLead));
       dispatch(
@@ -236,7 +262,15 @@ const useContract = () => {
           );
         }
       });
-      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+      dispatch(
+        updateModalType({
+          type: ModalType.UPLOAD_OFFER_IMAGE,
+          data: {
+            refID: refID,
+            name: name,
+          },
+        })
+      );
     }
   };
 

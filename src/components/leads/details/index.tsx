@@ -33,6 +33,7 @@ const LeadsDetails = () => {
           </div>
           <div className="xlg:mt-[330px] w-full xlg:block mb-10">
             <LeadsDetailsData
+              leadDetails={leadDetails}
               loading={loading}
               shareImgModal={shareImgModal}
               handleImagesUpload={handleUploadImages}

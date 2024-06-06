@@ -31,7 +31,7 @@ export default function Offers() {
   const CurrentComponent = useEmptyStates(
     <TableRows
       dataToAdd={currentPageRows}
-      openModal={handleNotes}
+      handleNotes={handleNotes}
       handleImageUpload={handleImageUpload}
       handleOfferStatusUpdate={handleOfferStatusUpdate}
       handlePaymentStatusUpdate={handlePaymentStatusUpdate}

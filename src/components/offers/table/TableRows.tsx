@@ -11,22 +11,31 @@ import { useTranslation } from "next-i18next";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
-const TableRows = ({
-  dataToAdd,
-  openModal,
-  handleImageUpload,
-  handleOfferStatusUpdate,
-  handlePaymentStatusUpdate,
-}: {
+export interface OfferTableProps {
   dataToAdd: OffersTableRowTypes[];
-  openModal: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refId: string,
+    name: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refId: string,
+    name: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleOfferStatusUpdate: (id: string, status: string, type: string) => void;
   handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
-}) => {
+}
+
+const TableRows = ({
+  dataToAdd,
+  handleNotes,
+  handleImageUpload,
+  handleOfferStatusUpdate,
+  handlePaymentStatusUpdate,
+}: OfferTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -64,17 +73,17 @@ const TableRows = ({
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
                 } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 mlg:gap-x-1 xMaxSize:gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_3fr)_minmax(300px,_4fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(160px,_160px)] mlg:grid-cols-[minmax(70px,_70px),minmax(100px,_3fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(140px,_140px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]`}
               >
-                <span className="py-4 truncate">{item.offerNumber}</span>
+                <span className="py-4 truncate">{item?.offerNumber}</span>
                 <div className="flex items-center gap-x-1">
                   {(item?.leadID?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
                     <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item.leadID?.customerDetail?.companyName})
+                      ({item?.leadID?.customerDetail?.companyName})
                     </span>
                   ) : (
                     <span className="py-4 truncate">
-                      {item.leadID?.customerDetail?.fullName}
+                      {item?.leadID?.customerDetail?.fullName}
                     </span>
                   )}
                 </div>
@@ -82,10 +91,10 @@ const TableRows = ({
                   {item?.content?.contentName}
                 </span>
                 <span className="py-4 truncate block mlg:hidden xMaxSize:block">
-                  {item.total}
+                  {item?.total}
                 </span>
                 <span className="py-4 mlg:hidden xMaxSize:block truncate">
-                  {formatDateString(item.createdAt)}
+                  {formatDateString(item?.createdAt)}
                 </span>
                 <span className="py-4 flex justify-center items-center">
                   <div
@@ -108,13 +117,13 @@ const TableRows = ({
                       })
                     )}
                     selectedItem={translate(
-                      `payment_method.${item.paymentType}`
+                      `payment_method.${item?.paymentType}`
                     )}
                     onItemSelected={(status) => {
-                      handlePaymentStatusUpdate(item.id, status, "offer");
+                      handlePaymentStatusUpdate(item?.id, status, "offer");
                     }}
                     dropDownClassName={`${
-                      staticEnums["PaymentType"][item.paymentType] === 0
+                      staticEnums["PaymentType"][item?.paymentType] === 0
                         ? "bg-[#45C769]"
                         : "bg-[#4A13E7]"
                     } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
@@ -213,7 +222,14 @@ const TableRows = ({
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) => handleImageUpload(item?.id, e)}
+                onClick={(e) =>
+                  handleImageUpload(
+                    item?.id,
+                    item?.offerNumber,
+                    item?.leadID?.customerDetail?.fullName,
+                    e
+                  )
+                }
                 title={translate("offers.table_headings.images")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
@@ -255,7 +271,14 @@ const TableRows = ({
 
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) => openModal(item?.id, e)}
+                onClick={(e) =>
+                  handleNotes(
+                    item?.id,
+                    item?.offerNumber,
+                    item.leadID?.customerDetail?.fullName,
+                    e
+                  )
+                }
                 title={translate("offers.table_headings.note")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">

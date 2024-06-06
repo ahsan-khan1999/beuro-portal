@@ -20,9 +20,11 @@ export enum ComponentsType {
 
 export interface ContractDetailProps {
   loading: boolean;
-  shareImgModal: Function;
+  shareImgModal: (id: string, refID?: string, name?: string) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refID: string,
+    name: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
@@ -179,6 +181,9 @@ const ContractDetailsData = ({
             shareImgModal={shareImgModal}
             handleImagesUpload={handleImageUpload}
             tabType={tabType}
+            id={contractDetails?.id}
+            refID={contractDetails?.contractNumber}
+            name={contractDetails?.offerID?.leadID?.customerDetail?.fullName}
             handleImageSlider={handleImageSlider}
           />
         </div>

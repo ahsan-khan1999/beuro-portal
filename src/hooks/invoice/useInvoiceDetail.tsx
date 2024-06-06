@@ -176,21 +176,33 @@ export default function useInvoiceDetail() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
-    if (e) {
-      e.stopPropagation();
-    }
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+
     dispatch(
       readNotes({ params: { type: "invoice", id: invoiceDetails?.id } })
     );
-    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    dispatch(
+      updateModalType({
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          refID: refID,
+          name: name,
+        },
+      })
+    );
   };
 
-  const handleAddNote = (id: string) => {
+  const handleAddNote = (id: string, refID: string, name: string) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "invoice" },
+        data: { id: id, type: "invoice", refID: refID, name: name },
       })
     );
   };
@@ -202,11 +214,16 @@ export default function useInvoiceDetail() {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "invoice", data: note },
+        data: { id: id, type: "invoice", data: note, refID: refID, name: name },
       })
     );
   };

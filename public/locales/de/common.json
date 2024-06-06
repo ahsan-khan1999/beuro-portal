@@ -1145,6 +1145,7 @@
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
       "offer_created": "Operation erfolgreich",
+      "record_update_des": "Danke, dass Sie uns auf dem Laufenden halten, wir sind froh, Sie zu haben.",
       "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
       "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
@@ -1158,6 +1159,7 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "customer_name": "Kundenname",
     "invoice_fitlers": {
       "pending": "Entwurf",
       "sending": "Versandbereit",
@@ -1296,7 +1298,7 @@
     },
     "add_note_modal": {
       "heading": "Notizen hinzufügen",
-      "label": "Ihre Notiz hinzufügen",
+      "label": "Notiz Titel",
       "button": "Speichern"
     },
     "images_modal": {

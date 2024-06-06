@@ -5,6 +5,8 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { formatDateTimeToDate } from "@/utils/utility";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { staticEnums } from "@/utils/static";
+import { useRouter } from "next/router";
+import { updateQuery } from "@/utils/update-query";
 
 const DetailsData = ({
   customerDetail,
@@ -19,6 +21,7 @@ const DetailsData = ({
   handleAreYouSure: () => void;
   handleStatusChange: (id: string) => void;
 }) => {
+  const router = useRouter();
   const customerStatus = [
     `${translate("customer_status.block")}`,
     `${translate("customer_status.unBlock")}`,
@@ -30,11 +33,17 @@ const DetailsData = ({
     })
   );
 
+  const handleBack = () => {
+    router.pathname = "/admin/customers";
+    delete router.query["customer"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-4 justify-between lg:items-center pb-5">
         <div className="flex items-center">
-          <div onClick={onHandleBack} className="cursor-pointer">
+          <div onClick={handleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"

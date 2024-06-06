@@ -6,7 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import usePlans from "@/hooks/admin/plans/usePlans";
-import { useEmptyStates } from "@/utils/hooks";
+import { useAdminEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Plans() {
@@ -22,11 +22,12 @@ export default function Plans() {
     handleDelete,
     renderModal,
     currentPage,
+    totalCount,
   } = usePlans();
 
-  const CurrentComponent = useEmptyStates(
+  const CurrentComponent = useAdminEmptyStates(
     <TableRow currentPageRows={currentPageRows} handleDelete={handleDelete} />,
-    currentPageRows?.length > 0,
+    totalCount !== 0,
     loading
   );
 

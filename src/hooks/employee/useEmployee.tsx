@@ -25,13 +25,13 @@ const useEmployee = () => {
   const { query } = useRouter();
   const [currentPageRows, setCurrentPageRows] = useState<Employee[]>([]);
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
   const { t: translate } = useTranslation();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(query.page as string, 15);
     let resetPage = null;
 
     if (!isNaN(parsedPage)) {
@@ -72,7 +72,7 @@ const useEmployee = () => {
           params: {
             filter: queryParams ? updatedFilter : {},
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {
