@@ -38,7 +38,7 @@ const useInvoice = () => {
   const { query } = useRouter();
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(query.page as string, 15);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -106,7 +106,7 @@ const useInvoice = () => {
           params: {
             filter: updatedFilter,
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {
@@ -136,7 +136,7 @@ const useInvoice = () => {
   });
 
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   const [isSendEmail, setIsSendEmail] = useState(false);
   const dispatch = useDispatch();
