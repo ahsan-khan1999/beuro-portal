@@ -93,7 +93,12 @@ export interface InvoiceEmptyStateType {
 export interface InvoiceCardContentProps {
   handleInvoiceCreation: () => void;
   invoiceDetails: InvoiceTableRowTypes;
-  handleNotes: (item: string, e?: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleRecurringInvoiceCreation: () => void;
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;

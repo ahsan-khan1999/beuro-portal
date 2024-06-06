@@ -319,7 +319,14 @@ const ContractDetailsCard = ({
           <div className="flex justify-between">
             <div
               className="flex items-center gap-[11px] cursor-pointer"
-              onClick={(e) => handleNotes(contractDetails?.id, e)}
+              onClick={(e) =>
+                handleNotes(
+                  contractDetails?.id,
+                  contractDetails?.contractNumber,
+                  contractDetails?.offerID?.leadID?.customerDetail?.fullName,
+                  e
+                )
+              }
             >
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.notes")}:
@@ -338,7 +345,14 @@ const ContractDetailsCard = ({
 
               <span
                 className="cursor-pointer"
-                onClick={(e) => handleImageUpload(contractDetails?.id, e)}
+                onClick={(e) =>
+                  handleImageUpload(
+                    contractDetails?.id,
+                    contractDetails?.contractNumber,
+                    contractDetails?.offerID?.leadID?.customerDetail?.fullName,
+                    e
+                  )
+                }
               >
                 <ImageUploadIcon
                   pathClass={

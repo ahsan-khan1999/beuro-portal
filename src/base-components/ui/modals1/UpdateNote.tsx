@@ -5,6 +5,7 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { FilterType } from "@/types";
 import { useUpdateNote } from "@/hooks/modals/useUpdateNote";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export const UpdateNote = ({
   onClose,
@@ -21,6 +22,7 @@ export const UpdateNote = ({
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useUpdateNote({ handleNotes, handleFilterChange, filter });
+  const { refID, name } = useAppSelector((state) => state.global.modal.data);
 
   return (
     <>
@@ -39,6 +41,8 @@ export const UpdateNote = ({
             <p className="text-2xl font-medium text-[#000] ml-[38px]">
               {heading}
             </p>
+            <p>{refID}</p>
+            <p>{name}</p>
           </div>
 
           <div className="xl:mx-[42px] mx-4 mt-3">

@@ -8,17 +8,18 @@ import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
-const TableRows = ({
-  dataToAdd,
-  openModal,
-  handleImageUpload,
-  handleContractStatusUpdate,
-  handlePaymentStatusUpdate,
-}: {
+export interface ContractTableProps {
   dataToAdd: contractTableTypes[];
-  openModal: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refId: string,
+    name: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refID: string,
+    name: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleContractStatusUpdate: (
@@ -27,7 +28,15 @@ const TableRows = ({
     type: string
   ) => void;
   handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
-}) => {
+}
+
+const TableRows = ({
+  dataToAdd,
+  handleNotes,
+  handleImageUpload,
+  handleContractStatusUpdate,
+  handlePaymentStatusUpdate,
+}: ContractTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const colorPicker = {
@@ -74,11 +83,11 @@ const TableRows = ({
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
                     <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item.offerID?.leadID?.customerDetail?.companyName})
+                      ({item?.offerID?.leadID?.customerDetail?.companyName})
                     </span>
                   ) : (
                     <span className="py-4 truncate">
-                      {item.offerID?.leadID?.customerDetail?.fullName}
+                      {item?.offerID?.leadID?.customerDetail?.fullName}
                     </span>
                   )}
                 </div>
@@ -86,7 +95,7 @@ const TableRows = ({
                   {item?.offerID?.content?.contentName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
-                  {item.offerID?.total}
+                  {item?.offerID?.total}
                 </span>
                 <span className="py-4 mlg:hidden xLarge:block">
                   {formatDateString(item.createdAt)}
@@ -111,13 +120,13 @@ const TableRows = ({
                       })
                     )}
                     selectedItem={translate(
-                      `payment_method.${item.paymentType}`
+                      `payment_method.${item?.paymentType}`
                     )}
                     onItemSelected={(status) => {
-                      handlePaymentStatusUpdate(item.id, status, "contracts");
+                      handlePaymentStatusUpdate(item?.id, status, "contracts");
                     }}
                     dropDownClassName={`${
-                      staticEnums["PaymentType"][item.paymentType] === 0
+                      staticEnums["PaymentType"][item?.paymentType] === 0
                         ? "bg-[#45C769]"
                         : "bg-[#4A13E7]"
                     } w-full rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
@@ -198,7 +207,14 @@ const TableRows = ({
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) => handleImageUpload(item?.id, e)}
+                onClick={(e) =>
+                  handleImageUpload(
+                    item?.id,
+                    item?.contractNumber,
+                    item?.offerID?.leadID?.customerDetail?.fullName,
+                    e
+                  )
+                }
                 title={translate("offers.table_headings.images")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
@@ -270,7 +286,14 @@ const TableRows = ({
               )}
 
               <span
-                onClick={(e) => openModal(item?.id, e)}
+                onClick={(e) =>
+                  handleNotes(
+                    item?.id,
+                    item?.contractNumber,
+                    item?.offerID?.leadID?.customerDetail?.fullName,
+                    e
+                  )
+                }
                 title={translate("contracts.table_headings.notes")}
                 className="py-3 flex justify-center items-center cursor-pointer"
               >

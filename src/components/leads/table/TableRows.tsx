@@ -8,9 +8,16 @@ import { staticEnums } from "@/utils/static";
 
 export interface LeadTableProps {
   dataToAdd: Lead[];
-  openModal: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleAddNote: (
+    id: string,
+    refId: string,
+    name: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refId: string,
+    name: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   onStatusChange: (id: string, status: string, type: string) => void;
@@ -18,7 +25,7 @@ export interface LeadTableProps {
 
 const TableRows = ({
   dataToAdd,
-  openModal,
+  handleAddNote,
   handleImageUpload,
   onStatusChange,
 }: LeadTableProps) => {
@@ -68,21 +75,21 @@ const TableRows = ({
                     </span>
                   ) : (
                     <span className="py-4 truncate">
-                      {item.customerDetail?.fullName}
+                      {item?.customerDetail?.fullName}
                     </span>
                   )}
                 </div>
                 <span className="py-4 truncate block mlg:hidden maxSize:block">
-                  {item.customerDetail?.email}
+                  {item?.customerDetail?.email}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
-                  {item.customerDetail?.phoneNumber}
+                  {item?.customerDetail?.phoneNumber}
                 </span>
                 <span className="py-4 flex items-center">
                   {formatDate(item.createdAt)}
                 </span>
                 <span className="py-4 truncate mlg:hidden xMaxSize:block">
-                  {item.customerDetail?.address?.country}
+                  {item?.customerDetail?.address?.country}
                 </span>
                 <span
                   className="py-4 flex items-center"
@@ -136,7 +143,14 @@ const TableRows = ({
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) => handleImageUpload(item?.id, e)}
+                onClick={(e) =>
+                  handleImageUpload(
+                    item?.id,
+                    item?.refID,
+                    item?.customerDetail?.fullName,
+                    e
+                  )
+                }
                 title={translate("leads.table_headings.images")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
@@ -178,7 +192,14 @@ const TableRows = ({
 
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) => openModal(item?.id, e)}
+                onClick={(e) =>
+                  handleAddNote(
+                    item?.id,
+                    item?.refID,
+                    item?.customerDetail?.fullName,
+                    e
+                  )
+                }
                 title={translate("leads.table_headings.note")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">

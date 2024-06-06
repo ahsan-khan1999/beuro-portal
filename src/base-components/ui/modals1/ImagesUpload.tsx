@@ -8,6 +8,7 @@ import { BaseButton } from "../button/base-button";
 import { AttachementField } from "./attachement-field";
 import { VideoField } from "./video-field";
 import { ImageField } from "./image-field";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const ImagesUpload = ({
   onClose,
@@ -37,6 +38,7 @@ const ImagesUpload = ({
     loading,
     loadingGlobal,
   } = useUploadImage(handleImageSlider);
+  const { refID, name } = useAppSelector((state) => state.global.modal.data);
 
   const attachementLookUp = {
     img_tab: (
@@ -147,6 +149,9 @@ const ImagesUpload = ({
           <p className="text-2xl font-medium text-[#000] border-b-2 border-b-[#000] border-opacity-10 pb-5">
             {translate("common.images_modal.heading")}
           </p>
+
+          <p>{refID}</p>
+          <p>{name}</p>
 
           <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
             {attachementTabs.map((item, index) => (

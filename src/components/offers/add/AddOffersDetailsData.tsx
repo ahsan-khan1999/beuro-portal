@@ -114,7 +114,15 @@ const EditOffersDetailsData = () => {
     dispatch(
       readImage({ params: { type: "leadID", id: offerDetails?.leadID?.id } })
     );
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: offerDetails?.offerNumber,
+          name: offerDetails?.leadID?.customerDetail?.fullName,
+        },
+      })
+    );
   };
 
   const handleOfferCreated = () => {

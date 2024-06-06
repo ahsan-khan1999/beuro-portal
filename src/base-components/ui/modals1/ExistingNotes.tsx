@@ -8,7 +8,6 @@ import { formatDateReverse } from "@/utils/utility";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { InvoiceTableRowTypes } from "@/types/invoice";
-import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { BaseButton } from "../button/base-button";
 import editNoteIcon from "@/assets/svgs/edit_primary.svg";
@@ -21,8 +20,8 @@ const ExistingNotes = ({
   onClose,
   leadDetails,
 }: {
-  handleAddNote: (id: string) => void;
-  onEditNote: (id: string, note: string) => void;
+  handleAddNote: (id: string, refID: string, name: string) => void;
+  onEditNote: (id: string, note: string, refID: string, name: string) => void;
   onConfrimDeleteNote: (id: string) => void;
   onClose: () => void;
   leadDetails:
@@ -32,7 +31,7 @@ const ExistingNotes = ({
     | InvoiceTableRowTypes;
 }) => {
   const { notes } = useAppSelector((state) => state.note);
-  const { t: translate } = useTranslation();
+  const { refID, name } = useAppSelector((state) => state.global.modal.data);
 
   return (
     <BaseModal
@@ -50,9 +49,11 @@ const ExistingNotes = ({
           <p className="text-2xl font-medium text-[#000]">
             {translate("common.notes_modal.heading")}
           </p>
+          <p>{refID}</p>
+          <p>{name}</p>
           <div className="flex justify-between items-center gap-[10px]">
             <BaseButton
-              onClick={() => handleAddNote(leadDetails?.id)}
+              onClick={() => handleAddNote(leadDetails?.id, refID, name)}
               buttonText={translate("common.notes_modal.button")}
               containerClassName="flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover"
               textClassName="text-white font-medium"
@@ -100,7 +101,9 @@ const ExistingNotes = ({
                       width={20}
                       height={20}
                       className="cursor-pointer"
-                      onClick={() => onEditNote(item?.id, item?.description)}
+                      onClick={() =>
+                        onEditNote(item?.id, item?.description, refID, name)
+                      }
                     />
                     <Image
                       src={deleteIcon}
@@ -130,10 +133,7 @@ const ExistingNotes = ({
           </div>
         ) : (
           <div className="flex justify-center items-center">
-            <NoDataEmptyState
-              className="w-fit"
-              containerClassName="py-5"
-            />
+            <NoDataEmptyState className="w-fit" containerClassName="py-5" />
           </div>
         )}
       </div>

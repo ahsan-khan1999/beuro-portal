@@ -6,7 +6,7 @@ import { Form } from "@/base-components/form/form";
 import { useAddNewNote } from "@/hooks/modals/useAddNewNote";
 import { FilterType } from "@/types";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
-import { useAppDispatch } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 
 export interface AddNoteProps {
   onClose: () => void;
@@ -25,6 +25,7 @@ const AddNewNote = ({
 }: AddNoteProps) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewNote({ handleNotes, handleFilterChange, filter });
+  const { refID, name } = useAppSelector((state) => state.global.modal.data);
 
   return (
     <>
@@ -43,6 +44,8 @@ const AddNewNote = ({
             <p className="text-2xl font-medium text-[#000] ml-[38px]">
               {heading}
             </p>
+            <p>{refID}</p>
+            <p>{name}</p>
           </div>
 
           <div className="xl:mx-[42px] mx-4">

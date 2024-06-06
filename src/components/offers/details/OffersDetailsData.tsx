@@ -3,12 +3,9 @@ import { tabArrayTypes } from "@/types";
 import AddressDetailsData from "./AddressDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
-import SwitchedComp from "./SwitchedComp";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
-import { useTranslation } from "next-i18next";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import OfferEditImages from "../OfferEditImages";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
@@ -19,6 +16,21 @@ export enum ComponentsType {
   additional,
 }
 
+export interface OfferDetailsProps {
+  offerDetails: OffersTableRowTypes;
+  loading: boolean;
+  handleUpdateDiscount: (discount: number) => void;
+  currency?: string;
+  shareImgModal: Function;
+  handleImagesUpload: (
+    id: string,
+    refID: string,
+    name: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
+}
+
 const OffersDetailsData = ({
   offerDetails,
   loading,
@@ -27,18 +39,7 @@ const OffersDetailsData = ({
   shareImgModal,
   handleImagesUpload,
   handleImageSlider,
-}: {
-  offerDetails: OffersTableRowTypes;
-  loading: boolean;
-  handleUpdateDiscount: (discount: number) => void;
-  currency?: string;
-  shareImgModal: Function;
-  handleImagesUpload: (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
-  handleImageSlider: () => void;
-}) => {
+}: OfferDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
 
   useEffect(() => {
@@ -47,8 +48,6 @@ const OffersDetailsData = ({
       elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, []);
-
-  const { t: translate } = useTranslation();
 
   const componentArray = [
     <CustomerDetailsData offerDetails={offerDetails} />,
@@ -148,6 +147,9 @@ const OffersDetailsData = ({
             shareImgModal={shareImgModal}
             handleImagesUpload={handleImagesUpload}
             tabType={tabType}
+            id={offerDetails?.id}
+            refID={offerDetails?.offerNumber}
+            name={offerDetails?.leadID?.customerDetail?.fullName}
             handleImageSlider={handleImageSlider}
           />
         </div>

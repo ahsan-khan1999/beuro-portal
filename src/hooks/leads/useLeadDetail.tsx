@@ -91,11 +91,21 @@ export default function useLeadDetail() {
   };
 
   const handleUploadImages = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    e?.stopPropagation();
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: refID,
+          name: name,
+        },
+      })
+    );
   };
 
   const shareImgModal = () => {

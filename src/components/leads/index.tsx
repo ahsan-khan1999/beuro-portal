@@ -31,7 +31,7 @@ export default function Leads() {
   const CurrentComponent = useEmptyStates(
     <TableRows
       dataToAdd={currentPageRows}
-      openModal={handleNotes}
+      handleAddNote={handleNotes}
       handleImageUpload={handleImageUpload}
       onStatusChange={handleLeadStatusUpdate}
     />,
