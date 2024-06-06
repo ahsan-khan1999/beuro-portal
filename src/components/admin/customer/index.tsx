@@ -22,6 +22,7 @@ export default function Customers() {
     currentPage,
     handleStatusChange,
     totalCount,
+    renderModal,
   } = useCustomer();
 
   const CurrentComponent = useAdminEmptyStates(
@@ -53,6 +54,7 @@ export default function Customers() {
         onPageChange={handlePageChange}
         currentPage={currentPage}
       />
+      {renderModal()}
     </Layout>
   );
 }

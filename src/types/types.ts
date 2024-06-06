@@ -539,7 +539,7 @@ export type GenerateOfferServiceFormField = (
     invoiceDetails?: InvoiceDetailTableRowTypes;
   },
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
-  handleRemoveAddress: UseFieldArrayRemove,
+  handleRemoveService: (index: number) => void,
   serviceType: ServiceType[],
   onServiceChange: (index: number, value: ServiceType) => void,
   fields?: object[],
@@ -576,7 +576,7 @@ export type GenerateInvoiceServiceFormField = (
     invoiceDetails?: InvoiceDetailTableRowTypes;
   },
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
-  handleRemoveAddress: UseFieldArrayRemove,
+  handleRemoveService: (index: number) => void,
   serviceType: ServiceType[],
   onServiceChange: (index: number, value: ServiceType) => void,
   fields?: object[],

@@ -20,7 +20,7 @@ export default function useCustomer() {
   const page = query?.page as unknown as number;
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(query.page as string, 15);
     let resetPage = null;
 
     if (!isNaN(parsedPage) && parsedPage !== undefined) {
@@ -54,7 +54,7 @@ export default function useCustomer() {
           params: {
             filter: queryParams ? updatedFilter : {},
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {
@@ -75,7 +75,7 @@ export default function useCustomer() {
   const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customer);
   const dispatch = useAppDispatch();
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   useEffect(() => {
     localStoreUtil.remove_data("customers");

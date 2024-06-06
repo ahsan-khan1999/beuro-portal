@@ -32,7 +32,7 @@ export default function Contract() {
     <TableRows
       dataToAdd={currentPageRows}
       handleImageUpload={handleImageUpload}
-      openModal={handleNotes}
+      handleNotes={handleNotes}
       handlePaymentStatusUpdate={handlePaymentStatusUpdate}
       handleContractStatusUpdate={handleContractStatusUpdate}
     />,

@@ -21,8 +21,8 @@ export default function SupportRequest() {
     loading,
     currentPage,
     handleStatusChange,
-    totalCount,
     renderModal,
+    totalCount,
   } = useSupportRequest();
 
   const CurrentComponent = useAdminEmptyStates(
@@ -54,7 +54,6 @@ export default function SupportRequest() {
         onPageChange={handlePageChange}
         currentPage={currentPage}
       />
-
       {renderModal()}
     </Layout>
   );

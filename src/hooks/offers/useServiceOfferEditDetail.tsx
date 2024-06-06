@@ -276,6 +276,7 @@ export const useServiceOfferEditDetail = ({
     } else if (newLength < currentLength) {
       setServiceType(serviceType.slice(0, newLength));
     }
+    generateGrandTotal();
   }, [serviceFields?.length]);
 
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
@@ -324,6 +325,15 @@ export const useServiceOfferEditDetail = ({
     }
   };
 
+  const handleRemoveService = (index: number) => {
+    remove(index);
+    const data = getValues();
+
+    reset({
+      ...data,
+    });
+  };
+
   const fields = AddOfferServiceDetailsFormField(
     register,
     loading,
@@ -338,7 +348,7 @@ export const useServiceOfferEditDetail = ({
       offerDetails,
     },
     append,
-    remove,
+    handleRemoveService,
     serviceType,
     handleServiceChange,
     serviceFields,

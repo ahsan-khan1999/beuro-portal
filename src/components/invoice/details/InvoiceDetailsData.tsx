@@ -5,7 +5,6 @@ import { InvoiceCardContentProps } from "@/types/invoice";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import recurring from "@/assets/svgs/recurring icon.svg";
-import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { updateQuery } from "@/utils/update-query";
@@ -22,7 +21,6 @@ const InvoiceDetailsData = ({
   handleInvoiceEdit,
 }: InvoiceCardContentProps) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
 
   const handleBack = () => {
     router.pathname = "/invoices";
@@ -214,7 +212,14 @@ const InvoiceDetailsData = ({
             </div>
             <div
               className="flex gap-2 items-center cursor-pointer"
-              onClick={(e) => handleNotes(invoiceDetails?.id, e)}
+              onClick={(e) =>
+                handleNotes(
+                  invoiceDetails?.id,
+                  invoiceDetails?.invoiceNumber,
+                  invoiceDetails?.customerDetail?.fullName,
+                  e
+                )
+              }
             >
               <span className="text-base font-normal text-[#4D4D4D]">
                 {translate("invoice.card_content.notes")}:

@@ -99,10 +99,10 @@ export default function useCustomerDetailAdmin() {
     ),
     [ModalType.CREATION]: (
       <CreationCreated
-        heading={translate("common.are_you_sure_modal.success")}
-        subHeading={translate("common.are_you_sure_modal.success_heading")}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.record_update_des")}
         onClose={onClose}
-        route={route}
+        route={onClose}
       />
     ),
     [ModalType.CONFIRM_DELETION]: (

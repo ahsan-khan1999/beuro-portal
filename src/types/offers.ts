@@ -238,9 +238,16 @@ export interface OffersDiscountDataTypes {
 export interface OfferDetailCardProps {
   offerDetails: OffersTableRowTypes;
   offerDeleteHandler: () => void;
-  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refID: string,
+    name: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleStatusUpdate: (id: string) => void;

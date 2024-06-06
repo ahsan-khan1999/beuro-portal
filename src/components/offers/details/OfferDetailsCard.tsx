@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "../../../utils/static";
-import { useTranslation } from "next-i18next";
 import { OfferDetailCardProps } from "@/types/offers";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
@@ -35,7 +34,6 @@ const OfferDetailsCard = ({
   onFileUpload,
 }: OfferDetailCardProps) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
 
   const itemsValue = [
     `${translate("offer_status.Open")}`,
@@ -338,7 +336,14 @@ const OfferDetailsCard = ({
 
               <span
                 className="cursor-pointer"
-                onClick={(e) => handleNotes(offerDetails?.id, e)}
+                onClick={(e) =>
+                  handleNotes(
+                    offerDetails?.id,
+                    offerDetails?.offerNumber,
+                    offerDetails?.leadID?.customerDetail?.fullName,
+                    e
+                  )
+                }
               >
                 <WriteIcon
                   pathClass={
@@ -354,7 +359,14 @@ const OfferDetailsCard = ({
 
               <span
                 className="cursor-pointer"
-                onClick={(e) => handleImageUpload(offerDetails?.id, e)}
+                onClick={(e) =>
+                  handleImageUpload(
+                    offerDetails?.id,
+                    offerDetails?.offerNumber,
+                    offerDetails?.leadID?.customerDetail?.fullName,
+                    e
+                  )
+                }
               >
                 <ImageUploadIcon
                   pathClass={offerDetails?.isImageAdded ? "#FF0000" : "#4A13E7"}

@@ -26,7 +26,6 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { readImage } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import localStoreUtil from "@/utils/localstore.util";
-import toast from "react-hot-toast";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
@@ -100,28 +99,46 @@ export default function useOfferDetails() {
     dispatch(deleteOffer({ offerDetails, router, translate }));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
     if (e) {
       e.stopPropagation();
     }
     dispatch(readNotes({ params: { type: "offer", id: offerDetails?.id } }));
-    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
-  };
-
-  const handleAddNote = (id: string) => {
     dispatch(
       updateModalType({
-        type: ModalType.ADD_NOTE,
-        data: { id: id, type: "offer" },
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          refID: refID,
+          name: name,
+        },
       })
     );
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleAddNote = (id: string, refID: string, name: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.ADD_NOTE,
+        data: { id: id, type: "offer", refID: refID, name: name },
+      })
+    );
+  };
+
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "offer", data: note },
+        data: { id: id, type: "offer", data: note, refID: refID, name: name },
       })
     );
   };
@@ -138,12 +155,22 @@ export default function useOfferDetails() {
   };
 
   const handleImageUpload = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
+    e?.stopPropagation();
     dispatch(readImage({ params: { type: "offerID", id: offerDetails?.id } }));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: refID,
+          name: name,
+        },
+      })
+    );
   };
 
   const handleSendEmail = async () => {

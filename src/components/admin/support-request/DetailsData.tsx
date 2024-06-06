@@ -5,6 +5,7 @@ import { DropDownItem } from "@/types";
 import { ContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
+import { updateQuery } from "@/utils/update-query";
 
 const DetailsData = ({
   supportDetail,
@@ -30,11 +31,17 @@ const DetailsData = ({
     })
   );
 
+  const handleBack = () => {
+    router.pathname = "/admin/support-request";
+    delete router.query["supportRequest"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <>
       <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
-          <div onClick={handlePreviousClick} className="cursor-pointer">
+          <div onClick={handleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"

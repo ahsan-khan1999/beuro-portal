@@ -64,7 +64,7 @@ const OfferDetails = () => {
             handleUpdateDiscount={handleUpdateDiscount}
             currency={systemSettings?.currency}
             shareImgModal={shareImgModal}
-            handleImagesUpload={handleUploadImages}
+            handleImagesUpload={handleImageUpload}
             handleImageSlider={handleImageSlider}
           />
         )}

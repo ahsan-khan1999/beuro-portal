@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import { useTranslation } from "next-i18next";
 import AddressDetailsData from "./AddressDetailsData";
 import CustomerDetailsData from "./CustomerDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
@@ -11,6 +10,7 @@ import CustomerEditDetails from "../edit/CustomerEditDetails";
 import ServiceEditDetails from "../edit/ServiceEditDetails";
 import AditionalEditDetails from "../edit/AditionalEditDetails";
 import OfferEditImages from "@/components/offers/OfferEditImages";
+import { Lead } from "@/types/leads";
 
 export enum ComponentsType {
   customer,
@@ -23,20 +23,26 @@ export enum ComponentsType {
   additionalEdit,
 }
 
+export interface LeadDetailsProps {
+  leadDetails: Lead;
+  loading: boolean;
+  shareImgModal: Function;
+  handleImagesUpload: (
+    id: string,
+    refID: string,
+    name: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
+}
+
 const LeadsDetailsData = ({
   loading,
   shareImgModal,
   handleImagesUpload,
   handleImageSlider,
-}: {
-  loading: boolean;
-  shareImgModal: Function;
-  handleImagesUpload: (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
-  handleImageSlider: () => void;
-}) => {
+  leadDetails,
+}: LeadDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
 
   const [data, setData] = useState<{
@@ -47,8 +53,6 @@ const LeadsDetailsData = ({
   const handleEdit = (index: number, component: ComponentsType) => {
     setData({ index, component });
   };
-
-  const { t: translate } = useTranslation();
 
   const componentArray = [
     <CustomerDetailsData onClick={handleEdit} />,
@@ -192,6 +196,9 @@ const LeadsDetailsData = ({
           shareImgModal={shareImgModal}
           handleImagesUpload={handleImagesUpload}
           tabType={tabType}
+          id={leadDetails?.id}
+          refID={leadDetails?.refID}
+          name={leadDetails?.customerDetail?.fullName}
           handleImageSlider={handleImageSlider}
         />
       </div>

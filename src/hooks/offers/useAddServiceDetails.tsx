@@ -236,7 +236,6 @@ export const useAddServiceDetails = (
   useMemo(() => {
     const currentLength = serviceType?.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
-
     if (newLength > currentLength) {
       setServiceType([
         ...serviceType,
@@ -247,7 +246,17 @@ export const useAddServiceDetails = (
     } else if (newLength < currentLength) {
       setServiceType(serviceType.slice(0, newLength));
     }
+    generateGrandTotal();
   }, [serviceFields?.length]);
+
+  const handleRemoveService = (index: number) => {
+    remove(index);
+    const data = getValues();
+
+    reset({
+      ...data,
+    });
+  };
 
   const onServiceSelectType = (index: number) => {
     setValue(
@@ -284,8 +293,8 @@ export const useAddServiceDetails = (
     const updatedService = serviceType.map((type, i) =>
       i === index ? newServiceType : type
     );
-    setServiceType(updatedService);
 
+    setServiceType(updatedService);
     const fieldNamePrefix = "serviceDetail";
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
@@ -340,7 +349,7 @@ export const useAddServiceDetails = (
       offerDetails,
     },
     append,
-    remove,
+    handleRemoveService,
     serviceType,
     handleServiceChange,
     serviceFields,
@@ -373,6 +382,7 @@ export const useAddServiceDetails = (
     serviceFields,
     setValue
   );
+
   const submitFields = AddOfferDetailsServiceSubmitFormField(
     loading,
     handleBack

@@ -114,7 +114,15 @@ const AddNewLeadsData = () => {
 
   const imageUploadHandler = () => {
     dispatch(setImages([]));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_IMAGE,
+        data: {
+          refID: leadDetails?.refID,
+          name: leadDetails?.customerDetail?.fullName,
+        },
+      })
+    );
     // dispatch(readImage({ params: { type: "leadID", id: leadDetails?.id } }));
   };
 

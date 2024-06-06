@@ -4,26 +4,33 @@ import LeadsDetailImgLayout from "@/layout/Leads/LeadsDetailImgLayout";
 import shareIcon from "@/assets/svgs/share_icon.svg";
 import imageUpload from "@/assets/svgs/img_upload.svg";
 import { useAppSelector } from "@/hooks/useRedux";
-import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
+export interface DetailImgUploadProps {
+  shareImgModal: Function;
+  handleImagesUpload: (
+    id: string,
+    refID: string,
+    name: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  tabType: number;
+  handleImageSlider: () => void;
+  id: string;
+  refID: string;
+  name: string;
+}
 const OfferEditImages = ({
   shareImgModal,
   handleImagesUpload,
   tabType,
   handleImageSlider,
-}: {
-  shareImgModal: Function;
-  handleImagesUpload: (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
-  tabType: number;
-  handleImageSlider: () => void;
-}) => {
+  id,
+  name,
+  refID,
+}: DetailImgUploadProps) => {
   const { images } = useAppSelector((state) => state.image);
-  const { offerDetails } = useAppSelector((state) => state.offer);
-  const { t: translate } = useTranslation();
+  // const { offerDetails } = useAppSelector((state) => state.offer);
 
   return (
     <LeadsDetailImgLayout>
@@ -70,7 +77,7 @@ const OfferEditImages = ({
 
         <div className="flex justify-end items-center mx-[13px] pb-3">
           <span
-            onClick={(e) => handleImagesUpload(offerDetails?.id, e)}
+            onClick={(e) => handleImagesUpload(id, refID, name, e)}
             className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer `}
           >
             {translate("offers.side_images.upload_button")}

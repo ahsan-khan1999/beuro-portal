@@ -6,6 +6,8 @@ import { formatDateTimeToDate } from "@/utils/utility";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { staticEnums } from "@/utils/static";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
+import { useRouter } from "next/router";
+import { updateQuery } from "@/utils/update-query";
 
 export interface AdminCustomerProps {
   customerDetail: CustomersAdmin;
@@ -28,17 +30,25 @@ const DetailsData = ({
     `${translate("customer_status.unBlock")}`,
   ];
 
+  const router = useRouter();
+
   const items = Object.keys(staticEnums["User"]["accountStatus"]).map(
     (item, index) => ({
       item: { label: customerStatus[index], value: item },
     })
   );
 
+  const handleBack = () => {
+    router.pathname = "/admin/customers";
+    delete router.query["customer"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-4 justify-between lg:items-center pb-5">
         <div className="flex items-center">
-          <div onClick={onHandleBack} className="cursor-pointer">
+          <div onClick={handleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
