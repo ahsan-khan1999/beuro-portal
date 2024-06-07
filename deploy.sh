@@ -6,4 +6,4 @@ ls
 source ~/.nvm/nvm.sh
 git pull
 npm i
-pm2 restart frontend
+pm2 restart buero-frontend
