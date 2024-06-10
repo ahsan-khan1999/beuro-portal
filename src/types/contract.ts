@@ -12,7 +12,7 @@ export interface contractTableTypes {
   offerID: ContractOfferDetails;
   createdAt: string;
   mail: {
-    mailStatus: "open" | "failed" | "pending";
+    mailStatus: 0 | 1;
   };
   contractStatus: "Open" | "Confirmed" | "Cancelled";
   paymentType: string;

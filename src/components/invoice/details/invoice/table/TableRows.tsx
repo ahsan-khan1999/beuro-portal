@@ -85,8 +85,8 @@ const TableRows = ({
                   {item.amount + " " + systemSettings?.currency}
                 </span>
 
-                <span className="py-4">
-                  <div
+                <div className="py-4">
+                  <span
                     style={{
                       backgroundColor: `${getInvoiceEmailColor(
                         item.emailStatus
@@ -95,8 +95,8 @@ const TableRows = ({
                     className="text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm min-w-[70px] w-full"
                   >
                     {translate(item?.emailStatus)}
-                  </div>
-                </span>
+                  </span>
+                </div>
 
                 <span className="py-4" onClick={(e) => e.stopPropagation()}>
                   <div className="flex items-center">
