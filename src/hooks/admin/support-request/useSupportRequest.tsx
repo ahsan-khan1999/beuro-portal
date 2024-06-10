@@ -37,7 +37,7 @@ export default function useSupportRequest() {
   const { modal } = useAppSelector((state) => state.global);
 
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -135,7 +135,7 @@ export default function useSupportRequest() {
         params: {
           filter: updatedFilter,
           page: (Number(parsedPage) || resetPage) ?? currentPage,
-          size: 10,
+          size: 15,
         },
       })
     ).then((res: any) => {

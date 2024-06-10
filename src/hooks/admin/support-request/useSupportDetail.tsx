@@ -7,7 +7,6 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { DropDownItem } from "@/types";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";

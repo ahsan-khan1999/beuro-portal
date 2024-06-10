@@ -5,7 +5,6 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
@@ -33,7 +32,6 @@ let prevDisAmount: number | string = "";
 export const useAddServiceDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void
 ) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const [total, setTotal] = useState<Total>({
     subTotal: 0,
@@ -252,9 +250,17 @@ export const useAddServiceDetails = (
   const handleRemoveService = (index: number) => {
     remove(index);
     const data = getValues();
-
     reset({
       ...data,
+    });
+
+    setServiceType((prev) => {
+      const newlist = [...prev];
+
+      newlist[index] =
+        data?.serviceDetail[index]?.serviceType === "New Service" ? 0 : 1;
+
+      return newlist;
     });
   };
 
@@ -295,7 +301,6 @@ export const useAddServiceDetails = (
     );
 
     setServiceType(updatedService);
-    const fieldNamePrefix = "serviceDetail";
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==

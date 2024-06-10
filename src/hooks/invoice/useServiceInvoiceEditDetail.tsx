@@ -335,6 +335,15 @@ export const useServiceInvoiceEditDetail = ({
     reset({
       ...data,
     });
+
+    setServiceType((prev) => {
+      const newlist = [...prev];
+
+      newlist[index] =
+        data?.serviceDetail[index]?.serviceType === "New Service" ? 0 : 1;
+
+      return newlist;
+    });
   };
 
   const fields = EditInvoiceServiceDetailsFormField(

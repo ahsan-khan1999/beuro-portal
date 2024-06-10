@@ -53,7 +53,7 @@ const useLeads = () => {
   }, []);
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 15);
+    const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);

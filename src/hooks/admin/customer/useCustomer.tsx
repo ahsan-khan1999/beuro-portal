@@ -33,7 +33,7 @@ export default function useCustomer() {
 
   const dispatch = useAppDispatch();
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
@@ -84,7 +84,7 @@ export default function useCustomer() {
         params: {
           filter: updatedFilter,
           page: (Number(parsedPage) || resetPage) ?? currentPage,
-          size: 10,
+          size: 15,
         },
       })
     ).then((res: any) => {
