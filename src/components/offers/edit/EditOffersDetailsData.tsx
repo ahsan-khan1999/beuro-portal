@@ -23,9 +23,11 @@ const EditOffersDetailsData = ({
   handleImageSlider,
   tab,
 }: {
-  shareImgModal: Function;
+  shareImgModal: (id: string, refID: string, name: string) => void;
   handleImagesUpload: (
-    item: string,
+    id: string,
+    refID: string,
+    name: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
@@ -150,6 +152,9 @@ const EditOffersDetailsData = ({
           shareImgModal={shareImgModal}
           handleImagesUpload={handleImagesUpload}
           tabType={tabType}
+          id={offerDetails?.id}
+          name={offerDetails?.leadID?.customerDetail?.fullName}
+          refID={offerDetails?.offerNumber}
           handleImageSlider={handleImageSlider}
         />
       </div>

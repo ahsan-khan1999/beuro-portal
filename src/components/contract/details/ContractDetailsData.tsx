@@ -20,7 +20,7 @@ export enum ComponentsType {
 
 export interface ContractDetailProps {
   loading: boolean;
-  shareImgModal: Function;
+  shareImgModal: (id: string, refID?: string, name?: string) => void;
   handleImageUpload: (
     id: string,
     refID: string,

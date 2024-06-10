@@ -7,7 +7,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 export interface DetailImgUploadProps {
-  shareImgModal: Function;
+  shareImgModal: (id: string, refID: string, name: string) => void;
   handleImagesUpload: (
     id: string,
     refID: string,
@@ -20,6 +20,7 @@ export interface DetailImgUploadProps {
   refID: string;
   name: string;
 }
+
 const OfferEditImages = ({
   shareImgModal,
   handleImagesUpload,
@@ -30,7 +31,6 @@ const OfferEditImages = ({
   refID,
 }: DetailImgUploadProps) => {
   const { images } = useAppSelector((state) => state.image);
-  // const { offerDetails } = useAppSelector((state) => state.offer);
 
   return (
     <LeadsDetailImgLayout>
@@ -48,7 +48,7 @@ const OfferEditImages = ({
                 src={shareIcon}
                 alt="shareIcon"
                 className="cursor-pointer"
-                onClick={() => shareImgModal()}
+                onClick={() => shareImgModal(id, refID, name)}
               />
             )}
         </div>

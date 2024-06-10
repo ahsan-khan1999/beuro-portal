@@ -26,7 +26,7 @@ export enum ComponentsType {
 export interface LeadDetailsProps {
   leadDetails: Lead;
   loading: boolean;
-  shareImgModal: Function;
+  shareImgModal: (id: string, refID?: string, name?: string) => void;
   handleImagesUpload: (
     id: string,
     refID: string,

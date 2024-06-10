@@ -59,7 +59,7 @@ pipelines:
                 USER: $USER
                 SERVER: $SERVER
                 REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
-                LOCAL_PATH: "./build"
+                LOCAL_PATH:  "${BITBUCKET_CLONE_DIR}/"
                 EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore"
             - echo "Build Transported...!"
             - pipe: atlassian/ssh-run:0.4.1

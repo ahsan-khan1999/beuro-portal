@@ -15,12 +15,12 @@ export const UpdateNoteFormField: GenerateUpdateNoteFormField = (
       label: {
         text: `${translate("common.add_note_modal.label")}`,
         htmlFor: "description",
-        className: "mb-[10px] text-[#8F8F8F]",
+        className: "mb-[10px] text-[#1E1E1E]",
       },
 
       field: {
         type: Field.ckEditor,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+        className: "!p-4 !border-[#1E1E1E] focus:!border-primary",
         id: "description",
         name: "description",
         control,

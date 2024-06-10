@@ -108,8 +108,16 @@ export default function useLeadDetail() {
     );
   };
 
-  const shareImgModal = () => {
-    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  const shareImgModal = (id: string, refID?: string, name?: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SHARE_IMAGES,
+        data: {
+          refID: refID,
+          name: name,
+        },
+      })
+    );
   };
 
   const MODAL_CONFIG: ModalConfigType = {

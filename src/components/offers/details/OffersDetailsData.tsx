@@ -21,7 +21,7 @@ export interface OfferDetailsProps {
   loading: boolean;
   handleUpdateDiscount: (discount: number) => void;
   currency?: string;
-  shareImgModal: Function;
+  shareImgModal: (id: string, refID?: string, name?: string) => void;
   handleImagesUpload: (
     id: string,
     refID: string,

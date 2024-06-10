@@ -49,8 +49,7 @@ const ExistingNotes = ({
           <p className="text-2xl font-medium text-[#000]">
             {translate("common.notes_modal.heading")}
           </p>
-          <p>{refID}</p>
-          <p>{name}</p>
+
           <div className="flex justify-between items-center gap-[10px]">
             <BaseButton
               onClick={() => handleAddNote(leadDetails?.id, refID, name)}
@@ -61,25 +60,23 @@ const ExistingNotes = ({
           </div>
         </div>
 
-        <span className="mb-[13px] w-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="651"
-            height="3"
-            viewBox="0 0 651 3"
-            fill="none"
-          >
-            <path
-              opacity="0.1"
-              d="M0.585938 1.06348L650.043 1.06342"
-              stroke="black"
-              strokeWidth="2"
-            />
-          </svg>
-        </span>
+        <div className="border-y border-y-[#000] border-opacity-10 py-[10px] mx-10 mb-[46px]">
+          <div className="flex items-center gap-x-[34px]">
+            <div className="flex items-center gap-x-[14px]">
+              <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+              <span className="text-sm font-medium text-primary">{refID}</span>
+            </div>
+            <div className="flex items-center gap-x-[14px]">
+              <span className="text-sm font-normal text-[#4D4D4D]">
+                {translate("common.customer_name")}:
+              </span>
+              <span className="text-sm font-medium text-primary">{name}</span>
+            </div>
+          </div>
+        </div>
 
         {notes && notes?.length > 0 ? (
-          <div className="h-[615px] overflow-y-auto overflow-x-hidden">
+          <div className="h-[550px] overflow-y-auto overflow-x-hidden">
             {notes?.map((item, key) => (
               <div
                 className={`mb-[10px] ${
