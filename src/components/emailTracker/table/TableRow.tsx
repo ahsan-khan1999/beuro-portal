@@ -6,11 +6,9 @@ import {
   formatDateTimeToTime,
   getMailStatusColor,
 } from "@/utils/utility";
-import { useTranslation } from "next-i18next";
 
 const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
 
   return (
     <div>

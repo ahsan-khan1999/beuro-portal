@@ -37,7 +37,6 @@ export default function Services() {
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
-        translate={translate}
       />
       <TableCardLayout>
         <TableLayout>

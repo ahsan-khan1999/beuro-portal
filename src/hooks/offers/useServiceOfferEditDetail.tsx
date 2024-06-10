@@ -285,7 +285,6 @@ export const useServiceOfferEditDetail = ({
     );
     setServiceType(updatedService);
 
-    const fieldNamePrefix = "serviceDetail";
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
@@ -331,6 +330,15 @@ export const useServiceOfferEditDetail = ({
 
     reset({
       ...data,
+    });
+
+    setServiceType((prev) => {
+      const newlist = [...prev];
+
+      newlist[index] =
+        data?.serviceDetail[index]?.serviceType === "New Service" ? 0 : 1;
+
+      return newlist;
     });
   };
 

@@ -20,7 +20,7 @@ export default function useCustomer() {
   const page = query?.page as unknown as number;
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 15);
+    const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
 
     if (!isNaN(parsedPage) && parsedPage !== undefined) {
@@ -82,7 +82,7 @@ export default function useCustomer() {
     dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
   }, []);
 
-  const handleFilterChange = (query: FilterType) => {
+  const handleFilterChange = () => {
     setCurrentPage(1);
   };
 

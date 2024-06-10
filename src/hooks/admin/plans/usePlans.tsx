@@ -29,10 +29,11 @@ export default function usePlans() {
   const dispatch = useAppDispatch();
 
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
+
   useEffect(() => {
     // dispatch(set(DEFAULT_CUSTOMER))
-    dispatch(readPlan({ params: { filter: filter, page: 1, size: 10 } })).then(
+    dispatch(readPlan({ params: { filter: filter, page: 1, size: 15 } })).then(
       (res: any) => {
         if (res?.payload) {
           setCurrentPageRows(res?.payload?.Plan || []);
