@@ -38,7 +38,7 @@ export const DocumentHeader = ({
                 {offerNo}
               </span>
             </div>
-            <div className="flex gap-[5px] ">
+            <div className="flex gap-[5px]">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
                 // style={{ color: textColor }}

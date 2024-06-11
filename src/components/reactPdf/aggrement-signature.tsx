@@ -49,9 +49,11 @@ const styles = StyleSheet.create({
 export const AggrementSignature = ({
   showContractSign,
   signature,
+  language,
 }: {
   signature?: any;
   showContractSign?: boolean;
+  language?: string;
 }) => {
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
   const onFileChange = () => {
@@ -66,6 +68,17 @@ export const AggrementSignature = ({
 
   useMemo(() => signature && onFileChange(), [signature]);
   const date = pdfDateFormat(new Date().toString(), "de");
+
+  const langContent = {
+    en: {
+      date: "Date",
+      signature: "Signature",
+    },
+    de: {
+      date: "Datum",
+      signature: "Unterschrift",
+    },
+  };
 
   return (
     <View style={styles.wrapper}>
@@ -84,7 +97,9 @@ export const AggrementSignature = ({
                   {date}
                 </Text>
               }
-              <Text style={styles.dateText}>Datum</Text>
+              <Text style={styles.dateText}>
+                {langContent[language as keyof typeof langContent]?.date}
+              </Text>
             </View>
 
             <View style={{ width: "40%" }}>
@@ -95,7 +110,9 @@ export const AggrementSignature = ({
                 />
               )}
               <View style={styles.signature}>
-                <Text style={styles.dateText}>Signature</Text>
+                <Text style={styles.dateText}>
+                  {langContent[language as keyof typeof langContent]?.signature}
+                </Text>
               </View>
             </View>
           </View>

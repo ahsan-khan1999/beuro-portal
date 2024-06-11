@@ -882,6 +882,7 @@ export interface DocumentHeaderDetailsProps {
   companyName?: string;
   isReverseLogo?: boolean;
   language?: string;
+  isOffer?: boolean;
 }
 
 export interface ProductItemFooterProps {
@@ -909,6 +910,7 @@ export interface ProductItemFooterProps {
   isTax?: boolean;
   isDiscount?: boolean;
   discountDescription?: string;
+  language?: string;
 }
 
 export interface ContactDetailsProps {
@@ -936,6 +938,7 @@ export interface MovingDetailsProps {
   handleEditDateModal?: () => void;
   time?: string;
   isReverseAddress?: boolean;
+  language?: string;
 }
 export interface ProductItemProps {
   title: string;

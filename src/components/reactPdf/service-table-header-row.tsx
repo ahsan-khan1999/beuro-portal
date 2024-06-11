@@ -48,26 +48,61 @@ const styles = StyleSheet.create({
 
 export const ServiceTableHederRow = ({
   isDiscount,
+  language,
 }: {
   isDiscount?: boolean;
+  language?: string;
 }) => {
+  const langContent = {
+    en: {
+      service: "Service / Product",
+      description: "Description",
+      count: "Count",
+      unit: "Unit",
+      price: "Price",
+      discount: "Discount",
+      total: "Total",
+    },
+    de: {
+      service: "Dienstleistung / Produkt",
+      description: "Beschreibung",
+      count: "Anzahl",
+      unit: "Einheit",
+      price: "Preis",
+      discount: "Rabatt",
+      total: "Gesamt",
+    },
+  };
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerRow}>
-        <Text style={styles.headerTitle}>{translate("pdf.service")}</Text>
+        <Text style={styles.headerTitle}>
+          {langContent[language as keyof typeof langContent]?.service}
+        </Text>
         <Text style={styles.headerDescription}>
-          {translate("pdf.description")}
+          {langContent[language as keyof typeof langContent]?.description}
         </Text>
 
         <View style={styles.priceHeader}>
-          <Text style={styles.headerText}>{translate("pdf.count")}</Text>
-          <Text style={styles.headerText}>{translate("pdf.unit")}</Text>
-          <Text style={styles.headerText}>{translate("pdf.price")}</Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.count}
+          </Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.unit}
+          </Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.price}
+          </Text>
 
           {isDiscount && (
-            <Text style={styles.headerText}>{translate("pdf.discount")}</Text>
+            <Text style={styles.headerText}>
+              {langContent[language as keyof typeof langContent]?.discount}
+            </Text>
           )}
-          <Text style={styles.headerText}>{translate("pdf.total")}</Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.total}
+          </Text>
         </View>
       </View>
     </View>

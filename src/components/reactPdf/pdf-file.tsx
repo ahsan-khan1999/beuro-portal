@@ -103,9 +103,12 @@ const PdfFile = ({
         >
           <ContactAddress {...{ ...contactAddress }} />
 
-          <AddressDetails {...{ address, header, workDates, time }} />
+          <AddressDetails
+            {...{ address, header, workDates, time }}
+            language={lang}
+          />
 
-          <ServiceTableHederRow isDiscount={isDiscount} />
+          <ServiceTableHederRow isDiscount={isDiscount} language={lang} />
           {serviceItem?.map((item, index) => (
             <ServiceTableRow
               {...item}
@@ -131,6 +134,7 @@ const PdfFile = ({
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSetting}
+            language={lang}
           />
         </View>
         <Footer
@@ -144,7 +148,7 @@ const PdfFile = ({
 
       {/* Additional details */}
       <Page style={styles.body}>
-        <Header {...headerDetails} />
+        <Header {...headerDetails} language={lang} />
         <View
           style={{
             position: "absolute",

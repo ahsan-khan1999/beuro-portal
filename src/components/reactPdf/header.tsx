@@ -10,7 +10,8 @@ export const Header = ({
   offerNo,
   fileType,
   isReverseLogo,
-  language,
+  language = "de",
+  isOffer,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const fomrattedDate = formatDateTimeToDate(offerDate || "");
   const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
@@ -64,6 +65,7 @@ export const Header = ({
         padding: 20,
         fontFamily: "Poppins",
       }}
+      key={language}
       fixed
     >
       <View style={{ width: "65%" }}>
@@ -96,11 +98,13 @@ export const Header = ({
             }}
           >
             {(fileType &&
-              langContent[language]?.HeaderLabelNr[
-                fileType as keyof typeof HeaderLabel
+              langContent[language as keyof typeof langContent]?.HeaderLabelNr[
+                fileType as keyof typeof HeaderLabelNr
               ]) ||
-              langContent[language]?.offer}
-            {langContent[language]?.no}:{" "}
+              langContent[language as keyof typeof langContent]?.offer
+              
+              }
+            {langContent[language as keyof typeof langContent]?.no}:{" "}
           </Text>
           <Text
             style={{
@@ -130,11 +134,11 @@ export const Header = ({
             }}
           >
             {(fileType &&
-              langContent[language]?.HeaderLabel[
+              langContent[language as keyof typeof langContent]?.HeaderLabel[
                 fileType as keyof typeof HeaderLabel
               ]) ||
-              langContent[language]?.create}{" "}
-            {langContent[language]?.date}:{" "}
+              langContent[language as keyof typeof langContent]?.create}{" "}
+            {langContent[language as keyof typeof langContent]?.date}:{" "}
           </Text>
           <Text
             style={{
@@ -157,8 +161,7 @@ export const Header = ({
               // color: `#${textColour}`,
             }}
           >
-            {/* {translate("pdf.created_by")} : */}
-            {langContent[language]?.created_by}:{" "}
+            {langContent[language as keyof typeof langContent]?.created_by}:{" "}
           </Text>
           <Text
             style={{

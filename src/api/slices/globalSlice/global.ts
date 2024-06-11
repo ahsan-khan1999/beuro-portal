@@ -13,7 +13,7 @@ const initialState: GlobalState = {
     type: ModalType.NONE,
     data: "",
   },
-  currentLanguage: "en",
+  currentLanguage: "de",
 };
 
 // file upload connect with the firebase

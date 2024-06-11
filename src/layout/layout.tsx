@@ -5,13 +5,20 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGlobalUser } from "@/utils/hooks";
 import SideBar from "@/base-components/SideBar";
 import Header from "@/base-components/Header";
+import { useRouter } from "next/router";
+import { updateCurrentLanguage } from "@/api/slices/globalSlice/global";
 
 export const Layout = ({ children }: MyComponentProp) => {
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const locale = useRouter().locale;
   useEffect(() => {
     if (!user) useGlobalUser(user, dispatch);
   }, []);
+
+  useEffect(() => {
+    dispatch(updateCurrentLanguage(locale));
+  }, [locale]);
 
   return (
     <>

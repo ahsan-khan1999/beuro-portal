@@ -128,13 +128,11 @@ const OfferPdfPreview = ({
       : false || false;
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
-  console.log(lang, "language offer");
-
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
       <Document title={data?.headerDetails?.offerNo || ""}>
         <Page style={styles.body} dpi={72}>
-          <Header {...headerDetails} language={lang} />
+          <Header {...headerDetails} language={lang} isOffer={true} />
           <View
             style={{
               position: "absolute",
@@ -144,8 +142,11 @@ const OfferPdfPreview = ({
             }}
           >
             <ContactAddress {...{ ...contactAddress }} />
-            <AddressDetails {...{ address, header, workDates, time }} />
-            <ServiceTableHederRow isDiscount={isDiscount} />
+            <AddressDetails
+              {...{ address, header, workDates, time }}
+              language={lang}
+            />
+            <ServiceTableHederRow isDiscount={isDiscount} language={lang} />
             {serviceItem?.map((item, index, arr) => (
               <ServiceTableRow
                 {...item}
@@ -171,6 +172,7 @@ const OfferPdfPreview = ({
             <ServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}
+              language={lang}
             />
             ContentPdfPreview
           </View>
@@ -186,7 +188,7 @@ const OfferPdfPreview = ({
         {/* Additional details */}
         <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
           <View style={{ marginBottom: 10 }} fixed>
-            <Header {...headerDetails} />
+            <Header {...headerDetails} language={lang} />
           </View>
           {/* <View
             style={{
@@ -199,7 +201,10 @@ const OfferPdfPreview = ({
           > */}
           {/* <ContactAddress {...{ ...contactAddress }} /> */}
           <AdditionalDetails description={aggrementDetails} />
-          <AggrementSignature showContractSign={showContractSign} />
+          <AggrementSignature
+            showContractSign={showContractSign}
+            language={lang}
+          />
 
           {/* </View> */}
           <Footer
