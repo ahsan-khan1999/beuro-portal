@@ -44,7 +44,7 @@ export interface OffersTableRowTypes {
   createdBy: User;
   discountType: keyof (typeof staticEnums)["DiscountType"];
   mail: {
-    mailStatus: "open" | "failed" | "pending";
+    mailStatus: 0 | 1;
   };
   emailStatus: "Pending" | "Sent" | "Failed";
   isDiscount: boolean;

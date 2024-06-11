@@ -14,7 +14,6 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -44,7 +43,6 @@ export default function useOfferDetails() {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const isMail = Boolean(router.query?.isMail);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
-  const { t: translate } = useTranslation();
   const id = router.query.offer;
 
   useEffect(() => {

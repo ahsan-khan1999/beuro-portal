@@ -21,17 +21,8 @@ body {
   color: #1e1e1e;
   background: #f3f3f3;
   overflow-x: hidden;
-
-  font-family: "Poppins", sans-serif;
-  /* Font smoothing for WebKit (Safari, Chrome) */
-  -webkit-font-smoothing: antialiased;
-
-  /* Font smoothing for Mozilla (Firefox) */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Ensures consistent rendering in most browsers */
-  text-rendering: optimizeLegibility;
 }
+
 .pricing-gradient {
   background: linear-gradient(to right, #b503fe, #ff376f);
 }

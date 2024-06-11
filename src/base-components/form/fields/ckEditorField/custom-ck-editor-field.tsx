@@ -2,7 +2,6 @@ import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { CKEditorBoxProps } from "@/types";
 import CustomEditor from "@/base-components/ui/editor/ckeditor/build/ckeditor";
-import { useTranslation } from "next-i18next";
 
 const CustomCKEditor = ({
   id,
@@ -12,7 +11,6 @@ const CustomCKEditor = ({
   name,
   type,
 }: CKEditorBoxProps) => {
-  const { t: translate } = useTranslation();
   return (
     <CKEditor
       id={id}

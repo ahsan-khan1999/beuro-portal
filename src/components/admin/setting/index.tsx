@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 const AdminSettings = () => {
   const { query } = useRouter();
+
   const tab = query.tab;
   const [switchDetails, setSwitchDetails] = useState<number>(0);
 

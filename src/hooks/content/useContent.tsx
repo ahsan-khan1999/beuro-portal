@@ -1,6 +1,5 @@
 import { ContentTableRowTypes } from "@/types/content";
 import { DEFAULT_CONTENT } from "@/utils/static";
-import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
@@ -37,7 +36,6 @@ const useContent = () => {
   >([]);
 
   const totalItems = totalCount;
-  const { t: translate } = useTranslation();
   const itemsPerPage = 15;
 
   useEffect(() => {
@@ -46,7 +44,7 @@ const useContent = () => {
   }, []);
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 15);
+    const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
 
     if (!isNaN(parsedPage)) {

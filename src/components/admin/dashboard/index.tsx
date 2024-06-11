@@ -7,14 +7,12 @@ import DashboardCard from "@/base-components/ui/dashboard-card";
 import activeSubscribersIcon from "@/assets/svgs/leads.svg";
 import pendingCompaniesIcon from "@/assets/svgs/pending-companies.svg";
 import customersIcon from "@/assets/svgs/customers-card.svg";
-import { useTranslation } from "next-i18next";
 import { FilterType } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readAdminDashboard } from "@/api/slices/authSlice/auth";
 import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
 
 const AdminDashboard = () => {
-  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const { adminDashboard } = useAppSelector((state) => state.auth);
   const [filter, setFilter] = useState<FilterType>({
@@ -176,14 +174,14 @@ const AdminDashboard = () => {
           },
         ]}
       /> */}
-      <DashboardFunctions
-        filter={filter}
-        setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
-      />
 
       {adminDashboard !== null ? (
         <>
+          <DashboardFunctions
+            filter={filter}
+            setFilter={setFilter}
+            handleFilterChange={handleFilterChange}
+          />
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-5">
             {dashboardCards.map((item, index) => {
               return (

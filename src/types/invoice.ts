@@ -69,7 +69,7 @@ export interface SubInvoiceTableRowTypes {
   dateOfNextInvoice: string;
   emailStatus: "Pending" | "Sent" | "Failed";
   mail: {
-    mailStatus: "open" | "failed" | "pending";
+    mailStatus: 0 | 1;
   };
   frequency: string;
   invoiceID: InvoiceTableRowTypes;

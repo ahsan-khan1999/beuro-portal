@@ -34,6 +34,13 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
+        const customerType = item?.customerDetail
+          ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+        const name =
+          customerType === 1
+            ? item?.customerDetail?.companyName
+            : item?.customerDetail?.fullName;
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -49,8 +56,8 @@ const TableRows = ({
                   {(item?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item?.customerDetail?.companyName})
+                    <span className="py-4 truncate font-normal text-primary">
+                      {item?.customerDetail?.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">
@@ -111,12 +118,7 @@ const TableRows = ({
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 onClick={(e) =>
-                  handleNotes(
-                    item?.id,
-                    item?.invoiceNumber,
-                    item?.customerDetail?.fullName,
-                    e
-                  )
+                  handleNotes(item?.id, item?.invoiceNumber, name, e)
                 }
                 title={translate("contracts.table_headings.notes")}
                 className="py-3 cursor-pointer flex justify-center items-center"

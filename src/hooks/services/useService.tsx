@@ -3,7 +3,6 @@ import { Service } from "@/types/service";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
 import { readService } from "@/api/slices/service/serviceSlice";
-import { useTranslation } from "next-i18next";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
@@ -14,11 +13,10 @@ const useService = () => {
 
   const dispatch = useAppDispatch();
   const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
-  const { t: translate } = useTranslation();
   const { query } = useRouter();
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 15);
+    const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
 
     if (!isNaN(parsedPage)) {

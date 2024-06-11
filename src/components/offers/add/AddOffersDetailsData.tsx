@@ -15,6 +15,7 @@ import { useTranslation } from "next-i18next";
 import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { staticEnums } from "@/utils/static";
 
 export enum ComponentsType {
   customerAdded,
@@ -86,8 +87,15 @@ const EditOffersDetailsData = () => {
   ];
 
   const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
   const router = useRouter();
+  const { modal } = useAppSelector((state) => state.global);
+
+  const customerType = offerDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? offerDetails?.leadID?.customerDetail?.companyName
+      : offerDetails?.leadID?.customerDetail?.fullName;
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -119,7 +127,7 @@ const EditOffersDetailsData = () => {
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
           refID: offerDetails?.offerNumber,
-          name: offerDetails?.leadID?.customerDetail?.fullName,
+          name: name,
         },
       })
     );

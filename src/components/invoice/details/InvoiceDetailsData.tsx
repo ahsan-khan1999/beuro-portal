@@ -8,6 +8,7 @@ import recurring from "@/assets/svgs/recurring icon.svg";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { updateQuery } from "@/utils/update-query";
+import { staticEnums } from "@/utils/static";
 
 const InvoiceDetailsData = ({
   handleInvoiceCreation,
@@ -28,6 +29,13 @@ const InvoiceDetailsData = ({
     delete router.query["tab"];
     updateQuery(router, router.locale as string);
   };
+
+  const customerType = invoiceDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? invoiceDetails?.customerDetail?.companyName
+      : invoiceDetails?.customerDetail?.fullName;
 
   return (
     <>
@@ -216,7 +224,7 @@ const InvoiceDetailsData = ({
                 handleNotes(
                   invoiceDetails?.id,
                   invoiceDetails?.invoiceNumber,
-                  invoiceDetails?.customerDetail?.fullName,
+                  name,
                   e
                 )
               }

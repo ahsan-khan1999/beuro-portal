@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SettingLayout from "./SettingLayout";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
 const SettingTopDataButtons = ({
@@ -10,16 +9,8 @@ const SettingTopDataButtons = ({
   switchDetails: number;
   setSwitchDetails: (item: number) => void;
 }) => {
-  const { t: translate } = useTranslation();
-  const [selectedTab, setSelectedTab] = useState<number | null>(switchDetails);
-
   const router = useRouter();
-  const buttonsData: string[] = [
-    `${translate("admin.settings.tabs_heading.account")}`,
-    `${translate("admin.settings.tabs_heading.payment")}`,
-    `${translate("admin.settings.tabs_heading.mail")}`,
-  ];
-
+  const [selectedTab, setSelectedTab] = useState<number | null>(switchDetails);
   const tab = router.query.tab;
 
   useEffect(() => {
@@ -31,6 +22,12 @@ const SettingTopDataButtons = ({
       setSelectedTab(0);
     }
   }, [router.query]);
+
+  const buttonsData: string[] = [
+    `${translate("admin.settings.tabs_heading.account")}`,
+    `${translate("admin.settings.tabs_heading.payment")}`,
+    `${translate("admin.settings.tabs_heading.mail")}`,
+  ];
 
   const handleTabClick = (index: number) => {
     setSelectedTab(index);
@@ -44,7 +41,7 @@ const SettingTopDataButtons = ({
         {buttonsData.map((item, index) => (
           <button
             className={`w-fit px-4 py-[10px] text-[#4B4B4B] font-medium text-base ${
-              switchDetails === index
+              selectedTab === index
                 ? "bg-[#4A13E7] text-white rounded-md shadow-lg"
                 : ""
             }`}

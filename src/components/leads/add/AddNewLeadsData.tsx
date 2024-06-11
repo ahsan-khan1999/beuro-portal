@@ -16,6 +16,7 @@ import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 import { setImages } from "@/api/slices/imageSlice/image";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { staticEnums } from "@/utils/static";
 
 export enum ComponentsType {
   customerAdd,
@@ -97,6 +98,13 @@ const AddNewLeadsData = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
+  const customerType = leadDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? leadDetails?.customerDetail?.companyName
+      : leadDetails?.customerDetail?.fullName;
+
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
@@ -119,7 +127,7 @@ const AddNewLeadsData = () => {
         type: ModalType.UPLOAD_IMAGE,
         data: {
           refID: leadDetails?.refID,
-          name: leadDetails?.customerDetail?.fullName,
+          name: name,
         },
       })
     );

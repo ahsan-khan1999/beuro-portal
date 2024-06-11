@@ -16,7 +16,6 @@ import {
 } from "@/api/slices/invoice/invoiceSlice";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { FiltersDefaultValues } from "@/enums/static";
-import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
@@ -34,11 +33,11 @@ const useInvoice = () => {
     invoiceDetails,
     invoiceSum,
   } = useAppSelector((state) => state.invoice);
-  const { t: translate } = useTranslation();
+
   const { query } = useRouter();
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 15);
+    const parsedPage = parseInt(query.page as string, 10);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -268,7 +267,7 @@ const useInvoice = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),

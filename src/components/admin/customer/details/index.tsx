@@ -32,7 +32,7 @@ const CustomerDetails = () => {
             onDelete={deleteHandler}
           />
         </DetailsCard>
-        <div className="mt-8">
+        <div className="mt-5">
           {loading ? (
             <CustomPuffLoader />
           ) : (
