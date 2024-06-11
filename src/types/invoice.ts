@@ -97,6 +97,7 @@ export interface InvoiceCardContentProps {
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleRecurringInvoiceCreation: () => void;

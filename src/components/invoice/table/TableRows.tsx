@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import { InvoiceTableRowTypes } from "@/types/invoice";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
@@ -14,12 +13,11 @@ const TableRows = ({
     id: string,
     refId: string,
     name: string,
+    heading: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => void;
 }) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
-
   const handleInvoicePdfPreview = (id?: string) => {
     router.push({
       pathname: "/invoices/pdf-preview",
@@ -40,6 +38,11 @@ const TableRows = ({
           customerType === 1
             ? item?.customerDetail?.companyName
             : item?.customerDetail?.fullName;
+
+        const heading =
+          customerType === 1
+            ? translate("common.company_name")
+            : translate("common.customer_name");
 
         return (
           <div className="flex" key={index}>
@@ -118,7 +121,7 @@ const TableRows = ({
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 onClick={(e) =>
-                  handleNotes(item?.id, item?.invoiceNumber, name, e)
+                  handleNotes(item?.id, item?.invoiceNumber, name, heading, e)
                 }
                 title={translate("contracts.table_headings.notes")}
                 className="py-3 cursor-pointer flex justify-center items-center"

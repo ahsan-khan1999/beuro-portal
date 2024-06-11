@@ -11,7 +11,6 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
@@ -27,7 +26,6 @@ export enum ComponentsType {
 
 const EditOffersDetailsData = () => {
   const { offerDetails } = useAppSelector((state) => state.offer);
-  const { t: translate } = useTranslation();
 
   const [tabType, setTabType] = useState<ComponentsType>(
     offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded
@@ -97,6 +95,11 @@ const EditOffersDetailsData = () => {
       ? offerDetails?.leadID?.customerDetail?.companyName
       : offerDetails?.leadID?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -128,6 +131,7 @@ const EditOffersDetailsData = () => {
         data: {
           refID: offerDetails?.offerNumber,
           name: name,
+          heading: heading,
         },
       })
     );

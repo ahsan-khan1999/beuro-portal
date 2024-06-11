@@ -11,7 +11,6 @@ import {
 import { ContractDetailCardProps } from "@/types/contract";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
-import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 import editIcon from "@/assets/svgs/edit_primary.svg";
@@ -31,7 +30,6 @@ const ContractDetailsCard = ({
   handleEditDateModal,
 }: ContractDetailCardProps) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
 
   const handleDonwload = () => {
     window.open(contractDetails?.attachement);
@@ -64,6 +62,11 @@ const ContractDetailsCard = ({
     customerType === 1
       ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
       : contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div className="min-h-[218px]">
@@ -331,6 +334,7 @@ const ContractDetailsCard = ({
                   contractDetails?.id,
                   contractDetails?.contractNumber,
                   name,
+                  heading,
                   e
                 )
               }
@@ -357,6 +361,7 @@ const ContractDetailsCard = ({
                     contractDetails?.id,
                     contractDetails?.contractNumber,
                     name,
+                    heading,
                     e
                   )
                 }

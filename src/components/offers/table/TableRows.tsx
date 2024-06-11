@@ -2,11 +2,7 @@ import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
 import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
-import {
-  getEmailColor,
-  getMailStatusColor,
-  getOfferStatusColor,
-} from "@/utils/utility";
+import { getEmailColor, getOfferStatusColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 
@@ -16,12 +12,14 @@ export interface OfferTableProps {
     id: string,
     refId: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageUpload: (
     id: string,
     refId: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleOfferStatusUpdate: (id: string, status: string, type: string) => void;
@@ -63,7 +61,10 @@ const TableRows = ({
           customerType === 1
             ? item?.leadID?.customerDetail?.companyName
             : item?.leadID?.customerDetail?.fullName;
-
+        const heading =
+          customerType === 1
+            ? translate("common.company_name")
+            : translate("common.customer_name");
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -228,7 +229,13 @@ const TableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleImageUpload(item?.id, item?.offerNumber, name, e)
+                  handleImageUpload(
+                    item?.id,
+                    item?.offerNumber,
+                    name,
+                    heading,
+                    e
+                  )
                 }
                 title={translate("offers.table_headings.images")}
               >
@@ -271,7 +278,7 @@ const TableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleNotes(item?.id, item?.offerNumber, name, e)
+                  handleNotes(item?.id, item?.offerNumber, name, heading, e)
                 }
                 title={translate("offers.table_headings.note")}
               >

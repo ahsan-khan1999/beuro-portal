@@ -1,6 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddLeadAdditionalDetailsFormField } from "@/components/leads/fields/Add-lead-additional-fields";
@@ -16,7 +15,6 @@ export const useAddLeadAdditionalDetails = ({
   onHandleBack: (currentComponent: ComponentsType) => void;
   onHandleNext: (currentComponent: ComponentsType) => void;
 }) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);

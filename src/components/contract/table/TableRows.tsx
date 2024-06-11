@@ -1,7 +1,7 @@
 import { contractTableTypes } from "@/types/contract";
 import React from "react";
 import { useRouter } from "next/router";
-import { getEmailColor, getMailStatusColor } from "@/utils/utility";
+import { getEmailColor } from "@/utils/utility";
 import { formatDateString } from "@/utils/functions";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
@@ -13,12 +13,14 @@ export interface ContractTableProps {
     id: string,
     refId: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleContractStatusUpdate: (
@@ -66,6 +68,11 @@ const TableRows = ({
           customerType === 1
             ? item?.offerID?.leadID?.customerDetail?.companyName
             : item?.offerID?.leadID?.customerDetail?.fullName;
+
+        const heading =
+          customerType === 1
+            ? translate("common.company_name")
+            : translate("common.customer_name");
 
         return (
           <div className="flex" key={index}>
@@ -213,7 +220,13 @@ const TableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleImageUpload(item?.id, item?.contractNumber, name, e)
+                  handleImageUpload(
+                    item?.id,
+                    item?.contractNumber,
+                    name,
+                    heading,
+                    e
+                  )
                 }
                 title={translate("offers.table_headings.images")}
               >
@@ -287,7 +300,7 @@ const TableRows = ({
 
               <span
                 onClick={(e) =>
-                  handleNotes(item?.id, item?.contractNumber, name, e)
+                  handleNotes(item?.id, item?.contractNumber, name, heading, e)
                 }
                 title={translate("contracts.table_headings.notes")}
                 className="py-3 flex justify-center items-center cursor-pointer"
