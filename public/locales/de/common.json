@@ -1160,6 +1160,7 @@
       "date": "Datum"
     },
     "customer_name": "Kundenname",
+    "company_name": "Firmenname",
     "invoice_fitlers": {
       "pending": "Entwurf",
       "sending": "Versandbereit",
@@ -1860,7 +1861,7 @@
       "table_headings": {
         "id": "ID",
         "customer_name": "Kundenname",
-        "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
+        "follow_up_date": "Datum und Uhrzeit",
         "title": "Betreff/Titel",
         "status": "Status",
         "delete": "Löschen",

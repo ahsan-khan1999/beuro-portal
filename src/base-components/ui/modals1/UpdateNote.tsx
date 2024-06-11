@@ -12,17 +12,20 @@ export const UpdateNote = ({
   handleNotes,
   handleFilterChange,
   filter,
-  heading,
+  mainHeading,
 }: {
   onClose: () => void;
   handleNotes: (id: string) => void;
   handleFilterChange?: (query: FilterType) => void;
   filter?: FilterType;
-  heading: string;
+  mainHeading: string;
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useUpdateNote({ handleNotes, handleFilterChange, filter });
-  const { refID, name } = useAppSelector((state) => state.global.modal.data);
+
+  const { refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   return (
     <>
@@ -39,7 +42,7 @@ export const UpdateNote = ({
           />
 
           <p className="text-2xl font-medium text-[#000] ml-[38px]">
-            {heading}
+            {mainHeading}
           </p>
 
           <div className="border-y border-y-[#000] border-opacity-10 py-[10px] mx-10 my-5">
@@ -52,7 +55,7 @@ export const UpdateNote = ({
               </div>
               <div className="flex items-center gap-x-[14px]">
                 <span className="text-sm font-normal text-[#4D4D4D]">
-                  {translate("common.customer_name")}:
+                  {heading}:
                 </span>
                 <span className="text-sm font-medium text-primary">{name}</span>
               </div>

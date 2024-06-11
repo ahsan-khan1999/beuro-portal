@@ -84,7 +84,7 @@ const TableRows = ({
                   {(item?.leadID?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate font-normal text-primary">
+                    <span className="py-4 truncate text-lg font-medium text-primary">
                       {item?.leadID?.customerDetail?.companyName}
                     </span>
                   ) : (

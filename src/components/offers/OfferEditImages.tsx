@@ -7,11 +7,17 @@ import { useAppSelector } from "@/hooks/useRedux";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 export interface DetailImgUploadProps {
-  shareImgModal: (id: string, refID: string, name: string) => void;
+  shareImgModal: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
   handleImagesUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   tabType: number;
@@ -19,6 +25,7 @@ export interface DetailImgUploadProps {
   id: string;
   refID: string;
   name: string;
+  heading: string;
 }
 
 const OfferEditImages = ({
@@ -29,6 +36,7 @@ const OfferEditImages = ({
   id,
   name,
   refID,
+  heading,
 }: DetailImgUploadProps) => {
   const { images } = useAppSelector((state) => state.image);
 
@@ -48,7 +56,7 @@ const OfferEditImages = ({
                 src={shareIcon}
                 alt="shareIcon"
                 className="cursor-pointer"
-                onClick={() => shareImgModal(id, refID, name)}
+                onClick={() => shareImgModal(id, refID, name, heading)}
               />
             )}
         </div>
@@ -77,7 +85,7 @@ const OfferEditImages = ({
 
         <div className="flex justify-end items-center mx-[13px] pb-3">
           <span
-            onClick={(e) => handleImagesUpload(id, refID, name, e)}
+            onClick={(e) => handleImagesUpload(id, refID, name, heading, e)}
             className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer `}
           >
             {translate("offers.side_images.upload_button")}

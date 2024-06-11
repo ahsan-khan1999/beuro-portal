@@ -29,7 +29,9 @@ export const ShareImages = ({
     images,
   } = useShareImages();
 
-  const { refID, name } = useAppSelector((state) => state.global.modal.data);
+  const { refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   const handleFileLink = (fileName: string) => {
     window.open(fileName);
@@ -153,7 +155,7 @@ export const ShareImages = ({
               </div>
               <div className="flex items-center gap-x-[14px]">
                 <span className="text-sm font-normal text-[#4D4D4D]">
-                  {translate("common.customer_name")}:
+                  {heading}:
                 </span>
                 <span className="text-sm font-medium text-primary">{name}</span>
               </div>
