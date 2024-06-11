@@ -28,7 +28,6 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { FiltersDefaultValues } from "@/enums/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { useTranslation } from "next-i18next";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
@@ -41,7 +40,6 @@ const useOffers = () => {
   const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-  const { t: translate } = useTranslation();
 
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
     []
@@ -162,11 +160,10 @@ const useOffers = () => {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    if (e) {
-      e.stopPropagation();
-    }
+    e?.stopPropagation();
 
     const filteredLead = offer?.filter((item_) => item_.id === id);
     if (filteredLead?.length === 1) {
@@ -196,17 +193,29 @@ const useOffers = () => {
           data: {
             refID: refID,
             name: name,
+            heading: heading,
           },
         })
       );
     }
   };
 
-  const handleAddNote = (id: string, refID: string, name: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "offer", refID: refID, name: name },
+        data: {
+          id: id,
+          type: "offer",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -222,12 +231,20 @@ const useOffers = () => {
     id: string,
     note: string,
     refID: string,
-    name: string
+    name: string,
+    heading: string
   ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "offer", data: note, refID: refID, name: name },
+        data: {
+          id: id,
+          type: "offer",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -240,6 +257,7 @@ const useOffers = () => {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -271,6 +289,7 @@ const useOffers = () => {
           data: {
             refID: refID,
             name: name,
+            heading: heading,
           },
         })
       );
@@ -337,7 +356,7 @@ const useOffers = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
@@ -355,7 +374,7 @@ const useOffers = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (

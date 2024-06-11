@@ -3,7 +3,6 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import leadCreatedIcon from "@/assets/svgs/created_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import { useTranslation } from "next-i18next";
 
 export interface LeadCreatedProps {
   imageUploadHandler: Function;
@@ -20,8 +19,6 @@ const LeadCreated = ({
   heading,
   subHeading,
 }: LeadCreatedProps) => {
-  const { t: translate } = useTranslation();
-
   return (
     <>
       <BaseModal

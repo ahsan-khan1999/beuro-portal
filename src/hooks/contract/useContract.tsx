@@ -19,7 +19,6 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
-import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
@@ -113,7 +112,6 @@ const useContract = () => {
     }
   }, [query]);
 
-  const { t: translate } = useTranslation();
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
@@ -151,11 +149,10 @@ const useContract = () => {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    if (e) {
-      e.stopPropagation();
-    }
+    e?.stopPropagation();
 
     const filteredLead = contract?.filter((item_) => item_.id === id);
 
@@ -186,17 +183,29 @@ const useContract = () => {
           data: {
             refID: refID,
             name: name,
+            heading: heading,
           },
         })
       );
     }
   };
 
-  const handleAddNote = (id: string, refID: string, name: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "contract", refID: refID, name: name },
+        data: {
+          id: id,
+          type: "contract",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -212,7 +221,8 @@ const useContract = () => {
     id: string,
     note: string,
     refID: string,
-    name: string
+    name: string,
+    heading: string
   ) => {
     dispatch(
       updateModalType({
@@ -223,6 +233,7 @@ const useContract = () => {
           data: note,
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
@@ -236,6 +247,7 @@ const useContract = () => {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -268,6 +280,7 @@ const useContract = () => {
           data: {
             refID: refID,
             name: name,
+            heading: heading,
           },
         })
       );
@@ -314,7 +327,7 @@ const useContract = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -323,7 +336,7 @@ const useContract = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (

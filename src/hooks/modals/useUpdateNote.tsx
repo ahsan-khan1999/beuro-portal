@@ -13,7 +13,12 @@ import { UpdateNoteFormField } from "@/components/leads/fields/update-note-form-
 import { staticEnums } from "@/utils/static";
 
 export interface UpdateNoteProps {
-  handleNotes: (id: string, refID: string, name: string) => void;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
   handleFilterChange?: (query: FilterType) => void;
   filter?: FilterType;
 }
@@ -68,6 +73,23 @@ export const useUpdateNote = ({
       ? invoiceDetails?.customerDetail?.companyName
       : invoiceDetails?.customerDetail?.fullName;
 
+  const leadHeading =
+    leadCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const offerHeading =
+    offerCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const contractHeading =
+    contractCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const invoiceHeading =
+    invoiceCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   const schema = generateUpdateNoteValidation(translate);
   const {
     register,
@@ -103,16 +125,31 @@ export const useUpdateNote = ({
           const isFilterLead = lead.find((item) => item.id === id);
           if (!isFilterLead?.isNoteCreated && handleFilterChange)
             handleFilterChange(filter || {});
-          handleNotes(leadDetails?.id, leadDetails?.refID, leadName);
+          handleNotes(
+            leadDetails?.id,
+            leadDetails?.refID,
+            leadName,
+            leadHeading
+          );
           break;
         case "offer":
           const isFilterOffer = offer.find((item) => item.id === id);
           if (!isFilterOffer?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-            handleNotes(offerDetails?.id, offerDetails?.offerNumber, offerName);
+            handleNotes(
+              offerDetails?.id,
+              offerDetails?.offerNumber,
+              offerName,
+              offerHeading
+            );
           } else {
             dispatch(setOfferDetails({ ...offerDetails, isNoteCreated: true }));
-            handleNotes(offerDetails?.id, offerDetails?.offerNumber, offerName);
+            handleNotes(
+              offerDetails?.id,
+              offerDetails?.offerNumber,
+              offerName,
+              offerHeading
+            );
           }
 
           break;
@@ -123,7 +160,8 @@ export const useUpdateNote = ({
             handleNotes(
               contractDetails?.id,
               contractDetails?.contractNumber,
-              contractName
+              contractName,
+              contractHeading
             );
           } else {
             dispatch(
@@ -132,7 +170,8 @@ export const useUpdateNote = ({
             handleNotes(
               contractDetails?.id,
               contractDetails?.contractNumber,
-              contractName
+              contractName,
+              contractHeading
             );
           }
 
@@ -144,7 +183,8 @@ export const useUpdateNote = ({
             handleNotes(
               invoiceDetails?.id,
               invoiceDetails?.invoiceNumber,
-              invoiceName
+              invoiceName,
+              invoiceHeading
             );
           } else {
             dispatch(
@@ -153,7 +193,8 @@ export const useUpdateNote = ({
             handleNotes(
               invoiceDetails?.id,
               invoiceDetails?.invoiceNumber,
-              invoiceName
+              invoiceName,
+              invoiceHeading
             );
           }
 

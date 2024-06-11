@@ -31,8 +31,8 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                   {staticEnums["CustomerType"][
                     item?.customerType as keyof (typeof staticEnums)["CustomerType"]
                   ] === 1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item.companyName})
+                    <span className="py-4 truncate text-lg font-medium text-primary">
+                      {item.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">{item.fullName}</span>

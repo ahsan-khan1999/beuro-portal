@@ -13,7 +13,6 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
-import { useTranslation } from "next-i18next";
 import { setImages } from "@/api/slices/imageSlice/image";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { staticEnums } from "@/utils/static";
@@ -26,14 +25,12 @@ export enum ComponentsType {
 }
 
 const AddNewLeadsData = () => {
+  const router = useRouter();
   const { leadDetails } = useAppSelector((state) => state.lead);
 
   const [tabType, setTabType] = useState<ComponentsType>(
     (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
   );
-
-  const router = useRouter();
-  const { t: translate } = useTranslation();
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -105,6 +102,11 @@ const AddNewLeadsData = () => {
       ? leadDetails?.customerDetail?.companyName
       : leadDetails?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
@@ -128,6 +130,7 @@ const AddNewLeadsData = () => {
         data: {
           refID: leadDetails?.refID,
           name: name,
+          heading: heading,
         },
       })
     );

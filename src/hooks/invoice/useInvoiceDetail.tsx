@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { deleteContract } from "@/api/slices/contract/contractSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
@@ -56,7 +55,6 @@ export default function useInvoiceDetail() {
   const { modal } = useAppSelector((state) => state.global);
   const { systemSettings } = useAppSelector((state) => state.settings);
 
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const id = router.query.invoice;
 
@@ -180,6 +178,7 @@ export default function useInvoiceDetail() {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -193,16 +192,28 @@ export default function useInvoiceDetail() {
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
   };
 
-  const handleAddNote = (id: string, refID: string, name: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "invoice", refID: refID, name: name },
+        data: {
+          id: id,
+          type: "invoice",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -218,12 +229,20 @@ export default function useInvoiceDetail() {
     id: string,
     note: string,
     refID: string,
-    name: string
+    name: string,
+    heading: string
   ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "invoice", data: note, refID: refID, name: name },
+        data: {
+          id: id,
+          type: "invoice",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -308,7 +327,7 @@ export default function useInvoiceDetail() {
       <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
 
@@ -316,7 +335,7 @@ export default function useInvoiceDetail() {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
 

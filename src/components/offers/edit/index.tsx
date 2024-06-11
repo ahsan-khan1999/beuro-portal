@@ -11,22 +11,26 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage } from "@/api/slices/imageSlice/image";
 import { useRouter } from "next/router";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { useTranslation } from "next-i18next";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 const EditOffersDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails } = useAppSelector((state) => state.offer);
-  const { t: translate } = useTranslation();
 
-  const shareImgModal = (id: string, refID: string, name: string) => {
+  const shareImgModal = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.SHARE_IMAGES,
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
@@ -51,6 +55,7 @@ const EditOffersDetails = () => {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -60,6 +65,7 @@ const EditOffersDetails = () => {
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );

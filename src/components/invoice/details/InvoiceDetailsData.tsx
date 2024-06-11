@@ -37,6 +37,11 @@ const InvoiceDetailsData = ({
       ? invoiceDetails?.customerDetail?.companyName
       : invoiceDetails?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-y-3 mb-5">
@@ -225,6 +230,7 @@ const InvoiceDetailsData = ({
                   invoiceDetails?.id,
                   invoiceDetails?.invoiceNumber,
                   name,
+                  heading,
                   e
                 )
               }

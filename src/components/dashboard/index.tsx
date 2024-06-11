@@ -8,7 +8,6 @@ import leadsIcon from "@/assets/svgs/leads.svg";
 import offersIcon from "@/assets/svgs/offers.svg";
 import contractsIcon from "@/assets/svgs/contracts.svg";
 import salesIcon from "@/assets/svgs/sales.svg";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readDashboard } from "@/api/slices/authSlice/auth";
@@ -18,7 +17,6 @@ import { DashboardActionType } from "@/types/dashboard";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const AdminDashboard = () => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const { dashboard } = useAppSelector((state) => state.auth);
 
@@ -56,6 +54,8 @@ const AdminDashboard = () => {
     dispatch(readDashboard({ params: { filter: filter } })).then(
       (response: DashboardActionType) => {
         if (response?.payload) {
+          console.log(response?.payload);
+
           setPieData({
             datasets: [
               {

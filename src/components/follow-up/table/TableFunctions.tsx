@@ -1,19 +1,18 @@
 import React, { SetStateAction } from "react";
 import FollowUpFilter from "./follow-up-filter";
 import { FilterType } from "@/types";
-import { useTranslation } from "next-i18next";
+
+export interface FollowUpProps {
+  filter: FilterType;
+  setFilter: SetStateAction<any>;
+  handleFilterChange: (text: FilterType) => void;
+}
 
 const TableFunctions = ({
   filter,
   setFilter,
   handleFilterChange,
-}: {
-  filter: FilterType;
-  setFilter: SetStateAction<any>;
-  handleFilterChange: (text: FilterType) => void;
-}) => {
-  const { t: translate } = useTranslation();
-
+}: FollowUpProps) => {
   return (
     <div className="flex items-center mb-5 space-x-10">
       <h1 className="text-xl text-[#222B45] font-normal">

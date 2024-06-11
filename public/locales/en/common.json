@@ -1168,6 +1168,7 @@
       "date": "Date"
     },
     "customer_name": "Customer Name",
+    "company_name": "Company Name",
     "invoice_fitlers": {
       "pending": "Pending",
       "sending": "Sending",
@@ -1865,7 +1866,7 @@
       "table_headings": {
         "id": "ID",
         "customer_name": "Customer Name",
-        "follow_up_date": "Follow Up Date and Time",
+        "follow_up_date": "Date and Time",
         "title": "Subject/Title",
         "status": "Status",
         "delete": "Delete",

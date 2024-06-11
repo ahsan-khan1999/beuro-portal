@@ -138,6 +138,7 @@ const useLeads = () => {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -170,6 +171,7 @@ const useLeads = () => {
           data: {
             refID: refID,
             name: name,
+            heading: heading,
           },
         })
       );
@@ -178,11 +180,22 @@ const useLeads = () => {
     }
   };
 
-  const handleAddNote = (id: string, refID: string, name: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "lead", refID: refID, name: name },
+        data: {
+          id: id,
+          type: "lead",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -198,12 +211,20 @@ const useLeads = () => {
     id: string,
     note: string,
     refID: string,
-    name: string
+    name: string,
+    heading: string
   ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "lead", data: note, refID: refID, name: name },
+        data: {
+          id: id,
+          type: "lead",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -216,6 +237,7 @@ const useLeads = () => {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -248,6 +270,7 @@ const useLeads = () => {
           data: {
             refID: refID,
             name: name,
+            heading: heading,
           },
         })
       );
@@ -280,7 +303,7 @@ const useLeads = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -289,7 +312,7 @@ const useLeads = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
