@@ -64,6 +64,11 @@ const OfferDetailsCard = ({
       ? offerDetails?.leadID?.customerDetail?.companyName
       : offerDetails?.leadID?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <div className="min-h-[217px]">
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
@@ -348,6 +353,7 @@ const OfferDetailsCard = ({
                     offerDetails?.id,
                     offerDetails?.offerNumber,
                     name,
+                    heading,
                     e
                   )
                 }
@@ -371,6 +377,7 @@ const OfferDetailsCard = ({
                     offerDetails?.id,
                     offerDetails?.offerNumber,
                     name,
+                    heading,
                     e
                   )
                 }

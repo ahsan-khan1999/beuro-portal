@@ -1,6 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
@@ -15,7 +14,12 @@ import { NoteSetting } from "@/api/slices/settingSlice/settings";
 import { staticEnums } from "@/utils/static";
 
 export interface AddNoteProps {
-  handleNotes: (id: string, refID: string, name: string) => void;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
   handleFilterChange?: (query: FilterType) => void;
   filter?: FilterType;
 }
@@ -25,7 +29,6 @@ export const useAddNewNote = ({
   handleFilterChange,
   filter,
 }: AddNoteProps) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.note);
@@ -70,6 +73,23 @@ export const useAddNewNote = ({
     invoiceCustomerType === 1
       ? invoiceDetails?.customerDetail?.companyName
       : invoiceDetails?.customerDetail?.fullName;
+
+  const leadHeading =
+    leadCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const offerHeading =
+    offerCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const contractHeading =
+    contractCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const invoiceHeading =
+    invoiceCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   const schema = generateAddNewNoteValidation(translate);
   const {
@@ -121,16 +141,31 @@ export const useAddNewNote = ({
           const isFilterLead = lead.find((item) => item.id === id);
           if (!isFilterLead?.isNoteCreated && handleFilterChange)
             handleFilterChange(filter || {});
-          handleNotes(leadDetails?.id, leadDetails?.refID, leadName);
+          handleNotes(
+            leadDetails?.id,
+            leadDetails?.refID,
+            leadName,
+            leadHeading
+          );
           break;
         case "offer":
           const isFilterOffer = offer.find((item) => item.id === id);
           if (!isFilterOffer?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-            handleNotes(offerDetails?.id, offerDetails?.offerNumber, offerName);
+            handleNotes(
+              offerDetails?.id,
+              offerDetails?.offerNumber,
+              offerName,
+              offerHeading
+            );
           } else {
             dispatch(setOfferDetails({ ...offerDetails, isNoteCreated: true }));
-            handleNotes(offerDetails?.id, offerDetails?.offerNumber, offerName);
+            handleNotes(
+              offerDetails?.id,
+              offerDetails?.offerNumber,
+              offerName,
+              offerHeading
+            );
           }
 
           break;
@@ -141,7 +176,8 @@ export const useAddNewNote = ({
             handleNotes(
               contractDetails?.id,
               contractDetails?.contractNumber,
-              contractName
+              contractName,
+              contractHeading
             );
           } else {
             dispatch(
@@ -150,7 +186,8 @@ export const useAddNewNote = ({
             handleNotes(
               contractDetails?.id,
               contractDetails?.contractNumber,
-              contractName
+              contractName,
+              contractHeading
             );
           }
 
@@ -162,7 +199,8 @@ export const useAddNewNote = ({
             handleNotes(
               invoiceDetails?.id,
               invoiceDetails?.invoiceNumber,
-              invoiceName
+              invoiceName,
+              invoiceHeading
             );
           } else {
             dispatch(
@@ -171,7 +209,8 @@ export const useAddNewNote = ({
             handleNotes(
               invoiceDetails?.id,
               invoiceDetails?.invoiceNumber,
-              invoiceName
+              invoiceName,
+              invoiceHeading
             );
           }
 

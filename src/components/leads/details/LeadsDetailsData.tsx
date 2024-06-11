@@ -27,11 +27,17 @@ export enum ComponentsType {
 export interface LeadDetailsProps {
   leadDetails: Lead;
   loading: boolean;
-  shareImgModal: (id: string, refID?: string, name?: string) => void;
+  shareImgModal: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
   handleImagesUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
@@ -182,6 +188,11 @@ const LeadsDetailsData = ({
       ? leadDetails?.customerDetail?.companyName
       : leadDetails?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
@@ -207,6 +218,7 @@ const LeadsDetailsData = ({
           id={leadDetails?.id}
           refID={leadDetails?.refID}
           name={name}
+          heading={heading}
           handleImageSlider={handleImageSlider}
         />
       </div>

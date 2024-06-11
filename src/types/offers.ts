@@ -242,12 +242,14 @@ export interface OfferDetailCardProps {
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleStatusUpdate: (id: string) => void;

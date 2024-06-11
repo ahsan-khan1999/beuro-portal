@@ -52,6 +52,8 @@ export default function usePlans() {
       }
     });
   };
+
+  
   const handleFilterChange = (filter: FilterType) => {
     dispatch(
       readPlan({ params: { filter: filter, page: currentPage, size: 10 } })

@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
-import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const PieChart = ({ data }) => {
-  const { t: translate } = useTranslation();
-
   useEffect(() => {
     if (
       data &&
@@ -14,6 +11,7 @@ const PieChart = ({ data }) => {
       data.datasets[0].data.length > 0
     ) {
       const ctx = document.getElementById("myPieChart").getContext("2d");
+
       const myPieChart = new Chart(ctx, {
         type: "pie",
         data: data,

@@ -1,11 +1,7 @@
 import React from "react";
 import { SubInvoiceTableRowTypes } from "@/types/invoice";
 import { useRouter } from "next/router";
-import {
-  formatDateTimeToDate,
-  getInvoiceEmailColor,
-  getMailStatusColor,
-} from "@/utils/utility";
+import { formatDateTimeToDate, getInvoiceEmailColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
@@ -70,9 +66,23 @@ const TableRows = ({
                 } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(200px,_200px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(140px,_140px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)] xlg:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(80px,_80px)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(80px,_4fr)_minmax(120px,_3fr)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)] xLarge:grid-cols-[minmax(80px,_80px),minmax(100px,_3fr)_minmax(130px,_4fr)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)] xMaxLarge:grid-cols-[minmax(80px,_80px),minmax(100px,_3fr)_minmax(130px,_4fr)_minmax(150px,_150px)_minmax(80px,_80px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(130px,_130px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item.invoiceNumber}</span>
-                <span className="py-4 truncate">
+
+                <div className="flex items-center gap-x-1">
+                  {(item.invoiceID?.customerDetail
+                    ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
+                  1 ? (
+                    <span className="py-4 truncate text-lg font-medium text-primary">
+                      {item.invoiceID?.customerDetail?.companyName}
+                    </span>
+                  ) : (
+                    <span className="py-4 truncate">
+                      {item.invoiceID?.customerDetail?.fullName}
+                    </span>
+                  )}
+                </div>
+                {/* <span className="py-4 truncate">
                   {item.invoiceID?.customerDetail?.fullName}
-                </span>
+                </span> */}
                 <span className="py-4 truncate mlg:hidden xMaxSize:block">
                   {item?.invoiceID?.content?.contentName}
                 </span>

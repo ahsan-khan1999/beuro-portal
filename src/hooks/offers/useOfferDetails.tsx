@@ -3,7 +3,6 @@ import {
   readOfferActivity,
   readOfferDetails,
   sendOfferByPost,
-  sendOfferEmail,
   setOfferDetails,
   updateOfferDiscount,
   updateOfferStatus,
@@ -101,11 +100,11 @@ export default function useOfferDetails() {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    if (e) {
-      e.stopPropagation();
-    }
+    e?.stopPropagation();
+
     dispatch(readNotes({ params: { type: "offer", id: offerDetails?.id } }));
     dispatch(
       updateModalType({
@@ -113,16 +112,28 @@ export default function useOfferDetails() {
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
   };
 
-  const handleAddNote = (id: string, refID: string, name: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "offer", refID: refID, name: name },
+        data: {
+          id: id,
+          type: "offer",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -131,12 +142,20 @@ export default function useOfferDetails() {
     id: string,
     note: string,
     refID: string,
-    name: string
+    name: string,
+    heading: string
   ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "offer", data: note, refID: refID, name: name },
+        data: {
+          id: id,
+          type: "offer",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -156,6 +175,7 @@ export default function useOfferDetails() {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -166,6 +186,7 @@ export default function useOfferDetails() {
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
@@ -212,13 +233,19 @@ export default function useOfferDetails() {
     );
   };
 
-  const shareImgModal = (id: string, refID?: string, name?: string) => {
+  const shareImgModal = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.SHARE_IMAGES,
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
@@ -277,14 +304,14 @@ export default function useOfferDetails() {
       <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
