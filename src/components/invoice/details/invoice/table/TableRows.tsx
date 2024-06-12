@@ -5,6 +5,7 @@ import { formatDateTimeToDate, getInvoiceEmailColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { useTranslation } from "next-i18next";
 
 const TableRows = ({
   dataToAdd,
@@ -23,6 +24,8 @@ const TableRows = ({
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );
+
+  const { t: translate } = useTranslation();
   const { systemSettings } = useAppSelector((state) => state.settings);
 
   const handleInvoicePdfPreview = (id?: string) => {

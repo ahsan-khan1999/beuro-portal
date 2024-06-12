@@ -1,8 +1,6 @@
 import { DocumentHeaderDetailsProps } from "@/types";
-import { HeaderLabel, HeaderLabelNr } from "@/utils/static";
 import { pdfDateFormat } from "@/utils/utility";
 import { View, Text, Image } from "@react-pdf/renderer";
-import { useTranslation } from "next-i18next";
 
 export const OfferPdfHeader = ({
   createdBy,
@@ -13,6 +11,7 @@ export const OfferPdfHeader = ({
   isReverseLogo,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const { logo } = emailTemplateSettings ?? {};
+
   return (
     <View
       style={{

@@ -140,6 +140,11 @@ const TableRows = ({
                       dataToAdd.length > 5 &&
                       index === dataToAdd.length - 2
                     }
+                    isThirdLastIndex={
+                      dataToAdd &&
+                      dataToAdd.length > 5 &&
+                      index === dataToAdd.length - 3
+                    }
                     isLastIndex={
                       dataToAdd &&
                       dataToAdd.length > 5 &&

@@ -20,12 +20,14 @@ export const DropDown = ({
   shouldNotSelectItem = false,
   isLastIndex,
   isSecondLastIndex,
+  isThirdLastIndex,
   isLead,
   isOffer,
   isAdminCustomer,
 }: DropDownProps & {
   isLastIndex?: boolean;
   isSecondLastIndex?: boolean;
+  isThirdLastIndex?: boolean;
   isLead?: boolean;
   isOffer?: boolean;
   isAdminCustomer?: boolean;
@@ -86,6 +88,7 @@ export const DropDown = ({
               containerClassName={dropDownItemsContainerClassName}
               isLastIndex={isLastIndex}
               isSecondLastIndex={isSecondLastIndex}
+              isThirdLastIndex={isThirdLastIndex}
               isOffer={isOffer}
               isLead={isLead}
               isAdminCustomer={isAdminCustomer}

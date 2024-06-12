@@ -1998,7 +1998,7 @@
     }
   },
   "pdf": {
-    "no": "No ",
+    "no": "No",
     "label_nr_offer": "Offer ",
     "label_nr_contract": "Contract ",
     "label_nr_invoice": "Invoice ",

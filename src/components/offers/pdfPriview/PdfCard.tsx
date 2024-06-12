@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import EmailCardLayout from "./PdfCardLayout";
 import { useRouter } from "next/router";
 import { BaseButton } from "@/base-components/ui/button/base-button";

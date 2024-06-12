@@ -2,22 +2,22 @@ import {
   BlobProvider,
   Document,
   Font,
-  PDFViewer,
   Page,
   StyleSheet,
   View,
 } from "@react-pdf/renderer";
-import { EmailHeaderProps, PdfPreviewProps, PdfProps } from "@/types";
-import { Header } from "@/components/reactPdf/header";
+import { PdfPreviewProps } from "@/types";
 import { ContactAddress } from "@/components/reactPdf/contact-address";
-import { AddressDetails } from "@/components/reactPdf/address-details";
-import { ServiceTableHederRow } from "@/components/reactPdf/service-table-header-row";
 import { ServiceTableRow } from "@/components/reactPdf/service-table-row";
-import { ServicesTotalAmount } from "@/components/reactPdf/services-total-ammount";
 import { Footer } from "@/components/reactPdf/footer";
 import { AdditionalDetails } from "@/components/reactPdf/additional-details";
 import { blobToFile } from "@/utils/utility";
 import { AggrementSignature } from "@/components/reactPdf/aggrement-signature";
+import { OfferPdfHeader } from "@/components/reactPdf/offer-pdf-header";
+import { OfferAddressDetails } from "@/components/reactPdf/offer-address-details";
+import { OfferServiceTableHederRow } from "@/components/reactPdf/offer-service-table-header-row";
+import { OfferServicesTotalAmount } from "@/components/reactPdf/offer-services-total-amount";
+
 Font.register({
   family: "Poppins",
   fonts: [
@@ -76,6 +76,7 @@ const OfferPdfDownload = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+
   const disscountTableRow = {
     serviceTitle: "Rabatt",
     price: Number(serviceItemFooter?.discount),
@@ -110,7 +111,7 @@ const OfferPdfDownload = ({
             // }}
           >
             <Page style={styles.body} dpi={72}>
-              <Header {...headerDetails} />
+              <OfferPdfHeader {...headerDetails} />
               <View
                 style={{
                   position: "absolute",
@@ -121,9 +122,11 @@ const OfferPdfDownload = ({
               >
                 <ContactAddress {...{ ...contactAddress }} />
 
-                <AddressDetails {...{ address, header, workDates, time }} />
+                <OfferAddressDetails
+                  {...{ address, header, workDates, time }}
+                />
 
-                <ServiceTableHederRow isDiscount={isDiscount} />
+                <OfferServiceTableHederRow isDiscount={isDiscount} />
                 {serviceItem?.map((item, index) => (
                   <ServiceTableRow
                     {...item}
@@ -146,7 +149,7 @@ const OfferPdfDownload = ({
                     isDiscount={isDiscount}
                   />
                 )} */}
-                <ServicesTotalAmount
+                <OfferServicesTotalAmount
                   {...serviceItemFooter}
                   systemSettings={systemSetting}
                 />
@@ -163,7 +166,7 @@ const OfferPdfDownload = ({
             {/* Additional details */}
             <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
               <View style={{ marginBottom: 10 }} fixed>
-                <Header {...headerDetails} />
+                <OfferPdfHeader {...headerDetails} />
               </View>
               {/* <View
             style={{

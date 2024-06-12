@@ -1992,7 +1992,7 @@
     }
   },
   "pdf": {
-    "no": "Nr ",
+    "no": "Nr",
     "label_nr_offer": "Angebot ",
     "label_nr_contract": "Vertrag ",
     "label_nr_invoice": "Rechnung ",
