@@ -5,6 +5,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { ComponentsType } from "./AddOffersDetailsData";
 import { updateQuery } from "@/utils/update-query";
+import { useTranslation } from "next-i18next";
 
 const AditionalAddDetails = ({
   onHandleNext,
@@ -36,8 +37,8 @@ const AditionalAddDetails = ({
     <FormCard>
       <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
-          {translate("offers.additional_details.main_heading")}
-          {offerDetails?.id && offerDetails?.offerNumber}
+          {translate("offers.additional_details.main_heading")} (
+          {offerDetails?.id && offerDetails?.offerNumber})
         </h2>
         <button
           onClick={handleCancel}
@@ -46,7 +47,7 @@ const AditionalAddDetails = ({
           {translate("offers.additional_details.cancel_button")}
         </button>
       </div>
-      <div className="px-6">
+      <div className="px-6 pt-3">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

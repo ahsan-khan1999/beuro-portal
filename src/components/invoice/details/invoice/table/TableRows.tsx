@@ -5,6 +5,7 @@ import { formatDateTimeToDate, getInvoiceEmailColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { useTranslation } from "next-i18next";
 
 const TableRows = ({
   dataToAdd,
@@ -20,6 +21,8 @@ const TableRows = ({
   handleRecurringInvoiceEdit: (item: any) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );

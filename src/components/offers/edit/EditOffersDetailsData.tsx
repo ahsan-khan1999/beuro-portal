@@ -9,6 +9,7 @@ import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/useRedux";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum EditComponentsType {
   offerEdit,
@@ -43,6 +44,7 @@ const EditOffersDetailsData = ({
     tab || EditComponentsType.offerEdit
   );
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const { offerDetails } = useAppSelector((state) => state.offer);
 
   const tabSection: tabArrayTypes[] = [

@@ -19,6 +19,7 @@ import {
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 import { updateQuery } from "@/utils/update-query";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { useTranslation } from "next-i18next";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -34,6 +35,7 @@ const OfferDetailsCard = ({
   onFileUpload,
 }: OfferDetailCardProps) => {
   const router = useRouter();
+  const {t:translate} = useTranslation()
 
   const itemsValue = [
     `${translate("offer_status.Open")}`,

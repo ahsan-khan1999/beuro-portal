@@ -34,8 +34,8 @@ const ServiceAddDetails = ({
     <>
       <div className="flex justify-between items-center bg-[#C50EE0] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
-          {translate("offers.service_details.main_heading")}
-          {offerDetails?.id && offerDetails?.offerNumber}
+          {translate("offers.service_details.main_heading")} (
+          {offerDetails?.id && offerDetails?.offerNumber})
         </h2>
         <button
           onClick={handleCancel}

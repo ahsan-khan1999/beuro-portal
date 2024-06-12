@@ -5,7 +5,6 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 // const InvoicePdfPreview = dynamic(
 //   () => import("@/components/reactPdf/pdf-layout"),

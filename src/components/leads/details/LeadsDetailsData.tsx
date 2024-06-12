@@ -12,6 +12,7 @@ import AditionalEditDetails from "../edit/AditionalEditDetails";
 import OfferEditImages from "@/components/offers/OfferEditImages";
 import { Lead } from "@/types/leads";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customer,
@@ -51,6 +52,7 @@ const LeadsDetailsData = ({
   leadDetails,
 }: LeadDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
+  const { t: translate } = useTranslation();
 
   const [data, setData] = useState<{
     index: number;

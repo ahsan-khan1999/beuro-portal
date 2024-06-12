@@ -2,9 +2,11 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <div>

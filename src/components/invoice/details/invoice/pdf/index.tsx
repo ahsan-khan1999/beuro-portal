@@ -4,7 +4,6 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { InvoiceEmailHeader } from "./invoice-email-header";
 import { useInvoicePdf } from "@/hooks/invoice/useInvoicePdf";
 import dynamic from "next/dynamic";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 // const InvoicePdfPreview = dynamic(
 //   () => import("@/components/reactPdf/pdf-layout"),

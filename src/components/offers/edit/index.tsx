@@ -12,9 +12,11 @@ import { readImage } from "@/api/slices/imageSlice/image";
 import { useRouter } from "next/router";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
+import { useTranslation } from "next-i18next";
 
 const EditOffersDetails = () => {
   const dispatch = useDispatch();
+  const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails } = useAppSelector((state) => state.offer);
 

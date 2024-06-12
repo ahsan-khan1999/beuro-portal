@@ -2,10 +2,8 @@ import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
 import DetailsData from "../DetailsData";
-import SideCard from "../SideCard";
 import useEmployeeDetail from "@/hooks/employee/useEmployeeDetail";
 import EmployeeForm from "../EmployeeForm";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const EmploysDetails = () => {

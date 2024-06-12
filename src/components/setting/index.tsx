@@ -23,9 +23,11 @@ import {
   deleteNoteSetting,
   readNoteSettings,
 } from "@/api/slices/settingSlice/settings";
+import { useTranslation } from "next-i18next";
 
 const Setting = () => {
   const { query } = useRouter();
+  const { t: translate } = useTranslation();
 
   const { loading, noteSettings } = useAppSelector((state) => state.settings);
 
