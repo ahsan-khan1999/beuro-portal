@@ -2,9 +2,9 @@ import React from "react";
 import { Lead } from "@/types/leads";
 import { useRouter } from "next/router";
 import { formatDate } from "@/utils/utility";
-import { useTranslation } from "next-i18next";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export interface LeadTableProps {
   dataToAdd: Lead[];
@@ -12,12 +12,14 @@ export interface LeadTableProps {
     id: string,
     refId: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageUpload: (
     id: string,
     refId: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   onStatusChange: (id: string, status: string, type: string) => void;
@@ -56,6 +58,10 @@ const TableRows = ({
           customerType === 1
             ? item?.customerDetail?.companyName
             : item?.customerDetail?.fullName;
+        const heading =
+          customerType === 1
+            ? translate("common.company_name")
+            : translate("common.customer_name");
 
         return (
           <div className="flex" key={index}>
@@ -77,7 +83,7 @@ const TableRows = ({
                   {(item?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate font-normal text-primary">
+                    <span className="py-4 truncate text-lg font-medium text-primary">
                       {item?.customerDetail?.companyName}
                     </span>
                   ) : (
@@ -151,7 +157,7 @@ const TableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleImageUpload(item?.id, item?.refID, name, e)
+                  handleImageUpload(item?.id, item?.refID, name, heading, e)
                 }
                 title={translate("leads.table_headings.images")}
               >
@@ -194,7 +200,9 @@ const TableRows = ({
 
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) => handleAddNote(item?.id, item?.refID, name, e)}
+                onClick={(e) =>
+                  handleAddNote(item?.id, item?.refID, name, heading, e)
+                }
                 title={translate("leads.table_headings.note")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">

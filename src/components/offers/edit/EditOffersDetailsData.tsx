@@ -7,9 +7,9 @@ import AditionalEditDetails from "./AditionalEditDetails";
 import ServiceEditDetails from "./ServiceEditDetails";
 import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum EditComponentsType {
   offerEdit,
@@ -24,11 +24,17 @@ const EditOffersDetailsData = ({
   handleImageSlider,
   tab,
 }: {
-  shareImgModal: (id: string, refID: string, name: string) => void;
+  shareImgModal: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
   handleImagesUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
@@ -138,6 +144,11 @@ const EditOffersDetailsData = ({
       ? offerDetails?.leadID?.customerDetail?.companyName
       : offerDetails?.leadID?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <>
       <div className="xLarge:fixed mb-5 mt-[40px]">
@@ -162,6 +173,7 @@ const EditOffersDetailsData = ({
           tabType={tabType}
           id={offerDetails?.id}
           name={name}
+          heading={heading}
           refID={offerDetails?.offerNumber}
           handleImageSlider={handleImageSlider}
         />

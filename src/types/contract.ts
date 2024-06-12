@@ -4,6 +4,7 @@ import { ContentTableRowTypes } from "./content";
 import { CustomerAddress, Customers } from "./customer";
 import { AddressID, Lead } from "./leads";
 import { OfferServiceDetails } from "./offers";
+import { StringifyOptions } from "querystring";
 
 // Interface for contract Table
 export interface contractTableTypes {
@@ -99,12 +100,14 @@ export interface ContractDetailCardProps {
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleStatusUpdate: (id: string) => void;

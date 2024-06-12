@@ -38,7 +38,9 @@ const ImagesUpload = ({
     loading,
     loadingGlobal,
   } = useUploadImage(handleImageSlider);
-  const { refID, name } = useAppSelector((state) => state.global.modal.data);
+  const { refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   const attachementLookUp = {
     img_tab: (
@@ -160,7 +162,7 @@ const ImagesUpload = ({
               </div>
               <div className="flex items-center gap-x-[14px]">
                 <span className="text-sm font-normal text-[#4D4D4D]">
-                  {translate("common.customer_name")}:
+                  {heading}:
                 </span>
                 <span className="text-sm font-medium text-primary">{name}</span>
               </div>

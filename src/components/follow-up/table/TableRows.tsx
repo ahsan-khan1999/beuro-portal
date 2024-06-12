@@ -25,15 +25,15 @@ const TableRows = ({
             </span>
             <span className="flex items-center">{item.title}</span>
 
-            <span className="flex items-center justify-center">
-              <div
+            <div>
+              <span
                 className={`bg-[${
                   StatusColors[item.status]
-                }] text-white px-2 py-1 text-center rounded-md text-sm`}
+                }] text-white px-2 py-1 text-center rounded-md text-sm w-full`}
               >
                 {item.status}
-              </div>
-            </span>
+              </span>
+            </div>
             <span
               className="flex justify-center items-center cursor-pointer"
               onClick={() => handleFollowUpsDelete(item.id)}

@@ -20,8 +20,19 @@ const ExistingNotes = ({
   onClose,
   leadDetails,
 }: {
-  handleAddNote: (id: string, refID: string, name: string) => void;
-  onEditNote: (id: string, note: string, refID: string, name: string) => void;
+  handleAddNote: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
+  onEditNote: (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
   onConfrimDeleteNote: (id: string) => void;
   onClose: () => void;
   leadDetails:
@@ -31,7 +42,9 @@ const ExistingNotes = ({
     | InvoiceTableRowTypes;
 }) => {
   const { notes } = useAppSelector((state) => state.note);
-  const { refID, name } = useAppSelector((state) => state.global.modal.data);
+  const { refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   return (
     <BaseModal
@@ -52,7 +65,9 @@ const ExistingNotes = ({
 
           <div className="flex justify-between items-center gap-[10px]">
             <BaseButton
-              onClick={() => handleAddNote(leadDetails?.id, refID, name)}
+              onClick={() =>
+                handleAddNote(leadDetails?.id, refID, name, heading)
+              }
               buttonText={translate("common.notes_modal.button")}
               containerClassName="flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover"
               textClassName="text-white font-medium"
@@ -68,7 +83,7 @@ const ExistingNotes = ({
             </div>
             <div className="flex items-center gap-x-[14px]">
               <span className="text-sm font-normal text-[#4D4D4D]">
-                {translate("common.customer_name")}:
+                {heading}:
               </span>
               <span className="text-sm font-medium text-primary">{name}</span>
             </div>
@@ -99,7 +114,13 @@ const ExistingNotes = ({
                       height={20}
                       className="cursor-pointer"
                       onClick={() =>
-                        onEditNote(item?.id, item?.description, refID, name)
+                        onEditNote(
+                          item?.id,
+                          item?.description,
+                          refID,
+                          name,
+                          heading
+                        )
                       }
                     />
                     <Image

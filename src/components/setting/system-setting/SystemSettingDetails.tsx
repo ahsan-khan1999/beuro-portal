@@ -6,7 +6,6 @@ import SettingLayout from "../SettingLayout";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
-  SystemSetting,
   readSystemSettings,
   readTaxSettings,
   updateSystemSetting,

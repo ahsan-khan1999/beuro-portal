@@ -9,6 +9,7 @@ import { OffersTableRowTypes } from "@/types/offers";
 import OfferEditImages from "../OfferEditImages";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customer,
@@ -22,11 +23,17 @@ export interface OfferDetailsProps {
   loading: boolean;
   handleUpdateDiscount: (discount: number) => void;
   currency?: string;
-  shareImgModal: (id: string, refID?: string, name?: string) => void;
+  shareImgModal: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
   handleImagesUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
@@ -42,6 +49,7 @@ const OffersDetailsData = ({
   handleImageSlider,
 }: OfferDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     const elements = document.querySelectorAll("[data-scroll-target]");
@@ -132,6 +140,11 @@ const OffersDetailsData = ({
       ? offerDetails?.leadID?.customerDetail?.companyName
       : offerDetails?.leadID?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
@@ -158,6 +171,7 @@ const OffersDetailsData = ({
             id={offerDetails?.id}
             refID={offerDetails?.offerNumber}
             name={name}
+            heading={heading}
             handleImageSlider={handleImageSlider}
           />
         </div>

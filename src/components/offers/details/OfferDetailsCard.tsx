@@ -19,6 +19,7 @@ import {
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 import { updateQuery } from "@/utils/update-query";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { useTranslation } from "next-i18next";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -34,6 +35,7 @@ const OfferDetailsCard = ({
   onFileUpload,
 }: OfferDetailCardProps) => {
   const router = useRouter();
+  const {t:translate} = useTranslation()
 
   const itemsValue = [
     `${translate("offer_status.Open")}`,
@@ -63,6 +65,11 @@ const OfferDetailsCard = ({
     customerType === 1
       ? offerDetails?.leadID?.customerDetail?.companyName
       : offerDetails?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div className="min-h-[217px]">
@@ -348,6 +355,7 @@ const OfferDetailsCard = ({
                     offerDetails?.id,
                     offerDetails?.offerNumber,
                     name,
+                    heading,
                     e
                   )
                 }
@@ -371,6 +379,7 @@ const OfferDetailsCard = ({
                     offerDetails?.id,
                     offerDetails?.offerNumber,
                     name,
+                    heading,
                     e
                   )
                 }

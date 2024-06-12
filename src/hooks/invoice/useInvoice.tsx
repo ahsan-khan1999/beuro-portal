@@ -158,11 +158,11 @@ const useInvoice = () => {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    if (e) {
-      e.stopPropagation();
-    }
+    e?.stopPropagation();
+
     const filteredLead = invoice?.filter((item_) => item_.id === id);
 
     if (filteredLead?.length === 1) {
@@ -192,17 +192,29 @@ const useInvoice = () => {
           data: {
             refID: refID,
             name: name,
+            heading: heading,
           },
         })
       );
     }
   };
 
-  const handleAddNote = (id: string, refID: string, name: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "invoice", refID: refID, name: name },
+        data: {
+          id: id,
+          type: "invoice",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -218,12 +230,20 @@ const useInvoice = () => {
     id: string,
     note: string,
     refID: string,
-    name: string
+    name: string,
+    heading: string
   ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "invoice", data: note, refID: refID, name: name },
+        data: {
+          id: id,
+          type: "invoice",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -276,7 +296,7 @@ const useInvoice = () => {
       <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -285,7 +305,7 @@ const useInvoice = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
   };

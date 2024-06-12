@@ -12,6 +12,7 @@ import AditionalEditDetails from "../edit/AditionalEditDetails";
 import OfferEditImages from "@/components/offers/OfferEditImages";
 import { Lead } from "@/types/leads";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customer,
@@ -27,11 +28,17 @@ export enum ComponentsType {
 export interface LeadDetailsProps {
   leadDetails: Lead;
   loading: boolean;
-  shareImgModal: (id: string, refID?: string, name?: string) => void;
+  shareImgModal: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
   handleImagesUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
@@ -45,6 +52,7 @@ const LeadsDetailsData = ({
   leadDetails,
 }: LeadDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
+  const { t: translate } = useTranslation();
 
   const [data, setData] = useState<{
     index: number;
@@ -182,6 +190,11 @@ const LeadsDetailsData = ({
       ? leadDetails?.customerDetail?.companyName
       : leadDetails?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
@@ -207,6 +220,7 @@ const LeadsDetailsData = ({
           id={leadDetails?.id}
           refID={leadDetails?.refID}
           name={name}
+          heading={heading}
           handleImageSlider={handleImageSlider}
         />
       </div>

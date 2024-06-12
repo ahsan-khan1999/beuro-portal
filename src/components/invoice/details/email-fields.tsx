@@ -1,9 +1,5 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateContractFormField,
-  GenerateInvoiceEmailFormField,
-} from "@/types";
+import { FormField, GenerateInvoiceEmailFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 

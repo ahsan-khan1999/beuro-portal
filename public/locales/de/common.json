@@ -291,7 +291,7 @@
       "customers": "Kunden",
       "plans": "Pläne",
       "payments": "Zahlungen",
-      "support_requests": "Unterstützunganfragen",
+      "support_requests": "Support",
       "Settings": "Einstellungen"
     }
   },
@@ -1146,10 +1146,10 @@
       "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
       "offer_created": "Operation erfolgreich",
       "record_update_des": "Danke, dass Sie uns auf dem Laufenden halten, wir sind froh, Sie zu haben.",
-      "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "offer_created_des": "Vielen Dank für die Aktualisierung des Angebot. Wir freuen uns, Sie als Kunden zu haben.",
       "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
-      "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "email_sent_des": "Vielen Dank für die Aktualisierung des Angebot. Wir freuen uns, Sie als Kunden zu haben.",
       "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
       "content_confirmation": "Bitte Bestätigen die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
@@ -1160,6 +1160,7 @@
       "date": "Datum"
     },
     "customer_name": "Kundenname",
+    "company_name": "Firmenname",
     "invoice_fitlers": {
       "pending": "Entwurf",
       "sending": "Versandbereit",
@@ -1194,7 +1195,7 @@
     "description_placeholder": "Bitte tragen Sie hier Ihre Angaben ein...",
     "actions": "Aktion",
     "service": "Dienst",
-    "offer_created": "Angebote erfolgreich erstellt",
+    "offer_created": "Angebot erstellt",
     "user_rule": "Unternehmen",
     "invoice_total": "Insgesamt",
     "page_sum": "Seite Summe",
@@ -1535,8 +1536,8 @@
       "cancel_button": "Abbrechen"
     },
     "offer_created_modal": {
-      "main_heading": "Angebote erfolgreich erstellt",
-      "sub_heading": "Danke, dass Sie ein Angebote erstellt haben. Wir freuen uns, Sie zu haben.",
+      "main_heading": "Angebot erfolgreich erstellt",
+      "sub_heading": "Danke, dass Sie ein Angebot erstellt haben. Wir freuen uns, Sie zu haben.",
       "button": "Fertig"
     },
     "placeholders": {
@@ -1860,7 +1861,7 @@
       "table_headings": {
         "id": "ID",
         "customer_name": "Kundenname",
-        "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
+        "follow_up_date": "Datum und Uhrzeit",
         "title": "Betreff/Titel",
         "status": "Status",
         "delete": "Löschen",

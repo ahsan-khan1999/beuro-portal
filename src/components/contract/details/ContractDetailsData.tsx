@@ -21,11 +21,17 @@ export enum ComponentsType {
 
 export interface ContractDetailProps {
   loading: boolean;
-  shareImgModal: (id: string, refID?: string, name?: string) => void;
+  shareImgModal: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
   handleImageUpload: (
     id: string,
     refID: string,
     name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
@@ -166,6 +172,11 @@ const ContractDetailsData = ({
       ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
       : contractDetails?.offerID?.leadID?.customerDetail?.fullName;
 
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <>
       <div className="2xl:fixed mb-5">
@@ -192,6 +203,7 @@ const ContractDetailsData = ({
             id={contractDetails?.id}
             refID={contractDetails?.contractNumber}
             name={name}
+            heading={heading}
             handleImageSlider={handleImageSlider}
           />
         </div>

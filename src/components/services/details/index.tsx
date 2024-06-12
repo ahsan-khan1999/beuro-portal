@@ -19,6 +19,7 @@ const ServicesDetails = () => {
     renderModal,
     loading,
   } = useServiceDetail(true);
+
   return (
     <Layout>
       <DetailsCard>

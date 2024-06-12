@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import {
   deleteContract,
@@ -41,8 +40,6 @@ export default function useContractDetail() {
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
-
-  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (contractDetails?.id)
@@ -93,6 +90,7 @@ export default function useContractDetail() {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -106,16 +104,28 @@ export default function useContractDetail() {
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
   };
 
-  const handleAddNote = (id: string, refID: string, name: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "contract", refID: refID, name: name },
+        data: {
+          id: id,
+          type: "contract",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -131,7 +141,8 @@ export default function useContractDetail() {
     id: string,
     note: string,
     refID: string,
-    name: string
+    name: string,
+    heading: string
   ) => {
     dispatch(
       updateModalType({
@@ -142,6 +153,7 @@ export default function useContractDetail() {
           data: note,
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
@@ -155,6 +167,7 @@ export default function useContractDetail() {
     id: string,
     refID?: string,
     name?: string,
+    heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
@@ -167,6 +180,7 @@ export default function useContractDetail() {
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
@@ -191,13 +205,19 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
-  const shareImgModal = (id: string, refID?: string, name?: string) => {
+  const shareImgModal = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.SHARE_IMAGES,
         data: {
           refID: refID,
           name: name,
+          heading: heading,
         },
       })
     );
@@ -251,14 +271,14 @@ export default function useContractDetail() {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.EDIT_NOTE]: (
       <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     // [ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL]: (

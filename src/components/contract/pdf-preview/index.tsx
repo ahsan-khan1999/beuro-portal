@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
+import { useTranslation } from "next-i18next";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -29,6 +30,8 @@ const PdfPriview = () => {
     onSuccess,
     contractDetails,
   } = useContractPdf();
+
+  const { t: translate } = useTranslation();
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (

@@ -679,7 +679,7 @@ export function getInvoiceEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
   )
-    return "#FF0000";
+    return "#FE9244";
   else return "#FF376F";
 }
 
