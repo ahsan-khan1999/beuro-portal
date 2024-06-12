@@ -10,8 +10,8 @@ import {
   readNoteSettings,
 } from "@/api/slices/settingSlice/settings";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { useTranslation } from "next-i18next";
 
 export interface GeneralNotesProps {
   onAddNote: () => void;
@@ -32,6 +32,8 @@ export const NotesDetailCard = ({
   loading,
 }: GeneralNotesProps) => {
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
+
   const [openNoteIndex, setOpenNoteIndex] = useState<number | null>(null);
 
   const handleDescription = (index: number) => {

@@ -9,6 +9,7 @@ import { OffersTableRowTypes } from "@/types/offers";
 import OfferEditImages from "../OfferEditImages";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customer,
@@ -48,6 +49,7 @@ const OffersDetailsData = ({
   handleImageSlider,
 }: OfferDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     const elements = document.querySelectorAll("[data-scroll-target]");

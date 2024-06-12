@@ -21,6 +21,8 @@ const TableRows = ({
   handleRecurringInvoiceEdit: (item: any) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );

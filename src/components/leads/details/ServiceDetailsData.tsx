@@ -11,10 +11,10 @@ const ServiceDetailsData = ({
 }: {
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
+  const { t: translate } = useTranslation();
   const { leadDetails } = useAppSelector((state) => state.lead);
   const content = leadDetails?.requiredService as ContentTableRowTypes;
   const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
-  const { t: translate } = useTranslation();
 
   return (
     <LeadsCardLayout>

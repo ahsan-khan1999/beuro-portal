@@ -14,6 +14,7 @@ import { OffersTableRowTypes, Total } from "@/types/offers";
 import { TaxSetting } from "../../../../api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { useTranslation } from "next-i18next";
 const serviceObject = {
   serviceTitle: "",
   price: "",
@@ -39,6 +40,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
   fields,
   setValue
 ) => {
+  const { t: translate } = useTranslation();
   const {
     service,
     onCustomerSelect,
@@ -414,7 +416,7 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
       tax,
       currency,
     } = properties;
-
+    const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
         containerClass: "mt-5 bg-white px-5 pt-5 rounded-lg",
@@ -538,6 +540,7 @@ const generateServiceCalulationChildren = (
   tax?: TaxSetting[] | null,
   currency?: string
 ) => {
+  const { t: translate } = useTranslation();
   let field: any = {
     containerClass: "mb-0 w-full",
     field: {
@@ -816,6 +819,7 @@ const generateServiceCalulationChildren = (
 
 export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionFormField =
   (loading, OnClick) => {
+    const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
         containerClass: "pt-[55px] pb-5 px-5 rounded-b-lg bg-white",

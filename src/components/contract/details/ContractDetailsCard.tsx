@@ -16,6 +16,7 @@ import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 import editIcon from "@/assets/svgs/edit_primary.svg";
 import { updateQuery } from "@/utils/update-query";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { useTranslation } from "next-i18next";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -30,6 +31,7 @@ const ContractDetailsCard = ({
   handleEditDateModal,
 }: ContractDetailCardProps) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const handleDonwload = () => {
     window.open(contractDetails?.attachement);

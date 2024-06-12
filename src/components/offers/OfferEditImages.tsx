@@ -5,6 +5,7 @@ import shareIcon from "@/assets/svgs/share_icon.svg";
 import imageUpload from "@/assets/svgs/img_upload.svg";
 import { useAppSelector } from "@/hooks/useRedux";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import { useTranslation } from "next-i18next";
 
 export interface DetailImgUploadProps {
   shareImgModal: (
@@ -39,6 +40,7 @@ const OfferEditImages = ({
   heading,
 }: DetailImgUploadProps) => {
   const { images } = useAppSelector((state) => state.image);
+  const { t: translate } = useTranslation();
 
   return (
     <LeadsDetailImgLayout>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { GeneralAddress } from "@/types/settings";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { useTranslation } from "next-i18next";
 
 export interface GeneralAddressProps {
   onAddAddressTitle: () => void;
@@ -22,6 +23,8 @@ export const AddressDetailCard = ({
   addresses,
   loading,
 }: GeneralAddressProps) => {
+  const { t: translate } = useTranslation();
+
   return (
     <div className="p-6 bg-white rounded-md">
       <div className="flex items-center justify-between pb-6 border-b border-b-[#000] border-opacity-10">

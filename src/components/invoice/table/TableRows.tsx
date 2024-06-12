@@ -4,6 +4,7 @@ import { InvoiceTableRowTypes } from "@/types/invoice";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { formatDateString } from "@/utils/functions";
+import { useTranslation } from "next-i18next";
 const TableRows = ({
   dataToAdd,
   handleNotes,
@@ -18,6 +19,7 @@ const TableRows = ({
   ) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const handleInvoicePdfPreview = (id?: string) => {
     router.push({
       pathname: "/invoices/pdf-preview",

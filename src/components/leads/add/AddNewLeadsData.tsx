@@ -16,6 +16,7 @@ import { updateQuery } from "@/utils/update-query";
 import { setImages } from "@/api/slices/imageSlice/image";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customerAdd,
@@ -26,6 +27,7 @@ export enum ComponentsType {
 
 const AddNewLeadsData = () => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const { leadDetails } = useAppSelector((state) => state.lead);
 
   const [tabType, setTabType] = useState<ComponentsType>(
