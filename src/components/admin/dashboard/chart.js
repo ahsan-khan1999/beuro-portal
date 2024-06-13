@@ -34,10 +34,11 @@ const PieChart = ({ data }) => {
       <h3 className="pt-5 pb-3 ml-[40px] font-medium text-[#18181B]">
         {translate("admin.overview.plans")}
       </h3>
-      <hr className="h-[1px] text-black opacity-10" />
 
-      <div className="flex justify-center items-center h-[340px] py-5">
-        <canvas id="myPieChart" />
+      <div className="flex justify-center items-center h-[340px] py-5 border-t border-[#000] border-opacity-10">
+        <div className="w-fit h-fit">
+          <canvas id="myPieChart" />
+        </div>
       </div>
     </div>
   );

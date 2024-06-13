@@ -14,6 +14,12 @@ export default function SupportFilter({
   const [inputValue, setInputValue] = useState<string>("");
   const router = useRouter();
 
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
 
@@ -64,12 +70,6 @@ export default function SupportFilter({
       return updatedFilter;
     });
   };
-
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
 
   return (
     <div className="flex space-x-4 z-10">

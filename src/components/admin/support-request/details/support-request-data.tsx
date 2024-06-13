@@ -1,12 +1,14 @@
+import React from "react";
 import { ContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
-import React from "react";
+import { useTranslation } from "next-i18next";
 
-const SupportDetailsData = ({
+export const SupportDetailsData = ({
   supportDetail,
 }: {
   supportDetail: ContactSupport | null;
 }) => {
+  const { t: translate } = useTranslation();
   return (
     <LeadsCardLayout>
       <div className="my-5 p-6">
@@ -64,5 +66,3 @@ const SupportDetailsData = ({
     </LeadsCardLayout>
   );
 };
-
-export default SupportDetailsData;

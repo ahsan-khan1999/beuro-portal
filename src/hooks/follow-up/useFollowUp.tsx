@@ -20,7 +20,6 @@ const useFollowUps = () => {
     (state) => state.followUp
   );
 
-  const { query } = useRouter();
   const {
     modal: { data },
   } = useAppSelector((state) => state.global);
@@ -88,45 +87,6 @@ const useFollowUps = () => {
       }
     });
   }, []);
-
-  // useEffect(() => {
-  //   const parsedPage = parseInt(query.page as string, 10);
-  //   let resetPage = null;
-  //   if (!isNaN(parsedPage)) {
-  //     setCurrentPage(parsedPage);
-  //   } else {
-  //     resetPage = 1;
-  //     setCurrentPage(1);
-  //   }
-
-  //   const searchQuery = query?.text as string;
-
-  //   let updatedFilter: {
-  //     text?: string;
-  //   } = {
-  //     text: searchQuery || "",
-  //   };
-
-  //   if (searchQuery) {
-  //     updatedFilter.text = searchQuery;
-  //   }
-
-  //   setFilter(updatedFilter);
-
-  //   dispatch(
-  //     readFollowUp({
-  //       params: {
-  //         filter: searchQuery ? updatedFilter : {},
-  //         page: (Number(parsedPage) || resetPage) ?? currentPage,
-  //         size: 10,
-  //       },
-  //     })
-  //   ).then((res: any) => {
-  //     if (res?.payload) {
-  //       setCurrentPageRows(res?.payload?.FollowUp);
-  //     }
-  //   });
-  // }, [query]);
 
   return {
     currentPageRows,

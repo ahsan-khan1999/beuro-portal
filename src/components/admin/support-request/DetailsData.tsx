@@ -1,24 +1,24 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { DropDownItem } from "@/types";
 import { ContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
+import { useTranslation } from "next-i18next";
 
-const DetailsData = ({
+export const DetailsData = ({
   supportDetail,
   // status,
   handlePreviousClick,
   handleStatusUpadte,
 }: {
   supportDetail: ContactSupport | null;
-  // status: DropDownItem[];
   handlePreviousClick: () => void;
   handleStatusUpadte: (value: string) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const itemStatus = [
     `${translate("support_request_status.pending")}`,
@@ -168,5 +168,3 @@ const DetailsData = ({
     </>
   );
 };
-
-export default DetailsData;

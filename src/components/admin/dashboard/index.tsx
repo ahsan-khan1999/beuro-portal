@@ -11,9 +11,11 @@ import { FilterType } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readAdminDashboard } from "@/api/slices/authSlice/auth";
 import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
+import { useTranslation } from "next-i18next";
 
 const AdminDashboard = () => {
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const { adminDashboard } = useAppSelector((state) => state.auth);
   const [filter, setFilter] = useState<FilterType>({
     month: 1,
@@ -76,6 +78,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     dispatch(readAdminDashboard({ params: { filter: filter } }));
   }, []);
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readAdminDashboard({ params: { filter: { month: query?.month } } })

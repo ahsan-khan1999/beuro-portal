@@ -20,7 +20,7 @@ const WarningModal = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[480px] lg:max-w-[570.236px] min-h-fit"
+        containerClassName="max-w-[400px] md:max-w-[480px] lg:max-w-[570.56px] min-h-fit"
       >
         <div className="relative flex flex-col items-center p-6 lg:pt-[69px] lg:pb-[67px]">
           <Image
@@ -30,8 +30,8 @@ const WarningModal = ({
             onClick={onClose}
           />
 
-          <Image src={warningIcon} alt="delete_icon" />
-          <p className="font-medium text-2xl mt-6 text-center mb-2">
+          <Image src={warningIcon} alt="delete_icon" className="w-16 h-16 md:w-fit md:h-fit"/>
+          <p className="text-base md:text-2xl font-medium mt-6 text-center mb-2">
             {translate("common.are_you_sure_modal.confirm_heading")}
           </p>
 
