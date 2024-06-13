@@ -115,7 +115,7 @@ const DetailsData = ({
       <div className="flex flex-col gap-y-3 mlg:flex-row mlg:space-x-20 mlg:items-center mt-5">
         <div className="flex items-center gap-x-3">
           <span className="text-base font-medium text-[#4D4D4D]">
-            {translate("admin.support_requests.card_content.customer_id")}:
+            {translate("admin.customers_details.card_content.customer_id")}:
           </span>
           <span className="text-primary font-medium">
             {supportDetail?.createdBy?.company?.refID}
@@ -141,10 +141,26 @@ const DetailsData = ({
               selectedItem={translate(
                 `support_request_status.${supportDetail?.status}`
               )}
-              dropDownClassName="px-3 border border-primary justify-between py-[3px]"
-              dropDownTextClassName="text-primary font-medium"
-              dropDownIconClassName="text-primary ml-2"
-              dropDownItemsContainerClassName="border border-primary w-full"
+              dropDownClassName={`px-3 border ${
+                supportDetail?.status === "resolved"
+                  ? "border-[#4A13E7]"
+                  : "border-[#FE9244]"
+              } justify-between py-[3px]`}
+              dropDownTextClassName={`${
+                supportDetail?.status === "resolved"
+                  ? "text-[#4A13E7]"
+                  : "text-[#FE9244]"
+              } font-medium`}
+              dropDownIconClassName={`${
+                supportDetail?.status === "resolved"
+                  ? "text-[#4A13E7]"
+                  : "text-[#FE9244]"
+              } ml-2`}
+              dropDownItemsContainerClassName={`border ${
+                supportDetail?.status === "resolved"
+                  ? "border-[#4A13E7]"
+                  : "border-[#FE9244]"
+              }y w-full`}
             />
           </span>
         </div>

@@ -28,8 +28,8 @@ const AddressAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
     <FormCard>
       <div className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
-          {translate("offers.address_details.main_heading")}{" "}
-          {invoiceDetails?.id && invoiceDetails?.invoiceNumber}
+          {translate("offers.address_details.main_heading")} (
+          {invoiceDetails?.id && invoiceDetails?.invoiceNumber})
         </h2>
         <button
           onClick={handleCancel}

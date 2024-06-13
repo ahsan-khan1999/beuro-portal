@@ -5,7 +5,6 @@ import React from "react";
 import { useRouter } from "next/router";
 import { ComponentsType } from "./AddOffersDetailsData";
 import { updateQuery } from "@/utils/update-query";
-import { useTranslation } from "next-i18next";
 
 const AditionalAddDetails = ({
   onHandleNext,

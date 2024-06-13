@@ -17,12 +17,12 @@ export default function CustomerFilter({
 
   const checkbox: CheckBoxType[] = [
     {
-      label: `${translate("admin.customers_details.table_functions.active")}`,
-      type: "1",
+      label: `${translate("customer_status.block")}`,
+      type: "0",
     },
     {
-      label: `${translate("admin.customers_details.table_functions.block")}`,
-      type: "0",
+      label: `${translate("customer_status.unBlock")}`,
+      type: "1",
     },
   ];
 

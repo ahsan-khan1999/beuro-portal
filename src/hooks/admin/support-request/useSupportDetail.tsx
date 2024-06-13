@@ -19,10 +19,10 @@ export default function useSupportDetail() {
   const { contactSupportDetails, loading } = useAppSelector(
     (state) => state.contactSupport
   );
-  const { modal } = useAppSelector((state) => state.global);
-  const { t: translate } = useTranslation();
 
   const id = router.query.supportRequest;
+  const { modal } = useAppSelector((state) => state.global);
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (id) {
@@ -42,10 +42,6 @@ export default function useSupportDetail() {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -54,13 +50,15 @@ export default function useSupportDetail() {
     [ModalType.CREATION]: (
       <CreationCreated
         heading={translate("common.are_you_sure_modal.success")}
-        subHeading={translate(
-          "admin.customers_details.card_content.customer_free"
-        )}
+        subHeading={translate("common.modals.update_success")}
         onClose={onClose}
         route={onClose}
       />
     ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   const handleStatusUpadte = async (value: string) => {

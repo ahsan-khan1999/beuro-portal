@@ -5,8 +5,6 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useMainInvoicePdf } from "@/hooks/invoice/useMainInvoicePdf";
 
-
-
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   {

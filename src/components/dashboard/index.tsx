@@ -57,8 +57,6 @@ const AdminDashboard = () => {
     dispatch(readDashboard({ params: { filter: filter } })).then(
       (response: DashboardActionType) => {
         if (response?.payload) {
-          console.log(response?.payload);
-
           setPieData({
             datasets: [
               {

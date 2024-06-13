@@ -149,7 +149,7 @@ const EditOffersDetailsData = () => {
         imageUploadHandler={handleImageUpload}
         onClose={onClose}
         routeHandler={route}
-        heading={translate("common.offer_created")}
+        heading={translate("common.offer_create")}
         subHeading=""
       />
     ),

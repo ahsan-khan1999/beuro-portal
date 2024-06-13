@@ -4,7 +4,6 @@ import React from "react";
 import DetailsData from "../DetailsData";
 import SupportDetailsData from "./support-request-data";
 import useSupportDetail from "@/hooks/admin/support-request/useSupportDetail";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
 
 const SupportRequestDetails = () => {

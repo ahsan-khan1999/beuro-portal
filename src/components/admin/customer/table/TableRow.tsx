@@ -74,7 +74,7 @@ const TableRow = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(120px,_120px)_minmax(50px,_50px)]">
+            <div className="gap-x-4 grid grid-cols-[minmax(120px,_120px)_minmax(50px,_50px)]">
               {/* <span className="py-4 flex items-center">
                 <div
                   className={`${
@@ -92,7 +92,7 @@ const TableRow = ({
                 <DropDown
                   items={items}
                   onItemSelected={(status) =>
-                    onStatusChange(item.id, status, "customer")
+                    onStatusChange(item.id, status, "admin_customer")
                   }
                   selectedItem={translate(`customer_status.${item.status}`)}
                   dropDownClassName={`w-full rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-1 ${

@@ -65,6 +65,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };

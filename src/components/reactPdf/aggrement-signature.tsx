@@ -84,7 +84,7 @@ export const AggrementSignature = ({
                   {date}
                 </Text>
               }
-              <Text style={styles.dateText}>Datum</Text>
+              <Text style={styles.dateText}>{translate("pdf.date")}</Text>
             </View>
 
             <View style={{ width: "40%" }}>
@@ -95,7 +95,9 @@ export const AggrementSignature = ({
                 />
               )}
               <View style={styles.signature}>
-                <Text style={styles.dateText}>Signature</Text>
+                <Text style={styles.dateText}>
+                  {translate("pdf.signature")}
+                </Text>
               </View>
             </View>
           </View>

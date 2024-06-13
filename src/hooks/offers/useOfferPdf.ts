@@ -10,7 +10,7 @@ import {
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EmailTemplate } from "@/types/settings";
 import { ContractEmailHeaderProps, PdfProps, TemplateType } from "@/types";
@@ -23,6 +23,7 @@ import {
 import { ModalType } from "@/enums/ui";
 import { updateQuery } from "@/utils/update-query";
 import { staticEnums } from "@/utils/static";
+import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 
 let contractPdfInfo = {
   subject: "",
@@ -51,10 +52,11 @@ export const useOfferPdf = () => {
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
-  const dispatch = useAppDispatch();
 
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { offerID, isMail } = router.query;
+  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
 
   useEffect(() => {
     (async () => {
@@ -260,13 +262,38 @@ export const useOfferPdf = () => {
     })();
   }, [offerID]);
 
+  const fileName = offerData?.emailHeader?.offerNo;
+  const offerDataProps = useMemo(
+    () => ({
+      emailTemplateSettings,
+      templateSettings,
+      data: offerData,
+      fileName,
+      remoteFileBlob,
+      systemSetting,
+      isOfferPdf: true,
+      showContractSign: true,
+      companyName: offerData?.headerDetails?.companyName,
+    }),
+    [
+      emailTemplateSettings,
+      templateSettings,
+      offerData,
+      fileName,
+      remoteFileBlob,
+      systemSetting,
+    ]
+  );
+
+  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+    useMergedPdfDownload(offerDataProps);
+
   const handleEmailSend = async () => {
     try {
       const formData = new FormData();
 
-      if (!pdfFile) return;
-      formData.append("file", pdfFile as any);
-
+      if (!mergedFile) return;
+      formData.append("file", mergedFile as any);
       const fileUrl = await dispatch(uploadFileToFirebase(formData));
 
       if (fileUrl?.payload) {
@@ -333,8 +360,8 @@ export const useOfferPdf = () => {
   };
 
   const handleDonwload = () => {
-    if (pdfFile) {
-      const url = URL.createObjectURL(pdfFile);
+    if (mergedPdfUrl) {
+      const url = mergedPdfUrl;
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
@@ -345,16 +372,13 @@ export const useOfferPdf = () => {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-
       URL.revokeObjectURL(url);
     }
   };
 
   const handlePrint = () => {
-    if (pdfFile) {
-      const url = URL.createObjectURL(pdfFile);
-
-      let printWindow = window.open(url, "_blank");
+    if (mergedPdfUrl) {
+      let printWindow = window.open(mergedPdfUrl, "_blank");
       if (!printWindow) return;
       printWindow.onload = function () {
         printWindow?.print();
@@ -391,5 +415,8 @@ export const useOfferPdf = () => {
     onSuccess,
     systemSetting,
     offerDetails,
+    mergedFile,
+    mergedPdfUrl,
+    isPdfRendering,
   };
 };

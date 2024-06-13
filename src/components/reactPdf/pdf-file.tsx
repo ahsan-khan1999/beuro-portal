@@ -8,6 +8,7 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
+import { AggrementSignature } from "./aggrement-signature";
 
 Font.register({
   family: "Poppins",
@@ -55,6 +56,9 @@ const PdfFile = ({
   templateSettings,
   emailTemplateSettings,
   systemSetting,
+  lang,
+  showContractSign,
+  isOfferPdf,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
   const { address, header, workDates, time } = data?.movingDetails || {};
@@ -64,33 +68,18 @@ const PdfFile = ({
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
 
-  const disscountTableRow = {
-    serviceTitle: "Rabatt",
-    price: Number(serviceItemFooter?.discount),
-    unit: "-",
-    totalPrice: Number(serviceItemFooter?.discount),
-    serviceType: "",
-    description: serviceItemFooter?.discountDescription,
-    count: "-",
-    pagebreak: true,
-    discount: Number(serviceItemFooter?.discount),
-    discountType: serviceItemFooter?.discountType,
-    discountPercentage: Number(serviceItemFooter?.discountPercentage),
-    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
-    totalDiscount: serviceItemFooter?.serviceDiscountSum,
-    isGlobalDiscount: serviceItemFooter?.isDiscount,
-  };
-
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
     Number(serviceItemFooter?.serviceDiscountSum) > 0
       ? true
       : false || false;
+
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
+
   return (
     <Document title={headerDetails?.offerNo || ""}>
       <Page style={styles.body} dpi={72}>
-        <Header {...headerDetails} />
+        <Header {...headerDetails} language={lang} />
         <View
           style={{
             position: "absolute",
@@ -101,9 +90,12 @@ const PdfFile = ({
         >
           <ContactAddress {...{ ...contactAddress }} />
 
-          <AddressDetails {...{ address, header, workDates, time }} />
+          <AddressDetails
+            {...{ address, header, workDates, time }}
+            language={lang}
+          />
 
-          <ServiceTableHederRow isDiscount={isDiscount} />
+          <ServiceTableHederRow isDiscount={isDiscount} language={lang} />
           {serviceItem?.map((item, index) => (
             <ServiceTableRow
               {...item}
@@ -129,6 +121,7 @@ const PdfFile = ({
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSetting}
+            language={lang}
           />
         </View>
         <Footer
@@ -140,20 +133,22 @@ const PdfFile = ({
         />
       </Page>
 
-      {/* Additional details */}
       <Page style={styles.body}>
-        <Header {...headerDetails} />
-        <View
+        <Header {...headerDetails} language={lang} />
+        {/* <View
           style={{
             position: "absolute",
             left: 0,
             right: 0,
             top: 120,
           }}
-        >
-          {/* <ContactAddress {...{ ...contactAddress }} /> */}
-          <AdditionalDetails description={aggrementDetails} />
-        </View>
+        > */}
+        <AdditionalDetails description={aggrementDetails} />
+        {isOfferPdf && (
+          <AggrementSignature showContractSign={showContractSign} />
+        )}
+        {/* </View> */}
+
         <Footer
           {...{
             documentDetails: footerDetails,

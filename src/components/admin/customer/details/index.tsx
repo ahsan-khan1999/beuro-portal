@@ -16,6 +16,7 @@ const CustomerDetails = () => {
     handleStatusChange,
     loading,
     handleMakeAccountFree,
+    deleteHandler,
   } = useCustomerDetailAdmin();
 
   return (
@@ -28,6 +29,7 @@ const CustomerDetails = () => {
             handleAreYouSure={handleMakeAccountFree}
             isCustomerFree={isCustomerFree}
             handleStatusChange={handleStatusChange}
+            onDelete={deleteHandler}
           />
         </DetailsCard>
         <div className="mt-5">

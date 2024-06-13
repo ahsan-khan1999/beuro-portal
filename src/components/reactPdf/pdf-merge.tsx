@@ -1,6 +1,4 @@
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
-import { useEffect } from "react";
 
 export const Merger = ({
   mergedPdfFileUrl,
