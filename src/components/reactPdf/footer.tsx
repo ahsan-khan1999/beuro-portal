@@ -1,9 +1,4 @@
-import {
-  DocumentDetailFooterProps,
-  PdfPreviewFooterProps,
-  TemplateType,
-} from "@/types";
-import { FooterProps } from "@/types/pdf";
+import { PdfPreviewFooterProps } from "@/types";
 import { insertBreaks } from "@/utils/functions";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useMemo } from "react";
@@ -93,7 +88,10 @@ export const Footer = ({
     row5: c4Row5,
   } = templateSettings?.fourthColumn ?? {};
   const ibanNumber = insertBreaks(templateSettings?.secondColumn?.iban, 32);
-  const accountNumber = insertBreaks(templateSettings?.secondColumn?.accountNumber, 32);
+  const accountNumber = insertBreaks(
+    templateSettings?.secondColumn?.accountNumber,
+    32
+  );
 
   const { FooterColour, textColour } = emailTemplateSettings ?? {};
   const {

@@ -43,11 +43,8 @@ const TableRow = ({
               </div>
             </div>
 
-            <div className="gap-x-3 grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
-              <div
-                className="flex justify-center items-center"
-                // onClick={() => handleDelete(item?.refID)}
-              >
+            <div className="gap-x-2 grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
+              <div className="flex justify-center items-center">
                 <div className="border border-[#ED2F2F] rounded-lg w-[34px] h-[34px] flex items-center justify-center cursor-pointer">
                   <Image
                     src={deleteIcon}

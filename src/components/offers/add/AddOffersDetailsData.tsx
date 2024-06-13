@@ -15,6 +15,7 @@ import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customerAdded,
@@ -26,6 +27,7 @@ export enum ComponentsType {
 
 const EditOffersDetailsData = () => {
   const { offerDetails } = useAppSelector((state) => state.offer);
+  const { t: translate } = useTranslation();
 
   const [tabType, setTabType] = useState<ComponentsType>(
     offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded
@@ -147,7 +149,7 @@ const EditOffersDetailsData = () => {
         imageUploadHandler={handleImageUpload}
         onClose={onClose}
         routeHandler={route}
-        heading={translate("common.offer_created")}
+        heading={translate("common.offer_create")}
         subHeading=""
       />
     ),

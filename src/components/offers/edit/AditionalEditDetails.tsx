@@ -40,7 +40,7 @@ const AditionalEditDetails = ({
         </button>
       </div>
 
-      <div className="px-6">
+      <div className="px-6 pt-3">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

@@ -23,7 +23,7 @@ export const AreYouSureMakeAccountFree = ({
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[564px] min-h-auto"
+        containerClassName="max-w-[360px] md:max-w-[480px] lg:max-w-[564px] min-h-fit"
       >
         <div className="relative flex flex-col items-center py-10">
           <Image
@@ -40,13 +40,13 @@ export const AreYouSureMakeAccountFree = ({
 
           <div className="flex items-center gap-x-5 mt-5">
             <button
-              className="p-4 w-[174px] text-black hover:text-white bg-[#BFBFBF] hover:bg-buttonHover flex items-center justify-center rounded-lg !h-[50px]"
+              className="p-4 w-[100px] md:w-[174px] text-black hover:text-white bg-[#BFBFBF] hover:bg-buttonHover flex items-center justify-center rounded-lg !h-[50px]"
               onClick={onClose}
             >
               {translate("common.cancel_button")}
             </button>
             <Button
-              className="p-4 w-[174px] rounded-lg"
+              className="p-4 w-[100px] md:w-[174px] rounded-lg"
               id="yes"
               inputType="button"
               onClick={onSuccess}

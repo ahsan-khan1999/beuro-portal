@@ -5,6 +5,7 @@ import { formatDateString } from "@/utils/functions";
 import { getEmailColor, getOfferStatusColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { useTranslation } from "next-i18next";
 
 export interface OfferTableProps {
   dataToAdd: OffersTableRowTypes[];
@@ -34,6 +35,7 @@ const TableRows = ({
   handlePaymentStatusUpdate,
 }: OfferTableProps) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const paymentMethod = [
     `${translate("payment_method.Cash")}`,

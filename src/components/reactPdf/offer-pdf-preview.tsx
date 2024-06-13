@@ -7,15 +7,15 @@ import {
   StyleSheet,
   View,
 } from "@react-pdf/renderer";
-import { Header } from "./header";
 import { ContactAddress } from "./contact-address";
-import { AddressDetails } from "./address-details";
-import { ServiceTableHederRow } from "./service-table-header-row";
 import { ServiceTableRow } from "./service-table-row";
-import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
 import { AggrementSignature } from "./aggrement-signature";
+import { OfferPdfHeader } from "./offer-pdf-header";
+import { OfferAddressDetails } from "./offer-address-details";
+import { OfferServiceTableHederRow } from "./offer-service-table-header-row";
+import { OfferServicesTotalAmount } from "./offer-services-total-amount";
 
 Font.register({
   family: "Poppins",
@@ -102,22 +102,6 @@ const OfferPdfPreview = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
-  const disscountTableRow = {
-    serviceTitle: "Rabatt",
-    price: Number(serviceItemFooter?.discount),
-    unit: "-",
-    totalPrice: Number(serviceItemFooter?.discount),
-    serviceType: "",
-    description: serviceItemFooter?.discountDescription,
-    count: "-",
-    pagebreak: true,
-    discount: Number(serviceItemFooter?.discount),
-    discountType: serviceItemFooter?.discountType,
-    discountPercentage: Number(serviceItemFooter?.discountPercentage),
-    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
-    totalDiscount: serviceItemFooter?.serviceDiscountSum,
-    isGlobalDiscount: serviceItemFooter?.isDiscount,
-  };
 
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
@@ -130,7 +114,7 @@ const OfferPdfPreview = ({
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
       <Document title={data?.headerDetails?.offerNo || ""}>
         <Page style={styles.body} dpi={72}>
-          <Header {...headerDetails} />
+          <OfferPdfHeader {...headerDetails} />
           <View
             style={{
               position: "absolute",
@@ -140,10 +124,8 @@ const OfferPdfPreview = ({
             }}
           >
             <ContactAddress {...{ ...contactAddress }} />
-
-            <AddressDetails {...{ address, header, workDates, time }} />
-
-            <ServiceTableHederRow isDiscount={isDiscount} />
+            <OfferAddressDetails {...{ address, header, workDates, time }} />
+            <OfferServiceTableHederRow isDiscount={isDiscount} />
             {serviceItem?.map((item, index, arr) => (
               <ServiceTableRow
                 {...item}
@@ -166,7 +148,7 @@ const OfferPdfPreview = ({
                 isDiscount={isDiscount}
               />
             )} */}
-            <ServicesTotalAmount
+            <OfferServicesTotalAmount
               {...serviceItemFooter}
               systemSettings={systemSetting}
             />
@@ -180,25 +162,14 @@ const OfferPdfPreview = ({
           />
         </Page>
 
-        {/* Additional details */}
         <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
           <View style={{ marginBottom: 10 }} fixed>
-            <Header {...headerDetails} />
+            <OfferPdfHeader {...headerDetails} />
           </View>
-          {/* <View
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              top: 120,
-              fontFamily: "Poppins",
-            }}
-          > */}
-          {/* <ContactAddress {...{ ...contactAddress }} /> */}
+
           <AdditionalDetails description={aggrementDetails} />
           <AggrementSignature showContractSign={showContractSign} />
 
-          {/* </View> */}
           <Footer
             {...{
               documentDetails: footerDetails,

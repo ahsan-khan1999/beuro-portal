@@ -1441,15 +1441,15 @@ export const DEFAULT_INVOICE = {
 };
 
 export const HeaderLabelNr = {
-  contract: "Vertrag ",
-  invoice: "Rechnung ",
-  receipt: "Quittung ",
+  contract: "pdf.label_nr_contract",
+  invoice: "pdf.label_nr_invoice",
+  receipt: "pdf.label_nr_receipt",
 };
 
 export const HeaderLabel = {
-  contract: "Erstell",
-  invoice: "Rechnung",
-  receipt: "Quittung",
+  contract: "pdf.label_contract",
+  invoice: "pdf.label_invoice",
+  receipt: "pdf.label_receipt",
 };
 
 export const GenderLabel = {

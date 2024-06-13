@@ -1,4 +1,5 @@
 import { contractTableTypes } from "@/types/contract";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const AddressDetailsData = ({
@@ -6,6 +7,7 @@ const AddressDetailsData = ({
 }: {
   contractDetails: contractTableTypes;
 }) => {
+  const { t: translate } = useTranslation();
   return (
     <div
       className="rounded-md border-none bg-white w-full h-fit"

@@ -16,6 +16,8 @@ import { ServicesTotalAmount } from "@/components/reactPdf/services-total-ammoun
 import { Footer } from "@/components/reactPdf/footer";
 import { AdditionalDetails } from "@/components/reactPdf/additional-details";
 import { blobToFile } from "@/utils/utility";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 Font.register({
   family: "Poppins",
@@ -75,6 +77,9 @@ const PdfDownload = ({
   const serviceItemFooter = data?.serviceItemFooter;
   const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+  const router = useRouter();
+
+  useEffect(() => {}, [router.locale]);
 
   return (
     <div className="download-link">

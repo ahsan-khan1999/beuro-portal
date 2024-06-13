@@ -27,27 +27,23 @@ export const DocumentHeader = ({
             <div className="flex gap-[5px]">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {translation("pdf.offer_number")} :
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {offerNo}
               </span>
             </div>
-            <div className="flex gap-[5px] ">
+            <div className="flex gap-[5px]">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {translation("pdf.offer_date")} :
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {formatDateTimeToDate(offerDate || "")}
               </span>
@@ -55,13 +51,11 @@ export const DocumentHeader = ({
             <div className="flex gap-[5px]">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {translation("pdf.created_by")} :
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {createdBy}
               </span>
@@ -96,13 +90,11 @@ export const DocumentHeader = ({
             <div className="flex gap-[5px]">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {translation("pdf.offer_number")} :
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {offerNo}
               </span>
@@ -110,13 +102,11 @@ export const DocumentHeader = ({
             <div className="flex gap-[5px] ">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {translation("pdf.offer_date")} :
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {formatDateTimeToDate(offerDate || "")}
               </span>
@@ -124,13 +114,11 @@ export const DocumentHeader = ({
             <div className="flex gap-[5px] ">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {translation("pdf.created_by")} :
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
-                // style={{ color: textColor }}
               >
                 {createdBy}
               </span>

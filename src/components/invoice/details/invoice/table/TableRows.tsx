@@ -5,6 +5,7 @@ import { formatDateTimeToDate, getInvoiceEmailColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { useTranslation } from "next-i18next";
 
 const TableRows = ({
   dataToAdd,
@@ -20,10 +21,12 @@ const TableRows = ({
   handleRecurringInvoiceEdit: (item: any) => void;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+  const { systemSettings } = useAppSelector((state) => state.settings);
+
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );
-  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const handleInvoicePdfPreview = (id?: string) => {
     router.push({

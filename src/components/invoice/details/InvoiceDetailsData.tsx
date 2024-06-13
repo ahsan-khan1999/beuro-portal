@@ -9,6 +9,7 @@ import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { updateQuery } from "@/utils/update-query";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 const InvoiceDetailsData = ({
   handleInvoiceCreation,
@@ -22,6 +23,7 @@ const InvoiceDetailsData = ({
   handleInvoiceEdit,
 }: InvoiceCardContentProps) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const handleBack = () => {
     router.pathname = "/invoices";

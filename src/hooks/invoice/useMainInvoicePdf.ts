@@ -203,7 +203,7 @@ export const useMainInvoicePdf = () => {
               createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType: "contract",
+              fileType: "invoice",
               isReverseLogo: template?.payload?.Template?.order,
               companyName: invoiceDetails?.createdBy?.company?.companyName,
             },

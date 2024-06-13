@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+import { useTranslation } from "next-i18next";
 
 const AddressDetailsData = ({
   offerDetails,
@@ -10,6 +11,7 @@ const AddressDetailsData = ({
   offerDetails: OffersTableRowTypes;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <LeadsCardLayout>

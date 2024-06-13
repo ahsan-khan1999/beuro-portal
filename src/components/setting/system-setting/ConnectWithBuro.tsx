@@ -1,14 +1,11 @@
-import React, { Ref, SetStateAction, useRef } from "react";
+import React, { SetStateAction, useRef } from "react";
 import Image from "next/image";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import PasswordCopyField from "@/base-components/ui/password-copy-field";
 import SettingLayout from "../SettingLayout";
 import { useTranslation } from "next-i18next";
-import { useAppSelector } from "@/hooks/useRedux";
 import { SystemSettingDataProps } from "@/types/settings";
 import InputField from "@/base-components/filter/fields/input-field";
 import { SecurityTokenField } from "@/base-components/ui/password-field";
-import { Field } from "../../../enums/form";
 
 const ConnectWithBuro = ({
   systemSetting,

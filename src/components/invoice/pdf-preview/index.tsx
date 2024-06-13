@@ -4,7 +4,6 @@ import { InvoiceEmailHeader } from "./email-header-card";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useMainInvoicePdf } from "@/hooks/invoice/useMainInvoicePdf";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),

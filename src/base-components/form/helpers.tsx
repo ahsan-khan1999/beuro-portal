@@ -1,12 +1,4 @@
-import {
-  CreditCardIconsType,
-  DetectedCardInfo,
-  FieldComponents,
-  FieldProps,
-  FieldType,
-  FormField,
-  GetCreditCardIconProps,
-} from "@/types";
+import { FieldComponents, FieldProps, FieldType, FormField } from "@/types";
 import {
   InputField,
   TextAreaField,

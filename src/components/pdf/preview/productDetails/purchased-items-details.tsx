@@ -23,25 +23,6 @@ export const ProductPurchasedItemsDetails = ({
   systemSettings,
   handleEditDateModal,
 }: Partial<PurchasedItemsDetailsProps>) => {
-  const { t: translate } = useTranslation();
-
-  const disscountTableRow = {
-    serviceTitle: translate("pdf_preview.discount"),
-    price: Number(serviceItemFooter?.discount),
-    unit: "-",
-    totalPrice: Number(serviceItemFooter?.discount),
-    serviceType: "",
-    description: serviceItemFooter?.discountDescription || "",
-    count: "-",
-    pagebreak: true,
-    discount: Number(serviceItemFooter?.discount),
-    discountType: serviceItemFooter?.discountType,
-    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
-    discountPercentage: Number(serviceItemFooter?.discountPercentage),
-    totalDiscount: Number(serviceItemFooter?.serviceDiscountSum),
-    isGlobalDiscount: serviceItemFooter?.isDiscount,
-  };
-
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
     Number(serviceItemFooter?.serviceDiscountSum) > 0

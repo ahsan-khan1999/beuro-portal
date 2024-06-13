@@ -2,9 +2,11 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Employee } from "@/types/employee";
 import moment from "moment";
+import { useTranslation } from "next-i18next";
 
 const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <div>

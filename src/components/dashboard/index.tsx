@@ -15,9 +15,12 @@ import { FilterType } from "@/types";
 import { getCurrentMonth } from "@/utils/utility";
 import { DashboardActionType } from "@/types/dashboard";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { useTranslation } from "next-i18next";
 
 const AdminDashboard = () => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   const { dashboard } = useAppSelector((state) => state.auth);
 
   const [pieData, setPieData] = useState({
@@ -54,8 +57,6 @@ const AdminDashboard = () => {
     dispatch(readDashboard({ params: { filter: filter } })).then(
       (response: DashboardActionType) => {
         if (response?.payload) {
-          console.log(response?.payload);
-
           setPieData({
             datasets: [
               {

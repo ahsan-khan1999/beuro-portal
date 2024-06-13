@@ -285,7 +285,7 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
 
 export interface SpanProps {
   type: Field.span;
-  text?: string;
+  text?: string | number;
   linkText?: string;
   linkHref?: string;
   containerClassName?: string;

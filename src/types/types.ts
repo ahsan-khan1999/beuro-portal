@@ -326,7 +326,8 @@ export type GenerateContentFormField = (
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   contentDetails?: ContentTableRowTypes,
   append?: UseFieldArrayAppend<FieldValues, "offerContent.address">,
-  onRemove?: UseFieldArrayRemove
+  onRemove?: UseFieldArrayRemove,
+  offerDescriptionCount?: string
 ) => FormField[];
 // Employee formfield
 export type GenerateEmployeeFormField = (
@@ -880,6 +881,8 @@ export interface DocumentHeaderDetailsProps {
   fileType?: "contract" | "invoice" | "receipt";
   companyName?: string;
   isReverseLogo?: boolean;
+  language?: string;
+  isOffer?: boolean;
 }
 
 export interface ProductItemFooterProps {
@@ -907,6 +910,7 @@ export interface ProductItemFooterProps {
   isTax?: boolean;
   isDiscount?: boolean;
   discountDescription?: string;
+  language?: string;
 }
 
 export interface ContactDetailsProps {
@@ -934,6 +938,7 @@ export interface MovingDetailsProps {
   handleEditDateModal?: () => void;
   time?: string;
   isReverseAddress?: boolean;
+  language?: string;
 }
 export interface ProductItemProps {
   title: string;
@@ -989,8 +994,8 @@ export interface DocumentDetailFooterProps {
   thirdColumn: CompanyDetailsThirdColumn;
   fourthColumn: CompanyDetailsFourthColumn;
   columnSettings: TemplateType | null;
-  totalPages: number;
-  currPage: number;
+  totalPages?: number;
+  currPage?: number;
   emailTemplateSettings?: EmailTemplate | null;
 }
 export interface TemplateSettigsFirstColumn {
@@ -1103,6 +1108,18 @@ export interface ContractEmailHeaderProps {
   onDownload: () => void;
 }
 
+export interface ContentHeaderProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  footerDetails?: DocumentDetailFooterProps;
+  aggrementDetails?: string;
+}
+
+export interface ContentPdfPreviewerProps {
+  data?: ContentHeaderProps;
+  templateSettings: TemplateType | null;
+  emailTemplateSettings: EmailTemplate | null;
+}
+
 export interface PdfProps<T = EmailHeaderProps> {
   emailHeader: Partial<T>;
   headerDetails: DocumentHeaderDetailsProps;
@@ -1133,6 +1150,8 @@ export interface PdfPreviewProps {
   isPdfRendering?: boolean;
   showContractSign?: boolean;
   companyName?: string;
+  lang?: string | undefined;
+  isOfferPdf?: boolean;
 }
 
 export interface PdfPreviewFooterProps {

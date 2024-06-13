@@ -23,6 +23,7 @@ export default function usePlans() {
     text: "",
     type: "",
   });
+
   const router = useRouter();
   const { t: translate } = useTranslation();
   const [currentPageRows, setCurrentPageRows] = useState<Plan[]>([]);
@@ -53,7 +54,6 @@ export default function usePlans() {
     });
   };
 
-  
   const handleFilterChange = (filter: FilterType) => {
     dispatch(
       readPlan({ params: { filter: filter, page: currentPage, size: 10 } })
@@ -86,6 +86,7 @@ export default function usePlans() {
     const filteredPlan = plan?.find(
       (item) => item?.refID === modal?.data?.refId?.refId
     );
+
     const res = await dispatch(deletePlan({ data: { id: filteredPlan?.id } }));
     dispatch(
       readPlan({ params: { filter: filter, page: currentPage, size: 10 } })

@@ -4,7 +4,6 @@ import {
   updateContactSupport,
 } from "@/api/slices/contactSupport/contactSupportSlice";
 import { FiltersDefaultValues } from "@/enums/static";
-import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { FilterType } from "@/types";
 import { DEFAULT_CONTACT_SUPPORT, staticEnums } from "@/utils/static";
@@ -12,6 +11,7 @@ import { useEffect, useState } from "react";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useRouter } from "next/router";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { ModalConfigType, ModalType } from "@/enums/ui";
 
 export default function useSupportRequest() {
   const {

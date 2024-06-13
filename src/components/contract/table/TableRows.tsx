@@ -6,6 +6,7 @@ import { formatDateString } from "@/utils/functions";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { useTranslation } from "next-i18next";
 
 export interface ContractTableProps {
   dataToAdd: contractTableTypes[];
@@ -39,6 +40,7 @@ const TableRows = ({
   handlePaymentStatusUpdate,
 }: ContractTableProps) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const colorPicker = {
     [staticEnums.ContractSignedStatus.Deprecated]: "#FF0000",
     [staticEnums.ContractSignedStatus.Active]: "#45C769",

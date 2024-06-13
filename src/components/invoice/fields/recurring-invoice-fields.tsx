@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateInvoiceFormField } from "@/types";
-import { disablePastDate } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
 
 export const RecurringInvoiceFormField: GenerateInvoiceFormField = (

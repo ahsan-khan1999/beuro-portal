@@ -12,6 +12,7 @@ export const RejectOfferFields: GenerateAddReasonFormField = (
   reason
 ) => {
   const { t: translate } = useTranslation();
+
   const formField: FormField[] = [
     {
       containerClass: "mb-0 mt-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",

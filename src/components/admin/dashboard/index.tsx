@@ -7,43 +7,43 @@ import DashboardCard from "@/base-components/ui/dashboard-card";
 import activeSubscribersIcon from "@/assets/svgs/leads.svg";
 import pendingCompaniesIcon from "@/assets/svgs/pending-companies.svg";
 import customersIcon from "@/assets/svgs/customers-card.svg";
-import { useTranslation } from "next-i18next";
 import { FilterType } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readAdminDashboard } from "@/api/slices/authSlice/auth";
 import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
+import { useTranslation } from "next-i18next";
 
 const AdminDashboard = () => {
-  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const { adminDashboard } = useAppSelector((state) => state.auth);
   const [filter, setFilter] = useState<FilterType>({
     month: 1,
   });
 
-  const [pieData, setPieData] = useState({
-    datasets: [
-      {
-        data: [40, 10, 10, 10, 15, 15],
-        backgroundColor: [
-          "#FE9244",
-          "#FF376F",
-          "#4A13E7",
-          "#45C769",
-          "#7B18FF",
-          "#221177",
-        ],
-      },
-    ],
-    labels: [
-      `${translate("dashboard_detail.charts_labels.website")}`,
-      `${translate("dashboard_detail.charts_labels.google")}`,
-      `${translate("dashboard_detail.charts_labels.facebook")}`,
-      `${translate("dashboard_detail.charts_labels.insta")}`,
-      `${translate("dashboard_detail.charts_labels.pinterest")}`,
-      `${translate("dashboard_detail.charts_labels.whatsapp")}`,
-    ],
-  });
+  // const [pieData, setPieData] = useState({
+  //   datasets: [
+  //     {
+  //       data: [40, 10, 10, 10, 15, 15],
+  //       backgroundColor: [
+  //         "#FE9244",
+  //         "#FF376F",
+  //         "#4A13E7",
+  //         "#45C769",
+  //         "#7B18FF",
+  //         "#221177",
+  //       ],
+  //     },
+  //   ],
+  //   labels: [
+  //     `${translate("dashboard_detail.charts_labels.website")}`,
+  //     `${translate("dashboard_detail.charts_labels.google")}`,
+  //     `${translate("dashboard_detail.charts_labels.facebook")}`,
+  //     `${translate("dashboard_detail.charts_labels.insta")}`,
+  //     `${translate("dashboard_detail.charts_labels.pinterest")}`,
+  //     `${translate("dashboard_detail.charts_labels.whatsapp")}`,
+  //   ],
+  // });
 
   const dashboardCards = [
     {
@@ -78,13 +78,13 @@ const AdminDashboard = () => {
   useEffect(() => {
     dispatch(readAdminDashboard({ params: { filter: filter } }));
   }, []);
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(
       readAdminDashboard({ params: { filter: { month: query?.month } } })
     );
   };
 
-  // Sample data for the pie chart
   const data = {
     datasets: [
       {

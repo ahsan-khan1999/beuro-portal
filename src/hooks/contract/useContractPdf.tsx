@@ -1,10 +1,4 @@
-import {
-  AcknowledgementSlipProps,
-  ContractEmailHeaderProps,
-  PayableToProps,
-  PdfProps,
-  TemplateType,
-} from "@/types";
+import { ContractEmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import { EmailTemplate } from "@/types/settings";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -29,43 +23,8 @@ import {
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
-
-// import { PdfFile } from "@/components/reactPdf/pdf-file";
 import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 import { staticEnums } from "@/utils/static";
-
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
 
 let contractPdfInfo = {
   subject: "",
@@ -87,8 +46,6 @@ export const useContractPdf = () => {
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );
-
-  const [pdfFile, setPdfFile] = useState(null);
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
@@ -352,7 +309,6 @@ export const useContractPdf = () => {
   }, [offerID]);
 
   const totalItems = contractData?.serviceItem?.length ?? 0;
-
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
     const remainingItems = totalItems - itemsOnFirstPage;
@@ -422,7 +378,6 @@ export const useContractPdf = () => {
         );
       } else {
         setActiveButtonId("email");
-
         const data = await localStoreUtil.get_data("contractComposeEmail");
 
         if (data) {
@@ -463,8 +418,6 @@ export const useContractPdf = () => {
   };
 
   const handleDonwload = () => {
-    // window.open(contractData?.attachement);
-
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
       const a = document.createElement("a");

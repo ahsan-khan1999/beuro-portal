@@ -4,7 +4,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { SystemSettingDataProps } from "@/types/settings";
 import { staticEnums } from "@/utils/static";
 import { AnimatePresence, motion } from "framer-motion";
-import { SetStateAction, useEffect, useRef } from "react";
+import { SetStateAction, useRef } from "react";
 import { useTranslation } from "next-i18next";
 
 export const OfferRemainderSection = ({
@@ -16,6 +16,7 @@ export const OfferRemainderSection = ({
 }) => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t: translate } = useTranslation();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -35,8 +36,6 @@ export const OfferRemainderSection = ({
       offerReminderFrequency: selectedItem,
     });
   };
-
-  const { t: translate } = useTranslation();
 
   return (
     <SettingLayout>

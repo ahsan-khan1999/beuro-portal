@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { formatDate } from "@/utils/utility";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export interface LeadTableProps {
   dataToAdd: Lead[];
@@ -31,6 +32,7 @@ const TableRows = ({
   onStatusChange,
 }: LeadTableProps) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const itemsValue = [
     `${translate("leads.lead_dropdown_status.Open")}`,
@@ -139,6 +141,11 @@ const TableRows = ({
                       dataToAdd &&
                       dataToAdd.length > 5 &&
                       index === dataToAdd.length - 2
+                    }
+                    isThirdLastIndex={
+                      dataToAdd &&
+                      dataToAdd.length > 5 &&
+                      index === dataToAdd.length - 3
                     }
                     isLastIndex={
                       dataToAdd &&
