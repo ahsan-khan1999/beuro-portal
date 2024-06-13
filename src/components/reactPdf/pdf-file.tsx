@@ -145,7 +145,10 @@ const PdfFile = ({
         > */}
         <AdditionalDetails description={aggrementDetails} />
         {isOfferPdf && (
-          <AggrementSignature showContractSign={showContractSign} />
+          <AggrementSignature
+            showContractSign={showContractSign}
+            language={lang}
+          />
         )}
         {/* </View> */}
 
