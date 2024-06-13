@@ -13,6 +13,8 @@ export const useMergedPdfDownload = ({
   remoteFileBlob,
   fileName,
   companyName,
+  isOfferPdf,
+  showContractSign,
 }: PdfPreviewProps) => {
   const [mergedFile, setMergedFile] = useState<File | null>(null);
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
@@ -38,6 +40,8 @@ export const useMergedPdfDownload = ({
                 templateSettings,
                 systemSetting,
                 lang: currentLanguage,
+                isOfferPdf,
+                showContractSign,
               }}
             />
           ).toBlob();

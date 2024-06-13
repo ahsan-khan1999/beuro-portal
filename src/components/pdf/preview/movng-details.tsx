@@ -80,7 +80,7 @@ export const MovingDetails = ({
                 <button
                   type="submit"
                   onClick={handleSaveClick}
-                  className=" bg-[#4A13E7] rounded-[3px]  px-[29px] py-[6px]   text-[#fff]"
+                  className=" bg-[#4A13E7] rounded-[3px] px-[29px] py-[6px]  text-[#fff]"
                 >
                   Save
                 </button>

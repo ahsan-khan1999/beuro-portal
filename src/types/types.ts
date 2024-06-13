@@ -1151,6 +1151,7 @@ export interface PdfPreviewProps {
   showContractSign?: boolean;
   companyName?: string;
   lang?: string | undefined;
+  isOfferPdf?: boolean;
 }
 
 export interface PdfPreviewFooterProps {

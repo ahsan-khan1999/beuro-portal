@@ -22,13 +22,11 @@ const TableRows = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );
-
-  const { t: translate } = useTranslation();
-  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const handleInvoicePdfPreview = (id?: string) => {
     router.push({

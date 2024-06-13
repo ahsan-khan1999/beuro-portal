@@ -76,7 +76,7 @@ export const Aggrement = ({
               <div className="flex flex-col ">
                 <span className="font-medium text-sm mb-2">{date}</span>
                 <hr className="mb-[17px]" />
-                <span className="text-sm text-black font-normal ">
+                <span className="text-sm text-black font-normal">
                   {translation("pdf.date")}
                 </span>
               </div>
@@ -173,7 +173,7 @@ export const Aggrement = ({
       {pdfAction === "Reject" && (
         <Button
           className={`mt-[0px]   ${
-            pdfAction === "Reject" ? "bg-red" : "bg-[#45C769] "
+            pdfAction === "Reject" ? "bg-red" : "bg-[#45C769]"
           } rounded-[4px] shadow-md  text-center text-white w-full`}
           onClick={() => rejectOffer()}
           inputType="button"
