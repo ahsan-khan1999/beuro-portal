@@ -274,6 +274,7 @@ export interface OnClick {
 
 export interface LanguageName {
   name?: string;
+  className?:string
 }
 
 export interface ToggleButtonProps {

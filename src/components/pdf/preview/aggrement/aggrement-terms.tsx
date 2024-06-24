@@ -2,6 +2,7 @@ import Image from "next/image";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 
 const CustomCKEditor = dynamic(
   () => import("@/base-components/ui/editor/ck-editor"),
@@ -18,11 +19,9 @@ export const AggrementTerms = ({
   handleDescriptionUpdate?: (value: string) => void;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [error, setError] = useState({
-    aggrement: null,
-  });
-
   const [editedText, setEditedText] = useState(aggrementDetails);
+
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     setEditedText(aggrementDetails); // Update editedText whenever aggrementDetails changes
@@ -82,13 +81,13 @@ export const AggrementTerms = ({
                   onClick={handleCancelClick}
                   className="border border-[#C7C7C7] w-[92px] px-4 py-[10px] rounded-md text-[#1E1E1E] text-base font-normal"
                 >
-                  Cancel
+                  {translate("common.cancel_button")}
                 </button>
                 <button
                   onClick={handleSaveClick}
                   className="border bg-[#4A13E7] w-[152px] px-4 py-[10px] rounded-md text-[#fff] text-base font-normal"
                 >
-                  Save
+                  {translate("common.save_button")}
                 </button>
               </div>
             </div>
