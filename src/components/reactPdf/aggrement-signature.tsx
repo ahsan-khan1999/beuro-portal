@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     color: "#000",
   },
 });
+
 export const AggrementSignature = ({
   showContractSign,
   signature,
@@ -79,14 +80,11 @@ export const AggrementSignature = ({
       signature: "Unterschrift",
     },
   };
+
   return (
     <View style={styles.wrapper}>
       {showContractSign && (
-        <View style={{}}>
-          {/* <Text style={styles.shareHeading}>
-            Ich teile den Vertrag mit Ihnen.
-          </Text> */}
-
+        <View>
           <View style={{ ...styles.dateContainer }}>
             <View
               style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}
@@ -97,7 +95,8 @@ export const AggrementSignature = ({
                 </Text>
               }
               <Text style={styles.dateText}>
-                {langContent[language as keyof typeof langContent].date}
+                {langContent[language as keyof typeof langContent]?.date ||
+                  "Datum"}
               </Text>
             </View>
 
@@ -110,7 +109,8 @@ export const AggrementSignature = ({
               )}
               <View style={styles.signature}>
                 <Text style={styles.dateText}>
-                  {langContent[language as keyof typeof langContent].signature}
+                  {langContent[language as keyof typeof langContent]
+                    ?.signature || "Unterschrift"}
                 </Text>
               </View>
             </View>

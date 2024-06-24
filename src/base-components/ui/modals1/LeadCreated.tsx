@@ -55,7 +55,7 @@ const LeadCreated = ({
             </button>
             <button
               onClick={() => routeHandler()}
-              className="bg-[#BFBFBF] cursor-pointer hover:bg-buttonHover w-full md:w-[384px] rounded-lg p-4 mb-[33px] text-white text-base font-medium"
+              className="bg-[#BFBFBF] cursor-pointer w-full md:w-[384px] rounded-lg p-4 mb-[33px] text-dark text-base font-medium hover:bg-buttonHover hover:text-white"
             >
               {translate("leads.leads_created_modal.without_images")}
             </button>

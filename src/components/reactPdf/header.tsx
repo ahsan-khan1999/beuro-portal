@@ -61,7 +61,6 @@ export const Header = ({
         display: "flex",
         flexDirection: isReverseLogo ? "row-reverse" : "row",
         alignItems: "center",
-        // backgroundColor: `#${FooterColour}`,
         padding: 20,
         fontFamily: "Poppins",
       }}
@@ -94,24 +93,21 @@ export const Header = ({
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
-              // color: `#${textColour}`,
             }}
           >
             {(fileType &&
               langContent[language as keyof typeof langContent]?.HeaderLabelNr[
                 fileType as keyof typeof HeaderLabelNr
               ]) ||
-              langContent[language as keyof typeof langContent]?.offer
-              
-              }
-            {langContent[language as keyof typeof langContent]?.no}:{" "}
+              langContent[language as keyof typeof langContent]?.offer ||
+              "Angebot "}
+            {langContent[language as keyof typeof langContent]?.no || "Nr"}:{" "}
           </Text>
           <Text
             style={{
               fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
-              // color: `#${textColour}`,
             }}
           >
             {offerNo}
@@ -130,22 +126,22 @@ export const Header = ({
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
-              // color: `#${textColour}`,
             }}
           >
             {(fileType &&
               langContent[language as keyof typeof langContent]?.HeaderLabel[
                 fileType as keyof typeof HeaderLabel
               ]) ||
-              langContent[language as keyof typeof langContent]?.create}{" "}
-            {langContent[language as keyof typeof langContent]?.date}:{" "}
+              langContent[language as keyof typeof langContent]?.create ||
+              "Erstell"}{" "}
+            {langContent[language as keyof typeof langContent]?.date || "datum"}
+            :{" "}
           </Text>
           <Text
             style={{
               fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
-              // color: `#${textColour}`,
             }}
           >
             {pdfDateFormat(offerDate || "", "de")}
@@ -158,17 +154,17 @@ export const Header = ({
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
-              // color: `#${textColour}`,
             }}
           >
-            {langContent[language as keyof typeof langContent]?.created_by}:{" "}
+            {langContent[language as keyof typeof langContent]?.created_by ||
+              "Erstellt von"}
+            :{" "}
           </Text>
           <Text
             style={{
               fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
-              // color: `#${textColour}`,
             }}
           >
             {createdBy}

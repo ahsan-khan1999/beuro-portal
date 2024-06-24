@@ -2144,7 +2144,7 @@
   },
   "offer_status": {
     "Open": "Offen",
-    "Expired": "Abgeloffen",
+    "Expired": "Abgelaufen",
     "Rejected": "Abgelehnt",
     "Accepted": "Angenommen"
   },
