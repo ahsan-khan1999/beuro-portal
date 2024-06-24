@@ -78,30 +78,37 @@ export const ServiceTableHederRow = ({
     <View style={styles.headerContainer}>
       <View style={styles.headerRow}>
         <Text style={styles.headerTitle}>
-          {langContent[language as keyof typeof langContent]?.service}
+          {langContent[language as keyof typeof langContent]?.service ||
+            "Dienstleistung / Produkt"}
         </Text>
         <Text style={styles.headerDescription}>
-          {langContent[language as keyof typeof langContent]?.description}
+          {langContent[language as keyof typeof langContent]?.description ||
+            "Beschreibung"}
         </Text>
 
         <View style={styles.priceHeader}>
           <Text style={styles.headerText}>
-            {langContent[language as keyof typeof langContent]?.count}
+            {langContent[language as keyof typeof langContent]?.count ||
+              "Anzahl"}
           </Text>
           <Text style={styles.headerText}>
-            {langContent[language as keyof typeof langContent]?.unit}
+            {langContent[language as keyof typeof langContent]?.unit ||
+              "Einheit"}
           </Text>
           <Text style={styles.headerText}>
-            {langContent[language as keyof typeof langContent]?.price}
+            {langContent[language as keyof typeof langContent]?.price ||
+              "Preis"}
           </Text>
 
           {isDiscount && (
             <Text style={styles.headerText}>
-              {langContent[language as keyof typeof langContent]?.discount}
+              {langContent[language as keyof typeof langContent]?.discount ||
+                "discount"}
             </Text>
           )}
           <Text style={styles.headerText}>
-            {langContent[language as keyof typeof langContent]?.total}
+            {langContent[language as keyof typeof langContent]?.total ||
+              "Gesamt"}
           </Text>
         </View>
       </View>

@@ -212,8 +212,10 @@ export const AddressDetails = ({
             }}
           >
             {workDates?.length === 1
-              ? langContent[language as keyof typeof langContent]?.work_date
-              : langContent[language as keyof typeof langContent]?.work_dates}
+              ? langContent[language as keyof typeof langContent]?.work_date ||
+                "Auftragsdatum"
+              : langContent[language as keyof typeof langContent]?.work_dates ||
+                "Auftragsdaten"}
             :
           </Text>
         </GridItem>
