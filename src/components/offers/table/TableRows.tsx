@@ -139,6 +139,11 @@ const TableRows = ({
                     dropDownTextClassName="text-white text-base font-medium"
                     dropDownIconClassName={`text-[#fff]`}
                     dropDownItemsContainerClassName="w-full"
+                    isThirdLastIndex={
+                      dataToAdd &&
+                      dataToAdd.length > 5 &&
+                      index === dataToAdd.length - 3
+                    }
                     isSecondLastIndex={
                       dataToAdd &&
                       dataToAdd.length > 5 &&
@@ -149,6 +154,7 @@ const TableRows = ({
                       dataToAdd.length > 5 &&
                       index === dataToAdd.length - 1
                     }
+                    isOffer={true}
                   />
                 </span>
 
@@ -210,6 +216,11 @@ const TableRows = ({
                       dropDownIconClassName={"text-white"}
                       dropDownTextClassName="text-white text-base font-medium"
                       dropDownItemsContainerClassName="w-full"
+                      isThirdLastIndex={
+                        dataToAdd &&
+                        dataToAdd.length > 5 &&
+                        index === dataToAdd.length - 3
+                      }
                       isSecondLastIndex={
                         dataToAdd &&
                         dataToAdd.length > 5 &&

@@ -1626,7 +1626,7 @@
       }
     },
     "customers_details": {
-      "main_heading": "Kundenmanagement",
+      "main_heading": "Kunden Leitung",
       "table_functions": {
         "active": "Aktiv",
         "block": "Blockiert",
@@ -1674,19 +1674,20 @@
       }
     },
     "plans_management": {
-      "main_heading": "Pläne Verwaltung",
+      "main_heading": "Plan Leitung",
       "add_button": "Neu hinzufügen",
       "id": "ID",
-      "plan_name": "Pläne",
+      "plan_name": "Plan",
       "description": "Beschreibung",
       "price": "Preis",
       "employees": "Mitarbeiter",
       "delete": "Löschen"
     },
     "plan_details": {
-      "detail_heading": "Plan Details",
-      "add_heading": "Neuen Plan hinzufügen",
+      "detail_heading": "Pläne Details",
+      "add_heading": "Neuen Pläne hinzufügen",
       "plans_name": "Planname",
+
       "pricing": "Preisgestaltung monatlich",
       "annually_discount": "Jährlicher Rabatt(%)",
       "number_of_employees": "Anzahl der Mitarbeiter",
@@ -2143,7 +2144,7 @@
   },
   "offer_status": {
     "Open": "Offen",
-    "Expired": "Abgeloffen",
+    "Expired": "Abgelaufen",
     "Rejected": "Abgelehnt",
     "Accepted": "Angenommen"
   },

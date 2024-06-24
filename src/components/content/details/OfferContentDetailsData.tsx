@@ -79,7 +79,7 @@ const OfferContentDetailsData = ({
                 {translate("content.details.offer_description")}
               </p>
 
-              <Button
+              {/* <Button
                 inputType="button"
                 onClick={() =>
                   router.push({
@@ -95,7 +95,7 @@ const OfferContentDetailsData = ({
                 text={translate("common.pdf_preview")}
                 id="pdf"
                 iconAlt="content PDF"
-              />
+              /> */}
             </div>
             <div
               className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"

@@ -14,12 +14,14 @@ export const ConfigrationTabs = ({
 }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const { emailSettings, loading } = useAppSelector((state) => state.settings);
-  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
+
   const tabsData: string[] = [
     `${translate("setting.mail_setting.system_config")}`,
     `${translate("setting.mail_setting.own_config")}`,
   ];
+
   const handleChangeConfig = async () => {
     const response = await dispatch(
       updateEmailSetting({
@@ -29,6 +31,7 @@ export const ConfigrationTabs = ({
     );
     if (response?.payload) onHandleCreation();
   };
+
   return (
     <SettingLayout containerClassName="pl-[31px] shadow-0-3-10-0 bg-white py-7 pr-12">
       <div className="flex gap-[40px]">

@@ -84,7 +84,7 @@ const ReceiptContentDetails = ({
               <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
                 {translate("content.details.receipt_description")}
               </p>
-              <Button
+              {/* <Button
                 inputType="button"
                 onClick={() =>
                   router.push({
@@ -100,7 +100,7 @@ const ReceiptContentDetails = ({
                 text={translate("common.pdf_preview")}
                 id="pdf"
                 iconAlt="content PDF"
-              />
+              /> */}
             </div>
 
             <div

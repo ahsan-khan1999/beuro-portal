@@ -5,11 +5,12 @@ import MailSetting from "./mail-setting";
 import SettingProfile from "./profile-form";
 import PaymentSettings from "./payment-settings";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const AdminSettings = () => {
   const { query } = useRouter();
-
   const tab = query.tab;
+  const { t: translate } = useTranslation();
   const [switchDetails, setSwitchDetails] = useState<number>(0);
 
   useEffect(() => {
@@ -19,6 +20,12 @@ const AdminSettings = () => {
       setSwitchDetails(0);
     }
   }, [query]);
+
+  const lookUp: { [key: number]: JSX.Element } = {
+    0: <SettingProfile />,
+    1: <PaymentSettings />,
+    2: <MailSetting />,
+  };
 
   return (
     <>
@@ -34,13 +41,7 @@ const AdminSettings = () => {
         </div>
 
         <div className="mt-4">
-          {switchDetails === 0 ? <SettingProfile /> : null}
-        </div>
-        <div className="mt-4">
-          {switchDetails === 1 ? <PaymentSettings /> : null}
-        </div>
-        <div className="mt-4">
-          {switchDetails === 2 ? <MailSetting /> : null}
+          {switchDetails !== undefined && lookUp[switchDetails]}
         </div>
       </Layout>
     </>

@@ -216,7 +216,9 @@ export const ServicesTotalAmount = ({
         <View style={styles.topRow}>
           <View style={styles.subSection}>
             <Text style={styles.text}>
-              {langContent[language as keyof typeof langContent]?.sub_total}:{" "}
+              {langContent[language as keyof typeof langContent]?.sub_total ||
+                "Zwischensumme"}
+              :{" "}
             </Text>
             <Text style={styles.text}>
               {Number(subTotal).toFixed(2)} {systemSettings?.currency}
@@ -225,10 +227,9 @@ export const ServicesTotalAmount = ({
           {isDiscount && (
             <View style={styles.subSection}>
               <Text style={styles.text}>
-                {" "}
-                {
-                  langContent[language as keyof typeof langContent]?.discount
-                }:{" "}
+                {langContent[language as keyof typeof langContent]?.discount ||
+                  "Rabatt"}
+                :{" "}
               </Text>
               <Text style={styles.discountDescriptionText}>
                 {discountDescription}
@@ -243,10 +244,8 @@ export const ServicesTotalAmount = ({
           {isDiscount && (
             <View style={styles.subSection}>
               <Text style={styles.text}>
-                {
-                  langContent[language as keyof typeof langContent]
-                    ?.total_after_discount
-                }
+                {langContent[language as keyof typeof langContent]
+                  ?.total_after_discount || "Gesamtsumme nach Rabatt"}
                 :{" "}
               </Text>
               <Text style={styles.text}>
@@ -268,10 +267,8 @@ export const ServicesTotalAmount = ({
             (!isShowExtraAmount ? (
               <View style={styles.totalSection}>
                 <Text style={styles.whiteText}>
-                  {
-                    langContent[language as keyof typeof langContent]
-                      ?.grand_total
-                  }
+                  {langContent[language as keyof typeof langContent]
+                    ?.grand_total || "Gesamtsumme"}
                   :
                 </Text>
                 <Text style={styles.whiteText}>
@@ -282,10 +279,8 @@ export const ServicesTotalAmount = ({
               <View>
                 <View style={styles.subSection}>
                   <Text style={styles.text}>
-                    {
-                      langContent[language as keyof typeof langContent]
-                        ?.grand_total
-                    }
+                    {langContent[language as keyof typeof langContent]
+                      ?.grand_total || "Gesamtsumme"}
                     :
                   </Text>
                   <Text style={styles.text}>
@@ -311,10 +306,8 @@ export const ServicesTotalAmount = ({
             <View>
               <View style={styles.totalSection}>
                 <Text style={styles.whiteText}>
-                  {
-                    langContent[language as keyof typeof langContent]
-                      ?.grand_total
-                  }
+                  {langContent[language as keyof typeof langContent]
+                    ?.grand_total || "Gesamtsumme"}
                   :
                 </Text>
                 <Text style={styles.whiteText}>
@@ -325,10 +318,8 @@ export const ServicesTotalAmount = ({
                 <View>
                   <View style={styles.paidAmountSection}>
                     <Text style={styles.text}>
-                      {
-                        langContent[language as keyof typeof langContent]
-                          ?.paid_amount
-                      }
+                      {langContent[language as keyof typeof langContent]
+                        ?.paid_amount || "Bezahlt Betrag"}
                       :
                     </Text>
                     <Text style={styles.text}>
@@ -339,10 +330,8 @@ export const ServicesTotalAmount = ({
                   {Number(unPaidAmount) > 0 && (
                     <View style={styles.subSection}>
                       <Text style={styles.text}>
-                        {
-                          langContent[language as keyof typeof langContent]
-                            ?.unpaid_amount
-                        }
+                        {langContent[language as keyof typeof langContent]
+                          ?.unpaid_amount || "Unbezahlter Betrag"}
                         :
                       </Text>
                       <Text style={styles.text}>
@@ -359,10 +348,8 @@ export const ServicesTotalAmount = ({
             (!isShowExtraAmount ? (
               <View style={styles.totalSection}>
                 <Text style={styles.whiteText}>
-                  {
-                    langContent[language as keyof typeof langContent]
-                      ?.grand_total
-                  }
+                  {langContent[language as keyof typeof langContent]
+                    ?.grand_total || "Gesamtsumme"}
                   :
                 </Text>
                 <Text style={styles.whiteText}>
@@ -373,10 +360,8 @@ export const ServicesTotalAmount = ({
               <View>
                 <View style={styles.dueAmountSection}>
                   <Text style={styles.text}>
-                    {
-                      langContent[language as keyof typeof langContent]
-                        ?.due_amount
-                    }
+                    {langContent[language as keyof typeof langContent]
+                      ?.due_amount || "Fälliger Betrag"}
                     :
                   </Text>
                   <Text style={styles.text}>
@@ -386,10 +371,8 @@ export const ServicesTotalAmount = ({
                 <View>
                   <View style={styles.totalSection}>
                     <Text style={styles.whiteText}>
-                      {
-                        langContent[language as keyof typeof langContent]
-                          ?.grand_total
-                      }
+                      {langContent[language as keyof typeof langContent]
+                        ?.grand_total || "Gesamtsumme"}
                       :
                     </Text>
                     <Text style={styles.whiteText}>
@@ -399,10 +382,8 @@ export const ServicesTotalAmount = ({
                   {Number(invoiceAmount) > 0 && (
                     <View style={styles.subInvoicepaidAmountSection}>
                       <Text style={styles.text}>
-                        {
-                          langContent[language as keyof typeof langContent]
-                            ?.paid_amount
-                        }
+                        {langContent[language as keyof typeof langContent]
+                          ?.paid_amount || "Bezahlt Betrag"}
                         :
                       </Text>
                       <Text style={styles.text}>
@@ -414,10 +395,8 @@ export const ServicesTotalAmount = ({
                   {Number(unPaidAmount) > 0 && (
                     <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>
-                        {
-                          langContent[language as keyof typeof langContent]
-                            ?.unpaid_amount
-                        }
+                        {langContent[language as keyof typeof langContent]
+                          ?.unpaid_amount || "Unbezahlter Betrag"}
                         :
                       </Text>
                       <Text style={styles.text}>
@@ -433,10 +412,8 @@ export const ServicesTotalAmount = ({
             (!isShowExtraAmount ? (
               <View style={styles.totalSection}>
                 <Text style={styles.whiteText}>
-                  {
-                    langContent[language as keyof typeof langContent]
-                      ?.grand_total
-                  }
+                  {langContent[language as keyof typeof langContent]
+                    ?.grand_total || "Gesamtsumme"}
                   :
                 </Text>
                 <Text style={styles.whiteText}>
@@ -448,17 +425,14 @@ export const ServicesTotalAmount = ({
                 {Number(invoiceAmount) > 0 && (
                   <View style={styles.receiptPaidAmountSection}>
                     <Text style={styles.text}>
-                      {
-                        langContent[language as keyof typeof langContent]
-                          ?.paid_amount
-                      }
+                      {langContent[language as keyof typeof langContent]
+                        ?.paid_amount || "Bezahlt Betrag"}
                       :
                     </Text>
                     <Text style={styles.paidText}>
-                      {
-                        langContent[language as keyof typeof langContent]
-                          ?.amount_paid_last
-                      }
+                      {langContent[language as keyof typeof langContent]
+                        ?.amount_paid_last ||
+                        "Der Betrag, den Sie beim letzten Mal bezahlt haben."}
                     </Text>
                     <Text style={styles.text}>
                       -{Number(dueAmount).toFixed(2)}
@@ -469,10 +443,8 @@ export const ServicesTotalAmount = ({
                 <View>
                   <View style={styles.totalSection}>
                     <Text style={styles.whiteText}>
-                      {
-                        langContent[language as keyof typeof langContent]
-                          ?.grand_total
-                      }
+                      {langContent[language as keyof typeof langContent]
+                        ?.grand_total || "Gesamtsumme"}
                       :
                     </Text>
                     <Text style={styles.whiteText}>
@@ -482,10 +454,8 @@ export const ServicesTotalAmount = ({
                   {Number(invoiceAmount) > 0 && (
                     <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>
-                        {
-                          langContent[language as keyof typeof langContent]
-                            ?.total_paid_amount
-                        }
+                        {langContent[language as keyof typeof langContent]
+                          ?.total_paid_amount || "Bezahlte Gesamtbetrag"}
                         :
                       </Text>
                       <Text style={styles.text}>
@@ -497,10 +467,8 @@ export const ServicesTotalAmount = ({
                   {Number(unPaidAmount) > 0 && (
                     <View style={styles.subSection}>
                       <Text style={styles.text}>
-                        {
-                          langContent[language as keyof typeof langContent]
-                            ?.unpaid_amount
-                        }
+                        {langContent[language as keyof typeof langContent]
+                          ?.unpaid_amount || "Unbezahlter Betrag"}
                         :
                       </Text>
                       <Text style={styles.text}>
@@ -524,13 +492,12 @@ export const ServicesTotalAmount = ({
                   color: "#000",
                 }}
               >
-                {
-                  langContent[language as keyof typeof langContent]
-                    ?.general_terms
-                }
+                {langContent[language as keyof typeof langContent]
+                  ?.general_terms || "Allgemeine Geschäftsbedingungen"}
               </Text>
               <Text style={styles.discountDescription}>
-                {langContent[language as keyof typeof langContent]?.terms_des}
+                {langContent[language as keyof typeof langContent]?.terms_des ||
+                  "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen."}
               </Text>
             </View>
           )}

@@ -12,6 +12,7 @@ const TaxVerifiedComp = ({
 }) => {
   const toggleBtnsData: string[] = ["No Tax", "Inclusive Tax", "Exclusive Tax"];
   const toggleInfo: string[] = ["Name", "Tax Rate (%)", "Action"];
+
   const toggleInfoValue: (string | JSX.Element)[] = [
     "Gst Tax",
     "10%",
@@ -32,7 +33,6 @@ const TaxVerifiedComp = ({
     />,
   ];
 
-  // State to track the active button index (set to 0 for the first item by default)
   const [activeButton, setActiveButton] = useState(0);
 
   const handleButtonClick = (index: number) => {
