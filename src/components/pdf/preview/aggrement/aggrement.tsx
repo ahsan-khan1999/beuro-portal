@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import { Button } from "@/base-components/ui/button/button";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
-import { useAppDispatch } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { pdfDateFormat } from "@/utils/utility";
 
 export const Aggrement = ({
@@ -34,12 +34,13 @@ export const Aggrement = ({
   pdfData,
   setComponentMounted,
 }: AggrementProps) => {
-  const { t: translation } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const currentDate = new Date().toString();
   const date = pdfDateFormat(currentDate, router.locale as string);
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
+  const { currentLanguage } = useAppSelector((state) => state.global);
 
   const rejectOffer = async () => {
     dispatch(updateModalType({ type: ModalType.REJECT_OFFER }));
@@ -60,24 +61,24 @@ export const Aggrement = ({
           <div className="flex justify-between items-center gap-x-[103px] mt-4">
             <div>
               <div className="h-[223.656px] flex flex-col justify-between">
-                <div className=" pt-5">
+                <div className="pt-5">
                   <span className="text-[#000] text-sm font-medium">
-                    {translation("pdf.validate_heading")}:
+                    {translate("pdf.validate_heading")}:
                   </span>
 
-                  <p className="text-[#000] text-[14px] font-normal">
-                    {translation("pdf.validate_des")}
+                  <p className="text-[#000] text-sm font-normal">
+                    {translate("pdf.validate_des")}
                   </p>
                 </div>
                 <p className="text-[18px] text-black font-medium pb-[43px]">
-                  {translation("pdf.share_des")}.
+                  {translate("pdf.share_des")}.
                 </p>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col">
                 <span className="font-medium text-sm mb-2">{date}</span>
                 <hr className="mb-[17px]" />
                 <span className="text-sm text-black font-normal">
-                  {translation("pdf.date")}
+                  {translate("pdf.date")}
                 </span>
               </div>
             </div>
@@ -97,6 +98,7 @@ export const Aggrement = ({
                   systemSettings={systemSettings}
                   templateSettings={templateSettings}
                   offerSignature={signature as string}
+                  lang={currentLanguage}
                 />
               )) || (
                 <div className="flex flex-col gap-y-[18px]">
@@ -111,7 +113,7 @@ export const Aggrement = ({
 
                   <hr />
                   <span className="text-sm text-black font-normal">
-                    {translation("pdf.signature")}
+                    {translate("pdf.signature")}
                   </span>
                 </div>
               )}
@@ -120,29 +122,31 @@ export const Aggrement = ({
         )}
         {!isOffer && (
           <>
-            <div className="flex  gap-x-[103px] mt-4">
+            <div className="flex gap-x-[103px] mt-4">
               <div>
                 <div className="h-[223.656px] flex flex-col justify-between">
-                  <div className=" pt-5">
+                  <div className="pt-5">
                     <span className="text-[#000] text-sm font-medium">
-                      Validity of the offer:
+                      {translate("pdf.validate_heading")}:
                     </span>
 
-                    <p className="text-[#000] text-[14px] font-normal">
-                      3 months from preparation of the offer
+                    <p className="text-[#000] text-sm font-normal">
+                      {translate("pdf.validate_des")}
                     </p>
                   </div>
                   <p className="text-[18px] text-black font-medium pb-[43px]">
-                    I share the contract with you.
+                    {translate("pdf.share_des")}
                   </p>
                 </div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-x-[103px] mt-4 items-center">
-              <div className="flex flex-col  ">
+              <div className="flex flex-col">
                 <span className="font-medium text-sm mb-2">{date}</span>
                 <hr className="mb-[17px]" />
-                <span className="text-sm text-black font-normal">Date</span>
+                <span className="text-sm text-black font-normal">
+                  {translate("pdf.date")}
+                </span>
               </div>
               <div className="flex flex-col gap-y-[18px]">
                 {signature && (
@@ -156,7 +160,7 @@ export const Aggrement = ({
 
                 <hr />
                 <span className="text-sm text-black font-normal">
-                  {translation("pdf.signature")}
+                  {translate("pdf.signature")}
                 </span>
               </div>
             </div>

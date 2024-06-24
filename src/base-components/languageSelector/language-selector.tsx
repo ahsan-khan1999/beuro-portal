@@ -5,8 +5,9 @@ import checkIcon from "@/assets/svgs/check-fill-green.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import { useLanguageSeleclor } from "@/hooks/languageSelector/useLanguageSelector";
+import { combineClasses } from "@/utils/utility";
 
-export const LanguageSelector = ({ name = "" }: LanguageName) => {
+export const LanguageSelector = ({ className }: LanguageName) => {
   const {
     handleLanguageChange,
     languages,
@@ -22,8 +23,13 @@ export const LanguageSelector = ({ name = "" }: LanguageName) => {
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
 
+  const containerClasses = combineClasses(
+    "relative flex items-center justify-center",
+    className
+  );
+
   return (
-    <div className="relative flex items-center justify-center" ref={ref}>
+    <div className={containerClasses} ref={ref}>
       <FlagIcon countryCode={selectedLanguage?.code} />
       <button
         onClick={() => setIsOpen(!isOpen)}

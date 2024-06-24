@@ -112,7 +112,9 @@ export const MovingDetails = ({
         ))}
         <div className="flex flex-row gap-6">
           <span className="min-w-[205px] mt-2 text-sm">
-            {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}
+            {workDates?.length === 1
+              ? translate("pdf.work_date")
+              : translate("pdf.work_dates")}
           </span>
           <div className="flex flex-row flex-wrap mb-[46px] mt-2 max-w-[850px]">
             <span className="text-sm font-medium text-[#4B4B4B]">

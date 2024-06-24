@@ -12,14 +12,11 @@ export const DocumentHeader = ({
   emailTemplateSettings,
   isReverseLogo,
 }: Partial<DocumentHeaderDetailsProps>) => {
-  const { t: translation } = useTranslation();
-  const textColor = "#" + emailTemplateSettings?.textColour;
-  const backgroundColor = "#" + emailTemplateSettings?.FooterColour;
+  const { t: translate } = useTranslation();
 
   return (
     <div
-      className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full `}
-      // style={{backgroundColor:"#fff"}}
+      className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full`}
     >
       {isReverseLogo ? (
         <>
@@ -28,7 +25,7 @@ export const DocumentHeader = ({
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
               >
-                {translation("pdf.offer_number")} :
+                {translate("pdf.offer_number")}:
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
@@ -40,7 +37,7 @@ export const DocumentHeader = ({
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
               >
-                {translation("pdf.offer_date")} :
+                {translate("pdf.offer_date")}:
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
@@ -52,7 +49,7 @@ export const DocumentHeader = ({
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
               >
-                {translation("pdf.created_by")} :
+                {translate("pdf.created_by")}:
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
@@ -91,7 +88,7 @@ export const DocumentHeader = ({
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
               >
-                {translation("pdf.offer_number")} :
+                {translate("pdf.offer_number")}:
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
@@ -99,11 +96,11 @@ export const DocumentHeader = ({
                 {offerNo}
               </span>
             </div>
-            <div className="flex gap-[5px] ">
+            <div className="flex gap-[5px]">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
               >
-                {translation("pdf.offer_date")} :
+                {translate("pdf.offer_date")}:
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
@@ -111,11 +108,11 @@ export const DocumentHeader = ({
                 {formatDateTimeToDate(offerDate || "")}
               </span>
             </div>
-            <div className="flex gap-[5px] ">
+            <div className="flex gap-[5px]">
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
               >
-                {translation("pdf.created_by")} :
+                {translate("pdf.created_by")}:
               </span>
               <span
                 className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}

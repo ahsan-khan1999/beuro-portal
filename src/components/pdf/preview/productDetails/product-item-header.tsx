@@ -11,7 +11,7 @@ export const ProcutItemHeader = ({ isDiscount }: { isDiscount?: boolean }) => {
         <span className="col-span-1 text-white text-sm font-medium">
           {translation("pdf.description")}
         </span>
-        <div className="col-span-1 flex space-x-2 items-center pr-[46px] w-full">
+        <div className="col-span-1 flex space-x-2 items-center pr-[44px] w-full">
           <span className="text-sm font-medium text-white min-w-[50px]">
             {translation("pdf.count")}
           </span>
@@ -22,11 +22,11 @@ export const ProcutItemHeader = ({ isDiscount }: { isDiscount?: boolean }) => {
             {translation("pdf.price")}
           </span>
           {isDiscount && (
-            <span className="text-sm font-medium text-white min-w-[50px]">
+            <span className="text-sm font-medium text-white w-[62px]">
               {translation("pdf.discount")}
             </span>
           )}
-          <span className="text-sm font-medium text-white min-w-[70px]">
+          <span className="text-sm font-medium text-white min-w-[50px]">
             {translation("pdf.total")}
           </span>
         </div>
