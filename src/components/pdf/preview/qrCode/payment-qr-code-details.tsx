@@ -2,7 +2,6 @@ import React from "react";
 import { PaymentQrCodeDetailsProps } from "@/types/types";
 import { DocumentHeader } from "../document-header";
 import { ContactDetails } from "../contact-details";
-import { QrCodeDetails } from "./qr-code-details";
 
 export const PaymentQRCodeDetails = ({
   contactAddress,

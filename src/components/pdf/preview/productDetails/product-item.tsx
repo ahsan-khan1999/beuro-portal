@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/hooks/useRedux";
 import { ServiceList } from "@/types/offers";
 
 export const ProductItem = ({

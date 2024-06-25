@@ -6,7 +6,6 @@ import { ProductItem } from "./product-item";
 import { ProcutItemHeader } from "./product-item-header";
 import { ProductItemFooter } from "./product-item-footer";
 import { PurchasedItemsDetailsProps } from "@/types/types";
-import { useTranslation } from "next-i18next";
 
 export const ProductPurchasedItemsDetails = ({
   contactAddress,

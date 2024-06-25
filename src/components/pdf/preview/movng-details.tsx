@@ -75,14 +75,14 @@ export const MovingDetails = ({
                   onClick={handleCancelClick}
                   className="border border-[#8F8F8F] px-[11px] py-[6px] rounded-[3px] text-[12px] font-normal"
                 >
-                  Cancel
+                  {translate("common.cancel_button")}
                 </button>
                 <button
                   type="submit"
                   onClick={handleSaveClick}
                   className=" bg-[#4A13E7] rounded-[3px] px-[29px] py-[6px]  text-[#fff]"
                 >
-                  Save
+                  {translate("common.save_button")}
                 </button>
               </div>
             )}

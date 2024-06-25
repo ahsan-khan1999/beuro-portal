@@ -79,9 +79,6 @@ Font.register({
 const ow = 442;
 const oh = 173;
 const originalStrokeWidth = 1;
-const OfferSignedPdf = dynamic(() => import("@/components/offers/signed-pdf"), {
-  ssr: false,
-});
 let mySignature: any = null;
 
 export interface SignPdfProps {
@@ -219,7 +216,7 @@ export const SignaturePad = ({
         </View>
 
         {/* <ContactAddress {...{ ...contactAddress }} /> */}
-        <View style={{ paddingBottom: 100 }}>
+        <View style={{ paddingBottom: 120 }}>
           <AdditionalDetails
             description={aggrementDetails}
             signature={mySignature}
@@ -326,7 +323,7 @@ export const SignaturePad = ({
               <View style={{ marginBottom: 10 }} fixed>
                 <Header {...headerDetails} language={lang} />
               </View>
-              <View style={{ paddingBottom: 100 }}>
+              <View style={{ paddingBottom: 120 }}>
                 <AdditionalDetails
                   description={aggrementDetails}
                   signature={file}
@@ -441,7 +438,6 @@ export const SignaturePad = ({
                       loading={offerLoading}
                       text={pdfAction as string}
                     />
-                    
                   </div>
                 );
               }}
