@@ -219,10 +219,12 @@ export const SignaturePad = ({
         </View>
 
         {/* <ContactAddress {...{ ...contactAddress }} /> */}
-        <AdditionalDetails
-          description={aggrementDetails}
-          signature={mySignature}
-        />
+        <View style={{ paddingBottom: 100 }}>
+          <AdditionalDetails
+            description={aggrementDetails}
+            signature={mySignature}
+          />
+        </View>
         <AggrementSignature
           showContractSign={true}
           signature={mySignature}
@@ -324,11 +326,12 @@ export const SignaturePad = ({
               <View style={{ marginBottom: 10 }} fixed>
                 <Header {...headerDetails} language={lang} />
               </View>
-
-              <AdditionalDetails
-                description={aggrementDetails}
-                signature={file}
-              />
+              <View style={{ paddingBottom: 100 }}>
+                <AdditionalDetails
+                  description={aggrementDetails}
+                  signature={file}
+                />
+              </View>
               <AggrementSignature
                 showContractSign={true}
                 signature={file}
@@ -438,6 +441,7 @@ export const SignaturePad = ({
                       loading={offerLoading}
                       text={pdfAction as string}
                     />
+                    
                   </div>
                 );
               }}
