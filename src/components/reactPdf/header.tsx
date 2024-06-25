@@ -13,8 +13,7 @@ export const Header = ({
   language = "de",
   isOffer,
 }: Partial<DocumentHeaderDetailsProps>) => {
-  const fomrattedDate = formatDateTimeToDate(offerDate || "");
-  const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
+  const { logo } = emailTemplateSettings ?? {};
 
   const langContent = {
     en: {
@@ -22,7 +21,7 @@ export const Header = ({
       created_by: "Created By",
       offer: "Offer ",
       create: "Create",
-      date: "date",
+      date: "Date",
       HeaderLabelNr: {
         offer: "Offer ",
         contract: "Contract ",
@@ -37,9 +36,9 @@ export const Header = ({
     },
     de: {
       no: "Nr",
-      created_by: "Erstellt von",
+      created_by: "Erstellt Von",
       create: "Erstell",
-      date: "datum",
+      date: "Datum",
       offer: "Angebot ",
       HeaderLabelNr: {
         offer: "Angebot ",

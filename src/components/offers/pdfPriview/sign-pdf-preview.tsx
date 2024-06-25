@@ -10,6 +10,7 @@ import { EmailTemplate } from "@/types/settings";
 import { Container } from "@/components/pdf/container";
 import { staticEnums } from "@/utils/static";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 
 interface ActionType {
   payload: PublicOffersTableRowTypes;
@@ -284,18 +285,24 @@ const SignPdfPreview = () => {
     <CustomLoader />
   ) : (
     offerData && (
-      <Container>
-        <SignPdf<EmailHeaderProps>
-          pdfData={offerData}
-          newPageData={newPageData}
-          templateSettings={templateSettings}
-          totalPages={calculateTotalPages}
-          action={action as string}
-          emailTemplateSettings={emailTemplateSettings}
-          systemSettings={systemSetting}
-          setOfferData={setOfferData}
-        />
-      </Container>
+      <>
+        <div className="my-5 min-w-auto max-w-[1200px] mr-5 xlg:mx-auto flex justify-end items-end">
+          <LanguageSelector />
+        </div>
+
+        <Container>
+          <SignPdf<EmailHeaderProps>
+            pdfData={offerData}
+            newPageData={newPageData}
+            templateSettings={templateSettings}
+            totalPages={calculateTotalPages}
+            action={action as string}
+            emailTemplateSettings={emailTemplateSettings}
+            systemSettings={systemSetting}
+            setOfferData={setOfferData}
+          />
+        </Container>
+      </>
     )
   );
 };

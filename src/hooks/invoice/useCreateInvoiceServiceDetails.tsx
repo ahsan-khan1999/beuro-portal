@@ -337,9 +337,7 @@ export const useCreateInvoiceServiceDetails = (
 
     setServiceType((prev) => {
       const newlist = [...prev];
-
-      newlist[index] =
-        data?.serviceDetail[index]?.serviceType === "New Service" ? 0 : 1;
+      newlist.splice(index, 1);
 
       return newlist;
     });

@@ -45,7 +45,6 @@ const ServiceAddDetails = ({
         </button>
       </div>
 
-      {/* <div className="px-6"> */}
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
@@ -53,7 +52,6 @@ const ServiceAddDetails = ({
         errors={errors}
         className={`${defaultClassName}`}
       />
-      {/* </div> */}
     </>
   );
 };

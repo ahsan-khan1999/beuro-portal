@@ -1476,7 +1476,7 @@
       "next_button": "Weiter"
     },
     "service_details": {
-      "main_heading": "Leistungen-/Produktdetails",
+      "main_heading": "Dienstleistung/Produktdetails",
       "edit_button": "Details Bearbeiten",
       "add_new_service": "Neuen Leistungen hinzufügen",
       "price": "Preis",
@@ -2003,8 +2003,8 @@
     "label_invoice": "Rechnung",
     "label_receipt": "Quittung",
     "offer_number": "Angebot Nr",
-    "offer_date": "Erstelldatum",
-    "created_by": "Erstellt von",
+    "offer_date": "Erstell Datum",
+    "created_by": "Erstellt Von",
     "email": "E-Mail",
     "phone": "Telefon",
     "mobile": "Handynummer",
@@ -2032,7 +2032,7 @@
     "validate_heading": "Gültigkeit des Angebots",
     "validate_des": "3 Monate ab Erstellung des Angebots",
     "share_des": "Ich teile den Vertrag mit Ihnen.",
-    "date": "datum",
+    "date": "Datum",
     "signature": "Unterschrift",
     "page": "Seite",
     "receipt_slip": "Quittungsschein",
