@@ -11,7 +11,7 @@ export const ContactDetails = ({
   mobile,
   isReverseInfo,
 }: Partial<ContactDetailsProps>) => {
-  const { t: translation } = useTranslation();
+  const { t: translate } = useTranslation();
   const { city, name, postalCode, streetWithNumber, companyName } =
     address || {};
   return (
@@ -21,43 +21,37 @@ export const ContactDetails = ({
           <div className="flex flex-col gap-y-[0px] col-span-3">
             {email && (
               <div className="space-x-0">
-                <span className="text-[#000] text-sm font-medium">
-                  {translation("pdf.email")} :
+                <span className="text-sm font-medium">
+                  {translate("pdf.email")} :
                 </span>
-                <span className="text-[#000]  text-sm font-medium">
-                  {email}
-                </span>
+                <span className="text-sm font-medium">{email}</span>
               </div>
             )}
             {phone !== "+" && phone && (
               <div className="space-x-0">
                 <span className="text-[#404040] text-sm font-medium">
-                  {translation("pdf.phone")} :
+                  {translate("pdf.phone")} :
                 </span>
-                <span className="text-[#000] text-sm font-medium">{phone}</span>
+                <span className="text-sm font-medium">{phone}</span>
               </div>
             )}
             {mobile !== "+" && mobile && (
               <div className="space-x-0">
                 <span className="text-[#404040] text-sm font-medium">
-                  {translation("pdf.mobile")} :
+                  {translate("pdf.mobile")} :
                 </span>
-                <span className="text-[#000] text-sm font-medium">
-                  {mobile}
-                </span>
+                <span className="text-sm font-medium">{mobile}</span>
               </div>
             )}
           </div>
           <div className="col-span-1 ml-[80px]">
             <div className="flex flex-col gap-[0px] w-[185px]">
-              <span className="text-[#000] text-sm font-medium">
+              <span className="text-sm font-medium">
                 {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}{" "}
                 {companyName && "c/o" + " " + companyName}
               </span>
-              <span className="text-[#000] text-sm font-medium">
-                {streetWithNumber}
-              </span>
-              <span className="text-[#000] text-sm font-medium">
+              <span className="text-sm font-medium">{streetWithNumber}</span>
+              <span className="text-sm font-medium">
                 {postalCode} {[city as keyof typeof Country] || ""}
               </span>
             </div>
@@ -66,16 +60,14 @@ export const ContactDetails = ({
       ) : (
         <>
           <div className="flex flex-col gap-[0px] col-span-3">
-            <span className="text-[#000] text-sm font-medium">
+            <span className="text-sm font-medium">
               {companyName && companyName}
             </span>
-            <span className="text-[#000] text-sm font-medium">
+            <span className="text-sm font-medium">
               {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}{" "}
             </span>
-            <span className="text-[#000] text-sm font-medium">
-              {streetWithNumber}
-            </span>
-            <span className="text-[#000] text-sm font-medium">
+            <span className="text-sm font-medium">{streetWithNumber}</span>
+            <span className="text-sm font-medium">
               {postalCode} {city || ""}
             </span>
           </div>
@@ -83,12 +75,10 @@ export const ContactDetails = ({
           <div className="flex flex-col gap-y-[0px] col-span-1 ml-[6px]">
             {email && (
               <div className="space-x-0">
-                {/* <span className="text-[#000] text-sm font-medium">
+                {/* <span className="text-sm font-medium">
                   {translation("pdf.email")} :
                 </span> */}
-                <span className="text-[#000]  text-sm font-medium">
-                  {email}
-                </span>
+                <span className=" text-sm font-medium">{email}</span>
               </div>
             )}
             {phone !== "+" && phone && (
@@ -96,7 +86,7 @@ export const ContactDetails = ({
                 {/* <span className="text-[#404040] text-sm font-medium">
                   {translation("pdf.phone")} :
                 </span> */}
-                <span className="text-[#000] text-sm font-medium">{phone}</span>
+                <span className="text-sm font-medium">{phone}</span>
               </div>
             )}
             {mobile !== "+" && mobile && (
@@ -104,9 +94,7 @@ export const ContactDetails = ({
                 {/* <span className="text-[#404040] text-sm font-medium">
                   {translation("pdf.mobile")} :
                 </span> */}
-                <span className="text-[#000] text-sm font-medium">
-                  {mobile}
-                </span>
+                <span className="text-sm font-medium">{mobile}</span>
               </div>
             )}
           </div>

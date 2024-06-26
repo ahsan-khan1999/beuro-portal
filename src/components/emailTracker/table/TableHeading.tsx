@@ -6,7 +6,7 @@ const TableHeading = () => {
   return (
     <div className="flex">
       <div className="mlg:w-full">
-        <div className="bg-primary py-4 pl-4 rounded-l-lg gap-x-3 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(100px,_100px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_4fr)_minmax(130px,_3fr)_minmax(100px,_100px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(140px,_4fr)_minmax(130px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(160px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)]">
+        <div className="bg-primary py-4 pl-4 rounded-l-lg gap-x-3 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(140px,_4fr)_minmax(130px,_3fr)_minmax(120px,_120px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(160px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)]">
           <span className="font-semibold text-base text-white">
             {translate("email_tracker.table_headings.id")}
           </span>
@@ -27,7 +27,7 @@ const TableHeading = () => {
           </span>
         </div>
       </div>
-      <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)] bg-primary py-4 rounded-r-md">
+      <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)] bg-primary py-4 rounded-r-md pr-1">
         <span className="font-semibold text-base text-white">
           {translate("common.actions")}
         </span>

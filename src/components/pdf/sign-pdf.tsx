@@ -12,12 +12,6 @@ import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSucces
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { SetStateAction, useEffect, useState } from "react";
 import { EmailTemplate } from "@/types/settings";
-
-const OfferSignedPdf = dynamic(() => import("../offers/signed-pdf"), {
-  ssr: false,
-});
-
-import dynamic from "next/dynamic";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
 import RejectOffer from "@/base-components/ui/modals1/RejectOffer";
