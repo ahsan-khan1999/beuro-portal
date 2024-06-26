@@ -214,7 +214,7 @@ const LeadsDetailsData = ({
   return (
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
-        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap w-full gap-[14px] mb-5">
+        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap gap-[14px] mb-5">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -239,11 +239,12 @@ const LeadsDetailsData = ({
           name={name}
           heading={heading}
           handleImageSlider={handleImageSlider}
+          className="xlg:w-[247px]"
         />
       </div>
 
       <div className="w-full break-all flex">
-        <div className={`max-w-[330px] w-full hidden xlg:block`}></div>
+        <div className={`max-w-[280px] w-full hidden xlg:block`}></div>
 
         {loading ? (
           <div className="flex justify-center items-center w-full">

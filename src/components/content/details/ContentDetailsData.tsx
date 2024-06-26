@@ -200,7 +200,7 @@ const ContentDetailsData = () => {
   return (
     <>
       <div className="maxSize:fixed mb-5 mt-5 maxSize:mt-0">
-        <div className="flex flex-row flex-wrap maxSize:flex-col maxSize:flex-nowrap w-full gap-[14px] mb-5 maxSize:mb-0">
+        <div className="flex flex-row flex-wrap maxSize:flex-col maxSize:flex-nowrap gap-[14px] mb-5 maxSize:mb-0">
           {tabSection.map((item, index) => (
             <DetailsTab
               key={index}

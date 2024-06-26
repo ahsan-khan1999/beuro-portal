@@ -107,18 +107,15 @@ const EditOffersDetails = () => {
   }
 
   return (
-    <>
-      <Layout>
-        <EditOffersDetailsData
-          shareImgModal={shareImgModal}
-          handleImagesUpload={handleImageUpload}
-          handleImageSlider={handleImageSlider}
-          tab={tab}
-        />
-      </Layout>
-
+    <Layout>
+      <EditOffersDetailsData
+        shareImgModal={shareImgModal}
+        handleImagesUpload={handleImageUpload}
+        handleImageSlider={handleImageSlider}
+        tab={tab}
+      />
       {renderModal()}
-    </>
+    </Layout>
   );
 };
 

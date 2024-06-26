@@ -186,7 +186,7 @@ const ContentAddDetailsData = () => {
         <p className="text-xl mb-5 font-normal text-[#222B45]">
           {translate("content.create_content")}
         </p>
-        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-full gap-[14px]">
+        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -201,8 +201,8 @@ const ContentAddDetailsData = () => {
         </div>
       </div>
       <div className="w-full break-all xLarge:mt-[145px] flex mb-10" ref={ref}>
-        <div className="max-w-[300px] w-full hidden xLarge:block"></div>
-        <div className="w-full xLarge:max-w-[80%]">
+        <div className="max-w-[280px] w-full hidden xLarge:block"></div>
+        <div className="w-full ">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

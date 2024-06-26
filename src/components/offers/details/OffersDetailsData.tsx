@@ -148,7 +148,7 @@ const OffersDetailsData = ({
   return (
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
-        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 2xl:mb-0">
+        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 2xl:mb-0">
           {tabSection.map((item, index) => (
             <DetailsTab
               key={index}
@@ -174,12 +174,13 @@ const OffersDetailsData = ({
             name={name}
             heading={heading}
             handleImageSlider={handleImageSlider}
+            className="2xl:w-[247px]"
           />
         </div>
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[330px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[280px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <CustomLoader />
