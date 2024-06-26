@@ -140,5 +140,6 @@ export const useOfferContentPdf = () => {
     loading,
     systemSetting,
     contentDetails,
+    
   };
 };

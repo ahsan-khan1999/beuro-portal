@@ -13,6 +13,7 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { updateQuery } from "@/utils/update-query";
+import { ContentPdfPreview } from "./pdf-preview";
 
 export enum ComponentsType {
   addOffer,
@@ -202,8 +203,12 @@ const ContentAddDetailsData = () => {
       </div>
       <div className="w-full break-all xLarge:mt-[145px] flex mb-10" ref={ref}>
         <div className="max-w-[280px] w-full hidden xLarge:block"></div>
-        <div className="w-full ">
+        <div className="w-full">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
+        </div>
+
+        <div className="w-[340px] ml-4">
+          <ContentPdfPreview />
         </div>
       </div>
 
