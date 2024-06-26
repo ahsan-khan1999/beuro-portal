@@ -136,7 +136,6 @@ const AddNewLeadsData = () => {
         },
       })
     );
-    // dispatch(readImage({ params: { type: "leadID", id: leadDetails?.id } }));
   };
 
   const handleImageSlider = () => {

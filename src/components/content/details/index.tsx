@@ -17,13 +17,10 @@ const ContentDetails = () => {
           contentDeleteHandler={contentDeleteHandler}
         />
       </div>
-      {loading ? (
-        <CustomLoader />
-      ) : (
-        <div className="maxSize:mt-[320px] w-full maxSize:block">
-          <ContentDetailsData />
-        </div>
-      )}
+
+      <div className="maxSize:mt-[320px] w-full maxSize:block">
+        <ContentDetailsData />
+      </div>
       {renderModal()}
     </Layout>
   );

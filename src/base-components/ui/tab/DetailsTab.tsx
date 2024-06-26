@@ -9,9 +9,11 @@ const DetailsTab = ({
   icon,
   selectedTab,
   onScroll,
+  onItemSelected,
 }: leadsTabsSectionTypes) => {
-  const handleClickScroll = () => {
-    onScroll && onScroll(selectedTab);
+  const handleClickScroll = (name: string) => {
+    // onScroll && onScroll(selectedTab);
+    onItemSelected && onItemSelected(name);
     setTabType(selectedTab);
   };
 
@@ -26,7 +28,7 @@ const DetailsTab = ({
 
   return (
     <button
-      onClick={() => handleClickScroll()}
+      onClick={() => handleClickScroll(name)}
       className={`h-fit whitespace-nowrap rounded-lg py-[10px] border px-4 text-lg font-medium flex items-center bg-white ${
         isSelected
           ? "border-[#4A13E7] text-primary"

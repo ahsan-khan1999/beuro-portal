@@ -29,7 +29,7 @@ const ServicesDetails = () => {
           deleteHandler={deleteHandler}
         />
       </DetailsCard>
-      <div className="w-full mt-8">
+      <div className="w-full mt-5">
         {loading ? (
           <CustomLoader />
         ) : (
@@ -44,9 +44,6 @@ const ServicesDetails = () => {
           />
         )}
       </div>
-      {/* <div className="xl:col-span-1">
-          <SideCard />
-        </div> */}
 
       {renderModal()}
     </Layout>

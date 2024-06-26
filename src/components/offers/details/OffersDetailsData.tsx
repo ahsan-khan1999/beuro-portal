@@ -118,18 +118,18 @@ const OffersDetailsData = ({
     },
   ];
 
-  const scrollHandler = (index: number) => {
-    if (index === 0) {
-      window.scrollTo({ behavior: "smooth", top: 0 });
-    }
-    if (index === 1) {
-      window.scrollTo({ behavior: "smooth", top: 600 });
-    }
-    if (index === 2) {
-      window.scrollTo({ behavior: "smooth", top: 980 });
-    }
-    if (index === 3) {
-      window.scrollTo({ behavior: "smooth", top: 1500 });
+  const handleScrollToTop = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    const offset = 380;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -158,7 +158,8 @@ const OffersDetailsData = ({
               name={item.name}
               icon={item.icon}
               selectedTab={index}
-              onScroll={scrollHandler}
+              // onScroll={scrollHandler}
+              onItemSelected={handleScrollToTop}
             />
           ))}
         </div>

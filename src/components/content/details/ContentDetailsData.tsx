@@ -11,6 +11,7 @@ import EditInoviceContentDetails from "../edit/EditInoviceContentDetails";
 import EditReceiptContentDetails from "../edit/ReceiptContentDetails";
 import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export enum ComponentsType {
   offerContent,
@@ -24,6 +25,7 @@ export enum ComponentsType {
 }
 
 const ContentDetailsData = () => {
+  const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<number>(0);
   const { contentDetails, loading } = useAppSelector((state) => state.content);
 
@@ -35,8 +37,6 @@ const ContentDetailsData = () => {
   const handleEdit = (index: number, component: ComponentsType) => {
     setData({ index, component });
   };
-
-  const { t: translate } = useTranslation();
 
   const componentArray = [
     <OfferContentDetailsData
@@ -168,18 +168,18 @@ const ContentDetailsData = () => {
     },
   ];
 
-  const scrollHandler = (index: number) => {
-    if (index === 0) {
-      window.scrollTo({ behavior: "smooth", top: 0 });
-    }
-    if (index === 1) {
-      window.scrollTo({ behavior: "smooth", top: 770 });
-    }
-    if (index === 2) {
-      window.scrollTo({ behavior: "smooth", top: 1370 });
-    }
-    if (index === 3) {
-      window.scrollTo({ behavior: "smooth", top: 1950 });
+  const handleScrollToTop = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    const offset = 300;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -210,18 +210,26 @@ const ContentDetailsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
-              onScroll={scrollHandler}
+              // onScroll={scrollHandler}
+              onItemSelected={handleScrollToTop}
             />
           ))}
         </div>
       </div>
       <div className="w-full break-all flex mb-10">
         <div className="max-w-[280px] w-full hidden maxSize:block"></div>
-        <div className="flex flex-col gap-y-5 w-full">
-          {renderComponent.map((component, index) => (
-            <div key={index}>{component}</div>
-          ))}
-        </div>
+
+        {loading ? (
+          <div className="flex items-center justify-center w-full">
+            <CustomLoader />
+          </div>
+        ) : (
+          <div className="flex flex-col gap-y-5 w-full">
+            {renderComponent.map((component, index) => (
+              <div key={index}>{component}</div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

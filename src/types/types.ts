@@ -97,6 +97,7 @@ export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
   icon: string;
+  id?: string;
 }
 
 export interface tabsSectionTypes {
