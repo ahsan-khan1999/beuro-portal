@@ -216,7 +216,7 @@ export const SignaturePad = ({
         </View>
 
         {/* <ContactAddress {...{ ...contactAddress }} /> */}
-        <View style={{ paddingBottom: 120 }}>
+        <View style={{ paddingBottom: 110 }}>
           <AdditionalDetails
             description={aggrementDetails}
             signature={mySignature}
@@ -323,7 +323,7 @@ export const SignaturePad = ({
               <View style={{ marginBottom: 10 }} fixed>
                 <Header {...headerDetails} language={lang} />
               </View>
-              <View style={{ paddingBottom: 120 }}>
+              <View style={{ paddingBottom: 110 }}>
                 <AdditionalDetails
                   description={aggrementDetails}
                   signature={file}

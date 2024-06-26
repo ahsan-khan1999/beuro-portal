@@ -1,6 +1,6 @@
 import { DocumentHeaderDetailsProps } from "@/types";
 import { HeaderLabel, HeaderLabelNr } from "@/utils/static";
-import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
+import { pdfDateFormat } from "@/utils/utility";
 import { View, Text, Image } from "@react-pdf/renderer";
 
 export const Header = ({
@@ -143,7 +143,7 @@ export const Header = ({
               fontStyle: "medium",
             }}
           >
-            {pdfDateFormat(offerDate || "", "de")}
+            {pdfDateFormat(offerDate || "", language || "de")}
           </Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>

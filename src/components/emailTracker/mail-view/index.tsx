@@ -51,6 +51,7 @@ const ViewMails = () => {
     );
     if (res?.payload) router.push("/email-tracker");
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -79,26 +80,24 @@ const ViewMails = () => {
   };
 
   return (
-    <>
-      <Layout>
-        <DetailsCard>
-          <DetailsData
-            handleConfirmDeletion={handleConfirmDeletion}
-            emailDetails={emailDetails}
-          />
-        </DetailsCard>
-        <div className="mt-7">
-          {loading ? (
-            <div className="flex justify-center items-center">
-              <CustomLoader />
-            </div>
-          ) : (
-            <EmailDetailsData emailDetails={emailDetails} />
-          )}
-        </div>
-      </Layout>
+    <Layout>
+      <DetailsCard>
+        <DetailsData
+          handleConfirmDeletion={handleConfirmDeletion}
+          emailDetails={emailDetails}
+        />
+      </DetailsCard>
+      <div className="mt-7">
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <CustomLoader />
+          </div>
+        ) : (
+          <EmailDetailsData emailDetails={emailDetails} />
+        )}
+      </div>
       {renderModal()}
-    </>
+    </Layout>
   );
 };
 

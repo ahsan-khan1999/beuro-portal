@@ -18,12 +18,7 @@ export enum EditComponentsType {
   additionalEdit,
 }
 
-const EditOffersDetailsData = ({
-  shareImgModal,
-  handleImagesUpload,
-  handleImageSlider,
-  tab,
-}: {
+export interface EditOfferDetailsProps {
   shareImgModal: (
     id: string,
     refID: string,
@@ -39,7 +34,14 @@ const EditOffersDetailsData = ({
   ) => void;
   handleImageSlider: () => void;
   tab?: EditComponentsType;
-}) => {
+}
+
+const EditOffersDetailsData = ({
+  shareImgModal,
+  handleImagesUpload,
+  handleImageSlider,
+  tab,
+}: EditOfferDetailsProps) => {
   const [tabType, setTabType] = useState<EditComponentsType>(
     tab || EditComponentsType.offerEdit
   );
@@ -102,14 +104,10 @@ const EditOffersDetailsData = ({
 
   const handleNextTab = (currentComponent: EditComponentsType) => {
     if (tabType === EditComponentsType.additionalEdit) {
-      router.push(
-        {
-          pathname: `/offers/pdf-preview`,
-          query: { status: "None", offerID: offerDetails?.id, isMail: true },
-        }
-
-        // `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
-      );
+      router.push({
+        pathname: `/offers/pdf-preview`,
+        query: { status: "None", offerID: offerDetails?.id, isMail: true },
+      });
       return;
     }
     setTabType(currentComponent);

@@ -68,7 +68,7 @@ export const AggrementSignature = ({
   };
 
   useMemo(() => signature && onFileChange(), [signature]);
-  const date = pdfDateFormat(new Date().toString(), "de");
+  const date = pdfDateFormat(new Date().toString(), language || "de");
 
   const langContent = {
     en: {

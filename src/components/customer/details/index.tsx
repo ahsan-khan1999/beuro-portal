@@ -20,7 +20,10 @@ const CustomerDetails = () => {
     deleteHandler,
     renderModal,
     loading,
+    isLoading,
   } = useCustomerDetail({ detail: true, idAddNewCustomer: false });
+
+  console.log({ loading });
 
   return (
     <Layout>
@@ -36,7 +39,7 @@ const CustomerDetails = () => {
       {loading ? (
         <CustomLoader />
       ) : (
-        <div className="w-full my-8">
+        <div className="w-full my-5">
           <CustomerForm
             isUpdate={isUpdate}
             setIsUpdate={setIsUpdate}
