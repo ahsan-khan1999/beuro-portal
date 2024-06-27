@@ -51,8 +51,8 @@ export interface ContentPdfPageProps {
   footerDetails?: DocumentDetailFooterProps;
   aggrementDetails?: string;
   templateSettings: TemplateType | null;
-  totalPages: number;
-  currPage: number;
+  totalPages?: number;
+  currPage?: number;
   emailTemplateSettings: EmailTemplate | null;
   systemSettings: SystemSetting | null;
 }

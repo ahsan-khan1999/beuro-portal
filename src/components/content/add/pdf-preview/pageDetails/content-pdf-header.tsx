@@ -12,34 +12,41 @@ export const ContentPdfHeader = ({
   isReverseLogo,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const { t: translate } = useTranslation();
+  const headerBgColor = "#" + emailTemplateSettings?.FooterColour;
+  const textColor = "#" + emailTemplateSettings?.textColour;
 
   return (
     <div
       className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full`}
+      style={{ backgroundColor: headerBgColor }}
     >
       {isReverseLogo ? (
         <>
           <div className="flex flex-col col-span-1">
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.offer_number")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 o-4040 umzugsguchs
               </span>
             </div>
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.offer_date")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {/* {formatDateTimeToDate(offerDate || "")} */}
                 26/06/2024
@@ -47,12 +54,14 @@ export const ContentPdfHeader = ({
             </div>
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.created_by")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {/* {createdBy} */}
                 Rahal Ahmad
@@ -87,12 +96,14 @@ export const ContentPdfHeader = ({
           <div className="flex flex-col gap-[0px] col-span-1">
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.offer_number")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {/* {offerNo} */}
                 o-4040 umzugsguchs
@@ -100,12 +111,14 @@ export const ContentPdfHeader = ({
             </div>
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.offer_date")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {/* {formatDateTimeToDate(offerDate || "")} */}
                 26/06/2024
@@ -113,12 +126,14 @@ export const ContentPdfHeader = ({
             </div>
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.created_by")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {/* {createdBy} */}
                 Rahal Ahmad

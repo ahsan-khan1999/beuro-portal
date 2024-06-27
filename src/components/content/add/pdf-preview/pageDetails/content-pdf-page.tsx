@@ -22,7 +22,7 @@ export const ContentPdfPage = ({
   const date = pdfDateFormat(currentDate, router.locale as string);
 
   return (
-    <>
+    <div className="border border-[#404F6A] rounded-lg">
       <ContentPdfHeader {...headerDetails} />
       <div className="px-[80px] flex flex-col bg-white pb-[50px] pt-10">
         <ContentPdfDescription aggrementDetails={aggrementDetails} />
@@ -67,6 +67,6 @@ export const ContentPdfPage = ({
         currPage={currPage}
         emailTemplateSettings={emailTemplateSettings}
       />
-    </>
+    </div>
   );
 };

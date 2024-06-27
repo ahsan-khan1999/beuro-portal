@@ -162,15 +162,6 @@ const ContentAddDetailsData = () => {
     },
   ];
 
-  // useEffect(() => {
-  //   if (ref.current) {
-  //     ref.current.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "start",
-  //     });
-  //   }
-  // }, [tabType]);
-
   return (
     <>
       <div className="xLarge:fixed mb-5 xLarge:-mt-12">
@@ -196,10 +187,6 @@ const ContentAddDetailsData = () => {
         <div className="w-full">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
-
-        {/* <div className="w-[340px] ml-4">
-          <ContentPdfPreview offerDescription={offerDescriptionCount} />
-        </div> */}
       </div>
 
       {renderModal()}

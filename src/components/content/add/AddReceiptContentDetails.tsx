@@ -3,6 +3,8 @@ import { useAddContentReceiptDetails } from "@/hooks/content/useAddContentReceip
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { ReceiptContentPdf } from "./pdf-preview/receipt-content-pdf";
+import { splitContentIntoPages } from "@/utils/functions";
+import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const AddReceiptContentDetails = ({
   onHandleBack,
@@ -23,6 +25,8 @@ const AddReceiptContentDetails = ({
     receiptDescription,
   } = useAddContentReceiptDetails(onHandleBack, onHandleNext);
 
+  const pages = splitContentIntoPages(receiptDescription);
+
   return (
     <div className="flex gap-x-5">
       <FormCard>
@@ -42,11 +46,26 @@ const AddReceiptContentDetails = ({
           />
         </div>
       </FormCard>
-      <div className="bg-white rounded-lg w-[340px] hidden xlg:block">
-        <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-3 pb-2">
+      <div className="bg-white rounded-lg w-[340px] h-fit p-[6px] hidden xlg:block">
+        <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-3 pb-2 border-b-2 border-b-primary">
           {translate("common.receipt_PDF_PREVIEW")}
         </h1>
-        <ReceiptContentPdf receiptDescription={receiptDescription} />
+
+        {pages.length > 0 ? (
+          <div className="flex flex-col gap-y-4">
+            {" "}
+            {pages.map((pageContent, index) => (
+              <ReceiptContentPdf key={index} receiptDescription={pageContent} />
+            ))}
+          </div>
+        ) : (
+          <NoDataEmptyState
+            className="w-fit"
+            imgClassName="w-14 h-14"
+            textClassName="text-base"
+            containerClassName="py-3"
+          />
+        )}
       </div>
     </div>
   );

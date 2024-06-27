@@ -25,8 +25,8 @@ export const InvoiceContentPdf = ({
             footerDetails={contentData?.footerDetails}
             aggrementDetails={invoiceDescription}
             templateSettings={templateSettings}
-            totalPages={1}
-            currPage={1}
+            totalPages={contentData?.footerDetails?.totalPages}
+            currPage={contentData?.footerDetails?.currPage}
             emailTemplateSettings={emailTemplateSettings}
             systemSettings={systemSetting}
           />

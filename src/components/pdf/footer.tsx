@@ -13,6 +13,7 @@ export const Footer = ({
   emailTemplateSettings,
 }: Partial<DocumentDetailFooterProps>) => {
   const textColor = "#" + emailTemplateSettings?.textColour;
+  const footerBackgroundColor = "#" + emailTemplateSettings?.FooterColour;
 
   const {
     firstColumn: firstColumnSettings,
@@ -46,9 +47,8 @@ export const Footer = ({
 
   return (
     <div
-      className={`relative flex items-center justify-between h-[149px] px-4  w-full bg-[${
-        "#" + emailTemplateSettings?.FooterColour
-      }]`}
+      className={`relative flex items-center justify-between h-[149px] px-4 w-full`}
+      style={{ background: footerBackgroundColor }}
     >
       <div className="flex justify-center gap-[20px] w-full">
         {isFirstColumn && (
@@ -66,7 +66,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {firstColumn?.companyName}
+                {firstColumnSettings?.companyName}
               </span>
             )}
             {firstColumnSettings?.isWebsite && (
@@ -76,7 +76,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {firstColumn?.website}
+                {firstColumnSettings?.website}
               </span>
             )}
             {firstColumnSettings?.isEmail && (
@@ -86,7 +86,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {firstColumn?.email}
+                {firstColumnSettings?.email}
               </span>
             )}
             {firstColumnSettings?.isPhoneNumber && (
@@ -96,7 +96,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {firstColumn?.phoneNumber}
+                {firstColumnSettings?.phoneNumber}
               </span>
             )}
             {firstColumnSettings?.isTaxNumber && (
@@ -106,7 +106,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {firstColumn?.taxNumber}
+                {firstColumnSettings?.taxNumber}
               </span>
             )}
           </div>
@@ -128,7 +128,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {secondColumn?.bankDetails?.bankName}
+                {secondColumnSettings?.bankName}
               </span>
             )}
             {secondColumnSettings?.isStreetNumber && (
@@ -138,7 +138,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {secondColumn?.address?.streetNumber}
+                {secondColumnSettings?.streetNumber}
               </span>
             )}
             {secondColumnSettings?.isPostCode && (
@@ -148,7 +148,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {secondColumn?.address?.postalCode}
+                {secondColumnSettings?.postCode}
               </span>
             )}
 
@@ -159,7 +159,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {secondColumn?.bankDetails?.ibanNumber}
+                {secondColumnSettings?.iban}
               </span>
             )}
             {secondColumnSettings?.isAccountNumber && (
@@ -169,7 +169,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {secondColumn?.bankDetails?.accountNumber}
+                {secondColumnSettings?.accountNumber}
               </span>
             )}
           </div>
@@ -191,7 +191,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {thirdColumn?.row1}
+                {thirdColumnSettings?.row1}
               </span>
             )}
             {thirdColumnSettings?.isRow2 && (
@@ -201,7 +201,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {thirdColumn?.row2}
+                {thirdColumnSettings?.row2}
               </span>
             )}
             {thirdColumnSettings?.isRow3 && (
@@ -211,7 +211,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {thirdColumn?.row3}
+                {thirdColumnSettings?.row3}
               </span>
             )}
             {thirdColumnSettings?.isRow4 && (
@@ -221,7 +221,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {thirdColumn?.row4}
+                {thirdColumnSettings?.row4}
               </span>
             )}
             {thirdColumnSettings?.isRow5 && (
@@ -231,7 +231,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {thirdColumn?.row5}
+                {thirdColumnSettings?.row5}
               </span>
             )}
           </div>
@@ -247,7 +247,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {fourthColumn?.row1}
+                {fourthColumnSettings?.row1}
               </span>
             )}
             {fourthColumnSettings?.isRow2 && (
@@ -257,7 +257,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {fourthColumn?.row2}
+                {fourthColumnSettings?.row2}
               </span>
             )}
             {fourthColumnSettings?.isRow3 && (
@@ -267,7 +267,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {fourthColumn?.row3}
+                {fourthColumnSettings?.row3}
               </span>
             )}
             {fourthColumnSettings?.isRow4 && (
@@ -277,7 +277,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {fourthColumn?.row4}
+                {fourthColumnSettings?.row4}
               </span>
             )}
             {fourthColumnSettings?.isRow5 && (
@@ -287,7 +287,7 @@ export const Footer = ({
                   "#" + emailTemplateSettings?.textColour
                 }]`}
               >
-                {fourthColumn?.row5}
+                {fourthColumnSettings?.row5}
               </span>
             )}
           </div>

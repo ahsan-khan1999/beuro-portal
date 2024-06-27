@@ -121,7 +121,7 @@ export const useOfferContentPdf = () => {
           fourthColumn: {},
           columnSettings: null,
           currPage: 1,
-          // totalPages: calculateTotalPages,
+          totalPages: 10,
         },
         aggrementDetails: "",
       };

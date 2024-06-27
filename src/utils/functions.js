@@ -248,3 +248,24 @@ export function getTextCount(value) {
     .replace(/^\s*/g, "") // Trim leading whitespace
     .replace(/\s*$/g, "").length; // Trim trailing whitespace // Get the length directly and return
 }
+
+export const splitContentIntoPages = (content) => {
+  const pageSize = 2400;
+  const pages = [];
+  let currentPage = "";
+
+  for (let i = 0; i < content?.length; i++) {
+    currentPage += content[i];
+    if (i > 0 && i % pageSize === 0) {
+      pages.push(currentPage);
+      currentPage = "";
+    }
+  }
+
+  // Add the last page if any content remains
+  if (currentPage !== "") {
+    pages.push(currentPage);
+  }
+
+  return pages;
+};

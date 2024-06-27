@@ -25,8 +25,8 @@ export const ConfirmationContentPdf = ({
             footerDetails={contentData?.footerDetails}
             aggrementDetails={confirmationDescription}
             templateSettings={templateSettings}
-            totalPages={1}
-            currPage={1}
+            totalPages={contentData?.footerDetails?.totalPages}
+            currPage={contentData?.footerDetails?.currPage}
             emailTemplateSettings={emailTemplateSettings}
             systemSettings={systemSetting}
           />

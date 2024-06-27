@@ -68,6 +68,7 @@ export interface SVGIconProp {
 
 export interface MyComponentProp {
   children: ReactNode;
+  className?: string;
 }
 
 export interface UserAccountCardProp extends MyComponentProp {
