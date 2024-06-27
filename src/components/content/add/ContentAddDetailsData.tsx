@@ -13,18 +13,12 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { updateQuery } from "@/utils/update-query";
-import { ContentPdfPreview } from "./pdf-preview";
-
-export enum ComponentsType {
-  addOffer,
-  addConfirmationContent,
-  addInvoiceContent,
-  addReceiptContent,
-}
+import { ComponentsType } from "@/enums/content";
 
 const ContentAddDetailsData = () => {
   const { contentDetails } = useAppSelector((state) => state.content);
   const { t: translate } = useTranslation();
+  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
   const [tabType, setTabType] = useState<number>(
     (contentDetails?.id && contentDetails?.stage) || ComponentsType.addOffer
@@ -39,10 +33,6 @@ const ContentAddDetailsData = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
-  const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
   const onCloseRoute = () => {
     router.pathname = "/content";
     updateQuery(router, router.locale as string);
@@ -52,8 +42,6 @@ const ContentAddDetailsData = () => {
   const handleContentCreated = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
-
-  const router = useRouter();
 
   const route = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -75,9 +63,11 @@ const ContentAddDetailsData = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const onHandleBack = (currentComponent: ComponentsType) => {
     setTabType(currentComponent);
   };
+
   const handleNextTab = (currentComponent: ComponentsType) => {
     if (tabType === ComponentsType.addReceiptContent) {
       handleContentCreated();
@@ -172,14 +162,14 @@ const ContentAddDetailsData = () => {
     },
   ];
 
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, [tabType]);
+  // useEffect(() => {
+  //   if (ref.current) {
+  //     ref.current.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     });
+  //   }
+  // }, [tabType]);
 
   return (
     <>
@@ -207,9 +197,9 @@ const ContentAddDetailsData = () => {
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
 
-        <div className="w-[340px] ml-4">
-          <ContentPdfPreview />
-        </div>
+        {/* <div className="w-[340px] ml-4">
+          <ContentPdfPreview offerDescription={offerDescriptionCount} />
+        </div> */}
       </div>
 
       {renderModal()}

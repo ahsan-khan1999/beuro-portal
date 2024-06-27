@@ -1167,6 +1167,10 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "offer_PDF_PREVIEW": "Offer PDF Preview",
+    "confirmation_PDF_PREVIEW": "Confirmation PDF Preview",
+    "invoice_PDF_PREVIEW": "Invoice PDF Preview",
+    "receipt_PDF_PREVIEW": "Receipt PDF Preview",
     "customer_name": "Customer Name",
     "company_name": "Company Name",
     "invoice_fitlers": {

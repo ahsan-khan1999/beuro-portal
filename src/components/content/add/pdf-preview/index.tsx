@@ -1,34 +1,37 @@
-import { Container } from "@/components/pdf/container";
-import { PdfFirstPage } from "./pageDetails/pdf-first-page";
-import { useOfferContentPdf } from "@/hooks/content/useOfferContentPdf";
+import { useState } from "react";
+import { ComponentsType } from "@/enums/content";
+import { OfferContentPdf } from "./offer-content-pdf";
+import { ConfirmationContentPdf } from "./confirmation-content-pdf";
+import { InvoiceContentPdf } from "./invoice-content-pdf";
+import { ReceiptContentPdf } from "./receipt-content-pdf";
+import { useAppSelector } from "@/hooks/useRedux";
 
-export const ContentPdfPreview = () => {
-  const {
-    contentData,
-    contentDetails,
-    emailTemplateSettings,
-    loading,
-    systemSetting,
-    templateSettings,
-  } = useOfferContentPdf();
+export const ContentPdfPreview = ({
+  offerDescription,
+}: {
+  offerDescription: string;
+}) => {
+  const { contentDetails } = useAppSelector((state) => state.content);
+  const [tabType, setTabType] = useState<number>(
+    (contentDetails?.id && contentDetails?.stage) || ComponentsType.addOffer
+  );
+
+  // const componentsLookUp = {
+  //   [ComponentsType.addOffer]: (
+  //     <OfferContentPdf offerDescription={offerDescription} />
+  //   ),
+  //   [ComponentsType.addConfirmationContent]: <ConfirmationContentPdf />,
+  //   [ComponentsType.addInvoiceContent]: <InvoiceContentPdf />,
+  //   [ComponentsType.addReceiptContent]: <ReceiptContentPdf />,
+  // };
 
   return (
     <div className="bg-white rounded-lg">
       <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-3 pb-2">
-        PDF Preview
+        {translate("common.PDF_PREVIEW")}
       </h1>
 
-      <Container>
-        <div className="flex flex-col items-center bg-[#EDF4FF] p-2 rounded-lg">
-          <div className="flex flex-col gap-y-[30px]">
-            <PdfFirstPage
-              pdfData={contentData}
-              emailTemplateSettings={emailTemplateSettings}
-              templateSettings={templateSettings}
-            />
-          </div>
-        </div>
-      </Container>
+      {/* {componentsLookUp[tabType as keyof typeof componentsLookUp]} */}
     </div>
   );
 };

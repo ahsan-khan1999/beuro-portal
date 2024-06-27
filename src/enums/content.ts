@@ -38,3 +38,10 @@ export enum ContentPDFComponents {
   INVOICE_CONTENT_PDF = "INVOICE_CONTENT_PDF",
   RECEIPT_CONTENT_PDF = "RECEIPT_CONTENT_PDF",
 }
+
+export enum ComponentsType {
+  addOffer,
+  addConfirmationContent,
+  addInvoiceContent,
+  addReceiptContent,
+}

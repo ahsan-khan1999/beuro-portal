@@ -10,11 +10,11 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddOfferContentDetailsFormField } from "@/components/content/add/fields/add-offer-content-details-fields";
 import { generateOfferEditContentDetailsValidation } from "@/validation/contentSchema";
-import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 import { useState, useEffect } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { createContent } from "@/api/slices/content/contentSlice";
+import { ComponentsType } from "@/enums/content";
 
 export const useAddOfferContentDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -128,5 +128,7 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
+    offerDescriptionCount,
+    watch
   };
 };

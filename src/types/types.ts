@@ -1111,8 +1111,8 @@ export interface ContractEmailHeaderProps {
 
 export interface ContentHeaderProps {
   headerDetails: DocumentHeaderDetailsProps;
-  footerDetails?: DocumentDetailFooterProps;
-  aggrementDetails?: string;
+  footerDetails: DocumentDetailFooterProps;
+  aggrementDetails: string;
 }
 
 export interface ContentPdfPreviewerProps {

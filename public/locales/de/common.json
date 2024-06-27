@@ -1159,6 +1159,10 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "offer_PDF_PREVIEW": "Angebot PDF-Vorschau",
+    "confirmation_PDF_PREVIEW": "Bestätigungs-PDF-Vorschau",
+    "invoice_PDF_PREVIEW": "Rechnungs-PDF-Vorschau",
+    "receipt_PDF_PREVIEW": "Quittung PDF-Vorschau",
     "customer_name": "Kundenname",
     "company_name": "Firmenname",
     "invoice_fitlers": {

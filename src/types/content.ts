@@ -1,10 +1,17 @@
-import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
-import { User } from ".";
+import { ComponentsType } from "@/enums/content";
+import {
+  DocumentDetailFooterProps,
+  DocumentHeaderDetailsProps,
+  TemplateType,
+  User,
+} from ".";
+import { EmailTemplate } from "./settings";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
 
 // Interface for the content table
 export interface ContentTableRowTypes {
   refID: string;
-  createdAt:string;
+  createdAt: string;
   id: string;
   contentName: string;
   contentTitle: string;
@@ -34,8 +41,18 @@ export interface ContentTableRowTypes {
     description: string;
     body: string;
     attachments: string[];
-
   };
-  stage: ComponentsType,
-  createdBy:User
+  stage: ComponentsType;
+  createdBy: User;
+}
+
+export interface ContentPdfPageProps {
+  headerDetails?: DocumentHeaderDetailsProps;
+  footerDetails?: DocumentDetailFooterProps;
+  aggrementDetails?: string;
+  templateSettings: TemplateType | null;
+  totalPages: number;
+  currPage: number;
+  emailTemplateSettings: EmailTemplate | null;
+  systemSettings: SystemSetting | null;
 }
