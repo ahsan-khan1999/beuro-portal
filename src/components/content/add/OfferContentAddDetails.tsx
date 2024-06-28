@@ -60,7 +60,12 @@ const OfferContentAddDetails = ({
         {pages.length > 0 ? (
           <div className="flex flex-col gap-y-4">
             {pages.map((pageContent, index) => (
-              <OfferContentPdf key={index} offerDescription={pageContent} />
+              <OfferContentPdf
+                key={index}
+                offerDescription={pageContent}
+                currPage={index + 1}
+                totalPages={pages.length}
+              />
             ))}
           </div>
         ) : (

@@ -250,7 +250,7 @@ export function getTextCount(value) {
 }
 
 export const splitContentIntoPages = (content) => {
-  const pageSize = 2400;
+  const pageSize = 2800;
   const pages = [];
   let currentPage = "";
 

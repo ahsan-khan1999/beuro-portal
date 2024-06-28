@@ -294,11 +294,11 @@ export const Footer = ({
         )}
       </div>
 
-      <div className="s self-end">
+      <div className="self-end w-[80px] pb-2">
         <span
           className={`text-sm text-[${
             "#" + emailTemplateSettings?.textColour
-          }] text-sm  font-medium mr-[10px]`}
+          }] text-sm font-medium mr-[10px]`}
           style={{ color: textColor }}
         >
           {translation("pdf.page")}
@@ -306,7 +306,7 @@ export const Footer = ({
         <span
           className={`text-sm text-[${
             "#" + emailTemplateSettings?.textColour
-          }]  font-medium`}
+          }] font-medium`}
           style={{ color: textColor }}
         >
           {currPage}/{totalPages}

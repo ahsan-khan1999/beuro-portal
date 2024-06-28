@@ -32,7 +32,7 @@ export const Container = ({ children, className }: MyComponentProp) => {
 
   return (
     <div
-      className={containerClasses}
+      // className={containerClasses}
       ref={containerRef}
       style={{
         // height: "100vh",
@@ -42,7 +42,7 @@ export const Container = ({ children, className }: MyComponentProp) => {
         display: "flex",
         justifyContent: "center",
         margin: "auto",
-        height: "430px",
+        // height: "500px",
       }}
     >
       {children}
