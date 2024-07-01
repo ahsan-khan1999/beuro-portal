@@ -5,6 +5,7 @@ import React from "react";
 import { OfferContentPdf } from "./pdf-preview/offer-content-pdf";
 import { splitContentIntoPages } from "@/utils/functions";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import { Container } from "@/components/pdf/container";
 
 const OfferContentAddDetails = ({
   onHandleNext,
@@ -58,16 +59,18 @@ const OfferContentAddDetails = ({
           {translate("common.offer_PDF_PREVIEW")}
         </h1>
         {pages.length > 0 ? (
-          <div className="flex flex-col gap-y-4">
-            {pages.map((pageContent, index) => (
-              <OfferContentPdf
-                key={index}
-                offerDescription={pageContent}
-                currPage={index + 1}
-                totalPages={pages.length}
-              />
-            ))}
-          </div>
+          <Container>
+            <div className="flex flex-col gap-y-10 p-[6px] mt-5 rounded-lg bg-[#EDF4FF]">
+              {pages.map((pageContent, index) => (
+                <OfferContentPdf
+                  key={index}
+                  offerDescription={pageContent}
+                  currPage={index + 1}
+                  totalPages={pages.length}
+                />
+              ))}
+            </div>
+          </Container>
         ) : (
           <NoDataEmptyState
             className="w-fit"

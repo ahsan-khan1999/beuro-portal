@@ -250,7 +250,7 @@ export function getTextCount(value) {
 }
 
 export const splitContentIntoPages = (content) => {
-  const pageSize = 2800;
+  const pageSize = 3108;
   const pages = [];
   let currentPage = "";
 
@@ -262,7 +262,6 @@ export const splitContentIntoPages = (content) => {
     }
   }
 
-  // Add the last page if any content remains
   if (currentPage !== "") {
     pages.push(currentPage);
   }

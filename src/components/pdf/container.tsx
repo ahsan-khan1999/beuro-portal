@@ -28,11 +28,11 @@ export const Container = ({ children, className }: MyComponentProp) => {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
-  const containerClasses = combineClasses("h-screen", className);
+  const containerClasses = combineClasses("h-fit", className);
 
   return (
     <div
-      // className={containerClasses}
+      className={containerClasses}
       ref={containerRef}
       style={{
         // height: "100vh",

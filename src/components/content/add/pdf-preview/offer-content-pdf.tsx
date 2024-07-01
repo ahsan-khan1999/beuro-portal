@@ -1,4 +1,3 @@
-import { Container } from "@/components/pdf/container";
 import { ContentPdfPage } from "./pageDetails/content-pdf-page";
 import { useOfferContentPdf } from "@/hooks/content/useOfferContentPdf";
 
@@ -19,19 +18,15 @@ export const OfferContentPdf = ({
   } = useOfferContentPdf();
 
   return (
-    <Container className="h-fit">
-      <div className="p-2 rounded-lg">
-        <ContentPdfPage
-          headerDetails={contentData?.headerDetails}
-          footerDetails={contentData?.footerDetails}
-          aggrementDetails={offerDescription}
-          templateSettings={templateSettings}
-          totalPages={totalPages}
-          currPage={currPage}
-          emailTemplateSettings={emailTemplateSettings}
-          systemSettings={systemSetting}
-        />
-      </div>
-    </Container>
+    <ContentPdfPage
+      headerDetails={contentData?.headerDetails}
+      footerDetails={contentData?.footerDetails}
+      aggrementDetails={offerDescription}
+      templateSettings={templateSettings}
+      totalPages={totalPages}
+      currPage={currPage}
+      emailTemplateSettings={emailTemplateSettings}
+      systemSettings={systemSetting}
+    />
   );
 };
