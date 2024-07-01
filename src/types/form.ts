@@ -214,6 +214,7 @@ export interface ProfileUploadFieldProps
   control?: Control<FieldValues>;
   iconClasses?: string;
   disabled?: boolean;
+  isMailSetting?: boolean;
 }
 
 // interface for the Image upload

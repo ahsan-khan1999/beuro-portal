@@ -44,7 +44,7 @@ const PieChart = ({ data }) => {
         {translate("dashboard_detail.lead_source")}
       </h3>
 
-      <div className="flex justify-center items-center h-[340px] py-5 border-t border-[#000] border-opacity-10">
+      <div className="border-t border-[#000] border-opacity-10 w-full">
         {!data ||
         !data.datasets ||
         data.datasets.length === 0 ||
@@ -54,8 +54,10 @@ const PieChart = ({ data }) => {
             containerClassName="py-0"
           />
         ) : (
-          <div className="w-fit h-fit">
-            <canvas className="asd" id="myPieChart" />
+          <div className="flex justify-center items-center h-[340px] py-5">
+            <div className="w-fit h-fit">
+              <canvas className="asd" id="myPieChart" />
+            </div>
           </div>
         )}
       </div>

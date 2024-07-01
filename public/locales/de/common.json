@@ -1159,6 +1159,8 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "svg_upload_not_allowed": "SVG-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
+    "img_upload_error_message": "WebP-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
     "offer_PDF_PREVIEW": "Angebot PDF-Vorschau",
     "confirmation_PDF_PREVIEW": "Bestätigungs-PDF-Vorschau",
     "invoice_PDF_PREVIEW": "Rechnungs-PDF-Vorschau",

@@ -49,6 +49,7 @@ const OfferEditImages = ({
     "flex flex-col max-h-[250px] w-full",
     className
   );
+
   return (
     <LeadsDetailImgLayout>
       <div className={containerClasses}>
@@ -72,16 +73,30 @@ const OfferEditImages = ({
 
         {images?.images && images?.images?.length > 0 ? (
           <div className="grid max-h-[400px] overflow-y-scroll grid-cols-2 gap-[14px] p-3 border-t-4 border-t-[#4A13E7]">
-            {images?.images?.map((item, index) => (
-              <Image
-                src={item}
-                key={index}
-                alt="leads_images"
-                className="rounded-lg"
-                height={106}
-                width={106}
-              />
-            ))}
+            {images?.images?.map((item, index) => {
+              const isSvg = item?.endsWith(".svg");
+              return (
+                <>
+                  {isSvg ? (
+                    <object
+                      data={item}
+                      width={106}
+                      height={106}
+                      style={{ height: "106px", width: "106px" }}
+                    />
+                  ) : (
+                    <Image
+                      src={item}
+                      key={index}
+                      alt="leads_images"
+                      className="rounded-lg"
+                      height={106}
+                      width={106}
+                    />
+                  )}
+                </>
+              );
+            })}
           </div>
         ) : (
           <div className="pb-4 max-h-[400px] overflow-y-scroll border-t-4 border-t-[#4A13E7]">

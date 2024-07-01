@@ -50,7 +50,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.profileUploadField,
               iconClasses: "right-3 bottom-3",
-              className: "!h-[241px] !w-[241px] !rounded-full",
+              className:
+                "!h-[241px] !w-[241px] !rounded-full border border-[#BFBFBF]",
               id: "company.logo",
               name: "company.logo",
               control,

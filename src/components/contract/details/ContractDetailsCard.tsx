@@ -328,7 +328,7 @@ const ContractDetailsCard = ({
             </span>
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex gap-x-10">
             <div
               className="flex items-center gap-[11px] cursor-pointer"
               onClick={(e) =>
@@ -351,7 +351,7 @@ const ContractDetailsCard = ({
                 }
               />
             </div>
-            <div className="flex items-center gap-[11px] ">
+            <div className="flex items-center gap-3">
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.images")}:
               </span>

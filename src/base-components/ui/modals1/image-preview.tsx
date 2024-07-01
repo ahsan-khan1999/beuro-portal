@@ -31,18 +31,37 @@ export const ImagePreview = ({ images }: { images: string[] }) => {
   return (
     <div style={{ position: "relative" }}>
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px] max-h-[350px] overflow-y-scroll">
-        {images?.map((item, index) => (
-          <Image
-            src={item}
-            key={index}
-            width={100}
-            height={100}
-            alt="Uploaded Preview"
-            style={{ height: "100px", width: "100px" }}
-            onClick={() => toggleZoom(item, index)}
-            className="cursor-pointer"
-          />
-        ))}
+        {images?.map((item, index) => {
+          const isSvg = item?.endsWith(".svg");
+          return (
+            <>
+              {isSvg ? (
+                <div
+                  onClick={() => toggleZoom(item, index)}
+                  style={{ display: "inline-block", cursor: "pointer" }}
+                >
+                  <object
+                    data={item}
+                    width={100}
+                    height={100}
+                    style={{ height: "100px", width: "100px" }}
+                  />
+                </div>
+              ) : (
+                <Image
+                  src={item}
+                  key={index}
+                  width={100}
+                  height={100}
+                  alt="Uploaded Preview"
+                  style={{ height: "100px", width: "100px" }}
+                  onClick={() => toggleZoom(item, index)}
+                  className="cursor-pointer"
+                />
+              )}
+            </>
+          );
+        })}
       </div>
 
       {isZoomed.zoomed && (

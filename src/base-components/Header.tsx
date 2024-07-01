@@ -15,6 +15,7 @@ import { readSystemSettings } from "@/api/slices/settingSlice/settings";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 
 const Header = () => {
+  const { t: translate } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { systemSettings } = useAppSelector((state) => state.settings);
 
@@ -36,20 +37,32 @@ const Header = () => {
     }
   }, [user]);
 
-  const { t: translate } = useTranslation();
+  const isSVG = user?.company?.logo?.endsWith(".svg");
 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
         <div className="flex items-center">
           {user?.company?.logo && (
-            <Image
-              src={user?.company?.logo}
-              alt="Company Logo"
-              className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-              height={50}
-              width={150}
-            />
+            <>
+              {isSVG ? (
+                <object
+                  data={user?.company?.logo}
+                  width="150"
+                  height="50"
+                  type="image/svg+xml"
+                  className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+                ></object>
+              ) : (
+                <Image
+                  src={user?.company?.logo}
+                  alt="Company Logo"
+                  className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+                  height={50}
+                  width={150}
+                />
+              )}
+            </>
           )}
 
           <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">

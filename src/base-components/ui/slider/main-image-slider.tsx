@@ -16,6 +16,8 @@ export const MainImageSlider = ({
     containerClassName
   );
 
+  const isSvg = imageSrc.endsWith(".svg");
+
   return (
     <div className={silderContainerClasses}>
       <IconOnlyButton
@@ -30,21 +32,24 @@ export const MainImageSlider = ({
           />
         }
       />
-      <div
-      
-      >
-        <Image
-          src={imageSrc}
-          alt="main image"
-          // fill={true}
-          id="mainImage"
-          className=" flex justify-center items-center align-middle mx-auto my-auto bg-black rounded-lg"
-          objectFit='contain'
-          layout='fill'
-
-
-          
-        />
+      <div>
+        {isSvg ? (
+          <object
+            data={imageSrc}
+            height={"100%"}
+            width={"100%"}
+            className=" bg-black rounded-lg"
+          />
+        ) : (
+          <Image
+            src={imageSrc}
+            alt="main image"
+            id="mainImage"
+            className="flex justify-center items-center align-middle mx-auto my-auto bg-black rounded-lg"
+            objectFit="contain"
+            layout="fill"
+          />
+        )}
       </div>
       <IconOnlyButton
         onClick={goToNext}
