@@ -36,17 +36,16 @@ export const ImagePreview = ({ images }: { images: string[] }) => {
           return (
             <>
               {isSvg ? (
-                <div
-                  onClick={() => toggleZoom(item, index)}
-                  style={{ display: "inline-block", cursor: "pointer" }}
-                >
-                  <object
-                    data={item}
-                    width={100}
-                    height={100}
-                    style={{ height: "100px", width: "100px" }}
-                  />
-                </div>
+                <object
+                  width={100}
+                  data={item}
+                  height={100}
+                  style={{
+                    height: "100px",
+                    width: "100px",
+                    cursor: "not-allowed",
+                  }}
+                />
               ) : (
                 <Image
                   src={item}

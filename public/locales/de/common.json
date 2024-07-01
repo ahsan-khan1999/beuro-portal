@@ -1159,6 +1159,8 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "doc_upload_error_message": "Bitte laden Sie eine Dokumentendatei hoch.",
+    "video_upload_error_message": "Bitte laden Sie eine Videodatei hoch.",
     "svg_upload_not_allowed": "SVG-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
     "img_upload_error_message": "WebP-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
     "offer_PDF_PREVIEW": "Angebot PDF-Vorschau",

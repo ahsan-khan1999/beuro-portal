@@ -1,11 +1,21 @@
 import Image from "next/image";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
-import { useRouter } from "next/router";
 import { uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
+import { useState } from "react";
+
+export interface AttachFieldProps {
+  id: string;
+  text?: string;
+  fileSupported?: string;
+  isOpenedFile?: boolean;
+  attachements?: Attachement[];
+  setAttachements?: (attachement?: Attachement[]) => void;
+  isAttachement?: boolean;
+}
 
 export const AttachementField = ({
   id,
@@ -15,49 +25,95 @@ export const AttachementField = ({
   attachements,
   setAttachements,
   isAttachement,
-}: {
-  id: string;
-  text?: string;
-  fileSupported?: string;
-  isOpenedFile?: boolean;
-  attachements?: Attachement[];
-  setAttachements?: (attachement?: Attachement[]) => void;
-  isAttachement?: boolean;
-}) => {
+}: AttachFieldProps) => {
   const formdata = new FormData();
   const dispatch = useAppDispatch();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const validateAndUploadFiles = async (files: FileList) => {
+    const formdata = new FormData();
+    const documentTypes = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "text/plain",
+    ];
+    let validFiles = [];
+
+    for (let item of files) {
+      if (documentTypes.includes(item.type)) {
+        formdata.append("files", item);
+        validFiles.push(item);
+      } else {
+        setErrorMessage(translate("common.doc_upload_error_message"));
+      }
+    }
+
+    if (validFiles.length > 0) {
+      const response = await dispatch(uploadMultiFileToFirebase(formdata));
+      let newAttachement = (attachements && [...attachements]) || [];
+      if (response?.payload) {
+        response?.payload?.forEach((element: any) => {
+          newAttachement.push({
+            name: getFileNameFromUrl(element),
+            value: element,
+          });
+        });
+        setAttachements && setAttachements(newAttachement);
+        setErrorMessage(""); // Clear error message if files are successfully uploaded
+      }
+    }
+  };
+
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
     e.preventDefault();
 
-    let file: any = [];
+    let files: FileList | null = null;
 
     if (e instanceof DragEvent && e.dataTransfer) {
-      for (let item of e.dataTransfer.files) {
-        formdata.append("files", item);
-      }
-      file.push(e.dataTransfer.files);
+      files = e.dataTransfer.files;
     } else if (e.target instanceof HTMLInputElement && e.target.files) {
-      // file = e.target.files ? e.target.files[0] : null;
-      for (let item of e.target.files) {
-        formdata.append("files", item);
-      }
-      file.push(e.target.files);
+      files = e.target.files;
     }
 
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
-        });
-      });
-      setAttachements && setAttachements(newAttachement);
+    if (files) {
+      await validateAndUploadFiles(files);
     }
   };
+
+  // const handleFileInput = async (
+  //   e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
+  // ) => {
+  //   e.preventDefault();
+
+  //   let file: any = [];
+
+  //   if (e instanceof DragEvent && e.dataTransfer) {
+  //     for (let item of e.dataTransfer.files) {
+  //       formdata.append("files", item);
+  //     }
+  //     file.push(e.dataTransfer.files);
+  //   } else if (e.target instanceof HTMLInputElement && e.target.files) {
+  //     for (let item of e.target.files) {
+  //       formdata.append("files", item);
+  //     }
+  //     file.push(e.target.files);
+  //   }
+
+  //   const response = await dispatch(uploadMultiFileToFirebase(formdata));
+  //   let newAttachement = (attachements && [...attachements]) || [];
+  //   if (response?.payload) {
+  //     response?.payload?.forEach((element: any) => {
+  //       newAttachement.push({
+  //         name: getFileNameFromUrl(element),
+  //         value: element,
+  //       });
+  //     });
+  //     setAttachements && setAttachements(newAttachement);
+  //   }
+  // };
 
   const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
@@ -133,6 +189,10 @@ export const AttachementField = ({
           onChange={handleFileInput}
           multiple
         />
+
+        {errorMessage && (
+          <p className="text-red text-sm mt-2">{errorMessage}</p>
+        )}
       </label>
 
       <div className="col-span-2 mt-5">

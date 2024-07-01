@@ -1167,8 +1167,10 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
-    "svg_upload_not_allowed":"SVG files are not allowed. Please upload a different file format.",
-    "img_upload_error_message":"WebP files are not allowed. Please upload a different file format.",
+    "doc_upload_error_message": "Please upload a document file.",
+    "video_upload_error_message": "Please upload a video file.",
+    "svg_upload_not_allowed": "SVG files are not allowed. Please upload a different file format.",
+    "img_upload_error_message": "WebP files are not allowed. Please upload a different file format.",
     "offer_PDF_PREVIEW": "Offer PDF Preview",
     "confirmation_PDF_PREVIEW": "Confirmation PDF Preview",
     "invoice_PDF_PREVIEW": "Invoice PDF Preview",

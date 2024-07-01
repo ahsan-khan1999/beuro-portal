@@ -38,7 +38,7 @@ export const MainImageSlider = ({
             data={imageSrc}
             height={"100%"}
             width={"100%"}
-            className=" bg-black rounded-lg"
+            className={`bg-black rounded-lg`}
           />
         ) : (
           <Image
