@@ -6,6 +6,16 @@ import { OfferContentPdf } from "./pdf-preview/offer-content-pdf";
 import { splitContentIntoPages } from "@/utils/functions";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { Container } from "@/components/pdf/container";
+import { AdditionalDetails } from "@/components/reactPdf/additional-details";
+import { Document, Page } from "@react-pdf/renderer";
+import dynamic from "next/dynamic";
+
+const ContentPdf = dynamic(
+  () => import("@/components/reactPdf/content-pdf-preview"),
+  {
+    ssr: false,
+  }
+);
 
 const OfferContentAddDetails = ({
   onHandleNext,
@@ -54,11 +64,24 @@ const OfferContentAddDetails = ({
         </div>
       </FormCard>
 
-      <div className="bg-white rounded-lg w-[340px] h-fit p-[6px] hidden xlg:block">
+      <div className="bg-white rounded-lg w-[500px] h-fit p-[6px] hidden xlg:block">
         <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-2 pb-2 border-b-2 border-b-primary">
           {translate("common.offer_PDF_PREVIEW")}
         </h1>
-        {pages.length > 0 ? (
+        {offerDescriptionCount ? (
+          <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
+            <OfferContentPdf description={offerDescriptionCount} />
+          </div>
+        ) : (
+          <NoDataEmptyState
+            className="w-fit"
+            imgClassName="w-14 h-14"
+            textClassName="text-base"
+            containerClassName="py-3"
+          />
+        )}
+
+        {/* {pages.length > 0 ? (
           <Container>
             <div className="flex flex-col gap-y-10 p-[6px] mt-5 rounded-lg bg-[#EDF4FF]">
               {pages.map((pageContent, index) => (
@@ -78,10 +101,17 @@ const OfferContentAddDetails = ({
             textClassName="text-base"
             containerClassName="py-3"
           />
-        )}
+        )} */}
       </div>
     </div>
   );
 };
 
 export default OfferContentAddDetails;
+
+// const styles = StyleSheet.create({
+//   body: {
+//     fontFamily: "Poppins",
+//     paddingBottom: 100,
+//   },
+// });

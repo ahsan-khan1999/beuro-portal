@@ -1,32 +1,40 @@
-import { ContentPdfPage } from "./pageDetails/content-pdf-page";
+import dynamic from "next/dynamic";
 import { useOfferContentPdf } from "@/hooks/content/useOfferContentPdf";
 
-export const OfferContentPdf = ({
-  offerDescription,
-  currPage,
-  totalPages,
-}: {
-  offerDescription: string;
-  totalPages?: number;
-  currPage?: number;
-}) => {
+const ContentPdf = dynamic(
+  () => import("@/components/reactPdf/content-pdf-preview"),
+  {
+    ssr: false,
+  }
+);
+
+export const OfferContentPdf = ({ description }: { description: string }) => {
   const {
     contentData,
     emailTemplateSettings,
     systemSetting,
     templateSettings,
+    currentLanguage,
   } = useOfferContentPdf();
 
   return (
-    <ContentPdfPage
-      headerDetails={contentData?.headerDetails}
-      footerDetails={contentData?.footerDetails}
-      aggrementDetails={offerDescription}
-      templateSettings={templateSettings}
-      totalPages={totalPages}
-      currPage={currPage}
+    // <ContentPdfPage
+    //   headerDetails={contentData?.headerDetails}
+    //   footerDetails={contentData?.footerDetails}
+    //   aggrementDetails={offerDescription}
+    //   templateSettings={templateSettings}
+    //   totalPages={totalPages}
+    //   currPage={currPage}
+    //   emailTemplateSettings={emailTemplateSettings}
+    //   systemSettings={systemSetting}
+    // />
+
+    <ContentPdf
+      data={contentData}
       emailTemplateSettings={emailTemplateSettings}
-      systemSettings={systemSetting}
+      templateSettings={templateSettings}
+      description={description}
+      language={currentLanguage}
     />
   );
 };

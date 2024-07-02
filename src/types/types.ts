@@ -1120,6 +1120,8 @@ export interface ContentPdfPreviewerProps {
   data?: ContentHeaderProps;
   templateSettings: TemplateType | null;
   emailTemplateSettings: EmailTemplate | null;
+  description?: string;
+  language?: string | undefined;
 }
 
 export interface PdfProps<T = EmailHeaderProps> {

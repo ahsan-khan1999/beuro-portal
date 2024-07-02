@@ -3,7 +3,6 @@ import React from "react";
 import ContentCard from "../ContentCard";
 import ContentDetailsData from "./ContentDetailsData";
 import useContentDetail from "@/hooks/content/useContentDetail";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const ContentDetails = () => {
   const { contentDetails, contentDeleteHandler, renderModal, loading } =

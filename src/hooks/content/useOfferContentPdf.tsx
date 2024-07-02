@@ -12,6 +12,7 @@ import { ContentHeaderProps, TemplateType } from "@/types";
 
 export const useOfferContentPdf = () => {
   const [contentData, setContentData] = useState<ContentHeaderProps>();
+  const { currentLanguage } = useAppSelector((state) => state.global);
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
@@ -84,10 +85,10 @@ export const useOfferContentPdf = () => {
       // if (contentData?.payload) {
       let formatData: ContentHeaderProps = {
         headerDetails: {
-          offerNo: "",
+          offerNo: "A-2500",
           companyName: "",
-          offerDate: "",
-          createdBy: "",
+          offerDate: "25. Juni 2024",
+          createdBy: "Abdul rahman",
           logo: emailTemplate?.payload?.logo,
           emailTemplateSettings: emailTemplate?.payload,
           isReverseLogo: template.payload.Template?.order,
@@ -139,5 +140,6 @@ export const useOfferContentPdf = () => {
     loading,
     systemSetting,
     contentDetails,
+    currentLanguage,
   };
 };

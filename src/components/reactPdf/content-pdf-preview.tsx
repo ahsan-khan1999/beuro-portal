@@ -3,6 +3,7 @@ import { Document, Font, PDFViewer, Page, View } from "@react-pdf/renderer";
 import { AdditionalDetails } from "./additional-details";
 import { Header } from "./header";
 import { Footer } from "./footer";
+import { AggrementSignature } from "./aggrement-signature";
 
 Font.register({
   family: "Poppins",
@@ -79,21 +80,26 @@ const ContentPdfPreview = ({
   data,
   emailTemplateSettings,
   templateSettings,
+  description,
+  language,
 }: ContentPdfPreviewerProps) => {
   const headerDetails = data?.headerDetails;
-  const aggrementDetails = data?.aggrementDetails;
   const footerDetails = data?.footerDetails;
+  const isOfferPdf = true;
 
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
       <Document>
-        <Page style={{ fontFamily: "Poppins" }}>
+        <Page style={{ fontFamily: "Poppins", paddingBottom: 100 }}>
           <View style={{ marginBottom: 10 }} fixed>
-            <Header {...headerDetails} />
+            <Header {...headerDetails} language={language} />
           </View>
-
-          <AdditionalDetails description={aggrementDetails} />
-
+          <View style={{ paddingBottom: isOfferPdf ? 110 : 0 }}>
+            <AdditionalDetails description={description} />
+          </View>
+          {isOfferPdf && (
+            <AggrementSignature showContractSign={true} language={language} />
+          )}
           <Footer
             {...{
               documentDetails: footerDetails,
