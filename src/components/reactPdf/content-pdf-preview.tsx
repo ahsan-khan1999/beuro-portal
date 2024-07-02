@@ -82,10 +82,10 @@ const ContentPdfPreview = ({
   templateSettings,
   description,
   language,
+  isOfferPdf,
 }: ContentPdfPreviewerProps) => {
   const headerDetails = data?.headerDetails;
   const footerDetails = data?.footerDetails;
-  const isOfferPdf = true;
 
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>

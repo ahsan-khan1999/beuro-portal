@@ -26,6 +26,7 @@ export const useConfirmationContentPdf = () => {
   const {
     auth: { user },
     content: { loading, contentDetails },
+    global: { currentLanguage },
   } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
@@ -85,11 +86,12 @@ export const useConfirmationContentPdf = () => {
       if (contentData?.payload) {
         let formatData: ContentHeaderProps = {
           headerDetails: {
-            offerNo: "",
+            offerNo: "V-2509",
             companyName: "",
-            offerDate: "",
-            createdBy: "",
+            offerDate: "26. June 2024",
+            createdBy: "Abdul rahman",
             logo: emailTemplate?.payload?.logo,
+            fileType: "contract",
             emailTemplateSettings: emailTemplate?.payload,
             isReverseLogo: template.payload.Template?.order,
           },
@@ -140,5 +142,6 @@ export const useConfirmationContentPdf = () => {
     loading,
     systemSetting,
     contentDetails,
+    currentLanguage,
   };
 };

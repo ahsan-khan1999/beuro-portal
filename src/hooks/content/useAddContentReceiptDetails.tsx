@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
-import { updateQuery } from "@/utils/update-query";
 import { ComponentsType } from "@/enums/content";
 
 export const useAddContentReceiptDetails = (

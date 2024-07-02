@@ -3,19 +3,7 @@ import { useAddOfferContentDetails } from "@/hooks/content/useAddOfferContent";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { OfferContentPdf } from "./pdf-preview/offer-content-pdf";
-import { splitContentIntoPages } from "@/utils/functions";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import { Container } from "@/components/pdf/container";
-import { AdditionalDetails } from "@/components/reactPdf/additional-details";
-import { Document, Page } from "@react-pdf/renderer";
-import dynamic from "next/dynamic";
-
-const ContentPdf = dynamic(
-  () => import("@/components/reactPdf/content-pdf-preview"),
-  {
-    ssr: false,
-  }
-);
 
 const OfferContentAddDetails = ({
   onHandleNext,
@@ -35,8 +23,6 @@ const OfferContentAddDetails = ({
     translate,
     offerDescriptionCount,
   } = useAddOfferContentDetails(onHandleNext);
-
-  const pages = splitContentIntoPages(offerDescriptionCount);
 
   return (
     <div className="flex gap-x-5">
@@ -80,38 +66,9 @@ const OfferContentAddDetails = ({
             containerClassName="py-3"
           />
         )}
-
-        {/* {pages.length > 0 ? (
-          <Container>
-            <div className="flex flex-col gap-y-10 p-[6px] mt-5 rounded-lg bg-[#EDF4FF]">
-              {pages.map((pageContent, index) => (
-                <OfferContentPdf
-                  key={index}
-                  offerDescription={pageContent}
-                  currPage={index + 1}
-                  totalPages={pages.length}
-                />
-              ))}
-            </div>
-          </Container>
-        ) : (
-          <NoDataEmptyState
-            className="w-fit"
-            imgClassName="w-14 h-14"
-            textClassName="text-base"
-            containerClassName="py-3"
-          />
-        )} */}
       </div>
     </div>
   );
 };
 
 export default OfferContentAddDetails;
-
-// const styles = StyleSheet.create({
-//   body: {
-//     fontFamily: "Poppins",
-//     paddingBottom: 100,
-//   },
-// });

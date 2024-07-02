@@ -1118,6 +1118,7 @@ export interface ContentHeaderProps {
 
 export interface ContentPdfPreviewerProps {
   data?: ContentHeaderProps;
+  isOfferPdf?: boolean;
   templateSettings: TemplateType | null;
   emailTemplateSettings: EmailTemplate | null;
   description?: string;

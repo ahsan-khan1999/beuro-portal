@@ -4,7 +4,6 @@ import {
   readEmailSettings,
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EmailTemplate } from "@/types/settings";
@@ -12,7 +11,6 @@ import { ContentHeaderProps, TemplateType } from "@/types";
 
 export const useOfferContentPdf = () => {
   const [contentData, setContentData] = useState<ContentHeaderProps>();
-  const { currentLanguage } = useAppSelector((state) => state.global);
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
@@ -26,11 +24,10 @@ export const useOfferContentPdf = () => {
   const {
     auth: { user },
     content: { loading, contentDetails },
+    global: { currentLanguage },
   } = useAppSelector((state) => state);
 
-  const router = useRouter();
   const dispatch = useAppDispatch();
-  const { contentID } = router.query;
 
   useEffect(() => {
     (async () => {

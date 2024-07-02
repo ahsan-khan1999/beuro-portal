@@ -1,9 +1,8 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { useAddContentConfirmationDetails } from "@/hooks/content/useAddContentConfirmationDetails";
 import FormCard from "@/layout/customers/FormCard";
-import React from "react";
 import { ConfirmationContentPdf } from "./pdf-preview/confirmation-content-pdf";
-import { splitContentIntoPages } from "@/utils/functions";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const AddConfirmationContentDetails = ({
@@ -25,8 +24,6 @@ const AddConfirmationContentDetails = ({
     confirmationDescription,
   } = useAddContentConfirmationDetails(onHandleNext, onHandleBack);
 
-  const pages = splitContentIntoPages(confirmationDescription);
-
   return (
     <div className="flex gap-x-5">
       <FormCard>
@@ -46,19 +43,14 @@ const AddConfirmationContentDetails = ({
         </div>
       </FormCard>
 
-      <div className="bg-white rounded-lg w-[340px] h-fit p-[6px] hidden xlg:block">
+      <div className="bg-white rounded-lg w-[500px] h-fit p-[6px] hidden xlg:block">
         <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-3 pb-2 border-b-2 border-b-primary">
           {translate("common.confirmation_PDF_PREVIEW")}
         </h1>
 
-        {pages.length > 0 ? (
-          <div className="flex flex-col gap-y-4">
-            {pages.map((pageContent, index) => (
-              <ConfirmationContentPdf
-                key={index}
-                confirmationDescription={pageContent}
-              />
-            ))}
+        {confirmationDescription ? (
+          <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
+            <ConfirmationContentPdf description={confirmationDescription} />
           </div>
         ) : (
           <NoDataEmptyState

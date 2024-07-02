@@ -3,7 +3,6 @@ import { useAddContentReceiptDetails } from "@/hooks/content/useAddContentReceip
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { ReceiptContentPdf } from "./pdf-preview/receipt-content-pdf";
-import { splitContentIntoPages } from "@/utils/functions";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const AddReceiptContentDetails = ({
@@ -25,8 +24,6 @@ const AddReceiptContentDetails = ({
     receiptDescription,
   } = useAddContentReceiptDetails(onHandleBack, onHandleNext);
 
-  const pages = splitContentIntoPages(receiptDescription);
-
   return (
     <div className="flex gap-x-5">
       <FormCard>
@@ -46,17 +43,14 @@ const AddReceiptContentDetails = ({
           />
         </div>
       </FormCard>
-      <div className="bg-white rounded-lg w-[340px] h-fit p-[6px] hidden xlg:block">
+      <div className="bg-white rounded-lg w-[500px] h-fit p-[6px] hidden xlg:block">
         <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-3 pb-2 border-b-2 border-b-primary">
           {translate("common.receipt_PDF_PREVIEW")}
         </h1>
 
-        {pages.length > 0 ? (
-          <div className="flex flex-col gap-y-4">
-            {" "}
-            {pages.map((pageContent, index) => (
-              <ReceiptContentPdf key={index} receiptDescription={pageContent} />
-            ))}
+        {receiptDescription ? (
+          <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
+            <ReceiptContentPdf description={receiptDescription} />
           </div>
         ) : (
           <NoDataEmptyState

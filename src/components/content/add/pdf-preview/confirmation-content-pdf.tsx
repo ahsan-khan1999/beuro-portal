@@ -1,37 +1,33 @@
-import { Container } from "@/components/pdf/container";
-import { ContentPdfPage } from "./pageDetails/content-pdf-page";
 import { useConfirmationContentPdf } from "@/hooks/content/useConfirmationContentPdf";
+import dynamic from "next/dynamic";
+
+const ContentPdf = dynamic(
+  () => import("@/components/reactPdf/content-pdf-preview"),
+  {
+    ssr: false,
+  }
+);
 
 export const ConfirmationContentPdf = ({
-  confirmationDescription,
+  description,
 }: {
-  confirmationDescription: string;
+  description: string;
 }) => {
   const {
     contentData,
-    contentDetails,
     emailTemplateSettings,
-    loading,
-    systemSetting,
     templateSettings,
+    currentLanguage,
   } = useConfirmationContentPdf();
 
   return (
-    <Container>
-      <div className="flex flex-col items-center bg-[#EDF4FF] p-2 rounded-lg">
-        <div className="flex flex-col gap-y-[30px]">
-          <ContentPdfPage
-            headerDetails={contentData?.headerDetails}
-            footerDetails={contentData?.footerDetails}
-            aggrementDetails={confirmationDescription}
-            templateSettings={templateSettings}
-            totalPages={contentData?.footerDetails?.totalPages}
-            currPage={contentData?.footerDetails?.currPage}
-            emailTemplateSettings={emailTemplateSettings}
-            systemSettings={systemSetting}
-          />
-        </div>
-      </div>
-    </Container>
+    <ContentPdf
+      data={contentData}
+      emailTemplateSettings={emailTemplateSettings}
+      templateSettings={templateSettings}
+      description={description}
+      language={currentLanguage}
+      isOfferPdf={false}
+    />
   );
 };

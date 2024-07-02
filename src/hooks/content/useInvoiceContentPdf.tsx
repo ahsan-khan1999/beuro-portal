@@ -4,7 +4,6 @@ import {
   readEmailSettings,
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EmailTemplate } from "@/types/settings";
@@ -26,12 +25,10 @@ export const useInvoiceContentPdf = () => {
   const {
     auth: { user },
     content: { loading, contentDetails },
+    global: { currentLanguage },
   } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
-
-  const router = useRouter();
-  const { contentID } = router.query;
 
   useEffect(() => {
     (async () => {
@@ -85,11 +82,12 @@ export const useInvoiceContentPdf = () => {
       if (contentData?.payload) {
         let formatData: ContentHeaderProps = {
           headerDetails: {
-            offerNo: "",
+            offerNo: "R-2508",
             companyName: "",
-            offerDate: "",
-            createdBy: "",
+            offerDate: "26. June 2024",
+            createdBy: "Abdul rahman",
             logo: emailTemplate?.payload?.logo,
+            fileType: "invoice",
             emailTemplateSettings: emailTemplate?.payload,
             isReverseLogo: template.payload.Template?.order,
           },
@@ -140,5 +138,6 @@ export const useInvoiceContentPdf = () => {
     loading,
     systemSetting,
     contentDetails,
+    currentLanguage,
   };
 };
