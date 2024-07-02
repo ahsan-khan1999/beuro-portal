@@ -8,12 +8,13 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 
 const useFollowUps = () => {
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,
+    status: FiltersDefaultValues.None,
   });
+  const [clickedIndex, setClickedIndex] = useState(null);
 
   const dispatch = useAppDispatch();
   const { followUp, totalCount, loading } = useAppSelector(
@@ -34,9 +35,13 @@ const useFollowUps = () => {
     setCurrentPage(page);
   };
 
-  const handleFilterChange = (text: FilterType) => {
+  const handleClick = (index: any) => {
+    setClickedIndex(index);
+  };
+
+  const handleFilterChange = (queryFitler: FilterType) => {
     dispatch(
-      readFollowUp({ params: { filter: text, page: 1, size: 10 } })
+      readFollowUp({ params: { filter: queryFitler, page: 1, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.FollowUp);
@@ -100,6 +105,8 @@ const useFollowUps = () => {
     handleFilterChange,
     loading,
     currentPage,
+    clickedIndex,
+    handleClick
   };
 };
 

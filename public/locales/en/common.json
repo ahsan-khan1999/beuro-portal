@@ -1813,7 +1813,7 @@
     }
   },
   "follow_up": {
-    "heading": "Follow Up",
+    "heading": " Today Follow ups",
     "add_button": "Add Follow Up",
     "upcoming_follow_up": "Up coming follow up",
     "view_all": "View all",
@@ -1940,6 +1940,13 @@
       "lead_source": "Lead Source",
       "other_services": "Other Services",
       "Additional_details": "Additional Details"
+    },
+    "view_all_follow_up_filters": {
+      "all": "All",
+      "today": "Today",
+      "pending": "Pending",
+      "overdue": "Overdue",
+      "upcoming": "Upcoming"
     }
   },
   "dashboard_detail": {

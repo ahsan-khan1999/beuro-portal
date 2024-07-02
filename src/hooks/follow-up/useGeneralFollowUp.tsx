@@ -26,6 +26,15 @@ import { getUser } from "@/utils/auth.util";
 const useGeneralFollowUp = () => {
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const handleMouseEnter = (index: any) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
   const { followUp, followUpDetails, loading } = useAppSelector(
     (state) => state.followUp
   );
@@ -201,6 +210,9 @@ const useGeneralFollowUp = () => {
     followUpDetails,
     handleDeleteFollowUp,
     translate,
+    hoveredIndex,
+    handleMouseEnter,
+    handleMouseLeave,
   };
 };
 

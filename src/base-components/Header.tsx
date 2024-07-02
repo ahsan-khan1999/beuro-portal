@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import createOfferIcon from "@/assets/svgs/create-offer.svg";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import Image from "next/image";
 import FollowUpDropDown from "@/components/FollowUpDropDown";
@@ -13,11 +12,13 @@ import { useTranslation } from "next-i18next";
 import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
+import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 
 const Header = () => {
   const { t: translate } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { systemSettings } = useAppSelector((state) => state.settings);
+  const { totalCount } = useAppSelector((state) => state.followUp);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -83,12 +84,13 @@ const Header = () => {
       <div className="flex items-center">
         <div className="flex items-center pr-8">
           {user?.role !== "Admin" && (
-            <div className="relative menu mr-6">
-              <Image
+            <div className="relative menu mr-5">
+              {/* <Image
                 src={createOfferIcon}
                 alt="Create Offer Icon"
                 className="cursor-pointer"
-              />
+              /> */}
+              <NotificationIcon count={totalCount} />
               <FollowUpDropDown />
             </div>
           )}

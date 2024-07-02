@@ -1809,7 +1809,7 @@
     }
   },
   "follow_up": {
-    "heading": "Nachverfolgung",
+    "heading": "Heute Follow-ups",
     "add_button": "Nachverfolgung hinzufügen",
     "upcoming_follow_up": "Bevorstehende Nachverfolgung",
     "view_all": "Alle anzeigen",
@@ -1936,6 +1936,13 @@
       "lead_source": "Leadquellen",
       "other_services": "Andere Leistungen",
       "Additional_details": "Zusätzliche Details"
+    },
+    "view_all_follow_up_filters": {
+      "all": "All",
+      "today": "Heute",
+      "pending": "Anhängig",
+      "overdue": "Überfällig",
+      "upcoming": "Demnächst"
     }
   },
   "dashboard_detail": {
