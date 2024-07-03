@@ -251,7 +251,7 @@ export const FollowUpNotificationBar = ({
               <div className="flex justify-center py-4">
                 <button
                   onClick={() => handleFollowUps()}
-                  className=" text-primary w-fit text-sm font-medium"
+                  className="text-primary w-fit text-sm font-medium"
                 >
                   {translate("dashboard_detail.view_all")}
                 </button>

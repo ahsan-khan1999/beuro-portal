@@ -36,10 +36,14 @@ export const useEditReceiptDetails = (onClick: Function) => {
     setError,
     reset,
     trigger,
+    watch,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  const receiptDescription = watch("receiptContent.description");
+
   useMemo(() => {
     if (contentDetails.id) {
       reset({
@@ -49,6 +53,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
       });
     }
   }, [contentDetails.id]);
+
   const fields = EditReceiptContentDetailsFormField(
     register,
     loading,
@@ -60,6 +65,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
     setAttachements,
     contentDetails
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
@@ -79,6 +85,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
     );
     if (res?.payload) onClick(3, ComponentsType.receiptContent);
   };
+
   return {
     fields,
     onSubmit,
@@ -87,5 +94,6 @@ export const useEditReceiptDetails = (onClick: Function) => {
     errors,
     error,
     translate,
+    receiptDescription,
   };
 };

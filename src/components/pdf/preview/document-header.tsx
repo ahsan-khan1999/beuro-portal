@@ -16,8 +16,6 @@ export const DocumentHeader = ({
   const headerBackgroundColor = "#" + emailTemplateSettings?.FooterColour;
   const textColor = "#" + emailTemplateSettings?.textColour;
 
-  console.log(emailTemplateSettings?.logo);
-
   return (
     <div
       className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full`}

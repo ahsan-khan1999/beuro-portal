@@ -67,16 +67,28 @@ export const Header = ({
       fixed
     >
       <View style={{ width: "65%" }}>
-        <Image
-          src={logo}
-          style={{
-            width: 182,
-            height: 73,
-            display: "flex",
-            justifyContent: isReverseLogo ? "flex-end" : "flex-start",
-            marginLeft: isReverseLogo ? "auto" : 0,
-          }}
-        />
+        {logo ? (
+          <Image
+            src={logo}
+            style={{
+              width: 182,
+              height: 73,
+              display: "flex",
+              justifyContent: isReverseLogo ? "flex-end" : "flex-start",
+              marginLeft: isReverseLogo ? "auto" : 0,
+            }}
+          />
+        ) : (
+          <View
+            style={{
+              width: 182,
+              height: 73,
+              display: "flex",
+              justifyContent: isReverseLogo ? "flex-end" : "flex-start",
+              marginLeft: isReverseLogo ? "auto" : 0,
+            }}
+          />
+        )}
       </View>
       <View style={{ width: "35%" }}>
         <View

@@ -36,6 +36,13 @@ const ContentDetailsData = () => {
 
   const handleEdit = (index: number, component: ComponentsType) => {
     setData({ index, component });
+    setRenderComponent((prev) => {
+      const updatedData = [...prev];
+      // if (data) {
+      updatedData[index] = lookup[component];
+      // }
+      return updatedData;
+    });
   };
 
   const componentArray = [
@@ -170,7 +177,7 @@ const ContentDetailsData = () => {
 
   const handleScrollToTop = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    const offset = 300;
+    const offset = 320;
     if (element) {
       const elementPosition =
         element.getBoundingClientRect().top + window.scrollY;
@@ -187,20 +194,20 @@ const ContentDetailsData = () => {
     setRenderComponent(componentArray);
   }, [contentDetails]);
 
-  useEffect(() => {
-    setRenderComponent((prev) => {
-      const updatedData = [...prev];
-      if (data) {
-        updatedData[data.index] = lookup[data.component];
-      }
-      return updatedData;
-    });
-  }, [data]);
+  // useEffect(() => {
+  //   setRenderComponent((prev) => {
+  //     const updatedData = [...prev];
+  //     if (data) {
+  //       updatedData[data.index] = lookup[data.component];
+  //     }
+  //     return updatedData;
+  //   });
+  // }, [data]);
 
   return (
     <>
-      <div className="maxSize:fixed mb-5 mt-5 maxSize:mt-0">
-        <div className="flex flex-row flex-wrap maxSize:flex-col maxSize:flex-nowrap gap-[14px] mb-5 maxSize:mb-0">
+      <div className="xMaxSize:fixed mb-5 mt-5 xMaxSize:mt-0">
+        <div className="flex flex-row flex-wrap xMaxSize:flex-col xMaxSize:flex-nowrap gap-[14px] mb-5 xMaxSize:mb-0">
           {tabSection.map((item, index) => (
             <DetailsTab
               key={index}
@@ -217,7 +224,7 @@ const ContentDetailsData = () => {
         </div>
       </div>
       <div className="w-full break-all flex mb-10">
-        <div className="max-w-[280px] w-full hidden maxSize:block"></div>
+        <div className="max-w-[280px] w-full hidden xMaxSize:block"></div>
 
         {loading ? (
           <div className="flex items-center justify-center w-full">

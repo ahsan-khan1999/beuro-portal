@@ -53,7 +53,6 @@ export const useAddContentConfirmationDetails = (
       reset({
         confirmationContent: {
           ...contentDetails?.confirmationContent,
-          // attachments: contentDetails?.confirmationContent?.attachments?.length > 0 && contentDetails?.confirmationContent?.attachments[0] || null
         },
       });
     }

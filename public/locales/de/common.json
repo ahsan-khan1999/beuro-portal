@@ -1159,6 +1159,15 @@
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum"
     },
+    "invoice_cards": {
+      "open_invoice": "Offen Rechnung",
+      "paid_invoice": "Bezahlt Rechnung",
+      "overdue_invoice": "Überfällig Rechnung",
+      "sending_invoice": "Versandbereit Rechnung",
+      "pending_invoice": "Entwurf Rechnung",
+      "invoice_total": "Insgesamt",
+      "page_sum": "Seite Summe"
+    },
     "doc_upload_error_message": "Bitte laden Sie eine Dokumentendatei hoch.",
     "video_upload_error_message": "Bitte laden Sie eine Videodatei hoch.",
     "svg_upload_not_allowed": "SVG-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
@@ -1206,8 +1215,6 @@
     "offer_created": "Angebot erstellt",
     "offer_create": "Angebot erstellt",
     "user_rule": "Unternehmen",
-    "invoice_total": "Insgesamt",
-    "page_sum": "Seite Summe",
     "upload_file": "Datei hochladen",
     "view_docs": "Dokumente anzeigen",
     "share_on_whatsapp": "Auf Whatsapp teilen",

@@ -4,12 +4,10 @@ import {
   readEmailSettings,
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EmailTemplate } from "@/types/settings";
 import { ContentHeaderProps, TemplateType } from "@/types";
-import { readContentDetails } from "@/api/slices/content/contentSlice";
 
 export const useConfirmationContentPdf = () => {
   const [contentData, setContentData] = useState<ContentHeaderProps>();
@@ -31,19 +29,14 @@ export const useConfirmationContentPdf = () => {
 
   const dispatch = useAppDispatch();
 
-  const router = useRouter();
-  const { contentID } = router.query;
-
   useEffect(() => {
     (async () => {
-      // if (contentID) {
-      const [template, emailTemplate, contentData, settings] =
-        await Promise.all([
-          dispatch(getTemplateSettings()),
-          dispatch(readEmailSettings()),
-          dispatch(readContentDetails({ params: { filter: "" } })),
-          dispatch(readSystemSettings()),
-        ]);
+      const [template, emailTemplate, settings] = await Promise.all([
+        dispatch(getTemplateSettings()),
+        dispatch(readEmailSettings()),
+        // dispatch(readContentDetails({ params: { filter: "" } })),
+        dispatch(readSystemSettings()),
+      ]);
       if (template?.payload?.Template) {
         const {
           firstColumn,
@@ -83,54 +76,54 @@ export const useConfirmationContentPdf = () => {
       if (settings?.payload?.Setting) {
         setSystemSettings({ ...settings?.payload?.Setting });
       }
-      if (contentData?.payload) {
-        let formatData: ContentHeaderProps = {
-          headerDetails: {
-            offerNo: "V-2509",
-            companyName: "",
-            offerDate: "26. June 2024",
-            createdBy: "Abdul rahman",
-            logo: emailTemplate?.payload?.logo,
-            fileType: "contract",
-            emailTemplateSettings: emailTemplate?.payload,
-            isReverseLogo: template.payload.Template?.order,
+      // if (contentData) {
+      let formatData: ContentHeaderProps = {
+        headerDetails: {
+          offerNo: "V-2509",
+          companyName: "",
+          offerDate: "26. June 2024",
+          createdBy: "Abdul rahman",
+          logo: emailTemplate?.payload?.logo,
+          fileType: "contract",
+          emailTemplateSettings: emailTemplate?.payload,
+          isReverseLogo: template.payload.Template?.order,
+        },
+        footerDetails: {
+          firstColumn: {
+            companyName: user?.company?.companyName,
+            email: user?.email,
+            phoneNumber: user?.company?.phoneNumber,
+            taxNumber: user?.company?.taxNumber,
+            website: user?.company?.website,
           },
-          footerDetails: {
-            firstColumn: {
-              companyName: user?.company?.companyName,
-              email: user?.email,
-              phoneNumber: user?.company?.phoneNumber,
-              taxNumber: user?.company?.taxNumber,
-              website: user?.company?.website,
+          secondColumn: {
+            address: {
+              postalCode: user?.company?.address?.postalCode,
+              streetNumber: user?.company?.address?.streetNumber,
             },
-            secondColumn: {
-              address: {
-                postalCode: user?.company?.address?.postalCode,
-                streetNumber: user?.company?.address?.streetNumber,
-              },
-              bankDetails: {
-                accountNumber: user?.company?.bankDetails?.accountNumber,
-                bankName: user?.company?.bankDetails?.bankName,
-                ibanNumber: user?.company?.bankDetails?.ibanNumber,
-              },
+            bankDetails: {
+              accountNumber: user?.company?.bankDetails?.accountNumber,
+              bankName: user?.company?.bankDetails?.bankName,
+              ibanNumber: user?.company?.bankDetails?.ibanNumber,
             },
-            thirdColumn: {
-              row1: "Standorte",
-              row2: "bern-Solothurn",
-              row3: "Aargau-Luzern",
-              row4: "Basel-Zürich",
-              row5: "",
-            },
-            fourthColumn: {},
-            columnSettings: null,
-            currPage: 1,
-            totalPages: 10,
           },
-          aggrementDetails: contentDetails?.confirmationContent?.description,
-        };
+          thirdColumn: {
+            row1: "Standorte",
+            row2: "bern-Solothurn",
+            row3: "Aargau-Luzern",
+            row4: "Basel-Zürich",
+            row5: "",
+          },
+          fourthColumn: {},
+          columnSettings: null,
+          currPage: 1,
+          totalPages: 10,
+        },
+        aggrementDetails: contentDetails?.confirmationContent?.description,
+      };
 
-        setContentData(formatData);
-      }
+      setContentData(formatData);
+      // }
       // }
     })();
   }, []);
