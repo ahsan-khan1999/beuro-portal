@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { MyComponentProp } from "@/types";
+import { combineClasses } from "@/utils/utility";
 
-export const Container = ({ children }: MyComponentProp) => {
+export const Container = ({ children, className }: MyComponentProp) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const updateScale = () => {
@@ -27,17 +28,21 @@ export const Container = ({ children }: MyComponentProp) => {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
+  const containerClasses = combineClasses("h-fit", className);
+
   return (
     <div
+      className={containerClasses}
       ref={containerRef}
       style={{
-        height: "100vh",
+        // height: "100vh",
         transformOrigin: "top left",
         minWidth: "1160px",
         maxWidth: "1200px",
         display: "flex",
         justifyContent: "center",
         margin: "auto",
+        // height: "500px",
       }}
     >
       {children}

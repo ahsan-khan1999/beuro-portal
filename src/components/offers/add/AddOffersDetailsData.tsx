@@ -107,13 +107,10 @@ const EditOffersDetailsData = () => {
   };
 
   const route = () => {
-    router.push(
-      {
-        pathname: `/offers/pdf-preview`,
-        query: { status: "None", offerID: offerDetails?.id, isMail: true },
-      }
-      // `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
-    );
+    router.push({
+      pathname: `/offers/pdf-preview`,
+      query: { status: "None", offerID: offerDetails?.id, isMail: true },
+    });
     onClose();
   };
 
@@ -213,7 +210,7 @@ const EditOffersDetailsData = () => {
   return (
     <>
       <div className="xLarge:fixed mb-5 mt-[40px]">
-        <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full">
+        <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
           {tabSection.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
@@ -230,7 +227,7 @@ const EditOffersDetailsData = () => {
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[330px] w-full hidden xLarge:block"></div>
+        <div className="max-w-[320px] w-full hidden xLarge:block"></div>
 
         <div className="w-full xLarge:max-w-[80%] my-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}

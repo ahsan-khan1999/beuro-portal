@@ -3,9 +3,7 @@ import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "./ContentDetailsData";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
-import { Button } from "@/base-components/ui/button/button";
 import { useRouter } from "next/router";
-import { ContentPDFComponents } from "@/enums/content";
 
 const ReceiptContentDetails = ({
   contentDetail,

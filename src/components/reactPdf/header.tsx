@@ -1,6 +1,6 @@
 import { DocumentHeaderDetailsProps } from "@/types";
 import { HeaderLabel, HeaderLabelNr } from "@/utils/static";
-import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
+import { pdfDateFormat } from "@/utils/utility";
 import { View, Text, Image } from "@react-pdf/renderer";
 
 export const Header = ({
@@ -67,16 +67,28 @@ export const Header = ({
       fixed
     >
       <View style={{ width: "65%" }}>
-        <Image
-          src={logo}
-          style={{
-            width: 182,
-            height: 73,
-            display: "flex",
-            justifyContent: isReverseLogo ? "flex-end" : "flex-start",
-            marginLeft: isReverseLogo ? "auto" : 0,
-          }}
-        />
+        {logo ? (
+          <Image
+            src={logo}
+            style={{
+              width: 182,
+              height: 73,
+              display: "flex",
+              justifyContent: isReverseLogo ? "flex-end" : "flex-start",
+              marginLeft: isReverseLogo ? "auto" : 0,
+            }}
+          />
+        ) : (
+          <View
+            style={{
+              width: 182,
+              height: 73,
+              display: "flex",
+              justifyContent: isReverseLogo ? "flex-end" : "flex-start",
+              marginLeft: isReverseLogo ? "auto" : 0,
+            }}
+          />
+        )}
       </View>
       <View style={{ width: "35%" }}>
         <View
@@ -143,7 +155,7 @@ export const Header = ({
               fontStyle: "medium",
             }}
           >
-            {pdfDateFormat(offerDate || "", "de")}
+            {pdfDateFormat(offerDate || "", language || "de")}
           </Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>

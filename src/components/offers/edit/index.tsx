@@ -99,8 +99,6 @@ const EditOffersDetails = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  // const { handleImagesUpload } = useOffers();
-  // const handleImagesUpload = () => {};
   const router = useRouter();
   let tab: EditComponentsType | undefined;
 
@@ -109,18 +107,15 @@ const EditOffersDetails = () => {
   }
 
   return (
-    <>
-      <Layout>
-        <EditOffersDetailsData
-          shareImgModal={shareImgModal}
-          handleImagesUpload={handleImageUpload}
-          handleImageSlider={handleImageSlider}
-          tab={tab}
-        />
-      </Layout>
-
+    <Layout>
+      <EditOffersDetailsData
+        shareImgModal={shareImgModal}
+        handleImagesUpload={handleImageUpload}
+        handleImageSlider={handleImageSlider}
+        tab={tab}
+      />
       {renderModal()}
-    </>
+    </Layout>
   );
 };
 

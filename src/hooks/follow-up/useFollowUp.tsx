@@ -8,14 +8,15 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 
 const useFollowUps = () => {
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,
+    status: FiltersDefaultValues.None,
   });
 
   const dispatch = useAppDispatch();
+  const [clickedIndex, setClickedIndex] = useState<number | null>(0);
   const { followUp, totalCount, loading } = useAppSelector(
     (state) => state.followUp
   );
@@ -23,6 +24,7 @@ const useFollowUps = () => {
   const {
     modal: { data },
   } = useAppSelector((state) => state.global);
+
   const { modal } = useAppSelector((state) => state.global);
   const { t: translate } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -30,18 +32,27 @@ const useFollowUps = () => {
   const totalItems = totalCount;
   const itemsPerPage = 10;
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  useEffect(() => {
+    fetchFollowUps();
+  }, [currentPage, filter]);
 
-  const handleFilterChange = (text: FilterType) => {
+  const fetchFollowUps = () => {
     dispatch(
-      readFollowUp({ params: { filter: text, page: 1, size: 10 } })
+      readFollowUp({ params: { filter: filter, page: currentPage, size: 10 } })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.FollowUp);
       }
     });
+  };
+
+  const handleFilterChange = (filter: FilterType) => {
+    setFilter(filter);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   const handleDeleteFollowUp = (id: string) => {
@@ -78,15 +89,26 @@ const useFollowUps = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  useEffect(() => {
-    dispatch(
-      readFollowUp({ params: { filter: filter, page: currentPage, size: 10 } })
-    ).then((res: any) => {
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.FollowUp);
-      }
-    });
-  }, []);
+  const handleFollowUpStatusChange = (index: number, type: string) => {
+    setClickedIndex(index);
+    if (index === 0) {
+      const newFilter = {
+        ...filter,
+        text: FiltersDefaultValues.None,
+        status: FiltersDefaultValues.None,
+      };
+      setFilter(newFilter);
+      handleFilterChange(newFilter);
+    } else {
+      const newFilter = {
+        ...filter,
+        text: FiltersDefaultValues.None,
+        status: type,
+      };
+      setFilter(newFilter);
+      handleFilterChange(newFilter);
+    }
+  };
 
   return {
     currentPageRows,
@@ -100,6 +122,9 @@ const useFollowUps = () => {
     handleFilterChange,
     loading,
     currentPage,
+    clickedIndex,
+    handleFollowUpStatusChange,
+    totalCount,
   };
 };
 

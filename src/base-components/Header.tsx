@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import createOfferIcon from "@/assets/svgs/create-offer.svg";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import Image from "next/image";
 import FollowUpDropDown from "@/components/FollowUpDropDown";
@@ -13,10 +12,13 @@ import { useTranslation } from "next-i18next";
 import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
+import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 
 const Header = () => {
+  const { t: translate } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { systemSettings } = useAppSelector((state) => state.settings);
+  const { totalCount } = useAppSelector((state) => state.followUp);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -36,20 +38,32 @@ const Header = () => {
     }
   }, [user]);
 
-  const { t: translate } = useTranslation();
+  const isSVG = user?.company?.logo?.endsWith(".svg");
 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
         <div className="flex items-center">
           {user?.company?.logo && (
-            <Image
-              src={user?.company?.logo}
-              alt="Company Logo"
-              className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-              height={50}
-              width={150}
-            />
+            <>
+              {isSVG ? (
+                <object
+                  data={user?.company?.logo}
+                  width="150"
+                  height="50"
+                  type="image/svg+xml"
+                  className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+                ></object>
+              ) : (
+                <Image
+                  src={user?.company?.logo}
+                  alt="Company Logo"
+                  className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+                  height={50}
+                  width={150}
+                />
+              )}
+            </>
           )}
 
           <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
@@ -70,12 +84,13 @@ const Header = () => {
       <div className="flex items-center">
         <div className="flex items-center pr-8">
           {user?.role !== "Admin" && (
-            <div className="relative menu mr-6">
-              <Image
+            <div className="relative menu mr-5">
+              {/* <Image
                 src={createOfferIcon}
                 alt="Create Offer Icon"
                 className="cursor-pointer"
-              />
+              /> */}
+              <NotificationIcon count={totalCount} />
               <FollowUpDropDown />
             </div>
           )}

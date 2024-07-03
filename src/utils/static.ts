@@ -613,7 +613,6 @@ export const staticEnums: Record<string, any> = {
     Deprecated: 0,
     Active: 1,
   },
-
   InvoiceMainStatus: {
     Pending: 0,
     Overdue: 1,
@@ -654,6 +653,7 @@ export const staticEnums: Record<string, any> = {
       Upcoming: 0,
       Pending: 1,
       Overdue: 2,
+      today: 10,
     },
   },
   ContentStatus: {

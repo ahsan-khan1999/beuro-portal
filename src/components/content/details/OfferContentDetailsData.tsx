@@ -4,9 +4,6 @@ import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "./ContentDetailsData";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
-import { useRouter } from "next/router";
-import { Button } from "@/base-components/ui/button/button";
-import { ContentPDFComponents } from "@/enums/content";
 
 const OfferContentDetailsData = ({
   onClick,
@@ -16,7 +13,6 @@ const OfferContentDetailsData = ({
   contentDetail: ContentTableRowTypes;
 }) => {
   const { t: translate } = useTranslation();
-  const router = useRouter();
 
   return (
     <div

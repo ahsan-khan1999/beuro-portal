@@ -4,11 +4,9 @@ import ContentAddDetailsData from "./ContentAddDetailsData";
 
 const ContentAddDetails = () => {
   return (
-    <>
-      <Layout>
-        <ContentAddDetailsData />
-      </Layout>
-    </>
+    <Layout>
+      <ContentAddDetailsData />
+    </Layout>
   );
 };
 

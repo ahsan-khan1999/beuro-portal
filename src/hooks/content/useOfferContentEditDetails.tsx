@@ -9,23 +9,11 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { OfferEditContentDetailsFormField } from "@/components/content/edit/fields/offer-edit-content-details-fields";
-import {
-  generateContentAddressValidationSchema,
-  generateOfferEditContentDetailsValidation,
-  mergeSchemas,
-} from "@/validation/contentSchema";
+import { generateOfferEditContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
-import { useMemo, useState, useEffect } from "react";
-import {
-  generateAddressFields,
-  setAddressFieldValues,
-  transformAttachments,
-  transformFieldsToValues,
-} from "@/utils/utility";
-import {
-  createContent,
-  updateContent,
-} from "@/api/slices/content/contentSlice";
+import { useState, useEffect } from "react";
+import { transformAttachments } from "@/utils/utility";
+import { createContent } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 
 export const useOfferContentEditDetails = (onClick: Function) => {
@@ -35,18 +23,20 @@ export const useOfferContentEditDetails = (onClick: Function) => {
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
   );
-  let [addressCount, setAddressCount] = useState<number>(
-    (contentDetails?.id && contentDetails?.offerContent?.address?.length) || 1
-  );
+
+  // let [addressCount, setAddressCount] = useState<number>(
+  //   (contentDetails?.id && contentDetails?.offerContent?.address?.length) || 1
+  // );
+
   const [attachements, setAttachements] = useState<Attachement[]>(
     (contentDetails?.id &&
       transformAttachments(contentDetails?.offerContent?.attachments)) ||
       []
   );
 
-  const handleAddAddressField = () => {
-    setAddressCount(addressCount + 1);
-  };
+  // const handleAddAddressField = () => {
+  //   setAddressCount(addressCount + 1);
+  // };
 
   const schema = generateOfferEditContentDetailsValidation(translate);
 
@@ -58,12 +48,17 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     formState: { errors },
     reset,
     trigger,
+    watch,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  const offerDescriptionCount = watch("offerContent.description");
+
   const handleBack = () => {
     onClick(0, ComponentsType.offerContent);
   };
+
   useEffect(() => {
     if (contentDetails?.id) {
       reset({
@@ -77,6 +72,7 @@ export const useOfferContentEditDetails = (onClick: Function) => {
       });
     }
   }, [contentDetails?.id]);
+
   const {
     fields: addressFields,
     append,
@@ -141,5 +137,6 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     errors,
     error,
     translate,
+    offerDescriptionCount,
   };
 };

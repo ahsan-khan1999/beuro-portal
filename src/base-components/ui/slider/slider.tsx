@@ -1,12 +1,7 @@
 import { useSlider } from "./useSlider";
 import { SliderImagesDataProps } from "@/types";
 import { MainImageSlider } from "./main-image-slider";
-import { ThumbnailSlider } from "./thumbnail-slider";
-import {
-  combineClasses,
-  downloadFile,
-  getFileNameFromUrl,
-} from "@/utils/utility";
+import { combineClasses, downloadFile } from "@/utils/utility";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 
 export const Slider = ({

@@ -1,17 +1,21 @@
 import Image from "next/image";
-import { SetStateAction, useState } from "react";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
-import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { useRouter } from "next/router";
-import {
-  uploadFileToFirebase,
-  uploadMultiFileToFirebase,
-} from "@/api/slices/globalSlice/global";
+import { uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
+import { useState } from "react";
+
+export interface VideoUploadFieldProps {
+  id: string;
+  text?: string;
+  fileSupported?: string;
+  isOpenedFile?: boolean;
+  attachements?: Attachement[];
+  setAttachements?: (attachement?: Attachement[]) => void;
+  isAttachement?: boolean;
+}
 
 export const VideoField = ({
   id,
@@ -21,76 +25,99 @@ export const VideoField = ({
   attachements,
   setAttachements,
   isAttachement,
-}: {
-  id: string;
-  text?: string;
-  fileSupported?: string;
-  isOpenedFile?: boolean;
-  attachements?: Attachement[];
-  setAttachements?: (attachement?: Attachement[]) => void;
-  isAttachement?: boolean;
-}) => {
+}: VideoUploadFieldProps) => {
   const router = useRouter();
   const formdata = new FormData();
   const dispatch = useAppDispatch();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // const handleFileInput = async (
+  //   e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
+  // ) => {
+  //   e.preventDefault();
+
+  //   let file: any = [];
+
+  //   if (e instanceof DragEvent && e.dataTransfer) {
+  //     for (let item of e.dataTransfer.files) {
+  //       formdata.append("files", item);
+  //     }
+
+  //     file.push(e.dataTransfer.files);
+  //   } else if (e.target instanceof HTMLInputElement && e.target.files) {
+  //     for (let item of e.target.files) {
+  //       formdata.append("files", item);
+  //     }
+  //     file.push(e.target.files);
+  //   }
+
+  //   const response = await dispatch(uploadMultiFileToFirebase(formdata));
+
+  //   let newAttachement = (attachements && [...attachements]) || [];
+  //   if (response?.payload) {
+  //     response?.payload?.forEach((element: any) => {
+  //       newAttachement.push({
+  //         name: getFileNameFromUrl(element),
+  //         value: element,
+  //       });
+  //     });
+  //     setAttachements && setAttachements(newAttachement);
+  //   }
+  // };
 
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
     e.preventDefault();
 
+    const formdata = new FormData();
     let file: any = [];
+
+    const checkFileType = (file: File) => {
+      const videoTypes = ["video/mp4", "video/avi", "video/mov", "video/wmv"];
+      return videoTypes.includes(file.type);
+    };
 
     if (e instanceof DragEvent && e.dataTransfer) {
       for (let item of e.dataTransfer.files) {
-        formdata.append("files", item);
+        if (checkFileType(item)) {
+          formdata.append("files", item);
+          file.push(item);
+        } else {
+          setErrorMessage(translate("common.video_upload_error_message"));
+        }
       }
-
-      file.push(e.dataTransfer.files);
     } else if (e.target instanceof HTMLInputElement && e.target.files) {
-      // file = e.target.files ? e.target.files[0] : null;
       for (let item of e.target.files) {
-        formdata.append("files", item);
+        if (checkFileType(item)) {
+          formdata.append("files", item);
+          file.push(item);
+        } else {
+          setErrorMessage(translate("common.video_upload_error_message"));
+        }
       }
-      file.push(e.target.files);
     }
 
-    // if (file) {
-    // formdata.append("files", file);
-
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
-
-    // res?.payload?.forEach((res: string, idx: number) => {
-
-    //     const fieldId = `upload_image${index as number + 1}`;
-    //     console.log(fieldId, "index", res);
-    //     field.onChange(res, fieldId);
-    // });
-
-    // Store the file name locally
-    // const response = await dispatch(uploadFileToFirebase(formdata));
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
+    if (file.length > 0) {
+      const response = await dispatch(uploadMultiFileToFirebase(formdata));
+      let newAttachement = (attachements && [...attachements]) || [];
+      if (response?.payload) {
+        response?.payload?.forEach((element: any) => {
+          newAttachement.push({
+            name: getFileNameFromUrl(element),
+            value: element,
+          });
         });
-      });
-      setAttachements && setAttachements(newAttachement);
-      // setAttachements(
-      //     attachements &&
-      //     [...attachements, { name: file?.name, value: response?.payload }],
-      // );
+        setAttachements && setAttachements(newAttachement);
+      }
+      setErrorMessage(""); // Clear error message if files are successfully uploaded
     }
-    // }
   };
 
   const handleDeleteFile = (index: number) => {
     const list = attachements && [...attachements];
     list?.splice(index, 1);
     setAttachements && setAttachements(list);
-    // field.onChange();
   };
 
   const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
@@ -160,6 +187,9 @@ export const VideoField = ({
           onChange={handleFileInput}
           multiple
         />
+        {errorMessage && (
+          <p className="text-red text-sm mt-2">{errorMessage}</p>
+        )}
       </label>
 
       <div className="col-span-2 mt-5">
@@ -185,7 +215,7 @@ export const VideoField = ({
                   <Image
                     src={deletePdfIcon}
                     alt="deletePdfIcon"
-                    className={`absolute -right-1 -top-1 cursor-pointer `}
+                    className={`absolute -right-1 -top-1 cursor-pointer`}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDeleteFile(index);

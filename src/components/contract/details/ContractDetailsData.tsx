@@ -143,18 +143,33 @@ const ContractDetailsData = ({
     },
   ];
 
-  const scrollHandler = (index: number) => {
-    if (index === 0) {
-      window.scrollTo({ behavior: "smooth", top: 0 });
-    }
-    if (index === 1) {
-      window.scrollTo({ behavior: "smooth", top: 590 });
-    }
-    if (index === 2) {
-      window.scrollTo({ behavior: "smooth", top: 970 });
-    }
-    if (index === 3) {
-      window.scrollTo({ behavior: "smooth", top: 1450 });
+  // const scrollHandler = (index: number) => {
+  //   if (index === 0) {
+  //     window.scrollTo({ behavior: "smooth", top: 0 });
+  //   }
+  //   if (index === 1) {
+  //     window.scrollTo({ behavior: "smooth", top: 590 });
+  //   }
+  //   if (index === 2) {
+  //     window.scrollTo({ behavior: "smooth", top: 970 });
+  //   }
+  //   if (index === 3) {
+  //     window.scrollTo({ behavior: "smooth", top: 1450 });
+  //   }
+  // };
+
+  const handleScrollToTop = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    const offset = 380;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -180,7 +195,7 @@ const ContractDetailsData = ({
   return (
     <>
       <div className="2xl:fixed mb-5">
-        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0 ">
+        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -189,7 +204,8 @@ const ContractDetailsData = ({
               name={item.name}
               icon={item.icon}
               selectedTab={index}
-              onScroll={scrollHandler}
+              // onScroll={scrollHandler}
+              onItemSelected={handleScrollToTop}
               key={index}
             />
           ))}
@@ -205,12 +221,13 @@ const ContractDetailsData = ({
             name={name}
             heading={heading}
             handleImageSlider={handleImageSlider}
+            className="2xl:w-[247px]"
           />
         </div>
       </div>
 
       <div className="overflow-y-auto w-full break-all flex">
-        <div className="max-w-[330px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[280px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <CustomLoader />

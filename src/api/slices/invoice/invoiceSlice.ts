@@ -24,6 +24,11 @@ interface InvoiceState {
   invoiceSum: {
     sumOfAllPages: number;
     sumOfTotalsPerPage: number;
+    sumOfOpenInvoices: number;
+    sumOfOverdueInvoices: number;
+    sumOfPaidInvoices: number;
+    sumOfPendingInvoices: number;
+    sumOfSendingInvoices: number;
   };
   loadingInvoice: boolean;
   loadingReceipt: boolean;
@@ -49,6 +54,11 @@ const initialState: InvoiceState = {
   invoiceSum: {
     sumOfAllPages: 0,
     sumOfTotalsPerPage: 0,
+    sumOfOpenInvoices: 0,
+    sumOfOverdueInvoices: 0,
+    sumOfPaidInvoices: 0,
+    sumOfPendingInvoices: 0,
+    sumOfSendingInvoices: 0,
   },
   loadingInvoice: true,
   loadingReceipt: true,
@@ -473,6 +483,14 @@ const InvoiceSlice = createSlice({
       state.invoice = action.payload.Invoice;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
+      state.invoiceSum.sumOfOpenInvoices = action.payload.sumOfOpenInvoices;
+      state.invoiceSum.sumOfPaidInvoices = action.payload.sumOfPaidInvoices;
+      state.invoiceSum.sumOfOverdueInvoices =
+        action.payload.sumOfOverdueInvoices;
+      state.invoiceSum.sumOfPendingInvoices =
+        action.payload.sumOfPendingInvoices;
+      state.invoiceSum.sumOfSendingInvoices =
+        action.payload.sumOfSendingInvoices;
       state.invoiceSum.sumOfAllPages = action.payload.sumOfAllPages;
       state.invoiceSum.sumOfTotalsPerPage = action.payload.sumOfTotalsPerPage;
       state.isLoading = false;

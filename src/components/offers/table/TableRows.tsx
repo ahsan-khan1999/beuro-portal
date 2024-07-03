@@ -177,7 +177,7 @@ const TableRows = ({
             </span> */}
 
                 {item.offerStatus === "Accepted" ? (
-                  <span className="py-4">
+                  <div className="py-4">
                     <div
                       style={{
                         backgroundColor: `${getOfferStatusColor(
@@ -188,7 +188,7 @@ const TableRows = ({
                     >
                       {translate(`offer_status.${item.offerStatus}`)}
                     </div>
-                  </span>
+                  </div>
                 ) : (
                   <div className="py-4" onClick={(e) => e.stopPropagation()}>
                     <DropDown

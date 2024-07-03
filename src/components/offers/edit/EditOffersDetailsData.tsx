@@ -18,12 +18,7 @@ export enum EditComponentsType {
   additionalEdit,
 }
 
-const EditOffersDetailsData = ({
-  shareImgModal,
-  handleImagesUpload,
-  handleImageSlider,
-  tab,
-}: {
+export interface EditOfferDetailsProps {
   shareImgModal: (
     id: string,
     refID: string,
@@ -39,7 +34,14 @@ const EditOffersDetailsData = ({
   ) => void;
   handleImageSlider: () => void;
   tab?: EditComponentsType;
-}) => {
+}
+
+const EditOffersDetailsData = ({
+  shareImgModal,
+  handleImagesUpload,
+  handleImageSlider,
+  tab,
+}: EditOfferDetailsProps) => {
   const [tabType, setTabType] = useState<EditComponentsType>(
     tab || EditComponentsType.offerEdit
   );
@@ -102,14 +104,10 @@ const EditOffersDetailsData = ({
 
   const handleNextTab = (currentComponent: EditComponentsType) => {
     if (tabType === EditComponentsType.additionalEdit) {
-      router.push(
-        {
-          pathname: `/offers/pdf-preview`,
-          query: { status: "None", offerID: offerDetails?.id, isMail: true },
-        }
-
-        // `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
-      );
+      router.push({
+        pathname: `/offers/pdf-preview`,
+        query: { status: "None", offerID: offerDetails?.id, isMail: true },
+      });
       return;
     }
     setTabType(currentComponent);
@@ -152,7 +150,7 @@ const EditOffersDetailsData = ({
   return (
     <>
       <div className="xLarge:fixed mb-5 mt-[40px]">
-        <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full mb-5">
+        <div className="flex flex-wrap xLarge:flex-col gap-[14px] mb-5">
           {tabSection.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
@@ -176,11 +174,12 @@ const EditOffersDetailsData = ({
           heading={heading}
           refID={offerDetails?.offerNumber}
           handleImageSlider={handleImageSlider}
+          className="xLarge:w-[280px]"
         />
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[330px] w-full hidden xLarge:block"></div>
+        <div className="max-w-[320px] w-full hidden xLarge:block"></div>
         <div className="w-full xLarge:max-w-[80%] my-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>

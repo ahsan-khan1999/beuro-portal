@@ -13,46 +13,55 @@ export const DocumentHeader = ({
   isReverseLogo,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const { t: translate } = useTranslation();
+  const headerBackgroundColor = "#" + emailTemplateSettings?.FooterColour;
+  const textColor = "#" + emailTemplateSettings?.textColour;
 
   return (
     <div
       className={`my-2 grid grid-cols-4 items-center h-[173px] px-[74px] py-[27px] w-full`}
+      style={{ backgroundColor: headerBackgroundColor }}
     >
       {isReverseLogo ? (
         <>
           <div className="flex flex-col gap-[0px] col-span-1">
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.offer_number")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {offerNo}
               </span>
             </div>
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.offer_date")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {formatDateTimeToDate(offerDate || "")}
               </span>
             </div>
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.created_by")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {createdBy}
               </span>
@@ -86,36 +95,42 @@ export const DocumentHeader = ({
           <div className="flex flex-col gap-[0px] col-span-1">
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.offer_number")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {offerNo}
               </span>
             </div>
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.offer_date")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {formatDateTimeToDate(offerDate || "")}
               </span>
             </div>
             <div className="flex gap-[5px]">
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {translate("pdf.created_by")}:
               </span>
               <span
-                className={`text-[#${emailTemplateSettings?.textColour}] text-sm font-medium`}
+                className={`text-[${textColor}] text-sm font-medium`}
+                style={{ color: textColor }}
               >
                 {createdBy}
               </span>

@@ -37,7 +37,6 @@ export interface Customers {
   date: string;
   mobileNumber: string;
   gender: number;
-
   status?: string;
   editImg?: string;
   editNote?: string;

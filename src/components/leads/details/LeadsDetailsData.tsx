@@ -13,6 +13,7 @@ import OfferEditImages from "@/components/offers/OfferEditImages";
 import { Lead } from "@/types/leads";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export enum ComponentsType {
   customer,
@@ -168,18 +169,33 @@ const LeadsDetailsData = ({
     },
   ];
 
-  const scrollHandler = (index: number) => {
-    if (index === 0) {
-      window.scrollTo({ behavior: "smooth", top: 0 });
-    }
-    if (index === 1) {
-      window.scrollTo({ behavior: "smooth", top: 500 });
-    }
-    if (index === 2) {
-      window.scrollTo({ behavior: "smooth", top: 650 });
-    }
-    if (index === 3) {
-      window.scrollTo({ behavior: "smooth", top: 950 });
+  // const scrollHandler = (index: number) => {
+  //   if (index === 0) {
+  //     window.scrollTo({ behavior: "smooth", top: 0 });
+  //   }
+  //   if (index === 1) {
+  //     window.scrollTo({ behavior: "smooth", top: 500 });
+  //   }
+  //   if (index === 2) {
+  //     window.scrollTo({ behavior: "smooth", top: 650 });
+  //   }
+  //   if (index === 3) {
+  //     window.scrollTo({ behavior: "smooth", top: 950 });
+  //   }
+  // };
+
+  const handleScrollToTop = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    const offset = 320;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -198,7 +214,7 @@ const LeadsDetailsData = ({
   return (
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
-        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap w-full gap-[14px] mb-5">
+        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap gap-[14px] mb-5">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -208,7 +224,8 @@ const LeadsDetailsData = ({
               icon={item.icon}
               selectedTab={index}
               key={index}
-              onScroll={scrollHandler}
+              // onScroll={scrollHandler}
+              onItemSelected={handleScrollToTop}
             />
           ))}
         </div>
@@ -222,16 +239,24 @@ const LeadsDetailsData = ({
           name={name}
           heading={heading}
           handleImageSlider={handleImageSlider}
+          className="xlg:w-[247px]"
         />
       </div>
 
       <div className="w-full break-all flex">
-        <div className={`max-w-[330px] w-full hidden xlg:block`}></div>
-        <div className="flex flex-col gap-y-5 w-full">
-          {renderComponent.map((component, index) => (
-            <div key={index}>{component}</div>
-          ))}
-        </div>
+        <div className={`max-w-[280px] w-full hidden xlg:block`}></div>
+
+        {loading ? (
+          <div className="flex justify-center items-center w-full">
+            <CustomLoader />
+          </div>
+        ) : (
+          <div className="flex flex-col gap-y-5 w-full">
+            {renderComponent.map((component, index) => (
+              <div key={index}>{component}</div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

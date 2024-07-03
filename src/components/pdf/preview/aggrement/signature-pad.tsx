@@ -6,7 +6,6 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
 import { blobToFile, dataURLtoBlob } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
-import dynamic from "next/dynamic";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { PdfProps, TemplateType } from "@/types";

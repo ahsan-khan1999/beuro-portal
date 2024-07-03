@@ -22,6 +22,7 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
       transformAttachments(contentDetails?.confirmationContent?.attachments)) ||
       []
   );
+
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -37,10 +38,13 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     setError,
     reset,
     trigger,
+    watch,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  const confirmationDescription = watch("confirmationContent.description");
 
   useEffect(() => {
     if (contentDetails.id) {
@@ -51,6 +55,7 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
       });
     }
   }, [contentDetails?.id]);
+
   const fields = EditConfirmationContentDetailsFormField(
     register,
     loading,
@@ -77,11 +82,13 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
       contentId: contentDetails?.id,
       id: contentDetails?.id,
     };
+
     const res = await dispatch(
       updateContent({ data: apiData, router, setError, translate })
     );
     if (res?.payload) onClick(1, ComponentsType.confirmationContent);
   };
+
   return {
     fields,
     onSubmit,
@@ -90,5 +97,6 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     errors,
     error,
     translate,
+    confirmationDescription,
   };
 };

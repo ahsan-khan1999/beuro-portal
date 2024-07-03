@@ -68,6 +68,7 @@ export interface SVGIconProp {
 
 export interface MyComponentProp {
   children: ReactNode;
+  className?: string;
 }
 
 export interface UserAccountCardProp extends MyComponentProp {
@@ -97,6 +98,7 @@ export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
   icon: string;
+  id?: string;
 }
 
 export interface tabsSectionTypes {
@@ -798,6 +800,7 @@ export interface PaginationProps {
   onPageChange: (page: number) => void;
   containerClassName?: string;
   currentPage: number;
+  isPageInParam?: boolean;
 }
 
 export interface PaginationItemProps {
@@ -1110,14 +1113,17 @@ export interface ContractEmailHeaderProps {
 
 export interface ContentHeaderProps {
   headerDetails: DocumentHeaderDetailsProps;
-  footerDetails?: DocumentDetailFooterProps;
-  aggrementDetails?: string;
+  footerDetails: DocumentDetailFooterProps;
+  aggrementDetails: string;
 }
 
 export interface ContentPdfPreviewerProps {
   data?: ContentHeaderProps;
+  isOfferPdf?: boolean;
   templateSettings: TemplateType | null;
   emailTemplateSettings: EmailTemplate | null;
+  description?: string;
+  language?: string | undefined;
 }
 
 export interface PdfProps<T = EmailHeaderProps> {

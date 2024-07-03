@@ -1167,6 +1167,23 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date"
     },
+    "invoice_cards": {
+      "open_invoice": "Open Invoice",
+      "paid_invoice": "Paid Invoice",
+      "overdue_invoice": "Overdue Invoice",
+      "sending_invoice": "Sending Invoice",
+      "pending_invoice": "Pending Invoice",
+      "invoice_total": "Total",
+      "page_sum": "Page Sum"
+    },
+    "doc_upload_error_message": "Please upload a document file.",
+    "video_upload_error_message": "Please upload a video file.",
+    "svg_upload_not_allowed": "SVG files are not allowed. Please upload a different file format.",
+    "img_upload_error_message": "WebP files are not allowed. Please upload a different file format.",
+    "offer_PDF_PREVIEW": "Offer PDF Preview",
+    "confirmation_PDF_PREVIEW": "Confirmation PDF Preview",
+    "invoice_PDF_PREVIEW": "Invoice PDF Preview",
+    "receipt_PDF_PREVIEW": "Receipt PDF Preview",
     "customer_name": "Customer Name",
     "company_name": "Company Name",
     "invoice_fitlers": {
@@ -1206,8 +1223,6 @@
     "offer_created": "Angebot erfolgreich erstellt",
     "offer_create": "Offer Created",
     "user_rule": "Company",
-    "invoice_total": "Total",
-    "page_sum": "Page Sum",
     "upload_file": "Upload File",
     "view_docs": "View Documents",
     "share_on_whatsapp": "Share on whatsapp",
@@ -1805,7 +1820,7 @@
     }
   },
   "follow_up": {
-    "heading": "Follow Up",
+    "heading": " Today Follow ups",
     "add_button": "Add Follow Up",
     "upcoming_follow_up": "Up coming follow up",
     "view_all": "View all",
@@ -1932,6 +1947,13 @@
       "lead_source": "Lead Source",
       "other_services": "Other Services",
       "Additional_details": "Additional Details"
+    },
+    "view_all_follow_up_filters": {
+      "all": "All",
+      "today": "Today",
+      "pending": "Pending",
+      "overdue": "Overdue",
+      "upcoming": "Upcoming"
     }
   },
   "dashboard_detail": {

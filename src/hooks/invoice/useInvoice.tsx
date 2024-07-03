@@ -34,10 +34,10 @@ const useInvoice = () => {
     invoiceSum,
   } = useAppSelector((state) => state.invoice);
 
-  const { query } = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(router.query.page as string, 10);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -46,12 +46,12 @@ const useInvoice = () => {
       setCurrentPage(1);
     }
 
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchNoteType = query?.noteType as string;
-    const searchDate = query?.date as string;
-    const searchPayment = query?.paymentType;
+    const queryStatus = router.query?.status;
+    const searchQuery = router.query?.text as string;
+    const sortedValue = router.query?.sort as string;
+    const searchNoteType = router.query?.noteType as string;
+    const searchDate = router.query?.date as string;
+    const searchPayment = router.query?.paymentType;
 
     const queryParams =
       queryStatus ||
@@ -63,7 +63,7 @@ const useInvoice = () => {
 
     if (queryParams !== undefined) {
       const filteredStatus =
-        query?.status === "None"
+      router.query?.status === "None"
           ? "None"
           : queryParams
               .toString()
@@ -112,13 +112,13 @@ const useInvoice = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
     }
-  }, [query]);
+  }, [router.query]);
 
   const [currentPageRows, setCurrentPageRows] = useState<
     InvoiceTableRowTypes[]
   >([]);
 
-  const page = query?.page as unknown as number;
+  const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [filter, setFilter] = useState<FilterType>({
@@ -365,6 +365,7 @@ const useInvoice = () => {
     translate,
     handleDownloadInvoiceReport,
     totalCount,
+    router
   };
 };
 

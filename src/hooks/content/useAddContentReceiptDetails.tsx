@@ -5,12 +5,11 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddReceiptContentDetailsFormField } from "@/components/content/add/fields/add-receipt-details-fields";
 import { generateEditReceiptContentDetailsValidation } from "@/validation/contentSchema";
-import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
-import { updateQuery } from "@/utils/update-query";
+import { ComponentsType } from "@/enums/content";
 
 export const useAddContentReceiptDetails = (
   onHandleBack: Function,
@@ -41,14 +40,12 @@ export const useAddContentReceiptDetails = (
     formState: { errors },
     reset,
     trigger,
+    watch,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const changeRouterHandler = () => {
-    router.pathname = "/content";
-    updateQuery(router, router.locale as string);
-  };
+  const receiptDescription = watch("receiptContent.description");
 
   useEffect(() => {
     if (contentDetails.id) {
@@ -63,6 +60,7 @@ export const useAddContentReceiptDetails = (
       });
     }
   }, [contentDetails.id]);
+
   const fields = AddReceiptContentDetailsFormField(
     register,
     loading,
@@ -103,5 +101,6 @@ export const useAddContentReceiptDetails = (
     errors,
     error,
     translate,
+    receiptDescription,
   };
 };
