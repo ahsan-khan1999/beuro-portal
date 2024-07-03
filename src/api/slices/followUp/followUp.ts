@@ -52,6 +52,7 @@ export const readFollowUpDetail: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createFollowUp: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("followUp/create", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -66,6 +67,7 @@ export const createFollowUp: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateFollowUp: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("followUp/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -86,6 +88,7 @@ export const updateFollowUp: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const deleteFollowUp: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("followUp/delete", async (args, thunkApi) => {
     const { data } = args as any;
@@ -106,6 +109,7 @@ export const deleteFollowUp: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createPostpondNotes: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("followUp/create/postpond/notes", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -119,6 +123,7 @@ export const createPostpondNotes: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const markComplete: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("followUp/markComplete", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -132,6 +137,7 @@ export const markComplete: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 const followUpSlice = createSlice({
   name: "FollowUpSlice",
   initialState,

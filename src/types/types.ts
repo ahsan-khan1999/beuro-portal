@@ -800,6 +800,7 @@ export interface PaginationProps {
   onPageChange: (page: number) => void;
   containerClassName?: string;
   currentPage: number;
+  isPageInParam?: boolean;
 }
 
 export interface PaginationItemProps {

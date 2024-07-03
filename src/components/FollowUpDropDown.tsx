@@ -78,7 +78,7 @@ const FollowUpDropDown = () => {
         {followUp?.length > 0 && (
           <div className="flex justify-center pt-[14px]">
             <button
-              className="text-[#616161] w-fit text-base font-medium"
+              className="text-[#616161] w-fit text-base font-medium hover:text-primary"
               onClick={() => handleFollowUps()}
             >
               {translate("follow_up.view_all")}

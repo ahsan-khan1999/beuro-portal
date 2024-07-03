@@ -25,8 +25,32 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
     loading,
     currentPage,
     clickedIndex,
-    handleClick,
+    handleFollowUpStatusChange,
+    totalCount,
   } = useFollowUps();
+
+  const followUpStatuses: CheckBoxType[] = [
+    {
+      label: translate("follow_up.view_all_follow_up_filters.all"),
+      type: `${staticEnums.FollowUp.Status.all}`,
+    },
+    {
+      label: translate("follow_up.view_all_follow_up_filters.today"),
+      type: `${staticEnums.FollowUp.Status.today}`,
+    },
+    {
+      label: translate("follow_up.view_all_follow_up_filters.pending"),
+      type: `${staticEnums.FollowUp.Status.Pending}`,
+    },
+    {
+      label: translate("follow_up.view_all_follow_up_filters.overdue"),
+      type: `${staticEnums.FollowUp.Status.Overdue}`,
+    },
+    {
+      label: translate("follow_up.view_all_follow_up_filters.upcoming"),
+      type: `${staticEnums.FollowUp.Status.Upcoming}`,
+    },
+  ];
 
   const CurrentComponent = useEmptyStates(
     <TableRows
@@ -34,32 +58,9 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
       handleFollowUpsDetails={handleFollowUpsDetails}
       handleFollowUpsDelete={handleDeleteFollowUp}
     />,
-    currentPageRows.length > 0,
+    totalCount !== 0,
     loading
   );
-
-  const checkbox: CheckBoxType[] = [
-    {
-      label: translate("follow_up.view_all_follow_up_filters.all"),
-      type: `${staticEnums.OfferStatus.Open}`,
-    },
-    {
-      label: translate("follow_up.view_all_follow_up_filters.today"),
-      type: `${staticEnums.OfferStatus.Accepted}`,
-    },
-    {
-      label: translate("follow_up.view_all_follow_up_filters.pending"),
-      type: `${staticEnums.OfferStatus.Expired}`,
-    },
-    {
-      label: translate("follow_up.view_all_follow_up_filters.overdue"),
-      type: `${staticEnums.OfferStatus.Rejected}`,
-    },
-    {
-      label: translate("follow_up.view_all_follow_up_filters.upcoming"),
-      type: `${staticEnums.OfferStatus.Rejected}`,
-    },
-  ];
 
   return (
     <>
@@ -70,10 +71,10 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
       />
 
       <div className="border-y border-y-[#E0E0E0] mt-[18px] mb-5 flex gap-x-[48px] pb-3">
-        {checkbox.map((item, index) => (
+        {followUpStatuses.map((item, index) => (
           <div
             key={index}
-            onClick={() => handleClick(index)}
+            onClick={() => handleFollowUpStatusChange(index, item.type)}
             className={`text-base font-medium pt-[14px] cursor-pointer border-b-2 ${
               clickedIndex === index
                 ? "text-primary border-b-primary"
@@ -97,6 +98,7 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
         currentPage={currentPage}
+        isPageInParam={false}
       />
       {renderModal()}
     </>

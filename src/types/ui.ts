@@ -274,7 +274,7 @@ export interface OnClick {
 
 export interface LanguageName {
   name?: string;
-  className?:string
+  className?: string;
 }
 
 export interface ToggleButtonProps {
@@ -354,7 +354,8 @@ export interface UsePaginationProps {
   totalItems: number;
   itemsPerPage: number;
   onPageChange: (page: number) => void;
-  currentPage:number
+  currentPage: number;
+  isPageInParam?: boolean;
 }
 
 export interface ChildrenProp {
