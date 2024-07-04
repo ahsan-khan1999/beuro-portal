@@ -24,19 +24,11 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     (state) => state.content
   );
 
-  // let [addressCount, setAddressCount] = useState<number>(
-  //   (contentDetails?.id && contentDetails?.offerContent?.address?.length) || 1
-  // );
-
   const [attachements, setAttachements] = useState<Attachement[]>(
     (contentDetails?.id &&
       transformAttachments(contentDetails?.offerContent?.attachments)) ||
       []
   );
-
-  // const handleAddAddressField = () => {
-  //   setAddressCount(addressCount + 1);
-  // };
 
   const schema = generateOfferEditContentDetailsValidation(translate);
 
@@ -138,5 +130,6 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     error,
     translate,
     offerDescriptionCount,
+    router
   };
 };

@@ -165,6 +165,8 @@ export const FollowUpNotificationBar = ({
         {dashboard?.["FollowUp"] && dashboard?.["FollowUp"]?.length > 0 ? (
           <div className="overflow-y-scroll max-h-[340px] dashboard_scrollbar px-3 pb-[14px] mr-1 mt-2 flex flex-col gap-y-3">
             {dashboard?.["FollowUp"]?.map((item, index) => {
+              console.log(item);
+
               return (
                 <div
                   className="py-3 px-4 bg-[#FFF2E9] rounded-2xl cursor-pointer"

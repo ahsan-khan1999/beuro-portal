@@ -35,6 +35,8 @@ const useGeneralFollowUp = () => {
   const handleMouseLeave = () => {
     setHoveredIndex(null);
   };
+
+  
   const { followUp, followUpDetails, loading } = useAppSelector(
     (state) => state.followUp
   );

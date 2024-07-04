@@ -7,7 +7,6 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { useTranslation } from "next-i18next";
-import { getTextCount } from "@/utils/functions";
 
 export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   register,

@@ -42,6 +42,7 @@ const SERVICE_URLS = {
   company: "/company",
   invoice: "/invoice",
   downloadInvoiceRoute: "/invoice/download-excel",
+  invoiceCalculationRoute: "/invoice/calculations",
   mainInvoice: "/invoice/invoice-step/",
 
   contactSupport: "/contactSupport",
@@ -401,6 +402,14 @@ const readInvoice = (params) =>
 const downloadInvoice = (params) =>
   get(
     SERVICE_URLS.downloadInvoiceRoute,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const calculateInvoiceData = (params) =>
+  get(
+    SERVICE_URLS.invoiceCalculationRoute,
     params,
     { feature: featureConstants.login },
     { detail: false }
@@ -1169,5 +1178,6 @@ const apiServices = {
   readNotesSettings,
   updateNotesSettings,
   deleteNotesSettings,
+  calculateInvoiceData,
 };
 export default apiServices;

@@ -12,6 +12,7 @@ interface CustomerState {
   loading: boolean;
   error: Record<string, object>;
   totalCount: number;
+  filteredCount: number;
   lastPage: number;
   followUpDetails: FollowUps;
 }
@@ -22,6 +23,7 @@ const initialState: CustomerState = {
   error: {},
   lastPage: 1,
   totalCount: 10,
+  filteredCount: 0,
   //@ts-expect-error
   followUpDetails: DEFAULT_FOLLOWUP,
 };
@@ -154,10 +156,16 @@ const followUpSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(readFollowUp.fulfilled, (state, action) => {
-      (state.followUp = action.payload.FollowUp),
-        (state.lastPage = action.payload.lastPage),
-        (state.totalCount = action.payload.totalCount),
-        (state.loading = false);
+      state.followUp = action.payload.FollowUp;
+      state.lastPage = action.payload.lastPage;
+      state.totalCount = action.payload.totalCount;
+
+      const today = moment().startOf("day");
+      const todayFollowUps = action.payload.FollowUp?.filter((item: any) =>
+        moment(item.dateTime).isSame(today, "day")
+      );
+      state.filteredCount = todayFollowUps.length;
+      state.loading = false;
     });
     builder.addCase(readFollowUp.rejected, (state) => {
       state.loading = false;

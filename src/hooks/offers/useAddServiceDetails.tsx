@@ -257,8 +257,6 @@ export const useAddServiceDetails = (
     setServiceType((prev) => {
       var newlist = [...prev];
       newlist.splice(index, 1);
-      // newlist[index] =
-      //   data?.serviceDetail[index]?.serviceType === "New Service" ? 0 : 1;
 
       return newlist;
     });

@@ -94,7 +94,7 @@ export const SignPdf = <T,>({
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading={translate("common.modals.offer_created")}
+        modelHeading={translate("common.modals.success_signed_offer")}
         modelSubHeading={translate("common.modals.admin_setting_des")}
         routeHandler={onSuccess}
       />

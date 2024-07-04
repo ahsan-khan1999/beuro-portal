@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
   downloadInvoiceReports,
+  invoiceCalculation,
   readInvoice,
   sendOfferByPost,
   setInvoiceDetails,
@@ -63,7 +64,7 @@ const useInvoice = () => {
 
     if (queryParams !== undefined) {
       const filteredStatus =
-      router.query?.status === "None"
+        router.query?.status === "None"
           ? "None"
           : queryParams
               .toString()
@@ -111,6 +112,14 @@ const useInvoice = () => {
       ).then((response: any) => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
+
+      dispatch(
+        invoiceCalculation({
+          params: {
+            filter: updatedFilter,
+          },
+        })
+      );
     }
   }, [router.query]);
 
@@ -344,6 +353,19 @@ const useInvoice = () => {
     }
   };
 
+  // const handleCalculateInvoice = async () => {
+  //   const response = await dispatch(
+  //     invoiceCalculation({
+  //       params: {
+  //         filter: { status: filter["status"] },
+  //       },
+  //     })
+  //   );
+  //   if (response.payload) {
+  //     downloadFile(response.payload?.excelFile);
+  //   }
+  // };
+
   return {
     currentPageRows,
     totalItems,
@@ -365,7 +387,7 @@ const useInvoice = () => {
     translate,
     handleDownloadInvoiceReport,
     totalCount,
-    router
+    router,
   };
 };
 

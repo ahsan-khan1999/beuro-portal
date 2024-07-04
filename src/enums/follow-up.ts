@@ -30,4 +30,5 @@ export enum StatusColors {
   "Pending" = "#FE9244",
   "Overdue" = "#FF376F",
   "complete" = "#45C769",
+  "today" = "#45C769",
 }

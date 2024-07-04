@@ -33,7 +33,7 @@ const AditionalAddDetails = ({
   };
 
   return (
-    <FormCard>
+    <FormCard containerClassName="pb-6">
       <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
           {translate("offers.additional_details.main_heading")} (

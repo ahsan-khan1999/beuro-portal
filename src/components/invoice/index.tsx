@@ -64,7 +64,7 @@ export default function Invoices() {
           />
         </div>
 
-        <div className="grid xs:grid-cols-[repeat(2,1fr)] mlg:grid-cols-[repeat(3,1fr)] xlg:grid-cols-[repeat(4,1fr)] xLarge:grid-cols-[repeat(5,1fr)] xMaxLarge:grid-cols-[repeat(6,1fr)] xMaxProLarge:grid-cols-[repeat(7,1fr)] items-center pt-6 gap-3">
+        <div className="grid xs:grid-cols-[repeat(2,1fr)] mlg:grid-cols-[repeat(3,1fr)] xlg:grid-cols-[repeat(4,1fr)] xLarge:grid-cols-[repeat(5,1fr)] xMaxLarge:grid-cols-[repeat(6,1fr)] items-center pt-6 gap-3">
           <InvoiceCard
             heading={translate("common.invoice_cards.open_invoice")}
             value={invoiceSum?.sumOfOpenInvoices || 0}
@@ -90,15 +90,15 @@ export default function Invoices() {
             value={invoiceSum?.sumOfPendingInvoices || 0}
             className="bg-[#FE9244]"
           />
-          <InvoiceCard
+          {/* <InvoiceCard
             heading={translate("common.invoice_cards.page_sum")}
-            value={invoiceSum?.sumOfAllPages || 0}
+            value={invoiceSum?.pageSum || 0}
             className="bg-[#FF376F]"
-          />
+          /> */}
           <InvoiceCard
             heading={translate("common.invoice_cards.invoice_total")}
-            value={invoiceSum?.sumOfTotalsPerPage || 0}
-            className="bg-[#4A13E7]"
+            value={invoiceSum?.totalSum || 0}
+            className="bg-[#FF376F]"
           />
         </div>
       </div>

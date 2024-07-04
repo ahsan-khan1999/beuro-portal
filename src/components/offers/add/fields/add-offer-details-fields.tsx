@@ -41,7 +41,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
   let formField: FormField[] = [
     {
-      containerClass: "mt-3",
+      containerClass: "mt-3 ",
       field: {
         type: Field.div,
         id: "div-field",
@@ -549,7 +549,7 @@ export const generateDateChildren = (
             },
           },
           {
-            containerClass: "mb-0 ",
+            containerClass: "mb-0",
             label: {
               text: `${translate("common.end_date")}`,
               htmlFor: `date.${i}.endDate`,
@@ -709,7 +709,7 @@ export const AddOfferDetailsSubmitFormField: GenerateOffersFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "float-right my-[30px]",
+      containerClass: "float-right py-[30px]",
       field: {
         type: Field.button,
         id: "button",
@@ -733,7 +733,7 @@ export const AddOfferDetailsDateFormField = (
 ) => {
   const { t: translate } = useTranslation();
   const dateField = {
-    containerClass: "mb-0 ",
+    containerClass: "mb-0",
     label: {
       text: "Start Date",
       htmlFor: `date.startDate`,

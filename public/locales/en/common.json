@@ -1165,7 +1165,8 @@
       "content_ID": "Enter Content ID",
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful.",
-      "date": "Date"
+      "date": "Date",
+      "success_signed_offer": "Operation Successful"
     },
     "invoice_cards": {
       "open_invoice": "Open Invoice",
