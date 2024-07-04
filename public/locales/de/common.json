@@ -1157,7 +1157,8 @@
       "plan_created": "Datensatz erfolgreich erstellt",
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
-      "date": "Datum"
+      "date": "Datum",
+      "success_signed_offer": "Unterschrift eingerichtetde"
     },
     "invoice_cards": {
       "open_invoice": "Offen Rechnung",
