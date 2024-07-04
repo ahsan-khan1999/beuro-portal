@@ -1,4 +1,4 @@
-import { loginUser, readDashboard } from "@/api/slices/authSlice/auth";
+import { readDashboard } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -40,6 +40,7 @@ export const useAddFollowUp = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   const customerID = watch("customer");
 
   const lookUpModals = {
@@ -66,6 +67,7 @@ export const useAddFollowUp = (
     lead: lead,
     followUps,
   });
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(
       createFollowUp({ data, router, setError, translate })
@@ -76,6 +78,7 @@ export const useAddFollowUp = (
         dispatch(readDashboard({ params: { filter: { month: 1 } } }));
     }
   };
+
   return {
     fields,
     onSubmit,

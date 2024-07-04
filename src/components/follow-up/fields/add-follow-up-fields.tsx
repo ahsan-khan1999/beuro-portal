@@ -1,4 +1,3 @@
-import { Modals } from "@/enums/follow-up";
 import { Field } from "@/enums/form";
 import { FormField, GenerateFollowUpFormField } from "@/types";
 import { useTranslation } from "next-i18next";
@@ -17,7 +16,8 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
       field: {
         id: "div-field",
         type: Field.div,
-        className: "grid grid-cols-1 lg:grid-cols-2 gap-x-[41px] gap-y-5",
+        className:
+          "grid grid-cols-1 lg:grid-cols-2 gap-x-[41px] gap-y-5 rounded-t-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -125,7 +125,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "px-2 pt-3 pb-5 bg-[#EDF4FF]",
       label: {
         text: `${translate("follow_up.add_follow_up.follow_up_type")}`,
         htmlFor: "type",
@@ -150,7 +150,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("follow_up.add_follow_up.additional_details")}`,
         htmlFor: "additionalDetails",
@@ -175,7 +175,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
         text: `${translate("follow_up.save_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ",
+          "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none",
         loading,
       },
     },

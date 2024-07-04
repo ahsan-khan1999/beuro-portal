@@ -13,12 +13,13 @@ import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
+import { readFollowUp } from "@/api/slices/followUp/followUp";
 
 const Header = () => {
   const { t: translate } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { systemSettings } = useAppSelector((state) => state.settings);
-  const { totalCount } = useAppSelector((state) => state.followUp);
+  const { filteredCount } = useAppSelector((state) => state.followUp);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -36,6 +37,7 @@ const Header = () => {
     if (user && user?.role !== "Admin" && !systemSettings) {
       dispatch(readSystemSettings());
     }
+    dispatch(readFollowUp({ params: { filter: { status: "10" } } }));
   }, [user]);
 
   const isSVG = user?.company?.logo?.endsWith(".svg");
@@ -90,7 +92,7 @@ const Header = () => {
                 alt="Create Offer Icon"
                 className="cursor-pointer"
               /> */}
-              <NotificationIcon count={totalCount} />
+              <NotificationIcon count={filteredCount} />
               <FollowUpDropDown />
             </div>
           )}

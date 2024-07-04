@@ -5,6 +5,7 @@ import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
 import { ReceiptContentPdf } from "../add/pdf-preview/receipt-content-pdf";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import { Button } from "@/base-components/ui/button/button";
 
 const EditReceiptContentDetails = ({
   onClick,
@@ -24,6 +25,11 @@ const EditReceiptContentDetails = ({
     translate,
     receiptDescription,
   } = useEditReceiptDetails(onClick);
+
+  const handlePreviewClick = (type: string) => {
+    localStorage.setItem("description", receiptDescription);
+    window.open(`/content/pdf-preview/${type}`, "_blank");
+  };
 
   return (
     <div className="flex gap-x-5">
@@ -52,9 +58,20 @@ const EditReceiptContentDetails = ({
       </div>
 
       <div className="bg-white rounded-lg w-[500px] h-fit p-[6px] hidden xlg:block">
-        <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-3 pb-2 border-b-2 border-b-primary">
-          {translate("common.receipt_PDF_PREVIEW")}
-        </h1>
+        <div className="flex items-center justify-between pt-2 pb-2 border-b-2 border-b-primary">
+          <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px]">
+            {translate("common.receipt_PDF_PREVIEW")}
+          </h1>
+
+          <Button
+            inputType="button"
+            onClick={() => handlePreviewClick("receipt")}
+            className="gap-x-2 !h-fit py-2 p-4 w-fit flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+            text={translate("invoice.invoice_created_modal.button")}
+            id="preview"
+            iconAlt="button"
+          />
+        </div>
 
         {receiptDescription ? (
           <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
