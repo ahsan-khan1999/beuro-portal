@@ -13,7 +13,6 @@ import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
-import { readFollowUp } from "@/api/slices/followUp/followUp";
 
 const Header = () => {
   const { t: translate } = useTranslation();
@@ -37,7 +36,6 @@ const Header = () => {
     if (user && user?.role !== "Admin" && !systemSettings) {
       dispatch(readSystemSettings());
     }
-    dispatch(readFollowUp({ params: { filter: { status: "10" } } }));
   }, [user]);
 
   const isSVG = user?.company?.logo?.endsWith(".svg");

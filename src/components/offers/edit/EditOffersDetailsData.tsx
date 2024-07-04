@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/useRedux";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export enum EditComponentsType {
   offerEdit,
@@ -181,15 +180,10 @@ const EditOffersDetailsData = ({
 
       <div className="w-full break-all flex">
         <div className="max-w-[320px] w-full hidden xLarge:block"></div>
-        {/* {loading ? (
-          <div className="flex justify-center items-center w-full">
-            <CustomLoader />
-          </div>
-        ) : ( */}
+
         <div className="w-full xLarge:max-w-[80%] my-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
-        {/* )} */}
       </div>
     </>
   );

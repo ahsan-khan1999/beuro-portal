@@ -66,14 +66,20 @@ export default function Invoices() {
 
         <div className="grid xs:grid-cols-[repeat(2,1fr)] mlg:grid-cols-[repeat(3,1fr)] xlg:grid-cols-[repeat(4,1fr)] xLarge:grid-cols-[repeat(5,1fr)] xMaxLarge:grid-cols-[repeat(6,1fr)] items-center pt-6 gap-3">
           <InvoiceCard
+            heading={translate("common.invoice_cards.pending_invoice")}
+            value={invoiceSum?.sumOfPendingInvoices || 0}
+            className="bg-[#FE9244]"
+          />
+
+          <InvoiceCard
+            heading={translate("common.invoice_cards.sending_invoice")}
+            value={invoiceSum?.sumOfSendingInvoices || 0}
+            className="bg-[#7B18FF]"
+          />
+          <InvoiceCard
             heading={translate("common.invoice_cards.open_invoice")}
             value={invoiceSum?.sumOfOpenInvoices || 0}
             className="bg-primary"
-          />
-          <InvoiceCard
-            heading={translate("common.invoice_cards.paid_invoice")}
-            value={invoiceSum?.sumOfPaidInvoices || 0}
-            className="bg-[#45C769]"
           />
           <InvoiceCard
             heading={translate("common.invoice_cards.overdue_invoice")}
@@ -81,15 +87,11 @@ export default function Invoices() {
             className="bg-[#FF0000]"
           />
           <InvoiceCard
-            heading={translate("common.invoice_cards.sending_invoice")}
-            value={invoiceSum?.sumOfSendingInvoices || 0}
-            className="bg-[#7B18FF]"
+            heading={translate("common.invoice_cards.paid_invoice")}
+            value={invoiceSum?.sumOfPaidInvoices || 0}
+            className="bg-[#45C769]"
           />
-          <InvoiceCard
-            heading={translate("common.invoice_cards.pending_invoice")}
-            value={invoiceSum?.sumOfPendingInvoices || 0}
-            className="bg-[#FE9244]"
-          />
+
           {/* <InvoiceCard
             heading={translate("common.invoice_cards.page_sum")}
             value={invoiceSum?.pageSum || 0}
