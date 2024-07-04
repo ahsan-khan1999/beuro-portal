@@ -5,7 +5,6 @@ import moment from "moment";
 import { getDaysDifference } from "@/utils/utility";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { BellIcon } from "@/assets/svgs/components/bell-icon";
-import { staticEnums } from "@/utils/static";
 
 const FollowUpDropDown = () => {
   const {

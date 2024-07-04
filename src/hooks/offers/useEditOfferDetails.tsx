@@ -284,5 +284,6 @@ export const useEditOfferDetails = ({
     error,
     translate,
     offerDetails,
+    loading
   };
 };
