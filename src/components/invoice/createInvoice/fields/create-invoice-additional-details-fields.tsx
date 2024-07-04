@@ -61,7 +61,7 @@ export const CreateInvoiceAdditionalDetailsFormField: GenerateCreateInvoiceFormF
         },
       },
       {
-        containerClass: "py-[30px]",
+        containerClass: "mt-[30px]",
         field: {
           type: Field.div,
           id: "div-field",

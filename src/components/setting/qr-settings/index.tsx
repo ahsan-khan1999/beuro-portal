@@ -11,7 +11,7 @@ const QRSettings = ({ handleCreation }: { handleCreation: Function }) => {
     });
 
   return (
-    <FormCard>
+    <FormCard containerClassName="pb-5">
       <div className="py-3 px-6">
         <Form
           formFields={fields}

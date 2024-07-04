@@ -54,7 +54,6 @@ export const useEditInvoiceDetails = ({
 
   const onCancel = () => {
     router.back();
-    // updateQuery(router, router.locale as string);
   };
 
   const schema = generateInvoiceDetailsValidationSchema(translate);

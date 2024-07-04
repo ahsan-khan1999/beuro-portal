@@ -25,7 +25,7 @@ const AddressAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   };
 
   return (
-    <FormCard>
+    <FormCard containerClassName="pb-6">
       <div className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
           {translate("offers.address_details.main_heading")} (

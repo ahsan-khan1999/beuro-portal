@@ -141,7 +141,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.input,
               inputType: "tel",
-              className: "!px-4  !border-[#BFBFBF]  focus:!border-primary",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               register,

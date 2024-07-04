@@ -111,6 +111,7 @@ export const useEditOfferDetails = ({
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
+
   useEffect(() => {
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
