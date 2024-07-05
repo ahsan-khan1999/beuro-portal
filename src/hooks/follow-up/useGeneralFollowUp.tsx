@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -10,7 +10,6 @@ import AllCustomers from "@/base-components/ui/modals1/AllCustomers";
 import AllLeads from "@/base-components/ui/modals1/AllLeads";
 import FollowUpCustomersDetails from "@/base-components/ui/modals1/FollowUpCustomersDetails";
 import FollowUpServiceDetails from "@/base-components/ui/modals1/FollowUpServiceDetails";
-import FollowUps from "@/base-components/ui/modals1/FollowUps";
 import {
   deleteFollowUp,
   readFollowUp,
@@ -22,44 +21,58 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import { useTranslation } from "next-i18next";
 import { isJSON } from "@/utils/functions";
 import { getUser } from "@/utils/auth.util";
+import { FiltersDefaultValues } from "@/enums/static";
+import moment from "moment";
+import AllFollowUpsTable from "@/base-components/ui/modals1/AllFollowUpsTable";
+import { FollowUps } from "@/types/follow-up";
 
 const useGeneralFollowUp = () => {
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [todayFollowUps, setTodayFollowUps] = useState<FollowUps[]>();
 
-  const handleMouseEnter = (index: any) => {
-    setHoveredIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
+  const [filter, setFilter] = useState<FilterType>({
+    text: FiltersDefaultValues.None,
+    status: FiltersDefaultValues.None,
+  });
 
   const { followUp, followUpDetails, loading } = useAppSelector(
     (state) => state.followUp
   );
 
   const user = isJSON(getUser());
-  const [filter, setFilter] = useState<FilterType>({
-    text: "",
-  });
 
   const { modal } = useAppSelector((state) => state.global);
   const {
     modal: { data },
   } = useAppSelector((state) => state.global);
 
-  const [status, setStatus] = useState({
+  const [markUpStatus, setMarkUpStatus] = useState({
     postpond: false,
     completed: false,
     neutral: true,
   });
 
-  useEffect(() => {
-    if (user?.role !== "Admin" && followUp?.length === 0)
-      dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
-  }, [dispatch]);
+  // useMemo(() => {
+  //   const today = moment().startOf("day");
+  //   const todayFollowUps = followUp?.filter((item) =>
+  //     moment(item.dateTime).isSame(today, "day")
+  //   );
+
+  //   if (todayFollowUps.length > 0) {
+  //     setTodayFollowUps(todayFollowUps);
+  //   }
+  // }, [followUp]);
+
+  // useEffect(() => {
+  //   if (user?.role !== "Admin" && followUp?.length === 0)
+  //     dispatch(readFollowUp({ params: { filter: { status: "10" } } })).then(
+  //       (response: any) => {
+  //         setTodayFollowUps(response?.payload.followUp);
+  //       }
+  //     );
+  // }, [user]);
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -76,11 +89,14 @@ const useGeneralFollowUp = () => {
 
   const handleAddPostPonedNote = () => {
     dispatch(updateModalType({ type: ModalType.ADD_POSTSPONED_NOTE }));
-    // setStatus({
-    //     postpond: true,
-    //     completed: false,
-    //     neutral: false,
-    // });
+  };
+
+  const handleMouseEnter = (index: any) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
   };
 
   const handleDeleteFollowUp = (
@@ -101,17 +117,10 @@ const useGeneralFollowUp = () => {
 
   const handleAddRemarks = () => {
     dispatch(updateModalType({ type: ModalType.ADD_REMARKS }));
-    // setStatus({
-    //     postpond: false,
-    //     completed: true,
-    //     neutral: false,
-    // });
   };
 
   const handleAddFollowUp = () => {
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
-    // dispatch(readLead({ params: { filter: {}, paginate: 0 } }));
-
     dispatch(updateModalType({ type: ModalType.ADD_FOLLOW_UP }));
   };
 
@@ -139,7 +148,7 @@ const useGeneralFollowUp = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.FOLLOW_UPS]: (
-      <FollowUps
+      <AllFollowUpsTable
         onClose={onClose}
         handleFollowUpsDetails={handleFollowUpsDetails}
       />
@@ -149,7 +158,7 @@ const useGeneralFollowUp = () => {
         onClose={onClose}
         handleAddPostPonedNote={handleAddPostPonedNote}
         handleAddRemarks={handleAddRemarks}
-        status={status}
+        status={markUpStatus}
         followUpDetails={followUpDetails}
       />
     ),
@@ -214,6 +223,7 @@ const useGeneralFollowUp = () => {
     hoveredIndex,
     handleMouseEnter,
     handleMouseLeave,
+    todayFollowUps
   };
 };
 

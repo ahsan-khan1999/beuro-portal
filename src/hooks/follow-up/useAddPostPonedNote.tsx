@@ -1,4 +1,4 @@
-import { loginUser, readDashboard } from "@/api/slices/authSlice/auth";
+import { readDashboard } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -8,8 +8,6 @@ import { generateAddPostPonedValidation } from "@/validation/followUpSchema";
 import { AddPostPonedFollowUpFormField } from "@/components/follow-up/fields/add-post-poned-note-fields";
 import { createPostpondNotes } from "@/api/slices/followUp/followUp";
 import moment from "moment";
-import { useEffect } from "react";
-import dashboard from "@/pages/dashboard";
 import { getCurrentMonth } from "@/utils/utility";
 
 export const useAddPostPonedNote = (handleFollowUpsDetails: Function) => {
@@ -31,11 +29,8 @@ export const useAddPostPonedNote = (handleFollowUpsDetails: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  // useEffect(() => {
-  //   dispatch(readDashboard({ params: dashboard }));
-  // }, [dashboard]);
-
   const fields = AddPostPonedFollowUpFormField(register, loading, control);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       ...data,
@@ -48,13 +43,16 @@ export const useAddPostPonedNote = (handleFollowUpsDetails: Function) => {
 
     if (res?.payload) {
       handleFollowUpsDetails(followUpDetails?.id);
-      dispatch(readDashboard({
-        params: {
-          month: getCurrentMonth(),
-        },
-      }))
+      dispatch(
+        readDashboard({
+          params: {
+            month: getCurrentMonth(),
+          },
+        })
+      );
     }
   };
+
   return {
     fields,
     onSubmit,
@@ -62,5 +60,6 @@ export const useAddPostPonedNote = (handleFollowUpsDetails: Function) => {
     handleSubmit,
     errors,
     error,
+    translate
   };
 };

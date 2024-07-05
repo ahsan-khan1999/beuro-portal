@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import FollowUps from "@/base-components/ui/modals1/FollowUps";
+import FollowUps from "@/base-components/ui/modals1/AllFollowUpsTable";
 import FollowUpDetails from "@/base-components/ui/modals1/FollowUpDetails";
 import AddPostPonedNote from "@/base-components/ui/modals1/AddPostPonedNote";
 import AddRemarks from "@/base-components/ui/modals1/AddRemarks";
@@ -70,11 +70,6 @@ export const FollowUpNotificationBar = ({
 
   const handleAddPostPonedNote = () => {
     dispatch(updateModalType({ type: ModalType.ADD_POSTSPONED_NOTE }));
-    // setStatus({
-    //   postpond: true,
-    //   completed: false,
-    //   neutral: false,
-    // });
   };
 
   const handleAddRemarks = () => {
@@ -163,10 +158,8 @@ export const FollowUpNotificationBar = ({
 
         <hr className="opacity-20" />
         {dashboard?.["FollowUp"] && dashboard?.["FollowUp"]?.length > 0 ? (
-          <div className="overflow-y-scroll max-h-[340px] dashboard_scrollbar px-3 pb-[14px] mr-1 mt-2 flex flex-col gap-y-3">
+          <div className="overflow-y-scroll max-h-[290px] dashboard_scrollbar px-3 pb-[14px] mr-1 mt-2 flex flex-col gap-y-3">
             {dashboard?.["FollowUp"]?.map((item, index) => {
-              console.log(item);
-
               return (
                 <div
                   className="py-3 px-4 bg-[#FFF2E9] rounded-2xl cursor-pointer"
@@ -197,74 +190,25 @@ export const FollowUpNotificationBar = ({
                     </p> */}
                   </div>
                 </div>
-                // <div
-                //   onClick={() => handleFollowUpsDetails(item.id)}
-                //   key={index}
-                //   className={`cursor-pointer mt-2`}
-                // >
-                //   <div className="py-2 px-5 rounded-md flex items-center bg-[#F1F1F1] hover:bg-primary hover:bg-opacity-10">
-                //     <div
-                //       className="mr-6"
-                //       dangerouslySetInnerHTML={{ __html: item.svg }}
-                //     />
-                //     <div>
-                //       <span className="text-[#1E1E1E] text-sm font-medium">
-                //         {item.title}
-                //       </span>
-                //       <div className="flex items-center justify-between space-x-3 mt-2">
-                //         <div className="flex items-center">
-                //           <Image
-                //             src={timeIcon}
-                //             alt="Time Icon"
-                //             className="mr-[6px]"
-                //           />
-                //           <span className="text-[#4B4B4B] text-xs">
-                //             {item.time},{item.date}
-                //           </span>
-                //         </div>
-                //         <div className="flex items-center">
-                //           <Image
-                //             src={driverLicenseIcon}
-                //             alt="Id Icon"
-                //             className="mr-[6px]"
-                //           />
-                //           <span className="text-[#4B4B4B] text-xs">
-                //             {item.refID}
-                //           </span>
-                //         </div>
-                //         <div className="flex items-center">
-                //           <Image
-                //             src={dayIcon}
-                //             alt="Id Icon"
-                //             className="mr-[6px]"
-                //           />
-                //           <span className="text-[#4B4B4B] text-xs">
-                //             {item.day}
-                //           </span>
-                //         </div>
-                //       </div>
-                //     </div>
-                //   </div>
-                // </div>
               );
             })}
-
-            {followUp && followUp?.length > 0 && (
-              <div className="flex justify-center py-4">
-                <button
-                  onClick={() => handleFollowUps()}
-                  className="text-primary w-fit text-sm font-medium"
-                >
-                  {translate("dashboard_detail.view_all")}
-                </button>
-              </div>
-            )}
           </div>
         ) : (
           <NoDataEmptyState
             className="w-[90%] mx-auto my-3"
             containerClassName="py-0"
           />
+        )}
+
+        {followUp && followUp?.length > 0 && (
+          <div className="flex justify-center py-2 border-t border-t-[#EFEFEF]">
+            <button
+              onClick={() => handleFollowUps()}
+              className="text-[#616161] hover:text-primary w-fit text-sm font-medium"
+            >
+              {translate("dashboard_detail.view_all")}
+            </button>
+          </div>
         )}
       </div>
       {renderModal()}

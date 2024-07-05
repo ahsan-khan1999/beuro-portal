@@ -18,16 +18,15 @@ const AddRemarks = ({ onClose, handleFollowUpsDetails }: AddRemarksProps) => {
     <>
       <BaseModal
         onClose={onClose}
-        containerClassName="max-w-[604.966px] min-h-auto max-h-fit"
+        containerClassName="max-w-[480px] xl:max-w-[604px] min-h-fit"
       >
-        <div className="relative flex flex-col px-[52px] py-6">
+        <div className="relative flex flex-col px-[30px] py-6">
           <Image
             src={crossIcon}
             alt="cross_icon"
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          {/* <div className="flex flex-col"> */}
           <p className="text-2xl font-normal my-3">
             {translate("follow_up.add_remarks_heading")}
           </p>

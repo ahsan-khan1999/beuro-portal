@@ -11,10 +11,10 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mb-0 ",
+      containerClass: "mb-0 rounded-lg px-2 py-3 bg-[#EDF4FF]",
       field: {
         type: Field.textArea,
-        className: "!p-4 !h-fit !border-[#BFBFBF]  focus:!border-primary ",
+        className: "!p-4 !h-fit !border-[#BFBFBF] focus:!border-primary",
         rows: 3,
         id: "completeRemarks",
         name: "completeRemarks",
@@ -24,13 +24,13 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
     },
 
     {
-      containerClass: "mt-5 ",
+      containerClass: "mt-5",
       field: {
         id: "button",
         type: Field.button,
         text: `${translate("follow_up.next_button")}`,
         inputType: "submit",
-        className: "rounded-lg px-4 w-[174px] text-white hover:bg-none ",
+        className: "rounded-lg px-4 w-[174px] text-white hover:bg-none",
         loading,
       },
     },

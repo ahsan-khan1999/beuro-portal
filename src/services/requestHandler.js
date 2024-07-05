@@ -557,6 +557,14 @@ const readFollowUp = (params) =>
     { detail: false }
   );
 
+const readTableFollowUp = (params) =>
+  get(
+    SERVICE_URLS.leadFollowUp,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
 const readFollowUpDetail = (params) =>
   get(
     SERVICE_URLS.leadFollowUp,
@@ -1179,5 +1187,6 @@ const apiServices = {
   updateNotesSettings,
   deleteNotesSettings,
   calculateInvoiceData,
+  readTableFollowUp,
 };
 export default apiServices;

@@ -160,11 +160,11 @@ const followUpSlice = createSlice({
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
 
-      const today = moment().startOf("day");
-      const todayFollowUps = action.payload.FollowUp?.filter((item: any) =>
-        moment(item.dateTime).isSame(today, "day")
-      );
-      state.filteredCount = todayFollowUps.length;
+      // const today = moment().startOf("day");
+      // const todayFollowUps = action.payload.FollowUp?.filter((item: any) =>
+      //   moment(item.dateTime).isSame(today, "day")
+      // );
+      // state.filteredCount = todayFollowUps.length;
       state.loading = false;
     });
     builder.addCase(readFollowUp.rejected, (state) => {

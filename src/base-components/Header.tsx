@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import Image from "next/image";
 import FollowUpDropDown from "@/components/FollowUpDropDown";
@@ -13,12 +13,15 @@ import { logoutUser } from "@/api/slices/authSlice/auth";
 import { readSystemSettings } from "@/api/slices/settingSlice/settings";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
+import { readFollowUp } from "@/api/slices/followUp/followUp";
+import moment from "moment";
 
 const Header = () => {
   const { t: translate } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { systemSettings } = useAppSelector((state) => state.settings);
-  const { filteredCount } = useAppSelector((state) => state.followUp);
+  const { followUp } = useAppSelector((state) => state.followUp);
+  const [todayCount, setTodayCount] = useState<number>(0);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -32,14 +35,29 @@ const Header = () => {
     // });
   };
 
+  useMemo(() => {
+    const today = moment().startOf("day");
+    const todayFollowUps = followUp?.filter((item) =>
+      moment(item.dateTime).isSame(today, "day")
+    );
+
+    if (todayFollowUps.length > 0) {
+      setTodayCount(todayFollowUps.length);
+    }
+  }, [followUp]);
+
   useEffect(() => {
     if (user && user?.role !== "Admin" && !systemSettings) {
       dispatch(readSystemSettings());
+      dispatch(readFollowUp({ params: { filter: { status: "10" } } })).then(
+        (response: any) => {
+          setTodayCount(response?.payload?.totalCount);
+        }
+      );
     }
   }, [user]);
 
   const isSVG = user?.company?.logo?.endsWith(".svg");
-
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
       {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
@@ -90,7 +108,7 @@ const Header = () => {
                 alt="Create Offer Icon"
                 className="cursor-pointer"
               /> */}
-              <NotificationIcon count={filteredCount} />
+              <NotificationIcon count={todayCount} />
               <FollowUpDropDown />
             </div>
           )}
