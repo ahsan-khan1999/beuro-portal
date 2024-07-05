@@ -9,7 +9,6 @@ import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-stat
 
 const FollowUpDropDown = () => {
   const {
-    followUp,
     handleAddFollowUp,
     handleFollowUps,
     renderModal,
@@ -17,7 +16,13 @@ const FollowUpDropDown = () => {
     handleMouseEnter,
     handleMouseLeave,
     hoveredIndex,
+    followUpTableData,
+    todayFollowUps,
   } = useGeneralFollowUp();
+
+  const viewAllData = followUpTableData.map(
+    (item) => item.status === "Pending"
+  );
 
   return (
     <>
@@ -37,47 +42,43 @@ const FollowUpDropDown = () => {
         </div>
 
         <div className="max-h-[450px] overflow-y-auto dashboard_scrollbar">
-          {followUp.filter((item) =>
-            moment(item.dateTime).isSame(moment(), "day")
-          ).length > 0 ? (
-            followUp
-              .filter((item) => moment(item.dateTime).isSame(moment(), "day"))
-              .map((item, index) => {
-                let days = getDaysDifference(item.createdAt);
-                return (
-                  <div className="relative">
-                    <div
-                      key={index}
-                      onMouseEnter={() => handleMouseEnter(index)}
-                      onMouseLeave={handleMouseLeave}
-                      className={`flex items-start gap-x-6 pl-[30px] pr-[47px] pt-5 pb-6 border-b border-b-[#F5F5F5] ${
-                        hoveredIndex === index ? "follow_up_item" : ""
-                      }`}
-                    >
-                      <BellIcon isHovered={hoveredIndex === index} />
-                      <div className="flex flex-col gap-y-[14px]">
-                        <p className="text-base font-medium text-[#171B1E]">
-                          {item?.title}
-                        </p>
-                        <div className="flex items-center">
-                          <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] pr-2">
-                            {moment(item.dateTime).format("hh:mm")}
-                          </span>
-                          <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] px-2">
-                            {moment(item.dateTime).format("DD/MM/YYYY")}
-                          </span>
-                          <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] px-2">
-                            ID {item?.customer?.refID}
-                          </span>
-                          <span className="text-primary font-normal text-sm pl-2">
-                            Days {days}
-                          </span>
-                        </div>
+          {todayFollowUps.length > 0 ? (
+            todayFollowUps.map((item, index) => {
+              let days = getDaysDifference(item.createdAt);
+              return (
+                <div className="relative">
+                  <div
+                    key={index}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
+                    className={`flex items-start gap-x-6 pl-[30px] pr-[47px] pt-5 pb-6 border-b border-b-[#F5F5F5] ${
+                      hoveredIndex === index ? "follow_up_item" : ""
+                    }`}
+                  >
+                    <BellIcon isHovered={hoveredIndex === index} />
+                    <div className="flex flex-col gap-y-[14px]">
+                      <p className="text-base font-medium text-[#171B1E]">
+                        {item?.title}
+                      </p>
+                      <div className="flex items-center">
+                        <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] pr-2">
+                          {moment(item.dateTime).format("hh:mm")}
+                        </span>
+                        <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] px-2">
+                          {moment(item.dateTime).format("DD/MM/YYYY")}
+                        </span>
+                        <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] px-2">
+                          ID {item?.customer?.refID}
+                        </span>
+                        <span className="text-primary font-normal text-sm pl-2">
+                          Days {days}
+                        </span>
                       </div>
                     </div>
                   </div>
-                );
-              })
+                </div>
+              );
+            })
           ) : (
             <NoDataEmptyState
               className="w-[90%] mx-auto my-3"
@@ -85,7 +86,7 @@ const FollowUpDropDown = () => {
             />
           )}
         </div>
-        {followUp?.length > 0 && (
+        {viewAllData?.length > 0 && (
           <div className="flex justify-center pt-[14px] border-t border-t-primary">
             <button
               className="text-[#616161] w-fit text-base font-medium hover:text-primary"

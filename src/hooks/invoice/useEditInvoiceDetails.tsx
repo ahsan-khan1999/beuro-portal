@@ -269,5 +269,6 @@ export const useEditInvoiceDetails = ({
     error,
     translate,
     invoiceDetails,
+    loading
   };
 };

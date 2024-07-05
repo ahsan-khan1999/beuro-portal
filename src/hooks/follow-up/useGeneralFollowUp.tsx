@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -14,6 +14,7 @@ import {
   deleteFollowUp,
   readFollowUp,
   readFollowUpDetail,
+  readFollowUpTableData,
 } from "@/api/slices/followUp/followUp";
 import { FilterType } from "@/types";
 import { readCustomer } from "@/api/slices/customer/customerSlice";
@@ -24,25 +25,22 @@ import { getUser } from "@/utils/auth.util";
 import { FiltersDefaultValues } from "@/enums/static";
 import moment from "moment";
 import AllFollowUpsTable from "@/base-components/ui/modals1/AllFollowUpsTable";
-import { FollowUps } from "@/types/follow-up";
+import { readDashboard } from "@/api/slices/authSlice/auth";
 
 const useGeneralFollowUp = () => {
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [todayFollowUps, setTodayFollowUps] = useState<FollowUps[]>();
 
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,
     status: FiltersDefaultValues.None,
   });
 
-  const { followUp, followUpDetails, loading } = useAppSelector(
-    (state) => state.followUp
-  );
+  const { followUp, followUpDetails, loading, followUpTableData } =
+    useAppSelector((state) => state.followUp);
 
   const user = isJSON(getUser());
-
   const { modal } = useAppSelector((state) => state.global);
   const {
     modal: { data },
@@ -54,25 +52,10 @@ const useGeneralFollowUp = () => {
     neutral: true,
   });
 
-  // useMemo(() => {
-  //   const today = moment().startOf("day");
-  //   const todayFollowUps = followUp?.filter((item) =>
-  //     moment(item.dateTime).isSame(today, "day")
-  //   );
-
-  //   if (todayFollowUps.length > 0) {
-  //     setTodayFollowUps(todayFollowUps);
-  //   }
-  // }, [followUp]);
-
-  // useEffect(() => {
-  //   if (user?.role !== "Admin" && followUp?.length === 0)
-  //     dispatch(readFollowUp({ params: { filter: { status: "10" } } })).then(
-  //       (response: any) => {
-  //         setTodayFollowUps(response?.payload.followUp);
-  //       }
-  //     );
-  // }, [user]);
+  useEffect(() => {
+    if (user?.role !== "Admin" && followUp?.length === 0)
+      dispatch(readFollowUpTableData({ params: { filter: filter } }));
+  }, []);
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -142,8 +125,11 @@ const useGeneralFollowUp = () => {
 
   const routeHandler = async () => {
     const response = await dispatch(deleteFollowUp({ data: { id: data } }));
-    if (response?.payload)
-      dispatch(readFollowUp({ params: { filter: filter, page: 1, size: 10 } }));
+    if (response?.payload) {
+      dispatch(readFollowUp({ params: { filter: { status: "10" } } }));
+      dispatch(readDashboard({ params: { filter: { month: 1 } } }));
+      handleFollowUps();
+    }
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -207,6 +193,10 @@ const useGeneralFollowUp = () => {
     ),
   };
 
+  const todayFollowUps = followUp.filter((item) =>
+    moment(item.dateTime).isSame(moment(), "day")
+  );
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -223,7 +213,8 @@ const useGeneralFollowUp = () => {
     hoveredIndex,
     handleMouseEnter,
     handleMouseLeave,
-    todayFollowUps
+    followUpTableData,
+    todayFollowUps,
   };
 };
 

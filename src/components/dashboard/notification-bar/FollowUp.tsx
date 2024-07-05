@@ -151,7 +151,7 @@ export const FollowUpNotificationBar = ({
 
   return (
     <>
-      <div className="bg-white rounded-[20px] h-[397.089px]">
+      <div className="bg-white rounded-[20px] h-[397.089px] relative">
         <h1 className="mb-3 ml-[40px] pt-5 text-[#18181B] font-medium">
           {translate("dashboard_detail.follow_up_heading")}
         </h1>
@@ -200,8 +200,8 @@ export const FollowUpNotificationBar = ({
           />
         )}
 
-        {followUp && followUp?.length > 0 && (
-          <div className="flex justify-center py-2 border-t border-t-[#EFEFEF]">
+        {followUp && followUp.length > 0 && (
+          <div className="flex justify-center py-2 border-t border-t-[#EFEFEF] absolute bottom-0 right-0 left-0">
             <button
               onClick={() => handleFollowUps()}
               className="text-[#616161] hover:text-primary w-fit text-sm font-medium"

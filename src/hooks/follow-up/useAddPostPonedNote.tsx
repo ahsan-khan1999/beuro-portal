@@ -60,6 +60,6 @@ export const useAddPostPonedNote = (handleFollowUpsDetails: Function) => {
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

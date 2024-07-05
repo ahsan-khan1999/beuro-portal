@@ -3,19 +3,19 @@ import contactSupportSlice from "../slices/contactSupport/contactSupportSlice";
 import contentSlice from "../slices/content/contentSlice";
 import contractSlice from "../slices/contract/contractSlice";
 import customerSlice from "../slices/customer/customerSlice";
-import globalSlice from '../slices/globalSlice/global';
+import globalSlice from "../slices/globalSlice/global";
 import invoiceSlice from "../slices/invoice/invoiceSlice";
 import leadSlice from "../slices/lead/leadSlice";
 import offerSlice from "../slices/offer/offerSlice";
 // import userAccountSlice from "../slices/user/user-account-slice";
-import EmployeeSlice from '../slices/employee/emplyeeSlice';
+import EmployeeSlice from "../slices/employee/emplyeeSlice";
 import serviceSlice from "../slices/service/serviceSlice";
 import followUp from "../slices/followUp/followUp";
 import noteSlice from "../slices/noteSlice/noteSlice";
 import imageSlice from "../slices/imageSlice/image";
 import settings from "../slices/settingSlice/settings";
-import EmailSlice from '../slices/emailTracker/email';
-import companySlice from "../slices/company/companySlice"
+import EmailSlice from "../slices/emailTracker/email";
+import companySlice from "../slices/company/companySlice";
 const reducer = {
   auth,
   global: globalSlice,
@@ -34,7 +34,6 @@ const reducer = {
   image: imageSlice,
   settings,
   emailSlice: EmailSlice,
-  company: companySlice
-
+  company: companySlice,
 };
 export default reducer;
