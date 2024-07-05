@@ -10,12 +10,7 @@ import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
 import { EditComponentsType } from "@/enums/invoice";
 
-const EditOffersDetailsData = ({
-  shareImgModal,
-  handleImagesUpload,
-  handleImageSlider,
-  tab,
-}: {
+export interface EditInvoiceProps {
   shareImgModal: Function;
   handleImagesUpload: (
     item: string,
@@ -23,7 +18,14 @@ const EditOffersDetailsData = ({
   ) => void;
   handleImageSlider: () => void;
   tab?: EditComponentsType;
-}) => {
+}
+
+const EditInvoiceDetailsData = ({
+  shareImgModal,
+  handleImagesUpload,
+  handleImageSlider,
+  tab,
+}: EditInvoiceProps) => {
   const [tabType, setTabType] = useState<EditComponentsType>(
     tab || EditComponentsType.offerEdit
   );
@@ -153,4 +155,4 @@ const EditOffersDetailsData = ({
   );
 };
 
-export default EditOffersDetailsData;
+export default EditInvoiceDetailsData;

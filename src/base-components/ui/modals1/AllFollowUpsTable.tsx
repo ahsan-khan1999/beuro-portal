@@ -5,7 +5,10 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import FollowUpsTable from "@/components/follow-up";
 import { FollowUpsProps } from "@/types/follow-up";
 
-const FollowUps = ({ onClose, handleFollowUpsDetails }: FollowUpsProps) => {
+const AllFollowUpsTable = ({
+  onClose,
+  handleFollowUpsDetails,
+}: FollowUpsProps) => {
   return (
     <BaseModal
       onClose={onClose}
@@ -24,4 +27,4 @@ const FollowUps = ({ onClose, handleFollowUpsDetails }: FollowUpsProps) => {
   );
 };
 
-export default FollowUps;
+export default AllFollowUpsTable;

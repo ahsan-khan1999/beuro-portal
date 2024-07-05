@@ -1,4 +1,8 @@
-import { deleteFollowUp, readFollowUp } from "@/api/slices/followUp/followUp";
+import {
+  deleteFollowUp,
+  readFollowUp,
+  readFollowUpTableData,
+} from "@/api/slices/followUp/followUp";
 import { FilterType } from "@/types";
 import { FollowUps } from "@/types/follow-up";
 import React, { useEffect, useState } from "react";
@@ -38,7 +42,9 @@ const useFollowUps = () => {
 
   const fetchFollowUps = () => {
     dispatch(
-      readFollowUp({ params: { filter: filter, page: currentPage, size: 10 } })
+      readFollowUpTableData({
+        params: { filter: filter, page: currentPage, size: 10 },
+      })
     ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.FollowUp);

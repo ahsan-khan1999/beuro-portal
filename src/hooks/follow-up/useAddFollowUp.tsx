@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
 import { Modals } from "@/enums/follow-up";
-import { createFollowUp } from "@/api/slices/followUp/followUp";
+import { createFollowUp, readFollowUp } from "@/api/slices/followUp/followUp";
 import { useEffect, useMemo } from "react";
 import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
 import { readLead } from "@/api/slices/lead/leadSlice";
@@ -74,6 +74,8 @@ export const useAddFollowUp = (
     );
     if (response?.payload) {
       handleFollowUps();
+      dispatch(readFollowUp({ params: { filter: { status: "10" } } }));
+
       if (router.pathname === "/dashboard")
         dispatch(readDashboard({ params: { filter: { month: 1 } } }));
     }

@@ -9,6 +9,7 @@ import moment from "moment";
 
 interface CustomerState {
   followUp: FollowUps[];
+  followUpTableData: FollowUps[];
   loading: boolean;
   error: Record<string, object>;
   totalCount: number;
@@ -19,6 +20,7 @@ interface CustomerState {
 
 const initialState: CustomerState = {
   followUp: [],
+  followUpTableData: [],
   loading: false,
   error: {},
   lastPage: 1,
@@ -34,6 +36,19 @@ export const readFollowUp: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.readFollowUp(params);
+      return response?.data?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+export const readFollowUpTableData: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("followUpTable/read", async (args, thunkApi) => {
+    const { params, router, translate } = args as any;
+
+    try {
+      const response = await apiServices.readTableFollowUp(params);
       return response?.data?.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -159,15 +174,22 @@ const followUpSlice = createSlice({
       state.followUp = action.payload.FollowUp;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
-
-      const today = moment().startOf("day");
-      const todayFollowUps = action.payload.FollowUp?.filter((item: any) =>
-        moment(item.dateTime).isSame(today, "day")
-      );
-      state.filteredCount = todayFollowUps.length;
       state.loading = false;
     });
     builder.addCase(readFollowUp.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(readFollowUpTableData.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readFollowUpTableData.fulfilled, (state, action) => {
+      state.followUpTableData = action.payload.FollowUp;
+      state.lastPage = action.payload.lastPage;
+      state.totalCount = action.payload.totalCount;
+      state.loading = false;
+    });
+    builder.addCase(readFollowUpTableData.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(createFollowUp.pending, (state) => {
