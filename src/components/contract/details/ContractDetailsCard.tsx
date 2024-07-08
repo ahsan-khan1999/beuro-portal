@@ -44,6 +44,7 @@ const ContractDetailsCard = ({
   const paymentMethod = [
     `${translate("payment_method.Cash")}`,
     `${translate("payment_method.Online")}`,
+    `${translate("payment_method.Twint")}`,
   ];
 
   const contractStatus = [

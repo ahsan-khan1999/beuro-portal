@@ -914,6 +914,7 @@ export interface ProductItemFooterProps {
   isDiscount?: boolean;
   discountDescription?: string;
   language?: string;
+  paymentType?: string;
 }
 
 export interface ContactDetailsProps {

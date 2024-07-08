@@ -49,6 +49,10 @@ export default function InvoicesFilter({
       label: `${translate("filters.extra_filters.cash")}`,
       type: `${staticEnums.PaymentType.Cash}`,
     },
+    {
+      label: `${translate("filters.extra_filters.twint")}`,
+      type: `${staticEnums.PaymentType.Twint}`,
+    },
   ];
 
   const handleSave = () => {

@@ -2120,6 +2120,7 @@
       "open": "Open",
       "online": "Online",
       "cash": "Cash",
+      "twint": "Twint",
       "sending": "Sending"
     }
   },
@@ -2196,7 +2197,8 @@
   },
   "payment_method": {
     "Cash": "Cash",
-    "Online": "Online"
+    "Online": "Online",
+    "Twint": "Twint"
   },
   "typeList": {
     "All": "All",

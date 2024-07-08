@@ -603,7 +603,9 @@ export const staticEnums: Record<string, any> = {
   PaymentType: {
     Cash: 0,
     Online: 1,
+    Twint: 2,
   },
+
   ContractStatus: {
     Open: 0,
     Confirmed: 1,
