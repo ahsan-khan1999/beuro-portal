@@ -16,13 +16,7 @@ import {
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { ModalType } from "@/enums/ui";
-import {
-  AcknowledgementSlipProps,
-  InvoiceEmailHeaderProps,
-  PayableToProps,
-  PdfProps,
-  TemplateType,
-} from "@/types";
+import { InvoiceEmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import localStoreUtil from "@/utils/localstore.util";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -32,48 +26,18 @@ import { PdfSubInvoiceTypes } from "@/types/invoice";
 import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 import { staticEnums } from "@/utils/static";
 
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
 let invoiceInfoObj = {
   subject: "",
   description: "",
 };
+
 export const useReceiptPdf = () => {
   const [receiptData, setReceiptData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>();
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
 
@@ -83,18 +47,17 @@ export const useReceiptPdf = () => {
 
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
-  // const [pdfFile, setPdfFile] = useState(null);
-  // const [qrCodeUrl, setQrCodeUrl] = useState("");
-
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
 
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
+
   const { loading, collectiveInvoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -249,6 +212,7 @@ export const useReceiptPdf = () => {
               discountPercentage: discountPercentage?.toString(),
               updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
+              paymentType: invoiceDetails?.paymentType,
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount?.toString(),
               isShowExtraAmount: true,

@@ -17,7 +17,6 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
     error,
     translate,
     offerDetails,
-    loading,
   } = useAddOfferDetails(onHandleNext);
 
   const handleCancel = () => {

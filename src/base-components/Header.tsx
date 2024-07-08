@@ -57,6 +57,21 @@ const Header = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = moment();
+      const upcomingFollowUps = followUp?.filter((item) =>
+        moment(item.dateTime).isBetween(now, moment(now).add(1, "minute"))
+      );
+
+      if (upcomingFollowUps.length > 0) {
+        showError("This follow-up is finishing within 1 minute");
+      } 
+    }, 3000); 
+
+    return () => clearInterval(interval);
+  }, [followUp]);
+
   const isSVG = user?.company?.logo?.endsWith(".svg");
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">

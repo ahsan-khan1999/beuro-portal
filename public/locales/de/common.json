@@ -2115,6 +2115,7 @@
       "open": "Offen",
       "online": "Online",
       "cash": "Bar",
+      "twint": "Twint",
       "sending": "Senden"
     }
   },

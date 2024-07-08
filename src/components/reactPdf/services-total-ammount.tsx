@@ -145,6 +145,7 @@ export const ServicesTotalAmount = ({
   discountDescription,
   dueAmount,
   language,
+  paymentType,
 }: Partial<ProductItemFooterProps>) => {
   const isPaid =
     invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
@@ -191,6 +192,7 @@ export const ServicesTotalAmount = ({
       total_paid_amount: "Total Paid Amount",
       amount_paid_last: "The amount you paid last time.",
       general_terms: "General Terms and Conditions",
+      payment_method: "Payment Method",
       terms_des:
         "Below you will find further information on the guidelines and conditions. Please take the time to understand the following terms and conditions.",
     },
@@ -205,6 +207,7 @@ export const ServicesTotalAmount = ({
       total_paid_amount: "Bezahlte Gesamtbetrag",
       amount_paid_last: "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
       general_terms: "Allgemeine Geschäftsbedingungen",
+      payment_method: "Zahlungsmethode",
       terms_des:
         "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen.",
     },
@@ -431,8 +434,8 @@ export const ServicesTotalAmount = ({
                     </Text>
                     <Text style={styles.paidText}>
                       {langContent[language as keyof typeof langContent]
-                        ?.amount_paid_last ||
-                        "Der Betrag, den Sie beim letzten Mal bezahlt haben."}
+                        ?.payment_method || "Zahlungsmethode"}{" "}
+                      ({paymentType})
                     </Text>
                     <Text style={styles.text}>
                       -{Number(dueAmount).toFixed(2)}

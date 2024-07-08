@@ -35,7 +35,7 @@ const OfferDetailsCard = ({
   onFileUpload,
 }: OfferDetailCardProps) => {
   const router = useRouter();
-  const {t:translate} = useTranslation()
+  const { t: translate } = useTranslation();
 
   const itemsValue = [
     `${translate("offer_status.Open")}`,
@@ -51,6 +51,7 @@ const OfferDetailsCard = ({
   const paymentMethod = [
     `${translate("payment_method.Cash")}`,
     `${translate("payment_method.Online")}`,
+    `${translate("payment_method.Twint")}`,
   ];
 
   const handleBack = () => {
