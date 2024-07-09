@@ -113,10 +113,26 @@ const useInvoice = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
       });
 
+      let calculationFilter: {
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+        paymentType?: string | string[];
+      } = {
+        date: updatedFilter.date,
+        paymentType: updatedFilter.paymentType,
+      };
+
+      if (updatedFilter.date || updatedFilter.paymentType) {
+        calculationFilter.date = updatedFilter.date;
+        calculationFilter.paymentType = updatedFilter.paymentType;
+      }
+
       dispatch(
         invoiceCalculation({
           params: {
-            filter: updatedFilter,
+            filter: calculationFilter,
           },
         })
       );

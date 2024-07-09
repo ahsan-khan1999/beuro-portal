@@ -44,6 +44,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     (state) => state.customer
   );
 
+  console.log(customer);
+
   const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
 
@@ -70,6 +72,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
   const type = watch("type");

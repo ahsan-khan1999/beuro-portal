@@ -20,6 +20,7 @@ export const useAddFollowUp = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  // const { customer } = useAppSelector((state) => state.customer);
   const { lead } = useAppSelector((state) => state.lead);
   const { loading, error } = useAppSelector((state) => state.followUp);
   const { followUps } = useAppSelector((state) => state.settings);

@@ -15,6 +15,8 @@ import { LanguageSelector } from "@/base-components/languageSelector/language-se
 import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 import { readFollowUp } from "@/api/slices/followUp/followUp";
 import moment from "moment";
+import { FollowUpNotification } from "./ui/follow-up-notification";
+import { FollowUps } from "@/types/follow-up";
 
 const Header = () => {
   const { t: translate } = useTranslation();
@@ -22,6 +24,7 @@ const Header = () => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const { followUp } = useAppSelector((state) => state.followUp);
   const [todayCount, setTodayCount] = useState<number>(0);
+  const [upcomingFollowUp, setUpcomingFollowUp] = useState<any>(null);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -60,14 +63,18 @@ const Header = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const now = moment();
-      const upcomingFollowUps = followUp?.filter((item) =>
-        moment(item.dateTime).isBetween(now, moment(now).add(1, "minute"))
-      );
+      const oneHourLater = moment(now).add(1, "hour");
+      const today = moment().startOf("day");
 
-      if (upcomingFollowUps.length > 0) {
-        showError("This follow-up is finishing within 1 minute");
-      } 
-    }, 3000); 
+      const upcoming = followUp?.find((item) => {
+        const itemTime = moment(item.dateTime);
+        return (
+          itemTime.isSame(today, "day") && itemTime.isBetween(now, oneHourLater)
+        );
+      });
+
+      setUpcomingFollowUp(upcoming || null);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [followUp]);
@@ -118,12 +125,10 @@ const Header = () => {
         <div className="flex items-center pr-8">
           {user?.role !== "Admin" && (
             <div className="relative menu mr-5">
-              {/* <Image
-                src={createOfferIcon}
-                alt="Create Offer Icon"
-                className="cursor-pointer"
-              /> */}
               <NotificationIcon count={todayCount} />
+              {/* {upcomingFollowUp && (
+                <FollowUpNotification followUp={upcomingFollowUp} />
+              )} */}
               <FollowUpDropDown />
             </div>
           )}
