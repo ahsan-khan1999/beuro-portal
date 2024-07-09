@@ -41,6 +41,8 @@ export const useAddFollowUp = (
     resolver: yupResolver<FieldValues>(schema),
   });
 
+  console.log(customer, "customer");
+
   const customerID = watch("customer");
 
   const lookUpModals = {

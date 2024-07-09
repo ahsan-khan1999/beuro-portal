@@ -51,7 +51,7 @@ export interface OffersTableRowTypes {
   isTax: boolean;
   offerNumber: string;
   offerStatus: "Open" | "Accepted" | "Expired" | "Rejected";
-  paymentType: "Cash" | "Online";
+  paymentType: "Cash" | "Online" | "Twint";
   taxType: "Include" | "Exclude";
   taxAmount: number;
   title: string;
@@ -156,7 +156,7 @@ export interface InvoiceTableRowDetailsTypes {
   isTax: boolean;
   invoiceNumber: string;
   offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
-  paymentType: "Cash" | "Online";
+  paymentType: "Cash" | "Online" | "Twint";
   taxType: "Include" | "Exclude";
   taxAmount: number;
   title: string;

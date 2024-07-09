@@ -33,6 +33,7 @@ export const SelectBox = ({
       field?.onChange(defaultValue);
     }
   }, [defaultValue]);
+
   useEffect(() => {
     setOption(options);
   }, [options]);

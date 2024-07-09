@@ -611,8 +611,8 @@ export function getPaymentTypeColor(status: string) {
   else if (
     staticEnums["PaymentType"][status] == staticEnums["PaymentType"]["Online"]
   )
-    return "#FE9244";
-  else return "#FF376F";
+    return "#4A13E7";
+  else return "#FE9244";
 }
 
 export function getOfferStatusColor(status: string) {

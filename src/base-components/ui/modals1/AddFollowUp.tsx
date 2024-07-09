@@ -22,7 +22,7 @@ const AddFollowUp = ({
       containerClassName="max-w-[650px] lg:max-w-[960px] min-h-auto max-h-fit"
     >
       <AnimatePresence>
-        <motion.div className="relative flex flex-col px-4 lg:px-10 py-[30px]">
+        <motion.div className="relative flex flex-col px-4 lg:px-6 py-[30px]">
           <Image
             src={crossIcon}
             alt="cross_icon"

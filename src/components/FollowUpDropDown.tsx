@@ -26,7 +26,7 @@ const FollowUpDropDown = () => {
 
   return (
     <>
-      <div className="bg-white rounded-[20px] shadow-followUp w-[460px] absolute top-8 menuItems -right-[2px] mt-7 !z-50 follow-up-container pt-[25px] pb-[18px]">
+      <div className="bg-white rounded-[20px] shadow-followUp w-[560px] absolute top-8 menuItems -right-[2px] mt-7 !z-50 follow-up-container pt-[25px] pb-[18px]">
         <div className="flex justify-between items-center px-[30px] mb-6">
           <h1 className="text-[#222B45] text-lg font-medium">
             {translate("dashboard_detail.follow_up_heading")}
