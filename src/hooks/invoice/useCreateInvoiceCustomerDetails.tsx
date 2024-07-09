@@ -68,7 +68,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    // dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -202,21 +202,21 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     }
   }, [type]);
 
-  const fetchCustomers = async (searchItem: string) => {
-    const response = await dispatch(
-      readCustomer({
-        params: {
-          filter: {
-            text: searchItem,
-          },
-        },
-      })
-    );
+  // const fetchCustomers = async (searchItem: string) => {
+  //   const response = await dispatch(
+  //     readCustomer({
+  //       params: {
+  //         filter: {
+  //           text: searchItem,
+  //         },
+  //       },
+  //     })
+  //   );
 
-    if (response.payload) {
-      setFilteredCustomers(response.payload?.Customer);
-    }
-  };
+  //   if (response.payload) {
+  //     setFilteredCustomers(response.payload?.Customer);
+  //   }
+  // };
   const invoiceFields = CreateInvoiceCustomerDetailsFormField(
     register,
     loading,
@@ -224,7 +224,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     {
       customerType,
       type,
-      customer: filteredCustomers,
+      customer,
       onCustomerSelect,
       customerDetails,
       onCancel,
@@ -233,7 +233,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
       content,
       handleContentSelect,
       invoiceDetails,
-      onEnterPress: fetchCustomers,
+      // onEnterPress: fetchCustomers,
       // leadID,
     },
     setValue

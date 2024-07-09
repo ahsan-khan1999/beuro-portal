@@ -28,12 +28,13 @@ import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
 import { ContentTableRowTypes } from "@/types/content";
+import { Customers } from "@/types/customer";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [filteredCustomers, setFilteredCustomers] = useState([]);
+  const [filteredCustomers, setFilteredCustomers] = useState<Customers[]>([]);
 
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
@@ -68,7 +69,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    // dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -113,6 +113,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
           staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
         time: offerDetails?.time,
       });
+      // fetchCustomers(offerDetails?.leadID?.customerDetail?.fullName);
     } else {
       setValue("type", "New Customer");
     }
@@ -172,14 +173,24 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     }
   }, [selectedContent, leadID]);
 
-  const fetchCustomers = async (searchTerm: string) => {
-    const response = await dispatch(
-      readCustomer({ params: { filter: { text: searchTerm } } })
-    );
-    if (response.payload) {
-      setFilteredCustomers(response.payload.Customer);
-    }
-  };
+  // const fetchCustomers = async (searchTerm: string) => {
+  //   const response = await dispatch(
+  //     readCustomer({
+  //       params: {
+  //         filter: { text: searchTerm },
+  //       },
+  //     })
+  //   );
+
+  //   if (response.payload) {
+  //     let customersList = [...filteredCustomers, ...response.payload.Customer];
+  //     const uniqueCustomers = Array.from(
+  //       new Map(customersList.map((item) => [item.id, item])).values()
+  //     );
+
+  //     setFilteredCustomers(uniqueCustomers);
+  //   }
+  // };
 
   const offerFields = AddOfferDetailsFormField(
     register,
@@ -188,7 +199,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     {
       customerType,
       type,
-      customer: filteredCustomers,
+      customer,
       onCustomerSelect,
       customerDetails,
       onCancel,
@@ -198,7 +209,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       handleContentSelect,
       offerDetails,
       leadID,
-      onEnterPress: fetchCustomers,
+      // onEnterPress: fetchCustomers,
     },
     setValue
   );

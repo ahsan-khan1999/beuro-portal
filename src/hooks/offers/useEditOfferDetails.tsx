@@ -28,7 +28,7 @@ import {
   readOfferDetails,
   setOfferDetails,
 } from "@/api/slices/offer/offerSlice";
-import { OfferPromiseActionType } from "@/types/customer";
+import { Customers, OfferPromiseActionType } from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -52,7 +52,7 @@ export const useEditOfferDetails = ({
 
   const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
-  const [filteredCustomers, setFilteredCustomers] = useState([]);
+  const [filteredCustomers, setFilteredCustomers] = useState<Customers[]>([]);
 
   const onCancel = () => {
     router.pathname = "/offers";
@@ -103,6 +103,7 @@ export const useEditOfferDetails = ({
               ],
             time: res?.payload?.time,
           });
+          // fetchCustomers(res?.payload?.leadID?.customerDetail?.fullName);
         }
       );
     }
@@ -114,7 +115,7 @@ export const useEditOfferDetails = ({
   const selectedContent = watch("content");
 
   useEffect(() => {
-    // dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -210,10 +211,20 @@ export const useEditOfferDetails = ({
 
   // const fetchCustomers = async (searchTerm: string) => {
   //   const response = await dispatch(
-  //     readCustomer({ params: { filter: { text: searchTerm } } })
+  //     readCustomer({
+  //       params: {
+  //         filter: { text: searchTerm },
+  //       },
+  //     })
   //   );
+
   //   if (response.payload) {
-  //     setFilteredCustomers(response.payload.Customer);
+  //     let customersList = [...filteredCustomers, ...response.payload.Customer];
+  //     const uniqueCustomers = Array.from(
+  //       new Map(customersList.map((item) => [item.id, item])).values()
+  //     );
+
+  //     setFilteredCustomers(uniqueCustomers);
   //   }
   // };
 
@@ -234,6 +245,7 @@ export const useEditOfferDetails = ({
       handleContentSelect,
       selectedContent,
       offerDetails,
+      // onEnterPress: fetchCustomers,
     },
     setValue
   );

@@ -19,7 +19,7 @@ export const InvoiceCard = ({
   return (
     <div className={containerClassName}>
       <span className="text-sm font-medium text-white">{heading}:</span>
-      <p className="text-xl font-semibold text-white">CHF {value}</p>
+      <p className="text-xl font-semibold text-white">{value} CHF</p>
     </div>
   );
 };

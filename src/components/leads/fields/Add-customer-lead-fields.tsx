@@ -389,7 +389,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
       },
       field: {
         className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
-        type: Field.customerSelectField,
+        type: Field.select,
         id: "customerID",
         name: "customerID",
         options: customer?.map((item) => ({
@@ -398,7 +398,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         })),
 
         onItemChange: onCustomerSelect,
-        onEnterPress: (value: string) => onEnterPress && onEnterPress(value),
+        // onEnterPress: (value: string) => onEnterPress && onEnterPress(value),
         control,
         value: leadDetails?.id
           ? leadDetails?.customerID

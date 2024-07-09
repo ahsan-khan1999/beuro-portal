@@ -416,7 +416,7 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
         },
         field: {
           className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
-          type: Field.customerSelectField,
+          type: Field.select,
           id: "customerID",
           name: "customerID",
           options: customer?.map((item) => ({
@@ -427,7 +427,7 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
 
           control,
           onItemChange: onCustomerSelect,
-          onEnterPress: (value: string) => onEnterPress && onEnterPress(value),
+          // onEnterPress: (value: string) => onEnterPress && onEnterPress(value),
           value: invoiceDetails?.id ? invoiceDetails?.customerID : "",
           setValue,
         },
