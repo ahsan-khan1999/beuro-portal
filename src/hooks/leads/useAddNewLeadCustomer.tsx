@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNewCustomerLeadFormField } from "@/components/leads/fields/Add-customer-lead-fields";
 import { generateAddNewLeadCustomerDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   readCustomer,
   setCustomerDetails,
@@ -20,6 +20,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [filteredCustomers, setFilteredCustomers] = useState([]);
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
@@ -49,9 +50,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const customerType = watch("customerType");
-  // const customerID = watch("customerID");
 
+  const customerType = watch("customerType");
   const type = watch("type");
   const gender = watch("gender");
 
@@ -94,6 +94,16 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     }
   }, [leadDetails.id]);
 
+  const fetchCustomers = async (searchItem: string) => {
+    const response = await dispatch(
+      readCustomer({ params: { filter: { text: searchItem } } })
+    );
+
+    if (response.payload) {
+      setFilteredCustomers(response.payload?.Customer);
+    }
+  };
+
   const fields = AddNewCustomerLeadFormField(
     register,
     loading,
@@ -101,12 +111,13 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     {
       customerType,
       type,
-      customer,
+      customer: filteredCustomers,
       onCustomerSelect,
       customerDetails,
       onCancel,
       leadDetails,
       gender,
+      onEnterPress: fetchCustomers,
     },
     setValue
   );

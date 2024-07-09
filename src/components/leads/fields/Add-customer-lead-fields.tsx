@@ -17,6 +17,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
     onCancel,
     leadDetails,
     gender,
+    onEnterPress,
   },
   setValue
 ) => {
@@ -388,16 +389,17 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
       },
       field: {
         className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
-        type: Field.select,
+        type: Field.customerSelectField,
         id: "customerID",
         name: "customerID",
-        options: customer?.map((item, key) => ({
+        options: customer?.map((item) => ({
           value: item.id,
           label: item.fullName,
         })),
 
-        control,
         onItemChange: onCustomerSelect,
+        onEnterPress: (value: string) => onEnterPress && onEnterPress(value),
+        control,
         value: leadDetails?.id
           ? leadDetails?.customerID
           : customerDetails && customerDetails?.id,

@@ -103,7 +103,7 @@ const useGeneralFollowUp = () => {
   };
 
   const handleAddFollowUp = () => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    // dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(updateModalType({ type: ModalType.ADD_FOLLOW_UP }));
   };
 

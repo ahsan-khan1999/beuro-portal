@@ -1,5 +1,5 @@
 export { InputField } from "./input-field";
-export { ColorPicker } from './color-picker';
+export { ColorPicker } from "./color-picker";
 export { SelectField } from "./select/select-field";
 export { TelephoneInputField } from "./telephone-input-field";
 export { PasswordField } from "./password-field";
@@ -13,5 +13,6 @@ export { SpanField } from "./span-field";
 export { AddFiled } from "./add-field-button";
 export { TextAreaField } from "./text-area-field";
 export { CkEditor } from "./ckEditorField/ck-editor";
-export { MultiSelectField } from "./multi-select/multi-select-field" 
-export { ToggleButton } from "./toggleButton/toggle" 
+export { MultiSelectField } from "./multi-select/multi-select-field";
+export { ToggleButton } from "./toggleButton/toggle";
+export { CustomerSelectField } from "./customerSelect/customer-select-field";

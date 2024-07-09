@@ -14,7 +14,7 @@ import {
   AddOfferDetailsSubmitFormField,
 } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   readCustomer,
   setCustomerDetails,
@@ -52,6 +52,7 @@ export const useEditOfferDetails = ({
 
   const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
+  const [filteredCustomers, setFilteredCustomers] = useState([]);
 
   const onCancel = () => {
     router.pathname = "/offers";
@@ -113,7 +114,7 @@ export const useEditOfferDetails = ({
   const selectedContent = watch("content");
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    // dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -206,6 +207,16 @@ export const useEditOfferDetails = ({
   }, [selectedContent]);
 
   const handleContentSelect = () => {};
+
+  // const fetchCustomers = async (searchTerm: string) => {
+  //   const response = await dispatch(
+  //     readCustomer({ params: { filter: { text: searchTerm } } })
+  //   );
+  //   if (response.payload) {
+  //     setFilteredCustomers(response.payload.Customer);
+  //   }
+  // };
+
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -284,6 +295,6 @@ export const useEditOfferDetails = ({
     error,
     translate,
     offerDetails,
-    loading
+    loading,
   };
 };

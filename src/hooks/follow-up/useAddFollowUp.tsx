@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
-import { Modals } from "@/enums/follow-up";
 import { createFollowUp, readFollowUp } from "@/api/slices/followUp/followUp";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
 import { readLead } from "@/api/slices/lead/leadSlice";
+import { readCustomer } from "@/api/slices/customer/customerSlice";
 
 export const useAddFollowUp = (
   handleFollowUps: Function,
@@ -20,10 +20,10 @@ export const useAddFollowUp = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { customer } = useAppSelector((state) => state.customer);
   const { lead } = useAppSelector((state) => state.lead);
   const { loading, error } = useAppSelector((state) => state.followUp);
   const { followUps } = useAppSelector((state) => state.settings);
+  const [filteredCustomers, setFilteredCustomers] = useState([]);
 
   useEffect(() => {
     dispatch(readFollowUpSettings({}));
@@ -41,18 +41,16 @@ export const useAddFollowUp = (
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  console.log(customer, "customer");
-
   const customerID = watch("customer");
 
-  const lookUpModals = {
-    [Modals.customer]: () => handleAllCustomers(),
-    [Modals.leads]: () => handleAllLeads(),
-  };
+  // const lookUpModals = {
+  //   [Modals.customer]: () => handleAllCustomers(),
+  //   [Modals.leads]: () => handleAllLeads(),
+  // };
 
-  const handleModalPop = (item: Modals) => {
-    lookUpModals[item]();
-  };
+  // const handleModalPop = (item: Modals) => {
+  //   lookUpModals[item]();
+  // };
 
   useMemo(() => {
     if (customerID) {
@@ -64,10 +62,20 @@ export const useAddFollowUp = (
     }
   }, [customerID]);
 
+  const fetchCustomers = async (searchTerm: string) => {
+    const response = await dispatch(
+      readCustomer({ params: { filter: { text: searchTerm } } })
+    );
+    if (response.payload) {
+      setFilteredCustomers(response.payload.Customer);
+    }
+  };
+
   const fields = AddFollowUpFormField(register, loading, control, {
-    customer: customer,
+    customer: filteredCustomers,
     lead: lead,
     followUps,
+    onEnterPress: fetchCustomers,
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -90,8 +98,8 @@ export const useAddFollowUp = (
     handleSubmit,
     errors,
     error,
-    customer,
-    lead,
+    // customer,
+    // lead,
     translate,
   };
 };
