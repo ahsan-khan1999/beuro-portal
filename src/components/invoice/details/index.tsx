@@ -66,11 +66,14 @@ const InvoiceDetails = () => {
     loading
   );
 
+  const invoiceTotalAmount =
+    invoiceDetails?.total - Number(invoiceDetails?.paidAmount);
+
   const shouldShowPendingInvoice =
     activeTab === "invoice"
       ? ((!loading || !loadingInvoice || !loadingReceipt) &&
-          !collectiveInvoice?.length &&
-          !collectiveReciept?.length) ||
+          collectiveInvoice?.length === 0 &&
+          invoiceTotalAmount > 0) ||
         !collectiveReciept?.map((item) => item.invoiceStatus !== "Paid")
       : false;
 
