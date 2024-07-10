@@ -683,6 +683,30 @@ export function getInvoiceEmailColor(status: string) {
   else return "#FF376F";
 }
 
+export function getFollowUpStatusColor(status: string) {
+  if (
+    staticEnums["FollowUp"]["Status"][status] ==
+    staticEnums["FollowUp"]["Status"]["Pending"]
+  )
+    return "#FE9244";
+  else if (
+    staticEnums["FollowUp"]["Status"][status] ==
+    staticEnums["FollowUp"]["Status"]["Upcoming"]
+  )
+    return "#4A13E7";
+  else if (
+    staticEnums["FollowUp"]["Status"][status] ==
+    staticEnums["FollowUp"]["Status"]["Overdue"]
+  )
+    return "#FF376F";
+  else if (
+    staticEnums["FollowUp"]["Status"][status] ==
+    staticEnums["FollowUp"]["Status"]["complete"]
+  )
+    return "#45C769";
+  else return "#FE9244";
+}
+
 export function getMailStatusColor(status: string) {
   if (staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["failed"])
     return "#FF376F";

@@ -6,6 +6,7 @@ export const BaseModal = ({
   children,
   onClose,
   containerClassName,
+  customOpacity,
 }: IBaseModalProps) => {
   const defaultContainerClasses =
     "rounded-lg bg-white w-[964px] max-w-[964px] min-h-[615px] max-h-[615px]";
@@ -15,7 +16,7 @@ export const BaseModal = ({
   );
 
   return (
-    <Backdrop onClose={onClose}>
+    <Backdrop onClose={onClose} customOpacity={customOpacity}>
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}

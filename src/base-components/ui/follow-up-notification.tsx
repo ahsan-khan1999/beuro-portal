@@ -4,20 +4,22 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import moment from "moment";
 import { BaseModal } from "./modals/base-modal";
-import { getDaysDifference } from "@/utils/utility";
+import { getDaysDifference, getFollowUpStatusColor } from "@/utils/utility";
+import { StatusColors } from "@/enums/follow-up";
 
 export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
   const { t: translate } = useTranslation();
 
   const onClose = () => setIsTimeEnded(false);
-  let days = getDaysDifference(followUp.createdAt);
+  let days = getDaysDifference(followUp?.createdAt);
+
 
   return (
     <BaseModal
       onClose={onClose}
-      containerClassName="w-[560px] max-h-[204px] min-h-[204px] rounded-[20px] pt-[25px] pb-[28px] absolute top-14 right-[21.5%] mt-7 follow-up-container"
+      customOpacity={true}
+      containerClassName="w-[560px] max-h-[221px] min-h-[221px] rounded-[20px] pt-[25px] pb-[28px] absolute top-14 right-[392px] mt-7 follow-up-container"
     >
-      {/* <div className="bg-white rounded-[20px] shadow-followUp w-[560px] absolute top-8 menuItems -right-[2px] mt-7 !z-50 follow-up-container pt-[25px] pb-[28px]"> */}
       <div>
         <h1 className="text-[#171B1E] text-xl font-semibold pl-[31px] pb-[18px]">
           {translate("common.follow_up_completed")}
@@ -32,11 +34,23 @@ export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
             className={`flex items-start gap-x-6 pl-[31px] pr-[47px] pt-3 border-b border-b-[#F5F5F5]`}
           >
             <Image src={infoIcon} alt="info" />
-            <div className="flex flex-col gap-y-[14px]">
-              <p className="text-base font-medium text-[#171B1E]">
+            <div className="flex flex-col">
+              <p className="text-lg font-medium text-[#171B1E]">
+                {followUp?.customer?.fullName}
+              </p>
+              <p className="text-base font-medium text-[#171B1E] mt-[2px]">
                 {followUp?.title}
               </p>
-              <div className="flex items-center">
+              <div className="flex items-center mt-[9px]">
+                <span
+                  className={`text-[${getFollowUpStatusColor(
+                    followUp?.status
+                  )}] border border-[${getFollowUpStatusColor(
+                    followUp?.status
+                  )}] font-medium text-sm mr-2 p-1 rounded-lg`}
+                >
+                  {followUp?.status}
+                </span>
                 <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] pr-2">
                   {moment(followUp?.dateTime).format("hh:mm")}
                 </span>
@@ -54,7 +68,6 @@ export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </BaseModal>
   );
 };
