@@ -18,11 +18,8 @@ const FollowUpDropDown = () => {
     hoveredIndex,
     followUpTableData,
     todayFollowUps,
+    handleFollowUpsDetails,
   } = useGeneralFollowUp();
-
-  const viewAllData = followUpTableData.map(
-    (item) => item.status === "Pending"
-  );
 
   return (
     <>
@@ -51,7 +48,8 @@ const FollowUpDropDown = () => {
                     key={index}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
-                    className={`flex items-start gap-x-6 pl-[30px] pr-[47px] pt-5 pb-6 border-b border-b-[#F5F5F5] ${
+                    onClick={() => handleFollowUpsDetails(item?.id)}
+                    className={`cursor-pointer flex items-start gap-x-6 pl-[30px] pr-[47px] pt-5 pb-6 border-b border-b-[#F5F5F5] ${
                       hoveredIndex === index ? "follow_up_item" : ""
                     }`}
                   >
