@@ -246,6 +246,7 @@ export interface IBaseModalProps {
   children: ReactNode;
   onClose: () => void;
   containerClassName?: string;
+  customOpacity?: boolean;
 }
 
 export interface IInfoModalProps extends IBaseModalProps {
@@ -266,6 +267,7 @@ export interface IConfirmationModalProps extends IConfirmationBaseModalProps {
 export interface IBackdropProps {
   children: ReactNode;
   onClose: () => void;
+  customOpacity?: boolean;
 }
 
 export interface OnClick {
