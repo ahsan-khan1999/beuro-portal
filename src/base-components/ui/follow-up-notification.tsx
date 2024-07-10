@@ -5,7 +5,6 @@ import { useTranslation } from "next-i18next";
 import moment from "moment";
 import { BaseModal } from "./modals/base-modal";
 import { getDaysDifference, getFollowUpStatusColor } from "@/utils/utility";
-import { StatusColors } from "@/enums/follow-up";
 
 export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
   const { t: translate } = useTranslation();
@@ -13,12 +12,11 @@ export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
   const onClose = () => setIsTimeEnded(false);
   let days = getDaysDifference(followUp?.createdAt);
 
-
   return (
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName="w-[560px] max-h-[221px] min-h-[221px] rounded-[20px] pt-[25px] pb-[28px] absolute top-14 right-[392px] mt-7 follow-up-container"
+      containerClassName="w-[560px] max-h-[221px] min-h-[231px] rounded-[20px] pt-[25px] pb-[28px] absolute top-[46px] right-[392px] mt-7 follow-up-container border border-primary"
     >
       <div>
         <h1 className="text-[#171B1E] text-xl font-semibold pl-[31px] pb-[18px]">
@@ -41,7 +39,7 @@ export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
               <p className="text-base font-medium text-[#171B1E] mt-[2px]">
                 {followUp?.title}
               </p>
-              <div className="flex items-center mt-[9px]">
+              <div className="flex items-center mt-1">
                 <span
                   className={`text-[${getFollowUpStatusColor(
                     followUp?.status
