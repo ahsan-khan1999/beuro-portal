@@ -711,7 +711,6 @@ export type GenerateLeadsCustomerFormField = (
     type: string;
     customer: Customers[];
     onCustomerSelect: (id: string) => void;
-    onEnterPress?: (text: string) => void;
     customerDetails: Customers;
     onCancel: () => void;
     leadDetails: Lead;
@@ -741,7 +740,6 @@ export type GenerateInvoiceCustomerFormField = (
     lead?: Lead[];
     content?: ContentTableRowTypes[];
     handleContentSelect?: () => void;
-    onEnterPress?: (item: string) => void;
     selectedContent?: string;
     leadID?: string;
     gender?: number;
@@ -767,7 +765,6 @@ export type GenerateFollowUpFormField = (
     lead: Lead[];
     followUps: FollowUp | null;
     onCustomerSelect?: (id: string) => void;
-    onEnterPress?: (text: string) => void;
   },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>

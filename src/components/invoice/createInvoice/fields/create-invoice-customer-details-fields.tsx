@@ -36,7 +36,6 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
       handleContentSelect,
       selectedContent,
       invoiceDetails,
-      onEnterPress,
       leadID,
     },
     setValue
@@ -427,7 +426,6 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
 
           control,
           onItemChange: onCustomerSelect,
-          // onEnterPress: (value: string) => onEnterPress && onEnterPress(value),
           value: invoiceDetails?.id ? invoiceDetails?.customerID : "",
           setValue,
         },

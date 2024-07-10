@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNewCustomerLeadFormField } from "@/components/leads/fields/Add-customer-lead-fields";
 import { generateAddNewLeadCustomerDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   readCustomer,
   setCustomerDetails,
@@ -15,20 +15,18 @@ import { createLead } from "@/api/slices/lead/leadSlice";
 import { updateQuery } from "@/utils/update-query";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
-import { Customers } from "@/types/customer";
 
 export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [filteredCustomers, setFilteredCustomers] = useState<Customers[]>([]);
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const onCancel = () => {
@@ -71,8 +69,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     }
   };
 
-  // console.log(leadDetails?.customerDetail?.fullName);
-
   useEffect(() => {
     if (leadDetails.id) {
       reset({
@@ -92,29 +88,10 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         companyName: leadDetails?.customerDetail?.companyName,
         gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
       });
-      // fetchCustomers(leadDetails?.customerDetail?.fullName);
     } else {
       setValue("type", "New Customer");
     }
   }, [leadDetails.id]);
-
-  // const fetchCustomers = async (searchItem: string) => {
-  //   const response = await dispatch(
-  //     readCustomer({ params: { filter: { text: searchItem } } })
-  //   );
-
-  //   if (response.payload) {
-  //     let customersList = [
-  //       ...filteredCustomers,
-  //       ...response?.payload?.Customer,
-  //     ];
-
-  //     const uniqueCustomers = Array.from(
-  //       new Map(customersList.map((item) => [item.id, item])).values()
-  //     );
-  //     setFilteredCustomers(uniqueCustomers);
-  //   }
-  // };
 
   const fields = AddNewCustomerLeadFormField(
     register,
@@ -129,7 +106,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       onCancel,
       leadDetails,
       gender,
-      // onEnterPress: fetchCustomers,
     },
     setValue
   );

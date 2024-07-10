@@ -34,7 +34,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
     selectedContent,
     offerDetails,
     leadID,
-    onEnterPress,
   },
   setValue
 ) => {
@@ -427,7 +426,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
-        // onEnterPress: (value: string) => onEnterPress && onEnterPress(value),
         value: offerDetails?.id ? offerDetails?.leadID?.customerID : "",
         setValue,
       },

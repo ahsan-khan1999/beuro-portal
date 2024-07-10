@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
 import { createFollowUp, readFollowUp } from "@/api/slices/followUp/followUp";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
 import { readLead } from "@/api/slices/lead/leadSlice";
 import { readCustomer } from "@/api/slices/customer/customerSlice";
@@ -20,14 +20,14 @@ export const useAddFollowUp = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  // const { customer } = useAppSelector((state) => state.customer);
+  const { customer } = useAppSelector((state) => state.customer);
   const { lead } = useAppSelector((state) => state.lead);
   const { loading, error } = useAppSelector((state) => state.followUp);
   const { followUps } = useAppSelector((state) => state.settings);
-  const [filteredCustomers, setFilteredCustomers] = useState([]);
 
   useEffect(() => {
     dispatch(readFollowUpSettings({}));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const schema = generateAddFollowUpValidation(translate);
@@ -63,20 +63,10 @@ export const useAddFollowUp = (
     }
   }, [customerID]);
 
-  const fetchCustomers = async (searchTerm: string) => {
-    const response = await dispatch(
-      readCustomer({ params: { filter: { text: searchTerm } } })
-    );
-    if (response.payload) {
-      setFilteredCustomers(response.payload.Customer);
-    }
-  };
-
   const fields = AddFollowUpFormField(register, loading, control, {
-    customer: filteredCustomers,
+    customer,
     lead: lead,
     followUps,
-    onEnterPress: fetchCustomers,
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

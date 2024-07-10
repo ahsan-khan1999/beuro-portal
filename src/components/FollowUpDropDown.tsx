@@ -86,16 +86,16 @@ const FollowUpDropDown = () => {
             />
           )}
         </div>
-        {viewAllData?.length > 0 && (
-          <div className="flex justify-center pt-[14px] border-t border-t-[#EFEFEF]">
-            <button
-              className="text-[#616161] w-fit text-base font-medium hover:text-primary"
-              onClick={() => handleFollowUps()}
-            >
-              {translate("follow_up.view_all")}
-            </button>
-          </div>
-        )}
+        {/* {viewAllData?.length > 0 && ( */}
+        <div className="flex justify-center pt-[14px] border-t border-t-[#EFEFEF]">
+          <button
+            className="text-[#616161] w-fit text-base font-medium hover:text-primary"
+            onClick={() => handleFollowUps()}
+          >
+            {translate("follow_up.view_all")}
+          </button>
+        </div>
+        {/* )} */}
       </div>
 
       {renderModal()}

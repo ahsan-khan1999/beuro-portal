@@ -9,7 +9,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   setCustomerDetails,
@@ -29,10 +29,9 @@ import {
 } from "@/components/invoice/createInvoice/fields/create-invoice-customer-details-fields";
 
 export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-  const [filteredCustomers, setFilteredCustomers] = useState([]);
 
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
@@ -68,7 +67,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -202,21 +201,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     }
   }, [type]);
 
-  // const fetchCustomers = async (searchItem: string) => {
-  //   const response = await dispatch(
-  //     readCustomer({
-  //       params: {
-  //         filter: {
-  //           text: searchItem,
-  //         },
-  //       },
-  //     })
-  //   );
 
-  //   if (response.payload) {
-  //     setFilteredCustomers(response.payload?.Customer);
-  //   }
-  // };
   const invoiceFields = CreateInvoiceCustomerDetailsFormField(
     register,
     loading,
@@ -233,7 +218,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
       content,
       handleContentSelect,
       invoiceDetails,
-      // onEnterPress: fetchCustomers,
       // leadID,
     },
     setValue

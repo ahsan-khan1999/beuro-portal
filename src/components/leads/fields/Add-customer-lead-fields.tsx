@@ -17,7 +17,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
     onCancel,
     leadDetails,
     gender,
-    onEnterPress,
   },
   setValue
 ) => {
@@ -398,7 +397,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         })),
 
         onItemChange: onCustomerSelect,
-        // onEnterPress: (value: string) => onEnterPress && onEnterPress(value),
         control,
         value: leadDetails?.id
           ? leadDetails?.customerID

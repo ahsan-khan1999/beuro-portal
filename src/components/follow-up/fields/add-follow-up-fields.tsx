@@ -6,7 +6,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  { customer, lead, followUps, onCustomerSelect, onEnterPress },
+  { customer, lead, followUps, onCustomerSelect },
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
@@ -29,7 +29,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
             },
             field: {
               className: "!py-4 !border-[#BFBFBF] focus:!border-primary",
-              type: Field.customerSelectField,
+              type: Field.select,
               id: "customer",
               name: "customer",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
@@ -45,7 +45,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
                 value: item?.id.toString(),
               })),
               onItemChange: () => onItemChange && onItemChange(),
-              onEnterPress: (value) => onEnterPress && onEnterPress(value),
               control,
             },
           },

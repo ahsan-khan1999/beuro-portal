@@ -15,7 +15,7 @@ import {
 } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   setCustomerDetails,
@@ -28,13 +28,11 @@ import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
 import { ContentTableRowTypes } from "@/types/content";
-import { Customers } from "@/types/customer";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [filteredCustomers, setFilteredCustomers] = useState<Customers[]>([]);
 
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
@@ -43,8 +41,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
-
-  console.log(customer);
 
   const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
@@ -72,7 +68,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const type = watch("type");
@@ -116,7 +112,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
           staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
         time: offerDetails?.time,
       });
-      // fetchCustomers(offerDetails?.leadID?.customerDetail?.fullName);
     } else {
       setValue("type", "New Customer");
     }
@@ -176,25 +171,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     }
   }, [selectedContent, leadID]);
 
-  // const fetchCustomers = async (searchTerm: string) => {
-  //   const response = await dispatch(
-  //     readCustomer({
-  //       params: {
-  //         filter: { text: searchTerm },
-  //       },
-  //     })
-  //   );
-
-  //   if (response.payload) {
-  //     let customersList = [...filteredCustomers, ...response.payload.Customer];
-  //     const uniqueCustomers = Array.from(
-  //       new Map(customersList.map((item) => [item.id, item])).values()
-  //     );
-
-  //     setFilteredCustomers(uniqueCustomers);
-  //   }
-  // };
-
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -212,7 +188,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       handleContentSelect,
       offerDetails,
       leadID,
-      // onEnterPress: fetchCustomers,
     },
     setValue
   );

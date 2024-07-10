@@ -14,7 +14,7 @@ import {
   AddOfferDetailsSubmitFormField,
 } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   setCustomerDetails,
@@ -28,7 +28,7 @@ import {
   readOfferDetails,
   setOfferDetails,
 } from "@/api/slices/offer/offerSlice";
-import { Customers, OfferPromiseActionType } from "@/types/customer";
+import { OfferPromiseActionType } from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -52,7 +52,6 @@ export const useEditOfferDetails = ({
 
   const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
-  const [filteredCustomers, setFilteredCustomers] = useState<Customers[]>([]);
 
   const onCancel = () => {
     router.pathname = "/offers";
@@ -115,7 +114,7 @@ export const useEditOfferDetails = ({
   const selectedContent = watch("content");
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -209,25 +208,6 @@ export const useEditOfferDetails = ({
 
   const handleContentSelect = () => {};
 
-  // const fetchCustomers = async (searchTerm: string) => {
-  //   const response = await dispatch(
-  //     readCustomer({
-  //       params: {
-  //         filter: { text: searchTerm },
-  //       },
-  //     })
-  //   );
-
-  //   if (response.payload) {
-  //     let customersList = [...filteredCustomers, ...response.payload.Customer];
-  //     const uniqueCustomers = Array.from(
-  //       new Map(customersList.map((item) => [item.id, item])).values()
-  //     );
-
-  //     setFilteredCustomers(uniqueCustomers);
-  //   }
-  // };
-
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -245,7 +225,6 @@ export const useEditOfferDetails = ({
       handleContentSelect,
       selectedContent,
       offerDetails,
-      // onEnterPress: fetchCustomers,
     },
     setValue
   );
