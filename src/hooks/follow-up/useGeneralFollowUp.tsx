@@ -17,7 +17,6 @@ import {
   readFollowUpTableData,
 } from "@/api/slices/followUp/followUp";
 import { FilterType } from "@/types";
-import { readCustomer } from "@/api/slices/customer/customerSlice";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { useTranslation } from "next-i18next";
 import { isJSON } from "@/utils/functions";
@@ -26,6 +25,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import moment from "moment";
 import AllFollowUpsTable from "@/base-components/ui/modals1/AllFollowUpsTable";
 import { readDashboard } from "@/api/slices/authSlice/auth";
+import { readCustomer } from "@/api/slices/customer/customerSlice";
 
 const useGeneralFollowUp = () => {
   const dispatch = useAppDispatch();
@@ -103,7 +103,6 @@ const useGeneralFollowUp = () => {
   };
 
   const handleAddFollowUp = () => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(updateModalType({ type: ModalType.ADD_FOLLOW_UP }));
   };
 

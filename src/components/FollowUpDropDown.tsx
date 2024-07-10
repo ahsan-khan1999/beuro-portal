@@ -18,15 +18,12 @@ const FollowUpDropDown = () => {
     hoveredIndex,
     followUpTableData,
     todayFollowUps,
+    handleFollowUpsDetails,
   } = useGeneralFollowUp();
-
-  const viewAllData = followUpTableData.map(
-    (item) => item.status === "Pending"
-  );
 
   return (
     <>
-      <div className="bg-white rounded-[20px] shadow-followUp w-[460px] absolute top-8 menuItems -right-[2px] mt-7 !z-50 follow-up-container pt-[25px] pb-[18px]">
+      <div className="bg-white rounded-[20px] shadow-followUp w-[560px] absolute top-8 menuItems -right-[2px] mt-7 !z-50 follow-up-container pt-[25px] pb-[18px]">
         <div className="flex justify-between items-center px-[30px] mb-6">
           <h1 className="text-[#222B45] text-lg font-medium">
             {translate("dashboard_detail.follow_up_heading")}
@@ -51,7 +48,8 @@ const FollowUpDropDown = () => {
                     key={index}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
-                    className={`flex items-start gap-x-6 pl-[30px] pr-[47px] pt-5 pb-6 border-b border-b-[#F5F5F5] ${
+                    onClick={() => handleFollowUpsDetails(item?.id)}
+                    className={`cursor-pointer flex items-start gap-x-6 pl-[30px] pr-[47px] pt-5 pb-6 border-b border-b-[#F5F5F5] ${
                       hoveredIndex === index ? "follow_up_item" : ""
                     }`}
                   >
@@ -86,16 +84,16 @@ const FollowUpDropDown = () => {
             />
           )}
         </div>
-        {viewAllData?.length > 0 && (
-          <div className="flex justify-center pt-[14px] border-t border-t-[#EFEFEF]">
-            <button
-              className="text-[#616161] w-fit text-base font-medium hover:text-primary"
-              onClick={() => handleFollowUps()}
-            >
-              {translate("follow_up.view_all")}
-            </button>
-          </div>
-        )}
+        {/* {viewAllData?.length > 0 && ( */}
+        <div className="flex justify-center pt-[14px] border-t border-t-[#EFEFEF]">
+          <button
+            className="text-[#616161] w-fit text-base font-medium hover:text-primary"
+            onClick={() => handleFollowUps()}
+          >
+            {translate("follow_up.view_all")}
+          </button>
+        </div>
+        {/* )} */}
       </div>
 
       {renderModal()}

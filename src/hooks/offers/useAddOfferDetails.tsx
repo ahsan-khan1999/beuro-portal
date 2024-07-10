@@ -67,8 +67,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const type = watch("type");

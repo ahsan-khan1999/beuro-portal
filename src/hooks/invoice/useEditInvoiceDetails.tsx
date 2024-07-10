@@ -107,7 +107,7 @@ export const useEditInvoiceDetails = ({
   const selectedContent = watch("content");
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -269,6 +269,6 @@ export const useEditInvoiceDetails = ({
     error,
     translate,
     invoiceDetails,
-    loading
+    loading,
   };
 };

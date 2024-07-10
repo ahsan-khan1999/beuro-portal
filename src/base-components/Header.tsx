@@ -15,6 +15,7 @@ import { LanguageSelector } from "@/base-components/languageSelector/language-se
 import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 import { readFollowUp } from "@/api/slices/followUp/followUp";
 import moment from "moment";
+import { FollowUpNotification } from "./ui/follow-up-notification";
 
 const Header = () => {
   const { t: translate } = useTranslation();
@@ -22,6 +23,8 @@ const Header = () => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const { followUp } = useAppSelector((state) => state.followUp);
   const [todayCount, setTodayCount] = useState<number>(0);
+  const [upcomingFollowUp, setUpcomingFollowUp] = useState<any>(null);
+  const [showNotification, setShowNotification] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -58,20 +61,37 @@ const Header = () => {
   }, [user]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const now = moment();
-      const upcomingFollowUps = followUp?.filter((item) =>
-        moment(item.dateTime).isBetween(now, moment(now).add(1, "minute"))
+    const now = moment();
+    const oneHourLater = moment(now).add(1, "hour");
+    const today = moment().startOf("day");
+
+    const upcoming = followUp?.find((item) => {
+      const itemTime = moment(item.dateTime);
+      return (
+        itemTime.isSame(today, "day") && itemTime.isBetween(now, oneHourLater)
       );
+    });
 
-      if (upcomingFollowUps.length > 0) {
-        showError("This follow-up is finishing within 1 minute");
-      } 
-    }, 3000); 
-
-    return () => clearInterval(interval);
+    setUpcomingFollowUp(upcoming || null);
   }, [followUp]);
 
+  useEffect(() => {
+    const followUpTime = upcomingFollowUp ? upcomingFollowUp.dateTime : null;
+    const now = new Date();
+    // const end = new Date("2024-07-10T13:27:30Z");
+    const end = new Date(followUpTime);
+    const difference = end.getTime() - now.getTime();
+
+    if (difference >= 600000) {
+      const timer = setTimeout(() => {
+        setShowNotification(true);
+      }, difference - 600000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [upcomingFollowUp]);
+
+  // const { isTimeEnded, setIsTimeEnded } = useTimeLeft(followUpTime);
   const isSVG = user?.company?.logo?.endsWith(".svg");
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
@@ -108,7 +128,7 @@ const Header = () => {
           <Image
             src={logo}
             alt="Company Logo"
-            className="pr-[50px] max-h-[50px]  border-r-2 border-[#000000] border-opacity-10"
+            className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
             height={50}
             width={150}
           />
@@ -118,12 +138,13 @@ const Header = () => {
         <div className="flex items-center pr-8">
           {user?.role !== "Admin" && (
             <div className="relative menu mr-5">
-              {/* <Image
-                src={createOfferIcon}
-                alt="Create Offer Icon"
-                className="cursor-pointer"
-              /> */}
               <NotificationIcon count={todayCount} />
+              {showNotification && (
+                <FollowUpNotification
+                  followUp={upcomingFollowUp}
+                  setIsTimeEnded={setShowNotification}
+                />
+              )}
               <FollowUpDropDown />
             </div>
           )}

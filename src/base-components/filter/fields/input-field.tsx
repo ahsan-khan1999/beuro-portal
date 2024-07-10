@@ -1,6 +1,5 @@
 import { InputFieldProps } from "@/types/global";
 import { combineClasses } from "@/utils/utility";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { forwardRef, useState } from "react";
 
@@ -18,7 +17,6 @@ const InputField = forwardRef(
     }: InputFieldProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
-    const router = useRouter();
     const { t: translate } = useTranslation();
     const [hasText, setHasText] = useState<boolean>(false);
 

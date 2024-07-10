@@ -656,6 +656,7 @@ export const staticEnums: Record<string, any> = {
       Pending: 1,
       Overdue: 2,
       today: 10,
+      complete: 4,
     },
   },
   ContentStatus: {

@@ -391,13 +391,13 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         type: Field.select,
         id: "customerID",
         name: "customerID",
-        options: customer?.map((item, key) => ({
+        options: customer?.map((item) => ({
           value: item.id,
           label: item.fullName,
         })),
 
-        control,
         onItemChange: onCustomerSelect,
+        control,
         value: leadDetails?.id
           ? leadDetails?.customerID
           : customerDetails && customerDetails?.id,

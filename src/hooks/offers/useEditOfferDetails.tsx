@@ -102,6 +102,7 @@ export const useEditOfferDetails = ({
               ],
             time: res?.payload?.time,
           });
+          // fetchCustomers(res?.payload?.leadID?.customerDetail?.fullName);
         }
       );
     }
@@ -113,7 +114,7 @@ export const useEditOfferDetails = ({
   const selectedContent = watch("content");
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -206,6 +207,7 @@ export const useEditOfferDetails = ({
   }, [selectedContent]);
 
   const handleContentSelect = () => {};
+
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -284,6 +286,6 @@ export const useEditOfferDetails = ({
     error,
     translate,
     offerDetails,
-    loading
+    loading,
   };
 };

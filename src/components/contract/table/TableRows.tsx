@@ -143,7 +143,9 @@ const TableRows = ({
                     dropDownClassName={`${
                       staticEnums["PaymentType"][item?.paymentType] === 0
                         ? "bg-[#45C769]"
-                        : "bg-[#4A13E7]"
+                        : staticEnums["PaymentType"][item?.paymentType] === 1
+                        ? "bg-[#4A13E7]"
+                        : "bg-[#FE9244]"
                     } w-full rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
                     dropDownTextClassName="text-white text-base font-medium"
                     dropDownIconClassName={`text-[#fff]`}

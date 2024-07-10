@@ -19,6 +19,7 @@ import {
   UseFormHandleSubmit,
 } from "react-hook-form";
 import { Plan } from "./admin/plans";
+import { CustomerAddress, CustomerLeadDetail } from "./leads";
 
 export interface User {
   [UserResponse.id]: string;
@@ -169,7 +170,7 @@ interface FollowUp {
   company: string;
   createdAt: string;
   createdBy: string;
-  customer: string;
+  customer: Customers;
   dateTime: string;
   isCompleted: boolean;
   isDeleted: boolean;
@@ -182,6 +183,30 @@ interface FollowUp {
   updatedAt: string;
   _id: string;
   id: string;
+}
+
+export interface Customers {
+  id: string;
+  refID: string;
+  createdAt: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  date: string;
+  mobileNumber: string;
+  gender: number;
+  status?: string;
+  editImg?: string;
+  editNote?: string;
+  customerType: string;
+  companyName: string;
+  mobile: string;
+  address: CustomerAddress;
+  edit?: boolean;
+  lead: CustomerLeadDetail;
+  logo: string;
+  plan?: Plan;
+  createdBy?: User;
 }
 interface Activity {
   company: string;

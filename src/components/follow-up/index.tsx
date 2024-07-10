@@ -50,6 +50,10 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
       label: translate("follow_up.view_all_follow_up_filters.upcoming"),
       type: `${staticEnums.FollowUp.Status.Upcoming}`,
     },
+    {
+      label: translate("follow_up.view_all_follow_up_filters.complete"),
+      type: `${staticEnums.FollowUp.Status.complete}`,
+    },
   ];
 
   const CurrentComponent = useEmptyStates(

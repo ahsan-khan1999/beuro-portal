@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
-import { Modals } from "@/enums/follow-up";
 import { createFollowUp, readFollowUp } from "@/api/slices/followUp/followUp";
 import { useEffect, useMemo } from "react";
 import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
 import { readLead } from "@/api/slices/lead/leadSlice";
+import { readCustomer } from "@/api/slices/customer/customerSlice";
 
 export const useAddFollowUp = (
   handleFollowUps: Function,
@@ -27,6 +27,7 @@ export const useAddFollowUp = (
 
   useEffect(() => {
     dispatch(readFollowUpSettings({}));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const schema = generateAddFollowUpValidation(translate);
@@ -43,14 +44,14 @@ export const useAddFollowUp = (
 
   const customerID = watch("customer");
 
-  const lookUpModals = {
-    [Modals.customer]: () => handleAllCustomers(),
-    [Modals.leads]: () => handleAllLeads(),
-  };
+  // const lookUpModals = {
+  //   [Modals.customer]: () => handleAllCustomers(),
+  //   [Modals.leads]: () => handleAllLeads(),
+  // };
 
-  const handleModalPop = (item: Modals) => {
-    lookUpModals[item]();
-  };
+  // const handleModalPop = (item: Modals) => {
+  //   lookUpModals[item]();
+  // };
 
   useMemo(() => {
     if (customerID) {
@@ -63,7 +64,7 @@ export const useAddFollowUp = (
   }, [customerID]);
 
   const fields = AddFollowUpFormField(register, loading, control, {
-    customer: customer,
+    customer,
     lead: lead,
     followUps,
   });
@@ -88,8 +89,8 @@ export const useAddFollowUp = (
     handleSubmit,
     errors,
     error,
-    customer,
-    lead,
+    // customer,
+    // lead,
     translate,
   };
 };

@@ -1,16 +1,15 @@
-// import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
 import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 
-export const SelectBox = ({
+export const CustomerSelectBox = ({
   id,
   options,
   value: defaultValue,
@@ -23,12 +22,13 @@ export const SelectBox = ({
   onItemChange,
   disabled,
   fieldIndex,
+  onEnterPress,
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // setOption(options);
     if (defaultValue) {
       field?.onChange(defaultValue);
     }
@@ -38,13 +38,8 @@ export const SelectBox = ({
     setOption(options);
   }, [options]);
 
-  const search = useRef<string>("");
-
-  const toggleDropDown = () => {
-    setIsOpen((prevState) => !prevState);
-  };
-
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
+
   const selectedOptionHandler = (value: string) => {
     onItemChange && onItemChange(value, fieldIndex);
     setIsOpen(false);
@@ -53,22 +48,27 @@ export const SelectBox = ({
   };
 
   const handleChange = (value: string) => {
-    search.current = value;
-    setOption(
-      options.filter((item) =>
-        item.label?.toLowerCase()?.includes(value?.toLowerCase())
-      )
-    );
+    setSearchTerm(value);
+    setIsOpen(true);
   };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onEnterPress && onEnterPress(searchTerm);
+    }
+  };
+
   const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
+
   const classes = combineClasses(defaultClasses, className);
   const { t: translate } = useTranslation();
+
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
-        // placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
@@ -107,13 +107,14 @@ export const SelectBox = ({
                 />
 
                 <input
-                  value={search.current}
+                  value={searchTerm}
                   onChange={(e) => handleChange(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   placeholder={translate("common.search")}
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
-              {option.map(({ value, label }) => (
+              {option?.map(({ value, label }) => (
                 <li
                   key={value}
                   onClick={() => selectedOptionHandler(value)}

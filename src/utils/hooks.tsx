@@ -220,8 +220,9 @@ export const ___useTimeLeft = (endDate: string) => {
 export const useTimeLeft = (endDate: string) => {
   const timeLeftRef = useRef<string | null>(null);
   const [isTimeEnded, setIsTimeEnded] = useState<boolean>(false);
-  const [_, setRender] = useState(0); // Used only to force a re-render
+  const [_, setRender] = useState(0);
   const startTickingRef = useRef(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const getTimeLeft = (shouldTick = false) => {
     startTickingRef.current = shouldTick;
@@ -229,39 +230,57 @@ export const useTimeLeft = (endDate: string) => {
   };
 
   useEffect(() => {
+    if (!endDate) return;
+
     const updateTimer = () => {
       const now = new Date();
       const end = new Date(endDate);
       const difference = end.getTime() - now.getTime();
 
-      if (difference <= 0) {
-        timeLeftRef.current = "Not Sold";
-        if (!isTimeEnded) setIsTimeEnded(true);
-      } else if (difference < 3600000) {
-        const minutes = Math.floor(difference / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        timeLeftRef.current = `${minutes}m ${seconds}s`;
+      // if (difference <= 0) {
+      //   timeLeftRef.current = "Not Sold";
+      //   if (!isTimeEnded) setIsTimeEnded(true);
+      // } else if (difference < 3600000) {
+      //   const minutes = Math.floor(difference / (1000 * 60));
+      //   const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      //   timeLeftRef.current = `${minutes}m ${seconds}s`;
+      // } else {
+      //   const hours = Math.floor(difference / (1000 * 60 * 60));
+      //   const minutes = Math.floor(
+      //     (difference % (1000 * 60 * 60)) / (1000 * 60)
+      //   );
+      //   const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      //   timeLeftRef.current = `${hours}h ${minutes}m ${seconds}s`;
+      // }
+
+      if (difference <= 3600000 && difference > 0) {
+        setIsTimeEnded(true);
       } else {
-        const hours = Math.floor(difference / (1000 * 60 * 60));
-        const minutes = Math.floor(
-          (difference % (1000 * 60 * 60)) / (1000 * 60)
-        );
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        timeLeftRef.current = `${hours}h ${minutes}m ${seconds}s`;
+        setIsTimeEnded(false);
       }
 
       if (startTickingRef.current) {
-        setRender((prev) => prev + 1); // Force a re-render if shouldTick is true
+        setRender((prev) => prev + 1);
       }
     };
 
     updateTimer();
-    const interval = setInterval(updateTimer, 1000);
+    intervalRef.current = setInterval(updateTimer, 1000);
 
-    return () => clearInterval(interval);
-  }, [endDate, isTimeEnded]);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [endDate]);
 
-  return { getTimeLeft, isTimeEnded };
+  useEffect(() => {
+    if (!isTimeEnded && intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  }, [isTimeEnded]);
+
+  return { getTimeLeft, isTimeEnded, setIsTimeEnded };
 };
 
 export const closeModal = (dispatch: Dispatch, type: keyof ModalType) => {

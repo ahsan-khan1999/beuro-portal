@@ -26,7 +26,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   );
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const onCancel = () => {
@@ -49,9 +49,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const customerType = watch("customerType");
-  // const customerID = watch("customerID");
 
+  const customerType = watch("customerType");
   const type = watch("type");
   const gender = watch("gender");
 
