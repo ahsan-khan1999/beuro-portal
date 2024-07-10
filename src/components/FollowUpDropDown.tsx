@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@/base-components/ui/button/button";
 import useGeneralFollowUp from "@/hooks/follow-up/useGeneralFollowUp";
 import moment from "moment";
-import { getDaysDifference } from "@/utils/utility";
+import { getDaysDifference, getFollowUpStatusColor } from "@/utils/utility";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { BellIcon } from "@/assets/svgs/components/bell-icon";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
@@ -23,7 +23,7 @@ const FollowUpDropDown = () => {
 
   return (
     <>
-      <div className="bg-white rounded-[20px] shadow-followUp w-[560px] absolute top-8 menuItems -right-[2px] mt-7 !z-50 follow-up-container pt-[25px] pb-[18px]">
+      <div className="bg-white rounded-[20px] shadow-followUp w-[560px] absolute top-8 menuItems -right-[2px] mt-6 !z-50 follow-up-container pt-[25px] pb-[18px]">
         <div className="flex justify-between items-center px-[30px] mb-6">
           <h1 className="text-[#222B45] text-lg font-medium">
             {translate("dashboard_detail.follow_up_heading")}
@@ -54,11 +54,23 @@ const FollowUpDropDown = () => {
                     }`}
                   >
                     <BellIcon isHovered={hoveredIndex === index} />
-                    <div className="flex flex-col gap-y-[14px]">
+                    <div className="flex flex-col">
+                      <p className="text-lg font-medium text-[#171B1E]">
+                        {item?.customer?.fullName}
+                      </p>
                       <p className="text-base font-medium text-[#171B1E]">
                         {item?.title}
                       </p>
-                      <div className="flex items-center">
+                      <div className="flex items-center mt-1">
+                        <span
+                          className={`text-[${getFollowUpStatusColor(
+                            item?.status
+                          )}] border border-[${getFollowUpStatusColor(
+                            item?.status
+                          )}] font-medium text-sm mr-2 p-1 rounded-lg`}
+                        >
+                          {item?.status}
+                        </span>
                         <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] pr-2">
                           {moment(item.dateTime).format("hh:mm")}
                         </span>
