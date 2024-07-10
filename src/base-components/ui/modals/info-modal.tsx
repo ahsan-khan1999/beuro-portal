@@ -10,7 +10,6 @@ export const InfoModal = ({
 }: IInfoModalProps) => {
   return (
     <BaseModal onClose={onClose} containerClassName={containerClassName}>
-      z
       <div className="flex justify-between border-b-2 pb-5 border-slate-gray border-opacity-10">
         <h1 className="text-dark font-semibold">{modalTitle}</h1>
         <button

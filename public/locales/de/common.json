@@ -1160,6 +1160,7 @@
       "date": "Datum",
       "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "details": "Einzelheiten",
     "follow_up_completed": "Die Nachverfolgung ist innerhalb von 10 Minute abgeschlossen",
     "invoice_cards": {
       "open_invoice": "Offen Rechnung",

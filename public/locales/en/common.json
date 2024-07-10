@@ -1168,6 +1168,7 @@
       "date": "Date",
       "success_signed_offer": "Operation Successful"
     },
+    "details":"Details",
     "follow_up_completed": "Follow up is completed within 10 minute",
     "invoice_cards": {
       "open_invoice": "Open Invoice",

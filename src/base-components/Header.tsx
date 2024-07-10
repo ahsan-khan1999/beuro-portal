@@ -16,7 +16,6 @@ import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 import { readFollowUp } from "@/api/slices/followUp/followUp";
 import moment from "moment";
 import { FollowUpNotification } from "./ui/follow-up-notification";
-import { FollowUps } from "@/types/follow-up";
 
 const Header = () => {
   const { t: translate } = useTranslation();
@@ -25,6 +24,7 @@ const Header = () => {
   const { followUp } = useAppSelector((state) => state.followUp);
   const [todayCount, setTodayCount] = useState<number>(0);
   const [upcomingFollowUp, setUpcomingFollowUp] = useState<any>(null);
+  const [showNotification, setShowNotification] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -61,24 +61,37 @@ const Header = () => {
   }, [user]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const now = moment();
-      const oneHourLater = moment(now).add(1, "hour");
-      const today = moment().startOf("day");
+    const now = moment();
+    const oneHourLater = moment(now).add(1, "hour");
+    const today = moment().startOf("day");
 
-      const upcoming = followUp?.find((item) => {
-        const itemTime = moment(item.dateTime);
-        return (
-          itemTime.isSame(today, "day") && itemTime.isBetween(now, oneHourLater)
-        );
-      });
+    const upcoming = followUp?.find((item) => {
+      const itemTime = moment(item.dateTime);
+      return (
+        itemTime.isSame(today, "day") && itemTime.isBetween(now, oneHourLater)
+      );
+    });
 
-      setUpcomingFollowUp(upcoming || null);
-    }, 2000);
-
-    return () => clearInterval(interval);
+    setUpcomingFollowUp(upcoming || null);
   }, [followUp]);
 
+  useEffect(() => {
+    const followUpTime = upcomingFollowUp ? upcomingFollowUp.dateTime : null;
+    const now = new Date();
+    // const end = new Date("2024-07-10T13:27:30Z");
+    const end = new Date(followUpTime);
+    const difference = end.getTime() - now.getTime();
+
+    if (difference >= 600000) {
+      const timer = setTimeout(() => {
+        setShowNotification(true);
+      }, difference - 600000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [upcomingFollowUp]);
+
+  // const { isTimeEnded, setIsTimeEnded } = useTimeLeft(followUpTime);
   const isSVG = user?.company?.logo?.endsWith(".svg");
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
@@ -115,7 +128,7 @@ const Header = () => {
           <Image
             src={logo}
             alt="Company Logo"
-            className="pr-[50px] max-h-[50px]  border-r-2 border-[#000000] border-opacity-10"
+            className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
             height={50}
             width={150}
           />
@@ -126,9 +139,12 @@ const Header = () => {
           {user?.role !== "Admin" && (
             <div className="relative menu mr-5">
               <NotificationIcon count={todayCount} />
-              {/* {upcomingFollowUp && (
-                <FollowUpNotification followUp={upcomingFollowUp} />
-              )} */}
+              {showNotification && (
+                <FollowUpNotification
+                  followUp={upcomingFollowUp}
+                  setIsTimeEnded={setShowNotification}
+                />
+              )}
               <FollowUpDropDown />
             </div>
           )}

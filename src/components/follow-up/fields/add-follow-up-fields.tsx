@@ -10,7 +10,6 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
-  console.log(customer, "customer");
 
   const formField: FormField[] = [
     {
