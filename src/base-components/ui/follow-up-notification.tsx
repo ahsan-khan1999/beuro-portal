@@ -1,13 +1,13 @@
 import React from "react";
-import infoIcon from "@/assets/svgs/info_icon.svg";
-import Image from "next/image";
-import { useTranslation } from "next-i18next";
 import moment from "moment";
+import Image from "next/image";
 import { BaseModal } from "./modals/base-modal";
+import infoIcon from "@/assets/svgs/info_icon.svg";
+import useGeneralFollowUp from "@/hooks/follow-up/useGeneralFollowUp";
 import { getDaysDifference, getFollowUpStatusColor } from "@/utils/utility";
 
 export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
-  const { t: translate } = useTranslation();
+  const { translate, handleFollowUpsDetails } = useGeneralFollowUp();
 
   const onClose = () => setIsTimeEnded(false);
   let days = getDaysDifference(followUp?.createdAt);
@@ -16,14 +16,17 @@ export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName="w-[560px] max-h-[221px] min-h-[231px] rounded-[20px] pt-[25px] pb-[28px] absolute top-[46px] right-[392px] mt-7 follow-up-container border border-primary"
+      containerClassName="w-[560px] max-h-[221px] min-h-[231px] rounded-[20px] pt-[25px] pb-[28px] absolute top-[46px] right-[397px] mt-7 follow-up-container border border-primary"
     >
       <div>
         <h1 className="text-[#171B1E] text-xl font-semibold pl-[31px] pb-[18px]">
           {translate("common.follow_up_completed")}
         </h1>
 
-        <div className="border-t border-t-[#F5F5F5] pt-[9px]">
+        <div
+          onClick={() => handleFollowUpsDetails(followUp?.id)}
+          className="border-t border-t-[#F5F5F5] pt-[9px] cursor-pointer"
+        >
           <p className="text-base text-[#616161] font-medium pl-[31px]">
             {translate("common.details")}
           </p>
