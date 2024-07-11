@@ -10,9 +10,9 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 //   }
 // );
 
-const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
-  ssr: false,
-});
+// const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
+//   ssr: false,
+// });
 
 const OfferPdf = dynamic(() => import("@/components/reactPdf/pdf-layout"), {
   ssr: false,

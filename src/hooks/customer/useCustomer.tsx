@@ -16,8 +16,20 @@ export default function useCustomer() {
     (state) => state.customer
   );
 
+  const [filter, setFilter] = useState<FilterType>({
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
+  });
+
   const { query } = useRouter();
   const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
+  const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customer);
+
+  useEffect(() => {
+    localStoreUtil.remove_data("customers");
+    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+  }, []);
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
@@ -65,22 +77,9 @@ export default function useCustomer() {
     }
   }, [query]);
 
-  const [currentPage, setCurrentPage] = useState<number>(page || 1);
-
-  const [filter, setFilter] = useState<FilterType>({
-    sort: FiltersDefaultValues.None,
-    text: FiltersDefaultValues.None,
-  });
-
-  const [currentPageRows, setCurrentPageRows] = useState<Customers[]>(customer);
   const dispatch = useAppDispatch();
   const totalItems = totalCount;
   const itemsPerPage = 15;
-
-  useEffect(() => {
-    localStoreUtil.remove_data("customers");
-    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-  }, []);
 
   const handleFilterChange = () => {
     setCurrentPage(1);

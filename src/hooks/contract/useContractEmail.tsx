@@ -28,8 +28,8 @@ export const useContractEmail = (
   const { loading, error, contractDetails } = useAppSelector(
     (state) => state.contract
   );
-  const isMail = router.query?.isMail;
 
+  const isMail = router.query?.isMail;
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [moreEmail, setMoreEmail] = useState({ isCc: false, isBcc: false });
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -120,6 +120,7 @@ export const useContractEmail = (
     setMoreEmail,
     setValue
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // const apiData = {
     //   id: contractDetails?.id,
@@ -132,22 +133,21 @@ export const useContractEmail = (
 
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
-
       let apiData = {
         ...data,
         id: contractDetails?.id,
         pdf: fileUrl,
-        // attachments: attachements.map((item) => {
-        //   return `${item.value}`;
-        // }),
         attachments: attachements.map((item) => {
-          const url = item.value;
-          const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
-          const fileName = url.substring(url.lastIndexOf("/") + 1);
-          const newUrl = `${baseUrl}${contractDetails?.offerID?.createdBy?.company?.companyName}-${fileName}`;
-
-          return newUrl;
+          return `${item.value}`;
         }),
+        // attachments: attachements.map((item) => {
+        //   const url = item.value;
+        //   const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
+        //   const fileName = url.substring(url.lastIndexOf("/") + 1);
+        //   const newUrl = `${baseUrl}${contractDetails?.offerID?.createdBy?.company?.companyName}-${fileName}`;
+
+        //   return newUrl;
+        // }),
       };
 
       dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));

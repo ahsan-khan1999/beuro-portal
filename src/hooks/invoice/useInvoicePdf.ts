@@ -291,14 +291,12 @@ export const useInvoicePdf = () => {
   }, [invoiceID]);
 
   const totalItems = invoiceData?.serviceItem?.length || 0;
-  // const totalItems = 34;
 
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
     const remainingItems = totalItems - itemsOnFirstPage;
     const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
 
-    // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
@@ -350,20 +348,16 @@ export const useInvoicePdf = () => {
         localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
       if (isMail) {
-        router.push(
-          {
-            pathname: `/invoices/compose-mail`,
-            query: { ...router.query, invoiceID: invoiceID, isMail: isMail },
-          }
-          // `/invoices/compose-mail?invoiceID=${invoiceID}&isMail=${isMail}`
-        );
+        router.push({
+          pathname: `/invoices/compose-mail`,
+          query: { ...router.query, invoiceID: invoiceID, isMail: isMail },
+        });
       } else {
         const data = await localStoreUtil.get_data("invoiceComposeEmail");
         if (data) {
           formData.append("file", mergedFile as any);
           const fileUrl = await dispatch(uploadFileToFirebase(formData));
           let apiData = { ...data, pdf: fileUrl?.payload };
-
           delete apiData["content"];
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
           await dispatch(sendInvoiceEmail({ data: apiData }));
@@ -398,6 +392,7 @@ export const useInvoicePdf = () => {
       console.error("Error in handleEmailSend:", error);
     }
   };
+
   const handleSendByPost = async () => {
     setActiveButtonId("post");
     const apiData = {
@@ -440,8 +435,8 @@ export const useInvoicePdf = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const onSuccess = () => {
-    // router.push("/invoices");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -456,6 +451,7 @@ export const useInvoicePdf = () => {
       return true;
     } else return false;
   };
+
   const handleDescriptionUpdate = async (value: string) => {
     const apiData = {
       id: invoiceID,
@@ -469,7 +465,6 @@ export const useInvoicePdf = () => {
     } else return false;
   };
 
-  //resetting active button state
   useEffect(() => {
     if (!loading) {
       setActiveButtonId(null);
