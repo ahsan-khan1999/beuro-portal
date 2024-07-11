@@ -171,17 +171,17 @@ export const useInvoiceEmail = (
         ...data,
         id: invoiceID,
         pdf: fileUrl,
-        // attachments: attachements.map((item) => {
-        //   return `${item.value}`;
-        // }),
         attachments: attachements.map((item) => {
-          const url = item.value;
-          const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
-          const fileName = url.substring(url.lastIndexOf("/") + 1);
-          const newUrl = `${baseUrl}${collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName}-${fileName}`;
-
-          return newUrl;
+          return `${item.value}`;
         }),
+        // attachments: attachements.map((item) => {
+        //   const url = item.value;
+        //   const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
+        //   const fileName = url.substring(url.lastIndexOf("/") + 1);
+        //   const newUrl = `${baseUrl}${collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName}-${fileName}`;
+
+        //   return newUrl;
+        // }),
       };
 
       dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));

@@ -364,18 +364,14 @@ export const useContractPdf = () => {
         localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
       if (isMail) {
-        router.push(
-          {
-            pathname: `/contract/details`,
-            query: {
-              ...router.query,
-              offer: contractDetails?.id,
-              isMail: isMail,
-            },
-          }
-
-          // `/contract/details?offer=${contractDetails?.id}&isMail=${isMail}`
-        );
+        router.push({
+          pathname: `/contract/details`,
+          query: {
+            ...router.query,
+            offer: contractDetails?.id,
+            isMail: isMail,
+          },
+        });
       } else {
         setActiveButtonId("email");
         const data = await localStoreUtil.get_data("contractComposeEmail");

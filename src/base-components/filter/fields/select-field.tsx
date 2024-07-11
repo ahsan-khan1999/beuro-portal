@@ -20,7 +20,6 @@ export default function SelectField({
   isSearch,
   labelClassName,
 }: OptionsFieldProps) {
-  const defaultClasses = `flex items-center`;
   const containerClasses = combineClasses(
     "relative flex items-center justify-center w-[120px]",
     containerClassName

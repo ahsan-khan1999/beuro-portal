@@ -59,10 +59,7 @@ export const useMergedPdfDownload = ({
           const url = URL.createObjectURL(convertedBlob);
 
           setMergedFile(
-            blobToFile(
-              convertedBlob,
-              `${companyName} ${fileName}.pdf` || "output.pdf"
-            )
+            blobToFile(convertedBlob, `${fileName}.pdf` || "output.pdf")
           );
           setMergedPdfUrl(url);
         }
