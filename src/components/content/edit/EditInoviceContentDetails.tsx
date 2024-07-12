@@ -31,6 +31,8 @@ const EditInoviceContentDetails = ({
     window.open(`/content/pdf-preview/${type}`, "_blank");
   };
 
+  console.log(invoiceDescription);
+
   return (
     <div className="flex gap-x-5">
       <div className="rounded-lg border border-primary bg-white w-full h-fit">

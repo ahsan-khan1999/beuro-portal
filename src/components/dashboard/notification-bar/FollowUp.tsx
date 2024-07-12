@@ -19,6 +19,7 @@ import {
   formatDateTimeToDate,
   formatDateTimeToTime,
   getDaysDifference,
+  getFollowUpStatusColor,
 } from "@/utils/utility";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
@@ -171,7 +172,11 @@ export const FollowUpNotificationBar = ({
                       <span className="px-1 py-[2px] bg-primary rounded-lg text-white">
                         {item.lead?.refID}
                       </span>
-                      <span className="px-1 py-[2px] bg-[#FE9244] rounded-lg text-white">
+                      <span
+                        className={`px-1 py-[2px] bg-[${getFollowUpStatusColor(
+                          item?.status
+                        )}] rounded-lg text-white`}
+                      >
                         {item.status}
                       </span>
                       <span className="text-[#1E1E1E] text-sm font-normal ml-[3px]">

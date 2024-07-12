@@ -42,6 +42,7 @@ const FollowUpDropDown = () => {
           {todayFollowUps?.length > 0 ? (
             todayFollowUps?.map((item, index) => {
               let days = getDaysDifference(item?.createdAt);
+
               return (
                 <div className="relative">
                   <div
@@ -62,10 +63,25 @@ const FollowUpDropDown = () => {
                         {item?.title}
                       </p>
                       <div className="flex items-center mt-1">
-                        <span
+                        {/* <span
                           className={`text-[${getFollowUpStatusColor(
                             item?.status
                           )}] border border-[${getFollowUpStatusColor(
+                            item?.status
+                          )}] font-medium text-sm mr-2 p-1 rounded-lg`}
+                        >
+                          {item?.status}
+                        </span> */}
+                        <span
+                          className={`${
+                            item?.status === "Pending"
+                              ? "text-[#FE9244]"
+                              : item?.status === "Upcoming"
+                              ? "text-[#4A13E7]"
+                              : item?.status === "Overdue"
+                              ? "text-[#FF376F]"
+                              : "text-[#45C769]"
+                          } border border-[${getFollowUpStatusColor(
                             item?.status
                           )}] font-medium text-sm mr-2 p-1 rounded-lg`}
                         >

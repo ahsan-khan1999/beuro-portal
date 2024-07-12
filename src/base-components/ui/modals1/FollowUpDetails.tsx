@@ -202,7 +202,7 @@ const FollowUpDetails = ({
         <div className="min-h-[600px] max-h-[600px] overflow-y-scroll">
           {followUpDetails?.isCompleted ? (
             <div className="flex flex-col gap-y-1 mt-1">
-              <p className="text-[#4D4D4D] text-sm font-normal">
+              <p className="text-[#393939] text-sm font-semibold">
                 {translate("follow_up.follow_up_details.remark")}
               </p>
               <p className="text-[#484848] text-base font-normal">
@@ -211,7 +211,7 @@ const FollowUpDetails = ({
             </div>
           ) : followUpDetails?.isPostponed ? (
             <div className="flex flex-col gap-y-1 mt-1">
-              <p className="text-[#4D4D4D] text-sm font-normal">
+              <p className="text-[#393939] text-sm font-semibold">
                 {translate("follow_up.follow_up_details.postpond_note")}
               </p>
               <p className="text-[#484848] text-base font-normal">
