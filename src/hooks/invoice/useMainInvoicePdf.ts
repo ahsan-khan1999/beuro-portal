@@ -406,17 +406,16 @@ export const useMainInvoicePdf = () => {
       console.error("Error in handleEmailSend:", error);
     }
   };
-  const handleDonwload = () => {
-    // window.open(invoiceData?.attachement);
 
+  const handleDonwload = () => {
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
-        invoiceDetails?.invoiceNumber +
+        invoiceDetails?.createdBy?.company?.companyName +
         "-" +
-        invoiceDetails?.createdBy?.company?.companyName
+        invoiceDetails?.invoiceNumber
       }.pdf`;
       document.body.appendChild(a);
       a.click();

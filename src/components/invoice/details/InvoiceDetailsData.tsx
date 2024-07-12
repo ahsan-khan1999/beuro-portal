@@ -157,7 +157,7 @@ const InvoiceDetailsData = ({
       <div className="flex flex-col maxSize:flex-row justify-between gap-y-3 border-t border-[#000] border-opacity-10 pt-4">
         <div className="flex flex-col gap-[17px]">
           <div className="flex items-start gap-2">
-            <span className="text-base font-normal text-[#4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[85px]">
               {translate("invoice.card_content.invoice_id")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
@@ -166,7 +166,7 @@ const InvoiceDetailsData = ({
           </div>
           {invoiceDetails.contractID && (
             <div className="flex gap-2">
-              <span className="text-base font-normal text-[#4D4D4D]">
+              <span className="text-base font-normal text-[#4D4D4D] min-w-[100px]">
                 {translate("invoice.card_content.contract_id")}:
               </span>
               <span className="text-[#4A13E7] font-medium text-base">
@@ -176,7 +176,7 @@ const InvoiceDetailsData = ({
           )}
           {invoiceDetails.contractID && (
             <div className="flex gap-2">
-              <span className="text-base font-normal text-[#4D4D4D]">
+              <span className="text-base font-normal text-[#4D4D4D] min-w-[70px]">
                 {translate("invoice.card_content.offer_id")}:
               </span>
               <span className="text-[#4A13E7] font-medium text-base">
@@ -188,7 +188,7 @@ const InvoiceDetailsData = ({
 
         <div className="flex flex-col gap-[17px]">
           <div className="flex gap-2">
-            <span className="text-base font-normal text-[#4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[100px]">
               {translate("invoice.card_content.title")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
@@ -205,7 +205,7 @@ const InvoiceDetailsData = ({
               </span>
             </div>
             <div className="flex gap-2">
-              <span className="text-base font-normal text-[#4D4D4D]">
+              <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
                 {translate("invoice.card_content.status")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
@@ -219,7 +219,7 @@ const InvoiceDetailsData = ({
 
           <div className="flex gap-[44px] items-center">
             <div className="flex gap-2 items-center">
-              <span className="text-base font-normal text-[#4D4D4D]">
+              <span className="text-base font-normal text-[#4D4D4D] min-w-[120px]">
                 {translate("invoice.card_content.created_date")}:
               </span>
               <span className="text-[#393939] font-medium text-base">

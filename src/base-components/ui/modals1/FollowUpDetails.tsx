@@ -87,7 +87,6 @@ const FollowUpDetails = ({
     },
   ];
 
-
   return (
     <BaseModal
       onClose={onClose}
@@ -200,31 +199,31 @@ const FollowUpDetails = ({
           </div>
         </section>
 
-        {followUpDetails?.isCompleted ? (
-          <div className="flex flex-col gap-y-1 mt-1">
-            <p className="text-[#4D4D4D] text-sm font-normal">
-              {translate("follow_up.follow_up_details.remark")}
-            </p>
-            <p className="text-[#484848] text-base font-normal">
-              {followUpDetails?.completeRemarks}
-            </p>
-          </div>
-        ) : followUpDetails?.isPostponed ? (
-          <div className="flex flex-col gap-y-1 mt-1">
-            <p className="text-[#4D4D4D] text-sm font-normal">
-              {translate("follow_up.follow_up_details.postpond_note")}
-            </p>
-            <p className="text-[#484848] text-base font-normal">
-              {followUpDetails?.postPonedNote}
-            </p>
-          </div>
-        ) : null}
-
         <div className="min-h-[600px] max-h-[600px] overflow-y-scroll">
+          {followUpDetails?.isCompleted ? (
+            <div className="flex flex-col gap-y-1 mt-1">
+              <p className="text-[#4D4D4D] text-sm font-normal">
+                {translate("follow_up.follow_up_details.remark")}
+              </p>
+              <p className="text-[#484848] text-base font-normal">
+                {followUpDetails?.completeRemarks}
+              </p>
+            </div>
+          ) : followUpDetails?.isPostponed ? (
+            <div className="flex flex-col gap-y-1 mt-1">
+              <p className="text-[#4D4D4D] text-sm font-normal">
+                {translate("follow_up.follow_up_details.postpond_note")}
+              </p>
+              <p className="text-[#484848] text-base font-normal">
+                {followUpDetails?.postPonedNote}
+              </p>
+            </div>
+          ) : null}
+
           <section className="grid grid-cols-2 mt-[30px] mb-[18px] ">
             <div className="flex flex-col border-r border-[#000] border-opacity-10 pr-5">
               <article className="flex gap-x-[50px] items-center">
-                <h2 className="text-lg font-medium text-[#393939]">
+                <h2 className="text-lg font-semibold text-[#393939]">
                   {translate("follow_up.customer_detail_heading")}
                 </h2>
                 <span className="text-lg font-medium text-[#4A13E7]">
@@ -248,7 +247,7 @@ const FollowUpDetails = ({
             </div>
 
             <div className="flex flex-col pl-[30px]">
-              <h2 className="text-lg font-medium text-[#393939]">
+              <h2 className="text-lg font-semibold text-[#393939]">
                 {translate("follow_up.follow_up_detail_heading")}
               </h2>
 
@@ -266,7 +265,7 @@ const FollowUpDetails = ({
           <section className="mt-3 border-t border-[#000] border-opacity-10 pt-3">
             <div className="flex flex-col">
               <article className="flex gap-x-[50px] items-center">
-                <h2 className="text-lg font-medium text-[#393939]">
+                <h2 className="text-lg font-semibold text-[#393939]">
                   {translate("follow_up.lead_detail_heading")}
                 </h2>
                 <span className="text-lg font-medium text-[#4A13E7]">
@@ -289,7 +288,7 @@ const FollowUpDetails = ({
               </div>
             </div>
             <div className="flex flex-col mt-5">
-              <h2 className="text-base font-normal text-[#8F8F8F]">
+              <h2 className="text-base font-semibold text-[#393939]">
                 {translate("follow_up.address_detail_heading")}
               </h2>
 

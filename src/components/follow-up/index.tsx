@@ -75,17 +75,17 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
       />
 
       <div className="border-y border-y-[#E0E0E0] mt-[18px] mb-5 flex gap-x-[48px] pb-3">
-        {followUpStatuses.map((item, index) => (
+        {followUpStatuses?.map((item, index) => (
           <div
             key={index}
-            onClick={() => handleFollowUpStatusChange(index, item.type)}
+            onClick={() => handleFollowUpStatusChange(index, item?.type)}
             className={`text-base font-medium pt-[14px] cursor-pointer border-b-2 ${
               clickedIndex === index
                 ? "text-primary border-b-primary"
                 : "text-[#404040] border-b-transparent"
             }`}
           >
-            {item.label}
+            {item?.label}
           </div>
         ))}
       </div>

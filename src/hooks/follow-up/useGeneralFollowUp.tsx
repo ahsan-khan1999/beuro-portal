@@ -191,7 +191,7 @@ const useGeneralFollowUp = () => {
   };
 
   const todayFollowUps = followUp.filter((item) =>
-    moment(item.dateTime).isSame(moment(), "day")
+    moment(item?.dateTime).isSame(moment(), "day")
   );
 
   const renderModal = () => {
