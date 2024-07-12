@@ -24,20 +24,20 @@ const TableRows = ({
                   {item.customer?.refID}
                 </span>
                 <span className="py-4 flex items-center truncate mr-2">
-                  {item.customer?.fullName}
+                  {item?.customer?.fullName}
                 </span>
                 <span className="py-4 lex items-center">
-                  {moment(item.dateTime).format("DD/MM/YYYY hh:mm")}
+                  {moment(item?.dateTime).format("DD/MM/YYYY hh:mm")}
                 </span>
-                <span className="py-4 flex items-center">{item.title}</span>
+                <span className="py-4 flex items-center">{item?.title}</span>
 
                 <div className="py-4">
                   <div
                     className={`bg-[${
-                      StatusColors[item.status]
+                      StatusColors[item?.status]
                     }] text-white px-2 py-1 text-center rounded-md text-sm min-w-[70px] w-full`}
                   >
-                    {item.status}
+                    {item?.status}
                   </div>
                 </div>
               </div>
@@ -46,7 +46,7 @@ const TableRows = ({
             <div className="grid grid-cols-[minmax(50px,_50px),minmax(50px,_50px)]">
               <span
                 className="py-4 flex justify-center items-center cursor-pointer"
-                onClick={() => handleFollowUpsDelete(item.id)}
+                onClick={() => handleFollowUpsDelete(item?.id)}
               >
                 <svg
                   width="13"
@@ -64,8 +64,8 @@ const TableRows = ({
                 </svg>
               </span>
               <span
-                className="py-4 flex justify-center items-centercursor-pointer"
-                onClick={() => handleFollowUpsDetails(item.id)}
+                className="py-4 flex justify-center items-center cursor-pointer"
+                onClick={() => handleFollowUpsDetails(item?.id)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

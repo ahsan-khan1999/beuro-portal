@@ -39,9 +39,9 @@ const FollowUpDropDown = () => {
         </div>
 
         <div className="max-h-[450px] overflow-y-auto dashboard_scrollbar">
-          {todayFollowUps.length > 0 ? (
-            todayFollowUps.map((item, index) => {
-              let days = getDaysDifference(item.createdAt);
+          {todayFollowUps?.length > 0 ? (
+            todayFollowUps?.map((item, index) => {
+              let days = getDaysDifference(item?.createdAt);
               return (
                 <div className="relative">
                   <div
@@ -72,10 +72,10 @@ const FollowUpDropDown = () => {
                           {item?.status}
                         </span>
                         <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] pr-2">
-                          {moment(item.dateTime).format("hh:mm")}
+                          {moment(item?.dateTime).format("hh:mm")}
                         </span>
                         <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] px-2">
-                          {moment(item.dateTime).format("DD/MM/YYYY")}
+                          {moment(item?.dateTime).format("DD/MM/YYYY")}
                         </span>
                         <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] px-2">
                           ID {item?.customer?.refID}

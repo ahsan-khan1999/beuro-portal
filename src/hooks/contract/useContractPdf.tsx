@@ -419,9 +419,9 @@ export const useContractPdf = () => {
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
-        contractDetails?.contractNumber +
+        contractDetails?.offerID?.createdBy?.company?.companyName +
         "-" +
-        contractDetails?.offerID?.createdBy?.company?.companyName
+        contractDetails?.contractNumber
       }.pdf`;
       document.body.appendChild(a);
       a.click();

@@ -67,55 +67,98 @@ const MailDetailsCard = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
-        <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
-          <div className="flex justify-between">
-            <div>
-              <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
-                {translate("invoice.card_content.invoice_number")}:
-              </span>
-              <span className="text-base font-medium text-[#4B4B4B]">
-                {collectiveInvoiceDetails?.invoiceID?.invoiceNumber}
-              </span>
-            </div>
-            <div className="flex gap-[10px]">
-              <span className="text-base  font-normal text-[#4D4D4D] break-all">
-                {translate("invoice.table_headings.title")}:
-              </span>
+      <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
+        <div className="flex items-center gap-[10px]">
+          <span className="text-base font-normal text-[#4D4D4D] min-w-[130px]">
+            {translate("invoice.card_content.invoice_number")}:
+          </span>
+          <span className="text-base font-medium text-primary">
+            {collectiveInvoiceDetails?.invoiceID?.invoiceNumber}
+          </span>
+        </div>
+        <div className="flex items-center gap-[10px]">
+          <span className="text-base font-normal text-[#4D4D4D] min-w-[100px]">
+            {translate("invoice.table_headings.title")}:
+          </span>
 
-              <span className="text-base font-medium text-[#4B4B4B] flex">
-                {collectiveInvoiceDetails?.title}
-              </span>
-            </div>
-          </div>
-          <div className="flex justify-between items-center">
-            <div className="flex gap-[10px]">
-              <span className="text-base  font-normal text-[4D4D4D]">
-                {translate("invoice.table_headings.status")}
-              </span>
+          <span className="text-base font-medium text-[#4B4B4B] truncate">
+            {collectiveInvoiceDetails?.title}
+          </span>
+        </div>
 
-              {collectiveInvoiceDetails?.invoiceID?.invoiceStatus && (
-                <span
-                  className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
-                >
-                  {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
-                </span>
+        <div className="flex items-center gap-[10px]">
+          <span className="text-base font-normal text-[4D4D4D]">
+            {translate("invoice.table_headings.status")}
+          </span>
+
+          {collectiveInvoiceDetails?.invoiceID?.invoiceStatus && (
+            <span
+              className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
+            >
+              {translate(
+                `invoice_status.${collectiveInvoiceDetails?.invoiceID?.invoiceStatus}`
               )}
-            </div>
-            <div className="flex gap-[10px]">
-              <span className="text-base  font-normal text-[4D4D4D]">
-                {translate("invoice.card_content.worker")}:
-              </span>
-              <span className="text-base font-medium text-[#4B4B4B]">
-                {
-                  collectiveInvoiceDetails?.invoiceID?.contractID?.offerID
-                    ?.createdBy?.fullName
-                }
-              </span>
-            </div>
-          </div>
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-[10px]">
+          <span className="text-base font-normal text-[4D4D4D]">
+            {translate("invoice.card_content.worker")}:
+          </span>
+          <span className="text-base font-medium text-[#4B4B4B]">
+            {collectiveInvoiceDetails?.invoiceID?.createdBy?.fullName}
+          </span>
         </div>
       </div>
+      {/* <div className="flex flex-col gap-4"> */}
+      {/* <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
+        <div className="flex justify-between">
+          <div>
+            <span className="text-base font-normal text-[#4D4D4D] mr-[10px]">
+              {translate("invoice.card_content.invoice_number")}:
+            </span>
+            <span className="text-base font-medium text-[#4B4B4B]">
+              {collectiveInvoiceDetails?.invoiceID?.invoiceNumber}
+            </span>
+          </div>
+          <div className="flex gap-[10px]">
+            <span className="text-base  font-normal text-[#4D4D4D] break-all">
+              {translate("invoice.table_headings.title")}:
+            </span>
+
+            <span className="text-base font-medium text-[#4B4B4B] flex">
+              {collectiveInvoiceDetails?.title}
+            </span>
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+          <div className="flex gap-[10px]">
+            <span className="text-base  font-normal text-[4D4D4D]">
+              {translate("invoice.table_headings.status")}
+            </span>
+
+            {collectiveInvoiceDetails?.invoiceID?.invoiceStatus && (
+              <span
+                className={`text-base font-medium text-[${color}] border border-[${color}] rounded-lg px-4`}
+              >
+                {collectiveInvoiceDetails?.invoiceID?.invoiceStatus}
+              </span>
+            )}
+          </div>
+          <div className="flex gap-[10px]">
+            <span className="text-base  font-normal text-[4D4D4D]">
+              {translate("invoice.card_content.worker")}:
+            </span>
+            <span className="text-base font-medium text-[#4B4B4B]">
+              {
+                collectiveInvoiceDetails?.invoiceID?.contractID?.offerID
+                  ?.createdBy?.fullName
+              }
+            </span>
+          </div>
+        </div>
+      </div> */}
+      {/* </div> */}
     </>
   );
 };

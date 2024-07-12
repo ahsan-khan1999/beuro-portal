@@ -414,9 +414,9 @@ export const useReceiptPdf = () => {
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
-        collectiveInvoiceDetails?.invoiceNumber +
+        collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName +
         "-" +
-        collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName
+        collectiveInvoiceDetails?.invoiceNumber
       }.pdf`;
       document.body.appendChild(a);
       a.click();

@@ -365,9 +365,9 @@ export const useOfferPdf = () => {
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
-        offerDetails?.offerNumber +
+        offerDetails?.createdBy?.company?.companyName +
         "-" +
-        offerDetails?.createdBy?.company?.companyName
+        offerDetails?.offerNumber
       }.pdf`;
       document.body.appendChild(a);
       a.click();
