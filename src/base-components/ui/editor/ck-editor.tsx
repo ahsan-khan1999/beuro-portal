@@ -1,8 +1,6 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
-import CustomEditor from '@/base-components/ui/editor/ckeditor/build/ckeditor';
+import CustomEditor from "@/base-components/ui/editor/ckeditor/build/ckeditor";
 
 const ClassicCKEditor = ({
   data,
@@ -11,20 +9,18 @@ const ClassicCKEditor = ({
   data: string;
   onChange: (event: any, editor: CustomEditor) => void;
 }) => {
-
   return (
     <CKEditor
       editor={CustomEditor}
       data={data}
-      onReady={(editor) => { }}
+      onReady={(editor) => {}}
       onChange={(event, editor) => {
         const data = editor?.getData();
         onChange(event, editor);
       }}
-      onBlur={(event, editor) => { }}
-      onFocus={(event, editor) => { }}
+      onBlur={(event, editor) => {}}
+      onFocus={(event, editor) => {}}
       config={{
-       
         //   toolbar: [
         //     "undo",
         //     "redo",
@@ -38,7 +34,6 @@ const ClassicCKEditor = ({
         //     "blockQuote",
         //   ],
         toolbar: {
-
           items: [
             "undo",
             "redo",
@@ -73,7 +68,7 @@ const ClassicCKEditor = ({
         placeholder: "Describe your item",
       }}
     />
-  )
-}
+  );
+};
 
 export default ClassicCKEditor;
