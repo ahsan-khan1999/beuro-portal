@@ -41,12 +41,12 @@ const TableRow = ({
                 onClick={() =>
                   router.push({
                     pathname: "/admin/support-request/details",
-                    query: { supportRequest: item.id },
+                    query: { ...router.query, supportRequest: item.id },
                   })
                 }
                 className={` ${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } hover:bg-[#E9E1FF] pl-4 pr-1 border-t border-t-[#E7EAEE] cursor-pointer xs:w-fit xlg:w-auto mlg:w-full grid gap-x-4 xs:grid-cols-[minmax(70px,_70px),minmax(200px,_3fr)_minmax(300px,_4fr)_minmax(160px,_160px)_minmax(140px,_140px)] mlg:grid-cols-[minmax(60px,_60px),minmax(100px,_100%)_minmax(160px,_160px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px),minmax(150px,_3fr)_minmax(150px,_4fr)_minmax(140px,_140px)_minmax(130px,_130px)]`}
+                } hover:bg-[#E9E1FF] pl-4 pr-1 border-t border-t-[#E7EAEE] cursor-pointer xs:w-fit xlg:w-auto mlg:w-full grid gap-x-4 xs:grid-cols-[minmax(70px,_70px),minmax(200px,_3fr)_minmax(300px,_4fr)_minmax(180px,_180px)_minmax(160px,_160px)] mlg:grid-cols-[minmax(60px,_60px),minmax(100px,_100%)_minmax(160px,_160px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px),minmax(150px,_3fr)_minmax(150px,_4fr)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(60px,_60px),minmax(150px,_3fr)_minmax(150px,_4fr)_minmax(140px,_140px)_minmax(130px,_130px)]`}
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <span className="py-4 truncate">
@@ -55,7 +55,7 @@ const TableRow = ({
                 <span className="truncate py-4 block mlg:hidden xlg:block">
                   {item?.createdBy?.email}
                 </span>
-                <span className="py-4 truncate">
+                <span className="py-4 truncate xlg:hidden maxSize:block">
                   {item?.createdBy?.company?.mobileNumber}
                 </span>
                 <span className="py-4 truncate">
@@ -64,7 +64,7 @@ const TableRow = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(140px,_140px)_minmax(50px,_50px)]">
+            <div className="gap-x-3 grid grid-cols-[minmax(140px,_140px)_minmax(50px,_50px)]">
               <span
                 className="py-4 flex justify-center items-center"
                 onClick={(e) => e.stopPropagation()}
@@ -104,8 +104,16 @@ const TableRow = ({
                 />
               </span>
               <div className="flex justify-center items-center">
-                <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg cursor-pointer">
-                  <div className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center">
+                <div
+                  onClick={() =>
+                    router.push({
+                      pathname: "/admin/support-request/details",
+                      query: { ...router.query, supportRequest: item.id },
+                    })
+                  }
+                  className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg cursor-pointer"
+                >
+                  <span className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="8"
@@ -118,7 +126,7 @@ const TableRow = ({
                         fill="#4A13E7"
                       />
                     </svg>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>

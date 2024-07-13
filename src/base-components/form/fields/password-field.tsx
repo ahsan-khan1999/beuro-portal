@@ -26,6 +26,7 @@ export const PasswordField = ({
   const defaultClasses = ` w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
     type == "password" ? "pl-10 pr-4" : "px-4"
   }`;
+
   return (
     <div className="relative flex items-center">
       {/* {type == "password" && (

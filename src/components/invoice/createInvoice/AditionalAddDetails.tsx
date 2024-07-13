@@ -33,11 +33,11 @@ const AditionalAddDetails = ({
   };
 
   return (
-    <FormCard>
+    <FormCard containerClassName="pb-6">
       <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
-          {translate("offers.additional_details.main_heading")}{" "}
-          {invoiceDetails?.id && invoiceDetails?.invoiceNumber}
+          {translate("offers.additional_details.main_heading")} (
+          {invoiceDetails?.id && invoiceDetails?.invoiceNumber})
         </h2>
         <button
           onClick={handleCancel}
@@ -46,7 +46,7 @@ const AditionalAddDetails = ({
           {translate("offers.additional_details.cancel_button")}
         </button>
       </div>
-      <div className="py-3 px-6">
+      <div className="pt-3 px-6">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

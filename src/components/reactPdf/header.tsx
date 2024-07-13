@@ -1,10 +1,7 @@
 import { DocumentHeaderDetailsProps } from "@/types";
-import { HeaderProps } from "@/types/pdf";
 import { HeaderLabel, HeaderLabelNr } from "@/utils/static";
-import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
-import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
+import { pdfDateFormat } from "@/utils/utility";
+import { View, Text, Image } from "@react-pdf/renderer";
 
 export const Header = ({
   createdBy,
@@ -13,32 +10,85 @@ export const Header = ({
   offerNo,
   fileType,
   isReverseLogo,
+  language = "de",
+  isOffer,
 }: Partial<DocumentHeaderDetailsProps>) => {
-  const fomrattedDate = formatDateTimeToDate(offerDate || "");
-  const { FooterColour, textColour, logo } = emailTemplateSettings ?? {};
+  const { logo } = emailTemplateSettings ?? {};
+
+  const langContent = {
+    en: {
+      no: "No",
+      created_by: "Created By",
+      offer: "Offer ",
+      create: "Create",
+      date: "Date",
+      HeaderLabelNr: {
+        offer: "Offer ",
+        contract: "Contract ",
+        invoice: "Invoice ",
+        receipt: "Receipt ",
+      },
+      HeaderLabel: {
+        contract: "Create",
+        invoice: "Invoice",
+        receipt: "Receipt",
+      },
+    },
+    de: {
+      no: "Nr",
+      created_by: "Erstellt Von",
+      create: "Erstell",
+      date: "Datum",
+      offer: "Angebot ",
+      HeaderLabelNr: {
+        offer: "Angebot ",
+        contract: "Vertrag ",
+        invoice: "Rechnung ",
+        receipt: "Quittung ",
+      },
+      HeaderLabel: {
+        contract: "Erstell",
+        invoice: "Rechnung",
+        receipt: "Quittung",
+      },
+    },
+  };
+
   return (
     <View
       style={{
         display: "flex",
         flexDirection: isReverseLogo ? "row-reverse" : "row",
         alignItems: "center",
-        // backgroundColor: `#${FooterColour}`,
         padding: 20,
         fontFamily: "Poppins",
       }}
+      key={language}
       fixed
     >
       <View style={{ width: "65%" }}>
-        <Image
-          src={logo}
-          style={{
-            width: 182,
-            height: 73,
-            display: "flex",
-            justifyContent: isReverseLogo ? "flex-end" : "flex-start",
-            marginLeft: isReverseLogo ? "auto" : 0,
-          }}
-        />
+        {logo ? (
+          <Image
+            src={logo}
+            style={{
+              width: 182,
+              height: 73,
+              display: "flex",
+              justifyContent: isReverseLogo ? "flex-end" : "flex-start",
+              marginLeft: isReverseLogo ? "auto" : 0,
+            }}
+          />
+        ) : (
+          <View
+            style={{
+              width: 182,
+              height: 73,
+              display: "flex",
+              justifyContent: isReverseLogo ? "flex-end" : "flex-start",
+              marginLeft: isReverseLogo ? "auto" : 0,
+            }}
+          />
+        )}
       </View>
       <View style={{ width: "35%" }}>
         <View
@@ -54,20 +104,21 @@ export const Header = ({
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
-              // color: `#${textColour}`,
             }}
           >
             {(fileType &&
-              HeaderLabelNr[fileType as keyof typeof HeaderLabel]) ||
+              langContent[language as keyof typeof langContent]?.HeaderLabelNr[
+                fileType as keyof typeof HeaderLabelNr
+              ]) ||
+              langContent[language as keyof typeof langContent]?.offer ||
               "Angebot "}
-            Nr :
+            {langContent[language as keyof typeof langContent]?.no || "Nr"}:{" "}
           </Text>
           <Text
             style={{
               fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
-              // color: `#${textColour}`,
             }}
           >
             {offerNo}
@@ -86,22 +137,25 @@ export const Header = ({
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
-              // color: `#${textColour}`,
             }}
           >
-            {(fileType && HeaderLabel[fileType as keyof typeof HeaderLabel]) ||
-              "Erstell"}
-            datum :
+            {(fileType &&
+              langContent[language as keyof typeof langContent]?.HeaderLabel[
+                fileType as keyof typeof HeaderLabel
+              ]) ||
+              langContent[language as keyof typeof langContent]?.create ||
+              "Erstell"}{" "}
+            {langContent[language as keyof typeof langContent]?.date || "datum"}
+            :{" "}
           </Text>
           <Text
             style={{
               fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
-              // color: `#${textColour}`,
             }}
           >
-            {pdfDateFormat(offerDate || "", "de")}
+            {pdfDateFormat(offerDate || "", language || "de")}
           </Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>
@@ -111,17 +165,17 @@ export const Header = ({
               fontWeight: 400,
               fontStyle: "normal",
               marginRight: 1,
-              // color: `#${textColour}`,
             }}
           >
-            Erstellt von :
+            {langContent[language as keyof typeof langContent]?.created_by ||
+              "Erstellt von"}
+            :{" "}
           </Text>
           <Text
             style={{
               fontSize: 8,
               fontWeight: 500,
               fontStyle: "medium",
-              // color: `#${textColour}`,
             }}
           >
             {createdBy}

@@ -4,7 +4,7 @@ import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 import AddressAddDetails from "./AddressAddDetails";
 import ServiceAddDetails from "./ServiceAddDetails";
 import AditionalAddDetails from "./AditionalAddDetails";
-import OfferAddDetails from "./OfferAddDetails";
+import InvoiceAddDetails from "./InvoiceAddDetails";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -124,7 +124,7 @@ export const CreateInvoice = () => {
 
   const componentsLookUp = {
     [ComponentsType.customerAdded]: (
-      <OfferAddDetails onHandleNext={handleNextTab} />
+      <InvoiceAddDetails onHandleNext={handleNextTab} />
     ),
     [ComponentsType.addressAdded]: (
       <AddressAddDetails onHandleNext={handleNextTab} />

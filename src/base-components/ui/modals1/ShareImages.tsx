@@ -9,6 +9,7 @@ import { BaseButton } from "../button/base-button";
 import { ImagePreview } from "./image-preview";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useShareImages } from "@/hooks/modals/useShareImages";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export const ShareImages = ({
   onClose,
@@ -27,6 +28,10 @@ export const ShareImages = ({
     isOpenedFile,
     images,
   } = useShareImages();
+
+  const { refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   const handleFileLink = (fileName: string) => {
     window.open(fileName);
@@ -122,8 +127,6 @@ export const ShareImages = ({
     );
   };
 
-  const isProduction = process.env.NODE_ENV === "production";
-
   return (
     <>
       <BaseModal
@@ -138,11 +141,28 @@ export const ShareImages = ({
             onClick={onClose}
           />
 
-          <p className="text-2xl font-medium border-b-2 border-b-[#000] border-opacity-10 pb-5">
+          <p className="text-2xl font-medium">
             {translate("offers.share_images_modal.heading")}
           </p>
 
-          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5] ">
+          <div className="border-y border-y-[#000] border-opacity-10 py-[10px] my-5">
+            <div className="flex items-center gap-x-[34px]">
+              <div className="flex items-center gap-x-[14px]">
+                <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+                <span className="text-sm font-medium text-primary">
+                  {refID}
+                </span>
+              </div>
+              <div className="flex items-center gap-x-[14px]">
+                <span className="text-sm font-normal text-[#4D4D4D]">
+                  {heading}:
+                </span>
+                <span className="text-sm font-medium text-primary">{name}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
             {attachementTabs.map((item, index) => (
               <button
                 key={index}

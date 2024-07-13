@@ -1,4 +1,3 @@
-import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Form } from "@/base-components/form/form";
 import { useAddLeadAdditionalDetails } from "@/hooks/leads/useAddLeadAdditionalDetails";
 import FormCard from "@/layout/customers/FormCard";

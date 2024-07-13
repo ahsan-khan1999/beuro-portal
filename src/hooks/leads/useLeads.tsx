@@ -111,7 +111,7 @@ const useLeads = () => {
           params: {
             filter: updatedFilter,
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {
@@ -121,7 +121,7 @@ const useLeads = () => {
   }, [query]);
 
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
@@ -134,11 +134,16 @@ const useLeads = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
-    if (e) {
-      e.stopPropagation();
-    }
-    const filteredLead = lead?.filter((item_) => item_.id === item);
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+
+    const filteredLead = lead?.filter((item_) => item_.id === id);
     if (filteredLead?.length === 1) {
       dispatch(setLeadDetails(filteredLead[0]));
       dispatch(
@@ -160,17 +165,37 @@ const useLeads = () => {
           });
         }
       });
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+      dispatch(
+        updateModalType({
+          type: ModalType.EXISTING_NOTES,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
     } else {
       dispatch(updateModalType({ type: ModalType.CREATION }));
     }
   };
 
-  const handleAddNote = (id: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "lead" },
+        data: {
+          id: id,
+          type: "lead",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -182,11 +207,24 @@ const useLeads = () => {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "lead", data: note },
+        data: {
+          id: id,
+          type: "lead",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -196,12 +234,15 @@ const useLeads = () => {
   };
 
   const handleImageUpload = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
+    e?.stopPropagation();
     dispatch(setImages([]));
-    const filteredLead = lead.find((item_) => item_.id === item);
+    const filteredLead = lead.find((item_) => item_.id === id);
 
     if (filteredLead) {
       dispatch(setLeadDetails(filteredLead));
@@ -223,7 +264,16 @@ const useLeads = () => {
           );
         }
       });
-      dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
+      dispatch(
+        updateModalType({
+          type: ModalType.UPLOAD_IMAGE,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
     }
   };
 
@@ -253,7 +303,7 @@ const useLeads = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -262,7 +312,7 @@ const useLeads = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
@@ -281,7 +331,7 @@ const useLeads = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),
@@ -313,6 +363,7 @@ const useLeads = () => {
         );
 
         if (res?.payload) {
+
           let index = currentPageRows.findIndex(
             (item) => item.id === res.payload?.id
           );

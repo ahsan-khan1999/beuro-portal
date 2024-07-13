@@ -11,17 +11,31 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage } from "@/api/slices/imageSlice/image";
 import { useRouter } from "next/router";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { useTranslation } from "next-i18next";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
+import { useTranslation } from "next-i18next";
 
 const EditOffersDetails = () => {
   const dispatch = useDispatch();
+  const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails } = useAppSelector((state) => state.offer);
-  const { t: translate } = useTranslation();
 
-  const shareImgModal = () => {
-    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  const shareImgModal = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SHARE_IMAGES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   useEffect(() => {
@@ -40,11 +54,23 @@ const EditOffersDetails = () => {
   };
 
   const handleImageUpload = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    e?.stopPropagation();
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -73,8 +99,6 @@ const EditOffersDetails = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  // const { handleImagesUpload } = useOffers();
-  // const handleImagesUpload = () => {};
   const router = useRouter();
   let tab: EditComponentsType | undefined;
 
@@ -83,18 +107,15 @@ const EditOffersDetails = () => {
   }
 
   return (
-    <>
-      <Layout>
-        <EditOffersDetailsData
-          shareImgModal={shareImgModal}
-          handleImagesUpload={handleImageUpload}
-          handleImageSlider={handleImageSlider}
-          tab={tab}
-        />
-      </Layout>
-
+    <Layout>
+      <EditOffersDetailsData
+        shareImgModal={shareImgModal}
+        handleImagesUpload={handleImageUpload}
+        handleImageSlider={handleImageSlider}
+        tab={tab}
+      />
       {renderModal()}
-    </>
+    </Layout>
   );
 };
 

@@ -13,7 +13,7 @@ const SettingProfile = ({
     useSettingProfile(handleChangePassword);
 
   return (
-    <FormCard>
+    <FormCard containerClassName="pb-6">
       <div className="py-3 px-6">
         <Form
           formFields={fields}

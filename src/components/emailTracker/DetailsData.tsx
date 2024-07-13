@@ -11,6 +11,8 @@ import {
 } from "@/utils/utility";
 import Link from "next/link";
 import { updateQuery } from "@/utils/update-query";
+import { useTranslation } from "next-i18next";
+
 const DetailsData = ({
   handleConfirmDeletion,
   emailDetails,
@@ -19,6 +21,7 @@ const DetailsData = ({
   emailDetails: TableRowEmailTracker | null;
 }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const handleBack = () => {
     (router.pathname = "/email-tracker"), delete router.query["email"];
@@ -150,8 +153,6 @@ const DetailsData = ({
         </div>
         <div className="mt-5 flex items-end">
           {emailDetails?.attachments?.map((item) => {
-            console.log(item);
-
             return (
               <>
                 <Link

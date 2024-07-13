@@ -11,12 +11,12 @@ import {
 import { ContractDetailCardProps } from "@/types/contract";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
-import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 import editIcon from "@/assets/svgs/edit_primary.svg";
 import { updateQuery } from "@/utils/update-query";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { useTranslation } from "next-i18next";
 
 const ContractDetailsCard = ({
   contractDetails,
@@ -44,6 +44,7 @@ const ContractDetailsCard = ({
   const paymentMethod = [
     `${translate("payment_method.Cash")}`,
     `${translate("payment_method.Online")}`,
+    `${translate("payment_method.Twint")}`,
   ];
 
   const contractStatus = [
@@ -57,6 +58,18 @@ const ContractDetailsCard = ({
     delete router.query["offer"];
     updateQuery(router, router.locale as string);
   };
+
+  const customerType = contractDetails?.offerID?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
+      : contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div className="min-h-[218px]">
@@ -316,10 +329,18 @@ const ContractDetailsCard = ({
             </span>
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex gap-x-10">
             <div
               className="flex items-center gap-[11px] cursor-pointer"
-              onClick={(e) => handleNotes(contractDetails?.id, e)}
+              onClick={(e) =>
+                handleNotes(
+                  contractDetails?.id,
+                  contractDetails?.contractNumber,
+                  name,
+                  heading,
+                  e
+                )
+              }
             >
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.notes")}:
@@ -331,14 +352,22 @@ const ContractDetailsCard = ({
                 }
               />
             </div>
-            <div className="flex items-center gap-[11px] ">
+            <div className="flex items-center gap-3">
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.images")}:
               </span>
 
               <span
                 className="cursor-pointer"
-                onClick={(e) => handleImageUpload(contractDetails?.id, e)}
+                onClick={(e) =>
+                  handleImageUpload(
+                    contractDetails?.id,
+                    contractDetails?.contractNumber,
+                    name,
+                    heading,
+                    e
+                  )
+                }
               >
                 <ImageUploadIcon
                   pathClass={

@@ -54,7 +54,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       },
     },
     {
-      containerClass: "my-[30px]",
+      containerClass: "mt-[30px]",
       field: {
         type: Field.div,
         id: "div-field",

@@ -1,6 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNoteFormField } from "@/components/leads/fields/Add-note-fields";
@@ -12,19 +11,24 @@ import { setContractDetails } from "@/api/slices/contract/contractSlice";
 import { setInvoiceDetails } from "@/api/slices/invoice/invoiceSlice";
 import { useEffect } from "react";
 import { NoteSetting } from "@/api/slices/settingSlice/settings";
-import { DEFAULT_LEAD } from "@/utils/static";
-import { setLeadDetails } from "@/api/slices/lead/leadSlice";
+import { staticEnums } from "@/utils/static";
+
+export interface AddNoteProps {
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
+  handleFilterChange?: (query: FilterType) => void;
+  filter?: FilterType;
+}
 
 export const useAddNewNote = ({
   handleNotes,
   handleFilterChange,
   filter,
-}: {
-  handleNotes: (id: string) => void;
-  handleFilterChange?: (query: FilterType) => void;
-  filter?: FilterType;
-}) => {
-  const { t: translate } = useTranslation();
+}: AddNoteProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.note);
@@ -41,6 +45,51 @@ export const useAddNewNote = ({
       data: { id, type, data },
     },
   } = useAppSelector((state) => state.global);
+
+  const leadCustomerType = leadDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const leadName =
+    leadCustomerType === 1
+      ? leadDetails?.customerDetail?.companyName
+      : leadDetails?.customerDetail?.fullName;
+
+  const offerCustomerType = offerDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const offerName =
+    offerCustomerType === 1
+      ? offerDetails?.leadID?.customerDetail?.companyName
+      : offerDetails?.leadID?.customerDetail?.fullName;
+
+  const contractCustomerType = contractDetails?.offerID?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const contractName =
+    contractCustomerType === 1
+      ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
+      : contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+
+  const invoiceCustomerType = invoiceDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const invoiceName =
+    invoiceCustomerType === 1
+      ? invoiceDetails?.customerDetail?.companyName
+      : invoiceDetails?.customerDetail?.fullName;
+
+  const leadHeading =
+    leadCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const offerHeading =
+    offerCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const contractHeading =
+    contractCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+  const invoiceHeading =
+    invoiceCustomerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   const schema = generateAddNewNoteValidation(translate);
   const {
@@ -92,16 +141,31 @@ export const useAddNewNote = ({
           const isFilterLead = lead.find((item) => item.id === id);
           if (!isFilterLead?.isNoteCreated && handleFilterChange)
             handleFilterChange(filter || {});
-          handleNotes(leadDetails?.id);
+          handleNotes(
+            leadDetails?.id,
+            leadDetails?.refID,
+            leadName,
+            leadHeading
+          );
           break;
         case "offer":
           const isFilterOffer = offer.find((item) => item.id === id);
           if (!isFilterOffer?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-            handleNotes(offerDetails?.id);
+            handleNotes(
+              offerDetails?.id,
+              offerDetails?.offerNumber,
+              offerName,
+              offerHeading
+            );
           } else {
             dispatch(setOfferDetails({ ...offerDetails, isNoteCreated: true }));
-            handleNotes(offerDetails?.id);
+            handleNotes(
+              offerDetails?.id,
+              offerDetails?.offerNumber,
+              offerName,
+              offerHeading
+            );
           }
 
           break;
@@ -109,12 +173,22 @@ export const useAddNewNote = ({
           const isFilterContract = contract.find((item) => item.id === id);
           if (!isFilterContract?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-            handleNotes(contractDetails?.id);
+            handleNotes(
+              contractDetails?.id,
+              contractDetails?.contractNumber,
+              contractName,
+              contractHeading
+            );
           } else {
             dispatch(
               setContractDetails({ ...contractDetails, isNoteCreated: true })
             );
-            handleNotes(contractDetails?.id);
+            handleNotes(
+              contractDetails?.id,
+              contractDetails?.contractNumber,
+              contractName,
+              contractHeading
+            );
           }
 
           break;
@@ -122,12 +196,22 @@ export const useAddNewNote = ({
           const isFilterInvoice = invoice.find((item) => item.id === id);
           if (!isFilterInvoice?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
-            handleNotes(invoiceDetails?.id);
+            handleNotes(
+              invoiceDetails?.id,
+              invoiceDetails?.invoiceNumber,
+              invoiceName,
+              invoiceHeading
+            );
           } else {
             dispatch(
               setInvoiceDetails({ ...invoiceDetails, isNoteCreated: true })
             );
-            handleNotes(invoiceDetails?.id);
+            handleNotes(
+              invoiceDetails?.id,
+              invoiceDetails?.invoiceNumber,
+              invoiceName,
+              invoiceHeading
+            );
           }
 
           break;

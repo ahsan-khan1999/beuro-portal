@@ -291,7 +291,7 @@
       "customers": "Kunden",
       "plans": "Pläne",
       "payments": "Zahlungen",
-      "support_requests": "Unterstützunganfragen",
+      "support_requests": "Support",
       "Settings": "Einstellungen"
     }
   },
@@ -1145,10 +1145,11 @@
       "are_you_delete": "Sind Sie sicher, dass Sie dieses Angebot löschen möchten?",
       "delete_note": "Sind Sie sicher, dass Sie diese Notiz löschen wollen?",
       "offer_created": "Operation erfolgreich",
-      "offer_created_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "record_update_des": "Danke, dass Sie uns auf dem Laufenden halten, wir sind froh, Sie zu haben.",
+      "offer_created_des": "Vielen Dank für die Aktualisierung des Angebot. Wir freuen uns, Sie als Kunden zu haben.",
       "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
-      "email_sent_des": "Vielen Dank für die Aktualisierung des Angebote. Wir freuen uns, Sie als Kunden zu haben.",
+      "email_sent_des": "Vielen Dank für die Aktualisierung des Angebot. Wir freuen uns, Sie als Kunden zu haben.",
       "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
       "content_confirmation": "Bitte Bestätigen die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
@@ -1156,8 +1157,30 @@
       "plan_created": "Datensatz erfolgreich erstellt",
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
-      "date": "Datum"
+      "date": "Datum",
+      "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "details": "Einzelheiten",
+    "follow_up_completed": "Bitte kontaktieren Sie den Kunden nach 10 Minuten.",
+    "invoice_cards": {
+      "open_invoice": "Offen Rechnung",
+      "paid_invoice": "Bezahlt Rechnung",
+      "overdue_invoice": "Überfällig Rechnung",
+      "sending_invoice": "Versandbereit Rechnung",
+      "pending_invoice": "Entwurf Rechnung",
+      "invoice_total": "Insgesamt",
+      "page_sum": "Seite Summe"
+    },
+    "doc_upload_error_message": "Bitte laden Sie eine Dokumentendatei hoch.",
+    "video_upload_error_message": "Bitte laden Sie eine Videodatei hoch.",
+    "svg_upload_not_allowed": "SVG-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
+    "img_upload_error_message": "WebP-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
+    "offer_PDF_PREVIEW": "Angebot PDF-Vorschau",
+    "confirmation_PDF_PREVIEW": "Bestätigungs-PDF-Vorschau",
+    "invoice_PDF_PREVIEW": "Rechnungs-PDF-Vorschau",
+    "receipt_PDF_PREVIEW": "Quittung PDF-Vorschau",
+    "customer_name": "Kundenname",
+    "company_name": "Firmenname",
     "invoice_fitlers": {
       "pending": "Entwurf",
       "sending": "Versandbereit",
@@ -1192,10 +1215,9 @@
     "description_placeholder": "Bitte tragen Sie hier Ihre Angaben ein...",
     "actions": "Aktion",
     "service": "Dienst",
-    "offer_created": "Angebote erfolgreich erstellt",
+    "offer_created": "Angebot erstellt",
+    "offer_create": "Angebot erstellt",
     "user_rule": "Unternehmen",
-    "invoice_total": "Insgesamt",
-    "page_sum": "Seite Summe",
     "upload_file": "Datei hochladen",
     "view_docs": "Dokumente anzeigen",
     "share_on_whatsapp": "Auf Whatsapp teilen",
@@ -1296,7 +1318,7 @@
     },
     "add_note_modal": {
       "heading": "Notizen hinzufügen",
-      "label": "Ihre Notiz hinzufügen",
+      "label": "Notiz Titel",
       "button": "Speichern"
     },
     "images_modal": {
@@ -1472,7 +1494,7 @@
       "next_button": "Weiter"
     },
     "service_details": {
-      "main_heading": "Leistungen-/Produktdetails",
+      "main_heading": "Dienstleistung/Produktdetails",
       "edit_button": "Details Bearbeiten",
       "add_new_service": "Neuen Leistungen hinzufügen",
       "price": "Preis",
@@ -1533,8 +1555,8 @@
       "cancel_button": "Abbrechen"
     },
     "offer_created_modal": {
-      "main_heading": "Angebote erfolgreich erstellt",
-      "sub_heading": "Danke, dass Sie ein Angebote erstellt haben. Wir freuen uns, Sie zu haben.",
+      "main_heading": "Angebot erfolgreich erstellt",
+      "sub_heading": "Danke, dass Sie ein Angebot erstellt haben. Wir freuen uns, Sie zu haben.",
       "button": "Fertig"
     },
     "placeholders": {
@@ -1622,7 +1644,7 @@
       }
     },
     "customers_details": {
-      "main_heading": "Kundenmanagement",
+      "main_heading": "Kunden Leitung",
       "table_functions": {
         "active": "Aktiv",
         "block": "Blockiert",
@@ -1642,7 +1664,7 @@
         "main_heading": "Kundendetails",
         "make_button_unchecked": "Konto kostenlos erstellen",
         "make_button_checked": "Unendlich erstellen",
-        "customer_id": "ID",
+        "customer_id": "Kunde ID",
         "role": "Rolle",
         "no_of_employee": "Anzahl der Mitarbeiter",
         "plan": "Plan",
@@ -1670,19 +1692,20 @@
       }
     },
     "plans_management": {
-      "main_heading": "Pläne Verwaltung",
+      "main_heading": "Plan Leitung",
       "add_button": "Neu hinzufügen",
       "id": "ID",
-      "plan_name": "Pläne",
+      "plan_name": "Plan",
       "description": "Beschreibung",
       "price": "Preis",
       "employees": "Mitarbeiter",
       "delete": "Löschen"
     },
     "plan_details": {
-      "detail_heading": "Plan Details",
-      "add_heading": "Neuen Plan hinzufügen",
+      "detail_heading": "Pläne Details",
+      "add_heading": "Neuen Pläne hinzufügen",
       "plans_name": "Planname",
+
       "pricing": "Preisgestaltung monatlich",
       "annually_discount": "Jährlicher Rabatt(%)",
       "number_of_employees": "Anzahl der Mitarbeiter",
@@ -1796,7 +1819,7 @@
     }
   },
   "follow_up": {
-    "heading": "Nachverfolgung",
+    "heading": "Heute Follow-ups",
     "add_button": "Nachverfolgung hinzufügen",
     "upcoming_follow_up": "Bevorstehende Nachverfolgung",
     "view_all": "Alle anzeigen",
@@ -1858,7 +1881,7 @@
       "table_headings": {
         "id": "ID",
         "customer_name": "Kundenname",
-        "follow_up_date": "Datum und Uhrzeit der Nachverfolgung",
+        "follow_up_date": "Datum und Uhrzeit",
         "title": "Betreff/Titel",
         "status": "Status",
         "delete": "Löschen",
@@ -1923,6 +1946,14 @@
       "lead_source": "Leadquellen",
       "other_services": "Andere Leistungen",
       "Additional_details": "Zusätzliche Details"
+    },
+    "view_all_follow_up_filters": {
+      "all": "All",
+      "today": "Heute",
+      "pending": "Anhängig",
+      "overdue": "Überfällig",
+      "upcoming": "Demnächst",
+      "complete": "Vollständig"
     }
   },
   "dashboard_detail": {
@@ -1989,16 +2020,25 @@
     }
   },
   "pdf": {
+    "no": "Nr",
+    "label_nr_offer": "Angebot ",
+    "label_nr_contract": "Vertrag ",
+    "label_nr_invoice": "Rechnung ",
+    "label_nr_receipt": "Quittung ",
+    "label_create": "Erstell",
+    "label_invoice": "Rechnung",
+    "label_receipt": "Quittung",
     "offer_number": "Angebot Nr",
-    "offer_date": "Erstelldatum",
-    "created_by": "Erstellt von",
+    "offer_date": "Erstell Datum",
+    "created_by": "Erstellt Von",
     "email": "E-Mail",
     "phone": "Telefon",
     "mobile": "Handynummer",
     "address": "Adresse",
-    "work_date": "Arbeitstermine",
+    "work_date": "Auftragsdatum",
+    "work_dates": "Auftragsdaten",
     "description": "Beschreibung",
-    "service": "Dienstleistung/Produkt",
+    "service": "Dienstleistung / Produkt",
     "price": "Preis",
     "unit": "Einheit",
     "count": "Anzahl",
@@ -2008,8 +2048,13 @@
     "discount": "Rabatt",
     "total_after_discount": "Gesamtsumme nach Rabatt",
     "grand_total": "Gesamtsumme",
-    "paid_amount": "Bezahlter Betrag",
-    "due_amount": "Ausstehender Betrag",
+    "paid_amount": "Bezahlt Betrag",
+    "unpaid_amount": "Unbezahlter Betrag",
+    "due_amount": "Fälliger Betrag",
+    "total_paid_amount": "Bezahlte Gesamtbetrag",
+    "amount_paid_last": "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
+    "general_terms": "Allgemeine Geschäftsbedingungen",
+    "terms_des": "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen.",
     "validate_heading": "Gültigkeit des Angebots",
     "validate_des": "3 Monate ab Erstellung des Angebots",
     "share_des": "Ich teile den Vertrag mit Ihnen.",
@@ -2073,6 +2118,7 @@
       "open": "Offen",
       "online": "Online",
       "cash": "Bar",
+      "twint": "Twint",
       "sending": "Senden"
     }
   },
@@ -2125,7 +2171,7 @@
   },
   "offer_status": {
     "Open": "Offen",
-    "Expired": "Abgeloffen",
+    "Expired": "Abgelaufen",
     "Rejected": "Abgelehnt",
     "Accepted": "Angenommen"
   },

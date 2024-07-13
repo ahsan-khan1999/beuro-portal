@@ -12,18 +12,16 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useEffect } from "react";
 import { deleteEmail, readEmailDetail } from "@/api/slices/emailTracker/email";
-import { CustomerPromiseActionType } from "@/types/customer";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+
 const ViewMails = () => {
   const { modal } = useAppSelector((state) => state.global);
   const { emailDetails, loading } = useAppSelector((state) => state.emailSlice);
   const router = useRouter();
-
   const id = router.query.email;
-
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
+
   useEffect(() => {
     if (id) {
       dispatch(readEmailDetail({ params: { filter: id } }));
@@ -53,6 +51,7 @@ const ViewMails = () => {
     );
     if (res?.payload) router.push("/email-tracker");
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -81,26 +80,24 @@ const ViewMails = () => {
   };
 
   return (
-    <>
-      <Layout>
-        <DetailsCard>
-          <DetailsData
-            handleConfirmDeletion={handleConfirmDeletion}
-            emailDetails={emailDetails}
-          />
-        </DetailsCard>
-        <div className="mt-7">
-          {loading ? (
-            <div className="flex justify-center items-center">
-              <CustomLoader />
-            </div>
-          ) : (
-            <EmailDetailsData emailDetails={emailDetails} />
-          )}
-        </div>
-      </Layout>
+    <Layout>
+      <DetailsCard>
+        <DetailsData
+          handleConfirmDeletion={handleConfirmDeletion}
+          emailDetails={emailDetails}
+        />
+      </DetailsCard>
+      <div className="mt-7">
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <CustomLoader />
+          </div>
+        ) : (
+          <EmailDetailsData emailDetails={emailDetails} />
+        )}
+      </div>
       {renderModal()}
-    </>
+    </Layout>
   );
 };
 

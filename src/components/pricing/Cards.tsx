@@ -1,7 +1,4 @@
 import React from "react";
-import { Button } from "@/base-components/ui/button/button";
-import diamondIcon from "@/assets/svgs/diamond-plan-icon.svg";
-import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useEmptyStates } from "@/utils/hooks";
 import PlanInfo from "./PlanInfo";

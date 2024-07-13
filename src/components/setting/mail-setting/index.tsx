@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 
 const MailSetting = ({ handleCreation }: { handleCreation: Function }) => {
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const [changedComponent, setChangedComponent] =
     useState<MailSettingsComponentsType>(
       MailSettingsComponentsType.CONFIGURATION
@@ -17,11 +18,10 @@ const MailSetting = ({ handleCreation }: { handleCreation: Function }) => {
   const handleChangedComponent = (component: MailSettingsComponentsType) => {
     setChangedComponent(component);
   };
+
   useEffect(() => {
     dispatch(readEmailSettings({}));
   }, []);
-
-  const { t: translate } = useTranslation();
 
   return (
     <div>

@@ -42,6 +42,7 @@ const SERVICE_URLS = {
   company: "/company",
   invoice: "/invoice",
   downloadInvoiceRoute: "/invoice/download-excel",
+  invoiceCalculationRoute: "/invoice/calculations",
   mainInvoice: "/invoice/invoice-step/",
 
   contactSupport: "/contactSupport",
@@ -406,6 +407,14 @@ const downloadInvoice = (params) =>
     { detail: false }
   );
 
+const calculateInvoiceData = (params) =>
+  get(
+    SERVICE_URLS.invoiceCalculationRoute,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
 const readInvoiceDetails = (params) =>
   get(
     SERVICE_URLS.invoice,
@@ -541,6 +550,14 @@ const deleteOfferService = (data) =>
   del(SERVICE_URLS.offerService, data, { feature: featureConstants.login });
 
 const readFollowUp = (params) =>
+  get(
+    SERVICE_URLS.leadFollowUp,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const readTableFollowUp = (params) =>
   get(
     SERVICE_URLS.leadFollowUp,
     params,
@@ -1169,5 +1186,7 @@ const apiServices = {
   readNotesSettings,
   updateNotesSettings,
   deleteNotesSettings,
+  calculateInvoiceData,
+  readTableFollowUp,
 };
 export default apiServices;

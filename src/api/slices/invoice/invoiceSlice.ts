@@ -22,8 +22,13 @@ interface InvoiceState {
   collectiveReciept: SubInvoiceTableRowTypes[];
   invoiceInfo: { subject: string; description: string };
   invoiceSum: {
-    sumOfAllPages: number;
-    sumOfTotalsPerPage: number;
+    pageSum: number;
+    totalSum: number;
+    sumOfOpenInvoices: number;
+    sumOfOverdueInvoices: number;
+    sumOfPaidInvoices: number;
+    sumOfPendingInvoices: number;
+    sumOfSendingInvoices: number;
   };
   loadingInvoice: boolean;
   loadingReceipt: boolean;
@@ -47,8 +52,13 @@ const initialState: InvoiceState = {
     description: "",
   },
   invoiceSum: {
-    sumOfAllPages: 0,
-    sumOfTotalsPerPage: 0,
+    pageSum: 0,
+    totalSum: 0,
+    sumOfOpenInvoices: 0,
+    sumOfOverdueInvoices: 0,
+    sumOfPaidInvoices: 0,
+    sumOfPendingInvoices: 0,
+    sumOfSendingInvoices: 0,
   },
   loadingInvoice: true,
   loadingReceipt: true,
@@ -74,6 +84,21 @@ export const downloadInvoiceReports: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.downloadInvoice(params);
+      return response?.data?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+// invoice calculation
+export const invoiceCalculation: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("invoice/calculation", async (args, thunkApi) => {
+    const { params } = args as any;
+
+    try {
+      const response = await apiServices.calculateInvoiceData(params);
+
       return response?.data?.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -448,6 +473,7 @@ export const updateInvoiceDetials: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 const InvoiceSlice = createSlice({
   name: "InvoiceSlice",
   initialState,
@@ -473,12 +499,31 @@ const InvoiceSlice = createSlice({
       state.invoice = action.payload.Invoice;
       state.lastPage = action.payload.lastPage;
       state.totalCount = action.payload.totalCount;
-      state.invoiceSum.sumOfAllPages = action.payload.sumOfAllPages;
-      state.invoiceSum.sumOfTotalsPerPage = action.payload.sumOfTotalsPerPage;
       state.isLoading = false;
     });
     builder.addCase(readInvoice.rejected, (state) => {
       state.isLoading = false;
+    });
+
+    // invoice calculation
+    builder.addCase(invoiceCalculation.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(invoiceCalculation.fulfilled, (state, action) => {
+      state.invoiceSum.sumOfOpenInvoices = action.payload.sumOfOpenInvoices;
+      state.invoiceSum.sumOfPaidInvoices = action.payload.sumOfPaidInvoices;
+      state.invoiceSum.sumOfOverdueInvoices =
+        action.payload.sumOfOverdueInvoices;
+      state.invoiceSum.sumOfPendingInvoices =
+        action.payload.sumOfPendingInvoices;
+      state.invoiceSum.sumOfSendingInvoices =
+        action.payload.sumOfSendingInvoices;
+      state.invoiceSum.pageSum = action.payload.pageSum;
+      state.invoiceSum.totalSum = action.payload.totalSum;
+      state.loading = false;
+    });
+    builder.addCase(invoiceCalculation.rejected, (state) => {
+      state.loading = false;
     });
 
     builder.addCase(readInvoiceDetails.pending, (state) => {

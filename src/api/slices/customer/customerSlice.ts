@@ -34,6 +34,7 @@ export const readCustomer: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.readCustomer(params);
+
       return response?.data?.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));

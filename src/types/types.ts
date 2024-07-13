@@ -68,6 +68,7 @@ export interface SVGIconProp {
 
 export interface MyComponentProp {
   children: ReactNode;
+  className?: string;
 }
 
 export interface UserAccountCardProp extends MyComponentProp {
@@ -97,6 +98,7 @@ export interface tabArrayTypes {
   name: string;
   content?: React.ReactNode;
   icon: string;
+  id?: string;
 }
 
 export interface tabsSectionTypes {
@@ -326,7 +328,8 @@ export type GenerateContentFormField = (
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
   contentDetails?: ContentTableRowTypes,
   append?: UseFieldArrayAppend<FieldValues, "offerContent.address">,
-  onRemove?: UseFieldArrayRemove
+  onRemove?: UseFieldArrayRemove,
+  offerDescriptionCount?: string
 ) => FormField[];
 // Employee formfield
 export type GenerateEmployeeFormField = (
@@ -538,7 +541,7 @@ export type GenerateOfferServiceFormField = (
     invoiceDetails?: InvoiceDetailTableRowTypes;
   },
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
-  handleRemoveAddress: UseFieldArrayRemove,
+  handleRemoveService: (index: number) => void,
   serviceType: ServiceType[],
   onServiceChange: (index: number, value: ServiceType) => void,
   fields?: object[],
@@ -575,7 +578,7 @@ export type GenerateInvoiceServiceFormField = (
     invoiceDetails?: InvoiceDetailTableRowTypes;
   },
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
-  handleRemoveAddress: UseFieldArrayRemove,
+  handleRemoveService: (index: number) => void,
   serviceType: ServiceType[],
   onServiceChange: (index: number, value: ServiceType) => void,
   fields?: object[],
@@ -797,6 +800,7 @@ export interface PaginationProps {
   onPageChange: (page: number) => void;
   containerClassName?: string;
   currentPage: number;
+  isPageInParam?: boolean;
 }
 
 export interface PaginationItemProps {
@@ -880,6 +884,8 @@ export interface DocumentHeaderDetailsProps {
   fileType?: "contract" | "invoice" | "receipt";
   companyName?: string;
   isReverseLogo?: boolean;
+  language?: string;
+  isOffer?: boolean;
 }
 
 export interface ProductItemFooterProps {
@@ -907,6 +913,8 @@ export interface ProductItemFooterProps {
   isTax?: boolean;
   isDiscount?: boolean;
   discountDescription?: string;
+  language?: string;
+  paymentType?: string;
 }
 
 export interface ContactDetailsProps {
@@ -934,6 +942,7 @@ export interface MovingDetailsProps {
   handleEditDateModal?: () => void;
   time?: string;
   isReverseAddress?: boolean;
+  language?: string;
 }
 export interface ProductItemProps {
   title: string;
@@ -989,8 +998,8 @@ export interface DocumentDetailFooterProps {
   thirdColumn: CompanyDetailsThirdColumn;
   fourthColumn: CompanyDetailsFourthColumn;
   columnSettings: TemplateType | null;
-  totalPages: number;
-  currPage: number;
+  totalPages?: number;
+  currPage?: number;
   emailTemplateSettings?: EmailTemplate | null;
 }
 export interface TemplateSettigsFirstColumn {
@@ -1103,6 +1112,21 @@ export interface ContractEmailHeaderProps {
   onDownload: () => void;
 }
 
+export interface ContentHeaderProps {
+  headerDetails: DocumentHeaderDetailsProps;
+  footerDetails: DocumentDetailFooterProps;
+  aggrementDetails: string;
+}
+
+export interface ContentPdfPreviewerProps {
+  data?: ContentHeaderProps;
+  isOfferPdf?: boolean;
+  templateSettings: TemplateType | null;
+  emailTemplateSettings: EmailTemplate | null;
+  description?: string;
+  language?: string | undefined;
+}
+
 export interface PdfProps<T = EmailHeaderProps> {
   emailHeader: Partial<T>;
   headerDetails: DocumentHeaderDetailsProps;
@@ -1132,7 +1156,9 @@ export interface PdfPreviewProps {
   mergedPdfFileUrl?: string | null;
   isPdfRendering?: boolean;
   showContractSign?: boolean;
-  companyName?:string
+  companyName?: string;
+  lang?: string | undefined;
+  isOfferPdf?: boolean;
 }
 
 export interface PdfPreviewFooterProps {

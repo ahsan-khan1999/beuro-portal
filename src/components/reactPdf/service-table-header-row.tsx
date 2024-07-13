@@ -48,22 +48,68 @@ const styles = StyleSheet.create({
 
 export const ServiceTableHederRow = ({
   isDiscount,
+  language,
 }: {
   isDiscount?: boolean;
+  language?: string;
 }) => {
+  const langContent = {
+    en: {
+      service: "Service / Product",
+      description: "Description",
+      count: "Count",
+      unit: "Unit",
+      price: "Price",
+      discount: "Discount",
+      total: "Total",
+    },
+    de: {
+      service: "Dienstleistung / Produkt",
+      description: "Beschreibung",
+      count: "Anzahl",
+      unit: "Einheit",
+      price: "Preis",
+      discount: "Rabatt",
+      total: "Gesamt",
+    },
+  };
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerRow}>
-        <Text style={styles.headerTitle}>{"Dienstleistung / Produkt"}</Text>
-        <Text style={styles.headerDescription}>{"Beschreibung"}</Text>
+        <Text style={styles.headerTitle}>
+          {langContent[language as keyof typeof langContent]?.service ||
+            "Dienstleistung / Produkt"}
+        </Text>
+        <Text style={styles.headerDescription}>
+          {langContent[language as keyof typeof langContent]?.description ||
+            "Beschreibung"}
+        </Text>
 
         <View style={styles.priceHeader}>
-          <Text style={styles.headerText}>{"Anzahl"}</Text>
-          <Text style={styles.headerText}>{"Einheit"}</Text>
-          <Text style={styles.headerText}>{"Preis"}</Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.count ||
+              "Anzahl"}
+          </Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.unit ||
+              "Einheit"}
+          </Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.price ||
+              "Preis"}
+          </Text>
 
-          {isDiscount && <Text style={styles.headerText}>{"Rabatt"}</Text>}
-          <Text style={styles.headerText}>{"Gesamt"}</Text>
+          {isDiscount && (
+            <Text style={styles.headerText}>
+              {langContent[language as keyof typeof langContent]?.discount ||
+                "discount"}
+            </Text>
+          )}
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.total ||
+              "Gesamt"}
+          </Text>
         </View>
       </View>
     </View>

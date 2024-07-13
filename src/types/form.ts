@@ -130,15 +130,29 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   disabled?: boolean;
   fieldIndex?: number;
 }
+export interface CustomerSelectProps
+  extends BaseFieldProps<Field.customerSelectField> {
+  control?: Control<FieldValues>;
+  options: OptionType[];
+  value?: string;
+  svg?: string;
+  onItemChange?: (id: string, index?: number) => void;
+  onEnterPress?: (text: string) => void;
+  trigger?: UseFormTrigger<FieldValues>;
+  className?: string;
+  disabled?: boolean;
+  fieldIndex?: number;
+}
 
 export interface SelectBoxProps {
   id: string;
   options: OptionType[];
+  value: string;
   trigger?: UseFormTrigger<FieldValues>;
   field?: ControllerRenderProps<FieldValues, string>;
-  value: string;
   svg?: string;
   onItemChange?: (id: string, index?: number) => void;
+  onEnterPress?: (text: string) => void;
   success?: boolean;
   placeholder?: string;
   className?: string;
@@ -214,6 +228,7 @@ export interface ProfileUploadFieldProps
   control?: Control<FieldValues>;
   iconClasses?: string;
   disabled?: boolean;
+  isMailSetting?: boolean;
 }
 
 // interface for the Image upload
@@ -285,7 +300,7 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
 
 export interface SpanProps {
   type: Field.span;
-  text?: string;
+  text?: string | number;
   linkText?: string;
   linkHref?: string;
   containerClassName?: string;
@@ -350,7 +365,8 @@ export type FieldType =
   | Field.link
   | Field.multiSelect
   | Field.addField
-  | Field.toggleButton;
+  | Field.toggleButton
+  | Field.customerSelectField;
 
 export type FieldProps =
   | InputProps
@@ -378,7 +394,8 @@ export type FieldProps =
   | LinkProps
   | MultiSelectProps
   | AddFieldProps
-  | ToggleButtonFormProps;
+  | ToggleButtonFormProps
+  | CustomerSelectProps;
 
 export interface FormField {
   containerClass?: string;
@@ -412,6 +429,7 @@ export interface FieldComponents {
   link: React.FC<LinkProps>;
   multiSelect: React.FC<MultiSelectProps>;
   toggleButton: React.FC<ToggleButtonFormProps>;
+  customerSelectField: React.FC<CustomerSelectProps>;
 }
 
 export interface FormProps {

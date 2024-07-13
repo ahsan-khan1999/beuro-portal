@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
-import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const PieChart = ({ data }) => {
-  const { t: translate } = useTranslation();
-
   useEffect(() => {
     if (
       data &&
@@ -14,6 +11,7 @@ const PieChart = ({ data }) => {
       data.datasets[0].data.length > 0
     ) {
       const ctx = document.getElementById("myPieChart").getContext("2d");
+
       const myPieChart = new Chart(ctx, {
         type: "pie",
         data: data,
@@ -46,7 +44,7 @@ const PieChart = ({ data }) => {
         {translate("dashboard_detail.lead_source")}
       </h3>
 
-      <div className="flex justify-center items-center h-[340px] py-5 border-t border-[#000] border-opacity-10">
+      <div className="border-t border-[#000] border-opacity-10 w-full">
         {!data ||
         !data.datasets ||
         data.datasets.length === 0 ||
@@ -56,8 +54,10 @@ const PieChart = ({ data }) => {
             containerClassName="py-0"
           />
         ) : (
-          <div className="w-fit h-fit">
-            <canvas className="asd" id="myPieChart" />
+          <div className="flex justify-center items-center h-[340px] py-5">
+            <div className="w-fit h-fit">
+              <canvas className="asd" id="myPieChart" />
+            </div>
           </div>
         )}
       </div>

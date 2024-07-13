@@ -1,20 +1,25 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import { InvoiceTableRowTypes } from "@/types/invoice";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { formatDateString } from "@/utils/functions";
+import { useTranslation } from "next-i18next";
 const TableRows = ({
   dataToAdd,
   handleNotes,
 }: {
   dataToAdd: InvoiceTableRowTypes[];
-  handleNotes: (item: string, e?: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refId: string,
+    name: string,
+    heading: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
   const handleInvoicePdfPreview = (id?: string) => {
     router.push({
       pathname: "/invoices/pdf-preview",
@@ -29,6 +34,18 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
+        const customerType = item?.customerDetail
+          ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+        const name =
+          customerType === 1
+            ? item?.customerDetail?.companyName
+            : item?.customerDetail?.fullName;
+
+        const heading =
+          customerType === 1
+            ? translate("common.company_name")
+            : translate("common.customer_name");
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -44,8 +61,8 @@ const TableRows = ({
                   {(item?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item?.customerDetail?.companyName})
+                    <span className="py-4 truncate text-lg font-medium text-primary">
+                      {item?.customerDetail?.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">
@@ -105,7 +122,9 @@ const TableRows = ({
 
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
-                onClick={(e) => handleNotes(item?.id, e)}
+                onClick={(e) =>
+                  handleNotes(item?.id, item?.invoiceNumber, name, heading, e)
+                }
                 title={translate("contracts.table_headings.notes")}
                 className="py-3 cursor-pointer flex justify-center items-center"
               >

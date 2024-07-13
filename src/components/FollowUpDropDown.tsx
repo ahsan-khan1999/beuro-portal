@@ -1,33 +1,32 @@
 import React from "react";
 import { Button } from "@/base-components/ui/button/button";
-import followUpIcon from "@/assets/svgs/follow-up.svg";
-import timeIcon from "@/assets/svgs/time.svg";
-import licenseIcon from "@/assets/svgs/driver-license-icon.svg";
-import dateIcon from "@/assets/svgs/Vector-date.svg";
-import deleteIcon from "@/assets/svgs/Vector-delete.svg";
-import Image from "next/image";
 import useGeneralFollowUp from "@/hooks/follow-up/useGeneralFollowUp";
 import moment from "moment";
-import { getDaysDifference } from "@/utils/utility";
-import { AnimatePresence, motion } from "framer-motion";
+import { getDaysDifference, getFollowUpStatusColor } from "@/utils/utility";
+import addIcon from "@/assets/svgs/plus_icon.svg";
+import { BellIcon } from "@/assets/svgs/components/bell-icon";
+import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const FollowUpDropDown = () => {
   const {
-    followUp,
     handleAddFollowUp,
     handleFollowUps,
-    handleFollowUpsDetails,
     renderModal,
-    handleDeleteFollowUp,
     translate,
+    handleMouseEnter,
+    handleMouseLeave,
+    hoveredIndex,
+    followUpTableData,
+    todayFollowUps,
+    handleFollowUpsDetails,
   } = useGeneralFollowUp();
 
   return (
     <>
-      <div className=" bg-white rounded-md shadow-followUp w-[460px] absolute top-7 menuItems right-0 mt-1 !z-50 ">
-        <div className="flex justify-between items-center pt-5 pb-3 px-4 border-b-2 border-[#000] border-opacity-10">
-          <h1 className="text-[#222B45] text-lg font-medium ">
-            {translate("follow_up.heading")}
+      <div className="bg-white rounded-[20px] shadow-followUp w-[560px] absolute top-8 menuItems -right-[2px] mt-6 !z-50 follow-up-container pt-[25px] pb-[18px]">
+        <div className="flex justify-between items-center px-[30px] mb-6">
+          <h1 className="text-[#222B45] text-lg font-medium">
+            {translate("dashboard_detail.follow_up_heading")}
           </h1>
           <Button
             onClick={() => handleAddFollowUp()}
@@ -35,101 +34,94 @@ const FollowUpDropDown = () => {
             inputType="button"
             text={translate("follow_up.add_button")}
             className="text-white text-[13px] font-semibold rounded-md !h-8"
+            icon={addIcon}
           />
         </div>
-        <div className="max-h-[450px] overflow-y-auto">
-          <AnimatePresence>
-            {followUp?.map((item, index) => {
-              let days = getDaysDifference(item.createdAt);
+
+        <div className="max-h-[450px] overflow-y-auto dashboard_scrollbar">
+          {todayFollowUps?.length > 0 ? (
+            todayFollowUps?.map((item, index) => {
+              let days = getDaysDifference(item?.createdAt);
+
               return (
-                <motion.div
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                  key={index}
-                  onClick={() => handleFollowUpsDetails(item.id)}
-                  className={`relative pt-[10px] px-4 cursor-pointer ${
-                    (index == 0 || index == 1) && "bg-primary"
-                  } bg-opacity-10 `}
-                >
-                  <div className=" pb-[5px]  flex items-center border-b border-[#000] border-opacity-10 ">
-                    <Image
-                      src={followUpIcon}
-                      alt="Follow Up Icon"
-                      className="mr-6"
-                    />
-                    <div>
-                      <div>
-                        <span className="text-dark text-sm">
-                          {translate("follow_up.upcoming_follow_up")}:
-                        </span>
-                        <span className="text-dark text-sm font-medium">
-                          {item.title}
-                        </span>
-                      </div>
+                <div className="relative">
+                  <div
+                    key={index}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={() => handleFollowUpsDetails(item?.id)}
+                    className={`cursor-pointer flex items-start gap-x-6 pl-[30px] pr-[47px] pt-5 pb-6 border-b border-b-[#F5F5F5] ${
+                      hoveredIndex === index ? "follow_up_item" : ""
+                    }`}
+                  >
+                    <BellIcon isHovered={hoveredIndex === index} />
+                    <div className="flex flex-col">
+                      <p className="text-lg font-medium text-[#171B1E]">
+                        {item?.customer?.fullName}
+                      </p>
+                      <p className="text-base font-medium text-[#171B1E]">
+                        {item?.title}
+                      </p>
                       <div className="flex items-center mt-1">
-                        <div className="flex items-center mr-7">
-                          <Image
-                            src={timeIcon}
-                            alt="Time Icon"
-                            className="mr-[10px]"
-                          />
-                          <span className="text-[#4B4B4B] text-[13px] ">
-                            {moment(item.dateTime).format(
-                              "DD/MM/YYYY hh:mm:ss"
-                            )}
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <Image
-                            src={licenseIcon}
-                            alt="Id Icon"
-                            className="mr-[10px]"
-                          />
-                          <span className="text-[#4B4B4B] text-[13px]">
-                            {item?.customer?.refID}
-                          </span>
-                        </div>
-                        {days > 0 && (
-                          <div className="flex items-center">
-                            <div className="ml-2 flex space-x-2">
-                              <Image src={dateIcon} alt="Id Icon" />
-                              <span className="text-[#4B4B4B] text-[13px]">
-                                {days + " Day"}
-                              </span>
-                            </div>
-                          </div>
-                        )}
-                        {days > 0 ? (
-                          <div
-                            className="flex items-center absolute right-5 top-4"
-                            onClick={(e) => handleDeleteFollowUp(item.id, e)}
-                            title="delete"
-                          >
-                            {/* <div className="ml-2 border-2 border-red rounded-md p-1"> */}
-                            <Image src={deleteIcon} alt="Id Icon" />
-                            {/* </div> */}
-                          </div>
-                        ) : null}
+                        {/* <span
+                          className={`text-[${getFollowUpStatusColor(
+                            item?.status
+                          )}] border border-[${getFollowUpStatusColor(
+                            item?.status
+                          )}] font-medium text-sm mr-2 p-1 rounded-lg`}
+                        >
+                          {item?.status}
+                        </span> */}
+                        <span
+                          className={`${
+                            item?.status === "Pending"
+                              ? "text-[#FE9244]"
+                              : item?.status === "Upcoming"
+                              ? "text-[#4A13E7]"
+                              : item?.status === "Overdue"
+                              ? "text-[#FF376F]"
+                              : "text-[#45C769]"
+                          } border border-[${getFollowUpStatusColor(
+                            item?.status
+                          )}] font-medium text-sm mr-2 p-1 rounded-lg`}
+                        >
+                          {item?.status}
+                        </span>
+                        <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] pr-2">
+                          {moment(item?.dateTime).format("hh:mm")}
+                        </span>
+                        <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] px-2">
+                          {moment(item?.dateTime).format("DD/MM/YYYY")}
+                        </span>
+                        <span className="text-[#717579] font-normal text-sm border-r border-r-[#C4C4C4] px-2">
+                          ID {item?.customer?.refID}
+                        </span>
+                        <span className="text-primary font-normal text-sm pl-2">
+                          Days {days}
+                        </span>
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
-            })}
-          </AnimatePresence>
-          {followUp?.length > 0 && (
-            <div className="flex justify-center py-4">
-              <button
-                className=" text-primary w-fit text-sm font-medium "
-                onClick={() => handleFollowUps()}
-              >
-                {translate("follow_up.view_all")}
-              </button>
-            </div>
+            })
+          ) : (
+            <NoDataEmptyState
+              className="w-[90%] mx-auto my-3"
+              containerClassName="py-0"
+            />
           )}
         </div>
+        {/* {viewAllData?.length > 0 && ( */}
+        <div className="flex justify-center pt-[14px] border-t border-t-[#EFEFEF]">
+          <button
+            className="text-[#616161] w-fit text-base font-medium hover:text-primary"
+            onClick={() => handleFollowUps()}
+          >
+            {translate("follow_up.view_all")}
+          </button>
+        </div>
+        {/* )} */}
       </div>
 
       {renderModal()}

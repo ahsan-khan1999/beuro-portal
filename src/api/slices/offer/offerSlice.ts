@@ -14,7 +14,6 @@ import { ModalType } from "@/enums/ui";
 import axios from "axios";
 import { BASEURL } from "@/services/HttpProvider";
 import { getRefreshToken, getToken } from "@/utils/auth.util";
-import toast from "react-hot-toast";
 
 interface OfferState {
   offer: OffersTableRowTypes[];

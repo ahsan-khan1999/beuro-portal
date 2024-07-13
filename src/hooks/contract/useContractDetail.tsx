@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import {
   deleteContract,
@@ -41,8 +40,6 @@ export default function useContractDetail() {
   const { contractDetails, loading, contract } = useAppSelector(
     (state) => state.contract
   );
-
-  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (contractDetails?.id)
@@ -89,21 +86,46 @@ export default function useContractDetail() {
     dispatch(deleteContract({ data: contractDetails, router, translate }));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
-    if (e) {
-      e.stopPropagation();
-    }
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+
     dispatch(
       readNotes({ params: { type: "contract", id: contractDetails?.id } })
     );
-    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    dispatch(
+      updateModalType({
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
-  const handleAddNote = (id: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "contract" },
+        data: {
+          id: id,
+          type: "contract",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -115,11 +137,24 @@ export default function useContractDetail() {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "contract", data: note },
+        data: {
+          id: id,
+          type: "contract",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -129,14 +164,26 @@ export default function useContractDetail() {
   };
 
   const handleImageUpload = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
+    e?.stopPropagation();
     dispatch(
       readImage({ params: { type: "contractID", id: contractDetails?.id } })
     );
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const onSuccess = () => {
@@ -158,8 +205,22 @@ export default function useContractDetail() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
-  const shareImgModal = () => {
-    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  const shareImgModal = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SHARE_IMAGES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleUpdateContractDetail = () => {
@@ -210,14 +271,14 @@ export default function useContractDetail() {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.EDIT_NOTE]: (
       <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     // [ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL]: (

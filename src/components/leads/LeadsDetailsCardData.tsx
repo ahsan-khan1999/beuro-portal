@@ -164,6 +164,9 @@ const LeadsDetailsCardData = ({
               leadDetails?.leadStatus
             )}] text-base font-medium me-1`}
             dropDownItemsContainerClassName="w-full"
+            dropDownIconClassName={`text-[${getStatusColor(
+              leadDetails?.leadStatus
+            )}]`}
           />
         </div>
 

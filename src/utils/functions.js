@@ -226,14 +226,45 @@ export const smoothScrollTo = (elementId, duration = 1000) => {
     window.scrollTo(0, run);
 
     if (timeElapsed < duration) requestAnimationFrame(animation);
-  }
+  };
 
   const easeInOutCubic = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t * t + b;
     t -= 2;
     return (c / 2) * (t * t * t + 2) + b;
-  }
+  };
 
   requestAnimationFrame(animation);
+};
+
+export function getTextCount(value) {
+  if (!value) return 0; // Return 0 if input is null or undefined
+
+  return value
+    .replace(/<[^>]*>/g, "") // Remove HTML tags
+    .replace(/\s+/g, " ") // Normalize whitespace
+    .replace(/&\w+;/g, "X") // Replace HTML entities with a placeholder (e.g., "X")
+    .replace(/^\s*/g, "") // Trim leading whitespace
+    .replace(/\s*$/g, "").length; // Trim trailing whitespace // Get the length directly and return
 }
+
+export const splitContentIntoPages = (content) => {
+  const pageSize = 3500;
+  const pages = [];
+  let currentPage = "";
+
+  for (let i = 0; i < content?.length; i++) {
+    currentPage += content[i];
+    if (i > 0 && i % pageSize === 0) {
+      pages.push(currentPage);
+      currentPage = "";
+    }
+  }
+
+  if (currentPage !== "") {
+    pages.push(currentPage);
+  }
+
+  return pages;
+};

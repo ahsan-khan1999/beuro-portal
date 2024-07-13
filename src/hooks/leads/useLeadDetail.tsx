@@ -12,7 +12,6 @@ import {
   updateLeadStatus,
 } from "@/api/slices/lead/leadSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
-import { useTranslation } from "next-i18next";
 import { readImage } from "@/api/slices/imageSlice/image";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { staticEnums } from "@/utils/static";
@@ -27,7 +26,6 @@ export default function useLeadDetail() {
     (state) => state.lead
   );
 
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const id = router.query.lead;
 
@@ -91,15 +89,41 @@ export default function useLeadDetail() {
   };
 
   const handleUploadImages = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    e?.stopPropagation();
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
-  const shareImgModal = () => {
-    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  const shareImgModal = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SHARE_IMAGES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -124,7 +148,7 @@ export default function useLeadDetail() {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),

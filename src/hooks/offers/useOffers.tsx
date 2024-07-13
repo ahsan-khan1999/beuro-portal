@@ -28,7 +28,6 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { FiltersDefaultValues } from "@/enums/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { useTranslation } from "next-i18next";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
@@ -41,7 +40,6 @@ const useOffers = () => {
   const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-  const { t: translate } = useTranslation();
 
   const [currentPageRows, setCurrentPageRows] = useState<OffersTableRowTypes[]>(
     []
@@ -116,7 +114,7 @@ const useOffers = () => {
           params: {
             filter: queryParams ? updatedFilter : {},
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {
@@ -138,7 +136,7 @@ const useOffers = () => {
   });
 
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
@@ -158,12 +156,16 @@ const useOffers = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
-    if (e) {
-      e.stopPropagation();
-    }
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
 
-    const filteredLead = offer?.filter((item_) => item_.id === item);
+    const filteredLead = offer?.filter((item_) => item_.id === id);
     if (filteredLead?.length === 1) {
       dispatch(setOfferDetails(filteredLead[0]));
       dispatch(
@@ -185,15 +187,35 @@ const useOffers = () => {
           });
         }
       });
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+      dispatch(
+        updateModalType({
+          type: ModalType.EXISTING_NOTES,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
     }
   };
 
-  const handleAddNote = (id: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "offer" },
+        data: {
+          id: id,
+          type: "offer",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -205,11 +227,24 @@ const useOffers = () => {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "offer", data: note },
+        data: {
+          id: id,
+          type: "offer",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -219,12 +254,15 @@ const useOffers = () => {
   };
 
   const handleImageUpload = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
+    e?.stopPropagation();
     dispatch(setImages([]));
-    const filteredLead = offer?.find((item_) => item_.id === item);
+    const filteredLead = offer?.find((item_) => item_.id === id);
     if (filteredLead) {
       dispatch(setOfferDetails(filteredLead));
       dispatch(
@@ -245,7 +283,16 @@ const useOffers = () => {
           );
         }
       });
-      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+      dispatch(
+        updateModalType({
+          type: ModalType.UPLOAD_OFFER_IMAGE,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
     }
   };
 
@@ -309,7 +356,7 @@ const useOffers = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
@@ -327,7 +374,7 @@ const useOffers = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (

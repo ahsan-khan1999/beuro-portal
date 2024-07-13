@@ -1,6 +1,5 @@
 import { InputFieldProps } from "@/types/global";
 import { combineClasses } from "@/utils/utility";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { forwardRef, useState } from "react";
 
@@ -18,7 +17,6 @@ const InputField = forwardRef(
     }: InputFieldProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
-    const router = useRouter();
     const { t: translate } = useTranslation();
     const [hasText, setHasText] = useState<boolean>(false);
 
@@ -61,9 +59,7 @@ const InputField = forwardRef(
           />
           {hasText && iconDisplay && (
             <div
-              className={`absolute top-1/2 ${
-                router.pathname.includes("dashboard") ? "left-0" : "right-5"
-              } transform -translate-y-1/2 cursor-pointer`}
+              className={`absolute top-1/2 right-5 transform -translate-y-1/2 cursor-pointer`}
               onClick={handleClearInput}
             >
               <svg

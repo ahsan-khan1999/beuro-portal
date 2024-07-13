@@ -1,4 +1,4 @@
-import { loginUser, readDashboard } from "@/api/slices/authSlice/auth";
+import { readDashboard } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -30,6 +30,7 @@ export const useAddRemarks = (handleFollowUpsDetails: Function) => {
   // @ts-expect-error
 
   const fields = AddRemarksFormField(register, loading, control);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, id: followUpDetails?.id };
     const res = await dispatch(
@@ -37,11 +38,13 @@ export const useAddRemarks = (handleFollowUpsDetails: Function) => {
     );
     if (res?.payload) {
       handleFollowUpsDetails(followUpDetails?.id);
-      dispatch(readDashboard({
-        params: {
-          month: getCurrentMonth(),
-        },
-      }));
+      dispatch(
+        readDashboard({
+          params: {
+            month: getCurrentMonth(),
+          },
+        })
+      );
     }
   };
 

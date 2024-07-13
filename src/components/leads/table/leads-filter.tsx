@@ -176,15 +176,6 @@ export default function LeadsFilter({
     });
   };
 
-  const noteLabel = [
-    `${translate("add_note_dropdown.sending_picture")}`,
-    `${translate("add_note_dropdown.view_date")}`,
-    `${translate("add_note_dropdown.approximate_offer_open")}`,
-    `${translate("add_note_dropdown.contact_us")}`,
-    `${translate("add_note_dropdown.individual_note")}`,
-    `${translate("add_note_dropdown.note_reached")}`,
-    `${translate("add_note_dropdown.other")}`,
-  ];
 
   useEffect(() => {
     dispatch(readNoteSettings());

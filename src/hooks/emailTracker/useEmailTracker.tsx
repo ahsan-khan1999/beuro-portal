@@ -25,7 +25,7 @@ const useEmailTracker = () => {
 
   const dispatch = useAppDispatch();
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
@@ -63,7 +63,7 @@ const useEmailTracker = () => {
           params: {
             filter: queryParams ? updatedFilter : {},
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {

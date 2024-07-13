@@ -50,7 +50,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
             field: {
               type: Field.profileUploadField,
               iconClasses: "right-3 bottom-3",
-              className: "!h-[241px] !w-[241px] !rounded-full",
+              className:
+                "!h-[241px] !w-[241px] !rounded-full border border-[#BFBFBF]",
               id: "company.logo",
               name: "company.logo",
               control,
@@ -486,7 +487,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center justify-end space-x-[18px] my-[30px]",
+        className: "flex items-center justify-end space-x-[18px] mt-[30px]",
         children: [
           {
             containerClass: "mb-0",

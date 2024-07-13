@@ -30,6 +30,7 @@ import {
   EditInvoiceDetailsFormField,
   EditInvoiceDetailsSubmitFormField,
 } from "@/components/invoice/edit/fields/edit-invoice-offer-details-fields";
+import { Customers } from "@/types";
 
 export const useEditInvoiceDetails = ({
   handleNext,
@@ -54,7 +55,6 @@ export const useEditInvoiceDetails = ({
 
   const onCancel = () => {
     router.back();
-    // updateQuery(router, router.locale as string);
   };
 
   const schema = generateInvoiceDetailsValidationSchema(translate);
@@ -102,13 +102,29 @@ export const useEditInvoiceDetails = ({
     }
   }, [invoice]);
 
+  useEffect(() => {
+    if (invoiceDetails?.customerID) {
+      const currentOfferCustomer = {
+        fullName: invoiceDetails?.customerDetail?.fullName,
+        id: invoiceDetails?.customerID,
+      };
+      const isCustomerExist = customer.find(
+        (item) => item.id === invoiceDetails?.customerID
+      );
+      if (!isCustomerExist) {
+        const customerList = [currentOfferCustomer, ...customer];
+        dispatch(setCustomers(customerList));
+      }
+    }
+  }, [invoiceDetails, customer, dispatch]);
+
   const type = watch("type");
   const customerType = watch("customerType");
-  const customerID = watch("customerID");
+  // const customerID = watch("customerID");
   const selectedContent = watch("content");
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -270,5 +286,6 @@ export const useEditInvoiceDetails = ({
     error,
     translate,
     invoiceDetails,
+    loading,
   };
 };

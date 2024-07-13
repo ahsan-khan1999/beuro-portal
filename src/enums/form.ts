@@ -65,6 +65,7 @@ export enum Field {
   dateRange = "dateRange",
   multiSelect = "multiSelect",
   toggleButton = "toggleButton",
+  customerSelectField = "customerSelectField",
 }
 
 export enum CardType {

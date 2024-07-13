@@ -29,8 +29,8 @@ import {
 } from "@/components/invoice/createInvoice/fields/create-invoice-customer-details-fields";
 
 export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
 
   const { loading, error, invoiceDetails } = useAppSelector(
@@ -67,7 +67,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -75,7 +75,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
-  // const leadID = watch("leadID");
 
   useEffect(() => {
     if (type && customerID)
@@ -201,6 +200,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
       // setValue("leadID", null);
     }
   }, [type]);
+
 
   const invoiceFields = CreateInvoiceCustomerDetailsFormField(
     register,

@@ -18,8 +18,6 @@ export const ProductDiscountItem = ({
   discountType,
   updatedDiscountAmount,
 }: ServiceList) => {
-  const { systemSettings } = useAppSelector((state) => state.settings);
-
   const totalUpdatedAmount =
     Number(totalDiscount || 0) + Number(updatedDiscountAmount || 0);
 

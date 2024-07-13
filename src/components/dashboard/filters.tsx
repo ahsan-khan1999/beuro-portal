@@ -80,7 +80,7 @@ export default function DashboardFilters({
         label={translate(
           `selected_month.${getKeyByValue(monthObj, filter?.month?.toString())}`
         )}
-        containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80] w-[105px]"
+        containerClassName="bg-white rounded-lg border border-[#8F8F8F80] w-[135px]"
       />
     </div>
   );

@@ -3,6 +3,7 @@ import { pdf as reactPdf } from "@react-pdf/renderer";
 import { PdfPreviewProps } from "@/types";
 import { blobToFile, mergePDFs } from "@/utils/utility";
 import PdfFile from "./pdf-file";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export const useMergedPdfDownload = ({
   emailTemplateSettings,
@@ -12,10 +13,13 @@ export const useMergedPdfDownload = ({
   remoteFileBlob,
   fileName,
   companyName,
+  isOfferPdf,
+  showContractSign,
 }: PdfPreviewProps) => {
   const [mergedFile, setMergedFile] = useState<File | null>(null);
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
   const [isPdfRendering, setIsPdfRendering] = useState(false);
+  const { currentLanguage } = useAppSelector((state) => state.global);
 
   useEffect(() => {
     (async () => {
@@ -35,6 +39,9 @@ export const useMergedPdfDownload = ({
                 emailTemplateSettings,
                 templateSettings,
                 systemSetting,
+                lang: currentLanguage,
+                isOfferPdf,
+                showContractSign,
               }}
             />
           ).toBlob();
@@ -52,10 +59,7 @@ export const useMergedPdfDownload = ({
           const url = URL.createObjectURL(convertedBlob);
 
           setMergedFile(
-            blobToFile(
-              convertedBlob,
-              `${companyName} ${fileName}.pdf` || "output.pdf"
-            )
+            blobToFile(convertedBlob, `${fileName}.pdf` || "output.pdf")
           );
           setMergedPdfUrl(url);
         }
@@ -70,6 +74,7 @@ export const useMergedPdfDownload = ({
     systemSetting,
     emailTemplateSettings,
     templateSettings,
+    currentLanguage,
   ]);
 
   useEffect(() => {

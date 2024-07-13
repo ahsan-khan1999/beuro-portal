@@ -14,7 +14,7 @@ import {
   AddOfferDetailsSubmitFormField,
 } from "@/components/offers/add/fields/add-offer-details-fields";
 import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   setCustomerDetails,
@@ -32,6 +32,7 @@ import { OfferPromiseActionType } from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
+import { Customers } from "@/types";
 
 export const useEditOfferDetails = ({
   handleNext,
@@ -80,6 +81,7 @@ export const useEditOfferDetails = ({
           dispatch(
             setOfferDetails({ ...res.payload, type: "Existing Customer" })
           );
+
           reset({
             type: "Existing Customer",
             leadID: res?.payload?.leadID?.id,
@@ -107,12 +109,29 @@ export const useEditOfferDetails = ({
     }
   }, [offer]);
 
+  useEffect(() => {
+    if (offerDetails?.leadID?.customerID) {
+      const currentOfferCustomer = {
+        fullName: offerDetails?.leadID?.customerDetail?.fullName,
+        id: offerDetails?.leadID?.customerID,
+      };
+      const isCustomerExist = customer.find(
+        (item) => item.id === offerDetails?.leadID?.customerID
+      );
+      if (!isCustomerExist) {
+        const customerList = [currentOfferCustomer, ...customer];
+        dispatch(setCustomers(customerList));
+      }
+    }
+  }, [offerDetails, customer, dispatch]);
+
   const type = watch("type");
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
+
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -205,6 +224,7 @@ export const useEditOfferDetails = ({
   }, [selectedContent]);
 
   const handleContentSelect = () => {};
+
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -283,5 +303,6 @@ export const useEditOfferDetails = ({
     error,
     translate,
     offerDetails,
+    loading,
   };
 };

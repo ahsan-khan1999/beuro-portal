@@ -11,10 +11,11 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customerAdded,
@@ -86,21 +87,30 @@ const EditOffersDetailsData = () => {
   ];
 
   const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
   const router = useRouter();
+  const { modal } = useAppSelector((state) => state.global);
+
+  const customerType = offerDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? offerDetails?.leadID?.customerDetail?.companyName
+      : offerDetails?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const route = () => {
-    router.push(
-      {
-        pathname: `/offers/pdf-preview`,
-        query: { status: "None", offerID: offerDetails?.id, isMail: true },
-      }
-      // `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
-    );
+    router.push({
+      pathname: `/offers/pdf-preview`,
+      query: { status: "None", offerID: offerDetails?.id, isMail: true },
+    });
     onClose();
   };
 
@@ -114,7 +124,16 @@ const EditOffersDetailsData = () => {
     dispatch(
       readImage({ params: { type: "leadID", id: offerDetails?.leadID?.id } })
     );
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: offerDetails?.offerNumber,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleOfferCreated = () => {
@@ -127,8 +146,8 @@ const EditOffersDetailsData = () => {
         imageUploadHandler={handleImageUpload}
         onClose={onClose}
         routeHandler={route}
-        heading={translate("common.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        heading={translate("common.offer_create")}
+        subHeading=""
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
@@ -191,7 +210,7 @@ const EditOffersDetailsData = () => {
   return (
     <>
       <div className="xLarge:fixed mb-5 mt-[40px]">
-        <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full">
+        <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
           {tabSection.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
@@ -208,7 +227,7 @@ const EditOffersDetailsData = () => {
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[330px] w-full hidden xLarge:block"></div>
+        <div className="max-w-[320px] w-full hidden xLarge:block"></div>
 
         <div className="w-full xLarge:max-w-[80%] my-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}

@@ -37,7 +37,6 @@ const ServiceEditDetails = ({
         </button>
       </div>
 
-      {/* <div className="py-3 px-6"> */}
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
@@ -45,7 +44,6 @@ const ServiceEditDetails = ({
         errors={errors}
         className={`${defaultClassName}`}
       />
-      {/* </div> */}
       {errors?.taxAmount && (
         <span className="mt-[3px] text-red text-sm">
           {translate(errors?.taxAmount?.message as any)}

@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { formatDateString } from "@/utils/functions";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "../../../utils/static";
-import { useTranslation } from "next-i18next";
 import { OfferDetailCardProps } from "@/types/offers";
 import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
@@ -20,6 +19,7 @@ import {
 import { PrimaryPDF } from "@/assets/svgs/components/primary-pdf";
 import { updateQuery } from "@/utils/update-query";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { useTranslation } from "next-i18next";
 
 const OfferDetailsCard = ({
   offerDetails,
@@ -51,6 +51,7 @@ const OfferDetailsCard = ({
   const paymentMethod = [
     `${translate("payment_method.Cash")}`,
     `${translate("payment_method.Online")}`,
+    `${translate("payment_method.Twint")}`,
   ];
 
   const handleBack = () => {
@@ -58,6 +59,18 @@ const OfferDetailsCard = ({
     delete router.query["offer"];
     updateQuery(router, router.locale as string);
   };
+
+  const customerType = offerDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? offerDetails?.leadID?.customerDetail?.companyName
+      : offerDetails?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div className="min-h-[217px]">
@@ -338,7 +351,15 @@ const OfferDetailsCard = ({
 
               <span
                 className="cursor-pointer"
-                onClick={(e) => handleNotes(offerDetails?.id, e)}
+                onClick={(e) =>
+                  handleNotes(
+                    offerDetails?.id,
+                    offerDetails?.offerNumber,
+                    name,
+                    heading,
+                    e
+                  )
+                }
               >
                 <WriteIcon
                   pathClass={
@@ -354,7 +375,15 @@ const OfferDetailsCard = ({
 
               <span
                 className="cursor-pointer"
-                onClick={(e) => handleImageUpload(offerDetails?.id, e)}
+                onClick={(e) =>
+                  handleImageUpload(
+                    offerDetails?.id,
+                    offerDetails?.offerNumber,
+                    name,
+                    heading,
+                    e
+                  )
+                }
               >
                 <ImageUploadIcon
                   pathClass={offerDetails?.isImageAdded ? "#FF0000" : "#4A13E7"}

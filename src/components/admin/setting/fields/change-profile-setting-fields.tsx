@@ -126,7 +126,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                         "grid grid-cols-2 gap-x-6 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
                       children: [
                         {
-                          containerClass: "mb-0 ",
+                          containerClass: "mb-0",
                           label: {
                             text: `${translate(
                               "admin.settings.account_setting.old_password"
@@ -151,7 +151,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                           },
                         },
                         {
-                          containerClass: "mb-0 ",
+                          containerClass: "mb-0",
                           label: {
                             text: `${translate(
                               "admin.settings.account_setting.new_password"
@@ -204,7 +204,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                     },
                   },
                   {
-                    containerClass: "mb-0",
+                    containerClass: "mb-[30px]",
                     field: {
                       type: Field.button,
                       id: "button",
@@ -213,7 +213,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       )}`,
                       inputType: "submit",
                       className:
-                        "rounded-lg   px-4 w-fit h-[50px]  text-white hover:bg-none ",
+                        "rounded-lg px-4 w-fit h-[50px] text-white hover:bg-none",
                       loading,
                     },
                   },

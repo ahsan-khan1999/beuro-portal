@@ -75,14 +75,14 @@ export const MovingDetails = ({
                   onClick={handleCancelClick}
                   className="border border-[#8F8F8F] px-[11px] py-[6px] rounded-[3px] text-[12px] font-normal"
                 >
-                  Cancel
+                  {translate("common.cancel_button")}
                 </button>
                 <button
                   type="submit"
                   onClick={handleSaveClick}
-                  className=" bg-[#4A13E7] rounded-[3px]  px-[29px] py-[6px]   text-[#fff]"
+                  className=" bg-[#4A13E7] rounded-[3px] px-[29px] py-[6px]  text-[#fff]"
                 >
-                  Save
+                  {translate("common.save_button")}
                 </button>
               </div>
             )}
@@ -112,7 +112,9 @@ export const MovingDetails = ({
         ))}
         <div className="flex flex-row gap-6">
           <span className="min-w-[205px] mt-2 text-sm">
-            {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}
+            {workDates?.length === 1
+              ? translate("pdf.work_date")
+              : translate("pdf.work_dates")}
           </span>
           <div className="flex flex-row flex-wrap mb-[46px] mt-2 max-w-[850px]">
             <span className="text-sm font-medium text-[#4B4B4B]">

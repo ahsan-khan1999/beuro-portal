@@ -1,15 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "@/layout";
 import SettingTopDataButtons from "./SettingTopDataButtons";
 import MailSetting from "./mail-setting";
 import SettingProfile from "./profile-form";
 import PaymentSettings from "./payment-settings";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 const AdminSettings = () => {
-  const [switchDetails, setSwitchDetails] = useState(0);
-
+  const { query } = useRouter();
+  const tab = query.tab;
   const { t: translate } = useTranslation();
+  const [switchDetails, setSwitchDetails] = useState<number>(0);
+
+  useEffect(() => {
+    if (tab && !Array.isArray(tab) && !isNaN(Number(tab))) {
+      setSwitchDetails(parseInt(tab as string, 10));
+    } else {
+      setSwitchDetails(0);
+    }
+  }, [query]);
+
+  const lookUp: { [key: number]: JSX.Element } = {
+    0: <SettingProfile />,
+    1: <PaymentSettings />,
+    2: <MailSetting />,
+  };
 
   return (
     <>
@@ -25,13 +41,7 @@ const AdminSettings = () => {
         </div>
 
         <div className="mt-4">
-          {switchDetails === 0 ? <SettingProfile /> : null}
-        </div>
-        <div className="mt-4">
-          {switchDetails === 1 ? <PaymentSettings /> : null}
-        </div>
-        <div className="mt-4">
-          {switchDetails === 2 ? <MailSetting /> : null}
+          {switchDetails !== undefined && lookUp[switchDetails]}
         </div>
       </Layout>
     </>

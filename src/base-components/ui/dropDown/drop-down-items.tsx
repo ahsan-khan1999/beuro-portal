@@ -8,12 +8,14 @@ export const DropDownItems = ({
   containerClassName,
   isLastIndex,
   isSecondLastIndex,
+  isThirdLastIndex,
   isOffer,
   isLead,
   isAdminCustomer,
 }: DropDownItemsProps & {
   isLastIndex?: boolean;
   isSecondLastIndex?: boolean;
+  isThirdLastIndex?: boolean;
   isLead?: boolean;
   isOffer?: boolean;
   isAdminCustomer?: boolean;
@@ -23,8 +25,12 @@ export const DropDownItems = ({
   };
 
   const containerDefaultClasses = `absolute  ${
-    (isLead && (isLastIndex || isSecondLastIndex) && "!-top-[170px]") ||
-    (isOffer && (isLastIndex || isSecondLastIndex) && "!-top-40") ||
+    (isLead &&
+      (isLastIndex || isSecondLastIndex || isThirdLastIndex) &&
+      "!-top-[170px]") ||
+    (isOffer &&
+      (isLastIndex || isSecondLastIndex || isThirdLastIndex) &&
+      "!-top-40") ||
     (isAdminCustomer && (isLastIndex || isSecondLastIndex) && "!-top-[85px]") ||
     ((isLastIndex || isSecondLastIndex) && "!-top-20")
   }  z-10 w-fit border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg max-h-52 overflow-y-auto`;

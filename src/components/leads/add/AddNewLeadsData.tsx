@@ -13,9 +13,10 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
-import { useTranslation } from "next-i18next";
 import { setImages } from "@/api/slices/imageSlice/image";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customerAdd,
@@ -25,14 +26,13 @@ export enum ComponentsType {
 }
 
 const AddNewLeadsData = () => {
+  const router = useRouter();
+  const { t: translate } = useTranslation();
   const { leadDetails } = useAppSelector((state) => state.lead);
 
   const [tabType, setTabType] = useState<ComponentsType>(
     (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
   );
-
-  const router = useRouter();
-  const { t: translate } = useTranslation();
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -97,6 +97,18 @@ const AddNewLeadsData = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
+  const customerType = leadDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? leadDetails?.customerDetail?.companyName
+      : leadDetails?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
@@ -114,8 +126,16 @@ const AddNewLeadsData = () => {
 
   const imageUploadHandler = () => {
     dispatch(setImages([]));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_IMAGE }));
-    // dispatch(readImage({ params: { type: "leadID", id: leadDetails?.id } }));
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_IMAGE,
+        data: {
+          refID: leadDetails?.refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleImageSlider = () => {
@@ -138,9 +158,7 @@ const AddNewLeadsData = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    // [ModalType.IMAGE_SLIDER]: (
-    //   <ImageSlider onClose={onClose} details={images} />
-    // ),
+    
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
@@ -203,7 +221,7 @@ const AddNewLeadsData = () => {
         <p className="mb-5 font-normal text-xl text-[#222B45]">
           {translate("leads.add_new_lead")}
         </p>
-        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-fit gap-[14px]">
+        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap  gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -219,7 +237,7 @@ const AddNewLeadsData = () => {
       </div>
 
       <div className="w-full break-all xLarge:mt-[145px] flex mb-10">
-        <div className="max-w-[270px] w-full hidden xLarge:block"></div>
+        <div className="max-w-[280px] w-full hidden xLarge:block"></div>
         <div className="w-full xLarge:max-w-[80%]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>

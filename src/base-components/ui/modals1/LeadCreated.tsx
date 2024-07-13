@@ -3,7 +3,6 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import leadCreatedIcon from "@/assets/svgs/created_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import { useTranslation } from "next-i18next";
 
 export interface LeadCreatedProps {
   imageUploadHandler: Function;
@@ -20,8 +19,6 @@ const LeadCreated = ({
   heading,
   subHeading,
 }: LeadCreatedProps) => {
-  const { t: translate } = useTranslation();
-
   return (
     <>
       <BaseModal
@@ -58,7 +55,7 @@ const LeadCreated = ({
             </button>
             <button
               onClick={() => routeHandler()}
-              className="bg-[#BFBFBF] cursor-pointer hover:bg-buttonHover w-full md:w-[384px] rounded-lg p-4 mb-[33px] text-white text-base font-medium"
+              className="bg-[#BFBFBF] cursor-pointer w-full md:w-[384px] rounded-lg p-4 mb-[33px] text-dark text-base font-medium hover:bg-buttonHover hover:text-white"
             >
               {translate("leads.leads_created_modal.without_images")}
             </button>

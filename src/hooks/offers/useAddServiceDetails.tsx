@@ -5,7 +5,6 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
@@ -33,7 +32,6 @@ let prevDisAmount: number | string = "";
 export const useAddServiceDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void
 ) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const [total, setTotal] = useState<Total>({
     subTotal: 0,
@@ -236,7 +234,6 @@ export const useAddServiceDetails = (
   useMemo(() => {
     const currentLength = serviceType?.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
-
     if (newLength > currentLength) {
       setServiceType([
         ...serviceType,
@@ -247,7 +244,23 @@ export const useAddServiceDetails = (
     } else if (newLength < currentLength) {
       setServiceType(serviceType.slice(0, newLength));
     }
+    generateGrandTotal();
   }, [serviceFields?.length]);
+
+  const handleRemoveService = (index: number) => {
+    remove(index);
+    const data = getValues();
+    reset({
+      ...data,
+    });
+
+    setServiceType((prev) => {
+      var newlist = [...prev];
+      newlist.splice(index, 1);
+
+      return newlist;
+    });
+  };
 
   const onServiceSelectType = (index: number) => {
     setValue(
@@ -284,9 +297,8 @@ export const useAddServiceDetails = (
     const updatedService = serviceType.map((type, i) =>
       i === index ? newServiceType : type
     );
-    setServiceType(updatedService);
 
-    const fieldNamePrefix = "serviceDetail";
+    setServiceType(updatedService);
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
@@ -340,7 +352,7 @@ export const useAddServiceDetails = (
       offerDetails,
     },
     append,
-    remove,
+    handleRemoveService,
     serviceType,
     handleServiceChange,
     serviceFields,
@@ -373,6 +385,7 @@ export const useAddServiceDetails = (
     serviceFields,
     setValue
   );
+
   const submitFields = AddOfferDetailsServiceSubmitFormField(
     loading,
     handleBack

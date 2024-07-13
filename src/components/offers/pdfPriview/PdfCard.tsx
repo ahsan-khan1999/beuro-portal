@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import EmailCardLayout from "./PdfCardLayout";
 import { useRouter } from "next/router";
 import { BaseButton } from "@/base-components/ui/button/base-button";
@@ -24,14 +24,7 @@ const EmailCard = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  // const handleBackToDetail = () => {
-  //   const { status, page, text, sort } = router.query;
-
-  //   router.push({
-  //     pathname: "/offers/details",
-  //     query: { status, page, text, sort, offer: offerId },
-  //   });
-  // };
+ 
 
   const handleBackToDetail = () => {
     const { status, page, text, sort, date, leadSource } = router.query;

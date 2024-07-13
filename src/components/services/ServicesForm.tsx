@@ -1,9 +1,7 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FormDataProps } from "@/types/service";
-import Image from "next/image";
 import React from "react";
-import editInfo from "@/assets/svgs/edit-customer-details.svg";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 

@@ -10,6 +10,7 @@ export const usePagination = ({
   itemsPerPage,
   onPageChange,
   currentPage: defaultPage,
+  isPageInParam,
 }: UsePaginationProps) => {
   const [currentPage, setCurrentPage] = useState<number>(defaultPage || 1);
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -21,17 +22,20 @@ export const usePagination = ({
   const handlePageClick = useCallback(
     (page: number) => {
       if (page >= 1 && page <= totalPages) {
-        router.push(
-          {
-            pathname: router.pathname,
-            query: {
-              ...router.query,
-              page: page,
+        // this check is used just for the follow-up in modal
+        if (isPageInParam !== false) {
+          router.push(
+            {
+              pathname: router.pathname,
+              query: {
+                ...router.query,
+                page: page,
+              },
             },
-          },
-          undefined,
-          { shallow: true }
-        );
+            undefined,
+            { shallow: true }
+          );
+        }
 
         setCurrentPage(page);
         onPageChange(page);

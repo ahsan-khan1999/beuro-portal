@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateInvoiceFormField } from "@/types";
-import { disablePastDate } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
 
 export const RecurringInvoiceFormField: GenerateInvoiceFormField = (
@@ -51,7 +50,7 @@ export const RecurringInvoiceFormField: GenerateInvoiceFormField = (
             field: {
               type: Field.input,
               className:
-                "!p-4 !border-[#8F8F8F] focus:!border-primary  text-[#8F8F8F] text-[16px] font-normal",
+                "!p-4 !border-[#8F8F8F] focus:!border-primary text-[#8F8F8F] text-[16px] font-normal",
               inputType: "text",
               id: "remainingAmount",
               name: "remainingAmount",
@@ -82,6 +81,10 @@ export const RecurringInvoiceFormField: GenerateInvoiceFormField = (
         options: [
           { value: "Online", label: `${translate("common.online")}` },
           { value: "Cash", label: `${translate("common.cash")}` },
+          {
+            value: "Twint",
+            label: `${translate("payment_method.Twint")}`,
+          },
         ],
         control,
       },

@@ -6,7 +6,6 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Button } from "@/base-components/ui/button/button";
 import { blobToFile, dataURLtoBlob } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
-import dynamic from "next/dynamic";
 import { EmailTemplate } from "@/types/settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { PdfProps, TemplateType } from "@/types";
@@ -79,10 +78,23 @@ Font.register({
 const ow = 442;
 const oh = 173;
 const originalStrokeWidth = 1;
-const OfferSignedPdf = dynamic(() => import("@/components/offers/signed-pdf"), {
-  ssr: false,
-});
 let mySignature: any = null;
+
+export interface SignPdfProps {
+  signature?: string;
+  isCanvas?: boolean;
+  setIsSignatureDone?: SetStateAction<boolean>;
+  isSignatureDone?: boolean;
+  setOfferSignature?: SetStateAction<any>;
+  handleSignature?: (sign: any) => void;
+  emailTemplateSettings: EmailTemplate | null;
+  systemSettings: SystemSetting | null;
+  templateSettings: TemplateType | null;
+  offerSignature: string;
+  pdfData: PdfProps<any>;
+  setComponentMounted: SetStateAction<any>;
+  lang?: string | undefined;
+}
 
 export const SignaturePad = ({
   signature,
@@ -97,20 +109,8 @@ export const SignaturePad = ({
   offerSignature,
   systemSettings,
   templateSettings,
-}: {
-  signature?: string;
-  isCanvas?: boolean;
-  setIsSignatureDone?: SetStateAction<boolean>;
-  isSignatureDone?: boolean;
-  setOfferSignature?: SetStateAction<any>;
-  handleSignature?: (sign: any) => void;
-  emailTemplateSettings: EmailTemplate | null;
-  systemSettings: SystemSetting | null;
-  templateSettings: TemplateType | null;
-  offerSignature: string;
-  pdfData: PdfProps<any>;
-  setComponentMounted: SetStateAction<any>;
-}) => {
+  lang,
+}: SignPdfProps) => {
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -147,24 +147,6 @@ export const SignaturePad = ({
   const aggrementDetails = pdfData?.aggrementDetails;
   const router = useRouter();
   const { action: pdfAction } = router.query;
-  const acceptButtonRef = useRef<HTMLDivElement>(null);
-
-  const disscountTableRow = {
-    serviceTitle: "Discount",
-    price: Number(serviceItemFooter?.discount),
-    unit: "-",
-    totalPrice: Number(serviceItemFooter?.discount),
-    serviceType: "",
-    description: serviceItemFooter?.discountDescription,
-    count: "-",
-    pagebreak: true,
-    discount: Number(serviceItemFooter?.discount),
-    discountType: serviceItemFooter?.discountType,
-    discountPercentage: Number(serviceItemFooter?.discountPercentage),
-    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
-    totalDiscount: serviceItemFooter?.serviceDiscountSum,
-    isGlobalDiscount: serviceItemFooter?.isDiscount,
-  };
 
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
@@ -175,7 +157,7 @@ export const SignaturePad = ({
   const pdfDoc = (
     <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>
       <Page style={styles.body}>
-        <Header {...headerDetails} />
+        <Header {...headerDetails} language={lang} />
         <View
           style={{
             position: "absolute",
@@ -186,9 +168,12 @@ export const SignaturePad = ({
         >
           <ContactAddress {...{ ...contactAddress }} />
 
-          <AddressDetails {...{ address, header, workDates, time }} />
+          <AddressDetails
+            {...{ address, header, workDates, time }}
+            language={lang}
+          />
 
-          <ServiceTableHederRow isDiscount={isDiscount} />
+          <ServiceTableHederRow isDiscount={isDiscount} language={lang} />
           {serviceItem?.map((item, index, arr) => (
             <ServiceTableRow
               {...item}
@@ -214,6 +199,7 @@ export const SignaturePad = ({
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSettings}
+            language={lang}
           />
         </View>
         <Footer
@@ -225,15 +211,21 @@ export const SignaturePad = ({
 
       <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
         <View style={{ marginBottom: 10 }} fixed>
-          <Header {...headerDetails} />
+          <Header {...headerDetails} language={lang} />
         </View>
 
         {/* <ContactAddress {...{ ...contactAddress }} /> */}
-        <AdditionalDetails
-          description={aggrementDetails}
+        <View style={{ paddingBottom: 110 }}>
+          <AdditionalDetails
+            description={aggrementDetails}
+            signature={mySignature}
+          />
+        </View>
+        <AggrementSignature
+          showContractSign={true}
           signature={mySignature}
+          language={lang}
         />
-        <AggrementSignature showContractSign={true} signature={mySignature} />
         <Footer
           documentDetails={pdfData?.footerDetails}
           emailTemplateSettings={emailTemplateSettings}
@@ -242,16 +234,6 @@ export const SignaturePad = ({
       </Page>
     </Document>
   );
-
-  const [instance, updateInstance] = usePDF({ document: pdfDoc });
-
-  // useMemo(() => {
-  //   console.log(instance, "instance", signatureHolder);
-
-  //   if (signatureHolder && instance?.url) {
-  //     updateInstance(pdfDoc);
-  //   }
-  // }, [mySignature]);
 
   useEffect(() => {
     if (canvasRef.current && !signaturePad) {
@@ -284,7 +266,7 @@ export const SignaturePad = ({
         let newPdf = (
           <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>
             <Page style={styles.body}>
-              <Header {...headerDetails} />
+              <Header {...headerDetails} language={lang} />
               <View
                 style={{
                   position: "absolute",
@@ -295,9 +277,12 @@ export const SignaturePad = ({
               >
                 <ContactAddress {...{ ...contactAddress }} />
 
-                <AddressDetails {...{ address, header, workDates, time }} />
+                <AddressDetails
+                  {...{ address, header, workDates, time }}
+                  language={lang}
+                />
 
-                <ServiceTableHederRow isDiscount={isDiscount} />
+                <ServiceTableHederRow isDiscount={isDiscount} language={lang} />
                 {serviceItem?.map((item, index, arr) => (
                   <ServiceTableRow
                     {...item}
@@ -323,6 +308,7 @@ export const SignaturePad = ({
                 <ServicesTotalAmount
                   {...serviceItemFooter}
                   systemSettings={systemSettings}
+                  language={lang}
                 />
               </View>
               <Footer
@@ -334,15 +320,19 @@ export const SignaturePad = ({
 
             <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
               <View style={{ marginBottom: 10 }} fixed>
-                <Header {...headerDetails} />
+                <Header {...headerDetails} language={lang} />
               </View>
-
-              {/* <ContactAddress {...{ ...contactAddress }} /> */}
-              <AdditionalDetails
-                description={aggrementDetails}
+              <View style={{ paddingBottom: 110 }}>
+                <AdditionalDetails
+                  description={aggrementDetails}
+                  signature={file}
+                />
+              </View>
+              <AggrementSignature
+                showContractSign={true}
                 signature={file}
+                language={lang}
               />
-              <AggrementSignature showContractSign={true} signature={file} />
               <Footer
                 documentDetails={pdfData?.footerDetails}
                 emailTemplateSettings={emailTemplateSettings}
@@ -404,13 +394,11 @@ export const SignaturePad = ({
     signaturePad?.clear();
     setIsSubmitted(false);
   };
-  const rejectOffer = async () => {
-    dispatch(updateModalType({ type: ModalType.REJECT_OFFER }));
-  };
 
   useEffect(() => {
     setComponentMounted(true);
   }, []);
+
   return (
     pdfAction === "Accept" && (
       <>

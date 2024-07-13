@@ -142,6 +142,7 @@ export const useServiceInvoiceEditDetail = ({
       invoiceDetails?.serviceDetail?.serviceDetail[index]?.discount
     );
   };
+
   const generateTotalPrice = (index: number) => {
     const data = getValues();
     setTimeout(() => {
@@ -278,6 +279,7 @@ export const useServiceInvoiceEditDetail = ({
     } else if (newLength < currentLength) {
       setServiceType(serviceType.slice(0, newLength));
     }
+    generateGrandTotal();
   }, [serviceFields?.length]);
 
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
@@ -326,6 +328,22 @@ export const useServiceInvoiceEditDetail = ({
     }
   };
 
+  const handleRemoveService = (index: number) => {
+    remove(index);
+    const data = getValues();
+
+    reset({
+      ...data,
+    });
+
+    setServiceType((prev) => {
+      const newlist = [...prev];
+      newlist.splice(index, 1);
+
+      return newlist;
+    });
+  };
+
   const fields = EditInvoiceServiceDetailsFormField(
     register,
     loading,
@@ -340,7 +358,7 @@ export const useServiceInvoiceEditDetail = ({
       invoiceDetails,
     },
     append,
-    remove,
+    handleRemoveService,
     serviceType,
     handleServiceChange,
     serviceFields,

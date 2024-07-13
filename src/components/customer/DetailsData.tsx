@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import { CustomerDetail } from "@/types/customer";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
-import { useTranslation } from "next-i18next";
 import { updateQuery } from "@/utils/update-query";
 import { useRouter } from "next/router";
 
@@ -13,7 +12,6 @@ const DetailsData = ({
   handlePreviousClick,
   handleDelete,
 }: CustomerDetail) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
 
   const handleBack = () => {

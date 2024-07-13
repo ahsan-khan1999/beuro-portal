@@ -64,6 +64,7 @@ export const AddressDetails = ({
   workDates,
   time,
   isReverseAddress,
+  language,
 }: Partial<MovingDetailsProps>) => {
   let MaxLength = 0;
   for (const item of (address && address) || []) {
@@ -73,6 +74,17 @@ export const AddressDetails = ({
 
   const labelWidth = (MaxLength < 15 && 15 * 6) || MaxLength * 6;
   const valueWidth = 595 - labelWidth;
+
+  const langContent = {
+    en: {
+      work_date: "Work Date",
+      work_dates: "Work Dates",
+    },
+    de: {
+      work_date: "Auftragsdatum",
+      work_dates: "Auftragsdaten",
+    },
+  };
 
   return (
     <View style={styles.container}>
@@ -199,7 +211,12 @@ export const AddressDetails = ({
               color: "#000",
             }}
           >
-            {workDates?.length === 1 ? "Auftragsdatum" : "Auftragsdaten"}:
+            {workDates?.length === 1
+              ? langContent[language as keyof typeof langContent]?.work_date ||
+                "Auftragsdatum"
+              : langContent[language as keyof typeof langContent]?.work_dates ||
+                "Auftragsdaten"}
+            :
           </Text>
         </GridItem>
 

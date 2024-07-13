@@ -4,6 +4,7 @@ import { ContentTableRowTypes } from "./content";
 import { CustomerAddress, Customers } from "./customer";
 import { AddressID, Lead } from "./leads";
 import { OfferServiceDetails } from "./offers";
+import { StringifyOptions } from "querystring";
 
 // Interface for contract Table
 export interface contractTableTypes {
@@ -12,7 +13,7 @@ export interface contractTableTypes {
   offerID: ContractOfferDetails;
   createdAt: string;
   mail: {
-    mailStatus: "open" | "failed" | "pending";
+    mailStatus: 0 | 1;
   };
   contractStatus: "Open" | "Confirmed" | "Cancelled";
   paymentType: string;
@@ -95,9 +96,18 @@ export interface Contract {
 export interface ContractDetailCardProps {
   contractDetails: contractTableTypes;
   offerDeleteHandler: () => void;
-  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleStatusUpdate: (id: string) => void;

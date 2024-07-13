@@ -1,4 +1,4 @@
-import { loginUser, readDashboard } from "@/api/slices/authSlice/auth";
+import { readDashboard } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateAddFollowUpValidation } from "@/validation/followUpSchema";
 import { AddFollowUpFormField } from "@/components/follow-up/fields/add-follow-up-fields";
-import { Modals } from "@/enums/follow-up";
-import { createFollowUp } from "@/api/slices/followUp/followUp";
+import { createFollowUp, readFollowUp } from "@/api/slices/followUp/followUp";
 import { useEffect, useMemo } from "react";
 import { readFollowUpSettings } from "@/api/slices/settingSlice/settings";
 import { readLead } from "@/api/slices/lead/leadSlice";
+import { readCustomer } from "@/api/slices/customer/customerSlice";
 
 export const useAddFollowUp = (
   handleFollowUps: Function,
@@ -27,6 +27,7 @@ export const useAddFollowUp = (
 
   useEffect(() => {
     dispatch(readFollowUpSettings({}));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const schema = generateAddFollowUpValidation(translate);
@@ -40,16 +41,17 @@ export const useAddFollowUp = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   const customerID = watch("customer");
 
-  const lookUpModals = {
-    [Modals.customer]: () => handleAllCustomers(),
-    [Modals.leads]: () => handleAllLeads(),
-  };
+  // const lookUpModals = {
+  //   [Modals.customer]: () => handleAllCustomers(),
+  //   [Modals.leads]: () => handleAllLeads(),
+  // };
 
-  const handleModalPop = (item: Modals) => {
-    lookUpModals[item]();
-  };
+  // const handleModalPop = (item: Modals) => {
+  //   lookUpModals[item]();
+  // };
 
   useMemo(() => {
     if (customerID) {
@@ -62,20 +64,24 @@ export const useAddFollowUp = (
   }, [customerID]);
 
   const fields = AddFollowUpFormField(register, loading, control, {
-    customer: customer,
+    customer,
     lead: lead,
     followUps,
   });
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(
       createFollowUp({ data, router, setError, translate })
     );
     if (response?.payload) {
       handleFollowUps();
+      dispatch(readFollowUp({ params: { filter: { status: "10" } } }));
+
       if (router.pathname === "/dashboard")
         dispatch(readDashboard({ params: { filter: { month: 1 } } }));
     }
   };
+
   return {
     fields,
     onSubmit,
@@ -83,8 +89,8 @@ export const useAddFollowUp = (
     handleSubmit,
     errors,
     error,
-    customer,
-    lead,
+    // customer,
+    // lead,
     translate,
   };
 };

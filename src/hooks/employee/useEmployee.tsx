@@ -1,6 +1,5 @@
 import { FilterType } from "@/types";
 import { Employee } from "@/types/employee";
-import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { readEmployee } from "@/api/slices/employee/emplyeeSlice";
@@ -25,8 +24,7 @@ const useEmployee = () => {
   const { query } = useRouter();
   const [currentPageRows, setCurrentPageRows] = useState<Employee[]>([]);
   const totalItems = totalCount;
-  const itemsPerPage = 10;
-  const { t: translate } = useTranslation();
+  const itemsPerPage = 15;
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
@@ -72,7 +70,7 @@ const useEmployee = () => {
           params: {
             filter: queryParams ? updatedFilter : {},
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {

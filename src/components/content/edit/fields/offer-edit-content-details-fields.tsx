@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
-import icon from "@/assets/svgs/Vector.svg";
 import {
   FieldValues,
   UseFieldArrayAppend,

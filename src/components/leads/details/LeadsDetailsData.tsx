@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import { useTranslation } from "next-i18next";
 import AddressDetailsData from "./AddressDetailsData";
 import CustomerDetailsData from "./CustomerDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
@@ -11,6 +10,10 @@ import CustomerEditDetails from "../edit/CustomerEditDetails";
 import ServiceEditDetails from "../edit/ServiceEditDetails";
 import AditionalEditDetails from "../edit/AditionalEditDetails";
 import OfferEditImages from "@/components/offers/OfferEditImages";
+import { Lead } from "@/types/leads";
+import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export enum ComponentsType {
   customer,
@@ -23,21 +26,34 @@ export enum ComponentsType {
   additionalEdit,
 }
 
+export interface LeadDetailsProps {
+  leadDetails: Lead;
+  loading: boolean;
+  shareImgModal: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
+  handleImagesUpload: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
+}
+
 const LeadsDetailsData = ({
   loading,
   shareImgModal,
   handleImagesUpload,
   handleImageSlider,
-}: {
-  loading: boolean;
-  shareImgModal: Function;
-  handleImagesUpload: (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
-  handleImageSlider: () => void;
-}) => {
+  leadDetails,
+}: LeadDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
+  const { t: translate } = useTranslation();
 
   const [data, setData] = useState<{
     index: number;
@@ -47,8 +63,6 @@ const LeadsDetailsData = ({
   const handleEdit = (index: number, component: ComponentsType) => {
     setData({ index, component });
   };
-
-  const { t: translate } = useTranslation();
 
   const componentArray = [
     <CustomerDetailsData onClick={handleEdit} />,
@@ -155,25 +169,52 @@ const LeadsDetailsData = ({
     },
   ];
 
-  const scrollHandler = (index: number) => {
-    if (index === 0) {
-      window.scrollTo({ behavior: "smooth", top: 0 });
-    }
-    if (index === 1) {
-      window.scrollTo({ behavior: "smooth", top: 500 });
-    }
-    if (index === 2) {
-      window.scrollTo({ behavior: "smooth", top: 650 });
-    }
-    if (index === 3) {
-      window.scrollTo({ behavior: "smooth", top: 950 });
+  // const scrollHandler = (index: number) => {
+  //   if (index === 0) {
+  //     window.scrollTo({ behavior: "smooth", top: 0 });
+  //   }
+  //   if (index === 1) {
+  //     window.scrollTo({ behavior: "smooth", top: 500 });
+  //   }
+  //   if (index === 2) {
+  //     window.scrollTo({ behavior: "smooth", top: 650 });
+  //   }
+  //   if (index === 3) {
+  //     window.scrollTo({ behavior: "smooth", top: 950 });
+  //   }
+  // };
+
+  const handleScrollToTop = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    const offset = 320;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
+
+  const customerType = leadDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? leadDetails?.customerDetail?.companyName
+      : leadDetails?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
-        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap w-full gap-[14px] mb-5">
+        <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap gap-[14px] mb-5">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -183,7 +224,8 @@ const LeadsDetailsData = ({
               icon={item.icon}
               selectedTab={index}
               key={index}
-              onScroll={scrollHandler}
+              // onScroll={scrollHandler}
+              onItemSelected={handleScrollToTop}
             />
           ))}
         </div>
@@ -192,17 +234,29 @@ const LeadsDetailsData = ({
           shareImgModal={shareImgModal}
           handleImagesUpload={handleImagesUpload}
           tabType={tabType}
+          id={leadDetails?.id}
+          refID={leadDetails?.refID}
+          name={name}
+          heading={heading}
           handleImageSlider={handleImageSlider}
+          className="xlg:w-[247px]"
         />
       </div>
 
       <div className="w-full break-all flex">
-        <div className={`max-w-[330px] w-full hidden xlg:block`}></div>
-        <div className="flex flex-col gap-y-5 w-full">
-          {renderComponent.map((component, index) => (
-            <div key={index}>{component}</div>
-          ))}
-        </div>
+        <div className={`max-w-[280px] w-full hidden xlg:block`}></div>
+
+        {loading ? (
+          <div className="flex justify-center items-center w-full">
+            <CustomLoader />
+          </div>
+        ) : (
+          <div className="flex flex-col gap-y-5 w-full">
+            {renderComponent.map((component, index) => (
+              <div key={index}>{component}</div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

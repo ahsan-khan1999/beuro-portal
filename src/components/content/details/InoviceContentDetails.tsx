@@ -2,7 +2,6 @@ import React from "react";
 import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "./ContentDetailsData";
-import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const InoviceContentDetails = ({
@@ -12,8 +11,6 @@ const InoviceContentDetails = ({
   contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const { t: translate } = useTranslation();
-
   return (
     <div
       className="rounded-md border-none bg-white w-full h-fit"
@@ -71,10 +68,28 @@ const InoviceContentDetails = ({
           </div>
 
           <div className="flex flex-col">
-            <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
-              {translate("content.details.invoice_description")}
-            </p>
-
+            <div className="flex items-center justify-between">
+              <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
+                {translate("content.details.invoice_description")}
+              </p>
+              {/* <Button
+                inputType="button"
+                onClick={() =>
+                  router.push({
+                    pathname: `/content/pdf-preview`,
+                    query: {
+                      ...router.query,
+                      contentID: contentDetail?.id,
+                      contentPdfType: ContentPDFComponents.INVOICE_CONTENT_PDF,
+                    },
+                  })
+                }
+                className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap mb-[10px]"
+                text={translate("common.pdf_preview")}
+                id="pdf"
+                iconAlt="content PDF"
+              /> */}
+            </div>
             <div
               className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"
               dangerouslySetInnerHTML={{

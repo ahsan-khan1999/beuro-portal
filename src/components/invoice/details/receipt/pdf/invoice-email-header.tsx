@@ -12,16 +12,11 @@ import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { PrintIcon } from "@/assets/svgs/components/print-icon";
 
 export const InvoiceEmailHeader = ({
-  contentName,
-  contractId,
-  contractStatus,
-  workerName,
   loading,
   onDownload,
   onEmailSend,
   onPrint,
   onSendViaPost,
-  title,
   activeButtonId,
 }: InvoiceEmailHeaderProps) => {
   const router = useRouter();
@@ -130,7 +125,7 @@ export const InvoiceEmailHeader = ({
         </div>
         <div className="grid grid-cols-1 xLarge:grid-cols-2 items-center gap-y-3 gap-x-10 mt-5">
           <div className="flex items-center gap-[10px]">
-            <span className="text-base font-normal text-[#4D4D4D] mr-[10px] min-w-[130px]">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[130px]">
               {translate("invoice.card_content.receipt_number")}:
             </span>
             <span className="text-base font-medium text-primary">
@@ -148,7 +143,7 @@ export const InvoiceEmailHeader = ({
           </div>
 
           <div className="flex items-center gap-[10px]">
-            <span className="text-base  font-normal text-[#4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D]">
               {translate("contracts.table_headings.status")}:
             </span>
 

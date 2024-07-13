@@ -603,7 +603,9 @@ export const staticEnums: Record<string, any> = {
   PaymentType: {
     Cash: 0,
     Online: 1,
+    Twint: 2,
   },
+
   ContractStatus: {
     Open: 0,
     Confirmed: 1,
@@ -613,7 +615,6 @@ export const staticEnums: Record<string, any> = {
     Deprecated: 0,
     Active: 1,
   },
-
   InvoiceMainStatus: {
     Pending: 0,
     Overdue: 1,
@@ -654,6 +655,8 @@ export const staticEnums: Record<string, any> = {
       Upcoming: 0,
       Pending: 1,
       Overdue: 2,
+      today: 10,
+      complete: 4,
     },
   },
   ContentStatus: {
@@ -1441,15 +1444,15 @@ export const DEFAULT_INVOICE = {
 };
 
 export const HeaderLabelNr = {
-  contract: "Vertrag ",
-  invoice: "Rechnung ",
-  receipt: "Quittung ",
+  contract: "pdf.label_nr_contract",
+  invoice: "pdf.label_nr_invoice",
+  receipt: "pdf.label_nr_receipt",
 };
 
 export const HeaderLabel = {
-  contract: "Erstell",
-  invoice: "Rechnung",
-  receipt: "Quittung",
+  contract: "pdf.label_contract",
+  invoice: "pdf.label_invoice",
+  receipt: "pdf.label_receipt",
 };
 
 export const GenderLabel = {

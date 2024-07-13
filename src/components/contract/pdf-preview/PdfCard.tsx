@@ -169,26 +169,23 @@ const PdfCard = ({
               <span className="text-[#4D4D4D] text-base font-normal min-w-[100px]">
                 {translate("contracts.pdf_card_details.contract_id")}:
               </span>
-
               <span className="text-primary text-base font-medium">
                 {contractNo}
               </span>
             </div>
             <div className="flex items-center gap-x-2">
-              <span className="text-[#4D4D4D] text-base font-normal">
+              <span className="text-[#4D4D4D] text-base font-normal min-w-[60px]">
                 {translate("contracts.pdf_card_details.worker")}:
               </span>
-
               <span className="text-[#4B4B4B] text-base font-medium">
                 {worker}
               </span>
             </div>
 
             <div className="flex items-center gap-x-2">
-              <span className="text-[#4D4D4D] text-base font-normal">
+              <span className="text-[#4D4D4D] text-base font-normal min-w-[125px]">
                 {translate("contracts.pdf_card_details.content_name")}:
               </span>
-
               <p className="text-[#4B4B4B] text-base font-medium truncate">
                 {contractTitle}
               </p>
@@ -197,7 +194,6 @@ const PdfCard = ({
               <span className="text-[#4D4D4D] text-base font-normal min-w-[130px]">
                 {translate("contracts.pdf_card_details.contract_status")}:
               </span>
-
               <div className="border-[#FE9244] border rounded-lg px-[8px]">
                 <span className="text-[#FE9244] text-base font-medium">
                   {translate(`contract_status.${contractStatus}`)}

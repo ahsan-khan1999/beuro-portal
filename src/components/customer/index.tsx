@@ -4,9 +4,9 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
-import useCustomer from "@/hooks/customer/useCustomer";
 import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
+import useCustomer from "@/hooks/customer/useCustomer";
 
 export default function Customers() {
   const {

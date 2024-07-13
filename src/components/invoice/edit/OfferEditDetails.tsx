@@ -4,6 +4,7 @@ import FormCard from "@/layout/customers/FormCard";
 import { useRouter } from "next/router";
 import { useEditInvoiceDetails } from "@/hooks/invoice/useEditInvoiceDetails";
 import { EditComponentsType } from "@/enums/invoice";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const OfferEditDetails = ({
   handleNext,
@@ -20,10 +21,11 @@ const OfferEditDetails = ({
     errors,
     translate,
     invoiceDetails,
+    loading,
   } = useEditInvoiceDetails({ handleNext });
 
   return (
-    <FormCard>
+    <FormCard containerClassName="pb-[100px]">
       <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
         <h2 className="text-[#fff] text-lg font-medium">
           {translate("invoice.invoice_details")} (
@@ -36,15 +38,20 @@ const OfferEditDetails = ({
           {translate("offers.offer_details.cancel_button")}
         </button>
       </div>
-      <div className="py-3 px-6">
-        <Form
-          formFields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          className={`${defaultClassName}`}
-        />
-      </div>
+
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <div className="py-3 px-6">
+          <Form
+            formFields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+            className={`${defaultClassName}`}
+          />
+        </div>
+      )}
     </FormCard>
   );
 };

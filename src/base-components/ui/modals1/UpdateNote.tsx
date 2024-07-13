@@ -5,22 +5,27 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Form } from "@/base-components/form/form";
 import { FilterType } from "@/types";
 import { useUpdateNote } from "@/hooks/modals/useUpdateNote";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export const UpdateNote = ({
   onClose,
   handleNotes,
   handleFilterChange,
   filter,
-  heading,
+  mainHeading,
 }: {
   onClose: () => void;
   handleNotes: (id: string) => void;
   handleFilterChange?: (query: FilterType) => void;
   filter?: FilterType;
-  heading: string;
+  mainHeading: string;
 }) => {
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useUpdateNote({ handleNotes, handleFilterChange, filter });
+
+  const { refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   return (
     <>
@@ -35,10 +40,26 @@ export const UpdateNote = ({
             className="absolute right-5 top-5 cursor-pointer"
             onClick={onClose}
           />
-          <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
-            <p className="text-2xl font-medium text-[#000] ml-[38px]">
-              {heading}
-            </p>
+
+          <p className="text-2xl font-medium text-[#000] ml-[38px]">
+            {mainHeading}
+          </p>
+
+          <div className="border-y border-y-[#000] border-opacity-10 py-[10px] mx-10 my-5">
+            <div className="flex items-center gap-x-[34px]">
+              <div className="flex items-center gap-x-[14px]">
+                <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+                <span className="text-sm font-medium text-primary">
+                  {refID}
+                </span>
+              </div>
+              <div className="flex items-center gap-x-[14px]">
+                <span className="text-sm font-normal text-[#4D4D4D]">
+                  {heading}:
+                </span>
+                <span className="text-sm font-medium text-primary">{name}</span>
+              </div>
+            </div>
           </div>
 
           <div className="xl:mx-[42px] mx-4 mt-3">

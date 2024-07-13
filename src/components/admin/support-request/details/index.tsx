@@ -1,10 +1,10 @@
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
-import DetailsData from "../DetailsData";
-import SupportDetailsData from "./support-request-data";
 import useSupportDetail from "@/hooks/admin/support-request/useSupportDetail";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
+import { SupportDetailsData } from "./support-request-data";
+import { DetailsData } from "../DetailsData";
 
 const SupportRequestDetails = () => {
   const {
@@ -26,9 +26,9 @@ const SupportRequestDetails = () => {
           handleStatusUpadte={handleStatusUpadte}
         />
       </DetailsCard>
-      <div className="mt-8">
+      <div className="mt-5">
         {loading ? (
-          <CustomLoader />
+          <CustomPuffLoader />
         ) : (
           <SupportDetailsData supportDetail={contactSupportDetails} />
         )}

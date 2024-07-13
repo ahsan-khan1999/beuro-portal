@@ -2,15 +2,24 @@ import React from "react";
 import { Lead } from "@/types/leads";
 import { useRouter } from "next/router";
 import { formatDate } from "@/utils/utility";
-import { useTranslation } from "next-i18next";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export interface LeadTableProps {
   dataToAdd: Lead[];
-  openModal: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleAddNote: (
+    id: string,
+    refId: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refId: string,
+    name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   onStatusChange: (id: string, status: string, type: string) => void;
@@ -18,7 +27,7 @@ export interface LeadTableProps {
 
 const TableRows = ({
   dataToAdd,
-  openModal,
+  handleAddNote,
   handleImageUpload,
   onStatusChange,
 }: LeadTableProps) => {
@@ -43,6 +52,17 @@ const TableRows = ({
       }`}
     >
       {dataToAdd?.map((item: Lead, index: number) => {
+        const customerType = item?.customerDetail
+          ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+        const name =
+          customerType === 1
+            ? item?.customerDetail?.companyName
+            : item?.customerDetail?.fullName;
+        const heading =
+          customerType === 1
+            ? translate("common.company_name")
+            : translate("common.customer_name");
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -56,33 +76,33 @@ const TableRows = ({
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(400px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(170px,_170px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(50px,_4fr)_minmax(130px,_130px)_minmax(190px,_190px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_4fr)_minmax(130px,_130px)_minmax(190px,_190px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(190px,_190px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(190px,_190px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(190px,_190px)] border-t border-t-[#E7EAEE]`}
+                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(190px,_190px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(50px,_3fr)_minmax(150px,_150px)_minmax(190px,_190px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(150px,_150px)_minmax(190px,_190px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(150px,_150px)_minmax(190px,_190px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(190px,_190px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(190px,_190px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <div className="flex items-center gap-x-1">
                   {(item?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item?.customerDetail?.companyName})
+                    <span className="py-4 truncate text-lg font-medium text-primary">
+                      {item?.customerDetail?.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">
-                      {item.customerDetail?.fullName}
+                      {item?.customerDetail?.fullName}
                     </span>
                   )}
                 </div>
                 <span className="py-4 truncate block mlg:hidden maxSize:block">
-                  {item.customerDetail?.email}
+                  {item?.customerDetail?.email}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
-                  {item.customerDetail?.phoneNumber}
+                  {item?.customerDetail?.phoneNumber}
                 </span>
                 <span className="py-4 flex items-center">
                   {formatDate(item.createdAt)}
                 </span>
                 <span className="py-4 truncate mlg:hidden xMaxSize:block">
-                  {item.customerDetail?.address?.country}
+                  {item?.customerDetail?.address?.country}
                 </span>
                 <span
                   className="py-4 flex items-center"
@@ -117,6 +137,11 @@ const TableRows = ({
                         ? "text-black"
                         : "text-white"
                     }`}
+                    isThirdLastIndex={
+                      dataToAdd &&
+                      dataToAdd.length > 5 &&
+                      index === dataToAdd.length - 3
+                    }
                     isSecondLastIndex={
                       dataToAdd &&
                       dataToAdd.length > 5 &&
@@ -136,7 +161,9 @@ const TableRows = ({
             <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) => handleImageUpload(item?.id, e)}
+                onClick={(e) =>
+                  handleImageUpload(item?.id, item?.refID, name, heading, e)
+                }
                 title={translate("leads.table_headings.images")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
@@ -178,7 +205,9 @@ const TableRows = ({
 
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
-                onClick={(e) => openModal(item?.id, e)}
+                onClick={(e) =>
+                  handleAddNote(item?.id, item?.refID, name, heading, e)
+                }
                 title={translate("leads.table_headings.note")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">

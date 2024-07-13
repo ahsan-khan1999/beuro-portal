@@ -12,7 +12,6 @@ import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails"
 import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
 import SettingProfile from "./profile-form";
-import { useTranslation } from "next-i18next";
 import QRSettings from "./qr-settings";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { useRouter } from "next/router";
@@ -24,6 +23,7 @@ import {
   deleteNoteSetting,
   readNoteSettings,
 } from "@/api/slices/settingSlice/settings";
+import { useTranslation } from "next-i18next";
 
 const Setting = () => {
   const { query } = useRouter();
@@ -31,10 +31,10 @@ const Setting = () => {
 
   const { loading, noteSettings } = useAppSelector((state) => state.settings);
 
+  const dispatch = useDispatch();
   const tab = query.tab;
   const [switchDetails, setSwitchDetails] = useState<number>(0);
 
-  const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
   const onClose = () => {

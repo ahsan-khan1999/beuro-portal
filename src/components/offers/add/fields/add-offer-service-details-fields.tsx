@@ -13,8 +13,8 @@ import {
 import { OffersTableRowTypes, Total } from "@/types/offers";
 import { TaxSetting } from "../../../../api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
-import { useTranslation } from "next-i18next";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import { useTranslation } from "next-i18next";
 const serviceObject = {
   serviceTitle: "",
   price: "",
@@ -40,6 +40,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
   fields,
   setValue
 ) => {
+  const { t: translate } = useTranslation();
   const {
     service,
     onCustomerSelect,
@@ -52,7 +53,6 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
 
   // if(!fields) return null;
 
-  const { t: translate } = useTranslation();
   const formField: FormField[] = [];
   for (let i = 0; i < count; i++) {
     formField.push(
@@ -188,9 +188,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                           value: item?.serviceName,
                         })) || [],
                       control,
-                      value:
-                        offerDetails?.serviceDetail?.serviceDetail[i]
-                          ?.serviceTitle,
+                      // value:
+                      //   offerDetails?.serviceDetail?.serviceDetail[i]
+                      //     ?.serviceTitle,
                       onItemChange: onCustomerSelect,
                       fieldIndex: i,
                     },
@@ -265,7 +265,7 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                         "mb-0 grid grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-5",
                       children: [
                         {
-                          containerClass: "mb-0 ",
+                          containerClass: "mb-0",
                           label: {
                             text: `${translate(
                               "offers.service_details.detail_headings.count"
@@ -417,7 +417,6 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
       currency,
     } = properties;
     const { t: translate } = useTranslation();
-
     const formField: FormField[] = [
       {
         containerClass: "mt-5 bg-white px-5 pt-5 rounded-lg",

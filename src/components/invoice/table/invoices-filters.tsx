@@ -7,8 +7,6 @@ import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { Button } from "@/base-components/ui/button/button";
-import addIcon from "@/assets/svgs/plus_icon.svg";
 import InvoicesFilter from "@/base-components/filter/invoices-filter";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readNoteSettings } from "@/api/slices/settingSlice/settings";
@@ -258,22 +256,10 @@ export default function InvoicesFilters({
             }
             label={translate("add_note_dropdown.all_notes")}
           />
-        </div>
-        <div className="flex items-center gap-x-4">
           <InvoicesFilter
             filter={filter}
             setFilter={setFilter}
             onFilterChange={handleFilterChange}
-          />
-
-          <Button
-            inputType="button"
-            onClick={() => router.push("/invoices/create-invoice")}
-            className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-            text={translate("common.create_invoice")}
-            id="add"
-            icon={addIcon}
-            iconAlt="add button"
           />
         </div>
       </div>

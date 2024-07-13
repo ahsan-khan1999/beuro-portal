@@ -667,7 +667,7 @@ export const CreateInvoiceDetailsSubmitFormField: GenerateCreateInvoiceFormField
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "float-right my-[30px]",
+        containerClass: "float-right mt-[30px]",
         field: {
           type: Field.button,
           id: "button",

@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddContentInvoiceDetailsFormField } from "@/components/content/add/fields/add-invoice-details-fields";
 import { generateEditInvoiceContentDetailsValidation } from "@/validation/contentSchema";
-import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { useEffect, useMemo, useState } from "react";
 import { updateContent } from "@/api/slices/content/contentSlice";
+import { ComponentsType } from "@/enums/content";
 
 export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -24,7 +24,7 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   const [attachements, setAttachements] = useState<Attachement[]>(
     (contentDetails?.id &&
       transformAttachments(contentDetails?.invoiceContent?.attachments)) ||
-    []
+      []
   );
 
   const router = useRouter();
@@ -45,10 +45,14 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     setError,
     reset,
     trigger,
+    watch,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  const invoiceDescription = watch("invoiceContent.description");
+
   useEffect(() => {
     if (contentDetails.id) {
       reset({
@@ -57,10 +61,11 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
           // attachments:
           //   contentDetails?.offerContent?.attachments?.length > 0 &&
           //   contentDetails?.offerContent?.attachments[0] || null,
-        }
+        },
       });
     }
   }, [contentDetails.id]);
+
   const fields = AddContentInvoiceDetailsFormField(
     register,
     loading,
@@ -92,6 +97,7 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     );
     if (res?.payload) onHandleNext(ComponentsType.addReceiptContent);
   };
+
   return {
     fields,
     onSubmit,
@@ -100,5 +106,6 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
+    invoiceDescription,
   };
 };

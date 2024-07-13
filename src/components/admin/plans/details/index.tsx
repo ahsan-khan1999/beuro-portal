@@ -2,7 +2,7 @@ import { Layout } from "@/layout";
 import React from "react";
 import PlansForm from "../Form";
 import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
 
 const PlanDetails = () => {
   const {
@@ -22,7 +22,7 @@ const PlanDetails = () => {
   return (
     <Layout>
       {loading ? (
-        <CustomLoader />
+        <CustomPuffLoader />
       ) : (
         <div>
           <h2 className="text-xl font-normal text-[#222B45] mb-4">

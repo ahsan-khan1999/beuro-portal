@@ -4,7 +4,7 @@ import DetailsCard from "@/layout/customers/DetailsCard";
 import CustomerDetailsData from "./customer-details-data";
 import useCustomerDetailAdmin from "@/hooks/admin/customer/useCustomerDetail";
 import DetailsData from "../DetailsData";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
 
 const CustomerDetails = () => {
   const {
@@ -16,6 +16,7 @@ const CustomerDetails = () => {
     handleStatusChange,
     loading,
     handleMakeAccountFree,
+    deleteHandler,
   } = useCustomerDetailAdmin();
 
   return (
@@ -28,11 +29,12 @@ const CustomerDetails = () => {
             handleAreYouSure={handleMakeAccountFree}
             isCustomerFree={isCustomerFree}
             handleStatusChange={handleStatusChange}
+            onDelete={deleteHandler}
           />
         </DetailsCard>
-        <div className="mt-8">
+        <div className="mt-5">
           {loading ? (
-            <CustomLoader />
+            <CustomPuffLoader />
           ) : (
             <CustomerDetailsData customerDetail={companyDetails} />
           )}

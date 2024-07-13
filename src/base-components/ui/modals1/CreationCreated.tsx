@@ -28,11 +28,11 @@ const CreationCreated = ({
             alt="delete_icon"
             className="mt-[47px] w-[70px] h-[70px] md:w-fit md:h-fit"
           />
-          <p className="font-medium text-base md:text-2xl mt-[40px] text-center">
+          <p className="font-medium mt-5 text-base md:text-2xl md:mt-10 text-center">
             {heading}
           </p>
 
-          <span className="text-[#1E1E1E] font-normal text-sm mt-[6px] px-[60px] text-center">
+          <span className="text-[#1E1E1E] font-normal text-sm mt-[6px] px-5 md:px-[60px] text-center">
             {subHeading}
           </span>
 
