@@ -35,7 +35,7 @@ const ActivitiesNotificationBar = ({
             return (
               <div
                 key={index}
-                className={`mt-3 cursor-pointer hover:bg-primary hover:bg-opacity-10 bg-opacity-10`}
+                className={`mt-3 hover:bg-primary hover:bg-opacity-10 bg-opacity-10`}
               >
                 <div className="mb-3">
                   <div>
@@ -55,7 +55,7 @@ const ActivitiesNotificationBar = ({
                         {item.time},{item.date}
                       </span>
                     </div>
-                    <div className="lg:flex justify-between items-center hidden ">
+                    <div className="lg:flex justify-between items-center hidden">
                       <span className="mr-3 text-white bg-primary text-xs rounded-[2px] px-1 py-0.5 font-medium">
                         {item.id1}
                       </span>
