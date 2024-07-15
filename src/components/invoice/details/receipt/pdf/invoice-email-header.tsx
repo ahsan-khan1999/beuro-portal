@@ -10,6 +10,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { PrintIcon } from "@/assets/svgs/components/print-icon";
+import { updateQuery } from "@/utils/update-query";
 
 export const InvoiceEmailHeader = ({
   loading,
@@ -23,6 +24,12 @@ export const InvoiceEmailHeader = ({
   const { t: translate } = useTranslation();
   const { collectiveInvoiceDetails } = useAppSelector((state) => state.invoice);
   const color = getInvoiceStatusColor(collectiveInvoiceDetails?.invoiceStatus);
+
+  const handleBack = () => {
+    router.pathname = "/invoices/details";
+    delete router.query["tab"];
+    updateQuery(router, router.locale as string);
+  };
 
   return (
     <div className="mb-5">
@@ -46,15 +53,17 @@ export const InvoiceEmailHeader = ({
           </div> */}
 
           <button
-            onClick={() => {
-              router.push({
-                pathname: "/invoices/details",
-                query: {
-                  ...router.query,
-                  invoice: collectiveInvoiceDetails?.invoiceID?.id,
-                },
-              });
-            }}
+            // onClick={() => {
+            //   router.push({
+            //     pathname: "/invoices/details",
+            //     query: {
+            //       ...router.query,
+            //       invoice: collectiveInvoiceDetails?.invoiceID?.id,
+            //     },
+            //   });
+            // }}
+
+            onClick={handleBack}
             className="text-[#4B4B4B] hover:text-primary flex items-center gap-x-3 border border-primary rounded-lg py-2 px-3 cursor-pointer w-fit"
           >
             <svg

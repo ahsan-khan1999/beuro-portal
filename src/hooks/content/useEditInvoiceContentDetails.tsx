@@ -24,6 +24,7 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
       transformAttachments(contentDetails?.invoiceContent?.attachments)) ||
       []
   );
+
   const handleBack = () => {
     onClick(2, ComponentsType.invoiceContent);
   };

@@ -207,7 +207,6 @@ const TableRows = ({
                 }}
                 title={translate("contracts.table_headings.edit")}
               >
-                {/* <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg"> */}
                 <span className="p-[5px] border border-primary rounded-md">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -224,7 +223,6 @@ const TableRows = ({
                     />
                   </svg>
                 </span>
-                {/* </div> */}
               </div>
 
               <span

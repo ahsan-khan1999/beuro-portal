@@ -42,7 +42,9 @@ export const useEditReceiptDetails = (onClick: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const receiptDescription = watch("receiptContent.description");
+  const receiptDescription =
+    watch("receiptContent.description") ||
+    contentDetails.receiptContent.description;
 
   useMemo(() => {
     if (contentDetails.id) {

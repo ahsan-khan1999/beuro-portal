@@ -701,7 +701,7 @@ export function getFollowUpStatusColor(status: string) {
     return "#FF376F";
   else if (
     staticEnums["FollowUp"]["Status"][status] ==
-    staticEnums["FollowUp"]["Status"]["complete"]
+    staticEnums["FollowUp"]["Status"]["Complete"]
   )
     return "#45C769";
   else return "#FE9244";
