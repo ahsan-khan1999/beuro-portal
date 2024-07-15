@@ -6,7 +6,6 @@ import { ComponentsType } from "../details/ContentDetailsData";
 import { ReceiptContentPdf } from "../add/pdf-preview/receipt-content-pdf";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { Button } from "@/base-components/ui/button/button";
-import { ConfirmationContentPdf } from "../add/pdf-preview/confirmation-content-pdf";
 
 const EditReceiptContentDetails = ({
   onClick,
@@ -76,7 +75,7 @@ const EditReceiptContentDetails = ({
 
         {receiptDescription ? (
           <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
-            <ConfirmationContentPdf description={receiptDescription} />
+            <ReceiptContentPdf description={receiptDescription} />
           </div>
         ) : (
           <NoDataEmptyState

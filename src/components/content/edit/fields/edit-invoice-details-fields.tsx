@@ -65,7 +65,6 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "invoiceContent.body",
               name: "invoiceContent.body",
-
               control,
             },
           },
