@@ -44,13 +44,13 @@ export const useEditReceiptDetails = (onClick: Function) => {
 
   const receiptDescription =
     watch("receiptContent.description") ||
-    contentDetails.offerContent.description;
+    contentDetails?.receiptContent?.description;
 
   useMemo(() => {
     if (contentDetails.id) {
       reset({
         receiptContent: {
-          ...contentDetails?.offerContent,
+          ...contentDetails?.receiptContent,
         },
       });
     }
@@ -73,7 +73,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
       contentName: data.contentName,
       receiptContent: {
         body: data.receiptContent.body,
-        description: data.offerContent.description,
+        description: data.receiptContent.description,
         title: data.receiptContent.title,
         attachments: attachements?.map((item) => item.value),
       },

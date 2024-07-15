@@ -39,25 +39,27 @@ const ActivitiesNotificationBar = ({
               >
                 <div className="mb-3">
                   <div>
-                    <span className="text-dark text-sm">{item.name}&nbsp;</span>
+                    <span className="text-dark text-sm">
+                      {item?.name}&nbsp;
+                    </span>
                     <span className="text-dark text-sm font-medium">
-                      {item.description}
+                      {item?.description}
                     </span>
                   </div>
                   <div className="flex items-center justify-between mt-[5px]">
-                    <div className="flex items-center ">
+                    <div className="flex items-center">
                       <Image
                         src={timeIcon}
                         alt="Time Icon"
                         className="mr-[10px]"
                       />
                       <span className="text-[#393939] text-xs">
-                        {item.time},{item.date}
+                        {item?.time},{item?.date}
                       </span>
                     </div>
                     <div className="lg:flex justify-between items-center hidden">
                       <span className="mr-3 text-white bg-primary text-xs rounded-[2px] px-1 py-0.5 font-medium">
-                        {item.id1}
+                        {item?.id1}
                       </span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +76,7 @@ const ActivitiesNotificationBar = ({
                         />
                       </svg>
                       <span className="ml-3 text-white text-xs bg-[#45C769] rounded-[2px] px-1 py-0.5 font-medium">
-                        {item.id2}
+                        {item?.id2}
                       </span>
                     </div>
                   </div>

@@ -54,7 +54,7 @@ const OfferEditImages = ({
     <LeadsDetailImgLayout>
       <div className={containerClasses}>
         <div className="flex justify-between items-center ml-6 mr-[14px] my-3">
-          <p className="text-lg font-normal text-[#4A13E7] ">
+          <p className="text-lg font-normal text-[#4A13E7]">
             {translate("offers.side_images.heading")}
           </p>
           {images &&
@@ -112,7 +112,7 @@ const OfferEditImages = ({
         <div className="flex justify-end items-center mx-[13px] pb-3">
           <span
             onClick={(e) => handleImagesUpload(id, refID, name, heading, e)}
-            className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer `}
+            className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer`}
           >
             {translate("offers.side_images.upload_button")}
             <Image src={imageUpload} alt="imageUpload" className="ml-2" />

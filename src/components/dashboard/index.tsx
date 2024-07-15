@@ -246,7 +246,7 @@ const AdminDashboard = () => {
           />
 
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
-            {dashboardCards.map((item, index) => {
+            {dashboardCards?.map((item, index) => {
               return (
                 <DashboardCard
                   key={index}

@@ -165,19 +165,19 @@ export const FollowUpNotificationBar = ({
                 <div
                   className="py-3 px-4 bg-[#FFF2E9] rounded-2xl cursor-pointer"
                   key={index}
-                  onClick={() => handleFollowUpsDetails(item.id)}
+                  onClick={() => handleFollowUpsDetails(item?.id)}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-x-[6px]">
                       <span className="px-1 py-[2px] bg-primary rounded-lg text-white">
-                        {item.lead?.refID}
+                        {item?.lead?.refID}
                       </span>
                       <span
                         className={`px-1 py-[2px] bg-[${getFollowUpStatusColor(
                           item?.status
                         )}] rounded-lg text-white`}
                       >
-                        {item.status}
+                        {item?.status}
                       </span>
                       <span className="text-[#1E1E1E] text-sm font-normal ml-[3px]">
                         {item?.customer?.fullName}
@@ -191,7 +191,7 @@ export const FollowUpNotificationBar = ({
 
                   <div className="mt-2">
                     <p className="text-[#1E1E1E] text-sm font-medium">
-                      {item.title}
+                      {item?.title}
                     </p>
                     {/* <p className="text-[#1E1E1E] text-sm font-medium">
                       {formatDateTime(item?.dateTime)}
@@ -208,7 +208,7 @@ export const FollowUpNotificationBar = ({
           />
         )}
 
-        {followUp && followUp.length > 0 && (
+        {followUp && followUp?.length > 0 && (
           <div className="flex justify-center py-2 border-t border-t-[#EFEFEF] absolute bottom-0 right-0 left-0">
             <button
               onClick={() => handleFollowUps()}

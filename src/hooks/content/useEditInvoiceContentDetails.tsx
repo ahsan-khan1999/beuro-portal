@@ -45,15 +45,13 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
 
   const invoiceDescription =
     watch("invoiceContent.description") ||
-    contentDetails.offerContent.description;
-
-  console.log(contentDetails, "contentDetails");
+    contentDetails?.invoiceContent?.description;
 
   useMemo(() => {
     if (contentDetails.id) {
       reset({
         invoiceContent: {
-          ...contentDetails?.offerContent,
+          ...contentDetails?.invoiceContent,
         },
       });
     }
@@ -76,7 +74,7 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
       contentName: data.contentName,
       invoiceContent: {
         body: data.invoiceContent.body,
-        description: data.offerContent.description,
+        description: data.invoiceContent.description,
         title: data.invoiceContent.title,
         attachments: attachements?.map((item) => item.value),
       },

@@ -91,7 +91,6 @@ const Header = () => {
     }
   }, [upcomingFollowUp]);
 
-  // const { isTimeEnded, setIsTimeEnded } = useTimeLeft(followUpTime);
   const isSVG = user?.company?.logo?.endsWith(".svg");
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
@@ -153,18 +152,18 @@ const Header = () => {
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">
           <Image src={userIcon} alt="User Icon" className="mr-3" />
-          <div className="">
+          <div>
             <span className="font-semibold tracking-[0.5px] text-[#0A0A0A] block">
               {user?.fullName}
             </span>
-            <span className="flex justify-between space-x-2">
+            <div className="flex justify-between space-x-2">
               <span className=" text-sm tracking-[0.4 px] text-[#8F8F8F] block">
                 {translate(`admin_role.${user?.role}`)}
               </span>
               <span className="px-2 cursor-pointer" onClick={handleLogout}>
                 <Image src={logoutImage} alt="logout" />
               </span>
-            </span>
+            </div>
           </div>
         </div>
       </div>

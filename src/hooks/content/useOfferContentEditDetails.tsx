@@ -47,8 +47,6 @@ export const useOfferContentEditDetails = (onClick: Function) => {
 
   const offerDescriptionCount = watch("offerContent.description");
 
-  console.log(contentDetails);
-
   const handleBack = () => {
     onClick(0, ComponentsType.offerContent);
   };

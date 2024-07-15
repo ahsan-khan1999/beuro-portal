@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { useTranslation } from "next-i18next";
 import { DashboardCardProps } from "@/types/dashboard";
 
 const DashboardCard = ({
@@ -17,7 +16,6 @@ const DashboardCard = ({
   expired,
   route,
 }: DashboardCardProps) => {
-  const { t: translate } = useTranslation();
   // const datatest2 = {
   //   labels: [
   //     `${translate("admin.months.jan")}`,
