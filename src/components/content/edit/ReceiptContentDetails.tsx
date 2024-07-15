@@ -31,6 +31,8 @@ const EditReceiptContentDetails = ({
     window.open(`/content/pdf-preview/${type}`, "_blank");
   };
 
+  console.log(receiptDescription, "receiptDescription is here");
+
   return (
     <div className="flex gap-x-5">
       <div className="rounded-lg border border-primary bg-white w-full h-fit">
