@@ -8,7 +8,7 @@ import { AddContentInvoiceDetailsFormField } from "@/components/content/add/fiel
 import { generateEditInvoiceContentDetailsValidation } from "@/validation/contentSchema";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateContent } from "@/api/slices/content/contentSlice";
 import { ComponentsType } from "@/enums/content";
 
@@ -17,9 +17,10 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
   );
-  let [addressCount, setAddressCount] = useState<number>(
-    (contentDetails?.id && contentDetails?.offerContent?.address?.length) || 1
-  );
+
+  // let [addressCount, setAddressCount] = useState<number>(
+  //   (contentDetails?.id && contentDetails?.offerContent?.address?.length) || 1
+  // );
 
   const [attachements, setAttachements] = useState<Attachement[]>(
     (contentDetails?.id &&
@@ -33,9 +34,10 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   const backHandle = () => {
     onHandleNext(ComponentsType.addConfirmationContent);
   };
-  const handleAddAddressField = () => {
-    setAddressCount(addressCount + 1);
-  };
+
+  // const handleAddAddressField = () => {
+  //   setAddressCount(addressCount + 1);
+  // };
 
   const schema = generateEditInvoiceContentDetailsValidation(translate);
   const {

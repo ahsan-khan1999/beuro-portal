@@ -87,8 +87,6 @@ const ContentPdfPreview = ({
   const headerDetails = data?.headerDetails;
   const footerDetails = data?.footerDetails;
 
-  console.log(description, "description from content-pdf render");
-
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
       <Document>
