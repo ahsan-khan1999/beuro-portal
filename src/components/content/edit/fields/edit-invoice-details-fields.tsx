@@ -11,7 +11,6 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
   count,
   attachements,
   setAttachements,
-  contentDetails
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -50,11 +49,7 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "invoiceContent.description",
               name: "invoiceContent.description",
-
               control,
-              // value:
-              //   contentDetails?.id &&
-              //   contentDetails?.invoiceContent?.description,
             },
           },
 
@@ -72,7 +67,6 @@ export const EditInvoiceContentDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.body",
 
               control,
-              // value: contentDetails?.id && contentDetails?.invoiceContent?.body,
             },
           },
 

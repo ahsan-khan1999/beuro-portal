@@ -6,6 +6,7 @@ import { ComponentsType } from "../details/ContentDetailsData";
 import { ReceiptContentPdf } from "../add/pdf-preview/receipt-content-pdf";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { Button } from "@/base-components/ui/button/button";
+import { ConfirmationContentPdf } from "../add/pdf-preview/confirmation-content-pdf";
 
 const EditReceiptContentDetails = ({
   onClick,
@@ -30,8 +31,6 @@ const EditReceiptContentDetails = ({
     localStorage.setItem("description", receiptDescription);
     window.open(`/content/pdf-preview/${type}`, "_blank");
   };
-
-  console.log(receiptDescription, "receiptDescription is here");
 
   return (
     <div className="flex gap-x-5">
@@ -77,7 +76,7 @@ const EditReceiptContentDetails = ({
 
         {receiptDescription ? (
           <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
-            <ReceiptContentPdf description={receiptDescription} />
+            <ConfirmationContentPdf description={receiptDescription} />
           </div>
         ) : (
           <NoDataEmptyState
