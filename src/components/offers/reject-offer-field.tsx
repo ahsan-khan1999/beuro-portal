@@ -102,7 +102,7 @@ export const RejectOfferTextFields: GenerateAddReasonFormField = (
         text: `${translate("common.add_note_modal.button")}`,
         inputType: "submit",
         className:
-          "rounded-lg  w-[200px] px-4 w-[152px] h-[50px]  text-white hover:bg-none",
+          "rounded-lg w-[200px] px-4 w-[152px] h-[50px] text-white hover:bg-none",
         loading,
       },
     },
