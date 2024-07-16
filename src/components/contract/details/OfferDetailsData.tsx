@@ -37,7 +37,7 @@ const OfferDetailsData = ({
       className="rounded-md border-none bg-white w-full h-fit"
       id={translate("contracts.card_content.heading")}
     >
-      <h2 className="text-[#fff] text-lg font-medium bg-[#4A13E7] py-5 px-6 rounded-t-lg">
+      <h2 className="text-[#fff] text-xl font-medium bg-[#4A13E7] py-5 px-6 rounded-t-lg">
         {translate("contracts.card_content.heading")}
       </h2>
 

@@ -28,7 +28,7 @@ export const AddressDetailCard = ({
   return (
     <div className="p-6 bg-white rounded-md">
       <div className="flex items-center justify-between pb-6 border-b border-b-[#000] border-opacity-10">
-        <span className="text-xl text-[#1E1E1E] font-normal">
+        <span className="text-xl text-[#1E1E1E] font-medium">
           {translate("setting.general_setting.address")}
         </span>
         <Button

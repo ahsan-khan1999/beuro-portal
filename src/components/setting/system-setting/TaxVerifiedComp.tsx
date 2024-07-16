@@ -62,7 +62,7 @@ const TaxVerifiedComp = memo(
       <SettingLayout>
         <div className="pl-[31px] pt-[23px] pb-5 pr-[22px] bg-white">
           <div className="flex justify-between items-center">
-            <p className="text-lg font-normal text-[#393939] mb-4">
+            <p className="font-semibold text-base text-[#393939] mb-4">
               {translate("setting.system_setting.tax")}
             </p>
             {systemSettings["taxType"] === 1 && (

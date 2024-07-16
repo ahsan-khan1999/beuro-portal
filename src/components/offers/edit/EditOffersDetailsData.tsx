@@ -47,7 +47,7 @@ const EditOffersDetailsData = ({
   );
   const router = useRouter();
   const { t: translate } = useTranslation();
-  const { offerDetails, loading } = useAppSelector((state) => state.offer);
+  const { offerDetails } = useAppSelector((state) => state.offer);
 
   const tabSection: tabArrayTypes[] = [
     {

@@ -22,7 +22,7 @@ const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
       } w-full h-fit`}
     >
       <div className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("services.add_service_heading")}
         </h2>
 

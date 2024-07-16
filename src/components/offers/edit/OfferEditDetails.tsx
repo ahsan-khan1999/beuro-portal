@@ -27,7 +27,7 @@ const OfferEditDetails = ({
   return (
     <FormCard containerClassName="pb-[100px]">
       <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("offers.offer_details.heading")} (
           {offerDetails?.id && offerDetails?.offerNumber})
         </h2>

@@ -93,7 +93,7 @@ const ServiceDetailsData = ({
         className="flex justify-between bg-[#C50EE0] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.service")}
       >
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("offers.service_details.main_heading")}
         </h2>
         <button

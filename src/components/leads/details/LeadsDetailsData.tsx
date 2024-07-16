@@ -169,21 +169,6 @@ const LeadsDetailsData = ({
     },
   ];
 
-  // const scrollHandler = (index: number) => {
-  //   if (index === 0) {
-  //     window.scrollTo({ behavior: "smooth", top: 0 });
-  //   }
-  //   if (index === 1) {
-  //     window.scrollTo({ behavior: "smooth", top: 500 });
-  //   }
-  //   if (index === 2) {
-  //     window.scrollTo({ behavior: "smooth", top: 650 });
-  //   }
-  //   if (index === 3) {
-  //     window.scrollTo({ behavior: "smooth", top: 950 });
-  //   }
-  // };
-
   const handleScrollToTop = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     const offset = 320;
