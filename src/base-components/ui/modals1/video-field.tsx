@@ -30,6 +30,7 @@ export const VideoField = ({
   const formdata = new FormData();
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
+  const videoTypes = ["video/mp4", "video/avi", "video/mov", "video/wmv"];
 
   // const handleFileInput = async (
   //   e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
@@ -74,7 +75,6 @@ export const VideoField = ({
     let file: any = [];
 
     const checkFileType = (file: File) => {
-      const videoTypes = ["video/mp4", "video/avi", "video/mov", "video/wmv"];
       return videoTypes.includes(file.type);
     };
 
@@ -110,7 +110,7 @@ export const VideoField = ({
         });
         setAttachements && setAttachements(newAttachement);
       }
-      setErrorMessage(""); // Clear error message if files are successfully uploaded
+      setErrorMessage("");
     }
   };
 

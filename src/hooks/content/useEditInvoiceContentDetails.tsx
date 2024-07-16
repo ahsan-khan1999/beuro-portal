@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EditInvoiceContentDetailsFormField } from "@/components/content/edit/fields/edit-invoice-details-fields";
 import { generateEditInvoiceContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
@@ -43,11 +43,9 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const invoiceDescription =
-    watch("invoiceContent.description") ||
-    contentDetails?.invoiceContent?.description;
+  const invoiceDescription = watch("invoiceContent.description");
 
-  useMemo(() => {
+  useEffect(() => {
     if (contentDetails.id) {
       reset({
         invoiceContent: {

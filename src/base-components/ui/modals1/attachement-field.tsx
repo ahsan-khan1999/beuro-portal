@@ -30,16 +30,17 @@ export const AttachementField = ({
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
 
-  const validateAndUploadFiles = async (files: FileList) => {
-    const formdata = new FormData();
-    const documentTypes = [
-      "application/pdf",
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "text/plain",
-    ];
-    let validFiles = [];
+  let validFiles = [];
+  const documentTypes = [
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "text/plain",
+    "application/vnd.ms-excel",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  ];
 
+  const validateAndUploadFiles = async (files: FileList) => {
     for (let item of files) {
       if (documentTypes.includes(item.type)) {
         formdata.append("files", item);
@@ -60,7 +61,7 @@ export const AttachementField = ({
           });
         });
         setAttachements && setAttachements(newAttachement);
-        setErrorMessage(""); // Clear error message if files are successfully uploaded
+        setErrorMessage("");
       }
     }
   };
@@ -83,36 +84,44 @@ export const AttachementField = ({
     }
   };
 
-  // const handleFileInput = async (
-  //   e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
-  // ) => {
+  // const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
   //   e.preventDefault();
 
-  //   let file: any = [];
+  //   let files: FileList | null = null;
 
   //   if (e instanceof DragEvent && e.dataTransfer) {
-  //     for (let item of e.dataTransfer.files) {
-  //       formdata.append("files", item);
-  //     }
-  //     file.push(e.dataTransfer.files);
+  //     files = e.dataTransfer.files;
   //   } else if (e.target instanceof HTMLInputElement && e.target.files) {
-  //     for (let item of e.target.files) {
-  //       formdata.append("files", item);
-  //     }
-  //     file.push(e.target.files);
+  //     files = e.target.files;
   //   }
 
-  //   const response = await dispatch(uploadMultiFileToFirebase(formdata));
-  //   let newAttachement = (attachements && [...attachements]) || [];
-  //   if (response?.payload) {
-  //     response?.payload?.forEach((element: any) => {
-  //       newAttachement.push({
-  //         name: getFileNameFromUrl(element),
-  //         value: element,
-  //       });
-  //     });
-  //     setAttachements && setAttachements(newAttachement);
+  //   if (files) {
+  //     await validateAndUploadFiles(files);
   //   }
+
+  //   // for (let item of e.dataTransfer.files) {
+  //   //   if (documentTypes.includes(item.type)) {
+  //   //     formdata.append("files", item);
+  //   //     validFiles.push(item);
+  //   //   } else {
+  //   //     setErrorMessage(translate("common.doc_upload_error_message"));
+  //   //   }
+  //   // }
+
+  //   // if (validFiles.length > 0) {
+  //   //   const response = await dispatch(uploadMultiFileToFirebase(formdata));
+  //   //   let newAttachement = (attachements && [...attachements]) || [];
+  //   //   if (response?.payload) {
+  //   //     response?.payload?.forEach((element: any) => {
+  //   //       newAttachement.push({
+  //   //         name: getFileNameFromUrl(element),
+  //   //         value: element,
+  //   //       });
+  //   //     });
+  //   //     setAttachements && setAttachements(newAttachement);
+  //   //     setErrorMessage("");
+  //   //   }
+  //   // }
   // };
 
   const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
@@ -218,7 +227,7 @@ export const AttachementField = ({
                   <Image
                     src={deletePdfIcon}
                     alt="deletePdfIcon"
-                    className={`absolute -right-1 -top-1 cursor-pointer `}
+                    className={`absolute -right-1 -top-1 cursor-pointer`}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDeleteFile(index);
