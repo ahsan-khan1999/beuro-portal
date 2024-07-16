@@ -42,7 +42,7 @@ const InoviceContentDetails = ({
               </clipPath>
             </defs>
           </svg> */}
-        <h2 className="text-white text-lg font-medium">
+        <h2 className="text-white text-xl font-medium">
           {translate("content.details.invoice_heading")}
         </h2>
         {/* </div> */}

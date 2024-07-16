@@ -35,7 +35,7 @@ const OfferContentEditDetails = ({
     <div className="flex gap-x-5">
       <div className="rounded-md border border-primary bg-white w-full h-fit">
         <div className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg">
-          <h2 className="text-white text-lg font-medium">
+          <h2 className="text-white text-xl font-medium">
             {translate("content.details.offer_heading")}
           </h2>
           <button

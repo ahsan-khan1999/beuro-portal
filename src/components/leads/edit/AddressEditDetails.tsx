@@ -16,7 +16,7 @@ const AddressEditDetails = ({
   return (
     <FormCard>
       <div className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("leads.address_details.main_heading")}
         </h2>
         <button

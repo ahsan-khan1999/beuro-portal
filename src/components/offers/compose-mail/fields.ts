@@ -39,7 +39,7 @@ export const OfferEmailFormField: GenerateOfferFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#EBEBEB] focus:!border-primary ",
+              className: "!p-4 !border-[#EBEBEB] focus:!border-primary",
               inputType: "email",
               id: "email",
               name: "email",

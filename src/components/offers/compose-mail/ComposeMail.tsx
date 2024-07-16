@@ -16,7 +16,7 @@ const ComposeMail = ({
 
   return (
     <ContractFormCard>
-      <h2 className="text-[#fff] text-lg font-medium bg-[#4A13E7] py-5 px-6 rounded-t-lg">
+      <h2 className="text-[#fff] text-xl font-medium bg-[#4A13E7] py-5 px-6 rounded-t-lg">
         {translate("common.offer_mail_preview")}
       </h2>
       <div className="py-3 px-6">

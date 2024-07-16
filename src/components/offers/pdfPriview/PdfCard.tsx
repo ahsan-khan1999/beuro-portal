@@ -24,8 +24,6 @@ const EmailCard = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
- 
-
   const handleBackToDetail = () => {
     const { status, page, text, sort, date, leadSource } = router.query;
 

@@ -40,7 +40,7 @@ const PieChart = ({ data }) => {
 
   return (
     <div className="rounded-[20px] bg-white h-[397.089px]">
-      <h3 className="pt-5 pb-3 ml-[40px] font-medium text-[#18181B]">
+      <h3 className="pt-5 pb-3 ml-[40px] text-base font-semibold text-[#18181B]">
         {translate("dashboard_detail.lead_source")}
       </h3>
 

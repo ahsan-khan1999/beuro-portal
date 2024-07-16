@@ -11,7 +11,6 @@ import { useTranslation } from "next-i18next";
 export default function ContactSupport() {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
-
   const { t: translate } = useTranslation();
 
   const onClose = () => {
@@ -48,7 +47,7 @@ export default function ContactSupport() {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h1 className="text-xl text-[#222B45] ">
+        <h1 className="text-2xl font-medium text-[#222B45]">
           {translate("contact_support.heading")}
         </h1>
       </div>

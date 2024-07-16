@@ -68,7 +68,7 @@ const FollowUpSetting = () => {
 
       <section className="grid grid-cols-3 mt-3 gap-x-2 gap-y-2 xl:gap-y-0">
         <div className="rounded-md bg-white px-5 pt-4 col-span-3 xl:col-span-1">
-          <span className="text-[#4B4B4B] text-base font-medium">
+          <span className="text-[#4B4B4B] text-base font-semibold">
             {translate("setting.follow_up_setting.add_follow_up.heading")}
           </span>
           <Form

@@ -14,7 +14,7 @@ const MailDetailsCard = () => {
   const router = useRouter();
   return (
     <ContractCardLayout>
-      <div className="flex justify-between items-center  ">
+      <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Image
             src={backIcon}

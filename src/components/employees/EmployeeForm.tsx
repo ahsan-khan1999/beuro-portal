@@ -25,7 +25,7 @@ const EmployeeForm = ({
       } w-full h-fit`}
     >
       <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-3 bg-primary py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("employees.details.main_heading")}
         </h2>
         {isUpdate ? (

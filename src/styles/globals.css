@@ -82,6 +82,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   max-width: 100% !important;
   z-index: 1;
 }
+
 /* ===================== */
 
 /* Thin scrollbar track */

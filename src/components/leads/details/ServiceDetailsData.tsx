@@ -22,7 +22,7 @@ const ServiceDetailsData = ({
         className="flex justify-between items-center bg-[#C50EE0] py-5 px-6 rounded-t-lg"
         id={translate("leads.tabs_headings.service")}
       >
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("leads.service_details.heading")}
         </h2>
         <button

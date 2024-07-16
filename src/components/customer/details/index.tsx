@@ -23,8 +23,6 @@ const CustomerDetails = () => {
     isLoading,
   } = useCustomerDetail({ detail: true, idAddNewCustomer: false });
 
-  console.log({ loading });
-
   return (
     <Layout>
       <DetailsCard>

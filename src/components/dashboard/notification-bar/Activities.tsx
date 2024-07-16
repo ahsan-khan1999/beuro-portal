@@ -23,7 +23,7 @@ const ActivitiesNotificationBar = ({
   const { t: translate } = useTranslation();
   return (
     <div className="bg-white rounded-[20px] h-[397.089px]">
-      <h1 className="pb-3 ml-[40px] pt-5 text-[#18181B] font-medium">
+      <h1 className="pb-3 ml-[40px] pt-5 text-[#18181B] text-base font-semibold">
         {translate("dashboard_detail.activity")}
       </h1>
 
