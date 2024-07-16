@@ -30,6 +30,10 @@ export const useOfferContentEditDetails = (onClick: Function) => {
       []
   );
 
+  const handleBack = () => {
+    onClick(0, ComponentsType.offerContent);
+  };
+
   const schema = generateOfferEditContentDetailsValidation(translate);
 
   const {
@@ -46,10 +50,6 @@ export const useOfferContentEditDetails = (onClick: Function) => {
   });
 
   const offerDescriptionCount = watch("offerContent.description");
-
-  const handleBack = () => {
-    onClick(0, ComponentsType.offerContent);
-  };
 
   useEffect(() => {
     if (contentDetails?.id) {
