@@ -258,6 +258,12 @@
         "close": "Close",
         "expire": "Expire"
       },
+      "appointments": {
+        "appointment": "Appointments",
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
       "offers": {
         "offers": "Offers",
         "open": "Open",
@@ -1094,6 +1100,20 @@
       "sub_heading": "Thanks for creating offer we are happy to have you.",
       "add_button": "Add Images",
       "without_images": "Continue without Images"
+    }
+  },
+  "appointments": {
+    "view_reports_btn": "View Reports",
+    "reschedule_btn": "Reschedule",
+    "table_headings": {
+      "id": "ID",
+      "lead_id": "Lead ID",
+      "customer": "Customer",
+      "date": "Date",
+      "time": "Time",
+      "agent": "Agent",
+      "status": "Status",
+      "action": "Action"
     }
   },
   "common": {

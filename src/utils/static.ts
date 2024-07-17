@@ -968,6 +968,7 @@ export const sideBar: SideBar[] = [
     // query: "1",
     // queryName: "page",
   },
+
   {
     icon: "Customers",
     title: "sidebar.admin.customers",
@@ -1014,6 +1015,39 @@ export const sideBar: SideBar[] = [
       },
     ],
   },
+
+  {
+    icon: "Appointments",
+    title: "sidebar.customer.appointments.appointment",
+    pathname: "/appointments",
+    role: [1, 2],
+    query: "None",
+    queryName: "status",
+    inner: [
+      {
+        title: "sidebar.customer.appointments.pending",
+        pathname: "/appointments",
+        query: "0",
+        role: [1, 2],
+        queryName: "status",
+      },
+      {
+        title: "sidebar.customer.appointments.completed",
+        pathname: "/appointments",
+        query: "3",
+        queryName: "status",
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.appointments.cancelled",
+        pathname: "/appointments",
+        query: "1",
+        queryName: "status",
+        role: [1, 2],
+      },
+    ],
+  },
+
   {
     icon: "Offers",
     title: "sidebar.customer.offers.offers",

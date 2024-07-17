@@ -258,6 +258,12 @@
         "close": "Geschlossen",
         "expire": "Abgelaufen"
       },
+      "appointments": {
+        "appointment": "Ernennungen",
+        "pending": "Entwurf",
+        "completed": "Vollendet",
+        "cancelled": "Abgebrochen"
+      },
       "offers": {
         "offers": "Angebote",
         "open": "Offen",
@@ -1086,6 +1092,20 @@
       "sub_heading": "Vielen Dank, dass Sie ein Angebot erstellt haben, wir freuen uns, Sie zu haben.",
       "add_button": "Bilder hinzufügen",
       "without_images": "Ohne Bilder fortfahren"
+    }
+  },
+  "appointments": {
+    "view_reports_btn": "Berichte anzeigen",
+    "reschedule_btn": "Umplanen",
+    "table_headings": {
+      "id": "ID",
+      "lead_id": "Lead ID",
+      "customer": "Kunde",
+      "date": "Datum",
+      "time": "Zeit",
+      "agent": "Agent",
+      "status": "Status",
+      "action": "Aktion"
     }
   },
   "common": {

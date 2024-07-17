@@ -22,11 +22,13 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import { AppointmentsIcon } from "@/assets/svgs/components/sideBar/Appointments";
 
 export const svgs = {
   Dashboard: <DashboardIcon />,
   Customers: <CustomersIcon />,
   Leads: <LeadsIcon />,
+  Appointments: <AppointmentsIcon />,
   Offers: <OffersIcon />,
   Contracts: <ContractsIcon />,
   Invoices: <InvoicesIcon />,
