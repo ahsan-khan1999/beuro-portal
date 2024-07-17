@@ -17,31 +17,29 @@ export const AddGeneralAddress = ({
     useAddGeneralAddress({ onClose });
 
   return (
-    <>
-      <BaseModal
-        onClose={onClose}
-        containerClassName="max-w-[400px] lg:max-w-[474.447px] min-h-fit"
-      >
-        <div className="relative flex flex-col px-6 py-5">
-          <Image
-            src={crossIcon}
-            alt="crossIcon"
-            className="absolute right-5 top-5 cursor-pointer"
-            onClick={onClose}
-          />
-          <p className="font-medium text-2xl border-b border-b-[#000] border-opacity-10 pb-5">
-            {heading}
-          </p>
+    <BaseModal
+      onClose={onClose}
+      containerClassName="max-w-[400px] lg:max-w-[474.447px] min-h-fit"
+    >
+      <div className="relative flex flex-col px-6 py-5">
+        <Image
+          src={crossIcon}
+          alt="crossIcon"
+          className="absolute right-5 top-5 cursor-pointer"
+          onClick={onClose}
+        />
+        <p className="font-medium text-2xl border-b border-b-[#000] border-opacity-10 pb-5">
+          {heading}
+        </p>
 
-          <Form
-            formFields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-            className={`${defaultClassName}`}
-          />
-        </div>
-      </BaseModal>
-    </>
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
+    </BaseModal>
   );
 };

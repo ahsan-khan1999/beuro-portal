@@ -30,7 +30,7 @@ const AddFollowUp = ({
             onClick={onClose}
           />
 
-          <p className="text-2xl font-medium text-[#000] mb-5 border-b border-b-[#000] border-opacity-10 pb-5">
+          <p className="text-2xl font-medium mb-5 border-b border-b-[#000] border-opacity-10 pb-5">
             {translate("follow_up.add_follow_up.heading")}
           </p>
 

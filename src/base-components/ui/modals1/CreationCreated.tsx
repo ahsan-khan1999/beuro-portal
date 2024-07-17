@@ -17,34 +17,32 @@ const CreationCreated = ({
 }) => {
   const { t: translate } = useTranslation();
   return (
-    <>
-      <BaseModal
-        onClose={onClose}
-        containerClassName="max-w-[360px] md:max-w-[480px] lg:max-w-[624.862px] min-h-fit"
-      >
-        <div className="relative flex flex-col items-center px-6 md:px-0">
-          <Image
-            src={createdIcon}
-            alt="delete_icon"
-            className="mt-[47px] w-[70px] h-[70px] md:w-fit md:h-fit"
-          />
-          <p className="font-medium mt-5 text-base md:text-2xl md:mt-10 text-center">
-            {heading}
-          </p>
+    <BaseModal
+      onClose={onClose}
+      containerClassName="max-w-[360px] md:max-w-[480px] lg:max-w-[624.862px] min-h-fit"
+    >
+      <div className="relative flex flex-col items-center px-6 md:px-0">
+        <Image
+          src={createdIcon}
+          alt="delete_icon"
+          className="mt-[47px] w-[70px] h-[70px] md:w-fit md:h-fit"
+        />
+        <p className="font-medium mt-5 text-base md:text-2xl md:mt-10 text-center">
+          {heading}
+        </p>
 
-          <span className="text-[#1E1E1E] font-normal text-sm mt-[6px] px-5 md:px-[60px] text-center">
-            {subHeading}
-          </span>
+        <span className="text-[#1E1E1E] font-normal text-sm mt-[6px] px-5 md:px-[60px] text-center">
+          {subHeading}
+        </span>
 
-          <button
-            onClick={route}
-            className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-6 lg:mb-[68px] w-full md:w-[384px] rounded-lg p-4 text-white text-base font-medium hover:bg-buttonHover"
-          >
-            {translate("common.done_button")}
-          </button>
-        </div>
-      </BaseModal>
-    </>
+        <button
+          onClick={route}
+          className="bg-[#4A13E7] cursor-pointer mt-[32px] mb-6 lg:mb-[68px] w-full md:w-[384px] rounded-lg p-4 text-white text-base font-medium hover:bg-buttonHover"
+        >
+          {translate("common.done_button")}
+        </button>
+      </div>
+    </BaseModal>
   );
 };
 
