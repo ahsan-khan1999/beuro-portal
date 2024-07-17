@@ -7,7 +7,6 @@ import { AllLeadsProps } from "@/types/follow-up";
 
 const AllLeads = ({ onClose, handleLeadDetail }: AllLeadsProps) => {
   return (
-    <>
       <BaseModal
         onClose={onClose}
         containerClassName="w-full max-w-[1209.603px] min-h-[752.521px] max-h-[752.521px] overflow-scroll"
@@ -22,7 +21,6 @@ const AllLeads = ({ onClose, handleLeadDetail }: AllLeadsProps) => {
           <AllLeadsTable handleLeadDetail={handleLeadDetail} />
         </div>
       </BaseModal>
-    </>
   );
 };
 

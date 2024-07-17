@@ -32,9 +32,7 @@ export const GeneralNote = ({
             onClick={onClose}
           />
           <div className="flex justify-between items-center mb-[19px] border-b border-b-[#000] border-opacity-10 pb-5">
-            <p className="text-2xl font-medium text-[#000] ml-[38px]">
-              {heading}
-            </p>
+            <p className="text-2xl font-medium ml-[38px]">{heading}</p>
           </div>
 
           <div className="xl:mx-[42px] mx-4">

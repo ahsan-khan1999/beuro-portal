@@ -59,7 +59,7 @@ const ExistingNotes = ({
           onClick={onClose}
         />
         <div className="flex justify-between items-center mb-[19px] ml-[38px] mr-[56px]">
-          <p className="text-2xl font-medium text-[#000]">
+          <p className="text-2xl font-medium">
             {translate("common.notes_modal.heading")}
           </p>
 

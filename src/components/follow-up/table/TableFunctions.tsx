@@ -15,7 +15,7 @@ const TableFunctions = ({
 }: FollowUpProps) => {
   return (
     <div className="flex items-center mb-5 space-x-10">
-      <h1 className="text-xl text-[#222B45] font-normal">
+      <h1 className="text-xl font-medium text-[#222B45]">
         {translate("follow_up.all_follow_ups.heading")}
       </h1>
 

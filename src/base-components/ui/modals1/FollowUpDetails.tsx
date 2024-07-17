@@ -102,7 +102,7 @@ const FollowUpDetails = ({
 
         {/* <div className="flex flex-col"> */}
         <section className="flex justify-between items-center mb-5 border-b border-b-[#000] border-opacity-10 pb-5">
-          <h2 className="font-medium text-2xl text-black">
+          <h2 className="font-medium text-2xl">
             {translate("follow_up.main_heading")}
           </h2>
           <div className="flex items-center gap-x-[14px] mr-5">

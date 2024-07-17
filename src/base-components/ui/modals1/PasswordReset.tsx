@@ -17,33 +17,31 @@ const PasswordReset = ({
     useEmployeePasswordReset(passwordResetSuccessfully);
 
   return (
-    <>
-      <BaseModal
-        onClose={onClose}
-        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit"
-      >
-        <div className="relative flex flex-col">
-          <Image
-            src={crossIcon}
-            onClick={onClose}
-            alt="cross_icon"
-            className="absolute right-5 top-5 cursor-pointer"
+    <BaseModal
+      onClose={onClose}
+      containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit"
+    >
+      <div className="relative flex flex-col">
+        <Image
+          src={crossIcon}
+          onClick={onClose}
+          alt="cross_icon"
+          className="absolute right-5 top-5 cursor-pointer"
+        />
+        <p className="ont-medium text-base md:text-2xl py-5 px-6">
+          {translate("employees.edit_password_modal.heading")}
+        </p>
+        <div className="pb-3 px-6">
+          <Form
+            formFields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+            className={`${defaultClassName}`}
           />
-          <p className="text-[#000] font-medium text-2xl py-5 px-6">
-            {translate("employees.edit_password_modal.heading")}
-          </p>
-          <div className="pb-3 px-6">
-            <Form
-              formFields={fields}
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              errors={errors}
-              className={`${defaultClassName}`}
-            />
-          </div>
         </div>
-      </BaseModal>
-    </>
+      </div>
+    </BaseModal>
   );
 };
 

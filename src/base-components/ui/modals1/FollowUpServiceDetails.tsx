@@ -48,47 +48,45 @@ const FollowUpServiceDetails = ({ onClose }: FollowUpServicesDetailsProps) => {
   ];
 
   return (
-    <>
-      <BaseModal
-        onClose={() => false}
-        containerClassName="max-w-[862.597px] min-h-auto max-h-fit"
-      >
-        <div className="relative pt-[26px] pb-[40px] pl-[31px] pr-[24px]">
-          <Image
-            src={crossIcon}
-            alt="cross_icon"
-            className="absolute right-5 top-5 cursor-pointer"
-            onClick={onClose}
-          />
+    <BaseModal
+      onClose={() => false}
+      containerClassName="max-w-[862.597px] min-h-auto max-h-fit"
+    >
+      <div className="relative pt-[26px] pb-[40px] pl-[31px] pr-[24px]">
+        <Image
+          src={crossIcon}
+          alt="cross_icon"
+          className="absolute right-5 top-5 cursor-pointer"
+          onClick={onClose}
+        />
 
-          <div className="flex flex-col">
-            <h2 className="font-medium text-[18px] text-[#393939] mb-[23px]">
-              {translate("follow_up.service_details.heading")}
-            </h2>
+        <div className="flex flex-col">
+          <h2 className="font-medium text-2xl text-[#393939] mb-[23px]">
+            {translate("follow_up.service_details.heading")}
+          </h2>
 
-            <hr className="opacity-10" />
+          <hr className="opacity-10" />
 
-            <section className="grid grid-cols-3 gap-x-3 mt-[33px]">
-              {detailsData.map((item, index) => (
-                <div className="flex flex-col gap-y-[10px] mb-5" key={index}>
-                  <p className="text-sm font-normal">{item.label}</p>
-                  <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
-                    {item.value}
-                  </span>
-                </div>
-              ))}
-            </section>
+          <section className="grid grid-cols-3 gap-x-3 mt-[33px]">
+            {detailsData.map((item, index) => (
+              <div className="flex flex-col gap-y-[10px] mb-5" key={index}>
+                <p className="text-sm font-normal">{item.label}</p>
+                <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+                  {item.value}
+                </span>
+              </div>
+            ))}
+          </section>
 
-            <section className="flex flex-col gap-y-[10px]">
-              <p className="text-sm font-normal ">
-                {translate("follow_up.additional_detail_heading")}
-              </p>
-              <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"></span>
-            </section>
-          </div>
+          <section className="flex flex-col gap-y-[10px]">
+            <p className="text-sm font-normal ">
+              {translate("follow_up.additional_detail_heading")}
+            </p>
+            <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base"></span>
+          </section>
         </div>
-      </BaseModal>
-    </>
+      </div>
+    </BaseModal>
   );
 };
 

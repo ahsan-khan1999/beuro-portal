@@ -11,34 +11,32 @@ const ChangePassword = ({ onClose }: { onClose: () => void }) => {
     useChangePassword(onClose);
 
   return (
-    <>
-      <BaseModal
-        onClose={onClose}
-        containerClassName="max-w-[474.447px] min-h-auto max-h-auto"
-      >
-        <div className="relative flex flex-col">
-          <Image
-            src={crossIcon}
-            alt="crossIcon"
-            className="absolute right-5 top-5 cursor-pointer"
-            onClick={onClose}
-          />
-          <p className="text-[#000] font-medium text-2xl px-6 py-5">
-            {translate("setting.account_setting.change_password")}
-          </p>
+    <BaseModal
+      onClose={onClose}
+      containerClassName="max-w-[474.447px] min-h-auto max-h-auto"
+    >
+      <div className="relative flex flex-col">
+        <Image
+          src={crossIcon}
+          alt="crossIcon"
+          className="absolute right-5 top-5 cursor-pointer"
+          onClick={onClose}
+        />
+        <p className="text-2xl font-medium px-6 py-5">
+          {translate("setting.account_setting.change_password")}
+        </p>
 
-          <div className="pb-3 px-6">
-            <Form
-              formFields={fields}
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              errors={errors}
-              className={`${defaultClassName}`}
-            />
-          </div>
+        <div className="pb-3 px-6">
+          <Form
+            formFields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+            className={`${defaultClassName}`}
+          />
         </div>
-      </BaseModal>
-    </>
+      </div>
+    </BaseModal>
   );
 };
 

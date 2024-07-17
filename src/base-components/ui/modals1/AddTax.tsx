@@ -16,30 +16,28 @@ const AddTax = ({
   const { fields, onSubmit, handleSubmit, errors, error } = useAddTax(onClose);
 
   return (
-    <>
-      <BaseModal
-        onClose={onClose}
-        containerClassName="max-w-[480px] lg:max-w-[474.447px] min-h-fit"
-      >
-        <div className="relative flex flex-col px-6 py-5">
-          <Image
-            src={crossIcon}
-            alt="crossIcon"
-            className="absolute right-5 top-5 cursor-pointer"
-            onClick={onClose}
-          />
-          <p className="text-[#000] font-medium text-2xl mb-5">{heading}</p>
+    <BaseModal
+      onClose={onClose}
+      containerClassName="max-w-[480px] lg:max-w-[474.447px] min-h-fit"
+    >
+      <div className="relative flex flex-col px-6 py-5">
+        <Image
+          src={crossIcon}
+          alt="crossIcon"
+          className="absolute right-5 top-5 cursor-pointer"
+          onClick={onClose}
+        />
+        <p className="text-2xl font-medium mb-5">{heading}</p>
 
-          <Form
-            formFields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-            className={`${defaultClassName}`}
-          />
-        </div>
-      </BaseModal>
-    </>
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
+    </BaseModal>
   );
 };
 

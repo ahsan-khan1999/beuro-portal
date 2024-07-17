@@ -128,79 +128,75 @@ export const ShareImages = ({
   };
 
   return (
-    <>
-      <BaseModal
-        onClose={onClose}
-        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[500px]"
-      >
-        <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
-          <Image
-            src={crossIcon}
-            alt="cross_icon"
-            className="absolute right-5 top-5 cursor-pointer"
-            onClick={onClose}
-          />
+    <BaseModal
+      onClose={onClose}
+      containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[500px]"
+    >
+      <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
+        <Image
+          src={crossIcon}
+          alt="cross_icon"
+          className="absolute right-5 top-5 cursor-pointer"
+          onClick={onClose}
+        />
 
-          <p className="text-2xl font-medium">
-            {translate("offers.share_images_modal.heading")}
-          </p>
+        <p className="font-medium text-base md:text-2xl">
+          {translate("offers.share_images_modal.heading")}
+        </p>
 
-          <div className="border-y border-y-[#000] border-opacity-10 py-[10px] my-5">
-            <div className="flex items-center gap-x-[34px]">
-              <div className="flex items-center gap-x-[14px]">
-                <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
-                <span className="text-sm font-medium text-primary">
-                  {refID}
-                </span>
-              </div>
-              <div className="flex items-center gap-x-[14px]">
-                <span className="text-sm font-normal text-[#4D4D4D]">
-                  {heading}:
-                </span>
-                <span className="text-sm font-medium text-primary">{name}</span>
-              </div>
+        <div className="border-y border-y-[#000] border-opacity-10 py-[10px] my-5">
+          <div className="flex items-center gap-x-[34px]">
+            <div className="flex items-center gap-x-[14px]">
+              <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+              <span className="text-sm font-medium text-primary">{refID}</span>
+            </div>
+            <div className="flex items-center gap-x-[14px]">
+              <span className="text-sm font-normal text-[#4D4D4D]">
+                {heading}:
+              </span>
+              <span className="text-sm font-medium text-primary">{name}</span>
             </div>
           </div>
-
-          <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
-            {attachementTabs.map((item, index) => (
-              <button
-                key={index}
-                className={`${
-                  activeTab === item ? "text-primary" : "text-[#393939]"
-                } text-base font-medium pb-[10px] ${
-                  activeTab === item ? "border-b-2 border-primary" : ""
-                }`}
-                onClick={() => handleTabChange(item)}
-              >
-                {translate(`common.images_modal.${item}`)}
-              </button>
-            ))}
-          </div>
-
-          <div className="my-5">
-            {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
-          </div>
-
-          <p className="text-lg font-medium mb-3">
-            {translate("common.share_on_whatsapp")}
-          </p>
-          <CopyField
-            value={`https://portal.buero-365.com/document-viewer?offerID=${offerId}`}
-          />
-
-          <div className="flex justify-end mt-5">
-            <BaseButton
-              buttonText={translate("common.share")}
-              containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
-              textClassName="text-white"
-              onClick={handleShare}
-              loading={loading || loadingGlobal}
-              disabled={loadingGlobal}
-            />
-          </div>
         </div>
-      </BaseModal>
-    </>
+
+        <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
+          {attachementTabs.map((item, index) => (
+            <button
+              key={index}
+              className={`${
+                activeTab === item ? "text-primary" : "text-[#393939]"
+              } text-base font-medium pb-[10px] ${
+                activeTab === item ? "border-b-2 border-primary" : ""
+              }`}
+              onClick={() => handleTabChange(item)}
+            >
+              {translate(`common.images_modal.${item}`)}
+            </button>
+          ))}
+        </div>
+
+        <div className="my-5">
+          {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
+        </div>
+
+        <p className="text-lg font-medium mb-3">
+          {translate("common.share_on_whatsapp")}
+        </p>
+        <CopyField
+          value={`https://portal.buero-365.com/document-viewer?offerID=${offerId}`}
+        />
+
+        <div className="flex justify-end mt-5">
+          <BaseButton
+            buttonText={translate("common.share")}
+            containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
+            textClassName="text-white"
+            onClick={handleShare}
+            loading={loading || loadingGlobal}
+            disabled={loadingGlobal}
+          />
+        </div>
+      </div>
+    </BaseModal>
   );
 };
