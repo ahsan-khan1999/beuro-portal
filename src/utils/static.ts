@@ -1,6 +1,7 @@
 import { Country, State } from "@/enums/auth";
 import { SideBar, countryType } from "@/types";
 import { PaymentsAdmin } from "@/types/admin/payments";
+import agentProfile from "@/assets/pngs/agent-profile.png";
 
 // Function for handling the date format
 function parseCustomDate(dateString: string) {
@@ -570,6 +571,11 @@ export const staticEnums: Record<string, any> = {
     InProcess: 3,
     Close: 1,
     Expired: 2,
+  },
+  AppointmentStatus: {
+    Pending: 0,
+    Completed: 1,
+    Cancelled: 2,
   },
   mailStatus: {
     opend: 0,
@@ -1509,3 +1515,45 @@ export const DEFAULT_CONTACT_SUPPORT = {
     id: "",
   },
 };
+
+export const DEFAULT_APPOINTMETNS = {
+  id: "V-2000",
+  lead_id: "V-2000",
+  customer: "Ronald Richards",
+  date: "25/08/2023",
+  time: "16:30 - 18:00",
+  agent: {
+    imgProfile: agentProfile,
+    name: "Jenny Wilson",
+  },
+  appointments_status: "",
+};
+
+export const hoursArr = [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22",
+  "23",
+  "24",
+];
+
+export const minsArr = ["00", "15", "30", "45"];

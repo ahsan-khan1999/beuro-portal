@@ -44,8 +44,8 @@ const Header = () => {
       moment(item.dateTime).isSame(today, "day")
     );
 
-    if (todayFollowUps.length > 0) {
-      setTodayCount(todayFollowUps.length);
+    if (todayFollowUps?.length > 0) {
+      setTodayCount(todayFollowUps?.length);
     }
   }, [followUp]);
 

@@ -66,7 +66,6 @@ const AddEmployeeDetails = () => {
     dispatch(updateModalType(ModalType.PASSWORD_SET));
   };
 
-  // funtion for handling the route
   const routeHandler = () => {
     router.push("/employees/details");
   };

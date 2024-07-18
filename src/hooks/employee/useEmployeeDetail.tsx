@@ -33,7 +33,6 @@ const useEmployeeDetail = (stage: boolean) => {
 
   const router = useRouter();
 
-  // Function for close the modal
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
@@ -46,7 +45,6 @@ const useEmployeeDetail = (stage: boolean) => {
     dispatch(updateModalType({ type: ModalType.NONE }));
     dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE_SUCCESSFULLY }));
   };
-  // METHOD FOR HANDLING THE MODALS
 
   const { loading } = useAppSelector((state) => state.employee);
   const [isUpdate, setIsUpdate] = useState<boolean>(stage);

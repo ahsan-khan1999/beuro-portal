@@ -1,0 +1,8 @@
+export enum ScheduleAppointments {
+  LEAD_ID = "LEAD_ID",
+  ENTER_DATE = "ENTER_DATE",
+  ENTER_TIME = "ENTER_TIME",
+  START_TIME = "START_TIME",
+  END_TIME = "END_TIME",
+  SELECT_AGENT = "SELECT_AGENT",
+}

@@ -1097,6 +1097,7 @@
   "appointments": {
     "view_reports_btn": "Berichte anzeigen",
     "reschedule_btn": "Umplanen",
+    "schedule_appointment": "Termin vereinbaren",
     "table_headings": {
       "id": "ID",
       "lead_id": "Lead ID",
@@ -1106,8 +1107,24 @@
       "agent": "Agent",
       "status": "Status",
       "action": "Aktion"
+    },
+    "appointment_status": {
+      "pending": "Entwurf",
+      "completed": "Vollendet",
+      "cancelled": "Abgebrochen"
+    },
+    "successs_modal": {
+      "heading": "Termin erfolgreich erstellt",
+      "sub_heading": "Vielen Dank für die Erstellung von Appointments, wir freuen uns, Sie zu haben."
     }
   },
+  "appointments_field_label": {
+    "lead_id": "Lead ID",
+    "enter_date": "Datum eingeben",
+    "enter_time": "Zeit eingeben",
+    "select_agent": "Agent auswählen"
+  },
+
   "common": {
     "modals": {
       "contract_updating_description": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie da sind.",
@@ -1180,6 +1197,7 @@
       "date": "Datum",
       "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "schedule_btn": "Termin vereinbaren",
     "details": "Einzelheiten",
     "follow_up_completed": "Bitte kontaktieren Sie den Kunden nach 10 Minuten.",
     "invoice_cards": {

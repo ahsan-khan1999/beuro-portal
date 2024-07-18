@@ -1,6 +1,6 @@
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
-import { SelectBoxProps } from "@/types";
-import { getLabelByValue } from "@/utils/auth.util";
+import { AgentSelectBoxProps } from "@/types";
+import { getAgentLabelByValue, getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
@@ -9,7 +9,7 @@ import searchIcon from "@/assets/svgs/search-icon.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 
-export const CustomerSelectBox = ({
+export const AgentSelectBox = ({
   id,
   options,
   value: defaultValue,
@@ -23,7 +23,7 @@ export const CustomerSelectBox = ({
   disabled,
   fieldIndex,
   onEnterPress,
-}: SelectBoxProps) => {
+}: AgentSelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,7 +59,7 @@ export const CustomerSelectBox = ({
     }
   };
 
-  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
 
@@ -75,9 +75,9 @@ export const CustomerSelectBox = ({
         }}
         className={`${classes}`}
       >
-        <span className="truncate">
-          {(field && getLabelByValue(field.value, option)) ||
-            getLabelByValue(defaultValue, option)}
+        <span className="truncate flex items-center gap-x-2">
+          {(field && getAgentLabelByValue(field.value, option)) ||
+            getAgentLabelByValue(defaultValue, option)}
         </span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
@@ -105,7 +105,6 @@ export const CustomerSelectBox = ({
                   width={24}
                   height={8}
                 />
-
                 <input
                   value={searchTerm}
                   onChange={(e) => handleChange(e.target.value)}
@@ -114,13 +113,34 @@ export const CustomerSelectBox = ({
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
-              {option?.map(({ value, label }) => (
+              {option?.map(({ value, label }, index) => (
                 <li
-                  key={value}
-                  onClick={() => selectedOptionHandler(value)}
-                  className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
+                  key={index}
+                  onClick={() => selectedOptionHandler(value.name)}
+                  className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion border-b border-b-lightGray pb-1"
                 >
-                  {label}
+                  <div className="flex items-center justify-between gap-x-3">
+                    <div className="flex items-center gap-x-3">
+                      <Image
+                        src={label.imgSrc}
+                        alt="profile"
+                        width={40}
+                        height={40}
+                      />
+                      <span className="text-[#191D23] text-base font-medium">
+                        {label.name}
+                      </span>
+                    </div>
+                    <span
+                      className={`${
+                        value.status === "Available"
+                          ? "text-[#45C769]"
+                          : "text-[#838383]"
+                      } text-base font-medium`}
+                    >
+                      {label.status}
+                    </span>
+                  </div>
                 </li>
               ))}
             </motion.ul>

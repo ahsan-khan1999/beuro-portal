@@ -275,7 +275,7 @@
         "contracts": "Contracts",
         "open": "Open",
         "confirmed": "Confirmed",
-        "cancelled": "Cacelled"
+        "cancelled": "Cancelled"
       },
       "invoices": {
         "invoices": "Invoices",
@@ -1105,6 +1105,7 @@
   "appointments": {
     "view_reports_btn": "View Reports",
     "reschedule_btn": "Reschedule",
+    "schedule_appointment": "Schedule Appointment",
     "table_headings": {
       "id": "ID",
       "lead_id": "Lead ID",
@@ -1114,6 +1115,21 @@
       "agent": "Agent",
       "status": "Status",
       "action": "Action"
+    },
+    "appointment_status": {
+      "pending": "Pending",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "successs_modal": {
+      "heading": "Appointment create successfully",
+      "sub_heading": "Thanks for creating Appointments we are happy to have you."
+    },
+    "appointments_field_label": {
+      "lead_id": "Lead ID",
+      "enter_date": "Enter Date",
+      "enter_time": "Enter Time",
+      "select_agent": "Select Agent"
     }
   },
   "common": {
@@ -1188,6 +1204,9 @@
       "date": "Date",
       "success_signed_offer": "Operation Successful"
     },
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "schedule_btn": "Schedule Appointment",
     "details": "Details",
     "follow_up_completed": "Please contact the customer after 10 minutes.",
     "invoice_cards": {

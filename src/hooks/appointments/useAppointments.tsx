@@ -24,6 +24,9 @@ import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { Appointments } from "@/types/appointments";
+import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
+import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 
 export const useAppointments = () => {
   const { lastPage, lead, loading, isLoading, totalCount, leadDetails } =
@@ -32,7 +35,7 @@ export const useAppointments = () => {
   const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-  const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
+  const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -134,51 +137,51 @@ export const useAppointments = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleNotes = (
-    id: string,
-    refID?: string,
-    name?: string,
-    heading?: string,
-    e?: React.MouseEvent<HTMLSpanElement>
-  ) => {
-    e?.stopPropagation();
+  // const handleNotes = (
+  //   id: string,
+  //   refID?: string,
+  //   name?: string,
+  //   heading?: string,
+  //   e?: React.MouseEvent<HTMLSpanElement>
+  // ) => {
+  //   e?.stopPropagation();
 
-    const filteredLead = lead?.filter((item_) => item_.id === id);
-    if (filteredLead?.length === 1) {
-      dispatch(setLeadDetails(filteredLead[0]));
-      dispatch(
-        readNotes({ params: { type: "lead", id: filteredLead[0]?.id } })
-      ).then((res: any) => {
-        if (res.payload.Note?.length > 0) {
-          setCurrentPageRows((prev) => {
-            const updatedLeads = prev.map((item) => {
-              if (item.id === filteredLead[0]?.id) {
-                const lead: Lead = {
-                  ...item,
-                  isNoteCreated: true,
-                };
-                return lead;
-              }
-              return item;
-            });
-            return updatedLeads;
-          });
-        }
-      });
-      dispatch(
-        updateModalType({
-          type: ModalType.EXISTING_NOTES,
-          data: {
-            refID: refID,
-            name: name,
-            heading: heading,
-          },
-        })
-      );
-    } else {
-      dispatch(updateModalType({ type: ModalType.CREATION }));
-    }
-  };
+  //   const filteredLead = lead?.filter((item_) => item_.id === id);
+  //   if (filteredLead?.length === 1) {
+  //     dispatch(setLeadDetails(filteredLead[0]));
+  //     dispatch(
+  //       readNotes({ params: { type: "lead", id: filteredLead[0]?.id } })
+  //     ).then((res: any) => {
+  //       if (res.payload.Note?.length > 0) {
+  //         setCurrentPageRows((prev) => {
+  //           const updatedLeads = prev.map((item) => {
+  //             if (item.id === filteredLead[0]?.id) {
+  //               const lead: Appointments = {
+  //                 ...item,
+  //                 isNoteCreated: true,
+  //               };
+  //               return lead;
+  //             }
+  //             return item;
+  //           });
+  //           return updatedLeads;
+  //         });
+  //       }
+  //     });
+  //     dispatch(
+  //       updateModalType({
+  //         type: ModalType.EXISTING_NOTES,
+  //         data: {
+  //           refID: refID,
+  //           name: name,
+  //           heading: heading,
+  //         },
+  //       })
+  //     );
+  //   } else {
+  //     dispatch(updateModalType({ type: ModalType.CREATION }));
+  //   }
+  // };
 
   const handleAddNote = (
     id: string,
@@ -287,6 +290,14 @@ export const useAppointments = () => {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handleScheduleAppointments = () => {
+    dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
+  };
+
+  const handleAppointmentsSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -297,24 +308,24 @@ export const useAppointments = () => {
         onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
-    [ModalType.EDIT_NOTE]: (
-      <UpdateNote
-        onClose={onClose}
-        handleNotes={handleNotes}
-        handleFilterChange={handleFilterChange}
-        filter={filter}
-        mainHeading={translate("common.update_note")}
-      />
-    ),
-    [ModalType.ADD_NOTE]: (
-      <AddNewNote
-        onClose={onClose}
-        handleNotes={handleNotes}
-        handleFilterChange={handleFilterChange}
-        filter={filter}
-        mainHeading={translate("common.add_note")}
-      />
-    ),
+    // [ModalType.EDIT_NOTE]: (
+    //   <UpdateNote
+    //     onClose={onClose}
+    //     handleNotes={handleNotes}
+    //     handleFilterChange={handleFilterChange}
+    //     filter={filter}
+    //     mainHeading={translate("common.update_note")}
+    //   />
+    // ),
+    // [ModalType.ADD_NOTE]: (
+    //   <AddNewNote
+    //     onClose={onClose}
+    //     handleNotes={handleNotes}
+    //     handleFilterChange={handleFilterChange}
+    //     filter={filter}
+    //     mainHeading={translate("common.add_note")}
+    //   />
+    // ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
       <ConfirmDeleteNote
         onClose={onClose}
@@ -335,6 +346,22 @@ export const useAppointments = () => {
         route={onClose}
       />
     ),
+    [ModalType.SCHEDULE_APPOINTMENTS]: (
+      <ScheduleAppointments
+        onClose={onClose}
+        heading={translate("appointments.schedule_appointment")}
+        onSuccess={handleAppointmentsSuccess}
+      />
+    ),
+    [ModalType.APPOINTMENT_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("appointments.successs_modal.heading")}
+        subHeading={translate("appointments.successs_modal.sub_heading")}
+        route={onClose}
+        imgSrc={reschudleIcon}
+      />
+    ),
   };
 
   const renderModal = () => {
@@ -345,37 +372,41 @@ export const useAppointments = () => {
     setCurrentPage(page);
   };
 
-  const handleLeadStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "lead") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
-      if (!currentItem || currentItem.leadStatus !== status) {
-        const res = await dispatch(
-          updateLeadStatus({
-            data: {
-              id: id,
-              leadStatus: staticEnums["LeadStatus"][status],
-            },
-          })
-        );
+  // const handleLeadStatusUpdate = async (
+  //   id: string,
+  //   status: string,
+  //   type: string
+  // ) => {
+  //   if (type === "lead") {
+  //     const currentItem = currentPageRows.find((item) => item.id === id);
+  //     if (!currentItem || currentItem.leadStatus !== status) {
+  //       const res = await dispatch(
+  //         updateLeadStatus({
+  //           data: {
+  //             id: id,
+  //             leadStatus: staticEnums["LeadStatus"][status],
+  //           },
+  //         })
+  //       );
 
-        if (res?.payload) {
-          let index = currentPageRows.findIndex(
-            (item) => item.id === res.payload?.id
-          );
+  //       if (res?.payload) {
+  //         let index = currentPageRows.findIndex(
+  //           (item) => item.id === res.payload?.id
+  //         );
 
-          if (index !== -1) {
-            let prevPageRows = [...currentPageRows];
-            prevPageRows.splice(index, 1, res.payload);
-            setCurrentPageRows(prevPageRows);
-            defaultUpdateModal();
-          }
-        }
-      }
-    }
+  //         if (index !== -1) {
+  //           let prevPageRows = [...currentPageRows];
+  //           prevPageRows.splice(index, 1, res.payload);
+  //           setCurrentPageRows(prevPageRows);
+  //           defaultUpdateModal();
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
+
+  const handleAppointmentStatusUpdate = () => {
+    console.log("handleAppointmentStatusUpdate");
   };
 
   return {
@@ -383,7 +414,7 @@ export const useAppointments = () => {
     totalItems,
     handlePageChange,
     itemsPerPage,
-    handleNotes,
+    // handleNotes,
     handleDeleteNote,
     handleImageUpload,
     renderModal,
@@ -393,7 +424,8 @@ export const useAppointments = () => {
     loading,
     isLoading,
     currentPage,
-    handleLeadStatusUpdate,
+    handleAppointmentStatusUpdate,
     totalCount,
+    handleScheduleAppointments,
   };
 };

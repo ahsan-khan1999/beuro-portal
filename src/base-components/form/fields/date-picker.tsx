@@ -19,7 +19,7 @@ export const DatePicker = ({
   disable,
 }: DatePickerProps) => {
   const [inputFocus, setInputFocus] = useState(false);
-  const defaultClasses = ` w-full rounded-lg max-h-12 ${
+  const defaultClasses = `w-full rounded-lg max-h-12 ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   } py-[10px] outline-none text-dark text-sm focus:border-primary`;
   const classes = combineClasses(defaultClasses, className);

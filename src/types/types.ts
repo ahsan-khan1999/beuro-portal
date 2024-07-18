@@ -341,6 +341,19 @@ export type GenerateEmployeeFormField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
+export type GenerateScheduleAppointmentsFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  properties: {
+    onClose: () => void;
+    isUpdate?: boolean;
+    onClick?: Function;
+    handleChangeTimeField?: (type: string, date: string) => void;
+  },
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
 // Notes formfield
 export type GenerateNotesFormField = (
   register: UseFormRegister<FieldValues>,
@@ -764,7 +777,6 @@ export type GenerateFollowUpFormField = (
     customer: Customers[];
     lead: Lead[];
     followUps: FollowUp | null;
-    onCustomerSelect?: (id: string) => void;
   },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>

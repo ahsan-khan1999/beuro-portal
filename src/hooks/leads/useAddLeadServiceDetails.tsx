@@ -24,10 +24,10 @@ export const useAddLeadServiceDetails = ({
   const dispatch = useAppDispatch();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { systemSettings } = useAppSelector((state) => state.settings);
-
   const { content } = useAppSelector((state) => state.content);
 
   const schema = generateLeadsServiceEditDetailsValidation(translate);
+
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);

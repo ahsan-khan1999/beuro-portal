@@ -6,7 +6,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  { customer, lead, followUps, onCustomerSelect },
+  { customer, lead, followUps },
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
