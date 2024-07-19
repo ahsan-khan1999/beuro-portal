@@ -14,16 +14,22 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
 import moment from "moment";
+import { OutlineButton } from "@/base-components/ui/button/outline-button";
+import appointmentIcon from "@/assets/pngs/appoinment-icon.png";
+import { Button } from "@/base-components/ui/button/button";
 
+export interface LeadDetailCardProps {
+  leadDeleteHandler: Function;
+  leadDetails: Lead;
+  onStatusUpdate: (id: string) => void;
+  onCreateAppointment: () => void;
+}
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
   leadDetails,
   onStatusUpdate,
-}: {
-  leadDeleteHandler: Function;
-  leadDetails: Lead;
-  onStatusUpdate: (id: string) => void;
-}) => {
+  onCreateAppointment,
+}: LeadDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
@@ -45,8 +51,36 @@ const LeadsDetailsCardData = ({
     updateQuery(router, router.locale as string);
   };
 
+  const offerCreateHandler = () => {
+    localStoreUtil.remove_data("offer");
+    dispatch(
+      setOfferDetails({
+        id: "convert",
+        type: "Existing Customer",
+        leadID: {
+          ...leadDetails,
+          customerID: leadDetails?.customerID,
+        },
+        serviceDetail: {
+          serviceDetail: leadDetails?.otherServices,
+        },
+        addressID: { address: leadDetails?.addressID?.address },
+        content: leadDetails?.requiredService,
+        date: [
+          {
+            startDate: moment(leadDetails.desireDate).format("YYYY-MM-DD"),
+            endDate: "",
+          },
+        ],
+      })
+    );
+    dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }));
+
+    router.push("/offers/add");
+  };
+
   return (
-    <div className="bg-white rounded-md w-full">
+    <div>
       <div className="flex gap-y-3 justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
           <svg
@@ -77,62 +111,59 @@ const LeadsDetailsCardData = ({
           </p>
         </div>
 
-        <div className="flex items-center justify-end gap-[22px]">
-          {leadDetails.leadStatus !== "Close" && (
-            <button
-              className="group w-fit border-[1px] border-[#4A13E7] rounded-lg flex items-center px-4 py-[6px] cursor-pointer"
-              onClick={() => {
-                localStoreUtil.remove_data("offer");
-                dispatch(
-                  setOfferDetails({
-                    id: "convert",
-                    type: "Existing Customer",
-                    leadID: {
-                      ...leadDetails,
-                      customerID: leadDetails?.customerID,
-                    },
-                    serviceDetail: {
-                      serviceDetail: leadDetails?.otherServices,
-                    },
-                    addressID: { address: leadDetails?.addressID?.address },
-                    content: leadDetails?.requiredService,
-                    date: [
-                      {
-                        startDate: moment(leadDetails.desireDate).format(
-                          "YYYY-MM-DD"
-                        ),
-                        endDate: "",
-                      },
-                    ],
-                  })
-                );
-                dispatch(
-                  setCustomerDetails({ ...leadDetails?.customerDetail })
-                );
+        <div className="flex items-center gap-x-4">
+          <OutlineButton
+            inputType="button"
+            onClick={onCreateAppointment}
+            className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+            text={translate("appointments.reschedule_btn")}
+            id="reschedule"
+            iconAlt="reschedule"
+            icon={appointmentIcon}
+          />
 
-                router.push("/offers/add");
-              }}
+          {/* <Button
+            inputType="button"
+            onClick={() => {}}
+            className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
+            text={translate("appointments.view_appointments_btn")}
+            id="reschedule"
+            iconAlt="reschedule"
+          /> */}
+          {leadDetails.leadStatus !== "Close" && (
+            <OutlineButton
+              inputType="button"
+              onClick={offerCreateHandler}
+              className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+              text={translate("leads.card_content.create_button")}
+              id="create offer"
+              iconAlt="create offer"
+              icon={createOfferIcon}
+            />
+          )}
+          {/* {leadDetails.leadStatus !== "Close" && (
+            <button
+              className="group w-[180px] border-[1px] border-[#4A13E7] rounded-lg flex items-center px-4 py-[6px] cursor-pointer"
+              onClick={offerCreateHandler}
             >
               <Image src={createOfferIcon} alt="create_offer_icon" />
               <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px] group-hover:text-primary">
                 {translate("leads.card_content.create_button")}
               </p>
             </button>
-          )}
-          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
-            <Image
-              src={deleteIcon}
-              alt="deleteIcon"
-              className="cursor-pointer"
+          )} */}
+          <div>
+            <span
               onClick={() => leadDeleteHandler()}
-              width={16}
-              height={20}
-            />
-          </span>
+              className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer"
+            >
+              <Image src={deleteIcon} alt="deleteIcon" width={16} height={20} />
+            </span>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-5">
         <div className="flex items-center gap-x-3">
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.lead_id")}:
@@ -169,7 +200,14 @@ const LeadsDetailsCardData = ({
             )}]`}
           />
         </div>
-
+        <div className="flex items-center gap-x-3">
+          <span className="font-normal text-[#4D4D4D] text-base">
+            {translate("appointments.appointment")}:
+          </span>
+          <div className="bg-[#FB9600] px-[10px] py-1 rounded-lg">
+            <span className="text-sm font-medium text-white">Not Created</span>
+          </div>
+        </div>
         <div className="flex items-center gap-x-3">
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.created_date")}:

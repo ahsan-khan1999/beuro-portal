@@ -16,7 +16,7 @@ export const OutlineButton = ({
   disabled,
   id,
 }: ButtonProps) => {
-  const defaultClasses = `!h-10 min-w-fit px-3 py-2 !h-[33px] bg-primary border border-lightGray text-dark text-sm font-semibold hover:bg-buttonHover rounded-lg`;
+  const defaultClasses = `!h-10 min-w-fit px-3 py-2 !h-[33px] bg-primary border border-lightGray text-dark hover:text-white text-sm font-semibold hover:bg-buttonHover rounded-lg`;
   const classes = combineClasses(defaultClasses, className);
 
   return loading ? (
@@ -37,7 +37,7 @@ export const OutlineButton = ({
     <button
       id={id}
       type={inputType}
-      className={`hover:bg-buttonHover hover:text-white ${
+      className={`hover:bg-buttonHover ${
         success && "flex items-center gap-x-2"
       } flex items-center justify-center ${classes}`}
       onClick={() => {

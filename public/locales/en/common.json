@@ -981,6 +981,8 @@
     "main_heading": "Leads",
     "add_button": "Add New",
     "side_images_heading": "Images",
+    "created": "Created",
+    "not_created": "Not Created",
     "table_functions": {
       "open": "Open",
       "inProcess": "InProcess",
@@ -991,7 +993,8 @@
       "Open": "Open",
       "InProcess": "InProcess",
       "Close": "Close",
-      "Expired": "Expired"
+      "Expired": "Expired",
+      "Appointment": "Appointment"
     },
     "table_headings": {
       "id": "ID",
@@ -1002,6 +1005,7 @@
       "creation_date": "Creation Date",
       "location": "Location",
       "status": "Status",
+      "appointment": "Appointment",
       "images": "Images",
       "note": "Notes",
       "edit": "Edit"
@@ -1105,6 +1109,8 @@
   "appointments": {
     "view_reports_btn": "View Reports",
     "reschedule_btn": "Reschedule",
+    "appointment": "Appointment",
+    "view_appointments_btn": "View Appointments",
     "schedule_appointment": "Schedule Appointment",
     "detail_heading": "Appointment Details",
     "table_headings": {

@@ -23,6 +23,7 @@ export interface LeadTableProps {
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   onStatusChange: (id: string, status: string, type: string) => void;
+  onAppointment: () => void;
 }
 
 const TableRows = ({
@@ -30,6 +31,7 @@ const TableRows = ({
   handleAddNote,
   handleImageUpload,
   onStatusChange,
+  onAppointment,
 }: LeadTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -39,6 +41,7 @@ const TableRows = ({
     `${translate("leads.lead_dropdown_status.InProcess")}`,
     `${translate("leads.lead_dropdown_status.Close")}`,
     `${translate("leads.lead_dropdown_status.Expired")}`,
+    `${translate("leads.lead_dropdown_status.Appointment")}`,
   ];
 
   const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
@@ -76,7 +79,7 @@ const TableRows = ({
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(150px,150px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(190px,_190px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(50px,_3fr)_minmax(150px,_150px)_minmax(190px,_190px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(150px,_150px)_minmax(190px,_190px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(150px,_150px)_minmax(190px,_190px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(190px,_190px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(190px,_190px)] border-t border-t-[#E7EAEE]`}
+                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(200px,200px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(180px,_180px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(170px,_170px)_minmax(120px,_120px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(100px,_4fr)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(120px,_120px)] maxLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <div className="flex items-center gap-x-1">
@@ -95,13 +98,13 @@ const TableRows = ({
                 <span className="py-4 truncate block mlg:hidden maxSize:block">
                   {item?.customerDetail?.email}
                 </span>
-                <span className="py-4 truncate mlg:hidden xLarge:block">
+                <span className="py-4 truncate mlg:hidden maxLarge:block">
                   {item?.customerDetail?.phoneNumber}
                 </span>
-                <span className="py-4 flex items-center">
+                <span className="py-4 flex items-center mlg:hidden xlg:flex">
                   {formatDate(item.createdAt)}
                 </span>
-                <span className="py-4 truncate mlg:hidden xMaxSize:block">
+                <span className="py-4 truncate mlg:hidden xLarge:block">
                   {item?.customerDetail?.address?.country}
                 </span>
                 <span
@@ -124,6 +127,8 @@ const TableRows = ({
                         ? "bg-[#f5d60f]"
                         : item?.leadStatus === "Close"
                         ? "bg-[#45C769]"
+                        : item?.leadStatus === "Appointment"
+                        ? "bg-[#FB9600]"
                         : "bg-[#FF0000]"
                     } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
                     dropDownTextClassName={`${
@@ -155,6 +160,15 @@ const TableRows = ({
                     isLead={true}
                   />
                 </span>
+                <div className={`py-4`}>
+                  <div
+                    className={`px-[10px] py-1 w-full rounded-lg text-white text-sm font-medium text-center ${
+                      "Created" ? "bg-primary" : "bg-[#FB9600]"
+                    }`}
+                  >
+                    {translate("leads.created")}
+                  </div>
+                </div>
               </div>
             </div>
 

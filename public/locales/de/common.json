@@ -974,6 +974,8 @@
     "main_heading": "Anfragen",
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
+    "created": "Erstellt",
+    "not_created": "Nicht Erstellt",
     "table_functions": {
       "open": "Offen",
       "inProcess": "In Bearbeitung",
@@ -984,7 +986,8 @@
       "Open": "Offen",
       "InProcess": "In Bearbeitung",
       "Close": "Geschlossen",
-      "Expired": "Abgelaufen"
+      "Expired": "Abgelaufen",
+      "Appointment": "Termin"
     },
     "table_headings": {
       "id": "ID",
@@ -995,6 +998,7 @@
       "creation_date": "Erstelldatum",
       "location": "Standort",
       "status": "Status",
+      "appointment": "Termin",
       "images": "Bilder",
       "note": "Notizen",
       "edit": "Bearbeiten"
@@ -1097,8 +1101,10 @@
   "appointments": {
     "view_reports_btn": "Berichte anzeigen",
     "reschedule_btn": "Umplanen",
+    "view_appointments_btn": "Termine ansehen",
     "schedule_appointment": "Termin vereinbaren",
     "detail_heading": "Termin Details",
+    "appointment": "Termin",
     "table_headings": {
       "id": "ID",
       "lead_id": "Lead ID",

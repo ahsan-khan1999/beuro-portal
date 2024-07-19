@@ -1,8 +1,8 @@
 import { Layout } from "@/layout";
 import React from "react";
-import LeadsDetailsCardData from "../LeadsDetailsCardData";
 import LeadsDetailsData from "./LeadsDetailsData";
 import useLeadDetail from "@/hooks/leads/useLeadDetail";
+import LeadsDetailsCardData from "./LeadsDetailsCardData";
 
 const LeadsDetails = () => {
   const {
@@ -15,6 +15,7 @@ const LeadsDetails = () => {
     defaultUpdateModal,
     handleUploadImages,
     shareImgModal,
+    handleScheduleAppointments,
   } = useLeadDetail();
 
   return (
@@ -24,6 +25,7 @@ const LeadsDetails = () => {
           leadDeleteHandler={leadDeleteHandler}
           leadDetails={leadDetails}
           onStatusUpdate={handleStatusUpdate}
+          onCreateAppointment={handleScheduleAppointments}
         />
       </div>
       <div className="xlg:mt-[330px] w-full xlg:block mb-10">
