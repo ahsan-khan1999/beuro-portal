@@ -964,8 +964,12 @@ export const sideBar: SideBar[] = [
     title: "sidebar.admin.dashboard",
     pathname: "/admin/dashboard",
     role: [0],
-    // query: "1",
-    // queryName: "page",
+  },
+  {
+    icon: "Dashboard",
+    title: "sidebar.agent.dashboard",
+    pathname: "/agent/dashboard",
+    role: [3],
   },
   {
     icon: "Customers",

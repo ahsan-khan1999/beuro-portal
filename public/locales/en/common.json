@@ -299,6 +299,24 @@
       "payments": "Payments",
       "support_requests": "Support",
       "Settings": "Settings"
+    },
+    "agent": {
+      "dashboard": "Dashboard",
+      "leads": {
+        "leads": "Leads",
+        "open": "Open",
+        "InProcess": "InProcess",
+        "close": "Close",
+        "expire": "Expire"
+      },
+      "appointments": {
+        "appointment": "Appointments",
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "settings": "Settings",
+      "contact_supports": "Contact Supports"
     }
   },
   "customers": {
@@ -1110,6 +1128,7 @@
     "view_reports_btn": "View Reports",
     "reschedule_btn": "Reschedule",
     "appointment": "Appointment",
+    "sub_report": "Submit Report",
     "view_appointments_btn": "View Appointments",
     "schedule_appointment": "Schedule Appointment",
     "detail_heading": "Appointment Details",
@@ -1117,6 +1136,7 @@
       "id": "ID",
       "lead_id": "Lead ID",
       "customer": "Customer",
+      "company_name": "Company Name",
       "date": "Date",
       "time": "Time",
       "agent": "Agent",

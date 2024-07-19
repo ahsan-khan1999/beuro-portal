@@ -299,6 +299,23 @@
       "payments": "Zahlungen",
       "support_requests": "Support",
       "Settings": "Einstellungen"
+    },
+    "agent": {
+      "dashboard": "Dashboard",
+      "leads": {
+        "leads": "Anfragen",
+        "open": "Offen",
+        "InProcess": "In Bearbeitung",
+        "close": "Geschlossen",
+        "expire": "Abgelaufen"
+      },
+      "appointments": {
+        "pending": "Entwurf",
+        "completed": "Vollendet",
+        "cancelled": "Abgebrochen"
+      },
+      "settings": "Einstellungen",
+      "contact_supports": "Support"
     }
   },
 
@@ -1101,6 +1118,7 @@
   "appointments": {
     "view_reports_btn": "Berichte anzeigen",
     "reschedule_btn": "Umplanen",
+    "sub_report": "Bericht einreichen",
     "view_appointments_btn": "Termine ansehen",
     "schedule_appointment": "Termin vereinbaren",
     "detail_heading": "Termin Details",
@@ -1109,6 +1127,7 @@
       "id": "ID",
       "lead_id": "Lead ID",
       "customer": "Kunde",
+      "company_name": "Firmenname",
       "date": "Datum",
       "time": "Zeit",
       "agent": "Agent",
