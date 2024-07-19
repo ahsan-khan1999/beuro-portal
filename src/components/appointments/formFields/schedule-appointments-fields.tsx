@@ -92,7 +92,7 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                       register,
                       handleChange: (date: any) =>
                         handleChangeTimeField &&
-                        handleChangeTimeField("endtTime", date),
+                        handleChangeTimeField("END_TIME", date),
                     },
                   },
                 ],

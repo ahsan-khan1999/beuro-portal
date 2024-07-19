@@ -1106,6 +1106,7 @@
     "view_reports_btn": "View Reports",
     "reschedule_btn": "Reschedule",
     "schedule_appointment": "Schedule Appointment",
+    "detail_heading": "Appointment Details",
     "table_headings": {
       "id": "ID",
       "lead_id": "Lead ID",
@@ -1130,6 +1131,14 @@
       "enter_date": "Enter Date",
       "enter_time": "Enter Time",
       "select_agent": "Select Agent"
+    },
+    "detail_data": {
+      "assign_agent": "Assign Agent",
+      "lead_id": "Lead ID",
+      "status": "Status",
+      "date": "Date",
+      "time": "Time",
+      "no_data_found": "No reports submitted"
     }
   },
   "common": {

@@ -9,6 +9,8 @@ export interface EmptyDataStateProps {
   containerClassName?: string;
   imgClassName?: string;
   textClassName?: string;
+  heading?: string;
+  subHeading?: string;
 }
 
 export default function NoDataEmptyState({
@@ -16,6 +18,8 @@ export default function NoDataEmptyState({
   containerClassName,
   imgClassName,
   textClassName,
+  heading,
+  subHeading,
 }: EmptyDataStateProps) {
   const { t: translate } = useTranslation();
 
@@ -40,9 +44,11 @@ export default function NoDataEmptyState({
       <div className={defaultClasses}>
         <div className="flex flex-col gap-y-4 items-center">
           <Image src={emptyDataIcon} alt="empty state" className={imgClasses} />
-          <h1 className={textClasses}>{translate("empty_state.heading")}</h1>
+          <h1 className={textClasses}>
+            {heading || translate("empty_state.heading")}
+          </h1>
           <p className="text-[#909090] text-sm font-normal text-center">
-            {translate("empty_state.description")}
+            {subHeading || translate("empty_state.description")}
           </p>
         </div>
       </div>

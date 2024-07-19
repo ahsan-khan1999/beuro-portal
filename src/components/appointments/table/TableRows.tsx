@@ -72,11 +72,16 @@ const TableRows = ({
                 //     query: { ...router.query, lead: item?.id },
                 //   });
                 // }}
-                onClick={() => {}}
+                onClick={() => {
+                  router.push({
+                    pathname: "/appointments/details",
+                    query: { ...router.query },
+                  });
+                }}
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(250px,_3fr)_minmax(140px,_140px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_100%)_minmax(140px,_140px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(100px,_100%)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_100px)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(60px,_4fr)_minmax(140px,_140px)] maxLarge:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(100px,_100%)_minmax(140px,_140px)] xMaxLarge:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(100px,_100%)_minmax(140px,_140px)] xMaxProLarge:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(100px,_100%)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]`}
+                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(250px,_3fr)_minmax(140px,_140px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_100%)_minmax(140px,_140px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(100px,_100%)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_100px)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(60px,_4fr)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item.id}</span>
                 <div className="flex items-center gap-x-1">

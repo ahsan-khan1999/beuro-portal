@@ -35,6 +35,7 @@ export const useScheduleAppointment = ({
   const handleChangeTimeField = (type: string, date: string) => {
     // if (type === "START_TIME") {
     setValue(type, date);
+
     // }
   };
 

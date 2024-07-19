@@ -1098,6 +1098,7 @@
     "view_reports_btn": "Berichte anzeigen",
     "reschedule_btn": "Umplanen",
     "schedule_appointment": "Termin vereinbaren",
+    "detail_heading": "Termin Details",
     "table_headings": {
       "id": "ID",
       "lead_id": "Lead ID",
@@ -1116,13 +1117,21 @@
     "successs_modal": {
       "heading": "Termin erfolgreich erstellt",
       "sub_heading": "Vielen Dank für die Erstellung von Appointments, wir freuen uns, Sie zu haben."
+    },
+    "appointments_field_label": {
+      "lead_id": "Lead ID",
+      "enter_date": "Datum eingeben",
+      "enter_time": "Zeit eingeben",
+      "select_agent": "Agent auswählen"
+    },
+    "detail_data": {
+      "assign_agent": "Agent zuweisen",
+      "lead_id": "Lead ID",
+      "status": "Status",
+      "date": "Datum",
+      "time": "Zeit",
+      "no_data_found": "Keine Berichte eingereicht"
     }
-  },
-  "appointments_field_label": {
-    "lead_id": "Lead ID",
-    "enter_date": "Datum eingeben",
-    "enter_time": "Zeit eingeben",
-    "select_agent": "Agent auswählen"
   },
 
   "common": {
