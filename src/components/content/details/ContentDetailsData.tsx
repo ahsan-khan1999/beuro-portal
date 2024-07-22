@@ -38,9 +38,7 @@ const ContentDetailsData = () => {
     setData({ index, component });
     setRenderComponent((prev) => {
       const updatedData = [...prev];
-      // if (data) {
       updatedData[index] = lookup[component];
-      // }
       return updatedData;
     });
   };
@@ -193,16 +191,6 @@ const ContentDetailsData = () => {
   useEffect(() => {
     setRenderComponent(componentArray);
   }, [contentDetails]);
-
-  // useEffect(() => {
-  //   setRenderComponent((prev) => {
-  //     const updatedData = [...prev];
-  //     if (data) {
-  //       updatedData[data.index] = lookup[data.component];
-  //     }
-  //     return updatedData;
-  //   });
-  // }, [data]);
 
   return (
     <>

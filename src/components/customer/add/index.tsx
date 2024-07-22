@@ -32,7 +32,7 @@ const AddCustomer = () => {
 
   return (
     <Layout>
-      <h1 className="text-[#222B45] text-xl mb-5">
+      <h1 className="text-[#222B45] text-2xl font-semibold mb-5">
         {translate("customers.details.add_customer_heading")}
       </h1>
 

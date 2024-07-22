@@ -225,7 +225,7 @@ const Setting = () => {
 
   return (
     <div className="mb-5">
-      <h1 className="text-[#222B45] font-normal text-xl">
+      <h1 className="text-[#222B45] font-normal text-2xl">
         {translate("setting.heading")}
       </h1>
       <div className="mt-[22px]">

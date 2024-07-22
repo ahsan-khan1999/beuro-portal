@@ -14,6 +14,7 @@ export interface ProfileUploadFieldProps {
   iconClasses?: string;
   disabled?: boolean;
   isMailSetting?: boolean;
+  isMailField?: boolean;
 }
 
 export const ProfileUpload = ({
@@ -23,6 +24,7 @@ export const ProfileUpload = ({
   iconClasses,
   disabled,
   isMailSetting,
+  isMailField,
 }: ProfileUploadFieldProps) => {
   const dispatch = useAppDispatch();
   const formdata = new FormData();
@@ -33,17 +35,15 @@ export const ProfileUpload = ({
     const file = e.target.files && e.target.files[0];
 
     if (file) {
-      if (isMailSetting && file.name.endsWith(".svg")) {
-        setErrorMessage(translate("common.svg_upload_not_allowed"));
-        return;
-      }
-
-      if (file.type === "image/webp") {
+      if (
+        isMailField &&
+        (file.name.endsWith(".svg") || file.type === "image/webp")
+      ) {
         setErrorMessage(translate("common.img_upload_error_message"));
         return;
       }
 
-      setErrorMessage(""); // Clear error message if the file type is valid
+      setErrorMessage("");
       formdata.append("file", file);
       const res = await dispatch(uploadFileToFirebase(formdata));
       field.onChange(res?.payload);
@@ -97,7 +97,6 @@ export const ProfileUpload = ({
             </div>
           ) : (
             <div className={`${classes} cursor-pointer`}>
-              {/* <Image src={profile} alt="profile" /> */}
               <label className={`absolute ${iconClasses}`}>
                 <input
                   type="file"

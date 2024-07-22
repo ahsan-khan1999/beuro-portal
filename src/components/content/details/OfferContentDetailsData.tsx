@@ -20,7 +20,7 @@ const OfferContentDetailsData = ({
       id={translate("content.tabs_headings.offer_content")}
     >
       <div className="flex justify-between items-center bg-[#4A13E7] rounded-t-lg pt-[17px] pb-[22px] pl-[29px] pr-6">
-        <h2 className="text-white text-lg font-medium">
+        <h2 className="text-white text-xl font-medium">
           {translate("content.details.offer_heading")}
         </h2>
 

@@ -10,19 +10,19 @@ export default function DashboardFilters({
   handleFilterChange,
   setFilter,
 }: FiltersComponentProps) {
-  const [isOpen, setIsOpen] = useState({
-    [DashboardFiltersToggle.month]: false,
-    [DashboardFiltersToggle.week]: false,
-  });
+  // const [isOpen, setIsOpen] = useState({
+  //   [DashboardFiltersToggle.month]: false,
+  //   [DashboardFiltersToggle.week]: false,
+  // });
 
   const { t: translate } = useTranslation();
 
-  const handleSelectToggle = (type: DashboardFiltersToggle) => {
-    setIsOpen((prev) => ({
-      ...prev,
-      [type]: !isOpen[type],
-    }));
-  };
+  // const handleSelectToggle = (type: DashboardFiltersToggle) => {
+  //   setIsOpen((prev) => ({
+  //     ...prev,
+  //     [type]: !isOpen[type],
+  //   }));
+  // };
 
   const monthObj = {
     January: "1",

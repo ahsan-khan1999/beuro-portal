@@ -12,7 +12,7 @@ const TableFunctions = ({
 
   return (
     <div className="flex flex-col mlg:flex-row justify-between mlg:items-center gap-y-3 mb-4">
-      <h1 className="text-xl text-[#222B45] ">
+      <h1 className="text-2xl font-medium text-[#222B45]">
         {translate("employees.main_heading")}
       </h1>
 

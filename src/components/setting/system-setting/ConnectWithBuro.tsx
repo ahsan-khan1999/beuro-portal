@@ -14,11 +14,9 @@ const ConnectWithBuro = ({
   systemSetting: SystemSettingDataProps;
   setSystemSetting: SetStateAction<any>;
 }) => {
-  const tagData: string[] = ["loremipsum", "loremipsum", "loremipsum"];
   const password = useRef("dummy");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // const password = "#MaT33n";
   const { t: translate } = useTranslation();
   const handleDelete = (index: number) => {
     let domain = [...(systemSetting?.allowedDomains || [])];
@@ -43,7 +41,7 @@ const ConnectWithBuro = ({
   return (
     <SettingLayout>
       <div className="pl-[31px] pt-6 pb-5 pr-5 bg-white">
-        <p className="text-[#393939] text-lg font-normal mt-3 ">
+        <p className="text-[#393939] font-semibold text-base mt-3 ">
           {translate("setting.system_setting.connect_with_buro")}
         </p>
 

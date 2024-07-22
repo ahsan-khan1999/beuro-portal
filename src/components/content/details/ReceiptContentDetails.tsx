@@ -53,7 +53,7 @@ const ReceiptContentDetails = ({
               </clipPath>
             </defs>
           </svg> */}
-        <h2 className="text-white text-lg font-medium">
+        <h2 className="text-white text-xl font-medium">
           {translate("content.tabs_headings.receipt_content")}
         </h2>
         {/* </div> */}

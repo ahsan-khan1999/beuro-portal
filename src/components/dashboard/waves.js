@@ -1,4 +1,3 @@
-// components/WavesChart.js
 import { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 import { useTranslation } from "next-i18next";
@@ -37,14 +36,17 @@ const WavesChart = ({ datatest }) => {
       wavesChart.destroy();
     };
   }, [datatest]);
+
   const filterButtons = ["12 Months", "6 Months", "30 Days", "7 Days"];
 
   return (
     <div className="bg-white p-6 w-full rounded-[20px] ">
       <div className="flex items-center justify-between mb-10">
-        <h3 className="font-medium text-[#18181B]">{translate("dashboard_detail.sales_heading")}</h3>
+        <h3 className="font-medium text-[#18181B]">
+          {translate("dashboard_detail.sales_heading")}
+        </h3>
         <div>
-          {filterButtons.map((item, index) => {
+          {filterButtons?.map((item, index) => {
             return (
               <button
                 onClick={() => setFilterButton(item)}
@@ -64,4 +66,3 @@ const WavesChart = ({ datatest }) => {
 };
 
 export default WavesChart;
-``;

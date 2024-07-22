@@ -28,7 +28,7 @@ const AddReceiptContentDetails = ({
     <div className="flex gap-x-5">
       <FormCard>
         <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">
-          <h2 className="text-[#fff] text-lg font-medium">
+          <h2 className="text-[#fff] text-xl font-medium">
             {translate("content.tabs_headings.receipt_content")}
           </h2>
         </div>

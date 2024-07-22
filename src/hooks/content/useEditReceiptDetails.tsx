@@ -6,14 +6,15 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EditReceiptContentDetailsFormField } from "@/components/content/edit/fields/edit-receipt-details-fields";
 import { generateEditReceiptContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
 
 export const useEditReceiptDetails = (onClick: Function) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
   );
@@ -22,7 +23,6 @@ export const useEditReceiptDetails = (onClick: Function) => {
       transformAttachments(contentDetails?.receiptContent?.attachments)) ||
       []
   );
-  const dispatch = useAppDispatch();
 
   const handleBack = () => {
     onClick(3, ComponentsType.receiptContent);
@@ -44,7 +44,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
 
   const receiptDescription = watch("receiptContent.description");
 
-  useMemo(() => {
+  useEffect(() => {
     if (contentDetails.id) {
       reset({
         receiptContent: {

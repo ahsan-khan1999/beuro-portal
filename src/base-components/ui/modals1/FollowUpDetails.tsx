@@ -102,7 +102,7 @@ const FollowUpDetails = ({
 
         {/* <div className="flex flex-col"> */}
         <section className="flex justify-between items-center mb-5 border-b border-b-[#000] border-opacity-10 pb-5">
-          <h2 className="font-medium text-2xl text-black">
+          <h2 className="font-medium text-2xl">
             {translate("follow_up.main_heading")}
           </h2>
           <div className="flex items-center gap-x-[14px] mr-5">
@@ -163,7 +163,7 @@ const FollowUpDetails = ({
               </span>
             )}
 
-            {followUpDetails.isCompleted && (
+            {followUpDetails?.isCompleted && (
               <span className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-default ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -220,7 +220,7 @@ const FollowUpDetails = ({
             </div>
           ) : null}
 
-          <section className="grid grid-cols-2 mt-[30px] mb-[18px] ">
+          <section className="grid grid-cols-2 mt-[30px] mb-[18px]">
             <div className="flex flex-col border-r border-[#000] border-opacity-10 pr-5">
               <article className="flex gap-x-[50px] items-center">
                 <h2 className="text-lg font-semibold text-[#393939]">
@@ -233,13 +233,13 @@ const FollowUpDetails = ({
               </article>
 
               <div className="grid grid-cols-2 gap-x-3 mt-[22px]">
-                {detailsData.map((item, index) => (
+                {detailsData?.map((item, index) => (
                   <div className="flex flex-col gap-y-[10px] mb-5" key={index}>
                     <p className="text-sm font-normal text-[#4D4D4D]">
-                      {item.label}
+                      {item?.label}
                     </p>
                     <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
-                      {item.value}
+                      {item?.value}
                     </span>
                   </div>
                 ))}
@@ -275,13 +275,13 @@ const FollowUpDetails = ({
               </article>
 
               <div className="grid grid-cols-4 gap-x-[25px] mt-[23px]">
-                {leadsDetails.map((item, index) => (
+                {leadsDetails?.map((item, index) => (
                   <div className="flex flex-col gap-y-[10px]" key={index}>
                     <p className="text-sm font-normal text-[#4D4D4D]">
-                      {item.label}
+                      {item?.label}
                     </p>
                     <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
-                      {item.value}
+                      {item?.value}
                     </span>
                   </div>
                 ))}
@@ -293,13 +293,13 @@ const FollowUpDetails = ({
               </h2>
 
               <div className="grid grid-cols-[minmax(200px,_100%)_minmax(100px,_100%)_minmax(200px,_100%)_minmax(400px,_100%)] gap-x-[25px] mt-3">
-                {addressDetails.map((item, index) => (
+                {addressDetails?.map((item, index) => (
                   <div className="flex flex-col gap-y-[10px]" key={index}>
                     <p className="text-sm font-normal text-[#4D4D4D]">
-                      {item.label}
+                      {item?.label}
                     </p>
                     <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] truncate">
-                      {item.value}
+                      {item?.value}
                     </span>
                   </div>
                 ))}

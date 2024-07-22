@@ -22,7 +22,7 @@ const CustomerForm = ({
       } w-full h-fit`}
     >
       <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("customers.details.heading")}
         </h2>
         {isUpdate ? (

@@ -35,7 +35,7 @@ const EditInoviceContentDetails = ({
     <div className="flex gap-x-5">
       <div className="rounded-lg border border-primary bg-white w-full h-fit">
         <div className="flex justify-between items-center bg-[#C50EE0] rounded-t-lg py-5 px-6">
-          <h2 className="text-white text-lg font-medium">
+          <h2 className="text-white text-xl font-medium">
             {translate("content.details.invoice_heading")}
           </h2>
           <button

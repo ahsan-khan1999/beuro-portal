@@ -20,7 +20,6 @@ const LeadCreated = ({
   subHeading,
 }: LeadCreatedProps) => {
   return (
-    <>
       <BaseModal
         onClose={onClose}
         containerClassName="max-w-[360px] md:max-w-[480px] lg:max-w-[624.862px] min-h-fit"
@@ -62,7 +61,6 @@ const LeadCreated = ({
           </div>
         </div>
       </BaseModal>
-    </>
   );
 };
 

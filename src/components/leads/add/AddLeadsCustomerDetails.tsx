@@ -27,7 +27,7 @@ const AddLeadsCustomerDetails = ({
         className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg"
         id="Customer Details"
       >
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("leads.customer_details.heading")}
         </h2>
         <button

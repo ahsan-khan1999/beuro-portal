@@ -26,7 +26,7 @@ const AddPostPonedNote = ({
           onClick={onClose}
         />
 
-        <p className="text-2xl font-normal mb-4">
+        <p className="text-2xl font-medium mb-4">
           {translate("follow_up.add_postponed_note_heading")}
         </p>
 

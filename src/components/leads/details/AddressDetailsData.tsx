@@ -18,7 +18,7 @@ const AddressDetailsData = ({
         className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg"
         id={translate("leads.tabs_headings.address")}
       >
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("leads.address_details.main_heading")}
         </h2>
         <button

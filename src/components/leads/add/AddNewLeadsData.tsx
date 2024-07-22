@@ -158,7 +158,7 @@ const AddNewLeadsData = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    
+
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
@@ -218,7 +218,7 @@ const AddNewLeadsData = () => {
   return (
     <div className="h-full">
       <div className="xLarge:fixed mb-5 xLarge:-mt-12">
-        <p className="mb-5 font-normal text-xl text-[#222B45]">
+        <p className="mb-5 text-2xl text-[#222B45] font-normal">
           {translate("leads.add_new_lead")}
         </p>
         <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap  gap-[14px]">
