@@ -25,7 +25,7 @@ export const ContactAndAddressReport = ({
   );
 
   return (
-    <div className="p-[21px] bg-white rounded-lg">
+    <div className="p-[21px] bg-white rounded-lg h-fit mb-5">
       <h1 className="text-[#1E1E1E] text-base font-semibold mb-2">
         {translate("agent.contact_detail_heading")}
       </h1>
