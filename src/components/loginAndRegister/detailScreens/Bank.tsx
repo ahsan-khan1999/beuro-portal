@@ -1,7 +1,5 @@
 import React from "react";
-
 import { Form } from "@/base-components/form/form";
-
 import { FormComponentProps } from "@/types";
 import { detailBankFormField } from "../login/login-fields";
 import { useAppSelector } from "@/hooks/useRedux";

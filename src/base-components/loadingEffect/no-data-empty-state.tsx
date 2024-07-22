@@ -14,6 +14,7 @@ export interface EmptyDataStateProps {
   subHeading?: string;
   isButton?: boolean;
   onButtonClick?: () => void;
+  buttonHeading?: string;
 }
 
 export default function NoDataEmptyState({
@@ -25,6 +26,7 @@ export default function NoDataEmptyState({
   subHeading,
   isButton,
   onButtonClick,
+  buttonHeading,
 }: EmptyDataStateProps) {
   const { t: translate } = useTranslation();
 
@@ -59,8 +61,8 @@ export default function NoDataEmptyState({
             <Button
               inputType="button"
               onClick={onButtonClick}
-              className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
-              text={translate("appointments.sub_report")}
+              className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+              text={buttonHeading}
               id="submit reports"
               iconAlt="submit reports"
             />

@@ -806,6 +806,14 @@ export type GeneratePaymentSettingFormField = (
   onClick?: Function
 ) => FormField[];
 
+// appointment form
+export type GenerateAgentReportFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
+
 export interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;

@@ -6,8 +6,10 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useRouter } from "next/router";
 
 export const useAppointmentsDetails = () => {
+  const router = useRouter()
   const { t: translate } = useTranslation();
   const handleStatusChange = (id: number, status: string, type: string) => {
     console.log("status change");
@@ -60,6 +62,7 @@ export const useAppointmentsDetails = () => {
   };
 
   return {
+    router,
     translate,
     renderModal,
     handleStatusChange,

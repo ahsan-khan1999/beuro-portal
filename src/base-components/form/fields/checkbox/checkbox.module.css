@@ -16,8 +16,6 @@
   border: 1px solid #c4c4c4;
   border-radius: 100%; /* Square with border radius */
   cursor: pointer;
-
-  /* font-size: 14px !important; */
 }
 
 .hiddenCheckbox:checked + .checkboxLabel {
@@ -32,7 +30,6 @@
   width: 5px;
   height: 8px;
   border: solid white;
- 
 
   border-width: 0 2px 2px 0;
   top: 45%;

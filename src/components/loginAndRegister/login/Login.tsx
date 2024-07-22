@@ -2,13 +2,12 @@ import React from "react";
 import logo from "@/assets/svgs/logo.svg";
 import { useLoginForm } from "@/hooks/auth/useLogin";
 import Image from "next/image";
-
 import EntryLinks from "../EntryLinks";
 import { Form } from "@/base-components/form/form";
 import Error from "@/base-components/ui/error";
 
 const Login = () => {
-  const defaultClassName = "mt-[30px]  ";
+  const defaultClassName = "mt-[30px]";
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
     useLoginForm();
 
@@ -32,7 +31,6 @@ const Login = () => {
             errors={errors}
             className={`${defaultClassName}`}
           />
-          {/* <ClassicCKEditor /> */}
         </div>
       </div>
       <EntryLinks />

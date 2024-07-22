@@ -55,7 +55,7 @@ export const SelectBox = ({
   const handleChange = (value: string) => {
     search.current = value;
     setOption(
-      options.filter((item) =>
+      option?.filter((item) =>
         item.label?.toLowerCase()?.includes(value?.toLowerCase())
       )
     );
@@ -65,6 +65,7 @@ export const SelectBox = ({
   }`;
   const classes = combineClasses(defaultClasses, className);
   const { t: translate } = useTranslation();
+
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
@@ -76,7 +77,7 @@ export const SelectBox = ({
         className={`${classes}`}
       >
         <span className="truncate">
-          {(field && getLabelByValue(field.value, option)) ||
+          {(field && getLabelByValue(field?.value, option)) ||
             getLabelByValue(defaultValue, option)}
         </span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
@@ -113,7 +114,7 @@ export const SelectBox = ({
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
-              {option.map(({ value, label }) => (
+              {option?.map(({ value, label }) => (
                 <li
                   key={value}
                   onClick={() => selectedOptionHandler(value)}

@@ -53,6 +53,7 @@ export enum Field {
   phone = "phone",
   date = "date",
   checkbox = "checkbox",
+  customCheckBox = "customCheckBox",
   radio = "radio",
   dragAndDropFileField = "dragAndDropFileField",
   dragAndDropPdfField = "dragAndDropPdfField",

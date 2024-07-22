@@ -233,6 +233,14 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
   textClassName?: string;
   label?: string;
 }
+export interface CustomCheckBoxFieldProps
+  extends BaseFieldProps<Field.checkbox> {
+  register: UseFormRegister<FieldValues>;
+  description: string;
+  containerClassName?: string;
+  textClassName?: string;
+  label?: string;
+}
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;
   label: string;
@@ -411,7 +419,8 @@ export type FieldType =
   | Field.toggleButton
   | Field.agentSelectField
   | Field.timePicker
-  | Field.quantityInput;
+  | Field.quantityInput
+  | Field.customCheckBox;
 
 export type FieldProps =
   | InputProps
@@ -442,7 +451,8 @@ export type FieldProps =
   | ToggleButtonFormProps
   | AgentSelectProps
   | TimePickerProps
-  | QuantityInputProps;
+  | QuantityInputProps
+  | CustomCheckBoxFieldProps;
 
 export interface FormField {
   containerClass?: string;
@@ -462,6 +472,7 @@ export interface FieldComponents {
   phone: React.FC<PhoneProps>;
   date: React.FC<DatePickerProps>;
   checkbox: React.FC<CheckBoxProps>;
+  customCheckBox: React.FC<CustomCheckBoxFieldProps>;
   radio: React.FC<RadioButtonProps>;
   dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
   dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;

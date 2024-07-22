@@ -18,3 +18,4 @@ export { ToggleButton } from "./toggleButton/toggle";
 export { AgentSelectField } from "./agentSelect/agent-select-field";
 export { TimePicker } from "./time-picker";
 export { QuantityInputField } from "./quantity-input-field";
+export { CustomCheckBoxField } from "./custom-checkbox-field";
