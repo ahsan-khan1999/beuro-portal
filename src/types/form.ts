@@ -229,6 +229,7 @@ export interface ProfileUploadFieldProps
   iconClasses?: string;
   disabled?: boolean;
   isMailSetting?: boolean;
+  isMailField?: boolean;
 }
 
 // interface for the Image upload

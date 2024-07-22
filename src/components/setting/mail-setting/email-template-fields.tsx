@@ -29,6 +29,7 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
         name: "logo",
         control,
         isMailSetting: true,
+        isMailField: true,
       },
     },
 
