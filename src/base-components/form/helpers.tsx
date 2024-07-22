@@ -16,6 +16,7 @@ import {
   ToggleButton,
   ColorPicker,
   AgentSelectField,
+  QuantityInputField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -53,6 +54,7 @@ const fieldComponents: FieldComponents = {
   toggleButton: ToggleButton,
   agentSelectField: AgentSelectField,
   timePicker: TimePicker,
+  quantityInput: QuantityInputField,
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -97,6 +99,7 @@ export function isFieldType(type: any): type is FieldType {
     "toggleButton",
     "customerSelectField",
     "timePicker",
+    "quantityInput",
   ].includes(type);
 }
 

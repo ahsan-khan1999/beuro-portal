@@ -40,6 +40,7 @@ export enum SalutationValue {
 
 export enum Field {
   input = "input",
+  quantityInput = "quantityInput",
   colorPicker = "colorPicker",
   textArea = "textArea",
   ckEditor = "ckEditor",

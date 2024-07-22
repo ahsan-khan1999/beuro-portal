@@ -17,3 +17,4 @@ export { MultiSelectField } from "./multi-select/multi-select-field";
 export { ToggleButton } from "./toggleButton/toggle";
 export { AgentSelectField } from "./agentSelect/agent-select-field";
 export { TimePicker } from "./time-picker";
+export { QuantityInputField } from "./quantity-input-field";

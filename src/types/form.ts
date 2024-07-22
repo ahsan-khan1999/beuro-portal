@@ -52,6 +52,21 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   percentage?: string;
   step?: string;
 }
+export interface QuantityInputProps
+  extends BaseFieldProps<Field.quantityInput> {
+  inputType: "text" | "number";
+  inputLabelValue: string;
+  value?: string;
+  success?: boolean;
+  register: UseFormRegister<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+  svg?: string;
+  fieldIndex?: number;
+  onChange?: (value?: number) => void;
+  step?: string;
+}
 
 export interface ColorPickerProps extends BaseFieldProps<Field.colorPicker> {
   value?: string;
@@ -395,7 +410,8 @@ export type FieldType =
   | Field.addField
   | Field.toggleButton
   | Field.agentSelectField
-  | Field.timePicker;
+  | Field.timePicker
+  | Field.quantityInput;
 
 export type FieldProps =
   | InputProps
@@ -425,7 +441,8 @@ export type FieldProps =
   | AddFieldProps
   | ToggleButtonFormProps
   | AgentSelectProps
-  | TimePickerProps;
+  | TimePickerProps
+  | QuantityInputProps;
 
 export interface FormField {
   containerClass?: string;
@@ -459,6 +476,7 @@ export interface FieldComponents {
   toggleButton: React.FC<ToggleButtonFormProps>;
   agentSelectField: React.FC<AgentSelectProps>;
   timePicker: React.FC<TimePickerProps>;
+  quantityInput: React.FC<QuantityInputProps>;
 }
 
 export interface FormProps {

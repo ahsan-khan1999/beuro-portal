@@ -59,7 +59,7 @@ export const AppointmentsDetailCard = ({
           <OutlineButton
             inputType="button"
             onClick={() => {}}
-            className="bg-white text-[#D80027] w-full border border-[#D80027] px-4"
+            className="bg-white text-[#D80027] w-full border border-[#D80027] px-4 !h-10"
             text={translate("common.cancel_button")}
             id="cancel"
             iconAlt="cancel"
