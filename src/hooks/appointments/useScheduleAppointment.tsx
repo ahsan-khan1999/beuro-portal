@@ -5,15 +5,21 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { generateScheduleAppointmentsValidationSchema } from "@/validation/appointments";
 import { scheduleAppointmentsFormField } from "@/components/appointments/formFields/schedule-appointments-fields";
+import { createCompanyAppointment } from "@/api/slices/lead/leadSlice";
+import { useEffect } from "react";
 
 export interface AppointmentHookProps {
   onSuccess: () => void;
   onClose: () => void;
+  id: string;
+  refID: string;
 }
 
 export const useScheduleAppointment = ({
   onSuccess,
   onClose,
+  id,
+  refID,
 }: AppointmentHookProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -32,11 +38,14 @@ export const useScheduleAppointment = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const handleChangeTimeField = (type: string, date: string) => {
-    // if (type === "START_TIME") {
-    setValue(type, date);
+  useEffect(() => {
+    if (refID) {
+      setValue("leadID", refID);
+    }
+  }, [refID, setValue]);
 
-    // }
+  const handleChangeTimeField = (type: string, date: string) => {
+    setValue(type, date);
   };
 
   const fields = scheduleAppointmentsFormField(register, loading, control, {
@@ -44,9 +53,12 @@ export const useScheduleAppointment = ({
     handleChangeTimeField,
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-    onSuccess();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = { ...data, leadID: id };
+    const res = await dispatch(
+      createCompanyAppointment({ data: apiData, router, translate })
+    );
+    if (res?.payload) onSuccess();
   };
 
   return {

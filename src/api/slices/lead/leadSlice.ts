@@ -170,6 +170,22 @@ export const deleteLead: AsyncThunk<boolean, object, object> | any =
     }
   });
 
+// create company appointment
+export const createCompanyAppointment:
+  | AsyncThunk<boolean, object, object>
+  | any = createAsyncThunk("appointment/created", async (args, thunkApi) => {
+  const { data, router, setError, translate } = args as any;
+
+  try {
+    const res = await apiServices.createCompanyLeadAppointment(data);
+    return res?.data?.data;
+  } catch (e: any) {
+    thunkApi.dispatch(setErrorMessage(e?.data?.message));
+    setErrors(setError, e?.data.data, translate);
+    return false;
+  }
+});
+
 const leadSlice = createSlice({
   name: "leadSlice",
   initialState,
@@ -214,6 +230,15 @@ const leadSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(createLead.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(createCompanyAppointment.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createCompanyAppointment.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(createCompanyAppointment.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(updateLead.pending, (state) => {

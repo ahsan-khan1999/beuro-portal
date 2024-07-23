@@ -129,7 +129,12 @@ export default function useLeadDetail() {
   };
 
   const handleScheduleAppointments = () => {
-    dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
+    dispatch(
+      updateModalType({
+        type: ModalType.SCHEDULE_APPOINTMENTS,
+        data: { id: leadDetails?.id, refID: leadDetails?.refID },
+      })
+    );
   };
 
   const handleAppointmentsSuccess = () => {

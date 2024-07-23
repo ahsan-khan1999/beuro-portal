@@ -571,7 +571,7 @@ export const staticEnums: Record<string, any> = {
     InProcess: 3,
     Close: 1,
     Expired: 2,
-    Appointment: 4,
+    // Appointment: 4,
   },
   AppointmentStatus: {
     Pending: 0,

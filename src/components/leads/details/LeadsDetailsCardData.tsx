@@ -112,24 +112,27 @@ const LeadsDetailsCardData = ({
         </div>
 
         <div className="flex items-center gap-x-4">
-          <OutlineButton
-            inputType="button"
-            onClick={onCreateAppointment}
-            className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
-            text={translate("appointments.reschedule_btn")}
-            id="reschedule"
-            iconAlt="reschedule"
-            icon={appointmentIcon}
-          />
+          {leadDetails?.isAppointmentCreated ? (
+            <Button
+              inputType="button"
+              onClick={() => {}}
+              className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
+              text={translate("appointments.view_appointments_btn")}
+              id="view-appointments"
+              iconAlt="view-appointments"
+            />
+          ) : (
+            <OutlineButton
+              inputType="button"
+              onClick={onCreateAppointment}
+              className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+              text={translate("appointments.create_appointments")}
+              id="create-appointment"
+              iconAlt="create-appointment"
+              icon={appointmentIcon}
+            />
+          )}
 
-          {/* <Button
-            inputType="button"
-            onClick={() => {}}
-            className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
-            text={translate("appointments.view_appointments_btn")}
-            id="reschedule"
-            iconAlt="reschedule"
-          /> */}
           {leadDetails.leadStatus !== "Close" && (
             <OutlineButton
               inputType="button"
@@ -204,8 +207,14 @@ const LeadsDetailsCardData = ({
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("appointments.appointment")}:
           </span>
-          <div className="bg-[#FB9600] px-[10px] py-1 rounded-lg">
-            <span className="text-sm font-medium text-white">Not Created</span>
+          <div
+            className={`px-[10px] py-1 rounded-lg text-white text-sm font-medium text-center w-fit ${
+              leadDetails?.isAppointmentCreated ? "bg-primary" : "bg-[#FB9600]"
+            }`}
+          >
+            {leadDetails?.isAppointmentCreated
+              ? translate("leads.created")
+              : translate("leads.not_created")}
           </div>
         </div>
         <div className="flex items-center gap-x-3">

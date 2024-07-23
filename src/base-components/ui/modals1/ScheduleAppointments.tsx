@@ -4,6 +4,7 @@ import { Form } from "@/base-components/form/form";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { useScheduleAppointment } from "@/hooks/appointments/useScheduleAppointment";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export interface AppointmentsModalProps {
   onClose: () => void;
@@ -17,9 +18,14 @@ export const ScheduleAppointments = ({
   heading,
 }: AppointmentsModalProps) => {
   const defaultClassName = "mt-[25px]";
+
+  const { id, refID } = useAppSelector((state) => state.global.modal.data);
+
   const { fields, onSubmit, handleSubmit, errors } = useScheduleAppointment({
     onSuccess,
     onClose,
+    id,
+    refID,
   });
 
   return (

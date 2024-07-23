@@ -1101,6 +1101,7 @@
   "appointments": {
     "view_reports_btn": "Berichte anzeigen",
     "reschedule_btn": "Umplanen",
+    "create_appointments": "Termin erstellen",
     "view_appointments_btn": "Termine ansehen",
     "schedule_appointment": "Termin vereinbaren",
     "detail_heading": "Termin Details",

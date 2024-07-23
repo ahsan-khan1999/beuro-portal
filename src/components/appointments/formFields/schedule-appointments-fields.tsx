@@ -23,15 +23,16 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                 text: `${translate(
                   "appointments.appointments_field_label.lead_id"
                 )}`,
-                htmlFor: "LEAD_ID",
+                htmlFor: "leadID",
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
-                id: "LEAD_ID",
-                name: "LEAD_ID",
+                id: "leadID",
+                name: "leadID",
+                disabled: true,
                 register,
               },
             },
@@ -41,14 +42,14 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                 text: `${translate(
                   "appointments.appointments_field_label.enter_date"
                 )}`,
-                htmlFor: "ENTER_DATE",
+                htmlFor: "date",
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.date,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-                id: "ENTER_DATE",
-                name: "ENTER_DATE",
+                id: "date",
+                name: "date",
                 register,
                 dateType: "date",
               },
@@ -58,7 +59,7 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                 text: `${translate(
                   "appointments.appointments_field_label.enter_time"
                 )}`,
-                htmlFor: "ENTER_TIME",
+                htmlFor: "startTime",
               },
               field: {
                 type: Field.div,
@@ -72,12 +73,12 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                         "!bg-[#fff] !px-3 py-[14px] rounded-lg w-full border border-lightGray",
                       type: Field.timePicker,
                       dateType: "time",
-                      id: "START_TIME",
-                      name: "START_TIME",
+                      id: "startTime",
+                      name: "startTime",
                       register,
                       handleChange: (date: any) =>
                         handleChangeTimeField &&
-                        handleChangeTimeField("START_TIME", date),
+                        handleChangeTimeField("startTime", date),
                     },
                   },
                   {
@@ -87,12 +88,12 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                         "!bg-[#fff] !px-3 py-[14px] rounded-lg w-full border border-lightGray",
                       type: Field.timePicker,
                       dateType: "time",
-                      id: "END_TIME",
-                      name: "END_TIME",
+                      id: "endTime",
+                      name: "endTime",
                       register,
                       handleChange: (date: any) =>
                         handleChangeTimeField &&
-                        handleChangeTimeField("END_TIME", date),
+                        handleChangeTimeField("endTime", date),
                     },
                   },
                 ],
@@ -104,14 +105,14 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                 text: `${translate(
                   "appointments.appointments_field_label.select_agent"
                 )}`,
-                htmlFor: "SELECT_AGENT",
+                htmlFor: "agent",
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.agentSelectField,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-                id: "SELECT_AGENT",
-                name: "SELECT_AGENT",
+                id: "agent",
+                name: "agent",
                 options: [
                   {
                     label: {

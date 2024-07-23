@@ -41,7 +41,7 @@ const TableRows = ({
     `${translate("leads.lead_dropdown_status.InProcess")}`,
     `${translate("leads.lead_dropdown_status.Close")}`,
     `${translate("leads.lead_dropdown_status.Expired")}`,
-    `${translate("leads.lead_dropdown_status.Appointment")}`,
+    // `${translate("leads.lead_dropdown_status.Appointment")}`,
   ];
 
   const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
@@ -127,9 +127,9 @@ const TableRows = ({
                         ? "bg-[#f5d60f]"
                         : item?.leadStatus === "Close"
                         ? "bg-[#45C769]"
-                        : item?.leadStatus === "Appointment"
-                        ? "bg-[#FB9600]"
-                        : "bg-[#FF0000]"
+                        : // : item?.leadStatus === "Appointment"
+                          // ? "bg-[#FB9600]"
+                          "bg-[#FF0000]"
                     } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
                     dropDownTextClassName={`${
                       item?.leadStatus === "InProcess"
@@ -163,10 +163,12 @@ const TableRows = ({
                 <div className={`py-4`}>
                   <div
                     className={`px-[10px] py-1 w-full rounded-lg text-white text-sm font-medium text-center ${
-                      "Created" ? "bg-primary" : "bg-[#FB9600]"
+                      item?.isAppointmentCreated ? "bg-primary" : "bg-[#FB9600]"
                     }`}
                   >
-                    {translate("leads.created")}
+                    {item?.isAppointmentCreated
+                      ? translate("leads.created")
+                      : translate("leads.not_created")}
                   </div>
                 </div>
               </div>

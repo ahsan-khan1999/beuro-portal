@@ -1109,6 +1109,7 @@
   "appointments": {
     "view_reports_btn": "View Reports",
     "reschedule_btn": "Reschedule",
+    "create_appointments": "Create Appointment",
     "appointment": "Appointment",
     "view_appointments_btn": "View Appointments",
     "schedule_appointment": "Schedule Appointment",
