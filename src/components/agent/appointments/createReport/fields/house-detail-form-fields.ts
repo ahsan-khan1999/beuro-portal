@@ -16,6 +16,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         id: "div-field",
         className:
           "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+        children: [],
+      },
+    },
+    {
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
         children: [
           {
             field: {

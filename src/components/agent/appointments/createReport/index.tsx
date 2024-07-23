@@ -45,7 +45,7 @@ const CreateReport = () => {
         {translate("agent.main_heading")}
       </h1>
 
-      <div className="border-y border-y-[#000] border-opacity-10 py-4 mb-6 flex items-center gap-x-4">
+      <div className="border-y border-y-[#000] border-opacity-10 py-4 mb-6 flex items-center justify-center gap-x-4">
         {stages.map((stage, index) => (
           <SteperFormTab
             key={stage}
