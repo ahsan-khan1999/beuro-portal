@@ -1,6 +1,10 @@
-import { ContactAndAddressReport } from "@/components/agent/appointments/createReport/forms/contact-and-address-form";
-import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslation } from "next-i18next";
 import { updateQuery } from "@/utils/update-query";
+import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import {
   getBackReportFormStage,
   getNextReportFormStage,
@@ -11,18 +15,18 @@ import {
   ReportHouseDetailsValidation,
   ReportServiceDetailsValidation,
 } from "@/validation/agent/agentReportSchema";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { ContactAndAddressReport } from "@/components/agent/appointments/createReport/forms/contact-and-address-form";
+import { HouseDetailReport } from "@/components/agent/appointments/createReport/forms/house-detail-form";
+import { ServicesDetailReport } from "@/components/agent/appointments/createReport/forms/services-detail-form";
+import { AdditionalInfoReport } from "@/components/agent/appointments/createReport/forms/additional-detail-form";
 
-const FORM_COMPONENTS = {
-  [AppointmentReportsFormStages.CONTACT_AND_ADDRESS]: ContactAndAddressReport,
-  [AppointmentReportsFormStages.HOUSE_DETAILS]: <></>,
-  [AppointmentReportsFormStages.SERVICES]: <></>,
-  [AppointmentReportsFormStages.ADDITIONAL_INFO]: <></>,
-};
+const FORM_COMPONENTS: Record<AppointmentReportsFormStages, React.ElementType> =
+  {
+    [AppointmentReportsFormStages.CONTACT_AND_ADDRESS]: ContactAndAddressReport,
+    [AppointmentReportsFormStages.HOUSE_DETAILS]: HouseDetailReport,
+    [AppointmentReportsFormStages.SERVICES]: ServicesDetailReport,
+    [AppointmentReportsFormStages.ADDITIONAL_INFO]: AdditionalInfoReport,
+  };
 
 export const useAgentReport = () => {
   const router = useRouter();
@@ -32,23 +36,37 @@ export const useAgentReport = () => {
       AppointmentReportsFormStages.CONTACT_AND_ADDRESS
     );
 
-  const contactAndAddressSchema = ReportContactDetailsValidation(translate);
-  const houseDetailSchema = ReportHouseDetailsValidation(translate);
-  const servicesDetailSchema = ReportServiceDetailsValidation(translate);
-  const additionalDetailSchema = ReportAdditionalDetailsValidation(translate);
+  const schemas = {
+    [AppointmentReportsFormStages.CONTACT_AND_ADDRESS]:
+      ReportContactDetailsValidation(translate),
+    [AppointmentReportsFormStages.HOUSE_DETAILS]:
+      ReportHouseDetailsValidation(translate),
+    [AppointmentReportsFormStages.SERVICES]:
+      ReportServiceDetailsValidation(translate),
+    [AppointmentReportsFormStages.ADDITIONAL_INFO]:
+      ReportAdditionalDetailsValidation(translate),
+  };
 
   const formMethodsConfig = {
     [AppointmentReportsFormStages.CONTACT_AND_ADDRESS]: useForm<FieldValues>({
-      resolver: yupResolver<FieldValues>(contactAndAddressSchema),
+      resolver: yupResolver<FieldValues>(
+        schemas[AppointmentReportsFormStages.CONTACT_AND_ADDRESS]
+      ),
     }),
     [AppointmentReportsFormStages.HOUSE_DETAILS]: useForm<FieldValues>({
-      resolver: yupResolver<FieldValues>(houseDetailSchema),
+      resolver: yupResolver<FieldValues>(
+        schemas[AppointmentReportsFormStages.HOUSE_DETAILS]
+      ),
     }),
     [AppointmentReportsFormStages.SERVICES]: useForm<FieldValues>({
-      resolver: yupResolver<FieldValues>(servicesDetailSchema),
+      resolver: yupResolver<FieldValues>(
+        schemas[AppointmentReportsFormStages.SERVICES]
+      ),
     }),
     [AppointmentReportsFormStages.ADDITIONAL_INFO]: useForm<FieldValues>({
-      resolver: yupResolver<FieldValues>(additionalDetailSchema),
+      resolver: yupResolver<FieldValues>(
+        schemas[AppointmentReportsFormStages.ADDITIONAL_INFO]
+      ),
     }),
   };
 

@@ -234,9 +234,9 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
   label?: string;
 }
 export interface CustomCheckBoxFieldProps
-  extends BaseFieldProps<Field.checkbox> {
-  register: UseFormRegister<FieldValues>;
+  extends BaseFieldProps<Field.customCheckBox> {
   description: string;
+  register: UseFormRegister<FieldValues>;
   containerClassName?: string;
   textClassName?: string;
   label?: string;
@@ -291,8 +291,16 @@ export interface ImageUploadFieldProps
   index?: number;
   setValue?: UseFormSetValue<FieldValues>;
 }
+export interface CustomFileUploadFieldProps
+  extends BaseFieldProps<Field.customFileUpload> {
+  control?: Control<FieldValues>;
+  onClick?: Function;
+  value?: string;
+  index?: number;
+  setValue?: UseFormSetValue<FieldValues>;
+  attachements: Attachement[];
+}
 
-// Interface for the input field copy
 export interface InputWithCopyProps
   extends BaseFieldProps<Field.inputWithCopy> {
   inputType: "text" | "email" | "number" | "password";
@@ -420,7 +428,8 @@ export type FieldType =
   | Field.agentSelectField
   | Field.timePicker
   | Field.quantityInput
-  | Field.customCheckBox;
+  | Field.customCheckBox
+  | Field.customFileUpload;
 
 export type FieldProps =
   | InputProps
@@ -452,7 +461,8 @@ export type FieldProps =
   | AgentSelectProps
   | TimePickerProps
   | QuantityInputProps
-  | CustomCheckBoxFieldProps;
+  | CustomCheckBoxFieldProps
+  | CustomFileUploadFieldProps;
 
 export interface FormField {
   containerClass?: string;
@@ -478,6 +488,7 @@ export interface FieldComponents {
   dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;
   profileUploadField: React.FC<ProfileUploadFieldProps>;
   imageUploadField: React.FC<ImageUploadFieldProps>;
+  customFileUpload: React.FC<CustomFileUploadFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;

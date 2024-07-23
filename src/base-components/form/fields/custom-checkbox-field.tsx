@@ -1,4 +1,4 @@
-import { CheckBoxProps } from "@/types";
+import { CustomCheckBoxFieldProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
 
 export const CustomCheckBoxField = ({
@@ -10,7 +10,7 @@ export const CustomCheckBoxField = ({
   textClassName,
   label,
   description,
-}: CheckBoxProps) => {
+}: CustomCheckBoxFieldProps) => {
   const containerDefaultClasses = "flex items-center gap-x-[12px]";
   const containerClasses = combineClasses(
     containerDefaultClasses,
@@ -20,9 +20,7 @@ export const CustomCheckBoxField = ({
   return (
     <label htmlFor={id}>
       <div className={`${containerClasses}`}>
-        <div className="flex items-center">
-          <input id={id} type="checkbox" {...register(name)} className={``} />
-        </div>
+        <input id={id} type="checkbox" {...register(name)} />
         <span className={`${textClassName} text-sm`}>{description}</span>
       </div>
     </label>

@@ -1231,6 +1231,8 @@
       "date": "Datum",
       "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "upload_button": "Hochladen",
+    "item": "Artikel",
     "create_report_btn": "Bericht erstellen",
     "schedule_btn": "Termin vereinbaren",
     "details": "Einzelheiten",
@@ -2375,6 +2377,12 @@
   "agent": {
     "main_heading": "Terminberichte einreichen",
     "contact_detail_heading": "Kontakt Details",
+    "report_tabs_heading": {
+      "contact": "Kontakt und Adresse",
+      "house": "Details zum Haus",
+      "services": "Dienstleistungen",
+      "additional": "Zusätzliche Informationen"
+    },
     "report_contact_fields": {
       "name": "Name",
       "email": "Email",
@@ -2457,6 +2465,7 @@
     },
     "additional_details_fields": {
       "heading": "Details Offerte",
+      "bemerkung": "Bemerkung",
       "mitarbeiter": "Mitarbeiter",
       "leiferwagen": "Lieferwage",
       "stunden": "Stunden",

@@ -1239,7 +1239,9 @@
       "date": "Date",
       "success_signed_offer": "Operation Successful"
     },
-    "create_report_btn":"Create Report",
+    "upload_button": "Upload",
+    "item": "Item",
+    "create_report_btn": "Create Report",
     "hours": "Hours",
     "minutes": "Minutes",
     "schedule_btn": "Schedule Appointment",
@@ -2378,6 +2380,12 @@
   "agent": {
     "main_heading": "Submit Appointment Reports",
     "contact_detail_heading": "Contact Details",
+    "report_tabs_heading": {
+      "contact": "Contact and Address",
+      "house": "House Details",
+      "services": "Services",
+      "additional": "Additional Info"
+    },
     "report_contact_fields": {
       "name": "Name",
       "email": "Email",
@@ -2437,7 +2445,7 @@
       "fahrrad": "Bicycle",
       "boxen": "Boxing",
       "kinderwagen": "Baby carriage",
-      "speziell":"Special",
+      "speziell": "Special",
       "aquarium": "Aquarium",
       "piano": "Piano",
       "lampe": "Lampe",
@@ -2460,6 +2468,7 @@
     },
     "additional_details_fields": {
       "heading": "Details Offer",
+      "bemerkung": "Remark",
       "mitarbeiter": "Employees",
       "leiferwagen": "Delivery van",
       "stunden": "Hours",

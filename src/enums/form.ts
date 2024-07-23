@@ -69,6 +69,7 @@ export enum Field {
   toggleButton = "toggleButton",
   agentSelectField = "agentSelectField",
   timePicker = "timePicker",
+  customFileUpload = "customFileUpload",
 }
 
 export enum CardType {

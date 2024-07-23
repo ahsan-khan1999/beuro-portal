@@ -53,12 +53,7 @@ const ImagesUpload = ({
             {translate("common.images_modal.sub_title")}
           </p>
         </div>
-        {/* <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-      /> */}
+
         <ImageField
           id="attachement"
           attachements={enteredLinks?.images}
@@ -98,9 +93,6 @@ const ImagesUpload = ({
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.link_title")}
           </h2>
-          {/* <p className="text-xs font-normal text-[#8F8F8F]">
-            {translate("common.images_modal.link_sub_title")}
-          </p> */}
         </div>
         <LinkUpload
           inputLink={enteredLink}

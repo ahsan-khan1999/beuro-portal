@@ -18,6 +18,7 @@ import {
   AgentSelectField,
   QuantityInputField,
   CustomCheckBoxField,
+  CustomFileUploadField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -46,6 +47,7 @@ const fieldComponents: FieldComponents = {
   dragAndDropPdfField: DragAndDropPdfField,
   profileUploadField: ProfileControllerField,
   imageUploadField: ImageUploadField,
+  customFileUpload: CustomFileUploadField,
   span: SpanField,
   div: DivField,
   button: Button,
@@ -103,6 +105,7 @@ export function isFieldType(type: any): type is FieldType {
     "timePicker",
     "quantityInput",
     "customCheckBox",
+    "customFileUpload",
   ].includes(type);
 }
 

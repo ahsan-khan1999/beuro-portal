@@ -101,6 +101,9 @@ export const ReportHouseDetailsValidation = (translate: Function) => {
     [HouseDetailsFieldsId.KITCHEN_WASHING_MACHINE]: yup
       .string()
       .required(translate("validationMessages.required")),
+    [HouseDetailsFieldsId.KITCHEN_TUMBLER]: yup
+      .string()
+      .required(translate("validationMessages.required")),
     [HouseDetailsFieldsId.KITCHEN_BOX]: yup
       .string()
       .required(translate("validationMessages.required")),
@@ -131,7 +134,7 @@ export const ReportHouseDetailsValidation = (translate: Function) => {
     [HouseDetailsFieldsId.BEDROOM_SCHMINKANLAGE]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_PUIT]: yup
+    [HouseDetailsFieldsId.BEDROOM_PULT]: yup
       .string()
       .required(translate("validationMessages.required")),
     [HouseDetailsFieldsId.BEDROOM_DOPPEIBETT]: yup
@@ -182,7 +185,7 @@ export const ReportHouseDetailsValidation = (translate: Function) => {
     [HouseDetailsFieldsId.ZIMMER_SCHRANK_MITTEL]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_PUIT]: yup
+    [HouseDetailsFieldsId.ZIMMER_PULT]: yup
       .string()
       .required(translate("validationMessages.required")),
     [HouseDetailsFieldsId.ZIMMER_NACHTTISCH]: yup
@@ -333,6 +336,9 @@ export const ReportAdditionalDetailsValidation = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [AdditionalInfoFieldsId.PRICE]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [AdditionalInfoFieldsId.REMARK]: yup
       .string()
       .required(translate("validationMessages.required")),
     [AdditionalInfoFieldsId.NOTE_INFORMATION]: yup

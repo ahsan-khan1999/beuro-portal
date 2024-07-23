@@ -19,10 +19,7 @@ export const DivField = ({ children, className, errors }: DivProps) => {
           field?.type &&
           getTypedFieldComponent(field.type as FieldType, field, error, errors);
 
-        const childClasses = combineClasses(
-          "flex flex-col",
-          containerClass
-        );
+        const childClasses = combineClasses("flex flex-col", containerClass);
         const labelClasses = combineClasses(
           "text-dark font-medium mb-[10px]",
           label?.className
@@ -31,7 +28,10 @@ export const DivField = ({ children, className, errors }: DivProps) => {
         return (
           <div key={index} className={`${childClasses}`}>
             {label && (
-              <label htmlFor={label.htmlFor} className={` ${labelClasses}`}>
+              <label
+                htmlFor={label.htmlFor}
+                className={`truncate ${labelClasses}`}
+              >
                 {label.text}
               </label>
             )}
