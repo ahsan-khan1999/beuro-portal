@@ -1,5 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateEmployeeFormField } from "@/types";
+import { getKeyByValue } from "@/utils/auth.util";
+import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
 export const employeeDetailsFormField: GenerateEmployeeFormField = (
@@ -10,6 +12,8 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
   employeeDetails,
   control
 ) => {
+  console.log(employeeDetails);
+
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
@@ -46,16 +50,32 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               htmlFor: "designation",
               className: "mb-[10px]",
             },
+            // field: {
+            //   type: Field.input,
+            //   className: `!p-4 !border-[#BFBFBF] border border-dark focus:!border-primary ${
+            //     !isUpdate && "!border-light"
+            //   }`,
+            //   inputType: "text",
+            //   id: "designation",
+            //   name: "designation",
+            //   placeholder: "Manager",
+            //   register,
+            //   disabled: isUpdate,
+            // },
+
             field: {
-              type: Field.input,
-              className: `!p-4 !border-[#BFBFBF] border border-dark focus:!border-primary ${
-                !isUpdate && "!border-light"
-              }`,
-              inputType: "text",
+              className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
+              type: Field.select,
               id: "designation",
               name: "designation",
-              placeholder: "Manager",
-              register,
+              options:
+                Object.keys(staticEnums.Designation)
+                  ?.slice(1)
+                  ?.map((item) => ({
+                    value: staticEnums.Designation[item],
+                    label: translate(`employee_type.${item}`),
+                  })) || [],
+              control,
               disabled: isUpdate,
             },
           },

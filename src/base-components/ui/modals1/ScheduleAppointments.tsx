@@ -10,25 +10,32 @@ export interface AppointmentsModalProps {
   onClose: () => void;
   onSuccess: () => void;
   heading?: string;
+  isUpdate?: boolean;
 }
 
 export const ScheduleAppointments = ({
   onClose,
   onSuccess,
   heading,
+  isUpdate,
 }: AppointmentsModalProps) => {
   const defaultClassName = "mt-[25px]";
-
-  const { id, refID } = useAppSelector((state) => state.global.modal.data);
+  const { id, leadId, refID, date, startTime, endTime, agent } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   const { fields, onSubmit, handleSubmit, errors } = useScheduleAppointment({
     onSuccess,
     onClose,
     id,
+    leadId,
     refID,
+    date,
+    startTime,
+    endTime,
+    agent,
+    isUpdate,
   });
-
-  console.log(id);
 
   return (
     <BaseModal onClose={onClose} containerClassName="max-w-[733px] min-h-fit">

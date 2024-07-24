@@ -19,9 +19,8 @@ import localStoreUtil from "@/utils/localstore.util";
 import { DEFAULT_APPOINTMETNS } from "@/utils/static";
 
 export const useAppointments = () => {
-  const { loading, isLoading, totalCount, appointmentDetails } = useAppSelector(
-    (state) => state.appointment
-  );
+  const { loading, isLoading, totalCount, appointmentDetails, appointment } =
+    useAppSelector((state) => state.appointment);
 
   const { query } = useRouter();
   const page = query?.page as unknown as number;
@@ -113,7 +112,7 @@ export const useAppointments = () => {
         }
       });
     }
-  }, [query]);
+  }, []);
 
   const totalItems = totalCount;
   const itemsPerPage = 15;
@@ -129,13 +128,30 @@ export const useAppointments = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleScheduleAppointments = (id: string, refID: string) => {
+  const handleScheduleAppointments = (
+    id: string,
+    leadId: string,
+    refID: string,
+    date: string,
+    startTime: string,
+    endTime: string,
+    agent: {
+      id: string;
+      picture: string;
+      fullName: string;
+    }
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.SCHEDULE_APPOINTMENTS,
         data: {
           id: id,
+          leadId: leadId,
           refID: refID,
+          date: date,
+          startTime: startTime,
+          endTime: endTime,
+          agent: agent,
         },
       })
     );
@@ -157,8 +173,9 @@ export const useAppointments = () => {
     [ModalType.SCHEDULE_APPOINTMENTS]: (
       <ScheduleAppointments
         onClose={onClose}
-        heading={translate("appointments.schedule_appointment")}
+        heading={translate("appointments.reschedule_appointment")}
         onSuccess={handleAppointmentsSuccess}
+        isUpdate={true}
       />
     ),
     [ModalType.APPOINTMENT_SUCCESS]: (

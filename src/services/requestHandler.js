@@ -253,6 +253,16 @@ const createCompanyAppointment = (params) =>
     feature: featureConstants.login,
   });
 
+const updateAppointment = (data) =>
+  put(SERVICE_URLS.companyLeadAppointment + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const readAppointment = (data) =>
+  get(SERVICE_URLS.companyLeadAppointment + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
 const readCompanyAppointments = (params) =>
   get(
     SERVICE_URLS.companyLeadAppointment,
@@ -1204,6 +1214,8 @@ const apiServices = {
   calculateInvoiceData,
   readTableFollowUp,
   createCompanyAppointment,
+  updateAppointment,
   readCompanyAppointments,
+  readAppointment,
 };
 export default apiServices;

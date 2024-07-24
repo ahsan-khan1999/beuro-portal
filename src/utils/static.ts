@@ -591,6 +591,23 @@ export const staticEnums: Record<string, any> = {
     individual: 0,
     company: 1,
   },
+
+  Designation: {
+    CEO: 0,
+    Administration: 1,
+    HRManager: 2,
+    Agent: 3,
+    FinanceManager: 4,
+    OperationsManager: 5,
+    ITManager: 6,
+    MarketingManager: 7,
+    SalesManager: 8,
+    ProjectManager: 9,
+    BusinessAnalyst: 10,
+    CustomerSupportRepresentative: 11,
+    AdministrativeAssistant: 12,
+    Intern: 13,
+  },
   OfferStatus: {
     Open: 0,
     Accepted: 1,
@@ -1335,12 +1352,12 @@ export const DEFAULT_EMPLOYEE = {
   email: "Test12@gmail.com",
   phoneNumber: "",
   mobileNumber: "",
-
   designation: "Islamabad",
   creationDate: "2023-11-17T12:43:00.479Z",
   action: "edit",
   employeeID: "1",
   createdBy: "",
+  picture: "",
 };
 
 export const DEFAULT_FOLLOWUP = {

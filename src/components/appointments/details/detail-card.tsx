@@ -48,7 +48,7 @@ export const AppointmentsDetailCard = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-4">
-          <Button
+          {/* <Button
             inputType="button"
             onClick={onScheduleAppointments}
             className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
@@ -63,7 +63,7 @@ export const AppointmentsDetailCard = ({
             text={translate("common.cancel_button")}
             id="cancel"
             iconAlt="cancel"
-          />
+          /> */}
         </div>
       </div>
 

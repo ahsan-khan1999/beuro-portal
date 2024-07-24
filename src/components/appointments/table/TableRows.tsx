@@ -1,19 +1,33 @@
 import React from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { formatDateTimeToDate } from "@/utils/utility";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
-import { Button } from "@/base-components/ui/button/button";
-import { CancelFillIcon } from "@/assets/svgs/components/cancel-icon";
 import { Appointments } from "@/types/appointments";
+import { formatDateTimeToDate } from "@/utils/utility";
+import { Button } from "@/base-components/ui/button/button";
+import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { CancelFillIcon } from "@/assets/svgs/components/cancel-icon";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
-import Image from "next/image";
+
+import dummyAgent from "@/assets/pngs/dummyAgent.png";
 
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
   onStatusChange: (id: string, status: string, type: string) => void;
-  onAppointmentSchedule: (id: string, refID: string) => void;
+  onAppointmentSchedule: (
+    id: string,
+    leadId: string,
+    refID: string,
+    date: string,
+    startTime: string,
+    endTime: string,
+    agent: {
+      id: string;
+      picture: string;
+      fullName: string;
+    }
+  ) => void;
 }
 
 const TableRows = ({
@@ -102,7 +116,12 @@ const TableRows = ({
                 </div>
 
                 <div className="flex items-center gap-x-[10px]">
-                  <Image src={""} alt="agent profile" width={32} height={32} />
+                  <Image
+                    src={dummyAgent}
+                    alt="agent profile"
+                    width={32}
+                    height={32}
+                  />
                   <span className="py-4 truncate">{item?.agent?.fullName}</span>
                 </div>
                 <div
@@ -149,7 +168,7 @@ const TableRows = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(140px,_140px)_minmax(50px,_50px)] gap-x-3">
+            <div className="grid grid-cols-[minmax(140px,_140px)]">
               <div className="py-4 flex items-center">
                 {item?.isReportSubmitted ? (
                   <Button
@@ -163,7 +182,17 @@ const TableRows = ({
                 ) : (
                   <OutlineButton
                     inputType="button"
-                    onClick={() => onAppointmentSchedule(item?.id, item?.id)}
+                    onClick={() =>
+                      onAppointmentSchedule(
+                        item?.id,
+                        item?.leadID?.id,
+                        item?.leadID?.refID,
+                        item?.date,
+                        item?.startTime,
+                        item?.endTime,
+                        item?.agent
+                      )
+                    }
                     className="bg-white text-primary w-full border border-primary"
                     text={translate("appointments.reschedule_btn")}
                     id="view reports"
@@ -172,13 +201,13 @@ const TableRows = ({
                 )}
               </div>
 
-              <div className="py-4 flex items-center">
+              {/* <div className="py-4 flex items-center">
                 <span className="p-[6px]">
                   <CancelFillIcon
                     opacityVal={item?.isReportSubmitted ? 0 : 1}
                   />
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         );

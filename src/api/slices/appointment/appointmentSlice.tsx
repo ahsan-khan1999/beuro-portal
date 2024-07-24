@@ -26,7 +26,7 @@ const initialState: AppointmentState = {
 };
 
 export const createAppointment: AsyncThunk<boolean, object, object> | any =
-  createAsyncThunk("appointment/created", async (args, thunkApi) => {
+  createAsyncThunk("create/appointment", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
 
     try {
@@ -38,11 +38,35 @@ export const createAppointment: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+export const updateAppointment: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("update/appointment", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      await apiServices.updateAppointment(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
 
 export const readAppointments: AsyncThunk<boolean, object, object> | any =
-  createAsyncThunk("read/appointments", async (args, thunkApi) => {
+  createAsyncThunk("view/appointments", async (args, thunkApi) => {
     try {
       const response = await apiServices.readCompanyAppointments({});
+      return response?.data?.data?.Appointment;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+export const readSingleAppointment: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("read/appointment", async (args, thunkApi) => {
+    try {
+      const response = await apiServices.readAppointment({});
       return response?.data?.data?.Appointment;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -61,6 +85,9 @@ const appointmentSlice = createSlice({
     setAppointmentDetails: (state, action) => {
       state.appointmentDetails = action.payload;
     },
+    setAppointment: (state, action) => {
+      state.appointment = action.payload;
+    },
   },
   extraReducers(builder) {
     builder.addCase(readAppointments.pending, (state) => {
@@ -73,7 +100,16 @@ const appointmentSlice = createSlice({
     builder.addCase(readAppointments.rejected, (state) => {
       state.isLoading = false;
     });
-
+    builder.addCase(readSingleAppointment.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(readSingleAppointment.fulfilled, (state, action) => {
+      state.appointmentDetails = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(readSingleAppointment.rejected, (state) => {
+      state.isLoading = false;
+    });
     builder.addCase(createAppointment.pending, (state) => {
       state.loading = true;
     });
@@ -81,6 +117,15 @@ const appointmentSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(createAppointment.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(updateAppointment.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateAppointment.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(updateAppointment.rejected, (state) => {
       state.loading = false;
     });
   },

@@ -75,7 +75,6 @@ const LeadsDetailsCardData = ({
       })
     );
     dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }));
-
     router.push("/offers/add");
   };
 
