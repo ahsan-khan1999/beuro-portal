@@ -44,6 +44,7 @@ import {
 } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
+import { Appointments } from "./appointments";
 
 export interface SideBar {
   icon?: keyof typeof svgs;
@@ -339,6 +340,21 @@ export type GenerateEmployeeFormField = (
   handleUpdateCancel: () => void,
   employeeDetails?: Employee,
   control?: Control<FieldValues>
+) => FormField[];
+
+export type GenerateScheduleAppointmentsFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  properties: {
+    onClose: () => void;
+    appointmentDetails?: Appointments;
+    employee: Employee[];
+    isUpdate?: boolean;
+    onClick?: Function;
+    handleChangeTimeField?: (type: string, date: string) => void;
+  },
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // Notes formfield
@@ -764,7 +780,6 @@ export type GenerateFollowUpFormField = (
     customer: Customers[];
     lead: Lead[];
     followUps: FollowUp | null;
-    onCustomerSelect?: (id: string) => void;
   },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>

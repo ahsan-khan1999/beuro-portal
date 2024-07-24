@@ -258,6 +258,12 @@
         "close": "Geschlossen",
         "expire": "Abgelaufen"
       },
+      "appointments": {
+        "appointment": "Ernennungen",
+        "pending": "Entwurf",
+        "completed": "Vollendet",
+        "cancelled": "Abgebrochen"
+      },
       "offers": {
         "offers": "Angebote",
         "open": "Offen",
@@ -968,6 +974,8 @@
     "main_heading": "Anfragen",
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
+    "created": "Erstellt",
+    "not_created": "Nicht Erstellt",
     "table_functions": {
       "open": "Offen",
       "inProcess": "In Bearbeitung",
@@ -978,7 +986,8 @@
       "Open": "Offen",
       "InProcess": "In Bearbeitung",
       "Close": "Geschlossen",
-      "Expired": "Abgelaufen"
+      "Expired": "Abgelaufen",
+      "Appointment": "Termin"
     },
     "table_headings": {
       "id": "ID",
@@ -989,6 +998,7 @@
       "creation_date": "Erstelldatum",
       "location": "Standort",
       "status": "Status",
+      "appointment": "Termin",
       "images": "Bilder",
       "note": "Notizen",
       "edit": "Bearbeiten"
@@ -1088,6 +1098,50 @@
       "without_images": "Ohne Bilder fortfahren"
     }
   },
+  "appointments": {
+    "view_reports_btn": "Berichte anzeigen",
+    "reschedule_btn": "Umplanen",
+    "create_appointments": "Termin erstellen",
+    "view_appointments_btn": "Termine ansehen",
+    "schedule_appointment": "Termin vereinbaren",
+    "reschedule_appointment": "Termin verschieben",
+    "detail_heading": "Termin Details",
+    "appointment": "Termin",
+    "table_headings": {
+      "id": "ID",
+      "lead_id": "Lead ID",
+      "customer": "Kunde",
+      "date": "Datum",
+      "time": "Zeit",
+      "agent": "Agent",
+      "status": "Status",
+      "action": "Aktion"
+    },
+    "appointment_status": {
+      "pending": "Entwurf",
+      "completed": "Vollendet",
+      "cancelled": "Abgebrochen"
+    },
+    "successs_modal": {
+      "heading": "Termin erfolgreich erstellt",
+      "sub_heading": "Vielen Dank für die Erstellung von Appointments, wir freuen uns, Sie zu haben."
+    },
+    "appointments_field_label": {
+      "lead_id": "Lead ID",
+      "enter_date": "Datum eingeben",
+      "enter_time": "Zeit eingeben",
+      "select_agent": "Agent auswählen"
+    },
+    "detail_data": {
+      "assign_agent": "Agent zuweisen",
+      "lead_id": "Lead ID",
+      "status": "Status",
+      "date": "Datum",
+      "time": "Zeit",
+      "no_data_found": "Keine Berichte eingereicht"
+    }
+  },
+
   "common": {
     "modals": {
       "contract_updating_description": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie da sind.",
@@ -1160,6 +1214,7 @@
       "date": "Datum",
       "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "schedule_btn": "Termin vereinbaren",
     "details": "Einzelheiten",
     "follow_up_completed": "Bitte kontaktieren Sie den Kunden nach 10 Minuten.",
     "invoice_cards": {
@@ -2298,5 +2353,21 @@
     "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten.",
     "warm_regards": "Mit freundlichen Grüßen",
     "team": "Das Buro-Team"
+  },
+  "employee_type": {
+    "CEO": "CEO",
+    "Administration": "Verwaltung",
+    "HRManager": "HRManager",
+    "Agent": "Agent",
+    "FinanceManager": "FinanceManager",
+    "OperationsManager": "OperationsManager",
+    "ITManager": "ITManager",
+    "MarketingManager": "MarketingManager",
+    "SalesManager": "SalesManager",
+    "ProjectManager": "ProjektManager",
+    "BusinessAnalyst": "BusinessAnalyst",
+    "CustomerSupportRepresentative": "KundenSupportVertreter",
+    "AdministrativeAssistant": "VerwaltungsAssistentin",
+    "Intern": "Intern"
   }
 }

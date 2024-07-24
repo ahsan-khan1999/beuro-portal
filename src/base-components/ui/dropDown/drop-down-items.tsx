@@ -27,7 +27,7 @@ export const DropDownItems = ({
   const containerDefaultClasses = `absolute  ${
     (isLead &&
       (isLastIndex || isSecondLastIndex || isThirdLastIndex) &&
-      "!-top-[170px]") ||
+      "!-top-[205px]") ||
     (isOffer &&
       (isLastIndex || isSecondLastIndex || isThirdLastIndex) &&
       "!-top-40") ||

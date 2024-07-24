@@ -1,6 +1,7 @@
 import { Country, State } from "@/enums/auth";
 import { SideBar, countryType } from "@/types";
 import { PaymentsAdmin } from "@/types/admin/payments";
+import agentProfile from "@/assets/pngs/agent-profile.png";
 
 // Function for handling the date format
 function parseCustomDate(dateString: string) {
@@ -570,6 +571,12 @@ export const staticEnums: Record<string, any> = {
     InProcess: 3,
     Close: 1,
     Expired: 2,
+    // Appointment: 4,
+  },
+  AppointmentStatus: {
+    Pending: 0,
+    Completed: 1,
+    Cancelled: 2,
   },
   mailStatus: {
     opend: 0,
@@ -583,6 +590,23 @@ export const staticEnums: Record<string, any> = {
     none: "None",
     individual: 0,
     company: 1,
+  },
+
+  Designation: {
+    CEO: 0,
+    Administration: 1,
+    HRManager: 2,
+    Agent: 3,
+    FinanceManager: 4,
+    OperationsManager: 5,
+    ITManager: 6,
+    MarketingManager: 7,
+    SalesManager: 8,
+    ProjectManager: 9,
+    BusinessAnalyst: 10,
+    CustomerSupportRepresentative: 11,
+    AdministrativeAssistant: 12,
+    Intern: 13,
   },
   OfferStatus: {
     Open: 0,
@@ -968,6 +992,7 @@ export const sideBar: SideBar[] = [
     // query: "1",
     // queryName: "page",
   },
+
   {
     icon: "Customers",
     title: "sidebar.admin.customers",
@@ -1014,6 +1039,39 @@ export const sideBar: SideBar[] = [
       },
     ],
   },
+
+  {
+    icon: "Appointments",
+    title: "sidebar.customer.appointments.appointment",
+    pathname: "/appointments",
+    role: [1, 2],
+    query: "None",
+    queryName: "status",
+    inner: [
+      {
+        title: "sidebar.customer.appointments.pending",
+        pathname: "/appointments",
+        query: "0",
+        role: [1, 2],
+        queryName: "status",
+      },
+      {
+        title: "sidebar.customer.appointments.completed",
+        pathname: "/appointments",
+        query: "3",
+        queryName: "status",
+        role: [1, 2],
+      },
+      {
+        title: "sidebar.customer.appointments.cancelled",
+        pathname: "/appointments",
+        query: "1",
+        queryName: "status",
+        role: [1, 2],
+      },
+    ],
+  },
+
   {
     icon: "Offers",
     title: "sidebar.customer.offers.offers",
@@ -1294,12 +1352,12 @@ export const DEFAULT_EMPLOYEE = {
   email: "Test12@gmail.com",
   phoneNumber: "",
   mobileNumber: "",
-
   designation: "Islamabad",
   creationDate: "2023-11-17T12:43:00.479Z",
   action: "edit",
   employeeID: "1",
   createdBy: "",
+  picture: "",
 };
 
 export const DEFAULT_FOLLOWUP = {
@@ -1475,3 +1533,65 @@ export const DEFAULT_CONTACT_SUPPORT = {
     id: "",
   },
 };
+
+export const DEFAULT_APPOINTMETNS = {
+  id: "",
+  date: "",
+  isReportSubmitted: "",
+  startTime: "",
+  endTime: "",
+  leadID: {
+    id: "",
+    refID: "",
+    customerDetail: {
+      gender: "",
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      mobileNumber: "",
+      customerType: "",
+      address: {
+        streetNumber: "",
+        postalCode: "",
+        country: "",
+      },
+      companyName: "",
+    },
+  },
+  agent: {
+    id: "",
+    picture: "",
+    fullName: "",
+  },
+  appointmentRouter: "",
+  createdAt: "",
+};
+
+export const hoursArr = [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22",
+  "23",
+  "24",
+];
+
+export const minsArr = ["00", "15", "30", "45"];

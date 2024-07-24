@@ -15,4 +15,5 @@ export { TextAreaField } from "./text-area-field";
 export { CkEditor } from "./ckEditorField/ck-editor";
 export { MultiSelectField } from "./multi-select/multi-select-field";
 export { ToggleButton } from "./toggleButton/toggle";
-export { CustomerSelectField } from "./customerSelect/customer-select-field";
+export { AgentSelectField } from "./agentSelect/agent-select-field";
+export { TimePicker } from "./time-picker";

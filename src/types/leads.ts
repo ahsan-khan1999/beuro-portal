@@ -9,7 +9,7 @@ export interface Lead {
   refID: string;
   customerDetail: Customers;
   lead: CustomerLeadDetail;
-  leadStatus: "Open" | "InProcess" | "Close" | "Expired";
+  leadStatus: "Open" | "InProcess" | "Close" | "Expired" | "Appointment";
   customerID: string;
   images: string[];
   createdAt: string;
@@ -27,6 +27,7 @@ export interface Lead {
   additionalDetails: string;
   createdBy: User;
   isNoteCreated: boolean;
+  isAppointmentCreated: boolean;
   isImageAdded: boolean;
 }
 interface CustomerDetails {

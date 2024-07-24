@@ -77,6 +77,7 @@ export interface ButtonProps {
   icon?: any;
   iconAlt?: any;
   id: string;
+  IconComponent?: React.FC;
   disabled?: boolean;
 }
 

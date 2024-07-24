@@ -26,6 +26,7 @@ export default function Leads() {
     currentPage,
     handleLeadStatusUpdate,
     totalCount,
+    handleScheduleAppointments,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
@@ -34,6 +35,7 @@ export default function Leads() {
       handleAddNote={handleNotes}
       handleImageUpload={handleImageUpload}
       onStatusChange={handleLeadStatusUpdate}
+      onAppointment={handleScheduleAppointments}
     />,
     // currentPageRows.length > 0,
     totalCount !== 0,

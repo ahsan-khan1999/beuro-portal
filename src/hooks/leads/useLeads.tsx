@@ -24,6 +24,8 @@ import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
+import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 
 const useLeads = () => {
   const { lastPage, lead, loading, isLoading, totalCount, leadDetails } =
@@ -287,6 +289,55 @@ const useLeads = () => {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleScheduleAppointments = () => {
+    dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
+  };
+
+  const handleAppointmentsSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
+  };
+
+  const handleLeadStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "lead") {
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (status === "Appointment") {
+        handleScheduleAppointments();
+      }
+
+      if (!currentItem || currentItem.leadStatus !== status) {
+        const res = await dispatch(
+          updateLeadStatus({
+            data: {
+              id: id,
+              leadStatus: staticEnums["LeadStatus"][status],
+            },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            defaultUpdateModal();
+          }
+        }
+      }
+    }
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -335,48 +386,26 @@ const useLeads = () => {
         route={onClose}
       />
     ),
+    [ModalType.SCHEDULE_APPOINTMENTS]: (
+      <ScheduleAppointments
+        onClose={onClose}
+        heading={translate("appointments.schedule_appointment")}
+        onSuccess={handleAppointmentsSuccess}
+      />
+    ),
+    [ModalType.APPOINTMENT_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("appointments.successs_modal.heading")}
+        subHeading={translate("appointments.successs_modal.sub_heading")}
+        route={onClose}
+        imgSrc={reschudleIcon}
+      />
+    ),
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleLeadStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "lead") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
-      if (!currentItem || currentItem.leadStatus !== status) {
-        const res = await dispatch(
-          updateLeadStatus({
-            data: {
-              id: id,
-              leadStatus: staticEnums["LeadStatus"][status],
-            },
-          })
-        );
-
-        if (res?.payload) {
-
-          let index = currentPageRows.findIndex(
-            (item) => item.id === res.payload?.id
-          );
-
-          if (index !== -1) {
-            let prevPageRows = [...currentPageRows];
-            prevPageRows.splice(index, 1, res.payload);
-            setCurrentPageRows(prevPageRows);
-            defaultUpdateModal();
-          }
-        }
-      }
-    }
   };
 
   return {
@@ -396,6 +425,7 @@ const useLeads = () => {
     currentPage,
     handleLeadStatusUpdate,
     totalCount,
+    handleScheduleAppointments,
   };
 };
 

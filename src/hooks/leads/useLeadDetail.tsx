@@ -18,6 +18,8 @@ import { staticEnums } from "@/utils/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
+import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
+import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 
 export default function useLeadDetail() {
   const dispatch = useAppDispatch();
@@ -126,6 +128,19 @@ export default function useLeadDetail() {
     );
   };
 
+  const handleScheduleAppointments = () => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SCHEDULE_APPOINTMENTS,
+        data: { id: leadDetails?.id, refID: leadDetails?.refID },
+      })
+    );
+  };
+
+  const handleAppointmentsSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -164,6 +179,22 @@ export default function useLeadDetail() {
     [ModalType.SHARE_IMAGES]: (
       <ShareImages onClose={onClose} offerId={leadDetails?.id} />
     ),
+    [ModalType.SCHEDULE_APPOINTMENTS]: (
+      <ScheduleAppointments
+        onClose={onClose}
+        heading={translate("appointments.schedule_appointment")}
+        onSuccess={handleAppointmentsSuccess}
+      />
+    ),
+    [ModalType.APPOINTMENT_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("appointments.successs_modal.heading")}
+        subHeading={translate("appointments.successs_modal.sub_heading")}
+        route={onClose}
+        imgSrc={reschudleIcon}
+      />
+    ),
   };
 
   const renderModal = () => {
@@ -180,5 +211,6 @@ export default function useLeadDetail() {
     handleUploadImages,
     shareImgModal,
     defaultUpdateModal,
+    handleScheduleAppointments,
   };
 }

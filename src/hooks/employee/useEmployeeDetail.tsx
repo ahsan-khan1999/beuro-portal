@@ -1,4 +1,3 @@
-import { Employee } from "@/types/employee";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -24,6 +23,7 @@ import { CustomerPromiseActionType } from "@/types/customer";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { staticEnums } from "@/utils/static";
 
 const useEmployeeDetail = (stage: boolean) => {
   const dispatch = useDispatch();
@@ -33,7 +33,6 @@ const useEmployeeDetail = (stage: boolean) => {
 
   const router = useRouter();
 
-  // Function for close the modal
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
@@ -46,7 +45,6 @@ const useEmployeeDetail = (stage: boolean) => {
     dispatch(updateModalType({ type: ModalType.NONE }));
     dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE_SUCCESSFULLY }));
   };
-  // METHOD FOR HANDLING THE MODALS
 
   const { loading } = useAppSelector((state) => state.employee);
   const [isUpdate, setIsUpdate] = useState<boolean>(stage);
@@ -60,6 +58,7 @@ const useEmployeeDetail = (stage: boolean) => {
     formState: { errors },
     setError,
     control,
+    setValue,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
@@ -73,23 +72,31 @@ const useEmployeeDetail = (stage: boolean) => {
       );
     }
   }, [id]);
+
   useMemo(() => {
-    if (employeeDetails && stage) reset({ ...employeeDetails });
+    if (employeeDetails && stage)
+      reset({
+        ...employeeDetails,
+        designation: staticEnums["Designation"][employeeDetails.designation],
+      });
   }, [employeeDetails?.id]);
 
   const handleUpdateCancel = () => {
     setIsUpdate(!isUpdate);
   };
+
   const handleUpdateSuccess = () => {
     router.pathname = "/employees";
     updateQuery(router, router.locale as string);
     onClose();
   };
+
   const handleCreateSuccess = (email: string) => {
     dispatch(
       updateModalType({ type: ModalType.EMPLOYEE_SUCCESS, data: email })
     );
   };
+
   const deleteHandler = () => {
     dispatch(
       updateModalType({
@@ -98,6 +105,7 @@ const useEmployeeDetail = (stage: boolean) => {
       })
     );
   };
+
   const handleDelete = () => {
     dispatch(
       updateModalType({
@@ -105,6 +113,7 @@ const useEmployeeDetail = (stage: boolean) => {
       })
     );
   };
+
   const routeHandler = async () => {
     const res = await dispatch(
       deleteEmployee({ data: employeeDetails, router, setError, translate })
@@ -169,8 +178,14 @@ const useEmployeeDetail = (stage: boolean) => {
     let res;
     if (!stage) {
       res = await dispatch(
-        createEmployee({ data, router, setError, translate })
+        createEmployee({
+          data,
+          router,
+          setError,
+          translate,
+        })
       );
+
       if (res.payload) handleCreateSuccess(data?.email);
     } else if (stage) {
       res = await dispatch(

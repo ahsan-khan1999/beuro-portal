@@ -118,6 +118,13 @@ export interface OptionType {
   value: string;
   label: string;
 }
+export interface AgentOptionType {
+  value: {
+    picture: string;
+    name: string;
+  };
+  label: { picture: string; name: string };
+}
 
 export interface SelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
@@ -130,10 +137,10 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   disabled?: boolean;
   fieldIndex?: number;
 }
-export interface CustomerSelectProps
-  extends BaseFieldProps<Field.customerSelectField> {
+export interface AgentSelectProps
+  extends BaseFieldProps<Field.agentSelectField> {
   control?: Control<FieldValues>;
-  options: OptionType[];
+  options: AgentOptionType[];
   value?: string;
   svg?: string;
   onItemChange?: (id: string, index?: number) => void;
@@ -147,6 +154,21 @@ export interface CustomerSelectProps
 export interface SelectBoxProps {
   id: string;
   options: OptionType[];
+  value: string;
+  trigger?: UseFormTrigger<FieldValues>;
+  field?: ControllerRenderProps<FieldValues, string>;
+  svg?: string;
+  onItemChange?: (id: string, index?: number) => void;
+  onEnterPress?: (text: string) => void;
+  success?: boolean;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+  fieldIndex?: number;
+}
+export interface AgentSelectBoxProps {
+  id: string;
+  options: AgentOptionType[];
   value: string;
   trigger?: UseFormTrigger<FieldValues>;
   field?: ControllerRenderProps<FieldValues, string>;
@@ -367,7 +389,8 @@ export type FieldType =
   | Field.multiSelect
   | Field.addField
   | Field.toggleButton
-  | Field.customerSelectField;
+  | Field.agentSelectField
+  | Field.timePicker;
 
 export type FieldProps =
   | InputProps
@@ -396,7 +419,8 @@ export type FieldProps =
   | MultiSelectProps
   | AddFieldProps
   | ToggleButtonFormProps
-  | CustomerSelectProps;
+  | AgentSelectProps
+  | TimePickerProps;
 
 export interface FormField {
   containerClass?: string;
@@ -409,9 +433,7 @@ export interface FieldComponents {
   colorPicker: React.FC<ColorPickerProps>;
   textArea: React.FC<TextAreaProps>;
   ckEditor: React.FC<CKEditorProps>;
-  // ckEditorBox: React.FC<CKEditorBoxProps>;
   customerInput: React.FC<InputProps>;
-  // creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
   password: React.FC<PasswordInputProps>;
   select: React.FC<SelectProps>;
@@ -430,7 +452,8 @@ export interface FieldComponents {
   link: React.FC<LinkProps>;
   multiSelect: React.FC<MultiSelectProps>;
   toggleButton: React.FC<ToggleButtonFormProps>;
-  customerSelectField: React.FC<CustomerSelectProps>;
+  agentSelectField: React.FC<AgentSelectProps>;
+  timePicker: React.FC<TimePickerProps>;
 }
 
 export interface FormProps {
@@ -495,4 +518,19 @@ export interface ToggleButtonFormProps
   className: string;
   checked: boolean;
   onClick?: () => void;
+}
+
+export interface TimePickerProps extends BaseFieldProps<Field.timePicker> {
+  register: UseFormRegister<FieldValues>;
+  value?: string;
+  className?: string;
+  remove?: string;
+  svg?: string;
+  success?: boolean;
+  onRemove?: () => void;
+  dateType?: string;
+  min?: string;
+  max?: string;
+  handleChange: (date: any) => void;
+  placeholder?: string;
 }

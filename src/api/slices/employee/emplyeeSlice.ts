@@ -24,6 +24,7 @@ const initialState: EmployeeState = {
   employeeDetails: DEFAULT_EMPLOYEE,
 };
 
+
 export const readEmployee: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("employee/read", async (args, thunkApi) => {
     const { params, router, setError, translate } = args as any;

@@ -258,6 +258,12 @@
         "close": "Close",
         "expire": "Expire"
       },
+      "appointments": {
+        "appointment": "Appointments",
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
       "offers": {
         "offers": "Offers",
         "open": "Open",
@@ -269,7 +275,7 @@
         "contracts": "Contracts",
         "open": "Open",
         "confirmed": "Confirmed",
-        "cancelled": "Cacelled"
+        "cancelled": "Cancelled"
       },
       "invoices": {
         "invoices": "Invoices",
@@ -975,6 +981,8 @@
     "main_heading": "Leads",
     "add_button": "Add New",
     "side_images_heading": "Images",
+    "created": "Created",
+    "not_created": "Not Created",
     "table_functions": {
       "open": "Open",
       "inProcess": "InProcess",
@@ -985,7 +993,8 @@
       "Open": "Open",
       "InProcess": "InProcess",
       "Close": "Close",
-      "Expired": "Expired"
+      "Expired": "Expired",
+      "Appointment": "Appointment"
     },
     "table_headings": {
       "id": "ID",
@@ -996,6 +1005,7 @@
       "creation_date": "Creation Date",
       "location": "Location",
       "status": "Status",
+      "appointment": "Appointment",
       "images": "Images",
       "note": "Notes",
       "edit": "Edit"
@@ -1096,6 +1106,49 @@
       "without_images": "Continue without Images"
     }
   },
+  "appointments": {
+    "view_reports_btn": "View Reports",
+    "reschedule_btn": "Reschedule",
+    "create_appointments": "Create Appointment",
+    "appointment": "Appointment",
+    "view_appointments_btn": "View Appointments",
+    "schedule_appointment": "Schedule Appointment",
+    "reschedule_appointment": "Reschedule Appointment",
+    "detail_heading": "Appointment Details",
+    "table_headings": {
+      "id": "ID",
+      "lead_id": "Lead ID",
+      "customer": "Customer",
+      "date": "Date",
+      "time": "Time",
+      "agent": "Agent",
+      "status": "Status",
+      "action": "Action"
+    },
+    "appointment_status": {
+      "pending": "Pending",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "successs_modal": {
+      "heading": "Appointment create successfully",
+      "sub_heading": "Thanks for creating Appointments we are happy to have you."
+    },
+    "appointments_field_label": {
+      "lead_id": "Lead ID",
+      "enter_date": "Enter Date",
+      "enter_time": "Enter Time",
+      "select_agent": "Select Agent"
+    },
+    "detail_data": {
+      "assign_agent": "Assign Agent",
+      "lead_id": "Lead ID",
+      "status": "Status",
+      "date": "Date",
+      "time": "Time",
+      "no_data_found": "No reports submitted"
+    }
+  },
   "common": {
     "modals": {
       "contract_updating_description": "Thanks for updating Contract we are happy to have you.",
@@ -1168,6 +1221,9 @@
       "date": "Date",
       "success_signed_offer": "Operation Successful"
     },
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "schedule_btn": "Schedule Appointment",
     "details": "Details",
     "follow_up_completed": "Please contact the customer after 10 minutes.",
     "invoice_cards": {
@@ -2298,5 +2354,21 @@
     "description": "We are thrilled to inform you that we have successfully received your signed contract. Your trust in Buro to meet your needs is greatl appreciated, and we are committed to delivering excellence every step of the way. This marks the beginning of our official partnership, and we assure you that our team is dedicated to providing you with outstanding service and support. As we proceed, you will receive a comprehensive guide on how to maximize the benefits of our services. Should you have any questions or need assistance, please feel free to reach out to our customer support at any time. Your satisfaction is our priority, and we are here to ensure a smooth and beneficial experience for you. Thank you for choosing Buro. We look forward to a fruitful collaboration and are excited about the opportunities ahead.",
     "warm_regards": "Warm Regards",
     "team": "The Buro Team"
+  },
+  "employee_type": {
+    "CEO": "CEO",
+    "Administration": "Administration",
+    "HRManager": "HRManager",
+    "Agent": "Agent",
+    "FinanceManager": "FinanceManager",
+    "OperationsManager": "OperationsManager",
+    "ITManager": "ITManager",
+    "MarketingManager": "MarketingManager",
+    "SalesManager": "SalesManager",
+    "ProjectManager": "ProjectManager",
+    "BusinessAnalyst": "BusinessAnalyst",
+    "CustomerSupportRepresentative": "CustomerSupportRepresentative",
+    "AdministrativeAssistant": "AdministrativeAssistant",
+    "Intern": "Intern"
   }
 }

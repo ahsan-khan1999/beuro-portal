@@ -1,12 +1,22 @@
 import localStore from "./localstore.util";
 import { updateHeaders } from "../services/HttpProvider";
-import { setCookie, getCookie, deleteCookie } from 'cookies-next';
+import { setCookie, getCookie, deleteCookie } from "cookies-next";
+import Image from "next/image";
 export const getToken = () => getCookie("buroToken");
 export const getRefreshToken = () => getCookie("buroRefreshToken");
 
-export const setToken = (token) => setCookie("buroToken", token, { httpOnly: false, sameSite: true, secure: false });
+export const setToken = (token) =>
+  setCookie("buroToken", token, {
+    httpOnly: false,
+    sameSite: true,
+    secure: false,
+  });
 export const setRefreshToken = (token) =>
-  setCookie("buroRefreshToken", token,{ httpOnly: false, sameSite: true, secure: false });
+  setCookie("buroRefreshToken", token, {
+    httpOnly: false,
+    sameSite: true,
+    secure: false,
+  });
 
 export const setUserRole = (token) =>
   localStore.store_data("buroUserRole", token);
@@ -15,7 +25,8 @@ export const getUser = () => getCookie("buroUser");
 export const saveUser = (user) => setCookie("buroUser", user);
 
 export const logout = async () => {
-  Promise.all[deleteCookie("buroToken"),
+  Promise.all[
+    (deleteCookie("buroToken"),
     deleteCookie("buroRefreshToken"),
     deleteCookie("buroUser"),
     localStore.remove_data("buroUserRole"),
@@ -25,8 +36,8 @@ export const logout = async () => {
     localStore.remove_data("chatToken"),
     localStore.remove_data("offer"),
     localStore.remove_data("lead"),
-    updateHeaders()
-  ]
+    updateHeaders())
+  ];
 
   return true;
 };
@@ -54,7 +65,6 @@ class Auth {
     this.user = {};
   }
 }
-
 
 export const authClass = new Auth();
 
@@ -86,10 +96,10 @@ export const userRoleObject = {
 };
 
 export function getKeyByValue(object, value) {
-  return Object.keys(object).find((key) => object[key] === value);
+  return Object?.keys(object).find((key) => object[key] === value);
 }
 export function getValueByKey(object, value) {
-  return Object.values(object).find((key) => object[key] === value);
+  return Object?.values(object).find((key) => object[key] === value);
 }
 export function getCategoryName(category, id) {
   let result = category.find((item) => item?.id === id);
@@ -116,6 +126,24 @@ export const generateValues = (data) => {
 };
 
 export const getLabelByValue = (value, list) => {
-  let filteredItem = list?.filter((item) => item.value === value)
-  if (filteredItem) return filteredItem[0]?.label
-}
+  let filteredItem = list?.filter((item) => item.value === value);
+  if (filteredItem) return filteredItem[0]?.label;
+};
+
+export const getAgentLabelByValue = (value, options) => {
+  const option = options?.find((opt) => opt.value.name === value);
+  if (option) {
+    return (
+      <div className="flex items-center gap-x-2">
+        <Image
+          src={option.label.picture}
+          alt="profile"
+          width={24}
+          height={24}
+        />
+        <span>{option.label.name}</span>
+      </div>
+    );
+  }
+  return null;
+};

@@ -1,8 +1,8 @@
-import { CustomerSelectProps } from "@/types";
 import { Controller } from "react-hook-form";
-import { CustomerSelectBox } from "./customer-custom-select";
+import { AgentSelectBox } from "./agent-custom-select";
+import { AgentSelectProps } from "@/types";
 
-export const CustomerSelectField = ({
+export const AgentSelectField = ({
   id,
   options,
   value: defaultValue,
@@ -15,14 +15,14 @@ export const CustomerSelectField = ({
   disabled,
   fieldIndex,
   onEnterPress,
-}: CustomerSelectProps) => {
+}: AgentSelectProps) => {
   return (
     <Controller
       name={name}
       control={control}
       defaultValue={defaultValue}
       render={({ field, fieldState: { error } }) => (
-        <CustomerSelectBox
+        <AgentSelectBox
           id={id}
           svg={svg}
           onItemChange={onItemChange}

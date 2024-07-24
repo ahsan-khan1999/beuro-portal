@@ -15,18 +15,17 @@ import {
   AddFiled,
   ToggleButton,
   ColorPicker,
-  CustomerSelectField,
+  AgentSelectField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
 import { DivField } from "./fields/div-field";
-// import { CreditCardNumberField } from "./fields/credit-card-number-field";
-// import { CardType } from "@/enums";
 import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-field";
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
 import { CustomerInputField } from "./fields/customer-input-field";
 import { ProfileControllerField } from "./fields/profile_field/profile_upload_controller";
+import { TimePicker } from "./fields/time-picker";
 
 const fieldComponents: FieldComponents = {
   input: InputField,
@@ -34,7 +33,6 @@ const fieldComponents: FieldComponents = {
   textArea: TextAreaField,
   ckEditor: CkEditor,
   customerInput: CustomerInputField,
-  // creditCardNumberInput: CreditCardNumberField,
   creditCardExpiryDateInput: CreditCardExpiryDateField,
   password: PasswordField,
   select: SelectField,
@@ -53,7 +51,8 @@ const fieldComponents: FieldComponents = {
   link: LinkField,
   multiSelect: MultiSelectField,
   toggleButton: ToggleButton,
-  customerSelectField: CustomerSelectField,
+  agentSelectField: AgentSelectField,
+  timePicker: TimePicker,
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -97,6 +96,7 @@ export function isFieldType(type: any): type is FieldType {
     "addField",
     "toggleButton",
     "customerSelectField",
+    "timePicker",
   ].includes(type);
 }
 

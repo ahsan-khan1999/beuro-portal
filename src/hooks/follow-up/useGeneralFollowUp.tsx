@@ -190,7 +190,7 @@ const useGeneralFollowUp = () => {
     ),
   };
 
-  const todayFollowUps = followUp.filter((item) =>
+  const todayFollowUps = followUp?.filter((item) =>
     moment(item?.dateTime).isSame(moment(), "day")
   );
 
