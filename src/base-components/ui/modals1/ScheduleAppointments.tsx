@@ -28,6 +28,8 @@ export const ScheduleAppointments = ({
     refID,
   });
 
+  console.log(id);
+
   return (
     <BaseModal onClose={onClose} containerClassName="max-w-[733px] min-h-fit">
       <div className="relative flex flex-col px-[42px] pt-[26px] pb-[32px]">

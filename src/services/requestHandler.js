@@ -248,10 +248,18 @@ const createLead = (data) => {
 };
 
 // company lead appointment create
-const createCompanyLeadAppointment = (params) =>
+const createCompanyAppointment = (params) =>
   post(SERVICE_URLS.companyLeadAppointment, params, {
     feature: featureConstants.login,
   });
+
+const readCompanyAppointments = (params) =>
+  get(
+    SERVICE_URLS.companyLeadAppointment,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
 
 const updateLead = (data) =>
   put(SERVICE_URLS.updateLead + `${data?.step}/${data?.id}`, data, {
@@ -1195,6 +1203,7 @@ const apiServices = {
   deleteNotesSettings,
   calculateInvoiceData,
   readTableFollowUp,
-  createCompanyLeadAppointment
+  createCompanyAppointment,
+  readCompanyAppointments,
 };
 export default apiServices;

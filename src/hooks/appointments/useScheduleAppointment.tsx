@@ -5,8 +5,8 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { generateScheduleAppointmentsValidationSchema } from "@/validation/appointments";
 import { scheduleAppointmentsFormField } from "@/components/appointments/formFields/schedule-appointments-fields";
-import { createCompanyAppointment } from "@/api/slices/lead/leadSlice";
 import { useEffect } from "react";
+import { createAppointment } from "@/api/slices/appointment/appointmentSlice";
 
 export interface AppointmentHookProps {
   onSuccess: () => void;
@@ -56,7 +56,7 @@ export const useScheduleAppointment = ({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = { ...data, leadID: id };
     const res = await dispatch(
-      createCompanyAppointment({ data: apiData, router, translate })
+      createAppointment({ data: apiData, router, translate })
     );
     if (res?.payload) onSuccess();
   };

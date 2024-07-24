@@ -1518,16 +1518,36 @@ export const DEFAULT_CONTACT_SUPPORT = {
 };
 
 export const DEFAULT_APPOINTMETNS = {
-  id: "V-2000",
-  lead_id: "V-2000",
-  customer: "Ronald Richards",
-  date: "25/08/2023",
-  time: "16:30 - 18:00",
-  agent: {
-    imgProfile: agentProfile,
-    name: "Jenny Wilson",
+  id: "",
+  date: "",
+  isReportSubmitted: "",
+  startTime: "",
+  endTime: "",
+  leadID: {
+    id: "",
+    refID: "",
+    customerDetail: {
+      gender: "",
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      mobileNumber: "",
+      customerType: "",
+      address: {
+        streetNumber: "",
+        postalCode: "",
+        country: "",
+      },
+      companyName: "",
+    },
   },
-  appointments_status: "",
+  agent: {
+    id: "",
+    picture: "",
+    fullName: "",
+  },
+  appointmentRouter: "",
+  createdAt: "",
 };
 
 export const hoursArr = [

@@ -14,9 +14,6 @@ export default function Appointments() {
     handlePageChange,
     totalItems,
     itemsPerPage,
-    // handleNotes,
-    handleDeleteNote,
-    handleImageUpload,
     renderModal,
     filter,
     setFilter,
@@ -32,12 +29,11 @@ export default function Appointments() {
   const CurrentComponent = useEmptyStates(
     <TableRows
       dataToAdd={currentPageRows}
-      // handleAddNote={handleNotes}
-      // handleImageUpload={handleImageUpload}
       onStatusChange={handleAppointmentStatusUpdate}
       onAppointmentSchedule={handleScheduleAppointments}
     />,
-    totalCount !== 0,
+    // totalCount !== 0,
+    currentPageRows?.length > 0,
     isLoading
   );
 

@@ -1,4 +1,4 @@
-export const CancelFillIcon = () => {
+export const CancelFillIcon = ({ opacityVal }: { opacityVal: number }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ export const CancelFillIcon = () => {
       height="20"
       viewBox="0 0 20 20"
       fill="none"
-      className="cursor-pointer"
+      style={{ opacity: opacityVal }}
     >
       <g clip-path="url(#clip0_674_15942)">
         <path
