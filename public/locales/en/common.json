@@ -2481,20 +2481,21 @@
       "hinweis": "Note and information",
       "images": "Upload Images"
     },
-  "employee_type": {
-    "CEO": "CEO",
-    "Administration": "Administration",
-    "HRManager": "HR Manager",
-    "Agent": "Agent",
-    "FinanceManager": "Finance Manager",
-    "OperationsManager": "Operations Manager",
-    "ITManager": "IT Manager",
-    "MarketingManager": "Marketing Manager",
-    "SalesManager": "Sales Manager",
-    "ProjectManager": "Project Manager",
-    "BusinessAnalyst": "Business Analyst",
-    "CustomerSupportRepresentative": "Customer Support Representative",
-    "AdministrativeAssistant": "Administrative Assistant",
-    "Intern": "Intern"
+    "employee_type": {
+      "CEO": "CEO",
+      "Administration": "Administration",
+      "HRManager": "HR Manager",
+      "Agent": "Agent",
+      "FinanceManager": "Finance Manager",
+      "OperationsManager": "Operations Manager",
+      "ITManager": "IT Manager",
+      "MarketingManager": "Marketing Manager",
+      "SalesManager": "Sales Manager",
+      "ProjectManager": "Project Manager",
+      "BusinessAnalyst": "Business Analyst",
+      "CustomerSupportRepresentative": "Customer Support Representative",
+      "AdministrativeAssistant": "Administrative Assistant",
+      "Intern": "Intern"
+    }
   }
 }

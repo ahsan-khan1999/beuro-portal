@@ -2478,20 +2478,21 @@
       "hinweis": "Hinweis und Angaben",
       "images": "Upload Images"
     },
-  "employee_type": {
-    "CEO": "CEO",
-    "Administration": "Verwaltung",
-    "HRManager": "HR Manager",
-    "Agent": "Agent",
-    "FinanceManager": "Finance Manager",
-    "OperationsManager": "Operations Manager",
-    "ITManager": "IT Manager",
-    "MarketingManager": "Marketing Manager",
-    "SalesManager": "Sales Manager",
-    "ProjectManager": "Projekt Manager",
-    "BusinessAnalyst": "Business Analyst",
-    "CustomerSupportRepresentative": "Kunden Support Vertreter",
-    "AdministrativeAssistant": "Verwaltungs Assistentin",
-    "Intern": "Intern"
+    "employee_type": {
+      "CEO": "CEO",
+      "Administration": "Verwaltung",
+      "HRManager": "HR Manager",
+      "Agent": "Agent",
+      "FinanceManager": "Finance Manager",
+      "OperationsManager": "Operations Manager",
+      "ITManager": "IT Manager",
+      "MarketingManager": "Marketing Manager",
+      "SalesManager": "Sales Manager",
+      "ProjectManager": "Projekt Manager",
+      "BusinessAnalyst": "Business Analyst",
+      "CustomerSupportRepresentative": "Kunden Support Vertreter",
+      "AdministrativeAssistant": "Verwaltungs Assistentin",
+      "Intern": "Intern"
+    }
   }
 }

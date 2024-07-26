@@ -1,7 +1,6 @@
 import { Country, State } from "@/enums/auth";
 import { SideBar, countryType } from "@/types";
 import { PaymentsAdmin } from "@/types/admin/payments";
-import agentProfile from "@/assets/pngs/agent-profile.png";
 
 // Function for handling the date format
 function parseCustomDate(dateString: string) {
@@ -1072,6 +1071,79 @@ export const sideBar: SideBar[] = [
         query: "1",
         queryName: "status",
         role: [1, 2],
+      },
+    ],
+  },
+
+  // agent leads
+  {
+    icon: "Leads",
+    title: "sidebar.agent.leads.leads",
+    pathname: "/agent/leads",
+    role: [3],
+    query: "None",
+    queryName: "status",
+    inner: [
+      {
+        title: "sidebar.agent.leads.open",
+        pathname: "/agent/leads",
+        query: "0",
+        role: [3],
+        queryName: "status",
+      },
+      {
+        title: "sidebar.agent.leads.InProcess",
+        pathname: "/agent/leads",
+        query: "3",
+        queryName: "status",
+        role: [3],
+      },
+      {
+        title: "sidebar.agent.leads.close",
+        pathname: "/agent/leads",
+        query: "1",
+        queryName: "status",
+        role: [3],
+      },
+      {
+        title: "sidebar.agent.leads.expire",
+        pathname: "/agent/leads",
+        query: "2",
+        queryName: "status",
+        role: [3],
+      },
+    ],
+  },
+
+  // agent appointments
+  {
+    icon: "Appointments",
+    title: "sidebar.agent.appointments.appointment",
+    pathname: "/agent/appointments",
+    role: [3],
+    query: "None",
+    queryName: "status",
+    inner: [
+      {
+        title: "sidebar.agent.appointments.pending",
+        pathname: "/agent/appointments",
+        query: "0",
+        role: [3],
+        queryName: "status",
+      },
+      {
+        title: "sidebar.agent.appointments.completed",
+        pathname: "/agent/appointments",
+        query: "3",
+        queryName: "status",
+        role: [3],
+      },
+      {
+        title: "sidebar.agent.appointments.cancelled",
+        pathname: "/agent/appointments",
+        query: "1",
+        queryName: "status",
+        role: [3],
       },
     ],
   },
