@@ -165,7 +165,6 @@ export const deleteLead: AsyncThunk<boolean, object, object> | any =
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
-      // setErrors(setError, e?.data.data, translate);
       return false;
     }
   });

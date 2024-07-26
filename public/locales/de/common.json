@@ -1114,7 +1114,8 @@
       "date": "Datum",
       "time": "Zeit",
       "agent": "Agent",
-      "status": "Status",
+      "status": "Terminstatus",
+      "offer_status": "Angebotsstatus",
       "action": "Aktion"
     },
     "appointment_status": {
@@ -1129,7 +1130,7 @@
     "appointments_field_label": {
       "lead_id": "Lead ID",
       "enter_date": "Datum eingeben",
-      "enter_time": "Zeit eingeben",
+      "enter_time": "Zeit auswählen",
       "select_agent": "Agent auswählen"
     },
     "detail_data": {

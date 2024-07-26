@@ -132,7 +132,11 @@ export default function useLeadDetail() {
     dispatch(
       updateModalType({
         type: ModalType.SCHEDULE_APPOINTMENTS,
-        data: { id: leadDetails?.id, refID: leadDetails?.refID },
+        data: {
+          id: leadDetails?.id,
+          leadId: leadDetails?.id,
+          refID: leadDetails?.refID,
+        },
       })
     );
   };

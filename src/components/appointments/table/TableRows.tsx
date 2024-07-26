@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { formatDateTimeToDate, getOfferStatusColor } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { CancelFillIcon } from "@/assets/svgs/components/cancel-icon";
@@ -81,9 +81,9 @@ const TableRows = ({
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(250px,_3fr)_minmax(140px,_140px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_100%)_minmax(140px,_140px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_70px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(100px,_100%)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(70px,_70px)_minmax(100px,_100px)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(60px,_4fr)_minmax(140px,_140px)] border-t border-t-[#E7EAEE]`}
+                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(250px,_3fr)_minmax(180px,_180px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(80px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(70px,_3fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] border-t border-t-[#E7EAEE]`}
               >
-                <span className="py-4 truncate">{item?.id?.slice(-6)}</span>
+                <span className="py-4 truncate">{item?.leadID?.refID}</span>
                 <div className="flex items-center gap-x-1">
                   {/* {(item?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
@@ -165,6 +165,16 @@ const TableRows = ({
                     isLead={true}
                   />
                 </div>
+
+                <span className="py-4 flex justify-center items-center">
+                  <div
+                    className={`bg-[${getOfferStatusColor(item.offerStatus)}]
+                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
+                  >
+                    {/* {translate(`offer_status.${item.offerStatus}`)} */}
+                    {translate(`offer_status.Expired`)}
+                  </div>
+                </span>
               </div>
             </div>
 

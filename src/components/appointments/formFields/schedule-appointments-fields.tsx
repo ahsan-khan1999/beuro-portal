@@ -77,7 +77,7 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                       value:
                         (appointmentDetails?.id &&
                           appointmentDetails?.startTime) ||
-                        "09:00",
+                        "",
                       options: [
                         { label: "00:00", value: "00:00" },
                         { label: "00:15", value: "00:15" },
@@ -189,7 +189,7 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                       value:
                         (appointmentDetails?.id &&
                           appointmentDetails?.endTime) ||
-                        "09:00",
+                        "",
                       options: [
                         { label: "00:00", value: "00:00" },
                         { label: "00:15", value: "00:15" },

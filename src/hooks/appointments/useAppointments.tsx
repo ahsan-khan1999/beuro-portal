@@ -19,13 +19,14 @@ import localStoreUtil from "@/utils/localstore.util";
 import { DEFAULT_APPOINTMETNS } from "@/utils/static";
 
 export const useAppointments = () => {
-  const { loading, isLoading, totalCount, appointmentDetails, appointment } =
-    useAppSelector((state) => state.appointment);
+  const { loading, isLoading, totalCount, appointment } = useAppSelector(
+    (state) => state.appointment
+  );
 
   const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-  const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
+  // const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -106,13 +107,14 @@ export const useAppointments = () => {
             size: 15,
           },
         })
-      ).then((response: any) => {
-        if (response?.payload) {
-          setCurrentPageRows(response?.payload);
-        }
-      });
+      );
+      // .then((response: any) => {
+      //   if (response?.payload) {
+      //     setCurrentPageRows(response?.payload);
+      //   }
+      // });
     }
-  }, []);
+  }, [query]);
 
   const totalItems = totalCount;
   const itemsPerPage = 15;
@@ -202,10 +204,11 @@ export const useAppointments = () => {
   };
 
   return {
-    currentPageRows,
+    // currentPageRows,
     totalItems,
     handlePageChange,
     itemsPerPage,
+    appointment,
     renderModal,
     handleFilterChange,
     filter,
