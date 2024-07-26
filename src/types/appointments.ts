@@ -1,13 +1,33 @@
 export interface Appointments {
   id: string;
-  lead_id: string;
-  customer: string;
-  companyName?: string;
   date: string;
-  time: string;
-  agent?: {
-    profile_img: string;
-    name: string;
+  isReportSubmitted: boolean;
+  startTime: string;
+  endTime: string;
+  leadID: {
+    id: string;
+    refID: string;
+    customerDetail: {
+      gender: number;
+      fullName: string;
+      email: string;
+      phoneNumber: string;
+      mobileNumber: string;
+      customerType: number;
+      address: {
+        streetNumber: string;
+        postalCode: string;
+        country: string;
+      };
+      companyName: string;
+    };
   };
-  appointmentsStatus: "Pending" | "Completed" | "Cancelled";
+  agent: {
+    id: string;
+    picture: string;
+    fullName: string;
+  };
+  offerStatus: string;
+  appointmentRouter: string;
+  createdAt: string;
 }

@@ -135,15 +135,10 @@ export interface OptionType {
 }
 export interface AgentOptionType {
   value: {
-    imgSrc: string;
+    picture: string;
     name: string;
-    status: string;
   };
-  label: {
-    imgSrc: string;
-    name: string;
-    status: string;
-  };
+  label: { picture: string; name: string };
 }
 
 export interface SelectProps extends BaseFieldProps<Field.select> {

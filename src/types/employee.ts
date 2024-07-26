@@ -18,6 +18,7 @@ export interface Employee {
   action: string;
   createdBy: string;
   employeeID: string;
+  picture: string;
 }
 export interface EmployeeDetail {
   date?: string;
@@ -25,13 +26,13 @@ export interface EmployeeDetail {
   name?: string;
   isUpdate: boolean;
   handleDelete: () => void;
-  refID:string
+  refID: string;
 }
 
 export interface FormDataProps {
   employeeDetail?: Employee;
   isUpdate: boolean;
-  handlePasswordReset: Function
+  handlePasswordReset: Function;
   setIsUpdate: SetStateAction<any>;
   fields: FormField[];
   handleSubmit: UseFormHandleSubmit<FieldValues>;
@@ -39,13 +40,11 @@ export interface FormDataProps {
   onSubmit: SubmitHandler<FieldValues>;
 }
 
-
 export interface LinkSendToEmailModal {
   onClose: () => void;
   createNewPswHandler: () => void;
 }
 
-
 export interface PasswordChangedModal {
-  onClose: () => void
+  onClose: () => void;
 }

@@ -1119,8 +1119,10 @@
     "view_reports_btn": "Berichte anzeigen",
     "reschedule_btn": "Umplanen",
     "sub_report": "Bericht einreichen",
+    "create_appointments": "Termin erstellen",
     "view_appointments_btn": "Termine ansehen",
     "schedule_appointment": "Termin vereinbaren",
+    "reschedule_appointment": "Termin verschieben",
     "detail_heading": "Termin Details",
     "appointment": "Termin",
     "table_headings": {
@@ -1131,7 +1133,8 @@
       "date": "Datum",
       "time": "Zeit",
       "agent": "Agent",
-      "status": "Status",
+      "status": "Terminstatus",
+      "offer_status": "Angebotsstatus",
       "action": "Aktion"
     },
     "appointment_status": {
@@ -1146,7 +1149,7 @@
     "appointments_field_label": {
       "lead_id": "Lead ID",
       "enter_date": "Datum eingeben",
-      "enter_time": "Zeit eingeben",
+      "enter_time": "Zeit auswählen",
       "select_agent": "Agent auswählen"
     },
     "detail_data": {
@@ -2474,6 +2477,21 @@
       "preis_chf": "Preis CHF",
       "hinweis": "Hinweis und Angaben",
       "images": "Upload Images"
-    }
+    },
+  "employee_type": {
+    "CEO": "CEO",
+    "Administration": "Verwaltung",
+    "HRManager": "HR Manager",
+    "Agent": "Agent",
+    "FinanceManager": "Finance Manager",
+    "OperationsManager": "Operations Manager",
+    "ITManager": "IT Manager",
+    "MarketingManager": "Marketing Manager",
+    "SalesManager": "Sales Manager",
+    "ProjectManager": "Projekt Manager",
+    "BusinessAnalyst": "Business Analyst",
+    "CustomerSupportRepresentative": "Kunden Support Vertreter",
+    "AdministrativeAssistant": "Verwaltungs Assistentin",
+    "Intern": "Intern"
   }
 }

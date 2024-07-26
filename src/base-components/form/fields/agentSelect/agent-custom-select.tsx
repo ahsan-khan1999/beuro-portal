@@ -1,6 +1,6 @@
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { AgentSelectBoxProps } from "@/types";
-import { getAgentLabelByValue, getLabelByValue } from "@/utils/auth.util";
+import { getAgentLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
+import dummyAgentProfile from "@/assets/pngs/dummyAgent.png";
 
 export const AgentSelectBox = ({
   id,
@@ -122,16 +123,17 @@ export const AgentSelectBox = ({
                   <div className="flex items-center justify-between gap-x-3">
                     <div className="flex items-center gap-x-3">
                       <Image
-                        src={label.imgSrc}
+                        src={label.picture || dummyAgentProfile}
                         alt="profile"
                         width={40}
                         height={40}
+                        className="rounded-full"
                       />
                       <span className="text-[#191D23] text-base font-medium">
                         {label.name}
                       </span>
                     </div>
-                    <span
+                    {/* <span
                       className={`${
                         value.status === "Available"
                           ? "text-[#45C769]"
@@ -139,7 +141,7 @@ export const AgentSelectBox = ({
                       } text-base font-medium`}
                     >
                       {label.status}
-                    </span>
+                    </span> */}
                   </div>
                 </li>
               ))}

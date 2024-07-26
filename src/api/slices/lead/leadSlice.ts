@@ -165,7 +165,6 @@ export const deleteLead: AsyncThunk<boolean, object, object> | any =
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
-      // setErrors(setError, e?.data.data, translate);
       return false;
     }
   });
@@ -207,6 +206,7 @@ const leadSlice = createSlice({
     builder.addCase(readLeadDetails.rejected, (state) => {
       state.loadingDetails = false;
     });
+
     builder.addCase(createLead.pending, (state) => {
       state.loading = true;
     });
@@ -216,6 +216,7 @@ const leadSlice = createSlice({
     builder.addCase(createLead.rejected, (state) => {
       state.loading = false;
     });
+
     builder.addCase(updateLead.pending, (state) => {
       state.loading = true;
     });

@@ -119,7 +119,7 @@ const EmployeeSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(readEmployee.fulfilled, (state, action) => {
-      (state.employee = action.payload.Customer),
+      (state.employee = action.payload.Employee),
         (state.lastPage = action.payload.lastPage),
         (state.totalCount = action.payload.totalCount),
         (state.isLoading = false);
@@ -131,8 +131,8 @@ const EmployeeSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(readEmployeeDetail.fulfilled, (state, action) => {
-      state.loading = false;
       state.employeeDetails = action.payload;
+      state.loading = false;
     });
     builder.addCase(readEmployeeDetail.rejected, (state) => {
       state.loading = false;

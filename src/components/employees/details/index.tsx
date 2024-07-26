@@ -19,7 +19,7 @@ const EmploysDetails = () => {
     errors,
     deleteHandler,
     loading,
-  } = useEmployeeDetail(true);
+  } = useEmployeeDetail({ stage: true, isCreate: false });
 
   return (
     <Layout>

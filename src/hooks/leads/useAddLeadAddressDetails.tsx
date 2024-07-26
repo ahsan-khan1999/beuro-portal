@@ -85,7 +85,6 @@ export const useAddLeadAddressDetails = (
 
   const handleAddNewAddress = () => {
     append(addressObject);
-    // const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
 
     setValue(`address.${addressFieldsLength}.addressType`, ``);
     setValue(

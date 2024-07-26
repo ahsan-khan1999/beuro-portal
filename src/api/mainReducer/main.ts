@@ -16,12 +16,15 @@ import imageSlice from "../slices/imageSlice/image";
 import settings from "../slices/settingSlice/settings";
 import EmailSlice from "../slices/emailTracker/email";
 import companySlice from "../slices/company/companySlice";
+import appointmentSlice from "../slices/appointment/appointmentSlice";
+
 const reducer = {
   auth,
   global: globalSlice,
   // user: userAccountSlice
   customer: customerSlice,
   lead: leadSlice,
+  appointment: appointmentSlice,
   content: contentSlice,
   offer: offerSlice,
   contract: contractSlice,
@@ -36,4 +39,5 @@ const reducer = {
   emailSlice: EmailSlice,
   company: companySlice,
 };
+
 export default reducer;

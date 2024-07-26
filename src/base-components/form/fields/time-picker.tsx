@@ -28,8 +28,8 @@ export const TimePicker = ({
 
   useEffect(() => {
     if (value) {
-      setHours(moment(value).format("HH"));
-      setMins(moment(value).format("mm"));
+      setHours(value);
+      // setMins(moment(value).format("mm"));
     }
   }, [value]);
 

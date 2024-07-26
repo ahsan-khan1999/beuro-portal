@@ -44,6 +44,7 @@ import {
 } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
+import { Appointments } from "./appointments";
 
 export interface SideBar {
   icon?: keyof typeof svgs;
@@ -338,6 +339,7 @@ export type GenerateEmployeeFormField = (
   isUpdate: boolean,
   handleUpdateCancel: () => void,
   employeeDetails?: Employee,
+  isCreate?: boolean,
   control?: Control<FieldValues>
 ) => FormField[];
 
@@ -347,6 +349,8 @@ export type GenerateScheduleAppointmentsFormField = (
   control: Control<FieldValues>,
   properties: {
     onClose: () => void;
+    appointmentDetails?: Appointments;
+    employee: Employee[];
     isUpdate?: boolean;
     onClick?: Function;
     handleChangeTimeField?: (type: string, date: string) => void;

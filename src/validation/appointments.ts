@@ -5,16 +5,19 @@ export const generateScheduleAppointmentsValidationSchema = (
   translate: Function
 ) => {
   return yup.object().shape({
-    [ScheduleAppointments.LEAD_ID]: yup
+    [ScheduleAppointments.leadID]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [ScheduleAppointments.ENTER_DATE]: yup
+    [ScheduleAppointments.date]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [ScheduleAppointments.START_TIME]: yup
+    [ScheduleAppointments.startTime]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [ScheduleAppointments.SELECT_AGENT]: yup
+    [ScheduleAppointments.endTime]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [ScheduleAppointments.agent]: yup
       .string()
       .required(translate("validationMessages.required")),
   });

@@ -571,7 +571,7 @@ export const staticEnums: Record<string, any> = {
     InProcess: 3,
     Close: 1,
     Expired: 2,
-    Appointment: 4,
+    // Appointment: 4,
   },
   AppointmentStatus: {
     Pending: 0,
@@ -590,6 +590,23 @@ export const staticEnums: Record<string, any> = {
     none: "None",
     individual: 0,
     company: 1,
+  },
+
+  Designation: {
+    CEO: 0,
+    Administration: 1,
+    HRManager: 2,
+    Agent: 3,
+    FinanceManager: 4,
+    OperationsManager: 5,
+    ITManager: 6,
+    MarketingManager: 7,
+    SalesManager: 8,
+    ProjectManager: 9,
+    BusinessAnalyst: 10,
+    CustomerSupportRepresentative: 11,
+    AdministrativeAssistant: 12,
+    Intern: 13,
   },
   OfferStatus: {
     Open: 0,
@@ -1334,17 +1351,17 @@ export const DEFAULT_CUSTOMER = {
 //   refID: "",
 // };
 export const DEFAULT_EMPLOYEE = {
-  id: "001",
-  fullName: "Rahal Ahmad",
-  email: "Test12@gmail.com",
+  id: "",
+  fullName: "",
+  email: "",
   phoneNumber: "",
   mobileNumber: "",
-
-  designation: "Islamabad",
-  creationDate: "2023-11-17T12:43:00.479Z",
-  action: "edit",
-  employeeID: "1",
+  designation: "",
+  creationDate: "",
+  action: "",
+  employeeID: "",
   createdBy: "",
+  picture: "",
 };
 
 export const DEFAULT_FOLLOWUP = {
@@ -1522,16 +1539,36 @@ export const DEFAULT_CONTACT_SUPPORT = {
 };
 
 export const DEFAULT_APPOINTMETNS = {
-  id: "V-2000",
-  lead_id: "V-2000",
-  customer: "Ronald Richards",
-  date: "25/08/2023",
-  time: "16:30 - 18:00",
-  agent: {
-    imgProfile: agentProfile,
-    name: "Jenny Wilson",
+  id: "",
+  date: "",
+  isReportSubmitted: "",
+  startTime: "",
+  endTime: "",
+  leadID: {
+    id: "",
+    refID: "",
+    customerDetail: {
+      gender: "",
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      mobileNumber: "",
+      customerType: "",
+      address: {
+        streetNumber: "",
+        postalCode: "",
+        country: "",
+      },
+      companyName: "",
+    },
   },
-  appointments_status: "",
+  agent: {
+    id: "",
+    picture: "",
+    fullName: "",
+  },
+  appointmentRouter: "",
+  createdAt: "",
 };
 
 export const hoursArr = [

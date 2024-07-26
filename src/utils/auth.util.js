@@ -96,10 +96,10 @@ export const userRoleObject = {
 };
 
 export function getKeyByValue(object, value) {
-  return Object.keys(object).find((key) => object[key] === value);
+  return Object?.keys(object).find((key) => object[key] === value);
 }
 export function getValueByKey(object, value) {
-  return Object.values(object).find((key) => object[key] === value);
+  return Object?.values(object).find((key) => object[key] === value);
 }
 export function getCategoryName(category, id) {
   let result = category.find((item) => item?.id === id);
@@ -131,11 +131,17 @@ export const getLabelByValue = (value, list) => {
 };
 
 export const getAgentLabelByValue = (value, options) => {
-  const option = options.find((opt) => opt.value.name === value);
+  const option = options?.find((opt) => opt.value.name === value);
   if (option) {
     return (
       <div className="flex items-center gap-x-2">
-        <Image src={option.label.imgSrc} alt="profile" width={24} height={24} />
+        <Image
+          src={option.label.picture}
+          alt="profile"
+          width={24}
+          height={24}
+          className="rounded-full"
+        />
         <span>{option.label.name}</span>
       </div>
     );

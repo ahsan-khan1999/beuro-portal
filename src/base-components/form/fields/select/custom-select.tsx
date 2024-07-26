@@ -1,4 +1,3 @@
-// import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
 import { getLabelByValue } from "@/utils/auth.util";
@@ -28,7 +27,6 @@ export const SelectBox = ({
   const [option, setOption] = useState(options);
 
   useEffect(() => {
-    // setOption(options);
     if (defaultValue) {
       field?.onChange(defaultValue);
     }
@@ -69,7 +67,6 @@ export const SelectBox = ({
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
-        // placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
@@ -114,15 +111,17 @@ export const SelectBox = ({
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
-              {option?.map(({ value, label }) => (
-                <li
-                  key={value}
-                  onClick={() => selectedOptionHandler(value)}
-                  className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
-                >
-                  {label}
-                </li>
-              ))}
+              {option?.map(({ value, label }) => {
+                return (
+                  <li
+                    key={value}
+                    onClick={() => selectedOptionHandler(value)}
+                    className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
+                  >
+                    {label}
+                  </li>
+                );
+              })}
             </motion.ul>
           </motion.div>
         )}
