@@ -339,6 +339,7 @@ export type GenerateEmployeeFormField = (
   isUpdate: boolean,
   handleUpdateCancel: () => void,
   employeeDetails?: Employee,
+  isCreate?: boolean,
   control?: Control<FieldValues>
 ) => FormField[];
 

@@ -13,7 +13,7 @@ const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
     isUpdate,
     renderModal,
     translate,
-  } = useEmployeeDetail(false);
+  } = useEmployeeDetail({ stage: false, isCreate: true });
 
   return (
     <div

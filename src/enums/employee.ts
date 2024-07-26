@@ -1,5 +1,6 @@
 // Employ details enum
 export enum EmployDetailsFields {
+  picture = "picture",
   employName = "fullName",
   designation = "designation",
   email = "email",

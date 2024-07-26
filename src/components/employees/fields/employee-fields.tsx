@@ -9,6 +9,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
   isUpdate,
   handleUpdateCancel,
   employeeDetails,
+  isCreate,
   control
 ) => {
   const { t: translate } = useTranslation();
@@ -29,6 +30,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
               id: "picture",
               name: "picture",
               control,
+              disabled: isUpdate,
             },
           },
 
@@ -55,6 +57,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
                     inputType: "text",
                     id: "fullName",
                     name: "fullName",
+                    placeholder: "Jhon William",
                     register,
                     disabled: isUpdate,
                   },
@@ -68,7 +71,9 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
                   },
 
                   field: {
-                    className: `pl-4 !border-[#BFBFBF] focus:!border-primary`,
+                    className: `pl-4 !border-[#BFBFBF] focus:!border-primary ${
+                      isUpdate ? "cursor-default" : "cursor-pointer"
+                    }`,
                     type: Field.select,
                     id: "designation",
                     name: "designation",
@@ -98,6 +103,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
                     inputType: "text",
                     id: "email",
                     name: "email",
+                    placeholder: "jhonwilli65@gmail.com",
                     register,
                     disabled: isUpdate,
                   },
@@ -117,6 +123,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
                     id: "phoneNumber",
                     name: "phoneNumber",
                     disabled: isUpdate,
+                    placeholder: "+49 234 23423",
                     inputType: "tel",
                     register,
                     value: employeeDetails && employeeDetails?.phoneNumber,
@@ -137,6 +144,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
                     id: "mobileNumber",
                     name: "mobileNumber",
                     inputType: "tel",
+                    placeholder: "+49 234 23423",
                     disabled: isUpdate,
                     register,
                     value: employeeDetails && employeeDetails?.mobileNumber,
@@ -246,9 +254,11 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: `${translate("employees.details.save_changes_button")}`,
+              text: isCreate
+                ? `${translate("employees.details.save_button")}`
+                : `${translate("employees.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg px-4 w-fit h-auto text-white hover:bg-none ${
+              className: `rounded-lg px-4 min-w-[100px] w-fit h-auto text-white hover:bg-none ${
                 isUpdate && "hidden"
               }`,
               loading,
