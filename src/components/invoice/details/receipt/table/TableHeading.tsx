@@ -39,8 +39,6 @@ const TableHeading = () => {
         <span className="font-semibold text-base text-white flex justify-center items-center">
           {translate("common.actions")}
         </span>
-
-        {/* <span className="font-semibold text-base text-white"></span> */}
       </div>
     </div>
   );

@@ -30,14 +30,14 @@ export const AddNoteFormField: GenerateNotesFormField = (
               .slice()
               .reverse()
               .map((item) => ({
-                label: item.notes?.noteType,
-                value: item.notes?.noteType,
+                label: item?.notes?.noteType,
+                value: item?.notes?.noteType,
               }))
           : [],
         control,
         value:
           (noteSetting &&
-            noteSetting[noteSetting.length - 1]?.notes?.noteType) ||
+            noteSetting[noteSetting?.length - 1]?.notes?.noteType) ||
           "",
         onItemChange: onNoteSelect,
         trigger,

@@ -2195,7 +2195,8 @@
   },
   "payment_method": {
     "Cash": "Bar",
-    "Online": "Online"
+    "Online": "Online",
+    "Twint": "Twint"
   },
 
   "customer_status": {
