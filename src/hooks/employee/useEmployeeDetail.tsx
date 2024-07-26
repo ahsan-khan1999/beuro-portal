@@ -26,12 +26,12 @@ import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { staticEnums } from "@/utils/static";
 
 const useEmployeeDetail = (stage: boolean) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
   const { employeeDetails } = useAppSelector((state) => state.employee);
 
-  const router = useRouter();
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));

@@ -81,7 +81,6 @@ const AddEmployeeDetails = () => {
       <CreateNewPassword
         onClose={onClose}
         passwordSetSuccessfully={passwordSetSuccessfully}
-        // email={data}
       />
     ),
     [ModalType.PASSWORD_SET]: (

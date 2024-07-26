@@ -1347,15 +1347,15 @@ export const DEFAULT_CUSTOMER = {
 //   refID: "",
 // };
 export const DEFAULT_EMPLOYEE = {
-  id: "001",
-  fullName: "Rahal Ahmad",
-  email: "Test12@gmail.com",
+  id: "",
+  fullName: "",
+  email: "",
   phoneNumber: "",
   mobileNumber: "",
-  designation: "Islamabad",
-  creationDate: "2023-11-17T12:43:00.479Z",
-  action: "edit",
-  employeeID: "1",
+  designation: "",
+  creationDate: "",
+  action: "",
+  employeeID: "",
   createdBy: "",
   picture: "",
 };

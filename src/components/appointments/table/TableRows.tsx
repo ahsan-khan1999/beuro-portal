@@ -57,6 +57,11 @@ const TableRows = ({
       }`}
     >
       {dataToAdd?.map((item, index) => {
+        const imageUrl = item?.agent?.picture
+          ? item.agent.picture.startsWith("http")
+            ? item.agent.picture
+            : `/${item.agent.picture}`
+          : dummyAgent;
         // const customerType = item?.customerDetail
         //   ?.customerType as keyof (typeof staticEnums)["CustomerType"];
         // const name =
@@ -117,10 +122,11 @@ const TableRows = ({
 
                 <div className="flex items-center gap-x-[10px]">
                   <Image
-                    src={dummyAgent}
+                    src={imageUrl || dummyAgent}
                     alt="agent profile"
                     width={32}
                     height={32}
+                    className="rounded-full"
                   />
                   <span className="py-4 truncate">{item?.agent?.fullName}</span>
                 </div>
