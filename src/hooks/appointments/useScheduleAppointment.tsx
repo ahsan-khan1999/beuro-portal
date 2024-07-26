@@ -8,8 +8,6 @@ import { scheduleAppointmentsFormField } from "@/components/appointments/formFie
 import { useEffect, useState } from "react";
 import {
   createAppointment,
-  readAppointments,
-  setAppointmentDetails,
   updateAppointment,
 } from "@/api/slices/appointment/appointmentSlice";
 import { fieldDateFormat } from "@/utils/utility";
@@ -104,7 +102,6 @@ export const useScheduleAppointment = ({
         )
       : await dispatch(createAppointment({ data: apiData, router, translate }));
     if (res?.payload) {
-      // dispatch(readAppointments());
       onSuccess();
     }
   };

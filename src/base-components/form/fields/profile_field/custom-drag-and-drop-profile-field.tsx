@@ -6,6 +6,7 @@ import Image from "next/image";
 import edit_circle from "@/assets/svgs/edit_circle.svg";
 import { combineClasses } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import fileUploadIcon from "@/assets/pngs/file-upload-icon.png";
 
 export interface ProfileUploadFieldProps {
   id: string;
@@ -57,67 +58,70 @@ export const ProfileUpload = ({
 
   return (
     <div>
-      <label htmlFor={id}>
-        <div className="w-full">
-          {field.value ? (
-            <div className={`${classes}`}>
-              {isSVG ? (
-                <object
-                  data={field.value}
-                  width={241}
-                  height={241}
-                  className={`${classes} object-contain`}
-                />
-              ) : (
-                <Image
-                  src={field.value}
-                  layout="responsive"
-                  width={241}
-                  height={241}
-                  alt="Uploaded Preview"
-                  key={Math.random()}
-                  className={`${classes} object-contain`}
-                />
-              )}
-              <label
-                className={`absolute ${iconClasses} ${disabled && "hidden"}`}
-              >
-                <input
-                  type="file"
-                  className="hidden"
-                  onChange={handleFileSelected}
-                  disabled={disabled}
-                />
-                <Image
-                  src={edit_circle}
-                  alt="editIcon"
-                  className="cursor-pointer"
-                />
-              </label>
-            </div>
-          ) : (
-            <div className={`${classes} cursor-pointer`}>
-              <label className={`absolute ${iconClasses}`}>
-                <input
-                  type="file"
-                  className="hidden"
-                  onChange={handleFileSelected}
-                  disabled={disabled}
-                />
-                <Image src={edit_circle} alt="editIcon" />
-              </label>
-            </div>
-          )}
-        </div>
+      {/* <label> */}
+      <div className="w-full">
+        {field.value ? (
+          <div className={`${classes}`}>
+            {isSVG ? (
+              <object
+                data={field.value}
+                width={241}
+                height={241}
+                className={`${classes} object-contain`}
+              />
+            ) : (
+              <Image
+                src={field.value}
+                layout="responsive"
+                width={241}
+                height={241}
+                alt="Uploaded Preview"
+                key={Math.random()}
+                className={`${classes} object-contain`}
+              />
+            )}
 
-        <input
-          id={id}
-          type="file"
-          className="hidden"
-          onChange={handleFileSelected}
-          disabled={disabled}
-        />
-      </label>
+            <label
+              className={`absolute ${iconClasses} ${disabled && "hidden"}`}
+            >
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleFileSelected}
+                disabled={disabled}
+              />
+
+              <Image
+                src={edit_circle}
+                alt="editIcon"
+                className="cursor-pointer"
+              />
+            </label>
+          </div>
+        ) : (
+          <div className={`${classes} flex justify-center items-center`}>
+            <input
+              id={id}
+              type="file"
+              className="hidden"
+              onChange={handleFileSelected}
+              disabled={disabled}
+            />
+            <label className={`absolute`}>
+              <div className="flex flex-col items-center gap-y-[10px]">
+                <Image src={fileUploadIcon} alt="editIcon" />
+                <span
+                  className="bg-primary px-3 py-2 cursor-pointer text-white text-sm font-medium rounded-lg"
+                  onClick={() => document.getElementById(id)?.click()}
+                >
+                  {translate("common.upload_button")}
+                </span>
+              </div>
+            </label>
+          </div>
+        )}
+      </div>
+      {/* </label> */}
       {errorMessage && <p className="text-red text-sm mt-2">{errorMessage}</p>}
     </div>
   );

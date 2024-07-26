@@ -27,6 +27,7 @@ export interface Appointments {
     picture: string;
     fullName: string;
   };
+  offerStatus: string;
   appointmentRouter: string;
   createdAt: string;
 }

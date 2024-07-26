@@ -1114,7 +1114,8 @@
       "date": "Datum",
       "time": "Zeit",
       "agent": "Agent",
-      "status": "Status",
+      "status": "Terminstatus",
+      "offer_status": "Angebotsstatus",
       "action": "Aktion"
     },
     "appointment_status": {
@@ -1129,7 +1130,7 @@
     "appointments_field_label": {
       "lead_id": "Lead ID",
       "enter_date": "Datum eingeben",
-      "enter_time": "Zeit eingeben",
+      "enter_time": "Zeit auswählen",
       "select_agent": "Agent auswählen"
     },
     "detail_data": {
@@ -1214,6 +1215,7 @@
       "date": "Datum",
       "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "upload_button": "Hochladen",
     "schedule_btn": "Termin vereinbaren",
     "details": "Einzelheiten",
     "follow_up_completed": "Bitte kontaktieren Sie den Kunden nach 10 Minuten.",
@@ -2357,17 +2359,17 @@
   "employee_type": {
     "CEO": "CEO",
     "Administration": "Verwaltung",
-    "HRManager": "HRManager",
+    "HRManager": "HR Manager",
     "Agent": "Agent",
-    "FinanceManager": "FinanceManager",
-    "OperationsManager": "OperationsManager",
-    "ITManager": "ITManager",
-    "MarketingManager": "MarketingManager",
-    "SalesManager": "SalesManager",
-    "ProjectManager": "ProjektManager",
-    "BusinessAnalyst": "BusinessAnalyst",
-    "CustomerSupportRepresentative": "KundenSupportVertreter",
-    "AdministrativeAssistant": "VerwaltungsAssistentin",
+    "FinanceManager": "Finance Manager",
+    "OperationsManager": "Operations Manager",
+    "ITManager": "IT Manager",
+    "MarketingManager": "Marketing Manager",
+    "SalesManager": "Sales Manager",
+    "ProjectManager": "Projekt Manager",
+    "BusinessAnalyst": "Business Analyst",
+    "CustomerSupportRepresentative": "Kunden Support Vertreter",
+    "AdministrativeAssistant": "Verwaltungs Assistentin",
     "Intern": "Intern"
   }
 }

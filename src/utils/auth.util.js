@@ -140,6 +140,7 @@ export const getAgentLabelByValue = (value, options) => {
           alt="profile"
           width={24}
           height={24}
+          className="rounded-full"
         />
         <span>{option.label.name}</span>
       </div>

@@ -10,7 +10,7 @@ import { useAppointments } from "@/hooks/appointments/useAppointments";
 
 export default function Appointments() {
   const {
-    currentPageRows,
+    // currentPageRows,
     handlePageChange,
     totalItems,
     itemsPerPage,
@@ -23,17 +23,18 @@ export default function Appointments() {
     currentPage,
     handleAppointmentStatusUpdate,
     totalCount,
+    appointment,
     handleScheduleAppointments,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
     <TableRows
-      dataToAdd={currentPageRows}
+      dataToAdd={appointment}
       onStatusChange={handleAppointmentStatusUpdate}
       onAppointmentSchedule={handleScheduleAppointments}
     />,
     // totalCount !== 0,
-    currentPageRows?.length > 0,
+    appointment?.length > 0,
     isLoading
   );
 

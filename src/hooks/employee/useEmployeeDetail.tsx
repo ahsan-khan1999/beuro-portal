@@ -25,13 +25,17 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { staticEnums } from "@/utils/static";
 
-const useEmployeeDetail = (stage: boolean) => {
+export interface EmployeeCreateProps {
+  stage: boolean;
+  isCreate?: boolean;
+}
+
+const useEmployeeDetail = ({ stage, isCreate }: EmployeeCreateProps) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
   const { employeeDetails } = useAppSelector((state) => state.employee);
-
-  const router = useRouter();
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -46,9 +50,9 @@ const useEmployeeDetail = (stage: boolean) => {
     dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE_SUCCESSFULLY }));
   };
 
+  const id = router.query.employee;
   const { loading } = useAppSelector((state) => state.employee);
   const [isUpdate, setIsUpdate] = useState<boolean>(stage);
-  const id = router.query.employee;
   const schema = generateEmployDetailsValidation(translate);
 
   const {
@@ -87,6 +91,7 @@ const useEmployeeDetail = (stage: boolean) => {
 
   const handleUpdateSuccess = () => {
     router.pathname = "/employees";
+    delete router.query["employee"];
     updateQuery(router, router.locale as string);
     onClose();
   };
@@ -171,6 +176,7 @@ const useEmployeeDetail = (stage: boolean) => {
     isUpdate,
     handleUpdateCancel,
     employeeDetails,
+    isCreate,
     control
   );
 
@@ -186,12 +192,12 @@ const useEmployeeDetail = (stage: boolean) => {
         })
       );
 
-      if (res.payload) handleCreateSuccess(data?.email);
+      if (res?.payload) handleCreateSuccess(data?.email);
     } else if (stage) {
       res = await dispatch(
         updateEmployee({ data, router, setError, translate })
       );
-      if (res.payload)
+      if (res?.payload)
         dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
     }
   };

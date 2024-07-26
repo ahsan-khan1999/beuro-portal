@@ -123,10 +123,11 @@ export const AgentSelectBox = ({
                   <div className="flex items-center justify-between gap-x-3">
                     <div className="flex items-center gap-x-3">
                       <Image
-                        src={value.picture || dummyAgentProfile}
+                        src={label.picture || dummyAgentProfile}
                         alt="profile"
                         width={40}
                         height={40}
+                        className="rounded-full"
                       />
                       <span className="text-[#191D23] text-base font-medium">
                         {label.name}

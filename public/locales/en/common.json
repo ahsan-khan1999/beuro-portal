@@ -1122,7 +1122,8 @@
       "date": "Date",
       "time": "Time",
       "agent": "Agent",
-      "status": "Status",
+      "status": "Appointment Status",
+      "offer_status": "Offer Status",
       "action": "Action"
     },
     "appointment_status": {
@@ -1137,7 +1138,7 @@
     "appointments_field_label": {
       "lead_id": "Lead ID",
       "enter_date": "Enter Date",
-      "enter_time": "Enter Time",
+      "enter_time": "Select Time",
       "select_agent": "Select Agent"
     },
     "detail_data": {
@@ -1221,6 +1222,7 @@
       "date": "Date",
       "success_signed_offer": "Operation Successful"
     },
+    "upload_button": "Upload",
     "hours": "Hours",
     "minutes": "Minutes",
     "schedule_btn": "Schedule Appointment",
@@ -2358,17 +2360,17 @@
   "employee_type": {
     "CEO": "CEO",
     "Administration": "Administration",
-    "HRManager": "HRManager",
+    "HRManager": "HR Manager",
     "Agent": "Agent",
-    "FinanceManager": "FinanceManager",
-    "OperationsManager": "OperationsManager",
-    "ITManager": "ITManager",
-    "MarketingManager": "MarketingManager",
-    "SalesManager": "SalesManager",
-    "ProjectManager": "ProjectManager",
-    "BusinessAnalyst": "BusinessAnalyst",
-    "CustomerSupportRepresentative": "CustomerSupportRepresentative",
-    "AdministrativeAssistant": "AdministrativeAssistant",
+    "FinanceManager": "Finance Manager",
+    "OperationsManager": "Operations Manager",
+    "ITManager": "IT Manager",
+    "MarketingManager": "Marketing Manager",
+    "SalesManager": "Sales Manager",
+    "ProjectManager": "Project Manager",
+    "BusinessAnalyst": "Business Analyst",
+    "CustomerSupportRepresentative": "Customer Support Representative",
+    "AdministrativeAssistant": "Administrative Assistant",
     "Intern": "Intern"
   }
 }

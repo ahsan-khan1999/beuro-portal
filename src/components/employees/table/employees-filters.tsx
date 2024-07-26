@@ -8,6 +8,9 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import EmployeesFilter from "@/base-components/filter/employees-filter";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { setEmployeeDetails } from "@/api/slices/employee/emplyeeSlice";
+import { DEFAULT_EMPLOYEE } from "@/utils/static";
 
 export default function EmployeesFilters({
   filter,
@@ -18,7 +21,8 @@ export default function EmployeesFilters({
   const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
-  // const [selectedSortLabel, setSelectedSortLabel] = useState<string>("");
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -145,7 +149,10 @@ export default function EmployeesFilters({
 
         <Button
           inputType="button"
-          onClick={() => router.push("/employees/add")}
+          onClick={() => {
+            dispatch(setEmployeeDetails(DEFAULT_EMPLOYEE));
+            router.push("/employees/add");
+          }}
           className="flex items-center gap-x-2 py-2 !h-fit px-[10px] text-[13px] font-semibold hover:bg-[#7B18FF] bg-primary text-white rounded-md whitespace-nowrap"
           icon={addIcon}
           text={translate("services.add_button")}

@@ -5,9 +5,9 @@ import {
   employeePasswordResetFields,
 } from "@/enums/employee";
 
-// Generate employ details validation here
 export const generateEmployDetailsValidation = (translate: Function) => {
   return yup.object().shape({
+    [EmployDetailsFields.picture]: yup.string().notRequired(),
     [EmployDetailsFields.employName]: yup
       .string()
       .required(translate("validationMessages.required")),
