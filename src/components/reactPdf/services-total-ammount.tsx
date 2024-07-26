@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexDirection: "column",
-    // justifyContent: "space-between",
     rowGap: 20,
   },
   bottomRow: {
@@ -18,21 +17,15 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   topRow: {
-    // flexDirection: "row",
     width: "100%",
   },
   totalSection: {
     backgroundColor: "#404F6A",
     borderRadius: 4,
     padding: 8,
-    // marginTop: 10,
-    // columnGap: 16,
+
     flexDirection: "row",
     justifyContent: "space-between",
-    // borderBottom: "1px",
-    // borderBottomColor: "#ccc",
-    // paddingBottom: 5,
-    // marginBottom: 5,
   },
   grandTotalText: {
     fontSize: 8,
@@ -193,6 +186,11 @@ export const ServicesTotalAmount = ({
       amount_paid_last: "The amount you paid last time.",
       general_terms: "General Terms and Conditions",
       payment_method: "Payment Method",
+      payment_method_type: {
+        Cash: "Cash",
+        Online: "Online",
+        Twint: "Twint",
+      },
       terms_des:
         "Below you will find further information on the guidelines and conditions. Please take the time to understand the following terms and conditions.",
     },
@@ -208,6 +206,11 @@ export const ServicesTotalAmount = ({
       amount_paid_last: "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
       general_terms: "Allgemeine Geschäftsbedingungen",
       payment_method: "Zahlungsmethode",
+      payment_method_type: {
+        Cash: "Bar",
+        Online: "Online",
+        Twint: "Twint",
+      },
       terms_des:
         "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen.",
     },
@@ -435,7 +438,12 @@ export const ServicesTotalAmount = ({
                     <Text style={styles.paidText}>
                       {langContent[language as keyof typeof langContent]
                         ?.payment_method || "Zahlungsmethode"}{" "}
-                      ({paymentType})
+                      (
+                      {langContent[language as keyof typeof langContent]
+                        ?.payment_method_type[
+                        paymentType as keyof typeof langContent.en.payment_method_type
+                      ] || paymentType}
+                      )
                     </Text>
                     <Text style={styles.text}>
                       -{Number(dueAmount).toFixed(2)}
