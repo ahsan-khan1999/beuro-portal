@@ -38,9 +38,9 @@ export const AppointmentTableRows = ({
   const { t: translate } = useTranslation();
 
   const itemsValue = [
-    `${translate("sidebar.customer.appointments.pending")}`,
-    `${translate("sidebar.customer.appointments.completed")}`,
-    `${translate("sidebar.customer.appointments.cancelled")}`,
+    `${translate("appointments.appointment_status.Pending")}`,
+    `${translate("appointments.appointment_status.Completed")}`,
+    `${translate("appointments.appointment_status.Cancelled")}`,
   ];
 
   const items = Object.keys(staticEnums["AppointmentStatus"]).map(
@@ -76,12 +76,12 @@ export const AppointmentTableRows = ({
           <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
-                onClick={() => {
-                  router.push({
-                    pathname: "/appointments/details",
-                    query: { ...router.query, appointment: item?.id },
-                  });
-                }}
+                // onClick={() => {
+                //   router.push({
+                //     pathname: "/appointments/details",
+                //     query: { ...router.query, appointment: item?.id },
+                //   });
+                // }}
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
@@ -137,7 +137,7 @@ export const AppointmentTableRows = ({
                     key={item?.id}
                     items={items}
                     selectedItem={translate(
-                      `appointments.appointment_status.pending`
+                      `appointments.appointment_status.${item?.appointmentStatus}`
                     )}
                     onItemSelected={(status) => {
                       onStatusChange(item?.id, status, "appointments");

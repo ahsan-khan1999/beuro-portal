@@ -27,7 +27,7 @@ export default function Leads() {
     handleLeadStatusUpdate,
     totalCount,
     handleScheduleAppointments,
-    shareImgModal
+    shareImgModal,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
@@ -38,9 +38,8 @@ export default function Leads() {
       onStatusChange={handleLeadStatusUpdate}
       onAppointment={handleScheduleAppointments}
       onShareImages={shareImgModal}
-      isAgent={true}
+      isAgent={false}
     />,
-    // currentPageRows.length > 0,
     totalCount !== 0,
     isLoading
   );
