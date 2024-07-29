@@ -25,7 +25,6 @@ export const useAppointments = () => {
   const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-  // const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -203,7 +202,6 @@ export const useAppointments = () => {
   };
 
   return {
-    // currentPageRows,
     totalItems,
     handlePageChange,
     itemsPerPage,

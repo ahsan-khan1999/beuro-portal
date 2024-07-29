@@ -28,8 +28,9 @@ import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppoi
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 
 const useLeads = () => {
-  const { lastPage, lead, loading, isLoading, totalCount, leadDetails } =
-    useAppSelector((state) => state.lead);
+  const { lead, loading, isLoading, totalCount, leadDetails } = useAppSelector(
+    (state) => state.lead
+  );
 
   const { query } = useRouter();
   const page = query?.page as unknown as number;

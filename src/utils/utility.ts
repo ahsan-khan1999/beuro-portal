@@ -301,6 +301,10 @@ export const conditionHandlerLogin = (
     } else {
       if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
         router.pathname = "/admin/dashboard";
+      } else if (
+        staticEnums["User"]["role"][response?.data?.data?.User?.role] === 3
+      ) {
+        router.pathname = "/agent/dashboard";
       } else {
         router.pathname = "/dashboard";
       }

@@ -117,7 +117,6 @@ const Setting = () => {
       const noteSetting = [...noteSettings];
       noteSetting.splice(index, 1);
       dispatch(readNoteSettings());
-      // dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
       handleCreation();
     }
   };
@@ -139,14 +138,12 @@ const Setting = () => {
     [ModalType.ADD_GENERAL_ADDRESS]: (
       <AddGeneralAddress
         onClose={onClose}
-        // onSuccess={handleAddressGeneralSuccess}
         heading={translate("common.add_address_title")}
       />
     ),
     [ModalType.EDIT_GENERAL_ADDRESS]: (
       <AddGeneralAddress
         onClose={onClose}
-        // onSuccess={handleAddressGeneralSuccess}
         heading={translate("common.edit_address_title")}
       />
     ),

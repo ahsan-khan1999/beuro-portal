@@ -1,12 +1,11 @@
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
-import { withLayout } from "@/hoc/withLayout";
-import AgentAppointments from "@/components/agent/appointments";
+import { AgentLeadsDetails } from "@/components/agent/leads/details";
 
-const Home = () => <AgentAppointments />;
-
-export default withLayout(Home);
+export default function () {
+  return <AgentLeadsDetails />;
+}
 
 export const getStaticProps = async ({ locale }: Locale) => ({
   props: {

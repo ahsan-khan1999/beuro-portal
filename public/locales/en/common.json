@@ -2336,7 +2336,8 @@
   },
   "admin_role": {
     "Admin": "Admin",
-    "Company": "Company"
+    "Company": "Company",
+    "Agent": "Agent"
   },
   "header_alignment": {
     "header_heading": "Header Alignment",

@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import React from "react";
 
-const TableHeadings = () => {
+export const AppointmentTableHeadings = () => {
   const { t: translate } = useTranslation();
   return (
     <div className="flex">
@@ -44,5 +44,3 @@ const TableHeadings = () => {
     </div>
   );
 };
-
-export default TableHeadings;

@@ -7,6 +7,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { useTranslation } from "next-i18next";
 import { combineClasses } from "@/utils/utility";
+import { BlobOptions } from "buffer";
 
 export interface DetailImgUploadProps {
   shareImgModal: (
@@ -29,6 +30,7 @@ export interface DetailImgUploadProps {
   name: string;
   heading: string;
   className?: string;
+  isAgent?: boolean;
 }
 
 const OfferEditImages = ({
@@ -41,6 +43,7 @@ const OfferEditImages = ({
   refID,
   heading,
   className,
+  isAgent,
 }: DetailImgUploadProps) => {
   const { t: translate } = useTranslation();
   const { images } = useAppSelector((state) => state.image);
@@ -109,15 +112,17 @@ const OfferEditImages = ({
           </div>
         )}
 
-        <div className="flex justify-end items-center mx-[13px] pb-3">
-          <span
-            onClick={(e) => handleImagesUpload(id, refID, name, heading, e)}
-            className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer`}
-          >
-            {translate("offers.side_images.upload_button")}
-            <Image src={imageUpload} alt="imageUpload" className="ml-2" />
-          </span>
-        </div>
+        {!isAgent && (
+          <div className="flex justify-end items-center mx-[13px] pb-3">
+            <span
+              onClick={(e) => handleImagesUpload(id, refID, name, heading, e)}
+              className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer`}
+            >
+              {translate("offers.side_images.upload_button")}
+              <Image src={imageUpload} alt="imageUpload" className="ml-2" />
+            </span>
+          </div>
+        )}
       </div>
     </LeadsDetailImgLayout>
   );

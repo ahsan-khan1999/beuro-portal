@@ -4,11 +4,11 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import useLeads from "@/hooks/leads/useLeads";
 import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
-import { LeadsTableRows } from "./table/leads-table-rows";
-import { LeadsTableFunctions } from "./table/leads-table-functions";
-import { LeadsTableHeadings } from "./table/leads-table-headongs";
+import { LeadsTableFunctions } from "@/components/leads/table/leads-table-functions";
+import { LeadsTableHeadings } from "@/components/leads/table/leads-table-headongs";
+import { LeadsTableRows } from "@/components/leads/table/leads-table-rows";
 
-export default function Leads() {
+export default function AgentLeads() {
   const {
     currentPageRows,
     handlePageChange,
@@ -36,8 +36,8 @@ export default function Leads() {
       handleImageUpload={handleImageUpload}
       onStatusChange={handleLeadStatusUpdate}
       onAppointment={handleScheduleAppointments}
+      isAgent={true}
     />,
-    // currentPageRows.length > 0,
     totalCount !== 0,
     isLoading
   );
@@ -48,6 +48,7 @@ export default function Leads() {
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
+        isAgent={true}
       />
       <TableCardLayout>
         <TableLayout>

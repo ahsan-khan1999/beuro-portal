@@ -1320,6 +1320,7 @@ export interface FiltersComponentProps {
   filter: FilterType;
   setFilter: SetStateAction<any>;
   handleFilterChange: (filter: FilterType) => void;
+  isAgent?: boolean;
 }
 export interface ContractEmailHeaderProps {
   contractNo?: string;

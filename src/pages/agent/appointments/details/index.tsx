@@ -2,7 +2,7 @@ import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 import { withLayout } from "@/hoc/withLayout";
-import { AgentAppointments } from "@/components/agent/appointments";
+import AgentAppointments from "@/components/agent/appointments";
 
 const Home = () => <AgentAppointments />;
 

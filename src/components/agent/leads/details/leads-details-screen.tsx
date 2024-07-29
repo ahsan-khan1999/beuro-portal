@@ -1,32 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
-import AddressEditDetails from "../edit/AddressEditDetails";
-import CustomerEditDetails from "../edit/CustomerEditDetails";
-import ServiceEditDetails from "../edit/ServiceEditDetails";
-import AditionalEditDetails from "../edit/AditionalEditDetails";
 import OfferEditImages from "@/components/offers/OfferEditImages";
 import { Lead } from "@/types/leads";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
-import { LeadsCustomerDetailData } from "./leads-customer-details";
-import { LeadsAddressDetailsData } from "./leads-address-details";
-import { LeadServiceDetailsData } from "./leads-service-details";
-import { LeadsAdditionalDetails } from "./leads-additional-details";
+import { LeadsAddressDetailsData } from "@/components/leads/details/leads-address-details";
+import { LeadServiceDetailsData } from "@/components/leads/details/leads-service-details";
+import { LeadsAdditionalDetails } from "@/components/leads/details/leads-additional-details";
+import { LeadsCustomerDetailData } from "@/components/leads/details/leads-customer-details";
 
 export enum ComponentsType {
   customer,
-  customerEdit,
   address,
-  addressEdit,
   service,
-  serviceEdit,
   additional,
-  additionalEdit,
 }
 
-export interface LeadDetailsProps {
+export interface AgentLeadDetailsProps {
   leadDetails: Lead;
   loading: boolean;
   shareImgModal: (
@@ -45,58 +37,25 @@ export interface LeadDetailsProps {
   handleImageSlider: () => void;
 }
 
-const LeadsDetailsData = ({
+export const AgentLeadsDetailsData = ({
   loading,
   shareImgModal,
   handleImagesUpload,
   handleImageSlider,
   leadDetails,
-}: LeadDetailsProps) => {
+}: AgentLeadDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
   const { t: translate } = useTranslation();
-
-  const [data, setData] = useState<{
-    index: number;
-    component: ComponentsType;
-  } | null>(null);
-
-  const handleEdit = (index: number, component: ComponentsType) => {
-    setData({ index, component });
-  };
-
-  const componentArray = [
-    <LeadsCustomerDetailData onClick={handleEdit} />,
-    <LeadsAddressDetailsData onClick={handleEdit} />,
-    <LeadServiceDetailsData onClick={handleEdit} />,
-    <LeadsAdditionalDetails onClick={handleEdit} />,
-  ];
-
-  const [renderComponent, setRenderComponent] = useState(componentArray);
-
-  const lookup = {
-    [ComponentsType.customer]: <LeadsCustomerDetailData onClick={handleEdit} />,
-    [ComponentsType.customerEdit]: <CustomerEditDetails onClick={handleEdit} />,
-    [ComponentsType.address]: <LeadsAddressDetailsData onClick={handleEdit} />,
-    [ComponentsType.addressEdit]: <AddressEditDetails onClick={handleEdit} />,
-    [ComponentsType.service]: <LeadServiceDetailsData onClick={handleEdit} />,
-    [ComponentsType.serviceEdit]: <ServiceEditDetails onClick={handleEdit} />,
-    [ComponentsType.additional]: (
-      <LeadsAdditionalDetails onClick={handleEdit} />
-    ),
-    [ComponentsType.additionalEdit]: (
-      <AditionalEditDetails onClick={handleEdit} />
-    ),
-  };
+  const [renderComponent, setRenderComponent] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    setRenderComponent((prev) => {
-      const updatedData = [...prev];
-      if (data) {
-        updatedData[data.index] = lookup[data.component];
-      }
-      return updatedData;
-    });
-  }, [data]);
+    setRenderComponent([
+      <LeadsCustomerDetailData isAgent={true} />,
+      <LeadsAddressDetailsData isAgent={true} />,
+      <LeadServiceDetailsData isAgent={true} />,
+      <LeadsAdditionalDetails isAgent={true} />,
+    ]);
+  }, []);
 
   const tabSection: tabArrayTypes[] = [
     {
@@ -211,7 +170,6 @@ const LeadsDetailsData = ({
               icon={item.icon}
               selectedTab={index}
               key={index}
-              // onScroll={scrollHandler}
               onItemSelected={handleScrollToTop}
             />
           ))}
@@ -227,6 +185,7 @@ const LeadsDetailsData = ({
           heading={heading}
           handleImageSlider={handleImageSlider}
           className="xlg:w-[247px]"
+          isAgent={true}
         />
       </div>
 
@@ -248,5 +207,3 @@ const LeadsDetailsData = ({
     </div>
   );
 };
-
-export default LeadsDetailsData;

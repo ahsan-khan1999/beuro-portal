@@ -23,12 +23,14 @@ export interface LeadDetailCardProps {
   leadDetails: Lead;
   onStatusUpdate: (id: string) => void;
   onCreateAppointment: () => void;
+  isAgent?: boolean;
 }
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
   leadDetails,
   onStatusUpdate,
   onCreateAppointment,
+  isAgent,
 }: LeadDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -46,7 +48,7 @@ const LeadsDetailsCardData = ({
   }));
 
   const handleBack = () => {
-    router.pathname = "/leads";
+    router.pathname = isAgent ? "/agent/leads" : "/leads";
     delete router.query["lead"];
     updateQuery(router, router.locale as string);
   };
@@ -110,40 +112,41 @@ const LeadsDetailsCardData = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-x-4">
-          {leadDetails?.isAppointmentCreated ? (
-            <Button
-              inputType="button"
-              onClick={() => {}}
-              className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
-              text={translate("appointments.view_appointments_btn")}
-              id="view-appointments"
-              iconAlt="view-appointments"
-            />
-          ) : (
-            <OutlineButton
-              inputType="button"
-              onClick={onCreateAppointment}
-              className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
-              text={translate("appointments.create_appointments")}
-              id="create-appointment"
-              iconAlt="create-appointment"
-              icon={appointmentIcon}
-            />
-          )}
+        {!isAgent && (
+          <div className="flex items-center gap-x-4">
+            {leadDetails?.isAppointmentCreated ? (
+              <Button
+                inputType="button"
+                onClick={() => {}}
+                className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
+                text={translate("appointments.view_appointments_btn")}
+                id="view-appointments"
+                iconAlt="view-appointments"
+              />
+            ) : (
+              <OutlineButton
+                inputType="button"
+                onClick={onCreateAppointment}
+                className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+                text={translate("appointments.create_appointments")}
+                id="create-appointment"
+                iconAlt="create-appointment"
+                icon={appointmentIcon}
+              />
+            )}
 
-          {leadDetails.leadStatus !== "Close" && (
-            <OutlineButton
-              inputType="button"
-              onClick={offerCreateHandler}
-              className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
-              text={translate("leads.card_content.create_button")}
-              id="create offer"
-              iconAlt="create offer"
-              icon={createOfferIcon}
-            />
-          )}
-          {/* {leadDetails.leadStatus !== "Close" && (
+            {leadDetails.leadStatus !== "Close" && (
+              <OutlineButton
+                inputType="button"
+                onClick={offerCreateHandler}
+                className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+                text={translate("leads.card_content.create_button")}
+                id="create offer"
+                iconAlt="create offer"
+                icon={createOfferIcon}
+              />
+            )}
+            {/* {leadDetails.leadStatus !== "Close" && (
             <button
               className="group w-[180px] border-[1px] border-[#4A13E7] rounded-lg flex items-center px-4 py-[6px] cursor-pointer"
               onClick={offerCreateHandler}
@@ -154,15 +157,21 @@ const LeadsDetailsCardData = ({
               </p>
             </button>
           )} */}
-          <div>
-            <span
-              onClick={() => leadDeleteHandler()}
-              className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer"
-            >
-              <Image src={deleteIcon} alt="deleteIcon" width={16} height={20} />
-            </span>
+            <div>
+              <span
+                onClick={() => leadDeleteHandler()}
+                className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer"
+              >
+                <Image
+                  src={deleteIcon}
+                  alt="deleteIcon"
+                  width={16}
+                  height={20}
+                />
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-5">
@@ -178,29 +187,46 @@ const LeadsDetailsCardData = ({
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.status")}:
           </span>
-          {/* {leadDetails.leadStatus && (
-            <span className="font-medium text-base text-[#FE9244] px-[14px] py-1 text-center rounded-md border-[1px] border-[#FE9244]  min-w-[70px] w-fit">
-              {translate(`leads.lead_dropdown_status.${leadDetails.leadStatus}`)}
-            </span>
-          )} */}
 
-          <DropDown
-            items={items}
-            selectedItem={translate(
-              `leads.lead_dropdown_status.${leadDetails?.leadStatus}`
-            )}
-            onItemSelected={onStatusUpdate}
-            dropDownClassName={`border border-[${getStatusColor(
-              leadDetails?.leadStatus
-            )}] w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
-            dropDownTextClassName={`text-[${getStatusColor(
-              leadDetails?.leadStatus
-            )}] text-base font-medium me-1`}
-            dropDownItemsContainerClassName="w-full"
-            dropDownIconClassName={`text-[${getStatusColor(
-              leadDetails?.leadStatus
-            )}]`}
-          />
+          {!isAgent ? (
+            <DropDown
+              items={items}
+              selectedItem={translate(
+                `leads.lead_dropdown_status.${leadDetails?.leadStatus}`
+              )}
+              onItemSelected={onStatusUpdate}
+              dropDownClassName={`border border-[${getStatusColor(
+                leadDetails?.leadStatus
+              )}] w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+              dropDownTextClassName={`text-[${getStatusColor(
+                leadDetails?.leadStatus
+              )}] text-base font-medium me-1`}
+              dropDownItemsContainerClassName="w-full"
+              dropDownIconClassName={`text-[${getStatusColor(
+                leadDetails?.leadStatus
+              )}]`}
+            />
+          ) : (
+            <div
+              className={`px-[10px] py-1 min-w-[110px] w-fit rounded-lg ${
+                leadDetails?.leadStatus === "InProcess"
+                  ? "text-dark"
+                  : "text-white"
+              } text-sm font-medium text-center ${
+                leadDetails?.leadStatus === "Open"
+                  ? "bg-[#4A13E7]"
+                  : leadDetails?.leadStatus === "InProcess"
+                  ? "bg-[#f5d60f]"
+                  : leadDetails?.leadStatus === "Close"
+                  ? "bg-[#45C769]"
+                  : "bg-[#FF0000]"
+              }`}
+            >
+              {translate(
+                `leads.lead_dropdown_status.${leadDetails?.leadStatus}`
+              )}
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-x-3">
           <span className="font-normal text-[#4D4D4D] text-base">

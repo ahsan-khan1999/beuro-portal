@@ -1,51 +1,51 @@
-import { useAgentAppointments } from "@/hooks/agent/appointments/useAgentAppointments";
-import TableFunctions from "./table/TableFunctions";
-import { TableCardLayout } from "@/layout/TableCardLayout";
+import React from "react";
 import TableLayout from "@/layout/TableLayout";
-import TableHeadings from "./table/TableHeadings";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import TableRows from "./table/TableRows";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
+import { useAppointments } from "@/hooks/appointments/useAppointments";
+import { AppointmentTableRows } from "@/components/appointments/table/appointment-table-rows";
+import { AppointmentTableFunctions } from "@/components/appointments/table/appointment-table-functions";
+import { AppointmentTableHeadings } from "@/components/appointments/table/apppointment-table-headings";
 
-export const AgentAppointments = () => {
+export default function AgentAppointments() {
   const {
-    handleSubmitReports,
-    handleViewReports,
     handlePageChange,
-    handleStatusChange,
+    totalItems,
+    itemsPerPage,
     renderModal,
-    currentPage,
-    currentPageRows,
     filter,
     setFilter,
     handleFilterChange,
-    itemsPerPage,
-    totalCount,
-    totalItems,
+    loading,
     isLoading,
-  } = useAgentAppointments();
+    currentPage,
+    handleAppointmentStatusUpdate,
+    totalCount,
+    appointment,
+    handleScheduleAppointments,
+  } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
-    <TableRows
-      dataToAdd={currentPageRows}
-      onStatusChange={handleStatusChange}
-      onViewReport={handleViewReports}
-      onSubmitReport={handleSubmitReports}
+    <AppointmentTableRows
+      dataToAdd={appointment}
+      onStatusChange={handleAppointmentStatusUpdate}
+      onAppointmentSchedule={handleScheduleAppointments}
     />,
-    totalCount !== 0,
+    appointment?.length > 0,
     isLoading
   );
 
   return (
     <>
-      <TableFunctions
+      <AppointmentTableFunctions
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
       <TableCardLayout>
         <TableLayout>
-          <TableHeadings />
+          <AppointmentTableHeadings />
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>
@@ -58,4 +58,4 @@ export const AgentAppointments = () => {
       {renderModal()}
     </>
   );
-};
+}

@@ -2334,7 +2334,8 @@
   },
   "admin_role": {
     "Admin": "Verwaltung",
-    "Company": "Unternehmen"
+    "Company": "Unternehmen",
+    "Agent": "Agent"
   },
   "header_alignment": {
     "header_heading": "Ausrichtung der Kopfzeile",

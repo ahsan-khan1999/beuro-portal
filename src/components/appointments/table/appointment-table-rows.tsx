@@ -30,7 +30,7 @@ export interface ApointmentsTableProps {
   ) => void;
 }
 
-const TableRows = ({
+export const AppointmentTableRows = ({
   dataToAdd,
   onStatusChange,
   onAppointmentSchedule,
@@ -231,5 +231,3 @@ const TableRows = ({
     </div>
   );
 };
-
-export default TableRows;

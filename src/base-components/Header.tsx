@@ -50,7 +50,12 @@ const Header = () => {
   }, [followUp]);
 
   useEffect(() => {
-    if (user && user?.role !== "Admin" && !systemSettings) {
+    if (
+      user &&
+      user?.role !== "Admin" &&
+      user?.role !== "Agent" &&
+      !systemSettings
+    ) {
       dispatch(readSystemSettings());
       dispatch(readFollowUp({ params: { filter: { status: "10" } } })).then(
         (response: any) => {
@@ -135,7 +140,7 @@ const Header = () => {
       )}
       <div className="flex items-center">
         <div className="flex items-center pr-8">
-          {user?.role !== "Admin" && (
+          {user?.role !== "Admin" && user?.role !== "Agent" && (
             <div className="relative menu mr-5">
               <NotificationIcon count={todayCount} />
               {showNotification && (

@@ -1,16 +1,15 @@
 import React from "react";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import TableFunctions from "./table/TableFunctions";
-import TableRows from "./table/TableRows";
-import TableHeadings from "./table/TableHeadings";
 import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
 import { useAppointments } from "@/hooks/appointments/useAppointments";
+import { AppointmentTableRows } from "./table/appointment-table-rows";
+import { AppointmentTableFunctions } from "./table/appointment-table-functions";
+import { AppointmentTableHeadings } from "./table/apppointment-table-headings";
 
 export default function Appointments() {
   const {
-    // currentPageRows,
     handlePageChange,
     totalItems,
     itemsPerPage,
@@ -28,26 +27,25 @@ export default function Appointments() {
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
-    <TableRows
+    <AppointmentTableRows
       dataToAdd={appointment}
       onStatusChange={handleAppointmentStatusUpdate}
       onAppointmentSchedule={handleScheduleAppointments}
     />,
-    // totalCount !== 0,
     appointment?.length > 0,
     isLoading
   );
 
   return (
     <>
-      <TableFunctions
+      <AppointmentTableFunctions
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
       <TableCardLayout>
         <TableLayout>
-          <TableHeadings />
+          <AppointmentTableHeadings />
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>

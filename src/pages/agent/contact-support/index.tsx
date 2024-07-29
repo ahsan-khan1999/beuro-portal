@@ -1,10 +1,10 @@
 import React from "react";
+import ContactSupport from "@/components/contactSupport";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 import { withLayout } from "@/hoc/withLayout";
-import AgentAppointments from "@/components/agent/appointments";
 
-const Home = () => <AgentAppointments />;
+const Home = () => <ContactSupport />;
 
 export default withLayout(Home);
 

@@ -18,6 +18,7 @@ export default function LeadsFilter({
   filter,
   setFilter,
   handleFilterChange,
+  isAgent,
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -176,7 +177,6 @@ export default function LeadsFilter({
     });
   };
 
-
   useEffect(() => {
     dispatch(readNoteSettings());
   }, []);
@@ -263,28 +263,22 @@ export default function LeadsFilter({
               setFilter={setFilter}
               onFilterChange={handleFilterChange}
             />
-            <Button
-              inputType="button"
-              onClick={() => {
-                dispatch(setLeadDetails(DEFAULT_LEAD));
-                router.push("/leads/add");
-              }}
-              className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
-              icon={addIcon}
-              text={translate("leads.add_button")}
-              id="add"
-              iconAlt="add button"
-            />
+            {!isAgent && (
+              <Button
+                inputType="button"
+                onClick={() => {
+                  dispatch(setLeadDetails(DEFAULT_LEAD));
+                  router.push("/leads/add");
+                }}
+                className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+                icon={addIcon}
+                text={translate("leads.add_button")}
+                id="add"
+                iconAlt="add button"
+              />
+            )}
           </div>
         </div>
-
-        {/* <Button
-          id="apply"
-          inputType="button"
-          text="Apply"
-          onClick={() => handleFilterChange()}
-          className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        /> */}
       </div>
     </div>
   );

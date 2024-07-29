@@ -526,6 +526,7 @@ export const staticEnums: Record<string, any> = {
       Admin: 0,
       Company: 1,
       Employee: 2,
+      Agent: 3,
     },
     salutation: {
       Mr: 0,
@@ -570,7 +571,6 @@ export const staticEnums: Record<string, any> = {
     InProcess: 3,
     Close: 1,
     Expired: 2,
-    // Appointment: 4,
   },
   AppointmentStatus: {
     Pending: 0,
@@ -972,8 +972,6 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.dashboard",
     pathname: "/dashboard",
     role: [1, 2],
-    // query: "1",
-    // queryName: "page",
   },
   {
     icon: "Dashboard",
@@ -982,18 +980,10 @@ export const sideBar: SideBar[] = [
     role: [0],
   },
   {
-    icon: "Dashboard",
-    title: "sidebar.agent.dashboard",
-    pathname: "/agent/dashboard",
-    role: [3],
-  },
-  {
     icon: "Customers",
     title: "sidebar.customer.customers",
     pathname: "/customers",
     role: [1, 2],
-    // query: "1",
-    // queryName: "page",
   },
 
   {
@@ -1001,8 +991,6 @@ export const sideBar: SideBar[] = [
     title: "sidebar.admin.customers",
     pathname: "/admin/customers",
     role: [0],
-    // query: "1",
-    // queryName: "page",
   },
   {
     icon: "Leads",
@@ -1075,7 +1063,13 @@ export const sideBar: SideBar[] = [
     ],
   },
 
-  // agent leads
+  // agent route
+  {
+    icon: "Dashboard",
+    title: "sidebar.agent.dashboard",
+    pathname: "/agent/dashboard",
+    role: [3],
+  },
   {
     icon: "Leads",
     title: "sidebar.agent.leads.leads",
@@ -1114,8 +1108,6 @@ export const sideBar: SideBar[] = [
       },
     ],
   },
-
-  // agent appointments
   {
     icon: "Appointments",
     title: "sidebar.agent.appointments.appointment",
@@ -1146,6 +1138,18 @@ export const sideBar: SideBar[] = [
         role: [3],
       },
     ],
+  },
+  {
+    icon: "Settings",
+    title: "sidebar.agent.settings",
+    pathname: "/agent/setting",
+    role: [3],
+  },
+  {
+    icon: "ContactSupports",
+    title: "sidebar.agent.contact_supports",
+    pathname: "/agent/contact-support",
+    role: [3],
   },
 
   {
@@ -1267,40 +1271,30 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.services",
     pathname: "/services",
     role: [1, 2],
-    // query: "1",
-    // queryName: "page",
   },
   {
     icon: "Employees",
     title: "sidebar.customer.employees",
     pathname: "/employees",
     role: [1],
-    // query: "1",
-    // queryName: "page",
   },
   {
     icon: "Content",
     title: "sidebar.customer.content",
     pathname: "/content",
     role: [1, 2],
-    // query: "1",
-    // queryName: "page",
   },
   {
     icon: "MailTracker",
     title: "sidebar.customer.mail_tracker",
     pathname: "/email-tracker",
     role: [1, 2],
-    // query: "1",
-    // queryName: "page",
   },
   {
     icon: "Settings",
     title: "sidebar.customer.settings",
     pathname: "/setting",
     role: [1],
-    // query: "1",
-    // queryName: "page",
   },
 
   {
@@ -1308,34 +1302,24 @@ export const sideBar: SideBar[] = [
     title: "sidebar.admin.plans",
     pathname: "/admin/plans",
     role: [0],
-    // query: "1",
-    // queryName: "page",
   },
   {
     icon: "payment",
     title: "sidebar.admin.payments",
     pathname: "/admin/payments",
     role: [],
-    // query: "1",
-    // queryName: "page",
   },
   {
     icon: "ContactSupports",
     title: "sidebar.customer.contact_supports",
     pathname: "/contact-support",
     role: [1, 2],
-    // query: "1",
-    // queryName: "page",
-    // className:"mb-6 border-b border-[#0000001A]"
   },
   {
     icon: "ContactSupports",
     title: "sidebar.admin.support_requests",
     pathname: "/admin/support-request",
     role: [0],
-    // query: "1",
-    // queryName: "page",
-    // className:"mb-6 border border-red-700"
   },
   {
     icon: "dummy",
@@ -1350,8 +1334,6 @@ export const sideBar: SideBar[] = [
     title: "sidebar.admin.Settings",
     pathname: "/admin/settings",
     role: [0],
-    // query: "1",
-    // queryName: "page",
   },
 ];
 
