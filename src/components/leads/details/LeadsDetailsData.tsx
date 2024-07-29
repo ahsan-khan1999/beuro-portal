@@ -211,7 +211,6 @@ const LeadsDetailsData = ({
               icon={item.icon}
               selectedTab={index}
               key={index}
-              // onScroll={scrollHandler}
               onItemSelected={handleScrollToTop}
             />
           ))}

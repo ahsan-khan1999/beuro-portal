@@ -1,29 +1,40 @@
+import { useAppointmentsDetails } from "@/hooks/appointments/useAppointmentsDetails";
+import { AppointmentsDetailCard } from "./detail-card";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import { AgentAppointmentsDetailCard } from "./agent-detail-card";
-import { useAgentAppointmentsDetails } from "@/hooks/agent/appointments/useAgentAppointmentsDetails";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export const AgentAppointmentsDetails = () => {
   const {
     translate,
-    handleStatusChange,
-    handleScheduleAppointments,
-    renderModal,
+    loading,
+    handleStatusUpdate,
     handleCreateReport,
-  } = useAgentAppointmentsDetails();
+    renderModal,
+    appointmentDetails,
+  } = useAppointmentsDetails();
 
   return (
     <>
-      <AgentAppointmentsDetailCard
-        onStatusChange={handleStatusChange}
-        onScheduleAppointments={handleScheduleAppointments}
+      <AppointmentsDetailCard
+        onStatusChange={handleStatusUpdate}
+        appointmentDetails={appointmentDetails}
       />
-      <div className="bg-white flex items-center justify-center mt-6">
-        <NoDataEmptyState
-          heading={translate("appointments.detail_data.no_data_found")}
-          isButton={true}
-          onButtonClick={handleCreateReport}
-        />
-      </div>
+
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        !appointmentDetails?.leadID?.isAppointmentCreated && (
+          <div className="bg-white flex items-center justify-center mt-6">
+            <NoDataEmptyState
+              heading={translate("appointments.detail_data.no_data_found")}
+              isButton={true}
+              onButtonClick={handleCreateReport}
+              buttonHeading={translate("common.create_report_btn")}
+            />
+          </div>
+        )
+      )}
+
       {renderModal()}
     </>
   );

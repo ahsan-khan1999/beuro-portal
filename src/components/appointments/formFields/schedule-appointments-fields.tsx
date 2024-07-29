@@ -318,7 +318,10 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                     value: { name: item?.id, picture: "" },
                   })),
                 control,
-                value: (appointmentDetails?.id && appointmentDetails?.id) || "",
+                value:
+                  (appointmentDetails?.agent?.id &&
+                    appointmentDetails?.agent?.id) ||
+                  "",
               },
             },
             {

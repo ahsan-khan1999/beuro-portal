@@ -51,7 +51,11 @@ const useGeneralFollowUp = () => {
   });
 
   useEffect(() => {
-    if (user?.role !== "Admin" && followUp?.length === 0)
+    if (
+      user?.role !== "Admin" &&
+      user?.role !== "Agent" &&
+      followUp?.length === 0
+    )
       dispatch(readFollowUpTableData({ params: { filter: filter } }));
   }, []);
 

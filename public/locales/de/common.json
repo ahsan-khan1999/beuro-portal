@@ -310,6 +310,7 @@
         "expire": "Abgelaufen"
       },
       "appointments": {
+        "appointment": "Termine",
         "pending": "Entwurf",
         "completed": "Vollendet",
         "cancelled": "Abgebrochen"
@@ -1138,9 +1139,9 @@
       "action": "Aktion"
     },
     "appointment_status": {
-      "pending": "Entwurf",
-      "completed": "Vollendet",
-      "cancelled": "Abgebrochen"
+      "Pending": "Entwurf",
+      "Completed": "Vollendet",
+      "Cancelled": "Abgebrochen"
     },
     "successs_modal": {
       "heading": "Termin erfolgreich erstellt",
@@ -1155,6 +1156,7 @@
     "detail_data": {
       "assign_agent": "Agent zuweisen",
       "lead_id": "Lead ID",
+      "appointment_id": "Termin ID",
       "status": "Status",
       "date": "Datum",
       "time": "Zeit",

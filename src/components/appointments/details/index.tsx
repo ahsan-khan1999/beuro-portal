@@ -1,25 +1,19 @@
-import { useAppointmentsDetails } from "@/hooks/appointments/useAppointmentsDetails";
-import { AppointmentsDetailCard } from "./detail-card";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import { AgentAppointmentsDetailCard } from "./agent-detail-card";
+import { useAgentAppointmentsDetails } from "@/hooks/agent/appointments/useAgentAppointmentsDetails";
 
 export const AppointmentsDetails = () => {
   const {
-    router,
     translate,
     handleStatusChange,
     handleScheduleAppointments,
     renderModal,
-  } = useAppointmentsDetails();
-
-  const handleCreateReport = () => {
-    router.push({
-      pathname: "/agent/appointments/create-report",
-    });
-  };
+    handleCreateReport,
+  } = useAgentAppointmentsDetails();
 
   return (
     <>
-      <AppointmentsDetailCard
+      <AgentAppointmentsDetailCard
         onStatusChange={handleStatusChange}
         onScheduleAppointments={handleScheduleAppointments}
       />
@@ -28,7 +22,6 @@ export const AppointmentsDetails = () => {
           heading={translate("appointments.detail_data.no_data_found")}
           isButton={true}
           onButtonClick={handleCreateReport}
-          buttonHeading={translate("common.create_report_btn")}
         />
       </div>
       {renderModal()}

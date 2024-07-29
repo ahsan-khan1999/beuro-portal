@@ -1,10 +1,10 @@
 import React from "react";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 import { withLayout } from "@/hoc/withLayout";
-import AgentAppointments from "@/components/agent/appointments";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { AgentAppointmentsDetails } from "@/components/agent/appointments/details";
 
-const Home = () => <AgentAppointments />;
+const Home = () => <AgentAppointmentsDetails />;
 
 export default withLayout(Home);
 

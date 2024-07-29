@@ -41,8 +41,24 @@ export const createAppointment: AsyncThunk<boolean, object, object> | any =
 
 export const readAppointments: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("view/appointments", async (args, thunkApi) => {
+    const { params } = args as any;
+
     try {
-      const response = await apiServices.readCompanyAppointments({});
+      const response = await apiServices.readCompanyAppointments(params);
+      return response?.data?.data?.Appointment;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+export const readAppointmentDetails: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("read/appointment/details", async (args, thunkApi) => {
+    const { params } = args as any;
+
+    try {
+      const response = await apiServices.readAppointmentDetails(params);
+
       return response?.data?.data?.Appointment;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -56,7 +72,6 @@ export const updateAppointment: AsyncThunk<boolean, object, object> | any =
 
     try {
       const res = await apiServices.updateAppointment(data);
-      console.log(res);
 
       return res?.data?.Appointment;
     } catch (e: any) {
@@ -66,16 +81,20 @@ export const updateAppointment: AsyncThunk<boolean, object, object> | any =
     }
   });
 
-// export const readSingleAppointment: AsyncThunk<boolean, object, object> | any =
-//   createAsyncThunk("read/appointment", async (args, thunkApi) => {
-//     try {
-//       const response = await apiServices.readAppointment({});
-//       return response?.data?.data?.Appointment;
-//     } catch (e: any) {
-//       thunkApi.dispatch(setErrorMessage(e?.data?.message));
-//       return false;
-//     }
-//   });
+export const updateAppointmentStatus:
+  | AsyncThunk<boolean, object, object>
+  | any = createAsyncThunk("lead/update/status", async (args, thunkApi) => {
+  const { data } = args as any;
+
+  try {
+    const response = await apiServices.updateAppointmentStatus(data);
+    thunkApi.dispatch(setAppointmentDetails(response?.data?.data?.Appointment));
+    return response?.data?.data?.Appointment;
+  } catch (e: any) {
+    thunkApi.dispatch(setErrorMessage(e?.data?.message));
+    return false;
+  }
+});
 
 const appointmentSlice = createSlice({
   name: "appointmentSlice",
@@ -102,6 +121,16 @@ const appointmentSlice = createSlice({
     });
     builder.addCase(readAppointments.rejected, (state) => {
       state.isLoading = false;
+    });
+    builder.addCase(readAppointmentDetails.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readAppointmentDetails.fulfilled, (state, action) => {
+      state.appointmentDetails = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(readAppointmentDetails.rejected, (state) => {
+      state.loading = false;
     });
 
     builder.addCase(createAppointment.pending, (state) => {

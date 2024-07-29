@@ -4,9 +4,9 @@ import { Pagination } from "@/base-components/ui/pagination/pagination";
 import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
 import { useAppointments } from "@/hooks/appointments/useAppointments";
-import { AppointmentTableRows } from "@/components/appointments/table/appointment-table-rows";
-import { AppointmentTableFunctions } from "@/components/appointments/table/appointment-table-functions";
-import { AppointmentTableHeadings } from "@/components/appointments/table/apppointment-table-headings";
+import { AppointmentTableRows } from "./table/appointment-table-rows";
+import { AppointmentTableFunctions } from "./table/appointment-table-functions";
+import { AppointmentTableHeadings } from "./table/apppointment-table-headings";
 
 export default function AgentAppointments() {
   const {

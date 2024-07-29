@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
@@ -8,8 +7,6 @@ import { formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
-
-import dummyAgent from "@/assets/pngs/dummyAgent.png";
 
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
@@ -38,9 +35,9 @@ export const AppointmentTableRows = ({
   const { t: translate } = useTranslation();
 
   const itemsValue = [
-    `${translate("sidebar.customer.appointments.pending")}`,
-    `${translate("sidebar.customer.appointments.completed")}`,
-    `${translate("sidebar.customer.appointments.cancelled")}`,
+    `${translate("appointments.appointment_status.Pending")}`,
+    `${translate("appointments.appointment_status.Completed")}`,
+    `${translate("appointments.appointment_status.Cancelled")}`,
   ];
 
   const items = Object.keys(staticEnums["AppointmentStatus"]).map(
@@ -56,55 +53,33 @@ export const AppointmentTableRows = ({
       }`}
     >
       {dataToAdd?.map((item, index) => {
-        const imageUrl = item?.agent?.picture
-          ? item.agent.picture.startsWith("http")
-            ? item.agent.picture
-            : `/${item.agent.picture}`
-          : dummyAgent;
-        // const customerType = item?.customerDetail
-        //   ?.customerType as keyof (typeof staticEnums)["CustomerType"];
-        // const name =
-        //   customerType === 1
-        //     ? item?.customerDetail?.companyName
-        //     : item?.customerDetail?.fullName;
-        // const heading =
-        //   customerType === 1
-        //     ? translate("common.company_name")
-        //     : translate("common.customer_name");
-
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
                 onClick={() => {
                   router.push({
-                    pathname: "/appointments/details",
+                    pathname: "/agent/appointments/details",
                     query: { ...router.query, appointment: item?.id },
                   });
                 }}
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(250px,_3fr)_minmax(180px,_180px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(80px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(70px,_3fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(60px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] border-t border-t-[#E7EAEE]`}
+                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(250px,_3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(180px,_180px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(80px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(130px,_130px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(70px,_3fr)_minmax(60px,_4fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(170px,_170px)_minmax(130px,_130px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item?.leadID?.refID}</span>
                 <div className="flex items-center gap-x-1">
-                  {/* {(item?.customerDetail
-                    ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
-                  1 ? (
-                    <span className="py-4 truncate text-lg font-medium text-primary">
-                      {item?.customerDetail?.companyName}
-                    </span>
-                  ) : (
-                    <span className="py-4 truncate">
-                      {item?.customerDetail?.fullName}
-                    </span>
-                  )} */}
                   {item?.leadID?.refID}
                 </div>
-                <span className="py-4 truncate mlg:hidden xlg:block">
+                <span className="py-4 truncate">
                   {item.leadID?.customerDetail?.fullName}
                 </span>
+
+                <span className="py-4 truncate mlg:hidden xlg:block">
+                  {item.leadID?.customerDetail?.companyName}
+                </span>
+
                 <span className="py-4 mlg:hidden xMaxSize:block">
                   {formatDateTimeToDate(item.date)}
                 </span>
@@ -119,16 +94,6 @@ export const AppointmentTableRows = ({
                   </span>
                 </div>
 
-                <div className="flex items-center gap-x-[10px]">
-                  <Image
-                    src={imageUrl || dummyAgent}
-                    alt="agent profile"
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                  <span className="py-4 truncate">{item?.agent?.fullName}</span>
-                </div>
                 <div
                   className="py-4 flex items-center"
                   onClick={(e) => e.stopPropagation()}
@@ -137,7 +102,7 @@ export const AppointmentTableRows = ({
                     key={item?.id}
                     items={items}
                     selectedItem={translate(
-                      `appointments.appointment_status.pending`
+                      `appointments.appointment_status.${item?.appointmentStatus}`
                     )}
                     onItemSelected={(status) => {
                       onStatusChange(item?.id, status, "appointments");
@@ -195,26 +160,21 @@ export const AppointmentTableRows = ({
                     inputType="button"
                     onClick={() => {}}
                     className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
-                    text={translate("appointments.view_reports_btn")}
+                    text={translate("appointments.sub_report")}
                     id="view reports"
                     iconAlt="view reports"
                   />
                 ) : (
                   <OutlineButton
                     inputType="button"
-                    onClick={() =>
-                      onAppointmentSchedule(
-                        item?.id,
-                        item?.leadID?.id,
-                        item?.leadID?.refID,
-                        item?.date,
-                        item?.startTime,
-                        item?.endTime,
-                        item?.agent
-                      )
-                    }
+                    onClick={() => {
+                      router.push({
+                        pathname: "/agent/appointments/details",
+                        query: { ...router.query, appointment: item?.id },
+                      });
+                    }}
                     className="bg-white text-primary w-full border border-primary"
-                    text={translate("appointments.reschedule_btn")}
+                    text={translate("appointments.view_reports_btn")}
                     id="view reports"
                     iconAlt="view reports"
                   />

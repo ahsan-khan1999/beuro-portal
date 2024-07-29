@@ -1147,9 +1147,9 @@
       "action": "Action"
     },
     "appointment_status": {
-      "pending": "Pending",
-      "completed": "Completed",
-      "cancelled": "Cancelled"
+      "Pending": "Pending",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
     },
     "successs_modal": {
       "heading": "Appointment create successfully",
@@ -1164,6 +1164,7 @@
     "detail_data": {
       "assign_agent": "Assign Agent",
       "lead_id": "Lead ID",
+      "appointment_id": "Appointment ID",
       "status": "Status",
       "date": "Date",
       "time": "Time",

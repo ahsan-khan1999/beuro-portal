@@ -20,9 +20,15 @@ export interface LeadTableProps {
     refId: string,
     name: string,
     heading: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => void;
   onStatusChange: (id: string, status: string, type: string) => void;
+  onShareImages?: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
   onAppointment: () => void;
   isAgent?: boolean;
 }
@@ -33,6 +39,7 @@ export const LeadsTableRows = ({
   handleImageUpload,
   onStatusChange,
   onAppointment,
+  onShareImages,
   isAgent,
 }: LeadTableProps) => {
   const router = useRouter();
@@ -186,6 +193,7 @@ export const LeadsTableRows = ({
                     />
                   </div>
                 )}
+
                 <div className={`py-4`}>
                   <div
                     className={`px-[10px] py-1 w-full rounded-lg text-white text-sm font-medium text-center ${
@@ -204,7 +212,16 @@ export const LeadsTableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleImageUpload(item?.id, item?.refID, name, heading, e)
+                  isAgent
+                    ? onShareImages &&
+                      onShareImages(item?.id, item?.refID, name, heading)
+                    : handleImageUpload(
+                        item?.id,
+                        item?.refID,
+                        name,
+                        heading,
+                        e as React.MouseEvent<HTMLSpanElement>
+                      )
                 }
                 title={translate("leads.table_headings.images")}
               >

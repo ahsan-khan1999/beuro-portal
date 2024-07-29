@@ -26,6 +26,7 @@ export default function AgentLeads() {
     currentPage,
     handleLeadStatusUpdate,
     totalCount,
+    shareImgModal,
     handleScheduleAppointments,
   } = useLeads();
 
@@ -36,6 +37,7 @@ export default function AgentLeads() {
       handleImageUpload={handleImageUpload}
       onStatusChange={handleLeadStatusUpdate}
       onAppointment={handleScheduleAppointments}
+      onShareImages={shareImgModal}
       isAgent={true}
     />,
     totalCount !== 0,

@@ -1,6 +1,4 @@
 import { BackIcon } from "@/assets/svgs/components/back-icon";
-import { Button } from "@/base-components/ui/button/button";
-import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
@@ -8,28 +6,31 @@ import { useRouter } from "next/router";
 import profileImg from "@/assets/pngs/agent-profile.png";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
+import { Appointments } from "@/types/appointments";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 export interface AppointmentsDetailCardProps {
-  onStatusChange: (id: number, status: string, type: string) => void;
-  onScheduleAppointments: () => void;
+  onStatusChange: (id: string) => void;
+  appointmentDetails: Appointments;
 }
 
 export const AppointmentsDetailCard = ({
   onStatusChange,
-  onScheduleAppointments,
+  appointmentDetails,
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
   const handleBack = () => {
-    router.pathname = "/appointments";
+    router.pathname = "/agent/appointments";
+    delete router.query["appointment"];
     updateQuery(router, router.locale as string);
   };
 
   const itemsValue = [
-    `${translate("sidebar.customer.appointments.pending")}`,
-    `${translate("sidebar.customer.appointments.completed")}`,
-    `${translate("sidebar.customer.appointments.cancelled")}`,
+    `${translate("appointments.appointment_status.Pending")}`,
+    `${translate("appointments.appointment_status.Completed")}`,
+    `${translate("appointments.appointment_status.Cancelled")}`,
   ];
 
   const items = Object.keys(staticEnums["AppointmentStatus"]).map(
@@ -69,41 +70,47 @@ export const AppointmentsDetailCard = ({
 
       <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
         <div className="flex flex-col gap-y-[34px] mt-[34px]">
-          <div className="flex items-center gap-x-[142px]">
+          <div className="grid grid-cols-2 mlg:grid-cols-3 items-center mlg:gap-x-20 gap-y-5">
             <div className="flex items-center gap-x-[10px]">
-              <span className="text-base text-[#5C5C5C] font-medium">
+              <span className="text-base text-[#5C5C5C] font-medium min-w-[65px] w-fit">
                 {translate("appointments.detail_data.lead_id")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                V-2000
+                {appointmentDetails?.leadID?.refID}
               </span>
             </div>
             <div className="flex items-center gap-x-[10px]">
-              <span className="text-base text-[#5C5C5C] font-medium">
+              <span className="text-base text-[#5C5C5C] font-medium min-w-[130px] w-fit">
+                {translate("appointments.detail_data.appointment_id")}:
+              </span>
+              <span className="text-base text-[#5C5C5C] font-nomal">
+                {appointmentDetails?.leadID?.refID}
+              </span>
+            </div>
+            <div className="flex items-center gap-x-[10px]">
+              <span className="text-base text-[#5C5C5C] font-medium min-w-[60px] w-fit">
                 {translate("appointments.detail_data.status")}:
               </span>
               <DropDown
                 items={items}
                 selectedItem={translate(
-                  `appointments.appointment_status.pending`
+                  `appointments.appointment_status.${appointmentDetails?.appointmentStatus}`
                 )}
-                onItemSelected={(status) => {
-                  onStatusChange(0, status, "appointments");
-                }}
-                dropDownClassName={`bg-[#4A13E7] w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                onItemSelected={onStatusChange}
+                dropDownClassName={`bg-[#4A13E7] w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium me-1"
-                dropDownItemsContainerClassName="w-full"
+                dropDownItemsContainerClassName="w-[140px]"
                 dropDownIconClassName="text-white"
               />
             </div>
           </div>
-          <div className="flex items-center gap-x-[128px]">
+          <div className="grid grid-cols-3 items-center gap-x-20">
             <div className="flex items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium">
                 {translate("appointments.detail_data.date")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                05/07/2024
+                {formatDateTimeToDate(appointmentDetails?.date)}
               </span>
             </div>
             <div className="flex items-center gap-x-[10px]">
@@ -111,12 +118,12 @@ export const AppointmentsDetailCard = ({
                 {translate("appointments.detail_data.time")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                16:30 - 18:00
+                {appointmentDetails?.startTime} - {appointmentDetails?.endTime}
               </span>
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-y-[6px]">
+        {/* <div className="flex flex-col gap-y-[6px]">
           <p className="text-[#5C5C5C] text-base font-medium">
             {translate("appointments.detail_data.assign_agent")}
           </p>
@@ -131,7 +138,7 @@ export const AppointmentsDetailCard = ({
               Jenny Wilson
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

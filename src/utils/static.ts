@@ -1601,6 +1601,7 @@ export const DEFAULT_APPOINTMETNS = {
   leadID: {
     id: "",
     refID: "",
+    isOfferCreated: "",
     customerDetail: {
       gender: "",
       fullName: "",
