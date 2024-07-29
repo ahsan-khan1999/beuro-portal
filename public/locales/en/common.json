@@ -299,6 +299,24 @@
       "payments": "Payments",
       "support_requests": "Support",
       "Settings": "Settings"
+    },
+    "agent": {
+      "dashboard": "Dashboard",
+      "leads": {
+        "leads": "Leads",
+        "open": "Open",
+        "InProcess": "InProcess",
+        "close": "Close",
+        "expire": "Expire"
+      },
+      "appointments": {
+        "appointment": "Appointments",
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "settings": "Settings",
+      "contact_supports": "Contact Supports"
     }
   },
   "customers": {
@@ -1111,6 +1129,7 @@
     "reschedule_btn": "Reschedule",
     "create_appointments": "Create Appointment",
     "appointment": "Appointment",
+    "sub_report": "Submit Report",
     "view_appointments_btn": "View Appointments",
     "schedule_appointment": "Schedule Appointment",
     "reschedule_appointment": "Reschedule Appointment",
@@ -1119,6 +1138,7 @@
       "id": "ID",
       "lead_id": "Lead ID",
       "customer": "Customer",
+      "company_name": "Company Name",
       "date": "Date",
       "time": "Time",
       "agent": "Agent",
@@ -1127,9 +1147,9 @@
       "action": "Action"
     },
     "appointment_status": {
-      "pending": "Pending",
-      "completed": "Completed",
-      "cancelled": "Cancelled"
+      "Pending": "Pending",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
     },
     "successs_modal": {
       "heading": "Appointment create successfully",
@@ -1144,6 +1164,7 @@
     "detail_data": {
       "assign_agent": "Assign Agent",
       "lead_id": "Lead ID",
+      "appointment_id": "Appointment ID",
       "status": "Status",
       "date": "Date",
       "time": "Time",
@@ -1223,6 +1244,8 @@
       "success_signed_offer": "Operation Successful"
     },
     "upload_button": "Upload",
+    "item": "Item",
+    "create_report_btn": "Create Report",
     "hours": "Hours",
     "minutes": "Minutes",
     "schedule_btn": "Schedule Appointment",
@@ -2314,7 +2337,8 @@
   },
   "admin_role": {
     "Admin": "Admin",
-    "Company": "Company"
+    "Company": "Company",
+    "Agent": "Agent"
   },
   "header_alignment": {
     "header_heading": "Header Alignment",
@@ -2357,20 +2381,123 @@
     "warm_regards": "Warm Regards",
     "team": "The Buro Team"
   },
-  "employee_type": {
-    "CEO": "CEO",
-    "Administration": "Administration",
-    "HRManager": "HR Manager",
-    "Agent": "Agent",
-    "FinanceManager": "Finance Manager",
-    "OperationsManager": "Operations Manager",
-    "ITManager": "IT Manager",
-    "MarketingManager": "Marketing Manager",
-    "SalesManager": "Sales Manager",
-    "ProjectManager": "Project Manager",
-    "BusinessAnalyst": "Business Analyst",
-    "CustomerSupportRepresentative": "Customer Support Representative",
-    "AdministrativeAssistant": "Administrative Assistant",
-    "Intern": "Intern"
+
+  "agent": {
+    "main_heading": "Submit Appointment Reports",
+    "contact_detail_heading": "Contact Details",
+    "report_tabs_heading": {
+      "contact": "Contact and Address",
+      "house": "House Details",
+      "services": "Services",
+      "additional": "Additional Info"
+    },
+    "report_contact_fields": {
+      "name": "Name",
+      "email": "Email",
+      "telefon": "Telefon",
+      "move_out_addres_heading": "Move-out Address",
+      "street_no": "Street No",
+      "post_code": "Post Code + City",
+      "floor": "Floor",
+      "room": "Room",
+      "lift": "Lift",
+      "parking_permit": "Parking Permit",
+      "collection_address_heading": "Collection Address"
+    },
+    "house_detail_fields": {
+      "living_room_heading": "Living room(WZ)",
+      "sofa": "Sofa",
+      "puit": "Desk",
+      "tv_table": "TV table",
+      "sessel": "Armchair",
+      "tisch": "Table",
+      "regal": "Shelf",
+      "l_sofa": "L Sofa",
+      "fernseher": "Television",
+      "deco_gross": "Deco large",
+      "box": "Box",
+      "remark": "Remark",
+      "kuche": "kitchen",
+      "backofen": "Oven",
+      "herd": "Stove",
+      "washchmashine": "Washing machine",
+      "kuhlschrank": "Refrigerator",
+      "mikrowelle": "Microwave",
+      "Tumbler": "Tumbler",
+      "tiefkuhler": "Deep Freezer",
+      "kaffeemaschine": "Coffee machine",
+      "bedroom_heading": "Bedroom(SZ)",
+      "bett": "Bed",
+      "schrank_klein": "Cupboard small",
+      "schminkanlage": "Make-up system",
+      "pult": "Desk",
+      "doppeltbett": "Double bed",
+      "schrank_mittel": "Medium wardrobe",
+      "nachttisch": "Bedside table",
+      "pflanzen": "Plants",
+      "schrank_gross": "Large wardrobe",
+      "zimmer_heading": "Room(z)",
+      "balcony_heading": "Balcony/terrace/garden (W/D/G)",
+      "grill": "Grill",
+      "topfe": "Pots",
+      "rasenmaher": "Lawn mower",
+      "stuhle": "Chairs",
+      "schirm": "Shield",
+      "krauterbeet": "Herb bed",
+      "keller_heading": "Cellar/screed (K/E)",
+      "entsorgungen": "Disposals",
+      "mobel": "Furniture",
+      "fahrrad": "Bicycle",
+      "boxen": "Boxing",
+      "kinderwagen": "Baby carriage",
+      "speziell": "Special",
+      "aquarium": "Aquarium",
+      "piano": "Piano",
+      "lampe": "Lampe",
+      "elektronisches": "Electronic",
+      "pool": "Pool",
+      "sportgerat": "Sports equipment",
+      "tressor": "Tressor"
+    },
+    "service_detail_fields": {
+      "heading": "Service/Product Details",
+      "service": "Service",
+      "existng_service": "Existing Service",
+      "new_service": "New Service",
+      "description": "Description",
+      "count": "Count",
+      "unit": "Unit",
+      "price": "Price",
+      "discount": "Discount",
+      "total": "Total"
+    },
+    "additional_details_fields": {
+      "heading": "Details Offer",
+      "bemerkung": "Remark",
+      "mitarbeiter": "Employees",
+      "leiferwagen": "Delivery van",
+      "stunden": "Hours",
+      "reingung_mit": "Cleaning with delivery guarantee",
+      "besenrein": "Broom clean",
+      "preis_chf": "Price CHF",
+      "hinweis": "Note and information",
+      "images": "Upload Images"
+    },
+    "employee_type": {
+      "CEO": "CEO",
+      "Administration": "Administration",
+      "HRManager": "HR Manager",
+      "Agent": "Agent",
+      "FinanceManager": "Finance Manager",
+      "OperationsManager": "Operations Manager",
+      "ITManager": "IT Manager",
+      "MarketingManager": "Marketing Manager",
+      "SalesManager": "Sales Manager",
+      "ProjectManager": "Project Manager",
+      "BusinessAnalyst": "Business Analyst",
+      "CustomerSupportRepresentative": "Customer Support Representative",
+      "AdministrativeAssistant": "Administrative Assistant",
+      "Intern": "Intern"
+    }
   }
 }

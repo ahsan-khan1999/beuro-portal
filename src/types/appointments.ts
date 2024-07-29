@@ -7,6 +7,8 @@ export interface Appointments {
   leadID: {
     id: string;
     refID: string;
+    isAppointmentCreated: boolean;
+    isOfferCreated: boolean;
     customerDetail: {
       gender: number;
       fullName: string;
@@ -27,7 +29,6 @@ export interface Appointments {
     picture: string;
     fullName: string;
   };
-  offerStatus: string;
-  appointmentRouter: string;
+  appointmentStatus: string;
   createdAt: string;
 }

@@ -6,11 +6,50 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import {
+  readAppointmentDetails,
+  setAppointmentDetails,
+  updateAppointmentStatus,
+} from "@/api/slices/appointment/appointmentSlice";
+import { CustomerPromiseActionType } from "@/types/company";
+import { staticEnums } from "@/utils/static";
 
 export const useAppointmentsDetails = () => {
+  const router = useRouter();
   const { t: translate } = useTranslation();
-  const handleStatusChange = (id: number, status: string, type: string) => {
-    console.log("status change");
+
+  const { loading, appointmentDetails } = useAppSelector(
+    (state) => state.appointment
+  );
+
+  const id = router.query.appointment;
+
+  useEffect(() => {
+    if (id) {
+      dispatch(readAppointmentDetails({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setAppointmentDetails(res.payload));
+        }
+      );
+    }
+  }, [id]);
+
+  const defaultUpdateModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleStatusUpdate = async (appointmentStatus: string) => {
+    const res = await dispatch(
+      updateAppointmentStatus({
+        data: {
+          id: appointmentDetails?.id,
+          leadStatus: staticEnums["AppointmentStatus"][appointmentStatus],
+        },
+      })
+    );
+    if (res?.payload) defaultUpdateModal();
   };
 
   const dispatch = useDispatch();
@@ -26,6 +65,12 @@ export const useAppointmentsDetails = () => {
 
   const handleAppointmentsSuccess = () => {
     dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
+  };
+
+  const handleCreateReport = () => {
+    router.push({
+      pathname: "/agent/appointments/create-report",
+    });
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -60,9 +105,13 @@ export const useAppointmentsDetails = () => {
   };
 
   return {
+    router,
+    loading,
     translate,
     renderModal,
-    handleStatusChange,
+    appointmentDetails,
+    handleStatusUpdate,
+    handleCreateReport,
     handleScheduleAppointments,
   };
 };

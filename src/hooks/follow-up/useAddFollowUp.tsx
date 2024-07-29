@@ -89,8 +89,6 @@ export const useAddFollowUp = (
     handleSubmit,
     errors,
     error,
-    // customer,
-    // lead,
     translate,
   };
 };

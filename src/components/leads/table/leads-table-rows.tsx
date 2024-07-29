@@ -20,18 +20,27 @@ export interface LeadTableProps {
     refId: string,
     name: string,
     heading: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => void;
   onStatusChange: (id: string, status: string, type: string) => void;
+  onShareImages?: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
   onAppointment: () => void;
+  isAgent?: boolean;
 }
 
-const TableRows = ({
+export const LeadsTableRows = ({
   dataToAdd,
   handleAddNote,
   handleImageUpload,
   onStatusChange,
   onAppointment,
+  onShareImages,
+  isAgent,
 }: LeadTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -41,7 +50,6 @@ const TableRows = ({
     `${translate("leads.lead_dropdown_status.InProcess")}`,
     `${translate("leads.lead_dropdown_status.Close")}`,
     `${translate("leads.lead_dropdown_status.Expired")}`,
-    // `${translate("leads.lead_dropdown_status.Appointment")}`,
   ];
 
   const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
@@ -72,7 +80,9 @@ const TableRows = ({
               <div
                 onClick={() => {
                   router.push({
-                    pathname: "/leads/details",
+                    pathname: isAgent
+                      ? "/agent/leads/details"
+                      : "/leads/details",
                     query: { ...router.query, lead: item?.id },
                   });
                 }}
@@ -107,59 +117,83 @@ const TableRows = ({
                 <span className="py-4 truncate mlg:hidden xLarge:block">
                   {item?.customerDetail?.address?.country}
                 </span>
-                <span
-                  className="py-4 flex items-center"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <DropDown
-                    key={item.id}
-                    items={items}
-                    selectedItem={translate(
-                      `leads.lead_dropdown_status.${item?.leadStatus}`
-                    )}
-                    onItemSelected={(status) => {
-                      onStatusChange(item.id, status, "lead");
-                    }}
-                    dropDownClassName={`${
-                      item?.leadStatus === "Open"
-                        ? "bg-[#4A13E7]"
-                        : item?.leadStatus === "InProcess"
-                        ? "bg-[#f5d60f]"
-                        : item?.leadStatus === "Close"
-                        ? "bg-[#45C769]"
-                        : // : item?.leadStatus === "Appointment"
-                          // ? "bg-[#FB9600]"
-                          "bg-[#FF0000]"
-                    } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
-                    dropDownTextClassName={`${
-                      item?.leadStatus === "InProcess"
-                        ? "text-black"
-                        : "text-white"
-                    }  text-base font-medium me-1`}
-                    dropDownItemsContainerClassName="w-full"
-                    dropDownIconClassName={`${
-                      item?.leadStatus === "InProcess"
-                        ? "text-black"
-                        : "text-white"
-                    }`}
-                    isThirdLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 3
-                    }
-                    isSecondLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 2
-                    }
-                    isLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 1
-                    }
-                    isLead={true}
-                  />
-                </span>
+
+                {isAgent ? (
+                  <div className={`py-4`}>
+                    <div
+                      className={`px-[10px] py-1 w-full rounded-lg ${
+                        item?.leadStatus === "InProcess"
+                          ? "text-dark"
+                          : "text-white"
+                      } text-sm font-medium text-center ${
+                        item?.leadStatus === "Open"
+                          ? "bg-[#4A13E7]"
+                          : item?.leadStatus === "InProcess"
+                          ? "bg-[#f5d60f]"
+                          : item?.leadStatus === "Close"
+                          ? "bg-[#45C769]"
+                          : "bg-[#FF0000]"
+                      }`}
+                    >
+                      {translate(
+                        `leads.lead_dropdown_status.${item?.leadStatus}`
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="py-4 flex items-center"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <DropDown
+                      key={item.id}
+                      items={items}
+                      selectedItem={translate(
+                        `leads.lead_dropdown_status.${item?.leadStatus}`
+                      )}
+                      onItemSelected={(status) => {
+                        onStatusChange(item.id, status, "lead");
+                      }}
+                      dropDownClassName={`${
+                        item?.leadStatus === "Open"
+                          ? "bg-[#4A13E7]"
+                          : item?.leadStatus === "InProcess"
+                          ? "bg-[#f5d60f]"
+                          : item?.leadStatus === "Close"
+                          ? "bg-[#45C769]"
+                          : "bg-[#FF0000]"
+                      } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                      dropDownTextClassName={`${
+                        item?.leadStatus === "InProcess"
+                          ? "text-black"
+                          : "text-white"
+                      } text-base font-medium me-1`}
+                      dropDownItemsContainerClassName="w-full"
+                      dropDownIconClassName={`${
+                        item?.leadStatus === "InProcess"
+                          ? "text-black"
+                          : "text-white"
+                      }`}
+                      isThirdLastIndex={
+                        dataToAdd &&
+                        dataToAdd.length > 5 &&
+                        index === dataToAdd.length - 3
+                      }
+                      isSecondLastIndex={
+                        dataToAdd &&
+                        dataToAdd.length > 5 &&
+                        index === dataToAdd.length - 2
+                      }
+                      isLastIndex={
+                        dataToAdd &&
+                        dataToAdd.length > 5 &&
+                        index === dataToAdd.length - 1
+                      }
+                      isLead={true}
+                    />
+                  </div>
+                )}
+
                 <div className={`py-4`}>
                   <div
                     className={`px-[10px] py-1 w-full rounded-lg text-white text-sm font-medium text-center ${
@@ -178,7 +212,16 @@ const TableRows = ({
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleImageUpload(item?.id, item?.refID, name, heading, e)
+                  isAgent
+                    ? onShareImages &&
+                      onShareImages(item?.id, item?.refID, name, heading)
+                    : handleImageUpload(
+                        item?.id,
+                        item?.refID,
+                        name,
+                        heading,
+                        e as React.MouseEvent<HTMLSpanElement>
+                      )
                 }
                 title={translate("leads.table_headings.images")}
               >
@@ -271,7 +314,9 @@ const TableRows = ({
                 className="flex justify-center items-center cursor-pointer"
                 onClick={() =>
                   router.push({
-                    pathname: "/leads/details",
+                    pathname: isAgent
+                      ? "/agent/leads/details"
+                      : "/leads/details",
                     query: { ...router.query, lead: item?.id },
                   })
                 }
@@ -301,5 +346,3 @@ const TableRows = ({
     </div>
   );
 };
-
-export default TableRows;

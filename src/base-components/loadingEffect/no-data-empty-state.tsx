@@ -3,6 +3,7 @@ import React from "react";
 import emptyDataIcon from "@/assets/pngs/empty_state_icon.png";
 import { useTranslation } from "next-i18next";
 import { combineClasses } from "@/utils/utility";
+import { Button } from "../ui/button/button";
 
 export interface EmptyDataStateProps {
   className?: string;
@@ -11,6 +12,9 @@ export interface EmptyDataStateProps {
   textClassName?: string;
   heading?: string;
   subHeading?: string;
+  isButton?: boolean;
+  onButtonClick?: () => void;
+  buttonHeading?: string;
 }
 
 export default function NoDataEmptyState({
@@ -20,6 +24,9 @@ export default function NoDataEmptyState({
   textClassName,
   heading,
   subHeading,
+  isButton,
+  onButtonClick,
+  buttonHeading,
 }: EmptyDataStateProps) {
   const { t: translate } = useTranslation();
 
@@ -50,6 +57,16 @@ export default function NoDataEmptyState({
           <p className="text-[#909090] text-sm font-normal text-center">
             {subHeading || translate("empty_state.description")}
           </p>
+          {isButton && (
+            <Button
+              inputType="button"
+              onClick={onButtonClick}
+              className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+              text={buttonHeading}
+              id="submit reports"
+              iconAlt="submit reports"
+            />
+          )}
         </div>
       </div>
     </div>

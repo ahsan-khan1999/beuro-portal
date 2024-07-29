@@ -153,7 +153,6 @@ export const useAddServiceDetails = (
       setValue("discountAmount", prevDisAmount);
     }
 
-    // Calculate grand total after applying discount
     const discountedTotal = totalPrices - discount;
 
     let taxAmount = 0;
@@ -219,7 +218,6 @@ export const useAddServiceDetails = (
         taxAmount: offerDetails?.taxAmount || 0,
       });
     }
-    // generateGrandTotal();
   }, [offerDetails.id]);
 
   const {

@@ -52,6 +52,21 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   percentage?: string;
   step?: string;
 }
+export interface QuantityInputProps
+  extends BaseFieldProps<Field.quantityInput> {
+  inputType: "text" | "number";
+  inputLabelValue: string;
+  value?: string;
+  success?: boolean;
+  register: UseFormRegister<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+  svg?: string;
+  fieldIndex?: number;
+  onChange?: (value?: number) => void;
+  step?: string;
+}
 
 export interface ColorPickerProps extends BaseFieldProps<Field.colorPicker> {
   value?: string;
@@ -213,6 +228,14 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
   textClassName?: string;
   label?: string;
 }
+export interface CustomCheckBoxFieldProps
+  extends BaseFieldProps<Field.customCheckBox> {
+  description: string;
+  register: UseFormRegister<FieldValues>;
+  containerClassName?: string;
+  textClassName?: string;
+  label?: string;
+}
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;
   label: string;
@@ -263,8 +286,16 @@ export interface ImageUploadFieldProps
   index?: number;
   setValue?: UseFormSetValue<FieldValues>;
 }
+export interface CustomFileUploadFieldProps
+  extends BaseFieldProps<Field.customFileUpload> {
+  control?: Control<FieldValues>;
+  onClick?: Function;
+  value?: string;
+  index?: number;
+  setValue?: UseFormSetValue<FieldValues>;
+  attachements: Attachement[];
+}
 
-// Interface for the input field copy
 export interface InputWithCopyProps
   extends BaseFieldProps<Field.inputWithCopy> {
   inputType: "text" | "email" | "number" | "password";
@@ -390,7 +421,10 @@ export type FieldType =
   | Field.addField
   | Field.toggleButton
   | Field.agentSelectField
-  | Field.timePicker;
+  | Field.timePicker
+  | Field.quantityInput
+  | Field.customCheckBox
+  | Field.customFileUpload;
 
 export type FieldProps =
   | InputProps
@@ -420,7 +454,10 @@ export type FieldProps =
   | AddFieldProps
   | ToggleButtonFormProps
   | AgentSelectProps
-  | TimePickerProps;
+  | TimePickerProps
+  | QuantityInputProps
+  | CustomCheckBoxFieldProps
+  | CustomFileUploadFieldProps;
 
 export interface FormField {
   containerClass?: string;
@@ -440,11 +477,13 @@ export interface FieldComponents {
   phone: React.FC<PhoneProps>;
   date: React.FC<DatePickerProps>;
   checkbox: React.FC<CheckBoxProps>;
+  customCheckBox: React.FC<CustomCheckBoxFieldProps>;
   radio: React.FC<RadioButtonProps>;
   dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
   dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;
   profileUploadField: React.FC<ProfileUploadFieldProps>;
   imageUploadField: React.FC<ImageUploadFieldProps>;
+  customFileUpload: React.FC<CustomFileUploadFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
@@ -454,6 +493,7 @@ export interface FieldComponents {
   toggleButton: React.FC<ToggleButtonFormProps>;
   agentSelectField: React.FC<AgentSelectProps>;
   timePicker: React.FC<TimePickerProps>;
+  quantityInput: React.FC<QuantityInputProps>;
 }
 
 export interface FormProps {

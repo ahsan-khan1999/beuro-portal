@@ -3,7 +3,7 @@ import { FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import AppointmentsFilter from "./appointments-filter";
 
-const TableFunctions = ({
+export const AppointmentTableFunctions = ({
   filter,
   setFilter,
   handleFilterChange,
@@ -22,5 +22,3 @@ const TableFunctions = ({
     </div>
   );
 };
-
-export default TableFunctions;

@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import AddressDetailsData from "./AddressDetailsData";
-import CustomerDetailsData from "./CustomerDetailsData";
-import ServiceDetailsData from "./ServiceDetailsData";
-import AdditionalDetails from "./AdditionalDetails";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import AddressEditDetails from "../edit/AddressEditDetails";
 import CustomerEditDetails from "../edit/CustomerEditDetails";
@@ -14,6 +10,10 @@ import { Lead } from "@/types/leads";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { LeadsCustomerDetailData } from "./leads-customer-details";
+import { LeadsAddressDetailsData } from "./leads-address-details";
+import { LeadServiceDetailsData } from "./leads-service-details";
+import { LeadsAdditionalDetails } from "./leads-additional-details";
 
 export enum ComponentsType {
   customer,
@@ -65,22 +65,24 @@ const LeadsDetailsData = ({
   };
 
   const componentArray = [
-    <CustomerDetailsData onClick={handleEdit} />,
-    <AddressDetailsData onClick={handleEdit} />,
-    <ServiceDetailsData onClick={handleEdit} />,
-    <AdditionalDetails onClick={handleEdit} />,
+    <LeadsCustomerDetailData onClick={handleEdit} />,
+    <LeadsAddressDetailsData onClick={handleEdit} />,
+    <LeadServiceDetailsData onClick={handleEdit} />,
+    <LeadsAdditionalDetails onClick={handleEdit} />,
   ];
 
   const [renderComponent, setRenderComponent] = useState(componentArray);
 
   const lookup = {
-    [ComponentsType.customer]: <CustomerDetailsData onClick={handleEdit} />,
+    [ComponentsType.customer]: <LeadsCustomerDetailData onClick={handleEdit} />,
     [ComponentsType.customerEdit]: <CustomerEditDetails onClick={handleEdit} />,
-    [ComponentsType.address]: <AddressDetailsData onClick={handleEdit} />,
+    [ComponentsType.address]: <LeadsAddressDetailsData onClick={handleEdit} />,
     [ComponentsType.addressEdit]: <AddressEditDetails onClick={handleEdit} />,
-    [ComponentsType.service]: <ServiceDetailsData onClick={handleEdit} />,
+    [ComponentsType.service]: <LeadServiceDetailsData onClick={handleEdit} />,
     [ComponentsType.serviceEdit]: <ServiceEditDetails onClick={handleEdit} />,
-    [ComponentsType.additional]: <AdditionalDetails onClick={handleEdit} />,
+    [ComponentsType.additional]: (
+      <LeadsAdditionalDetails onClick={handleEdit} />
+    ),
     [ComponentsType.additionalEdit]: (
       <AditionalEditDetails onClick={handleEdit} />
     ),
@@ -209,7 +211,6 @@ const LeadsDetailsData = ({
               icon={item.icon}
               selectedTab={index}
               key={index}
-              // onScroll={scrollHandler}
               onItemSelected={handleScrollToTop}
             />
           ))}

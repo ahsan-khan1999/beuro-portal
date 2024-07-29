@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { Appointments } from "@/types/appointments";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import {
@@ -26,7 +25,6 @@ export const useAppointments = () => {
   const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-  // const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
   const { t: translate } = useTranslation();
 
   const [filter, setFilter] = useState<FilterType>({
@@ -204,7 +202,6 @@ export const useAppointments = () => {
   };
 
   return {
-    // currentPageRows,
     totalItems,
     handlePageChange,
     itemsPerPage,

@@ -47,7 +47,9 @@ export const useScheduleAppointment = ({
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const { loading, error } = useAppSelector((state) => state.auth);
-  const { appointmentDetails } = useAppSelector((state) => state.appointment);
+  const { appointmentDetails, appointment } = useAppSelector(
+    (state) => state.appointment
+  );
   const schema = generateScheduleAppointmentsValidationSchema(translate);
   const [employee, setEmployee] = useState<Employee[]>([]);
 
@@ -57,6 +59,7 @@ export const useScheduleAppointment = ({
     control,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
@@ -74,11 +77,13 @@ export const useScheduleAppointment = ({
 
   useEffect(() => {
     if (id) {
-      setValue("leadID", refID);
-      setValue("date", fieldDateFormat(date) || "");
-      setValue("startTime", startTime || "");
-      setValue("endTime", endTime || "");
-      setValue("agent", employee || []);
+      reset({
+        leadID: refID,
+        date: fieldDateFormat(date) || "",
+        startTime: startTime || "",
+        endTime: endTime || "",
+        agent: agent?.id,
+      });
     }
   }, []);
 

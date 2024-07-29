@@ -31,6 +31,7 @@ const SERVICE_URLS = {
   lead: "/lead/lead-step/",
   updateLead: "/lead/lead-step/",
   companyLeadAppointment: "/lead/appointment",
+  appointmentStatus: "/lead/appointment/update-status",
   content: "/content",
   contentDetails: "/content/content-step/",
   leadStatus: "/lead/update-lead-status",
@@ -270,6 +271,19 @@ const readCompanyAppointments = (params) =>
     { feature: featureConstants.login },
     { detail: false }
   );
+
+const readAppointmentDetails = (params) =>
+  get(
+    SERVICE_URLS.companyLeadAppointment,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
+const updateAppointmentStatus = (data) =>
+  put(SERVICE_URLS.appointmentStatus + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
 
 const updateLead = (data) =>
   put(SERVICE_URLS.updateLead + `${data?.step}/${data?.id}`, data, {
@@ -1217,5 +1231,7 @@ const apiServices = {
   updateAppointment,
   readCompanyAppointments,
   readAppointment,
+  readAppointmentDetails,
+  updateAppointmentStatus,
 };
 export default apiServices;

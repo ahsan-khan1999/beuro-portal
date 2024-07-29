@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import React from "react";
 
-const TableHeadings = () => {
+export const LeadsTableHeadings = () => {
   const { t: translate } = useTranslation();
   return (
     <div className="flex">
@@ -53,5 +53,3 @@ const TableHeadings = () => {
       </span> */
   }
 };
-
-export default TableHeadings;

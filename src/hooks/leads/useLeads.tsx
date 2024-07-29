@@ -26,10 +26,12 @@ import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNot
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 const useLeads = () => {
-  const { lastPage, lead, loading, isLoading, totalCount, leadDetails } =
-    useAppSelector((state) => state.lead);
+  const { lead, loading, isLoading, totalCount, leadDetails } = useAppSelector(
+    (state) => state.lead
+  );
 
   const { query } = useRouter();
   const page = query?.page as unknown as number;
@@ -235,6 +237,24 @@ const useLeads = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
+  const shareImgModal = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SHARE_IMAGES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
   const handleImageUpload = (
     id: string,
     refID?: string,
@@ -242,7 +262,9 @@ const useLeads = () => {
     heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e?.stopPropagation();
+    if (e) {
+      e?.stopPropagation();
+    }
     dispatch(setImages([]));
     const filteredLead = lead.find((item_) => item_.id === id);
 
@@ -357,6 +379,9 @@ const useLeads = () => {
         mainHeading={translate("common.update_note")}
       />
     ),
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={leadDetails?.id} />
+    ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
         onClose={onClose}
@@ -426,6 +451,7 @@ const useLeads = () => {
     handleLeadStatusUpdate,
     totalCount,
     handleScheduleAppointments,
+    shareImgModal,
   };
 };
 

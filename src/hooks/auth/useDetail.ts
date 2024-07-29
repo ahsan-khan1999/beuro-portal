@@ -8,9 +8,13 @@ import {
 } from "@/validation/authSchema";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getBackFormStage, getNextFormStage, returnStep } from "@/utils/utility";
+import {
+  getBackFormStage,
+  getNextFormStage,
+  returnStep,
+} from "@/utils/utility";
 import { updateQuery } from "@/utils/update-query";
-import { useAppDispatch, useAppSelector } from "../useRedux";
+import { useAppDispatch } from "../useRedux";
 import { DetailScreensStages } from "@/enums/auth";
 import Company from "@/components/loginAndRegister/detailScreens/Company";
 import Bank from "@/components/loginAndRegister/detailScreens/Bank";
@@ -23,11 +27,12 @@ const FORM_COMPONENTS = {
   [DetailScreensStages.LocationDetails]: Location,
   [DetailScreensStages.BankDetails]: Bank,
 };
+
 export default function useDetail() {
   const { t: translate } = useTranslation();
   const user = isJSON(getUser());
   const dispatch = useAppDispatch();
-  
+
   const [currentFormStage, setCurrentFormStage] = useState<DetailScreensStages>(
     DetailScreensStages.CompanyDetails
   );
@@ -58,13 +63,12 @@ export default function useDetail() {
     setError,
     trigger,
     reset,
-
     formState: { errors },
   } = formMethodsConfig[currentFormStage];
 
   useEffect(() => {
-    if (user?.company?.logo) setValue("logo",user?.company?.logo)
-  }, [])
+    if (user?.company?.logo) setValue("logo", user?.company?.logo);
+  }, []);
 
   const CurrentFormComponent = FORM_COMPONENTS[currentFormStage];
 
@@ -79,8 +83,8 @@ export default function useDetail() {
         nextFormHandler
       )
     );
-    // nextFormHandler();
   };
+
   const backStage = getBackFormStage(currentFormStage);
   const nextStage = getNextFormStage(currentFormStage);
 
@@ -89,12 +93,12 @@ export default function useDetail() {
 
     if (nextStage) {
       setCurrentFormStage(nextStage);
-    }
-    else {
+    } else {
       router.pathname = "/login";
       updateQuery(router, "en");
     }
   };
+
   return {
     register,
     handleSubmit,
@@ -111,6 +115,6 @@ export default function useDetail() {
     backStage,
     nextStage,
     setCurrentFormStage,
-    user
+    user,
   };
 }

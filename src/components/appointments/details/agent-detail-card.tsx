@@ -3,9 +3,7 @@ import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import profileImg from "@/assets/pngs/agent-profile.png";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 
@@ -14,7 +12,7 @@ export interface AppointmentsDetailCardProps {
   onScheduleAppointments: () => void;
 }
 
-export const AppointmentsDetailCard = ({
+export const AgentAppointmentsDetailCard = ({
   onStatusChange,
   onScheduleAppointments,
 }: AppointmentsDetailCardProps) => {
@@ -48,7 +46,7 @@ export const AppointmentsDetailCard = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-4">
-          {/* <Button
+          <Button
             inputType="button"
             onClick={onScheduleAppointments}
             className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
@@ -63,7 +61,7 @@ export const AppointmentsDetailCard = ({
             text={translate("common.cancel_button")}
             id="cancel"
             iconAlt="cancel"
-          /> */}
+          />
         </div>
       </div>
 
@@ -114,22 +112,6 @@ export const AppointmentsDetailCard = ({
                 16:30 - 18:00
               </span>
             </div>
-          </div>
-        </div>
-        <div className="flex flex-col gap-y-[6px]">
-          <p className="text-[#5C5C5C] text-base font-medium">
-            {translate("appointments.detail_data.assign_agent")}
-          </p>
-          <div className="flex items-center gap-x-[10px] px-[10px] py-1 bg-[#F4F4F4] rounded-lg w-fit">
-            <Image
-              src={profileImg}
-              alt="agent profile"
-              width={32}
-              height={32}
-            />
-            <span className="text-[#191D23] text-base font-medium">
-              Jenny Wilson
-            </span>
           </div>
         </div>
       </div>

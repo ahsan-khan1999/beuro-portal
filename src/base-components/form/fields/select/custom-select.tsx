@@ -1,4 +1,3 @@
-// import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
 import { getLabelByValue } from "@/utils/auth.util";
@@ -54,7 +53,7 @@ export const SelectBox = ({
   const handleChange = (value: string) => {
     search.current = value;
     setOption(
-      options.filter((item) =>
+      option?.filter((item) =>
         item.label?.toLowerCase()?.includes(value?.toLowerCase())
       )
     );
@@ -64,6 +63,7 @@ export const SelectBox = ({
   }`;
   const classes = combineClasses(defaultClasses, className);
   const { t: translate } = useTranslation();
+
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
@@ -74,7 +74,7 @@ export const SelectBox = ({
         className={`${classes}`}
       >
         <span className="truncate">
-          {(field && getLabelByValue(field.value, option)) ||
+          {(field && getLabelByValue(field?.value, option)) ||
             getLabelByValue(defaultValue, option)}
         </span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
