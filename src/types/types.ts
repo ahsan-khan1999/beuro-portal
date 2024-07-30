@@ -848,24 +848,35 @@ export type GeneratePaymentSettingFormField = (
 ) => FormField[];
 
 // appointment form
+export type GenerateContactReportFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
+
 export type GenerateContactAddressReportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  control?: Control<FieldValues>,
+  control: Control<FieldValues>,
+  count: number,
+  addressFields?: object[],
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 
 export type GenerateHouseDetailReportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  control?: Control<FieldValues>,
+  control: Control<FieldValues>,
+  onHandleBack?: Function,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 
 export type GenerateAdditionalInfoReportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
-  control?: Control<FieldValues>,
+  control: Control<FieldValues>,
+  onHandleBack?: Function,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 

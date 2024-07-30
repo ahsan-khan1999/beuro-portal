@@ -1,9 +1,13 @@
+import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
+import { AddressID } from "./leads";
+
 export interface Appointments {
   id: string;
   date: string;
   isReportSubmitted: boolean;
   startTime: string;
   endTime: string;
+  addressID: AddressID;
   leadID: {
     id: string;
     refID: string;
@@ -31,4 +35,5 @@ export interface Appointments {
   };
   appointmentStatus: string;
   createdAt: string;
+  stage: AppointmentReportsFormStages;
 }

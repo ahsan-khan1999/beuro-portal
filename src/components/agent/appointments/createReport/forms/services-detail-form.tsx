@@ -1,13 +1,19 @@
 import React from "react";
 import { Form } from "@/base-components/form/form";
-import { FormComponentProps } from "@/types";
-import { useAgentReportServices } from "@/hooks/agent/appointments/useAgentReportServices";
+import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
+import { useCreateReportServicesDetails } from "@/hooks/agent/appointments/useCreateReportServicesDetails";
+
+export interface ReportServicesProps {
+  onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
+  onBackHandler: (currentComponent: AppointmentReportsFormStages) => void;
+}
 
 export const ServicesDetailReport = ({
-  setCurrentFormStage,
-}: FormComponentProps) => {
+  onNextHandler,
+  onBackHandler,
+}: ReportServicesProps) => {
   const { onSubmit, handleSubmit, errors, fields } =
-    useAgentReportServices(setCurrentFormStage);
+    useCreateReportServicesDetails({ onBackHandler, onNextHandler });
 
   return (
     <div className="p-[21px] bg-white rounded-lg h-fit mb-5">

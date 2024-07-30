@@ -23,15 +23,22 @@ import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { agentReportServiceDetailsFormField } from "@/components/agent/appointments/createReport/fields/services-form-fields";
+import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
+import {
+  AddOfferDetailsServiceSubmitFormField,
+  AddOfferServiceDetailsDescriptionFormField,
+  AddOfferServiceDetailsFormField,
+} from "@/components/offers/add/fields/add-offer-service-details-fields";
 
 let prevDisAmount: number | string = "";
 export interface AgentServicesReportProps {
-  setCurrentFormStage?: any;
+  onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
+  onBackHandler: (currentComponent: AppointmentReportsFormStages) => void;
 }
 
-export const useAgentReportServices = ({
-  setCurrentFormStage,
+export const useCreateReportServicesDetails = ({
+  onNextHandler,
+  onBackHandler,
 }: AgentServicesReportProps) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -56,11 +63,16 @@ export const useAgentReportServices = ({
   );
 
   const { service, serviceDetails } = useAppSelector((state) => state.service);
+  const { tax } = useAppSelector((state) => state.settings);
 
   useEffect(() => {
     dispatch(readService({ params: { filter: {}, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
+
+  const handleBack = () => {
+    onBackHandler(AppointmentReportsFormStages.HOUSE_DETAILS);
+  };
 
   const schema = generateAddfferServiceDetailsValidation(translate);
   const {
@@ -324,7 +336,7 @@ export const useAgentReportServices = ({
     });
   };
 
-  const fields = agentReportServiceDetailsFormField(
+  const fields = AddOfferServiceDetailsFormField(
     register,
     loading,
     control,
@@ -342,8 +354,38 @@ export const useAgentReportServices = ({
     serviceType,
     handleServiceChange,
     serviceFields,
-    setValue,
-    setCurrentFormStage
+    setValue
+  );
+
+  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
+    register,
+    loading,
+    control,
+    () => console.log(),
+    serviceFields?.length,
+    {
+      service: service,
+      total: total,
+      generateTotal: generateGrandTotal,
+      isTax,
+      isDiscount,
+      offerDetails: offerDetails,
+      taxType: taxType,
+      discountType,
+      tax: tax,
+      currency: systemSettings?.currency,
+    },
+    append,
+    remove,
+    serviceType,
+    handleServiceChange,
+    serviceFields,
+    setValue
+  );
+
+  const submitFields = AddOfferDetailsServiceSubmitFormField(
+    loading,
+    handleBack
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -370,10 +412,12 @@ export const useAgentReportServices = ({
     const response = await dispatch(
       updateOffer({ data: apiData, router, setError, translate })
     );
+    if (response?.payload)
+      onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
   };
 
   return {
-    fields: [...fields],
+    fields: [...fields, ...fieldsDescription, ...submitFields],
     onSubmit,
     control,
     handleSubmit,

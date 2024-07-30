@@ -1,4 +1,7 @@
-import { HouseDetailsFieldsId } from "@/enums/agent/appointments-report";
+import {
+  AppointmentReportsFormStages,
+  HouseDetailsFieldsId,
+} from "@/enums/agent/appointments-report";
 import { Field } from "@/enums/form";
 import { FormField, GenerateHouseDetailReportFormField } from "@/types";
 import { useTranslation } from "next-i18next";
@@ -7,7 +10,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
   register,
   loading,
   control,
-  user
+  onHandleBack
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -2688,7 +2691,9 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
-              onClick: () => {},
+              onClick:
+                onHandleBack &&
+                onHandleBack(AppointmentReportsFormStages.CONTACT_AND_ADDRESS),
             },
           },
           {

@@ -1,10 +1,13 @@
-import { AdditionalInfoFieldsId } from "@/enums/agent/appointments-report";
+import {
+  AdditionalInfoFieldsId,
+  AppointmentReportsFormStages,
+} from "@/enums/agent/appointments-report";
 import { Field } from "@/enums/form";
 import { FormField, GenerateAdditionalInfoReportFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 
 export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormField =
-  (register, loading, control, user) => {
+  (register, loading, control, onHandleBack) => {
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
@@ -191,7 +194,9 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 inputType: "button",
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
-                onClick: () => {},
+                onClick:
+                  onHandleBack &&
+                  onHandleBack(AppointmentReportsFormStages.SERVICES),
               },
             },
             {

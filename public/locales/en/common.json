@@ -1241,8 +1241,12 @@
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date",
-      "success_signed_offer": "Operation Successful"
+      "success_signed_offer": "Operation Successful",
+      "report_created": "Report created successfully!",
+      "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+    "yes": "Yes",
+    "no": "No",
     "upload_button": "Upload",
     "item": "Item",
     "create_report_btn": "Create Report",

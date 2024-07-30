@@ -1,28 +1,19 @@
 import React from "react";
 import { Form } from "@/base-components/form/form";
-import { FormComponentProps } from "@/types";
-import { useAppSelector } from "@/hooks/useRedux";
-import { useTranslation } from "next-i18next";
-import { houseDetailReportFormField } from "../fields/house-detail-form-fields";
+import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
+import { useCreateReportHoseDetails } from "@/hooks/agent/appointments/useCreateReportHoseDetails";
+
+export interface ReportHouseProps {
+  onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
+  onBackHandler: (currentComponent: AppointmentReportsFormStages) => void;
+}
 
 export const HouseDetailReport = ({
-  onSubmit,
-  handleSubmit,
-  errors,
-  register,
-  control,
-  currentFormStage,
-  setCurrentFormStage,
-}: FormComponentProps) => {
-  const { loading } = useAppSelector((state) => state.auth);
-  const { t: translate } = useTranslation();
-
-  const fields = houseDetailReportFormField(
-    register,
-    loading,
-    control,
-    setCurrentFormStage
-  );
+  onNextHandler,
+  onBackHandler,
+}: ReportHouseProps) => {
+  const { control, error, errors, fields, handleSubmit, onSubmit, translate } =
+    useCreateReportHoseDetails({ onNextHandler, onBackHandler });
 
   return (
     <div className="p-[21px] bg-white rounded-lg h-fit mb-5">

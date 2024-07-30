@@ -111,13 +111,6 @@ export const useAddLeadAddressDetails = (
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // const apiData = {
-    //   address: senitizeDataForm(data).slice(0, addressCount),
-    //   step: 2,
-    //   id: leadDetails?.id,
-    //   stage: ComponentsType.serviceAdd,
-    // };
-
     const apiData = {
       ...data,
       step: 2,

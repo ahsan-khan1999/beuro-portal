@@ -1,159 +1,215 @@
 import { ReportContactDetailsFieldsId } from "@/enums/agent/appointments-report";
 import { Field } from "@/enums/form";
-import { FormField, GenerateContactAddressReportFormField } from "@/types";
+import {
+  FormField,
+  GenerateContactAddressReportFormField,
+  GenerateContactReportFormField,
+} from "@/types";
 import { useTranslation } from "next-i18next";
 
-export const contactAgentReportFormField: GenerateContactAddressReportFormField =
-  (register, loading, control, user) => {
+export const contactAgentReportFormField: GenerateContactReportFormField = (
+  register,
+  loading,
+  control
+) => {
+  const { t: translate } = useTranslation();
+
+  const formField: FormField[] = [
+    {
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-3 gap-[17px] bg-[#EDF4FF] rounded-lg p-2",
+        children: [
+          {
+            label: {
+              text: `${translate("agent.report_contact_fields.name")}`,
+              htmlFor: ReportContactDetailsFieldsId.fullName,
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "text",
+              className: "!pl-4",
+              id: ReportContactDetailsFieldsId.fullName,
+              name: ReportContactDetailsFieldsId.fullName,
+              register,
+            },
+          },
+          {
+            label: {
+              text: `${translate("agent.report_contact_fields.email")}`,
+              htmlFor: ReportContactDetailsFieldsId.email,
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: ReportContactDetailsFieldsId.email,
+              className: "!pl-4",
+              id: ReportContactDetailsFieldsId.email,
+              name: ReportContactDetailsFieldsId.email,
+              register,
+            },
+          },
+          {
+            label: {
+              text: `${translate("agent.report_contact_fields.telefon")}`,
+              htmlFor: ReportContactDetailsFieldsId.phoneNumber,
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "tel",
+              className: "!pl-4",
+              id: ReportContactDetailsFieldsId.phoneNumber,
+              name: ReportContactDetailsFieldsId.phoneNumber,
+              register,
+            },
+          },
+        ],
+      },
+    },
+  ];
+
+  return formField;
+};
+
+export const ContactReportAddressFormField: GenerateContactAddressReportFormField =
+  (register, loading, control, count, addressFields) => {
+    const formField: FormField[] = [];
     const { t: translate } = useTranslation();
-    const formField: FormField[] = [
-      {
-        field: {
-          type: Field.div,
-          id: "div-field",
-          className:
-            "grid grid-cols-1 md:grid-cols-3 gap-[17px] bg-[#EDF4FF] rounded-lg p-2",
-          children: [
-            {
-              label: {
-                text: `${translate("agent.report_contact_fields.name")}`,
-                htmlFor: ReportContactDetailsFieldsId.fullName,
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.input,
-                inputType: "text",
-                className: "!pl-4",
-                id: ReportContactDetailsFieldsId.fullName,
-                name: ReportContactDetailsFieldsId.fullName,
-                register,
-              },
-            },
-            {
-              label: {
-                text: `${translate("agent.report_contact_fields.email")}`,
-                htmlFor: ReportContactDetailsFieldsId.email,
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.input,
-                inputType: ReportContactDetailsFieldsId.email,
-                className: "!pl-4",
-                id: ReportContactDetailsFieldsId.email,
-                name: ReportContactDetailsFieldsId.email,
-                register,
-              },
-            },
-            {
-              label: {
-                text: `${translate("agent.report_contact_fields.telefon")}`,
-                htmlFor: ReportContactDetailsFieldsId.phoneNumber,
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.input,
-                inputType: "number",
-                className: "!pl-4",
-                id: ReportContactDetailsFieldsId.phoneNumber,
-                name: ReportContactDetailsFieldsId.phoneNumber,
-                register,
-              },
-            },
-          ],
-        },
-      },
 
-      {
+    if (!addressFields) return formField;
+    for (let i = 0; i < count; i++) {
+      formField.push({
         containerClass: "mt-5 mb-2",
         field: {
           type: Field.span,
-          id: "test",
-          name: "test",
-          text: `${translate(
-            "agent.report_contact_fields.move_out_addres_heading"
-          )}`,
+          id: `address.${i}.label`,
+          name: `address.${i}.label`,
+          text: `${translate("agent.house_detail_fields.kuche")}`,
         },
-      },
+      });
 
-      {
+      formField.push({
         field: {
           type: Field.div,
-          id: "div-field",
+          id: `div-field-${i}`,
           className:
-            "grid grid-cols-1 md:grid-cols-2 gap-[17px] bg-[#EDF4FF] rounded-lg p-2",
+            "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
           children: [
             {
+              containerClass: "mb-0",
               label: {
-                text: `${translate("agent.report_contact_fields.street_no")}`,
-                htmlFor: "MOVE_OUT_STREET_NO",
+                text: translate("leads.address_details.street_no"),
+                htmlFor: `address.${i}.streetNumber`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
-                className: "!pl-4",
-                id: "MOVE_OUT_STREET_NO",
-                name: "MOVE_OUT_STREET_NO",
+                id: `address.${i}.streetNumber`,
+                name: `address.${i}.streetNumber`,
+                placeholder: ``,
                 register,
               },
             },
             {
+              containerClass: "mb-0",
               label: {
-                text: `${translate("agent.report_contact_fields.post_code")}`,
-                htmlFor: "MOVE_OUT_POSTAL_CODE",
+                text: translate("leads.address_details.post_code"),
+                htmlFor: `address.${i}.postalCode`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
-                inputType: ReportContactDetailsFieldsId.email,
-                className: "!pl-4",
-                id: "MOVE_OUT_POSTAL_CODE",
-                name: "MOVE_OUT_POSTAL_CODE",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+                inputType: "text",
+                id: `address.${i}.postalCode`,
+                name: `address.${i}.postalCode`,
+                placeholder: ``,
                 register,
               },
             },
             {
               label: {
                 text: `${translate("agent.report_contact_fields.floor")}`,
-                htmlFor: "MOVE_OUT_FLOOR",
+                htmlFor: `address.${i}.floor`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.select,
                 className: "!pl-4",
-                id: "MOVE_OUT_FLOOR",
-                name: "MOVE_OUT_FLOOR",
-                options: [],
+                id: `address.${i}.floor`,
+                name: `address.${i}.floor`,
+                options: [
+                  {
+                    label: "1",
+                    value: "1",
+                  },
+                  {
+                    label: "2",
+                    value: "2",
+                  },
+                  {
+                    label: "3",
+                    value: "3",
+                  },
+                ],
                 control,
               },
             },
             {
               label: {
                 text: `${translate("agent.report_contact_fields.room")}`,
-                htmlFor: "MOVE_OUT_ROOM",
+                htmlFor: `address.${i}.room`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.select,
                 className: "!pl-4",
-                id: "MOVE_OUT_ROOM",
-                name: "MOVE_OUT_ROOM",
-                options: [],
+                id: `address.${i}.room`,
+                name: `address.${i}.room`,
+                options: [
+                  {
+                    label: "1",
+                    value: "1",
+                  },
+                  {
+                    label: "2",
+                    value: "2",
+                  },
+                  {
+                    label: "3",
+                    value: "3",
+                  },
+                ],
                 control,
               },
             },
             {
               label: {
                 text: `${translate("agent.report_contact_fields.lift")}`,
-                htmlFor: "MOVE_OUT_LIFT",
+                htmlFor: `address.${i}.lift`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.select,
                 className: "!pl-4",
-                id: "MOVE_OUT_LIFT",
-                name: "MOVE_OUT_LIFT",
-                options: [],
+                id: `address.${i}.lift`,
+                name: `address.${i}.lift`,
+                options: [
+                  {
+                    label: translate("common.yes"),
+                    value: "1",
+                  },
+                  {
+                    label: translate("common.no"),
+                    value: "0",
+                  },
+                ],
                 control,
               },
             },
@@ -161,8 +217,8 @@ export const contactAgentReportFormField: GenerateContactAddressReportFormField 
               containerClass: "mt-8",
               field: {
                 type: Field.customCheckBox,
-                id: "MOVE_OUT_PARKING_PERMIT",
-                name: "MOVE_OUT_PARKING_PERMIT",
+                id: `address.${i}.parkingPermit`,
+                name: `address.${i}.parkingPermit`,
                 description: `${translate(
                   "agent.report_contact_fields.parking_permit"
                 )}`,
@@ -172,155 +228,55 @@ export const contactAgentReportFormField: GenerateContactAddressReportFormField 
             },
           ],
         },
-      },
-
-      {
-        containerClass: "mt-5 mb-2",
-        field: {
-          type: Field.span,
-          id: "test",
-          name: "test",
-          text: `${translate(
-            "agent.report_contact_fields.collection_address_heading"
-          )}`,
-        },
-      },
-
-      {
-        field: {
-          type: Field.div,
-          id: "div-field",
-          className:
-            "grid grid-cols-1 md:grid-cols-2 gap-[17px] bg-[#EDF4FF] rounded-lg p-2",
-          children: [
-            {
-              label: {
-                text: `${translate("agent.report_contact_fields.street_no")}`,
-                htmlFor: "COLLECTION_STREET_NO",
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.input,
-                inputType: "text",
-                className: "!pl-4",
-                id: "COLLECTION_STREET_NO",
-                name: "COLLECTION_STREET_NO",
-                register,
-              },
-            },
-            {
-              label: {
-                text: `${translate("agent.report_contact_fields.post_code")}`,
-                htmlFor: "COLLECTION_POSTAL_CODE",
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.input,
-                inputType: ReportContactDetailsFieldsId.email,
-                className: "!pl-4",
-                id: "COLLECTION_POSTAL_CODE",
-                name: "COLLECTION_POSTAL_CODE",
-                register,
-              },
-            },
-            {
-              label: {
-                text: `${translate("agent.report_contact_fields.floor")}`,
-                htmlFor: "COLLECTION_FLOOR",
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.select,
-                className: "!pl-4",
-                id: "COLLECTION_FLOOR",
-                name: "COLLECTION_FLOOR",
-                options: [],
-                control,
-              },
-            },
-            {
-              label: {
-                text: `${translate("agent.report_contact_fields.room")}`,
-                htmlFor: "COLLECTION_ROOM",
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.select,
-                className: "!pl-4",
-                id: "COLLECTION_ROOM",
-                name: "COLLECTION_ROOM",
-                options: [],
-                control,
-              },
-            },
-            {
-              label: {
-                text: `${translate("agent.report_contact_fields.lift")}`,
-                htmlFor: "COLLECTION_LIFT",
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.select,
-                className: "!pl-4",
-                id: "COLLECTION_LIFT",
-                name: "COLLECTION_LIFT",
-                options: [],
-                control,
-              },
-            },
-            {
-              containerClass: "mt-8",
-              field: {
-                type: Field.customCheckBox,
-                className: "",
-                id: "COLLECTION_PARKING_PERMIT",
-                name: "COLLECTION_PARKING_PERMIT",
-                textClassName: "text-sm text-[#344054] font-medium",
-                description: `${translate(
-                  "agent.report_contact_fields.parking_permit"
-                )}`,
-                register,
-              },
-            },
-          ],
-        },
-      },
-
-      {
-        containerClass: "pt-[30px]",
-        field: {
-          type: Field.div,
-          id: "div-field",
-          className: "flex justify-end items-center space-x-[18px]",
-          children: [
-            {
-              containerClass: "mb-0",
-              field: {
-                type: Field.button,
-                id: "button",
-                text: translate("content.details.cancel_button"),
-                inputType: "button",
-                className:
-                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
-                onClick: () => {},
-              },
-            },
-            {
-              containerClass: "mb-0",
-              field: {
-                type: Field.button,
-                id: "button",
-                text: translate("content.details.next_button"),
-                inputType: "submit",
-                className:
-                  "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
-                loading,
-              },
-            },
-          ],
-        },
-      },
-    ];
+      });
+    }
 
     return formField;
   };
+
+export const ReportContactSubmitFormField: GenerateContactReportFormField = (
+  register,
+  loading,
+  control,
+  OnClick
+) => {
+  const { t: translate } = useTranslation();
+  const formField: FormField[] = [
+    {
+      containerClass: "pt-[30px]",
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className: "flex justify-end items-center space-x-[18px]",
+        children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: translate("content.details.cancel_button"),
+              inputType: "button",
+              className:
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
+              onClick: () => {},
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: translate("content.details.next_button"),
+              inputType: "submit",
+              className:
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
+              loading,
+            },
+          },
+        ],
+      },
+    },
+  ];
+
+  return formField;
+};

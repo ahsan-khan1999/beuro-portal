@@ -2,7 +2,7 @@ import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 import { withLayout } from "@/hoc/withLayout";
-import CreateReport from "@/components/agent/appointments/createReport";
+import { CreateReport } from "@/components/agent/appointments/createReport";
 
 const Home = () => <CreateReport />;
 
