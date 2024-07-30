@@ -13,12 +13,12 @@ import {
   ReportAdditionalDetailsValidation,
   ReportContactDetailsValidation,
   ReportHouseDetailsValidation,
-  ReportServiceDetailsValidation,
 } from "@/validation/agent/agentReportSchema";
 import { ContactAndAddressReport } from "@/components/agent/appointments/createReport/forms/contact-and-address-form";
 import { HouseDetailReport } from "@/components/agent/appointments/createReport/forms/house-detail-form";
 import { ServicesDetailReport } from "@/components/agent/appointments/createReport/forms/services-detail-form";
 import { AdditionalInfoReport } from "@/components/agent/appointments/createReport/forms/additional-detail-form";
+import { generateAddfferServiceDetailsValidation } from "@/validation/offersSchema";
 
 const FORM_COMPONENTS: Record<AppointmentReportsFormStages, React.ElementType> =
   {
@@ -42,7 +42,7 @@ export const useAgentReport = () => {
     [AppointmentReportsFormStages.HOUSE_DETAILS]:
       ReportHouseDetailsValidation(translate),
     [AppointmentReportsFormStages.SERVICES]:
-      ReportServiceDetailsValidation(translate),
+      generateAddfferServiceDetailsValidation(translate),
     [AppointmentReportsFormStages.ADDITIONAL_INFO]:
       ReportAdditionalDetailsValidation(translate),
   };
@@ -98,7 +98,6 @@ export const useAgentReport = () => {
       setCurrentFormStage(nextStage);
     } else {
       router.pathname = "/agent/appointments/details";
-      updateQuery(router, "en");
     }
   };
 

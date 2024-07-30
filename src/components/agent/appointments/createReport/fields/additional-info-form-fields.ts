@@ -1,3 +1,4 @@
+import { AdditionalInfoFieldsId } from "@/enums/agent/appointments-report";
 import { Field } from "@/enums/form";
 import { FormField, GenerateAdditionalInfoReportFormField } from "@/types";
 import { useTranslation } from "next-i18next";
@@ -18,15 +19,15 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 text: `${translate(
                   "agent.additional_details_fields.mitarbeiter"
                 )}`,
-                htmlFor: "EMPLOYYES",
+                htmlFor: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.employees}`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 inputType: "text",
                 className: "!pl-4",
-                id: "EMPLOYYES",
-                name: "EMPLOYYES",
+                id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.employees}`,
+                name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.employees}`,
                 register,
               },
             },
@@ -35,30 +36,30 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 text: `${translate(
                   "agent.additional_details_fields.leiferwagen"
                 )}`,
-                htmlFor: "DELIVERT_VAN",
+                htmlFor: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.deliveryVehicle}`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 inputType: "text",
                 className: "!pl-4",
-                id: "DELIVERT_VAN",
-                name: "DELIVERT_VAN",
+                id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.deliveryVehicle}`,
+                name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.deliveryVehicle}`,
                 register,
               },
             },
             {
               label: {
                 text: `${translate("agent.additional_details_fields.stunden")}`,
-                htmlFor: "HOURS",
+                htmlFor: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.hours}`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 inputType: "text",
                 className: "!pl-4",
-                id: "HOURS",
-                name: "HOURS",
+                id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.hours}`,
+                name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.hours}`,
                 register,
               },
             },
@@ -67,15 +68,15 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 text: `${translate(
                   "agent.additional_details_fields.reingung_mit"
                 )}`,
-                htmlFor: "CLEANING_DELIVERY_GUARANTEE",
+                htmlFor: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.cleaningWithHandoverGuarantee}`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 inputType: "text",
                 className: "!pl-4",
-                id: "CLEANING_DELIVERY_GUARANTEE",
-                name: "CLEANING_DELIVERY_GUARANTEE",
+                id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.cleaningWithHandoverGuarantee}`,
+                name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.cleaningWithHandoverGuarantee}`,
                 register,
               },
             },
@@ -84,15 +85,15 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 text: `${translate(
                   "agent.additional_details_fields.besenrein"
                 )}`,
-                htmlFor: "BROOM_CLEAN",
+                htmlFor: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.broomClean}`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 inputType: "text",
                 className: "!pl-4",
-                id: "BROOM_CLEAN",
-                name: "BROOM_CLEAN",
+                id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.broomClean}`,
+                name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.broomClean}`,
                 register,
               },
             },
@@ -101,15 +102,15 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 text: `${translate(
                   "agent.additional_details_fields.preis_chf"
                 )}`,
-                htmlFor: "PRICE",
+                htmlFor: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.priceCHF}`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 inputType: "text",
                 className: "!pl-4",
-                id: "PRICE",
-                name: "PRICE",
+                id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.priceCHF}`,
+                name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.priceCHF}`,
                 register,
               },
             },
@@ -121,15 +122,15 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
         containerClass: "bg-[#EDF4FF] rounded-b-lg p-2",
         label: {
           text: `${translate("agent.additional_details_fields.bemerkung")}`,
-          htmlFor: "REMARK",
+          htmlFor: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.remarks}`,
           className: "mb-[10px]",
         },
         field: {
           type: Field.input,
           inputType: "text",
           className: "!pl-4",
-          id: "REMARK",
-          name: "REMARK",
+          id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.remarks}`,
+          name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.remarks}`,
           register,
         },
       },
@@ -138,8 +139,8 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
         containerClass: "mt-5 mb-2",
         field: {
           type: Field.span,
-          id: "NOTE_INFORMATION",
-          name: "NOTE_INFORMATION",
+          id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.noteAndInformation}`,
+          name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.noteAndInformation}`,
           text: `${translate("agent.additional_details_fields.hinweis")}:`,
         },
       },
@@ -149,8 +150,8 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
           type: Field.textArea,
           className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
           rows: 2,
-          id: "NOTE_INFORMATION",
-          name: "NOTE_INFORMATION",
+          id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.noteAndInformation}`,
+          name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.noteAndInformation}`,
           register,
         },
       },

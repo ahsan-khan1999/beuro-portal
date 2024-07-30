@@ -2403,6 +2403,8 @@
       "collection_address_heading": "Einzugsadresse"
     },
     "house_detail_fields": {
+      "item":"Artikel",
+      "qty":"Qty",
       "living_room_heading": "Wohnzimmer(WZ))",
       "sofa": "Sofa",
       "puit": "Pult",

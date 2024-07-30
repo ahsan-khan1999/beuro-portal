@@ -53,7 +53,6 @@ export const QuantityInputField = ({
     <div className={`flex items-center gap-x-[13px]`}>
       {svg && (
         <span
-          //   className={`w-[30px] h-5 ${(inputFocus && "tests") || "test"}`}
           className={`w-[30px] h-5`}
           dangerouslySetInnerHTML={{ __html: svg }}
         />
@@ -75,7 +74,6 @@ export const QuantityInputField = ({
         key={id}
         step={step}
         min={0}
-        // pattern={(inputType === "number" && "d+") || "*"}
         //@ts-expect-error
         onChangeCapture={(e) => onChange && onChange(Number(e.target?.value))}
         onKeyDown={handleKeyDown}

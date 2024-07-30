@@ -2405,6 +2405,8 @@
       "collection_address_heading": "Collection Address"
     },
     "house_detail_fields": {
+      "item": "Item",
+      "qty": "Qty",
       "living_room_heading": "Living room(WZ)",
       "sofa": "Sofa",
       "puit": "Desk",

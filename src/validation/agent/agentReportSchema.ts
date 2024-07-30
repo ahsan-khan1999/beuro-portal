@@ -2,350 +2,236 @@ import {
   AdditionalInfoFieldsId,
   HouseDetailsFieldsId,
   ReportContactDetailsFieldsId,
-  ServiceDetailFieldsId,
 } from "@/enums/agent/appointments-report";
 import * as yup from "yup";
 
 export const ReportContactDetailsValidation = (translate: Function) => {
   return yup.object().shape({
-    [ReportContactDetailsFieldsId.NAME]: yup
+    [ReportContactDetailsFieldsId.fullName]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.EMAIL]: yup
+    [ReportContactDetailsFieldsId.email]: yup
       .string()
       .email()
       .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.TELEPHONE]: yup
+    [ReportContactDetailsFieldsId.phoneNumber]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.MOVE_OUT_STREET_NO]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.MOVE_OUT_POSTAL_CODE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.MOVE_OUT_FLOOR]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.MOVE_OUT_ROOM]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.MOVE_OUT_LIFT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.MOVE_OUT_PARKING_PERMIT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.COLLECTION_STREET_NO]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.COLLECTION_POSTAL_CODE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.COLLECTION_FLOOR]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.COLLECTION_ROOM]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.COLLECTION_LIFT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.COLLECTION_PARKING_PERMIT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    [ReportContactDetailsFieldsId.address]: yup
+      .object({
+        [ReportContactDetailsFieldsId.streetNumber]: yup
+          .string()
+          .required(translate("validationMessages.required")),
+        [ReportContactDetailsFieldsId.postalCode]: yup.string().notRequired(),
+        [ReportContactDetailsFieldsId.country]: yup.string().notRequired(),
+        [ReportContactDetailsFieldsId.description]: yup.string().notRequired(),
+        [ReportContactDetailsFieldsId.floor]: yup.string().notRequired(),
+        [ReportContactDetailsFieldsId.room]: yup.string().notRequired(),
+        [ReportContactDetailsFieldsId.lift]: yup.string().notRequired(),
+      })
+      .required(),
   });
 };
 
 export const ReportHouseDetailsValidation = (translate: Function) => {
   return yup.object().shape({
-    [HouseDetailsFieldsId.LIVING_ROOM_SOFA]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_SESSEL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_L_SOFA]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_BOX]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_PUIT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_TISCH]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_FERNSEHER]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_FERNSEHTISCH]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_REGAL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_DECO_GROSS]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.LIVING_ROOM_REMARK]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_BACKOFEN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_HERD]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_WASHING_MACHINE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_TUMBLER]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_BOX]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_REFREGIRATOR]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_MICROWAVE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_DEEP_FREEZER]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_COFFEE_MACHINE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_REGAL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KITCHEN_REMARK]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_BETT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_SCHRANK_KELEIN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_SCHMINKANLAGE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_PULT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_DOPPEIBETT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_SCHRANK_MITTEL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_NACHTTISCH]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_PFLANZEN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_SESSEL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_SCHRANK_GROSS]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_REGAL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_BOX]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BEDROOM_REMARK]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_BETT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_DOPPEIBETT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_SESSEL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_REGAL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_SCHRANK_KLEIN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_FERNSEHTISCH]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_SCHRANK_MITTEL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_PULT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_NACHTTISCH]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_SCHRANK_GROSS]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_FERNSEHER]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_BOX]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.ZIMMER_REMARK]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_GRILL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_TISCH]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_STUHLE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_SOFA]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_REGAL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_SCHIRM]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_TOPFE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_PFLANZEN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_KRAUTERBEET]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_RASENMAHER]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.BALKON_REMARK]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_WASH_MACHINE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_TUMBLER]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_REGAL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_ENTSORGUNGEN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_FAHRRAD]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_KINDERWAGEN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_MOBEL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_BOXEN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.KELLER_REMARK]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.SPEZIELL_AQUARIUM]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.SPEZIELL_PIANO]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.SPEZIELL_SPORTGERAT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.SPEZIELL_ELEKTRONISCHES]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.SPEZIELL_POOL]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.SPEZIELL_TRESSOR]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.SPEZIELL_LAMPE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [HouseDetailsFieldsId.SPEZIELL_REMARK]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-  });
-};
+    [HouseDetailsFieldsId.livingRoomDetails]: yup.object({
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.sofa}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.teacherDesk}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.tvTable}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.armchair}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.table}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.shelf}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.LSofa}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.TV}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.decoBig}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.box}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.descriptions}`]:
+        yup.string().required(translate("validationMessages.required")),
+    }),
+    [HouseDetailsFieldsId.kitchenDetails]: yup.object({
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.oven}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.refrigerator}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.freezer}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.stove}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.microwave}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.coffeeMachine}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.washingMachine}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.tumbler}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.shelf}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.box}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.descriptions}`]:
+        yup.string().required(translate("validationMessages.required")),
+    }),
+    [HouseDetailsFieldsId.bedRoomDetails]: yup.object({
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.bed}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.doubleBed}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.armchair}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.smallWardrobe}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.largeWardrobe}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.dressingTable}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.nightstand}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.shelf}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.desk}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.plants}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.box}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.descriptions}`]:
+        yup.string().required(translate("validationMessages.required")),
+    }),
+    [HouseDetailsFieldsId.roomDetails]: yup.object({
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.bed}`]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.doubleBed}`]:
+        yup.string().required(translate("validationMessages.required")),
 
-export const ReportServiceDetailsValidation = (translate: Function) => {
-  return yup.object().shape({
-    // [ServiceDetailFieldsId.SERVICE_TYPE]: yup.string().when("serviceType", {
-    //   is: (serviceType: string) => serviceType === "Existing Service",
-    //   then: () =>
-    //     yup.string().required(translate("validationMessages.required")),
-    // }),
-    [ServiceDetailFieldsId.SERVICE_TYPE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ServiceDetailFieldsId.COUNT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ServiceDetailFieldsId.UNIT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ServiceDetailFieldsId.PRICE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ServiceDetailFieldsId.DISCOUNT]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [ServiceDetailFieldsId.DESCRIPTION]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.armchair}`]:
+        yup.string().required(translate("validationMessages.required")),
+
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.smallWardrobe}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.largeWardrobe}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.shelf}`]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.desk}`]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tv}`]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tvTable}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.nightstand}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.box}`]: yup
+        .string()
+        .required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.descriptions}`]:
+        yup.string().required(translate("validationMessages.required")),
+    }),
+    [HouseDetailsFieldsId.outDoorDetails]: yup.object({
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.grill}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.table}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.chairs}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.sofa}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.shelf}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.umbrella}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.pots}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.plants}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.herbGarden}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.lawnmower}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.descriptions}`]:
+        yup.string().required(translate("validationMessages.required")),
+    }),
+    [HouseDetailsFieldsId.basementAtticDetails]: yup.object({
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.washingMachine}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.tumbler}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.shelf}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.disposal}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.bicycle}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.stroller}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.furniture}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.boxes}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.descriptions}`]:
+        yup.string().required(translate("validationMessages.required")),
+    }),
+    [HouseDetailsFieldsId.specialItemsDetails]: yup.object({
+      [`${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.aquarium}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.piano}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.gymEquipment}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.electronics}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.pool}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.safe}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.lamp}`]:
+        yup.string().required(translate("validationMessages.required")),
+      [`${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.descriptions}`]:
+        yup.string().required(translate("validationMessages.required")),
+    }),
   });
 };
 
 export const ReportAdditionalDetailsValidation = (translate: Function) => {
   return yup.object().shape({
-    [AdditionalInfoFieldsId.EMPLOYYES]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AdditionalInfoFieldsId.DELIVERT_VAN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AdditionalInfoFieldsId.HOURS]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AdditionalInfoFieldsId.CLEANING_DELIVERY_GUARANTEE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AdditionalInfoFieldsId.BROOM_CLEAN]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AdditionalInfoFieldsId.PRICE]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AdditionalInfoFieldsId.REMARK]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AdditionalInfoFieldsId.NOTE_INFORMATION]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AdditionalInfoFieldsId.IMAGES]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    [AdditionalInfoFieldsId.offerDetails]: yup
+      .object({
+        [`${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.employees}`]:
+          yup.string().required(translate("validationMessages.required")),
+        [`${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.deliveryVehicle}`]:
+          yup.string().required(translate("validationMessages.required")),
+        [`${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.hours}`]:
+          yup.string().required(translate("validationMessages.required")),
+        [`${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.cleaningWithHandoverGuarantee}`]:
+          yup.string().required(translate("validationMessages.required")),
+        [`${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.broomClean}`]:
+          yup.string().required(translate("validationMessages.required")),
+        [`${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.priceCHF}`]:
+          yup.string().required(translate("validationMessages.required")),
+        [`${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.remarks}`]:
+          yup.string().required(translate("validationMessages.required")),
+        [`${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.noteAndInformation}`]:
+          yup.string().required(translate("validationMessages.required")),
+      })
+      .required(),
   });
 };

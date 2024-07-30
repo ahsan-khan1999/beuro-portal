@@ -1,3 +1,4 @@
+import { ReportContactDetailsFieldsId } from "@/enums/agent/appointments-report";
 import { Field } from "@/enums/form";
 import { FormField, GenerateContactAddressReportFormField } from "@/types";
 import { useTranslation } from "next-i18next";
@@ -16,45 +17,45 @@ export const contactAgentReportFormField: GenerateContactAddressReportFormField 
             {
               label: {
                 text: `${translate("agent.report_contact_fields.name")}`,
-                htmlFor: "NAME",
+                htmlFor: ReportContactDetailsFieldsId.fullName,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 inputType: "text",
                 className: "!pl-4",
-                id: "NAME",
-                name: "NAME",
+                id: ReportContactDetailsFieldsId.fullName,
+                name: ReportContactDetailsFieldsId.fullName,
                 register,
               },
             },
             {
               label: {
                 text: `${translate("agent.report_contact_fields.email")}`,
-                htmlFor: "EMAIL",
+                htmlFor: ReportContactDetailsFieldsId.email,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
-                inputType: "email",
+                inputType: ReportContactDetailsFieldsId.email,
                 className: "!pl-4",
-                id: "EMAIL",
-                name: "EMAIL",
+                id: ReportContactDetailsFieldsId.email,
+                name: ReportContactDetailsFieldsId.email,
                 register,
               },
             },
             {
               label: {
                 text: `${translate("agent.report_contact_fields.telefon")}`,
-                htmlFor: "TELEPHONE",
+                htmlFor: ReportContactDetailsFieldsId.phoneNumber,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 inputType: "number",
                 className: "!pl-4",
-                id: "TELEPHONE",
-                name: "TELEPHONE",
+                id: ReportContactDetailsFieldsId.phoneNumber,
+                name: ReportContactDetailsFieldsId.phoneNumber,
                 register,
               },
             },
@@ -104,7 +105,7 @@ export const contactAgentReportFormField: GenerateContactAddressReportFormField 
               },
               field: {
                 type: Field.input,
-                inputType: "email",
+                inputType: ReportContactDetailsFieldsId.email,
                 className: "!pl-4",
                 id: "MOVE_OUT_POSTAL_CODE",
                 name: "MOVE_OUT_POSTAL_CODE",
@@ -215,7 +216,7 @@ export const contactAgentReportFormField: GenerateContactAddressReportFormField 
               },
               field: {
                 type: Field.input,
-                inputType: "email",
+                inputType: ReportContactDetailsFieldsId.email,
                 className: "!pl-4",
                 id: "COLLECTION_POSTAL_CODE",
                 name: "COLLECTION_POSTAL_CODE",
