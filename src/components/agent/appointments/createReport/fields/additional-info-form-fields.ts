@@ -159,24 +159,24 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
         },
       },
 
-      {
-        containerClass: "mt-5 mb-2",
-        field: {
-          type: Field.span,
-          id: "IMAGES",
-          name: "IMAGES",
-          text: `${translate("agent.additional_details_fields.images")}`,
-        },
-      },
+      // {
+      //   containerClass: "mt-5 mb-2",
+      //   field: {
+      //     type: Field.span,
+      //     id: "IMAGES",
+      //     name: "IMAGES",
+      //     text: `${translate("agent.additional_details_fields.images")}`,
+      //   },
+      // },
 
-      {
-        field: {
-          type: Field.customFileUpload,
-          id: "IMAGES",
-          name: "IMAGES",
-          attachements: [],
-        },
-      },
+      // {
+      //   field: {
+      //     type: Field.customFileUpload,
+      //     id: "IMAGES",
+      //     name: "IMAGES",
+      //     attachements: [],
+      //   },
+      // },
 
       {
         containerClass: "pt-[30px]",
@@ -194,7 +194,7 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 inputType: "button",
                 className:
                   "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
-                onClick:
+                onClick: () =>
                   onHandleBack &&
                   onHandleBack(AppointmentReportsFormStages.SERVICES),
               },

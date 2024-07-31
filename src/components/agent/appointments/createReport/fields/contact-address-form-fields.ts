@@ -258,7 +258,7 @@ export const ReportContactSubmitFormField: GenerateContactReportFormField = (
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
-              onClick: () => {},
+              onClick: OnClick,
             },
           },
           {

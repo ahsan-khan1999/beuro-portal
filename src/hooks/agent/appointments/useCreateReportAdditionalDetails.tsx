@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { ReportAdditionalDetailsValidation } from "@/validation/agent/agentReportSchema";
 import { additionalAgentReportFormField } from "@/components/agent/appointments/createReport/fields/additional-info-form-fields";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
+import { updateReport } from "@/api/slices/appointment/appointmentSlice";
 
 export interface ReportAdditionalDetailsProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -22,9 +23,11 @@ export const useCreateReportAdditionalDetails = ({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
+  const { loading, error, appointmentDetails, reportDetails } = useAppSelector(
+    (state) => state.appointment
+  );
 
-  const schema = ReportAdditionalDetailsValidation(translate);
+  // const schema = ReportAdditionalDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -33,7 +36,7 @@ export const useCreateReportAdditionalDetails = ({
     formState: { errors },
     reset,
   } = useForm<FieldValues>({
-    resolver: yupResolver<FieldValues>(schema),
+    // resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = additionalAgentReportFormField(
@@ -43,24 +46,35 @@ export const useCreateReportAdditionalDetails = ({
     onHandleBack
   );
 
-  useMemo(() => {
-    if (leadDetails.id) {
-      reset({
-        ...leadDetails,
-      });
-    }
-  }, [leadDetails.id]);
+  // useMemo(() => {
+  //   if (leadDetails.id) {
+  //     reset({
+  //       ...leadDetails,
+  //     });
+  //   }
+  // }, [leadDetails.id]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const convertedOfferDetails = Object.fromEntries(
+      Object.entries(data).map(([key, value]) => {
+        if (key === "remarks" || key === "noteAndInformation") {
+          return [key, value];
+        }
+        return [key, Number(value)];
+      })
+    );
     const apiData = {
-      ...data,
+      ...convertedOfferDetails,
       step: 4,
-      id: leadDetails?.id,
+      id: reportDetails?.id,
+      appointmentID: appointmentDetails?.id,
       stage: ComponentsType.additionalEdit,
     };
+
     const response = await dispatch(
-      updateLead({ data: apiData, router, setError, translate })
+      updateReport({ data: apiData, router, setError, translate })
     );
+
     if (response?.payload)
       onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
   };

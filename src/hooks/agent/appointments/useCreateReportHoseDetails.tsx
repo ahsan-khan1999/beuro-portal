@@ -1,14 +1,10 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
-import { updateLead } from "@/api/slices/lead/leadSlice";
-import { useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { ReportHouseDetailsValidation } from "@/validation/agent/agentReportSchema";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import { houseDetailReportFormField } from "@/components/agent/appointments/createReport/fields/house-detail-form-fields";
+import { updateReport } from "@/api/slices/appointment/appointmentSlice";
 
 export interface ReportHouseDetailsProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -22,9 +18,11 @@ export const useCreateReportHoseDetails = ({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
+  const { loading, error, appointmentDetails, reportDetails } = useAppSelector(
+    (state) => state.appointment
+  );
 
-  const schema = ReportHouseDetailsValidation(translate);
+  // const schema = ReportHouseDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -33,7 +31,7 @@ export const useCreateReportHoseDetails = ({
     formState: { errors },
     reset,
   } = useForm<FieldValues>({
-    resolver: yupResolver<FieldValues>(schema),
+    // resolver: yupResolver<FieldValues>(schema),
   });
 
   const fields = houseDetailReportFormField(
@@ -43,25 +41,34 @@ export const useCreateReportHoseDetails = ({
     onBackHandler
   );
 
-  useMemo(() => {
-    if (leadDetails.id) {
-      reset({
-        ...leadDetails,
-      });
-    }
-  }, [leadDetails.id]);
+  // useMemo(() => {
+  //   if (appointmentDetails.id) {
+  //     reset({
+  //       ...appointmentDetails,
+  //     });
+  //   }
+  // }, [appointmentDetails.id]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const houseItemValue = Object.entries(data).map(([key, value]) => {
+      const convertedValue = isNaN(Number(value)) ? value : Number(value);
+      return [key, convertedValue];
+    });
+
     const apiData = {
-      ...data,
-      step: 4,
-      id: leadDetails?.id,
-      stage: ComponentsType.additionalEdit,
+      ...houseItemValue,
+      step: 2,
+      id: reportDetails?.id,
+      appointmentID: appointmentDetails?.id,
     };
+
     const response = await dispatch(
-      updateLead({ data: apiData, router, setError, translate })
+      updateReport({ data: apiData, router, setError, translate })
     );
-    if (response?.payload) onNextHandler(AppointmentReportsFormStages.SERVICES);
+
+    if (response?.payload) {
+      onNextHandler(AppointmentReportsFormStages.SERVICES);
+    }
   };
 
   return {

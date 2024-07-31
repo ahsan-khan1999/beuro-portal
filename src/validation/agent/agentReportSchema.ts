@@ -10,38 +10,28 @@ export const ReportContactAddressDetailsValidation = (translate: Function) => {
     [ReportContactDetailsFieldsId.fullName]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.email]: yup
-      .string()
-      .email()
-      .required(translate("validationMessages.required")),
-    [ReportContactDetailsFieldsId.phoneNumber]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    [ReportContactDetailsFieldsId.email]: yup.string().notRequired(),
+    [ReportContactDetailsFieldsId.phoneNumber]: yup.string().notRequired(),
     [ReportContactDetailsFieldsId.address]: yup
       .array()
       .of(
         yup.object().shape({
           [ReportContactDetailsFieldsId.streetNumber]: yup
             .string()
-            .required(translate("validationMessages.required")),
-          [ReportContactDetailsFieldsId.postalCode]: yup
-            .string()
-            .required(translate("validationMessages.required")),
-          [ReportContactDetailsFieldsId.country]: yup
-            .string()
-            .required(translate("validationMessages.required")),
+            .notRequired(),
+          [ReportContactDetailsFieldsId.postalCode]: yup.string().notRequired(),
+          // [ReportContactDetailsFieldsId.country]: yup
+          //   .string()
+          //   .required(translate("validationMessages.required")),
           // [ReportContactDetailsFieldsId.description]: yup
           //   .string()
           //   .notRequired(),
-          [ReportContactDetailsFieldsId.floor]: yup
+          [ReportContactDetailsFieldsId.floor]: yup.string().notRequired(),
+          [ReportContactDetailsFieldsId.room]: yup.string().notRequired(),
+          [ReportContactDetailsFieldsId.lift]: yup.boolean().notRequired(),
+          [ReportContactDetailsFieldsId.parkingPermit]: yup
             .string()
-            .required(translate("validationMessages.required")),
-          [ReportContactDetailsFieldsId.room]: yup
-            .string()
-            .required(translate("validationMessages.required")),
-          [ReportContactDetailsFieldsId.lift]: yup
-            .string()
-            .required(translate("validationMessages.required")),
+            .notRequired(),
         })
       )
       .required(),
@@ -50,6 +40,8 @@ export const ReportContactAddressDetailsValidation = (translate: Function) => {
 
 export const ReportHouseDetailsValidation = (translate: Function) => {
   return yup.object().shape({
+    [HouseDetailsFieldsId.livingRoomDetails]: yup.object().shape({}),
+    [HouseDetailsFieldsId.kitchenDetails]: yup.object().shape({}),
     // [HouseDetailsFieldsId.livingRoomDetails]: yup.object({
     [`${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.sofa}`]:
       yup.string().required(translate("validationMessages.required")),

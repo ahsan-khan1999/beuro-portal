@@ -112,7 +112,6 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
       };
       localStoreUtil.store_data("offer", objectToUpdate);
       thunkApi.dispatch(setOfferDetails(objectToUpdate));
-
       return response?.data?.data?.Offer;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -276,7 +275,6 @@ export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
-      // setErrors(setError, e?.data.data, translate);
       return false;
     }
   });

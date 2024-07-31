@@ -1,4 +1,4 @@
-import { CreateReportDetails } from "./create-reports-details";
+import CreateReportDetails from "./create-reports-details";
 
 export const CreateReport = () => {
   return (

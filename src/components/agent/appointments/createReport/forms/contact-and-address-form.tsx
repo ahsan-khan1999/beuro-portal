@@ -4,17 +4,20 @@ import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report"
 import { useCreateReportAddressDetails } from "@/hooks/agent/appointments/useCreateReportAddressDetails";
 
 export interface ReportAddressProps {
-  onNextHandle: (currentComponent: AppointmentReportsFormStages) => void;
+  onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
 }
 
 export const ContactAndAddressReport = ({
-  onNextHandle,
+  onNextHandler,
 }: ReportAddressProps) => {
   const { errors, fields, handleSubmit, onSubmit, translate } =
-    useCreateReportAddressDetails({ onNextHandle });
+    useCreateReportAddressDetails({ onNextHandler });
 
   return (
-    <div className="p-[21px] bg-white rounded-lg h-fit mb-5">
+    <div
+      className="p-[21px] bg-white rounded-lg h-fit mb-5"
+      id={translate("agent.report_tabs_heading.contact")}
+    >
       <h1 className="text-[#1E1E1E] text-base font-semibold mb-2">
         {translate("agent.contact_detail_heading")}
       </h1>

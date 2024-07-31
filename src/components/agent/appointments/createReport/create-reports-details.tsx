@@ -9,38 +9,30 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { HouseDetailReport } from "./forms/house-detail-form";
 import { ServicesDetailReport } from "./forms/services-detail-form";
 import { AdditionalInfoReport } from "./forms/additional-detail-form";
+import { stepFormArrayTypes } from "@/types";
 
-export const CreateReportDetails = () => {
-  const { appointmentDetails } = useAppSelector((state) => state.appointment);
-  const [currentComponent, setCurrrentComponent] =
-    useState<AppointmentReportsFormStages>(
-      AppointmentReportsFormStages.CONTACT_AND_ADDRESS
-    );
-
+const CreateReportDetails = () => {
   const dispatch = useAppDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
   const [tabType, setTabType] = useState<AppointmentReportsFormStages>(
-    (appointmentDetails?.id && appointmentDetails?.stage) ||
-      AppointmentReportsFormStages.CONTACT_AND_ADDRESS
+    AppointmentReportsFormStages.CONTACT_AND_ADDRESS
   );
 
-  const stageNames = {
-    [AppointmentReportsFormStages.CONTACT_AND_ADDRESS]: translate(
-      "agent.report_tabs_heading.contact"
-    ),
-    [AppointmentReportsFormStages.HOUSE_DETAILS]: translate(
-      "agent.report_tabs_heading.house"
-    ),
-    [AppointmentReportsFormStages.SERVICES]: translate(
-      "agent.report_tabs_heading.services"
-    ),
-    [AppointmentReportsFormStages.ADDITIONAL_INFO]: translate(
-      "agent.report_tabs_heading.additional"
-    ),
-  };
-
-  const stages = Object.values(AppointmentReportsFormStages);
+  const tabSection: stepFormArrayTypes[] = [
+    {
+      name: `${translate("agent.report_tabs_heading.contact")}`,
+    },
+    {
+      name: `${translate("agent.report_tabs_heading.house")}`,
+    },
+    {
+      name: `${translate("agent.report_tabs_heading.services")}`,
+    },
+    {
+      name: translate("agent.report_tabs_heading.additional"),
+    },
+  ];
 
   const handleReportCreated = () => {
     dispatch(updateModalType(ModalType.CREATION));
@@ -64,7 +56,7 @@ export const CreateReportDetails = () => {
 
   const componentLookUp = {
     [AppointmentReportsFormStages.CONTACT_AND_ADDRESS]: (
-      <ContactAndAddressReport onNextHandle={handleNextTab} />
+      <ContactAndAddressReport onNextHandler={handleNextTab} />
     ),
     [AppointmentReportsFormStages.HOUSE_DETAILS]: (
       <HouseDetailReport
@@ -100,26 +92,32 @@ export const CreateReportDetails = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-
+  
   return (
     <>
       <div>
         <div className="border-y border-y-[#000] border-opacity-10 py-4 mb-6 flex items-center justify-center gap-x-4">
-          {stages.map((stage, index) => (
+          {tabSection?.map((item, index) => (
             <SteperFormTab
-              key={stage}
-              heading={stageNames[stage]}
-              step={(index + 1).toString()}
-              showArrow={index < stages.length - 1}
-              isActive={stage === currentComponent}
-              onClick={() => setCurrrentComponent(stage)}
+              key={index}
+              showArrow={index < tabSection.length - 1}
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              selectedTab={index}
+              index={index + 1}
+              heading={item.name}
+              isToggle={true}
+              onClick={() => setTabType(index)}
             />
           ))}
         </div>
 
-        {componentLookUp[currentComponent as keyof typeof componentLookUp]}
+        {componentLookUp[tabType as keyof typeof componentLookUp]}
       </div>
       {renderModal}
     </>
   );
 };
+
+export default CreateReportDetails;

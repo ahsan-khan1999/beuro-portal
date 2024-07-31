@@ -1,8 +1,8 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { DEFAULT_APPOINTMETNS } from "@/utils/static";
-import { Appointments } from "@/types/appointments";
+import { DEFAULT_APPOINTMETNS, DEFAULT_REPOT } from "@/utils/static";
+import { Appointments, Report } from "@/types/appointments";
 
 export interface AppointmentState {
   appointment: Appointments[];
@@ -12,6 +12,7 @@ export interface AppointmentState {
   lastPage: number;
   totalCount: number;
   appointmentDetails: Appointments;
+  reportDetails: Report;
 }
 
 const initialState: AppointmentState = {
@@ -23,6 +24,8 @@ const initialState: AppointmentState = {
   totalCount: 10,
   //@ts-expect-error
   appointmentDetails: DEFAULT_APPOINTMETNS,
+  //@ts-expect-error
+  reportDetails: DEFAULT_REPOT,
 };
 
 export const createAppointment: AsyncThunk<boolean, object, object> | any =
@@ -96,6 +99,48 @@ export const updateAppointmentStatus:
   }
 });
 
+export const createReport: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("report/create", async (args, thunkApi) => {
+    const { data, setError, translate } = args as any;
+
+    try {
+      const response = await apiServices.createAppointmentReport(data);
+      return response?.data?.data?.Report;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
+export const readReportdetails: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("report/read/details", async (args, thunkApi) => {
+    const { params } = args as any;
+
+    try {
+      const response = await apiServices.readReportDetail(params);
+      return response?.data?.data.Report;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+export const updateReport: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("report/update", async (args, thunkApi) => {
+    const { data, router, setError, translate } = args as any;
+
+    try {
+      const response = await apiServices.updateAppointmentReport(data);
+
+      return response?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data?.data, translate);
+      return false;
+    }
+  });
+
 const appointmentSlice = createSlice({
   name: "appointmentSlice",
   initialState,
@@ -103,15 +148,27 @@ const appointmentSlice = createSlice({
     setErrorMessage: (state, action) => {
       state.error = action.payload;
     },
-
     setAppointmentDetails: (state, action) => {
       state.appointmentDetails = action.payload;
     },
     setAppointment: (state, action) => {
       state.appointment = action.payload;
     },
+    setReportDetails: (state, action) => {
+      state.reportDetails = action.payload;
+    },
   },
   extraReducers(builder) {
+    builder.addCase(createReport.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createReport.fulfilled, (state, action) => {
+      state.reportDetails = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(createReport.rejected, (state) => {
+      state.loading = false;
+    });
     builder.addCase(readAppointments.pending, (state) => {
       state.isLoading = true;
     });
@@ -120,6 +177,16 @@ const appointmentSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(readAppointments.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(readReportdetails.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(readReportdetails.fulfilled, (state, action) => {
+      state.reportDetails = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(readReportdetails.rejected, (state) => {
       state.isLoading = false;
     });
     builder.addCase(readAppointmentDetails.pending, (state) => {
@@ -156,6 +223,22 @@ const appointmentSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(updateAppointment.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(updateReport.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateReport.fulfilled, (state, action) => {
+      let index = state.appointment.findIndex(
+        (item) => item.id === action.payload?.id
+      );
+      if (index !== -1) {
+        state.appointment.splice(index, 1, action.payload);
+      }
+      state.loading = false;
+    });
+    builder.addCase(updateReport.rejected, (state) => {
       state.loading = false;
     });
   },

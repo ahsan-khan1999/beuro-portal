@@ -12,11 +12,14 @@ export const HouseDetailReport = ({
   onNextHandler,
   onBackHandler,
 }: ReportHouseProps) => {
-  const { control, error, errors, fields, handleSubmit, onSubmit, translate } =
+  const { errors, fields, handleSubmit, onSubmit, translate } =
     useCreateReportHoseDetails({ onNextHandler, onBackHandler });
 
   return (
-    <div className="p-[21px] bg-white rounded-lg h-fit mb-5">
+    <div
+      className="p-[21px] bg-white rounded-lg h-fit mb-5"
+      id={translate("agent.report_tabs_heading.house")}
+    >
       <h1 className="text-[#1E1E1E] text-base font-semibold mb-2">
         {translate("agent.house_detail_fields.living_room_heading")}
       </h1>

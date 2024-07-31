@@ -16,7 +16,10 @@ export const AdditionalInfoReport = ({
     useCreateReportAdditionalDetails({ onHandleBack, onNextHandler });
 
   return (
-    <div className="p-[21px] bg-white rounded-lg h-fit mb-5">
+    <div
+      className="p-[21px] bg-white rounded-lg h-fit mb-5"
+      id={translate("agent.report_tabs_heading.additional")}
+    >
       <h1 className="text-[#1E1E1E] text-base font-semibold mb-2">
         {translate("agent.additional_details_fields.heading")}
       </h1>

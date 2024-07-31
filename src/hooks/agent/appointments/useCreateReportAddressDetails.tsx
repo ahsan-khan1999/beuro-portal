@@ -7,8 +7,6 @@ import {
 } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
-import { updateLead } from "@/api/slices/lead/leadSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import { ReportContactAddressDetailsValidation } from "@/validation/agent/agentReportSchema";
@@ -17,30 +15,31 @@ import {
   ContactReportAddressFormField,
   ReportContactSubmitFormField,
 } from "@/components/agent/appointments/createReport/fields/contact-address-form-fields";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { createReport } from "@/api/slices/appointment/appointmentSlice";
 
 export interface ReportAddressHookProps {
-  onNextHandle: (currentComponent: AppointmentReportsFormStages) => void;
+  onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
 }
 
 export const useCreateReportAddressDetails = ({
-  onNextHandle,
+  onNextHandler,
 }: ReportAddressHookProps) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { error, leadDetails } = useAppSelector((state) => state.lead);
-  const { loading, appointmentDetails } = useAppSelector(
+  const { error, loading, appointmentDetails } = useAppSelector(
     (state) => state.appointment
   );
 
-  const [addressType, setAddressType] = useState(
-    appointmentDetails?.addressID
-      ? Array.from(appointmentDetails?.addressID?.address, () => false)
-      : appointmentDetails?.addressID?.address
-      ? Array.from(appointmentDetails?.addressID?.address, () => false)
-      : [false] || [false]
-  );
+  const handleCancel = () => {
+    router.push({
+      pathname: "/agent/appointments/details",
+      query: {
+        appointment: appointmentDetails?.id,
+      },
+    });
+  };
 
   const schema = ReportContactAddressDetailsValidation(translate);
   const {
@@ -53,20 +52,14 @@ export const useCreateReportAddressDetails = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
     defaultValues: {
-      address: appointmentDetails?.addressID
-        ? leadDetails?.addressID?.address?.map((item, index) => ({
-            ...item,
-            label: item?.label && item?.label,
-          }))
-        : addressType?.map((item, index) => ({
-            streetNumber: "",
-            postalCode: "",
-            floor: 0,
-            room: 0,
-            lift: false,
-            parkingPermit: false,
-            label: `Adresse ${++index}`,
-          })),
+      address: appointmentDetails?.leadID?.addressID
+        ? appointmentDetails?.leadID?.addressID?.address?.map(
+            (item, index) => ({
+              ...item,
+              label: item?.label ? item?.label : `Adresse ${++index}`,
+            })
+          )
+        : [],
     },
   });
 
@@ -86,7 +79,7 @@ export const useCreateReportAddressDetails = ({
 
   const fields = contactAgentReportFormField(register, false, control);
 
-  const addressesFields = ContactReportAddressFormField(
+  const address = ContactReportAddressFormField(
     register,
     loading,
     control,
@@ -94,28 +87,39 @@ export const useCreateReportAddressDetails = ({
     addressFields
   );
 
-  const submit = ReportContactSubmitFormField(register, false, control, () =>
-    console.log()
+  const submit = ReportContactSubmitFormField(
+    register,
+    loading,
+    control,
+    handleCancel
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       ...data,
-      step: 1,
-      id: appointmentDetails?.id,
-      stage: AppointmentReportsFormStages.CONTACT_AND_ADDRESS,
+      mode: `${1}`,
+      appointmentID: appointmentDetails?.id,
     };
 
-    const response = await dispatch(
-      updateLead({ data: apiData, router, setError, translate })
-    );
+    try {
+      const response = await dispatch(
+        createReport({
+          data: apiData,
+          router,
+          setError,
+          translate,
+        })
+      );
 
-    if (response?.payload)
-      onNextHandle(AppointmentReportsFormStages.HOUSE_DETAILS);
+      if (response?.payload)
+        onNextHandler(AppointmentReportsFormStages.HOUSE_DETAILS);
+    } catch (error) {
+      console.error("Submission error:", error);
+    }
   };
 
   return {
-    fields: [...fields, ...addressesFields, ...submit],
+    fields: [...fields, ...address, ...submit],
     onSubmit,
     control,
     handleSubmit,

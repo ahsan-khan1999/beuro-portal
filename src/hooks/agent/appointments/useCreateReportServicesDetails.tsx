@@ -18,7 +18,6 @@ import {
 import { Service } from "@/types/service";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import { updateOffer } from "@/api/slices/offer/offerSlice";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
@@ -29,6 +28,7 @@ import {
   AddOfferServiceDetailsDescriptionFormField,
   AddOfferServiceDetailsFormField,
 } from "@/components/offers/add/fields/add-offer-service-details-fields";
+import { updateReport } from "@/api/slices/appointment/appointmentSlice";
 
 let prevDisAmount: number | string = "";
 export interface AgentServicesReportProps {
@@ -54,6 +54,10 @@ export const useCreateReportServicesDetails = ({
     (state) => state.offer
   );
 
+  const { appointmentDetails, reportDetails } = useAppSelector(
+    (state) => state.appointment
+  );
+
   const [serviceType, setServiceType] = useState<ServiceType[]>(
     offerDetails?.serviceDetail?.serviceDetail?.map((item) =>
       item.serviceType === "New Service"
@@ -71,7 +75,7 @@ export const useCreateReportServicesDetails = ({
   }, []);
 
   const handleBack = () => {
-    onBackHandler(AppointmentReportsFormStages.HOUSE_DETAILS);
+    // onBackHandler(AppointmentReportsFormStages.HOUSE_DETAILS);
   };
 
   const schema = generateAddfferServiceDetailsValidation(translate);
@@ -393,7 +397,8 @@ export const useCreateReportServicesDetails = ({
       ...data,
       discountAmount: +data.discountAmount,
       step: 3,
-      id: offerDetails?.id,
+      id: reportDetails?.id,
+      appointmentID: appointmentDetails?.id,
       stage: EditComponentsType.additionalEdit,
       taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
       taxType: Number(data?.taxType),
@@ -410,7 +415,7 @@ export const useCreateReportServicesDetails = ({
     }
 
     const response = await dispatch(
-      updateOffer({ data: apiData, router, setError, translate })
+      updateReport({ data: apiData, router, setError, translate })
     );
     if (response?.payload)
       onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);

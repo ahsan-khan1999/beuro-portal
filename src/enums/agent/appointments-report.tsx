@@ -1,8 +1,8 @@
 export enum AppointmentReportsFormStages {
-  CONTACT_AND_ADDRESS = "CONTACT_AND_ADDRESS",
-  HOUSE_DETAILS = "HOUSE_DETAILS",
-  SERVICES = "SERVICES",
-  ADDITIONAL_INFO = "ADDITIONAL_INFO",
+  CONTACT_AND_ADDRESS,
+  HOUSE_DETAILS,
+  SERVICES,
+  ADDITIONAL_INFO,
 }
 
 export enum ReportContactDetailsFieldsId {
@@ -17,6 +17,7 @@ export enum ReportContactDetailsFieldsId {
   floor = "floor",
   room = "room",
   lift = "lift",
+  parkingPermit = "parkingPermit",
 }
 
 export enum HouseDetailsFieldsId {
