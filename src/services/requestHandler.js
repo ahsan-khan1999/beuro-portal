@@ -291,7 +291,7 @@ const createAppointmentReport = (data) => {
   // let route = data?.appointmentID
   //   ? data?.step + "/" + data?.appointmentID
   //   : data?.step;
-  return post(SERVICE_URLS.appointment + data.mode, data, {
+  return post(SERVICE_URLS.appointment + data.step, data, {
     feature: featureConstants.login,
   });
 };

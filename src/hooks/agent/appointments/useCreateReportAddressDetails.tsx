@@ -16,7 +16,11 @@ import {
   ReportContactSubmitFormField,
 } from "@/components/agent/appointments/createReport/fields/contact-address-form-fields";
 import { useEffect } from "react";
-import { createReport } from "@/api/slices/appointment/appointmentSlice";
+import {
+  createReport,
+  readReportdetails,
+} from "@/api/slices/appointment/appointmentSlice";
+import { ReportPromiseActionType } from "@/types/customer";
 
 export interface ReportAddressHookProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -31,6 +35,8 @@ export const useCreateReportAddressDetails = ({
   const { error, loading, appointmentDetails, reportDetails } = useAppSelector(
     (state) => state.appointment
   );
+  const { report } = router.query;
+
 
   const handleCancel = () => {
     router.push({
@@ -64,19 +70,27 @@ export const useCreateReportAddressDetails = ({
       };
     };
 
-    if (reportDetails?.id) {
-      reset(
-        transformData({
-          fullName: reportDetails?.customerDetail?.fullName,
-          email: reportDetails.customerDetail?.email,
-          phoneNumber: reportDetails.customerDetail?.phoneNumber,
-          address: reportDetails?.addressID
-            ? reportDetails?.addressID?.address?.map((item, index) => ({
-                ...item,
-                label: item?.label ? item?.label : `Adresse ${++index}`,
-              }))
-            : [],
-        })
+    if (report) {
+      dispatch(readReportdetails({ params: { filter: report } })).then(
+        (response: ReportPromiseActionType) => {
+          if (response?.payload) {
+            reset(
+              transformData({
+                fullName: response.payload?.customerDetail?.fullName,
+                email: response.payload.customerDetail?.email,
+                phoneNumber: response.payload.customerDetail?.phoneNumber,
+                address: response.payload?.addressID
+                  ? response?.payload?.addressID?.address?.map(
+                      (item, index) => ({
+                        ...item,
+                        label: item?.label ? item?.label : `Adresse ${++index}`,
+                      })
+                    )
+                  : [],
+              })
+            );
+          }
+        }
       );
     } else {
       reset(
@@ -95,7 +109,7 @@ export const useCreateReportAddressDetails = ({
         })
       );
     }
-  }, [reportDetails?.id]);
+  }, [reportDetails?.id, report]);
 
   const { fields: addressFields } = useFieldArray({ control, name: "address" });
 
@@ -119,24 +133,45 @@ export const useCreateReportAddressDetails = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = {
-      ...data,
-      mode: `${1}`,
-      appointmentID: appointmentDetails?.id,
-    };
-
     try {
-      const response = await dispatch(
-        createReport({
-          data: apiData,
-          router,
-          setError,
-          translate,
-        })
-      );
+      if (report) {
+        const apiData = {
+          ...data,
+          // id: report,
+          step: 1,
+          appointmentID: reportDetails?.appointmentID?.id,
+        };
 
-      if (response?.payload)
-        onNextHandler(AppointmentReportsFormStages.HOUSE_DETAILS);
+        const response = await dispatch(
+          createReport({
+            data: apiData,
+            router,
+            setError,
+            translate,
+          })
+        );
+
+        if (response?.payload)
+          onNextHandler(AppointmentReportsFormStages.HOUSE_DETAILS);
+      } else {
+        const apiData = {
+          ...data,
+          step: 1,
+          appointmentID: appointmentDetails?.id,
+        };
+
+        const response = await dispatch(
+          createReport({
+            data: apiData,
+            router,
+            setError,
+            translate,
+          })
+        );
+
+        if (response?.payload)
+          onNextHandler(AppointmentReportsFormStages.HOUSE_DETAILS);
+      }
     } catch (error) {
       console.error("Submission error:", error);
     }

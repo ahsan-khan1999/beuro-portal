@@ -21,12 +21,16 @@ import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
-import { updateReport } from "@/api/slices/appointment/appointmentSlice";
+import {
+  readReportdetails,
+  updateReport,
+} from "@/api/slices/appointment/appointmentSlice";
 import {
   ReportDetailsServiceSubmitFormField,
   ReportServiceDetailsDescriptionFormField,
   ReportServiceDetailsFormField,
 } from "@/components/agent/appointments/createReport/fields/service-detail-form-fields";
+import { ReportPromiseActionType } from "@/types/customer";
 
 let prevDisAmount: number | string = "";
 
@@ -51,6 +55,8 @@ export const useCreateReportServicesDetails = ({
   const { loading, error, reportDetails, appointmentDetails } = useAppSelector(
     (state) => state.appointment
   );
+
+  const { report } = router.query;
 
   const [serviceType, setServiceType] = useState<ServiceType[]>(
     reportDetails?.serviceDetail?.serviceDetail?.map((item) =>
@@ -187,30 +193,38 @@ export const useCreateReportServicesDetails = ({
   }, [discountAmount, discountType, taxType, isTax, isDiscount, taxPercentage]);
 
   useMemo(() => {
-    if (reportDetails.id) {
-      reset({
-        serviceDetail: reportDetails?.serviceDetail?.serviceDetail || [
-          {
-            serviceTitle: "",
-            price: "",
-            unit: "",
-            count: "",
-            description: "",
-            totalPrice: "",
-            serviceType: "Existing Service",
-            discount: 0,
-          },
-        ],
-        isTax: reportDetails?.isTax,
-        isDiscount: reportDetails?.isDiscount,
-        discountType: staticEnums["DiscountType"][reportDetails?.discountType],
-        taxType: staticEnums["TaxType"][reportDetails?.taxType] || 0,
-        discountAmount: reportDetails?.discountAmount || "",
-        discountDescription: reportDetails?.discountDescription,
-        taxAmount: reportDetails?.taxAmount || 0,
-      });
+    if (report) {
+      dispatch(readReportdetails({ params: { filter: report } })).then(
+        (response: ReportPromiseActionType) => {
+          if (response?.payload) {
+            reset({
+              serviceDetail: response?.payload?.serviceDetail
+                ?.serviceDetail || [
+                {
+                  serviceTitle: "",
+                  price: "",
+                  unit: "",
+                  count: "",
+                  description: "",
+                  totalPrice: "",
+                  serviceType: "Existing Service",
+                  discount: 0,
+                },
+              ],
+              isTax: response?.payload?.isTax,
+              isDiscount: response?.payload?.isDiscount,
+              discountType:
+                staticEnums["DiscountType"][response?.payload?.discountType],
+              taxType: staticEnums["TaxType"][response?.payload?.taxType] || 0,
+              discountAmount: response?.payload?.discountAmount || "",
+              discountDescription: response?.payload?.discountDescription,
+              taxAmount: response?.payload?.taxAmount || 0,
+            });
+          }
+        }
+      );
     }
-  }, [reportDetails.id]);
+  }, [reportDetails?.id, report]);
 
   const {
     fields: serviceFields,
@@ -382,31 +396,63 @@ export const useCreateReportServicesDetails = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData: typeof data = {
-      ...data,
-      discountAmount: +data.discountAmount,
-      step: 3,
-      id: reportDetails?.id,
-      appointmentID: appointmentDetails?.id,
-      taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
-      taxType: Number(data?.taxType),
-      discountType: Number(data?.discountType),
-    };
-    if (!apiData?.isDiscount) {
-      delete apiData["discountAmount"];
-      delete apiData["discountType"];
-      delete apiData["discountDescription"];
-    }
-    if (!apiData?.isTax) {
-      delete apiData["taxAmount"];
-      delete apiData["taxType"];
-    }
+    try {
+      if (report) {
+        const apiData: typeof data = {
+          ...data,
+          discountAmount: +data.discountAmount,
+          step: 3,
+          id: reportDetails?.id,
+          appointmentID: reportDetails?.appointmentID?.id,
+          taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
+          taxType: Number(data?.taxType),
+          discountType: Number(data?.discountType),
+        };
+        if (!apiData?.isDiscount) {
+          delete apiData["discountAmount"];
+          delete apiData["discountType"];
+          delete apiData["discountDescription"];
+        }
+        if (!apiData?.isTax) {
+          delete apiData["taxAmount"];
+          delete apiData["taxType"];
+        }
 
-    const response = await dispatch(
-      updateReport({ data: apiData, router, setError, translate })
-    );
-    if (response?.payload)
-      onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
+        const response = await dispatch(
+          updateReport({ data: apiData, router, setError, translate })
+        );
+        if (response?.payload)
+          onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
+      } else {
+        const apiData: typeof data = {
+          ...data,
+          discountAmount: +data.discountAmount,
+          step: 3,
+          id: reportDetails?.id,
+          appointmentID: appointmentDetails?.id,
+          taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
+          taxType: Number(data?.taxType),
+          discountType: Number(data?.discountType),
+        };
+        if (!apiData?.isDiscount) {
+          delete apiData["discountAmount"];
+          delete apiData["discountType"];
+          delete apiData["discountDescription"];
+        }
+        if (!apiData?.isTax) {
+          delete apiData["taxAmount"];
+          delete apiData["taxType"];
+        }
+
+        const response = await dispatch(
+          updateReport({ data: apiData, router, setError, translate })
+        );
+        if (response?.payload)
+          onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+    }
   };
 
   return {
