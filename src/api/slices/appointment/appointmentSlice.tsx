@@ -240,5 +240,5 @@ const appointmentSlice = createSlice({
 });
 
 export default appointmentSlice.reducer;
-export const { setErrorMessage, setAppointmentDetails, setAppointment } =
+export const { setErrorMessage, setAppointmentDetails, setAppointment , setReportDetails} =
   appointmentSlice.actions;

@@ -58,16 +58,16 @@ export interface Report {
   taxAmount: number;
   discountType: keyof (typeof staticEnums)["DiscountType"];
   livingRoomDetails: {
-    grill: string;
-    table: string;
-    chairs: string;
-    sofa: string;
-    shelf: string;
-    umbrella: string;
-    pots: string;
-    plants: string;
-    herbGarden: string;
-    lawnmower: string;
+    sofa: number;
+    teacherDesk: number;
+    tvTable: number;
+    armchair: number;
+    table: number;
+    shelf: number;
+    LSofa: number;
+    TV: number;
+    decoBig: number;
+    box: number;
     descriptions: string;
   };
   kitchenDetails: {
@@ -165,6 +165,19 @@ export interface Report {
     };
     appointmentStatus: string;
     createdAt: string;
+  };
+  outDoorDetails: {
+    grill: number;
+    table: number;
+    chairs: number;
+    sofa: number;
+    shelf: number;
+    umbrella: number;
+    pots: number;
+    plants: number;
+    herbGarden: number;
+    lawnmower: number;
+    descriptions: string;
   };
   offerDetails: {
     employees: number;

@@ -1161,6 +1161,13 @@
       "date": "Datum",
       "time": "Zeit",
       "no_data_found": "Keine Berichte eingereicht"
+    },
+    "report_detail": {
+      "contact_tab": "Kontakt Details",
+      "contact_address_detail": "Kontakt und Adresse",
+      "house_detail": "Haus Details",
+      "service_detail": "Dienstleistung/Produkt Details",
+      "additional_detail": "Zusätzliche Details"
     }
   },
 

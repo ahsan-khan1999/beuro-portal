@@ -59,8 +59,8 @@ export const AppointmentTableRows = ({
               <div
                 onClick={() => {
                   router.push({
-                    pathname: "/agent/appointments/details",
-                    query: { ...router.query, appointment: item?.id },
+                    pathname: "/agent/appointments/report-detail",
+                    query: { ...router.query, report: item?.id },
                   });
                 }}
                 key={index}

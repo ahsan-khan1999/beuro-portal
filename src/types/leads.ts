@@ -55,7 +55,7 @@ export interface CustomerAddress {
   floor?: number;
   room?: number;
   lift?: boolean;
-  permit?: boolean;
+  parkingPermit?: boolean;
 }
 
 export interface LeadService {

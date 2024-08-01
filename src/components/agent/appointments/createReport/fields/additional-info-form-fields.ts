@@ -151,7 +151,7 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
         containerClass: "bg-[#EDF4FF] rounded-b-lg p-2",
         field: {
           type: Field.textArea,
-          className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+          className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
           rows: 2,
           id: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.noteAndInformation}`,
           name: `${AdditionalInfoFieldsId.offerDetails}.${AdditionalInfoFieldsId.noteAndInformation}`,
