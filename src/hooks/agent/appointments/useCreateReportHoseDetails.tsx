@@ -4,8 +4,12 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import { houseDetailReportFormField } from "@/components/agent/appointments/createReport/fields/house-detail-form-fields";
-import { updateReport } from "@/api/slices/appointment/appointmentSlice";
+import {
+  readReportdetails,
+  updateReport,
+} from "@/api/slices/appointment/appointmentSlice";
 import { useEffect } from "react";
+import { ReportPromiseActionType } from "@/types/customer";
 
 export interface ReportHouseDetailsProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -39,18 +43,26 @@ export const useCreateReportHoseDetails = ({
     // resolver: yupResolver<FieldValues>(schema),
   });
 
+  const { report } = router.query;
+
   useEffect(() => {
-    if (reportDetails?.id) {
-      reset({
-        livingRoomDetails: reportDetails?.livingRoomDetails,
-        kitchenDetails: reportDetails?.kitchenDetails,
-        bedRoomDetails: reportDetails?.bedRoomDetails,
-        roomDetails: reportDetails?.roomDetails,
-        basementAtticDetails: reportDetails?.basementAtticDetails,
-        specialItemsDetails: reportDetails?.specialItemsDetails,
-      });
+    if (report) {
+      dispatch(readReportdetails({ params: { filter: report } })).then(
+        (response: ReportPromiseActionType) => {
+          if (response?.payload) {
+            reset({
+              livingRoomDetails: response?.payload?.livingRoomDetails,
+              kitchenDetails: response?.payload?.kitchenDetails,
+              bedRoomDetails: response?.payload?.bedRoomDetails,
+              roomDetails: response?.payload?.roomDetails,
+              basementAtticDetails: response?.payload?.basementAtticDetails,
+              specialItemsDetails: response?.payload?.specialItemsDetails,
+            });
+          }
+        }
+      );
     }
-  }, [reportDetails?.id]);
+  }, [reportDetails?.id, report]);
 
   const fields = houseDetailReportFormField(
     register,
@@ -60,44 +72,66 @@ export const useCreateReportHoseDetails = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const convertValues = (
-      obj: DataType,
-      excludeKeys: string[] = []
-    ): DataType => {
-      return Object.fromEntries(
-        Object.entries(obj).map(([key, value]) => {
-          if (typeof value === "object" && value !== null) {
-            // Recursively convert nested objects
-            return [key, convertValues(value, excludeKeys)];
-          } else if (excludeKeys.includes(key)) {
-            // Exclude specific keys from conversion
-            return [key, value];
-          } else {
-            // Convert value to number if it's numeric
-            const convertedValue = isNaN(Number(value)) ? value : Number(value);
-            return [key, convertedValue];
-          }
-        })
-      );
-    };
+    try {
+      const convertValues = (
+        obj: DataType,
+        excludeKeys: string[] = []
+      ): DataType => {
+        return Object.fromEntries(
+          Object.entries(obj).map(([key, value]) => {
+            if (typeof value === "object" && value !== null) {
+              // Recursively convert nested objects
+              return [key, convertValues(value, excludeKeys)];
+            } else if (excludeKeys.includes(key)) {
+              // Exclude specific keys from conversion
+              return [key, value];
+            } else {
+              // Convert value to number if it's numeric
+              const convertedValue = isNaN(Number(value))
+                ? value
+                : Number(value);
+              return [key, convertedValue];
+            }
+          })
+        );
+      };
 
-    const excludeKeys = ["descriptions"];
+      const excludeKeys = ["descriptions"];
+      const convertedApiData = convertValues(data, excludeKeys);
 
-    const convertedApiData = convertValues(data, excludeKeys);
+      if (report) {
+        const apiData = {
+          ...convertedApiData,
+          step: 2,
+          id: reportDetails?.id,
+          appointmentID: reportDetails?.appointmentID?.id,
+        };
 
-    const apiData = {
-      ...convertedApiData,
-      step: 2,
-      id: reportDetails?.id,
-      appointmentID: appointmentDetails?.id,
-    };
+        const response = await dispatch(
+          updateReport({ data: apiData, router, setError, translate })
+        );
 
-    const response = await dispatch(
-      updateReport({ data: apiData, router, setError, translate })
-    );
+        if (response?.payload) {
+          onNextHandler(AppointmentReportsFormStages.SERVICES);
+        }
+      } else {
+        const apiData = {
+          ...convertedApiData,
+          step: 2,
+          id: reportDetails?.id,
+          appointmentID: appointmentDetails?.id,
+        };
 
-    if (response?.payload) {
-      onNextHandler(AppointmentReportsFormStages.SERVICES);
+        const response = await dispatch(
+          updateReport({ data: apiData, router, setError, translate })
+        );
+
+        if (response?.payload) {
+          onNextHandler(AppointmentReportsFormStages.SERVICES);
+        }
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
     }
   };
 

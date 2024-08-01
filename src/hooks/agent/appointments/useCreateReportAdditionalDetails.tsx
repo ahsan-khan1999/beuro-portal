@@ -27,6 +27,8 @@ export const useCreateReportAdditionalDetails = ({
     (state) => state.appointment
   );
 
+  const { report } = router.query;
+
   // const schema = ReportAdditionalDetailsValidation(translate);
   const {
     register,
@@ -47,51 +49,72 @@ export const useCreateReportAdditionalDetails = ({
   );
 
   useEffect(() => {
-    if (reportDetails?.id) {
+    if (report) {
       reset({
         offerDetails: reportDetails?.offerDetails,
       });
     }
-  }, [reportDetails?.id]);
+  }, [report]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const convertValues = (
-      obj: DataType,
-      excludeKeys: string[] = []
-    ): DataType => {
-      return Object.fromEntries(
-        Object.entries(obj).map(([key, value]) => {
-          if (typeof value === "object" && value !== null) {
-            // Recursively convert nested objects
-            return [key, convertValues(value, excludeKeys)];
-          } else if (excludeKeys.includes(key)) {
-            // Exclude specific keys from conversion
-            return [key, value];
-          } else {
-            // Convert value to number if it's numeric
-            const convertedValue = isNaN(Number(value)) ? value : Number(value);
-            return [key, convertedValue];
-          }
-        })
-      );
-    };
+    try {
+      const convertValues = (
+        obj: DataType,
+        excludeKeys: string[] = []
+      ): DataType => {
+        return Object.fromEntries(
+          Object.entries(obj).map(([key, value]) => {
+            if (typeof value === "object" && value !== null) {
+              // Recursively convert nested objects
+              return [key, convertValues(value, excludeKeys)];
+            } else if (excludeKeys.includes(key)) {
+              // Exclude specific keys from conversion
+              return [key, value];
+            } else {
+              // Convert value to number if it's numeric
+              const convertedValue = isNaN(Number(value))
+                ? value
+                : Number(value);
+              return [key, convertedValue];
+            }
+          })
+        );
+      };
 
-    const excludeKeys = ["noteAndInformation", "remarks"];
-    const convertedApiData = convertValues(data, excludeKeys);
+      const excludeKeys = ["noteAndInformation", "remarks"];
+      const convertedApiData = convertValues(data, excludeKeys);
+      if (report) {
+        const apiData = {
+          ...convertedApiData,
+          step: 4,
+          id: reportDetails?.id,
+          appointmentID: reportDetails?.appointmentID?.id,
+        };
 
-    const apiData = {
-      ...convertedApiData,
-      step: 4,
-      id: reportDetails?.id,
-      appointmentID: appointmentDetails?.id,
-    };
+        const response = await dispatch(
+          updateReport({ data: apiData, router, setError, translate })
+        );
 
-    const response = await dispatch(
-      updateReport({ data: apiData, router, setError, translate })
-    );
+        if (response?.payload)
+          onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
+      } else {
+        const apiData = {
+          ...convertedApiData,
+          step: 4,
+          id: reportDetails?.id,
+          appointmentID: appointmentDetails?.id,
+        };
 
-    if (response?.payload)
-      onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
+        const response = await dispatch(
+          updateReport({ data: apiData, router, setError, translate })
+        );
+
+        if (response?.payload)
+          onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+    }
   };
 
   return {

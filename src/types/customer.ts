@@ -8,6 +8,7 @@ import {
 import { OffersTableRowTypes } from "./offers";
 import { Plan } from "./admin/plans";
 import { Company } from "./company";
+import { Report } from "./appointments";
 
 export interface CustomerTable {
   currentPageRows: Customers[];
@@ -81,5 +82,10 @@ export interface CustomerPromiseActionType {
 export interface OfferPromiseActionType {
   type: string;
   payload: OffersTableRowTypes;
+  meta: object;
+}
+export interface ReportPromiseActionType {
+  type: string;
+  payload: Report;
   meta: object;
 }

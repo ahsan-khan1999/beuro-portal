@@ -132,7 +132,6 @@ export const updateReport: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.updateAppointmentReport(data);
-
       return response?.data?.Report;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -240,5 +239,9 @@ const appointmentSlice = createSlice({
 });
 
 export default appointmentSlice.reducer;
-export const { setErrorMessage, setAppointmentDetails, setAppointment , setReportDetails} =
-  appointmentSlice.actions;
+export const {
+  setErrorMessage,
+  setAppointmentDetails,
+  setAppointment,
+  setReportDetails,
+} = appointmentSlice.actions;

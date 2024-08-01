@@ -26,7 +26,7 @@ export const ReportContactDetail = ({
           onClick={() =>
             router.push({
               pathname: "/agent/appointments/update-report",
-              query: { report: reportDetail?.id, tab: 0 },
+              query: { report: reportDetail?.appointmentID?.id },
             })
           }
           className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
