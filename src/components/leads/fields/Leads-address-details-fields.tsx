@@ -64,7 +64,6 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
           type: Field.select,
           id: `address.${i}.addressType`,
           name: `address.${i}.addressType`,
-          // value: translate("common.address_type"),
           options:
             addressSettings?.addresses?.map((item) => ({
               label: item,
@@ -101,7 +100,6 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
           children: [
             inputField,
             {
-              containerClass: "",
               field: {
                 type: Field.button,
                 className: "bg-white hover:bg-white",

@@ -23,7 +23,7 @@ export const AgentAppointmentsDetails = () => {
       {loading ? (
         <CustomLoader />
       ) : (
-        !appointmentDetails?.leadID?.isAppointmentCreated && (
+        !appointmentDetails?.isReportSubmitted && (
           <div className="bg-white flex items-center justify-center mt-6">
             <NoDataEmptyState
               heading={translate("appointments.detail_data.no_data_found")}

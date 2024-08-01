@@ -1,16 +1,25 @@
 import React from "react";
 import { Form } from "@/base-components/form/form";
-import { FormComponentProps } from "@/types";
-import { useAgentReportServices } from "@/hooks/agent/appointments/useAgentReportServices";
+import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
+import { useCreateReportServicesDetails } from "@/hooks/agent/appointments/useCreateReportServicesDetails";
+
+export interface ReportServicesProps {
+  onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
+  onBackHandler: (currentComponent: AppointmentReportsFormStages) => void;
+}
 
 export const ServicesDetailReport = ({
-  setCurrentFormStage,
-}: FormComponentProps) => {
+  onNextHandler,
+  onBackHandler,
+}: ReportServicesProps) => {
   const { onSubmit, handleSubmit, errors, fields } =
-    useAgentReportServices(setCurrentFormStage);
+    useCreateReportServicesDetails({ onBackHandler, onNextHandler });
 
   return (
-    <div className="p-[21px] bg-white rounded-lg h-fit mb-5">
+    <div
+      className="p-[21px] bg-white rounded-lg h-fit mb-5"
+      id={translate("agent.report_tabs_heading.services")}
+    >
       <h1 className="text-[#1E1E1E] text-base font-semibold pb-[29px] border-b border-b-[#000] border-opacity-20">
         {translate("agent.service_detail_fields.heading")}
       </h1>

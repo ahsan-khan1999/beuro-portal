@@ -1161,6 +1161,13 @@
       "date": "Datum",
       "time": "Zeit",
       "no_data_found": "Keine Berichte eingereicht"
+    },
+    "report_detail": {
+      "contact_tab": "Kontakt Details",
+      "contact_address_detail": "Kontakt und Adresse",
+      "house_detail": "Haus Details",
+      "service_detail": "Dienstleistung/Produkt Details",
+      "additional_detail": "Zusätzliche Details"
     }
   },
 
@@ -1234,8 +1241,12 @@
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum",
-      "success_signed_offer": "Unterschrift eingerichtetde"
+      "success_signed_offer": "Unterschrift eingerichtetde",
+      "report_created": "Bericht erfolgreich erstellt!",
+      "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
+    "yes": "Ja",
+    "no": "Nein",
     "upload_button": "Hochladen",
     "item": "Artikel",
     "create_report_btn": "Bericht erstellen",
@@ -2403,6 +2414,8 @@
       "collection_address_heading": "Einzugsadresse"
     },
     "house_detail_fields": {
+      "item": "Artikel",
+      "qty": "Qty",
       "living_room_heading": "Wohnzimmer(WZ))",
       "sofa": "Sofa",
       "puit": "Pult",

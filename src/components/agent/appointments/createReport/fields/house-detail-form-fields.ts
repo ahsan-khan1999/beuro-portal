@@ -1,3 +1,7 @@
+import {
+  AppointmentReportsFormStages,
+  HouseDetailsFieldsId,
+} from "@/enums/agent/appointments-report";
 import { Field } from "@/enums/form";
 import { FormField, GenerateHouseDetailReportFormField } from "@/types";
 import { useTranslation } from "next-i18next";
@@ -6,7 +10,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
   register,
   loading,
   control,
-  user
+  onHandleBack
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -15,8 +19,93 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
-        children: [],
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+        children: [
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className: "flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden md:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            containerClass: "",
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden mlg:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+        ],
       },
     },
     {
@@ -24,15 +113,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg px-2 pb-2",
         children: [
           {
             field: {
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_SOFA",
-              name: "LIVING_ROOM_SOFA",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.sofa}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.sofa}`,
               inputLabelValue: translate("agent.house_detail_fields.sofa"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="31" height="22" viewBox="0 0 31 22" fill="none">
   <path d="M3.57266 17.7283H2.31661C1.30969 17.7283 0.5 16.9931 0.5 16.0968V7.31506C0.5 6.41876 1.32007 5.68359 2.31661 5.68359H3.19896C4.20588 5.68359 5.01557 6.41876 5.01557 7.31506V16.3184C5.01557 17.0938 4.36159 17.7182 3.56228 17.7182L3.57266 17.7283ZM2.31661 6.38855C1.71453 6.38855 1.22664 6.80145 1.22664 7.31506V16.0867C1.22664 16.6003 1.71453 17.0132 2.31661 17.0132H3.57266C3.96713 17.0132 4.28893 16.7011 4.28893 16.3083V7.31506C4.28893 6.80145 3.80104 6.38855 3.19896 6.38855H2.31661Z" fill="#4A13E7"/>
@@ -52,8 +141,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_PUIT",
-              name: "LIVING_ROOM_PUIT",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.teacherDesk}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.teacherDesk}`,
               inputLabelValue: translate("agent.house_detail_fields.puit"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="31" height="18" viewBox="0 0 31 18" fill="none">
   <path d="M29.915 3.66492H1.08496C0.814961 3.66492 0.584961 3.44492 0.584961 3.16492V1.29492C0.584961 1.02492 0.804961 0.794922 1.08496 0.794922H29.915C30.185 0.794922 30.415 1.01492 30.415 1.29492V3.16492C30.415 3.43492 30.195 3.66492 29.915 3.66492ZM1.28496 2.96492H29.705V1.50492H1.28496V2.96492Z" fill="#4A13E7"/>
@@ -76,8 +165,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_FERNSEHTISCH",
-              name: "LIVING_ROOM_FERNSEHTISCH",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.tvTable}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.tvTable}`,
               inputLabelValue: translate("agent.house_detail_fields.tv_table"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="29" height="14" viewBox="0 0 29 14" fill="none">
   <path d="M19.2227 9.32222H2.15756C1.56794 9.32222 1.08037 8.87778 1.02367 8.3L0.502089 1.9C0.468073 1.41111 0.853596 1 1.35251 1H3.80172" stroke="#4A13E7" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -100,8 +189,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_SESSEL",
-              name: "LIVING_ROOM_SESSEL",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.armchair}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.armchair}`,
               inputLabelValue: translate("agent.house_detail_fields.sessel"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="31" height="28" viewBox="0 0 31 28" fill="none">
   <path d="M27.3121 10.359H27.0532L26.9034 10.1978L27.2576 9.88875L26.8489 9.87532H27.244L26.8897 9.57973L27.1077 9.47225V9.44538L27.3938 9.33789L27.6118 9.55286L27.5982 9.5663L27.6254 9.57973L27.3121 9.84845V9.87532H27.8026L27.5437 10.1306L27.6118 10.1978L27.5437 10.1306L27.4211 10.265L27.4347 10.3187L27.3121 10.359Z" fill="#4A13E7"/>
@@ -118,8 +207,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_TISCH",
-              name: "LIVING_ROOM_TISCH",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.table}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.table}`,
               inputLabelValue: translate("agent.house_detail_fields.tisch"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="31" height="20" viewBox="0 0 31 20" fill="none">
   <path d="M26.4412 4.20988H5.08423V0H26.4412V4.20988ZM6.09896 3.16049H25.4264V1.06173H6.09896V3.16049Z" fill="#4A13E7"/>
@@ -135,8 +224,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_REGAL",
-              name: "LIVING_ROOM_REGAL",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.shelf}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="24" viewBox="0 0 19 24" fill="none">
   <path d="M18.0083 0H0.980305C0.717281 0 0.5 0.228 0.5 0.504V21.408V23.412C0.5 23.688 0.717281 23.916 0.980305 23.916C1.24333 23.916 1.46061 23.688 1.46061 23.412V21.912H17.5394V23.496C17.5394 23.772 17.7567 24 18.0197 24C18.2827 24 18.5 23.772 18.5 23.496V21.432V0.504C18.5 0.228 18.2827 0 18.0197 0H18.0083ZM1.44917 6.252H9.00826V10.464H1.44917V6.252ZM17.5165 10.476H9.96887V6.264H17.528V10.476H17.5165ZM1.44917 11.472H9.00826V15.684H1.44917V11.472ZM9.96887 11.472H17.528V15.684H9.96887V11.472ZM17.528 16.692V20.904H9.96887V16.692H17.528ZM17.528 5.256H9.96887V0.996001H17.528V5.256ZM9.0197 0.996001V5.256H1.44917V0.996001H9.00826H9.0197ZM1.44917 16.692H9.00826V20.904H1.44917V16.692Z" fill="#4A13E7"/>
@@ -149,8 +238,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_L_SOFA",
-              name: "LIVING_ROOM_L_SOFA",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.LSofa}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.LSofa}`,
               inputLabelValue: translate("agent.house_detail_fields.l_sofa"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="29" height="20" viewBox="0 0 29 20" fill="none">
   <path d="M9.97296 3.42953V9.65321C9.97296 9.68716 9.95105 9.70979 9.95105 9.74374C9.95105 9.74374 9.9839 9.67584 9.95105 9.7211C9.9401 9.74374 9.91821 9.77768 9.90726 9.80031C9.86346 9.86821 9.96201 9.74374 9.90726 9.80031C9.90726 9.80031 9.83062 9.86821 9.87441 9.83426C9.91821 9.789 9.83061 9.85689 9.81966 9.86821C9.74301 9.89084 9.79776 9.89084 9.81966 9.86821C9.78681 9.86821 9.76491 9.89084 9.73206 9.89084C9.75396 9.89084 9.81966 9.89084 9.73206 9.89084H3.07454C3.18404 9.89084 2.99789 9.86821 3.05264 9.89084C3.10739 9.91347 2.9322 9.81163 2.976 9.84558C3.0198 9.87953 2.9541 9.82295 2.94315 9.81163C2.9103 9.77768 2.96504 9.86821 2.93219 9.789C2.92124 9.76637 2.89935 9.73242 2.8884 9.70979C2.8884 9.73242 2.9103 9.77768 2.8884 9.70979C2.8884 9.69847 2.8884 9.67584 2.8884 9.66453V8.75926L2.39566 9.26847C2.92125 9.26847 3.60014 9.38163 4.00529 8.94032C4.32283 8.58953 4.28998 8.15953 4.28998 7.71821V3.44085L3.79724 3.95006H10.4657C10.7175 3.95006 10.9694 3.71243 10.9584 3.44085C10.9475 3.16927 10.7394 2.93164 10.4657 2.93164H3.79724C3.53444 2.93164 3.3045 3.16927 3.3045 3.44085V5.74927C3.3045 6.57532 3.3045 7.39006 3.3045 8.21611V8.25005C3.2826 8.19348 3.3045 8.31795 3.3045 8.25005C3.3264 8.30663 3.2826 8.22742 3.3045 8.22742C3.2826 8.27269 3.27165 8.27269 3.3045 8.25005C3.3045 8.25005 3.30449 8.22742 3.32639 8.25005C3.31544 8.25005 3.30449 8.26137 3.29354 8.27269C3.30449 8.27269 3.31545 8.27269 3.33735 8.25005C3.33735 8.25005 3.24974 8.27269 3.31544 8.25005C3.37019 8.25005 3.30449 8.25005 3.29354 8.25005H2.41756C2.15477 8.25005 1.9248 8.48769 1.9248 8.75926V9.58532C1.9248 10.1737 2.24236 10.6943 2.78985 10.8753C3.1074 10.9772 3.5016 10.9319 3.81914 10.9319H9.40356C9.51306 10.9319 9.62256 10.9319 9.73206 10.9319C10.2358 10.9319 10.6847 10.6264 10.8818 10.1398C11.0241 9.77768 10.9694 9.32505 10.9694 8.94032V6.97137C10.9694 5.81716 10.9804 4.67427 10.9694 3.52006V3.45217C10.9694 3.1919 10.7395 2.93164 10.4767 2.94296C10.2029 2.95427 9.9839 3.16927 9.9839 3.45217L9.97296 3.42953Z" fill="#4A13E7"/>
@@ -168,8 +257,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_FERNSEHER",
-              name: "LIVING_ROOM_FERNSEHER",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.TV}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.TV}`,
               inputLabelValue: translate("agent.house_detail_fields.fernseher"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="18" viewBox="0 0 25 18" fill="none">
   <path d="M23.9338 14.2448H1.06622C0.757376 14.2448 0.5 13.9977 0.5 13.7012V1.54363C0.5 1.2471 0.757376 1 1.06622 1H23.9338C24.2426 1 24.5 1.2471 24.5 1.54363V13.6888C24.5 13.9853 24.2426 14.2324 23.9338 14.2324V14.2448Z" stroke="#4A13E7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -185,8 +274,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_DECO_GROSS",
-              name: "LIVING_ROOM_DECO_GROSS",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.decoBig}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.decoBig}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.deco_gross"
               ),
@@ -207,8 +296,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "LIVING_ROOM_BOX",
-              name: "LIVING_ROOM_BOX",
+              id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.box}`,
+              name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.box}`,
               inputLabelValue: translate("agent.house_detail_fields.box"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
   <path d="M22.293 7.20328L24.3475 5.14598C24.5841 4.90908 24.5094 4.51009 24.2105 4.37294L15.0961 0.0463709C14.9094 -0.0409086 14.6977 -0.00350319 14.5483 0.146119L12.4938 2.20342L10.4393 0.146119C10.2899 -0.00350319 10.0782 -0.0409086 9.89143 0.0463709L0.777025 4.37294C0.478192 4.51009 0.403483 4.90908 0.640059 5.14598L2.69453 7.20328L0.640059 9.26058C0.403483 9.49749 0.478192 9.89648 0.777025 10.0336L2.9062 11.0436V18.7242C2.9062 18.8987 3.00582 19.0608 3.16769 19.1481C3.20504 19.173 12.2572 23.936 12.2821 23.9485C12.4191 24.0108 12.5809 24.0233 12.7179 23.9485C12.3568 24.1355 21.4837 19.3351 21.8323 19.1481C21.9942 19.0608 22.0938 18.8987 22.0938 18.7242V11.0436L24.223 10.0336C24.5218 9.89648 24.5965 9.49749 24.3599 9.26058L22.3055 7.20328H22.293ZM12.5062 10.9937L4.51244 7.20328L12.5062 3.41286L20.5 7.20328L12.5062 10.9937ZM14.9965 1.05632L23.1895 4.94649L21.5086 6.62973L13.3156 2.73956L14.9965 1.05632ZM10.0035 1.05632L11.6844 2.73956L3.49142 6.62973L1.81047 4.94649L10.0035 1.05632ZM3.49142 7.77683L11.6844 11.667L10.0035 13.3502L1.81047 9.46008L3.49142 7.77683ZM3.86496 11.5049L9.89143 14.3602C10.0782 14.4475 10.2899 14.4101 10.4393 14.2604L12.0206 12.6769V22.7266L3.86496 18.4249V11.48V11.5049ZM21.135 18.4374L12.9794 22.739V12.6894L14.5607 14.2729C14.6977 14.4101 14.9218 14.4599 15.1086 14.3727L21.135 11.5174V18.4623V18.4374ZM14.9965 13.3502L13.3156 11.667L21.5086 7.77683L23.1895 9.46008L14.9965 13.3502Z" fill="#4A13E7"/>
@@ -223,15 +312,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
       containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("agent.house_detail_fields.remark")}`,
-        htmlFor: "LIVING_ROOM_REMARK",
+        htmlFor: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.descriptions}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
-        id: "LIVING_ROOM_REMARK",
-        name: "LIVING_ROOM_REMARK",
+        id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.descriptions}`,
+        name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.descriptions}`,
         register,
       },
     },
@@ -249,15 +338,109 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+        children: [
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className: "flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden md:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            containerClass: "",
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden mlg:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
         children: [
           {
             field: {
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_BACKOFEN",
-              name: "KITCHEN_BACKOFEN",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.oven}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.oven}`,
               inputLabelValue: translate("agent.house_detail_fields.backofen"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
   <g clip-path="url(#clip0_296_1589)">
@@ -285,8 +468,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_REFREGIRATOR",
-              name: "KITCHEN_REFREGIRATOR",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.refrigerator}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.refrigerator}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.kuhlschrank"
               ),
@@ -311,8 +494,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_DEEP_FREEZER",
-              name: "KITCHEN_DEEP_FREEZER",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.freezer}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.freezer}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.tiefkuhler"
               ),
@@ -336,8 +519,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_HERD",
-              name: "KITCHEN_HERD",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.stove}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.stove}`,
               inputLabelValue: translate("agent.house_detail_fields.herd"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
   <g clip-path="url(#clip0_296_1615)">
@@ -365,8 +548,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_MICROWAVE",
-              name: "KITCHEN_MICROWAVE",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.microwave}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.microwave}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.mikrowelle"
               ),
@@ -396,8 +579,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_COFFEE_MACHINE",
-              name: "KITCHEN_COFFEE_MACHINE",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.coffeeMachine}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.coffeeMachine}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.kaffeemaschine"
               ),
@@ -427,8 +610,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_WASHING_MACHINE",
-              name: "KITCHEN_WASHING_MACHINE",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.washingMachine}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.washingMachine}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.washchmashine"
               ),
@@ -456,8 +639,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_TUMBLER",
-              name: "KITCHEN_TUMBLER",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.tumbler}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.tumbler}`,
               inputLabelValue: translate("agent.house_detail_fields.Tumbler"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="22" viewBox="0 0 17 22" fill="none">
   <g clip-path="url(#clip0_296_1683)">
@@ -485,8 +668,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_REGAL",
-              name: "KITCHEN_REGAL",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.shelf}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20" fill="none">
   <g clip-path="url(#clip0_296_1696)">
@@ -506,8 +689,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KITCHEN_BOX",
-              name: "KITCHEN_BOX",
+              id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.box}`,
+              name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.box}`,
               inputLabelValue: translate("agent.house_detail_fields.box"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
   <path d="M22.293 7.20328L24.3475 5.14598C24.5841 4.90908 24.5094 4.51009 24.2105 4.37294L15.0961 0.0463709C14.9094 -0.0409086 14.6977 -0.00350319 14.5483 0.146119L12.4938 2.20342L10.4393 0.146119C10.2899 -0.00350319 10.0782 -0.0409086 9.89143 0.0463709L0.777025 4.37294C0.478192 4.51009 0.403483 4.90908 0.640059 5.14598L2.69453 7.20328L0.640059 9.26058C0.403483 9.49749 0.478192 9.89648 0.777025 10.0336L2.9062 11.0436V18.7242C2.9062 18.8987 3.00582 19.0608 3.16769 19.1481C3.20504 19.173 12.2572 23.936 12.2821 23.9485C12.4191 24.0108 12.5809 24.0233 12.7179 23.9485C12.3568 24.1355 21.4837 19.3351 21.8323 19.1481C21.9942 19.0608 22.0938 18.8987 22.0938 18.7242V11.0436L24.223 10.0336C24.5218 9.89648 24.5965 9.49749 24.3599 9.26058L22.3055 7.20328H22.293ZM12.5062 10.9937L4.51244 7.20328L12.5062 3.41286L20.5 7.20328L12.5062 10.9937ZM14.9965 1.05632L23.1895 4.94649L21.5086 6.62973L13.3156 2.73956L14.9965 1.05632ZM10.0035 1.05632L11.6844 2.73956L3.49142 6.62973L1.81047 4.94649L10.0035 1.05632ZM3.49142 7.77683L11.6844 11.667L10.0035 13.3502L1.81047 9.46008L3.49142 7.77683ZM3.86496 11.5049L9.89143 14.3602C10.0782 14.4475 10.2899 14.4101 10.4393 14.2604L12.0206 12.6769V22.7266L3.86496 18.4249V11.48V11.5049ZM21.135 18.4374L12.9794 22.739V12.6894L14.5607 14.2729C14.6977 14.4101 14.9218 14.4599 15.1086 14.3727L21.135 11.5174V18.4623V18.4374ZM14.9965 13.3502L13.3156 11.667L21.5086 7.77683L23.1895 9.46008L14.9965 13.3502Z" fill="#4A13E7"/>
@@ -522,15 +705,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
       containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("agent.house_detail_fields.remark")}`,
-        htmlFor: "KITCHEN_REMARK",
+        htmlFor: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.descriptions}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
-        id: "KITCHEN_REMARK",
-        name: "KITCHEN_REMARK",
+        id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.descriptions}`,
+        name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.descriptions}`,
         register,
       },
     },
@@ -549,15 +732,109 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+        children: [
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className: "flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden md:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            containerClass: "",
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden mlg:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
         children: [
           {
             field: {
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_BETT",
-              name: "BEDROOM_BETT",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.bed}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.bed}`,
               inputLabelValue: translate("agent.house_detail_fields.bett"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
   <g clip-path="url(#clip0_296_1961)">
@@ -582,8 +859,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_DOPPEIBETT",
-              name: "BEDROOM_DOPPEIBETT",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.doubleBed}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.doubleBed}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.doppeltbett"
               ),
@@ -611,8 +888,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_SESSEL",
-              name: "BEDROOM_SESSEL",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.armchair}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.armchair}`,
               inputLabelValue: translate("agent.house_detail_fields.sessel"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
   <g clip-path="url(#clip0_296_1986)">
@@ -636,8 +913,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_SCHRANK_KELEIN",
-              name: "BEDROOM_SCHRANK_KELEIN",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.smallWardrobe}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.smallWardrobe}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.schrank_klein"
               ),
@@ -668,8 +945,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_SCHRANK_MITTEL",
-              name: "BEDROOM_SCHRANK_MITTEL",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.schrank_mittel"
               ),
@@ -703,8 +980,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_SCHRANK_GROSS",
-              name: "BEDROOM_SCHRANK_GROSS",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.largeWardrobe}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.largeWardrobe}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.schrank_gross"
               ),
@@ -736,8 +1013,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_SCHMINKANLAGE",
-              name: "BEDROOM_SCHMINKANLAGE",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.dressingTable}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.dressingTable}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.schminkanlage"
               ),
@@ -773,8 +1050,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_NACHTTISCH",
-              name: "BEDROOM_NACHTTISCH",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.nightstand}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.nightstand}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.nachttisch"
               ),
@@ -795,14 +1072,13 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               register,
             },
           },
-
           {
             field: {
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_REGAL",
-              name: "BEDROOM_REGAL",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.shelf}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20" fill="none">
   <g clip-path="url(#clip0_296_1950)">
@@ -822,8 +1098,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_PULT",
-              name: "BEDROOM_PULT",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.desk}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.desk}`,
               inputLabelValue: translate("agent.house_detail_fields.pult"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="31" height="18" viewBox="0 0 31 18" fill="none">
   <g clip-path="url(#clip0_296_2149)">
@@ -853,8 +1129,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_PFLANZEN",
-              name: "BEDROOM_PFLANZEN",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.plants}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.plants}`,
               inputLabelValue: translate("agent.house_detail_fields.pflanzen"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="22" viewBox="0 0 17 22" fill="none">
   <g clip-path="url(#clip0_296_2174)">
@@ -879,8 +1155,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_BOX",
-              name: "BEDROOM_BOX",
+              id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.box}`,
+              name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.box}`,
               inputLabelValue: translate("agent.house_detail_fields.box"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
   <path d="M22.293 7.20328L24.3475 5.14598C24.5841 4.90908 24.5094 4.51009 24.2105 4.37294L15.0961 0.0463709C14.9094 -0.0409086 14.6977 -0.00350319 14.5483 0.146119L12.4938 2.20342L10.4393 0.146119C10.2899 -0.00350319 10.0782 -0.0409086 9.89143 0.0463709L0.777025 4.37294C0.478192 4.51009 0.403483 4.90908 0.640059 5.14598L2.69453 7.20328L0.640059 9.26058C0.403483 9.49749 0.478192 9.89648 0.777025 10.0336L2.9062 11.0436V18.7242C2.9062 18.8987 3.00582 19.0608 3.16769 19.1481C3.20504 19.173 12.2572 23.936 12.2821 23.9485C12.4191 24.0108 12.5809 24.0233 12.7179 23.9485C12.3568 24.1355 21.4837 19.3351 21.8323 19.1481C21.9942 19.0608 22.0938 18.8987 22.0938 18.7242V11.0436L24.223 10.0336C24.5218 9.89648 24.5965 9.49749 24.3599 9.26058L22.3055 7.20328H22.293ZM12.5062 10.9937L4.51244 7.20328L12.5062 3.41286L20.5 7.20328L12.5062 10.9937ZM14.9965 1.05632L23.1895 4.94649L21.5086 6.62973L13.3156 2.73956L14.9965 1.05632ZM10.0035 1.05632L11.6844 2.73956L3.49142 6.62973L1.81047 4.94649L10.0035 1.05632ZM3.49142 7.77683L11.6844 11.667L10.0035 13.3502L1.81047 9.46008L3.49142 7.77683ZM3.86496 11.5049L9.89143 14.3602C10.0782 14.4475 10.2899 14.4101 10.4393 14.2604L12.0206 12.6769V22.7266L3.86496 18.4249V11.48V11.5049ZM21.135 18.4374L12.9794 22.739V12.6894L14.5607 14.2729C14.6977 14.4101 14.9218 14.4599 15.1086 14.3727L21.135 11.5174V18.4623V18.4374ZM14.9965 13.3502L13.3156 11.667L21.5086 7.77683L23.1895 9.46008L14.9965 13.3502Z" fill="#4A13E7"/>
@@ -895,15 +1171,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
       containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("agent.house_detail_fields.remark")}`,
-        htmlFor: "BEDROOM_REMARK",
+        htmlFor: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.descriptions}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
-        id: "BEDROOM_REMARK",
-        name: "BEDROOM_REMARK",
+        id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.descriptions}`,
+        name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.descriptions}`,
         register,
       },
     },
@@ -922,15 +1198,109 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+        children: [
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className: "flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden md:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            containerClass: "",
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden mlg:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
         children: [
           {
             field: {
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_BETT",
-              name: "ZIMMER_BETT",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.bed}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.bed}`,
               inputLabelValue: translate("agent.house_detail_fields.bett"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
     <g clip-path="url(#clip0_296_1961)">
@@ -955,8 +1325,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_DOPPEIBETT",
-              name: "ZIMMER_DOPPEIBETT",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.doubleBed}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.doubleBed}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.doppeltbett"
               ),
@@ -984,8 +1354,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_SESSEL",
-              name: "ZIMMER_SESSEL",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.armchair}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.armchair}`,
               inputLabelValue: translate("agent.house_detail_fields.sessel"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
     <g clip-path="url(#clip0_296_1986)">
@@ -1009,8 +1379,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_SCHRANK_KLEIN",
-              name: "ZIMMER_SCHRANK_KLEIN",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.smallWardrobe}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.smallWardrobe}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.schrank_klein"
               ),
@@ -1041,8 +1411,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_SCHRANK_MITTEL",
-              name: "ZIMMER_SCHRANK_MITTEL",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.schrank_mittel"
               ),
@@ -1076,8 +1446,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_SCHRANK_GROSS",
-              name: "ZIMMER_SCHRANK_GROSS",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.largeWardrobe}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.largeWardrobe}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.schrank_gross"
               ),
@@ -1109,8 +1479,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_REGAL",
-              name: "ZIMMER_REGAL",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.shelf}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20" fill="none">
   <g clip-path="url(#clip0_296_2590)">
@@ -1130,8 +1500,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_PULT",
-              name: "ZIMMER_PULT",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.desk}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.desk}`,
               inputLabelValue: translate("agent.house_detail_fields.pult"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="31" height="18" viewBox="0 0 31 18" fill="none">
   <g clip-path="url(#clip0_312_1491)">
@@ -1161,8 +1531,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_FERNSEHER",
-              name: "ZIMMER_FERNSEHER",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tv}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tv}`,
               inputLabelValue: translate("agent.house_detail_fields.fernseher"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14" fill="none">
   <g clip-path="url(#clip0_296_2592)">
@@ -1185,8 +1555,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_FERNSEHTISCH",
-              name: "ZIMMER_FERNSEHTISCH",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tvTable}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tvTable}`,
               inputLabelValue: translate("agent.house_detail_fields.tv_table"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="33" height="16" viewBox="0 0 33 16" fill="none">
   <g clip-path="url(#clip0_312_1525)">
@@ -1216,8 +1586,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "ZIMMER_NACHTTISCH",
-              name: "ZIMMER_NACHTTISCH",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.nightstand}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.nightstand}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.nachttisch"
               ),
@@ -1243,8 +1613,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BEDROOM_BOX",
-              name: "BEDROOM_BOX",
+              id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.box}`,
+              name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.box}`,
               inputLabelValue: translate("agent.house_detail_fields.box"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
     <path d="M22.293 7.20328L24.3475 5.14598C24.5841 4.90908 24.5094 4.51009 24.2105 4.37294L15.0961 0.0463709C14.9094 -0.0409086 14.6977 -0.00350319 14.5483 0.146119L12.4938 2.20342L10.4393 0.146119C10.2899 -0.00350319 10.0782 -0.0409086 9.89143 0.0463709L0.777025 4.37294C0.478192 4.51009 0.403483 4.90908 0.640059 5.14598L2.69453 7.20328L0.640059 9.26058C0.403483 9.49749 0.478192 9.89648 0.777025 10.0336L2.9062 11.0436V18.7242C2.9062 18.8987 3.00582 19.0608 3.16769 19.1481C3.20504 19.173 12.2572 23.936 12.2821 23.9485C12.4191 24.0108 12.5809 24.0233 12.7179 23.9485C12.3568 24.1355 21.4837 19.3351 21.8323 19.1481C21.9942 19.0608 22.0938 18.8987 22.0938 18.7242V11.0436L24.223 10.0336C24.5218 9.89648 24.5965 9.49749 24.3599 9.26058L22.3055 7.20328H22.293ZM12.5062 10.9937L4.51244 7.20328L12.5062 3.41286L20.5 7.20328L12.5062 10.9937ZM14.9965 1.05632L23.1895 4.94649L21.5086 6.62973L13.3156 2.73956L14.9965 1.05632ZM10.0035 1.05632L11.6844 2.73956L3.49142 6.62973L1.81047 4.94649L10.0035 1.05632ZM3.49142 7.77683L11.6844 11.667L10.0035 13.3502L1.81047 9.46008L3.49142 7.77683ZM3.86496 11.5049L9.89143 14.3602C10.0782 14.4475 10.2899 14.4101 10.4393 14.2604L12.0206 12.6769V22.7266L3.86496 18.4249V11.48V11.5049ZM21.135 18.4374L12.9794 22.739V12.6894L14.5607 14.2729C14.6977 14.4101 14.9218 14.4599 15.1086 14.3727L21.135 11.5174V18.4623V18.4374ZM14.9965 13.3502L13.3156 11.667L21.5086 7.77683L23.1895 9.46008L14.9965 13.3502Z" fill="#4A13E7"/>
@@ -1259,19 +1629,18 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
       containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("agent.house_detail_fields.remark")}`,
-        htmlFor: "ZIMMER_REMARK",
+        htmlFor: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.descriptions}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
-        id: "ZIMMER_REMARK",
-        name: "ZIMMER_REMARK",
+        id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.descriptions}`,
+        name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.descriptions}`,
         register,
       },
     },
-
     {
       containerClass: "mt-5 mb-2",
       field: {
@@ -1286,15 +1655,109 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+        children: [
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className: "flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden md:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            containerClass: "",
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden mlg:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
         children: [
           {
             field: {
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_GRILL",
-              name: "BALKON_GRILL",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.grill}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.grill}`,
               inputLabelValue: translate("agent.house_detail_fields.grill"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="22" viewBox="0 0 17 22" fill="none">
   <g clip-path="url(#clip0_312_1811)">
@@ -1317,8 +1780,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_TISCH",
-              name: "BALKON_TISCH",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.table}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.table}`,
               inputLabelValue: translate("agent.house_detail_fields.tisch"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="29" height="16" viewBox="0 0 29 16" fill="none">
   <g clip-path="url(#clip0_312_1825)">
@@ -1341,8 +1804,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_STUHLE",
-              name: "BALKON_STUHLE",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.chairs}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.chairs}`,
               inputLabelValue: translate("agent.house_detail_fields.stuhle"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="22" viewBox="0 0 15 22" fill="none">
   <g clip-path="url(#clip0_312_1839)">
@@ -1365,8 +1828,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_SOFA",
-              name: "BALKON_SOFA",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.sofa}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.sofa}`,
               inputLabelValue: translate("agent.house_detail_fields.sofa"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="29" height="22" viewBox="0 0 29 22" fill="none">
   <g clip-path="url(#clip0_312_1849)">
@@ -1393,8 +1856,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_REGAL",
-              name: "BALKON_REGAL",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.shelf}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
   <g clip-path="url(#clip0_312_1867)">
@@ -1414,8 +1877,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_SCHIRM",
-              name: "BALKON_SCHIRM",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.umbrella}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.umbrella}`,
               inputLabelValue: translate("agent.house_detail_fields.schirm"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
   <g clip-path="url(#clip0_312_1869)">
@@ -1435,8 +1898,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_TOPFE",
-              name: "BALKON_TOPFE",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.pots}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.pots}`,
               inputLabelValue: translate("agent.house_detail_fields.topfe"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
   <g clip-path="url(#clip0_312_1873)">
@@ -1457,8 +1920,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_PFLANZEN",
-              name: "BALKON_PFLANZEN",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.plants}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.plants}`,
               inputLabelValue: translate("agent.house_detail_fields.pflanzen"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="22" viewBox="0 0 17 22" fill="none">
   <g clip-path="url(#clip0_312_1882)">
@@ -1483,8 +1946,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_KRAUTERBEET",
-              name: "BALKON_KRAUTERBEET",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.herbGarden}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.herbGarden}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.krauterbeet"
               ),
@@ -1506,8 +1969,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "BALKON_RASENMAHER",
-              name: "BALKON_RASENMAHER",
+              id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.lawnmower}`,
+              name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.lawnmower}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.rasenmaher"
               ),
@@ -1536,15 +1999,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
       containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("agent.house_detail_fields.remark")}`,
-        htmlFor: "BALKON_REMARK",
+        htmlFor: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.descriptions}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
-        id: "BALKON_REMARK",
-        name: "BALKON_REMARK",
+        id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.descriptions}`,
+        name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.descriptions}`,
         register,
       },
     },
@@ -1563,15 +2026,109 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+        children: [
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className: "flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden md:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            containerClass: "",
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden mlg:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
         children: [
           {
             field: {
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KELLER_WASH_MACHINE",
-              name: "KELLER_WASH_MACHINE",
+              id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.washingMachine}`,
+              name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.washingMachine}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.washchmashine"
               ),
@@ -1599,8 +2156,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KELLER_TUMBLER",
-              name: "KELLER_TUMBLER",
+              id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.tumbler}`,
+              name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.tumbler}`,
               inputLabelValue: translate("agent.house_detail_fields.Tumbler"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="22" viewBox="0 0 17 22" fill="none">
   <g clip-path="url(#clip0_312_2151)">
@@ -1628,8 +2185,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KELLER_REGAL",
-              name: "KELLER_REGAL",
+              id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.shelf}`,
+              name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 19 22" fill="none">
   <g clip-path="url(#clip0_312_2162)">
@@ -1649,8 +2206,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KELLER_ENTSORGUNGEN",
-              name: "KELLER_ENTSORGUNGEN",
+              id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.disposal}`,
+              name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.disposal}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.entsorgungen"
               ),
@@ -1675,8 +2232,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KELLER_FAHRRAD",
-              name: "KELLER_FAHRRAD",
+              id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.bicycle}`,
+              name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.bicycle}`,
               inputLabelValue: translate("agent.house_detail_fields.fahrrad"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="27" height="16" viewBox="0 0 27 16" fill="none">
   <g clip-path="url(#clip0_312_2170)">
@@ -1696,8 +2253,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KELLER_KINDERWAGEN",
-              name: "KELLER_KINDERWAGEN",
+              id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.stroller}`,
+              name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.stroller}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.kinderwagen"
               ),
@@ -1721,8 +2278,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KELLER_MOBEL",
-              name: "KELLER_MOBEL",
+              id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.furniture}`,
+              name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.furniture}`,
               inputLabelValue: translate("agent.house_detail_fields.mobel"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill="none">
   <g clip-path="url(#clip0_312_2177)">
@@ -1754,8 +2311,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "KELLER_BOXEN",
-              name: "KELLER_BOXEN",
+              id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.boxes}`,
+              name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.boxes}`,
               inputLabelValue: translate("agent.house_detail_fields.boxen"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
   <g clip-path="url(#clip0_312_2192)">
@@ -1777,15 +2334,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
       containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("agent.house_detail_fields.remark")}`,
-        htmlFor: "KELLER_REMARK",
+        htmlFor: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.descriptions}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
-        id: "KELLER_REMARK",
-        name: "KELLER_REMARK",
+        id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.descriptions}`,
+        name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.descriptions}`,
         register,
       },
     },
@@ -1799,20 +2356,115 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         text: `${translate("agent.house_detail_fields.speziell")}`,
       },
     },
+
     {
       field: {
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+        children: [
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className: "flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden md:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            containerClass: "",
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className:
+                "hidden mlg:flex items-center justify-between mb-[14px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.item")}`,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.span,
+                    id: "test",
+                    name: "test",
+                    text: `${translate("agent.house_detail_fields.qty")}`,
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
         children: [
           {
             field: {
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "SPEZIELL_AQUARIUM",
-              name: "SPEZIELL_AQUARIUM",
+              id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.aquarium}`,
+              name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.aquarium}`,
               inputLabelValue: translate("agent.house_detail_fields.aquarium"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="20" viewBox="0 0 23 20" fill="none">
   <g clip-path="url(#clip0_312_2377)">
@@ -1837,8 +2489,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "SPEZIELL_PIANO",
-              name: "SPEZIELL_PIANO",
+              id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.piano}`,
+              name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.piano}`,
               inputLabelValue: translate("agent.house_detail_fields.piano"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="22" viewBox="0 0 25 22" fill="none">
   <g clip-path="url(#clip0_312_2398)">
@@ -1872,8 +2524,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "SPEZIELL_SPORTGERAT",
-              name: "SPEZIELL_SPORTGERAT",
+              id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.gymEquipment}`,
+              name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.gymEquipment}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.sportgerat"
               ),
@@ -1904,8 +2556,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "SPEZIELL_ELEKTRONISCHES",
-              name: "SPEZIELL_ELEKTRONISCHES",
+              id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.electronics}`,
+              name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.electronics}`,
               inputLabelValue: translate(
                 "agent.house_detail_fields.elektronisches"
               ),
@@ -1931,8 +2583,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "SPEZIELL_POOL",
-              name: "SPEZIELL_POOL",
+              id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.pool}`,
+              name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.pool}`,
               inputLabelValue: translate("agent.house_detail_fields.pool"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill="none">
   <g clip-path="url(#clip0_312_2478)">
@@ -1962,8 +2614,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "SPEZIELL_TRESSOR",
-              name: "SPEZIELL_TRESSOR",
+              id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.safe}`,
+              name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.safe}`,
               inputLabelValue: translate("agent.house_detail_fields.tressor"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20" fill="none">
   <g clip-path="url(#clip0_312_2513)">
@@ -1987,8 +2639,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               type: Field.quantityInput,
               inputType: "text",
               className: "!pl-4",
-              id: "SPEZIELL_LAMPE",
-              name: "SPEZIELL_LAMPE",
+              id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.lamp}`,
+              name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.lamp}`,
               inputLabelValue: translate("agent.house_detail_fields.lampe"),
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="22" viewBox="0 0 11 22" fill="none">
   <g clip-path="url(#clip0_312_2521)">
@@ -2010,15 +2662,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
       containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("agent.house_detail_fields.remark")}`,
-        htmlFor: "SPEZIELL_REMARK",
+        htmlFor: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.descriptions}`,
         className: "mb-[10px]",
       },
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
-        id: "SPEZIELL_REMARK",
-        name: "SPEZIELL_REMARK",
+        id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.descriptions}`,
+        name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.descriptions}`,
         register,
       },
     },
@@ -2039,7 +2691,9 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               inputType: "button",
               className:
                 "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
-              onClick: () => {},
+              onClick: () =>
+                onHandleBack &&
+                onHandleBack(AppointmentReportsFormStages.CONTACT_AND_ADDRESS),
             },
           },
           {

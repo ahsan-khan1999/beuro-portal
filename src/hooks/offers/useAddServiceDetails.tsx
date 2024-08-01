@@ -189,13 +189,6 @@ export const useAddServiceDetails = (
 
   useMemo(() => {
     if (offerDetails.id) {
-      // setTotal({
-      //   taxAmount: Number(
-      //     (offerDetails?.total - offerDetails?.subTotal).toFixed(2)
-      //   ),
-      //   subTotal: offerDetails?.subTotal,
-      //   grandTotal: offerDetails?.total,
-      // });
       reset({
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [
           {
@@ -397,7 +390,6 @@ export const useAddServiceDetails = (
       id: offerDetails?.id,
       stage: ComponentsType.additionalAdded,
       taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
-
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),
     };

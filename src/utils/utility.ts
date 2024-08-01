@@ -25,7 +25,6 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
 import "moment/locale/de";
 import { TFunction } from "next-i18next";
-import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -42,28 +41,6 @@ export const getBackFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
   const stages = Object.values(DetailScreensStages);
-  const currentIndex = stages.indexOf(current);
-  if (currentIndex !== -1 && currentIndex > 0) {
-    return stages[currentIndex - 1];
-  }
-  return null;
-};
-
-export const getNextReportFormStage = (
-  current: AppointmentReportsFormStages
-): AppointmentReportsFormStages | null => {
-  const stages = Object.values(AppointmentReportsFormStages);
-  const currentIndex = stages.indexOf(current);
-  if (currentIndex !== -1 && currentIndex < stages.length - 1) {
-    return stages[currentIndex + 1];
-  }
-  return null;
-};
-
-export const getBackReportFormStage = (
-  current: AppointmentReportsFormStages
-): AppointmentReportsFormStages | null => {
-  const stages = Object.values(AppointmentReportsFormStages);
   const currentIndex = stages.indexOf(current);
   if (currentIndex !== -1 && currentIndex > 0) {
     return stages[currentIndex - 1];

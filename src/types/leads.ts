@@ -52,6 +52,10 @@ export interface CustomerAddress {
   postalCode: string;
   description: string;
   label: string;
+  floor?: number;
+  room?: number;
+  lift?: boolean;
+  parkingPermit?: boolean;
 }
 
 export interface LeadService {

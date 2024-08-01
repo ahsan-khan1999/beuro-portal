@@ -30,8 +30,10 @@ const SERVICE_URLS = {
   readLead: "/lead",
   lead: "/lead/lead-step/",
   updateLead: "/lead/lead-step/",
+  appointment: "/lead/report/report-step/",
   companyLeadAppointment: "/lead/appointment",
   appointmentStatus: "/lead/appointment/update-status",
+  readReport: "/lead/report",
   content: "/content",
   contentDetails: "/content/content-step/",
   leadStatus: "/lead/update-lead-status",
@@ -282,6 +284,28 @@ const readAppointmentDetails = (params) =>
 
 const updateAppointmentStatus = (data) =>
   put(SERVICE_URLS.appointmentStatus + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const createAppointmentReport = (data) => {
+  // let route = data?.appointmentID
+  //   ? data?.step + "/" + data?.appointmentID
+  //   : data?.step;
+  return post(SERVICE_URLS.appointment + data.mode, data, {
+    feature: featureConstants.login,
+  });
+};
+
+const readReportDetail = (params) =>
+  get(
+    SERVICE_URLS.readReport,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
+const updateAppointmentReport = (data) =>
+  put(SERVICE_URLS.appointment + `${data?.step}/${data?.id}`, data, {
     feature: featureConstants.login,
   });
 
@@ -1233,5 +1257,8 @@ const apiServices = {
   readAppointment,
   readAppointmentDetails,
   updateAppointmentStatus,
+  createAppointmentReport,
+  updateAppointmentReport,
+  readReportDetail,
 };
 export default apiServices;

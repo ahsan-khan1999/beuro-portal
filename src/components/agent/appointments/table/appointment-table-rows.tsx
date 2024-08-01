@@ -59,8 +59,8 @@ export const AppointmentTableRows = ({
               <div
                 onClick={() => {
                   router.push({
-                    pathname: "/agent/appointments/details",
-                    query: { ...router.query, appointment: item?.id },
+                    pathname: "/agent/appointments/report-detail",
+                    query: { ...router.query, report: item?.id },
                   });
                 }}
                 key={index}
@@ -156,16 +156,16 @@ export const AppointmentTableRows = ({
             <div className="grid grid-cols-[minmax(140px,_140px)]">
               <div className="py-4 flex items-center">
                 {item?.isReportSubmitted ? (
-                  <Button
+                  <OutlineButton
                     inputType="button"
                     onClick={() => {}}
-                    className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
-                    text={translate("appointments.sub_report")}
+                    className="bg-white text-primary w-full border border-primary"
+                    text={translate("appointments.view_reports_btn")}
                     id="view reports"
                     iconAlt="view reports"
                   />
                 ) : (
-                  <OutlineButton
+                  <Button
                     inputType="button"
                     onClick={() => {
                       router.push({
@@ -173,8 +173,8 @@ export const AppointmentTableRows = ({
                         query: { ...router.query, appointment: item?.id },
                       });
                     }}
-                    className="bg-white text-primary w-full border border-primary"
-                    text={translate("appointments.view_reports_btn")}
+                    className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
+                    text={translate("appointments.sub_report")}
                     id="view reports"
                     iconAlt="view reports"
                   />

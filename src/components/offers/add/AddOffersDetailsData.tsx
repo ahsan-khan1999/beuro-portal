@@ -217,10 +217,10 @@ const EditOffersDetailsData = () => {
               isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
+              selectedTab={index}
               name={item.name}
               index={index + 1}
               icon={item.icon}
-              selectedTab={index}
             />
           ))}
         </div>

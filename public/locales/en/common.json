@@ -1169,6 +1169,13 @@
       "date": "Date",
       "time": "Time",
       "no_data_found": "No reports submitted"
+    },
+    "report_detail": {
+      "contact_tab": "Contact Details",
+      "contact_address_detail": "Contact and address",
+      "house_detail": "House Details",
+      "service_detail": "Service/Product Details",
+      "additional_detail": "Additional Details"
     }
   },
   "common": {
@@ -1241,8 +1248,12 @@
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date",
-      "success_signed_offer": "Operation Successful"
+      "success_signed_offer": "Operation Successful",
+      "report_created": "Report created successfully!",
+      "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+    "yes": "Yes",
+    "no": "No",
     "upload_button": "Upload",
     "item": "Item",
     "create_report_btn": "Create Report",
@@ -2405,6 +2416,8 @@
       "collection_address_heading": "Collection Address"
     },
     "house_detail_fields": {
+      "item": "Item",
+      "qty": "Qty",
       "living_room_heading": "Living room(WZ)",
       "sofa": "Sofa",
       "puit": "Desk",

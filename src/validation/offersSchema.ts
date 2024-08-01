@@ -204,7 +204,6 @@ export const generateAddfferServiceDetailsValidation = (
           [AddServiceOfferDetails.discount]: yup
             .number()
             .notRequired()
-            // .lessThan(yup.ref(AddServiceOfferDetails.totalPrice), translate("validationMessages.discountLessThanTotalPrice"))
             .typeError(translate("validationMessages.invalid_format")),
           [AddServiceOfferDetails.totalPrice]: yup
             .number()
