@@ -82,7 +82,7 @@ export const employeeDetailsFormField: GenerateEmployeeFormField = (
                         ?.slice(1)
                         ?.map((item) => ({
                           value: staticEnums.Designation[item],
-                          label: translate(`employee_type.${item}`),
+                          label: translate(`agent.employee_type.${item}`),
                         })) || [],
                     control,
                     disabled: isUpdate,
