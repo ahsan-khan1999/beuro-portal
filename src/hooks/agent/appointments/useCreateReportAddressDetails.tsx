@@ -28,7 +28,7 @@ export const useCreateReportAddressDetails = ({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { error, loading, appointmentDetails } = useAppSelector(
+  const { error, loading, appointmentDetails, reportDetails } = useAppSelector(
     (state) => state.appointment
   );
 
@@ -51,27 +51,51 @@ export const useCreateReportAddressDetails = ({
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
-    defaultValues: {
-      address: appointmentDetails?.leadID?.addressID
-        ? appointmentDetails?.leadID?.addressID?.address?.map(
-            (item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Adresse ${++index}`,
-            })
-          )
-        : [],
-    },
   });
 
   useEffect(() => {
-    if (appointmentDetails?.id) {
-      reset({
-        fullName: appointmentDetails?.leadID?.customerDetail?.fullName,
-        email: appointmentDetails?.leadID?.customerDetail?.email,
-        phoneNumber: appointmentDetails?.leadID?.customerDetail?.phoneNumber,
-      });
+    const transformData = (data: any) => {
+      return {
+        ...data,
+        address: data?.address?.map((item: any) => ({
+          ...item,
+          lift: item?.lift === true ? "1" : "0",
+        })),
+      };
+    };
+
+    if (reportDetails?.id) {
+      reset(
+        transformData({
+          fullName: reportDetails?.customerDetail?.fullName,
+          email: reportDetails.customerDetail?.email,
+          phoneNumber: reportDetails.customerDetail?.phoneNumber,
+          address: reportDetails?.addressID
+            ? reportDetails?.addressID?.address?.map((item, index) => ({
+                ...item,
+                label: item?.label ? item?.label : `Adresse ${++index}`,
+              }))
+            : [],
+        })
+      );
+    } else {
+      reset(
+        transformData({
+          fullName: appointmentDetails?.leadID?.customerDetail?.fullName,
+          email: appointmentDetails?.leadID?.customerDetail?.email,
+          phoneNumber: appointmentDetails?.leadID?.customerDetail?.phoneNumber,
+          address: appointmentDetails?.leadID?.addressID
+            ? appointmentDetails?.leadID?.addressID?.address?.map(
+                (item, index) => ({
+                  ...item,
+                  label: item?.label ? item?.label : `Adresse ${++index}`,
+                })
+              )
+            : [],
+        })
+      );
     }
-  }, [appointmentDetails?.id]);
+  }, [reportDetails?.id]);
 
   const { fields: addressFields } = useFieldArray({ control, name: "address" });
 

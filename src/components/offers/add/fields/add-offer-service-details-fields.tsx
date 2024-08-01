@@ -837,7 +837,7 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
                 inputType: "button",
                 className:
                   "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] min-w-[152px] w-fit h-[50px] text-black hover-bg-none",
-                onClick: () => {}, // edit for create-report
+                onClick: OnClick, // edit for create-report
               },
             },
             {

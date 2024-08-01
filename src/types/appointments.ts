@@ -1,4 +1,6 @@
+import { staticEnums } from "@/utils/static";
 import { AddressID } from "./leads";
+import { OfferServiceDetails } from "./offers";
 
 export interface Appointments {
   id: string;
@@ -40,6 +42,21 @@ export interface Appointments {
 export interface Report {
   id: string;
   createdAt: string;
+  serviceDetail: OfferServiceDetails;
+  customerDetail: {
+    email: string;
+    fullName: string;
+    phoneNumber: string;
+  };
+  subTotal: number;
+  total: number;
+  discountAmount: number;
+  discountDescription: string;
+  isDiscount: boolean;
+  isTax: boolean;
+  taxType: "Include" | "Exclude";
+  taxAmount: number;
+  discountType: keyof (typeof staticEnums)["DiscountType"];
   livingRoomDetails: {
     grill: string;
     table: string;
@@ -149,23 +166,15 @@ export interface Report {
     appointmentStatus: string;
     createdAt: string;
   };
-  addressID: {
-    id: string;
-    address: [
-      {
-        streetNumber: string;
-        postalCode: string;
-        country: string;
-        description: string;
-        floor: string;
-        room: string;
-        lift: false;
-      }
-    ];
-    createdBy: {
-      id: string;
-      fullName: string;
-    };
-    createdAt: string;
+  offerDetails: {
+    employees: number;
+    deliveryVehicle: number;
+    hours: number;
+    cleaningWithHandoverGuarantee: number;
+    broomClean: number;
+    priceCHF: number;
+    remarks: string;
+    noteAndInformation: string;
   };
+  addressID: AddressID;
 }

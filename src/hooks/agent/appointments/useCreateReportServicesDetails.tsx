@@ -5,17 +5,15 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { generateAddfferServiceDetailsValidation } from "@/validation/offersSchema";
-import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
-import { Total } from "@/types/offers";
 import { useEffect, useMemo, useState } from "react";
 import {
   readService,
   setServiceDetails,
 } from "@/api/slices/service/serviceSlice";
 import { Service } from "@/types/service";
+import { Total } from "@/types/offers";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
@@ -23,15 +21,16 @@ import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
-import {
-  AddOfferDetailsServiceSubmitFormField,
-  AddOfferServiceDetailsDescriptionFormField,
-  AddOfferServiceDetailsFormField,
-} from "@/components/offers/add/fields/add-offer-service-details-fields";
 import { updateReport } from "@/api/slices/appointment/appointmentSlice";
+import {
+  ReportDetailsServiceSubmitFormField,
+  ReportServiceDetailsDescriptionFormField,
+  ReportServiceDetailsFormField,
+} from "@/components/agent/appointments/createReport/fields/service-detail-form-fields";
 
 let prevDisAmount: number | string = "";
-export interface AgentServicesReportProps {
+
+export interface ReportServiceHookProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
   onBackHandler: (currentComponent: AppointmentReportsFormStages) => void;
 }
@@ -39,8 +38,7 @@ export interface AgentServicesReportProps {
 export const useCreateReportServicesDetails = ({
   onNextHandler,
   onBackHandler,
-}: AgentServicesReportProps) => {
-  const { t: translate } = useTranslation();
+}: ReportServiceHookProps) => {
   const router = useRouter();
   const [total, setTotal] = useState<Total>({
     subTotal: 0,
@@ -50,33 +48,25 @@ export const useCreateReportServicesDetails = ({
 
   const dispatch = useAppDispatch();
   const { systemSettings } = useAppSelector((state) => state.settings);
-  const { loading, error, offerDetails } = useAppSelector(
-    (state) => state.offer
-  );
-
-  const { appointmentDetails, reportDetails } = useAppSelector(
+  const { loading, error, reportDetails, appointmentDetails } = useAppSelector(
     (state) => state.appointment
   );
 
   const [serviceType, setServiceType] = useState<ServiceType[]>(
-    offerDetails?.serviceDetail?.serviceDetail?.map((item) =>
+    reportDetails?.serviceDetail?.serviceDetail?.map((item) =>
       item.serviceType === "New Service"
         ? ServiceType.NEW_SERVICE
         : ServiceType.EXISTING_SERVICE
     ) || [ServiceType.EXISTING_SERVICE]
   );
 
-  const { service, serviceDetails } = useAppSelector((state) => state.service);
   const { tax } = useAppSelector((state) => state.settings);
+  const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
     dispatch(readService({ params: { filter: {}, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
-
-  const handleBack = () => {
-    // onBackHandler(AppointmentReportsFormStages.HOUSE_DETAILS);
-  };
 
   const schema = generateAddfferServiceDetailsValidation(translate);
   const {
@@ -119,37 +109,6 @@ export const useCreateReportServicesDetails = ({
       setValue(`serviceDetail.${index}.totalPrice`, 0);
       setValue(`serviceDetail.${index}.count`, 0);
     }
-  };
-
-  const onServiceSelectType = (index: number) => {
-    setValue(
-      `serviceDetail.${index}.price`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.price
-    );
-    setValue(
-      `serviceDetail.${index}.unit`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.unit
-    );
-    setValue(
-      `serviceDetail.${index}.description`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.description
-    );
-    setValue(
-      `serviceDetail.${index}.count`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.count
-    );
-    setValue(
-      `serviceDetail.${index}.totalPrice`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.totalPrice
-    );
-    setValue(
-      `serviceDetail.${index}.serviceTitle`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceTitle
-    );
-    setValue(
-      `serviceDetail.${index}.discount`,
-      offerDetails?.serviceDetail?.serviceDetail[index]?.discount
-    );
   };
 
   const generateTotalPrice = (index: number) => {
@@ -228,9 +187,9 @@ export const useCreateReportServicesDetails = ({
   }, [discountAmount, discountType, taxType, isTax, isDiscount, taxPercentage]);
 
   useMemo(() => {
-    if (offerDetails.id) {
+    if (reportDetails.id) {
       reset({
-        serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [
+        serviceDetail: reportDetails?.serviceDetail?.serviceDetail || [
           {
             serviceTitle: "",
             price: "",
@@ -242,16 +201,16 @@ export const useCreateReportServicesDetails = ({
             discount: 0,
           },
         ],
-        isTax: offerDetails?.isTax,
-        isDiscount: offerDetails?.isDiscount,
-        discountType: staticEnums["DiscountType"][offerDetails?.discountType],
-        taxType: staticEnums["TaxType"][offerDetails?.taxType] || 0,
-        discountAmount: offerDetails?.discountAmount || "",
-        discountDescription: offerDetails?.discountDescription,
-        taxAmount: offerDetails?.taxAmount || 0,
+        isTax: reportDetails?.isTax,
+        isDiscount: reportDetails?.isDiscount,
+        discountType: staticEnums["DiscountType"][reportDetails?.discountType],
+        taxType: staticEnums["TaxType"][reportDetails?.taxType] || 0,
+        discountAmount: reportDetails?.discountAmount || "",
+        discountDescription: reportDetails?.discountDescription,
+        taxAmount: reportDetails?.taxAmount || 0,
       });
     }
-  }, [offerDetails.id]);
+  }, [reportDetails.id]);
 
   const {
     fields: serviceFields,
@@ -265,7 +224,6 @@ export const useCreateReportServicesDetails = ({
   useMemo(() => {
     const currentLength = serviceType?.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
-
     if (newLength > currentLength) {
       setServiceType([
         ...serviceType,
@@ -279,21 +237,67 @@ export const useCreateReportServicesDetails = ({
     generateGrandTotal();
   }, [serviceFields?.length]);
 
+  const handleRemoveService = (index: number) => {
+    remove(index);
+    const data = getValues();
+    reset({
+      ...data,
+    });
+
+    setServiceType((prev) => {
+      var newlist = [...prev];
+      newlist.splice(index, 1);
+
+      return newlist;
+    });
+  };
+
+  const onServiceSelectType = (index: number) => {
+    setValue(
+      `serviceDetail.${index}.price`,
+      reportDetails?.serviceDetail?.serviceDetail[index]?.price
+    );
+    setValue(
+      `serviceDetail.${index}.unit`,
+      reportDetails?.serviceDetail?.serviceDetail[index]?.unit
+    );
+    setValue(
+      `serviceDetail.${index}.description`,
+      reportDetails?.serviceDetail?.serviceDetail[index]?.description
+    );
+    setValue(
+      `serviceDetail.${index}.count`,
+      reportDetails?.serviceDetail?.serviceDetail[index]?.count
+    );
+    setValue(
+      `serviceDetail.${index}.totalPrice`,
+      reportDetails?.serviceDetail?.serviceDetail[index]?.totalPrice
+    );
+    setValue(
+      `serviceDetail.${index}.serviceTitle`,
+      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceTitle
+    );
+    setValue(
+      `serviceDetail.${index}.discount`,
+      reportDetails?.serviceDetail?.serviceDetail[index]?.discount
+    );
+  };
+
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
     const updatedService = serviceType.map((type, i) =>
       i === index ? newServiceType : type
     );
-    setServiceType(updatedService);
 
+    setServiceType(updatedService);
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
         "New Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
         "New Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
@@ -305,13 +309,13 @@ export const useCreateReportServicesDetails = ({
       setValue(`serviceDetail.${index}.discount`, ``);
     } else if (
       newServiceType === ServiceType.EXISTING_SERVICE &&
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
         "Existing Service"
     ) {
       onServiceSelectType(index);
     } else if (
       newServiceType === ServiceType.NEW_SERVICE &&
-      offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
         "Existing Service"
     ) {
       setValue(`serviceDetail.${index}.serviceTitle`, "");
@@ -324,23 +328,7 @@ export const useCreateReportServicesDetails = ({
     }
   };
 
-  const handleRemoveService = (index: number) => {
-    remove(index);
-    const data = getValues();
-
-    reset({
-      ...data,
-    });
-
-    setServiceType((prev) => {
-      const newlist = [...prev];
-      newlist.splice(index, 1);
-
-      return newlist;
-    });
-  };
-
-  const fields = AddOfferServiceDetailsFormField(
+  const fields = ReportServiceDetailsFormField(
     register,
     loading,
     control,
@@ -351,17 +339,18 @@ export const useCreateReportServicesDetails = ({
       onCustomerSelect: onServiceSelect,
       serviceDetails: serviceDetails,
       generatePrice: generateTotalPrice,
-      offerDetails,
+      reportDetails,
     },
     append,
     handleRemoveService,
     serviceType,
     handleServiceChange,
     serviceFields,
-    setValue
+    setValue,
+    watch
   );
 
-  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
+  const fieldsDescription = ReportServiceDetailsDescriptionFormField(
     register,
     loading,
     control,
@@ -373,7 +362,7 @@ export const useCreateReportServicesDetails = ({
       generateTotal: generateGrandTotal,
       isTax,
       isDiscount,
-      offerDetails: offerDetails,
+      reportDetails: reportDetails,
       taxType: taxType,
       discountType,
       tax: tax,
@@ -387,9 +376,9 @@ export const useCreateReportServicesDetails = ({
     setValue
   );
 
-  const submitFields = AddOfferDetailsServiceSubmitFormField(
+  const submitFields = ReportDetailsServiceSubmitFormField(
     loading,
-    handleBack
+    onBackHandler
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -399,7 +388,6 @@ export const useCreateReportServicesDetails = ({
       step: 3,
       id: reportDetails?.id,
       appointmentID: appointmentDetails?.id,
-      stage: EditComponentsType.additionalEdit,
       taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),
@@ -430,6 +418,6 @@ export const useCreateReportServicesDetails = ({
     error,
     translate,
     systemSettings,
-    offerDetails,
+    reportDetails,
   };
 };

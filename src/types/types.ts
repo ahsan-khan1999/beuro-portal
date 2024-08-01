@@ -44,7 +44,7 @@ import {
 } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
-import { Appointments } from "./appointments";
+import { Appointments, Report } from "./appointments";
 
 export interface SideBar {
   icon?: keyof typeof svgs;
@@ -572,6 +572,43 @@ export type GenerateOfferServiceFormField = (
   watch?: UseFormWatch<FieldValues>
 ) => FormField[];
 
+export type GenerateReportServiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  properties: {
+    isTax?: boolean;
+    isDiscount?: boolean;
+    taxType?: number;
+    discountType?: number;
+    reportDetails?: Report;
+    generateTotal?: () => void;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string, index: number) => void;
+    serviceDetails?: Service;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    generatePrice?: (index: number) => void;
+    total?: Total;
+    tax?: TaxSetting[] | null;
+    currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+  },
+  handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
+  handleRemoveService: (index: number) => void,
+  serviceType: ServiceType[],
+  onServiceChange: (index: number, value: ServiceType) => void,
+  fields?: object[],
+  setValue?: SetFieldValue<FieldValues>,
+  watch?: UseFormWatch<FieldValues>
+) => FormField[];
+
 export type GenerateAgentReportServiceFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -649,6 +686,11 @@ export type GenerateInvoiceServiceFormField = (
 export type GenerateOffersServiceActionFormField = (
   loader: boolean,
   onClick: () => void
+) => FormField[];
+
+export type GenerateReportServiceActionFormField = (
+  loader: boolean,
+  onHandleBack?: Function
 ) => FormField[];
 
 export type GenerateInvoiceServiceActionFormField = (

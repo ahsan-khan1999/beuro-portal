@@ -1,20 +1,20 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
-import { updateLead } from "@/api/slices/lead/leadSlice";
-import { useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { ReportAdditionalDetailsValidation } from "@/validation/agent/agentReportSchema";
 import { additionalAgentReportFormField } from "@/components/agent/appointments/createReport/fields/additional-info-form-fields";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import { updateReport } from "@/api/slices/appointment/appointmentSlice";
+import { useEffect } from "react";
 
 export interface ReportAdditionalDetailsProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
   onHandleBack: (currentComponent: AppointmentReportsFormStages) => void;
 }
+
+type DataType = {
+  [key: string]: any;
+};
 
 export const useCreateReportAdditionalDetails = ({
   onNextHandler,
@@ -46,29 +46,44 @@ export const useCreateReportAdditionalDetails = ({
     onHandleBack
   );
 
-  // useMemo(() => {
-  //   if (leadDetails.id) {
-  //     reset({
-  //       ...leadDetails,
-  //     });
-  //   }
-  // }, [leadDetails.id]);
+  useEffect(() => {
+    if (reportDetails?.id) {
+      reset({
+        offerDetails: reportDetails?.offerDetails,
+      });
+    }
+  }, [reportDetails?.id]);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const convertedOfferDetails = Object.fromEntries(
-      Object.entries(data).map(([key, value]) => {
-        if (key === "remarks" || key === "noteAndInformation") {
-          return [key, value];
-        }
-        return [key, Number(value)];
-      })
-    );
+    const convertValues = (
+      obj: DataType,
+      excludeKeys: string[] = []
+    ): DataType => {
+      return Object.fromEntries(
+        Object.entries(obj).map(([key, value]) => {
+          if (typeof value === "object" && value !== null) {
+            // Recursively convert nested objects
+            return [key, convertValues(value, excludeKeys)];
+          } else if (excludeKeys.includes(key)) {
+            // Exclude specific keys from conversion
+            return [key, value];
+          } else {
+            // Convert value to number if it's numeric
+            const convertedValue = isNaN(Number(value)) ? value : Number(value);
+            return [key, convertedValue];
+          }
+        })
+      );
+    };
+
+    const excludeKeys = ["noteAndInformation", "remarks"];
+    const convertedApiData = convertValues(data, excludeKeys);
+
     const apiData = {
-      ...convertedOfferDetails,
+      ...convertedApiData,
       step: 4,
       id: reportDetails?.id,
       appointmentID: appointmentDetails?.id,
-      stage: ComponentsType.additionalEdit,
     };
 
     const response = await dispatch(

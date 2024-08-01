@@ -133,7 +133,7 @@ export const updateReport: AsyncThunk<boolean, object, object> | any =
     try {
       const response = await apiServices.updateAppointmentReport(data);
 
-      return response?.data;
+      return response?.data?.Report;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       setErrors(setError, e?.data?.data, translate);
@@ -230,12 +230,7 @@ const appointmentSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(updateReport.fulfilled, (state, action) => {
-      let index = state.appointment.findIndex(
-        (item) => item.id === action.payload?.id
-      );
-      if (index !== -1) {
-        state.appointment.splice(index, 1, action.payload);
-      }
+      state.reportDetails = action.payload;
       state.loading = false;
     });
     builder.addCase(updateReport.rejected, (state) => {

@@ -10,9 +10,11 @@ import { HouseDetailReport } from "./forms/house-detail-form";
 import { ServicesDetailReport } from "./forms/services-detail-form";
 import { AdditionalInfoReport } from "./forms/additional-detail-form";
 import { stepFormArrayTypes } from "@/types";
+import { useRouter } from "next/router";
 
 const CreateReportDetails = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { modal } = useAppSelector((state) => state.global);
 
   const [tabType, setTabType] = useState<AppointmentReportsFormStages>(
@@ -35,7 +37,7 @@ const CreateReportDetails = () => {
   ];
 
   const handleReportCreated = () => {
-    dispatch(updateModalType(ModalType.CREATION));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleNextTab = (currentComponent: AppointmentReportsFormStages) => {
@@ -51,7 +53,16 @@ const CreateReportDetails = () => {
   };
 
   const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
+  const handleReportSuccessRoute = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+
+    router.push({
+      pathname: "/agent/appointments",
+      query: { status: "None" },
+    });
   };
 
   const componentLookUp = {
@@ -84,7 +95,7 @@ const CreateReportDetails = () => {
         onClose={onClose}
         heading={translate("common.modals.report_created")}
         subHeading={translate("common.modals.report_created_des")}
-        route={onClose}
+        route={handleReportSuccessRoute}
       />
     ),
   };
@@ -92,7 +103,7 @@ const CreateReportDetails = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-  
+
   return (
     <>
       <div>
@@ -115,7 +126,7 @@ const CreateReportDetails = () => {
 
         {componentLookUp[tabType as keyof typeof componentLookUp]}
       </div>
-      {renderModal}
+      {renderModal()}
     </>
   );
 };
