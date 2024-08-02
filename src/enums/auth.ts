@@ -33,6 +33,11 @@ export enum UserResponse {
   companyLogo = "logo",
   notificationSettings = "notificationSettings",
   mobileNumber = "mobileNumber",
+  employeeID = "employeeID",
+  creationDate = "creationDate",
+  picture = "picture",
+  designation = "designation",
+  createdBy = "createdBy"
 }
 
 export enum LoginFields {

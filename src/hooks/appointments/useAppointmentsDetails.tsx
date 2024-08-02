@@ -45,7 +45,8 @@ export const useAppointmentsDetails = () => {
       updateAppointmentStatus({
         data: {
           id: appointmentDetails?.id,
-          leadStatus: staticEnums["AppointmentStatus"][appointmentStatus],
+          appointmentStatus:
+            staticEnums["AppointmentStatus"][appointmentStatus],
         },
       })
     );

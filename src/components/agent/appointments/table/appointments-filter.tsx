@@ -36,15 +36,15 @@ export default function AppointmentsFilter({
   const checkbox: CheckBoxType[] = [
     {
       label: translate("sidebar.customer.appointments.pending"),
-      type: `${staticEnums.LeadStatus.Open}`,
+      type: `${staticEnums.AppointmentStatus.Pending}`,
     },
     {
       label: translate("sidebar.customer.appointments.completed"),
-      type: `${staticEnums.LeadStatus.InProcess}`,
+      type: `${staticEnums.AppointmentStatus.Completed}`,
     },
     {
       label: translate("sidebar.customer.appointments.cancelled"),
-      type: `${staticEnums.LeadStatus.Close}`,
+      type: `${staticEnums.AppointmentStatus.Cancelled}`,
     },
   ];
 

@@ -35,14 +35,19 @@ export const useCreateReportAddressDetails = ({
   const { error, loading, appointmentDetails, reportDetails } = useAppSelector(
     (state) => state.appointment
   );
-  const { report } = router.query;
 
+  const { report } = router.query;
 
   const handleCancel = () => {
     router.push({
-      pathname: "/agent/appointments/details",
+      pathname: report
+        ? "/agent/appointments/report-detail"
+        : "/agent/appointments/details",
       query: {
-        appointment: appointmentDetails?.id,
+        appointment: report
+          ? reportDetails?.appointmentID?.id
+          : appointmentDetails?.id,
+        status: "None",
       },
     });
   };
@@ -91,6 +96,20 @@ export const useCreateReportAddressDetails = ({
             );
           }
         }
+      );
+    } else if (reportDetails?.id) {
+      reset(
+        transformData({
+          fullName: reportDetails?.customerDetail?.fullName,
+          email: reportDetails.customerDetail?.email,
+          phoneNumber: reportDetails.customerDetail?.phoneNumber,
+          address: reportDetails?.addressID
+            ? reportDetails?.addressID?.address?.map((item, index) => ({
+                ...item,
+                label: item?.label ? item?.label : `Adresse ${++index}`,
+              }))
+            : [],
+        })
       );
     } else {
       reset(

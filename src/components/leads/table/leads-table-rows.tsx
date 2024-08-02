@@ -121,7 +121,7 @@ export const LeadsTableRows = ({
                 {isAgent ? (
                   <div className={`py-4`}>
                     <div
-                      className={`px-[10px] py-1 w-full rounded-lg ${
+                      className={`px-[10px] py-2 w-full rounded-lg ${
                         item?.leadStatus === "InProcess"
                           ? "text-dark"
                           : "text-white"
@@ -196,7 +196,7 @@ export const LeadsTableRows = ({
 
                 <div className={`py-4`}>
                   <div
-                    className={`px-[10px] py-1 w-full rounded-lg text-white text-sm font-medium text-center ${
+                    className={`px-[10px] py-2 w-full rounded-lg text-white text-sm font-medium text-center ${
                       item?.isAppointmentCreated ? "bg-primary" : "bg-[#FB9600]"
                     }`}
                   >

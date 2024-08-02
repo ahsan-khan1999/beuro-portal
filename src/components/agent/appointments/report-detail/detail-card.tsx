@@ -21,7 +21,7 @@ export const ReportDetailCard = ({
 
   const handleBack = () => {
     router.pathname = "/agent/appointments";
-    delete router.query["appointment"];
+    delete router.query["report"];
     updateQuery(router, router.locale as string);
   };
 
@@ -95,7 +95,14 @@ export const ReportDetailCard = ({
                   `appointments.appointment_status.${reportDetail?.appointmentID?.appointmentStatus}`
                 )}
                 onItemSelected={onStatusChange}
-                dropDownClassName={`bg-[#4A13E7] w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                dropDownClassName={`${
+                  reportDetail?.appointmentID?.appointmentStatus === "Pending"
+                    ? "bg-[#4A13E7]"
+                    : reportDetail?.appointmentID?.appointmentStatus ===
+                      "Completed"
+                    ? "bg-[#45C769]"
+                    : "bg-[#D80027]"
+                } w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium me-1"
                 dropDownItemsContainerClassName="w-[140px]"
                 dropDownIconClassName="text-white"

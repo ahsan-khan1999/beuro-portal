@@ -4,8 +4,12 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { additionalAgentReportFormField } from "@/components/agent/appointments/createReport/fields/additional-info-form-fields";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
-import { updateReport } from "@/api/slices/appointment/appointmentSlice";
+import {
+  readReportdetails,
+  updateReport,
+} from "@/api/slices/appointment/appointmentSlice";
 import { useEffect } from "react";
+import { ReportPromiseActionType } from "@/types/customer";
 
 export interface ReportAdditionalDetailsProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -50,6 +54,16 @@ export const useCreateReportAdditionalDetails = ({
 
   useEffect(() => {
     if (report) {
+      dispatch(readReportdetails({ params: { filter: report } })).then(
+        (response: ReportPromiseActionType) => {
+          if (response?.payload) {
+            reset({
+              offerDetails: response?.payload?.offerDetails,
+            });
+          }
+        }
+      );
+    } else {
       reset({
         offerDetails: reportDetails?.offerDetails,
       });

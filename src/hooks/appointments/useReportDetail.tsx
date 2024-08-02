@@ -9,7 +9,9 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
+  readAppointmentDetails,
   readReportdetails,
+  setAppointmentDetails,
   setReportDetails,
   updateAppointmentStatus,
 } from "@/api/slices/appointment/appointmentSlice";
@@ -43,6 +45,16 @@ export const useReportDetails = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (id) {
+      dispatch(readAppointmentDetails({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setAppointmentDetails(res.payload));
+        }
+      );
+    }
+  }, [id]);
+
   const defaultUpdateModal = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -51,8 +63,9 @@ export const useReportDetails = () => {
     const res = await dispatch(
       updateAppointmentStatus({
         data: {
-          id: reportDetails?.id,
-          leadStatus: staticEnums["AppointmentStatus"][appointmentStatus],
+          id: reportDetails?.appointmentID?.id,
+          appointmentStatus:
+            staticEnums["AppointmentStatus"][appointmentStatus],
         },
       })
     );
@@ -111,10 +124,6 @@ export const useReportDetails = () => {
         },
       })
     );
-  };
-
-  const defaultModal = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleUpdateDiscount = async (discount: number) => {
@@ -176,6 +185,6 @@ export const useReportDetails = () => {
     shareImgModal,
     handleUpdateDiscount,
     systemSettings,
-    defaultModal,
+    defaultUpdateModal,
   };
 };
