@@ -47,7 +47,6 @@ export interface User {
   [UserResponse.isCommercialSellerRequested]: boolean;
   plan: Plan;
 }
-// [AddressType.primary]:{}
 
 export interface UserCompany {
   [UserResponse.companyName]: string;

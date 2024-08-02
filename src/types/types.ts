@@ -349,6 +349,12 @@ export type GenerateEmployeeFormField = (
   control?: Control<FieldValues>
 ) => FormField[];
 
+export type GenerateAgentSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>
+) => FormField[];
+
 export type GenerateScheduleAppointmentsFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

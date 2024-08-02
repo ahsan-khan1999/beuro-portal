@@ -29,7 +29,7 @@ const Setting = () => {
   const { query } = useRouter();
   const { t: translate } = useTranslation();
 
-  const { loading, noteSettings } = useAppSelector((state) => state.settings);
+  const { noteSettings } = useAppSelector((state) => state.settings);
 
   const dispatch = useDispatch();
   const tab = query.tab;

@@ -37,12 +37,16 @@ export const useCreateReportAddressDetails = ({
   );
   const { report } = router.query;
 
-
   const handleCancel = () => {
+    console.log(report);
     router.push({
-      pathname: "/agent/appointments/details",
+      pathname: report
+        ? "/agent/appointments/report-detail"
+        : "/agent/appointments/details",
       query: {
-        appointment: appointmentDetails?.id,
+        appointment: report
+          ? reportDetails?.appointmentID?.id
+          : appointmentDetails?.id,
       },
     });
   };

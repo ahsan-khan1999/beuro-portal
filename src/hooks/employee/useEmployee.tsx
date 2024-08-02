@@ -16,7 +16,7 @@ const useEmployee = () => {
     },
   });
 
-  const { employee, lastPage, totalCount, loading, isLoading } = useAppSelector(
+  const { totalCount, loading, isLoading } = useAppSelector(
     (state) => state.employee
   );
 

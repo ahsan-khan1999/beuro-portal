@@ -1,15 +1,11 @@
 import { Form } from "@/base-components/form/form";
-import useSettingProfile from "@/hooks/setting/useSettingProfile";
+import { useAgentProfileSetting } from "@/hooks/agent/setting/useAgentProfileSetting";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
-const SettingProfile = ({
-  handleChangePassword,
-}: {
-  handleChangePassword: Function;
-}) => {
-  const { fields, onSubmit, handleSubmit, errors, error, renderModal } =
-    useSettingProfile(handleChangePassword);
+export const AgentProfileSetting = () => {
+  const { fields, onSubmit, handleSubmit, errors, renderModal } =
+    useAgentProfileSetting();
 
   return (
     <FormCard containerClassName="pb-6">
@@ -25,5 +21,3 @@ const SettingProfile = ({
     </FormCard>
   );
 };
-
-export default SettingProfile;

@@ -42,6 +42,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
       ...user,
     });
   }, []);
+
   const handleRestore = () => {
     reset({
       ...user,
@@ -51,6 +52,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const handleSuccess = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
