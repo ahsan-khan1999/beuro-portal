@@ -35,10 +35,10 @@ export const useCreateReportAddressDetails = ({
   const { error, loading, appointmentDetails, reportDetails } = useAppSelector(
     (state) => state.appointment
   );
+
   const { report } = router.query;
 
   const handleCancel = () => {
-    console.log(report);
     router.push({
       pathname: report
         ? "/agent/appointments/report-detail"
@@ -47,6 +47,7 @@ export const useCreateReportAddressDetails = ({
         appointment: report
           ? reportDetails?.appointmentID?.id
           : appointmentDetails?.id,
+        status: "None",
       },
     });
   };

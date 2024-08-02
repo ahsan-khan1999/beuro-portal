@@ -1788,7 +1788,6 @@ export const hoursArr = [
 
 export const minsArr = ["00", "15", "30", "45"];
 
-
 // export const itemImages = {
 //   sofa: sofaIcon,
 //   teacherDesk: teacherDesckIcon,

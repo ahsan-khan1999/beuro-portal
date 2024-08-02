@@ -342,6 +342,8 @@ export const useCreateReportServicesDetails = ({
     }
   };
 
+  console.log(systemSettings?.currency);
+
   const fields = ReportServiceDetailsFormField(
     register,
     loading,

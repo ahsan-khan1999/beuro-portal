@@ -8,24 +8,28 @@ import { useRouter } from "next/router";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import {
   readAppointments,
   setAppointmentDetails,
+  updateAppointmentStatus,
 } from "@/api/slices/appointment/appointmentSlice";
 import localStoreUtil from "@/utils/localstore.util";
-import { DEFAULT_APPOINTMETNS } from "@/utils/static";
+import { DEFAULT_APPOINTMETNS, staticEnums } from "@/utils/static";
+import { CreateReportModal } from "@/base-components/ui/modals1/CreateReportModal";
+import { Appointments } from "@/types/appointments";
+import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 
 export const useAppointments = () => {
   const { loading, isLoading, totalCount, appointment } = useAppSelector(
     (state) => state.appointment
   );
 
-  const { query } = useRouter();
-  const page = query?.page as unknown as number;
-  const [currentPage, setCurrentPage] = useState<number>(page || 1);
+  const router = useRouter();
   const { t: translate } = useTranslation();
+  const page = router.query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
+  const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -44,7 +48,7 @@ export const useAppointments = () => {
   }, []);
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(router.query.page as string, 10);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -53,11 +57,11 @@ export const useAppointments = () => {
       setCurrentPage(1);
     }
 
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchedDate = query?.date as string;
-    const searchNoteType = query?.noteType as string;
+    const queryStatus = router.query?.status;
+    const searchQuery = router.query?.text as string;
+    const sortedValue = router.query?.sort as string;
+    const searchedDate = router.query?.date as string;
+    const searchNoteType = router.query?.noteType as string;
 
     const queryParams =
       queryStatus ||
@@ -68,7 +72,7 @@ export const useAppointments = () => {
 
     if (queryParams !== undefined) {
       const filteredStatus =
-        query?.status === "None"
+        router.query?.status === "None"
           ? "None"
           : queryParams
               .toString()
@@ -105,18 +109,16 @@ export const useAppointments = () => {
             size: 15,
           },
         })
-      );
-      // .then((response: any) => {
-      //   if (response?.payload) {
-      //     setCurrentPageRows(response?.payload);
-      //   }
-      // });
+      ).then((response: any) => {
+        if (response?.payload) {
+          setCurrentPageRows(response?.payload);
+        }
+      });
     }
-  }, [query]);
+  }, [router.query]);
 
   const totalItems = totalCount;
   const itemsPerPage = 15;
-
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
@@ -125,7 +127,61 @@ export const useAppointments = () => {
   };
 
   const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
+  const defaultUpdateModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleAppointmentCreate = (id: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.APPOINTMENT_CREATE,
+        data: {
+          id: id,
+        },
+      })
+    );
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleStatusUpdate = async (
+    id: string,
+    appointmentStatus: string,
+    type: string
+  ) => {
+    if (type === "appointment") {
+      const currentItem = currentPageRows.find((item) => item.id === id);
+
+      if (!currentItem || currentItem.appointmentStatus !== appointmentStatus) {
+        const res = await dispatch(
+          updateAppointmentStatus({
+            data: {
+              id: id,
+              appointmentStatus:
+                staticEnums["AppointmentStatus"][appointmentStatus],
+            },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            defaultUpdateModal();
+          }
+        }
+      }
+    }
   };
 
   const handleScheduleAppointments = (
@@ -187,25 +243,18 @@ export const useAppointments = () => {
         imgSrc={reschudleIcon}
       />
     ),
+    [ModalType.APPOINTMENT_CREATE]: <CreateReportModal onClose={onClose} />,
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleAppointmentStatusUpdate = () => {
-    console.log("handleAppointmentStatusUpdate");
-  };
-
   return {
     totalItems,
     handlePageChange,
     itemsPerPage,
-    appointment,
+    currentPageRows,
     renderModal,
     handleFilterChange,
     filter,
@@ -213,8 +262,9 @@ export const useAppointments = () => {
     loading,
     isLoading,
     currentPage,
-    handleAppointmentStatusUpdate,
     totalCount,
+    handleStatusUpdate,
+    handleAppointmentCreate,
     handleScheduleAppointments,
   };
 };

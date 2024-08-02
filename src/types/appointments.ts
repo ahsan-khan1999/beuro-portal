@@ -8,7 +8,6 @@ export interface Appointments {
   isReportSubmitted: boolean;
   startTime: string;
   endTime: string;
-
   leadID: {
     id: string;
     refID: string;

@@ -1160,7 +1160,8 @@
       "status": "Status",
       "date": "Datum",
       "time": "Zeit",
-      "no_data_found": "Keine Berichte eingereicht"
+      "no_data_found": "Keine Berichte eingereicht",
+      "no_report_found": "Kein Bericht gefunden"
     },
     "report_detail": {
       "contact_tab": "Kontakt Details",

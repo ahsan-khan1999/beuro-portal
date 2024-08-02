@@ -20,19 +20,20 @@ export default function Appointments() {
     loading,
     isLoading,
     currentPage,
-    handleAppointmentStatusUpdate,
+    currentPageRows,
+    handleAppointmentCreate,
+    handleStatusUpdate,
     totalCount,
-    appointment,
     handleScheduleAppointments,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
     <AppointmentTableRows
-      dataToAdd={appointment}
-      onStatusChange={handleAppointmentStatusUpdate}
+      dataToAdd={currentPageRows}
+      onStatusChange={handleStatusUpdate}
       onAppointmentSchedule={handleScheduleAppointments}
     />,
-    appointment?.length > 0,
+    currentPageRows?.length > 0,
     isLoading
   );
 

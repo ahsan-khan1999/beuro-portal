@@ -76,6 +76,7 @@ export enum ModalType {
   ARE_YOU_COMPANY,
   SCHEDULE_APPOINTMENTS,
   APPOINTMENT_SUCCESS,
+  APPOINTMENT_CREATE
 }
 
 export type ModalConfigType = {

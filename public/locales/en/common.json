@@ -1168,7 +1168,8 @@
       "status": "Status",
       "date": "Date",
       "time": "Time",
-      "no_data_found": "No reports submitted"
+      "no_data_found": "No reports submitted",
+      "no_report_found": "No report Found"
     },
     "report_detail": {
       "contact_tab": "Contact Details",

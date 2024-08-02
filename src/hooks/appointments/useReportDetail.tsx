@@ -51,8 +51,9 @@ export const useReportDetails = () => {
     const res = await dispatch(
       updateAppointmentStatus({
         data: {
-          id: reportDetails?.id,
-          leadStatus: staticEnums["AppointmentStatus"][appointmentStatus],
+          id: reportDetails?.appointmentID?.id,
+          appointmentStatus:
+            staticEnums["AppointmentStatus"][appointmentStatus],
         },
       })
     );
@@ -111,10 +112,6 @@ export const useReportDetails = () => {
         },
       })
     );
-  };
-
-  const defaultModal = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleUpdateDiscount = async (discount: number) => {
@@ -176,6 +173,6 @@ export const useReportDetails = () => {
     shareImgModal,
     handleUpdateDiscount,
     systemSettings,
-    defaultModal,
+    defaultUpdateModal,
   };
 };

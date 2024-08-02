@@ -11,25 +11,13 @@ import { OutlineButton } from "@/base-components/ui/button/outline-button";
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
   onStatusChange: (id: string, status: string, type: string) => void;
-  onAppointmentSchedule: (
-    id: string,
-    leadId: string,
-    refID: string,
-    date: string,
-    startTime: string,
-    endTime: string,
-    agent: {
-      id: string;
-      picture: string;
-      fullName: string;
-    }
-  ) => void;
+  onAppointmentCreate: (id: string) => void;
 }
 
 export const AppointmentTableRows = ({
   dataToAdd,
   onStatusChange,
-  onAppointmentSchedule,
+  onAppointmentCreate,
 }: ApointmentsTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -53,16 +41,21 @@ export const AppointmentTableRows = ({
       }`}
     >
       {dataToAdd?.map((item, index) => {
+        const handleAppointmentRoute = () => {
+          if (!item?.isReportSubmitted) {
+            onAppointmentCreate(item?.id);
+          } else {
+            router.push({
+              pathname: "/agent/appointments/report-detail",
+              query: { ...router.query, report: item?.id },
+            });
+          }
+        };
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
-                onClick={() => {
-                  router.push({
-                    pathname: "/agent/appointments/report-detail",
-                    query: { ...router.query, report: item?.id },
-                  });
-                }}
+                onClick={handleAppointmentRoute}
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
@@ -105,7 +98,7 @@ export const AppointmentTableRows = ({
                       `appointments.appointment_status.${item?.appointmentStatus}`
                     )}
                     onItemSelected={(status) => {
-                      onStatusChange(item?.id, status, "appointments");
+                      onStatusChange(item?.id, status, "appointment");
                     }}
                     dropDownClassName={`${
                       item?.appointmentStatus === "Pending"
@@ -113,7 +106,7 @@ export const AppointmentTableRows = ({
                         : item?.appointmentStatus === "Completed"
                         ? "bg-[#45C769]"
                         : "bg-[#D80027]"
-                    } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                    } w-full rounded-lg px-4 py-[5px] flex items-center justify-center`}
                     dropDownTextClassName="text-white text-base font-medium me-1"
                     dropDownItemsContainerClassName="w-full"
                     dropDownIconClassName="text-white"
@@ -143,7 +136,7 @@ export const AppointmentTableRows = ({
                         ? "bg-primary"
                         : "bg-[#FB9600]"
                     }
-                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
+                  } text-white px-2 py-2 text-center rounded-md min-w-[70px] w-full text-sm`}
                   >
                     {item.leadID?.isOfferCreated === true
                       ? translate(`leads.created`)
@@ -159,7 +152,7 @@ export const AppointmentTableRows = ({
                   <OutlineButton
                     inputType="button"
                     onClick={() => {}}
-                    className="bg-white text-primary w-full border border-primary"
+                    className="bg-white text-primary w-full border border-primary py-[5px] !h-fit"
                     text={translate("appointments.view_reports_btn")}
                     id="view reports"
                     iconAlt="view reports"

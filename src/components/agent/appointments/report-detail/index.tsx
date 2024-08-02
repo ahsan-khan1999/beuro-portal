@@ -9,15 +9,12 @@ export const ReportDetails = () => {
     loading,
     handleStatusUpdate,
     renderModal,
-    appointmentDetails,
     reportDetails,
-    defaultModal,
-    handleScheduleAppointments,
     handleUpdateDiscount,
     handleImageUpload,
-    router,
     shareImgModal,
     systemSettings,
+    defaultUpdateModal,
   } = useReportDetails();
 
   return (
@@ -37,11 +34,11 @@ export const ReportDetails = () => {
           currency={systemSettings?.currency}
           shareImgModal={shareImgModal}
           handleImagesUpload={handleImageUpload}
-          handleImageSlider={defaultModal}
+          handleImageSlider={defaultUpdateModal}
         />
       </div>
 
-      {/* {renderModal()} */}
+      {renderModal()}
     </>
   );
 };
