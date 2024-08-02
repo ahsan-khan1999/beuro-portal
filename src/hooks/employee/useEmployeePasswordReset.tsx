@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { resetPassword } from "@/api/slices/authSlice/auth";
 import { EmployeeResetPasswordFieldsFormField } from "@/components/employees/fields/employee-reset-password-fields";
 import { generateEmployeePasswordResetValidationSchema } from "@/validation/employeeSchema";
 import { updateEmployeePassword } from "@/api/slices/employee/emplyeeSlice";
@@ -15,6 +14,7 @@ export default function useEmployeePasswordReset(
   const { loading, error, employeeDetails } = useAppSelector(
     (state) => state.employee
   );
+
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -39,6 +39,7 @@ export default function useEmployeePasswordReset(
     );
     if (res?.payload) passwordResetSuccessfully();
   };
+
   return {
     error,
     handleSubmit,

@@ -223,6 +223,28 @@ export const useCreateReportServicesDetails = ({
           }
         }
       );
+    } else {
+      reset({
+        serviceDetail: reportDetails?.serviceDetail?.serviceDetail || [
+          {
+            serviceTitle: "",
+            price: "",
+            unit: "",
+            count: "",
+            description: "",
+            totalPrice: "",
+            serviceType: "Existing Service",
+            discount: 0,
+          },
+        ],
+        isTax: reportDetails?.isTax,
+        isDiscount: reportDetails?.isDiscount,
+        discountType: staticEnums["DiscountType"][reportDetails?.discountType],
+        taxType: staticEnums["TaxType"][reportDetails?.taxType] || 0,
+        discountAmount: reportDetails?.discountAmount || "",
+        discountDescription: reportDetails?.discountDescription,
+        taxAmount: reportDetails?.taxAmount || 0,
+      });
     }
   }, [reportDetails?.id, report]);
 
@@ -341,8 +363,6 @@ export const useCreateReportServicesDetails = ({
       setValue(`serviceDetail.${index}.discount`, ``);
     }
   };
-
-  console.log(systemSettings?.currency);
 
   const fields = ReportServiceDetailsFormField(
     register,

@@ -12,7 +12,6 @@ const PasswordReset = ({
   onClose: () => void;
   passwordResetSuccessfully: Function;
 }) => {
-  const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
     useEmployeePasswordReset(passwordResetSuccessfully);
 
@@ -37,7 +36,6 @@ const PasswordReset = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </div>

@@ -42,15 +42,12 @@ export const AppointmentTableRows = ({
     >
       {dataToAdd?.map((item, index) => {
         const handleAppointmentRoute = () => {
-          if (!item?.isReportSubmitted) {
-            onAppointmentCreate(item?.id);
-          } else {
-            router.push({
-              pathname: "/agent/appointments/report-detail",
-              query: { ...router.query, report: item?.id },
-            });
-          }
+          router.push({
+            pathname: "/agent/appointments/report-detail",
+            query: { ...router.query, report: item?.id },
+          });
         };
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">

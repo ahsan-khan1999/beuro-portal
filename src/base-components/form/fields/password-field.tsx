@@ -62,7 +62,7 @@ export const PasswordField = ({
           onClick={() => {
             onClick && onClick();
           }}
-          className="absolute right-2 z-40 bg-[#4A13E7] rounded-lg px-[23px] py-[6px] text-white cursor-default"
+          className="absolute right-2 z-40 bg-[#4A13E7] rounded-lg px-[23px] py-[6px] text-white cursor-pointer"
         >
           {translate("common.change_button")}
         </span>

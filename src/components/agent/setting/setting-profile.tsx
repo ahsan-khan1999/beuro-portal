@@ -1,6 +1,5 @@
 import { Form } from "@/base-components/form/form";
 import { useAgentProfileSetting } from "@/hooks/agent/setting/useAgentProfileSetting";
-import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 export const AgentProfileSetting = () => {
@@ -8,8 +7,8 @@ export const AgentProfileSetting = () => {
     useAgentProfileSetting();
 
   return (
-    <FormCard containerClassName="pb-6">
-      <div className="py-3 px-6">
+    <>
+      <div className="pt-[30px] pb-5">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}
@@ -18,6 +17,6 @@ export const AgentProfileSetting = () => {
         />
       </div>
       {renderModal()}
-    </FormCard>
+    </>
   );
 };

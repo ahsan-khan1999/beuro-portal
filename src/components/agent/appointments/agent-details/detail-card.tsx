@@ -1,9 +1,7 @@
 import { BackIcon } from "@/assets/svgs/components/back-icon";
 import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import profileImg from "@/assets/pngs/agent-profile.png";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { Appointments } from "@/types/appointments";
@@ -24,6 +22,7 @@ export const AppointmentsDetailCard = ({
   const handleBack = () => {
     router.pathname = "/agent/appointments";
     delete router.query["appointment"];
+    delete router.query["report"];
     updateQuery(router, router.locale as string);
   };
 
@@ -97,7 +96,13 @@ export const AppointmentsDetailCard = ({
                   `appointments.appointment_status.${appointmentDetails?.appointmentStatus}`
                 )}
                 onItemSelected={onStatusChange}
-                dropDownClassName={`bg-[#4A13E7] w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                dropDownClassName={`${
+                  appointmentDetails?.appointmentStatus === "Pending"
+                    ? "bg-[#4A13E7]"
+                    : appointmentDetails?.appointmentStatus === "Completed"
+                    ? "bg-[#45C769]"
+                    : "bg-[#D80027]"
+                } w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium me-1"
                 dropDownItemsContainerClassName="w-[140px]"
                 dropDownIconClassName="text-white"

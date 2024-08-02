@@ -61,6 +61,15 @@ export const useCreateReportHoseDetails = ({
           }
         }
       );
+    } else {
+      reset({
+        livingRoomDetails: reportDetails?.livingRoomDetails,
+        kitchenDetails: reportDetails?.kitchenDetails,
+        bedRoomDetails: reportDetails?.bedRoomDetails,
+        roomDetails: reportDetails?.roomDetails,
+        basementAtticDetails: reportDetails?.basementAtticDetails,
+        specialItemsDetails: reportDetails?.specialItemsDetails,
+      });
     }
   }, [reportDetails?.id, report]);
 

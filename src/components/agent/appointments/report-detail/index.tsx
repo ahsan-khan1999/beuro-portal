@@ -1,5 +1,4 @@
 import { AppointmentsDetailCard } from "../agent-details/detail-card";
-import { ReportDetailCard } from "./detail-card";
 import { ReportDetailData } from "./detail-screens";
 import { useReportDetails } from "@/hooks/appointments/useReportDetail";
 
@@ -15,14 +14,15 @@ export const ReportDetails = () => {
     shareImgModal,
     systemSettings,
     defaultUpdateModal,
+    appointmentDetails,
   } = useReportDetails();
 
   return (
     <>
-      <div className=" 2xl:fixed offerCardCalWidth z-10 2xl:-mt-[295px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
-        <ReportDetailCard
+      <div className="2xl:fixed offerCardCalWidth z-10 2xl:-mt-[295px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
+        <AppointmentsDetailCard
           onStatusChange={handleStatusUpdate}
-          reportDetail={reportDetails}
+          appointmentDetails={appointmentDetails}
         />
       </div>
 

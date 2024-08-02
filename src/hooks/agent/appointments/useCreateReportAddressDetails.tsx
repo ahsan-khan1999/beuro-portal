@@ -97,6 +97,20 @@ export const useCreateReportAddressDetails = ({
           }
         }
       );
+    } else if (reportDetails?.id) {
+      reset(
+        transformData({
+          fullName: reportDetails?.customerDetail?.fullName,
+          email: reportDetails.customerDetail?.email,
+          phoneNumber: reportDetails.customerDetail?.phoneNumber,
+          address: reportDetails?.addressID
+            ? reportDetails?.addressID?.address?.map((item, index) => ({
+                ...item,
+                label: item?.label ? item?.label : `Adresse ${++index}`,
+              }))
+            : [],
+        })
+      );
     } else {
       reset(
         transformData({

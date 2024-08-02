@@ -28,7 +28,7 @@ export interface User {
   [UserResponse.role]: string;
   [UserResponse.bank]: string;
   [UserResponse.company]: UserCompany;
-  [UserResponse.employee]: string;
+  [UserResponse.employee]: UserEmployee;
   [UserResponse.addresses]: UserAddress;
   [UserResponse.isProfileComplete]: boolean;
   [UserResponse.isEmailVerified]: boolean;
@@ -57,6 +57,19 @@ export interface UserCompany {
   [UserResponse.mobileNumber]: string;
   [UserResponse.addresses]: UserAddress;
   [UserResponse.bank]: UserBankDetail;
+}
+
+export interface UserEmployee {
+  [UserResponse.id]: string;
+  [UserResponse.employeeID]: string;
+  [UserResponse.creationDate]: number;
+  [UserResponse.fullName]: UserAddress;
+  [UserResponse.picture]: string;
+  [UserResponse.designation]: UserBankDetail;
+  [UserResponse.email]: string; 
+  [UserResponse.phoneNumber]: string;
+  [UserResponse.mobileNumber]: string;
+  [UserResponse.createdBy]: string;
 }
 export interface UserAddress {
   [AddressTypes.city]: string;

@@ -9,7 +9,9 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
+  readAppointmentDetails,
   readReportdetails,
+  setAppointmentDetails,
   setReportDetails,
   updateAppointmentStatus,
 } from "@/api/slices/appointment/appointmentSlice";
@@ -38,6 +40,16 @@ export const useReportDetails = () => {
       dispatch(readReportdetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setReportDetails(res.payload));
+        }
+      );
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(readAppointmentDetails({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setAppointmentDetails(res.payload));
         }
       );
     }

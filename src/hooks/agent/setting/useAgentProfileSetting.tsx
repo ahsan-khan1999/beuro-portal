@@ -10,14 +10,11 @@ import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updateEmployee } from "@/api/slices/employee/emplyeeSlice";
-import { updateQuery } from "@/utils/update-query";
-import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
-import { useAppSelector } from "@/hooks/useRedux";
 import { User } from "@/types";
 import { isJSON } from "@/utils/functions";
+import { useAppSelector } from "@/hooks/useRedux";
 import { getUser } from "@/utils/auth.util";
 import { AgentPrfoileSettingFormField } from "@/components/agent/setting/setting-profile-fields";
-import { staticEnums } from "@/utils/static";
 
 export const useAgentProfileSetting = () => {
   const router = useRouter();
@@ -39,6 +36,12 @@ export const useAgentProfileSetting = () => {
     dispatch(updateModalType({ type: ModalType.PASSWORD_CHANGE_SUCCESSFULLY }));
   };
 
+  const handleCancel = () => {
+    router.push({
+      pathname: "/agent/dashboard",
+    });
+  };
+
   const schema = generateEmployDetailsValidation(translate);
 
   const {
@@ -55,17 +58,9 @@ export const useAgentProfileSetting = () => {
 
   useEffect(() => {
     reset({
-      ...user,
-      designation: staticEnums["Designation"][user?.employee],
+      ...user.employee,
     });
   }, []);
-
-  const handleUpdateSuccess = () => {
-    router.pathname = "/employees";
-    delete router.query["employee"];
-    updateQuery(router, router.locale as string);
-    onClose();
-  };
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_RESET]: (
@@ -77,21 +72,19 @@ export const useAgentProfileSetting = () => {
     [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
       <PasswordChangeSuccessfully onClose={onClose} />
     ),
-    [ModalType.CREATE_SUCCESS]: (
-      <RecordCreateSuccess
-        onClose={onClose}
-        modelHeading={translate("common.modals.offer_created")}
-        modelSubHeading={translate("common.modals.update_success")}
-        routeHandler={handleUpdateSuccess}
-      />
-    ),
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  const fields = AgentPrfoileSettingFormField(register, loading, control);
+  const fields = AgentPrfoileSettingFormField(
+    register,
+    loading,
+    control,
+    handleCancel,
+    handlePasswordReset
+  );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
