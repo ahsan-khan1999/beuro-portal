@@ -55,6 +55,13 @@ export const useReportDetails = () => {
     }
   }, [id]);
 
+  const handleCreateReport = () => {
+    router.push({
+      pathname: `/agent/appointments/create-report`,
+      query: appointmentDetails?.id,
+    });
+  };
+
   const defaultUpdateModal = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
@@ -186,5 +193,6 @@ export const useReportDetails = () => {
     handleUpdateDiscount,
     systemSettings,
     defaultUpdateModal,
+    handleCreateReport
   };
 };
