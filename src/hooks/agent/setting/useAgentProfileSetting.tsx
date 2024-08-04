@@ -87,8 +87,6 @@ export const useAgentProfileSetting = () => {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
-
     try {
       const res = await dispatch(
         updateEmployee({ data, router, setError, translate })

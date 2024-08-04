@@ -16,9 +16,15 @@ const CreateReportDetails = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { modal } = useAppSelector((state) => state.global);
+  let tab: AppointmentReportsFormStages =
+    AppointmentReportsFormStages.CONTACT_AND_ADDRESS;
+
+  if (router?.query?.tab) {
+    tab = Number(router.query.tab) as AppointmentReportsFormStages;
+  }
 
   const [tabType, setTabType] = useState<AppointmentReportsFormStages>(
-    AppointmentReportsFormStages.CONTACT_AND_ADDRESS
+    tab || AppointmentReportsFormStages.CONTACT_AND_ADDRESS
   );
 
   const tabSection: stepFormArrayTypes[] = [

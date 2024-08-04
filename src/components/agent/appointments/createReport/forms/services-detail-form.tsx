@@ -16,14 +16,12 @@ export const ServicesDetailReport = ({
     useCreateReportServicesDetails({ onBackHandler, onNextHandler });
 
   return (
-    <div
-      className="p-[21px] bg-white rounded-lg h-fit mb-5"
-      id={translate("agent.report_tabs_heading.services")}
-    >
-      <h1 className="text-[#1E1E1E] text-base font-semibold pb-[29px] border-b border-b-[#000] border-opacity-20">
+    <div className="mb-5" id={translate("agent.report_tabs_heading.services")}>
+      <h1 className="p-5 bg-white rounded-t-lg h-fit text-[#1E1E1E] text-base font-semibold pb-[29px]">
         {translate("agent.service_detail_fields.heading")}
       </h1>
 
+      <hr className="opacity-10 mx-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
