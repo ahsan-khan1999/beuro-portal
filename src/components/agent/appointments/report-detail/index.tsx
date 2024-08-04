@@ -53,7 +53,7 @@ export const ReportDetails = () => {
             className={`${
               !appointmentDetails?.isReportSubmitted
                 ? ""
-                : "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[295px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
+                : "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[285px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
             }`}
           >
             <AppointmentsDetailCard
@@ -61,7 +61,7 @@ export const ReportDetails = () => {
               appointmentDetails={appointmentDetails}
             />
           </div>
-          <div className="2xl:mt-[375px] w-full 2xl:block mb-10">
+          <div className="2xl:mt-[365px] w-full 2xl:block mb-10">
             <ReportDetailData
               reportDetail={reportDetails}
               loading={loading}

@@ -22,4 +22,6 @@ export interface OfferTabsSectionTypes {
   name: string;
   index: number;
   icon: string;
+  onScroll?: (id: number) => void;
+  onItemSelected?: (id: string) => void;
 }

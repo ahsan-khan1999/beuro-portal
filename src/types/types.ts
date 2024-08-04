@@ -104,7 +104,7 @@ export interface tabArrayTypes {
 export interface stepFormArrayTypes {
   name: string;
   content?: React.ReactNode;
-  icon?: string;
+  icon: string;
   id?: string;
 }
 

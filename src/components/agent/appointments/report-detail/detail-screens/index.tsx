@@ -8,6 +8,7 @@ import { ReportHouseDetail } from "./house-detail";
 import { ReportServicesDetail } from "./services-detail";
 import { ReportAdditionalInfoDetail } from "./additional-detail";
 import { Report } from "@/types/appointments";
+import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 export enum ComponentsType {
   contact,
@@ -119,7 +120,7 @@ export const ReportDetailData = ({
 
   const handleScrollToTop = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    const offset = 380;
+    const offset = 355;
     if (element) {
       const elementPosition =
         element.getBoundingClientRect().top + window.scrollY;
@@ -149,14 +150,16 @@ export const ReportDetailData = ({
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
         <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 2xl:mb-0">
           {tabSection.map((item, index) => (
-            <DetailsTab
-              key={index}
+            <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}
+              index={index + 1}
               icon={item.icon}
               selectedTab={index}
+              key={index}
               onItemSelected={handleScrollToTop}
             />
           ))}
@@ -177,7 +180,7 @@ export const ReportDetailData = ({
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[280px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[320px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <CustomLoader />

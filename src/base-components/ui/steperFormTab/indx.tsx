@@ -16,6 +16,7 @@ export interface StepFormTabProps {
   onItemSelected?: (id: string) => void;
   isToggle?: boolean;
   onClick: () => void;
+  icon: string;
 }
 
 export const SteperFormTab = ({
@@ -31,6 +32,7 @@ export const SteperFormTab = ({
   textClassName,
   isToggle,
   onClick,
+  icon,
 }: StepFormTabProps) => {
   const mainDefaultClasses = combineClasses(
     "flex items-center gap-x-4",
@@ -39,8 +41,8 @@ export const SteperFormTab = ({
 
   const defaultClasses = combineClasses(
     `
-    cursor-pointer px-3 py-[10px] rounded-[40px] bg-white border flex items-center gap-x-3 w-fit
-    ${isSelected ? "border-primary" : "border-gray-300"}
+    cursor-pointer px-3 py-[10px] rounded-[40px] border flex items-center gap-x-3 w-fit
+    ${isSelected ? "border-primary bg-primary" : "border-gray-300"}
   `,
     containerClassName
   );
@@ -48,7 +50,7 @@ export const SteperFormTab = ({
   const defaultTextClasses = combineClasses(
     `
     text-base font-medium
-    ${isSelected ? "text-primary" : "text-[#616161]"}
+    ${isSelected ? "text-white" : "text-[#616161]"}
   `,
     textClassName
   );
@@ -56,7 +58,7 @@ export const SteperFormTab = ({
   return (
     <button onClick={onClick} className={mainDefaultClasses}>
       <div className={defaultClasses}>
-        <span className={defaultTextClasses}>{index}</span>
+        <span dangerouslySetInnerHTML={{ __html: icon }} />
         <span className={defaultTextClasses}>{heading}</span>
       </div>
       {showArrow && <Image src={arrowIcon} alt="arrow icon" />}
