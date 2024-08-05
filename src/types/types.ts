@@ -104,7 +104,7 @@ export interface tabArrayTypes {
 export interface stepFormArrayTypes {
   name: string;
   content?: React.ReactNode;
-  icon?: string;
+  icon: string;
   id?: string;
 }
 
@@ -915,7 +915,7 @@ export type GenerateContactAddressReportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  count: number,
+  addressFieldsLength: number,
   addressFields?: object[],
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];

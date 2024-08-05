@@ -37,6 +37,7 @@ export const SelectBox = ({
   }, [options]);
 
   const search = useRef<string>("");
+  const { t: translate } = useTranslation();
 
   const toggleDropDown = () => {
     setIsOpen((prevState) => !prevState);
@@ -58,11 +59,15 @@ export const SelectBox = ({
       )
     );
   };
-  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+
+  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
   const classes = combineClasses(defaultClasses, className);
-  const { t: translate } = useTranslation();
+
+  const selectedLabel =
+    (field && getLabelByValue(field?.value, option)) ||
+    getLabelByValue(defaultValue, option);
 
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
@@ -73,10 +78,12 @@ export const SelectBox = ({
         }}
         className={`${classes}`}
       >
-        <span className="truncate">
-          {(field && getLabelByValue(field?.value, option)) ||
-            getLabelByValue(defaultValue, option)}
-        </span>
+        {!selectedLabel && (
+          <span className="text-sm text-[#1E1E1E] font-normal truncate">
+            {translate("common.please_choose")}
+          </span>
+        )}
+        <span className="text-sm text-[#1E1E1E] font-normal truncate">{selectedLabel}</span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
           <span
@@ -103,7 +110,6 @@ export const SelectBox = ({
                   width={24}
                   height={8}
                 />
-
                 <input
                   value={search.current}
                   onChange={(e) => handleChange(e.target.value)}
@@ -111,17 +117,15 @@ export const SelectBox = ({
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
-              {option?.map(({ value, label }) => {
-                return (
-                  <li
-                    key={value}
-                    onClick={() => selectedOptionHandler(value)}
-                    className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
-                  >
-                    {label}
-                  </li>
-                );
-              })}
+              {option?.map(({ value, label }) => (
+                <li
+                  key={value}
+                  onClick={() => selectedOptionHandler(value)}
+                  className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
+                >
+                  {label}
+                </li>
+              ))}
             </motion.ul>
           </motion.div>
         )}

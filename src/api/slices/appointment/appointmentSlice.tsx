@@ -105,6 +105,7 @@ export const createReport: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.createAppointmentReport(data);
+
       return response?.data?.data?.Report;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));

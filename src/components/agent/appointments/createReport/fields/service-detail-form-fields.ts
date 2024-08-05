@@ -241,7 +241,7 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
                     type: Field.div,
                     id: "div-field",
                     className:
-                      "mb-0 grid grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-5",
+                      "mb-0 grid md:grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-5",
                     children: [
                       {
                         containerClass: "mb-0",

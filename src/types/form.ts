@@ -235,6 +235,7 @@ export interface CustomCheckBoxFieldProps
   containerClassName?: string;
   textClassName?: string;
   label?: string;
+  checked?: boolean;
 }
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;

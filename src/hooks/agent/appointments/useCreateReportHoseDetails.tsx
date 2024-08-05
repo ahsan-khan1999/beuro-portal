@@ -55,6 +55,7 @@ export const useCreateReportHoseDetails = ({
               kitchenDetails: response?.payload?.kitchenDetails,
               bedRoomDetails: response?.payload?.bedRoomDetails,
               roomDetails: response?.payload?.roomDetails,
+              outDoorDetails: response?.payload?.outDoorDetails,
               basementAtticDetails: response?.payload?.basementAtticDetails,
               specialItemsDetails: response?.payload?.specialItemsDetails,
             });
@@ -67,6 +68,7 @@ export const useCreateReportHoseDetails = ({
         kitchenDetails: reportDetails?.kitchenDetails,
         bedRoomDetails: reportDetails?.bedRoomDetails,
         roomDetails: reportDetails?.roomDetails,
+        outDoorDetails: reportDetails?.outDoorDetails,
         basementAtticDetails: reportDetails?.basementAtticDetails,
         specialItemsDetails: reportDetails?.specialItemsDetails,
       });
@@ -93,6 +95,9 @@ export const useCreateReportHoseDetails = ({
               return [key, convertValues(value, excludeKeys)];
             } else if (excludeKeys.includes(key)) {
               // Exclude specific keys from conversion
+              return [key, value];
+            } else if (value === "") {
+              // Preserve empty strings
               return [key, value];
             } else {
               // Convert value to number if it's numeric

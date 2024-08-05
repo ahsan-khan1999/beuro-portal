@@ -64,6 +64,8 @@ export const useCreateReportAddressDetails = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
+  const { fields: addressFields } = useFieldArray({ control, name: "address" });
+
   useEffect(() => {
     const transformData = (data: any) => {
       return {
@@ -71,66 +73,62 @@ export const useCreateReportAddressDetails = ({
         address: data?.address?.map((item: any) => ({
           ...item,
           lift: item?.lift === true ? "1" : "0",
+          parkingPermit: item?.parkingPermit === "true" ? true : false,
         })),
       };
+    };
+
+    const resetFormWithAddresses = (addresses: any[], labelPrefix: string) => {
+      return addresses.map((item, index) => ({
+        ...item,
+        label: item?.label || `${labelPrefix} ${++index}`,
+      }));
     };
 
     if (report) {
       dispatch(readReportdetails({ params: { filter: report } })).then(
         (response: ReportPromiseActionType) => {
           if (response?.payload) {
-            reset(
-              transformData({
-                fullName: response.payload?.customerDetail?.fullName,
-                email: response.payload.customerDetail?.email,
-                phoneNumber: response.payload.customerDetail?.phoneNumber,
-                address: response.payload?.addressID
-                  ? response?.payload?.addressID?.address?.map(
-                      (item, index) => ({
-                        ...item,
-                        label: item?.label ? item?.label : `Adresse ${++index}`,
-                      })
-                    )
-                  : [],
-              })
-            );
+            const transformedData = transformData({
+              fullName: response.payload?.customerDetail?.fullName,
+              email: response.payload.customerDetail?.email,
+              phoneNumber: response.payload.customerDetail?.phoneNumber,
+              address: resetFormWithAddresses(
+                response.payload?.addressID?.address || [],
+                "Adresse"
+              ),
+            });
+
+            reset(transformedData);
           }
         }
       );
     } else if (reportDetails?.id) {
-      reset(
-        transformData({
-          fullName: reportDetails?.customerDetail?.fullName,
-          email: reportDetails.customerDetail?.email,
-          phoneNumber: reportDetails.customerDetail?.phoneNumber,
-          address: reportDetails?.addressID
-            ? reportDetails?.addressID?.address?.map((item, index) => ({
-                ...item,
-                label: item?.label ? item?.label : `Adresse ${++index}`,
-              }))
-            : [],
-        })
-      );
-    } else {
-      reset(
-        transformData({
-          fullName: appointmentDetails?.leadID?.customerDetail?.fullName,
-          email: appointmentDetails?.leadID?.customerDetail?.email,
-          phoneNumber: appointmentDetails?.leadID?.customerDetail?.phoneNumber,
-          address: appointmentDetails?.leadID?.addressID
-            ? appointmentDetails?.leadID?.addressID?.address?.map(
-                (item, index) => ({
-                  ...item,
-                  label: item?.label ? item?.label : `Adresse ${++index}`,
-                })
-              )
-            : [],
-        })
-      );
-    }
-  }, [reportDetails?.id, report]);
+      const transformedData = transformData({
+        fullName: reportDetails?.customerDetail?.fullName,
+        email: reportDetails.customerDetail?.email,
+        phoneNumber: reportDetails.customerDetail?.phoneNumber,
+        address: resetFormWithAddresses(
+          reportDetails?.addressID?.address || [],
+          "Adresse"
+        ),
+      });
 
-  const { fields: addressFields } = useFieldArray({ control, name: "address" });
+      reset(transformedData);
+    } else {
+      const transformedData = transformData({
+        fullName: appointmentDetails?.leadID?.customerDetail?.fullName,
+        email: appointmentDetails?.leadID?.customerDetail?.email,
+        phoneNumber: appointmentDetails?.leadID?.customerDetail?.phoneNumber,
+        address: resetFormWithAddresses(
+          appointmentDetails?.leadID?.addressID?.address || [],
+          "Adresse"
+        ),
+      });
+
+      reset(transformedData);
+    }
+  }, [appointmentDetails?.id, reportDetails?.id, report]);
 
   const addressFieldsLength = addressFields.length || 1;
 

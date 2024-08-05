@@ -160,6 +160,7 @@
     "file": "Please Select a valid file format"
   },
   "validationMessages": {
+    "unauthorized":"You do not have permission",
     "required": "This field is required",
     "nonexistent": "nonexistent",
     "already_exists": "{0} with this {1} already exists",
@@ -1253,6 +1254,7 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+    "please_choose":"Please Choose",
     "yes": "Yes",
     "no": "No",
     "upload_button": "Upload",

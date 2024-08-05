@@ -24,7 +24,10 @@ import { Service } from "@/types/service";
 import { Total } from "@/types/offers";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import { readTaxSettings } from "@/api/slices/settingSlice/settings";
+import {
+  
+  readTaxSettings,
+} from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
@@ -40,7 +43,7 @@ export const useAddServiceDetails = (
   });
 
   const dispatch = useAppDispatch();
-  const { systemSettings } = useAppSelector((state) => state.settings);
+  const { systemSettings, tax } = useAppSelector((state) => state.settings);
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
@@ -53,7 +56,6 @@ export const useAddServiceDetails = (
     ) || [ServiceType.EXISTING_SERVICE]
   );
 
-  const { tax } = useAppSelector((state) => state.settings);
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {

@@ -135,6 +135,7 @@ const OffersDetailsData = ({
 
   const customerType = offerDetails?.leadID?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
   const name =
     customerType === 1
       ? offerDetails?.leadID?.customerDetail?.companyName

@@ -13,6 +13,7 @@ export const LeadsAddressDetailsData = ({
 }) => {
   const { leadDetails } = useAppSelector((state) => state.lead);
   const { t: translate } = useTranslation();
+  const addressData = leadDetails?.addressID?.address || [{}];
 
   return (
     <LeadsCardLayout>
@@ -65,7 +66,7 @@ export const LeadsAddressDetailsData = ({
         )}
       </div>
 
-      {leadDetails?.addressID?.address?.map((item, index) => (
+      {addressData?.map((item, index) => (
         <div className="py-3 px-6" key={index}>
           <h4 className="text-[#1E1E1E] text-base font-semibold mb-[10px]">
             {item?.label}

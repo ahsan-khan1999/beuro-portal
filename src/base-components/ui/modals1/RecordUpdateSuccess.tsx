@@ -36,7 +36,7 @@ const RecordUpdateSuccess = ({
         <div className="flex justify-between space-x-4 mt-[32px] mb-5 lg:mb-[68px]">
           <button
             onClick={cancelHandler}
-            className="bg-[#BFBFBF] cursor-pointer w-[100px] md:w-[150px] rounded-lg px-4 text-white text-base font-medium hover:bg-buttonHover"
+            className="bg-[#BFBFBF] cursor-pointer w-[100px] md:w-[150px] rounded-lg px-4 text-dark text-base font-medium hover:bg-buttonHover hover:text-white"
           >
             {translate("common.cancel_button")}
           </button>
