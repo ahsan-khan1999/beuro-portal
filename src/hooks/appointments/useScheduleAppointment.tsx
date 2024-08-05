@@ -57,8 +57,6 @@ export const useScheduleAppointment = ({
     register,
     handleSubmit,
     control,
-    setValue,
-    watch,
     reset,
     formState: { errors },
   } = useForm<FieldValues>({

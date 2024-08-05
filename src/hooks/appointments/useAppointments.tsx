@@ -21,7 +21,7 @@ import { Appointments } from "@/types/appointments";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 
 export const useAppointments = () => {
-  const { loading, isLoading, totalCount, appointment } = useAppSelector(
+  const { loading, isLoading, totalCount } = useAppSelector(
     (state) => state.appointment
   );
 
@@ -154,6 +154,7 @@ export const useAppointments = () => {
     appointmentStatus: string,
     type: string
   ) => {
+
     if (type === "appointment") {
       const currentItem = currentPageRows.find((item) => item.id === id);
 

@@ -24,6 +24,7 @@ export const DropDown = ({
   isLead,
   isOffer,
   isAdminCustomer,
+  isContract,
 }: DropDownProps & {
   isLastIndex?: boolean;
   isSecondLastIndex?: boolean;
@@ -31,6 +32,7 @@ export const DropDown = ({
   isLead?: boolean;
   isOffer?: boolean;
   isAdminCustomer?: boolean;
+  isContract?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
@@ -92,6 +94,7 @@ export const DropDown = ({
               isOffer={isOffer}
               isLead={isLead}
               isAdminCustomer={isAdminCustomer}
+              isContract={isContract}
             />
           )}
         </AnimatePresence>

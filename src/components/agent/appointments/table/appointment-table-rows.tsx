@@ -107,22 +107,9 @@ export const AppointmentTableRows = ({
                     dropDownTextClassName="text-white text-base font-medium me-1"
                     dropDownItemsContainerClassName="w-full"
                     dropDownIconClassName="text-white"
-                    isThirdLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 3
-                    }
-                    isSecondLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 2
-                    }
-                    isLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 1
-                    }
-                    isLead={true}
+                    isSecondLastIndex={index === dataToAdd?.length - 2}
+                    isLastIndex={index === dataToAdd?.length - 1}
+                    isContract={true}
                   />
                 </div>
 

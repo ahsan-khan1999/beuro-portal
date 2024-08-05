@@ -27,9 +27,8 @@ export const useReportDetails = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const { loading, reportDetails, appointmentDetails } = useAppSelector(
-    (state) => state.appointment
-  );
+  const { isLoading, loading, reportDetails, appointmentDetails } =
+    useAppSelector((state) => state.appointment);
 
   const { systemSettings } = useAppSelector((state) => state.settings);
 
@@ -182,6 +181,7 @@ export const useReportDetails = () => {
   return {
     router,
     loading,
+    isLoading,
     translate,
     renderModal,
     reportDetails,
@@ -193,6 +193,6 @@ export const useReportDetails = () => {
     handleUpdateDiscount,
     systemSettings,
     defaultUpdateModal,
-    handleCreateReport
+    handleCreateReport,
   };
 };
