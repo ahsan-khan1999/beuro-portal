@@ -1,6 +1,6 @@
 import { SteperFormTab } from "@/base-components/ui/steperFormTab/indx";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContactAndAddressReport } from "./forms/contact-and-address-form";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -16,16 +16,51 @@ const CreateReportDetails = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { modal } = useAppSelector((state) => state.global);
-  let tab: AppointmentReportsFormStages =
+  let initialTab: AppointmentReportsFormStages =
     AppointmentReportsFormStages.CONTACT_AND_ADDRESS;
 
   if (router?.query?.tab) {
-    tab = Number(router.query.tab) as AppointmentReportsFormStages;
+    initialTab = Number(router.query?.tab) as AppointmentReportsFormStages;
   }
 
-  const [tabType, setTabType] = useState<AppointmentReportsFormStages>(
-    tab || AppointmentReportsFormStages.CONTACT_AND_ADDRESS
-  );
+  const [tabType, setTabType] =
+    useState<AppointmentReportsFormStages>(initialTab);
+
+  useEffect(() => {
+    if (router?.query?.tab) {
+      const tab = Number(router.query.tab) as AppointmentReportsFormStages;
+      setTabType(tab);
+    }
+  }, [router?.query?.tab]);
+
+  const updateQueryParam = (tab: AppointmentReportsFormStages) => {
+    const cleanQuery = { ...router.query, tab };
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: cleanQuery,
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
+
+  const handleNextTab = () => {
+    if (tabType === AppointmentReportsFormStages.ADDITIONAL_INFO) {
+      handleReportCreated();
+      return;
+    }
+    const nextTab = tabType + 1;
+    setTabType(nextTab);
+    updateQueryParam(nextTab);
+  };
+
+  const handleBack = () => {
+    const prevTab = tabType - 1;
+    setTabType(prevTab);
+    updateQueryParam(prevTab);
+  };
 
   const tabSection: stepFormArrayTypes[] = [
     {
@@ -89,25 +124,12 @@ const CreateReportDetails = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleNextTab = (currentComponent: AppointmentReportsFormStages) => {
-    if (tabType === AppointmentReportsFormStages.ADDITIONAL_INFO) {
-      handleReportCreated();
-      return;
-    }
-    setTabType(currentComponent);
-  };
-
-  const handleBack = (currentComponent: AppointmentReportsFormStages) => {
-    setTabType(currentComponent);
-  };
-
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const handleReportSuccessRoute = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
-
     router.push({
       pathname: "/agent/appointments",
       query: { status: "None" },
@@ -169,11 +191,13 @@ const CreateReportDetails = () => {
               heading={item.name}
               icon={item.icon}
               isToggle={true}
-              onClick={() => setTabType(index)}
+              onClick={() => {
+                setTabType(index);
+                updateQueryParam(index as AppointmentReportsFormStages);
+              }}
             />
           ))}
         </div>
-
         {componentLookUp[tabType as keyof typeof componentLookUp]}
       </div>
       {renderModal()}

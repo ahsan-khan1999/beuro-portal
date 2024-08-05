@@ -915,7 +915,7 @@ export type GenerateContactAddressReportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  count: number,
+  addressFieldsLength: number,
   addressFields?: object[],
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];

@@ -10,6 +10,7 @@ export const CustomCheckBoxField = ({
   textClassName,
   label,
   description,
+  checked = false,
 }: CustomCheckBoxFieldProps) => {
   const containerDefaultClasses = "flex items-center gap-x-[12px]";
   const containerClasses = combineClasses(

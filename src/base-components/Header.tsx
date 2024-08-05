@@ -49,14 +49,33 @@ const Header = () => {
     }
   }, [followUp]);
 
+  // useEffect(() => {
+  //   if (
+  //     user &&
+  //     user?.role !== "Admin" &&
+  //     user?.role !== "Agent" &&
+  //     !systemSettings
+  //   ) {
+  //     dispatch(readSystemSettings());
+  //     dispatch(readFollowUp({ params: { filter: { status: "10" } } })).then(
+  //       (response: any) => {
+  //         setTodayCount(response?.payload?.totalCount);
+  //       }
+  //     );
+  //   }
+  // }, [user]);
+
   useEffect(() => {
+    if (user && user?.role === "Agent" && !systemSettings) {
+      dispatch(readSystemSettings());
+    }
+
     if (
       user &&
       user?.role !== "Admin" &&
       user?.role !== "Agent" &&
       !systemSettings
     ) {
-      dispatch(readSystemSettings());
       dispatch(readFollowUp({ params: { filter: { status: "10" } } })).then(
         (response: any) => {
           setTodayCount(response?.payload?.totalCount);

@@ -76,19 +76,22 @@ export const contactAgentReportFormField: GenerateContactReportFormField = (
 };
 
 export const ContactReportAddressFormField: GenerateContactAddressReportFormField =
-  (register, loading, control, count, addressFields) => {
+  (register, loading, control, addressFieldsLength, addressFields) => {
     const formField: FormField[] = [];
     const { t: translate } = useTranslation();
 
     if (!addressFields) return formField;
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < addressFieldsLength; i++) {
       formField.push({
-        containerClass: "mt-5 mb-2",
         field: {
-          type: Field.span,
+          type: Field.input,
+          inputType: "text",
           id: `address.${i}.label`,
           name: `address.${i}.label`,
-          text: `${translate("agent.house_detail_fields.kuche")}`,
+          register,
+          disabled: true,
+          className:
+            "!p-0 !bg-transparent h-6 mt-5 mb-2 !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
         },
       });
 
@@ -224,6 +227,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 )}`,
                 textClassName: "text-sm text-[#344054] font-medium",
                 register,
+                checked: true,
               },
             },
           ],

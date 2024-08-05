@@ -160,12 +160,14 @@ export const readTaxSettings: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("user/tax/setting", async (args, thunkApi) => {
     try {
       const response = await apiServices.readTaxSettings({});
+
       return response?.data?.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
     }
   });
+
 export const createTaxSetting: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("user/tax/settings", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

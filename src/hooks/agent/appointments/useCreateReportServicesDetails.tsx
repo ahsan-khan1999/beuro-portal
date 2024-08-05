@@ -16,7 +16,10 @@ import { Service } from "@/types/service";
 import { Total } from "@/types/offers";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import { readTaxSettings } from "@/api/slices/settingSlice/settings";
+import {
+  readSystemSettings,
+  readTaxSettings,
+} from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";

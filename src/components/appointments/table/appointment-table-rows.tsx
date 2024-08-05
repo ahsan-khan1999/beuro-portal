@@ -148,7 +148,7 @@ export const AppointmentTableRows = ({
                         : item?.appointmentStatus === "Completed"
                         ? "bg-[#45C769]"
                         : "bg-[#D80027]"
-                    } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                    } w-full rounded-lg px-4 py-[5px] flex items-center justify-center`}
                     dropDownTextClassName="text-white text-base font-medium me-1"
                     dropDownItemsContainerClassName="w-full"
                     dropDownIconClassName="text-white"
@@ -178,7 +178,7 @@ export const AppointmentTableRows = ({
                         ? "bg-primary"
                         : "bg-[#FB9600]"
                     }
-                  } text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
+                  } text-white px-2 py-2 text-center rounded-md min-w-[70px] w-full text-sm`}
                   >
                     {item.leadID?.isOfferCreated === true
                       ? translate(`leads.created`)
@@ -213,7 +213,7 @@ export const AppointmentTableRows = ({
                         item?.agent
                       )
                     }
-                    className="bg-white text-primary w-full border border-primary"
+                    className="bg-white text-primary w-full border border-primary py-[5px] !h-fit"
                     text={translate("appointments.reschedule_btn")}
                     id="view reports"
                     iconAlt="view reports"

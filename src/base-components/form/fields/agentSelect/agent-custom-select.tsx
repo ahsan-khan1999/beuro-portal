@@ -67,6 +67,10 @@ export const AgentSelectBox = ({
   const classes = combineClasses(defaultClasses, className);
   const { t: translate } = useTranslation();
 
+  const selectedLabel =
+    (field && getAgentLabelByValue(field.value, option)) ||
+    getAgentLabelByValue(defaultValue, option);
+
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
@@ -76,7 +80,13 @@ export const AgentSelectBox = ({
         }}
         className={`${classes}`}
       >
-        <span className="truncate flex items-center gap-x-2">
+        {!selectedLabel && (
+          <span className="text-sm text-[#1E1E1E] font-normal truncate">
+            {translate("common.please_choose")}
+          </span>
+        )}
+
+        <span className="truncate flex items-center gap-x-2 text-sm text-[#1E1E1E] font-normal">
           {(field && getAgentLabelByValue(field.value, option)) ||
             getAgentLabelByValue(defaultValue, option)}
         </span>

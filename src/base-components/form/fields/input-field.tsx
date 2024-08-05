@@ -27,7 +27,7 @@ export const InputField = ({
   const [inputFocus, setInputFocus] = useState(false);
   const defaultClasses = `border border-borderColor rounded-lg w-full h-12 !bg-white ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
-  } py-[10px] outline-none text-dark text-sm focus:border-primary`;
+  } pt-[10px] pb-[10px] outline-none text-dark text-sm focus:border-primary`;
 
   const classes = combineClasses(defaultClasses, className);
   useEffect(() => setValue && setValue(name, value), []);
