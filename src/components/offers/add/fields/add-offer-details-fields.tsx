@@ -20,6 +20,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
+  onSearchCustomer,
   {
     customerType,
     type,
@@ -128,7 +129,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 value: staticEnums.Gender[item],
                 label: translate(`gender.${item}`),
               })),
-
               control,
               value: "",
             },
@@ -146,7 +146,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "fullName",
               name: "fullName",
-
               placeholder: `${translate("offers.placeholders.name")}`,
               register,
               // value: leadDetails && leadDetails.customerDetail?.fullName
@@ -318,7 +317,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "address.postalCode",
               name: "address.postalCode",
               placeholder: `${translate("offers.placeholders.post_code")}`,
-
               register,
               value:
                 offerDetails && offerDetails?.customerID?.address?.postalCode,
@@ -383,7 +381,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         inputType: "text",
         id: "companyName",
         name: "companyName",
-        placeholder: "Please Enter Company Name",
         register,
         setValue: setValue,
         value: offerDetails?.leadID?.customerDetail?.companyName || "",
@@ -426,6 +423,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
+        isLocalCustomer: true,
+        onSearchCustomer: (value: string) => onSearchCustomer(value),
         value: offerDetails?.id ? offerDetails?.leadID?.customerID : "",
         setValue,
       },
@@ -464,13 +463,11 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
           label: item.refID,
         })),
         control,
-        // value:""
         value:
           (offerDetails?.id && offerDetails?.leadID?.id) ||
           (lead && lead?.length > 0 && lead?.at(0)?.id) ||
           leadID ||
           leadID,
-        // disabled: offerDetails?.leadID?.id ? true : false,
       },
     };
     const divField = formField[fieldLeadIndex]?.field as DivProps;

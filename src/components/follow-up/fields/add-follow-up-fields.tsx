@@ -6,6 +6,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
+  onSearchCustomer,
   { customer, lead, followUps, onCustomerSelect },
   onItemChange
 ) => {
@@ -44,6 +45,8 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
                 value: item?.id.toString(),
               })),
               onItemChange: () => onItemChange && onItemChange(),
+              isLocalCustomer: true,
+              onSearchCustomer: (value) => onSearchCustomer(value),
               control,
             },
           },

@@ -90,6 +90,9 @@ const LeadsDetailsCardData = ({
                     leadID: {
                       ...leadDetails,
                       customerID: leadDetails?.customerID,
+                      customerDetails: {
+                        ...leadDetails.customerDetail,
+                      },
                     },
                     serviceDetail: {
                       serviceDetail: leadDetails?.otherServices,

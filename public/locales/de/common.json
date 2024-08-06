@@ -1160,6 +1160,7 @@
       "date": "Datum",
       "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "no_customer_found": "Kein Kunde gefunden",
     "details": "Einzelheiten",
     "follow_up_completed": "Bitte kontaktieren Sie den Kunden nach 10 Minuten.",
     "invoice_cards": {
@@ -1304,7 +1305,7 @@
     "change_button": "Ändern",
     "image_upload_heading": "Ziehen Sie Ihre Dateien hierher oder hängen Sie sie an",
     "note": "Hinweis",
-    "search": "Suchen...",
+    "search": "Suchen",
     "drag_table": "Zum Scrollen in der Tabelle ziehen",
     "sort_button": "Sortieren",
     "source": "Leadquellen",

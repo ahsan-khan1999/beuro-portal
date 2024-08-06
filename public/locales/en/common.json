@@ -1168,6 +1168,7 @@
       "date": "Date",
       "success_signed_offer": "Operation Successful"
     },
+    "no_customer_found": "No customer found",
     "details": "Details",
     "follow_up_completed": "Please contact the customer after 10 minutes.",
     "invoice_cards": {
@@ -1312,7 +1313,7 @@
     "change_button": "Change",
     "image_upload_heading": "Drop or Attach your files here",
     "note": "Note",
-    "search": "Search...",
+    "search": "Search",
     "drag_table": "Drag to scroll on the table",
     "sort_button": "Sort By",
     "source": "Lead Source",

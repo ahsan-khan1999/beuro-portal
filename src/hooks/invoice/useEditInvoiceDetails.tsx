@@ -30,7 +30,6 @@ import {
   EditInvoiceDetailsFormField,
   EditInvoiceDetailsSubmitFormField,
 } from "@/components/invoice/edit/fields/edit-invoice-offer-details-fields";
-import { Customers } from "@/types";
 
 export const useEditInvoiceDetails = ({
   handleNext,
@@ -120,11 +119,10 @@ export const useEditInvoiceDetails = ({
 
   const type = watch("type");
   const customerType = watch("customerType");
-  // const customerID = watch("customerID");
   const selectedContent = watch("content");
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    // dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -180,6 +178,10 @@ export const useEditInvoiceDetails = ({
     name: "date",
   });
 
+  const handleSearchCustomer = (value: string) => {
+    dispatch(readCustomer({ params: { filter: { text: value } } }));
+  };
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
@@ -212,6 +214,7 @@ export const useEditInvoiceDetails = ({
     register,
     loading,
     control,
+    handleSearchCustomer,
     {
       customerType,
       type,

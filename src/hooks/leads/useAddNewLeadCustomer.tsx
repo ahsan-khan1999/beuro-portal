@@ -25,9 +25,9 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     (state) => state.customer
   );
 
-  useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+  // }, []);
 
   const onCancel = () => {
     router.pathname = "/leads";
@@ -54,12 +54,17 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const type = watch("type");
   const gender = watch("gender");
 
+  console.log(type);
+
+  const handleSearchCustomer = (value: string) => {
+    dispatch(readCustomer({ params: { filter: { text: value } } }));
+  };
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
       dispatch(setCustomerDetails(selectedCustomers));
-
       reset({
         ...selectedCustomers,
         type: type,
@@ -70,13 +75,13 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   };
 
   useEffect(() => {
-    if (leadDetails.id) {
+    if (leadDetails?.id) {
       reset({
+        // type: "Existing Customer",
+        // type: leadDetails.type,
         fullName: leadDetails.customerDetail?.fullName,
-        type: leadDetails.type,
         customer: leadDetails.customerID,
         customerID: leadDetails.customerID,
-
         customerType: getKeyByValue(
           staticEnums["CustomerType"],
           leadDetails.customerDetail?.customerType
@@ -89,14 +94,15 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
       });
     } else {
-      setValue("type", "New Customer");
+      // setValue("type", "New Customer");
     }
-  }, [leadDetails.id]);
+  }, [leadDetails?.id]);
 
   const fields = AddNewCustomerLeadFormField(
     register,
     loading,
     control,
+    handleSearchCustomer,
     {
       customerType,
       type,

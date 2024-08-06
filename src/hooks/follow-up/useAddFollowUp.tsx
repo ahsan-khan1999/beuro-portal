@@ -27,7 +27,6 @@ export const useAddFollowUp = (
 
   useEffect(() => {
     dispatch(readFollowUpSettings({}));
-    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const schema = generateAddFollowUpValidation(translate);
@@ -63,11 +62,21 @@ export const useAddFollowUp = (
     }
   }, [customerID]);
 
-  const fields = AddFollowUpFormField(register, loading, control, {
-    customer,
-    lead: lead,
-    followUps,
-  });
+  const handleSearchCustomer = (value: string) => {
+    dispatch(readCustomer({ params: { filter: { text: value } } }));
+  };
+
+  const fields = AddFollowUpFormField(
+    register,
+    loading,
+    control,
+    handleSearchCustomer,
+    {
+      customer,
+      lead: lead,
+      followUps,
+    }
+  );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(
@@ -89,8 +98,6 @@ export const useAddFollowUp = (
     handleSubmit,
     errors,
     error,
-    // customer,
-    // lead,
     translate,
   };
 };
