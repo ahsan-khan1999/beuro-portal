@@ -54,8 +54,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const type = watch("type");
   const gender = watch("gender");
 
-  console.log(type);
-
   const handleSearchCustomer = (value: string) => {
     dispatch(readCustomer({ params: { filter: { text: value } } }));
   };
@@ -77,8 +75,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   useEffect(() => {
     if (leadDetails?.id) {
       reset({
-        // type: "Existing Customer",
-        // type: leadDetails.type,
+        type: leadDetails.type,
         fullName: leadDetails.customerDetail?.fullName,
         customer: leadDetails.customerID,
         customerID: leadDetails.customerID,
@@ -94,7 +91,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
       });
     } else {
-      // setValue("type", "New Customer");
+      setValue("type", "New Customer");
     }
   }, [leadDetails?.id]);
 

@@ -60,7 +60,7 @@ export const SelectBox = ({
     );
   };
 
-  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
 
@@ -116,7 +116,7 @@ export const SelectBox = ({
                 {isLocalCustomer && (
                   <div
                     onClick={handleSearch}
-                    className="bg-primary hover:bg-buttonHover text-white py-1 px-2 rounded-lg mx-2 cursor-pointer min-w-[75px]"
+                    className="bg-primary hover:bg-buttonHover text-white rounded-lg mx-2 text-center py-1 cursor-pointer w-fit min-w-[80px]"
                   >
                     {translate("common.search")}
                   </div>
