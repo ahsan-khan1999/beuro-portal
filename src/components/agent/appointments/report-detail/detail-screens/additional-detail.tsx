@@ -22,7 +22,7 @@ export const ReportAdditionalInfoDetail = ({
         <h2 className="text-[#fff] text-xl font-medium">
           {translate("appointments.report_detail.additional_detail")}
         </h2>
-        {!isCompanyAppointment && (
+        {/* {!isCompanyAppointment && ( */}
           <button
             onClick={() =>
               router.push({
@@ -35,7 +35,7 @@ export const ReportAdditionalInfoDetail = ({
             <EditIcon />
             {translate("offers.address_details.edit_button")}
           </button>
-        )}
+        {/* )} */}
       </div>
 
       <div className="px-5 py-2 pb-5">

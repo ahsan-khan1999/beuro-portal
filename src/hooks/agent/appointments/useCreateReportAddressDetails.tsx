@@ -36,7 +36,7 @@ export const useCreateReportAddressDetails = ({
     (state) => state.appointment
   );
 
-  const { report } = router.query;
+  const { report, companyAppointment } = router.query;
 
   const handleCancel = () => {
     router.push({

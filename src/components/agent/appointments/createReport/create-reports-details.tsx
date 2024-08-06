@@ -47,10 +47,6 @@ const CreateReportDetails = () => {
   };
 
   const handleNextTab = () => {
-    // if (tabType === AppointmentReportsFormStages.ADDITIONAL_INFO) {
-    //   handleReportCreated();
-    //   return;
-    // }
     const nextTab = tabType + 1;
     setTabType(nextTab);
     updateQueryParam(nextTab);

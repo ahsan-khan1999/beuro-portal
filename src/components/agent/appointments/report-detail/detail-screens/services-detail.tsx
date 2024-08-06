@@ -77,8 +77,6 @@ export const ReportServicesDetail = ({
       ? reportDetail?.discountAmount
       : discountAmount;
 
-  console.log(currency, "currency");
-
   return (
     <LeadsCardLayout>
       <div
@@ -88,7 +86,7 @@ export const ReportServicesDetail = ({
         <h2 className="text-[#fff] text-xl font-medium">
           {translate("offers.service_details.main_heading")}
         </h2>
-        {!isCompanyAppointment && (
+        {/* {!isCompanyAppointment && ( */}
           <button
             onClick={() =>
               router.push({
@@ -101,7 +99,7 @@ export const ReportServicesDetail = ({
             <EditIcon />
             {translate("offers.service_details.edit_button")}
           </button>
-        )}
+        {/* )} */}
       </div>
       <div className="py-3 px-5">
         <div className="rounded-lg px-2 pt-3 bg-[#EDF4FF]">
