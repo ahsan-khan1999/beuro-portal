@@ -19,11 +19,7 @@ const index = () => {
     };
   }, []);
 
-  return (
-    <div>
-      <OfferAddDetails />
-    </div>
-  );
+  return <OfferAddDetails />;
 };
 
 export default index;

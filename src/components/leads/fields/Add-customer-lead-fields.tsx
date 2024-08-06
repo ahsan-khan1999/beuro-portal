@@ -46,14 +46,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "New Customer",
-                    label: `${translate(
-                      "leads.customer_details.new_customer"
-                    )}`,
+                    label: `${translate("offers.offer_details.new_customer")}`,
                     id: "type",
                     name: "type",
                     register,
-                    checked: type === "New Customer",
                     colorClasses: "bg-transparent",
+                    checked: type === "New Customer",
                   },
                 },
                 {
@@ -61,14 +59,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "Existing Customer",
-                    label: `${translate(
-                      "leads.customer_details.exit_customer"
-                    )}`,
+                    label: `${translate("offers.offer_details.exit_customer")}`,
                     id: "type",
                     name: "type",
                     register,
-                    checked: type === "Existing Customer",
                     colorClasses: "bg-transparent",
+                    checked: type === "Existing Customer",
                   },
                 },
               ],
@@ -139,7 +135,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "fullName",
               name: "fullName",
-
               placeholder: `${translate("leads.placeholders.name")}`,
               register,
               // value: leadDetails && leadDetails.customerID?.fullName
@@ -157,7 +152,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "email",
               name: "email",
               inputType: "text",
-
               placeholder: `${translate("leads.placeholders.email")}`,
               register,
               value: leadDetails && leadDetails.customerDetail?.email,
@@ -231,7 +225,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "address.streetNumber",
               name: "address.streetNumber",
-
               placeholder: `${translate("leads.placeholders.street")}`,
               register,
               value:
@@ -332,12 +325,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   ];
   // customer type
   const fieldIndex = formField.findIndex(
-    (field) =>
+    (field: any) =>
       field?.field?.type === Field.div &&
-      //@ts-expect-error
       Array.isArray(field?.field?.children) &&
-      //@ts-expect-error
-      field?.field?.children.some((child) => child?.field?.id == "fullName")
+      field?.field?.children.some(
+        (child: any) => child?.field?.id == "fullName"
+      )
   );
 
   if (fieldIndex !== -1 && customerType === "company") {
@@ -355,28 +348,25 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         inputType: "text",
         id: "companyName",
         name: "companyName",
-        placeholder: "Please Enter Company Name",
         register,
         setValue: setValue,
         value: leadDetails?.customerDetail?.companyName || "",
       },
     };
-    // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
-    const divField = formField[fieldIndex]?.field as DivProps; // Assert type
+    const divField = formField[fieldIndex]?.field as DivProps;
     if (divField && Array.isArray(divField.children)) {
-      //@ts-expect-error
-      divField.children.splice(fieldIndex + 3, 0, companyNameField);
+      divField.children.splice(fieldIndex + 3, 0, companyNameField as any);
     }
   }
 
   // type
   const fieldTypeIndex = formField.findIndex(
-    (field) =>
+    (field: any) =>
       field?.field?.type === Field.div &&
-      //@ts-expect-error
       Array.isArray(field?.field?.children) &&
-      //@ts-expect-error
-      field?.field?.children.some((child) => child?.field?.id == "customerType")
+      field?.field?.children.some(
+        (child: any) => child?.field?.id == "customerType"
+      )
   );
 
   if (fieldIndex !== -1 && type === "Existing Customer") {
@@ -396,23 +386,20 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
           value: item.id,
           label: item.fullName,
         })),
-
+        control,
         onItemChange: onCustomerSelect,
         isLocalCustomer: true,
-        onSearchCustomer: (value:string) => onSearchCustomer(value),
-        control,
+        onSearchCustomer: (value: string) => onSearchCustomer(value),
         value: leadDetails?.id
           ? leadDetails?.customerID
           : customerDetails && customerDetails?.id,
         setValue,
       },
     };
-    // formField[fieldIndex]?.field?.children?.splice(fieldIndex + 2, 0, companyNameField)
 
-    const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps; // Assert type
+    const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps;
     if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
-      //@ts-expect-error
-      divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField);
+      divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField as any);
     }
   }
 
