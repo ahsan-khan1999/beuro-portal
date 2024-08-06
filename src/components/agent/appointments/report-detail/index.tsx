@@ -18,7 +18,6 @@ export const ReportDetails = () => {
     defaultUpdateModal,
     appointmentDetails,
     handleCreateReport,
-    
   } = useReportDetails();
 
   return (

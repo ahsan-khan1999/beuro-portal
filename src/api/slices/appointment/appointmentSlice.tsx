@@ -173,6 +173,8 @@ const appointmentSlice = createSlice({
     });
     builder.addCase(readAppointments.fulfilled, (state, action) => {
       state.appointment = action.payload;
+      state.lastPage = action.payload.lastPage;
+      state.totalCount = action.payload.totalCount;
       state.isLoading = false;
     });
     builder.addCase(readAppointments.rejected, (state) => {

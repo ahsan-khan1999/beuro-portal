@@ -11,11 +11,13 @@ import { Report } from "@/types/appointments";
 export interface ServiceDetailDataProps {
   reportDetail: Report;
   currency?: string;
+  isCompanyAppointment?: boolean;
 }
 
 export const ReportServicesDetail = ({
   reportDetail,
   currency,
+  isCompanyAppointment,
 }: ServiceDetailDataProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -75,6 +77,8 @@ export const ReportServicesDetail = ({
       ? reportDetail?.discountAmount
       : discountAmount;
 
+  console.log(currency, "currency");
+
   return (
     <LeadsCardLayout>
       <div
@@ -84,20 +88,22 @@ export const ReportServicesDetail = ({
         <h2 className="text-[#fff] text-xl font-medium">
           {translate("offers.service_details.main_heading")}
         </h2>
-        <button
-          onClick={() =>
-            router.push({
-              pathname: "/agent/appointments/update-report",
-              query: { report: reportDetail?.appointmentID?.id, tab: 2 },
-            })
-          }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
-        >
-          <EditIcon />
-          {translate("offers.service_details.edit_button")}
-        </button>
+        {!isCompanyAppointment && (
+          <button
+            onClick={() =>
+              router.push({
+                pathname: "/agent/appointments/update-report",
+                query: { report: reportDetail?.appointmentID?.id, tab: 2 },
+              })
+            }
+            className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
+          >
+            <EditIcon />
+            {translate("offers.service_details.edit_button")}
+          </button>
+        )}
       </div>
-      <div className="py-3 px-6">
+      <div className="py-3 px-5">
         <div className="rounded-lg px-2 pt-3 bg-[#EDF4FF]">
           <TableLayout>
             <div className="grid xs:grid-cols-[minmax(300px,_100%)_minmax(400px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_3fr)_minmax(110px,_4fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] xlg:grid-cols-[minmax(120px,_3fr)_minmax(130px,_4fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_3fr)_minmax(120px,_4fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] pb-5">
@@ -109,7 +115,6 @@ export const ReportServicesDetail = ({
                   "offers.service_details.detail_headings.description"
                 )}
               </span>
-
               <span className="text-sm font-medium">
                 {translate("offers.service_details.detail_headings.count")}
               </span>
@@ -120,11 +125,9 @@ export const ReportServicesDetail = ({
                 {translate("offers.service_details.detail_headings.price")}(
                 {currency})
               </span>
-
               <span className="text-sm font-medium">
                 {translate("offers.service_details.detail_headings.discount")}
               </span>
-
               <span className="text-sm font-medium">
                 {translate(
                   "offers.service_details.detail_headings.total_price"

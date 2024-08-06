@@ -8,6 +8,7 @@ import { Button } from "@/base-components/ui/button/button";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import dummyAgent from "@/assets/pngs/dummyAgent.png";
+import { useRouter } from "next/router";
 
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
@@ -32,6 +33,7 @@ export const AppointmentTableRows = ({
   onStatusChange,
   onAppointmentSchedule,
 }: ApointmentsTableProps) => {
+  const router = useRouter();
   const { t: translate } = useTranslation();
 
   const itemsValue = [
@@ -58,6 +60,14 @@ export const AppointmentTableRows = ({
             ? item.agent.picture
             : `/${item.agent.picture}`
           : dummyAgent;
+
+        const handleViewReport = () => {
+          router.push({
+            pathname: "/appointments/details",
+            query: { ...router.query, appointment: item?.id },
+          });
+        };
+
         // const customerType = item?.customerDetail
         //   ?.customerType as keyof (typeof staticEnums)["CustomerType"];
         // const name =
@@ -177,7 +187,7 @@ export const AppointmentTableRows = ({
                 {item?.isReportSubmitted ? (
                   <Button
                     inputType="button"
-                    onClick={() => {}}
+                    onClick={handleViewReport}
                     className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
                     text={translate("appointments.view_reports_btn")}
                     id="view reports"

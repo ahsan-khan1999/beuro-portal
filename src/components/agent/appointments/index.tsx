@@ -32,7 +32,7 @@ export default function AgentAppointments() {
       onStatusChange={handleStatusUpdate}
       onAppointmentCreate={handleAppointmentCreate}
     />,
-    currentPageRows?.length > 0,
+    totalCount !== 0,
     isLoading
   );
 

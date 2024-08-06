@@ -66,7 +66,7 @@ const Header = () => {
   // }, [user]);
 
   useEffect(() => {
-    if (user && user?.role === "Agent" && !systemSettings) {
+    if (user?.role === "Agent" && !systemSettings) {
       dispatch(readSystemSettings());
     }
 
@@ -76,6 +76,7 @@ const Header = () => {
       user?.role !== "Agent" &&
       !systemSettings
     ) {
+      dispatch(readSystemSettings());
       dispatch(readFollowUp({ params: { filter: { status: "10" } } })).then(
         (response: any) => {
           setTodayCount(response?.payload?.totalCount);

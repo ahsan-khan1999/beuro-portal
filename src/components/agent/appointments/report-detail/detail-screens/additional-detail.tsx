@@ -4,10 +4,12 @@ import { useRouter } from "next/router";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 export interface ReportAdditionalDetailProps {
+  isCompanyAppointment?: boolean;
   reportDetail: Report;
 }
 
 export const ReportAdditionalInfoDetail = ({
+  isCompanyAppointment,
   reportDetail,
 }: ReportAdditionalDetailProps) => {
   const router = useRouter();
@@ -20,18 +22,20 @@ export const ReportAdditionalInfoDetail = ({
         <h2 className="text-[#fff] text-xl font-medium">
           {translate("appointments.report_detail.additional_detail")}
         </h2>
-        <button
-          onClick={() =>
-            router.push({
-              pathname: "/agent/appointments/update-report",
-              query: { report: reportDetail?.appointmentID?.id, tab: 3 },
-            })
-          }
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
-        >
-          <EditIcon />
-          {translate("offers.address_details.edit_button")}
-        </button>
+        {!isCompanyAppointment && (
+          <button
+            onClick={() =>
+              router.push({
+                pathname: "/agent/appointments/update-report",
+                query: { report: reportDetail?.appointmentID?.id, tab: 3 },
+              })
+            }
+            className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
+          >
+            <EditIcon />
+            {translate("offers.address_details.edit_button")}
+          </button>
+        )}
       </div>
 
       <div className="px-5 py-2 pb-5">

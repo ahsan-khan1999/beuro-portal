@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { useTranslation } from "next-i18next";
 import { ReportContactDetail } from "./contact-detail";
@@ -36,12 +35,14 @@ export interface ReportDetailProps {
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
+  isCompanyAppointment?: boolean;
 }
 
 export const ReportDetailData = ({
   reportDetail,
   loading,
   currency,
+  isCompanyAppointment,
 }: ReportDetailProps) => {
   const [tabType, setTabType] = useState<number>(0);
   const { t: translate } = useTranslation();
@@ -54,10 +55,23 @@ export const ReportDetailData = ({
   }, []);
 
   const componentArray = [
-    <ReportContactDetail reportDetail={reportDetail} />,
-    <ReportHouseDetail reportDetail={reportDetail} />,
-    <ReportServicesDetail reportDetail={reportDetail} currency={currency} />,
-    <ReportAdditionalInfoDetail reportDetail={reportDetail} />,
+    <ReportContactDetail
+      reportDetail={reportDetail}
+      isCompanyAppointment={isCompanyAppointment}
+    />,
+    <ReportHouseDetail
+      reportDetail={reportDetail}
+      isCompanyAppointment={isCompanyAppointment}
+    />,
+    <ReportServicesDetail
+      reportDetail={reportDetail}
+      currency={currency}
+      isCompanyAppointment={isCompanyAppointment}
+    />,
+    <ReportAdditionalInfoDetail
+      reportDetail={reportDetail}
+      isCompanyAppointment={isCompanyAppointment}
+    />,
   ];
 
   const tabSection: tabArrayTypes[] = [

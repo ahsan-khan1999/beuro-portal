@@ -6,6 +6,13 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { Appointments } from "@/types/appointments";
 import { formatDateTimeToDate } from "@/utils/utility";
+import localStoreUtil from "@/utils/localstore.util";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { setOfferDetails } from "@/api/slices/offer/offerSlice";
+import moment from "moment";
+import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
+import { OutlineButton } from "@/base-components/ui/button/outline-button";
+import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
 
 export interface AppointmentsDetailCardProps {
   onStatusChange: (id: string) => void;
@@ -17,6 +24,7 @@ export const AppointmentsDetailCard = ({
   appointmentDetails,
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
 
   const handleBack = () => {
@@ -38,6 +46,37 @@ export const AppointmentsDetailCard = ({
     })
   );
 
+  const offerCreateHandler = () => {
+    localStoreUtil.remove_data("appointment");
+    dispatch(
+      setOfferDetails({
+        id: "convert",
+        type: "Existing Customer",
+        leadID: {
+          ...appointmentDetails,
+          customerID: appointmentDetails?.leadID?.customerID,
+        },
+        serviceDetail: {
+          serviceDetail: appointmentDetails?.leadID?.otherServices,
+        },
+        addressID: { address: appointmentDetails?.leadID?.addressID?.address },
+        content: appointmentDetails?.leadID?.requiredService,
+        date: [
+          {
+            startDate: moment(appointmentDetails?.leadID?.desireDate).format(
+              "YYYY-MM-DD"
+            ),
+            endDate: "",
+          },
+        ],
+      })
+    );
+    dispatch(
+      setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail })
+    );
+    router.push("/offers/add");
+  };
+
   return (
     <div className="bg-white pt-5 pl-5 pr-6 pb-[37px] rounded-lg">
       <div className="flex items-center justify-between border-b border-b-[#000] border-opacity-10 pb-5">
@@ -48,6 +87,17 @@ export const AppointmentsDetailCard = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-4">
+          {appointmentDetails?.leadID?.isOfferCreated && (
+            <OutlineButton
+              inputType="button"
+              onClick={offerCreateHandler}
+              className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+              text={translate("leads.card_content.create_button")}
+              id="create offer"
+              iconAlt="create offer"
+              icon={createOfferIcon}
+            />
+          )}
           {/* <Button
             inputType="button"
             onClick={onScheduleAppointments}

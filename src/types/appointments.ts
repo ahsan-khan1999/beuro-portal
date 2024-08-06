@@ -1,6 +1,8 @@
 import { staticEnums } from "@/utils/static";
 import { AddressID } from "./leads";
 import { OfferServiceDetails } from "./offers";
+import { ContentTableRowTypes } from "./content";
+import { User } from ".";
 
 export interface Appointments {
   id: string;
@@ -27,6 +29,12 @@ export interface Appointments {
       };
       companyName: string;
     };
+    customerID: string;
+    otherServices: string[] | ContentTableRowTypes[];
+    requiredService: string | ContentTableRowTypes;
+    additionalDetails: string;
+    createdBy: User;
+    desireDate: string;
     addressID: AddressID;
   };
   agent: {

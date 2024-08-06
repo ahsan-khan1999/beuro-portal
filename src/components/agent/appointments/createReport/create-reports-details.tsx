@@ -47,10 +47,10 @@ const CreateReportDetails = () => {
   };
 
   const handleNextTab = () => {
-    if (tabType === AppointmentReportsFormStages.ADDITIONAL_INFO) {
-      handleReportCreated();
-      return;
-    }
+    // if (tabType === AppointmentReportsFormStages.ADDITIONAL_INFO) {
+    //   handleReportCreated();
+    //   return;
+    // }
     const nextTab = tabType + 1;
     setTabType(nextTab);
     updateQueryParam(nextTab);
@@ -120,10 +120,6 @@ const CreateReportDetails = () => {
     },
   ];
 
-  const handleReportCreated = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
-
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -134,6 +130,14 @@ const CreateReportDetails = () => {
       pathname: "/agent/appointments",
       query: { status: "None" },
     });
+  };
+
+  const handleReportCreated = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const updateSuccessModal = () => {
+    dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
   };
 
   const componentLookUp = {
@@ -156,6 +160,8 @@ const CreateReportDetails = () => {
       <AdditionalInfoReport
         onNextHandler={handleNextTab}
         onHandleBack={handleBack}
+        onReportCreated={handleReportCreated}
+        onReportUpdate={updateSuccessModal}
       />
     ),
   };
@@ -166,6 +172,14 @@ const CreateReportDetails = () => {
         onClose={onClose}
         heading={translate("common.modals.report_created")}
         subHeading={translate("common.modals.report_created_des")}
+        route={handleReportSuccessRoute}
+      />
+    ),
+    [ModalType.UPDATE_REPORT]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
         route={handleReportSuccessRoute}
       />
     ),

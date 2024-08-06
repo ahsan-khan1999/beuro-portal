@@ -32,7 +32,7 @@ export const useReportDetails = () => {
 
   const { systemSettings } = useAppSelector((state) => state.settings);
 
-  const id = router.query.report;
+  const id = router.query.report || router.query.appointment;
 
   useEffect(() => {
     if (id) {

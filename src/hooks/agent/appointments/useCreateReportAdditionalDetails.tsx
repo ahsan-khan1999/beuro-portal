@@ -14,6 +14,8 @@ import { ReportPromiseActionType } from "@/types/customer";
 export interface ReportAdditionalDetailsProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
   onHandleBack: (currentComponent: AppointmentReportsFormStages) => void;
+  onReportCreated: () => void;
+  onReportUpdate: () => void;
 }
 
 type DataType = {
@@ -23,6 +25,8 @@ type DataType = {
 export const useCreateReportAdditionalDetails = ({
   onNextHandler,
   onHandleBack,
+  onReportCreated,
+  onReportUpdate,
 }: ReportAdditionalDetailsProps) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -109,8 +113,7 @@ export const useCreateReportAdditionalDetails = ({
           updateReport({ data: apiData, router, setError, translate })
         );
 
-        if (response?.payload)
-          onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
+        if (response?.payload) onReportUpdate();
       } else {
         const apiData = {
           ...convertedApiData,
@@ -123,8 +126,7 @@ export const useCreateReportAdditionalDetails = ({
           updateReport({ data: apiData, router, setError, translate })
         );
 
-        if (response?.payload)
-          onNextHandler(AppointmentReportsFormStages.ADDITIONAL_INFO);
+        if (response?.payload) onReportCreated();
       }
     } catch (error) {
       console.error("Submission error:", error);
