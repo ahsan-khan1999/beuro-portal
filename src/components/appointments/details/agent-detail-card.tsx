@@ -9,12 +9,12 @@ import { staticEnums } from "@/utils/static";
 
 export interface AppointmentsDetailCardProps {
   onStatusChange: (id: number, status: string, type: string) => void;
-  onScheduleAppointments: () => void;
+  // onScheduleAppointments: () => void;
 }
 
 export const AgentAppointmentsDetailCard = ({
   onStatusChange,
-  onScheduleAppointments,
+  // onScheduleAppointments,
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -45,7 +45,7 @@ export const AgentAppointmentsDetailCard = ({
             {translate("appointments.detail_heading")}
           </h1>
         </div>
-        <div className="flex items-center gap-x-4">
+        {/* <div className="flex items-center gap-x-4">
           <Button
             inputType="button"
             onClick={onScheduleAppointments}
@@ -62,7 +62,7 @@ export const AgentAppointmentsDetailCard = ({
             id="cancel"
             iconAlt="cancel"
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">

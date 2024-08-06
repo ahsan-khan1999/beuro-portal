@@ -6,7 +6,7 @@ export const AppointmentsDetails = () => {
   const {
     translate,
     handleStatusChange,
-    handleScheduleAppointments,
+    // handleScheduleAppointments,
     renderModal,
     handleCreateReport,
   } = useAgentAppointmentsDetails();
@@ -15,7 +15,7 @@ export const AppointmentsDetails = () => {
     <>
       <AgentAppointmentsDetailCard
         onStatusChange={handleStatusChange}
-        onScheduleAppointments={handleScheduleAppointments}
+        // onScheduleAppointments={handleScheduleAppointments}
       />
       <div className="bg-white flex items-center justify-center mt-6">
         <NoDataEmptyState

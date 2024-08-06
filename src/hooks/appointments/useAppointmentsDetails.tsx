@@ -60,13 +60,13 @@ export const useAppointmentsDetails = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleScheduleAppointments = () => {
-    dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
-  };
+  // const handleScheduleAppointments = () => {
+  //   dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
+  // };
 
-  const handleAppointmentsSuccess = () => {
-    dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
-  };
+  // const handleAppointmentsSuccess = () => {
+  //   dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
+  // };
 
   const handleCreateReport = () => {
     router.push({
@@ -84,13 +84,13 @@ export const useAppointmentsDetails = () => {
         route={onClose}
       />
     ),
-    [ModalType.SCHEDULE_APPOINTMENTS]: (
-      <ScheduleAppointments
-        onClose={onClose}
-        heading={translate("appointments.schedule_appointment")}
-        onSuccess={handleAppointmentsSuccess}
-      />
-    ),
+    // [ModalType.SCHEDULE_APPOINTMENTS]: (
+    //   <ScheduleAppointments
+    //     onClose={onClose}
+    //     heading={translate("appointments.schedule_appointment")}
+    //     onSuccess={handleAppointmentsSuccess}
+    //   />
+    // ),
     [ModalType.APPOINTMENT_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
@@ -114,6 +114,6 @@ export const useAppointmentsDetails = () => {
     appointmentDetails,
     handleStatusUpdate,
     handleCreateReport,
-    handleScheduleAppointments,
+    // handleScheduleAppointments,
   };
 };

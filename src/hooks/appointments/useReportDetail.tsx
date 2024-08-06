@@ -85,10 +85,6 @@ export const useReportDetails = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleScheduleAppointments = () => {
-    dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
-  };
-
   const handleAppointmentsSuccess = () => {
     dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
   };
@@ -156,13 +152,7 @@ export const useReportDetails = () => {
         route={onClose}
       />
     ),
-    [ModalType.SCHEDULE_APPOINTMENTS]: (
-      <ScheduleAppointments
-        onClose={onClose}
-        heading={translate("appointments.schedule_appointment")}
-        onSuccess={handleAppointmentsSuccess}
-      />
-    ),
+
     [ModalType.APPOINTMENT_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
@@ -186,7 +176,6 @@ export const useReportDetails = () => {
     renderModal,
     reportDetails,
     handleStatusUpdate,
-    handleScheduleAppointments,
     appointmentDetails,
     handleImageUpload,
     shareImgModal,

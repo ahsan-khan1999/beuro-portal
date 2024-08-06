@@ -91,7 +91,6 @@ export const updateAppointmentStatus:
   try {
     const response = await apiServices.updateAppointmentStatus(data);
     thunkApi.dispatch(setAppointmentDetails(response?.data?.Appointment));
-    // thunkApi.dispatch(setReportDetails(response?.data?.Report));
     return response?.data?.Appointment;
   } catch (e: any) {
     thunkApi.dispatch(setErrorMessage(e?.data?.message));

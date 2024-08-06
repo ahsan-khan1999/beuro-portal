@@ -13,9 +13,11 @@ import {
 import { fieldDateFormat } from "@/utils/utility";
 import { readEmployee } from "@/api/slices/employee/emplyeeSlice";
 import { Employee } from "@/types/employee";
+import { Appointments } from "@/types/appointments";
 
 export interface AppointmentHookProps {
   onSuccess: () => void;
+  onUpdateSuccess?: () => void;
   onClose: () => void;
   id: string;
   leadId: string;
@@ -29,6 +31,8 @@ export interface AppointmentHookProps {
     fullName: string;
   };
   isUpdate?: boolean;
+  setCurrentPageRows?: React.Dispatch<React.SetStateAction<Appointments[]>>;
+  currentPageRows?: Appointments[];
 }
 
 export const useScheduleAppointment = ({
@@ -42,14 +46,15 @@ export const useScheduleAppointment = ({
   endTime,
   startTime,
   isUpdate,
+  onUpdateSuccess,
+  currentPageRows,
+  setCurrentPageRows,
 }: AppointmentHookProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const { loading, error } = useAppSelector((state) => state.auth);
-  const { appointmentDetails, appointment } = useAppSelector(
-    (state) => state.appointment
-  );
+  const { appointmentDetails } = useAppSelector((state) => state.appointment);
   const schema = generateScheduleAppointmentsValidationSchema(translate);
   const [employee, setEmployee] = useState<Employee[]>([]);
 
@@ -98,14 +103,25 @@ export const useScheduleAppointment = ({
     const res = isUpdate
       ? await dispatch(
           updateAppointment({
-            data: { ...apiData, id: id },
+            data: { ...apiData, id },
             router,
             translate,
           })
         )
       : await dispatch(createAppointment({ data: apiData, router, translate }));
+
     if (res?.payload) {
-      onSuccess();
+      if (isUpdate) {
+        if (currentPageRows && setCurrentPageRows) {
+          const updatedRows = currentPageRows.map((appointment) =>
+            appointment.id === id ? res.payload : appointment
+          );
+          setCurrentPageRows(updatedRows);
+        }
+        onUpdateSuccess && onUpdateSuccess();
+      } else {
+        onSuccess();
+      }
     }
   };
 
