@@ -8,6 +8,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
+  onSearchCustomer,
   {
     customerType,
     type,
@@ -397,6 +398,8 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         })),
 
         onItemChange: onCustomerSelect,
+        isLocalCustomer: true,
+        onSearchCustomer: (value:string) => onSearchCustomer(value),
         control,
         value: leadDetails?.id
           ? leadDetails?.customerID

@@ -131,7 +131,7 @@ export const useEditOfferDetails = ({
   const selectedContent = watch("content");
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    // dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -197,12 +197,15 @@ export const useEditOfferDetails = ({
     name: "date",
   });
 
+  const handleSearchCustomer = (value: string) => {
+    dispatch(readCustomer({ params: { filter: { text: value } } }));
+  };
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
       dispatch(setCustomerDetails(selectedCustomers));
-
       reset({
         ...selectedCustomers,
         type: type,
@@ -229,6 +232,7 @@ export const useEditOfferDetails = ({
     register,
     loading,
     control,
+    handleSearchCustomer,
     {
       customerType,
       type,

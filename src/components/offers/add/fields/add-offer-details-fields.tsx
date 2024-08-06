@@ -20,6 +20,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
+  onSearchCustomer,
   {
     customerType,
     type,
@@ -318,7 +319,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "address.postalCode",
               name: "address.postalCode",
               placeholder: `${translate("offers.placeholders.post_code")}`,
-
               register,
               value:
                 offerDetails && offerDetails?.customerID?.address?.postalCode,
@@ -426,6 +426,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
         control,
         onItemChange: onCustomerSelect,
+        isLocalCustomer: true,
+        onSearchCustomer: (value: string) => onSearchCustomer(value),
         value: offerDetails?.id ? offerDetails?.leadID?.customerID : "",
         setValue,
       },

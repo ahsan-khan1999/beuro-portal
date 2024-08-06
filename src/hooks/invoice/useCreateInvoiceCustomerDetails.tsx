@@ -67,7 +67,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    // dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -123,6 +123,10 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     control,
     name: "date",
   });
+
+  const handleSearchCustomer = (value: string) => {
+    dispatch(readCustomer({ params: { filter: { text: value } } }));
+  };
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
@@ -201,11 +205,11 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     }
   }, [type]);
 
-
   const invoiceFields = CreateInvoiceCustomerDetailsFormField(
     register,
     loading,
     control,
+    handleSearchCustomer,
     {
       customerType,
       type,

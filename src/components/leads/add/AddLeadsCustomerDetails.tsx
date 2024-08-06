@@ -10,7 +10,6 @@ const AddLeadsCustomerDetails = ({
 }: {
   onHandleNext: Function;
 }) => {
-  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewLeadCustomer(onHandleNext);
 
@@ -44,7 +43,6 @@ const AddLeadsCustomerDetails = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </FormCard>

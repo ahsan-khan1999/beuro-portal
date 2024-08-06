@@ -129,6 +129,8 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   className?: string;
   disabled?: boolean;
   fieldIndex?: number;
+  isLocalCustomer?:boolean
+  onSearchCustomer?:(value:string) => void
 }
 export interface CustomerSelectProps
   extends BaseFieldProps<Field.customerSelectField> {
@@ -158,6 +160,8 @@ export interface SelectBoxProps {
   className?: string;
   disabled?: boolean;
   fieldIndex?: number;
+  isLocalCustomer?:boolean
+  onSearchCustomer?:(value:string) => void
 }
 
 export interface MultiSelectProps extends BaseFieldProps<Field.select> {

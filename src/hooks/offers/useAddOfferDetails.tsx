@@ -68,7 +68,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
-    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    // dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const type = watch("type");
@@ -117,6 +117,22 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     }
   }, [offerDetails?.id]);
 
+  useEffect(() => {
+    if (offerDetails?.leadID?.customerID) {
+      const currentOfferCustomer = {
+        fullName: offerDetails?.leadID?.customerDetail?.fullName,
+        id: offerDetails?.leadID?.customerID,
+      };
+      const isCustomerExist = customer.find(
+        (item) => item.id === offerDetails?.leadID?.customerID
+      );
+      if (!isCustomerExist) {
+        const customerList = [currentOfferCustomer, ...customer];
+        dispatch(setCustomers(customerList));
+      }
+    }
+  }, [offerDetails, customer, dispatch]);
+
   const {
     fields: testFields,
     append,
@@ -126,12 +142,15 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     name: "date",
   });
 
+  const handleSearchCustomer = (value: string) => {
+    dispatch(readCustomer({ params: { filter: { text: value } } }));
+  };
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
       dispatch(setCustomerDetails(selectedCustomers));
-
       reset({
         ...selectedCustomers,
         customerID: selectedCustomers?.id,
@@ -175,6 +194,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     register,
     loading,
     control,
+    handleSearchCustomer,
     {
       customerType,
       type,

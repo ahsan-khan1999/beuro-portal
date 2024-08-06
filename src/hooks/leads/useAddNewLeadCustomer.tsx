@@ -25,9 +25,9 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     (state) => state.customer
   );
 
-  useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+  // }, []);
 
   const onCancel = () => {
     router.pathname = "/leads";
@@ -54,12 +54,15 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const type = watch("type");
   const gender = watch("gender");
 
+  const handleSearchCustomer = (value: string) => {
+    dispatch(readCustomer({ params: { filter: { text: value } } }));
+  };
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
     const selectedCustomers = customer.find((item) => item.id === id);
     if (selectedCustomers) {
       dispatch(setCustomerDetails(selectedCustomers));
-
       reset({
         ...selectedCustomers,
         type: type,
@@ -97,6 +100,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     register,
     loading,
     control,
+    handleSearchCustomer,
     {
       customerType,
       type,
