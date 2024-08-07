@@ -17,6 +17,7 @@ import { setImages } from "@/api/slices/imageSlice/image";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 export enum ComponentsType {
   customerAdd,
@@ -217,28 +218,26 @@ const AddNewLeadsData = () => {
 
   return (
     <>
-      <div className="xLarge:fixed mb-5 xLarge:-mt-12">
-        <p className="mb-5 text-2xl text-[#222B45] font-semibold">
-          {translate("leads.add_new_lead")}
-        </p>
-        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap gap-[14px]">
+       <div className="xLarge:fixed mb-5">
+        <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
           {tabSection.map((item, index) => (
-            <DetailsTab
+            <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}
+              index={index + 1}
               icon={item.icon}
               selectedTab={index}
-              key={index}
             />
           ))}
         </div>
       </div>
 
-      <div className="w-full break-all flex xLarge:mt-[145px] mb-10">
-        <div className="max-w-[340px] w-full hidden xLarge:block"></div>
-        <div className="w-full xLarge:max-w-[80%]">
+      <div className="w-full break-all flex">
+        <div className="max-w-[320px] w-full hidden xLarge:block"></div>
+        <div className="w-full xLarge:max-w-[80%] mb-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

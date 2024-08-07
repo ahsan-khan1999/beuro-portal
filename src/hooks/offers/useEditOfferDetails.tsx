@@ -32,7 +32,6 @@ import { OfferPromiseActionType } from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
-import { Customers } from "@/types";
 
 export const useEditOfferDetails = ({
   handleNext,

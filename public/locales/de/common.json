@@ -911,7 +911,7 @@
   },
   "content": {
     "main_heading": "Inhalt",
-    "create_content": "Inhalt erstellen",
+    "create_content": "Neue Inhalte hinzufügen",
     "add_button": "Neu hinzufügen",
     "content_card_detail": {
       "heading": "Inhaltsdetails",
@@ -1160,6 +1160,8 @@
       "date": "Datum",
       "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "add_new_offer": "Neues Angebot hinzufügen",
+    "add_new_invoice": "Neue Rechnung hinzufügen",
     "no_customer_found": "Kein Kunde gefunden",
     "details": "Einzelheiten",
     "follow_up_completed": "Bitte kontaktieren Sie den Kunden nach 10 Minuten.",
@@ -2258,7 +2260,22 @@
   },
   "admin_role": {
     "Admin": "Verwaltung",
-    "Company": "Unternehmen"
+    "Company": "Unternehmen",
+    "Employee": "Employee",
+    "Agent": "Agent",
+    "CEO": "CEO",
+    "Administration": "Verwaltung",
+    "HRManager": "HR Manager",
+    "FinanceManager": "Finance Manager",
+    "OperationsManager": "Operations Manager",
+    "ITManager": "IT Manager",
+    "MarketingManager": "Marketing Manager",
+    "SalesManager": "Sales Manager",
+    "ProjectManager": "Projekt Manager",
+    "BusinessAnalyst": "Business Analyst",
+    "CustomerSupportRepresentative": "Kunden Support Vertreter",
+    "AdministrativeAssistant": "Verwaltungs Assistentin",
+    "Intern": "Intern"
   },
   "header_alignment": {
     "header_heading": "Ausrichtung der Kopfzeile",
