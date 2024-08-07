@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useEffect, useMemo } from "react";
 import {
   readCustomer,
+  readCustomerDetail,
   setCustomerDetails,
   setCustomers,
 } from "@/api/slices/customer/customerSlice";
@@ -122,7 +123,9 @@ export const useEditInvoiceDetails = ({
   const selectedContent = watch("content");
 
   useEffect(() => {
-    // dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    dispatch(
+      readCustomer({ params: { filter: { dropdown: "true" }, paginate: 0 } })
+    );
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -178,24 +181,25 @@ export const useEditInvoiceDetails = ({
     name: "date",
   });
 
-  const handleSearchCustomer = (value: string) => {
-    dispatch(readCustomer({ params: { filter: { text: value } } }));
-  };
-
-  const onCustomerSelect = (id: string) => {
+  const onCustomerSelect = async (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.find((item) => item.id === id);
-    if (selectedCustomers) {
-      dispatch(setCustomerDetails(selectedCustomers));
 
-      reset({
-        ...selectedCustomers,
-        type: type,
-        content: selectedContent,
-        customerID: selectedCustomers?.id,
-        // leadID: "",
-        gender: staticEnums["Gender"][selectedCustomers?.gender],
-      });
+    if (id) {
+      try {
+        const response = await dispatch(
+          readCustomerDetail({ params: { filter: id } })
+        );
+        dispatch(setCustomerDetails(response?.payload));
+        reset({
+          ...response?.payload,
+          type: type,
+          content: selectedContent,
+          customerID: response?.payload?.id,
+          gender: staticEnums["Gender"][response?.payload?.gender],
+        });
+      } catch (error) {
+        console.error("Failed to fetch customer detail:", error);
+      }
     }
   };
 
@@ -214,7 +218,7 @@ export const useEditInvoiceDetails = ({
     register,
     loading,
     control,
-    handleSearchCustomer,
+    // handleSearchCustomer,
     {
       customerType,
       type,

@@ -122,6 +122,7 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
 
   return {
     fields,
+    router,
     onSubmit,
     control,
     handleSubmit,
@@ -129,6 +130,6 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     error,
     translate,
     offerDescriptionCount,
-    watch
+    watch,
   };
 };

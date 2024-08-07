@@ -79,7 +79,7 @@ const TaxVerifiedComp = memo(
           </div>
 
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-[110px] gap-y-5">
-            {toggleBtnsData.map((item, index) => (
+            {toggleBtnsData?.map((item, index) => (
               <div
                 className={`border rounded-md py-4 px-[18px] flex justify-between items-center w-full 
               ${
@@ -135,7 +135,7 @@ const TaxVerifiedComp = memo(
           {systemSettings["taxType"] === 1 && (
             <div className="mt-[10px] mb-4 ">
               <div className=" bg-[#F9F9F9] h-[45px] py-2 mt-5 grid grid-cols-3 gap-x-[110px]">
-                {toggleInfo.map((item, index) => (
+                {toggleInfo?.map((item, index) => (
                   <span
                     className={`text-base font-medium text-[#8F8F8F] `}
                     key={index}
@@ -148,10 +148,10 @@ const TaxVerifiedComp = memo(
               <div className="mt-5  grid grid-cols-3 gap-2 gap-x-[110px]">
                 {tax?.map((item, index) => (
                   <React.Fragment key={item?.id}>
-                    <span className={"text-base font-medium text-[#8F8F8F] "}>
+                    <span className={"text-base font-medium text-[#8F8F8F]"}>
                       {item?.name}
                     </span>
-                    <span className={"text-base font-medium text-[#8F8F8F] "}>
+                    <span className={"text-base font-medium text-[#8F8F8F]"}>
                       {item?.taxRate + "%"}
                     </span>
                     <span className={"text-base font-medium text-[#8F8F8F]"}>

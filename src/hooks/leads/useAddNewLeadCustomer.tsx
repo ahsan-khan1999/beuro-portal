@@ -9,6 +9,7 @@ import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { useEffect } from "react";
 import {
   readCustomer,
+  readCustomerDetail,
   setCustomerDetails,
 } from "@/api/slices/customer/customerSlice";
 import { createLead } from "@/api/slices/lead/leadSlice";
@@ -25,9 +26,11 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     (state) => state.customer
   );
 
-  // useEffect(() => {
-  //   dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
-  // }, []);
+  useEffect(() => {
+    dispatch(
+      readCustomer({ params: { filter: { dropdown: "true" }, paginate: 0 } })
+    );
+  }, []);
 
   const onCancel = () => {
     router.pathname = "/leads";
@@ -54,21 +57,24 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const type = watch("type");
   const gender = watch("gender");
 
-  const handleSearchCustomer = (value: string) => {
-    dispatch(readCustomer({ params: { filter: { text: value } } }));
-  };
-
-  const onCustomerSelect = (id: string) => {
+  const onCustomerSelect = async (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.find((item) => item.id === id);
-    if (selectedCustomers) {
-      dispatch(setCustomerDetails(selectedCustomers));
-      reset({
-        ...selectedCustomers,
-        type: type,
-        gender: staticEnums["Gender"][selectedCustomers?.gender],
-        customerID: id,
-      });
+
+    if (id) {
+      try {
+        const response = await dispatch(
+          readCustomerDetail({ params: { filter: id } })
+        );
+        dispatch(setCustomerDetails(response?.payload));
+        reset({
+          ...response?.payload,
+          type: type,
+          gender: staticEnums["Gender"][response?.payload?.gender],
+          customerID: id,
+        });
+      } catch (error) {
+        console.error("Failed to fetch customer detail:", error);
+      }
     }
   };
 
@@ -99,7 +105,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     register,
     loading,
     control,
-    handleSearchCustomer,
     {
       customerType,
       type,
@@ -122,14 +127,13 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         stage: ComponentsType.addressAdd,
       };
       if (leadDetails?.customerID)
-        apiData = { ...apiData, customerID: leadDetails?.customerID };
+        apiData = { ...apiData, customerID: data?.customerID };
       const res = await dispatch(
         createLead({ data: apiData, router, setError, translate })
       );
       if (res?.payload) onHandleNext(ComponentsType.addressAdd);
     } else {
       const apiData = { ...data, step: 1, stage: ComponentsType.addressAdd };
-
       const res = await dispatch(
         createLead({ data: apiData, router, setError, translate })
       );

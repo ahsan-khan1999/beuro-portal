@@ -17,6 +17,7 @@ import { generateOfferDetailsValidationSchema } from "@/validation/offersSchema"
 import { useEffect, useMemo } from "react";
 import {
   readCustomer,
+  readCustomerDetail,
   setCustomerDetails,
   setCustomers,
 } from "@/api/slices/customer/customerSlice";
@@ -32,7 +33,6 @@ import { OfferPromiseActionType } from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
-import { Customers } from "@/types";
 
 export const useEditOfferDetails = ({
   handleNext,
@@ -74,40 +74,40 @@ export const useEditOfferDetails = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  useEffect(() => {
-    if (offer) {
-      dispatch(readOfferDetails({ params: { filter: offer } })).then(
-        (res: OfferPromiseActionType) => {
-          dispatch(
-            setOfferDetails({ ...res.payload, type: "Existing Customer" })
-          );
+  // useEffect(() => {
+  //   if (offer) {
+  //     dispatch(readOfferDetails({ params: { filter: offer } })).then(
+  //       (res: OfferPromiseActionType) => {
+  //         dispatch(
+  //           setOfferDetails({ ...res.payload, type: "Existing Customer" })
+  //         );
 
-          reset({
-            type: "Existing Customer",
-            leadID: res?.payload?.leadID?.id,
-            customerType: getKeyByValue(
-              staticEnums["CustomerType"],
-              res?.payload?.leadID?.customerDetail?.customerType
-            ),
-            fullName: res?.payload?.leadID?.customerDetail?.fullName,
-            email: res?.payload?.leadID?.customerDetail?.email,
-            phoneNumber: res?.payload?.leadID?.customerDetail?.phoneNumber,
-            mobileNumber: res?.payload?.leadID?.customerDetail?.mobileNumber,
-            content: res?.payload?.content?.id,
-            title: res?.payload?.title,
-            address: res?.payload?.leadID?.customerDetail?.address,
-            date: res?.payload?.date,
-            customerID: res?.payload?.leadID?.customerID,
-            gender:
-              staticEnums["Gender"][
-                res?.payload?.leadID?.customerDetail?.gender
-              ],
-            time: res?.payload?.time,
-          });
-        }
-      );
-    }
-  }, [offer]);
+  //         reset({
+  //           type: "Existing Customer",
+  //           leadID: res?.payload?.leadID?.id,
+  //           customerType: getKeyByValue(
+  //             staticEnums["CustomerType"],
+  //             res?.payload?.leadID?.customerDetail?.customerType
+  //           ),
+  //           fullName: res?.payload?.leadID?.customerDetail?.fullName,
+  //           email: res?.payload?.leadID?.customerDetail?.email,
+  //           phoneNumber: res?.payload?.leadID?.customerDetail?.phoneNumber,
+  //           mobileNumber: res?.payload?.leadID?.customerDetail?.mobileNumber,
+  //           content: res?.payload?.content?.id,
+  //           title: res?.payload?.title,
+  //           address: res?.payload?.leadID?.customerDetail?.address,
+  //           date: res?.payload?.date,
+  //           customerID: res?.payload?.leadID?.customerID,
+  //           gender:
+  //             staticEnums["Gender"][
+  //               res?.payload?.leadID?.customerDetail?.gender
+  //             ],
+  //           time: res?.payload?.time,
+  //         });
+  //       }
+  //     );
+  //   }
+  // }, [offer]);
 
   useEffect(() => {
     if (offerDetails?.leadID?.customerID) {
@@ -131,7 +131,9 @@ export const useEditOfferDetails = ({
   const selectedContent = watch("content");
 
   useEffect(() => {
-    // dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    dispatch(
+      readCustomer({ params: { filter: { dropdown: "true" }, paginate: 0 } })
+    );
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -197,23 +199,26 @@ export const useEditOfferDetails = ({
     name: "date",
   });
 
-  const handleSearchCustomer = (value: string) => {
-    dispatch(readCustomer({ params: { filter: { text: value } } }));
-  };
-
-  const onCustomerSelect = (id: string) => {
+  const onCustomerSelect = async (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.find((item) => item.id === id);
-    if (selectedCustomers) {
-      dispatch(setCustomerDetails(selectedCustomers));
-      reset({
-        ...selectedCustomers,
-        type: type,
-        content: selectedContent,
-        customerID: selectedCustomers?.id,
-        leadID: "",
-        gender: staticEnums["Gender"][selectedCustomers?.gender],
-      });
+
+    if (id) {
+      try {
+        const response = await dispatch(
+          readCustomerDetail({ params: { filter: id } })
+        );
+        dispatch(setCustomerDetails(response?.payload));
+        reset({
+          ...response?.payload,
+          type: type,
+          content: selectedContent,
+          customerID: response?.payload?.id,
+          leadID: "",
+          gender: staticEnums["Gender"][response?.payload?.gender],
+        });
+      } catch (error) {
+        console.error("Failed to fetch customer detail:", error);
+      }
     }
   };
 
@@ -232,7 +237,7 @@ export const useEditOfferDetails = ({
     register,
     loading,
     control,
-    handleSearchCustomer,
+    // handleSearchCustomer,
     {
       customerType,
       type,
@@ -276,11 +281,13 @@ export const useEditOfferDetails = ({
       stage: EditComponentsType.addressEdit,
       isLeadCreated: data?.leadID ? true : false,
     };
+
     if (!apiData?.isLeadCreated) delete apiData["leadID"];
 
     const res = await dispatch(
       createOffer({ data: apiData, router, setError, translate })
     );
+
     if (res?.payload) {
       if (data?.type === "New Customer") {
         dispatch(setLeads([...lead, res?.payload?.leadID]));

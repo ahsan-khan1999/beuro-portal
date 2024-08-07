@@ -26,6 +26,9 @@ export const useAddFollowUp = (
   const { followUps } = useAppSelector((state) => state.settings);
 
   useEffect(() => {
+    dispatch(
+      readCustomer({ params: { filter: { dropdown: "true" }, paginate: 0 } })
+    );
     dispatch(readFollowUpSettings({}));
   }, []);
 
@@ -62,15 +65,15 @@ export const useAddFollowUp = (
     }
   }, [customerID]);
 
-  const handleSearchCustomer = (value: string) => {
-    dispatch(readCustomer({ params: { filter: { text: value } } }));
-  };
+  // const handleSearchCustomer = (value: string) => {
+  //   dispatch(readCustomer({ params: { filter: { text: value } } }));
+  // };
 
   const fields = AddFollowUpFormField(
     register,
     loading,
     control,
-    handleSearchCustomer,
+    // handleSearchCustomer,
     {
       customer,
       lead: lead,
@@ -85,7 +88,6 @@ export const useAddFollowUp = (
     if (response?.payload) {
       handleFollowUps();
       dispatch(readFollowUp({ params: { filter: { status: "10" } } }));
-
       if (router.pathname === "/dashboard")
         dispatch(readDashboard({ params: { filter: { month: 1 } } }));
     }

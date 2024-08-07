@@ -22,7 +22,7 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
   register,
   loading,
   control,
-  onSearchCustomer,
+  // onSearchCustomer,
   {
     invoiceDetails,
     customerType,
@@ -438,7 +438,7 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
         control,
         onItemChange: onCustomerSelect,
         isLocalCustomer: true,
-        onSearchCustomer: (value: string) => onSearchCustomer(value),
+        // onSearchCustomer: (value: string) => onSearchCustomer(value),
         value: invoiceDetails?.id ? invoiceDetails?.customerID : "",
         setValue,
       },

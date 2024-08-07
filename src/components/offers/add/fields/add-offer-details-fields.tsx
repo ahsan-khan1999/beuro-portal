@@ -20,7 +20,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
-  onSearchCustomer,
+  // onSearchCustomer,
   {
     customerType,
     type,
@@ -424,7 +424,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         control,
         onItemChange: onCustomerSelect,
         isLocalCustomer: true,
-        onSearchCustomer: (value: string) => onSearchCustomer(value),
+        // onSearchCustomer: (value: string) => onSearchCustomer(value),
         value: offerDetails?.id ? offerDetails?.leadID?.customerID : "",
         setValue,
       },

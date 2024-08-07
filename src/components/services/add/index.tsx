@@ -43,7 +43,7 @@ const AddService = () => {
 
   return (
     <Layout>
-      <h2 className="text-[#222B45] text-2xl font-normal mb-5">
+      <h2 className="text-[#222B45] text-2xl font-semibold mb-5">
         {translate("services.add_service_heading")}
       </h2>
       <div className="flex flex-col xl:flex-row gap-4">

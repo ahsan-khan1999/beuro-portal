@@ -9,7 +9,7 @@ import searchIcon from "@/assets/svgs/search-icon.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 
-export const SelectBox = ({
+export const CustomSearchSelectBox = ({
   id,
   options,
   value: defaultValue,
@@ -22,9 +22,13 @@ export const SelectBox = ({
   disabled,
   fieldIndex,
   isLocalCustomer,
+  onSearchCustomer,
+  
 }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState(options);
+  const [searchPerformed, setSearchPerformed] = useState(false);
+  const searchRef = useRef<string>("");
 
   useEffect(() => {
     if (defaultValue) {
@@ -36,10 +40,8 @@ export const SelectBox = ({
     setOption(options);
   }, [options]);
 
-  const search = useRef<string>("");
-  const { t: translate } = useTranslation();
-
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
+
   const selectedOptionHandler = (value: string) => {
     onItemChange && onItemChange(value, fieldIndex);
     setIsOpen(false);
@@ -47,17 +49,16 @@ export const SelectBox = ({
     trigger?.(field?.name);
   };
 
-  const handleChange = (value: string) => {
-    search.current = value;
-    if (value === "") {
-      setOption(options);
-    } else {
-      setOption(
-        options.filter((item) =>
-          item.label?.toLowerCase()?.includes(value?.toLowerCase())
-        )
-      );
+  const handleSearch = () => {
+    setSearchPerformed(true);
+    if (isLocalCustomer) {
+      onSearchCustomer && onSearchCustomer(searchRef.current);
     }
+    setOption(
+      options?.filter((item) =>
+        item.label?.toLowerCase()?.includes(searchRef.current?.toLowerCase())
+      )
+    );
   };
 
   const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
@@ -65,9 +66,7 @@ export const SelectBox = ({
   }`;
 
   const classes = combineClasses(defaultClasses, className);
-  const selectedLabel =
-    (field && getLabelByValue(field?.value, option)) ||
-    getLabelByValue(defaultValue, option);
+  const { t: translate } = useTranslation();
 
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
@@ -78,13 +77,9 @@ export const SelectBox = ({
         }}
         className={`${classes}`}
       >
-        {!selectedLabel && (
-          <span className="text-sm text-[#1E1E1E] font-normal truncate">
-            {translate("common.please_choose")}
-          </span>
-        )}
-        <span className="text-sm text-[#1E1E1E] font-normal truncate">
-          {selectedLabel}
+        <span className="truncate">
+          {(field && getLabelByValue(field?.value, option)) ||
+            getLabelByValue(defaultValue, option)}
         </span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
@@ -113,13 +108,22 @@ export const SelectBox = ({
                   height={8}
                 />
                 <input
-                  value={search.current}
-                  onChange={(e) => handleChange(e.target.value)}
+                  onChange={(e) => {
+                    searchRef.current = e.target.value;
+                  }}
                   placeholder={translate("common.search")}
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
+                {isLocalCustomer && (
+                  <div
+                    onClick={handleSearch}
+                    className="bg-primary hover:bg-buttonHover text-white rounded-lg mx-2 text-center py-1 cursor-pointer w-fit min-w-[80px]"
+                  >
+                    {translate("common.search")}
+                  </div>
+                )}
               </div>
-              {isLocalCustomer && option?.length === 0 ? (
+              {searchPerformed && option?.length === 0 ? (
                 <p className="text-center text-gray-500">
                   {translate("common.no_customer_found")}
                 </p>

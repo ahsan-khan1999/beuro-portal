@@ -12,6 +12,7 @@ import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo } from "react";
 import {
   readCustomer,
+  readCustomerDetail,
   setCustomerDetails,
   setCustomers,
 } from "@/api/slices/customer/customerSlice";
@@ -67,7 +68,9 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    // dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    dispatch(
+      readCustomer({ params: { filter: { dropdown: "true" }, paginate: 0 } })
+    );
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -124,24 +127,30 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     name: "date",
   });
 
-  const handleSearchCustomer = (value: string) => {
-    dispatch(readCustomer({ params: { filter: { text: value } } }));
-  };
+  // const handleSearchCustomer = (value: string) => {
+  //   dispatch(readCustomer({ params: { filter: { text: value } } }));
+  // };
 
-  const onCustomerSelect = (id: string) => {
+  const onCustomerSelect = async (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.find((item) => item.id === id);
 
-    if (selectedCustomers) {
-      dispatch(setCustomerDetails(selectedCustomers));
+    if (id) {
+      try {
+        const response = await dispatch(
+          readCustomerDetail({ params: { filter: id } })
+        );
 
-      reset({
-        ...selectedCustomers,
-        customerID: selectedCustomers?.id,
-        type: type,
-        content: selectedContent,
-        gender: staticEnums["Gender"][selectedCustomers?.gender],
-      });
+        reset({
+          ...response?.payload,
+          customerID: response?.payload?.id,
+          type: type,
+          content: selectedContent,
+          gender: staticEnums["Gender"][response?.payload?.gender],
+        });
+        dispatch(setCustomerDetails(response?.payload));
+      } catch (error) {
+        console.error("Failed to fetch customer detail:", error);
+      }
     }
   };
 
@@ -209,7 +218,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     register,
     loading,
     control,
-    handleSearchCustomer,
+    // handleSearchCustomer,
     {
       customerType,
       type,
@@ -252,10 +261,8 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         step: 1,
         invoiceId: invoiceDetails?.id === "convert" ? null : invoiceDetails?.id,
         stage: ComponentsType.addressAdded,
-        // isLeadCreated: data?.leadID ? true : false,
       };
 
-      // if (!apiData?.isLeadCreated) delete apiData["leadID"];
       const res = await dispatch(
         createMainInvoice({ data: apiData, router, setError, translate })
       );
@@ -268,7 +275,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
               ...customer,
               {
                 ...res?.payload?.customerDetail,
-                // id: res?.payload?.customerID,
               },
             ])
           );
@@ -283,7 +289,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         invoiceId: null,
         stage: ComponentsType.addressAdded,
       };
-      // if (!apiData?.isLeadCreated) delete apiData["leadID"];
 
       const res = await dispatch(
         createMainInvoice({ data: apiData, router, setError, translate })
