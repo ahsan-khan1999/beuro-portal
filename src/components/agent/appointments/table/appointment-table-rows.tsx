@@ -48,6 +48,12 @@ export const AppointmentTableRows = ({
           });
         };
 
+        const handlePdfPreview = () => {
+          router.push({
+            pathname: `/agent/appointments/pdf`,
+            query: { ...router.query },
+          });
+        };
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -135,7 +141,7 @@ export const AppointmentTableRows = ({
                 {item?.isReportSubmitted ? (
                   <OutlineButton
                     inputType="button"
-                    onClick={() => {}}
+                    onClick={handlePdfPreview}
                     className="bg-white text-primary w-full border border-primary py-[5px] !h-fit"
                     text={translate("appointments.view_reports_btn")}
                     id="view reports"
