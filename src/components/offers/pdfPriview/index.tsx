@@ -72,46 +72,29 @@ const OfferPdfPriview = () => {
 
   return (
     <div>
-      <EmailCard
-        emailStatus={offerDetails?.emailStatus}
-        offerNo={offerData?.emailHeader?.offerNo}
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        handleSendByPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-        offerId={offerData?.id}
-      />
-
       {loading ? (
         <CustomLoader />
       ) : (
-        <div className="mt-5">
-          {/* <OfferPdf
-            data={offerData}
-            emailTemplateSettings={emailTemplateSettings}
-            templateSettings={templateSettings}
-            systemSetting={systemSetting}
-            showContractSign={true}
-            pdfFile={pdfFile}
-            setPdfFile={setPdfFile}
+        <>
+          <EmailCard
+            emailStatus={offerDetails?.emailStatus}
+            offerNo={offerData?.emailHeader?.offerNo}
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            handleSendByPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+            offerId={offerData?.id}
           />
-          <OfferPdfDownload
-            data={offerData}
-            templateSettings={templateSettings}
-            emailTemplateSettings={emailTemplateSettings}
-            pdfFile={pdfFile}
-            setPdfFile={setPdfFile}
-            systemSetting={systemSetting}
-            showContractSign={true}
-          /> */}
 
-          <OfferPdf
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          />
-        </div>
+          <div className="mt-5">
+            <OfferPdf
+              mergedPdfFileUrl={mergedPdfUrl}
+              isPdfRendering={isPdfRendering}
+            />
+          </div>
+        </>
       )}
 
       {renderModal()}

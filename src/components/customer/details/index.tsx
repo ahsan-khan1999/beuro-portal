@@ -25,29 +25,32 @@ const CustomerDetails = () => {
 
   return (
     <Layout>
-      <DetailsCard>
-        <DetailsData
-          date={formatDateTimeToDate(customerDetail?.createdAt) as string}
-          id={customerDetail?.refID}
-          name={customerDetail?.createdBy?.fullName}
-          handlePreviousClick={handlePreviousClick}
-          handleDelete={deleteHandler}
-        />
-      </DetailsCard>
       {loading ? (
         <CustomLoader />
       ) : (
-        <div className="w-full my-5">
-          <CustomerForm
-            isUpdate={isUpdate}
-            setIsUpdate={setIsUpdate}
-            customerDetail={customerDetail}
-            fields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-          />
-        </div>
+        <>
+          <DetailsCard>
+            <DetailsData
+              date={formatDateTimeToDate(customerDetail?.createdAt) as string}
+              id={customerDetail?.refID}
+              name={customerDetail?.createdBy?.fullName}
+              handlePreviousClick={handlePreviousClick}
+              handleDelete={deleteHandler}
+            />
+          </DetailsCard>
+
+          <div className="w-full my-5">
+            <CustomerForm
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
+              customerDetail={customerDetail}
+              fields={fields}
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              errors={errors}
+            />
+          </div>
+        </>
       )}
       {renderModal()}
     </Layout>

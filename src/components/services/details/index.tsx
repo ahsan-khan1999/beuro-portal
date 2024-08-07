@@ -22,28 +22,30 @@ const ServicesDetails = () => {
 
   return (
     <Layout>
-      <DetailsCard>
-        <DetailsData
-          serviceDetail={serviceDetails}
-          isUpdate={isUpdate}
-          deleteHandler={deleteHandler}
-        />
-      </DetailsCard>
-      <div className="w-full mt-5">
-        {loading ? (
-          <CustomLoader />
-        ) : (
-          <ServicesForm
-            isUpdate={isUpdate}
-            setIsUpdate={setIsUpdate}
-            serviceDetail={serviceDetails}
-            fields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-          />
-        )}
-      </div>
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <>
+          <DetailsCard>
+            <DetailsData
+              serviceDetail={serviceDetails}
+              isUpdate={isUpdate}
+              deleteHandler={deleteHandler}
+            />
+          </DetailsCard>
+          <div className="w-full mt-5">
+            <ServicesForm
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
+              serviceDetail={serviceDetails}
+              fields={fields}
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              errors={errors}
+            />
+          </div>
+        </>
+      )}
 
       {renderModal()}
     </Layout>

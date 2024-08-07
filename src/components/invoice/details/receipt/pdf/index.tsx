@@ -5,6 +5,7 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 // const InvoicePdfPreview = dynamic(
 //   () => import("@/components/reactPdf/pdf-layout"),
@@ -81,23 +82,29 @@ const ReceiptPdfPreview = () => {
 
   return (
     <>
-      <InvoiceEmailHeader
-        {...receiptData?.emailHeader}
-        contractStatus={collectiveInvoiceDetails?.emailStatus}
-        contentName={receiptData?.emailHeader.contentName}
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        onSendViaPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-        title={translate("invoice.receipt_details")}
-      />
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <>
+          <InvoiceEmailHeader
+            {...receiptData?.emailHeader}
+            contractStatus={collectiveInvoiceDetails?.emailStatus}
+            contentName={receiptData?.emailHeader.contentName}
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            onSendViaPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+            title={translate("invoice.receipt_details")}
+          />
 
-      <InvoicePdfPreview
-        mergedPdfFileUrl={mergedPdfUrl}
-        isPdfRendering={isPdfRendering}
-      />
+          <InvoicePdfPreview
+            mergedPdfFileUrl={mergedPdfUrl}
+            isPdfRendering={isPdfRendering}
+          />
+        </>
+      )}
 
       {renderModal()}
     </>
