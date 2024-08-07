@@ -6,21 +6,23 @@ import { useTranslation } from "next-i18next";
 import { Report } from "@/types/appointments";
 
 export interface ReportAddressProps {
-  isCompanyAppointment?: boolean;
+  // isCompanyAppointment?: boolean;
   reportDetail: Report;
 }
 
 export const ReportContactDetail = ({
-  isCompanyAppointment,
+  // isCompanyAppointment,
   reportDetail,
 }: ReportAddressProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
+  const { companyAppointment } = router.query;
+
   const handleEditClick = () => {
     const query: any = { report: reportDetail?.appointmentID?.id, tab: 0 };
-    if (isCompanyAppointment) {
-      query.companyAppointment = true;
+    if (companyAppointment) {
+      query.companyAppointment = companyAppointment;
     }
     router.push({
       pathname: "/agent/appointments/update-report",

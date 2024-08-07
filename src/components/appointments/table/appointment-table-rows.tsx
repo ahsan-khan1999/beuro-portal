@@ -64,7 +64,11 @@ export const AppointmentTableRows = ({
         const handleViewReport = () => {
           router.push({
             pathname: "/appointments/details",
-            query: { ...router.query, appointment: item?.id },
+            query: {
+              ...router.query,
+              appointment: item?.id,
+              companyAppointment: true,
+            },
           });
         };
 

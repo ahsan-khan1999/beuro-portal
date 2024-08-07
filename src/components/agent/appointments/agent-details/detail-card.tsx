@@ -27,10 +27,15 @@ export const AppointmentsDetailCard = ({
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
 
+  const { companyAppointment } = router.query;
+
   const handleBack = () => {
-    router.pathname = "/agent/appointments";
+    router.pathname = companyAppointment
+      ? "/appointments"
+      : "/agent/appointments";
     delete router.query["appointment"];
     delete router.query["report"];
+    delete router.query["companyAppointment"];
     updateQuery(router, router.locale as string);
   };
 

@@ -11,14 +11,14 @@ import { Report } from "@/types/appointments";
 export interface ServiceDetailDataProps {
   reportDetail: Report;
   currency?: string;
-  isCompanyAppointment?: boolean;
+  // isCompanyAppointment?: boolean;
 }
 
 export const ReportServicesDetail = ({
   reportDetail,
   currency,
-  isCompanyAppointment,
-}: ServiceDetailDataProps) => {
+}: // isCompanyAppointment,
+ServiceDetailDataProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -77,6 +77,19 @@ export const ReportServicesDetail = ({
       ? reportDetail?.discountAmount
       : discountAmount;
 
+  const { companyAppointment } = router.query;
+
+  const handleEditClick = () => {
+    const query: any = { report: reportDetail?.appointmentID?.id, tab: 2 };
+    if (companyAppointment) {
+      query.companyAppointment = companyAppointment;
+    }
+    router.push({
+      pathname: "/agent/appointments/update-report",
+      query,
+    });
+  };
+
   return (
     <LeadsCardLayout>
       <div
@@ -87,18 +100,13 @@ export const ReportServicesDetail = ({
           {translate("offers.service_details.main_heading")}
         </h2>
         {/* {!isCompanyAppointment && ( */}
-          <button
-            onClick={() =>
-              router.push({
-                pathname: "/agent/appointments/update-report",
-                query: { report: reportDetail?.appointmentID?.id, tab: 2 },
-              })
-            }
-            className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
-          >
-            <EditIcon />
-            {translate("offers.service_details.edit_button")}
-          </button>
+        <button
+          onClick={handleEditClick}
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
+        >
+          <EditIcon />
+          {translate("offers.service_details.edit_button")}
+        </button>
         {/* )} */}
       </div>
       <div className="py-3 px-5">

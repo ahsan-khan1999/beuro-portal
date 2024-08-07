@@ -39,16 +39,26 @@ export const useCreateReportAddressDetails = ({
   const { report, companyAppointment } = router.query;
 
   const handleCancel = () => {
+    const pathname = companyAppointment
+      ? "/appointments/details"
+      : report
+      ? "/agent/appointments/report-detail"
+      : "/agent/appointments/details";
+
+    const query: any = {
+      appointment: report
+        ? reportDetails?.appointmentID?.id
+        : appointmentDetails?.id,
+      status: "None",
+    };
+
+    if (companyAppointment) {
+      query.companyAppointment = companyAppointment;
+    }
+
     router.push({
-      pathname: report
-        ? "/agent/appointments/report-detail"
-        : "/agent/appointments/details",
-      query: {
-        appointment: report
-          ? reportDetails?.appointmentID?.id
-          : appointmentDetails?.id,
-        status: "None",
-      },
+      pathname,
+      query,
     });
   };
 

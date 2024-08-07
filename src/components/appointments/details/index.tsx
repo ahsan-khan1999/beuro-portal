@@ -69,7 +69,6 @@ export const AppointmentsDetails = () => {
               shareImgModal={shareImgModal}
               handleImagesUpload={handleImageUpload}
               handleImageSlider={defaultUpdateModal}
-              isCompanyAppointment={true}
             />
           </div>
         </>

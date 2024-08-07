@@ -35,14 +35,12 @@ export interface ReportDetailProps {
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
-  isCompanyAppointment?: boolean;
 }
 
 export const ReportDetailData = ({
   reportDetail,
   loading,
   currency,
-  isCompanyAppointment,
 }: ReportDetailProps) => {
   const [tabType, setTabType] = useState<number>(0);
   const { t: translate } = useTranslation();
@@ -57,20 +55,20 @@ export const ReportDetailData = ({
   const componentArray = [
     <ReportContactDetail
       reportDetail={reportDetail}
-      isCompanyAppointment={isCompanyAppointment}
+      // isCompanyAppointment={isCompanyAppointment}
     />,
     <ReportHouseDetail
       reportDetail={reportDetail}
-      isCompanyAppointment={isCompanyAppointment}
+      // isCompanyAppointment={isCompanyAppointment}
     />,
     <ReportServicesDetail
       reportDetail={reportDetail}
       currency={currency}
-      isCompanyAppointment={isCompanyAppointment}
+      // isCompanyAppointment={isCompanyAppointment}
     />,
     <ReportAdditionalInfoDetail
       reportDetail={reportDetail}
-      isCompanyAppointment={isCompanyAppointment}
+      // isCompanyAppointment={isCompanyAppointment}
     />,
   ];
 
@@ -163,7 +161,7 @@ export const ReportDetailData = ({
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
         <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 2xl:mb-0">
-          {tabSection.map((item, index) => (
+          {tabSection?.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
               isToggle={true}
@@ -201,7 +199,7 @@ export const ReportDetailData = ({
           </div>
         ) : (
           <div className="flex flex-col gap-y-5 w-full">
-            {componentArray.map((component, index) => (
+            {componentArray?.map((component, index) => (
               <div key={index}>{component}</div>
             ))}
           </div>

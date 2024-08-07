@@ -19,6 +19,8 @@ const CreateReportDetails = () => {
   let initialTab: AppointmentReportsFormStages =
     AppointmentReportsFormStages.CONTACT_AND_ADDRESS;
 
+  const { companyAppointment } = router.query;
+
   if (router?.query?.tab) {
     initialTab = Number(router.query?.tab) as AppointmentReportsFormStages;
   }
@@ -28,7 +30,7 @@ const CreateReportDetails = () => {
 
   useEffect(() => {
     if (router?.query?.tab) {
-      const tab = Number(router.query.tab) as AppointmentReportsFormStages;
+      const tab = Number(router.query?.tab) as AppointmentReportsFormStages;
       setTabType(tab);
     }
   }, [router?.query?.tab]);
@@ -123,7 +125,7 @@ const CreateReportDetails = () => {
   const handleReportSuccessRoute = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
     router.push({
-      pathname: "/agent/appointments",
+      pathname: companyAppointment ? "/appointments" : "/agent/appointments",
       query: { status: "None" },
     });
   };
