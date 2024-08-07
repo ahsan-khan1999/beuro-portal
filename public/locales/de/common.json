@@ -1160,6 +1160,7 @@
       "date": "Datum",
       "success_signed_offer": "Unterschrift eingerichtetde"
     },
+    "please_choose": "Bitte wählen Sie",
     "add_new_offer": "Neues Angebot hinzufügen",
     "add_new_invoice": "Neue Rechnung hinzufügen",
     "no_customer_found": "Kein Kunde gefunden",

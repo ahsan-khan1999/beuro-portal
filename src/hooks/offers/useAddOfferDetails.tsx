@@ -18,6 +18,7 @@ import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo } from "react";
 import {
   readCustomer,
+  readCustomerDetail,
   setCustomerDetails,
   setCustomers,
 } from "@/api/slices/customer/customerSlice";
@@ -68,7 +69,9 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
-    // dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    dispatch(
+      readCustomer({ params: { filter: { dropdown: "true" }, paginate: 0 } })
+    );
   }, []);
 
   const type = watch("type");
@@ -142,23 +145,26 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     name: "date",
   });
 
-  const handleSearchCustomer = (value: string) => {
-    dispatch(readCustomer({ params: { filter: { text: value } } }));
-  };
-
-  const onCustomerSelect = (id: string) => {
+  const onCustomerSelect = async (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.find((item) => item.id === id);
-    if (selectedCustomers) {
-      dispatch(setCustomerDetails(selectedCustomers));
-      reset({
-        ...selectedCustomers,
-        customerID: selectedCustomers?.id,
-        type: type,
-        content: selectedContent,
-        leadID: "",
-        gender: staticEnums["Gender"][selectedCustomers?.gender],
-      });
+
+    if (id) {
+      try {
+        const response = await dispatch(
+          readCustomerDetail({ params: { filter: id } })
+        );
+        dispatch(setCustomerDetails(response?.payload));
+        reset({
+          ...response?.payload,
+          customerID: response?.payload?.id,
+          type: type,
+          content: selectedContent,
+          leadID: "",
+          gender: staticEnums["Gender"][response?.payload?.gender],
+        });
+      } catch (error) {
+        console.error("Failed to fetch customer detail:", error);
+      }
     }
   };
 
@@ -194,7 +200,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     register,
     loading,
     control,
-    handleSearchCustomer,
+    // handleSearchCustomer,
     {
       customerType,
       type,

@@ -705,7 +705,7 @@ export type GenerateLeadsCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onSearchCustomer: (value: string) => void,
+  // onSearchCustomer: (value: string) => void,
   properties: {
     offerDetails?: OffersTableRowTypes;
     customerType: string;
@@ -729,7 +729,7 @@ export type GenerateInvoiceCustomerFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onSearchCustomer: (value: string) => void,
+  // onSearchCustomer: (value: string) => void,
   properties: {
     invoiceDetails?: InvoiceDetailTableRowTypes;
     customerType: string;
@@ -762,7 +762,7 @@ export type GenerateFollowUpFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  onSearchCustomer: (value: string) => void,
+  // onSearchCustomer: (value: string) => void,
   data: {
     customer: Customers[];
     lead: Lead[];

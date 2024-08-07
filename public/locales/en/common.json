@@ -1168,6 +1168,7 @@
       "date": "Date",
       "success_signed_offer": "Operation Successful"
     },
+    "please_choose": "Please Choose",
     "add_new_offer": "Add New Offer",
     "add_new_invoice": "Add New Invoice",
     "no_customer_found": "No customer found",
