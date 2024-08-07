@@ -124,15 +124,18 @@ export const SelectBox = ({
                   {translate("common.no_customer_found")}
                 </p>
               ) : (
-                option?.map(({ value, label }) => (
-                  <li
-                    key={value}
-                    onClick={() => selectedOptionHandler(value)}
-                    className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
-                  >
-                    {label}
-                  </li>
-                ))
+                option
+                  ?.slice()
+                  ?.reverse()
+                  ?.map(({ value, label }) => (
+                    <li
+                      key={value}
+                      onClick={() => selectedOptionHandler(value)}
+                      className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
+                    >
+                      {label}
+                    </li>
+                  ))
               )}
             </motion.ul>
           </motion.div>
