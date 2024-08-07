@@ -427,7 +427,7 @@
     "main_heading": "Services",
     "add_button": "Add New",
     "heading": "Services Details",
-    "add_service_heading": "Add new Service",
+    "add_service_heading": "Add New Service",
     "service_detail_tab": "Service Details",
     "table_headings": {
       "id": "ID",
@@ -459,7 +459,7 @@
   "employees": {
     "main_heading": "Employees",
     "add_button": "Add New",
-    "add_new_employee": "Add Employee",
+    "add_new_employee": "Add New Employee",
     "employee_tab": "Employee Details",
     "table_headings": {
       "id": "ID",

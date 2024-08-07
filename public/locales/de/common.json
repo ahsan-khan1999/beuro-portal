@@ -454,7 +454,7 @@
   "employees": {
     "main_heading": "Mitarbeiter",
     "add_button": "Neu hinzufügen",
-    "add_new_employee": "Mitarbeiter hinzufügen",
+    "add_new_employee": "Neuen Mitarbeiter hinzufügen",
     "employee_tab": "Mitarbeiter Details",
     "table_headings": {
       "id": "ID",
