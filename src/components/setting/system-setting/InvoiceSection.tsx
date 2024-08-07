@@ -26,7 +26,6 @@ const InvoiceSection = ({
       isInvoiceOverDue: !systemSetting.isInvoiceOverDue,
     });
   };
-  console.log(systemSetting, "systemSetting");
 
   // const hanldeClose = () => {
   //   setIsOpen(false);
@@ -78,7 +77,7 @@ const InvoiceSection = ({
                   {translate("setting.system_setting.invoice_days_limit")}
                 </p>
                 <DropDown
-                  items={Object.keys(staticEnums["InvoiceOverDueLimit"]).map(
+                  items={Object.keys(staticEnums["InvoiceOverDueLimit"])?.map(
                     (item) => ({
                       item: {
                         label: item,

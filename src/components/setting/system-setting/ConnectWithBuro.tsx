@@ -64,10 +64,10 @@ const ConnectWithBuro = ({
             <div className="border border-[#BFBFBF] rounded-md px-[25px] py-3 flex gap-4">
               {systemSetting?.allowedDomains?.map((item, index) => (
                 <div
-                  className="bg-[#D9D9D9] rounded-md px-2 py-[6px] flex items-center gap-4 "
+                  className="bg-[#D9D9D9] rounded-md px-2 py-[6px] flex items-center gap-4"
                   key={index}
                 >
-                  <span className="text-[#1E1E1E] font-normal text-sm ">
+                  <span className="text-[#1E1E1E] font-normal text-sm">
                     {item}
                   </span>
                   <Image
@@ -89,7 +89,7 @@ const ConnectWithBuro = ({
                 // value={filter.text}
                 onEnterPress={handleSubmit}
                 ref={inputRef}
-                containerClassName="border border-[#BFBFBF] rounded-md "
+                containerClassName="border border-[#BFBFBF] rounded-md"
               />
             </div>
           </div>

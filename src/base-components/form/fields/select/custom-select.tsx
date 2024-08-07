@@ -54,7 +54,7 @@ export const SelectBox = ({
       onSearchCustomer && onSearchCustomer(searchRef.current);
     }
     setOption(
-      options.filter((item) =>
+      options?.filter((item) =>
         item.label?.toLowerCase()?.includes(searchRef.current?.toLowerCase())
       )
     );
@@ -77,7 +77,7 @@ export const SelectBox = ({
         className={`${classes}`}
       >
         <span className="truncate">
-          {(field && getLabelByValue(field.value, option)) ||
+          {(field && getLabelByValue(field?.value, option)) ||
             getLabelByValue(defaultValue, option)}
         </span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
@@ -122,12 +122,12 @@ export const SelectBox = ({
                   </div>
                 )}
               </div>
-              {searchPerformed && option.length === 0 ? (
+              {searchPerformed && option?.length === 0 ? (
                 <p className="text-center text-gray-500">
                   {translate("common.no_customer_found")}
                 </p>
               ) : (
-                option.map(({ value, label }) => (
+                option?.map(({ value, label }) => (
                   <li
                     key={value}
                     onClick={() => selectedOptionHandler(value)}

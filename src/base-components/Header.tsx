@@ -44,8 +44,8 @@ const Header = () => {
       moment(item.dateTime).isSame(today, "day")
     );
 
-    if (todayFollowUps.length > 0) {
-      setTodayCount(todayFollowUps.length);
+    if (todayFollowUps?.length > 0) {
+      setTodayCount(todayFollowUps?.length);
     }
   }, [followUp]);
 
@@ -76,7 +76,7 @@ const Header = () => {
   }, [followUp]);
 
   useEffect(() => {
-    const followUpTime = upcomingFollowUp ? upcomingFollowUp.dateTime : null;
+    const followUpTime = upcomingFollowUp ? upcomingFollowUp?.dateTime : null;
     const now = new Date();
     // const end = new Date("2024-07-10T13:27:30Z");
     const end = new Date(followUpTime);
