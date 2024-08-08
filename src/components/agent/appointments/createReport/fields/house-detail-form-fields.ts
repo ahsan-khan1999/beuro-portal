@@ -15,6 +15,15 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
+      containerClass: "pt-5 mb-2",
+      field: {
+        type: Field.span,
+        id: "test",
+        name: "test",
+        text: `${translate("agent.house_detail_fields.living_room_heading")}`,
+      },
+    },
+    {
       field: {
         type: Field.div,
         id: "div-field",

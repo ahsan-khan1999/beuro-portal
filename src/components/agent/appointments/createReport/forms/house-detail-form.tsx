@@ -16,20 +16,21 @@ export const HouseDetailReport = ({
     useCreateReportHoseDetails({ onNextHandler, onBackHandler });
 
   return (
-    <div
-      className="p-[21px] bg-white rounded-lg h-fit mb-5"
-      id={translate("agent.report_tabs_heading.house")}
-    >
-      <h1 className="text-[#1E1E1E] text-base font-semibold mb-2">
-        {translate("agent.house_detail_fields.living_room_heading")}
+    <div className="mb-5" id={translate("agent.report_tabs_heading.house")}>
+      <h1 className="p-5 bg-white rounded-t-lg h-fit text-[#1E1E1E] text-base font-semibold pb-[29px]">
+        {translate("appointments.report_detail.house_detail")}
       </h1>
 
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-      />
+      <hr className="opacity-10 mx-5" />
+
+      <div className="px-5 pb-5 bg-white rounded-b-lg">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+        />
+      </div>
     </div>
   );
 };

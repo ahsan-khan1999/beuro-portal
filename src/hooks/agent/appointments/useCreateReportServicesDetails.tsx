@@ -25,7 +25,7 @@ import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import {
-  readReportdetails,
+  readReportDetails,
   updateReport,
 } from "@/api/slices/appointment/appointmentSlice";
 import {
@@ -197,7 +197,7 @@ export const useCreateReportServicesDetails = ({
 
   useMemo(() => {
     if (report) {
-      dispatch(readReportdetails({ params: { filter: report } })).then(
+      dispatch(readReportDetails({ params: { filter: report } })).then(
         (response: ReportPromiseActionType) => {
           if (response?.payload) {
             reset({

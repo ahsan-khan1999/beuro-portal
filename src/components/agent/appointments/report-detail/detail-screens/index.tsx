@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { useTranslation } from "next-i18next";
 import { ReportContactDetail } from "./contact-detail";
@@ -54,10 +53,23 @@ export const ReportDetailData = ({
   }, []);
 
   const componentArray = [
-    <ReportContactDetail reportDetail={reportDetail} />,
-    <ReportHouseDetail reportDetail={reportDetail} />,
-    <ReportServicesDetail reportDetail={reportDetail} currency={currency} />,
-    <ReportAdditionalInfoDetail reportDetail={reportDetail} />,
+    <ReportContactDetail
+      reportDetail={reportDetail}
+      // isCompanyAppointment={isCompanyAppointment}
+    />,
+    <ReportHouseDetail
+      reportDetail={reportDetail}
+      // isCompanyAppointment={isCompanyAppointment}
+    />,
+    <ReportServicesDetail
+      reportDetail={reportDetail}
+      currency={currency}
+      // isCompanyAppointment={isCompanyAppointment}
+    />,
+    <ReportAdditionalInfoDetail
+      reportDetail={reportDetail}
+      // isCompanyAppointment={isCompanyAppointment}
+    />,
   ];
 
   const tabSection: tabArrayTypes[] = [
@@ -149,7 +161,7 @@ export const ReportDetailData = ({
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
         <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 2xl:mb-0">
-          {tabSection.map((item, index) => (
+          {tabSection?.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
               isToggle={true}
@@ -187,7 +199,7 @@ export const ReportDetailData = ({
           </div>
         ) : (
           <div className="flex flex-col gap-y-5 w-full">
-            {componentArray.map((component, index) => (
+            {componentArray?.map((component, index) => (
               <div key={index}>{component}</div>
             ))}
           </div>

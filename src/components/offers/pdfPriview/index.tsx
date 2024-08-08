@@ -2,18 +2,6 @@ import EmailCard from "./PdfCard";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
-// const OfferPdf = dynamic(
-//   () => import("@/components/reactPdf/offer-pdf-preview"),
-//   {
-//     ssr: false,
-
-//   }
-// );
-
-// const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
-//   ssr: false,
-// });
-
 const OfferPdf = dynamic(() => import("@/components/reactPdf/pdf-layout"), {
   ssr: false,
 });
@@ -27,20 +15,14 @@ const OfferPdfPriview = () => {
   const {
     offerData,
     activeButtonId,
-    emailTemplateSettings,
-    templateSettings,
     modal,
     loading,
-    loadingGlobal,
-    pdfFile,
-    setPdfFile,
     handleDonwload,
     handleEmailSend,
     handlePrint,
     handleSendByPost,
     onClose,
     onSuccess,
-    systemSetting,
     offerDetails,
     isPdfRendering,
     mergedPdfUrl,
@@ -88,25 +70,6 @@ const OfferPdfPriview = () => {
         <CustomLoader />
       ) : (
         <div className="mt-5">
-          {/* <OfferPdf
-            data={offerData}
-            emailTemplateSettings={emailTemplateSettings}
-            templateSettings={templateSettings}
-            systemSetting={systemSetting}
-            showContractSign={true}
-            pdfFile={pdfFile}
-            setPdfFile={setPdfFile}
-          />
-          <OfferPdfDownload
-            data={offerData}
-            templateSettings={templateSettings}
-            emailTemplateSettings={emailTemplateSettings}
-            pdfFile={pdfFile}
-            setPdfFile={setPdfFile}
-            systemSetting={systemSetting}
-            showContractSign={true}
-          /> */}
-
           <OfferPdf
             mergedPdfFileUrl={mergedPdfUrl}
             isPdfRendering={isPdfRendering}

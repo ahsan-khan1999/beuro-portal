@@ -160,7 +160,7 @@
     "file": "Please Select a valid file format"
   },
   "validationMessages": {
-    "unauthorized":"You do not have permission",
+    "unauthorized": "You do not have permission",
     "required": "This field is required",
     "nonexistent": "nonexistent",
     "already_exists": "{0} with this {1} already exists",
@@ -1135,6 +1135,7 @@
     "schedule_appointment": "Schedule Appointment",
     "reschedule_appointment": "Reschedule Appointment",
     "detail_heading": "Appointment Details",
+    "details": "Details",
     "table_headings": {
       "id": "ID",
       "lead_id": "Lead ID",
@@ -1254,7 +1255,7 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
-    "please_choose":"Please Choose",
+    "please_choose": "Please Choose",
     "yes": "Yes",
     "no": "No",
     "upload_button": "Upload",

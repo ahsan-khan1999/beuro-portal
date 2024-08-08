@@ -33,7 +33,7 @@ export default function Appointments() {
       onStatusChange={handleStatusUpdate}
       onAppointmentSchedule={handleScheduleAppointments}
     />,
-    currentPageRows?.length > 0,
+    totalCount !== 0,
     isLoading
   );
 

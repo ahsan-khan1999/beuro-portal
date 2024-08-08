@@ -1,13 +1,5 @@
-import { ContactAddressProps } from "@/types/pdf";
-import { Text, View, StyleSheet } from "@react-pdf/renderer";
-import {
-  container,
-  greyText,
-  leftColumn,
-  rightColumn,
-  textBase,
-  textSmall,
-} from "./style-sheet";
+import { Text, View } from "@react-pdf/renderer";
+import { textBase } from "./style-sheet";
 import { ContactDetailsProps } from "@/types";
 import { Country } from "./address-details";
 import { GenderLabel } from "@/utils/static";

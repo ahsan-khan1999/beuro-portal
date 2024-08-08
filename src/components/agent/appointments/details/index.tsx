@@ -15,24 +15,25 @@ export const AgentAppointmentsDetails = () => {
 
   return (
     <>
-      <AppointmentsDetailCard
-        onStatusChange={handleStatusUpdate}
-        appointmentDetails={appointmentDetails}
-      />
-
       {loading ? (
         <CustomLoader />
       ) : (
-        !appointmentDetails?.isReportSubmitted && (
-          <div className="bg-white flex items-center justify-center mt-6">
-            <NoDataEmptyState
-              heading={translate("appointments.detail_data.no_data_found")}
-              isButton={true}
-              onButtonClick={handleCreateReport}
-              buttonHeading={translate("common.create_report_btn")}
-            />
-          </div>
-        )
+        <>
+          <AppointmentsDetailCard
+            onStatusChange={handleStatusUpdate}
+            appointmentDetails={appointmentDetails}
+          />
+          {!appointmentDetails?.isReportSubmitted && (
+            <div className="bg-white flex items-center justify-center mt-6">
+              <NoDataEmptyState
+                heading={translate("appointments.detail_data.no_data_found")}
+                isButton={true}
+                onButtonClick={handleCreateReport}
+                buttonHeading={translate("common.create_report_btn")}
+              />
+            </div>
+          )}
+        </>
       )}
 
       {renderModal()}

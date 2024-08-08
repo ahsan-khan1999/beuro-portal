@@ -6,15 +6,17 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
+import { Appointments } from "@/types/appointments";
+import { formatDateTimeToDate } from "@/utils/utility";
 
 export interface AppointmentsDetailCardProps {
-  onStatusChange: (id: number, status: string, type: string) => void;
-  onScheduleAppointments: () => void;
+  appointmentDetails: Appointments;
+  onStatusChange: (appointmentStatus: string) => void;
 }
 
 export const AgentAppointmentsDetailCard = ({
+  appointmentDetails,
   onStatusChange,
-  onScheduleAppointments,
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -25,9 +27,9 @@ export const AgentAppointmentsDetailCard = ({
   };
 
   const itemsValue = [
-    `${translate("sidebar.customer.appointments.pending")}`,
-    `${translate("sidebar.customer.appointments.completed")}`,
-    `${translate("sidebar.customer.appointments.cancelled")}`,
+    `${translate("appointments.appointment_status.Pending")}`,
+    `${translate("appointments.appointment_status.Completed")}`,
+    `${translate("appointments.appointment_status.Cancelled")}`,
   ];
 
   const items = Object.keys(staticEnums["AppointmentStatus"]).map(
@@ -42,10 +44,10 @@ export const AgentAppointmentsDetailCard = ({
         <div className="flex items-center gap-x-4">
           <BackIcon onClick={handleBack} />
           <h1 className="text-[#222B45] text-2xl font-semibold">
-            {translate("appointments.detail_heading")}
+            {translate("appointments.details")}
           </h1>
         </div>
-        <div className="flex items-center gap-x-4">
+        {/* <div className="flex items-center gap-x-4">
           <Button
             inputType="button"
             onClick={onScheduleAppointments}
@@ -62,7 +64,7 @@ export const AgentAppointmentsDetailCard = ({
             id="cancel"
             iconAlt="cancel"
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
@@ -73,7 +75,7 @@ export const AgentAppointmentsDetailCard = ({
                 {translate("appointments.detail_data.lead_id")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                V-2000
+                {appointmentDetails?.leadID?.refID}
               </span>
             </div>
             <div className="flex items-center gap-x-[10px]">
@@ -83,11 +85,9 @@ export const AgentAppointmentsDetailCard = ({
               <DropDown
                 items={items}
                 selectedItem={translate(
-                  `appointments.appointment_status.pending`
+                  `appointments.appointment_status.${appointmentDetails?.appointmentStatus}`
                 )}
-                onItemSelected={(status) => {
-                  onStatusChange(0, status, "appointments");
-                }}
+                onItemSelected={onStatusChange}
                 dropDownClassName={`bg-[#4A13E7] w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
                 dropDownTextClassName="text-white text-base font-medium me-1"
                 dropDownItemsContainerClassName="w-full"
@@ -101,7 +101,7 @@ export const AgentAppointmentsDetailCard = ({
                 {translate("appointments.detail_data.date")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                05/07/2024
+                {formatDateTimeToDate(appointmentDetails?.date)}
               </span>
             </div>
             <div className="flex items-center gap-x-[10px]">
@@ -109,7 +109,7 @@ export const AgentAppointmentsDetailCard = ({
                 {translate("appointments.detail_data.time")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                16:30 - 18:00
+                {appointmentDetails?.startTime} - {appointmentDetails?.endTime}
               </span>
             </div>
           </div>

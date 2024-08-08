@@ -4,7 +4,7 @@ import { StyleSheet } from "@react-pdf/renderer";
 const styles = StyleSheet.create({
   headerContainer: {
     width: 555,
-    backgroundColor: "#40506A",
+    // backgroundColor: bgColor ? bgColor : "#40506A",
     paddingVertical: 8,
     borderRadius: 4,
     marginBottom: 12,
@@ -49,9 +49,11 @@ const styles = StyleSheet.create({
 export const ServiceTableHederRow = ({
   isDiscount,
   language,
+  bgColor,
 }: {
   isDiscount?: boolean;
   language?: string;
+  bgColor?: string;
 }) => {
   const langContent = {
     en: {
@@ -75,7 +77,12 @@ export const ServiceTableHederRow = ({
   };
 
   return (
-    <View style={styles.headerContainer}>
+    <View
+      style={{
+        ...styles.headerContainer,
+        backgroundColor: bgColor || "#3498db",
+      }}
+    >
       <View style={styles.headerRow}>
         <Text style={styles.headerTitle}>
           {langContent[language as keyof typeof langContent]?.service ||

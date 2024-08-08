@@ -21,7 +21,7 @@ import { Appointments } from "@/types/appointments";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 
 export const useAppointments = () => {
-  const { loading, isLoading, totalCount, appointment } = useAppSelector(
+  const { loading, isLoading, totalCount } = useAppSelector(
     (state) => state.appointment
   );
 
@@ -130,7 +130,7 @@ export const useAppointments = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const defaultUpdateModal = () => {
+  const updateSuccessModal = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
@@ -177,7 +177,7 @@ export const useAppointments = () => {
             let prevPageRows = [...currentPageRows];
             prevPageRows.splice(index, 1, res.payload);
             setCurrentPageRows(prevPageRows);
-            defaultUpdateModal();
+            updateSuccessModal();
           }
         }
       }
@@ -231,7 +231,10 @@ export const useAppointments = () => {
         onClose={onClose}
         heading={translate("appointments.reschedule_appointment")}
         onSuccess={handleAppointmentsSuccess}
+        onUpdateSuccess={updateSuccessModal}
         isUpdate={true}
+        currentPageRows={currentPageRows}
+        setCurrentPageRows={setCurrentPageRows}
       />
     ),
     [ModalType.APPOINTMENT_SUCCESS]: (

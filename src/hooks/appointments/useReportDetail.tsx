@@ -3,14 +3,13 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
   readAppointmentDetails,
-  readReportdetails,
+  readReportDetails,
   setAppointmentDetails,
   setReportDetails,
   updateAppointmentStatus,
@@ -27,17 +26,16 @@ export const useReportDetails = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const { loading, reportDetails, appointmentDetails } = useAppSelector(
-    (state) => state.appointment
-  );
+  const { isLoading, loading, reportDetails, appointmentDetails } =
+    useAppSelector((state) => state.appointment);
 
   const { systemSettings } = useAppSelector((state) => state.settings);
 
-  const id = router.query.report;
+  const id = router.query.report || router.query.appointment;
 
   useEffect(() => {
     if (id) {
-      dispatch(readReportdetails({ params: { filter: id } })).then(
+      dispatch(readReportDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setReportDetails(res.payload));
         }
@@ -84,10 +82,6 @@ export const useReportDetails = () => {
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const handleScheduleAppointments = () => {
-    dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
   };
 
   const handleAppointmentsSuccess = () => {
@@ -157,13 +151,7 @@ export const useReportDetails = () => {
         route={onClose}
       />
     ),
-    [ModalType.SCHEDULE_APPOINTMENTS]: (
-      <ScheduleAppointments
-        onClose={onClose}
-        heading={translate("appointments.schedule_appointment")}
-        onSuccess={handleAppointmentsSuccess}
-      />
-    ),
+
     [ModalType.APPOINTMENT_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
@@ -182,17 +170,17 @@ export const useReportDetails = () => {
   return {
     router,
     loading,
+    isLoading,
     translate,
     renderModal,
     reportDetails,
     handleStatusUpdate,
-    handleScheduleAppointments,
     appointmentDetails,
     handleImageUpload,
     shareImgModal,
     handleUpdateDiscount,
     systemSettings,
     defaultUpdateModal,
-    handleCreateReport
+    handleCreateReport,
   };
 };

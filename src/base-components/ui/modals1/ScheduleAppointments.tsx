@@ -5,12 +5,16 @@ import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { useScheduleAppointment } from "@/hooks/appointments/useScheduleAppointment";
 import { useAppSelector } from "@/hooks/useRedux";
+import { Appointments } from "@/types/appointments";
 
 export interface AppointmentsModalProps {
   onClose: () => void;
   onSuccess: () => void;
+  onUpdateSuccess?: () => void;
   heading?: string;
   isUpdate?: boolean;
+  setCurrentPageRows?: React.Dispatch<React.SetStateAction<Appointments[]>>;
+  currentPageRows?: Appointments[];
 }
 
 export const ScheduleAppointments = ({
@@ -18,6 +22,9 @@ export const ScheduleAppointments = ({
   onSuccess,
   heading,
   isUpdate,
+  onUpdateSuccess,
+  currentPageRows,
+  setCurrentPageRows,
 }: AppointmentsModalProps) => {
   const defaultClassName = "mt-[25px]";
   const { id, leadId, refID, date, startTime, endTime, agent } = useAppSelector(
@@ -26,6 +33,7 @@ export const ScheduleAppointments = ({
 
   const { fields, onSubmit, handleSubmit, errors } = useScheduleAppointment({
     onSuccess,
+    onUpdateSuccess,
     onClose,
     id,
     leadId,
@@ -35,6 +43,8 @@ export const ScheduleAppointments = ({
     endTime,
     agent,
     isUpdate,
+    currentPageRows,
+    setCurrentPageRows,
   });
 
   return (

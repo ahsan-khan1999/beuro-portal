@@ -18,7 +18,7 @@ import {
 import { useEffect } from "react";
 import {
   createReport,
-  readReportdetails,
+  readReportDetails,
 } from "@/api/slices/appointment/appointmentSlice";
 import { ReportPromiseActionType } from "@/types/customer";
 
@@ -36,19 +36,29 @@ export const useCreateReportAddressDetails = ({
     (state) => state.appointment
   );
 
-  const { report } = router.query;
+  const { report, companyAppointment } = router.query;
 
   const handleCancel = () => {
+    const pathname = companyAppointment
+      ? "/appointments/details"
+      : report
+      ? "/agent/appointments/report-detail"
+      : "/agent/appointments/details";
+
+    const query: any = {
+      appointment: report
+        ? reportDetails?.appointmentID?.id
+        : appointmentDetails?.id,
+      status: "None",
+    };
+
+    if (companyAppointment) {
+      query.companyAppointment = companyAppointment;
+    }
+
     router.push({
-      pathname: report
-        ? "/agent/appointments/report-detail"
-        : "/agent/appointments/details",
-      query: {
-        appointment: report
-          ? reportDetails?.appointmentID?.id
-          : appointmentDetails?.id,
-        status: "None",
-      },
+      pathname,
+      query,
     });
   };
 
@@ -86,7 +96,7 @@ export const useCreateReportAddressDetails = ({
     };
 
     if (report) {
-      dispatch(readReportdetails({ params: { filter: report } })).then(
+      dispatch(readReportDetails({ params: { filter: report } })).then(
         (response: ReportPromiseActionType) => {
           if (response?.payload) {
             const transformedData = transformData({

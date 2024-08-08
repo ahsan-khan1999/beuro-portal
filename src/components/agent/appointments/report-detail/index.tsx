@@ -7,7 +7,7 @@ import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-stat
 export const ReportDetails = () => {
   const {
     translate,
-    loading,
+    isLoading,
     handleStatusUpdate,
     renderModal,
     reportDetails,
@@ -22,7 +22,7 @@ export const ReportDetails = () => {
 
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <CustomLoader />
       ) : !appointmentDetails?.isReportSubmitted ? (
         <>
@@ -64,7 +64,7 @@ export const ReportDetails = () => {
           <div className="2xl:mt-[365px] w-full 2xl:block mb-10">
             <ReportDetailData
               reportDetail={reportDetails}
-              loading={loading}
+              loading={isLoading}
               handleUpdateDiscount={handleUpdateDiscount}
               currency={systemSettings?.currency}
               shareImgModal={shareImgModal}

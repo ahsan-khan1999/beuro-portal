@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import { houseDetailReportFormField } from "@/components/agent/appointments/createReport/fields/house-detail-form-fields";
 import {
-  readReportdetails,
+  readReportDetails,
   updateReport,
 } from "@/api/slices/appointment/appointmentSlice";
 import { useEffect } from "react";
@@ -47,7 +47,7 @@ export const useCreateReportHoseDetails = ({
 
   useEffect(() => {
     if (report) {
-      dispatch(readReportdetails({ params: { filter: report } })).then(
+      dispatch(readReportDetails({ params: { filter: report } })).then(
         (response: ReportPromiseActionType) => {
           if (response?.payload) {
             reset({

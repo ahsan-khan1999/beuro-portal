@@ -1057,6 +1057,7 @@ export interface ProductItemFooterProps {
   discountDescription?: string;
   language?: string;
   paymentType?: string;
+  isBreakPage?: boolean;
 }
 
 export interface ContactDetailsProps {
@@ -1302,6 +1303,17 @@ export interface PdfPreviewProps {
   lang?: string | undefined;
   isOfferPdf?: boolean;
 }
+export interface ReportPdfPreviewProps {
+  data?: ReportPDFProps;
+  pdfFile?: any;
+  setPdfFile?: SetStateAction<any>;
+  fileName?: string;
+  remoteFileBlob?: Blob | null;
+  mergedPdfFileUrl?: string | null;
+  isPdfRendering?: boolean;
+  language?: string | undefined;
+  systemSetting?: SystemSetting | null;
+}
 
 export interface PdfPreviewFooterProps {
   documentDetails?: DocumentDetailFooterProps;
@@ -1404,4 +1416,163 @@ export interface InvoiceEmailCardProps {
   loading?: boolean;
   onEmailSend: () => void;
   onSendViaPost: () => void;
+}
+
+export interface ReportHeaderProps {
+  date: string;
+}
+
+export interface ReportDocumentHeaderProps {
+  date: string;
+  language?: string;
+}
+
+export interface LivingRoomDetailsProps {
+  sofa: number;
+  teacherDesk: number;
+  tvTable: number;
+  armchair: number;
+  table: number;
+  shelf: number;
+  LSofa: number;
+  TV: number;
+  decoBig: number;
+  box: number;
+  descriptions: string;
+}
+
+export interface KitchenDetailsProps {
+  oven: number;
+  refrigerator: number;
+  freezer: number;
+  stove: number;
+  microwave: number;
+  coffeeMachine: number;
+  washingMachine: number;
+  tumbler: number;
+  shelf: number;
+  box: number;
+  descriptions: string;
+}
+
+export interface DedRoomDetailsProps {
+  bed: number;
+  doubleBed: number;
+  armchair: number;
+  smallWardrobe: number;
+  mediumWardrobe: number;
+  largeWardrobe: number;
+  dressingTable: number;
+  nightstand: number;
+  shelf: number;
+  desk: number;
+  plants: number;
+  box: number;
+  descriptions: string;
+}
+
+export interface RoomDetailsProps {
+  bed: number;
+  doubleBed: number;
+  armchair: number;
+  smallWardrobe: number;
+  mediumWardrobe: number;
+  largeWardrobe: number;
+  shelf: number;
+  desk: number;
+  tv: number;
+  tvTable: number;
+  nightstand: number;
+  box: number;
+  descriptions: string;
+}
+
+export interface OutDoorDetailsProps {
+  grill: number;
+  table: number;
+  chairs: number;
+  sofa: number;
+  shelf: number;
+  umbrella: number;
+  pots: number;
+  plants: number;
+  herbGarden: number;
+  lawnmower: number;
+  descriptions: string;
+}
+
+export interface BasementAtticDetailsProps {
+  washingMachine: number;
+  tumbler: number;
+  shelf: number;
+  disposal: number;
+  bicycle: number;
+  stroller: number;
+  furniture: number;
+  boxes: number;
+  descriptions: string;
+}
+
+export interface SpecialItemsDetailsProps {
+  aquarium: number;
+  piano: number;
+  gymEquipment: number;
+  electronics: number;
+  pool: number;
+  safe: number;
+  lamp: number;
+  descriptions: string;
+}
+
+export interface ReportHouseDetailsProps {
+  livingRoomDetails: LivingRoomDetailsProps;
+  kitchenDetails: KitchenDetailsProps;
+  bedRoomDetails: DedRoomDetailsProps;
+  roomDetails: RoomDetailsProps;
+  outDoorDetails: OutDoorDetailsProps;
+  basementAtticDetails: BasementAtticDetailsProps;
+  specialItemsDetails: SpecialItemsDetailsProps;
+}
+
+export interface OfferDetailsProps {
+  employees: number;
+  deliveryVehicle: number;
+  hours: number;
+  cleaningWithHandoverGuarantee: number;
+  broomClean: number;
+  priceCHF: number;
+  remarks: string;
+  noteAndInformation: string;
+}
+
+export interface ReportMovingDetailsProps {
+  address: CustomerAddress[];
+}
+
+export interface ReportContactDetailsProps {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface AppointmentProps {
+  id?: string;
+  date?: string;
+  leadID?: {
+    id?: string;
+    refID?: string;
+    createdBy?: {
+      fullName: string;
+    };
+  };
+}
+export interface ReportPDFProps {
+  appointmentID?: AppointmentProps;
+  headerDetails: ReportDocumentHeaderProps;
+  contactAddress: ReportContactDetailsProps;
+  movingDetails: ReportMovingDetailsProps;
+  houseDetails: ReportHouseDetailsProps;
+  serviceItem: ServiceList[];
+  serviceItemFooter: ProductItemFooterProps;
+  offerDetails: OfferDetailsProps;
 }

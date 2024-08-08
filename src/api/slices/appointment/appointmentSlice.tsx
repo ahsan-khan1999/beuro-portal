@@ -91,7 +91,6 @@ export const updateAppointmentStatus:
   try {
     const response = await apiServices.updateAppointmentStatus(data);
     thunkApi.dispatch(setAppointmentDetails(response?.data?.Appointment));
-    // thunkApi.dispatch(setReportDetails(response?.data?.Report));
     return response?.data?.Appointment;
   } catch (e: any) {
     thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -114,7 +113,7 @@ export const createReport: AsyncThunk<boolean, object, object> | any =
     }
   });
 
-export const readReportdetails: AsyncThunk<boolean, object, object> | any =
+export const readReportDetails: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("report/read/details", async (args, thunkApi) => {
     const { params } = args as any;
 
@@ -174,19 +173,21 @@ const appointmentSlice = createSlice({
     });
     builder.addCase(readAppointments.fulfilled, (state, action) => {
       state.appointment = action.payload;
+      state.lastPage = action.payload.lastPage;
+      state.totalCount = action.payload.totalCount;
       state.isLoading = false;
     });
     builder.addCase(readAppointments.rejected, (state) => {
       state.isLoading = false;
     });
-    builder.addCase(readReportdetails.pending, (state) => {
+    builder.addCase(readReportDetails.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(readReportdetails.fulfilled, (state, action) => {
+    builder.addCase(readReportDetails.fulfilled, (state, action) => {
       state.reportDetails = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(readReportdetails.rejected, (state) => {
+    builder.addCase(readReportDetails.rejected, (state) => {
       state.isLoading = false;
     });
     builder.addCase(readAppointmentDetails.pending, (state) => {

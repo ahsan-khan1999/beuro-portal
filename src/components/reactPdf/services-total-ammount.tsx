@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexDirection: "column",
-    // justifyContent: "space-between",
     rowGap: 20,
   },
   bottomRow: {
@@ -18,21 +17,14 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   topRow: {
-    // flexDirection: "row",
     width: "100%",
   },
   totalSection: {
-    backgroundColor: "#404F6A",
+    // backgroundColor: "#404F6A",
     borderRadius: 4,
     padding: 8,
-    // marginTop: 10,
-    // columnGap: 16,
     flexDirection: "row",
     justifyContent: "space-between",
-    // borderBottom: "1px",
-    // borderBottomColor: "#ccc",
-    // paddingBottom: 5,
-    // marginBottom: 5,
   },
   grandTotalText: {
     fontSize: 8,
@@ -146,6 +138,7 @@ export const ServicesTotalAmount = ({
   dueAmount,
   language,
   paymentType,
+  isBreakPage,
 }: Partial<ProductItemFooterProps>) => {
   const isPaid =
     invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
@@ -214,7 +207,7 @@ export const ServicesTotalAmount = ({
   };
 
   return (
-    <View style={styles.container} break={true}>
+    <View style={styles.container} break={isBreakPage ? false : true}>
       <View style={styles.contentContainer}>
         <View style={styles.topRow}>
           <View style={styles.subSection}>
@@ -268,7 +261,12 @@ export const ServicesTotalAmount = ({
 
           {(isOfferPDF || isContractPDF) &&
             (!isShowExtraAmount ? (
-              <View style={styles.totalSection}>
+              <View
+                style={{
+                  ...styles.totalSection,
+                  backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                }}
+              >
                 <Text style={styles.whiteText}>
                   {langContent[language as keyof typeof langContent]
                     ?.grand_total || "Gesamtsumme"}
@@ -290,24 +288,17 @@ export const ServicesTotalAmount = ({
                     {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                   </Text>
                 </View>
-                {/* <View style={styles.subSection}>
-                  <Text style={styles.text}>
-                    {!isPaid ? "Fälliger Betrag" : "Bezahlt Menge"}:
-                  </Text>
-                  <Text style={styles.text}>
-                    {Number(invoiceAmount).toFixed(2)}{" "}
-                  </Text>
-                </View>
-                <View style={styles.totalSection}>
-                  <Text style={styles.text}>Unbezahlter Betrag:</Text>
-                  <Text style={styles.text}>{unPaidAmount.toFixed(2)} </Text>
-                </View> */}
               </View>
             ))}
 
           {isMainInvoice && (
             <View>
-              <View style={styles.totalSection}>
+              <View
+                style={{
+                  ...styles.totalSection,
+                  backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                }}
+              >
                 <Text style={styles.whiteText}>
                   {langContent[language as keyof typeof langContent]
                     ?.grand_total || "Gesamtsumme"}
@@ -349,7 +340,12 @@ export const ServicesTotalAmount = ({
 
           {isSubInvoicePdf &&
             (!isShowExtraAmount ? (
-              <View style={styles.totalSection}>
+              <View
+                style={{
+                  ...styles.totalSection,
+                  backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                }}
+              >
                 <Text style={styles.whiteText}>
                   {langContent[language as keyof typeof langContent]
                     ?.grand_total || "Gesamtsumme"}
@@ -372,7 +368,12 @@ export const ServicesTotalAmount = ({
                   </Text>
                 </View>
                 <View>
-                  <View style={styles.totalSection}>
+                  <View
+                    style={{
+                      ...styles.totalSection,
+                      backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                    }}
+                  >
                     <Text style={styles.whiteText}>
                       {langContent[language as keyof typeof langContent]
                         ?.grand_total || "Gesamtsumme"}
@@ -413,7 +414,12 @@ export const ServicesTotalAmount = ({
 
           {isReceiptPdf &&
             (!isShowExtraAmount ? (
-              <View style={styles.totalSection}>
+              <View
+                style={{
+                  ...styles.totalSection,
+                  backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                }}
+              >
                 <Text style={styles.whiteText}>
                   {langContent[language as keyof typeof langContent]
                     ?.grand_total || "Gesamtsumme"}
@@ -444,7 +450,12 @@ export const ServicesTotalAmount = ({
                   </View>
                 )}
                 <View>
-                  <View style={styles.totalSection}>
+                  <View
+                    style={{
+                      ...styles.totalSection,
+                      backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                    }}
+                  >
                     <Text style={styles.whiteText}>
                       {langContent[language as keyof typeof langContent]
                         ?.grand_total || "Gesamtsumme"}

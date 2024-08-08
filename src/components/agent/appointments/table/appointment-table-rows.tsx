@@ -48,6 +48,12 @@ export const AppointmentTableRows = ({
           });
         };
 
+        const handlePdfPreview = () => {
+          router.push({
+            pathname: `/agent/appointments/pdf`,
+            query: { ...router.query, reportId: item?.id },
+          });
+        };
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -107,22 +113,9 @@ export const AppointmentTableRows = ({
                     dropDownTextClassName="text-white text-base font-medium me-1"
                     dropDownItemsContainerClassName="w-full"
                     dropDownIconClassName="text-white"
-                    isThirdLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 3
-                    }
-                    isSecondLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 2
-                    }
-                    isLastIndex={
-                      dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 1
-                    }
-                    isLead={true}
+                    isSecondLastIndex={index === dataToAdd?.length - 2}
+                    isLastIndex={index === dataToAdd?.length - 1}
+                    isContract={true}
                   />
                 </div>
 
@@ -148,7 +141,7 @@ export const AppointmentTableRows = ({
                 {item?.isReportSubmitted ? (
                   <OutlineButton
                     inputType="button"
-                    onClick={() => {}}
+                    onClick={handlePdfPreview}
                     className="bg-white text-primary w-full border border-primary py-[5px] !h-fit"
                     text={translate("appointments.view_reports_btn")}
                     id="view reports"
