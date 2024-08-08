@@ -74,40 +74,40 @@ export const useEditOfferDetails = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  // useEffect(() => {
-  //   if (offer) {
-  //     dispatch(readOfferDetails({ params: { filter: offer } })).then(
-  //       (res: OfferPromiseActionType) => {
-  //         dispatch(
-  //           setOfferDetails({ ...res.payload, type: "Existing Customer" })
-  //         );
+  useEffect(() => {
+    if (offer) {
+      dispatch(readOfferDetails({ params: { filter: offer } })).then(
+        (res: OfferPromiseActionType) => {
+          dispatch(
+            setOfferDetails({ ...res.payload, type: "Existing Customer" })
+          );
 
-  //         reset({
-  //           type: "Existing Customer",
-  //           leadID: res?.payload?.leadID?.id,
-  //           customerType: getKeyByValue(
-  //             staticEnums["CustomerType"],
-  //             res?.payload?.leadID?.customerDetail?.customerType
-  //           ),
-  //           fullName: res?.payload?.leadID?.customerDetail?.fullName,
-  //           email: res?.payload?.leadID?.customerDetail?.email,
-  //           phoneNumber: res?.payload?.leadID?.customerDetail?.phoneNumber,
-  //           mobileNumber: res?.payload?.leadID?.customerDetail?.mobileNumber,
-  //           content: res?.payload?.content?.id,
-  //           title: res?.payload?.title,
-  //           address: res?.payload?.leadID?.customerDetail?.address,
-  //           date: res?.payload?.date,
-  //           customerID: res?.payload?.leadID?.customerID,
-  //           gender:
-  //             staticEnums["Gender"][
-  //               res?.payload?.leadID?.customerDetail?.gender
-  //             ],
-  //           time: res?.payload?.time,
-  //         });
-  //       }
-  //     );
-  //   }
-  // }, [offer]);
+          reset({
+            type: "Existing Customer",
+            leadID: res?.payload?.leadID?.id,
+            customerType: getKeyByValue(
+              staticEnums["CustomerType"],
+              res?.payload?.leadID?.customerDetail?.customerType
+            ),
+            fullName: res?.payload?.leadID?.customerDetail?.fullName,
+            email: res?.payload?.leadID?.customerDetail?.email,
+            phoneNumber: res?.payload?.leadID?.customerDetail?.phoneNumber,
+            mobileNumber: res?.payload?.leadID?.customerDetail?.mobileNumber,
+            content: res?.payload?.content?.id,
+            title: res?.payload?.title,
+            address: res?.payload?.leadID?.customerDetail?.address,
+            date: res?.payload?.date,
+            customerID: res?.payload?.leadID?.customerID,
+            gender:
+              staticEnums["Gender"][
+                res?.payload?.leadID?.customerDetail?.gender
+              ],
+            time: res?.payload?.time,
+          });
+        }
+      );
+    }
+  }, [offer]);
 
   useEffect(() => {
     if (offerDetails?.leadID?.customerID) {

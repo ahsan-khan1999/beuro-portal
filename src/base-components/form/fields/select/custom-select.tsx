@@ -69,6 +69,7 @@ export const SelectBox = ({
     (field && getLabelByValue(field?.value, option)) ||
     getLabelByValue(defaultValue, option);
 
+  const displayedOptions = isLocalCustomer ? [...option].reverse() : option;
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
@@ -119,23 +120,20 @@ export const SelectBox = ({
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
-              {isLocalCustomer && option?.length === 0 ? (
+              {isLocalCustomer && displayedOptions?.length === 0 ? (
                 <p className="text-center text-gray-500">
                   {translate("common.no_customer_found")}
                 </p>
               ) : (
-                option
-                  ?.slice()
-                  ?.reverse()
-                  ?.map(({ value, label }) => (
-                    <li
-                      key={value}
-                      onClick={() => selectedOptionHandler(value)}
-                      className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
-                    >
-                      {label}
-                    </li>
-                  ))
+                displayedOptions?.map(({ value, label }) => (
+                  <li
+                    key={value}
+                    onClick={() => selectedOptionHandler(value)}
+                    className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
+                  >
+                    {label}
+                  </li>
+                ))
               )}
             </motion.ul>
           </motion.div>
