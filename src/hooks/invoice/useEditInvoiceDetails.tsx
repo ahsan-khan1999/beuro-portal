@@ -89,7 +89,7 @@ export const useEditInvoiceDetails = ({
             phoneNumber: res?.payload?.customerDetail?.phoneNumber,
             mobileNumber: res?.payload?.customerDetail?.mobileNumber,
             content: res?.payload?.content?.id,
-            title: res?.payload?.content?.invoiceContent?.title,
+            title: res?.payload?.title,
             address: res?.payload?.customerDetail?.address,
             date: res?.payload?.date,
             customerID: res?.payload?.customerID,

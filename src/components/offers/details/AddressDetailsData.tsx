@@ -12,6 +12,7 @@ const AddressDetailsData = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const addressData = offerDetails?.addressID?.address || [{}];
 
   return (
     <LeadsCardLayout>
@@ -36,7 +37,7 @@ const AddressDetailsData = ({
         </button>
       </div>
 
-      {offerDetails?.addressID?.address?.map((item, index) => (
+      {addressData?.map((item, index) => (
         <div className="py-3 px-6" key={index}>
           <h4 className="text-base font-semibold text-[#1E1E1E] mb-[10px]">
             {item?.label}
