@@ -18,7 +18,7 @@ import {
 import { useEffect } from "react";
 import {
   createReport,
-  readReportdetails,
+  readReportDetails,
 } from "@/api/slices/appointment/appointmentSlice";
 import { ReportPromiseActionType } from "@/types/customer";
 
@@ -96,7 +96,7 @@ export const useCreateReportAddressDetails = ({
     };
 
     if (report) {
-      dispatch(readReportdetails({ params: { filter: report } })).then(
+      dispatch(readReportDetails({ params: { filter: report } })).then(
         (response: ReportPromiseActionType) => {
           if (response?.payload) {
             const transformedData = transformData({

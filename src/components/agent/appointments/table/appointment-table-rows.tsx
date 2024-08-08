@@ -51,7 +51,7 @@ export const AppointmentTableRows = ({
         const handlePdfPreview = () => {
           router.push({
             pathname: `/agent/appointments/pdf`,
-            query: { ...router.query },
+            query: { ...router.query, reportId: item?.id },
           });
         };
         return (

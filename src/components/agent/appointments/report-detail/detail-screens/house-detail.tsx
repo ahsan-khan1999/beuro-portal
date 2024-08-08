@@ -45,6 +45,8 @@ import microOvenIcon from "@/assets/pngs/micro-oven.png";
 import herdIcon from "@/assets/pngs/herd.png";
 import decoGrossIcon from "@/assets/pngs/deco-gross.png";
 import safeIcon from "@/assets/pngs/safe-icon.png";
+
+
 import Image from "next/image";
 import { HouseFieldLabel } from "./house-field-label";
 import { HouseDescriptionField } from "./house-description-field";

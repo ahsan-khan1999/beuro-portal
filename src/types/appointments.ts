@@ -2,7 +2,8 @@ import { staticEnums } from "@/utils/static";
 import { AddressID } from "./leads";
 import { OfferServiceDetails } from "./offers";
 import { ContentTableRowTypes } from "./content";
-import { User } from ".";
+import { ReportPDFProps, User } from ".";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
 
 export interface Appointments {
   id: string;
@@ -78,67 +79,67 @@ export interface Report {
     descriptions: string;
   };
   kitchenDetails: {
-    oven: string;
-    refrigerator: string;
-    freezer: string;
-    stove: string;
-    microwave: string;
-    coffeeMachine: string;
-    washingMachine: string;
-    tumbler: string;
-    shelf: string;
-    box: string;
+    oven: number;
+    refrigerator: number;
+    freezer: number;
+    stove: number;
+    microwave: number;
+    coffeeMachine: number;
+    washingMachine: number;
+    tumbler: number;
+    shelf: number;
+    box: number;
     descriptions: string;
   };
   bedRoomDetails: {
-    bed: string;
-    doubleBed: string;
-    armchair: string;
-    smallWardrobe: string;
-    mediumWardrobe: string;
-    largeWardrobe: string;
-    dressingTable: string;
-    nightstand: string;
-    shelf: string;
-    desk: string;
-    plants: string;
-    box: string;
+    bed: number;
+    doubleBed: number;
+    armchair: number;
+    smallWardrobe: number;
+    mediumWardrobe: number;
+    largeWardrobe: number;
+    dressingTable: number;
+    nightstand: number;
+    shelf: number;
+    desk: number;
+    plants: number;
+    box: number;
     descriptions: string;
   };
   roomDetails: {
-    bed: string;
-    doubleBed: string;
-    armchair: string;
-    smallWardrobe: string;
-    mediumWardrobe: string;
-    largeWardrobe: string;
-    shelf: string;
-    desk: string;
-    tv: string;
-    tvTable: string;
-    nightstand: string;
-    box: string;
+    bed: number;
+    doubleBed: number;
+    armchair: number;
+    smallWardrobe: number;
+    mediumWardrobe: number;
+    largeWardrobe: number;
+    shelf: number;
+    desk: number;
+    tv: number;
+    tvTable: number;
+    nightstand: number;
+    box: number;
     descriptions: string;
   };
   basementAtticDetails: {
-    washingMachine: string;
-    tumbler: string;
-    shelf: string;
-    disposal: string;
-    bicycle: string;
-    stroller: string;
-    furniture: string;
-    boxes: string;
+    washingMachine: number;
+    tumbler: number;
+    shelf: number;
+    disposal: number;
+    bicycle: number;
+    stroller: number;
+    furniture: number;
+    boxes: number;
     descriptions: string;
   };
   specialItemsDetails: {
-    aquarium: string;
-    piano: string;
-    gymEquipment: string;
-    electronics: string;
-    pool: string;
-    safe: string;
-    lamp: string;
+    aquarium: number;
+    piano: number;
+    gymEquipment: number;
+    electronics: number;
+    pool: number;
+    safe: number;
+    lamp: number;
     descriptions: string;
   };
   appointmentID: {
@@ -163,6 +164,9 @@ export interface Report {
           postalCode: string;
           country: string;
         };
+      };
+      createdBy: {
+        fullName: string;
       };
     };
     agent: {
@@ -197,4 +201,10 @@ export interface Report {
     noteAndInformation: string;
   };
   addressID: AddressID;
+}
+
+export interface ReportPdfProps {
+  data: ReportPDFProps;
+  language: string;
+  systemSetting?: SystemSetting | null;
 }

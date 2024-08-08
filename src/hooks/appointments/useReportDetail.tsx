@@ -3,14 +3,13 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
   readAppointmentDetails,
-  readReportdetails,
+  readReportDetails,
   setAppointmentDetails,
   setReportDetails,
   updateAppointmentStatus,
@@ -36,7 +35,7 @@ export const useReportDetails = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(readReportdetails({ params: { filter: id } })).then(
+      dispatch(readReportDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setReportDetails(res.payload));
         }

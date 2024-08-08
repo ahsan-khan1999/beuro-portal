@@ -1,10 +1,10 @@
+import { ReportContactDetailsProps } from "@/types";
 import { StyleSheet, Text, View } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "row",
-    marginTop: 20,
     paddingHorizontal: 20,
   },
   serviceContainer: {
@@ -46,7 +46,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ReportContactAddress = () => {
+export const ReportContactAddress = ({
+  email,
+  name,
+  phone,
+}: ReportContactDetailsProps) => {
   const langContent = {
     en: {
       serviceHeading: "Services",
@@ -76,9 +80,9 @@ export const ReportContactAddress = () => {
           {langContent["en" as keyof typeof langContent]?.contactHeading}
         </Text>
         <View style={styles.contactInnerContainer}>
-          <Text style={styles.textBase}>Ahmad Rahal</Text>
-          <Text style={styles.textBase}>ahmad.rahal@gmail.com</Text>
-          <Text style={styles.textBase}>+41 79 361 11 14</Text>
+          <Text style={styles.textBase}>{name}</Text>
+          <Text style={styles.textBase}>{email}</Text>
+          <Text style={styles.textBase}>{phone}</Text>
         </View>
       </View>
     </View>

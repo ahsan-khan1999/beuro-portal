@@ -6,23 +6,7 @@ import { GridItem } from "../reactPdf/grid-item";
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  addressRow: {
-    display: "flex",
-    flexDirection: "row",
-    marginTop: 8,
-    paddingBottom: 8,
-    borderBottomWidth: 2,
-    borderBottomColor: "#8C8C8C",
-    borderBottomStyle: "solid",
-  },
-  addressText: {
-    color: "#141414",
-    fontSize: 7,
-    display: "flex",
-    flexDirection: "row",
-    columnGap: 2,
+    paddingTop: 10,
   },
 });
 

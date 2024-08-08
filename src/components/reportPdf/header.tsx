@@ -1,4 +1,5 @@
-import { DocumentHeaderDetailsProps } from "@/types";
+import { ReportDocumentHeaderProps } from "@/types";
+import { formatDateTimeToDate } from "@/utils/utility";
 import { StyleSheet, Text, View } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -8,6 +9,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginBottom: 20,
   },
   headinText: {
     fontSize: 16,
@@ -25,8 +27,9 @@ const styles = StyleSheet.create({
 });
 
 export const ReportPDFHeader = ({
-  language = "de",
-}: Partial<DocumentHeaderDetailsProps>) => {
+  language,
+  date,
+}: ReportDocumentHeaderProps) => {
   const langContent = {
     en: {
       heading: "Viewing form",
@@ -49,7 +52,7 @@ export const ReportPDFHeader = ({
         <Text style={styles.dateText}>
           {langContent[language as keyof typeof langContent]?.date}:
         </Text>
-        <Text style={styles.dateText}>05/07/2024</Text>
+        <Text style={styles.dateText}>{formatDateTimeToDate(date)}</Text>
       </View>
     </View>
   );
