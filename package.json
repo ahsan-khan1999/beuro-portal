@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "format": "prettier --write .",
+    "lint": "",
+    "lint:fix": "eslint --fix --quiet --ext .ts .",
+    "prepare": "husky",
+    "install:base": "npm i --save-dev @commitlint/config-conventional @commitlint/cli eslint husky"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^41.0.0",
