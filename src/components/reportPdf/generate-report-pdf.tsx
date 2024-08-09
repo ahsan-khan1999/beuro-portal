@@ -1,7 +1,4 @@
 import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
-import { ReportPDFHeader } from "./header";
-import { ReportPDFFooter } from "./footer";
-import { ReportContactAddress } from "./contact-address";
 import { ReportAddressDetails } from "./report-address-details";
 import { HouseItemWrapper } from "./house-item-wrapper";
 import shelfIcon from "@/assets/pngs/shelf.png";
@@ -48,15 +45,18 @@ import herdIcon from "@/assets/pngs/herd.png";
 import decoGrossIcon from "@/assets/pngs/deco-gross.png";
 import safeIcon from "@/assets/pngs/safe-icon.png";
 import { StaticImageData } from "next/image";
-import { ReportPdfProps } from "@/types/appointments";
 import { ServiceTableHederRow } from "../reactPdf/service-table-header-row";
 import { ServiceTableRow } from "../reactPdf/service-table-row";
 import { ServicesTotalAmount } from "../reactPdf/services-total-ammount";
+import { PdfPreviewProps } from "@/types";
+import { Header } from "../reactPdf/header";
+import { Footer } from "../reactPdf/footer";
+import { ContactAddress } from "../reactPdf/contact-address";
 
 export interface HouseDetailObjectProps {
   icon: StaticImageData;
   name: string;
-  quantity: number;
+  quantity?: number;
 }
 
 Font.register({
@@ -130,8 +130,14 @@ Font.register({
   ],
 });
 
-const ReportPdf = ({ data, language, systemSetting }: ReportPdfProps) => {
-  const date = data?.headerDetails?.date;
+const ReportPdf = ({
+  data,
+  templateSettings,
+  emailTemplateSettings,
+  systemSetting,
+  lang,
+}: PdfPreviewProps) => {
+  const headerDetails = data?.headerDetails;
   const { address } = data?.movingDetails || {};
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
@@ -139,11 +145,167 @@ const ReportPdf = ({ data, language, systemSetting }: ReportPdfProps) => {
   const kitchenDetails = data?.houseDetails?.kitchenDetails;
   const roomDetails = data?.houseDetails?.roomDetails;
   const bedRoomDetails = data?.houseDetails?.bedRoomDetails;
-  const specialItemsDetails = data?.houseDetails?.specialItemsDetails;
   const outDoorDetails = data?.houseDetails?.outDoorDetails;
   const basementAtticDetails = data?.houseDetails?.basementAtticDetails;
+  const specialItemsDetails = data?.houseDetails?.specialItemsDetails;
   const offerDetails = data?.offerDetails;
   const contactAddress = data?.contactAddress;
+
+  const langContent = {
+    en: {
+      livingRoomHeading: "Living room(WZ)",
+      kitchenHeading: "kitchen",
+      bedRoomHeading: "Bedroom(SZ)",
+      roomHeading: "Room(Z)",
+      outdoorHeading: "Balcony/terrace/garden (W/D/G)",
+      basementHeading: "Cellar/screed (K/E)",
+      specialHeading: "Special",
+      remarks: "Remarks",
+      tumbler: "Tumbler",
+      washMachine: "Washing machine",
+      shelf: "Shelf",
+      box: "Box",
+      bed: "Bed",
+      doublebed: "Double bed",
+      armchair: "Armchair",
+      smallWoodDrobe: "Small wardrobe",
+      mediumWoodDrobe: "Medium wardrobe",
+      largeWoodDrobe: "Large wardrobe",
+      nightStand: "Bedside table",
+      plant: "Plants",
+      tv: "Television",
+      tvTable: "TV table",
+      desk: "Desk",
+      teacherDesk: "Teacher Desk",
+      sofa: "Sofa",
+      livingRoomItem: {
+        teacherDesk: "Desk",
+        lSofa: "L Sofa",
+        decoGross: "Deco large",
+      },
+      kitchenItem: {
+        oven: "Oven",
+        refrigerator: "Refrigerator",
+        freezer: "Deep Freezer",
+        stove: "Stove",
+        microOven: "Microwave",
+        coffeMachine: "Coffee machine",
+      },
+      bedRoomItem: {
+        dressingTable: "Dress Table",
+      },
+      outdoorItem: {
+        grill: "Grill",
+        chair: "Chairs",
+        umbrella: "Umbrella",
+        cup: "Pots",
+        herbGen: "Herb bed",
+        lawnmower: "Lawn mower",
+      },
+      basementItem: {
+        disposible: "Disposals",
+        cycle: "Bicycle",
+        stroller: "Baby carriage",
+        furniture: "Furniture",
+        boxes: "Boxes",
+      },
+      specialItem: {
+        aquairum: "Aquarium",
+        piano: "Piano",
+        gymSport: "Sports equipment",
+        electronics: "Electronics",
+        pool: "Pool",
+        safe: "Tressor",
+        lamp: "Lampe",
+      },
+      offerDetails: {
+        employee: "Employees",
+        deliveryVan: "Delivery van",
+        hours: "Hours",
+        cleaningHandOver: "Cleaning with delivery guarantee",
+        broomClean: "Broom clean",
+        price: "Price",
+        noteInfo: "Note and information",
+      },
+    },
+
+    de: {
+      livingRoomHeading: "Wohnzimmer(WZ)",
+      kitchenHeading: "Küche",
+      bedRoomHeading: "Schlafzimmer",
+      roomHeading: "Zimmer(Z)",
+      outdoorHeading: "Balkon/Terrasse/Garten (B/T/G)",
+      basementHeading: "Keller/Estrich (K/E)",
+      specialHeading: "Speziell",
+      remarks: "Bemerkung",
+      tumbler: "Tumbler",
+      washMachine: "Waschmaschine",
+      shelf: "Regal",
+      box: "Box",
+      bed: "Bett",
+      doublebed: "Doppelbett",
+      armchair: "Sessel",
+      smallWoodDrobe: "Schrank klein",
+      mediumWoodDrobe: "Schrank Mittel",
+      largeWoodDrobe: "Schrank Gross",
+      nightStand: "Nachttisch",
+      plant: "Pflanzen",
+      tv: "Fernseher",
+      tvTable: "Fernsehtisch",
+      desk: "Tisch",
+      teacherDesk: "Pult",
+      sofa: "Sofa",
+      livingRoomItem: {
+        teacherDesk: "Pult",
+        lSofa: "L Sofa",
+        decoGross: "Deco gross",
+      },
+      kitchenItem: {
+        oven: "Backofen",
+        refrigerator: "Kühlschrank",
+        freezer: "Tiefkühler",
+        stove: "Herd",
+        microOven: "Mikrowelle",
+        coffeMachine: "Kaffeemaschine",
+      },
+      bedRoomItem: {
+        dressingTable: "Schminkanlage",
+      },
+      outdoorItem: {
+        grill: "Grill",
+        chair: "Stühle",
+        umbrella: "Schirm",
+        cup: "Töpfe",
+        herbGen: "Kräuterbeet",
+        lawnmower: "Rasenmäher",
+      },
+      basementItem: {
+        disposible: "Entsorgungen",
+        cycle: "Fahrrad",
+        stroller: "Kinderwagen",
+        furniture: "Möbel",
+        boxes: "Boxen",
+      },
+      specialItem: {
+        aquairum: "Aquarium",
+        piano: "Piano",
+        gymSport: "Sportgerät",
+        electronics: "Elektronisches",
+        pool: "Pool",
+        safe: "Tressor",
+        lamp: "Lampe",
+      },
+      offerDetails: {
+        employee: "Mitarbeiter",
+        deliveryVan: "Lieferwagen",
+        hours: "Stunden",
+        cleaningHandOver: "Reinigung mit Abgabegarantie",
+        broomClean: "Besenrein",
+        price: "Preis",
+        noteInfo: "Hinweis und Angaben",
+      },
+    },
+  };
 
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
@@ -154,295 +316,523 @@ const ReportPdf = ({ data, language, systemSetting }: ReportPdfProps) => {
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
   const livingRoomItem: HouseDetailObjectProps[] = [
-    { icon: sofaIcon, name: "Sofa", quantity: livingRoomDetails?.sofa },
+    {
+      icon: sofaIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.sofa}`,
+      quantity: livingRoomDetails?.sofa,
+    },
     {
       icon: teacherDesckIcon,
-      name: "Pult",
+      name: `${langContent[lang as keyof typeof langContent]?.teacherDesk}`,
       quantity: livingRoomDetails?.teacherDesk,
     },
     {
       icon: tvTableIcon,
-      name: "Fernsehtisch",
+      name: `${langContent[lang as keyof typeof langContent]?.tvTable}`,
       quantity: livingRoomDetails?.tvTable,
     },
     {
       icon: armChairIcon,
-      name: "Sessel",
+      name: `${langContent[lang as keyof typeof langContent]?.armchair}`,
       quantity: livingRoomDetails?.armchair,
     },
-    { icon: deskIcon, name: "Tisch", quantity: livingRoomDetails?.table },
-    { icon: shelfIcon, name: "Regal", quantity: livingRoomDetails?.shelf },
-    { icon: lSofaIcon, name: "L Sofa", quantity: livingRoomDetails?.LSofa },
-    { icon: tvIcon, name: "Fernseher", quantity: livingRoomDetails?.TV },
     {
-      icon: grossyIcon,
-      name: "Deco gross",
+      icon: deskIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.desk}`,
+      quantity: livingRoomDetails?.table,
+    },
+    {
+      icon: shelfIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.shelf}`,
+      quantity: livingRoomDetails?.shelf,
+    },
+    {
+      icon: lSofaIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.livingRoomItem?.lSofa
+      }`,
+      quantity: livingRoomDetails?.LSofa,
+    },
+    {
+      icon: tvIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.tv}`,
+      quantity: livingRoomDetails?.TV,
+    },
+    {
+      icon: decoGrossIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.livingRoomItem?.decoGross
+      }`,
       quantity: livingRoomDetails?.decoBig,
     },
-    { icon: boxIcon, name: "Box", quantity: livingRoomDetails?.box },
+    {
+      icon: boxIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.box}`,
+      quantity: livingRoomDetails?.box,
+    },
   ];
   const kitchenRoomItem: HouseDetailObjectProps[] = [
-    { icon: ovenIcon, name: "Backofen", quantity: kitchenDetails?.oven },
+    {
+      icon: ovenIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.kitchenItem?.oven
+      }`,
+      quantity: kitchenDetails?.oven,
+    },
     {
       icon: refrigeratorIcon,
-      name: "Kühlschrank",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.kitchenItem?.refrigerator
+      }`,
       quantity: kitchenDetails?.refrigerator,
     },
     {
       icon: freezerIcon,
-      name: "Tiefkühler",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.kitchenItem?.freezer
+      }`,
       quantity: kitchenDetails?.freezer,
     },
     {
       icon: herdIcon,
-      name: "Herd",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.kitchenItem?.stove
+      }`,
       quantity: kitchenDetails?.stove,
     },
     {
       icon: microOvenIcon,
-      name: "Mikrowelle",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.kitchenItem?.microOven
+      }`,
       quantity: kitchenDetails?.microwave,
     },
     {
       icon: coffeMacIcon,
-      name: "Kaffeemaschine",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.kitchenItem?.coffeMachine
+      }`,
       quantity: kitchenDetails?.coffeeMachine,
     },
     {
       icon: washMacIcon,
-      name: "Waschmaschine",
+      name: `${langContent[lang as keyof typeof langContent]?.washMachine}`,
       quantity: kitchenDetails?.washingMachine,
     },
-    { icon: tumblerIcon, name: "Tumbler", quantity: kitchenDetails?.tumbler },
+    {
+      icon: tumblerIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.tumbler}`,
+      quantity: kitchenDetails?.tumbler,
+    },
     {
       icon: shelfIcon,
-      name: "Regal",
+      name: `${langContent[lang as keyof typeof langContent]?.shelf}`,
       quantity: kitchenDetails?.shelf,
     },
 
-    { icon: boxIcon, name: "Box", quantity: kitchenDetails?.box },
+    {
+      icon: boxIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.box}`,
+      quantity: kitchenDetails?.box,
+    },
   ];
   const bedRoomItem: HouseDetailObjectProps[] = [
     {
       icon: bedIcon,
-      name: "Bett",
+      name: `${langContent[lang as keyof typeof langContent]?.bed}`,
       quantity: bedRoomDetails?.bed,
     },
     {
       icon: doublebedIcon,
-      name: "Doppelbett",
+      name: `${langContent[lang as keyof typeof langContent]?.doublebed}`,
       quantity: bedRoomDetails?.doubleBed,
     },
     {
       icon: armChairIcon,
-      name: "Sessel",
+      name: `${langContent[lang as keyof typeof langContent]?.armchair}`,
       quantity: bedRoomDetails?.armchair,
     },
     {
       icon: singWoodDrobeIcon,
-      name: "Schrank klein",
+      name: `${langContent[lang as keyof typeof langContent]?.smallWoodDrobe}`,
       quantity: bedRoomDetails?.smallWardrobe,
     },
     {
       icon: medWoodDrobeIcon,
-      name: "Schrank Mittel",
+      name: `${langContent[lang as keyof typeof langContent]?.mediumWoodDrobe}`,
       quantity: bedRoomDetails?.mediumWardrobe,
     },
     {
       icon: largeWoodDrobeIcon,
-      name: "Schrank Gross",
+      name: `${langContent[lang as keyof typeof langContent]?.largeWoodDrobe}`,
       quantity: bedRoomDetails?.largeWardrobe,
     },
     {
       icon: macupTableIcon,
-      name: "Schminkanlage",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.bedRoomItem
+          ?.dressingTable
+      }`,
       quantity: bedRoomDetails?.dressingTable,
     },
     {
       icon: tableIcon,
-      name: "Nachttisch",
+      name: `${langContent[lang as keyof typeof langContent]?.nightStand}`,
       quantity: bedRoomDetails?.nightstand,
     },
     {
       icon: shelfIcon,
-      name: "Regal",
+      name: `${langContent[lang as keyof typeof langContent]?.shelf}`,
       quantity: bedRoomDetails?.shelf,
     },
     {
       icon: teacherDesckIcon,
-      name: "Pult",
+      name: `${langContent[lang as keyof typeof langContent]?.teacherDesk}`,
       quantity: bedRoomDetails?.desk,
     },
     {
       icon: plantIcon,
-      name: "Pflanzen",
+      name: `${langContent[lang as keyof typeof langContent]?.plant}`,
       quantity: bedRoomDetails?.plants,
     },
 
-    { icon: boxIcon, name: "Box", quantity: bedRoomDetails?.box },
+    {
+      icon: boxIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.box}`,
+      quantity: bedRoomDetails?.box,
+    },
   ];
   const roomItem: HouseDetailObjectProps[] = [
     {
       icon: bedIcon,
-      name: "Bett",
+      name: `${langContent[lang as keyof typeof langContent]?.bed}`,
       quantity: roomDetails?.bed,
     },
     {
       icon: doublebedIcon,
-      name: "Doppelbett",
+      name: `${langContent[lang as keyof typeof langContent]?.doublebed}`,
       quantity: roomDetails?.doubleBed,
     },
     {
       icon: armChairIcon,
-      name: "Sessel",
+      name: `${langContent[lang as keyof typeof langContent]?.armchair}`,
       quantity: roomDetails?.armchair,
     },
     {
       icon: singWoodDrobeIcon,
-      name: "Schrank klein",
+      name: `${langContent[lang as keyof typeof langContent]?.smallWoodDrobe}`,
       quantity: roomDetails?.smallWardrobe,
     },
     {
       icon: medWoodDrobeIcon,
-      name: "Schrank Mittel",
+      name: `${langContent[lang as keyof typeof langContent]?.mediumWoodDrobe}`,
       quantity: roomDetails?.mediumWardrobe,
     },
     {
       icon: largeWoodDrobeIcon,
-      name: "Schrank Gross",
+      name: `${langContent[lang as keyof typeof langContent]?.largeWoodDrobe}`,
       quantity: roomDetails?.largeWardrobe,
     },
     {
       icon: shelfIcon,
-      name: "Regal",
+      name: `${langContent[lang as keyof typeof langContent]?.shelf}`,
       quantity: roomDetails?.shelf,
     },
     {
       icon: teacherDesckIcon,
-      name: "Pult",
+      name: `${langContent[lang as keyof typeof langContent]?.teacherDesk}`,
       quantity: roomDetails?.desk,
     },
     {
       icon: tvIcon,
-      name: "Fernseher",
+      name: `${langContent[lang as keyof typeof langContent]?.tv}`,
       quantity: roomDetails?.tv,
     },
     {
       icon: tvTableIcon,
-      name: "Fernsehtisch",
+      name: `${langContent[lang as keyof typeof langContent]?.tvTable}`,
       quantity: roomDetails?.tvTable,
     },
     {
       icon: tableIcon,
-      name: "Nachttisch",
+      name: `${langContent[lang as keyof typeof langContent]?.nightStand}`,
       quantity: roomDetails?.nightstand,
     },
 
-    { icon: boxIcon, name: "Box", quantity: roomDetails?.box },
+    {
+      icon: boxIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.box}`,
+      quantity: roomDetails?.box,
+    },
   ];
   const outdoorItem: HouseDetailObjectProps[] = [
     {
       icon: grillIcon,
-      name: "Grill",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.outdoorItem?.grill
+      }`,
       quantity: outDoorDetails?.grill,
     },
     {
       icon: deskIcon,
-      name: "Tisch",
+      name: `${langContent[lang as keyof typeof langContent]?.desk}`,
       quantity: outDoorDetails?.table,
     },
     {
       icon: chairIcon,
-      name: "Stühle",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.outdoorItem?.chair
+      }`,
       quantity: outDoorDetails?.chairs,
     },
     {
       icon: sofaIcon,
-      name: "Sofa",
+      name: `${langContent[lang as keyof typeof langContent]?.sofa}`,
       quantity: outDoorDetails?.sofa,
     },
     {
       icon: shelfIcon,
-      name: "Regal",
+      name: `${langContent[lang as keyof typeof langContent]?.shelf}`,
       quantity: outDoorDetails?.shelf,
     },
     {
       icon: umbellaIcon,
-      name: "Schirm",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.outdoorItem?.umbrella
+      }`,
       quantity: outDoorDetails?.umbrella,
     },
     {
       icon: cupIcon,
-      name: "Töpfe",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.outdoorItem?.cup
+      }`,
       quantity: outDoorDetails?.pots,
     },
     {
       icon: plantIcon,
-      name: "Pflanzen",
+      name: `${langContent[lang as keyof typeof langContent]?.plant}`,
       quantity: outDoorDetails?.plants,
     },
     {
       icon: grossyIcon,
-      name: "Kräuterbeet",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.outdoorItem?.herbGen
+      }`,
       quantity: outDoorDetails?.herbGarden,
     },
     {
       icon: gymEquIcon,
-      name: "Rasenmäher",
+      name: `${
+        langContent[lang as keyof typeof langContent]?.outdoorItem?.lawnmower
+      }`,
       quantity: outDoorDetails?.lawnmower,
+    },
+  ];
+  const basementItem: HouseDetailObjectProps[] = [
+    {
+      icon: washMacIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.washMachine}`,
+      quantity: basementAtticDetails?.washingMachine,
+    },
+    {
+      icon: tumblerIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.tumbler}`,
+      quantity: basementAtticDetails?.tumbler,
+    },
+    {
+      icon: shelfIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.shelf}`,
+      quantity: basementAtticDetails?.shelf,
+    },
+    {
+      icon: disposibleIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.basementItem?.disposible
+      }`,
+      quantity: basementAtticDetails?.disposal,
+    },
+    {
+      icon: cycleIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.basementItem?.cycle
+      }`,
+      quantity: basementAtticDetails?.bicycle,
+    },
+    {
+      icon: chilWalkerIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.basementItem?.stroller
+      }`,
+      quantity: basementAtticDetails?.stroller,
+    },
+    {
+      icon: mobelIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.basementItem?.furniture
+      }`,
+      quantity: basementAtticDetails?.furniture,
+    },
+    {
+      icon: boxIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.basementItem?.boxes
+      }`,
+      quantity: basementAtticDetails?.boxes,
+    },
+  ];
+  const specialItem: HouseDetailObjectProps[] = [
+    {
+      icon: aquairumIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.specialItem?.aquairum
+      }`,
+      quantity: specialItemsDetails?.aquarium,
+    },
+    {
+      icon: pianoIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.specialItem?.piano
+      }`,
+      quantity: specialItemsDetails?.piano,
+    },
+    {
+      icon: gymSportIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.specialItem?.gymSport
+      }`,
+      quantity: specialItemsDetails?.gymEquipment,
+    },
+    {
+      icon: electronicsIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.specialItem?.electronics
+      }`,
+      quantity: specialItemsDetails?.electronics,
+    },
+    {
+      icon: poolIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.specialItem?.pool
+      }`,
+      quantity: specialItemsDetails?.pool,
+    },
+    {
+      icon: safeIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.specialItem?.safe
+      }`,
+      quantity: specialItemsDetails?.safe,
+    },
+    {
+      icon: lampIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.specialItem?.lamp
+      }`,
+      quantity: specialItemsDetails?.lamp,
     },
   ];
 
   return (
     <Document>
       <Page style={styles.body} dpi={72} break={true}>
-        <ReportPDFHeader date={date} language={language} />
+        <Header {...headerDetails} language={lang} />
 
-        <ReportContactAddress {...{ ...contactAddress }} />
-        <ReportAddressDetails {...{ address }} language={language} />
+        <ContactAddress {...{ ...contactAddress }} />
+        <ReportAddressDetails {...{ address }} language={lang} />
 
         <HouseItemWrapper
-          mainHeading="Wohnzimmer(WZ)"
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.livingRoomHeading
+          }
           description={livingRoomDetails?.descriptions}
           items={livingRoomItem}
+          language={lang}
         />
 
         <HouseItemWrapper
-          mainHeading="Küche"
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.kitchenHeading
+          }
           description={kitchenDetails?.descriptions}
           items={kitchenRoomItem}
+          language={lang}
         />
+
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+      <Page style={styles.body}>
+        <Header {...headerDetails} language={lang} />
         <HouseItemWrapper
-          mainHeading="Schlafzimmer"
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.bedRoomHeading
+          }
           description={bedRoomDetails?.descriptions}
           items={bedRoomItem}
+          language={lang}
         />
 
         <HouseItemWrapper
-          mainHeading="Zimmer(Z)"
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.roomHeading
+          }
           description={roomDetails?.descriptions}
           items={roomItem}
+          language={lang}
         />
         <HouseItemWrapper
-          mainHeading="Balkon/Terrasse/Garten (B/T/G)"
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.outdoorHeading
+          }
           description={outDoorDetails?.descriptions}
           items={outdoorItem}
+          language={lang}
         />
 
-        <View style={styles.footerContainer}>
-          <ReportPDFFooter />
-        </View>
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
       </Page>
+      <Page style={styles.body}>
+        <Header {...headerDetails} language={lang} />
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.basementHeading
+          }
+          description={basementAtticDetails?.descriptions}
+          items={basementItem}
+          language={lang}
+        />
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.specialHeading
+          }
+          description={specialItemsDetails?.descriptions}
+          items={specialItem}
+          language={lang}
+        />
 
-      <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }} break={true}>
-        <View style={{ marginBottom: 10 }} fixed>
-          <ReportPDFHeader date={date} language={language} />
-        </View>
-
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+      <Page style={styles.body}>
+        <Header {...headerDetails} language={lang} />
         <ServiceTableHederRow
           isDiscount={isDiscount}
-          language={language}
-          bgColor="#4A13E7"
+          language={lang}
+          // bgColor="#4A13E7"
         />
 
         {serviceItem?.map((item, index) => (
@@ -463,28 +853,26 @@ const ReportPdf = ({ data, language, systemSetting }: ReportPdfProps) => {
         <ServicesTotalAmount
           {...serviceItemFooter}
           systemSettings={systemSetting}
-          language={language}
-          isBreakPage={true}
+          language={lang}
+          // isBreakPage={true}
         />
 
-        <View style={styles.footerContainer}>
-          <ReportPDFFooter />
-        </View>
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
       </Page>
     </Document>
   );
 };
 
-export default ReportPdf;
-
 const styles = StyleSheet.create({
   body: {
-    paddingBottom: 50,
     fontFamily: "Poppins",
-  },
-  footerContainer: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
+    paddingBottom: 100,
   },
 });
+
+export default ReportPdf;

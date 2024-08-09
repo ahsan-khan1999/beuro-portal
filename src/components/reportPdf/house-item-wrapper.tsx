@@ -51,23 +51,36 @@ const styles = StyleSheet.create({
 interface HouseItemWrapperProps {
   items: HouseDetailObjectProps[];
   mainHeading: string;
-
-  description: string;
+  description?: string;
+  language?: string;
 }
 
 export const HouseItemWrapper: React.FC<HouseItemWrapperProps> = ({
   items,
   mainHeading,
   description,
+  language,
 }) => {
+  const langContent = {
+    en: {
+      remarks: "Remarks",
+    },
+
+    de: {
+      remarks: "Bemerkung",
+    },
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.mainHeading}>{mainHeading}</Text>
       <View style={styles.remarksContainer}>
-        <Text style={styles.remarksHeading}>Bemerkung</Text>
+        <Text style={styles.remarksHeading}>
+          {langContent[language as keyof typeof langContent]?.remarks}
+        </Text>
         <Text style={styles.remarksDescription}>{description}</Text>
       </View>
-      <HouseItemHeader />
+      <HouseItemHeader language={language} />
 
       <View style={styles.grid}>
         {items.map((item, index) => (

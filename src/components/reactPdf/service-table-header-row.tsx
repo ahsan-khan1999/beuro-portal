@@ -80,7 +80,7 @@ export const ServiceTableHederRow = ({
     <View
       style={{
         ...styles.headerContainer,
-        backgroundColor: bgColor || "#3498db",
+        backgroundColor: bgColor || "#404F6A",
       }}
     >
       <View style={styles.headerRow}>

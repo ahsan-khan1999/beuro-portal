@@ -1,48 +1,105 @@
+import {
+  SystemSetting,
+  getTemplateSettings,
+  readEmailSettings,
+  readSystemSettings,
+} from "@/api/slices/settingSlice/settings";
+import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { ReportPDFProps } from "@/types";
+import { EmailTemplate } from "@/types/settings";
+import { ContractEmailHeaderProps, PdfProps, TemplateType } from "@/types";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalType } from "@/enums/ui";
+import { updateQuery } from "@/utils/update-query";
 import { staticEnums } from "@/utils/static";
 import { readReportDetails } from "@/api/slices/appointment/appointmentSlice";
-import { useRouter } from "next/router";
-import { useMergedReportPdfDownload } from "@/components/reportPdf/report-merge-pdf-download";
 import { Report } from "@/types/appointments";
-import {
-  readSystemSettings,
-  SystemSetting,
-} from "@/api/slices/settingSlice/settings";
+import { useMergedReportPdfDownload } from "@/components/reportPdf/report-merge-pdf-download";
 
-export const useReportPdf = () => {
-  const [reportData, setReportData] = useState<ReportPDFProps>();
+export const useReportUpdatedPdf = () => {
+  const [reportData, setReportData] = useState<PdfProps>();
+  const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
+    null
+  );
+
+  const [emailTemplateSettings, setEmailTemplateSettings] =
+    useState<EmailTemplate | null>(null);
+
+  const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
+    null
+  );
+
   const [pdfFile, setPdfFile] = useState(null);
-  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
-
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );
 
-  const {
-    appointment: { reportDetails, isLoading },
-    global: { currentLanguage },
-  } = useAppSelector((state) => state);
+  const { isLoading, reportDetails } = useAppSelector(
+    (state) => state.appointment
+  );
+
+  const { modal, loading: loadingGlobal } = useAppSelector(
+    (state) => state.global
+  );
 
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { reportId } = router.query;
+  const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
 
   useEffect(() => {
     (async () => {
       if (reportId) {
-        const [reportData, settings] = await Promise.all([
-          dispatch(readReportDetails({ params: { filter: reportId } })),
-          dispatch(readSystemSettings()),
-        ]);
+        const [template, emailTemplate, reportData, settings] =
+          await Promise.all([
+            dispatch(getTemplateSettings()),
+            dispatch(readEmailSettings()),
+            dispatch(readReportDetails({ params: { filter: reportId } })),
+            dispatch(readSystemSettings()),
+          ]);
+        if (template?.payload?.Template) {
+          const {
+            firstColumn,
+            fourthColumn,
+            isFirstColumn,
+            isFourthColumn,
+            isSecondColumn,
+            isThirdColumn,
+            secondColumn,
+            thirdColumn,
+            order,
+          }: TemplateType = template.payload.Template;
+
+          setTemplateSettings(() => ({
+            firstColumn,
+            secondColumn,
+            thirdColumn,
+            fourthColumn,
+            isFirstColumn,
+            isFourthColumn,
+            isSecondColumn,
+            isThirdColumn,
+            order,
+          }));
+        }
+        if (emailTemplate?.payload) {
+          setEmailTemplateSettings({
+            logo: emailTemplate?.payload?.logo,
+            FooterColour: emailTemplate?.payload?.FooterColour,
+            email: emailTemplate?.payload?.email,
+            mobileNumber: emailTemplate?.payload?.mobileNumber,
+            phoneNumber: emailTemplate?.payload?.phoneNumber,
+            textColour: emailTemplate?.payload?.textColour,
+          });
+        }
 
         if (settings?.payload?.Setting) {
           setSystemSettings({ ...settings?.payload?.Setting });
         }
-
         if (reportData?.payload) {
           const reportDetails: Report = reportData?.payload;
+
           let serviceDiscountSum =
             reportDetails?.serviceDetail?.serviceDetail?.reduce(
               (acc, service) => {
@@ -72,19 +129,45 @@ export const useReportPdf = () => {
                 reportDetails?.subTotal) *
               100;
           }
-          let formatData: ReportPDFProps = {
-            appointmentID: {
-              leadID: {
-                refID: reportDetails?.appointmentID?.leadID?.refID,
-              },
-            },
+
+          let formatData: PdfProps<ContractEmailHeaderProps> = {
+            id: reportDetails?.id,
+            //
             headerDetails: {
-              date: reportDetails?.appointmentID?.date,
+              offerNo: reportDetails?.appointmentID?.leadID?.refID,
+              // companyName: reportDetails?.createdBy?.company?.companyName,
+              offerDate: reportDetails?.createdAt,
+              createdBy: reportDetails?.appointmentID?.agent?.fullName,
+              logo: emailTemplate?.payload?.logo,
+              emailTemplateSettings: emailTemplate?.payload,
+              isReverseLogo: template.payload.Template?.order,
+              fileType: "report",
             },
             contactAddress: {
-              name: reportDetails?.customerDetail?.fullName,
-              email: reportDetails?.customerDetail?.email,
-              phone: reportDetails?.customerDetail?.phoneNumber,
+              address: {
+                name: reportDetails?.appointmentID?.leadID?.customerDetail
+                  ?.fullName,
+                // companyName: reportDetails?.appointmentID?.leadID?.customerDetail?.companyName,
+                city: reportDetails?.appointmentID?.leadID?.customerDetail
+                  ?.address?.country,
+                postalCode:
+                  reportDetails?.appointmentID?.leadID?.customerDetail?.address
+                    ?.postalCode,
+                streetWithNumber:
+                  reportDetails?.appointmentID?.leadID?.customerDetail?.address
+                    ?.streetNumber,
+              },
+              email:
+                reportDetails?.appointmentID?.leadID?.customerDetail?.email,
+              phone:
+                reportDetails?.appointmentID?.leadID?.customerDetail
+                  ?.phoneNumber,
+              mobile:
+                reportDetails?.appointmentID?.leadID?.customerDetail
+                  ?.mobileNumber,
+              gender:
+                reportDetails?.appointmentID?.leadID?.customerDetail?.gender?.toString(),
+              isReverseInfo: template.payload.Template?.order,
             },
             movingDetails: {
               address: reportDetails?.addressID?.address,
@@ -218,6 +301,12 @@ export const useReportPdf = () => {
                 ),
               discountDescription: reportDetails?.discountDescription,
             },
+            footerDetails: {
+              columnSettings: null,
+              currPage: 1,
+              totalPages: 10,
+            },
+            aggrementDetails: "",
           };
 
           setReportData(formatData);
@@ -226,16 +315,27 @@ export const useReportPdf = () => {
     })();
   }, [reportId]);
 
-  const fileName = "Report - " + reportData?.appointmentID?.leadID?.refID;
-
+  const fileName = reportData?.emailHeader?.offerNo;
   const reportDataProps = useMemo(
     () => ({
+      emailTemplateSettings,
+      templateSettings,
       data: reportData,
       fileName,
       remoteFileBlob,
       systemSetting,
+      isOfferPdf: true,
+      showContractSign: true,
+      companyName: reportData?.headerDetails?.companyName,
     }),
-    [reportData, fileName, remoteFileBlob, systemSetting]
+    [
+      emailTemplateSettings,
+      templateSettings,
+      reportData,
+      fileName,
+      remoteFileBlob,
+      systemSetting,
+    ]
   );
 
   const { mergedFile, mergedPdfUrl, isPdfRendering } =
@@ -244,14 +344,12 @@ export const useReportPdf = () => {
   const handleDonwload = () => {
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
-      console.log(url, "url");
-
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
-        reportDetails?.appointmentID?.leadID?.createdBy +
-        "-" +
-        reportDetails?.id
+        // reportDetails?.createdBy?.company?.companyName +
+        // "-" +
+        reportDetails?.appointmentID?.leadID?.refID
       }.pdf`;
       document.body.appendChild(a);
       a.click();
@@ -270,17 +368,35 @@ export const useReportPdf = () => {
     }
   };
 
+  const onClose = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
+  const onSuccess = () => {
+    router.pathname = "/offers";
+    router.query = { status: "None" };
+    updateQuery(router, router.locale as string);
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
   return {
     reportData,
-    currentLanguage,
-    isLoading,
-    handleDonwload,
-    handlePrint,
+    templateSettings,
+    emailTemplateSettings,
+    activeButtonId,
+    modal,
+    loadingGlobal,
     pdfFile,
     setPdfFile,
+    handleDonwload,
+    handlePrint,
+    onClose,
+    onSuccess,
+    systemSetting,
+    reportDetails,
     mergedFile,
     mergedPdfUrl,
     isPdfRendering,
-    reportDetails,
+    isLoading,
   };
 };

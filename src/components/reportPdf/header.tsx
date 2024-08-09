@@ -4,7 +4,8 @@ import { StyleSheet, Text, View } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   container: {
-    padding: 30,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
     backgroundColor: "#EDE7FD",
     display: "flex",
     flexDirection: "row",

@@ -1163,7 +1163,8 @@
       "date": "Datum",
       "time": "Zeit",
       "no_data_found": "Keine Berichte eingereicht",
-      "no_report_found": "Kein Bericht gefunden"
+      "no_report_found": "Kein Bericht gefunden",
+      "created_by": "Erstellt von"
     },
     "report_detail": {
       "contact_tab": "Kontakt Details",

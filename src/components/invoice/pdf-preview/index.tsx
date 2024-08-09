@@ -74,7 +74,9 @@ export const MainInvoicePdfDetail = () => {
       <InvoiceEmailHeader
         {...invoiceData?.emailHeader}
         contractStatus={invoiceDetails?.emailStatus}
-        contentName={invoiceData?.emailHeader.contentName}
+        contentName={
+          invoiceData?.emailHeader && invoiceData?.emailHeader.contentName
+        }
         onEmailSend={handleEmailSend}
         loading={loading}
         onDownload={handleDonwload}

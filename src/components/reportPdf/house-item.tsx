@@ -37,7 +37,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HouseItem = ({ icon, name, quantity }: HouseDetailObjectProps) => {
+export const HouseItem = ({
+  icon,
+  name,
+  quantity,
+}: HouseDetailObjectProps) => {
+ 
   return (
     <View style={styles.container}>
       <View style={styles.labelContainer}>
