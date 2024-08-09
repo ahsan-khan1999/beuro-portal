@@ -8,5 +8,5 @@ const styles = StyleSheet.create({
 });
 
 export const ReportPDFFooter = () => {
-  return <View style={styles.container} fixed></View>;
+  return <View style={styles.container} fixed />;
 };

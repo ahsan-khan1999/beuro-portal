@@ -81,7 +81,9 @@ const DetailsPdfPriview = () => {
       <InvoiceEmailHeader
         {...invoiceData?.emailHeader}
         contractStatus={collectiveInvoiceDetails?.emailStatus}
-        contentName={invoiceData?.emailHeader.contentName}
+        contentName={
+          invoiceData?.emailHeader && invoiceData?.emailHeader.contentName
+        }
         onEmailSend={handleEmailSend}
         loading={loading}
         onDownload={handleDonwload}

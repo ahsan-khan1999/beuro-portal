@@ -62,7 +62,7 @@ export const AppointmentTableRows = ({
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(250px,_3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(180px,_180px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(80px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(130px,_130px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(70px,_3fr)_minmax(60px,_4fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(170px,_170px)_minmax(130px,_130px)] border-t border-t-[#E7EAEE]`}
+                } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(250px,_3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(180px,_180px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(80px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(80px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(130px,_130px)] xLarge:grid-cols-[minmax(60px,_60px)_minmax(60px,_60px)_minmax(70px,_3fr)_minmax(60px,_4fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(170px,_170px)_minmax(130px,_130px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item?.leadID?.refID}</span>
                 <div className="flex items-center gap-x-1">
@@ -72,7 +72,7 @@ export const AppointmentTableRows = ({
                   {item.leadID?.customerDetail?.fullName}
                 </span>
 
-                <span className="py-4 truncate mlg:hidden xlg:block">
+                <span className="py-4 truncate mlg:hidden maxSize:block">
                   {item.leadID?.customerDetail?.companyName}
                 </span>
 
@@ -136,7 +136,7 @@ export const AppointmentTableRows = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(140px,_140px)]">
+            <div className="grid grid-cols-[minmax(180px,_180px)]">
               <div className="py-4 flex items-center">
                 {item?.isReportSubmitted ? (
                   <OutlineButton
@@ -163,14 +163,6 @@ export const AppointmentTableRows = ({
                   />
                 )}
               </div>
-
-              {/* <div className="py-4 flex items-center">
-                <span className="p-[6px]">
-                  <CancelFillIcon
-                    opacityVal={item?.isReportSubmitted ? 0 : 1}
-                  />
-                </span>
-              </div> */}
             </div>
           </div>
         );

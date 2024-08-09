@@ -44,7 +44,7 @@ export const AppointmentPdfCard = ({
 
       <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
         <div className="flex flex-col gap-y-[34px] mt-[34px]">
-          <div className="grid grid-cols-2 mlg:grid-cols-3 items-center mlg:gap-x-20 gap-y-5">
+          <div className="grid grid-cols-2 xlg:grid-cols-3 items-center mlg:gap-x-20 gap-y-5">
             <div className="flex items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[65px] w-fit">
                 {translate("appointments.detail_data.lead_id")}:
@@ -84,7 +84,7 @@ export const AppointmentPdfCard = ({
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 items-center gap-x-20">
+          <div className="grid grid-cols-2 xlg:grid-cols-3 items-center gap-x-20">
             <div className="flex items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium">
                 {translate("appointments.detail_data.date")}:
@@ -94,13 +94,12 @@ export const AppointmentPdfCard = ({
               </span>
             </div>
             <div className="flex items-center gap-x-[10px]">
-              <span className="text-base text-[#5C5C5C] font-medium">
-                {translate("appointments.detail_data.time")}:
-              </span>
-              <span className="text-base text-[#5C5C5C] font-nomal">
-                {appointmentDetails?.appointmentID?.startTime} -{" "}
-                {appointmentDetails?.appointmentID?.endTime}
-              </span>
+              <p className="text-base text-[#5C5C5C] font-medium min-w-[100px] w-fit">
+                {translate("appointments.detail_data.created_by")}:
+              </p>
+              <p className="text-base text-[#5C5C5C] font-nomal w-full">
+                {appointmentDetails?.appointmentID?.agent?.fullName}
+              </p>
             </div>
           </div>
         </div>

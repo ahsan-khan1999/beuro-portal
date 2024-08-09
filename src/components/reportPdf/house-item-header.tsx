@@ -24,14 +24,27 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HouseItemHeader = () => {
+export const HouseItemHeader = ({ language }: { language?: string }) => {
   const headerLabel = [0, 1, 2];
+
+  const langContent = {
+    en: {
+      item: "Item",
+    },
+
+    de: {
+      item: "Artikel",
+    },
+  };
+
   return (
     <View style={styles.grid}>
       {headerLabel.map((index) => (
         <View key={index} style={styles.column}>
           <View style={styles.container} key={index}>
-            <Text style={styles.textbase}>Item</Text>
+            <Text style={styles.textbase}>
+              {langContent[language as keyof typeof langContent]?.item}
+            </Text>
             <Text style={styles.textbase}>Qty</Text>
           </View>
         </View>

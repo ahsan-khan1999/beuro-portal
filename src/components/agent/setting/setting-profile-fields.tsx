@@ -55,29 +55,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                     register,
                   },
                 },
-                // {
-                //   containerClass: "mb-0",
-                //   label: {
-                //     text: `${translate("employees.details.designation")}`,
-                //     htmlFor: "designation",
-                //     className: "mb-[10px]",
-                //   },
 
-                //   field: {
-                //     className: `pl-4 !border-[#BFBFBF] focus:!border-primary cursor-pointer`,
-                //     type: Field.select,
-                //     id: "designation",
-                //     name: "designation",
-                //     options:
-                //       Object.keys(staticEnums.Designation)
-                //         ?.slice(1)
-                //         ?.map((item) => ({
-                //           value: staticEnums.Designation[item],
-                //           label: translate(`agent.employee_type.${item}`),
-                //         })) || [],
-                //     control,
-                //   },
-                // },
                 {
                   containerClass: "mb-0",
                   label: {

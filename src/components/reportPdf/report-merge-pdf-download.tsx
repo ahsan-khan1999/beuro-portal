@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { pdf as reactPdf } from "@react-pdf/renderer";
-import { ReportPdfPreviewProps } from "@/types";
+import { PdfPreviewProps, ReportPdfPreviewProps } from "@/types";
 import { blobToFile, mergePDFs } from "@/utils/utility";
 import { useAppSelector } from "@/hooks/useRedux";
 import ReportPdf from "./generate-report-pdf";
 
 export const useMergedReportPdfDownload = ({
+  emailTemplateSettings,
+  templateSettings,
+  systemSetting,
   data,
   remoteFileBlob,
   fileName,
-  systemSetting,
-}: ReportPdfPreviewProps) => {
+}: PdfPreviewProps) => {
   const [mergedFile, setMergedFile] = useState<File | null>(null);
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
   const [isPdfRendering, setIsPdfRendering] = useState(false);
@@ -26,8 +28,10 @@ export const useMergedReportPdfDownload = ({
             <ReportPdf
               {...{
                 data,
-                language: currentLanguage,
+                emailTemplateSettings,
+                templateSettings,
                 systemSetting,
+                lang: currentLanguage,
               }}
             />
           ).toBlob();
@@ -52,7 +56,14 @@ export const useMergedReportPdfDownload = ({
         console.error("Error merging PDFs:", err);
       }
     })();
-  }, [data, remoteFileBlob, currentLanguage, systemSetting]);
+  }, [
+    data,
+    remoteFileBlob,
+    systemSetting,
+    emailTemplateSettings,
+    templateSettings,
+    currentLanguage,
+  ]);
 
   useEffect(() => {
     if (mergedPdfUrl) setIsPdfRendering(false);

@@ -24,6 +24,7 @@ export default function AgentAppointments() {
     totalCount,
     currentPageRows,
     handleAppointmentCreate,
+    lastPage,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -32,7 +33,7 @@ export default function AgentAppointments() {
       onStatusChange={handleStatusUpdate}
       onAppointmentCreate={handleAppointmentCreate}
     />,
-    totalCount !== 0,
+    currentPageRows.length > 0,
     isLoading
   );
 

@@ -84,7 +84,9 @@ const ReceiptPdfPreview = () => {
       <InvoiceEmailHeader
         {...receiptData?.emailHeader}
         contractStatus={collectiveInvoiceDetails?.emailStatus}
-        contentName={receiptData?.emailHeader.contentName}
+        contentName={
+          receiptData?.emailHeader && receiptData?.emailHeader.contentName
+        }
         onEmailSend={handleEmailSend}
         loading={loading}
         onDownload={handleDonwload}

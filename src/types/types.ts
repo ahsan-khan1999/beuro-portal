@@ -1018,12 +1018,12 @@ interface DateRangeSelectionProps {
 }
 
 export interface DocumentHeaderDetailsProps {
-  offerNo: string;
-  offerDate: string;
+  offerNo?: string;
+  offerDate?: string;
   createdBy: string;
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
-  fileType?: "contract" | "invoice" | "receipt";
+  fileType?: "contract" | "invoice" | "receipt" | "report";
   companyName?: string;
   isReverseLogo?: boolean;
   language?: string;
@@ -1063,7 +1063,7 @@ export interface ProductItemFooterProps {
 export interface ContactDetailsProps {
   address: {
     name: string;
-    companyName: string;
+    companyName?: string;
     streetWithNumber: string;
     postalCode: string;
     city: string;
@@ -1075,9 +1075,9 @@ export interface ContactDetailsProps {
   isReverseInfo?: boolean;
 }
 export interface MovingDetailsProps {
-  header: string;
+  header?: string;
   address: CustomerAddress[];
-  workDates: DateRangeProps[];
+  workDates?: DateRangeProps[];
   isOffer?: boolean;
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
@@ -1136,10 +1136,10 @@ interface CompanyDetailsFourthColumn {
 }
 
 export interface DocumentDetailFooterProps {
-  firstColumn: CompanyDetailsFirstColumn;
-  secondColumn: CompanyDetailsSecondColumn;
-  thirdColumn: CompanyDetailsThirdColumn;
-  fourthColumn: CompanyDetailsFourthColumn;
+  firstColumn?: CompanyDetailsFirstColumn;
+  secondColumn?: CompanyDetailsSecondColumn;
+  thirdColumn?: CompanyDetailsThirdColumn;
+  fourthColumn?: CompanyDetailsFourthColumn;
   columnSettings: TemplateType | null;
   totalPages?: number;
   currPage?: number;
@@ -1271,10 +1271,12 @@ export interface ContentPdfPreviewerProps {
 }
 
 export interface PdfProps<T = EmailHeaderProps> {
-  emailHeader: Partial<T>;
+  emailHeader?: Partial<T>;
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   movingDetails: MovingDetailsProps;
+  houseDetails?: ReportHouseDetailsProps;
+  offerDetails?: OfferDetailsProps;
   serviceItem: ServiceList[];
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
@@ -1572,7 +1574,7 @@ export interface ReportPDFProps {
   contactAddress: ReportContactDetailsProps;
   movingDetails: ReportMovingDetailsProps;
   houseDetails: ReportHouseDetailsProps;
+  offerDetails: OfferDetailsProps;
   serviceItem: ServiceList[];
   serviceItemFooter: ProductItemFooterProps;
-  offerDetails: OfferDetailsProps;
 }

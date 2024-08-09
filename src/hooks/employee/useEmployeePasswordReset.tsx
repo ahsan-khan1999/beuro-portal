@@ -7,9 +7,15 @@ import { EmployeeResetPasswordFieldsFormField } from "@/components/employees/fie
 import { generateEmployeePasswordResetValidationSchema } from "@/validation/employeeSchema";
 import { updateEmployeePassword } from "@/api/slices/employee/emplyeeSlice";
 
-export default function useEmployeePasswordReset(
-  passwordResetSuccessfully: Function
-) {
+export interface EmpolyeePasswordResetProps {
+  id?: string;
+  passwordResetSuccessfully: Function;
+}
+
+export default function useEmployeePasswordReset({
+  id,
+  passwordResetSuccessfully,
+}: EmpolyeePasswordResetProps) {
   const router = useRouter();
   const { loading, error, employeeDetails } = useAppSelector(
     (state) => state.employee
@@ -33,7 +39,7 @@ export default function useEmployeePasswordReset(
   const fields = EmployeeResetPasswordFieldsFormField(register, loading);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    let apiData = { ...data, id: employeeDetails?.id };
+    let apiData = { ...data, id: id ? id : employeeDetails?.id };
     const res = await dispatch(
       updateEmployeePassword({ apiData, router, setError, translate })
     );
