@@ -21,7 +21,7 @@ import { Appointments } from "@/types/appointments";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 
 export const useAppointments = () => {
-  const { loading, isLoading, totalCount } = useAppSelector(
+  const { loading, isLoading, totalCount, lastPage, } = useAppSelector(
     (state) => state.appointment
   );
 
@@ -269,5 +269,6 @@ export const useAppointments = () => {
     handleStatusUpdate,
     handleAppointmentCreate,
     handleScheduleAppointments,
+    lastPage
   };
 };

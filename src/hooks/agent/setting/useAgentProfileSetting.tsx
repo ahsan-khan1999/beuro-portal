@@ -15,6 +15,8 @@ import { isJSON } from "@/utils/functions";
 import { useAppSelector } from "@/hooks/useRedux";
 import { getUser } from "@/utils/auth.util";
 import { AgentPrfoileSettingFormField } from "@/components/agent/setting/setting-profile-fields";
+import { staticEnums } from "@/utils/static";
+import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 
 export const useAgentProfileSetting = () => {
   const router = useRouter();
@@ -28,7 +30,14 @@ export const useAgentProfileSetting = () => {
   };
 
   const handlePasswordReset = () => {
-    dispatch(updateModalType({ type: ModalType.PASSWORD_RESET }));
+    dispatch(
+      updateModalType({
+        type: ModalType.PASSWORD_RESET,
+        data: {
+          id: user?.employee?.id,
+        },
+      })
+    );
   };
 
   const passwordResetSuccessfully = () => {
@@ -42,7 +51,7 @@ export const useAgentProfileSetting = () => {
     });
   };
 
-  const schema = generateEmployDetailsValidation(translate);
+  // const schema = generateEmployDetailsValidation(translate);
 
   const {
     register,
@@ -53,7 +62,7 @@ export const useAgentProfileSetting = () => {
     control,
     setValue,
   } = useForm<FieldValues>({
-    resolver: yupResolver<FieldValues>(schema),
+    // resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
@@ -61,6 +70,10 @@ export const useAgentProfileSetting = () => {
       ...user.employee,
     });
   }, []);
+
+  const handleSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+  };
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.PASSWORD_RESET]: (
@@ -71,6 +84,14 @@ export const useAgentProfileSetting = () => {
     ),
     [ModalType.PASSWORD_CHANGE_SUCCESSFULLY]: (
       <PasswordChangeSuccessfully onClose={onClose} />
+    ),
+    [ModalType.CREATE_SUCCESS]: (
+      <RecordCreateSuccess
+        onClose={onClose}
+        modelHeading={translate("common.modals.admin_setting")}
+        modelSubHeading={translate("common.modals.setting_update")}
+        routeHandler={onClose}
+      />
     ),
   };
 
@@ -88,11 +109,14 @@ export const useAgentProfileSetting = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
+      const apiData = {
+        ...data,
+        designation: staticEnums["Designation"][user?.employee?.designation],
+      };
       const res = await dispatch(
-        updateEmployee({ data, router, setError, translate })
+        updateEmployee({ data: apiData, router, setError, translate })
       );
-      if (res?.payload)
-        dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+      if (res?.payload) handleSuccess();
     } catch (error) {
       console.error("Something went wrong!", error);
     }

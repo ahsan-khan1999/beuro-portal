@@ -65,7 +65,7 @@ export interface UserEmployee {
   [UserResponse.creationDate]: number;
   [UserResponse.fullName]: UserAddress;
   [UserResponse.picture]: string;
-  [UserResponse.designation]: UserBankDetail;
+  [UserResponse.designation]: string;
   [UserResponse.email]: string; 
   [UserResponse.phoneNumber]: string;
   [UserResponse.mobileNumber]: string;
