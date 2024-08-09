@@ -8,10 +8,6 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import {
-  AddDateFormField,
-  AddOfferDetailsSubmitFormField,
-} from "@/components/invoice/edit/fields/add-offer-details-fields";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo } from "react";
 import {
@@ -26,11 +22,15 @@ import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
 import { generateInvoiceDetailsValidationSchema } from "@/validation/invoiceSchema";
 import { createMainInvoice } from "@/api/slices/invoice/invoiceSlice";
-import { AddOfferDetailsFormField } from "@/components/invoice/createInvoice/fields/add-offer-details-fields";
+import {
+  CreateInvoiceCustomerDetailsFormField,
+  CreateInvoiceDateFormField,
+  CreateInvoiceDetailsSubmitFormField,
+} from "@/components/invoice/createInvoice/fields/create-invoice-customer-details-fields";
 
 export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
 
   const { loading, error, invoiceDetails } = useAppSelector(
@@ -51,6 +51,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   };
 
   const schema = generateInvoiceDetailsValidationSchema(translate);
+
   const {
     register,
     handleSubmit,
@@ -66,7 +67,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -74,9 +75,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
-  // const leadID = watch("leadID");
-
-  console.log({ customerType });
 
   useEffect(() => {
     if (type && customerID)
@@ -144,6 +142,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   };
 
   const handleContentSelect = () => {};
+
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
@@ -156,27 +155,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
       setValue("title", filteredContent?.invoiceContent?.title);
     }
   }, [selectedContent]);
-
-  const invoiceFields = AddOfferDetailsFormField(
-    register,
-    loading,
-    control,
-    {
-      customerType,
-      type,
-      customer,
-      onCustomerSelect,
-      customerDetails,
-      onCancel,
-      leadDetails,
-      lead,
-      content,
-      handleContentSelect,
-      invoiceDetails,
-      // leadID,
-    },
-    setValue
-  );
 
   useMemo(() => {
     if (type === "New Customer") {
@@ -223,7 +201,29 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     }
   }, [type]);
 
-  const dateFields = AddDateFormField(
+
+  const invoiceFields = CreateInvoiceCustomerDetailsFormField(
+    register,
+    loading,
+    control,
+    {
+      customerType,
+      type,
+      customer,
+      onCustomerSelect,
+      customerDetails,
+      onCancel,
+      leadDetails,
+      lead,
+      content,
+      handleContentSelect,
+      invoiceDetails,
+      // leadID,
+    },
+    setValue
+  );
+
+  const dateFields = CreateInvoiceDateFormField(
     register,
     append,
     testFields?.length ? testFields?.length : 1,
@@ -232,7 +232,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     control
   );
 
-  const submit = AddOfferDetailsSubmitFormField(
+  const submit = CreateInvoiceDetailsSubmitFormField(
     register,
     loading,
     control,

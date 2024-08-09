@@ -10,19 +10,19 @@ export default function DashboardFilters({
   handleFilterChange,
   setFilter,
 }: FiltersComponentProps) {
-  const [isOpen, setIsOpen] = useState({
-    [DashboardFiltersToggle.month]: false,
-    [DashboardFiltersToggle.week]: false,
-  });
+  // const [isOpen, setIsOpen] = useState({
+  //   [DashboardFiltersToggle.month]: false,
+  //   [DashboardFiltersToggle.week]: false,
+  // });
 
   const { t: translate } = useTranslation();
 
-  const handleSelectToggle = (type: DashboardFiltersToggle) => {
-    setIsOpen((prev) => ({
-      ...prev,
-      [type]: !isOpen[type],
-    }));
-  };
+  // const handleSelectToggle = (type: DashboardFiltersToggle) => {
+  //   setIsOpen((prev) => ({
+  //     ...prev,
+  //     [type]: !isOpen[type],
+  //   }));
+  // };
 
   const monthObj = {
     January: "1",
@@ -80,7 +80,7 @@ export default function DashboardFilters({
         label={translate(
           `selected_month.${getKeyByValue(monthObj, filter?.month?.toString())}`
         )}
-        containerClassName="bg-white rounded-[7px] border border-[#8F8F8F80] w-[105px]"
+        containerClassName="bg-white rounded-lg border border-[#8F8F8F80] w-[135px]"
       />
     </div>
   );

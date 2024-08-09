@@ -7,40 +7,56 @@ export interface FollowUps {
   id: string;
   dateAndTime: string;
   title: string;
-  status:  keyof typeof StatusColors;
+  status: keyof typeof StatusColors;
   delete?: string;
   details?: string;
-  dateTime: string
+  dateTime: string;
   customer: AllCustomers;
-  lead:Lead;
-  additionalDetails:string;
-  isCompleted:boolean;
-  isPostponed:boolean;
-  postPonedNote:string;
-  completeRemarks:string
-  createdAt:string;
-  refID:string
+  lead: Lead;
+  additionalDetails: string;
+  isCompleted: boolean;
+  isPostponed: boolean;
+  postPonedNote: string;
+  completeRemarks: string;
+  createdAt: string;
+  refID: string;
+}
+export interface TableDataFollowUps {
+  id: string;
+  dateAndTime: string;
+  title: string;
+  status: keyof typeof StatusColors;
+  delete?: string;
+  details?: string;
+  dateTime: string;
+  customer: AllCustomers;
+  lead: Lead;
+  additionalDetails: string;
+  isCompleted: boolean;
+  isPostponed: boolean;
+  postPonedNote: string;
+  completeRemarks: string;
+  createdAt: string;
+  refID: string;
 }
 
 // follow up table is here
 export interface FollowUpsTable {
   currentPageRows: FollowUps[];
-  handleFollowUpsDetails: (id:string) => void;
-  handleFollowUpsDelete: (id:string) => void;
-
+  handleFollowUpsDetails: (id: string) => void;
+  handleFollowUpsDelete: (id: string) => void;
 }
 
 // interface for all customers
 export interface AllCustomers {
   id: number;
   refID: string;
-  createdAt: string
+  createdAt: string;
   fullName: string;
   email: string;
   phoneNumber: string;
   date: string;
   mobileNumber: string;
-
   status?: string;
   editImg?: string;
   editNote?: string;
@@ -50,7 +66,6 @@ export interface AllCustomers {
   address: CustomerAddress;
   edit?: boolean;
   lead: CustomerLeadDetail;
-
 }
 
 export interface AllCustomersTable {
@@ -98,16 +113,16 @@ export interface FollowUpCustomersDetailsProps {
 
 export interface FollowUpsProps {
   onClose: () => void;
-  handleFollowUpsDetails: (id:string) => void;
+  handleFollowUpsDetails: (id: string) => void;
 }
 
 export interface AddPostPonedNoteProps {
   onClose: () => void;
-  handleFollowUpsDetails: (id:string) => void;
+  handleFollowUpsDetails: (id: string) => void;
 }
 export interface AddRemarksProps {
   onClose: () => void;
-  handleFollowUpsDetails: (id:string) => void;
+  handleFollowUpsDetails: (id: string) => void;
 }
 
 export interface AllLeadsProps {
@@ -124,18 +139,16 @@ export interface FollowUpDetailsProps {
     completed: boolean;
     neutral: boolean;
   };
-  followUpDetails:FollowUps
+  followUpDetails: FollowUps;
 }
-
 
 export interface FollowUpsTableProps {
-  handleFollowUpsDetails: (id:string) => void
+  handleFollowUpsDetails: (id: string) => void;
 }
-
 
 export interface AllLeadsTableProps {
-  handleLeadDetail: () => void
+  handleLeadDetail: () => void;
 }
 export interface AllCustomersTableProps {
-  handleCustomerDetail: () => void
+  handleCustomerDetail: () => void;
 }

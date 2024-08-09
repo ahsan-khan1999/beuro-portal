@@ -1,6 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
-import icon from "@/assets/svgs/Vector.svg";
 import {
   FieldValues,
   UseFieldArrayAppend,
@@ -20,9 +19,11 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   setAttachements,
   contentDetails,
   append,
-  remove
+  remove,
+  offerDescriptionCount
 ) => {
   const { t: translate } = useTranslation();
+
   const formField: FormField[] = [
     {
       field: {
@@ -39,7 +40,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "contentName",
               name: "contentName",
@@ -56,7 +57,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "offerContent.title",
               name: "offerContent.title",
@@ -65,24 +66,46 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
           },
           {
-            containerClass: "mb-0",
-            label: {
-              text: translate("content.details.offer_description"),
-              htmlFor: "offerContent.description",
-              className: "mb-[10px]",
-            },
             field: {
-              type: Field.ckEditor,
-              id: "offerContent.description",
-              name: "offerContent.description",
-
-              control,
-              // value:
-              //   (contentDetails?.id &&
-              //     contentDetails?.offerContent?.description) ||
-              //   "",
+              type: Field.div,
+              id: "div-field",
+              className: "flex flex-col gap-y-1",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  label: {
+                    text: translate("content.details.offer_description"),
+                    htmlFor: "offerContent.description",
+                    className: "mb-[10px]",
+                  },
+                  field: {
+                    type: Field.ckEditor,
+                    id: "offerContent.description",
+                    name: "offerContent.description",
+                    control,
+                    // value:
+                    //   (contentDetails?.id &&
+                    //     contentDetails?.offerContent?.description) ||
+                    //   "",
+                  },
+                },
+                // {
+                //   containerClass: `${
+                //     offerDescriptionCount && offerDescriptionCount?.length > 0
+                //       ? "flex"
+                //       : "hidden"
+                //   } items-center justify-end`,
+                //   field: {
+                //     type: Field.span,
+                //     text: getTextCount(offerDescriptionCount),
+                //     containerClassName: "text-sm text-[#393939] font-normal",
+                //     id: "",
+                //   },
+                // },
+              ],
             },
           },
+
           {
             containerClass: "mb-0",
             label: {
@@ -92,7 +115,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
             },
             field: {
               type: Field.ckEditor,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "offerContent.body",
               name: "offerContent.body",
 

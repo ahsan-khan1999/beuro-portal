@@ -1,4 +1,4 @@
-import { CheckBoxProps, InputProps } from "@/types";
+import { CheckBoxProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
 import styles from "./checkbox.module.css";
 
@@ -26,7 +26,7 @@ export const CheckBox = ({
           {...register(name)}
           className={`${styles.hiddenCheckbox} checkbox-gradietnt`}
         />
-        <label htmlFor={id} className={`${styles.checkboxLabel} `}></label>
+        <label htmlFor={id} className={`${styles.checkboxLabel}`}></label>
         <label htmlFor={id} className="ml-2 cursor-pointer text-sm">
           {label}
         </label>

@@ -522,7 +522,6 @@ export const readDashboard: AsyncThunk<boolean, NextRouter, object> | any =
 
     try {
       const response = await apiServices.readDashboard(params);
-
       return response?.data?.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));

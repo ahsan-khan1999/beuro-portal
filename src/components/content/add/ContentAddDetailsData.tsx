@@ -13,17 +13,12 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { updateQuery } from "@/utils/update-query";
-
-export enum ComponentsType {
-  addOffer,
-  addConfirmationContent,
-  addInvoiceContent,
-  addReceiptContent,
-}
+import { ComponentsType } from "@/enums/content";
 
 const ContentAddDetailsData = () => {
   const { contentDetails } = useAppSelector((state) => state.content);
   const { t: translate } = useTranslation();
+  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
   const [tabType, setTabType] = useState<number>(
     (contentDetails?.id && contentDetails?.stage) || ComponentsType.addOffer
@@ -38,10 +33,6 @@ const ContentAddDetailsData = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
-  const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
-  };
-
   const onCloseRoute = () => {
     router.pathname = "/content";
     updateQuery(router, router.locale as string);
@@ -51,8 +42,6 @@ const ContentAddDetailsData = () => {
   const handleContentCreated = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
-
-  const router = useRouter();
 
   const route = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -74,9 +63,11 @@ const ContentAddDetailsData = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   const onHandleBack = (currentComponent: ComponentsType) => {
     setTabType(currentComponent);
   };
+
   const handleNextTab = (currentComponent: ComponentsType) => {
     if (tabType === ComponentsType.addReceiptContent) {
       handleContentCreated();
@@ -171,22 +162,13 @@ const ContentAddDetailsData = () => {
     },
   ];
 
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, [tabType]);
-
   return (
     <>
       <div className="xLarge:fixed mb-5 xLarge:-mt-12">
         <p className="text-xl mb-5 font-normal text-[#222B45]">
           {translate("content.create_content")}
         </p>
-        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-full gap-[14px]">
+        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -201,8 +183,8 @@ const ContentAddDetailsData = () => {
         </div>
       </div>
       <div className="w-full break-all xLarge:mt-[145px] flex mb-10" ref={ref}>
-        <div className="max-w-[300px] w-full hidden xLarge:block"></div>
-        <div className="w-full xLarge:max-w-[80%]">
+        <div className="max-w-[280px] w-full hidden xLarge:block"></div>
+        <div className="w-full">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

@@ -3,11 +3,15 @@ import Image from "next/image";
 import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import { TableRowEmailTracker } from "@/types/emailTracker";
-import { formatDateReverse, getFileNameFromUrl, getMailStatusColor } from "@/utils/utility";
+import {
+  formatDateReverse,
+  getFileNameFromUrl,
+  getMailStatusColor,
+} from "@/utils/utility";
 import Link from "next/link";
-import { Pdf } from '../../types/emailTracker';
+import { updateQuery } from "@/utils/update-query";
+import { useTranslation } from "next-i18next";
 
 const DetailsData = ({
   handleConfirmDeletion,
@@ -19,14 +23,16 @@ const DetailsData = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
+  const handleBack = () => {
+    (router.pathname = "/email-tracker"), delete router.query["email"];
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <>
       <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
-          <span
-            onClick={() => router.push("/email-tracker")}
-            className="cursor-pointer"
-          >
+          <span onClick={handleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
@@ -65,18 +71,18 @@ const DetailsData = ({
         </span>
       </div>
 
-      <div className="xl:w-11/12 w-full mt-5">
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-5">
-          <div>
-            <span className="font-normal text-[#4D4D4D] text-base mr-5">
-              {translate("email_tracker.card_content.id")}
+      <div className="w-full mt-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+          <div className="flex items-center gap-x-2">
+            <span className="font-normal text-[#4D4D4D] text-base">
+              {translate("email_tracker.card_content.id")}:
             </span>
-            <span className="font-medium  text-[#4B4B4B] text-base">
+            <span className="font-medium text-primary text-base">
               {emailDetails?.id && emailDetails.id.slice(-5)}
             </span>
           </div>
-          <div>
-            <span className="font-normal text-[#4D4D4D] text-base mr-5">
+          <div className="flex items-center gap-x-2">
+            <span className="font-normal text-[#4D4D4D] text-base">
               {translate("email_tracker.card_content.status")}:
             </span>
             {emailDetails?.mailStatus && (
@@ -89,28 +95,26 @@ const DetailsData = ({
               </span>
             )}
           </div>
-          <div>
-            <span className="font-normal text-[#4D4D4D]  text-base mr-5">
+          <div className="flex items-center gap-x-2">
+            <span className="font-normal text-[#4D4D4D] text-base">
               {translate("email_tracker.card_content.subject")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] text-base">
+            <span className="font-medium text-[#4B4B4B] text-base truncate">
               {emailDetails?.subject}
             </span>
           </div>
 
-          <div>
-            <span className="font-normal text-[#4D4D4D] text-base mr-5">
+          <div className="flex items-center gap-x-2">
+            <span className="font-normal text-[#4D4D4D] text-base">
               {translate("email_tracker.card_content.recipient")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] text-base break-all">
+            <span className="font-medium text-[#4B4B4B] text-base truncate">
               {emailDetails?.email}
             </span>
           </div>
           {emailDetails?.cc && (
             <div>
-              <span className="font-normal text-[#4D4D4D] text-base mr-5">
-                Cc:
-              </span>
+              <span className="font-normal text-[#4D4D4D] text-base">Cc:</span>
               <span className="font-medium text-[#4B4B4B] text-base break-all">
                 {emailDetails?.cc}
               </span>
@@ -118,16 +122,14 @@ const DetailsData = ({
           )}
           {emailDetails?.bcc && (
             <div>
-              <span className="font-normal text-[#4D4D4D] text-base mr-5">
-                Bcc:
-              </span>
+              <span className="font-normal text-[#4D4D4D] text-base">Bcc:</span>
               <span className="font-medium text-[#4B4B4B] text-base break-all">
                 {emailDetails?.bcc}
               </span>
             </div>
           )}
           <div>
-            <span className="font-normal text-[#4D4D4D] text-base mr-5">
+            <span className="font-normal text-[#4D4D4D] text-base">
               {translate("email_tracker.card_content.send_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
@@ -135,7 +137,7 @@ const DetailsData = ({
             </span>
           </div>
           <div>
-            <span className="font-normal text-[#4D4D4D] text-base mr-5">
+            <span className="font-normal text-[#4D4D4D] text-base">
               {translate("email_tracker.card_content.viewed_at")}:
             </span>
             <span className="font-medium text-[#4B4B4B] text-base">
@@ -145,7 +147,7 @@ const DetailsData = ({
         </div>
 
         <div className="mt-5">
-          <span className="text-[#4B4B4B] text-lg  font-semibold ">
+          <span className="text-[#4B4B4B] text-lg font-semibold">
             {translate("email_tracker.card_content.attachments")}:
           </span>
         </div>
@@ -161,10 +163,15 @@ const DetailsData = ({
                   <Image
                     src={pdfFileIcon}
                     alt="PDF_FILE_ICON"
-                    className=" mr-[11px]"
+                    className="mr-[11px]"
                   />
                   <span className="text-[#BFBFBF] text-base font-normal">
-                    {getFileNameFromUrl(typeof item === "string" ? item : item?.href, typeof item === "string" ? item?.length : item?.href?.length)}
+                    {getFileNameFromUrl(
+                      typeof item === "string" ? item : item?.href,
+                      typeof item === "string"
+                        ? item?.length
+                        : item?.href?.length
+                    )}
                   </span>
                 </Link>
                 &nbsp;&nbsp;

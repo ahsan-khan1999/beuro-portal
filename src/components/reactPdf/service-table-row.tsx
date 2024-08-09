@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
-    // marginRight: 5,
+    marginRight: 20,
   },
   descriptionText: {
     color: "#000",
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontStyle: "medium",
     width: 170,
-    marginRight: 10,
+    marginRight: 20,
   },
   priceHeader: {
     flexDirection: "row",
@@ -61,7 +61,7 @@ export const ServiceTableRow = ({
   isDiscount,
 }: Partial<ServiceList>) => {
   return (
-    <View style={styles.headerContainer} break={pagebreak}>
+    <View style={styles.headerContainer} break={pagebreak} wrap={false}>
       <View style={styles.headerRow}>
         <Text style={styles.descriptionTextTitle}>{serviceTitle}</Text>
         <Text style={styles.descriptionText}>{description}</Text>

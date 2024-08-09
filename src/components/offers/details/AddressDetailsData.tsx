@@ -2,8 +2,8 @@ import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { useRouter } from "next/router";
 import React from "react";
 import { OffersTableRowTypes } from "@/types/offers";
-import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+import { useTranslation } from "next-i18next";
 
 const AddressDetailsData = ({
   offerDetails,
@@ -13,13 +13,15 @@ const AddressDetailsData = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
+  const addressData = offerDetails?.addressID?.address || [{}];
+
   return (
     <LeadsCardLayout>
       <div
         className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.address")}
       >
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("offers.address_details.main_heading")}
         </h2>
         <button
@@ -36,7 +38,7 @@ const AddressDetailsData = ({
         </button>
       </div>
 
-      {offerDetails?.addressID?.address?.map((item, index) => (
+      {addressData?.map((item, index) => (
         <div className="py-3 px-6" key={index}>
           <h4 className="text-base font-semibold text-[#1E1E1E] mb-[10px]">
             {item?.label}

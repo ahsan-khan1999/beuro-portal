@@ -8,11 +8,7 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import {
-  AddOfferDetailsServiceSubmitFormField,
-  AddOfferServiceDetailsDescriptionFormField,
-  AddOfferServiceDetailsFormField,
-} from "@/components/offers/add/fields/add-offer-service-details-fields";
+
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -28,6 +24,11 @@ import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 import { generateCreateInvoiceServiceDetailsValidation } from "@/validation/invoiceSchema";
 import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
+import {
+  CreateInvoiceDetailsServiceSubmitFormField,
+  CreateInvoiceServiceDetailsDescriptionFormField,
+  CreateInvoiceServiceDetailsFormField,
+} from "@/components/invoice/createInvoice/fields/create-invoice-service-details-fields";
 
 let prevDisAmount: number | string = "";
 
@@ -114,6 +115,7 @@ export const useCreateInvoiceServiceDetails = (
       setValue(`serviceDetail.${index}.count`, 0);
     }
   };
+
   const generateTotalPrice = (index: number) => {
     const data = getValues();
     setTimeout(() => {
@@ -125,50 +127,6 @@ export const useCreateInvoiceServiceDetails = (
       generateGrandTotal();
     }, 10);
   };
-
-  // const generateGrandTotal = () => {
-  //   const data = getValues();
-  //   const totalPrices = data?.serviceDetail?.reduce(
-  //     (acc: number, element: any) => acc + parseFloat(element.totalPrice || 0),
-  //     0
-  //   );
-
-  //   let taxAmount =
-  //     isTax && String(taxType) == "0"
-  //       ? calculateTax(totalPrices, Number(TAX_PERCENTAGE))
-  //       : isTax && String(taxType) == "1"
-  //       ? calculateTax(totalPrices, data?.taxAmount || 0)
-  //       : 0;
-  //   let discount = 0;
-  //   if (isDiscount && discountAmount) {
-  //     discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
-  //     if (!+discountType && discountAmount > 100) {
-  //       setValue("discountAmount", 100);
-  //       console.info("Percentage should not be greater than 100%");
-  //     } else if (!!+discountType && discountAmount > totalPrices) {
-  //       setValue("discountAmount", totalPrices);
-  //       console.info("Amount should not be greater than total price");
-  //     } else if (!!+discountType && discountAmount === "") {
-  //       // console.log("here");
-  //     }
-  //   } else {
-  //     setValue("discountAmount", prevDisAmount);
-  //   }
-  //   const grandTotal =
-  //     String(taxType) === "0"
-  //       ? totalPrices - discount
-  //       : totalPrices + taxAmount - discount;
-
-  //   if (discountAmount === "") {
-  //     setValue("discountAmount", "");
-  //   }
-  //   prevDisAmount = discountAmount === "" || discount === 0 ? "" : discount;
-  //   setTotal({
-  //     subTotal: totalPrices,
-  //     grandTotal: grandTotal,
-  //     taxAmount: taxAmount,
-  //   });
-  // };
 
   const generateGrandTotal = () => {
     const data = getValues();
@@ -289,6 +247,7 @@ export const useCreateInvoiceServiceDetails = (
     } else if (newLength < currentLength) {
       setServiceType(serviceType.slice(0, newLength));
     }
+    generateGrandTotal();
   }, [serviceFields?.length]);
 
   const onServiceSelectType = (index: number) => {
@@ -368,7 +327,23 @@ export const useCreateInvoiceServiceDetails = (
     }
   };
 
-  const fields = AddOfferServiceDetailsFormField(
+  const handleRemoveService = (index: number) => {
+    remove(index);
+    const data = getValues();
+
+    reset({
+      ...data,
+    });
+
+    setServiceType((prev) => {
+      const newlist = [...prev];
+      newlist.splice(index, 1);
+
+      return newlist;
+    });
+  };
+
+  const fields = CreateInvoiceServiceDetailsFormField(
     register,
     loading,
     control,
@@ -382,7 +357,7 @@ export const useCreateInvoiceServiceDetails = (
       invoiceDetails,
     },
     append,
-    remove,
+    handleRemoveService,
     serviceType,
     handleServiceChange,
     serviceFields,
@@ -390,7 +365,7 @@ export const useCreateInvoiceServiceDetails = (
     watch
   );
 
-  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
+  const fieldsDescription = CreateInvoiceServiceDetailsDescriptionFormField(
     register,
     loading,
     control,
@@ -416,7 +391,7 @@ export const useCreateInvoiceServiceDetails = (
     setValue
   );
 
-  const submitFields = AddOfferDetailsServiceSubmitFormField(
+  const submitFields = CreateInvoiceDetailsServiceSubmitFormField(
     loading,
     handleBack
   );

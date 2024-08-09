@@ -20,7 +20,6 @@ export default function SelectField({
   isSearch,
   labelClassName,
 }: OptionsFieldProps) {
-  const defaultClasses = `flex items-center`;
   const containerClasses = combineClasses(
     "relative flex items-center justify-center w-[120px]",
     containerClassName
@@ -111,7 +110,7 @@ export default function SelectField({
                   height={8}
                 />
                 <input
-                  placeholder="Search..."
+                  placeholder={translate("common.search")}
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-1 placeholder:text-sm bg-[#f6f6f7] "
                 />
               </div>

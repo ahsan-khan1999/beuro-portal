@@ -19,6 +19,7 @@ import {
   UseFormHandleSubmit,
 } from "react-hook-form";
 import { Plan } from "./admin/plans";
+import { CustomerAddress, CustomerLeadDetail } from "./leads";
 
 export interface User {
   [UserResponse.id]: string;
@@ -27,7 +28,7 @@ export interface User {
   [UserResponse.role]: string;
   [UserResponse.bank]: string;
   [UserResponse.company]: UserCompany;
-  [UserResponse.employee]: string;
+  [UserResponse.employee]: UserEmployee;
   [UserResponse.addresses]: UserAddress;
   [UserResponse.isProfileComplete]: boolean;
   [UserResponse.isEmailVerified]: boolean;
@@ -46,7 +47,6 @@ export interface User {
   [UserResponse.isCommercialSellerRequested]: boolean;
   plan: Plan;
 }
-// [AddressType.primary]:{}
 
 export interface UserCompany {
   [UserResponse.companyName]: string;
@@ -57,6 +57,19 @@ export interface UserCompany {
   [UserResponse.mobileNumber]: string;
   [UserResponse.addresses]: UserAddress;
   [UserResponse.bank]: UserBankDetail;
+}
+
+export interface UserEmployee {
+  [UserResponse.id]: string;
+  [UserResponse.employeeID]: string;
+  [UserResponse.creationDate]: number;
+  [UserResponse.fullName]: UserAddress;
+  [UserResponse.picture]: string;
+  [UserResponse.designation]: string;
+  [UserResponse.email]: string; 
+  [UserResponse.phoneNumber]: string;
+  [UserResponse.mobileNumber]: string;
+  [UserResponse.createdBy]: string;
 }
 export interface UserAddress {
   [AddressTypes.city]: string;
@@ -169,7 +182,7 @@ interface FollowUp {
   company: string;
   createdAt: string;
   createdBy: string;
-  customer: string;
+  customer: Customers;
   dateTime: string;
   isCompleted: boolean;
   isDeleted: boolean;
@@ -182,6 +195,30 @@ interface FollowUp {
   updatedAt: string;
   _id: string;
   id: string;
+}
+
+export interface Customers {
+  id: string;
+  refID: string;
+  createdAt: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  date: string;
+  mobileNumber: string;
+  gender: number;
+  status?: string;
+  editImg?: string;
+  editNote?: string;
+  customerType: string;
+  companyName: string;
+  mobile: string;
+  address: CustomerAddress;
+  edit?: boolean;
+  lead: CustomerLeadDetail;
+  logo: string;
+  plan?: Plan;
+  createdBy?: User;
 }
 interface Activity {
   company: string;

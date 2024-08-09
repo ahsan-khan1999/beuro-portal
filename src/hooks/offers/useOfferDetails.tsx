@@ -3,7 +3,6 @@ import {
   readOfferActivity,
   readOfferDetails,
   sendOfferByPost,
-  sendOfferEmail,
   setOfferDetails,
   updateOfferDiscount,
   updateOfferStatus,
@@ -14,7 +13,6 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -26,7 +24,6 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { readImage } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import localStoreUtil from "@/utils/localstore.util";
-import toast from "react-hot-toast";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { OfferAccepted } from "@/base-components/ui/modals1/offerAccepted";
 import { UploadFile } from "@/base-components/ui/modals1/uploadFile";
@@ -45,7 +42,6 @@ export default function useOfferDetails() {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const isMail = Boolean(router.query?.isMail);
   const [isSendEmail, setIsSendEmail] = useState(isMail || false);
-  const { t: translate } = useTranslation();
   const id = router.query.offer;
 
   useEffect(() => {
@@ -100,28 +96,66 @@ export default function useOfferDetails() {
     dispatch(deleteOffer({ offerDetails, router, translate }));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
-    if (e) {
-      e.stopPropagation();
-    }
-    dispatch(readNotes({ params: { type: "offer", id: offerDetails?.id } }));
-    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
-  };
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
 
-  const handleAddNote = (id: string) => {
+    dispatch(readNotes({ params: { type: "offer", id: offerDetails?.id } }));
     dispatch(
       updateModalType({
-        type: ModalType.ADD_NOTE,
-        data: { id: id, type: "offer" },
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.ADD_NOTE,
+        data: {
+          id: id,
+          type: "offer",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "offer", data: note },
+        data: {
+          id: id,
+          type: "offer",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -138,12 +172,24 @@ export default function useOfferDetails() {
   };
 
   const handleImageUpload = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
+    e?.stopPropagation();
     dispatch(readImage({ params: { type: "offerID", id: offerDetails?.id } }));
-    dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleSendEmail = async () => {
@@ -187,8 +233,22 @@ export default function useOfferDetails() {
     );
   };
 
-  const shareImgModal = () => {
-    dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
+  const shareImgModal = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SHARE_IMAGES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleUploadImages = (
@@ -244,14 +304,14 @@ export default function useOfferDetails() {
       <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (

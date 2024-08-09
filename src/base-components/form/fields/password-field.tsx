@@ -26,6 +26,7 @@ export const PasswordField = ({
   const defaultClasses = ` w-full border border-borderColor rounded-lg   py-[10px] text-sm focus:border-primary outline-none ${
     type == "password" ? "pl-10 pr-4" : "px-4"
   }`;
+
   return (
     <div className="relative flex items-center">
       {/* {type == "password" && (
@@ -61,7 +62,7 @@ export const PasswordField = ({
           onClick={() => {
             onClick && onClick();
           }}
-          className="absolute right-2 z-40 bg-[#4A13E7] rounded-lg px-[23px] py-[6px] text-white cursor-default"
+          className="absolute right-2 z-40 bg-[#4A13E7] rounded-lg px-[23px] py-[6px] text-white cursor-pointer"
         >
           {translate("common.change_button")}
         </span>

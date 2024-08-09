@@ -1,10 +1,10 @@
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
+import ServicesForm from "../ServicesForm";
 import DetailsData from "../DetailsData";
 import useServiceDetail from "@/hooks/services/useServiceDetail";
-import ServicesForm from "../ServicesForm";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const ServicesDetails = () => {
   const {
@@ -19,6 +19,7 @@ const ServicesDetails = () => {
     renderModal,
     loading,
   } = useServiceDetail(true);
+
   return (
     <Layout>
       <DetailsCard>
@@ -28,9 +29,9 @@ const ServicesDetails = () => {
           deleteHandler={deleteHandler}
         />
       </DetailsCard>
-      <div className="w-full mt-8">
+      <div className="w-full mt-5">
         {loading ? (
-          <LoadingState />
+          <CustomLoader />
         ) : (
           <ServicesForm
             isUpdate={isUpdate}
@@ -43,9 +44,6 @@ const ServicesDetails = () => {
           />
         )}
       </div>
-      {/* <div className="xl:col-span-1">
-          <SideCard />
-        </div> */}
 
       {renderModal()}
     </Layout>

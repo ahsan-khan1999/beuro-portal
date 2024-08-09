@@ -1,9 +1,8 @@
 import EmailCard from "./PdfCard";
-import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import dynamic from "next/dynamic";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
 import { useTranslation } from "next-i18next";
 
@@ -33,6 +32,7 @@ const PdfPriview = () => {
   } = useContractPdf();
 
   const { t: translate } = useTranslation();
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EMAIL_CONFIRMATION]: (
       <CreationCreated
@@ -54,36 +54,32 @@ const PdfPriview = () => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
   return (
     <>
-      {loading ? (
-        <LoadingState />
-      ) : (
-        <>
-          <EmailCard
-            contractStatus={contractDetails?.emailStatus}
-            contractNo={contractData?.emailHeader?.offerNo}
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onDownload={handleDonwload}
-            onPrint={handlePrint}
-            contractTitle={contractData?.emailHeader?.contractTitle || ""}
-            worker={contractData?.emailHeader?.worker || ""}
-            onSendViaPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-          />
+      <EmailCard
+        contractStatus={contractDetails?.emailStatus}
+        contractNo={contractData?.emailHeader?.offerNo}
+        onEmailSend={handleEmailSend}
+        loading={loading}
+        onDownload={handleDonwload}
+        onPrint={handlePrint}
+        contractTitle={contractData?.emailHeader?.contractTitle || ""}
+        worker={contractData?.emailHeader?.worker || ""}
+        onSendViaPost={handleSendByPost}
+        activeButtonId={activeButtonId}
+      />
 
-          <ContractPdfPreview
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          />
-          {renderModal()}
-        </>
-      )}
+      <ContractPdfPreview
+        mergedPdfFileUrl={mergedPdfUrl}
+        isPdfRendering={isPdfRendering}
+      />
+
+      {renderModal()}
     </>
   );
 };

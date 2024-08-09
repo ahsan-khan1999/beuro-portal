@@ -18,19 +18,6 @@ export default function FollowUpFilter({
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
-  // router.push(
-  //   {
-  //     pathname: router.pathname,
-  //     query: {
-  //       ...router.query,
-  //       page: 1,
-  //       text: inputValue,
-  //     },
-  //   },
-  //   undefined,
-  //   { shallow: false }
-  // );
-
   const handleInputChange = (value: string) => {
     setInputValue(value);
   };
@@ -39,9 +26,14 @@ export default function FollowUpFilter({
     const inputValue = inputRef?.current?.value || FiltersDefaultValues.None;
 
     setFilter((prev: FilterType) => {
-      const updatedValue = { ...prev, text: inputValue };
-      handleFilterChange(updatedValue);
-      return updatedValue;
+      // const updatedValue = { ...prev, text: inputValue };
+      const updatedFilter = {
+        ...prev,
+        text: inputValue,
+        status: FiltersDefaultValues.None,
+      };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
     });
   };
 
@@ -51,7 +43,7 @@ export default function FollowUpFilter({
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
-        iconDisplay={false}
+        iconDisplay={true}
       />
       <Button
         text={translate("common.apply_button")}

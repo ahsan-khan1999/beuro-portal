@@ -1,15 +1,19 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import useServiceDetail from "@/hooks/services/useServiceDetail";
-import { useTranslation } from "next-i18next";
 import React from "react";
 
 const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, isUpdate, renderModal } =
-    useServiceDetail(false);
-
-  const { t: translate } = useTranslation();
+  const {
+    fields,
+    onSubmit,
+    handleSubmit,
+    errors,
+    isUpdate,
+    renderModal,
+    translate,
+  } = useServiceDetail(false);
 
   return (
     <div
@@ -18,7 +22,7 @@ const AddServiceForm = ({ handleCancel }: { handleCancel: () => void }) => {
       } w-full h-fit`}
     >
       <div className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("services.add_service_heading")}
         </h2>
 

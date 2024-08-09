@@ -8,7 +8,6 @@ import { formatDateReverse } from "@/utils/utility";
 import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { InvoiceTableRowTypes } from "@/types/invoice";
-import { useTranslation } from "next-i18next";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { BaseButton } from "../button/base-button";
 import editNoteIcon from "@/assets/svgs/edit_primary.svg";
@@ -21,8 +20,19 @@ const ExistingNotes = ({
   onClose,
   leadDetails,
 }: {
-  handleAddNote: (id: string) => void;
-  onEditNote: (id: string, note: string) => void;
+  handleAddNote: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
+  onEditNote: (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
   onConfrimDeleteNote: (id: string) => void;
   onClose: () => void;
   leadDetails:
@@ -32,7 +42,9 @@ const ExistingNotes = ({
     | InvoiceTableRowTypes;
 }) => {
   const { notes } = useAppSelector((state) => state.note);
-  const { t: translate } = useTranslation();
+  const { refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   return (
     <BaseModal
@@ -47,12 +59,15 @@ const ExistingNotes = ({
           onClick={onClose}
         />
         <div className="flex justify-between items-center mb-[19px] ml-[38px] mr-[56px]">
-          <p className="text-2xl font-medium text-[#000]">
+          <p className="text-2xl font-medium">
             {translate("common.notes_modal.heading")}
           </p>
+
           <div className="flex justify-between items-center gap-[10px]">
             <BaseButton
-              onClick={() => handleAddNote(leadDetails?.id)}
+              onClick={() =>
+                handleAddNote(leadDetails?.id, refID, name, heading)
+              }
               buttonText={translate("common.notes_modal.button")}
               containerClassName="flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover"
               textClassName="text-white font-medium"
@@ -60,25 +75,23 @@ const ExistingNotes = ({
           </div>
         </div>
 
-        <span className="mb-[13px] w-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="651"
-            height="3"
-            viewBox="0 0 651 3"
-            fill="none"
-          >
-            <path
-              opacity="0.1"
-              d="M0.585938 1.06348L650.043 1.06342"
-              stroke="black"
-              strokeWidth="2"
-            />
-          </svg>
-        </span>
+        <div className="border-y border-y-[#000] border-opacity-10 py-[10px] mx-10 mb-[46px]">
+          <div className="flex items-center gap-x-[34px]">
+            <div className="flex items-center gap-x-[14px]">
+              <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+              <span className="text-sm font-medium text-primary">{refID}</span>
+            </div>
+            <div className="flex items-center gap-x-[14px]">
+              <span className="text-sm font-normal text-[#4D4D4D]">
+                {heading}:
+              </span>
+              <span className="text-sm font-medium text-primary">{name}</span>
+            </div>
+          </div>
+        </div>
 
         {notes && notes?.length > 0 ? (
-          <div className="h-[615px] overflow-y-auto overflow-x-hidden">
+          <div className="h-[550px] overflow-y-auto overflow-x-hidden">
             {notes?.map((item, key) => (
               <div
                 className={`mb-[10px] ${
@@ -100,7 +113,15 @@ const ExistingNotes = ({
                       width={20}
                       height={20}
                       className="cursor-pointer"
-                      onClick={() => onEditNote(item?.id, item?.description)}
+                      onClick={() =>
+                        onEditNote(
+                          item?.id,
+                          item?.description,
+                          refID,
+                          name,
+                          heading
+                        )
+                      }
                     />
                     <Image
                       src={deleteIcon}
@@ -130,7 +151,7 @@ const ExistingNotes = ({
           </div>
         ) : (
           <div className="flex justify-center items-center">
-            <NoDataEmptyState />
+            <NoDataEmptyState className="w-fit" containerClassName="py-5" />
           </div>
         )}
       </div>

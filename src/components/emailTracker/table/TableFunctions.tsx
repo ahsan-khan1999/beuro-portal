@@ -13,11 +13,10 @@ const TableFunctions = ({
   handleFilterChange: (value: FilterType) => void;
 }) => {
   const { t: translate } = useTranslation();
-  // function onInputChange(text: string) {}
 
   return (
     <div className="flex lg:flex-row flex-col justify-between lg:items-center mb-4 gap-y-3">
-      <h1 className="text-base lg:text-xl text-[#222B45] ">
+      <h1 className="text-2xl font-medium text-[#222B45]">
         {translate("email_tracker.main_heading")}
       </h1>
 

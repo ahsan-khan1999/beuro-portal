@@ -20,7 +20,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-3 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -141,7 +141,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.input,
               inputType: "tel",
-              className: "!px-4  !border-[#BFBFBF]  focus:!border-primary",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
               register,
@@ -197,7 +197,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",

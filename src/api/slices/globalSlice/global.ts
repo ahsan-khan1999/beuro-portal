@@ -5,7 +5,6 @@ import { GlobalState } from "@/types/global";
 import { getRefreshToken, getToken, logout } from "@/utils/auth.util";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getCookie } from "cookies-next";
 
 const initialState: GlobalState = {
   loading: false,
@@ -14,6 +13,7 @@ const initialState: GlobalState = {
     type: ModalType.NONE,
     data: "",
   },
+  currentLanguage: "de",
 };
 
 // file upload connect with the firebase
@@ -88,7 +88,11 @@ const globalSlice = createSlice({
       state.modal.type = action.payload.type;
       state.modal.data = action.payload.data;
     },
+    updateCurrentLanguage: (state, action) => {
+      state.currentLanguage = action.payload;
+    },
   },
+
   extraReducers: (builder) => {
     builder.addCase(uploadFileToFirebase.pending, (state) => {
       state.loading = true;
@@ -115,4 +119,4 @@ const globalSlice = createSlice({
 });
 
 export default globalSlice.reducer;
-export const { updateModalType } = globalSlice.actions;
+export const { updateModalType, updateCurrentLanguage } = globalSlice.actions;

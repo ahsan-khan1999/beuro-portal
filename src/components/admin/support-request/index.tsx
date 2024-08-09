@@ -6,7 +6,8 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useSupportRequest from "@/hooks/admin/support-request/useSupportRequest";
-import { useEmptyStates } from "@/utils/hooks";
+import { useAdminEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function SupportRequest() {
   const {
@@ -18,13 +19,18 @@ export default function SupportRequest() {
     setFilter,
     handleFilterChange,
     loading,
-    currentPage
-
+    currentPage,
+    handleStatusChange,
+    renderModal,
+    totalCount,
   } = useSupportRequest();
 
-  const CurrentComponent = useEmptyStates(
-    <TableRow currentPageRows={currentPageRows} />,
-    currentPageRows?.length > 0,
+  const CurrentComponent = useAdminEmptyStates(
+    <TableRow
+      currentPageRows={currentPageRows}
+      onStatusChange={handleStatusChange}
+    />,
+    totalCount !== 0,
     loading
   );
 
@@ -35,17 +41,20 @@ export default function SupportRequest() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeading />
-        {CurrentComponent}
-      </TableLayout>
+
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeading />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
         currentPage={currentPage}
-
       />
+      {renderModal()}
     </Layout>
   );
 }

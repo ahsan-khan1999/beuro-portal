@@ -28,7 +28,6 @@ import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
 import { ContentTableRowTypes } from "@/types/content";
-import { formatDateTimeToDate } from "@/utils/utility";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -68,8 +67,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const type = watch("type");
@@ -154,7 +153,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       if (filteredContent)
         setValue("title", filteredContent?.offerContent?.title);
     } else {
-      const filteredLead = lead.find((item) => item.id === leadID);
+      const filteredLead = lead?.find((item) => item.id === leadID);
       if (filteredLead) {
         const content = filteredLead?.requiredService as ContentTableRowTypes;
 
@@ -265,7 +264,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         ...data,
         step: 1,
         offerId: offerDetails?.id === "convert" ? null : offerDetails?.id,
-        stage: ComponentsType.addressAdded,
+        stage: ComponentsType?.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
 
@@ -285,16 +284,16 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
               },
             ])
           );
-          onHandleNext(ComponentsType.addressAdded);
+          onHandleNext(ComponentsType?.addressAdded);
         }
-        onHandleNext(ComponentsType.addressAdded);
+        onHandleNext(ComponentsType?.addressAdded);
       }
     } else {
       const apiData: any = {
         ...data,
         step: 1,
         offerId: null,
-        stage: ComponentsType.addressAdded,
+        stage: ComponentsType?.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
       if (!apiData?.isLeadCreated) delete apiData["leadID"];

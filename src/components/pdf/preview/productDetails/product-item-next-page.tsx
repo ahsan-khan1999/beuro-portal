@@ -3,7 +3,6 @@ import { ProductItem } from "./product-item";
 import { DocumentHeader } from "../document-header";
 import { ProductItemFooter } from "./product-item-footer";
 import { Footer } from "../../footer";
-import { ProductDiscountItem } from "./product--discount-item";
 import { useTranslation } from "next-i18next";
 
 export const ProductItemNewPage = ({

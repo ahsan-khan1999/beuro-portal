@@ -1,4 +1,3 @@
-import { updateModalType } from "@/api/slices/globalSlice/global";
 import { Form } from "@/base-components/form/form";
 import { useAddLeadAdditionalDetails } from "@/hooks/leads/useAddLeadAdditionalDetails";
 import FormCard from "@/layout/customers/FormCard";
@@ -32,7 +31,7 @@ const AddLeadAdditionalDetails = ({
           className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg"
           id="Additional Details"
         >
-          <h2 className="text-[#fff] text-lg font-medium">
+          <h2 className="text-[#fff] text-xl font-medium">
             {translate("leads.additional.heading")}
           </h2>
           <button

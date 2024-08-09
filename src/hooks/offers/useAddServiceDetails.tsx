@@ -5,7 +5,6 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import {
@@ -25,7 +24,10 @@ import { Service } from "@/types/service";
 import { Total } from "@/types/offers";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import { readTaxSettings } from "@/api/slices/settingSlice/settings";
+import {
+  
+  readTaxSettings,
+} from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
 
@@ -33,7 +35,6 @@ let prevDisAmount: number | string = "";
 export const useAddServiceDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void
 ) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const [total, setTotal] = useState<Total>({
     subTotal: 0,
@@ -42,7 +43,7 @@ export const useAddServiceDetails = (
   });
 
   const dispatch = useAppDispatch();
-  const { systemSettings } = useAppSelector((state) => state.settings);
+  const { systemSettings, tax } = useAppSelector((state) => state.settings);
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
@@ -55,7 +56,6 @@ export const useAddServiceDetails = (
     ) || [ServiceType.EXISTING_SERVICE]
   );
 
-  const { tax } = useAppSelector((state) => state.settings);
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
@@ -113,6 +113,7 @@ export const useAddServiceDetails = (
       setValue(`serviceDetail.${index}.count`, 0);
     }
   };
+
   const generateTotalPrice = (index: number) => {
     const data = getValues();
     setTimeout(() => {
@@ -154,7 +155,6 @@ export const useAddServiceDetails = (
       setValue("discountAmount", prevDisAmount);
     }
 
-    // Calculate grand total after applying discount
     const discountedTotal = totalPrices - discount;
 
     let taxAmount = 0;
@@ -191,13 +191,6 @@ export const useAddServiceDetails = (
 
   useMemo(() => {
     if (offerDetails.id) {
-      // setTotal({
-      //   taxAmount: Number(
-      //     (offerDetails?.total - offerDetails?.subTotal).toFixed(2)
-      //   ),
-      //   subTotal: offerDetails?.subTotal,
-      //   grandTotal: offerDetails?.total,
-      // });
       reset({
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [
           {
@@ -220,7 +213,6 @@ export const useAddServiceDetails = (
         taxAmount: offerDetails?.taxAmount || 0,
       });
     }
-    // generateGrandTotal();
   }, [offerDetails.id]);
 
   const {
@@ -235,7 +227,6 @@ export const useAddServiceDetails = (
   useMemo(() => {
     const currentLength = serviceType?.length;
     const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
-
     if (newLength > currentLength) {
       setServiceType([
         ...serviceType,
@@ -246,7 +237,23 @@ export const useAddServiceDetails = (
     } else if (newLength < currentLength) {
       setServiceType(serviceType.slice(0, newLength));
     }
+    generateGrandTotal();
   }, [serviceFields?.length]);
+
+  const handleRemoveService = (index: number) => {
+    remove(index);
+    const data = getValues();
+    reset({
+      ...data,
+    });
+
+    setServiceType((prev) => {
+      var newlist = [...prev];
+      newlist.splice(index, 1);
+
+      return newlist;
+    });
+  };
 
   const onServiceSelectType = (index: number) => {
     setValue(
@@ -278,13 +285,13 @@ export const useAddServiceDetails = (
       offerDetails?.serviceDetail?.serviceDetail[index]?.discount
     );
   };
+
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
     const updatedService = serviceType.map((type, i) =>
       i === index ? newServiceType : type
     );
-    setServiceType(updatedService);
 
-    const fieldNamePrefix = "serviceDetail";
+    setServiceType(updatedService);
     if (
       newServiceType === ServiceType.NEW_SERVICE &&
       offerDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
@@ -338,7 +345,7 @@ export const useAddServiceDetails = (
       offerDetails,
     },
     append,
-    remove,
+    handleRemoveService,
     serviceType,
     handleServiceChange,
     serviceFields,
@@ -371,6 +378,7 @@ export const useAddServiceDetails = (
     serviceFields,
     setValue
   );
+
   const submitFields = AddOfferDetailsServiceSubmitFormField(
     loading,
     handleBack
@@ -384,7 +392,6 @@ export const useAddServiceDetails = (
       id: offerDetails?.id,
       stage: ComponentsType.additionalAdded,
       taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
-
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),
     };

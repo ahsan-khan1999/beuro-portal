@@ -20,7 +20,7 @@ export const ContractAditionalEditDetails = ({
   return (
     <FormCard>
       <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("leads.additional.heading")}
         </h2>
         <button

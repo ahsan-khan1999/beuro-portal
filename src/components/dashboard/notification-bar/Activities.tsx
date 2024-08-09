@@ -23,7 +23,7 @@ const ActivitiesNotificationBar = ({
   const { t: translate } = useTranslation();
   return (
     <div className="bg-white rounded-[20px] h-[397.089px]">
-      <h1 className="pb-3 ml-[40px] pt-5 text-[#18181B] font-medium">
+      <h1 className="pb-3 ml-[40px] pt-5 text-[#18181B] text-base font-semibold">
         {translate("dashboard_detail.activity")}
       </h1>
 
@@ -35,29 +35,31 @@ const ActivitiesNotificationBar = ({
             return (
               <div
                 key={index}
-                className={`mt-3 cursor-pointer hover:bg-primary hover:bg-opacity-10 bg-opacity-10 `}
+                className={`mt-3 hover:bg-primary hover:bg-opacity-10 bg-opacity-10`}
               >
                 <div className="mb-3">
                   <div>
-                    <span className="text-dark text-sm">{item.name}&nbsp;</span>
+                    <span className="text-dark text-sm">
+                      {item?.name}&nbsp;
+                    </span>
                     <span className="text-dark text-sm font-medium">
-                      {item.description}
+                      {item?.description}
                     </span>
                   </div>
                   <div className="flex items-center justify-between mt-[5px]">
-                    <div className="flex items-center ">
+                    <div className="flex items-center">
                       <Image
                         src={timeIcon}
                         alt="Time Icon"
                         className="mr-[10px]"
                       />
-                      <span className="text-[#393939] text-xs ">
-                        {item.time},{item.date}
+                      <span className="text-[#393939] text-xs">
+                        {item?.time},{item?.date}
                       </span>
                     </div>
-                    <div className="lg:flex justify-between items-center hidden ">
+                    <div className="lg:flex justify-between items-center hidden">
                       <span className="mr-3 text-white bg-primary text-xs rounded-[2px] px-1 py-0.5 font-medium">
-                        {item.id1}
+                        {item?.id1}
                       </span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +76,7 @@ const ActivitiesNotificationBar = ({
                         />
                       </svg>
                       <span className="ml-3 text-white text-xs bg-[#45C769] rounded-[2px] px-1 py-0.5 font-medium">
-                        {item.id2}
+                        {item?.id2}
                       </span>
                     </div>
                   </div>
@@ -90,7 +92,10 @@ const ActivitiesNotificationBar = ({
         </div> */}
         </div>
       ) : (
-        <NoDataEmptyState />
+        <NoDataEmptyState
+          className="w-[90%] mx-auto my-3"
+          containerClassName="py-0"
+        />
       )}
     </div>
   );

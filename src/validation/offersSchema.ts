@@ -204,6 +204,78 @@ export const generateAddfferServiceDetailsValidation = (
           [AddServiceOfferDetails.discount]: yup
             .number()
             .notRequired()
+            .typeError(translate("validationMessages.invalid_format")),
+          [AddServiceOfferDetails.totalPrice]: yup
+            .number()
+            .required(translate("validationMessages.required"))
+            .typeError(translate("validationMessages.invalid_format")),
+          [AddServiceOfferDetails.description]: yup.string().notRequired(),
+        })
+        .required(translate("validationMessages.required"))
+    )
+    .min(1)
+    .required(translate("validationMessages.required"));
+  return yup.object().shape({
+    serviceDetail: serviceValidationSchema,
+    [AddServiceOfferDetails.discountDiscription]: yup
+      .string()
+      .when("isDiscount", {
+        is: (isDiscount: boolean) => isDiscount,
+        then: () => yup.string().notRequired(),
+      }),
+    [AddServiceOfferDetails.isDiscount]: yup
+      .boolean()
+      .required(translate("validationMessages.required")),
+    [AddServiceOfferDetails.isTax]: yup
+      .boolean()
+      .required(translate("validationMessages.required")),
+
+    [AddServiceOfferDetails.discountType]: yup.boolean().when("isDiscount", {
+      is: (isDiscount: boolean) => isDiscount,
+      then: () => yup.boolean().notRequired(),
+    }),
+    [AddServiceOfferDetails.discountAmount]: yup.mixed().when("isDiscount", {
+      is: (isDiscount: boolean) => isDiscount,
+      then: () =>
+        yup.mixed().required(translate("validationMessages.required")),
+    }),
+    [AddServiceOfferDetails.taxAmount]: yup.number().notRequired(),
+    [AddServiceOfferDetails.taxType]: yup.boolean().when("isTax", {
+      is: (isTax: boolean) => isTax === true,
+      then: () => yup.boolean().notRequired(),
+    }),
+  });
+};
+
+export const generateCreateInvoiceServiceDetailsValidation = (
+  translate: Function
+) => {
+  const serviceValidationSchema = yup
+    .array()
+    .of(
+      yup
+        .object()
+        .shape({
+          [AddServiceOfferDetails.serviceType]: yup
+            .string()
+            .required(translate("validationMessages.required")),
+          [AddServiceOfferDetails.serviceTitle]: yup
+            .string()
+            .required(translate("validationMessages.required")),
+          [AddServiceOfferDetails.price]: yup
+            .number()
+            .required(translate("validationMessages.required"))
+            .typeError(translate("validationMessages.invalid_format")),
+          [AddServiceOfferDetails.unit]: yup
+            .string()
+            .required(translate("validationMessages.required")),
+          [AddServiceOfferDetails.count]: yup
+            .number()
+            .required(translate("validationMessages.required"))
+            .typeError(translate("validationMessages.invalid_format")),
+          [AddServiceOfferDetails.discount]: yup
+            .number()
+            .notRequired()
             // .lessThan(yup.ref(AddServiceOfferDetails.totalPrice), translate("validationMessages.discountLessThanTotalPrice"))
             .typeError(translate("validationMessages.invalid_format")),
           [AddServiceOfferDetails.totalPrice]: yup

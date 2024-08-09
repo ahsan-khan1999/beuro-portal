@@ -1,39 +1,31 @@
 import EmailCard from "./PdfCard";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 
-const OfferPdf = dynamic(
-  () => import("@/components/reactPdf/offer-pdf-preview"),
-  { ssr: false, loading: () => <LoadingState /> }
-);
-const OfferPdfDownload = dynamic(() => import("./generate-offer-pdf"), {
+const OfferPdf = dynamic(() => import("@/components/reactPdf/pdf-layout"), {
   ssr: false,
 });
 
 import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const OfferPdfPriview = () => {
   const {
     offerData,
     activeButtonId,
-    emailTemplateSettings,
-    templateSettings,
     modal,
     loading,
-    loadingGlobal,
-    pdfFile,
-    setPdfFile,
     handleDonwload,
     handleEmailSend,
     handlePrint,
     handleSendByPost,
     onClose,
     onSuccess,
-    systemSetting,
     offerDetails,
+    isPdfRendering,
+    mergedPdfUrl,
   } = useOfferPdf();
 
   const { t: translate } = useTranslation();
@@ -56,58 +48,37 @@ const OfferPdfPriview = () => {
     ),
   };
 
-  
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
   return (
-    <>
-      {/* {loading ? (
-        <LoadingState />
-      ) : ( */}
-      <div>
-        <EmailCard
-          emailStatus={offerDetails?.emailStatus}
-          offerNo={offerData?.emailHeader?.offerNo}
-          onEmailSend={handleEmailSend}
-          loading={loading}
-          onDownload={handleDonwload}
-          onPrint={handlePrint}
-          handleSendByPost={handleSendByPost}
-          activeButtonId={activeButtonId}
-          offerId={offerData?.id}
-        />
+    <div>
+      <EmailCard
+        emailStatus={offerDetails?.emailStatus}
+        offerNo={offerData?.emailHeader?.offerNo}
+        onEmailSend={handleEmailSend}
+        loading={loading}
+        onDownload={handleDonwload}
+        onPrint={handlePrint}
+        handleSendByPost={handleSendByPost}
+        activeButtonId={activeButtonId}
+        offerId={offerData?.id}
+      />
 
-        {loading ? (
-          <LoadingState />
-        ) : (
-          <div className="mt-5">
-            <OfferPdf
-              data={offerData}
-              emailTemplateSettings={emailTemplateSettings}
-              templateSettings={templateSettings}
-              systemSetting={systemSetting}
-              showContractSign={true}
-              pdfFile={pdfFile}
-              setPdfFile={setPdfFile}
-            />
-            <OfferPdfDownload
-              data={offerData}
-              templateSettings={templateSettings}
-              emailTemplateSettings={emailTemplateSettings}
-              pdfFile={pdfFile}
-              setPdfFile={setPdfFile}
-              systemSetting={systemSetting}
-              showContractSign={true}
-            />
-          </div>
-        )}
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <div className="mt-5">
+          <OfferPdf
+            mergedPdfFileUrl={mergedPdfUrl}
+            isPdfRendering={isPdfRendering}
+          />
+        </div>
+      )}
 
-        {renderModal()}
-      </div>
-      {/* )} */}
-    </>
+      {renderModal()}
+    </div>
   );
 };
 

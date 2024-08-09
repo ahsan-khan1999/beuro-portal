@@ -165,6 +165,10 @@ export const CreateInvoiceFormField: GenerateInvoiceFormField = (
               options: [
                 { value: "Online", label: `${translate("common.online")}` },
                 { value: "Cash", label: `${translate("common.cash")}` },
+                {
+                  value: "Twint",
+                  label: `${translate("payment_method.Twint")}`,
+                },
               ],
               control,
             },

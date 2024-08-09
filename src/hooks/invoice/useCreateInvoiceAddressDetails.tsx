@@ -8,11 +8,13 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddOffAddressDetailsFormField } from "@/components/offers/add/fields/add-address-details-fields";
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useState, useEffect } from "react";
 import { generateCreateInvoiceAddressDetailsValidation } from "@/validation/invoiceSchema";
 import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
+import { CreateInvoiceAddressDetailsFormField } from "@/components/invoice/createInvoice/fields/create-invoice-address-details-fields";
+import { readAddressSettings } from "@/api/slices/settingSlice/settings";
+import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -22,6 +24,8 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
+  const { addressSettings } = useAppSelector((state) => state.settings);
 
   const [addressType, setAddressType] = useState(
     invoiceDetails?.addressID
@@ -48,38 +52,38 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
+    defaultValues: {
+      address: invoiceDetails?.addressID
+        ? invoiceDetails?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Adresse ${++index}`,
+          }))
+        : invoiceDetails?.addressID
+        ? invoiceDetails?.addressID?.address?.map((item, index) => ({
+            ...item,
+            label: item?.label ? item?.label : `Adresse ${++index}`,
+          }))
+        : invoiceDetails?.customerDetail?.address
+        ? [
+            {
+              ...invoiceDetails?.customerDetail?.address,
+              label: `Adresse ${1}`,
+              addressType: "",
+            },
+          ]
+        : addressType?.map((item, index) => ({
+            streetNumber: "",
+            postalCode: "",
+            country: "",
+            description: "",
+            label: `Adresse ${++index}`,
+          })),
+    },
   });
 
   useEffect(() => {
-    if (invoiceDetails.id) {
-      reset({
-        address: invoiceDetails?.addressID
-          ? invoiceDetails?.addressID?.address?.map((item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Adresse ${++index}`,
-            }))
-          : invoiceDetails?.addressID
-          ? invoiceDetails?.addressID?.address?.map((item, index) => ({
-              ...item,
-              label: item?.label ? item?.label : `Address ${++index}`,
-            }))
-          : invoiceDetails?.customerDetail?.address
-          ? [
-              {
-                ...invoiceDetails?.customerDetail?.address,
-                label: `Adresse ${1}`,
-              },
-            ]
-          : addressType?.map((item, index) => ({
-              streetNumber: "",
-              postalCode: "",
-              country: "",
-              description: "",
-              label: `Adresse ${++index}`,
-            })),
-      });
-    }
-  }, [invoiceDetails?.id]);
+    dispatch(readAddressSettings());
+  }, []);
 
   const {
     fields: addressFields,
@@ -96,19 +100,38 @@ export const useCreateInvoiceAddressDetails = (onHandleNext: Function) => {
     setAddressType(address);
   };
 
-  const fields = AddOffAddressDetailsFormField(
+  const handleChangeLabel = (item: string, index: number) => {
+    setValue(`address.${index}.label`, item);
+  };
+
+  const addressFieldsLength = addressFields.length || 1;
+
+  const handleAddNewAddress = () => {
+    append(addressObject);
+
+    setValue(`address.${addressFieldsLength}.addressType`, ``);
+    setValue(
+      `address.${addressFieldsLength}.label`,
+      `Adresse ${addressFieldsLength + 1}`
+    );
+  };
+
+  const fields = CreateInvoiceAddressDetailsFormField(
     register,
     loading,
     control,
     handleBack,
     addressFields?.length === 0 ? addressType?.length : addressFields?.length,
-    append,
+    handleChangeLabel,
+    handleAddNewAddress,
+    // append,
     remove,
     addressFields,
     handleFieldTypeChange,
     addressType,
     setValue,
-    getValues
+    getValues,
+    addressSettings
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

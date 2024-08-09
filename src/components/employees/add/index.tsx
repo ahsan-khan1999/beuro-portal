@@ -46,11 +46,6 @@ const AddEmployeeDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
-  // Function for creating a password
-  const linkSendHandler = () => {
-    dispatch(updateModalType(ModalType.LINK_SEND_TO_EMAIL));
-  };
-
   const createRouteChange = () => {
     router.pathname = "/employees";
     updateQuery(router, router.locale as string);
@@ -71,7 +66,6 @@ const AddEmployeeDetails = () => {
     dispatch(updateModalType(ModalType.PASSWORD_SET));
   };
 
-  // funtion for handling the route
   const routeHandler = () => {
     router.push("/employees/details");
   };
@@ -87,7 +81,6 @@ const AddEmployeeDetails = () => {
       <CreateNewPassword
         onClose={onClose}
         passwordSetSuccessfully={passwordSetSuccessfully}
-        // email={data}
       />
     ),
     [ModalType.PASSWORD_SET]: (
@@ -108,7 +101,7 @@ const AddEmployeeDetails = () => {
   return (
     <>
       <Layout>
-        <h2 className="text-xl text-[#222B45] font-normal mb-5">
+        <h2 className="text-2xl font-medium text-[#222B45] mb-5">
           {translate("employees.add_new_employee")}
         </h2>
         <div className="flex flex-col xl:flex-row gap-4">

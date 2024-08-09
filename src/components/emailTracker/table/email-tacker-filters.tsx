@@ -89,7 +89,7 @@ export default function EmailTrackerFilters({
           handleChange={handleInputChange}
           ref={inputRef}
           value={inputValue}
-          iconDisplay={false}
+          iconDisplay={true}
           onEnterPress={onEnterPress}
         />
         <SelectField

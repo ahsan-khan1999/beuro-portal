@@ -1,9 +1,7 @@
 import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FormDataProps } from "@/types/service";
-import Image from "next/image";
 import React from "react";
-import editInfo from "@/assets/svgs/edit-customer-details.svg";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
@@ -24,7 +22,7 @@ const ServiceForm = ({
       } h-fit`}
     >
       <div className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("services.detail.main_heading")}
         </h2>
         {isUpdate ? (

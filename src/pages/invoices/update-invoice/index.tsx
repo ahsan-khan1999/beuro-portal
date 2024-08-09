@@ -4,11 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import EditInvoiceDetails from "@/components/invoice/edit";
 
 const index = () => {
-  return (
-    <>
-      <EditInvoiceDetails />
-    </>
-  );
+  return <EditInvoiceDetails />;
 };
 
 export default index;

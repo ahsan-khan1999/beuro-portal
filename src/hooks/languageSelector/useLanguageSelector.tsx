@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { FlagType, Language } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { useAppDispatch } from "../useRedux";
+import { updateCurrentLanguage } from "@/api/slices/globalSlice/global";
 
 const FLAG_LIST = [
   {
@@ -24,7 +26,7 @@ export const useLanguageSeleclor = () => {
   const selectedLanguage = FLAG_LIST.find(
     (language) => language.code === i18n.language
   );
-
+  const dispatch = useAppDispatch();
   const handleLanguageChange = async (language: Language) => {
     await i18n.changeLanguage(language.code);
     setIsOpen(false);
@@ -38,6 +40,7 @@ export const useLanguageSeleclor = () => {
     router.push(routeWithQuery, undefined, {
       locale: language?.code,
     });
+    dispatch(updateCurrentLanguage(language?.code));
   };
 
   useEffect(() => {

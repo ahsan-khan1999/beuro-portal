@@ -40,6 +40,7 @@ export enum SalutationValue {
 
 export enum Field {
   input = "input",
+  quantityInput = "quantityInput",
   colorPicker = "colorPicker",
   textArea = "textArea",
   ckEditor = "ckEditor",
@@ -52,6 +53,7 @@ export enum Field {
   phone = "phone",
   date = "date",
   checkbox = "checkbox",
+  customCheckBox = "customCheckBox",
   radio = "radio",
   dragAndDropFileField = "dragAndDropFileField",
   dragAndDropPdfField = "dragAndDropPdfField",
@@ -65,6 +67,9 @@ export enum Field {
   dateRange = "dateRange",
   multiSelect = "multiSelect",
   toggleButton = "toggleButton",
+  agentSelectField = "agentSelectField",
+  timePicker = "timePicker",
+  customFileUpload = "customFileUpload",
 }
 
 export enum CardType {

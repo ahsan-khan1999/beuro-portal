@@ -1,6 +1,5 @@
 import { Form } from "@/base-components/form/form";
 import { useAddServiceDetails } from "@/hooks/offers/useAddServiceDetails";
-import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import { ComponentsType } from "./AddOffersDetailsData";
@@ -32,11 +31,11 @@ const ServiceAddDetails = ({
   };
 
   return (
-    <FormCard>
+    <>
       <div className="flex justify-between items-center bg-[#C50EE0] py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
-          {translate("offers.service_details.main_heading")}
-          {offerDetails?.id && offerDetails?.offerNumber}
+        <h2 className="text-[#fff] text-xl font-medium">
+          {translate("offers.service_details.main_heading")} (
+          {offerDetails?.id && offerDetails?.offerNumber})
         </h2>
         <button
           onClick={handleCancel}
@@ -46,16 +45,14 @@ const ServiceAddDetails = ({
         </button>
       </div>
 
-      <div className="px-6">
-        <Form
-          formFields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          className={`${defaultClassName}`}
-        />
-      </div>
-    </FormCard>
+      <Form
+        formFields={fields}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        errors={errors}
+        className={`${defaultClassName}`}
+      />
+    </>
   );
 };
 

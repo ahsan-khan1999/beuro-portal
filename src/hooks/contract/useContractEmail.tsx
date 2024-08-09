@@ -5,17 +5,14 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
 import { ContractEmailPreviewFormField } from "@/components/contract/fields/contract-email-fields";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   readContent,
   setContentDetails,
 } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import {
-  sendContractEmail,
-  updateContractContent,
-} from "@/api/slices/contract/contractSlice";
+import { sendContractEmail } from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import localStoreUtil from "@/utils/localstore.util";
@@ -31,8 +28,8 @@ export const useContractEmail = (
   const { loading, error, contractDetails } = useAppSelector(
     (state) => state.contract
   );
-  const isMail = router.query?.isMail;
 
+  const isMail = router.query?.isMail;
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [moreEmail, setMoreEmail] = useState({ isCc: false, isBcc: false });
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -60,7 +57,9 @@ export const useContractEmail = (
 
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
+  }, []);
 
+  useEffect(() => {
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
       content: contractDetails?.offerID?.content?.id,
@@ -121,6 +120,7 @@ export const useContractEmail = (
     setMoreEmail,
     setValue
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // const apiData = {
     //   id: contractDetails?.id,
@@ -133,12 +133,27 @@ export const useContractEmail = (
 
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
-      let apiData = { ...data, id: contractDetails?.id, pdf: fileUrl };
+      let apiData = {
+        ...data,
+        id: contractDetails?.id,
+        pdf: fileUrl,
+        attachments: attachements.map((item) => {
+          return `${item.value}`;
+        }),
+        // attachments: attachements.map((item) => {
+        //   const url = item.value;
+        //   const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
+        //   const fileName = url.substring(url.lastIndexOf("/") + 1);
+        //   const newUrl = `${baseUrl}${contractDetails?.offerID?.createdBy?.company?.companyName}-${fileName}`;
 
-      const res = await dispatch(sendContractEmail({ data: apiData }));
-      if (res?.payload) {
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      }
+        //   return newUrl;
+        // }),
+      };
+
+      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      await dispatch(sendContractEmail({ data: apiData }));
+      // if (res?.payload) {
+      // }
     } else {
       const updatedData = {
         ...data,

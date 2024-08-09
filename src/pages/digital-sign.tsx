@@ -1,5 +1,4 @@
-import { Pdf } from "@/components/pdf/pdf";
-import { PdfPreview } from "@/components/pdfPreview/pdf-preview";
+
 import React from "react";
 
 export default function () {

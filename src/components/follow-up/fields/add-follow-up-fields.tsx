@@ -1,4 +1,3 @@
-import { Modals } from "@/enums/follow-up";
 import { Field } from "@/enums/form";
 import { FormField, GenerateFollowUpFormField } from "@/types";
 import { useTranslation } from "next-i18next";
@@ -7,18 +6,18 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
   register,
   loading,
   control,
-  { customer, lead, followUps, onCustomerSelect },
+  { customer, lead, followUps },
   onItemChange
 ) => {
   const { t: translate } = useTranslation();
 
   const formField: FormField[] = [
     {
-      //@ts-expect-error
       field: {
         id: "div-field",
         type: Field.div,
-        className: "grid grid-cols-1 lg:grid-cols-2 gap-x-[41px] gap-y-5",
+        className:
+          "grid grid-cols-1 lg:grid-cols-2 gap-x-[41px] gap-y-5 rounded-t-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -28,7 +27,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               className: "mb-[12px]",
             },
             field: {
-              className: "!py-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!py-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "customer",
               name: "customer",
@@ -61,7 +60,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               inputType: "text",
               id: "title",
               name: "title",
-              placeholder: "Offerten Follow up",
+              // placeholder: "Offerten Follow up",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
               <path d="M18.0446 6.29277C17.6488 5.89667 17.0196 5.87177 16.5941 6.21849C16.5325 6.26863 16.5802 6.22445 15.6433 7.16134L18.0753 9.59332L18.9493 8.7302C19.3719 8.30762 19.3719 7.62005 18.9493 7.19743L18.0446 6.29277Z" fill="#8F8F8F"/>
               <path d="M10.656 12.1944L9.22541 15.2599C9.12906 15.4665 9.17216 15.7112 9.33329 15.8723C9.49441 16.0335 9.73921 16.0765 9.94565 15.9802L13.0112 14.5496C13.1325 14.4929 12.7653 14.8366 17.3039 10.3547L14.8768 7.92749C10.3768 12.4275 10.7137 12.0707 10.656 12.1944Z" fill="#8F8F8F"/>
@@ -126,7 +125,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "px-2 pt-3 pb-5 bg-[#EDF4FF]",
       label: {
         text: `${translate("follow_up.add_follow_up.follow_up_type")}`,
         htmlFor: "type",
@@ -151,7 +150,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
     },
 
     {
-      containerClass: "mt-5",
+      containerClass: "rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("follow_up.add_follow_up.additional_details")}`,
         htmlFor: "additionalDetails",
@@ -163,7 +162,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
         rows: 2,
         id: "additionalDetails",
         name: "additionalDetails",
-        placeholder: "",
+        // placeholder: "",
         register,
       },
     },
@@ -176,7 +175,7 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
         text: `${translate("follow_up.save_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ",
+          "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none",
         loading,
       },
     },

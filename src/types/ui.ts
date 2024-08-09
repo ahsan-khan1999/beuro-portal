@@ -77,6 +77,7 @@ export interface ButtonProps {
   icon?: any;
   iconAlt?: any;
   id: string;
+  IconComponent?: React.FC;
   disabled?: boolean;
 }
 
@@ -246,6 +247,7 @@ export interface IBaseModalProps {
   children: ReactNode;
   onClose: () => void;
   containerClassName?: string;
+  customOpacity?: boolean;
 }
 
 export interface IInfoModalProps extends IBaseModalProps {
@@ -266,6 +268,7 @@ export interface IConfirmationModalProps extends IConfirmationBaseModalProps {
 export interface IBackdropProps {
   children: ReactNode;
   onClose: () => void;
+  customOpacity?: boolean;
 }
 
 export interface OnClick {
@@ -274,6 +277,7 @@ export interface OnClick {
 
 export interface LanguageName {
   name?: string;
+  className?: string;
 }
 
 export interface ToggleButtonProps {
@@ -353,7 +357,8 @@ export interface UsePaginationProps {
   totalItems: number;
   itemsPerPage: number;
   onPageChange: (page: number) => void;
-  currentPage:number
+  currentPage: number;
+  isPageInParam?: boolean;
 }
 
 export interface ChildrenProp {

@@ -4,19 +4,14 @@ import {
   updateProfileStep3,
 } from "@/api/slices/authSlice/auth";
 import {
-  AddressType,
   ApiResponseType,
   CheckProps,
-  DateRangeProps,
-  DivProps,
   Errors,
-  FieldProps,
   FieldType,
   FilterType,
-  FormField,
   User,
 } from "@/types";
-import { Action, AsyncThunkAction } from "@reduxjs/toolkit";
+import { AsyncThunkAction } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
 import { DEFAULT_SERVICE, staticEnums } from "./static";
@@ -25,13 +20,12 @@ import moment from "moment";
 import { CustomerAddress } from "@/types/customer";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { Service } from "@/types/service";
-import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
-import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
 import "moment/locale/de";
 import { TFunction } from "next-i18next";
+
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -42,6 +36,7 @@ export const getNextFormStage = (
   }
   return null;
 };
+
 export const getBackFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -283,6 +278,10 @@ export const conditionHandlerLogin = (
     } else {
       if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
         router.pathname = "/admin/dashboard";
+      } else if (
+        staticEnums["User"]["role"][response?.data?.data?.User?.role] === 3
+      ) {
+        router.pathname = "/agent/dashboard";
       } else {
         router.pathname = "/dashboard";
       }
@@ -402,15 +401,22 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 }
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY hh:mm");
+  return moment(date).format("DD/MM/YYYY HH:mm");
 }
+
 export function formatDateReverse(date: string) {
   if (!date) return;
-  return moment(date).format("HH:MM, DD/MM/YYYY");
+  return moment(date).format("HH:mm, DD/MM/YYYY");
 }
+
 export function formatDateTimeToDate(date: string) {
   if (!date) return null;
   return moment(date).format("DD/MM/YYYY");
+}
+
+export function fieldDateFormat(date: string) {
+  if (!date) return null;
+  return moment(date).format("YYYY-MM-DD");
 }
 
 export function pdfDateFormat(date: string, locale: string) {
@@ -617,8 +623,8 @@ export function getPaymentTypeColor(status: string) {
   else if (
     staticEnums["PaymentType"][status] == staticEnums["PaymentType"]["Online"]
   )
-    return "#FE9244";
-  else return "#FF376F";
+    return "#4A13E7";
+  else return "#FE9244";
 }
 
 export function getOfferStatusColor(status: string) {
@@ -685,8 +691,32 @@ export function getInvoiceEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
   )
-    return "#FF0000";
+    return "#FE9244";
   else return "#FF376F";
+}
+
+export function getFollowUpStatusColor(status: string) {
+  if (
+    staticEnums["FollowUp"]["Status"][status] ==
+    staticEnums["FollowUp"]["Status"]["Pending"]
+  )
+    return "#FE9244";
+  else if (
+    staticEnums["FollowUp"]["Status"][status] ==
+    staticEnums["FollowUp"]["Status"]["Upcoming"]
+  )
+    return "#4A13E7";
+  else if (
+    staticEnums["FollowUp"]["Status"][status] ==
+    staticEnums["FollowUp"]["Status"]["Overdue"]
+  )
+    return "#FF376F";
+  else if (
+    staticEnums["FollowUp"]["Status"][status] ==
+    staticEnums["FollowUp"]["Status"]["Complete"]
+  )
+    return "#45C769";
+  else return "#FE9244";
 }
 
 export function getMailStatusColor(status: string) {

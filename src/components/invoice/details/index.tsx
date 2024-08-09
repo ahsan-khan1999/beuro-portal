@@ -6,6 +6,8 @@ import InvoiceDetailsTable from "./invoice/table";
 import ReceiptDetailsTable from "./receipt/table";
 import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
 import { useEmptyStates } from "@/utils/hooks";
+import { PendingInvoice } from "./PendingInvoice";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const InvoiceDetails = () => {
   const {
@@ -28,6 +30,9 @@ const InvoiceDetails = () => {
     loading,
     systemSettings,
     handleInvoiceUpdate,
+    totalCount,
+    loadingInvoice,
+    loadingReceipt,
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -61,6 +66,17 @@ const InvoiceDetails = () => {
     loading
   );
 
+  const invoiceTotalAmount =
+    invoiceDetails?.total - Number(invoiceDetails?.paidAmount);
+
+  const shouldShowPendingInvoice =
+    activeTab === "invoice"
+      ? ((!loading || !loadingInvoice || !loadingReceipt) &&
+          collectiveInvoice?.length === 0 &&
+          invoiceTotalAmount > 0) ||
+        !collectiveReciept?.map((item) => item.invoiceStatus !== "Paid")
+      : false;
+
   return (
     <>
       <Layout>
@@ -80,13 +96,19 @@ const InvoiceDetails = () => {
           />
         </InvoiceCardLayout>
 
-        <div className="flex mt-[12px] mb-[18px]">
+        <div className="flex my-3">
           <DetailsSwitchBtn
             activeTab={activeTab}
             onComponentChange={setActiveTab}
           />
         </div>
-        {CurrentComponent}
+        {loading || loadingInvoice || loadingReceipt ? (
+          <CustomLoader />
+        ) : shouldShowPendingInvoice ? (
+          <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />
+        ) : (
+          CurrentComponent
+        )}
       </Layout>
       {renderModal()}
     </>

@@ -20,7 +20,7 @@ const DetailsData = ({
   };
 
   return (
-    <div className="flex flex-col-reverse gap-y-3 ">
+    <div className="flex flex-col-reverse gap-y-3">
       {contractDetails?.signedContracts?.map((item) => (
         <div className="flex bg-white justify-between items-center flex-wrap gap-y-2 rounded-md py-5 px-5">
           <div className="text-[#4D4D4D] text-base font-medium">

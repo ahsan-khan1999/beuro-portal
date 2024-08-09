@@ -8,18 +8,24 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import addIcon from "@/assets/svgs/plus_icon.svg";
 import { Button } from "@/base-components/ui/button/button";
-import { staticEnums } from "@/utils/static";
+import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readNoteSettings } from "@/api/slices/settingSlice/settings";
+import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 
 export default function LeadsFilter({
   filter,
   setFilter,
   handleFilterChange,
+  isAgent,
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
+  const { noteSettings } = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -171,6 +177,10 @@ export default function LeadsFilter({
     });
   };
 
+  useEffect(() => {
+    dispatch(readNoteSettings());
+  }, []);
+
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex items-center gap-[14px]">
@@ -193,7 +203,7 @@ export default function LeadsFilter({
           handleChange={handleInputChange}
           ref={inputRef}
           value={inputValue}
-          iconDisplay={false}
+          iconDisplay={true}
           onEnterPress={onEnterPress}
         />
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
@@ -231,71 +241,44 @@ export default function LeadsFilter({
                 dropDownIconClassName=""
                 containerClassName="w-[225px]"
                 labelClassName="w-[225px]"
-                options={[
-                  // {
-                  //   value:
-                  //     "Sending pictures,Viewing date,Approximate Offer open,Will contact us,Individual Note, Not Reached, other",
-                  //   label: `${translate("add_note_dropdown.all_notes")}`,
-                  // },
-                  {
-                    value: "Sending pictures",
-                    label: `${translate("add_note_dropdown.sending_picture")}`,
-                  },
-                  {
-                    value: "Viewing date",
-                    label: `${translate("add_note_dropdown.view_date")}`,
-                  },
-                  {
-                    value: "Approximate Offer open",
-                    label: `${translate(
-                      "add_note_dropdown.approximate_offer_open"
-                    )}`,
-                  },
-                  {
-                    value: "Will contact us",
-                    label: `${translate("add_note_dropdown.contact_us")}`,
-                  },
-                  {
-                    value: "Individual Note",
-                    label: `${translate("add_note_dropdown.individual_note")}`,
-                  },
-                  {
-                    value: "Not Reached",
-                    label: `${translate("add_note_dropdown.note_reached")}`,
-                  },
-                  {
-                    value: "Other",
-                    label: `${translate("add_note_dropdown.other")}`,
-                  },
-                ]}
+                options={
+                  noteSettings
+                    ? noteSettings
+                        .slice()
+                        .reverse()
+                        .map((item) => ({
+                          label: item.notes.noteType,
+                          value: item.notes.noteType,
+                        }))
+                    : []
+                }
                 label={translate("add_note_dropdown.all_notes")}
               />
             </div>
+          </div>
+
+          <div className="flex items-center gap-x-4">
             <LeadsFilters
               filter={filter}
               setFilter={setFilter}
               onFilterChange={handleFilterChange}
             />
+            {!isAgent && (
+              <Button
+                inputType="button"
+                onClick={() => {
+                  dispatch(setLeadDetails(DEFAULT_LEAD));
+                  router.push("/leads/add");
+                }}
+                className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+                icon={addIcon}
+                text={translate("leads.add_button")}
+                id="add"
+                iconAlt="add button"
+              />
+            )}
           </div>
-
-          <Button
-            inputType="button"
-            onClick={() => router.push("/leads/add")}
-            className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
-            icon={addIcon}
-            text={translate("leads.add_button")}
-            id="add"
-            iconAlt="add button"
-          />
         </div>
-
-        {/* <Button
-          id="apply"
-          inputType="button"
-          text="Apply"
-          onClick={() => handleFilterChange()}
-          className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        /> */}
       </div>
     </div>
   );

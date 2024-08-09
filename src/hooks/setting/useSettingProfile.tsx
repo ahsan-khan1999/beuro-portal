@@ -42,6 +42,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
       ...user,
     });
   }, []);
+
   const handleRestore = () => {
     reset({
       ...user,
@@ -51,6 +52,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const handleSuccess = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
@@ -65,6 +67,7 @@ export default function useSettingProfile(handleChangePassword: Function) {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -79,6 +82,8 @@ export default function useSettingProfile(handleChangePassword: Function) {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
+
     const apiData = { ...data, ...data?.company };
     const res = await dispatch(
       updateAccountSettings({ data: apiData, router, setError, translate })

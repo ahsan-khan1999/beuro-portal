@@ -1,20 +1,25 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import { InvoiceTableRowTypes } from "@/types/invoice";
 import { getInvoiceStatusColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { formatDateString } from "@/utils/functions";
+import { useTranslation } from "next-i18next";
 const TableRows = ({
   dataToAdd,
   handleNotes,
 }: {
   dataToAdd: InvoiceTableRowTypes[];
-  handleNotes: (item: string, e?: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refId: string,
+    name: string,
+    heading: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => void;
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
   const handleInvoicePdfPreview = (id?: string) => {
     router.push({
       pathname: "/invoices/pdf-preview",
@@ -29,21 +34,35 @@ const TableRows = ({
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
+        const customerType = item?.customerDetail
+          ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+        const name =
+          customerType === 1
+            ? item?.customerDetail?.companyName
+            : item?.customerDetail?.fullName;
+
+        const heading =
+          customerType === 1
+            ? translate("common.company_name")
+            : translate("common.customer_name");
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
                 key={index}
                 onClick={() => handleInvoicePdfPreview(item?.id)}
-                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(400px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)] border-t border-t-[#E7EAEE]"
+                className={`${
+                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(400px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item.invoiceNumber}</span>
                 <div className="flex items-center gap-x-1">
                   {(item?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item?.customerDetail?.companyName})
+                    <span className="py-4 truncate text-lg font-medium text-primary">
+                      {item?.customerDetail?.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">
@@ -52,7 +71,7 @@ const TableRows = ({
                   )}
                 </div>
                 <span className="py-4 mlg:hidden maxSize:block truncate">
-                  {item?.title}
+                  {item?.content?.contentName}
                 </span>
                 <span className="py-4 mlg:hidden maxSize:block truncate">
                   {formatDateString(item.date[0].startDate)}
@@ -101,10 +120,11 @@ const TableRows = ({
               </div>
             </div>
 
-            {/* <div className="flex"> */}
-            <div className="ml-2 grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
+            <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
               <span
-                onClick={(e) => handleNotes(item?.id, e)}
+                onClick={(e) =>
+                  handleNotes(item?.id, item?.invoiceNumber, name, heading, e)
+                }
                 title={translate("contracts.table_headings.notes")}
                 className="py-3 cursor-pointer flex justify-center items-center"
               >
@@ -179,7 +199,6 @@ const TableRows = ({
                 </div>
               </span>
             </div>
-            {/* </div> */}
           </div>
         );
       })}

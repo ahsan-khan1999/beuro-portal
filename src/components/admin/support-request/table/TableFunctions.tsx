@@ -1,7 +1,7 @@
 import React, { SetStateAction } from "react";
-import CustomerFilter from "./payments-filter";
 import { useTranslation } from "next-i18next";
 import { FilterType } from "@/types";
+import SupportFilter from "./support-filter";
 
 const TableFunctions = ({
   filter,
@@ -18,7 +18,7 @@ const TableFunctions = ({
       <h1 className="text-xl text-[#222B45] mb-2 mr-3">
         {translate("admin.support_requests.heading")}
       </h1>
-      <CustomerFilter
+      <SupportFilter
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}

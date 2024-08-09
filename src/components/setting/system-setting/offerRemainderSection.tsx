@@ -4,7 +4,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { SystemSettingDataProps } from "@/types/settings";
 import { staticEnums } from "@/utils/static";
 import { AnimatePresence, motion } from "framer-motion";
-import { SetStateAction, useEffect, useRef } from "react";
+import { SetStateAction, useRef } from "react";
 import { useTranslation } from "next-i18next";
 
 export const OfferRemainderSection = ({
@@ -16,6 +16,7 @@ export const OfferRemainderSection = ({
 }) => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t: translate } = useTranslation();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -36,13 +37,11 @@ export const OfferRemainderSection = ({
     });
   };
 
-  const { t: translate } = useTranslation();
-
   return (
     <SettingLayout>
       <div className="px-6 py-5 bg-white">
         <div className="rounded-lg px-2 py-3 bg-[#EDF4FF]">
-          <p className="text-[#393939] font-normal text-lg mb-3">
+          <p className="text-[#393939] font-semibold text-base mb-3">
             {translate("setting.offer_remainder")}
           </p>
 

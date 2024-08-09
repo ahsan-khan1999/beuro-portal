@@ -4,8 +4,6 @@ import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
-import Link from "next/link";
-
 const TableRow = ({ currentPageRows }: CustomerTable) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -16,21 +14,25 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
-              <Link
+              <div
                 key={index}
-                href={{
-                  pathname: "/customers/details",
-                  query: { ...router.query, customer: item.id },
+                onClick={() => {
+                  router.push({
+                    pathname: "/customers/details",
+                    query: { ...router.query, customer: item.id },
+                  });
                 }}
-                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md grid items-center gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(80px,_80px),minmax(500px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(200px,_3fr)_minmax(140px,140px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]"
+                className={`pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md grid items-center gap-x-4 xs:w-fit mlg:w-full xs:grid-cols-[minmax(80px,_80px),minmax(500px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(60px,_60px)_minmax(90px,_100%)_minmax(130px,_130px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(80px,_80px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(200px,_3fr)_minmax(140px,140px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE] ${
+                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                }`}
               >
                 <span className="py-4 truncate">{item.refID}</span>
                 <div className="flex items-center gap-x-1">
                   {staticEnums["CustomerType"][
                     item?.customerType as keyof (typeof staticEnums)["CustomerType"]
                   ] === 1 ? (
-                    <span className="py-4 truncate text-sm font-normal text-primary">
-                      ({item.companyName})
+                    <span className="py-4 truncate text-lg font-medium text-primary">
+                      {item.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">{item.fullName}</span>
@@ -48,15 +50,17 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                 <span className="py-4 flex items-center truncate">
                   {translate(`customer_type.${item.customerType}`)}
                 </span>
-              </Link>
+              </div>
             </div>
 
             <div className="grid grid-cols-[minmax(90px,_90px)]">
-              <Link
+              <div
                 key={index}
-                href={{
-                  pathname: "/customers/details",
-                  query: { ...router.query, customer: item.id },
+                onClick={() => {
+                  router.push({
+                    pathname: "/customers/details",
+                    query: { ...router.query, customer: item.id },
+                  });
                 }}
                 className="flex justify-center items-center cursor-pointer"
               >
@@ -79,7 +83,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                     </svg>
                   </div>
                 </div>
-              </Link>
+              </div>
             </div>
           </div>
         );

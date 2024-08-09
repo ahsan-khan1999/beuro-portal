@@ -28,6 +28,8 @@ export const EmailTemplateFormField: GenerateEmailTemplateFormField = (
         className: "!h-[89px] !w-[187px] !rounded-lg border border-[#BFBFBF]",
         name: "logo",
         control,
+        isMailSetting: true,
+        isMailField: true,
       },
     },
 

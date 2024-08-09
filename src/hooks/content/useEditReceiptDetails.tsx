@@ -6,14 +6,15 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EditReceiptContentDetailsFormField } from "@/components/content/edit/fields/edit-receipt-details-fields";
 import { generateEditReceiptContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
 
 export const useEditReceiptDetails = (onClick: Function) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
   );
@@ -22,7 +23,6 @@ export const useEditReceiptDetails = (onClick: Function) => {
       transformAttachments(contentDetails?.receiptContent?.attachments)) ||
       []
   );
-  const dispatch = useAppDispatch();
 
   const handleBack = () => {
     onClick(3, ComponentsType.receiptContent);
@@ -36,11 +36,15 @@ export const useEditReceiptDetails = (onClick: Function) => {
     setError,
     reset,
     trigger,
+    watch,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  useMemo(() => {
+
+  const receiptDescription = watch("receiptContent.description");
+
+  useEffect(() => {
     if (contentDetails.id) {
       reset({
         receiptContent: {
@@ -49,6 +53,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
       });
     }
   }, [contentDetails.id]);
+
   const fields = EditReceiptContentDetailsFormField(
     register,
     loading,
@@ -60,6 +65,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
     setAttachements,
     contentDetails
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
@@ -79,6 +85,7 @@ export const useEditReceiptDetails = (onClick: Function) => {
     );
     if (res?.payload) onClick(3, ComponentsType.receiptContent);
   };
+
   return {
     fields,
     onSubmit,
@@ -87,5 +94,6 @@ export const useEditReceiptDetails = (onClick: Function) => {
     errors,
     error,
     translate,
+    receiptDescription,
   };
 };

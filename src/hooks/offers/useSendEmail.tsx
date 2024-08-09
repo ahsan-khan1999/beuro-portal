@@ -50,7 +50,6 @@ export const useSendEmail = (
   });
 
   useEffect(() => {
-    // dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
     reset({
       email: offerDetails?.leadID?.customerDetail?.email,
       content: offerDetails?.content?.id,
@@ -95,6 +94,7 @@ export const useSendEmail = (
       dispatch(setContentDetails(selectedContent));
     }
   };
+
   const fields = OfferEmailFormField(
     register,
     loading,
@@ -111,6 +111,7 @@ export const useSendEmail = (
     setIsMoreEmail,
     setValue
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // const apiData = {
     //   id: offerDetails?.id,
@@ -123,12 +124,24 @@ export const useSendEmail = (
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
 
-      let apiData = { ...data, id: offerDetails?.id, pdf: fileUrl };
+      let apiData = {
+        ...data,
+        id: offerDetails?.id,
+        pdf: fileUrl,
+        // attachments: attachements.map((item) => {
+        //   const url = item.value;
+        //   const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
+        //   const fileName = url.substring(url.lastIndexOf("/") + 1);
+        //   const newUrl = `${baseUrl}${offerDetails?.createdBy?.company?.companyName}-${fileName}`;
 
-      const res = await dispatch(sendOfferEmail({ data: apiData }));
-      if (res?.payload) {
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      }
+        //   return newUrl;
+        // }),
+      };
+
+      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      await dispatch(sendOfferEmail({ data: apiData }));
+      // if (res?.payload) {
+      // }
     } else {
       const updatedData = {
         ...data,
@@ -136,12 +149,12 @@ export const useSendEmail = (
         attachments: attachements?.map((item) => item.value),
       };
       localStoreUtil.store_data("contractComposeEmail", updatedData);
-
       router.pathname = "/offers/pdf-preview";
       router.query = { ...router.query, offerID: offerDetails?.id };
       updateQuery(router, router.locale as string);
     }
   };
+
   return {
     fields,
     onSubmit,

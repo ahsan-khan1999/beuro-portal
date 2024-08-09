@@ -50,7 +50,7 @@ const Toast: React.FC<ToastProps> = ({ type, message, onClose }) => {
                 {type === "success" && <SuccessIcon />}
                 {type === "info" && <InfoIcon />}
               </span>
-              <p className="text-base font-medium tracking-wider truncate">
+              <p className="text-xs font-normal md:text-base md:font-medium md:tracking-wider truncate">
                 {message}
               </p>
             </div>

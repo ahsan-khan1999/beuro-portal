@@ -12,12 +12,6 @@ import RecordUpdateSuccess from "@/base-components/ui/modals1/RecordUpdateSucces
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { SetStateAction, useEffect, useState } from "react";
 import { EmailTemplate } from "@/types/settings";
-
-const OfferSignedPdf = dynamic(() => import("../offers/signed-pdf"), {
-  ssr: false,
-});
-
-import dynamic from "next/dynamic";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
 import RejectOffer from "@/base-components/ui/modals1/RejectOffer";
@@ -77,7 +71,8 @@ export const SignPdf = <T,>({
   };
 
   const onSuccess = () => {
-    router.push("/thank-you");
+    // router.push("/thank-you");
+    window.location.href = "/thank-you";
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -99,7 +94,7 @@ export const SignPdf = <T,>({
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading={translate("common.modals.offer_created")}
+        modelHeading={translate("common.modals.success_signed_offer")}
         modelSubHeading={translate("common.modals.admin_setting_des")}
         routeHandler={onSuccess}
       />
@@ -180,7 +175,7 @@ export const SignPdf = <T,>({
           contactAddress={pdfData?.contactAddress}
           headerDetails={pdfData?.headerDetails}
           footerDetails={pdfData?.footerDetails}
-          aggrementDetails={pdfData?.aggrementDetails}
+          aggrementDetails={pdfData && pdfData?.aggrementDetails}
           templateSettings={templateSettings}
           totalPages={totalPages}
           currPage={totalPages}

@@ -3,7 +3,6 @@ import { Service } from "@/types/service";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
 import { readService } from "@/api/slices/service/serviceSlice";
-import { useTranslation } from "next-i18next";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
@@ -12,29 +11,9 @@ const useService = () => {
     (state) => state.service
   );
 
-  const [filter, setFilter] = useState<FilterType>({
-    sort: FiltersDefaultValues.None,
-    text: FiltersDefaultValues.None,
-    date: {
-      $gte: FiltersDefaultValues.$gte,
-      $lte: FiltersDefaultValues.$lte,
-    },
-  });
-
-  const handleFilterChange = (query: FilterType) => {
-    setCurrentPage(1);
-  };
-
   const dispatch = useAppDispatch();
   const [currentPageRows, setCurrentPageRows] = useState<Service[]>([]);
-  const { t: translate } = useTranslation();
   const { query } = useRouter();
-
-  const page = query?.page as unknown as number;
-  const [currentPage, setCurrentPage] = useState<number>(page || 1);
-
-  const totalItems = totalCount;
-  const itemsPerPage = 10;
 
   useEffect(() => {
     const parsedPage = parseInt(query.page as string, 10);
@@ -78,7 +57,7 @@ const useService = () => {
           params: {
             filter: queryParams ? updatedFilter : {},
             page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
+            size: 15,
           },
         })
       ).then((response: any) => {
@@ -88,6 +67,25 @@ const useService = () => {
       });
     }
   }, [query]);
+
+  const [filter, setFilter] = useState<FilterType>({
+    sort: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+  });
+
+  const handleFilterChange = (query: FilterType) => {
+    setCurrentPage(1);
+  };
+
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
+
+  const totalItems = totalCount;
+  const itemsPerPage = 15;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -105,6 +103,7 @@ const useService = () => {
     loading,
     isLoading,
     currentPage,
+    totalCount,
   };
 };
 

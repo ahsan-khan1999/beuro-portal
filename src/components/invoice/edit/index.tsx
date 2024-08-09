@@ -1,6 +1,5 @@
 import { Layout } from "@/layout";
 import React from "react";
-import EditOffersDetailsData from "./EditOffersDetailsData";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -9,6 +8,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 import { EditComponentsType } from "@/enums/invoice";
+import EditInvoiceDetailsData from "./EditInvoiceDetailsData";
 
 const EditInvoiceDetails = () => {
   const dispatch = useDispatch();
@@ -62,18 +62,15 @@ const EditInvoiceDetails = () => {
   }
 
   return (
-    <>
-      <Layout>
-        <EditOffersDetailsData
-          shareImgModal={shareImgModal}
-          handleImagesUpload={handleImageUpload}
-          handleImageSlider={handleImageSlider}
-          tab={tab}
-        />
-      </Layout>
-
+    <Layout>
+      <EditInvoiceDetailsData
+        shareImgModal={shareImgModal}
+        handleImagesUpload={handleImageUpload}
+        handleImageSlider={handleImageSlider}
+        tab={tab}
+      />
       {renderModal()}
-    </>
+    </Layout>
   );
 };
 

@@ -2,20 +2,17 @@ import { Form } from "@/base-components/form/form";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import FormCard from "@/layout/customers/FormCard";
-import { useTranslation } from "next-i18next";
 import React from "react";
 
 const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, renderModal } =
+  const { fields, onSubmit, handleSubmit, errors, renderModal, translate } =
     useCustomerDetail({ detail: false, idAddNewCustomer: true });
-
-  const { t: translate } = useTranslation();
 
   return (
     <FormCard>
       <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("customers.details.heading")}
         </h2>
 

@@ -30,6 +30,10 @@ const SERVICE_URLS = {
   readLead: "/lead",
   lead: "/lead/lead-step/",
   updateLead: "/lead/lead-step/",
+  appointment: "/lead/report/report-step/",
+  companyLeadAppointment: "/lead/appointment",
+  appointmentStatus: "/lead/appointment/update-status",
+  readReport: "/lead/report",
   content: "/content",
   contentDetails: "/content/content-step/",
   leadStatus: "/lead/update-lead-status",
@@ -42,6 +46,7 @@ const SERVICE_URLS = {
   company: "/company",
   invoice: "/invoice",
   downloadInvoiceRoute: "/invoice/download-excel",
+  invoiceCalculationRoute: "/invoice/calculations",
   mainInvoice: "/invoice/invoice-step/",
 
   contactSupport: "/contactSupport",
@@ -84,6 +89,8 @@ const SERVICE_URLS = {
   systemSetting: "/setting/system-setting/",
   templates: "/setting/template",
   tax: "/setting/tax",
+  addressSetting: "/setting/address-setting",
+  notesSetting: "/setting/notes-setting",
   followUp: "/setting/follow-up-setting",
   mail: "/mailtracker",
   offerSendEmail: "/offer/send-email/",
@@ -193,7 +200,6 @@ const profileNotification = (data) =>
   });
 
 // new Req method
-
 const readCustomer = (params) =>
   get(
     SERVICE_URLS.customer,
@@ -243,6 +249,65 @@ const createLead = (data) => {
     feature: featureConstants.login,
   });
 };
+
+// company lead appointment create
+const createCompanyAppointment = (params) =>
+  post(SERVICE_URLS.companyLeadAppointment, params, {
+    feature: featureConstants.login,
+  });
+
+const updateAppointment = (data) =>
+  put(SERVICE_URLS.companyLeadAppointment + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const readAppointment = (data) =>
+  get(SERVICE_URLS.companyLeadAppointment + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const readCompanyAppointments = (params) =>
+  get(
+    SERVICE_URLS.companyLeadAppointment,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const readAppointmentDetails = (params) =>
+  get(
+    SERVICE_URLS.companyLeadAppointment,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
+const updateAppointmentStatus = (data) =>
+  put(SERVICE_URLS.appointmentStatus + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const createAppointmentReport = (data) => {
+  // let route = data?.appointmentID
+  //   ? data?.step + "/" + data?.appointmentID
+  //   : data?.step;
+  return post(SERVICE_URLS.appointment + data.step, data, {
+    feature: featureConstants.login,
+  });
+};
+
+const readReportDetail = (params) =>
+  get(
+    SERVICE_URLS.readReport,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
+const updateAppointmentReport = (data) =>
+  put(SERVICE_URLS.appointment + `${data?.step}/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
 
 const updateLead = (data) =>
   put(SERVICE_URLS.updateLead + `${data?.step}/${data?.id}`, data, {
@@ -405,6 +470,14 @@ const downloadInvoice = (params) =>
     { detail: false }
   );
 
+const calculateInvoiceData = (params) =>
+  get(
+    SERVICE_URLS.invoiceCalculationRoute,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
 const readInvoiceDetails = (params) =>
   get(
     SERVICE_URLS.invoice,
@@ -547,6 +620,14 @@ const readFollowUp = (params) =>
     { detail: false }
   );
 
+const readTableFollowUp = (params) =>
+  get(
+    SERVICE_URLS.leadFollowUp,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
 const readFollowUpDetail = (params) =>
   get(
     SERVICE_URLS.leadFollowUp,
@@ -679,6 +760,7 @@ const getTemplateSettings = (params) =>
   );
 const updateTemplateSettings = (params) =>
   put(SERVICE_URLS.templates, params, { feature: featureConstants.login });
+
 const getFollowUpSettings = (params) =>
   get(
     SERVICE_URLS.followUp,
@@ -717,6 +799,49 @@ const readTaxSettings = (params) =>
   );
 const createTaxSettings = (params) =>
   post(SERVICE_URLS.tax, params, { feature: featureConstants.login });
+
+// read addresses
+const getAddressSettings = (params) =>
+  get(
+    SERVICE_URLS.addressSetting,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+// update address
+const updateAddressSettings = (params) =>
+  post(SERVICE_URLS.addressSetting, params, {
+    feature: featureConstants.login,
+  });
+
+// notes setting
+const createNotesSettings = (params) =>
+  post(SERVICE_URLS.notesSetting, params, {
+    feature: featureConstants.login,
+  });
+
+// read notes
+const readNotesSettings = (params) =>
+  get(
+    SERVICE_URLS.notesSetting,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+// update notes
+const updateNotesSettings = (data) =>
+  put(SERVICE_URLS.notesSetting + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+// delete notes
+const deleteNotesSettings = (data) =>
+  del(SERVICE_URLS.notesSetting + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
 const readMailSettings = (params) =>
   get(
     SERVICE_URLS.emailSettings,
@@ -1118,5 +1243,22 @@ const apiServices = {
   readMainQRCode,
   updateContractDetails,
   downloadInvoice,
+  getAddressSettings,
+  updateAddressSettings,
+  createNotesSettings,
+  readNotesSettings,
+  updateNotesSettings,
+  deleteNotesSettings,
+  calculateInvoiceData,
+  readTableFollowUp,
+  createCompanyAppointment,
+  updateAppointment,
+  readCompanyAppointments,
+  readAppointment,
+  readAppointmentDetails,
+  updateAppointmentStatus,
+  createAppointmentReport,
+  updateAppointmentReport,
+  readReportDetail,
 };
 export default apiServices;

@@ -19,7 +19,6 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
-import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
@@ -33,13 +32,90 @@ const useContract = () => {
     totalCount,
     contractDetails,
   } = useAppSelector((state) => state.contract);
+  const { query } = useRouter();
 
-  const { t: translate } = useTranslation();
+  useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const queryStatus = query?.status;
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+    const searchDate = query?.date as string;
+    const searchLeadSource = query?.leadSource;
+    const searchNoteType = query?.noteType as string;
+
+    const queryParams =
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchDate ||
+      searchLeadSource ||
+      searchNoteType;
+
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+        sort?: string;
+        noteType?: string;
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+        leadSource?: string | string[];
+      } = {
+        status: filteredStatus,
+      };
+
+      if (
+        searchQuery ||
+        sortedValue ||
+        searchDate ||
+        searchLeadSource ||
+        searchNoteType
+      ) {
+        updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
+        updatedFilter.date = searchDate && JSON.parse(searchDate);
+        updatedFilter.leadSource = searchLeadSource;
+        updatedFilter.noteType = searchNoteType;
+      }
+
+      setFilter(updatedFilter);
+
+      dispatch(
+        readContract({
+          params: {
+            filter: updatedFilter,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
+            size: 15,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
+      });
+    }
+  }, [query]);
+
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
 
-  const { query } = useRouter();
   const page = query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
@@ -56,7 +132,7 @@ const useContract = () => {
   });
 
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
@@ -69,12 +145,16 @@ const useContract = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
-    if (e) {
-      e.stopPropagation();
-    }
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
 
-    const filteredLead = contract?.filter((item_) => item_.id === item);
+    const filteredLead = contract?.filter((item_) => item_.id === id);
 
     if (filteredLead?.length === 1) {
       dispatch(setContractDetails(filteredLead[0]));
@@ -97,15 +177,35 @@ const useContract = () => {
           });
         }
       });
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+      dispatch(
+        updateModalType({
+          type: ModalType.EXISTING_NOTES,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
     }
   };
 
-  const handleAddNote = (id: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "contract" },
+        data: {
+          id: id,
+          type: "contract",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -117,11 +217,24 @@ const useContract = () => {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "contract", data: note },
+        data: {
+          id: id,
+          type: "contract",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -131,13 +244,16 @@ const useContract = () => {
   };
 
   const handleImageUpload = (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e.stopPropagation();
+    e?.stopPropagation();
     dispatch(setImages([]));
 
-    const filteredLead = contract?.find((item_) => item_.id === item);
+    const filteredLead = contract?.find((item_) => item_.id === id);
     if (filteredLead) {
       dispatch(setContractDetails(filteredLead));
       dispatch(
@@ -158,7 +274,16 @@ const useContract = () => {
           );
         }
       });
-      dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
+      dispatch(
+        updateModalType({
+          type: ModalType.UPLOAD_OFFER_IMAGE,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
     }
   };
 
@@ -202,7 +327,7 @@ const useContract = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -211,7 +336,7 @@ const useContract = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
@@ -225,7 +350,7 @@ const useContract = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),
@@ -301,84 +426,6 @@ const useContract = () => {
     }
   };
 
-  useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
-    let resetPage = null;
-    if (!isNaN(parsedPage)) {
-      setCurrentPage(parsedPage);
-    } else {
-      resetPage = 1;
-      setCurrentPage(1);
-    }
-
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchDate = query?.date as string;
-    const searchLeadSource = query?.leadSource;
-    const searchNoteType = query?.noteType as string;
-
-    const queryParams =
-      queryStatus ||
-      searchQuery ||
-      sortedValue ||
-      searchDate ||
-      searchLeadSource ||
-      searchNoteType;
-
-    if (queryParams !== undefined) {
-      const filteredStatus =
-        query?.status === "None"
-          ? "None"
-          : queryParams
-              .toString()
-              .split(",")
-              .filter((item) => item !== "None");
-
-      let updatedFilter: {
-        status: string | string[];
-        text?: string;
-        sort?: string;
-        noteType?: string;
-        date?: {
-          $gte?: string;
-          $lte?: string;
-        };
-        leadSource?: string | string[];
-      } = {
-        status: filteredStatus,
-      };
-
-      if (
-        searchQuery ||
-        sortedValue ||
-        searchDate ||
-        searchLeadSource ||
-        searchNoteType
-      ) {
-        updatedFilter.text = searchQuery;
-        updatedFilter.sort = sortedValue;
-        updatedFilter.date = searchDate && JSON.parse(searchDate);
-        updatedFilter.leadSource = searchLeadSource;
-        updatedFilter.noteType = searchNoteType;
-      }
-
-      setFilter(updatedFilter);
-
-      dispatch(
-        readContract({
-          params: {
-            filter: updatedFilter,
-            page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
-      });
-    }
-  }, [query]);
-
   return {
     currentPageRows,
     totalItems,
@@ -395,6 +442,7 @@ const useContract = () => {
     handleContractStatusUpdate,
     handlePaymentStatusUpdate,
     currentPage,
+    totalCount,
   };
 };
 

@@ -11,7 +11,7 @@ import {
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { generateCreateInvoiceAdditionalDetailsValidation } from "@/validation/invoiceSchema";
 import { updateMainInvoice } from "@/api/slices/invoice/invoiceSlice";
-import { AddInvoiceAdditionalDetailsFormField } from "@/components/invoice/createInvoice/fields/add-additional-details-fields";
+import { CreateInvoiceAdditionalDetailsFormField } from "@/components/invoice/createInvoice/fields/create-invoice-additional-details-fields";
 
 export const useCreateInvoiceAdditionalDetails = (
   onHandleNext: (currentComponent: ComponentsType) => void,
@@ -23,6 +23,7 @@ export const useCreateInvoiceAdditionalDetails = (
   const { loading, error, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
   const { content, contentDetails } = useAppSelector((state) => state.content);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ export const useCreateInvoiceAdditionalDetails = (
     }
   };
 
-  const fields = AddInvoiceAdditionalDetailsFormField(
+  const fields = CreateInvoiceAdditionalDetailsFormField(
     register,
     loading,
     control,

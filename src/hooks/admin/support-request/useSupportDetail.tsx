@@ -1,35 +1,28 @@
-import { readContactSupportDetail, setSupportReqDetails, updateContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
+import {
+  readContactSupportDetail,
+  setSupportReqDetails,
+  updateContactSupport,
+} from "@/api/slices/contactSupport/contactSupportSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { DropDownItem } from "@/types";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function useSupportDetail() {
   const router = useRouter();
-  const dispatch = useAppDispatch()
-  const { contactSupportDetails, loading } = useAppSelector(state => state.contactSupport)
-  const {
-    modal,
-  } = useAppSelector((state) => state.global);
-  const { t: translate } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { contactSupportDetails, loading } = useAppSelector(
+    (state) => state.contactSupport
+  );
 
-  const items: DropDownItem[] = [
-    {
-      item: { label: "pending", value: "pending" },
-
-    },
-    {
-      item: { label: "resolved", value: "resolved" },
-    },
-
-  ];
   const id = router.query.supportRequest;
+  const { modal } = useAppSelector((state) => state.global);
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (id) {
@@ -45,39 +38,49 @@ export default function useSupportDetail() {
     router.push("/admin/support-request");
   };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
+  const handleDefaultModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
-
     [ModalType.CREATION]: (
       <CreationCreated
         heading={translate("common.are_you_sure_modal.success")}
-        subHeading={translate(
-          "admin.customers_details.card_content.customer_free"
-        )}
+        subHeading={translate("common.modals.update_success")}
         onClose={onClose}
         route={onClose}
       />
     ),
   };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
   const handleStatusUpadte = async (value: string) => {
-    const response = await dispatch(updateContactSupport({ data: { id: contactSupportDetails?.id, status: staticEnums["SupportRequest"][value] }, router, translate }))
-    if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+    const response = await dispatch(
+      updateContactSupport({
+        data: {
+          id: contactSupportDetails?.id,
+          status: staticEnums["SupportRequest"][value],
+        },
+        router,
+        translate,
+      })
+    );
+    if (response?.payload) handleDefaultModal();
+  };
 
-
-  }
   return {
     contactSupportDetails,
-    status: items,
+    // status: items,
     handlePreviousClick,
     handleStatusUpadte,
     renderModal,
-    loading
+    loading,
   };
 }

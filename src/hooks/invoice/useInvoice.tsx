@@ -10,13 +10,13 @@ import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
   downloadInvoiceReports,
+  invoiceCalculation,
   readInvoice,
   sendOfferByPost,
   setInvoiceDetails,
 } from "@/api/slices/invoice/invoiceSlice";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { FiltersDefaultValues } from "@/enums/static";
-import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
@@ -34,14 +34,116 @@ const useInvoice = () => {
     invoiceDetails,
     invoiceSum,
   } = useAppSelector((state) => state.invoice);
-  const { t: translate } = useTranslation();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const parsedPage = parseInt(router.query.page as string, 10);
+    let resetPage = null;
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const queryStatus = router.query?.status;
+    const searchQuery = router.query?.text as string;
+    const sortedValue = router.query?.sort as string;
+    const searchNoteType = router.query?.noteType as string;
+    const searchDate = router.query?.date as string;
+    const searchPayment = router.query?.paymentType;
+
+    const queryParams =
+      queryStatus ||
+      searchQuery ||
+      sortedValue ||
+      searchNoteType ||
+      searchDate ||
+      searchPayment;
+
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        router.query?.status === "None"
+          ? "None"
+          : queryParams
+              .toString()
+              .split(",")
+              .filter((item) => item !== "None");
+
+      let updatedFilter: {
+        status: string | string[];
+        text?: string;
+        sort?: string;
+        noteType?: string;
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+        paymentType?: string | string[];
+      } = {
+        status: filteredStatus,
+      };
+
+      if (
+        searchQuery ||
+        sortedValue ||
+        searchNoteType ||
+        searchDate ||
+        searchPayment
+      ) {
+        updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
+        updatedFilter.noteType = searchNoteType;
+        updatedFilter.date = searchDate && JSON.parse(searchDate);
+        updatedFilter.paymentType = searchPayment;
+      }
+
+      setFilter(updatedFilter);
+
+      dispatch(
+        readInvoice({
+          params: {
+            filter: updatedFilter,
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
+            size: 15,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
+      });
+
+      let calculationFilter: {
+        date?: {
+          $gte?: string;
+          $lte?: string;
+        };
+        paymentType?: string | string[];
+      } = {
+        date: updatedFilter.date,
+        paymentType: updatedFilter.paymentType,
+      };
+
+      if (updatedFilter.date || updatedFilter.paymentType) {
+        calculationFilter.date = updatedFilter.date;
+        calculationFilter.paymentType = updatedFilter.paymentType;
+      }
+
+      dispatch(
+        invoiceCalculation({
+          params: {
+            filter: calculationFilter,
+          },
+        })
+      );
+    }
+  }, [router.query]);
 
   const [currentPageRows, setCurrentPageRows] = useState<
     InvoiceTableRowTypes[]
   >([]);
 
-  const { query } = useRouter();
-  const page = query?.page as unknown as number;
+  const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [filter, setFilter] = useState<FilterType>({
@@ -58,7 +160,7 @@ const useInvoice = () => {
   });
 
   const totalItems = totalCount;
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
 
   const [isSendEmail, setIsSendEmail] = useState(false);
   const dispatch = useDispatch();
@@ -77,11 +179,16 @@ const useInvoice = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
-    if (e) {
-      e.stopPropagation();
-    }
-    const filteredLead = invoice?.filter((item_) => item_.id === item);
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+
+    const filteredLead = invoice?.filter((item_) => item_.id === id);
 
     if (filteredLead?.length === 1) {
       dispatch(setInvoiceDetails(filteredLead[0]));
@@ -104,15 +211,35 @@ const useInvoice = () => {
           });
         }
       });
-      dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+      dispatch(
+        updateModalType({
+          type: ModalType.EXISTING_NOTES,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
     }
   };
 
-  const handleAddNote = (id: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "invoice" },
+        data: {
+          id: id,
+          type: "invoice",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -124,11 +251,24 @@ const useInvoice = () => {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "invoice", data: note },
+        data: {
+          id: id,
+          type: "invoice",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -172,7 +312,7 @@ const useInvoice = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
+        subHeading={translate("common.modals.update_success")}
         route={onClose}
       />
     ),
@@ -181,7 +321,7 @@ const useInvoice = () => {
       <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
     [ModalType.ADD_NOTE]: (
@@ -190,7 +330,7 @@ const useInvoice = () => {
         handleNotes={handleNotes}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
   };
@@ -229,83 +369,18 @@ const useInvoice = () => {
     }
   };
 
-  useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
-    let resetPage = null;
-    if (!isNaN(parsedPage)) {
-      setCurrentPage(parsedPage);
-    } else {
-      resetPage = 1;
-      setCurrentPage(1);
-    }
-
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchNoteType = query?.noteType as string;
-    const searchDate = query?.date as string;
-    const searchPayment = query?.paymentType;
-
-    const queryParams =
-      queryStatus ||
-      searchQuery ||
-      sortedValue ||
-      searchNoteType ||
-      searchDate ||
-      searchPayment;
-
-    if (queryParams !== undefined) {
-      const filteredStatus =
-        query?.status === "None"
-          ? "None"
-          : queryParams
-              .toString()
-              .split(",")
-              .filter((item) => item !== "None");
-
-      let updatedFilter: {
-        status: string | string[];
-        text?: string;
-        sort?: string;
-        noteType?: string;
-        date?: {
-          $gte?: string;
-          $lte?: string;
-        };
-        paymentType?: string | string[];
-      } = {
-        status: filteredStatus,
-      };
-
-      if (
-        searchQuery ||
-        sortedValue ||
-        searchNoteType ||
-        searchDate ||
-        searchPayment
-      ) {
-        updatedFilter.text = searchQuery;
-        updatedFilter.sort = sortedValue;
-        updatedFilter.noteType = searchNoteType;
-        updatedFilter.date = searchDate && JSON.parse(searchDate);
-        updatedFilter.paymentType = searchPayment;
-      }
-
-      setFilter(updatedFilter);
-
-      dispatch(
-        readInvoice({
-          params: {
-            filter: updatedFilter,
-            page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 10,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) setCurrentPageRows(response?.payload?.Invoice);
-      });
-    }
-  }, [query]);
+  // const handleCalculateInvoice = async () => {
+  //   const response = await dispatch(
+  //     invoiceCalculation({
+  //       params: {
+  //         filter: { status: filter["status"] },
+  //       },
+  //     })
+  //   );
+  //   if (response.payload) {
+  //     downloadFile(response.payload?.excelFile);
+  //   }
+  // };
 
   return {
     currentPageRows,
@@ -327,6 +402,8 @@ const useInvoice = () => {
     invoiceSum,
     translate,
     handleDownloadInvoiceReport,
+    totalCount,
+    router,
   };
 };
 

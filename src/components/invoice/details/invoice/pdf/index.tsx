@@ -2,7 +2,6 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { InvoiceEmailHeader } from "./invoice-email-header";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import { useInvoicePdf } from "@/hooks/invoice/useInvoicePdf";
 import dynamic from "next/dynamic";
 
@@ -13,7 +12,11 @@ import dynamic from "next/dynamic";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
-  { ssr: false, loading: () => <LoadingState /> }
+  {
+    ssr: false,
+
+    // loading: () => <CustomLoader />
+  }
 );
 
 // const PdfDownload = dynamic(
@@ -47,7 +50,7 @@ const DetailsPdfPriview = () => {
     onClose,
     onSuccess,
     collectiveInvoiceDetails,
-    systemSetting
+    systemSetting,
   } = useInvoicePdf();
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -75,31 +78,27 @@ const DetailsPdfPriview = () => {
   };
   return (
     <>
-      {loading  ? (
-        <LoadingState />
-      ) : (
-        <>
-          <InvoiceEmailHeader
-            {...invoiceData?.emailHeader}
-            contractStatus={collectiveInvoiceDetails?.emailStatus}
-            contentName={invoiceData?.emailHeader.contentName}
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onDownload={handleDonwload}
-            onPrint={handlePrint}
-            onSendViaPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-            title={translate("invoice.invoice_details")}
-          />
+      <InvoiceEmailHeader
+        {...invoiceData?.emailHeader}
+        contractStatus={collectiveInvoiceDetails?.emailStatus}
+        contentName={
+          invoiceData?.emailHeader && invoiceData?.emailHeader.contentName
+        }
+        onEmailSend={handleEmailSend}
+        loading={loading}
+        onDownload={handleDonwload}
+        onPrint={handlePrint}
+        onSendViaPost={handleSendByPost}
+        activeButtonId={activeButtonId}
+        title={translate("invoice.invoice_details")}
+      />
 
-          <InvoicePdfPreview
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          />
+      <InvoicePdfPreview
+        mergedPdfFileUrl={mergedPdfUrl}
+        isPdfRendering={isPdfRendering}
+      />
 
-          {renderModal()}
-        </>
-      )}
+      {renderModal()}
     </>
   );
 };

@@ -7,7 +7,6 @@ import {
 } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
-import { useTransition } from "react";
 
 export const generateLoginFormField: GenerateRegistrationFormField = (
   register,
@@ -469,7 +468,6 @@ export const detailBankFormField: GenerateCompanyProfileFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      //@ts-expect-error
       field: {
         type: Field.div,
         id: "div-field",

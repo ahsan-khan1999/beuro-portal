@@ -26,7 +26,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   };
 
   return (
-    <FormCard>
+    <FormCard containerClassName="pb-[100px]">
       <div
         className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.offer")}
@@ -55,7 +55,7 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
               />
             </svg>
           </span>
-          <p className="font-medium text-2xl text-white">
+          <p className="text-xl font-medium text-white">
             {translate("offers.offer_details.heading")}{" "}
             {offerDetails?.id && offerDetails?.offerNumber}
           </p>

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { EditInvoiceContentDetailsFormField } from "@/components/content/edit/fields/edit-invoice-details-fields";
 import { generateEditInvoiceContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/details/ContentDetailsData";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
@@ -24,6 +24,7 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
       transformAttachments(contentDetails?.invoiceContent?.attachments)) ||
       []
   );
+
   const handleBack = () => {
     onClick(2, ComponentsType.invoiceContent);
   };
@@ -36,11 +37,15 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     setError,
     reset,
     trigger,
+    watch,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  useMemo(() => {
+
+  const invoiceDescription = watch("invoiceContent.description");
+
+  useEffect(() => {
     if (contentDetails.id) {
       reset({
         invoiceContent: {
@@ -49,6 +54,7 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
       });
     }
   }, [contentDetails.id]);
+
   const fields = EditInvoiceContentDetailsFormField(
     register,
     loading,
@@ -60,6 +66,7 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     setAttachements,
     contentDetails
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
@@ -79,6 +86,7 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     );
     if (res?.payload) onClick(2, ComponentsType.invoiceContent);
   };
+
   return {
     fields,
     onSubmit,
@@ -87,5 +95,6 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     errors,
     error,
     translate,
+    invoiceDescription,
   };
 };

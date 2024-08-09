@@ -17,7 +17,7 @@ const AdditionalDetails = ({
       id={translate("contracts.tabs_headings.additional_details")}
     >
       <div className="flex items-center justify-between bg-[#45C769] py-5 px-6 rounded-t-lg">
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("contracts.additional_details.heading")}
         </h2>
 

@@ -2,9 +2,11 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Employee } from "@/types/employee";
 import moment from "moment";
+import { useTranslation } from "next-i18next";
 
 const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <div>
@@ -20,7 +22,9 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
                     query: { ...router.query, employee: item.id },
                   })
                 }
-                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_250px)_minmax(250px,_100%)_minmax(160px,_160px)_minmax(150px,_150px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(50px,_50px),minmax(100px,_3fr)_minmax(90px,_4fr)] xlg:grid-cols-[minmax(60px,_60px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(60px,_60px),minmax(140px,_4fr)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(120px,_120px)] xMaxSize:grid-cols-[minmax(60px,_60px),minmax(150px,_4fr)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(130px,_130px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]"
+                className={`${
+                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(250px,_250px)_minmax(250px,_100%)_minmax(160px,_160px)_minmax(150px,_150px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(50px,_50px),minmax(100px,_3fr)_minmax(90px,_4fr)] xlg:grid-cols-[minmax(60px,_60px),minmax(250px,_250px)_minmax(100px,_100%)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(60px,_60px),minmax(140px,_4fr)_minmax(100px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(120px,_120px)] xMaxSize:grid-cols-[minmax(60px,_60px),minmax(150px,_4fr)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(130px,_130px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item?.employeeID}</span>
                 <span className="py-4 truncate">{item.fullName}</span>
@@ -31,13 +35,12 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
                 <span className="py-4 truncate mlg:hidden maxSize:block">
                   {item.designation}
                 </span>
-                <span className="py-4 flex items-center mlg:hidden xlg:flex">
+                <span className="py-4 mlg:hidden xlg:flex">
                   {moment(item?.creationDate).format("DD/MM/YYYY")}
                 </span>
               </div>
             </div>
 
-            {/* <div className="flex"> */}
             <div className="grid grid-cols-[minmax(90px,_90px)]">
               <span className="flex justify-center items-center cursor-pointer">
                 <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
@@ -68,7 +71,6 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
               </span>
             </div>
           </div>
-          // </div>
         );
       })}
     </div>

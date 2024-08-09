@@ -22,11 +22,13 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import { AppointmentsIcon } from "@/assets/svgs/components/sideBar/Appointments";
 
 export const svgs = {
   Dashboard: <DashboardIcon />,
   Customers: <CustomersIcon />,
   Leads: <LeadsIcon />,
+  Appointments: <AppointmentsIcon />,
   Offers: <OffersIcon />,
   Contracts: <ContractsIcon />,
   Invoices: <InvoicesIcon />,
@@ -108,7 +110,7 @@ const SideBar = () => {
     <div className="fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll">
       <div className={`pt-6 px-4 pb-8 flex flex-col `}>
         <div className="space-y-3">
-          {sideBar.map((item, index) => {
+          {sideBar.map((item) => {
             return (
               item.role.includes(userRole) && (
                 <React.Fragment key={item?.pathname}>
@@ -134,7 +136,7 @@ const SideBar = () => {
                         {item.icon && svgs[item.icon]}
                       </span>
                       <span
-                        className={`font-medium tracking-[0.5px] text-[#4B4B4B] ${
+                        className={`text-base font-semibold tracking-[0.5px] text-[#4B4B4B] ${
                           selected.parent.title === item.title && "text-white"
                         }`}
                       >
@@ -209,7 +211,7 @@ const SideBar = () => {
                                       : {},
                                   }}
                                   onClick={() => filterHandler(it.query)}
-                                  className={`text-[#4B4B4B] hover:bg-[#E9E1FF] rounded-lg font-medium tracking-[0.5px] px-3 py-2 w-full text-start block ${
+                                  className={`text-sm text-[#4B4B4B] hover:bg-[#E9E1FF] rounded-lg font-medium tracking-[0.5px] px-3 py-2 w-full text-start block ${
                                     router.query.status === it.query
                                       ? "bg-primary hover:bg-primary text-white"
                                       : ""

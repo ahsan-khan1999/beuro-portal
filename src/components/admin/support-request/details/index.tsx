@@ -1,15 +1,15 @@
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
-import DetailsData from "../DetailsData";
-import SupportDetailsData from "./support-request-data";
 import useSupportDetail from "@/hooks/admin/support-request/useSupportDetail";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
+import { SupportDetailsData } from "./support-request-data";
+import { DetailsData } from "../DetailsData";
 
 const SupportRequestDetails = () => {
   const {
     contactSupportDetails,
-    status,
+    // status,
     handlePreviousClick,
     handleStatusUpadte,
     renderModal,
@@ -21,14 +21,14 @@ const SupportRequestDetails = () => {
       <DetailsCard>
         <DetailsData
           supportDetail={contactSupportDetails}
-          status={status}
+          // status={status}
           handlePreviousClick={handlePreviousClick}
           handleStatusUpadte={handleStatusUpadte}
         />
       </DetailsCard>
-      <div className="mt-8">
+      <div className="mt-5">
         {loading ? (
-          <LoadingState />
+          <CustomPuffLoader />
         ) : (
           <SupportDetailsData supportDetail={contactSupportDetails} />
         )}

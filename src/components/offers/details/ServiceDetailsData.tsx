@@ -93,7 +93,7 @@ const ServiceDetailsData = ({
         className="flex justify-between bg-[#C50EE0] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.service")}
       >
-        <h2 className="text-[#fff] text-lg font-medium">
+        <h2 className="text-[#fff] text-xl font-medium">
           {translate("offers.service_details.main_heading")}
         </h2>
         <button
@@ -112,32 +112,32 @@ const ServiceDetailsData = ({
       <div className="py-3 px-6">
         <div className="rounded-lg px-2 pt-3 bg-[#EDF4FF]">
           <TableLayout>
-            <div className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(100px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] pb-5">
-              <span className="text-[14px] font-medium text-[#8F8F8F]">
+            <div className="grid xs:grid-cols-[minmax(300px,_100%)_minmax(400px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_3fr)_minmax(110px,_4fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] xlg:grid-cols-[minmax(120px,_3fr)_minmax(130px,_4fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_3fr)_minmax(120px,_4fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] pb-5">
+              <span className="text-sm font-medium text-[#8F8F8F] mr-2">
                 {translate("offers.service_details.detail_headings.title")}
               </span>
-              <span className="text-[14px] font-medium text-[#8F8F8F] mx-2">
+              <span className="text-sm font-medium text-[#8F8F8F]">
                 {translate(
                   "offers.service_details.detail_headings.description"
                 )}
               </span>
 
-              <span>
+              <span className="text-sm font-medium">
                 {translate("offers.service_details.detail_headings.count")}
               </span>
-              <span>
+              <span className="text-sm font-medium">
                 {translate("offers.service_details.detail_headings.unit")}
               </span>
-              <span>
+              <span className="text-sm font-medium">
                 {translate("offers.service_details.detail_headings.price")}(
                 {currency})
               </span>
 
-              <span>
+              <span className="text-sm font-medium">
                 {translate("offers.service_details.detail_headings.discount")}
               </span>
 
-              <span>
+              <span className="text-sm font-medium">
                 {translate(
                   "offers.service_details.detail_headings.total_price"
                 )}
@@ -146,32 +146,32 @@ const ServiceDetailsData = ({
 
             {offerDetails?.serviceDetail?.serviceDetail.map((item, index) => (
               <div
-                className="grid xs:grid-cols-[minmax(160px,_160px)_minmax(200px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_150px)_minmax(120px,_100%)_minmax(100px,_100px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] text-[14px] font-medium text-[#4B4B4B] border-t border-t-[#000] border-opacity-10 py-5"
+                className="grid xs:grid-cols-[minmax(300px,_100%)_minmax(400px,_100%)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(150px,_3fr)_minmax(110px,_4fr)_minmax(80px,_80px)_minmax(90px,_90px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] xlg:grid-cols-[minmax(120px,_3fr)_minmax(130px,_4fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(150px,_3fr)_minmax(120px,_4fr)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)] text-sm font-medium text-[#4B4B4B] border-t border-t-[#000] border-opacity-10 py-5"
                 key={index}
               >
-                <span className="text-base font-medium text-[#4B4B4B]">
+                <span className="text-sm font-medium text-[#4B4B4B] break-all mr-5">
                   {item?.serviceTitle}
                 </span>
-                <span className="text-base font-medium text-[#4B4B4B] break-all mx-2">
+                <span className="text-sm font-medium text-[#4B4B4B] break-all mr-5">
                   {item?.description}
                 </span>
 
-                <span className="text-base font-medium text-[#4B4B4B]">
+                <span className="text-sm font-medium text-[#4B4B4B]">
                   {item?.count}
                 </span>
 
-                <span className="text-base font-medium text-[#4B4B4B]">
+                <span className="text-sm font-medium text-[#4B4B4B]">
                   {item?.unit}
                 </span>
 
-                <span className="text-base font-medium text-[#4B4B4B]">
+                <span className="text-sm font-medium text-[#4B4B4B]">
                   {item?.price}
                 </span>
 
-                <span className="text-base font-medium text-[#4B4B4B]">
+                <span className="text-sm font-medium text-[#4B4B4B]">
                   {item?.discount}
                 </span>
-                <span className="text-base font-medium text-[#4B4B4B]">
+                <span className="text-sm font-medium text-[#4B4B4B]">
                   {item?.totalPrice.toFixed(2)}
                 </span>
               </div>
@@ -181,7 +181,7 @@ const ServiceDetailsData = ({
               <div className="mt-5 border float-right border-[#EBEBEB] rounded-lg w-fit p-5 bg-white">
                 <div className="grid grid-cols-3 border-b border-b-[#000] border-opacity-10 pb-3">
                   <div className="flex flex-col gap-2 border-r-[2px] border-r-[#EBEBEB]">
-                    <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    <span className="text-[#4D4D4D] text-sm font-normal">
                       {translate(
                         "offers.service_details.detail_headings.sub_total"
                       )}
@@ -191,7 +191,7 @@ const ServiceDetailsData = ({
                     </span>
                   </div>
                   <div className="flex flex-col gap-2 ml-5 pr-5 border-r-[2px] border-r-[#EBEBEB]">
-                    <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    <span className="text-[#4D4D4D] text-sm font-normal">
                       {translate("offers.service_details.detail_headings.tax")}
                     </span>
                     <span className="text-[#4B4B4B] text-base font-medium">
@@ -204,7 +204,7 @@ const ServiceDetailsData = ({
                     </span>
                   </div>
                   <div className="flex flex-col gap-2 ml-5">
-                    <span className="text-[#4D4D4D] text-[14px] font-normal">
+                    <span className="text-[#4D4D4D] text-sm font-normal">
                       {translate(
                         "offers.service_details.detail_headings.discount"
                       )}

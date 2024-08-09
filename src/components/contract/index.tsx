@@ -25,17 +25,19 @@ export default function Contract() {
     handleContractStatusUpdate,
     handlePaymentStatusUpdate,
     currentPage,
+    totalCount,
   } = useContract();
 
   const CurrentComponent = useEmptyStates(
     <TableRows
       dataToAdd={currentPageRows}
       handleImageUpload={handleImageUpload}
-      openModal={handleNotes}
+      handleNotes={handleNotes}
       handlePaymentStatusUpdate={handlePaymentStatusUpdate}
       handleContractStatusUpdate={handleContractStatusUpdate}
     />,
-    currentPageRows.length > 0,
+    // currentPageRows.length > 0,
+    totalCount !== 0,
     isLoading
   );
 

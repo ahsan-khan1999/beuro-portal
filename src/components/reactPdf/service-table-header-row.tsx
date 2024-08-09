@@ -4,7 +4,7 @@ import { StyleSheet } from "@react-pdf/renderer";
 const styles = StyleSheet.create({
   headerContainer: {
     width: 555,
-    backgroundColor: "#40506A",
+    // backgroundColor: bgColor ? bgColor : "#40506A",
     paddingVertical: 8,
     borderRadius: 4,
     marginBottom: 12,
@@ -23,13 +23,15 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontStyle: "medium",
     width: 135,
+    marginRight: 20,
   },
   headerDescription: {
     color: "white",
     fontSize: 8,
     fontWeight: 500,
     fontStyle: "medium",
-    width: 180,
+    width: 170,
+    marginRight: 20,
   },
   priceHeader: {
     flexDirection: "row",
@@ -46,22 +48,75 @@ const styles = StyleSheet.create({
 
 export const ServiceTableHederRow = ({
   isDiscount,
+  language,
+  bgColor,
 }: {
   isDiscount?: boolean;
+  language?: string;
+  bgColor?: string;
 }) => {
+  const langContent = {
+    en: {
+      service: "Service / Product",
+      description: "Description",
+      count: "Count",
+      unit: "Unit",
+      price: "Price",
+      discount: "Discount",
+      total: "Total",
+    },
+    de: {
+      service: "Dienstleistung / Produkt",
+      description: "Beschreibung",
+      count: "Anzahl",
+      unit: "Einheit",
+      price: "Preis",
+      discount: "Rabatt",
+      total: "Gesamt",
+    },
+  };
+
   return (
-    <View style={styles.headerContainer}>
+    <View
+      style={{
+        ...styles.headerContainer,
+        backgroundColor: bgColor || "#404F6A",
+      }}
+    >
       <View style={styles.headerRow}>
-        <Text style={styles.headerTitle}>{"Dienstleistung / Produkt"}</Text>
-        <Text style={styles.headerDescription}>{"Beschreibung"}</Text>
+        <Text style={styles.headerTitle}>
+          {langContent[language as keyof typeof langContent]?.service ||
+            "Dienstleistung / Produkt"}
+        </Text>
+        <Text style={styles.headerDescription}>
+          {langContent[language as keyof typeof langContent]?.description ||
+            "Beschreibung"}
+        </Text>
 
         <View style={styles.priceHeader}>
-          <Text style={styles.headerText}>{"Anzahl"}</Text>
-          <Text style={styles.headerText}>{"Einheit"}</Text>
-          <Text style={styles.headerText}>{"Preis"}</Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.count ||
+              "Anzahl"}
+          </Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.unit ||
+              "Einheit"}
+          </Text>
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.price ||
+              "Preis"}
+          </Text>
 
-          {isDiscount && <Text style={styles.headerText}>{"Rabatt"}</Text>}
-          <Text style={styles.headerText}>{"Gesamt"}</Text>
+          {isDiscount && (
+            <Text style={styles.headerText}>
+              {langContent[language as keyof typeof langContent]?.discount ||
+                "discount"}
+            </Text>
+          )}
+          <Text style={styles.headerText}>
+            {langContent[language as keyof typeof langContent]?.total ||
+              "Gesamt"}
+          </Text>
         </View>
       </View>
     </View>

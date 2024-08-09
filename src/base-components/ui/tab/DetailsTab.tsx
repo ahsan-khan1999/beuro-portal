@@ -9,25 +9,33 @@ const DetailsTab = ({
   icon,
   selectedTab,
   onScroll,
+  onItemSelected,
 }: leadsTabsSectionTypes) => {
   const handleClickScroll = (name: string) => {
-    onScroll && onScroll(selectedTab);
+    // onScroll && onScroll(selectedTab);
+    onItemSelected && onItemSelected(name);
     setTabType(selectedTab);
   };
+
+  // const scrollHandler2 = () => {
+  //   const element = document.getElementById(name);
+  //   if (!element) return;
+
+  //   const { top } = element.getBoundingClientRect();
+  //   window.scrollTo({ behavior: "smooth", top: window.scrollY + top });
+  //   setTabType(selectedTab);
+  // };
 
   return (
     <button
       onClick={() => handleClickScroll(name)}
-      className={`h-fit whitespace-nowrap rounded-lg py-[10px] border px-4 text-lg font-medium flex items-center bg-white ${
+      className={`h-fit whitespace-nowrap rounded-lg py-[10px] border px-[14px] text-base font-normal flex items-center bg-white w-[247px]  ${
         isSelected
-          ? "border-[#4A13E7] text-primary"
-          : "border-[#EBEBEB] text-EBEBEB"
+          ? "border-primary text-primary"
+          : "border-[#EBEBEB] text-[#1E1E1E]"
       }`}
     >
-      <span
-        className="mr-[10px]"
-        dangerouslySetInnerHTML={{ __html: icon }}
-      ></span>
+      <span className="mr-[10px]" dangerouslySetInnerHTML={{ __html: icon }} />
       {name}
     </button>
   );

@@ -16,13 +16,7 @@ import {
   readSystemSettings,
 } from "@/api/slices/settingSlice/settings";
 import { ModalType } from "@/enums/ui";
-import {
-  AcknowledgementSlipProps,
-  InvoiceEmailHeaderProps,
-  PayableToProps,
-  PdfProps,
-  TemplateType,
-} from "@/types";
+import { InvoiceEmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import localStoreUtil from "@/utils/localstore.util";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -32,48 +26,18 @@ import { PdfSubInvoiceTypes } from "@/types/invoice";
 import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 import { staticEnums } from "@/utils/static";
 
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
 let invoiceInfoObj = {
   subject: "",
   description: "",
 };
+
 export const useReceiptPdf = () => {
   const [receiptData, setReceiptData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>();
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
 
@@ -83,18 +47,17 @@ export const useReceiptPdf = () => {
 
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
-  // const [pdfFile, setPdfFile] = useState(null);
-  // const [qrCodeUrl, setQrCodeUrl] = useState("");
-
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
 
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
+
   const { loading, collectiveInvoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -205,11 +168,12 @@ export const useReceiptPdf = () => {
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "receipt",
-              isReverseLogo: template.payload.Template?.order,
+              isReverseLogo: template?.payload?.Template?.order,
+              companyName: invoiceDetails?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {
-                name: invoiceDetails?.invoiceID?.customerDetail.fullName,
+                name: invoiceDetails?.invoiceID?.customerDetail?.fullName,
                 companyName:
                   invoiceDetails?.invoiceID?.customerDetail?.companyName,
                 city: invoiceDetails?.invoiceID?.customerDetail?.address
@@ -245,16 +209,17 @@ export const useReceiptPdf = () => {
               tax: invoiceDetails?.invoiceID?.taxAmount?.toString(),
               discount: invoiceDetails?.invoiceID?.discountAmount?.toString(),
               discountType: invoiceDetails?.invoiceID?.discountType,
-              discountPercentage: discountPercentage.toString(),
-              updatedDiscountAmount: updatedTotalDiscount.toString(),
+              discountPercentage: discountPercentage?.toString(),
+              updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
+              paymentType: invoiceDetails?.paymentType,
               invoicePaidAmount:
-                invoiceDetails?.invoiceID?.paidAmount.toString(),
+                invoiceDetails?.invoiceID?.paidAmount?.toString(),
               isShowExtraAmount: true,
               isReceiptPdf: true,
               dueAmount: invoiceDetails?.amount.toString(),
-              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount.toString(),
-              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
+              invoiceAmount: invoiceDetails?.invoiceID?.paidAmount?.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus?.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
               serviceDiscountSum:
                 invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
@@ -277,13 +242,13 @@ export const useReceiptPdf = () => {
               },
               secondColumn: {
                 address: {
-                  postalCode: user?.company.address.postalCode,
-                  streetNumber: user?.company.address.streetNumber,
+                  postalCode: user?.company?.address?.postalCode,
+                  streetNumber: user?.company?.address?.streetNumber,
                 },
                 bankDetails: {
-                  accountNumber: user?.company.bankDetails.accountNumber,
-                  bankName: user?.company.bankDetails.bankName,
-                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                  accountNumber: user?.company?.bankDetails?.accountNumber,
+                  bankName: user?.company?.bankDetails?.bankName,
+                  ibanNumber: user?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {
@@ -352,6 +317,7 @@ export const useReceiptPdf = () => {
       qrCode: qrCodeUrl,
       remoteFileBlob,
       systemSetting,
+      companyName: receiptData?.headerDetails?.companyName,
     }),
     [
       emailTemplateSettings,
@@ -397,10 +363,10 @@ export const useReceiptPdf = () => {
             pdf: fileUrl?.payload,
           };
           delete apiData["content"];
-          const res = await dispatch(sendInvoiceEmail({ data: apiData }));
-          if (res?.payload)
-            //   await localStoreUtil.remove_data("receiptEmailCompose");
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendInvoiceEmail({ data: apiData }));
+          // if (res?.payload)
+          //   await localStoreUtil.remove_data("receiptEmailCompose");
         } else {
           let apiData = {
             email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
@@ -422,9 +388,9 @@ export const useReceiptPdf = () => {
                 ?.receiptContent?.attachments,
             id: collectiveInvoiceDetails?.invoiceID?.contractID?.id,
           };
-          const res = await dispatch(sendInvoiceEmail({ apiData }));
-          if (res?.payload)
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendInvoiceEmail({ apiData }));
+          // if (res?.payload)
         }
       }
     } catch (error) {
@@ -448,9 +414,9 @@ export const useReceiptPdf = () => {
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
-        collectiveInvoiceDetails?.invoiceNumber +
+        collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName +
         "-" +
-        collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName
+        collectiveInvoiceDetails?.invoiceNumber
       }.pdf`;
       document.body.appendChild(a);
       a.click();

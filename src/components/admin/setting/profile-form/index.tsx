@@ -5,9 +5,11 @@ import React from "react";
 
 const SettingProfile = () => {
   const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error, renderModal } = useSettingProfile();
+  const { fields, onSubmit, handleSubmit, errors, error, renderModal } =
+    useSettingProfile();
+
   return (
-    <FormCard>
+    <FormCard containerClassName="pt-3 px-6">
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}

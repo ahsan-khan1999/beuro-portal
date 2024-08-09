@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SettingLayout from "./SettingLayout";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const SettingTopDataButtons = ({
   switchDetails,
@@ -12,8 +12,8 @@ const SettingTopDataButtons = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-  const [selectedTab, setSelectedTab] = useState<number | null>(switchDetails);
 
+  const [selectedTab, setSelectedTab] = useState<number | null>(switchDetails);
   const tab = router.query.tab;
 
   useEffect(() => {
@@ -33,6 +33,7 @@ const SettingTopDataButtons = ({
     `${translate("setting.steps_heading.follow_up_setting")}`,
     `${translate("setting.steps_heading.mail_setting")}`,
     `${translate("setting.steps_heading.qr_settings")}`,
+    `${translate("setting.steps_heading.general_setting")}`,
   ];
 
   const handleTabClick = (index: number) => {

@@ -1,4 +1,3 @@
-// import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
 import { SelectBoxProps } from "@/types";
 import { getLabelByValue } from "@/utils/auth.util";
@@ -28,16 +27,17 @@ export const SelectBox = ({
   const [option, setOption] = useState(options);
 
   useEffect(() => {
-    // setOption(options);
     if (defaultValue) {
       field?.onChange(defaultValue);
     }
   }, [defaultValue]);
+
   useEffect(() => {
     setOption(options);
   }, [options]);
 
   const search = useRef<string>("");
+  const { t: translate } = useTranslation();
 
   const toggleDropDown = () => {
     setIsOpen((prevState) => !prevState);
@@ -54,28 +54,36 @@ export const SelectBox = ({
   const handleChange = (value: string) => {
     search.current = value;
     setOption(
-      options.filter((item) =>
+      option?.filter((item) =>
         item.label?.toLowerCase()?.includes(value?.toLowerCase())
       )
     );
   };
-  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between  text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+
+  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
   const classes = combineClasses(defaultClasses, className);
-  const { t: translate } = useTranslation();
+
+  const selectedLabel =
+    (field && getLabelByValue(field?.value, option)) ||
+    getLabelByValue(defaultValue, option);
+
   return (
     <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
-        // placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
         className={`${classes}`}
       >
-        {(field && getLabelByValue(field.value, option)) ||
-          getLabelByValue(defaultValue, option)}
+        {!selectedLabel && (
+          <span className="text-sm text-[#1E1E1E] font-normal truncate">
+            {translate("common.please_choose")}
+          </span>
+        )}
+        <span className="text-sm text-[#1E1E1E] font-normal truncate">{selectedLabel}</span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
           <span
@@ -102,7 +110,6 @@ export const SelectBox = ({
                   width={24}
                   height={8}
                 />
-
                 <input
                   value={search.current}
                   onChange={(e) => handleChange(e.target.value)}
@@ -110,7 +117,7 @@ export const SelectBox = ({
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
-              {option.map(({ value, label }) => (
+              {option?.map(({ value, label }) => (
                 <li
                   key={value}
                   onClick={() => selectedOptionHandler(value)}

@@ -120,5 +120,6 @@ export default function usePlanDetail(stage: boolean) {
     handleUpdateCancel,
     renderModal,
     loading,
+    translate
   };
 }

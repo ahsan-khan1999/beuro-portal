@@ -12,6 +12,7 @@ export const RejectOfferFields: GenerateAddReasonFormField = (
   reason
 ) => {
   const { t: translate } = useTranslation();
+
   const formField: FormField[] = [
     {
       containerClass: "mb-0 mt-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
@@ -101,7 +102,7 @@ export const RejectOfferTextFields: GenerateAddReasonFormField = (
         text: `${translate("common.add_note_modal.button")}`,
         inputType: "submit",
         className:
-          "rounded-lg  w-[200px] px-4 w-[152px] h-[50px]  text-white hover:bg-none",
+          "rounded-lg w-[200px] px-4 w-[152px] h-[50px] text-white hover:bg-none",
         loading,
       },
     },

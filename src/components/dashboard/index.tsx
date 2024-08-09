@@ -8,18 +8,19 @@ import leadsIcon from "@/assets/svgs/leads.svg";
 import offersIcon from "@/assets/svgs/offers.svg";
 import contractsIcon from "@/assets/svgs/contracts.svg";
 import salesIcon from "@/assets/svgs/sales.svg";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readDashboard } from "@/api/slices/authSlice/auth";
-import { Dashboard, FilterType } from "@/types";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { FilterType } from "@/types";
 import { getCurrentMonth } from "@/utils/utility";
 import { DashboardActionType } from "@/types/dashboard";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { useTranslation } from "next-i18next";
 
 const AdminDashboard = () => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
+
   const { dashboard } = useAppSelector((state) => state.auth);
 
   const [pieData, setPieData] = useState({
@@ -245,7 +246,7 @@ const AdminDashboard = () => {
           />
 
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
-            {dashboardCards.map((item, index) => {
+            {dashboardCards?.map((item, index) => {
               return (
                 <DashboardCard
                   key={index}
@@ -275,7 +276,7 @@ const AdminDashboard = () => {
           </div>
         </>
       ) : (
-        <LoadingState />
+        <CustomLoader />
       )}
     </div>
   );

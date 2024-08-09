@@ -22,6 +22,7 @@ body {
   background: #f3f3f3;
   overflow-x: hidden;
 }
+
 .pricing-gradient {
   background: linear-gradient(to right, #b503fe, #ff376f);
 }
@@ -81,6 +82,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   max-width: 100% !important;
   z-index: 1;
 }
+
 /* ===================== */
 
 /* Thin scrollbar track */
@@ -645,3 +647,44 @@ input[type="date"] {
     font-size: 14px;
   }
 }
+
+.img_loader {
+  animation: puff 1s infinite;
+}
+
+@keyframes puff {
+  0% {
+    transform: scale(0.1);
+  }
+
+  100% {
+    transform: scale(1.5);
+  }
+}
+
+.follow-up-container::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 26px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #4a13e7;
+}
+
+.follow_up_item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #4a13e7;
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+
+

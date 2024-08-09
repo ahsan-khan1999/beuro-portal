@@ -4,6 +4,7 @@ import { Form } from "@/base-components/form/form";
 import useEmployeePasswordReset from "@/hooks/employee/useEmployeePasswordReset";
 import Image from "next/image";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const PasswordReset = ({
   onClose,
@@ -12,38 +13,36 @@ const PasswordReset = ({
   onClose: () => void;
   passwordResetSuccessfully: Function;
 }) => {
-  const defaultClassName = "";
+  const { id } = useAppSelector((state) => state.global.modal.data);
+
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
-    useEmployeePasswordReset(passwordResetSuccessfully);
+    useEmployeePasswordReset({ passwordResetSuccessfully, id });
 
   return (
-    <>
-      <BaseModal
-        onClose={onClose}
-        containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit"
-      >
-        <div className="relative flex flex-col">
-          <Image
-            src={crossIcon}
-            onClick={onClose}
-            alt="cross_icon"
-            className="absolute right-5 top-5 cursor-pointer"
+    <BaseModal
+      onClose={onClose}
+      containerClassName="max-w-[480px] lg:max-w-[624.862px] min-h-fit"
+    >
+      <div className="relative flex flex-col">
+        <Image
+          src={crossIcon}
+          onClick={onClose}
+          alt="cross_icon"
+          className="absolute right-5 top-5 cursor-pointer"
+        />
+        <p className="ont-medium text-base md:text-2xl py-5 px-6">
+          {translate("employees.edit_password_modal.heading")}
+        </p>
+        <div className="pb-3 px-6">
+          <Form
+            formFields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
           />
-          <p className="text-[#000] font-medium text-2xl py-5 px-6">
-            {translate("employees.edit_password_modal.heading")}
-          </p>
-          <div className="pb-3 px-6">
-            <Form
-              formFields={fields}
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              errors={errors}
-              className={`${defaultClassName}`}
-            />
-          </div>
         </div>
-      </BaseModal>
-    </>
+      </div>
+    </BaseModal>
   );
 };
 

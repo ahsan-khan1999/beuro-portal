@@ -5,10 +5,11 @@ import { InvoiceCardContentProps } from "@/types/invoice";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import recurring from "@/assets/svgs/recurring icon.svg";
-import { useTranslation } from "next-i18next";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { updateQuery } from "@/utils/update-query";
+import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 const InvoiceDetailsData = ({
   handleInvoiceCreation,
@@ -27,9 +28,22 @@ const InvoiceDetailsData = ({
   const handleBack = () => {
     router.pathname = "/invoices";
     delete router.query["invoice"];
+    delete router.query["isMail"];
     delete router.query["tab"];
     updateQuery(router, router.locale as string);
   };
+
+  const customerType = invoiceDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? invoiceDetails?.customerDetail?.companyName
+      : invoiceDetails?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <>
@@ -143,7 +157,7 @@ const InvoiceDetailsData = ({
       <div className="flex flex-col maxSize:flex-row justify-between gap-y-3 border-t border-[#000] border-opacity-10 pt-4">
         <div className="flex flex-col gap-[17px]">
           <div className="flex items-start gap-2">
-            <span className="text-base font-normal text-[#4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[85px]">
               {translate("invoice.card_content.invoice_id")}:
             </span>
             <span className="text-[#4A13E7] font-medium text-base">
@@ -152,7 +166,7 @@ const InvoiceDetailsData = ({
           </div>
           {invoiceDetails.contractID && (
             <div className="flex gap-2">
-              <span className="text-base font-normal text-[#4D4D4D]">
+              <span className="text-base font-normal text-[#4D4D4D] min-w-[100px]">
                 {translate("invoice.card_content.contract_id")}:
               </span>
               <span className="text-[#4A13E7] font-medium text-base">
@@ -162,7 +176,7 @@ const InvoiceDetailsData = ({
           )}
           {invoiceDetails.contractID && (
             <div className="flex gap-2">
-              <span className="text-base font-normal text-[#4D4D4D]">
+              <span className="text-base font-normal text-[#4D4D4D] min-w-[70px]">
                 {translate("invoice.card_content.offer_id")}:
               </span>
               <span className="text-[#4A13E7] font-medium text-base">
@@ -174,7 +188,7 @@ const InvoiceDetailsData = ({
 
         <div className="flex flex-col gap-[17px]">
           <div className="flex gap-2">
-            <span className="text-base font-normal text-[#4D4D4D]">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[100px]">
               {translate("invoice.card_content.title")}:
             </span>
             <span className="text-[#393939] font-medium text-base">
@@ -191,7 +205,7 @@ const InvoiceDetailsData = ({
               </span>
             </div>
             <div className="flex gap-2">
-              <span className="text-base font-normal text-[#4D4D4D]">
+              <span className="text-base font-normal text-[#4D4D4D] min-w-[110px]">
                 {translate("invoice.card_content.status")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
@@ -205,7 +219,7 @@ const InvoiceDetailsData = ({
 
           <div className="flex gap-[44px] items-center">
             <div className="flex gap-2 items-center">
-              <span className="text-base font-normal text-[#4D4D4D]">
+              <span className="text-base font-normal text-[#4D4D4D] min-w-[120px]">
                 {translate("invoice.card_content.created_date")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
@@ -214,7 +228,15 @@ const InvoiceDetailsData = ({
             </div>
             <div
               className="flex gap-2 items-center cursor-pointer"
-              onClick={(e) => handleNotes(invoiceDetails?.id, e)}
+              onClick={(e) =>
+                handleNotes(
+                  invoiceDetails?.id,
+                  invoiceDetails?.invoiceNumber,
+                  name,
+                  heading,
+                  e
+                )
+              }
             >
               <span className="text-base font-normal text-[#4D4D4D]">
                 {translate("invoice.card_content.notes")}:

@@ -17,8 +17,6 @@ import { Footer } from "../reactPdf/footer";
 import { AdditionalDetails } from "../reactPdf/additional-details";
 import { EmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import { EmailTemplate } from "@/types/settings";
-import { useEffect, useState } from "react";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 Font.register({
   family: "Poppins",
@@ -266,8 +264,8 @@ const OfferPdf = ({
     description: serviceItemFooter?.discountDescription,
     count: Number("-"),
     pagebreak: true,
-    discount: Number(serviceItemFooter?.discount)
-  }
+    discount: Number(serviceItemFooter?.discount),
+  };
   return (
     <PDFViewer width={A4_WIDTH} height={A4_HEIGHT}>
       <Document>
@@ -287,15 +285,13 @@ const OfferPdf = ({
 
             <ServiceTableHederRow />
             {serviceItem?.map((item, index) => (
-              <ServiceTableRow {...item} key={index}
-                pagebreak={false}
-
-              />
+              <ServiceTableRow {...item} key={index} pagebreak={false} />
             ))}
 
-            <ServiceTableRow {...disscountTableRow} key={Math.random()}
+            <ServiceTableRow
+              {...disscountTableRow}
+              key={Math.random()}
               pagebreak={true}
-
             />
             <ServicesTotalAmount {...serviceItemFooter} />
           </View>

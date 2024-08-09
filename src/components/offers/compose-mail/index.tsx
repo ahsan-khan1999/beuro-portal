@@ -14,7 +14,6 @@ const OfferEmail = () => {
   const backRouteHandler = () => {
     router.push("/offer/details");
   };
-
   return (
     <Layout>
       <MailDetailsCard />

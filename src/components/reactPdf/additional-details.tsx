@@ -1,8 +1,6 @@
 import { View, StyleSheet } from "@react-pdf/renderer";
-
 import Html, { HtmlStyles } from "react-pdf-html";
-
-type FontSizeMap = { [key: string]: string };
+import { transformHtmlToPdf } from "./convert-tags-react-pdf-components";
 
 const styles = StyleSheet.create({
   borderDiv: {
@@ -10,7 +8,7 @@ const styles = StyleSheet.create({
     // borderTopColor: "#000",
     marginLeft: 20,
     marginRight: 20,
-    paddingTop: 15,
+    // paddingTop: 15,
   },
   container: {
     fontFamily: "Poppins",
@@ -113,7 +111,7 @@ const stylesheet: HtmlStyles = {
     marginLeft: 0,
     marginRight: 10,
     marginTop: 0,
-
+    marginBottom: 0,
     listStyle: "outside",
   },
   blockquote: {
@@ -156,45 +154,23 @@ export const AdditionalDetails = ({
 
   // useMemo(() => signature && onFileChange(), [signature]);
 
-  function replaceFontSizes(description: string | undefined | null): string {
-    if (!description) return ""; // Return empty string if description is undefined or null
+  // console.log(transformHtmlToPdf(description ?? ''));
+  const content = transformHtmlToPdf(description ?? "");
+  //  const content = convertHtmlToPdf(description ?? '');
 
-    // Define a mapping for specific replacements
-    const replacements: FontSizeMap = {
-      "8px": "5.5px",
-      "9px": "6px",
-      "10px": "6.5px",
-      "11px": "7px",
-      "12px": "7.5px",
-      "13px": "8px",
-      "14px": "8.5px",
-    };
-
-    // Regular expression to match font sizes in the format "Xpx"
-    const fontSizeRegex = /(\d+px)/g;
-
-    // Replace font sizes using the map and regular expression
-    const replacedDescription = description.replaceAll(
-      fontSizeRegex,
-      (match) => {
-        return replacements[match] || match; // Use replacement if found in map, otherwise keep the original value
-      }
-    );
-
-    return replacedDescription;
-  }
+  // const content = parseHTML(description ?? '');
 
   return (
     <View style={styles.borderDiv}>
-      <View style={styles.container}>
-        <Html
+      <View>
+        {/* <Html
           resetStyles={false}
           stylesheet={stylesheet}
           style={{ fontFamily: "Poppins" }}
         >
-          {/* {replaceFontSizes(description ?? "")} */}
-          {description ?? ""}
-        </Html>
+          {replaceFontSizes(description ?? "")}
+        </Html> */}
+        {content}
       </View>
     </View>
   );

@@ -1,47 +1,47 @@
-import { SupportRequestAdmin } from "@/types/admin/support-request";
-import { useTranslation } from "next-i18next";
 import React from "react";
 import { useRouter } from "next/router";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { DropDownItem } from "@/types";
 import { ContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { staticEnums } from "@/utils/static";
+import { updateQuery } from "@/utils/update-query";
+import { useTranslation } from "next-i18next";
 
-const DetailsData = ({
+export const DetailsData = ({
   supportDetail,
-  status,
+  // status,
   handlePreviousClick,
   handleStatusUpadte,
 }: {
   supportDetail: ContactSupport | null;
-  status: DropDownItem[];
   handlePreviousClick: () => void;
   handleStatusUpadte: (value: string) => void;
 }) => {
+  const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const router = useRouter();
-
-  const itemStatus: DropDownItem[] = [
-    {
-      item: {
-        label: `${translate("support_request_status.pending")}`,
-        value: "pending",
-      },
-    },
-    {
-      item: {
-        label: `${translate("support_request_status.resolved")}`,
-        value: "resolved",
-      },
-    },
+  const itemStatus = [
+    `${translate("support_request_status.pending")}`,
+    `${translate("support_request_status.resolved")}`,
   ];
+
+  const items = Object.keys(staticEnums["SupportRequest"]).map(
+    (item, index) => ({
+      item: { label: itemStatus[index], value: item },
+    })
+  );
+
+  const handleBack = () => {
+    router.pathname = "/admin/support-request";
+    delete router.query["supportRequest"];
+    updateQuery(router, router.locale as string);
+  };
 
   return (
     <>
       <div className="flex justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center">
-          <div onClick={handlePreviousClick} className="cursor-pointer">
+          <div onClick={handleBack} className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
@@ -112,40 +112,59 @@ const DetailsData = ({
           {translate("admin.support_requests.card_content.button")}
         </button>
       </div>
-      <div className="flex flex-col gap-y-3 md:flex-row md:space-x-20 md:items-center mt-5">
-        <h3 className="text-[#4D4D4D]">
-          {translate("admin.support_requests.card_content.customer_id")}:
-          <span className="text-[#4B4B4B] font-medium ml-3">
+      <div className="flex flex-col gap-y-3 mlg:flex-row mlg:space-x-20 mlg:items-center mt-5">
+        <div className="flex items-center gap-x-3">
+          <span className="text-base font-medium text-[#4D4D4D]">
+            {translate("admin.customers_details.card_content.customer_id")}:
+          </span>
+          <span className="text-primary font-medium">
             {supportDetail?.createdBy?.company?.refID}
           </span>
-        </h3>
-        <h3 className="text-[#4D4D4D]">
-          {translate("admin.support_requests.card_content.request_date")}:
-          <span className="ml-3 text-[#4B4B4B] font-medium">
+        </div>
+        <div className="flex items-center gap-x-3">
+          <span className="text-base font-medium text-[#4D4D4D]">
+            {translate("admin.support_requests.card_content.request_date")}:
+          </span>
+          <span className="text-primary font-medium">
             {supportDetail && formatDateTimeToDate(supportDetail?.createdAt)}
           </span>
-        </h3>
-        <h3 className="text-[#4D4D4D] flex items-center">
-          {translate("admin.support_requests.card_content.status")}:
-          <span className="ml-3 text-[#4B4B4B] font-medium">
+        </div>
+        <div className="flex items-center gap-x-3">
+          <span className="text-base font-medium text-[#4D4D4D]">
+            {translate("admin.support_requests.card_content.status")}:
+          </span>
+
+          <span>
             <DropDown
-              items={itemStatus}
-              onItemSelected={(selectedItem) =>
-                handleStatusUpadte(selectedItem)
-              }
+              items={items}
+              onItemSelected={handleStatusUpadte}
               selectedItem={translate(
                 `support_request_status.${supportDetail?.status}`
               )}
-              dropDownClassName="px-3 border border-primary justify-between"
-              dropDownTextClassName="text-primary font-medium"
-              dropDownIconClassName="text-primary ml-2"
-              dropDownItemsContainerClassName="border border-primary w-full"
+              dropDownClassName={`px-3 border ${
+                supportDetail?.status === "resolved"
+                  ? "border-[#4A13E7]"
+                  : "border-[#FE9244]"
+              } justify-between py-[3px]`}
+              dropDownTextClassName={`${
+                supportDetail?.status === "resolved"
+                  ? "text-[#4A13E7]"
+                  : "text-[#FE9244]"
+              } font-medium`}
+              dropDownIconClassName={`${
+                supportDetail?.status === "resolved"
+                  ? "text-[#4A13E7]"
+                  : "text-[#FE9244]"
+              } ml-2`}
+              dropDownItemsContainerClassName={`border ${
+                supportDetail?.status === "resolved"
+                  ? "border-[#4A13E7]"
+                  : "border-[#FE9244]"
+              }y w-full`}
             />
           </span>
-        </h3>
+        </div>
       </div>
     </>
   );
 };
-
-export default DetailsData;

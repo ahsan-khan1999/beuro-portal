@@ -7,9 +7,10 @@ import ServiceDetailsData from "./ServiceDetailsData";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import OfferEditImages from "@/components/offers/OfferEditImages";
 import { ContractAditionalEditDetails } from "../edit/editAdditionalDetails";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { staticEnums } from "@/utils/static";
 
 export enum ComponentsType {
   customer,
@@ -20,9 +21,17 @@ export enum ComponentsType {
 
 export interface ContractDetailProps {
   loading: boolean;
-  shareImgModal: Function;
+  shareImgModal: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleImageSlider: () => void;
@@ -88,7 +97,7 @@ const ContractDetailsData = ({
       <path d="M14.854 15C14.3056 15 13.8594 15.4462 13.8594 15.9946C13.8594 16.543 14.3055 16.9892 14.854 16.9892C15.4024 16.9892 15.8486 16.543 15.8486 15.9946C15.8486 15.4462 15.4024 15 14.854 15Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"/>
       <path d="M10.0805 8.63477C9.53211 8.63477 9.08594 9.08094 9.08594 9.62937C9.08594 10.1778 9.53211 10.624 10.0805 10.624C10.629 10.624 11.0752 10.1778 11.0752 9.62937C11.0751 9.08098 10.629 8.63477 10.0805 8.63477Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"/>
     </svg>`,
-      name: `${translate("contracts.tabs_headings.offer_details")}`,
+      name: `${translate("contracts.card_content.heading")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -134,18 +143,33 @@ const ContractDetailsData = ({
     },
   ];
 
-  const scrollHandler = (index: number) => {
-    if (index === 0) {
-      window.scrollTo({ behavior: "smooth", top: 0 });
-    }
-    if (index === 1) {
-      window.scrollTo({ behavior: "smooth", top: 590 });
-    }
-    if (index === 2) {
-      window.scrollTo({ behavior: "smooth", top: 970 });
-    }
-    if (index === 3) {
-      window.scrollTo({ behavior: "smooth", top: 1450 });
+  // const scrollHandler = (index: number) => {
+  //   if (index === 0) {
+  //     window.scrollTo({ behavior: "smooth", top: 0 });
+  //   }
+  //   if (index === 1) {
+  //     window.scrollTo({ behavior: "smooth", top: 590 });
+  //   }
+  //   if (index === 2) {
+  //     window.scrollTo({ behavior: "smooth", top: 970 });
+  //   }
+  //   if (index === 3) {
+  //     window.scrollTo({ behavior: "smooth", top: 1450 });
+  //   }
+  // };
+
+  const handleScrollToTop = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    const offset = 380;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -156,10 +180,22 @@ const ContractDetailsData = ({
     }
   }, []);
 
+  const customerType = contractDetails?.offerID?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
+      : contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <>
       <div className="2xl:fixed mb-5">
-        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0 ">
+        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -168,7 +204,8 @@ const ContractDetailsData = ({
               name={item.name}
               icon={item.icon}
               selectedTab={index}
-              onScroll={scrollHandler}
+              // onScroll={scrollHandler}
+              onItemSelected={handleScrollToTop}
               key={index}
             />
           ))}
@@ -179,16 +216,21 @@ const ContractDetailsData = ({
             shareImgModal={shareImgModal}
             handleImagesUpload={handleImageUpload}
             tabType={tabType}
+            id={contractDetails?.id}
+            refID={contractDetails?.contractNumber}
+            name={name}
+            heading={heading}
             handleImageSlider={handleImageSlider}
+            className="2xl:w-[247px]"
           />
         </div>
       </div>
 
       <div className="overflow-y-auto w-full break-all flex">
-        <div className="max-w-[330px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[280px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
-            <LoadingState />
+            <CustomLoader />
           </div>
         ) : (
           <div className="flex flex-col gap-y-5 w-full">

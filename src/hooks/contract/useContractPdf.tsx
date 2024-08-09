@@ -1,10 +1,4 @@
-import {
-  AcknowledgementSlipProps,
-  ContractEmailHeaderProps,
-  PayableToProps,
-  PdfProps,
-  TemplateType,
-} from "@/types";
+import { ContractEmailHeaderProps, PdfProps, TemplateType } from "@/types";
 import { EmailTemplate } from "@/types/settings";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -29,43 +23,8 @@ import {
   uploadFileToFirebase,
 } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
-
-// import { PdfFile } from "@/components/reactPdf/pdf-file";
 import { useMergedPdfDownload } from "@/components/reactPdf/generate-merged-pdf-download";
 import { staticEnums } from "@/utils/static";
-
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
 
 let contractPdfInfo = {
   subject: "",
@@ -87,8 +46,6 @@ export const useContractPdf = () => {
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );
-
-  const [pdfFile, setPdfFile] = useState(null);
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
@@ -205,6 +162,8 @@ export const useContractPdf = () => {
               emailTemplateSettings: emailTemplate?.payload,
               fileType: "contract",
               isReverseLogo: template.payload.Template?.order,
+              companyName:
+                contractDetails?.offerID?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {
@@ -229,7 +188,7 @@ export const useContractPdf = () => {
 
               gender:
                 contractDetails?.offerID?.leadID?.customerDetail?.gender?.toString(),
-              isReverseInfo: template.payload.Template?.order,
+              isReverseInfo: template?.payload?.Template?.order,
             },
             movingDetails: {
               address: contractDetails?.offerID?.addressID?.address,
@@ -247,8 +206,8 @@ export const useContractPdf = () => {
               tax: contractDetails?.offerID?.taxAmount?.toString(),
               discount: contractDetails?.offerID?.discountAmount?.toString(),
               discountType: contractDetails?.offerID?.discountType,
-              discountPercentage: discountPercentage.toString(),
-              updatedDiscountAmount: updatedTotalDiscount.toString(),
+              discountPercentage: discountPercentage?.toString(),
+              updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: contractDetails?.offerID?.total?.toString(),
               taxType: contractDetails?.offerID?.taxType,
               isContractPDF: true,
@@ -273,13 +232,13 @@ export const useContractPdf = () => {
               },
               secondColumn: {
                 address: {
-                  postalCode: user?.company.address.postalCode,
-                  streetNumber: user?.company.address.streetNumber,
+                  postalCode: user?.company?.address?.postalCode,
+                  streetNumber: user?.company?.address?.streetNumber,
                 },
                 bankDetails: {
-                  accountNumber: user?.company.bankDetails.accountNumber,
-                  bankName: user?.company.bankDetails.bankName,
-                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                  accountNumber: user?.company?.bankDetails?.accountNumber,
+                  bankName: user?.company?.bankDetails?.bankName,
+                  ibanNumber: user?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {
@@ -350,7 +309,6 @@ export const useContractPdf = () => {
   }, [offerID]);
 
   const totalItems = contractData?.serviceItem?.length ?? 0;
-
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
     const remainingItems = totalItems - itemsOnFirstPage;
@@ -380,6 +338,7 @@ export const useContractPdf = () => {
       qrCode: qrCodeUrl,
       remoteFileBlob,
       systemSetting,
+      companyName: contractData?.headerDetails?.companyName,
     }),
     [
       emailTemplateSettings,
@@ -405,31 +364,26 @@ export const useContractPdf = () => {
         localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
       if (isMail) {
-        router.push(
-          {
-            pathname: `/contract/details`,
-            query: {
-              ...router.query,
-              offer: contractDetails?.id,
-              isMail: isMail,
-            },
-          }
-
-          // `/contract/details?offer=${contractDetails?.id}&isMail=${isMail}`
-        );
+        router.push({
+          pathname: `/contract/details`,
+          query: {
+            ...router.query,
+            offer: contractDetails?.id,
+            isMail: isMail,
+          },
+        });
       } else {
         setActiveButtonId("email");
-
         const data = await localStoreUtil.get_data("contractComposeEmail");
 
         if (data) {
           let apiData = { ...data, pdf: fileUrl?.payload };
 
           delete apiData["content"];
-          const res = await dispatch(sendContractEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendContractEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         } else {
           let apiData = {
             email: contractDetails?.offerID?.leadID?.customerDetail?.email,
@@ -448,10 +402,10 @@ export const useContractPdf = () => {
             id: contractDetails?.id,
             pdf: fileUrl?.payload,
           };
-          const res = await dispatch(sendContractEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendContractEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         }
       }
     } catch (error) {
@@ -460,16 +414,14 @@ export const useContractPdf = () => {
   };
 
   const handleDonwload = () => {
-    // window.open(contractData?.attachement);
-
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
-        contractDetails?.contractNumber +
+        contractDetails?.offerID?.createdBy?.company?.companyName +
         "-" +
-        contractDetails?.offerID?.createdBy?.company?.companyName
+        contractDetails?.contractNumber
       }.pdf`;
       document.body.appendChild(a);
       a.click();
@@ -492,6 +444,7 @@ export const useContractPdf = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const onSuccess = () => {
     router.push("/contract?status=None");
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -508,6 +461,7 @@ export const useContractPdf = () => {
       return true;
     } else return false;
   };
+
   const handleDescriptionUpdate = async (value: string) => {
     const apiData = {
       id: offerID,
@@ -521,6 +475,7 @@ export const useContractPdf = () => {
       return true;
     } else return false;
   };
+
   const handleSendByPost = async () => {
     setActiveButtonId("post");
     const apiData = {

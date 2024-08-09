@@ -221,6 +221,7 @@ const useServiceDetail = (stage: boolean) => {
     renderModal,
     deleteHandler,
     loading,
+    translate,
   };
 };
 

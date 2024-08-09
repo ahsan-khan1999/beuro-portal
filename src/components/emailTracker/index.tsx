@@ -20,11 +20,13 @@ export default function EmailTracker() {
     loading,
     isLoading,
     currentPage,
+    totalCount,
   } = useEmailTracker();
 
   const CurrentComponent = useEmptyStates(
     <TableRow dataToAdd={currentPageRows} />,
-    currentPageRows?.length > 0,
+    // currentPageRows?.length > 0,
+    totalCount !== 0,
     isLoading
   );
 

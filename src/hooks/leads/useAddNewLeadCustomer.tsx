@@ -24,8 +24,9 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
+
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
+    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
   }, []);
 
   const onCancel = () => {
@@ -48,8 +49,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const customerType = watch("customerType");
 
+  const customerType = watch("customerType");
   const type = watch("type");
   const gender = watch("gender");
 
@@ -63,6 +64,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         ...selectedCustomers,
         type: type,
         gender: staticEnums["Gender"][selectedCustomers?.gender],
+        customerID: id,
       });
     }
   };
@@ -73,6 +75,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         fullName: leadDetails.customerDetail?.fullName,
         type: leadDetails.type,
         customer: leadDetails.customerID,
+        customerID: leadDetails.customerID,
 
         customerType: getKeyByValue(
           staticEnums["CustomerType"],

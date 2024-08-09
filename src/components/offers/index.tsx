@@ -25,17 +25,18 @@ export default function Offers() {
     renderModal,
     setFilter,
     totalItems,
+    totalCount,
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
     <TableRows
       dataToAdd={currentPageRows}
-      openModal={handleNotes}
+      handleNotes={handleNotes}
       handleImageUpload={handleImageUpload}
       handleOfferStatusUpdate={handleOfferStatusUpdate}
       handlePaymentStatusUpdate={handlePaymentStatusUpdate}
     />,
-    currentPageRows?.length > 0,
+    totalCount !== 0,
     isLoading
   );
 

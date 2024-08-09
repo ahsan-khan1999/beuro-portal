@@ -35,7 +35,7 @@ export default function useCustomerDetail({
   idAddNewCustomer: boolean;
 }) {
   const [isUpdate, setIsUpdate] = useState<boolean>(detail);
-  const { loading, customerDetails } = useAppSelector(
+  const { loading, customerDetails, isLoading } = useAppSelector(
     (state) => state.customer
   );
   const { modal } = useAppSelector((state) => state.global);
@@ -54,6 +54,7 @@ export default function useCustomerDetail({
       })
     );
   };
+
   const handleCreateSuccess = () => {
     dispatch(
       updateModalType({
@@ -61,6 +62,7 @@ export default function useCustomerDetail({
       })
     );
   };
+
   const handleUpdateCancle = () => {
     dispatch(
       updateModalType({
@@ -68,6 +70,7 @@ export default function useCustomerDetail({
       })
     );
   };
+
   const handleUpdate = (data: any) => {
     dispatch(
       updateModalType({
@@ -76,6 +79,7 @@ export default function useCustomerDetail({
       })
     );
   };
+
   const deleteHandler = () => {
     dispatch(
       updateModalType({
@@ -122,12 +126,18 @@ export default function useCustomerDetail({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   const customerType = watch("customerType");
+
   useEffect(() => {
     if (id) {
       dispatch(readCustomerDetail({ params: { filter: id } }));
     }
+    return () => {
+      dispatch(readCustomerDetail({ ...DEFAULT_CUSTOMER }));
+    };
   }, [id]);
+
   useMemo(() => {
     if (customerDetails && detail)
       reset({
@@ -162,6 +172,7 @@ export default function useCustomerDetail({
       handleUpdate(data);
     }
   };
+
   const test = async ({
     data,
     router,
@@ -223,6 +234,7 @@ export default function useCustomerDetail({
       />
     ),
   };
+
   const handlePreviousClick = () => {
     router.push("/customers");
   };
@@ -241,5 +253,7 @@ export default function useCustomerDetail({
     renderModal,
     handleCreateSuccess,
     loading,
+    isLoading,
+    translate,
   };
 }

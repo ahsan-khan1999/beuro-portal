@@ -167,62 +167,75 @@ export const ImageField = ({
       <div className="col-span-2 mt-5">
         <div className="grid mlg:grid-cols-5 xLarge:grid-cols-5 gap-x-4 gap-y-3">
           {attachements &&
-            attachements?.map((item, index) => (
-              <div
-                className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
-                  isOpenedFile ? "cursor-pointer" : "cursor-default"
-                }`}
-                key={index}
-                onClick={() =>
-                  isOpenedFile && router.push("/content/pdf-preview")
-                }
-              >
-                <div className="flex items-center gap-3">
-                  <div style={{ position: "relative" }}>
-                    <Image
-                      src={item?.value}
-                      width={100}
-                      height={100}
-                      alt="Uploaded Preview"
-                      style={{ height: "80px", width: "80px" }}
-                      onClick={() => toggleZoom(item.value, index)}
-                      className="cursor-pointer"
-                    />
-                    <div
-                      className="absolute top-[5px] right-[5px] cursor-pointer"
-                      onClick={(e) => handleDeleteFile(index)}
-                    >
-                      <Image src={imgDelete} alt="imgDelete" />
-                    </div>
-                    {isZoomed.zoomed && (
-                      <div
-                        style={{
-                          position: "fixed",
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          zIndex: 9999,
-                          backgroundColor: "rgba(0, 0, 0, 0.8)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                        onClick={() => toggleZoom(item.value, index)}
-                      >
-                        <Slider
-                          {...SLIDER_IMAGES_DATA}
-                          images={isZoomed?.sliderImageData}
-                          activeIndex={isZoomed?.currentIndex}
-                          containerClasses="w-[80%]"
-                          mainImgSliderClasses="w-full h-[615px]"
+            attachements?.map((item, index) => {
+              const isSVG = item?.value?.endsWith(".svg");
+
+              return (
+                <div
+                  className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+                    isOpenedFile ? "cursor-pointer" : "cursor-default"
+                  }`}
+                  key={index}
+                  onClick={() =>
+                    isOpenedFile && router.push("/content/pdf-preview")
+                  }
+                >
+                  <div className="flex items-center gap-3">
+                    <div style={{ position: "relative" }}>
+                      {isSVG ? (
+                        <object
+                          data={item.value}
+                          width={100}
+                          height={100}
+                          style={{ height: "100px", width: "100px" }}
                         />
+                      ) : (
+                        <Image
+                          src={item?.value}
+                          width={100}
+                          height={100}
+                          alt="Uploaded Preview"
+                          style={{ height: "100px", width: "100px" }}
+                          onClick={() => toggleZoom(item.value, index)}
+                          className="cursor-pointer"
+                        />
+                      )}
+                      <div
+                        className="absolute top-[5px] right-[5px] cursor-pointer"
+                        onClick={(e) => handleDeleteFile(index)}
+                      >
+                        <Image src={imgDelete} alt="imgDelete" />
                       </div>
-                    )}
+                      {isZoomed.zoomed && (
+                        <div
+                          style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            zIndex: 9999,
+                            backgroundColor: "rgba(0, 0, 0, 0.8)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                          onClick={() => toggleZoom(item.value, index)}
+                        >
+                          <Slider
+                            {...SLIDER_IMAGES_DATA}
+                            images={isZoomed?.sliderImageData}
+                            activeIndex={isZoomed?.currentIndex}
+                            containerClasses="w-[80%]"
+                            mainImgSliderClasses="w-full h-[615px]"
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
         </div>
       </div>
     </>

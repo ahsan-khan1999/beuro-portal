@@ -23,14 +23,8 @@ export const generateCustomerValidation = (translate: Function) => {
     //   .email()
     //   .required(translate("validationMessages.required")),
 
-    [CustomerDetailsFields.phone]: yup
-      .string()
-
-      .notRequired(),
-    [CustomerDetailsFields.mobile]: yup
-      .string()
-
-      .notRequired(),
+    [CustomerDetailsFields.phone]: yup.string().notRequired(),
+    [CustomerDetailsFields.mobile]: yup.string().notRequired(),
     [CustomerDetailsFields.address]: yup
       .object({
         [CustomerDetailsFields.streetNo]: yup

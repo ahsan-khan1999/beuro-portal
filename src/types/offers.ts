@@ -44,14 +44,14 @@ export interface OffersTableRowTypes {
   createdBy: User;
   discountType: keyof (typeof staticEnums)["DiscountType"];
   mail: {
-    mailStatus: "open" | "failed" | "pending";
+    mailStatus: 0 | 1;
   };
   emailStatus: "Pending" | "Sent" | "Failed";
   isDiscount: boolean;
   isTax: boolean;
   offerNumber: string;
   offerStatus: "Open" | "Accepted" | "Expired" | "Rejected";
-  paymentType: "Cash" | "Online";
+  paymentType: "Cash" | "Online" | "Twint";
   taxType: "Include" | "Exclude";
   taxAmount: number;
   title: string;
@@ -156,7 +156,7 @@ export interface InvoiceTableRowDetailsTypes {
   isTax: boolean;
   invoiceNumber: string;
   offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
-  paymentType: "Cash" | "Online";
+  paymentType: "Cash" | "Online" | "Twint";
   taxType: "Include" | "Exclude";
   taxAmount: number;
   title: string;
@@ -238,9 +238,18 @@ export interface OffersDiscountDataTypes {
 export interface OfferDetailCardProps {
   offerDetails: OffersTableRowTypes;
   offerDeleteHandler: () => void;
-  handleNotes: (item: string, e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleImageUpload: (
-    item: string,
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
   handleStatusUpdate: (id: string) => void;

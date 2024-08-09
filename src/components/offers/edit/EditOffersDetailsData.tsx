@@ -7,8 +7,9 @@ import AditionalEditDetails from "./AditionalEditDetails";
 import ServiceEditDetails from "./ServiceEditDetails";
 import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
+import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum EditComponentsType {
   offerEdit,
@@ -17,20 +18,30 @@ export enum EditComponentsType {
   additionalEdit,
 }
 
+export interface EditOfferDetailsProps {
+  shareImgModal: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => void;
+  handleImagesUpload: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
+  tab?: EditComponentsType;
+}
+
 const EditOffersDetailsData = ({
   shareImgModal,
   handleImagesUpload,
   handleImageSlider,
   tab,
-}: {
-  shareImgModal: Function;
-  handleImagesUpload: (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
-  handleImageSlider: () => void;
-  tab?: EditComponentsType;
-}) => {
+}: EditOfferDetailsProps) => {
   const [tabType, setTabType] = useState<EditComponentsType>(
     tab || EditComponentsType.offerEdit
   );
@@ -93,14 +104,10 @@ const EditOffersDetailsData = ({
 
   const handleNextTab = (currentComponent: EditComponentsType) => {
     if (tabType === EditComponentsType.additionalEdit) {
-      router.push(
-        {
-          pathname: `/offers/pdf-preview`,
-          query: { status: "None", offerID: offerDetails?.id, isMail: true },
-        }
-
-        // `/offers/pdf-preview?offerID=${offerDetails?.id}&isMail=${true}`
-      );
+      router.push({
+        pathname: `/offers/pdf-preview`,
+        query: { status: "None", offerID: offerDetails?.id, isMail: true },
+      });
       return;
     }
     setTabType(currentComponent);
@@ -128,10 +135,22 @@ const EditOffersDetailsData = ({
     ),
   };
 
+  const customerType = offerDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? offerDetails?.leadID?.customerDetail?.companyName
+      : offerDetails?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
+
   return (
     <>
       <div className="xLarge:fixed mb-5 mt-[40px]">
-        <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full mb-5">
+        <div className="flex flex-wrap xLarge:flex-col gap-[14px] mb-5">
           {tabSection.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
@@ -150,12 +169,18 @@ const EditOffersDetailsData = ({
           shareImgModal={shareImgModal}
           handleImagesUpload={handleImagesUpload}
           tabType={tabType}
+          id={offerDetails?.id}
+          name={name}
+          heading={heading}
+          refID={offerDetails?.offerNumber}
           handleImageSlider={handleImageSlider}
+          className="xLarge:w-[280px]"
         />
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[330px] w-full hidden xLarge:block"></div>
+        <div className="max-w-[320px] w-full hidden xLarge:block"></div>
+
         <div className="w-full xLarge:max-w-[80%] my-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>

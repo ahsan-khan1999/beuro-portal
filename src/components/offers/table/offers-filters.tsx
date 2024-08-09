@@ -10,6 +10,8 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function OffersFilters({
   filter,
@@ -19,6 +21,8 @@ export default function OffersFilters({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { noteSettings } = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
 
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -169,6 +173,10 @@ export default function OffersFilters({
     setInputValue(textValue || "");
   }, [router.query.text]);
 
+  useEffect(() => {
+    dispatch(readNoteSettings());
+  }, []);
+
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
@@ -187,14 +195,15 @@ export default function OffersFilters({
         ))}
       </div>
       <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
+        <InputField
+          handleChange={handleInputChange}
+          ref={inputRef}
+          value={inputValue}
+          iconDisplay={true}
+          onEnterPress={onEnterPress}
+        />
+
         <div className="flex items-center gap-x-3">
-          <InputField
-            handleChange={handleInputChange}
-            ref={inputRef}
-            value={inputValue}
-            iconDisplay={false}
-            onEnterPress={onEnterPress}
-          />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
             value=""
@@ -219,58 +228,30 @@ export default function OffersFilters({
             ]}
             label={translate("common.sort_button")}
           />
+          <span className="text-[#4B4B4B] font-semibold text-base">
+            {translate("global_search.notes")}
+          </span>
+          <SelectField
+            handleChange={(value) => hanldeNoteType(value)}
+            value=""
+            dropDownIconClassName=""
+            containerClassName="w-[225px]"
+            labelClassName="w-[225px]"
+            options={
+              noteSettings
+                ? noteSettings
+                    .slice()
+                    .reverse()
+                    .map((item) => ({
+                      label: item.notes.noteType,
+                      value: item.notes.noteType,
+                    }))
+                : []
+            }
+            label={translate("add_note_dropdown.all_notes")}
+          />
         </div>
-
-        <div className="flex items-center gap-x-3">
-          <div className="flex items-center gap-x-3">
-            <span className="text-[#4B4B4B] font-semibold text-base">
-              {translate("global_search.notes")}
-            </span>
-            <SelectField
-              handleChange={(value) => hanldeNoteType(value)}
-              value=""
-              dropDownIconClassName=""
-              containerClassName="w-[225px]"
-              labelClassName="w-[225px]"
-              options={[
-                // {
-                //   value: "None",
-                //   label: `${translate("add_note_dropdown.all_notes")}`,
-                // },
-                {
-                  value: "Sending pictures",
-                  label: `${translate("add_note_dropdown.sending_picture")}`,
-                },
-                {
-                  value: "Viewing date",
-                  label: `${translate("add_note_dropdown.view_date")}`,
-                },
-                {
-                  value: "Approximate Offer open",
-                  label: `${translate(
-                    "add_note_dropdown.approximate_offer_open"
-                  )}`,
-                },
-                {
-                  value: "Will contact us",
-                  label: `${translate("add_note_dropdown.contact_us")}`,
-                },
-                {
-                  value: "Individual Note",
-                  label: `${translate("add_note_dropdown.individual_note")}`,
-                },
-                {
-                  value: "Not Reached",
-                  label: `${translate("add_note_dropdown.note_reached")}`,
-                },
-                {
-                  value: "Other",
-                  label: `${translate("add_note_dropdown.other")}`,
-                },
-              ]}
-              label={translate("add_note_dropdown.all_notes")}
-            />
-          </div>
+        <div className="flex items-center gap-x-4">
           <OfferFilter
             filter={filter}
             setFilter={setFilter}

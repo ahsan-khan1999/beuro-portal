@@ -28,7 +28,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
         name: "content",
         options:
           content?.map((item) => ({
-            label: item.offerContent?.title,
+            label: item?.offerContent?.title,
             value: item.id,
           })) || [],
         control,
@@ -54,7 +54,7 @@ export const AddOfferAdditionalDetailsFormField: GenerateOffersFormField = (
       },
     },
     {
-      containerClass: "my-[30px]",
+      containerClass: "mt-[30px]",
       field: {
         type: Field.div,
         id: "div-field",

@@ -203,8 +203,9 @@ export const useMainInvoicePdf = () => {
               createdBy: invoiceDetails?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
-              fileType: "contract",
-              isReverseLogo: template.payload.Template?.order,
+              fileType: "invoice",
+              isReverseLogo: template?.payload?.Template?.order,
+              companyName: invoiceDetails?.createdBy?.company?.companyName,
             },
             contactAddress: {
               address: {
@@ -220,7 +221,7 @@ export const useMainInvoicePdf = () => {
               mobile: invoiceDetails?.customerDetail?.mobileNumber,
 
               gender: invoiceDetails?.customerDetail?.gender?.toString(),
-              isReverseInfo: template.payload.Template?.order,
+              isReverseInfo: template?.payload?.Template?.order,
             },
             movingDetails: {
               address: invoiceDetails?.addressID?.address,
@@ -238,12 +239,12 @@ export const useMainInvoicePdf = () => {
               tax: invoiceDetails?.taxAmount?.toString(),
               discount: invoiceDetails?.discountAmount?.toString(),
               discountType: invoiceDetails?.discountType,
-              discountPercentage: discountPercentage.toString(),
-              updatedDiscountAmount: updatedTotalDiscount.toString(),
+              discountPercentage: discountPercentage?.toString(),
+              updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: invoiceDetails?.total?.toString(),
               invoicePaidAmount: invoiceDetails?.paidAmount.toString(),
-              invoiceAmount: invoiceDetails?.paidAmount.toString(),
-              invoiceStatus: invoiceDetails?.invoiceStatus.toString(),
+              invoiceAmount: invoiceDetails?.paidAmount?.toString(),
+              invoiceStatus: invoiceDetails?.invoiceStatus?.toString(),
               taxType: invoiceDetails?.taxType,
               serviceDiscountSum:
                 invoiceDetails?.serviceDetail?.serviceDetail?.reduce(
@@ -266,13 +267,13 @@ export const useMainInvoicePdf = () => {
               },
               secondColumn: {
                 address: {
-                  postalCode: user?.company.address.postalCode,
-                  streetNumber: user?.company.address.streetNumber,
+                  postalCode: user?.company?.address?.postalCode,
+                  streetNumber: user?.company?.address?.streetNumber,
                 },
                 bankDetails: {
-                  accountNumber: user?.company.bankDetails.accountNumber,
-                  bankName: user?.company.bankDetails.bankName,
-                  ibanNumber: user?.company.bankDetails.ibanNumber,
+                  accountNumber: user?.company?.bankDetails?.accountNumber,
+                  bankName: user?.company?.bankDetails?.bankName,
+                  ibanNumber: user?.company?.bankDetails?.ibanNumber,
                 },
               },
               thirdColumn: {
@@ -375,10 +376,10 @@ export const useMainInvoicePdf = () => {
           let apiData = { ...data, pdf: fileUrl?.payload };
 
           delete apiData["content"];
-          const res = await dispatch(sendContractEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendContractEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         } else {
           let apiData = {
             email: invoiceDetails?.customerDetail?.email,
@@ -395,27 +396,26 @@ export const useMainInvoicePdf = () => {
             id: invoiceDetails?.id,
             pdf: fileUrl?.payload,
           };
-          const res = await dispatch(sendContractEmail({ data: apiData }));
-          if (res?.payload) {
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          }
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          await dispatch(sendContractEmail({ data: apiData }));
+          // if (res?.payload) {
+          // }
         }
       }
     } catch (error) {
       console.error("Error in handleEmailSend:", error);
     }
   };
-  const handleDonwload = () => {
-    // window.open(invoiceData?.attachement);
 
+  const handleDonwload = () => {
     if (mergedPdfUrl) {
       const url = mergedPdfUrl;
       const a = document.createElement("a");
       a.href = url;
       a.download = `${
-        invoiceDetails?.invoiceNumber +
+        invoiceDetails?.createdBy?.company?.companyName +
         "-" +
-        invoiceDetails?.createdBy?.company?.companyName
+        invoiceDetails?.invoiceNumber
       }.pdf`;
       document.body.appendChild(a);
       a.click();

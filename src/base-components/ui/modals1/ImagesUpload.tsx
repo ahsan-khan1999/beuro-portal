@@ -8,6 +8,7 @@ import { BaseButton } from "../button/base-button";
 import { AttachementField } from "./attachement-field";
 import { VideoField } from "./video-field";
 import { ImageField } from "./image-field";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const ImagesUpload = ({
   onClose,
@@ -37,6 +38,9 @@ const ImagesUpload = ({
     loading,
     loadingGlobal,
   } = useUploadImage(handleImageSlider);
+  const { refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
 
   const attachementLookUp = {
     img_tab: (
@@ -49,12 +53,7 @@ const ImagesUpload = ({
             {translate("common.images_modal.sub_title")}
           </p>
         </div>
-        {/* <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-      /> */}
+
         <ImageField
           id="attachement"
           attachements={enteredLinks?.images}
@@ -94,9 +93,6 @@ const ImagesUpload = ({
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.link_title")}
           </h2>
-          {/* <p className="text-xs font-normal text-[#8F8F8F]">
-            {translate("common.images_modal.link_sub_title")}
-          </p> */}
         </div>
         <LinkUpload
           inputLink={enteredLink}
@@ -131,54 +127,67 @@ const ImagesUpload = ({
   };
 
   return (
-    <>
-      <BaseModal
-        onClose={onClose}
-        containerClassName="max-w-[480px] xl:max-w-[624px] min-h-fit"
-      >
-        <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
-          <Image
-            src={crossIcon}
-            alt="cross_icon"
-            className="absolute right-5 top-5 cursor-pointer"
-            onClick={onClose}
-          />
+    <BaseModal
+      onClose={onClose}
+      containerClassName="max-w-[480px] xl:max-w-[624px] min-h-fit"
+    >
+      <div className="relative flex flex-col px-[26px] pt-5 pb-[36px]">
+        <Image
+          src={crossIcon}
+          alt="cross_icon"
+          className="absolute right-5 top-5 cursor-pointer"
+          onClick={onClose}
+        />
 
-          <p className="text-2xl font-medium text-[#000] border-b-2 border-b-[#000] border-opacity-10 pb-5">
-            {translate("common.images_modal.heading")}
-          </p>
+        <p className="text-2xl font-medium">
+          {translate("common.images_modal.heading")}
+        </p>
 
-          <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
-            {attachementTabs.map((item, index) => (
-              <button
-                key={index}
-                className={`${
-                  activeTab === item ? "text-primary" : "text-[#393939]"
-                } text-base font-medium pb-[10px] ${
-                  activeTab === item ? "border-b-2 border-primary" : ""
-                }`}
-                onClick={() => handleTabChange(item)}
-              >
-                {translate(`common.images_modal.${item}`)}
-              </button>
-            ))}
-          </div>
-
-          {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
-
-          <div className="flex justify-end mt-5">
-            <BaseButton
-              buttonText={translate("pdf.submit")}
-              containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
-              textClassName="text-white"
-              onClick={onSubmit}
-              loading={loading || loadingGlobal}
-              disabled={loadingGlobal}
-            />
+        <div className="border-y border-y-[#000] border-opacity-10 py-[10px] my-5">
+          <div className="flex items-center gap-x-[34px]">
+            <div className="flex items-center gap-x-[14px]">
+              <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+              <span className="text-sm font-medium text-primary">{refID}</span>
+            </div>
+            <div className="flex items-center gap-x-[14px]">
+              <span className="text-sm font-normal text-[#4D4D4D]">
+                {heading}:
+              </span>
+              <span className="text-sm font-medium text-primary">{name}</span>
+            </div>
           </div>
         </div>
-      </BaseModal>
-    </>
+
+        <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
+          {attachementTabs.map((item, index) => (
+            <button
+              key={index}
+              className={`${
+                activeTab === item ? "text-primary" : "text-[#393939]"
+              } text-base font-medium pb-[10px] ${
+                activeTab === item ? "border-b-2 border-primary" : ""
+              }`}
+              onClick={() => handleTabChange(item)}
+            >
+              {translate(`common.images_modal.${item}`)}
+            </button>
+          ))}
+        </div>
+
+        {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
+
+        <div className="flex justify-end mt-5">
+          <BaseButton
+            buttonText={translate("pdf.submit")}
+            containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
+            textClassName="text-white"
+            onClick={onSubmit}
+            loading={loading || loadingGlobal}
+            disabled={loadingGlobal}
+          />
+        </div>
+      </div>
+    </BaseModal>
   );
 };
 

@@ -2,8 +2,8 @@ import React from "react";
 import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "./ContentDetailsData";
-import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+import { useRouter } from "next/router";
 
 const ReceiptContentDetails = ({
   contentDetail,
@@ -12,7 +12,7 @@ const ReceiptContentDetails = ({
   contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const { t: translate } = useTranslation();
+  const router = useRouter();
 
   return (
     <div
@@ -53,7 +53,7 @@ const ReceiptContentDetails = ({
               </clipPath>
             </defs>
           </svg> */}
-        <h2 className="text-white text-lg font-medium">
+        <h2 className="text-white text-xl font-medium">
           {translate("content.tabs_headings.receipt_content")}
         </h2>
         {/* </div> */}
@@ -78,9 +78,28 @@ const ReceiptContentDetails = ({
           </div>
 
           <div className="flex flex-col">
-            <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
-              {translate("content.details.receipt_description")}
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
+                {translate("content.details.receipt_description")}
+              </p>
+              {/* <Button
+                inputType="button"
+                onClick={() =>
+                  router.push({
+                    pathname: `/content/pdf-preview`,
+                    query: {
+                      ...router.query,
+                      contentID: contentDetail?.id,
+                      contentPdfType: ContentPDFComponents.RECEIPT_CONTENT_PDF,
+                    },
+                  })
+                }
+                className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap mb-[10px]"
+                text={translate("common.pdf_preview")}
+                id="pdf"
+                iconAlt="content PDF"
+              /> */}
+            </div>
 
             <div
               className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"
@@ -105,13 +124,19 @@ const ReceiptContentDetails = ({
             <span className="text-[#1E1E1E] font-semibold text-sm ">
               {translate("content.details.attachments")}
             </span>
-            <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">
-              {contentDetail?.receiptContent?.attachments?.map(
-                (item, index) => (
-                  <AttachmentsFiles fileName={item} key={index} />
-                )
-              )}
-            </div>
+            {contentDetail?.offerContent?.attachments.length > 0 ? (
+              <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">
+                {contentDetail?.receiptContent?.attachments?.map(
+                  (item, index) => (
+                    <AttachmentsFiles fileName={item} key={index} />
+                  )
+                )}
+              </div>
+            ) : (
+              <p className="text-center text-xl font-medium text-primary">
+                {translate("common.no_attachments")}
+              </p>
+            )}
           </div>
         </div>
       </div>

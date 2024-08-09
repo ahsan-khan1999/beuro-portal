@@ -1,23 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SettingLayout from "./SettingLayout";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 const SettingTopDataButtons = ({
   switchDetails,
   setSwitchDetails,
 }: {
-  switchDetails: number; // Change the type to number
-  setSwitchDetails: (item: number) => void; // Change the type to number
+  switchDetails: number;
+  setSwitchDetails: (item: number) => void;
 }) => {
+  const router = useRouter();
+  const tab = router.query.tab;
   const { t: translate } = useTranslation();
+  const [selectedTab, setSelectedTab] = useState<number | null>(switchDetails);
+
+  useEffect(() => {
+    if (tab && !Array.isArray(tab) && !isNaN(Number(tab))) {
+      setSwitchDetails(parseInt(tab as string, 10));
+      setSelectedTab(parseInt(tab as string, 10));
+    } else {
+      setSwitchDetails(0);
+      setSelectedTab(0);
+    }
+  }, [router.query]);
+
   const buttonsData: string[] = [
     `${translate("admin.settings.tabs_heading.account")}`,
     `${translate("admin.settings.tabs_heading.payment")}`,
     `${translate("admin.settings.tabs_heading.mail")}`,
   ];
 
-  // State to track the active button index (set to 0 for the first item by default)
-  const [activeButton, setActiveButton] = useState(0);
+  const handleTabClick = (index: number) => {
+    setSelectedTab(index);
+    setSwitchDetails(index);
+    router.push(`?tab=${index}`, undefined, { shallow: true });
+  };
 
   return (
     <SettingLayout>
@@ -25,12 +43,12 @@ const SettingTopDataButtons = ({
         {buttonsData.map((item, index) => (
           <button
             className={`w-fit px-4 py-[10px] text-[#4B4B4B] font-medium text-base ${
-              switchDetails === index
-                ? "bg-[#4A13E7] text-white rounded-md"
+              selectedTab === index
+                ? "bg-[#4A13E7] text-white rounded-md shadow-lg"
                 : ""
             }`}
             key={index}
-            onClick={() => setSwitchDetails(index)}
+            onClick={() => handleTabClick(index)}
           >
             {item}
           </button>

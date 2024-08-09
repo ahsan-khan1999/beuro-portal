@@ -6,7 +6,6 @@ import SettingLayout from "../SettingLayout";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
-  SystemSetting,
   readSystemSettings,
   readTaxSettings,
   updateSystemSetting,
@@ -136,7 +135,7 @@ const SystemSettingDetails = ({
       <SettingLayout>
         <div className="px-6 py-5 bg-white">
           <div className="rounded-lg px-2 py-3 bg-[#EDF4FF]">
-            <p className="text-[#393939] font-normal text-lg mb-3">
+            <p className="text-[#393939] font-semibold text-base mb-3">
               {translate("setting.system_setting.currency")}
             </p>
             <DropDown

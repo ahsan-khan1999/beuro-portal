@@ -8,7 +8,7 @@ import {
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { generateAddfferServiceDetailsValidation } from "@/validation/offersSchema";
+import { generateCreateInvoiceServiceDetailsValidation } from "@/validation/offersSchema";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { Total } from "@/types/offers";
 import { useEffect, useMemo, useState } from "react";
@@ -19,14 +19,14 @@ import {
 import { Service } from "@/types/service";
 import { calculateDiscount, calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import {
-  AddOfferDetailsServiceSubmitFormField,
-  AddOfferServiceDetailsDescriptionFormField,
-} from "@/components/offers/add/fields/add-offer-service-details-fields";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
-import { AddInvoiceServiceDetailsFormField } from "@/components/invoice/edit/fields/add-offer-service-details-fields";
+import {
+  EditInvoiceDetailsServiceSubmitFormField,
+  EditInvoiceServiceDetailsDescriptionFormField,
+  EditInvoiceServiceDetailsFormField,
+} from "@/components/invoice/edit/fields/edit-invoice-service-details-fields";
 import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
 
 let prevDisAmount: number | string = "";
@@ -69,7 +69,7 @@ export const useServiceInvoiceEditDetail = ({
     handleNext(EditComponentsType.addressEdit);
   };
 
-  const schema = generateAddfferServiceDetailsValidation(translate);
+  const schema = generateCreateInvoiceServiceDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -142,6 +142,7 @@ export const useServiceInvoiceEditDetail = ({
       invoiceDetails?.serviceDetail?.serviceDetail[index]?.discount
     );
   };
+
   const generateTotalPrice = (index: number) => {
     const data = getValues();
     setTimeout(() => {
@@ -278,6 +279,7 @@ export const useServiceInvoiceEditDetail = ({
     } else if (newLength < currentLength) {
       setServiceType(serviceType.slice(0, newLength));
     }
+    generateGrandTotal();
   }, [serviceFields?.length]);
 
   const handleServiceChange = (index: number, newServiceType: ServiceType) => {
@@ -326,7 +328,23 @@ export const useServiceInvoiceEditDetail = ({
     }
   };
 
-  const fields = AddInvoiceServiceDetailsFormField(
+  const handleRemoveService = (index: number) => {
+    remove(index);
+    const data = getValues();
+
+    reset({
+      ...data,
+    });
+
+    setServiceType((prev) => {
+      const newlist = [...prev];
+      newlist.splice(index, 1);
+
+      return newlist;
+    });
+  };
+
+  const fields = EditInvoiceServiceDetailsFormField(
     register,
     loading,
     control,
@@ -340,14 +358,14 @@ export const useServiceInvoiceEditDetail = ({
       invoiceDetails,
     },
     append,
-    remove,
+    handleRemoveService,
     serviceType,
     handleServiceChange,
     serviceFields,
     setValue
   );
 
-  const fieldsDescription = AddOfferServiceDetailsDescriptionFormField(
+  const fieldsDescription = EditInvoiceServiceDetailsDescriptionFormField(
     register,
     loading,
     control,
@@ -372,7 +390,8 @@ export const useServiceInvoiceEditDetail = ({
     serviceFields,
     setValue
   );
-  const submitFields = AddOfferDetailsServiceSubmitFormField(
+
+  const submitFields = EditInvoiceDetailsServiceSubmitFormField(
     loading,
     handleBack
   );

@@ -11,6 +11,7 @@ export interface GlobalState {
     cardId?: number;
     data?: any;
   };
+  currentLanguage: string;
 }
 
 export type TranslatorFunction = (value: any) => any;

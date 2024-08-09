@@ -3,19 +3,40 @@ import { tabArrayTypes } from "@/types";
 import AddressDetailsData from "./AddressDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
-import SwitchedComp from "./SwitchedComp";
 import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
-import { useTranslation } from "next-i18next";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import OfferEditImages from "../OfferEditImages";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { staticEnums } from "@/utils/static";
+import { useTranslation } from "next-i18next";
 
 export enum ComponentsType {
   customer,
   address,
   service,
   additional,
+}
+
+export interface OfferDetailsProps {
+  offerDetails: OffersTableRowTypes;
+  loading: boolean;
+  handleUpdateDiscount: (discount: number) => void;
+  currency?: string;
+  shareImgModal: (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => void;
+  handleImagesUpload: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
 }
 
 const OffersDetailsData = ({
@@ -26,19 +47,9 @@ const OffersDetailsData = ({
   shareImgModal,
   handleImagesUpload,
   handleImageSlider,
-}: {
-  offerDetails: OffersTableRowTypes;
-  loading: boolean;
-  handleUpdateDiscount: (discount: number) => void;
-  currency?: string;
-  shareImgModal: Function;
-  handleImagesUpload: (
-    item: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
-  handleImageSlider: () => void;
-}) => {
+}: OfferDetailsProps) => {
   const [tabType, setTabType] = useState<number>(0);
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     const elements = document.querySelectorAll("[data-scroll-target]");
@@ -46,8 +57,6 @@ const OffersDetailsData = ({
       elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, []);
-
-  const { t: translate } = useTranslation();
 
   const componentArray = [
     <CustomerDetailsData offerDetails={offerDetails} />,
@@ -109,25 +118,38 @@ const OffersDetailsData = ({
     },
   ];
 
-  const scrollHandler = (index: number) => {
-    if (index === 0) {
-      window.scrollTo({ behavior: "smooth", top: 0 });
-    }
-    if (index === 1) {
-      window.scrollTo({ behavior: "smooth", top: 600 });
-    }
-    if (index === 2) {
-      window.scrollTo({ behavior: "smooth", top: 980 });
-    }
-    if (index === 3) {
-      window.scrollTo({ behavior: "smooth", top: 1500 });
+  const handleScrollToTop = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    const offset = 380;
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
+
+  const customerType = offerDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
+  const name =
+    customerType === 1
+      ? offerDetails?.leadID?.customerDetail?.companyName
+      : offerDetails?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
-        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 2xl:mb-0">
+        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 2xl:mb-0">
           {tabSection.map((item, index) => (
             <DetailsTab
               key={index}
@@ -137,7 +159,8 @@ const OffersDetailsData = ({
               name={item.name}
               icon={item.icon}
               selectedTab={index}
-              onScroll={scrollHandler}
+              // onScroll={scrollHandler}
+              onItemSelected={handleScrollToTop}
             />
           ))}
         </div>
@@ -147,16 +170,21 @@ const OffersDetailsData = ({
             shareImgModal={shareImgModal}
             handleImagesUpload={handleImagesUpload}
             tabType={tabType}
+            id={offerDetails?.id}
+            refID={offerDetails?.offerNumber}
+            name={name}
+            heading={heading}
             handleImageSlider={handleImageSlider}
+            className="2xl:w-[247px]"
           />
         </div>
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[330px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[280px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
-            <LoadingState />
+            <CustomLoader />
           </div>
         ) : (
           <div className="flex flex-col gap-y-5 w-full">

@@ -6,7 +6,8 @@ import TableFunctions from "./table/TableFunctions";
 import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import useCustomer from "@/hooks/admin/customer/useCustomer";
-import { useEmptyStates } from "@/utils/hooks";
+import { useAdminEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Customers() {
   const {
@@ -18,33 +19,42 @@ export default function Customers() {
     handleFilterChange,
     loading,
     setFilter,
-    currentPage
-} = useCustomer();
+    currentPage,
+    handleStatusChange,
+    totalCount,
+    renderModal,
+  } = useCustomer();
 
-const CurrentComponent = useEmptyStates(
-  <TableRow currentPageRows={currentPageRows} />,
-  currentPageRows?.length > 0,
-  loading
-);
+  const CurrentComponent = useAdminEmptyStates(
+    <TableRow
+      currentPageRows={currentPageRows}
+      onStatusChange={handleStatusChange}
+    />,
+    totalCount !== 0,
+    loading
+  );
 
-return (
-  <Layout>
-    <TableFunctions
-      filter={filter}
-      setFilter={setFilter}
-      handleFilterChange={handleFilterChange}
-    />
-    <TableLayout>
-      <TableHeading />
-      {CurrentComponent}
-    </TableLayout>
+  return (
+    <Layout>
+      <TableFunctions
+        filter={filter}
+        setFilter={setFilter}
+        handleFilterChange={handleFilterChange}
+      />
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeading />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
 
-    <Pagination
-      totalItems={totalItems}
-      itemsPerPage={itemsPerPage}
-      onPageChange={handlePageChange}
-      currentPage={currentPage}
-    />
-  </Layout>
-);
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
+      {renderModal()}
+    </Layout>
+  );
 }

@@ -1,21 +1,22 @@
+import React from "react";
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
-import React, { useState } from "react";
-
 import CustomerDetailsData from "./customer-details-data";
 import useCustomerDetailAdmin from "@/hooks/admin/customer/useCustomerDetail";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
 import DetailsData from "../DetailsData";
+import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
 
 const CustomerDetails = () => {
   const {
     companyDetails,
     isCustomerFree,
     handleAreYouSure,
-    handlePreviousClick,
+    handleBack,
     renderModal,
     handleStatusChange,
     loading,
+    handleMakeAccountFree,
+    deleteHandler,
   } = useCustomerDetailAdmin();
 
   return (
@@ -24,15 +25,16 @@ const CustomerDetails = () => {
         <DetailsCard>
           <DetailsData
             customerDetail={companyDetails}
-            handlePreviousClick={handlePreviousClick}
-            handleAreYouSure={handleAreYouSure}
+            onHandleBack={handleBack}
+            handleAreYouSure={handleMakeAccountFree}
             isCustomerFree={isCustomerFree}
             handleStatusChange={handleStatusChange}
+            onDelete={deleteHandler}
           />
         </DetailsCard>
-        <div className="mt-8">
+        <div className="mt-5">
           {loading ? (
-            <LoadingState />
+            <CustomPuffLoader />
           ) : (
             <CustomerDetailsData customerDetail={companyDetails} />
           )}

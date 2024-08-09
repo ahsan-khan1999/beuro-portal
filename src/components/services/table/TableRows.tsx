@@ -2,13 +2,15 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
 import { formatDateTimeToDate } from "@/utils/utility";
+import { useTranslation } from "next-i18next";
 
 const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   return (
     <div>
-      {servicesData?.map((item) => {
+      {servicesData?.map((item, index) => {
         return (
           <div className="flex">
             <div className="mlg:w-full">
@@ -20,7 +22,9 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
                     query: { ...router.query, service: item.id },
                   })
                 }
-                className="px-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 items-center xs:w-fit mlg:w-full xlg:w-auto grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(150px,_150px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(300px,300px)] mlg:grid-cols-[minmax(70px,_70px),minmax(130px,_130px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100%)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_4fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_3fr)] border-t border-t-[#E7EAEE]"
+                className={` ${
+                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-4 xlg:gap-x-2 maxSize:gap-x-3 items-center xs:w-fit mlg:w-full xlg:w-auto grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(150px,_150px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(300px,300px)] mlg:grid-cols-[minmax(70px,_70px),minmax(130px,_130px)_minmax(120px,_120px)_minmax(80px,_80px)_minmax(80px,_80px)_minmax(100px,_100%)] xlg:grid-cols-[minmax(80px,_80px),minmax(150px,_4fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_3fr)] border-t border-t-[#E7EAEE]`}
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <span className="py-4 truncate">{item.serviceName}</span>
@@ -33,7 +37,6 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
               </div>
             </div>
 
-            {/* <div className="flex"> */}
             <div className="grid grid-cols-[minmax(90px,_90px)]">
               <span
                 className="flex justify-center items-center cursor-pointer"
@@ -65,7 +68,6 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
                 </div>
               </span>
             </div>
-            {/* </div> */}
           </div>
         );
       })}

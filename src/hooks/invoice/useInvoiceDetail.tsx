@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { deleteContract } from "@/api/slices/contract/contractSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
@@ -38,6 +37,17 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
+  const {
+    invoiceDetails,
+    loading,
+    invoice,
+    collectiveInvoice,
+    collectiveReciept,
+    totalCount,
+    loadingInvoice,
+    loadingReceipt,
+  } = useAppSelector((state) => state.invoice);
+
   const [isSendEmail, setIsSendEmail] = useState(false);
   const [activeTab, setActiveTab] = useState("invoice");
   const invoiceDetailTabs = ["invoice", "receipt"];
@@ -45,15 +55,6 @@ export default function useInvoiceDetail() {
   const { modal } = useAppSelector((state) => state.global);
   const { systemSettings } = useAppSelector((state) => state.settings);
 
-  const {
-    invoiceDetails,
-    loading,
-    invoice,
-    collectiveInvoice,
-    collectiveReciept,
-  } = useAppSelector((state) => state.invoice);
-
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const id = router.query.invoice;
 
@@ -86,6 +87,36 @@ export default function useInvoiceDetail() {
       );
     }
   }, [id]);
+
+  useEffect(() => {
+    const { tab } = router.query;
+
+    const updateActiveTabFromQuery = () => {
+      if (tab && invoiceDetailTabs.includes(tab as string)) {
+        setActiveTab(tab as string);
+      } else if (invoice) {
+        if (collectiveInvoice && collectiveInvoice.length > 0) {
+          setActiveTab("invoice");
+        } else if (collectiveReciept && collectiveReciept.length > 0) {
+          setActiveTab("receipt");
+        } else {
+          setActiveTab(invoiceDetailTabs[0]);
+        }
+      }
+    };
+
+    updateActiveTabFromQuery();
+
+    const handleRouteChange = () => {
+      updateActiveTabFromQuery();
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [invoice, collectiveInvoice, collectiveReciept, router.query]);
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -143,21 +174,46 @@ export default function useInvoiceDetail() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const handleNotes = (item: string, e?: React.MouseEvent<HTMLSpanElement>) => {
-    if (e) {
-      e.stopPropagation();
-    }
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+
     dispatch(
       readNotes({ params: { type: "invoice", id: invoiceDetails?.id } })
     );
-    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+    dispatch(
+      updateModalType({
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
-  const handleAddNote = (id: string) => {
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ADD_NOTE,
-        data: { id: id, type: "invoice" },
+        data: {
+          id: id,
+          type: "invoice",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -169,11 +225,24 @@ export default function useInvoiceDetail() {
       dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleEditNote = (id: string, note: string) => {
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.EDIT_NOTE,
-        data: { id: id, type: "invoice", data: note },
+        data: {
+          id: id,
+          type: "invoice",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
       })
     );
   };
@@ -258,7 +327,7 @@ export default function useInvoiceDetail() {
       <UpdateNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.update_note")}
+        mainHeading={translate("common.update_note")}
       />
     ),
 
@@ -266,7 +335,7 @@ export default function useInvoiceDetail() {
       <AddNewNote
         onClose={onClose}
         handleNotes={handleNotes}
-        heading={translate("common.add_note")}
+        mainHeading={translate("common.add_note")}
       />
     ),
 
@@ -282,7 +351,7 @@ export default function useInvoiceDetail() {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.admin_setting_des")}
+        subHeading={translate("common.modals.update_success")}
         route={route}
       />
     ),
@@ -385,36 +454,6 @@ export default function useInvoiceDetail() {
     updateQuery(router, router.locale as string);
   };
 
-  useEffect(() => {
-    const { tab } = router.query;
-
-    const updateActiveTabFromQuery = () => {
-      if (tab && invoiceDetailTabs.includes(tab as string)) {
-        setActiveTab(tab as string);
-      } else if (invoice) {
-        if (collectiveInvoice && collectiveInvoice.length > 0) {
-          setActiveTab("invoice");
-        } else if (collectiveReciept && collectiveReciept.length > 0) {
-          setActiveTab("receipt");
-        } else {
-          setActiveTab(invoiceDetailTabs[0]);
-        }
-      }
-    };
-
-    updateActiveTabFromQuery();
-
-    const handleRouteChange = () => {
-      updateActiveTabFromQuery();
-    };
-
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [invoice, collectiveInvoice, collectiveReciept, router.query]);
-
   return {
     invoiceDetails,
     renderModal,
@@ -439,5 +478,8 @@ export default function useInvoiceDetail() {
     loading,
     systemSettings,
     handleInvoiceUpdate,
+    totalCount,
+    loadingInvoice,
+    loadingReceipt,
   };
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import EmailCardLayout from "./PdfCardLayout";
 import { useRouter } from "next/router";
 import { BaseButton } from "@/base-components/ui/button/base-button";
@@ -23,15 +23,6 @@ const EmailCard = ({
 }: EmailHeaderProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
-  // const handleBackToDetail = () => {
-  //   const { status, page, text, sort } = router.query;
-
-  //   router.push({
-  //     pathname: "/offers/details",
-  //     query: { status, page, text, sort, offer: offerId },
-  //   });
-  // };
 
   const handleBackToDetail = () => {
     const { status, page, text, sort, date, leadSource } = router.query;
@@ -133,9 +124,7 @@ const EmailCard = ({
             {translate("offer_pdf_card.offer_id")}:
           </span>
 
-          <span className="text-[#4B4B4B] text-base font-medium">
-            {offerNo}
-          </span>
+          <span className="text-primary text-base font-medium">{offerNo}</span>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[#4D4D4D] text-base font-normal">

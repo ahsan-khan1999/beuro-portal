@@ -69,7 +69,7 @@ export interface SubInvoiceTableRowTypes {
   dateOfNextInvoice: string;
   emailStatus: "Pending" | "Sent" | "Failed";
   mail: {
-    mailStatus: "open" | "failed" | "pending";
+    mailStatus: 0 | 1;
   };
   frequency: string;
   invoiceID: InvoiceTableRowTypes;
@@ -93,7 +93,13 @@ export interface InvoiceEmptyStateType {
 export interface InvoiceCardContentProps {
   handleInvoiceCreation: () => void;
   invoiceDetails: InvoiceTableRowTypes;
-  handleNotes: (item: string, e?: React.MouseEvent<HTMLSpanElement>) => void;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleRecurringInvoiceCreation: () => void;
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;

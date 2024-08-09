@@ -6,7 +6,7 @@ export const RegisterationForm = ({
   onSubmit,
   errors,
 }: RegistrationFormProps) => {
-  const defaultClassName = "mt-4  ";
+  const defaultClassName = "mt-4";
   return (
     <Form
       formFields={fields}

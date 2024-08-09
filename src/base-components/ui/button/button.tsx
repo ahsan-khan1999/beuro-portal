@@ -37,15 +37,15 @@ export const Button = ({
     <button
       id={id}
       type={inputType}
-      className={` hover:bg-buttonHover hover:text-white text-dark  ${
-        success && "flex items-center gap-x-2  "
+      className={` hover:bg-buttonHover hover:text-white text-dark ${
+        success && "flex items-center gap-x-2"
       } flex items-center justify-center ${classes}`}
       onClick={() => {
         onClick && onClick();
       }}
       disabled={disabled || false}
     >
-      {icon && <Image src={icon} alt={iconAlt} className="mr-1 " />}{" "}
+      {icon && <Image src={icon} alt={iconAlt} className="mr-1" />}{" "}
       {success ? "Geändert" : text}
       {/* {success && <ButtonSuccessIcon />} */}
     </button>

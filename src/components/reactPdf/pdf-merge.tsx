@@ -1,5 +1,4 @@
-import LoadingState from "@/base-components/loadingEffect/loading-state";
-import { useEffect } from "react";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export const Merger = ({
   mergedPdfFileUrl,
@@ -8,26 +7,16 @@ export const Merger = ({
   mergedPdfFileUrl: string | null;
   isPdfRendering?: boolean;
 }) => {
-
   return isPdfRendering ? (
-    <LoadingState />
+    <CustomLoader />
   ) : (
     mergedPdfFileUrl && (
-      // <iframe
-      //   height="670"
-      //   src={mergedPdfFileUrl}
-      //   title="Merged PDF Document"
-      //   width="100%"
-      //   style={{ border: "none" }}
-      // />
-
-
       <embed
         src={mergedPdfFileUrl}
         width={"100%"}
         title="PDF"
         id="downloadButton"
-        style={{height:"100vh"}}
+        style={{ height: "100vh" }}
       />
     )
   );
