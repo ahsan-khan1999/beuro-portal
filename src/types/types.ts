@@ -1429,6 +1429,18 @@ export interface ReportDocumentHeaderProps {
   language?: string;
 }
 
+export interface ReportPDFOfferDetailsProps {
+  language?: string;
+  employees: number;
+  deliveryVehicle: number;
+  hours: number;
+  cleaningWithHandoverGuarantee: number;
+  broomClean: number;
+  priceCHF: number;
+  remarks: string;
+  noteAndInformation: string;
+}
+
 export interface LivingRoomDetailsProps {
   sofa: number;
   teacherDesk: number;

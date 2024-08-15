@@ -1,4 +1,4 @@
-import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
+import { Document, Font, Page, StyleSheet } from "@react-pdf/renderer";
 import { ReportAddressDetails } from "./report-address-details";
 import { HouseItemWrapper } from "./house-item-wrapper";
 import shelfIcon from "@/assets/pngs/shelf.png";
@@ -52,6 +52,7 @@ import { PdfPreviewProps } from "@/types";
 import { Header } from "../reactPdf/header";
 import { Footer } from "../reactPdf/footer";
 import { ContactAddress } from "../reactPdf/contact-address";
+import { ReportPDFOfferDetails } from "./offer-details";
 
 export interface HouseDetailObjectProps {
   icon: StaticImageData;
@@ -857,6 +858,16 @@ const ReportPdf = ({
           // isBreakPage={true}
         />
 
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+      <Page style={styles.body}>
+        <Header {...headerDetails} language={lang} />
+        <ReportPDFOfferDetails language={lang} {...offerDetails} />
         <Footer
           {...{
             emailTemplateSettings,
