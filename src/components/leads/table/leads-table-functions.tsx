@@ -6,7 +6,7 @@ export const LeadsTableFunctions = ({
   filter,
   setFilter,
   handleFilterChange,
-  isAgent
+  isAgent,
 }: FiltersComponentProps) => {
   return (
     <div className="flex flex-col xMaxProLarge:flex-row justify-between xMaxProLarge:items-center gap-y-3 mb-4">

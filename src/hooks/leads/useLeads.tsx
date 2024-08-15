@@ -33,8 +33,8 @@ const useLeads = () => {
     (state) => state.lead
   );
 
-  const { query } = useRouter();
-  const page = query?.page as unknown as number;
+  const router = useRouter();
+  const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { t: translate } = useTranslation();
@@ -57,7 +57,7 @@ const useLeads = () => {
   }, []);
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(router.query.page as string, 10);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -66,11 +66,11 @@ const useLeads = () => {
       setCurrentPage(1);
     }
 
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchedDate = query?.date as string;
-    const searchNoteType = query?.noteType as string;
+    const queryStatus = router.query?.status;
+    const searchQuery = router.query?.text as string;
+    const sortedValue = router.query?.sort as string;
+    const searchedDate = router.query?.date as string;
+    const searchNoteType = router.query?.noteType as string;
 
     const queryParams =
       queryStatus ||
@@ -81,7 +81,7 @@ const useLeads = () => {
 
     if (queryParams !== undefined) {
       const filteredStatus =
-        query?.status === "None"
+        router.query?.status === "None"
           ? "None"
           : queryParams
               .toString()
@@ -122,7 +122,7 @@ const useLeads = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
       });
     }
-  }, [query]);
+  }, [router.query]);
 
   const totalItems = totalCount;
   const itemsPerPage = 15;

@@ -127,6 +127,7 @@ export interface detailScreenCardsLayout {
   currentFormStage?: string;
   children: ReactNode;
   containerClassName?: string;
+  isAgent?:boolean
 }
 
 export interface TableCardLayoutProps {
@@ -1001,6 +1002,7 @@ export interface FilterProps {
   filter: FilterType;
   setFilter: React.Dispatch<SetStateAction<FilterType>>;
   onFilterChange: (filters: FilterType) => void;
+  containerClassName?: string;
 }
 
 interface ItemList {

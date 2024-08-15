@@ -21,7 +21,7 @@ export default function SelectField({
   labelClassName,
 }: OptionsFieldProps) {
   const containerClasses = combineClasses(
-    "relative flex items-center justify-center w-[120px]",
+    "relative flex items-center justify-center min-w-[120px] w-fit",
     containerClassName
   );
 

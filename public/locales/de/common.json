@@ -1011,6 +1011,7 @@
     "table_headings": {
       "id": "ID",
       "name": "Name",
+      "customer": "Kunde",
       "email": "E-Mail",
       "phone": "Telefon",
       "desire_date": "Wunschdatum",
@@ -1136,7 +1137,7 @@
       "date": "Datum",
       "time": "Zeit",
       "agent": "Agent",
-      "status": "Terminstatus",
+      "status": "Status",
       "offer_status": "Angebotsstatus",
       "action": "Aktion"
     },

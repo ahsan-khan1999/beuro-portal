@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import React from "react";
 
-export const LeadsTableHeadings = () => {
+export const LeadsTableHeadings = ({ isAgent }: { isAgent?: boolean }) => {
   const { t: translate } = useTranslation();
   return (
     <div className="flex">

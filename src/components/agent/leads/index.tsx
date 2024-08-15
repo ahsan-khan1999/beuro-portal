@@ -53,7 +53,7 @@ export default function AgentLeads() {
         isAgent={true}
       />
       <TableCardLayout>
-        <TableLayout>
+        <TableLayout >
           <LeadsTableHeadings />
           {CurrentComponent}
         </TableLayout>

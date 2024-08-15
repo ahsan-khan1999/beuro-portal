@@ -1018,6 +1018,7 @@
     "table_headings": {
       "id": "ID",
       "name": "Name",
+      "customer": "Customer",
       "email": "Email",
       "phone": "Phone",
       "desire_date": "Desire Date",
@@ -1144,7 +1145,7 @@
       "date": "Date",
       "time": "Time",
       "agent": "Agent",
-      "status": "Appointment Status",
+      "status": "Status",
       "offer_status": "Offer Status",
       "action": "Action"
     },
@@ -1172,7 +1173,7 @@
       "time": "Time",
       "no_data_found": "No reports submitted",
       "no_report_found": "No report Found",
-      "created_by":"Created by"
+      "created_by": "Created by"
     },
     "report_detail": {
       "contact_tab": "Contact Details",

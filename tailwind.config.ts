@@ -22,6 +22,9 @@ module.exports = {
       screens: {
         xs: "375px",
         md: "900px",
+        xMini: "768px",
+        xAir: "820px",
+        xPro: "1025px",
         mlg: "1100px",
         xlg: "1200px",
         xlgg: "1220px",

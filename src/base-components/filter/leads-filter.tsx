@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
-import { formatDateForDatePicker } from "@/utils/utility";
+import { combineClasses, formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
@@ -16,6 +16,7 @@ export default function LeadsFilter({
   filter,
   setFilter,
   onFilterChange,
+  containerClassName,
 }: FilterProps) {
   const router = useRouter();
 
@@ -81,8 +82,13 @@ export default function LeadsFilter({
     }));
   };
 
+  const defaultClasses = combineClasses(
+    "relative flex my-auto cursor-pointer w-[85px] z-10",
+    containerClassName
+  );
+
   return (
-    <div className="relative flex my-auto cursor-pointer" ref={ref}>
+    <div className={defaultClasses} ref={ref}>
       <Button
         inputType="button"
         onClick={handleExtraFilterToggle}

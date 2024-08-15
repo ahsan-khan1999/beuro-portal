@@ -66,7 +66,7 @@ export interface OptionsFieldProps {
   title?: string;
   label?: string;
   border?: number;
-  handleChange: (value: string) => void;
+  handleChange: (value: string, isAgent?: boolean) => void;
   options: { label: string; value: string }[];
   dropDownIconClassName?: string;
   containerClassName?: string;
