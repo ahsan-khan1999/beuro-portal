@@ -59,7 +59,7 @@ export const LeadsTableRows = ({
   return (
     <div
       className={`overflow-y-visible ${
-        dataToAdd && dataToAdd.length <= 4 ? "h-[550px]" : ""
+        !isAgent && dataToAdd && dataToAdd.length <= 4 ? "h-[550px]" : ""
       }`}
     >
       {dataToAdd?.map((item: Lead, index: number) => {

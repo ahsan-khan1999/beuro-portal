@@ -49,6 +49,7 @@ export interface InputFieldProps {
   handleChange: (value: string) => void;
   onEnterPress?: () => void;
   containerClassName?: string;
+  inputDivClassName?: string;
   textClassName?: string;
   placeholder?: string;
   bgColor?: boolean;

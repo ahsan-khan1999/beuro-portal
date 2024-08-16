@@ -1,8 +1,9 @@
 import React from "react";
 import { FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
-import AppointmentsFilter from "./appointments-filter";
-import AppointmentsTabletFilters from "./tablet-filters";
+import AppointmentsFilter from "./appointments-filters";
+import AppointmentsTabletFilters from "./appointment-tablet-filters";
+import AppointmentsMobileFilters from "../mobile/appointment-mobile-filters";
 
 export const AppointmentTableFunctions = ({
   filter,
@@ -24,7 +25,7 @@ export const AppointmentTableFunctions = ({
 
       {isAgent ? (
         <>
-          <div className="block mlg:hidden">
+          <div className="hidden xMini:block mlg:hidden">
             <AppointmentsTabletFilters
               filter={filter}
               setFilter={setFilter}
@@ -32,9 +33,17 @@ export const AppointmentTableFunctions = ({
               isAgent={isAgent}
             />
           </div>
-
           <div className="hidden mlg:block">
             <AppointmentsFilter
+              filter={filter}
+              setFilter={setFilter}
+              handleFilterChange={handleFilterChange}
+              isAgent={isAgent}
+            />
+          </div>
+
+          <div className="block xMini:hidden">
+            <AppointmentsMobileFilters
               filter={filter}
               setFilter={setFilter}
               handleFilterChange={handleFilterChange}
