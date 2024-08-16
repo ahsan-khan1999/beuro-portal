@@ -23,7 +23,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { AppointmentsIcon } from "@/assets/svgs/components/sideBar/Appointments";
-import toggleCrossIcon from "@/assets/pngs/toggle-cross-icon.png";
 import { CrossIcon } from "@/assets/svgs/components/cross-icon";
 
 export const svgs = {

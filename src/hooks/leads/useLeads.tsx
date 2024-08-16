@@ -112,9 +112,9 @@ const useLeads = () => {
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
 
-      // if (isAgentRoute) {
-      //   updatedFilter.today = true;
-      // }
+      if (isAgentRoute) {
+        updatedFilter.today = true;
+      }
 
       setFilter(updatedFilter);
 

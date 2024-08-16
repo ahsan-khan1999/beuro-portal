@@ -15,7 +15,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex flex-col lg:flex-row  items-center gap-[47px]",
+        className: "flex flex-col mlg:flex-row  items-center gap-[47px]",
         children: [
           {
             containerClass: "flex justify-center items-center",
@@ -36,7 +36,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
               type: Field.div,
               id: "div-field",
               className:
-                "grid grid-cols-1 lg:grid-cols-2 items-center gap-y-[10px] gap-x-4 rounded-lg p-4 bg-[#EDF4FF] w-full",
+                "grid grid-cols-1 mlg:grid-cols-2 items-center gap-y-[10px] gap-x-4 rounded-lg p-4 bg-[#EDF4FF] w-full",
               children: [
                 {
                   containerClass: "mb-0",

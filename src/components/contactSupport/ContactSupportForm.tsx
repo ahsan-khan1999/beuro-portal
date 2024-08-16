@@ -8,7 +8,6 @@ const ContactSupportForm = ({
 }: {
   requestSubmitHandler: Function;
 }) => {
-  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     userContactSupport(requestSubmitHandler);
 
@@ -25,7 +24,6 @@ const ContactSupportForm = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </FormCard>

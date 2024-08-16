@@ -35,16 +35,6 @@ export const useReportDetails = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(readReportDetails({ params: { filter: id } })).then(
-        (res: CustomerPromiseActionType) => {
-          dispatch(setReportDetails(res.payload));
-        }
-      );
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (id) {
       dispatch(readAppointmentDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setAppointmentDetails(res.payload));
@@ -52,6 +42,26 @@ export const useReportDetails = () => {
       );
     }
   }, [id]);
+
+  // useEffect(() => {
+  //   if (id) {
+  //     dispatch(readReportDetails({ params: { filter: id } })).then(
+  //       (res: CustomerPromiseActionType) => {
+  //         dispatch(setReportDetails(res.payload));
+  //       }
+  //     );
+  //   }
+  // }, [id]);
+
+  useEffect(() => {
+    if (id && appointmentDetails?.isReportSubmitted) {
+      dispatch(readReportDetails({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setReportDetails(res.payload));
+        }
+      );
+    }
+  }, [id, appointmentDetails?.isReportSubmitted]);
 
   const handleCreateReport = () => {
     router.push({

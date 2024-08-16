@@ -8,6 +8,7 @@ export const ReportDetails = () => {
   const {
     translate,
     isLoading,
+    loading,
     handleStatusUpdate,
     renderModal,
     reportDetails,
@@ -22,7 +23,7 @@ export const ReportDetails = () => {
 
   return (
     <>
-      {isLoading ? (
+      {loading ? (
         <CustomLoader />
       ) : !appointmentDetails?.isReportSubmitted ? (
         <>
@@ -36,6 +37,7 @@ export const ReportDetails = () => {
             <AppointmentsDetailCard
               onStatusChange={handleStatusUpdate}
               appointmentDetails={appointmentDetails}
+              isAgent={true}
             />
           </div>
           <div className="bg-white flex items-center justify-center mt-6">
@@ -59,6 +61,7 @@ export const ReportDetails = () => {
             <AppointmentsDetailCard
               onStatusChange={handleStatusUpdate}
               appointmentDetails={appointmentDetails}
+              isAgent={true}
             />
           </div>
           <div className="2xl:mt-[365px] w-full 2xl:block mb-10">

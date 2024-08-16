@@ -22,8 +22,15 @@ export const AppointmentPdfCard = ({
   const { t: translate } = useTranslation();
 
   const handleBack = () => {
-    router.pathname = "/agent/appointments";
+    if (router.query.isCompany) {
+      router.pathname = "/appointments";
+    } else {
+      router.pathname = "/agent/appointments";
+    }
+
     delete router.query["appointment"];
+    delete router.query["reportId"];
+    delete router.query["isCompany"];
     updateQuery(router, router.locale as string);
   };
 

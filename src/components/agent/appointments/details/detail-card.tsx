@@ -68,8 +68,8 @@ export const AppointmentsDetailCard = ({
 
       <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
         <div className="flex flex-col gap-y-[34px] mt-[34px]">
-          <div className="grid grid-cols-2 mlg:grid-cols-3 items-center mlg:gap-x-20 gap-y-5">
-            <div className="flex items-center gap-x-[10px]">
+          <div className="grid grid-cols-2 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-5">
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[65px] w-fit">
                 {translate("appointments.detail_data.lead_id")}:
               </span>
@@ -77,7 +77,7 @@ export const AppointmentsDetailCard = ({
                 {appointmentDetails?.leadID?.refID}
               </span>
             </div>
-            <div className="flex items-center gap-x-[10px]">
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[130px] w-fit">
                 {translate("appointments.detail_data.appointment_id")}:
               </span>
@@ -85,7 +85,7 @@ export const AppointmentsDetailCard = ({
                 {appointmentDetails?.leadID?.refID}
               </span>
             </div>
-            <div className="flex items-center gap-x-[10px]">
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[60px] w-fit">
                 {translate("appointments.detail_data.status")}:
               </span>
@@ -108,8 +108,18 @@ export const AppointmentsDetailCard = ({
               />
             </div>
           </div>
-          <div className="grid grid-cols-3 items-center gap-x-20">
-            <div className="flex items-center gap-x-[10px]">
+          <div className="grid grid-cols-2 xMini:grid-cols-3 items-center mlg:gap-x-20">
+            {appointmentDetails?.leadID?.customerDetail?.companyName && (
+              <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+                <span className="text-base text-[#5C5C5C] font-medium min-w-[140px]">
+                  {translate("appointments.table_headings.company_name")}:
+                </span>
+                <span className="text-base text-primary font-nomal truncate">
+                  {appointmentDetails?.leadID?.customerDetail?.companyName}
+                </span>
+              </div>
+            )}
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium">
                 {translate("appointments.detail_data.date")}:
               </span>
@@ -117,7 +127,7 @@ export const AppointmentsDetailCard = ({
                 {formatDateTimeToDate(appointmentDetails?.date)}
               </span>
             </div>
-            <div className="flex items-center gap-x-[10px]">
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium">
                 {translate("appointments.detail_data.time")}:
               </span>
