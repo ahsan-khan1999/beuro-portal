@@ -7,6 +7,7 @@ import { useAppointments } from "@/hooks/appointments/useAppointments";
 import { AppointmentTableRows } from "./table/appointment-table-rows";
 import { AppointmentTableFunctions } from "./table/appointment-table-functions";
 import { AppointmentTableHeadings } from "./table/apppointment-table-headings";
+import { LeadTableRecordCard } from "./mobile/table-record-card";
 
 export default function AgentAppointments() {
   const {
@@ -22,6 +23,7 @@ export default function AgentAppointments() {
     handleStatusUpdate,
     currentPageRows,
     handleAppointmentCreate,
+    totalCount
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -31,7 +33,7 @@ export default function AgentAppointments() {
       onAppointmentCreate={handleAppointmentCreate}
       isAgent={true}
     />,
-    currentPageRows.length > 0,
+    totalCount !== 0,
     isLoading
   );
 
@@ -43,12 +45,19 @@ export default function AgentAppointments() {
         handleFilterChange={handleFilterChange}
         isAgent={true}
       />
-      <TableCardLayout>
-        <TableLayout isAgent={true}>
-          <AppointmentTableHeadings isAgent={true} />
-          {CurrentComponent}
-        </TableLayout>
-      </TableCardLayout>
+
+      <div className="ml-5 block xMini:hidden">
+        <LeadTableRecordCard dataToAdd={currentPageRows} />
+      </div>
+
+      <div className="hidden xMini:block">
+        <TableCardLayout>
+          <TableLayout isAgent={true}>
+            <AppointmentTableHeadings isAgent={true} />
+            {CurrentComponent}
+          </TableLayout>
+        </TableCardLayout>
+      </div>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

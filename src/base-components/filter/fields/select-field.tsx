@@ -86,7 +86,7 @@ export default function SelectField({
   return (
     <div className={containerClasses} ref={ref}>
       <div
-        className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg border border-[#ccc]  min-w-[105px] w-fit"
+        className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg border border-[#ccc] min-w-[105px] w-fit"
         onClick={handleToggle}
       >
         <span className={labelDefualtClasses}>{selectedLabel}</span>

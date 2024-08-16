@@ -11,6 +11,7 @@ const InputField = forwardRef(
       onEnterPress,
       textClassName,
       containerClassName,
+      inputDivClassName,
       iconDisplay,
       bgColor,
       placeholder,
@@ -34,6 +35,10 @@ const InputField = forwardRef(
     );
 
     const containerClasses = combineClasses("w-fit", containerClassName);
+    const inputDivClasses = combineClasses(
+      "relative flex w-fit",
+      inputDivClassName
+    );
 
     const handleInputChange = (newValue: string) => {
       handleChange(newValue);
@@ -46,7 +51,7 @@ const InputField = forwardRef(
 
     return (
       <div className={containerClasses}>
-        <div className="relative flex w-fit">
+        <div className={inputDivClasses}>
           <input
             id="searchBar"
             type="text"

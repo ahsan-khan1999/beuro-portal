@@ -42,23 +42,6 @@ const useLeads = () => {
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
 
-  const [filter, setFilter] = useState<FilterType>({
-    sort: FiltersDefaultValues.None,
-    noteType: FiltersDefaultValues.None,
-    text: FiltersDefaultValues.None,
-    date: {
-      $gte: FiltersDefaultValues.$gte,
-      $lte: FiltersDefaultValues.$lte,
-    },
-    status: FiltersDefaultValues.None,
-  });
-
-  useEffect(() => {
-    localStoreUtil.remove_data("lead");
-    dispatch(setLeadDetails(DEFAULT_LEAD));
-    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-  }, []);
-
   useEffect(() => {
     const parsedPage = parseInt(router.query.page as string, 10);
     let resetPage = null;
@@ -132,6 +115,17 @@ const useLeads = () => {
     }
   }, [router.query]);
 
+  const [filter, setFilter] = useState<FilterType>({
+    sort: FiltersDefaultValues.None,
+    noteType: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+    status: FiltersDefaultValues.None,
+  });
+
   const totalItems = totalCount;
   const itemsPerPage = 15;
 
@@ -141,6 +135,12 @@ const useLeads = () => {
   const handleFilterChange = () => {
     setCurrentPage(1);
   };
+
+  useEffect(() => {
+    localStoreUtil.remove_data("lead");
+    dispatch(setLeadDetails(DEFAULT_LEAD));
+    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+  }, []);
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));

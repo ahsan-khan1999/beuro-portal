@@ -48,7 +48,8 @@ export const readAppointments: AsyncThunk<boolean, object, object> | any =
 
     try {
       const response = await apiServices.readCompanyAppointments(params);
-      return response?.data?.data?.Appointment;
+
+      return response?.data?.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
@@ -172,9 +173,10 @@ const appointmentSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(readAppointments.fulfilled, (state, action) => {
-      state.appointment = action.payload;
-      state.lastPage = action.payload.lastPage;
-      state.totalCount = action.payload.totalCount;
+      const { Appointment, totalCount, lastPage } = action.payload;
+      state.appointment = Appointment || [];
+      state.lastPage = lastPage || 1;
+      state.totalCount = totalCount || 0;
       state.isLoading = false;
     });
     builder.addCase(readAppointments.rejected, (state) => {

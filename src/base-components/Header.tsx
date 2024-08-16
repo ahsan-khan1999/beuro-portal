@@ -16,11 +16,11 @@ import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 import { readFollowUp } from "@/api/slices/followUp/followUp";
 import moment from "moment";
 import { FollowUpNotification } from "./ui/follow-up-notification";
-import menuIcon from "@/assets/pngs/menu-icon.png";
+import { HamburgerIcon } from "@/assets/svgs/components/hamburger-icon";
 
 export interface HeaderProps {
   isDrawer?: boolean;
-  handleDrawer?: (e: any) => void;
+  handleDrawer: (e: any) => void;
 }
 
 const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
@@ -113,14 +113,9 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
 
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
-      <div className="flex items-center gap-x-1">
+      <div className="flex items-center gap-x-3">
         {isAgentRoute && (
-          <Image
-            src={menuIcon}
-            alt="menu"
-            className="w-8 h-[33px] xMini:block mlg:hidden cursor-pointer"
-            onClick={handleDrawer}
-          />
+          <HamburgerIcon onClick={handleDrawer} strokeColor="#4A13E7" />
         )}
 
         {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
