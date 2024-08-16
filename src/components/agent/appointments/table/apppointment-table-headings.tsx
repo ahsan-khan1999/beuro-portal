@@ -15,13 +15,16 @@ export const AppointmentTableHeadings = ({
           {/* This div is only shown below the mlg breakpoint for agents */}
           <div className="mlg:hidden">
             <div
-              className={`items-center gap-x-1 bg-primary rounded-lg pl-4 pr-1 py-4 grid xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)]`}
+              className={`items-center gap-x-1 bg-primary rounded-lg pl-4 pr-1 py-4 grid xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)] xAir:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(180px,180px)]`}
             >
               <span className="font-semibold text-base text-white">
                 {translate("appointments.table_headings.lead_id")}
               </span>
               <span className="font-semibold text-base text-white">
                 {translate("appointments.table_headings.customer")}
+              </span>
+              <span className="font-semibold text-base text-white hidden xAir:block">
+                {translate("appointments.table_headings.date")}
               </span>
               <span className="font-semibold text-base text-white">
                 {translate("appointments.table_headings.status")}

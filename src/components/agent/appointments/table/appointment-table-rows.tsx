@@ -66,13 +66,16 @@ export const AppointmentTableRows = ({
                     key={index}
                     className={`${
                       index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-1 grid xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)] border-t border-t-[#E7EAEE]`}
+                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-1 grid xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)] xAir:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(180px,180px)] border-t border-t-[#E7EAEE]`}
                   >
                     <div className="flex items-center gap-x-1">
                       {item?.leadID?.refID}
                     </div>
                     <span className="py-4 truncate">
                       {item.leadID?.customerDetail?.fullName}
+                    </span>
+                    <span className="py-4 hidden xAir:block">
+                      {formatDateTimeToDate(item.date)}
                     </span>
 
                     <div

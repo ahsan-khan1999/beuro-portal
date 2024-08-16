@@ -122,15 +122,15 @@ const SideBar = ({
       className={`fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll`}
     >
       {isAgentRoute && (
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 xMini:block mlg:hidden">
           <CrossIcon />
         </div>
       )}
 
       <div
         className={`${
-          isAgentRoute ? "pt-10" : "pt-6"
-        }  px-4 pb-8 flex flex-col`}
+          isAgentRoute ? "xMini:pt-10 mlg:pt-6" : "pt-6"
+        } px-4 pb-8 flex flex-col`}
       >
         <div className="space-y-3">
           {sideBar.map((item) => {

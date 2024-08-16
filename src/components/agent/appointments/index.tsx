@@ -17,14 +17,11 @@ export default function AgentAppointments() {
     filter,
     setFilter,
     handleFilterChange,
-    loading,
     isLoading,
     currentPage,
     handleStatusUpdate,
-    totalCount,
     currentPageRows,
     handleAppointmentCreate,
-    lastPage,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(

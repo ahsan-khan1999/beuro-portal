@@ -118,7 +118,7 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
           <Image
             src={menuIcon}
             alt="menu"
-            className="w-8 h-[33px] xMini:block xPro:hidden cursor-pointer"
+            className="w-8 h-[33px] xMini:block mlg:hidden cursor-pointer"
             onClick={handleDrawer}
           />
         )}
@@ -135,7 +135,7 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
                     type="image/svg+xml"
                     className={`${
                       isAgentRoute
-                        ? "xMini:w-[100px] xMini:pr-4 xPro:w-[150px] xPro:pr-8"
+                        ? "xMini:w-[100px] xMini:pr-4 mlg:w-[150px] mlg:pr-8"
                         : "w-[150px]"
                     } max-h-[50px] border-r-2 border-[#000000] border-opacity-10`}
                   ></object>
@@ -145,7 +145,7 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
                     alt="Company Logo"
                     className={`${
                       isAgentRoute
-                        ? "xMini:w-[100px] xMini:pr-4 xPro:w-[150px] xPro:pr-8"
+                        ? "xMini:w-[100px] xMini:pr-4 mlg:w-[150px] mlg:pr-8"
                         : "w-[150px]"
                     } max-h-[50px] border-r-2 border-[#000000] border-opacity-10`}
                     height={50}
@@ -157,7 +157,7 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
 
             <span
               className={`font-medium text-2xl tracking-[0.15px] text-dark ${
-                isAgentRoute ? "xMini:pl-4 xPro:pl-8" : "pl-8"
+                isAgentRoute ? "xMini:pl-4 mlg:pl-8" : "pl-8"
               } `}
             >
               {user?.company?.companyName}{" "}

@@ -84,7 +84,7 @@ export default function AppointmentsTabletFilters({
       >
         {translate("sidebar.customer.appointments.appointment")}
       </h1>
-      <div className="flex items-center">
+      <div className="flex items-center gap-x-2">
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}
@@ -116,13 +116,13 @@ export default function AppointmentsTabletFilters({
             },
           ]}
           label={translate("common.sort_button")}
+          containerClassName="min-w-fit"
         />
 
         <LeadsFilters
           filter={filter}
           setFilter={setFilter}
           onFilterChange={handleFilterChange}
-          containerClassName="hidden xAir:block"
         />
       </div>
     </div>

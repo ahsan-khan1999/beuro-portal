@@ -24,7 +24,7 @@ export const Layout = ({ children }: MyComponentProp) => {
   }, [locale]);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width:1024px)");
+    const mediaQuery = window.matchMedia("(min-width:1100px)");
 
     const handleMediaQueryChange = (event: MediaQueryListEvent) => {
       if (event.matches) {
@@ -73,7 +73,7 @@ export const Layout = ({ children }: MyComponentProp) => {
 
       <main className="bg-[#F3F3F3]">
         <div
-          className={`${isAgentRoute ? "xMini:hidden xPro:block" : "block"}`}
+          className={`${isAgentRoute ? "xMini:hidden mlg:block" : "block"}`}
         >
           <SideBar isDrawer={false} handleDrawer={handleDrawer} />
         </div>
@@ -81,7 +81,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         <Header handleDrawer={handleDrawer} />
         <div
           className={`${
-            isAgentRoute ? "xMini:ml-5 xPro:ml-[272px]" : "ml-[272px]"
+            isAgentRoute ? "xMini:ml-5 mlg:ml-[272px]" : "ml-[272px]"
           } mt-[90px] mr-5`}
         >
           {children}
