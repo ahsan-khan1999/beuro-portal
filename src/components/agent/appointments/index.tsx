@@ -7,7 +7,7 @@ import { useAppointments } from "@/hooks/appointments/useAppointments";
 import { AppointmentTableRows } from "./table/appointment-table-rows";
 import { AppointmentTableFunctions } from "./table/appointment-table-functions";
 import { AppointmentTableHeadings } from "./table/apppointment-table-headings";
-import { LeadTableRecordCard } from "./mobile/table-record-card";
+import { AppointmentTableRecordCard } from "./mobile/table-record-card";
 
 export default function AgentAppointments() {
   const {
@@ -23,7 +23,7 @@ export default function AgentAppointments() {
     handleStatusUpdate,
     currentPageRows,
     handleAppointmentCreate,
-    totalCount
+    totalCount,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -47,7 +47,7 @@ export default function AgentAppointments() {
       />
 
       <div className="ml-5 block xMini:hidden">
-        <LeadTableRecordCard dataToAdd={currentPageRows} />
+        <AppointmentTableRecordCard dataToAdd={currentPageRows} />
       </div>
 
       <div className="hidden xMini:block">

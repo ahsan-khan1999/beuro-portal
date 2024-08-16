@@ -7,6 +7,7 @@ import { TableCardLayout } from "@/layout/TableCardLayout";
 import { LeadsTableFunctions } from "@/components/leads/table/leads-table-functions";
 import { LeadsTableHeadings } from "@/components/leads/table/leads-table-headings";
 import { LeadsTableRows } from "@/components/leads/table/leads-table-rows";
+import { LeadTableRecordCard } from "./mobile/leads-table-records";
 
 export default function AgentLeads() {
   const {
@@ -52,12 +53,18 @@ export default function AgentLeads() {
         handleFilterChange={handleFilterChange}
         isAgent={true}
       />
-      <TableCardLayout>
-        <TableLayout isAgent={true}>
-          <LeadsTableHeadings isAgent={true} />
-          {CurrentComponent}
-        </TableLayout>
-      </TableCardLayout>
+
+      <div className="ml-5 block xMini:hidden">
+        <LeadTableRecordCard dataToAdd={currentPageRows} />
+      </div>
+      <div className="hidden xMini:block">
+        <TableCardLayout>
+          <TableLayout isAgent={true}>
+            <LeadsTableHeadings isAgent={true} />
+            {CurrentComponent}
+          </TableLayout>
+        </TableCardLayout>
+      </div>
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

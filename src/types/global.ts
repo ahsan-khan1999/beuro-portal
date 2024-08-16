@@ -42,6 +42,8 @@ export interface CheckFieldProps {
   type: keyof FilterType;
   value: string;
   onChange?: (val: string, checked: boolean) => void;
+  containerClassName?:string
+  isMobile?:boolean
 }
 
 export interface InputFieldProps {

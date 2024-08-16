@@ -103,9 +103,9 @@ export const useAppointments = () => {
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
 
-      // if (isAgentRoute) {
-      //   updatedFilter.today = true;
-      // }
+      if (isAgentRoute) {
+        updatedFilter.today = true;
+      }
 
       setFilter(updatedFilter);
 
@@ -278,6 +278,5 @@ export const useAppointments = () => {
     handleAppointmentCreate,
     handleScheduleAppointments,
     lastPage,
-    
   };
 };

@@ -10,7 +10,7 @@ export interface AppointmentMobileRecordsProps {
   dataToAdd: Appointments[];
 }
 
-export const LeadTableRecordCard = ({
+export const AppointmentTableRecordCard = ({
   dataToAdd,
 }: AppointmentMobileRecordsProps) => {
   const router = useRouter();

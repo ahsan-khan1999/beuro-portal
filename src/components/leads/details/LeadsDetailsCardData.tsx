@@ -187,8 +187,8 @@ const LeadsDetailsCardData = ({
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-5">
-        <div className="flex items-center gap-x-3">
+      <div className="grid grid-cols-2 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-5 pt-2 mlg:pt-5">
+        <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.lead_id")}:
           </span>
@@ -196,7 +196,7 @@ const LeadsDetailsCardData = ({
             {leadDetails?.refID}
           </span>
         </div>
-        <div className="max-w-[250px] flex items-center gap-x-3">
+        <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.status")}:
           </span>
@@ -241,7 +241,7 @@ const LeadsDetailsCardData = ({
             </div>
           )}
         </div>
-        <div className="flex items-center gap-x-3">
+        <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("appointments.appointment")}:
           </span>
@@ -255,19 +255,19 @@ const LeadsDetailsCardData = ({
               : translate("leads.not_created")}
           </div>
         </div>
-        <div className="flex items-center gap-x-3">
-          <span className="font-normal text-[#4D4D4D] text-base">
+        <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+          <span className="font-normal text-[#4D4D4D] text-base min-w-[120px]">
             {translate("leads.card_content.created_date")}:
           </span>
           <span className="font-medium text-[#4B4B4B] text-base">
             {formatDateTimeToDate(leadDetails?.createdAt)}
           </span>
         </div>
-        <div className="flex items-center gap-x-3">
-          <span className="font-normal text-[#4D4D4D] text-base">
+        <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+          <span className="font-normal text-[#4D4D4D] text-base min-w-[100px]">
             {translate("leads.card_content.created_by")}:
           </span>
-          <span className="font-medium text-[#4B4B4B] text-base">
+          <span className="font-medium text-[#4B4B4B] text-base truncate">
             {leadDetails?.createdBy?.fullName}
           </span>
         </div>
