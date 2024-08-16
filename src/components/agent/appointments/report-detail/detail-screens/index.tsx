@@ -53,23 +53,10 @@ export const ReportDetailData = ({
   }, []);
 
   const componentArray = [
-    <ReportContactDetail
-      reportDetail={reportDetail}
-      // isCompanyAppointment={isCompanyAppointment}
-    />,
-    <ReportHouseDetail
-      reportDetail={reportDetail}
-      // isCompanyAppointment={isCompanyAppointment}
-    />,
-    <ReportServicesDetail
-      reportDetail={reportDetail}
-      currency={currency}
-      // isCompanyAppointment={isCompanyAppointment}
-    />,
-    <ReportAdditionalInfoDetail
-      reportDetail={reportDetail}
-      // isCompanyAppointment={isCompanyAppointment}
-    />,
+    <ReportContactDetail reportDetail={reportDetail} />,
+    <ReportHouseDetail reportDetail={reportDetail} />,
+    <ReportServicesDetail reportDetail={reportDetail} currency={currency} />,
+    <ReportAdditionalInfoDetail reportDetail={reportDetail} />,
   ];
 
   const tabSection: tabArrayTypes[] = [
@@ -192,14 +179,14 @@ export const ReportDetailData = ({
       </div>
 
       <div className="w-full break-all flex">
-        <div className="max-w-[320px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[320px] w-full hidden 2xl:block" />
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <CustomLoader />
           </div>
         ) : (
           <div className="flex flex-col gap-y-5 w-full">
-            {componentArray?.map((component, index) => (
+            {componentArray.map((component, index) => (
               <div key={index}>{component}</div>
             ))}
           </div>

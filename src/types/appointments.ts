@@ -164,6 +164,7 @@ export interface Report {
           postalCode: string;
           country: string;
         };
+        companyName: string;
       };
       createdBy: {
         fullName: string;

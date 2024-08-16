@@ -13,8 +13,6 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
-import TabletLeadsFilter from "./tablet-leads-filter";
-import MobileLeadsFilter from "./mobile-leads-filter";
 
 export default function LeadsFilter({
   filter,
@@ -235,6 +233,7 @@ export default function LeadsFilter({
                   },
                 ]}
                 label={translate("common.sort_button")}
+                containerClassName="min-w-fit"
               />
               <div className="flex items-center gap-x-3">
                 <span className="text-[#4B4B4B] font-semibold text-base">

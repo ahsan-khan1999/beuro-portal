@@ -227,6 +227,7 @@ export default function OffersFilters({
               },
             ]}
             label={translate("common.sort_button")}
+            containerClassName="min-w-fit"
           />
           <span className="text-[#4B4B4B] font-semibold text-base">
             {translate("global_search.notes")}

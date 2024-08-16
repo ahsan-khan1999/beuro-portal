@@ -132,6 +132,7 @@ export default function EmployeesFilters({
             { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
           ]}
           label={translate("common.sort_button")}
+          containerClassName="min-w-fit"
         />
         <EmployeesFilter
           filter={filter}
