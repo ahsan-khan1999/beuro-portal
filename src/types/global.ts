@@ -70,6 +70,7 @@ export interface OptionsFieldProps {
   options: { label: string; value: string }[];
   dropDownIconClassName?: string;
   containerClassName?: string;
+  dropdownClassName?: string;
   isSearch?: boolean;
   labelClassName?: string;
 }

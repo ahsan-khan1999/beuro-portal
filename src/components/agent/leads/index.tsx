@@ -5,7 +5,7 @@ import useLeads from "@/hooks/leads/useLeads";
 import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
 import { LeadsTableFunctions } from "@/components/leads/table/leads-table-functions";
-import { LeadsTableHeadings } from "@/components/leads/table/leads-table-headongs";
+import { LeadsTableHeadings } from "@/components/leads/table/leads-table-headings";
 import { LeadsTableRows } from "@/components/leads/table/leads-table-rows";
 
 export default function AgentLeads() {
@@ -53,8 +53,8 @@ export default function AgentLeads() {
         isAgent={true}
       />
       <TableCardLayout>
-        <TableLayout >
-          <LeadsTableHeadings />
+        <TableLayout isAgent={true}>
+          <LeadsTableHeadings isAgent={true} />
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>

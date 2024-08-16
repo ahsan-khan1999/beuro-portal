@@ -85,8 +85,8 @@ export default function TabletLeadsFilter({
     <div className="flex xMd:hidden items-center justify-between w-full z-10">
       <h1 className="text-2xl font-medium text-[#222B45]">Leads</h1>
 
-      <div className="flex items-center">
-        <SelectField
+      <div className="flex items-center gap-x-1">
+        {/* <SelectField
           handleChange={(value) => hanldeSortChange(value)}
           value=""
           options={[
@@ -108,7 +108,9 @@ export default function TabletLeadsFilter({
             },
           ]}
           label={translate("leads.table_functions.open")}
-        />
+          containerClassName="min-w-fit"
+          dropdownClassName="w-[160px]"
+        /> */}
 
         <InputField
           handleChange={handleInputChange}
@@ -141,6 +143,7 @@ export default function TabletLeadsFilter({
             },
           ]}
           label={translate("common.sort_button")}
+          containerClassName="min-w-fit"
         />
 
         <LeadsFilters

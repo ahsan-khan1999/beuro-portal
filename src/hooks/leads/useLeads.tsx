@@ -39,6 +39,9 @@ const useLeads = () => {
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { t: translate } = useTranslation();
 
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/agent");
+
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
     noteType: FiltersDefaultValues.None,
@@ -97,6 +100,7 @@ const useLeads = () => {
           $gte?: string;
           $lte?: string;
         };
+        today?: boolean;
       } = {
         status: filteredStatus,
       };
@@ -107,6 +111,10 @@ const useLeads = () => {
         updatedFilter.noteType = searchNoteType;
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
+
+      // if (isAgentRoute) {
+      //   updatedFilter.today = true;
+      // }
 
       setFilter(updatedFilter);
 

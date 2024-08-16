@@ -12,10 +12,9 @@ export const AppointmentTableHeadings = ({
     <div>
       {isAgent ? (
         <>
-          {/* This div is only shown below the mlg breakpoint for agents */}
           <div className="mlg:hidden">
             <div
-              className={`items-center gap-x-1 bg-primary rounded-lg pl-4 pr-1 py-4 grid xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)] xAir:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(180px,180px)]`}
+              className={`gap-x-1 bg-primary rounded-lg pl-4 pr-1 py-4 grid items-center xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)] xAir:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(180px,180px)]`}
             >
               <span className="font-semibold text-base text-white">
                 {translate("appointments.table_headings.lead_id")}
@@ -37,7 +36,6 @@ export const AppointmentTableHeadings = ({
         </>
       ) : null}
 
-      {/* This div is shown above the mlg breakpoint for agents and always shown for non-agents */}
       <div className={`${isAgent ? "hidden mlg:flex" : "flex"}`}>
         <div className="mlg:w-full">
           <div
