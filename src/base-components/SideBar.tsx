@@ -121,13 +121,17 @@ const SideBar = ({
     <div
       className={`fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll`}
     >
-      {/* {isDrawer && ( */}
-      <div className="absolute top-2 right-2">
-        <CrossIcon />
-      </div>
-      {/* )} */}
+      {isAgentRoute && (
+        <div className="absolute top-2 right-2">
+          <CrossIcon />
+        </div>
+      )}
 
-      <div className={`pt-6 px-4 pb-8 flex flex-col`}>
+      <div
+        className={`${
+          isAgentRoute ? "pt-10" : "pt-6"
+        }  px-4 pb-8 flex flex-col`}
+      >
         <div className="space-y-3">
           {sideBar.map((item) => {
             return (

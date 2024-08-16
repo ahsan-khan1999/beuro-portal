@@ -13,6 +13,7 @@ export const Layout = ({ children }: MyComponentProp) => {
   const dispatch = useAppDispatch();
   const [isDrawer, setIsDrawer] = useState(false);
   const locale = useRouter().locale;
+  const router = useRouter();
 
   useEffect(() => {
     if (!user) useGlobalUser(user, dispatch);
@@ -23,7 +24,7 @@ export const Layout = ({ children }: MyComponentProp) => {
   }, [locale]);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const mediaQuery = window.matchMedia("(min-width:1024px)");
 
     const handleMediaQueryChange = (event: MediaQueryListEvent) => {
       if (event.matches) {
@@ -48,10 +49,13 @@ export const Layout = ({ children }: MyComponentProp) => {
     setIsDrawer((prev) => !prev);
   };
 
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/agent");
+
   const Drawer = () => {
     return (
       <div
-        className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-40 ${
+        className={`!fixed top-0 flex justify-center items-center z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
           isDrawer ? "block" : "hidden"
         }`}
         onClick={handleClose}
@@ -68,15 +72,20 @@ export const Layout = ({ children }: MyComponentProp) => {
       </Head>
 
       <main className="bg-[#F3F3F3]">
-        <div className="fixed inset-y-0 left-0 hidden md:block">
+        <div
+          className={`${isAgentRoute ? "xMini:hidden xPro:block" : "block"}`}
+        >
           <SideBar isDrawer={false} handleDrawer={handleDrawer} />
         </div>
         <Drawer />
-        <Header />
-        <SideBar isDrawer={false} handleDrawer={handleDrawer} />
-        {/* <div className="mr-5"> */}
-        <div className="ml-[272px] mt-[90px] mr-5">{children}</div>
-        {/* </div> */}
+        <Header handleDrawer={handleDrawer} />
+        <div
+          className={`${
+            isAgentRoute ? "xMini:ml-5 xPro:ml-[272px]" : "ml-[272px]"
+          } mt-[90px] mr-5`}
+        >
+          {children}
+        </div>
       </main>
     </>
   );

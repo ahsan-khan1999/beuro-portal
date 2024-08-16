@@ -16,8 +16,14 @@ import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 import { readFollowUp } from "@/api/slices/followUp/followUp";
 import moment from "moment";
 import { FollowUpNotification } from "./ui/follow-up-notification";
+import menuIcon from "@/assets/pngs/menu-icon.png";
 
-const Header = () => {
+export interface HeaderProps {
+  isDrawer?: boolean;
+  handleDrawer?: (e: any) => void;
+}
+
+const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
   const { t: translate } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { systemSettings } = useAppSelector((state) => state.settings);
@@ -101,47 +107,74 @@ const Header = () => {
   }, [upcomingFollowUp]);
 
   const isSVG = user?.company?.logo?.endsWith(".svg");
+
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/agent");
+
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
-      {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
-        <div className="flex items-center">
-          {user?.company?.logo && (
-            <>
-              {isSVG ? (
-                <object
-                  data={user?.company?.logo}
-                  width="150"
-                  height="50"
-                  type="image/svg+xml"
-                  className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-                ></object>
-              ) : (
-                <Image
-                  src={user?.company?.logo}
-                  alt="Company Logo"
-                  className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-                  height={50}
-                  width={150}
-                />
-              )}
-            </>
-          )}
-
-          <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
-            {user?.company?.companyName}{" "}
-          </span>
-        </div>
-      )) || (
-        <div className="flex items-center">
+      <div className="flex items-center gap-x-1">
+        {isAgentRoute && (
           <Image
-            src={logo}
-            alt="Company Logo"
-            className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-            height={50}
-            width={150}
+            src={menuIcon}
+            alt="menu"
+            className="w-8 h-[33px] xMini:block xPro:hidden cursor-pointer"
+            onClick={handleDrawer}
           />
-        </div>
-      )}
+        )}
+
+        {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
+          <div className="flex items-center">
+            {user?.company?.logo && (
+              <>
+                {isSVG ? (
+                  <object
+                    data={user?.company?.logo}
+                    width="150"
+                    height="50"
+                    type="image/svg+xml"
+                    className={`${
+                      isAgentRoute
+                        ? "xMini:w-[100px] xMini:pr-4 xPro:w-[150px] xPro:pr-8"
+                        : "w-[150px]"
+                    } max-h-[50px] border-r-2 border-[#000000] border-opacity-10`}
+                  ></object>
+                ) : (
+                  <Image
+                    src={user?.company?.logo}
+                    alt="Company Logo"
+                    className={`${
+                      isAgentRoute
+                        ? "xMini:w-[100px] xMini:pr-4 xPro:w-[150px] xPro:pr-8"
+                        : "w-[150px]"
+                    } max-h-[50px] border-r-2 border-[#000000] border-opacity-10`}
+                    height={50}
+                    width={150}
+                  />
+                )}
+              </>
+            )}
+
+            <span
+              className={`font-medium text-2xl tracking-[0.15px] text-dark ${
+                isAgentRoute ? "xMini:pl-4 xPro:pl-8" : "pl-8"
+              } `}
+            >
+              {user?.company?.companyName}{" "}
+            </span>
+          </div>
+        )) || (
+          <div className="flex items-center">
+            <Image
+              src={logo}
+              alt="Company Logo"
+              className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+              height={50}
+              width={150}
+            />
+          </div>
+        )}
+      </div>
       <div className="flex items-center">
         <div className="flex items-center pr-8">
           {user?.role !== "Admin" && user?.role !== "Agent" && (
