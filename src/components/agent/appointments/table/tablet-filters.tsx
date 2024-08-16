@@ -1,22 +1,20 @@
+import LeadsFilters from "@/base-components/filter/leads-filter";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FilterType, FiltersComponentProps } from "@/types";
-import React, { useEffect, useRef, useState } from "react";
-import { Button } from "@/base-components/ui/button/button";
-import plusIcon from "@/assets/svgs/plus_icon.svg";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import ContentFilter from "@/base-components/filter/content-filter";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 
-export default function ContentFilters({
+export default function AppointmentsTabletFilters({
   filter,
   setFilter,
   handleFilterChange,
+  isAgent,
 }: FiltersComponentProps) {
-  const router = useRouter();
   const { t: translate } = useTranslation();
-
+  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -78,19 +76,27 @@ export default function ContentFilters({
   };
 
   return (
-    <div className="flex flex-col mlg:flex-row mlg:items-center gap-4">
-      <InputField
-        handleChange={handleInputChange}
-        ref={inputRef}
-        value={inputValue}
-        iconDisplay={true}
-        onEnterPress={onEnterPress}
-      />
-      <div className="flex items-center gap-x-4">
+    <div className="flex items-center justify-between w-full z-50">
+      <h1
+        className={`font-semibold text-[#222B45] ${
+          isAgent ? "xAir:text-base mlg:text-2xl" : "text-2xl"
+        }`}
+      >
+        {translate("sidebar.customer.appointments.appointment")}
+      </h1>
+      <div className="flex items-center gap-x-2">
+        <InputField
+          handleChange={handleInputChange}
+          ref={inputRef}
+          value={inputValue}
+          iconDisplay={true}
+          onEnterPress={onEnterPress}
+          textClassName="w-[177px]"
+        />
+
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}
-          value={filter?.sort || ""}
-          dropDownIconClassName=""
+          value=""
           options={[
             {
               label: `${translate("filters.sort_by.date")}`,
@@ -104,32 +110,19 @@ export default function ContentFilters({
               label: `${translate("filters.sort_by.oldest")}`,
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+            {
+              label: `${translate("filters.sort_by.a_z")}`,
+              value: "customerDetail.fullName",
+            },
           ]}
           label={translate("common.sort_button")}
           containerClassName="min-w-fit"
         />
-        <ContentFilter
+
+        <LeadsFilters
           filter={filter}
           setFilter={setFilter}
           onFilterChange={handleFilterChange}
-        />
-        {/* <Button
-        onClick={handleFilterChange}
-        className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        text="Apply"
-        id="apply"
-        inputType="button"
-        name=""
-      /> */}
-
-        <Button
-          onClick={() => router.push("/content/add")}
-          className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-          text={translate("content.add_button")}
-          id="apply"
-          inputType="button"
-          icon={plusIcon}
         />
       </div>
     </div>

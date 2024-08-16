@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   column: {
     width: "30%",
   },
-
   mainHeading: {
     fontSize: 10,
     fontStyle: "semibold",

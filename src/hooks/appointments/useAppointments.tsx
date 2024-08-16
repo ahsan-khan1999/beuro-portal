@@ -21,7 +21,7 @@ import { Appointments } from "@/types/appointments";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 
 export const useAppointments = () => {
-  const { loading, isLoading, totalCount, lastPage, } = useAppSelector(
+  const { loading, isLoading, totalCount, lastPage } = useAppSelector(
     (state) => state.appointment
   );
 
@@ -30,6 +30,9 @@ export const useAppointments = () => {
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
+
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/agent");
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -88,6 +91,7 @@ export const useAppointments = () => {
           $gte?: string;
           $lte?: string;
         };
+        today?: boolean;
       } = {
         status: filteredStatus,
       };
@@ -97,6 +101,10 @@ export const useAppointments = () => {
         updatedFilter.sort = sortedValue;
         updatedFilter.noteType = searchNoteType;
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
+      }
+
+      if (isAgentRoute) {
+        updatedFilter.today = true;
       }
 
       setFilter(updatedFilter);
@@ -269,6 +277,6 @@ export const useAppointments = () => {
     handleStatusUpdate,
     handleAppointmentCreate,
     handleScheduleAppointments,
-    lastPage
+    lastPage,
   };
 };

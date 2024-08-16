@@ -17,11 +17,13 @@ import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
 export interface AppointmentsDetailCardProps {
   onStatusChange: (id: string) => void;
   appointmentDetails: Appointments;
+  isAgent?: boolean;
 }
 
 export const AppointmentsDetailCard = ({
   onStatusChange,
   appointmentDetails,
+  isAgent,
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -92,7 +94,7 @@ export const AppointmentsDetailCard = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-4">
-          {appointmentDetails?.leadID?.isOfferCreated && (
+          {!appointmentDetails?.leadID?.isOfferCreated && !isAgent && (
             <OutlineButton
               inputType="button"
               onClick={offerCreateHandler}
@@ -123,9 +125,11 @@ export const AppointmentsDetailCard = ({
       </div>
 
       <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
-        <div className="flex flex-col gap-y-[34px] mt-[34px]">
-          <div className="grid grid-cols-2 mlg:grid-cols-3 items-center mlg:gap-x-20 gap-y-5">
-            <div className="flex items-center gap-x-[10px]">
+        <div
+          className={`flex flex-col gap-y-5 mlg:gap-y-[34px] mt-[10px] mlg:mt-[34px]`}
+        >
+          <div className="grid grid-cols-2 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-5">
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[65px] w-fit">
                 {translate("appointments.detail_data.lead_id")}:
               </span>
@@ -133,7 +137,7 @@ export const AppointmentsDetailCard = ({
                 {appointmentDetails?.leadID?.refID}
               </span>
             </div>
-            <div className="flex items-center gap-x-[10px]">
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[130px] w-fit">
                 {translate("appointments.detail_data.appointment_id")}:
               </span>
@@ -141,7 +145,7 @@ export const AppointmentsDetailCard = ({
                 {appointmentDetails?.leadID?.refID}
               </span>
             </div>
-            <div className="flex items-center gap-x-[10px]">
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[60px] w-fit">
                 {translate("appointments.detail_data.status")}:
               </span>
@@ -164,8 +168,18 @@ export const AppointmentsDetailCard = ({
               />
             </div>
           </div>
-          <div className="grid grid-cols-3 items-center gap-x-20">
-            <div className="flex items-center gap-x-[10px]">
+          <div className="grid grid-cols-2 xMini:grid-cols-3 items-center mlg:gap-x-20">
+            {appointmentDetails?.leadID?.customerDetail?.companyName && (
+              <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+                <span className="text-base text-[#5C5C5C] font-medium min-w-[140px]">
+                  {translate("appointments.table_headings.company_name")}:
+                </span>
+                <span className="text-base text-primary font-nomal truncate">
+                  {appointmentDetails?.leadID?.customerDetail?.companyName}
+                </span>
+              </div>
+            )}
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium">
                 {translate("appointments.detail_data.date")}:
               </span>
@@ -173,7 +187,7 @@ export const AppointmentsDetailCard = ({
                 {formatDateTimeToDate(appointmentDetails?.date)}
               </span>
             </div>
-            <div className="flex items-center gap-x-[10px]">
+            <div className="flex xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium">
                 {translate("appointments.detail_data.time")}:
               </span>
@@ -183,22 +197,6 @@ export const AppointmentsDetailCard = ({
             </div>
           </div>
         </div>
-        {/* <div className="flex flex-col gap-y-[6px]">
-          <p className="text-[#5C5C5C] text-base font-medium">
-            {translate("appointments.detail_data.assign_agent")}
-          </p>
-          <div className="flex items-center gap-x-[10px] px-[10px] py-1 bg-[#F4F4F4] rounded-lg w-fit">
-            <Image
-              src={profileImg}
-              alt="agent profile"
-              width={32}
-              height={32}
-            />
-            <span className="text-[#191D23] text-base font-medium">
-              Jenny Wilson
-            </span>
-          </div>
-        </div> */}
       </div>
     </div>
   );

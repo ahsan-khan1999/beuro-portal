@@ -17,14 +17,11 @@ export default function AgentAppointments() {
     filter,
     setFilter,
     handleFilterChange,
-    loading,
     isLoading,
     currentPage,
     handleStatusUpdate,
-    totalCount,
     currentPageRows,
     handleAppointmentCreate,
-    lastPage,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -32,6 +29,7 @@ export default function AgentAppointments() {
       dataToAdd={currentPageRows}
       onStatusChange={handleStatusUpdate}
       onAppointmentCreate={handleAppointmentCreate}
+      isAgent={true}
     />,
     currentPageRows.length > 0,
     isLoading
@@ -43,10 +41,11 @@ export default function AgentAppointments() {
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
+        isAgent={true}
       />
       <TableCardLayout>
-        <TableLayout>
-          <AppointmentTableHeadings />
+        <TableLayout isAgent={true}>
+          <AppointmentTableHeadings isAgent={true} />
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>

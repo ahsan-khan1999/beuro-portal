@@ -72,6 +72,13 @@ export const AppointmentTableRows = ({
           });
         };
 
+        const handleReportPDF = () => {
+          router.push({
+            pathname: `/appointments/pdf`,
+            query: { ...router.query, reportId: item?.id, isCompany: true },
+          });
+        };
+
         // const customerType = item?.customerDetail
         //   ?.customerType as keyof (typeof staticEnums)["CustomerType"];
         // const name =
@@ -87,12 +94,9 @@ export const AppointmentTableRows = ({
           <div className="flex" key={index}>
             <div className="mlg:w-full">
               <div
-                // onClick={() => {
-                //   router.push({
-                //     pathname: "/appointments/details",
-                //     query: { ...router.query, appointment: item?.id },
-                //   });
-                // }}
+                onClick={
+                  item?.isReportSubmitted ? handleReportPDF : handleViewReport
+                }
                 key={index}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
@@ -218,14 +222,6 @@ export const AppointmentTableRows = ({
                   />
                 )}
               </div>
-
-              {/* <div className="py-4 flex items-center">
-                <span className="p-[6px]">
-                  <CancelFillIcon
-                    opacityVal={item?.isReportSubmitted ? 0 : 1}
-                  />
-                </span>
-              </div> */}
             </div>
           </div>
         );

@@ -222,6 +222,7 @@ export default function AppointmentsFilter({
                 },
               ]}
               label={translate("common.sort_button")}
+              containerClassName="min-w-fit"
             />
             <div className="flex items-center gap-x-3">
               <span className="text-[#4B4B4B] font-semibold text-base">

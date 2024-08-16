@@ -23,6 +23,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { AppointmentsIcon } from "@/assets/svgs/components/sideBar/Appointments";
+import { CrossIcon } from "@/assets/svgs/components/cross-icon";
 
 export const svgs = {
   Dashboard: <DashboardIcon />,
@@ -45,7 +46,13 @@ export const svgs = {
   dummy: <></>,
 };
 
-const SideBar = () => {
+const SideBar = ({
+  isDrawer,
+  handleDrawer,
+}: {
+  isDrawer: boolean;
+  handleDrawer: (e: any) => void;
+}) => {
   const { user } = useAppSelector((state) => state.auth);
   const { t: translation } = useTranslation();
   const [selected, setSelected] = useState<{
@@ -106,9 +113,24 @@ const SideBar = () => {
     }
   }, [router.pathname]);
 
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/agent");
+
   return (
-    <div className="fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll">
-      <div className={`pt-6 px-4 pb-8 flex flex-col `}>
+    <div
+      className={`fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll`}
+    >
+      {isAgentRoute && (
+        <div className="absolute top-2 right-2 xMini:block mlg:hidden">
+          <CrossIcon />
+        </div>
+      )}
+
+      <div
+        className={`${
+          isAgentRoute ? "xMini:pt-10 mlg:pt-6" : "pt-6"
+        } px-4 pb-8 flex flex-col`}
+      >
         <div className="space-y-3">
           {sideBar.map((item) => {
             return (
@@ -165,7 +187,6 @@ const SideBar = () => {
                         }}
                       >
                         <svg
-                          className={` `}
                           xmlns="http://www.w3.org/2000/svg"
                           width="13"
                           height="8"

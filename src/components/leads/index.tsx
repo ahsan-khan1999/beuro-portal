@@ -6,7 +6,7 @@ import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
 import { LeadsTableRows } from "./table/leads-table-rows";
 import { LeadsTableFunctions } from "./table/leads-table-functions";
-import { LeadsTableHeadings } from "./table/leads-table-headongs";
+import { LeadsTableHeadings } from "./table/leads-table-headings";
 
 export default function Leads() {
   const {

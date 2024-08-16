@@ -16,7 +16,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-2 lg:grid-cols-3 gap-x-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
+          "grid grid-cols-2 mlg:grid-cols-3 gap-x-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -27,7 +27,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "fullName",
               name: "fullName",
@@ -55,7 +55,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
           },
           {
-            containerClass: "mb-0 mt-5 lg:mt-0",
+            containerClass: "mb-0 mt-5 mlg:mt-0",
             label: {
               text: `${translate("contact_support.form_fields.phone_number")}`,
               htmlFor: "phoneNumber",

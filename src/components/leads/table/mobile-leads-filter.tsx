@@ -1,3 +1,4 @@
+import LeadsFilters from "@/base-components/filter/leads-filter";
 import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
@@ -5,50 +6,53 @@ import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
-import { Button } from "@/base-components/ui/button/button";
-import addIcon from "@/assets/svgs/plus_icon.svg";
-import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
-export default function OffersFilters({
+export default function MobileLeadsFilter({
   filter,
   setFilter,
   handleFilterChange,
+  isAgent,
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { noteSettings } = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
-
   const [inputValue, setInputValue] = useState<string>("");
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+  };
 
   const checkbox: CheckBoxType[] = [
     {
-      label: translate("offers.table_functions.open"),
-      type: `${staticEnums.OfferStatus.Open}`,
+      label: translate("leads.table_functions.open"),
+      type: `${staticEnums.LeadStatus.Open}`,
     },
     {
-      label: translate("offers.table_functions.signed"),
-      type: `${staticEnums.OfferStatus.Accepted}`,
+      label: translate("leads.table_functions.inProcess"),
+      type: `${staticEnums.LeadStatus.InProcess}`,
     },
     {
-      label: translate("offers.table_functions.expire"),
-      type: `${staticEnums.OfferStatus.Expired}`,
+      label: translate("leads.table_functions.close"),
+      type: `${staticEnums.LeadStatus.Close}`,
     },
     {
-      label: translate("offers.table_functions.rejected"),
-      type: `${staticEnums.OfferStatus.Rejected}`,
+      label: translate("leads.table_functions.expire"),
+      type: `${staticEnums.LeadStatus.Expired}`,
     },
   ];
 
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
       const updatedStatus = prev.status ? [...prev.status] : [];
-      const newStatus = updatedStatus.map(Number);
+      const newStatus = updatedStatus;
 
       if (isChecked) {
         if (!updatedStatus.includes(value)) {
@@ -73,6 +77,7 @@ export default function OffersFilters({
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
+
         router.push(
           {
             pathname: router.pathname,
@@ -87,16 +92,14 @@ export default function OffersFilters({
           { shallow: true }
         );
       }
+
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
       const updatedFilter = { ...prev, status: status };
+
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
-  };
-
-  const handleInputChange = (value: string) => {
-    setInputValue(value);
   };
 
   const onEnterPress = () => {
@@ -146,68 +149,15 @@ export default function OffersFilters({
     });
   };
 
-  const hanldeNoteType = (value: string) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          page: 1,
-          noteType: value,
-        },
-      },
-      undefined,
-      { shallow: false }
-    );
-
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["noteType"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
-
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
-
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
-
   return (
-    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
-      <div className="flex gap-[14px]">
-        {checkbox.map((item, idx) => (
-          <CheckField
-            key={idx}
-            checkboxFilter={filter}
-            setCheckBoxFilter={setFilter}
-            type={"status"}
-            label={item.label}
-            value={item.type}
-            onChange={(value, isChecked) =>
-              handleStatusChange(value, isChecked)
-            }
-          />
-        ))}
-      </div>
-      <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={true}
-          onEnterPress={onEnterPress}
-        />
+    <div className="flex flex-col gap-y-4 xs:hidden">
+      <div className="flex items-center justify-between">
+        <h1 className="text-base font-medium text-[#1E1E1E]">Leads</h1>
 
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-center gap-x-1">
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
             value=""
-            dropDownIconClassName=""
             options={[
               {
                 label: `${translate("filters.sort_by.date")}`,
@@ -227,49 +177,37 @@ export default function OffersFilters({
               },
             ]}
             label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
           />
-          <span className="text-[#4B4B4B] font-semibold text-base">
-            {translate("global_search.notes")}
-          </span>
-          <SelectField
-            handleChange={(value) => hanldeNoteType(value)}
-            value=""
-            dropDownIconClassName=""
-            containerClassName="w-[225px]"
-            labelClassName="w-[225px]"
-            options={
-              noteSettings
-                ? noteSettings
-                    .slice()
-                    .reverse()
-                    .map((item) => ({
-                      label: item.notes.noteType,
-                      value: item.notes.noteType,
-                    }))
-                : []
-            }
-            label={translate("add_note_dropdown.all_notes")}
-          />
-        </div>
-        <div className="flex items-center gap-x-4">
-          <OfferFilter
+
+          <LeadsFilters
             filter={filter}
             setFilter={setFilter}
             onFilterChange={handleFilterChange}
           />
-
-          <Button
-            inputType="button"
-            onClick={() => router.push("/offers/add")}
-            className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-            icon={addIcon}
-            text={translate("offers.add_button")}
-            id="add"
-            iconAlt="add button"
-          />
         </div>
       </div>
+      <div className="flex items-center gap-[14px]">
+        {checkbox.map((item, idx) => (
+          <CheckField
+            key={idx}
+            checkboxFilter={filter}
+            setCheckBoxFilter={setFilter}
+            type={"status"}
+            label={item.label}
+            value={item.type}
+            onChange={(value, isChecked) =>
+              handleStatusChange(value, isChecked)
+            }
+          />
+        ))}
+      </div>
+      <InputField
+        handleChange={handleInputChange}
+        ref={inputRef}
+        value={inputValue}
+        iconDisplay={true}
+        onEnterPress={onEnterPress}
+      />
     </div>
   );
 }

@@ -220,6 +220,7 @@ export default function ContractFilters({
               },
             ]}
             label={translate("common.sort_button")}
+            containerClassName="min-w-fit"
           />
         </div>
 

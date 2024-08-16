@@ -53,34 +53,30 @@ export const ReportDetailData = ({
   }, []);
 
   const componentArray = [
-    <ReportContactDetail
-      reportDetail={reportDetail}
-      // isCompanyAppointment={isCompanyAppointment}
-    />,
-    <ReportHouseDetail
-      reportDetail={reportDetail}
-      // isCompanyAppointment={isCompanyAppointment}
-    />,
-    <ReportServicesDetail
-      reportDetail={reportDetail}
-      currency={currency}
-      // isCompanyAppointment={isCompanyAppointment}
-    />,
-    <ReportAdditionalInfoDetail
-      reportDetail={reportDetail}
-      // isCompanyAppointment={isCompanyAppointment}
-    />,
+    <ReportContactDetail reportDetail={reportDetail} />,
+    <ReportHouseDetail reportDetail={reportDetail} />,
+    <ReportServicesDetail reportDetail={reportDetail} currency={currency} />,
+    <ReportAdditionalInfoDetail reportDetail={reportDetail} />,
   ];
 
   const tabSection: tabArrayTypes[] = [
     {
-      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill=${
-        tabType === 0 ? "#4A13E7" : "#1E1E1E"
-      }>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 9C12.2091 9 14 7.20914 14 5C14 2.79086 12.2091 1 10 1C7.79086 1 6 2.79086 6 5C6 7.20914 7.79086 9 10 9ZM12.7606 9.1695C14.1102 8.2741 15 6.74097 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 6.74097 5.88979 8.2741 7.23942 9.1695C7.78982 9.5346 8.4167 9.7937 9.0909 9.9176C9.3857 9.9717 9.6895 10 10 10H9.0909C8.391 10 7.70963 10.0791 7.05514 10.2288C3.0145 11.1532 0 14.77 0 19.0909C0 19.593 0.40701 20 0.90909 20H19.0909C19.593 20 20 19.593 20 19.0909C20 14.77 16.9855 11.1532 12.9449 10.2288C12.2904 10.0791 11.609 10 10.9091 10H10C10.3105 10 10.6143 9.9717 10.9091 9.9176C11.5833 9.7937 12.2102 9.5346 12.7606 9.1695ZM10.9091 11H9.0909C4.65277 11 1.04923 14.5734 1.0005 19H18.9995C18.9508 14.5734 15.3472 11 10.9091 11Z" fill=${
-    tabType === 0 ? "#4A13E7" : "#1E1E1E"
-  }/>
-</svg>`,
+      icon: `<svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="25"
+      viewBox="0 0 24 25"
+      fill="none"
+    >
+      <path
+        d="M12.0006 3.5918C9.74227 3.5918 7.91406 5.42001 7.91406 7.67838C7.91406 9.93676 9.74227 11.765 12.0006 11.765C14.259 11.765 16.0872 9.93676 16.0872 7.67838C16.0872 5.42001 14.259 3.5918 12.0006 3.5918Z"
+        fill=${tabType === 0 ? "#4A13E7" : "#1E1E1E"}
+      />
+      <path
+        d="M13.592 12.2378H10.4088C7.20407 12.2378 4.60156 14.8403 4.60156 18.045V20.411C4.60156 20.7766 4.88117 21.0562 5.24681 21.0562H18.7541C19.1197 21.0562 19.3993 20.7766 19.3993 20.411V18.045C19.3993 14.8403 16.7968 12.2378 13.592 12.2378Z"
+        fill=${tabType === 0 ? "#4A13E7" : "#1E1E1E"}
+      />
+    </svg>`,
       name: `${translate("appointments.report_detail.contact_tab")}`,
     },
     {
@@ -191,19 +187,21 @@ export const ReportDetailData = ({
         </div> */}
       </div>
 
-      <div className="w-full break-all flex">
-        <div className="max-w-[320px] w-full hidden 2xl:block"></div>
-        {loading ? (
-          <div className="flex justify-center items-center w-full">
-            <CustomLoader />
-          </div>
-        ) : (
-          <div className="flex flex-col gap-y-5 w-full">
-            {componentArray?.map((component, index) => (
-              <div key={index}>{component}</div>
-            ))}
-          </div>
-        )}
+      <div className="grid grid-cols-1 2xl:grid-cols-[320px_1fr] w-full break-all">
+        <div className="max-w-[320px] hidden 2xl:block" />
+        <div className="flex flex-col gap-y-5 w-full overflow-hidden">
+          {loading ? (
+            <div className="flex justify-center items-center w-full">
+              <CustomLoader />
+            </div>
+          ) : (
+            componentArray.map((component, index) => (
+              <div key={index} className="w-full">
+                {component}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

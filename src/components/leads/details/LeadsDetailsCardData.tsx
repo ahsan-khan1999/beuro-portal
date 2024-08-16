@@ -80,6 +80,18 @@ const LeadsDetailsCardData = ({
     router.push("/offers/add");
   };
 
+  const handleReportPDF = () => {
+    router.push({
+      pathname: `/appointments/pdf`,
+      query: { ...router.query, reportId: leadDetails?.id, isCompany: true },
+    });
+  };
+
+  console.log(
+    leadDetails?.isAppointmentCreated,
+    "leadDetails?.isAppointmentCreated"
+  );
+
   return (
     <div>
       <div className="flex gap-y-3 justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
@@ -115,14 +127,15 @@ const LeadsDetailsCardData = ({
         {!isAgent && (
           <div className="flex items-center gap-x-4">
             {leadDetails?.isAppointmentCreated ? (
-              <Button
-                inputType="button"
-                onClick={() => {}}
-                className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
-                text={translate("appointments.view_appointments_btn")}
-                id="view-appointments"
-                iconAlt="view-appointments"
-              />
+              // <Button
+              //   inputType="button"
+              //   onClick={handleReportPDF}
+              //   className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
+              //   text={translate("appointments.view_appointments_btn")}
+              //   id="view-appointments"
+              //   iconAlt="view-appointments"
+              // />
+              <></>
             ) : (
               <OutlineButton
                 inputType="button"

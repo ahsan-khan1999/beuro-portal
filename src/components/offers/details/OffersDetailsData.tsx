@@ -159,7 +159,6 @@ const OffersDetailsData = ({
               name={item.name}
               icon={item.icon}
               selectedTab={index}
-              // onScroll={scrollHandler}
               onItemSelected={handleScrollToTop}
             />
           ))}

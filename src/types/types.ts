@@ -127,6 +127,7 @@ export interface detailScreenCardsLayout {
   currentFormStage?: string;
   children: ReactNode;
   containerClassName?: string;
+  isAgent?:boolean
 }
 
 export interface TableCardLayoutProps {
@@ -1001,6 +1002,7 @@ export interface FilterProps {
   filter: FilterType;
   setFilter: React.Dispatch<SetStateAction<FilterType>>;
   onFilterChange: (filters: FilterType) => void;
+  containerClassName?: string;
 }
 
 interface ItemList {
@@ -1427,6 +1429,18 @@ export interface ReportHeaderProps {
 export interface ReportDocumentHeaderProps {
   date: string;
   language?: string;
+}
+
+export interface ReportPDFOfferDetailsProps {
+  language?: string;
+  employees: number;
+  deliveryVehicle: number;
+  hours: number;
+  cleaningWithHandoverGuarantee: number;
+  broomClean: number;
+  priceCHF: number;
+  remarks: string;
+  noteAndInformation: string;
 }
 
 export interface LivingRoomDetailsProps {

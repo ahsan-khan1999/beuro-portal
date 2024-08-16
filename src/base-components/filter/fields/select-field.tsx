@@ -19,10 +19,16 @@ export default function SelectField({
   containerClassName,
   isSearch,
   labelClassName,
+  dropdownClassName,
 }: OptionsFieldProps) {
   const containerClasses = combineClasses(
-    "relative flex items-center justify-center w-[120px]",
+    "relative flex items-center justify-center min-w-[120px] w-fit",
     containerClassName
+  );
+
+  const dropdownClasses = combineClasses(
+    "bg-white flex-col absolute top-[40px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2 shadow-lg",
+    dropdownClassName
   );
 
   const labelDefualtClasses = combineClasses(
@@ -80,7 +86,7 @@ export default function SelectField({
   return (
     <div className={containerClasses} ref={ref}>
       <div
-        className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg min-w-[105px] w-fit"
+        className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg border border-[#ccc]  min-w-[105px] w-fit"
         onClick={handleToggle}
       >
         <span className={labelDefualtClasses}>{selectedLabel}</span>
@@ -94,7 +100,7 @@ export default function SelectField({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="bg-white flex-col absolute top-[40px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2 shadow-lg"
+            className={dropdownClasses}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
