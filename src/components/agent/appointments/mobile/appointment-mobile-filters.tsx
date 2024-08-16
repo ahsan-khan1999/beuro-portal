@@ -107,11 +107,11 @@ export default function AppointmentsMobileFilters({
             containerClassName="min-w-fit"
           />
 
-          <LeadsFilters
+          {/* <LeadsFilters
             filter={filter}
             setFilter={setFilter}
             onFilterChange={handleFilterChange}
-          />
+          /> */}
         </div>
       </div>
 

@@ -9,11 +9,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 
-export default function MobileLeadsFilter({
+export default function MobileLeadsFilters({
   filter,
   setFilter,
   handleFilterChange,
-  isAgent,
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -150,43 +149,44 @@ export default function MobileLeadsFilter({
   };
 
   return (
-    <div className="flex flex-col gap-y-4 xs:hidden">
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-y-4">
+      <div className="flex items-center justify-between ml-5">
         <h1 className="text-base font-medium text-[#1E1E1E]">Leads</h1>
 
-        <div className="flex items-center gap-x-1">
-          <SelectField
-            handleChange={(value) => hanldeSortChange(value)}
-            value=""
-            options={[
-              {
-                label: `${translate("filters.sort_by.date")}`,
-                value: "createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.latest")}`,
-                value: "-createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.oldest")}`,
-                value: "createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.a_z")}`,
-                value: "customerDetail.fullName",
-              },
-            ]}
-            label={translate("common.sort_button")}
-          />
+        {/* <div className="flex items-center gap-x-1"> */}
+        <SelectField
+          handleChange={(value) => hanldeSortChange(value)}
+          value=""
+          options={[
+            {
+              label: `${translate("filters.sort_by.date")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.latest")}`,
+              value: "-createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.oldest")}`,
+              value: "createdAt",
+            },
+            {
+              label: `${translate("filters.sort_by.a_z")}`,
+              value: "customerDetail.fullName",
+            },
+          ]}
+          label={translate("common.sort_button")}
+          containerClassName="z-10"
+        />
 
-          <LeadsFilters
+        {/* <LeadsFilters
             filter={filter}
             setFilter={setFilter}
             onFilterChange={handleFilterChange}
           />
-        </div>
+        </div> */}
       </div>
-      <div className="flex items-center gap-[14px]">
+      {/* <div className="grid grid-cols-2 xsMini:grid-cols-4 items-center gap-4 ml-5">
         {checkbox.map((item, idx) => (
           <CheckField
             key={idx}
@@ -198,15 +198,20 @@ export default function MobileLeadsFilter({
             onChange={(value, isChecked) =>
               handleStatusChange(value, isChecked)
             }
+            containerClassName="rounded-full w-full py-[6px] pl-[7px] pr-[7px]"
+            isMobile={true}
           />
         ))}
-      </div>
+      </div> */}
       <InputField
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
         iconDisplay={true}
         onEnterPress={onEnterPress}
+        textClassName="w-full rounded-full ml-5"
+        containerClassName="w-full"
+        inputDivClassName="w-full"
       />
     </div>
   );
