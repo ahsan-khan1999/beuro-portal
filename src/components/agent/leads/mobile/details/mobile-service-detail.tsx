@@ -1,22 +1,7 @@
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { combineClasses } from "@/utils/utility";
 import { ServiceMobileDetailProps } from ".";
-interface ServiceDetailItemProps {
-  label: string;
-  value?: string;
-}
-
-const ServiceDetailItem: React.FC<ServiceDetailItemProps> = ({
-  label,
-  value,
-}) => {
-  return (
-    <div className="flex items-center justify-between mb-[14px]">
-      <span className="text-[#656565] text-xs font-medium">{label}:</span>
-      <span className="text-sm text-[#4A4543] font-medium">{value}</span>
-    </div>
-  );
-};
+import { MobileDetailItem } from "@/base-components/ui/item-mobile-row";
 
 export const LeadMobileServiceDetail = ({
   services,
@@ -33,7 +18,7 @@ export const LeadMobileServiceDetail = ({
     <div className={defaultClasses}>
       {hasData ? (
         services?.map((detail: any, index: any) => (
-          <ServiceDetailItem
+          <MobileDetailItem
             key={index}
             label={detail.label}
             value={detail.value}

@@ -36,18 +36,18 @@ export const ReportContactDetail = ({
         className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg"
         id={translate("appointments.report_detail.contact_tab")}
       >
-        <h2 className="text-[#fff] text-xl font-medium">
+        <h2 className="text-[#fff] text-lg xMini:text-xl font-medium">
           {translate("appointments.report_detail.contact_address_detail")}
         </h2>
-        {/* {!isCompanyAppointment && ( */}
         <button
           onClick={handleEditClick}
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
+          className="flex items-center gap-x-4 font-medium rounded-lg border border-[#4A13E7] py-[7px] px-3 xMini:px-4 xMini:min-w-[161px] w-fit bg-white text-[#4B4B4B]"
         >
-          <EditIcon />
-          {translate("offers.address_details.edit_button")}
+          <EditIcon title={translate("offers.address_details.edit_button")} />
+          <span className="hidden xMini:block">
+            {translate("offers.address_details.edit_button")}
+          </span>
         </button>
-        {/* )} */}
       </div>
 
       <div className="px-5 py-2 pb-5">
@@ -81,7 +81,7 @@ export const ReportContactDetail = ({
         <div className="flex flex-col gap-y-5">
           {reportDetail?.addressID?.address?.map((item, index) => (
             <div key={index}>
-              <h4 className="text-base font-semibold text-[#1E1E1E] mb-2">
+              <h4 className="text-base font-medium xMini:font-semibold text-[#1E1E1E] mb-2">
                 {item?.label}
               </h4>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">

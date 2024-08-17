@@ -6,7 +6,7 @@ export const BackIcon = ({ onClick }: { onClick: () => void }) => {
       height="40"
       viewBox="0 0 41 40"
       fill="none"
-      className="cursor-pointer"
+      className="cursor-pointer w-6 h-6 xMini:w-[41px] xMini:h-[41px]"
       onClick={onClick}
     >
       <rect
