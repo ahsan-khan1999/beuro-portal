@@ -82,7 +82,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         </div>
         <div
           className={`${
-            isAgentRoute ? "xMini:ml-5 mlg:ml-[272px]" : "ml-[272px]"
+            isAgentRoute ? "xs:ml-5 mlg:ml-[272px]" : "ml-[272px]"
           } mt-[90px] mr-5`}
         >
           {children}

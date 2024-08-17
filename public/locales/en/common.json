@@ -1064,7 +1064,8 @@
       "country": "Country",
       "cancel_button": "Cancel",
       "save_changes_button": "Save Changes",
-      "next_button": "Next"
+      "next_button": "Next",
+      "address":"Address"
     },
 
     "placeholders": {

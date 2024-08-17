@@ -1,34 +1,34 @@
-import { CompanyIcon } from "@/assets/svgs/components/company-icon";
-import { DateIcon } from "@/assets/svgs/components/date-icon";
 import { MailIcon } from "@/assets/svgs/components/mail-icon";
 import { UserIcon } from "@/assets/svgs/components/use-icon";
-import { OutlineButton } from "@/base-components/ui/button/outline-button";
-import { Appointments } from "@/types/appointments";
 import { Lead } from "@/types/leads";
-import { formatDateTimeToDate } from "@/utils/utility";
 import { useRouter } from "next/router";
 
 export interface LeadMobileRecordsProps {
   dataToAdd: Lead[];
+  isAgent: boolean;
 }
 
-export const LeadTableRecordCard = ({ dataToAdd }: LeadMobileRecordsProps) => {
+export const LeadTableRecordCard = ({
+  dataToAdd,
+  isAgent,
+}: LeadMobileRecordsProps) => {
   const router = useRouter();
 
   return (
     <div className="flex flex-col gap-y-5">
       {dataToAdd.map((item, index) => {
-        const handlePdfPreview = () => {
+        const handleDetail = () => {
           router.push({
-            pathname: `/agent/appointments/pdf`,
-            query: { ...router.query, reportId: item?.id },
+            pathname: isAgent ? "/agent/leads/details" : "/leads/details",
+            query: { ...router.query, lead: item?.id },
           });
         };
 
         return (
           <div
-            className="pl-5 pb-5 pt-[14px] pr-[14px] bg-white rounded-lg"
+            className="pl-5 pb-5 pt-[14px] pr-[14px] bg-white rounded-lg cursor-pointer"
             key={index}
+            onClick={handleDetail}
           >
             <div className="flex flex-col gap-y-1">
               <div className="flex items-start justify-between gap-x-3">

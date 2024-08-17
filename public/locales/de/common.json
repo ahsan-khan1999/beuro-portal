@@ -1057,7 +1057,8 @@
       "country": "Land",
       "cancel_button": "Abbrechen",
       "save_changes_button": "Änderungen speichern",
-      "next_button": "Weiter"
+      "next_button": "Weiter",
+      "address": "Adresse"
     },
     "placeholders": {
       "name": "Bitte geben Sie Ihren Namen ein",

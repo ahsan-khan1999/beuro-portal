@@ -230,7 +230,7 @@ const LeadsDetailsData = ({
       </div>
 
       <div className="w-full break-all flex">
-        <div className={`max-w-[280px] w-full hidden xlg:block`}></div>
+        <div className={`max-w-[280px] w-full hidden xlg:block`} />
 
         {loading ? (
           <div className="flex justify-center items-center w-full">
