@@ -12,6 +12,7 @@ export interface MobileDetailTabProps {
   isSelected: boolean;
   selectedTab?: number;
   onItemSelected?: (id: string) => void;
+  backgroundColor?: string;
 }
 
 export const MobileDetailTab = ({
@@ -23,11 +24,12 @@ export const MobileDetailTab = ({
   selectedTab,
   setTabType,
   onItemSelected,
+  backgroundColor,
 }: MobileDetailTabProps) => {
   const defaultClasses = combineClasses(
     `px-3 py-4 flex items-center justify-between cursor-pointer ${
       isSelected
-        ? "bg-primary text-white rounded-t-lg"
+        ? `bg-[${backgroundColor}] text-white rounded-t-lg`
         : "bg-white text-[#272727] rounded-lg"
     }`,
     containerClassName

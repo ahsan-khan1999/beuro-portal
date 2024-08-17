@@ -4,9 +4,6 @@ import { useTranslation } from "next-i18next";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { MobileDetailTab } from "@/base-components/ui/tab/mobile-detail-tab";
 import { LeadMobileCustomerDetail } from "./mobile-customer-detail";
-import { LeadsAddressDetailsData } from "@/components/leads/details/leads-address-details";
-import { LeadServiceDetailsData } from "@/components/leads/details/leads-service-details";
-import { LeadsAdditionalDetails } from "@/components/leads/details/leads-additional-details";
 import { Lead } from "@/types/leads";
 import { LeadsAddressMobileDetails } from "./mobile-address-detail";
 import { LeadMobileServiceDetail } from "./mobile-service-detail";
@@ -83,7 +80,9 @@ export const LeadsMobileDetailData = ({
         return <LeadMobileServiceDetail services={serviceDetail} />;
       case ComponentsType.additional:
         return (
-          <LeadMobileAdditionalDetail additional={leadDetails?.additionalDetails} />
+          <LeadMobileAdditionalDetail
+            additional={leadDetails?.additionalDetails}
+          />
         );
       default:
         return null;
@@ -119,6 +118,7 @@ export const LeadsMobileDetailData = ({
     </svg>`,
       name: `${translate("leads.tabs_headings.customer")}`,
       type: ComponentsType.customer,
+      backgroundColor: "#4A13E7",
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -130,6 +130,7 @@ export const LeadsMobileDetailData = ({
     </svg>`,
       name: `${translate("leads.tabs_headings.address")}`,
       type: ComponentsType.address,
+      backgroundColor: "#FE9244",
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -146,6 +147,7 @@ export const LeadsMobileDetailData = ({
     </svg>`,
       name: `${translate("leads.tabs_headings.service")}`,
       type: ComponentsType.service,
+      backgroundColor: "#C50EE0",
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -164,6 +166,7 @@ export const LeadsMobileDetailData = ({
     </svg>`,
       name: `${translate("leads.tabs_headings.additional")}`,
       type: ComponentsType.additional,
+      backgroundColor: "#45C769",
     },
   ];
 
@@ -186,6 +189,7 @@ export const LeadsMobileDetailData = ({
                 heading={item.name}
                 icon={item.icon}
                 selectedTab={item.type}
+                backgroundColor={item.backgroundColor}
               />
               {tabType === item.type && <>{renderComponent(item.type)}</>}
             </React.Fragment>

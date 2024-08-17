@@ -1,3 +1,4 @@
+import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { Customers } from "@/types/customer";
 import { combineClasses } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
@@ -41,39 +42,47 @@ export const LeadMobileCustomerDetail = ({
       value: data.gender,
     },
   ];
-  return (
-    <div
-      className={defaultClasses}
-      id={translate("leads.tabs_headings.customer")}
-    >
-      {customerDetail.map((detail, index) => (
-        <div
-          key={index}
-          className="flex items-center justify-between mb-[14px]"
-        >
-          <span className="text-[#656565] text-xs font-medium">
-            {detail.label}:
-          </span>
-          <span className="text-sm text-[#4A4543] font-medium">
-            {detail.value}
-          </span>
-        </div>
-      ))}
 
-      <div className="flex items-center justify-between mb-[14px]">
-        <span className="text-[#656565] text-xs font-medium">
-          {translate("leads.customer_details.address")}:
-        </span>
-        <p className="flex flex-col gap-y-[2px]">
-          <span className="text-sm text-[#4A4543] font-medium">
-            {data?.address?.streetNumber}
-          </span>
-          <span className="text-sm text-[#4A4543] font-medium">
-            {data?.address?.postalCode}
-            {data?.address?.country}
-          </span>
-        </p>
-      </div>
+  return (
+    <div className={defaultClasses}>
+      {data ? (
+        <>
+          {customerDetail.map((detail, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between mb-[14px]"
+            >
+              <span className="text-[#656565] text-xs font-medium">
+                {detail.label}:
+              </span>
+              <span className="text-sm text-[#4A4543] font-medium">
+                {detail.value}
+              </span>
+            </div>
+          ))}
+
+          <div className="flex items-center justify-between mb-[14px]">
+            <span className="text-[#656565] text-xs font-medium">
+              {translate("leads.customer_details.address")}:
+            </span>
+            <p className="flex flex-col gap-y-[2px]">
+              <span className="text-sm text-[#4A4543] font-medium">
+                {data?.address?.streetNumber}
+              </span>
+              <span className="text-sm text-[#4A4543] font-medium">
+                {data?.address?.postalCode}
+                {data?.address?.country}
+              </span>
+            </p>
+          </div>
+        </>
+      ) : (
+        <NoDataEmptyState
+          containerClassName="py-5"
+          imgClassName="w-14 h-14"
+          textClassName="text-lg"
+        />
+      )}
     </div>
   );
 };

@@ -107,6 +107,7 @@ export interface MobileTabArrayTypes {
   icon: string;
   id?: string;
   type: number;
+  backgroundColor?:string
 }
 export interface stepFormArrayTypes {
   name: string;
