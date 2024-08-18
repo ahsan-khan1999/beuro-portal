@@ -4,8 +4,12 @@ import buroHeading from "@/assets/pngs/bure-mobile-heading.png";
 import Image from "next/image";
 import { useAppSelector } from "@/hooks/useRedux";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
+export interface MobileHeaderProps {
+  containerClassName?: string;
+  handleDrawer: () => void;
+}
 
-export const MobileHeader = () => {
+export const MobileHeader = ({ handleDrawer }: MobileHeaderProps) => {
   const { user } = useAppSelector((state) => state.auth);
   const defaultClasses = combineClasses(
     "fixed w-full top-0 shadow-header z-50 px-6 pb-5 pt-[56px] flex items-center justify-between"
@@ -21,7 +25,7 @@ export const MobileHeader = () => {
     >
       <div className="flex items-center gap-x-[14px]">
         <HamburgerIcon
-          onClick={() => {}}
+          onClick={handleDrawer}
           strokeColor="#fff"
           containerClassName="xMini:block mlg:hidden"
         />

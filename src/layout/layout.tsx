@@ -8,11 +8,13 @@ import Header from "@/base-components/Header";
 import { useRouter } from "next/router";
 import { updateCurrentLanguage } from "@/api/slices/globalSlice/global";
 import { MobileHeader } from "@/base-components/mobile-header";
+import { MobileSidebar } from "@/base-components/ui/mobile-sidebar";
 
 export const Layout = ({ children }: MyComponentProp) => {
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [isDrawer, setIsDrawer] = useState(false);
+  const [isBelowXMini, setIsBelowXMini] = useState(false);
   const locale = useRouter().locale;
   const router = useRouter();
 
@@ -23,6 +25,19 @@ export const Layout = ({ children }: MyComponentProp) => {
   useEffect(() => {
     dispatch(updateCurrentLanguage(locale));
   }, [locale]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsBelowXMini(window.innerWidth < 730);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width:1100px)");
@@ -58,10 +73,14 @@ export const Layout = ({ children }: MyComponentProp) => {
       <div
         className={`!fixed top-0 flex justify-center items-center z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
           isDrawer ? "block" : "hidden"
-        }`}
+        } ${isBelowXMini ? "ml-[375px]" : "ml-0"}`}
         onClick={handleClose}
       >
-        <SideBar isDrawer={true} handleDrawer={(e) => handleClose(e)} />
+        {isBelowXMini ? (
+          <MobileSidebar handleDrawer={handleClose} />
+        ) : (
+          <SideBar isDrawer={true} handleDrawer={handleClose} />
+        )}
       </div>
     );
   };
@@ -83,7 +102,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         </div>
 
         <div className="block xMini:hidden">
-          <MobileHeader />
+          <MobileHeader handleDrawer={handleDrawer} />
         </div>
 
         <div

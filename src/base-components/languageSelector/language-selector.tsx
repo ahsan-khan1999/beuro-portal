@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import { useLanguageSeleclor } from "@/hooks/languageSelector/useLanguageSelector";
 import { combineClasses } from "@/utils/utility";
+import { useEffect, useState } from "react";
 
 export const LanguageSelector = ({ className }: LanguageName) => {
   const {
@@ -22,11 +23,26 @@ export const LanguageSelector = ({ className }: LanguageName) => {
   };
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  const [isXMini, setIsXMini] = useState(false);
 
   const containerClasses = combineClasses(
     "relative flex items-center justify-center",
     className
   );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 730px)"); // xMini breakpoint is 640px
+    setIsXMini(mediaQuery.matches);
+
+    const handleResize = (event: MediaQueryListEvent) => {
+      setIsXMini(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleResize);
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
 
   return (
     <div className={containerClasses} ref={ref}>
@@ -36,10 +52,10 @@ export const LanguageSelector = ({ className }: LanguageName) => {
         className="flex items-center ml-2 text-dark font-medium"
         ref={dropdownRef}
       >
-        {selectedLanguage?.name}
+        {isXMini && selectedLanguage?.name}
 
         <svg
-          className={`ml-2  ${isOpen ? "rotate-180" : ""} `}
+          className={`xMini:ml-2 ${isOpen ? "rotate-180" : ""} `}
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="11"
@@ -83,7 +99,9 @@ export const LanguageSelector = ({ className }: LanguageName) => {
                 >
                   <div className="flex items-center">
                     <FlagIcon countryCode={language.code} />
-                    <span className="truncate ml-3">{language.name}</span>
+                    {isXMini && (
+                      <span className="truncate ml-3">{language.name}</span>
+                    )}
                   </div>
                   {selectedLanguage?.code === language.code && (
                     <Image src={checkIcon} alt="Check Icon Selected" />
