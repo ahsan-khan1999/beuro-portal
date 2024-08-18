@@ -87,6 +87,7 @@ module.exports = {
         inProgressStatus: "#ebd409",
         tableRowBg: "#F4F8FD",
         overdueColor: "#FF376F",
+        
       },
       boxShadow: (theme: any) => ({
         header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,

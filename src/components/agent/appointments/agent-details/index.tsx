@@ -30,6 +30,10 @@ export const AgentAppointmentsDetails = () => {
               isButton={true}
               onButtonClick={handleCreateReport}
               buttonHeading={translate("common.create_report_btn")}
+              containerClassName="py-4 xMini:py-[153px]"
+              imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
+              textClassName="text-lg xMini:text-2xl"
+              className="py-5 px-3 xMini:py-10 xMini:px-6"
             />
           </div>
         )

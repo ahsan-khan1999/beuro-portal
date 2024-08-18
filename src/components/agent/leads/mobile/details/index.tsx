@@ -33,9 +33,8 @@ export const LeadsMobileDetailData = ({
   leadDetails,
 }: AgentLeadDetailsProps) => {
   const { t: translate } = useTranslation();
-  const [tabType, setTabType] = useState<number | null>(null);
-
   const addressDetail = leadDetails?.addressID?.address;
+  const [tabType, setTabType] = useState<number | null>(null);
   const content = leadDetails?.requiredService as ContentTableRowTypes;
 
   const serviceDetail: ServiceMobileDetailProps[] = [

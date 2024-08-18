@@ -54,7 +54,7 @@ export default function AgentLeads() {
         isAgent={true}
       />
 
-      <div className="ml-5 block xMini:hidden">
+      <div className="block xMini:hidden">
         <LeadTableRecordCard isAgent={true} dataToAdd={currentPageRows} />
       </div>
       <div className="hidden xMini:block">

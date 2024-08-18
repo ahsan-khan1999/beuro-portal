@@ -7,6 +7,7 @@ import SideBar from "@/base-components/SideBar";
 import Header from "@/base-components/Header";
 import { useRouter } from "next/router";
 import { updateCurrentLanguage } from "@/api/slices/globalSlice/global";
+import { MobileHeader } from "@/base-components/mobile-header";
 
 export const Layout = ({ children }: MyComponentProp) => {
   const { user } = useAppSelector((state) => state.auth);
@@ -80,10 +81,15 @@ export const Layout = ({ children }: MyComponentProp) => {
         <div className={`${isAgentRoute ? "hidden xMini:block" : "block"}`}>
           <Header handleDrawer={handleDrawer} />
         </div>
+
+        <div className="block xMini:hidden">
+          <MobileHeader />
+        </div>
+
         <div
           className={`${
             isAgentRoute ? "xs:ml-5 mlg:ml-[272px]" : "ml-[272px]"
-          } mt-[90px] mr-5`}
+          } mt-[150px] xMini:mt-[90px] mr-5`}
         >
           {children}
         </div>
