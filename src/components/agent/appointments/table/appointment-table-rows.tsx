@@ -117,7 +117,10 @@ export const AppointmentTableRows = ({
                       />
                     </div>
 
-                    <div className="py-4 flex items-center">
+                    <div
+                      className="py-4 flex items-center"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       {item?.isReportSubmitted ? (
                         <OutlineButton
                           inputType="button"

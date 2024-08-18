@@ -89,7 +89,7 @@ export const AppointmentsDetailCard = ({
       <div className="flex items-center justify-between border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center gap-x-3 xMini:gap-x-[27px]">
           <BackIcon onClick={handleBack} />
-          <h1 className="ttext-base xMini:text-2xl">
+          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-base xMini:text-2xl">
             {translate("appointments.detail_heading")}
           </h1>
         </div>
@@ -169,6 +169,8 @@ export const AppointmentsDetailCard = ({
                 />
               </div>
             </div>
+
+            
           </div>
           <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">
             {appointmentDetails?.leadID?.customerDetail?.companyName && (

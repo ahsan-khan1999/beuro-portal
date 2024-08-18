@@ -42,7 +42,7 @@ export const AppointmentsDetailCard = ({
       <div className="flex items-center justify-between border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center gap-x-4">
           <BackIcon onClick={handleBack} />
-          <h1 className="text-[#222B45] text-2xl font-semibold">
+          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-base xMini:text-2xl">
             {translate("appointments.detail_heading")}
           </h1>
         </div>
@@ -85,7 +85,7 @@ export const AppointmentsDetailCard = ({
                 {appointmentDetails?.leadID?.refID}
               </span>
             </div>
-            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+            {/* <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <p className="text-base text-[#5C5C5C] font-medium min-w-[60px] w-fit">
                 {translate("appointments.detail_data.status")}:
               </p>
@@ -106,6 +106,31 @@ export const AppointmentsDetailCard = ({
                 dropDownItemsContainerClassName="w-[140px]"
                 dropDownIconClassName="text-white"
               />
+            </div> */}
+
+            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+              <span className="text-base text-[#5C5C5C] font-medium min-w-[60px] w-fit">
+                {translate("appointments.detail_data.status")}:
+              </span>
+              <div>
+                <DropDown
+                  items={items}
+                  selectedItem={translate(
+                    `appointments.appointment_status.${appointmentDetails?.appointmentStatus}`
+                  )}
+                  onItemSelected={onStatusChange}
+                  dropDownClassName={`${
+                    appointmentDetails?.appointmentStatus === "Pending"
+                      ? "bg-[#4A13E7]"
+                      : appointmentDetails?.appointmentStatus === "Completed"
+                      ? "bg-[#45C769]"
+                      : "bg-[#D80027]"
+                  } w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                  dropDownTextClassName="text-white text-base font-medium me-1"
+                  dropDownItemsContainerClassName="w-[140px]"
+                  dropDownIconClassName="text-white"
+                />
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">

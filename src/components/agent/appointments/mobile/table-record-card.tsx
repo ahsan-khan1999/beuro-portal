@@ -3,6 +3,7 @@ import { DateIcon } from "@/assets/svgs/components/date-icon";
 import { UserIcon } from "@/assets/svgs/components/use-icon";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
+import { useAppSelector } from "@/hooks/useRedux";
 import { Appointments } from "@/types/appointments";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { useRouter } from "next/router";
@@ -15,6 +16,7 @@ export const AppointmentTableRecordCard = ({
   dataToAdd,
 }: AppointmentMobileRecordsProps) => {
   const router = useRouter();
+  const { user } = useAppSelector((state) => state.auth);
 
   return (
     <div className="flex flex-col gap-y-5">
@@ -68,7 +70,10 @@ export const AppointmentTableRecordCard = ({
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-y-1 min-w-[130px]">
+                <div
+                  className="flex flex-col gap-y-1 min-w-[130px]"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <p
                     className={`${
                       item?.appointmentStatus === "Pending"
@@ -104,11 +109,11 @@ export const AppointmentTableRecordCard = ({
               </div>
 
               <div className="flex flex-col gap-y-1">
-                {item?.leadID?.customerDetail?.companyName && (
+                {user?.company?.companyName && (
                   <div className="flex items-center gap-x-4">
                     <CompanyIcon />
                     <p className="text-[#616161] font-normal text-sm">
-                      {item?.leadID?.customerDetail?.companyName}
+                      {user?.company?.companyName}
                     </p>
                   </div>
                 )}
