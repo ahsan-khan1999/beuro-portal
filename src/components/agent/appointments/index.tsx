@@ -46,7 +46,7 @@ export default function AgentAppointments() {
         isAgent={true}
       />
 
-      <div className="ml-5 block xMini:hidden">
+      <div className="block xMini:hidden">
         <AppointmentTableRecordCard dataToAdd={currentPageRows} />
       </div>
 

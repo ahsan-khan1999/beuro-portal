@@ -1,6 +1,4 @@
 import { BackIcon } from "@/assets/svgs/components/back-icon";
-import { Button } from "@/base-components/ui/button/button";
-import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";

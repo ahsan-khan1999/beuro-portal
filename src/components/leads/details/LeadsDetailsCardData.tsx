@@ -89,31 +89,8 @@ const LeadsDetailsCardData = ({
 
   return (
     <div>
-      <div className="flex gap-y-3 justify-between items-center border-b border-b-[#000] border-opacity-10 pb-5">
+      <div className=" flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
         <div className="flex items-center gap-x-3 xsMini:gap-x-[27px]">
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="41"
-            height="40"
-            viewBox="0 0 41 40"
-            fill="none"
-            className="cursor-pointer w-6 h-6 xMini:w-[41px] xMini:h-[41px]"
-            onClick={handleBack}
-          >
-            <rect
-              x="0.750977"
-              y="0.5"
-              width="39.2105"
-              height="39"
-              rx="7.5"
-              fill="white"
-              stroke="#4A13E7"
-            />
-            <path
-              d="M23.7911 13.2658C23.975 13.4498 24.0783 13.6993 24.0783 13.9594C24.0783 14.2196 23.975 14.4691 23.7911 14.6531L18.9346 19.5095L23.7911 24.366C23.9698 24.551 24.0687 24.7989 24.0664 25.0561C24.0642 25.3134 23.961 25.5594 23.7791 25.7413C23.5972 25.9232 23.3511 26.0264 23.0939 26.0287C22.8366 26.0309 22.5888 25.932 22.4038 25.7533L16.8537 20.2032C16.6697 20.0192 16.5664 19.7697 16.5664 19.5095C16.5664 19.2494 16.6697 18.9999 16.8537 18.8159L22.4038 13.2658C22.5878 13.0818 22.8373 12.9785 23.0974 12.9785C23.3576 12.9785 23.6071 13.0818 23.7911 13.2658Z"
-              fill="#4A13E7"
-            />
-          </svg> */}
           <BackIcon onClick={handleBack} />
           <p className="font-medium text-base xMini:text-2xl">
             {translate("leads.card_content.heading")}
@@ -121,7 +98,7 @@ const LeadsDetailsCardData = ({
         </div>
 
         {!isAgent && (
-          <div className="flex items-center gap-x-4">
+          <div className="flex items-center justify-end gap-x-4">
             {leadDetails?.isAppointmentCreated ? (
               // <Button
               //   inputType="button"
@@ -136,7 +113,7 @@ const LeadsDetailsCardData = ({
               <OutlineButton
                 inputType="button"
                 onClick={onCreateAppointment}
-                className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+                className="bg-white text-[#4B4B4B] w-fit border border-primary !h-10 hover:bg-transparent hover:text-primary"
                 text={translate("appointments.create_appointments")}
                 id="create-appointment"
                 iconAlt="create-appointment"
@@ -148,7 +125,7 @@ const LeadsDetailsCardData = ({
               <OutlineButton
                 inputType="button"
                 onClick={offerCreateHandler}
-                className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+                className="bg-white text-[#4B4B4B] w-fit border border-primary !h-10 hover:bg-transparent hover:text-primary"
                 text={translate("leads.card_content.create_button")}
                 id="create offer"
                 iconAlt="create offer"
@@ -166,17 +143,23 @@ const LeadsDetailsCardData = ({
               </p>
             </button>
           )} */}
-            <span
+            <div
               onClick={() => leadDeleteHandler()}
-              className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer"
+              className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center"
             >
-              <Image src={deleteIcon} alt="deleteIcon" width={16} height={20} />
-            </span>
+              <Image
+                src={deleteIcon}
+                alt="deleteIcon"
+                className="cursor-pointer"
+                width={16}
+                height={20}
+              />
+            </div>
           </div>
         )}
       </div>
 
-      <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3 pt-2 mlg:pt-5">
+      <div className="grid grid-cols-1 xMini:grid-cols-3 items-center gap-x-5 xlg:gap-x-20 gap-y-3 pt-2 mlg:pt-5">
         <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
           <span className="font-normal text-[#4D4D4D] text-base">
             {translate("leads.card_content.lead_id")}:
@@ -198,12 +181,24 @@ const LeadsDetailsCardData = ({
                 `leads.lead_dropdown_status.${leadDetails?.leadStatus}`
               )}
               onItemSelected={onStatusUpdate}
-              dropDownClassName={`border border-[${getStatusColor(
-                leadDetails?.leadStatus
-              )}] w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
-              dropDownTextClassName={`text-[${getStatusColor(
-                leadDetails?.leadStatus
-              )}] text-base font-medium me-1`}
+              dropDownClassName={`border ${
+                leadDetails?.leadStatus === "Open"
+                  ? "border-[#4A13E7]"
+                  : leadDetails?.leadStatus === "InProcess"
+                  ? "border-[#f5d60f]"
+                  : leadDetails?.leadStatus === "Close"
+                  ? "border-[#45C769]"
+                  : "border-[#FF0000]"
+              } w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+              dropDownTextClassName={`${
+                leadDetails?.leadStatus === "Open"
+                  ? "text-[#4A13E7]"
+                  : leadDetails?.leadStatus === "InProcess"
+                  ? "text-[#000]"
+                  : leadDetails?.leadStatus === "Close"
+                  ? "text-[#45C769]"
+                  : "text-[#FF0000]"
+              } text-base font-medium me-1`}
               dropDownItemsContainerClassName="w-full"
               dropDownIconClassName={`text-[${getStatusColor(
                 leadDetails?.leadStatus
@@ -236,7 +231,7 @@ const LeadsDetailsCardData = ({
             {translate("appointments.appointment")}:
           </span>
           <div
-            className={`px-[10px] py-1 rounded-lg text-white text-sm font-medium text-center xs:w-[110px] mlg:w-fit ${
+            className={`px-[10px] py-1 rounded-lg text-white text-sm font-medium text-center xs:w-[120px] mlg:w-fit ${
               leadDetails?.isAppointmentCreated ? "bg-primary" : "bg-[#FB9600]"
             }`}
           >

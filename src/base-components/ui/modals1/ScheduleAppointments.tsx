@@ -6,6 +6,7 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { useScheduleAppointment } from "@/hooks/appointments/useScheduleAppointment";
 import { useAppSelector } from "@/hooks/useRedux";
 import { Appointments } from "@/types/appointments";
+import { Lead } from "@/types/leads";
 
 export interface AppointmentsModalProps {
   onClose: () => void;
