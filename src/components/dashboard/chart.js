@@ -50,7 +50,7 @@ const PieChart = ({ data }) => {
         data.datasets.length === 0 ||
         data.datasets[0].data.length === 0 ? (
           <NoDataEmptyState
-            className="w-[90%] mx-auto my-3"
+            className="w-[90%] mx-4 my-3"
             containerClassName="py-0"
           />
         ) : (

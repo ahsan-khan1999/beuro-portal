@@ -32,22 +32,23 @@ export const ReportAdditionalInfoDetail = ({
         className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.additional")}
       >
-        <h2 className="text-[#fff] text-xl font-medium">
+        <h2 className="text-[#fff] text-lg xMini:text-xl font-medium">
           {translate("appointments.report_detail.additional_detail")}
         </h2>
-        {/* {!isCompanyAppointment && ( */}
         <button
           onClick={handleEditClick}
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
+          className="flex items-center gap-x-4 font-medium rounded-lg border border-[#4A13E7] py-[7px] px-3 xMini:px-4 xMini:min-w-[161px] w-fit bg-white text-[#4B4B4B]"
         >
-          <EditIcon />
-          {translate("offers.address_details.edit_button")}
+          <EditIcon title={translate("offers.address_details.edit_button")} />
+
+          <span className="hidden xMini:block">
+            {translate("offers.address_details.edit_button")}
+          </span>
         </button>
-        {/* )} */}
       </div>
 
       <div className="px-5 py-2 pb-5">
-        <div className="gap-x-[17px] grid grid-cols-1 lg:grid-cols-2 xlg:grid-cols-3 bg-[#EDF4FF] rounded-lg p-2 gap-y-2">
+        <div className="gap-x-[17px] grid grid-cols-1 xMini:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] rounded-t-lg p-2 gap-y-2">
           <div className="flex flex-col gap-y-1">
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.additional_details_fields.mitarbeiter")}
@@ -96,13 +97,14 @@ export const ReportAdditionalInfoDetail = ({
               {reportDetail?.offerDetails?.priceCHF}
             </div>
           </div>
-          <div className="flex flex-col gap-y-1 col-span-3">
-            <label className="text-[#344054] text-sm font-medium">
-              {translate("agent.additional_details_fields.bemerkung")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {reportDetail?.offerDetails?.remarks}
-            </div>
+        </div>
+
+        <div className="flex flex-col gap-y-1 bg-[#EDF4FF] rounded-b-lg px-2 pt-3 pb-2">
+          <label className="text-[#344054] text-sm font-medium">
+            {translate("agent.additional_details_fields.bemerkung")}
+          </label>
+          <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            {reportDetail?.offerDetails?.remarks}
           </div>
         </div>
 

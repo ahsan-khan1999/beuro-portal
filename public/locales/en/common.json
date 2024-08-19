@@ -291,7 +291,7 @@
       "content": "Content",
       "mail_tracker": "Mail Tracker",
       "settings": "Settings",
-      "contact_supports": "Contact Supports"
+      "contact_supports": "Supports"
     },
     "admin": {
       "dashboard": "Dashboard",
@@ -317,7 +317,7 @@
         "cancelled": "Cancelled"
       },
       "settings": "Settings",
-      "contact_supports": "Contact Supports"
+      "contact_supports": "Supports"
     }
   },
   "customers": {
@@ -1064,7 +1064,8 @@
       "country": "Country",
       "cancel_button": "Cancel",
       "save_changes_button": "Save Changes",
-      "next_button": "Next"
+      "next_button": "Next",
+      "address": "Address"
     },
 
     "placeholders": {
@@ -1257,6 +1258,7 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+    "logout": "Logout",
     "please_choose": "Please Choose",
     "yes": "Yes",
     "no": "No",
@@ -2060,6 +2062,7 @@
   },
   "dashboard_detail": {
     "main_heading": "Customer Dashboard",
+    "agent_dashboard": "Agent Dashboard",
     "overview": "Overview",
     "sales_heading": "Sales Report",
     "plans": "Plans",

@@ -1057,7 +1057,8 @@
       "country": "Land",
       "cancel_button": "Abbrechen",
       "save_changes_button": "Änderungen speichern",
-      "next_button": "Weiter"
+      "next_button": "Weiter",
+      "address": "Adresse"
     },
     "placeholders": {
       "name": "Bitte geben Sie Ihren Namen ein",
@@ -1250,6 +1251,7 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
+    "logout": "Abmeldung",
     "please_choose": "Bitte wählen Sie",
     "yes": "Ja",
     "no": "Nein",
@@ -2055,6 +2057,7 @@
   },
   "dashboard_detail": {
     "main_heading": "Kunden-Dashboard",
+    "agent_dashboard": "Agent Dashboard",
     "overview": "Überblick",
     "sales_heading": "Verkaufsbericht",
     "plans": "Pläne",

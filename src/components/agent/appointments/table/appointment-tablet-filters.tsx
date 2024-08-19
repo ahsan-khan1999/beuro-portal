@@ -119,11 +119,11 @@ export default function AppointmentsTabletFilters({
           containerClassName="min-w-fit"
         />
 
-        <LeadsFilters
+        {/* <LeadsFilters
           filter={filter}
           setFilter={setFilter}
           onFilterChange={handleFilterChange}
-        />
+        /> */}
       </div>
     </div>
   );

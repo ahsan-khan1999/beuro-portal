@@ -41,7 +41,7 @@ export const SteperFormTab = ({
 
   const defaultClasses = combineClasses(
     `
-    cursor-pointer px-3 py-[10px] rounded-[40px] border flex items-center gap-x-3 w-fit
+    cursor-pointer px-3 py-[10px] rounded-[40px] border flex items-center gap-x-[2px] xAir:gap-x-1 md:gap-x-3 w-fit
     ${isSelected ? "border-primary bg-primary" : "border-gray-300"}
   `,
     containerClassName
@@ -49,7 +49,7 @@ export const SteperFormTab = ({
 
   const defaultTextClasses = combineClasses(
     `
-    text-base font-medium
+    text-sm mlg:text-base font-medium
     ${isSelected ? "text-white" : "text-[#616161]"}
   `,
     textClassName
@@ -61,7 +61,9 @@ export const SteperFormTab = ({
         <span dangerouslySetInnerHTML={{ __html: icon }} />
         <span className={defaultTextClasses}>{heading}</span>
       </div>
-      {showArrow && <Image src={arrowIcon} alt="arrow icon" />}
+      {showArrow && (
+        <Image src={arrowIcon} alt="arrow icon" className="hidden xlg:block" />
+      )}
     </button>
   );
 };

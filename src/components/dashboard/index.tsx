@@ -195,11 +195,16 @@ const AdminDashboard = () => {
     dispatch(readDashboard({ params: { filter: { month: query?.month } } }));
   };
 
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/agent");
+
   return (
     <div className="mb-10">
-      <div className="p-9 bg-gradient rounded-lg">
-        <h1 className="font-medium text-[28px] tracking-[0.5px] text-white">
-          {translate("dashboard_detail.main_heading")}
+      <div className="p-5 xMini:p-9 bg-gradient rounded-lg">
+        <h1 className="font-medium text-lg xMini:text-2xl mlg:text-[28px] tracking-[0.5px] text-white">
+          {isAgentRoute
+            ? `${translate("dashboard_detail.agent_dashboard")}`
+            : `${translate("dashboard_detail.main_heading")}}`}
         </h1>
       </div>
 
@@ -245,7 +250,7 @@ const AdminDashboard = () => {
             handleFilterChange={handleFilterChange}
           />
 
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
+          <div className="grid xMini:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5">
             {dashboardCards?.map((item, index) => {
               return (
                 <DashboardCard
@@ -267,13 +272,15 @@ const AdminDashboard = () => {
             })}
           </div>
 
-          <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
-            <div className="hidden 2xl:block">
-              <FollowUpNotificationBar dashboard={dashboard} />
+          {!isAgentRoute && (
+            <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
+              <div className="hidden 2xl:block">
+                <FollowUpNotificationBar dashboard={dashboard} />
+              </div>
+              <ActivitiesNotificationBar dashboard={dashboard} />
+              <PieChart data={pieData} />
             </div>
-            <ActivitiesNotificationBar dashboard={dashboard} />
-            <PieChart data={pieData} />
-          </div>
+          )}
         </>
       ) : (
         <CustomLoader />

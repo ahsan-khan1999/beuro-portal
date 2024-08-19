@@ -96,18 +96,18 @@ ServiceDetailDataProps) => {
         className="flex justify-between bg-[#C50EE0] py-5 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.service")}
       >
-        <h2 className="text-[#fff] text-xl font-medium">
+        <h2 className="text-[#fff] text-lg xMini:text-xl font-medium">
           {translate("offers.service_details.main_heading")}
         </h2>
-        {/* {!isCompanyAppointment && ( */}
         <button
           onClick={handleEditClick}
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
+          className="flex items-center gap-x-4 font-medium rounded-lg border border-[#4A13E7] py-[7px] px-3 xMini:px-4 xMini:min-w-[161px] w-fit bg-white text-[#4B4B4B]"
         >
-          <EditIcon />
-          {translate("offers.service_details.edit_button")}
+          <EditIcon title={translate("offers.service_details.edit_button")} />
+          <span className="hidden xMini:block">
+            {translate("offers.service_details.edit_button")}
+          </span>
         </button>
-        {/* )} */}
       </div>
       <div className="py-3 px-5">
         <div className="rounded-lg px-2 pt-3 bg-[#EDF4FF]">

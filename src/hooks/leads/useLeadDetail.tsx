@@ -110,6 +110,27 @@ export default function useLeadDetail() {
     );
   };
 
+  // const handleImageUpload = (
+  //   id: string,
+  //   refID?: string,
+  //   name?: string,
+  //   heading?: string,
+  //   e?: React.MouseEvent<HTMLSpanElement>
+  // ) => {
+  //   e?.stopPropagation();
+  //   dispatch(readImage({ params: { type: "leadID", id: leadDetails?.id } }));
+  //   dispatch(
+  //     updateModalType({
+  //       type: ModalType.UPLOAD_OFFER_IMAGE,
+  //       data: {
+  //         refID: refID,
+  //         name: name,
+  //         heading: heading,
+  //       },
+  //     })
+  //   );
+  // };
+
   const shareImgModal = (
     id: string,
     refID?: string,

@@ -29,7 +29,7 @@ export const AdditionalInfoReport = ({
       className="mb-5"
       id={translate("agent.report_tabs_heading.additional")}
     >
-      <h1 className="p-5 bg-white rounded-t-lg h-fit text-[#1E1E1E] text-base font-semibold pb-[29px]">
+      <h1 className="p-5 bg-white rounded-t-lg h-fit text-[#1E1E1E] text-base font-semibold pb-3 xMini:pb-[29px]">
         {translate("appointments.report_detail.additional_detail")}
       </h1>
 

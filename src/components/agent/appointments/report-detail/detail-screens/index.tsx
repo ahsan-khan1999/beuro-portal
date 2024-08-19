@@ -154,8 +154,8 @@ export const ReportDetailData = ({
   //     : translate("common.customer_name");
 
   return (
-    <div>
-      <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
+    <div className="mt-5 xMini:mt-0">
+      <div className="hidden xMini:block 2xl:fixed mb-5 mt-5 2xl:mt-0">
         <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 2xl:mb-0">
           {tabSection?.map((item, index) => (
             <OfferTabs

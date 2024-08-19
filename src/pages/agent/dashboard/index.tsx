@@ -2,9 +2,9 @@ import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 import { withLayout } from "@/hoc/withLayout";
-import { AgentDashboard } from "@/components/agent/dashboard";
+import Dashboard from "@/components/dashboard";
 
-const Home = () => <AgentDashboard />;
+const Home = () => <Dashboard />;
 
 export default withLayout(Home);
 

@@ -101,6 +101,14 @@ export interface tabArrayTypes {
   icon: string;
   id?: string;
 }
+export interface MobileTabArrayTypes {
+  name: string;
+  content?: React.ReactNode;
+  icon: string;
+  id?: string;
+  type: number;
+  backgroundColor?:string
+}
 export interface stepFormArrayTypes {
   name: string;
   content?: React.ReactNode;
@@ -127,7 +135,7 @@ export interface detailScreenCardsLayout {
   currentFormStage?: string;
   children: ReactNode;
   containerClassName?: string;
-  isAgent?:boolean
+  isAgent?: boolean;
 }
 
 export interface TableCardLayoutProps {

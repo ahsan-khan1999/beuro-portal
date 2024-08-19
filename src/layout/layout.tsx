@@ -7,6 +7,8 @@ import SideBar from "@/base-components/SideBar";
 import Header from "@/base-components/Header";
 import { useRouter } from "next/router";
 import { updateCurrentLanguage } from "@/api/slices/globalSlice/global";
+import { MobileHeader } from "@/base-components/mobile-header";
+import { motion } from "framer-motion";
 
 export const Layout = ({ children }: MyComponentProp) => {
   const { user } = useAppSelector((state) => state.auth);
@@ -55,12 +57,22 @@ export const Layout = ({ children }: MyComponentProp) => {
   const Drawer = () => {
     return (
       <div
-        className={`!fixed top-0 flex justify-center items-center z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
+        className={`!fixed top-0  z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
           isDrawer ? "block" : "hidden"
         }`}
-        onClick={handleClose}
+        // onClick={handleClose}
       >
-        <SideBar isDrawer={true} handleDrawer={(e) => handleClose(e)} />
+        {isDrawer && (
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="w-[247px] h-full bg-white"
+          >
+            <SideBar isDrawer={true} handleDrawer={handleClose} />
+          </motion.div>
+        )}
       </div>
     );
   };
@@ -80,10 +92,15 @@ export const Layout = ({ children }: MyComponentProp) => {
         <div className={`${isAgentRoute ? "hidden xMini:block" : "block"}`}>
           <Header handleDrawer={handleDrawer} />
         </div>
+
+        <div className="block xMini:hidden">
+          <MobileHeader handleDrawer={handleDrawer} />
+        </div>
+
         <div
           className={`${
-            isAgentRoute ? "xMini:ml-5 mlg:ml-[272px]" : "ml-[272px]"
-          } mt-[90px] mr-5`}
+            isAgentRoute ? "xs:ml-5 mlg:ml-[272px]" : "ml-[272px]"
+          } mt-[150px] xMini:mt-[90px] mr-5`}
         >
           {children}
         </div>

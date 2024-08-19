@@ -150,7 +150,7 @@ export default function MobileLeadsFilters({
 
   return (
     <div className="flex flex-col gap-y-4">
-      <div className="flex items-center justify-between ml-5">
+      <div className="flex items-center justify-between">
         <h1 className="text-base font-medium text-[#1E1E1E]">Leads</h1>
 
         {/* <div className="flex items-center gap-x-1"> */}
@@ -209,7 +209,7 @@ export default function MobileLeadsFilters({
         value={inputValue}
         iconDisplay={true}
         onEnterPress={onEnterPress}
-        textClassName="w-full rounded-full ml-5"
+        textClassName="w-full rounded-full"
         containerClassName="w-full"
         inputDivClassName="w-full"
       />

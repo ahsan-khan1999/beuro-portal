@@ -31,12 +31,12 @@ export default function NoDataEmptyState({
   const { t: translate } = useTranslation();
 
   const defaultClasses = combineClasses(
-    "py-10 px-6 bg-[#EDF4FF] rounded-3xl w-[525px]",
+    "py-10 px-6 bg-[#E5EFFF] rounded-3xl xMini:w-[525px]",
     className
   );
 
   const containerClasses = combineClasses(
-    "flex items-center justify-center bg-white py-[153px]",
+    "xMini:flex items-center justify-center bg-white py-[153px] px-3 xMini:px-0",
     containerClassName
   );
 

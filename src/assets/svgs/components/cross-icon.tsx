@@ -1,14 +1,15 @@
 import { combineClasses } from "@/utils/utility";
 
 export interface CrossIconProps {
-  onClick?: () => void;
+  onClick?: (e: any) => void;
   className?: string;
 }
 
 export const CrossIcon = ({ onClick, className }: CrossIconProps) => {
   const defaultClasses = combineClasses("cursor-pointer", className);
+
   return (
-    <div className={defaultClasses}>
+    <div className={defaultClasses} onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="26"

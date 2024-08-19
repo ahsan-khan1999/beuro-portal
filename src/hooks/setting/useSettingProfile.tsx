@@ -82,8 +82,6 @@ export default function useSettingProfile(handleChangePassword: Function) {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
-
     const apiData = { ...data, ...data?.company };
     const res = await dispatch(
       updateAccountSettings({ data: apiData, router, setError, translate })

@@ -16,7 +16,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-2 mlg:grid-cols-3 gap-x-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
+          "grid xMini:grid-cols-2 mlg:grid-cols-3 gap-x-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -45,7 +45,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "email",
               id: "email",
               name: "email",
@@ -76,11 +76,10 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     },
 
     {
-      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 px-2 pb-5 bg-[#EDF4FF]",
+        className: "grid grid-cols-1 xMini:grid-cols-3 px-2 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0 col-span-2",
@@ -90,7 +89,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               value: "",
               id: "reason",

@@ -160,12 +160,14 @@ const OfferDetailsCard = ({
             onClick={handlePrint}
           /> */}
 
-          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center">
+          <span
+            onClick={offerDeleteHandler}
+            className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center"
+          >
             <Image
               src={deleteIcon}
               alt="deleteIcon"
               className="cursor-pointer"
-              onClick={offerDeleteHandler}
               width={16}
               height={20}
             />

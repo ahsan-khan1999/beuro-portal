@@ -10,6 +10,7 @@ import { LeadsAddressDetailsData } from "@/components/leads/details/leads-addres
 import { LeadServiceDetailsData } from "@/components/leads/details/leads-service-details";
 import { LeadsAdditionalDetails } from "@/components/leads/details/leads-additional-details";
 import { LeadsCustomerDetailData } from "@/components/leads/details/leads-customer-details";
+import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 export enum ComponentsType {
   customer,
@@ -162,11 +163,24 @@ export const AgentLeadsDetailsData = ({
       <div className="xlg:fixed mb-5">
         <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap gap-[14px] mb-5">
           {tabSection.map((item, index) => (
-            <DetailsTab
+            // <DetailsTab
+            //   isSelected={tabType === index}
+            //   setTabType={setTabType}
+            //   tabType={tabType}
+            //   name={item.name}
+            //   icon={item.icon}
+            //   selectedTab={index}
+            //   key={index}
+            //   onItemSelected={handleScrollToTop}
+            // />
+
+            <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}
+              index={index + 1}
               icon={item.icon}
               selectedTab={index}
               key={index}
@@ -175,7 +189,7 @@ export const AgentLeadsDetailsData = ({
           ))}
         </div>
 
-        <OfferEditImages
+        {/* <OfferEditImages
           shareImgModal={shareImgModal}
           handleImagesUpload={handleImagesUpload}
           tabType={tabType}
@@ -184,25 +198,27 @@ export const AgentLeadsDetailsData = ({
           name={name}
           heading={heading}
           handleImageSlider={handleImageSlider}
-          className="xlg:w-[247px]"
+          className="xlg:w-[247px] hidden xlg:block"
           isAgent={true}
-        />
+        /> */}
       </div>
 
-      <div className="w-full break-all flex">
-        <div className={`max-w-[280px] w-full hidden xlg:block`}/>
+      <div className="grid grid-cols-1 xlg:grid-cols-[320px_1fr] w-full break-all">
+        <div className={`max-w-[320px] hidden xlg:block`} />
 
-        {loading ? (
-          <div className="flex justify-center items-center w-full">
-            <CustomLoader />
-          </div>
-        ) : (
-          <div className="flex flex-col gap-y-5 w-full">
-            {renderComponent.map((component, index) => (
-              <div key={index}>{component}</div>
-            ))}
-          </div>
-        )}
+        <div className="flex flex-col gap-y-5 w-full overflow-hidden">
+          {loading ? (
+            <div className="flex justify-center items-center w-full">
+              <CustomLoader />
+            </div>
+          ) : (
+            renderComponent.map((component, index) => (
+              <div key={index} className="w-full">
+                {component}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

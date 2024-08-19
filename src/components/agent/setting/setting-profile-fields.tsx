@@ -15,7 +15,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex flex-col mlg:flex-row  items-center gap-[47px]",
+        className: "flex flex-col mlg:flex-row items-center gap-[47px]",
         children: [
           {
             containerClass: "flex justify-center items-center",
@@ -110,7 +110,8 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                   },
                 },
                 {
-                  containerClass: "mb-0 rounded-lg bg-[#EDF4FF] col-span-2",
+                  containerClass:
+                    "mb-0 rounded-lg bg-[#EDF4FF] xMini:col-span-2",
                   label: {
                     text: `${translate(
                       "setting.account_setting.change_password"
@@ -149,7 +150,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center justify-end space-x-[18px]",
+        className: "flex items-center justify-end gap-x-2 xMini:gap-x-[18px]",
         children: [
           {
             containerClass: "mb-0",
@@ -160,7 +161,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
               inputType: "button",
               onClick: onCancel && onCancel,
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white px-4 py-[10px] min-w-[152px] w-fit text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white px-2 xMini:px-4 py-[6px] xMini:py-[10px] !h-fit xMini:min-w-[152px] w-fit text-dark hover:bg-none",
             },
           },
           {
@@ -173,7 +174,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
               )}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 py-[10px] w-fit text-white hover:bg-none",
+                "rounded-lg px-2 xMini:px-4 py-[6px] xMini:py-[10px] w-fit text-white hover:bg-none !h-fit",
               loading,
             },
           },

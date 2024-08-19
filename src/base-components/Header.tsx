@@ -192,7 +192,13 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
           <LanguageSelector />
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">
-          <Image src={userIcon} alt="User Icon" className="mr-3" />
+          <Image
+            src={user?.employee?.picture || userIcon}
+            alt="User Icon"
+            className="mr-3 rounded-full"
+            width={44}
+            height={44}
+          />
           <div>
             <span className="font-semibold tracking-[0.5px] text-[#0A0A0A] block">
               {user?.fullName}

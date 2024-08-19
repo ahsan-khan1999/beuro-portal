@@ -4,11 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 
 const index = () => {
-  return (
-    <div>
-      <OfferDetails />
-    </div>
-  );
+  return <OfferDetails />;
 };
 
 export default index;
