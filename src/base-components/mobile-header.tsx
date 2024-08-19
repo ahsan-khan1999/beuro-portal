@@ -25,7 +25,7 @@ export const MobileHeader = ({ handleDrawer }: MobileHeaderProps) => {
     >
       <div className="flex items-center gap-x-[14px]">
         <HamburgerIcon
-          onClick={() => {}}
+          onClick={handleDrawer}
           strokeColor="#fff"
           containerClassName="xMini:block mlg:hidden"
         />

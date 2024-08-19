@@ -8,13 +8,12 @@ import Header from "@/base-components/Header";
 import { useRouter } from "next/router";
 import { updateCurrentLanguage } from "@/api/slices/globalSlice/global";
 import { MobileHeader } from "@/base-components/mobile-header";
-import { MobileSidebar } from "@/base-components/ui/mobile-sidebar";
+import { motion } from "framer-motion";
 
 export const Layout = ({ children }: MyComponentProp) => {
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [isDrawer, setIsDrawer] = useState(false);
-  const [isBelowXMini, setIsBelowXMini] = useState(false);
   const locale = useRouter().locale;
   const router = useRouter();
 
@@ -25,19 +24,6 @@ export const Layout = ({ children }: MyComponentProp) => {
   useEffect(() => {
     dispatch(updateCurrentLanguage(locale));
   }, [locale]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsBelowXMini(window.innerWidth < 730);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width:1100px)");
@@ -71,15 +57,21 @@ export const Layout = ({ children }: MyComponentProp) => {
   const Drawer = () => {
     return (
       <div
-        className={`!fixed top-0 flex justify-center items-center z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
+        className={`!fixed top-0  z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
           isDrawer ? "block" : "hidden"
-        } ${isBelowXMini ? "ml-[375px]" : "ml-0"}`}
-        onClick={handleClose}
+        }`}
+        // onClick={handleClose}
       >
-        {isBelowXMini ? (
-          <MobileSidebar handleDrawer={handleClose} />
-        ) : (
-          <SideBar isDrawer={true} handleDrawer={handleClose} />
+        {isDrawer && (
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="w-[247px] h-full bg-white"
+          >
+            <SideBar isDrawer={true} handleDrawer={handleClose} />
+          </motion.div>
         )}
       </div>
     );

@@ -5,11 +5,13 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import PasswordReset from "@/base-components/ui/modals1/PasswordReset";
 import PasswordChangeSuccessfully from "@/base-components/ui/modals1/PasswordChangeSuccessfully";
-import { generateEmployDetailsValidation } from "@/validation/employeeSchema";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { updateEmployee } from "@/api/slices/employee/emplyeeSlice";
+import {
+  readEmployeeDetail,
+  setEmployeeDetails,
+  updateEmployee,
+} from "@/api/slices/employee/emplyeeSlice";
 import { User } from "@/types";
 import { isJSON } from "@/utils/functions";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -17,6 +19,7 @@ import { getUser } from "@/utils/auth.util";
 import { AgentPrfoileSettingFormField } from "@/components/agent/setting/setting-profile-fields";
 import { staticEnums } from "@/utils/static";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { CustomerPromiseActionType } from "@/types/company";
 
 export const useAgentProfileSetting = () => {
   const router = useRouter();
@@ -24,6 +27,7 @@ export const useAgentProfileSetting = () => {
   const user: User = isJSON(getUser());
   const { t: translate } = useTranslation();
   const { modal, loading } = useAppSelector((state) => state.global);
+  const { employeeDetails } = useAppSelector((state) => state.employee);
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -51,8 +55,6 @@ export const useAgentProfileSetting = () => {
     });
   };
 
-  // const schema = generateEmployDetailsValidation(translate);
-
   const {
     register,
     handleSubmit,
@@ -61,15 +63,19 @@ export const useAgentProfileSetting = () => {
     setError,
     control,
     setValue,
-  } = useForm<FieldValues>({
-    // resolver: yupResolver<FieldValues>(schema),
-  });
+  } = useForm<FieldValues>({});
+
+  useEffect(() => {
+    if (user?.employee?.id) {
+      dispatch(readEmployeeDetail({ params: { filter: user?.employee?.id } }));
+    }
+  }, [user?.employee?.id, employeeDetails?.id]);
 
   useEffect(() => {
     reset({
-      ...user.employee,
+      ...employeeDetails,
     });
-  }, []);
+  }, [employeeDetails?.id]);
 
   const handleSuccess = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
@@ -116,7 +122,10 @@ export const useAgentProfileSetting = () => {
       const res = await dispatch(
         updateEmployee({ data: apiData, router, setError, translate })
       );
-      if (res?.payload) handleSuccess();
+      if (res?.payload) {
+        dispatch(setEmployeeDetails(res.payload));
+        handleSuccess();
+      }
     } catch (error) {
       console.error("Something went wrong!", error);
     }

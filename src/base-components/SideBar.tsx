@@ -18,12 +18,16 @@ import { sideBar, staticEnums } from "@/utils/static";
 import { PlanIcon } from "@/assets/svgs/components/sideBar/plan";
 import { PaymentIcon } from "@/assets/svgs/components/sideBar/payment";
 import { SupportRequestIcon } from "@/assets/svgs/components/sideBar/supportRequest";
-import { useAppSelector } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { AppointmentsIcon } from "@/assets/svgs/components/sideBar/Appointments";
 import { CrossIcon } from "@/assets/svgs/components/cross-icon";
+import { LogoutIcon } from "@/assets/svgs/components/logout-icon";
+import { logoutUser } from "@/api/slices/authSlice/auth";
+import { logout } from "@/utils/auth.util";
+import { LanguageSelector } from "./languageSelector/language-selector";
 
 export const svgs = {
   Dashboard: <DashboardIcon />,
@@ -55,6 +59,8 @@ const SideBar = ({
 }) => {
   const { user } = useAppSelector((state) => state.auth);
   const { t: translation } = useTranslation();
+  const dispatch = useAppDispatch();
+
   const [selected, setSelected] = useState<{
     parent: { title: string; isActive: boolean };
     child: any[] | null;
@@ -116,19 +122,25 @@ const SideBar = ({
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
 
+  const handleLogout = async () => {
+    await dispatch(logoutUser());
+    logout();
+    router.push("/");
+  };
+
   return (
     <div
-      className={`fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full top-[92px] overflow-scroll`}
+      className={`fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full mlg:top-[92px] overflow-scroll`}
     >
       {isAgentRoute && (
         <div className="absolute top-2 right-2 xMini:block mlg:hidden">
-          <CrossIcon />
+          <CrossIcon onClick={handleDrawer} />
         </div>
       )}
 
       <div
         className={`${
-          isAgentRoute ? "xMini:pt-10 mlg:pt-6" : "pt-6"
+          isAgentRoute ? "pt-10 mlg:pt-6" : "pt-6"
         } px-4 pb-8 flex flex-col`}
       >
         <div className="space-y-3">
@@ -153,7 +165,7 @@ const SideBar = ({
                       <span
                         className={`${
                           selected.parent.title === item.title && "sidebar-svg"
-                        } mr-2 `}
+                        } mr-2`}
                       >
                         {item.icon && svgs[item.icon]}
                       </span>
@@ -249,6 +261,21 @@ const SideBar = ({
               )
             );
           })}
+        </div>
+      </div>
+
+      <div className="ml-7 mr-4 border-t border-t-[#0000001A] pt-[31px] block xMini:hidden">
+        <div className="flex items-center justify-between">
+          <div
+            className="flex items-center gap-x-3 cursor-pointer"
+            onClick={handleLogout}
+          >
+            <LogoutIcon />
+            <span className="text-[#4B4B4B] text-sm font-medium">
+              {translate("common.logout")}
+            </span>
+          </div>
+          <LanguageSelector />
         </div>
       </div>
       <div className={`ms-3 ${userRole === 0 ? "absolute bottom-0" : "mt-16"}`}>

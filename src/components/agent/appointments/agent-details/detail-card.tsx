@@ -89,7 +89,7 @@ export const AppointmentsDetailCard = ({
       <div className="flex items-center justify-between border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center gap-x-3 xMini:gap-x-[27px]">
           <BackIcon onClick={handleBack} />
-          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-base xMini:text-2xl">
+          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-lg xMini:text-2xl">
             {translate("appointments.detail_heading")}
           </h1>
         </div>

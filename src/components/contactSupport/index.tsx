@@ -47,7 +47,7 @@ export default function ContactSupport() {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-medium text-[#222B45]">
+        <h1 className="text-lg xMini:text-2xl font-medium text-[#222B45]">
           {translate("contact_support.heading")}
         </h1>
       </div>

@@ -45,7 +45,11 @@ export const LanguageSelector = ({ className }: LanguageName) => {
   }, []);
 
   return (
-    <div className={containerClasses} ref={ref}>
+    <div
+      className={containerClasses}
+      ref={ref}
+      onClick={(e) => e.stopPropagation()}
+    >
       <FlagIcon countryCode={selectedLanguage?.code} />
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -73,7 +77,7 @@ export const LanguageSelector = ({ className }: LanguageName) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute flex flex-col top-[42px] right-0 text-dark bg-white  rounded-lg  p-4 w-[241px] z-[999999] shadow-languagesDropDown"
+            className={`absolute flex flex-col top-[42px] right-0 text-dark bg-white rounded-lg p-4 xMini:w-[241px] z-[999999] shadow-languagesDropDown`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -104,7 +108,11 @@ export const LanguageSelector = ({ className }: LanguageName) => {
                     )}
                   </div>
                   {selectedLanguage?.code === language.code && (
-                    <Image src={checkIcon} alt="Check Icon Selected" />
+                    <Image
+                      src={checkIcon}
+                      alt="Check Icon Selected"
+                      className="hidden xMini:block"
+                    />
                   )}
                 </button>
               );

@@ -2057,6 +2057,7 @@
   },
   "dashboard_detail": {
     "main_heading": "Kunden-Dashboard",
+    "agent_dashboard": "Agent Dashboard",
     "overview": "Überblick",
     "sales_heading": "Verkaufsbericht",
     "plans": "Pläne",

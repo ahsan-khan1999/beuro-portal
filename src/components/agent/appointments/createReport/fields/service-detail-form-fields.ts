@@ -584,7 +584,7 @@ const generateServiceCalulationChildren = (
                             },
                           },
                           {
-                            containerClass: "mb-0 min-w-[70px]",
+                            containerClass: "mb-0 min-w-[80px]",
                             field: {
                               type: Field.span,
                               className:
@@ -599,7 +599,7 @@ const generateServiceCalulationChildren = (
                       },
                     },
                     {
-                      containerClass: "mb-0 hidden xMini:block",
+                      containerClass: "mb-0 hidden mr-3 w-full xMini:block",
                       field: {
                         type: Field.div,
                         id: "div-field",
@@ -721,7 +721,7 @@ const generateServiceCalulationChildren = (
                     },
 
                     {
-                      containerClass: "mb-0 hidden xMini:block w-full",
+                      containerClass: "mb-0 hidden mr-3 xMini:block w-full",
                       field: {
                         type: Field.input,
                         className:
@@ -813,15 +813,35 @@ const generateServiceCalulationChildren = (
         },
 
         {
-          containerClass: "mb-0 mt-3 flex justify-start xMini:justify-end",
           field: {
-            type: Field.span,
-            containerClassName:
-              "!!border-[#BFBFBF] focus:!border-primary text-dark font-bold",
-            id: "span-field",
-            text: `${translate(
-              "offers.service_details.detail_headings.grand_total"
-            )} : ${total?.grandTotal.toFixed(2)} ${currency}`,
+            type: Field.div,
+            id: "div-field",
+            className:
+              "mt-3 flex gap-x-3 items-center justify-start xMini:justify-end",
+            children: [
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.span,
+                  containerClassName:
+                    "!!border-[#BFBFBF] text-dark text-base font-medium",
+                  id: "span-field",
+                  text: `${translate(
+                    "offers.service_details.detail_headings.grand_total"
+                  )} :`,
+                },
+              },
+              {
+                containerClass: "mb-0 flex justify-start xMini:justify-end",
+                field: {
+                  type: Field.span,
+                  containerClassName:
+                    "!!border-[#BFBFBF] text-dark text-base font-semibold",
+                  id: "span-field",
+                  text: `${total?.grandTotal.toFixed(2)} ${currency}`,
+                },
+              },
+            ],
           },
         },
       ],
