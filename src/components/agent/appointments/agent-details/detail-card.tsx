@@ -129,24 +129,24 @@ export const AppointmentsDetailCard = ({
           className={`flex flex-col gap-y-3 mlg:gap-y-[34px] mt-[10px] mlg:mt-[34px]`}
         >
           <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">
-            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-              <span className="text-base text-[#5C5C5C] font-medium min-w-[65px] w-fit">
+            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+              <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[65px] w-fit">
                 {translate("appointments.detail_data.lead_id")}:
               </span>
-              <span className="text-base text-[#5C5C5C] font-nomal">
+              <span className="text-base text-primary font-nomal">
                 {appointmentDetails?.leadID?.refID}
               </span>
             </div>
-            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-              <span className="text-base text-[#5C5C5C] font-medium min-w-[130px] w-fit">
+            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+              <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[130px] w-fit">
                 {translate("appointments.detail_data.appointment_id")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
                 {appointmentDetails?.leadID?.refID}
               </span>
             </div>
-            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-              <span className="text-base text-[#5C5C5C] font-medium min-w-[60px] w-fit">
+            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+              <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[60px] w-fit">
                 {translate("appointments.detail_data.status")}:
               </span>
               <div>
@@ -169,13 +169,11 @@ export const AppointmentsDetailCard = ({
                 />
               </div>
             </div>
-
-            
           </div>
           <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">
             {appointmentDetails?.leadID?.customerDetail?.companyName && (
-              <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-                <span className="text-base text-[#5C5C5C] font-medium min-w-[140px]">
+              <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+                <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[140px]">
                   {translate("appointments.table_headings.company_name")}:
                 </span>
                 <span className="text-base text-primary font-nomal truncate">
@@ -183,16 +181,16 @@ export const AppointmentsDetailCard = ({
                 </span>
               </div>
             )}
-            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-              <span className="text-base text-[#5C5C5C] font-medium">
+            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+              <span className="font-normal text-[#848484] text-sm mlg:text-base">
                 {translate("appointments.detail_data.date")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
                 {formatDateTimeToDate(appointmentDetails?.date)}
               </span>
             </div>
-            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-              <span className="text-base text-[#5C5C5C] font-medium">
+            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+              <span className="font-normal text-[#848484] text-sm mlg:text-base">
                 {translate("appointments.detail_data.time")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">

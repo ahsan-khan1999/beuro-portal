@@ -9,11 +9,22 @@ export const LeadsAddressMobileDetails = ({
 }) => {
   const defaultClasses = combineClasses("p-4 bg-white rounded-b-lg");
 
+  const isEmptyAddress = (addr: CustomerAddress) => {
+    return (
+      !addr.streetNumber?.trim() &&
+      !addr.postalCode?.trim() &&
+      !addr.country?.trim() &&
+      !addr.description?.trim()
+    );
+  };
+
+  const nonEmptyAddresses = address?.filter((addr) => !isEmptyAddress(addr));
+
   return (
     <div className={defaultClasses}>
-      {address?.length > 0 ? (
+      {nonEmptyAddresses?.length > 0 ? (
         <div className="flex flex-col gap-y-4">
-          {address?.map((item, index) => (
+          {nonEmptyAddresses?.map((item, index) => (
             <div
               key={index}
               className={`flex flex-col gap-y-3 ${
@@ -22,9 +33,11 @@ export const LeadsAddressMobileDetails = ({
                   : ""
               }`}
             >
-              <span className="text-[#656565] text-xs font-medium">
-                {item?.label}:
-              </span>
+              {item?.label && (
+                <span className="text-[#656565] text-xs font-medium">
+                  {item?.label}:
+                </span>
+              )}
               <p className="flex flex-col gap-y-[2px]">
                 <span className="text-sm text-[#4A4543] font-medium">
                   {item?.streetNumber}
@@ -35,14 +48,16 @@ export const LeadsAddressMobileDetails = ({
                 </span>
               </p>
 
-              <div className="flex flex-col gap-y-1">
-                <p className="text-[#656565] text-xs font-medium">
-                  Description:
-                </p>
-                <p className="text-[#4A4543] text-xs font-normal">
-                  {item?.description}
-                </p>
-              </div>
+              {item.description && (
+                <div className="flex flex-col gap-y-1">
+                  <p className="text-[#656565] text-xs font-medium">
+                    Description:
+                  </p>
+                  <p className="text-[#4A4543] text-xs font-normal">
+                    {item?.description}
+                  </p>
+                </div>
+              )}
             </div>
           ))}
         </div>

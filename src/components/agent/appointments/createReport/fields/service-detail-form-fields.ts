@@ -482,7 +482,7 @@ const generateServiceCalulationChildren = (
 ) => {
   const { t: translate } = useTranslation();
   let field: any = {
-    containerClass: "mb-0 w-full",
+    containerClass: "mb-0 w-full text-center",
     field: {
       type: Field.span,
       className: "!border-[#BFBFBF] focus:!border-primary w-full",
@@ -549,94 +549,122 @@ const generateServiceCalulationChildren = (
         },
 
         {
-          containerClass: "mb-0 py-2 space-x-5 border-b border-lightGray",
           field: {
             type: Field.div,
-            className: "flex justify-between !h-[45px]",
-            id: "div3",
+            id: "div-field",
+            className: "flex flex-col gap-y-3",
             children: [
               {
+                containerClass:
+                  "mb-0 pt-2 xMini:py-2 space-x-5 xMini:border-b xMini:border-lightGray",
                 field: {
                   type: Field.div,
-                  className: "flex space-x-5 !h-[45px]",
+                  className: "flex justify-between",
                   id: "div3",
                   children: [
                     {
-                      containerClass: "mb-0 px-0 mt-1",
                       field: {
-                        type: Field.toggleButton,
-                        className: "!border-[#BFBFBF] focus:!border-primary",
-                        id: "span-field",
-                        name: "isTax",
-                        label: `${translate(
-                          "offers.service_details.detail_headings.tax"
-                        )}`,
-                        checked: false,
-                        register,
+                        type: Field.div,
+                        className: "flex space-x-5",
+                        id: "div3",
+                        children: [
+                          {
+                            containerClass: "mb-0 px-0 mt-1",
+                            field: {
+                              type: Field.toggleButton,
+                              className:
+                                "!border-[#BFBFBF] focus:!border-primary",
+                              id: "span-field",
+                              name: "isTax",
+                              label: `${translate(
+                                "offers.service_details.detail_headings.tax"
+                              )}`,
+                              checked: false,
+                              register,
+                            },
+                          },
+                          {
+                            containerClass: "mb-0 min-w-[70px]",
+                            field: {
+                              type: Field.span,
+                              className:
+                                "!border-[#BFBFBF] focus:!border-primary",
+                              id: "span-field",
+                              text: `${translate(
+                                "offers.service_details.detail_headings.tax"
+                              )}`,
+                            },
+                          },
+                        ],
                       },
                     },
                     {
-                      containerClass: "mb-0 min-w-[70px]",
+                      containerClass: "mb-0 hidden xMini:block",
                       field: {
-                        type: Field.span,
-                        className: "!border-[#BFBFBF] focus:!border-primary",
-                        id: "span-field",
-                        text: `${translate(
-                          "offers.service_details.detail_headings.tax"
-                        )}`,
+                        type: Field.div,
+                        id: "div-field",
+                        children: [field],
+                      },
+                    },
+                    {
+                      field: {
+                        type: Field.div,
+                        className: "flex flex-row xMini:flex-col",
+                        id: "100",
+                        children: [
+                          {
+                            containerClass: "mb-1 min-w-[100px]",
+                            field: {
+                              type: Field.radio,
+                              className:
+                                "!border-[#BFBFBF] focus:!border-primary",
+                              id: "taxType1",
+                              text: "Sub Total",
+                              name: "taxType",
+                              label: `${translate(
+                                "offers.service_details.detail_headings.Inclusive"
+                              )}`,
+                              register,
+                              colorClasses: "bg-transparent",
+                              checked: isTax && taxType == 0 ? true : false,
+                              value: 0,
+                              setValue,
+                              disabled: !isTax,
+                            },
+                          },
+                          {
+                            containerClass: "mb-0 min-w-[100px]",
+                            field: {
+                              type: Field.radio,
+                              className:
+                                " !border-[#BFBFBF] focus:!border-primary",
+                              id: "taxType2",
+                              text: "Sub Total",
+                              name: "taxType",
+                              label: `${translate(
+                                "offers.service_details.detail_headings.exclusive"
+                              )}`,
+                              register,
+                              colorClasses: "bg-transparent",
+                              checked: isTax && taxType == 1 ? true : false,
+                              value: 1,
+                              setValue,
+                              disabled: !isTax,
+                            },
+                          },
+                        ],
                       },
                     },
                   ],
                 },
               },
-
-              field,
-
               {
+                containerClass:
+                  "mb-0 border-b border-lightGray pb-4 xMini:hidden",
                 field: {
                   type: Field.div,
-                  className: "flex flex-row xMini:flex-col",
-                  id: "100",
-                  children: [
-                    {
-                      containerClass: "mb-1 min-w-[100px]",
-                      field: {
-                        type: Field.radio,
-                        className: "!border-[#BFBFBF] focus:!border-primary",
-                        id: "taxType1",
-                        text: "Sub Total",
-                        name: "taxType",
-                        label: `${translate(
-                          "offers.service_details.detail_headings.Inclusive"
-                        )}`,
-                        register,
-                        colorClasses: "bg-transparent",
-                        checked: isTax && taxType == 0 ? true : false,
-                        value: 0,
-                        setValue,
-                        disabled: !isTax,
-                      },
-                    },
-                    {
-                      containerClass: "mb-0 min-w-[100px]",
-                      field: {
-                        type: Field.radio,
-                        className: " !border-[#BFBFBF] focus:!border-primary",
-                        id: "taxType2",
-                        text: "Sub Total",
-                        name: "taxType",
-                        label: `${translate(
-                          "offers.service_details.detail_headings.exclusive"
-                        )}`,
-                        register,
-                        colorClasses: "bg-transparent",
-                        checked: isTax && taxType == 1 ? true : false,
-                        value: 1,
-                        setValue,
-                        disabled: !isTax,
-                      },
-                    },
-                  ],
+                  id: "div-field",
+                  children: [field],
                 },
               },
             ],
@@ -644,47 +672,129 @@ const generateServiceCalulationChildren = (
         },
 
         {
-          containerClass: "mb-0 py-2 space-x-5 border-b border-lightGray pb-3",
           field: {
             type: Field.div,
-            className: "flex space-x-5 !h-[45px]",
-            id: "div3",
+            id: "div-field",
+            className: "flex flex-col gap-y-3",
             children: [
               {
+                containerClass:
+                  "mb-0 pt-2 xMini:py-2 space-x-5 xMini:border-b xMini:border-lightGray",
                 field: {
                   type: Field.div,
-                  id: "div-field",
-                  className: "flex space-x-5 !h-[45px]",
+                  className: "flex justify-between",
+                  id: "div3",
                   children: [
                     {
-                      containerClass: "mb-0 px-0 mt-1",
                       field: {
-                        type: Field.toggleButton,
-                        className: "!border-[#BFBFBF] focus:!border-primary",
-                        id: "span-field",
-                        name: "isDiscount",
-                        checked: false,
-                        register,
+                        type: Field.div,
+                        id: "div-field",
+                        className: "flex space-x-5",
+                        children: [
+                          {
+                            containerClass: "mb-0 px-0 mt-1",
+                            field: {
+                              type: Field.toggleButton,
+                              className:
+                                "!border-[#BFBFBF] focus:!border-primary",
+                              id: "span-field",
+                              name: "isDiscount",
+                              checked: false,
+                              register,
+                            },
+                          },
+
+                          {
+                            containerClass: "mb-0 min-w-[80px]",
+                            field: {
+                              type: Field.span,
+                              className:
+                                "!border-[#BFBFBF] focus:!border-primary",
+                              id: "span-field",
+                              text: `${translate(
+                                "offers.service_details.detail_headings.discount"
+                              )}`,
+                            },
+                          },
+                        ],
                       },
                     },
 
                     {
-                      containerClass: "mb-0 min-w-[80px]",
+                      containerClass: "mb-0 hidden xMini:block w-full",
                       field: {
-                        type: Field.span,
-                        className: "!border-[#BFBFBF] focus:!border-primary",
-                        id: "span-field",
-                        text: `${translate(
-                          "offers.service_details.detail_headings.discount"
-                        )}`,
+                        type: Field.input,
+                        className:
+                          "!px-2 !border-[#BFBFBF] focus:!border-primary",
+                        id: "discountAmount",
+                        register,
+                        name: "discountAmount",
+                        inputType: "number",
+                        value:
+                          reportDetails?.id && reportDetails?.discountAmount,
+                        disabled: !isDiscount,
+                        setValue,
+                        step: "0.01",
+                      },
+                    },
+
+                    {
+                      field: {
+                        type: Field.div,
+                        className: "flex flex-row xMini:flex-col",
+                        id: "4",
+                        children: [
+                          {
+                            containerClass: "mb-1 min-w-[100px]",
+                            field: {
+                              type: Field.radio,
+                              className:
+                                " !border-[#BFBFBF] focus:!border-primary",
+                              id: "discountType1",
+                              text: "Sub Total",
+                              name: "discountType",
+                              label: `${translate(
+                                "offers.service_details.detail_headings.percent"
+                              )}`,
+                              register,
+                              colorClasses: "bg-transparent",
+                              checked:
+                                isDiscount && discountType == 0 ? true : false,
+                              value: 0,
+                              setValue,
+                              disabled: !isDiscount,
+                            },
+                          },
+                          {
+                            containerClass: "mb-0 min-w-[100px]",
+                            field: {
+                              type: Field.radio,
+                              className:
+                                " !border-[#BFBFBF] focus:!border-primary",
+                              id: "discountType2",
+                              text: "Sub Total",
+                              name: "discountType",
+                              label: `${translate(
+                                "offers.service_details.detail_headings.amount"
+                              )}`,
+                              checked:
+                                isDiscount && discountType == 1 ? true : false,
+                              register,
+                              colorClasses: "bg-transparent",
+                              value: 1,
+                              setValue,
+                              disabled: !isDiscount,
+                            },
+                          },
+                        ],
                       },
                     },
                   ],
                 },
               },
-
               {
-                containerClass: "mb-0 w-full",
+                containerClass:
+                  "mb-0 border-b border-lightGray pb-4 xMini:hidden w-full",
                 field: {
                   type: Field.input,
                   className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
@@ -698,58 +808,12 @@ const generateServiceCalulationChildren = (
                   step: "0.01",
                 },
               },
-              {
-                field: {
-                  type: Field.div,
-                  className: "flex flex-row xMini:flex-col",
-                  id: "4",
-                  children: [
-                    {
-                      containerClass: "mb-1 min-w-[100px]",
-                      field: {
-                        type: Field.radio,
-                        className: " !border-[#BFBFBF] focus:!border-primary",
-                        id: "discountType1",
-                        text: "Sub Total",
-                        name: "discountType",
-                        label: `${translate(
-                          "offers.service_details.detail_headings.percent"
-                        )}`,
-                        register,
-                        colorClasses: "bg-transparent",
-                        checked: isDiscount && discountType == 0 ? true : false,
-                        value: 0,
-                        setValue,
-                        disabled: !isDiscount,
-                      },
-                    },
-                    {
-                      containerClass: "mb-0 min-w-[100px]",
-                      field: {
-                        type: Field.radio,
-                        className: " !border-[#BFBFBF] focus:!border-primary",
-                        id: "discountType2",
-                        text: "Sub Total",
-                        name: "discountType",
-                        label: `${translate(
-                          "offers.service_details.detail_headings.amount"
-                        )}`,
-                        checked: isDiscount && discountType == 1 ? true : false,
-                        register,
-                        colorClasses: "bg-transparent",
-                        value: 1,
-                        setValue,
-                        disabled: !isDiscount,
-                      },
-                    },
-                  ],
-                },
-              },
             ],
           },
         },
+
         {
-          containerClass: "mb-0 mt-3 flex justify-end",
+          containerClass: "mb-0 mt-3 flex justify-start xMini:justify-end",
           field: {
             type: Field.span,
             containerClassName:
@@ -793,7 +857,7 @@ export const ReportDetailsServiceSubmitFormField: GenerateReportServiceActionFor
               },
             },
             {
-              containerClass: "mb-0 ",
+              containerClass: "mb-0",
               field: {
                 type: Field.button,
                 id: "button",

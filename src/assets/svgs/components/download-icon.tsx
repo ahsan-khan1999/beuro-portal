@@ -2,15 +2,15 @@ export const DownloadIcon = ({ onClick }: { onClick: () => void }) => {
   return (
     <svg
       onClick={(e) => {
-        e.stopPropagation()
-        onClick()
+        e.stopPropagation();
+        onClick();
       }}
       xmlns="http://www.w3.org/2000/svg"
       width="41"
       height="41"
       viewBox="0 0 41 41"
       fill="none"
-      className="cursor-pointer"
+      className="cursor-pointer w-6 h-6 xMini:w-[41px] xMini:h-[41px]"
     >
       <rect
         x="1.14062"

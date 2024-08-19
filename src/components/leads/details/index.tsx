@@ -26,6 +26,7 @@ const LeadsDetails = () => {
           leadDetails={leadDetails}
           onStatusUpdate={handleStatusUpdate}
           onCreateAppointment={handleScheduleAppointments}
+          handleImageUpload={handleUploadImages}
         />
       </div>
       <div className="xlg:mt-[330px] w-full xlg:block mb-10">

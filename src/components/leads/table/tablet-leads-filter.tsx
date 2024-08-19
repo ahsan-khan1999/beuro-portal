@@ -146,11 +146,11 @@ export default function TabletLeadsFilter({
           containerClassName="min-w-fit"
         />
 
-        <LeadsFilters
+        {/* <LeadsFilters
           filter={filter}
           setFilter={setFilter}
           onFilterChange={handleFilterChange}
-        />
+        /> */}
         {!isAgent && (
           <Button
             inputType="button"

@@ -17,6 +17,7 @@ import moment from "moment";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import appointmentIcon from "@/assets/pngs/appoinment-icon.png";
 import { BackIcon } from "@/assets/svgs/components/back-icon";
+import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
 
 export interface LeadDetailCardProps {
   leadDeleteHandler: Function;
@@ -24,6 +25,13 @@ export interface LeadDetailCardProps {
   onStatusUpdate: (id: string) => void;
   onCreateAppointment: () => void;
   isAgent?: boolean;
+  handleImageUpload: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
 }
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
@@ -31,6 +39,7 @@ const LeadsDetailsCardData = ({
   onStatusUpdate,
   onCreateAppointment,
   isAgent,
+  handleImageUpload,
 }: LeadDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -86,6 +95,18 @@ const LeadsDetailsCardData = ({
       query: { ...router.query, reportId: leadDetails?.id, isCompany: true },
     });
   };
+
+  const customerType = leadDetails?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? leadDetails?.customerDetail?.companyName
+      : leadDetails?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div>
@@ -160,8 +181,8 @@ const LeadsDetailsCardData = ({
       </div>
 
       <div className="grid grid-cols-1 xMini:grid-cols-3 items-center gap-x-5 xlg:gap-x-20 gap-y-3 pt-2 mlg:pt-5">
-        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-          <span className="font-normal text-[#4D4D4D] text-base">
+        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-y-2 mlg:gap-y-0 gap-x-[10px]">
+          <span className="font-normal text-[#848484] text-sm mlg:text-base">
             {translate("leads.card_content.lead_id")}:
           </span>
           <span className="font-medium text-primary text-base">
@@ -169,8 +190,8 @@ const LeadsDetailsCardData = ({
           </span>
         </div>
 
-        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-          <span className="font-normal text-[#4D4D4D] text-base">
+        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+          <span className="font-normal text-[#848484] text-sm mlg:text-base">
             {translate("leads.card_content.status")}:
           </span>
 
@@ -226,8 +247,8 @@ const LeadsDetailsCardData = ({
             </div>
           )}
         </div>
-        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-          <span className="font-normal text-[#4D4D4D] text-base">
+        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+          <span className="font-normal text-[#848484] text-sm mlg:text-base">
             {translate("appointments.appointment")}:
           </span>
           <div
@@ -240,22 +261,46 @@ const LeadsDetailsCardData = ({
               : translate("leads.not_created")}
           </div>
         </div>
-        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-          <span className="font-normal text-[#4D4D4D] text-base min-w-[120px]">
+        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+          <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[120px]">
             {translate("leads.card_content.created_date")}:
           </span>
           <span className="font-medium text-[#4B4B4B] text-base">
             {formatDateTimeToDate(leadDetails?.createdAt)}
           </span>
         </div>
-        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
           <span className="font-normal text-[#4D4D4D] text-base min-w-[100px]">
             {translate("leads.card_content.created_by")}:
           </span>
-          <span className="font-medium text-[#4B4B4B] text-base truncate">
+          <span className="font-medium text-[#848484] text-sm mlg:text-base truncate">
             {leadDetails?.createdBy?.fullName}
           </span>
         </div>
+        {isAgent && (
+          <div className="flex items-center gap-[11px]">
+            <span className="text-[#4D4D4D] font-normal text-base">
+              {translate("offers.card_content.images")}:
+            </span>
+
+            <span
+              className="cursor-pointer"
+              onClick={(e) =>
+                handleImageUpload(
+                  leadDetails?.id,
+                  leadDetails?.refID,
+                  name,
+                  heading,
+                  e
+                )
+              }
+            >
+              <ImageUploadIcon
+                pathClass={leadDetails?.isImageAdded ? "#FF0000" : "#4A13E7"}
+              />
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

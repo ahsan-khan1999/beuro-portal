@@ -32,6 +32,7 @@ export const AgentLeadsDetails = () => {
               leadDetails={leadDetails}
               onStatusUpdate={handleStatusUpdate}
               onCreateAppointment={handleScheduleAppointments}
+              handleImageUpload={handleUploadImages}
               isAgent={true}
             />
           </div>
