@@ -11,6 +11,7 @@ import { ServicesDetailReport } from "./forms/services-detail-form";
 import { AdditionalInfoReport } from "./forms/additional-detail-form";
 import { stepFormArrayTypes } from "@/types";
 import { useRouter } from "next/router";
+import { MobileStepperTab } from "@/base-components/ui/tab/stepper-tab";
 
 const CreateReportDetails = () => {
   const dispatch = useAppDispatch();
@@ -188,32 +189,46 @@ const CreateReportDetails = () => {
   };
 
   return (
-    <>
-      <div>
-        <div className="border-y border-y-[#000] border-opacity-10 py-4 mb-6 flex items-center justify-center gap-x-4">
-          {tabSection?.map((item, index) => (
-            <SteperFormTab
-              key={index}
-              showArrow={index < tabSection.length - 1}
-              isSelected={tabType === index}
-              setTabType={setTabType}
-              tabType={tabType}
-              selectedTab={index}
-              index={index + 1}
-              heading={item.name}
-              icon={item.icon}
-              isToggle={true}
-              onClick={() => {
-                setTabType(index);
-                updateQueryParam(index as AppointmentReportsFormStages);
-              }}
-            />
-          ))}
-        </div>
-        {componentLookUp[tabType as keyof typeof componentLookUp]}
+    <div>
+      <div className="hidden xMini:flex border-y border-y-[#000] border-opacity-10 py-4 mb-6 items-center justify-center gap-x-4">
+        {tabSection?.map((item, index) => (
+          <SteperFormTab
+            key={index}
+            showArrow={index < tabSection.length - 1}
+            isSelected={tabType === index}
+            setTabType={setTabType}
+            tabType={tabType}
+            selectedTab={index}
+            index={index + 1}
+            heading={item.name}
+            icon={item.icon}
+            isToggle={true}
+            onClick={() => {
+              setTabType(index);
+              updateQueryParam(index as AppointmentReportsFormStages);
+            }}
+          />
+        ))}
       </div>
+
+      <div className="flex justify-between gap-x-4 mb-[18px] xMini:hidden">
+        {tabSection?.map((item, index) => (
+          <MobileStepperTab
+            isSelected={tabType === index}
+            setTabType={setTabType}
+            tabType={tabType}
+            name={item.name}
+            selectedTab={index}
+            key={index}
+            index={index + 1}
+          />
+        ))}
+      </div>
+
+      {componentLookUp[tabType as keyof typeof componentLookUp]}
+
       {renderModal()}
-    </>
+    </div>
   );
 };
 
