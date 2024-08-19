@@ -38,6 +38,8 @@ export const AppointmentsDetails = () => {
             <AppointmentsDetailCard
               onStatusChange={handleStatusUpdate}
               appointmentDetails={appointmentDetails}
+              handleImageUpload={() => {}}
+              handleNotes={() => {}}
             />
           </div>
           <div className="xMini:bg-white mt-6">
@@ -62,6 +64,8 @@ export const AppointmentsDetails = () => {
             <AppointmentsDetailCard
               appointmentDetails={appointmentDetails}
               onStatusChange={handleStatusUpdate}
+              handleImageUpload={() => {}}
+              handleNotes={() => {}}
             />
           </div>
           <div className="2xl:mt-[365px] w-full 2xl:block mb-10">

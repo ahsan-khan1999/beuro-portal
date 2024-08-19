@@ -192,5 +192,7 @@ export const useReportDetails = () => {
     systemSettings,
     defaultUpdateModal,
     handleCreateReport,
+    // handleNotes,
+    // handleUploadImages,
   };
 };

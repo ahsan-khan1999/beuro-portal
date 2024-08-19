@@ -12,6 +12,7 @@ import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-stat
 import { BaseButton } from "../button/base-button";
 import editNoteIcon from "@/assets/svgs/edit_primary.svg";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
+import { Appointments } from "@/types/appointments";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -39,7 +40,8 @@ const ExistingNotes = ({
     | Lead
     | OffersTableRowTypes
     | contractTableTypes
-    | InvoiceTableRowTypes;
+    | InvoiceTableRowTypes
+    | Appointments;
 }) => {
   const { notes } = useAppSelector((state) => state.note);
   const { refID, name, heading } = useAppSelector(

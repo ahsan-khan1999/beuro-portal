@@ -38,6 +38,8 @@ export const ReportDetails = () => {
               onStatusChange={handleStatusUpdate}
               appointmentDetails={appointmentDetails}
               isAgent={true}
+              handleImageUpload={() => {}}
+              handleNotes={() => {}}
             />
           </div>
           <div className="xMini:bg-white mt-6">
@@ -66,6 +68,8 @@ export const ReportDetails = () => {
               onStatusChange={handleStatusUpdate}
               appointmentDetails={appointmentDetails}
               isAgent={true}
+              handleImageUpload={() => {}}
+              handleNotes={() => {}}
             />
           </div>
           <div className="2xl:mt-[365px] w-full 2xl:block mb-10">

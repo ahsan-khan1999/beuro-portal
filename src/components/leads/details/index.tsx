@@ -15,6 +15,7 @@ const LeadsDetails = () => {
     defaultUpdateModal,
     handleUploadImages,
     shareImgModal,
+    handleNotes,
     handleScheduleAppointments,
   } = useLeadDetail();
 
@@ -26,6 +27,7 @@ const LeadsDetails = () => {
           leadDetails={leadDetails}
           onStatusUpdate={handleStatusUpdate}
           onCreateAppointment={handleScheduleAppointments}
+          handleNotes={handleNotes}
           handleImageUpload={handleUploadImages}
         />
       </div>

@@ -11,6 +11,8 @@ export const AgentAppointmentsDetails = () => {
     handleCreateReport,
     renderModal,
     appointmentDetails,
+    handleNotes,
+    handleUploadImages,
   } = useAppointmentsDetails();
 
   return (

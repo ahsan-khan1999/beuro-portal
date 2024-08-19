@@ -18,6 +18,7 @@ export const AgentLeadsDetails = () => {
     handleUploadImages,
     shareImgModal,
     handleScheduleAppointments,
+    handleNotes,
   } = useLeadDetail();
 
   return (
@@ -33,6 +34,7 @@ export const AgentLeadsDetails = () => {
               onStatusUpdate={handleStatusUpdate}
               onCreateAppointment={handleScheduleAppointments}
               handleImageUpload={handleUploadImages}
+              handleNotes={handleNotes}
               isAgent={true}
             />
           </div>
