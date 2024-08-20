@@ -66,12 +66,14 @@ export const LeadTableRecordCard = ({
               </div>
 
               <div className="flex flex-col gap-y-1">
-                <div className="flex items-center gap-x-4">
-                  <MailIcon />
-                  <p className="text-[#616161] font-normal text-sm break-all">
-                    {item?.customerDetail?.email}
-                  </p>
-                </div>
+                {item?.customerDetail?.email && (
+                  <div className="flex items-center gap-x-4">
+                    <MailIcon />
+                    <p className="text-[#616161] font-normal text-sm break-all">
+                      {item?.customerDetail?.email}
+                    </p>
+                  </div>
+                )}
                 {item?.customerDetail?.address?.country && (
                   <div className="flex items-center gap-x-4">
                     <LocationIcon />

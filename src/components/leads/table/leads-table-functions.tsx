@@ -11,10 +11,15 @@ export const LeadsTableFunctions = ({
   isAgent,
 }: FiltersComponentProps) => {
   return (
-    <div className="flex flex-col xMaxProLarge:flex-row justify-between xMaxProLarge:items-center gap-y-3 mb-4">
+    <div
+      className={`flex flex-col ${
+        !isAgent &&
+        "xMaxProLarge:flex-row justify-between xMaxProLarge:items-center"
+      } gap-y-3 mb-4`}
+    >
       <h1
         className={`text-2xl font-medium text-[#222B45] ${
-          isAgent ? "hidden mlg:block" : "block"
+          !isAgent ? "block" : "hidden"
         }`}
       >
         Leads
@@ -22,23 +27,27 @@ export const LeadsTableFunctions = ({
 
       {isAgent ? (
         <>
-          <div className="hidden xMini:block mlg:hidden">
-            <TabletLeadsFilter
-              filter={filter}
-              setFilter={setFilter}
-              handleFilterChange={handleFilterChange}
-              isAgent={isAgent}
-            />
-          </div>
+          {isAgent && (
+            <div className="hidden xMini:block">
+              <TabletLeadsFilter
+                filter={filter}
+                setFilter={setFilter}
+                handleFilterChange={handleFilterChange}
+                isAgent={isAgent}
+              />
+            </div>
+          )}
 
-          <div className="hidden mlg:block">
-            <LeadsFilter
-              filter={filter}
-              setFilter={setFilter}
-              handleFilterChange={handleFilterChange}
-              isAgent={isAgent}
-            />
-          </div>
+          {!isAgent && (
+            <div className="hidden mlg:block">
+              <LeadsFilter
+                filter={filter}
+                setFilter={setFilter}
+                handleFilterChange={handleFilterChange}
+                isAgent={isAgent}
+              />
+            </div>
+          )}
 
           <div className="block xMini:hidden">
             <MobileLeadsFilters

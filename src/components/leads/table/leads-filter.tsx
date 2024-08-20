@@ -235,7 +235,7 @@ export default function LeadsFilter({
                 label={translate("common.sort_button")}
                 containerClassName="min-w-fit"
               />
-              <div className="flex items-center gap-x-3">
+              {!isAgent && <div className="flex items-center gap-x-3">
                 <span className="text-[#4B4B4B] font-semibold text-base">
                   {translate("global_search.notes")}
                 </span>
@@ -258,15 +258,15 @@ export default function LeadsFilter({
                   }
                   label={translate("add_note_dropdown.all_notes")}
                 />
-              </div>
+              </div>}
             </div>
 
             <div className="flex items-center gap-x-4">
-              <LeadsFilters
+             {!isAgent && <LeadsFilters
                 filter={filter}
                 setFilter={setFilter}
                 onFilterChange={handleFilterChange}
-              />
+              />}
               {!isAgent && (
                 <Button
                   inputType="button"

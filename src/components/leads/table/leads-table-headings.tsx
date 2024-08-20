@@ -57,7 +57,9 @@ export const LeadsTableHeadings = ({ isAgent }: { isAgent?: boolean }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] bg-primary rounded-r-md py-4">
+        <div
+          className={`grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] bg-primary rounded-r-md py-4`}
+        >
           <span className="font-semibold text-base text-white flex items-center justify-center pl-5">
             {translate("common.actions")}
           </span>

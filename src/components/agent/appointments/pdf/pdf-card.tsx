@@ -24,6 +24,10 @@ export const AppointmentPdfCard = ({
   const handleBack = () => {
     if (router.query.isCompany) {
       router.pathname = "/appointments";
+    } else if (router.query.isLead) {
+      router.pathname = "/agent/leads";
+    } else if (router.query.isCompanyLead) {
+      router.pathname = "/leads";
     } else {
       router.pathname = "/agent/appointments";
     }
@@ -31,6 +35,8 @@ export const AppointmentPdfCard = ({
     delete router.query["appointment"];
     delete router.query["reportId"];
     delete router.query["isCompany"];
+    delete router.query["isLead"];
+    delete router.query["isCompanyLead"];
     updateQuery(router, router.locale as string);
   };
 

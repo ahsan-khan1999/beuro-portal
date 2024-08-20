@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
@@ -16,12 +15,11 @@ import {
 import { CustomerPromiseActionType } from "@/types/company";
 import { staticEnums } from "@/utils/static";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
-import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
-import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 
 export const useAppointmentsDetails = () => {
   const router = useRouter();
@@ -77,7 +75,7 @@ export const useAppointmentsDetails = () => {
     e?.stopPropagation();
 
     dispatch(
-      readNotes({ params: { type: "appointment", id: appointmentDetails?.id } })
+      readNotes({ params: { type: "lead", id: appointmentDetails?.id } })
     );
     dispatch(
       updateModalType({
@@ -123,7 +121,7 @@ export const useAppointmentsDetails = () => {
         type: ModalType.EDIT_NOTE,
         data: {
           id: id,
-          type: "appointment",
+          type: "lead",
           data: note,
           refID: refID,
           name: name,
@@ -240,6 +238,13 @@ export const useAppointmentsDetails = () => {
         onClose={onClose}
         handleNotes={handleNotes}
         mainHeading={translate("common.add_note")}
+      />
+    ),
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer
+        onClose={onClose}
+        handleImageSlider={defaultUpdateModal}
+        type={"Appointment"}
       />
     ),
   };

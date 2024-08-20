@@ -71,8 +71,40 @@ export const AppointmentsDetailCard = ({
     })
   );
 
+  // const offerCreateHandler = () => {
+  //   localStoreUtil.remove_data("appointment");
+  //   dispatch(
+  //     setOfferDetails({
+  //       id: "convert",
+  //       type: "Existing Customer",
+  //       leadID: {
+  //         ...appointmentDetails,
+  //         customerID: appointmentDetails?.leadID?.customerID,
+  //       },
+  //       serviceDetail: {
+  //         serviceDetail: appointmentDetails?.leadID?.otherServices,
+  //       },
+  //       addressID: { address: appointmentDetails?.leadID?.addressID?.address },
+  //       content: appointmentDetails?.leadID?.requiredService,
+  //       date: [
+  //         {
+  //           startDate: moment(appointmentDetails?.leadID?.desireDate).format(
+  //             "YYYY-MM-DD"
+  //           ),
+  //           endDate: "",
+  //         },
+  //       ],
+  //     })
+  //   );
+  //   dispatch(
+  //     setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail })
+  //   );
+  //   router.push("/offers/add");
+  // };
+
+
   const offerCreateHandler = () => {
-    localStoreUtil.remove_data("appointment");
+    localStoreUtil.remove_data("offer");
     dispatch(
       setOfferDetails({
         id: "convert",
@@ -88,19 +120,16 @@ export const AppointmentsDetailCard = ({
         content: appointmentDetails?.leadID?.requiredService,
         date: [
           {
-            startDate: moment(appointmentDetails?.leadID?.desireDate).format(
-              "YYYY-MM-DD"
-            ),
+            startDate: moment(appointmentDetails.leadID?.desireDate).format("YYYY-MM-DD"),
             endDate: "",
           },
         ],
       })
     );
-    dispatch(
-      setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail })
-    );
+    dispatch(setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail }));
     router.push("/offers/add");
   };
+
 
   const customerType = appointmentDetails?.leadID?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
@@ -230,7 +259,7 @@ export const AppointmentsDetailCard = ({
 
             <div className="hidden xMini:flex justify-between gap-x-3 items-center mt-2 md:mt-0">
               <div className="flex items-center gap-[11px]">
-                <span className="text-[#4D4D4D] font-normal text-base">
+                <span className="font-normal text-[#848484] text-sm mlg:text-base">
                   {translate("offers.card_content.notes")}:
                 </span>
 
@@ -247,14 +276,14 @@ export const AppointmentsDetailCard = ({
                   }
                 >
                   <WriteIcon
-                    // pathClass={
-                    //   appointmentDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
-                    // }
+                    pathClass={
+                      appointmentDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
+                    }
                   />
                 </span>
               </div>
               <div className="flex items-center gap-[11px]">
-                <span className="text-[#4D4D4D] font-normal text-base">
+                <span className="font-normal text-[#848484] text-sm mlg:text-base">
                   {translate("offers.card_content.images")}:
                 </span>
 
@@ -271,11 +300,9 @@ export const AppointmentsDetailCard = ({
                   }
                 >
                   <ImageUploadIcon
-                    // pathClass={
-                    //   appointmentDetails?.leadID?.isImageAdded
-                    //     ? "#FF0000"
-                    //     : "#4A13E7"
-                    // }
+                    pathClass={
+                      appointmentDetails?.isImageAdded ? "#FF0000" : "#4A13E7"
+                    }
                   />
                 </span>
               </div>

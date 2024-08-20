@@ -21,6 +21,12 @@ import {
   updateOfferDiscount,
 } from "@/api/slices/offer/offerSlice";
 import { readImage } from "@/api/slices/imageSlice/image";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 
 export const useReportDetails = () => {
   const router = useRouter();
@@ -42,16 +48,6 @@ export const useReportDetails = () => {
       );
     }
   }, [id]);
-
-  // useEffect(() => {
-  //   if (id) {
-  //     dispatch(readReportDetails({ params: { filter: id } })).then(
-  //       (res: CustomerPromiseActionType) => {
-  //         dispatch(setReportDetails(res.payload));
-  //       }
-  //     );
-  //   }
-  // }, [id]);
 
   useEffect(() => {
     if (id && appointmentDetails?.isReportSubmitted) {
@@ -116,27 +112,6 @@ export const useReportDetails = () => {
     );
   };
 
-  const handleImageUpload = (
-    id: string,
-    refID?: string,
-    name?: string,
-    heading?: string,
-    e?: React.MouseEvent<HTMLSpanElement>
-  ) => {
-    e?.stopPropagation();
-    dispatch(readImage({ params: { type: "offerID", id: reportDetails?.id } }));
-    dispatch(
-      updateModalType({
-        type: ModalType.UPLOAD_OFFER_IMAGE,
-        data: {
-          refID: refID,
-          name: name,
-          heading: heading,
-        },
-      })
-    );
-  };
-
   const handleUpdateDiscount = async (discount: number) => {
     if (discount < 0)
       showError("Negative values are not applicable for discounts");
@@ -152,6 +127,109 @@ export const useReportDetails = () => {
     }
   };
 
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+
+    dispatch(
+      readNotes({ params: { type: "lead", id: appointmentDetails?.id } })
+    );
+    dispatch(
+      updateModalType({
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.ADD_NOTE,
+        data: {
+          id: id,
+          type: "lead",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: {
+          id: id,
+          type: "lead",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleUploadImages = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATION]: (
       <CreationCreated
@@ -161,7 +239,6 @@ export const useReportDetails = () => {
         route={onClose}
       />
     ),
-
     [ModalType.APPOINTMENT_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
@@ -169,6 +246,45 @@ export const useReportDetails = () => {
         subHeading={translate("appointments.successs_modal.sub_heading")}
         route={onClose}
         imgSrc={reschudleIcon}
+      />
+    ),
+    [ModalType.EXISTING_NOTES]: (
+      <ExistingNotes
+        handleAddNote={handleAddNote}
+        onClose={onClose}
+        leadDetails={appointmentDetails}
+        onEditNote={handleEditNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
+      />
+    ),
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <ConfirmDeleteNote
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        onDeleteNote={handleDeleteNote}
+        loading={loading}
+        onCancel={handleCancelNote}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <UpdateNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        mainHeading={translate("common.update_note")}
+      />
+    ),
+    [ModalType.ADD_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        mainHeading={translate("common.add_note")}
+      />
+    ),
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer
+        onClose={onClose}
+        handleImageSlider={defaultUpdateModal}
+        type={"Appointment"}
       />
     ),
   };
@@ -186,13 +302,12 @@ export const useReportDetails = () => {
     reportDetails,
     handleStatusUpdate,
     appointmentDetails,
-    handleImageUpload,
     shareImgModal,
     handleUpdateDiscount,
     systemSettings,
     defaultUpdateModal,
     handleCreateReport,
-    // handleNotes,
-    // handleUploadImages,
+    handleNotes,
+    handleUploadImages,
   };
 };
