@@ -28,9 +28,11 @@ import { LogoutIcon } from "@/assets/svgs/components/logout-icon";
 import { logoutUser } from "@/api/slices/authSlice/auth";
 import { logout } from "@/utils/auth.util";
 import { LanguageSelector } from "./languageSelector/language-selector";
+import { CalenderIcon } from "@/assets/svgs/components/sideBar/Calender-icon";
 
 export const svgs = {
   Dashboard: <DashboardIcon />,
+  Calendar: <CalenderIcon />,
   Customers: <CustomersIcon />,
   Leads: <LeadsIcon />,
   Appointments: <AppointmentsIcon />,

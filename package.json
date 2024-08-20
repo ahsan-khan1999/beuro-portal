@@ -15,6 +15,10 @@
   "dependencies": {
     "@ckeditor/ckeditor5-export-pdf": "^41.3.1",
     "@ckeditor/ckeditor5-react": "^6.2.0",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/interaction": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/timegrid": "^6.1.15",
     "@hookform/resolvers": "^3.3.1",
     "@react-pdf/renderer": "^3.4.4",
     "@reduxjs/toolkit": "^1.9.5",

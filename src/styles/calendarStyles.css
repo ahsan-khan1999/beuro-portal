@@ -1,0 +1,96 @@
+.fc .fc-daygrid-day {
+  background-color: #f8f9fa;
+}
+
+.fc-event {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+}
+
+.fc-event .fc-event-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.fc-timegrid-slot-label {
+  background-color: #e9ecef;
+  font-weight: bold;
+}
+
+.fc-timegrid-event {
+  border: 1px solid #dee2e6;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.fc-timegrid-slot-label,
+.fc-daygrid-all-day .fc-cell-text {
+  font-family: "Inter", sans-serif;
+  font-size: 16px !important;
+  font-weight: 500;
+  color: #787878;
+  background-color: #fff;
+}
+
+.fc-toolbar {
+  display: flex;
+  justify-content: space-between; /* Distribute space between left, center, and right sections */
+}
+
+.fc-toolbar .fc-left {
+  margin-right: auto; /* Pushes the left content to the left */
+}
+
+.fc-toolbar .fc-center {
+  margin: 0 auto; /* Centers the center content */
+}
+
+.fc-toolbar .fc-right {
+  margin-left: auto; /* Pushes the right content to the right */
+}
+
+/* Style the previous and next buttons */
+.fc .fc-prev-button,
+.fc .fc-next-button {
+  background-color: transparent !important;
+  border: 2px solid #888 !important; /* Gray border */
+  border-radius: 50% !important; /* Make the button circular */
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  outline: none !important;
+  cursor: pointer !important;
+  padding: 0 !important; /* Remove any padding */
+  box-sizing: content-box !important; /* Ensure padding/border does not affect size */
+}
+
+.fc .fc-prev-button {
+  margin-right: 20px;
+}
+
+.fc .fc-prev-button:hover,
+.fc .fc-next-button:hover {
+  background-color: #f0f0f0 !important;
+}
+
+.fc .fc-prev-button:focus,
+.fc .fc-next-button:focus {
+  outline: none !important; /* Remove default focus outline */
+}
+
+.fc .fc-prev-button .fc-icon,
+.fc .fc-next-button .fc-icon {
+  color: #888 !important; /* Arrow color */
+  font-size: 14px !important; /* Adjust arrow size */
+}
+
+.fc .fc-prev-button .fc-icon:before,
+.fc .fc-next-button .fc-icon:before {
+  font-weight: bold !important; /* Make arrows bold */
+}

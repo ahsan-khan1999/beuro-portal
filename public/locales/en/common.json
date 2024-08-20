@@ -251,6 +251,7 @@
   "sidebar": {
     "customer": {
       "dashboard": "Dashboard",
+      "calendar": "Calendar",
       "customers": "Customers",
       "leads": {
         "leads": "Leads",

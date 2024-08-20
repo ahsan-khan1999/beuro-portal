@@ -686,5 +686,18 @@ input[type="date"] {
   border-bottom-right-radius: 14px;
 }
 
+.fc-event {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+  font-weight: bold;
+}
 
+.fc-event-title {
+  font-size: 14px;
+}
 
+.fc-timegrid-slot-label {
+  background-color: #e9ecef;
+  font-weight: bold;
+}

@@ -53,11 +53,12 @@ export const Layout = ({ children }: MyComponentProp) => {
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
+  const isCalendarRoute = path.startsWith("/calendar");
 
   const Drawer = () => {
     return (
       <div
-        className={`!fixed top-0  z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
+        className={`!fixed top-0 z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
           isDrawer ? "block" : "hidden"
         }`}
         // onClick={handleClose}
@@ -100,7 +101,9 @@ export const Layout = ({ children }: MyComponentProp) => {
         <div
           className={`${
             isAgentRoute ? "xs:ml-5 mlg:ml-[272px]" : "ml-[272px]"
-          } mt-[150px] xMini:mt-[90px] mr-5`}
+          } mt-[150px] ${
+            isCalendarRoute ? "xMini:mt-[110px]" : "xMini:mt-[90px]"
+          } mr-5`}
         >
           {children}
         </div>
