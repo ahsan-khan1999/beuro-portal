@@ -83,9 +83,6 @@ export const Calendar = () => {
           },
           dayGridMonth: { buttonText: "Month" },
         }}
-        windowResize={() => {
-          // Custom logic for responsive behavior on window resize
-        }}
       />
     </div>
   );
