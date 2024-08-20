@@ -974,6 +974,12 @@ export const sideBar: SideBar[] = [
     role: [1, 2],
   },
   {
+    icon: "Calendar",
+    title: "sidebar.customer.calendar",
+    pathname: "/calendar",
+    role: [1, 2],
+  },
+  {
     icon: "Dashboard",
     title: "sidebar.admin.dashboard",
     pathname: "/admin/dashboard",

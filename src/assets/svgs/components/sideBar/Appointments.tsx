@@ -1,6 +1,4 @@
-import { SVGIconProp } from "@/types";
-
-export const AppointmentsIcon = ({ className, pathClass }: SVGIconProp) => {
+export const AppointmentsIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
