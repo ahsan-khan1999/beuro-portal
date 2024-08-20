@@ -13,12 +13,13 @@ export const ReportDetails = () => {
     renderModal,
     reportDetails,
     handleUpdateDiscount,
-    handleImageUpload,
     shareImgModal,
     systemSettings,
     defaultUpdateModal,
     appointmentDetails,
     handleCreateReport,
+    handleNotes,
+    handleUploadImages,
   } = useReportDetails();
 
   return (
@@ -38,6 +39,8 @@ export const ReportDetails = () => {
               onStatusChange={handleStatusUpdate}
               appointmentDetails={appointmentDetails}
               isAgent={true}
+              handleImageUpload={handleUploadImages}
+              handleNotes={handleNotes}
             />
           </div>
           <div className="xMini:bg-white mt-6">
@@ -66,6 +69,8 @@ export const ReportDetails = () => {
               onStatusChange={handleStatusUpdate}
               appointmentDetails={appointmentDetails}
               isAgent={true}
+              handleImageUpload={handleUploadImages}
+              handleNotes={handleNotes}
             />
           </div>
           <div className="2xl:mt-[365px] w-full 2xl:block mb-10">
@@ -74,9 +79,9 @@ export const ReportDetails = () => {
               loading={isLoading}
               handleUpdateDiscount={handleUpdateDiscount}
               currency={systemSettings?.currency}
-              shareImgModal={shareImgModal}
-              handleImagesUpload={handleImageUpload}
-              handleImageSlider={defaultUpdateModal}
+              // shareImgModal={shareImgModal}
+              // handleImagesUpload={handleImageUpload}
+              // handleImageSlider={defaultUpdateModal}
             />
           </div>
         </>

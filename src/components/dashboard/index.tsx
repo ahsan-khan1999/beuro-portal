@@ -204,7 +204,7 @@ const AdminDashboard = () => {
         <h1 className="font-medium text-lg xMini:text-2xl mlg:text-[28px] tracking-[0.5px] text-white">
           {isAgentRoute
             ? `${translate("dashboard_detail.agent_dashboard")}`
-            : `${translate("dashboard_detail.main_heading")}}`}
+            : `${translate("dashboard_detail.main_heading")}`}
         </h1>
       </div>
 

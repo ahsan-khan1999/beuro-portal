@@ -19,11 +19,24 @@ import { DEFAULT_APPOINTMETNS, staticEnums } from "@/utils/static";
 import { CreateReportModal } from "@/base-components/ui/modals1/CreateReportModal";
 import { Appointments } from "@/types/appointments";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
 
 export const useAppointments = () => {
-  const { loading, isLoading, totalCount, lastPage } = useAppSelector(
-    (state) => state.appointment
-  );
+  const {
+    loading,
+    isLoading,
+    totalCount,
+    lastPage,
+    appointment,
+    appointmentDetails,
+  } = useAppSelector((state) => state.appointment);
 
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -225,6 +238,165 @@ export const useAppointments = () => {
     dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
   };
 
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+
+    const filteredAppointment = appointment?.filter((item_) => item_.id === id);
+    if (filteredAppointment?.length === 1) {
+      dispatch(setAppointmentDetails(filteredAppointment[0]));
+      dispatch(
+        readNotes({
+          params: { type: "lead", id: filteredAppointment[0]?.id },
+        })
+      ).then((res: any) => {
+        if (res.payload.Note?.length > 0) {
+          setCurrentPageRows((prev) => {
+            const updatedAppointment = prev.map((item) => {
+              if (item.id === filteredAppointment[0]?.id) {
+                const appointment: Appointments = {
+                  ...item,
+                  isNoteCreated: true,
+                };
+                return appointment;
+              }
+              return item;
+            });
+            return updatedAppointment;
+          });
+        }
+      });
+      dispatch(
+        updateModalType({
+          type: ModalType.EXISTING_NOTES,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
+    } else {
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+    }
+  };
+
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.ADD_NOTE,
+        data: {
+          id: id,
+          type: "lead",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: {
+          id: id,
+          type: "lead",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
+  const handleImageUpload = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    if (e) {
+      e?.stopPropagation();
+    }
+    dispatch(setImages([]));
+    const filteredAppointment = appointment.find((item_) => item_.id === id);
+
+    if (filteredAppointment) {
+      dispatch(setAppointmentDetails(filteredAppointment));
+      dispatch(
+        readImage({
+          params: { type: "leadID", id: filteredAppointment?.id },
+        })
+      ).then((res: any) => {
+        if (
+          res.payload?.images?.length > 0 ||
+          res.payload?.attachments?.length > 0 ||
+          res.payload?.videos?.length > 0 ||
+          res.payload?.links?.length > 0
+        ) {
+          setCurrentPageRows((prev) =>
+            prev.map((item) => {
+              return item.id === filteredAppointment?.id
+                ? { ...item, isImageAdded: true }
+                : item;
+            })
+          );
+        }
+      });
+      dispatch(
+        updateModalType({
+          type: ModalType.UPLOAD_IMAGE,
+          data: {
+            refID: refID,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
+    }
+  };
+
+  const defaultUpdateModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATION]: (
       <CreationCreated
@@ -255,6 +427,48 @@ export const useAppointments = () => {
       />
     ),
     [ModalType.APPOINTMENT_CREATE]: <CreateReportModal onClose={onClose} />,
+    [ModalType.EXISTING_NOTES]: (
+      <ExistingNotes
+        handleAddNote={handleAddNote}
+        onClose={onClose}
+        leadDetails={appointmentDetails}
+        onEditNote={handleEditNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <UpdateNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        mainHeading={translate("common.update_note")}
+      />
+    ),
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={appointmentDetails?.id} />
+    ),
+    [ModalType.ADD_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        mainHeading={translate("common.add_note")}
+      />
+    ),
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <ConfirmDeleteNote
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        onDeleteNote={handleDeleteNote}
+        loading={loading}
+        onCancel={handleCancelNote}
+      />
+    ),
+    [ModalType.UPLOAD_IMAGE]: (
+      <ImagesUpload onClose={onClose} handleImageSlider={defaultUpdateModal} />
+    ),
   };
 
   const renderModal = () => {
@@ -278,5 +492,8 @@ export const useAppointments = () => {
     handleAppointmentCreate,
     handleScheduleAppointments,
     lastPage,
+    handleNotes,
+    handleDeleteNote,
+    handleImageUpload,
   };
 };

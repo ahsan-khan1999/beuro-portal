@@ -11,6 +11,8 @@ export const AgentAppointmentsDetails = () => {
     handleCreateReport,
     renderModal,
     appointmentDetails,
+    handleNotes,
+    handleUploadImages,
   } = useAppointmentsDetails();
 
   return (
@@ -18,6 +20,8 @@ export const AgentAppointmentsDetails = () => {
       <AppointmentsDetailCard
         onStatusChange={handleStatusUpdate}
         appointmentDetails={appointmentDetails}
+        handleImageUpload={handleUploadImages}
+        handleNotes={handleNotes}
       />
 
       {loading ? (

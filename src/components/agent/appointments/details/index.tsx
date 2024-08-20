@@ -1,7 +1,7 @@
-import { useAppointmentsDetails } from "@/hooks/appointments/useAppointmentsDetails";
-import { AppointmentsDetailCard } from "./detail-card";
+import { AppointmentsDetailCard } from "../agent-details/detail-card";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { useAppointmentsDetails } from "@/hooks/appointments/useAppointmentsDetails";
 
 export const AgentAppointmentsDetails = () => {
   const {
@@ -11,6 +11,8 @@ export const AgentAppointmentsDetails = () => {
     handleCreateReport,
     renderModal,
     appointmentDetails,
+    handleNotes,
+    handleUploadImages,
   } = useAppointmentsDetails();
 
   return (
@@ -19,9 +21,16 @@ export const AgentAppointmentsDetails = () => {
         <CustomLoader />
       ) : (
         <>
+          {/* <AppointmentsDetailCard
+            onStatusChange={handleStatusUpdate}
+            appointmentDetails={appointmentDetails}
+          /> */}
           <AppointmentsDetailCard
             onStatusChange={handleStatusUpdate}
             appointmentDetails={appointmentDetails}
+            isAgent={true}
+            handleImageUpload={handleUploadImages}
+            handleNotes={handleNotes}
           />
           {!appointmentDetails?.isReportSubmitted && (
             <div className="xMini:bg-white mt-6">

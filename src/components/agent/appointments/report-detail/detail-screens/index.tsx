@@ -21,20 +21,6 @@ export interface ReportDetailProps {
   loading: boolean;
   handleUpdateDiscount: (discount: number) => void;
   currency?: string;
-  shareImgModal: (
-    id: string,
-    refID?: string,
-    name?: string,
-    heading?: string
-  ) => void;
-  handleImagesUpload: (
-    id: string,
-    refID: string,
-    name: string,
-    heading: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
-  handleImageSlider: () => void;
 }
 
 export const ReportDetailData = ({

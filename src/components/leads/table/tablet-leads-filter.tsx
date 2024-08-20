@@ -1,7 +1,6 @@
-import LeadsFilters from "@/base-components/filter/leads-filter";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { FilterType, FiltersComponentProps } from "@/types";
+import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -11,6 +10,7 @@ import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
+import CheckField from "@/base-components/filter/fields/check-field";
 
 export default function TabletLeadsFilter({
   filter,
@@ -81,37 +81,118 @@ export default function TabletLeadsFilter({
     });
   };
 
+  const hanldeStatusChange = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          status: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["status"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
+  const checkbox: CheckBoxType[] = [
+    {
+      label: translate("leads.table_functions.open"),
+      type: `${staticEnums.LeadStatus.Open}`,
+    },
+    {
+      label: translate("leads.table_functions.inProcess"),
+      type: `${staticEnums.LeadStatus.InProcess}`,
+    },
+    {
+      label: translate("leads.table_functions.close"),
+      type: `${staticEnums.LeadStatus.Close}`,
+    },
+    {
+      label: translate("leads.table_functions.expire"),
+      type: `${staticEnums.LeadStatus.Expired}`,
+    },
+  ];
+
+  const handleStatusChange = (value: string, isChecked: boolean) => {
+    setFilter((prev: FilterType) => {
+      const updatedStatus = prev.status ? [...prev.status] : [];
+      const newStatus = updatedStatus;
+
+      if (isChecked) {
+        if (!updatedStatus.includes(value)) {
+          updatedStatus.push(value);
+        }
+
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      } else {
+        const index = updatedStatus.indexOf(value);
+        if (index > -1) {
+          updatedStatus.splice(index, 1);
+        }
+
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      }
+
+      const status =
+        updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+      const updatedFilter = { ...prev, status: status };
+
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
     <div className="flex xMd:hidden items-center justify-between w-full z-10">
       <h1 className="text-2xl font-medium text-[#222B45]">Leads</h1>
 
-      <div className="flex items-center gap-x-1">
-        {/* <SelectField
-          handleChange={(value) => hanldeSortChange(value)}
-          value=""
-          options={[
-            {
-              label: translate("leads.table_functions.open"),
-              value: `${staticEnums.LeadStatus.Open}`,
-            },
-            {
-              label: translate("leads.table_functions.inProcess"),
-              value: `${staticEnums.LeadStatus.InProcess}`,
-            },
-            {
-              label: translate("leads.table_functions.close"),
-              value: `${staticEnums.LeadStatus.Close}`,
-            },
-            {
-              label: translate("leads.table_functions.expire"),
-              value: `${staticEnums.LeadStatus.Expired}`,
-            },
-          ]}
-          label={translate("leads.table_functions.open")}
-          containerClassName="min-w-fit"
-          dropdownClassName="w-[160px]"
-        /> */}
-
+      <div className="flex items-center gap-x-1 mlg:gap-x-3">
+        <div className="hidden xlg:flex items-center gap-[14px]">
+          {checkbox.map((item, idx) => (
+            <CheckField
+              key={idx}
+              checkboxFilter={filter}
+              setCheckBoxFilter={setFilter}
+              type={"status"}
+              label={item.label}
+              value={item.type}
+              onChange={(value, isChecked) =>
+                handleStatusChange(value, isChecked)
+              }
+            />
+          ))}
+        </div>
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}
@@ -120,6 +201,34 @@ export default function TabletLeadsFilter({
           onEnterPress={onEnterPress}
           textClassName="w-[177px]"
         />
+
+        <div className="block xlg:hidden">
+          <SelectField
+            handleChange={(value) => hanldeStatusChange(value)}
+            value=""
+            options={[
+              {
+                label: translate("leads.table_functions.open"),
+                value: `${staticEnums.LeadStatus.Open}`,
+              },
+              {
+                label: translate("leads.table_functions.inProcess"),
+                value: `${staticEnums.LeadStatus.InProcess}`,
+              },
+              {
+                label: translate("leads.table_functions.close"),
+                value: `${staticEnums.LeadStatus.Close}`,
+              },
+              {
+                label: translate("leads.table_functions.expire"),
+                value: `${staticEnums.LeadStatus.Expired}`,
+              },
+            ]}
+            label={translate("leads.table_functions.open")}
+            containerClassName="min-w-fit"
+            dropdownClassName="w-[160px]"
+          />
+        </div>
 
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

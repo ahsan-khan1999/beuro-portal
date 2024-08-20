@@ -18,6 +18,7 @@ import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import appointmentIcon from "@/assets/pngs/appoinment-icon.png";
 import { BackIcon } from "@/assets/svgs/components/back-icon";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { WriteIcon } from "@/assets/svgs/components/write-icon";
 
 export interface LeadDetailCardProps {
   leadDeleteHandler: Function;
@@ -25,6 +26,13 @@ export interface LeadDetailCardProps {
   onStatusUpdate: (id: string) => void;
   onCreateAppointment: () => void;
   isAgent?: boolean;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
   handleImageUpload: (
     id: string,
     refID: string,
@@ -40,6 +48,7 @@ const LeadsDetailsCardData = ({
   onCreateAppointment,
   isAgent,
   handleImageUpload,
+  handleNotes,
 }: LeadDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -277,9 +286,10 @@ const LeadsDetailsCardData = ({
             {leadDetails?.createdBy?.fullName}
           </span>
         </div>
-        {isAgent && (
+        {/* {isAgent && ( */}
+        <div className="hidden xMini:flex justify-between gap-x-3 items-center mt-2 md:mt-0">
           <div className="flex items-center gap-[11px]">
-            <span className="text-[#4D4D4D] font-normal text-base">
+            <span className="font-normal text-[#848484] text-sm mlg:text-base">
               {translate("offers.card_content.images")}:
             </span>
 
@@ -300,7 +310,30 @@ const LeadsDetailsCardData = ({
               />
             </span>
           </div>
-        )}
+          <div className="flex items-center gap-[11px]">
+            <span className="font-normal text-[#848484] text-sm mlg:text-base">
+              {translate("offers.card_content.notes")}:
+            </span>
+
+            <span
+              className="cursor-pointer"
+              onClick={(e) =>
+                handleNotes(
+                  leadDetails?.id,
+                  leadDetails?.refID,
+                  name,
+                  heading,
+                  e
+                )
+              }
+            >
+              <WriteIcon
+                pathClass={leadDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"}
+              />
+            </span>
+          </div>
+        </div>
+        {/* )} */}
       </div>
     </div>
   );

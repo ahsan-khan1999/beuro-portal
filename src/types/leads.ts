@@ -27,8 +27,12 @@ export interface Lead {
   additionalDetails: string;
   createdBy: User;
   isNoteCreated: boolean;
-  isAppointmentCreated: boolean;
   isImageAdded: boolean;
+  isAppointmentCreated: boolean;
+  appointment: {
+    id: string;
+    isReportSubmitted: boolean;
+  };
 }
 interface CustomerDetails {
   Customer: Customers;

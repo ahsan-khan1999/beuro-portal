@@ -13,17 +13,35 @@ import moment from "moment";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
+import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { WriteIcon } from "@/assets/svgs/components/write-icon";
 
 export interface AppointmentsDetailCardProps {
   onStatusChange: (id: string) => void;
   appointmentDetails: Appointments;
   isAgent?: boolean;
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageUpload: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
 }
 
 export const AppointmentsDetailCard = ({
   onStatusChange,
   appointmentDetails,
   isAgent,
+  handleImageUpload,
+  handleNotes,
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -53,8 +71,40 @@ export const AppointmentsDetailCard = ({
     })
   );
 
+  // const offerCreateHandler = () => {
+  //   localStoreUtil.remove_data("appointment");
+  //   dispatch(
+  //     setOfferDetails({
+  //       id: "convert",
+  //       type: "Existing Customer",
+  //       leadID: {
+  //         ...appointmentDetails,
+  //         customerID: appointmentDetails?.leadID?.customerID,
+  //       },
+  //       serviceDetail: {
+  //         serviceDetail: appointmentDetails?.leadID?.otherServices,
+  //       },
+  //       addressID: { address: appointmentDetails?.leadID?.addressID?.address },
+  //       content: appointmentDetails?.leadID?.requiredService,
+  //       date: [
+  //         {
+  //           startDate: moment(appointmentDetails?.leadID?.desireDate).format(
+  //             "YYYY-MM-DD"
+  //           ),
+  //           endDate: "",
+  //         },
+  //       ],
+  //     })
+  //   );
+  //   dispatch(
+  //     setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail })
+  //   );
+  //   router.push("/offers/add");
+  // };
+
+
   const offerCreateHandler = () => {
-    localStoreUtil.remove_data("appointment");
+    localStoreUtil.remove_data("offer");
     dispatch(
       setOfferDetails({
         id: "convert",
@@ -70,19 +120,28 @@ export const AppointmentsDetailCard = ({
         content: appointmentDetails?.leadID?.requiredService,
         date: [
           {
-            startDate: moment(appointmentDetails?.leadID?.desireDate).format(
-              "YYYY-MM-DD"
-            ),
+            startDate: moment(appointmentDetails.leadID?.desireDate).format("YYYY-MM-DD"),
             endDate: "",
           },
         ],
       })
     );
-    dispatch(
-      setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail })
-    );
+    dispatch(setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail }));
     router.push("/offers/add");
   };
+
+
+  const customerType = appointmentDetails?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+  const name =
+    customerType === 1
+      ? appointmentDetails?.leadID?.customerDetail?.companyName
+      : appointmentDetails?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div className="bg-white pt-5 pl-5 pr-6 pb-[37px] rounded-lg">
@@ -196,6 +255,57 @@ export const AppointmentsDetailCard = ({
               <span className="text-base text-[#5C5C5C] font-nomal">
                 {appointmentDetails?.startTime} - {appointmentDetails?.endTime}
               </span>
+            </div>
+
+            <div className="hidden xMini:flex justify-between gap-x-3 items-center mt-2 md:mt-0">
+              <div className="flex items-center gap-[11px]">
+                <span className="font-normal text-[#848484] text-sm mlg:text-base">
+                  {translate("offers.card_content.notes")}:
+                </span>
+
+                <span
+                  className="cursor-pointer"
+                  onClick={(e) =>
+                    handleNotes(
+                      appointmentDetails?.id,
+                      appointmentDetails?.leadID?.refID,
+                      name,
+                      heading,
+                      e
+                    )
+                  }
+                >
+                  <WriteIcon
+                    pathClass={
+                      appointmentDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
+                    }
+                  />
+                </span>
+              </div>
+              <div className="flex items-center gap-[11px]">
+                <span className="font-normal text-[#848484] text-sm mlg:text-base">
+                  {translate("offers.card_content.images")}:
+                </span>
+
+                <span
+                  className="cursor-pointer"
+                  onClick={(e) =>
+                    handleImageUpload(
+                      appointmentDetails?.leadID?.id,
+                      appointmentDetails?.leadID?.refID,
+                      name,
+                      heading,
+                      e
+                    )
+                  }
+                >
+                  <ImageUploadIcon
+                    pathClass={
+                      appointmentDetails?.isImageAdded ? "#FF0000" : "#4A13E7"
+                    }
+                  />
+                </span>
+              </div>
             </div>
           </div>
         </div>

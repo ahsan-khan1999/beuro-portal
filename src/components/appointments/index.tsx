@@ -25,6 +25,8 @@ export default function Appointments() {
     handleStatusUpdate,
     totalCount,
     handleScheduleAppointments,
+    handleNotes,
+    handleImageUpload,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -32,6 +34,8 @@ export default function Appointments() {
       dataToAdd={currentPageRows}
       onStatusChange={handleStatusUpdate}
       onAppointmentSchedule={handleScheduleAppointments}
+      handleAddNote={handleNotes}
+      handleImageUpload={handleImageUpload}
     />,
     currentPageRows.length > 0,
     isLoading

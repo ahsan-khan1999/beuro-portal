@@ -45,6 +45,8 @@ export interface Appointments {
   };
   appointmentStatus: string;
   createdAt: string;
+  isNoteCreated: boolean;
+  isImageAdded: boolean;
 }
 
 export interface Report {

@@ -282,10 +282,10 @@ const useLeads = () => {
         readImage({ params: { type: "leadID", id: filteredLead?.id } })
       ).then((res: any) => {
         if (
-          res.payload?.images.length > 0 ||
-          res.payload?.attachments.length > 0 ||
-          res.payload?.videos.length > 0 ||
-          res.payload?.links.length > 0
+          res.payload?.images?.length > 0 ||
+          res.payload?.attachments?.length > 0 ||
+          res.payload?.videos?.length > 0 ||
+          res.payload?.links?.length > 0
         ) {
           setCurrentPageRows((prev) =>
             prev.map((lead) => {
