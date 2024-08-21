@@ -16,13 +16,13 @@ import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
 import { DEFAULT_SERVICE, staticEnums } from "./static";
 import { DetailScreensStages } from "@/enums/auth";
-import moment from "moment";
 import { CustomerAddress } from "@/types/customer";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { Service } from "@/types/service";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
+import moment from "moment";
 import "moment/locale/de";
 import { TFunction } from "next-i18next";
 
@@ -422,6 +422,14 @@ export function fieldDateFormat(date: string) {
 export function pdfDateFormat(date: string, locale: string) {
   if (!date) return null;
   return moment(date).locale(locale).format("DD. MMMM YYYY");
+}
+
+export function calendarDayDateFormat(date: string, locale: string) {
+  return moment(date).locale(locale).format("dddd, DD MMMM");
+}
+
+export function calendarYearDateFormat(date: string, locale: string) {
+  return moment(date).locale(locale).format("MMMM YYYY");
 }
 
 export function formatDateTimeToDateMango(date: string) {
@@ -939,3 +947,5 @@ export const downloadFile = (url: string) => {
       console.error("Error downloading file:", error);
     });
 };
+
+export const calenderFormattedDate = moment().format("dddd, DD MMMM");

@@ -2522,5 +2522,26 @@
       "AdministrativeAssistant": "Administrative Assistant",
       "Intern": "Intern"
     }
+  },
+
+  "calendar": {
+    "main_heading": "Calendar",
+    "add_task": "Add Task",
+    "today":"Today",
+    "tab_headings": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
+    },
+    "days": {
+      "Monday": "Monday",
+      "Tuesday": "Tuesday",
+      "Wednesday": "Wednesday",
+      "Thursday": "Thursday",
+      "Friday": "Friday",
+      "Saturday": "Saturday",
+      "Sunday": "Sunday"
+    }
   }
 }
