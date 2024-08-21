@@ -92,5 +92,13 @@
 
 .fc .fc-prev-button .fc-icon:before,
 .fc .fc-next-button .fc-icon:before {
-  font-weight: bold !important; /* Make arrows bold */
+  font-weight: bold !important;
+}
+
+.fc-toolbar-chunk {
+  visibility: hidden;
+}
+
+#fc-dom-22 {
+  visibility: hidden;
 }

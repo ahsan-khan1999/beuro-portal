@@ -53,7 +53,6 @@ export const Layout = ({ children }: MyComponentProp) => {
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
-  const isCalendarRoute = path.startsWith("/calendar");
 
   const Drawer = () => {
     return (
@@ -101,9 +100,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         <div
           className={`${
             isAgentRoute ? "xs:ml-5 mlg:ml-[272px]" : "ml-[272px]"
-          } mt-[150px] ${
-            isCalendarRoute ? "xMini:mt-[110px]" : "xMini:mt-[90px]"
-          } mr-5`}
+          } mt-[150px] xMini:mt-[90px] mr-5`}
         >
           {children}
         </div>
