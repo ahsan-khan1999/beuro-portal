@@ -424,8 +424,12 @@ export function pdfDateFormat(date: string, locale: string) {
   return moment(date).locale(locale).format("DD. MMMM YYYY");
 }
 
-export function calendarDateFormat(date: string, locale: string) {
+export function calendarDayDateFormat(date: string, locale: string) {
   return moment(date).locale(locale).format("dddd, DD MMMM");
+}
+
+export function calendarYearDateFormat(date: string, locale: string) {
+  return moment(date).locale(locale).format("MMMM YYYY");
 }
 
 export function formatDateTimeToDateMango(date: string) {

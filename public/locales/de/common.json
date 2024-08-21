@@ -2524,6 +2524,7 @@
   "calendar": {
     "main_heading": "Kalender",
     "add_task": "Aufgabe hinzufügen",
+    "today": "Heute",
     "tab_headings": {
       "day": "Tag",
       "week": "Woche",

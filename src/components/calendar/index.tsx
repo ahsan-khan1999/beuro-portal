@@ -12,10 +12,11 @@ import "moment/locale/de";
 import moment from "moment";
 import { extendMoment } from "moment-range";
 import { useRouter } from "next/router";
-import { calendarDateFormat } from "@/utils/utility";
+import { calendarDayDateFormat, calendarYearDateFormat } from "@/utils/utility";
+import { DayView } from "./day-view";
+import { AllDayEvent } from "./all-day-event";
 
 const Moment = extendMoment(moment as any);
-
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
 
 export const Calendar = () => {
@@ -41,7 +42,7 @@ export const Calendar = () => {
     let formattedDate = "";
 
     if (viewType === "timeGridDay") {
-      const currentDate = calendarDateFormat(
+      const currentDate = calendarDayDateFormat(
         date.toString(),
         router.locale as string
       );
@@ -56,7 +57,10 @@ export const Calendar = () => {
         "DD MMMM, YYYY"
       )}`;
     } else if (viewType === "dayGridMonth") {
-      formattedDate = moment(date).format("MMMM YYYY");
+      formattedDate = calendarYearDateFormat(
+        date.toString(),
+        router.locale as string
+      );
     }
 
     setCurrentDate(formattedDate);
@@ -88,44 +92,118 @@ export const Calendar = () => {
 
   const events = [
     {
-      title: "Conference",
-      start: "2024-08-20T00:00:00", // All-day event
+      title: "Customer call",
+      start: "2024-08-21T10:30:00",
+      end: "2024-08-21T11:30:00",
+      backgroundColor: "#E9F0FF",
+      textColor: "#4A13E7",
+      borderColor: "red",
       allDay: true,
     },
     {
-      title: "Meeting",
-      start: "2024-08-20T10:30:00",
-      end: "2024-08-20T12:30:00",
-    },
-    {
-      title: "Meeting",
-      start: "2024-08-20T10:30:00",
-      end: "2024-08-20T12:30:00",
-    },
-    {
-      title: "Meeting",
-      start: "2024-08-20T10:30:00",
-      end: "2024-08-20T12:30:00",
-    },
-    {
-      title: "Lunch",
-      start: "2024-08-20T12:00:00",
+      title: "Customer call",
+      start: "2024-08-21T10:30:00",
+      end: "2024-08-21T11:30:00",
+      backgroundColor: "#E9FFEF",
+      textColor: "#45C769",
+      borderColor: "red",
       allDay: true,
     },
     {
-      title: "Meeting",
-      start: "2024-08-20T14:30:00",
-    },
-    {
-      title: "Happy Hour",
-      start: "2024-08-20T17:30:00",
+      title:
+        "Call customer lorem ipsum dollar smiht emit lorem ipsum dolar ipsum lorem ip.",
+      start: "2024-08-21T10:30:00",
+      end: "2024-08-21T11:30:00",
+      backgroundColor: "#E9FFEF",
+      textColor: "purple",
+      borderColor: "red",
       allDay: true,
     },
     {
-      title: "Dinner",
-      start: "2024-08-20T20:00:00",
+      title: "Customer call",
+      start: "2024-08-21T10:30:00",
+      end: "2024-08-21T11:30:00",
+      backgroundColor: "#E9FFEF",
+      textColor: "orange",
+      borderColor: "red",
+      allDay: true,
+    },
+    {
+      title: "Customer call",
+      start: "2024-08-21T10:30:00",
+      end: "2024-08-21T11:30:00",
+      backgroundColor: "#E9FFEF",
+      textColor: "#45C769",
+      borderColor: "red",
+      allDay: true,
+    },
+    {
+      title: "Customer call",
+      start: "2024-08-21T10:30:00",
+      end: "2024-08-21T11:30:00",
+      backgroundColor: "#E9FFEF",
+      textColor: "#45C769",
+      borderColor: "red",
+      allDay: true,
+    },
+    {
+      title: "Urgent call",
+      start: "2024-08-20T13:30:00",
+      end: "2024-08-20T15:30:00",
+      backgroundColor: "orange",
+      textColor: "red",
+      borderColor: "purple",
+    },
+    {
+      title: "Urgent call",
+      start: "2024-08-21T10:30:00",
+      end: "2024-08-21T11:30:00",
+      backgroundColor: "#cfcfcf",
+      textColor: "red",
+      borderColor: "orange",
+    },
+    {
+      title: "Urgent call",
+      start: "2024-0806:30:00",
+      end: "2024-08-11T08:30:00",
+      backgroundColor: "orange",
+      textColor: "red",
+      borderColor: "black",
+    },
+    {
+      title: "Urgent call",
+      start: "2024-08-16T09:30:00",
+      end: "2024-08-16T11:30:00",
+      backgroundColor: "orange",
+      allDay: true,
+      textColor: "red",
+      borderColor: "red",
+    },
+    {
+      title: "Urgent call",
+      start: "2024-08-15T10:30:00",
+      end: "2024-08-15T11:30:00",
+      backgroundColor: "orange",
+      textColor: "red",
+      borderColor: "black",
     },
   ];
+
+  const handlePrviousClick = () => {
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi();
+      calendarApi.prev();
+      updateDateDisplay(calendarApi.getDate(), selectedTab);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi();
+      calendarApi.next();
+      updateDateDisplay(calendarApi.getDate(), selectedTab);
+    }
+  };
 
   return (
     <div className="mb-5">
@@ -174,21 +252,9 @@ export const Calendar = () => {
         </div>
 
         <ActionsTab
-          previousClick={() => {
-            if (calendarRef.current) {
-              const calendarApi = calendarRef.current.getApi();
-              calendarApi.prev();
-              updateDateDisplay(calendarApi.getDate(), selectedTab);
-            }
-          }}
-          nextClick={() => {
-            if (calendarRef.current) {
-              const calendarApi = calendarRef.current.getApi();
-              calendarApi.next();
-              updateDateDisplay(calendarApi.getDate(), selectedTab);
-            }
-          }}
-          heading="Today"
+          previousClick={handlePrviousClick}
+          nextClick={handleNextClick}
+          heading={translate("calendar.today")}
         />
       </div>
 
@@ -198,13 +264,101 @@ export const Calendar = () => {
         initialView="timeGridDay"
         events={events}
         headerToolbar={false}
+        slotLabelFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }}
         dateClick={(arg) => alert("Date clicked: " + arg.dateStr)}
         eventClick={(info) => alert("Event clicked: " + info.event.title)}
-        editable={true}
+        editable={false}
         selectable={true}
         dayMaxEvents={true}
         height="auto"
         aspectRatio={1.5}
+        views={{
+          timeGridDay: {
+            dayMaxEvents: 6,
+          },
+          dayGridMonth: {
+            dayMaxEvents: true,
+          },
+          timeGridWeek: {
+            dayMaxEvents: true,
+          },
+        }}
+        eventTimeFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }}
+        eventContent={(eventInfo) => {
+          const { event, view } = eventInfo;
+          const viewType = view.type;
+
+          if (event.allDay) {
+            return (
+              <AllDayEvent
+                title={event.title}
+                backrgoundColour={eventInfo.event.backgroundColor}
+                dotColour={eventInfo.event.textColor}
+              />
+            );
+          } else if (
+            viewType === "timeGridDay" ||
+            viewType === "timeGridWeek"
+          ) {
+            const formattedTime = `${moment(eventInfo.event.start).format(
+              "HH:mm"
+            )} - ${moment(eventInfo.event.end).format("HH:mm")}`;
+            return (
+              <DayView
+                time={formattedTime}
+                title={eventInfo.event.title}
+                backrgoundColour={eventInfo.event.backgroundColor}
+                borderColour={eventInfo.event.borderColor}
+                timeColour={eventInfo.event.textColor}
+              />
+            );
+          } else if (viewType === "dayGridMonth") {
+            return (
+              <AllDayEvent
+                title={event.title}
+                backrgoundColour={eventInfo.event.backgroundColor}
+                dotColour={eventInfo.event.textColor}
+              />
+            );
+          } else {
+            return null;
+          }
+        }}
+        eventDidMount={(info) => {
+          const viewType = info.view.type;
+          const containerEl = document.querySelector(".fc-daygrid-day-events");
+
+          if (viewType === "timeGridDay" && containerEl) {
+            containerEl.classList.add("timeGridDay-flex");
+          } else if (containerEl) {
+            containerEl.classList.remove("timeGridDay-flex");
+          }
+
+          // Only apply the specific styling to all-day events in the timeGridDay view
+          if (info.event.allDay && viewType === "timeGridDay") {
+            info.el.style.display = "inline-block";
+            // info.el.style.width = "270px";
+            info.el.style.overflow = "hidden";
+            info.el.style.textOverflow = "ellipsis";
+            info.el.style.whiteSpace = "nowrap";
+            info.el.style.border = "none";
+            info.el.style.boxShadow = "none";
+          }
+
+          // Ensure the width is not applied in other views like dayGridMonth
+          if (viewType === "dayGridMonth" || viewType === "timeGridWeek") {
+            info.el.style.width = "auto"; // Reset the width to auto for month view events
+            info.el.style.display = "block"; // Ensure proper display style for month view
+          }
+        }}
       />
     </div>
   );

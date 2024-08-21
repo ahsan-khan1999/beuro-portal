@@ -22,7 +22,7 @@ export const CalendarTab = ({
   onItemSelected,
 }: CalendarTabProps) => {
   const tabContaienrClasses = combineClasses(
-    `px-[13px] rounded-full py-1 text-sm font-medium cursor-pointer ${
+    `px-[13px] rounded-full py-[5px] text-base font-medium cursor-pointer ${
       isSelected ? "text-white bg-primary" : "text-[#2E2E2E] bg-transparent"
     }`
   );

@@ -23,6 +23,8 @@ export const ActionsTab = ({
   const textView = combineClasses(
     "border border-[#DADADA] rounded-lg px-3 py-[6px]"
   );
+
+  
   return (
     <div className={defaultClasses}>
       <PreviousActionIcon onClick={previousClick} />
