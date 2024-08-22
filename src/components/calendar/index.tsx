@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { calendarDayDateFormat, calendarYearDateFormat } from "@/utils/utility";
 import { DayView } from "./day-view";
 import { AllDayEvent } from "./all-day-event";
+import { useCalendar } from "@/hooks/calendar/useCalendar";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
@@ -25,6 +26,7 @@ export const Calendar = () => {
   const calendarRef = useRef<FullCalendar>(null);
   const [currentDate, setCurrentDate] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
+  const { handleAddContractTask, renderModal } = useCalendar();
 
   const tabs = [
     { view: "timeGridDay", label: `${translate("calendar.tab_headings.day")}` },
@@ -213,7 +215,7 @@ export const Calendar = () => {
         </h1>
 
         <Button
-          onClick={() => {}}
+          onClick={handleAddContractTask}
           className="!h-fit py-2 px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap mt-6"
           text={translate("calendar.add_task")}
           id="add task"
@@ -360,6 +362,8 @@ export const Calendar = () => {
           }
         }}
       />
+
+      {renderModal()}
     </div>
   );
 };

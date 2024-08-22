@@ -1,8 +1,8 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { contractTableTypes } from "@/types/contract";
-import { DEFAULT_CONTRACT } from "@/utils/static";
+import { contractTableTypes, Task, Tasks } from "@/types/contract";
+import { DEFAULT_CONTRACT, DEFAULT_CONTRACT_TASK } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";
 import { ModalType } from "@/enums/ui";
@@ -15,10 +15,13 @@ interface ContractState {
   lastPage: number;
   totalCount: number;
   contractDetails: contractTableTypes;
+  task: Tasks[];
+  taskDetail: Task;
 }
 
 const initialState: ContractState = {
   contract: [],
+  task: [],
   loading: false,
   isLoading: true,
   error: {},
@@ -26,6 +29,7 @@ const initialState: ContractState = {
   totalCount: 10,
   //@ts-expect-error
   contractDetails: DEFAULT_CONTRACT,
+  taskDetail: DEFAULT_CONTRACT_TASK,
 };
 
 export const readContract: AsyncThunk<boolean, object, object> | any =
@@ -40,6 +44,7 @@ export const readContract: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const readContractDetails: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("contract/read/details", async (args, thunkApi) => {
     const { params } = args as any;
@@ -52,6 +57,7 @@ export const readContractDetails: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createContract: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("contract/create", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -154,6 +160,7 @@ export const deleteContract: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateContractStatus: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("contract/update/status", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -185,6 +192,7 @@ export const updateContractPaymentStatus:
     }
   }
 );
+
 export const sendContractEmail: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("send/contract/email", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -237,6 +245,22 @@ export const readQRCode: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
+// Create contract task
+export const createContractTask: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("contract-task/create", async (args, thunkApi) => {
+    const { data, setError, translate } = args as any;
+
+    try {
+      const res = await apiServices.createContractTask(data);
+      return res.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
 const ContractSlice = createSlice({
   name: "ContractSlice",
   initialState,
@@ -246,6 +270,9 @@ const ContractSlice = createSlice({
     },
     setContractDetails: (state, action) => {
       state.contractDetails = action.payload;
+    },
+    setContractTaskDetails: (state, action) => {
+      state.taskDetail = action.payload;
     },
   },
   extraReducers(builder) {
@@ -368,8 +395,19 @@ const ContractSlice = createSlice({
     builder.addCase(updateContractDates.rejected, (state) => {
       state.loading = false;
     });
+
+    builder.addCase(createContractTask.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createContractTask.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(createContractTask.rejected, (state) => {
+      state.loading = false;
+    });
   },
 });
 
 export default ContractSlice.reducer;
-export const { setErrorMessage, setContractDetails } = ContractSlice.actions;
+export const { setErrorMessage, setContractDetails, setContractTaskDetails } =
+  ContractSlice.actions;

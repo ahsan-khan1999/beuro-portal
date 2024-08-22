@@ -19,6 +19,10 @@ import {
   QuantityInputField,
   CustomCheckBoxField,
   CustomFileUploadField,
+  IconLabelFeild,
+  CalendarDatePickerField,
+  ColourSelectField,
+  RemainderSelectField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -59,6 +63,10 @@ const fieldComponents: FieldComponents = {
   timePicker: TimePicker,
   quantityInput: QuantityInputField,
   customCheckBox: CustomCheckBoxField,
+  iconLabel: IconLabelFeild,
+  calendarDatePicker: CalendarDatePickerField,
+  colourSelectField: ColourSelectField,
+  remainderSelectField: RemainderSelectField,
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -106,26 +114,12 @@ export function isFieldType(type: any): type is FieldType {
     "quantityInput",
     "customCheckBox",
     "customFileUpload",
+    "iconLabel",
+    "calendarDatePicker",
+    "colourSelectField",
+    "remainderSelectField",
   ].includes(type);
 }
-
-// const cardPatterns = [
-//   { type: CardType.VISA, pattern: /^4/, format: [4, 4, 4, 4] },
-//   { type: CardType.MASTERCARD, pattern: /^5[1-5]/, format: [4, 4, 4, 4] },
-//   // Add more card patterns here...
-// ];
-
-// export const detectCardType = (cardNumber: string): DetectedCardInfo | null => {
-//   const cleanNumber = cardNumber.replace(/\D+/g, "");
-
-//   for (const card of cardPatterns) {
-//     if (card.pattern.test(cleanNumber)) {
-//       return { type: card.type, format: card.format };
-//     }
-//   }
-
-//   return null;
-// };
 
 export const formatCardNumber = (cardNumber: string, format: number[]) => {
   const cleanNumber = cardNumber.replace(/\D+/g, "");
@@ -138,25 +132,6 @@ export const formatCardNumber = (cardNumber: string, format: number[]) => {
     return section ? `${acc} ${section}`.trim() : acc;
   }, "");
 };
-
-// export const getCardIcon = ({
-//   cardType,
-//   icons: { visa, mastercard },
-// }: GetCreditCardIconProps) => {
-//   const creditCardIcons: CreditCardIconsType = {
-//     [CardType.VISA]: visa,
-//     [CardType.MASTERCARD]: mastercard,
-//   };
-//   const iconSrc = cardType && creditCardIcons[cardType?.type];
-//   if (!iconSrc) return null;
-//   return (
-//     <Image
-//       src={iconSrc}
-//       alt={`${cardType.type} Icon`}
-//       className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4"
-//     />
-//   );
-// };
 
 export const renderField = (
   fieldData: FormField,

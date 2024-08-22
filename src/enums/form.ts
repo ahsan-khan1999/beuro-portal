@@ -70,6 +70,10 @@ export enum Field {
   agentSelectField = "agentSelectField",
   timePicker = "timePicker",
   customFileUpload = "customFileUpload",
+  iconLabel = "iconLabel",
+  calendarDatePicker = "calendarDatePicker",
+  colourSelectField = "colourSelectField",
+  remainderSelectField = "remainderSelectField",
 }
 
 export enum CardType {
