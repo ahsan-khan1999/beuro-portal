@@ -29,7 +29,7 @@ export const Backdrop = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.1 }}
       className={`!fixed top-0 flex justify-center items-center z-[999] bg-[#1E1E1E] ${
-        customOpacity ? "bg-opacity-40" : "bg-opacity-90"
+        customOpacity ? "bg-opacity-10" : "bg-opacity-90"
       } w-screen h-screen bg-blend-saturation`}
       onClick={handleBackdropClicked}
     >

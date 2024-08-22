@@ -1,6 +1,7 @@
 import { Country, State } from "@/enums/auth";
 import { SideBar, countryType } from "@/types";
 import { PaymentsAdmin } from "@/types/admin/payments";
+import { Task } from "@/types/contract";
 
 // Function for handling the date format
 function parseCustomDate(dateString: string) {
@@ -1547,6 +1548,24 @@ export const DEFAULT_CONTRACT = {
   payment: "",
   status: "",
   type: "",
+};
+
+export const DEFAULT_CONTRACT_TASK: Task = {
+  id: "",
+  taskID: "",
+  isContrcatCreated: false,
+  title: "",
+  date: [
+    {
+      startDate: "",
+      endDate: "",
+    },
+  ],
+  isAllDay: true,
+  colour: "",
+  createdAt: "",
+  note: "",
+  alertTime: "",
 };
 
 export const DEFAULT_INVOICE = {

@@ -42,6 +42,7 @@ const SERVICE_URLS = {
   offer: "/offer/Offer-step/",
 
   contract: "/contract",
+  contractTask: "/contract/task",
   updateContract: "/contract/",
   company: "/company",
   invoice: "/invoice",
@@ -426,6 +427,9 @@ const readContractDetail = (params) =>
 
 const createContract = (data) =>
   post(SERVICE_URLS.contract, data, { feature: featureConstants.login });
+
+const createContractTask = (data) =>
+  post(SERVICE_URLS.contractTask, data, { feature: featureConstants.login });
 
 const updateContractDate = (data) =>
   put(SERVICE_URLS.updateDate + `${data?.id}`, data, {
@@ -1260,5 +1264,6 @@ const apiServices = {
   createAppointmentReport,
   updateAppointmentReport,
   readReportDetail,
+  createContractTask
 };
 export default apiServices;

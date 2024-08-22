@@ -87,9 +87,9 @@ module.exports = {
         inProgressStatus: "#ebd409",
         tableRowBg: "#F4F8FD",
         overdueColor: "#FF376F",
-        
       },
       boxShadow: (theme: any) => ({
+        calendarShadow: "0px 0px 33.6px 0px rgba(0, 0, 0, 0.20)",
         header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,
         followUp: `0px 3px 16px 6px rgba(0, 0, 0, 0.11)`,
         loginCard: `0px 0px 32px 0px rgba(0, 0, 0, 0.08)`,

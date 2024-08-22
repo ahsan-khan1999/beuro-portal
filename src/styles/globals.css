@@ -674,6 +674,18 @@ input[type="date"] {
   border-bottom: 10px solid #4a13e7;
 }
 
+.add-task-modal::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: -15px;
+  width: 20px;
+  height: 20px;
+  background-color: #f3f3f3;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
+}
+
 .follow_up_item::before {
   content: "";
   position: absolute;

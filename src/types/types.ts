@@ -107,7 +107,7 @@ export interface MobileTabArrayTypes {
   icon: string;
   id?: string;
   type: number;
-  backgroundColor?:string
+  backgroundColor?: string;
 }
 export interface stepFormArrayTypes {
   name: string;
@@ -314,6 +314,14 @@ export type GenerateAddTaxFormField = (
   loader: boolean,
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function
+) => FormField[];
+
+export type GenerateAddTaskFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  isRemainder: boolean,
+  control?: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 export type GenerateGeneralAddressFormField = (

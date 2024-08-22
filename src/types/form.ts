@@ -352,6 +352,64 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   max?: string;
   disable?: boolean;
 }
+export interface CalendarDatePickerProps
+  extends BaseFieldProps<Field.calendarDatePicker> {
+  register: UseFormRegister<FieldValues>;
+  value?: string;
+  className?: string;
+  svg?: string;
+  dateType?: string;
+  min?: string;
+  max?: string;
+  disable?: boolean;
+}
+export interface ColourSeclectionFieldProps
+  extends BaseFieldProps<Field.colourSelectField> {
+  value?: string;
+  options: string[];
+  containerClassName?: string;
+  control?: Control<FieldValues>; // This should match the type expected by Controller
+  onItemChange?: (id: string, index?: number) => void;
+  trigger?: UseFormTrigger<FieldValues>; // Optional, for triggering validation
+}
+
+export interface remainderOptionType {
+  label: string;
+  value: number;
+}
+export interface RemainderSeclectionFieldProps
+  extends BaseFieldProps<Field.remainderSelectField> {
+  value?: number;
+  options: remainderOptionType[];
+  containerClassName?: string;
+  control?: Control<FieldValues>;
+  onItemChange?: (id: string, index?: number) => void;
+  trigger?: UseFormTrigger<FieldValues>;
+}
+
+export interface RemainderSelectProps {
+  options: remainderOptionType[];
+  containerClassName?: string;
+  eventClassName?: string;
+  id: string;
+  name: string;
+  value?: number;
+  control?: Control<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+  register?: UseFormRegister<FieldValues>; // Change this to optional if not always needed
+  onChange?: (value: number) => void;
+}
+export interface ColourSelectProps {
+  options: string[];
+  containerClassName?: string;
+  id: string;
+  name: string;
+  value?: string;
+  control?: Control<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+  register?: UseFormRegister<FieldValues>; // Change this to optional if not always needed
+  onChange?: (value: string) => void;
+}
 
 export interface SpanProps {
   type: Field.span;
@@ -365,6 +423,17 @@ export interface SpanProps {
   onClick?: Function;
   id: string;
   html?: string;
+}
+
+export interface IconLabelProps {
+  type: Field.iconLabel;
+  text?: string;
+  id: string;
+  name: string;
+  icon: string;
+  containerClassName?: string;
+  textClassName?: string;
+  iconClassName?: string;
 }
 
 export interface DivProps {
@@ -425,7 +494,11 @@ export type FieldType =
   | Field.timePicker
   | Field.quantityInput
   | Field.customCheckBox
-  | Field.customFileUpload;
+  | Field.customFileUpload
+  | Field.iconLabel
+  | Field.calendarDatePicker
+  | Field.colourSelectField
+  | Field.remainderSelectField;
 
 export type FieldProps =
   | InputProps
@@ -458,7 +531,11 @@ export type FieldProps =
   | TimePickerProps
   | QuantityInputProps
   | CustomCheckBoxFieldProps
-  | CustomFileUploadFieldProps;
+  | CustomFileUploadFieldProps
+  | IconLabelProps
+  | CalendarDatePickerProps
+  | ColourSeclectionFieldProps
+  | RemainderSeclectionFieldProps;
 
 export interface FormField {
   containerClass?: string;
@@ -495,6 +572,10 @@ export interface FieldComponents {
   agentSelectField: React.FC<AgentSelectProps>;
   timePicker: React.FC<TimePickerProps>;
   quantityInput: React.FC<QuantityInputProps>;
+  iconLabel: React.FC<IconLabelProps>;
+  calendarDatePicker: React.FC<CalendarDatePickerProps>;
+  colourSelectField: React.FC<ColourSeclectionFieldProps>;
+  remainderSelectField: React.FC<RemainderSeclectionFieldProps>;
 }
 
 export interface FormProps {
