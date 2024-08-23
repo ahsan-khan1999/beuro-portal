@@ -20,8 +20,8 @@ const DeleteConfirmation_1 = ({
   const {
     modal: { data },
   } = useAppSelector((state) => state.global);
-
   const { t: translate } = useTranslation();
+
   return (
     <BaseModal
       onClose={onClose}

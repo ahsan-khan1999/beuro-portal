@@ -1,28 +1,39 @@
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
-import {
-  FieldValues,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { generateAddTaskValidationSchema } from "@/validation/modalsSchema";
 import { addTaskFormField } from "@/components/calendar/add-task-fields";
 import {
   createContractTask,
+  setContractTask,
   updateContractTask,
 } from "@/api/slices/contract/contractSlice";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
+  onSuccess: () => void;
+  onUpdateSuccess: () => void;
+  id?: string;
 }
 
-export default function useAddTask({ isUpdate }: AddTaskHookProps) {
+export default function useAddTask({
+  isUpdate,
+  onSuccess,
+  onUpdateSuccess,
+  id,
+}: AddTaskHookProps) {
   const router = useRouter();
-  const { loading, error } = useAppSelector((state) => state.settings);
+  const { loading, error, taskDetail, task } = useAppSelector(
+    (state) => state.contract
+  );
+
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+
+  const schema = generateAddTaskValidationSchema(translate);
 
   const {
     register,
@@ -32,34 +43,53 @@ export default function useAddTask({ isUpdate }: AddTaskHookProps) {
     formState: { errors },
     setError,
     watch,
-  } = useForm<FieldValues>({});
+    setValue,
+    reset,
+  } = useForm<FieldValues>({ resolver: yupResolver<FieldValues>(schema) });
 
   const isRemainder = watch("remainder");
   const startDate = watch("startDate");
+  const endDate = watch("endDate");
+  const alertTime = taskDetail?.alertTime;
 
-  // Initialize useFieldArray for managing date ranges
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "date", // This will be the key in your form values
-  });
-
-  // Add an initial date field if needed
-  if (fields.length === 0) {
-    append({ startDate: "", endDate: "" });
-  }
+  useEffect(() => {
+    if (id) {
+      reset({
+        title: taskDetail?.title,
+        streetNumber: taskDetail?.address?.streetNumber,
+        postalCode: taskDetail?.address?.postalCode,
+        country: taskDetail?.address?.country,
+        isAllDay: taskDetail?.isAllDay,
+        note: taskDetail?.note,
+        alertTime: taskDetail?.alertTime,
+        colour: taskDetail?.colour,
+      }),
+        setValue("startDate", taskDetail?.date?.[0]?.startDate),
+        setValue("endDate", taskDetail?.date?.[0]?.endDate);
+    }
+  }, [id]);
 
   const taskFields = addTaskFormField(
     register,
     loading,
     isRemainder,
+    startDate,
+    endDate,
+    setValue,
+    taskDetail?.colour,
+    alertTime,
     control,
     trigger
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const formattedDate = data.startDate
+      ? [{ startDate: data.startDate, endDate: data.endDate }]
+      : [];
+
     const formattedData = {
       title: data.title,
-      date: data.date,
+      date: formattedDate,
       isAllDay: data.isAllDay,
       colour: data.colour,
       alertTime: data.alertTime,
@@ -74,7 +104,7 @@ export default function useAddTask({ isUpdate }: AddTaskHookProps) {
     const res = isUpdate
       ? await dispatch(
           updateContractTask({
-            data: { ...formattedData },
+            data: { ...formattedData, id: id },
             router,
             translate,
           })
@@ -84,7 +114,11 @@ export default function useAddTask({ isUpdate }: AddTaskHookProps) {
         );
 
     if (res?.payload) {
-      console.log(res?.payload);
+      if (isUpdate) {
+        onUpdateSuccess();
+      } else {
+        onSuccess();
+      }
     }
   };
 

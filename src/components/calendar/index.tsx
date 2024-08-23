@@ -28,7 +28,6 @@ export const Calendar = () => {
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
   const {
     events,
-    task,
     handleAddContractTask,
     handleContractTaskDetail,
     renderModal,

@@ -303,6 +303,19 @@ export const readContractTaskDetail: AsyncThunk<boolean, object, object> | any =
     }
   });
 
+export const deleteContractTask: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("contract-task/delete", async (args, thunkApi) => {
+    const { params } = args as any;
+
+    try {
+      await apiServices.deleteContractTask(params);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
 const ContractSlice = createSlice({
   name: "ContractSlice",
   initialState,
@@ -312,6 +325,9 @@ const ContractSlice = createSlice({
     },
     setContractDetails: (state, action) => {
       state.contractDetails = action.payload;
+    },
+    setContractTask: (state, action) => {
+      state.task = action.payload;
     },
     setContractTaskDetails: (state, action) => {
       state.taskDetail = action.payload;
@@ -451,6 +467,13 @@ const ContractSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(updateContractTask.fulfilled, (state, action) => {
+      const index = state.task.findIndex(
+        (item) => item.id === action?.payload?.id
+      );
+      if (index !== -1) {
+        state.task[index] = action.payload;
+      }
+
       state.loading = false;
     });
     builder.addCase(updateContractTask.rejected, (state) => {
@@ -479,9 +502,24 @@ const ContractSlice = createSlice({
     builder.addCase(readContractTaskDetail.rejected, (state) => {
       state.loading = false;
     });
+
+    builder.addCase(deleteContractTask.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteContractTask.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+
+    builder.addCase(deleteContractTask.rejected, (state) => {
+      state.loading = false;
+    });
   },
 });
 
 export default ContractSlice.reducer;
-export const { setErrorMessage, setContractDetails, setContractTaskDetails } =
-  ContractSlice.actions;
+export const {
+  setErrorMessage,
+  setContractDetails,
+  setContractTaskDetails,
+  setContractTask,
+} = ContractSlice.actions;

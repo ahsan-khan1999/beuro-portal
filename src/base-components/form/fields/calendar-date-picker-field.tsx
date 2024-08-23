@@ -14,10 +14,13 @@ export const CalendarDatePickerField = ({
   min,
   max,
   disable,
+  setValue,
 }: CalendarDatePickerProps) => {
   const [formattedDate, setFormattedDate] = useState(
     value ? formatDateString(value) : ""
   );
+
+  console.log(value, "value");
 
   const dateInputRef = useRef<HTMLInputElement>(null);
 
@@ -51,8 +54,8 @@ export const CalendarDatePickerField = ({
     const value = e.target.value;
     const { formattedDate, formattedTime } = formatDateTime(value);
     setFormattedDate(`${formattedDate} ${formattedTime}`);
-    // Ensure the form state is updated
-    register(name).onChange(e);
+    setValue(name, e.target.value);
+    // register(name).onChange(e);
   };
 
   const { formattedDate: displayDate, formattedTime: displayTime } =

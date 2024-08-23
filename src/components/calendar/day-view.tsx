@@ -20,7 +20,7 @@ export const DayView = ({
   title,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
-    `flex flex-col gap-y-1 p-[6px] rounded-r-md`,
+    `flex flex-col gap-y-1 p-[6px] rounded-r-md cursor-pointer`,
     containerClassName
   );
 
@@ -28,13 +28,13 @@ export const DayView = ({
     <div
       className={containerClasses}
       style={{
-        backgroundColor: backrgoundColour || "#ccc",
+        backgroundColor: `${backrgoundColour || "#cccccc"}4D`,
         borderLeft: `3px solid ${borderColour || "#000"}`,
       }}
     >
       <p
         style={{
-          color: titleColour || "#3C3C3C",
+          color: "#3C3C3C",
           fontSize: "14px",
           fontWeight: "500",
         }}

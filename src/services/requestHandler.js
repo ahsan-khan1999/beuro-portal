@@ -452,6 +452,13 @@ const readContractTaskDetail = (params) =>
     { detail: true }
   );
 
+const deleteContractTask = (data) =>
+  del(
+    SERVICE_URLS.contractTask + `/${data?.id}`,
+    {},
+    { feature: featureConstants.login }
+  );
+
 const updateContractDate = (data) =>
   put(SERVICE_URLS.updateDate + `${data?.id}`, data, {
     feature: featureConstants.login,
@@ -1288,6 +1295,8 @@ const apiServices = {
   createContractTask,
   updateContractTask,
   readContractTask,
-  readContractTaskDetail
+  readContractTaskDetail,
+  deleteContractTask,
 };
+
 export default apiServices;

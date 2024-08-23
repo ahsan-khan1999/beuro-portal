@@ -1566,6 +1566,11 @@ export const DEFAULT_CONTRACT_TASK: Task = {
   createdAt: "",
   note: "",
   alertTime: 0,
+  address: {
+    streetNumber: "",
+    postalCode: "",
+    country: "",
+  },
 };
 
 export const DEFAULT_INVOICE = {
