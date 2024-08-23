@@ -9,8 +9,16 @@ import {
 } from "react-hook-form";
 import { generateAddTaskValidationSchema } from "@/validation/modalsSchema";
 import { addTaskFormField } from "@/components/calendar/add-task-fields";
+import {
+  createContractTask,
+  updateContractTask,
+} from "@/api/slices/contract/contractSlice";
 
-export default function useAddTask() {
+export interface AddTaskHookProps {
+  isUpdate?: boolean;
+}
+
+export default function useAddTask({ isUpdate }: AddTaskHookProps) {
   const router = useRouter();
   const { loading, error } = useAppSelector((state) => state.settings);
   const { t: translate } = useTranslation();
@@ -28,8 +36,6 @@ export default function useAddTask() {
 
   const isRemainder = watch("remainder");
   const startDate = watch("startDate");
-
-  console.log(startDate);
 
   // Initialize useFieldArray for managing date ranges
   const { fields, append, remove } = useFieldArray({
@@ -51,7 +57,35 @@ export default function useAddTask() {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    const formattedData = {
+      title: data.title,
+      date: data.date,
+      isAllDay: data.isAllDay,
+      colour: data.colour,
+      alertTime: data.alertTime,
+      note: data.note,
+      address: {
+        streetNumber: data.streetNumber,
+        postalCode: data.postalCode,
+        country: data.country,
+      },
+    };
+
+    const res = isUpdate
+      ? await dispatch(
+          updateContractTask({
+            data: { ...formattedData },
+            router,
+            translate,
+          })
+        )
+      : await dispatch(
+          createContractTask({ data: formattedData, router, translate })
+        );
+
+    if (res?.payload) {
+      console.log(res?.payload);
+    }
   };
 
   return {

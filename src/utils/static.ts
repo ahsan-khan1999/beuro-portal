@@ -1565,7 +1565,7 @@ export const DEFAULT_CONTRACT_TASK: Task = {
   colour: "",
   createdAt: "",
   note: "",
-  alertTime: "",
+  alertTime: 0,
 };
 
 export const DEFAULT_INVOICE = {

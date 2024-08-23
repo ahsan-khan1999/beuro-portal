@@ -3,8 +3,14 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import useAddTask from "@/hooks/calendar/useAddTask";
 
-export const AddContractTask = ({ onClose }: { onClose: () => void }) => {
-  const { fields, onSubmit, handleSubmit, errors } = useAddTask();
+export const AddContractTask = ({
+  onClose,
+  isUpdate,
+}: {
+  onClose: () => void;
+  isUpdate?: boolean;
+}) => {
+  const { fields, onSubmit, handleSubmit, errors } = useAddTask({ isUpdate });
 
   return (
     <BaseModal

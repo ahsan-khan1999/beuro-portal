@@ -261,6 +261,48 @@ export const createContractTask: AsyncThunk<boolean, object, object> | any =
     }
   });
 
+export const updateContractTask: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("contract-task/update", async (args, thunkApi) => {
+    const { data, setError, translate } = args as any;
+
+    try {
+      await apiServices.updateContractTask(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
+export const readContractTasks: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("contract-task/read", async (args, thunkApi) => {
+    const { params } = args as any;
+
+    try {
+      const res = await apiServices.readContractTask(params);
+      return res.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+
+      return false;
+    }
+  });
+
+export const readContractTaskDetail: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("contract-task/detail", async (args, thunkApi) => {
+    const { params } = args as any;
+
+    try {
+      const res = await apiServices.readContractTaskDetail(params);
+      return res?.data?.data?.Task;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+
+      return false;
+    }
+  });
+
 const ContractSlice = createSlice({
   name: "ContractSlice",
   initialState,
@@ -403,6 +445,38 @@ const ContractSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(createContractTask.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(updateContractTask.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateContractTask.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(updateContractTask.rejected, (state) => {
+      state.loading = false;
+    });
+
+    builder.addCase(readContractTasks.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(readContractTasks.fulfilled, (state, action) => {
+      state.task = action.payload.data.Task;
+      state.lastPage = action.payload.lastPage;
+      state.totalCount = action.payload.totalCount;
+      state.isLoading = false;
+    });
+    builder.addCase(readContractTasks.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(readContractTaskDetail.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readContractTaskDetail.fulfilled, (state, action) => {
+      state.taskDetail = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(readContractTaskDetail.rejected, (state) => {
       state.loading = false;
     });
   },

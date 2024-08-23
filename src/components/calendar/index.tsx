@@ -26,7 +26,13 @@ export const Calendar = () => {
   const calendarRef = useRef<FullCalendar>(null);
   const [currentDate, setCurrentDate] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
-  const { handleAddContractTask, renderModal } = useCalendar();
+  const {
+    events,
+    task,
+    handleAddContractTask,
+    handleContractTaskDetail,
+    renderModal,
+  } = useCalendar();
 
   const tabs = [
     { view: "timeGridDay", label: `${translate("calendar.tab_headings.day")}` },
@@ -91,105 +97,6 @@ export const Calendar = () => {
       updateDateDisplay(calendarApi.getDate(), selectedTab);
     }
   }, [router.locale]);
-
-  const events = [
-    {
-      title: "Customer call",
-      start: "2024-08-21T10:30:00",
-      end: "2024-08-21T11:30:00",
-      backgroundColor: "#E9F0FF",
-      textColor: "#4A13E7",
-      borderColor: "red",
-      allDay: true,
-    },
-    {
-      title: "Customer call",
-      start: "2024-08-21T10:30:00",
-      end: "2024-08-21T11:30:00",
-      backgroundColor: "#E9FFEF",
-      textColor: "#45C769",
-      borderColor: "red",
-      allDay: true,
-    },
-    {
-      title:
-        "Call customer lorem ipsum dollar smiht emit lorem ipsum dolar ipsum lorem ip.",
-      start: "2024-08-21T10:30:00",
-      end: "2024-08-21T11:30:00",
-      backgroundColor: "#E9FFEF",
-      textColor: "purple",
-      borderColor: "red",
-      allDay: true,
-    },
-    {
-      title: "Customer call",
-      start: "2024-08-21T10:30:00",
-      end: "2024-08-21T11:30:00",
-      backgroundColor: "#E9FFEF",
-      textColor: "orange",
-      borderColor: "red",
-      allDay: true,
-    },
-    {
-      title: "Customer call",
-      start: "2024-08-21T10:30:00",
-      end: "2024-08-21T11:30:00",
-      backgroundColor: "#E9FFEF",
-      textColor: "#45C769",
-      borderColor: "red",
-      allDay: true,
-    },
-    {
-      title: "Customer call",
-      start: "2024-08-21T10:30:00",
-      end: "2024-08-21T11:30:00",
-      backgroundColor: "#E9FFEF",
-      textColor: "#45C769",
-      borderColor: "red",
-      allDay: true,
-    },
-    {
-      title: "Urgent call",
-      start: "2024-08-20T13:30:00",
-      end: "2024-08-20T15:30:00",
-      backgroundColor: "orange",
-      textColor: "red",
-      borderColor: "purple",
-    },
-    {
-      title: "Urgent call",
-      start: "2024-08-21T10:30:00",
-      end: "2024-08-21T11:30:00",
-      backgroundColor: "#cfcfcf",
-      textColor: "red",
-      borderColor: "orange",
-    },
-    {
-      title: "Urgent call",
-      start: "2024-0806:30:00",
-      end: "2024-08-11T08:30:00",
-      backgroundColor: "orange",
-      textColor: "red",
-      borderColor: "black",
-    },
-    {
-      title: "Urgent call",
-      start: "2024-08-16T09:30:00",
-      end: "2024-08-16T11:30:00",
-      backgroundColor: "orange",
-      allDay: true,
-      textColor: "red",
-      borderColor: "red",
-    },
-    {
-      title: "Urgent call",
-      start: "2024-08-15T10:30:00",
-      end: "2024-08-15T11:30:00",
-      backgroundColor: "orange",
-      textColor: "red",
-      borderColor: "black",
-    },
-  ];
 
   const handlePrviousClick = () => {
     if (calendarRef.current) {
@@ -271,8 +178,11 @@ export const Calendar = () => {
           minute: "2-digit",
           hour12: false,
         }}
-        dateClick={(arg) => alert("Date clicked: " + arg.dateStr)}
-        eventClick={(info) => alert("Event clicked: " + info.event.title)}
+        eventClick={(info) => {
+          const taskID = info.event.extendedProps.taskID;
+
+          handleContractTaskDetail(taskID);
+        }}
         editable={false}
         selectable={true}
         dayMaxEvents={true}

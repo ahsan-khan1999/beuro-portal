@@ -53,7 +53,6 @@ export const CalendarDatePickerField = ({
     setFormattedDate(`${formattedDate} ${formattedTime}`);
     // Ensure the form state is updated
     register(name).onChange(e);
-    console.log(`Updated ${name} to: `, value); // Debugging statement
   };
 
   const { formattedDate: displayDate, formattedTime: displayTime } =

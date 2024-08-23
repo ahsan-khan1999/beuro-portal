@@ -24,53 +24,53 @@ export const addTaskFormField: GenerateAddTaskFormField = (
       },
     },
 
-    {
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className:
-          "flex justify-between bg-white rounded-lg py-[5px] px-[10px] mt-[14px]",
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.calendarDatePicker,
-              className: `!py-4`,
-              id: "startDate",
-              name: "startDate",
-              svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-  <path d="M16.2825 4.9375H15.4492V3.27083C15.4492 3.04982 15.3614 2.83786 15.2051 2.68158C15.0488 2.5253 14.8369 2.4375 14.6158 2.4375C14.3948 2.4375 14.1829 2.5253 14.0266 2.68158C13.8703 2.83786 13.7825 3.04982 13.7825 3.27083V4.9375H7.11584V3.27083C7.11584 3.04982 7.02805 2.83786 6.87177 2.68158C6.71549 2.5253 6.50353 2.4375 6.28251 2.4375C6.0615 2.4375 5.84954 2.5253 5.69326 2.68158C5.53698 2.83786 5.44918 3.04982 5.44918 3.27083V4.9375H4.61584C3.9528 4.9375 3.31692 5.20089 2.84808 5.66973C2.37924 6.13857 2.11584 6.77446 2.11584 7.4375V8.27083H18.7825V7.4375C18.7825 6.77446 18.5191 6.13857 18.0503 5.66973C17.5814 5.20089 16.9456 4.9375 16.2825 4.9375Z" fill="#4A13E7"/>
-  <path d="M2.11584 16.6042C2.11584 17.2672 2.37924 17.9031 2.84808 18.3719C3.31692 18.8408 3.9528 19.1042 4.61584 19.1042H16.2825C16.9456 19.1042 17.5814 18.8408 18.0503 18.3719C18.5191 17.9031 18.7825 17.2672 18.7825 16.6042V9.9375H2.11584V16.6042Z" fill="#4A13E7"/>
-</svg>`,
-              register,
-              dateType: "datetime-local",
-            },
-          },
-          {
-            containerClass: "border-r border-[#000] border-opacity-30",
-            field: {
-              type: Field.span,
-              id: "border",
-            },
-          },
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.calendarDatePicker,
-              className: `!py-4`,
-              id: "endDate",
-              name: "endDate",
-              svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-  <path d="M16.2825 4.9375H15.4492V3.27083C15.4492 3.04982 15.3614 2.83786 15.2051 2.68158C15.0488 2.5253 14.8369 2.4375 14.6158 2.4375C14.3948 2.4375 14.1829 2.5253 14.0266 2.68158C13.8703 2.83786 13.7825 3.04982 13.7825 3.27083V4.9375H7.11584V3.27083C7.11584 3.04982 7.02805 2.83786 6.87177 2.68158C6.71549 2.5253 6.50353 2.4375 6.28251 2.4375C6.0615 2.4375 5.84954 2.5253 5.69326 2.68158C5.53698 2.83786 5.44918 3.04982 5.44918 3.27083V4.9375H4.61584C3.9528 4.9375 3.31692 5.20089 2.84808 5.66973C2.37924 6.13857 2.11584 6.77446 2.11584 7.4375V8.27083H18.7825V7.4375C18.7825 6.77446 18.5191 6.13857 18.0503 5.66973C17.5814 5.20089 16.9456 4.9375 16.2825 4.9375Z" fill="#4A13E7"/>
-  <path d="M2.11584 16.6042C2.11584 17.2672 2.37924 17.9031 2.84808 18.3719C3.31692 18.8408 3.9528 19.1042 4.61584 19.1042H16.2825C16.9456 19.1042 17.5814 18.8408 18.0503 18.3719C18.5191 17.9031 18.7825 17.2672 18.7825 16.6042V9.9375H2.11584V16.6042Z" fill="#4A13E7"/>
-</svg>`,
-              register,
-              dateType: "datetime-local",
-            },
-          },
-        ],
-      },
-    },
+    //     {
+    //       field: {
+    //         type: Field.div,
+    //         id: "div-field",
+    //         className:
+    //           "flex justify-between bg-white rounded-lg py-[5px] px-[10px] mt-[14px]",
+    //         children: [
+    //           {
+    //             containerClass: "mb-0",
+    //             field: {
+    //               type: Field.calendarDatePicker,
+    //               className: `!py-4`,
+    //               id: "startDate",
+    //               name: "startDate",
+    //               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+    //   <path d="M16.2825 4.9375H15.4492V3.27083C15.4492 3.04982 15.3614 2.83786 15.2051 2.68158C15.0488 2.5253 14.8369 2.4375 14.6158 2.4375C14.3948 2.4375 14.1829 2.5253 14.0266 2.68158C13.8703 2.83786 13.7825 3.04982 13.7825 3.27083V4.9375H7.11584V3.27083C7.11584 3.04982 7.02805 2.83786 6.87177 2.68158C6.71549 2.5253 6.50353 2.4375 6.28251 2.4375C6.0615 2.4375 5.84954 2.5253 5.69326 2.68158C5.53698 2.83786 5.44918 3.04982 5.44918 3.27083V4.9375H4.61584C3.9528 4.9375 3.31692 5.20089 2.84808 5.66973C2.37924 6.13857 2.11584 6.77446 2.11584 7.4375V8.27083H18.7825V7.4375C18.7825 6.77446 18.5191 6.13857 18.0503 5.66973C17.5814 5.20089 16.9456 4.9375 16.2825 4.9375Z" fill="#4A13E7"/>
+    //   <path d="M2.11584 16.6042C2.11584 17.2672 2.37924 17.9031 2.84808 18.3719C3.31692 18.8408 3.9528 19.1042 4.61584 19.1042H16.2825C16.9456 19.1042 17.5814 18.8408 18.0503 18.3719C18.5191 17.9031 18.7825 17.2672 18.7825 16.6042V9.9375H2.11584V16.6042Z" fill="#4A13E7"/>
+    // </svg>`,
+    //               register,
+    //               dateType: "datetime-local",
+    //             },
+    //           },
+    //           {
+    //             containerClass: "border-r border-[#000] border-opacity-30",
+    //             field: {
+    //               type: Field.span,
+    //               id: "border",
+    //             },
+    //           },
+    //           {
+    //             containerClass: "mb-0",
+    //             field: {
+    //               type: Field.calendarDatePicker,
+    //               className: `!py-4`,
+    //               id: "endDate",
+    //               name: "endDate",
+    //               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+    //   <path d="M16.2825 4.9375H15.4492V3.27083C15.4492 3.04982 15.3614 2.83786 15.2051 2.68158C15.0488 2.5253 14.8369 2.4375 14.6158 2.4375C14.3948 2.4375 14.1829 2.5253 14.0266 2.68158C13.8703 2.83786 13.7825 3.04982 13.7825 3.27083V4.9375H7.11584V3.27083C7.11584 3.04982 7.02805 2.83786 6.87177 2.68158C6.71549 2.5253 6.50353 2.4375 6.28251 2.4375C6.0615 2.4375 5.84954 2.5253 5.69326 2.68158C5.53698 2.83786 5.44918 3.04982 5.44918 3.27083V4.9375H4.61584C3.9528 4.9375 3.31692 5.20089 2.84808 5.66973C2.37924 6.13857 2.11584 6.77446 2.11584 7.4375V8.27083H18.7825V7.4375C18.7825 6.77446 18.5191 6.13857 18.0503 5.66973C17.5814 5.20089 16.9456 4.9375 16.2825 4.9375Z" fill="#4A13E7"/>
+    //   <path d="M2.11584 16.6042C2.11584 17.2672 2.37924 17.9031 2.84808 18.3719C3.31692 18.8408 3.9528 19.1042 4.61584 19.1042H16.2825C16.9456 19.1042 17.5814 18.8408 18.0503 18.3719C18.5191 17.9031 18.7825 17.2672 18.7825 16.6042V9.9375H2.11584V16.6042Z" fill="#4A13E7"/>
+    // </svg>`,
+    //               register,
+    //               dateType: "datetime-local",
+    //             },
+    //           },
+    //         ],
+    //       },
+    //     },
 
     {
       field: {
@@ -92,7 +92,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
               type: Field.toggleButton,
               className: "!border-[#BFBFBF] focus:!border-primary",
               id: "span-field",
-              name: "allDay",
+              name: "isAllDay",
               checked: false,
               register,
             },
@@ -140,13 +140,13 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             containerClass: "mb-0 mt-2",
             label: {
               text: `Select Color`,
-              htmlFor: `textColor`,
+              htmlFor: `colour`,
               className: "mb-3",
             },
             field: {
               type: Field.colourSelectField,
-              id: "textColor",
-              name: "textColor",
+              id: "colour",
+              name: "colour",
               options: [
                 "#FF0000",
                 "#FF9900",
@@ -223,8 +223,8 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             containerClass: `mb-0 mt-2 ${isRemainder ? "block" : "hidden"}`,
             field: {
               type: Field.remainderSelectField,
-              id: "textColor",
-              name: "textColor",
+              id: "alertTime",
+              name: "alertTime",
               value: 15,
               options: [
                 {
