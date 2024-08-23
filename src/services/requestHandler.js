@@ -431,6 +431,34 @@ const createContract = (data) =>
 const createContractTask = (data) =>
   post(SERVICE_URLS.contractTask, data, { feature: featureConstants.login });
 
+const updateContractTask = (data) =>
+  put(SERVICE_URLS.contractTask + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const readContractTask = (params) =>
+  get(
+    SERVICE_URLS.contractTask,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const readContractTaskDetail = (params) =>
+  get(
+    SERVICE_URLS.contractTask,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
+const deleteContractTask = (data) =>
+  del(
+    SERVICE_URLS.contractTask + `/${data?.id}`,
+    {},
+    { feature: featureConstants.login }
+  );
+
 const updateContractDate = (data) =>
   put(SERVICE_URLS.updateDate + `${data?.id}`, data, {
     feature: featureConstants.login,
@@ -1264,6 +1292,11 @@ const apiServices = {
   createAppointmentReport,
   updateAppointmentReport,
   readReportDetail,
-  createContractTask
+  createContractTask,
+  updateContractTask,
+  readContractTask,
+  readContractTaskDetail,
+  deleteContractTask,
 };
+
 export default apiServices;

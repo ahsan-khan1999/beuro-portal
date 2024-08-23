@@ -22,6 +22,7 @@ export const DatePicker = ({
   const defaultClasses = `w-full rounded-lg max-h-12 ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   } py-[10px] outline-none text-dark text-sm focus:border-primary`;
+
   const classes = combineClasses(defaultClasses, className);
 
   return (
@@ -49,7 +50,6 @@ export const DatePicker = ({
           <div className="flex border border-borderColor rounded-lg items-center">
             <input
               type={dateType}
-              // value={formatDateString(value)}
               defaultValue={value && formatDateString(value)}
               id={id}
               onBlurCapture={() => setInputFocus(false)}

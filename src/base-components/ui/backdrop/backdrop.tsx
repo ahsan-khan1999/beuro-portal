@@ -21,7 +21,6 @@ export const Backdrop = ({
     }
   };
 
-  // backdrop-blur-sm
   return ReactDOM.createPortal(
     <motion.div
       initial={{ opacity: 0 }}

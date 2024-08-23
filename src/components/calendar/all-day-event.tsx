@@ -15,7 +15,7 @@ export const AllDayEvent = ({
   dotColour,
 }: AllDayEventsProps) => {
   const containerClasses = combineClasses(
-    `flex items-center gap-x-1 px-2 py-[6px] rounded-[4px]`,
+    `flex items-center gap-x-1 px-2 py-[6px] rounded-[4px] cursor-pointer`,
     containerClassName
   );
 
@@ -27,7 +27,7 @@ export const AllDayEvent = ({
   return (
     <div
       className={containerClasses}
-      style={{ backgroundColor: backrgoundColour || "#ccc" }}
+      style={{ backgroundColor: `${backrgoundColour || "#cccccc"}4D` }}
     >
       <span
         className={dotDefaultClasses}
@@ -35,7 +35,8 @@ export const AllDayEvent = ({
       />
 
       <p className="text-[#3C3C3C] font-medium text-sm">
-        {title.length > 20 ? `${title.substring(0, 20)}...` : title}
+        {title}
+        {/* {title.length > 20 ? `${title.substring(0, 20)}...` : title} */}
       </p>
     </div>
   );

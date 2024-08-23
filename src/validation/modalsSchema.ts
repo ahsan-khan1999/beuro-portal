@@ -153,29 +153,23 @@ export const generateAddTaskValidationSchema = (translate: Function) => {
     [AddCalendarTask.title]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [AddCalendarTask.date]: yup
-      .array()
-      .of(
-        yup
-          .object()
-          .shape({
-            startDate: yup
-              .string()
-              .required(translate("validationMessages.required")),
-            endDate: yup.string().notRequired(),
-          })
-          .required(translate("validationMessages.required"))
-      )
-      .min(1)
-      .required(translate("validationMessages.required")),
-    [AddCalendarTask.textColor]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AddCalendarTask.alertTime]: yup
-      .string()
-      .required(translate("validationMessages.required")),
-    [AddCalendarTask.note]: yup
-      .string()
-      .required(translate("validationMessages.required")),
+    // [AddCalendarTask.date]: yup
+    //   .array()
+    //   .of(
+    //     yup
+    //       .object()
+    //       .shape({
+    //         startDate: yup
+    //           .string()
+    //           .required(translate("validationMessages.required")),
+    //         endDate: yup.string().notRequired(),
+    //       })
+    //       .required(translate("validationMessages.required"))
+    //   )
+    //   .min(1)
+    //   .required(translate("validationMessages.required")),
+    [AddCalendarTask.textColor]: yup.string().notRequired(),
+    [AddCalendarTask.alertTime]: yup.number().notRequired(),
+    [AddCalendarTask.note]: yup.string().notRequired(),
   });
 };

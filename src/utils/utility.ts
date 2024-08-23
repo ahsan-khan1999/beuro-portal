@@ -428,6 +428,29 @@ export function calendarDayDateFormat(date: string, locale: string) {
   return moment(date).locale(locale).format("dddd, DD MMMM");
 }
 
+export const calendarTaskformatDate = (date: string) => {
+  return moment(date).format("dddd, D MMMM");
+};
+
+export const formatAlertTime = (alertTime: number) => {
+  switch (alertTime) {
+    case 15:
+    case 30:
+    case 60:
+      return `${alertTime} minutes before`;
+    case 120:
+      return `2 hours before`;
+    case 1440:
+      return "1 day before";
+    case 2880:
+      return "2 days before";
+    case 10080:
+      return "7 days before";
+    default:
+      return `${alertTime} minutes before`;
+  }
+};
+
 export function calendarYearDateFormat(date: string, locale: string) {
   return moment(date).locale(locale).format("MMMM YYYY");
 }

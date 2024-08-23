@@ -20,7 +20,6 @@ import {
   readOfferActivity,
   updateOfferDiscount,
 } from "@/api/slices/offer/offerSlice";
-import { readImage } from "@/api/slices/imageSlice/image";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";

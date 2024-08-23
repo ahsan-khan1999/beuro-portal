@@ -2,9 +2,28 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import useAddTask from "@/hooks/calendar/useAddTask";
+import { useAppSelector } from "@/hooks/useRedux";
 
-export const AddContractTask = ({ onClose }: { onClose: () => void }) => {
-  const { fields, onSubmit, handleSubmit, errors } = useAddTask();
+export interface AddTaskModalProps {
+  onSuccess: () => void;
+  onClose: () => void;
+  onUpdateSuccess: () => void;
+  isUpdate?: boolean;
+}
+export const AddContractTask = ({
+  onClose,
+  isUpdate,
+  onSuccess,
+  onUpdateSuccess
+}: AddTaskModalProps) => {
+  const id = useAppSelector((state) => state.global.modal.data);
+
+  const { fields, onSubmit, handleSubmit, errors } = useAddTask({
+    isUpdate,
+    onSuccess,
+    onUpdateSuccess,
+    id: id?.id,
+  });
 
   return (
     <BaseModal

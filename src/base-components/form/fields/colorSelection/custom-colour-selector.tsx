@@ -1,6 +1,6 @@
 import { ColourSelectProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const CustomColorSelectionField = ({
   options,
@@ -13,10 +13,11 @@ export const CustomColorSelectionField = ({
 }: ColourSelectProps) => {
   const [selectedColor, setSelectedColor] = useState(value || "");
 
-  const defaultClasses = combineClasses(
-    `${selectedColor ? "w-5 h-5" : "w-[26px] h-[26px]"} rounded-full`,
-    containerClassName
-  );
+  useEffect(() => {
+    if (value) {
+      setSelectedColor(value);
+    }
+  }, [value]);
 
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
@@ -30,7 +31,7 @@ export const CustomColorSelectionField = ({
 
   return (
     <div className="flex items-center gap-x-[6px]" id={id}>
-      {options.map((color, index) => {
+      {options?.map((color, index) => {
         const isSelected = color === selectedColor;
 
         const buttonClasses = combineClasses(
@@ -48,12 +49,13 @@ export const CustomColorSelectionField = ({
               borderColor: isSelected ? color : "transparent",
             }}
           >
-            <button
+            <span
               key={color}
               style={{
                 backgroundColor: color,
                 width: isSelected ? "16px" : "26px",
                 height: isSelected ? "16px" : "26px",
+                cursor: "pointer",
               }}
               className={buttonClasses}
               onClick={() => handleColorSelect(color)}

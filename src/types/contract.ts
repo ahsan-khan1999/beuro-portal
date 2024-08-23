@@ -149,5 +149,10 @@ export interface Task {
   colour: string;
   createdAt: string;
   note: string;
-  alertTime: string;
+  alertTime: number;
+  address :{
+    streetNumber:string,
+    postalCode:string,
+    country:string
+  }
 }

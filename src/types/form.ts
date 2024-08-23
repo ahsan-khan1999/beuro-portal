@@ -355,6 +355,7 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
 export interface CalendarDatePickerProps
   extends BaseFieldProps<Field.calendarDatePicker> {
   register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>,
   value?: string;
   className?: string;
   svg?: string;
@@ -362,6 +363,12 @@ export interface CalendarDatePickerProps
   min?: string;
   max?: string;
   disable?: boolean;
+}
+
+
+export interface ColourSelectionOptions {
+  dotColor:string,
+  value:string
 }
 export interface ColourSeclectionFieldProps
   extends BaseFieldProps<Field.colourSelectField> {
