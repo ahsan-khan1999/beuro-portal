@@ -8,6 +8,7 @@ import { CalendarNoteIcon } from "@/assets/svgs/components/calendar-note-icon";
 import { CalendarDeleteIcon } from "@/assets/svgs/components/calendar-delete-icon";
 import addressLocationIcon from "@/assets/pngs/address-location-icon.png";
 import Image from "next/image";
+
 export interface ContractTaskDetailProps {
   onDelete: (id: string) => void;
   onEditTask: (id: string) => void;
@@ -89,14 +90,14 @@ export const ContractTaskDetail = ({
 
         {taskDetail?.address && (
           <div className="flex items-start gap-x-2 mb-[35px] mt-[14px]">
-            {/* <Image
+            <Image
               src={addressLocationIcon}
               alt="location"
               width={16}
               height={16}
-            /> */}
+            />
 
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -107,7 +108,7 @@ export const ContractTaskDetail = ({
                 d="M7.86456 0.492188C4.98962 0.492188 2.65063 2.83118 2.65063 5.70612C2.65063 9.31961 7.86969 15.4922 7.86969 15.4922C7.86969 15.4922 13.0785 9.14191 13.0785 5.70612C13.0785 2.83118 10.7396 0.492188 7.86456 0.492188ZM9.43771 7.23276C9.00394 7.66644 8.4343 7.88333 7.86456 7.88333C7.29492 7.88333 6.7251 7.66644 6.2915 7.23276C5.42404 6.36539 5.42404 4.95401 6.2915 4.08655C6.71155 3.66632 7.27029 3.43488 7.86456 3.43488C8.45883 3.43488 9.01749 3.66641 9.43771 4.08655C10.3052 4.95401 10.3052 6.36539 9.43771 7.23276Z"
                 fill="#616161"
               />
-            </svg>
+            </svg> */}
 
             <div className="flex flex-col gap-y-1">
               <span className="text-sm font-normal text-[#2A2E3A]">

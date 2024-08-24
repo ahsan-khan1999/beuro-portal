@@ -48,7 +48,7 @@ export enum AddCalendarTask {
   startDate = "startDate",
   endDate = "endDate",
   allDay = "allDay",
-  textColor = "textColor",
+  colour = "colour",
   alertTime = "alertTime",
   note = "note",
 }

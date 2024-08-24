@@ -437,17 +437,21 @@ export const formatAlertTime = (alertTime: number) => {
     case 15:
     case 30:
     case 60:
-      return `${alertTime} minutes before`;
+      return `${alertTime} ${translate("common.minutes")} ${translate(
+        "common.before"
+      )}`;
     case 120:
-      return `2 hours before`;
+      return `2 ${translate("common.hours")} ${translate("common.before")}`;
     case 1440:
-      return "1 day before";
+      return `1 ${translate("common.day")} ${translate("common.before")}`;
     case 2880:
-      return "2 days before";
+      return `2 ${translate("common.days")} ${translate("common.before")}`;
     case 10080:
-      return "7 days before";
+      return `7 ${translate("common.days")} ${translate("common.before")}`;
     default:
-      return `${alertTime} minutes before`;
+      return `${alertTime} ${translate("common.minutes")} ${translate(
+        "common.before"
+      )}`;
   }
 };
 

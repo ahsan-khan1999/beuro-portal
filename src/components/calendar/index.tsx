@@ -16,6 +16,7 @@ import { calendarDayDateFormat, calendarYearDateFormat } from "@/utils/utility";
 import { DayView } from "./day-view";
 import { AllDayEvent } from "./all-day-event";
 import { useCalendar } from "@/hooks/calendar/useCalendar";
+import { DayHeaderContent } from "./day-header-content";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
@@ -172,6 +173,7 @@ export const Calendar = () => {
         initialView="timeGridDay"
         events={events}
         headerToolbar={false}
+        dayHeaderContent={DayHeaderContent}
         slotLabelFormat={{
           hour: "2-digit",
           minute: "2-digit",
@@ -179,7 +181,6 @@ export const Calendar = () => {
         }}
         eventClick={(info) => {
           const taskID = info.event.extendedProps.taskID;
-
           handleContractTaskDetail(taskID);
         }}
         editable={false}
