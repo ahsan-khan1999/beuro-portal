@@ -183,6 +183,7 @@ export const Calendar = () => {
           const taskID = info.event.extendedProps.taskID;
           handleContractTaskDetail(taskID);
         }}
+        // windowResize={handleWindowResize}
         editable={false}
         selectable={true}
         dayMaxEvents={true}
@@ -191,6 +192,7 @@ export const Calendar = () => {
         views={{
           timeGridDay: {
             dayMaxEvents: 6,
+            
           },
           dayGridMonth: {
             dayMaxEvents: true,
