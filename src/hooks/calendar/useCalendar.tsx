@@ -17,7 +17,6 @@ import {
 import { Tasks } from "@/types/contract";
 import { ContractTaskDetail } from "@/base-components/ui/modals1/ContractTaskDetail";
 import { CustomerPromiseActionType } from "@/types/company";
-import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 export const useCalendar = () => {

@@ -136,3 +136,17 @@
   font-weight: 500 !important;
   margin: 10px 0;
 }
+
+.fc-event-main {
+  height: max-content;
+}
+
+/* Set the overall background color of the calendar */
+.fc {
+  background-color: white; /* Ensure the entire calendar is white */
+}
+
+/* Remove the different background color for the current date */
+.fc .fc-day-today {
+  background-color: white !important; /* Override the background for the current date */
+}

@@ -468,7 +468,7 @@ const ContractSlice = createSlice({
     });
     builder.addCase(updateContractTask.fulfilled, (state, action) => {
       const index = state.task.findIndex(
-        (item) => item.id === action?.payload?.id
+        (item) => item.id === action?.payload?.Task
       );
       if (index !== -1) {
         state.task[index] = action.payload;

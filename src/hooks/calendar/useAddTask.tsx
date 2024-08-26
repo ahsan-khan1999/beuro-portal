@@ -6,7 +6,7 @@ import { generateAddTaskValidationSchema } from "@/validation/modalsSchema";
 import { addTaskFormField } from "@/components/calendar/add-task-fields";
 import {
   createContractTask,
-  setContractTask,
+  readContractTasks,
   updateContractTask,
 } from "@/api/slices/contract/contractSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -48,9 +48,10 @@ export default function useAddTask({
   } = useForm<FieldValues>({ resolver: yupResolver<FieldValues>(schema) });
 
   const isRemainder = watch("remainder");
+  const alertTime = watch("alertTime");
   const startDate = watch("startDate");
   const endDate = watch("endDate");
-  const alertTime = taskDetail?.alertTime;
+  // const alertTime = taskDetail?.alertTime;
 
   useEffect(() => {
     if (id) {
@@ -115,8 +116,16 @@ export default function useAddTask({
 
     if (res?.payload) {
       if (isUpdate) {
+        //
+        await dispatch(
+          readContractTasks({ params: { filter: {}, paginate: 0 } })
+        );
         onUpdateSuccess();
       } else {
+        await dispatch(
+          readContractTasks({ params: { filter: {}, paginate: 0 } })
+        );
+
         onSuccess();
       }
     }

@@ -92,7 +92,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             field: {
               type: Field.span,
               id: "span-field",
-              text: `All-day event`,
+              text: `${translate("calendar.all_day_event")}`,
             },
           },
           {
@@ -148,7 +148,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
           {
             containerClass: "mb-0 mt-2",
             label: {
-              text: `Select Color`,
+              text: `${translate("calendar.select_color")}`,
               htmlFor: `colour`,
               className: "mb-3",
             },
@@ -193,7 +193,9 @@ export const addTaskFormField: GenerateAddTaskFormField = (
                     type: Field.iconLabel,
                     id: "remainder",
                     name: "remainder",
-                    text: `Reminder`,
+                    text: alertTime
+                      ? alertTime
+                      : translate("calendar.remainder"),
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
         <g clip-path="url(#clip0_2433_15874)">
           <path d="M12.0803 10.6364C11.2613 9.89092 10.7917 8.80126 10.7917 7.64684V6.02051C10.7917 3.96776 9.37579 2.26851 7.54171 1.98384V1.35384C7.54171 1.03126 7.29904 0.770508 7.00004 0.770508C6.70104 0.770508 6.45837 1.03126 6.45837 1.35384V1.98384C4.62375 2.26851 3.20837 3.96776 3.20837 6.02051V7.64684C3.20837 8.80126 2.73875 9.89092 1.91487 10.6411C1.70417 10.8353 1.58337 11.1177 1.58337 11.4163C1.58337 11.9793 2.00858 12.4372 2.53129 12.4372H11.4688C11.9915 12.4372 12.4167 11.9793 12.4167 11.4163C12.4167 11.1177 12.2959 10.8353 12.0803 10.6364Z" fill="#272727"/>
@@ -208,71 +210,69 @@ export const addTaskFormField: GenerateAddTaskFormField = (
                   },
                 },
                 {
-                  containerClass: `mb-0 ${!isRemainder ? "block" : "hidden"}`,
+                  containerClass: `mb-0`,
                   field: {
                     type: Field.toggleButton,
                     className: "!border-[#BFBFBF] focus:!border-primary",
                     id: "remainder",
                     name: "remainder",
-                    checked: alertTime ? true : false,
+                    checked: isRemainder ? true : false,
                     register,
                   },
                 },
-                {
-                  containerClass: `mb-0 ${isRemainder ? "block" : "hidden"}`,
-                  field: {
-                    type: Field.span,
-                    id: "span-field",
-                    text: `Done`,
-                  },
-                },
+                // {
+                //   containerClass: `mb-0 ${isRemainder ? "block" : "hidden"}`,
+                //   field: {
+                //     type: Field.span,
+                //     id: "span-field",
+                //     text: `Done`,
+                //   },
+                // },
               ],
             },
           },
           {
-            containerClass: `mb-0 mt-2 ${
-              alertTime || isRemainder ? "block" : "hidden"
-            }`,
+            containerClass: `mb-0 mt-2 ${isRemainder ? "block" : "hidden"}`,
             field: {
               type: Field.remainderSelectField,
               id: "alertTime",
               name: "alertTime",
               value: 15,
               options: [
+                // {
+                //   label: "Event Time",
+                //   value: 0,
+                // },
                 {
-                  label: "Event Time",
-                  value: 0,
-                },
-                {
-                  label: "Minutes",
+                  label: translate("common.minutes"),
                   value: 5,
                 },
                 {
-                  label: "Minutes",
+                  label: translate("common.minutes"),
                   value: 15,
                 },
                 {
-                  label: "Minutes",
+                  label: translate("common.minutes"),
                   value: 30,
                 },
                 {
-                  label: "Hour",
+                  label: translate("common.hour"),
                   value: 60,
                 },
                 {
-                  label: "Hours",
+                  label: translate("common.hours"),
                   value: 120,
                 },
                 {
-                  label: "Day",
+                  label: translate("common.day"),
                   value: 1440,
                 },
                 {
-                  label: "Day",
+                  label: translate("common.days"),
                   value: 2880,
                 },
                 {
-                  label: "Day",
+                  label: translate("common.days"),
                   value: 10080,
                 },
               ],
@@ -295,7 +295,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
               type: Field.iconLabel,
               id: "address",
               name: "address",
-              text: `Address`,
+              text: translate("calendar.address"),
               icon: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
   <g clip-path="url(#clip0_2433_15842)">
     <path d="M6.88128 1.20117C4.36571 1.20117 2.31909 3.24779 2.31909 5.76336C2.31909 8.92517 6.88577 14.3262 6.88577 14.3262C6.88577 14.3262 11.4435 8.76968 11.4435 5.76336C11.4435 3.24779 9.39693 1.20117 6.88128 1.20117ZM8.25779 7.09917C7.87823 7.47865 7.3798 7.66842 6.88128 7.66842C6.38284 7.66842 5.88425 7.47865 5.50485 7.09917C4.74582 6.34022 4.74582 5.10527 5.50485 4.34624C5.87239 3.97854 6.36129 3.77602 6.88128 3.77602C7.40126 3.77602 7.89009 3.97862 8.25779 4.34624C9.01682 5.10527 9.01682 6.34022 8.25779 7.09917Z" fill="#616161"/>

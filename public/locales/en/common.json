@@ -1259,6 +1259,9 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+    "before": "before",
+    "hour": "Hour",
+    "text_area_msg": "Type your message here",
     "logout": "Logout",
     "please_choose": "Please Choose",
     "yes": "Yes",
@@ -2527,7 +2530,14 @@
   "calendar": {
     "main_heading": "Calendar",
     "add_task": "Add Task",
-    "today":"Today",
+    "today": "Today",
+    "edit": "Edit",
+    "select_date": "Select Date",
+    "select_color": "Select Color",
+    "remainder": "Remainder",
+    "address": "Address",
+    "all_day":"All-Day",
+    "all_day_event":"All-day event",
     "tab_headings": {
       "day": "Day",
       "week": "Week",
