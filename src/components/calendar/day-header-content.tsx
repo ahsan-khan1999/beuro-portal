@@ -1,4 +1,8 @@
-export const DayHeaderContent = (arg: any, isSmallScreen: boolean) => {
+export const DayHeaderContent = (
+  arg: any,
+  isSmallScreen: boolean,
+  isSmallWeekScreen: boolean
+) => {
   const { view } = arg;
   const date = arg.date.getDate();
 
@@ -16,9 +20,15 @@ export const DayHeaderContent = (arg: any, isSmallScreen: boolean) => {
       html: `<span class="text-[#2E2E2E] font-medium text-base">${dayName}</span>`,
     };
   } else if (view.type === "timeGridWeek") {
-    return {
-      html: `<span class="text-[#2E2E2E] font-medium text-base">${dayName}, ${date}</span>`,
-    };
+    if (isSmallWeekScreen) {
+      return {
+        html: `<span class="text-[#2E2E2E] font-medium text-base">${dayNameShort}</span>`,
+      };
+    } else {
+      return {
+        html: `<span class="text-[#2E2E2E] font-medium text-base">${dayName}, ${date}</span>`,
+      };
+    }
   } else {
     return {
       html: `<span class="text-[#2E2E2E] font-medium text-base">${dayName}</span>`,

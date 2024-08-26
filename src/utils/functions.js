@@ -174,6 +174,23 @@ export function useIsSmallScreen() {
   return isSmallScreen;
 }
 
+export function useIsSmallWeekScreen() {
+  const [isSmallWeekScreen, setIsSmallWeekScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallWeekScreen(window.innerWidth < 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  return isSmallWeekScreen;
+}
+
 export function formatDateToCustomString(dateString, ShowUTC = true) {
   const months = [
     "Jan",

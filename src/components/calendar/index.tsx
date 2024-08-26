@@ -17,7 +17,7 @@ import { DayView } from "./day-view";
 import { AllDayEvent } from "./all-day-event";
 import { useCalendar } from "@/hooks/calendar/useCalendar";
 import { DayHeaderContent } from "./day-header-content";
-import { useIsSmallScreen } from "@/utils/functions";
+import { useIsSmallScreen, useIsSmallWeekScreen } from "@/utils/functions";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
@@ -28,7 +28,8 @@ export const Calendar = () => {
   const calendarRef = useRef<FullCalendar>(null);
   const [currentDate, setCurrentDate] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
-  const isSmallScreen = useIsSmallScreen();
+  const isSmallScreen = useIsSmallScreen(); // 1100px check
+  const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
   const {
     events,
     handleAddContractTask,
@@ -116,16 +117,20 @@ export const Calendar = () => {
     }
   };
 
+  const getDayMaxEvents = () => {
+    return isSmallScreen ? 2 : true;
+  };
+
   return (
     <div className="mb-5">
       <div className="flex item-center justify-between mb-[28px]">
-        <h1 className="text-[#202020] font-semibold text-2xl xlg:text-[36px] mt-6">
+        <h1 className="text-[#202020] font-semibold text-xl xMini:text-2xl xlg:text-[36px] xMini:mt-6">
           {translate("calendar.main_heading")}
         </h1>
 
         <Button
           onClick={handleAddContractTask}
-          className="!h-fit py-2 px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap mt-6"
+          className="!h-fit py-2 px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
           text={translate("calendar.add_task")}
           id="add task"
           inputType="button"
@@ -136,13 +141,13 @@ export const Calendar = () => {
       <div className="p-6 bg-white rounded-t-lg flex flex-col gap-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[#393939] text-base mlg:text-2xl font-medium">
+            <span className="text-[#393939] text-xs xMini:text-base mlg:text-2xl font-medium">
               {currentDate.split(",")[0]}
             </span>
             {currentDate.includes(",") && (
               <>
                 {", "}
-                <span className="text-[#393939] text-base mlg:text-xl font-light">
+                <span className="text-[#393939] text-xs xMini:text-base mlg:text-xl font-light">
                   {currentDate.split(",")[1]}
                 </span>
               </>
@@ -170,7 +175,7 @@ export const Calendar = () => {
           />
         </div>
         <div className="flex mlg:hidden items-center justify-center w-fit p-[6px] rounded-full bg-[#F6F6F6] mx-auto">
-          <div className="flex items-center gap-x-5">
+          <div className="flex items-center gap-x-3 xMini:gap-x-5">
             {tabs.map((tab, index) => (
               <CalendarTab
                 key={tab.view}
@@ -187,34 +192,40 @@ export const Calendar = () => {
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="timeGridDay"
+        initialView={isSmallScreen ? "dayGridMonth" : "timeGridDay"}
         events={events}
         headerToolbar={false}
-        dayHeaderContent={(arg) => DayHeaderContent(arg, isSmallScreen)}
+        dayHeaderContent={(arg) =>
+          DayHeaderContent(arg, isSmallScreen, isSmallWeekScreen)
+        }
         allDayText={translate("calendar.all_day")}
-        slotLabelFormat={{
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-        }}
+        slotLabelContent={(arg) => (
+          <>
+            {arg.date.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            })}
+          </>
+        )}
         eventClick={(info) => {
           const taskID = info.event.extendedProps.taskID;
           handleContractTaskDetail(taskID);
         }}
         editable={false}
         selectable={true}
-        dayMaxEvents={true}
-        height="auto"
-        aspectRatio={1.5}
+        dayMaxEvents={getDayMaxEvents()}
+        height={isSmallScreen ? "auto" : "auto"}
+        aspectRatio={isSmallScreen ? 0.75 : 1.5}
         views={{
           timeGridDay: {
-            dayMaxEvents: 6,
-          },
-          dayGridMonth: {
-            dayMaxEvents: true,
+            dayMaxEvents: getDayMaxEvents(),
           },
           timeGridWeek: {
-            dayMaxEvents: true,
+            dayMaxEvents: getDayMaxEvents(),
+          },
+          dayGridMonth: {
+            dayMaxEvents: getDayMaxEvents(),
           },
         }}
         eventTimeFormat={{
@@ -226,7 +237,35 @@ export const Calendar = () => {
           const { event, view } = eventInfo;
           const viewType = view.type;
 
-          if (event.allDay) {
+          if (viewType === "dayGridMonth") {
+            if (isSmallScreen) {
+              // Render using DayView on small screens in dayGridMonth view
+              const formattedTime = event.allDay
+                ? "All Day"
+                : `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
+                    eventInfo.event.end
+                  ).format("HH:mm")}`;
+              return (
+                <DayView
+                  time={formattedTime}
+                  title={eventInfo.event.title}
+                  backrgoundColour={eventInfo.event.backgroundColor}
+                  borderColour={eventInfo.event.borderColor}
+                  timeColour={eventInfo.event.textColor}
+                  isMonthView={true} // Pass isMonthView as true to adjust styling
+                />
+              );
+            } else {
+              // Render using AllDayEvent on larger screens
+              return (
+                <AllDayEvent
+                  title={event.title}
+                  backrgoundColour={eventInfo.event.backgroundColor}
+                  dotColour={eventInfo.event.textColor}
+                />
+              );
+            }
+          } else if (event.allDay) {
             return (
               <AllDayEvent
                 title={event.title}
@@ -248,14 +287,6 @@ export const Calendar = () => {
                 backrgoundColour={eventInfo.event.backgroundColor}
                 borderColour={eventInfo.event.borderColor}
                 timeColour={eventInfo.event.textColor}
-              />
-            );
-          } else if (viewType === "dayGridMonth") {
-            return (
-              <AllDayEvent
-                title={event.title}
-                backrgoundColour={eventInfo.event.backgroundColor}
-                dotColour={eventInfo.event.textColor}
               />
             );
           } else {

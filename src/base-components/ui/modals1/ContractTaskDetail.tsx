@@ -41,7 +41,7 @@ export const ContractTaskDetail = ({
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName="max-w-[384px] min-h-fit absolute top-[200px] rounded-lg bg-[#F3F3F3] calendarShadow"
+      containerClassName="max-w-[300px] xsMini:max-w-[384px] min-h-fit absolute top-[200px] rounded-lg bg-[#F3F3F3] calendarShadow"
     >
       <div className="p-[10px]">
         <div className="flex items-center gap-x-2">

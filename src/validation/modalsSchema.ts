@@ -172,6 +172,8 @@ export const generateAddTaskValidationSchema = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
     [AddCalendarTask.alertTime]: yup.number().notRequired(),
-    [AddCalendarTask.note]: yup.string().notRequired(),
+    [AddCalendarTask.note]: yup
+      .string()
+      .required(translate("validationMessages.required")),
   });
 };
