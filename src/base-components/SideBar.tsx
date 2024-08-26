@@ -122,7 +122,7 @@ const SideBar = ({
   }, [router.pathname]);
 
   const path = router.asPath;
-  const isAgentRoute = path.startsWith("/agent");
+  const isAgentRoute = path.startsWith("/");
 
   const handleLogout = async () => {
     await dispatch(logoutUser());

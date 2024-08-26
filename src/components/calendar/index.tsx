@@ -17,7 +17,7 @@ import { DayView } from "./day-view";
 import { AllDayEvent } from "./all-day-event";
 import { useCalendar } from "@/hooks/calendar/useCalendar";
 import { DayHeaderContent } from "./day-header-content";
-import { useIsSmallScreen } from "@/utils/functions";
+import { useIsSmallScreen, useIsSmallWeekScreen } from "@/utils/functions";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
@@ -28,7 +28,8 @@ export const Calendar = () => {
   const calendarRef = useRef<FullCalendar>(null);
   const [currentDate, setCurrentDate] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
-  const isSmallScreen = useIsSmallScreen();
+  const isSmallScreen = useIsSmallScreen(); // 1100px check
+  const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
   const {
     events,
     handleAddContractTask,
@@ -123,13 +124,13 @@ export const Calendar = () => {
   return (
     <div className="mb-5">
       <div className="flex item-center justify-between mb-[28px]">
-        <h1 className="text-[#202020] font-semibold text-2xl xlg:text-[36px] mt-6">
+        <h1 className="text-[#202020] font-semibold text-xl xMini:text-2xl xlg:text-[36px] xMini:mt-6">
           {translate("calendar.main_heading")}
         </h1>
 
         <Button
           onClick={handleAddContractTask}
-          className="!h-fit py-2 px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap mt-6"
+          className="!h-fit py-2 px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
           text={translate("calendar.add_task")}
           id="add task"
           inputType="button"
@@ -140,13 +141,13 @@ export const Calendar = () => {
       <div className="p-6 bg-white rounded-t-lg flex flex-col gap-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[#393939] text-base mlg:text-2xl font-medium">
+            <span className="text-[#393939] text-xs xMini:text-base mlg:text-2xl font-medium">
               {currentDate.split(",")[0]}
             </span>
             {currentDate.includes(",") && (
               <>
                 {", "}
-                <span className="text-[#393939] text-base mlg:text-xl font-light">
+                <span className="text-[#393939] text-xs xMini:text-base mlg:text-xl font-light">
                   {currentDate.split(",")[1]}
                 </span>
               </>
@@ -174,7 +175,7 @@ export const Calendar = () => {
           />
         </div>
         <div className="flex mlg:hidden items-center justify-center w-fit p-[6px] rounded-full bg-[#F6F6F6] mx-auto">
-          <div className="flex items-center gap-x-5">
+          <div className="flex items-center gap-x-3 xMini:gap-x-5">
             {tabs.map((tab, index) => (
               <CalendarTab
                 key={tab.view}
@@ -194,7 +195,9 @@ export const Calendar = () => {
         initialView={isSmallScreen ? "dayGridMonth" : "timeGridDay"}
         events={events}
         headerToolbar={false}
-        dayHeaderContent={(arg) => DayHeaderContent(arg, isSmallScreen)}
+        dayHeaderContent={(arg) =>
+          DayHeaderContent(arg, isSmallScreen, isSmallWeekScreen)
+        }
         allDayText={translate("calendar.all_day")}
         slotLabelContent={(arg) => (
           <>
@@ -213,15 +216,15 @@ export const Calendar = () => {
         selectable={true}
         dayMaxEvents={getDayMaxEvents()}
         height={isSmallScreen ? "auto" : "auto"}
-        aspectRatio={isSmallScreen ? 0.75 : 1.5} // Adjusted for mobile
+        aspectRatio={isSmallScreen ? 0.75 : 1.5}
         views={{
           timeGridDay: {
             dayMaxEvents: getDayMaxEvents(),
           },
-          dayGridMonth: {
+          timeGridWeek: {
             dayMaxEvents: getDayMaxEvents(),
           },
-          timeGridWeek: {
+          dayGridMonth: {
             dayMaxEvents: getDayMaxEvents(),
           },
         }}

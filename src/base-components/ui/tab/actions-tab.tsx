@@ -21,16 +21,15 @@ export const ActionsTab = ({
   );
 
   const textView = combineClasses(
-    "border border-[#DADADA] rounded-lg px-3 py-[6px]"
+    "border border-[#DADADA] rounded-lg px-2 xMini:px-3 py-[6px]"
   );
 
-  
   return (
     <div className={defaultClasses}>
       <PreviousActionIcon onClick={previousClick} />
 
       <div className={textView}>
-        <span className="text-base font-medium">{heading}</span>
+        <span className=" text-xs xMini:text-base font-medium">{heading}</span>
       </div>
       <NextActionIcon onClick={nextClick} />
     </div>
