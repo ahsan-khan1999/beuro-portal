@@ -8,6 +8,7 @@ export interface DayViewProps {
   title: string;
   time: string;
   backrgoundColour?: string;
+  isMonthView?: boolean;
 }
 
 export const DayView = ({
@@ -18,9 +19,10 @@ export const DayView = ({
   backrgoundColour,
   time,
   title,
+  isMonthView,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
-    `flex flex-col gap-y-1 p-[6px] rounded-r-md cursor-pointer`,
+    `flex flex-col gap-y-1 p-[6px] cursor-pointer`,
     containerClassName
   );
 
@@ -29,7 +31,12 @@ export const DayView = ({
       className={containerClasses}
       style={{
         backgroundColor: `${backrgoundColour || "#cccccc"}4D`,
-        borderLeft: `3px solid ${borderColour || "#000"}`,
+        borderLeft: isMonthView
+          ? `3px solid ${borderColour || "#000"}`
+          : undefined,
+        borderTop: !isMonthView
+          ? `3px solid ${borderColour || "#000"}`
+          : undefined,
       }}
     >
       <p
@@ -38,6 +45,7 @@ export const DayView = ({
           fontSize: "14px",
           fontWeight: "500",
         }}
+        className="whitespace-nowrap overflow-hidden text-ellipsis"
       >
         {title}
       </p>
@@ -47,6 +55,7 @@ export const DayView = ({
           fontSize: "12px",
           fontWeight: "400",
         }}
+        className="whitespace-nowrap overflow-hidden text-ellipsis"
       >
         {time}
       </p>

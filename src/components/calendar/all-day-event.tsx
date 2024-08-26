@@ -7,6 +7,7 @@ export interface AllDayEventsProps {
   dotClassName?: string;
   dotColour?: string;
 }
+
 export const AllDayEvent = ({
   title,
   containerClassName,
@@ -20,7 +21,7 @@ export const AllDayEvent = ({
   );
 
   const dotDefaultClasses = combineClasses(
-    `h-3 w-3 rounded-full`,
+    `h-3 w-3 rounded-full flex-shrink-0`,
     dotClassName
   );
 
@@ -34,9 +35,8 @@ export const AllDayEvent = ({
         style={{ backgroundColor: dotColour || "#ccc" }}
       />
 
-      <p className="text-[#3C3C3C] font-medium text-sm">
+      <p className="text-[#3C3C3C] font-medium text-sm whitespace-nowrap overflow-hidden text-ellipsis mlg:text-xs">
         {title}
-        {/* {title.length > 20 ? `${title.substring(0, 20)}...` : title} */}
       </p>
     </div>
   );

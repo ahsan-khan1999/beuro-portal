@@ -116,6 +116,10 @@ export const Calendar = () => {
     }
   };
 
+  const getDayMaxEvents = () => {
+    return isSmallScreen ? 2 : true;
+  };
+
   return (
     <div className="mb-5">
       <div className="flex item-center justify-between mb-[28px]">
@@ -187,34 +191,38 @@ export const Calendar = () => {
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="timeGridDay"
+        initialView={isSmallScreen ? "dayGridMonth" : "timeGridDay"}
         events={events}
         headerToolbar={false}
         dayHeaderContent={(arg) => DayHeaderContent(arg, isSmallScreen)}
         allDayText={translate("calendar.all_day")}
-        slotLabelFormat={{
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-        }}
+        slotLabelContent={(arg) => (
+          <>
+            {arg.date.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            })}
+          </>
+        )}
         eventClick={(info) => {
           const taskID = info.event.extendedProps.taskID;
           handleContractTaskDetail(taskID);
         }}
         editable={false}
         selectable={true}
-        dayMaxEvents={true}
-        height="auto"
-        aspectRatio={1.5}
+        dayMaxEvents={getDayMaxEvents()}
+        height={isSmallScreen ? "auto" : "auto"}
+        aspectRatio={isSmallScreen ? 0.75 : 1.5} // Adjusted for mobile
         views={{
           timeGridDay: {
-            dayMaxEvents: 6,
+            dayMaxEvents: getDayMaxEvents(),
           },
           dayGridMonth: {
-            dayMaxEvents: true,
+            dayMaxEvents: getDayMaxEvents(),
           },
           timeGridWeek: {
-            dayMaxEvents: true,
+            dayMaxEvents: getDayMaxEvents(),
           },
         }}
         eventTimeFormat={{
@@ -226,7 +234,35 @@ export const Calendar = () => {
           const { event, view } = eventInfo;
           const viewType = view.type;
 
-          if (event.allDay) {
+          if (viewType === "dayGridMonth") {
+            if (isSmallScreen) {
+              // Render using DayView on small screens in dayGridMonth view
+              const formattedTime = event.allDay
+                ? "All Day"
+                : `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
+                    eventInfo.event.end
+                  ).format("HH:mm")}`;
+              return (
+                <DayView
+                  time={formattedTime}
+                  title={eventInfo.event.title}
+                  backrgoundColour={eventInfo.event.backgroundColor}
+                  borderColour={eventInfo.event.borderColor}
+                  timeColour={eventInfo.event.textColor}
+                  isMonthView={true} // Pass isMonthView as true to adjust styling
+                />
+              );
+            } else {
+              // Render using AllDayEvent on larger screens
+              return (
+                <AllDayEvent
+                  title={event.title}
+                  backrgoundColour={eventInfo.event.backgroundColor}
+                  dotColour={eventInfo.event.textColor}
+                />
+              );
+            }
+          } else if (event.allDay) {
             return (
               <AllDayEvent
                 title={event.title}
@@ -248,14 +284,6 @@ export const Calendar = () => {
                 backrgoundColour={eventInfo.event.backgroundColor}
                 borderColour={eventInfo.event.borderColor}
                 timeColour={eventInfo.event.textColor}
-              />
-            );
-          } else if (viewType === "dayGridMonth") {
-            return (
-              <AllDayEvent
-                title={event.title}
-                backrgoundColour={eventInfo.event.backgroundColor}
-                dotColour={eventInfo.event.textColor}
               />
             );
           } else {
