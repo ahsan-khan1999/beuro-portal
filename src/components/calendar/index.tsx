@@ -17,6 +17,7 @@ import { DayView } from "./day-view";
 import { AllDayEvent } from "./all-day-event";
 import { useCalendar } from "@/hooks/calendar/useCalendar";
 import { DayHeaderContent } from "./day-header-content";
+import { useIsSmallScreen } from "@/utils/functions";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
@@ -27,6 +28,7 @@ export const Calendar = () => {
   const calendarRef = useRef<FullCalendar>(null);
   const [currentDate, setCurrentDate] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
+  const isSmallScreen = useIsSmallScreen();
   const {
     events,
     handleAddContractTask,
@@ -134,20 +136,20 @@ export const Calendar = () => {
       <div className="p-6 bg-white rounded-t-lg flex flex-col gap-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[#393939] text-base xPro:text-2xl font-medium">
+            <span className="text-[#393939] text-base mlg:text-2xl font-medium">
               {currentDate.split(",")[0]}
             </span>
             {currentDate.includes(",") && (
               <>
                 {", "}
-                <span className="text-[#393939] text-base xPro:text-xl font-light">
+                <span className="text-[#393939] text-base mlg:text-xl font-light">
                   {currentDate.split(",")[1]}
                 </span>
               </>
             )}
           </div>
 
-          <div className="hidden xPro:flex items-center w-fit p-[6px] rounded-full bg-[#F6F6F6]">
+          <div className="hidden mlg:flex items-center w-fit p-[6px] rounded-full bg-[#F6F6F6]">
             <div className="flex items-center gap-x-5">
               {tabs.map((tab, index) => (
                 <CalendarTab
@@ -167,7 +169,7 @@ export const Calendar = () => {
             heading={translate("calendar.today")}
           />
         </div>
-        <div className="flex xPro:hidden items-center justify-center w-full p-[6px] rounded-full bg-[#F6F6F6]">
+        <div className="flex mlg:hidden items-center justify-center w-fit p-[6px] rounded-full bg-[#F6F6F6] mx-auto">
           <div className="flex items-center gap-x-5">
             {tabs.map((tab, index) => (
               <CalendarTab
@@ -188,7 +190,7 @@ export const Calendar = () => {
         initialView="timeGridDay"
         events={events}
         headerToolbar={false}
-        dayHeaderContent={DayHeaderContent}
+        dayHeaderContent={(arg) => DayHeaderContent(arg, isSmallScreen)}
         allDayText={translate("calendar.all_day")}
         slotLabelFormat={{
           hour: "2-digit",
@@ -270,10 +272,9 @@ export const Calendar = () => {
             containerEl.classList.remove("timeGridDay-flex");
           }
 
-          // Only apply the specific styling to all-day events in the timeGridDay view
           if (info.event.allDay && viewType === "timeGridDay") {
             info.el.style.display = "inline-block";
-            // info.el.style.width = "270px";
+
             info.el.style.overflow = "hidden";
             info.el.style.textOverflow = "ellipsis";
             info.el.style.whiteSpace = "nowrap";
@@ -281,10 +282,9 @@ export const Calendar = () => {
             info.el.style.boxShadow = "none";
           }
 
-          // Ensure the width is not applied in other views like dayGridMonth
           if (viewType === "dayGridMonth" || viewType === "timeGridWeek") {
-            info.el.style.width = "auto"; // Reset the width to auto for month view events
-            info.el.style.display = "block"; // Ensure proper display style for month view
+            info.el.style.width = "auto";
+            info.el.style.display = "block";
           }
         }}
       />

@@ -20,9 +20,7 @@ import { CustomerPromiseActionType } from "@/types/company";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 export const useCalendar = () => {
-  const { loading, totalCount, lastPage, task, taskDetail } = useAppSelector(
-    (state) => state.contract
-  );
+  const { loading, task } = useAppSelector((state) => state.contract);
 
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
@@ -37,7 +35,6 @@ export const useCalendar = () => {
     dispatch(readContractTasks({ params: { filter: {}, paginate: 0 } }));
   }, [dispatch]);
 
-  // Use useMemo to ensure events are recalculated whenever the task array changes
   const events = useMemo(() => {
     return task?.flatMap((task: Tasks) =>
       task.date?.map((dateRange) => ({
@@ -57,10 +54,6 @@ export const useCalendar = () => {
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
-  };
-
-  const defaultUpdateModal = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleAddContractTask = () => {

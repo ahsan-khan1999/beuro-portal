@@ -3,6 +3,7 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import useAddTask from "@/hooks/calendar/useAddTask";
 import { useAppSelector } from "@/hooks/useRedux";
+import { useRouter } from "next/router";
 
 export interface AddTaskModalProps {
   onSuccess: () => void;
@@ -10,28 +11,40 @@ export interface AddTaskModalProps {
   onUpdateSuccess: () => void;
   isUpdate?: boolean;
 }
+
 export const AddContractTask = ({
   onClose,
   isUpdate,
   onSuccess,
-  onUpdateSuccess
+  onUpdateSuccess,
 }: AddTaskModalProps) => {
   const id = useAppSelector((state) => state.global.modal.data);
+  const { locale } = useRouter();
 
-  const { fields, onSubmit, handleSubmit, errors } = useAddTask({
+  const { fields, onSubmit, handleSubmit, errors, isRemainder } = useAddTask({
     isUpdate,
     onSuccess,
     onUpdateSuccess,
     id: id?.id,
   });
 
+  const rightValue = locale === "en" ? "right-[180px]" : "right-[250px]";
+
   return (
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName="max-w-[375px] min-h-fit rounded-lg absolute top-[105px] right-[180px] add-task-modal bg-[#F3F3F3] calendarShadow"
+      containerClassName={`max-w-[375px] min-h-fit rounded-lg absolute top-[105px] ${rightValue} add-task-modal bg-[#F3F3F3] calendarShadow`}
     >
-      <div className="px-[18px] py-4">
+      <div
+        className="px-[18px] py-4"
+        style={{
+          ...(isRemainder && {
+            maxHeight: "650px",
+            overflowY: "auto",
+          }),
+        }}
+      >
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

@@ -26,7 +26,7 @@ export default function useAddTask({
   id,
 }: AddTaskHookProps) {
   const router = useRouter();
-  const { loading, error, taskDetail, task } = useAppSelector(
+  const { loading, error, taskDetail } = useAppSelector(
     (state) => state.contract
   );
 
@@ -51,7 +51,8 @@ export default function useAddTask({
   const alertTime = watch("alertTime");
   const startDate = watch("startDate");
   const endDate = watch("endDate");
-  // const alertTime = taskDetail?.alertTime;
+  const isAllDay = watch("isAllDay");
+  const colour = watch("colour");
 
   useEffect(() => {
     if (id) {
@@ -64,9 +65,16 @@ export default function useAddTask({
         note: taskDetail?.note,
         alertTime: taskDetail?.alertTime,
         colour: taskDetail?.colour,
-      }),
-        setValue("startDate", taskDetail?.date?.[0]?.startDate),
-        setValue("endDate", taskDetail?.date?.[0]?.endDate);
+      });
+      setValue("startDate", taskDetail?.date?.[0]?.startDate);
+      setValue("endDate", taskDetail?.date?.[0]?.endDate);
+    } else {
+      if (isRemainder) {
+        setValue("alertTime", alertTime || 15);
+      } else {
+        setValue("alertTime", undefined);
+      }
+      setValue("colour", colour || "");
     }
   }, [id]);
 
@@ -77,6 +85,7 @@ export default function useAddTask({
     startDate,
     endDate,
     setValue,
+    isAllDay,
     taskDetail?.colour,
     alertTime,
     control,
@@ -88,12 +97,11 @@ export default function useAddTask({
       ? [{ startDate: data.startDate, endDate: data.endDate }]
       : [];
 
-    const formattedData = {
+    const formattedData: any = {
       title: data.title,
       date: formattedDate,
       isAllDay: data.isAllDay,
       colour: data.colour,
-      alertTime: data.alertTime,
       note: data.note,
       address: {
         streetNumber: data.streetNumber,
@@ -101,6 +109,10 @@ export default function useAddTask({
         country: data.country,
       },
     };
+
+    if (isRemainder) {
+      formattedData.alertTime = data.alertTime;
+    }
 
     const res = isUpdate
       ? await dispatch(
@@ -116,7 +128,6 @@ export default function useAddTask({
 
     if (res?.payload) {
       if (isUpdate) {
-        //
         await dispatch(
           readContractTasks({ params: { filter: {}, paginate: 0 } })
         );
@@ -137,5 +148,6 @@ export default function useAddTask({
     errors,
     fields: taskFields,
     onSubmit,
+    isRemainder,
   };
 }

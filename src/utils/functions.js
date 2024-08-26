@@ -155,6 +155,25 @@ export function formatDateString(dateString) {
   return `${day}/${month}/${year}`;
 }
 
+import { useState, useEffect } from "react";
+
+export function useIsSmallScreen() {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 1100);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  return isSmallScreen;
+}
+
 export function formatDateToCustomString(dateString, ShowUTC = true) {
   const months = [
     "Jan",

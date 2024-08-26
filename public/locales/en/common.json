@@ -1259,9 +1259,13 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+
     "before": "before",
     "hour": "Hour",
     "text_area_msg": "Type your message here",
+    "street_no_placeholder": "Add Street No",
+    "post_code_placeholder": "Add Post Code",
+    "country_placeholder": "Add Country",
     "logout": "Logout",
     "please_choose": "Please Choose",
     "yes": "Yes",
@@ -2536,8 +2540,8 @@
     "select_color": "Select Color",
     "remainder": "Remainder",
     "address": "Address",
-    "all_day":"All-Day",
-    "all_day_event":"All-day event",
+    "all_day": "All-Day",
+    "all_day_event": "All-day event",
     "tab_headings": {
       "day": "Day",
       "week": "Week",
