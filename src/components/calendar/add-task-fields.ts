@@ -92,7 +92,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             field: {
               type: Field.span,
               id: "span-field",
-              text: `${translate("calendar.remainder")}`,
+              text: `${translate("calendar.all_day_event")}`,
             },
           },
           {

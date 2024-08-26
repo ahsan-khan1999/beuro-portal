@@ -131,22 +131,43 @@ export const Calendar = () => {
         />
       </div>
 
-      <div className="p-6 bg-white rounded-t-lg flex items-center justify-between">
-        <div>
-          <span className="text-[#393939] text-2xl font-medium">
-            {currentDate.split(",")[0]}
-          </span>
-          {currentDate.includes(",") && (
-            <>
-              {", "}
-              <span className="text-[#393939] text-xl font-light">
-                {currentDate.split(",")[1]}
-              </span>
-            </>
-          )}
-        </div>
+      <div className="p-6 bg-white rounded-t-lg flex flex-col gap-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="text-[#393939] text-base xPro:text-2xl font-medium">
+              {currentDate.split(",")[0]}
+            </span>
+            {currentDate.includes(",") && (
+              <>
+                {", "}
+                <span className="text-[#393939] text-base xPro:text-xl font-light">
+                  {currentDate.split(",")[1]}
+                </span>
+              </>
+            )}
+          </div>
 
-        <div className="flex items-center w-fit p-[6px] rounded-full bg-[#F6F6F6]">
+          <div className="hidden xPro:flex items-center w-fit p-[6px] rounded-full bg-[#F6F6F6]">
+            <div className="flex items-center gap-x-5">
+              {tabs.map((tab, index) => (
+                <CalendarTab
+                  key={tab.view}
+                  heading={tab.label}
+                  isSelected={selectedTab === tab.view}
+                  selectedTab={index}
+                  setTabType={() => switchView(tab.view)}
+                />
+              ))}
+            </div>
+          </div>
+
+          <ActionsTab
+            previousClick={handlePrviousClick}
+            nextClick={handleNextClick}
+            heading={translate("calendar.today")}
+          />
+        </div>
+        <div className="flex xPro:hidden items-center justify-center w-full p-[6px] rounded-full bg-[#F6F6F6]">
           <div className="flex items-center gap-x-5">
             {tabs.map((tab, index) => (
               <CalendarTab
@@ -159,12 +180,6 @@ export const Calendar = () => {
             ))}
           </div>
         </div>
-
-        <ActionsTab
-          previousClick={handlePrviousClick}
-          nextClick={handleNextClick}
-          heading={translate("calendar.today")}
-        />
       </div>
 
       <FullCalendar
@@ -174,6 +189,7 @@ export const Calendar = () => {
         events={events}
         headerToolbar={false}
         dayHeaderContent={DayHeaderContent}
+        allDayText={translate("calendar.all_day")}
         slotLabelFormat={{
           hour: "2-digit",
           minute: "2-digit",
@@ -183,7 +199,6 @@ export const Calendar = () => {
           const taskID = info.event.extendedProps.taskID;
           handleContractTaskDetail(taskID);
         }}
-        // windowResize={handleWindowResize}
         editable={false}
         selectable={true}
         dayMaxEvents={true}
@@ -192,7 +207,6 @@ export const Calendar = () => {
         views={{
           timeGridDay: {
             dayMaxEvents: 6,
-            
           },
           dayGridMonth: {
             dayMaxEvents: true,

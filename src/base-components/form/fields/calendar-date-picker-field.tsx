@@ -20,8 +20,6 @@ export const CalendarDatePickerField = ({
     value ? formatDateString(value) : ""
   );
 
-  console.log(value, "value");
-
   const dateInputRef = useRef<HTMLInputElement>(null);
 
   const handleOpenDatePicker = () => {
@@ -39,9 +37,9 @@ export const CalendarDatePickerField = ({
   const formatDateTime = (value: string) => {
     const date = new Date(value);
 
-    if (isNaN(date.getTime())) {
-      return { formattedDate: "", formattedTime: "" };
-    }
+    // if (isNaN(date.getTime())) {
+    //   return { formattedDate: "", formattedTime: "" };
+    // }
 
     const formattedDate = date.toLocaleDateString(undefined, {
       weekday: "short",

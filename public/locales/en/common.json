@@ -2536,6 +2536,8 @@
     "select_color": "Select Color",
     "remainder": "Remainder",
     "address": "Address",
+    "all_day":"All-Day",
+    "all_day_event":"All-day event",
     "tab_headings": {
       "day": "Day",
       "week": "Week",

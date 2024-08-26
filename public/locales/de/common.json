@@ -2535,7 +2535,8 @@
     "select_color": "Farbe auswählen",
     "remainder": "Restbetrag",
     "address": "Adresse",
-
+    "all_day": "Ganztägig",
+    "all_day_event": "Ganztägige Veranstaltung",
     "tab_headings": {
       "day": "Tag",
       "week": "Woche",
