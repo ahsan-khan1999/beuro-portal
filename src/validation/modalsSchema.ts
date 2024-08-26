@@ -1,8 +1,12 @@
 import {
+  AddGeneralAddressField,
+  AddGeneralNoteField,
   AddNewNote,
   AddTaxField,
   ChangePasswordField,
   EditPaymentDetails,
+  EnterComponayNameField,
+  UpdateNoteId,
 } from "@/enums/modals";
 import * as yup from "yup";
 
@@ -11,20 +15,29 @@ export const generatePasswordChangeValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [ChangePasswordField.oldPassword]: yup
       .string()
-      .required(translate("validationMessage.required"))
+      .required(translate("validationMessages.required"))
       .min(6, translate("validationMessages.string.min")),
 
     [ChangePasswordField.newPassword]: yup
       .string()
-      .required(translate("validationMessage.required"))
-      .notOneOf([yup.ref("currentPassword")], translate("validationMessages.mixed.notOneOf"))
+      .required(translate("validationMessages.required"))
+      .notOneOf(
+        [yup.ref("currentPassword")],
+        translate("validationMessages.mixed.notOneOf")
+      )
 
       .min(6, translate("validationMessages.string.min")),
 
     [ChangePasswordField.confirmNewPassword]: yup
       .string()
-      .oneOf([yup.ref("newPassword")], translate("validationMessages.mixed.oneOf"))
-      .notOneOf([yup.ref("currentPassword")], translate("validationMessages.mixed.notOneOf"))
+      .oneOf(
+        [yup.ref("newPassword")],
+        translate("validationMessages.mixed.oneOf")
+      )
+      .notOneOf(
+        [yup.ref("currentPassword")],
+        translate("validationMessages.mixed.notOneOf")
+      )
       .required(translate("validationMessages.required")),
   });
 };
@@ -44,7 +57,26 @@ export const generateAddTaxValidationSchema = (translate: Function) => {
 // Validation for Add new note
 export const generateAddNewNoteValidation = (translate: Function) => {
   return yup.object().shape({
-    [AddNewNote.noteMessage]: yup.string().required(translate("validationMessage.required")),
+    [AddNewNote.noteType]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [AddNewNote.noteMessage]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+  });
+};
+
+export const generateUpdateNoteValidation = (translate: Function) => {
+  return yup.object().shape({
+    [UpdateNoteId.noteMessage]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+  });
+};
+
+export const generateRejectOfferValidation = (translate: Function) => {
+  return yup.object().shape({
+    reason: yup.string().required(translate("validationMessages.required")),
   });
 };
 
@@ -53,33 +85,64 @@ export const generateEditPaymentDetailsValidation = (translate: Function) => {
   return yup.object().shape({
     [EditPaymentDetails.nameOnCard]: yup
       .string()
-      .required(translate("validationMessage.required")),
-    [EditPaymentDetails.expiry]: yup.string().required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
+    [EditPaymentDetails.expiry]: yup
+      .string()
+      .required(translate("validationMessages.required")),
     [EditPaymentDetails.cardNumber]: yup
       .string()
-      .required(translate("validationMessage.required")),
-    [EditPaymentDetails.cvv]: yup.string().required(translate("validationMessage.required")),
+      .required(translate("validationMessages.required")),
+    [EditPaymentDetails.cvv]: yup
+      .string()
+      .required(translate("validationMessages.required")),
   });
 };
 
-
 export const generateImageValidation = (translate: Function) => {
   return yup.object().shape({
-    "upload_image1": yup.string().required(translate("validationMessages.required")),
-    "upload_image2": yup.string().notRequired(),
-    "upload_image3": yup.string().notRequired(),
-    "upload_image4": yup.string().notRequired(),
-    "upload_image5": yup.string().notRequired(),
-    "upload_image6": yup.string().notRequired(),
-    "upload_image7": yup.string().notRequired(),
-    "upload_image8": yup.string().notRequired(),
-    "upload_image9": yup.string().notRequired(),
-    "upload_image10": yup.string().notRequired(),
-    "upload_image11": yup.string().notRequired(),
-    "upload_image12": yup.string().notRequired(),
-    "upload_image13": yup.string().notRequired(),
-    "upload_image14": yup.string().notRequired(),
-    "upload_image15": yup.string().notRequired(),
+    upload_image1: yup.string().notRequired(),
+    upload_image2: yup.string().notRequired(),
+    upload_image3: yup.string().notRequired(),
+    upload_image4: yup.string().notRequired(),
+    upload_image5: yup.string().notRequired(),
+    upload_image6: yup.string().notRequired(),
+    upload_image7: yup.string().notRequired(),
+    upload_image8: yup.string().notRequired(),
+    upload_image9: yup.string().notRequired(),
+    upload_image10: yup.string().notRequired(),
+    upload_image11: yup.string().notRequired(),
+    upload_image12: yup.string().notRequired(),
+    upload_image13: yup.string().notRequired(),
+    upload_image14: yup.string().notRequired(),
+    upload_image15: yup.string().notRequired(),
+  });
+};
 
+// Add general address validation
+export const generateAddGeneralAddressValidationSchema = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [AddGeneralAddressField.addresses]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+  });
+};
+export const generateAddGeneralNoteValidationSchema = (translate: Function) => {
+  return yup.object().shape({
+    [AddGeneralNoteField.noteType]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [AddGeneralNoteField.description]: yup.string().notRequired(),
+  });
+};
+
+export const generateEnterCompanyNameValidationSchema = (
+  translate: Function
+) => {
+  return yup.object().shape({
+    [EnterComponayNameField.companyName]: yup
+      .string()
+      .required(translate("validationMessages.required")),
   });
 };

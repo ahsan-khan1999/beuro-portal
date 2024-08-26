@@ -5,6 +5,7 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
 import { ComponentsType } from "./AddNewLeadsData";
+import { updateQuery } from "@/utils/update-query";
 
 const AddLeadAdditionalDetails = ({
   onHandleBack,
@@ -18,31 +19,39 @@ const AddLeadAdditionalDetails = ({
     useAddLeadAdditionalDetails({ onHandleBack, onHandleNext });
 
   const router = useRouter();
+  const handleCancel = () => {
+    router.pathname = "/leads";
+    router.query = { status: "None" };
+    updateQuery(router, router.locale as string);
+  };
 
   return (
     <>
       <FormCard>
         <div
-          className="flex justify-between items-center pb-5 border-b border-[#000] border-opacity-20"
+          className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg"
           id="Additional Details"
         >
-          <h2 className="text-[#393939] text-lg font-medium">
+          <h2 className="text-[#fff] text-lg font-medium">
             {translate("leads.additional.heading")}
           </h2>
           <button
-            onClick={() => router.push("/leads")}
-            className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
+            onClick={handleCancel}
+            className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full bg-white"
           >
             {translate("leads.additional.cancel_button")}
           </button>
         </div>
-        <Form
-          formFields={fields}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          errors={errors}
-          className={`${defaultClassName}`}
-        />
+
+        <div className="py-3 px-6">
+          <Form
+            formFields={fields}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            errors={errors}
+            className={`${defaultClassName}`}
+          />
+        </div>
       </FormCard>
     </>
   );

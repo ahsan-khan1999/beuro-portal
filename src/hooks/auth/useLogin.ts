@@ -1,4 +1,4 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
+import { loginUser, setErrorMessage } from "@/api/slices/authSlice/auth";
 import { generateLoginFormField } from "@/components/loginAndRegister/login/login-fields";
 import { generateLoginValidation } from "@/validation/authSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,12 +6,16 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
+import { useEffect } from "react";
 
 export const useLoginForm = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
+  useEffect(() => {
+    dispatch(setErrorMessage(null));
+  }, []);
 
   const schema = generateLoginValidation(translate);
   const {
@@ -24,6 +28,8 @@ export const useLoginForm = () => {
   });
   const fields = generateLoginFormField(register, loading);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
+
     dispatch(loginUser({ data, router, setError, translate }));
     // router.push("/dashboard")
   };

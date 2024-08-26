@@ -1,4 +1,8 @@
-import { readContactSupportDetail, setSupportReqDetails, updateContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
+import {
+  readContactSupportDetail,
+  setSupportReqDetails,
+  updateContactSupport,
+} from "@/api/slices/contactSupport/contactSupportSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -8,25 +12,24 @@ import { CustomerPromiseActionType } from "@/types/customer";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function useSupportDetail() {
   const router = useRouter();
-  const dispatch = useAppDispatch()
-  const { contactSupportDetails, loading } = useAppSelector(state => state.contactSupport)
-  const {
-    modal,
-  } = useAppSelector((state) => state.global);
+  const dispatch = useAppDispatch();
+  const { contactSupportDetails, loading } = useAppSelector(
+    (state) => state.contactSupport
+  );
+  const { modal } = useAppSelector((state) => state.global);
   const { t: translate } = useTranslation();
 
   const items: DropDownItem[] = [
     {
-      item: "pending",
+      item: { label: "pending", value: "pending" },
     },
     {
-      item: "resolved",
+      item: { label: "resolved", value: "resolved" },
     },
-    
   ];
   const id = router.query.supportRequest;
 
@@ -52,7 +55,6 @@ export default function useSupportDetail() {
   };
 
   const MODAL_CONFIG: ModalConfigType = {
-
     [ModalType.CREATION]: (
       <CreationCreated
         heading={translate("common.are_you_sure_modal.success")}
@@ -64,19 +66,28 @@ export default function useSupportDetail() {
       />
     ),
   };
+
+  
   const handleStatusUpadte = async (value: string) => {
-    const response = await dispatch(updateContactSupport({ data: { id: contactSupportDetails?.id, status: staticEnums["SupportRequest"][value] }, router, translate }))
+    const response = await dispatch(
+      updateContactSupport({
+        data: {
+          id: contactSupportDetails?.id,
+          status: staticEnums["SupportRequest"][value],
+        },
+        router,
+        translate,
+      })
+    );
     if (response?.payload)
       dispatch(updateModalType({ type: ModalType.CREATION }));
-
-
-  }
+  };
   return {
     contactSupportDetails,
     status: items,
     handlePreviousClick,
     handleStatusUpadte,
     renderModal,
-    loading
+    loading,
   };
 }

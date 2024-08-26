@@ -7,7 +7,13 @@ import { useAppDispatch, useAppSelector } from "../../useRedux";
 import { generateChangeMailSettingValidationSchema } from "@/validation/admin/settingSchema";
 import { ChangeMailSettingFormField } from "@/components/admin/setting/mail-setting/change-mail-setting-fields";
 
-export const useChangeMailSetting = ({ handleCreation, selectedTab }: { handleCreation: () => void, selectedTab: number }) => {
+export const useChangeMailSetting = ({
+  handleCreation,
+  selectedTab,
+}: {
+  handleCreation: () => void;
+  selectedTab: number;
+}) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -23,10 +29,13 @@ export const useChangeMailSetting = ({ handleCreation, selectedTab }: { handleCr
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   const fields = ChangeMailSettingFormField(register, loading, control);
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     dispatch(loginUser({ data, router, setError, translate }));
   };
+
   return {
     fields,
     onSubmit,

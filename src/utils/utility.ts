@@ -29,7 +29,9 @@ import { EmailStatus, OfferStatus, PaymentType } from "@/types/offers";
 import { formatDateString } from "./functions";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
-
+import { PDFDocument } from "pdf-lib";
+import "moment/locale/de";
+import { TFunction } from "next-i18next";
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -142,13 +144,14 @@ export function setErrors(
         }
       });
       setError(key, newObj);
-    } else
+    } else {
       setError(key, {
         message: formatStrings(
           translate(`validationMessages.${value?.split(":")[0]}`),
           value?.split(":").slice(1)
         ),
       });
+    }
   }
 }
 export function setErrorMessage(
@@ -267,17 +270,23 @@ export const conditionHandlerLogin = (
   if (!connect) {
     if (!response.data.data.User.isEmailVerified) {
       router.pathname = "/login-success";
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     } else if (!response.data.data.User.isProfileComplete) {
       router.pathname = "/profile";
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
+    } else if (
+      staticEnums["User"]["role"][response?.data?.data?.User?.role] === 1 &&
+      !response?.data?.data?.User?.plan?.id
+    ) {
+      router.pathname = "/plan";
+      updateQuery(router, router?.locale as string);
     } else {
       if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
         router.pathname = "/admin/dashboard";
       } else {
         router.pathname = "/dashboard";
       }
-      updateQuery(router, "en");
+      updateQuery(router, router?.locale as string);
     }
   } else {
     router.query = {};
@@ -384,6 +393,7 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
       postalCode: inputObject[`postalCode-${i}`] || "",
       country: inputObject[`country-${i}`] || "",
       description: inputObject[`description-${i}`] || "",
+      label: inputObject[`label-${i}`] || "",
     };
     outputArray.push(addressObj);
   }
@@ -392,31 +402,57 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
 }
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY hh:mm:ss");
+  return moment(date).format("DD/MM/YYYY HH:mm");
 }
+
 export function formatDateReverse(date: string) {
   if (!date) return;
-  return moment(date).format("hh:mm:ss, DD/MM/YYYY");
+  return moment(date).format("HH:mm, DD/MM/YYYY");
 }
 export function formatDateTimeToDate(date: string) {
+  if (!date) return null;
+  return moment(date).format("DD/MM/YYYY");
+}
+
+export function pdfDateFormat(date: string, locale: string) {
+  if (!date) return null;
+  return moment(date).locale(locale).format("DD. MMMM YYYY");
+}
+
+export function formatDateTimeToDateMango(date: string) {
+  if (!date) return null;
   return moment(date).format("YYYY-MM-DD");
 }
 export function formatDateTimeToTime(date: string) {
-  return moment(date).format("hh:mm: A");
+  return moment(date).format("HH:mm");
+}
+
+export function formatDateTime(item: string) {
+  const date = new Date(item);
+  const options: Intl.DateTimeFormatOptions = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  };
+  return date.toLocaleTimeString([], options);
 }
 
 export function getStatusColor(status: string) {
   if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"])
     return "#4A13E7";
   else if (
+    staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["InProcess"]
+  )
+    return "#ebd409";
+  else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
   )
-    return "#FE9244";
+    return "#45C769";
   else if (
     staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Expired"]
   )
-    return "#FF376F";
-  else return "#FF376F";
+    return "#FF0000";
+  else return "#FF0000";
 }
 
 type TransformedMessages = {
@@ -544,25 +580,35 @@ export const transformAttachments = (attachmemts: string[]) => {
   return list;
 };
 
-export function getFileNameFromUrl(url: string) {
-  const urlParts = url.split("/");
-  const fileName = urlParts[urlParts.length - 1];
-  return fileName;
+export function getFileNameFromUrl(url: string, count?: number) {
+  const urlParts = url?.split("/");
+  const fileName = urlParts[urlParts?.length - 1];
+  return fileName?.slice(0, count ? count : 28);
 }
 
 export function getEmailColor(status: string) {
   if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
   )
-    return "#FE9244";
+    return "#FF0000";
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
   )
+    return "#45C769";
+  else if (
+    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
+  )
+    return "#FE9244";
+  else return "#FF376F";
+}
+
+export function getLeadStatusColor(status: string) {
+  if (staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Open"])
     return "#4A13E7";
   else if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Failed"]
+    staticEnums["LeadStatus"][status] == staticEnums["LeadStatus"]["Close"]
   )
-    return "#FF0000";
+    return "#45C769";
   else return "#FF376F";
 }
 
@@ -575,11 +621,12 @@ export function getPaymentTypeColor(status: string) {
     return "#FE9244";
   else return "#FF376F";
 }
+
 export function getOfferStatusColor(status: string) {
   if (staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Open"])
     return "#4A13E7";
   else if (
-    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Signed"]
+    staticEnums["OfferStatus"][status] == staticEnums["OfferStatus"]["Accepted"]
   )
     return "#45C769";
   else if (
@@ -626,13 +673,11 @@ export function getInvoiceStatusColor(status: string) {
     staticEnums["InvoiceStatus"][status] == staticEnums["InvoiceStatus"]["Paid"]
   )
     return "#45C769";
-  else return "#FF376F";
+  else return "#4A13E7";
 }
 
 export function getInvoiceEmailColor(status: string) {
-  if (
-    staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"]
-  )
+  if (staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Post"])
     return "#FF376F";
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Sent"]
@@ -641,8 +686,18 @@ export function getInvoiceEmailColor(status: string) {
   else if (
     staticEnums["EmailStatus"][status] == staticEnums["EmailStatus"]["Pending"]
   )
-    return "#FE9244";
+    return "#FF0000";
   else return "#FF376F";
+}
+
+export function getMailStatusColor(status: string) {
+  if (staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["failed"])
+    return "#FF376F";
+  else if (
+    staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["pending"]
+  )
+    return "#FE9244";
+  else return "#45C769";
 }
 
 export function calculateTax(amount: number, taxPercentage: number) {
@@ -656,7 +711,6 @@ export function calculatePercentage(
   if (totalAmount === 0) {
     return 0; // Avoid division by zero
   }
-
   const percentage = ((amount / totalAmount) * 100).toFixed(2);
   return parseFloat(percentage);
 }
@@ -704,4 +758,155 @@ export const calculateDiscount = (
   } else {
     return Math.min(discount, amount);
   }
+};
+export function dataURLtoBlob(dataURL: any) {
+  const arr = dataURL.split(",");
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new Blob([u8arr], { type: mime });
+}
+
+// export const smoothScrollToSection = (target: string) => {
+//   const element = document.querySelector(target);
+
+//   if (!element) {
+//     console.error(`Element with selector ${target} not found`);
+//     return;
+//   }
+
+//   const headerOffset = 100; // Adjust this value according to your page layout
+//   const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+//   const offsetPosition = elementPosition - headerOffset;
+
+//   window.scrollTo(0,offsetPosition);
+// };
+
+export const getValueForKeyInArray = (key: string, array?: any) => {
+  if (array) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].hasOwnProperty(key)) {
+        return array[i][key];
+      }
+    }
+  } else return null;
+};
+
+export const smoothScrollToSection = (target: string) => {
+  const element = document.getElementById(target);
+  const headerOffset = 100;
+  const elementPosition = element?.getBoundingClientRect().top || 0;
+  const offsetPosition = elementPosition - headerOffset;
+
+  window.scrollBy({
+    top: offsetPosition,
+    behavior: "smooth",
+  });
+};
+
+export function blobToFile(blob: any, fileName: string) {
+  const options = { type: blob.type };
+  const file = new File([blob], fileName, options);
+  return file;
+}
+
+export const mergePDFs = async (pdfBlobs: Blob[], fileName?: string) => {
+  const mergedPdf = await PDFDocument.create();
+
+  for (const blob of pdfBlobs) {
+    const arrayBuffer =
+      blob instanceof ArrayBuffer ? blob : await blob.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const copiedPages = await mergedPdf.copyPages(
+      pdfDoc,
+      pdfDoc.getPageIndices()
+    );
+    copiedPages.forEach((page) => mergedPdf.addPage(page));
+  }
+
+  mergedPdf.setTitle(fileName || "PDF File");
+
+  const pdfBytes = await mergedPdf.save();
+  return new Blob([pdfBytes], { type: "application/pdf" });
+};
+
+export const replaceClassesWithInlineStyles = (htmlContent: string): string => {
+  const classToStyleMap: { [className: string]: string } = {
+    "text-tiny": "font-size: 8px;",
+    "text-small": "font-size: 10px",
+    "text-big": "font-size: 19.6px",
+    "text-huge": "font-size: 24px;",
+    "ck-link_selected": "background-color: rgba(31,176,255,.1)",
+    "ck-list-bogus-paragraph": "display: block;",
+  };
+
+  return htmlContent.replace(/class="([^"]*)"/g, (match, classNames) => {
+    const classes: string[] = classNames.split(/\s+/);
+    const styleRules = classes
+      .map((className: string) => classToStyleMap[className] || "")
+      .join(" ");
+    return styleRules ? `style="${styleRules}"` : "";
+  });
+};
+
+export function validateUrl(url: string, translate: TFunction) {
+  const regexp = new RegExp(
+    "((http|https)\\://)?[a-zA-Z0-9\\./\\?\\:@\\-_=#]+\\.([a-zA-Z]){2,6}([a-zA-Z0-9\\.\\&/\\?\\:@\\-_=#])*"
+  );
+  if (!regexp.test(url)) {
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_format"),
+    };
+  }
+  return { isValid: true, message: "" };
+}
+
+export function validateNumber(number: string, translate: TFunction) {
+  const regexp = /^\+41\d{9}$/;
+  if (!regexp.test(number)) {
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_format"),
+    };
+  }
+  return { isValid: true, message: "" };
+}
+
+export function validateEmail(email: string, translate: TFunction) {
+  const regexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!regexp.test(email)) {
+    return {
+      isValid: false,
+      message: translate("validationMessages.invalid_email"),
+    };
+  }
+  return { isValid: true, message: "" };
+}
+
+export const getCurrentMonth = () => {
+  const currentDate = new Date();
+  return currentDate.getMonth() + 1;
+};
+
+export const downloadFile = (url: string) => {
+  fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = getFileNameFromUrl(url);
+      link.click();
+      URL.revokeObjectURL(blobUrl);
+    })
+    .catch((error) => {
+      console.error("Error downloading file:", error);
+    });
 };

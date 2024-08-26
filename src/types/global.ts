@@ -1,6 +1,5 @@
 import { ApiResponse, Header } from "@/enums/auth";
 import { ModalType } from "@/enums/ui";
-import { Dispatch, SetStateAction } from "react";
 import { FilterType } from ".";
 import { StaticImageData } from "next/image";
 
@@ -50,6 +49,7 @@ export interface InputFieldProps {
   onEnterPress?: () => void;
   containerClassName?: string;
   textClassName?: string;
+  placeholder?: string;
   bgColor?: boolean;
   iconDisplay?: boolean;
   options?: {
@@ -67,9 +67,10 @@ export interface OptionsFieldProps {
   border?: number;
   handleChange: (value: string) => void;
   options: { label: string; value: string }[];
-  dropDownIconClassName: string;
+  dropDownIconClassName?: string;
   containerClassName?: string;
   isSearch?: boolean;
+  labelClassName?: string;
 }
 
 export interface GlobalApiResponseType {
@@ -89,6 +90,10 @@ export interface CreateSuccessProps {
   modelHeading: string;
   modelSubHeading: string;
   routeHandler: () => void;
+}
+export interface onRejectProps {
+  onClose: () => void;
+  onReject?: () => void;
 }
 export interface UpdateSuccessProps {
   onClose: () => void;

@@ -1,3 +1,4 @@
+import { staticEnums } from "@/utils/static";
 import { DateRangeProps, User } from ".";
 import { ContentTableRowTypes } from "./content";
 import { CustomerAddress, Customers } from "./customer";
@@ -10,21 +11,34 @@ export interface contractTableTypes {
   contractNumber: string;
   offerID: ContractOfferDetails;
   createdAt: string;
+  mail: {
+    mailStatus: "open" | "failed" | "pending";
+  };
   contractStatus: "Open" | "Confirmed" | "Cancelled";
-  paymentType:string;
-  title:string;
-  additionalDetails:string;
-  attachement?:string;
-  emailStatus:string
+  paymentType: string;
+  title: string;
+  additionalDetails: string;
+  attachement?: string;
+  emailStatus: string;
+  signedContracts?: signedContracts[];
+  isNoteCreated: boolean;
+  isImageAdded: boolean;
 }
+
+export interface signedContracts {
+  createdAt: string;
+  link: string;
+  status: number;
+}
+
 export interface ContractOfferDetails {
   refID: string;
   id: string;
-
   fullName: string;
   email: string;
   phoneNumber: string;
   date: DateRangeProps[];
+  time: string;
   mobileNumber: string;
   status: string;
   editImg?: string;
@@ -50,14 +64,13 @@ export interface ContractOfferDetails {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: 0 | 1;
+  discountType: keyof (typeof staticEnums)["DiscountType"];
   emailStatus: "Pening" | "Sent" | "Post";
   isDiscount: boolean;
   isTax: boolean;
   offerNumber: string;
   contractStatus: "Open" | "Confirmed" | "Cancelled";
   offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
-
   paymentType: "Cash" | "Online";
   taxType: "Include" | "Exclude";
   taxAmount: number;
@@ -70,7 +83,13 @@ export interface ContractOfferDetails {
   total: number;
   discountAmount: number;
   discountDescription: string;
-  signature?:string
+  signature?: string;
+}
+
+export interface Contract {
+  title: string;
+  id: string;
+  additionalDetails: string;
 }
 
 export interface ContractDetailCardProps {
@@ -83,5 +102,8 @@ export interface ContractDetailCardProps {
   ) => void;
   handleStatusUpdate: (id: string) => void;
   handlePaymentStatusUpdate: (id: string) => void;
-  handleSendEmail: () => void
+  handleSendEmail: () => void;
+  isSendEmail: boolean;
+  handleUpdateAdditionalDetailsModal: () => void;
+  handleEditDateModal: () => void;
 }

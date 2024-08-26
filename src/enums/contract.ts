@@ -4,5 +4,11 @@ export enum ContractEmailPreview {
   content = "content",
   subject = "subject",
   description = "description",
-  fileUpload = "pdf",
+  fileUpload = "attachments",
+  additionalDetails = "additionalDetails",
+  title = "title",
+}
+
+export enum ContractAdditionalDetails {
+  additionalDetails = "additionalDetails",
 }

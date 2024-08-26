@@ -18,25 +18,40 @@ export const DropDown = ({
   dropDownIconClassName,
   dropDownDisabled = false,
   shouldNotSelectItem = false,
-}: DropDownProps) => {
+  isLastIndex,
+  isSecondLastIndex,
+  isLead,
+  isOffer,
+  isAdminCustomer,
+}: DropDownProps & {
+  isLastIndex?: boolean;
+  isSecondLastIndex?: boolean;
+  isLead?: boolean;
+  isOffer?: boolean;
+  isAdminCustomer?: boolean;
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
   const toggleDropDown = (item: string) => {
     onItemSelected(item);
-    !shouldNotSelectItem && setSelectedItem(item);
+    // !shouldNotSelectItem && setSelectedItem(item);
     setIsOpen((prevState) => !prevState);
   };
+
   useEffect(() => {
     setSelectedItem(defaultSelectedItem);
   }, [defaultSelectedItem]);
+
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const defaultClasses =
-    "flex items-center justify-between bg-white px-4 py-[10px] w-full min-h-10 border border-lightGray rounded-lg";
+    "flex items-center bg-white px-3 py-[10px] w-full min-h-8 border border-lightGray rounded-lg cursor-pointer";
   const buttonClasses = combineClasses(defaultClasses, dropDownClassName);
   const textClasses = combineClasses(
-    `text-sm font-medium text-dark ${dropDownDisabled ? "text-lightGray" : ""}`,
+    `text-sm font-medium text-white ${
+      dropDownDisabled ? "text-lightGray" : ""
+    }`,
     dropDownTextClassName
   );
 
@@ -49,24 +64,31 @@ export const DropDown = ({
     >
       {label && <label className="text-sm text-gray">{label}</label>}
       <div className="relative w-full">
-        <button
+        <div
           aria-expanded={isOpen}
           className={`${buttonClasses}`}
           onClick={() => setIsOpen((prevState) => !prevState)}
         >
           {children}
           <span className={textClasses}>{selectedItem}</span>
-          <DropDownNonFillIcon
-            isOpen={isOpen}
-            className={dropDownIconClassName}
-          />
-        </button>
+          <div>
+            <DropDownNonFillIcon
+              isOpen={isOpen}
+              className={dropDownIconClassName}
+            />
+          </div>
+        </div>
         <AnimatePresence>
           {isOpen && (
             <DropDownItems
               items={items}
               onItemClick={toggleDropDown}
               containerClassName={dropDownItemsContainerClassName}
+              isLastIndex={isLastIndex}
+              isSecondLastIndex={isSecondLastIndex}
+              isOffer={isOffer}
+              isLead={isLead}
+              isAdminCustomer={isAdminCustomer}
             />
           )}
         </AnimatePresence>

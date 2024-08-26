@@ -8,7 +8,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mb-0 mt-6",
+        containerClass: "mb-0 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         field: {
           type: Field.ckEditor,
           className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
@@ -20,11 +20,11 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
       },
 
       {
-        containerClass: "mt-6",
+        containerClass: "my-[30px]",
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex space-x-[18px]",
+          className: "flex justify-end items-center space-x-[18px]",
           children: [
             {
               containerClass: "mb-0",
@@ -36,7 +36,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
                 onClick: () =>
                   onHandleBack && onHandleBack(ComponentsType.serviceAdd),
                 className:
-                  "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]  text-dark hover:bg-none",
+                  "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover:bg-none",
               },
             },
             {
@@ -47,7 +47,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
                 text: translate("leads.additional.save_button"),
                 inputType: "submit",
                 className:
-                  "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none ",
+                  "rounded-lg px-4 w-[152px] h-[50px] text-white hover:bg-none",
                 loading,
               },
             },

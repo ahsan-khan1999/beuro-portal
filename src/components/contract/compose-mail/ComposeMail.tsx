@@ -13,21 +13,22 @@ const ComposeMail = ({
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useContractEmail(backRouteHandler, onNextHandle);
+
   return (
     <ContractFormCard>
-      <h2 className="text-[#393939] text-lg font-medium">
+      <h2 className="text-[#fff] text-lg font-medium bg-[#4A13E7] py-5 px-6 rounded-t-lg">
         {translate("contracts.contract_email_preview.heading")}
       </h2>
 
-      <hr className="opacity-20 mt-[25px] mb-5" />
-
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </ContractFormCard>
   );
 };

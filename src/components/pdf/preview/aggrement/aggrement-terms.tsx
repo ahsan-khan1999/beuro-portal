@@ -15,11 +15,11 @@ export const AggrementTerms = ({
 }: {
   aggrementDetails: string;
   isOffer?: boolean;
-  handleDescriptionUpdate?: (value: string) => void
+  handleDescriptionUpdate?: (value: string) => void;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState({
-    aggrement: null
+    aggrement: null,
   });
 
   const [editedText, setEditedText] = useState(aggrementDetails);
@@ -36,7 +36,7 @@ export const AggrementTerms = ({
 
   const handleSaveClick = () => {
     if (!editedText) return;
-    handleDescriptionUpdate && handleDescriptionUpdate(editedText)
+    handleDescriptionUpdate && handleDescriptionUpdate(editedText);
     setIsEditing(false);
     // Here, ideally, you would also handle saving editedText to a server or state management
   };
@@ -51,7 +51,7 @@ export const AggrementTerms = ({
     <div>
       {isOffer ? (
         <div
-          className="flex flex-col gap-1"
+          className="html-content flex flex-col gap-1 max-w-[1160px]"
           dangerouslySetInnerHTML={{ __html: aggrementDetails }}
         />
       ) : (
@@ -59,7 +59,7 @@ export const AggrementTerms = ({
           {!isEditing ? (
             <div className="flex gap-[10px] items-center">
               <span
-                className="text-[#000] text-base font-medium"
+                className="html-content text-[#000] text-base font-medium"
                 dangerouslySetInnerHTML={{ __html: editedText }}
               />
               <Image
@@ -76,9 +76,7 @@ export const AggrementTerms = ({
                 onChange={(event, editor) => {
                   setEditedText(editor.getData());
                 }}
-
               />
-              { }
               <div className="flex gap-[19px] justify-end mt-4">
                 <button
                   onClick={handleCancelClick}

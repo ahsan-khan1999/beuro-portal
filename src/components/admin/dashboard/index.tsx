@@ -4,7 +4,6 @@ import DashboardFunctions from "./Functions";
 import PieChart from "./chart";
 import WavesChart from "./waves";
 import DashboardCard from "@/base-components/ui/dashboard-card";
-import InputField from "@/base-components/filter/fields/input-field";
 import activeSubscribersIcon from "@/assets/svgs/leads.svg";
 import pendingCompaniesIcon from "@/assets/svgs/pending-companies.svg";
 import customersIcon from "@/assets/svgs/customers-card.svg";
@@ -12,7 +11,7 @@ import { useTranslation } from "next-i18next";
 import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
 import { Dashboard, FilterType } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readAdminDashboard, readDashboard } from "@/api/slices/authSlice/auth";
+import { readAdminDashboard } from "@/api/slices/authSlice/auth";
 import customerIcon from "@/assets/pngs/customers.png";
 import leadsPngIcon from "@/assets/pngs/leads.png";
 import offersPngIcon from "@/assets/pngs/offers.png";
@@ -97,23 +96,28 @@ const AdminDashboard = () => {
         backgroundColor: ["#FE9244", "#FF376F", "#4A13E7", "#45C769"],
       },
     ],
-    labels: ["Silver", "Gold", "Diamond", "Infinite"],
+    labels: [
+      `${translate("admin.chart_list.silver")}`,
+      `${translate("admin.chart_list.gold")}`,
+      `${translate("admin.chart_list.diamond")}`,
+      `${translate("admin.chart_list.infinite")}`,
+    ],
   };
 
   const datatest = {
     labels: [
       `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
-      `${translate("admin.overview.months_name.jan")}`,
+      `${translate("admin.overview.months_name.feb")}`,
+      `${translate("admin.overview.months_name.mar")}`,
+      `${translate("admin.overview.months_name.apr")}`,
+      `${translate("admin.overview.months_name.may")}`,
+      `${translate("admin.overview.months_name.jun")}`,
+      `${translate("admin.overview.months_name.jul")}`,
+      `${translate("admin.overview.months_name.aug")}`,
+      `${translate("admin.overview.months_name.sep")}`,
+      `${translate("admin.overview.months_name.oct")}`,
+      `${translate("admin.overview.months_name.nov")}`,
+      `${translate("admin.overview.months_name.dec")}`,
     ],
     datasets: [
       {
@@ -144,7 +148,7 @@ const AdminDashboard = () => {
           {translate("admin.main_heading")}
         </h1>
       </div>
-      <SearchInputFiled
+      {/* <SearchInputFiled
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter.text}
         iconDisplay={true}
@@ -176,7 +180,7 @@ const AdminDashboard = () => {
             service: "Umzug Cleaning Service",
           },
         ]}
-      />
+      /> */}
       <DashboardFunctions
         filter={filter}
         setFilter={setFilter}

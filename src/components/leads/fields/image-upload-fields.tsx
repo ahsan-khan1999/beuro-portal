@@ -2,7 +2,12 @@ import { Field } from "@/enums/form";
 import { FormField, ImageUploadFormFieldType } from "@/types";
 import { useTranslation } from "next-i18next";
 
-export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control, onClick) => {
+export const ImageUploadFormField: ImageUploadFormFieldType = (
+  loading,
+  control,
+  onClick,
+  setValue
+) => {
   const { t: translate } = useTranslation();
 
   const formField: FormField[] = [
@@ -11,7 +16,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-5 gap-x-2",
+        className: "grid grid-cols-5 gap-2",
         children: [
           {
             field: {
@@ -21,7 +26,8 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               name: "upload_image1",
               control,
               onClick: onClick,
-              
+              index: 0,
+              setValue,
             },
           },
           {
@@ -31,7 +37,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image2",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 1,
+              setValue,
             },
           },
           {
@@ -41,7 +49,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image3",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 2,
+              setValue,
             },
           },
           {
@@ -51,7 +61,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image4",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 3,
+              setValue,
             },
           },
           {
@@ -61,7 +73,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image5",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 4,
+              setValue,
             },
           },
           {
@@ -71,7 +85,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image6",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 5,
+              setValue,
             },
           },
           {
@@ -81,7 +97,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image7",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 6,
+              setValue,
             },
           },
           {
@@ -91,7 +109,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image8",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 7,
+              setValue,
             },
           },
           {
@@ -101,7 +121,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image9",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 8,
+              setValue,
             },
           },
           {
@@ -111,7 +133,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image10",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 9,
+              setValue,
             },
           },
 
@@ -122,7 +146,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image11",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 10,
+              setValue,
             },
           },
           {
@@ -132,7 +158,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image12",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 11,
+              setValue,
             },
           },
           {
@@ -142,7 +170,9 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image13",
               control,
-              onClick: onClick
+              onClick: onClick,
+              index: 12,
+              setValue,
             },
           },
           {
@@ -152,7 +182,7 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image14",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
           {
@@ -162,26 +192,58 @@ export const ImageUploadFormField: ImageUploadFormFieldType = (loading, control,
               text: translate("common.image_upload_heading"),
               name: "upload_image15",
               control,
-              onClick: onClick
+              onClick: onClick,
             },
           },
-        ]
-      }
-
-    },
-    {
-      containerClass: "flex justify-end mb-0 mt-5",
-      field: {
-        type: Field.button,
-        id: "button",
-        text: "Save",
-        inputType: "submit",
-        className:
-          " rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
-        loading,
+        ],
       },
     },
+    // {
+    //   field: {
+    //     type: Field.div,
+    //     id: "div-field",
+    //     className: "flex items-center space-x-4 mt-[30px]",
+    //     children: [
+    //       {
+    //         containerClass: "mb-0",
+    //         field: {
+    //           type: Field.button,
+    //           id: "button",
+    //           text: `${translate("common.cancel_button")}`,
+    //           inputType: "button",
+    //           className:
+    //             "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[202px] w-fit h-[50px] text-dark hover:bg-none",
+    //           onClick: onClick,
+    //         },
+    //       },
+    //       {
+    //         containerClass: "mb-0",
+    //         field: {
+    //           type: Field.button,
+    //           id: "button",
+    //           text: `${translate("pdf.submit")}`,
+    //           inputType: "submit",
+    //           className:
+    //             "rounded-lg px-4 min-w-[202px] w-fit h-[50px] text-white hover:bg-none",
+    //           loading,
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
 
+    // {
+    //   containerClass: "mb-0 flex justify-end mt-[30px]",
+    //   field: {
+    //     type: Field.button,
+    //     id: "button",
+    //     text: `${translate("pdf.submit")}`,
+    //     inputType: "submit",
+    //     className:
+    //       "rounded-lg px-4 min-w-[202px] w-fit h-[50px] text-white hover:bg-none",
+    //     loading,
+    //   },
+    // },
   ];
 
   return formField;

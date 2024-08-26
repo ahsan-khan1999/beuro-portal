@@ -16,14 +16,13 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 gap-4",
+        className: "grid grid-cols-1 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.receipt_title"),
               htmlFor: "receiptContent.title",
@@ -35,12 +34,12 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               inputType: "text",
               id: "receiptContent.title",
               name: "receiptContent.title",
-              placeholder: "Text for Receipt",
+              placeholder: translate("content.details.receipt_title"),
               register,
             },
           },
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.receipt_description"),
               htmlFor: "receiptContent.description",
@@ -53,14 +52,11 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.description",
 
               control,
-              value:
-                contentDetails?.id &&
-                contentDetails?.receiptContent?.description,
             },
           },
 
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.email_body"),
               htmlFor: "receiptContent.body",
@@ -73,12 +69,11 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               name: "receiptContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.receiptContent?.body,
             },
           },
 
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.attachments"),
               htmlFor: "receiptContent.attachments",
@@ -101,21 +96,21 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
     },
 
     {
-      containerClass: "mt-6",
+      containerClass: "my-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px]",
         children: [
           {
-            containerClass: "mb-0",
+            containerClass: "mb-0 ",
             field: {
               type: Field.button,
               id: "button",
               text: `${translate("content.details.back_button")}`,
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
               onClick: onClick,
             },
           },
@@ -127,7 +122,7 @@ export const AddReceiptContentDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.save_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] !mt-5 h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

@@ -26,7 +26,8 @@ import { readLead, setLeads } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { createOffer } from "@/api/slices/offer/offerSlice";
 import { getKeyByValue } from "@/utils/auth.util";
-import { staticEnums } from "../../utils/static";
+import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
+import { ContentTableRowTypes } from "@/types/content";
 
 export const useAddOfferDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
@@ -36,17 +37,20 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
-  const { content } = useAppSelector((state) => state.content);
 
+  const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
 
   const onCancel = () => {
     router.pathname = "/offers";
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
+
   const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,
@@ -56,32 +60,36 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     watch,
     reset,
     setValue,
+    resetField,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
   const type = watch("type");
-
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
   const leadID = watch("leadID");
 
-  useMemo(() => {
+  useEffect(() => {
     if (type && customerID)
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID, paginate: 0 } },
+          params: {
+            filter: { customerID: customerID, status: [0, 1, 3] },
+            paginate: 0,
+          },
         })
       );
   }, [customerID]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (offerDetails?.id) {
       reset({
         type: "Existing Customer",
@@ -96,12 +104,19 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
         mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
         content: offerDetails?.content?.id,
-        title: offerDetails?.title,
+        title:
+          offerDetails?.title || offerDetails?.content?.offerContent?.title,
         address: offerDetails?.leadID?.customerDetail?.address,
         date: offerDetails?.date,
+        gender:
+          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.time,
       });
+    } else {
+      setValue("type", "New Customer");
     }
   }, [offerDetails?.id]);
+
   const {
     fields: testFields,
     append,
@@ -113,27 +128,49 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if (selectedCustomers) {
+      dispatch(setCustomerDetails(selectedCustomers));
 
-    reset({
-      ...selectedCustomers[0],
-      customerID: selectedCustomers[0]?.id,
-      type: type,
-      content: selectedContent,
-      leadID: "",
-    });
+      reset({
+        ...selectedCustomers,
+        customerID: selectedCustomers?.id,
+        type: type,
+        content: selectedContent,
+        leadID: "",
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+      });
+    }
   };
+
   const handleContentSelect = () => {};
+
   useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
-    if (filteredContent)
-      setValue("title", filteredContent?.offerContent?.title);
-  }, [selectedContent]);
+    if (offerDetails?.id) {
+      if (filteredContent)
+        setValue("title", filteredContent?.offerContent?.title);
+    } else {
+      const filteredLead = lead?.find((item) => item.id === leadID);
+      if (filteredLead) {
+        const content = filteredLead?.requiredService as ContentTableRowTypes;
+
+        if (selectedContent !== content?.id) {
+          setValue("content", selectedContent);
+          setValue("title", filteredContent?.offerContent?.title);
+        } else {
+          setValue("content", content?.id);
+          setValue("title", content?.offerContent?.title);
+        }
+      } else {
+        setValue("content", selectedContent);
+        setValue("title", filteredContent?.offerContent?.title);
+      }
+    }
+  }, [selectedContent, leadID]);
+
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -154,6 +191,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     },
     setValue
   );
+
   useMemo(() => {
     if (type === "New Customer") {
       reset({
@@ -168,7 +206,37 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
+        // title: null,
+        gender: null,
       });
+    } else if (type === "Existing Customer" && offerDetails?.id) {
+      reset({
+        type: "Existing Customer",
+        customerID: offerDetails?.leadID?.customerID,
+        leadID: offerDetails?.leadID?.id,
+        customerType: getKeyByValue(
+          staticEnums["CustomerType"],
+          offerDetails?.leadID?.customerDetail?.customerType
+        ),
+        fullName: offerDetails?.leadID?.customerDetail?.fullName,
+        email: offerDetails?.leadID?.customerDetail?.email,
+        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
+        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
+        content: offerDetails?.content?.id,
+        title:
+          offerDetails?.title || offerDetails?.content?.offerContent?.title,
+        address: offerDetails?.leadID?.customerDetail?.address,
+        date: offerDetails?.date,
+        gender:
+          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.time,
+      });
+    } else if (type === "Existing Customer" && !offerDetails?.id) {
+      dispatch(setLeads([]));
+      dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+      setValue("content", null);
+      setValue("title", null);
+      setValue("leadID", null);
     }
   }, [type]);
 
@@ -177,9 +245,10 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
-    offerDetails,
+    loading,
     control
   );
+
   const submit = AddOfferDetailsSubmitFormField(
     register,
     loading,
@@ -194,10 +263,11 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       const apiData: any = {
         ...data,
         step: 1,
-        offerId: offerDetails?.id,
-        stage: ComponentsType.addressAdded,
+        offerId: offerDetails?.id === "convert" ? null : offerDetails?.id,
+        stage: ComponentsType?.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
+
       if (!apiData?.isLeadCreated) delete apiData["leadID"];
       const res = await dispatch(
         createOffer({ data: apiData, router, setError, translate })
@@ -214,18 +284,20 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
               },
             ])
           );
-          onHandleNext(ComponentsType.addressAdded);
+          onHandleNext(ComponentsType?.addressAdded);
         }
-        onHandleNext(ComponentsType.addressAdded);
+        onHandleNext(ComponentsType?.addressAdded);
       }
     } else {
-      const apiData = {
+      const apiData: any = {
         ...data,
         step: 1,
         offerId: null,
-        stage: ComponentsType.addressAdded,
+        stage: ComponentsType?.addressAdded,
         isLeadCreated: data?.leadID ? true : false,
       };
+      if (!apiData?.isLeadCreated) delete apiData["leadID"];
+
       const res = await dispatch(
         createOffer({ data: apiData, router, setError, translate })
       );
@@ -241,5 +313,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     errors,
     error,
     translate,
+    offerDetails,
   };
 };

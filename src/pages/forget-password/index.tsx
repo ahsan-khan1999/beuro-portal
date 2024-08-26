@@ -1,6 +1,8 @@
 import DescriptionSection from "@/components/loginAndRegister/DescriptionSection";
 import ForgetPasswordEmail from "@/components/loginAndRegister/login/ForgetPasswordEmail";
 import { LoginFlowCard } from "@/layout/LoginFlowCard";
+import { Locale } from "@/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
 const Index = () => {
@@ -13,3 +15,10 @@ const Index = () => {
 };
 
 export default Index;
+
+
+export const getStaticProps = async ({ locale }: Locale) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

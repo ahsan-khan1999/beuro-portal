@@ -1,22 +1,8 @@
-import React, { useEffect } from "react";
-import Chart from "chart.js/auto";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import React from "react";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
+import { DashboardCardProps } from "@/types/dashboard";
 
-interface DashboardCard {
-  icon: string | StaticImport;
-  alt: string;
-  backgroundColor: string;
-  title: string;
-  subTitle: string;
-  id: string;
-  salePercent: string;
-  chartPointColor: string;
-  open: string;
-  closed: string;
-  expired: string;
-  route: Function;
-}
 const DashboardCard = ({
   icon,
   alt,
@@ -30,68 +16,73 @@ const DashboardCard = ({
   closed,
   expired,
   route,
-}: DashboardCard) => {
-  const datatest2 = {
-    labels: ["Jan", "Feb", "Mar", "Apr"],
-    datasets: [
-      {
-        label: "",
-        data: [10, 11.5, 11, 12.5],
-        tension: 0.4,
-        borderColor: "white",
-        backgroundColor: chartPointColor,
-        // borderColor: Utils.CHART_COLORS.red,
-        // backgroundColor: Utils.CHART_COLORS.red,
-      },
-    ],
-  };
-  useEffect(() => {
-    var existingChart = Chart.getChart(id);
-    if (existingChart) {
-      existingChart.destroy();
-    }
-    //@ts-expect-error
-    const ctx = document.getElementById(id)?.getContext("2d");
+}: DashboardCardProps) => {
+  const { t: translate } = useTranslation();
+  // const datatest2 = {
+  //   labels: [
+  //     `${translate("admin.months.jan")}`,
+  //     `${translate("admin.months.feb")}`,
+  //     `${translate("admin.months.mar")}`,
+  //     `${translate("admin.months.apr")}`,
+  //   ],
+  //   datasets: [
+  //     {
+  //       label: "",
+  //       data: [10, 11.5, 11, 12.5],
+  //       tension: 0.4,
+  //       borderColor: "white",
+  //       backgroundColor: chartPointColor,
+  //       // borderColor: Utils.CHART_COLORS.red,
+  //       // backgroundColor: Utils.CHART_COLORS.red,
+  //     },
+  //   ],
+  // };
+  // useEffect(() => {
+  //   var existingChart = Chart.getChart(id);
+  //   if (existingChart) {
+  //     existingChart.destroy();
+  //   }
+  //   //@ts-expect-error
+  //   const ctx = document.getElementById(id)?.getContext("2d");
 
-    const wavesChart2 = new Chart(ctx, {
-      type: "line",
-      data: datatest2,
-      //@ts-expect-error
-      fill: true,
-      options: {
-        plugins: {
-          legend: {
-            display: false, // Hide the legend
-          },
-        },
+  //   const wavesChart2 = new Chart(ctx, {
+  //     type: "line",
+  //     data: datatest2,
+  //     //@ts-expect-error
+  //     fill: true,
+  //     options: {
+  //       plugins: {
+  //         legend: {
+  //           display: false, // Hide the legend
+  //         },
+  //       },
 
-        scales: {
-          x: {
-            display: false,
-          },
-          y: {
-            display: false,
-          },
-        },
-      },
-    });
+  //       scales: {
+  //         x: {
+  //           display: false,
+  //         },
+  //         y: {
+  //           display: false,
+  //         },
+  //       },
+  //     },
+  //   });
 
-    return () => {
-      wavesChart2.destroy();
-    };
-  }, []);
+  //   return () => {
+  //     wavesChart2.destroy();
+  //   };
+  // }, []);
 
   return (
     <div
-      onClick={() => route()}
+      onClick={() => route?.()}
       className={`cursor-pointer rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
     >
       <div className="flex items-center mb-8">
-      
         <Image src={icon} alt={alt} />
         <div className="ml-2 space-y-1">
           <h3 className="text-xlMonthly text-white font-semibold ">{title}</h3>
-          <span className="text-xs text-white  ">{subTitle}</span>
+          <span className="text-xs text-white">{subTitle}</span>
         </div>
       </div>
       <div className="flex items-center justify-between">
@@ -99,7 +90,7 @@ const DashboardCard = ({
           <span className="text-xl font-medium text-white">{id}</span>
           <span className="text-white ml-[10px]">{salePercent}</span>
         </div>
-        <canvas id={id} className="max-w-[78px] max-h-[50px]" />
+        {/* <canvas id={id} className="max-w-[78px] max-h-[50px]" /> */}
       </div>
       <div className="flex items-center justify-between mt-8">
         <div className="flex items-center">

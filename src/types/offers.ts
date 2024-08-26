@@ -1,8 +1,11 @@
 import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { CustomerAddress, Customers } from "./customer";
 import { AddressID, Lead } from "./leads";
-import { DateRangeProps, User } from ".";
+import { DateRangeProps, TemplateType, User } from ".";
 import { ContentTableRowTypes } from "./content";
+import { EmailTemplate } from "./settings";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
+import { staticEnums } from "@/utils/static";
 
 // types for offers
 export interface OffersTableRowTypes {
@@ -12,6 +15,7 @@ export interface OffersTableRowTypes {
   email: string;
   phoneNumber: string;
   date: DateRangeProps[];
+  time: string;
   mobileNumber: string;
   status: string;
   editImg?: string;
@@ -38,12 +42,15 @@ export interface OffersTableRowTypes {
   requiredService: string;
   additionalDetails: string;
   createdBy: User;
-  discountType: 0 | 1;
-  emailStatus: "Draft" | "Sent" | "Failed";
+  discountType: keyof (typeof staticEnums)["DiscountType"];
+  mail: {
+    mailStatus: "open" | "failed" | "pending";
+  };
+  emailStatus: "Pending" | "Sent" | "Failed";
   isDiscount: boolean;
   isTax: boolean;
   offerNumber: string;
-  offerStatus: "Open" | "Signed" | "Expired" | "Rejected";
+  offerStatus: "Open" | "Accepted" | "Expired" | "Rejected";
   paymentType: "Cash" | "Online";
   taxType: "Include" | "Exclude";
   taxAmount: number;
@@ -56,8 +63,18 @@ export interface OffersTableRowTypes {
   total: number;
   discountAmount: number;
   discountDescription: string;
-  signature?: string
-  attachement?: string
+  signature?: string;
+  attachement?: string;
+  isNoteCreated: boolean;
+  isImageAdded: boolean;
+  reason: string;
+}
+
+export interface PublicOffersTableRowTypes {
+  Offer: OffersTableRowTypes;
+  Template: TemplateType;
+  Mail: EmailTemplate;
+  setting: SystemSetting;
 }
 
 interface Address {
@@ -164,7 +181,15 @@ export interface ServiceList {
   totalPrice: number;
   serviceType: string;
   description: string;
-  count: number;
+  count: number | string;
+  pagebreak: boolean;
+  discount: number;
+  discountType?: keyof (typeof staticEnums)["DiscountType"];
+  discountPercentage: number;
+  updatedDiscountAmount: number;
+  isDiscount?: boolean;
+  totalDiscount?: number;
+  isGlobalDiscount?: boolean;
 }
 export interface EmailStatus {
   Pending: number;
@@ -223,25 +248,31 @@ export interface OfferDetailCardProps {
   handleSendEmail: () => void;
   isSendEmail: boolean;
   handleSendByPost: () => void;
-  loading:boolean
+  loading: boolean;
+  onFileUpload: (id: string) => void;
 }
-
 
 export interface OfferActivity {
   id: string;
   offerNumber: string;
   offer: string;
   discount: Discounts[];
-  activity: Activity[]
-
+  activity: Activity[];
 }
 export interface Discounts {
   totalPrice: number;
   amount: number | null;
   percentage: number | null;
-  dateTime: string
+  dateTime: string;
 }
 export interface Activity {
   editedBy: string;
-  dateTime: string
+  dateTime: string;
+}
+
+export interface InvoiceDetailCardProps {
+  handleSendEmail: () => void;
+  isSendEmail: boolean;
+  handleSendByPost: () => void;
+  loading: boolean;
 }

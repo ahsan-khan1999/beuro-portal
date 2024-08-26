@@ -4,8 +4,9 @@ import { useState } from "react";
 export const useSlider = ({
   images,
   noOfThumbNails,
+  activeIndex
 }: SliderImagesDataProps): ImageSliderHook => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(activeIndex || 0);
   const [thumbnailStartIndex, setThumbnailStartIndex] = useState(0);
 
   const selectedImage = images[currentIndex]?.imageSrc;

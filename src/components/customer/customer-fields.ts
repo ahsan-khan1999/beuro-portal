@@ -1,7 +1,7 @@
 import { Field } from "@/enums/form";
-import { DivProps, FormField, GenerateCustomerFormField } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { DivProps, FormField, GenerateCustomerFormField } from "@/types";
 
 export const customerDetailsFormField: GenerateCustomerFormField = (
   register,
@@ -10,37 +10,38 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
   handleUpdateCancel,
   { customer: customerDetails, customerType: customerType },
   control,
+  idAddNewCustomer,
   setValue
 ) => {
   const { t: translate } = useTranslation();
   let formField: FormField[] = [
     {
-      containerClass: "mt-6",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
             label: {
               text: `${translate("customers.details.customer_type")}`,
               htmlFor: "customerType",
-              className: "mb-[10px] ",
+              className: "mb-[10px]",
             },
             field: {
               className: `!px-4 !border-[#BFBFBF] ${
                 !isUpdate && "!border-light"
-              } focus:!border-primary `,
+              } focus:!border-primary`,
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType)?.slice(1).map(
-                (item, key) => ({
+              options: Object.keys(staticEnums.CustomerType)
+                ?.slice(1)
+                .map((item, key) => ({
                   value: item,
-                  label: item,
-                })
-              ),
+                  label: translate(`customer_type.${item}`),
+                })),
 
               control,
               disabled: isUpdate,
@@ -48,7 +49,31 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
           },
           {
-            containerClass: "mb-0 w-full xl:col-span-2",
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("customers.details.gender")}`,
+              htmlFor: "gender",
+              className: "mb-[10px]",
+            },
+            field: {
+              className: `!px-4 !border-[#BFBFBF] ${
+                !isUpdate && "!border-light"
+              } focus:!border-primary`,
+              type: Field.select,
+              id: "gender",
+              name: "gender",
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
+
+              control,
+              disabled: isUpdate,
+              value: "",
+            },
+          },
+          {
+            containerClass: "mb-0 w-full xl:col-span-1",
             label: {
               text: `${translate("customers.details.full_name")}`,
               htmlFor: "fullName",
@@ -56,12 +81,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "fullName",
               name: "fullName",
-
-              placeholder: "Please Enter Your Name",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.name"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -74,12 +100,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF]  focus:!border-primary",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "email",
               name: "email",
               inputType: "email",
-
-              placeholder: "Please Enter Email Address",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.email"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -93,13 +120,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
+              type: Field.input,
               className:
-                " !border-[#BFBFBF] focus:!border-primary cursor-default",
+                "!px-4 !border-[#BFBFBF] focus:!border-primary cursor-default",
               id: "phoneNumber",
               name: "phoneNumber",
-              country: "ch",
-              control,
+              inputType: "tel",
+              register,
               disabled: isUpdate,
               value: customerDetails && customerDetails.phoneNumber,
             },
@@ -112,12 +139,12 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "mb-[10px]",
             },
             field: {
-              type: Field.phone,
-              className: "  !border-[#BFBFBF]  focus:!border-primary",
+              type: Field.input,
+              inputType: "tel",
+              className: "!px-4  !border-[#BFBFBF]  focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              country: "ch",
-              control,
+              register,
               value: customerDetails && customerDetails.mobileNumber,
               disabled: isUpdate,
             },
@@ -126,17 +153,18 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
     },
     {
-      containerClass: "my-5",
+      containerClass: "mt-5",
       label: {
         text: `${translate("customers.details.address_details")}`,
         htmlFor: "div",
-        className: "mb-[10px] text-[#8F8F8F]",
+        className: "mb-[10px] text-[#1E1E1E] text-base font-semibold",
       },
 
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -151,8 +179,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               inputType: "text",
               id: "address.streetNumber",
               name: "address.streetNumber",
-
-              placeholder: "Please Enter Street Number",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.street"
+              )}`,
               register,
               disabled: isUpdate,
             },
@@ -167,12 +196,13 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4  !border-[#BFBFBF] focus:!border-primary",
-
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
-              placeholder: "Enter Your Post Code",
+              placeholder: `${translate(
+                "customers.add_customer_placeholders.post_code"
+              )}`,
 
               register,
               disabled: isUpdate,
@@ -185,18 +215,28 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
+            // field: {
+            //   className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+            //   type: Field.select,
+            //   id: "address.country",
+            //   name: "address.country",
+            //   options: Object.keys(staticEnums.Country).map((item) => ({
+            //     value: item,
+            //     label: translate(`countries.${item}`),
+            //   })),
+            //   control,
+            //   disabled: isUpdate,
+            //   value: Object.keys(staticEnums.Country)[0],
+            // },
+
             field: {
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              type: Field.select,
+              type: Field.input,
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+              inputType: "text",
               id: "address.country",
               name: "address.country",
-              options: Object.keys(staticEnums.Country).map((item) => ({
-                value: item,
-                label: item,
-              })),
-              control,
+              register,
               disabled: isUpdate,
-              value: "",
             },
           },
         ],
@@ -207,7 +247,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px] mt-8",
+        className: "flex justify-end items-center space-x-[18px] my-[30px]",
         children: [
           {
             field: {
@@ -216,7 +256,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               text: `${translate("customers.details.cancel_button")}`,
               inputType: "button",
               onClick: handleUpdateCancel,
-              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 w-[92px] h-[50px] text-dark hover:bg-none ${
+              className: `rounded-lg border border-[#C7C7C7] bg-white px-4 min-w-[92px] h-[50px] text-dark hover:bg-none ${
                 isUpdate && "hidden"
               }`,
             },
@@ -225,9 +265,11 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             field: {
               type: Field.button,
               id: "button",
-              text: `${translate("customers.details.save_changes_button")}`,
+              text: idAddNewCustomer
+                ? `${translate("customers.details.save_button")}`
+                : `${translate("customers.details.save_changes_button")}`,
               inputType: "submit",
-              className: `rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ${
+              className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ${
                 isUpdate && "hidden"
               }`,
               loading,
@@ -237,6 +279,7 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
       },
     },
   ];
+
   const fieldIndex = formField.findIndex(
     (field) =>
       field?.field?.type === Field.div &&

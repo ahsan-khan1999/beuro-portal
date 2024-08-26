@@ -7,6 +7,7 @@ import TableHeading from "./table/TableHeading";
 import TableRow from "./table/TableRow";
 import usePlans from "@/hooks/admin/plans/usePlans";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Plans() {
   const {
@@ -20,28 +21,30 @@ export default function Plans() {
     setFilter,
     handleDelete,
     renderModal,
+    currentPage,
   } = usePlans();
 
   const CurrentComponent = useEmptyStates(
     <TableRow currentPageRows={currentPageRows} handleDelete={handleDelete} />,
-    currentPageRows.length > 0,
+    currentPageRows?.length > 0,
     loading
   );
 
   return (
     <Layout>
       <TableFunctions />
-      <TableLayout>
-        <TableHeading />
-        {CurrentComponent}
-      </TableLayout>
-      {currentPageRows.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeading />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       {renderModal()}
     </Layout>
   );

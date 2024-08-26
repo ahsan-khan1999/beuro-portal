@@ -13,7 +13,8 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 lg:grid-cols-2 gap-y-5   lg:gap-x-[60px] ",
+        className:
+          "grid grid-cols-1 lg:grid-cols-2 gap-y-5 lg:gap-x-[60px] rounded-t-lg px-2 pt-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -30,7 +31,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailDriver",
               name: "mailDriver",
-              placeholder: "Mail Driver",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_driver"
+              )}`,
               register,
             },
           },
@@ -38,7 +41,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
             containerClass: "mb-0",
             label: {
               text: `${translate(
-                "setting.mail_setting.mail_form_fields.mail_driver"
+                "setting.mail_setting.mail_form_fields.mail_host"
               )}`,
               htmlFor: "mailHost",
               className: "mb-[10px]",
@@ -49,7 +52,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailHost",
               name: "mailHost",
-              placeholder: "Mail Host",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_host"
+              )}`,
               register,
             },
           },
@@ -68,7 +73,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailPort",
               name: "mailPort",
-              placeholder: "Mail Port",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_port"
+              )}`,
               register,
             },
           },
@@ -87,7 +94,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailEncryption",
               name: "mailEncryption",
-              placeholder: "Mail Encryption",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_encryption"
+              )}`,
               register,
             },
           },
@@ -106,7 +115,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailUserName",
               name: "mailUserName",
-              placeholder: "Mail Username",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_user"
+              )}`,
               register,
             },
           },
@@ -125,7 +136,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailPassword",
               name: "mailPassword",
-              placeholder: "Mail Password",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_password"
+              )}`,
               register,
             },
           },
@@ -144,7 +157,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailFromAddress",
               name: "mailFromAddress",
-              placeholder: "Mail From Address",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_address"
+              )}`,
               register,
             },
           },
@@ -163,7 +178,9 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
               inputType: "text",
               id: "mailFromName",
               name: "mailFromName",
-              placeholder: "Mail From Name",
+              placeholder: `${translate(
+                "admin.settings.placeholders.mail_name"
+              )}`,
               register,
             },
           },
@@ -172,7 +189,7 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
     },
 
     {
-      containerClass: "mb-0 mt-[25px]",
+      containerClass: "mb-0 pt-[25px] rounded-b-lg px-2 bg-[#EDF4FF]",
       label: {
         text: `${translate("setting.mail_setting.mail_form_fields.email")}`,
         htmlFor: "testingMail",
@@ -188,27 +205,29 @@ export const ChangeMailSettingFormField: GenerateChangeMailSettingFormField = (
       },
     },
     {
-      containerClass: "mt-2",
+      containerClass: "rounded-b-lg px-2 pb-3 pt-2 bg-[#EDF4FF]",
       field: {
         type: Field.input,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         inputType: "email",
         id: "testingMail",
         name: "testingMail",
-        placeholder: "Mail From Address",
+        placeholder: `${translate(
+          "admin.settings.placeholders.email_from_address"
+        )}`,
         register,
       },
     },
 
     {
-      containerClass: "mb-0 mt-[30px]",
+      containerClass: "mb-0 mt-[30px] flex items-center justify-end",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("setting.save_setting")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
         loading,
       },
     },

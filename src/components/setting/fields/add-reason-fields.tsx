@@ -10,7 +10,8 @@ export const addReasonFormField: GenerateAddReasonFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "mt-[18px] mb-0 col-span-2",
+      containerClass:
+        "mt-[15px] mb-0 col-span-2 rounded-lg px-2 py-3 bg-[#EDF4FF]",
       label: {
         text: `${translate(
           "setting.follow_up_setting.add_follow_up.add_label"
@@ -20,7 +21,7 @@ export const addReasonFormField: GenerateAddReasonFormField = (
       },
       field: {
         type: Field.input,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         inputType: "text",
         id: "reason",
         name: "reason",
@@ -39,7 +40,7 @@ export const addReasonFormField: GenerateAddReasonFormField = (
         )}`,
         inputType: "submit",
         className:
-          "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
       },
     },
   ];

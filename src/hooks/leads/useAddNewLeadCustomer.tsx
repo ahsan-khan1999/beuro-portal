@@ -1,22 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  FieldValues,
-  SubmitHandler,
-  UseFormRegister,
-  useForm,
-} from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNewCustomerLeadFormField } from "@/components/leads/fields/Add-customer-lead-fields";
 import { generateAddNewLeadCustomerDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   readCustomer,
   setCustomerDetails,
 } from "@/api/slices/customer/customerSlice";
-import { createLead, updateLead } from "@/api/slices/lead/leadSlice";
+import { createLead } from "@/api/slices/lead/leadSlice";
 import { updateQuery } from "@/utils/update-query";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -29,14 +24,17 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
+
   useEffect(() => {
     dispatch(readCustomer({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
   const onCancel = () => {
     router.pathname = "/leads";
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
+
   const schema = generateAddNewLeadCustomerDetailsValidation(translate);
 
   const {
@@ -52,28 +50,33 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
   const customerType = watch("customerType");
+  const customerID = watch("customerID");
 
   const type = watch("type");
+  const gender = watch("gender");
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if (selectedCustomers) {
+      dispatch(setCustomerDetails(selectedCustomers));
 
-    reset({
-      ...selectedCustomers[0],
-      type: type,
-    });
+      reset({
+        ...selectedCustomers,
+        type: type,
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+        customerID: id,
+      });
+    }
   };
 
-  useMemo(() => {
+  useEffect(() => {
     if (leadDetails.id) {
       reset({
         fullName: leadDetails.customerDetail?.fullName,
         type: leadDetails.type,
         customer: leadDetails.customerID,
+        customerID: leadDetails.customerID,
 
         customerType: getKeyByValue(
           staticEnums["CustomerType"],
@@ -84,7 +87,10 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
         address: leadDetails?.customerDetail?.address,
         companyName: leadDetails?.customerDetail?.companyName,
+        gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
       });
+    } else {
+      setValue("type", "New Customer");
     }
   }, [leadDetails.id]);
 
@@ -100,6 +106,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       customerDetails,
       onCancel,
       leadDetails,
+      gender,
     },
     setValue
   );
@@ -112,8 +119,8 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         leadId: leadDetails?.id,
         stage: ComponentsType.addressAdd,
       };
-      if (leadDetails?.customerID) apiData = { ...apiData, customerID: leadDetails?.customerID }
-
+      if (leadDetails?.customerID)
+        apiData = { ...apiData, customerID: leadDetails?.customerID };
       const res = await dispatch(
         createLead({ data: apiData, router, setError, translate })
       );
@@ -127,6 +134,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       if (res?.payload) onHandleNext(ComponentsType.addressAdd);
     }
   };
+
   return {
     fields,
     onSubmit,

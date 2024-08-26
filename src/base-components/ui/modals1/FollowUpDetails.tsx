@@ -7,45 +7,44 @@ import { formatAddress } from "@/utils/utility";
 import moment from "moment";
 import { useTranslation } from "next-i18next";
 
-type details = {
+export interface details {
   label: string;
-  value: string;
-};
+  value?: string;
+}
 
 const FollowUpDetails = ({
   onClose,
   handleAddPostPonedNote,
   handleAddRemarks,
   status,
-  followUpDetails
+  followUpDetails,
 }: FollowUpDetailsProps) => {
-
   const { t: translate } = useTranslation();
 
   const detailsData: details[] = [
     {
-      label: "Name",
+      label: `${translate("follow_up.follow_up_details.name")}`,
       value: followUpDetails?.customer?.fullName,
     },
     {
-      label: "Customer Type",
+      label: `${translate("follow_up.follow_up_details.customer_type")}`,
       value: followUpDetails?.customer?.customerType,
     },
     {
-      label: "Email Address",
+      label: `${translate("follow_up.follow_up_details.email")}`,
       value: followUpDetails?.customer?.email,
     },
     {
-      label: "Phone Number",
+      label: `${translate("follow_up.follow_up_details.phone_number")}`,
       value: followUpDetails?.customer?.phoneNumber,
     },
 
     {
-      label: "Mobile Number",
+      label: `${translate("follow_up.follow_up_details.mobile_number")}`,
       value: followUpDetails?.customer?.mobileNumber,
     },
     {
-      label: "Address Details",
+      label: `${translate("follow_up.follow_up_details.address_detail")}`,
       value: formatAddress(followUpDetails?.customer?.address),
     },
   ];
@@ -67,19 +66,19 @@ const FollowUpDetails = ({
 
   const leadsDetails: details[] = [
     {
-      label: "Required Service ",
+      label: `${translate("follow_up.follow_up_details.required_service")}`,
       value: followUpDetails?.lead?.leadStatus,
     },
     {
-      label: "Desire Date and time",
+      label: `${translate("follow_up.follow_up_details.desire_date")}`,
       value: moment(followUpDetails?.lead?.createdAt).format("DD/MM/YYY hh:mm"),
     },
     {
-      label: "Flexibility",
+      label: `${translate("follow_up.follow_up_details.flexibility")}`,
       value: moment(followUpDetails?.lead?.createdAt).format("DD/MM/YYY hh:mm"),
     },
     {
-      label: "Budget",
+      label: `${translate("follow_up.follow_up_details.budget")}`,
       value: followUpDetails?.lead?.leadStatus,
     },
   ];
@@ -87,19 +86,19 @@ const FollowUpDetails = ({
   const addressDetails: details[] = [
     {
       label: translate("follow_up.address_details.street_no"),
-      value: followUpDetails?.customer?.address?.streetNumber,
+      value: followUpDetails?.lead?.customerDetail?.address?.streetNumber,
     },
     {
       label: translate("follow_up.address_details.post_code"),
-      value: followUpDetails?.customer?.address?.postalCode,
+      value: followUpDetails?.lead?.customerDetail?.address?.postalCode,
     },
     {
       label: translate("follow_up.address_details.country"),
-      value: followUpDetails?.customer?.address?.country,
+      value: followUpDetails?.lead?.customerDetail?.address?.country,
     },
     {
       label: translate("follow_up.address_details.description"),
-      value: followUpDetails?.customer?.address?.country,
+      value: followUpDetails?.lead?.customerDetail?.address?.description,
     },
   ];
 
@@ -118,13 +117,13 @@ const FollowUpDetails = ({
           />
 
           <div className="flex flex-col">
-            <section className="flex justify-between items-center mb-5">
+            <section className="flex justify-between items-center mb-5 border-b border-b-[#000] border-opacity-10 pb-5">
               <h2 className="font-medium text-2xl text-black">
                 {translate("follow_up.main_heading")}
               </h2>
               <div className="flex items-center gap-x-[14px] mr-5">
                 {/*@ts-ignore  */}
-                {!followUpDetails?.isPostponed &&
+                {!followUpDetails?.isPostponed && (
                   <>
                     <span
                       onClick={() => handleAddPostPonedNote()}
@@ -145,9 +144,10 @@ const FollowUpDetails = ({
                       {translate("follow_up.post_pond_button")}
                     </span>
                   </>
-                }
-                {
-                  !followUpDetails?.isCompleted && <span
+                )}
+
+                {!followUpDetails?.isCompleted && (
+                  <span
                     onClick={() => handleAddRemarks()}
                     className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-pointer "
                   >
@@ -177,9 +177,9 @@ const FollowUpDetails = ({
                     </svg>
                     {translate("follow_up.mark_as_complete")}
                   </span>
-                }
-                {
-                  followUpDetails.isCompleted &&
+                )}
+
+                {followUpDetails.isCompleted && (
                   <span className="border border-[#C7C7C7] rounded-lg flex items-center gap-x-3 pl-4 pr-2 py-[6px] cursor-default ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -211,29 +211,29 @@ const FollowUpDetails = ({
                     </svg>
                     {translate("follow_up.completed_button")}
                   </span>
-                }
+                )}
               </div>
             </section>
-
-            <hr className="opacity-10" />
 
             {followUpDetails?.isCompleted ? (
               <div className="flex flex-col gap-y-1 mt-1">
                 <p className="text-[#4D4D4D] text-sm font-normal">
-                  Your Remarks
+                  {translate("follow_up.follow_up_details.remark")}
                 </p>
                 <p className="text-[#484848] text-base font-normal">
                   {followUpDetails?.completeRemarks}
                 </p>
               </div>
-            ) : followUpDetails?.isPostponed ? <div className="flex flex-col gap-y-1 mt-1">
-              <p className="text-[#4D4D4D] text-sm font-normal">
-                Your Postponed Note
-              </p>
-              <p className="text-[#484848] text-base font-normal">
-                {followUpDetails?.postPonedNote}
-              </p>
-            </div> : null}
+            ) : followUpDetails?.isPostponed ? (
+              <div className="flex flex-col gap-y-1 mt-1">
+                <p className="text-[#4D4D4D] text-sm font-normal">
+                  {translate("follow_up.follow_up_details.postpond_note")}
+                </p>
+                <p className="text-[#484848] text-base font-normal">
+                  {followUpDetails?.postPonedNote}
+                </p>
+              </div>
+            ) : null}
 
             <section className="grid grid-cols-2 mt-[30px] mb-[18px]">
               {/* customer details */}
@@ -243,7 +243,8 @@ const FollowUpDetails = ({
                     {translate("follow_up.customer_detail_heading")}
                   </h2>
                   <span className="text-lg font-medium text-[#4A13E7]">
-                    ID: {followUpDetails?.customer?.refID}
+                    {translate("follow_up.follow_up_details.id")}:{" "}
+                    {followUpDetails?.customer?.refID}
                   </span>
                 </article>
 
@@ -256,7 +257,7 @@ const FollowUpDetails = ({
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
                         {item.value}
                       </span>
                     </div>
@@ -264,14 +265,13 @@ const FollowUpDetails = ({
                 </div>
               </div>
 
-              {/* follow up details */}
               <div className="flex flex-col pl-[30px]">
                 <h2 className="text-lg font-medium text-[#393939]">
                   {translate("follow_up.follow_up_detail_heading")}
                 </h2>
 
-                <div className="grid grid-cols-2 gap-x-3 mt-[22px]">
-                  {/* {followUpDetails.map((item, index) => (
+                {/* <div className="grid grid-cols-2 gap-x-3 mt-[22px]"> */}
+                {/* {followUpDetails.map((item, index) => (
                     <div
                       className="flex flex-col gap-y-[10px] mb-5"
                       key={index}
@@ -284,49 +284,44 @@ const FollowUpDetails = ({
                       </span>
                     </div>
                   ))} */}
-                </div>
+                {/* </div> */}
 
                 <div className="flex flex-col gap-y-[10px] mb-5">
                   <p className="text-sm font-normal text-[#4D4D4D]">
                     {translate("follow_up.additional_detail_heading")}
                   </p>
-                  <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base">
+                  <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base min-h-[58px]">
                     {followUpDetails?.additionalDetails}
                   </p>
                 </div>
               </div>
             </section>
 
-            <hr className="opacity-10" />
-
-            {/* Below part */}
-            <section className="mt-3 ">
-              {/* Leads details */}
+            <section className="mt-3 border-t border-[#000] border-opacity-10 pt-3">
               <div className="flex flex-col">
                 <article className="flex gap-x-[50px] items-center">
                   <h2 className="text-lg font-medium text-[#393939]">
                     {translate("follow_up.lead_detail_heading")}
                   </h2>
                   <span className="text-lg font-medium text-[#4A13E7]">
-                    ID: {followUpDetails?.lead?.refID}
+                    {translate("follow_up.follow_up_details.id")}:{" "}
+                    {followUpDetails?.lead?.refID}
                   </span>
                 </article>
 
                 <div className="grid grid-cols-4 gap-x-[25px] mt-[23px]">
                   {leadsDetails.map((item, index) => (
-                    <div className="flex flex-col gap-y-[10px] " key={index}>
+                    <div className="flex flex-col gap-y-[10px]" key={index}>
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
                         {item.value}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-
-              {/* Address details */}
               <div className="flex flex-col mt-5">
                 <h2 className="text-base font-normal text-[#8F8F8F]">
                   {translate("follow_up.address_detail_heading")}
@@ -338,7 +333,7 @@ const FollowUpDetails = ({
                       <p className="text-sm font-normal text-[#4D4D4D]">
                         {item.label}
                       </p>
-                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base">
+                      <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] truncate">
                         {item.value}
                       </span>
                     </div>

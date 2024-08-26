@@ -8,6 +8,8 @@ import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import OfferEditImages from "@/components/offers/OfferEditImages";
+import { ContractAditionalEditDetails } from "../edit/editAdditionalDetails";
 
 export enum ComponentsType {
   customer,
@@ -16,23 +18,65 @@ export enum ComponentsType {
   additional,
 }
 
-const ContractDetailsData = ({ loading }: { loading: boolean }) => {
+export interface ContractDetailProps {
+  loading: boolean;
+  shareImgModal: Function;
+  handleImageUpload: (
+    item: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleImageSlider: () => void;
+  onEditAdditionDetail: () => void;
+  isEditing: boolean;
+  onComponentChange: React.Dispatch<React.SetStateAction<boolean>>;
+  onHandleChange: (data: any) => Promise<void>;
+  value: string;
+  onChangeValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ContractDetailsData = ({
+  loading,
+  shareImgModal,
+  handleImageUpload,
+  handleImageSlider,
+  onEditAdditionDetail,
+  isEditing,
+  onComponentChange,
+  onHandleChange,
+  value,
+  onChangeValue,
+}: ContractDetailProps) => {
+  const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<number>(0);
   const { contractDetails } = useAppSelector((state) => state.contract);
-  const { t: translate } = useTranslation();
-
-  useEffect(() => {
-    const elements = document.querySelectorAll("[data-scroll-target]");
-    if (elements.length > 0) {
-      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, []);
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const componentArray = [
-    <OfferDetailsData contractDetails={contractDetails} />,
+    <OfferDetailsData
+      contractDetails={contractDetails}
+      onEditAdditionDetails={onEditAdditionDetail}
+      isEditing={isEditing}
+      onComponentChange={onComponentChange}
+      onHandleChange={onHandleChange}
+      value={value}
+      onChangeValue={onChangeValue}
+    />,
     <AddressDetailsData contractDetails={contractDetails} />,
-    <ServiceDetailsData contractDetails={contractDetails} />,
-    <AdditionalDetails contractDetails={contractDetails} />,
+    <ServiceDetailsData
+      contractDetails={contractDetails}
+      currency={systemSettings?.currency}
+    />,
+    isEditing ? (
+      <ContractAditionalEditDetails
+        onEditAdditionDetails={onEditAdditionDetail}
+        onComponentChange={onComponentChange}
+      />
+    ) : (
+      <AdditionalDetails
+        contractDetails={contractDetails}
+        onComponentChange={onComponentChange}
+      />
+    ),
   ];
 
   const tabSection: tabArrayTypes[] = [
@@ -44,7 +88,7 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
       <path d="M14.854 15C14.3056 15 13.8594 15.4462 13.8594 15.9946C13.8594 16.543 14.3055 16.9892 14.854 16.9892C15.4024 16.9892 15.8486 16.543 15.8486 15.9946C15.8486 15.4462 15.4024 15 14.854 15Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"/>
       <path d="M10.0805 8.63477C9.53211 8.63477 9.08594 9.08094 9.08594 9.62937C9.08594 10.1778 9.53211 10.624 10.0805 10.624C10.629 10.624 11.0752 10.1778 11.0752 9.62937C11.0751 9.08098 10.629 8.63477 10.0805 8.63477Z" fill={isSelected ? "#4A13E7" : "#1E1E1E"/>
     </svg>`,
-      name: `${translate("contracts.tabs_headings.offer_details")}`,
+      name: `${translate("contracts.card_content.heading")}`,
     },
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
@@ -90,31 +134,71 @@ const ContractDetailsData = ({ loading }: { loading: boolean }) => {
     },
   ];
 
+  const scrollHandler = (index: number) => {
+    if (index === 0) {
+      window.scrollTo({ behavior: "smooth", top: 0 });
+    }
+    if (index === 1) {
+      window.scrollTo({ behavior: "smooth", top: 590 });
+    }
+    if (index === 2) {
+      window.scrollTo({ behavior: "smooth", top: 970 });
+    }
+    if (index === 3) {
+      window.scrollTo({ behavior: "smooth", top: 1450 });
+    }
+  };
+
+  useEffect(() => {
+    const elements = document.querySelectorAll("[data-scroll-target]");
+    if (elements.length > 0) {
+      elements[0].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
   return (
-    <div className="flex w-full flex-col xl:flex-row gap-x-6">
-      <div className="grid grid-cols-2 xl:flex xl:flex-col gap-y-4 gap-x-4 w-full xl:w-fit">
-        {tabSection.map((item, index) => (
-          <DetailsTab
-            isSelected={tabType === index}
-            setTabType={setTabType}
+    <>
+      <div className="2xl:fixed mb-5">
+        <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap w-full gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0 ">
+          {tabSection.map((item, index) => (
+            <DetailsTab
+              isSelected={tabType === index}
+              setTabType={setTabType}
+              tabType={tabType}
+              name={item.name}
+              icon={item.icon}
+              selectedTab={index}
+              onScroll={scrollHandler}
+              key={index}
+            />
+          ))}
+        </div>
+
+        <div className="w-full mt-5">
+          <OfferEditImages
+            shareImgModal={shareImgModal}
+            handleImagesUpload={handleImageUpload}
             tabType={tabType}
-            name={item.name}
-            icon={item.icon}
-            selectedTab={index}
+            handleImageSlider={handleImageSlider}
           />
-        ))}
+        </div>
       </div>
 
-      <div className="flex flex-col gap-y-5 w-full h-[480px] xl:mt-0 mt-4 overflow-y-scroll">
+      <div className="overflow-y-auto w-full break-all flex">
+        <div className="max-w-[330px] w-full hidden 2xl:block"></div>
         {loading ? (
-          <LoadingState />
+          <div className="flex justify-center items-center w-full">
+            <LoadingState />
+          </div>
         ) : (
-          componentArray.map((component, index) => (
-            <React.Fragment key={index}>{component}</React.Fragment>
-          ))
+          <div className="flex flex-col gap-y-5 w-full">
+            {componentArray.map((component, index) => (
+              <div key={index}>{component}</div>
+            ))}
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

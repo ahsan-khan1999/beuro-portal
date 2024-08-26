@@ -9,7 +9,7 @@ import { generateEditInvoiceContentDetailsValidation } from "@/validation/conten
 import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { updateContent } from "@/api/slices/content/contentSlice";
 
 export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
@@ -24,7 +24,7 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   const [attachements, setAttachements] = useState<Attachement[]>(
     (contentDetails?.id &&
       transformAttachments(contentDetails?.invoiceContent?.attachments)) ||
-      []
+    []
   );
 
   const router = useRouter();
@@ -49,13 +49,15 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  useMemo(() => {
+  useEffect(() => {
     if (contentDetails.id) {
       reset({
-        title: contentDetails?.invoiceContent?.title,
-        attachments:
-          contentDetails?.offerContent?.attachments?.length > 0 &&
-          contentDetails?.offerContent?.attachments[0],
+        invoiceContent: {
+          ...contentDetails?.invoiceContent,
+          // attachments:
+          //   contentDetails?.offerContent?.attachments?.length > 0 &&
+          //   contentDetails?.offerContent?.attachments[0] || null,
+        }
       });
     }
   }, [contentDetails.id]);

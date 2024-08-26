@@ -20,6 +20,7 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
     renderModal,
     handleFilterChange,
     loading,
+    currentPage
   } = useFollowUps();
 
   const CurrentComponent = useEmptyStates(
@@ -43,13 +44,12 @@ const FollowUpsTable = ({ handleFollowUpsDetails }: FollowUpsTableProps) => {
         <TableHeading />
         {CurrentComponent}
       </TableLayout>
-      {currentPageRows.length > 0 && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          currentPage={currentPage}
         />
-      )}
       {renderModal()}
     </>
   );

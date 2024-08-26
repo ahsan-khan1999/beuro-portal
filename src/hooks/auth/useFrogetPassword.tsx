@@ -10,7 +10,6 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 
-
 export default function useFrogetPassword() {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -18,7 +17,6 @@ export default function useFrogetPassword() {
   const resetPasswordSchema = generateResetPasswordValidationSchema(translate);
   const { loading, error } = useAppSelector((state) => state.auth);
   const { modal } = useAppSelector((state) => state.global);
-
 
   const {
     register,
@@ -29,18 +27,20 @@ export default function useFrogetPassword() {
     resolver: yupResolver<FieldValues>(resetPasswordSchema),
   });
   const onClick = () => {
-    router.push("/login")
-  }
+    router.push("/login");
+    onClose();
+  };
   const fields = generateResetPassowrdFormField(register, loading, onClick);
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading="Email has been sent. "
-        modelSubHeading="Thanks! we are happy to have you. "
+        modelHeading={translate("common.modals.offer_email_sent")}
+        modelSubHeading={translate("common.modals.update_password")}
         routeHandler={onClick}
       />
     ),
@@ -49,8 +49,11 @@ export default function useFrogetPassword() {
     return MODAL_CONFIG[modal.type] || null;
   };
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const response = await dispatch(forgotPassword({ translate, data, setError }));
-    if (response?.payload) dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }))
+    const response = await dispatch(
+      forgotPassword({ translate, data, setError })
+    );
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
   return {
     error,
@@ -58,6 +61,7 @@ export default function useFrogetPassword() {
     errors,
     fields,
     onSubmit,
-    renderModal
+    renderModal,
+    translate,
   };
 }

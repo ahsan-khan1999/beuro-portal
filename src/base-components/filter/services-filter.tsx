@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import { PriceInputField } from "./fields/price-input-field";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { Button } from "@/base-components/ui/button/button";
+import filtersIcon from "@/assets/pngs/filter_icon.png";
 
 export default function ServicesFilter({
   filter,
@@ -29,8 +32,23 @@ export default function ServicesFilter({
     handleExtraFiltersClose,
     extraFilterss,
   } = useFilter({ filter, setFilter, moreFilters });
+  const { t: translate } = useTranslation();
+  const router = useRouter();
 
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          date: JSON.stringify(moreFilter.date),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: FilterType) => {
       const updatedFilters = {
         ...prev,
@@ -57,16 +75,31 @@ export default function ServicesFilter({
   };
 
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
-    const dateTime = new Date(val);
+    let dateTime: string | undefined = undefined;
+
+    if (val && !isNaN(new Date(val).getTime())) {
+      dateTime = new Date(val).toISOString();
+    }
+
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime },
     }));
   };
+
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   return (
-    <div className="relative flex my-auto cursor-pointer " ref={ref}>
-      <svg
+    <div className="relative flex my-auto cursor-pointer" ref={ref}>
+      <Button
+        inputType="button"
+        onClick={handleExtraFilterToggle}
+        className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+        icon={filtersIcon}
+        text={translate("common.filters")}
+        id="add"
+        iconAlt="fitlers"
+      />
+      {/* <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -90,7 +123,7 @@ export default function ServicesFilter({
             />
           </clipPath>
         </defs>
-      </svg>
+      </svg> */}
       <AnimatePresence>
         {extraFilterss && (
           <motion.div
@@ -101,18 +134,20 @@ export default function ServicesFilter({
             transition={{ duration: 0.4 }}
           >
             <div className="flex justify-between border-b border-lightGray pb-3">
-              <span className="font-medium text-lg">Filter</span>
+              <span className="font-medium text-lg">
+                {translate("filters.extra_filters.heading")}
+              </span>
               <span
-                className=" text-base text-red cursor-pointer"
+                className="text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
-                Reset All
+                {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
             <div className="mt-5 mb-2">
               <div className="flex justify-between">
                 <label htmlFor="type" className="font-medium text-base">
-                  Date
+                  {translate("filters.extra_filters.date")}
                 </label>
                 <label
                   htmlFor="type"
@@ -124,25 +159,24 @@ export default function ServicesFilter({
                     });
                   }}
                 >
-                  Reset
+                  {translate("filters.extra_filters.reset")}
                 </label>
               </div>
-              <div>
-                <DatePicker
-                  label="From"
-                  label2="To"
-                  dateFrom={formatDateForDatePicker(
-                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                      FiltersDefaultValues.$gte
-                  )}
-                  dateTo={formatDateForDatePicker(
-                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                      FiltersDefaultValues.$lte
-                  )}
-                  onChangeFrom={(val) => handleDateChange("$gte", val)}
-                  onChangeTo={(val) => handleDateChange("$lte", val)}
-                />
-              </div>
+
+              <DatePicker
+                label={translate("filters.extra_filters.from")}
+                label2={translate("filters.extra_filters.to")}
+                dateFrom={formatDateForDatePicker(
+                  (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                    FiltersDefaultValues.$gte
+                )}
+                dateTo={formatDateForDatePicker(
+                  (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                    FiltersDefaultValues.$lte
+                )}
+                onChangeFrom={(val) => handleDateChange("$gte", val)}
+                onChangeTo={(val) => handleDateChange("$lte", val)}
+              />
             </div>
             {/* <div className="mt-5 mb-2">
               <div className="flex justify-between mb-2">
@@ -167,14 +201,13 @@ export default function ServicesFilter({
                 onLowPriceChange={handleLowPriceChange}
               />
             </div> */}
-            <div>
-              <BaseButton
-                buttonText="Save"
-                onClick={handleSave}
-                containerClassName="bg-primary mt-4 mb-1 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-primary mt-4 mb-1 px-8 py-2"
+              textClassName="text-white"
+            />
           </motion.div>
         )}
       </AnimatePresence>

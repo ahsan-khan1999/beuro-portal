@@ -5,8 +5,8 @@ import DetailsSwitchBtn from "./DetailsSwitchBtn";
 import InvoiceDetailsTable from "./invoice/table";
 import ReceiptDetailsTable from "./receipt/table";
 import useInvoiceDetail from "@/hooks/invoice/useInvoiceDetail";
-
 import { useEmptyStates } from "@/utils/hooks";
+import { PendingInvoice } from "./PendingInvoice";
 
 const InvoiceDetails = () => {
   const {
@@ -14,8 +14,8 @@ const InvoiceDetails = () => {
     handleNotes,
     invoiceDetails,
     renderModal,
-    setSwitchDetails,
-    switchDetails,
+    activeTab,
+    setActiveTab,
     collectiveInvoice,
     handlePaymentStatusUpdate,
     handleInvoiceStatusUpdate,
@@ -27,36 +27,44 @@ const InvoiceDetails = () => {
     handleSendEmail,
     handleRecurringInvoiceEdit,
     loading,
-
+    systemSettings,
+    handleInvoiceUpdate,
   } = useInvoiceDetail();
 
-
   const invoiceComponent = {
-    Invoice:
-      {comp: <InvoiceDetailsTable
-        collectiveInvoice={collectiveInvoice}
-        handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
-        handlePaymentStatusUpdate={handlePaymentStatusUpdate}
-        handleInvoiceEdit={handleInvoiceEdit}
-        handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
-      />,
-    isData: collectiveInvoice?.length > 0
+    invoice: {
+      comp: (
+        <InvoiceDetailsTable
+          collectiveInvoice={collectiveInvoice}
+          handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
+          handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+          handleInvoiceEdit={handleInvoiceEdit}
+          handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
+        />
+      ),
+      isData: collectiveInvoice?.length > 0,
     },
-    Receipt:{comp : <ReceiptDetailsTable
-        collectiveInvoice={collectiveReciept}
-        handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
-        handlePaymentStatusUpdate={handlePaymentStatusUpdate}
-      />,
-      isData: collectiveReciept?.length > 0
+    receipt: {
+      comp: (
+        <ReceiptDetailsTable
+          collectiveInvoice={collectiveReciept}
+          handleInvoiceStatusUpdate={handleInvoiceStatusUpdate}
+          handlePaymentStatusUpdate={handlePaymentStatusUpdate}
+        />
+      ),
+      isData: collectiveReciept?.length > 0,
     },
   };
 
   const CurrentComponent = useEmptyStates(
-    invoiceComponent[switchDetails as keyof typeof invoiceComponent].comp,
-    invoiceComponent[switchDetails as keyof typeof invoiceComponent].isData,
+    invoiceComponent[activeTab as keyof typeof invoiceComponent].comp,
+    invoiceComponent[activeTab as keyof typeof invoiceComponent].isData,
     loading
   );
-  
+
+  const shouldShowPendingInvoice =
+    !collectiveInvoice?.length && !collectiveReciept?.length;
+
   return (
     <>
       <Layout>
@@ -71,16 +79,23 @@ const InvoiceDetails = () => {
             handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
             handleStopInvoiceCreation={handleStopInvoiceCreation}
             handleSendEmail={handleSendEmail}
+            currency={systemSettings?.currency}
+            handleInvoiceEdit={handleInvoiceUpdate}
           />
         </InvoiceCardLayout>
 
-        <div className="flex mt-[12px] mb-[18px]">
+        <div className="flex my-3">
           <DetailsSwitchBtn
-            switchDetails={switchDetails}
-            setSwitchDetails={setSwitchDetails}
+            activeTab={activeTab}
+            onComponentChange={setActiveTab}
           />
         </div>
-        {CurrentComponent}
+
+        {shouldShowPendingInvoice ? (
+          <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />
+        ) : (
+          CurrentComponent
+        )}
       </Layout>
       {renderModal()}
     </>

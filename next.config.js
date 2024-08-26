@@ -5,22 +5,25 @@ const nextConfig = {
   reactStrictMode: true,
   i18n,
   images: {
+    domains: ["*"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "kaufes-dev-v2.s3.me-south-1.amazonaws.com",
+        hostname: "*",
       },
-      {
-        protocol: "http",
-        hostname: "abc.com",
-      },
-      {
-        protocol: "http",
-        hostname: "test.com",
-      },
+    
     ],
   },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Exclude fs module from @react-pdf/pdfkit
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
+};
 
-}
-
-module.exports = nextConfig
+module.exports = nextConfig;

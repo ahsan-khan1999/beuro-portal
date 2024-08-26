@@ -1,14 +1,13 @@
 import { setUser } from "@/api/slices/authSlice/auth";
-import { ButtonClickFunction, Locale, User } from "@/types";
+import { ButtonClickFunction, User } from "@/types";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { isJSON } from "./functions";
-import { getCookie } from "cookies-next";
 import { useMemo } from "react";
 import { useTranslation } from "next-i18next";
 import { TranslatorFunction } from "@/types/global";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { EmptyStateType, ModalConfigType, ModalType } from "@/enums/ui";
+import { EmptyStateType, ModalType } from "@/enums/ui";
 import { getUser } from "./auth.util";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
@@ -310,10 +309,28 @@ export const useEmptyStates = (
   const lookup = {
     [EmptyStateType.hasData]: CurrentComponent,
     [EmptyStateType.loading]: <LoadingState />,
-    [EmptyStateType.hasNoData]: <NoDataEmptyState />,
-    
+    [EmptyStateType.hasNoData]: (
+      <div className="mt-6">
+        <NoDataEmptyState />
+      </div>
+    ),
   };
   // const data = useMemo(() => lookup[isEmpty], [isEmpty]);
-  const data = lookup[isEmpty]
+  const data = lookup[isEmpty];
   return data;
+};
+
+export const useQueryParams = () => {
+  let queryParams = {} as any;
+  if (typeof window !== "undefined") {
+    queryParams = useMemo(() => {
+      const queryParamsObject = {} as { [x: string]: string | number };
+      const searchParams = new URLSearchParams(window.location.search);
+      for (const [key, value] of searchParams.entries()) {
+        queryParamsObject[key] = value;
+      }
+      return queryParamsObject;
+    }, [window.location.search]);
+  }
+  return queryParams;
 };

@@ -8,19 +8,25 @@ const DetailsTab = ({
   isSelected,
   icon,
   selectedTab,
+  onScroll,
 }: leadsTabsSectionTypes) => {
-  const handleClickScroll = (name: string) => {
-    const element = document.getElementById(name);
-    if (element) {
-      element.setAttribute("data-scroll-target", "true");
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setTabType(selectedTab);
-    }
+  const handleClickScroll = () => {
+    onScroll && onScroll(selectedTab);
+    setTabType(selectedTab);
   };
+
+  // const scrollHandler2 = () => {
+  //   const element = document.getElementById(name);
+  //   if (!element) return;
+
+  //   const { top } = element.getBoundingClientRect();
+  //   window.scrollTo({ behavior: "smooth", top: window.scrollY + top });
+  //   setTabType(selectedTab);
+  // };
 
   return (
     <button
-      onClick={() => handleClickScroll(name)}
+      onClick={() => handleClickScroll()}
       className={`h-fit whitespace-nowrap rounded-lg py-[10px] border px-4 text-lg font-medium flex items-center bg-white ${
         isSelected
           ? "border-[#4A13E7] text-primary"

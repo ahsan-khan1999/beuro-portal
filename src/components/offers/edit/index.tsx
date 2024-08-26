@@ -1,36 +1,42 @@
 import { Layout } from "@/layout";
 import React, { useEffect } from "react";
-import EditOffersDetailsData from "./EditOffersDetailsData";
+import EditOffersDetailsData, {
+  EditComponentsType,
+} from "./EditOffersDetailsData";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/hooks/useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import ShareImages from "@/base-components/ui/modals1/ShareImages";
-import useOffers from "@/hooks/offers/useOffers";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { readImage } from "@/api/slices/imageSlice/image";
+import { useRouter } from "next/router";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { useTranslation } from "next-i18next";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 const EditOffersDetails = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
   const { offerDetails } = useAppSelector((state) => state.offer);
-  const { images } = useAppSelector((state) => state.image);
+  const { t: translate } = useTranslation();
 
   const shareImgModal = () => {
     dispatch(updateModalType({ type: ModalType.SHARE_IMAGES }));
   };
 
   useEffect(() => {
-    if (offerDetails?.id) dispatch(readImage({ params: { type: "offerID", id: offerDetails?.id } }));
+    if (offerDetails?.id)
+      dispatch(
+        readImage({ params: { type: "offerID", id: offerDetails?.id } })
+      );
+  }, [offerDetails?.id]);
 
-  }, [offerDetails?.id])
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-    dispatch(updateModalType({ type: ModalType.IMAGE_SLIDER }));
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleImageUpload = (
@@ -40,8 +46,11 @@ const EditOffersDetails = () => {
     e.stopPropagation();
     dispatch(updateModalType({ type: ModalType.UPLOAD_OFFER_IMAGE }));
   };
+
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.SHARE_IMAGES]: <ShareImages onClose={onClose} />,
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={offerDetails?.id} />
+    ),
 
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
@@ -50,8 +59,13 @@ const EditOffersDetails = () => {
         type={"Offer"}
       />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
     ),
   };
 
@@ -61,6 +75,12 @@ const EditOffersDetails = () => {
 
   // const { handleImagesUpload } = useOffers();
   // const handleImagesUpload = () => {};
+  const router = useRouter();
+  let tab: EditComponentsType | undefined;
+
+  if (router.query?.tab) {
+    tab = +router.query?.tab;
+  }
 
   return (
     <>
@@ -69,6 +89,7 @@ const EditOffersDetails = () => {
           shareImgModal={shareImgModal}
           handleImagesUpload={handleImageUpload}
           handleImageSlider={handleImageSlider}
+          tab={tab}
         />
       </Layout>
 

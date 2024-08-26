@@ -3,14 +3,11 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { resetPassword } from "@/api/slices/authSlice/auth";
 import { generateCreateInvoiceValidationSchema } from "@/validation/invoiceSchema";
 import { CreateInvoiceFormField } from "@/components/invoice/fields/create-invoice-fields";
 import {
   createInvoice,
   readInvoiceDetails,
-  updateInvoice,
-  updateParentInvoice,
 } from "@/api/slices/invoice/invoiceSlice";
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
@@ -26,6 +23,9 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
   const createdInvoiceSchema = generateCreateInvoiceValidationSchema(translate);
+  let taxPercentage = 0;
+  const remainingAmount =
+    invoiceDetails?.total - invoiceDetails?.invoiceCreatedAmount;
 
   const {
     register,
@@ -39,14 +39,13 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(createdInvoiceSchema),
   });
+
   const amount = watch("amount");
   const type = watch("type");
   useEffect(() => {
-    setValue("type", "0")
-    setValue("amount",0)
-
-
-  }, [])
+    setValue("type", "0");
+    setValue("amount", remainingAmount.toFixed(2));
+  }, []);
 
   const fields = CreateInvoiceFormField(
     register,
@@ -56,28 +55,38 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
     invoiceDetails,
     type
   );
+
   useMemo(() => {
-    const remainingAmount = invoiceDetails?.contractID?.offerID?.total - Number(invoiceDetails?.paidAmount)
-    if (type === '0') {
+    taxPercentage = calculateTax(Number(remainingAmount), amount);
+
+    if (type === "0") {
       if (remainingAmount < amount) {
-        setValue("amount", remainingAmount)
-        setValue("remainingAmount", remainingAmount - amount)
-
+        setValue("amount", remainingAmount?.toFixed(2));
+        setValue(
+          "remainingAmount",
+          Math.abs(remainingAmount - (amount || 0)).toFixed(2)
+        );
       } else {
-        setValue("remainingAmount", remainingAmount - amount)
+        setValue(
+          "remainingAmount",
+          Math.abs(remainingAmount - (amount || 0)).toFixed(2)
+        );
       }
-    }
-    else if (type === '1') {
-      if (Number(remainingAmount) < calculateTax(Number(remainingAmount), amount)) {
-        setValue("remainingAmount", remainingAmount)
-        setValue("amount", 100)
-
+    } else if (type === "1") {
+      if (Number(remainingAmount) < taxPercentage) {
+        setValue(
+          "remainingAmount",
+          Math.abs(remainingAmount - (taxPercentage || 0)).toFixed(2)
+        );
+        setValue("amount", 100);
       } else {
-        setValue("remainingAmount", Number(remainingAmount) - calculateTax(Number(remainingAmount), amount))
+        setValue(
+          "remainingAmount",
+          (Number(remainingAmount) - taxPercentage).toFixed(2)
+        );
       }
     } else {
-      setValue("remainingAmount", remainingAmount)
-
+      setValue("remainingAmount", remainingAmount.toFixed(2));
     }
   }, [amount, type]);
 
@@ -87,12 +96,17 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
       ["paymentType"]: staticEnums["PaymentType"][data.paymentType],
       id: invoiceDetails?.id,
       isInvoiceRecurring: false,
+      amount: data?.type === "1" ? taxPercentage : data?.amount,
     };
     const res = await dispatch(
       createInvoice({ data: apiData, router, setError, translate })
     );
-    if (res?.payload) invoiceCreated();
+    if (res?.payload) {
+      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }));
+      invoiceCreated();
+    }
   };
+
   return {
     error,
     handleSubmit,

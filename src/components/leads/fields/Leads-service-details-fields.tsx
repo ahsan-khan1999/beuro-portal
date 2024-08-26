@@ -1,5 +1,7 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateLeadsFormField } from "@/types";
+import { ContentTableRowTypes } from "@/types/content";
+import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
 export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
@@ -8,17 +10,20 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
   control,
   onHandleBack,
   trigger,
-  service,
-  leadDetails
+  content,
+  leadDetails,
+  systemSettings
 ) => {
   const { t: translate } = useTranslation();
+  const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
+
   const formField: FormField[] = [
     {
-      containerClass: "mt-6",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+        className:
+          "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -28,15 +33,16 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "requiredService",
               name: "requiredService",
-              value: (leadDetails?.id && leadDetails?.requiredService) || "",
+              value: "",
               options:
-                (service &&
-                  service?.map((item) => ({
-                    label: item.serviceName,
+                (content &&
+                  content?.map((item) => ({
+                    label: item.contentName,
                     value: item.id,
                   }))) ||
                 [],
@@ -52,7 +58,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
             field: {
               type: Field.date,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               id: "desireDate",
               name: "desireDate",
               register,
@@ -68,7 +74,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "contactAvailability",
               value:
@@ -77,11 +84,15 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "Morning(9am to 12am)",
-                  label: "Morning(9am to 12am)",
+                  label: `${translate("common.morning")}(9am to 12pm)`,
                 },
                 {
-                  value: "Morning(1pm to 10pm)",
-                  label: "Morning(1pm to 10pm)",
+                  value: "Afternoon(1pm to 5pm)",
+                  label: `${translate("common.afternoon")}(1am to 5pm)`,
+                },
+                {
+                  value: "Evening(6pm to 8pm)",
+                  label: `${translate("common.evening")}(6pm to 8pm)`,
                 },
               ],
               control,
@@ -95,39 +106,44 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary",
               type: Field.select,
               id: "flexibility",
               value: (leadDetails?.id && leadDetails?.flexibility) || "",
               name: "flexibility",
               options: [
                 {
+                  value: "0",
+                  label: `${translate("common.flexible")}`,
+                },
+                {
                   value: "1",
-                  label: "1 days",
+                  label: `1 ${translate("common.day")}`,
                 },
                 {
                   value: "2",
-                  label: "2 days",
+                  label: `2 ${translate("common.days")}`,
                 },
                 {
                   value: "3",
-                  label: "3 days",
+                  label: `3 ${translate("common.days")}`,
                 },
                 {
                   value: "4",
-                  label: "4 days",
+                  label: `4 ${translate("common.days")}`,
                 },
                 {
                   value: "5",
-                  label: "5 days",
+                  label: `5 ${translate("common.days")}`,
                 },
                 {
                   value: "6",
-                  label: "6 days",
+                  label: `6 ${translate("common.days")}`,
                 },
                 {
                   value: "7",
-                  label: "7 days",
+                  label: `7 ${translate("common.days")}`,
                 },
               ],
               control,
@@ -143,7 +159,8 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             },
 
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               id: "preferredContact",
               name: "preferredContact",
@@ -151,43 +168,78 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               options: [
                 {
                   value: "Via Email",
-                  label: "Via Email",
+                  label: `${translate("common.via_email")}`,
                 },
                 {
                   value: "Via What'sapp",
-                  label: "Via What'sapp",
+                  label: `${translate("common.via_whatsapp")}`,
+                },
+                {
+                  value: "Via Phone Call",
+                  label: `${translate("common.via_phone")}`,
+                },
+                {
+                  value: "Via Post",
+                  label: `${translate("common.via_post")}`,
+                },
+                {
+                  value: "Via Internet",
+                  label: `${translate("common.via_internet")}`,
                 },
               ],
               control,
             },
           },
-          {
-            containerClass: "mb-0",
-            label: {
-              text: `${translate("leads.service_details.budget")}`,
-              htmlFor: "budget",
-              className: "mb-[10px]",
-            },
-            field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
-              type: Field.select,
-              id: "budget",
-              name: "budget",
-              value: (leadDetails?.id && leadDetails?.budget) || "",
+          // {
+          //   containerClass: "mb-0",
+          //   label: {
+          //     text: `${translate("leads.service_details.budget")}`,
+          //     htmlFor: "budget",
+          //     className: "mb-[10px]",
+          //   },
+          //   field: {
+          //     className:
+          //       "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+          //     type: Field.select,
+          //     id: "budget",
+          //     name: "budget",
+          //     value: (leadDetails?.id && leadDetails?.budget) || "",
 
-              options: [
-                {
-                  value: "Less then 1000CHF",
-                  label: "Less then 1000CHF",
-                },
-                {
-                  value: "Less then 500CHF",
-                  label: "Less then 500CHF",
-                },
-              ],
-              control,
-            },
-          },
+          //     options: [
+          //       {
+          //         value: `Less then 500 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 500${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 1000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 1000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 1500 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 1500${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 2000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 2000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //       {
+          //         value: `Less then 5000 ${systemSettings?.currency}`,
+          //         label: `${translate("common.less_then")} 5000${
+          //           systemSettings?.currency
+          //         }`,
+          //       },
+          //     ],
+          //     control,
+          //   },
+          // },
           {
             containerClass: "xl:col-span-1 mb-0",
             label: {
@@ -196,22 +248,23 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary ",
               type: Field.select,
               id: "leadSource",
               name: "leadSource",
               value: (leadDetails?.id && leadDetails?.leadSource) || "",
 
-              options: [
-                { value: "Whats'app", label: "What'sapp" },
-                { value: "Facebook", label: "Facebook" },
-              ],
+              options: Object.keys(staticEnums["LeadSource"]).map((item) => ({
+                label: translate(`common.lead_source.${item}`),
+                value: item,
+              })),
               control,
             },
           },
 
           {
-            containerClass: "xl:col-span-2 mb-0",
+            containerClass: "xl:col-span-3 mb-0",
             label: {
               text: `${translate("leads.service_details.other_services")}`,
               htmlFor: "otherServices",
@@ -220,13 +273,14 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
             field: {
               type: Field.multiSelect,
               // @ts-expect-error
-              className: "!p-4 h-[56px] !border-[#BFBFBF]  focus:!border-primary ",
+              className:
+                "!p-4 h-[56px] !border-[#BFBFBF] focus:!border-primary",
               id: "otherServices",
               name: "otherServices",
-              value: (leadDetails?.id && leadDetails?.otherServices) || [""],
+              value: contentList?.map((item) => item.id),
               options:
-                service?.map((item) => ({
-                  label: item.serviceName,
+                content?.map((item) => ({
+                  label: item.contentName,
                   value: item.id,
                 })) || [],
 
@@ -239,11 +293,11 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
     },
 
     {
-      containerClass: "mt-[30px]",
+      containerClass: "my-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex space-x-[18px]",
+        className: "flex items-center justify-end space-x-[18px]",
         children: [
           {
             containerClass: "mb-0",
@@ -254,7 +308,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               inputType: "button",
               onClick: () => onHandleBack && onHandleBack(),
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
             },
           },
           {
@@ -265,7 +319,7 @@ export const LeadsServiceDetailsFormField: GenerateLeadsFormField = (
               text: `${translate("leads.service_details.save_changes_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

@@ -3,14 +3,18 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { FilterType } from "@/types";
 import { readEmail } from "@/api/slices/emailTracker/email";
-import { areFiltersEmpty } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useRouter } from "next/router";
 
 const useEmailTracker = () => {
-  const { email, lastPage, totalCount, loading } = useAppSelector(
+  const { email, lastPage, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.emailSlice
   );
-  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const { query } = useRouter();
+  const page = query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
+
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
@@ -18,32 +22,65 @@ const useEmailTracker = () => {
 
   const [currentPageRows, setCurrentPageRows] =
     useState<TableRowEmailTracker[]>(email);
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   const totalItems = totalCount;
   const itemsPerPage = 10;
-  useEffect(() => {
-    dispatch(readEmail({ params: { filter: filter, page: currentPage, size: 10 } })).then(
-      (res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.MailTracker);
-        }
-      }
-    );
-  }, [currentPage]);
+
+  const handleFilterChange = (query: FilterType) => {
+    setCurrentPage(1);
+  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleFilterChange = (query: FilterType) => {
-    dispatch(readEmail({ params: { filter: filter, page: currentPage, size: 10 } })).then(
-      (res: any) => {
-        if (res?.payload) {
-          setCurrentPageRows(res?.payload?.MailTracker);
+
+  useEffect(() => {
+    const parsedPage = parseInt(query.page as string, 10);
+    let resetPage = null;
+
+    if (!isNaN(parsedPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      resetPage = 1;
+      setCurrentPage(1);
+    }
+
+    const searchQuery = query?.text as string;
+    const sortedValue = query?.sort as string;
+
+    const queryParams = searchQuery || sortedValue;
+
+    let updatedFilter: {
+      text?: string;
+      sort?: string;
+    } = {
+      text: searchQuery || "",
+    };
+
+    if (searchQuery || sortedValue) {
+      updatedFilter.text = searchQuery;
+      updatedFilter.sort = sortedValue;
+    }
+
+    setFilter(updatedFilter);
+
+    if (parsedPage !== undefined) {
+      dispatch(
+        readEmail({
+          params: {
+            filter: queryParams ? updatedFilter : {},
+            page: (Number(parsedPage) || resetPage) ?? currentPage,
+            size: 10,
+          },
+        })
+      ).then((response: any) => {
+        if (response?.payload) {
+          setCurrentPageRows(response?.payload?.MailTracker);
         }
-      }
-    );
-  };
+      });
+    }
+  }, [query]);
 
   return {
     currentPageRows,
@@ -54,6 +91,8 @@ const useEmailTracker = () => {
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
+    currentPage,
   };
 };
 

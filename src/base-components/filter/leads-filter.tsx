@@ -1,27 +1,31 @@
-import React, { SetStateAction, useState } from "react";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import React from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import InputField from "./fields/input-field";
-import { FilterProps, FilterType } from "@/types";
+import { FilterProps } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
-import { date } from "yup";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { Button } from "@/base-components/ui/button/button";
+import filtersIcon from "@/assets/pngs/filter_icon.png";
 
 export default function LeadsFilter({
   filter,
   setFilter,
   onFilterChange,
 }: FilterProps) {
+  const router = useRouter();
+
   const moreFilters = {
     date: {
       $gte: FiltersDefaultValues.$gte,
       $lte: FiltersDefaultValues.$lte,
     },
   };
+
   const {
     extraFilterss,
     moreFilter,
@@ -33,8 +37,22 @@ export default function LeadsFilter({
   } = useFilter({ filter, setFilter, moreFilters });
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
+  const { t: translate } = useTranslation();
 
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          date: JSON.stringify(moreFilter.date),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: any) => {
       const updatedFilter = {
         ...prev,
@@ -46,20 +64,36 @@ export default function LeadsFilter({
       onFilterChange(updatedFilter);
       return updatedFilter;
     });
+
     handleExtraFiltersClose();
   };
 
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
-    const dateTime = new Date(val);
+    let dateTime: string | undefined = undefined;
+
+    if (val && !isNaN(new Date(val).getTime())) {
+      dateTime = new Date(val).toISOString();
+    }
+
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime },
     }));
   };
 
   return (
-    <div className="relative flex my-auto" ref={ref}>
-      <svg
+    <div className="relative flex my-auto cursor-pointer" ref={ref}>
+      <Button
+        inputType="button"
+        onClick={handleExtraFilterToggle}
+        className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+        icon={filtersIcon}
+        text={translate("common.filters")}
+        id="add"
+        iconAlt="fitlers"
+      />
+
+      {/* <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -70,7 +104,7 @@ export default function LeadsFilter({
         <g clipPath="url(#clip0_702_12694)">
           <path
             d="M7.43477 0.291992C6.32977 0.291992 5.39477 1.00599 5.03777 1.99199H0.634766V3.69199H5.03777C5.38627 4.67799 6.32127 5.39199 7.43477 5.39199C8.83727 5.39199 9.98477 4.24449 9.98477 2.84199C9.98477 1.43949 8.83727 0.291992 7.43477 0.291992ZM11.6848 1.99199V3.69199H17.6348V1.99199H11.6848ZM11.6848 6.24199C10.5798 6.24199 9.64477 6.95599 9.28777 7.94199H0.634766V9.64199H9.28777C9.63627 10.628 10.5713 11.342 11.6848 11.342C13.0873 11.342 14.2348 10.1945 14.2348 8.79199C14.2348 7.38949 13.0873 6.24199 11.6848 6.24199ZM15.9348 7.94199V9.64199H17.6348V7.94199H15.9348ZM4.88477 12.192C3.77977 12.192 2.84477 12.906 2.48777 13.892H0.634766V15.592H2.48777C2.83627 16.578 3.77127 17.292 4.88477 17.292C6.28727 17.292 7.43477 16.1445 7.43477 14.742C7.43477 13.3395 6.28727 12.192 4.88477 12.192ZM9.13477 13.892V15.592H17.6348V13.892H9.13477Z"
-            fill="#404040"
+            fill="#fff"
           />
         </g>
         <defs>
@@ -83,7 +117,7 @@ export default function LeadsFilter({
             />
           </clipPath>
         </defs>
-      </svg>
+      </svg> */}
       <AnimatePresence>
         {extraFilterss && (
           <motion.div
@@ -94,19 +128,21 @@ export default function LeadsFilter({
             transition={{ duration: 0.4 }}
           >
             <div className="flex justify-between border-b border-lightGray pb-3">
-              <span className="font-medium text-lg">Filter</span>
+              <span className="font-medium text-lg">
+                {translate("filters.extra_filters.heading")}
+              </span>
               <span
-                className=" text-base text-red cursor-pointer"
+                className="text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
-                Reset All
+                {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
-            <div className="">
+            <div>
               <div className="mt-5 mb-2">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
-                    Date
+                    {translate("filters.extra_filters.date")}
                   </label>
                   <label
                     htmlFor="type"
@@ -118,25 +154,24 @@ export default function LeadsFilter({
                       });
                     }}
                   >
-                    Reset
+                    {translate("filters.extra_filters.reset")}
                   </label>
                 </div>
-                <div>
-                  <DatePicker
-                    label="From"
-                    label2="To"
-                    dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                        FiltersDefaultValues.$gte
-                    )}
-                    dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                        FiltersDefaultValues.$lte
-                    )}
-                    onChangeFrom={(val) => handleDateChange("$gte", val)}
-                    onChangeTo={(val) => handleDateChange("$lte", val)}
-                  />
-                </div>
+
+                <DatePicker
+                  label={translate("filters.extra_filters.from")}
+                  label2={translate("filters.extra_filters.to")}
+                  dateFrom={formatDateForDatePicker(
+                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                      FiltersDefaultValues.$gte
+                  )}
+                  dateTo={formatDateForDatePicker(
+                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                      FiltersDefaultValues.$lte
+                  )}
+                  onChangeFrom={(val) => handleDateChange("$gte", val)}
+                  onChangeTo={(val) => handleDateChange("$lte", val)}
+                />
               </div>
               {/* <div>
                 <div className="flex justify-between mt-6">
@@ -163,14 +198,13 @@ export default function LeadsFilter({
                 />
               </div> */}
             </div>
-            <div>
-              <BaseButton
-                buttonText="Save"
-                onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
-                textClassName="text-white"
-              />
-            </div>
+
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-primary my-2 px-8 py-2"
+              textClassName="text-white"
+            />
           </motion.div>
         )}
       </AnimatePresence>

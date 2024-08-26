@@ -5,30 +5,33 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useTranslation } from "next-i18next";
 
 const MailSetting = () => {
   const tabsData: string[] = [
     "Use Own Mail Configuration",
     // "Use System Mail Configuration",
   ];
-  const { modal } = useAppSelector(state => state.global)
-  const dispatch = useAppDispatch()
+  const { modal } = useAppSelector((state) => state.global);
+  const dispatch = useAppDispatch();
   // State to manage the selected tab
   const [selectedTab, setSelectedTab] = useState(0);
-
+  const { t: translate } = useTranslation();
   // Function to handle tab selection
   const handleTabSelect = (index: number) => {
     setSelectedTab(index);
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATE_SUCCESS]: (
       <RecordCreateSuccess
         onClose={onClose}
-        modelHeading="Settings Updated Successful "
-        modelSubHeading="Thanks! we are happy to have you. "
+        modelHeading={translate("common.modals.update_setting")}
+        modelSubHeading={translate("common.modals.admin_setting_des")}
         routeHandler={onClose}
       />
     ),
@@ -38,11 +41,10 @@ const MailSetting = () => {
   };
   const handleCreation = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
-
-  }
+  };
   return (
-    <SettingLayout>
-      <div className="ml-3 mb-3">
+    <SettingLayout containerClassName="pl-4 pr-4 mb-5">
+      <div className="mb-3">
         <div className="flex gap-[40px] mt-4 mb-[36px]">
           {tabsData.map((item, index) => (
             <div
@@ -66,7 +68,9 @@ const MailSetting = () => {
           ))}
         </div>
 
-        {selectedTab === 0 && <MailSettingForm handleCreation={handleCreation} selectedTab={1} />}
+        {selectedTab === 0 && (
+          <MailSettingForm handleCreation={handleCreation} selectedTab={1} />
+        )}
 
         {/* {selectedTab === 1 && (
           <button className="text-base font-medium text-white bg-[#4A13E7] rounded-lg p-[10px] w-[150px]">

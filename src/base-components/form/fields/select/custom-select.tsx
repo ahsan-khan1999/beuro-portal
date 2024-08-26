@@ -5,10 +5,10 @@ import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import Image from "next/image";
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import searchIcon from "@/assets/svgs/search-icon.png";
-
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "next-i18next";
 
 export const SelectBox = ({
   id,
@@ -45,8 +45,8 @@ export const SelectBox = ({
 
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
-    setIsOpen(false);
     onItemChange && onItemChange(value, fieldIndex);
+    setIsOpen(false);
     field?.onChange(value);
     trigger?.(field?.name);
   };
@@ -63,20 +63,21 @@ export const SelectBox = ({
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
   const classes = combineClasses(defaultClasses, className);
-
+  const { t: translate } = useTranslation();
   return (
-    <div id={id} ref={selectBoxRef} className="relative focus:border-primary  ">
+    <div id={id} ref={selectBoxRef} className="relative focus:border-primary">
       <button
-        placeholder={placeholder}
+        // placeholder={placeholder}
         onClick={(e) => {
           e.preventDefault();
           setIsOpen(!isOpen);
         }}
-        className={`${classes} `}
+        className={`${classes}`}
       >
-        {(field && getLabelByValue(field.value, option)) ||
-          getLabelByValue(defaultValue, option)}
-
+        <span className="truncate">
+          {(field && getLabelByValue(field.value, option)) ||
+            getLabelByValue(defaultValue, option)}
+        </span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}
         {svg && (
           <span
@@ -87,40 +88,41 @@ export const SelectBox = ({
       </button>
       <AnimatePresence>
         {!disabled && isOpen && (
-          <motion.ul
-            className="absolute overflow-x-hidden top-[52px] max-h-[180px] h-fit overflow-scroll  w-full bg-white border border-lightGray rounded-br-lg rounded-bl-lg rounded-lg z-10 p-2"
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            id="dropdownSerchBar"
+            className="select_scrollbar absolute overflow-x-hidden top-[56px] max-h-[180px] h-fit overflow-scroll w-full bg-white border border-lightGray rounded-br-lg rounded-bl-lg rounded-lg z-10"
           >
-            <div className="flex items-center border border-lightGray rounded-md  w-full mb-2">
-              <Image
-                src={searchIcon}
-                alt={"Search Icon"}
-                className="ml-1 w-4 h-4 absolute"
-                width={24}
-                height={8}
-              />
+            <motion.ul className="p-2" id="dropdownSerchBar">
+              <div className="flex items-center border border-lightGray rounded-md w-full mb-2">
+                <Image
+                  src={searchIcon}
+                  alt="Search Icon"
+                  className="ml-1 w-4 h-4 absolute"
+                  width={24}
+                  height={8}
+                />
 
-              <input
-                value={search.current}
-                onChange={(e) => handleChange(e.target.value)}
-                placeholder="Search..."
-                className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
-              />
-            </div>
-            {option.map(({ value, label }) => (
-              <li
-                key={value}
-                onClick={() => selectedOptionHandler(value)}
-                className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
-              >
-                {label}
-              </li>
-            ))}
-          </motion.ul>
+                <input
+                  value={search.current}
+                  onChange={(e) => handleChange(e.target.value)}
+                  placeholder={translate("common.search")}
+                  className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
+                />
+              </div>
+              {option.map(({ value, label }) => (
+                <li
+                  key={value}
+                  onClick={() => selectedOptionHandler(value)}
+                  className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
+                >
+                  {label}
+                </li>
+              ))}
+            </motion.ul>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

@@ -9,7 +9,7 @@ const OfferTabs = ({
   icon,
   index,
   selectedTab,
-  tabType
+  tabType,
 }: OfferTabsSectionTypes) => {
   const handleClickScroll = (name: string) => {
     const element = document.getElementById(name);
@@ -17,9 +17,11 @@ const OfferTabs = ({
       element.setAttribute("data-scroll-target", "true");
       element.scrollIntoView({ behavior: "smooth", block: "start" });
       setTabType(selectedTab);
+    } else {
+      setTabType(selectedTab);
     }
   };
-  
+
   return (
     <>
       <div className="flex justify-between gap-3">

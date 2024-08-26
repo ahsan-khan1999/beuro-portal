@@ -21,11 +21,11 @@ const RequestSubmitted = ({ onClose }: { onClose: () => void }) => {
             alt="request_submitted"
             className="mb-10 mt-[47px]"
           />
-          <p className="text-black text-[24px] leading-7 font-medium mb-4">
+          <p className="text-black text-2xl font-medium mb-4">
             {translate("contact_support.request_modal.main_heading")}
           </p>
           <p className="text-[#1E1E1E] text-sm font-normal">
-          {translate("contact_support.request_modal.sub_heading")}
+            {translate("contact_support.request_modal.sub_heading")}
           </p>
 
           <button

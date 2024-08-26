@@ -1,10 +1,10 @@
 import { Layout } from "@/layout";
-import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
 import DetailsData from "../DetailsData";
 import CustomerForm from "../CustomerForm";
-import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import { formatDateTimeToDate } from "@/utils/utility";
+import DetailsCard from "@/layout/customers/DetailsCard";
+import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
 
 const CustomerDetails = () => {
@@ -20,15 +20,15 @@ const CustomerDetails = () => {
     deleteHandler,
     renderModal,
     loading,
-  } = useCustomerDetail(true);
+  } = useCustomerDetail({ detail: true, idAddNewCustomer: false });
 
   return (
     <Layout>
       <DetailsCard>
         <DetailsData
-          date={formatDateTimeToDate(customerDetail?.createdAt)}
+          date={formatDateTimeToDate(customerDetail?.createdAt) as string}
           id={customerDetail?.refID}
-          name={customerDetail?.fullName}
+          name={customerDetail?.createdBy?.fullName}
           handlePreviousClick={handlePreviousClick}
           handleDelete={deleteHandler}
         />
@@ -36,7 +36,7 @@ const CustomerDetails = () => {
       {loading ? (
         <LoadingState />
       ) : (
-        <div className="w-full mt-8 ">
+        <div className="w-full my-8">
           <CustomerForm
             isUpdate={isUpdate}
             setIsUpdate={setIsUpdate}

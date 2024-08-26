@@ -1,13 +1,7 @@
 import { Field } from "@/enums/form";
-import {
-  FormField,
-  GenerateLeadAddressFormField,
-  GenerateLeadsFormField,
-} from "@/types";
-import { ComponentsType } from "../add/AddNewLeadsData";
-import { staticEnums } from "@/utils/static";
-import icon from "@/assets/svgs/Vector.svg";
 import { useTranslation } from "next-i18next";
+import editIcon from "@/assets/svgs/edit_primary.svg";
+import { FormField, GenerateLeadAddressFormField } from "@/types";
 
 export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   register,
@@ -15,57 +9,182 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
   control,
   onHandleBack,
   count,
+  handleChangeLabel,
   handleAddNewAddress,
-  handleRemoveAddress
+  handleRemoveAddress,
+  fields,
+  handleFieldTypeChange,
+  addressType,
+  setValue,
+  getValues,
+  addressSettings
 ) => {
   const formField: FormField[] = [];
   const { t: translate } = useTranslation();
 
-  for (let i = 1; i <= count; i++) {
+  if (!fields) return null;
+  for (let i = 0; i < count; i++) {
+    const isEditable = addressType && addressType[i];
+    const inputField: FormField = isEditable
+      ? {
+          //editable address
+          containerClass: "",
+          field: {
+            type: Field.input,
+            className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
+            inputType: "text",
+            id: `address.${i}.label`,
+            name: `address.${i}.label`,
+            register,
+            // value: `Adresse ${i + 1}`,
+            // setValue,
+          },
+        }
+      : {
+          //non-editable address
+          containerClass: "",
+          field: {
+            type: Field.input,
+            inputType: "text",
+            id: `address.${i}.label`,
+            name: `address.${i}.label`,
+            register,
+            // value: `Adresse ${i + 1}`,
+            disabled: true,
+            className:
+              "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
+            // setValue,
+          },
+        };
     formField.push(
       {
-        containerClass: "mt-6 ",
-        label: {
-          text: translate("leads.address_details.heading"),
-          htmlFor: `address-${i}-details`,
-          className: "mb-[10px] text-[#8F8F8F]",
+        containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
+        field: {
+          className: "!p-4 h-[45px] !border-[#BFBFBF] focus:!border-primary",
+          type: Field.select,
+          id: `address.${i}.addressType`,
+          name: `address.${i}.addressType`,
+          // value: addressSettings?.addresses?.[0] || "",
+          options:
+            addressSettings?.addresses?.map((item) => ({
+              label: item,
+              value: item,
+            })) || [],
+
+          control,
+          onItemChange: (item) => handleChangeLabel(item, i),
         },
+      },
+
+      {
+        containerClass: "mb-0 relative right-0 float-right",
+        field: {
+          type: Field.button,
+          id: "button",
+          text: `${translate("common.remove_button")}`,
+          inputType: "button",
+          className: `rounded-md px-[6px] py-1 bg-transparent !h-[30px] text-dark-red text-base font-semibold border-2 rounded-[6px] border-[#C31313] hover-bg-none mt-1 ${
+            i === 0 && "hidden"
+          }`,
+          onClick: () => {
+            handleRemoveAddress && handleRemoveAddress(i);
+          },
+        },
+      },
+
+      {
+        containerClass: "mt-2",
+        field: {
+          type: Field.div,
+          className: "flex space-x-2",
+          id: `address-labels-${i}`,
+          children: [
+            // (!(addressType && !addressType[i - 1]) && {
+            //   containerClass: "",
+            //   field: {
+            //     type: Field.input,
+            //     className: "!px-2 !border-[#BFBFBF] focus:!border-primary ",
+            //     inputType: "text",
+            //     id: `address.${i}.label`,
+            //     name: `address.${i}.label`,
+            //     // placeholder: `Zweibrückenstraße, ${i}`,
+            //     register,
+            //     value: `Address ${++valueIndex}`,
+            //     setValue,
+            //   },
+            // }) || {
+            //   containerClass: "",
+            //   field: {
+            //     type: Field.input,
+            //     inputType: "text",
+            //     id: `address.${i}.label`,
+            //     name: `address.${i}.label`,
+            //     // placeholder: `Zweibrückenstraße, ${i}`,
+            //     register,
+            //     value: `Address ${++valueIndex}`,
+            //     disabled: true,
+            //     className:
+            //       "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base",
+            //     setValue,
+            //   },
+            // },
+
+            inputField,
+            {
+              containerClass: "",
+              field: {
+                type: Field.button,
+                className: "bg-white hover:bg-white",
+                id: `address.${i}.type`,
+                name: `address.${i}.type`,
+                inputType: "button",
+                icon: editIcon,
+                onClick: () =>
+                  handleFieldTypeChange && handleFieldTypeChange(i),
+              },
+            },
+          ],
+        },
+      },
+
+      {
         field: {
           type: Field.div,
           id: `div-field-${i}`,
-          className: "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5",
+          className:
+            "grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
           children: [
             {
-              containerClass: "mb-0 ",
+              containerClass: "mb-0",
               label: {
                 text: translate("leads.address_details.street_no"),
-                htmlFor: `streetNumber-${i}`,
+                htmlFor: `address.${i}.streetNumber`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
-                id: `streetNumber-${i}`,
-                name: `streetNumber-${i}`,
-                placeholder: `Zweibrückenstraße, ${i}`,
+                id: `address.${i}.streetNumber`,
+                name: `address.${i}.streetNumber`,
+                placeholder: ``,
                 register,
               },
             },
             {
-              containerClass: "mb-0 ",
+              containerClass: "mb-0",
               label: {
                 text: translate("leads.address_details.post_code"),
-                htmlFor: `postalCode-${i}`,
+                htmlFor: `address.${i}.postalCode`,
                 className: "mb-[10px]",
               },
               field: {
                 type: Field.input,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 inputType: "text",
-                id: `postalCode-${i}`,
-                name: `postalCode-${i}`,
-                placeholder: `123${i}`,
+                id: `address.${i}.postalCode`,
+                name: `address.${i}.postalCode`,
+                placeholder: ``,
                 register,
               },
             },
@@ -73,114 +192,106 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               containerClass: "mb-0",
               label: {
                 text: translate("leads.address_details.country"),
-                htmlFor: "address.country",
+                htmlFor: `address.${i}.country`,
                 className: "mb-[10px]",
               },
+              // field: {
+              //   className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
+              //   type: Field.select,
+              //   id: `address.${i}.country`,
+              //   name: `address.${i}.country`,
+              //   options: Object.keys(staticEnums.Country).map((item) => ({
+              //     value: item,
+              //     label: translate(`countries.${item}`),
+              //   })),
+              //   control,
+              //   value: Object.keys(staticEnums.Country)[0],
+              // },
               field: {
-                className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
-                type: Field.select,
-                id: `country-${i}`,
-                name: `country-${i}`,
-                options: Object.keys(staticEnums.Country).map((item) => ({
-                  value: item,
-                  label: item,
-                })),
-                control,
-                value: "",
+                type: Field.input,
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+                inputType: "text",
+                id: `address.${i}.country`,
+                name: `address.${i}.country`,
+                register,
               },
             },
           ],
         },
       },
       {
-        containerClass: "mt-6",
+        containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
+        label: {
+          text: translate("leads.address_details.description"),
+          htmlFor: `address.${i}.description`,
+          className: "mb-[10px]",
+        },
         field: {
-          type: Field.div,
-          id: "div-field",
-          className: "grid grid-cols-1 relative w-full space-x-[18px] ",
-          children: [
-            {
-              containerClass: "mt-5 mb-0 pb-10 border-b-2 border-lightGray",
-              label: {
-                text: translate("leads.address_details.description"),
-                htmlFor: `description-${i}`,
-                className: "mb-[10px]",
-              },
-              field: {
-                type: Field.textArea,
-                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-                rows: 8,
-                id: `description-${i}`,
-                name: `description-${i}`,
-                placeholder:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
-                register,
-              },
-            },
-            {
-              containerClass: "mb-0 absolute -top-44 right-0",
-              field: {
-                type: Field.button,
-                id: "button",
-                text: "Remove",
-                inputType: "button",
-                className: `rounded-none p-2 bg-red !h-[30px] text-white hover-bg-none ${
-                  i === 1 && "hidden"
-                }`,
-                onClick: handleRemoveAddress && handleRemoveAddress,
-              },
-            },
-          ],
+          type: Field.textArea,
+          className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+          rows: 2,
+          id: `address.${i}.description`,
+          name: `address.${i}.description`,
+          placeholder: translate("common.description_placeholder"),
+          register,
         },
       }
     );
   }
 
   formField.push({
-    containerClass: "mt-6",
+    containerClass: "my-[30px]",
     field: {
       type: Field.div,
       id: "div-field",
-      className: "flex space-x-[18px] ",
+      className: "flex justify-between flex-row-reverse",
       children: [
         {
+          field: {
+            className: "flex items-center gap-x-[18px]",
+            type: Field.div,
+            id: "div-field",
+            children: [
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  text: `${translate("leads.address_details.back_button")}`,
+                  inputType: "button",
+                  className:
+                    "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover-bg-none",
+                  onClick: onHandleBack && onHandleBack,
+                },
+              },
+              {
+                containerClass: "mb-0",
+                field: {
+                  type: Field.button,
+                  id: "button",
+                  text: `${translate("leads.address_details.next_button")}`,
+                  inputType: "submit",
+                  className:
+                    "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                  loading,
+                },
+              },
+            ],
+          },
+        },
+        {
           containerClass: "mb-0",
           field: {
             type: Field.button,
             id: "button",
-            text: `${translate("leads.address_details.back_button")}`,
+            text: `${translate("offers.address_details.add_new_address")}`,
             inputType: "button",
-            className:
-              "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px] text-dark hover-bg-none",
-            onClick: () =>
-              onHandleBack && onHandleBack(ComponentsType.customerAdd),
-          },
-        },
-        {
-          containerClass: "mb-0",
-          field: {
-            type: Field.button,
-            id: "button",
-            text: `${translate("leads.address_details.next_button")}`,
-            inputType: "submit",
-            className:
-              "rounded-lg px-4 w-[152px] h-[50px] text-white hover-bg-none",
-            loading,
-          },
-        },
-
-        {
-          containerClass: "mb-0",
-          field: {
-            type: Field.button,
-            id: "button",
-            className: ` absolute right-10 rounded-lg border-[1px] border-[#4B4B4B] bg-[#fff] m-1 p-4   h-[40px] text-white hover-bg-none ${
-              count === 2 && "hidden"
+            className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none ${
+              count === 3 && "hidden"
             }`,
-            onClick: handleAddNewAddress && handleAddNewAddress,
-            icon: icon,
-            name: "",
-            // icon
+            onClick: () => {
+              handleAddNewAddress && handleAddNewAddress();
+            },
           },
         },
       ],

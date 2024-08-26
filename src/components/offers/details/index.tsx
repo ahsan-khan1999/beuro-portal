@@ -1,6 +1,5 @@
 import { Layout } from "@/layout";
 import React from "react";
-import DetailsCard from "@/layout/customers/DetailsCard";
 import OfferDetailsCard from "./OfferDetailsCard";
 import OffersDetailsData from "./OffersDetailsData";
 import useOfferDetails from "@/hooks/offers/useOfferDetails";
@@ -20,12 +19,21 @@ const OfferDetails = () => {
     setIsSendEmail,
     onNextHandle,
     loading,
-    handleSendByPost
+    handleSendByPost,
+    handleUpdateDiscount,
+    systemSettings,
+    handleImageSlider,
+    handleUploadImages,
+    shareImgModal,
+    handleUploadFile,
   } = useOfferDetails();
 
   return (
     <Layout>
-      <DetailsCard>
+      {/* {loading ? (
+        <LoadingState />
+      ) : ( */}
+      <div className="bg-white rounded-md px-5 pt-5 pb-10 2xl:fixed offerCardCalWidth z-10 2xl:-mt-[314px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground">
         <OfferDetailsCard
           offerDetails={offerDetails}
           offerDeleteHandler={offerDeleteHandler}
@@ -37,20 +45,32 @@ const OfferDetails = () => {
           isSendEmail={isSendEmail}
           handleSendByPost={handleSendByPost}
           loading={loading}
-
+          onFileUpload={handleUploadFile}
         />
-      </DetailsCard>
+      </div>
 
-      <div className="w-full mt-7">
+      <div className="2xl:mt-[395px] w-full 2xl:block mb-10">
         {isSendEmail ? (
-          <ComposeMail
-            backRouteHandler={handleSendEmail}
-            onNextHandle={onNextHandle}
-          />
+          <div className="mt-5">
+            <ComposeMail
+              backRouteHandler={handleSendEmail}
+              onNextHandle={onNextHandle}
+            />
+          </div>
         ) : (
-          <OffersDetailsData offerDetails={offerDetails} loading={loading} />
+          <OffersDetailsData
+            offerDetails={offerDetails}
+            loading={loading}
+            handleUpdateDiscount={handleUpdateDiscount}
+            currency={systemSettings?.currency}
+            shareImgModal={shareImgModal}
+            handleImagesUpload={handleUploadImages}
+            handleImageSlider={handleImageSlider}
+          />
         )}
       </div>
+
+      {/* )} */}
       {renderModal()}
     </Layout>
   );

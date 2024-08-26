@@ -21,7 +21,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                 id: "logo",
                 name: "logo",
                 control,
-                disabled: true
+                disabled: true,
               },
             },
             {
@@ -36,7 +36,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       type: Field.div,
                       id: "paymentdiv",
 
-                      className: "grid grid-cols-2 gap-x-6 ",
+                      className:
+                        "grid grid-cols-2 gap-x-6 rounded-lg px-2 py-3 bg-[#EDF4FF]",
                       children: [
                         {
                           containerClass: "mb-0",
@@ -52,7 +53,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                             name: "fullName",
                             disabled: true,
                             inputType: "text",
-                            placeholder: "Enter Your Name",
+                            placeholder: "",
                             svg: `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">
                         <path d="M9.74966 0.828796C9.56809 0.647231 9.56809 0.352864 9.74966 0.171298C9.93122 -0.0102245 10.2255 -0.0102245 10.4071 0.171298L12.2071 1.97119C12.3886 2.15275 12.3886 2.44712 12.2071 2.62868C12.1163 2.71942 11.9973 2.76486 11.8784 2.76486C11.7594 2.76486 11.6404 2.71947 11.5496 2.62868L9.74966 0.828796ZM12.4326 13.0326H0.478085C0.221333 13.0326 0.0131836 13.2407 0.0131836 13.4975C0.0131836 13.7542 0.221333 13.9624 0.478085 13.9624H12.4326C12.6893 13.9624 12.8975 13.7542 12.8975 13.4975C12.8975 13.2407 12.6894 13.0326 12.4326 13.0326ZM0.703647 11.6748C0.586745 11.5579 0.54072 11.3878 0.58273 11.228L1.22413 8.78651C1.24509 8.7068 1.2868 8.63415 1.34504 8.57591L8.48876 1.43207C8.67033 1.25055 8.96465 1.25055 9.14622 1.43207L10.9463 3.23204C11.0335 3.31923 11.0824 3.43744 11.0824 3.56077C11.0824 3.68405 11.0335 3.80231 10.9463 3.8895L3.80251 11.0333C3.74427 11.0915 3.67158 11.1332 3.59195 11.1541L1.15054 11.7957C1.11149 11.806 1.07176 11.811 1.03242 11.811C0.910655 11.811 0.791936 11.7632 0.703647 11.6748ZM1.68434 10.6941L3.23398 10.2868L9.96009 3.56077L8.81753 2.41829L2.09146 9.14444L1.68434 10.6941Z" fill="#8F8F8F"/>
                       </svg>
@@ -74,7 +75,7 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                             id: "email",
                             name: "email",
                             disabled: true,
-                            className: "bg-[#F1F1F1] border-none focus-none ",
+                            className: "border-none focus-none bg-[#F5F5F5]",
                             svg: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11" fill="none">
                     <path d="M12.3107 0.703125H1.21449C0.563394 0.703125 0.03125 1.23293 0.03125 1.88637V8.98582C0.03125 9.6395 0.563736 10.1691 1.21449 10.1691H12.3107C12.9618 10.1691 13.4939 9.63926 13.4939 8.98582V1.88637C13.4939 1.23277 12.9615 0.703125 12.3107 0.703125ZM12.129 1.49195C11.7464 1.87577 7.25284 6.384 7.06823 6.56922C6.91404 6.72388 6.61121 6.72399 6.45694 6.56922L1.39619 1.49195H12.129ZM0.820078 8.84081V2.03138L4.21375 5.4361L0.820078 8.84081ZM1.39619 9.38024L4.77064 5.9948L5.89827 7.12611C6.36036 7.5897 7.16499 7.58952 7.62693 7.12611L8.75456 5.99482L12.129 9.38024H1.39619ZM12.7051 8.84081L9.31142 5.4361L12.7051 2.03138V8.84081Z" fill="#8F8F8F"/>
                   </svg>
@@ -87,32 +88,30 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                   },
 
                   {
-                    containerClass: "mt-[26px] mb-[21px]",
+                    containerClass: "mt-[26px] mb-5",
                     field: {
                       type: Field.div,
-                      className: "flex gap-x-4 items-center relative w-full ",
                       id: "div-field",
+                      className:
+                        "overflow-hidden grid grid-cols-[minmax(200px,_100%)_minmax(100%,_100%)] gap-x-2 items-center",
                       children: [
                         {
-                          containerClass: "mb-0",
+                          containerClass: "",
                           field: {
                             type: Field.span,
                             text: `${translate(
                               "admin.settings.account_setting.update_password"
                             )}`,
                             containerClassName:
-                              "text-[14px] text-[#393939] font-normal ",
-                            id: "paymentdiv",
-
+                              " text-[14px] text-[#393939] font-normal ",
+                            id: "info",
                           },
                         },
                         {
+                          containerClass: "border-lightGray border-b-[1px]",
                           field: {
                             type: Field.span,
-                            containerClassName:
-                              " absolute top-3 bg-[#BFBFBF] w-[87%]  mx-auto h-[1px]",
-                            id: "paymentdiv",
-
+                            id: "border",
                           },
                         },
                       ],
@@ -123,7 +122,8 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                     field: {
                       type: Field.div,
                       id: "div-field",
-                      className: "grid grid-cols-2 gap-x-6 gap-y-5",
+                      className:
+                        "grid grid-cols-2 gap-x-6 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
                       children: [
                         {
                           containerClass: "mb-0 ",
@@ -215,7 +215,6 @@ export const changeProfileSettingFormField: GenerateAccountSettingAdminFormField
                       className:
                         "rounded-lg   px-4 w-fit h-[50px]  text-white hover:bg-none ",
                       loading,
-
                     },
                   },
                 ],

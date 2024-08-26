@@ -1,18 +1,15 @@
 import { detailScreenCardsLayout } from "@/types";
-import Head from "next/head";
-import { ReactNode, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { useGlobalUser } from "@/utils/hooks";
 import companyIcon from "@/assets/svgs/company-details.svg";
 import locationIcon from "@/assets/svgs/location-details.svg";
 import bankIcon from "@/assets/svgs/bank-details.svg";
-
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 export const DetailScreensCard = ({
   children,
   currentFormStage,
 }: detailScreenCardsLayout) => {
+  const { t: translate } = useTranslation();
 
   return (
     <div className="flex flex-col justify-center min-h-screen mx-10">
@@ -23,7 +20,7 @@ export const DetailScreensCard = ({
               className={`flex justify-center items-center pl-[53px] pr-11 py-4 ${
                 currentFormStage?.includes("companyDetails") &&
                 "rounded-r-[24px]"
-              } bg-gradient-pricingCards  rounded-tl-2xl cursor-pointer w-full`}
+              } bg-gradient-pricingCards  rounded-tl-2xl  w-full`}
             >
               <Image
                 src={companyIcon}
@@ -31,11 +28,11 @@ export const DetailScreensCard = ({
                 className="mr-[10px]"
               />
               <h2 className="text-sm text-white font-semibold tracking-[0.42px]">
-                Company Details
+                {translate("login_detail.tabs_heading.company")}
               </h2>
             </div>
             <div
-              className={`flex  justify-center items-center py-4 mx-auto cursor-pointer w-full ${
+              className={`flex  justify-center items-center py-4 mx-auto  w-full ${
                 (currentFormStage?.includes("locationDetails") ||
                   currentFormStage?.includes("bankDetails")) &&
                 "bg-gradient-pricingCards "
@@ -57,11 +54,11 @@ export const DetailScreensCard = ({
                     : "text-white"
                 } font-semibold tracking-[0.42px]`}
               >
-                Location Details
+                {translate("login_detail.tabs_heading.location")}
               </h2>
             </div>
             <div
-              className={`flex justify-center items-center py-4 mx-auto cursor-pointer w-full rounded-tr-2xl ${
+              className={`flex justify-center items-center py-4 mx-auto  w-full rounded-tr-2xl ${
                 currentFormStage?.includes("bankDetails") &&
                 "bg-gradient-pricingCards"
               }`}
@@ -74,7 +71,7 @@ export const DetailScreensCard = ({
                     : "text-[#B9B9B9]"
                 } font-semibold tracking-[0.42px]`}
               >
-                Bank Details
+                {translate("login_detail.tabs_heading.bank")}
               </h2>
             </div>
           </div>

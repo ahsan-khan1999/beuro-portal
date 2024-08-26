@@ -9,15 +9,13 @@ import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
-import ImageSlider from "@/base-components/ui/modals1/ImageSlider";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
-import { Lead } from "@/types/leads";
-import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import { useTranslation } from "next-i18next";
-import { readImage, setImages } from "@/api/slices/imageSlice/image";
+import { setImages } from "@/api/slices/imageSlice/image";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 export enum ComponentsType {
   customerAdd,
@@ -28,17 +26,10 @@ export enum ComponentsType {
 
 const AddNewLeadsData = () => {
   const { leadDetails } = useAppSelector((state) => state.lead);
-  const { images } = useAppSelector((state) => state.image);
 
   const [tabType, setTabType] = useState<ComponentsType>(
     (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
   );
-
-  useEffect(() => {
-    setTabType(
-      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
-    );
-  }, [leadDetails?.id]);
 
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -111,8 +102,10 @@ const AddNewLeadsData = () => {
   };
 
   const routeHandler = () => {
-    onClose();
-    router.push("/leads");
+    router.pathname = "/leads";
+    router.query = { status: "None" };
+    updateQuery(router, router.locale as string);
+    dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const leadCreatedHandler = () => {
@@ -126,9 +119,10 @@ const AddNewLeadsData = () => {
   };
 
   const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
     router.pathname = "/leads";
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
+    dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -137,13 +131,23 @@ const AddNewLeadsData = () => {
         imageUploadHandler={imageUploadHandler}
         onClose={onClose}
         routeHandler={routeHandler}
+        heading={translate("leads.leads_created_modal.main_heading")}
+        subHeading={translate("common.modals.lead_created_des")}
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload onClose={onClose} handleImageSlider={handleImageSlider} />
     ),
-    [ModalType.IMAGE_SLIDER]: (
-      <ImageSlider onClose={onClose} details={images} />
+    // [ModalType.IMAGE_SLIDER]: (
+    //   <ImageSlider onClose={onClose} details={images} />
+    // ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.lead_created_des")}
+        route={onClose}
+      />
     ),
   };
 
@@ -187,10 +191,19 @@ const AddNewLeadsData = () => {
     ),
   };
 
+  useEffect(() => {
+    setTabType(
+      (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
+    );
+  }, [leadDetails?.id]);
+
   return (
-    <div className="mt-[22px]">
-      <div className="flex flex-col xl:flex-row w-full gap-6">
-        <div className="flex flex-row flex-wrap xl:flex-col xl:flex-nowrap w-fit gap-[14px]">
+    <div className="h-full">
+      <div className="xLarge:fixed mb-5 xLarge:-mt-12">
+        <p className="mb-5 font-normal text-xl text-[#222B45]">
+          {translate("leads.add_new_lead")}
+        </p>
+        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap w-fit gap-[14px]">
           {tabSection.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
@@ -199,11 +212,15 @@ const AddNewLeadsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
+              key={index}
             />
           ))}
         </div>
+      </div>
 
-        <div className="w-full break-all">
+      <div className="w-full break-all xLarge:mt-[145px] flex mb-10">
+        <div className="max-w-[270px] w-full hidden xLarge:block"></div>
+        <div className="w-full xLarge:max-w-[80%]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

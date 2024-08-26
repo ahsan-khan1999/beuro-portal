@@ -5,9 +5,10 @@ import { EmailTemplateForm } from "./email-template-form";
 import { MailSettingsComponentsType } from "@/enums/setting";
 import { readEmailSettings } from "@/api/slices/settingSlice/settings";
 import { useAppDispatch } from "@/hooks/useRedux";
+import { useTranslation } from "next-i18next";
 
 const MailSetting = ({ handleCreation }: { handleCreation: Function }) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [changedComponent, setChangedComponent] =
     useState<MailSettingsComponentsType>(
       MailSettingsComponentsType.CONFIGURATION
@@ -17,33 +18,37 @@ const MailSetting = ({ handleCreation }: { handleCreation: Function }) => {
     setChangedComponent(component);
   };
   useEffect(() => {
-    dispatch(readEmailSettings({}))
-  }, [])
+    dispatch(readEmailSettings({}));
+  }, []);
+
+  const { t: translate } = useTranslation();
 
   return (
     <div>
       <SettingLayout containerClassName="pl-[31px] my-[14px] space-x-8">
         <button
-          className={`text-base font-medium ${changedComponent === MailSettingsComponentsType.CONFIGURATION
-            ? "text-[#4A13E7]"
-            : "text-[#4B4B4B]"
-            }`}
+          className={`text-base font-medium ${
+            changedComponent === MailSettingsComponentsType.CONFIGURATION
+              ? "text-[#4A13E7]"
+              : "text-[#4B4B4B]"
+          }`}
           onClick={() =>
             handleChangedComponent(MailSettingsComponentsType.CONFIGURATION)
           }
         >
-          Email Configuration
+          {translate("setting.mail_setting.email_config")}
         </button>
         <button
-          className={`text-base font-medium ${changedComponent === MailSettingsComponentsType.EMAIL_TEMPLATE
-            ? "text-[#4A13E7]"
-            : "text-[#4B4B4B]"
-            }`}
+          className={`text-base font-medium ${
+            changedComponent === MailSettingsComponentsType.EMAIL_TEMPLATE
+              ? "text-[#4A13E7]"
+              : "text-[#4B4B4B]"
+          }`}
           onClick={() =>
             handleChangedComponent(MailSettingsComponentsType.EMAIL_TEMPLATE)
           }
         >
-          Email template
+          {translate("setting.mail_setting.email_templates")}
         </button>
       </SettingLayout>
 

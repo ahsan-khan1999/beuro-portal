@@ -45,7 +45,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               inputType: "text",
               id: "customerName",
               name: "customerName",
-              placeholder: "Rahal Ahmed",
+              placeholder: "Customer Name",
               register,
             },
           },
@@ -77,12 +77,12 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               className: "!p-4 !border-[#BFBFBF]  focus:!border-primary ",
               type: Field.select,
               id: "offerTitle",
-              value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
+              value: "Office Cleaning",
               name: "offerTitle",
               options: [
                 {
-                  value: "Office Cleaning Munich Lorem ipsum dollar smith emit",
-                  label: "Office Cleaning Munich Lorem ipsum dollar smith emit",
+                  value: "Office Cleaning",
+                  label: "Office Cleaning",
                 },
               ],
               control,
@@ -131,8 +131,8 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              inputType: "number",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary ",
+              inputType: "tel",
               id: "phoneNumber",
               name: "phoneNumber",
               placeholder: "+49 445612 2112",
@@ -149,7 +149,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              inputType: "number",
+              inputType: "tel",
               id: "mobileNumber",
               name: "mobileNumber",
               placeholder: "+49 445612 2112",
@@ -207,7 +207,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
               inputType: "text",
               id: "country",
               name: "country",
-              placeholder: "Switzerland",
+              placeholder: "",
 
               register,
             },
@@ -215,36 +215,6 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
         ],
       },
     },
-
-    // {
-    //   containerClass: "mt-5",
-    //   field: {
-    //     type: Field.div,
-    //     id: "div-field",
-    //     className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
-    //     children: [
-
-    //     ],
-    //   },
-    // },
-
-    // {
-    //   containerClass: "mt-5",
-    //   label: {
-    //     text: `${translate("offers.offer_details.customer_address")}`,
-    //     htmlFor: "name",
-    //     className: "mb-[10px] text-[#8F8F8F]",
-    //   },
-
-    //   field: {
-    //     type: Field.div,
-    //     id: "div-field",
-    //     className: "grid grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-5",
-    //     children: [
-
-    //     ],
-    //   },
-    // },
 
     {
       containerClass: "mt-5",
@@ -297,7 +267,7 @@ export const OfferEditDetailsFormField: GenerateOffersFormField = (
         text: `${translate("offers.offer_details.save_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg p-4 w-[152px] h-[50px]  text-white hover:bg-none",
+          "rounded-lg p-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
         loading,
       },
     },

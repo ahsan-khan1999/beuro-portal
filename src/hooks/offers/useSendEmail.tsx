@@ -1,27 +1,19 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
-import { ContractEmailPreviewFormField } from "@/components/contract/fields/contract-email-fields";
-import { useEffect, useMemo, useState } from "react";
-import {
-  readContent,
-  setContentDetails,
-} from "@/api/slices/content/contentSlice";
+import { useEffect, useState } from "react";
+import { setContentDetails } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { ModalType } from "@/enums/ui";
 import { updateQuery } from "@/utils/update-query";
 import { OfferEmailFormField } from "@/components/offers/compose-mail/fields";
 import localStoreUtil from "@/utils/localstore.util";
-import { CompanySettingsActionType, TemplateType } from "@/types";
-import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
 
 export const useSendEmail = (
   backRouteHandler: Function,
@@ -33,14 +25,15 @@ export const useSendEmail = (
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
-
+  const isMail = router.query?.isMail;
+  const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (offerDetails?.id &&
       transformAttachments(
         offerDetails?.content?.offerContent?.attachments as string[]
       )) ||
-    []
+      []
   );
 
   const schema = generateContractEmailValidationSchema(translate);
@@ -51,19 +44,29 @@ export const useSendEmail = (
     setError,
     reset,
     formState: { errors },
+    setValue,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
-    dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
+    // dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
     reset({
       email: offerDetails?.leadID?.customerDetail?.email,
       content: offerDetails?.content?.id,
-      subject: offerDetails?.content?.offerContent?.title,
-      description: offerDetails?.content?.offerContent?.description,
-      pdf: offerDetails?.content?.offerContent?.attachments,
-    });
+      subject:
+        offerDetails?.title ||
+        "" +
+          " " +
+          offerDetails?.offerNumber +
+          " " +
+          offerDetails?.createdBy?.company?.companyName,
 
+      description: offerDetails?.content?.offerContent?.body || "",
+      attachments: offerDetails?.content?.offerContent?.attachments,
+      title: offerDetails?.title,
+      additionalDetails: offerDetails?.additionalDetails || "",
+    });
   }, []);
 
   const onContentSelect = (id: string) => {
@@ -72,13 +75,23 @@ export const useSendEmail = (
       reset({
         email: offerDetails?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.offerContent?.title,
-        description: selectedContent?.offerContent?.description,
-        pdf: selectedContent?.offerContent?.attachments,
+        subject:
+          selectedContent?.offerContent?.title ||
+          "" +
+            " " +
+            offerDetails?.offerNumber +
+            " " +
+            offerDetails?.createdBy?.company?.companyName,
+        description: selectedContent?.offerContent?.body || "",
+        attachments: selectedContent?.offerContent?.attachments,
+        title: offerDetails?.title,
+        additionalDetails: offerDetails?.additionalDetails || "",
       });
-      setAttachements(transformAttachments(
-        selectedContent?.offerContent?.attachments as string[]
-      ) || [])
+      setAttachements(
+        transformAttachments(
+          selectedContent?.offerContent?.attachments as string[]
+        ) || []
+      );
       dispatch(setContentDetails(selectedContent));
     }
   };
@@ -93,23 +106,41 @@ export const useSendEmail = (
     onContentSelect,
     attachements,
     setAttachements,
-    offerDetails
+    offerDetails,
+    isMoreEmail,
+    setIsMoreEmail,
+    setValue
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const updatedData = {
-      ...data,
-      id: offerDetails?.id,
-      pdf: attachements?.map((item) => item.value),
-      // router,
-      // translate,
-      // setError,
-    };
+    // const apiData = {
+    //   id: offerDetails?.id,
+    //   title: data?.title,
+    //   additionalDetails: data?.additionalDetails,
 
-    localStoreUtil.store_data("contractComposeEmail", updatedData);
+    // };
+    // const response = await dispatch(updateOfferContent({ data: apiData }));
+    // if (response?.payload) {
+    if (isMail) {
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
 
-    router.pathname = "/offers/pdf-preview";
-    router.query = { offerID: offerDetails?.id };
-    updateQuery(router, router.locale as string);
+      let apiData = { ...data, id: offerDetails?.id, pdf: fileUrl };
+
+      const res = await dispatch(sendOfferEmail({ data: apiData }));
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
+    } else {
+      const updatedData = {
+        ...data,
+        id: offerDetails?.id,
+        attachments: attachements?.map((item) => item.value),
+      };
+      localStoreUtil.store_data("contractComposeEmail", updatedData);
+
+      router.pathname = "/offers/pdf-preview";
+      router.query = { ...router.query, offerID: offerDetails?.id };
+      updateQuery(router, router.locale as string);
+    }
   };
   return {
     fields,

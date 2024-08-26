@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
-import addNewNote from "@/assets/svgs/add_new_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Lead } from "@/types/leads";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -10,16 +9,21 @@ import { OffersTableRowTypes } from "@/types/offers";
 import { contractTableTypes } from "@/types/contract";
 import { InvoiceTableRowTypes } from "@/types/invoice";
 import { useTranslation } from "next-i18next";
-import { useEmptyStates } from "@/utils/hooks";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { BaseButton } from "../button/base-button";
+import editNoteIcon from "@/assets/svgs/edit_primary.svg";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 
 const ExistingNotes = ({
   handleAddNote,
+  onEditNote,
+  onConfrimDeleteNote,
   onClose,
   leadDetails,
 }: {
   handleAddNote: (id: string) => void;
+  onEditNote: (id: string, note: string) => void;
+  onConfrimDeleteNote: (id: string) => void;
   onClose: () => void;
   leadDetails:
     | Lead
@@ -30,13 +34,12 @@ const ExistingNotes = ({
   const { notes } = useAppSelector((state) => state.note);
   const { t: translate } = useTranslation();
 
-
   return (
     <BaseModal
       onClose={onClose}
-      containerClassName="max-w-[480px] xl:max-w-[624px] "
+      containerClassName="max-w-[480px] xl:max-w-[624px]"
     >
-      <div className="relative flex flex-col pt-[22px] xl:pb-[50px] pb-4 h-[615px] overflow-y-auto overflow-x-hidden">
+      <div className="relative flex flex-col pt-[22px] xl:pb-[50px] pb-4">
         <Image
           src={crossIcon}
           alt="cross_icon"
@@ -47,16 +50,13 @@ const ExistingNotes = ({
           <p className="text-2xl font-medium text-[#000]">
             {translate("common.notes_modal.heading")}
           </p>
-          <div className="flex justify-between items-center gap-[10px] ">
-            <Image
-              src={addNewNote}
-              alt="request_submitted"
+          <div className="flex justify-between items-center gap-[10px]">
+            <BaseButton
               onClick={() => handleAddNote(leadDetails?.id)}
-              className="cursor-pointer"
+              buttonText={translate("common.notes_modal.button")}
+              containerClassName="flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover"
+              textClassName="text-white font-medium"
             />
-            <p className="text-[#4B4B4B] text-base">
-              {translate("common.notes_modal.button")}
-            </p>
           </div>
         </div>
 
@@ -76,38 +76,64 @@ const ExistingNotes = ({
             />
           </svg>
         </span>
-        {notes?.length > 0 ? (
-          <>
+
+        {notes && notes?.length > 0 ? (
+          <div className="h-[615px] overflow-y-auto overflow-x-hidden">
             {notes?.map((item, key) => (
               <div
-                className={` mb-[10px]  ${
-                  notes?.length - 1 !== key &&
-                  "border-b-[1px] border-lightGray "
-                }pb-3 `}
+                className={`mb-[10px] ${
+                  notes?.length - 1 !== key && "border-b-[1px] border-lightGray"
+                } pb-3 `}
                 key={key}
               >
-                <p className="mx-[41px] text-[#8F8F8F] text-[14px] font-normal mb-[8px]">
-                  Created by &nbsp;
-                  <span className="text-[#1E1E1E] text-base font-normal">
-                    {item.createdBy?.fullName}
-                  </span>
-                </p>
+                <div className="flex items-center justify-between mx-[41px] mb-[8px]">
+                  <p className="text-[#8F8F8F] text-[14px] font-normal">
+                    Created by &nbsp;
+                    <span className="text-[#1E1E1E] text-base font-normal">
+                      {item.createdBy?.fullName}
+                    </span>
+                  </p>
+                  <div className="flex items-center gap-x-4">
+                    <Image
+                      src={editNoteIcon}
+                      alt="edit note"
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() => onEditNote(item?.id, item?.description)}
+                    />
+                    <Image
+                      src={deleteIcon}
+                      alt="delete note"
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() => onConfrimDeleteNote(item?.id)}
+                    />
+                  </div>
+                </div>
 
-                <div className="mx-[41px] border border-[#4B4B4B] rounded-lg">
+                <div className="relative mx-[41px] border border-[#4B4B4B] rounded-lg">
+                  <p className="text-primary text-sm font-normal absolute bottom-2 left-2">
+                    {item?.noteType}
+                  </p>
                   <div
-                    className="text-[#4B4B4B]  text-base font-normal p-[17px] break-all"
+                    className="text-[#4B4B4B] text-base font-normal p-[17px] break-all"
                     dangerouslySetInnerHTML={{ __html: item?.description }}
                   />
-                  <div className="p-2 flex justify-end text-sm text-lightGray">
+                  <div className="p-2 flex justify-end text-sm text-primary">
                     {formatDateReverse(item?.createdAt)}
                   </div>
                 </div>
               </div>
             ))}
-          </>
+          </div>
         ) : (
           <div className="flex justify-center items-center">
-            <NoDataEmptyState />
+            <NoDataEmptyState
+              className="w-fit"
+              containerClassName="py-5"
+            />
           </div>
         )}
       </div>

@@ -39,6 +39,8 @@ export enum OfferAddressEditDetails {
   country = "country",
   description = "description",
   address = "address",
+  label = "label",
+  type = "type"
 }
 
 // enum for add service offer details
@@ -57,6 +59,7 @@ export enum AddServiceOfferDetails {
   isTax = "isTax",
   taxType = "taxType",
   taxAmount = "taxAmount",
+  discount = "discount"
 }
 
 export enum ServiceType {

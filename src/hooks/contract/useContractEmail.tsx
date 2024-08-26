@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -6,8 +5,11 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
 import { ContractEmailPreviewFormField } from "@/components/contract/fields/contract-email-fields";
-import { useEffect, useMemo, useState } from "react";
-import { readContent, setContentDetails } from "@/api/slices/content/contentSlice";
+import { useEffect, useState } from "react";
+import {
+  readContent,
+  setContentDetails,
+} from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { sendContractEmail } from "@/api/slices/contract/contractSlice";
@@ -23,9 +25,21 @@ export const useContractEmail = (
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, contractDetails } = useAppSelector((state) => state.contract);
+  const { loading, error, contractDetails } = useAppSelector(
+    (state) => state.contract
+  );
+  const isMail = router.query?.isMail;
+
   const { content, contentDetails } = useAppSelector((state) => state.content);
-  const [attachements, setAttachements] = useState<Attachement[]>(contractDetails?.id && transformAttachments(contractDetails?.offerID?.content?.confirmationContent?.attachments as string[]) || [])
+  const [moreEmail, setMoreEmail] = useState({ isCc: false, isBcc: false });
+  const [attachements, setAttachements] = useState<Attachement[]>(
+    (contractDetails?.id &&
+      transformAttachments(
+        contractDetails?.offerID?.content?.confirmationContent
+          ?.attachments as string[]
+      )) ||
+      []
+  );
 
   const schema = generateContractEmailValidationSchema(translate);
   const {
@@ -35,24 +49,32 @@ export const useContractEmail = (
     setError,
     formState: { errors },
     watch,
-    reset
+    reset,
+    setValue,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
-    dispatch(readContent({ params: { filter: {}, paginate: 0 } }))
+    dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
 
     reset({
       email: contractDetails?.offerID?.leadID?.customerDetail?.email,
-      content: contractDetails?.offerID?.content?.confirmationContent?.title,
-      subject: contractDetails?.offerID?.content?.confirmationContent?.title,
-      description: contractDetails?.offerID?.content?.confirmationContent?.description,
-      pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments
-    })
-  }, [])
-
-
+      content: contractDetails?.offerID?.content?.id,
+      subject:
+        contractDetails?.title ||
+        "" +
+          " " +
+          contractDetails?.contractNumber +
+          " " +
+          contractDetails?.offerID?.createdBy?.company?.companyName,
+      description:
+        contractDetails?.offerID?.content?.confirmationContent?.body || "",
+      pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
+      // title: contractDetails?.title,
+      // additionalDetails: contractDetails?.additionalDetails || "",
+    });
+  }, []);
 
   const onContentSelect = (id: string) => {
     const selectedContent = content.find((item) => item.id === id);
@@ -60,13 +82,23 @@ export const useContractEmail = (
       reset({
         email: contractDetails?.offerID?.leadID?.customerDetail?.email,
         content: selectedContent?.id,
-        subject: selectedContent?.confirmationContent?.title,
-        description: selectedContent?.confirmationContent?.description,
+        subject:
+          selectedContent?.confirmationContent?.title ||
+          "" +
+            " " +
+            contractDetails?.contractNumber +
+            " " +
+            contractDetails?.offerID?.createdBy?.company?.companyName,
+        description: selectedContent?.confirmationContent?.body || "",
         pdf: selectedContent?.confirmationContent?.attachments,
+        // title: contractDetails?.title,
+        // additionalDetails: contractDetails?.additionalDetails || "",
       });
-      setAttachements(transformAttachments(
-        selectedContent?.confirmationContent?.attachments as string[]
-      ) || [])
+      setAttachements(
+        transformAttachments(
+          selectedContent?.confirmationContent?.attachments as string[]
+        ) || []
+      );
       dispatch(setContentDetails(selectedContent));
     }
   };
@@ -81,32 +113,43 @@ export const useContractEmail = (
     onContentSelect,
     attachements,
     setAttachements,
-    contractDetails
+    contractDetails,
+    moreEmail,
+    setMoreEmail,
+    setValue
   );
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    // const apiData = {
+    //   id: contractDetails?.id,
+    //   title: data?.title,
+    //   additionalDetails: data?.additionalDetails,
 
-    const updatedData = {
-      ...data,
-      id: contractDetails?.id,
-      pdf: attachements?.map((item) => item.value),
-      // router,
-      // translate,
-      // setError,
-    };
+    // };
+    // const response = await dispatch(updateContractContent({ data: apiData }));
+    // if (response?.payload) {
 
-    localStoreUtil.store_data("contractComposeEmail", updatedData);
+    if (isMail) {
+      const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
+      let apiData = { ...data, id: contractDetails?.id, pdf: fileUrl };
 
-    router.pathname = "/contract/pdf-preview";
-    router.query = { offerID: contractDetails?.id };
-    updateQuery(router, router.locale as string);
-    // const res = await dispatch(sendContractEmail({
-    //   data: {
-    //     ...data, id: contractDetails?.id,
-    //     pdf: attachements?.map((item) => item.value),
+      const res = await dispatch(sendContractEmail({ data: apiData }));
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
+    } else {
+      const updatedData = {
+        ...data,
+        id: contractDetails?.id,
+        attachments: attachements?.map((item) => item.value),
+      } as { [key: string]: any };
+      delete updatedData["pdf"];
+      localStoreUtil.store_data("contractComposeEmail", updatedData);
+      router.pathname = "/contract/pdf-preview";
+      router.query = { offerID: contractDetails?.id };
+      updateQuery(router, router.locale as string);
+    }
 
-    //   }, router, translate, setError
-    // }))
-    // if (res?.payload) dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }))
+    // }
   };
   return {
     fields,
@@ -115,6 +158,6 @@ export const useContractEmail = (
     handleSubmit,
     errors,
     error,
-    translate
+    translate,
   };
 };

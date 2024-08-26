@@ -6,6 +6,7 @@ import TableRows from "./table/TableRows";
 import TableHeadings from "./table/TableHeadings";
 import useLeads from "@/hooks/leads/useLeads";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Leads() {
   const {
@@ -14,12 +15,16 @@ export default function Leads() {
     totalItems,
     itemsPerPage,
     handleNotes,
+    handleDeleteNote,
     handleImageUpload,
     renderModal,
     filter,
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
+    currentPage,
+    handleLeadStatusUpdate,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
@@ -27,9 +32,10 @@ export default function Leads() {
       dataToAdd={currentPageRows}
       openModal={handleNotes}
       handleImageUpload={handleImageUpload}
+      onStatusChange={handleLeadStatusUpdate}
     />,
     currentPageRows.length > 0,
-    loading
+    isLoading
   );
 
   return (
@@ -39,17 +45,18 @@ export default function Leads() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeadings />
-        {CurrentComponent}
-      </TableLayout>
-      {currentPageRows.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeadings />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       {renderModal()}
     </>
   );

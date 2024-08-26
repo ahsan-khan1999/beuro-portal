@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { CheckBoxType, FilterProps, FilterType } from "@/types";
+import { FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
-import { PriceInputField } from "./fields/price-input-field";
-import { RadioField } from "./fields/radio-field";
 import useFilter from "@/hooks/filter/hook";
 import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
+import { useTranslation } from "next-i18next";
+import { staticEnums } from "@/utils/static";
+import EmailCheckField from "./fields/email-check-field";
+import { useRouter } from "next/router";
+import { Button } from "@/base-components/ui/button/button";
+import filtersIcon from "@/assets/pngs/filter_icon.png";
+
 export default function ContractsFilter({
   filter,
   setFilter,
@@ -20,6 +25,7 @@ export default function ContractsFilter({
       $lte: FiltersDefaultValues.$lte,
     },
   };
+
   const {
     extraFilterss,
     moreFilter,
@@ -30,16 +36,35 @@ export default function ContractsFilter({
     handleExtraFiltersClose,
   } = useFilter({ filter, setFilter, moreFilters });
 
+  const router = useRouter();
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
+  const { t: translate } = useTranslation();
 
   const handleSave = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          date: JSON.stringify(moreFilter?.date),
+          ...(moreFilter?.leadSource && {
+            leadSource: moreFilter?.leadSource,
+          }),
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
     setFilter((prev: any) => {
       const updatedFilters = {
         ...prev,
         date: {
           $gte: moreFilter.date && moreFilter.date.$gte,
           $lte: moreFilter.date && moreFilter.date.$lte,
-        }
+        },
+        leadSource: moreFilter?.leadSource,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -60,16 +85,52 @@ export default function ContractsFilter({
       price: prev.price && [prev.price[0], val],
     }));
   };
+
   const handleDateChange = (dateRange: "$gte" | "$lte", val: string) => {
-    const dateTime = new Date(val);
+    let dateTime: string | undefined = undefined;
+
+    if (val && !isNaN(new Date(val).getTime())) {
+      dateTime = new Date(val).toISOString();
+    }
+
     setMoreFilter((prev) => ({
       ...prev,
-      date: { ...prev.date, [dateRange]: dateTime?.toISOString() },
+      date: { ...prev.date, [dateRange]: dateTime },
     }));
   };
+
+  const handleStatusChange = (value: string, isChecked: boolean) => {
+    setMoreFilter((prev: FilterType) => {
+      let updatedStatus = new Set(
+        prev.leadSource !== FiltersDefaultValues.None ? prev.leadSource : []
+      );
+
+      if (isChecked) {
+        updatedStatus.add(value);
+      } else {
+        updatedStatus.delete(value);
+      }
+
+      const emailStatus =
+        updatedStatus.size > 0
+          ? Array.from(updatedStatus)
+          : FiltersDefaultValues.None;
+      return { ...prev, leadSource: emailStatus };
+    });
+  };
+
   return (
-    <div className="relative flex my-auto cursor-pointer " ref={ref}>
-      <svg
+    <div className="relative flex my-auto cursor-pointer z-50" ref={ref}>
+      <Button
+        inputType="button"
+        onClick={handleExtraFilterToggle}
+        className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+        icon={filtersIcon}
+        text={translate("common.filters")}
+        id="add"
+        iconAlt="fitlers"
+      />
+      {/* <svg
         onClick={handleExtraFilterToggle}
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -93,7 +154,7 @@ export default function ContractsFilter({
             />
           </clipPath>
         </defs>
-      </svg>
+      </svg> */}
       <AnimatePresence>
         {extraFilterss && (
           <motion.div
@@ -104,114 +165,90 @@ export default function ContractsFilter({
             transition={{ duration: 0.4 }}
           >
             <div className="flex justify-between border-b border-lightGray pb-3">
-              <span className="font-medium text-lg">Filter</span>
+              <span className="font-medium text-lg">
+                {translate("filters.extra_filters.heading")}
+              </span>
               <span
-                className=" text-base text-red cursor-pointer"
+                className="text-base text-red cursor-pointer"
                 onClick={handleFilterResetToInitial}
               >
-                Reset All
+                {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
-            <div className="">
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Date
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => {
-                      handleFilterReset("date", {
-                        $gte: FiltersDefaultValues.$gte,
-                        $lte: FiltersDefaultValues.$lte,
-                      });
-                    }}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div>
-                  <DatePicker
-                    label="From"
-                    label2="To"
-                    dateFrom={formatDateForDatePicker(
-                      (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                      FiltersDefaultValues.$gte
-                    )}
-                    dateTo={formatDateForDatePicker(
-                      (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                      FiltersDefaultValues.$lte
-                    )}
-                    onChangeFrom={(val) => handleDateChange("$gte", val)}
-                    onChangeTo={(val) => handleDateChange("$lte", val)}
-                  />
-                </div>
+            <div className="mt-5 mb-2">
+              <div className="flex justify-between">
+                <label htmlFor="type" className="font-medium text-base">
+                  {translate("filters.extra_filters.date")}
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => {
+                    handleFilterReset("date", {
+                      $gte: FiltersDefaultValues.$gte,
+                      $lte: FiltersDefaultValues.$lte,
+                    });
+                  }}
+                >
+                  {translate("filters.extra_filters.reset")}
+                </label>
               </div>
-              {/* payment section  */}
-              {/* <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Payment
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("payment", "")}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div className="flex items-center gap-x-10 my-5">
-                  <RadioField
-                    lable="Cash"
-                    onChange={(val) =>
-                      setMoreFilter((prev) => ({ ...prev, payment: val }))
-                    }
-                    checked={moreFilter.payment === "Cash"}
-                  />
-                  <RadioField
-                    lable="Online"
-                    checked={moreFilter.payment === "Online"}
-                    onChange={(val) =>
-                      setMoreFilter((prev) => ({ ...prev, payment: val }))
-                    }
-                  />
-                </div>
-              </div>
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Price
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("price", ["0", "0"])}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div>
-                  <PriceInputField
-                    label="Low Price"
-                    label2="High Price"
-                    lowPrice={moreFilter.price && moreFilter.price[0]}
-                    highPrice={moreFilter.price && moreFilter.price[1]}
-                    onHighPriceChange={handleHighPriceChange}
-                    onLowPriceChange={handleLowPriceChange}
-                  />
-                </div>
-              </div> */}
-            </div>
-            <div>
-              <BaseButton
-                buttonText="Save"
-                onClick={handleSave}
-                containerClassName="bg-primary my-2 px-8 py-2"
-                textClassName="text-white"
+
+              <DatePicker
+                label={translate("filters.extra_filters.from")}
+                label2={translate("filters.extra_filters.to")}
+                dateFrom={formatDateForDatePicker(
+                  (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                    FiltersDefaultValues.$gte
+                )}
+                dateTo={formatDateForDatePicker(
+                  (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                    FiltersDefaultValues.$lte
+                )}
+                onChangeFrom={(val) => handleDateChange("$gte", val)}
+                onChangeTo={(val) => handleDateChange("$lte", val)}
               />
             </div>
+
+            <div className="mt-5 mb-2">
+              <div className="flex justify-between">
+                <label htmlFor="type" className="font-medium text-base">
+                  {translate("filters.extra_filters.leadSource")}
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => {
+                    handleFilterReset("leadSource", "None");
+                  }}
+                >
+                  {translate("filters.extra_filters.reset")}
+                </label>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 mt-4">
+                {Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
+                  <EmailCheckField
+                    key={idx}
+                    checkboxFilter={moreFilter as unknown as FilterType}
+                    setCheckBoxFilter={setMoreFilter}
+                    type={"leadSource"}
+                    label={item}
+                    value={item}
+                    onChange={(value, isChecked) =>
+                      handleStatusChange(value, isChecked)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+
+            <BaseButton
+              buttonText={translate("common.apply_button")}
+              onClick={handleSave}
+              containerClassName="bg-primary my-2 px-8 py-2"
+              textClassName="text-white"
+            />
           </motion.div>
         )}
       </AnimatePresence>

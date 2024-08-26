@@ -19,6 +19,7 @@ export const ProfileUpload = ({
   iconClasses?: string;
   disabled?: boolean;
 }) => {
+  
   // const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const dispatch = useAppDispatch();
   const formdata = new FormData();
@@ -47,6 +48,7 @@ export const ProfileUpload = ({
               width={241}
               height={241}
               alt="Uploaded Preview"
+              key={Math.random()}
               className={`${classes} object-contain`}
             />
             <label

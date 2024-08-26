@@ -3,6 +3,7 @@ import { useAddNewLeadCustomer } from "@/hooks/leads/useAddNewLeadCustomer";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { useRouter } from "next/router";
+import { updateQuery } from "@/utils/update-query";
 
 const AddLeadsCustomerDetails = ({
   onHandleNext,
@@ -12,30 +13,40 @@ const AddLeadsCustomerDetails = ({
   const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useAddNewLeadCustomer(onHandleNext);
+
   const router = useRouter();
+  const handleCancel = () => {
+    router.pathname = "/leads";
+    router.query = { status: "None" };
+    updateQuery(router, router.locale as string);
+  };
+
   return (
     <FormCard>
       <div
-        className="flex justify-between items-center pb-5 "
+        className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg"
         id="Customer Details"
       >
-        <h2 className="text-[#393939] text-lg font-medium">{translate("leads.customer_details.heading")}</h2>
+        <h2 className="text-[#fff] text-lg font-medium">
+          {translate("leads.customer_details.heading")}
+        </h2>
         <button
-          onClick={() => router.push("/leads")}
-          className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
+          onClick={handleCancel}
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full bg-white"
         >
           {translate("leads.customer_details.cancel_button")}
         </button>
       </div>
-      <hr className="opacity-20 mb-5" />
 
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      <div className="py-3 px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </FormCard>
   );
 };

@@ -12,7 +12,8 @@ export enum LeadsCustomerEditDetails {
   country = "country",
   address = "address",
   type = "type",
-  customer = "customerID"
+  customer = "customerID",
+  gender="gender"
 
 }
 
@@ -34,6 +35,8 @@ export enum LeadsAddressEditDetails {
   postCode = "postalCode",
   country = "country",
   description = "description",
+  label = "label",
+  type="type"
 }
 
 // Add new customer lead details

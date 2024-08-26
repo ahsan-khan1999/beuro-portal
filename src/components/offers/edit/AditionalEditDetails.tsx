@@ -5,38 +5,50 @@ import React from "react";
 import { useRouter } from "next/router";
 import { EditComponentsType } from "./EditOffersDetailsData";
 
-const AditionalEditDetails = ({ handleNext, handleBack }: {
-  handleNext: (currentComponent: EditComponentsType) => void,
-  handleBack: (currentComponent: EditComponentsType) => void
-
+const AditionalEditDetails = ({
+  handleNext,
+  handleBack,
+}: {
+  handleNext: (currentComponent: EditComponentsType) => void;
+  handleBack: (currentComponent: EditComponentsType) => void;
 }) => {
   const router = useRouter();
   const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useOfferEditAdditionalDetails({ handleNext,handleBack });
+  const {
+    fields,
+    control,
+    onSubmit,
+    handleSubmit,
+    errors,
+    error,
+    translate,
+    offerDetails,
+  } = useOfferEditAdditionalDetails({ handleNext, handleBack });
+
   return (
     <FormCard>
-      <div className="flex justify-between items-center pb-5 border-b border-black border-opacity-20">
-        <h2 className="text-[#393939] text-lg font-medium">
-          {translate("offers.additional_details.main_heading")}
+      <div className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg">
+        <h2 className="text-[#fff] text-lg font-medium">
+          {translate("offers.additional_details.main_heading")} (
+          {offerDetails?.id && offerDetails?.offerNumber})
         </h2>
         <button
           onClick={() => router.back()}
-          className="text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[131px] w-full"
+          className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 max-w-[131px] w-full bg-white"
         >
           {translate("offers.additional_details.cancel_button")}
         </button>
       </div>
 
-      <hr className="opacity-20 mb-5" />
-
-      <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-        className={`${defaultClassName}`}
-      />
+      <div className="px-6">
+        <Form
+          formFields={fields}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          errors={errors}
+          className={`${defaultClassName}`}
+        />
+      </div>
     </FormCard>
   );
 };

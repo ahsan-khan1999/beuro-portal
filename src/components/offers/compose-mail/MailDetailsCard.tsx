@@ -56,7 +56,7 @@ const MailDetailsCard = () => {
             </span>
 
             <span className="text-base font-medium text-[#4B4B4B] flex">
-              Office Cleaning Munich Lorem Ipsum dollar
+              Office Cleaning
             </span>
           </div>
           <div className="flex gap-[10px]">

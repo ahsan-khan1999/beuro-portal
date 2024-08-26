@@ -1,10 +1,11 @@
 import { CKEditorProps } from "@/types";
-import { Controller } from "react-hook-form";
 import dynamic from "next/dynamic";
+import { Controller } from "react-hook-form";
 
 const CustomCKEditor = dynamic(() => import("./custom-ck-editor-field"), {
   ssr: false,
 });
+
 export const CkEditor = ({
   id,
   value: defaultValue,
@@ -18,16 +19,18 @@ export const CkEditor = ({
       name={name}
       control={control}
       defaultValue={defaultValue}
-      render={({ field, fieldState: { error } }) => (
-        <CustomCKEditor
-          field={field}
-          trigger={trigger}
-          name={name}
-          id={id}
-          type="Editor"
-          data={defaultValue}
-        />
-      )}
+      render={({ field, fieldState: { error } }) => {
+        return (
+          <CustomCKEditor
+            field={field}
+            trigger={trigger}
+            name={name}
+            id={id}
+            type="Editor"
+            data={defaultValue}
+          />
+        );
+      }}
     />
   );
 };

@@ -21,10 +21,16 @@ module.exports = {
       },
       screens: {
         xs: "375px",
-        mlg: "1090px",
+        md: "900px",
+        mlg: "1100px",
         xlg: "1200px",
+        xlgg: "1220px",
         maxSize: "1280px",
-        xMaxSize: "1400px"
+        xMaxSize: "1400px",
+        xLarge: "1500px",
+        maxLarge: "1600px",
+        xMaxLarge: "1680px",
+        xMaxProLarge: "1780px",
       },
       margin: {
         "60px": "3.75rem",
@@ -51,6 +57,7 @@ module.exports = {
         primary: "#4A13E7",
         "bright-primary": "#9B19E6",
         secondary: "#18d9c5",
+        "dark-red": "#C31313",
         dark: "#1E1E1E",
         gray: "#616161",
         "dark-gray": "#61616199",
@@ -70,9 +77,11 @@ module.exports = {
         buttonHover: "#9B19E6",
         shadowColor: "#00000029",
         helpShadowColor: "#00000014",
-        lightDark:"#393939",
-
-        statusColor: "#AF2626",
+        lightDark: "#393939",
+        statusColor: "#ebd409",
+        defaultBackground: "#f3f3f3",
+        inProgressStatus: "#ebd409",
+        tableRowBg: "#F4F8FD",
       },
       boxShadow: (theme: any) => ({
         header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,

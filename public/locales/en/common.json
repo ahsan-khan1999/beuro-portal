@@ -1,16 +1,20 @@
 {
   "register": {
-    "main_heading": "Create Account",
-    "sub_heading": "Join free! Please enter your details",
+    "main_heading": "Sign Up to Büro-365",
+    "sub_heading": "Manage your business with us",
+    "full_name": "Full Name",
     "email_label": "Email",
     "password_label": "Password",
     "confirm_password_label": "Confirm Password",
+    "full_name_placeholder": "Enter Your Full Name",
     "email_placeholder": "Enter Your Email",
     "password_placeholder": "Enter Your Password",
-    "confirm_password_placeholder": "Enter Your Password",
-    "button": "Create Account",
+    "confirm_password_placeholder": "Confirm Your Password",
+    "agreed": "By creating an account your agreeing to our",
+    "terms_policy": "Privacy Policy",
+    "button": "Sign Up",
     "have_an_account": "Already have an account ?",
-    "login": "Login",
+    "sign_in": "Sign In",
     "or_login": "or login with"
   },
   "login": {
@@ -18,14 +22,52 @@
     "sub_heading": "Enter your account details",
     "email_label": "Email",
     "password_label": "Password",
-    "email_placeholder": "Enter Your Email",
+    "email_placeholder": "Please enter an email address",
     "password_placeholder": "Enter Your Password",
     "button": "Login",
+    "sign_up_button": "Sign Up",
     "dont_have_an_account": "Dont have an account ?",
     "create": "Create Account",
     "or_login": "or login with",
     "remember_me": "Remember me",
     "forgot_password": "Forgot Password"
+  },
+  "login_detail": {
+    "back_button": "Back",
+    "next_button": "Next",
+    "finish_button": "Lets Finish",
+    "tabs_heading": {
+      "company": "Company Details",
+      "location": "Location Details",
+      "bank": "Bank Details"
+    },
+    "company_details": {
+      "heading": "Tell Us About Your Company",
+      "sub_heading": "Enhance support by sharing company information.",
+      "company_name": "Company Name",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "website": "Website",
+      "mwst_number": "MwST Number",
+      "upload_logo": "Upload Company Logo"
+    },
+    "location_details": {
+      "heading": "Tell Us About Your Location",
+      "sub_heading": "Inform Us About Your Location for Enhanced Service.",
+      "street_no": "Street Number",
+      "house_no": "House Number",
+      "post_code": "Post Code + City",
+      "City": "City"
+    },
+    "bank_details": {
+      "heading": "Procced with your bank",
+      "sub_heading": "Proceed securely by providing your essential bank information now.",
+      "choose_currency": "Choose currency",
+      "optional": "Optional",
+      "bank_name": "Bank Name",
+      "account_no": "Account No",
+      "iban_number": "Iban Number"
+    }
   },
   "account_type": {
     "main_heading": "Account Type",
@@ -82,27 +124,29 @@
   },
   "email_verification": {
     "title": "Verify your email address",
+    "first_sub_heading": "An email has been send to",
+    "end_sub_heading": "Click the link in email to verify your email address",
     "description": "Thanks for registering! Please enter OTP that we sent to your email address to complete registration. Check your spam folder or contact support if you haven't received the email.",
     "label": "Enter OTP",
-    "button": "Verify",
+    "login": "Login",
     "notrecieve": "Did not recieve?",
-    "sendagain": "Send Again"
+    "sendagain": "Resend Link?"
   },
   "reset_password": {
-    "title": "Reset Passowrd",
-    "description": "Enter your account details",
-    "label": "Password",
+    "title": "Create New Password",
+    "description": "Manage your business with us",
+    "label": "New Password",
     "label2": "Confirm Password",
-    "placeholder1": "Enter your Password",
-    "placeholder2": "Enter your Password Again",
-    "button": "Reset",
+    "placeholder1": "Enter Your Password",
+    "placeholder2": "Confirm Your Password",
+    "button": "Submit",
     "dont_have_an_account": "Dont have an account ?",
     "create": "Create Account",
     "or_login": "or login with"
   },
   "forgot_password": {
     "title": "Forgot Password",
-    "description": "Enter your account details",
+    "description": "Manage your business with us",
     "label": "Email",
     "placeholder1": "Enter your Email",
     "button": "Submit",
@@ -111,7 +155,6 @@
     "create": "Create Account",
     "or_login": "or login with"
   },
-
   "toast": {
     "login": "Please login",
     "file": "Please Select a valid file format"
@@ -121,29 +164,30 @@
     "nonexistent": "nonexistent",
     "already_exists": "{0} with this {1} already exists",
     "not_found": "not_found:{0}:{1}",
+    "unauthenticated": "Log in or create an account to proceed",
     "password_length_error": "Password must be greater then 6",
-    "password_missing_lower": "password_missing_lower",
-    "password_missing_upper": "password_missing_upper",
-    "password_missing_number": "password_missing_number",
+    "password_missing_lower": "Password missing lower",
+    "password_missing_upper": "Password missing upper",
+    "password_missing_number": "Password missing number",
     "password_missing_special": "password_missing_special",
-    "invalid_datatype": "invalid_datatype:{0}:{1}",
+    "invalid_datatype": "Invalid datatype:{0}:{1}",
     "invalid_format": "Invalid Format",
     "invalid_option": "Please select a valid option",
     "auth_invalid_credentials": "Invalid Credentials",
-    "length_error": "length_error:{0}:{1}",
+    "length_error": "Length error:{0}:{1}",
     "length_max": "{0} has max length of {1}",
     "length_min": "{0} has min length of {1}",
     "otp_invalid": "Invalid Otp",
     "server_error": "Internal Server Error : 500",
     "oauth_account_in_use": "Account already in use",
     "user_profile_commercial_seller_request_already_filed": "User profile commercial seller application already submitted",
-
-    "mail_sent_maybe": "Email Sent",
-
+    "value_max": "value_max",
+    "value_min": "{0} Minimum {1} ",
+    "employee_creation_limit_reached": "You are running out of your plan!",
     "mixed": {
-      "required": "This is required field ",
-      "oneOf": "Password must match ",
-      "notOneOf": "Passwort muss different"
+      "required": "This is required field",
+      "oneOf": "Password must match",
+      "notOneOf": "Password must different"
     },
     "string": {
       "email": "Please enter a valid email",
@@ -152,9 +196,63 @@
     "array": {
       "min": "Minimum 1 is required"
     },
-    "user_profile_already_complete": "User Profile is already completed"
+    "user_profile_already_complete": "User Profile is already completed",
+    "offer_not_open": "This offer is already closed or signed",
+<<<<<<< HEAD
+    "discountLessThanTotalPrice": "must be less than total price",
+    "offer_already_signed": "This offer has already been signed.",
+    "validation_failed": "This Offer Already Signed"
+=======
+    "discountLessThanTotalPrice": "Must be less than total price",
+    "offer_already_signed": "This offer has already been signed",
+    "validation_failed": "Validation failed",
+    "auth_provider_mismatch": "Authentication Provider Mismatch",
+    "otp_sent": "OPT Send",
+    "otp_user_invalid_phone": "The provided phone number is invalid for OTP verification",
+    "otp_user_phone_mismatch": "OPT verification phone number mismatch",
+    "otp_user_phone_already_verified": "OPT phone number has already been verified",
+    "token_invalid": "The token provided is invalid",
+    "mail_sent_maybe": "Email Sent (Pending)",
+    "link_sent": "Link Sent",
+    "link_invalid": "The provided link is invalid",
+    "otp_user_email_already_verified": "OPT email address has already been verified",
+    "user_not_found": "User Not Found",
+    "user_same_password_not_allowed": "Please select a new password different from your current one",
+    "New_password_and_confirm_password_do_not_match": "The new password and confirm password do not match",
+    "user_profile_not_complete": "User Profile Incomplete",
+    "CompleteStep1": "Please complete the first step",
+    "CompleteStep2": "Please complete the second step",
+    "user_profile_address_must_keep_one": "Please ensure at least one address is provided in your profile",
+    "user_profile_address_invalid_index": "Please select a valid address from the list",
+    "followup_is_already_marked_complete": "The follow-up is already marked as complete",
+    "followup_is_completed_cannot_be_postponed": "The follow-up has been completed and cannot be postponed",
+    "Discount_cannot_be_greater_than_total_Amount": "The discount amount cannot exceed the total amount",
+    "Discount_percentage_cannot_be_greater_than_100%": "The discount percentage cannot be greater than 100%",
+    "Tax_percentage_cannot_be_greater_than_100%": "The tax percentage cannot be greater than 100%",
+    "Paid_Amount_Cannot_Be_Greater_Than_Remaining_Amount": "The paid amount cannot be greater than the remaining amount",
+    "Alreday_Recurring_Invoice_Created_You_cant't_Create _Invoice": "An existing recurring invoice has already been created. You cannot create another invoice",
+    "Paid_Amount_Must_Be Equal_to_Remaining_Amount": "The paid amount must be equal to the remaining amount",
+    "invalidType": "Please provide a valid type for this operation",
+    "Recurring_Invoice_Can_Not_Be_start_Again": "A recurring invoice cannot be restarted once it has begun",
+    "Cannot_Update_invoice_Becuase_Recuring_Invoice_is_not_created": "You cannot update the invoice because a recurring invoice has not been created yet",
+    "mail_Not_Sent": "The email was not sent",
+    "offer_already_rejected": "The offer has already been rejected",
+    "cannot_change_offer": "You cannot change the offer at this time",
+    "cannot_choose_two_options": "You cannot choose two options simultaneously",
+    "choose_atleast_one_option": "Please choose at least one option",
+    "user_is_blocked": "The user is blocked and cannot be accessed",
+    "cannot_create_recurring_invoice": "Recurring invoice creation is not possible at this time",
+    "oauth_account_already_connected": "The user with this account is already connected",
+    "oauth_account_not_connected": "The user with this account is not connected",
+    "oauth_apple_strict_checking_failed": "The strict checking for Apple authentication has failed",
+    "oauth_invalid_code": "The authentication code provided is invalid",
+    "Employee_has_been_created": "The employee has been successfully created",
+    "Login_details_have_been_emailed_to_them": "The login details have been emailed to them",
+    "Login_details_could_not_be_emailed_to_them": "The login details could not be emailed to them",
+    "Employee_password_has_changed": "The employee's password has been changed successfully",
+    "passwordRegex": "Password must be 6 characters & including uppercase, lowercase, number, & special character."
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
   },
-
   "sidebar": {
     "customer": {
       "dashboard": "Dashboard",
@@ -162,26 +260,30 @@
       "leads": {
         "leads": "Leads",
         "open": "Open",
+        "InProcess": "InProcess",
         "close": "Close",
         "expire": "Expire"
       },
       "offers": {
         "offers": "Offers",
-        "accepted": "Accepted",
-        "rejected": "Rejected",
-        "pending": "Pending"
+        "open": "Open",
+        "signed": "Accepted",
+        "expired": "Expired",
+        "rejected": "Rejected"
       },
       "contracts": {
         "contracts": "Contracts",
-        "accepted": "Accepted",
-        "rejected": "Rejected",
-        "pending": "Pending"
+        "open": "Open",
+        "confirmed": "Confirmed",
+        "cancelled": "Cacelled"
       },
       "invoices": {
         "invoices": "Invoices",
-        "accepted": "Accepted",
-        "rejected": "Rejected",
-        "pending": "Pending"
+        "pending": "Pending",
+        "overdue": "Overdue",
+        "paid": "Paid",
+        "open": "Open",
+        "sending": "Sending"
       },
       "services": "Services",
       "employees": "Employees",
@@ -195,13 +297,13 @@
       "customers": "Customers",
       "plans": "Plans",
       "payments": "Payments",
-      "contact_supports": "Contact Supports",
+      "support_requests": "Support Requests",
       "Settings": "Settings"
     }
   },
-
   "customers": {
     "title": "Customers",
+    "tab_heading": "Customer Details",
     "add_button": "Add New",
     "table_headings": {
       "id": "ID",
@@ -226,18 +328,26 @@
       "heading": "Customer Details",
       "edit_button": "Edit Details",
       "customer_type": "Customer Type",
+      "gender": "Gender",
       "full_name": "Full Name",
       "email_address": "Email Address",
       "phone_number": "Phone Number",
       "mobile_number": "Mobile Number",
       "address_details": "Address Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "cancel_button": "Cancel",
       "save_changes_button": "Save Changes",
       "company_name": "Company Name",
       "save_button": "Save"
+    },
+
+    "add_customer_placeholders": {
+      "name": "Please Enter Your Name",
+      "email": "Please Enter Your Email Address",
+      "street": "Please Enter Street Number",
+      "post_code": "Please Enter Your Post Code + City"
     },
 
     "side_bar_details": {
@@ -264,7 +374,7 @@
   },
   "request_modal": {
     "main_heading": "Your Request has been sent",
-    "sub_heading": "Thanks for sending your request to Buro we are happy to have you. 3",
+    "sub_heading": "Thanks for sending your request to Buro we are happy to have you.",
     "button": "Done"
   },
   "contact_support": {
@@ -294,7 +404,8 @@
       "send_at": "Send at",
       "viewed_at": "Viewd at",
       "status": "Status",
-      "view_mail": "View Mail"
+      "view_mail": "View Mail",
+      "edit": "Edit"
     },
     "card_content": {
       "main_heading": "Email Details",
@@ -321,12 +432,15 @@
   "services": {
     "main_heading": "Services",
     "add_button": "Add New",
+    "heading": "Services Details",
     "add_service_heading": "Add new Service",
+    "service_detail_tab": "Service Details",
     "table_headings": {
       "id": "ID",
       "service": "Service",
       "created_on": "Created On",
       "price": "Price",
+      "unit": "Unit",
       "description": "Description",
       "edit": "Edit"
     },
@@ -352,6 +466,7 @@
     "main_heading": "Employees",
     "add_button": "Add New",
     "add_new_employee": "Add Employee",
+    "employee_tab": "Employee Details",
     "table_headings": {
       "id": "ID",
       "name": "Name",
@@ -389,7 +504,7 @@
     },
     "password_changed_modal": {
       "main_heading": "Password has been changes successfully",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Thanks for updating the password, we are happy to have you.",
       "button": "Done"
     },
     "link_send_modal": {
@@ -406,20 +521,27 @@
     },
     "password_set_modal": {
       "main_heading": "Your Password set Successfully",
-      "sub_heading": "Lorem ipsum dolor sit amet consectetur. Non non sed sed mattis ac dictum.",
+      "sub_heading": "Thanks for set up the password, we are happy to have you.",
       "button": "Done"
     }
   },
   "setting": {
     "heading": "Setting",
     "save_setting": "Save Setting",
+    "offer_remainder": "Offer Reminders",
+    "remainder_text": "Reminder Text",
+    "remainder_freq": "Offer Reminder Frequency",
+    "second_warnings": "Second Warning Days",
+    "third_warnings": "Third Warning Days",
     "steps_heading": {
       "account_setting": "Account Setting",
       "system_setting": "System Setting",
       "templates": "Templates",
       "follow_up_setting": "Follow Up Setting",
       "billing": "Billing",
-      "mail_setting": "Mail Setting"
+      "mail_setting": "Mail Setting",
+      "qr_settings": "QR Settings",
+      "general_setting": "General Setting"
     },
     "account_setting": {
       "public_info": "Public Information",
@@ -430,10 +552,11 @@
       "mobile_number": "Mobile Number",
       "website": "Website",
       "mwst_number": "MWST Number (Optional)",
-      "private_info": "Private Information",
+      "private_info": "Address/Bank Information",
       "street_address": "Street Address",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
+      "house_no": "House No",
       "bank_name": "Bank Name",
       "account_no": "Account No",
       "iban_number": "Iban Number",
@@ -455,7 +578,7 @@
       "invoice_days_limit": "Invoice Over Due Days Limit",
       "currency": "Currency",
       "connect_with_buro": "Connect With Buro",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's  visit our",
+      "description": "",
       "allowed_domain": "Allowed Domain",
       "security_token": "Security Token",
 
@@ -487,14 +610,14 @@
       "second_column": {
         "heading": "Second Column",
         "street_no": "Street No",
-        "post_code": "Post Code",
+        "post_code": "Post Code + City",
         "bank_name": "Bank Name",
         "account_number": "Account Number",
         "iban_number": "IBAN Number"
       },
       "third_column": {
-        "third_column_heading": "Third Column",
-        "fourth_column_heading": "Fourth Column",
+        "third_column_heading": "Third Column(Services)",
+        "fourth_column_heading": "Fourth Column(Locations)",
         "row_one": "Row 1",
         "row_two": "Row 2",
         "row_three": "Row 3",
@@ -517,7 +640,7 @@
       "next_renew": "Next Renew 24 september 2018",
       "card_type": "Visa",
       "package_name": "Silver",
-      "package_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's",
+      "package_description": "Büro 360 Silver includes reports, requests, simplicity, and affordability.",
       "request_services": {
         "heading": "Request",
         "managers": "Managers",
@@ -536,10 +659,9 @@
       },
       "upgrade_card": {
         "heading": "Upgrade To Gold Membership!",
-        "description": "You can use any of the given package on one month free trail. smith amit dolem isplum sumip alpsum Lorem ipsum.",
+        "description": "You can use any of the given package on one month free trail.",
         "button": "Upgrade"
       },
-
       "edit_payment_modal": {
         "heading": "Edit Payment Details",
         "sub_heading": "We automatically bill on the 1st of each month",
@@ -553,6 +675,20 @@
       }
     },
     "mail_setting": {
+      "email_config": "Email Configuration",
+      "email_templates": "Email template",
+      "template_form_fields": {
+        "heading": "Logo Setting",
+        "change_logo": "Change the logo",
+        "contact_setting_heading": "Contact settings(Footer)",
+        "email": "Email",
+        "phone_number": "Phone Number",
+        "mobile_number": "Mobile Number",
+        "color_setting": "Color Settings",
+        "footer_color": "Footer Color",
+        "text_color": "Text Color(Footer)",
+        "save_setting": "Save Setting"
+      },
       "system_config": "Use System Mail Configuration",
       "own_config": "Use Own Mail Configuration",
       "mail_form_fields": {
@@ -567,10 +703,40 @@
         "email": "Email",
         "mail_description": "Enter The Email To Receive The Testing Email Of Mail Configuration."
       }
+    },
+    "qr_settings": {
+      "company_info": "Company Information",
+      "company_name": "Company Name",
+      "iban_number": "Iban No",
+      "house_no": "House Number",
+      "street_no": "Street No",
+      "post_code": "Postal Code",
+      "city": "City"
+    },
+    "general_setting": {
+      "address": "Address",
+      "notes": "Notes"
     }
   },
   "invoice": {
     "main_heading": "Invoice",
+    "invoice_details": "Invoice Details",
+    "receipt_details": "Receipt Details",
+    "receipt_card": {
+      "receipt_id": "Receipt ID",
+      "receipt_title": "Receipt Title",
+      "worker": "Worker",
+      "content_name": "Content Name",
+      "contract_status": "Contarct Status",
+      "contract_id": "Contarct ID",
+      "total_amount": "Total Amount",
+      "offer_id": "Offer ID",
+      "payment_status": "Payment Status",
+      "email_status": "Email Status",
+      "invoice_email_preview": "Invoice Email Preview",
+      "receipt_email_preview": "Receipt Email Preview",
+      "edit_invoice": "Edit Invoice"
+    },
     "table_functions": {
       "open": "Open",
       "overdue": "Overdue",
@@ -580,14 +746,19 @@
       "id": "ID",
       "customer": "Customer",
       "title": "Invoice Title",
+      "work_date": "Work Date",
       "price": "Total Price",
       "email_status": "Email Status",
       "paid": "Paid",
       "status": "Status",
-      "notes": "Notes"
+      "notes": "Notes",
+      "edit": "Edit"
     },
     "card_content": {
+      "invoice_number": "Invoice Number",
+      "receipt_number": "Receipt Number",
       "heading": "Invoice Details",
+      "receipt_heading": "Receipt Details",
       "invoice_id": "Invoice ID",
       "title": "Invoice Title",
       "total_amount": "Total Amount",
@@ -598,7 +769,9 @@
       "offer_id": "Offer ID",
       "created_date": "Creation Date",
       "notes": "Notes",
-      "unpaid_amount": "Unpaid Amount"
+      "unpaid_amount": "Unpaid Amount",
+      "create_invoice_button": "Create Invoice",
+      "recurring_invoice_button": "Recurring Invoice"
     },
     "invoice_table_heading": {
       "id": "ID",
@@ -608,12 +781,13 @@
       "amount": "Amount",
       "email_status": "Email Status",
       "payment": "Payment",
-      "status": "Status"
+      "status": "Status",
+      "edit": "Edit"
     },
     "receipt_table_heading": {
       "id": "ID",
       "customer": "Customer",
-      "title": "Invoice Title",
+      "title": "Receipt Title",
       "paid_date": "Paid Date",
       "amount": "Amount",
       "invoice": "Invoice",
@@ -638,6 +812,11 @@
       "main_heading": "Invoice Created Successful ",
       "sub_heading": "Thanks for creating Invoice we are happy to have you. ",
       "button": "Preview PDF"
+    },
+    "main_invoice_created_modal": {
+      "main_heading": "Invoice Created Successfully",
+      "sub_heading": "Thanks for creating invoice we are happy to have you.",
+      "button": "Done"
     }
   },
   "contracts": {
@@ -656,14 +835,18 @@
       "payment": "Payment",
       "status": "Status",
       "images": "Images",
-      "notes": "Notes"
+      "notes": "Notes",
+      "edit": "Edit",
+      "pdf": "Pdf"
     },
     "card_content": {
       "heading": "Contract Details",
       "confirm_button": "Send Confirmation",
       "contract_id": "Contarct ID",
       "offer_title": "Offer Title",
+      "invoice_title": "Invoice Title",
       "worker": "Worker",
+      "email_status": "Email Status",
       "offer_id": "Offer ID",
       "created_date": "Creation Date",
       "service_date": "Service Date",
@@ -671,7 +854,8 @@
       "payment_method": "Payment Method",
       "contract_status": "Contarct Status",
       "notes": "Notes",
-      "images": "Images"
+      "images": "Images",
+      "to": "to"
     },
     "tabs_headings": {
       "offer_details": "Offer Details",
@@ -689,14 +873,15 @@
       "mobile_number": "Mobile Number",
       "address_details": "Address Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
-      "country": "Country"
+      "post_code": "Post Code + City",
+      "country": "Country",
+      "title": "Contract Title"
     },
     "address_details": {
       "main_heading": "Address Details",
-      "heading": "Address 1 Details",
+      "heading": "Address Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "description": "Description"
     },
@@ -704,7 +889,7 @@
       "heading": "Service/Product Details",
       "title": "Service/Product Title",
       "description": "Description",
-      "price": "Price(CHF)",
+      "price": "Price",
       "unit": "Unit",
       "count": "Count",
       "total_price": "Total Price",
@@ -722,7 +907,10 @@
       "description": "Description",
       "attachments": "Attachments",
       "back_button": "Back",
-      "next_button": "Next"
+      "next_button": "Next",
+      "title": "Title",
+      "additional_details": "Additional Details",
+      "send": "Send"
     },
     "pdf_card_details": {
       "heading": "Contract Details",
@@ -736,8 +924,15 @@
   },
   "content": {
     "main_heading": "Content",
-    "create_content":"Create Content",
+    "create_content": "Create Content",
     "add_button": "Add New",
+    "content_card_detail": {
+      "heading": "Content details",
+      "s_no": "S.no",
+      "title": "Content Title",
+      "worker": "Worker",
+      "created_date": "Creation Date"
+    },
     "table_headings": {
       "id": "ID",
       "name": "Name",
@@ -759,7 +954,7 @@
       "edit_button": "Edit Details",
       "content_name": "Content Name",
       "address_labels": "Address Labels",
-      "offer_title": "Offer Content",
+      "offer_title": "Offer Title",
       "offer_description": "Offer Description",
       "email_body": "Email Body",
       "confirmation_title": "Confirmation Title",
@@ -787,9 +982,16 @@
     "add_button": "Add New",
     "side_images_heading": "Images",
     "table_functions": {
-      "open": "Open Leads",
-      "close": "Close Leads",
-      "expire": "Expire Leads"
+      "open": "Open",
+      "inProcess": "InProcess",
+      "close": "Close",
+      "expire": "Expire"
+    },
+    "lead_dropdown_status": {
+      "Open": "Open",
+      "InProcess": "InProcess",
+      "Close": "Close",
+      "Expired": "Expired"
     },
     "table_headings": {
       "id": "ID",
@@ -797,12 +999,13 @@
       "email": "Email",
       "phone": "Phone",
       "desire_date": "Desire Date",
+      "creation_date": "Creation Date",
       "location": "Location",
       "status": "Status",
       "images": "Images",
-      "note": "Notes"
+      "note": "Notes",
+      "edit": "Edit"
     },
-
     "card_content": {
       "heading": "Leads Details",
       "create_button": "Create Offer",
@@ -818,6 +1021,8 @@
       "additional": "Additional Details"
     },
     "customer_details": {
+      "new_customer": "New Customer",
+      "exit_customer": "Existing Customer",
       "heading": "Customer Details",
       "edit_button": "Edit Details",
       "customer": "Customer",
@@ -831,11 +1036,18 @@
       "mobile_number": "Mobile Number",
       "address_details": "Address Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "cancel_button": "Cancel",
       "save_changes_button": "Save Changes",
       "next_button": "Next"
+    },
+
+    "placeholders": {
+      "name": "Please Enter Your Name",
+      "email": "Please Enter Your Email Address",
+      "street": "Please Enter Street Number",
+      "post_code": "Please Enter Your Post Code + City"
     },
     "address_details": {
       "main_heading": "Address Details",
@@ -843,7 +1055,7 @@
       "heading": "Address 1 Details",
       "sub_heading": "Address 2 Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "description": "Description",
       "cancel_button": "Cancel",
@@ -857,11 +1069,12 @@
       "required_service": "Required Service",
       "desire_date": "Desire Date",
       "flexibility": "Flexibility",
+      "days": "Days",
       "availability": "Contact Availability",
       "prefer_contact": "Preferred Contact",
       "budget": "Budget",
       "lead_source": "Lead Source",
-      "other_services": "Other Services",
+      "other_services": "Other Service",
       "save_changes_button": "Save Changes",
       "cancel_button": "Cancel",
       "next_button": "Next",
@@ -883,15 +1096,209 @@
       "confirm_button": "Confirm"
     },
     "leads_created_modal": {
-      "main_heading": "Lead Created Successful",
+      "main_heading": "Lead Created Successfully",
       "sub_heading": "Thanks for creating offer we are happy to have you.",
       "add_button": "Add Images",
       "without_images": "Continue without Images"
     }
   },
-
   "common": {
+    "modals": {
+      "contract_updating_description": "Thanks for updating Contract we are happy to have you.",
+      "offer_rejected_des": "Your change has been made successfully",
+      "update_password": "Thanks for updating password, we are happy to have you.",
+      "invoice_update": "Thanks for updating invoice, we are happy to have you.",
+      "receipt_update": "Thanks for updating receipt, we are happy to have you.",
+      "verifying_email": "We are verifying your email",
+      "verifying_des": "Please continue! Please take a second to make sure we have your correct email address",
+      "verify_email": "Verify Email address",
+      "verify_email_des1": "An email has been send to ",
+      "verify_email_des2": "Click the link in email to verify your email address",
+      "stop_reccuring": "You want you want to stop this recurring invoice",
+      "invoice_created": "Invoice Created Successfully",
+      "confirm_invoice_id": "Please confirm Invoice ID",
+      "enter_invoice_id": "Enter Invoice ID",
+      "delete_invoice": "Are you sure you want to delete this Invoice?",
+      "delete_follow_up": "Are you sure you want to delete this FollowUp?",
+      "offer_update": "Offer Updated Successfully",
+      "reject_offer": "Are you sure you want to reject this offer.",
+      "email_config_created": "Email Configration Created Successfully",
+      "email_config_des": "Thanks for created email configration.",
+      "admin_setting": "Settings Updated Successfully",
+      "setting_update": "Thanks for updating settings we are happy to have you.",
+      "admin_setting_des": "Thanks! we are happy to have you.",
+      "plan_created": "Record Created Successfully",
+      "plan_record_des": "Thanks! we are happy to have you. ",
+      "update_setting": "Settings Updated Successfully",
+      "setting_update_des": "Thanks! we are happy to have you.",
+      "employee_confirm": "Please Confirm Employee ID",
+      "employee_ID": "Employee ID",
+      "delete_employee": "Are you sure you want to delete this Employee?",
+      "service_confirm": "Please Confirm Service ID",
+      "service_ID": "Service ID",
+      "delete_service": "Are you sure you want to delete this Service?",
+      "created_service": "Service Created Successfully",
+      "service_created_des": "Thanks for creating Service we are happy to have you. ",
+      "delete_record": "You want to update this record",
+      "contract_done": "Thanks for updating offer we are happy to have you. ",
+      "contract_confirm": "Please Confirm Conttract ID",
+      "contract_ID": "Enter Contract ID",
+      "delete_contract": "Are you sure you want to delete this Contract?",
+      "update_contract_heading": "Status Update Successful",
+      "update_des": "Thanks for updating offer we are happy to have you.",
+      "lead_confirm": "Please Confirm Lead ID",
+      "lead_ID": "Enter Lead ID",
+      "delete_lead": "Are you sure you want to delete this Lead?",
+      "customer_confirm": "Please confirm Customer ID",
+      "customer_ID": "Customer ID",
+      "delete_customer": "Are you sure you want to delete this customer?",
+      "created_customer": "Customer Created Successfully",
+      "customer_created_des": "Thanks for creating Customer we are happy to have you. ",
+      "are_sure": "Are You Sure?",
+      "leave_page": "You want to save these changes?",
+      "offer_delete": "Please confirm Offer ID",
+      "offer_ID": "Enter Offer ID",
+      "are_you_delete": "Are you sure you want to delete this Offer?",
+      "delete_note": "Are you sure you want to delete this Note?",
+      "offer_created": "Operation Successful",
+      "offer_created_des": "Thanks for updating offer we are happy to have you.",
+      "lead_created_des": "Thanks for creating Lead we are happy to have you.",
+      "offer_email_sent": "Email Sent Successfully",
+      "email_sent_des": "Thanks for updating offer we are happy to have you.",
+      "updating_contract": "Thanks for updating contract we are happy to have you.",
+      "content_confirmation": "Please Confirm Content ID",
+      "content_ID": "Enter Content ID",
+      "delete_content": "Are you sure want to delete this content?",
+      "update_success": "Congratulations! Your update was successful.",
+      "date": "Date"
+    },
+<<<<<<< HEAD
+=======
+    "plan_detail": "Plan Details",
+    "new_plan": "Add new Plan",
+    "yes_button": "Yes",
+    "enter_company": "Enter Company Name",
+    "note_title": "Note title",
+    "title": "Title",
+    "created_by": "Created by",
+    "add_new_notes": "Add New Notes",
+    "successful": "Successful",
+    "address_title_save": "Your Address title save successfully",
+    "note_save": "Your Notes save successfully",
+    "finish_button": "Finish",
+    "edit_address_title": "Edit address title",
+    "add_address_title": "Add address title",
+    "address_title": "Address Title",
+    "no_invoice_created": "No Invoice Created",
+    "no_invoice_des": "Sub invoice has not yet been created. Please create the sub invoice first",
+>>>>>>> 48d4a8a098b45b87ddfc9bedff9928a9da3bf9bb
+    "no_attachments": "No attachments found!",
+    "sign_first": "Please Sign First",
+    "paid_amount_last": "The amount which you paid last time.",
+    "filters": "Filters",
+    "CSV_button": "Download Reports",
+    "create_invoice": "Create Invoice",
+    "description_placeholder": "Please write your detail here...",
+    "actions": "Actions",
+    "service": "Service",
+    "offer_created": "Offer Created Successfully",
+    "user_rule": "Company",
+    "invoice_total": "Total",
+    "page_sum": "Page Sum",
+    "upload_file": "Upload File",
+    "view_docs": "View Documents",
+    "share_on_whatsapp": "Share on whatsapp",
+    "send_again": "Send Again",
+    "share": "Share",
+    "lead": "Lead",
+    "add": "Add",
+    "upload_link": "Upload your link here",
+    "time": "Time",
+    "at": "At",
+    "clock": "o,cklock",
+    "editor_placeholder": "Insert your text here",
+    "content_name": "Title for offer",
+    "content_text": "Text for offer",
+    "general_inquery": "General Inquiry",
+    "account_assist": "Account Assistance",
+    "payment_issues": "Billing or Payment Issues",
+    "Technical_support": "Technical Support",
+    "feedback_suggestion": "Feedback or Suggestions",
+    "report_bug": "Report a Bug or Error",
+    "website_feedback": "Website Feedback",
+    "complaint": "Complaint",
+    "other": "Other",
+    "type_message": "Type Your Message here",
+    "mark_invoice": "Automatically Mark Invoice Over Due",
+    "discount": "Discount",
+    "update": "Update",
+    "mail": "Mail",
+    "offer_mail_preview": "Offer Email Preview",
+    "address": "Address",
+    "add_new_date": "Add New Date",
+    "add_company_info": "Add Company Information",
+    "add_new_address": "Add New Address",
+    "upload_img": "Upload Images",
+    "resend_button": "Resend?",
+    "continue": "Continue",
+    "remove": "Remove",
+    "drop_or_attach": "Drop or attach your file here",
+    "file_support": "Files supported: PDF, JPG, PNG, GIF",
+    "online": "Online",
+    "cash": "Cash",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "month": "Month",
+    "name": "Name",
+    "tax": "Tax Rate (%)",
+    "action": "Action",
+    "help": "help Center",
+    "via_post": "Via Post",
+    "via_internet": "Via Internet",
+    "via_phone": "Via Phone Call",
+    "via_email": "Via Email",
+    "via_whatsapp": "Via What'sapp",
+    "via_fb": "Via Facebook",
+    "via_insta": "Via Instagram",
+    "less_then": "Less then",
+    "whatsapp": "Whats'app",
+    "facebook": "Facebook",
+    "insta": "Instagram",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
+    "days": "days",
+    "day": "day",
+    "flexible": "Not Flexible",
+    "lead_source": {
+      "Umzugsfuchs": "Umzugsfuchs",
+      "Webvermarktung": "Webvermarktung",
+      "Offerten-365": "Offerten-365",
+      "Umzugshero": "Umzugshero",
+      "Via Call": "Via Call"
+    },
+    "true": "True",
+    "false": "False",
+    "done_button": "Done",
+    "save_button": "Save",
+    "add_note": "Add Note",
+    "update_note": "Update Note",
+    "remove_button": "Remove",
+    "apply_button": "Apply",
+    "next_button": "Next",
+    "back_button": "Back",
+    "cancel_button": "Cancel",
+    "change_button": "Change",
     "image_upload_heading": "Drop or Attach your files here",
+    "note": "Note",
+    "search": "Search...",
+    "drag_table": "Drag to scroll on the table",
+    "sort_button": "Sort By",
+    "source": "Lead Source",
+    "privacy": "Privacy Policy",
+    "copy_right": "Copyright 2024",
+    "better_management": "Better management",
+    "better_description": "Better Management brings unparalleled efficiency and strategic control to your fingertips. Boost your company's performance with process optimization, empowered decision-making, and intuitive tools that will lead to long-term success. ",
     "notes_modal": {
       "heading": "Notes",
       "button": "Add New Note"
@@ -902,10 +1309,25 @@
       "button": "Save"
     },
     "images_modal": {
-      "heading": "Images",
-      "title": "7 images uploaded",
+      "heading": "Supporting Documents",
+      "img_tab": "Images",
+      "link_tab": "Links",
+      "title": "20 images can be uploaded",
       "sub_title": "Images should be max 20, file size up to 10MB",
-      "image_slider_heading": "Image Name"
+      "image_slider_heading": "Image",
+      "drop_attach": "Drop or attach your file here",
+      "attachement_tab": "Attachments",
+      "video_tab": "Video",
+      "video_title": "20 Video can be uploaded",
+      "video_sub_title": "Video should be max 20, file size up to 10MB",
+      "attachement_title": "20 attachment can be uploaded",
+      "single_attachment": "1 attachment can be uploaded",
+      "attachement_sub_title": "Attachment should be max 20, file size up to 10MB",
+      "link_title": "Add Link",
+      "link_sub_title": "Links should be max 20, file size up to 10MB",
+      "add_image": "Add Image",
+      "add_video": "Add Video",
+      "add_attachment": "Add Attachment"
     },
     "delete_modal": {
       "heading": "Are you sure you want to delete this Image?",
@@ -968,11 +1390,13 @@
     }
   },
   "offers": {
+    "customer_type": "Customer Type",
+    "customer": "Customer",
     "main_heading": "Offers",
     "add_button": "Add New",
     "table_functions": {
       "open": "Open",
-      "signed": "Signed",
+      "signed": "Accepted",
       "expire": "Expired",
       "rejected": "Rejected"
     },
@@ -982,15 +1406,17 @@
       "title": "Offer Title",
       "total_price": "Total Price",
       "created_on": "Created On",
-      "email": "Email",
+      "email": "E-Status",
       "payment": "Payment",
       "status": "Status",
       "images": "Images",
-      "note": "Notes"
+      "note": "Notes",
+      "edit": "Edit"
     },
     "card_content": {
       "main_heading": "Offer Details",
       "send_button": "Send Email",
+      "send_via_post": "Send via Post",
       "offer_id": "Offer ID",
       "offer_title": "Offer Title",
       "worker": "Worker",
@@ -1000,7 +1426,8 @@
       "payment_method": "Payment Method",
       "status": "Status",
       "notes": "Notes",
-      "images": "Images"
+      "images": "Images",
+      "reason": "Reason"
     },
     "tabs_heading": {
       "offer": "Offer Details",
@@ -1013,6 +1440,8 @@
       "discount": "Discount"
     },
     "offer_details": {
+      "new_customer": "New Customer",
+      "exit_customer": "Existing Customer",
       "heading": "Offer Details",
       "edit_button": "Edit Details",
       "customer_type": "Customer Type",
@@ -1023,7 +1452,7 @@
       "mobile_number": "Mobile Number",
       "customer_address": "Customer Address",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "select_customer": "Select Customer",
       "customer_name": "Customer Name",
@@ -1036,12 +1465,13 @@
       "next_button": "Next"
     },
     "address_details": {
+      "add_new_address": "Add New Address",
       "main_heading": "Address Details",
       "edit_button": "Edit Details",
-      "heading": "Address 1 Details",
-      "sub_heading": "Address 2 Details",
+      "address": "Address",
+      "details": "Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "description": "Description",
       "cancel_button": "Cancel",
@@ -1053,17 +1483,26 @@
     "service_details": {
       "main_heading": "Service/Product Details",
       "edit_button": "Edit Details",
+      "add_new_service": "Add New Service",
       "price": "Price",
+      "discount_decription": "Discount Description",
       "detail_headings": {
+        "new_service": "New Service",
+        "exit_service": "Existing Service",
         "title": "Service/Product Title",
         "description": "Description",
-        "price": "Price(CHF)",
+        "price": "Price ",
         "unit": "Unit",
         "count": "Count",
         "total_price": "Total Price",
-        "grand_total": " Grand  Total",
+        "grand_total": " Grand Total",
         "sub_total": "Sub Total",
-        "tax": "Tax%"
+        "tax": "Tax%",
+        "discount": "Discount",
+        "Inclusive": "Inclusive",
+        "exclusive": "Exclusive",
+        "percent": "Percent",
+        "amount": "Amount"
       },
       "service_name": "Service Name",
       "service_type": "Service Type",
@@ -1102,9 +1541,19 @@
       "cancel_button": "Cancel"
     },
     "offer_created_modal": {
-      "main_heading": "Offer Created Successful ",
-      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "main_heading": "Offer Created Successfully",
+      "sub_heading": "Thanks for creating offer we are happy to have you.",
       "button": "Done"
+    },
+    "placeholders": {
+      "name": "Please Enter Your Name",
+      "company_name": "Please Enter Company Name",
+      "email": "Please Enter Your Email Address",
+      "offer_title": "Please Enter Your Offer Title",
+      "street": "Please Enter Street Number",
+      "post_code": "Please Enter Your Post Code + City",
+      "address_description": "",
+      "service_title": "Please Enter Your service Name"
     }
   },
   "pdf_preview": {
@@ -1139,6 +1588,18 @@
   },
   "admin": {
     "main_heading": "Super Admin",
+    "chart_list": {
+      "silver": "Silver",
+      "gold": "Gold",
+      "diamond": "Diamond",
+      "infinite": "Infinite"
+    },
+    "months": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr"
+    },
     "overview": {
       "main_heading": "Overview",
       "subscriber": "Active Sucbscribers",
@@ -1186,7 +1647,8 @@
       },
       "card_content": {
         "main_heading": "Customer Details",
-        "make_button": "Make Infinite",
+        "make_button_unchecked": "Make Account Free",
+        "make_button_checked": "Make Infinite",
         "customer_id": "Customer ID",
         "role": "Role",
         "no_of_employee": "No of Employees",
@@ -1196,7 +1658,8 @@
         "company_logo": "Company Logo",
         "customer_status": {
           "active": "Active",
-          "block": "Block"
+          "block": "Block",
+          "unBlock": "Un Block"
         },
         "customer_free": "Your customer is now totally free."
       },
@@ -1209,7 +1672,7 @@
         "phone_number": "Phone Number",
         "sub_heading": "Address Details",
         "street_no": "Street No",
-        "post_code": "Post Code",
+        "post_code": "Post Code + City",
         "country": "Country"
       }
     },
@@ -1238,7 +1701,11 @@
       "api_feature": "API Feature",
       "back_button": "Back",
       "edit_button": "Edit",
-      "save_button": "Save"
+      "save_button": "Save",
+      "enable_reports": "Enable Reports",
+      "enable_cus": "Enable Customization",
+      "enable_watermark": "Enable Watermark",
+      "enable_api": "Enable Api"
     },
     "payment_history": {
       "heading": "Payment History",
@@ -1281,6 +1748,19 @@
     },
     "settings": {
       "main_heading": "Account Setting",
+      "placeholders": {
+        "publish_key": "Please Enter Your Publishable Key",
+        "search_key": "Please Enter Your Search Key",
+        "mail_driver": "Mail Driver",
+        "mail_host": "Mail Host",
+        "mail_port": "Mail Port",
+        "mail_encryption": "Mail Encryption",
+        "mail_user": "Mail Username",
+        "mail_password": "Mail Password",
+        "mail_address": "Mail From Address",
+        "mail_name": "Mail From Name",
+        "email_from_address": "Mail From Address"
+      },
       "tabs_heading": {
         "account": "Account Setting",
         "payment": "Payment Setting",
@@ -1322,6 +1802,10 @@
     }
   },
   "follow_up": {
+    "heading": "Follow Up",
+    "add_button": "Add Follow Up",
+    "upcoming_follow_up": "Up coming follow up",
+    "view_all": "View all",
     "save_button": "Save",
     "next_button": "Next",
     "main_heading": "Details",
@@ -1335,6 +1819,21 @@
     "additional_detail_heading": "Additional Details",
     "lead_detail_heading": "Lead Details",
     "address_detail_heading": "Address Details",
+    "follow_up_details": {
+      "remark": "Your Remarks",
+      "postpond_note": "Your Postponed Note",
+      "id": "ID",
+      "name": "Name",
+      "customer_type": "Customer Type",
+      "email": "Email Address",
+      "phone_number": "Phone Number",
+      "mobile_number": "Mobile Number",
+      "address_detail": "Address Details",
+      "required_service": "Required Service",
+      "desire_date": "Desire Date and time",
+      "flexibility": "Flexibility",
+      "budget": "Budget"
+    },
     "customer_details": {
       "name": "Name",
       "customer_type": "Customer Type",
@@ -1356,7 +1855,7 @@
     },
     "address_details": {
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country",
       "description": "Description"
     },
@@ -1392,7 +1891,7 @@
       "address_one_heading": "Address 1 Details",
       "address_two_heading": "Address 2 Details",
       "street_no": "Street No",
-      "post_code": "Post Code",
+      "post_code": "Post Code + City",
       "country": "Country"
     },
     "all_customer_details": {
@@ -1440,7 +1939,7 @@
     "lead_source": "Lead Source",
     "activity": "Activity",
     "view_all": "View all",
-    "follow_up_heading": "Follow Ups",
+    "follow_up_heading": "Today’s Follow ups",
     "months": {
       "jan": "January",
       "feb": "February",
@@ -1461,10 +1960,22 @@
       "year": "Yearly"
     },
     "cards_title": {
-      "lead": "Leads",
+      "leads": "Leads",
       "offer": "Offers",
       "contracts": "Contracts",
       "sales": "Sales"
+    },
+
+    "cards_status": {
+      "open": "Open",
+      "close": "Close",
+      "expire": "Expired",
+      "signed": "Signed",
+      "confirm": "Confirmed",
+      "cancel": "Cancelled",
+      "overdue": "Overdue",
+      "paid": "Paid",
+      "pending": "Pending"
     },
     "charts_labels": {
       "website": "Website",
@@ -1490,15 +2001,22 @@
     "created_by": "Created By",
     "email": "Email",
     "phone": "Phone",
+    "mobile": "Mobile Number",
+    "address": "Address",
+    "work_date": "Work Dates",
     "service": "Service/Product",
+    "description": "Description",
     "price": "Price",
     "unit": "Unit",
     "count": "Count",
     "total": "Total",
     "sub_total": "Sub Total",
-    "tax": "Tax%",
+    "tax": "Tax",
     "discount": "Discount",
+    "total_after_discount": "Total after Discount",
     "grand_total": " Grand Total",
+    "paid_amount": "Paid Amount",
+    "due_amount": "Due Amount",
     "validate_heading": "Validity of the offer",
     "validate_des": "3 months from preparation of the offer",
     "share_des": "I share the contract with you.",
@@ -1507,6 +2025,233 @@
     "page": "Page",
     "receipt_slip": "Receipt slip",
     "payment_part": "Payment Part",
-    "account": "Account / Payable to"
+    "account": "Account / Payable to",
+    "condition_for_moving": "General Terms and Conditions",
+    "thanks_message": "Thank you for your interest in our services.",
+    "pdf_description": "Below you will find further information regarding the guidelines and conditions. Please take the time to understand the following terms and conditions below.",
+    "submit": "Submit",
+    "clear": "Clear"
+  },
+  "pricing_details": {
+    "heading": "Let's start with us",
+    "sub_heading": "You can use any of the given packages on one one-month free trail. Unlock success with Büro 365's flexible plans.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "button": "Choose Plan",
+    "packages": {
+      "silver": "Silver",
+      "gold": "Gold",
+      "diamond": "Diamond",
+      "description": "Büro 360 Diamond includes 1000 requests, managers, reports and API access.",
+      "request": "Requests",
+      "employees": "Employees",
+      "accounting": "Accounting Reports",
+      "customized": "Customized Emails",
+      "watermark": "With Watermark",
+      "features": "API Features"
+    }
+  },
+  "empty_state": {
+    "heading": "No Data Found",
+    "description": "Whoops ... this information is not avilable for a moment"
+  },
+  "filters": {
+    "sort_by": {
+      "date": "Date",
+      "latest": "Latest",
+      "oldest": "Oldest",
+      "a_z": "A -Z"
+    },
+    "extra_filters": {
+      "heading": "Filter",
+      "reset_all": "Reset All",
+      "reset": "Reset",
+      "date": "Date",
+      "from": "From",
+      "to": "To",
+      "email": "Email",
+      "send": "Send",
+      "draft": "Draft",
+      "failed": "Failed",
+      "pending": "Pending",
+      "overdue": "Overdue",
+      "paid": "Paid",
+      "leadSource": "Lead Source",
+      "open": "Open",
+      "online": "Online",
+      "cash": "Cash",
+      "sending": "Sending"
+    }
+  },
+  "global_search": {
+    "customer": "Customer",
+    "customer_id": "Customer ID",
+    "phone": "Phone No",
+    "created_date": "Creation Date",
+    "name": "Name",
+    "mobile_number": "Mobile No",
+    "address": "Address",
+    "email": "Email Address",
+    "created_by": "Created By",
+    "notes": "Notes",
+    "paid_amount": "Paid Amount",
+    "unpaid_amount": "Unpaid Amount"
+  },
+  "switch_tabs": {
+    "invoice": "Invoice",
+    "receipt": "Receipt",
+    "offer": "Offers",
+    "contract": "Contracts",
+    "invoices": "Invoices"
+  },
+  "countries": {
+    "Switzerland": "Switzerland",
+    "Germany": "Germany",
+    "Austria": "Austria",
+    "Italy": "Italy",
+    "France": "France"
+  },
+  "offer_pdf_card": {
+    "offer_detail": "offer Details",
+    "send_post": "Send By Post",
+    "send_email": "Send Email",
+    "offer_id": "Offer ID",
+    "email_status": "Email Status"
+  },
+  "Pending": "Draft",
+  "Sent": "Sent",
+  "gender": {
+    "Mr": "Mr",
+    "Mrs": "Mrs"
+  },
+  "lead_status": {
+    "Open": "Open",
+    "InProcess": "InProcess",
+    "Close": "Close",
+    "Expired": "Expired"
+  },
+  "offer_status": {
+    "Open": "Open",
+    "Expired": "Expired",
+    "Rejected": "Rejected",
+    "Accepted": "Accepted"
+  },
+  "contract_status": {
+    "Open": "Open",
+    "Sent": "Sent",
+    "Confirmed": "Confirmed",
+    "Cancelled": "Cancelled",
+    "Pending": "Pending",
+    "Post": "Post"
+  },
+  "invoice_status": {
+    "Pending": "Pending",
+    "Overdue": "Overdue",
+    "Paid": "Paid",
+    "Open": "Open"
+  },
+  "support_req_status": {
+    "pending": "pending",
+    "resolved": "resolved"
+  },
+  "payment_method": {
+    "Cash": "Cash",
+    "Online": "Online"
+  },
+  "typeList": {
+    "All": "All",
+    "Individual": "Individual",
+    "Company": "Company"
+  },
+  "email_status": {
+    "Post": "Post",
+    "Pending": "Pending",
+    "Sent": "Sent",
+    "Failed": "Failed"
+  },
+  "mail_tracker_status": {
+    "opend": "opend",
+    "failed": "failed",
+    "pending": "pending"
+  },
+  "support_request_status": {
+    "pending": "pending",
+    "resolved": "resolved"
+  },
+  "customer_type": {
+    "individual": "individual",
+    "company": "company"
+  },
+  "frequency": {
+    "Weekly": "Weekly",
+    "FourtennDays": "FourtennDays",
+    "Monthly": "Monthly",
+    "Yearly": "Yearly"
+  },
+  "plan_status": {
+    "Silver": "Silver",
+    "Diamond": "Diamond",
+    "Free": "Free",
+    "Gold": "Gold",
+    "Platinium": "Platinium"
+  },
+  "selected_month": {
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  },
+  "admin_role": {
+    "Employee": "Employee",
+    "Company": "Company"
+  },
+  "header_alignment": {
+    "header_heading": "Header Alignment",
+    "left_align": "Logo Align Left",
+    "right_align": "Logo Align Right"
+  },
+  "share_images_tab": {
+    "whats_app": "What'sapp",
+    "email": "Email",
+    "enter_whatsapp_number": "Enter your what'sapp number",
+    "enter_your_email": "Enter your email"
+  },
+  "rejected_offer": {
+    "heading": "Reject Offer",
+    "options": {
+      "Cost Concerns": "Cost Concerns",
+      "Hidden Fees": "Hidden Fees",
+      "Service Scope": "Service Scope",
+      "Negative Reviews": "Negative Reviews",
+      "Unreliable Schedule": "Unreliable Schedule",
+      "Customer Service": "Customer Service",
+      "Inadequate Equipment": "Inadequate Equipment",
+      "Other": "Other"
+    }
+  },
+  "add_note_dropdown": {
+    "all_notes": "All Notes",
+    "Sending pictures": "Sending pictures",
+    "Viewing date": "Viewing date",
+    "Approximate Offer open": "Approximate Offer open",
+    "Will contact us": "Will contact us",
+    "Individual Note": "Individual Note",
+    "Not Reached": "Not Reached",
+    "Other": "Other"
+  },
+  "thank_you_content": {
+    "heading": "Thanks for Signing the Contract",
+    "valued_csutomer": "Dear Valued Customer",
+    "description": "We are thrilled to inform you that we have successfully received your signed contract. Your trust in Buro to meet your needs is greatl appreciated, and we are committed to delivering excellence every step of the way. This marks the beginning of our official partnership, and we assure you that our team is dedicated to providing you with outstanding service and support. As we proceed, you will receive a comprehensive guide on how to maximize the benefits of our services. Should you have any questions or need assistance, please feel free to reach out to our customer support at any time. Your satisfaction is our priority, and we are here to ensure a smooth and beneficial experience for you. Thank you for choosing Buro. We look forward to a fruitful collaboration and are excited about the opportunities ahead.",
+    "warm_regards": "Warm Regards",
+    "team": "The Buro Team"
   }
 }

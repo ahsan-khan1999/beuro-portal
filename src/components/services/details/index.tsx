@@ -2,7 +2,6 @@ import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import React from "react";
 import DetailsData from "../DetailsData";
-import SideCard from "../SideCard";
 import useServiceDetail from "@/hooks/services/useServiceDetail";
 import ServicesForm from "../ServicesForm";
 import LoadingState from "@/base-components/loadingEffect/loading-state";

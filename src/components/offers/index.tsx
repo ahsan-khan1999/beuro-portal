@@ -6,20 +6,25 @@ import TableHeading from "./table/TableHeadings";
 import TableRows from "./table/TableRows";
 import useOffers from "@/hooks/offers/useOffers";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Offers() {
   const {
+    currentPage,
     currentPageRows,
-    handlePageChange,
-    totalItems,
-    itemsPerPage,
-    handleNotes,
-    handleImageUpload,
-    renderModal,
     filter,
-    setFilter,
     handleFilterChange,
+    handleImageUpload,
+    handleNotes,
+    handleOfferStatusUpdate,
+    handlePageChange,
+    handlePaymentStatusUpdate,
+    isLoading,
+    itemsPerPage,
     loading,
+    renderModal,
+    setFilter,
+    totalItems,
   } = useOffers();
 
   const CurrentComponent = useEmptyStates(
@@ -27,9 +32,11 @@ export default function Offers() {
       dataToAdd={currentPageRows}
       openModal={handleNotes}
       handleImageUpload={handleImageUpload}
+      handleOfferStatusUpdate={handleOfferStatusUpdate}
+      handlePaymentStatusUpdate={handlePaymentStatusUpdate}
     />,
     currentPageRows?.length > 0,
-    loading
+    isLoading
   );
 
   return (
@@ -39,17 +46,20 @@ export default function Offers() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeading />
-        {CurrentComponent}
-      </TableLayout>
-      {currentPageRows.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}    
+
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeading />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
+
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
 
       {renderModal()}
     </>

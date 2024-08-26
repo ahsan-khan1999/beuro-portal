@@ -27,7 +27,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
               inputType: "text",
               id: "serviceName",
               name: "serviceName",
-              placeholder: "Versicherung  Lorem Ipsum",
+              placeholder: "",
               register,
             },
           },
@@ -74,7 +74,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mt-5 border-b border-black border-opacity-20 pb-[35px]",
+      containerClass: "mt-5 border-b border-black border-opacity-10 pb-[35px]",
       field: {
         type: Field.div,
         id: "div-field",
@@ -139,12 +139,11 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "description",
               name: "description",
-              placeholder:
-                "Kostenübernahme bei Lorem Ipsum dollar smith emit lorem.....",
+              placeholder: "",
               register,
             },
           },
@@ -173,7 +172,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
               inputType: "text",
               id: "servcieName",
               name: "servcieName",
-              placeholder: "Versicherung  Lorem Ipsum",
+              placeholder: "",
               register,
             },
           },
@@ -211,7 +210,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
               inputType: "text",
               id: "unit",
               name: "unit",
-              placeholder: "Loreipsum",
+              placeholder: "",
               register,
             },
           },
@@ -220,7 +219,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
     },
 
     {
-      containerClass: "mt-5 border-b border-black border-opacity-20 pb-[35px]",
+      containerClass: "mt-5 border-b border-black border-opacity-10 pb-[35px]",
       field: {
         type: Field.div,
         id: "div-field",
@@ -289,8 +288,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
               inputType: "text",
               id: "description",
               name: "description",
-              placeholder:
-                "Kostenübernahme bei Lorem Ipsum dollar smith emit lorem.....",
+              placeholder: "",
               register,
             },
           },
@@ -318,11 +316,11 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
             field: {
               type: Field.textArea,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-              rows: 8,
+              rows: 2,
               id: "description",
               name: "description",
-              placeholder:
-                "Lorem Ipsum is simply dummy text of the isp ispu printing and typesetting industry. Lorem Ipsum ie has  a been the industry's standard dummyalesl...",
+              maxLength: 100,
+              placeholder: "",
               register,
             },
           },
@@ -338,7 +336,7 @@ export const ServiceEditDetailsFormField: GenerateOffersFormField = (
         text: `${translate("offers.service_details.save_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg p-4 w-[152px] h-[50px] text-white hover:bg-none ",
         loading,
       },
     },

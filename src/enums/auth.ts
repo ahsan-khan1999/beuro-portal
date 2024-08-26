@@ -23,7 +23,6 @@ export enum UserResponse {
   username = "username",
   dob = "dob",
   phoneNumber = "phoneNumber",
-
   oAuthIds = "oAuthIds",
   _isSocialLogin = "_isSocialLogin",
   isCommercialSellerRequested = "isCommercialSellerRequested",
@@ -33,7 +32,7 @@ export enum UserResponse {
   websiteUrl = "website",
   companyLogo = "logo",
   notificationSettings = "notificationSettings",
-  mobileNumber = "mobileNumber"
+  mobileNumber = "mobileNumber",
 }
 
 export enum LoginFields {
@@ -77,8 +76,7 @@ export enum AddressTypes {
   postalCode = "postalCode",
   city = "city",
   houseNumber = "houseNumber",
-  country="country"
-
+  country = "country",
 }
 export enum Header {
   header = "headers",
@@ -115,7 +113,7 @@ export enum AuthenticationState {
 }
 
 export enum Country {
-  Swizterland = "Swizterland",
+  Switzerland = "Switzerland",
   Germany = "Germany",
   Austria = "Austria",
   Italy = "Italy",

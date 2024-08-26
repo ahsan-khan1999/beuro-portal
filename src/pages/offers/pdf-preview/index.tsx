@@ -1,13 +1,13 @@
-import PdfPriview from "@/components/offers/pdfPriview";
 import { Layout } from "@/layout";
 import { Locale } from "@/types";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
+import OfferPdfPriview from "@/components/offers/pdfPriview";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const index = () => {
   return (
     <Layout>
-      <PdfPriview />
+      <OfferPdfPriview />
     </Layout>
   );
 };

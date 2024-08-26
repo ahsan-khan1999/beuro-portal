@@ -36,7 +36,7 @@ export interface LabelProps {
 }
 
 export interface InputProps extends BaseFieldProps<Field.input> {
-  inputType: "text" | "email" | "number";
+  inputType: "text" | "email" | "number" | "tel";
   value?: string;
   success?: boolean;
   register: UseFormRegister<FieldValues>;
@@ -53,10 +53,19 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   step?: string;
 }
 
+export interface ColorPickerProps extends BaseFieldProps<Field.colorPicker> {
+  value?: string;
+  register: UseFormRegister<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+}
+
 // textarea added
 export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
   register: UseFormRegister<FieldValues>;
   rows?: number;
+  maxLength?: number;
   value?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -113,7 +122,7 @@ export interface OptionType {
 export interface SelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
   options: OptionType[];
-  value: string;
+  value?: string;
   svg?: string;
   onItemChange?: (id: string, index?: number) => void;
   trigger?: UseFormTrigger<FieldValues>;
@@ -174,11 +183,13 @@ export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   value?: string;
   containerClassName?: string;
   textClassName?: string;
+  colorClasses?: string;
   checked?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
   disabled?: boolean;
   onClick?: () => void;
-  onChange?: (value: string) => void;
+  onChange?: (value: string, index?: number) => void;
+  fieldIndex?: number;
 }
 
 export interface DragAndDropFileFieldProps
@@ -202,7 +213,7 @@ export interface ProfileUploadFieldProps
   extends BaseFieldProps<Field.profileUploadField> {
   control?: Control<FieldValues>;
   iconClasses?: string;
-  disabled?:boolean
+  disabled?: boolean;
 }
 
 // interface for the Image upload
@@ -211,6 +222,8 @@ export interface ImageUploadFieldProps
   control?: Control<FieldValues>;
   onClick?: Function;
   value?: string;
+  index?: number;
+  setValue?: UseFormSetValue<FieldValues>;
 }
 
 // Interface for the input field copy
@@ -223,6 +236,14 @@ export interface InputWithCopyProps
   placeholder?: string;
   disabled?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
+}
+
+export interface SecurityTokenFieldProps {
+  inputType: "text" | "email" | "number" | "password";
+  value?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  onChange: (value: string) => void;
 }
 
 export interface PhoneProps extends BaseFieldProps<Field.phone> {
@@ -257,6 +278,9 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   success?: boolean;
   onRemove?: () => void;
   dateType?: string;
+  min?: string;
+  max?: string;
+  disable?: boolean;
 }
 
 export interface SpanProps {
@@ -305,6 +329,7 @@ export type FieldPropsWithChildren = FieldProps & {
 
 export type FieldType =
   | Field.input
+  | Field.colorPicker
   | Field.textArea
   | Field.ckEditor
   // | Field.creditCardNumberInput
@@ -329,6 +354,7 @@ export type FieldType =
 
 export type FieldProps =
   | InputProps
+  | ColorPickerProps
   | TextAreaProps
   | CKEditorProps
   | InputWithCopyProps
@@ -362,6 +388,7 @@ export interface FormField {
 
 export interface FieldComponents {
   input: React.FC<InputProps>;
+  colorPicker: React.FC<ColorPickerProps>;
   textArea: React.FC<TextAreaProps>;
   ckEditor: React.FC<CKEditorProps>;
   // ckEditorBox: React.FC<CKEditorBoxProps>;
@@ -383,7 +410,6 @@ export interface FieldComponents {
   button: React.FC<ButtonProps>;
   addField: React.FC<AddFieldProps>;
   link: React.FC<LinkProps>;
-  dateRange: React.FC<MultiDateProps>;
   multiSelect: React.FC<MultiSelectProps>;
   toggleButton: React.FC<ToggleButtonFormProps>;
 }

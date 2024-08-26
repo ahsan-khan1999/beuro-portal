@@ -15,7 +15,8 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-2 lg:grid-cols-3 gap-x-3 ",
+        className:
+          "grid grid-cols-2 lg:grid-cols-3 gap-x-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -32,7 +33,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               name: "fullName",
               placeholder: "Rahal",
               register,
-              disabled:true
+              disabled: true,
             },
           },
           {
@@ -50,8 +51,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               name: "email",
               placeholder: "rahal.ahmad@gmail.com",
               register,
-              disabled:true
-
+              disabled: true,
             },
           },
           {
@@ -61,12 +61,12 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               htmlFor: "phoneNumber",
             },
             field: {
-              type: Field.phone,
-              className: "!border-[#BFBFBF] focus:!border-primary",
+              type: Field.input,
+              inputType: "tel",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
-              country: "ch",
-              control,
+              register,
               value: "",
               disabled: false,
             },
@@ -76,11 +76,11 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     },
 
     {
-      containerClass: "mt-[25px]",
+      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3",
+        className: "grid grid-cols-3 px-2 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0 col-span-2",
@@ -90,23 +90,45 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4 !border-[#BFBFBF]  focus:!border-primary ",
+              className: "pl-4 !border-[#BFBFBF] focus:!border-primary ",
               type: Field.select,
               value: "",
               id: "reason",
               name: "reason",
               options: [
-                { value: "General Inquiry", label: "General Inquiry" },
-                { value: "Account Assistance", label: "Account Assistance" },
-                { value: "Billing or Payment Issues", label: "Billing or Payment Issues" },
-                { value: "Technical Support", label: "Technical Support" },
-                { value: "Feedback or Suggestions", label: "Feedback or Suggestions" },
-                { value: "Report a Bug or Error", label: "Report a Bug or Error" },
-                { value: "Website Feedback", label: "Website Feedback" },
-                { value: "Complaint", label: "Complaint" },
-                { value: "Other", label: "Other" },
-
-
+                {
+                  value: "General Inquiry",
+                  label: `${translate("common.general_inquery")}`,
+                },
+                {
+                  value: "Account Assistance",
+                  label: `${translate("common.account_assist")}`,
+                },
+                {
+                  value: "Billing or Payment Issues",
+                  label: `${translate("common.payment_issues")}`,
+                },
+                {
+                  value: "Technical Support",
+                  label: `${translate("common.Technical_support")}`,
+                },
+                {
+                  value: "Feedback or Suggestions",
+                  label: `${translate("common.feedback_suggestion")}`,
+                },
+                {
+                  value: "Report a Bug or Error",
+                  label: `${translate("common.report_bug")}`,
+                },
+                {
+                  value: "Website Feedback",
+                  label: `${translate("common.website_feedback")}`,
+                },
+                {
+                  value: "Complaint",
+                  label: `${translate("common.complaint")}`,
+                },
+                { value: "Other", label: `${translate("common.other")}` },
               ],
               control,
             },
@@ -115,7 +137,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       },
     },
     {
-      containerClass: "mb-0 mt-[22px]",
+      containerClass: "mb-0 rounded-b-lg px-2 pb-3 bg-[#EDF4FF]",
       label: {
         text: `${translate("contact_support.form_fields.message")}`,
         htmlFor: "message",
@@ -124,23 +146,23 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       field: {
         type: Field.textArea,
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-        rows: 8,
+        rows: 2,
         id: "message",
         name: "message",
-        placeholder: "Type your message here",
+        placeholder: `${translate("common.type_message")}`,
         register,
       },
     },
 
     {
-      containerClass: "mt-[30px]",
+      containerClass: "my-[30px] flex justify-end",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("contact_support.form_fields.request_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg   px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
         loading,
       },
     },

@@ -5,19 +5,22 @@ import TabSection from "@/base-components/ui/tab";
 import { Layout } from "@/layout";
 import AddServiceForm from "../fields/add-services-fields";
 import { useTranslation } from "next-i18next";
+import { updateQuery } from "@/utils/update-query";
 type ComponentLookupType = Record<string, JSX.Element>;
 
 const AddService = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<string>("Service Details");
+
   const handleCancel = () => {
-    router.push("/services");
+    router.pathname = "/services";
+    updateQuery(router, router.locale as string);
   };
 
   const tabSection: tabArrayTypes[] = [
     {
-      name: "Service Details",
+      name: `${translate("services.service_detail_tab")}`,
       content: <AddServiceForm handleCancel={handleCancel} />,
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill=${
         tabType ? "#4A13E7" : "#1E1E1E"
@@ -51,7 +54,10 @@ const AddService = () => {
             tabType={tabType}
           />
         </div>
-        {componentLookup[tabType]}
+
+        <div className="w-full xLarge:max-w-[80%]">
+          {componentLookup[tabType]}
+        </div>
       </div>
     </Layout>
   );

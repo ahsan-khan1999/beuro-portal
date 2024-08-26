@@ -6,6 +6,7 @@ import TableFunctions from "./table/TableFunctions";
 import useService from "@/hooks/services/useService";
 import TableHeadings from "./table/TableHeadings";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Services() {
   const {
@@ -18,12 +19,14 @@ export default function Services() {
     handleFilterChange,
     translate,
     loading,
+    isLoading,
+    currentPage,
   } = useService();
 
   const CurrentComponent = useEmptyStates(
     <TableRowServices servicesData={currentPageRows} />,
     currentPageRows.length > 0,
-    loading
+    isLoading
   );
 
   return (
@@ -34,17 +37,18 @@ export default function Services() {
         handleFilterChange={handleFilterChange}
         translate={translate}
       />
-      <TableLayout>
-        <TableHeadings />
-        {CurrentComponent}
-      </TableLayout>
-      {currentPageRows.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeadings />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
     </>
   );
 }

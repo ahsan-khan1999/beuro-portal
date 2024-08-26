@@ -1,48 +1,51 @@
-import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
-import Image from "next/image";
-import { useRouter } from "next/router";
 import React from "react";
-import editIcon from "@/assets/svgs/edit-customer-details.svg";
+import { useRouter } from "next/router";
 import { OffersTableRowTypes } from "@/types/offers";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
+import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
-const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTypes }) => {
+const CustomerDetailsData = ({
+  offerDetails,
+}: {
+  offerDetails: OffersTableRowTypes;
+}) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center pb-5 "
-        id="Offer Details"
+        className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg"
+        id={translate("offers.tabs_heading.offer")}
       >
-        <h2 className="text-[#393939] text-lg font-medium">
+        <h2 className="text-[#fff] text-lg font-medium">
           {translate("offers.offer_details.heading")}
         </h2>
         <button
-          onClick={() => router.push({
-            pathname: "/offers/edit",
-            query: { offer: offerDetails?.id },
-          })}
-          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 max-w-[161px] w-full"
+          onClick={() =>
+            router.push({
+              pathname: "/offers/edit",
+              query: { offer: offerDetails?.id, tab: 0 },
+            })
+          }
+          className="flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[7px] px-4 min-w-[161px] w-fit bg-white"
         >
-          <Image src={editIcon} alt="editIcon" />
+          <EditIcon />
           {translate("offers.offer_details.edit_button")}
         </button>
       </div>
 
-      <hr className="opacity-20 mb-5" />
-      <div className="mt-5">
-        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 mb-5">
+      <div className="py-3 px-6">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 py-3 bg-[#EDF4FF]">
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
-              Offer Title
+              {translate("offers.offer_details.offer_title")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium overflow-clip text-ellipsis ">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.title}
-
             </div>
           </div>
 
@@ -50,96 +53,110 @@ const CustomerDetailsData = ({ offerDetails }: { offerDetails: OffersTableRowTyp
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.customer_type")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
-              {getKeyByValue(staticEnums["CustomerType"], offerDetails?.leadID?.customerDetail?.customerType)}
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px]">
+              {translate(
+                `customer_type.${getKeyByValue(
+                  staticEnums["CustomerType"],
+                  offerDetails?.leadID?.customerDetail?.customerType
+                )}`
+              )}
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.full_name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.fullName}
-
             </div>
           </div>
-          {
-            staticEnums["CustomerType"][offerDetails?.leadID?.customerDetail?.customerType] === 1 &&
+          {staticEnums["CustomerType"][
+            offerDetails?.leadID?.customerDetail?.customerType
+          ] === 1 && (
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
-                Company Name
+                {translate("offers.offer_details.company_name")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {offerDetails?.leadID?.customerDetail?.companyName}
-
               </div>
             </div>
-          }
+          )}
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.email_address")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.email}
-
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.phone_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.phoneNumber}
-
             </div>
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.mobile_number")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {offerDetails?.leadID?.customerDetail?.mobileNumber}
-
+            </div>
+          </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("customers.details.gender")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+              {offerDetails?.leadID?.customerDetail?.gender}
+            </div>
+          </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("common.lead")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+              {offerDetails?.leadID?.refID}
             </div>
           </div>
         </div>
 
         <div className="mt-5">
-          <h4 className="text-[#8F8F8F] mb-[10px]">
+          <h4 className="text-base font-semibold text-[#1E1E1E] mb-[10px]">
             {translate("offers.offer_details.customer_address")}
           </h4>
-          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5">
+          <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-b-lg px-2 py-3 bg-[#EDF4FF]">
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.street_no")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {offerDetails?.leadID?.customerDetail?.address?.streetNumber}
-
               </div>
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.post_code")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {offerDetails?.leadID?.customerDetail?.address?.postalCode}
-
               </div>
             </div>
             <div>
               <label className="text-[#4D4D4D] mb-3 block text-sm">
                 {translate("offers.offer_details.country")}
               </label>
-              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium">
+              <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
                 {offerDetails?.leadID?.customerDetail?.address?.country}
-
               </div>
             </div>
           </div>
         </div>
       </div>
-    </LeadsCardLayout >
+    </LeadsCardLayout>
   );
 };
 

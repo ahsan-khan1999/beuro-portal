@@ -6,12 +6,16 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddReceiptContentDetailsFormField } from "@/components/content/add/fields/add-receipt-details-fields";
 import { generateEditReceiptContentDetailsValidation } from "@/validation/contentSchema";
 import { ComponentsType } from "@/components/content/add/ContentAddDetailsData";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
+import { updateQuery } from "@/utils/update-query";
 
-export const useAddContentReceiptDetails = (onHandleNext: Function) => {
+export const useAddContentReceiptDetails = (
+  onHandleBack: Function,
+  onHandleNext: Function
+) => {
   const { t: translate } = useTranslation();
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
@@ -25,7 +29,7 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
   const dispatch = useAppDispatch();
 
   const handleBack = () => {
-    onHandleNext(ComponentsType.addInvoiceContent);
+    onHandleBack(ComponentsType.addInvoiceContent);
   };
 
   const schema = generateEditReceiptContentDetailsValidation(translate);
@@ -40,17 +44,22 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const handleSuccess = () => {
-    router.push("/content");
+
+  const changeRouterHandler = () => {
+    router.pathname = "/content";
+    updateQuery(router, router.locale as string);
   };
-  useMemo(() => {
+
+  useEffect(() => {
     if (contentDetails.id) {
       reset({
-        title: contentDetails?.receiptContent?.title,
-        attachments:
-          (contentDetails?.receiptContent?.attachments?.length > 0 &&
-            contentDetails?.receiptContent?.attachments[0]) ||
-          null,
+        receiptContent: {
+          ...contentDetails?.receiptContent,
+          // attachments:
+          //   (contentDetails?.receiptContent?.attachments?.length > 0 &&
+          //     contentDetails?.receiptContent?.attachments[0]) ||
+          //   null,
+        },
       });
     }
   }, [contentDetails.id]);
@@ -85,6 +94,7 @@ export const useAddContentReceiptDetails = (onHandleNext: Function) => {
     );
     if (res?.payload) onHandleNext();
   };
+
   return {
     fields,
     onSubmit,

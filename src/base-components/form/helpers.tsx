@@ -19,10 +19,10 @@ import {
   DragAndDropFileField,
   DragAndDropPdfField,
   ImageUploadField,
-  MultiDateField,
   MultiSelectField,
   AddFiled,
-  ToggleButton
+  ToggleButton,
+  ColorPicker,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -37,6 +37,7 @@ import { ProfileControllerField } from "./fields/profile_field/profile_upload_co
 
 const fieldComponents: FieldComponents = {
   input: InputField,
+  colorPicker: ColorPicker,
   textArea: TextAreaField,
   ckEditor: CkEditor,
   customerInput: CustomerInputField,
@@ -57,11 +58,8 @@ const fieldComponents: FieldComponents = {
   button: Button,
   addField: AddFiled,
   link: LinkField,
-  dateRange: MultiDateField,
   multiSelect: MultiSelectField,
   toggleButton: ToggleButton,
-
-
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -83,6 +81,7 @@ export const getTypedFieldComponent = <T extends FieldProps>(
 export function isFieldType(type: any): type is FieldType {
   return [
     "input",
+    "colorPicker",
     "textArea",
     "ckEditor",
     "creditCardExpiryDateInput",
@@ -100,10 +99,9 @@ export function isFieldType(type: any): type is FieldType {
     "div",
     "button",
     "link",
-    "dateRange",
     "multiSelect",
     "addField",
-    "toggleButton"
+    "toggleButton",
   ].includes(type);
 }
 
@@ -155,7 +153,6 @@ export const formatCardNumber = (cardNumber: string, format: number[]) => {
 //     />
 //   );
 // };
-
 
 export const renderField = (
   fieldData: FormField,

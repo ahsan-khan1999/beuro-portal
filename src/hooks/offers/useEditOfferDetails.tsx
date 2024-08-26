@@ -28,10 +28,7 @@ import {
   readOfferDetails,
   setOfferDetails,
 } from "@/api/slices/offer/offerSlice";
-import {
-  CustomerPromiseActionType,
-  OfferPromiseActionType,
-} from "@/types/customer";
+import { OfferPromiseActionType } from "@/types/customer";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
@@ -52,14 +49,16 @@ export const useEditOfferDetails = ({
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
-  const { content } = useAppSelector((state) => state.content);
 
+  const { content } = useAppSelector((state) => state.content);
   const { leadDetails, lead } = useAppSelector((state) => state.lead);
 
   const onCancel = () => {
     router.pathname = "/offers";
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
   };
+
   const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,
@@ -73,6 +72,7 @@ export const useEditOfferDetails = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     if (offer) {
       dispatch(readOfferDetails({ params: { filter: offer } })).then(
@@ -96,13 +96,18 @@ export const useEditOfferDetails = ({
             address: res?.payload?.leadID?.customerDetail?.address,
             date: res?.payload?.date,
             customerID: res?.payload?.leadID?.customerID,
+            gender:
+              staticEnums["Gender"][
+                res?.payload?.leadID?.customerDetail?.gender
+              ],
+            time: res?.payload?.time,
           });
         }
       );
     }
   }, [offer]);
-  const type = watch("type");
 
+  const type = watch("type");
   const customerType = watch("customerType");
   const customerID = watch("customerID");
   const selectedContent = watch("content");
@@ -115,7 +120,10 @@ export const useEditOfferDetails = ({
     if (type && customerID) {
       dispatch(
         readLead({
-          params: { filter: { customerID: customerID, paginate: 0 } },
+          params: {
+            filter: { customerID: customerID, status: [0, 1, 3] },
+            paginate: 0,
+          },
         })
       );
     }
@@ -135,6 +143,28 @@ export const useEditOfferDetails = ({
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
+        gender: null,
+      });
+    } else {
+      reset({
+        type: "Existing Customer",
+        leadID: offerDetails?.leadID?.id,
+        customerType: getKeyByValue(
+          staticEnums["CustomerType"],
+          offerDetails?.leadID?.customerDetail?.customerType
+        ),
+        fullName: offerDetails?.leadID?.customerDetail?.fullName,
+        email: offerDetails?.leadID?.customerDetail?.email,
+        phoneNumber: offerDetails?.leadID?.customerDetail?.phoneNumber,
+        mobileNumber: offerDetails?.leadID?.customerDetail?.mobileNumber,
+        content: offerDetails?.content?.id,
+        title: offerDetails?.title,
+        address: offerDetails?.leadID?.customerDetail?.address,
+        date: offerDetails?.date,
+        customerID: offerDetails?.leadID?.customerID,
+        gender:
+          staticEnums["Gender"][offerDetails?.leadID?.customerDetail?.gender],
+        time: offerDetails?.id && offerDetails?.time,
       });
     }
   }, [type]);
@@ -147,29 +177,34 @@ export const useEditOfferDetails = ({
     control,
     name: "date",
   });
+
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.filter((item) => item.id === id);
-    dispatch(
-      setCustomerDetails(selectedCustomers?.length > 0 && selectedCustomers[0])
-    );
+    const selectedCustomers = customer.find((item) => item.id === id);
+    if (selectedCustomers) {
+      dispatch(setCustomerDetails(selectedCustomers));
 
-    reset({
-      ...selectedCustomers[0],
-      type: type,
-      content: selectedContent,
-      customerID: selectedCustomers[0]?.id,
-      leadID: "",
-    });
+      reset({
+        ...selectedCustomers,
+        type: type,
+        content: selectedContent,
+        customerID: selectedCustomers?.id,
+        leadID: "",
+        gender: staticEnums["Gender"][selectedCustomers?.gender],
+      });
+    }
   };
-  const handleContentSelect = () => {
+
+  useMemo(() => {
     const filteredContent = content?.find(
       (item) => item.id === selectedContent
     );
+
     if (filteredContent)
       setValue("title", filteredContent?.offerContent?.title);
-  };
+  }, [selectedContent]);
 
+  const handleContentSelect = () => {};
   const offerFields = AddOfferDetailsFormField(
     register,
     loading,
@@ -196,7 +231,7 @@ export const useEditOfferDetails = ({
     append,
     testFields?.length ? testFields?.length : 1,
     remove,
-    offerDetails,
+    loading,
     control
   );
 
@@ -247,5 +282,6 @@ export const useEditOfferDetails = ({
     errors,
     error,
     translate,
+    offerDetails,
   };
 };

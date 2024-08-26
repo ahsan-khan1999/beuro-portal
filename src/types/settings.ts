@@ -2,6 +2,10 @@ export interface SystemSettingDataProps {
   allowedDomains: string[];
   currency: string;
   daysLimit: number;
+  reminderText: string;
+  offerReminderFrequency: number;
+  secondWarningDays: number;
+  thirdWarningDays: number;
   isInvoiceOverDue: boolean;
   taxType: number;
 }
@@ -13,7 +17,13 @@ export type Template = {
 export type colsData = {
   title: string;
   placeholder: string;
-  data: { column: string; type: string; value: boolean };
+  data: {
+    column: string;
+    type: string;
+    value: boolean;
+    text: string;
+    textType: string;
+  };
 };
 export type ColumnStructure = {
   firstColumn: colsData[];
@@ -31,12 +41,19 @@ export interface TemplateSettings {
   isFourthColumn: boolean;
   isThirdColumn: boolean;
   isSecondColumn: boolean;
+  order: boolean;
+  alignment: "left" | "right";
   firstColumn: {
     isCompanyName: boolean;
     isEmail: boolean;
     isPhoneNumber: boolean;
     isTaxNumber: boolean;
     isWebsite: boolean;
+    companyName: string;
+    email: string;
+    phoneNumber: string;
+    taxNumber: string;
+    website: string;
   };
   secondColumn: {
     isStreetNumber: boolean;
@@ -44,6 +61,12 @@ export interface TemplateSettings {
     isBankName: boolean;
     isAccountNumber: boolean;
     isIBAN: boolean;
+
+    streetNumber: string;
+    postCode: string;
+    bankName: string;
+    accountNumber: string;
+    iban: string;
   };
   thirdColumn: {
     isRow1: boolean;
@@ -51,6 +74,11 @@ export interface TemplateSettings {
     isRow3: boolean;
     isRow4: boolean;
     isRow5: boolean;
+    row1: string;
+    row2: string;
+    row3: string;
+    row4: string;
+    row5: string;
   };
   fourthColumn: {
     isRow1: boolean;
@@ -58,6 +86,11 @@ export interface TemplateSettings {
     isRow3: boolean;
     isRow4: boolean;
     isRow5: boolean;
+    row1: string;
+    row2: string;
+    row3: string;
+    row4: string;
+    row5: string;
   };
   company: string;
   createdAt: string;
@@ -72,6 +105,14 @@ export interface FollowUp {
   createdAt: string;
   isCreateFollowUpOnOfferExpire: boolean;
   isCreateFollowUpOnLeadCreation: false;
+}
+
+export interface GeneralAddress {
+  id: string;
+  createdBy: string;
+  company: string;
+  addresses: string[];
+  createdAt: string;
 }
 
 export interface FollowUpProp {
@@ -99,7 +140,7 @@ export interface EmailSetting {
   phoneNumber: string;
   mobileNumber: string;
   FooterColour: string;
-  textColour: string
+  textColour: string;
 }
 
 export interface EmailTemplate {
@@ -108,5 +149,19 @@ export interface EmailTemplate {
   phoneNumber: string;
   mobileNumber: string;
   FooterColour: string;
-  textColour: string
+  textColour: string;
+}
+
+export interface QRSettings {
+  companyName: string;
+  ibanNo: string;
+  streetNumber: string;
+  postalCode: string;
+  city: string;
+}
+
+export interface CompanyQrSettings {
+  id: string;
+  createdAt: string;
+  QrCodeDetail: QRSettings[];
 }

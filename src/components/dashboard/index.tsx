@@ -10,23 +10,18 @@ import contractsIcon from "@/assets/svgs/contracts.svg";
 import salesIcon from "@/assets/svgs/sales.svg";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import SearchInputFiled from "@/base-components/filter/fields/search-input-fields";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { readDashboard } from "@/api/slices/authSlice/auth";
-import { Dashboard, FilterType } from "@/types";
-import customerIcon from "@/assets/pngs/customers.png";
-import leadsPngIcon from "@/assets/pngs/leads.png";
-import offersPngIcon from "@/assets/pngs/offers.png";
-import invoiceIcon from "@/assets/pngs/invoice.png";
+import { FilterType } from "@/types";
+import LoadingState from "@/base-components/loadingEffect/loading-state";
+import { getCurrentMonth } from "@/utils/utility";
+import { DashboardActionType } from "@/types/dashboard";
 
-interface ActionType {
-  type: string;
-  payload: Dashboard;
-}
 const AdminDashboard = () => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const { dashboard } = useAppSelector((state) => state.auth);
+
   const [pieData, setPieData] = useState({
     datasets: [
       {
@@ -50,13 +45,16 @@ const AdminDashboard = () => {
       `${translate("dashboard_detail.charts_labels.whatsapp")}`,
     ],
   });
+
   const [filter, setFilter] = useState<FilterType>({
-    month: 1,
+    month: getCurrentMonth(),
   });
+
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(readDashboard({ params: { filter: filter } })).then(
-      (response: ActionType) => {
+      (response: DashboardActionType) => {
         if (response?.payload) {
           setPieData({
             datasets: [
@@ -85,60 +83,113 @@ const AdminDashboard = () => {
     {
       icon: leadsIcon,
       alt: "leads icon",
-      title: `${translate("dashboard_detail.cards_title.lead")}`,
-      subTitle: dashboard?.Lead?.totalLeads + " Leads",
+      title: `${translate("dashboard_detail.cards_title.leads")}`,
+      subTitle:
+        dashboard?.Lead?.totalLeads +
+        ` ${translate("dashboard_detail.cards_title.leads")}`,
       id: dashboard?.Lead?.filterCount,
-      salePercent: "+" + dashboard?.Lead?.percentage + "%",
+      salePercent:
+        (dashboard?.Lead?.percentage && dashboard?.Lead?.percentage > 0
+          ? "+"
+          : "") +
+        Math.round(dashboard?.Lead?.percentage! * 100) / 100 +
+        "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
-      open: dashboard?.Lead?.opened + " Open",
-      closed: dashboard?.Lead?.closed + " Close",
-      expired: dashboard?.Lead?.expired + " Expired",
-      route: () => router.push("/leads"),
+      open:
+        dashboard?.Lead?.opened +
+        ` ${translate("dashboard_detail.cards_status.open")}`,
+      closed:
+        dashboard?.Lead?.closed +
+        ` ${translate("dashboard_detail.cards_status.close")}`,
+      expired:
+        dashboard?.Lead?.expired +
+        ` ${translate("dashboard_detail.cards_status.expire")}`,
+      route: () => router.push("/leads?status=None"),
     },
     {
       icon: offersIcon,
       alt: "offers icon",
       title: `${translate("dashboard_detail.cards_title.offer")}`,
-      subTitle: dashboard?.Offer?.totalOffers + "Offers",
+      subTitle:
+        dashboard?.Offer?.totalOffers +
+        ` ${translate("dashboard_detail.cards_title.offer")}`,
       id: dashboard?.Offer?.filterCount,
-      salePercent: "+" + dashboard?.Offer?.percentage + "%",
+      salePercent:
+        (dashboard?.Offer?.percentage && dashboard?.Offer?.percentage > 0
+          ? "+"
+          : "") +
+        Math.round(dashboard?.Offer?.percentage! * 100) / 100 +
+        "%",
       backgroundColor: "bg-dashboardCard2-gradient",
       chartPointColor: "#FC3576",
-      open: dashboard?.Offer?.opened + " Open",
-      closed: dashboard?.Offer?.signed + " Signed",
-      expired: dashboard?.Offer?.expired + " Expired",
-      route: () => router.push("/offers"),
+      open:
+        dashboard?.Offer?.opened +
+        ` ${translate("dashboard_detail.cards_status.open")}`,
+      closed:
+        dashboard?.Offer?.signed +
+        ` ${translate("dashboard_detail.cards_status.signed")}`,
+      expired:
+        dashboard?.Offer?.expired +
+        ` ${translate("dashboard_detail.cards_status.expire")}`,
+      route: () => router.push("/offers?status=None"),
     },
     {
       icon: contractsIcon,
       alt: "contracts icon",
       title: `${translate("dashboard_detail.cards_title.contracts")}`,
-      subTitle: dashboard?.Contract?.totalContract + " Contracts",
+      subTitle:
+        dashboard?.Contract?.totalContract +
+        ` ${translate("dashboard_detail.cards_title.contracts")}`,
       id: dashboard?.Contract?.filterCount,
-      salePercent: "+" + dashboard?.Contract?.percentage + "%",
+      salePercent:
+        (dashboard?.Contract?.percentage && dashboard?.Contract?.percentage > 0
+          ? "+"
+          : "") +
+        Math.round(dashboard?.Contract?.percentage! * 100) / 100 +
+        "%",
       backgroundColor: "bg-dashboardCard3-gradient",
       chartPointColor: "#FE8D46",
-      open: dashboard?.Contract?.opened + " Open",
-      closed: dashboard?.Contract?.confirmed + " Confirmed",
-      expired: dashboard?.Contract?.cancelled + " Cancelled",
-      route: () => router.push("/contract"),
+      open:
+        dashboard?.Contract?.opened +
+        ` ${translate("dashboard_detail.cards_status.open")}`,
+      closed:
+        dashboard?.Contract?.confirmed +
+        ` ${translate("dashboard_detail.cards_status.confirm")}`,
+      expired:
+        dashboard?.Contract?.cancelled +
+        ` ${translate("dashboard_detail.cards_status.cancel")}`,
+      route: () => router.push("/contract?status=None"),
     },
     {
       icon: salesIcon,
       alt: "sales icon",
       title: `${translate("dashboard_detail.cards_title.sales")}`,
-      subTitle: dashboard?.Sales?.totalSales + " Sales",
+      subTitle:
+        dashboard?.Sales?.totalSales +
+        ` ${translate("dashboard_detail.cards_title.sales")}`,
       id: dashboard?.Sales?.filterCount,
-      salePercent: "+" + dashboard?.Sales?.percentage + "%",
+      salePercent:
+        (dashboard?.Sales?.percentage && dashboard?.Sales?.percentage > 0
+          ? "+"
+          : "") +
+        Math.round(dashboard?.Sales?.percentage! * 100) / 100 +
+        "%",
       backgroundColor: "bg-gradient",
       chartPointColor: "#5114EA",
-      open: dashboard?.Sales?.pending + " Open",
-      closed: dashboard?.Sales?.overdue + " Overdue",
-      expired: dashboard?.Sales?.paid + " Paid",
-      route: () => router.push("/dashboard"),
+      open:
+        dashboard?.Sales?.pending +
+        ` ${translate("dashboard_detail.cards_status.pending")}`,
+      closed:
+        dashboard?.Sales?.overdue +
+        ` ${translate("dashboard_detail.cards_status.overdue")}`,
+      expired:
+        dashboard?.Sales?.paid +
+        ` ${translate("dashboard_detail.cards_status.paid")}`,
+      route: () => router.push("/invoices?status=None"),
     },
   ];
+
   const handleFilterChange = (query: FilterType) => {
     dispatch(readDashboard({ params: { filter: { month: query?.month } } }));
   };
@@ -151,7 +202,7 @@ const AdminDashboard = () => {
         </h1>
       </div>
 
-      <SearchInputFiled
+      {/* <SearchInputFiled
         handleChange={(value) => setFilter({ ...filter, ["text"]: value })}
         value={filter.text}
         iconDisplay={true}
@@ -183,45 +234,49 @@ const AdminDashboard = () => {
             service: "Umzug Cleaning Service",
           },
         ]}
-      />
+      /> */}
 
-      <DashboardFunctions
-        filter={filter}
-        setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
-      />
+      {dashboard !== null ? (
+        <>
+          <DashboardFunctions
+            filter={filter}
+            setFilter={setFilter}
+            handleFilterChange={handleFilterChange}
+          />
 
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
-        {dashboardCards.map((item, index) => {
-          return (
-            <DashboardCard
-              icon={item.icon}
-              alt={item.alt}
-              backgroundColor={item.backgroundColor}
-              title={item.title}
-              subTitle={item.subTitle}
-              id={item?.id?.toString() as string}
-              salePercent={item.salePercent}
-              chartPointColor={item.chartPointColor}
-              open={item.open}
-              closed={item.closed}
-              expired={item.expired}
-              route={item.route}
-            />
-          );
-        })}
-      </div>
-      {/* <div className="mt-[51px] grid grid-cols-1  gap-x-[18px]">
-        <MainCalender />
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 ">
+            {dashboardCards.map((item, index) => {
+              return (
+                <DashboardCard
+                  key={index}
+                  icon={item.icon}
+                  alt={item.alt}
+                  backgroundColor={item.backgroundColor}
+                  title={item.title}
+                  subTitle={item.subTitle}
+                  id={item?.id?.toString() as string}
+                  salePercent={item.salePercent}
+                  chartPointColor={item.chartPointColor}
+                  open={item.open}
+                  closed={item.closed}
+                  expired={item.expired}
+                  route={item.route}
+                />
+              );
+            })}
+          </div>
 
-      </div> */}
-      <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
-        <div className="hidden 2xl:block">
-          <FollowUpNotificationBar dashboard={dashboard} />
-        </div>
-        <ActivitiesNotificationBar dashboard={dashboard} />
-        <PieChart data={pieData} />
-      </div>
+          <div className="mt-[51px] grid grid-cols-2 2xl:grid-cols-3 gap-x-[18px] mb-10">
+            <div className="hidden 2xl:block">
+              <FollowUpNotificationBar dashboard={dashboard} />
+            </div>
+            <ActivitiesNotificationBar dashboard={dashboard} />
+            <PieChart data={pieData} />
+          </div>
+        </>
+      ) : (
+        <LoadingState />
+      )}
     </div>
   );
 };

@@ -11,50 +11,51 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function usePlans() {
-  const { plan, lastPage, totalCount, loading } = useAppSelector(state => state.company)
-  const { modal } = useAppSelector(state => state.global)
+  const { plan, lastPage, totalCount, loading } = useAppSelector(
+    (state) => state.company
+  );
+  const { modal } = useAppSelector((state) => state.global);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filter, setFilter] = useState<FilterType>({
     location: "",
     sort: "",
     text: "",
-    type: ""
+    type: "",
   });
-  const router = useRouter()
-  const { t: translate } = useTranslation()
-  const [currentPageRows, setCurrentPageRows] =
-    useState<Plan[]>([]);
+  const router = useRouter();
+  const { t: translate } = useTranslation();
+  const [currentPageRows, setCurrentPageRows] = useState<Plan[]>([]);
   const dispatch = useAppDispatch();
-
 
   const totalItems = totalCount;
   const itemsPerPage = 10;
   useEffect(() => {
     // dispatch(set(DEFAULT_CUSTOMER))
-    dispatch(readPlan({ params: { filter: filter, page: 1, size: 10 } })).then((res: any) => {
-
-      if (res?.payload) {
-        setCurrentPageRows(res?.payload?.Plan || []);
+    dispatch(readPlan({ params: { filter: filter, page: 1, size: 10 } })).then(
+      (res: any) => {
+        if (res?.payload) {
+          setCurrentPageRows(res?.payload?.Plan || []);
+        }
       }
-    })
-  }, [])
-
- 
+    );
+  }, []);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    dispatch(readPlan({ params: { filter: filter, page: page, size: 10 } })).then((res: any) => {
-
+    dispatch(
+      readPlan({ params: { filter: filter, page: page, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Plan || []);
       }
-    })
+    });
   };
   const handleFilterChange = (filter: FilterType) => {
-    dispatch(readPlan({ params: { filter: filter, page: currentPage, size: 10 } }))
+    dispatch(
+      readPlan({ params: { filter: filter, page: currentPage, size: 10 } })
+    );
   };
-
 
   const handleConfirmDeletion = (id: string) => {
     dispatch(
@@ -66,12 +67,12 @@ export default function usePlans() {
   };
 
   const handleDelete = () => {
-
-    dispatch(updateModalType({
-      type: ModalType.DELETE_MAIL,
-      data: { refId: modal?.data },
-
-    }));
+    dispatch(
+      updateModalType({
+        type: ModalType.DELETE_MAIL,
+        data: { refId: modal?.data },
+      })
+    );
   };
 
   const onClose = () => {
@@ -79,16 +80,18 @@ export default function usePlans() {
   };
 
   const routeHandler = async () => {
-    const filteredPlan = plan?.find((item) => item?.refID === modal?.data?.refId?.refId)
-    const res = await dispatch(
-      deletePlan({ data: { id: filteredPlan?.id } })
+    const filteredPlan = plan?.find(
+      (item) => item?.refID === modal?.data?.refId?.refId
     );
-    dispatch(readPlan({ params: { filter: filter, page: currentPage, size: 10 } })).then((res: any) => {
+    const res = await dispatch(deletePlan({ data: { id: filteredPlan?.id } }));
+    dispatch(
+      readPlan({ params: { filter: filter, page: currentPage, size: 10 } })
+    ).then((res: any) => {
       if (res?.payload) {
         setCurrentPageRows(res?.payload?.Plan);
       }
-    })
-    onClose()
+    });
+    onClose();
     if (res?.payload) router.push("/admin/plans");
   };
   const MODAL_CONFIG: ModalConfigType = {
@@ -122,10 +125,12 @@ export default function usePlans() {
     totalItems,
     handlePageChange,
     itemsPerPage,
-    filter, setFilter,
+    filter,
+    setFilter,
     handleFilterChange,
     loading,
     handleDelete: handleConfirmDeletion,
-    renderModal
+    renderModal,
+    currentPage
   };
 }

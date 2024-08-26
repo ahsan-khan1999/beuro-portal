@@ -11,9 +11,9 @@ export const Pagination = React.memo(
     itemsPerPage,
     onPageChange,
     containerClassName,
+    currentPage,
   }: PaginationProps) => {
     const {
-      currentPage,
       isFirst,
       isLast,
       pagesToShow,
@@ -21,11 +21,13 @@ export const Pagination = React.memo(
       handlePrevClick,
       handleNextClick,
       handlePageClick,
-    } = usePagination({ totalItems, itemsPerPage, onPageChange });
+    } = usePagination({ totalItems, itemsPerPage, onPageChange, currentPage });
+
     const combineContainerClass = combineClasses(
       "flex justify-end gap-x-2 mt-6",
       containerClassName
     );
+
     return (
       <div className={combineContainerClass}>
         <PaginationItem
@@ -43,10 +45,14 @@ export const Pagination = React.memo(
           if (index > 0 && pageNumber - array[index - 1] > 1) {
             return (
               <React.Fragment key={pageNumber}>
-                <span className="flex justify-center items-center text-gray">
+                <span
+                  className="flex justify-center items-center text-gray"
+                  key={`dots-${pageNumber}`}
+                >
                   {dots}
                 </span>
                 <PageNumber
+                  key={pageNumber}
                   currentPage={currentPage}
                   pageNumber={pageNumber}
                   handlePageClick={handlePageClick}
@@ -56,6 +62,7 @@ export const Pagination = React.memo(
           } else {
             return (
               <PageNumber
+                key={pageNumber}
                 currentPage={currentPage}
                 pageNumber={pageNumber}
                 handlePageClick={handlePageClick}

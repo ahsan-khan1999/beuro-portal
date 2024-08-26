@@ -14,12 +14,11 @@ export const AddRemarksFormField: GenerateFollowUpFormField = (
       containerClass: "mb-0 ",
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-dark  focus:!border-primary ",
-        rows: 8,
+        className: "!p-4 !h-fit !border-[#BFBFBF]  focus:!border-primary ",
+        rows: 3,
         id: "completeRemarks",
         name: "completeRemarks",
-        placeholder:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  a been the industry's standard dummy text ever since the 1500s",
+        placeholder: "",
         register,
       },
     },

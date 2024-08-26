@@ -19,16 +19,13 @@ export const OfferEditAdditionalDetailsFormField: GenerateOffersFormField = (
       field: {
         className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
         type: Field.select,
-        value:
-          "Office Cleaning Munich Lorem ipsum dollar smith emit typesetting industry Lorem Isum has...",
+        value: "Office Cleaning ",
         id: "chooseFromExisting",
         name: "chooseFromExisting",
         options: [
           {
-            value:
-              "Office Cleaning Munich Lorem ipsum dollar smith emit typesetting industry Lorem Isum has...",
-            label:
-              "Office Cleaning Munich Lorem ipsum dollar smith emit typesetting industry Lorem Isum has...",
+            value: "Office Cleaning",
+            label: "Office Cleaning",
           },
         ],
         control,

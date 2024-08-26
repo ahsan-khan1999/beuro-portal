@@ -16,14 +16,13 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-1 gap-4",
+        className: "grid grid-cols-1 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.invoice_title"),
               htmlFor: "invoiceContent.title",
@@ -35,12 +34,12 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
               inputType: "text",
               id: "invoiceContent.title",
               name: "invoiceContent.title",
-              placeholder: "Text for Invoice",
+              placeholder: translate("content.details.invoice_title"),
               register,
             },
           },
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.invoice_description"),
               htmlFor: "invoiceContent.description",
@@ -53,14 +52,11 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.description",
 
               control,
-              value:
-                contentDetails?.id &&
-                contentDetails?.invoiceContent?.description,
             },
           },
 
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.email_body"),
               htmlFor: "invoiceContent.body",
@@ -73,12 +69,11 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
               name: "invoiceContent.body",
 
               control,
-              value: contentDetails?.id && contentDetails?.invoiceContent?.body,
             },
           },
 
           {
-            containerClass: "mb-0 mt-5",
+            containerClass: "mb-0",
             label: {
               text: translate("content.details.attachments"),
               htmlFor: "invoiceContent.attachments",
@@ -101,11 +96,11 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
     },
 
     {
-      containerClass: "mt-6",
+      containerClass: "my-[30px]",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center space-x-[18px] ",
+        className: "flex items-center justify-end space-x-[18px]",
         children: [
           {
             containerClass: "mb-0",
@@ -115,7 +110,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.back_button")}`,
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
               loading,
               onClick: onClick,
             },
@@ -128,7 +123,7 @@ export const AddContentInvoiceDetailsFormField: GenerateContentFormField = (
               text: `${translate("content.details.next_button")}`,
               inputType: "submit",
               className:
-                "rounded-lg px-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
               loading,
             },
           },

@@ -14,8 +14,18 @@ import {
   User,
 } from "@/types/auth";
 import { updateQuery } from "@/utils/update-query";
-import { conditionHandlerLogin, conditionHandlerRegistration, senitizePhone, setErrors } from "@/utils/utility";
-import { getUser, saveUser, setRefreshToken, setToken } from "@/utils/auth.util";
+import {
+  conditionHandlerLogin,
+  conditionHandlerRegistration,
+  senitizePhone,
+  setErrors,
+} from "@/utils/utility";
+import {
+  getUser,
+  saveUser,
+  setRefreshToken,
+  setToken,
+} from "@/utils/auth.util";
 import { formatDateString, isJSON } from "@/utils/functions";
 import { getCookie } from "cookies-next";
 import { SalutationValue } from "@/enums/form";
@@ -33,7 +43,7 @@ const initialState: AuthState = {
   fb: false,
   apple: false,
   dashboard: null,
-  adminDashboard: null
+  adminDashboard: null,
 };
 
 export const loginUser: AsyncThunk<boolean, object, object> | any =
@@ -58,6 +68,7 @@ export const loginUser: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const resetPassword: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("reset/user", async (args, thunkApi) => {
     const { router, data } = args as any;
@@ -77,6 +88,7 @@ export const resetPassword: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const forgotPassword: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("forgot/user", async (args, thunkApi) => {
     const { translate, data, setError } = args as any;
@@ -101,7 +113,7 @@ export const signUp: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(setErrorMessage(null));
       // conditionHandlerRegistration(router, response);
       router.pathname = "/login-success";
-      updateQuery(router, router.locale as string)
+      updateQuery(router, router.locale as string);
 
       saveUser(response.data.data.User);
 
@@ -116,19 +128,21 @@ export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep1/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      const user = isJSON(getUser())
+      const user = isJSON(getUser());
 
       const response = await apiServices.profileStep1(data);
-      thunkApi.dispatch(setErrorMessage(null))
-      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
-      saveUser({ ...user, "company": { ...response?.data?.Company } });
+      thunkApi.dispatch(setErrorMessage(null));
+      thunkApi.dispatch(
+        setUser({ ...user, company: { ...response?.data?.Company } })
+      );
+      saveUser({ ...user, company: { ...response?.data?.Company } });
 
       nextFormHandler();
 
       return true;
     } catch (e: any) {
-      setErrors(setError, e?.data.data, translate)
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      setErrors(setError, e?.data.data, translate);
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
@@ -137,16 +151,16 @@ export const updateProfileStep2: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep2/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      const user = isJSON(getUser())
+      const user = isJSON(getUser());
 
-      const response = await apiServices.profileStep2(
-        { address: { ...data } }
-      );
+      const response = await apiServices.profileStep2({ address: { ...data } });
 
       thunkApi.dispatch(setErrorMessage(null));
 
-      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
-      saveUser({ ...user, "company": { ...response?.data?.Company } });
+      thunkApi.dispatch(
+        setUser({ ...user, company: { ...response?.data?.Company } })
+      );
+      saveUser({ ...user, company: { ...response?.data?.Company } });
       nextFormHandler();
 
       return true;
@@ -161,14 +175,21 @@ export const updateProfileStep3: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep3/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
     try {
-      const user = isJSON(getUser())
+      const user = isJSON(getUser());
 
-      let apiData = { ...data, "currency": staticEnums["currency"][data?.currency] }
+      let apiData = {
+        ...data,
+        currency: staticEnums["currency"][data?.currency],
+      };
 
-      const response = await apiServices.profileStep3({ bankDetails: { ...apiData } });
+      const response = await apiServices.profileStep3({
+        bankDetails: { ...apiData },
+      });
 
-      thunkApi.dispatch(setUser({ ...user, "company": { ...response?.data?.Company } }));
-      saveUser({ ...user, "company": { ...response?.data?.Company } });
+      thunkApi.dispatch(
+        setUser({ ...user, company: { ...response?.data?.Company } })
+      );
+      saveUser({ ...user, company: { ...response?.data?.Company } });
 
       thunkApi.dispatch(setErrorMessage(null));
 
@@ -244,7 +265,6 @@ export const userDetails: AsyncThunk<boolean, object, object> | any =
 export const verifyOtp: AsyncThunk<boolean, NextRouter, object> | any =
   createAsyncThunk("verify/otp", async (router: NextRouter, thunkApi) => {
     try {
-
       const response: ApiResponseType = await apiServices.verifyEmailOtp(
         router.query.otp
       );
@@ -298,15 +318,15 @@ export const updateProfile: AsyncThunk<boolean, object, object> | any =
             field === "salutation"
               ? SalutationValue[data["salutation"]]
               : field === "phoneNumber"
-                ? data?.[field]?.includes("+")
-                  ? data?.[field]
-                  : "+" + data?.[field]
-                : field === "password"
-                  ? {
-                    currentPassword: data?.["currentPassword"],
-                    newPassword: data?.["newPassword"],
-                  }
-                  : data?.[field],
+              ? data?.[field]?.includes("+")
+                ? data?.[field]
+                : "+" + data?.[field]
+              : field === "password"
+              ? {
+                  currentPassword: data?.["currentPassword"],
+                  newPassword: data?.["newPassword"],
+                }
+              : data?.[field],
         },
       });
       thunkApi.dispatch(setUser(response.data.User));
@@ -475,69 +495,54 @@ export const changePassword: AsyncThunk<boolean, NextRouter, object> | any =
 //     Cookies.remove("kaufestoken");
 //   }
 // );
-export const sendOtpViaEmail: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
-  "send/otp/email",
-  async (data, thunkApi) => {
-
-
+export const sendOtpViaEmail: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk("send/otp/email", async (data, thunkApi) => {
     try {
       await apiServices.sendEmailOtp({ data });
 
       return true;
     } catch (e: any) {
-      thunkApi.dispatch(setErrorMessage(e?.data?.message))
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
       return false;
     }
-  }
-);
-export const logoutUser: AsyncThunk<boolean, NextRouter, object> | any = createAsyncThunk(
-  "user/logout",
-  async (data, thunkApi) => {
-
-
+  });
+export const logoutUser: AsyncThunk<boolean, NextRouter, object> | any =
+  createAsyncThunk("user/logout", async (data, thunkApi) => {
     try {
       apiServices.logoutUser({ data });
       return true;
     } catch (e: any) {
       return false;
     }
-  }
-);
-
+  });
 
 export const readDashboard: AsyncThunk<boolean, NextRouter, object> | any =
-  createAsyncThunk(
-    "read/dashboard",
-    async (data, thunkApi) => {
-      const { params, router, setError, translate } = data as any;
+  createAsyncThunk("read/dashboard", async (data, thunkApi) => {
+    const { params, router, setError, translate } = data as any;
 
-      try {
-        const response = await apiServices.readDashboard(params);
+    try {
+      const response = await apiServices.readDashboard(params);
 
-        return response?.data?.data;
-      } catch (e: any) {
-        thunkApi.dispatch(setErrorMessage(e?.data?.message));
-        return false;
-      }
+      return response?.data?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
     }
-  );
+  });
 
 export const readAdminDashboard: AsyncThunk<boolean, NextRouter, object> | any =
-  createAsyncThunk(
-    "read/dashboard/admin",
-    async (data, thunkApi) => {
-      const { params, router, setError, translate } = data as any;
+  createAsyncThunk("read/dashboard/admin", async (data, thunkApi) => {
+    const { params, router, setError, translate } = data as any;
 
-      try {
-        const response = await apiServices.readAdminDashboard(params);
+    try {
+      const response = await apiServices.readAdminDashboard(params);
 
-        return response?.data?.data;
-      } catch (e: any) {
-        thunkApi.dispatch(setErrorMessage(e?.data?.message));
-        return false;
-      }
+      return response?.data?.data;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
     }
-  );
+  });
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -589,9 +594,12 @@ const authSlice = createSlice({
     builder.addCase(sendOtpViaEmail.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(sendOtpViaEmail.fulfilled, (state, action: PayloadAction<any>) => {
-      state.loading = false;
-    });
+    builder.addCase(
+      sendOtpViaEmail.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+      }
+    );
     builder.addCase(sendOtpViaEmail.rejected, (state) => {
       state.loading = false;
     });
@@ -754,7 +762,7 @@ const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(readDashboard.fulfilled, (state, action) => {
-      if (action?.payload) state.dashboard = action?.payload
+      if (action?.payload) state.dashboard = action?.payload;
       state.loading = false;
     });
     builder.addCase(readDashboard.rejected, (state) => {
@@ -765,7 +773,7 @@ const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(readAdminDashboard.fulfilled, (state, action) => {
-      if (action?.payload) state.adminDashboard = action?.payload
+      if (action?.payload) state.adminDashboard = action?.payload;
       state.loading = false;
     });
     builder.addCase(readAdminDashboard.rejected, (state) => {

@@ -16,7 +16,7 @@ const TableFunctions = ({
   // function onInputChange(text: string) {}
 
   return (
-    <div className="flex justify-between items-center mb-4">
+    <div className="flex lg:flex-row flex-col justify-between lg:items-center mb-4 gap-y-3">
       <h1 className="text-base lg:text-xl text-[#222B45] ">
         {translate("email_tracker.main_heading")}
       </h1>

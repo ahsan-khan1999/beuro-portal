@@ -6,6 +6,7 @@ import TableRows from "./table/TableRows";
 import useContent from "@/hooks/content/useContent";
 import TableFunctions from "./table/TableFunctions";
 import { useEmptyStates } from "@/utils/hooks";
+import { TableCardLayout } from "@/layout/TableCardLayout";
 
 export default function Content() {
   const {
@@ -17,12 +18,14 @@ export default function Content() {
     setFilter,
     handleFilterChange,
     loading,
+    isLoading,
+    currentPage,
   } = useContent();
 
   const CurrentComponent = useEmptyStates(
     <TableRows contentData={currentPageRows} />,
     currentPageRows.length > 0,
-    loading
+    isLoading
   );
   return (
     <>
@@ -31,17 +34,18 @@ export default function Content() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
-      <TableLayout>
-        <TableHeadings />
-        {CurrentComponent}
-      </TableLayout>
-      {currentPageRows.length > 0 && (
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-        />
-      )}
+      <TableCardLayout>
+        <TableLayout>
+          <TableHeadings />
+          {CurrentComponent}
+        </TableLayout>
+      </TableCardLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
     </>
   );
 }

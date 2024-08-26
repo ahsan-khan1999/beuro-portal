@@ -3,6 +3,8 @@ import { ProductItem } from "./product-item";
 import { DocumentHeader } from "../document-header";
 import { ProductItemFooter } from "./product-item-footer";
 import { Footer } from "../../footer";
+import { ProductDiscountItem } from "./product--discount-item";
+import { useTranslation } from "next-i18next";
 
 export const ProductItemNewPage = ({
   serviceItem,
@@ -12,18 +14,78 @@ export const ProductItemNewPage = ({
   isShowTotal,
   templateSettings,
   totalPages,
-  currPage
-}: PurchasedItemDetailsNextPageProps) => {
+  currPage,
+  emailTemplateSettings,
+  systemSettings,
+}: Partial<PurchasedItemDetailsNextPageProps>) => {
+  const { t: translate } = useTranslation();
+
+  const disscountTableRow = {
+    serviceTitle: translate("pdf_preview.discount"),
+    price: Number(serviceItemFooter?.discount),
+    unit: "-",
+    totalPrice: Number(serviceItemFooter?.discount),
+    serviceType: "",
+    description: serviceItemFooter?.discountDescription || "",
+    count: "-",
+    pagebreak: true,
+    discount: Number(serviceItemFooter?.discount),
+    discountType: serviceItemFooter?.discountType,
+    discountPercentage: Number(serviceItemFooter?.discountPercentage),
+    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
+    totalDiscount: Number(serviceItemFooter?.serviceDiscountSum),
+    isGlobalDiscount: serviceItemFooter?.isDiscount,
+  };
+
+  const isDiscount =
+    serviceItemFooter?.serviceDiscountSum &&
+    Number(serviceItemFooter?.serviceDiscountSum) > 0
+      ? true
+      : false || false;
+  const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
   return (
     <div>
-      <DocumentHeader {...headerDetails} />
-      <div className="px-[80px] flex flex-col bg-white">
-        {serviceItem.map((item,index) => (
-          <ProductItem {...item} key={index} />
+      <DocumentHeader
+        {...headerDetails}
+        emailTemplateSettings={emailTemplateSettings}
+      />
+      <div className="px-[80px] flex flex-col bg-white py-2">
+        {serviceItem?.map((item, index) => (
+          <ProductItem
+            {...item}
+            key={index}
+            isDiscount={isDiscount}
+            pagebreak={
+              !pageBreakCondition
+                ? serviceItem?.length === 1
+                  ? false
+                  : index === serviceItem?.length - 1
+                : false
+            }
+          />
         ))}
-        {isShowTotal && <ProductItemFooter {...serviceItemFooter} />}
+        {/* {(isDiscount || serviceItemFooter?.isDiscount) && (
+          <ProductDiscountItem
+            {...disscountTableRow}
+            key={Math.random()}
+            pagebreak={true}
+            isDiscount={isDiscount}
+          />
+        )} */}
+        {isShowTotal && (
+          <ProductItemFooter
+            {...serviceItemFooter}
+            systemSettings={systemSettings}
+          />
+        )}
       </div>
-      <Footer {...footerDetails} columnSettings={templateSettings} currPage={currPage} totalPages={totalPages} />
+      <Footer
+        {...footerDetails}
+        columnSettings={templateSettings}
+        currPage={currPage}
+        totalPages={totalPages}
+        emailTemplateSettings={emailTemplateSettings}
+      />
     </div>
   );
 };

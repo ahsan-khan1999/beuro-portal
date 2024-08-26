@@ -1,21 +1,21 @@
+import React from "react";
 import { Layout } from "@/layout";
 import DetailsCard from "@/layout/customers/DetailsCard";
-import React, { useState } from "react";
-import DetailsData from "../DetailsData";
-
 import CustomerDetailsData from "./customer-details-data";
 import useCustomerDetailAdmin from "@/hooks/admin/customer/useCustomerDetail";
 import LoadingState from "@/base-components/loadingEffect/loading-state";
+import DetailsData from "../DetailsData";
 
 const CustomerDetails = () => {
   const {
     companyDetails,
     isCustomerFree,
     handleAreYouSure,
-    handlePreviousClick,
+    handleBack,
     renderModal,
     handleStatusChange,
     loading,
+    handleMakeAccountFree,
   } = useCustomerDetailAdmin();
 
   return (
@@ -24,8 +24,8 @@ const CustomerDetails = () => {
         <DetailsCard>
           <DetailsData
             customerDetail={companyDetails}
-            handlePreviousClick={handlePreviousClick}
-            handleAreYouSure={handleAreYouSure}
+            onHandleBack={handleBack}
+            handleAreYouSure={handleMakeAccountFree}
             isCustomerFree={isCustomerFree}
             handleStatusChange={handleStatusChange}
           />

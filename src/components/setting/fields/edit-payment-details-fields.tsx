@@ -10,7 +10,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
         field: {
           type: Field.div,
           id: "div-field",
-          className: "grid grid-cols-3 gap-x-4 ",
+          className: "grid grid-cols-3 gap-x-4",
           children: [
             {
               containerClass: "mb-0 col-span-2",
@@ -57,7 +57,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
         field: {
           type: Field.div,
           id: "div-field",
-          className: "grid grid-cols-3 gap-x-4 ",
+          className: "grid grid-cols-3 gap-x-4",
           children: [
             {
               containerClass: "mb-0 col-span-2",
@@ -103,7 +103,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex space-x-[18px] mt-5",
+          className: "flex justify-end items-center space-x-[18px] mt-5",
           children: [
             {
               containerClass: "mb-0",
@@ -115,7 +115,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
                 )}`,
                 inputType: "button",
                 className:
-                  "rounded-lg border border-[#C7C7C7] bg-white p-4 w-[92px] h-[50px]   text-dark hover:bg-none",
+                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px]   text-dark hover:bg-none",
                 loading,
                 onClick: onClick,
               },
@@ -130,7 +130,7 @@ export const editPaymentDetailsFormField: GenerateEditPaymentDetailsFormField =
                 )}`,
                 inputType: "submit",
                 className:
-                  "rounded-lg   p-4 w-[152px] h-[50px]  text-white hover:bg-none ",
+                  "rounded-lg p-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none ",
                 loading,
               },
             },
