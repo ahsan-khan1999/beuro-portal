@@ -1,6 +1,7 @@
 import { CalendarDatePickerProps } from "@/types";
 import { formatDateString } from "@/utils/functions";
 import { combineClasses } from "@/utils/utility";
+import moment from "moment";
 import { useState, useRef } from "react";
 
 export const CalendarDatePickerField = ({
@@ -10,14 +11,18 @@ export const CalendarDatePickerField = ({
   value,
   className,
   svg,
-  dateType,
+  dateType = "datetime-local",
   min,
   max,
   disable,
   setValue,
 }: CalendarDatePickerProps) => {
   const [formattedDate, setFormattedDate] = useState(
-    value ? formatDateString(value) : ""
+    value
+      ? moment(value).format(
+          dateType === "datetime-local" ? "MM-DD-YYYY hh:mm" : "MM-DD-YYYY"
+        )
+      : ""
   );
 
   const dateInputRef = useRef<HTMLInputElement>(null);
@@ -34,39 +39,37 @@ export const CalendarDatePickerField = ({
     className
   );
 
-  const formatDateTime = (value: string) => {
+  const formatDateTime = (value: string, dateType: string) => {
     const date = new Date(value);
-
-    // if (isNaN(date.getTime())) {
-    //   return { formattedDate: "", formattedTime: "" };
-    // }
 
     const formattedDate = date.toLocaleDateString(undefined, {
       weekday: "short",
       day: "numeric",
       month: "short",
     });
-    const formattedTime = date.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    return { formattedDate, formattedTime };
+
+    if (dateType === "datetime-local") {
+      const formattedTime = date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      return { formattedDate, formattedTime };
+    }
+
+    return { formattedDate, formattedTime: "" };
   };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const { formattedDate, formattedTime } = formatDateTime(value);
+    const { formattedDate, formattedTime } = formatDateTime(value, dateType);
     setFormattedDate(`${formattedDate} ${formattedTime}`);
     setValue(name, e.target.value);
-    // register(name).onChange(e);
   };
 
   const { formattedDate: displayDate, formattedTime: displayTime } =
     formattedDate
-      ? formatDateTime(formattedDate)
+      ? formatDateTime(formattedDate, dateType)
       : { formattedDate: "", formattedTime: "" };
-
-  console.log(displayDate);
 
   return (
     <div className={defaultClasses} onClick={handleOpenDatePicker}>
@@ -79,11 +82,13 @@ export const CalendarDatePickerField = ({
 
       <div className="flex flex-col gap-y-1">
         <span className="text-xs text-[#7A7A7A] font-medium">
-          {displayDate || "Select Date"}
+          {displayDate || translate("calendar.select_date")}
         </span>
-        <span className="text-sm font-medium text-[#3C3C3C]">
-          {displayTime || ""}
-        </span>
+        {dateType === "datetime-local" && (
+          <span className="text-sm font-medium text-[#3C3C3C]">
+            {displayTime || ""}
+          </span>
+        )}
       </div>
 
       <input

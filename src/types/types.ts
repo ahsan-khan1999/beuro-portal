@@ -323,7 +323,8 @@ export type GenerateAddTaskFormField = (
   startDate: string,
   endDate: string,
   setValue: UseFormSetValue<FieldValues>,
-  colour?:string,
+  isAllDay?: boolean,
+  colour?: string,
   alertTime?: number,
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>

@@ -8,6 +8,7 @@ import { CalendarNoteIcon } from "@/assets/svgs/components/calendar-note-icon";
 import { CalendarDeleteIcon } from "@/assets/svgs/components/calendar-delete-icon";
 import addressLocationIcon from "@/assets/pngs/address-location-icon.png";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 export interface ContractTaskDetailProps {
   onDelete: (id: string) => void;
@@ -20,17 +21,21 @@ export const ContractTaskDetail = ({
   onDelete,
   onEditTask,
 }: ContractTaskDetailProps) => {
+  const { t: translate } = useTranslation();
   const { taskDetail } = useAppSelector((state) => state.contract);
-
   const firstDateRange = taskDetail?.date && taskDetail.date[0];
 
-  // Format the time
-  const startTime = firstDateRange
+  const startTime = firstDateRange?.startDate
     ? moment(firstDateRange.startDate).format("HH:mm")
     : "";
-  const endTime = firstDateRange
+  const endTime = firstDateRange?.endDate
     ? moment(firstDateRange.endDate).format("HH:mm")
     : "";
+
+  const isSameDay = moment(firstDateRange?.startDate).isSame(
+    firstDateRange?.endDate,
+    "day"
+  );
 
   return (
     <BaseModal
@@ -52,20 +57,28 @@ export const ContractTaskDetail = ({
         </div>
 
         <div className="ml-5 flex flex-col gap-y-2 my-5">
-          {firstDateRange.startDate && (
+          {firstDateRange?.startDate && (
             <div className="flex flex-col gap-y-1">
               <span className="text-[#7A7A7A] text-sm font-medium">
                 {calendarTaskformatDate(firstDateRange.startDate)}
               </span>
-              <span className="text-[#272727] font-semibold text-sm">{`${startTime} - ${endTime}`}</span>
+              {isSameDay && startTime !== "00:00" && endTime !== "00:00" ? (
+                <span className="text-[#272727] font-semibold text-sm">{`${startTime} - ${endTime}`}</span>
+              ) : (
+                startTime !== "00:00" && (
+                  <span className="text-[#272727] font-semibold text-sm">{`${startTime}`}</span>
+                )
+              )}
             </div>
           )}
-          {firstDateRange.endDate && (
+          {!isSameDay && firstDateRange?.endDate && (
             <div className="flex flex-col gap-y-1">
               <span className="text-[#7A7A7A] text-sm font-medium">
                 {calendarTaskformatDate(firstDateRange.endDate)}
               </span>
-              <span className="text-[#272727] font-semibold text-sm">{`${startTime} - ${endTime}`}</span>
+              {endTime !== "00:00" && (
+                <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
+              )}
             </div>
           )}
         </div>
@@ -97,19 +110,6 @@ export const ContractTaskDetail = ({
               height={16}
             />
 
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M7.86456 0.492188C4.98962 0.492188 2.65063 2.83118 2.65063 5.70612C2.65063 9.31961 7.86969 15.4922 7.86969 15.4922C7.86969 15.4922 13.0785 9.14191 13.0785 5.70612C13.0785 2.83118 10.7396 0.492188 7.86456 0.492188ZM9.43771 7.23276C9.00394 7.66644 8.4343 7.88333 7.86456 7.88333C7.29492 7.88333 6.7251 7.66644 6.2915 7.23276C5.42404 6.36539 5.42404 4.95401 6.2915 4.08655C6.71155 3.66632 7.27029 3.43488 7.86456 3.43488C8.45883 3.43488 9.01749 3.66641 9.43771 4.08655C10.3052 4.95401 10.3052 6.36539 9.43771 7.23276Z"
-                fill="#616161"
-              />
-            </svg> */}
-
             <div className="flex flex-col gap-y-1">
               <span className="text-sm font-normal text-[#2A2E3A]">
                 {taskDetail?.address?.streetNumber}
@@ -117,9 +117,6 @@ export const ContractTaskDetail = ({
               <span className="text-sm font-normal text-[#2A2E3A]">
                 {taskDetail?.address?.postalCode} {taskDetail?.address?.country}
               </span>
-              {/* <span className="text-sm font-normal text-[#2A2E3A]">
-                {taskDetail?.address?.postalCode}
-              </span> */}
             </div>
           </div>
         )}
@@ -131,7 +128,7 @@ export const ContractTaskDetail = ({
             className="text-sm font-normal text-[#272727] cursor-pointer"
             onClick={() => onEditTask(taskDetail?.id)}
           >
-            Edit
+            {translate("calendar.edit")}
           </span>
           <CalendarDeleteIcon onClick={() => onDelete(taskDetail?.id)} />
         </div>

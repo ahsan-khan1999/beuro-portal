@@ -684,6 +684,7 @@ input[type="date"] {
   background-color: #f3f3f3;
   clip-path: polygon(0 0, 100% 50%, 0 100%);
   box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
+  z-index: -10;
 }
 
 .follow_up_item::before {
