@@ -4,7 +4,6 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const PaymentSettings = () => {
-  const defaultClassName = "  ";
   const { fields, onSubmit, handleSubmit, errors } = usePaymentSettings();
 
   return (
@@ -14,7 +13,6 @@ const PaymentSettings = () => {
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
-        className={`${defaultClassName}`}
       />
     </FormCard>
   );

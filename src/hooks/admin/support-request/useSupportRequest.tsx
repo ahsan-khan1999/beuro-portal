@@ -76,7 +76,7 @@ export default function useSupportRequest() {
     type: string
   ) => {
     if (type === "support_request") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
+      const currentItem = currentPageRows?.find((item) => item.id === id);
       if (!currentItem || currentItem.status !== statusValue) {
         const res = await dispatch(
           updateContactSupport({

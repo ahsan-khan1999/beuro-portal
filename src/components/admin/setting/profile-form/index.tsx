@@ -4,7 +4,6 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const SettingProfile = () => {
-  const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, error, renderModal } =
     useSettingProfile();
 
@@ -15,7 +14,6 @@ const SettingProfile = () => {
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
-        className={`${defaultClassName}`}
       />
       {renderModal()}
     </FormCard>

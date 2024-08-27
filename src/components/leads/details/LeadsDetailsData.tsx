@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import AddressEditDetails from "../edit/AddressEditDetails";
 import CustomerEditDetails from "../edit/CustomerEditDetails";
 import ServiceEditDetails from "../edit/ServiceEditDetails";

@@ -31,6 +31,7 @@ export interface CustomerLeadDetail {
 export interface Customers {
   id: string;
   refID: string;
+  isAppointment?: boolean;
   createdAt: string;
   fullName: string;
   email: string;

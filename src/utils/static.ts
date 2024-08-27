@@ -998,6 +998,8 @@ export const sideBar: SideBar[] = [
     title: "sidebar.admin.customers",
     pathname: "/admin/customers",
     role: [0],
+    query: "None",
+    queryName: "status",
   },
   {
     icon: "Leads",
