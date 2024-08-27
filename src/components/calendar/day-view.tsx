@@ -39,23 +39,14 @@ export const DayView = ({
           : undefined,
       }}
     >
-      <p
-        style={{
-          color: "#3C3C3C",
-          fontSize: "14px",
-          fontWeight: "500",
-        }}
-        className="whitespace-nowrap overflow-hidden text-ellipsis"
-      >
+      <p className="text-[#3C3C3C] text-xs xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
         {title}
       </p>
       <p
         style={{
           color: timeColour || "#3C3C3C",
-          fontSize: "12px",
-          fontWeight: "400",
         }}
-        className="whitespace-nowrap overflow-hidden text-ellipsis"
+        className="text-[10px] xMini:text-xs whitespace-nowrap overflow-hidden text-ellipsis"
       >
         {time}
       </p>

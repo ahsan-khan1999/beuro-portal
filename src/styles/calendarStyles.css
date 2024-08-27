@@ -110,8 +110,13 @@
   padding: 0 !important;
 }
 
+.fc .fc-timegrid-axis-cushion {
+  max-width: 100px !important;
+  padding: 0 10px;
+  font-size: 16px !important;
+}
+
 @media (min-width: 768px) {
-  /* Only apply flexbox in timeGridDay view when the screen is 768px or wider */
   .timeGridDay-flex {
     display: flex !important;
     align-items: center !important;
@@ -120,24 +125,27 @@
     gap: 10px !important;
   }
 
-  /* Ensure other views are not affected */
   .fc-daygrid-day-events {
-    display: block; /* Reset to block for non-timeGridDay views */
+    display: block;
   }
 }
 
-/* Below 768px, render the default version of FullCalendar */
 @media (max-width: 767px) {
-  /* Reset styles for smaller screens */
   .timeGridDay-flex {
-    display: block !important; /* Revert to default display */
+    display: block !important;
     align-items: initial !important;
     flex-wrap: initial !important;
     gap: initial !important;
   }
 
   .fc-daygrid-day-events {
-    display: block; /* Retain block display as per FullCalendar's default */
+    display: block;
+  }
+
+  .fc .fc-timegrid-axis-cushion {
+    max-width: 80px !important;
+    padding: 0 10px;
+    font-size: 12px !important;
   }
 }
 
@@ -158,17 +166,10 @@
   height: max-content;
 }
 
-/* Set the overall background color of the calendar */
 .fc {
-  background-color: white; /* Ensure the entire calendar is white */
+  background-color: white;
 }
 
-/* Remove the different background color for the current date */
 .fc .fc-day-today {
-  background-color: white !important; /* Override the background for the current date */
-}
-
-.fc .fc-timegrid-axis-cushion {
-  max-width: 100px !important;
-  padding: 0 10px;
+  background-color: white !important;
 }

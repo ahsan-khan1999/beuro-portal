@@ -9,7 +9,6 @@ import { CalendarDeleteIcon } from "@/assets/svgs/components/calendar-delete-ico
 import addressLocationIcon from "@/assets/pngs/address-location-icon.png";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-
 export interface ContractTaskDetailProps {
   onDelete: (id: string) => void;
   onEditTask: (id: string) => void;
@@ -37,6 +36,11 @@ export const ContractTaskDetail = ({
     "day"
   );
 
+  // const handlePDFPreview = () => {
+  //   const pdfRoute = `/contract/pdf-preview?offerID=${taskDetail?.id}&isCalendar=true`;
+  //   window.open(pdfRoute, "_blank");
+  // };
+
   return (
     <BaseModal
       onClose={onClose}
@@ -56,31 +60,42 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
-        <div className="ml-5 flex flex-col gap-y-2 my-5">
-          {firstDateRange?.startDate && (
-            <div className="flex flex-col gap-y-1">
-              <span className="text-[#7A7A7A] text-sm font-medium">
-                {calendarTaskformatDate(firstDateRange.startDate)}
-              </span>
-              {isSameDay && startTime !== "00:00" && endTime !== "00:00" ? (
-                <span className="text-[#272727] font-semibold text-sm">{`${startTime} - ${endTime}`}</span>
-              ) : (
-                startTime !== "00:00" && (
-                  <span className="text-[#272727] font-semibold text-sm">{`${startTime}`}</span>
-                )
-              )}
-            </div>
-          )}
-          {!isSameDay && firstDateRange?.endDate && (
-            <div className="flex flex-col gap-y-1">
-              <span className="text-[#7A7A7A] text-sm font-medium">
-                {calendarTaskformatDate(firstDateRange.endDate)}
-              </span>
-              {endTime !== "00:00" && (
-                <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
-              )}
-            </div>
-          )}
+        <div className="flex items-start justify-between my-5">
+          <div className="ml-5 flex flex-col gap-y-2">
+            {firstDateRange?.startDate && (
+              <div className="flex flex-col gap-y-1">
+                <span className="text-[#7A7A7A] text-sm font-medium">
+                  {calendarTaskformatDate(firstDateRange.startDate)}
+                </span>
+                {isSameDay && startTime !== "00:00" && endTime !== "00:00" ? (
+                  <span className="text-[#272727] font-semibold text-sm">{`${startTime} - ${endTime}`}</span>
+                ) : (
+                  startTime !== "00:00" && (
+                    <span className="text-[#272727] font-semibold text-sm">{`${startTime}`}</span>
+                  )
+                )}
+              </div>
+            )}
+            {!isSameDay && firstDateRange?.endDate && (
+              <div className="flex flex-col gap-y-1">
+                <span className="text-[#7A7A7A] text-sm font-medium">
+                  {calendarTaskformatDate(firstDateRange.endDate)}
+                </span>
+                {endTime !== "00:00" && (
+                  <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* <Button
+            onClick={handlePDFPreview}
+            className="!h-fit py-2 px-2 xMini:px-4 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
+            text={translate("invoice.invoice_created_modal.button")}
+            id="preview PDF"
+            inputType="button"
+            iconAlt="button"
+          /> */}
         </div>
 
         <hr className="opacity-30 -mx-[10px]" />
