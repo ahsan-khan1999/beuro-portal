@@ -65,7 +65,7 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                   {
                     field: {
                       type: Field.date,
-                      className: `!py-4  !border-[#BFBFBF] focus:!border-primary !w-full`,
+                      className: `!py-4 !border-[#BFBFBF] focus:!border-primary !w-full`,
                       id: "startTime",
                       name: "startTime",
                       register,
@@ -75,7 +75,7 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                   {
                     field: {
                       type: Field.date,
-                      className: `!py-4  !border-[#BFBFBF] focus:!border-primary !w-full`,
+                      className: `!py-4 !border-[#BFBFBF] focus:!border-primary !w-full`,
                       id: "endTime",
                       name: "endTime",
                       register,

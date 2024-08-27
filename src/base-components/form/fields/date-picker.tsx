@@ -61,7 +61,10 @@ export const DatePicker = ({
               className={`${classes} relative`}
             />
             {dateType === "time" ? (
-              <div className={`absolute right-4`}>
+              <div
+                className={`absolute right-4`}
+                onClick={() => document.getElementById(id)?.focus()}
+              >
                 <WatchIcon />
               </div>
             ) : (
