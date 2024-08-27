@@ -5,14 +5,12 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { generateScheduleAppointmentsValidationSchema } from "@/validation/appointments";
 import { scheduleAppointmentsFormField } from "@/components/appointments/formFields/schedule-appointments-fields";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   createAppointment,
   updateAppointment,
 } from "@/api/slices/appointment/appointmentSlice";
 import { fieldDateFormat } from "@/utils/utility";
-import { readEmployee } from "@/api/slices/employee/emplyeeSlice";
-import { Employee } from "@/types/employee";
 import { Appointments } from "@/types/appointments";
 
 export interface AppointmentHookProps {
@@ -30,6 +28,7 @@ export interface AppointmentHookProps {
     picture: string;
     fullName: string;
   };
+  canton?: string;
   isUpdate?: boolean;
   setCurrentPageRows?: React.Dispatch<React.SetStateAction<Appointments[]>>;
   currentPageRows?: Appointments[];
@@ -47,6 +46,7 @@ export const useScheduleAppointment = ({
   startTime,
   isUpdate,
   onUpdateSuccess,
+  canton,
   currentPageRows,
   setCurrentPageRows,
 }: AppointmentHookProps) => {
@@ -56,7 +56,7 @@ export const useScheduleAppointment = ({
   const { loading, error } = useAppSelector((state) => state.auth);
   const { appointmentDetails } = useAppSelector((state) => state.appointment);
   const schema = generateScheduleAppointmentsValidationSchema(translate);
-  const [employee, setEmployee] = useState<Employee[]>([]);
+  // const [employee, setEmployee] = useState<Employee[]>([]);
 
   const {
     register,
@@ -68,15 +68,15 @@ export const useScheduleAppointment = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  useEffect(() => {
-    dispatch(
-      readEmployee({ params: { filter: { designation: 3 }, paginate: 0 } })
-    ).then((response: any) => {
-      if (response?.payload) {
-        setEmployee(response?.payload?.Employee);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   dispatch(
+  //     readEmployee({ params: { filter: { designation: 3 }, paginate: 0 } })
+  //   ).then((response: any) => {
+  //     if (response?.payload) {
+  //       setEmployee(response?.payload?.Employee);
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (id) {
@@ -85,7 +85,7 @@ export const useScheduleAppointment = ({
         date: fieldDateFormat(date) || "",
         startTime: startTime || "",
         endTime: endTime || "",
-        agent: agent?.id,
+        canton: canton,
       });
     }
   }, []);
@@ -93,7 +93,7 @@ export const useScheduleAppointment = ({
   const fields = scheduleAppointmentsFormField(register, loading, control, {
     onClose,
     appointmentDetails,
-    employee,
+    // employee,
     isUpdate,
   });
 

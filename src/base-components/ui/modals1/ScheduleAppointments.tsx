@@ -28,7 +28,7 @@ export const ScheduleAppointments = ({
   setCurrentPageRows,
 }: AppointmentsModalProps) => {
   const defaultClassName = "mt-[25px]";
-  const { id, leadId, refID, date, startTime, endTime, agent } = useAppSelector(
+  const { id, leadId, refID, date, startTime, endTime, agent,canton } = useAppSelector(
     (state) => state.global.modal.data
   );
 
@@ -44,6 +44,7 @@ export const ScheduleAppointments = ({
     endTime,
     agent,
     isUpdate,
+    canton,
     currentPageRows,
     setCurrentPageRows,
   });

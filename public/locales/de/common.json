@@ -1141,7 +1141,8 @@
       "agent": "Agent",
       "status": "Status",
       "offer_status": "Angebotsstatus",
-      "action": "Aktion"
+      "action": "Aktion",
+      "canton": "Kanton"
     },
     "appointment_status": {
       "Pending": "Entwurf",
@@ -1252,6 +1253,7 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
+    "select_canton": "Kanton auswählen",
     "before": "vor",
     "hour": "Stunde",
     "hours": "Hours",

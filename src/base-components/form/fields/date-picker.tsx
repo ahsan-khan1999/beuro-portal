@@ -1,3 +1,4 @@
+import { WatchIcon } from "@/assets/svgs/components/watch-icon";
 import { DatePickerProps } from "@/types";
 import { formatDateString } from "@/utils/functions";
 import { combineClasses } from "@/utils/utility";
@@ -59,7 +60,11 @@ export const DatePicker = ({
               disabled={disable}
               className={`${classes} relative`}
             />
-            {dateType !== "time" && (
+            {dateType === "time" ? (
+              <div className={`absolute right-4`}>
+                <WatchIcon />
+              </div>
+            ) : (
               <div
                 className={`absolute right-4 ${
                   disable === true ? "cursor-default" : "cursor-pointer"

@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
@@ -20,11 +19,12 @@ export interface ApointmentsTableProps {
     date: string,
     startTime: string,
     endTime: string,
-    agent: {
-      id: string;
-      picture: string;
-      fullName: string;
-    }
+    canton: string
+    // agent: {
+    //   id: string;
+    //   picture: string;
+    //   fullName: string;
+    // }
   ) => void;
   handleAddNote: (
     id: string,
@@ -151,14 +151,14 @@ export const AppointmentTableRows = ({
                 </div>
 
                 <div className="flex items-center gap-x-[10px]">
-                  <Image
+                  {/* <Image
                     src={imageUrl || dummyAgent}
                     alt="agent profile"
                     width={32}
                     height={32}
                     className="rounded-full"
-                  />
-                  <span className="py-4 truncate">{item?.agent?.fullName}</span>
+                  /> */}
+                  <span className="py-4 truncate">{item?.canton}</span>
                 </div>
                 <div
                   className="py-4 flex items-center"
@@ -325,7 +325,8 @@ export const AppointmentTableRows = ({
                         item?.date,
                         item?.startTime,
                         item?.endTime,
-                        item?.agent
+                        // item?.agent
+                        item?.canton
                       )
                     }
                     className="bg-white text-primary w-full border border-primary py-[5px] !h-fit"
