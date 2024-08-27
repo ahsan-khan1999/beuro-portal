@@ -8,7 +8,6 @@ export const EmailTemplateForm = ({
 }: {
   handleCreation: Function;
 }) => {
-  const defaultClassName = " ";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useMailSettingsTemplate(handleCreation);
 
@@ -23,7 +22,6 @@ export const EmailTemplateForm = ({
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
-        className={`${defaultClassName}`}
       />
     </SettingLayout>
   );

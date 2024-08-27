@@ -147,6 +147,14 @@ const SideBar = ({
       >
         <div className="space-y-3">
           {sideBar.map((item) => {
+            if (item.title.toLowerCase().includes("appointments")) {
+              if (userRole === 1) {
+                if (!user?.company?.isAppointment) {
+                  return null;
+                }
+              }
+            }
+
             return (
               item.role.includes(userRole) && (
                 <React.Fragment key={item?.pathname}>

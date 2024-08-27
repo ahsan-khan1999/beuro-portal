@@ -81,6 +81,21 @@ export const updateCompany: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
+export const updateAdminCompany: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("admin-company/update", async (args, thunkApi) => {
+    const { data, setError, translate } = args as any;
+
+    try {
+      await apiServices.updateCompany(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
 export const deleteCompany: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("company/delete", async (args, thunkApi) => {
     const { customerDetails: data, router, setError, translate } = args as any;
@@ -157,6 +172,7 @@ export const createPlan: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const deletePlan: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("plan/delete", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -170,6 +186,7 @@ export const deletePlan: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateCompanyStatus: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("company/update/status", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -196,6 +213,7 @@ export const chooseCompanyPlan: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 const companySlice = createSlice({
   name: "CompanySlice",
   initialState,
@@ -234,6 +252,15 @@ const companySlice = createSlice({
       state.loading = false;
     });
     builder.addCase(updateCompany.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(updateAdminCompany.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateAdminCompany.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(updateAdminCompany.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(deleteCompany.pending, (state) => {

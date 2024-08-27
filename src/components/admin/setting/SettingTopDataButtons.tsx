@@ -40,7 +40,7 @@ const SettingTopDataButtons = ({
   return (
     <SettingLayout>
       <div className="grid xs:grid-cols-[minmax(170px,_170px)_minmax(190px,_190px)_minmax(180px,_180px)] mlg:grid-cols-[minmax(200px,_200px)_minmax(200px,_200px)_minmax(200px,_200px)]">
-        {buttonsData.map((item, index) => (
+        {buttonsData?.map((item, index) => (
           <button
             className={`w-fit px-4 py-[10px] text-[#4B4B4B] font-medium text-base ${
               selectedTab === index

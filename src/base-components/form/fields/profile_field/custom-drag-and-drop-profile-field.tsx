@@ -54,24 +54,25 @@ export const ProfileUpload = ({
   const defaultClasses = `relative`;
   const classes = combineClasses(defaultClasses, className);
 
-  const isSVG = field?.value?.endsWith(".svg");
+  const isSVG =
+    typeof field?.value === "string" && field.value.endsWith(".svg");
 
   return (
     <div>
       {/* <label> */}
       <div className="w-full">
-        {field.value ? (
+        {field?.value ? (
           <div className={`${classes}`}>
             {isSVG ? (
               <object
-                data={field.value}
+                data={field?.value}
                 width={241}
                 height={241}
                 className={`${classes} object-contain`}
               />
             ) : (
               <Image
-                src={field.value}
+                src={field?.value}
                 layout="responsive"
                 width={241}
                 height={241}

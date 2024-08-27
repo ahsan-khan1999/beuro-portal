@@ -1787,6 +1787,7 @@
         "subscription_date": "Subscription Date",
         "status": "Status",
         "company_logo": "Company Logo",
+        "appointment":"Appointment Module", 
         "customer_status": {
           "active": "Active",
           "block": "Block",
@@ -2313,6 +2314,10 @@
     "Cash": "Cash",
     "Online": "Online",
     "Twint": "Twint"
+  },
+  "customer_status": {
+    "unBlock": "Unblock",
+    "block": "Block"
   },
   "typeList": {
     "All": "All",

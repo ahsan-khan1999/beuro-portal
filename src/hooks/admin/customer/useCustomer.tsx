@@ -15,8 +15,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function useCustomer() {
-  const { company, lastPage, totalCount, loading, companyDetails } =
-    useAppSelector((state) => state.company);
+  const { company, totalCount, loading } = useAppSelector(
+    (state) => state.company
+  );
 
   const { query } = useRouter();
   const page = query?.page as unknown as number;
@@ -51,16 +52,13 @@ export default function useCustomer() {
 
     const queryParams = queryStatus || queryText || querySort;
 
-    // if (queryParams !== undefined) {
     const filteredStatus =
       query?.status === "None"
-        ? "None"
+        ? "1"
         : queryParams
             ?.toString()
             .split(",")
             .filter((item) => item !== "None");
-
-    const role = "1";
 
     let updatedFilter: {
       status: string | string[];
@@ -92,7 +90,6 @@ export default function useCustomer() {
         setCurrentPageRows(res?.payload?.User);
       }
     });
-    // }
   }, [query]);
 
   const handlePageChange = (page: number) => {

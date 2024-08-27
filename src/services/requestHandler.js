@@ -44,7 +44,7 @@ const SERVICE_URLS = {
   contract: "/contract",
   contractTask: "/contract/task",
   updateContract: "/contract/",
-  company: "/company",
+  adminCompany: "/company",
   invoice: "/invoice",
   downloadInvoiceRoute: "/invoice/download-excel",
   invoiceCalculationRoute: "/invoice/calculations",
@@ -918,9 +918,10 @@ const createCompany = (data) =>
   post(SERVICE_URLS.company, data, { feature: featureConstants.login });
 
 const updateCompany = (data) =>
-  put(SERVICE_URLS.company + `/${data?.id}`, data, {
+  put(SERVICE_URLS.adminCompany + `/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteCompany = (data) =>
   del(
     SERVICE_URLS.company + `/${data?.id}`,

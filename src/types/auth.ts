@@ -55,6 +55,7 @@ export interface UserCompany {
   [UserResponse.taxNumber]: number;
   [UserResponse.phoneNumber]: string;
   [UserResponse.mobileNumber]: string;
+  [UserResponse.isAppointment]: boolean;
   [UserResponse.addresses]: UserAddress;
   [UserResponse.bank]: UserBankDetail;
 }
@@ -66,7 +67,7 @@ export interface UserEmployee {
   [UserResponse.fullName]: UserAddress;
   [UserResponse.picture]: string;
   [UserResponse.designation]: string;
-  [UserResponse.email]: string; 
+  [UserResponse.email]: string;
   [UserResponse.phoneNumber]: string;
   [UserResponse.mobileNumber]: string;
   [UserResponse.createdBy]: string;

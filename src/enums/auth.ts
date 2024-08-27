@@ -37,7 +37,8 @@ export enum UserResponse {
   creationDate = "creationDate",
   picture = "picture",
   designation = "designation",
-  createdBy = "createdBy"
+  createdBy = "createdBy",
+  isAppointment = "isAppointment",
 }
 
 export enum LoginFields {

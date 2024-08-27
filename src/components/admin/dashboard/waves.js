@@ -1,4 +1,3 @@
-// components/WavesChart.js
 import { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 import { useTranslation } from "next-i18next";
@@ -6,6 +5,7 @@ import { useTranslation } from "next-i18next";
 const WavesChart = ({ datatest }) => {
   const { t: translate } = useTranslation();
   const [filterButton, setFilterButton] = useState("12 Months");
+
   useEffect(() => {
     const ctx = document.getElementById("myWavesChart").getContext("2d");
 
@@ -36,6 +36,7 @@ const WavesChart = ({ datatest }) => {
       wavesChart.destroy();
     };
   }, [datatest]);
+
   const filterButtons = [
     `${translate("admin.overview.sales_report.twelve_months")}`,
     `${translate("admin.overview.sales_report.six")}`,
@@ -44,13 +45,13 @@ const WavesChart = ({ datatest }) => {
   ];
 
   return (
-    <div className="bg-white p-6 w-full h-[402.005px] rounded-[20px] ">
+    <div className="bg-white p-6 w-full h-[402.005px] rounded-[20px]">
       <div className="flex items-center justify-between mb-10">
         <h3 className="font-medium text-[#18181B]">
           {translate("admin.overview.sales_report.heading")}
         </h3>
         <div className="grid grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-          {filterButtons.map((item, index) => (
+          {filterButtons?.map((item, index) => (
             <button
               key={index}
               onClick={() => setFilterButton(item)}

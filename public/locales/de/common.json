@@ -1781,6 +1781,7 @@
         "subscription_date": "Abonnementdatum",
         "status": "Status",
         "company_logo": "Firmenlogo",
+        "appointment": "Termin-Modul",
         "customer_status": {
           "active": "Aktiv",
           "block": "Blockieren",
@@ -2308,12 +2309,10 @@
     "Cash": "Bar",
     "Online": "Online"
   },
-
   "customer_status": {
-    "unBlock": "unBlock",
-    "block": "block"
+    "unBlock": "Entsperren",
+    "block": "Block"
   },
-
   "typeList": {
     "All": "Alle",
     "Individual": "Einzelne",

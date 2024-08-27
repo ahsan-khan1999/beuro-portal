@@ -14,7 +14,7 @@ const AdminSettings = () => {
   const [switchDetails, setSwitchDetails] = useState<number>(0);
 
   useEffect(() => {
-    if (tab && !Array.isArray(tab) && !isNaN(Number(tab))) {
+    if (tab && !Array?.isArray(tab) && !isNaN(Number(tab))) {
       setSwitchDetails(parseInt(tab as string, 10));
     } else {
       setSwitchDetails(0);
@@ -28,23 +28,21 @@ const AdminSettings = () => {
   };
 
   return (
-    <>
-      <Layout>
-        <h1 className="text-[#222B45] font-normal text-xl">
-          {translate("admin.settings.main_heading")}
-        </h1>
-        <div className="mt-[22px]">
-          <SettingTopDataButtons
-            switchDetails={switchDetails}
-            setSwitchDetails={setSwitchDetails}
-          />
-        </div>
+    <Layout>
+      <h1 className="text-[#222B45] font-normal text-xl">
+        {translate("admin.settings.main_heading")}
+      </h1>
+      <div className="mt-[22px]">
+        <SettingTopDataButtons
+          switchDetails={switchDetails}
+          setSwitchDetails={setSwitchDetails}
+        />
+      </div>
 
-        <div className="mt-4">
-          {switchDetails !== undefined && lookUp[switchDetails]}
-        </div>
-      </Layout>
-    </>
+      <div className="mt-4">
+        {switchDetails !== undefined && lookUp[switchDetails]}
+      </div>
+    </Layout>
   );
 };
 
