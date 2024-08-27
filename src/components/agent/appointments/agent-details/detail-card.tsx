@@ -71,38 +71,6 @@ export const AppointmentsDetailCard = ({
     })
   );
 
-  // const offerCreateHandler = () => {
-  //   localStoreUtil.remove_data("appointment");
-  //   dispatch(
-  //     setOfferDetails({
-  //       id: "convert",
-  //       type: "Existing Customer",
-  //       leadID: {
-  //         ...appointmentDetails,
-  //         customerID: appointmentDetails?.leadID?.customerID,
-  //       },
-  //       serviceDetail: {
-  //         serviceDetail: appointmentDetails?.leadID?.otherServices,
-  //       },
-  //       addressID: { address: appointmentDetails?.leadID?.addressID?.address },
-  //       content: appointmentDetails?.leadID?.requiredService,
-  //       date: [
-  //         {
-  //           startDate: moment(appointmentDetails?.leadID?.desireDate).format(
-  //             "YYYY-MM-DD"
-  //           ),
-  //           endDate: "",
-  //         },
-  //       ],
-  //     })
-  //   );
-  //   dispatch(
-  //     setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail })
-  //   );
-  //   router.push("/offers/add");
-  // };
-
-
   const offerCreateHandler = () => {
     localStoreUtil.remove_data("offer");
     dispatch(
@@ -110,7 +78,7 @@ export const AppointmentsDetailCard = ({
         id: "convert",
         type: "Existing Customer",
         leadID: {
-          ...appointmentDetails,
+          ...appointmentDetails?.leadID,
           customerID: appointmentDetails?.leadID?.customerID,
         },
         serviceDetail: {
@@ -120,16 +88,19 @@ export const AppointmentsDetailCard = ({
         content: appointmentDetails?.leadID?.requiredService,
         date: [
           {
-            startDate: moment(appointmentDetails.leadID?.desireDate).format("YYYY-MM-DD"),
+            startDate: moment(appointmentDetails.leadID?.desireDate).format(
+              "YYYY-MM-DD"
+            ),
             endDate: "",
           },
         ],
       })
     );
-    dispatch(setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail }));
+    dispatch(
+      setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail })
+    );
     router.push("/offers/add");
   };
-
 
   const customerType = appointmentDetails?.leadID?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
