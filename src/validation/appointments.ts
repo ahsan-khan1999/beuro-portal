@@ -17,7 +17,10 @@ export const generateScheduleAppointmentsValidationSchema = (
     [ScheduleAppointments.endTime]: yup
       .string()
       .required(translate("validationMessages.required")),
-    [ScheduleAppointments.agent]: yup
+    // [ScheduleAppointments.agent]: yup
+    //   .string()
+    //   .required(translate("validationMessages.required")),
+    [ScheduleAppointments.canton]: yup
       .string()
       .required(translate("validationMessages.required")),
   });

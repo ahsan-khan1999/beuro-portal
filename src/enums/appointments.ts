@@ -4,4 +4,5 @@ export enum ScheduleAppointments {
   startTime = "startTime",
   endTime = "endTime",
   agent = "agent",
+  canton = "canton",
 }

@@ -43,6 +43,7 @@ export interface Appointments {
     picture: string;
     fullName: string;
   };
+  canton:string,
   appointmentStatus: string;
   createdAt: string;
   isNoteCreated: boolean;

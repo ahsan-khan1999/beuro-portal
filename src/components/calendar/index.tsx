@@ -73,7 +73,6 @@ export const Calendar = () => {
         router.locale as string
       );
     }
-
     setCurrentDate(formattedDate);
   };
 
@@ -156,7 +155,7 @@ export const Calendar = () => {
 
           <div className="hidden mlg:flex items-center w-fit p-[6px] rounded-full bg-[#F6F6F6]">
             <div className="flex items-center gap-x-5">
-              {tabs.map((tab, index) => (
+              {tabs?.map((tab, index) => (
                 <CalendarTab
                   key={tab.view}
                   heading={tab.label}
@@ -176,7 +175,7 @@ export const Calendar = () => {
         </div>
         <div className="flex mlg:hidden items-center justify-center w-fit p-[6px] rounded-full bg-[#F6F6F6] mx-auto">
           <div className="flex items-center gap-x-3 xMini:gap-x-5">
-            {tabs.map((tab, index) => (
+            {tabs?.map((tab, index) => (
               <CalendarTab
                 key={tab.view}
                 heading={tab.label}
@@ -235,12 +234,11 @@ export const Calendar = () => {
         }}
         eventContent={(eventInfo) => {
           const { event, view } = eventInfo;
-          const viewType = view.type;
+          const viewType = view?.type;
 
           if (viewType === "dayGridMonth") {
             if (isSmallScreen) {
-              // Render using DayView on small screens in dayGridMonth view
-              const formattedTime = event.allDay
+              const formattedTime = event?.allDay
                 ? "All Day"
                 : `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
                     eventInfo.event.end
@@ -252,23 +250,22 @@ export const Calendar = () => {
                   backrgoundColour={eventInfo.event.backgroundColor}
                   borderColour={eventInfo.event.borderColor}
                   timeColour={eventInfo.event.textColor}
-                  isMonthView={true} // Pass isMonthView as true to adjust styling
+                  isMonthView={true}
                 />
               );
             } else {
-              // Render using AllDayEvent on larger screens
               return (
                 <AllDayEvent
-                  title={event.title}
+                  title={event?.title}
                   backrgoundColour={eventInfo.event.backgroundColor}
                   dotColour={eventInfo.event.textColor}
                 />
               );
             }
-          } else if (event.allDay) {
+          } else if (event?.allDay) {
             return (
               <AllDayEvent
-                title={event.title}
+                title={event?.title}
                 backrgoundColour={eventInfo.event.backgroundColor}
                 dotColour={eventInfo.event.textColor}
               />

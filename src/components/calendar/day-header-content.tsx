@@ -22,16 +22,16 @@ export const DayHeaderContent = (
   } else if (view.type === "timeGridWeek") {
     if (isSmallWeekScreen) {
       return {
-        html: `<span class="text-[#2E2E2E] font-medium text-base">${dayNameShort}</span>`,
+        html: `<span class="text-[#2E2E2E] font-medium text-xs xMini:text-base">${dayNameShort}</span>`,
       };
     } else {
       return {
-        html: `<span class="text-[#2E2E2E] font-medium text-base">${dayName}, ${date}</span>`,
+        html: `<span class="text-[#2E2E2E] font-medium text-xs xMini:text-base">${dayName}, ${date}</span>`,
       };
     }
   } else {
     return {
-      html: `<span class="text-[#2E2E2E] font-medium text-base">${dayName}</span>`,
+      html: `<span class="text-[#2E2E2E] font-medium text-xs xMini:text-base">${dayName}</span>`,
     };
   }
 };

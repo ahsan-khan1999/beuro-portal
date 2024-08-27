@@ -30,9 +30,9 @@ const DeleteConfirmation_2 = ({
   return (
     <BaseModal
       onClose={onClose}
-      containerClassName="max-w-[480px] lg:max-w-[564.004px] min-h-fit"
+      containerClassName="max-w-[300px] xMini:max-w-[480px] lg:max-w-[564.004px] min-h-fit"
     >
-      <div className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center px-5">
         <Image
           src={crossIcon}
           alt="cross_icon"
@@ -44,11 +44,11 @@ const DeleteConfirmation_2 = ({
           alt="delete_icon"
           className="mt-[59px]"
         />
-        <p className="text-2xlfont-medium mt-[44px] max-w-[290px] text-center">
+        <p className="text-2xlfont-medium mt-5 xMini:mt-[44px] max-w-[290px] text-center">
           {modelHeading}
         </p>
 
-        <div className="flex gap-[33px] mt-[27px] mb-[38px]">
+        <div className="flex gap-x-5 xMini:gap-[33px] mt-[27px] mb-[38px]">
           <button
             onClick={onClose}
             className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md hover:bg-buttonHover"

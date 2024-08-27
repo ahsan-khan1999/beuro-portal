@@ -1149,7 +1149,8 @@
       "agent": "Agent",
       "status": "Status",
       "offer_status": "Offer Status",
-      "action": "Action"
+      "action": "Action",
+      "canton": "Canton"
     },
     "appointment_status": {
       "Pending": "Pending",
@@ -1260,6 +1261,7 @@
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
 
+    "select_canton": "Select Canton",
     "before": "before",
     "hour": "Hour",
     "text_area_msg": "Type your message here",

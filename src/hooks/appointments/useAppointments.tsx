@@ -212,11 +212,12 @@ export const useAppointments = () => {
     date: string,
     startTime: string,
     endTime: string,
-    agent: {
-      id: string;
-      picture: string;
-      fullName: string;
-    }
+    canton: string,
+    // agent: {
+    //   id: string;
+    //   picture: string;
+    //   fullName: string;
+    // }
   ) => {
     dispatch(
       updateModalType({
@@ -228,7 +229,8 @@ export const useAppointments = () => {
           date: date,
           startTime: startTime,
           endTime: endTime,
-          agent: agent,
+          // agent: agent,
+          canton: canton,
         },
       })
     );

@@ -25,7 +25,7 @@ export const AppointmentTableHeadings = () => {
             {translate("appointments.table_headings.time")}
           </span>
           <span className="font-semibold text-base text-white">
-            {translate("appointments.table_headings.agent")}
+            {translate("appointments.table_headings.canton")}
           </span>
           <span className="font-semibold text-base text-white">
             {translate("appointments.table_headings.status")}
