@@ -77,6 +77,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const selectedContent = watch("content");
   const leadID = watch("leadID");
 
+  console.log(customerID, "customerID");
+
   useEffect(() => {
     if (type && customerID)
       dispatch(

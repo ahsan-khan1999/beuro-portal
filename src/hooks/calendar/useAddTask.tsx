@@ -54,6 +54,8 @@ export default function useAddTask({
   const isAllDay = watch("isAllDay");
   const colour = watch("colour");
 
+  console.log(alertTime, "alertTime");
+
   useEffect(() => {
     if (id) {
       reset({

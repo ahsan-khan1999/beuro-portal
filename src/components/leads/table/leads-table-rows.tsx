@@ -5,6 +5,7 @@ import { formatDate } from "@/utils/utility";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export interface LeadTableProps {
   dataToAdd: Lead[];
@@ -44,6 +45,7 @@ export const LeadsTableRows = ({
 }: LeadTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const { user } = useAppSelector((state) => state.auth);
 
   const itemsValue = [
     `${translate("leads.lead_dropdown_status.Open")}`,
@@ -55,6 +57,9 @@ export const LeadsTableRows = ({
   const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
     item: { label: itemsValue[index], value: item },
   }));
+
+  const isAppointment = user?.company?.isAppointment;
+  console.log(isAppointment);
 
   return (
     <div
@@ -135,137 +140,257 @@ export const LeadsTableRows = ({
               key={index}
             >
               <div className="mlg:w-full">
-                <div
-                  onClick={() => {
-                    router.push({
-                      pathname: isAgent
-                        ? "/agent/leads/details"
-                        : "/leads/details",
-                      query: { ...router.query, lead: item?.id },
-                    });
-                  }}
-                  key={index}
-                  className={`${
-                    index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                  } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(200px,200px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(180px,_180px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(170px,_170px)_minmax(120px,_120px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(100px,_4fr)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(120px,_120px)] maxLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]`}
-                >
-                  <span className="py-4 truncate">{item?.refID}</span>
-                  <div className="flex items-center gap-x-1">
-                    {(item?.customerDetail
-                      ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
-                    1 ? (
-                      <span className="py-4 truncate text-lg font-medium text-primary">
-                        {item?.customerDetail?.companyName}
-                      </span>
-                    ) : (
-                      <span className="py-4 truncate">
-                        {item?.customerDetail?.fullName}
-                      </span>
-                    )}
-                  </div>
-                  <span className="py-4 truncate block mlg:hidden maxSize:block">
-                    {item?.customerDetail?.email}
-                  </span>
-                  <span className="py-4 truncate mlg:hidden maxLarge:block">
-                    {item?.customerDetail?.phoneNumber}
-                  </span>
-                  <span className="py-4 flex items-center mlg:hidden xlg:flex">
-                    {formatDate(item.createdAt)}
-                  </span>
-                  <span className="py-4 truncate mlg:hidden xLarge:block">
-                    {item?.customerDetail?.address?.country}
-                  </span>
+                {user?.company?.isAppointment ? (
+                  <div
+                    onClick={() => {
+                      router.push({
+                        pathname: isAgent
+                          ? "/agent/leads/details"
+                          : "/leads/details",
+                        query: { ...router.query, lead: item?.id },
+                      });
+                    }}
+                    key={index}
+                    className={`${
+                      index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(200px,200px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(180px,_180px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(170px,_170px)_minmax(120px,_120px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(100px,_4fr)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(120px,_120px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(120px,_120px)] maxLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]`}
+                  >
+                    <span className="py-4 truncate">{item?.refID}</span>
+                    <div className="flex items-center gap-x-1">
+                      {(item?.customerDetail
+                        ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
+                      1 ? (
+                        <span className="py-4 truncate text-lg font-medium text-primary">
+                          {item?.customerDetail?.companyName}
+                        </span>
+                      ) : (
+                        <span className="py-4 truncate">
+                          {item?.customerDetail?.fullName}
+                        </span>
+                      )}
+                    </div>
+                    <span className="py-4 truncate block mlg:hidden maxSize:block">
+                      {item?.customerDetail?.email}
+                    </span>
+                    <span className="py-4 truncate mlg:hidden maxLarge:block">
+                      {item?.customerDetail?.phoneNumber}
+                    </span>
+                    <span className="py-4 flex items-center mlg:hidden xlg:flex">
+                      {formatDate(item.createdAt)}
+                    </span>
+                    <span className="py-4 truncate mlg:hidden xLarge:block">
+                      {item?.customerDetail?.address?.country}
+                    </span>
 
-                  {isAgent ? (
+                    {isAgent ? (
+                      <div className={`py-4`}>
+                        <div
+                          className={`px-[10px] py-2 w-full rounded-lg ${
+                            item?.leadStatus === "InProcess"
+                              ? "text-dark"
+                              : "text-white"
+                          } text-sm font-medium text-center ${
+                            item?.leadStatus === "Open"
+                              ? "bg-[#4A13E7]"
+                              : item?.leadStatus === "InProcess"
+                              ? "bg-[#f5d60f]"
+                              : item?.leadStatus === "Close"
+                              ? "bg-[#45C769]"
+                              : "bg-[#FF0000]"
+                          }`}
+                        >
+                          {translate(
+                            `leads.lead_dropdown_status.${item?.leadStatus}`
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        className="py-4 flex items-center"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <DropDown
+                          key={item.id}
+                          items={items}
+                          selectedItem={translate(
+                            `leads.lead_dropdown_status.${item?.leadStatus}`
+                          )}
+                          onItemSelected={(status) => {
+                            onStatusChange(item.id, status, "lead");
+                          }}
+                          dropDownClassName={`${
+                            item?.leadStatus === "Open"
+                              ? "bg-[#4A13E7]"
+                              : item?.leadStatus === "InProcess"
+                              ? "bg-[#f5d60f]"
+                              : item?.leadStatus === "Close"
+                              ? "bg-[#45C769]"
+                              : "bg-[#FF0000]"
+                          } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                          dropDownTextClassName={`${
+                            item?.leadStatus === "InProcess"
+                              ? "text-black"
+                              : "text-white"
+                          } text-base font-medium me-1`}
+                          dropDownItemsContainerClassName="w-full"
+                          dropDownIconClassName={`${
+                            item?.leadStatus === "InProcess"
+                              ? "text-black"
+                              : "text-white"
+                          }`}
+                          isThirdLastIndex={
+                            dataToAdd &&
+                            dataToAdd.length > 5 &&
+                            index === dataToAdd.length - 3
+                          }
+                          isSecondLastIndex={
+                            dataToAdd &&
+                            dataToAdd.length > 5 &&
+                            index === dataToAdd.length - 2
+                          }
+                          isLastIndex={
+                            dataToAdd &&
+                            dataToAdd.length > 5 &&
+                            index === dataToAdd.length - 1
+                          }
+                          isLead={true}
+                        />
+                      </div>
+                    )}
+
                     <div className={`py-4`}>
                       <div
-                        className={`px-[10px] py-2 w-full rounded-lg ${
-                          item?.leadStatus === "InProcess"
-                            ? "text-dark"
-                            : "text-white"
-                        } text-sm font-medium text-center ${
-                          item?.leadStatus === "Open"
-                            ? "bg-[#4A13E7]"
-                            : item?.leadStatus === "InProcess"
-                            ? "bg-[#f5d60f]"
-                            : item?.leadStatus === "Close"
-                            ? "bg-[#45C769]"
-                            : "bg-[#FF0000]"
+                        className={`px-[10px] py-2 w-full rounded-lg text-white text-sm font-medium text-center ${
+                          item?.isAppointmentCreated
+                            ? "bg-primary"
+                            : "bg-[#FB9600]"
                         }`}
                       >
-                        {translate(
-                          `leads.lead_dropdown_status.${item?.leadStatus}`
-                        )}
+                        {item?.isAppointmentCreated
+                          ? translate("leads.created")
+                          : translate("leads.not_created")}
                       </div>
                     </div>
-                  ) : (
-                    <div
-                      className="py-4 flex items-center"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <DropDown
-                        key={item.id}
-                        items={items}
-                        selectedItem={translate(
-                          `leads.lead_dropdown_status.${item?.leadStatus}`
-                        )}
-                        onItemSelected={(status) => {
-                          onStatusChange(item.id, status, "lead");
-                        }}
-                        dropDownClassName={`${
-                          item?.leadStatus === "Open"
-                            ? "bg-[#4A13E7]"
-                            : item?.leadStatus === "InProcess"
-                            ? "bg-[#f5d60f]"
-                            : item?.leadStatus === "Close"
-                            ? "bg-[#45C769]"
-                            : "bg-[#FF0000]"
-                        } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
-                        dropDownTextClassName={`${
-                          item?.leadStatus === "InProcess"
-                            ? "text-black"
-                            : "text-white"
-                        } text-base font-medium me-1`}
-                        dropDownItemsContainerClassName="w-full"
-                        dropDownIconClassName={`${
-                          item?.leadStatus === "InProcess"
-                            ? "text-black"
-                            : "text-white"
-                        }`}
-                        isThirdLastIndex={
-                          dataToAdd &&
-                          dataToAdd.length > 5 &&
-                          index === dataToAdd.length - 3
-                        }
-                        isSecondLastIndex={
-                          dataToAdd &&
-                          dataToAdd.length > 5 &&
-                          index === dataToAdd.length - 2
-                        }
-                        isLastIndex={
-                          dataToAdd &&
-                          dataToAdd.length > 5 &&
-                          index === dataToAdd.length - 1
-                        }
-                        isLead={true}
-                      />
-                    </div>
-                  )}
-
-                  <div className={`py-4`}>
-                    <div
-                      className={`px-[10px] py-2 w-full rounded-lg text-white text-sm font-medium text-center ${
-                        item?.isAppointmentCreated
-                          ? "bg-primary"
-                          : "bg-[#FB9600]"
-                      }`}
-                    >
-                      {item?.isAppointmentCreated
-                        ? translate("leads.created")
-                        : translate("leads.not_created")}
-                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div
+                    onClick={() => {
+                      router.push({
+                        pathname: isAgent
+                          ? "/agent/leads/details"
+                          : "/leads/details",
+                        query: { ...router.query, lead: item?.id },
+                      });
+                    }}
+                    key={index}
+                    className={`${
+                      index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
+                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(250px,4fr)_minmax(300px,_3fr)_minmax(200px,200px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(180px,_180px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(170px,_170px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(150px,_150px)_minmax(170px,_170px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(100px,_4fr)_minmax(150px,_150px)_minmax(170px,_170px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(110px,_110px)_minmax(150px,_150px)_minmax(170px,_170px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)] maxLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(70px,_3fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)] border-t border-t-[#E7EAEE]`}
+                  >
+                    <span className="py-4 truncate">{item?.refID}</span>
+                    <div className="flex items-center gap-x-1">
+                      {(item?.customerDetail
+                        ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
+                      1 ? (
+                        <span className="py-4 truncate text-lg font-medium text-primary">
+                          {item?.customerDetail?.companyName}
+                        </span>
+                      ) : (
+                        <span className="py-4 truncate">
+                          {item?.customerDetail?.fullName}
+                        </span>
+                      )}
+                    </div>
+                    <span className="py-4 truncate block mlg:hidden maxSize:block">
+                      {item?.customerDetail?.email}
+                    </span>
+                    <span className="py-4 truncate mlg:hidden maxLarge:block">
+                      {item?.customerDetail?.phoneNumber}
+                    </span>
+                    <span className="py-4 flex items-center mlg:hidden xlg:flex">
+                      {formatDate(item.createdAt)}
+                    </span>
+                    <span className="py-4 truncate mlg:hidden xLarge:block">
+                      {item?.customerDetail?.address?.country}
+                    </span>
+
+                    {isAgent ? (
+                      <div className={`py-4`}>
+                        <div
+                          className={`px-[10px] py-2 w-full rounded-lg ${
+                            item?.leadStatus === "InProcess"
+                              ? "text-dark"
+                              : "text-white"
+                          } text-sm font-medium text-center ${
+                            item?.leadStatus === "Open"
+                              ? "bg-[#4A13E7]"
+                              : item?.leadStatus === "InProcess"
+                              ? "bg-[#f5d60f]"
+                              : item?.leadStatus === "Close"
+                              ? "bg-[#45C769]"
+                              : "bg-[#FF0000]"
+                          }`}
+                        >
+                          {translate(
+                            `leads.lead_dropdown_status.${item?.leadStatus}`
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        className="py-4 flex items-center"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <DropDown
+                          key={item.id}
+                          items={items}
+                          selectedItem={translate(
+                            `leads.lead_dropdown_status.${item?.leadStatus}`
+                          )}
+                          onItemSelected={(status) => {
+                            onStatusChange(item.id, status, "lead");
+                          }}
+                          dropDownClassName={`${
+                            item?.leadStatus === "Open"
+                              ? "bg-[#4A13E7]"
+                              : item?.leadStatus === "InProcess"
+                              ? "bg-[#f5d60f]"
+                              : item?.leadStatus === "Close"
+                              ? "bg-[#45C769]"
+                              : "bg-[#FF0000]"
+                          } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                          dropDownTextClassName={`${
+                            item?.leadStatus === "InProcess"
+                              ? "text-black"
+                              : "text-white"
+                          } text-base font-medium me-1`}
+                          dropDownItemsContainerClassName="w-full"
+                          dropDownIconClassName={`${
+                            item?.leadStatus === "InProcess"
+                              ? "text-black"
+                              : "text-white"
+                          }`}
+                          isThirdLastIndex={
+                            dataToAdd &&
+                            dataToAdd.length > 5 &&
+                            index === dataToAdd.length - 3
+                          }
+                          isSecondLastIndex={
+                            dataToAdd &&
+                            dataToAdd.length > 5 &&
+                            index === dataToAdd.length - 2
+                          }
+                          isLastIndex={
+                            dataToAdd &&
+                            dataToAdd.length > 5 &&
+                            index === dataToAdd.length - 1
+                          }
+                          isLead={true}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">

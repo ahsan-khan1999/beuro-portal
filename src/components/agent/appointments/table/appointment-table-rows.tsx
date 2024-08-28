@@ -59,7 +59,7 @@ export const AppointmentTableRows = ({
       }`}
     >
       {dataToAdd?.map((item, index) => {
-        const handleAppointmentRoute = () => {
+        const handleReportDetail = () => {
           router.push({
             pathname: "/agent/appointments/report-detail",
             query: { ...router.query, report: item?.id },
@@ -73,7 +73,7 @@ export const AppointmentTableRows = ({
           });
         };
 
-        const handleReportDetail = () => {
+        const handleAppointmentRoute = () => {
           router.push({
             pathname: "/agent/appointments/details",
             query: {
@@ -100,7 +100,11 @@ export const AppointmentTableRows = ({
               <>
                 <div className="mlg:hidden">
                   <div
-                    onClick={handleAppointmentRoute}
+                    onClick={
+                      item?.isReportSubmitted
+                        ? handleReportDetail
+                        : handleAppointmentRoute
+                    }
                     key={index}
                     className={`${
                       index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
@@ -169,7 +173,7 @@ export const AppointmentTableRows = ({
                       ) : (
                         <Button
                           inputType="button"
-                          onClick={handleReportDetail}
+                          onClick={handleAppointmentRoute}
                           className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
                           text={translate("appointments.sub_report")}
                           id="view reports"
@@ -188,7 +192,11 @@ export const AppointmentTableRows = ({
             >
               <div className="mlg:w-full">
                 <div
-                  onClick={handleAppointmentRoute}
+                  onClick={
+                    item?.isReportSubmitted
+                      ? handleReportDetail
+                      : handleAppointmentRoute
+                  }
                   key={index}
                   className={`${
                     index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
@@ -390,7 +398,7 @@ export const AppointmentTableRows = ({
                   ) : (
                     <Button
                       inputType="button"
-                      onClick={handleReportDetail}
+                      onClick={handleAppointmentRoute}
                       className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
                       text={translate("appointments.sub_report")}
                       id="view reports"

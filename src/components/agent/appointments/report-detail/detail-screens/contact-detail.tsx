@@ -6,14 +6,10 @@ import { useTranslation } from "next-i18next";
 import { Report } from "@/types/appointments";
 
 export interface ReportAddressProps {
-  // isCompanyAppointment?: boolean;
   reportDetail: Report;
 }
 
-export const ReportContactDetail = ({
-  // isCompanyAppointment,
-  reportDetail,
-}: ReportAddressProps) => {
+export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 

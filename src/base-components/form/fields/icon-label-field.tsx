@@ -1,5 +1,5 @@
 import { IconLabelProps } from "@/types";
-import { combineClasses, formatAlertTime } from "@/utils/utility";
+import { combineClasses } from "@/utils/utility";
 
 export const IconLabelFeild = ({
   id,
@@ -19,11 +19,12 @@ export const IconLabelFeild = ({
     textClassName
   );
 
-  const updatedText = typeof text === "number" ? formatAlertTime(text) : text;
+  // const updatedText = typeof text === "number" ? formatAlertTime(text) : text;
+
   return (
     <div className={defaultClasses} id={id}>
       <span dangerouslySetInnerHTML={{ __html: icon }} />
-      <span className={textClasses}>{updatedText}</span>
+      <span className={textClasses}>{text}</span>
     </div>
   );
 };

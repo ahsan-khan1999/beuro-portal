@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { Lead } from "@/types/leads";
 import { formatDateTimeToDate, getStatusColor } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
-import { useAppDispatch } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
 import localStoreUtil from "@/utils/localstore.util";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
@@ -53,6 +53,7 @@ const LeadsDetailsCardData = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const itemsValue = [
     `${translate("leads.lead_dropdown_status.Open")}`,
@@ -119,7 +120,7 @@ const LeadsDetailsCardData = ({
 
   return (
     <div>
-      <div className=" flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
+      <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
         <div className="flex items-center gap-x-3 xsMini:gap-x-[27px]">
           <BackIcon onClick={handleBack} />
           <p className="font-medium text-base xMini:text-2xl">
@@ -140,15 +141,19 @@ const LeadsDetailsCardData = ({
               // />
               <></>
             ) : (
-              <OutlineButton
-                inputType="button"
-                onClick={onCreateAppointment}
-                className="bg-white text-[#4B4B4B] w-fit border border-primary !h-10 hover:bg-transparent hover:text-primary"
-                text={translate("appointments.create_appointments")}
-                id="create-appointment"
-                iconAlt="create-appointment"
-                icon={appointmentIcon}
-              />
+              <>
+                {user?.company?.isAppointment && (
+                  <OutlineButton
+                    inputType="button"
+                    onClick={onCreateAppointment}
+                    className="bg-white text-[#4B4B4B] w-fit border border-primary !h-10 hover:bg-transparent hover:text-primary"
+                    text={translate("appointments.create_appointments")}
+                    id="create-appointment"
+                    iconAlt="create-appointment"
+                    icon={appointmentIcon}
+                  />
+                )}
+              </>
             )}
 
             {leadDetails.leadStatus !== "Close" && (
@@ -189,7 +194,7 @@ const LeadsDetailsCardData = ({
         )}
       </div>
 
-      <div className="grid grid-cols-1 xMini:grid-cols-3 items-center gap-x-5 xlg:gap-x-20 gap-y-3 pt-2 mlg:pt-5">
+      <div className="grid grid-cols-1 xMini:grid-cols-3 items-center gap-x-5 xlg:gap-x-20 gap-y-5 pt-2 mlg:pt-5">
         <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-y-2 mlg:gap-y-0 gap-x-[10px]">
           <span className="font-normal text-[#848484] text-sm mlg:text-base">
             {translate("leads.card_content.lead_id")}:
@@ -256,20 +261,24 @@ const LeadsDetailsCardData = ({
             </div>
           )}
         </div>
-        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
-          <span className="font-normal text-[#848484] text-sm mlg:text-base">
-            {translate("appointments.appointment")}:
-          </span>
-          <div
-            className={`px-[10px] py-1 rounded-lg text-white text-sm font-medium text-center xs:w-[120px] mlg:w-fit ${
-              leadDetails?.isAppointmentCreated ? "bg-primary" : "bg-[#FB9600]"
-            }`}
-          >
-            {leadDetails?.isAppointmentCreated
-              ? translate("leads.created")
-              : translate("leads.not_created")}
+        {user?.company?.isAppointment && (
+          <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+            <span className="font-normal text-[#848484] text-sm mlg:text-base">
+              {translate("appointments.appointment")}:
+            </span>
+            <div
+              className={`px-[10px] py-1 rounded-lg text-white text-sm font-medium text-center xs:w-[120px] mlg:w-fit ${
+                leadDetails?.isAppointmentCreated
+                  ? "bg-primary"
+                  : "bg-[#FB9600]"
+              }`}
+            >
+              {leadDetails?.isAppointmentCreated
+                ? translate("leads.created")
+                : translate("leads.not_created")}
+            </div>
           </div>
-        </div>
+        )}
         <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
           <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[120px]">
             {translate("leads.card_content.created_date")}:
