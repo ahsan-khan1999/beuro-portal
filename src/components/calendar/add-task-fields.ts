@@ -1,5 +1,6 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateAddTaskFormField } from "@/types";
+import { formatAlertTime } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 
 export const addTaskFormField: GenerateAddTaskFormField = (
@@ -196,7 +197,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
                     name: "remainder",
                     text:
                       (isRemainder && alertTime) || alertTime
-                        ? `${alertTime} ${translate("common.minutes")}`
+                        ? `${formatAlertTime(alertTime)} `
                         : translate("calendar.remainder"),
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
         <g clip-path="url(#clip0_2433_15874)">

@@ -1,5 +1,6 @@
 import { CompanyIcon } from "@/assets/svgs/components/company-icon";
 import { DateIcon } from "@/assets/svgs/components/date-icon";
+import { LocationIcon } from "@/assets/svgs/components/location-icon";
 import { UserIcon } from "@/assets/svgs/components/use-icon";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
@@ -110,18 +111,26 @@ export const AppointmentTableRecordCard = ({
 
               <div className="flex flex-col gap-y-1">
                 {user?.company?.companyName && (
-                  <div className="flex items-center gap-x-4">
+                  <div className="flex items-center gap-x-[14px]">
                     <CompanyIcon />
                     <p className="text-[#616161] font-normal text-sm">
                       {user?.company?.companyName}
                     </p>
                   </div>
                 )}
-                <div className="flex items-center gap-x-4">
-                  <DateIcon />
-                  <p className="text-[#616161] font-normal text-sm">
-                    {formatDateTimeToDate(item.date)}
-                  </p>
+                <div className="flex justify-between">
+                  <div className="flex items-center gap-x-[14px]">
+                    <DateIcon />
+                    <p className="text-[#616161] font-normal text-sm">
+                      {formatDateTimeToDate(item.date)}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-x-[14px]">
+                    <LocationIcon />
+                    <p className="text-[#616161] font-normal text-sm">
+                      {item?.canton}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -179,7 +179,7 @@ export const useAppointmentsDetails = () => {
   const handleCreateReport = () => {
     router.push({
       pathname: `/agent/appointments/create-report`,
-      query: appointmentDetails?.id,
+      query: { appointmentId: appointmentDetails?.id },
     });
   };
 

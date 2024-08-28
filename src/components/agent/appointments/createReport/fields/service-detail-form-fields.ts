@@ -2,6 +2,7 @@ import { Field } from "@/enums/form";
 import {
   FormField,
   GenerateReportServiceActionFormField,
+  GenerateReportServiceDescriptionFormField,
   GenerateReportServiceFormField,
 } from "@/types";
 import {
@@ -366,7 +367,7 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
   return formField;
 };
 
-export const ReportServiceDetailsDescriptionFormField: GenerateReportServiceFormField =
+export const ReportServiceDetailsDescriptionFormField: GenerateReportServiceDescriptionFormField =
   (
     register,
     loading,
@@ -379,7 +380,9 @@ export const ReportServiceDetailsDescriptionFormField: GenerateReportServiceForm
     serviceType,
     onServiceChange,
     fields,
-    setValue
+    setValue,
+    isMobile,
+    isTablet
   ) => {
     const {
       total,
@@ -456,7 +459,9 @@ export const ReportServiceDetailsDescriptionFormField: GenerateReportServiceForm
               taxType,
               discountType,
               tax,
-              currency
+              currency,
+              isMobile,
+              isTablet
             ),
           ],
         },
@@ -478,7 +483,9 @@ const generateServiceCalulationChildren = (
   taxType?: number,
   discountType?: number,
   tax?: TaxSetting[] | null,
-  currency?: string
+  currency?: string,
+  isMobile?: boolean,
+  isTablet?: boolean
 ) => {
   const { t: translate } = useTranslation();
   let field: any = {
@@ -598,7 +605,7 @@ const generateServiceCalulationChildren = (
                         ],
                       },
                     },
-                    {
+                    isTablet && {
                       containerClass: "mb-0 hidden mr-3 w-full xMini:block",
                       field: {
                         type: Field.div,
@@ -658,7 +665,7 @@ const generateServiceCalulationChildren = (
                   ],
                 },
               },
-              {
+              isMobile && {
                 containerClass:
                   "mb-0 border-b border-lightGray pb-4 xMini:hidden",
                 field: {
@@ -720,7 +727,7 @@ const generateServiceCalulationChildren = (
                       },
                     },
 
-                    {
+                    isTablet && {
                       containerClass: "mb-0 hidden mr-3 xMini:block w-full",
                       field: {
                         type: Field.input,
@@ -792,7 +799,7 @@ const generateServiceCalulationChildren = (
                   ],
                 },
               },
-              {
+              isMobile && {
                 containerClass:
                   "mb-0 border-b border-lightGray pb-4 xMini:hidden w-full",
                 field: {

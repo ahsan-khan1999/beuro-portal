@@ -15,12 +15,14 @@ import {
   ContactReportAddressFormField,
   ReportContactSubmitFormField,
 } from "@/components/agent/appointments/createReport/fields/contact-address-form-fields";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   createReport,
+  readAppointmentDetails,
   readReportDetails,
 } from "@/api/slices/appointment/appointmentSlice";
 import { ReportPromiseActionType } from "@/types/customer";
+import { CustomerPromiseActionType } from "@/types/company";
 
 export interface ReportAddressHookProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -35,8 +37,7 @@ export const useCreateReportAddressDetails = ({
   const { error, loading, appointmentDetails, reportDetails } = useAppSelector(
     (state) => state.appointment
   );
-
-  const { report, companyAppointment } = router.query;
+  const { report, companyAppointment, appointmentId } = router.query;
 
   const handleCancel = () => {
     const pathname = companyAppointment
@@ -125,20 +126,39 @@ export const useCreateReportAddressDetails = ({
       });
 
       reset(transformedData);
-    } else {
-      const transformedData = transformData({
-        fullName: appointmentDetails?.leadID?.customerDetail?.fullName,
-        email: appointmentDetails?.leadID?.customerDetail?.email,
-        phoneNumber: appointmentDetails?.leadID?.customerDetail?.phoneNumber,
-        address: resetFormWithAddresses(
-          appointmentDetails?.leadID?.addressID?.address || [],
-          "Adresse"
-        ),
-      });
+    } else if (appointmentId) {
+      dispatch(
+        readAppointmentDetails({
+          params: { filter: appointmentId },
+        })
+      ).then((response: CustomerPromiseActionType) => {
+        if (response.payload) {
+          const transformedData = transformData({
+            fullName: response.payload?.leadID?.customerDetail?.fullName,
+            email: response.payload?.leadID?.customerDetail?.email,
+            phoneNumber: response.payload?.leadID?.customerDetail?.phoneNumber,
+            address: resetFormWithAddresses(
+              response.payload?.leadID?.addressID?.address || [],
+              "Adresse"
+            ),
+          });
 
-      reset(transformedData);
+          reset(transformedData);
+        }
+      });
+      // const transformedData = transformData({
+      //   fullName: appointmentDetails?.leadID?.customerDetail?.fullName,
+      //   email: appointmentDetails?.leadID?.customerDetail?.email,
+      //   phoneNumber: appointmentDetails?.leadID?.customerDetail?.phoneNumber,
+      //   address: resetFormWithAddresses(
+      //     appointmentDetails?.leadID?.addressID?.address || [],
+      //     "Adresse"
+      //   ),
+      // });
+
+      // reset(transformedData);
     }
-  }, [appointmentDetails?.id, reportDetails?.id, report]);
+  }, [appointmentDetails?.id, reportDetails?.id, report, appointmentId]);
 
   const addressFieldsLength = addressFields.length || 1;
 

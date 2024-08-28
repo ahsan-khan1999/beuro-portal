@@ -433,6 +433,8 @@ export const calendarTaskformatDate = (date: string) => {
 };
 
 export const formatAlertTime = (alertTime: number) => {
+  console.log(alertTime, "alertTime");
+
   switch (alertTime) {
     case 15:
     case 30:

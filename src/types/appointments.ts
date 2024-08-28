@@ -43,7 +43,7 @@ export interface Appointments {
     picture: string;
     fullName: string;
   };
-  canton:string,
+  canton: string;
   appointmentStatus: string;
   createdAt: string;
   isNoteCreated: boolean;
@@ -155,6 +155,12 @@ export interface Report {
       id: string;
       refID: string;
       isOfferCreated: false;
+      customerID: string;
+      otherServices: string[] | ContentTableRowTypes[];
+      requiredService: string | ContentTableRowTypes;
+      additionalDetails: string;
+      desireDate: string;
+      addressID: AddressID;
       customerDetail: {
         gender: number;
         fullName: string;

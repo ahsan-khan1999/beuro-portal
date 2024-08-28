@@ -640,6 +640,45 @@ export type GenerateReportServiceFormField = (
   watch?: UseFormWatch<FieldValues>
 ) => FormField[];
 
+export type GenerateReportServiceDescriptionFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  properties: {
+    isTax?: boolean;
+    isDiscount?: boolean;
+    taxType?: number;
+    discountType?: number;
+    reportDetails?: Report;
+    generateTotal?: () => void;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string, index: number) => void;
+    serviceDetails?: Service;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    generatePrice?: (index: number) => void;
+    total?: Total;
+    tax?: TaxSetting[] | null;
+    currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+  },
+  handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
+  handleRemoveService: (index: number) => void,
+  serviceType: ServiceType[],
+  onServiceChange: (index: number, value: ServiceType) => void,
+  fields?: object[],
+  setValue?: SetFieldValue<FieldValues>,
+  isMobile?: boolean,
+  isTablet?: boolean,
+  watch?: UseFormWatch<FieldValues>
+) => FormField[];
+
 export type GenerateAgentReportServiceFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

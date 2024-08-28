@@ -55,6 +55,7 @@ export const useCreateReportServicesDetails = ({
 
   const dispatch = useAppDispatch();
   const { systemSettings } = useAppSelector((state) => state.settings);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { loading, error, reportDetails, appointmentDetails } = useAppSelector(
     (state) => state.appointment
   );
@@ -76,6 +77,18 @@ export const useCreateReportServicesDetails = ({
     dispatch(readService({ params: { filter: {}, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 730;
+  const isTablet = windowWidth >= 730;
 
   const schema = generateAddfferServiceDetailsValidation(translate);
   const {
@@ -412,7 +425,9 @@ export const useCreateReportServicesDetails = ({
     serviceType,
     handleServiceChange,
     serviceFields,
-    setValue
+    setValue,
+    isMobile,
+    isTablet
   );
 
   const submitFields = ReportDetailsServiceSubmitFormField(

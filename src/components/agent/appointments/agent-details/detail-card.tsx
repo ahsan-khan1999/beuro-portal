@@ -4,7 +4,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
-import { Appointments } from "@/types/appointments";
+import { Appointments, Report } from "@/types/appointments";
 import { formatDateTimeToDate } from "@/utils/utility";
 import localStoreUtil from "@/utils/localstore.util";
 import { useAppDispatch } from "@/hooks/useRedux";
@@ -34,6 +34,7 @@ export interface AppointmentsDetailCardProps {
     heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
+  reportDetails?: Report;
 }
 
 export const AppointmentsDetailCard = ({
@@ -42,11 +43,11 @@ export const AppointmentsDetailCard = ({
   isAgent,
   handleImageUpload,
   handleNotes,
+  reportDetails,
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
-
   const { companyAppointment } = router.query;
 
   const handleBack = () => {
@@ -78,26 +79,30 @@ export const AppointmentsDetailCard = ({
         id: "convert",
         type: "Existing Customer",
         leadID: {
-          ...appointmentDetails?.leadID,
-          customerID: appointmentDetails?.leadID?.customerID,
+          ...reportDetails?.appointmentID?.leadID,
+          customerID: reportDetails?.appointmentID?.leadID?.customerID,
         },
         serviceDetail: {
-          serviceDetail: appointmentDetails?.leadID?.otherServices,
+          serviceDetail: reportDetails?.serviceDetail?.serviceDetail,
         },
-        addressID: { address: appointmentDetails?.leadID?.addressID?.address },
-        content: appointmentDetails?.leadID?.requiredService,
+        addressID: {
+          address: reportDetails?.appointmentID?.leadID?.addressID?.address,
+        },
+        content: reportDetails?.appointmentID?.leadID?.requiredService,
         date: [
           {
-            startDate: moment(appointmentDetails.leadID?.desireDate).format(
-              "YYYY-MM-DD"
-            ),
+            startDate: moment(
+              reportDetails?.appointmentID.leadID?.desireDate
+            ).format("YYYY-MM-DD"),
             endDate: "",
           },
         ],
       })
     );
     dispatch(
-      setCustomerDetails({ ...appointmentDetails?.leadID?.customerDetail })
+      setCustomerDetails({
+        ...reportDetails?.appointmentID?.leadID?.customerDetail,
+      })
     );
     router.push("/offers/add");
   };
@@ -114,6 +119,8 @@ export const AppointmentsDetailCard = ({
       ? translate("common.company_name")
       : translate("common.customer_name");
 
+  const isReportCreated = appointmentDetails?.isReportSubmitted;
+
   return (
     <div className="bg-white pt-5 pl-5 pr-6 pb-[37px] rounded-lg">
       <div className="flex items-center justify-between border-b border-b-[#000] border-opacity-10 pb-5">
@@ -124,17 +131,19 @@ export const AppointmentsDetailCard = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-4">
-          {!appointmentDetails?.leadID?.isOfferCreated && !isAgent && (
-            <OutlineButton
-              inputType="button"
-              onClick={offerCreateHandler}
-              className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
-              text={translate("leads.card_content.create_button")}
-              id="create offer"
-              iconAlt="create offer"
-              icon={createOfferIcon}
-            />
-          )}
+          {!appointmentDetails?.leadID?.isOfferCreated &&
+            !isAgent &&
+            isReportCreated && (
+              <OutlineButton
+                inputType="button"
+                onClick={offerCreateHandler}
+                className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+                text={translate("leads.card_content.create_button")}
+                id="create offer"
+                iconAlt="create offer"
+                icon={createOfferIcon}
+              />
+            )}
           {/* <Button
             inputType="button"
             onClick={onScheduleAppointments}
@@ -158,7 +167,7 @@ export const AppointmentsDetailCard = ({
         <div
           className={`flex flex-col gap-y-3 mlg:gap-y-[34px] mt-[10px] mlg:mt-[34px]`}
         >
-          <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">
+          <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-3">
             <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
               <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[65px] w-fit">
                 {translate("appointments.detail_data.lead_id")}:
@@ -200,7 +209,7 @@ export const AppointmentsDetailCard = ({
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">
+          <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-3">
             {appointmentDetails?.leadID?.customerDetail?.companyName && (
               <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
                 <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[140px]">

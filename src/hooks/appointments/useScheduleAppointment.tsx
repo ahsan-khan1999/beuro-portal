@@ -12,6 +12,8 @@ import {
 } from "@/api/slices/appointment/appointmentSlice";
 import { fieldDateFormat } from "@/utils/utility";
 import { Appointments } from "@/types/appointments";
+import { readLeadDetails, setLeadDetails } from "@/api/slices/lead/leadSlice";
+import { CustomerPromiseActionType } from "@/types/company";
 
 export interface AppointmentHookProps {
   onSuccess: () => void;
@@ -120,6 +122,11 @@ export const useScheduleAppointment = ({
         }
         onUpdateSuccess && onUpdateSuccess();
       } else {
+        dispatch(readLeadDetails({ params: { filter: id } })).then(
+          (res: CustomerPromiseActionType) => {
+            dispatch(setLeadDetails(res.payload));
+          }
+        );
         onSuccess();
       }
     }
