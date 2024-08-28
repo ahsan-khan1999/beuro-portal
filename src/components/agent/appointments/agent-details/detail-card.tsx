@@ -83,7 +83,7 @@ export const AppointmentsDetailCard = ({
           customerID: reportDetails?.appointmentID?.leadID?.customerID,
         },
         serviceDetail: {
-          serviceDetail: reportDetails?.appointmentID?.leadID?.otherServices,
+          serviceDetail: reportDetails?.serviceDetail?.serviceDetail,
         },
         addressID: {
           address: reportDetails?.appointmentID?.leadID?.addressID?.address,

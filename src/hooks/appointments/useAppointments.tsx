@@ -12,10 +12,15 @@ import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import {
   readAppointments,
   setAppointmentDetails,
+  setReportDetails,
   updateAppointmentStatus,
 } from "@/api/slices/appointment/appointmentSlice";
 import localStoreUtil from "@/utils/localstore.util";
-import { DEFAULT_APPOINTMETNS, staticEnums } from "@/utils/static";
+import {
+  DEFAULT_APPOINTMETNS,
+  DEFAULT_REPOT,
+  staticEnums,
+} from "@/utils/static";
 import { CreateReportModal } from "@/base-components/ui/modals1/CreateReportModal";
 import { Appointments } from "@/types/appointments";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
@@ -61,6 +66,7 @@ export const useAppointments = () => {
   useEffect(() => {
     localStoreUtil.remove_data("appointment");
     dispatch(setAppointmentDetails(DEFAULT_APPOINTMETNS));
+    dispatch(setReportDetails(DEFAULT_REPOT));
   }, []);
 
   useEffect(() => {
@@ -212,7 +218,7 @@ export const useAppointments = () => {
     date: string,
     startTime: string,
     endTime: string,
-    canton: string,
+    canton: string
     // agent: {
     //   id: string;
     //   picture: string;
