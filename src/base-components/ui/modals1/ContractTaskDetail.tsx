@@ -67,13 +67,15 @@ export const ContractTaskDetail = ({
                 <span className="text-[#7A7A7A] text-sm font-medium">
                   {calendarTaskformatDate(firstDateRange.startDate)}
                 </span>
-                {isSameDay && startTime !== "00:00" && endTime !== "00:00" ? (
-                  <span className="text-[#272727] font-semibold text-sm">{`${startTime} - ${endTime}`}</span>
-                ) : (
-                  startTime !== "00:00" && (
-                    <span className="text-[#272727] font-semibold text-sm">{`${startTime}`}</span>
-                  )
-                )}
+                {startTime && endTime ? (
+                  <span className="text-[#272727] font-semibold text-sm">
+                    {`${startTime} - ${endTime}`}
+                  </span>
+                ) : startTime ? (
+                  <span className="text-[#272727] font-semibold text-sm">{`${startTime}`}</span>
+                ) : endTime ? (
+                  <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
+                ) : null}
               </div>
             )}
             {!isSameDay && firstDateRange?.endDate && (

@@ -193,6 +193,7 @@ export const Calendar = () => {
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView={isSmallScreen ? "dayGridMonth" : "timeGridDay"}
         events={events}
+        slotEventOverlap={false}
         headerToolbar={false}
         dayHeaderContent={(arg) =>
           DayHeaderContent(arg, isSmallScreen, isSmallWeekScreen)
@@ -236,13 +237,20 @@ export const Calendar = () => {
           const { event, view } = eventInfo;
           const viewType = view?.type;
 
+          // Format time based on the presence of end date
+          const formattedTime = event?.end
+            ? `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
+                eventInfo.event.end
+              ).format("HH:mm")}`
+            : `${moment(eventInfo.event.start).format("HH:mm")}`;
+
           if (viewType === "dayGridMonth") {
             if (isSmallScreen) {
-              const formattedTime = event?.allDay
-                ? "All Day"
-                : `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
-                    eventInfo.event.end
-                  ).format("HH:mm")}`;
+              // const formattedTime = event?.allDay
+              //   ? "All Day"
+              //   : `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
+              //       eventInfo.event.end
+              //     ).format("HH:mm")}`;
               return (
                 <DayView
                   time={formattedTime}
@@ -274,9 +282,9 @@ export const Calendar = () => {
             viewType === "timeGridDay" ||
             viewType === "timeGridWeek"
           ) {
-            const formattedTime = `${moment(eventInfo.event.start).format(
-              "HH:mm"
-            )} - ${moment(eventInfo.event.end).format("HH:mm")}`;
+            // const formattedTime = `${moment(eventInfo.event.start).format(
+            //   "HH:mm"
+            // )} - ${moment(eventInfo.event.end).format("HH:mm")}`;
             return (
               <DayView
                 time={formattedTime}
