@@ -161,7 +161,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         text: `${translate("contact_support.form_fields.request_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 min-w-[152px] w-fit !h-[40px] xMini:h-[50px] text-white hover:bg-none",
+          "rounded-lg px-4 min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
         loading,
       },
     },

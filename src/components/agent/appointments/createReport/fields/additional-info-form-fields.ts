@@ -193,7 +193,7 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 text: translate("content.details.back_button"),
                 inputType: "button",
                 className:
-                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:h-[50px] text-dark hover:bg-none",
+                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:!h-[50px] text-dark hover:bg-none",
                 onClick: () =>
                   onHandleBack &&
                   onHandleBack(AppointmentReportsFormStages.SERVICES),
@@ -207,7 +207,7 @@ export const additionalAgentReportFormField: GenerateAdditionalInfoReportFormFie
                 text: translate("pdf.submit"),
                 inputType: "submit",
                 className:
-                  "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:h-[50px] text-white hover:bg-none",
+                  "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
                 loading,
               },
             },

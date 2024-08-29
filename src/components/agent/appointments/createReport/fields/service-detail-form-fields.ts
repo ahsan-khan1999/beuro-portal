@@ -440,7 +440,7 @@ export const ReportServiceDetailsDescriptionFormField: GenerateReportServiceDesc
                       )}`,
                       inputType: "button",
                       className:
-                        "rounded-lg px-4 min-w-[152px] w-fit !h-[40px] xMini:h-[50px] text-white hover-bg-none",
+                        "rounded-lg px-4 min-w-[152px] w-fit !h-[40px] xMini:!h-[50px] text-white hover-bg-none",
                       onClick: () => append(serviceObject),
                     },
                   },
@@ -879,7 +879,7 @@ export const ReportDetailsServiceSubmitFormField: GenerateReportServiceActionFor
                 text: `${translate("common.back_button")}`,
                 inputType: "button",
                 className:
-                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:h-[50px] text-dark hover:bg-none",
+                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:!h-[50px] text-dark hover:bg-none",
                 onClick: () =>
                   onHandleBack &&
                   onHandleBack(AppointmentReportsFormStages.HOUSE_DETAILS),
@@ -893,7 +893,7 @@ export const ReportDetailsServiceSubmitFormField: GenerateReportServiceActionFor
                 text: `${translate("common.next_button")}`,
                 inputType: "submit",
                 className:
-                  "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:h-[50px] text-white hover:bg-none",
+                  "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
                 loading,
               },
             },

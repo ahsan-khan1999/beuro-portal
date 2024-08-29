@@ -4,12 +4,10 @@ import { useRouter } from "next/router";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 export interface ReportAdditionalDetailProps {
-  // isCompanyAppointment?: boolean;
   reportDetail: Report;
 }
 
 export const ReportAdditionalInfoDetail = ({
-  // isCompanyAppointment,
   reportDetail,
 }: ReportAdditionalDetailProps) => {
   const router = useRouter();

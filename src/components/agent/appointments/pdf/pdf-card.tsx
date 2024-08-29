@@ -120,14 +120,14 @@ export const AppointmentPdfCard = ({
                 {formatDateTimeToDate(appointmentDetails?.appointmentID?.date)}
               </span>
             </div>
-            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+            {/* <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[100px] w-fit">
                 {translate("appointments.detail_data.created_by")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
                 {appointmentDetails?.appointmentID?.agent?.fullName}
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
