@@ -20,6 +20,7 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { readImage } from "@/api/slices/imageSlice/image";
 
 export const useAppointmentsDetails = () => {
   const router = useRouter();
@@ -30,6 +31,15 @@ export const useAppointmentsDetails = () => {
   );
 
   const id = router.query.appointment;
+
+  useEffect(() => {
+    if (appointmentDetails?.id)
+      dispatch(
+        readImage({
+          params: { type: "leadID", id: appointmentDetails?.leadID?.id },
+        })
+      );
+  }, [appointmentDetails?.id]);
 
   useEffect(() => {
     if (id) {
@@ -73,9 +83,10 @@ export const useAppointmentsDetails = () => {
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
-
     dispatch(
-      readNotes({ params: { type: "lead", id: appointmentDetails?.id } })
+      readNotes({
+        params: { type: "lead", id: appointmentDetails?.leadID?.id },
+      })
     );
     dispatch(
       updateModalType({
@@ -99,7 +110,7 @@ export const useAppointmentsDetails = () => {
       updateModalType({
         type: ModalType.ADD_NOTE,
         data: {
-          id: id,
+          id: appointmentDetails?.leadID?.id,
           type: "lead",
           refID: refID,
           name: name,
@@ -244,7 +255,8 @@ export const useAppointmentsDetails = () => {
       <ImagesUploadOffer
         onClose={onClose}
         handleImageSlider={defaultUpdateModal}
-        type={"Appointment"}
+        type={"Lead"}
+        id={appointmentDetails?.leadID?.id}
       />
     ),
   };

@@ -288,7 +288,7 @@ const useLeads = () => {
           res.payload?.links?.length > 0
         ) {
           setCurrentPageRows((prev) =>
-            prev.map((lead) => {
+            prev?.map((lead) => {
               return lead.id === filteredLead?.id
                 ? { ...lead, isImageAdded: true }
                 : lead;

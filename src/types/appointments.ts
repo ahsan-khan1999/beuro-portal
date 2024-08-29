@@ -37,6 +37,8 @@ export interface Appointments {
     createdBy: User;
     desireDate: string;
     addressID: AddressID;
+    isNoteCreated: boolean;
+    isImageAdded: boolean;
   };
   agent: {
     id: string;
@@ -46,8 +48,6 @@ export interface Appointments {
   canton: string;
   appointmentStatus: string;
   createdAt: string;
-  isNoteCreated: boolean;
-  isImageAdded: boolean;
 }
 
 export interface Report {

@@ -60,6 +60,7 @@ export const Layout = ({ children }: MyComponentProp) => {
         className={`!fixed top-0 z-[999] bg-[#1E1E1E] w-screen h-screen bg-opacity-40 ${
           isDrawer ? "block" : "hidden"
         }`}
+        onClick={handleClose}
       >
         {isDrawer && (
           <motion.div

@@ -53,7 +53,7 @@ export const LeadsAddressMobileDetails = ({
                   <p className="text-[#656565] text-xs font-medium">
                     Description:
                   </p>
-                  <p className="text-[#4A4543] text-xs font-normal">
+                  <p className="text-[#4A4543] text-xs font-normal break-all">
                     {item?.description}
                   </p>
                 </div>

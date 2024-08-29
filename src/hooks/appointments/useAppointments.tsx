@@ -260,21 +260,25 @@ export const useAppointments = () => {
       dispatch(setAppointmentDetails(filteredAppointment[0]));
       dispatch(
         readNotes({
-          params: { type: "lead", id: filteredAppointment[0]?.id },
+          params: { type: "lead", id: filteredAppointment[0]?.leadID?.id },
         })
       ).then((res: any) => {
-        if (res.payload.Note?.length > 0) {
+        if (res?.payload?.Note?.length > 0) {
           setCurrentPageRows((prev) => {
-            const updatedAppointment = prev.map((item) => {
+            const updatedAppointment = prev?.map((item) => {
               if (item.id === filteredAppointment[0]?.id) {
                 const appointment: Appointments = {
                   ...item,
-                  isNoteCreated: true,
+                  leadID: {
+                    ...item.leadID,
+                    isNoteCreated: true,
+                  },
                 };
                 return appointment;
               }
               return item;
             });
+
             return updatedAppointment;
           });
         }
@@ -370,7 +374,7 @@ export const useAppointments = () => {
       dispatch(setAppointmentDetails(filteredAppointment));
       dispatch(
         readImage({
-          params: { type: "leadID", id: filteredAppointment?.id },
+          params: { type: "leadID", id: filteredAppointment?.leadID?.id },
         })
       ).then((res: any) => {
         if (
@@ -380,9 +384,15 @@ export const useAppointments = () => {
           res.payload?.links?.length > 0
         ) {
           setCurrentPageRows((prev) =>
-            prev.map((item) => {
+            prev?.map((item) => {
               return item.id === filteredAppointment?.id
-                ? { ...item, isImageAdded: true }
+                ? {
+                    ...item,
+                    leadID: {
+                      ...item.leadID,
+                      isImageAdded: true,
+                    },
+                  }
                 : item;
             })
           );
@@ -392,6 +402,7 @@ export const useAppointments = () => {
         updateModalType({
           type: ModalType.UPLOAD_IMAGE,
           data: {
+            id: filteredAppointment?.leadID?.id,
             refID: refID,
             name: name,
             heading: heading,

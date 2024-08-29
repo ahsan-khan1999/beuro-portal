@@ -13,10 +13,12 @@ const ImagesUploadOffer = ({
   onClose,
   handleImageSlider,
   type,
+  id
 }: {
   handleImageSlider: Function;
   onClose: () => void;
   type: string;
+  id?:string
 }) => {
   const {
     onSubmit,
@@ -37,7 +39,7 @@ const ImagesUploadOffer = ({
     handleImageDelete,
     loading,
     loadingGlobal,
-  } = useUploadImageOffer(handleImageSlider, type);
+  } = useUploadImageOffer(handleImageSlider, type, id);
   const { refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
   );

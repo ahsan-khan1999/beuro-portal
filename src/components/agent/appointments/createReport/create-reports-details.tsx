@@ -188,6 +188,15 @@ const CreateReportDetails = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
+  useEffect(() => {
+    if (tabType !== null) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [tabType]);
+
   return (
     <div>
       <div className="hidden xMini:flex border-y border-y-[#000] border-opacity-10 py-4 mb-6 items-center justify-center gap-x-4">
@@ -211,7 +220,7 @@ const CreateReportDetails = () => {
         ))}
       </div>
 
-      <div className="flex justify-between gap-x-4 mb-[18px] xMini:hidden">
+      <div className="flex justify-between gap-x-4 mb-[35px] xMini:hidden">
         {tabSection?.map((item, index) => (
           <MobileStepperTab
             isSelected={tabType === index}

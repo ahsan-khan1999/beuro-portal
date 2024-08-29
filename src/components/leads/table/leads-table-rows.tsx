@@ -58,9 +58,6 @@ export const LeadsTableRows = ({
     item: { label: itemsValue[index], value: item },
   }));
 
-  const isAppointment = user?.company?.isAppointment;
-  console.log(isAppointment);
-
   return (
     <div
       className={`overflow-y-visible ${
@@ -398,7 +395,7 @@ export const LeadsTableRows = ({
                   <div
                     className="py-3 flex justify-center items-center cursor-pointer"
                     onClick={handleReportPDF}
-                    title={translate("leads.table_headings.images")}
+                    title={translate("contracts.table_headings.pdf")}
                   >
                     <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
                       <svg

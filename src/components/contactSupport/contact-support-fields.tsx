@@ -16,7 +16,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid xMini:grid-cols-2 mlg:grid-cols-3 gap-x-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
+          "grid xMini:grid-cols-2 mlg:grid-cols-3 gap-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -55,7 +55,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
           },
           {
-            containerClass: "mb-0 mt-5 mlg:mt-0",
+            containerClass: "mb-0",
             label: {
               text: `${translate("contact_support.form_fields.phone_number")}`,
               htmlFor: "phoneNumber",
@@ -161,7 +161,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         text: `${translate("contact_support.form_fields.request_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
+          "rounded-lg px-4 min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
         loading,
       },
     },

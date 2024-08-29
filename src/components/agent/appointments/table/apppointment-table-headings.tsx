@@ -26,7 +26,7 @@ export const AppointmentTableHeadings = ({
                 {translate("appointments.table_headings.date")}
               </span>
               <span className="font-semibold text-base text-white">
-                {translate("appointments.table_headings.status")}
+                {translate("appointments.table_headings.canton")}
               </span>
               <span className="font-semibold text-base text-white">
                 {translate("common.actions")}
@@ -54,16 +54,14 @@ export const AppointmentTableHeadings = ({
             <span className="font-semibold text-base text-white ] mlg:hidden maxSize:block">
               {translate("appointments.table_headings.company_name")}
             </span>
-
             <span className="font-semibold text-base text-white mlg:hidden xMaxSize:block">
               {translate("appointments.table_headings.date")}
             </span>
             <span className="font-semibold text-base text-white mlg:hidden xLarge:block">
               {translate("appointments.table_headings.time")}
             </span>
-
             <span className="font-semibold text-base text-white">
-              {translate("appointments.table_headings.status")}
+              {translate("appointments.table_headings.canton")}
             </span>
             <span className="font-semibold text-base text-white">
               {translate("appointments.table_headings.offer_status")}
