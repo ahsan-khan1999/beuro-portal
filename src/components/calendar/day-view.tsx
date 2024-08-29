@@ -22,7 +22,7 @@ export const DayView = ({
   isMonthView,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
-    `flex flex-col gap-y-1 p-[6px] cursor-pointer`,
+    `flex flex-col gap-y-1 p-[6px] cursor-pointer h-full`,
     containerClassName
   );
 
