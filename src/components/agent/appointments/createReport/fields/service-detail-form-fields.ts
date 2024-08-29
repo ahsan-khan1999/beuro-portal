@@ -440,7 +440,7 @@ export const ReportServiceDetailsDescriptionFormField: GenerateReportServiceDesc
                       )}`,
                       inputType: "button",
                       className:
-                        "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                        "rounded-lg px-4 min-w-[152px] w-fit !h-[40px] xMini:h-[50px] text-white hover-bg-none",
                       onClick: () => append(serviceObject),
                     },
                   },
@@ -572,7 +572,7 @@ const generateServiceCalulationChildren = (
                     {
                       field: {
                         type: Field.div,
-                        className: "flex space-x-5",
+                        className: "flex space-x-2 xMini:space-x-5",
                         id: "div3",
                         children: [
                           {
@@ -591,7 +591,8 @@ const generateServiceCalulationChildren = (
                             },
                           },
                           {
-                            containerClass: "mb-0 min-w-[80px]",
+                            containerClass:
+                              "mb-0 min-w-[60px] xMini:min-w-[80px]",
                             field: {
                               type: Field.span,
                               className:
@@ -696,7 +697,7 @@ const generateServiceCalulationChildren = (
                       field: {
                         type: Field.div,
                         id: "div-field",
-                        className: "flex space-x-5",
+                        className: "flex space-x-2 xMini:space-x-5",
                         children: [
                           {
                             containerClass: "mb-0 px-0 mt-1",
@@ -752,7 +753,8 @@ const generateServiceCalulationChildren = (
                         id: "4",
                         children: [
                           {
-                            containerClass: "mb-1 min-w-[100px]",
+                            containerClass:
+                              "mb-1 min-w-[90px] xMini:min-w-[100px]",
                             field: {
                               type: Field.radio,
                               className:
@@ -863,7 +865,7 @@ export const ReportDetailsServiceSubmitFormField: GenerateReportServiceActionFor
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "pt-[55px] pb-5 px-5 rounded-b-lg bg-white",
+        containerClass: "pt-6 xMini:pt-[55px] pb-5 px-5 rounded-b-lg bg-white",
         field: {
           type: Field.div,
           id: "div-field",
@@ -877,7 +879,7 @@ export const ReportDetailsServiceSubmitFormField: GenerateReportServiceActionFor
                 text: `${translate("common.back_button")}`,
                 inputType: "button",
                 className:
-                  "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] min-w-[152px] w-fit h-[50px] text-black hover-bg-none",
+                  "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:h-[50px] text-dark hover:bg-none",
                 onClick: () =>
                   onHandleBack &&
                   onHandleBack(AppointmentReportsFormStages.HOUSE_DETAILS),
@@ -891,7 +893,7 @@ export const ReportDetailsServiceSubmitFormField: GenerateReportServiceActionFor
                 text: `${translate("common.next_button")}`,
                 inputType: "submit",
                 className:
-                  "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+                  "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:h-[50px] text-white hover:bg-none",
                 loading,
               },
             },

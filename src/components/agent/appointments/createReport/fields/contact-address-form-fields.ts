@@ -217,7 +217,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
               },
             },
             {
-              containerClass: "mt-8",
+              containerClass: "xMini:mt-8",
               field: {
                 type: Field.customCheckBox,
                 id: `address.${i}.parkingPermit`,
@@ -261,7 +261,7 @@ export const ReportContactSubmitFormField: GenerateContactReportFormField = (
               text: translate("content.details.cancel_button"),
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:h-[50px] text-dark hover:bg-none",
               onClick: OnClick,
             },
           },
@@ -273,7 +273,7 @@ export const ReportContactSubmitFormField: GenerateContactReportFormField = (
               text: translate("content.details.next_button"),
               inputType: "submit",
               className:
-                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
+                "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:h-[50px] text-white hover:bg-none",
               loading,
             },
           },

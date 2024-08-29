@@ -34,10 +34,10 @@ export const useCreateReportAddressDetails = ({
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { report, companyAppointment, appointmentId } = router.query;
   const { error, loading, appointmentDetails, reportDetails } = useAppSelector(
     (state) => state.appointment
   );
-  const { report, companyAppointment, appointmentId } = router.query;
 
   const handleCancel = () => {
     const pathname = companyAppointment

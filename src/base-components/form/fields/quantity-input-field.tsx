@@ -22,7 +22,7 @@ export const QuantityInputField = ({
   const [inputFocus, setInputFocus] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const defaultClasses = `border border-[#D0D5DD] rounded-[4px] max-w-[54px] h-[54px] !bg-white p-2 outline-none text-dark text-sm focus:border-primary`;
+  const defaultClasses = `border border-[#D0D5DD] rounded-[4px] max-w-[40px] h-[40px] !bg-white p-2 outline-none text-dark text-sm focus:border-primary`;
 
   const classes = combineClasses(defaultClasses, className);
 

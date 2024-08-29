@@ -28,7 +28,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-t-lg px-2 pt-3",
         children: [
           {
             field: {
@@ -122,7 +122,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg px-2 pb-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 px-2 pb-2",
         children: [
           {
             field: {
@@ -347,7 +347,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-t-lg px-2 pt-3",
         children: [
           {
             field: {
@@ -441,7 +441,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 p-2",
         children: [
           {
             field: {
@@ -741,7 +741,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-t-lg px-2 pt-3",
         children: [
           {
             field: {
@@ -835,7 +835,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 p-2",
         children: [
           {
             field: {
@@ -1207,7 +1207,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-t-lg px-2 pt-3",
         children: [
           {
             field: {
@@ -1301,7 +1301,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 p-2",
         children: [
           {
             field: {
@@ -1664,7 +1664,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-t-lg px-2 pt-3",
         children: [
           {
             field: {
@@ -1758,7 +1758,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 p-2",
         children: [
           {
             field: {
@@ -2035,7 +2035,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-t-lg px-2 pt-3",
         children: [
           {
             field: {
@@ -2129,7 +2129,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 p-2",
         children: [
           {
             field: {
@@ -2371,7 +2371,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-lg px-2 pt-3",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] rounded-t-lg px-2 pt-3",
         children: [
           {
             field: {
@@ -2465,7 +2465,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 rounded-lg p-2",
+          "grid grid-cols-1 md:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] md:gap-x-[71px] gap-y-2 p-2",
         children: [
           {
             field: {
@@ -2699,7 +2699,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               text: translate("content.details.back_button"),
               inputType: "button",
               className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[92px] w-fit h-[50px] text-dark hover:bg-none",
+                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:h-[50px] text-dark hover:bg-none",
               onClick: () =>
                 onHandleBack &&
                 onHandleBack(AppointmentReportsFormStages.CONTACT_AND_ADDRESS),
@@ -2713,7 +2713,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               text: translate("content.details.next_button"),
               inputType: "submit",
               className:
-                "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
+                "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:h-[50px] text-white hover:bg-none",
               loading,
             },
           },

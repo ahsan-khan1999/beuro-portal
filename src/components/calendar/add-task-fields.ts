@@ -94,6 +94,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             field: {
               type: Field.span,
               id: "span-field",
+              containerClassName: "font-semibold",
               text: `${translate("calendar.all_day_event")}`,
             },
           },
@@ -152,7 +153,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             label: {
               text: `${translate("calendar.select_color")}`,
               htmlFor: `colour`,
-              className: "mb-3",
+              className: "mb-3 font-semibold",
             },
             field: {
               type: Field.colourSelectField,
@@ -195,6 +196,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
                     type: Field.iconLabel,
                     id: "remainder",
                     name: "remainder",
+                    textClassName: "font-semibold",
                     text:
                       (isRemainder && alertTime) || alertTime
                         ? `${formatAlertTime(alertTime)} `
@@ -242,10 +244,6 @@ export const addTaskFormField: GenerateAddTaskFormField = (
               name: "alertTime",
               value: isRemainder && alertTime ? alertTime : 15,
               options: [
-                // {
-                //   label: "Event Time",
-                //   value: 0,
-                // },
                 {
                   label: translate("common.minutes"),
                   value: 5,
@@ -298,6 +296,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
               type: Field.iconLabel,
               id: "address",
               name: "address",
+              textClassName: "font-semibold",
               text: translate("calendar.address"),
               icon: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
   <g clip-path="url(#clip0_2433_15842)">

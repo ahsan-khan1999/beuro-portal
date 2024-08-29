@@ -5,7 +5,6 @@ import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 
 export interface ApointmentsTableProps {
@@ -119,8 +118,9 @@ export const AppointmentTableRows = ({
                     <span className="py-4 hidden xAir:block">
                       {formatDateTimeToDate(item.date)}
                     </span>
+                    <span className="py-4 truncate">{item?.canton}</span>
 
-                    <div
+                    {/* <div
                       className="py-4 flex items-center"
                       onClick={(e) => e.stopPropagation()}
                     >
@@ -155,7 +155,7 @@ export const AppointmentTableRows = ({
                         }
                         isContract={true}
                       />
-                    </div>
+                    </div> */}
 
                     <div
                       className="py-4 flex items-center"
@@ -228,7 +228,9 @@ export const AppointmentTableRows = ({
                     </span>
                   </div>
 
-                  <div
+                  <span className="py-4 truncate">{item?.canton}</span>
+
+                  {/* <div
                     className="py-4 flex items-center"
                     onClick={(e) => e.stopPropagation()}
                   >
@@ -263,7 +265,7 @@ export const AppointmentTableRows = ({
                       }
                       isContract={true}
                     />
-                  </div>
+                  </div> */}
 
                   <span className="py-4 flex justify-center items-center">
                     <div

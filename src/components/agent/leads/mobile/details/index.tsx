@@ -37,6 +37,21 @@ export const LeadsMobileDetailData = ({
   const [tabType, setTabType] = useState<number | null>(null);
   const content = leadDetails?.requiredService as ContentTableRowTypes;
 
+  const flexibility =
+    leadDetails?.flexibility !== undefined && leadDetails?.flexibility !== ""
+      ? `${
+          leadDetails?.flexibility === "0"
+            ? translate("common.flexible")
+            : leadDetails?.flexibility
+        } ${
+          leadDetails?.flexibility !== "0"
+            ? leadDetails?.flexibility === "1"
+              ? translate("common.day")
+              : translate("common.days")
+            : ""
+        }`
+      : null;
+
   const serviceDetail: ServiceMobileDetailProps[] = [
     {
       label: `${translate("leads.service_details.required_service")}`,
@@ -48,12 +63,7 @@ export const LeadsMobileDetailData = ({
     },
     {
       label: `${translate("leads.service_details.flexibility")}`,
-      value: leadDetails?.flexibility,
-      // leadDetails?.flexibility == "0"
-      //   ? ""
-      //   : leadDetails?.flexibility == "1"
-      //   ? translate("common.day")
-      //   : translate("common.days"),
+      value: flexibility,
     },
     {
       label: `${translate("leads.service_details.availability")}`,
@@ -176,9 +186,9 @@ export const LeadsMobileDetailData = ({
           <CustomLoader />
         </div>
       ) : (
-        <div className={`flex flex-col mt-5 gap-y-2`}>
-          {tabSection.map((item, index) => (
-            <React.Fragment key={index}>
+        <div className="flex flex-col space-y-2 mt-5">
+          {tabSection?.map((item, index) => (
+            <div key={index} className="flex flex-col -space-y-2">
               <MobileDetailTab
                 isSelected={tabType === item.type}
                 setTabType={() =>
@@ -190,8 +200,10 @@ export const LeadsMobileDetailData = ({
                 selectedTab={item.type}
                 backgroundColor={item.backgroundColor}
               />
-              {tabType === item.type && <>{renderComponent(item.type)}</>}
-            </React.Fragment>
+              {tabType === item.type && (
+                <div key={item.type}>{renderComponent(item?.type)}</div>
+              )}
+            </div>
           ))}
         </div>
       )}

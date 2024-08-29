@@ -22,6 +22,13 @@ export const AppointmentTableRecordCard = ({
   return (
     <div className="flex flex-col gap-y-5">
       {dataToAdd.map((item, index) => {
+        const handleReportDetail = () => {
+          router.push({
+            pathname: "/agent/appointments/report-detail",
+            query: { ...router.query, report: item?.id },
+          });
+        };
+
         const handlePdfPreview = () => {
           router.push({
             pathname: `/agent/appointments/pdf`,
@@ -30,13 +37,6 @@ export const AppointmentTableRecordCard = ({
         };
 
         const handleAppointmentRoute = () => {
-          router.push({
-            pathname: "/agent/appointments/report-detail",
-            query: { ...router.query, report: item?.id },
-          });
-        };
-
-        const handleReportDetail = () => {
           router.push({
             pathname: "/agent/appointments/details",
             query: {
@@ -50,7 +50,11 @@ export const AppointmentTableRecordCard = ({
           <div
             className="pl-5 pb-5 pt-[14px] pr-[14px] bg-white rounded-lg cursor-pointer"
             key={index}
-            onClick={handleAppointmentRoute}
+            onClick={
+              item?.isReportSubmitted
+                ? handleReportDetail
+                : handleAppointmentRoute
+            }
           >
             <div className="flex flex-col gap-y-1">
               <div className="flex items-start justify-between gap-x-3">
@@ -58,9 +62,9 @@ export const AppointmentTableRecordCard = ({
                   <UserIcon />
                   <div className="flex flex-col gap-y-1">
                     <div className="flex items-center gap-x-2">
-                      <p className="p-1 rounded-[4px] text-[10px] font-medium text-white text-center bg-[#FF376F]">
+                      {/* <p className="p-1 rounded-[4px] text-[10px] font-medium text-white text-center bg-[#FF376F]">
                         {item?.leadID?.refID}
-                      </p>
+                      </p> */}
                       <p className="p-1 rounded-[4px] text-[10px] font-medium text-white text-center bg-primary">
                         {item?.leadID?.refID}
                       </p>
@@ -99,7 +103,11 @@ export const AppointmentTableRecordCard = ({
                   ) : (
                     <Button
                       inputType="button"
-                      onClick={handleReportDetail}
+                      onClick={
+                        item?.isReportSubmitted
+                          ? handleReportDetail
+                          : handleAppointmentRoute
+                      }
                       className="!h-fit py-1 px-1 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
                       text={translate("appointments.sub_report")}
                       id="view reports"
@@ -118,7 +126,7 @@ export const AppointmentTableRecordCard = ({
                     </p>
                   </div>
                 )}
-                <div className="flex justify-between">
+                <div className="flex justify-between gap-x-14 truncate">
                   <div className="flex items-center gap-x-[14px]">
                     <DateIcon />
                     <p className="text-[#616161] font-normal text-sm">
@@ -127,7 +135,7 @@ export const AppointmentTableRecordCard = ({
                   </div>
                   <div className="flex items-center gap-x-[14px]">
                     <LocationIcon />
-                    <p className="text-[#616161] font-normal text-sm">
+                    <p className="text-[#616161] font-normal text-sm truncate">
                       {item?.canton}
                     </p>
                   </div>
