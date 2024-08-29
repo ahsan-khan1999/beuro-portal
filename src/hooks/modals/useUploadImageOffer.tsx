@@ -10,7 +10,8 @@ import { Attachement } from "@/types/global";
 
 export const useUploadImageOffer = (
   handleImageSlider: Function,
-  type: string
+  type: string,
+  id?: string
 ) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -143,7 +144,7 @@ export const useUploadImageOffer = (
         links: formatLinks,
         attachments: formatAttachments,
         videos: formatVideos,
-        id: leadDetails?.id,
+        id: id ? id : leadDetails?.id,
         type: "leadID",
       };
 

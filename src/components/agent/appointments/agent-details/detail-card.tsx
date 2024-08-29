@@ -240,30 +240,6 @@ export const AppointmentsDetailCard = ({
             <div className="hidden xMini:flex justify-between gap-x-3 items-center mt-2 md:mt-0">
               <div className="flex items-center gap-[11px]">
                 <span className="font-normal text-[#848484] text-sm mlg:text-base">
-                  {translate("offers.card_content.notes")}:
-                </span>
-
-                <span
-                  className="cursor-pointer"
-                  onClick={(e) =>
-                    handleNotes(
-                      appointmentDetails?.id,
-                      appointmentDetails?.leadID?.refID,
-                      name,
-                      heading,
-                      e
-                    )
-                  }
-                >
-                  <WriteIcon
-                    pathClass={
-                      appointmentDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
-                    }
-                  />
-                </span>
-              </div>
-              <div className="flex items-center gap-[11px]">
-                <span className="font-normal text-[#848484] text-sm mlg:text-base">
                   {translate("offers.card_content.images")}:
                 </span>
 
@@ -281,7 +257,35 @@ export const AppointmentsDetailCard = ({
                 >
                   <ImageUploadIcon
                     pathClass={
-                      appointmentDetails?.isImageAdded ? "#FF0000" : "#4A13E7"
+                      appointmentDetails?.leadID?.isImageAdded
+                        ? "#FF0000"
+                        : "#4A13E7"
+                    }
+                  />
+                </span>
+              </div>
+              <div className="flex items-center gap-[11px]">
+                <span className="font-normal text-[#848484] text-sm mlg:text-base">
+                  {translate("offers.card_content.notes")}:
+                </span>
+
+                <span
+                  className="cursor-pointer"
+                  onClick={(e) =>
+                    handleNotes(
+                      appointmentDetails?.id,
+                      appointmentDetails?.leadID?.refID,
+                      name,
+                      heading,
+                      e
+                    )
+                  }
+                >
+                  <WriteIcon
+                    pathClass={
+                      appointmentDetails?.leadID?.isNoteCreated
+                        ? "#FF0000"
+                        : "#4A13E7"
                     }
                   />
                 </span>

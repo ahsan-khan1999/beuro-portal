@@ -8,7 +8,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { Attachement } from "@/types/global";
 
-export const useUploadImage = (handleImageSlider: Function) => {
+export const useUploadImage = (handleImageSlider: Function, id?: string) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
@@ -159,7 +159,7 @@ export const useUploadImage = (handleImageSlider: Function) => {
       links: formatLinks,
       attachments: formatAttachments,
       videos: formatVideos,
-      id: leadDetails?.id,
+      id: id ? id : leadDetails?.id,
       type: "leadID",
     };
 
@@ -168,7 +168,6 @@ export const useUploadImage = (handleImageSlider: Function) => {
     );
 
     if (response?.payload) handleImageSlider();
-    // else handleOnClose();
   };
 
   useEffect(() => {
