@@ -15,7 +15,7 @@ interface ContractState {
   lastPage: number;
   totalCount: number;
   contractDetails: contractTableTypes;
-  task: Tasks[];
+  task: Task[];
   taskDetail: Task;
 }
 

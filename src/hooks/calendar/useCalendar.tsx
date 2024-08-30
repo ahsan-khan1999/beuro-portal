@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
@@ -14,13 +14,16 @@ import {
   setContractTask,
   setContractTaskDetails,
 } from "@/api/slices/contract/contractSlice";
-import { Tasks } from "@/types/contract";
+import { Task, Tasks } from "@/types/contract";
 import { ContractTaskDetail } from "@/base-components/ui/modals1/ContractTaskDetail";
 import { CustomerPromiseActionType } from "@/types/company";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import { CalendarRemainderAlert } from "@/base-components/ui/modals1/CalendarRemainderAlert";
+import moment from "moment";
 
 export const useCalendar = () => {
   const { loading, task } = useAppSelector((state) => state.contract);
+  // const [reminderEvent, setReminderEvent] = useState<Task | null>(null);
 
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
@@ -51,6 +54,25 @@ export const useCalendar = () => {
       }))
     );
   }, [task]);
+
+  // useEffect(() => {
+  //   const now = moment();
+
+  //   task?.forEach((task: Task) => {
+  //     task.date?.forEach((dateRange) => {
+  //       const eventStart = moment(dateRange.startDate);
+  //       const reminderTime = task.alertTime || 15; 
+
+  //       if (
+  //         eventStart.diff(now, "minutes") <= reminderTime &&
+  //         eventStart.diff(now, "minutes") > 0
+  //       ) {
+  //         setReminderEvent(task);
+  //         dispatch(updateModalType({ type: ModalType.TASK_REMAINDER }));
+  //       }
+  //     });
+  //   });
+  // }, [task, dispatch]);
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -160,7 +182,6 @@ export const useCalendar = () => {
         onEditTask={handleUpdateTask}
       />
     ),
-
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
@@ -169,6 +190,12 @@ export const useCalendar = () => {
         loading={loading}
       />
     ),
+    // [ModalType.TASK_REMAINDER]: (
+    //   <CalendarRemainderAlert
+    //     onClose={onClose}
+    //     remainderAlert={reminderEvent}
+    //   />
+    // ),
   };
 
   const renderModal = () => {
