@@ -9,7 +9,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function AppointmentsFilter({
   filter,
@@ -168,10 +167,6 @@ export default function AppointmentsFilter({
       return updatedFilter;
     });
   };
-
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">

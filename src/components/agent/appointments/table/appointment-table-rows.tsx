@@ -12,12 +12,13 @@ export interface ApointmentsTableProps {
   onStatusChange: (id: string, status: string, type: string) => void;
   onAppointmentCreate: (id: string) => void;
   isAgent?: boolean;
-  handleAddNote: (
+  handleNotes: (
     id: string,
     refId: string,
     name: string,
     heading: string,
-    e: React.MouseEvent<HTMLSpanElement>
+    e: React.MouseEvent<HTMLSpanElement>,
+    leadId?: string
   ) => void;
   handleImageUpload: (
     id: string,
@@ -33,7 +34,7 @@ export const AppointmentTableRows = ({
   onStatusChange,
   onAppointmentCreate,
   isAgent,
-  handleAddNote,
+  handleNotes,
   handleImageUpload,
 }: ApointmentsTableProps) => {
   const router = useRouter();
@@ -347,12 +348,13 @@ export const AppointmentTableRows = ({
                 <div
                   className="py-3 hidden maxLarge:flex justify-center items-center cursor-pointer"
                   onClick={(e) =>
-                    handleAddNote(
+                    handleNotes(
                       item?.id,
                       item?.leadID?.refID,
                       name,
                       heading,
-                      e
+                      e,
+                      item?.leadID?.id
                     )
                   }
                   title={translate("leads.table_headings.note")}

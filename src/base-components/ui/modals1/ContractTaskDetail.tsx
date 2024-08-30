@@ -61,6 +61,13 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
+        <p
+          style={{ color: `${taskDetail.colour || "#4A13E7"}` }}
+          className="text-sm font-normal ml-5"
+        >
+          {taskDetail?.type}
+        </p>
+
         <div className="flex items-start justify-between my-5">
           <div className="ml-5 flex flex-col gap-y-2">
             {firstDateRange?.startDate && (
@@ -104,14 +111,23 @@ export const ContractTaskDetail = ({
         </div>
 
         <hr className="opacity-30 -mx-[10px]" />
-        {taskDetail?.alertTime && (
-          <div className="flex items-center gap-x-2 mb-3 mt-[18px]">
-            <CalendarAlertIcon />
-            <p className="text-sm font-normal text-[#2A2E3A]">
-              {formatAlertTime(taskDetail.alertTime)}
-            </p>
-          </div>
-        )}
+        <div className="flex items-center justify-between">
+          {taskDetail?.alertTime && (
+            <div className="flex items-center gap-x-2 mb-3 mt-[18px]">
+              <CalendarAlertIcon />
+              <p className="text-sm font-normal text-[#2A2E3A]">
+                {formatAlertTime(taskDetail.alertTime)}
+              </p>
+            </div>
+          )}
+
+          {/* <span
+            style={{ color: `${taskDetail.colour || "#4A13E7"}` }}
+            className="text-sm font-normal"
+          >
+            {taskDetail?.type}
+          </span> */}
+        </div>
         {taskDetail?.note && (
           <div className="flex items-center gap-x-2 max-h-[300px] overflow-y-auto">
             <CalendarNoteIcon />

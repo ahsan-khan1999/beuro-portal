@@ -9,7 +9,6 @@ import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function ContractFilters({
   filter,
@@ -167,9 +166,6 @@ export default function ContractFilters({
   };
   3;
 
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
 
   return (
     <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">

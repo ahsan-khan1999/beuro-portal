@@ -1429,6 +1429,7 @@
     "add_note_modal": {
       "heading": "Notizen hinzufügen",
       "label": "Notiz Titel",
+      "description_title":"Hinweis Beschreibung",
       "button": "Speichern"
     },
     "images_modal": {

@@ -9,7 +9,6 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import InvoicesFilter from "@/base-components/filter/invoices-filter";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function InvoicesFilters({
   filter,
@@ -178,9 +177,6 @@ export default function InvoicesFilters({
     setInputValue(textValue || "");
   }, [router.query.text]);
 
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">

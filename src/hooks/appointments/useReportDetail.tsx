@@ -26,7 +26,6 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-
 export const useReportDetails = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -136,12 +135,15 @@ export const useReportDetails = () => {
     e?.stopPropagation();
 
     dispatch(
-      readNotes({ params: { type: "lead", id: appointmentDetails?.id } })
+      readNotes({
+        params: { type: "lead", id: appointmentDetails?.leadID?.id },
+      })
     );
     dispatch(
       updateModalType({
         type: ModalType.EXISTING_NOTES,
         data: {
+          id: appointmentDetails?.leadID?.id,
           refID: refID,
           name: name,
           heading: heading,
@@ -160,7 +162,7 @@ export const useReportDetails = () => {
       updateModalType({
         type: ModalType.ADD_NOTE,
         data: {
-          id: id,
+          id: appointmentDetails?.leadID?.id,
           type: "lead",
           refID: refID,
           name: name,
@@ -211,6 +213,7 @@ export const useReportDetails = () => {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
+          id: appointmentDetails?.leadID?.id,
           refID: refID,
           name: name,
           heading: heading,
@@ -283,7 +286,7 @@ export const useReportDetails = () => {
       <ImagesUploadOffer
         onClose={onClose}
         handleImageSlider={defaultUpdateModal}
-        type={"Appointment"}
+        type={"Lead"}
       />
     ),
   };
@@ -291,6 +294,8 @@ export const useReportDetails = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
+
 
   return {
     router,

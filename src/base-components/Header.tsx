@@ -10,7 +10,10 @@ import logo from "@/assets/svgs/logo.svg";
 import { logout } from "@/utils/auth.util";
 import { useTranslation } from "next-i18next";
 import { logoutUser } from "@/api/slices/authSlice/auth";
-import { readSystemSettings } from "@/api/slices/settingSlice/settings";
+import {
+  readNoteSettings,
+  readSystemSettings,
+} from "@/api/slices/settingSlice/settings";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 import { readFollowUp } from "@/api/slices/followUp/followUp";
@@ -58,6 +61,10 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
   useEffect(() => {
     if (user?.role === "Agent" && !systemSettings) {
       dispatch(readSystemSettings());
+    }
+
+    if (user && user.role !== "Admin") {
+      dispatch(readNoteSettings());
     }
 
     if (
