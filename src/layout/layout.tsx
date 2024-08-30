@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { updateCurrentLanguage } from "@/api/slices/globalSlice/global";
 import { MobileHeader } from "@/base-components/mobile-header";
 import { motion } from "framer-motion";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export const Layout = ({ children }: MyComponentProp) => {
   const { user } = useAppSelector((state) => state.auth);
@@ -25,10 +24,6 @@ export const Layout = ({ children }: MyComponentProp) => {
   useEffect(() => {
     dispatch(updateCurrentLanguage(locale));
   }, [locale]);
-
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width:1100px)");
