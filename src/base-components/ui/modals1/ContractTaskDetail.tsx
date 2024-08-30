@@ -9,6 +9,7 @@ import { CalendarDeleteIcon } from "@/assets/svgs/components/calendar-delete-ico
 import addressLocationIcon from "@/assets/pngs/address-location-icon.png";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { Button } from "../button/button";
 export interface ContractTaskDetailProps {
   onDelete: (id: string) => void;
   onEditTask: (id: string) => void;
@@ -36,10 +37,10 @@ export const ContractTaskDetail = ({
     "day"
   );
 
-  // const handlePDFPreview = () => {
-  //   const pdfRoute = `/contract/pdf-preview?offerID=${taskDetail?.id}&isCalendar=true`;
-  //   window.open(pdfRoute, "_blank");
-  // };
+  const handlePDFPreview = () => {
+    const pdfRoute = `/contract/pdf-preview?offerID=${taskDetail?.contractID?.id}&isCalendar=true`;
+    window.open(pdfRoute, "_blank");
+  };
 
   return (
     <BaseModal
@@ -90,14 +91,16 @@ export const ContractTaskDetail = ({
             )}
           </div>
 
-          {/* <Button
-            onClick={handlePDFPreview}
-            className="!h-fit py-2 px-2 xMini:px-4 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
-            text={translate("invoice.invoice_created_modal.button")}
-            id="preview PDF"
-            inputType="button"
-            iconAlt="button"
-          /> */}
+          {taskDetail?.contractID && (
+            <Button
+              onClick={handlePDFPreview}
+              className="!h-fit py-2 px-2 xMini:px-4 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
+              text={translate("invoice.invoice_created_modal.button")}
+              id="preview PDF"
+              inputType="button"
+              iconAlt="button"
+            />
+          )}
         </div>
 
         <hr className="opacity-30 -mx-[10px]" />

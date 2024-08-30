@@ -1,5 +1,4 @@
 import { CalendarDatePickerProps } from "@/types";
-import { formatDateString } from "@/utils/functions";
 import { combineClasses } from "@/utils/utility";
 import moment from "moment";
 import { useState, useRef } from "react";
@@ -20,7 +19,7 @@ export const CalendarDatePickerField = ({
   const [formattedDate, setFormattedDate] = useState(
     value
       ? moment(value).format(
-          dateType === "datetime-local" ? "MM-DD-YYYY hh:mm" : "MM-DD-YYYY"
+          dateType === "datetime-local" ? "YYYY-MM-DDTHH:mm" : "YYYY-MM-DD"
         )
       : ""
   );
@@ -82,7 +81,7 @@ export const CalendarDatePickerField = ({
 
       <div className="flex flex-col gap-y-1">
         <span className="text-xs text-[#7A7A7A] font-medium">
-          {displayDate || translate("calendar.select_date")}
+          {displayDate || "Select Date"}
         </span>
         {dateType === "datetime-local" && (
           <span className="text-sm font-medium text-[#3C3C3C]">
@@ -93,7 +92,7 @@ export const CalendarDatePickerField = ({
 
       <input
         type={dateType}
-        defaultValue={value && formatDateString(value)}
+        defaultValue={formattedDate} // Ensure this is in YYYY-MM-DDTHH:mm format
         id={id}
         {...register(name)}
         min={min}
