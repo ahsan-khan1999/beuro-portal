@@ -12,6 +12,7 @@ export const AppointmentTableFunctions = ({
   isAgent,
 }: FiltersComponentProps) => {
   const { t: translate } = useTranslation();
+  
 
   return (
     <div

@@ -251,7 +251,8 @@ export const useAppointments = () => {
     refID?: string,
     name?: string,
     heading?: string,
-    e?: React.MouseEvent<HTMLSpanElement>
+    e?: React.MouseEvent<HTMLSpanElement>,
+    leadId?: string
   ) => {
     e?.stopPropagation();
 
@@ -287,6 +288,7 @@ export const useAppointments = () => {
         updateModalType({
           type: ModalType.EXISTING_NOTES,
           data: {
+            id: leadId,
             refID: refID,
             name: name,
             heading: heading,
@@ -514,5 +516,6 @@ export const useAppointments = () => {
     handleNotes,
     handleDeleteNote,
     handleImageUpload,
+    dispatch
   };
 };

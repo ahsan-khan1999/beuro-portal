@@ -4,11 +4,8 @@ import delIcon from "@/assets/pngs/address_del_icon.png";
 import editIcon from "@/assets/pngs/address_edit_icon.png";
 import Image from "next/image";
 import { useAppDispatch } from "@/hooks/useRedux";
-import { useEffect, useState } from "react";
-import {
-  NoteSetting,
-  readNoteSettings,
-} from "@/api/slices/settingSlice/settings";
+import { useState } from "react";
+import { NoteSetting } from "@/api/slices/settingSlice/settings";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { useTranslation } from "next-i18next";
@@ -39,10 +36,6 @@ export const NotesDetailCard = ({
   const handleDescription = (index: number) => {
     setOpenNoteIndex(openNoteIndex === index ? null : index);
   };
-
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
 
   const reversedNoteSettings = noteSettings?.slice().reverse() || [];
 

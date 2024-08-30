@@ -4,8 +4,6 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useEffect, useMemo, useState } from "react";
 import { getFileNameFromUrl } from "@/utils/utility";
 import { createImage } from "@/api/slices/imageSlice/image";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import { ModalType } from "@/enums/ui";
 import { Attachement } from "@/types/global";
 
 export const useUploadImage = (handleImageSlider: Function, id?: string) => {
@@ -92,30 +90,8 @@ export const useUploadImage = (handleImageSlider: Function, id?: string) => {
     setEnteredLinks({ ...enteredLinks, video: updatedAttachements });
   };
 
-  // const schema = generateImageValidation(translate);
-  // const {
-  //   handleSubmit,
-  //   control,
-  //   setError,
-  //   setValue,
-  //   formState: { errors },
-  // } = useForm({
-  //   resolver: yupResolver(schema),
-  // });
-
-  // const fields = ImageUploadFormField(
-  //   loading,
-  //   control as Control<any>,
-  //   handleImageSlider,
-  //   setValue
-  // );
-
-  const handleOnClose = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-  };
-
   useMemo(() => {
-    if (leadDetails?.id) {
+    if (leadDetails?.id || id) {
       const formatImages = images?.images?.map((item: string) => ({
         name: getFileNameFromUrl(item),
         value: item,
@@ -128,6 +104,7 @@ export const useUploadImage = (handleImageSlider: Function, id?: string) => {
         name: getFileNameFromUrl(item),
         value: item,
       }));
+
       const formatLinks = images?.links;
 
       setEnteredLinks({
@@ -137,7 +114,7 @@ export const useUploadImage = (handleImageSlider: Function, id?: string) => {
         video: formatVideos,
       });
     }
-  }, [leadDetails?.id, images]);
+  }, [id, leadDetails?.id, images]);
 
   const onSubmit = async () => {
     // const filteredList = Object.values(data)

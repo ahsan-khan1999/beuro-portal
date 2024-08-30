@@ -296,7 +296,7 @@ const LeadsDetailsCardData = ({
           </span>
         </div>
         {/* {isAgent && ( */}
-        <div className="hidden xMini:flex justify-between gap-x-3 items-center mt-2 md:mt-0">
+        <div className="hidden xMini:flex gap-x-8 items-center mt-2 md:mt-0">
           <div className="flex items-center gap-[11px]">
             <span className="font-normal text-[#848484] text-sm mlg:text-base">
               {translate("offers.card_content.images")}:

@@ -6,7 +6,6 @@ import { formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
-import dummyAgent from "@/assets/pngs/dummyAgent.png";
 import { useRouter } from "next/router";
 
 export interface ApointmentsTableProps {
@@ -26,13 +25,6 @@ export interface ApointmentsTableProps {
     //   fullName: string;
     // }
   ) => void;
-  handleAddNote: (
-    id: string,
-    refId: string,
-    name: string,
-    heading: string,
-    e: React.MouseEvent<HTMLSpanElement>
-  ) => void;
   handleImageUpload: (
     id: string,
     refId: string,
@@ -40,13 +32,21 @@ export interface ApointmentsTableProps {
     heading: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => void;
+  handleNotes: (
+    id: string,
+    refId: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>,
+    leadId?: string
+  ) => void;
 }
 
 export const AppointmentTableRows = ({
   dataToAdd,
   onStatusChange,
   onAppointmentSchedule,
-  handleAddNote,
+  handleNotes,
   handleImageUpload,
 }: ApointmentsTableProps) => {
   const router = useRouter();
@@ -71,11 +71,11 @@ export const AppointmentTableRows = ({
       }`}
     >
       {dataToAdd?.map((item, index) => {
-        const imageUrl = item?.agent?.picture
-          ? item.agent.picture.startsWith("http")
-            ? item.agent.picture
-            : `/${item.agent.picture}`
-          : dummyAgent;
+        // const imageUrl = item?.agent?.picture
+        //   ? item.agent.picture.startsWith("http")
+        //     ? item.agent.picture
+        //     : `/${item.agent.picture}`
+        //   : dummyAgent;
 
         const handleViewReport = () => {
           router.push({
@@ -97,10 +97,12 @@ export const AppointmentTableRows = ({
 
         const customerType = item?.leadID?.customerDetail
           ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
         const name =
           customerType === 1
             ? item?.leadID?.customerDetail?.companyName
             : item?.leadID?.customerDetail?.fullName;
+
         const heading =
           customerType === 1
             ? translate("common.company_name")
@@ -120,21 +122,31 @@ export const AppointmentTableRows = ({
               >
                 <span className="py-4 truncate">{item?.leadID?.refID}</span>
                 <div className="flex items-center gap-x-1">
-                  {/* {(item?.customerDetail
+                  {/* {(item?.leadID?.customerDetail
                     ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
                   1 ? (
                     <span className="py-4 truncate text-lg font-medium text-primary">
-                      {item?.customerDetail?.companyName}
+                      {item?.leadID?.customerDetail.companyName}
                     </span>
                   ) : (
                     <span className="py-4 truncate">
-                      {item?.customerDetail?.fullName}
+                      {item?.leadID?.customerDetail.fullName}
                     </span>
                   )} */}
                   {item?.leadID?.refID}
                 </div>
                 <span className="py-4 truncate mlg:hidden xlg:block">
-                  {item.leadID?.customerDetail?.fullName}
+                  {(item?.leadID?.customerDetail
+                    ?.customerType as keyof (typeof staticEnums)["CustomerType"]) ===
+                  1 ? (
+                    <span className="py-4 truncate text-lg font-medium text-primary">
+                      {item?.leadID?.customerDetail.companyName}
+                    </span>
+                  ) : (
+                    <span className="py-4 truncate">
+                      {item?.leadID?.customerDetail.fullName}
+                    </span>
+                  )}
                 </span>
                 <span className="py-4 mlg:hidden xMaxSize:block">
                   {formatDateTimeToDate(item.date)}
@@ -261,7 +273,14 @@ export const AppointmentTableRows = ({
               <div
                 className="py-3 hidden xLarge:flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
-                  handleAddNote(item?.id, item?.leadID?.refID, name, heading, e)
+                  handleNotes(
+                    item?.id,
+                    item?.leadID?.refID,
+                    name,
+                    heading,
+                    e,
+                    item?.leadID?.id
+                  )
                 }
                 title={translate("leads.table_headings.note")}
               >

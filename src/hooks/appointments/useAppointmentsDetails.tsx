@@ -75,6 +75,8 @@ export const useAppointmentsDetails = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
+  console.log(appointmentDetails?.leadID?.id, "appointmentDetails?.leadID?.id");
+
   const handleNotes = (
     id: string,
     refID?: string,
@@ -92,6 +94,7 @@ export const useAppointmentsDetails = () => {
       updateModalType({
         type: ModalType.EXISTING_NOTES,
         data: {
+          id: appointmentDetails?.leadID?.id,
           refID: refID,
           name: name,
           heading: heading,
@@ -161,6 +164,7 @@ export const useAppointmentsDetails = () => {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
+          id: appointmentDetails?.leadID?.id,
           refID: refID,
           name: name,
           heading: heading,
@@ -256,7 +260,6 @@ export const useAppointmentsDetails = () => {
         onClose={onClose}
         handleImageSlider={defaultUpdateModal}
         type={"Lead"}
-        id={appointmentDetails?.leadID?.id}
       />
     ),
   };

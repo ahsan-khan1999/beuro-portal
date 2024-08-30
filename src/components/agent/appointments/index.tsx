@@ -26,6 +26,7 @@ export default function AgentAppointments() {
     totalCount,
     handleNotes,
     handleImageUpload,
+    dispatch,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -33,7 +34,7 @@ export default function AgentAppointments() {
       dataToAdd={currentPageRows}
       onStatusChange={handleStatusUpdate}
       onAppointmentCreate={handleAppointmentCreate}
-      handleAddNote={handleNotes}
+      handleNotes={handleNotes}
       handleImageUpload={handleImageUpload}
       isAgent={true}
     />,

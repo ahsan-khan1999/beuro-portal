@@ -11,7 +11,6 @@ import { Button } from "@/base-components/ui/button/button";
 import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 
 export default function LeadsFilter({
@@ -177,9 +176,6 @@ export default function LeadsFilter({
     });
   };
 
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
 
   return (
     <div>

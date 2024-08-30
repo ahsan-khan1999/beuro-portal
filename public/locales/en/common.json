@@ -1437,6 +1437,7 @@
     "add_note_modal": {
       "heading": "Add Notes",
       "label": "Note Title",
+      "description_title":"Note Description",
       "button": "Save"
     },
     "images_modal": {

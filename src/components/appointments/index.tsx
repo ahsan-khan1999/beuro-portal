@@ -34,7 +34,7 @@ export default function Appointments() {
       dataToAdd={currentPageRows}
       onStatusChange={handleStatusUpdate}
       onAppointmentSchedule={handleScheduleAppointments}
-      handleAddNote={handleNotes}
+      handleNotes={handleNotes}
       handleImageUpload={handleImageUpload}
     />,
     currentPageRows.length > 0,

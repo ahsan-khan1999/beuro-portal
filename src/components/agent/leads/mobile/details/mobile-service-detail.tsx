@@ -11,7 +11,10 @@ export const LeadMobileServiceDetail = ({
   const defaultClasses = combineClasses("p-4 bg-white rounded-b-lg");
 
   const hasData = services?.some(
-    (service) => service.value !== undefined && service.value !== ""
+    (service) =>
+      service.value !== undefined &&
+      service.value !== "" &&
+      service.value !== null
   );
 
   return (

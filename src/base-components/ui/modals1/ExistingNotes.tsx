@@ -44,7 +44,7 @@ const ExistingNotes = ({
     | Appointments;
 }) => {
   const { notes } = useAppSelector((state) => state.note);
-  const { refID, name, heading } = useAppSelector(
+  const { id, refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
   );
 
@@ -68,7 +68,7 @@ const ExistingNotes = ({
           <div className="flex justify-between items-center gap-[10px]">
             <BaseButton
               onClick={() =>
-                handleAddNote(leadDetails?.id, refID, name, heading)
+                handleAddNote(id ? id : leadDetails?.id, refID, name, heading)
               }
               buttonText={translate("common.notes_modal.button")}
               containerClassName="flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover"

@@ -21,7 +21,6 @@ export const useUploadImageOffer = (
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
-
   const [activeTab, setActiveTab] = useState("img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
   const [enteredLinks, setEnteredLinks] = useState<any>({

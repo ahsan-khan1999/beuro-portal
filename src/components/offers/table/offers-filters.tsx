@@ -11,7 +11,6 @@ import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function OffersFilters({
   filter,
@@ -173,9 +172,6 @@ export default function OffersFilters({
     setInputValue(textValue || "");
   }, [router.query.text]);
 
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
