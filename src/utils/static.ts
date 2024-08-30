@@ -1573,6 +1573,7 @@ export const DEFAULT_CONTRACT_TASK: Task = {
     postalCode: "",
     country: "",
   },
+  type:"",
   contractID: {
     id: "",
   },

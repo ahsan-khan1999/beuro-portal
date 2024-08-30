@@ -42,7 +42,6 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.calendarDatePicker,
-              className: `!py-4`,
               id: "startDate",
               name: "startDate",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
@@ -66,7 +65,6 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             containerClass: "mb-0",
             field: {
               type: Field.calendarDatePicker,
-              className: `!py-4`,
               id: "endDate",
               name: "endDate",
               svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">

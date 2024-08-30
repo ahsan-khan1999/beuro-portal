@@ -1,7 +1,6 @@
 import { CalendarDatePickerProps } from "@/types";
-import { combineClasses } from "@/utils/utility";
 import moment from "moment";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export const CalendarDatePickerField = ({
   id,
@@ -26,52 +25,33 @@ export const CalendarDatePickerField = ({
 
   const dateInputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (value) {
+      setFormattedDate(
+        moment(value).format(
+          dateType === "datetime-local" ? "YYYY-MM-DDTHH:mm" : "YYYY-MM-DD"
+        )
+      );
+    }
+  }, [value]);
+
   const handleOpenDatePicker = () => {
     if (dateInputRef.current) {
       dateInputRef.current.showPicker();
     }
   };
 
-  const defaultClasses = `flex items-center gap-x-2 p-[10px]`;
-  const defaultInputClasses = combineClasses(
-    "absolute opacity-0 w-0 h-0",
-    className
-  );
-
-  const formatDateTime = (value: string, dateType: string) => {
-    const date = new Date(value);
-
-    const formattedDate = date.toLocaleDateString(undefined, {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-    });
-
-    if (dateType === "datetime-local") {
-      const formattedTime = date.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-      return { formattedDate, formattedTime };
-    }
-
-    return { formattedDate, formattedTime: "" };
-  };
-
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const { formattedDate, formattedTime } = formatDateTime(value, dateType);
-    setFormattedDate(`${formattedDate} ${formattedTime}`);
-    setValue(name, e.target.value);
+    setFormattedDate(value);
+    setValue(name, value); // Update the value in the form
   };
 
-  const { formattedDate: displayDate, formattedTime: displayTime } =
-    formattedDate
-      ? formatDateTime(formattedDate, dateType)
-      : { formattedDate: "", formattedTime: "" };
-
   return (
-    <div className={defaultClasses} onClick={handleOpenDatePicker}>
+    <div
+      className="flex items-center gap-x-2 p-[10px]"
+      onClick={handleOpenDatePicker}
+    >
       {svg && (
         <span
           className="cursor-pointer"
@@ -81,24 +61,26 @@ export const CalendarDatePickerField = ({
 
       <div className="flex flex-col gap-y-1">
         <span className="text-xs text-[#7A7A7A] font-medium">
-          {displayDate || "Select Date"}
+          {formattedDate
+            ? moment(formattedDate).format("ddd, MMM D")
+            : "Select Date"}
         </span>
         {dateType === "datetime-local" && (
           <span className="text-sm font-medium text-[#3C3C3C]">
-            {displayTime || ""}
+            {formattedDate ? moment(formattedDate).format("HH:mm") : ""}
           </span>
         )}
       </div>
 
       <input
         type={dateType}
-        defaultValue={formattedDate} // Ensure this is in YYYY-MM-DDTHH:mm format
+        value={formattedDate}
         id={id}
         {...register(name)}
         min={min}
         max={max}
         disabled={disable}
-        className={defaultInputClasses}
+        className="absolute opacity-0 w-0 h-0"
         onChange={handleDateChange}
         ref={dateInputRef}
       />

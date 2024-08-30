@@ -11,6 +11,7 @@ import {
 } from "@/api/slices/contract/contractSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
+import moment from "moment";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
@@ -75,8 +76,15 @@ export default function useAddTask({
         setValue("alertTime", undefined);
       }
       setValue("colour", colour || "");
+      if (startDate && !endDate) {
+        const startDateObj = moment(startDate);
+        const endDateObj = startDateObj
+          .add(1, "hour")
+          .format("YYYY-MM-DDTHH:mm");
+        setValue("endDate", endDateObj);
+      }
     }
-  }, [id]);
+  }, [id, startDate, isRemainder]);
 
   const taskFields = addTaskFormField(
     register,

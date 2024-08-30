@@ -155,6 +155,7 @@ export interface Task {
     postalCode: string;
     country: string;
   };
+  type:string
   contractID: {
     id: string;
   };
