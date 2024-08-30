@@ -1573,6 +1573,9 @@ export const DEFAULT_CONTRACT_TASK: Task = {
     postalCode: "",
     country: "",
   },
+  contractID: {
+    id: "",
+  },
 };
 
 export const DEFAULT_INVOICE = {

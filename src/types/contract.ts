@@ -150,9 +150,12 @@ export interface Task {
   createdAt: string;
   note: string;
   alertTime: number;
-  address :{
-    streetNumber:string,
-    postalCode:string,
-    country:string
-  }
+  address: {
+    streetNumber: string;
+    postalCode: string;
+    country: string;
+  };
+  contractID: {
+    id: string;
+  };
 }

@@ -5,6 +5,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
 import { useTranslation } from "next-i18next";
+import { Layout } from "@/layout";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -59,27 +60,42 @@ const PdfPriview = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
+  const isCalendar = router.query.isCalendar;
+
+  if (typeof isCalendar === "undefined") {
+    return null;
+  }
+
   return (
     <>
-      <EmailCard
-        contractStatus={contractDetails?.emailStatus}
-        contractNo={contractData?.emailHeader?.offerNo}
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        contractTitle={contractData?.emailHeader?.contractTitle || ""}
-        worker={contractData?.emailHeader?.worker || ""}
-        onSendViaPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-      />
+      {isCalendar ? (
+        <ContractPdfPreview
+          mergedPdfFileUrl={mergedPdfUrl}
+          isPdfRendering={isPdfRendering}
+        />
+      ) : (
+        <Layout>
+          <EmailCard
+            contractStatus={contractDetails?.emailStatus}
+            contractNo={contractData?.emailHeader?.offerNo}
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            contractTitle={contractData?.emailHeader?.contractTitle || ""}
+            worker={contractData?.emailHeader?.worker || ""}
+            onSendViaPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+          />
 
-      <ContractPdfPreview
-        mergedPdfFileUrl={mergedPdfUrl}
-        isPdfRendering={isPdfRendering}
-      />
+          <ContractPdfPreview
+            mergedPdfFileUrl={mergedPdfUrl}
+            isPdfRendering={isPdfRendering}
+          />
 
-      {renderModal()}
+          {renderModal()}
+        </Layout>
+      )}
     </>
   );
 };
