@@ -70,11 +70,11 @@ export default function useAddTask({
       setValue("startDate", taskDetail?.date?.[0]?.startDate);
       setValue("endDate", taskDetail?.date?.[0]?.endDate);
     } else {
-      if (isRemainder) {
-        setValue("alertTime", alertTime || 15);
-      } else {
-        setValue("alertTime", undefined);
-      }
+      // if (isRemainder) {
+      //   setValue("alertTime", alertTime || 15);
+      // } else {
+      //   setValue("alertTime", undefined);
+      // }
       setValue("colour", colour || "");
       if (startDate && !endDate) {
         const startDateObj = moment(startDate);
@@ -84,7 +84,7 @@ export default function useAddTask({
         setValue("endDate", endDateObj);
       }
     }
-  }, [id, startDate, isRemainder]);
+  }, [id, startDate]);
 
   const taskFields = addTaskFormField(
     register,

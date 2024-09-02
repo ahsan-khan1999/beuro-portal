@@ -219,7 +219,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
                     className: "!border-[#BFBFBF] focus:!border-primary",
                     id: "remainder",
                     name: "remainder",
-                    checked: isRemainder ? true : false,
+                    checked: false,
                     register,
                   },
                 },

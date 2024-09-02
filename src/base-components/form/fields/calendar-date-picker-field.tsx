@@ -44,7 +44,7 @@ export const CalendarDatePickerField = ({
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFormattedDate(value);
-    setValue(name, value); // Update the value in the form
+    setValue(name, value);
   };
 
   return (

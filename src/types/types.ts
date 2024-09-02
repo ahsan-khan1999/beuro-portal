@@ -330,6 +330,13 @@ export type GenerateAddTaskFormField = (
   trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
+export type GenerateRemainderFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
 export type GenerateGeneralAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

@@ -118,21 +118,7 @@ export interface ContractDetailCardProps {
   handleEditDateModal: () => void;
 }
 
-export interface Tasks {
-  id: string;
-  taskID: string;
-  isContrcatCreated: boolean;
-  title: string;
-  date: [
-    {
-      startDate: string;
-      endDate: string;
-    }
-  ];
-  isAllDay: boolean;
-  colour: string;
-  createdAt: string;
-}
+
 
 export interface Task {
   id: string;

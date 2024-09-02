@@ -1253,6 +1253,11 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
+    "notifications": "Benachrichtigungen",
+    "remaind_me": "Erinnere mich daran",
+    "starts_in": "Beginnt in",
+    "minute": "minute",
+    "_at": "unter",
     "select_canton": "Kanton auswählen",
     "before": "vor",
     "hour": "Stunde",
@@ -1429,7 +1434,7 @@
     "add_note_modal": {
       "heading": "Notizen hinzufügen",
       "label": "Notiz Titel",
-      "description_title":"Hinweis Beschreibung",
+      "description_title": "Hinweis Beschreibung",
       "button": "Speichern"
     },
     "images_modal": {
