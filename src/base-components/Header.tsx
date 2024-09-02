@@ -162,7 +162,7 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
             )}
 
             <span
-              className={`font-medium text-2xl tracking-[0.15px] text-dark ${
+              className={`font-medium text-xl mlg:text-2xl tracking-[0.15px] text-dark ${
                 isAgentRoute ? "xMini:pl-4 mlg:pl-8" : "pl-8"
               } `}
             >
@@ -182,7 +182,7 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
         )}
       </div>
       <div className="flex items-center">
-        <div className="flex items-center pr-8">
+        <div className="flex items-center pr-4 mlg:pr-8">
           {user?.role !== "Admin" && user?.role !== "Agent" && (
             <div className="relative menu mr-5">
               <NotificationIcon count={todayCount} />

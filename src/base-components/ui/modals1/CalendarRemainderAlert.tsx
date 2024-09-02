@@ -118,7 +118,7 @@ export const CalendarRemainderAlert = ({
                 key={index}
                 type="submit"
                 onClick={() => setValue("alertTime", item)}
-                className="rounded-full bg-white hover:bg-primary hover:text-white h-[35px] w-[108px] flex items-center justify-center"
+                className="rounded-full bg-white hover:bg-primary hover:text-white h-[30px] w-20 xMini:h-[35px] xMini:w-[108px] flex items-center justify-center"
               >
                 <span className="text-sm font-normal text-center">
                   {item} min

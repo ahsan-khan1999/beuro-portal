@@ -66,7 +66,7 @@ export const useCalendar = () => {
       for (const currentTask of task || []) {
         for (const dateRange of currentTask?.date || []) {
           const eventEnd = moment(dateRange?.endDate);
-          const reminderTime = currentTask?.alertTime || 5;
+          const reminderTime = currentTask?.alertTime;
 
           const reminderTriggerTime = eventEnd
             .clone()

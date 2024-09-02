@@ -30,7 +30,10 @@ export const CustomColorSelectionField = ({
   };
 
   return (
-    <div className="flex items-center gap-x-[6px]" id={id}>
+    <div
+      className="flex items-center justify-between xMini:gap-x-[6px]"
+      id={id}
+    >
       {options?.map((color, index) => {
         const isSelected = color === selectedColor;
 
@@ -53,11 +56,13 @@ export const CustomColorSelectionField = ({
               key={color}
               style={{
                 backgroundColor: color,
-                width: isSelected ? "16px" : "26px",
-                height: isSelected ? "16px" : "26px",
                 cursor: "pointer",
               }}
-              className={buttonClasses}
+              className={`${
+                isSelected
+                  ? "w-[14px] h-[14px] xMini:w-4 xMini:h-4"
+                  : "w-[20px] h-[20px] xMini:w-[26px] xMini:h-[26px]"
+              } ${buttonClasses}`}
               onClick={() => handleColorSelect(color)}
             />
           </div>
