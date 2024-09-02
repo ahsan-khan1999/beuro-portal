@@ -138,14 +138,23 @@
     gap: initial !important;
   }
 
-  .fc-daygrid-day-events {
-    display: block;
+  .fc-timeGridWeek-view .fc-daygrid-day-events {
+    display: none;
   }
 
   .fc .fc-timegrid-axis-cushion {
     max-width: 80px !important;
     padding: 0 10px;
     font-size: 12px !important;
+  }
+
+  .fc .fc-timeGridWeek-view .fc-timegrid-axis-cushion {
+    display: none;
+  }
+
+  .fc .fc-timeGridWeek-view .fc-timegrid-axis,
+  .fc-timeGridWeek-view .fc-timegrid-slot-label-frame {
+    display: none;
   }
 }
 
