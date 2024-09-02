@@ -1260,7 +1260,11 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
-
+    "notifications":"Notifications",
+    "remaind_me":"Remind me in",
+    "starts_in": "Starts in",
+    "minute":"minute",
+    "_at":"at",
     "select_canton": "Select Canton",
     "before": "before",
     "hour": "Hour",
@@ -1437,7 +1441,7 @@
     "add_note_modal": {
       "heading": "Add Notes",
       "label": "Note Title",
-      "description_title":"Note Description",
+      "description_title": "Note Description",
       "button": "Save"
     },
     "images_modal": {

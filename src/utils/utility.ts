@@ -432,6 +432,18 @@ export const calendarTaskformatDate = (date: string) => {
   return moment(date).format("dddd, D MMMM");
 };
 
+export const calculateRemainingTime = (endDate: string) => {
+  const now = moment();
+  const endTime = moment(endDate);
+  const remainingMinutes = endTime.diff(now, "minutes");
+  const formattedEndTime = endTime.format("HH:mm");
+
+  return {
+    remainingMinutes,
+    formattedEndTime,
+  };
+};
+
 export const formatAlertTime = (alertTime: number) => {
   switch (alertTime) {
     case 15:

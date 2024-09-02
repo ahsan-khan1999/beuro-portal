@@ -14,7 +14,7 @@ import {
   setContractTask,
   setContractTaskDetails,
 } from "@/api/slices/contract/contractSlice";
-import { Task, Tasks } from "@/types/contract";
+import { Task } from "@/types/contract";
 import { ContractTaskDetail } from "@/base-components/ui/modals1/ContractTaskDetail";
 import { CustomerPromiseActionType } from "@/types/company";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
@@ -23,7 +23,10 @@ import moment from "moment";
 
 export const useCalendar = () => {
   const { loading, task } = useAppSelector((state) => state.contract);
-  // const [reminderEvent, setReminderEvent] = useState<Task | null>(null);
+  const [reminderEvents, setReminderEvents] = useState<Task[]>([]);
+  const [triggeredReminders, setTriggeredReminders] = useState<Set<string>>(
+    new Set()
+  );
 
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
@@ -39,7 +42,7 @@ export const useCalendar = () => {
   }, [dispatch]);
 
   const events = useMemo(() => {
-    return task?.flatMap((task: Tasks) =>
+    return task?.flatMap((task: Task) =>
       task.date?.map((dateRange) => ({
         title: task.title,
         start: dateRange.startDate,
@@ -55,24 +58,58 @@ export const useCalendar = () => {
     );
   }, [task]);
 
-  // useEffect(() => {
-  //   const now = moment();
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      const now = moment();
+      const upcomingReminders: Task[] = [];
 
-  //   task?.forEach((task: Task) => {
-  //     task.date?.forEach((dateRange) => {
-  //       const eventStart = moment(dateRange.startDate);
-  //       const reminderTime = task.alertTime || 15; 
+      for (const currentTask of task || []) {
+        for (const dateRange of currentTask?.date || []) {
+          const eventEnd = moment(dateRange?.endDate);
+          const reminderTime = currentTask?.alertTime || 5;
 
-  //       if (
-  //         eventStart.diff(now, "minutes") <= reminderTime &&
-  //         eventStart.diff(now, "minutes") > 0
-  //       ) {
-  //         setReminderEvent(task);
-  //         dispatch(updateModalType({ type: ModalType.TASK_REMAINDER }));
-  //       }
-  //     });
-  //   });
-  // }, [task, dispatch]);
+          const reminderTriggerTime = eventEnd
+            .clone()
+            .subtract(reminderTime, "minutes");
+
+          if (
+            now.isSameOrAfter(reminderTriggerTime) &&
+            now.isBefore(eventEnd) &&
+            now.diff(reminderTriggerTime, "seconds") < 60 &&
+            !triggeredReminders.has(currentTask?.id)
+          ) {
+            setTriggeredReminders((prev) => new Set(prev).add(currentTask?.id));
+
+            const res = await dispatch(
+              readContractTaskDetail({ params: { filter: currentTask?.id } })
+            );
+            if (res?.payload) {
+              upcomingReminders.push(res.payload);
+            }
+          }
+        }
+      }
+
+      if (upcomingReminders?.length > 0) {
+        setReminderEvents(upcomingReminders);
+        dispatch(updateModalType({ type: ModalType.TASK_REMAINDER }));
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [task, triggeredReminders, dispatch]);
+
+  const tabs = [
+    { view: "timeGridDay", label: `${translate("calendar.tab_headings.day")}` },
+    {
+      view: "timeGridWeek",
+      label: `${translate("calendar.tab_headings.week")}`,
+    },
+    {
+      view: "dayGridMonth",
+      label: `${translate("calendar.tab_headings.month")}`,
+    },
+  ];
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -190,12 +227,19 @@ export const useCalendar = () => {
         loading={loading}
       />
     ),
-    // [ModalType.TASK_REMAINDER]: (
-    //   <CalendarRemainderAlert
-    //     onClose={onClose}
-    //     remainderAlert={reminderEvent}
-    //   />
-    // ),
+    [ModalType.TASK_REMAINDER]: (
+      <>
+        {reminderEvents?.map((event) => (
+          <CalendarRemainderAlert
+            key={event.id}
+            onClose={onClose}
+            remainderAlert={event}
+            onUpdateSuccess={handleTaskUpdateSuccess}
+            onContractDetail={handleContractTaskDetail}
+          />
+        ))}
+      </>
+    ),
   };
 
   const renderModal = () => {
@@ -203,6 +247,7 @@ export const useCalendar = () => {
   };
 
   return {
+    tabs,
     renderModal,
     loading,
     handleAddContractTask,

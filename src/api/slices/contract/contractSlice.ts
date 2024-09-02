@@ -1,7 +1,7 @@
 import apiServices from "@/services/requestHandler";
 import { setErrors } from "@/utils/utility";
 import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { contractTableTypes, Task, Tasks } from "@/types/contract";
+import { contractTableTypes, Task } from "@/types/contract";
 import { DEFAULT_CONTRACT, DEFAULT_CONTRACT_TASK } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
 import { updateModalType } from "../globalSlice/global";

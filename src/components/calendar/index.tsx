@@ -18,7 +18,6 @@ import { AllDayEvent } from "./all-day-event";
 import { useCalendar } from "@/hooks/calendar/useCalendar";
 import { DayHeaderContent } from "./day-header-content";
 import { useIsSmallScreen, useIsSmallWeekScreen } from "@/utils/functions";
-import { CurrentTimeIndicator } from "./current-time-indicator";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
@@ -31,26 +30,14 @@ export const Calendar = () => {
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
   const isSmallScreen = useIsSmallScreen(); // 1100px check
   const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
-  const [currentTime, setCurrentTime] = useState("");
 
   const {
     events,
     handleAddContractTask,
     handleContractTaskDetail,
     renderModal,
+    tabs,
   } = useCalendar();
-
-  const tabs = [
-    { view: "timeGridDay", label: `${translate("calendar.tab_headings.day")}` },
-    {
-      view: "timeGridWeek",
-      label: `${translate("calendar.tab_headings.week")}`,
-    },
-    {
-      view: "dayGridMonth",
-      label: `${translate("calendar.tab_headings.month")}`,
-    },
-  ];
 
   const updateDateDisplay = (date: Date, viewType: ViewType) => {
     let formattedDate = "";
