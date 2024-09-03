@@ -128,7 +128,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.sofa}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.sofa}`,
               inputLabelValue: translate("agent.house_detail_fields.sofa"),
@@ -149,7 +148,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.teacherDesk}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.teacherDesk}`,
               inputLabelValue: translate("agent.house_detail_fields.puit"),
@@ -173,7 +171,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.tvTable}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.tvTable}`,
               inputLabelValue: translate("agent.house_detail_fields.tv_table"),
@@ -197,7 +194,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.armchair}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.armchair}`,
               inputLabelValue: translate("agent.house_detail_fields.sessel"),
@@ -215,7 +211,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.table}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.table}`,
               inputLabelValue: translate("agent.house_detail_fields.tisch"),
@@ -232,7 +227,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.shelf}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
@@ -246,7 +240,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.LSofa}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.LSofa}`,
               inputLabelValue: translate("agent.house_detail_fields.l_sofa"),
@@ -265,7 +258,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.TV}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.TV}`,
               inputLabelValue: translate("agent.house_detail_fields.fernseher"),
@@ -282,7 +274,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.decoBig}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.decoBig}`,
               inputLabelValue: translate(
@@ -304,7 +295,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.box}`,
               name: `${HouseDetailsFieldsId.livingRoomDetails}.${HouseDetailsFieldsId.box}`,
               inputLabelValue: translate("agent.house_detail_fields.box"),
@@ -447,7 +437,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.oven}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.oven}`,
               inputLabelValue: translate("agent.house_detail_fields.backofen"),
@@ -476,7 +465,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.refrigerator}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.refrigerator}`,
               inputLabelValue: translate(
@@ -502,7 +490,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.freezer}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.freezer}`,
               inputLabelValue: translate(
@@ -527,7 +514,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.stove}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.stove}`,
               inputLabelValue: translate("agent.house_detail_fields.herd"),
@@ -556,7 +542,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.microwave}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.microwave}`,
               inputLabelValue: translate(
@@ -587,7 +572,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.coffeeMachine}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.coffeeMachine}`,
               inputLabelValue: translate(
@@ -618,7 +602,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.washingMachine}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.washingMachine}`,
               inputLabelValue: translate(
@@ -647,7 +630,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.tumbler}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.tumbler}`,
               inputLabelValue: translate("agent.house_detail_fields.Tumbler"),
@@ -676,7 +658,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.shelf}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
@@ -697,7 +678,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.box}`,
               name: `${HouseDetailsFieldsId.kitchenDetails}.${HouseDetailsFieldsId.box}`,
               inputLabelValue: translate("agent.house_detail_fields.box"),
@@ -841,7 +821,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.bed}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.bed}`,
               inputLabelValue: translate("agent.house_detail_fields.bett"),
@@ -867,7 +846,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.doubleBed}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.doubleBed}`,
               inputLabelValue: translate(
@@ -896,7 +874,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.armchair}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.armchair}`,
               inputLabelValue: translate("agent.house_detail_fields.sessel"),
@@ -921,7 +898,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.smallWardrobe}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.smallWardrobe}`,
               inputLabelValue: translate(
@@ -953,7 +929,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`,
               inputLabelValue: translate(
@@ -988,7 +963,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.largeWardrobe}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.largeWardrobe}`,
               inputLabelValue: translate(
@@ -1021,7 +995,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.dressingTable}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.dressingTable}`,
               inputLabelValue: translate(
@@ -1058,7 +1031,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.nightstand}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.nightstand}`,
               inputLabelValue: translate(
@@ -1085,7 +1057,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.shelf}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
@@ -1106,7 +1077,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.desk}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.desk}`,
               inputLabelValue: translate("agent.house_detail_fields.pult"),
@@ -1137,7 +1107,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.plants}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.plants}`,
               inputLabelValue: translate("agent.house_detail_fields.pflanzen"),
@@ -1163,7 +1132,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.box}`,
               name: `${HouseDetailsFieldsId.bedRoomDetails}.${HouseDetailsFieldsId.box}`,
               inputLabelValue: translate("agent.house_detail_fields.box"),
@@ -1307,7 +1275,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.bed}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.bed}`,
               inputLabelValue: translate("agent.house_detail_fields.bett"),
@@ -1333,7 +1300,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.doubleBed}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.doubleBed}`,
               inputLabelValue: translate(
@@ -1362,7 +1328,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.armchair}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.armchair}`,
               inputLabelValue: translate("agent.house_detail_fields.sessel"),
@@ -1387,7 +1352,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.smallWardrobe}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.smallWardrobe}`,
               inputLabelValue: translate(
@@ -1419,7 +1383,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.mediumWardrobe}`,
               inputLabelValue: translate(
@@ -1454,7 +1417,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.largeWardrobe}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.largeWardrobe}`,
               inputLabelValue: translate(
@@ -1487,7 +1449,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.shelf}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
@@ -1508,7 +1469,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.desk}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.desk}`,
               inputLabelValue: translate("agent.house_detail_fields.pult"),
@@ -1539,7 +1499,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tv}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tv}`,
               inputLabelValue: translate("agent.house_detail_fields.fernseher"),
@@ -1563,7 +1522,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tvTable}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.tvTable}`,
               inputLabelValue: translate("agent.house_detail_fields.tv_table"),
@@ -1594,7 +1552,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.nightstand}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.nightstand}`,
               inputLabelValue: translate(
@@ -1621,7 +1578,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.box}`,
               name: `${HouseDetailsFieldsId.roomDetails}.${HouseDetailsFieldsId.box}`,
               inputLabelValue: translate("agent.house_detail_fields.box"),
@@ -1764,7 +1720,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.grill}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.grill}`,
               inputLabelValue: translate("agent.house_detail_fields.grill"),
@@ -1788,7 +1743,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.table}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.table}`,
               inputLabelValue: translate("agent.house_detail_fields.tisch"),
@@ -1812,7 +1766,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.chairs}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.chairs}`,
               inputLabelValue: translate("agent.house_detail_fields.stuhle"),
@@ -1836,7 +1789,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.sofa}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.sofa}`,
               inputLabelValue: translate("agent.house_detail_fields.sofa"),
@@ -1864,7 +1816,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.shelf}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
@@ -1885,7 +1836,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.umbrella}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.umbrella}`,
               inputLabelValue: translate("agent.house_detail_fields.schirm"),
@@ -1906,7 +1856,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.pots}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.pots}`,
               inputLabelValue: translate("agent.house_detail_fields.topfe"),
@@ -1928,7 +1877,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.plants}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.plants}`,
               inputLabelValue: translate("agent.house_detail_fields.pflanzen"),
@@ -1954,7 +1902,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.herbGarden}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.herbGarden}`,
               inputLabelValue: translate(
@@ -1977,7 +1924,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.lawnmower}`,
               name: `${HouseDetailsFieldsId.outDoorDetails}.${HouseDetailsFieldsId.lawnmower}`,
               inputLabelValue: translate(
@@ -2135,7 +2081,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.washingMachine}`,
               name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.washingMachine}`,
               inputLabelValue: translate(
@@ -2164,7 +2109,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.tumbler}`,
               name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.tumbler}`,
               inputLabelValue: translate("agent.house_detail_fields.Tumbler"),
@@ -2193,7 +2137,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.shelf}`,
               name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.shelf}`,
               inputLabelValue: translate("agent.house_detail_fields.regal"),
@@ -2214,7 +2157,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.disposal}`,
               name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.disposal}`,
               inputLabelValue: translate(
@@ -2240,7 +2182,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.bicycle}`,
               name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.bicycle}`,
               inputLabelValue: translate("agent.house_detail_fields.fahrrad"),
@@ -2261,7 +2202,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.stroller}`,
               name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.stroller}`,
               inputLabelValue: translate(
@@ -2286,7 +2226,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.furniture}`,
               name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.furniture}`,
               inputLabelValue: translate("agent.house_detail_fields.mobel"),
@@ -2319,7 +2258,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.boxes}`,
               name: `${HouseDetailsFieldsId.basementAtticDetails}.${HouseDetailsFieldsId.boxes}`,
               inputLabelValue: translate("agent.house_detail_fields.boxen"),
@@ -2471,7 +2409,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.aquarium}`,
               name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.aquarium}`,
               inputLabelValue: translate("agent.house_detail_fields.aquarium"),
@@ -2497,7 +2434,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.piano}`,
               name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.piano}`,
               inputLabelValue: translate("agent.house_detail_fields.piano"),
@@ -2532,7 +2468,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.gymEquipment}`,
               name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.gymEquipment}`,
               inputLabelValue: translate(
@@ -2564,7 +2499,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.electronics}`,
               name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.electronics}`,
               inputLabelValue: translate(
@@ -2591,7 +2525,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.pool}`,
               name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.pool}`,
               inputLabelValue: translate("agent.house_detail_fields.pool"),
@@ -2622,7 +2555,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.safe}`,
               name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.safe}`,
               inputLabelValue: translate("agent.house_detail_fields.tressor"),
@@ -2647,7 +2579,6 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
             field: {
               type: Field.quantityInput,
               inputType: "text",
-              className: "!pl-4",
               id: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.lamp}`,
               name: `${HouseDetailsFieldsId.specialItemsDetails}.${HouseDetailsFieldsId.lamp}`,
               inputLabelValue: translate("agent.house_detail_fields.lampe"),

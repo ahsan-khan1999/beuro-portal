@@ -4,7 +4,6 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const QRSettings = ({ handleCreation }: { handleCreation: Function }) => {
-  const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, error, renderModal } =
     useQRSettings({
       handleCreation,
@@ -18,7 +17,6 @@ const QRSettings = ({ handleCreation }: { handleCreation: Function }) => {
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
       {renderModal()}

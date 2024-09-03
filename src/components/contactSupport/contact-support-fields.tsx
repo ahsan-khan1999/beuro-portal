@@ -154,7 +154,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     },
 
     {
-      containerClass: "my-[30px] flex justify-end",
+      containerClass: "my-5 xMini:my-[30px] flex justify-end",
       field: {
         type: Field.button,
         id: "button",

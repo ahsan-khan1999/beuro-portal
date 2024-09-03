@@ -20,9 +20,8 @@ export const QuantityInputField = ({
   inputLabelValue,
 }: QuantityInputProps) => {
   const [inputFocus, setInputFocus] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
-  const defaultClasses = `border border-[#D0D5DD] rounded-[4px] max-w-[40px] h-[40px] !bg-white p-2 outline-none text-dark text-sm focus:border-primary`;
+  const defaultClasses = `border border-[#D0D5DD] rounded-[4px] max-w-[40px] h-[40px] !bg-white outline-none text-dark text-sm focus:border-primary text-center`;
 
   const classes = combineClasses(defaultClasses, className);
 
@@ -45,10 +44,6 @@ export const QuantityInputField = ({
     };
   }, [id]);
 
-  const handleFocusInput = () => {
-    inputRef.current?.focus();
-  };
-
   return (
     <div className={`flex items-center gap-x-[13px]`}>
       {svg && (
@@ -58,7 +53,7 @@ export const QuantityInputField = ({
         />
       )}
 
-      <p className="text-[#1C1F35] text-base font-medium m-w-[122px] w-full">
+      <p className="text-[#1C1F35] text-base font-medium w-full">
         {inputLabelValue}
       </p>
       <input
