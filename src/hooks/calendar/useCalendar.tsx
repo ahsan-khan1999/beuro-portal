@@ -80,6 +80,9 @@ export const useCalendar = () => {
           ) {
             setTriggeredReminders((prev) => new Set(prev).add(currentTask?.id));
 
+            const audio = new Audio("/audio/remainder-tone.mp3");
+            audio.play();
+
             const res = await dispatch(
               readContractTaskDetail({ params: { filter: currentTask?.id } })
             );
