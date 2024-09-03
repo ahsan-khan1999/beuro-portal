@@ -57,6 +57,7 @@ export default function useAddTask({
 
   useEffect(() => {
     if (id) {
+      // Reset form values when editing
       reset({
         title: taskDetail?.title,
         streetNumber: taskDetail?.address?.streetNumber,
@@ -65,21 +66,38 @@ export default function useAddTask({
         isAllDay: taskDetail?.isAllDay,
         note: taskDetail?.note,
         alertTime: taskDetail?.alertTime,
-        colour: taskDetail?.colour,
       });
+      setValue(
+        "colour",
+        taskDetail?.colour ? taskDetail?.colour : colour || ""
+      );
       setValue("startDate", taskDetail?.date?.[0]?.startDate);
       setValue("endDate", taskDetail?.date?.[0]?.endDate);
     } else {
+      // Ensure the colour is set in creation case
       setValue("colour", colour || "");
-      if (startDate && !endDate) {
-        const startDateObj = moment(startDate);
-        const endDateObj = startDateObj
-          .add(1, "hour")
-          .format("YYYY-MM-DDTHH:mm");
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (startDate) {
+      const startDateObj = moment(startDate);
+      const endDateObj = startDateObj.add(1, "hour").format("YYYY-MM-DDTHH:mm");
+
+      // Only set the end date if it's empty or during creation (without id)
+      // Avoid overwriting if the user has manually changed the end date
+      if (!endDate && !id) {
         setValue("endDate", endDateObj);
       }
     }
-  }, [id, startDate]);
+  }, [startDate]);
+
+  useEffect(() => {
+    // This effect ensures that endDate is properly updated
+    if (taskDetail && id) {
+      setValue("endDate", taskDetail.date?.[0]?.endDate);
+    }
+  }, [taskDetail, id]);
 
   const taskFields = addTaskFormField(
     register,

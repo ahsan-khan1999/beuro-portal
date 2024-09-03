@@ -444,6 +444,28 @@ export const calculateRemainingTime = (endDate: string) => {
   };
 };
 
+export const formatTimeDifference = (minutes: number) => {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  let timeString = "";
+
+  if (hours > 0) {
+    timeString += `${hours} ${translate("common.hour")}${hours > 1 ? "s" : ""}`;
+  }
+
+  if (remainingMinutes > 0) {
+    if (hours > 0) {
+      timeString += ` ${translate("common.and")} `;
+    }
+    timeString += `${remainingMinutes} ${translate("common.minute")}${
+      remainingMinutes > 1 ? "s" : ""
+    }`;
+  }
+
+  return timeString;
+};
+
 export const formatAlertTime = (alertTime: number) => {
   switch (alertTime) {
     case 15:

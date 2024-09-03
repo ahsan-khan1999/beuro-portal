@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { updateContractTask } from "@/api/slices/contract/contractSlice";
-import { calculateRemainingTime } from "@/utils/utility";
+import { calculateRemainingTime, formatTimeDifference } from "@/utils/utility";
 import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 import { RingIcon } from "./ring-icon";
 
@@ -33,6 +33,8 @@ export const CalendarRemainderAlert = ({
   const { remainingMinutes, formattedEndTime } = calculateRemainingTime(
     remainderAlert.date[0].endDate
   );
+
+  const remainingTimeFormatted = formatTimeDifference(remainingMinutes);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const updatedTask = {
@@ -89,9 +91,9 @@ export const CalendarRemainderAlert = ({
                 <span className="text-sm font-semibold text-[#407ae9]">
                   {`${translate(
                     "common.starts_in"
-                  )} ${remainingMinutes} minute${
-                    remainingMinutes !== 1 ? "s" : ""
-                  } ${translate("common._at")} ${formattedEndTime}`}
+                  )} ${remainingTimeFormatted} ${translate(
+                    "common._at"
+                  )} ${formattedEndTime}`}
                 </span>
                 <RingIcon />
               </div>
