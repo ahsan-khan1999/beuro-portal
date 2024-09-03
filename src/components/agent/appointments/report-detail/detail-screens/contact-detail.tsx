@@ -46,13 +46,13 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
         </button>
       </div>
 
-      <div className="px-5 py-2 pb-5">
-        <div className="gap-x-[17px] grid grid-cols-1 lg:grid-cols-2 xlg:grid-cols-3 bg-[#EDF4FF] rounded-lg p-2 mb-5">
+      <div className="p-[9px] xMini:px-5 xMini:pb-5">
+        <div className="gap-x-[17px] gap-y-5 grid grid-cols-1 xMini:grid-cols-2 xlg:grid-cols-3 bg-[#EDF4FF] rounded-lg p-2 mb-5">
           <div className="flex flex-col gap-y-1">
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.report_contact_fields.name")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.customerDetail?.fullName}
             </div>
           </div>
@@ -60,7 +60,7 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.report_contact_fields.email")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.customerDetail?.email}
             </div>
           </div>
@@ -68,70 +68,76 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.report_contact_fields.telefon")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.customerDetail?.phoneNumber}
             </div>
           </div>
         </div>
 
         <div className="flex flex-col gap-y-5">
-          {reportDetail?.addressID?.address?.map((item, index) => (
-            <div key={index}>
-              <h4 className="text-base font-medium xMini:font-semibold text-[#1E1E1E] mb-2">
-                {item?.label}
-              </h4>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">
-                <div className="flex flex-col gap-y-1">
-                  <label className="text-[#344054] text-sm font-medium">
-                    {translate("offers.address_details.street_no")}
-                  </label>
-                  <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                    {item?.streetNumber}
+          {reportDetail?.addressID?.address?.map((item, index) => {
+            return (
+              <div key={index}>
+                <h4 className="text-base font-medium xMini:font-semibold text-[#1E1E1E] mb-2">
+                  {item?.label}
+                </h4>
+                <div className="grid grid-cols-1 xMini:grid-cols-2 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]">
+                  <div className="flex flex-col gap-y-1">
+                    <label className="text-[#344054] text-sm font-medium">
+                      {translate("offers.address_details.street_no")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                      {item?.streetNumber}
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-y-1">
-                  <label className="text-[#344054] text-sm font-medium">
-                    {translate("offers.address_details.post_code")}
-                  </label>
-                  <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                    {item?.postalCode}
+                  <div className="flex flex-col gap-y-1">
+                    <label className="text-[#344054] text-sm font-medium">
+                      {translate("offers.address_details.post_code")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                      {item?.postalCode}
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-y-1">
-                  <label className="text-[#344054] text-sm font-medium">
-                    {translate("agent.report_contact_fields.floor")}
-                  </label>
-                  <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                    {item?.floor}
+                  <div className="flex flex-col gap-y-1">
+                    <label className="text-[#344054] text-sm font-medium">
+                      {translate("agent.report_contact_fields.floor")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                      {item?.floor}
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-y-1">
-                  <label className="text-[#344054] text-sm font-medium">
-                    {translate("agent.report_contact_fields.room")}
-                  </label>
-                  <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                    {item?.room}
+                  <div className="flex flex-col gap-y-1">
+                    <label className="text-[#344054] text-sm font-medium">
+                      {translate("agent.report_contact_fields.room")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                      {item?.room}
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-y-1">
-                  <label className="text-[#344054] text-sm font-medium">
-                    {translate("agent.report_contact_fields.lift")}
-                  </label>
-                  <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                    {item?.lift ? "Yes" : "No"}
+                  <div className="flex flex-col gap-y-1">
+                    <label className="text-[#344054] text-sm font-medium">
+                      {translate("agent.report_contact_fields.lift")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                      {item?.lift
+                        ? `${translate("common.yes")}`
+                        : `${translate("common.no")}`}
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-y-1">
-                  <label className="text-[#344054] text-sm font-medium">
-                    {translate("agent.report_contact_fields.parking_permit")}
-                  </label>
-                  <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                    {item?.parkingPermit}
+                  <div className="flex flex-col gap-y-1">
+                    <label className="text-[#344054] text-sm font-medium">
+                      {translate("agent.report_contact_fields.parking_permit")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                      {item?.parkingPermit === true
+                        ? `${translate("common.true")}`
+                        : `${translate("common.false")}`}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </LeadsCardLayout>

@@ -1261,6 +1261,7 @@
     "select_canton": "Kanton auswählen",
     "before": "vor",
     "hour": "Stunde",
+    "and": "und",
     "hours": "Hours",
     "minutes": "Protokoll",
     "text_area_msg": "Geben Sie hier Ihre Nachricht ein",

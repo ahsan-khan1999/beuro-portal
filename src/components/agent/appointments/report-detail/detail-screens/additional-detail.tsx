@@ -45,13 +45,13 @@ export const ReportAdditionalInfoDetail = ({
         </button>
       </div>
 
-      <div className="px-5 py-2 pb-5">
-        <div className="gap-x-[17px] grid grid-cols-1 xMini:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] rounded-t-lg p-2 gap-y-2">
+      <div className="p-[9px] xMini:px-5 xMini:pb-5">
+        {/* <div className="gap-x-[17px] grid grid-cols-1 xMini:grid-cols-2 mlg:grid-cols-3 bg-[#EDF4FF] rounded-t-lg p-2 gap-y-5">
           <div className="flex flex-col gap-y-1">
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.additional_details_fields.mitarbeiter")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.offerDetails?.employees}
             </div>
           </div>
@@ -59,7 +59,7 @@ export const ReportAdditionalInfoDetail = ({
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.additional_details_fields.leiferwagen")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.offerDetails?.deliveryVehicle}
             </div>
           </div>
@@ -67,7 +67,7 @@ export const ReportAdditionalInfoDetail = ({
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.additional_details_fields.stunden")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.offerDetails?.hours}
             </div>
           </div>
@@ -75,7 +75,7 @@ export const ReportAdditionalInfoDetail = ({
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.additional_details_fields.reingung_mit")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.offerDetails?.cleaningWithHandoverGuarantee}
             </div>
           </div>
@@ -83,7 +83,7 @@ export const ReportAdditionalInfoDetail = ({
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.additional_details_fields.besenrein")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.offerDetails?.broomClean}
             </div>
           </div>
@@ -91,17 +91,17 @@ export const ReportAdditionalInfoDetail = ({
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.additional_details_fields.preis_chf")}
             </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.offerDetails?.priceCHF}
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-y-1 bg-[#EDF4FF] rounded-b-lg px-2 pt-3 pb-2">
           <label className="text-[#344054] text-sm font-medium">
             {translate("agent.additional_details_fields.bemerkung")}
           </label>
-          <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+          <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
             {reportDetail?.offerDetails?.remarks}
           </div>
         </div>
@@ -111,7 +111,7 @@ export const ReportAdditionalInfoDetail = ({
         </p>
         <div className="bg-[#EDF4FF] rounded-lg p-2">
           <div className="flex flex-col gap-y-1">
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+            <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
               {reportDetail?.offerDetails?.noteAndInformation}
             </div>
           </div>

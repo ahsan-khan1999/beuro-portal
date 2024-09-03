@@ -51,14 +51,10 @@ import { HouseFieldLabel } from "./house-field-label";
 import { HouseDescriptionField } from "./house-description-field";
 
 export interface ReportHouseDetailProps {
-  // isCompanyAppointment?: boolean;
   reportDetail: Report;
 }
 
-export const ReportHouseDetail = ({
-  // isCompanyAppointment,
-  reportDetail,
-}: ReportHouseDetailProps) => {
+export const ReportHouseDetail = ({ reportDetail }: ReportHouseDetailProps) => {
   const router = useRouter();
   const { companyAppointment } = router.query;
 
@@ -93,7 +89,7 @@ export const ReportHouseDetail = ({
         </button>
       </div>
 
-      <div className="px-5 pb-3">
+      <div className="px-[9px] xMini:px-5 pb-3">
         <div className="mt-5 flex flex-col gap-y-2">
           <p className="text-base font-medium xMini:font-semibold text-[#1E1E1E] mb-2">
             {translate("agent.house_detail_fields.living_room_heading")}
@@ -108,7 +104,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.sofa")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.sofa}
                 </p>
               </div>
@@ -119,7 +115,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.puit")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.teacherDesk}
                 </p>
               </div>
@@ -130,7 +126,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.tv_table")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.tvTable}
                 </p>
               </div>
@@ -141,7 +137,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.sessel")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.armchair}
                 </p>
               </div>
@@ -152,7 +148,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.tisch")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.table}
                 </p>
               </div>
@@ -163,7 +159,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.regal")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.shelf}
                 </p>
               </div>
@@ -174,7 +170,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.l_sofa")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.LSofa}
                 </p>
               </div>
@@ -185,7 +181,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.fernseher")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.TV}
                 </p>
               </div>
@@ -196,7 +192,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.deco_gross")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.decoBig}
                 </p>
               </div>
@@ -207,7 +203,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.box")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.livingRoomDetails?.box}
                 </p>
               </div>
@@ -232,7 +228,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.backofen")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.oven}
                 </p>
               </div>
@@ -243,7 +239,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.kuhlschrank")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.refrigerator}
                 </p>
               </div>
@@ -254,7 +250,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.tiefkuhler")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.freezer}
                 </p>
               </div>
@@ -265,7 +261,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.herd")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.stove}
                 </p>
               </div>
@@ -276,7 +272,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.mikrowelle")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.microwave}
                 </p>
               </div>
@@ -287,7 +283,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.kaffeemaschine")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.coffeeMachine}
                 </p>
               </div>
@@ -298,7 +294,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.washchmashine")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.washingMachine}
                 </p>
               </div>
@@ -309,7 +305,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.Tumbler")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.tumbler}
                 </p>
               </div>
@@ -320,7 +316,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.regal")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.shelf}
                 </p>
               </div>
@@ -331,7 +327,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.box")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.kitchenDetails?.box}
                 </p>
               </div>
@@ -356,7 +352,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.bett")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.bed}
                 </p>
               </div>
@@ -367,7 +363,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.doppeltbett")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.doubleBed}
                 </p>
               </div>
@@ -378,7 +374,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.sessel")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.shelf}
                 </p>
               </div>
@@ -390,7 +386,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.schrank_klein")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.smallWardrobe}
                 </p>
               </div>
@@ -401,7 +397,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.schrank_mittel")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.mediumWardrobe}
                 </p>
               </div>
@@ -412,7 +408,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.schrank_gross")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.largeWardrobe}
                 </p>
               </div>
@@ -423,7 +419,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.schminkanlage")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.dressingTable}
                 </p>
               </div>
@@ -434,7 +430,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.nachttisch")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.nightstand}
                 </p>
               </div>
@@ -445,7 +441,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.regal")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.shelf}
                 </p>
               </div>
@@ -456,7 +452,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.pult")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.desk}
                 </p>
               </div>
@@ -467,7 +463,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.pflanzen")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.plants}
                 </p>
               </div>
@@ -478,7 +474,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.box")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.bedRoomDetails?.box}
                 </p>
               </div>
@@ -503,7 +499,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.bett")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.bed}
                 </p>
               </div>
@@ -514,7 +510,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.doppeltbett")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.doubleBed}
                 </p>
               </div>
@@ -525,7 +521,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.sessel")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.armchair}
                 </p>
               </div>
@@ -536,7 +532,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.schrank_klein")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.smallWardrobe}
                 </p>
               </div>
@@ -547,7 +543,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.schrank_mittel")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.mediumWardrobe}
                 </p>
               </div>
@@ -558,7 +554,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.schrank_gross")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.largeWardrobe}
                 </p>
               </div>
@@ -569,7 +565,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.regal")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.shelf}
                 </p>
               </div>
@@ -580,7 +576,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.pult")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.desk}
                 </p>
               </div>
@@ -591,7 +587,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.fernseher")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.tv}
                 </p>
               </div>
@@ -602,7 +598,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.tv_table")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.tvTable}
                 </p>
               </div>
@@ -613,7 +609,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.nachttisch")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.nightstand}
                 </p>
               </div>
@@ -624,7 +620,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.box")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.roomDetails?.box}
                 </p>
               </div>
@@ -649,7 +645,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.grill")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.grill}
                 </p>
               </div>
@@ -660,7 +656,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.tisch")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.table}
                 </p>
               </div>
@@ -671,7 +667,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.stuhle")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.chairs}
                 </p>
               </div>
@@ -682,7 +678,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.sofa")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.sofa}
                 </p>
               </div>
@@ -693,7 +689,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.regal")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.shelf}
                 </p>
               </div>
@@ -704,7 +700,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.schirm")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.umbrella}
                 </p>
               </div>
@@ -715,7 +711,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.topfe")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.pots}
                 </p>
               </div>
@@ -726,7 +722,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.pflanzen")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.plants}
                 </p>
               </div>
@@ -737,7 +733,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.krauterbeet")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.herbGarden}
                 </p>
               </div>
@@ -748,7 +744,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.rasenmaher")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.outDoorDetails?.lawnmower}
                 </p>
               </div>
@@ -773,7 +769,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.washchmashine")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.basementAtticDetails?.washingMachine}
                 </p>
               </div>
@@ -784,7 +780,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.Tumbler")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.basementAtticDetails?.tumbler}
                 </p>
               </div>
@@ -795,7 +791,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.regal")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.basementAtticDetails?.shelf}
                 </p>
               </div>
@@ -806,7 +802,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.entsorgungen")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.basementAtticDetails?.disposal}
                 </p>
               </div>
@@ -817,7 +813,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.fahrrad")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.basementAtticDetails?.bicycle}
                 </p>
               </div>
@@ -828,7 +824,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.kinderwagen")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.basementAtticDetails?.stroller}
                 </p>
               </div>
@@ -839,7 +835,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.mobel")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.basementAtticDetails?.furniture}
                 </p>
               </div>
@@ -850,7 +846,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.boxen")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.basementAtticDetails?.boxes}
                 </p>
               </div>
@@ -877,7 +873,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.aquarium")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.specialItemsDetails?.aquarium}
                 </p>
               </div>
@@ -888,7 +884,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.piano")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.specialItemsDetails?.piano}
                 </p>
               </div>
@@ -899,7 +895,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.sportgerat")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.specialItemsDetails?.gymEquipment}
                 </p>
               </div>
@@ -910,7 +906,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.elektronisches")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.specialItemsDetails?.electronics}
                 </p>
               </div>
@@ -921,7 +917,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.pool")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.specialItemsDetails?.pool}
                 </p>
               </div>
@@ -932,7 +928,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.tressor")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.specialItemsDetails?.safe}
                 </p>
               </div>
@@ -943,7 +939,7 @@ export const ReportHouseDetail = ({
                     {translate("agent.house_detail_fields.lampe")}
                   </p>
                 </div>
-                <p className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[32px] min-w-[54px] truncate">
+                <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
                   {reportDetail?.specialItemsDetails?.lamp}
                 </p>
               </div>

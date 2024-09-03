@@ -65,17 +65,17 @@ export const useCalendar = () => {
 
       for (const currentTask of task || []) {
         for (const dateRange of currentTask?.date || []) {
-          const eventEnd = moment(dateRange?.endDate);
+          const eventStart = moment(dateRange?.startDate);
           const reminderTime = currentTask?.alertTime;
 
-          const reminderTriggerTime = eventEnd
+          const reminderTriggerTime = eventStart
             .clone()
             .subtract(reminderTime, "minutes");
 
           if (
             now.isSameOrAfter(reminderTriggerTime) &&
-            now.isBefore(eventEnd) &&
-            now.diff(reminderTriggerTime, "seconds") < 60 &&
+            now.isBefore(eventStart) &&
+            now.diff(reminderTriggerTime, "seconds") < 1 &&
             !triggeredReminders.has(currentTask?.id)
           ) {
             setTriggeredReminders((prev) => new Set(prev).add(currentTask?.id));
@@ -87,7 +87,7 @@ export const useCalendar = () => {
               readContractTaskDetail({ params: { filter: currentTask?.id } })
             );
             if (res?.payload) {
-              upcomingReminders.push(res.payload);
+              upcomingReminders.push(res?.payload);
             }
           }
         }

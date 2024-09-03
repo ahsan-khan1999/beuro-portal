@@ -48,6 +48,7 @@ export default function useQRSettings({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     dispatch(readQrCodeSettings({})).then((res: any) => {
       reset({
@@ -59,6 +60,7 @@ export default function useQRSettings({
       });
     });
   }, []);
+
   const {
     fields: qrSettingsArray,
     append,

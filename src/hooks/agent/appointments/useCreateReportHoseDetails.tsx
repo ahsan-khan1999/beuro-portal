@@ -91,16 +91,12 @@ export const useCreateReportHoseDetails = ({
         return Object.fromEntries(
           Object.entries(obj).map(([key, value]) => {
             if (typeof value === "object" && value !== null) {
-              // Recursively convert nested objects
               return [key, convertValues(value, excludeKeys)];
             } else if (excludeKeys.includes(key)) {
-              // Exclude specific keys from conversion
               return [key, value];
             } else if (value === "") {
-              // Preserve empty strings
               return [key, value];
             } else {
-              // Convert value to number if it's numeric
               const convertedValue = isNaN(Number(value))
                 ? value
                 : Number(value);
