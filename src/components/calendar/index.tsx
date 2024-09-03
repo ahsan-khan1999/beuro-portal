@@ -110,38 +110,6 @@ export const Calendar = () => {
     return isSmallScreen ? 2 : true;
   };
 
-  // const updateCurrentTimeLabel = () => {
-  //   const now = moment();
-  //   setCurrentTime(now.format("HH:mm"));
-
-  //   const nowIndicator = document.querySelector(
-  //     ".fc-now-indicator-line"
-  //   ) as HTMLElement;
-  //   const timeLabel = document.querySelector(
-  //     ".fc-now-time-label"
-  //   ) as HTMLElement;
-
-  //   if (nowIndicator && timeLabel) {
-  //     const indicatorRect = nowIndicator.getBoundingClientRect();
-  //     const calendarRect = document
-  //       .querySelector(".fc-timegrid") // or another parent element that contains both the line and your label
-  //       ?.getBoundingClientRect();
-
-  //     if (calendarRect) {
-  //       timeLabel.style.top = `${indicatorRect.top - calendarRect.top}px`;
-  //       timeLabel.style.left = `${indicatorRect.left - 40}px`;
-  //       timeLabel.style.position = "absolute"; // Ensure it's positioned relative to the calendar container
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const interval = setInterval(updateCurrentTimeLabel, 60000);
-  //   updateCurrentTimeLabel();
-
-  //   return () => clearInterval(interval);
-  // }, []);
-
   return (
     <div className="mb-5">
       <div className="flex item-center justify-between mb-[28px]">
@@ -151,7 +119,7 @@ export const Calendar = () => {
 
         <Button
           onClick={handleAddContractTask}
-          className="!h-fit py-2 px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
+          className="!h-fit py-2 px-4 xMini:px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
           text={translate("calendar.add_task")}
           id="add task"
           inputType="button"
@@ -210,7 +178,6 @@ export const Calendar = () => {
         </div>
       </div>
 
-      {/* <div style={{ position: "relative" }}> */}
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -256,7 +223,6 @@ export const Calendar = () => {
           minute: "2-digit",
           hour12: false,
         }}
-        // nowIndicator={true}
         eventContent={(eventInfo) => {
           const { event, view } = eventInfo;
           const viewType = view?.type;
@@ -269,11 +235,6 @@ export const Calendar = () => {
 
           if (viewType === "dayGridMonth") {
             if (isSmallScreen) {
-              // const formattedTime = event?.allDay
-              //   ? "All Day"
-              //   : `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
-              //       eventInfo.event.end
-              //     ).format("HH:mm")}`;
               return (
                 <DayView
                   time={formattedTime}
@@ -305,9 +266,6 @@ export const Calendar = () => {
             viewType === "timeGridDay" ||
             viewType === "timeGridWeek"
           ) {
-            // const formattedTime = `${moment(eventInfo.event.start).format(
-            //   "HH:mm"
-            // )} - ${moment(eventInfo.event.end).format("HH:mm")}`;
             return (
               <DayView
                 time={formattedTime}
@@ -347,8 +305,6 @@ export const Calendar = () => {
           }
         }}
       />
-      {/* <CurrentTimeIndicator currentTime={currentTime} />
-      </div> */}
 
       {renderModal()}
     </div>

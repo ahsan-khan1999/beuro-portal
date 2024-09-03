@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import useAddTask from "@/hooks/calendar/useAddTask";
@@ -18,10 +18,11 @@ export const AddContractTask = ({
   onSuccess,
   onUpdateSuccess,
 }: AddTaskModalProps) => {
+  const [maxHeight, setMaxHeight] = useState("750px");
   const id = useAppSelector((state) => state.global.modal.data);
   const { locale } = useRouter();
 
-  const { fields, onSubmit, handleSubmit, errors, isRemainder } = useAddTask({
+  const { fields, onSubmit, handleSubmit, errors } = useAddTask({
     isUpdate,
     onSuccess,
     onUpdateSuccess,
@@ -29,6 +30,18 @@ export const AddContractTask = ({
   });
 
   const rightValue = locale === "en" ? "right-[180px]" : "right-[250px]";
+
+  useEffect(() => {
+    const updateMaxHeight = () => {
+      const browserHeight = window.innerHeight;
+      const newMaxHeight = browserHeight < 830 ? "500px" : "750px";
+      setMaxHeight(newMaxHeight);
+    };
+
+    updateMaxHeight();
+    window.addEventListener("resize", updateMaxHeight);
+    return () => window.removeEventListener("resize", updateMaxHeight);
+  }, []);
 
   return (
     <BaseModal
@@ -39,10 +52,8 @@ export const AddContractTask = ({
       <div
         className="px-3 xMini:px-[18px] py-4"
         style={{
-          ...(isRemainder && {
-            maxHeight: "650px",
-            overflowY: "auto",
-          }),
+          maxHeight: maxHeight,
+          overflowY: "auto",
         }}
       >
         <Form

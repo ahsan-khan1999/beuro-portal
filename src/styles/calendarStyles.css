@@ -116,6 +116,10 @@
   font-size: 16px !important;
 }
 
+/* .fc-event {
+  min-height: 60px;
+} */
+
 @media (min-width: 768px) {
   .timeGridDay-flex {
     display: flex !important;

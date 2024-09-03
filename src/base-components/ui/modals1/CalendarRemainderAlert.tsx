@@ -8,6 +8,8 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { updateContractTask } from "@/api/slices/contract/contractSlice";
 import { calculateRemainingTime } from "@/utils/utility";
+import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
+import { RingIcon } from "./ring-icon";
 
 export interface ContractTaskDetailProps {
   onClose: () => void;
@@ -82,11 +84,17 @@ export const CalendarRemainderAlert = ({
               <span className="text-base font-semibold text-[#3C3C3C]">
                 {remainderAlert?.title}
               </span>
-              <span className="text-sm font-semibold text-[#407ae9]">
-                {`${translate("common.starts_in")} ${remainingMinutes} minute${
-                  remainingMinutes !== 1 ? "s" : ""
-                } ${translate("common._at")} ${formattedEndTime}`}
-              </span>
+
+              <div className="flex items-center gap-x-1">
+                <span className="text-sm font-semibold text-[#407ae9]">
+                  {`${translate(
+                    "common.starts_in"
+                  )} ${remainingMinutes} minute${
+                    remainingMinutes !== 1 ? "s" : ""
+                  } ${translate("common._at")} ${formattedEndTime}`}
+                </span>
+                <RingIcon />
+              </div>
             </div>
           </div>
           <svg
