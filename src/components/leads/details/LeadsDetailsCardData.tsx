@@ -194,7 +194,7 @@ const LeadsDetailsCardData = ({
         )}
       </div>
 
-      <div className="grid grid-cols-1 xMini:grid-cols-3 items-center gap-x-5 xlg:gap-x-20 gap-y-5 pt-2 mlg:pt-5">
+      <div className="grid grid-cols-1 xMini:grid-cols-3 items-center gap-x-5 xlg:gap-x-20 gap-y-3 pt-2 mlg:pt-5">
         <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-y-2 mlg:gap-y-0 gap-x-[10px]">
           <span className="font-normal text-[#848484] text-sm mlg:text-base">
             {translate("leads.card_content.lead_id")}:
@@ -241,7 +241,7 @@ const LeadsDetailsCardData = ({
             />
           ) : (
             <div
-              className={`px-[10px] py-1 min-w-[110px] w-fit rounded-lg ${
+              className={`px-[10px] py-1 min-w-[120px] w-fit rounded-lg ${
                 leadDetails?.leadStatus === "InProcess"
                   ? "text-dark"
                   : "text-white"

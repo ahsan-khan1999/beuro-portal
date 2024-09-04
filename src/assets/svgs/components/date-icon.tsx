@@ -6,7 +6,7 @@ export interface DateIconProps {
 
 export const DateIcon = ({ containerClassName }: DateIconProps) => {
   const defaultClasses = combineClasses(
-    "bg-[#EBEBEB] rounded-[4px] p-1",
+    "bg-[#EBEBEB] rounded-[4px] p-[3px]",
     containerClassName
   );
 

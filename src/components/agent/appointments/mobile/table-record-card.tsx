@@ -20,7 +20,7 @@ export const AppointmentTableRecordCard = ({
   const { user } = useAppSelector((state) => state.auth);
 
   return (
-    <div className="flex flex-col gap-y-5">
+    <div className="flex flex-col gap-y-3">
       {dataToAdd.map((item, index) => {
         const handleReportDetail = () => {
           router.push({
@@ -65,13 +65,15 @@ export const AppointmentTableRecordCard = ({
                       {/* <p className="p-1 rounded-[4px] text-[10px] font-medium text-white text-center bg-[#FF376F]">
                         {item?.leadID?.refID}
                       </p> */}
-                      <p className="p-1 rounded-[4px] text-[10px] font-medium text-white text-center bg-primary">
-                        {item?.leadID?.refID}
+                      <p className="h-4 px-[5px] rounded-[4px] bg-primary flex items-center justify-center">
+                        <span className="text-[10px] font-medium text-white">
+                          {item?.leadID?.refID}
+                        </span>
                       </p>
                     </div>
-                    <h2 className="text-[#4A4543] text-base font-medium break-all">
+                    <p className="text-[#4A4543] text-base font-medium break-all">
                       {item?.leadID?.customerDetail?.fullName}
-                    </h2>
+                    </p>
                   </div>
                 </div>
 
@@ -86,16 +88,18 @@ export const AppointmentTableRecordCard = ({
                         : item?.appointmentStatus === "Completed"
                         ? "bg-[#45C769]"
                         : "bg-[#D80027]"
-                    } w-full rounded-lg p-1 text-center text-white text-xs`}
+                    } rounded-lg h-[21px] flex items-center justify-center`}
                   >
-                    {item?.appointmentStatus}
+                    <span className="text-white text-xs font-medium">
+                      {item?.appointmentStatus}
+                    </span>
                   </p>
 
                   {item?.isReportSubmitted ? (
                     <OutlineButton
                       inputType="button"
                       onClick={handlePdfPreview}
-                      className="bg-white text-primary w-full border border-primary py-1 px-1 !h-fit text-xs"
+                      className="bg-white text-primary w-full border border-primary !h-[21px] text-xs font-medium"
                       text={translate("appointments.view_reports_btn")}
                       id="view reports"
                       iconAlt="view reports"
@@ -108,7 +112,7 @@ export const AppointmentTableRecordCard = ({
                           ? handleReportDetail
                           : handleAppointmentRoute
                       }
-                      className="!h-fit py-1 px-1 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
+                      className="!h-[21px] text-xs font-medium text-white flex items-center bg-primary rounded-lg"
                       text={translate("appointments.sub_report")}
                       id="view reports"
                       iconAlt="view reports"

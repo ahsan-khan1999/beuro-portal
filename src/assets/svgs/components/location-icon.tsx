@@ -6,7 +6,7 @@ export interface LocationconProps {
 
 export const LocationIcon = ({ containerClassName }: LocationconProps) => {
   const defaultClasses = combineClasses(
-    "bg-[#EBEBEB] rounded-[4px] p-1",
+    "bg-[#EBEBEB] rounded-[4px] p-[3px]",
     containerClassName
   );
 
