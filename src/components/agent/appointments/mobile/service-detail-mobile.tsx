@@ -27,10 +27,10 @@ export const ReportServiceMobileDetail = ({
   return (
     <>
       <div
-        className="flex justify-between items-center bg-[#C50EE0] py-5 px-6 rounded-t-lg"
+        className="flex justify-between items-center bg-[#C50EE0] py-3 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.additional")}
       >
-        <h2 className="text-[#fff] text-lg xMini:text-xl font-medium">
+        <h2 className="text-[#fff] text-sm xMini:text-xl font-medium">
           {translate("offers.service_details.main_heading")}
         </h2>
         <button

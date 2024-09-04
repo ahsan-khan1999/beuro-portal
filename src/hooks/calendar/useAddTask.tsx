@@ -45,7 +45,7 @@ export default function useAddTask({
     setValue,
     reset,
   } = useForm<FieldValues>({ resolver: yupResolver<FieldValues>(schema) });
-  const [timeDifference, setTimeDifference] = useState(60); // Default 1-hour difference
+  const [timeDifference, setTimeDifference] = useState(60);
 
   const isRemainder = watch("remainder");
   const alertTime = watch("alertTime");
@@ -55,11 +55,10 @@ export default function useAddTask({
   const colour = watch("colour");
 
   useEffect(() => {
-    // If editing, set initial values and compute time difference between start and end dates
     if (id && taskDetail) {
       const startMoment = moment(taskDetail.date[0].startDate);
       const endMoment = moment(taskDetail.date[0].endDate);
-      setTimeDifference(endMoment.diff(startMoment, "minutes")); // Calculate the initial difference
+      setTimeDifference(endMoment.diff(startMoment, "minutes"));
 
       reset({
         title: taskDetail?.title,
@@ -80,7 +79,6 @@ export default function useAddTask({
     if (startDate) {
       const startMoment = moment(startDate);
 
-      // Set the end date to be the start date + timeDifference
       const newEndDate = startMoment
         .add(timeDifference, "minutes")
         .format("YYYY-MM-DDTHH:mm");

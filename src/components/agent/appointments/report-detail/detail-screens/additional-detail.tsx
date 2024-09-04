@@ -27,10 +27,10 @@ export const ReportAdditionalInfoDetail = ({
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center bg-[#45C769] py-5 px-6 rounded-t-lg"
+        className="flex justify-between items-center bg-[#45C769] py-3 px-6 rounded-t-lg"
         id={translate("offers.tabs_heading.additional")}
       >
-        <h2 className="text-[#fff] text-lg xMini:text-xl font-medium">
+        <h2 className="text-[#fff] text-sm xMini:text-xl font-medium">
           {translate("appointments.report_detail.additional_detail")}
         </h2>
         <button

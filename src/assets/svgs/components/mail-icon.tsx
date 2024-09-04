@@ -6,7 +6,7 @@ export interface MailIconProps {
 
 export const MailIcon = ({ containerClassName }: MailIconProps) => {
   const defaultClasses = combineClasses(
-    "bg-[#EBEBEB] rounded-[4px] p-1",
+    "bg-[#EBEBEB] rounded-[4px] p-[3px]",
     containerClassName
   );
 

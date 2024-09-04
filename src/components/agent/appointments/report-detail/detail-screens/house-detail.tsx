@@ -72,10 +72,10 @@ export const ReportHouseDetail = ({ reportDetail }: ReportHouseDetailProps) => {
   return (
     <LeadsCardLayout>
       <div
-        className="flex justify-between items-center bg-[#FE9244] py-5 px-6 rounded-t-lg"
+        className="flex justify-between items-center bg-[#FE9244] py-3 px-6 rounded-t-lg"
         id={translate("appointments.report_detail.house_detail")}
       >
-        <h2 className="text-[#fff] text-lg xMini:text-xl font-medium">
+        <h2 className="text-[#fff] text-sm xMini:text-xl font-medium">
           {translate("appointments.report_detail.house_detail")}
         </h2>
         <button

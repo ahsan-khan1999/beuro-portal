@@ -61,7 +61,7 @@ export default function NoDataEmptyState({
             <Button
               inputType="button"
               onClick={onButtonClick}
-              className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+              className="!h-fit py-2 px-3 flex items-center text-sm font-medium xMini:font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
               text={buttonHeading}
               id="submit reports"
               iconAlt="submit reports"
