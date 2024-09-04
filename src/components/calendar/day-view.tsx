@@ -22,7 +22,7 @@ export const DayView = ({
   isMonthView,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
-    `flex flex-col gap-y-1 p-[6px] cursor-pointer h-full`,
+    `flex flex-col gap-y-1 p-1 cursor-pointer h-full`,
     containerClassName
   );
 
@@ -39,7 +39,7 @@ export const DayView = ({
           : undefined,
       }}
     >
-      <p className="text-[#3C3C3C] text-xs xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+      <p className="text-[#3C3C3C] font-normal text-xs xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
         {title}
       </p>
       <p

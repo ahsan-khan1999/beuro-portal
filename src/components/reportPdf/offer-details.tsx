@@ -114,16 +114,17 @@ export const ReportPDFOfferDetails = ({
       <View
         style={{ ...styles.innerContainer, marginTop: 10, marginBottom: 5 }}
       >
-        <View style={styles.grid}>
+        {/* <View style={styles.grid}>
           {details.map(({ label, value }, index) => (
             <View key={index} style={styles.column}>
               <Text style={styles.columHeading}>{label}</Text>
               <Text style={styles.textBase}>{value}</Text>
             </View>
           ))}
-        </View>
+        </View> */}
 
-        <View style={{ ...styles.column, paddingTop: 10 }}>
+        {/* <View style={{ ...styles.column, paddingTop: 10 }}> */}
+        <View style={{ ...styles.column }}>
           <Text style={styles.columHeading}>
             {langContent[language as keyof typeof langContent]?.remarks}
           </Text>

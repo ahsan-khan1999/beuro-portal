@@ -1058,14 +1058,14 @@ export const sideBar: SideBar[] = [
       {
         title: "sidebar.customer.appointments.completed",
         pathname: "/appointments",
-        query: "3",
+        query: "1",
         queryName: "status",
         role: [1, 2],
       },
       {
         title: "sidebar.customer.appointments.cancelled",
         pathname: "/appointments",
-        query: "1",
+        query: "2",
         queryName: "status",
         role: [1, 2],
       },
@@ -1135,14 +1135,14 @@ export const sideBar: SideBar[] = [
       {
         title: "sidebar.agent.appointments.completed",
         pathname: "/agent/appointments",
-        query: "3",
+        query: "1",
         queryName: "status",
         role: [3],
       },
       {
         title: "sidebar.agent.appointments.cancelled",
         pathname: "/agent/appointments",
-        query: "1",
+        query: "2",
         queryName: "status",
         role: [3],
       },
@@ -1573,7 +1573,7 @@ export const DEFAULT_CONTRACT_TASK: Task = {
     postalCode: "",
     country: "",
   },
-  type:"",
+  type: "",
   contractID: {
     id: "",
   },

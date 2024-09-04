@@ -144,6 +144,26 @@ export default function AppointmentsTabletFilters({
     });
   };
 
+  // const hanldeFilterStatus = (value: string) => {
+  //   router.push(
+  //     {
+  //       pathname: router.pathname,
+  //       query: {
+  //         ...router.query,
+  //         status: value,
+  //       },
+  //     },
+  //     undefined,
+  //     { shallow: false }
+  //   );
+
+  //   setFilter((prev: FilterType) => {
+  //     const updatedFilter = { ...prev, ["status"]: value };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
+
   return (
     <div className="flex items-center justify-between z-50">
       <h1 className={`text-2xl font-medium text-[#222B45]`}>
@@ -151,7 +171,7 @@ export default function AppointmentsTabletFilters({
       </h1>
       <div className="flex items-center gap-x-2">
         <div className="hidden xlg:flex items-center gap-[14px]">
-          {checkbox.map((item, idx) => (
+          {checkbox?.map((item, idx) => (
             <CheckField
               key={idx}
               checkboxFilter={filter}
@@ -174,9 +194,9 @@ export default function AppointmentsTabletFilters({
           textClassName="w-[177px]"
         />
 
-        <div className="block xlg:hidden z-50">
+        {/* <div className="block xlg:hidden z-50">
           <SelectField
-            handleChange={(value) => hanldeSortChange(value)}
+            handleChange={(value) => hanldeFilterStatus(value)}
             value=""
             options={[
               {
@@ -196,7 +216,7 @@ export default function AppointmentsTabletFilters({
             containerClassName="min-w-fit"
             dropdownClassName="w-fit"
           />
-        </div>
+        </div> */}
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}
           value=""

@@ -8,7 +8,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import InvoicesFilter from "@/base-components/filter/invoices-filter";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export default function InvoicesFilters({
   filter,
@@ -24,7 +24,6 @@ export default function InvoicesFilters({
   const router = useRouter();
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
 
   const checkbox: CheckBoxType[] = [
     {
@@ -177,11 +176,10 @@ export default function InvoicesFilters({
     setInputValue(textValue || "");
   }, [router.query.text]);
 
-
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
-        {checkbox.map((item, idx) => (
+        {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
             checkboxFilter={filter}

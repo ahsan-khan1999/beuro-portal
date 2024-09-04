@@ -81,25 +81,25 @@ export default function TabletLeadsFilter({
     });
   };
 
-  const hanldeStatusChange = (value: string) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          status: value,
-        },
-      },
-      undefined,
-      { shallow: false }
-    );
+  // const hanldeStatusChange = (value: string) => {
+  //   router.push(
+  //     {
+  //       pathname: router.pathname,
+  //       query: {
+  //         ...router.query,
+  //         status: value,
+  //       },
+  //     },
+  //     undefined,
+  //     { shallow: false }
+  //   );
 
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["status"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
+  //   setFilter((prev: FilterType) => {
+  //     const updatedFilter = { ...prev, ["status"]: value };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
 
   const checkbox: CheckBoxType[] = [
     {
@@ -179,7 +179,7 @@ export default function TabletLeadsFilter({
 
       <div className="flex items-center gap-x-1 mlg:gap-x-3">
         <div className="hidden xlg:flex items-center gap-[14px]">
-          {checkbox.map((item, idx) => (
+          {checkbox?.map((item, idx) => (
             <CheckField
               key={idx}
               checkboxFilter={filter}
@@ -202,7 +202,7 @@ export default function TabletLeadsFilter({
           textClassName="w-[177px]"
         />
 
-        <div className="block xlg:hidden">
+        {/* <div className="block xlg:hidden">
           <SelectField
             handleChange={(value) => hanldeStatusChange(value)}
             value=""
@@ -228,7 +228,7 @@ export default function TabletLeadsFilter({
             containerClassName="min-w-fit"
             dropdownClassName="w-[160px]"
           />
-        </div>
+        </div> */}
 
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}

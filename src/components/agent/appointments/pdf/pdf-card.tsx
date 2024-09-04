@@ -101,10 +101,10 @@ export const AppointmentPdfCard = ({
             {appointmentDetails?.appointmentID?.leadID?.customerDetail
               ?.companyName && (
               <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
-                <span className="text-base text-[#5C5C5C] font-medium">
+                <span className="text-base text-[#5C5C5C] font-medium min-w-[150px]">
                   {translate("appointments.table_headings.company_name")}:
                 </span>
-                <span className="text-base text-[#5C5C5C] font-nomal">
+                <span className="text-base text-[#5C5C5C] font-nomal truncate">
                   {
                     appointmentDetails?.appointmentID?.leadID?.customerDetail
                       ?.companyName

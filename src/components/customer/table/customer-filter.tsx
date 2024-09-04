@@ -105,6 +105,7 @@ export default function CustomerFilter({
             { label: `${translate("filters.sort_by.a_z")}`, value: "fullName" },
           ]}
           label={translate("common.sort_button")}
+          containerClassName="min-w-fit"
         />
 
         {/* <CustomerFilters

@@ -27,11 +27,12 @@ export default function useAddTask({
   id,
 }: AddTaskHookProps) {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
+  const [timeDifference, setTimeDifference] = useState(60);
   const { loading, error, taskDetail } = useAppSelector(
     (state) => state.contract
   );
-  const { t: translate } = useTranslation();
-  const dispatch = useAppDispatch();
 
   const schema = generateAddTaskValidationSchema(translate);
 
@@ -45,7 +46,6 @@ export default function useAddTask({
     setValue,
     reset,
   } = useForm<FieldValues>({ resolver: yupResolver<FieldValues>(schema) });
-  const [timeDifference, setTimeDifference] = useState(60);
 
   const isRemainder = watch("remainder");
   const alertTime = watch("alertTime");

@@ -127,7 +127,7 @@ export const Calendar = () => {
         />
       </div>
 
-      <div className="p-6 bg-white rounded-t-lg flex flex-col gap-y-4">
+      <div className="p-4 xMini:p-6 bg-white rounded-t-lg flex flex-col gap-y-4">
         <div className="flex items-center justify-between">
           <div>
             <span className="text-[#393939] text-xs xMini:text-base mlg:text-2xl font-medium">

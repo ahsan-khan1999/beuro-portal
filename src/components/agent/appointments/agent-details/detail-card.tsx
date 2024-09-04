@@ -126,18 +126,18 @@ export const AppointmentsDetailCard = ({
       <div className="flex items-center justify-between border-b border-b-[#000] border-opacity-10 pb-5">
         <div className="flex items-center gap-x-3 xMini:gap-x-[27px]">
           <BackIcon onClick={handleBack} />
-          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-lg xMini:text-2xl">
+          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-sm xMini:text-2xl">
             {translate("appointments.detail_heading")}
           </h1>
         </div>
-        <div className="flex items-center gap-x-4">
+        <div className="hidden xMini:flex items-center gap-x-4">
           {!appointmentDetails?.leadID?.isOfferCreated &&
             !isAgent &&
             isReportCreated && (
               <OutlineButton
                 inputType="button"
                 onClick={offerCreateHandler}
-                className="bg-white text-[#4B4B4B] w-full border border-primary !h-10 hover:bg-transparent hover:text-primary"
+                className="bg-white text-[#4B4B4B] border border-primary !h-10 hover:bg-transparent hover:text-primary"
                 text={translate("leads.card_content.create_button")}
                 id="create offer"
                 iconAlt="create offer"

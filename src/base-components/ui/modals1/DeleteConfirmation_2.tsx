@@ -42,7 +42,7 @@ const DeleteConfirmation_2 = ({
         <Image
           src={deleteConfirmIcon}
           alt="delete_icon"
-          className="mt-[59px]"
+          className="mt-10 xMini:mt-[59px]"
         />
         <p className="text-2xlfont-medium mt-5 xMini:mt-[44px] max-w-[290px] text-center">
           {modelHeading}
@@ -51,7 +51,7 @@ const DeleteConfirmation_2 = ({
         <div className="flex gap-x-5 xMini:gap-[33px] mt-[27px] mb-[38px]">
           <button
             onClick={onClose}
-            className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md hover:bg-buttonHover"
+            className="h-8 xMini:h-[50px] px-2 xMini:px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md hover:bg-buttonHover"
           >
             {translate("email_tracker.email_delete_modal.cancel_button")}
           </button>
@@ -68,7 +68,7 @@ const DeleteConfirmation_2 = ({
                 routeHandler();
               }
             }}
-            className="px-[25px] !text-white bg-[#FF0000] rounded-md"
+            className="px-2 xMini:px-[25px] !h-8 xMini:!h-[50px] !text-white bg-[#FF0000] rounded-md"
           />
         </div>
       </div>
