@@ -10,7 +10,7 @@ import {
   updateContractTask,
 } from "@/api/slices/contract/contractSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 
 export interface AddTaskHookProps {
@@ -30,7 +30,6 @@ export default function useAddTask({
   const { loading, error, taskDetail } = useAppSelector(
     (state) => state.contract
   );
-
   const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -42,11 +41,11 @@ export default function useAddTask({
     control,
     trigger,
     formState: { errors },
-    setError,
     watch,
     setValue,
     reset,
   } = useForm<FieldValues>({ resolver: yupResolver<FieldValues>(schema) });
+  const [timeDifference, setTimeDifference] = useState(60); // Default 1-hour difference
 
   const isRemainder = watch("remainder");
   const alertTime = watch("alertTime");
@@ -56,48 +55,39 @@ export default function useAddTask({
   const colour = watch("colour");
 
   useEffect(() => {
-    if (id) {
-      // Reset form values when editing
+    // If editing, set initial values and compute time difference between start and end dates
+    if (id && taskDetail) {
+      const startMoment = moment(taskDetail.date[0].startDate);
+      const endMoment = moment(taskDetail.date[0].endDate);
+      setTimeDifference(endMoment.diff(startMoment, "minutes")); // Calculate the initial difference
+
       reset({
         title: taskDetail?.title,
+        startDate: startMoment.format("YYYY-MM-DDTHH:mm"),
+        endDate: endMoment.format("YYYY-MM-DDTHH:mm"),
         streetNumber: taskDetail?.address?.streetNumber,
         postalCode: taskDetail?.address?.postalCode,
         country: taskDetail?.address?.country,
         isAllDay: taskDetail?.isAllDay,
         note: taskDetail?.note,
         alertTime: taskDetail?.alertTime,
+        colour: taskDetail?.colour,
       });
-      setValue(
-        "colour",
-        taskDetail?.colour ? taskDetail?.colour : colour || ""
-      );
-      setValue("startDate", taskDetail?.date?.[0]?.startDate);
-      setValue("endDate", taskDetail?.date?.[0]?.endDate);
-    } else {
-      // Ensure the colour is set in creation case
-      setValue("colour", colour || "");
     }
-  }, [id]);
+  }, [id, taskDetail]);
 
   useEffect(() => {
     if (startDate) {
-      const startDateObj = moment(startDate);
-      const endDateObj = startDateObj.add(1, "hour").format("YYYY-MM-DDTHH:mm");
+      const startMoment = moment(startDate);
 
-      // Only set the end date if it's empty or during creation (without id)
-      // Avoid overwriting if the user has manually changed the end date
-      if (!endDate && !id) {
-        setValue("endDate", endDateObj);
-      }
+      // Set the end date to be the start date + timeDifference
+      const newEndDate = startMoment
+        .add(timeDifference, "minutes")
+        .format("YYYY-MM-DDTHH:mm");
+
+      setValue("endDate", newEndDate);
     }
   }, [startDate]);
-
-  useEffect(() => {
-    // This effect ensures that endDate is properly updated
-    if (taskDetail && id) {
-      setValue("endDate", taskDetail.date?.[0]?.endDate);
-    }
-  }, [taskDetail, id]);
 
   const taskFields = addTaskFormField(
     register,
@@ -107,7 +97,7 @@ export default function useAddTask({
     endDate,
     setValue,
     isAllDay,
-    taskDetail?.colour,
+    colour,
     alertTime,
     control,
     trigger
@@ -157,7 +147,6 @@ export default function useAddTask({
         await dispatch(
           readContractTasks({ params: { filter: {}, paginate: 0 } })
         );
-
         onSuccess();
       }
     }
