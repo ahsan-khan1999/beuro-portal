@@ -183,7 +183,7 @@ export default function LeadsFilter({
         className={`flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10`}
       >
         <div className="flex items-center gap-[14px]">
-          {checkbox.map((item, idx) => (
+          {checkbox?.map((item, idx) => (
             <CheckField
               key={idx}
               checkboxFilter={filter}

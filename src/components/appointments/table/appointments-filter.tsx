@@ -19,7 +19,7 @@ export default function AppointmentsFilter({
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -146,33 +146,31 @@ export default function AppointmentsFilter({
     });
   };
 
-  const hanldeNoteType = (value: string) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          page: 1,
-          noteType: value,
-        },
-      },
-      undefined,
-      { shallow: false }
-    );
+  // const hanldeNoteType = (value: string) => {
+  //   router.push(
+  //     {
+  //       pathname: router.pathname,
+  //       query: {
+  //         ...router.query,
+  //         page: 1,
+  //         noteType: value,
+  //       },
+  //     },
+  //     undefined,
+  //     { shallow: false }
+  //   );
 
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["noteType"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
-
- 
+  //   setFilter((prev: FilterType) => {
+  //     const updatedFilter = { ...prev, ["noteType"]: value };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex items-center gap-[14px]">
-        {checkbox.map((item, idx) => (
+        {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
             checkboxFilter={filter}
@@ -220,7 +218,7 @@ export default function AppointmentsFilter({
               label={translate("common.sort_button")}
               containerClassName="min-w-fit"
             />
-            <div className="flex items-center gap-x-3">
+            {/* <div className="flex items-center gap-x-3">
               <span className="text-[#4B4B4B] font-semibold text-base">
                 {translate("global_search.notes")}
               </span>
@@ -243,7 +241,7 @@ export default function AppointmentsFilter({
                 }
                 label={translate("add_note_dropdown.all_notes")}
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="flex items-center gap-x-4">

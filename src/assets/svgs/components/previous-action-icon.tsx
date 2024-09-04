@@ -2,12 +2,12 @@ export const PreviousActionIcon = ({ onClick }: { onClick: () => void }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
+      // width="32"
+      // height="32"
       viewBox="0 0 32 32"
       fill="none"
       onClick={onClick}
-      className="cursor-pointer"
+      className="cursor-pointer w-6 h-6 xMini:h-[32px] xMini:w-[32px]"
     >
       <g clip-path="url(#clip0_2403_4778)">
         <path

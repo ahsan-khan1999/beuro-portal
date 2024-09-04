@@ -16,7 +16,7 @@ export const OutlineButton = ({
   disabled,
   id,
 }: ButtonProps) => {
-  const defaultClasses = `!h-10 min-w-fit px-3 py-2 bg-primary border border-lightGray text-dark hover:text-white text-sm font-semibold hover:bg-buttonHover rounded-lg`;
+  const defaultClasses = `!h-10 min-w-fit px-2 xMini:px-3 py-2 bg-primary border border-lightGray text-dark hover:text-white text-sm font-semibold hover:bg-buttonHover rounded-lg`;
   const classes = combineClasses(defaultClasses, className);
 
   return loading ? (
