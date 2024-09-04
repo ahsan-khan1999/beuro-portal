@@ -39,6 +39,13 @@ export const Calendar = () => {
     tabs,
   } = useCalendar();
 
+  // Call handleAddContractTask if isContractId is present in the query
+  useEffect(() => {
+    if (router.query.isContractId) {
+      handleAddContractTask(); // Call add task if isContractId exists
+    }
+  }, [router.query.isContractId]);
+
   const updateDateDisplay = (date: Date, viewType: ViewType) => {
     let formattedDate = "";
 
@@ -302,7 +309,6 @@ export const Calendar = () => {
 
           if (info.event.allDay && viewType === "timeGridDay") {
             info.el.style.display = "inline-block";
-
             info.el.style.overflow = "hidden";
             info.el.style.textOverflow = "ellipsis";
             info.el.style.whiteSpace = "nowrap";

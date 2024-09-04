@@ -36,7 +36,6 @@ export default function Contract() {
       handlePaymentStatusUpdate={handlePaymentStatusUpdate}
       handleContractStatusUpdate={handleContractStatusUpdate}
     />,
-    // currentPageRows.length > 0,
     totalCount !== 0,
     isLoading
   );

@@ -1260,12 +1260,13 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
-    "notifications":"Notifications",
-    "remaind_me":"Remind me in",
+
+    "notifications": "Notifications",
+    "remaind_me": "Remind me in",
     "starts_in": "Starts in",
-    "minute":"minute",
-    "_at":"at",
-    "and":"and",
+    "minute": "minute",
+    "_at": "at",
+    "and": "and",
     "select_canton": "Select Canton",
     "before": "before",
     "hour": "Hour",
@@ -2555,6 +2556,7 @@
     "address": "Address",
     "all_day": "All-Day",
     "all_day_event": "All-day event",
+    "is_contract_task_des": "Would you like to create a task?",
     "tab_headings": {
       "day": "Day",
       "week": "Week",
