@@ -82,8 +82,8 @@ export const CalendarRemainderAlert = ({
                 backgroundColor: `${remainderAlert.colour || "#4A13E7"}`,
               }}
             />
-            <div className="flex flex-col gap-y-1 -mt-1">
-              <span className="text-base font-semibold text-[#3C3C3C]">
+            <div className="flex flex-col gap-y-1 -mt-1 max-w-[320px]">
+              <span className="text-base font-semibold text-[#3C3C3C] truncate">
                 {remainderAlert?.title}
               </span>
 

@@ -22,6 +22,7 @@ import { staticEnums } from "@/utils/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { IsContractTaskCreated } from "@/base-components/ui/modals1/IsContractTaskCreated";
 
 const useContract = () => {
   const {
@@ -136,6 +137,10 @@ const useContract = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  const [selectedContractId, setSelectedContractId] = useState<string | null>(
+    null
+  );
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
 
   const handleFilterChange = (filter: FilterType) => {
     setCurrentPage(1);
@@ -302,6 +307,79 @@ const useContract = () => {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePaymentStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "contracts") {
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (!currentItem || currentItem.paymentType !== status) {
+        const res = await dispatch(
+          updateContractPaymentStatus({
+            data: { id: id, paymentType: staticEnums["PaymentType"][status] },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            contractHandler();
+          }
+        }
+      }
+    }
+  };
+
+  const handleContractStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (status === "Confirmed") {
+      // Show the modal and store the selected contract ID and status
+      setSelectedContractId(id);
+      setSelectedStatus(status); // Store the status
+      dispatch(updateModalType({ type: ModalType.IS_CONTRACT_TASK_CREATED }));
+    } else {
+      // Handle other statuses normally
+      if (type === "contracts") {
+        const currentItem = currentPageRows.find((item) => item.id === id);
+        if (!currentItem || currentItem.contractStatus !== status) {
+          const res = await dispatch(
+            updateContractStatus({
+              data: {
+                id: id,
+                contractStatus: staticEnums["ContractStatus"][status],
+              },
+            })
+          );
+          if (res?.payload) {
+            let index = currentPageRows.findIndex(
+              (item) => item.id === res.payload?.id
+            );
+            if (index !== -1) {
+              let prevPageRows = [...currentPageRows];
+              prevPageRows.splice(index, 1, res.payload);
+              setCurrentPageRows(prevPageRows);
+              contractHandler();
+            }
+          }
+        }
+      }
+    }
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -354,76 +432,18 @@ const useContract = () => {
         route={onClose}
       />
     ),
+    [ModalType.IS_CONTRACT_TASK_CREATED]: (
+      <IsContractTaskCreated
+        onClose={onClose}
+        heading={translate("calendar.is_contract_task_des")}
+        contractId={selectedContractId} // Pass the selected contract ID
+        status={selectedStatus} // Pass the selected status
+      />
+    ),
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleContractStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "contracts") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
-      if (!currentItem || currentItem.contractStatus !== status) {
-        const res = await dispatch(
-          updateContractStatus({
-            data: {
-              id: id,
-              contractStatus: staticEnums["ContractStatus"][status],
-            },
-          })
-        );
-        if (res?.payload) {
-          let index = currentPageRows.findIndex(
-            (item) => item.id === res.payload?.id
-          );
-
-          if (index !== -1) {
-            let prevPageRows = [...currentPageRows];
-            prevPageRows.splice(index, 1, res.payload);
-            setCurrentPageRows(prevPageRows);
-            contractHandler();
-          }
-        }
-      }
-    }
-  };
-
-  const handlePaymentStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "contracts") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
-      if (!currentItem || currentItem.paymentType !== status) {
-        const res = await dispatch(
-          updateContractPaymentStatus({
-            data: { id: id, paymentType: staticEnums["PaymentType"][status] },
-          })
-        );
-
-        if (res?.payload) {
-          let index = currentPageRows.findIndex(
-            (item) => item.id === res.payload?.id
-          );
-
-          if (index !== -1) {
-            let prevPageRows = [...currentPageRows];
-            prevPageRows.splice(index, 1, res.payload);
-            setCurrentPageRows(prevPageRows);
-            contractHandler();
-          }
-        }
-      }
-    }
   };
 
   return {

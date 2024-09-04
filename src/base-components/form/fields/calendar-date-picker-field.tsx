@@ -63,7 +63,7 @@ export const CalendarDatePickerField = ({
         <span className="text-xs text-[#7A7A7A] font-medium">
           {formattedDate
             ? moment(formattedDate).format("ddd, MMM D")
-            : "Select Date"}
+            : `${translate("calendar.select_date")}`}
         </span>
         {dateType === "datetime-local" && (
           <span className="text-sm font-medium text-[#3C3C3C]">

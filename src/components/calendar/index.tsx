@@ -39,6 +39,13 @@ export const Calendar = () => {
     tabs,
   } = useCalendar();
 
+  // Call handleAddContractTask if isContractId is present in the query
+  useEffect(() => {
+    if (router.query.isContractId) {
+      handleAddContractTask(); // Call add task if isContractId exists
+    }
+  }, [router.query.isContractId]);
+
   const updateDateDisplay = (date: Date, viewType: ViewType) => {
     let formattedDate = "";
 
@@ -227,11 +234,18 @@ export const Calendar = () => {
           const { event, view } = eventInfo;
           const viewType = view?.type;
 
+          const startMoment = moment(eventInfo.event.start);
+          const endMoment = moment(eventInfo.event.end);
+          const duration = endMoment.diff(startMoment, "minutes");
+
           const formattedTime = event?.end
             ? `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
                 eventInfo.event.end
               ).format("HH:mm")}`
             : `${moment(eventInfo.event.start).format("HH:mm")}`;
+
+          const showOnlyTitle = duration < 60;
+          const fixedHeight = duration < 1;
 
           if (viewType === "dayGridMonth") {
             if (isSmallScreen) {
@@ -243,6 +257,8 @@ export const Calendar = () => {
                   borderColour={eventInfo.event.borderColor}
                   timeColour={eventInfo.event.textColor}
                   isMonthView={true}
+                  showOnlyTitle={showOnlyTitle}
+                  fixedHeight={fixedHeight}
                 />
               );
             } else {
@@ -273,6 +289,8 @@ export const Calendar = () => {
                 backrgoundColour={eventInfo.event.backgroundColor}
                 borderColour={eventInfo.event.borderColor}
                 timeColour={eventInfo.event.textColor}
+                showOnlyTitle={showOnlyTitle}
+                fixedHeight={fixedHeight}
               />
             );
           } else {
@@ -291,7 +309,6 @@ export const Calendar = () => {
 
           if (info.event.allDay && viewType === "timeGridDay") {
             info.el.style.display = "inline-block";
-
             info.el.style.overflow = "hidden";
             info.el.style.textOverflow = "ellipsis";
             info.el.style.whiteSpace = "nowrap";

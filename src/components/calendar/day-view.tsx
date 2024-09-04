@@ -6,9 +6,11 @@ export interface DayViewProps {
   titleColour?: string;
   timeColour?: string;
   title: string;
-  time: string;
+  time?: string; // Make time optional
   backrgoundColour?: string;
   isMonthView?: boolean;
+  showOnlyTitle?: boolean; // New prop to conditionally render only the title
+  fixedHeight?: boolean; // New prop to handle fixed height for short events
 }
 
 export const DayView = ({
@@ -20,9 +22,11 @@ export const DayView = ({
   time,
   title,
   isMonthView,
+  showOnlyTitle = false,
+  fixedHeight = false,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
-    `flex flex-col gap-y-1 p-1 cursor-pointer h-full`,
+    `flex flex-col gap-y-1 p-1 cursor-pointer`,
     containerClassName
   );
 
@@ -37,19 +41,22 @@ export const DayView = ({
         borderTop: !isMonthView
           ? `3px solid ${borderColour || "#000"}`
           : undefined,
+        height: fixedHeight ? "50px" : "auto",
       }}
     >
       <p className="text-[#3C3C3C] font-normal text-xs xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
         {title}
       </p>
-      <p
-        style={{
-          color: timeColour || "#3C3C3C",
-        }}
-        className="text-[10px] xMini:text-xs whitespace-nowrap overflow-hidden text-ellipsis"
-      >
-        {time}
-      </p>
+      {!showOnlyTitle && (
+        <p
+          style={{
+            color: timeColour || "#3C3C3C",
+          }}
+          className="text-[10px] xMini:text-xs whitespace-nowrap overflow-hidden text-ellipsis"
+        >
+          {time}
+        </p>
+      )}
     </div>
   );
 };

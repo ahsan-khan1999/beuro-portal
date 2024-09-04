@@ -2548,6 +2548,7 @@
     "address": "Adresse",
     "all_day": "Ganztägig",
     "all_day_event": "Ganztägige Veranstaltung",
+    "is_contract_task_des": "Möchten Sie eine Aufgabe erstellen?",
     "tab_headings": {
       "day": "Tag",
       "week": "Woche",
