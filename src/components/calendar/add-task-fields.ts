@@ -26,7 +26,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
         inputType: "text",
         id: "title",
         name: "title",
-        placeholder: "Meet the Alex tomorrow",
+        placeholder: `${translate("common.title")}`,
         register,
       },
     },
@@ -85,7 +85,8 @@ export const addTaskFormField: GenerateAddTaskFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex items-center justify-end gap-x-[6px] mt-[6px]",
+        className:
+          "flex items-center justify-end gap-x-[6px] mt-[6px] mr-[9px]",
         children: [
           {
             containerClass: "mb-0",
