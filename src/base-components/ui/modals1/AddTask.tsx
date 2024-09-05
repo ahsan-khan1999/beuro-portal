@@ -19,14 +19,16 @@ export const AddContractTask = ({
   onUpdateSuccess,
 }: AddTaskModalProps) => {
   const [maxHeight, setMaxHeight] = useState("750px");
-  const id = useAppSelector((state) => state.global.modal.data);
+
   const { locale } = useRouter();
 
   const { fields, onSubmit, handleSubmit, errors } = useAddTask({
     isUpdate,
     onSuccess,
     onUpdateSuccess,
-    id: id?.id,
+    // id: id?.id,
+    // clickedStartDate: clickedStartDate,
+    // clickedEndDate: clickedEndDate,
   });
 
   const rightValue = locale === "en" ? "right-[180px]" : "right-[250px]";

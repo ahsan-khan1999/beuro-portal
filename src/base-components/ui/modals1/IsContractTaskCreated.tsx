@@ -89,7 +89,7 @@ export const IsContractTaskCreated = ({
         dispatch(
           setContractTaskDetails({
             id: "convert",
-            colour: "#45C769",
+            colour: "#5CDD42",
             contractID: {
               id: contractDetails?.id,
             },

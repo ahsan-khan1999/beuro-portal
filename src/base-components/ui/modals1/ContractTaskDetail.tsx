@@ -10,9 +10,14 @@ import addressLocationIcon from "@/assets/pngs/address-location-icon.png";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { Button } from "../button/button";
+import { TaskWithSelectedDates } from "@/types/contract";
 export interface ContractTaskDetailProps {
   onDelete: (id: string) => void;
-  onEditTask: (id: string) => void;
+  onEditTask: (
+    id: string,
+    clickedStartDate?: string,
+    clickedEndDate?: string
+  ) => void;
   onClose: () => void;
 }
 
@@ -22,18 +27,19 @@ export const ContractTaskDetail = ({
   onEditTask,
 }: ContractTaskDetailProps) => {
   const { t: translate } = useTranslation();
-  const { taskDetail } = useAppSelector((state) => state.contract);
-  const firstDateRange = taskDetail?.date && taskDetail.date[0];
+  const taskDetail = useAppSelector(
+    (state) => state.contract.taskDetail
+  ) as TaskWithSelectedDates;
 
-  const startTime = firstDateRange?.startDate
-    ? moment(firstDateRange.startDate).format("HH:mm")
+  const startTime = taskDetail?.selectedStartDate
+    ? moment(taskDetail.selectedStartDate).format("HH:mm")
     : "";
-  const endTime = firstDateRange?.endDate
-    ? moment(firstDateRange.endDate).format("HH:mm")
+  const endTime = taskDetail?.selectedEndDate
+    ? moment(taskDetail.selectedEndDate).format("HH:mm")
     : "";
 
-  const isSameDay = moment(firstDateRange?.startDate).isSame(
-    firstDateRange?.endDate,
+  const isSameDay = moment(taskDetail?.selectedStartDate).isSame(
+    taskDetail?.selectedEndDate,
     "day"
   );
 
@@ -70,10 +76,10 @@ export const ContractTaskDetail = ({
 
         <div className="flex items-start justify-between my-5">
           <div className="ml-5 flex flex-col gap-y-2">
-            {firstDateRange?.startDate && (
+            {taskDetail?.selectedStartDate && (
               <div className="flex flex-col gap-y-1">
                 <span className="text-[#7A7A7A] text-sm font-medium">
-                  {calendarTaskformatDate(firstDateRange.startDate)}
+                  {calendarTaskformatDate(taskDetail.selectedStartDate)}
                 </span>
                 {startTime && endTime ? (
                   <span className="text-[#272727] font-semibold text-sm">
@@ -86,10 +92,10 @@ export const ContractTaskDetail = ({
                 ) : null}
               </div>
             )}
-            {!isSameDay && firstDateRange?.endDate && (
+            {!isSameDay && taskDetail?.selectedEndDate && (
               <div className="flex flex-col gap-y-1">
                 <span className="text-[#7A7A7A] text-sm font-medium">
-                  {calendarTaskformatDate(firstDateRange.endDate)}
+                  {calendarTaskformatDate(taskDetail.selectedEndDate)}
                 </span>
                 {endTime !== "00:00" && (
                   <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
@@ -120,13 +126,6 @@ export const ContractTaskDetail = ({
               </p>
             </div>
           )}
-
-          {/* <span
-            style={{ color: `${taskDetail.colour || "#4A13E7"}` }}
-            className="text-sm font-normal"
-          >
-            {taskDetail?.type}
-          </span> */}
         </div>
         {taskDetail?.note && (
           <div className="flex items-center gap-x-2 max-h-[300px] overflow-y-auto">
@@ -162,7 +161,13 @@ export const ContractTaskDetail = ({
         <div className="pt-[17px] pb-[5px] flex items-center justify-between">
           <span
             className="text-sm font-normal text-[#272727] cursor-pointer"
-            onClick={() => onEditTask(taskDetail?.id)}
+            onClick={() =>
+              onEditTask(
+                taskDetail?.id,
+                taskDetail?.selectedStartDate,
+                taskDetail?.selectedEndDate
+              )
+            }
           >
             {translate("calendar.edit")}
           </span>

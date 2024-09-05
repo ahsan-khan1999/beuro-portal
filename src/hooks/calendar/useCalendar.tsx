@@ -128,10 +128,22 @@ export const useCalendar = () => {
     dispatch(updateModalType({ type: ModalType.ADD_CONTRACT_TASK }));
   };
 
-  const handleContractTaskDetail = (id: string) => {
-    dispatch(readContractTaskDetail({ params: { filter: id } })).then(
+  const handleContractTaskDetail = (
+    taskID: string,
+    clickedStartDate: string,
+    clickedEndDate: string
+  ) => {
+    dispatch(readContractTaskDetail({ params: { filter: taskID } })).then(
       (res: CustomerPromiseActionType) => {
-        dispatch(setContractTaskDetails(res?.payload));
+        if (res?.payload) {
+          dispatch(
+            setContractTaskDetails({
+              ...res.payload,
+              selectedStartDate: clickedStartDate,
+              selectedEndDate: clickedEndDate,
+            })
+          );
+        }
       }
     );
     dispatch(updateModalType({ type: ModalType.READ_CONTRACT_TASK_DETAIL }));
@@ -169,12 +181,18 @@ export const useCalendar = () => {
     );
   };
 
-  const handleUpdateTask = (id: string) => {
+  const handleUpdateTask = (
+    id: string,
+    clickedStartDate?: string,
+    clickedEndDate?: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.UPDATE_ADD_CONTRACT_TASK,
         data: {
           id: id,
+          clickedStartDate: clickedStartDate,
+          clickedEndDate: clickedEndDate,
         },
       })
     );

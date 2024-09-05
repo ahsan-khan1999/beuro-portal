@@ -118,19 +118,15 @@ export interface ContractDetailCardProps {
   handleEditDateModal: () => void;
 }
 
-
-
 export interface Task {
   id: string;
   taskID: string;
   isContrcatCreated: boolean;
   title: string;
-  date: [
-    {
-      startDate: string;
-      endDate: string;
-    }
-  ];
+  date: {
+    startDate: string;
+    endDate: string;
+  }[];
   isAllDay: boolean;
   colour: string;
   createdAt: string;
@@ -141,8 +137,13 @@ export interface Task {
     postalCode: string;
     country: string;
   };
-  type:string
+  type: string;
   contractID: {
     id: string;
   };
+}
+
+export interface TaskWithSelectedDates extends Task {
+  selectedStartDate?: string;
+  selectedEndDate?: string;
 }
