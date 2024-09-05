@@ -1,7 +1,12 @@
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useTranslation } from "next-i18next";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { generateAddTaskValidationSchema } from "@/validation/modalsSchema";
 import { addTaskFormField } from "@/components/calendar/add-task-fields";
 import {
@@ -36,6 +41,7 @@ export default function useAddTask({
 
   const schema = generateAddTaskValidationSchema(translate);
 
+  const { isContractId } = router.query;
   const {
     register,
     handleSubmit,
@@ -47,14 +53,19 @@ export default function useAddTask({
     reset,
   } = useForm<FieldValues>({ resolver: yupResolver<FieldValues>(schema) });
 
+  const { fields: dateFields } = useFieldArray({
+    control,
+    name: "date",
+  });
+
   const isRemainder = watch("remainder");
   const alertTime = watch("alertTime");
-  const startDate = watch("startDate");
-  const endDate = watch("endDate");
+  const startDate = watch("date.0.startDate");
   const isAllDay = watch("isAllDay");
   const colour = watch("colour");
 
   useEffect(() => {
+    if (isContractId) return;
     if (id && taskDetail) {
       const startMoment = moment(taskDetail.date[0].startDate);
       const endMoment = moment(taskDetail.date[0].endDate);
@@ -62,8 +73,7 @@ export default function useAddTask({
 
       reset({
         title: taskDetail?.title,
-        startDate: startMoment.format("YYYY-MM-DDTHH:mm"),
-        endDate: endMoment.format("YYYY-MM-DDTHH:mm"),
+        date: taskDetail?.date,
         streetNumber: taskDetail?.address?.streetNumber,
         postalCode: taskDetail?.address?.postalCode,
         country: taskDetail?.address?.country,
@@ -73,42 +83,65 @@ export default function useAddTask({
         colour: taskDetail?.colour,
       });
     }
-  }, [id, taskDetail]);
+  }, [id, taskDetail, isContractId]);
 
   useEffect(() => {
     if (startDate) {
       const startMoment = moment(startDate);
 
-      const newEndDate = startMoment
-        .add(timeDifference, "minutes")
-        .format("YYYY-MM-DDTHH:mm");
-
-      setValue("endDate", newEndDate);
+      if (isUpdate) {
+        const newEndDate = startMoment
+          .add(timeDifference, "minutes")
+          .format("YYYY-MM-DDTHH:mm");
+        setValue("date.0.endDate", newEndDate);
+      } else {
+        const newEndDate = startMoment
+          .add(60, "minutes")
+          .format("YYYY-MM-DDTHH:mm");
+        setValue("date.0.endDate", newEndDate);
+      }
     }
   }, [startDate]);
+
+  useEffect(() => {
+    if (isContractId) {
+      const startMoment = moment(taskDetail.date[0].startDate);
+      const endMoment = moment(taskDetail.date[0].endDate);
+      setTimeDifference(endMoment.diff(startMoment, "minutes"));
+
+      reset({
+        title: taskDetail?.title,
+        date: taskDetail?.date,
+        streetNumber: taskDetail?.address?.streetNumber,
+        postalCode: taskDetail?.address?.postalCode,
+        country: taskDetail?.address?.country,
+        isAllDay: taskDetail?.isAllDay,
+        note: taskDetail?.note,
+        alertTime: taskDetail?.alertTime,
+        colour: taskDetail?.colour,
+      });
+    }
+  }, [isContractId]);
 
   const taskFields = addTaskFormField(
     register,
     loading,
     isRemainder,
-    startDate,
-    endDate,
+    dateFields?.length ? dateFields?.length : 1,
     setValue,
+    watch,
     isAllDay,
     colour,
     alertTime,
     control,
-    trigger
+    trigger,
+    taskDetail?.date
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const formattedDate = data.startDate
-      ? [{ startDate: data.startDate, endDate: data.endDate }]
-      : [];
-
     const formattedData: any = {
       title: data.title,
-      date: formattedDate,
+      date: data.date,
       isAllDay: data.isAllDay,
       colour: data.colour,
       note: data.note,
@@ -136,16 +169,27 @@ export default function useAddTask({
         );
 
     if (res?.payload) {
-      if (isUpdate) {
+      if (!isUpdate) {
+        const { isContractId, ...restQuery } = router.query;
+        router.replace(
+          {
+            pathname: router.pathname,
+            query: restQuery,
+          },
+          undefined,
+          { shallow: true }
+        );
+
         await dispatch(
           readContractTasks({ params: { filter: {}, paginate: 0 } })
         );
-        onUpdateSuccess();
+
+        onSuccess();
       } else {
         await dispatch(
           readContractTasks({ params: { filter: {}, paginate: 0 } })
         );
-        onSuccess();
+        onUpdateSuccess();
       }
     }
   };

@@ -320,14 +320,15 @@ export type GenerateAddTaskFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   isRemainder: boolean,
-  startDate: string,
-  endDate: string,
+  count: number,
   setValue: UseFormSetValue<FieldValues>,
+  watch: UseFormWatch<FieldValues>,
   isAllDay?: boolean,
   colour?: string,
   alertTime?: number,
   control?: Control<FieldValues>,
-  trigger?: UseFormTrigger<FieldValues>
+  trigger?: UseFormTrigger<FieldValues>,
+  date?: { startDate: string; endDate: string }[]
 ) => FormField[];
 
 export type GenerateRemainderFormField = (

@@ -39,10 +39,9 @@ export const Calendar = () => {
     tabs,
   } = useCalendar();
 
-  // Call handleAddContractTask if isContractId is present in the query
   useEffect(() => {
     if (router.query.isContractId) {
-      handleAddContractTask(); // Call add task if isContractId exists
+      handleAddContractTask();
     }
   }, [router.query.isContractId]);
 

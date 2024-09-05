@@ -206,8 +206,16 @@ const TableRows = ({
                     dropDownTextClassName="text-white text-base font-medium"
                     dropDownIconClassName={`text-[#fff]`}
                     dropDownItemsContainerClassName="w-full"
-                    isSecondLastIndex={index === dataToAdd?.length - 2}
-                    isLastIndex={index === dataToAdd?.length - 1}
+                    isSecondLastIndex={
+                      dataToAdd &&
+                      dataToAdd.length > 5 &&
+                      index === dataToAdd.length - 2
+                    }
+                    isLastIndex={
+                      dataToAdd &&
+                      dataToAdd.length > 5 &&
+                      index === dataToAdd.length - 1
+                    }
                     isContract={true}
                   />
                 </span>

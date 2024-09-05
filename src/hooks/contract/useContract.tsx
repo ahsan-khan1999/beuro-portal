@@ -347,12 +347,10 @@ const useContract = () => {
     type: string
   ) => {
     if (status === "Confirmed") {
-      // Show the modal and store the selected contract ID and status
       setSelectedContractId(id);
-      setSelectedStatus(status); // Store the status
+      setSelectedStatus(status);
       dispatch(updateModalType({ type: ModalType.IS_CONTRACT_TASK_CREATED }));
     } else {
-      // Handle other statuses normally
       if (type === "contracts") {
         const currentItem = currentPageRows.find((item) => item.id === id);
         if (!currentItem || currentItem.contractStatus !== status) {

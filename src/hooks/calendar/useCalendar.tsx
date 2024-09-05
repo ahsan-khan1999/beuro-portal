@@ -20,22 +20,28 @@ import { CustomerPromiseActionType } from "@/types/company";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 import { CalendarRemainderAlert } from "@/base-components/ui/modals1/CalendarRemainderAlert";
 import moment from "moment";
+import { useRouter } from "next/router";
 
 export const useCalendar = () => {
   const { loading, task } = useAppSelector((state) => state.contract);
+
+  const router = useRouter();
   const [reminderEvents, setReminderEvents] = useState<Task[]>([]);
   const [triggeredReminders, setTriggeredReminders] = useState<Set<string>>(
     new Set()
   );
 
+  const { isContractId } = router.query;
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
 
   useEffect(() => {
-    localStoreUtil.remove_data("task");
-    dispatch(setContractTaskDetails(DEFAULT_CONTRACT_TASK));
-  }, []);
+    if (!isContractId) {
+      localStoreUtil.remove_data("task");
+      dispatch(setContractTaskDetails(DEFAULT_CONTRACT_TASK));
+    }
+  }, [isContractId]);
 
   useEffect(() => {
     dispatch(readContractTasks({ params: { filter: {}, paginate: 0 } }));
