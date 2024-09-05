@@ -359,6 +359,8 @@ export const generateDateChildren = (
   date?: { startDate: string; endDate: string }[],
   isAllDay?: boolean
 ) => {
+  console.log(date, "date");
+
   return [
     ...((date && date.length > 0 ? date : [{ endDate: "", startDate: "" }]) || [
       { endDate: "", startDate: "" },

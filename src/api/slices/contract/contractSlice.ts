@@ -330,7 +330,11 @@ const ContractSlice = createSlice({
       state.task = action.payload;
     },
     setContractTaskDetails: (state, action) => {
-      state.taskDetail = action.payload;
+      state.taskDetail = {
+        ...action.payload,
+        selectedStartDate: action.payload.selectedStartDate || "",
+        selectedEndDate: action.payload.selectedEndDate || "",
+      };
     },
   },
   extraReducers(builder) {

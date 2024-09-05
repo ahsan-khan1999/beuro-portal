@@ -22,14 +22,12 @@ export interface AddTaskHookProps {
   isUpdate?: boolean;
   onSuccess: () => void;
   onUpdateSuccess: () => void;
-  id?: string;
 }
 
 export default function useAddTask({
   isUpdate,
   onSuccess,
   onUpdateSuccess,
-  id,
 }: AddTaskHookProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -39,6 +37,11 @@ export default function useAddTask({
     (state) => state.contract
   );
 
+  const { id, clickedStartDate, clickedEndDate } = useAppSelector(
+    (state) => state.global.modal.data ?? {}
+  );
+
+  const [date, setDate] = useState(taskDetail?.date);
   const schema = generateAddTaskValidationSchema(translate);
 
   const { isContractId } = router.query;
@@ -66,24 +69,34 @@ export default function useAddTask({
 
   useEffect(() => {
     if (isContractId) return;
-    if (id && taskDetail) {
-      const startMoment = moment(taskDetail.date[0].startDate);
-      const endMoment = moment(taskDetail.date[0].endDate);
-      setTimeDifference(endMoment.diff(startMoment, "minutes"));
 
-      reset({
-        title: taskDetail?.title,
-        date: taskDetail?.date,
-        streetNumber: taskDetail?.address?.streetNumber,
-        postalCode: taskDetail?.address?.postalCode,
-        country: taskDetail?.address?.country,
-        isAllDay: taskDetail?.isAllDay,
-        note: taskDetail?.note,
-        alertTime: taskDetail?.alertTime,
-        colour: taskDetail?.colour,
-      });
+    if (id && taskDetail) {
+      let filteredDate = taskDetail.date;
+
+      if (isUpdate && clickedStartDate && clickedEndDate) {
+        filteredDate = taskDetail.date.filter(
+          (date) =>
+            moment(date.startDate).isSame(clickedStartDate) &&
+            moment(date.endDate).isSame(clickedEndDate)
+        );
+      }
+
+      if (filteredDate.length > 0) {
+        setDate(filteredDate);
+        reset({
+          title: taskDetail?.title,
+          date: filteredDate,
+          streetNumber: taskDetail?.address?.streetNumber,
+          postalCode: taskDetail?.address?.postalCode,
+          country: taskDetail?.address?.country,
+          isAllDay: taskDetail?.isAllDay,
+          note: taskDetail?.note,
+          alertTime: taskDetail?.alertTime,
+          colour: taskDetail?.colour,
+        });
+      }
     }
-  }, [id, taskDetail, isContractId]);
+  }, [id, taskDetail, isContractId, clickedStartDate, clickedEndDate]);
 
   useEffect(() => {
     if (startDate) {
@@ -105,10 +118,6 @@ export default function useAddTask({
 
   useEffect(() => {
     if (isContractId) {
-      const startMoment = moment(taskDetail.date[0].startDate);
-      const endMoment = moment(taskDetail.date[0].endDate);
-      setTimeDifference(endMoment.diff(startMoment, "minutes"));
-
       reset({
         title: taskDetail?.title,
         date: taskDetail?.date,
@@ -135,7 +144,7 @@ export default function useAddTask({
     alertTime,
     control,
     trigger,
-    taskDetail?.date
+    date
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

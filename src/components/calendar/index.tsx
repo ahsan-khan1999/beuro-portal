@@ -206,7 +206,17 @@ export const Calendar = () => {
         )}
         eventClick={(info) => {
           const taskID = info.event.extendedProps.taskID;
-          handleContractTaskDetail(taskID);
+
+          if (info.event.start) {
+            const clickedStartDate = info.event.start.toISOString();
+            const clickedEndDate = info.event.end
+              ? info.event.end.toISOString()
+              : clickedStartDate;
+
+            handleContractTaskDetail(taskID, clickedStartDate, clickedEndDate);
+          } else {
+            console.error("Start date is missing for this event");
+          }
         }}
         editable={false}
         selectable={true}
