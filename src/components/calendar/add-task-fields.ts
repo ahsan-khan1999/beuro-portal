@@ -2,19 +2,26 @@ import { Field } from "@/enums/form";
 import { FormField, GenerateAddTaskFormField } from "@/types";
 import { formatAlertTime } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import {
+  FieldValues,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormWatch,
+} from "react-hook-form";
 
 export const addTaskFormField: GenerateAddTaskFormField = (
   register,
   loading,
   isRemainder,
-  startDate,
-  endDate,
+  count,
   setValue,
+  watch,
   isAllDay,
   colour,
   alertTime,
   control,
-  trigger
+  trigger,
+  date
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -32,52 +39,19 @@ export const addTaskFormField: GenerateAddTaskFormField = (
     },
 
     {
+      containerClass: "mt-0 relative",
+      //@ts-expect-error
       field: {
         type: Field.div,
-        id: "div-field",
-        className:
-          "flex justify-between bg-white rounded-lg py-[5px] px-[10px] mt-[14px]",
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.calendarDatePicker,
-              id: "startDate",
-              name: "startDate",
-              svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-      <path d="M16.2825 4.9375H15.4492V3.27083C15.4492 3.04982 15.3614 2.83786 15.2051 2.68158C15.0488 2.5253 14.8369 2.4375 14.6158 2.4375C14.3948 2.4375 14.1829 2.5253 14.0266 2.68158C13.8703 2.83786 13.7825 3.04982 13.7825 3.27083V4.9375H7.11584V3.27083C7.11584 3.04982 7.02805 2.83786 6.87177 2.68158C6.71549 2.5253 6.50353 2.4375 6.28251 2.4375C6.0615 2.4375 5.84954 2.5253 5.69326 2.68158C5.53698 2.83786 5.44918 3.04982 5.44918 3.27083V4.9375H4.61584C3.9528 4.9375 3.31692 5.20089 2.84808 5.66973C2.37924 6.13857 2.11584 6.77446 2.11584 7.4375V8.27083H18.7825V7.4375C18.7825 6.77446 18.5191 6.13857 18.0503 5.66973C17.5814 5.20089 16.9456 4.9375 16.2825 4.9375Z" fill="#4A13E7"/>
-      <path d="M2.11584 16.6042C2.11584 17.2672 2.37924 17.9031 2.84808 18.3719C3.31692 18.8408 3.9528 19.1042 4.61584 19.1042H16.2825C16.9456 19.1042 17.5814 18.8408 18.0503 18.3719C18.5191 17.9031 18.7825 17.2672 18.7825 16.6042V9.9375H2.11584V16.6042Z" fill="#4A13E7"/>
-    </svg>`,
-              dateType: isAllDay ? "date" : "datetime-local",
-              value: startDate,
-              register,
-              setValue,
-            },
-          },
-          {
-            containerClass: "border-r border-[#000] border-opacity-30",
-            field: {
-              type: Field.span,
-              id: "border",
-            },
-          },
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.calendarDatePicker,
-              id: "endDate",
-              name: "endDate",
-              svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-      <path d="M16.2825 4.9375H15.4492V3.27083C15.4492 3.04982 15.3614 2.83786 15.2051 2.68158C15.0488 2.5253 14.8369 2.4375 14.6158 2.4375C14.3948 2.4375 14.1829 2.5253 14.0266 2.68158C13.8703 2.83786 13.7825 3.04982 13.7825 3.27083V4.9375H7.11584V3.27083C7.11584 3.04982 7.02805 2.83786 6.87177 2.68158C6.71549 2.5253 6.50353 2.4375 6.28251 2.4375C6.0615 2.4375 5.84954 2.5253 5.69326 2.68158C5.53698 2.83786 5.44918 3.04982 5.44918 3.27083V4.9375H4.61584C3.9528 4.9375 3.31692 5.20089 2.84808 5.66973C2.37924 6.13857 2.11584 6.77446 2.11584 7.4375V8.27083H18.7825V7.4375C18.7825 6.77446 18.5191 6.13857 18.0503 5.66973C17.5814 5.20089 16.9456 4.9375 16.2825 4.9375Z" fill="#4A13E7"/>
-      <path d="M2.11584 16.6042C2.11584 17.2672 2.37924 17.9031 2.84808 18.3719C3.31692 18.8408 3.9528 19.1042 4.61584 19.1042H16.2825C16.9456 19.1042 17.5814 18.8408 18.0503 18.3719C18.5191 17.9031 18.7825 17.2672 18.7825 16.6042V9.9375H2.11584V16.6042Z" fill="#4A13E7"/>
-    </svg>`,
-              dateType: isAllDay ? "date" : "datetime-local",
-              value: endDate,
-              register,
-              setValue,
-            },
-          },
-        ],
+        id: "div-field1",
+        className: "grid grid-cols-1 gap-x-3 items-center",
+        children: generateDateChildren(
+          register,
+          setValue,
+          watch,
+          date,
+          isAllDay
+        ),
       },
     },
 
@@ -357,9 +331,7 @@ export const addTaskFormField: GenerateAddTaskFormField = (
         id: "note",
         name: "note",
         placeholder: translate("common.text_area_msg"),
-        //         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-        //   <path fill-rule="evenodd" clip-rule="evenodd" d="M2.69948 0.818359C1.89073 0.863731 1.38017 0.992606 1.01415 1.35863C0.449219 1.92356 0.449219 2.14665 0.449219 3.42836V7.28597C0.449219 9.10443 0.449219 10.0137 1.01415 10.5786C1.57908 11.1436 2.48832 11.1436 4.3068 11.1436H8.16439C9.98286 11.1436 10.8921 11.1436 11.457 10.5786C12.022 10.0137 12.022 9.10443 12.022 7.28597V3.42836C12.022 2.1904 12.022 1.92356 11.457 1.35863C11.091 0.992606 10.5805 0.863731 9.77172 0.818359C9.147 0.818359 8.58514 0.818359 7.51987 0.818359H4.3068C3.24156 0.818359 5.48223 0.818359 4.3068 0.818359H2.69948ZM2.53874 3.75094C2.53874 3.48464 2.75463 3.26874 3.02094 3.26874H9.45025C9.71655 3.26874 9.93245 3.48464 9.93245 3.75094C9.93245 4.01724 9.71655 4.23314 9.45025 4.23314H3.02094C2.75463 4.23314 2.53874 4.01724 2.53874 3.75094ZM3.18168 6.0012C3.18168 5.7349 3.39757 5.519 3.66387 5.519H8.80732C9.07362 5.519 9.28952 5.7349 9.28952 6.0012C9.28952 6.2675 9.07362 6.4834 8.80732 6.4834H3.66387C3.39757 6.4834 3.18168 6.2675 3.18168 6.0012ZM3.82461 8.25146C3.82461 7.98516 4.0405 7.76926 4.3068 7.76926H8.16439C8.43069 7.76926 8.64659 7.98516 8.64659 8.25146C8.64659 8.51776 8.43069 8.73366 8.16439 8.73366H4.3068C4.0405 8.73366 3.82461 8.51776 3.82461 8.25146Z" fill="#616161"/>
-        // </svg>`,
+
         register,
       },
     },
@@ -378,4 +350,70 @@ export const addTaskFormField: GenerateAddTaskFormField = (
   ];
 
   return formField;
+};
+
+export const generateDateChildren = (
+  register: UseFormRegister<FieldValues>,
+  setValue: UseFormSetValue<FieldValues>,
+  watch: UseFormWatch<FieldValues>,
+  date?: { startDate: string; endDate: string }[],
+  isAllDay?: boolean
+) => {
+  return [
+    ...((date && date.length > 0 ? date : [{ endDate: "", startDate: "" }]) || [
+      { endDate: "", startDate: "" },
+    ]),
+  ]?.map((item, index) => ({
+    containerClass: "mb-0",
+
+    field: {
+      type: Field.div,
+      id: "div-field",
+      className:
+        "flex justify-between bg-white rounded-lg py-[5px] px-[10px] mt-[14px]",
+      children: [
+        {
+          containerClass: "mb-0",
+          field: {
+            type: Field.calendarDatePicker,
+            id: `date.${index}.startDate`,
+            name: `date.${index}.startDate`,
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+        <path d="M16.2825 4.9375H15.4492V3.27083C15.4492 3.04982 15.3614 2.83786 15.2051 2.68158C15.0488 2.5253 14.8369 2.4375 14.6158 2.4375C14.3948 2.4375 14.1829 2.5253 14.0266 2.68158C13.8703 2.83786 13.7825 3.04982 13.7825 3.27083V4.9375H7.11584V3.27083C7.11584 3.04982 7.02805 2.83786 6.87177 2.68158C6.71549 2.5253 6.50353 2.4375 6.28251 2.4375C6.0615 2.4375 5.84954 2.5253 5.69326 2.68158C5.53698 2.83786 5.44918 3.04982 5.44918 3.27083V4.9375H4.61584C3.9528 4.9375 3.31692 5.20089 2.84808 5.66973C2.37924 6.13857 2.11584 6.77446 2.11584 7.4375V8.27083H18.7825V7.4375C18.7825 6.77446 18.5191 6.13857 18.0503 5.66973C17.5814 5.20089 16.9456 4.9375 16.2825 4.9375Z" fill="#4A13E7"/>
+        <path d="M2.11584 16.6042C2.11584 17.2672 2.37924 17.9031 2.84808 18.3719C3.31692 18.8408 3.9528 19.1042 4.61584 19.1042H16.2825C16.9456 19.1042 17.5814 18.8408 18.0503 18.3719C18.5191 17.9031 18.7825 17.2672 18.7825 16.6042V9.9375H2.11584V16.6042Z" fill="#4A13E7"/>
+      </svg>`,
+            dateType: isAllDay ? "date" : "datetime-local",
+            value: item.startDate,
+            register,
+            setValue,
+            watch,
+          },
+        },
+        {
+          containerClass: "border-r border-[#000] border-opacity-30",
+          field: {
+            type: Field.span,
+            id: "border",
+          },
+        },
+        {
+          containerClass: "mb-0",
+          field: {
+            type: Field.calendarDatePicker,
+            id: `date.${index}.endDate`,
+            name: `date.${index}.endDate`,
+            svg: `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+        <path d="M16.2825 4.9375H15.4492V3.27083C15.4492 3.04982 15.3614 2.83786 15.2051 2.68158C15.0488 2.5253 14.8369 2.4375 14.6158 2.4375C14.3948 2.4375 14.1829 2.5253 14.0266 2.68158C13.8703 2.83786 13.7825 3.04982 13.7825 3.27083V4.9375H7.11584V3.27083C7.11584 3.04982 7.02805 2.83786 6.87177 2.68158C6.71549 2.5253 6.50353 2.4375 6.28251 2.4375C6.0615 2.4375 5.84954 2.5253 5.69326 2.68158C5.53698 2.83786 5.44918 3.04982 5.44918 3.27083V4.9375H4.61584C3.9528 4.9375 3.31692 5.20089 2.84808 5.66973C2.37924 6.13857 2.11584 6.77446 2.11584 7.4375V8.27083H18.7825V7.4375C18.7825 6.77446 18.5191 6.13857 18.0503 5.66973C17.5814 5.20089 16.9456 4.9375 16.2825 4.9375Z" fill="#4A13E7"/>
+        <path d="M2.11584 16.6042C2.11584 17.2672 2.37924 17.9031 2.84808 18.3719C3.31692 18.8408 3.9528 19.1042 4.61584 19.1042H16.2825C16.9456 19.1042 17.5814 18.8408 18.0503 18.3719C18.5191 17.9031 18.7825 17.2672 18.7825 16.6042V9.9375H2.11584V16.6042Z" fill="#4A13E7"/>
+      </svg>`,
+            dateType: isAllDay ? "date" : "datetime-local",
+            value: item.endDate,
+            register,
+            setValue,
+            watch,
+          },
+        },
+      ],
+    },
+  }));
 };

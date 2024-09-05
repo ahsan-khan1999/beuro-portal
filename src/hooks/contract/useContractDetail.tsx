@@ -37,7 +37,7 @@ export default function useContractDetail() {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState<string>("");
-  const { contractDetails, loading, contract } = useAppSelector(
+  const { contractDetails, loading } = useAppSelector(
     (state) => state.contract
   );
 

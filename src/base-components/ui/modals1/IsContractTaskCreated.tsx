@@ -1,15 +1,21 @@
 import { useRouter } from "next/router";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useTranslation } from "next-i18next";
-import { updateContractStatus } from "@/api/slices/contract/contractSlice";
+import {
+  readContractDetails,
+  setContractTaskDetails,
+  updateContractStatus,
+} from "@/api/slices/contract/contractSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { useDispatch } from "react-redux";
 import { ModalType } from "@/enums/ui";
 import { staticEnums } from "@/utils/static";
-
+import localStoreUtil from "@/utils/localstore.util";
+import { useAppSelector } from "@/hooks/useRedux";
+import moment from "moment";
 export interface IsTaskModalProps {
   onClose: () => void;
   heading: string;
@@ -27,6 +33,16 @@ export const IsContractTaskCreated = ({
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const { contractDetails } = useAppSelector((state) => state.contract);
+
+  useEffect(() => {
+    localStoreUtil.remove_data("contractComposeEmail");
+
+    if (contractId) {
+      dispatch(readContractDetails({ params: { filter: contractId } }));
+    }
+  }, [contractId]);
+
   const handleConfirm = async () => {
     if (contractId) {
       const res = await dispatch(
@@ -38,6 +54,56 @@ export const IsContractTaskCreated = ({
         })
       );
 
+      if (contractDetails?.offerID?.date) {
+        const updatedDates = contractDetails.offerID.date.map(
+          (dateItem: any) => {
+            const { startDate, endDate } = dateItem;
+            const taskTime = contractDetails?.offerID?.time || "00:00";
+
+            const startMoment = moment(startDate).set({
+              hour: parseInt(taskTime.split(":")[0], 10),
+              minute: parseInt(taskTime.split(":")[1], 10),
+            });
+
+            let endMoment;
+
+            if (endDate) {
+              endMoment = moment(endDate)
+                .set({
+                  hour: parseInt(taskTime.split(":")[0], 10),
+                  minute: parseInt(taskTime.split(":")[1], 10),
+                })
+                .add(1, "hour");
+            } else {
+              endMoment = startMoment.clone().add(1, "hour");
+            }
+
+            return {
+              ...dateItem,
+              startDate: startMoment.format("YYYY-MM-DDTHH:mm"),
+              endDate: endMoment.format("YYYY-MM-DDTHH:mm"),
+            };
+          }
+        );
+
+        dispatch(
+          setContractTaskDetails({
+            id: "convert",
+            colour: "#45C769",
+            contractID: {
+              id: contractDetails?.id,
+            },
+            date: updatedDates,
+            title: contractDetails?.title,
+            isAllDay: false,
+            isContractCreated: true,
+            type: "Contract",
+            alertTime: 15,
+            note: contractDetails?.contractNumber,
+          })
+        );
+      }
+
       if (res?.payload) {
         dispatch(updateModalType(ModalType.NONE));
         router.push(`/calendar?isContractId=${contractId}`);
@@ -46,7 +112,6 @@ export const IsContractTaskCreated = ({
   };
 
   const handleCancel = () => {
-    // Just close the modal without updating the status
     dispatch(updateModalType(ModalType.NONE));
   };
 

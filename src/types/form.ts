@@ -356,6 +356,7 @@ export interface CalendarDatePickerProps
   extends BaseFieldProps<Field.calendarDatePicker> {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
+  watch: UseFormWatch<FieldValues>,
   value?: string;
   className?: string;
   svg?: string;

@@ -167,7 +167,6 @@ export const generateDateChildren = (
   const { t: translate } = useTranslation();
   const dateformFields = [];
   for (let i = 0; i < count; i++) {
-    console.log(workDates && !workDates[i]?.endDate);
     dateformFields.push({
       containerClass: "mb-0",
       field: {

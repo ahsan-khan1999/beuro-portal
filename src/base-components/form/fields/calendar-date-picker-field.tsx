@@ -14,6 +14,7 @@ export const CalendarDatePickerField = ({
   max,
   disable,
   setValue,
+  watch,
 }: CalendarDatePickerProps) => {
   const [formattedDate, setFormattedDate] = useState(
     value
@@ -24,6 +25,14 @@ export const CalendarDatePickerField = ({
   );
 
   const dateInputRef = useRef<HTMLInputElement>(null);
+
+  const inputVal = watch(name);
+
+  useEffect(() => {
+    if (inputVal !== formattedDate) {
+      setFormattedDate(inputVal);
+    }
+  }, [inputVal, formattedDate]);
 
   useEffect(() => {
     if (value) {
