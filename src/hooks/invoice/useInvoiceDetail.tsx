@@ -34,6 +34,7 @@ import { readContent } from "@/api/slices/content/contentSlice";
 import { updateQuery } from "@/utils/update-query";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { PaymentStatusChange } from "@/base-components/ui/modals1/PaymentStatusChange";
 
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
@@ -170,10 +171,6 @@ export default function useInvoiceDetail() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const route = () => {
-    dispatch(updateModalType({ type: ModalType.NONE }));
-  };
-
   const handleNotes = (
     id: string,
     refID?: string,
@@ -286,6 +283,22 @@ export default function useInvoiceDetail() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handlePaymentStatusChange = (id: string, status: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.INVOICE_PAYMENT_STATUS,
+        data: {
+          id: id,
+          status: status,
+        },
+      })
+    );
+  };
+
+  const handlePaymentStatusSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.PAYMENT_STATUS_UPDATE }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -295,7 +308,6 @@ export default function useInvoiceDetail() {
         subHeading={translate("common.modals.enter_invoice_id")}
       />
     ),
-
     [ModalType.CONFIRM_DELETE_NOTE]: (
       <ConfirmDeleteNote
         onClose={onClose}
@@ -322,7 +334,6 @@ export default function useInvoiceDetail() {
         onConfrimDeleteNote={handleConfirmDeleteNote}
       />
     ),
-
     [ModalType.EDIT_NOTE]: (
       <UpdateNote
         onClose={onClose}
@@ -330,7 +341,6 @@ export default function useInvoiceDetail() {
         mainHeading={translate("common.update_note")}
       />
     ),
-
     [ModalType.ADD_NOTE]: (
       <AddNewNote
         onClose={onClose}
@@ -338,21 +348,26 @@ export default function useInvoiceDetail() {
         mainHeading={translate("common.add_note")}
       />
     ),
-
     [ModalType.INVOICE_CREATE]: (
       <InvoiceCreated onClose={onClose} invoiceCreated={invoiceCreated} />
     ),
-
     [ModalType.INVOICE_UPDATE]: (
       <InvoiceUpdate onClose={onClose} invoiceCreated={invoiceCreated} />
     ),
-
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
-        route={route}
+        route={onClose}
+      />
+    ),
+    [ModalType.PAYMENT_STATUS_UPDATE]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={onClose}
       />
     ),
     [ModalType.ARE_YOU_SURE]: (
@@ -375,11 +390,17 @@ export default function useInvoiceDetail() {
         route={onSuccess}
       />
     ),
-
     [ModalType.RECURRING_INVOICE_UPDATE]: (
       <RecurringInvoiceUpdate
         onClose={onClose}
         invoiceCreated={invoiceCreated}
+      />
+    ),
+    [ModalType.INVOICE_PAYMENT_STATUS]: (
+      <PaymentStatusChange
+        onClose={onClose}
+        heading={translate("common.change_payment")}
+        onSuccess={handlePaymentStatusSuccess}
       />
     ),
   };
@@ -481,5 +502,6 @@ export default function useInvoiceDetail() {
     totalCount,
     loadingInvoice,
     loadingReceipt,
+    handlePaymentStatusChange,
   };
 }

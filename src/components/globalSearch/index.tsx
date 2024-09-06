@@ -25,6 +25,7 @@ export const GlobalSearch = () => {
     handleInvoiceEdit,
     handleRecurringInvoiceEdit,
     loading,
+    handlePaymentStatusChange,
   } = useInvoiceDetail();
 
   const { currentPageRows, filter, setFilter, handleFilterChange } =
@@ -46,6 +47,7 @@ export const GlobalSearch = () => {
           handlePaymentStatusUpdate={handlePaymentStatusUpdate}
           handleInvoiceEdit={handleInvoiceEdit}
           handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
+          onPaymentStatusChange={handlePaymentStatusChange}
         />
       ),
       isData: collectiveInvoice?.length > 0,

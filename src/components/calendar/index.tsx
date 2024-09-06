@@ -18,6 +18,7 @@ import { AllDayEvent } from "./all-day-event";
 import { useCalendar } from "@/hooks/calendar/useCalendar";
 import { DayHeaderContent } from "./day-header-content";
 import { useIsSmallScreen, useIsSmallWeekScreen } from "@/utils/functions";
+import { CalendarFilters } from "./calendar-filters";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
@@ -37,6 +38,9 @@ export const Calendar = () => {
     handleContractTaskDetail,
     renderModal,
     tabs,
+    filter,
+    setFilter,
+    handleFilterChange,
   } = useCalendar();
 
   useEffect(() => {
@@ -123,14 +127,21 @@ export const Calendar = () => {
           {translate("calendar.main_heading")}
         </h1>
 
-        <Button
-          onClick={handleAddContractTask}
-          className="!h-fit py-2 px-4 xMini:px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
-          text={translate("calendar.add_task")}
-          id="add task"
-          inputType="button"
-          iconAlt="button"
-        />
+        <div className="flex items-center gap-x-4 xMini:mt-6">
+          <CalendarFilters
+            filter={filter}
+            setFilter={setFilter}
+            handleFilterChange={handleFilterChange}
+          />
+          <Button
+            onClick={handleAddContractTask}
+            className="!h-fit py-2 px-4 xMini:px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+            text={translate("calendar.add_task")}
+            id="add task"
+            inputType="button"
+            iconAlt="button"
+          />
+        </div>
       </div>
 
       <div className="p-4 xMini:p-6 bg-white rounded-t-lg flex flex-col gap-y-4">

@@ -138,10 +138,10 @@ export const useSendEmail = (
         // }),
       };
 
-      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      await dispatch(sendOfferEmail({ data: apiData }));
-      // if (res?.payload) {
-      // }
+      const res = await dispatch(sendOfferEmail({ data: apiData }));
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
     } else {
       const updatedData = {
         ...data,

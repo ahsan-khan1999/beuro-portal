@@ -114,6 +114,7 @@ export interface InvoiceDetailsTableProps {
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceEdit: (item: any) => void;
   handleRecurringInvoiceEdit: (item: any) => void;
+  onPaymentStatusChange: (id: string, status: string) => void;
 }
 
 export interface PdfSubInvoiceTypes {

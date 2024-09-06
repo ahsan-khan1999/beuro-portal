@@ -181,11 +181,11 @@ export const useReceiptEmail = (
         // }),
       };
 
-      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      await dispatch(sendInvoiceEmail({ data: apiData }));
+      const res = await dispatch(sendInvoiceEmail({ data: apiData }));
 
-      // if (res?.payload) {
-      // }
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
     } else {
       const updatedData = {
         ...data,
