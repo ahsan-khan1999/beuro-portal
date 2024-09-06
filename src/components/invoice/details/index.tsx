@@ -33,6 +33,7 @@ const InvoiceDetails = () => {
     totalCount,
     loadingInvoice,
     loadingReceipt,
+    handlePaymentStatusChange,
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -44,6 +45,7 @@ const InvoiceDetails = () => {
           handlePaymentStatusUpdate={handlePaymentStatusUpdate}
           handleInvoiceEdit={handleInvoiceEdit}
           handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
+          onPaymentStatusChange={handlePaymentStatusChange}
         />
       ),
       isData: collectiveInvoice?.length > 0,

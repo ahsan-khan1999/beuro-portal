@@ -7,23 +7,26 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { useTranslation } from "next-i18next";
 
+export interface SubInvoiceTableProps {
+  dataToAdd: SubInvoiceTableRowTypes[];
+  handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
+  handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
+  handleInvoiceEdit: (item: any) => void;
+  handleRecurringInvoiceEdit: (item: any) => void;
+  onPaymentStatusChange: (id: string, status: string) => void;
+}
+
 const TableRows = ({
   dataToAdd,
   handlePaymentStatusUpdate,
   handleInvoiceStatusUpdate,
   handleInvoiceEdit,
   handleRecurringInvoiceEdit,
-}: {
-  dataToAdd: SubInvoiceTableRowTypes[];
-  handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
-  handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
-  handleInvoiceEdit: (item: any) => void;
-  handleRecurringInvoiceEdit: (item: any) => void;
-}) => {
+  onPaymentStatusChange,
+}: SubInvoiceTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
   const { systemSettings } = useAppSelector((state) => state.settings);
-
   const { invoiceDetails, collectiveInvoice } = useAppSelector(
     (state) => state.invoice
   );
@@ -104,7 +107,7 @@ const TableRows = ({
                         item.emailStatus
                       )}`,
                     }}
-                    className="text-white px-2 flex justify-center items-center py-1 text-center rounded-md text-sm min-w-[70px] w-full"
+                    className="text-white px-2 flex justify-center items-center py-[5px] text-center rounded-md text-sm min-w-[70px] w-full"
                   >
                     {translate(`email_status.${item?.emailStatus}`)}
                   </span>
@@ -194,7 +197,23 @@ const TableRows = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(50px,_50px),_minmax(50px,_50px),_minmax(50px,_50px)]">
+            <div className="grid xs:grid-cols-[minmax(100px,_100px),_minmax(50px,_50px),_minmax(50px,_50px),_minmax(50px,_50px)] mlg:grid-cols-[minmax(40px,_40px),_minmax(40px,_40px),_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(100px,_100px),_minmax(40px,_40px),_minmax(40px,_40px),_minmax(40px,_40px)] gap-x-1">
+              <div className="py-4 xs:block mlg:hidden xMaxSize:block">
+                <span
+                  onClick={() =>
+                    onPaymentStatusChange(item?.id, item?.invoiceStatus)
+                  }
+                  className={`${
+                    item?.invoiceStatus === "Pending"
+                      ? "bg-[#FE9244]"
+                      : "bg-[#45C769]"
+                  } text-white px-2 flex justify-center items-center py-[5px] text-center rounded-md text-sm min-w-[70px] w-full cursor-pointer`}
+                >
+                  {item?.invoiceStatus === "Pending"
+                    ? `${translate("common.pay")}`
+                    : `${translate("common.unPaid")}`}
+                </span>
+              </div>
               <div
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) => {
@@ -224,7 +243,6 @@ const TableRows = ({
                   </svg>
                 </span>
               </div>
-
               <span
                 title={translate("common.mail")}
                 className="py-3 flex justify-center items-center cursor-pointer"

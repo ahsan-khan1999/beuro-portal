@@ -1260,7 +1260,11 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
-
+    "pay":"Pay",
+    "paid": "Paid",
+    "unPaid": "Unpaid",
+    "change_payment": "Change payment status",
+    "are_sure_payment_status": "Are you sure you want to change the payment status to",
     "notifications": "Notifications",
     "remaind_me": "Remind me in",
     "starts_in": "Starts in",

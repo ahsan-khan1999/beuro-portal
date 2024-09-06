@@ -33,14 +33,10 @@ const TableHeading = () => {
           </span>
         </div>
       </div>
-      <div className="grid grid-cols-[minmax(50px,_50px),_minmax(50px,_50px),_minmax(50px,_50px)] bg-primary py-4 rounded-r-md">
-        <span className="font-semibold text-base text-white flex items-center justify-center">
+      <div className="grid xs:grid-cols-[minmax(100px,_100px),_minmax(50px,_50px),_minmax(50px,_50px),_minmax(50px,_50px)] mlg:grid-cols-[minmax(40px,_40px),_minmax(40px,_40px),_minmax(40px,_40px)] xMaxSize:grid-cols-[minmax(100px,_100px),_minmax(40px,_40px),_minmax(40px,_40px),_minmax(40px,_40px)] bg-primary py-4 rounded-r-md gap-x-1">
+        <span className="font-semibold text-base text-white">
           {translate("common.actions")}
         </span>
-        {/* <span className="font-semibold text-base text-white flex items-center justify-center">
-        {translate("common.mail")}
-      </span>
-      <span className="font-semibold text-base text-white"></span> */}
       </div>
     </div>
   );
