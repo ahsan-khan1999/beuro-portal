@@ -21,7 +21,8 @@ export const addTaskFormField: GenerateAddTaskFormField = (
   alertTime,
   control,
   trigger,
-  date
+  date,
+  onDateChange
 ) => {
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
@@ -50,7 +51,8 @@ export const addTaskFormField: GenerateAddTaskFormField = (
           setValue,
           watch,
           date,
-          isAllDay
+          isAllDay,
+          onDateChange
         ),
       },
     },
@@ -357,10 +359,9 @@ export const generateDateChildren = (
   setValue: UseFormSetValue<FieldValues>,
   watch: UseFormWatch<FieldValues>,
   date?: { startDate: string; endDate: string }[],
-  isAllDay?: boolean
+  isAllDay?: boolean,
+  onDateChange?: (name:string,value:string) => void
 ) => {
-  console.log(date, "date");
-
   return [
     ...((date && date.length > 0 ? date : [{ endDate: "", startDate: "" }]) || [
       { endDate: "", startDate: "" },
@@ -389,6 +390,7 @@ export const generateDateChildren = (
             register,
             setValue,
             watch,
+            onDateChange,
           },
         },
         {
@@ -413,6 +415,7 @@ export const generateDateChildren = (
             register,
             setValue,
             watch,
+            onDateChange,
           },
         },
       ],

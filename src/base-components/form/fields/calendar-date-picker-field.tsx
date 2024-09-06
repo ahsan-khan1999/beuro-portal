@@ -15,6 +15,7 @@ export const CalendarDatePickerField = ({
   disable,
   setValue,
   watch,
+  onDateChange,
 }: CalendarDatePickerProps) => {
   const [formattedDate, setFormattedDate] = useState(
     value
@@ -54,6 +55,7 @@ export const CalendarDatePickerField = ({
     const value = e.target.value;
     setFormattedDate(value);
     setValue(name, value);
+    onDateChange?.(name, value);
   };
 
   return (

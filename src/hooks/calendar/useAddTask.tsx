@@ -15,7 +15,7 @@ import {
   updateContractTask,
 } from "@/api/slices/contract/contractSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 
 export interface AddTaskHookProps {
@@ -43,6 +43,7 @@ export default function useAddTask({
 
   const [date, setDate] = useState(taskDetail?.date);
   const schema = generateAddTaskValidationSchema(translate);
+  const startDateRef = useRef<string | null>(null);
 
   const { isContractId } = router.query;
   const {
@@ -64,6 +65,7 @@ export default function useAddTask({
   const isRemainder = watch("remainder");
   const alertTime = watch("alertTime");
   const startDate = watch("date.0.startDate");
+  const endDate = watch("date.0.endDate");
   const isAllDay = watch("isAllDay");
   const colour = watch("colour");
 
@@ -94,27 +96,27 @@ export default function useAddTask({
           alertTime: taskDetail?.alertTime,
           colour: taskDetail?.colour,
         });
+
+        startDateRef.current = filteredDate[0].startDate;
       }
     }
   }, [id, taskDetail, isContractId, clickedStartDate, clickedEndDate]);
 
-  useEffect(() => {
-    if (startDate) {
-      const startMoment = moment(startDate);
-
-      if (isUpdate) {
-        const newEndDate = startMoment
-          .add(timeDifference, "minutes")
-          .format("YYYY-MM-DDTHH:mm");
-        setValue("date.0.endDate", newEndDate);
-      } else {
-        const newEndDate = startMoment
-          .add(60, "minutes")
-          .format("YYYY-MM-DDTHH:mm");
-        setValue("date.0.endDate", newEndDate);
-      }
-    }
-  }, [startDate]);
+  // useEffect(() => {
+  //   if (startDate) {
+  //     if (isUpdate) {
+  //       const newEndDate = startMoment
+  //         .add(timeDifference, "minutes")
+  //         .format("YYYY-MM-DDTHH:mm");
+  //       setValue("date.0.endDate", newEndDate);
+  //     } else {
+  //       const newEndDate = startMoment
+  //         .add(60, "minutes")
+  //         .format("YYYY-MM-DDTHH:mm");
+  //       setValue("date.0.endDate", newEndDate);
+  //     }
+  //   }
+  // }, [startDate]);
 
   useEffect(() => {
     if (isContractId) {
@@ -132,6 +134,29 @@ export default function useAddTask({
     }
   }, [isContractId]);
 
+  const handleDateChange = (name: string, value: string) => {
+    if (name.includes("endDate")) {
+      return;
+    }
+
+    const startMoment = moment(value);
+
+    if (isUpdate) {
+      const minutesInDiff = moment(value).diff(startDateRef.current, "minutes");
+      const newEndDate = moment(endDate)
+        .add(minutesInDiff, "minutes")
+        .format("YYYY-MM-DDTHH:mm");
+      setValue("date.0.endDate", newEndDate);
+    } else {
+      const newEndDate = startMoment
+        .add(60, "minutes")
+        .format("YYYY-MM-DDTHH:mm");
+      setValue("date.0.endDate", newEndDate);
+    }
+
+    startDateRef.current = value;
+  };
+
   const taskFields = addTaskFormField(
     register,
     loading,
@@ -144,7 +169,8 @@ export default function useAddTask({
     alertTime,
     control,
     trigger,
-    date
+    date,
+    handleDateChange
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

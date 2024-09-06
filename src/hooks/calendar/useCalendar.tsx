@@ -125,6 +125,9 @@ export const useCalendar = () => {
   };
 
   const handleAddContractTask = () => {
+    if (!isContractId) {
+      dispatch(setContractTaskDetails(DEFAULT_CONTRACT_TASK));
+    }
     dispatch(updateModalType({ type: ModalType.ADD_CONTRACT_TASK }));
   };
 

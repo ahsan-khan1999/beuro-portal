@@ -328,7 +328,8 @@ export type GenerateAddTaskFormField = (
   alertTime?: number,
   control?: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
-  date?: { startDate: string; endDate: string }[]
+  date?: { startDate: string; endDate: string }[],
+  onDateChange?: (name: string, value: string) => void
 ) => FormField[];
 
 export type GenerateRemainderFormField = (

@@ -364,6 +364,7 @@ export interface CalendarDatePickerProps
   min?: string;
   max?: string;
   disable?: boolean;
+  onDateChange?:(name:string,value:string) => void
 }
 
 export interface ColourSelectionOptions {
