@@ -61,10 +61,10 @@ const PdfPriview = () => {
   };
 
   const isCalendar = router.query.isCalendar;
-
-  // if (typeof isCalendar === "undefined") {
-  //   return null;
-  // }
+  // Wait for router to be ready before rendering based on the query
+  if (!router.isReady) {
+    return null; // Prevent rendering while the router is not ready
+  }
 
   return (
     <>
