@@ -380,10 +380,10 @@ export const useContractPdf = () => {
           let apiData = { ...data, pdf: fileUrl?.payload };
 
           delete apiData["content"];
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendContractEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
+          const res = await dispatch(sendContractEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
         } else {
           let apiData = {
             email: contractDetails?.offerID?.leadID?.customerDetail?.email,
@@ -402,10 +402,10 @@ export const useContractPdf = () => {
             id: contractDetails?.id,
             pdf: fileUrl?.payload,
           };
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendContractEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
+          const res = await dispatch(sendContractEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
         }
       }
     } catch (error) {

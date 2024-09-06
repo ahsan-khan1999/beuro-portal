@@ -150,10 +150,10 @@ export const useContractEmail = (
         // }),
       };
 
-      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      await dispatch(sendContractEmail({ data: apiData }));
-      // if (res?.payload) {
-      // }
+      const res = await dispatch(sendContractEmail({ data: apiData }));
+      if (res?.payload) {
+        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      }
     } else {
       const updatedData = {
         ...data,

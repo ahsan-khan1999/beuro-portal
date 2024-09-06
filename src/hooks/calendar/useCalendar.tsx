@@ -21,19 +21,24 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import { CalendarRemainderAlert } from "@/base-components/ui/modals1/CalendarRemainderAlert";
 import moment from "moment";
 import { useRouter } from "next/router";
+import { FiltersDefaultValues } from "@/enums/static";
+import { FilterType } from "@/types";
 
 export const useCalendar = () => {
   const { loading, task } = useAppSelector((state) => state.contract);
-
-  const router = useRouter();
   const [reminderEvents, setReminderEvents] = useState<Task[]>([]);
   const [triggeredReminders, setTriggeredReminders] = useState<Set<string>>(
     new Set()
   );
 
-  const { isContractId } = router.query;
+  const [filter, setFilter] = useState<FilterType>({
+    text: FiltersDefaultValues.None,
+  });
+
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
+  const { isContractId } = router.query;
   const { modal } = useAppSelector((state) => state.global);
 
   useEffect(() => {
@@ -45,7 +50,7 @@ export const useCalendar = () => {
 
   useEffect(() => {
     dispatch(readContractTasks({ params: { filter: {}, paginate: 0 } }));
-  }, [dispatch]);
+  }, []);
 
   const events = useMemo(() => {
     return task?.flatMap((task: Task) =>
@@ -119,6 +124,10 @@ export const useCalendar = () => {
       label: `${translate("calendar.tab_headings.month")}`,
     },
   ];
+
+  const handleFilterChange = () => {
+    console.log("clicked");
+  };
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
@@ -284,5 +293,8 @@ export const useCalendar = () => {
     task,
     events,
     handleContractTaskDetail,
+    filter,
+    setFilter,
+    handleFilterChange,
   };
 };

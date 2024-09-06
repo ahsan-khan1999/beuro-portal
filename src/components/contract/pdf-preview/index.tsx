@@ -62,9 +62,9 @@ const PdfPriview = () => {
 
   const isCalendar = router.query.isCalendar;
 
-  if (typeof isCalendar === "undefined") {
-    return null;
-  }
+  // if (typeof isCalendar === "undefined") {
+  //   return null;
+  // }
 
   return (
     <>
