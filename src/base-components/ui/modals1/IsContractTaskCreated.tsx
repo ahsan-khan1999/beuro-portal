@@ -86,6 +86,46 @@ export const IsContractTaskCreated = ({
           }
         );
 
+        const noteDetail = `
+    <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px !important;">
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+          Contract No:
+        </span>
+        <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+          ${contractDetails?.contractNumber}
+        </span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+          Created By:
+        </span>
+        <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+          ${contractDetails?.offerID?.createdBy?.fullName}
+        </span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+          Created By:
+        </span>
+        <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+          ${contractDetails?.offerID?.createdBy?.fullName}
+        </span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+        ${contractDetails?.offerID?.leadID?.customerDetail?.fullName}
+      </p>
+      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+        ${contractDetails?.offerID?.leadID?.customerDetail?.email}
+      </span>
+      <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+        ${contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber}
+      </p>
+    </div>
+ `;
+
         dispatch(
           setContractTaskDetails({
             id: "convert",
@@ -99,7 +139,7 @@ export const IsContractTaskCreated = ({
             isContractCreated: true,
             type: "Contract",
             alertTime: 15,
-            note: contractDetails?.contractNumber,
+            note: noteDetail,
           })
         );
       }

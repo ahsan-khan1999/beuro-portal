@@ -17,22 +17,26 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useRef, useState } from "react";
 import moment from "moment";
+import { Task } from "@/types/contract";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
   onSuccess: () => void;
   onUpdateSuccess: () => void;
+  currentTask: Task[];
+  setCurrentTask: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 export default function useAddTask({
   isUpdate,
   onSuccess,
   onUpdateSuccess,
+  currentTask,
+  setCurrentTask,
 }: AddTaskHookProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
-  const [timeDifference, setTimeDifference] = useState(60);
   const { loading, error, taskDetail } = useAppSelector(
     (state) => state.contract
   );
@@ -64,7 +68,6 @@ export default function useAddTask({
 
   const isRemainder = watch("remainder");
   const alertTime = watch("alertTime");
-  const startDate = watch("date.0.startDate");
   const endDate = watch("date.0.endDate");
   const isAllDay = watch("isAllDay");
   const colour = watch("colour");
@@ -102,22 +105,6 @@ export default function useAddTask({
     }
   }, [id, taskDetail, isContractId, clickedStartDate, clickedEndDate]);
 
-  // useEffect(() => {
-  //   if (startDate) {
-  //     if (isUpdate) {
-  //       const newEndDate = startMoment
-  //         .add(timeDifference, "minutes")
-  //         .format("YYYY-MM-DDTHH:mm");
-  //       setValue("date.0.endDate", newEndDate);
-  //     } else {
-  //       const newEndDate = startMoment
-  //         .add(60, "minutes")
-  //         .format("YYYY-MM-DDTHH:mm");
-  //       setValue("date.0.endDate", newEndDate);
-  //     }
-  //   }
-  // }, [startDate]);
-
   useEffect(() => {
     if (isContractId) {
       reset({
@@ -130,6 +117,7 @@ export default function useAddTask({
         note: taskDetail?.note,
         alertTime: taskDetail?.alertTime,
         colour: taskDetail?.colour,
+        type: taskDetail?.type,
       });
     }
   }, [isContractId]);
@@ -164,10 +152,10 @@ export default function useAddTask({
     dateFields?.length ? dateFields?.length : 1,
     setValue,
     watch,
+    control,
     isAllDay,
     colour,
     alertTime,
-    control,
     trigger,
     date,
     handleDateChange
@@ -185,6 +173,7 @@ export default function useAddTask({
         postalCode: data.postalCode,
         country: data.country,
       },
+      type: taskDetail?.type || "Task",
     };
 
     if (isRemainder) {

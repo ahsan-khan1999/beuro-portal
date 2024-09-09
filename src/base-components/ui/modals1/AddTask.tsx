@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import useAddTask from "@/hooks/calendar/useAddTask";
-import { useAppSelector } from "@/hooks/useRedux";
 import { useRouter } from "next/router";
+import { Task } from "@/types/contract";
 
 export interface AddTaskModalProps {
   onSuccess: () => void;
   onClose: () => void;
   onUpdateSuccess: () => void;
   isUpdate?: boolean;
+  currentTask: Task[];
+  setCurrentTask: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 export const AddContractTask = ({
@@ -17,6 +19,8 @@ export const AddContractTask = ({
   isUpdate,
   onSuccess,
   onUpdateSuccess,
+  currentTask,
+  setCurrentTask,
 }: AddTaskModalProps) => {
   const [maxHeight, setMaxHeight] = useState("750px");
 
@@ -26,9 +30,8 @@ export const AddContractTask = ({
     isUpdate,
     onSuccess,
     onUpdateSuccess,
-    // id: id?.id,
-    // clickedStartDate: clickedStartDate,
-    // clickedEndDate: clickedEndDate,
+    currentTask,
+    setCurrentTask,
   });
 
   const rightValue = locale === "en" ? "right-[180px]" : "right-[250px]";

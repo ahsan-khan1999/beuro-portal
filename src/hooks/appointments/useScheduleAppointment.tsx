@@ -58,7 +58,6 @@ export const useScheduleAppointment = ({
   const { loading, error } = useAppSelector((state) => state.auth);
   const { appointmentDetails } = useAppSelector((state) => state.appointment);
   const schema = generateScheduleAppointmentsValidationSchema(translate);
-  // const [employee, setEmployee] = useState<Employee[]>([]);
 
   const {
     register,
@@ -69,16 +68,6 @@ export const useScheduleAppointment = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-
-  // useEffect(() => {
-  //   dispatch(
-  //     readEmployee({ params: { filter: { designation: 3 }, paginate: 0 } })
-  //   ).then((response: any) => {
-  //     if (response?.payload) {
-  //       setEmployee(response?.payload?.Employee);
-  //     }
-  //   });
-  // }, []);
 
   useEffect(() => {
     if (id) {
@@ -95,7 +84,6 @@ export const useScheduleAppointment = ({
   const fields = scheduleAppointmentsFormField(register, loading, control, {
     onClose,
     appointmentDetails,
-    // employee,
     isUpdate,
   });
 
