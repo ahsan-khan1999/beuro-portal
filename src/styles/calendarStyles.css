@@ -116,9 +116,13 @@
   font-size: 16px !important;
 }
 
-/* .fc-event {
-  min-height: 60px;
-} */
+.fc-timegrid-slot.fc-timegrid-slot-lane[data-time*="30:00"] {
+  border-top: none !important;
+}
+
+.fc .fc-timegrid-divider {
+  padding: 0 !important;
+}
 
 @media (min-width: 768px) {
   .timeGridDay-flex {

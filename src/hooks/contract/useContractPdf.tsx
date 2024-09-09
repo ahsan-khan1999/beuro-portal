@@ -43,6 +43,7 @@ export const useContractPdf = () => {
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
+
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );

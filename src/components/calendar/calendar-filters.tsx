@@ -25,7 +25,6 @@ export const CalendarFilters = ({
         pathname: router.pathname,
         query: {
           ...router.query,
-          page: 1,
           text: inputValue,
         },
       },

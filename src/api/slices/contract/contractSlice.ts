@@ -284,7 +284,6 @@ export const readContractTasks: AsyncThunk<boolean, object, object> | any =
       return res.data;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
-
       return false;
     }
   });
@@ -483,16 +482,20 @@ const ContractSlice = createSlice({
     builder.addCase(updateContractTask.rejected, (state) => {
       state.loading = false;
     });
-
     builder.addCase(readContractTasks.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(readContractTasks.fulfilled, (state, action) => {
-      state.task = action.payload.data.Task;
-      state.lastPage = action.payload.lastPage;
-      state.totalCount = action.payload.totalCount;
+      const tasks = action?.payload?.data?.Task || [];
+      const lastPage = action?.payload?.data?.lastPage || 1;
+      const totalCount = action?.payload?.data?.totalCount || 0;
+
+      state.task = tasks;
+      state.lastPage = lastPage;
+      state.totalCount = totalCount;
       state.isLoading = false;
     });
+
     builder.addCase(readContractTasks.rejected, (state) => {
       state.isLoading = false;
     });

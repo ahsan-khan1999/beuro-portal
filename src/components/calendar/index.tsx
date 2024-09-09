@@ -12,13 +12,13 @@ import "moment/locale/de";
 import moment from "moment";
 import { extendMoment } from "moment-range";
 import { useRouter } from "next/router";
-import { calendarDayDateFormat, calendarYearDateFormat } from "@/utils/utility";
 import { DayView } from "./day-view";
 import { AllDayEvent } from "./all-day-event";
 import { useCalendar } from "@/hooks/calendar/useCalendar";
 import { DayHeaderContent } from "./day-header-content";
-import { useIsSmallScreen, useIsSmallWeekScreen } from "@/utils/functions";
 import { CalendarFilters } from "./calendar-filters";
+import { useIsSmallScreen, useIsSmallWeekScreen } from "@/utils/functions";
+import { calendarDayDateFormat, calendarYearDateFormat } from "@/utils/utility";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";

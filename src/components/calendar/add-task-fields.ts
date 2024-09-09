@@ -16,10 +16,10 @@ export const addTaskFormField: GenerateAddTaskFormField = (
   count,
   setValue,
   watch,
+  control,
   isAllDay,
   colour,
   alertTime,
-  control,
   trigger,
   date,
   onDateChange
@@ -327,14 +327,11 @@ export const addTaskFormField: GenerateAddTaskFormField = (
     {
       containerClass: "mb-0 bg-white rounded-lg py-[5px] px-[10px]",
       field: {
-        type: Field.textArea,
+        type: Field.ckEditor,
         className: `!py-4 !border-[#fff] focus:!border-primary`,
-        rows: 3,
         id: "note",
         name: "note",
-        placeholder: translate("common.text_area_msg"),
-
-        register,
+        control,
       },
     },
     {
@@ -360,7 +357,7 @@ export const generateDateChildren = (
   watch: UseFormWatch<FieldValues>,
   date?: { startDate: string; endDate: string }[],
   isAllDay?: boolean,
-  onDateChange?: (name:string,value:string) => void
+  onDateChange?: (name: string, value: string) => void
 ) => {
   return [
     ...((date && date.length > 0 ? date : [{ endDate: "", startDate: "" }]) || [

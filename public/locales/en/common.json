@@ -2159,6 +2159,7 @@
     "offer_number": "Offer No",
     "offer_date": "Create Date",
     "created_by": "Created By",
+    "name":"Name",
     "email": "Email",
     "phone": "Phone",
     "mobile": "Mobile Number",

@@ -127,34 +127,46 @@ export const ContractTaskDetail = ({
             </div>
           )}
         </div>
-        {taskDetail?.note && (
-          <div className="flex items-center gap-x-2 max-h-[300px] overflow-y-auto">
-            <CalendarNoteIcon />
-            <p className="text-sm font-normal text-[#2A2E3A]">
-              {taskDetail?.note}
-            </p>
-          </div>
-        )}
 
-        {taskDetail?.address && (
-          <div className="flex items-start gap-x-2 mb-[35px] mt-[14px]">
-            <Image
-              src={addressLocationIcon}
-              alt="location"
-              width={16}
-              height={16}
-            />
+        <div className="flex flex-col max-h-[400px] overflow-y-auto">
+          {taskDetail?.note && (
+            <div className="flex items-start gap-x-2">
+              <CalendarNoteIcon />
 
-            <div className="flex flex-col gap-y-1">
-              <span className="text-sm font-normal text-[#2A2E3A]">
-                {taskDetail?.address?.streetNumber}
-              </span>
-              <span className="text-sm font-normal text-[#2A2E3A]">
-                {taskDetail?.address?.postalCode} {taskDetail?.address?.country}
-              </span>
+              {taskDetail?.type === "Contract" ? (
+                <div
+                  className="html-content -mt-1"
+                  dangerouslySetInnerHTML={{ __html: taskDetail?.note }}
+                />
+              ) : (
+                <p className="-mt-1 text-sm font-normal text-[#2A2E3A]">
+                  {taskDetail?.note}
+                </p>
+              )}
             </div>
-          </div>
-        )}
+          )}
+
+          {taskDetail?.address && (
+            <div className="flex items-start gap-x-2 mb-[35px] mt-[14px]">
+              <Image
+                src={addressLocationIcon}
+                alt="location"
+                width={16}
+                height={16}
+              />
+
+              <div className="flex flex-col gap-y-1">
+                <span className="text-sm font-normal text-[#2A2E3A]">
+                  {taskDetail?.address?.streetNumber}
+                </span>
+                <span className="text-sm font-normal text-[#2A2E3A]">
+                  {taskDetail?.address?.postalCode}{" "}
+                  {taskDetail?.address?.country}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
 
         <hr className="opacity-30 -mx-[10px]" />
 
