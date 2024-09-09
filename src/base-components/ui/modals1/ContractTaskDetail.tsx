@@ -52,7 +52,7 @@ export const ContractTaskDetail = ({
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName="max-w-[300px] xsMini:max-w-[384px] min-h-fit absolute top-[200px] rounded-lg bg-[#F3F3F3] calendarShadow"
+      containerClassName="max-w-[300px] xsMini:max-w-[384px] min-h-fit absolute top-[180px] rounded-lg bg-[#F3F3F3] calendarShadow"
     >
       <div className="p-[10px]">
         <div className="flex items-center gap-x-2">
@@ -128,7 +128,7 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
-        <div className="flex flex-col max-h-[400px] overflow-y-auto">
+        <div className="flex flex-col max-h-[300px] overflow-y-auto">
           {taskDetail?.note && (
             <div className="flex items-start gap-x-2">
               <CalendarNoteIcon />
