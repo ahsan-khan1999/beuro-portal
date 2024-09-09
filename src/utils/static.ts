@@ -592,6 +592,12 @@ export const staticEnums: Record<string, any> = {
     company: 1,
   },
 
+  TaskType: {
+    Task: 0,
+    Appointment: 1,
+    Contract: 2,
+  },
+
   Designation: {
     CEO: 0,
     Administration: 1,

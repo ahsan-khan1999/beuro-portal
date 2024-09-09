@@ -18,6 +18,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { Task } from "@/types/contract";
+import { staticEnums } from "@/utils/static";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
@@ -173,7 +174,9 @@ export default function useAddTask({
         postalCode: data.postalCode,
         country: data.country,
       },
-      type: taskDetail?.type || "Task",
+      type:
+        staticEnums["TaskType"][taskDetail?.type] ||
+        staticEnums["TaskType"]["Task"],
     };
 
     if (isRemainder) {

@@ -16,6 +16,7 @@ import { staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
 import { useAppSelector } from "@/hooks/useRedux";
 import moment from "moment";
+import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
 export interface IsTaskModalProps {
   onClose: () => void;
   heading: string;
@@ -32,8 +33,10 @@ export const IsContractTaskCreated = ({
   const { t: translate } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
+  const { currentLanguage } = useAppSelector((state) => state.global);
 
   const { contractDetails } = useAppSelector((state) => state.contract);
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   useEffect(() => {
     localStoreUtil.remove_data("contractComposeEmail");
@@ -86,45 +89,216 @@ export const IsContractTaskCreated = ({
           }
         );
 
+        const customerName =
+          contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+        const customerEmail =
+          contractDetails?.offerID?.leadID?.customerDetail?.email;
+        const customerPhoneNumber =
+          contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber;
+        const workDates = contractDetails?.offerID?.date;
+        const time = contractDetails?.offerID?.time;
+        const serviceItem =
+          contractDetails?.offerID?.serviceDetail?.serviceDetail;
+
         const noteDetail = `
-    <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px !important;">
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
-          Contract No:
-        </span>
-        <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
-          ${contractDetails?.contractNumber}
-        </span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
-          Created By:
-        </span>
-        <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
-          ${contractDetails?.offerID?.createdBy?.fullName}
-        </span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
-          Created By:
-        </span>
-        <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
-          ${contractDetails?.offerID?.createdBy?.fullName}
-        </span>
-      </div>
-    </div>
-    <div style="display: flex; flex-direction: column; gap: 4px;">
-      <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
-        ${contractDetails?.offerID?.leadID?.customerDetail?.fullName}
-      </p>
-      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
-        ${contractDetails?.offerID?.leadID?.customerDetail?.email}
-      </span>
-      <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
-        ${contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber}
-      </p>
-    </div>
- `;
+          <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
+              ${translate("contracts.card_content.heading")}.
+          </span>
+          
+          <div style="display: flex; flex-direction: column;">
+              <div style="display: flex; align-items: center; gap: 4px;">
+                  <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                      ${translate("pdf.label_nr_contract")} ${translate(
+          "pdf.no"
+        )}:
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                      ${contractDetails?.contractNumber}
+                  </span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 4px;">
+                  <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                      ${translate("pdf.offer_date")}:
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                      ${pdfDateFormat(
+                        contractDetails?.createdAt || "",
+                        currentLanguage || "de"
+                      )}
+                  </span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 4px;">
+                  <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                      ${translate("pdf.created_by")}:
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                      ${contractDetails?.offerID?.createdBy?.fullName}
+                  </span>
+              </div>
+          </div>
+          
+          <br />
+          
+          <span style="font-size: 16px; font-weight: 600; color: #FE9244;">
+              ${translate("customers.tab_heading")}.
+          </span>
+          
+          <div style="display: flex; flex-direction: column;">
+              ${
+                customerName &&
+                `<div style="display: flex; align-items: center; gap: 4px;">
+                  <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                      ${translate("pdf.name")}:
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #FE9244;">
+                      ${customerName}
+                  </span>
+              </div>`
+              }
+              ${
+                customerEmail &&
+                `<div style="display: flex; align-items: center; gap: 4px;">
+                  <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                      ${translate("pdf.email")}:
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #FE9244;">
+                      ${customerEmail}
+                  </span>
+              </div>`
+              }
+              ${
+                customerPhoneNumber &&
+                `<div style="display: flex; align-items: center; gap: 4px;">
+                  <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                      ${translate("pdf.phone")}:
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #FE9244;">
+                      ${customerPhoneNumber}
+                  </span>
+              </div>`
+              }
+          </div>
+          
+          <br />
+          
+          <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
+              ${translate("contracts.table_headings.title")}.
+          </span>
+          <p style="font-size: 16px; font-weight: 500; color: #2A2E3A;">
+              ${contractDetails?.title}
+          </p>
+          
+          <br />
+          
+          <span style="font-size: 16px; font-weight: 600; color: #FE9244;">
+              ${translate("customers.details.address_details")}.
+          </span>
+          
+          ${
+            contractDetails?.offerID?.addressID?.address &&
+            contractDetails?.offerID?.addressID?.address
+              ?.map(
+                (address, index) => `
+          <div key=${index} style="display: flex; flex-direction: column; gap: 2px;">
+              <p style="font-size: 14px; font-weight: 500; color: #2A2E3A;">
+                  ${address.label}:
+              </p>
+              <p style="font-size: 14px; font-weight: 500; color: #2A2E3A;">
+                  ${address.streetNumber}, ${address.postalCode}, ${
+                  [address.country] || ""
+                }
+              </p>
+          </div>
+          `
+              )
+              .join("")
+          }
+          <br />
+          
+          
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-size: 14px; font-weight: 600; color: #45C769;">
+                  ${
+                    workDates?.length === 1
+                      ? translate("pdf.work_date")
+                      : translate("pdf.work_dates")
+                  }
+                  :
+              </span>
+             <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+  ${workDates
+    ?.map(
+      (date, index) =>
+        `${formatDateTimeToDate(date.startDate)}${
+          date.endDate
+            ? " bis " +
+              formatDateTimeToDate(date.endDate) +
+              (workDates?.length - 1 != index ? ", " : ".")
+            : workDates?.length - 1 != index
+            ? ", "
+            : "."
+        }`
+    )
+    .join("")}
+  ${time ? ` Um ${time} Uhr` : ""}
+</span>
+
+          </div>
+          
+          
+          <br />
+          
+          <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
+              ${translate("services.service_detail_tab")}.
+          </span>
+          
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+              ${serviceItem?.map(
+                (item, index) =>
+                  `
+              <div key=${index} style="display: flex; align-items: center; justify-content: space-between;">
+                  <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">${item?.serviceTitle}</p>
+                  <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                      ${item?.totalPrice}
+                  </span>
+              </div>
+              `
+              )}
+          </div>
+          <br />
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; align-items: center; gap:4px">
+                  <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
+                      ${translate("pdf.sub_total")}:
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                      ${Number(contractDetails?.offerID?.subTotal).toFixed(
+                        2
+                      )} ${systemSettings?.currency}
+                  </span>
+              </div>
+              <div style="display: flex; align-items: center; gap:4px">
+                  <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
+                      Mwst (${contractDetails?.offerID?.taxAmount}%):
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                      ${Number(contractDetails?.offerID?.subTotal).toFixed(
+                        2
+                      )} ${systemSettings?.currency}
+                  </span>
+              </div>
+              <div style="display: flex; align-items: center; gap:4px">
+                  <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
+                      ${translate("pdf.grand_total")}:
+                  </span>
+                  <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                      ${Number(contractDetails?.offerID?.total).toFixed(2)} ${
+          systemSettings?.currency
+        }
+                  </span>
+              </div>
+          </div>
+          `;
 
         dispatch(
           setContractTaskDetails({
