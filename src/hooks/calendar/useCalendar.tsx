@@ -40,6 +40,7 @@ export const useCalendar = () => {
   const { t: translate } = useTranslation();
   const { isContractId } = router.query;
   const { modal } = useAppSelector((state) => state.global);
+  const [currentTask, setCurrentTask] = useState<Task[]>(task || []);
 
   useEffect(() => {
     if (!isContractId) {
@@ -49,11 +50,24 @@ export const useCalendar = () => {
   }, [isContractId]);
 
   useEffect(() => {
-    dispatch(readContractTasks({ params: { filter: {}, paginate: 0 } }));
-  }, []);
+    const searchQuery = router.query?.text as string;
+    let updatedFilter = searchQuery ? { text: searchQuery } : {};
+
+    setFilter(updatedFilter);
+
+    dispatch(
+      readContractTasks({
+        params: { filter: updatedFilter, paginate: 0 },
+      })
+    ).then((response: any) => {
+      if (response?.payload) {
+        setCurrentTask(response?.payload?.data?.Task);
+      }
+    });
+  }, [router.query]);
 
   const events = useMemo(() => {
-    return task?.flatMap((task: Task) =>
+    return currentTask?.flatMap((task: Task) =>
       task.date?.map((dateRange) => ({
         title: task.title,
         start: dateRange.startDate,
@@ -126,7 +140,7 @@ export const useCalendar = () => {
   ];
 
   const handleFilterChange = () => {
-    console.log("clicked");
+    console.log("filtered resutls");
   };
 
   const onClose = () => {

@@ -43,6 +43,8 @@ export const Calendar = () => {
     handleFilterChange,
   } = useCalendar();
 
+  console.log(events, "task");
+
   useEffect(() => {
     if (router.query.isContractId) {
       handleAddContractTask();
