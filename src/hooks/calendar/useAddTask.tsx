@@ -184,6 +184,10 @@ export default function useAddTask({
         staticEnums["TaskType"]["Task"],
     };
 
+    if (taskDetail?.contractID?.id) {
+      formattedData.contractID = taskDetail?.contractID?.id;
+    }
+
     if (isRemainder) {
       formattedData.alertTime = data.alertTime;
     }
