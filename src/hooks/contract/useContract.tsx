@@ -435,8 +435,11 @@ const useContract = () => {
       <IsContractTaskCreated
         onClose={onClose}
         heading={translate("calendar.is_contract_task_des")}
-        contractId={selectedContractId} // Pass the selected contract ID
-        status={selectedStatus} // Pass the selected status
+        contractId={selectedContractId}
+        status={selectedStatus}
+        onSuccess={contractHandler}
+        currentPageRows={currentPageRows}
+        setCurrentPageRows={setCurrentPageRows}
       />
     ),
   };

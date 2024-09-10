@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useTranslation } from "next-i18next";
 import {
+  readContract,
   readContractDetails,
   setContractTaskDetails,
   updateContractStatus,
@@ -17,18 +18,27 @@ import localStoreUtil from "@/utils/localstore.util";
 import { useAppSelector } from "@/hooks/useRedux";
 import moment from "moment";
 import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
+import { contractTableTypes } from "@/types/contract";
 export interface IsTaskModalProps {
   onClose: () => void;
+  onSuccess: () => void;
   heading: string;
   contractId: string | null;
   status: string;
+  currentPageRows: contractTableTypes[];
+  setCurrentPageRows: React.Dispatch<
+    React.SetStateAction<contractTableTypes[]>
+  >;
 }
 
 export const IsContractTaskCreated = ({
   onClose,
+  onSuccess,
   heading,
   contractId,
   status,
+  currentPageRows,
+  setCurrentPageRows,
 }: IsTaskModalProps) => {
   const { t: translate } = useTranslation();
   const dispatch = useDispatch();
@@ -46,16 +56,16 @@ export const IsContractTaskCreated = ({
     }
   }, [contractId]);
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     if (contractId) {
-      const res = await dispatch(
-        updateContractStatus({
-          data: {
-            id: contractId,
-            contractStatus: staticEnums["ContractStatus"][status],
-          },
-        })
-      );
+      // const res = await dispatch(
+      //   updateContractStatus({
+      //     data: {
+      //       id: contractId,
+      //       contractStatus: staticEnums["ContractStatus"][status],
+      //     },
+      //   })
+      // );
 
       if (contractDetails?.offerID?.date) {
         const updatedDates = contractDetails.offerID.date.map(
@@ -315,7 +325,6 @@ export const IsContractTaskCreated = ({
             date: updatedDates,
             title: contractDetails?.title,
             isAllDay: false,
-            isContractCreated: true,
             type: "Contract",
             alertTime: 15,
             note: noteDetail,
@@ -323,15 +332,35 @@ export const IsContractTaskCreated = ({
         );
       }
 
-      if (res?.payload) {
-        dispatch(updateModalType(ModalType.NONE));
-        router.push(`/calendar?isContractId=${contractId}`);
-      }
+      // if (res?.payload) {
+      dispatch(updateModalType(ModalType.NONE));
+      router.push(`/calendar?isContractId=${contractId}`);
+      // }
     }
   };
 
-  const handleCancel = () => {
-    dispatch(updateModalType(ModalType.NONE));
+  const handleCancel = async () => {
+    const res = await dispatch(
+      updateContractStatus({
+        data: {
+          id: contractId,
+          contractStatus: staticEnums["ContractStatus"][status],
+          isTaskCreated: false,
+        },
+      })
+    );
+
+    if (res?.payload) {
+      let index = currentPageRows?.findIndex(
+        (item) => item.id === res.payload?.id
+      );
+      if (index !== -1) {
+        let prevPageRows = [...currentPageRows];
+        prevPageRows.splice(index, 1, res.payload);
+        setCurrentPageRows(prevPageRows);
+        onSuccess();
+      }
+    }
   };
 
   return (

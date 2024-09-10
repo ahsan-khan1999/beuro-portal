@@ -180,9 +180,7 @@ export default function useAddTask({
     };
 
     if (taskDetail?.contractID?.id) {
-      formattedData.contractID = {
-        id: taskDetail?.contractID?.id,
-      };
+      formattedData.contractID = taskDetail?.contractID?.id;
     }
 
     if (isRemainder) {
