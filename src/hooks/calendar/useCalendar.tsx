@@ -313,6 +313,7 @@ export const useCalendar = () => {
     handleContractTaskDetail,
     filter,
     setFilter,
+    dispatch,
     handleFilterChange,
   };
 };

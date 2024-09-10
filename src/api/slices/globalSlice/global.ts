@@ -14,9 +14,13 @@ const initialState: GlobalState = {
     data: "",
   },
   currentLanguage: "de",
+  locationSearch: null,
+  advertLocation: "None",
+  filter: {
+    location: "None",
+  },
 };
 
-// file upload connect with the firebase
 export const uploadFileToFirebase: any = createAsyncThunk(
   "file/upload",
   async (data) => {
@@ -42,7 +46,6 @@ export const uploadFileToFirebase: any = createAsyncThunk(
     } catch (response: any) {
       if (response?.response?.data?.code === 401) {
         logout();
-        // window.location  = "/";
       }
       return false;
     }
@@ -74,7 +77,6 @@ export const uploadMultiFileToFirebase: any = createAsyncThunk(
     } catch (response: any) {
       if (response?.response?.data?.code === 401) {
         logout();
-        // window.location  = "/";
       }
       return false;
     }
@@ -90,6 +92,15 @@ const globalSlice = createSlice({
     },
     updateCurrentLanguage: (state, action) => {
       state.currentLanguage = action.payload;
+    },
+    updateLocation: (state, action) => {
+      state.locationSearch = action.payload;
+    },
+    updateAdvertLocation: (state, action) => {
+      state.advertLocation = action.payload;
+    },
+    setFilter: (state, action) => {
+      state.filter = action.payload;
     },
   },
 
@@ -119,4 +130,10 @@ const globalSlice = createSlice({
 });
 
 export default globalSlice.reducer;
-export const { updateModalType, updateCurrentLanguage } = globalSlice.actions;
+export const {
+  updateModalType,
+  updateCurrentLanguage,
+  updateLocation,
+  updateAdvertLocation,
+  setFilter,
+} = globalSlice.actions;

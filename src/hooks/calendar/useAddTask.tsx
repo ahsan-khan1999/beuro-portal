@@ -19,6 +19,9 @@ import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { Task } from "@/types/contract";
 import { staticEnums } from "@/utils/static";
+import { PlacesAutocomplete } from "@/base-components/ui/places-auto-complete";
+import { getGeocode, getLatLng } from "use-places-autocomplete";
+import { updateAdvertLocation } from "@/api/slices/globalSlice/global";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
@@ -145,6 +148,8 @@ export default function useAddTask({
 
     startDateRef.current = value;
   };
+
+  
 
   const taskFields = addTaskFormField(
     register,

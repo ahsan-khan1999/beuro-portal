@@ -12,6 +12,11 @@ export interface GlobalState {
     data?: any;
   };
   currentLanguage: string;
+  locationSearch: null,
+  advertLocation:string,
+  filter: {
+    location:string,
+  },
 }
 
 export type TranslatorFunction = (value: any) => any;

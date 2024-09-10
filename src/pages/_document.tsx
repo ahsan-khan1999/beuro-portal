@@ -9,13 +9,15 @@ export default function Document() {
           rel="stylesheet"
         />
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="robots" content="nofollow" />
+        <script
+          defer
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&libraries=places`}
+        ></script>
       </Head>
       <body>
         <Main />
         <div id="backdrop"></div>
         <div id="calendar"></div>
-
         <NextScript />
       </body>
     </Html>

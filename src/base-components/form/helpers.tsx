@@ -23,6 +23,7 @@ import {
   CalendarDatePickerField,
   ColourSelectField,
   RemainderSelectField,
+  LocationSearchInputField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -67,6 +68,7 @@ const fieldComponents: FieldComponents = {
   calendarDatePicker: CalendarDatePickerField,
   colourSelectField: ColourSelectField,
   remainderSelectField: RemainderSelectField,
+  locationSearchInput: LocationSearchInputField,
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -118,6 +120,7 @@ export function isFieldType(type: any): type is FieldType {
     "calendarDatePicker",
     "colourSelectField",
     "remainderSelectField",
+    "locationSearchInput",
   ].includes(type);
 }
 

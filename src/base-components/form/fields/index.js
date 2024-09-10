@@ -24,3 +24,4 @@ export { IconLabelFeild } from "./icon-label-field";
 export { CalendarDatePickerField } from "./calendar-date-picker-field";
 export { ColourSelectField } from "./colorSelection/colour-select-field";
 export { RemainderSelectField } from "./remainderSelect/colour-remainder-field";
+export { LocationSearchInputField } from "./locationSearchInput/location-search-field";
