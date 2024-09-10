@@ -132,17 +132,10 @@ export const ContractTaskDetail = ({
           {taskDetail?.note && (
             <div className="flex items-start gap-x-2">
               <CalendarNoteIcon />
-
-              {taskDetail?.type === "Contract" ? (
-                <div
-                  className="html-content -mt-1"
-                  dangerouslySetInnerHTML={{ __html: taskDetail?.note }}
-                />
-              ) : (
-                <p className="-mt-1 text-sm font-normal text-[#2A2E3A]">
-                  {taskDetail?.note}
-                </p>
-              )}
+              <div
+                className="html-content -mt-1"
+                dangerouslySetInnerHTML={{ __html: taskDetail?.note }}
+              />
             </div>
           )}
 
