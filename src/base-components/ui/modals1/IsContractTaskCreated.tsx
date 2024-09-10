@@ -144,19 +144,22 @@ export const IsContractTaskCreated = ({
           </span>
           
           <div style="display: flex; flex-direction: column;">
-              ${
-                customerName &&
-                `<div style="display: flex; align-items: center; gap: 4px;">
-                  <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
-                      ${translate("pdf.name")}:
-                  </span>
-                  <span style="font-size: 14px; font-weight: 400; color: #FE9244;">
-                      ${customerName}
-                  </span>
-              </div>`
-              }
+          ${
+            customerName &&
+            customerName.trim() !== "" &&
+            `<div style="display: flex; align-items: center; gap: 4px;">
+                <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                    ${translate("pdf.name")}:
+                </span>
+                <span style="font-size: 14px; font-weight: 400; color: #FE9244;">
+                    ${customerName}
+                </span>
+            </div>`
+          }
+          
               ${
                 customerEmail &&
+                customerEmail.trim() !== "" &&
                 `<div style="display: flex; align-items: center; gap: 4px;">
                   <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
                       ${translate("pdf.email")}:
@@ -168,6 +171,7 @@ export const IsContractTaskCreated = ({
               }
               ${
                 customerPhoneNumber &&
+                customerPhoneNumber.trim() !== "" &&
                 `<div style="display: flex; align-items: center; gap: 4px;">
                   <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
                       ${translate("pdf.phone")}:
@@ -245,7 +249,6 @@ export const IsContractTaskCreated = ({
 
           </div>
           
-          
           <br />
           
           <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
@@ -253,18 +256,20 @@ export const IsContractTaskCreated = ({
           </span>
           
           <div style="display: flex; flex-direction: column; gap: 8px;">
-              ${serviceItem?.map(
-                (item, index) =>
-                  `
-              <div key=${index} style="display: flex; align-items: center; justify-content: space-between;">
-                  <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">${item?.serviceTitle}</p>
-                  <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
-                      ${item?.totalPrice}
-                  </span>
-              </div>
-              `
-              )}
-          </div>
+  ${serviceItem
+    ?.map(
+      (item, index) => `
+    <div key=${index} style="display: flex; align-items: center; justify-content: space-between;">
+      <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">${item?.serviceTitle}</p>
+      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+        ${item?.totalPrice}
+      </span>
+    </div>
+    `
+    )
+    .join("")} 
+</div>
+
           <br />
           <div style="display: flex; flex-direction: column; gap: 8px;">
               <div style="display: flex; align-items: center; gap:4px">
