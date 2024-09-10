@@ -12,11 +12,12 @@ export interface GlobalState {
     data?: any;
   };
   currentLanguage: string;
-  locationSearch: null,
-  advertLocation:string,
+  locationSearch: null;
+  advertLocation: string;
   filter: {
-    location:string,
-  },
+    location: string;
+  };
+  map: boolean;
 }
 
 export type TranslatorFunction = (value: any) => any;
@@ -47,8 +48,8 @@ export interface CheckFieldProps {
   type: keyof FilterType;
   value: string;
   onChange?: (val: string, checked: boolean) => void;
-  containerClassName?:string
-  isMobile?:boolean
+  containerClassName?: string;
+  isMobile?: boolean;
 }
 
 export interface InputFieldProps {

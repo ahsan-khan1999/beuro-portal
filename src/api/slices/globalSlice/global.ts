@@ -19,6 +19,7 @@ const initialState: GlobalState = {
   filter: {
     location: "None",
   },
+  map: false,
 };
 
 export const uploadFileToFirebase: any = createAsyncThunk(
@@ -102,6 +103,9 @@ const globalSlice = createSlice({
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
+    isMapLoaded: (state, action) => {
+      state.map = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -136,4 +140,5 @@ export const {
   updateLocation,
   updateAdvertLocation,
   setFilter,
+  isMapLoaded,
 } = globalSlice.actions;

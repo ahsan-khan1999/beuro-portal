@@ -1,14 +1,22 @@
 import { MyComponentProp } from "@/types";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { useGlobalUser } from "@/utils/hooks";
 import SideBar from "@/base-components/SideBar";
 import Header from "@/base-components/Header";
 import { useRouter } from "next/router";
-import { updateCurrentLanguage } from "@/api/slices/globalSlice/global";
+import {
+  isMapLoaded,
+  updateCurrentLanguage,
+} from "@/api/slices/globalSlice/global";
 import { MobileHeader } from "@/base-components/mobile-header";
 import { motion } from "framer-motion";
+import {
+  Libraries,
+  useJsApiLoader,
+  useLoadScript,
+} from "@react-google-maps/api";
 
 export const Layout = ({ children }: MyComponentProp) => {
   const { user } = useAppSelector((state) => state.auth);
@@ -53,6 +61,17 @@ export const Layout = ({ children }: MyComponentProp) => {
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/");
+
+  const libraries = useMemo<Libraries>(() => ["places"], []);
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || "",
+    libraries: libraries,
+  });
+
+  useMemo(() => {
+    dispatch(isMapLoaded(isLoaded));
+  }, [isLoaded]);
 
   const Drawer = () => {
     return (
