@@ -4,9 +4,7 @@ import { ContentTableRowTypes } from "./content";
 import { CustomerAddress, Customers } from "./customer";
 import { AddressID, Lead } from "./leads";
 import { OfferServiceDetails } from "./offers";
-import { StringifyOptions } from "querystring";
 
-// Interface for contract Table
 export interface contractTableTypes {
   id: string;
   contractNumber: string;
@@ -24,6 +22,7 @@ export interface contractTableTypes {
   signedContracts?: signedContracts[];
   isNoteCreated: boolean;
   isImageAdded: boolean;
+  isTaskCreated?: boolean;
 }
 
 export interface signedContracts {

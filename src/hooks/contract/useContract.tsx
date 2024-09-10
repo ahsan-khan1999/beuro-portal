@@ -33,6 +33,7 @@ const useContract = () => {
     totalCount,
     contractDetails,
   } = useAppSelector((state) => state.contract);
+
   const { query } = useRouter();
 
   useEffect(() => {

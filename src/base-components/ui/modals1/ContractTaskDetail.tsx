@@ -104,10 +104,10 @@ export const ContractTaskDetail = ({
             )}
           </div>
 
-          {taskDetail?.contractID && (
+          {taskDetail?.type === "Contract" && (
             <Button
               onClick={handlePDFPreview}
-              className="!h-fit py-2 px-2 xMini:px-4 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap xMini:mt-6"
+              className="!h-fit py-2 px-2 xMini:px-4 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
               text={translate("invoice.invoice_created_modal.button")}
               id="preview PDF"
               inputType="button"
