@@ -149,8 +149,6 @@ export default function useAddTask({
     startDateRef.current = value;
   };
 
-  
-
   const taskFields = addTaskFormField(
     register,
     loading,
@@ -170,14 +168,26 @@ export default function useAddTask({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formattedData: any = {
       title: data.title,
-      date: data.date,
+      date:
+        taskDetail?.date[0].startDate.trim() !== ""
+          ? taskDetail?.date.map((item) => {
+              if (
+                moment(item.startDate).isSame(clickedStartDate) &&
+                moment(item.endDate).isSame(clickedEndDate)
+              ) {
+                return {
+                  startDate: data.date[0].startDate,
+                  endDate: data.date[0].endDate,
+                };
+              }
+              return item;
+            })
+          : data.date,
       isAllDay: data.isAllDay,
       colour: data.colour,
       note: data.note,
       address: {
-        streetNumber: data.streetNumber,
-        postalCode: data.postalCode,
-        country: data.country,
+        address: data.address,
       },
       type:
         staticEnums["TaskType"][taskDetail?.type] ||

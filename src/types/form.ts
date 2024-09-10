@@ -413,8 +413,8 @@ export interface LocationSearchInputFieldProps
   extends BaseFieldProps<Field.locationSearchInput> {
   id: string;
   name: string;
-  options: OptionType[];
-  value: string;
+  // options: OptionType[];
+  // value: string;
   setValue: UseFormSetValue<FieldValues>;
   control?: Control<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
