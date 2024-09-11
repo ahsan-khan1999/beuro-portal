@@ -17,23 +17,18 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useRef, useState } from "react";
 import moment from "moment";
-import { Task } from "@/types/contract";
 import { staticEnums } from "@/utils/static";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
   onSuccess: () => void;
   onUpdateSuccess: () => void;
-  currentTask: Task[];
-  setCurrentTask: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 export default function useAddTask({
   isUpdate,
   onSuccess,
   onUpdateSuccess,
-  currentTask,
-  setCurrentTask,
 }: AddTaskHookProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -92,7 +87,7 @@ export default function useAddTask({
         reset({
           title: taskDetail?.title,
           date: filteredDate,
-          // streetNumber: taskDetail?.address?.streetNumber,
+          streetNumber: taskDetail?.address?.streetNumber,
           // postalCode: taskDetail?.address?.postalCode,
           // country: taskDetail?.address?.country,
           isAllDay: taskDetail?.isAllDay,

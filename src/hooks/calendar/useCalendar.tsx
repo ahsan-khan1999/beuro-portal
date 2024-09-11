@@ -255,8 +255,6 @@ export const useCalendar = () => {
         isUpdate={false}
         onSuccess={handleTaskSuccess}
         onUpdateSuccess={handleTaskUpdateSuccess}
-        currentTask={currentTask}
-        setCurrentTask={setCurrentTask}
       />
     ),
     [ModalType.UPDATE_ADD_CONTRACT_TASK]: (
@@ -265,8 +263,6 @@ export const useCalendar = () => {
         isUpdate={true}
         onSuccess={handleTaskSuccess}
         onUpdateSuccess={handleTaskUpdateSuccess}
-        currentTask={currentTask}
-        setCurrentTask={setCurrentTask}
       />
     ),
     [ModalType.READ_CONTRACT_TASK_DETAIL]: (

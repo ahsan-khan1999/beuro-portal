@@ -184,6 +184,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   scrollbar-color: transparent transparent; /*just hides the scrollbar for firefox */
 }
 
+.suggestions-list {
+  border: 1px solid #bfbfbf;
+  background-color: white;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
 .calWidth {
   max-width: calc(100% - 292px);
   width: 100%;
