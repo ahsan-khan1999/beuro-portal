@@ -1260,6 +1260,7 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+    "enter_location": "Enter location",
     "pay": "Pay",
     "paid": "Paid",
     "unPaid": "Unpaid",
@@ -2559,7 +2560,7 @@
     "select_color": "Select Color",
     "remainder": "Remainder",
     "address": "Address",
-    "location":"Location",
+    "location": "Location",
     "all_day": "All-Day",
     "all_day_event": "All-day event",
     "is_contract_task_des": "Would you like to create a task?",

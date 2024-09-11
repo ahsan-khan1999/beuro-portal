@@ -289,10 +289,8 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             containerClass: "mb-2",
             field: {
               type: Field.locationSearchInput,
-              id: "address",
-              name: "address",
-              // options: [],
-              // value: "",
+              id: "streetNumber",
+              name: "streetNumber",
               setValue,
               control,
             },

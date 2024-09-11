@@ -183,19 +183,16 @@ export interface SelectBoxProps {
 }
 export interface CustomLocationInputProps {
   id: string;
-  name: string;
-  value?: string;
   setValue: UseFormSetValue<FieldValues>;
   field: ControllerRenderProps<FieldValues, string>;
-  control?: Control<FieldValues>;
-  trigger?: UseFormTrigger<FieldValues>;
-  onItemChange?: (id: string, index?: number) => void;
-  onEnterPress?: (text: string) => void;
-  success?: boolean;
-  placeholder?: string;
-  className?: string;
-  disabled?: boolean;
 }
+export interface CustomLocationMainInputProps {
+  id: string;
+  name: string;
+  control?: Control<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+}
+
 export interface AgentSelectBoxProps {
   id: string;
   options: AgentOptionType[];

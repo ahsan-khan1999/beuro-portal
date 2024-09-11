@@ -19,9 +19,6 @@ import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { Task } from "@/types/contract";
 import { staticEnums } from "@/utils/static";
-import { PlacesAutocomplete } from "@/base-components/ui/places-auto-complete";
-import { getGeocode, getLatLng } from "use-places-autocomplete";
-import { updateAdvertLocation } from "@/api/slices/globalSlice/global";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
@@ -80,24 +77,24 @@ export default function useAddTask({
     if (isContractId) return;
 
     if (id && taskDetail) {
-      let filteredDate = taskDetail.date;
+      let filteredDate = taskDetail?.date;
 
       if (isUpdate && clickedStartDate && clickedEndDate) {
-        filteredDate = taskDetail.date.filter(
+        filteredDate = taskDetail?.date.filter(
           (date) =>
             moment(date.startDate).isSame(clickedStartDate) &&
             moment(date.endDate).isSame(clickedEndDate)
         );
       }
 
-      if (filteredDate.length > 0) {
+      if (filteredDate?.length > 0) {
         setDate(filteredDate);
         reset({
           title: taskDetail?.title,
           date: filteredDate,
-          streetNumber: taskDetail?.address?.streetNumber,
-          postalCode: taskDetail?.address?.postalCode,
-          country: taskDetail?.address?.country,
+          // streetNumber: taskDetail?.address?.streetNumber,
+          // postalCode: taskDetail?.address?.postalCode,
+          // country: taskDetail?.address?.country,
           isAllDay: taskDetail?.isAllDay,
           note: taskDetail?.note,
           alertTime: taskDetail?.alertTime,
@@ -127,7 +124,7 @@ export default function useAddTask({
   }, [isContractId]);
 
   const handleDateChange = (name: string, value: string) => {
-    if (name.includes("endDate")) {
+    if (name?.includes("endDate")) {
       return;
     }
 
@@ -187,7 +184,7 @@ export default function useAddTask({
       colour: data.colour,
       note: data.note,
       address: {
-        address: data.address,
+        streetNumber: data.streetNumber,
       },
       type:
         staticEnums["TaskType"][taskDetail?.type] ||

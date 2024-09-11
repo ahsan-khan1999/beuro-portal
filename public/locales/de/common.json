@@ -1253,6 +1253,7 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
+    "enter_location": "Ort eingeben",
     "pay": "Bezahlen",
     "paid": "Bezahlt",
     "unPaid": "Unbezahlt",
@@ -2553,7 +2554,7 @@
     "select_color": "Farbe auswählen",
     "remainder": "Restbetrag",
     "address": "Adresse",
-    "location":"Standort",
+    "location": "Standort",
     "all_day": "Ganztägig",
     "all_day_event": "Ganztägige Veranstaltung",
     "is_contract_task_des": "Möchten Sie eine Aufgabe erstellen?",

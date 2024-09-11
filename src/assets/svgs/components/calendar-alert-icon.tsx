@@ -6,6 +6,7 @@ export const CalendarAlertIcon = () => {
       height="16"
       viewBox="0 0 16 16"
       fill="none"
+      className="min-w-[16px] min-h-[16px]"
     >
       <g clip-path="url(#clip0_2426_6460)">
         <path

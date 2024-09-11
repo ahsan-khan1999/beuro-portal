@@ -132,6 +132,7 @@ export const ContractTaskDetail = ({
           {taskDetail?.note && (
             <div className="flex items-start gap-x-2">
               <CalendarNoteIcon />
+
               <div
                 className="html-content -mt-1"
                 dangerouslySetInnerHTML={{ __html: taskDetail?.note }}
