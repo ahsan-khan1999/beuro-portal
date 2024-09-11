@@ -49,7 +49,11 @@ export const CustomLocationInput = ({
       <input
         {...field}
         onFocus={() => setIsFocused(true)}
-        onBlurCapture={() => setIsFocused(false)}
+        onBlurCapture={() => {
+          setTimeout(() => {
+            setIsFocused(false);
+          }, 200);
+        }}
         value={inputValue}
         onChange={(e) => {
           setInputValue(e.target.value);
