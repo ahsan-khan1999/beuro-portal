@@ -132,6 +132,7 @@ export const ContractTaskDetail = ({
           {taskDetail?.note && (
             <div className="flex items-start gap-x-2">
               <CalendarNoteIcon />
+
               <div
                 className="html-content -mt-1"
                 dangerouslySetInnerHTML={{ __html: taskDetail?.note }}
@@ -148,7 +149,7 @@ export const ContractTaskDetail = ({
                 height={16}
               />
 
-              <div className="flex flex-col gap-y-1">
+              <div className="flex flex-col gap-y-1 -mt-1">
                 <span className="text-sm font-normal text-[#2A2E3A]">
                   {taskDetail?.address?.streetNumber}
                 </span>

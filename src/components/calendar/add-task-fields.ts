@@ -288,13 +288,11 @@ export const addTaskFormField: GenerateAddTaskFormField = (
           {
             containerClass: "mb-2",
             field: {
-              type: Field.input,
-              className: "!p-4 !border-[#D7D7D7] focus:!border-primary",
-              inputType: "text",
+              type: Field.locationSearchInput,
               id: "streetNumber",
               name: "streetNumber",
-              placeholder: translate("common.search"),
-              register,
+              setValue,
+              control,
             },
           },
           // {

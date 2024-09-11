@@ -54,6 +54,19 @@ export const Layout = ({ children }: MyComponentProp) => {
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/");
 
+  // const libraries = useMemo<Libraries>(() => ["places"], []);
+
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || "",
+  //   libraries: libraries,
+  // });
+
+  // useMemo(() => {
+  //   console.log(isLoaded, "isLoaded");
+
+  //   dispatch(isMapLoaded(isLoaded));
+  // }, [isLoaded]);
+
   const Drawer = () => {
     return (
       <div

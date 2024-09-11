@@ -6,6 +6,7 @@ export const CalendarNoteIcon = () => {
       height="15"
       viewBox="0 0 16 15"
       fill="none"
+      className="min-w-[16px] min-h-[15px]"
     >
       <path
         fill-rule="evenodd"

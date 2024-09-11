@@ -17,23 +17,18 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useRef, useState } from "react";
 import moment from "moment";
-import { Task } from "@/types/contract";
 import { staticEnums } from "@/utils/static";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
   onSuccess: () => void;
   onUpdateSuccess: () => void;
-  currentTask: Task[];
-  setCurrentTask: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 export default function useAddTask({
   isUpdate,
   onSuccess,
   onUpdateSuccess,
-  currentTask,
-  setCurrentTask,
 }: AddTaskHookProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -77,24 +72,24 @@ export default function useAddTask({
     if (isContractId) return;
 
     if (id && taskDetail) {
-      let filteredDate = taskDetail.date;
+      let filteredDate = taskDetail?.date;
 
       if (isUpdate && clickedStartDate && clickedEndDate) {
-        filteredDate = taskDetail.date.filter(
+        filteredDate = taskDetail?.date.filter(
           (date) =>
             moment(date.startDate).isSame(clickedStartDate) &&
             moment(date.endDate).isSame(clickedEndDate)
         );
       }
 
-      if (filteredDate.length > 0) {
+      if (filteredDate?.length > 0) {
         setDate(filteredDate);
         reset({
           title: taskDetail?.title,
           date: filteredDate,
           streetNumber: taskDetail?.address?.streetNumber,
-          postalCode: taskDetail?.address?.postalCode,
-          country: taskDetail?.address?.country,
+          // postalCode: taskDetail?.address?.postalCode,
+          // country: taskDetail?.address?.country,
           isAllDay: taskDetail?.isAllDay,
           note: taskDetail?.note,
           alertTime: taskDetail?.alertTime,
@@ -124,7 +119,7 @@ export default function useAddTask({
   }, [isContractId]);
 
   const handleDateChange = (name: string, value: string) => {
-    if (name.includes("endDate")) {
+    if (name?.includes("endDate")) {
       return;
     }
 
@@ -165,14 +160,26 @@ export default function useAddTask({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formattedData: any = {
       title: data.title,
-      date: data.date,
+      date:
+        taskDetail?.date[0].startDate.trim() !== ""
+          ? taskDetail?.date.map((item) => {
+              if (
+                moment(item.startDate).isSame(clickedStartDate) &&
+                moment(item.endDate).isSame(clickedEndDate)
+              ) {
+                return {
+                  startDate: data.date[0].startDate,
+                  endDate: data.date[0].endDate,
+                };
+              }
+              return item;
+            })
+          : data.date,
       isAllDay: data.isAllDay,
       colour: data.colour,
       note: data.note,
       address: {
         streetNumber: data.streetNumber,
-        postalCode: data.postalCode,
-        country: data.country,
       },
       type:
         staticEnums["TaskType"][taskDetail?.type] ||

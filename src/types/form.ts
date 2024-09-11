@@ -181,6 +181,18 @@ export interface SelectBoxProps {
   disabled?: boolean;
   fieldIndex?: number;
 }
+export interface CustomLocationInputProps {
+  id: string;
+  setValue: UseFormSetValue<FieldValues>;
+  field: ControllerRenderProps<FieldValues, string>;
+}
+export interface CustomLocationMainInputProps {
+  id: string;
+  name: string;
+  control?: Control<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+}
+
 export interface AgentSelectBoxProps {
   id: string;
   options: AgentOptionType[];
@@ -356,7 +368,7 @@ export interface CalendarDatePickerProps
   extends BaseFieldProps<Field.calendarDatePicker> {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
-  watch: UseFormWatch<FieldValues>,
+  watch: UseFormWatch<FieldValues>;
   value?: string;
   className?: string;
   svg?: string;
@@ -364,7 +376,7 @@ export interface CalendarDatePickerProps
   min?: string;
   max?: string;
   disable?: boolean;
-  onDateChange?:(name:string,value:string) => void
+  onDateChange?: (name: string, value: string) => void;
 }
 
 export interface ColourSelectionOptions {
@@ -393,6 +405,23 @@ export interface RemainderSeclectionFieldProps
   control?: Control<FieldValues>;
   onItemChange?: (id: string, index?: number) => void;
   trigger?: UseFormTrigger<FieldValues>;
+}
+export interface LocationSearchInputFieldProps
+  extends BaseFieldProps<Field.locationSearchInput> {
+  id: string;
+  name: string;
+  // options: OptionType[];
+  // value: string;
+  setValue: UseFormSetValue<FieldValues>;
+  control?: Control<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+  field?: ControllerRenderProps<FieldValues, string>;
+  onItemChange?: (id: string, index?: number) => void;
+  onEnterPress?: (text: string) => void;
+  success?: boolean;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
 }
 
 export interface RemainderSelectProps {
@@ -506,7 +535,8 @@ export type FieldType =
   | Field.iconLabel
   | Field.calendarDatePicker
   | Field.colourSelectField
-  | Field.remainderSelectField;
+  | Field.remainderSelectField
+  | Field.locationSearchInput;
 
 export type FieldProps =
   | InputProps
@@ -543,7 +573,8 @@ export type FieldProps =
   | IconLabelProps
   | CalendarDatePickerProps
   | ColourSeclectionFieldProps
-  | RemainderSeclectionFieldProps;
+  | RemainderSeclectionFieldProps
+  | LocationSearchInputFieldProps;
 
 export interface FormField {
   containerClass?: string;
@@ -584,6 +615,7 @@ export interface FieldComponents {
   calendarDatePicker: React.FC<CalendarDatePickerProps>;
   colourSelectField: React.FC<ColourSeclectionFieldProps>;
   remainderSelectField: React.FC<RemainderSeclectionFieldProps>;
+  locationSearchInput: React.FC<LocationSearchInputFieldProps>;
 }
 
 export interface FormProps {

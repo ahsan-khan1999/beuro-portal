@@ -74,6 +74,7 @@ export enum Field {
   calendarDatePicker = "calendarDatePicker",
   colourSelectField = "colourSelectField",
   remainderSelectField = "remainderSelectField",
+  locationSearchInput = "locationSearchInput",
 }
 
 export enum CardType {
