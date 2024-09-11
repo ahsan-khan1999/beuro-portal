@@ -2555,6 +2555,7 @@
     "remainder": "Restbetrag",
     "address": "Adresse",
     "location": "Standort",
+    "current_location": "Aktueller Standort",
     "all_day": "Ganztägig",
     "all_day_event": "Ganztägige Veranstaltung",
     "is_contract_task_des": "Möchten Sie eine Aufgabe erstellen?",

@@ -471,6 +471,13 @@ export interface IconLabelProps {
   containerClassName?: string;
   textClassName?: string;
   iconClassName?: string;
+  isLocation?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+}
+
+export interface Location {
+  lat: number | null;
+  lng: number | null;
 }
 
 export interface DivProps {
