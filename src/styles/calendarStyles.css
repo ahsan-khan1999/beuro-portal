@@ -124,11 +124,6 @@
   padding: 0 !important;
 }
 
-.ck-dropdown__panel {
-  right: 0 !important; /* Force the dropdown to stick to the right edge */
-  left: auto !important; /* Prevent the dropdown from overflowing */
-}
-
 @media (min-width: 768px) {
   .timeGridDay-flex {
     display: flex !important;
@@ -140,6 +135,11 @@
 
   .fc-daygrid-day-events {
     display: block;
+  }
+
+  .ck-dropdown__panel {
+    right: 0 !important;
+    left: auto !important;
   }
 }
 

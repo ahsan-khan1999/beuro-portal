@@ -123,17 +123,19 @@ export const Calendar = () => {
 
   return (
     <div className="mb-5">
-      <div className="flex item-center justify-between mb-[28px]">
+      <div className="flex item-center justify-between xMini:mb-[28px]">
         <h1 className="text-[#202020] font-semibold text-xl xMini:text-2xl xlg:text-[36px] xMini:mt-6">
           {translate("calendar.main_heading")}
         </h1>
 
         <div className="flex items-center gap-x-4 xMini:mt-6">
-          <CalendarFilters
-            filter={filter}
-            setFilter={setFilter}
-            handleFilterChange={handleFilterChange}
-          />
+          <div className="hidden xMini:block">
+            <CalendarFilters
+              filter={filter}
+              setFilter={setFilter}
+              handleFilterChange={handleFilterChange}
+            />
+          </div>
 
           <Button
             onClick={handleAddContractTask}
@@ -144,6 +146,13 @@ export const Calendar = () => {
             iconAlt="button"
           />
         </div>
+      </div>
+      <div className="block my-4 w-full xMini:hidden">
+        <CalendarFilters
+          filter={filter}
+          setFilter={setFilter}
+          handleFilterChange={handleFilterChange}
+        />
       </div>
 
       <div className="p-4 xMini:p-6 bg-white rounded-t-lg flex flex-col gap-y-4">

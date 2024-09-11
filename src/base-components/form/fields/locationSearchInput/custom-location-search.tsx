@@ -8,6 +8,8 @@ export const CustomLocationInput = ({
   setValue,
 }: CustomLocationInputProps) => {
   const [inputValue, setInputValue] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+
   const {
     ready,
     value,
@@ -46,6 +48,8 @@ export const CustomLocationInput = ({
     <div className="relative">
       <input
         {...field}
+        onFocus={() => setIsFocused(true)}
+        onBlurCapture={() => setIsFocused(false)}
         value={inputValue}
         onChange={(e) => {
           setInputValue(e.target.value);
@@ -58,7 +62,7 @@ export const CustomLocationInput = ({
         className="border border-borderColor rounded-[4px] w-full p-2 outline-none text-dark text-sm focus:border-primary"
       />
 
-      {status === "OK" && (
+      {isFocused && status === "OK" && (
         <ul className="suggestions-list flex flex-col gap-y-1 top-[44px]">
           {data?.map(({ place_id, description }) => (
             <li

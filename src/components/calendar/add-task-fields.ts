@@ -286,13 +286,36 @@ export const addTaskFormField: GenerateAddTaskFormField = (
             },
           },
           {
-            containerClass: "mb-2",
+            containerClass: "mb-3",
             field: {
               type: Field.locationSearchInput,
               id: "streetNumber",
               name: "streetNumber",
               setValue,
               control,
+            },
+          },
+          {
+            containerClass:
+              "mb-0 block xMini:hidden pt-3 border-t border-t-borderColor",
+            field: {
+              type: Field.iconLabel,
+              id: "address",
+              name: "address",
+              textClassName: "font-semibold",
+              isLocation: true,
+              setValue,
+              text: translate("calendar.current_location"),
+              icon: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+  <g clip-path="url(#clip0_2433_15842)">
+    <path d="M6.88128 1.20117C4.36571 1.20117 2.31909 3.24779 2.31909 5.76336C2.31909 8.92517 6.88577 14.3262 6.88577 14.3262C6.88577 14.3262 11.4435 8.76968 11.4435 5.76336C11.4435 3.24779 9.39693 1.20117 6.88128 1.20117ZM8.25779 7.09917C7.87823 7.47865 7.3798 7.66842 6.88128 7.66842C6.38284 7.66842 5.88425 7.47865 5.50485 7.09917C4.74582 6.34022 4.74582 5.10527 5.50485 4.34624C5.87239 3.97854 6.36129 3.77602 6.88128 3.77602C7.40126 3.77602 7.89009 3.97862 8.25779 4.34624C9.01682 5.10527 9.01682 6.34022 8.25779 7.09917Z" fill="#616161"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_2433_15842">
+      <rect width="14" height="14" fill="white" transform="translate(0 0.770508)"/>
+    </clipPath>
+  </defs>
+</svg>`,
             },
           },
           // {

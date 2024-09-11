@@ -20,7 +20,7 @@ module.exports = {
         sans: ["Poppins", "sans-serif"],
       },
       screens: {
-        xs: "375px",
+        xs: "374px",
         xsMini: "520px",
         xMini: "730px",
         xAir: "820px",
