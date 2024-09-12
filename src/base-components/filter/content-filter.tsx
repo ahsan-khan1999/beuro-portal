@@ -77,8 +77,9 @@ export default function ContentFilter({
       date: { ...prev.date, [dateRange]: dateTime },
     }));
   };
+
   return (
-    <div className="relative flex my-auto cursor-pointer" ref={ref}>
+    <div className="relative flex my-auto" ref={ref}>
       <Button
         inputType="button"
         onClick={handleExtraFilterToggle}
@@ -133,41 +134,39 @@ export default function ContentFilter({
                 {translate("filters.extra_filters.reset_all")}
               </span>
             </div>
-            <div>
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    {translate("filters.extra_filters.date")}
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => {
-                      handleFilterReset("date", {
-                        $gte: FiltersDefaultValues.$gte,
-                        $lte: FiltersDefaultValues.$lte,
-                      });
-                    }}
-                  >
-                    {translate("filters.extra_filters.reset")}
-                  </label>
-                </div>
-
-                <DatePicker
-                  label={translate("filters.extra_filters.from")}
-                  label2={translate("filters.extra_filters.to")}
-                  dateFrom={formatDateForDatePicker(
-                    (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
-                      FiltersDefaultValues.$gte
-                  )}
-                  dateTo={formatDateForDatePicker(
-                    (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
-                      FiltersDefaultValues.$lte
-                  )}
-                  onChangeFrom={(val) => handleDateChange("$gte", val)}
-                  onChangeTo={(val) => handleDateChange("$lte", val)}
-                />
+            <div className="mt-5 mb-2">
+              <div className="flex justify-between">
+                <label htmlFor="type" className="font-medium text-base">
+                  {translate("filters.extra_filters.date")}
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => {
+                    handleFilterReset("date", {
+                      $gte: FiltersDefaultValues.$gte,
+                      $lte: FiltersDefaultValues.$lte,
+                    });
+                  }}
+                >
+                  {translate("filters.extra_filters.reset")}
+                </label>
               </div>
+
+              <DatePicker
+                label={translate("filters.extra_filters.from")}
+                label2={translate("filters.extra_filters.to")}
+                dateFrom={formatDateForDatePicker(
+                  (moreFilter.date?.$gte && moreFilter?.date?.$gte) ||
+                    FiltersDefaultValues.$gte
+                )}
+                dateTo={formatDateForDatePicker(
+                  (moreFilter.date?.$lte && moreFilter?.date?.$lte) ||
+                    FiltersDefaultValues.$lte
+                )}
+                onChangeFrom={(val) => handleDateChange("$gte", val)}
+                onChangeTo={(val) => handleDateChange("$lte", val)}
+              />
             </div>
 
             <BaseButton

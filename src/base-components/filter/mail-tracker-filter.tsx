@@ -1,16 +1,15 @@
 import React, { SetStateAction, useState } from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { CheckBoxType, FilterProps, FilterType, MoreFilterType } from "@/types";
+import { CheckBoxType, FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import { PriceInputField } from "./fields/price-input-field";
 import useFilter from "@/hooks/filter/hook";
-import CheckField from "./fields/check-field";
 import { FiltersDefaultValues } from "@/enums/static";
 
 export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
   const moreFilters: FilterType = {
-    email: FiltersDefaultValues.None,
+    emailStatus: FiltersDefaultValues.None,
   };
   const {
     extraFilterss,
@@ -32,17 +31,17 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
   ];
 
   const [moreFilter, setMoreFilter] = useState<{
-    email: string[];
+    emailStatus: string[];
     price: string[];
   }>({
-    email: (filter.email as string[]) || [],
+    emailStatus: (filter.emailStatus as string[]) || [],
     price: filter.price || [],
   });
 
   const handleSave = () => {
     setFilter((prev) => ({
       ...prev,
-      email: moreFilter.email,
+      emailStatus: moreFilter.emailStatus,
       price: moreFilter.price,
     }));
     handleExtraFiltersClose();
@@ -50,10 +49,10 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
 
   const handleEmailChange = (value: string, isChecked: boolean) => {
     const updatedEmails = isChecked
-      ? [...moreFilter.email, value]
-      : moreFilter.email.filter((email) => email !== value);
+      ? [...moreFilter.emailStatus, value]
+      : moreFilter.emailStatus.filter((email) => email !== value);
 
-    setMoreFilter({ ...moreFilter, email: updatedEmails });
+    setMoreFilter({ ...moreFilter, emailStatus: updatedEmails });
   };
 
   const handleLowPriceChange = (val: string) => {
@@ -116,8 +115,7 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
               </span>
             </div>
             <div className="">
-              {/* email section  */}
-              <div className="mt-5 my-5">
+              {/* <div className="mt-5 my-5">
                 <div className="flex justify-between">
                   <label htmlFor="type" className="font-medium text-base">
                     Email
@@ -131,20 +129,19 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
                   </label>
                 </div>
                 <div className="flex items-center gap-x-3 mt-4  ">
-                  {checkbox.map((item, idx) => (
+                  {checkbox?.map((item, idx) => (
                     <CheckField
                       key={idx}
                       checkboxFilter={filter}
                       setCheckBoxFilter={setFilter}
-                      type={"email"}
+                      type={"emailStatus"}
                       label={item.label}
                       value={item.type}
                       onChange={handleEmailChange}
                     />
                   ))}
                 </div>
-              </div>
-              {/* email section  */}
+              </div> */}
               {/* Price section  */}
               <div className="mt-5 mb-2">
                 <div className="flex justify-between mb-2">

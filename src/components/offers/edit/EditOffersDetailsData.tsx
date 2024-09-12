@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import OfferEditImages from "../OfferEditImages";
 import OfferEditDetails from "./OfferEditDetails";
@@ -146,6 +146,15 @@ const EditOffersDetailsData = ({
     customerType === 1
       ? translate("common.company_name")
       : translate("common.customer_name");
+
+  useEffect(() => {
+    if (tabType !== null) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [tabType]);
 
   return (
     <>

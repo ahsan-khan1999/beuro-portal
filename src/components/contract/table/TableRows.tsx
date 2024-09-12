@@ -164,7 +164,7 @@ const TableRows = ({
                       dataToAdd.length > 5 &&
                       index === dataToAdd.length - 1
                     }
-                    isContract={true}
+                    isPayment={true}
                   />
                 </span>
                 {/* <span className="py-4 flex justify-center items-center mr-1">

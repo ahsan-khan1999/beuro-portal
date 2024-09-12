@@ -2341,7 +2341,8 @@
     "Post": "Post",
     "Pending": "Pending",
     "Sent": "Sent",
-    "Failed": "Failed"
+    "Failed": "Failed",
+    "opend": "Opened"
   },
   "mail_tracker_status": {
     "opend": "opend",
@@ -2561,7 +2562,7 @@
     "remainder": "Remainder",
     "address": "Address",
     "location": "Location",
-    "current_location":"Current Location",
+    "current_location": "Current Location",
     "all_day": "All-Day",
     "all_day_event": "All-day event",
     "is_contract_task_des": "Would you like to create a task?",

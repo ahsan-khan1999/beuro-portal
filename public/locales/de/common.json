@@ -185,7 +185,7 @@
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "Ihr Plan läuft aus!",
     "offer_already_signed": "Dieses Angebot ist bereits unterzeichnet",
-    "validation_failed": "Überprüfung fehlgeschlagen",
+    "validation_failed": "Überprüfung Gescheitert",
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",
@@ -240,7 +240,7 @@
     "cannot_create_recurring_invoice": "Die Erstellung wiederkehrender Rechnungen ist derzeit nicht möglich",
     "oauth_account_already_connected": "Der Benutzer mit diesem Konto ist bereits verbunden",
     "oauth_account_not_connected": "Der Benutzer mit diesem Konto ist nicht verbunden",
-    "oauth_apple_strict_checking_failed": "Die strenge Prüfung der Apple-Authentifizierung ist fehlgeschlagen",
+    "oauth_apple_strict_checking_failed": "Die strenge Prüfung der Apple-Authentifizierung ist Gescheitert",
     "oauth_invalid_code": "Der angegebene Authentifizierungscode ist ungültig",
     "Employee_has_been_created": "Der Mitarbeiter wurde erfolgreich angelegt",
     "Login_details_have_been_emailed_to_them": "Die Zugangsdaten wurden ihnen per E-Mail zugesandt",
@@ -809,7 +809,7 @@
     },
     "create_invoice_modal": {
       "total_amount": "Gesamtbetrag",
-      "remaining_amount": "VerLeadbender Betrag",
+      "remaining_amount": "verbleibender Betrag",
       "enter_amount": "Betrag eingeben",
       "amount": "Betrag",
       "percentage": "Prozentsatz",
@@ -2236,7 +2236,7 @@
       "email": "E-Mail",
       "send": "Senden",
       "draft": "Ausstehend",
-      "failed": "Fehlgeschlagen",
+      "failed": "Gescheitert",
       "pending": "Ausstehend",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
@@ -2337,12 +2337,13 @@
     "Post": "Gesendet",
     "Pending": "Ausstehend",
     "Sent": "Gesendet",
-    "Failed": "Gescheitert"
+    "Failed": "Gescheitert",
+    "opend": "Geöffnet"
   },
   "mail_tracker_status": {
     "pending": "Ausstehend",
     "opend": "Geöffnet",
-    "failed": "Fehlgeschlagen"
+    "failed": "Gescheitert"
   },
   "support_request_status": {
     "pending": "Ausstehend",

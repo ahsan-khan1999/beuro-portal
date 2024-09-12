@@ -1,7 +1,9 @@
+import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
 import { FiltersDefaultValues } from "@/enums/static";
-import { FilterType, FiltersComponentProps } from "@/types";
+import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
+import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -26,14 +28,6 @@ export default function EmailTrackerFilters({
   const handleInputChange = (value: string) => {
     setInputValue(value);
   };
-
-  // const hanldeSortChange = (value: string) => {
-  //   setFilter((prev: FilterType) => {
-  //     const updatedFilter = { ...prev, ["sort"]: value };
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
@@ -82,39 +76,116 @@ export default function EmailTrackerFilters({
     });
   };
 
+  const checkbox: CheckBoxType[] = [
+    {
+      label: `${translate("email_status.Pending")}`,
+      type: `${staticEnums.MailStatus.pending}`,
+    },
+    {
+      label: `${translate("email_status.opend")}`,
+      type: `${staticEnums.MailStatus.opend}`,
+    },
+    {
+      label: `${translate("email_status.Failed")}`,
+      type: `${staticEnums.MailStatus.failed}`,
+    },
+  ];
+
+  const handleEmailFilter = (value: string, isChecked: boolean) => {
+    setFilter((prev: FilterType) => {
+      const updatedStatus = prev.mailStatus ? [...prev.mailStatus] : [];
+      const newStatus = updatedStatus.map(Number);
+
+      if (isChecked) {
+        if (!updatedStatus.includes(value)) {
+          updatedStatus.push(value);
+        }
+
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              mailStatus:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      } else {
+        const index = updatedStatus.indexOf(value);
+        if (index > -1) {
+          updatedStatus.splice(index, 1);
+        }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              mailStatus:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      }
+      const mailStatus =
+        updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+      const updatedFilter = { ...prev, mailStatus: mailStatus };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
-    <div className="flex">
-      <div className="flex items-center space-x-4">
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={true}
-          onEnterPress={onEnterPress}
-        />
-        <SelectField
-          handleChange={(value) => hanldeSortChange(value)}
-          value={filter?.sort || ""}
-          dropDownIconClassName=""
-          options={[
-            {
-              label: `${translate("filters.sort_by.date")}`,
-              value: "createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.latest")}`,
-              value: "-createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.oldest")}`,
-              value: "createdAt",
-            },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
-          ]}
-          label={translate("common.sort_button")}
-          containerClassName="min-w-fit"
-        />
-        {/* <Button
+    <div className="flex items-center gap-x-4">
+      <div className="flex gap-[14px]">
+        {checkbox?.map((item, idx) => (
+          <CheckField
+            key={idx}
+            checkboxFilter={filter}
+            setCheckBoxFilter={setFilter}
+            type={"mailStatus"}
+            label={item.label}
+            value={item.type}
+            onChange={(value, isChecked) => handleEmailFilter(value, isChecked)}
+          />
+        ))}
+      </div>
+      <InputField
+        handleChange={handleInputChange}
+        ref={inputRef}
+        value={inputValue}
+        iconDisplay={true}
+        onEnterPress={onEnterPress}
+      />
+      <SelectField
+        handleChange={(value) => hanldeSortChange(value)}
+        value={filter?.sort || ""}
+        dropDownIconClassName=""
+        options={[
+          {
+            label: `${translate("filters.sort_by.date")}`,
+            value: "createdAt",
+          },
+          {
+            label: `${translate("filters.sort_by.latest")}`,
+            value: "-createdAt",
+          },
+          {
+            label: `${translate("filters.sort_by.oldest")}`,
+            value: "createdAt",
+          },
+          { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+        ]}
+        label={translate("common.sort_button")}
+        containerClassName="min-w-fit"
+      />
+      {/* <Button
           onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
           text="Apply"
@@ -122,7 +193,6 @@ export default function EmailTrackerFilters({
           inputType="button"
           name=""
         /> */}
-      </div>
     </div>
   );
 }

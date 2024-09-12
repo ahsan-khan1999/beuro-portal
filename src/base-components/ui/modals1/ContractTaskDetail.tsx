@@ -67,12 +67,24 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
-        <p
-          style={{ color: `${taskDetail.colour || "#4A13E7"}` }}
-          className="text-sm font-normal ml-5"
-        >
-          {taskDetail?.type}
-        </p>
+        <div className="flex items-center justify-between mt-2">
+          <p
+            style={{ color: `${taskDetail.colour || "#4A13E7"}` }}
+            className="text-sm font-normal ml-5"
+          >
+            {taskDetail?.type}
+          </p>
+          {taskDetail?.type === "Contract" && (
+            <Button
+              onClick={handlePDFPreview}
+              className="!h-fit py-1 xMini:py-2 px-2 xMini:px-4 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+              text={translate("invoice.invoice_created_modal.button")}
+              id="preview PDF"
+              inputType="button"
+              iconAlt="button"
+            />
+          )}
+        </div>
 
         <div className="flex items-start justify-between my-5">
           <div className="ml-5 flex flex-col gap-y-2">
@@ -103,17 +115,6 @@ export const ContractTaskDetail = ({
               </div>
             )}
           </div>
-
-          {taskDetail?.type === "Contract" && (
-            <Button
-              onClick={handlePDFPreview}
-              className="!h-fit py-2 px-2 xMini:px-4 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-              text={translate("invoice.invoice_created_modal.button")}
-              id="preview PDF"
-              inputType="button"
-              iconAlt="button"
-            />
-          )}
         </div>
 
         <hr className="opacity-30 -mx-[10px]" />

@@ -96,6 +96,13 @@ export const areFiltersEmpty = (filter: FilterType) => {
 //   return cleanedFilter as FilterType;
 // };
 
+export const isValidUrl = (url?: string): boolean => {
+  return (
+    typeof url === "string" &&
+    (url.startsWith("http://") || url.startsWith("https://"))
+  );
+};
+
 export const formatDateForDatePicker = (isoDateString: string) => {
   if (
     isoDateString === FiltersDefaultValues.$gte ||
@@ -789,10 +796,10 @@ export function getFollowUpStatusColor(status: string) {
 }
 
 export function getMailStatusColor(status: string) {
-  if (staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["failed"])
+  if (staticEnums["MailStatus"][status] == staticEnums["MailStatus"]["failed"])
     return "#FF376F";
   else if (
-    staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["pending"]
+    staticEnums["MailStatus"][status] == staticEnums["MailStatus"]["pending"]
   )
     return "#FE9244";
   else return "#45C769";

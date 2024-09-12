@@ -178,7 +178,7 @@ export default function InvoicesFilters({
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
-      <div className="flex gap-[14px]">
+      <div className="flex gap-3">
         {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
@@ -194,7 +194,7 @@ export default function InvoicesFilters({
         ))}
       </div>
 
-      <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
+      <div className="flex flex-col maxSize:flex-row gap-3 maxSize:items-center">
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}

@@ -25,8 +25,8 @@ export interface IsTaskModalProps {
   heading: string;
   contractId: string | null;
   status: string;
-  currentPageRows: contractTableTypes[];
-  setCurrentPageRows: React.Dispatch<
+  currentPageRows?: contractTableTypes[];
+  setCurrentPageRows?: React.Dispatch<
     React.SetStateAction<contractTableTypes[]>
   >;
 }
@@ -44,7 +44,6 @@ export const IsContractTaskCreated = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const { currentLanguage } = useAppSelector((state) => state.global);
-
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { systemSettings } = useAppSelector((state) => state.settings);
 
@@ -351,13 +350,17 @@ export const IsContractTaskCreated = ({
     );
 
     if (res?.payload) {
-      let index = currentPageRows?.findIndex(
-        (item) => item.id === res.payload?.id
-      );
-      if (index !== -1) {
-        let prevPageRows = [...currentPageRows];
-        prevPageRows.splice(index, 1, res.payload);
-        setCurrentPageRows(prevPageRows);
+      if (currentPageRows && setCurrentPageRows) {
+        let index = currentPageRows?.findIndex(
+          (item) => item.id === res.payload?.id
+        );
+        if (index !== -1) {
+          let prevPageRows = [...currentPageRows];
+          prevPageRows.splice(index, 1, res.payload);
+          setCurrentPageRows(prevPageRows);
+          onSuccess();
+        }
+      } else {
         onSuccess();
       }
     }

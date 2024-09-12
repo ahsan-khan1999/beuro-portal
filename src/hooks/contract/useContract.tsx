@@ -25,14 +25,8 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import { IsContractTaskCreated } from "@/base-components/ui/modals1/IsContractTaskCreated";
 
 const useContract = () => {
-  const {
-    lastPage,
-    contract,
-    loading,
-    isLoading,
-    totalCount,
-    contractDetails,
-  } = useAppSelector((state) => state.contract);
+  const { contract, loading, isLoading, totalCount, contractDetails } =
+    useAppSelector((state) => state.contract);
 
   const { query } = useRouter();
 
@@ -51,6 +45,7 @@ const useContract = () => {
     const sortedValue = query?.sort as string;
     const searchDate = query?.date as string;
     const searchLeadSource = query?.leadSource;
+    const searchEmailStatus = query?.emailStatus;
     const searchNoteType = query?.noteType as string;
 
     const queryParams =
@@ -59,6 +54,7 @@ const useContract = () => {
       sortedValue ||
       searchDate ||
       searchLeadSource ||
+      searchEmailStatus ||
       searchNoteType;
 
     if (queryParams !== undefined) {
@@ -80,6 +76,7 @@ const useContract = () => {
           $lte?: string;
         };
         leadSource?: string | string[];
+        emailStatus?: string | string[];
       } = {
         status: filteredStatus,
       };
@@ -89,12 +86,14 @@ const useContract = () => {
         sortedValue ||
         searchDate ||
         searchLeadSource ||
+        searchEmailStatus ||
         searchNoteType
       ) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.date = searchDate && JSON.parse(searchDate);
         updatedFilter.leadSource = searchLeadSource;
+        updatedFilter.emailStatus = searchEmailStatus;
         updatedFilter.noteType = searchNoteType;
       }
 
@@ -141,6 +140,7 @@ const useContract = () => {
   const [selectedContractId, setSelectedContractId] = useState<string | null>(
     null
   );
+
   const [selectedStatus, setSelectedStatus] = useState<string>("");
 
   const handleFilterChange = (filter: FilterType) => {

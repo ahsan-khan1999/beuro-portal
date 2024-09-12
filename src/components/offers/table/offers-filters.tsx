@@ -10,7 +10,7 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export default function OffersFilters({
   filter,
@@ -21,8 +21,6 @@ export default function OffersFilters({
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const { noteSettings } = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
-
   const [inputValue, setInputValue] = useState<string>("");
 
   const checkbox: CheckBoxType[] = [
@@ -171,7 +169,6 @@ export default function OffersFilters({
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
   }, [router.query.text]);
-
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">

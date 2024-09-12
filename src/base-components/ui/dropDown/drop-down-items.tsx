@@ -11,6 +11,7 @@ export const DropDownItems = ({
   isThirdLastIndex,
   isOffer,
   isLead,
+  isPayment,
   isAdminCustomer,
   isContract,
 }: DropDownItemsProps & {
@@ -18,6 +19,7 @@ export const DropDownItems = ({
   isSecondLastIndex?: boolean;
   isThirdLastIndex?: boolean;
   isLead?: boolean;
+  isPayment?: boolean;
   isOffer?: boolean;
   isAdminCustomer?: boolean;
   isContract?: boolean;
@@ -29,12 +31,15 @@ export const DropDownItems = ({
   const containerDefaultClasses = `absolute  ${
     (isLead &&
       (isLastIndex || isSecondLastIndex || isThirdLastIndex) &&
-      "!-top-[205px]") ||
+      "!-top-[170px]") ||
+    (isPayment &&
+      (isLastIndex || isSecondLastIndex || isThirdLastIndex) &&
+      "!-top-[130px]") ||
     (isOffer &&
       (isLastIndex || isSecondLastIndex || isThirdLastIndex) &&
-      "!-top-40") ||
+      "!-top-[170px]") ||
     (isAdminCustomer && (isLastIndex || isSecondLastIndex) && "!-top-[85px]") ||
-    (isContract && (isLastIndex || isSecondLastIndex) && "!-top-[120px]") ||
+    (isContract && (isLastIndex || isSecondLastIndex) && "!-top-[130px]") ||
     ((isLastIndex || isSecondLastIndex) && "!-top-20")
   }  z-10 w-fit border border-borderColor bg-white shadow-[0px_3px_6px_#00000029] rounded-br-lg rounded-bl-lg max-h-52 overflow-y-auto`;
 
@@ -55,7 +60,7 @@ export const DropDownItems = ({
         return (
           <li
             key={idx}
-            className="text-gray hover:text-white font-medium hover:bg-borderColor cursor-pointer px-3 py-2"
+            className="text-gray hover:text-white font-medium hover:bg-borderColor cursor-pointer px-3 py-2 "
             onClick={() => handleItemClick(`${item.value}` || "")}
           >
             {item.label}
