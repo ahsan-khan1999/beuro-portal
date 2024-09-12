@@ -89,7 +89,7 @@ export default function ServicesFilter({
 
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   return (
-    <div className="relative flex my-auto cursor-pointer" ref={ref}>
+    <div className="relative flex my-auto" ref={ref}>
       <Button
         inputType="button"
         onClick={handleExtraFilterToggle}

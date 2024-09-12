@@ -7,7 +7,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 
 const useEmailTracker = () => {
-  const { email, lastPage, totalCount, loading, isLoading } = useAppSelector(
+  const { email, totalCount, loading, isLoading } = useAppSelector(
     (state) => state.emailSlice
   );
 
@@ -16,6 +16,7 @@ const useEmailTracker = () => {
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
 
   const [filter, setFilter] = useState<FilterType>({
+    emailStatus: FiltersDefaultValues.None,
     sort: FiltersDefaultValues.None,
     text: FiltersDefaultValues.None,
   });
@@ -38,39 +39,51 @@ const useEmailTracker = () => {
       setCurrentPage(1);
     }
 
+    const queryEmailStatus = query?.emailStatus;
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
+    const queryParams = queryEmailStatus || searchQuery || sortedValue;
 
-    const queryParams = searchQuery || sortedValue;
+    if (queryParams !== undefined) {
+      const filteredStatus =
+        query?.emailStatus === "None"
+          ? "None"
+          : queryParams
+              ?.toString()
+              ?.split(",")
+              .filter((item) => item !== "None");
 
-    let updatedFilter: {
-      text?: string;
-      sort?: string;
-    } = {
-      text: searchQuery || "",
-    };
+      let updatedFilter: {
+        emailStatus?: string | string[];
+        text?: string;
+        sort?: string;
+      } = {
+        emailStatus: filteredStatus,
+      };
 
-    if (searchQuery || sortedValue) {
-      updatedFilter.text = searchQuery;
-      updatedFilter.sort = sortedValue;
-    }
+      if (queryEmailStatus || searchQuery || sortedValue) {
+        updatedFilter.emailStatus = queryEmailStatus;
+        updatedFilter.text = searchQuery;
+        updatedFilter.sort = sortedValue;
+      }
 
-    setFilter(updatedFilter);
+      setFilter(updatedFilter);
 
-    if (parsedPage !== undefined) {
-      dispatch(
-        readEmail({
-          params: {
-            filter: queryParams ? updatedFilter : {},
-            page: (Number(parsedPage) || resetPage) ?? currentPage,
-            size: 15,
-          },
-        })
-      ).then((response: any) => {
-        if (response?.payload) {
-          setCurrentPageRows(response?.payload?.MailTracker);
-        }
-      });
+      if (parsedPage !== undefined) {
+        dispatch(
+          readEmail({
+            params: {
+              filter: queryParams ? updatedFilter : {},
+              page: (Number(parsedPage) || resetPage) ?? currentPage,
+              size: 15,
+            },
+          })
+        ).then((response: any) => {
+          if (response?.payload) {
+            setCurrentPageRows(response?.payload?.MailTracker);
+          }
+        });
+      }
     }
   }, [query]);
 

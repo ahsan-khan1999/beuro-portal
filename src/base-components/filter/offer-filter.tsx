@@ -7,7 +7,7 @@ import { formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { staticEnums } from "@/utils/static";
-import { FilterProps, FilterType } from "@/types";
+import { CheckBoxType, FilterProps, FilterType } from "@/types";
 import EmailCheckField from "./fields/email-check-field";
 import { useRouter } from "next/router";
 import { Button } from "@/base-components/ui/button/button";
@@ -35,9 +35,9 @@ export default function OfferFilter({
     setMoreFilter,
   } = useFilter({ filter, setFilter, moreFilters });
 
-  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
   const handleSave = () => {
     router.push(
@@ -50,6 +50,7 @@ export default function OfferFilter({
           ...(moreFilter?.leadSource && {
             leadSource: moreFilter?.leadSource,
           }),
+          emailStatus: moreFilter?.emailStatus,
         },
       },
       undefined,
@@ -61,6 +62,7 @@ export default function OfferFilter({
         ...prev,
         date: { $gte: moreFilter.date?.$gte, $lte: moreFilter.date?.$lte },
         leadSource: moreFilter?.leadSource,
+        emailStatus: moreFilter?.emailStatus,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -80,10 +82,47 @@ export default function OfferFilter({
       date: { ...prev.date, [dateRange]: dateTime },
     }));
   };
+
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setMoreFilter((prev: FilterType) => {
       let updatedStatus = new Set(
         prev.leadSource !== FiltersDefaultValues.None ? prev.leadSource : []
+      );
+
+      if (isChecked) {
+        updatedStatus.add(value);
+      } else {
+        updatedStatus.delete(value);
+      }
+
+      const leadSource =
+        updatedStatus.size > 0
+          ? Array.from(updatedStatus)
+          : FiltersDefaultValues.None;
+
+      return { ...prev, leadSource: leadSource };
+    });
+  };
+
+  const checkbox: CheckBoxType[] = [
+    {
+      label: `${translate("email_status.Pending")}`,
+      type: `${staticEnums.EmailStatus.Draft}`,
+    },
+    {
+      label: `${translate("email_status.Sent")}`,
+      type: `${staticEnums.EmailStatus.Sent}`,
+    },
+    {
+      label: `${translate("email_status.Failed")}`,
+      type: `${staticEnums.EmailStatus.Post}`,
+    },
+  ];
+
+  const handleEmailFilter = (value: string, isChecked: boolean) => {
+    setMoreFilter((prev: FilterType) => {
+      let updatedStatus = new Set(
+        prev.emailStatus !== FiltersDefaultValues.None ? prev.emailStatus : []
       );
 
       if (isChecked) {
@@ -97,12 +136,12 @@ export default function OfferFilter({
           ? Array.from(updatedStatus)
           : FiltersDefaultValues.None;
 
-      return { ...prev, leadSource: emailStatus };
+      return { ...prev, emailStatus: emailStatus };
     });
   };
 
   return (
-    <div className="relative flex my-auto cursor-pointer z-10" ref={ref}>
+    <div className="relative flex my-auto z-10" ref={ref}>
       <Button
         inputType="button"
         onClick={handleExtraFilterToggle}
@@ -225,33 +264,7 @@ export default function OfferFilter({
               </div> */}
               {/* payment section  */}
               {/* email section  */}
-              {/* <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    Email
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => handleFilterReset("email", [])}
-                  >
-                    Reset
-                  </label>
-                </div>
-                <div className="flex items-center gap-x-3 my-5">
-                  {checkbox.map((item, idx) => (
-                    <EmailCheckField
-                      key={idx}
-                      checkboxFilter={moreFilter as unknown as FilterType}
-                      setCheckBoxFilter={setFilter}
-                      type={"email"}
-                      label={item.label}
-                      value={item.type}
-                      onChange={handleEmailChange}
-                    />
-                  ))}
-                </div>
-              </div> */}
+
               {/* email section  */}
               {/* Price section  */}
               {/* <div className="mt-5 mb-2">
@@ -304,37 +317,65 @@ export default function OfferFilter({
                 />
               </div> */}
             </div>
-            <div>
-              <div className="mt-5 mb-2">
-                <div className="flex justify-between">
-                  <label htmlFor="type" className="font-medium text-base">
-                    {translate("filters.extra_filters.leadSource")}
-                  </label>
-                  <label
-                    htmlFor="type"
-                    className="cursor-pointer text-red"
-                    onClick={() => {
-                      handleFilterReset("leadSource", "None");
-                    }}
-                  >
-                    {translate("filters.extra_filters.reset")}
-                  </label>
-                </div>
-                <div className="grid grid-cols-2 gap-2 mt-4">
-                  {Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
-                    <EmailCheckField
-                      key={idx}
-                      checkboxFilter={moreFilter as unknown as FilterType}
-                      setCheckBoxFilter={setMoreFilter}
-                      type={"leadSource"}
-                      label={item}
-                      value={item}
-                      onChange={(value, isChecked) =>
-                        handleStatusChange(value, isChecked)
-                      }
-                    />
-                  ))}
-                </div>
+
+            <div className="mt-5 flex flex-col gap-y-3">
+              <div className="flex justify-between items-center">
+                <label htmlFor="type" className="font-medium text-base">
+                  {translate("filters.extra_filters.leadSource")}
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => {
+                    handleFilterReset("leadSource", "None");
+                  }}
+                >
+                  {translate("filters.extra_filters.reset")}
+                </label>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {Object?.keys(staticEnums["LeadSource"]).map((item, idx) => (
+                  <EmailCheckField
+                    key={idx}
+                    checkboxFilter={moreFilter as unknown as FilterType}
+                    setCheckBoxFilter={setMoreFilter}
+                    type={"leadSource"}
+                    label={item}
+                    value={item}
+                    onChange={(value, isChecked) =>
+                      handleStatusChange(value, isChecked)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="mt-5 mb-2 flex flex-col gap-y-3">
+              <div className="flex justify-between">
+                <label htmlFor="type" className="font-medium text-base">
+                  {translate("agent.report_contact_fields.email")}
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => handleFilterReset("emailStatus", [])}
+                >
+                  {translate("filters.extra_filters.reset")}
+                </label>
+              </div>
+              <div className="flex items-center gap-2">
+                {checkbox?.map((item, idx) => (
+                  <EmailCheckField
+                    key={idx}
+                    checkboxFilter={moreFilter as unknown as FilterType}
+                    setCheckBoxFilter={setFilter}
+                    type={"emailStatus"}
+                    label={item.label}
+                    value={item.type}
+                    onChange={(value, isChecked) =>
+                      handleEmailFilter(value, isChecked)
+                    }
+                  />
+                ))}
               </div>
             </div>
 

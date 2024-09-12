@@ -1303,6 +1303,8 @@ export const sideBar: SideBar[] = [
     icon: "MailTracker",
     title: "sidebar.customer.mail_tracker",
     pathname: "/email-tracker",
+    query: "None",
+    queryName: "emailStatus",
     role: [1, 2],
   },
   {

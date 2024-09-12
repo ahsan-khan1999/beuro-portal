@@ -96,6 +96,13 @@ export const areFiltersEmpty = (filter: FilterType) => {
 //   return cleanedFilter as FilterType;
 // };
 
+export const isValidUrl = (url?: string): boolean => {
+  return (
+    typeof url === "string" &&
+    (url.startsWith("http://") || url.startsWith("https://"))
+  );
+};
+
 export const formatDateForDatePicker = (isoDateString: string) => {
   if (
     isoDateString === FiltersDefaultValues.$gte ||

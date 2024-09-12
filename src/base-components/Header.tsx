@@ -20,6 +20,7 @@ import { readFollowUp } from "@/api/slices/followUp/followUp";
 import moment from "moment";
 import { FollowUpNotification } from "./ui/follow-up-notification";
 import { HamburgerIcon } from "@/assets/svgs/components/hamburger-icon";
+import { isValidUrl } from "@/utils/utility";
 
 export interface HeaderProps {
   isDrawer?: boolean;
@@ -100,7 +101,6 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
   useEffect(() => {
     const followUpTime = upcomingFollowUp ? upcomingFollowUp.dateTime : null;
     const now = new Date();
-    // const end = new Date("2024-07-10T13:27:30Z");
     const end = new Date(followUpTime);
     const difference = end.getTime() - now.getTime();
 
@@ -131,7 +131,7 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
 
         {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
           <div className="flex items-center">
-            {user?.company?.logo && (
+            {user?.company?.logo && isValidUrl(user.company.logo) && (
               <>
                 {isSVG ? (
                   <object
@@ -199,13 +199,15 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
           <LanguageSelector />
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">
-          <Image
-            src={user?.employee?.picture || userIcon}
-            alt="User Icon"
-            className="mr-3 rounded-full"
-            width={44}
-            height={44}
-          />
+          {isValidUrl(user?.employee?.picture) && (
+            <Image
+              src={user?.employee?.picture || userIcon}
+              alt="User Icon"
+              className="mr-3 rounded-full"
+              width={44}
+              height={44}
+            />
+          )}
           <div>
             <span className="font-semibold tracking-[0.5px] text-[#0A0A0A] block">
               {user?.fullName}

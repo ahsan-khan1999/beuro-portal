@@ -51,6 +51,7 @@ const useContract = () => {
     const sortedValue = query?.sort as string;
     const searchDate = query?.date as string;
     const searchLeadSource = query?.leadSource;
+    const searchEmailStatus = query?.emailStatus;
     const searchNoteType = query?.noteType as string;
 
     const queryParams =
@@ -59,6 +60,7 @@ const useContract = () => {
       sortedValue ||
       searchDate ||
       searchLeadSource ||
+      searchEmailStatus ||
       searchNoteType;
 
     if (queryParams !== undefined) {
@@ -80,6 +82,7 @@ const useContract = () => {
           $lte?: string;
         };
         leadSource?: string | string[];
+        emailStatus?: string | string[];
       } = {
         status: filteredStatus,
       };
@@ -89,12 +92,14 @@ const useContract = () => {
         sortedValue ||
         searchDate ||
         searchLeadSource ||
+        searchEmailStatus ||
         searchNoteType
       ) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.date = searchDate && JSON.parse(searchDate);
         updatedFilter.leadSource = searchLeadSource;
+        updatedFilter.emailStatus = searchEmailStatus;
         updatedFilter.noteType = searchNoteType;
       }
 
