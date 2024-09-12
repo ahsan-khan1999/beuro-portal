@@ -194,10 +194,10 @@ export const ServicesTotalAmount = ({
       discount: "Rabatt",
       total_after_discount: "Gesamtsumme nach Rabatt",
       grand_total: "Gesamtsumme",
-      paid_amount: "Bezahlt Betrag",
+      paid_amount: "Bezahlter Betrag",
       unpaid_amount: "Unbezahlter Betrag",
       due_amount: "Fälliger Betrag",
-      total_paid_amount: "Bezahlte Gesamtbetrag",
+      total_paid_amount: "Bezahlter Gesamtbetrag",
       amount_paid_last: "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
       general_terms: "Allgemeine Geschäftsbedingungen",
       payment_method: "Zahlungsmethode",
@@ -313,7 +313,7 @@ export const ServicesTotalAmount = ({
                   <View style={styles.paidAmountSection}>
                     <Text style={styles.text}>
                       {langContent[language as keyof typeof langContent]
-                        ?.paid_amount || "Bezahlt Betrag"}
+                        ?.paid_amount || "Bezahlter Betrag"}
                       :
                     </Text>
                     <Text style={styles.text}>
@@ -387,7 +387,7 @@ export const ServicesTotalAmount = ({
                     <View style={styles.subInvoicepaidAmountSection}>
                       <Text style={styles.text}>
                         {langContent[language as keyof typeof langContent]
-                          ?.paid_amount || "Bezahlt Betrag"}
+                          ?.paid_amount || "Bezahlter Betrag"}
                         :
                       </Text>
                       <Text style={styles.text}>
@@ -435,7 +435,7 @@ export const ServicesTotalAmount = ({
                   <View style={styles.receiptPaidAmountSection}>
                     <Text style={styles.text}>
                       {langContent[language as keyof typeof langContent]
-                        ?.paid_amount || "Bezahlt Betrag"}
+                        ?.paid_amount || "Bezahlter Betrag"}
                       :
                     </Text>
                     <Text style={styles.paidText}>
@@ -469,7 +469,7 @@ export const ServicesTotalAmount = ({
                     <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>
                         {langContent[language as keyof typeof langContent]
-                          ?.total_paid_amount || "Bezahlte Gesamtbetrag"}
+                          ?.total_paid_amount || "Bezahlter Gesamtbetrag"}
                         :
                       </Text>
                       <Text style={styles.text}>

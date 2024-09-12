@@ -809,7 +809,7 @@
     },
     "create_invoice_modal": {
       "total_amount": "Gesamtbetrag",
-      "remaining_amount": "VerLeadbender Betrag",
+      "remaining_amount": "verbleibender Betrag",
       "enter_amount": "Betrag eingeben",
       "amount": "Betrag",
       "percentage": "Prozentsatz",
