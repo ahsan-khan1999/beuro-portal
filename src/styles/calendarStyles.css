@@ -169,6 +169,11 @@
   .fc-timeGridWeek-view .fc-timegrid-slot-label-frame {
     display: none;
   }
+
+  .ck .ck-toolbar__separator,
+  .ck-heading-dropdown {
+    display: none !important;
+  }
 }
 
 .fc-scrollgrid-sync-inner {

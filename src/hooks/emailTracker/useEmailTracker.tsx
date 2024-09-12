@@ -39,14 +39,14 @@ const useEmailTracker = () => {
       setCurrentPage(1);
     }
 
-    const queryEmailStatus = query?.emailStatus;
+    const queryMailStatus = query?.mailStatus;
     const searchQuery = query?.text as string;
     const sortedValue = query?.sort as string;
-    const queryParams = queryEmailStatus || searchQuery || sortedValue;
+    const queryParams = queryMailStatus || searchQuery || sortedValue;
 
     if (queryParams !== undefined) {
       const filteredStatus =
-        query?.emailStatus === "None"
+        query?.mailStatus === "None"
           ? "None"
           : queryParams
               ?.toString()
@@ -54,15 +54,14 @@ const useEmailTracker = () => {
               .filter((item) => item !== "None");
 
       let updatedFilter: {
-        emailStatus?: string | string[];
+        mailStatus?: string | string[];
         text?: string;
         sort?: string;
       } = {
-        emailStatus: filteredStatus,
+        mailStatus: filteredStatus,
       };
 
-      if (queryEmailStatus || searchQuery || sortedValue) {
-        updatedFilter.emailStatus = queryEmailStatus;
+      if (searchQuery || sortedValue) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
       }

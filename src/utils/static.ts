@@ -578,9 +578,9 @@ export const staticEnums: Record<string, any> = {
     Completed: 1,
     Cancelled: 2,
   },
-  mailStatus: {
-    opend: 0,
-    pending: 1,
+  MailStatus: {
+    pending: 0,
+    opend: 1,
     failed: 2,
   },
   open: 0,
@@ -1304,7 +1304,7 @@ export const sideBar: SideBar[] = [
     title: "sidebar.customer.mail_tracker",
     pathname: "/email-tracker",
     query: "None",
-    queryName: "emailStatus",
+    queryName: "mailStatus",
     role: [1, 2],
   },
   {

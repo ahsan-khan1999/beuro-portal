@@ -18,7 +18,6 @@ export const AddContractTask = ({
   onUpdateSuccess,
 }: AddTaskModalProps) => {
   const [maxHeight, setMaxHeight] = useState("750px");
-
   const { locale } = useRouter();
 
   const { fields, onSubmit, handleSubmit, errors } = useAddTask({
@@ -52,6 +51,7 @@ export const AddContractTask = ({
         style={{
           maxHeight: maxHeight,
           overflowY: "auto",
+          overflowX: "hidden",
         }}
       >
         <Form

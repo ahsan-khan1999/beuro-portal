@@ -207,6 +207,15 @@ const EditOffersDetailsData = () => {
     );
   }, [offerDetails?.id]);
 
+  useEffect(() => {
+    if (tabType !== null) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [tabType]);
+
   return (
     <>
       <div className="xLarge:fixed mb-5 mt-[40px]">

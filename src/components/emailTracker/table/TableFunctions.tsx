@@ -15,7 +15,7 @@ const TableFunctions = ({
   const { t: translate } = useTranslation();
 
   return (
-    <div className="flex lg:flex-row flex-col justify-between lg:items-center mb-4 gap-y-3">
+    <div className="flex maxSize:flex-row flex-col justify-between maxSize:items-center mb-4 gap-y-3">
       <h1 className="text-2xl font-medium text-[#222B45]">
         {translate("email_tracker.main_heading")}
       </h1>

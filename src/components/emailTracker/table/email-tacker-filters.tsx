@@ -79,21 +79,21 @@ export default function EmailTrackerFilters({
   const checkbox: CheckBoxType[] = [
     {
       label: `${translate("email_status.Pending")}`,
-      type: `${staticEnums.EmailStatus.Draft}`,
+      type: `${staticEnums.MailStatus.pending}`,
     },
     {
-      label: `${translate("email_status.Sent")}`,
-      type: `${staticEnums.EmailStatus.Sent}`,
+      label: `${translate("email_status.opend")}`,
+      type: `${staticEnums.MailStatus.opend}`,
     },
     {
       label: `${translate("email_status.Failed")}`,
-      type: `${staticEnums.EmailStatus.Post}`,
+      type: `${staticEnums.MailStatus.failed}`,
     },
   ];
 
   const handleEmailFilter = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
-      const updatedStatus = prev.emailStatus ? [...prev.emailStatus] : [];
+      const updatedStatus = prev.mailStatus ? [...prev.mailStatus] : [];
       const newStatus = updatedStatus.map(Number);
 
       if (isChecked) {
@@ -105,7 +105,7 @@ export default function EmailTrackerFilters({
           {
             pathname: router.pathname,
             query: {
-              emailStatus:
+              mailStatus:
                 newStatus && newStatus.length > 0
                   ? newStatus.join(",")
                   : "None",
@@ -123,7 +123,7 @@ export default function EmailTrackerFilters({
           {
             pathname: router.pathname,
             query: {
-              emailStatus:
+              mailStatus:
                 newStatus && newStatus.length > 0
                   ? newStatus.join(",")
                   : "None",
@@ -133,62 +133,59 @@ export default function EmailTrackerFilters({
           { shallow: true }
         );
       }
-      const emailStatus =
+      const mailStatus =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
-      const updatedFilter = { ...prev, emailStatus: emailStatus };
+      const updatedFilter = { ...prev, mailStatus: mailStatus };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
   };
 
   return (
-    <div className="flex">
-      <div className="flex items-center space-x-4">
-        <div className="flex gap-[14px]">
-          {checkbox?.map((item, idx) => (
-            <CheckField
-              key={idx}
-              checkboxFilter={filter}
-              setCheckBoxFilter={setFilter}
-              type={"emailStatus"}
-              label={item.label}
-              value={item.type}
-              onChange={(value, isChecked) =>
-                handleEmailFilter(value, isChecked)
-              }
-            />
-          ))}
-        </div>
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={true}
-          onEnterPress={onEnterPress}
-        />
-        <SelectField
-          handleChange={(value) => hanldeSortChange(value)}
-          value={filter?.sort || ""}
-          dropDownIconClassName=""
-          options={[
-            {
-              label: `${translate("filters.sort_by.date")}`,
-              value: "createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.latest")}`,
-              value: "-createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.oldest")}`,
-              value: "createdAt",
-            },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
-          ]}
-          label={translate("common.sort_button")}
-          containerClassName="min-w-fit"
-        />
-        {/* <Button
+    <div className="flex items-center gap-x-4">
+      <div className="flex gap-[14px]">
+        {checkbox?.map((item, idx) => (
+          <CheckField
+            key={idx}
+            checkboxFilter={filter}
+            setCheckBoxFilter={setFilter}
+            type={"mailStatus"}
+            label={item.label}
+            value={item.type}
+            onChange={(value, isChecked) => handleEmailFilter(value, isChecked)}
+          />
+        ))}
+      </div>
+      <InputField
+        handleChange={handleInputChange}
+        ref={inputRef}
+        value={inputValue}
+        iconDisplay={true}
+        onEnterPress={onEnterPress}
+      />
+      <SelectField
+        handleChange={(value) => hanldeSortChange(value)}
+        value={filter?.sort || ""}
+        dropDownIconClassName=""
+        options={[
+          {
+            label: `${translate("filters.sort_by.date")}`,
+            value: "createdAt",
+          },
+          {
+            label: `${translate("filters.sort_by.latest")}`,
+            value: "-createdAt",
+          },
+          {
+            label: `${translate("filters.sort_by.oldest")}`,
+            value: "createdAt",
+          },
+          { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+        ]}
+        label={translate("common.sort_button")}
+        containerClassName="min-w-fit"
+      />
+      {/* <Button
           onClick={() => handleFilterChange()}
           className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
           text="Apply"
@@ -196,7 +193,6 @@ export default function EmailTrackerFilters({
           inputType="button"
           name=""
         /> */}
-      </div>
     </div>
   );
 }

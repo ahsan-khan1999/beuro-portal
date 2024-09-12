@@ -41,8 +41,6 @@ export const useAddNewNote = ({
   );
   const { invoice, invoiceDetails } = useAppSelector((state) => state.invoice);
   const { noteSettings } = useAppSelector((state) => state.settings);
-  console.log(noteSettings, "noteSettings");
-  console.log(leadId, "leadId");
 
   const {
     modal: {

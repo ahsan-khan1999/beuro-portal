@@ -1049,6 +1049,7 @@ export interface FilterType {
   };
   paymentType?: string[] | string;
   emailStatus?: string[] | string;
+  mailStatus?: string[] | string;
   price?: string[];
   month?: number;
   leadSource?: string[] | string;

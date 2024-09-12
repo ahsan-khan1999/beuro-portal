@@ -22,6 +22,7 @@ export const DropDown = ({
   isSecondLastIndex,
   isThirdLastIndex,
   isLead,
+  isPayment,
   isOffer,
   isAdminCustomer,
   isContract,
@@ -30,6 +31,7 @@ export const DropDown = ({
   isSecondLastIndex?: boolean;
   isThirdLastIndex?: boolean;
   isLead?: boolean;
+  isPayment?: boolean;
   isOffer?: boolean;
   isAdminCustomer?: boolean;
   isContract?: boolean;
@@ -93,6 +95,7 @@ export const DropDown = ({
               isThirdLastIndex={isThirdLastIndex}
               isOffer={isOffer}
               isLead={isLead}
+              isPayment={isPayment}
               isAdminCustomer={isAdminCustomer}
               isContract={isContract}
             />

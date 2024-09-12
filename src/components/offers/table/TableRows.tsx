@@ -157,7 +157,7 @@ const TableRows = ({
                       dataToAdd.length > 5 &&
                       index === dataToAdd.length - 1
                     }
-                    isOffer={true}
+                    isPayment={true}
                   />
                 </span>
 

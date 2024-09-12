@@ -25,14 +25,8 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import { IsContractTaskCreated } from "@/base-components/ui/modals1/IsContractTaskCreated";
 
 const useContract = () => {
-  const {
-    lastPage,
-    contract,
-    loading,
-    isLoading,
-    totalCount,
-    contractDetails,
-  } = useAppSelector((state) => state.contract);
+  const { contract, loading, isLoading, totalCount, contractDetails } =
+    useAppSelector((state) => state.contract);
 
   const { query } = useRouter();
 
@@ -146,6 +140,7 @@ const useContract = () => {
   const [selectedContractId, setSelectedContractId] = useState<string | null>(
     null
   );
+
   const [selectedStatus, setSelectedStatus] = useState<string>("");
 
   const handleFilterChange = (filter: FilterType) => {

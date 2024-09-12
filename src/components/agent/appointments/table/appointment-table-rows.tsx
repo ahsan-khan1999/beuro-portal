@@ -53,11 +53,7 @@ export const AppointmentTableRows = ({
   );
 
   return (
-    <div
-      className={`overflow-y-visible ${
-        dataToAdd && dataToAdd?.length <= 4 ? "h-[550px]" : ""
-      }`}
-    >
+    <div className={`overflow-y-visible`}>
       {dataToAdd?.map((item, index) => {
         const handleReportDetail = () => {
           router.push({
@@ -95,7 +91,7 @@ export const AppointmentTableRows = ({
             : translate("common.customer_name");
 
         return (
-          <div>
+          <div className="mt-2">
             {isAgent ? (
               <>
                 <div className="mlg:hidden">
