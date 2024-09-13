@@ -6,11 +6,11 @@ export interface DayViewProps {
   titleColour?: string;
   timeColour?: string;
   title: string;
-  time?: string; // Make time optional
+  time?: string;
   backrgoundColour?: string;
   isMonthView?: boolean;
-  showOnlyTitle?: boolean; // New prop to conditionally render only the title
-  fixedHeight?: boolean; // New prop to handle fixed height for short events
+  showOnlyTitle?: boolean;
+  fixedHeight?: boolean;
 }
 
 export const DayView = ({

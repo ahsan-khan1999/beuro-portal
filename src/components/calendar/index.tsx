@@ -18,10 +18,44 @@ import { useCalendar } from "@/hooks/calendar/useCalendar";
 import { DayHeaderContent } from "./day-header-content";
 import { CalendarFilters } from "./calendar-filters";
 import { useIsSmallScreen, useIsSmallWeekScreen } from "@/utils/functions";
-import { calendarDayDateFormat, calendarYearDateFormat } from "@/utils/utility";
+import {
+  calendarDayDateFormat,
+  calendarYearDateFormat,
+  hasTime,
+} from "@/utils/utility";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
+
+type EventType = {
+  start: string;
+  end: string;
+  allDay?: boolean;
+  [key: string]: any;
+};
+
+const prepareEvents = (rawEvents: EventType[]): EventType[] => {
+  return rawEvents.map((event) => {
+    const startDate = moment(event.start);
+    const endDate = moment(event.end);
+
+    if (
+      endDate.diff(startDate, "days") > 0 &&
+      (hasTime(startDate) || hasTime(endDate))
+    ) {
+      event.allDay = true;
+      event.extendedProps = {
+        ...event.extendedProps,
+        originalStart: event.start,
+        originalEnd: event.end,
+      };
+    } else {
+      event.allDay = !hasTime(startDate);
+    }
+
+    return event;
+  });
+};
 
 export const Calendar = () => {
   const router = useRouter();
@@ -33,16 +67,17 @@ export const Calendar = () => {
   const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
 
   const {
-    events,
+    events: rawEvents,
     handleAddContractTask,
     handleContractTaskDetail,
     renderModal,
     tabs,
     filter,
     setFilter,
-    dispatch,
     handleFilterChange,
   } = useCalendar();
+
+  const events = prepareEvents(rawEvents);
 
   useEffect(() => {
     if (router.query.isContractId) {
@@ -228,17 +263,39 @@ export const Calendar = () => {
         )}
         eventClick={(info) => {
           const taskID = info.event.extendedProps.taskID;
+          const isAllDay = info.event.allDay;
 
-          if (info.event.start) {
-            const clickedStartDate = info.event.start.toISOString();
-            const clickedEndDate = info.event.end
-              ? info.event.end.toISOString()
+          const originalStart = moment(
+            info.event.extendedProps.originalStart || info.event.start
+          );
+
+          const originalEnd = moment(
+            info.event.extendedProps.originalEnd || info.event.end
+          );
+
+          const isMultiDayEvent = originalStart.isBefore(originalEnd, "day");
+          const hasStartTime = originalStart.format("HH:mm") !== "00:00";
+
+          let clickedStartDate, clickedEndDate;
+
+          if (isMultiDayEvent && hasStartTime) {
+            clickedStartDate = originalStart.toISOString();
+            clickedEndDate = originalEnd
+              ? originalEnd.toISOString()
               : clickedStartDate;
-
-            handleContractTaskDetail(taskID, clickedStartDate, clickedEndDate);
+          } else if (isAllDay) {
+            clickedStartDate = originalStart.format("YYYY-MM-DD");
+            clickedEndDate = originalEnd
+              ? originalEnd.format("YYYY-MM-DD")
+              : clickedStartDate;
           } else {
-            console.error("Start date is missing for this event");
+            clickedStartDate = originalStart.toISOString();
+            clickedEndDate = originalEnd
+              ? originalEnd.toISOString()
+              : clickedStartDate;
           }
+
+          handleContractTaskDetail(taskID, clickedStartDate, clickedEndDate);
         }}
         editable={false}
         selectable={true}

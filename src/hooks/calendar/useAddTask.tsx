@@ -88,8 +88,6 @@ export default function useAddTask({
           title: taskDetail?.title,
           date: filteredDate,
           streetNumber: taskDetail?.address?.streetNumber,
-          // postalCode: taskDetail?.address?.postalCode,
-          // country: taskDetail?.address?.country,
           isAllDay: taskDetail?.isAllDay,
           note: taskDetail?.note,
           alertTime: taskDetail?.alertTime,
@@ -127,15 +125,27 @@ export default function useAddTask({
 
     if (isUpdate) {
       const minutesInDiff = moment(value).diff(startDateRef.current, "minutes");
-      const newEndDate = moment(endDate)
-        .add(minutesInDiff, "minutes")
-        .format("YYYY-MM-DDTHH:mm");
-      setValue("date.0.endDate", newEndDate);
+
+      // If it's an all-day event, don't add time to endDate
+      if (isAllDay) {
+        setValue("date.0.endDate", startMoment.format("YYYY-MM-DD")); // Only set the date, no time
+      } else {
+        const newEndDate = moment(endDate)
+          .add(minutesInDiff, "minutes")
+          .format("YYYY-MM-DDTHH:mm");
+        setValue("date.0.endDate", newEndDate);
+      }
     } else {
-      const newEndDate = startMoment
-        .add(60, "minutes")
-        .format("YYYY-MM-DDTHH:mm");
-      setValue("date.0.endDate", newEndDate);
+      // For creation case, if isAllDay is true, don't add time
+      if (isAllDay) {
+        const newEndDate = startMoment.format("YYYY-MM-DD"); // Only set the date, no time
+        setValue("date.0.endDate", newEndDate);
+      } else {
+        const newEndDate = startMoment
+          .add(60, "minutes")
+          .format("YYYY-MM-DDTHH:mm");
+        setValue("date.0.endDate", newEndDate);
+      }
     }
 
     startDateRef.current = value;
