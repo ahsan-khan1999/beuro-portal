@@ -621,9 +621,10 @@ export const staticEnums: Record<string, any> = {
     Rejected: 3,
   },
   EmailStatus: {
-    Draft: 0,
+    Pending: 0,
     Sent: 1,
     Post: 2,
+    Failed:3
   },
   TaxType: {
     Inclusive: 0,

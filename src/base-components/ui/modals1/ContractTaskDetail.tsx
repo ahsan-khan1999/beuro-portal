@@ -2,7 +2,11 @@ import React from "react";
 import moment from "moment";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { useAppSelector } from "@/hooks/useRedux";
-import { calendarTaskformatDate, formatAlertTime } from "@/utils/utility";
+import {
+  calendarTaskformatDate,
+  formatAlertTime,
+  hasTimeComponent,
+} from "@/utils/utility";
 import { CalendarAlertIcon } from "@/assets/svgs/components/calendar-alert-icon";
 import { CalendarNoteIcon } from "@/assets/svgs/components/calendar-note-icon";
 import { CalendarDeleteIcon } from "@/assets/svgs/components/calendar-delete-icon";
@@ -31,12 +35,16 @@ export const ContractTaskDetail = ({
     (state) => state.contract.taskDetail
   ) as TaskWithSelectedDates;
 
-  const startTime = taskDetail?.selectedStartDate
-    ? moment(taskDetail.selectedStartDate).format("HH:mm")
-    : "";
-  const endTime = taskDetail?.selectedEndDate
-    ? moment(taskDetail.selectedEndDate).format("HH:mm")
-    : "";
+  const startTime =
+    taskDetail?.selectedStartDate &&
+    hasTimeComponent(taskDetail.selectedStartDate)
+      ? moment(taskDetail.selectedStartDate).format("HH:mm")
+      : "";
+
+  const endTime =
+    taskDetail?.selectedEndDate && hasTimeComponent(taskDetail.selectedEndDate)
+      ? moment(taskDetail.selectedEndDate).format("HH:mm")
+      : "";
 
   const isSameDay = moment(taskDetail?.selectedStartDate).isSame(
     taskDetail?.selectedEndDate,
@@ -86,8 +94,8 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
-        <div className="flex items-start justify-between my-5">
-          <div className="ml-5 flex flex-col gap-y-2">
+        {isSameDay && (
+          <div className="ml-5 mt-3 mb-5">
             {taskDetail?.selectedStartDate && (
               <div className="flex flex-col gap-y-1">
                 <span className="text-[#7A7A7A] text-sm font-medium">
@@ -104,18 +112,62 @@ export const ContractTaskDetail = ({
                 ) : null}
               </div>
             )}
-            {!isSameDay && taskDetail?.selectedEndDate && (
+          </div>
+        )}
+
+        {!isSameDay && (
+          <div className="ml-5 flex flex-col gap-y-1 mt-3 mb-5">
+            {taskDetail?.selectedStartDate && (
+              <div className="flex flex-col gap-y-1">
+                <div className="flex items-center gap-x-2">
+                  {startTime && (
+                    <span className="text-[#272727] font-semibold text-sm">
+                      {startTime} -
+                    </span>
+                  )}
+                  <span className="text-[#7A7A7A] text-sm font-medium">
+                    {calendarTaskformatDate(taskDetail?.selectedStartDate)}
+                  </span>
+                </div>
+                <div className="flex items-center gap-x-2">
+                  {endTime && (
+                    <span className="text-[#272727] font-semibold text-sm">
+                      {endTime} -
+                    </span>
+                  )}
+                  <span className="text-[#7A7A7A] text-sm font-medium">
+                    {taskDetail?.selectedEndDate &&
+                      calendarTaskformatDate(taskDetail?.selectedEndDate)}
+                  </span>
+                </div>
+              </div>
+              // <div className="flex flex-col gap-y-1">
+              //   <span className="text-[#7A7A7A] text-sm font-medium">
+              //     {calendarTaskformatDate(taskDetail.selectedStartDate)}
+              //   </span>
+              //   {startTime && endTime ? (
+              //     <span className="text-[#272727] font-semibold text-sm">
+              //       {`${startTime} - ${endTime}`}
+              //     </span>
+              //   ) : startTime ? (
+              //     <span className="text-[#272727] font-semibold text-sm">{`${startTime}`}</span>
+              //   ) : endTime ? (
+              //     <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
+              //   ) : null}
+              // </div>
+            )}
+            {/* {!isSameDay && taskDetail?.selectedEndDate && (
               <div className="flex flex-col gap-y-1">
                 <span className="text-[#7A7A7A] text-sm font-medium">
                   {calendarTaskformatDate(taskDetail.selectedEndDate)}
                 </span>
-                {endTime !== "00:00" && (
+                {endTime && (
                   <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
                 )}
               </div>
-            )}
+            )} */}
           </div>
-        </div>
+        )}
 
         <hr className="opacity-30 -mx-[10px]" />
         <div className="flex items-center justify-between">
@@ -129,7 +181,7 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
-        <div className="flex flex-col max-h-[300px] overflow-y-auto">
+        <div className="flex flex-col max-h-[300px] overflow-y-auto mb-[35px]">
           {taskDetail?.note && (
             <div className="flex items-start gap-x-2">
               <CalendarNoteIcon />
@@ -141,8 +193,8 @@ export const ContractTaskDetail = ({
             </div>
           )}
 
-          {taskDetail?.address && (
-            <div className="flex items-start gap-x-2 mb-[35px] mt-[14px]">
+          {taskDetail?.address?.streetNumber && (
+            <div className="flex items-start gap-x-2 mt-[14px]">
               <Image
                 src={addressLocationIcon}
                 alt="location"
@@ -150,13 +202,9 @@ export const ContractTaskDetail = ({
                 height={16}
               />
 
-              <div className="flex flex-col gap-y-1 -mt-1">
+              <div className="flex flex-col gap-y-1 -mt-[2px]">
                 <span className="text-sm font-normal text-[#2A2E3A]">
                   {taskDetail?.address?.streetNumber}
-                </span>
-                <span className="text-sm font-normal text-[#2A2E3A]">
-                  {taskDetail?.address?.postalCode}{" "}
-                  {taskDetail?.address?.country}
                 </span>
               </div>
             </div>

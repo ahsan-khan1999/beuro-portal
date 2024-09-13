@@ -22,7 +22,7 @@ import { Service } from "@/types/service";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import "moment/locale/de";
 import { TFunction } from "next-i18next";
 
@@ -95,6 +95,20 @@ export const areFiltersEmpty = (filter: FilterType) => {
 //   }
 //   return cleanedFilter as FilterType;
 // };
+
+export const hasTimeComponent = (dateString: string) => {
+  return moment(dateString).format("HH:mm") !== "00:00";
+};
+
+export const hasTime = (date: string | Moment) => {
+  const momentDate = typeof date === "string" ? moment(date) : date;
+
+  return !(
+    momentDate.hours() === 0 &&
+    momentDate.minutes() === 0 &&
+    momentDate.seconds() === 0
+  );
+};
 
 export const isValidUrl = (url?: string): boolean => {
   return (

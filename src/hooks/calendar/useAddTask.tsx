@@ -88,8 +88,6 @@ export default function useAddTask({
           title: taskDetail?.title,
           date: filteredDate,
           streetNumber: taskDetail?.address?.streetNumber,
-          // postalCode: taskDetail?.address?.postalCode,
-          // country: taskDetail?.address?.country,
           isAllDay: taskDetail?.isAllDay,
           note: taskDetail?.note,
           alertTime: taskDetail?.alertTime,
@@ -127,15 +125,25 @@ export default function useAddTask({
 
     if (isUpdate) {
       const minutesInDiff = moment(value).diff(startDateRef.current, "minutes");
-      const newEndDate = moment(endDate)
-        .add(minutesInDiff, "minutes")
-        .format("YYYY-MM-DDTHH:mm");
-      setValue("date.0.endDate", newEndDate);
+
+      if (isAllDay) {
+        setValue("date.0.endDate", startMoment.format("YYYY-MM-DD"));
+      } else {
+        const newEndDate = moment(endDate)
+          .add(minutesInDiff, "minutes")
+          .format("YYYY-MM-DDTHH:mm");
+        setValue("date.0.endDate", newEndDate);
+      }
     } else {
-      const newEndDate = startMoment
-        .add(60, "minutes")
-        .format("YYYY-MM-DDTHH:mm");
-      setValue("date.0.endDate", newEndDate);
+      if (isAllDay) {
+        const newEndDate = startMoment.format("YYYY-MM-DD");
+        setValue("date.0.endDate", newEndDate);
+      } else {
+        const newEndDate = startMoment
+          .add(60, "minutes")
+          .format("YYYY-MM-DDTHH:mm");
+        setValue("date.0.endDate", newEndDate);
+      }
     }
 
     startDateRef.current = value;
