@@ -124,15 +124,19 @@ export default function ContractsFilter({
   const checkbox: CheckBoxType[] = [
     {
       label: `${translate("email_status.Pending")}`,
-      type: `${staticEnums.EmailStatus.Draft}`,
+      type: `${staticEnums.EmailStatus.Pending}`,
     },
     {
       label: `${translate("email_status.Sent")}`,
       type: `${staticEnums.EmailStatus.Sent}`,
     },
     {
-      label: `${translate("email_status.Failed")}`,
+      label: `${translate("email_status.Post")}`,
       type: `${staticEnums.EmailStatus.Post}`,
+    },
+    {
+      label: `${translate("email_status.Failed")}`,
+      type: `${staticEnums.EmailStatus.Failed}`,
     },
   ];
 

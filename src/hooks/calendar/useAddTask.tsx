@@ -126,9 +126,8 @@ export default function useAddTask({
     if (isUpdate) {
       const minutesInDiff = moment(value).diff(startDateRef.current, "minutes");
 
-      // If it's an all-day event, don't add time to endDate
       if (isAllDay) {
-        setValue("date.0.endDate", startMoment.format("YYYY-MM-DD")); // Only set the date, no time
+        setValue("date.0.endDate", startMoment.format("YYYY-MM-DD"));
       } else {
         const newEndDate = moment(endDate)
           .add(minutesInDiff, "minutes")
@@ -136,9 +135,8 @@ export default function useAddTask({
         setValue("date.0.endDate", newEndDate);
       }
     } else {
-      // For creation case, if isAllDay is true, don't add time
       if (isAllDay) {
-        const newEndDate = startMoment.format("YYYY-MM-DD"); // Only set the date, no time
+        const newEndDate = startMoment.format("YYYY-MM-DD");
         setValue("date.0.endDate", newEndDate);
       } else {
         const newEndDate = startMoment
