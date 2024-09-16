@@ -6,29 +6,11 @@ import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
 
-// const InvoicePdfPreview = dynamic(
-//   () => import("@/components/reactPdf/pdf-layout"),
-//   { ssr: false }
-// );
-
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   {
     ssr: false,
-
-    // loading: () => <CustomLoader />
   }
-);
-
-// const PdfDownload = dynamic(
-//   () => import("@/components/reactPdf/generate-merged-pdf-download"),
-//   {
-//     ssr: false,
-//   }
-// );
-const PdfDownload = dynamic(
-  () => import("@/components/reactPdf/generate-Pdf-Download"),
-  { ssr: false }
 );
 
 const ReceiptPdfPreview = () => {
@@ -75,6 +57,7 @@ const ReceiptPdfPreview = () => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -96,11 +79,12 @@ const ReceiptPdfPreview = () => {
         title={translate("invoice.receipt_details")}
       />
 
-      <InvoicePdfPreview
-        mergedPdfFileUrl={mergedPdfUrl}
-        isPdfRendering={isPdfRendering}
-      />
-
+      <div className="mt-5">
+        <InvoicePdfPreview
+          mergedPdfFileUrl={mergedPdfUrl}
+          isPdfRendering={isPdfRendering}
+        />
+      </div>
       {renderModal()}
     </>
   );

@@ -9,8 +9,6 @@ const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   {
     ssr: false,
-
-    // loading: () => <CustomLoader />
   }
 );
 
@@ -67,10 +65,6 @@ export const MainInvoicePdfDetail = () => {
 
   return (
     <>
-      {/* {loading ? (
-        <CustomLoader />
-      ) : (
-        <> */}
       <InvoiceEmailHeader
         {...invoiceData?.emailHeader}
         contractStatus={invoiceDetails?.emailStatus}
@@ -86,14 +80,14 @@ export const MainInvoicePdfDetail = () => {
         title={translate("invoice.invoice_details")}
       />
 
-      <InvoicePdfPreview
-        mergedPdfFileUrl={mergedPdfUrl}
-        isPdfRendering={isPdfRendering}
-      />
+      <div className="mt-5">
+        <InvoicePdfPreview
+          mergedPdfFileUrl={mergedPdfUrl}
+          isPdfRendering={isPdfRendering}
+        />
+      </div>
 
       {renderModal()}
-      {/* </>
-      )} */}
     </>
   );
 };

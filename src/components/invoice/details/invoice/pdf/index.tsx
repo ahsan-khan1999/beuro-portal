@@ -5,26 +5,12 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import { useInvoicePdf } from "@/hooks/invoice/useInvoicePdf";
 import dynamic from "next/dynamic";
 
-// const InvoicePdfPreview = dynamic(
-//   () => import("@/components/reactPdf/pdf-layout"),
-//   { ssr: false }
-// );
-
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   {
     ssr: false,
-
-    // loading: () => <CustomLoader />
   }
 );
-
-// const PdfDownload = dynamic(
-//   () => import("@/components/reactPdf/generate-merged-pdf-download"),
-//   {
-//     ssr: false,
-//   }
-// );
 
 const PdfDownload = dynamic(
   () => import("@/components/reactPdf/generate-Pdf-Download"),
@@ -93,11 +79,12 @@ const DetailsPdfPriview = () => {
         title={translate("invoice.invoice_details")}
       />
 
-      <InvoicePdfPreview
-        mergedPdfFileUrl={mergedPdfUrl}
-        isPdfRendering={isPdfRendering}
-      />
-
+      <div className="mt-5">
+        <InvoicePdfPreview
+          mergedPdfFileUrl={mergedPdfUrl}
+          isPdfRendering={isPdfRendering}
+        />
+      </div>
       {renderModal()}
     </>
   );
