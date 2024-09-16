@@ -1,6 +1,6 @@
 import { CompanyIcon } from "@/assets/svgs/components/company-icon";
 import { DateIcon } from "@/assets/svgs/components/date-icon";
-import { LocationIcon } from "@/assets/svgs/components/location-icon";
+import { LocationFilledIcon } from "@/assets/svgs/components/location-filled-icon";
 import { UserIcon } from "@/assets/svgs/components/use-icon";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
@@ -138,7 +138,7 @@ export const AppointmentTableRecordCard = ({
                     </p>
                   </div>
                   <div className="flex items-center gap-x-[14px]">
-                    <LocationIcon />
+                    <LocationFilledIcon />
                     <p className="text-[#616161] font-normal text-sm truncate">
                       {item?.canton}
                     </p>

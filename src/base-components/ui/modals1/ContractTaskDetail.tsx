@@ -10,11 +10,10 @@ import {
 import { CalendarAlertIcon } from "@/assets/svgs/components/calendar-alert-icon";
 import { CalendarNoteIcon } from "@/assets/svgs/components/calendar-note-icon";
 import { CalendarDeleteIcon } from "@/assets/svgs/components/calendar-delete-icon";
-import addressLocationIcon from "@/assets/pngs/address-location-icon.png";
-import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { Button } from "../button/button";
 import { TaskWithSelectedDates } from "@/types/contract";
+import { LocationIcon } from "@/assets/svgs/components/location-icon";
 export interface ContractTaskDetailProps {
   onDelete: (id: string) => void;
   onEditTask: (
@@ -195,12 +194,7 @@ export const ContractTaskDetail = ({
 
           {taskDetail?.address?.streetNumber && (
             <div className="flex items-start gap-x-2 mt-[14px]">
-              <Image
-                src={addressLocationIcon}
-                alt="location"
-                width={16}
-                height={16}
-              />
+              <LocationIcon />
 
               <div className="flex flex-col gap-y-1 -mt-[2px]">
                 <span className="text-sm font-normal text-[#2A2E3A]">
