@@ -336,10 +336,10 @@ export const useOfferPdf = () => {
             pdf: fileUrl?.payload,
             // pdf: res?.payload
           };
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendOfferEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
+          const res = await dispatch(sendOfferEmail({ data: apiData }));
+          if (res?.payload) {
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          }
         }
       }
     } catch (error) {

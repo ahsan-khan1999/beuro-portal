@@ -1,4 +1,4 @@
-import { LocationIcon } from "@/assets/svgs/components/location-icon";
+import { LocationFilledIcon } from "@/assets/svgs/components/location-filled-icon";
 import { MailIcon } from "@/assets/svgs/components/mail-icon";
 import { UserIcon } from "@/assets/svgs/components/use-icon";
 import { Lead } from "@/types/leads";
@@ -76,7 +76,7 @@ export const LeadTableRecordCard = ({
                 )}
                 {item?.customerDetail?.address?.country && (
                   <div className="flex items-center gap-x-4">
-                    <LocationIcon />
+                    <LocationFilledIcon />
                     <p className="text-[#616161] font-normal text-sm break-all">
                       {item?.customerDetail?.address?.country}
                     </p>

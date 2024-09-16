@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
 import OfferEditDetails from "./OfferEditDetails";
 import AddressEditDetails from "./AddressEditDetails";
@@ -119,11 +119,20 @@ const EditInvoiceDetailsData = ({
     ),
   };
 
+  useEffect(() => {
+    if (tabType !== null) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [tabType]);
+
   return (
     <>
       <div className="xLarge:fixed mb-5 mt-[40px]">
         <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full mb-5">
-          {tabSection.map((item, index) => (
+          {tabSection?.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
               setTabType={setTabType}

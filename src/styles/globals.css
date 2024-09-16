@@ -197,6 +197,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   z-index: 1000;
 }
 
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .calWidth {
   max-width: calc(100% - 292px);
   width: 100%;

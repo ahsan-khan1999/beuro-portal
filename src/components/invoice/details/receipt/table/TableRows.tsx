@@ -47,7 +47,7 @@ const TableRows = ({
   return (
     <div
       className={`overflow-y-visible ${
-        collectiveInvoice && collectiveInvoice.length <= 4 ? "h-[550px]" : ""
+        collectiveInvoice && collectiveInvoice?.length <= 4 ? "h-[550px]" : ""
       }`}
     >
       {collectiveInvoice?.map((item, index: number) => {
@@ -57,9 +57,11 @@ const TableRows = ({
               <div
                 key={index}
                 onClick={() => handleReceiptPreview(item?.id)}
-                className={`${
-                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(160px,_160px)_minmax(130px,_130px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(120px,_120px)] xLarge:grid-cols-[minmax(90px,_90px),minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]`}
+                className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
+                  index !== 0 && "border-t border-t-[#E7EAEE]"
+                } ${
+                  index === 0 && "mt-2"
+                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px),minmax(200px,_4fr)_minmax(200px,_3fr)_minmax(160px,_160px)_minmax(130px,_130px)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)] xlg:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(100px,_100px)_minmax(110px,_110px)] maxSize:grid-cols-[minmax(90px,_90px)_minmax(100px,_3fr)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(110px,_110px)] xMaxSize:grid-cols-[minmax(90px,_90px),minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(120px,_120px)] xLarge:grid-cols-[minmax(90px,_90px),minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(120px,_120px)]`}
               >
                 <span className="py-4 truncate">{item.invoiceNumber}</span>
                 <div className="flex items-center gap-x-1">
@@ -183,7 +185,11 @@ const TableRows = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(50px,_50px),_minmax(50px,_50px)]">
+            <div
+              className={`grid items-center grid-cols-[minmax(40px,_40px),_minmax(40px,_40px)] gap-x-1 ${
+                index === 0 && "mt-2"
+              }`}
+            >
               <span
                 title={translate("common.mail")}
                 className="py-3 flex justify-center items-center cursor-pointer"
@@ -199,7 +205,6 @@ const TableRows = ({
                     <path
                       opacity="1"
                       d="M1.12891 4.34055C1.12891 2.59917 2.54057 1.1875 4.28195 1.1875H24.7768C26.5181 1.1875 27.9298 2.59917 27.9298 4.34055V24.8354C27.9298 26.5767 26.5181 27.9884 24.7768 27.9884H4.28195C2.54057 27.9884 1.12891 26.5767 1.12891 24.8354V4.34055Z"
-                      // stroke={`${getMailStatusColor(item?.mail?.mailStatus)}`}
                       stroke={`${
                         item?.mail?.mailStatus === 0
                           ? "#FE9244"
@@ -210,7 +215,6 @@ const TableRows = ({
                     />
                     <path
                       d="M14.4499 16.1375C15.3211 16.1375 16.0273 15.4299 16.0273 14.557C16.0273 13.6842 15.3211 12.9766 14.4499 12.9766C13.5788 12.9766 12.8726 13.6842 12.8726 14.557C12.8726 15.4299 13.5788 16.1375 14.4499 16.1375Z"
-                      // fill={`${getMailStatusColor(item?.mail?.mailStatus)}`}
                       fill={`${
                         item?.mail?.mailStatus === 0
                           ? "#FE9244"
@@ -221,7 +225,6 @@ const TableRows = ({
                     />
                     <path
                       d="M6.66915 15.0562C7.70759 16.36 10.7966 19.837 14.4508 19.837C18.1051 19.837 21.1941 16.3602 22.2325 15.0562C22.4559 14.7664 22.4559 14.3581 22.2325 14.0817C21.1941 12.7778 18.1051 9.30082 14.4508 9.30082C10.7966 9.28765 7.70759 12.7646 6.66915 14.0685C6.43255 14.3583 6.43255 14.7664 6.66915 15.0562ZM14.4508 11.3949C16.1991 11.3949 17.6056 12.8041 17.6056 14.5558C17.6056 16.3075 16.1991 17.7167 14.4508 17.7167C12.7026 17.7167 11.2961 16.3075 11.2961 14.5558C11.2961 12.8041 12.7026 11.3949 14.4508 11.3949Z"
-                      // fill={`${getMailStatusColor(item?.mail?.mailStatus)}`}
                       fill={`${
                         item?.mail?.mailStatus === 0
                           ? "#FE9244"

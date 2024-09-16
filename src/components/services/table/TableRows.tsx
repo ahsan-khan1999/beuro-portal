@@ -39,7 +39,11 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(90px,_90px)]">
+            <div
+              className={`grid items-center grid-cols-[minmax(90px,_90px)] ${
+                index === 0 && "mt-2"
+              }`}
+            >
               <span
                 className="flex justify-center items-center cursor-pointer"
                 onClick={() =>

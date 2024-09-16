@@ -43,7 +43,11 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(90px,_90px)]">
+            <div
+              className={`grid grid-cols-[minmax(90px,_90px)] items-center ${
+                index === 0 && "mt-2"
+              }`}
+            >
               <span className="flex justify-center items-center cursor-pointer">
                 <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
                   <div

@@ -220,7 +220,11 @@ export const AppointmentTableRows = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(140px,_140px)] xLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(140px,_140px)] gap-x-2">
+            <div
+              className={`grid grid-cols-[minmax(140px,_140px)] xLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(140px,_140px)] gap-x-2 ${
+                index === 0 && "mt-2"
+              }`}
+            >
               <div
                 className="py-3 hidden xLarge:flex justify-center items-center cursor-pointer"
                 onClick={(e) =>

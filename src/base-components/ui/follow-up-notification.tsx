@@ -16,7 +16,7 @@ export const FollowUpNotification = ({ followUp, setIsTimeEnded }: any) => {
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName="w-[560px] max-h-[221px] min-h-[231px] rounded-[20px] pt-[25px] pb-[28px] absolute top-[46px] right-[397px] mt-7 follow-up-container border border-primary"
+      containerClassName="w-[560px] max-h-[221px] min-h-[231px] rounded-[20px] pt-[25px] pb-[28px] absolute top-[46px] right-[342px] mt-7 follow-up-container border border-primary"
     >
       <div>
         <h1 className="text-[#171B1E] text-xl font-semibold pl-[31px] pb-[18px]">

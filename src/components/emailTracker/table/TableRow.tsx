@@ -63,7 +63,11 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
+            <div
+              className={`grid grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)] items-center gap-x-1 ${
+                index === 0 && "mt-2"
+              }`}
+            >
               <span className="py-3 flex justify-center items-center cursor-pointer">
                 <span
                   title={translate("email_tracker.table_headings.view_mail")}
@@ -109,7 +113,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                       })
                     }
                     title={translate("email_tracker.table_headings.edit")}
-                    className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center"
+                    className="p-[5px] rounded-md w-[32px] h-[32px] border border-primary flex justify-center items-center"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

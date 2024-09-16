@@ -122,7 +122,11 @@ const TableRows = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
+            <div
+              className={`grid items-center grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)] ${
+                index === 0 && "mt-2"
+              }`}
+            >
               <span
                 onClick={(e) =>
                   handleNotes(item?.id, item?.invoiceNumber, name, heading, e)
@@ -183,7 +187,7 @@ const TableRows = ({
                         query: { ...router.query, invoice: item.id },
                       })
                     }
-                    className="p-[5px] rounded-md w-[33px] h-[33px] border border-primary flex justify-center items-center"
+                    className="p-[5px] rounded-md w-[32px] h-[32px] border border-primary flex justify-center items-center"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

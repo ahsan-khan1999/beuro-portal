@@ -162,6 +162,15 @@ const ContentAddDetailsData = () => {
     },
   ];
 
+  useEffect(() => {
+    if (tabType !== null) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [tabType]);
+
   return (
     <>
       <div className="xLarge:fixed mb-5 xLarge:-mt-12">
@@ -169,7 +178,7 @@ const ContentAddDetailsData = () => {
           {translate("content.create_content")}
         </p>
         <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap gap-[14px]">
-          {tabSection.map((item, index) => (
+          {tabSection?.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
               setTabType={setTabType}

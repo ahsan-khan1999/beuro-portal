@@ -46,11 +46,11 @@ export const AppointmentTableRows = ({
     `${translate("appointments.appointment_status.Cancelled")}`,
   ];
 
-  const items = Object.keys(staticEnums["AppointmentStatus"]).map(
-    (item, index) => ({
-      item: { label: itemsValue[index], value: item },
-    })
-  );
+  // const items = Object.keys(staticEnums["AppointmentStatus"]).map(
+  //   (item, index) => ({
+  //     item: { label: itemsValue[index], value: item },
+  //   })
+  // );
 
   return (
     <div className={`overflow-y-visible`}>
@@ -91,7 +91,7 @@ export const AppointmentTableRows = ({
             : translate("common.customer_name");
 
         return (
-          <div className="mt-2">
+          <div>
             {isAgent ? (
               <>
                 <div className="mlg:hidden">
@@ -104,7 +104,9 @@ export const AppointmentTableRows = ({
                     key={index}
                     className={`${
                       index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-1 grid xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)] xAir:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(180px,180px)] border-t border-t-[#E7EAEE]`}
+                    } ${index !== 0 && "border-t border-t-[#E7EAEE]"} ${
+                      index === 0 && "mt-2"
+                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-1 grid xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)] xAir:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(180px,180px)]`}
                   >
                     <div className="flex items-center gap-x-1">
                       {item?.leadID?.refID}
@@ -197,7 +199,9 @@ export const AppointmentTableRows = ({
                   key={index}
                   className={`${
                     index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                  } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(250px,_3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(180px,_180px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(80px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(60px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(80px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(130px,_130px)_minmax(140px,_100%)_minmax(90px,_90px)_minmax(170px,_170px)_minmax(130px,_130px)] xLarge:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(60px,_3fr)_minmax(70px,_4fr)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(170px,_170px)_minmax(130px,_130px)] border-t border-t-[#E7EAEE]`}
+                  } ${index !== 0 && "border-t border-t-[#E7EAEE]"} ${
+                    index === 0 && "mt-2"
+                  } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(80px,_80px)_minmax(200px,3fr)_minmax(250px,_3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(180px,_180px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(80px,_100%)_minmax(170px,_170px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(60px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(80px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(130px,_130px)_minmax(140px,_100%)_minmax(90px,_90px)_minmax(170px,_170px)_minmax(130px,_130px)] xLarge:grid-cols-[minmax(55px,_55px)_minmax(65px,_65px)_minmax(60px,_3fr)_minmax(70px,_4fr)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(170px,_170px)_minmax(130px,_130px)]`}
                 >
                   <span className="py-4 truncate">{item?.leadID?.refID}</span>
                   <div className="flex items-center gap-x-1">
@@ -281,7 +285,11 @@ export const AppointmentTableRows = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-[minmax(180px,_180px)] maxLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(180px,_180px)] gap-x-2">
+              <div
+                className={`grid grid-cols-[minmax(180px,_180px)] maxLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(180px,_180px)] gap-x-2 ${
+                  index === 0 && "mt-2"
+                }`}
+              >
                 <div
                   className="py-3 hidden maxLarge:flex justify-center items-center cursor-pointer"
                   onClick={(e) =>
