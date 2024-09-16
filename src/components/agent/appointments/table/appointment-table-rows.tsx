@@ -40,11 +40,11 @@ export const AppointmentTableRows = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const itemsValue = [
-    `${translate("appointments.appointment_status.Pending")}`,
-    `${translate("appointments.appointment_status.Completed")}`,
-    `${translate("appointments.appointment_status.Cancelled")}`,
-  ];
+  // const itemsValue = [
+  //   `${translate("appointments.appointment_status.Pending")}`,
+  //   `${translate("appointments.appointment_status.Completed")}`,
+  //   `${translate("appointments.appointment_status.Cancelled")}`,
+  // ];
 
   // const items = Object.keys(staticEnums["AppointmentStatus"]).map(
   //   (item, index) => ({

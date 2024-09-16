@@ -61,9 +61,8 @@ const PdfPriview = () => {
   };
 
   const isCalendar = router.query.isCalendar;
-  // Wait for router to be ready before rendering based on the query
   if (!router.isReady) {
-    return null; // Prevent rendering while the router is not ready
+    return null;
   }
 
   return (
@@ -88,10 +87,12 @@ const PdfPriview = () => {
             activeButtonId={activeButtonId}
           />
 
-          <ContractPdfPreview
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          />
+          <div className="mt-5">
+            <ContractPdfPreview
+              mergedPdfFileUrl={mergedPdfUrl}
+              isPdfRendering={isPdfRendering}
+            />
+          </div>
 
           {renderModal()}
         </Layout>
