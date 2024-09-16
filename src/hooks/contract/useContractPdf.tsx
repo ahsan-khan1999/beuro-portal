@@ -37,6 +37,7 @@ export const useContractPdf = () => {
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
 
@@ -315,7 +316,6 @@ export const useContractPdf = () => {
     const remainingItems = totalItems - itemsOnFirstPage;
     const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
 
-    // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 

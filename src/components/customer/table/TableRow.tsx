@@ -4,6 +4,7 @@ import { formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
+
 const TableRow = ({ currentPageRows }: CustomerTable) => {
   const router = useRouter();
   const { t: translate } = useTranslation();

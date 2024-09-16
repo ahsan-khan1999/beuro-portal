@@ -71,13 +71,13 @@ export const CalendarDatePickerField = ({
       )}
 
       <div className="flex flex-col gap-y-1">
-        <span className="text-xs text-[#7A7A7A] font-medium">
+        <span className="text-xs text-[#7A7A7A] font-medium cursor-pointer">
           {formattedDate
             ? moment(formattedDate).format("ddd, MMM D")
             : `${translate("calendar.select_date")}`}
         </span>
         {dateType === "datetime-local" && (
-          <span className="text-sm font-medium text-[#3C3C3C]">
+          <span className="text-sm font-medium text-[#3C3C3C] cursor-pointer">
             {formattedDate ? moment(formattedDate).format("HH:mm") : ""}
           </span>
         )}

@@ -47,7 +47,7 @@ export const AddContractTask = ({
       containerClassName={`max-w-[350px] xMini:max-w-[375px] min-h-fit rounded-lg xMini:absolute xMini:top-[105px] ${rightValue} add-task-modal bg-[#F3F3F3] calendarShadow`}
     >
       <div
-        className="px-3 xMini:px-[18px] py-4"
+        className="px-3 xMini:px-[18px] py-4 hide-scrollbar"
         style={{
           maxHeight: maxHeight,
           overflowY: "auto",

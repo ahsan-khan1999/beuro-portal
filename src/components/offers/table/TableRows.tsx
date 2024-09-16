@@ -243,7 +243,11 @@ const TableRows = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)]">
+            <div
+              className={`grid items-center grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)_minmax(50px,_50px)] ${
+                index === 0 && "mt-2"
+              }`}
+            >
               <span
                 className="py-3 flex justify-center items-center cursor-pointer"
                 onClick={(e) =>
@@ -363,7 +367,6 @@ const TableRows = ({
                     <path
                       opacity="1"
                       d="M1.12891 4.34055C1.12891 2.59917 2.54057 1.1875 4.28195 1.1875H24.7768C26.5181 1.1875 27.9298 2.59917 27.9298 4.34055V24.8354C27.9298 26.5767 26.5181 27.9884 24.7768 27.9884H4.28195C2.54057 27.9884 1.12891 26.5767 1.12891 24.8354V4.34055Z"
-                      // stroke={`${getMailStatusColor(item?.mail?.mailStatus)}`}
                       stroke={`${
                         item?.mail?.mailStatus === 0
                           ? "#FE9244"
@@ -374,7 +377,6 @@ const TableRows = ({
                     />
                     <path
                       d="M14.4499 16.1375C15.3211 16.1375 16.0273 15.4299 16.0273 14.557C16.0273 13.6842 15.3211 12.9766 14.4499 12.9766C13.5788 12.9766 12.8726 13.6842 12.8726 14.557C12.8726 15.4299 13.5788 16.1375 14.4499 16.1375Z"
-                      // fill={`${getMailStatusColor(item?.mail?.mailStatus)}`}
                       fill={`${
                         item?.mail?.mailStatus === 0
                           ? "#FE9244"
@@ -385,7 +387,6 @@ const TableRows = ({
                     />
                     <path
                       d="M6.66915 15.0562C7.70759 16.36 10.7966 19.837 14.4508 19.837C18.1051 19.837 21.1941 16.3602 22.2325 15.0562C22.4559 14.7664 22.4559 14.3581 22.2325 14.0817C21.1941 12.7778 18.1051 9.30082 14.4508 9.30082C10.7966 9.28765 7.70759 12.7646 6.66915 14.0685C6.43255 14.3583 6.43255 14.7664 6.66915 15.0562ZM14.4508 11.3949C16.1991 11.3949 17.6056 12.8041 17.6056 14.5558C17.6056 16.3075 16.1991 17.7167 14.4508 17.7167C12.7026 17.7167 11.2961 16.3075 11.2961 14.5558C11.2961 12.8041 12.7026 11.3949 14.4508 11.3949Z"
-                      // fill={`${getMailStatusColor(item?.mail?.mailStatus)}`}
                       fill={`${
                         item?.mail?.mailStatus === 0
                           ? "#FE9244"
@@ -410,7 +411,7 @@ const TableRows = ({
                         query: { ...router.query, offer: item?.id },
                       })
                     }
-                    className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center"
+                    className="p-[5px] rounded-md w-[32px] h-[32px] border border-primary flex justify-center items-center"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

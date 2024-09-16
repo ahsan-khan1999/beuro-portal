@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 import createdIcon from "@/assets/svgs/created_icon.svg";
 import { useTranslation } from "next-i18next";
 import {
-  readContract,
   readContractDetails,
   setContractTaskDetails,
   updateContractStatus,
@@ -57,15 +56,6 @@ export const IsContractTaskCreated = ({
 
   const handleConfirm = () => {
     if (contractId) {
-      // const res = await dispatch(
-      //   updateContractStatus({
-      //     data: {
-      //       id: contractId,
-      //       contractStatus: staticEnums["ContractStatus"][status],
-      //     },
-      //   })
-      // );
-
       if (contractDetails?.offerID?.date) {
         const updatedDates = contractDetails.offerID.date.map(
           (dateItem: any) => {
@@ -268,7 +258,7 @@ export const IsContractTaskCreated = ({
   ${serviceItem
     ?.map(
       (item, index) => `
-    <div key=${index} style="display: flex; align-items: center; justify-content: space-between;">
+    <div key=${index} style="display: flex; align-items: center; gap:4px">
       <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">${item?.serviceTitle}</p>
       <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
         ${item?.totalPrice}
@@ -331,10 +321,8 @@ export const IsContractTaskCreated = ({
         );
       }
 
-      // if (res?.payload) {
       dispatch(updateModalType(ModalType.NONE));
       router.push(`/calendar?isContractId=${contractId}`);
-      // }
     }
   };
 
