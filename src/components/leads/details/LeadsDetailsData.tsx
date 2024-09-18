@@ -202,17 +202,7 @@ const LeadsDetailsData = ({
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
         <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap gap-[14px] mb-5">
-          {tabSection.map((item, index) => (
-            // <DetailsTab
-            //   isSelected={tabType === index}
-            //   setTabType={setTabType}
-            //   tabType={tabType}
-            //   name={item.name}
-            //   icon={item.icon}
-            //   selectedTab={index}
-            //   key={index}
-            //   onItemSelected={handleScrollToTop}
-            // />
+          {tabSection?.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
               isToggle={true}
@@ -237,7 +227,6 @@ const LeadsDetailsData = ({
           name={name}
           heading={heading}
           handleImageSlider={handleImageSlider}
-          // className="xlg:w-[247px]"
         />
       </div>
 
@@ -250,7 +239,7 @@ const LeadsDetailsData = ({
               <CustomLoader />
             </div>
           ) : (
-            renderComponent.map((component, index) => (
+            renderComponent?.map((component, index) => (
               <div key={index} className="w-full">
                 {component}
               </div>

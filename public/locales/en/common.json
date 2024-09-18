@@ -1260,6 +1260,8 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+   "paid_invoice":"Invoice status paid successfully",
+   "paid_invoice_date":"Select the paid date of invoice",
     "enter_location": "Enter location",
     "pay": "Pay",
     "paid": "Paid",

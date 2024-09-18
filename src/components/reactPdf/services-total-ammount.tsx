@@ -1,6 +1,5 @@
 import { ProductItemFooterProps } from "@/types";
-import { staticEnums } from "@/utils/static";
-import { calculateTax } from "@/utils/utility";
+import { calculateTax, pdfDateFormat } from "@/utils/utility";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -139,9 +138,10 @@ export const ServicesTotalAmount = ({
   language,
   paymentType,
   isBreakPage,
+  payments,
 }: Partial<ProductItemFooterProps>) => {
-  const isPaid =
-    invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
+  // const isPaid =
+  //   invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
 
   const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount);
 
@@ -158,11 +158,11 @@ export const ServicesTotalAmount = ({
       )) ||
     0;
 
-  const totalDiscount = !isDiscount
-    ? serviceDiscountSum
-    : (serviceDiscountSum &&
-        (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2)) ||
-      Number(calculatedDiscount).toFixed(2);
+  // const totalDiscount = !isDiscount
+  //   ? serviceDiscountSum
+  //   : (serviceDiscountSum &&
+  //       (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2)) ||
+  //     Number(calculatedDiscount).toFixed(2);
 
   const discountAmount = (Number(discount) / 100) * Number(subTotal);
   const totalAfterDiscount =
@@ -317,7 +317,7 @@ export const ServicesTotalAmount = ({
                       :
                     </Text>
                     <Text style={styles.text}>
-                      -{Number(invoiceAmount).toFixed(2)}
+                      -{Number(invoiceAmount).toFixed(2)}{" "}
                       {systemSettings?.currency}
                     </Text>
                   </View>
@@ -383,11 +383,42 @@ export const ServicesTotalAmount = ({
                       {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                     </Text>
                   </View>
+                  {payments &&
+                    payments?.map((item, index) => {
+                      return (
+                        <View
+                          style={styles.subInvoicepaidAmountSection}
+                          key={index}
+                        >
+                          <Text style={styles.text}>
+                            {langContent[language as keyof typeof langContent]
+                              ?.paid_amount || "Bezahlter Betrag"}
+                            {payments?.length > 1 ? ` ${index + 1}:` : ":"}
+                          </Text>
+                          <Text style={styles.paidText}>
+                            {langContent[language as keyof typeof langContent]
+                              ?.payment_method || "Zahlungsmethode"}
+                            ({item?.paymentType}),
+                            {item?.paidDate
+                              ? ` (${pdfDateFormat(
+                                  item.paidDate,
+                                  language || "de"
+                                )})`
+                              : ""}
+                          </Text>
+                          <Text style={styles.text}>
+                            -{item?.paidAmount?.toFixed(2)}
+                            {systemSettings?.currency}
+                          </Text>
+                        </View>
+                      );
+                    })}
+
                   {Number(invoiceAmount) > 0 && (
                     <View style={styles.subInvoicepaidAmountSection}>
                       <Text style={styles.text}>
                         {langContent[language as keyof typeof langContent]
-                          ?.paid_amount || "Bezahlter Betrag"}
+                          ?.total_paid_amount || "Bezahlter Gesamtbetrag"}
                         :
                       </Text>
                       <Text style={styles.text}>
@@ -431,24 +462,34 @@ export const ServicesTotalAmount = ({
               </View>
             ) : (
               <View>
-                {Number(invoiceAmount) > 0 && (
-                  <View style={styles.receiptPaidAmountSection}>
-                    <Text style={styles.text}>
-                      {langContent[language as keyof typeof langContent]
-                        ?.paid_amount || "Bezahlter Betrag"}
-                      :
-                    </Text>
-                    <Text style={styles.paidText}>
-                      {langContent[language as keyof typeof langContent]
-                        ?.payment_method || "Zahlungsmethode"}{" "}
-                      ({paymentType})
-                    </Text>
-                    <Text style={styles.text}>
-                      -{Number(dueAmount).toFixed(2)}
-                      {systemSettings?.currency}
-                    </Text>
-                  </View>
-                )}
+                {payments &&
+                  payments?.map((item, index) => {
+                    return (
+                      <View style={styles.receiptPaidAmountSection} key={index}>
+                        <Text style={styles.text}>
+                          {langContent[language as keyof typeof langContent]
+                            ?.paid_amount || "Bezahlter Betrag"}
+                          {payments?.length > 1 ? ` ${index + 1}:` : ":"}
+                        </Text>
+                        <Text style={styles.paidText}>
+                          {langContent[language as keyof typeof langContent]
+                            ?.payment_method || "Zahlungsmethode"}
+                          ({item?.paymentType}),
+                          {item?.paidDate
+                            ? ` (${pdfDateFormat(
+                                item.paidDate,
+                                language || "de"
+                              )})`
+                            : ""}
+                        </Text>
+                        <Text style={styles.text}>
+                          -{item?.paidAmount?.toFixed(2)}
+                          {systemSettings?.currency}
+                        </Text>
+                      </View>
+                    );
+                  })}
+
                 <View>
                   <View
                     style={{

@@ -76,6 +76,7 @@ export interface SubInvoiceTableRowTypes {
   invoiceNumber: string;
   invoiceStatus: string;
   paymentType: string;
+  paidDate: string;
   createdAt: string;
   isInvoiceRecurring: boolean;
   title: string;
@@ -117,6 +118,12 @@ export interface InvoiceDetailsTableProps {
   onPaymentStatusChange: (id: string, status: string) => void;
 }
 
+export interface PaymentsDataType {
+  paidAmount: number;
+  paymentType: number;
+  paidDate: string;
+}
+
 export interface PdfSubInvoiceTypes {
   id: string;
   emailStatus: string;
@@ -131,6 +138,8 @@ export interface PdfSubInvoiceTypes {
   attachement?: string;
   createdBy: User;
   customerDetail: Customers;
+  paidDate: string;
+  payments: PaymentsDataType[];
 }
 
 export interface InvoiceTableRowTypesPdf {

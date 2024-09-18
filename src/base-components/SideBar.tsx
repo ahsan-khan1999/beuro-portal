@@ -146,7 +146,7 @@ const SideBar = ({
         } px-4 pb-8 flex flex-col`}
       >
         <div className="space-y-3">
-          {sideBar.map((item) => {
+          {sideBar?.map((item) => {
             if (item.title.toLowerCase().includes("appointments")) {
               if (userRole === 1) {
                 if (!user?.company?.isAppointment) {

@@ -213,6 +213,8 @@ export const useReceiptPdf = () => {
               updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               paymentType: invoiceDetails?.paymentType,
+              paidDate: invoiceDetails?.paidDate,
+              payments: invoiceDetails?.payments,
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount?.toString(),
               isShowExtraAmount: true,

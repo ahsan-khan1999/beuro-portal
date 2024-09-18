@@ -287,6 +287,36 @@ const useInvoice = () => {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleSendEmail = async () => {
+    setIsSendEmail(!isSendEmail);
+  };
+
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: invoiceDetails?.id,
+    };
+    const response = await dispatch(sendOfferByPost({ data: apiData }));
+    if (response?.payload) invoiceCreatedHandler();
+  };
+
+  const handleDownloadInvoiceReport = async () => {
+    const response = await dispatch(
+      downloadInvoiceReports({
+        params: {
+          filter: { date: filter["date"], paymentType: filter["paymentType"] },
+        },
+      })
+    );
+    if (response.payload) {
+      downloadFile(response.payload?.excelFile);
+    }
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -338,49 +368,6 @@ const useInvoice = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleSendEmail = async () => {
-    setIsSendEmail(!isSendEmail);
-  };
-
-  const handleSendByPost = async () => {
-    const apiData = {
-      emailStatus: 2,
-      id: invoiceDetails?.id,
-    };
-    const response = await dispatch(sendOfferByPost({ data: apiData }));
-    if (response?.payload) invoiceCreatedHandler();
-  };
-
-  const handleDownloadInvoiceReport = async () => {
-    const response = await dispatch(
-      downloadInvoiceReports({
-        params: {
-          filter: { date: filter["date"], paymentType: filter["paymentType"] },
-        },
-      })
-    );
-    if (response.payload) {
-      downloadFile(response.payload?.excelFile);
-    }
-  };
-
-  // const handleCalculateInvoice = async () => {
-  //   const response = await dispatch(
-  //     invoiceCalculation({
-  //       params: {
-  //         filter: { status: filter["status"] },
-  //       },
-  //     })
-  //   );
-  //   if (response.payload) {
-  //     downloadFile(response.payload?.excelFile);
-  //   }
-  // };
 
   return {
     currentPageRows,

@@ -75,8 +75,6 @@ export const useAppointmentsDetails = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  console.log(appointmentDetails?.leadID?.id, "appointmentDetails?.leadID?.id");
-
   const handleNotes = (
     id: string,
     refID?: string,

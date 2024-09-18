@@ -3,6 +3,7 @@ import {
   CreateInvoiceAdditionalDetails,
   CreateInvoiceAddressDetails,
   CreateInvoiceServiceOfferDetails,
+  PaidInvoiceDateFieldId,
   createInvoice,
 } from "@/enums/invoice";
 import { LeadsCustomerEditDetails } from "@/enums/leads";
@@ -248,5 +249,11 @@ export const generateCreateInvoiceAdditionalDetailsValidation = (
     [CreateInvoiceAdditionalDetails.additionlData]: yup
       .string()
       .required(translate("validationMessages.required")),
+  });
+};
+
+export const generatePaidDateInvoiceValidation = (translate: Function) => {
+  return yup.object().shape({
+    [PaidInvoiceDateFieldId.paidDate]: yup.string().notRequired(),
   });
 };

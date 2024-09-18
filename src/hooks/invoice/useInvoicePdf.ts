@@ -34,12 +34,13 @@ let invoiceInfoObj = {
 
 export const useInvoicePdf = () => {
   const { t: translate } = useTranslation();
-  // const [emailData, setEmailData] = useState({ subject: "", description: "" })
   const [invoiceData, setInvoiceData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>();
+
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
 
@@ -49,18 +50,18 @@ export const useInvoicePdf = () => {
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
-
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
   const { loading, collectiveInvoiceDetails, invoiceDetails } = useAppSelector(
     (state) => state.invoice
   );
+
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
-  const { user } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const maxItemsFirstPage = 6;
   const maxItemsPerPage = 10;
@@ -225,6 +226,7 @@ export const useInvoicePdf = () => {
               invoiceAmount: invoiceDetails?.invoiceID?.paidAmount?.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus?.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
+              payments: invoiceDetails?.payments,
               serviceDiscountSum:
                 invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
                   (acc, service) => {
