@@ -84,7 +84,7 @@ const TableRows = ({
                   {item?.invoiceID?.content?.contentName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
-                  {formatDateTimeToDate(item.createdAt)}
+                  {formatDateTimeToDate(item.paidDate)}
                 </span>
                 <span className="py-4 truncate mlg:hidden xlg:block">
                   {item.amount + " " + systemSettings?.currency}

@@ -80,40 +80,38 @@ const InvoiceDetails = () => {
       : false;
 
   return (
-    <>
-      <Layout>
-        <InvoiceCardLayout>
-          <InvoiceDetailsData
-            handleInvoiceCreation={handleInvoiceCreation}
-            invoiceDetails={invoiceDetails}
-            handleNotes={handleNotes}
-            handleEditInvoiceFrequencyCreation={
-              handleEditInvoiceFrequencyCreation
-            }
-            handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
-            handleStopInvoiceCreation={handleStopInvoiceCreation}
-            handleSendEmail={handleSendEmail}
-            currency={systemSettings?.currency}
-            handleInvoiceEdit={handleInvoiceUpdate}
-          />
-        </InvoiceCardLayout>
+    <Layout>
+      <InvoiceCardLayout>
+        <InvoiceDetailsData
+          handleInvoiceCreation={handleInvoiceCreation}
+          invoiceDetails={invoiceDetails}
+          handleNotes={handleNotes}
+          handleEditInvoiceFrequencyCreation={
+            handleEditInvoiceFrequencyCreation
+          }
+          handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
+          handleStopInvoiceCreation={handleStopInvoiceCreation}
+          handleSendEmail={handleSendEmail}
+          currency={systemSettings?.currency}
+          handleInvoiceEdit={handleInvoiceUpdate}
+        />
+      </InvoiceCardLayout>
 
-        <div className="flex my-3">
-          <DetailsSwitchBtn
-            activeTab={activeTab}
-            onComponentChange={setActiveTab}
-          />
-        </div>
-        {loading || loadingInvoice || loadingReceipt ? (
-          <CustomLoader />
-        ) : shouldShowPendingInvoice ? (
-          <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />
-        ) : (
-          CurrentComponent
-        )}
-      </Layout>
+      <div className="flex my-3">
+        <DetailsSwitchBtn
+          activeTab={activeTab}
+          onComponentChange={setActiveTab}
+        />
+      </div>
+      {loading || loadingInvoice || loadingReceipt ? (
+        <CustomLoader />
+      ) : shouldShowPendingInvoice ? (
+        <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />
+      ) : (
+        CurrentComponent
+      )}
       {renderModal()}
-    </>
+    </Layout>
   );
 };
 

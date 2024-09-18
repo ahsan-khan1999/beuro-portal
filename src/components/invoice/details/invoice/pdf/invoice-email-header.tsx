@@ -33,6 +33,7 @@ export const InvoiceEmailHeader = ({
   const handleBack = () => {
     router.pathname = "/invoices/details";
     delete router.query["tab"];
+    delete router.query["invoiceID"];
     updateQuery(router, router.locale as string);
   };
 

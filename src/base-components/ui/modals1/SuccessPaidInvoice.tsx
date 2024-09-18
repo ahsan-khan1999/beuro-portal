@@ -48,14 +48,12 @@ export const SuccessPaidInvoice = ({
             </span>
           </div>
 
-          {/* <div className="pb-3 px-6"> */}
           <Form
             formFields={fields}
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
           />
-          {/* </div> */}
         </div>
       </div>
     </BaseModal>

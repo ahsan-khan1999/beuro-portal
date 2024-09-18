@@ -25,7 +25,6 @@ export default function usePaidInvoice({ onSuccess }: PaidInvoiceProps) {
   );
 
   const invoiceID = router.query.invoice;
-
   const schema = generatePaidDateInvoiceValidation(translate);
 
   const {
@@ -39,13 +38,16 @@ export default function usePaidInvoice({ onSuccess }: PaidInvoiceProps) {
   const fields = PaidDateInvoiceFormField(register);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const apiData = {
+      ...data,
+      id: id,
+      invoiceStatus: staticEnums["InvoiceStatus"][status],
+    };
     const res = await dispatch(
       updateInvoiceStatus({
-        data: {
-          id: id,
-          invoiceStatus: staticEnums["InvoiceStatus"][status],
-          data,
-        },
+        data: apiData,
+        router,
+        translate,
       })
     );
     if (res?.payload) {

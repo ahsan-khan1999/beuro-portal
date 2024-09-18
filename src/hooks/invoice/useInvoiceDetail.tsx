@@ -83,7 +83,7 @@ export default function useInvoiceDetail() {
             })
           );
 
-          dispatch(setInvoiceDetails(res.payload));
+          dispatch(setInvoiceDetails(res?.payload));
         }
       );
     }
@@ -385,6 +385,10 @@ export default function useInvoiceDetail() {
     updateQuery(router, router.locale as string);
   };
 
+  const offerCreatedHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -495,12 +499,9 @@ export default function useInvoiceDetail() {
         onClose={onClose}
         heading={translate("common.change_payment")}
         onSuccess={handlePaymentStatusSuccess}
+        onPaidDate={handlePaidInvoice}
       />
     ),
-  };
-
-  const offerCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const renderModal = () => {

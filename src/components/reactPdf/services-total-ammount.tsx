@@ -1,6 +1,10 @@
 import { ProductItemFooterProps } from "@/types";
 import { staticEnums } from "@/utils/static";
-import { calculateTax } from "@/utils/utility";
+import {
+  calculateTax,
+  formatDateTimeToDate,
+  pdfDateFormat,
+} from "@/utils/utility";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -138,10 +142,11 @@ export const ServicesTotalAmount = ({
   dueAmount,
   language,
   paymentType,
+  paidDate,
   isBreakPage,
 }: Partial<ProductItemFooterProps>) => {
-  const isPaid =
-    invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
+  // const isPaid =
+  //   invoiceStatus && staticEnums["InvoiceStatus"][invoiceStatus] === 2;
 
   const unPaidAmount = Number(grandTotal) - Number(invoicePaidAmount);
 
@@ -158,11 +163,11 @@ export const ServicesTotalAmount = ({
       )) ||
     0;
 
-  const totalDiscount = !isDiscount
-    ? serviceDiscountSum
-    : (serviceDiscountSum &&
-        (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2)) ||
-      Number(calculatedDiscount).toFixed(2);
+  // const totalDiscount = !isDiscount
+  //   ? serviceDiscountSum
+  //   : (serviceDiscountSum &&
+  //       (serviceDiscountSum + Number(calculatedDiscount)).toFixed(2)) ||
+  //     Number(calculatedDiscount).toFixed(2);
 
   const discountAmount = (Number(discount) / 100) * Number(subTotal);
   const totalAfterDiscount =
@@ -180,6 +185,7 @@ export const ServicesTotalAmount = ({
       total_after_discount: "Total after Discount",
       grand_total: "Grand Total",
       paid_amount: "Paid Amount",
+      paid_invoice: "Paid Invoice",
       unpaid_amount: "Unpaid Amount",
       due_amount: "Due Amount",
       total_paid_amount: "Total Paid Amount",
@@ -195,6 +201,7 @@ export const ServicesTotalAmount = ({
       total_after_discount: "Gesamtsumme nach Rabatt",
       grand_total: "Gesamtsumme",
       paid_amount: "Bezahlter Betrag",
+      paid_invoice: "Bezahlter Rechnung",
       unpaid_amount: "Unbezahlter Betrag",
       due_amount: "Fälliger Betrag",
       total_paid_amount: "Bezahlter Gesamtbetrag",
@@ -441,7 +448,9 @@ export const ServicesTotalAmount = ({
                     <Text style={styles.paidText}>
                       {langContent[language as keyof typeof langContent]
                         ?.payment_method || "Zahlungsmethode"}{" "}
-                      ({paymentType})
+                      ({paymentType}),
+                      {paidDate &&
+                        pdfDateFormat(paidDate || "", language || "de")}
                     </Text>
                     <Text style={styles.text}>
                       -{Number(dueAmount).toFixed(2)}

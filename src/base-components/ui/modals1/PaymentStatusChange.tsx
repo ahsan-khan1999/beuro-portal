@@ -12,6 +12,7 @@ import { Button } from "../button/button";
 export interface PaymentStatusModalProps {
   onClose: () => void;
   onSuccess: () => void;
+  onPaidDate: (id: string, status: string) => void;
   heading: string;
 }
 
@@ -19,6 +20,7 @@ export const PaymentStatusChange = ({
   onClose,
   onSuccess,
   heading,
+  onPaidDate,
 }: PaymentStatusModalProps) => {
   const dispatch = useAppDispatch();
   const { id, status } = useAppSelector((state) => state.global.modal.data);
@@ -26,20 +28,20 @@ export const PaymentStatusChange = ({
 
   const newStatus = status === "Pending" ? "Paid" : "Pending";
 
-  const handleConfirmtion = async () => {
-    const res = await dispatch(
-      updateInvoiceStatus({
-        data: {
-          id: id,
-          invoiceStatus: staticEnums["InvoiceStatus"][newStatus],
-        },
-      })
-    );
-    if (res?.payload) {
-      dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }));
-      onSuccess();
-    }
-  };
+  // const handleConfirmtion = async () => {
+  //   const res = await dispatch(
+  //     updateInvoiceStatus({
+  //       data: {
+  //         id: id,
+  //         invoiceStatus: staticEnums["InvoiceStatus"][newStatus],
+  //       },
+  //     })
+  //   );
+  //   if (res?.payload) {
+  //     dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }));
+  //     onSuccess();
+  //   }
+  // };
 
   return (
     <BaseModal
@@ -70,7 +72,7 @@ export const PaymentStatusChange = ({
           </button>
 
           <Button
-            onClick={handleConfirmtion}
+            onClick={() => onPaidDate(id, newStatus)}
             className="!h-[50px] w-[120px] !text-[#fff] bg-[#45C769] rounded-md hover:bg-buttonHover"
             text={translate("common.yes")}
             id="status change"

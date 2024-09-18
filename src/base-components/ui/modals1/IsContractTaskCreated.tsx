@@ -193,29 +193,34 @@ export const IsContractTaskCreated = ({
           
           <br />
           
-          <span style="font-size: 16px; font-weight: 600; color: #FE9244;">
-              ${translate("customers.details.address_details")}.
-          </span>
-          
           ${
-            contractDetails?.offerID?.addressID?.address &&
-            contractDetails?.offerID?.addressID?.address
-              ?.map(
-                (address, index) => `
-          <div key=${index} style="display: flex; flex-direction: column; gap: 2px;">
-              <p style="font-size: 14px; font-weight: 500; color: #2A2E3A;">
-                  ${address.label}:
-              </p>
-              <p style="font-size: 14px; font-weight: 500; color: #2A2E3A;">
-                  ${address.streetNumber}, ${address.postalCode}, ${
-                  [address.country] || ""
-                }
-              </p>
-          </div>
-          `
-              )
-              .join("")
+            contractDetails?.offerID?.addressID?.address?.length > 0
+              ? `
+                <span style="font-size: 16px; font-weight: 600; color: #FE9244;">
+                  ${translate("customers.details.address_details")}.
+                </span>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  ${contractDetails.offerID.addressID.address
+                    .map(
+                      (address, index) => `
+                      <div key=${index} style="display: flex; flex-direction: column; gap: 2px;">
+                        <p style="font-size: 14px; font-weight: 500; color: #2A2E3A;">
+                          ${address.label}:
+                        </p>
+                        <p style="font-size: 14px; font-weight: 500; color: #2A2E3A;">
+                          ${address.streetNumber}, ${address.postalCode}, ${
+                        address.country || ""
+                      }
+                        </p>
+                      </div>
+                    `
+                    )
+                    .join("")}
+                </div>
+              `
+              : ""
           }
+          
           <br />
           
           
@@ -250,23 +255,31 @@ export const IsContractTaskCreated = ({
           
           <br />
           
-          <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
-              ${translate("services.service_detail_tab")}.
-          </span>
+          ${
+            serviceItem?.length > 0
+              ? `
+            <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
+              ${translate("services.service_detail_tab")}
+            </span>
           
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-  ${serviceItem
-    ?.map(
-      (item, index) => `
-    <div key=${index} style="display: flex; align-items: center; gap:4px">
-      <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">${item?.serviceTitle}</p>
-      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
-        ${item?.totalPrice}
-      </span>
-    </div>
-    `
-    )
-    .join("")} 
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              ${serviceItem
+                .map(
+                  (item, index) => `
+                  <div key=${index} style="display: flex; align-items: center; gap: 4px;">
+                    <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">${item?.serviceTitle}</p>
+                    <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                      ${item?.totalPrice}
+                    </span>
+                  </div>
+                `
+                )
+                .join("")}
+            </div>
+          `
+              : ""
+          }
+          
 </div>
 
           <br />
@@ -371,16 +384,16 @@ export const IsContractTaskCreated = ({
 
         <div className="flex gap-[33px] mt-[26px] mb-[38px]">
           <button
-            onClick={handleConfirm}
-            className="py-[11px] w-[120px] text-[#fff] bg-[#45C769] rounded-md"
-          >
-            {translate("common.yes")}
-          </button>
-          <button
             onClick={handleCancel}
-            className="py-[11px] w-[120px] text-[#fff] bg-[#FF0000] rounded-md"
+            className="py-[11px] w-[120px] text-[#fff] bg-[#FF0000] rounded-md hover:bg-buttonHover"
           >
             {translate("common.no")}
+          </button>
+          <button
+            onClick={handleConfirm}
+            className="py-[11px] w-[120px] text-[#fff] bg-[#45C769] rounded-md hover:bg-buttonHover"
+          >
+            {translate("common.yes")}
           </button>
         </div>
       </div>

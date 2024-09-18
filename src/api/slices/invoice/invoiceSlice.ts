@@ -132,6 +132,7 @@ export const createInvoice: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createRecuringInvoice: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/create/recurring", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -159,6 +160,7 @@ export const updateParentInvoice: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateInvoice: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -257,6 +259,7 @@ export const readCollectiveInvoice: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const readCollectiveReciept: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("collective/reciept/read", async (args, thunkApi) => {
     const { params } = args as any;
@@ -269,6 +272,7 @@ export const readCollectiveReciept: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const readCollectiveInvoiceDetails:
   | AsyncThunk<boolean, object, object>
   | any = createAsyncThunk(

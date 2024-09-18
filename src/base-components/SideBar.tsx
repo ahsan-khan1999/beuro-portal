@@ -146,7 +146,7 @@ const SideBar = ({
         } px-4 pb-8 flex flex-col`}
       >
         <div className="space-y-3">
-          {sideBar.map((item) => {
+          {sideBar?.map((item) => {
             if (item.title.toLowerCase().includes("appointments")) {
               if (userRole === 1) {
                 if (!user?.company?.isAppointment) {
@@ -156,7 +156,7 @@ const SideBar = ({
             }
 
             return (
-              item.role.includes(userRole) && (
+              item?.role.includes(userRole) && (
                 <React.Fragment key={item?.pathname}>
                   <Link
                     href={{
@@ -233,8 +233,8 @@ const SideBar = ({
                     selected.parent.isActive &&
                     selected.child && (
                       <>
-                        {item.inner &&
-                          item.inner.map((it, ind) => {
+                        {item?.inner &&
+                          item?.inner?.map((it, ind) => {
                             return (
                               <motion.div
                                 className="mt-2 px-3"
@@ -247,11 +247,14 @@ const SideBar = ({
                                 <Link
                                   href={{
                                     pathname: it.pathname,
-                                    query: item.query
-                                      ? {
-                                          [String(item.queryName)]: it.query,
-                                        }
-                                      : {},
+                                    query: {
+                                      [String(it.queryName)]: it.query,
+                                      ...(it.pathname === "/invoices" &&
+                                        it.queryName === "status" &&
+                                        it.query === "3" && {
+                                          sort: "-createdAt",
+                                        }),
+                                    },
                                   }}
                                   onClick={() => filterHandler(it.query)}
                                   className={`text-sm text-[#4B4B4B] hover:bg-[#E9E1FF] rounded-lg font-medium tracking-[0.5px] px-3 py-2 w-full text-start block ${

@@ -28,6 +28,7 @@ import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import {
   InvoiceDetailTableRowTypes,
   InvoiceTableRowTypes,
+  PaymentsDataType,
   SubInvoiceTableRowTypes,
 } from "./invoice";
 import { Contract, contractTableTypes } from "./contract";
@@ -1135,7 +1136,9 @@ export interface ProductItemFooterProps {
   discountDescription?: string;
   language?: string;
   paymentType?: string;
+  paidDate?: string;
   isBreakPage?: boolean;
+  payments: PaymentsDataType;
 }
 
 export interface ContactDetailsProps {
