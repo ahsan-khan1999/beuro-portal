@@ -139,7 +139,7 @@ export interface PdfSubInvoiceTypes {
   createdBy: User;
   customerDetail: Customers;
   paidDate: string;
-  payments: PaymentsDataType;
+  payments: PaymentsDataType[];
 }
 
 export interface InvoiceTableRowTypesPdf {

@@ -57,19 +57,15 @@ export default function InvoicesFilters({
         if (!updatedStatus.includes(value)) {
           updatedStatus.push(value);
         }
-
-        const updatedQuery = {
-          status:
-            newStatus && newStatus.length > 0 ? newStatus.join(",") : "None",
-          ...(value === `${staticEnums.InvoiceMainStatus.Open}` && {
-            sort: "-createdAt",
-          }),
-        };
-
         router.push(
           {
             pathname: router.pathname,
-            query: updatedQuery,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
           },
           undefined,
           { shallow: true }
@@ -79,16 +75,15 @@ export default function InvoicesFilters({
         if (index > -1) {
           updatedStatus.splice(index, 1);
         }
-
-        const updatedQuery = {
-          status:
-            newStatus && newStatus.length > 0 ? newStatus.join(",") : "None",
-        };
-
         router.push(
           {
             pathname: router.pathname,
-            query: updatedQuery,
+            query: {
+              status:
+                newStatus && newStatus.length > 0
+                  ? newStatus.join(",")
+                  : "None",
+            },
           },
           undefined,
           { shallow: true }
@@ -97,13 +92,7 @@ export default function InvoicesFilters({
 
       const status =
         updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
-      const updatedFilter = {
-        ...prev,
-        status: status,
-        ...(value === staticEnums.InvoiceMainStatus.Open &&
-          isChecked && { sort: "-createdAt" }),
-      };
-
+      const updatedFilter = { ...prev, status: status };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });

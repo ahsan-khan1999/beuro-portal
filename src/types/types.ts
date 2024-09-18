@@ -1138,7 +1138,7 @@ export interface ProductItemFooterProps {
   paymentType?: string;
   paidDate?: string;
   isBreakPage?: boolean;
-  payments: PaymentsDataType;
+  payments?: PaymentsDataType[];
 }
 
 export interface ContactDetailsProps {

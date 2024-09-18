@@ -226,6 +226,7 @@ export const useInvoicePdf = () => {
               invoiceAmount: invoiceDetails?.invoiceID?.paidAmount?.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus?.toString(),
               taxType: invoiceDetails?.invoiceID?.taxType,
+              payments: invoiceDetails?.payments,
               serviceDiscountSum:
                 invoiceDetails?.invoiceID?.serviceDetail?.serviceDetail?.reduce(
                   (acc, service) => {
