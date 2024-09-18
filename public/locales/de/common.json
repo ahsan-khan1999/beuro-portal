@@ -1253,6 +1253,8 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
+    "paid_invoice": "Rechnungsstatus erfolgreich bezahlt",
+    "paid_invoice_date": "Wählen Sie das Zahlungsdatum der Rechnung",
     "enter_location": "Ort eingeben",
     "pay": "Bezahlen",
     "paid": "Bezahlt",

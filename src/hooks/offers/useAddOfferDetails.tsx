@@ -51,6 +51,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     updateQuery(router, router.locale as string);
   };
 
+  console.log(offerDetails, "offerDetails");
+
   const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,
@@ -76,7 +78,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   const customerID = watch("customerID");
   const selectedContent = watch("content");
   const leadID = watch("leadID");
-
 
   useEffect(() => {
     if (type && customerID)

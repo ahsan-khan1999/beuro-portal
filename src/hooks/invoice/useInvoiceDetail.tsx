@@ -35,6 +35,7 @@ import { updateQuery } from "@/utils/update-query";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import { PaymentStatusChange } from "@/base-components/ui/modals1/PaymentStatusChange";
+import { SuccessPaidInvoice } from "@/base-components/ui/modals1/SuccessPaidInvoice";
 
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
@@ -53,11 +54,10 @@ export default function useInvoiceDetail() {
   const [activeTab, setActiveTab] = useState("invoice");
   const invoiceDetailTabs = ["invoice", "receipt"];
 
-  const { modal } = useAppSelector((state) => state.global);
-  const { systemSettings } = useAppSelector((state) => state.settings);
-
   const router = useRouter();
   const id = router.query.invoice;
+  const { modal } = useAppSelector((state) => state.global);
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   useEffect(() => {
     if (id) {
@@ -295,8 +295,94 @@ export default function useInvoiceDetail() {
     );
   };
 
+  const handlePaidInvoice = (id: string, status: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.PAID_DATE_INVOICE,
+        data: {
+          id: id,
+          status: status,
+        },
+      })
+    );
+  };
+
   const handlePaymentStatusSuccess = () => {
     dispatch(updateModalType({ type: ModalType.PAYMENT_STATUS_UPDATE }));
+  };
+
+  const handleInvoiceStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (status === "Paid") {
+      handlePaidInvoice(id, status);
+    } else {
+      if (type === "invoice") {
+        const res = await dispatch(
+          updateInvoiceStatus({
+            data: {
+              id: id,
+              invoiceStatus: staticEnums["InvoiceStatus"][status],
+            },
+          })
+        );
+        if (res?.payload) {
+          dispatch(
+            readInvoiceDetails({ params: { filter: invoiceDetails?.id } })
+          );
+          offerCreatedHandler();
+        }
+      } else {
+        const res = await dispatch(
+          updateRecieptStatus({
+            data: {
+              id: id,
+              invoiceStatus: staticEnums["InvoiceStatus"][status],
+            },
+          })
+        );
+        if (res?.payload) {
+          dispatch(
+            readInvoiceDetails({ params: { filter: invoiceDetails?.id } })
+          );
+          offerCreatedHandler();
+        }
+      }
+    }
+  };
+
+  const handlePaymentStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "invoice") {
+      const res = await dispatch(
+        updateInvoicePaymentStatus({
+          data: { id: id, paymentType: staticEnums["PaymentType"][status] },
+        })
+      );
+      if (res?.payload) offerCreatedHandler();
+    } else {
+      const res = await dispatch(
+        updateRecieptPaymentStatus({
+          data: { id: id, paymentType: staticEnums["PaymentType"][status] },
+        })
+      );
+      if (res?.payload) offerCreatedHandler();
+    }
+  };
+
+  const onNextHandle = () => {
+    router.pathname = "/offers/pdf-preview";
+  };
+
+  const handleInvoiceUpdate = () => {
+    router.pathname = "/invoices/update-invoice";
+    router.query = { invoice: invoiceDetails?.id };
+    updateQuery(router, router.locale as string);
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -362,6 +448,14 @@ export default function useInvoiceDetail() {
         route={onClose}
       />
     ),
+    [ModalType.PAID_DATE_INVOICE]: (
+      <SuccessPaidInvoice
+        onClose={onClose}
+        modelHeading={translate("common.successful")}
+        modelSubHeading={translate("common.paid_invoice")}
+        onSuccess={invoiceCreated}
+      />
+    ),
     [ModalType.PAYMENT_STATUS_UPDATE]: (
       <CreationCreated
         onClose={onClose}
@@ -411,68 +505,6 @@ export default function useInvoiceDetail() {
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handleInvoiceStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "invoice") {
-      const res = await dispatch(
-        updateInvoiceStatus({
-          data: { id: id, invoiceStatus: staticEnums["InvoiceStatus"][status] },
-        })
-      );
-      if (res?.payload)
-        dispatch(
-          readInvoiceDetails({ params: { filter: invoiceDetails?.id } })
-        ),
-          offerCreatedHandler();
-    } else {
-      const res = await dispatch(
-        updateRecieptStatus({
-          data: { id: id, invoiceStatus: staticEnums["InvoiceStatus"][status] },
-        })
-      );
-      if (res?.payload)
-        dispatch(
-          readInvoiceDetails({ params: { filter: invoiceDetails?.id } })
-        ),
-          offerCreatedHandler();
-    }
-  };
-
-  const handlePaymentStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "invoice") {
-      const res = await dispatch(
-        updateInvoicePaymentStatus({
-          data: { id: id, paymentType: staticEnums["PaymentType"][status] },
-        })
-      );
-      if (res?.payload) offerCreatedHandler();
-    } else {
-      const res = await dispatch(
-        updateRecieptPaymentStatus({
-          data: { id: id, paymentType: staticEnums["PaymentType"][status] },
-        })
-      );
-      if (res?.payload) offerCreatedHandler();
-    }
-  };
-
-  const onNextHandle = () => {
-    router.pathname = "/offers/pdf-preview";
-  };
-
-  const handleInvoiceUpdate = () => {
-    router.pathname = "/invoices/update-invoice";
-    router.query = { invoice: invoiceDetails?.id };
-    updateQuery(router, router.locale as string);
   };
 
   return {

@@ -463,6 +463,11 @@ export type GenerateInvoiceFormField = (
   data?: SubInvoiceTableRowTypes
 ) => FormField[];
 
+export type GeneratePaidDateInvoiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader?: boolean
+) => FormField[];
+
 // Contract formfield
 export type GenerateOfferFormField = (
   register: UseFormRegister<FieldValues>,
