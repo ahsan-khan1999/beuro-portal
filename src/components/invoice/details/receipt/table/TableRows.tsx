@@ -130,15 +130,16 @@ const TableRows = ({
                     dropDownIconClassName={`text-[#fff]`}
                     dropDownItemsContainerClassName="w-full"
                     isSecondLastIndex={
-                      collectiveInvoice?.length <= 2
-                        ? false
-                        : index === collectiveInvoice?.length - 2
+                      collectiveInvoice &&
+                      collectiveInvoice.length > 5 &&
+                      index === collectiveInvoice?.length - 2
                     }
                     isLastIndex={
-                      collectiveInvoice?.length <= 2
-                        ? false
-                        : index === collectiveInvoice?.length - 1
+                      collectiveInvoice &&
+                      collectiveInvoice?.length > 5 &&
+                      index === collectiveInvoice?.length - 1
                     }
+                    isPayment={true}
                   />
                 </span>
                 <span className="py-4" onClick={(e) => e.stopPropagation()}>
@@ -168,18 +169,19 @@ const TableRows = ({
                     } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
                     dropDownTextClassName="text-white text-base font-medium"
                     dropDownIconClassName={`text-[#fff]`}
-                    dropDownItemsContainerClassName="w-fit"
+                    dropDownItemsContainerClassName="w-full"
                     key={item.id}
                     isSecondLastIndex={
-                      collectiveInvoice?.length <= 2
-                        ? false
-                        : index === collectiveInvoice?.length - 2
+                      collectiveInvoice &&
+                      collectiveInvoice?.length > 5 &&
+                      index === collectiveInvoice?.length - 2
                     }
                     isLastIndex={
-                      collectiveInvoice?.length <= 2
-                        ? false
-                        : index === collectiveInvoice?.length - 1
+                      collectiveInvoice &&
+                      collectiveInvoice?.length > 5 &&
+                      index === collectiveInvoice?.length - 1
                     }
+                    isContract={true}
                   />
                 </span>
               </div>

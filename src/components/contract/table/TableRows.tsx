@@ -158,13 +158,13 @@ const TableRows = ({
                     dropDownItemsContainerClassName="w-full"
                     isSecondLastIndex={
                       dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 2
+                      dataToAdd?.length > 5 &&
+                      index === dataToAdd?.length - 2
                     }
                     isLastIndex={
                       dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 1
+                      dataToAdd?.length > 5 &&
+                      index === dataToAdd?.length - 1
                     }
                     isPayment={true}
                   />
@@ -214,13 +214,13 @@ const TableRows = ({
                     dropDownItemsContainerClassName="w-full"
                     isSecondLastIndex={
                       dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 2
+                      dataToAdd?.length > 5 &&
+                      index === dataToAdd?.length - 2
                     }
                     isLastIndex={
                       dataToAdd &&
-                      dataToAdd.length > 5 &&
-                      index === dataToAdd.length - 1
+                      dataToAdd?.length > 5 &&
+                      index === dataToAdd?.length - 1
                     }
                     isContract={true}
                   />

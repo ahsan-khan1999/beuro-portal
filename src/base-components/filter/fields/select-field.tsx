@@ -51,7 +51,7 @@ export default function SelectField({
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
 
   const handleItemSelected = (selectedValue: string, selectedIndex: number) => {
-    options.forEach(({ label, value }, index) => {
+    options?.forEach(({ label, value }, index) => {
       if (selectedIndex === index) {
         setSelectedLabel(label);
         handleChange(selectedValue);
@@ -122,11 +122,12 @@ export default function SelectField({
               </div>
             )}
             <div
-              className="mt-2 h-full max-h-[150px] min-h-fit overflow-x-hidden overflow-y-auto"
+              style={{ maxHeight: "150px" }}
+              className="mt-2 min-h-fit overflow-x-hidden overflow-y-auto"
               id="dropdownSerchBar"
             >
               <div className="flex-col space-y-2">
-                {options.map(({ label, value }, idx) => (
+                {options?.map(({ label, value }, idx) => (
                   <div
                     className="flex justify-start px-2 py-1 hover:bg-[#eaebec] rounded-sm cursor-pointer mr-1 hoverTransetion"
                     key={idx}

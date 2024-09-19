@@ -330,12 +330,11 @@ export const useEmptyStates = (
     [EmptyStateType.hasData]: CurrentComponent,
     [EmptyStateType.loading]: <CustomLoader />,
     [EmptyStateType.hasNoData]: (
-      <div className="mt-6">
+      <div className="mt-6 flex items-center justify-center">
         <NoDataEmptyState />
       </div>
     ),
   };
-  // const data = useMemo(() => lookup[isEmpty], [isEmpty]);
   const data = lookup[isEmpty];
   return data;
 };
@@ -355,12 +354,11 @@ export const useAdminEmptyStates = (
     [EmptyStateType.hasData]: CurrentComponent,
     [EmptyStateType.loading]: <CustomPuffLoader />,
     [EmptyStateType.hasNoData]: (
-      <div className="mt-6">
+      <div className="mt-6 flex items-center justify-center">
         <NoDataEmptyState />
       </div>
     ),
   };
-  // const data = useMemo(() => lookup[isEmpty], [isEmpty]);
   const data = lookup[isEmpty];
   return data;
 };

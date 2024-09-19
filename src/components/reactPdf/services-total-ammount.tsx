@@ -308,12 +308,43 @@ export const ServicesTotalAmount = ({
                   {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                 </Text>
               </View>
+              {payments &&
+                payments?.map((item, index) => {
+                  return (
+                    <View
+                      style={styles.subInvoicepaidAmountSection}
+                      key={index}
+                    >
+                      <Text style={styles.text}>
+                        {langContent[language as keyof typeof langContent]
+                          ?.paid_amount || "Bezahlter Betrag"}
+                        {payments?.length > 1 ? ` ${index + 1}:` : ":"}
+                      </Text>
+                      <Text style={styles.paidText}>
+                        {langContent[language as keyof typeof langContent]
+                          ?.payment_method || "Zahlungsmethode"}
+                        ({item?.paymentType}),
+                        {item?.paidDate
+                          ? ` (${pdfDateFormat(
+                              item.paidDate,
+                              language || "de"
+                            )})`
+                          : ""}
+                      </Text>
+                      <Text style={styles.text}>
+                        -{item?.paidAmount?.toFixed(2)}
+                        {systemSettings?.currency}
+                      </Text>
+                    </View>
+                  );
+                })}
+
               {Number(invoiceAmount) > 0 && (
                 <View>
                   <View style={styles.paidAmountSection}>
                     <Text style={styles.text}>
                       {langContent[language as keyof typeof langContent]
-                        ?.paid_amount || "Bezahlter Betrag"}
+                        ?.total_paid_amount || "Bezahlter Betrag"}
                       :
                     </Text>
                     <Text style={styles.text}>

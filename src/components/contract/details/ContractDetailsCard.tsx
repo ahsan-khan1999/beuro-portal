@@ -247,7 +247,7 @@ const ContractDetailsCard = ({
                   color: `${getEmailColor(contractDetails?.emailStatus)}`,
                 }}
               >
-                {translate(`contract_status.${contractDetails?.emailStatus}`)}
+                {translate(`email_status.${contractDetails?.emailStatus}`)}
               </div>
             )}
           </div>
