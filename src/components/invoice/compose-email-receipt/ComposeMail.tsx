@@ -8,13 +8,15 @@ import React from "react";
 
 const ComposeMail = () => {
   const router = useRouter();
-  const defaultClassName = "";
+
   const onNextHandle = () => {
     router.push("/contract/pdf-preview");
   };
+
   const backRouteHandler = () => {
     router.push("/contract/details");
   };
+
   const {
     fields,
     control,
@@ -40,9 +42,11 @@ const ComposeMail = () => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return (
     <>
       <ContractFormCard>
@@ -56,7 +60,6 @@ const ComposeMail = () => {
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </ContractFormCard>

@@ -124,6 +124,7 @@ export const useInvoiceEmail = (
       dispatch(setContentDetails(selectedContent));
     }
   };
+
   const fields = InvoiceEmailPreviewFormField(
     register,
     loading,

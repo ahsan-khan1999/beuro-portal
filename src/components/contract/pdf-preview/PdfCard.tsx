@@ -45,7 +45,7 @@ const PdfCard = ({
 
     router.push({
       pathname: "/contract/details",
-      query: { ...queryParams, offer: contractDetails?.id },
+      query: { ...queryParams, status: "None", offer: contractDetails?.id },
     });
   };
 
