@@ -11,9 +11,11 @@ const OfferEmail = () => {
   const onNextHandle = () => {
     router.push("/offer/pdf-preview");
   };
+
   const backRouteHandler = () => {
     router.push("/offer/details");
   };
+
   return (
     <Layout>
       <MailDetailsCard />

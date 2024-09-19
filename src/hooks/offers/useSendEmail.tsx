@@ -4,7 +4,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { setContentDetails } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
@@ -28,6 +28,7 @@ export const useSendEmail = (
   const isMail = router.query?.isMail;
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
   const { content, contentDetails } = useAppSelector((state) => state.content);
+  const [isMailSend, setIsMailSend] = useState(false);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (offerDetails?.id &&
       transformAttachments(
@@ -112,6 +113,11 @@ export const useSendEmail = (
     setValue
   );
 
+  useMemo(() => {
+    isMailSend &&
+      dispatch(updateModalType({ type: ModalType.LOADING_MAIL_GIF }));
+  }, [isMailSend]);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // const apiData = {
     //   id: offerDetails?.id,
@@ -137,10 +143,14 @@ export const useSendEmail = (
         //   return newUrl;
         // }),
       };
-
+      setIsMailSend(true);
       const res = await dispatch(sendOfferEmail({ data: apiData }));
+
       if (res?.payload) {
+        setIsMailSend(false);
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      } else {
+        setIsMailSend(false);
       }
     } else {
       const updatedData = {

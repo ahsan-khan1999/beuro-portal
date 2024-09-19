@@ -10,6 +10,7 @@ import { useOfferPdf } from "@/hooks/offers/useOfferPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 const OfferPdfPriview = () => {
   const {
@@ -46,6 +47,7 @@ const OfferPdfPriview = () => {
         route={onClose}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {
