@@ -38,7 +38,7 @@ pipelines:
                 SERVER: $SERVER
                 REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
                 LOCAL_PATH: "${BITBUCKET_CLONE_DIR}/"
-                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/"
+                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/  --exclude=node_modules/"
             - echo "Build Transported...!"
             - pipe: atlassian/ssh-run:0.8.1
               variables:
@@ -82,7 +82,7 @@ pipelines:
                 SERVER: $SERVER
                 REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
                 LOCAL_PATH: "${BITBUCKET_CLONE_DIR}/"
-                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/"
+                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/  --exclude=node_modules/"
             - echo "Build Transported...!"
             - pipe: atlassian/ssh-run:0.8.1
               variables:
@@ -180,7 +180,7 @@ pipelines:
                 SERVER: $SERVER
                 REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
                 LOCAL_PATH: "${BITBUCKET_CLONE_DIR}/"
-                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/"
+                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/  --exclude=node_modules/"
             - echo "Build Transported...!"
             - pipe: atlassian/ssh-run:0.8.1
               variables:
