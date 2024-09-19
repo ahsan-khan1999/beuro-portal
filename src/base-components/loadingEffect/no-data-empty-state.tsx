@@ -35,7 +35,10 @@ export default function NoDataEmptyState({
     className
   );
 
-  const containerClasses = combineClasses("bg-white px-6", containerClassName);
+  const containerClasses = combineClasses(
+    "xMini:bg-white xMini:px-6",
+    containerClassName
+  );
 
   const imgClasses = combineClasses("w-fit h-fit", imgClassName);
 

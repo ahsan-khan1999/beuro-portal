@@ -227,7 +227,7 @@ export const LeadsTableRows = ({
                               : item?.leadStatus === "Close"
                               ? "bg-[#45C769]"
                               : "bg-[#FF0000]"
-                          } w-full rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                          } w-full rounded-lg px-4 py-[5px] flex items-center justify-center`}
                           dropDownTextClassName={`${
                             item?.leadStatus === "InProcess"
                               ? "text-black"

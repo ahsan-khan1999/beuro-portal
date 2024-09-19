@@ -88,21 +88,21 @@ const TableRows = ({
                       item.sentEmail === item.totalEmail
                         ? "bg-[#FE9244]"
                         : "bg-[#4A13E7]"
-                    } text-white px-2 py-1 text-center rounded-md w-full text-sm`}
+                    } text-white px-2 py-2 text-center rounded-md w-full text-sm`}
                   >
                     {item.sentEmail + "/" + item.totalEmail + " Sent"}
                   </div>
                 </span>
                 <div className="py-4 flex justify-center items-center">
                   <span
-                    className={`bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm overflow-hidden max-w-[100px]`}
+                    className={`bg-[#4A13E7] text-white px-2 py-2 rounded-tl-md rounded-bl-md text-center text-sm overflow-hidden max-w-[100px]`}
                   >
                     {!Number.isInteger(item?.paidAmount)
                       ? Number(item?.paidAmount)?.toFixed(2)
                       : item?.paidAmount}
                   </span>
                   <span
-                    className={`bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm overflow-hidden max-w-[100px]`}
+                    className={`bg-[#EDE7FD] text-[#393939] px-2 py-2 rounded-tr-md rounded-br-md text-center text-sm overflow-hidden max-w-[100px]`}
                   >
                     {!Number.isInteger(item?.remainingAmount)
                       ? Number(item?.remainingAmount)?.toFixed(2)
@@ -114,7 +114,7 @@ const TableRows = ({
                   <div
                     className={`bg-[${getInvoiceStatusColor(
                       item.invoiceStatus
-                    )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
+                    )}] text-white px-2 py-2 text-center rounded-md min-w-[70px] w-full text-sm`}
                   >
                     {translate(`invoice_status.${item.invoiceStatus}`)}
                   </div>
