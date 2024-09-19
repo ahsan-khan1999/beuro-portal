@@ -16,7 +16,6 @@ const ComposeMail = () => {
     router.push("/contract/details");
   };
 
-  const defaultClassName = "";
   const {
     fields,
     control,
@@ -42,9 +41,11 @@ const ComposeMail = () => {
       />
     ),
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return (
     <>
       <ContractFormCard>
@@ -57,7 +58,6 @@ const ComposeMail = () => {
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </ContractFormCard>

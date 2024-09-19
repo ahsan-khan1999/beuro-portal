@@ -104,6 +104,7 @@ export const useContractEmail = (
       dispatch(setContentDetails(selectedContent));
     }
   };
+
   const fields = ContractEmailPreviewFormField(
     register,
     loading,

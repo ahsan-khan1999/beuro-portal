@@ -97,7 +97,7 @@ const TableRows = ({
                         item.emailStatus
                       )}`,
                     }}
-                    className="text-white px-2 py-1 text-center rounded-md text-sm flex justify-center items-center min-w-[70px] w-full"
+                    className="text-white px-2 py-2 text-center rounded-md text-sm flex justify-center items-center min-w-[70px] w-full"
                   >
                     {translate(`email_status.${item?.emailStatus}`)}
                   </div>
@@ -125,7 +125,7 @@ const TableRows = ({
                         : staticEnums["PaymentType"][item.paymentType] === 1
                         ? "bg-[#4A13E7]"
                         : "bg-[#FE9244]"
-                    } w-full rounded-lg !py-[3px] flex items-center justify-center gap-x-1`}
+                    } w-full rounded-lg !py-[5px] flex items-center justify-center gap-x-1`}
                     dropDownTextClassName="text-white text-base font-medium"
                     dropDownIconClassName={`text-[#fff]`}
                     dropDownItemsContainerClassName="w-full"
@@ -166,7 +166,7 @@ const TableRows = ({
                         : staticEnums["InvoiceStatus"][item.invoiceStatus] === 2
                         ? "bg-[#4A13E7]"
                         : "bg-red"
-                    } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                    } w-full !py-[5px] rounded-lg flex items-center justify-center gap-x-1`}
                     dropDownTextClassName="text-white text-base font-medium"
                     dropDownIconClassName={`text-[#fff]`}
                     dropDownItemsContainerClassName="w-full"

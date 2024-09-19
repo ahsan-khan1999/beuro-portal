@@ -331,7 +331,10 @@ export const useEmptyStates = (
     [EmptyStateType.loading]: <CustomLoader />,
     [EmptyStateType.hasNoData]: (
       <div className="mt-6 flex items-center justify-center">
-        <NoDataEmptyState />
+        <NoDataEmptyState
+          containerClassName="xMini:py-[153px]"
+          className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[531px]"
+        />
       </div>
     ),
   };
@@ -355,7 +358,10 @@ export const useAdminEmptyStates = (
     [EmptyStateType.loading]: <CustomPuffLoader />,
     [EmptyStateType.hasNoData]: (
       <div className="mt-6 flex items-center justify-center">
-        <NoDataEmptyState />
+        <NoDataEmptyState
+          containerClassName="xMini:py-[153px]"
+          className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[531px]"
+        />
       </div>
     ),
   };

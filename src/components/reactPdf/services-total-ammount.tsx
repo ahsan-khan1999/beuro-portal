@@ -43,6 +43,12 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     color: "#565656",
   },
+  paidValue: {
+    fontSize: 8,
+    fontWeight: 600,
+    fontStyle: "semibold",
+    color: "#565656",
+  },
   discountDescriptionText: {
     fontSize: 8,
     fontWeight: 400,
@@ -89,6 +95,24 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
 
+  amountSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 20,
+  },
+
+  paymentSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 10,
+  },
+
+  paymentValueSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 3,
+  },
+
   receiptPaidAmountSection: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -103,6 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 5,
   },
+
   discountDescription: {
     marginTop: 6,
     color: "#404040",
@@ -180,6 +205,7 @@ export const ServicesTotalAmount = ({
       total_after_discount: "Total after Discount",
       grand_total: "Grand Total",
       paid_amount: "Paid Amount",
+      paid_date: "Paid Date",
       unpaid_amount: "Unpaid Amount",
       due_amount: "Due Amount",
       total_paid_amount: "Total Paid Amount",
@@ -195,6 +221,7 @@ export const ServicesTotalAmount = ({
       total_after_discount: "Gesamtsumme nach Rabatt",
       grand_total: "Gesamtsumme",
       paid_amount: "Bezahlter Betrag",
+      paid_date: "Bezahltes Datum",
       unpaid_amount: "Unbezahlter Betrag",
       due_amount: "Fälliger Betrag",
       total_paid_amount: "Bezahlter Gesamtbetrag",
@@ -315,22 +342,38 @@ export const ServicesTotalAmount = ({
                       style={styles.subInvoicepaidAmountSection}
                       key={index}
                     >
-                      <Text style={styles.text}>
-                        {langContent[language as keyof typeof langContent]
-                          ?.paid_amount || "Bezahlter Betrag"}
-                        {payments?.length > 1 ? ` ${index + 1}:` : ":"}
-                      </Text>
-                      <Text style={styles.paidText}>
-                        {langContent[language as keyof typeof langContent]
-                          ?.payment_method || "Zahlungsmethode"}
-                        ({item?.paymentType}),
-                        {item?.paidDate
-                          ? ` (${pdfDateFormat(
-                              item.paidDate,
-                              language || "de"
-                            )})`
-                          : ""}
-                      </Text>
+                      <View style={styles.amountSection}>
+                        <Text style={styles.text}>
+                          {langContent[language as keyof typeof langContent]
+                            ?.paid_amount || "Bezahlter Betrag"}
+                          {payments?.length > 1 ? ` ${index + 1}:` : ":"}
+                        </Text>
+                        <View style={styles.paymentSection}>
+                          <View style={styles.paymentValueSection}>
+                            <Text style={styles.paidText}>
+                              {langContent[language as keyof typeof langContent]
+                                ?.payment_method || "Zahlungsmethode"}
+                              :
+                            </Text>
+                            <Text style={styles.paidValue}>
+                              {item?.paymentType}
+                            </Text>
+                          </View>
+                          {item?.paidDate && (
+                            <View style={styles.paymentValueSection}>
+                              <Text style={styles.paidText}>
+                                {langContent[
+                                  language as keyof typeof langContent
+                                ]?.paid_date || "Bezahltes Datum"}
+                                :
+                              </Text>
+                              <Text style={styles.paidValue}>
+                                {pdfDateFormat(item.paidDate, language || "de")}
+                              </Text>
+                            </View>
+                          )}
+                        </View>
+                      </View>
                       <Text style={styles.text}>
                         -{item?.paidAmount?.toFixed(2)}
                         {systemSettings?.currency}
@@ -421,22 +464,42 @@ export const ServicesTotalAmount = ({
                           style={styles.subInvoicepaidAmountSection}
                           key={index}
                         >
-                          <Text style={styles.text}>
-                            {langContent[language as keyof typeof langContent]
-                              ?.paid_amount || "Bezahlter Betrag"}
-                            {payments?.length > 1 ? ` ${index + 1}:` : ":"}
-                          </Text>
-                          <Text style={styles.paidText}>
-                            {langContent[language as keyof typeof langContent]
-                              ?.payment_method || "Zahlungsmethode"}
-                            ({item?.paymentType}),
-                            {item?.paidDate
-                              ? ` (${pdfDateFormat(
-                                  item.paidDate,
-                                  language || "de"
-                                )})`
-                              : ""}
-                          </Text>
+                          <View style={styles.amountSection}>
+                            <Text style={styles.text}>
+                              {langContent[language as keyof typeof langContent]
+                                ?.paid_amount || "Bezahlter Betrag"}
+                              {payments?.length > 1 ? ` ${index + 1}:` : ":"}
+                            </Text>
+                            <View style={styles.paymentSection}>
+                              <View style={styles.paymentValueSection}>
+                                <Text style={styles.paidText}>
+                                  {langContent[
+                                    language as keyof typeof langContent
+                                  ]?.payment_method || "Zahlungsmethode"}
+                                  :
+                                </Text>
+                                <Text style={styles.paidValue}>
+                                  {item?.paymentType}
+                                </Text>
+                              </View>
+                              {item?.paidDate && (
+                                <View style={styles.paymentValueSection}>
+                                  <Text style={styles.paidText}>
+                                    {langContent[
+                                      language as keyof typeof langContent
+                                    ]?.paid_date || "Bezahltes Datum"}
+                                    :
+                                  </Text>
+                                  <Text style={styles.paidValue}>
+                                    {pdfDateFormat(
+                                      item.paidDate,
+                                      language || "de"
+                                    )}
+                                  </Text>
+                                </View>
+                              )}
+                            </View>
+                          </View>
                           <Text style={styles.text}>
                             -{item?.paidAmount?.toFixed(2)}
                             {systemSettings?.currency}
@@ -497,22 +560,42 @@ export const ServicesTotalAmount = ({
                   payments?.map((item, index) => {
                     return (
                       <View style={styles.receiptPaidAmountSection} key={index}>
-                        <Text style={styles.text}>
-                          {langContent[language as keyof typeof langContent]
-                            ?.paid_amount || "Bezahlter Betrag"}
-                          {payments?.length > 1 ? ` ${index + 1}:` : ":"}
-                        </Text>
-                        <Text style={styles.paidText}>
-                          {langContent[language as keyof typeof langContent]
-                            ?.payment_method || "Zahlungsmethode"}
-                          ({item?.paymentType}),
-                          {item?.paidDate
-                            ? ` (${pdfDateFormat(
-                                item.paidDate,
-                                language || "de"
-                              )})`
-                            : ""}
-                        </Text>
+                        <View style={styles.amountSection}>
+                          <Text style={styles.text}>
+                            {langContent[language as keyof typeof langContent]
+                              ?.paid_amount || "Bezahlter Betrag"}
+                            {payments?.length > 1 ? ` ${index + 1}:` : ":"}
+                          </Text>
+                          <View style={styles.paymentSection}>
+                            <View style={styles.paymentValueSection}>
+                              <Text style={styles.paidText}>
+                                {langContent[
+                                  language as keyof typeof langContent
+                                ]?.payment_method || "Zahlungsmethode"}
+                                :
+                              </Text>
+                              <Text style={styles.paidValue}>
+                                {item?.paymentType}
+                              </Text>
+                            </View>
+                            {item?.paidDate && (
+                              <View style={styles.paymentValueSection}>
+                                <Text style={styles.paidText}>
+                                  {langContent[
+                                    language as keyof typeof langContent
+                                  ]?.paid_date || "Bezahltes Datum"}
+                                  :
+                                </Text>
+                                <Text style={styles.paidValue}>
+                                  {pdfDateFormat(
+                                    item.paidDate,
+                                    language || "de"
+                                  )}
+                                </Text>
+                              </View>
+                            )}
+                          </View>
+                        </View>
                         <Text style={styles.text}>
                           -{item?.paidAmount?.toFixed(2)}
                           {systemSettings?.currency}

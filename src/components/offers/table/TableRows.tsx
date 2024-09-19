@@ -112,7 +112,7 @@ const TableRows = ({
                   <div
                     className={`bg-[${getEmailColor(
                       item.emailStatus
-                    )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
+                    )}] text-white px-2 py-2 text-center rounded-md min-w-[70px] w-full text-sm`}
                   >
                     {translate(`email_status.${item?.emailStatus}`)}
                   </div>
@@ -140,7 +140,7 @@ const TableRows = ({
                         : staticEnums["PaymentType"][item?.paymentType] === 1
                         ? "bg-[#4A13E7]"
                         : "bg-[#FE9244]"
-                    } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                    } w-full !py-[5px] rounded-lg flex items-center justify-center gap-x-1`}
                     dropDownTextClassName="text-white text-base font-medium"
                     dropDownIconClassName={`text-[#fff]`}
                     dropDownItemsContainerClassName="w-full"
@@ -189,7 +189,7 @@ const TableRows = ({
                           item.offerStatus
                         )}`,
                       }}
-                      className="text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm"
+                      className="text-white px-2 py-2 text-center rounded-md min-w-[70px] w-full text-sm"
                     >
                       {translate(`offer_status.${item.offerStatus}`)}
                     </div>
@@ -217,7 +217,7 @@ const TableRows = ({
                           : staticEnums["OfferStatus"][item.offerStatus] === 2
                           ? "bg-[#FF376F]"
                           : "bg-[#FF0000]"
-                      } w-full !py-[3px] rounded-lg flex items-center justify-center gap-x-1`}
+                      } w-full !py-[5px] rounded-lg flex items-center justify-center gap-x-1`}
                       dropDownIconClassName={"text-white"}
                       dropDownTextClassName="text-white text-base font-medium"
                       dropDownItemsContainerClassName="w-full"

@@ -124,6 +124,7 @@ export const useReceiptEmail = (
       dispatch(setContentDetails(selectedContent));
     }
   };
+
   const onSuccess = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
 

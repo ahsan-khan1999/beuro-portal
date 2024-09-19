@@ -193,7 +193,7 @@ export const AppointmentTableRows = ({
                         : item?.appointmentStatus === "Completed"
                         ? "bg-[#45C769]"
                         : "bg-[#D80027]"
-                    } w-full rounded-lg px-4 py-[5px] flex items-center justify-center`}
+                    } w-full rounded-lg px-4 !py-[5px] flex items-center justify-center`}
                     dropDownTextClassName="text-white text-base font-medium me-1"
                     dropDownItemsContainerClassName="w-full"
                     dropDownIconClassName="text-white"
