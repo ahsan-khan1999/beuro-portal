@@ -25,7 +25,6 @@ export default function Customers() {
 
   const CurrentComponent = useEmptyStates(
     <TableRow currentPageRows={currentPageRows} />,
-    // currentPageRows?.length > 0,
     totalCount !== 0,
     isLoading
   );

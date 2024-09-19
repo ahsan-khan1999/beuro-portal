@@ -31,16 +31,14 @@ export default function NoDataEmptyState({
   const { t: translate } = useTranslation();
 
   const defaultClasses = combineClasses(
-    "py-10 px-6 bg-[#E5EFFF] rounded-3xl xMini:w-[525px]",
+    "py-10 px-6 bg-[#E5EFFF] rounded-3xl w-fit",
     className
   );
 
-  const containerClasses = combineClasses(
-    "xMini:flex items-center justify-center bg-white py-[153px] px-3 xMini:px-0",
-    containerClassName
-  );
+  const containerClasses = combineClasses("bg-white px-6", containerClassName);
 
   const imgClasses = combineClasses("w-fit h-fit", imgClassName);
+
   const textClasses = combineClasses(
     "text-[#222B45] font-normal text-2xl",
     textClassName

@@ -151,17 +151,7 @@ const OffersDetailsData = ({
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
         <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 2xl:mb-0">
-          {tabSection.map((item, index) => (
-            // <DetailsTab
-            //   key={index}
-            //   isSelected={tabType === index}
-            //   setTabType={setTabType}
-            //   tabType={tabType}
-            //   name={item.name}
-            //   icon={item.icon}
-            //   selectedTab={index}
-            //   onItemSelected={handleScrollToTop}
-            // />
+          {tabSection?.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
               isToggle={true}
@@ -177,7 +167,6 @@ const OffersDetailsData = ({
           ))}
         </div>
         <div className="w-full mt-5">
-          {/* <SwitchedComp handleUpdateDiscount={handleUpdateDiscount} /> */}
           <OfferEditImages
             shareImgModal={shareImgModal}
             handleImagesUpload={handleImagesUpload}
@@ -187,7 +176,7 @@ const OffersDetailsData = ({
             name={name}
             heading={heading}
             handleImageSlider={handleImageSlider}
-            // className="2xl:w-[247px]"
+            isOffer={true}
           />
         </div>
       </div>
@@ -200,7 +189,7 @@ const OffersDetailsData = ({
               <CustomLoader />
             </div>
           ) : (
-            componentArray.map((component, index) => (
+            componentArray?.map((component, index) => (
               <div key={index} className="w-full">
                 {component}
               </div>

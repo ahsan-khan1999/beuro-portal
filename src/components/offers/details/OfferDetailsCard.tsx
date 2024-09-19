@@ -348,6 +348,28 @@ const OfferDetailsCard = ({
           <div className="flex justify-between gap-x-3 items-center mt-2 md:mt-0">
             <div className="flex items-center gap-[11px]">
               <span className="text-[#4D4D4D] font-normal text-base">
+                {translate("offers.card_content.images")}:
+              </span>
+
+              <span
+                className="cursor-pointer"
+                onClick={(e) =>
+                  handleImageUpload(
+                    offerDetails?.id,
+                    offerDetails?.offerNumber,
+                    name,
+                    heading,
+                    e
+                  )
+                }
+              >
+                <ImageUploadIcon
+                  pathClass={offerDetails?.isImageAdded ? "#FF0000" : "#4A13E7"}
+                />
+              </span>
+            </div>
+            <div className="flex items-center gap-[11px]">
+              <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("offers.card_content.notes")}:
               </span>
 
@@ -367,28 +389,6 @@ const OfferDetailsCard = ({
                   pathClass={
                     offerDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
                   }
-                />
-              </span>
-            </div>
-            <div className="flex items-center gap-[11px]">
-              <span className="text-[#4D4D4D] font-normal text-base">
-                {translate("offers.card_content.images")}:
-              </span>
-
-              <span
-                className="cursor-pointer"
-                onClick={(e) =>
-                  handleImageUpload(
-                    offerDetails?.id,
-                    offerDetails?.offerNumber,
-                    name,
-                    heading,
-                    e
-                  )
-                }
-              >
-                <ImageUploadIcon
-                  pathClass={offerDetails?.isImageAdded ? "#FF0000" : "#4A13E7"}
                 />
               </span>
             </div>

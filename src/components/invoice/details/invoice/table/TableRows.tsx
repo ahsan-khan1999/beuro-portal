@@ -143,15 +143,16 @@ const TableRows = ({
                       dropDownIconClassName={`text-[#fff]`}
                       dropDownItemsContainerClassName="w-full"
                       isSecondLastIndex={
-                        dataToAdd?.length <= 2
-                          ? false
-                          : index === dataToAdd?.length - 2
+                        dataToAdd &&
+                        dataToAdd?.length > 5 &&
+                        index === dataToAdd?.length - 2
                       }
                       isLastIndex={
-                        dataToAdd?.length <= 2
-                          ? false
-                          : index === dataToAdd?.length - 1
+                        dataToAdd &&
+                        dataToAdd?.length > 5 &&
+                        index === dataToAdd?.length - 1
                       }
+                      isPayment={true}
                     />
                   </div>
                 </span>
@@ -185,15 +186,16 @@ const TableRows = ({
                     dropDownIconClassName={`text-[#fff]`}
                     dropDownItemsContainerClassName="w-full"
                     isSecondLastIndex={
-                      dataToAdd?.length <= 2
-                        ? false
-                        : index === dataToAdd?.length - 2
+                      dataToAdd &&
+                      dataToAdd?.length > 5 &&
+                      index === dataToAdd?.length - 2
                     }
                     isLastIndex={
-                      dataToAdd?.length <= 2
-                        ? false
-                        : index === dataToAdd?.length - 1
+                      dataToAdd &&
+                      dataToAdd?.length > 5 &&
+                      index === dataToAdd?.length - 1
                     }
+                    isContract={true}
                   />
                 </span>
               </div>

@@ -257,6 +257,7 @@ export interface MainInvoicePdfDetailTableRowTypes {
   additionalDetails: string;
   stage: ComponentsType;
   leadID: Lead;
+  payments: PaymentsDataType[];
 }
 
 interface Customers {

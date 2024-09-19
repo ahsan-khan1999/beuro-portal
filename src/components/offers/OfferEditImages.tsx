@@ -30,6 +30,7 @@ export interface DetailImgUploadProps {
   heading: string;
   className?: string;
   isAgent?: boolean;
+  isOffer?: boolean;
 }
 
 const OfferEditImages = ({
@@ -43,6 +44,7 @@ const OfferEditImages = ({
   heading,
   className,
   isAgent,
+  isOffer,
 }: DetailImgUploadProps) => {
   const { t: translate } = useTranslation();
   const { images } = useAppSelector((state) => state.image);
@@ -104,9 +106,11 @@ const OfferEditImages = ({
           <div className="pb-4 max-h-[400px] overflow-y-scroll border-t-4 border-t-[#4A13E7]">
             {
               <NoDataEmptyState
-                className="w-fit mx-2 xlg:w-[247px]"
+                className={`w-fit mx-auto ${
+                  isOffer ? "2xl:w-[247px]" : "xlg:w-[247px]"
+                } my-2`}
                 containerClassName="py-0 px-2"
-                imgClassName="w-20 h-20"
+                imgClassName="w-[80px] h-[80px]"
                 textClassName="text-lg text-center"
               />
             }

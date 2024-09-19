@@ -203,9 +203,8 @@ export const FollowUpNotificationBar = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="w-[90%] mx-4 my-3"
-            containerClassName="py-0"
-            // imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
+            className="my-3 w-full"
+            imgClassName="w-[120px] h-[112px]"
           />
         )}
 
