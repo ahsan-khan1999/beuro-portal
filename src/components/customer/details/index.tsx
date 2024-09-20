@@ -1,11 +1,11 @@
 import { Layout } from "@/layout";
 import React from "react";
-import DetailsData from "../DetailsData";
 import CustomerForm from "../CustomerForm";
 import { formatDateTimeToDate } from "@/utils/utility";
 import DetailsCard from "@/layout/customers/DetailsCard";
 import useCustomerDetail from "@/hooks/customer/useCustomerDetail";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { CustomerDetailsData } from "../customer-details-data";
 
 const CustomerDetails = () => {
   const {
@@ -26,12 +26,13 @@ const CustomerDetails = () => {
   return (
     <Layout>
       <DetailsCard>
-        <DetailsData
+        <CustomerDetailsData
           date={formatDateTimeToDate(customerDetail?.createdAt) as string}
           id={customerDetail?.refID}
           name={customerDetail?.createdBy?.fullName}
           handlePreviousClick={handlePreviousClick}
           handleDelete={deleteHandler}
+          customerDetails={customerDetail}
         />
       </DetailsCard>
       {loading ? (

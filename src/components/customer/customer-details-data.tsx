@@ -4,20 +4,55 @@ import { CustomerDetail } from "@/types/customer";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { updateQuery } from "@/utils/update-query";
 import { useRouter } from "next/router";
+import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
+import { OutlineButton } from "@/base-components/ui/button/outline-button";
+import localStoreUtil from "@/utils/localstore.util";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { setLeadDetails } from "@/api/slices/lead/leadSlice";
+import { getKeyByValue } from "@/utils/auth.util";
+import { staticEnums } from "@/utils/static";
 
-const DetailsData = ({
+export const CustomerDetailsData = ({
   date,
   id,
   name,
   handlePreviousClick,
   handleDelete,
+  customerDetails,
 }: CustomerDetail) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleBack = () => {
     router.pathname = "/customers";
     delete router.query["customer"];
     updateQuery(router, router.locale as string);
+  };
+
+  const leadCreateHandler = () => {
+    if (!customerDetails) return;
+
+    const formattedLeadDetails = {
+      id: "convert",
+      type: "Existing Customer",
+      customerID: customerDetails?.id,
+      customer: customerDetails?.id,
+      
+      customerDetail: {
+        fullName: customerDetails?.fullName,
+        customerType: customerDetails?.customerType,
+        email: customerDetails?.email,
+        phoneNumber:
+          customerDetails?.phoneNumber || customerDetails?.mobileNumber,
+        mobileNumber: customerDetails?.mobileNumber,
+        address: customerDetails?.address,
+        companyName: customerDetails?.companyName,
+        gender: customerDetails?.gender,
+      },
+    };
+
+    dispatch(setLeadDetails(formattedLeadDetails));
+    router.push("/leads/add");
   };
 
   return (
@@ -52,6 +87,16 @@ const DetailsData = ({
           </h1>
         </div>
         <div className="flex items-center gap-x-5">
+          <OutlineButton
+            inputType="button"
+            onClick={leadCreateHandler}
+            className="bg-white text-[#4B4B4B] w-fit border border-primary !h-10 hover:bg-transparent hover:text-primary"
+            text={translate("leads.card_content.lead_create")}
+            id="create lead"
+            iconAlt="create lead"
+            icon={createOfferIcon}
+          />
+
           <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center ">
             <Image
               src={deleteIcon}
@@ -90,5 +135,3 @@ const DetailsData = ({
     </>
   );
 };
-
-export default DetailsData;

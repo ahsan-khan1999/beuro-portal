@@ -1034,6 +1034,7 @@
     "card_content": {
       "heading": "Leads Details",
       "create_button": "Create Offer",
+      "lead_create":"Create Lead",
       "lead_id": "Lead ID",
       "status": "Status",
       "created_date": "Creation Date",

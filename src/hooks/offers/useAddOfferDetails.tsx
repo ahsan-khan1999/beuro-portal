@@ -51,8 +51,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     updateQuery(router, router.locale as string);
   };
 
-  console.log(offerDetails, "offerDetails");
-
   const schema = generateOfferDetailsValidationSchema(translate);
   const {
     register,
@@ -208,7 +206,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
-        // title: null,
         gender: null,
       });
     } else if (type === "Existing Customer" && offerDetails?.id) {

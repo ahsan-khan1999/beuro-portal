@@ -7,7 +7,6 @@ import {
 } from "react-hook-form";
 import { OffersTableRowTypes } from "./offers";
 import { Plan } from "./admin/plans";
-import { Company } from "./company";
 import { Report } from "./appointments";
 
 export interface CustomerTable {
@@ -20,6 +19,7 @@ export interface CustomerDetail {
   name?: string;
   handlePreviousClick: () => void;
   handleDelete: () => void;
+  customerDetails: Customers;
 }
 export interface CustomerLeadDetail {
   id: string;

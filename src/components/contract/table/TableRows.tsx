@@ -30,6 +30,7 @@ export interface ContractTableProps {
     type: string
   ) => void;
   handlePaymentStatusUpdate: (id: string, status: string, type: string) => void;
+  onTaskCreate: (id: string) => void;
 }
 
 const TableRows = ({
@@ -38,6 +39,7 @@ const TableRows = ({
   handleImageUpload,
   handleContractStatusUpdate,
   handlePaymentStatusUpdate,
+  onTaskCreate,
 }: ContractTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -95,7 +97,7 @@ const TableRows = ({
                     ? "bg-[#FFE3E3]"
                     : "bg-white"
                 } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-5 mlg:gap-x-1 xMaxSize:gap-x-4 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(120px,_120px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(65px,_65px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(80px,_80px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(65px,_65px),minmax(110px,_3fr)_minmax(110px,_110px)_minmax(85px,_85px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(150px,_150px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] maxLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(100px,_4fr)_minmax(100px,_100px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(90px,_90px)_minmax(140px,_140px)] ${
-                  index !== 0 && "border-t border-t-[#E7EAEE]"
+                  index !== 0 && "border-t border-t-[#E7EAEE] mb-1"
                 } ${index === 0 && "mt-2"}`}
               >
                 <span className="py-4 truncate">{item.contractNumber}</span>
@@ -118,9 +120,17 @@ const TableRows = ({
                 <span className="py-4 truncate mlg:hidden xLarge:block">
                   {item?.offerID?.total}
                 </span>
-                <span className="py-4 mlg:hidden xLarge:block">
-                  {formatDateString(item.createdAt)}
-                </span>
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="py-4 mlg:hidden xLarge:block"
+                >
+                  <p
+                    className="bg-primary hover:bg-buttonHover text-white px-2 py-2 text-center rounded-md w-full"
+                    onClick={() => onTaskCreate(item?.id)}
+                  >
+                    {translate("calendar.main_heading")}
+                  </p>
+                </div>
                 <span className="flex justify-center items-center">
                   <div
                     className={`bg-[${getEmailColor(

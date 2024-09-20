@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   totalSection: {
-    // backgroundColor: "#404F6A",
     borderRadius: 4,
     padding: 8,
     flexDirection: "row",
@@ -68,6 +67,17 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ccc",
     paddingBottom: 5,
     marginBottom: 5,
+  },
+  grandTotalSubSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottom: "1px",
+    borderBottomColor: "#ccc",
+    paddingBottom: 5,
+    // marginBottom: 5,
+    paddingTop: 5,
+    borderTop: "1px",
+    borderTopColor: "#ccc",
   },
   dueAmountSection: {
     flexDirection: "row",
@@ -320,26 +330,44 @@ export const ServicesTotalAmount = ({
 
           {isMainInvoice && (
             <View>
-              <View
-                style={{
-                  ...styles.totalSection,
-                  backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
-                }}
-              >
-                <Text style={styles.whiteText}>
-                  {langContent[language as keyof typeof langContent]
-                    ?.grand_total || "Gesamtsumme"}
-                  :
-                </Text>
-                <Text style={styles.whiteText}>
-                  {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
-                </Text>
-              </View>
+              {Number(invoiceAmount) > 0 ? (
+                <View style={styles.grandTotalSubSection}>
+                  <Text style={styles.text}>
+                    {langContent[language as keyof typeof langContent]
+                      ?.grand_total || "Gesamtsumme"}
+                    :
+                  </Text>
+                  <Text style={styles.text}>
+                    {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
+                  </Text>
+                </View>
+              ) : (
+                <View
+                  style={{
+                    ...styles.totalSection,
+                    backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                  }}
+                >
+                  <Text style={styles.whiteText}>
+                    {langContent[language as keyof typeof langContent]
+                      ?.grand_total || "Gesamtsumme"}
+                    :
+                  </Text>
+                  <Text style={styles.whiteText}>
+                    {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
+                  </Text>
+                </View>
+              )}
               {payments &&
                 payments?.map((item, index) => {
+                  const isLastItem = index === payments?.length - 1;
+
                   return (
                     <View
-                      style={styles.subInvoicepaidAmountSection}
+                      style={{
+                        ...styles.subInvoicepaidAmountSection,
+                        borderBottomWidth: isLastItem ? 0 : 1,
+                      }}
                       key={index}
                     >
                       <View style={styles.amountSection}>
@@ -384,19 +412,24 @@ export const ServicesTotalAmount = ({
 
               {Number(invoiceAmount) > 0 && (
                 <View>
-                  <View style={styles.paidAmountSection}>
-                    <Text style={styles.text}>
+                  <View
+                    style={{
+                      ...styles.totalSection,
+                      backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                    }}
+                  >
+                    <Text style={styles.whiteText}>
                       {langContent[language as keyof typeof langContent]
                         ?.total_paid_amount || "Bezahlter Betrag"}
                       :
                     </Text>
-                    <Text style={styles.text}>
+                    <Text style={styles.whiteText}>
                       -{Number(invoiceAmount).toFixed(2)}{" "}
                       {systemSettings?.currency}
                     </Text>
                   </View>
                   {Number(unPaidAmount) > 0 && (
-                    <View style={styles.subSection}>
+                    <View style={{ ...styles.subSection, paddingTop: 5 }}>
                       <Text style={styles.text}>
                         {langContent[language as keyof typeof langContent]
                           ?.unpaid_amount || "Unbezahlter Betrag"}
@@ -442,26 +475,46 @@ export const ServicesTotalAmount = ({
                   </Text>
                 </View>
                 <View>
-                  <View
-                    style={{
-                      ...styles.totalSection,
-                      backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
-                    }}
-                  >
-                    <Text style={styles.whiteText}>
-                      {langContent[language as keyof typeof langContent]
-                        ?.grand_total || "Gesamtsumme"}
-                      :
-                    </Text>
-                    <Text style={styles.whiteText}>
-                      {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
-                    </Text>
-                  </View>
+                  {Number(invoiceAmount) > 0 ? (
+                    <View style={styles.grandTotalSubSection}>
+                      <Text style={styles.text}>
+                        {langContent[language as keyof typeof langContent]
+                          ?.grand_total || "Gesamtsumme"}
+                        :
+                      </Text>
+                      <Text style={styles.text}>
+                        {Number(grandTotal).toFixed(2)}{" "}
+                        {systemSettings?.currency}
+                      </Text>
+                    </View>
+                  ) : (
+                    <View
+                      style={{
+                        ...styles.totalSection,
+                        backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                      }}
+                    >
+                      <Text style={styles.whiteText}>
+                        {langContent[language as keyof typeof langContent]
+                          ?.grand_total || "Gesamtsumme"}
+                        :
+                      </Text>
+                      <Text style={styles.whiteText}>
+                        {Number(grandTotal).toFixed(2)}{" "}
+                        {systemSettings?.currency}
+                      </Text>
+                    </View>
+                  )}
+
                   {payments &&
                     payments?.map((item, index) => {
+                      const isLastItem = index === payments?.length - 1;
                       return (
                         <View
-                          style={styles.subInvoicepaidAmountSection}
+                          style={{
+                            ...styles.subInvoicepaidAmountSection,
+                            borderBottomWidth: isLastItem ? 0 : 1,
+                          }}
                           key={index}
                         >
                           <View style={styles.amountSection}>
@@ -509,13 +562,18 @@ export const ServicesTotalAmount = ({
                     })}
 
                   {Number(invoiceAmount) > 0 && (
-                    <View style={styles.subInvoicepaidAmountSection}>
-                      <Text style={styles.text}>
+                    <View
+                      style={{
+                        ...styles.totalSection,
+                        backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                      }}
+                    >
+                      <Text style={styles.whiteText}>
                         {langContent[language as keyof typeof langContent]
                           ?.total_paid_amount || "Bezahlter Gesamtbetrag"}
                         :
                       </Text>
-                      <Text style={styles.text}>
+                      <Text style={styles.whiteText}>
                         -{Number(invoiceAmount).toFixed(2)}
                         {systemSettings?.currency}
                       </Text>
@@ -620,7 +678,7 @@ export const ServicesTotalAmount = ({
                       {Number(grandTotal).toFixed(2)} {systemSettings?.currency}
                     </Text>
                   </View>
-                  {Number(invoiceAmount) > 0 && (
+                  {/* {Number(invoiceAmount) > 0 && (
                     <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>
                         {langContent[language as keyof typeof langContent]
@@ -632,9 +690,9 @@ export const ServicesTotalAmount = ({
                         {systemSettings?.currency}
                       </Text>
                     </View>
-                  )}
+                  )} */}
                   {Number(unPaidAmount) > 0 && (
-                    <View style={styles.subSection}>
+                    <View style={styles.paidAmountSection}>
                       <Text style={styles.text}>
                         {langContent[language as keyof typeof langContent]
                           ?.unpaid_amount || "Unbezahlter Betrag"}
