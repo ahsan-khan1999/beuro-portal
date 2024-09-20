@@ -105,6 +105,7 @@ export interface InvoiceCardContentProps {
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;
   handleSendEmail: () => void;
+  onDeleteHandler: () => void;
   currency?: string;
   handleInvoiceEdit?: () => void;
 }

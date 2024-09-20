@@ -23,6 +23,8 @@ const DeleteConfirmation_2 = ({
   const { t: translate } = useTranslation();
   const id = useAppSelector((state) => state.global.modal.data);
 
+  console.log(id, "id");
+
   const handleDelete = () => {
     routeHandler(id.id);
   };
@@ -51,7 +53,7 @@ const DeleteConfirmation_2 = ({
         <div className="flex gap-x-5 xMini:gap-[33px] mt-[27px] mb-[38px]">
           <button
             onClick={onClose}
-            className="h-8 xMini:h-[50px] px-2 xMini:px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md hover:bg-buttonHover"
+            className="h-8 xMini:h-[50px] px-2 xMini:px-[25px] text-dark hover:text-[#fff] bg-[#BFBFBF] rounded-md hover:bg-buttonHover"
           >
             {translate("email_tracker.email_delete_modal.cancel_button")}
           </button>

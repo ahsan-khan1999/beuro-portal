@@ -10,6 +10,8 @@ import { BaseButton } from "@/base-components/ui/button/base-button";
 import { updateQuery } from "@/utils/update-query";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import deleteIcon from "@/assets/pngs/delet-icon.png";
 
 const InvoiceDetailsData = ({
   handleInvoiceCreation,
@@ -21,6 +23,7 @@ const InvoiceDetailsData = ({
   handleSendEmail,
   currency,
   handleInvoiceEdit,
+  onDeleteHandler,
 }: InvoiceCardContentProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -120,6 +123,18 @@ const InvoiceDetailsData = ({
               icon={recurring}
               onClick={handleRecurringInvoiceCreation}
             />
+            <div
+              onClick={() => onDeleteHandler()}
+              className="border-[#4A13E7] border w-8 h-8 rounded-lg flex items-center justify-center"
+            >
+              <Image
+                src={deleteIcon}
+                alt="deleteIcon"
+                className="cursor-pointer"
+                width={16}
+                height={20}
+              />
+            </div>
           </div>
         )) || (
           <div className="flex space-x-2">

@@ -34,6 +34,7 @@ const InvoiceDetails = () => {
     loadingInvoice,
     loadingReceipt,
     handlePaymentStatusChange,
+    handleDeleteInvoice
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -94,6 +95,7 @@ const InvoiceDetails = () => {
           handleSendEmail={handleSendEmail}
           currency={systemSettings?.currency}
           handleInvoiceEdit={handleInvoiceUpdate}
+          onDeleteHandler={handleDeleteInvoice}
         />
       </InvoiceCardLayout>
 

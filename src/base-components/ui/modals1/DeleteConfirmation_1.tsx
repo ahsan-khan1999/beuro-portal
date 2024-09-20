@@ -20,6 +20,7 @@ const DeleteConfirmation_1 = ({
   const {
     modal: { data },
   } = useAppSelector((state) => state.global);
+
   const { t: translate } = useTranslation();
 
   return (
@@ -48,13 +49,13 @@ const DeleteConfirmation_1 = ({
         <div className="flex gap-[33px] mt-[26px] mb-[38px]">
           <button
             onClick={onClose}
-            className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
+            className="py-[11px] px-[25px] text-dark hover:text-[#fff] bg-[#BFBFBF] rounded-md hover:bg-buttonHover"
           >
             {translate("email_tracker.email_confirmation_modal.cancel_button")}
           </button>
           <button
             onClick={() => handleDelete()}
-            className="py-[11px] px-[25px] text-[#fff] bg-[#FF0000] rounded-md"
+            className="py-[11px] px-[25px] text-[#fff] bg-[#FF0000] rounded-md hover:bg-buttonHover"
           >
             {translate("email_tracker.email_confirmation_modal.confirm_button")}
           </button>
