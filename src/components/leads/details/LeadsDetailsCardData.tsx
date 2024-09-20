@@ -51,8 +51,8 @@ const LeadsDetailsCardData = ({
   handleNotes,
 }: LeadDetailCardProps) => {
   const router = useRouter();
-  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
 
   const itemsValue = [
@@ -99,12 +99,12 @@ const LeadsDetailsCardData = ({
     router.push("/offers/add");
   };
 
-  const handleReportPDF = () => {
-    router.push({
-      pathname: `/appointments/pdf`,
-      query: { ...router.query, reportId: leadDetails?.id, isCompany: true },
-    });
-  };
+  // const handleReportPDF = () => {
+  //   router.push({
+  //     pathname: `/appointments/pdf`,
+  //     query: { ...router.query, reportId: leadDetails?.id, isCompany: true },
+  //   });
+  // };
 
   const customerType = leadDetails?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];

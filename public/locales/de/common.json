@@ -1027,6 +1027,7 @@
     "card_content": {
       "heading": "Anfragen details",
       "create_button": "Angebot erstellen",
+      "lead_create": "Blei erstellen",
       "lead_id": "Anfragen-ID",
       "status": "Status",
       "created_date": "Erstelldatum",

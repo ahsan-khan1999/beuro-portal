@@ -20,7 +20,8 @@ const TableHeadings = () => {
             {translate("contracts.table_headings.total_price")}
           </span>
           <span className="font-semibold text-base text-white mlg:hidden xLarge:block">
-            {translate("contracts.table_headings.created_on")}
+            {/* {translate("contracts.table_headings.created_on")} */}
+            {translate("calendar.main_heading")}
           </span>
           <span className="font-semibold text-base text-white">
             {translate("offers.table_headings.email")}

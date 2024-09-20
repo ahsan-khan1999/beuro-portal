@@ -211,6 +211,7 @@ export const createOfferNotes: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const deleteOffer: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/delete", async (args, thunkApi) => {
     const { offerDetails: data, router, translate } = args as any;
@@ -227,7 +228,6 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
-      // setErrors(setError, e?.data.data, translate);
       return false;
     }
   });

@@ -12,6 +12,7 @@ import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import {
+  deleteInvoice,
   readCollectiveInvoice,
   readCollectiveReciept,
   readInvoiceDetails,
@@ -124,7 +125,7 @@ export default function useInvoiceDetail() {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const offerDeleteHandler = () => {
+  const handleDeleteInvoice = () => {
     dispatch(
       updateModalType({
         type: ModalType.CONFIRM_DELETION,
@@ -138,7 +139,7 @@ export default function useInvoiceDetail() {
   };
 
   const routeHandler = () => {
-    dispatch(deleteContract({ data: invoiceDetails, router, translate }));
+    dispatch(deleteInvoice({ invoiceDetails, router, translate }));
   };
 
   const handleInvoiceCreation = () => {
@@ -513,7 +514,7 @@ export default function useInvoiceDetail() {
   return {
     invoiceDetails,
     renderModal,
-    offerDeleteHandler,
+    handleDeleteInvoice,
     handleNotes,
     activeTab,
     setActiveTab,

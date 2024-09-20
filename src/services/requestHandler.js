@@ -529,8 +529,13 @@ const stopRecurringInvoice = (data) =>
   put(SERVICE_URLS.invoice + `/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteInvoice = (data) =>
-  del(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+  del(
+    SERVICE_URLS.invoice + `/${data?.id}`,
+    {},
+    { feature: featureConstants.login }
+  );
 
 // create main invoice
 const createMainInvoice = (data) => {

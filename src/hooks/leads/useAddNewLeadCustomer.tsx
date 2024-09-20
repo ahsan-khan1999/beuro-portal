@@ -56,7 +56,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.find((item) => item.id === id);
+    const selectedCustomers = customer?.find((item) => item.id === id);
     if (selectedCustomers) {
       dispatch(setCustomerDetails(selectedCustomers));
 
@@ -70,17 +70,19 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   };
 
   useEffect(() => {
-    if (leadDetails.id) {
+    if (leadDetails?.id) {
       reset({
         fullName: leadDetails.customerDetail?.fullName,
         type: leadDetails.type,
         customer: leadDetails.customerID,
         customerID: leadDetails.customerID,
-
-        customerType: getKeyByValue(
-          staticEnums["CustomerType"],
-          leadDetails.customerDetail?.customerType
-        ),
+        customerType:
+          leadDetails?.id === "convert"
+            ? leadDetails.customerDetail?.customerType
+            : getKeyByValue(
+                staticEnums["CustomerType"],
+                leadDetails.customerDetail?.customerType
+              ),
         email: leadDetails.customerDetail?.email,
         phoneNumber: leadDetails.customerDetail?.phoneNumber,
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
@@ -91,7 +93,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     } else {
       setValue("type", "New Customer");
     }
-  }, [leadDetails.id]);
+  }, [leadDetails?.id]);
 
   const fields = AddNewCustomerLeadFormField(
     register,
@@ -115,7 +117,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       let apiData: any = {
         ...data,
         step: 1,
-        leadId: leadDetails?.id,
+        leadId: leadDetails?.id === "convert" ? null : leadDetails?.id,
         stage: ComponentsType.addressAdd,
       };
       if (leadDetails?.customerID)
