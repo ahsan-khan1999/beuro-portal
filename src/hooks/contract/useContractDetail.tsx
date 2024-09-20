@@ -27,6 +27,7 @@ import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNot
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import { IsContractTaskCreated } from "@/base-components/ui/modals1/IsContractTaskCreated";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ export default function useContractDetail() {
   const [selectedContractId, setSelectedContractId] = useState<string | null>(
     null
   );
+
   const { contractDetails, loading } = useAppSelector(
     (state) => state.contract
   );
@@ -394,6 +396,7 @@ export default function useContractDetail() {
     [ModalType.SHARE_IMAGES]: (
       <ShareImages onClose={onClose} offerId={contractDetails?.id} />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {

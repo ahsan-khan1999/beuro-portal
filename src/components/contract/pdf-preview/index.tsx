@@ -6,6 +6,7 @@ import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
 import { useTranslation } from "next-i18next";
 import { Layout } from "@/layout";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -54,6 +55,7 @@ const PdfPriview = () => {
         }}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {

@@ -36,6 +36,7 @@ import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNot
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import { PaymentStatusChange } from "@/base-components/ui/modals1/PaymentStatusChange";
 import { SuccessPaidInvoice } from "@/base-components/ui/modals1/SuccessPaidInvoice";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 export default function useInvoiceDetail() {
   const dispatch = useAppDispatch();
@@ -502,6 +503,7 @@ export default function useInvoiceDetail() {
         onPaidDate={handlePaidInvoice}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {

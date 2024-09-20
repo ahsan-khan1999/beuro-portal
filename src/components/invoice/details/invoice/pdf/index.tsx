@@ -4,17 +4,13 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { InvoiceEmailHeader } from "./invoice-email-header";
 import { useInvoicePdf } from "@/hooks/invoice/useInvoicePdf";
 import dynamic from "next/dynamic";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   {
     ssr: false,
   }
-);
-
-const PdfDownload = dynamic(
-  () => import("@/components/reactPdf/generate-Pdf-Download"),
-  { ssr: false }
 );
 
 const DetailsPdfPriview = () => {
@@ -58,10 +54,13 @@ const DetailsPdfPriview = () => {
         }}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return (
     <>
       <InvoiceEmailHeader

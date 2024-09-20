@@ -34,7 +34,9 @@ export const useReceiptEmail = (
 
   const isMail = router.query?.isMail;
   const { modal } = useAppSelector((state) => state.global);
+  const [isMailSend, setIsMailSend] = useState(false);
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
+  const { invoiceID } = router.query;
 
   const {
     content,
@@ -49,7 +51,7 @@ export const useReceiptEmail = (
       )) ||
       []
   );
-  const { invoiceID } = router.query;
+
   const schema = generateContractEmailValidationSchema(translate);
   const {
     register,
@@ -61,10 +63,16 @@ export const useReceiptEmail = (
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   useEffect(() => {
     if (content?.length === 0)
       dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
+
+  useEffect(() => {
+    isMailSend &&
+      dispatch(updateModalType({ type: ModalType.LOADING_MAIL_GIF }));
+  }, [isMailSend]);
 
   useEffect(() => {
     if (invoiceID) {
@@ -155,14 +163,6 @@ export const useReceiptEmail = (
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // const apiData = {
-    //   id: collectiveInvoiceDetails?.id,
-    //   title: data?.title,
-    //   additionalDetails: data?.additionalDetails,
-
-    // };
-    // const response = await dispatch(updateInvoiceContent({ data: apiData }));
-    // if (response?.payload) {
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
       let apiData = {
@@ -172,20 +172,15 @@ export const useReceiptEmail = (
         attachments: attachements.map((item) => {
           return `${item.value}`;
         }),
-        // attachments: attachements.map((item) => {
-        //   const url = item.value;
-        //   const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
-        //   const fileName = url.substring(url.lastIndexOf("/") + 1);
-        //   const newUrl = `${baseUrl}${collectiveInvoiceDetails?.invoiceID?.createdBy?.company?.companyName}-${fileName}`;
-
-        //   return newUrl;
-        // }),
       };
 
+      setIsMailSend(true);
       const res = await dispatch(sendInvoiceEmail({ data: apiData }));
-
       if (res?.payload) {
+        setIsMailSend(false);
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      } else {
+        setIsMailSend(false);
       }
     } else {
       const updatedData = {
@@ -205,7 +200,6 @@ export const useReceiptEmail = (
       router.pathname = "/invoices/receipt-pdf-preview";
       router.query = { invoiceID: collectiveInvoiceDetails?.id };
       updateQuery(router, router.locale as string);
-      // }
     }
   };
   return {

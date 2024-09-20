@@ -5,6 +5,7 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -56,6 +57,7 @@ const ReceiptPdfPreview = () => {
         }}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {

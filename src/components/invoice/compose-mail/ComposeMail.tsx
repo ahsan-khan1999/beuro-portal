@@ -1,5 +1,6 @@
 import { Form } from "@/base-components/form/form";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useInvoiceEmail } from "@/hooks/invoice/useInvoiceEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
@@ -40,6 +41,7 @@ const ComposeMail = () => {
         route={onSuccess}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {
