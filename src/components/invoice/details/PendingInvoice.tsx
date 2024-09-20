@@ -9,9 +9,10 @@ export const PendingInvoice = ({
   handleInvoiceCreation: () => void;
 }) => {
   const { t: translate } = useTranslation();
+
   return (
-    <div className="flex items-center justify-center bg-white py-[113px]">
-      <div className="w-[90%] md:w-[550px] bg-[#E5EFFF] rounded-[24px] py-8 px-6 flex items-center flex-col gap-y-4">
+    <div className="flex items-center justify-center xMini:bg-white xMini:py-[113px] my-5 xMini:my-0">
+      <div className="w-full xMini:w-[550px] bg-[#E5EFFF] rounded-[24px] py-8 px-6 flex items-center flex-col gap-y-4">
         <Image src={noInvoiceIcon} alt="no invoice" />
         <h2 className="text-[#222B45] font-semibold text-2xl">
           {translate("common.no_invoice_created")}

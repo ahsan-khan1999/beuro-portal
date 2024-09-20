@@ -8,12 +8,6 @@ const ReceiptEmail = () => {
   return (
     <Layout>
       <InvoiceCardLayout>
-        {/* <MailDetailsCard
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onSendViaPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-          /> */}
         <MailDetailsCard />
       </InvoiceCardLayout>
 

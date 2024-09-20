@@ -30,6 +30,7 @@ export const useContractEmail = (
   );
 
   const isMail = router.query?.isMail;
+  const [isMailSend, setIsMailSend] = useState(false);
   const { content, contentDetails } = useAppSelector((state) => state.content);
   const [moreEmail, setMoreEmail] = useState({ isCc: false, isBcc: false });
   const [attachements, setAttachements] = useState<Attachement[]>(
@@ -58,6 +59,11 @@ export const useContractEmail = (
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
+
+  useEffect(() => {
+    isMailSend &&
+      dispatch(updateModalType({ type: ModalType.LOADING_MAIL_GIF }));
+  }, [isMailSend]);
 
   useEffect(() => {
     reset({
@@ -123,15 +129,6 @@ export const useContractEmail = (
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // const apiData = {
-    //   id: contractDetails?.id,
-    //   title: data?.title,
-    //   additionalDetails: data?.additionalDetails,
-
-    // };
-    // const response = await dispatch(updateContractContent({ data: apiData }));
-    // if (response?.payload) {
-
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
       let apiData = {
@@ -141,19 +138,15 @@ export const useContractEmail = (
         attachments: attachements.map((item) => {
           return `${item.value}`;
         }),
-        // attachments: attachements.map((item) => {
-        //   const url = item.value;
-        //   const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
-        //   const fileName = url.substring(url.lastIndexOf("/") + 1);
-        //   const newUrl = `${baseUrl}${contractDetails?.offerID?.createdBy?.company?.companyName}-${fileName}`;
-
-        //   return newUrl;
-        // }),
       };
 
+      setIsMailSend(true);
       const res = await dispatch(sendContractEmail({ data: apiData }));
       if (res?.payload) {
+        setIsMailSend(false);
         dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+      } else {
+        setIsMailSend(false);
       }
     } else {
       const updatedData = {
@@ -167,8 +160,6 @@ export const useContractEmail = (
       router.query = { offerID: contractDetails?.id };
       updateQuery(router, router.locale as string);
     }
-
-    // }
   };
   return {
     fields,

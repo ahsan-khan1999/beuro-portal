@@ -50,6 +50,7 @@ export const useInvoicePdf = () => {
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
+  const [isMailSend, setIsMailSend] = useState(false);
   const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
 
   const { loading, collectiveInvoiceDetails, invoiceDetails } = useAppSelector(
@@ -292,6 +293,11 @@ export const useInvoicePdf = () => {
     })();
   }, [invoiceID]);
 
+  useEffect(() => {
+    isMailSend &&
+      dispatch(updateModalType({ type: ModalType.LOADING_MAIL_GIF }));
+  }, [isMailSend]);
+
   const totalItems = invoiceData?.serviceItem?.length || 0;
 
   const calculateTotalPages = useMemo(() => {
@@ -361,11 +367,15 @@ export const useInvoicePdf = () => {
           const fileUrl = await dispatch(uploadFileToFirebase(formData));
           let apiData = { ...data, pdf: fileUrl?.payload };
           delete apiData["content"];
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendInvoiceEmail({ data: apiData }));
-          // if (res?.payload) {
-          // await localStoreUtil.remove_data("invoiceComposeEmail");
-          // }
+
+          setIsMailSend(true);
+          const res = await dispatch(sendInvoiceEmail({ data: apiData }));
+          if (res?.payload) {
+            setIsMailSend(false);
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          } else {
+            setIsMailSend(false);
+          }
         } else {
           let apiData = {
             email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
@@ -385,9 +395,14 @@ export const useInvoicePdf = () => {
                 ?.attachments,
             id: collectiveInvoiceDetails?.invoiceID?.id,
           };
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendInvoiceEmail({ apiData }));
-          // if (res?.payload)
+          setIsMailSend(true);
+          const res = await dispatch(sendInvoiceEmail({ data: apiData }));
+          if (res?.payload) {
+            setIsMailSend(false);
+            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+          } else {
+            setIsMailSend(false);
+          }
         }
       }
     } catch (error) {
