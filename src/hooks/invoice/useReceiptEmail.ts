@@ -176,12 +176,15 @@ export const useReceiptEmail = (
 
       setIsMailSend(true);
       const res = await dispatch(sendInvoiceEmail({ data: apiData }));
-      if (res?.payload) {
-        setIsMailSend(false);
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      } else {
-        setIsMailSend(false);
-      }
+
+      setTimeout(() => {
+        if (res?.payload) {
+          setIsMailSend(false);
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        } else {
+          setIsMailSend(false);
+        }
+      }, 2000);
     } else {
       const updatedData = {
         ...data,
@@ -202,6 +205,7 @@ export const useReceiptEmail = (
       updateQuery(router, router.locale as string);
     }
   };
+
   return {
     fields,
     onSubmit,

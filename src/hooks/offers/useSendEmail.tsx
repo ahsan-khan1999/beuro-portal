@@ -127,15 +127,17 @@ export const useSendEmail = (
         id: offerDetails?.id,
         pdf: fileUrl,
       };
+
       setIsMailSend(true);
       const res = await dispatch(sendOfferEmail({ data: apiData }));
-
-      if (res?.payload) {
-        setIsMailSend(false);
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      } else {
-        setIsMailSend(false);
-      }
+      setTimeout(() => {
+        if (res?.payload) {
+          setIsMailSend(false);
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        } else {
+          setIsMailSend(false);
+        }
+      }, 1800);
     } else {
       const updatedData = {
         ...data,

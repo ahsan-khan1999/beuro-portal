@@ -56,50 +56,50 @@ export const IsContractTaskCreated = ({
 
   const handleConfirm = () => {
     if (contractId) {
-      if (contractDetails?.offerID?.date) {
-        const updatedDates = contractDetails.offerID.date.map(
-          (dateItem: any) => {
-            const { startDate, endDate } = dateItem;
-            const taskTime = contractDetails?.offerID?.time || "00:00";
+      // if (contractDetails?.offerID?.date) {
+      const updatedDates = contractDetails?.offerID?.date?.map(
+        (dateItem: any) => {
+          const { startDate, endDate } = dateItem;
+          const taskTime = contractDetails?.offerID?.time || "00:00";
 
-            const startMoment = moment(startDate).set({
-              hour: parseInt(taskTime.split(":")[0], 10),
-              minute: parseInt(taskTime.split(":")[1], 10),
-            });
+          const startMoment = moment(startDate).set({
+            hour: parseInt(taskTime.split(":")[0], 10),
+            minute: parseInt(taskTime.split(":")[1], 10),
+          });
 
-            let endMoment;
+          let endMoment;
 
-            if (endDate) {
-              endMoment = moment(endDate)
-                .set({
-                  hour: parseInt(taskTime.split(":")[0], 10),
-                  minute: parseInt(taskTime.split(":")[1], 10),
-                })
-                .add(1, "hour");
-            } else {
-              endMoment = startMoment.clone().add(1, "hour");
-            }
-
-            return {
-              ...dateItem,
-              startDate: startMoment.format("YYYY-MM-DDTHH:mm"),
-              endDate: endMoment.format("YYYY-MM-DDTHH:mm"),
-            };
+          if (endDate) {
+            endMoment = moment(endDate)
+              .set({
+                hour: parseInt(taskTime.split(":")[0], 10),
+                minute: parseInt(taskTime.split(":")[1], 10),
+              })
+              .add(1, "hour");
+          } else {
+            endMoment = startMoment.clone().add(1, "hour");
           }
-        );
 
-        const customerName =
-          contractDetails?.offerID?.leadID?.customerDetail?.fullName;
-        const customerEmail =
-          contractDetails?.offerID?.leadID?.customerDetail?.email;
-        const customerPhoneNumber =
-          contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber;
-        const workDates = contractDetails?.offerID?.date;
-        const time = contractDetails?.offerID?.time;
-        const serviceItem =
-          contractDetails?.offerID?.serviceDetail?.serviceDetail;
+          return {
+            ...dateItem,
+            startDate: startMoment.format("YYYY-MM-DDTHH:mm"),
+            endDate: endMoment.format("YYYY-MM-DDTHH:mm"),
+          };
+        }
+      );
 
-        const noteDetail = `
+      const customerName =
+        contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+      const customerEmail =
+        contractDetails?.offerID?.leadID?.customerDetail?.email;
+      const customerPhoneNumber =
+        contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber;
+      const workDates = contractDetails?.offerID?.date;
+      const time = contractDetails?.offerID?.time;
+      const serviceItem =
+        contractDetails?.offerID?.serviceDetail?.serviceDetail;
+
+      const noteDetail = `
           <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
               ${translate("contracts.card_content.heading")}.
           </span>
@@ -108,8 +108,8 @@ export const IsContractTaskCreated = ({
               <div style="display: flex; align-items: center; gap: 4px;">
                   <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
                       ${translate("pdf.label_nr_contract")} ${translate(
-          "pdf.no"
-        )}:
+        "pdf.no"
+      )}:
                   </span>
                   <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
                       ${contractDetails?.contractNumber}
@@ -310,29 +310,29 @@ export const IsContractTaskCreated = ({
                   </span>
                   <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
                       ${Number(contractDetails?.offerID?.total).toFixed(2)} ${
-          systemSettings?.currency
-        }
+        systemSettings?.currency
+      }
                   </span>
               </div>
           </div>
           `;
 
-        dispatch(
-          setContractTaskDetails({
-            id: "convert",
-            colour: "#5CDD42",
-            contractID: {
-              id: contractDetails?.id,
-            },
-            date: updatedDates,
-            title: contractDetails?.title,
-            isAllDay: false,
-            type: "Contract",
-            alertTime: 15,
-            note: noteDetail,
-          })
-        );
-      }
+      dispatch(
+        setContractTaskDetails({
+          id: "convert",
+          colour: "#5CDD42",
+          contractID: {
+            id: contractDetails?.id,
+          },
+          date: updatedDates,
+          title: contractDetails?.title,
+          isAllDay: false,
+          type: "Contract",
+          alertTime: 15,
+          note: noteDetail,
+        })
+      );
+      // }
 
       dispatch(updateModalType(ModalType.NONE));
       router.push(`/calendar?isContractId=${contractId}`);

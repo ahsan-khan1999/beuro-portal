@@ -30,7 +30,6 @@ import {
   EditInvoiceDetailsFormField,
   EditInvoiceDetailsSubmitFormField,
 } from "@/components/invoice/edit/fields/edit-invoice-offer-details-fields";
-import { Customers } from "@/types";
 
 export const useEditInvoiceDetails = ({
   handleNext,

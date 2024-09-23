@@ -324,12 +324,14 @@ export const useOfferPdf = () => {
 
           setIsMailSend(true);
           const res = await dispatch(sendOfferEmail({ data: apiData }));
-          if (res?.payload) {
-            setIsMailSend(false);
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          } else {
-            setIsMailSend(false);
-          }
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 1800);
         } else {
           let apiData = {
             email: offerDetails?.leadID?.customerDetail?.email,
@@ -348,12 +350,14 @@ export const useOfferPdf = () => {
           };
           setIsMailSend(true);
           const res = await dispatch(sendOfferEmail({ data: apiData }));
-          if (res?.payload) {
-            setIsMailSend(false);
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          } else {
-            setIsMailSend(false);
-          }
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 1800);
         }
       }
     } catch (error) {

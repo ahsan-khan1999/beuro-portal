@@ -16,6 +16,7 @@ import {
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { OffersTableRowTypes } from "@/types/offers";
+
 export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
