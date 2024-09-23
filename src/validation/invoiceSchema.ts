@@ -76,17 +76,27 @@ export const generateInvoiceDetailsValidationSchema = (translate: Function) => {
     [LeadsCustomerEditDetails.gender]: yup
       .number()
       .required(translate("validationMessages.required")),
-    [LeadsCustomerEditDetails.customer]: yup.string().when("type", {
-      is: (type: string) => type === "Existing Customer",
-      then: () =>
-        yup.string().required(translate("validationMessages.required")),
-    }),
 
-    [LeadsCustomerEditDetails.companyName]: yup.string().when("customerType", {
-      is: (customerType: string) => customerType === "company",
-      then: () =>
-        yup.string().required(translate("validationMessages.required")),
-    }),
+    // Conditionally require 'customer' field when type is "Existing Customer"
+    [LeadsCustomerEditDetails.customer]: yup
+      .string()
+      .when(LeadsCustomerEditDetails.type, {
+        is: (type: string) => type === "Existing Customer",
+        then: (schema) =>
+          schema.required(translate("validationMessages.required")),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+
+    // Conditionally require 'companyName' field when customerType is "company"
+    [LeadsCustomerEditDetails.companyName]: yup
+      .string()
+      .when(LeadsCustomerEditDetails.customerType, {
+        is: (customerType: string) => customerType === "company",
+        then: (schema) =>
+          schema.required(translate("validationMessages.required")),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+
     [EditOfferDetails.customerName]: yup
       .string()
       .required(translate("validationMessages.required")),
@@ -108,6 +118,7 @@ export const generateInvoiceDetailsValidationSchema = (translate: Function) => {
     [EditOfferDetails.content]: yup
       .string()
       .required(translate("validationMessages.required")),
+
     [LeadsCustomerEditDetails.address]: yup.object().shape({
       [EditOfferDetails.streetNumber]: yup
         .string()
@@ -115,18 +126,16 @@ export const generateInvoiceDetailsValidationSchema = (translate: Function) => {
       [EditOfferDetails.postCode]: yup.string().notRequired(),
       [EditOfferDetails.country]: yup.string().notRequired(),
     }),
+
     [EditOfferDetails.date]: yup
       .array()
       .of(
-        yup
-          .object()
-          .shape({
-            startDate: yup
-              .string()
-              .required(translate("validationMessages.required")),
-            endDate: yup.string().notRequired(),
-          })
-          .required(translate("validationMessages.required"))
+        yup.object().shape({
+          startDate: yup
+            .string()
+            .required(translate("validationMessages.required")),
+          endDate: yup.string().notRequired(),
+        })
       )
       .min(1)
       .required(translate("validationMessages.required")),

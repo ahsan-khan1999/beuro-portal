@@ -142,12 +142,15 @@ export const useContractEmail = (
 
       setIsMailSend(true);
       const res = await dispatch(sendContractEmail({ data: apiData }));
-      if (res?.payload) {
-        setIsMailSend(false);
-        dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      } else {
-        setIsMailSend(false);
-      }
+
+      setTimeout(() => {
+        if (res?.payload) {
+          setIsMailSend(false);
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        } else {
+          setIsMailSend(false);
+        }
+      }, 1800);
     } else {
       const updatedData = {
         ...data,

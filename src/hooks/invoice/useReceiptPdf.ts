@@ -368,12 +368,15 @@ export const useReceiptPdf = () => {
 
           setIsMailSend(true);
           const res = await dispatch(sendInvoiceEmail({ data: apiData }));
-          if (res?.payload) {
-            setIsMailSend(false);
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          } else {
-            setIsMailSend(false);
-          }
+
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 2000);
         } else {
           let apiData = {
             email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
@@ -395,14 +398,18 @@ export const useReceiptPdf = () => {
                 ?.receiptContent?.attachments,
             id: collectiveInvoiceDetails?.invoiceID?.contractID?.id,
           };
+
           setIsMailSend(true);
           const res = await dispatch(sendInvoiceEmail({ data: apiData }));
-          if (res?.payload) {
-            setIsMailSend(false);
-            dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          } else {
-            setIsMailSend(false);
-          }
+
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 2000);
         }
       }
     } catch (error) {

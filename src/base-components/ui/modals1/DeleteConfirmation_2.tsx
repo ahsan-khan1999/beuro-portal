@@ -23,8 +23,6 @@ const DeleteConfirmation_2 = ({
   const { t: translate } = useTranslation();
   const id = useAppSelector((state) => state.global.modal.data);
 
-  console.log(id, "id");
-
   const handleDelete = () => {
     routeHandler(id.id);
   };
