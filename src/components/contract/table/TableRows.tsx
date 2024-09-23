@@ -126,7 +126,11 @@ const TableRows = ({
                 >
                   <p
                     className="bg-primary hover:bg-buttonHover text-white px-2 py-[6px] text-center rounded-md w-full"
-                    onClick={() => onTaskCreate(item?.id)}
+                    onClick={() => {
+                      console.log("clicked");
+
+                      onTaskCreate(item?.id);
+                    }}
                   >
                     {translate("calendar.main_heading")}
                   </p>

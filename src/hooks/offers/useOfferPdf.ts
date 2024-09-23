@@ -331,7 +331,7 @@ export const useOfferPdf = () => {
             } else {
               setIsMailSend(false);
             }
-          }, 2000);
+          }, 1800);
         } else {
           let apiData = {
             email: offerDetails?.leadID?.customerDetail?.email,
@@ -357,7 +357,7 @@ export const useOfferPdf = () => {
             } else {
               setIsMailSend(false);
             }
-          }, 2000);
+          }, 1800);
         }
       }
     } catch (error) {

@@ -61,7 +61,7 @@ export default function useContractDetail() {
     if (id) {
       dispatch(readContractDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
-          dispatch(setContractDetails(res.payload));
+          dispatch(setContractDetails(res?.payload));
         }
       );
     }

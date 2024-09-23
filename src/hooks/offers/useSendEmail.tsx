@@ -137,7 +137,7 @@ export const useSendEmail = (
         } else {
           setIsMailSend(false);
         }
-      }, 2000);
+      }, 1800);
     } else {
       const updatedData = {
         ...data,
