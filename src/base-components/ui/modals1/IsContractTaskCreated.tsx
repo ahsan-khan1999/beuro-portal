@@ -56,7 +56,6 @@ export const IsContractTaskCreated = ({
 
   const handleConfirm = () => {
     if (contractId) {
-      // if (contractDetails?.offerID?.date) {
       const updatedDates = contractDetails?.offerID?.date?.map(
         (dateItem: any) => {
           const { startDate, endDate } = dateItem;
@@ -90,6 +89,8 @@ export const IsContractTaskCreated = ({
 
       const customerName =
         contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+      const customerGender =
+        contractDetails?.offerID?.leadID?.customerDetail?.gender;
       const customerEmail =
         contractDetails?.offerID?.leadID?.customerDetail?.email;
       const customerPhoneNumber =
@@ -325,14 +326,18 @@ export const IsContractTaskCreated = ({
             id: contractDetails?.id,
           },
           date: updatedDates,
-          title: contractDetails?.title,
+          title:
+            (contractDetails?.title || "") +
+            " " +
+            translate(`gender.${customerGender}`) +
+            " " +
+            customerName,
           isAllDay: false,
           type: "Contract",
           alertTime: 15,
           note: noteDetail,
         })
       );
-      // }
 
       dispatch(updateModalType(ModalType.NONE));
       router.push(`/calendar?isContractId=${contractId}`);

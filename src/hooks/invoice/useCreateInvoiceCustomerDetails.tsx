@@ -16,7 +16,7 @@ import {
   setCustomers,
 } from "@/api/slices/customer/customerSlice";
 import { updateQuery } from "@/utils/update-query";
-import { readLead, setLeads } from "@/api/slices/lead/leadSlice";
+import { setLeads } from "@/api/slices/lead/leadSlice";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { DEFAULT_CUSTOMER, staticEnums } from "../../utils/static";
@@ -73,20 +73,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
 
   const type = watch("type");
   const customerType = watch("customerType");
-  const customerID = watch("customerID");
   const selectedContent = watch("content");
-
-  useEffect(() => {
-    if (type && customerID)
-      dispatch(
-        readLead({
-          params: {
-            filter: { customerID: customerID, status: [0, 1, 3] },
-            paginate: 0,
-          },
-        })
-      );
-  }, [customerID]);
 
   useEffect(() => {
     if (invoiceDetails?.id) {
@@ -126,7 +113,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.find((item) => item.id === id);
+    const selectedCustomers = customer?.find((item) => item.id === id);
 
     if (selectedCustomers) {
       dispatch(setCustomerDetails(selectedCustomers));
@@ -162,10 +149,12 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         ...invoiceDetails,
         customerType: null,
         fullName: null,
+        companyName: null,
         email: null,
         phoneNumber: null,
         mobileNumber: null,
         address: null,
+        customerID: null,
         type: "New Customer",
         content: invoiceDetails?.content?.id,
         gender: null,
@@ -174,7 +163,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
       reset({
         type: "Existing Customer",
         customerID: invoiceDetails?.customerID,
-        // leadID: invoiceDetails?.id,
         customerType: getKeyByValue(
           staticEnums["CustomerType"],
           invoiceDetails?.customerDetail?.customerType
@@ -197,10 +185,8 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
       dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
       setValue("content", null);
       setValue("title", null);
-      // setValue("leadID", null);
     }
   }, [type]);
-
 
   const invoiceFields = CreateInvoiceCustomerDetailsFormField(
     register,
@@ -218,7 +204,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
       content,
       handleContentSelect,
       invoiceDetails,
-      // leadID,
     },
     setValue
   );
@@ -248,23 +233,20 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         step: 1,
         invoiceId: invoiceDetails?.id === "convert" ? null : invoiceDetails?.id,
         stage: ComponentsType.addressAdded,
-        // isLeadCreated: data?.leadID ? true : false,
       };
 
-      // if (!apiData?.isLeadCreated) delete apiData["leadID"];
       const res = await dispatch(
         createMainInvoice({ data: apiData, router, setError, translate })
       );
 
       if (res?.payload) {
         if (data?.type === "New Customer") {
-          dispatch(setLeads([res?.payload]));
           dispatch(
             setCustomers([
               ...customer,
               {
                 ...res?.payload?.customerDetail,
-                // id: res?.payload?.customerID,
+                id: res?.payload?.customerID,
               },
             ])
           );
@@ -279,7 +261,6 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         invoiceId: null,
         stage: ComponentsType.addressAdded,
       };
-      // if (!apiData?.isLeadCreated) delete apiData["leadID"];
 
       const res = await dispatch(
         createMainInvoice({ data: apiData, router, setError, translate })

@@ -75,8 +75,15 @@ export default function useLeadDetail() {
     dispatch(updateModalType({ type: ModalType.INFO_DELETED }));
   };
 
-  const routeHandler = () => {
-    dispatch(deleteLead({ leadDetails, router, translate }));
+  const routeHandler = async () => {
+    const res = await dispatch(deleteLead({ leadDetails, router, translate }));
+    if (!res?.payload) {
+      dispatch(
+        updateModalType({
+          type: ModalType.NONE,
+        })
+      );
+    }
   };
 
   const defaultUpdateModal = () => {

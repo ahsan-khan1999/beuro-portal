@@ -160,6 +160,7 @@
     "file": "Bitte wählen Sie ein gültiges Dateiformat"
   },
   "validationMessages": {
+    "delete_dependency_deny": "Löschen nicht möglich: Das Element hat zugehörige Abhängigkeiten",
     "unauthorized": "Sie haben keine Erlaubnis",
     "unauthenticated": "Melden Sie sich an oder erstellen Sie ein Konto, um fortzufahren",
     "required": "Dieses Feld ist erforderlich",
@@ -1254,14 +1255,15 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
-    "paid_invoice": "Rechnungsstatus erfolgreich bezahlt",
+    "paid_invoice": "Rechnung wurde erfolgreich als bezahlt markiert",
     "paid_invoice_date": "Wählen Sie das Zahlungsdatum der Rechnung",
     "enter_location": "Ort eingeben",
     "pay": "Bezahlen",
     "paid": "Bezahlt",
+    "Paid": "Bezahlt",
     "unPaid": "Unbezahlt",
     "change_payment": "Zahlungsstatus ändern",
-    "are_sure_payment_status": "Sind Sie sicher, dass Sie den Zahlungsstatus ändern möchten in",
+    "are_sure_payment_status": "Sind Sie sicher, dass Sie die Rechnung als markieren möchten",
     "notifications": "Benachrichtigungen",
     "remaind_me": "Erinnere mich daran",
     "starts_in": "Beginnt in",
@@ -1652,7 +1654,6 @@
       "back_button": "Zurück",
       "next_button": "Weiter"
     },
-
     "additional_details": {
       "main_heading": "Zusätzliche Details",
       "edit_button": "Details Bearbeiten",
@@ -1693,7 +1694,11 @@
       "street": "Bitte geben Sie die Strasse+Nr ein",
       "post_code": "Bitte geben Sie Ihre Plz + Ort ein",
       "address_description": "",
-      "service_title": "Bitte geben Sie Ihren Dienstnamen ein"
+      "service_title": "Bitte geben Sie Ihren Dienstnamen ein",
+      "phone_placeholder": "Bitte geben Sie Ihre Telefonnummer ein.",
+      "mobile_placeholder": "Bitte geben Sie Ihre Mobilnummer ein.",
+      "country_placeholder": "Bitte geben Sie Ihr Land ein",
+      "company_placeholder": "Bitte geben Sie Ihren Firmennamen ein"
     }
   },
   "pdf_preview": {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
-import { deleteContract } from "@/api/slices/contract/contractSlice";
 import { CustomerPromiseActionType } from "@/types/customer";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -52,12 +51,11 @@ export default function useInvoiceDetail() {
     loadingReceipt,
   } = useAppSelector((state) => state.invoice);
 
+  const router = useRouter();
+  const id = router.query.invoice;
   const [isSendEmail, setIsSendEmail] = useState(false);
   const [activeTab, setActiveTab] = useState("invoice");
   const invoiceDetailTabs = ["invoice", "receipt"];
-
-  const router = useRouter();
-  const id = router.query.invoice;
   const { modal } = useAppSelector((state) => state.global);
   const { systemSettings } = useAppSelector((state) => state.settings);
 
@@ -138,8 +136,17 @@ export default function useInvoiceDetail() {
     dispatch(updateModalType({ type: ModalType.INFO_DELETED }));
   };
 
-  const routeHandler = () => {
-    dispatch(deleteInvoice({ invoiceDetails, router, translate }));
+  const routeHandler = async () => {
+    const res = await dispatch(
+      deleteInvoice({ invoiceDetails, router, translate })
+    );
+    if (!res?.payload) {
+      dispatch(
+        updateModalType({
+          type: ModalType.NONE,
+        })
+      );
+    }
   };
 
   const handleInvoiceCreation = () => {

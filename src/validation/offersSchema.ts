@@ -40,7 +40,6 @@ export const generateOfferServiceEditDetailsValidation = (
   });
 };
 
-// Validation for edit details
 export const generateOfferDetailsValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [LeadsCustomerEditDetails.type]: yup
@@ -64,11 +63,6 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
       .string()
       .required(translate("validationMessages.required")),
 
-    // [EditOfferDetails.email]: yup
-    //   .string()
-    //   .email()
-    //   .notRequired(),
-
     [EditOfferDetails.offerTitle]: yup
       .string()
       .required(translate("validationMessages.required")),
@@ -89,7 +83,6 @@ export const generateOfferDetailsValidationSchema = (translate: Function) => {
         .string()
         .required(translate("validationMessages.required")),
       [EditOfferDetails.postCode]: yup.string().notRequired(),
-      // [EditOfferDetails.country]: yup.string().notRequired(),
     }),
     [EditOfferDetails.date]: yup
       .array()

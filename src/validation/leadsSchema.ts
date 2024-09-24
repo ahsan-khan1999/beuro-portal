@@ -6,7 +6,7 @@ import {
 } from "@/enums/leads";
 
 import * as yup from "yup";
-// Validation for leads customer edit details
+
 export const generateLeadsCustomerEditDetailsValidation = (
   translate: Function
 ) => {
@@ -20,16 +20,8 @@ export const generateLeadsCustomerEditDetailsValidation = (
     [LeadsCustomerEditDetails.customerType]: yup
       .string()
       .required(translate("validationMessages.required")),
-
-    // [LeadsCustomerEditDetails.email]: yup
-    //   .string()
-    //   .email()
-    //   .required(translate(translate("validationMessages.required"))),
-
     [LeadsCustomerEditDetails.phone]: yup.string().notRequired(),
-
     [LeadsCustomerEditDetails.mobile]: yup.string().notRequired(),
-
     [LeadsCustomerEditDetails.address]: yup
       .object({
         [LeadsCustomerEditDetails.streetNo]: yup
@@ -42,33 +34,9 @@ export const generateLeadsCustomerEditDetailsValidation = (
   });
 };
 
-// Validation for leads address edit details
 export const generateLeadsAddressEditDetailsValidation = (
   translate: Function
 ) => {
-  // const addressSchema = Array.from({ length: count }, (_, index) =>
-  // {
-  //   return {
-  //     [`address.${0}.${LeadsAddressEditDetails.streetNo}`]: yup
-  //       .string()
-  //       .required(translate("validationMessages.required")),
-  //     [`address.${0}.${LeadsAddressEditDetails.postCode}`]: yup
-  //       .string()
-  //       .required(translate("validationMessages.required")),
-  //     [`address.${0}.${LeadsAddressEditDetails.country}`]: yup
-  //       .string()
-  //       .required(translate("validationMessages.required")),
-  //     [`address.${0}.${LeadsAddressEditDetails.description}`]: yup
-  //       .string()
-  //       .required(translate("validationMessages.required")),
-  //     [`address.${0}.${LeadsAddressEditDetails.label}`]: yup
-  //       .string()
-  //       .required(translate("validationMessages.required")),
-
-  //   };
-  // }).reduce((acc, obj) => ({ ...acc, ...obj }), {});
-  // return yup.object().shape(addressSchema);
-
   const addressValidationSchema = yup
     .array()
     .of(
@@ -92,7 +60,6 @@ export const generateLeadsAddressEditDetailsValidation = (
   return yup.object().shape({ address: addressValidationSchema });
 };
 
-// Validation for leads service edit details
 export const generateLeadsServiceEditDetailsValidation = (
   translate: Function
 ) => {
@@ -100,30 +67,19 @@ export const generateLeadsServiceEditDetailsValidation = (
     [LeadsServiceEditDetails.requiredService]: yup
       .string()
       .required(translate("validationMessages.required")),
-
     [LeadsServiceEditDetails.desireDate]: yup
       .string()
       .required(translate("validationMessages.required")),
-
     [LeadsServiceEditDetails.contactAvailablity]: yup.string().notRequired(),
-
     [LeadsServiceEditDetails.flexibility]: yup.string().notRequired(),
-
     [LeadsServiceEditDetails.preferContact]: yup.string().notRequired(),
-
-    // [LeadsServiceEditDetails.budget]: yup
-    //   .string()
-    //   .notRequired(),
-
     [LeadsServiceEditDetails.leadSource]: yup.string().notRequired(),
-
     [LeadsServiceEditDetails.otherServices]: yup
       .array()
       .of(yup.string().notRequired()),
   });
 };
 
-// Validation for add new customer lead details
 export const generateAddNewLeadCustomerDetailsValidation = (
   translate: Function
 ) => {
@@ -150,12 +106,6 @@ export const generateAddNewLeadCustomerDetailsValidation = (
       then: () =>
         yup.string().required(translate("validationMessages.required")),
     }),
-
-    // [LeadsCustomerEditDetails.email]: yup
-    //   .string()
-    //   .email()
-    //   .required(translate("validationMessages.required")),
-
     [LeadsCustomerEditDetails.phone]: yup.string().notRequired(),
     [LeadsCustomerEditDetails.mobile]: yup.string().notRequired(),
     [LeadsCustomerEditDetails.address]: yup
@@ -170,7 +120,6 @@ export const generateAddNewLeadCustomerDetailsValidation = (
   });
 };
 
-// Validation for leads additional edit details
 export const generateLeadAdditionalDetailsValidation = (
   translate: Function
 ) => {

@@ -1,12 +1,7 @@
 import Image from "next/image";
 import { BaseModal } from "../modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import {
-  readInvoiceDetails,
-  updateInvoiceStatus,
-} from "@/api/slices/invoice/invoiceSlice";
-import { staticEnums } from "@/utils/static";
+import { useAppSelector } from "@/hooks/useRedux";
 import { Button } from "../button/button";
 
 export interface PaymentStatusModalProps {
@@ -22,26 +17,10 @@ export const PaymentStatusChange = ({
   heading,
   onPaidDate,
 }: PaymentStatusModalProps) => {
-  const dispatch = useAppDispatch();
   const { id, status } = useAppSelector((state) => state.global.modal.data);
-  const { invoiceDetails, loading } = useAppSelector((state) => state.invoice);
+  const { loading } = useAppSelector((state) => state.invoice);
 
   const newStatus = status === "Pending" ? "Paid" : "Pending";
-
-  // const handleConfirmtion = async () => {
-  //   const res = await dispatch(
-  //     updateInvoiceStatus({
-  //       data: {
-  //         id: id,
-  //         invoiceStatus: staticEnums["InvoiceStatus"][newStatus],
-  //       },
-  //     })
-  //   );
-  //   if (res?.payload) {
-  //     dispatch(readInvoiceDetails({ params: { filter: invoiceDetails?.id } }));
-  //     onSuccess();
-  //   }
-  // };
 
   return (
     <BaseModal
@@ -60,7 +39,8 @@ export const PaymentStatusChange = ({
         </p>
 
         <p className="text-base font-medium text-gray text-center my-[26px]">
-          {translate("common.are_sure_payment_status")} '{newStatus}'?
+          {translate("common.are_sure_payment_status")} '
+          {translate(`common.${newStatus}`)}'?
         </p>
 
         <div className="flex gap-[33px] mb-[38px]">

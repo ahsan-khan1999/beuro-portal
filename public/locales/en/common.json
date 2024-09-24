@@ -160,6 +160,7 @@
     "file": "Please Select a valid file format"
   },
   "validationMessages": {
+    "delete_dependency_deny": "Cannot delete: item has related dependencies",
     "unauthorized": "You do not have permission",
     "required": "This field is required",
     "nonexistent": "nonexistent",
@@ -1034,7 +1035,7 @@
     "card_content": {
       "heading": "Leads Details",
       "create_button": "Create Offer",
-      "lead_create":"Create Lead",
+      "lead_create": "Create Lead",
       "lead_id": "Lead ID",
       "status": "Status",
       "created_date": "Creation Date",
@@ -1261,14 +1262,15 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
-   "paid_invoice":"Invoice status paid successfully",
-   "paid_invoice_date":"Select the paid date of invoice",
+    "paid_invoice": "Invoice was successfully marked as paid",
+    "paid_invoice_date": "Select the paid date of invoice",
     "enter_location": "Enter location",
     "pay": "Pay",
     "paid": "Paid",
+    "Paid": "Paid",
     "unPaid": "Unpaid",
     "change_payment": "Change payment status",
-    "are_sure_payment_status": "Are you sure you want to change the payment status to",
+    "are_sure_payment_status": "Are you sure you want to mark the invoice as",
     "notifications": "Notifications",
     "remaind_me": "Remind me in",
     "starts_in": "Starts in",
@@ -1699,7 +1701,11 @@
       "street": "Please Enter Street Number",
       "post_code": "Please Enter Your Post Code + City",
       "address_description": "",
-      "service_title": "Please Enter Your service Name"
+      "service_title": "Please Enter Your service Name",
+      "phone_placeholder": "Please Enter Your phone no.",
+      "mobile_placeholder": "Please Enter Your mobile no.",
+      "country_placeholder": "Please Enter Your country",
+      "company_placeholder": "Please Enter Your company name"
     }
   },
   "pdf_preview": {

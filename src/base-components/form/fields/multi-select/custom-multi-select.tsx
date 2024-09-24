@@ -1,5 +1,5 @@
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
-import { MultiSelectBoxProps, SelectBoxProps } from "@/types";
+import { MultiSelectBoxProps } from "@/types";
 import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
@@ -41,10 +41,6 @@ export const MultiSelectBox = ({
 
   const search = useRef<string>("");
 
-  const toggleDropDown = () => {
-    setIsOpen((prevState) => !prevState);
-  };
-
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
     const isSelected = selectedOptions.includes(value);
@@ -53,13 +49,14 @@ export const MultiSelectBox = ({
       ? selectedOptions.filter((option) => option !== value)
       : [...selectedOptions, value];
 
+    console.log(updatedOptions, "updatedOptions");
+
     setSelectedOptions(updatedOptions);
     field?.onChange(updatedOptions);
     trigger?.(field?.name);
     onItemChange && onItemChange(updatedOptions);
 
-    // Remove the selected option from the available options
-    setOption(options.filter((item) => !updatedOptions.includes(item.value)));
+    setOption(options?.filter((item) => !updatedOptions.includes(item.value)));
   };
 
   const handleChange = (value: string) => {
@@ -74,6 +71,7 @@ export const MultiSelectBox = ({
   const defaultClasses = `cursor-pointer placeholder:text-dark h-10 xMini:h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
+
   const classes = combineClasses(defaultClasses, className);
 
   const handleDivScroll = (e: React.WheelEvent<HTMLDivElement>) => {

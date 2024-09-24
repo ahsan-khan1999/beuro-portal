@@ -93,8 +93,17 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.INFO_DELETED }));
   };
 
-  const routeHandler = () => {
-    dispatch(deleteOffer({ offerDetails, router, translate }));
+  const routeHandler = async () => {
+    const res = await dispatch(
+      deleteOffer({ offerDetails, router, translate })
+    );
+    if (!res?.payload) {
+      dispatch(
+        updateModalType({
+          type: ModalType.NONE,
+        })
+      );
+    }
   };
 
   const handleNotes = (

@@ -271,7 +271,6 @@ export const AddLeadServiceDetailsFormField: GenerateLeadsFormField = (
               id: "otherServices",
               name: "otherServices",
               value: contentList?.map((item) => item.id),
-
               options:
                 content?.map((item) => ({
                   label: item.contentName,
