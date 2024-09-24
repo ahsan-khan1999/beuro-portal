@@ -166,7 +166,6 @@ export default function ContractFilters({
   };
   3;
 
-
   return (
     <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
@@ -185,7 +184,7 @@ export default function ContractFilters({
         ))}
       </div>
       <div className="flex flex-col xlg:flex-row  xlg:items-center gap-3">
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-center gap-x-3 z-20">
           <InputField
             handleChange={handleInputChange}
             ref={inputRef}

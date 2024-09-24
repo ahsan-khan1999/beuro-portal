@@ -196,7 +196,7 @@ export default function OffersFilters({
           onEnterPress={onEnterPress}
         />
 
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-center gap-x-3 z-20">
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
             value=""

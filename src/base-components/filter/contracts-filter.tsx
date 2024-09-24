@@ -162,7 +162,7 @@ export default function ContractsFilter({
   };
 
   return (
-    <div className="relative flex my-auto z-50" ref={ref}>
+    <div className="relative flex my-auto z-10" ref={ref}>
       <Button
         inputType="button"
         onClick={handleExtraFilterToggle}

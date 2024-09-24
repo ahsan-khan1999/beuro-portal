@@ -12,7 +12,6 @@ const CustomerForm = ({
   handleSubmit,
   errors,
 }: FormDataProps) => {
-  const defaultClassName = "";
   const { t: translate } = useTranslation();
 
   return (
@@ -79,7 +78,6 @@ const CustomerForm = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </div>
