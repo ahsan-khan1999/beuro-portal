@@ -128,7 +128,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
   const onCustomerSelect = (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer.find((item) => item.id === id);
+    const selectedCustomers = customer?.find((item) => item.id === id);
     if (selectedCustomers) {
       dispatch(setCustomerDetails(selectedCustomers));
 
@@ -203,7 +203,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: null,
         mobileNumber: null,
         address: null,
-        customerID: "",
+        // customerID: "",
         type: "New Customer",
         content: offerDetails?.content?.id,
         gender: null,

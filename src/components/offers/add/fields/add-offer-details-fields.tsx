@@ -103,7 +103,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               options:
                 Object.keys(staticEnums.CustomerType)
                   ?.slice(1)
-                  ?.map((item, key) => ({
+                  ?.map((item) => ({
                     value: item,
                     label: translate(`customer_type.${item}`),
                   })) || [],
