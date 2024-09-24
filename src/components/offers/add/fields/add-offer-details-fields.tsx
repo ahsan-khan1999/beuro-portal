@@ -384,7 +384,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         inputType: "text",
         id: "companyName",
         name: "companyName",
-        placeholder: "Please Enter Company Name",
+        placeholder: "",
         register,
         setValue: setValue,
         value: offerDetails?.leadID?.customerDetail?.companyName || "",

@@ -160,6 +160,7 @@
     "file": "Bitte wählen Sie ein gültiges Dateiformat"
   },
   "validationMessages": {
+    "delete_dependency_deny": "Löschen nicht möglich: Das Element hat zugehörige Abhängigkeiten",
     "unauthorized": "Sie haben keine Erlaubnis",
     "unauthenticated": "Melden Sie sich an oder erstellen Sie ein Konto, um fortzufahren",
     "required": "Dieses Feld ist erforderlich",

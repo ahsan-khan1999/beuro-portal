@@ -97,18 +97,23 @@ export default function useCustomerDetail({
     );
   };
 
-  const routeHandler = () => {
-    dispatch(deleteCustomer({ customerDetails, router, setError, translate }));
+  const routeHandler = async () => {
+    const res = await dispatch(
+      deleteCustomer({ customerDetails, router, setError, translate })
+    );
+    if (!res?.payload) {
+      dispatch(
+        updateModalType({
+          type: ModalType.NONE,
+        })
+      );
+    }
   };
 
   const changeRouterHandler = () => {
     router.pathname = "/customers";
     updateQuery(router, router.locale as string);
     onClose();
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
   };
 
   const id = router.query.customer;
@@ -198,6 +203,10 @@ export default function useCustomerDetail({
     }
   };
 
+  const handlePreviousClick = () => {
+    router.push("/customers");
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -235,8 +244,8 @@ export default function useCustomerDetail({
     ),
   };
 
-  const handlePreviousClick = () => {
-    router.push("/customers");
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   return {

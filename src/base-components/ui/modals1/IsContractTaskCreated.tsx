@@ -56,7 +56,6 @@ export const IsContractTaskCreated = ({
 
   const handleConfirm = () => {
     if (contractId) {
-      // if (contractDetails?.offerID?.date) {
       const updatedDates = contractDetails?.offerID?.date?.map(
         (dateItem: any) => {
           const { startDate, endDate } = dateItem;
@@ -332,7 +331,6 @@ export const IsContractTaskCreated = ({
           note: noteDetail,
         })
       );
-      // }
 
       dispatch(updateModalType(ModalType.NONE));
       router.push(`/calendar?isContractId=${contractId}`);
@@ -395,6 +393,8 @@ export const IsContractTaskCreated = ({
           >
             {translate("common.yes")}
           </button>
+
+
         </div>
       </div>
     </BaseModal>

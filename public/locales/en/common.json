@@ -160,6 +160,7 @@
     "file": "Please Select a valid file format"
   },
   "validationMessages": {
+    "delete_dependency_deny":"Cannot delete: item has related dependencies",
     "unauthorized": "You do not have permission",
     "required": "This field is required",
     "nonexistent": "nonexistent",

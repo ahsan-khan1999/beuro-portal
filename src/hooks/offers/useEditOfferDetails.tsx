@@ -81,6 +81,8 @@ export const useEditOfferDetails = ({
             setOfferDetails({ ...res.payload, type: "Existing Customer" })
           );
 
+          console.log(res?.payload, "res?.payload");
+
           reset({
             type: "Existing Customer",
             leadID: res?.payload?.leadID?.id,
