@@ -422,6 +422,8 @@ const useContract = () => {
 
           const customerName =
             contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+          const customerGender =
+            contractDetails?.offerID?.leadID?.customerDetail?.gender;
           const customerEmail =
             contractDetails?.offerID?.leadID?.customerDetail?.email;
           const customerPhoneNumber =
@@ -657,7 +659,12 @@ const useContract = () => {
                 id: contractDetails?.id,
               },
               date: updatedDates,
-              title: contractDetails?.title,
+              title:
+                (contractDetails?.title || "") +
+                " " +
+                translate(`gender.${customerGender}`) +
+                " " +
+                customerName,
               isAllDay: false,
               type: "Contract",
               alertTime: 15,

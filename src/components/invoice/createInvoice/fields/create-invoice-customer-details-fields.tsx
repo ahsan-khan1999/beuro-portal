@@ -491,7 +491,7 @@ export const generateDateChildren = (
   const { t: translate } = useTranslation();
   const dateformFields = [];
   for (let i = 0; i < count; i++) {
-    dateformFields.push({
+    dateformFields?.push({
       containerClass: "mb-0 pt-5",
       field: {
         type: Field.div,
@@ -697,7 +697,7 @@ export const CreateInvoiceDetailsDateFormField = (
 ) => {
   const { t: translate } = useTranslation();
   const dateField = {
-    containerClass: "mb-0 ",
+    containerClass: "mb-0",
     label: {
       text: "Start Date",
       htmlFor: `date.startDate`,
@@ -708,12 +708,8 @@ export const CreateInvoiceDetailsDateFormField = (
       className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
       id: `date.startDate`,
       name: `date.startDate`,
-      // remove: key > 0 && "Remove",
-      // onRemove: () => handleRemoveDateField(key),
       register,
       dateType: "date",
-
-      // value: invoiceDetails?.date?.length > 0 && invoiceDetails?.date[key]?.startDate
     },
   };
   const dateField2 = {
@@ -732,7 +728,6 @@ export const CreateInvoiceDetailsDateFormField = (
       onRemove: () => handleRemoveDateField(count),
       register,
       dateType: "date",
-      // value: invoiceDetails?.date?.length > 0 && invoiceDetails?.date[key]?.endDate
     },
   };
   const fieldObj = { startDate: dateField, endDate: dateField2 };

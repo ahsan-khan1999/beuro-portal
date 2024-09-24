@@ -159,7 +159,7 @@ export const useEditOfferDetails = ({
         phoneNumber: null,
         mobileNumber: null,
         address: null,
-        // customerID: "",
+        customerID: null,
         type: "New Customer",
         content: offerDetails?.content?.id,
         gender: null,

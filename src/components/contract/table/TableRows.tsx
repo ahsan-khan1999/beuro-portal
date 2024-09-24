@@ -2,7 +2,6 @@ import { contractTableTypes } from "@/types/contract";
 import React from "react";
 import { useRouter } from "next/router";
 import { getEmailColor } from "@/utils/utility";
-import { formatDateString } from "@/utils/functions";
 import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
@@ -127,12 +126,10 @@ const TableRows = ({
                   <p
                     className="bg-primary hover:bg-buttonHover text-white px-2 py-[6px] text-center rounded-md w-full"
                     onClick={() => {
-                      console.log("clicked");
-
                       onTaskCreate(item?.id);
                     }}
                   >
-                    {translate("calendar.main_heading")}
+                    {translate("common.add")}
                   </p>
                 </div>
                 <span className="flex justify-center items-center">

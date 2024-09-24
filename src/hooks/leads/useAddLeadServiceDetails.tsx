@@ -12,26 +12,27 @@ import { formatDateTimeToDateMango } from "@/utils/utility";
 import { readContent } from "@/api/slices/content/contentSlice";
 import { ContentTableRowTypes } from "@/types/content";
 
+export interface LeadServicesProps {
+  onHandleBack: (currentComponent: ComponentsType) => void;
+  onHandleNext: (currentComponent: ComponentsType) => void;
+}
+
 export const useAddLeadServiceDetails = ({
   onHandleBack,
   onHandleNext,
-}: {
-  onHandleBack: (currentComponent: ComponentsType) => void;
-  onHandleNext: (currentComponent: ComponentsType) => void;
-}) => {
-  const { t: translate } = useTranslation();
+}: LeadServicesProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const { systemSettings } = useAppSelector((state) => state.settings);
   const { content } = useAppSelector((state) => state.content);
-
-  const schema = generateLeadsServiceEditDetailsValidation(translate);
 
   useEffect(() => {
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
+  const schema = generateLeadsServiceEditDetailsValidation(translate);
   const {
     register,
     handleSubmit,
@@ -43,19 +44,20 @@ export const useAddLeadServiceDetails = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-  const selectedContent = leadDetails?.requiredService as ContentTableRowTypes;
 
+  const selectedContent = leadDetails?.requiredService as ContentTableRowTypes;
   const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
+
   useMemo(() => {
-    if (leadDetails.id) {
+    if (leadDetails?.id) {
       reset({
         ...leadDetails,
         desireDate: formatDateTimeToDateMango(leadDetails?.desireDate),
         requiredService: selectedContent?.id,
-        // otherServices: contentList?.map((item) => item.id)
+        otherServices: contentList.map((item) => item?.id),
       });
     }
-  }, [leadDetails.id]);
+  }, [leadDetails?.id]);
 
   const fields = AddLeadServiceDetailsFormField(
     register,
