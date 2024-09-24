@@ -66,7 +66,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
                 value: staticEnums.Gender[item],
                 label: translate(`gender.${item}`),
               })),
-
               control,
               disabled: isUpdate,
               value: "",

@@ -176,62 +176,61 @@ export default function LeadsFilter({
     });
   };
 
-
   return (
-    <div>
-      <div
-        className={`flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10`}
-      >
-        <div className="flex items-center gap-[14px]">
-          {checkbox?.map((item, idx) => (
-            <CheckField
-              key={idx}
-              checkboxFilter={filter}
-              setCheckBoxFilter={setFilter}
-              type={"status"}
-              label={item.label}
-              value={item.type}
-              onChange={(value, isChecked) =>
-                handleStatusChange(value, isChecked)
-              }
-            />
-          ))}
-        </div>
-        <div className="flex flex-col xMaxSize:flex-row xMaxSize:items-center gap-4">
-          <InputField
-            handleChange={handleInputChange}
-            ref={inputRef}
-            value={inputValue}
-            iconDisplay={true}
-            onEnterPress={onEnterPress}
+    <div
+      className={`flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10`}
+    >
+      <div className="flex items-center gap-[14px]">
+        {checkbox?.map((item, idx) => (
+          <CheckField
+            key={idx}
+            checkboxFilter={filter}
+            setCheckBoxFilter={setFilter}
+            type={"status"}
+            label={item.label}
+            value={item.type}
+            onChange={(value, isChecked) =>
+              handleStatusChange(value, isChecked)
+            }
           />
-          <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-            <div className="flex items-center gap-x-4">
-              <SelectField
-                handleChange={(value) => hanldeSortChange(value)}
-                value=""
-                options={[
-                  {
-                    label: `${translate("filters.sort_by.date")}`,
-                    value: "createdAt",
-                  },
-                  {
-                    label: `${translate("filters.sort_by.latest")}`,
-                    value: "-createdAt",
-                  },
-                  {
-                    label: `${translate("filters.sort_by.oldest")}`,
-                    value: "createdAt",
-                  },
-                  {
-                    label: `${translate("filters.sort_by.a_z")}`,
-                    value: "customerDetail.fullName",
-                  },
-                ]}
-                label={translate("common.sort_button")}
-                containerClassName="min-w-fit"
-              />
-              {!isAgent && <div className="flex items-center gap-x-3">
+        ))}
+      </div>
+      <div className="flex flex-col xMaxSize:flex-row xMaxSize:items-center gap-4">
+        <InputField
+          handleChange={handleInputChange}
+          ref={inputRef}
+          value={inputValue}
+          iconDisplay={true}
+          onEnterPress={onEnterPress}
+        />
+        <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+          <div className="flex items-center gap-x-4 z-20">
+            <SelectField
+              handleChange={(value) => hanldeSortChange(value)}
+              value=""
+              options={[
+                {
+                  label: `${translate("filters.sort_by.date")}`,
+                  value: "createdAt",
+                },
+                {
+                  label: `${translate("filters.sort_by.latest")}`,
+                  value: "-createdAt",
+                },
+                {
+                  label: `${translate("filters.sort_by.oldest")}`,
+                  value: "createdAt",
+                },
+                {
+                  label: `${translate("filters.sort_by.a_z")}`,
+                  value: "customerDetail.fullName",
+                },
+              ]}
+              label={translate("common.sort_button")}
+              containerClassName="min-w-fit"
+            />
+            {!isAgent && (
+              <div className="flex items-center gap-x-3">
                 <span className="text-[#4B4B4B] font-semibold text-base">
                   {translate("global_search.notes")}
                 </span>
@@ -254,47 +253,34 @@ export default function LeadsFilter({
                   }
                   label={translate("add_note_dropdown.all_notes")}
                 />
-              </div>}
-            </div>
-
-            <div className="flex items-center gap-x-4">
-             {!isAgent && <LeadsFilters
+              </div>
+            )}
+          </div>
+          <div className="flex items-center gap-x-4">
+            {!isAgent && (
+              <LeadsFilters
                 filter={filter}
                 setFilter={setFilter}
                 onFilterChange={handleFilterChange}
-              />}
-              {!isAgent && (
-                <Button
-                  inputType="button"
-                  onClick={() => {
-                    dispatch(setLeadDetails(DEFAULT_LEAD));
-                    router.push("/leads/add");
-                  }}
-                  className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
-                  icon={addIcon}
-                  text={translate("leads.add_button")}
-                  id="add"
-                  iconAlt="add button"
-                />
-              )}
-            </div>
+              />
+            )}
+            {!isAgent && (
+              <Button
+                inputType="button"
+                onClick={() => {
+                  dispatch(setLeadDetails(DEFAULT_LEAD));
+                  router.push("/leads/add");
+                }}
+                className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+                icon={addIcon}
+                text={translate("leads.add_button")}
+                id="add"
+                iconAlt="add button"
+              />
+            )}
           </div>
         </div>
       </div>
-
-      {/* <TabletLeadsFilter
-        filter={filter}
-        setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
-        isAgent={isAgent}
-      />
-
-      <MobileLeadsFilter
-        filter={filter}
-        setFilter={setFilter}
-        handleFilterChange={handleFilterChange}
-        isAgent={isAgent}
-      /> */}
     </div>
   );
 }
