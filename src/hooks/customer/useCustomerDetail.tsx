@@ -35,16 +35,16 @@ export default function useCustomerDetail({
   idAddNewCustomer: boolean;
 }) {
   const [isUpdate, setIsUpdate] = useState<boolean>(detail);
+  const { modal } = useAppSelector((state) => state.global);
   const { loading, customerDetails, isLoading } = useAppSelector(
     (state) => state.customer
   );
-  const { modal } = useAppSelector((state) => state.global);
   const {
     modal: { data },
   } = useAppSelector((state) => state.global);
 
-  const dispatch = useAppDispatch();
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
 
   const onClose = () => {

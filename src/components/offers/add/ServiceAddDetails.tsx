@@ -11,7 +11,6 @@ const ServiceAddDetails = ({
   onHandleNext: (currentComponent: ComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "";
   const {
     fields,
     control,
@@ -50,7 +49,6 @@ const ServiceAddDetails = ({
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
-        className={`${defaultClassName}`}
       />
     </>
   );

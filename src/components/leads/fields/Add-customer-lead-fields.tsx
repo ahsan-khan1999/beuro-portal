@@ -85,7 +85,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "customerType",
               name: "customerType",
               options:
-                Object.keys(staticEnums.CustomerType)
+                Object?.keys(staticEnums.CustomerType)
                   ?.slice(1)
                   ?.map((item) => ({
                     value: item,
@@ -114,7 +114,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "gender",
               name: "gender",
-              options: Object.keys(staticEnums.Gender).map((item) => ({
+              options: Object?.keys(staticEnums.Gender).map((item) => ({
                 value: staticEnums.Gender[item],
                 label: translate(`gender.${item}`),
               })),
@@ -138,7 +138,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "fullName",
               name: "fullName",
-
               placeholder: `${translate("leads.placeholders.name")}`,
               register,
               // value: leadDetails && leadDetails.customerID?.fullName
@@ -156,7 +155,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "email",
               name: "email",
               inputType: "text",
-
               placeholder: `${translate("leads.placeholders.email")}`,
               register,
               value: leadDetails && leadDetails.customerDetail?.email,
@@ -175,6 +173,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
               inputType: "tel",
+              placeholder: `${translate(
+                "offers.placeholders.phone_placeholder"
+              )}`,
               register,
               value: leadDetails?.id
                 ? leadDetails?.customerDetail?.phoneNumber
@@ -194,6 +195,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
+              placeholder: `${translate(
+                "offers.placeholders.mobile_placeholder"
+              )}`,
               register,
               value: leadDetails?.id
                 ? leadDetails?.customerDetail?.phoneNumber
@@ -230,7 +234,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "address.streetNumber",
               name: "address.streetNumber",
-
               placeholder: `${translate("leads.placeholders.street")}`,
               register,
               value:
@@ -250,12 +253,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               type: Field.input,
               className:
                 "!p-4 !border-[#BFBFBF] focus:!border-primary focus:!border-primary",
-
               inputType: "text",
               id: "address.postalCode",
               name: "address.postalCode",
               placeholder: `${translate("leads.placeholders.post_code")}`,
-
               register,
               value:
                 leadDetails && leadDetails?.customerDetail?.address?.postalCode,
@@ -275,6 +276,9 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "address.country",
               name: "address.country",
+              placeholder: `${translate(
+                "offers.placeholders.country_placeholder"
+              )}`,
               register,
             },
           },
@@ -337,6 +341,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
         inputType: "text",
         id: "companyName",
         name: "companyName",
+        placeholder: `${translate("offers.placeholders.company_placeholder")}`,
         register,
         setValue: setValue,
         value: leadDetails?.customerDetail?.companyName || "",
@@ -375,7 +380,6 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
           value: item.id,
           label: item.fullName,
         })),
-
         onItemChange: onCustomerSelect,
         control,
         value: leadDetails?.id
