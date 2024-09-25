@@ -242,7 +242,9 @@ export const AddOfferServiceDetailsFormField: GenerateOfferServiceFormField = (
                       rows: 2,
                       id: `serviceDetail.${i}.description`,
                       name: `serviceDetail.${i}.description`,
-                      placeholder: ``,
+                      placeholder: `${translate(
+                        "common.description_placeholder"
+                      )}`,
                       register,
                     },
                   },
@@ -446,6 +448,9 @@ export const AddOfferServiceDetailsDescriptionFormField: GenerateOfferServiceFor
                       rows: 2,
                       id: "discountDescription",
                       name: "discountDescription",
+                      placeholder: `${translate(
+                        "common.description_placeholder"
+                      )}`,
                       maxLength: 100,
                       register,
                     },

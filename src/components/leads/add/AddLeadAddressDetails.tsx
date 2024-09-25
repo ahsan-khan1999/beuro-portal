@@ -13,10 +13,8 @@ const AddLeadAddressDetails = ({
   onHandleBack: (currentComponent: ComponentsType) => void;
   onHandleNext: (currentComponent: ComponentsType) => void;
 }) => {
-  const defaultClassName = "";
   const router = useRouter();
-
-  const { fields, control, onSubmit, handleSubmit, errors, translate } =
+  const { fields, onSubmit, handleSubmit, errors, translate } =
     useAddLeadAddressDetails(onHandleBack);
 
   const handleCancel = () => {
@@ -47,7 +45,6 @@ const AddLeadAddressDetails = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </FormCard>

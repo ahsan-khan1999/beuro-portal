@@ -25,7 +25,6 @@ export default function Employees() {
 
   const CurrentComponent = useEmptyStates(
     <TableRows employsData={currentPageRows} />,
-    // currentPageRows?.length > 0,
     totalCount !== 0,
     isLoading
   );

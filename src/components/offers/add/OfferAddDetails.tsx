@@ -7,7 +7,6 @@ import { useAddOfferDetails } from "@/hooks/offers/useAddOfferDetails";
 
 const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
   const router = useRouter();
-  const defaultClassName = "";
   const {
     fields,
     control,
@@ -74,7 +73,6 @@ const OfferAddDetails = ({ onHandleNext }: { onHandleNext: Function }) => {
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </FormCard>

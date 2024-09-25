@@ -44,7 +44,6 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
               label: item,
               value: item,
             })) || [],
-
           control,
           onItemChange: (item) => handleChangeLabel(item, i),
         },
@@ -85,7 +84,6 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                     },
                   },
                   {
-                    containerClass: "",
                     field: {
                       type: Field.button,
                       className: "bg-white hover:bg-white",
@@ -138,7 +136,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.streetNumber`,
                 name: `address.${i}.streetNumber`,
-                placeholder: `Zweibrückenstraße, ${i}`,
+                placeholder: `${translate("offers.placeholders.street")}`,
                 register,
               },
             },
@@ -155,7 +153,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.postalCode`,
                 name: `address.${i}.postalCode`,
-                placeholder: `123${i}`,
+                placeholder: `${translate("offers.placeholders.post_code")}`,
                 register,
               },
             },
@@ -173,6 +171,9 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
+                placeholder: `${translate(
+                  "offers.placeholders.country_placeholder"
+                )}`,
                 register,
               },
             },
@@ -193,7 +194,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
           rows: 2,
           id: `address.${i}.description`,
           name: `address.${i}.description`,
-          placeholder: "",
+          placeholder: `${translate("common.description_placeholder")}`,
           register,
         },
       }

@@ -351,7 +351,7 @@ export default function InvoicesFilter({
             <BaseButton
               buttonText={translate("common.apply_button")}
               onClick={handleSave}
-              containerClassName="bg-primary my-2 px-8 py-2"
+              containerClassName="bg-primary my-2 px-8 py-2 hover:bg-buttonHover"
               textClassName="text-white"
             />
           </motion.div>

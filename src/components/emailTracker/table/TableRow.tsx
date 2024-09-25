@@ -28,7 +28,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                 key={item.id}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_4fr)_minmax(300px,_3fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(100px,_100px),minmax(130px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(140px,_4fr)_minmax(130px,_3fr)_minmax(120px,_120px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(160px,_4fr)_minmax(130px,_3fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)] ${
+                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(200px,_3fr)_minmax(300px,_4fr)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(80px,_80px),minmax(100px,_100%)_minmax(130px,_130px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(100px,_100px),minmax(120px,_3fr)_minmax(140px,_4fr)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(140px,_4fr)_minmax(120px,_120px)_minmax(130px,_130px)] xMaxSize:grid-cols-[minmax(80px,_80px),minmax(130px,_3fr)_minmax(160px,_4fr)_minmax(130px,_130px)_minmax(130px,_130px)_minmax(130px,_130px)] ${
                   index !== 0 && "border-t border-t-[#E7EAEE]"
                 } ${index === 0 && "mt-2"}`}
               >

@@ -205,7 +205,7 @@ export default function ServicesFilter({
             <BaseButton
               buttonText={translate("common.apply_button")}
               onClick={handleSave}
-              containerClassName="bg-primary mt-4 mb-1 px-8 py-2"
+              containerClassName="bg-primary mt-4 mb-1 px-8 py-2 hover:bg-buttonHover"
               textClassName="text-white"
             />
           </motion.div>

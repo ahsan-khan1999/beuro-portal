@@ -74,7 +74,7 @@ const OfferDetailsData = ({
                   <div className="flex items-center gap-x-2">
                     <button
                       onClick={() => onComponentChange(false)}
-                      className="text-[#4B4B4B] font-medium rounded-lg border border-[#4A13E7] py-[5px] px-4 max-w-[131px] w-full bg-white"
+                      className="text-[#4B4B4B] hover:text-white font-medium rounded-lg border border-[#4A13E7] py-[5px] px-4 max-w-[131px] w-full bg-white hover:bg-buttonHover"
                     >
                       {translate("leads.additional.cancel_button")}
                     </button>

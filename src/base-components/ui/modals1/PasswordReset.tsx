@@ -13,9 +13,9 @@ const PasswordReset = ({
   onClose: () => void;
   passwordResetSuccessfully: Function;
 }) => {
-  const { id } = useAppSelector((state) => state.global.modal.data);
+  const id = useAppSelector((state) => state.global.modal.data);
 
-  const { fields, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, onSubmit, handleSubmit, errors, translate } =
     useEmployeePasswordReset({ passwordResetSuccessfully, id });
 
   return (
