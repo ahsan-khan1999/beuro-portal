@@ -21,8 +21,8 @@ export default function useEmployeePasswordReset({
     (state) => state.employee
   );
 
-  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
 
   const schema = generateEmployeePasswordResetValidationSchema(translate);
 

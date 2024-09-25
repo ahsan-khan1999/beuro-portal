@@ -12,7 +12,7 @@ import {
 import { useMemo } from "react";
 import { calculateTax } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
-import  { useEffect } from "react";
+import { useEffect } from "react";
 export default function useInvoiceCreatedModal(invoiceCreated: Function) {
   const router = useRouter();
   const { loading, error, invoiceDetails } = useAppSelector(
@@ -41,6 +41,7 @@ export default function useInvoiceCreatedModal(invoiceCreated: Function) {
 
   const amount = watch("amount");
   const type = watch("type");
+
   useEffect(() => {
     setValue("type", "0");
     setValue("amount", remainingAmount.toFixed(2));

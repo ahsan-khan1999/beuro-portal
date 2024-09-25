@@ -73,13 +73,9 @@ const ContractDetailsCard = ({
 
   return (
     <div className="min-h-[218px]">
-      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
+      <div className="flex justify-between items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
         <div className="flex items-center">
-          <span
-            className="cursor-pointer"
-            // onClick={() => router.push("/contract")}
-            onClick={handleBack}
-          >
+          <span className="cursor-pointer" onClick={handleBack}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
@@ -106,7 +102,6 @@ const ContractDetailsCard = ({
             {translate("contracts.card_content.heading")}
           </p>
         </div>
-
         <div className="flex justify-end gap-x-[22px]">
           <button
             onClick={handleSendEmail}
@@ -330,29 +325,7 @@ const ContractDetailsCard = ({
           </div>
 
           <div className="flex gap-x-10">
-            <div
-              className="flex items-center gap-[11px] cursor-pointer"
-              onClick={(e) =>
-                handleNotes(
-                  contractDetails?.id,
-                  contractDetails?.contractNumber,
-                  name,
-                  heading,
-                  e
-                )
-              }
-            >
-              <span className="text-[#4D4D4D] font-normal text-base">
-                {translate("contracts.card_content.notes")}:
-              </span>
-
-              <WriteIcon
-                pathClass={
-                  contractDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
-                }
-              />
-            </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-x-3">
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.images")}:
               </span>
@@ -375,6 +348,28 @@ const ContractDetailsCard = ({
                   }
                 />
               </span>
+            </div>
+            <div
+              className="flex items-center gap-[11px] cursor-pointer"
+              onClick={(e) =>
+                handleNotes(
+                  contractDetails?.id,
+                  contractDetails?.contractNumber,
+                  name,
+                  heading,
+                  e
+                )
+              }
+            >
+              <span className="text-[#4D4D4D] font-normal text-base">
+                {translate("contracts.card_content.notes")}:
+              </span>
+
+              <WriteIcon
+                pathClass={
+                  contractDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
+                }
+              />
             </div>
           </div>
         </div>
