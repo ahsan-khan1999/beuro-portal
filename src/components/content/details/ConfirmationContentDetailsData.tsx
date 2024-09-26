@@ -90,7 +90,7 @@ const ConfirmationContentDetailsData = ({
             <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
-            {contentDetail?.offerContent?.attachments.length > 0 ? (
+            {contentDetail?.confirmationContent?.attachments.length > 0 ? (
               <div className="mt-5 grid grid-cols-3 gap-2">
                 {contentDetail?.confirmationContent?.attachments?.map(
                   (item, index) => (
