@@ -14,14 +14,11 @@ const EditConfirmationContentDetailsData = ({
   onClick: (index: number, component: ComponentsType) => void;
   contentDetail: ContentTableRowTypes;
 }) => {
-  const defaultClassName = "";
   const {
     fields,
-    control,
     onSubmit,
     handleSubmit,
     errors,
-    error,
     translate,
     confirmationDescription,
   } = useEditConfirmationContentDetails(onClick);
@@ -51,7 +48,6 @@ const EditConfirmationContentDetailsData = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </div>

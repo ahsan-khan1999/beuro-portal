@@ -19,7 +19,6 @@ import { getUser } from "@/utils/auth.util";
 import { AgentPrfoileSettingFormField } from "@/components/agent/setting/setting-profile-fields";
 import { staticEnums } from "@/utils/static";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
-import { CustomerPromiseActionType } from "@/types/company";
 
 export const useAgentProfileSetting = () => {
   const router = useRouter();

@@ -259,7 +259,6 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
         globalThis.translate(`validationMessages.${e?.response?.data?.message}`)
       );
       thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
-      // toast.error(setErrorMessage(e?.response?.data?.message));
       setErrors(setError, e?.data.data, translate);
       return false;
     }

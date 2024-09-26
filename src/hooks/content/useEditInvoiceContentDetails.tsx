@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
+import { ModalType } from "@/enums/ui";
+import { updateModalType } from "@/api/slices/globalSlice/global";
 
 export const useEditInvoiceContentDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -84,7 +86,10 @@ export const useEditInvoiceContentDetails = (onClick: Function) => {
     const res = await dispatch(
       updateContent({ data: apiData, router, setError, translate })
     );
-    if (res?.payload) onClick(2, ComponentsType.invoiceContent);
+    if (res?.payload) {
+      onClick(2, ComponentsType.invoiceContent);
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+    }
   };
 
   return {

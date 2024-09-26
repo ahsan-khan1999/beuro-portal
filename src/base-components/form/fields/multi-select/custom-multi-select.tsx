@@ -49,8 +49,6 @@ export const MultiSelectBox = ({
       ? selectedOptions.filter((option) => option !== value)
       : [...selectedOptions, value];
 
-    console.log(updatedOptions, "updatedOptions");
-
     setSelectedOptions(updatedOptions);
     field?.onChange(updatedOptions);
     trigger?.(field?.name);

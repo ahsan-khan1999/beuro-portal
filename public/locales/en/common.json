@@ -992,8 +992,9 @@
       "save_button": "Save"
     },
     "content_created_modal": {
-      "main_heading": "Content Created Successful ",
-      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "main_heading": "Content Created Successful",
+      "sub_heading": "Thanks for creating Content we are happy to have you.",
+      "update_sub_heading": "Thanks for updating Content we are happy to have you.",
       "button": "Done"
     }
   },
@@ -2565,6 +2566,7 @@
     "add_task": "Add Task",
     "today": "Today",
     "edit": "Edit",
+    "all_day_task": "All Day",
     "select_date": "Select Date",
     "select_color": "Select Color",
     "remainder": "Remainder",

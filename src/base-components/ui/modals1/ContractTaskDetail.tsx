@@ -45,15 +45,16 @@ export const ContractTaskDetail = ({
       ? moment(taskDetail.selectedEndDate).format("HH:mm")
       : "";
 
-  const isSameDay = moment(taskDetail?.selectedStartDate).isSame(
-    taskDetail?.selectedEndDate,
-    "day"
-  );
+  const isSameDay = moment(taskDetail?.selectedStartDate)
+    .startOf("day")
+    .isSame(moment(taskDetail?.selectedEndDate).startOf("day"), "day");
 
   const handlePDFPreview = () => {
     const pdfRoute = `/contract/pdf-preview?offerID=${taskDetail?.contractID?.id}&isCalendar=true`;
     window.open(pdfRoute, "_blank");
   };
+
+  const isSameDateAlldayTask = taskDetail?.selectedEndDate === "Invalid date";
 
   return (
     <BaseModal
@@ -93,6 +94,20 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
+        {isSameDateAlldayTask && (
+          <div className="ml-5 mt-3 mb-5">
+            {taskDetail?.selectedStartDate && (
+              <div className="flex flex-col gap-y-1">
+                <span className="text-[#7A7A7A] text-sm font-medium">
+                  {calendarTaskformatDate(taskDetail?.selectedStartDate)}
+                </span>
+                <span className="text-[#3C3C3C] text-sm font-semibold">
+                  {translate("calendar.all_day_task")}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
         {isSameDay && (
           <div className="ml-5 mt-3 mb-5">
             {taskDetail?.selectedStartDate && (
@@ -114,7 +129,7 @@ export const ContractTaskDetail = ({
           </div>
         )}
 
-        {!isSameDay && (
+        {!isSameDay && !isSameDateAlldayTask && (
           <div className="ml-5 flex flex-col gap-y-1 mt-3 mb-5">
             {taskDetail?.selectedStartDate && (
               <div className="flex flex-col gap-y-1">
@@ -208,8 +223,7 @@ export const ContractTaskDetail = ({
         <hr className="opacity-30 -mx-[10px]" />
 
         <div className="pt-[17px] pb-[5px] flex items-center justify-between">
-          <span
-            className="text-sm font-normal text-[#272727] cursor-pointer"
+          <div
             onClick={() =>
               onEditTask(
                 taskDetail?.id,
@@ -217,9 +231,12 @@ export const ContractTaskDetail = ({
                 taskDetail?.selectedEndDate
               )
             }
+            className="py-[6px] px-4 rounded-md cursor-pointer bg-primary hover:bg-buttonHover"
           >
-            {translate("calendar.edit")}
-          </span>
+            <span className="text-sm font-normal text-white">
+              {translate("calendar.edit")}
+            </span>
+          </div>
           <CalendarDeleteIcon onClick={() => onDelete(taskDetail?.id)} />
         </div>
       </div>

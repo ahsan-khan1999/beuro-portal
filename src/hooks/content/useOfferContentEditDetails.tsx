@@ -15,6 +15,8 @@ import { useState, useEffect } from "react";
 import { transformAttachments } from "@/utils/utility";
 import { createContent } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 export const useOfferContentEditDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -117,7 +119,10 @@ export const useOfferContentEditDetails = (onClick: Function) => {
           isUpdate: true,
         })
       );
-      if (res?.payload) onClick(0, ComponentsType.offerContent);
+      if (res?.payload) {
+        onClick(0, ComponentsType.offerContent);
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+      }
     }
   };
 

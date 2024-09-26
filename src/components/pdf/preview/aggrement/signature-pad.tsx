@@ -131,7 +131,6 @@ export const SignaturePad = ({
       signaturePad.minWidth = scaledStrokeWidth;
       signaturePad.maxWidth = scaledStrokeWidth * 0.7;
 
-      // Redraw the signature from the existing data
       const data = signaturePad.toData();
       signaturePad.clear();
       signaturePad.fromData(data);
@@ -343,12 +342,6 @@ export const SignaturePad = ({
         );
         const blobPdf = await reactPdf(newPdf).toBlob();
 
-        // setOfferSignature && setOfferSignature(file)
-        // setsignatureHolder(file as any)
-        // setTimeout(() => {
-        // updateInstance(pdfDoc);
-        // }, 10);
-
         const convertedFile = blobToFile(
           blobPdf,
           `${
@@ -377,12 +370,6 @@ export const SignaturePad = ({
         }
 
         return true;
-
-        // smoothScrollToSection("#acceptOffer")
-
-        // Function to handle scrolling
-
-        // window.scrollTo(0, document.body.scrollHeight - window.innerHeight);
       } else {
         showError(translate("common.sign_first"));
       }

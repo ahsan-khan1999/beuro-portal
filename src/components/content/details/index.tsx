@@ -4,8 +4,8 @@ import ContentCard from "../ContentCard";
 import ContentDetailsData from "./ContentDetailsData";
 import useContentDetail from "@/hooks/content/useContentDetail";
 
-const ContentDetails = () => {
-  const { contentDetails, contentDeleteHandler, renderModal, loading } =
+export const ContentDetails = () => {
+  const { contentDetails, contentDeleteHandler, renderModal } =
     useContentDetail();
 
   return (
@@ -24,5 +24,3 @@ const ContentDetails = () => {
     </Layout>
   );
 };
-
-export default ContentDetails;
