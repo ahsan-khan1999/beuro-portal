@@ -95,7 +95,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
         },
       });
 
-      formField.push({
+      formField?.push({
         field: {
           type: Field.div,
           id: `div-field-${i}`,
@@ -115,7 +115,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 inputType: "text",
                 id: `address.${i}.streetNumber`,
                 name: `address.${i}.streetNumber`,
-                placeholder: ``,
+                placeholder: `${translate("offers.placeholders.street")}`,
                 register,
               },
             },
@@ -132,7 +132,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 inputType: "text",
                 id: `address.${i}.postalCode`,
                 name: `address.${i}.postalCode`,
-                placeholder: ``,
+                placeholder: `${translate("offers.placeholders.post_code")}`,
                 register,
               },
             },
@@ -147,20 +147,10 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 className: "!pl-4",
                 id: `address.${i}.floor`,
                 name: `address.${i}.floor`,
-                options: [
-                  {
-                    label: "1",
-                    value: "1",
-                  },
-                  {
-                    label: "2",
-                    value: "2",
-                  },
-                  {
-                    label: "3",
-                    value: "3",
-                  },
-                ],
+                options: Array?.from({ length: 10 }, (_, i) => ({
+                  label: (i + 1).toString(),
+                  value: (i + 1).toString(),
+                })),
                 control,
               },
             },
@@ -175,20 +165,10 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 className: "!pl-4",
                 id: `address.${i}.room`,
                 name: `address.${i}.room`,
-                options: [
-                  {
-                    label: "1",
-                    value: "1",
-                  },
-                  {
-                    label: "2",
-                    value: "2",
-                  },
-                  {
-                    label: "3",
-                    value: "3",
-                  },
-                ],
+                options: Array?.from({ length: 10 }, (_, i) => ({
+                  label: (i + 1).toString(),
+                  value: (i + 1).toString(),
+                })),
                 control,
               },
             },

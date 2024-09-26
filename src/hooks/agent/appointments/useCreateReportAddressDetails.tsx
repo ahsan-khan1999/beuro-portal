@@ -15,7 +15,7 @@ import {
   ContactReportAddressFormField,
   ReportContactSubmitFormField,
 } from "@/components/agent/appointments/createReport/fields/contact-address-form-fields";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   createReport,
   readAppointmentDetails,

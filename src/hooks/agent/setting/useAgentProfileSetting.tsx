@@ -122,7 +122,7 @@ export const useAgentProfileSetting = () => {
         updateEmployee({ data: apiData, router, setError, translate })
       );
       if (res?.payload) {
-        dispatch(setEmployeeDetails(res.payload));
+        dispatch(setEmployeeDetails(res?.payload));
         handleSuccess();
       }
     } catch (error) {

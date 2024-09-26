@@ -1,33 +1,20 @@
 import {
-  AnyAction,
   AsyncThunk,
   PayloadAction,
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
 import apiServices from "../../../services/requestHandler";
-import {
-  ApiResponseType,
-  ApiResponseTypeProfile,
-  ApiResponseTypePut,
-  AuthState,
-  User,
-} from "@/types/auth";
+import { ApiResponseType, ApiResponseTypePut, AuthState } from "@/types/auth";
 import { updateQuery } from "@/utils/update-query";
-import {
-  conditionHandlerLogin,
-  conditionHandlerRegistration,
-  senitizePhone,
-  setErrors,
-} from "@/utils/utility";
+import { conditionHandlerLogin, setErrors } from "@/utils/utility";
 import {
   getUser,
   saveUser,
   setRefreshToken,
   setToken,
 } from "@/utils/auth.util";
-import { formatDateString, isJSON } from "@/utils/functions";
-import { getCookie } from "cookies-next";
+import { isJSON } from "@/utils/functions";
 import { SalutationValue } from "@/enums/form";
 import { NextRouter } from "next/dist/client/router";
 import { staticEnums } from "@/utils/static";
@@ -63,8 +50,6 @@ export const loginUser: AsyncThunk<boolean, object, object> | any =
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       setErrors(setError, e?.data.data, translate);
-
-      // toast.info(e?.data?.message);
       return false;
     }
   });
@@ -546,7 +531,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // standard reducer logic, with auto-generated action types per reducer
     setUser: (state, action) => {
       state.user = action.payload;
     },

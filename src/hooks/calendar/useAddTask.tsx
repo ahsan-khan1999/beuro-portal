@@ -69,7 +69,7 @@ export default function useAddTask({
   const colour = watch("colour");
 
   useEffect(() => {
-    if (isContractId) return;
+    // if (isContractId) return;
 
     if (id && taskDetail) {
       let filteredDate = taskDetail?.date;
@@ -105,8 +105,6 @@ export default function useAddTask({
         title: taskDetail?.title,
         date: taskDetail?.date,
         streetNumber: taskDetail?.address?.streetNumber,
-        postalCode: taskDetail?.address?.postalCode,
-        country: taskDetail?.address?.country,
         isAllDay: taskDetail?.isAllDay,
         note: taskDetail?.note,
         alertTime: taskDetail?.alertTime,
@@ -117,32 +115,32 @@ export default function useAddTask({
   }, [isContractId]);
 
   const handleDateChange = (name: string, value: string) => {
-    if (name?.includes("endDate")) {
-      return;
-    }
+    const indexMatch = name.match(/date\.(\d+)\.startDate/);
+    if (!indexMatch) return;
 
+    const index = parseInt(indexMatch[1], 10);
     const startMoment = moment(value);
 
     if (isUpdate) {
       const minutesInDiff = moment(value).diff(startDateRef.current, "minutes");
 
       if (isAllDay) {
-        setValue("date.0.endDate", startMoment.format("YYYY-MM-DD"));
+        setValue(`date.${index}.endDate`, startMoment.format("YYYY-MM-DD"));
       } else {
         const newEndDate = moment(endDate)
           .add(minutesInDiff, "minutes")
           .format("YYYY-MM-DDTHH:mm");
-        setValue("date.0.endDate", newEndDate);
+        setValue(`date.${index}.endDate`, newEndDate);
       }
     } else {
       if (isAllDay) {
         const newEndDate = startMoment.format("YYYY-MM-DD");
-        setValue("date.0.endDate", newEndDate);
+        setValue(`date.${index}.endDate`, newEndDate);
       } else {
         const newEndDate = startMoment
           .add(60, "minutes")
           .format("YYYY-MM-DDTHH:mm");
-        setValue("date.0.endDate", newEndDate);
+        setValue(`date.${index}.endDate`, newEndDate);
       }
     }
 
@@ -168,21 +166,23 @@ export default function useAddTask({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formattedData: any = {
       title: data.title,
-      date:
-        taskDetail?.date[0].startDate.trim() !== ""
-          ? taskDetail?.date.map((item) => {
-              if (
-                moment(item.startDate).isSame(clickedStartDate) &&
-                moment(item.endDate).isSame(clickedEndDate)
-              ) {
-                return {
-                  startDate: data.date[0].startDate,
-                  endDate: data.date[0].endDate,
-                };
-              }
-              return item;
-            })
-          : data.date,
+      date: isUpdate
+        ? taskDetail?.date?.map((item) => {
+            if (
+              moment(item.startDate).isSame(clickedStartDate) &&
+              moment(item.endDate).isSame(clickedEndDate)
+            ) {
+              return {
+                startDate: data.date[0].startDate,
+                endDate: data.date[0].endDate,
+              };
+            }
+            return item;
+          })
+        : data.date?.map((dateItem: any) => ({
+            startDate: dateItem.startDate,
+            endDate: dateItem.endDate,
+          })),
       isAllDay: data.isAllDay,
       colour: data.colour,
       note: data.note,
