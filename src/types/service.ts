@@ -6,18 +6,16 @@ import {
   UseFormHandleSubmit,
 } from "react-hook-form";
 
-// Interface for the services table
 export interface Service {
   id: string;
   serviceName: string;
   unit: number;
   createdBy?: User;
-  price: number
+  price: number;
   description: string;
   createdAt: string;
-  refID:string
-  discount:number
-
+  refID: string;
+  discount: number;
 }
 
 export interface FormDataProps {

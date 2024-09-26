@@ -9,8 +9,7 @@ const AddressEditDetails = ({
 }: {
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, onSubmit, handleSubmit, errors, translate } =
     useLeadsAddressEditDetails(onClick);
 
   return (
@@ -32,7 +31,6 @@ const AddressEditDetails = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </FormCard>

@@ -55,6 +55,8 @@ export const useAddServiceDetails = (
 
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
+  console.log(offerDetails?.serviceDetail?.serviceDetail, "service");
+
   useEffect(() => {
     dispatch(readService({ params: { filter: {}, paginate: 0 } }));
     dispatch(readTaxSettings({}));

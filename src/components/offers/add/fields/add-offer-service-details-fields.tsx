@@ -672,7 +672,6 @@ const generateServiceCalulationChildren = (
                         value: 0,
                         setValue,
                         disabled: !isTax,
-                        // onClick: generateTotal
                       },
                     },
                     {
@@ -692,7 +691,6 @@ const generateServiceCalulationChildren = (
                         value: 1,
                         setValue,
                         disabled: !isTax,
-                        // onClick: generateTotal
                       },
                     },
                   ],
@@ -718,7 +716,6 @@ const generateServiceCalulationChildren = (
                   name: "isDiscount",
                   checked: false,
                   register,
-                  // onClick: generateTotal
                 },
               },
 
@@ -747,8 +744,6 @@ const generateServiceCalulationChildren = (
                   disabled: !isDiscount,
                   setValue,
                   step: "0.01",
-
-                  // onChange: generateTotal
                 },
               },
               {
@@ -774,7 +769,6 @@ const generateServiceCalulationChildren = (
                         value: 0,
                         setValue,
                         disabled: !isDiscount,
-                        // onClick: generateTotal
                       },
                     },
                     {
@@ -794,7 +788,6 @@ const generateServiceCalulationChildren = (
                         value: 1,
                         setValue,
                         disabled: !isDiscount,
-                        // onClick: generateTotal
                       },
                     },
                   ],
@@ -842,7 +835,7 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
                 inputType: "button",
                 className:
                   "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] min-w-[152px] w-fit h-[50px] text-black hover-bg-none",
-                onClick: OnClick, // edit for create-report
+                onClick: OnClick,
               },
             },
             {
