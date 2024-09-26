@@ -14,14 +14,11 @@ const EditReceiptContentDetails = ({
   onClick: (index: number, component: ComponentsType) => void;
   contentDetail: ContentTableRowTypes;
 }) => {
-  const defaultClassName = "";
   const {
     fields,
-    control,
     onSubmit,
     handleSubmit,
     errors,
-    error,
     translate,
     receiptDescription,
   } = useEditReceiptDetails(onClick);
@@ -52,7 +49,6 @@ const EditReceiptContentDetails = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </div>

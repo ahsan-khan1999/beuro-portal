@@ -12,6 +12,7 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useTranslation } from "next-i18next";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 const useContentDetail = () => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const useContentDetail = () => {
       );
     }
   }, [id]);
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -68,6 +70,16 @@ const useContentDetail = () => {
         loading={loading}
       />
     ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.successful")}
+        subHeading={translate(
+          "content.content_created_modal.update_sub_heading"
+        )}
+        route={onClose}
+      />
+    ),
   };
 
   const renderModal = () => {
@@ -81,4 +93,5 @@ const useContentDetail = () => {
     loading,
   };
 };
+
 export default useContentDetail;

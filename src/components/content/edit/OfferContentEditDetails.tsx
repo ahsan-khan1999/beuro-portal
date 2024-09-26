@@ -14,7 +14,6 @@ const OfferContentEditDetails = ({
   onClick: (index: number, component: ComponentsType) => void;
   contentDetail: ContentTableRowTypes;
 }) => {
-  const defaultClassName = "";
   const {
     fields,
     control,
@@ -52,7 +51,6 @@ const OfferContentEditDetails = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </div>

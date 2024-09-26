@@ -151,14 +151,14 @@ const ContractDetailsCard = ({
               {contractDetails.contractNumber}
             </span>
           </div>
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-x-3 overflow-hidden text-ellipsis whitespace-nowrap">
             <span className="text-base font-normal text-[#4D4D4D] min-w-[120px]">
               {translate("contracts.table_headings.title")}:
             </span>
 
-            <span className="text-base font-medium text-[#4B4B4B] truncate">
+            <p className="text-base font-medium text-[#4B4B4B] truncate">
               {contractDetails.offerID?.title}
-            </span>
+            </p>
           </div>
           <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">

@@ -152,13 +152,12 @@ const ExistingNotes = ({
             ))}
           </div>
         ) : (
-          // <div className="flex justify-center items-center">
           <NoDataEmptyState
             className="w-full"
-            containerClassName="py-5"
-            imgClassName="w-[120px] h-[112px]"
+            containerClassName="py-5 px-6"
+            textClassName="text-lg xMini:text-2xl"
+            imgClassName="w-20 h-20 xMini:w-fit xMini:h-fit"
           />
-          // </div>
         )}
       </div>
     </BaseModal>

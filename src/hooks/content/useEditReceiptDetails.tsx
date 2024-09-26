@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
+import { ModalType } from "@/enums/ui";
+import { updateModalType } from "@/api/slices/globalSlice/global";
 
 export const useEditReceiptDetails = (onClick: Function) => {
   const router = useRouter();
@@ -83,7 +85,10 @@ export const useEditReceiptDetails = (onClick: Function) => {
     const res = await dispatch(
       updateContent({ data: apiData, router, setError, translate })
     );
-    if (res?.payload) onClick(3, ComponentsType.receiptContent);
+    if (res?.payload) {
+      onClick(3, ComponentsType.receiptContent);
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+    }
   };
 
   return {

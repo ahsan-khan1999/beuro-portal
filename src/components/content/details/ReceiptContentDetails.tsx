@@ -3,7 +3,6 @@ import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "./ContentDetailsData";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
-import { useRouter } from "next/router";
 
 const ReceiptContentDetails = ({
   contentDetail,
@@ -12,8 +11,6 @@ const ReceiptContentDetails = ({
   contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const router = useRouter();
-
   return (
     <div
       className="rounded-md border-none bg-white w-full h-fit"
