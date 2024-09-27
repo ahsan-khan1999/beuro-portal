@@ -130,19 +130,6 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         companyName: leadDetails?.customerDetail?.companyName,
         gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
       });
-    } else if (type === "Existing Customer" && !leadDetails?.id) {
-      reset({
-        fullName: null,
-        type: "New Customer",
-        customer: null,
-        customerType: null,
-        email: null,
-        phoneNumber: null,
-        mobileNumber: null,
-        address: null,
-        companyName: "",
-        gender: null,
-      });
     }
   }, [type]);
 
@@ -172,12 +159,16 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         stage: ComponentsType.addressAdd,
       };
 
+      // Remove `customerID` if the type is "New Customer"
       if (type === "New Customer") {
         delete apiData.customerID;
+      } else {
+        // Include customerID from leadDetails if it exists
+        if (leadDetails?.customerID) {
+          apiData.customerID = leadDetails?.customerID;
+        }
       }
 
-      if (leadDetails?.customerID)
-        apiData = { ...apiData, customerID: leadDetails?.customerID };
       const res = await dispatch(
         createLead({ data: apiData, router, setError, translate })
       );

@@ -51,7 +51,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     updateQuery(router, router.locale as string);
   };
 
-  console.log(offerDetails, "offerDetails");
 
   const schema = generateOfferDetailsValidationSchema(translate);
   const {

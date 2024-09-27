@@ -390,7 +390,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         inputType: "text",
         id: "companyName",
         name: "companyName",
-        placeholder: "",
+        placeholder: `${translate("offers.placeholders.company_name")}`,
         register,
         setValue: setValue,
         value: offerDetails?.leadID?.customerDetail?.companyName || "",
