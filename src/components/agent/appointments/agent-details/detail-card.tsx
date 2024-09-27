@@ -66,7 +66,7 @@ export const AppointmentsDetailCard = ({
     `${translate("appointments.appointment_status.Cancelled")}`,
   ];
 
-  const items = Object.keys(staticEnums["AppointmentStatus"]).map(
+  const items = Object?.keys(staticEnums["AppointmentStatus"]).map(
     (item, index) => ({
       item: { label: itemsValue[index], value: item },
     })
@@ -79,16 +79,42 @@ export const AppointmentsDetailCard = ({
         id: "convert",
         type: "Existing Customer",
         leadID: {
-          ...reportDetails?.appointmentID?.leadID,
+          leadID: reportDetails?.appointmentID?.leadID?.id,
           customerID: reportDetails?.appointmentID?.leadID?.customerID,
+          customerDetail: {
+            fullName: reportDetails?.customerDetail?.fullName,
+            email: reportDetails?.customerDetail?.email,
+            phoneNumber: reportDetails?.customerDetail?.phoneNumber,
+            mobileNumber:
+              reportDetails?.appointmentID?.leadID?.customerDetail
+                ?.mobileNumber,
+            gender:
+              reportDetails?.appointmentID?.leadID?.customerDetail?.gender,
+            customerType:
+              reportDetails?.appointmentID?.leadID?.customerDetail
+                ?.customerType,
+            companyName:
+              reportDetails?.appointmentID?.leadID?.customerDetail?.companyName,
+            address: {
+              streetNumber:
+                reportDetails?.appointmentID?.leadID?.customerDetail?.address
+                  ?.streetNumber,
+              postalCode:
+                reportDetails?.appointmentID?.leadID?.customerDetail?.address
+                  ?.postalCode,
+              country:
+                reportDetails?.appointmentID?.leadID?.customerDetail?.address
+                  ?.country,
+            },
+          },
+        },
+        content: reportDetails?.appointmentID?.leadID?.requiredService,
+        addressID: {
+          address: reportDetails?.addressID?.address,
         },
         serviceDetail: {
           serviceDetail: reportDetails?.serviceDetail?.serviceDetail,
         },
-        addressID: {
-          address: reportDetails?.appointmentID?.leadID?.addressID?.address,
-        },
-        content: reportDetails?.appointmentID?.leadID?.requiredService,
         date: [
           {
             startDate: moment(
@@ -101,10 +127,22 @@ export const AppointmentsDetailCard = ({
     );
     dispatch(
       setCustomerDetails({
-        ...reportDetails?.appointmentID?.leadID?.customerDetail,
+        fullName: reportDetails?.customerDetail?.fullName,
+        email: reportDetails?.customerDetail?.email,
+        phoneNumber: reportDetails?.customerDetail?.phoneNumber,
+        mobileNumber:
+          reportDetails?.appointmentID?.leadID?.customerDetail?.mobileNumber,
+        gender: reportDetails?.appointmentID?.leadID?.customerDetail?.gender,
+        customerType:
+          reportDetails?.appointmentID?.leadID?.customerDetail?.customerType,
+        companyName:
+          reportDetails?.appointmentID?.leadID?.customerDetail?.companyName,
       })
     );
-    router.push("/offers/add");
+    router.push({
+      pathname: "/offers/add",
+      query: { appointmentId: reportDetails?.appointmentID?.id },
+    });
   };
 
   const customerType = appointmentDetails?.leadID?.customerDetail

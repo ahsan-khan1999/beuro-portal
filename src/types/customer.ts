@@ -39,11 +39,11 @@ export interface Customers {
   date: string;
   mobileNumber: string;
   gender: number;
+  customerType: string;
+  companyName: string;
   status?: string;
   editImg?: string;
   editNote?: string;
-  customerType: string;
-  companyName: string;
   mobile: string;
   address: CustomerAddress;
   edit?: boolean;

@@ -271,10 +271,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
 
       if (!apiData?.isLeadCreated) delete apiData["leadID"];
 
-      // if (offerDetails?.serviceDetail) {
-      //   apiData.serviceDetail = offerDetails.serviceDetail;
-      // }
-
       const res = await dispatch(
         createOffer({ data: apiData, router, setError, translate })
       );
