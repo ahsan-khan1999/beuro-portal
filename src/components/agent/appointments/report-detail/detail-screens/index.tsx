@@ -181,7 +181,7 @@ export const ReportDetailData = ({
               <CustomLoader />
             </div>
           ) : (
-            componentArray.map((component, index) => (
+            componentArray?.map((component, index) => (
               <div key={index} className="w-full">
                 {component}
               </div>

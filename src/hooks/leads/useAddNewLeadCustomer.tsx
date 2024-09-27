@@ -101,7 +101,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
         fullName: null,
         type: "New Customer",
         customer: null,
-        customerID: "",
+        // customerID: "",
         customerType: null,
         email: null,
         phoneNumber: null,

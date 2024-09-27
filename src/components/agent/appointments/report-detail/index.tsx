@@ -79,9 +79,6 @@ export const ReportDetails = () => {
               loading={isLoading}
               handleUpdateDiscount={handleUpdateDiscount}
               currency={systemSettings?.currency}
-              // shareImgModal={shareImgModal}
-              // handleImagesUpload={handleImageUpload}
-              // handleImageSlider={defaultUpdateModal}
             />
           </div>
         </>

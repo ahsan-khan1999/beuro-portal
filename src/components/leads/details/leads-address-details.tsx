@@ -3,6 +3,7 @@ import React from "react";
 import { ComponentsType } from "./LeadsDetailsData";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
+import { CustomerAddress } from "@/types/leads";
 
 export const LeadsAddressDetailsData = ({
   onClick,
@@ -13,7 +14,11 @@ export const LeadsAddressDetailsData = ({
 }) => {
   const { leadDetails } = useAppSelector((state) => state.lead);
   const { t: translate } = useTranslation();
-  const addressData = leadDetails?.addressID?.address || [{}];
+
+  const addressData: Partial<CustomerAddress>[] = leadDetails?.addressID
+    ?.address
+    ? leadDetails?.addressID?.address
+    : [{}];
 
   return (
     <LeadsCardLayout>
