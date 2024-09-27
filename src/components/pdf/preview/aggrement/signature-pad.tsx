@@ -18,7 +18,6 @@ import ReactPDF, {
   Page,
   StyleSheet,
   View,
-  usePDF,
 } from "@react-pdf/renderer";
 import { Header } from "@/components/reactPdf/header";
 import { ContactAddress } from "@/components/reactPdf/contact-address";
@@ -251,6 +250,20 @@ export const SignaturePad = ({
   }, [signaturePad]);
 
   const handleSave = async (signedFile: any, loading: boolean) => {
+    console.log("Inside handleSave function");
+    if (!signaturePad) {
+      console.error("Signature pad is not initialized");
+      return;
+    }
+
+    console.log("Signature pad exists, proceeding...");
+    const canvasData = signaturePad.toData();
+    console.log("Canvas Data:", canvasData);
+    if (canvasData?.length === 0) {
+      console.error("No signature data available.");
+      return;
+    }
+
     if (signaturePad) {
       const canvasData = signaturePad.toData();
       if (canvasData?.length > 0) {
@@ -364,6 +377,7 @@ export const SignaturePad = ({
         };
 
         const response = await dispatch(signOffer({ data, formData }));
+        console.log("signOffer API call response:", response);
 
         if (response?.payload) {
           dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
