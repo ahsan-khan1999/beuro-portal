@@ -250,28 +250,14 @@ export const SignaturePad = ({
   }, [signaturePad]);
 
   const handleSave = async (signedFile: any, loading: boolean) => {
-    console.log("Inside handleSave function");
     if (!signaturePad) {
       console.error("Signature pad is not initialized");
       return;
     }
 
-    console.log("Signature pad exists, proceeding...");
-    const canvasData = signaturePad.toData();
-    console.log("Canvas Data:", canvasData);
-    if (canvasData?.length === 0) {
-      console.error("No signature data available.");
-      return;
-    }
-
-    console.log(signaturePad, "signaturePad");
-
     if (signaturePad) {
-      console.log("inside signaturePad");
-
       const canvasData = signaturePad.toData();
       if (canvasData?.length > 0) {
-        console.log(canvasData?.length, "canvasData length");
         setIsSubmitted(true);
         //@ts-expect-error
         setIsSignatureDone && setIsSignatureDone(true);
@@ -358,6 +344,7 @@ export const SignaturePad = ({
             </Page>
           </Document>
         );
+
         const blobPdf = await reactPdf(newPdf).toBlob();
 
         const convertedFile = blobToFile(
@@ -381,14 +368,17 @@ export const SignaturePad = ({
           id: pdfData?.id,
         };
 
-        const response = await dispatch(signOffer({ data, formData }));
-        console.log("signOffer API call response:", response);
+        try {
+          const response = await dispatch(signOffer({ data, formData }));
 
-        if (response?.payload) {
-          dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+          if (response?.payload) {
+            dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+          }
+        } catch (error) {
+          console.error(error, "sign pdf error");
         }
 
-        return true;
+        // return true;
       } else {
         showError(translate("common.sign_first"));
       }

@@ -11,7 +11,8 @@ export const ProfileControllerField = ({
   iconClasses,
   disabled,
   isMailSetting,
-  isMailField
+  isMailField,
+  isAgent,
 }: ProfileUploadFieldProps) => {
   return (
     <Controller
@@ -26,6 +27,7 @@ export const ProfileControllerField = ({
           disabled={disabled}
           isMailSetting={isMailSetting}
           isMailField={isMailField}
+          isAgent={isAgent}
         />
       )}
     />
