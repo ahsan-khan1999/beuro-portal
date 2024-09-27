@@ -27,6 +27,11 @@ import { staticEnums } from "@/utils/static";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import {
+  readReportDetails,
+  setReportDetails,
+} from "@/api/slices/appointment/appointmentSlice";
+import { CustomerPromiseActionType } from "@/types/customer";
 
 let prevDisAmount: number | string = "";
 export const useAddServiceDetails = (
@@ -39,8 +44,10 @@ export const useAddServiceDetails = (
     taxAmount: 0,
   });
 
+  const appointmentId = router.query.appointmentId;
   const dispatch = useAppDispatch();
   const { systemSettings, tax } = useAppSelector((state) => state.settings);
+  const { reportDetails } = useAppSelector((state) => state.appointment);
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
@@ -55,12 +62,20 @@ export const useAddServiceDetails = (
 
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
-  console.log(offerDetails?.serviceDetail?.serviceDetail, "service");
-
   useEffect(() => {
     dispatch(readService({ params: { filter: {}, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
+
+  useEffect(() => {
+    if (appointmentId) {
+      dispatch(readReportDetails({ params: { filter: appointmentId } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setReportDetails(res?.payload));
+        }
+      );
+    }
+  }, [appointmentId]);
 
   const handleBack = () => {
     onHandleNext(ComponentsType.addressAdded);
@@ -213,6 +228,33 @@ export const useAddServiceDetails = (
       });
     }
   }, [offerDetails.id]);
+
+  useEffect(() => {
+    if (appointmentId) {
+      reset({
+        serviceDetail: reportDetails?.serviceDetail?.serviceDetail || [
+          {
+            serviceTitle: "",
+            price: "",
+            unit: "",
+            count: "",
+            description: "",
+            totalPrice: "",
+            serviceType: "Existing Service",
+            discount: 0,
+          },
+        ],
+        isTax: reportDetails?.isTax,
+        isDiscount: reportDetails?.isDiscount,
+        discountType: staticEnums["DiscountType"][reportDetails?.discountType],
+        taxType: staticEnums["TaxType"][reportDetails?.taxType] || 0,
+        discountAmount: reportDetails?.discountAmount || "",
+        discountDescription: reportDetails?.discountDescription,
+        taxAmount: reportDetails?.taxAmount || 0,
+        // totalPrice: reportDetails?.total,
+      });
+    }
+  }, [appointmentId]);
 
   const {
     fields: serviceFields,
@@ -407,7 +449,15 @@ export const useAddServiceDetails = (
     const response = await dispatch(
       updateOffer({ data: apiData, router, setError, translate })
     );
-    if (response?.payload) handleNext();
+    if (response?.payload) {
+      handleNext();
+
+      const { pathname, query } = router;
+      if (query.appointmentId) {
+        delete query.appointmentId;
+        router.replace({ pathname, query }, undefined, { shallow: true });
+      }
+    }
   };
 
   return {

@@ -29,9 +29,11 @@ import { Footer } from "@/components/reactPdf/footer";
 import { AdditionalDetails } from "@/components/reactPdf/additional-details";
 import { AggrementSignature } from "@/components/reactPdf/aggrement-signature";
 import { useRouter } from "next/router";
+import { pdf as reactPdf } from "@react-pdf/renderer";
+
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
-import { pdf as reactPdf } from "@react-pdf/renderer";
+
 
 Font.register({
   family: "Poppins",
@@ -355,6 +357,7 @@ export const SignaturePad = ({
             pdfData?.headerDetails?.companyName
           }.pdf` || "offer.pdf"
         );
+        
         if (!svgContent) {
           alert("true");
           showError(translate("common.sign_first"));

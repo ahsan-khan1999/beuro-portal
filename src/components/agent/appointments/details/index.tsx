@@ -21,10 +21,6 @@ export const AgentAppointmentsDetails = () => {
         <CustomLoader />
       ) : (
         <>
-          {/* <AppointmentsDetailCard
-            onStatusChange={handleStatusUpdate}
-            appointmentDetails={appointmentDetails}
-          /> */}
           <AppointmentsDetailCard
             onStatusChange={handleStatusUpdate}
             appointmentDetails={appointmentDetails}

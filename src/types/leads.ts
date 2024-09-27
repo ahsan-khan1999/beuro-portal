@@ -3,7 +3,6 @@ import { Customers } from "./customer";
 import { User } from ".";
 import { ContentTableRowTypes } from "./content";
 
-// Leads Table
 export interface Lead {
   id: string;
   refID: string;
