@@ -264,9 +264,14 @@ export const SignaturePad = ({
       return;
     }
 
+    console.log(signaturePad, "signaturePad");
+
     if (signaturePad) {
+      console.log("inside signaturePad");
+
       const canvasData = signaturePad.toData();
       if (canvasData?.length > 0) {
+        console.log(canvasData?.length, "canvasData length");
         setIsSubmitted(true);
         //@ts-expect-error
         setIsSignatureDone && setIsSignatureDone(true);
