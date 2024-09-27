@@ -288,6 +288,7 @@ export interface ProfileUploadFieldProps
   disabled?: boolean;
   isMailSetting?: boolean;
   isMailField?: boolean;
+  isAgent?: boolean;
 }
 
 // interface for the Image upload

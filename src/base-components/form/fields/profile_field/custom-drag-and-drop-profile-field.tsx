@@ -16,6 +16,7 @@ export interface ProfileUploadFieldProps {
   disabled?: boolean;
   isMailSetting?: boolean;
   isMailField?: boolean;
+  isAgent?: boolean;
 }
 
 export const ProfileUpload = ({
@@ -26,6 +27,7 @@ export const ProfileUpload = ({
   disabled,
   isMailSetting,
   isMailField,
+  isAgent,
 }: ProfileUploadFieldProps) => {
   const dispatch = useAppDispatch();
   const formdata = new FormData();
@@ -82,22 +84,24 @@ export const ProfileUpload = ({
               />
             )}
 
-            <label
-              className={`absolute ${iconClasses} ${disabled && "hidden"}`}
-            >
-              <input
-                type="file"
-                className="hidden"
-                onChange={handleFileSelected}
-                disabled={disabled}
-              />
+            {!isAgent && (
+              <label
+                className={`absolute ${iconClasses} ${disabled && "hidden"}`}
+              >
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleFileSelected}
+                  disabled={disabled}
+                />
 
-              <Image
-                src={edit_circle}
-                alt="editIcon"
-                className="cursor-pointer"
-              />
-            </label>
+                <Image
+                  src={edit_circle}
+                  alt="editIcon"
+                  className="cursor-pointer"
+                />
+              </label>
+            )}
           </div>
         ) : (
           <div className={`${classes} flex justify-center items-center`}>

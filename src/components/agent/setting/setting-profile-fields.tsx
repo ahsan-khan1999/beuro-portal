@@ -26,6 +26,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                 "!h-[148px] !w-[148px] !rounded-full border border-[#BFBFBF]",
               id: "picture",
               name: "picture",
+              isAgent: true,
               control,
             },
           },
