@@ -78,30 +78,25 @@ export const forgotPassword: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("forgot/user", async (args, thunkApi) => {
     const { translate, data, setError } = args as any;
     try {
-      const response = await apiServices.forgotPassword(data);
-      // thunkApi.dispatch(setErrorMessage(response?.data?.message));
+      await apiServices.forgotPassword(data);
       return true;
     } catch (e: any) {
       setErrors(setError, e?.data.data, translate);
-
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
       return false;
     }
   });
+
 export const signUp: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("signup/user", async (args, thunkApi) => {
-    const { data, router, setError, translate } = args as any; //SignUpPayload
+    const { data, router, setError, translate } = args as any;
     try {
       const response: ApiResponseType = await apiServices.singUp(data);
-
       thunkApi.dispatch(setErrorMessage(null));
-      // conditionHandlerRegistration(router, response);
       router.pathname = "/login-success";
       updateQuery(router, router.locale as string);
-
       saveUser(response.data.data.User);
-
       return response;
     } catch (e: any) {
       setErrors(setError, e?.data.data, translate);
@@ -109,9 +104,10 @@ export const signUp: AsyncThunk<boolean, object, object> | any =
       return e;
     }
   });
+
 export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep1/user", async (args, thunkApi) => {
-    const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
+    const { data, setError, translate, nextFormHandler } = args as any;
     try {
       const user = isJSON(getUser());
 
@@ -120,6 +116,7 @@ export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
       thunkApi.dispatch(
         setUser({ ...user, company: { ...response?.data?.Company } })
       );
+
       saveUser({ ...user, company: { ...response?.data?.Company } });
 
       nextFormHandler();
@@ -128,10 +125,10 @@ export const updateProfileStep1: AsyncThunk<boolean, object, object> | any =
     } catch (e: any) {
       setErrors(setError, e?.data.data, translate);
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
-
       return false;
     }
   });
+
 export const updateProfileStep2: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("profileStep2/user", async (args, thunkApi) => {
     const { data, router, setError, translate, nextFormHandler } = args as any; //SignUpPayload
