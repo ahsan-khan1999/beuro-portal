@@ -136,7 +136,7 @@ export const useEditInvoiceDetails = ({
         phoneNumber: null,
         mobileNumber: null,
         address: null,
-        customerID: null,
+        // customerID: null,
         type: "New Customer",
         content: invoiceDetails?.content?.id,
         gender: null,
@@ -250,9 +250,14 @@ export const useEditInvoiceDetails = ({
       stage: EditComponentsType.addressEdit,
     };
 
+    if (data.type === "New Customer") {
+      delete apiData.customerID;
+    }
+
     const res = await dispatch(
       createInvoiceDetial({ data: apiData, router, setError, translate })
     );
+
     if (res?.payload) {
       if (data?.type === "New Customer") {
         dispatch(

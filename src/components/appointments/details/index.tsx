@@ -8,17 +8,13 @@ export const AppointmentsDetails = () => {
   const {
     translate,
     renderModal,
-    handleCreateReport,
     appointmentDetails,
-    defaultUpdateModal,
     handleStatusUpdate,
     handleUpdateDiscount,
     isLoading,
     loading,
     reportDetails,
-    router,
     systemSettings,
-    shareImgModal,
     handleNotes,
     handleUploadImages,
   } = useReportDetails();

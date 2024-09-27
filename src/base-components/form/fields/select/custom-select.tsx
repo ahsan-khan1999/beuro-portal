@@ -84,7 +84,7 @@ export const SelectBox = ({
             {translate("common.please_choose")}
           </span>
         )}
-        <span className="text-sm text-[#1E1E1E] font-normal truncate">
+        <span className="text-sm text-[#1E1E1E] font-normal truncate mr-5">
           {selectedLabel}
         </span>
         {!disabled && <ArrowIcon isOpen={isOpen} />}

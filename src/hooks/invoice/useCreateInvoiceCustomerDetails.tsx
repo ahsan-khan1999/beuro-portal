@@ -154,7 +154,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         phoneNumber: null,
         mobileNumber: null,
         address: null,
-        customerID: null,
+        // customerID: null,
         type: "New Customer",
         content: invoiceDetails?.content?.id,
         gender: null,
@@ -235,6 +235,10 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         stage: ComponentsType.addressAdded,
       };
 
+      if (data.type === "New Customer") {
+        delete apiData.customerID;
+      }
+
       const res = await dispatch(
         createMainInvoice({ data: apiData, router, setError, translate })
       );
@@ -262,9 +266,14 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
         stage: ComponentsType.addressAdded,
       };
 
+      if (data.type === "New Customer") {
+        delete apiData.customerID;
+      }
+
       const res = await dispatch(
         createMainInvoice({ data: apiData, router, setError, translate })
       );
+
       if (res?.payload) {
         onHandleNext(ComponentsType.addressAdded);
       }

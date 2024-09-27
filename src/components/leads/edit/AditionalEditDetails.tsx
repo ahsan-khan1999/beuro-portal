@@ -10,7 +10,7 @@ const AditionalEditDetails = ({
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
   const defaultClassName = "mt-0";
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, onSubmit, handleSubmit, errors, translate } =
     useLeadAdditionalDetails(onClick);
 
   return (
