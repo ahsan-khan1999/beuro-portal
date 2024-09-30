@@ -593,6 +593,8 @@ export type GenerateOfferServiceFormField = (
     taxType?: number;
     discountType?: number;
     offerDetails?: OffersTableRowTypes;
+    reportDetails?:Report,
+    appointmentId?:string | string[],
     generateTotal?: () => void;
     customerType?: string;
     type?: string;

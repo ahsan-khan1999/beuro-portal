@@ -20,13 +20,15 @@ const ServiceDetailsData = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const totalDiscount = offerDetails?.serviceDetail?.serviceDetail?.reduce(
-    (acc, service) => {
-      const price = service?.discount || 0;
-      return acc + price;
-    },
-    0
-  );
+  // const totalDiscount = offerDetails?.serviceDetail?.serviceDetail?.reduce(
+  //   (acc, service) => {
+  //     const price = service?.discount || 0;
+  //     return acc + price;
+  //   },
+  //   0
+  // );
+
+  console.log(offerDetails, "offerDetails");
 
   let serviceDiscountSum = offerDetails?.serviceDetail?.serviceDetail?.reduce(
     (acc, service) => {
@@ -74,9 +76,9 @@ const ServiceDetailsData = ({
       )) ||
     0;
 
-  const percentageDiscountVal =
-    calculateTax(offerDetails?.subTotal, Number(offerDetails?.discountAmount)) +
-    totalDiscount;
+  // const percentageDiscountVal =
+  //   calculateTax(offerDetails?.subTotal, Number(offerDetails?.discountAmount)) +
+  //   totalDiscount;
 
   const discountAmount =
     (Number(offerDetails?.discountAmount) / 100) *

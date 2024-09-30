@@ -110,8 +110,8 @@ export const useAddServiceDetails = (
 
   const onServiceSelect = (id: string, index: number) => {
     if (!id) return;
-    const selectedService: Service[] = service.filter(
-      (item) => item.serviceName === id
+    const selectedService: Service[] = service?.filter(
+      (item) => item?.serviceName === id
     );
 
     if (selectedService?.length > 0) {
@@ -383,6 +383,7 @@ export const useAddServiceDetails = (
       serviceDetails: serviceDetails,
       generatePrice: generateTotalPrice,
       offerDetails,
+      reportDetails,
     },
     append,
     handleRemoveService,
@@ -406,6 +407,8 @@ export const useAddServiceDetails = (
       isTax,
       isDiscount,
       offerDetails: offerDetails,
+      reportDetails,
+      appointmentId,
       taxType: taxType,
       discountType,
       tax: tax,

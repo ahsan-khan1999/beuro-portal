@@ -11,17 +11,8 @@ const ServiceAddDetails = ({
   onHandleNext: (currentComponent: ComponentsType) => void;
 }) => {
   const router = useRouter();
-  const {
-    fields,
-    control,
-    onSubmit,
-    handleSubmit,
-    errors,
-    error,
-    translate,
-    systemSettings,
-    offerDetails,
-  } = useAddServiceDetails(onHandleNext);
+  const { fields, onSubmit, handleSubmit, errors, translate, offerDetails } =
+    useAddServiceDetails(onHandleNext);
 
   const handleCancel = () => {
     router.pathname = "/offers";
