@@ -571,9 +571,6 @@ const generateServiceCalulationChildren = (
         name: "taxAmount",
         control,
         className: "h-10 !px-8",
-        // value:
-        //   offerDetails?.id &&
-        //   calculatePercentage(offerDetails?.taxAmount, offerDetails?.subTotal),
       },
     };
   }
@@ -839,7 +836,7 @@ export const AddOfferDetailsServiceSubmitFormField: GenerateOffersServiceActionF
               },
             },
             {
-              containerClass: "mb-0 ",
+              containerClass: "mb-0",
               field: {
                 type: Field.button,
                 id: "button",

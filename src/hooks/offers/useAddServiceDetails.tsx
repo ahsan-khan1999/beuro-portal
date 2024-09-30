@@ -229,8 +229,8 @@ export const useAddServiceDetails = (
     }
   }, [offerDetails.id]);
 
-  useEffect(() => {
-    if (appointmentId) {
+  useMemo(() => {
+    if (appointmentId && reportDetails?.id) {
       reset({
         serviceDetail: reportDetails?.serviceDetail?.serviceDetail || [
           {
@@ -251,10 +251,9 @@ export const useAddServiceDetails = (
         discountAmount: reportDetails?.discountAmount || "",
         discountDescription: reportDetails?.discountDescription,
         taxAmount: reportDetails?.taxAmount || 0,
-        // totalPrice: reportDetails?.total,
       });
     }
-  }, [appointmentId]);
+  }, [reportDetails?.id]);
 
   const {
     fields: serviceFields,
