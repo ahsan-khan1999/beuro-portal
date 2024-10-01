@@ -63,7 +63,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
               label: item,
               value: item,
             })) || [],
-
           control,
           onItemChange: (item) => handleChangeLabel(item, i),
         },

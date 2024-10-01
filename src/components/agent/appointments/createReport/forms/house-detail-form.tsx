@@ -21,9 +21,9 @@ export const HouseDetailReport = ({
         {translate("appointments.report_detail.house_detail")}
       </h1>
 
-      <hr className="opacity-10 mx-5" />
+      <hr className="opacity-10 mx-[9px] xMini:mx-5" />
 
-      <div className="px-5 pb-5 bg-white rounded-b-lg">
+      <div className="p-[9px] xMini:px-5 xMini:pb-5 bg-white rounded-b-lg">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

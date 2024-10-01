@@ -69,16 +69,12 @@ export default function useAddTask({
   const colour = watch("colour");
 
   useEffect(() => {
-    // if (isContractId) return;
-
     if (id && taskDetail) {
       let filteredDate = taskDetail?.date;
 
       if (isUpdate && clickedStartDate && clickedEndDate) {
-        filteredDate = taskDetail?.date.filter(
-          (date) =>
-            moment(date.startDate).isSame(clickedStartDate) &&
-            moment(date.endDate).isSame(clickedEndDate)
+        filteredDate = taskDetail?.date.filter((date) =>
+          moment(date.startDate).isSame(clickedStartDate)
         );
       }
 
@@ -97,7 +93,7 @@ export default function useAddTask({
         startDateRef.current = filteredDate[0].startDate;
       }
     }
-  }, [id, taskDetail, isContractId, clickedStartDate, clickedEndDate]);
+  }, [id, taskDetail, clickedStartDate, clickedEndDate]);
 
   useEffect(() => {
     if (isContractId) {
@@ -125,12 +121,17 @@ export default function useAddTask({
       const minutesInDiff = moment(value).diff(startDateRef.current, "minutes");
 
       if (isAllDay) {
-        setValue(`date.${index}.endDate`, startMoment.format("YYYY-MM-DD"));
+        if (watch(`date.${index}.endDate`) === startDateRef.current) {
+          setValue(`date.${index}.endDate`, startMoment.format("YYYY-MM-DD"));
+        }
       } else {
         const newEndDate = moment(endDate)
           .add(minutesInDiff, "minutes")
           .format("YYYY-MM-DDTHH:mm");
-        setValue(`date.${index}.endDate`, newEndDate);
+
+        if (watch(`date.${index}.endDate`) === startDateRef.current) {
+          setValue(`date.${index}.endDate`, newEndDate);
+        }
       }
     } else {
       if (isAllDay) {
@@ -168,10 +169,7 @@ export default function useAddTask({
       title: data.title,
       date: isUpdate
         ? taskDetail?.date?.map((item) => {
-            if (
-              moment(item.startDate).isSame(clickedStartDate) &&
-              moment(item.endDate).isSame(clickedEndDate)
-            ) {
+            if (moment(item.startDate).isSame(clickedStartDate)) {
               return {
                 startDate: data.date[0].startDate,
                 endDate: data.date[0].endDate,

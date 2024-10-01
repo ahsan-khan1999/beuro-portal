@@ -18,7 +18,7 @@ const ContactSupportForm = ({
           {translate("contact_support.main_heading")}
         </h2>
       </div>
-      <div className="py-3 px-4 xMini:px-6">
+      <div className="p-[9px] xMini:py-3 xMini:px-6">
         <Form
           formFields={fields}
           handleSubmit={handleSubmit}

@@ -61,7 +61,7 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
       field: {
         type: Field.div,
         id: `div-field`,
-        className: `bg-white p-5 ${
+        className: `bg-white p-[9px] xMini:p-5  ${
           i > 0 ? "mt-5 rounded-lg" : "mt-0 rounded-b-lg"
         }`,
         children: [
@@ -398,7 +398,8 @@ export const ReportServiceDetailsDescriptionFormField: GenerateReportServiceDesc
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
-        containerClass: "mt-5 bg-white px-5 pt-5 rounded-lg",
+        containerClass:
+          "mt-5 bg-white p-[9px] xMini:px-5 xMini:pt-5 rounded-lg",
         //@ts-expect-error
         field: {
           type: Field.div,

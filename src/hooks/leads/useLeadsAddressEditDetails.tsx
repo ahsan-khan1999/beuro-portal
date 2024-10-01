@@ -10,16 +10,16 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateLeadsAddressEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateLead } from "@/api/slices/lead/leadSlice";
 import { LeadsEditAddressDetailsFormField } from "@/components/leads/fields/Leads-address-details-fields";
 import { readAddressSettings } from "@/api/slices/settingSlice/settings";
 import { addressObject } from "@/components/offers/add/fields/add-address-details-fields";
 
 export const useLeadsAddressEditDetails = (onClick: Function) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const [addressType, setAddressType] = useState([false, false]);
   const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
 
@@ -68,11 +68,6 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
     remove,
   } = useFieldArray({ control, name: "address" });
 
-  // useMemo(() => {
-  //   if (addressFields.length === 0) return;
-  //   setAddressCount(addressFields.length);
-  // }, [addressFields]);
-
   const handleFieldTypeChange = (index: number) => {
     const updatedAddressType = [...addressType];
     updatedAddressType[index] = !updatedAddressType[index];
@@ -87,13 +82,8 @@ export const useLeadsAddressEditDetails = (onClick: Function) => {
 
   const handleAddNewAddress = () => {
     append(addressObject);
-    // const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
 
-    setValue(
-      `address.${addressFieldsLength}.addressType`,
-      ``
-      // currentAddressItem || `Address ${addressFieldsLength}`
-    );
+    setValue(`address.${addressFieldsLength}.addressType`, ``);
 
     setValue(
       `address.${addressFieldsLength}.label`,

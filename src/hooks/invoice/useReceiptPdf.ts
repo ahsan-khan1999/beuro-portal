@@ -376,7 +376,7 @@ export const useReceiptPdf = () => {
             } else {
               setIsMailSend(false);
             }
-          }, 2000);
+          }, 1800);
         } else {
           let apiData = {
             email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
@@ -409,7 +409,7 @@ export const useReceiptPdf = () => {
             } else {
               setIsMailSend(false);
             }
-          }, 2000);
+          }, 1800);
         }
       }
     } catch (error) {

@@ -79,8 +79,6 @@ export const useContractEmail = (
       description:
         contractDetails?.offerID?.content?.confirmationContent?.body || "",
       pdf: contractDetails?.offerID?.content?.confirmationContent?.attachments,
-      // title: contractDetails?.title,
-      // additionalDetails: contractDetails?.additionalDetails || "",
     });
   }, []);
 
@@ -99,8 +97,6 @@ export const useContractEmail = (
             contractDetails?.offerID?.createdBy?.company?.companyName,
         description: selectedContent?.confirmationContent?.body || "",
         pdf: selectedContent?.confirmationContent?.attachments,
-        // title: contractDetails?.title,
-        // additionalDetails: contractDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
