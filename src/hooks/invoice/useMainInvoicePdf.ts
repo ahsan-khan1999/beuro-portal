@@ -280,7 +280,6 @@ export const useMainInvoicePdf = () => {
     const remainingItems = totalItems - itemsOnFirstPage;
     const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
 
-    // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
@@ -344,8 +343,6 @@ export const useMainInvoicePdf = () => {
           delete apiData["content"];
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
           await dispatch(sendContractEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
         } else {
           let apiData = {
             email: invoiceDetails?.customerDetail?.email,
@@ -364,8 +361,6 @@ export const useMainInvoicePdf = () => {
           };
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
           await dispatch(sendContractEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
         }
       }
     } catch (error) {
@@ -386,7 +381,6 @@ export const useMainInvoicePdf = () => {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-
       URL.revokeObjectURL(url);
     }
   };

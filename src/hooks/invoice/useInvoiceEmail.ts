@@ -120,8 +120,6 @@ export const useInvoiceEmail = (
               ?.companyName,
         description: selectedContent?.invoiceContent?.body || "",
         pdf: selectedContent?.invoiceContent?.attachments,
-        // title: collectiveInvoiceDetails?.title,
-        // additionalDetails: collectiveInvoiceDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
@@ -186,7 +184,7 @@ export const useInvoiceEmail = (
         } else {
           setIsMailSend(false);
         }
-      }, 2000);
+      }, 1800);
     } else {
       const updatedData = {
         ...data,

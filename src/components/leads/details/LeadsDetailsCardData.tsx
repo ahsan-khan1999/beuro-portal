@@ -121,7 +121,7 @@ const LeadsDetailsCardData = ({
   return (
     <div>
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
-        <div className="flex items-center gap-x-3 xsMini:gap-x-[27px]">
+        <div className="flex items-center gap-x-3 xMini:gap-x-[27px]">
           <BackIcon onClick={handleBack} />
           <p className="font-medium text-base xMini:text-2xl">
             {translate("leads.card_content.heading")}
@@ -129,7 +129,7 @@ const LeadsDetailsCardData = ({
         </div>
 
         {!isAgent && (
-          <div className="flex items-center justify-end gap-x-4">
+          <div className="items-center justify-end gap-x-4 hidden xMini:flex">
             {leadDetails?.isAppointmentCreated ? (
               // <Button
               //   inputType="button"
@@ -167,17 +167,7 @@ const LeadsDetailsCardData = ({
                 icon={createOfferIcon}
               />
             )}
-            {/* {leadDetails.leadStatus !== "Close" && (
-            <button
-              className="group w-[180px] border-[1px] border-[#4A13E7] rounded-lg flex items-center px-4 py-[6px] cursor-pointer"
-              onClick={offerCreateHandler}
-            >
-              <Image src={createOfferIcon} alt="create_offer_icon" />
-              <p className="font-medium text-[16px] text-[#4B4B4B] ml-[10px] group-hover:text-primary">
-                {translate("leads.card_content.create_button")}
-              </p>
-            </button>
-          )} */}
+
             <div
               onClick={() => leadDeleteHandler()}
               className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center"
@@ -204,10 +194,10 @@ const LeadsDetailsCardData = ({
           </span>
         </div>
 
-        <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
-          <span className="font-normal text-[#848484] text-sm mlg:text-base">
+        <div className="w-full flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+          <p className="font-normal text-[#848484] text-sm mlg:text-base">
             {translate("leads.card_content.status")}:
-          </span>
+          </p>
 
           {!isAgent ? (
             <DropDown
@@ -234,7 +224,8 @@ const LeadsDetailsCardData = ({
                   ? "text-[#45C769]"
                   : "text-[#FF0000]"
               } text-base font-medium me-1`}
-              dropDownItemsContainerClassName="w-full"
+              dropDownItemsContainerClassName="w-fit"
+              isMobileLead={true}
               dropDownIconClassName={`text-[${getStatusColor(
                 leadDetails?.leadStatus
               )}]`}

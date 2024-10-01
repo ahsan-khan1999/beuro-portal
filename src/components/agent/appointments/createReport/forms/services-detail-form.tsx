@@ -21,7 +21,7 @@ export const ServicesDetailReport = ({
         {translate("agent.service_detail_fields.heading")}
       </h1>
 
-      <hr className="opacity-10 mx-5" />
+      <hr className="opacity-10 mx-[9px] xMini:mx-5" />
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
