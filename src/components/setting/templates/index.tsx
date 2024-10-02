@@ -5,12 +5,13 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { getTemplateSettings } from "@/api/slices/settingSlice/settings";
 
 const Templates = () => {
+  const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
-  const dispatch = useAppDispatch()
+
   useEffect(() => {
-    dispatch(getTemplateSettings())
-  }, [])
-  
+    dispatch(getTemplateSettings());
+  }, []);
+
   return (
     <>
       <div className="border border-[#EBEBEB] rounded-md bg-white pl-[32px] pr-[45px] py-3 w-full h-fit flex justify-between items-center">

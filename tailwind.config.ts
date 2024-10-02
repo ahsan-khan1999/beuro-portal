@@ -14,6 +14,7 @@ module.exports = {
         xs: "374px",
         xsMini: "520px",
         xMini: "730px",
+        xAirMini:"767px",
         xAir: "820px",
         md: "900px",
         xPro: "1025px",

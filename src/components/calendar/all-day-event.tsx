@@ -35,7 +35,7 @@ export const AllDayEvent = ({
         style={{ backgroundColor: dotColour || "#ccc" }}
       />
 
-      <p className="text-[#3C3C3C] font-medium text-xs xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+      <p className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
         {title}
       </p>
     </div>

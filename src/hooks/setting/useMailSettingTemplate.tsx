@@ -24,8 +24,6 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
     setError,
     reset,
     setValue,
-    watch,
-    trigger,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),

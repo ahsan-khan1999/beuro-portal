@@ -31,14 +31,14 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               className: `!px-4 !border-[#BFBFBF] ${
-                !isUpdate && "!border-light"
-              } focus:!border-primary`,
+                !isUpdate && "!border-light focus:!border-primary"
+              }`,
               type: Field.select,
               id: "customerType",
               name: "customerType",
               options: Object?.keys(staticEnums.CustomerType)
                 ?.slice(1)
-                .map((item, key) => ({
+                .map((item) => ({
                   value: item,
                   label: translate(`customer_type.${item}`),
                 })),
@@ -57,8 +57,8 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               className: `!px-4 !border-[#BFBFBF] ${
-                !isUpdate && "!border-light"
-              } focus:!border-primary`,
+                !isUpdate && "!border-light focus:!border-primary"
+              }`,
               type: Field.select,
               id: "gender",
               name: "gender",

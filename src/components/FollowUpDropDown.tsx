@@ -16,7 +16,6 @@ const FollowUpDropDown = () => {
     handleMouseEnter,
     handleMouseLeave,
     hoveredIndex,
-    followUpTableData,
     todayFollowUps,
     handleFollowUpsDetails,
   } = useGeneralFollowUp();

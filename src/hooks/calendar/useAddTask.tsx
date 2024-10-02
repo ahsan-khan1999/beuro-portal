@@ -42,8 +42,8 @@ export default function useAddTask({
   );
 
   const [date, setDate] = useState(taskDetail?.date);
-  const schema = generateAddTaskValidationSchema(translate);
   const startDateRef = useRef<string | null>(null);
+  const schema = generateAddTaskValidationSchema(translate);
 
   const { isContractId } = router.query;
   const {
@@ -62,11 +62,11 @@ export default function useAddTask({
     name: "date",
   });
 
-  const isRemainder = watch("remainder");
-  const alertTime = watch("alertTime");
-  const endDate = watch("date.0.endDate");
-  const isAllDay = watch("isAllDay");
   const colour = watch("colour");
+  const isAllDay = watch("isAllDay");
+  const alertTime = watch("alertTime");
+  const isRemainder = watch("remainder");
+  const endDate = watch("date.0.endDate");
 
   useEffect(() => {
     if (id && taskDetail) {

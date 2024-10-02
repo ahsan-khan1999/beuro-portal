@@ -44,7 +44,9 @@ export const AddressDetailCard = ({
 
       {loading ? (
         <CustomLoader />
-      ) : addresses && addresses.addresses && addresses.addresses.length > 0 ? (
+      ) : addresses &&
+        addresses?.addresses &&
+        addresses?.addresses?.length > 0 ? (
         <div className="flex flex-col">
           <div className="flex items-center justify-between my-6">
             <span className="text-sm text-[#8F8F8F] font-medium">
@@ -55,7 +57,7 @@ export const AddressDetailCard = ({
             </span>
           </div>
           <div className="flex flex-col gap-y-5">
-            {addresses.addresses.map((item, index) => (
+            {addresses?.addresses?.map((item, index) => (
               <div
                 className="py-3 px-4 border border-[#ccc] rounded-lg hover:bg-[#EDF4FF] flex items-center justify-between"
                 key={index}
@@ -82,7 +84,10 @@ export const AddressDetailCard = ({
           </div>
         </div>
       ) : (
-        <NoDataEmptyState />
+        <NoDataEmptyState
+          containerClassName="xMini:py-[153px] w-full flex items-center justify-center"
+          className="py-5 px-3 xMini:py-10 xMini:px-6 w-[531px]"
+        />
       )}
     </div>
   );

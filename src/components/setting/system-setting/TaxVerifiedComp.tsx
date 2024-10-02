@@ -135,7 +135,7 @@ const TaxVerifiedComp = memo(
           {systemSettings["taxType"] === 1 && (
             <div className="mt-[10px] mb-4 ">
               <div className=" bg-[#F9F9F9] h-[45px] py-2 mt-5 grid grid-cols-3 gap-x-[110px]">
-                {toggleInfo.map((item, index) => (
+                {toggleInfo?.map((item, index) => (
                   <span
                     className={`text-base font-medium text-[#8F8F8F] `}
                     key={index}

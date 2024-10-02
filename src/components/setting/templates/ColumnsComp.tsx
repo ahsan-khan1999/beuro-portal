@@ -11,22 +11,11 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ColumnStructure, MainColumns, colsData } from "@/types/settings";
 import { Button } from "@/base-components/ui/button/button";
 import InputField from "@/base-components/filter/fields/input-field";
-// import leftAlignTemplate from "@/assets/pngs/Left_alight.png";
 import leftAlignTemplate from "@/assets/svgs/Group 48096404.svg";
-
 import rightAlignTemplate from "@/assets/svgs/Group 48096404 (1).svg";
-
 import { CheckIcon } from "@/assets/svgs/components/check-icon";
 
-const Column = ({
-  title,
-  data,
-  handleChange,
-  handleToggle,
-  column,
-  mainColumns,
-  handleChangeInput,
-}: {
+export interface SettinfColumnProps {
   title: string;
   data: colsData[];
   handleChange: (
@@ -44,7 +33,16 @@ const Column = ({
     value: string,
     index: number
   ) => void;
-}) => {
+}
+const Column = ({
+  title,
+  data,
+  handleChange,
+  handleToggle,
+  column,
+  mainColumns,
+  handleChangeInput,
+}: SettinfColumnProps) => {
   return (
     <section className="px-6 py-5 rounded-md bg-white mb-6">
       <div className="rounded-lg px-2 py-3 bg-[#EDF4FF]">
@@ -55,7 +53,7 @@ const Column = ({
             onChange={(value) => handleToggle(column, value.target.checked)}
           />
         </div>
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <div className="mb-5" key={index}>
             <div className="flex space-x-2">
               <CheckBox
@@ -97,9 +95,8 @@ const Column = ({
 };
 
 const ColumnsComp = () => {
-  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
-
+  const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
   const { loading, templateSettings } = useAppSelector(
     (state) => state.settings
@@ -430,13 +427,9 @@ const ColumnsComp = () => {
     ),
   };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
   const handleSaveSetings = async () => {
     let formatObj: any = {};
-    for (const [key, value] of Object.entries(columnSettings)) {
+    for (const [key, value] of Object?.entries(columnSettings)) {
       for (let item of value) {
         formatObj = {
           ...formatObj,
@@ -462,6 +455,10 @@ const ColumnsComp = () => {
     if (response?.payload) handleSuccess();
   };
 
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
   return (
     <>
       <div className="flex flex-col gap-x-5 mb-5 bg-white">
@@ -473,7 +470,7 @@ const ColumnsComp = () => {
             className={`relative px-6 my-3`}
             onClick={() => setMainColumns({ ...mainColumns, order: false })}
           >
-            {mainColumns.order === false && (
+            {mainColumns?.order === false && (
               <div className="absolute -right-2 -top-5">
                 <CheckIcon />
               </div>
@@ -499,7 +496,7 @@ const ColumnsComp = () => {
             className={`relative`}
             onClick={() => setMainColumns({ ...mainColumns, order: true })}
           >
-            {mainColumns.order && (
+            {mainColumns?.order && (
               <div className="absolute -right-8 -top-2">
                 <CheckIcon />
               </div>
@@ -582,7 +579,7 @@ const ColumnsComp = () => {
 export default ColumnsComp;
 
 const updateColumnValues = (columns: any, apiColumn: any) => {
-  columns.forEach((column: any) => {
+  columns?.forEach((column: any) => {
     const columnType = column?.data?.type;
     const columnTextType = column?.data?.textType;
 

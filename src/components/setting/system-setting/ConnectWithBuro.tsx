@@ -20,7 +20,7 @@ const ConnectWithBuro = ({
   const { t: translate } = useTranslation();
   const handleDelete = (index: number) => {
     let domain = [...(systemSetting?.allowedDomains || [])];
-    domain.splice(index, 1);
+    domain?.splice(index, 1);
     setSystemSetting({ ...systemSetting, ["allowedDomains"]: domain });
   };
 

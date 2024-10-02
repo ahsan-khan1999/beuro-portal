@@ -1,26 +1,34 @@
 import { useTranslation } from "next-i18next";
 import SettingLayout from "../SettingLayout";
-import MailSettingForm from "./mail-setting-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { updateEmailSetting } from "@/api/slices/settingSlice/settings";
 import { Button } from "@/base-components/ui/button/button";
 import { AnimatePresence, motion } from "framer-motion";
+import { MailSettingForm } from "./mail-setting-form";
 
 export const ConfigrationTabs = ({
   onHandleCreation,
 }: {
   onHandleCreation: Function;
 }) => {
-  const [selectedTab, setSelectedTab] = useState(0);
-  const { emailSettings, loading } = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
+  const [selectedTab, setSelectedTab] = useState(0);
+  const { emailSettings, loading } = useAppSelector((state) => state.settings);
 
   const tabsData: string[] = [
     `${translate("setting.mail_setting.system_config")}`,
     `${translate("setting.mail_setting.own_config")}`,
   ];
+
+  useEffect(() => {
+    if (emailSettings?.isOwnMailConfigration) {
+      setSelectedTab(1);
+    } else {
+      setSelectedTab(0);
+    }
+  }, [emailSettings]);
 
   const handleChangeConfig = async () => {
     const response = await dispatch(
@@ -35,7 +43,7 @@ export const ConfigrationTabs = ({
   return (
     <SettingLayout containerClassName="pl-[31px] shadow-0-3-10-0 bg-white py-7 pr-12">
       <div className="flex gap-[40px]">
-        {tabsData.map((item, index) => (
+        {tabsData?.map((item, index) => (
           <div
             key={index}
             className={`flex gap-3 items-center cursor-pointer`}

@@ -307,10 +307,10 @@ export const Calendar = () => {
             dayMaxEvents: getDayMaxEvents(),
           },
           timeGridWeek: {
-            dayMaxEvents: getDayMaxEvents(),
+            dayMaxEvents: isSmallScreen ? 2 : 4,
           },
           dayGridMonth: {
-            dayMaxEvents: getDayMaxEvents(),
+            dayMaxEvents: isSmallScreen ? 2 : 5,
           },
         }}
         eventTimeFormat={{
@@ -321,7 +321,6 @@ export const Calendar = () => {
         eventContent={(eventInfo) => {
           const { event, view } = eventInfo;
           const viewType = view?.type;
-
           const startMoment = moment(eventInfo.event.start);
           const endMoment = moment(eventInfo.event.end);
           const duration = endMoment.diff(startMoment, "minutes");

@@ -3,7 +3,6 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import delIcon from "@/assets/pngs/address_del_icon.png";
 import editIcon from "@/assets/pngs/address_edit_icon.png";
 import Image from "next/image";
-import { useAppDispatch } from "@/hooks/useRedux";
 import { useState } from "react";
 import { NoteSetting } from "@/api/slices/settingSlice/settings";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
@@ -28,16 +27,14 @@ export const NotesDetailCard = ({
   noteSettings,
   loading,
 }: GeneralNotesProps) => {
-  const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
-
   const [openNoteIndex, setOpenNoteIndex] = useState<number | null>(null);
+  const reversedNoteSettings = noteSettings?.slice().reverse() || [];
 
   const handleDescription = (index: number) => {
     setOpenNoteIndex(openNoteIndex === index ? null : index);
   };
 
-  const reversedNoteSettings = noteSettings?.slice().reverse() || [];
 
   return (
     <div className="p-6 bg-white rounded-md">
@@ -133,7 +130,10 @@ export const NotesDetailCard = ({
           </div>
         )
       ) : (
-        <NoDataEmptyState />
+        <NoDataEmptyState
+          containerClassName="xMini:py-[153px] w-full flex items-center justify-center"
+          className="py-5 px-3 xMini:py-10 xMini:px-6 w-[531px]"
+        />
       )}
     </div>
   );

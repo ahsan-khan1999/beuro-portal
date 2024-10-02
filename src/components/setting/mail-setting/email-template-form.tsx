@@ -8,7 +8,7 @@ export const EmailTemplateForm = ({
 }: {
   handleCreation: Function;
 }) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, onSubmit, handleSubmit, errors, translate } =
     useMailSettingsTemplate(handleCreation);
 
   return (
