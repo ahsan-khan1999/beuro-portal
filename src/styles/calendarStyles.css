@@ -128,9 +128,14 @@
   max-width: 300px !important;
   max-height: 300px !important;
   overflow-y: scroll !important;
+  overflow-x: hidden;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.fc-popover::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 768px) {

@@ -84,7 +84,7 @@ const PlanComp = () => {
             </section>
 
             <section className="mt-3">
-              {planData.map((item, index) => (
+              {planData?.map((item, index) => (
                 <div className="flex justify-between mb-1" key={index}>
                   <span className="text-[#4B4B4B] text-sm font-normal">
                     {item.title}

@@ -66,6 +66,7 @@ export default function useGeneralAddress({
   return {
     error,
     loading,
+    translate,
     addressSettings,
     handleSaveSetings,
     handleDeleteAddress,

@@ -139,7 +139,7 @@ const SystemSettingDetails = ({
               {translate("setting.system_setting.currency")}
             </p>
             <DropDown
-              items={Object.keys(staticEnums["currency"]).map((item) => ({
+              items={Object?.keys(staticEnums["currency"]).map((item) => ({
                 item: {
                   label: item,
                   value: item,

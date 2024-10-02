@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import SettingTopDataButtons from "./SettingTopDataButtons";
 import SystemSettingDetails from "./system-setting/SystemSettingDetails";
 import AddTax from "@/base-components/ui/modals1/AddTax";
-import MailSetting from "./mail-setting";
 import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
 import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
@@ -24,6 +23,7 @@ import {
   readNoteSettings,
 } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
+import { MailSetting } from "./mail-setting";
 
 const Setting = () => {
   const { query } = useRouter();
@@ -57,17 +57,17 @@ const Setting = () => {
     dispatch(updateModalType({ type: ModalType.ADD_TAX }));
   };
 
-  const handleEditPayment = () => {
-    dispatch(updateModalType({ type: ModalType.EDIT_PAYMENT_METHOD }));
-  };
+  // const handleEditPayment = () => {
+  //   dispatch(updateModalType({ type: ModalType.EDIT_PAYMENT_METHOD }));
+  // };
 
   const handleCreation = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
 
-  const handleAddressGeneralSuccess = () => {
-    dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_ADDRESS }));
-  };
+  // const handleAddressGeneralSuccess = () => {
+  //   dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_ADDRESS }));
+  // };
 
   const handleNoteGeneralSuccess = () => {
     dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_NOTES }));

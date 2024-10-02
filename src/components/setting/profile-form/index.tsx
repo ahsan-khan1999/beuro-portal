@@ -8,7 +8,7 @@ const SettingProfile = ({
 }: {
   handleChangePassword: Function;
 }) => {
-  const { fields, onSubmit, handleSubmit, errors, error, renderModal } =
+  const { fields, onSubmit, handleSubmit, errors, renderModal } =
     useSettingProfile(handleChangePassword);
 
   return (

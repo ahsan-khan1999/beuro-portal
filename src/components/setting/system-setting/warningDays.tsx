@@ -12,6 +12,7 @@ export const WarningDays = ({
   systemSetting: SystemSettingDataProps;
   setSystemSetting: SetStateAction<any>;
 }) => {
+  const { t: translate } = useTranslation();
   const handleSecondWarningSelected = (selectedItem: string) => {
     setSystemSetting({
       ...systemSetting,
@@ -25,8 +26,6 @@ export const WarningDays = ({
       thirdWarningDays: selectedItem,
     });
   };
-
-  const { t: translate } = useTranslation();
 
   return (
     <div>
@@ -73,7 +72,7 @@ export const WarningDays = ({
           </p>
 
           <DropDown
-            items={Object.keys(staticEnums["remainderDays"]).map((item) => ({
+            items={Object?.keys(staticEnums["remainderDays"]).map((item) => ({
               item: {
                 label: item,
                 value: item,

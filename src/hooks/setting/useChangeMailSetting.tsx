@@ -12,14 +12,15 @@ export const useChangeMailSetting = (
   handleCreation: Function,
   selectedTab: number
 ) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
   const { loading, error, emailSettings } = useAppSelector(
     (state) => state.settings
   );
 
   const schema = generateChangeMailSettingValidationSchema(translate);
+
   const {
     register,
     handleSubmit,

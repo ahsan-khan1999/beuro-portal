@@ -16,10 +16,10 @@ import { useEffect, useState } from "react";
 
 export default function useAddReason() {
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const { loading, error, followUps } = useAppSelector(
     (state) => state.settings
   );
-  const { t: translate } = useTranslation();
 
   const [toggleObj, setToggleObj] = useState({
     isCreateFollowUpOnLeadCreation: {
@@ -64,7 +64,6 @@ export default function useAddReason() {
     handleSubmit,
     formState: { errors },
     getValues,
-    setValue,
     resetField,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
@@ -109,10 +108,6 @@ export default function useAddReason() {
     ),
   };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
   const handleSaveSetings = async () => {
     const data = getValues();
     let apiData = {
@@ -130,6 +125,10 @@ export default function useAddReason() {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleAddReason(data?.reason);
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   return {
