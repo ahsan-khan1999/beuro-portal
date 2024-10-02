@@ -39,9 +39,9 @@ export const SelectBox = ({
   const search = useRef<string>("");
   const { t: translate } = useTranslation();
 
-  const toggleDropDown = () => {
-    setIsOpen((prevState) => !prevState);
-  };
+  // const toggleDropDown = () => {
+  //   setIsOpen((prevState) => !prevState);
+  // };
 
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
@@ -60,7 +60,9 @@ export const SelectBox = ({
     );
   };
 
-  const defaultClasses = `placeholder:text-dark h-10 xMini:h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+  const defaultClasses = `${
+    disabled ? "cursor-default" : "cursor-pointer"
+  } placeholder:text-dark h-10 xMini:h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
 
@@ -124,7 +126,7 @@ export const SelectBox = ({
                 <li
                   key={value}
                   onClick={() => selectedOptionHandler(value)}
-                  className="p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion"
+                  className={`p-2 hover:bg-[#eaebec] cursor-pointer rounded-sm hoverTransetion`}
                 >
                   {label}
                 </li>

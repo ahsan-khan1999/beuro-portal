@@ -10,17 +10,8 @@ const ServiceEditDetails = ({
   handleNext: (currentComponent: EditComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "";
-  const {
-    fields,
-    control,
-    onSubmit,
-    handleSubmit,
-    errors,
-    error,
-    translate,
-    invoiceDetails,
-  } = useServiceInvoiceEditDetail({ handleNext });
+  const { fields, onSubmit, handleSubmit, errors, translate, invoiceDetails } =
+    useServiceInvoiceEditDetail({ handleNext });
 
   return (
     <>
@@ -42,7 +33,6 @@ const ServiceEditDetails = ({
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
-        className={`${defaultClassName}`}
       />
       {errors?.taxAmount && (
         <span className="mt-[3px] text-red text-sm">

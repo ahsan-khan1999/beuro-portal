@@ -66,7 +66,11 @@ export const ContractTaskDetail = ({
         <div className="flex items-center gap-x-2">
           <span
             className={`w-3 h-3 rounded-full`}
-            style={{ backgroundColor: `${taskDetail.colour || "#4A13E7"}` }}
+            style={{
+              backgroundColor: `${taskDetail.colour || "#4A13E7"}`,
+              minHeight: "12px",
+              minWidth: "12px",
+            }}
           />
           {taskDetail?.title && (
             <span className="text-base font-semibold text-[#3C3C3C]">

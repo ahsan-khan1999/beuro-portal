@@ -30,6 +30,7 @@ import {
 import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
 
 let prevDisAmount: number | string = "";
+
 export const useServiceInvoiceEditDetail = ({
   handleNext,
 }: {
