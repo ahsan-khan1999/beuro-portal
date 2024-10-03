@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import AddLeadsCustomerDetails from "./AddLeadsCustomerDetails";
-import AddLeadAddressDetails from "./AddLeadAddressDetails";
-import AddLeadServiceDetails from "./AddLeadServiceDetails";
-import AddLeadAdditionalDetails from "./AddLeadAdditionalDetails";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
-import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
-import { ModalConfigType, ModalType } from "@/enums/ui";
-import { updateModalType } from "@/api/slices/globalSlice/global";
-import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
-import { useAppSelector } from "@/hooks/useRedux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { updateQuery } from "@/utils/update-query";
-import { setImages } from "@/api/slices/imageSlice/image";
-import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { useAppSelector } from "@/hooks/useRedux";
+import React, { useEffect, useState } from "react";
+import { updateQuery } from "@/utils/update-query";
+import { ModalConfigType, ModalType } from "@/enums/ui";
+import { setImages } from "@/api/slices/imageSlice/image";
+import AddLeadAddressDetails from "./AddLeadAddressDetails";
+import AddLeadServiceDetails from "./AddLeadServiceDetails";
+import DetailsTab from "@/base-components/ui/tab/DetailsTab";
+import AddLeadsCustomerDetails from "./AddLeadsCustomerDetails";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import AddLeadAdditionalDetails from "./AddLeadAdditionalDetails";
+import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
+import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
+import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 
 export enum ComponentsType {
   customerAdd,
@@ -27,9 +27,10 @@ export enum ComponentsType {
 
 const AddNewLeadsData = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { t: translate } = useTranslation();
+  const { modal } = useAppSelector((state) => state.global);
   const { leadDetails } = useAppSelector((state) => state.lead);
-
   const [tabType, setTabType] = useState<ComponentsType>(
     (leadDetails?.id && leadDetails?.stage) || ComponentsType.customerAdd
   );
@@ -94,11 +95,9 @@ const AddNewLeadsData = () => {
     },
   ];
 
-  const dispatch = useDispatch();
-  const { modal } = useAppSelector((state) => state.global);
-
   const customerType = leadDetails?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
   const name =
     customerType === 1
       ? leadDetails?.customerDetail?.companyName
@@ -169,10 +168,6 @@ const AddNewLeadsData = () => {
     ),
   };
 
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
   const handleNextTab = (currentComponent: ComponentsType) => {
     if (tabType === ComponentsType.additionalAdd) {
       leadCreatedHandler();
@@ -207,6 +202,10 @@ const AddNewLeadsData = () => {
         onHandleBack={onHandleBack}
       />
     ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   useEffect(() => {
@@ -244,7 +243,6 @@ const AddNewLeadsData = () => {
           ))}
         </div>
       </div>
-
       <div className="w-full break-all xLarge:mt-[145px] flex mb-10">
         <div className="max-w-[280px] w-full hidden xLarge:block"></div>
         <div className="w-full xLarge:max-w-[80%]">

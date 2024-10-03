@@ -1,8 +1,8 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateEditInvoiceAddressFormField } from "@/types";
 import editIcon from "@/assets/svgs/edit_primary.svg";
-
 import { useTranslation } from "next-i18next";
+import { FormField, GenerateEditInvoiceAddressFormField } from "@/types";
+
 export const addressObject = {
   streetNumber: "",
   postalCode: "",

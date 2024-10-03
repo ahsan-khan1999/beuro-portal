@@ -22,7 +22,6 @@ const ImagesUpload = ({
   );
 
   const {
-    error,
     translate,
     activeTab,
     handleTabChange,
@@ -33,11 +32,8 @@ const ImagesUpload = ({
     setEnteredLink,
     attachementTabs,
     handleAttachementAdd,
-    handleAttachementDelete,
     handleVideoAdd,
-    handleVideoDelete,
     handleimageAdd,
-    handleImageDelete,
     onSubmit,
     loading,
     loadingGlobal,
@@ -160,7 +156,7 @@ const ImagesUpload = ({
         </div>
 
         <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
-          {attachementTabs.map((item, index) => (
+          {attachementTabs?.map((item, index) => (
             <button
               key={index}
               className={`${
