@@ -56,7 +56,7 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
 
   const formField: FormField[] = [];
   for (let i = 0; i < count; i++) {
-    formField.push({
+    formField?.push({
       // @ts-expect-error
       field: {
         type: Field.div,
@@ -222,7 +222,9 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
                     rows: 2,
                     id: `serviceDetail.${i}.description`,
                     name: `serviceDetail.${i}.description`,
-                    placeholder: ``,
+                    placeholder: `${translate(
+                      "common.description_placeholder"
+                    )}`,
                     register,
                   },
                 },
@@ -426,6 +428,9 @@ export const ReportServiceDetailsDescriptionFormField: GenerateReportServiceDesc
                       rows: 2,
                       id: "discountDescription",
                       name: "discountDescription",
+                      placeholder: `${translate(
+                        "common.description_placeholder"
+                      )}`,
                       maxLength: 100,
                       register,
                     },

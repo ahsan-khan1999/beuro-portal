@@ -13,9 +13,7 @@ export const ReportDetails = () => {
     renderModal,
     reportDetails,
     handleUpdateDiscount,
-    shareImgModal,
     systemSettings,
-    defaultUpdateModal,
     appointmentDetails,
     handleCreateReport,
     handleNotes,
@@ -36,11 +34,11 @@ export const ReportDetails = () => {
             }`}
           >
             <AppointmentsDetailCard
+              isAgent={true}
+              handleNotes={handleNotes}
               onStatusChange={handleStatusUpdate}
               appointmentDetails={appointmentDetails}
-              isAgent={true}
               handleImageUpload={handleUploadImages}
-              handleNotes={handleNotes}
             />
           </div>
           <div className="xMini:bg-white mt-6">
@@ -49,10 +47,10 @@ export const ReportDetails = () => {
               isButton={true}
               onButtonClick={handleCreateReport}
               buttonHeading={translate("common.create_report_btn")}
-              containerClassName="py-4 xMini:py-[153px]"
+              containerClassName="xMini:py-[153px] w-full xMini:flex xMini:items-center xMini:justify-center"
+              className="py-5 px-3 xMini:py-10 xMini:px-6 w-full xMini:w-[531px]"
               imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
               textClassName="text-lg xMini:text-2xl"
-              className="py-5 px-3 xMini:py-10 xMini:px-6"
             />
           </div>
         </>
