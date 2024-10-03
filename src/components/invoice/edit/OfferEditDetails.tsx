@@ -14,7 +14,6 @@ const OfferEditDetails = ({
   const router = useRouter();
   const {
     fields,
-    control,
     onSubmit,
     handleSubmit,
     errors,

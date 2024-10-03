@@ -20,7 +20,6 @@ const PdfPriview = () => {
     modal,
     activeButtonId,
     router,
-    loadingGlobal,
     mergedPdfUrl,
     isPdfRendering,
     dispatch,

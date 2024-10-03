@@ -1,4 +1,10 @@
-export const DownloadIcon = ({ onClick }: { onClick: () => void }) => {
+export interface DownloadIconProps {
+  onClick: () => void;
+  isCalendar?: boolean;
+  containerClasses?: string;
+}
+
+export const DownloadIcon = ({ onClick, isCalendar }: DownloadIconProps) => {
   return (
     <svg
       onClick={(e) => {
@@ -18,7 +24,7 @@ export const DownloadIcon = ({ onClick }: { onClick: () => void }) => {
         width="39.2105"
         height="39"
         rx="7.5"
-        fill="white"
+        fill={`${isCalendar ? "transparent" : "white"}`}
         stroke="#4A13E7"
       />
       <path

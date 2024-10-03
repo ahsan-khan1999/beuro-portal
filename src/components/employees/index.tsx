@@ -17,7 +17,6 @@ export default function Employees() {
     filter,
     handleFilterChange,
     setFilter,
-    loading,
     isLoading,
     currentPage,
     totalCount,
