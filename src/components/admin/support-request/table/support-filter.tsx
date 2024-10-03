@@ -98,6 +98,7 @@ export default function SupportFilter({
           { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
         ]}
         label={translate("common.sort_button")}
+        containerClassName="min-w-fit"
       />
     </div>
   );
