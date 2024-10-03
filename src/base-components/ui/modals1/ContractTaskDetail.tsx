@@ -60,7 +60,7 @@ export const ContractTaskDetail = ({
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName="max-w-[300px] xsMini:max-w-[384px] min-h-fit absolute top-[180px] rounded-lg bg-[#F3F3F3] calendarShadow"
+      containerClassName="max-w-[340px] xsMini:max-w-[384px] min-h-fit absolute top-[180px] rounded-lg bg-[#F3F3F3] calendarShadow"
     >
       <div className="p-[10px]">
         <div className="flex items-center gap-x-2">
@@ -89,7 +89,7 @@ export const ContractTaskDetail = ({
           {taskDetail?.type === "Contract" && (
             <Button
               onClick={handlePDFPreview}
-              className="!h-fit py-1 xMini:py-2 px-2 xMini:px-4 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+              className="!h-fit py-1 xMini:py-2 px-2 xMini:px-4 hidden xMini:flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
               text={translate("invoice.invoice_created_modal.button")}
               id="preview PDF"
               inputType="button"
@@ -199,7 +199,7 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
-        <div className="flex flex-col max-h-[300px] overflow-y-auto mb-[35px]">
+        <div className="flex flex-col max-h-[300px] hide-scrollbar overflow-y-auto mb-[35px]">
           {taskDetail?.note && (
             <div className="flex items-start gap-x-2">
               <CalendarNoteIcon />

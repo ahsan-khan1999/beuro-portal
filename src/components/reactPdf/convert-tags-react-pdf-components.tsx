@@ -158,25 +158,6 @@ const valueMaps: any = {
 
 type FontSizeMap = { [key: string]: string };
 
-// function adjustStyles(cssStyle: string): object {
-//   const styleObject: { [key: string]: any } = {};
-//   const styles = cssStyle.split(";");
-//   for (let style of styles) {
-//     const [key, value] = style.split(":").map((s) => s.trim());
-//     if (!key || !value) continue;
-
-//     switch (key) {
-//       case "font-size":
-//         styleObject.fontSize = fontSizeMap[value] || value;
-//         break;
-//       case "font-weight":
-//         styleObject.fontWeight = value === "bold" ? "bold" : "normal";
-//         break;
-//     }
-//   }
-
-//   return styleObject;
-// }
 
 function adjustStyles(cssStyle: string): object {
   const styleObject: any = {};

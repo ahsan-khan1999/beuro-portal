@@ -17,8 +17,8 @@ const AddEmployeeForm = ({ handleCancel }: { handleCancel: () => void }) => {
 
   return (
     <div
-      className={`rounded-md bg-white ${
-        !isUpdate ? " border border-primary" : "border-none"
+      className={`rounded-lg bg-white ${
+        !isUpdate ? "border border-primary" : "border-none"
       } w-full h-fit`}
     >
       <div className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg">

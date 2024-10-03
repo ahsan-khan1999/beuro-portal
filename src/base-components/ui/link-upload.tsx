@@ -18,6 +18,8 @@ export const LinkUpload = ({
   const [validation, setValidation] = useState({ isValid: true, message: "" });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("clicked");
+
     setEnteredLink(event.target.value);
     setValidation(validateUrl(event.target.value, translate));
   };
@@ -40,9 +42,7 @@ export const LinkUpload = ({
             placeholder="https://buero-365.com/"
             className="p-4 border border-[#4B4B4B] rounded-lg w-full h-12 outline-none text-dark text-sm focus:border-primary"
             required
-            pattern={
-              "((http|https)\\:\\/\\/)?[a-zA-Z0-9\\.\\/\\?\\:@\\-_=#]+\\.([a-zA-Z]){2,6}([a-zA-Z0-9\\.\\&\\/\\?\\:@\\-_=#])*"
-            }
+            pattern="(https?:\\/\\/)?([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?"
           />
         </form>
         <BaseButton

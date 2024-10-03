@@ -25,7 +25,7 @@ export const AppointmentTableRecordCard = ({
         const handleReportDetail = () => {
           router.push({
             pathname: "/agent/appointments/report-detail",
-            query: { ...router.query, report: item?.id },
+            query: { ...router.query, reportId: item?.id },
           });
         };
 
@@ -98,7 +98,7 @@ export const AppointmentTableRecordCard = ({
                   {item?.isReportSubmitted ? (
                     <OutlineButton
                       inputType="button"
-                      onClick={handlePdfPreview}
+                      onClick={handleReportDetail}
                       className="bg-white text-primary w-full border border-primary !h-[21px] text-xs font-medium"
                       text={translate("appointments.view_reports_btn")}
                       id="view reports"

@@ -346,11 +346,7 @@ export const useReportUpdatedPdf = () => {
       const url = mergedPdfUrl;
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${
-        // reportDetails?.createdBy?.company?.companyName +
-        // "-" +
-        reportDetails?.appointmentID?.leadID?.refID
-      }.pdf`;
+      a.download = `${reportDetails?.appointmentID?.leadID?.refID}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

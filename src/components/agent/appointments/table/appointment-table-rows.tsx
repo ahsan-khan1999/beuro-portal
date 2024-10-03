@@ -58,7 +58,7 @@ export const AppointmentTableRows = ({
         const handleReportDetail = () => {
           router.push({
             pathname: "/agent/appointments/report-detail",
-            query: { ...router.query, report: item?.id },
+            query: { ...router.query, reportId: item?.id },
           });
         };
 
@@ -81,10 +81,12 @@ export const AppointmentTableRows = ({
 
         const customerType = item?.leadID?.customerDetail
           ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
         const name =
           customerType === 1
             ? item?.leadID?.customerDetail?.companyName
             : item?.leadID?.customerDetail?.fullName;
+
         const heading =
           customerType === 1
             ? translate("common.company_name")

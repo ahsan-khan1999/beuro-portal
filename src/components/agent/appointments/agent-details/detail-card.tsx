@@ -15,6 +15,9 @@ import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
+import { PrintIcon } from "@/assets/svgs/components/print-icon";
+import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { useReportUpdatedPdf } from "@/hooks/appointments/useReportUpdatedPdf";
 
 export interface AppointmentsDetailCardProps {
   onStatusChange: (id: string) => void;
@@ -49,13 +52,14 @@ export const AppointmentsDetailCard = ({
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const { companyAppointment } = router.query;
+  const { handleDonwload, handlePrint } = useReportUpdatedPdf();
 
   const handleBack = () => {
     router.pathname = companyAppointment
       ? "/appointments"
       : "/agent/appointments";
     delete router.query["appointment"];
-    delete router.query["report"];
+    delete router.query["reportId"];
     delete router.query["companyAppointment"];
     updateQuery(router, router.locale as string);
   };
@@ -147,6 +151,7 @@ export const AppointmentsDetailCard = ({
 
   const customerType = appointmentDetails?.leadID?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
   const name =
     customerType === 1
       ? appointmentDetails?.leadID?.customerDetail?.companyName
@@ -168,39 +173,30 @@ export const AppointmentsDetailCard = ({
             {translate("appointments.detail_heading")}
           </h1>
         </div>
-        <div className="hidden xMini:flex items-center gap-x-4">
-          {!appointmentDetails?.leadID?.isOfferCreated &&
-            !isAgent &&
-            isReportCreated && (
-              <OutlineButton
-                inputType="button"
-                onClick={offerCreateHandler}
-                className="bg-white text-[#4B4B4B] border border-primary !h-10 hover:bg-transparent hover:text-primary"
-                text={translate("leads.card_content.create_button")}
-                id="create offer"
-                iconAlt="create offer"
-                icon={createOfferIcon}
-              />
-            )}
-          {/* <Button
-            inputType="button"
-            onClick={onScheduleAppointments}
-            className="!h-10 py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
-            text={translate("appointments.reschedule_btn")}
-            id="reschedule"
-            iconAlt="reschedule"
-          />
-          <OutlineButton
-            inputType="button"
-            onClick={() => {}}
-            className="bg-white text-[#D80027] w-full border border-[#D80027] px-4 !h-10"
-            text={translate("common.cancel_button")}
-            id="cancel"
-            iconAlt="cancel"
-          /> */}
+        <div>
+          <div className="hidden xMini:flex items-center gap-x-4">
+            {!appointmentDetails?.leadID?.isOfferCreated &&
+              !isAgent &&
+              isReportCreated && (
+                <OutlineButton
+                  inputType="button"
+                  onClick={offerCreateHandler}
+                  className="bg-white text-[#4B4B4B] border border-primary !h-10 hover:bg-transparent hover:text-primary"
+                  text={translate("leads.card_content.create_button")}
+                  id="create offer"
+                  iconAlt="create offer"
+                  icon={createOfferIcon}
+                />
+              )}
+          </div>
+          {isReportCreated && (
+            <div className="flex items-center gap-x-2 xMini:gap-x-4">
+              <PrintIcon onClick={handlePrint} />
+              <DownloadIcon onClick={handleDonwload} />
+            </div>
+          )}
         </div>
       </div>
-
       <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
         <div
           className={`flex flex-col gap-y-3 mlg:gap-y-[34px] mt-[10px] mlg:mt-[34px]`}

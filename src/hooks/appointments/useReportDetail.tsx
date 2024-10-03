@@ -26,16 +26,15 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+
 export const useReportDetails = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const { systemSettings } = useAppSelector((state) => state.settings);
+  const id = router.query.reportId || router.query.appointment;
 
   const { isLoading, loading, reportDetails, appointmentDetails } =
     useAppSelector((state) => state.appointment);
-
-  const { systemSettings } = useAppSelector((state) => state.settings);
-
-  const id = router.query.report || router.query.appointment;
 
   useEffect(() => {
     if (id) {
@@ -86,10 +85,6 @@ export const useReportDetails = () => {
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
-  };
-
-  const handleAppointmentsSuccess = () => {
-    dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
   };
 
   const shareImgModal = (
@@ -294,8 +289,6 @@ export const useReportDetails = () => {
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
-
-
 
   return {
     router,

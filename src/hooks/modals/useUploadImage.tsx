@@ -14,7 +14,6 @@ export const useUploadImage = (handleImageSlider: Function, id?: string) => {
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
   const [isOpenedFile, setIsOpenedFile] = useState<boolean>(false);
-
   const [activeTab, setActiveTab] = useState("img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
   const [enteredLinks, setEnteredLinks] = useState<any>({
@@ -37,11 +36,15 @@ export const useUploadImage = (handleImageSlider: Function, id?: string) => {
 
   const handleLinkAdd = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
+
     if (enteredLink.trim() !== "") {
-      let newArray = [...enteredLinks.links];
+      const newArray = Array.isArray(enteredLinks?.links)
+        ? [...enteredLinks.links]
+        : [];
 
       newArray.push(enteredLink as string);
-      setEnteredLinks({ ...enteredLinks, links: [...newArray] });
+
+      setEnteredLinks({ ...enteredLinks, links: newArray });
       setEnteredLink("");
     }
   };
@@ -117,9 +120,6 @@ export const useUploadImage = (handleImageSlider: Function, id?: string) => {
   }, [id, leadDetails?.id, images]);
 
   const onSubmit = async () => {
-    // const filteredList = Object.values(data)
-    //   ?.filter((value) => value)
-    //   ?.reverse();
     const formatImages = enteredLinks?.images?.map(
       (item: Attachement) => item.value
     );

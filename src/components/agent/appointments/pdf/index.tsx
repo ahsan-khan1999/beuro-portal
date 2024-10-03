@@ -9,7 +9,6 @@ import { useReportUpdatedPdf } from "@/hooks/appointments/useReportUpdatedPdf";
 
 export const ReportPdfPreview = () => {
   const {
-    reportData,
     isLoading,
     handleDonwload,
     handlePrint,

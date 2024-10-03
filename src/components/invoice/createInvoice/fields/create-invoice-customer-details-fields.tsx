@@ -16,6 +16,7 @@ import {
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { InvoiceTableRowTypes } from "@/types/invoice";
+import { getKeyByValue } from "@/utils/auth.util";
 
 export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormField =
   (
@@ -113,13 +114,13 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
                     })) || [],
 
                 control,
-                // value:
-                //   (invoiceDetails &&
-                //     getKeyByValue(
-                //       staticEnums["CustomerType"],
-                //       invoiceDetails?.customerDetail?.customerType
-                //     )) ||
-                //   customerType,
+                value:
+                  (invoiceDetails &&
+                    getKeyByValue(
+                      staticEnums["CustomerType"],
+                      invoiceDetails?.customerDetail?.customerType
+                    )) ||
+                  customerType,
               },
             },
             {

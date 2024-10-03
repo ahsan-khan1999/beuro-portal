@@ -25,6 +25,7 @@ import { PDFDocument } from "pdf-lib";
 import moment, { Moment } from "moment";
 import "moment/locale/de";
 import { TFunction } from "next-i18next";
+import { contractTableTypes } from "@/types/contract";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -53,6 +54,7 @@ export function isFieldType(type: any): type is FieldType {
     type
   );
 }
+
 export const areFiltersEmpty = (filter: FilterType) => {
   return Object.values(filter).every((value) => {
     if (Array.isArray(value)) {

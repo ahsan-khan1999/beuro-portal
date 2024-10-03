@@ -19,11 +19,6 @@ export interface ApointmentsTableProps {
     startTime: string,
     endTime: string,
     canton: string
-    // agent: {
-    //   id: string;
-    //   picture: string;
-    //   fullName: string;
-    // }
   ) => void;
   handleImageUpload: (
     id: string,
@@ -58,7 +53,7 @@ export const AppointmentTableRows = ({
     `${translate("appointments.appointment_status.Cancelled")}`,
   ];
 
-  const items = Object.keys(staticEnums["AppointmentStatus"]).map(
+  const items = Object?.keys(staticEnums["AppointmentStatus"]).map(
     (item, index) => ({
       item: { label: itemsValue[index], value: item },
     })
@@ -71,12 +66,6 @@ export const AppointmentTableRows = ({
       }`}
     >
       {dataToAdd?.map((item, index) => {
-        // const imageUrl = item?.agent?.picture
-        //   ? item.agent.picture.startsWith("http")
-        //     ? item.agent.picture
-        //     : `/${item.agent.picture}`
-        //   : dummyAgent;
-
         const handleViewReport = () => {
           router.push({
             pathname: "/appointments/details",
@@ -202,7 +191,6 @@ export const AppointmentTableRows = ({
                     isContract={true}
                   />
                 </div>
-
                 <span className="py-4 flex justify-center items-center">
                   <div
                     className={`${
@@ -219,7 +207,6 @@ export const AppointmentTableRows = ({
                 </span>
               </div>
             </div>
-
             <div
               className={`grid grid-cols-[minmax(140px,_140px)] xLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(140px,_140px)] gap-x-2 ${
                 index === 0 && "mt-2"
@@ -332,7 +319,6 @@ export const AppointmentTableRows = ({
                   </svg>
                 </span>
               </div>
-
               <div className="py-4 flex items-center">
                 {item?.isReportSubmitted ? (
                   <Button
