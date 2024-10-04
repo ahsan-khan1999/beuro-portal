@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useAppSelector } from "@/hooks/useRedux";
 export default function AppointmentsFilter({
   filter,
   setFilter,
@@ -19,7 +19,6 @@ export default function AppointmentsFilter({
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
-  // const dispatch = useAppDispatch();
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -34,15 +33,15 @@ export default function AppointmentsFilter({
   const checkbox: CheckBoxType[] = [
     {
       label: translate("sidebar.customer.appointments.pending"),
-      type: `${staticEnums.LeadStatus.Open}`,
+      type: `${staticEnums.AppointmentStatus.Pending}`,
     },
     {
       label: translate("sidebar.customer.appointments.completed"),
-      type: `${staticEnums.LeadStatus.InProcess}`,
+      type: `${staticEnums.AppointmentStatus.Completed}`,
     },
     {
       label: translate("sidebar.customer.appointments.cancelled"),
-      type: `${staticEnums.LeadStatus.Close}`,
+      type: `${staticEnums.AppointmentStatus.Cancelled}`,
     },
   ];
 
