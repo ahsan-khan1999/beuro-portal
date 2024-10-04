@@ -1,6 +1,6 @@
 {
   "register": {
-    "main_heading": "Anmeldung bei Büro-3655",
+    "main_heading": "Anmeldung bei Büro 365",
     "sub_heading": "Verwalten Sie Ihr Unternehmen mit uns",
     "full_name": "Vollständiger Name",
     "email_label": "E-Mail",
@@ -481,7 +481,7 @@
   "employees": {
     "main_heading": "Mitarbeiter",
     "add_button": "Neu hinzufügen",
-    "add_new_employee": "Mitarbeiter hinzufügen",
+    "add_new_employee": "Neuen Mitarbeiter hinzufügen",
     "employee_tab": "Mitarbeiter Details",
     "table_headings": {
       "id": "ID",
@@ -938,7 +938,7 @@
   },
   "content": {
     "main_heading": "Inhalt",
-    "create_content": "Inhalt erstellen",
+    "create_content": "Neue Inhalte hinzufügen",
     "add_button": "Neu hinzufügen",
     "content_card_detail": {
       "heading": "Inhaltsdetails",
@@ -1256,6 +1256,9 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
+    "add_new_offer": "Neues Angebot hinzufügen",
+    "add_new_invoice": "Neue Rechnung hinzufügen",
+    "no_customer_found": "Kein Kunde gefunden",
     "paid_invoice": "Rechnung wurde erfolgreich als bezahlt markiert",
     "paid_invoice_date": "Wählen Sie das Zahlungsdatum der Rechnung",
     "enter_location": "Ort eingeben",
@@ -2392,7 +2395,21 @@
   "admin_role": {
     "Admin": "Verwaltung",
     "Company": "Unternehmen",
-    "Agent": "Agent"
+    "Employee": "Employee",
+    "Agent": "Agent",
+    "CEO": "CEO",
+    "Administration": "Verwaltung",
+    "HRManager": "HR Manager",
+    "FinanceManager": "Finance Manager",
+    "OperationsManager": "Operations Manager",
+    "ITManager": "IT Manager",
+    "MarketingManager": "Marketing Manager",
+    "SalesManager": "Sales Manager",
+    "ProjectManager": "Projekt Manager",
+    "BusinessAnalyst": "Business Analyst",
+    "CustomerSupportRepresentative": "Kunden Support Vertreter",
+    "AdministrativeAssistant": "Verwaltungs Assistentin",
+    "Intern": "Intern"
   },
   "header_alignment": {
     "header_heading": "Ausrichtung der Kopfzeile",

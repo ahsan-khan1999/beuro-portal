@@ -11,8 +11,6 @@ const ConfirmationContentDetailsData = ({
   contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  console.log(contentDetail?.offerContent?.attachments.length, "cc");
-
   return (
     <div
       className="rounded-md border-none bg-white w-full h-fit"
@@ -90,7 +88,7 @@ const ConfirmationContentDetailsData = ({
             <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
-            {contentDetail?.confirmationContent?.attachments.length > 0 ? (
+            {contentDetail?.confirmationContent?.attachments?.length > 0 ? (
               <div className="mt-5 grid grid-cols-3 gap-2">
                 {contentDetail?.confirmationContent?.attachments?.map(
                   (item, index) => (

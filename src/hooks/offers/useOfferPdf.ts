@@ -317,8 +317,6 @@ export const useOfferPdf = () => {
         const data = await localStoreUtil.get_data("contractComposeEmail");
 
         if (data) {
-          // delete apiData["id"]
-
           let apiData = { ...data, pdf: fileUrl?.payload };
           delete apiData["content"];
 
@@ -346,7 +344,6 @@ export const useOfferPdf = () => {
             attachments: offerDetails?.content?.offerContent?.attachments,
             id: offerDetails?.id,
             pdf: fileUrl?.payload,
-            // pdf: res?.payload
           };
           setIsMailSend(true);
           const res = await dispatch(sendOfferEmail({ data: apiData }));

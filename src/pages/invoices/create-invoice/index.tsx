@@ -4,11 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { InvoiceCreateDetail } from "@/components/invoice/createInvoice";
 
 const index = () => {
-  return (
-    <>
-      <InvoiceCreateDetail />
-    </>
-  );
+  return <InvoiceCreateDetail />;
 };
 
 export default index;

@@ -100,10 +100,10 @@ const AddEmployeeDetails = () => {
 
   return (
     <Layout>
-      <h2 className="text-2xl font-medium text-[#222B45] mb-5">
+      <h2 className="text-2xl font-semibold text-[#222B45] mb-5">
         {translate("employees.add_new_employee")}
       </h2>
-      <div className="flex flex-col xl:flex-row gap-5">
+      <div className="flex flex-col xl:flex-row gap-4">
         <div className="space-y-4 w-fit">
           <TabSection
             tabsArray={tabSection}

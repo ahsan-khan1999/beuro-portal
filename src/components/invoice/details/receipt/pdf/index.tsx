@@ -6,6 +6,7 @@ import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
 import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -16,14 +17,10 @@ const InvoicePdfPreview = dynamic(
 
 const ReceiptPdfPreview = () => {
   const {
-    emailTemplateSettings,
     loading,
-    loadingGlobal,
     modal,
     receiptData,
-    templateSettings,
     activeButtonId,
-    router,
     mergedPdfUrl,
     isPdfRendering,
     handleDonwload,
@@ -34,7 +31,6 @@ const ReceiptPdfPreview = () => {
     onSuccess,
     dispatch,
     collectiveInvoiceDetails,
-    systemSetting,
   } = useReceiptPdf();
 
   const { t: translate } = useTranslation();
@@ -66,27 +62,34 @@ const ReceiptPdfPreview = () => {
 
   return (
     <>
-      <InvoiceEmailHeader
-        {...receiptData?.emailHeader}
-        contractStatus={collectiveInvoiceDetails?.emailStatus}
-        contentName={
-          receiptData?.emailHeader && receiptData?.emailHeader.contentName
-        }
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        onSendViaPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-        title={translate("invoice.receipt_details")}
-      />
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <>
+          <InvoiceEmailHeader
+            {...receiptData?.emailHeader}
+            contractStatus={collectiveInvoiceDetails?.emailStatus}
+            contentName={
+              receiptData?.emailHeader && receiptData?.emailHeader.contentName
+            }
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            onSendViaPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+            title={translate("invoice.receipt_details")}
+          />
 
-      <div className="mt-5">
-        <InvoicePdfPreview
-          mergedPdfFileUrl={mergedPdfUrl}
-          isPdfRendering={isPdfRendering}
-        />
-      </div>
+          <div className="mt-5">
+            <InvoicePdfPreview
+              mergedPdfFileUrl={mergedPdfUrl}
+              isPdfRendering={isPdfRendering}
+            />
+          </div>
+        </>
+      )}
+
       {renderModal()}
     </>
   );

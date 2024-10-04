@@ -159,7 +159,7 @@ export const CreateInvoice = () => {
 
   return (
     <>
-      <div className="xLarge:fixed mb-5 mt-[40px]">
+      <div className="xLarge:fixed mb-5">
         <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full">
           {tabSection?.map((item, index) => (
             <OfferTabs
@@ -180,7 +180,7 @@ export const CreateInvoice = () => {
       <div className="w-full break-all flex">
         <div className="max-w-[330px] w-full hidden xLarge:block"></div>
 
-        <div className="w-full xLarge:max-w-[80%] my-[40px]">
+        <div className="w-full xLarge:max-w-[80%] mb-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

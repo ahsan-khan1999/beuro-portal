@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import AddConfirmationContentDetails from "./AddConfirmationContentDetails";
 import AddInoviceContentDetails from "./AddInoviceContentDetails";
 import AddReceiptContentDetails from "./AddReceiptContentDetails";
@@ -14,6 +13,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { updateQuery } from "@/utils/update-query";
 import { ComponentsType } from "@/enums/content";
+import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 const ContentAddDetailsData = () => {
   const { contentDetails } = useAppSelector((state) => state.content);
@@ -173,26 +173,25 @@ const ContentAddDetailsData = () => {
 
   return (
     <>
-      <div className="xLarge:fixed mb-5 xLarge:-mt-12">
-        <p className="text-xl mb-5 font-normal text-[#222B45]">
-          {translate("content.create_content")}
-        </p>
-        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap gap-[14px]">
+      <div className="xLarge:fixed mb-5">
+        <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
           {tabSection?.map((item, index) => (
-            <DetailsTab
+            <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}
+              index={index + 1}
               icon={item.icon}
               selectedTab={index}
-              key={item.name}
             />
           ))}
         </div>
       </div>
-      <div className="w-full break-all xLarge:mt-[145px] flex mb-10" ref={ref}>
-        <div className="max-w-[280px] w-full hidden xLarge:block"></div>
+
+      <div className="w-full break-all flex mb-10" ref={ref}>
+        <div className="max-w-[340px] w-full hidden xLarge:block"></div>
         <div className="w-full">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>

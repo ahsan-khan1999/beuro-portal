@@ -81,21 +81,23 @@ const ViewMails = () => {
 
   return (
     <Layout>
-      <DetailsCard>
-        <DetailsData
-          handleConfirmDeletion={handleConfirmDeletion}
-          emailDetails={emailDetails}
-        />
-      </DetailsCard>
-      <div className="mt-7">
-        {loading ? (
-          <div className="flex justify-center items-center">
-            <CustomLoader />
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <CustomLoader />
+        </div>
+      ) : (
+        <>
+          <DetailsCard>
+            <DetailsData
+              handleConfirmDeletion={handleConfirmDeletion}
+              emailDetails={emailDetails}
+            />
+          </DetailsCard>
+          <div className="mt-7">
+            <EmailDetailsData emailDetails={emailDetails} />
           </div>
-        ) : (
-          <EmailDetailsData emailDetails={emailDetails} />
-        )}
-      </div>
+        </>
+      )}
       {renderModal()}
     </Layout>
   );

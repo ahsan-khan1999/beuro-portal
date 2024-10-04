@@ -57,6 +57,8 @@ const OfferDetailsCard = ({
   const handleBack = () => {
     router.pathname = "/offers";
     delete router.query["offer"];
+    delete router.query["offerID"];
+    delete router.query["isMail"];
     updateQuery(router, router.locale as string);
   };
 

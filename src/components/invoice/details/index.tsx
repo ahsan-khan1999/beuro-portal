@@ -30,11 +30,10 @@ const InvoiceDetails = () => {
     loading,
     systemSettings,
     handleInvoiceUpdate,
-    totalCount,
     loadingInvoice,
     loadingReceipt,
     handlePaymentStatusChange,
-    handleDeleteInvoice
+    handleDeleteInvoice,
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -82,36 +81,43 @@ const InvoiceDetails = () => {
 
   return (
     <Layout>
-      <InvoiceCardLayout>
-        <InvoiceDetailsData
-          handleInvoiceCreation={handleInvoiceCreation}
-          invoiceDetails={invoiceDetails}
-          handleNotes={handleNotes}
-          handleEditInvoiceFrequencyCreation={
-            handleEditInvoiceFrequencyCreation
-          }
-          handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
-          handleStopInvoiceCreation={handleStopInvoiceCreation}
-          handleSendEmail={handleSendEmail}
-          currency={systemSettings?.currency}
-          handleInvoiceEdit={handleInvoiceUpdate}
-          onDeleteHandler={handleDeleteInvoice}
-        />
-      </InvoiceCardLayout>
-
-      <div className="flex my-3">
-        <DetailsSwitchBtn
-          activeTab={activeTab}
-          onComponentChange={setActiveTab}
-        />
-      </div>
-      {loading || loadingInvoice || loadingReceipt ? (
+      {loading ? (
         <CustomLoader />
-      ) : shouldShowPendingInvoice ? (
-        <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />
       ) : (
-        CurrentComponent
+        <>
+          <InvoiceCardLayout>
+            <InvoiceDetailsData
+              handleInvoiceCreation={handleInvoiceCreation}
+              invoiceDetails={invoiceDetails}
+              handleNotes={handleNotes}
+              handleEditInvoiceFrequencyCreation={
+                handleEditInvoiceFrequencyCreation
+              }
+              handleRecurringInvoiceCreation={handleRecurringInvoiceCreation}
+              handleStopInvoiceCreation={handleStopInvoiceCreation}
+              handleSendEmail={handleSendEmail}
+              currency={systemSettings?.currency}
+              handleInvoiceEdit={handleInvoiceUpdate}
+              onDeleteHandler={handleDeleteInvoice}
+            />
+          </InvoiceCardLayout>
+
+          <div className="flex my-3">
+            <DetailsSwitchBtn
+              activeTab={activeTab}
+              onComponentChange={setActiveTab}
+            />
+          </div>
+          {loading || loadingInvoice || loadingReceipt ? (
+            <CustomLoader />
+          ) : shouldShowPendingInvoice ? (
+            <PendingInvoice handleInvoiceCreation={handleInvoiceCreation} />
+          ) : (
+            CurrentComponent
+          )}
+        </>
       )}
+
       {renderModal()}
     </Layout>
   );

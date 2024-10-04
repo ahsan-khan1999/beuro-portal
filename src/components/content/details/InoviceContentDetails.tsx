@@ -114,7 +114,7 @@ const InoviceContentDetails = ({
             <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
-            {contentDetail?.invoiceContent?.attachments.length > 0 ? (
+            {contentDetail?.invoiceContent?.attachments?.length > 0 ? (
               <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">
                 {contentDetail?.invoiceContent?.attachments?.map(
                   (item, index) => (

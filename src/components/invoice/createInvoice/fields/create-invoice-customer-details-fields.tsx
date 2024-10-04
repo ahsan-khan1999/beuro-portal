@@ -23,6 +23,7 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
     register,
     loading,
     control,
+    // onSearchCustomer,
     {
       customerType,
       type,
@@ -433,6 +434,8 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
 
           control,
           onItemChange: onCustomerSelect,
+          isLocalCustomer: true,
+          // onSearchCustomer: (value: string) => onSearchCustomer(value),
           value: invoiceDetails?.id ? invoiceDetails?.customerID : "",
           setValue,
         },

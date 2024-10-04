@@ -4,17 +4,13 @@ import { InvoiceEmailHeader } from "./email-header-card";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useMainInvoicePdf } from "@/hooks/invoice/useMainInvoicePdf";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   {
     ssr: false,
   }
-);
-
-const PdfDownload = dynamic(
-  () => import("@/components/reactPdf/generate-Pdf-Download"),
-  { ssr: false }
 );
 
 export const MainInvoicePdfDetail = () => {
@@ -65,29 +61,35 @@ export const MainInvoicePdfDetail = () => {
 
   return (
     <>
-      <InvoiceEmailHeader
-        {...invoiceData?.emailHeader}
-        contractStatus={invoiceDetails?.emailStatus}
-        contentName={
-          invoiceData?.emailHeader && invoiceData?.emailHeader.contentName
-        }
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        onSendViaPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-        title={translate("invoice.invoice_details")}
-      />
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <>
+          <InvoiceEmailHeader
+            {...invoiceData?.emailHeader}
+            contractStatus={invoiceDetails?.emailStatus}
+            contentName={
+              invoiceData?.emailHeader && invoiceData?.emailHeader.contentName
+            }
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            onSendViaPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+            title={translate("invoice.invoice_details")}
+          />
 
-      <div className="mt-5">
-        <InvoicePdfPreview
-          mergedPdfFileUrl={mergedPdfUrl}
-          isPdfRendering={isPdfRendering}
-        />
-      </div>
+          <div className="mt-5">
+            <InvoicePdfPreview
+              mergedPdfFileUrl={mergedPdfUrl}
+              isPdfRendering={isPdfRendering}
+            />
+          </div>
 
-      {renderModal()}
+          {renderModal()}
+        </>
+      )}
     </>
   );
 };

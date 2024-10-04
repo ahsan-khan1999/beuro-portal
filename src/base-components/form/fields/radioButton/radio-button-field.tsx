@@ -39,16 +39,10 @@ export const RadioButtonField = ({
       <input
         id={id}
         type="radio"
-        // defaultValue={value}
         checked={checked}
         {...register(name)}
         className={`${classes}`}
         value={value}
-        disabled={disabled}
-        // onChangeCapture={() => {
-        //   console.log("change");
-        //   onClick && onClick()
-        // }}
         onChange={conditionalOnChange}
       />
       <span className="ms-0 text-sm">{label}</span>

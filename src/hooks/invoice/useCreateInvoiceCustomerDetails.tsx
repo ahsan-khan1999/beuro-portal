@@ -12,6 +12,7 @@ import { ComponentsType } from "@/components/offers/add/AddOffersDetailsData";
 import { useEffect, useMemo } from "react";
 import {
   readCustomer,
+  readCustomerDetail,
   setCustomerDetails,
   setCustomers,
 } from "@/api/slices/customer/customerSlice";
@@ -67,7 +68,9 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
   });
 
   useEffect(() => {
-    dispatch(readCustomer({ params: { filter: {}, size: 30 } }));
+    dispatch(
+      readCustomer({ params: { filter: { dropdown: "true" }, paginate: 0 } })
+    );
     dispatch(readContent({ params: { filter: {}, paginate: 0 } }));
   }, []);
 
@@ -111,20 +114,30 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     name: "date",
   });
 
-  const onCustomerSelect = (id: string) => {
+  // const handleSearchCustomer = (value: string) => {
+  //   dispatch(readCustomer({ params: { filter: { text: value } } }));
+  // };
+
+  const onCustomerSelect = async (id: string) => {
     if (!id) return;
-    const selectedCustomers = customer?.find((item) => item.id === id);
 
-    if (selectedCustomers) {
-      dispatch(setCustomerDetails(selectedCustomers));
+    if (id) {
+      try {
+        const response = await dispatch(
+          readCustomerDetail({ params: { filter: id } })
+        );
 
-      reset({
-        ...selectedCustomers,
-        customerID: selectedCustomers?.id,
-        type: type,
-        content: selectedContent,
-        gender: staticEnums["Gender"][selectedCustomers?.gender],
-      });
+        reset({
+          ...response?.payload,
+          customerID: response?.payload?.id,
+          type: type,
+          content: selectedContent,
+          gender: staticEnums["Gender"][response?.payload?.gender],
+        });
+        dispatch(setCustomerDetails(response?.payload));
+      } catch (error) {
+        console.error("Failed to fetch customer detail:", error);
+      }
     }
   };
 
@@ -192,6 +205,7 @@ export const useCreateInvoiceOfferDetails = (onHandleNext: Function) => {
     register,
     loading,
     control,
+    // handleSearchCustomer,
     {
       customerType,
       type,
