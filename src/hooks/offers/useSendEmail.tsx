@@ -4,7 +4,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateContractEmailValidationSchema } from "@/validation/contractSchema";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { setContentDetails } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
@@ -28,6 +28,7 @@ export const useSendEmail = (
   const isMail = router.query?.isMail;
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
   const { content, contentDetails } = useAppSelector((state) => state.content);
+  const [isMailSend, setIsMailSend] = useState(false);
   const [attachements, setAttachements] = useState<Attachement[]>(
     (offerDetails?.id &&
       transformAttachments(
@@ -112,15 +113,12 @@ export const useSendEmail = (
     setValue
   );
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // const apiData = {
-    //   id: offerDetails?.id,
-    //   title: data?.title,
-    //   additionalDetails: data?.additionalDetails,
+  useMemo(() => {
+    isMailSend &&
+      dispatch(updateModalType({ type: ModalType.LOADING_MAIL_GIF }));
+  }, [isMailSend]);
 
-    // };
-    // const response = await dispatch(updateOfferContent({ data: apiData }));
-    // if (response?.payload) {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (isMail) {
       const fileUrl = await JSON.parse(localStorage.getItem("pdf") as string);
 
@@ -128,20 +126,18 @@ export const useSendEmail = (
         ...data,
         id: offerDetails?.id,
         pdf: fileUrl,
-        // attachments: attachements.map((item) => {
-        //   const url = item.value;
-        //   const baseUrl = url.substring(0, url.lastIndexOf("/") + 1);
-        //   const fileName = url.substring(url.lastIndexOf("/") + 1);
-        //   const newUrl = `${baseUrl}${offerDetails?.createdBy?.company?.companyName}-${fileName}`;
-
-        //   return newUrl;
-        // }),
       };
 
-      dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-      await dispatch(sendOfferEmail({ data: apiData }));
-      // if (res?.payload) {
-      // }
+      setIsMailSend(true);
+      const res = await dispatch(sendOfferEmail({ data: apiData }));
+      setTimeout(() => {
+        if (res?.payload) {
+          setIsMailSend(false);
+          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+        } else {
+          setIsMailSend(false);
+        }
+      }, 1800);
     } else {
       const updatedData = {
         ...data,

@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import SettingTopDataButtons from "./SettingTopDataButtons";
 import SystemSettingDetails from "./system-setting/SystemSettingDetails";
 import AddTax from "@/base-components/ui/modals1/AddTax";
-import MailSetting from "./mail-setting";
 import EditPaymentDetails from "@/base-components/ui/modals1/EditPaymentDetails";
 import Templates from "./templates";
 import FollowUpSetting from "./follow-up-setting";
@@ -24,12 +23,13 @@ import {
   readNoteSettings,
 } from "@/api/slices/settingSlice/settings";
 import { useTranslation } from "next-i18next";
+import { MailSetting } from "./mail-setting";
 
 const Setting = () => {
   const { query } = useRouter();
   const { t: translate } = useTranslation();
 
-  const { loading, noteSettings } = useAppSelector((state) => state.settings);
+  const { noteSettings } = useAppSelector((state) => state.settings);
 
   const dispatch = useDispatch();
   const tab = query.tab;
@@ -57,17 +57,17 @@ const Setting = () => {
     dispatch(updateModalType({ type: ModalType.ADD_TAX }));
   };
 
-  const handleEditPayment = () => {
-    dispatch(updateModalType({ type: ModalType.EDIT_PAYMENT_METHOD }));
-  };
+  // const handleEditPayment = () => {
+  //   dispatch(updateModalType({ type: ModalType.EDIT_PAYMENT_METHOD }));
+  // };
 
   const handleCreation = () => {
     dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
   };
 
-  const handleAddressGeneralSuccess = () => {
-    dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_ADDRESS }));
-  };
+  // const handleAddressGeneralSuccess = () => {
+  //   dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_ADDRESS }));
+  // };
 
   const handleNoteGeneralSuccess = () => {
     dispatch(updateModalType({ type: ModalType.GENERAL_SUCCESS_NOTES }));
@@ -117,7 +117,6 @@ const Setting = () => {
       const noteSetting = [...noteSettings];
       noteSetting.splice(index, 1);
       dispatch(readNoteSettings());
-      // dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
       handleCreation();
     }
   };
@@ -139,14 +138,12 @@ const Setting = () => {
     [ModalType.ADD_GENERAL_ADDRESS]: (
       <AddGeneralAddress
         onClose={onClose}
-        // onSuccess={handleAddressGeneralSuccess}
         heading={translate("common.add_address_title")}
       />
     ),
     [ModalType.EDIT_GENERAL_ADDRESS]: (
       <AddGeneralAddress
         onClose={onClose}
-        // onSuccess={handleAddressGeneralSuccess}
         heading={translate("common.edit_address_title")}
       />
     ),

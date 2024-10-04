@@ -1,6 +1,7 @@
 import {
   readCompanyDetail,
   setCompanyDetails,
+  updateAdminCompany,
   updateCompanyStatus,
 } from "@/api/slices/company/companySlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -50,7 +51,6 @@ export default function useCustomerDetailAdmin() {
   };
 
   const route = () => {
-    //make api call
     onClose();
   };
 
@@ -91,8 +91,38 @@ export default function useCustomerDetailAdmin() {
   };
 
   const routeHandler = () => {
-    // dispatch(deleteCustomer({ customerDetails, router, setError, translate }));
     console.log("delete company");
+  };
+
+  const handleCompanyUpdate = async (isAppointment: boolean) => {
+    if (!companyDetails?.id) return;
+
+    const response = await dispatch(
+      updateAdminCompany({
+        data: { id: companyDetails?.company?.id, isAppointment },
+      })
+    );
+
+    if (response?.payload) {
+      dispatch(
+        readCompanyDetail({ params: { filter: companyDetails?.id } })
+      ).then((res: CustomerPromiseActionType) => {
+        dispatch(setCompanyDetails(res.payload));
+      });
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+    }
+  };
+
+  const handleStatusChange = async (custmerStatus: string) => {
+    const res = await dispatch(
+      updateCompanyStatus({
+        data: {
+          id: companyDetails?.id,
+          status: staticEnums["User"]["accountStatus"][custmerStatus],
+        },
+      })
+    );
+    if (res?.payload) handleDefaultModal();
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -137,18 +167,6 @@ export default function useCustomerDetailAdmin() {
     return MODAL_CONFIG[modal.type] || null;
   };
 
-  const handleStatusChange = async (custmerStatus: string) => {
-    const res = await dispatch(
-      updateCompanyStatus({
-        data: {
-          id: companyDetails?.id,
-          status: staticEnums["User"]["accountStatus"][custmerStatus],
-        },
-      })
-    );
-    if (res?.payload) handleDefaultModal();
-  };
-
   return {
     companyDetails,
     isCustomerFree,
@@ -164,5 +182,6 @@ export default function useCustomerDetailAdmin() {
     loading,
     handleMakeAccountFree,
     deleteHandler,
+    handleCompanyUpdate,
   };
 }

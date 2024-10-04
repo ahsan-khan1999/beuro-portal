@@ -39,13 +39,11 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
           type: Field.select,
           id: `address.${i}.addressType`,
           name: `address.${i}.addressType`,
-          // value: translate("common.address_type"),
           options:
             addressSettings?.addresses?.map((item) => ({
               label: item,
               value: item,
             })) || [],
-
           control,
           onItemChange: (item) => handleChangeLabel(item, i),
         },
@@ -72,8 +70,6 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                       id: `address.${i}.label`,
                       name: `address.${i}.label`,
                       register,
-                      // value: `Adresse ${++valueIndex}`,
-                      // setValue,
                     },
                   }) || {
                     field: {
@@ -82,15 +78,12 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                       id: `address.${i}.label`,
                       name: `address.${i}.label`,
                       register,
-                      // value: `Adresse ${++valueIndex}`,
                       disabled: true,
                       className:
                         "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
-                      // setValue,
                     },
                   },
                   {
-                    containerClass: "",
                     field: {
                       type: Field.button,
                       className: "bg-white hover:bg-white",
@@ -143,7 +136,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.streetNumber`,
                 name: `address.${i}.streetNumber`,
-                placeholder: `Zweibrückenstraße, ${i}`,
+                placeholder: `${translate("offers.placeholders.street")}`,
                 register,
               },
             },
@@ -160,7 +153,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.postalCode`,
                 name: `address.${i}.postalCode`,
-                placeholder: `123${i}`,
+                placeholder: `${translate("offers.placeholders.post_code")}`,
                 register,
               },
             },
@@ -178,6 +171,9 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
+                placeholder: `${translate(
+                  "offers.placeholders.country_placeholder"
+                )}`,
                 register,
               },
             },
@@ -198,7 +194,7 @@ export const AddOffAddressDetailsFormField: GenerateLeadAddressFormField = (
           rows: 2,
           id: `address.${i}.description`,
           name: `address.${i}.description`,
-          placeholder: "",
+          placeholder: `${translate("common.description_placeholder")}`,
           register,
         },
       }

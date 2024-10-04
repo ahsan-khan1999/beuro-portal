@@ -196,7 +196,7 @@ const ContentDetailsData = () => {
     <>
       <div className="xMaxSize:fixed mb-5 mt-5 xMaxSize:mt-0">
         <div className="flex flex-row flex-wrap xMaxSize:flex-col xMaxSize:flex-nowrap gap-[14px] mb-5 xMaxSize:mb-0">
-          {tabSection.map((item, index) => (
+          {tabSection?.map((item, index) => (
             <DetailsTab
               key={index}
               isSelected={tabType === index}
@@ -205,7 +205,6 @@ const ContentDetailsData = () => {
               name={item.name}
               icon={item.icon}
               selectedTab={index}
-              // onScroll={scrollHandler}
               onItemSelected={handleScrollToTop}
             />
           ))}
@@ -220,7 +219,7 @@ const ContentDetailsData = () => {
           </div>
         ) : (
           <div className="flex flex-col gap-y-5 w-full">
-            {renderComponent.map((component, index) => (
+            {renderComponent?.map((component, index) => (
               <div key={index}>{component}</div>
             ))}
           </div>

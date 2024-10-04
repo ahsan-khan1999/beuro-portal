@@ -10,6 +10,7 @@ import OfferEditImages from "../OfferEditImages";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 export enum ComponentsType {
   customer,
@@ -135,6 +136,7 @@ const OffersDetailsData = ({
 
   const customerType = offerDetails?.leadID?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
   const name =
     customerType === 1
       ? offerDetails?.leadID?.customerDetail?.companyName
@@ -149,22 +151,22 @@ const OffersDetailsData = ({
     <div>
       <div className="2xl:fixed mb-5 mt-5 2xl:mt-0">
         <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 2xl:mb-0">
-          {tabSection.map((item, index) => (
-            <DetailsTab
-              key={index}
+          {tabSection?.map((item, index) => (
+            <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}
+              index={index + 1}
               icon={item.icon}
               selectedTab={index}
-              // onScroll={scrollHandler}
+              key={index}
               onItemSelected={handleScrollToTop}
             />
           ))}
         </div>
         <div className="w-full mt-5">
-          {/* <SwitchedComp handleUpdateDiscount={handleUpdateDiscount} /> */}
           <OfferEditImages
             shareImgModal={shareImgModal}
             handleImagesUpload={handleImagesUpload}
@@ -174,24 +176,26 @@ const OffersDetailsData = ({
             name={name}
             heading={heading}
             handleImageSlider={handleImageSlider}
-            className="2xl:w-[247px]"
+            isOffer={true}
           />
         </div>
       </div>
 
-      <div className="w-full break-all flex">
-        <div className="max-w-[280px] w-full hidden 2xl:block"></div>
-        {loading ? (
-          <div className="flex justify-center items-center w-full">
-            <CustomLoader />
-          </div>
-        ) : (
-          <div className="flex flex-col gap-y-5 w-full">
-            {componentArray.map((component, index) => (
-              <div key={index}>{component}</div>
-            ))}
-          </div>
-        )}
+      <div className="grid grid-cols-1 2xl:grid-cols-[320px_1fr] w-full break-all">
+        <div className="max-w-[320px] hidden xlg:block" />
+        <div className="flex flex-col gap-y-5 w-full overflow-hidden">
+          {loading ? (
+            <div className="flex justify-center items-center w-full">
+              <CustomLoader />
+            </div>
+          ) : (
+            componentArray?.map((component, index) => (
+              <div key={index} className="w-full">
+                {component}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

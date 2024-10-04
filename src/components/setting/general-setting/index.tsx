@@ -6,7 +6,6 @@ import { NotesDetailCard } from "./notes";
 import { Button } from "@/base-components/ui/button/button";
 import { NoteSetting } from "@/api/slices/settingSlice/settings";
 import useGeneralAddress from "@/hooks/modals/useGeneralAddress";
-import { useTranslation } from "next-i18next";
 
 export interface GeneralSettingProps {
   onAddAddressTitle: () => void;
@@ -32,9 +31,13 @@ export const GeneralSetting = ({
   onClose,
   onSuccess,
 }: GeneralSettingProps) => {
-  const { addressSettings, handleDeleteAddress, handleSaveSetings, loading } =
-    useGeneralAddress({ onSuccess, onClose });
-  const { t: translate } = useTranslation();
+  const {
+    addressSettings,
+    handleDeleteAddress,
+    handleSaveSetings,
+    loading,
+    translate,
+  } = useGeneralAddress({ onSuccess, onClose });
 
   const [currentComponent, setCurrentComponent] =
     useState<GeneralSettingComponentType>(GeneralSettingComponentType.ADDRESS);
@@ -99,7 +102,7 @@ export const GeneralSetting = ({
         <Button
           id="setting"
           inputType="button"
-          className="mt-5 px-4 text-white text-base font-medium rounded-md bg-[#4A13E7] float-right"
+          className="mt-5 mb-5 px-4 text-white text-base font-medium rounded-md bg-[#4A13E7] float-right"
           text={translate("setting.save_setting")}
           loading={loading}
           onClick={handleSaveSetings}

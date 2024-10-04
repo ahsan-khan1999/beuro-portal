@@ -12,10 +12,8 @@ const OfferEditDetails = ({
   handleNext: (currentComponent: EditComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "";
   const {
     fields,
-    control,
     onSubmit,
     handleSubmit,
     errors,
@@ -48,7 +46,6 @@ const OfferEditDetails = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       )}

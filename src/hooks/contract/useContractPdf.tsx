@@ -37,17 +37,20 @@ export const useContractPdf = () => {
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
 
   const [activeButtonId, setActiveButtonId] = useState<"post" | "email" | null>(
     null
   );
+
   const [systemSetting, setSystemSettings] = useState<SystemSetting | null>(
     null
   );
 
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [isMailSend, setIsMailSend] = useState(false);
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
   const {
     auth: { user },
@@ -308,13 +311,17 @@ export const useContractPdf = () => {
     })();
   }, [offerID]);
 
+  useEffect(() => {
+    isMailSend &&
+      dispatch(updateModalType({ type: ModalType.LOADING_MAIL_GIF }));
+  }, [isMailSend]);
+
   const totalItems = contractData?.serviceItem?.length ?? 0;
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
     const remainingItems = totalItems - itemsOnFirstPage;
     const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
 
-    // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
@@ -380,10 +387,18 @@ export const useContractPdf = () => {
           let apiData = { ...data, pdf: fileUrl?.payload };
 
           delete apiData["content"];
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendContractEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
+
+          setIsMailSend(true);
+          const res = await dispatch(sendContractEmail({ data: apiData }));
+
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 1800);
         } else {
           let apiData = {
             email: contractDetails?.offerID?.leadID?.customerDetail?.email,
@@ -402,10 +417,18 @@ export const useContractPdf = () => {
             id: contractDetails?.id,
             pdf: fileUrl?.payload,
           };
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendContractEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
+
+          setIsMailSend(true);
+          const res = await dispatch(sendContractEmail({ data: apiData }));
+
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 1800);
         }
       }
     } catch (error) {
@@ -426,7 +449,6 @@ export const useContractPdf = () => {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-
       URL.revokeObjectURL(url);
     }
   };

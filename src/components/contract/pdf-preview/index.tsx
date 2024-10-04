@@ -5,6 +5,8 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useContractPdf } from "@/hooks/contract/useContractPdf";
 import { useTranslation } from "next-i18next";
+import { Layout } from "@/layout";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -18,7 +20,6 @@ const PdfPriview = () => {
     modal,
     activeButtonId,
     router,
-    loadingGlobal,
     mergedPdfUrl,
     isPdfRendering,
     dispatch,
@@ -53,33 +54,50 @@ const PdfPriview = () => {
         }}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
 
+  const isCalendar = router.query.isCalendar;
+  if (!router.isReady) {
+    return null;
+  }
+
   return (
     <>
-      <EmailCard
-        contractStatus={contractDetails?.emailStatus}
-        contractNo={contractData?.emailHeader?.offerNo}
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        contractTitle={contractData?.emailHeader?.contractTitle || ""}
-        worker={contractData?.emailHeader?.worker || ""}
-        onSendViaPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-      />
+      {isCalendar ? (
+        <ContractPdfPreview
+          mergedPdfFileUrl={mergedPdfUrl}
+          isPdfRendering={isPdfRendering}
+        />
+      ) : (
+        <Layout>
+          <EmailCard
+            contractStatus={contractDetails?.emailStatus}
+            contractNo={contractData?.emailHeader?.offerNo}
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            contractTitle={contractData?.emailHeader?.contractTitle || ""}
+            worker={contractData?.emailHeader?.worker || ""}
+            onSendViaPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+          />
 
-      <ContractPdfPreview
-        mergedPdfFileUrl={mergedPdfUrl}
-        isPdfRendering={isPdfRendering}
-      />
+          <div className="mt-5">
+            <ContractPdfPreview
+              mergedPdfFileUrl={mergedPdfUrl}
+              isPdfRendering={isPdfRendering}
+            />
+          </div>
 
-      {renderModal()}
+          {renderModal()}
+        </Layout>
+      )}
     </>
   );
 };

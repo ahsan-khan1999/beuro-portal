@@ -24,36 +24,26 @@ import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
+import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
+import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 
 const useLeads = () => {
-  const { lastPage, lead, loading, isLoading, totalCount, leadDetails } =
-    useAppSelector((state) => state.lead);
+  const { lead, loading, isLoading, totalCount, leadDetails } = useAppSelector(
+    (state) => state.lead
+  );
 
-  const { query } = useRouter();
-  const page = query?.page as unknown as number;
+  const router = useRouter();
+  const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
   const { t: translate } = useTranslation();
 
-  const [filter, setFilter] = useState<FilterType>({
-    sort: FiltersDefaultValues.None,
-    noteType: FiltersDefaultValues.None,
-    text: FiltersDefaultValues.None,
-    date: {
-      $gte: FiltersDefaultValues.$gte,
-      $lte: FiltersDefaultValues.$lte,
-    },
-    status: FiltersDefaultValues.None,
-  });
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/agent");
 
   useEffect(() => {
-    localStoreUtil.remove_data("lead");
-    dispatch(setLeadDetails(DEFAULT_LEAD));
-    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-  }, []);
-
-  useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(router.query.page as string, 10);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -62,11 +52,11 @@ const useLeads = () => {
       setCurrentPage(1);
     }
 
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchedDate = query?.date as string;
-    const searchNoteType = query?.noteType as string;
+    const queryStatus = router.query?.status;
+    const searchQuery = router.query?.text as string;
+    const sortedValue = router.query?.sort as string;
+    const searchedDate = router.query?.date as string;
+    const searchNoteType = router.query?.noteType as string;
 
     const queryParams =
       queryStatus ||
@@ -77,7 +67,7 @@ const useLeads = () => {
 
     if (queryParams !== undefined) {
       const filteredStatus =
-        query?.status === "None"
+        router.query?.status === "None"
           ? "None"
           : queryParams
               .toString()
@@ -93,6 +83,7 @@ const useLeads = () => {
           $gte?: string;
           $lte?: string;
         };
+        today?: boolean;
       } = {
         status: filteredStatus,
       };
@@ -102,6 +93,10 @@ const useLeads = () => {
         updatedFilter.sort = sortedValue;
         updatedFilter.noteType = searchNoteType;
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
+      }
+
+      if (isAgentRoute) {
+        updatedFilter.today = true;
       }
 
       setFilter(updatedFilter);
@@ -118,7 +113,18 @@ const useLeads = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Lead);
       });
     }
-  }, [query]);
+  }, [router.query]);
+
+  const [filter, setFilter] = useState<FilterType>({
+    sort: FiltersDefaultValues.None,
+    noteType: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+    status: FiltersDefaultValues.None,
+  });
 
   const totalItems = totalCount;
   const itemsPerPage = 15;
@@ -129,6 +135,12 @@ const useLeads = () => {
   const handleFilterChange = () => {
     setCurrentPage(1);
   };
+
+  useEffect(() => {
+    localStoreUtil.remove_data("lead");
+    dispatch(setLeadDetails(DEFAULT_LEAD));
+    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+  }, []);
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -233,6 +245,24 @@ const useLeads = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
+  const shareImgModal = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SHARE_IMAGES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
   const handleImageUpload = (
     id: string,
     refID?: string,
@@ -240,7 +270,9 @@ const useLeads = () => {
     heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e?.stopPropagation();
+    if (e) {
+      e?.stopPropagation();
+    }
     dispatch(setImages([]));
     const filteredLead = lead.find((item_) => item_.id === id);
 
@@ -250,13 +282,13 @@ const useLeads = () => {
         readImage({ params: { type: "leadID", id: filteredLead?.id } })
       ).then((res: any) => {
         if (
-          res.payload?.images.length > 0 ||
-          res.payload?.attachments.length > 0 ||
-          res.payload?.videos.length > 0 ||
-          res.payload?.links.length > 0
+          res.payload?.images?.length > 0 ||
+          res.payload?.attachments?.length > 0 ||
+          res.payload?.videos?.length > 0 ||
+          res.payload?.links?.length > 0
         ) {
           setCurrentPageRows((prev) =>
-            prev.map((lead) => {
+            prev?.map((lead) => {
               return lead.id === filteredLead?.id
                 ? { ...lead, isImageAdded: true }
                 : lead;
@@ -287,6 +319,55 @@ const useLeads = () => {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleScheduleAppointments = () => {
+    dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
+  };
+
+  const handleAppointmentsSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
+  };
+
+  const handleLeadStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "lead") {
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (status === "Appointment") {
+        handleScheduleAppointments();
+      }
+
+      if (!currentItem || currentItem.leadStatus !== status) {
+        const res = await dispatch(
+          updateLeadStatus({
+            data: {
+              id: id,
+              leadStatus: staticEnums["LeadStatus"][status],
+            },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            defaultUpdateModal();
+          }
+        }
+      }
+    }
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -305,6 +386,9 @@ const useLeads = () => {
         filter={filter}
         mainHeading={translate("common.update_note")}
       />
+    ),
+    [ModalType.SHARE_IMAGES]: (
+      <ShareImages onClose={onClose} offerId={leadDetails?.id} />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
@@ -335,48 +419,26 @@ const useLeads = () => {
         route={onClose}
       />
     ),
+    [ModalType.SCHEDULE_APPOINTMENTS]: (
+      <ScheduleAppointments
+        onClose={onClose}
+        heading={translate("appointments.schedule_appointment")}
+        onSuccess={handleAppointmentsSuccess}
+      />
+    ),
+    [ModalType.APPOINTMENT_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("appointments.successs_modal.heading")}
+        subHeading={translate("appointments.successs_modal.sub_heading")}
+        route={onClose}
+        imgSrc={reschudleIcon}
+      />
+    ),
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleLeadStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "lead") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
-      if (!currentItem || currentItem.leadStatus !== status) {
-        const res = await dispatch(
-          updateLeadStatus({
-            data: {
-              id: id,
-              leadStatus: staticEnums["LeadStatus"][status],
-            },
-          })
-        );
-
-        if (res?.payload) {
-
-          let index = currentPageRows.findIndex(
-            (item) => item.id === res.payload?.id
-          );
-
-          if (index !== -1) {
-            let prevPageRows = [...currentPageRows];
-            prevPageRows.splice(index, 1, res.payload);
-            setCurrentPageRows(prevPageRows);
-            defaultUpdateModal();
-          }
-        }
-      }
-    }
   };
 
   return {
@@ -396,6 +458,8 @@ const useLeads = () => {
     currentPage,
     handleLeadStatusUpdate,
     totalCount,
+    handleScheduleAppointments,
+    shareImgModal,
   };
 };
 

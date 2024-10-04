@@ -10,7 +10,6 @@ const ComposeMail = ({
   backRouteHandler: Function;
   onNextHandle: Function;
 }) => {
-  const defaultClassName = "";
   const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
     useSendEmail(backRouteHandler, onNextHandle);
 
@@ -25,7 +24,6 @@ const ComposeMail = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </ContractFormCard>

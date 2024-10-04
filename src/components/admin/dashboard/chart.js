@@ -1,4 +1,3 @@
-// components/PieChart.js
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
 import { useTranslation } from "next-i18next";
@@ -7,10 +6,8 @@ const PieChart = ({ data }) => {
   const { t: translate } = useTranslation();
 
   useEffect(() => {
-    // Get the canvas element
     const ctx = document.getElementById("myPieChart").getContext("2d");
 
-    // Create a new pie chart instance
     const myPieChart = new Chart(ctx, {
       type: "pie",
       data: data,
@@ -23,7 +20,6 @@ const PieChart = ({ data }) => {
       },
     });
 
-    // Clean up the chart when the component is unmounted
     return () => {
       myPieChart.destroy();
     };

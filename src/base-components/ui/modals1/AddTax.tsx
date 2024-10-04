@@ -12,7 +12,6 @@ const AddTax = ({
   onClose: () => void;
   heading: string;
 }) => {
-  const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, error } = useAddTax(onClose);
 
   return (
@@ -34,7 +33,6 @@ const AddTax = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </BaseModal>

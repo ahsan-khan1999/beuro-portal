@@ -5,15 +5,15 @@ import {
   employeePasswordResetFields,
 } from "@/enums/employee";
 
-// Generate employ details validation here
 export const generateEmployDetailsValidation = (translate: Function) => {
   return yup.object().shape({
+    [EmployDetailsFields.picture]: yup.string().notRequired(),
     [EmployDetailsFields.employName]: yup
       .string()
       .required(translate("validationMessages.required")),
 
     [EmployDetailsFields.designation]: yup
-      .string()
+      .number()
       .required(translate("validationMessages.required")),
 
     [EmployDetailsFields.email]: yup
@@ -21,13 +21,9 @@ export const generateEmployDetailsValidation = (translate: Function) => {
       .email()
       .required(translate("validationMessages.required")),
 
-    [EmployDetailsFields.phoneNumber]: yup
-      .string()
-      .notRequired(),
+    [EmployDetailsFields.phoneNumber]: yup.string().notRequired(),
 
-    [EmployDetailsFields.mobileNumber]: yup
-      .string()
-      .notRequired(),
+    [EmployDetailsFields.mobileNumber]: yup.string().notRequired(),
   });
 };
 
@@ -64,7 +60,10 @@ export const generateEmployeePasswordResetValidationSchema = (
 
     [employeePasswordResetFields.confirmNewPassword]: yup
       .string()
-      .oneOf([yup.ref("newPassword")], translate("validationMessages.mixed.oneOf"))
+      .oneOf(
+        [yup.ref("newPassword")],
+        translate("validationMessages.mixed.oneOf")
+      )
       .required(translate("validationMessages.required")),
   });
 };

@@ -4,6 +4,7 @@ import { Form } from "@/base-components/form/form";
 import useEmployeePasswordReset from "@/hooks/employee/useEmployeePasswordReset";
 import Image from "next/image";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const PasswordReset = ({
   onClose,
@@ -12,9 +13,10 @@ const PasswordReset = ({
   onClose: () => void;
   passwordResetSuccessfully: Function;
 }) => {
-  const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error, translate } =
-    useEmployeePasswordReset(passwordResetSuccessfully);
+  const id = useAppSelector((state) => state.global.modal.data);
+
+  const { fields, onSubmit, handleSubmit, errors, translate } =
+    useEmployeePasswordReset({ passwordResetSuccessfully, id });
 
   return (
     <BaseModal
@@ -37,7 +39,6 @@ const PasswordReset = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </div>

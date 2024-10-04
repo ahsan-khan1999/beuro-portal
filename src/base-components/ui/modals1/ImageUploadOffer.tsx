@@ -18,6 +18,10 @@ const ImagesUploadOffer = ({
   onClose: () => void;
   type: string;
 }) => {
+  const { id, refID, name, heading } = useAppSelector(
+    (state) => state.global.modal.data
+  );
+
   const {
     onSubmit,
     translate,
@@ -37,10 +41,7 @@ const ImagesUploadOffer = ({
     handleImageDelete,
     loading,
     loadingGlobal,
-  } = useUploadImageOffer(handleImageSlider, type);
-  const { refID, name, heading } = useAppSelector(
-    (state) => state.global.modal.data
-  );
+  } = useUploadImageOffer(handleImageSlider, type, id);
 
   const attachementLookUp = {
     img_tab: (

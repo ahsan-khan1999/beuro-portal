@@ -35,13 +35,13 @@ export const readService: AsyncThunk<boolean, object, object> | any =
     try {
       const response = await apiServices.readService(params);
       return response?.data?.data;
-      return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       setErrors(setError, e?.data.data, translate);
       return false;
     }
   });
+
 export const readServiceDetail: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("service/read/details", async (args, thunkApi) => {
     const { params, router, setError, translate } = args as any;
@@ -55,6 +55,7 @@ export const readServiceDetail: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createService: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("service/create", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -68,6 +69,7 @@ export const createService: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateService: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("service/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -81,6 +83,7 @@ export const updateService: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const deleteService: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("service/delete", async (args, thunkApi) => {
     const { serviceDetails: data, router, setError, translate } = args as any;

@@ -22,12 +22,11 @@ const AddNewNote = ({
   filter,
   mainHeading,
 }: AddNoteProps) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useAddNewNote({ handleNotes, handleFilterChange, filter });
-
-  const { refID, name, heading } = useAppSelector(
+  const { id, refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
   );
+  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+    useAddNewNote({ handleNotes, handleFilterChange, filter, id });
 
   return (
     <BaseModal

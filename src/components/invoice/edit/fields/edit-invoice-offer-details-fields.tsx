@@ -124,7 +124,7 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
             label: {
               text: `${translate("customers.details.gender")}`,
               htmlFor: "gender",
-              className: "mb-[10px] ",
+              className: "mb-[10px]",
             },
             field: {
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
@@ -135,7 +135,6 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
                 value: staticEnums.Gender[item],
                 label: translate(`gender.${item}`),
               })),
-
               control,
               value: "",
             },
@@ -152,10 +151,8 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               inputType: "text",
               id: "fullName",
               name: "fullName",
-
               placeholder: `${translate("offers.placeholders.name")}`,
               register,
-              // value: leadDetails && leadDetails.customerDetail?.fullName
             },
           },
 
@@ -171,10 +168,8 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               id: "email",
               name: "email",
               inputType: "text",
-
               placeholder: `${translate("offers.placeholders.email")}`,
               register,
-              // value: offerDetails && offerDetails.customerID?.email,
             },
           },
 
@@ -190,6 +185,9 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
+              placeholder: `${translate(
+                "offers.placeholders.phone_placeholder"
+              )}`,
               inputType: "tel",
               register,
               value:
@@ -213,6 +211,9 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
+              placeholder: `${translate(
+                "offers.placeholders.mobile_placeholder"
+              )}`,
               register,
               value:
                 type === "New Customer"
@@ -303,7 +304,6 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               inputType: "text",
               id: "address.streetNumber",
               name: "address.streetNumber",
-
               placeholder: `${translate("offers.placeholders.street")}`,
               register,
               value:
@@ -327,7 +327,6 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               id: "address.postalCode",
               name: "address.postalCode",
               placeholder: `${translate("offers.placeholders.post_code")}`,
-
               register,
               value:
                 invoiceDetails &&
@@ -341,28 +340,16 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
-            // field: {
-            //   className: "pl-4 !border-[#BFBFBF]",
-            //   type: Field.select,
-            //   id: "address.country",
-            //   name: "address.country",
 
-            //   options: Object.keys(staticEnums.Country).map((item) => ({
-            //     value: item,
-            //     label: translate(`countries.${item}`),
-            //   })),
-            //   control,
-            //   value:
-            //     (invoiceDetails &&
-            //       invoiceDetails?.customerDetail?.address?.country) ||
-            //     Object.keys(staticEnums.Country)[0],
-            // },
             field: {
               type: Field.input,
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "address.country",
               name: "address.country",
+              placeholder: `${translate(
+                "offers.placeholders.country_placeholder"
+              )}`,
               register,
             },
           },
@@ -394,10 +381,9 @@ export const EditInvoiceDetailsFormField: GenerateInvoiceCustomerFormField = (
         inputType: "text",
         id: "companyName",
         name: "companyName",
-        placeholder: "Please Enter Company Name",
+        placeholder: `${translate("offers.placeholders.company_placeholder")}`,
         register,
         setValue: setValue,
-        // value: invoiceDetails?.customerDetail?.companyName || "",
       },
     };
     const divField = formField[fieldIndex]?.field as DivProps;
@@ -493,7 +479,7 @@ export const generateDateChildren = (
   const { t: translate } = useTranslation();
   const dateformFields = [];
   for (let i = 0; i < count; i++) {
-    dateformFields.push({
+    dateformFields?.push({
       containerClass: "mb-0",
 
       field: {
@@ -655,7 +641,7 @@ export const generateDateChildren = (
     },
   });
   dateformFields.push({
-    containerClass: "mt-[50px] ",
+    containerClass: "mt-[50px]",
     field: {
       type: Field.button,
       id: "button",
@@ -698,7 +684,7 @@ export const EditInvoiceDetailsDateFormField = (
 ) => {
   const { t: translate } = useTranslation();
   const dateField = {
-    containerClass: "mb-0 ",
+    containerClass: "mb-0",
     label: {
       text: "Start Date",
       htmlFor: `date.startDate`,
@@ -709,12 +695,8 @@ export const EditInvoiceDetailsDateFormField = (
       className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
       id: `date.startDate`,
       name: `date.startDate`,
-      // remove: key > 0 && "Remove",
-      // onRemove: () => handleRemoveDateField(key),
       register,
       dateType: "date",
-
-      // value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.startDate
     },
   };
   const dateField2 = {
@@ -733,7 +715,6 @@ export const EditInvoiceDetailsDateFormField = (
       onRemove: () => handleRemoveDateField(count),
       register,
       dateType: "date",
-      // value: offerDetails?.date?.length > 0 && offerDetails?.date[key]?.endDate
     },
   };
   const fieldObj = { startDate: dateField, endDate: dateField2 };

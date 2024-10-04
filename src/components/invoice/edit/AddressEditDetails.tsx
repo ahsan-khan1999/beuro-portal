@@ -11,7 +11,6 @@ const AddressEditDetails = ({
   handleNext: (currentComponent: EditComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "";
   const {
     fields,
     control,
@@ -44,7 +43,6 @@ const AddressEditDetails = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </FormCard>

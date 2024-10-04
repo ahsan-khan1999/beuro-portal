@@ -1,6 +1,7 @@
 import { InputFieldProps } from "@/types/global";
 import { combineClasses } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import React, { forwardRef, useState } from "react";
 
 const InputField = forwardRef(
@@ -11,12 +12,14 @@ const InputField = forwardRef(
       onEnterPress,
       textClassName,
       containerClassName,
+      inputDivClassName,
       iconDisplay,
       bgColor,
       placeholder,
     }: InputFieldProps,
     ref: React.Ref<HTMLInputElement>
   ) => {
+    const router = useRouter();
     const { t: translate } = useTranslation();
     const [hasText, setHasText] = useState<boolean>(false);
 
@@ -29,11 +32,19 @@ const InputField = forwardRef(
     const inputClasses = combineClasses(
       `${
         bgColor ? "bg-[#F4F4F4]" : "bg-white"
-      } text-sm rounded-lg pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-[#ccc] focus:border-[#6665FF] w-fit`,
+      } text-sm rounded-lg pr-8 pl-3 py-2 focus:outline-none placeholder:text-[#222B45] text-[#222B45] text-[13px] border border-[#ccc] focus:border-[#6665FF] w-full xMini:w-fit`,
       textClassName
     );
 
-    const containerClasses = combineClasses("w-fit", containerClassName);
+    const containerClasses = combineClasses(
+      "w-full xMini:w-fit",
+      containerClassName
+    );
+
+    const inputDivClasses = combineClasses(
+      "relative flex w-full xMini:w-fit",
+      inputDivClassName
+    );
 
     const handleInputChange = (newValue: string) => {
       handleChange(newValue);
@@ -42,11 +53,26 @@ const InputField = forwardRef(
 
     const handleClearInput = () => {
       handleInputChange("");
+
+      const { pathname, query } = router;
+
+      if (query?.page) {
+        delete query.page;
+      }
+
+      if (query?.text) {
+        delete query.text;
+      }
+
+      router.push({
+        pathname,
+        query,
+      });
     };
 
     return (
       <div className={containerClasses}>
-        <div className="relative flex w-fit">
+        <div className={inputDivClasses}>
           <input
             id="searchBar"
             type="text"

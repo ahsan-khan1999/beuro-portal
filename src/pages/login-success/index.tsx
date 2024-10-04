@@ -1,5 +1,4 @@
 import EmailConfirmation from "@/base-components/ui/email-confirmation";
-import { useAppSelector } from "@/hooks/useRedux";
 import { Locale } from "@/types";
 import { getUser } from "@/utils/auth.util";
 import { isJSON } from "@/utils/functions";

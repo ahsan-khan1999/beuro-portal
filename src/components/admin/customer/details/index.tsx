@@ -17,31 +17,31 @@ const CustomerDetails = () => {
     loading,
     handleMakeAccountFree,
     deleteHandler,
+    handleCompanyUpdate,
   } = useCustomerDetailAdmin();
 
   return (
-    <>
-      <Layout>
-        <DetailsCard>
-          <DetailsData
-            customerDetail={companyDetails}
-            onHandleBack={handleBack}
-            handleAreYouSure={handleMakeAccountFree}
-            isCustomerFree={isCustomerFree}
-            handleStatusChange={handleStatusChange}
-            onDelete={deleteHandler}
-          />
-        </DetailsCard>
-        <div className="mt-5">
-          {loading ? (
-            <CustomPuffLoader />
-          ) : (
-            <CustomerDetailsData customerDetail={companyDetails} />
-          )}
-        </div>
-      </Layout>
+    <Layout>
+      <DetailsCard>
+        <DetailsData
+          customerDetail={companyDetails}
+          onHandleBack={handleBack}
+          handleAreYouSure={handleMakeAccountFree}
+          isCustomerFree={isCustomerFree}
+          handleStatusChange={handleStatusChange}
+          onDelete={deleteHandler}
+          onCompanyUpdate={handleCompanyUpdate}
+        />
+      </DetailsCard>
+      <div className="mt-5">
+        {loading ? (
+          <CustomPuffLoader />
+        ) : (
+          <CustomerDetailsData customerDetail={companyDetails} />
+        )}
+      </div>
       {renderModal()}
-    </>
+    </Layout>
   );
 };
 

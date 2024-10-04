@@ -7,7 +7,11 @@ import { readEmailSettings } from "@/api/slices/settingSlice/settings";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 
-const MailSetting = ({ handleCreation }: { handleCreation: Function }) => {
+export const MailSetting = ({
+  handleCreation,
+}: {
+  handleCreation: Function;
+}) => {
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const [changedComponent, setChangedComponent] =
@@ -60,5 +64,3 @@ const MailSetting = ({ handleCreation }: { handleCreation: Function }) => {
     </div>
   );
 };
-
-export default MailSetting;

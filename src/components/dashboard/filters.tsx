@@ -1,9 +1,8 @@
 import SelectField from "@/base-components/filter/fields/select-field";
-import { DashboardFiltersToggle } from "@/enums/dashboard";
 import { FiltersComponentProps } from "@/types";
 import { getKeyByValue } from "@/utils/auth.util";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
+import React from "react";
 
 export default function DashboardFilters({
   filter,
@@ -80,7 +79,6 @@ export default function DashboardFilters({
         label={translate(
           `selected_month.${getKeyByValue(monthObj, filter?.month?.toString())}`
         )}
-        containerClassName="bg-white rounded-lg border border-[#8F8F8F80] w-[135px]"
       />
     </div>
   );

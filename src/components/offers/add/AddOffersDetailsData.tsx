@@ -207,20 +207,29 @@ const EditOffersDetailsData = () => {
     );
   }, [offerDetails?.id]);
 
+  useEffect(() => {
+    if (tabType !== null) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [tabType]);
+
   return (
     <>
       <div className="xLarge:fixed mb-5">
         <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
-          {tabSection.map((item, index) => (
+          {tabSection?.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
               isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
+              selectedTab={index}
               name={item.name}
               index={index + 1}
               icon={item.icon}
-              selectedTab={index}
             />
           ))}
         </div>

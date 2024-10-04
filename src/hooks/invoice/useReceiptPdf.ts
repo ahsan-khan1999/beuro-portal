@@ -45,9 +45,9 @@ export const useReceiptPdf = () => {
     null
   );
 
-  const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
-
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [isMailSend, setIsMailSend] = useState(false);
+  const [activeButtonId, setActiveButtonId] = useState<string | null>(null);
   const [remoteFileBlob, setRemoteFileBlob] = useState<Blob | null>();
 
   const { modal, loading: loadingGlobal } = useAppSelector(
@@ -58,8 +58,8 @@ export const useReceiptPdf = () => {
     (state) => state.invoice
   );
 
-  const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const maxItemsFirstPage = 6;
   const maxItemsPerPage = 10;
@@ -213,6 +213,8 @@ export const useReceiptPdf = () => {
               updatedDiscountAmount: updatedTotalDiscount?.toString(),
               grandTotal: invoiceDetails?.invoiceID?.total?.toString(),
               paymentType: invoiceDetails?.paymentType,
+              paidDate: invoiceDetails?.paidDate,
+              payments: invoiceDetails?.payments,
               invoicePaidAmount:
                 invoiceDetails?.invoiceID?.paidAmount?.toString(),
               isShowExtraAmount: true,
@@ -285,15 +287,18 @@ export const useReceiptPdf = () => {
     })();
   }, [invoiceID]);
 
+  useEffect(() => {
+    isMailSend &&
+      dispatch(updateModalType({ type: ModalType.LOADING_MAIL_GIF }));
+  }, [isMailSend]);
+
   const totalItems = receiptData?.serviceItem?.length || 0;
-  // const totalItems = 34;
 
   const calculateTotalPages = useMemo(() => {
     const itemsOnFirstPage = Math.min(totalItems, maxItemsFirstPage);
     const remainingItems = totalItems - itemsOnFirstPage;
     const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
 
-    // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
@@ -344,13 +349,10 @@ export const useReceiptPdf = () => {
         localStoreUtil.store_data("pdf", fileUrl?.payload);
       }
       if (isMail) {
-        router.push(
-          {
-            pathname: `/invoices/receipt-email`,
-            query: { ...router.query, invoiceID: invoiceID, isMail: isMail },
-          }
-          // `/invoices/receipt-email?invoiceID=${invoiceID}&isMail=${isMail}`
-        );
+        router.push({
+          pathname: `/invoices/receipt-email`,
+          query: { ...router.query, invoiceID: invoiceID, isMail: isMail },
+        });
       } else {
         setActiveButtonId("email");
         const data = await localStoreUtil.get_data("receiptEmailCompose");
@@ -363,10 +365,18 @@ export const useReceiptPdf = () => {
             pdf: fileUrl?.payload,
           };
           delete apiData["content"];
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendInvoiceEmail({ data: apiData }));
-          // if (res?.payload)
-          //   await localStoreUtil.remove_data("receiptEmailCompose");
+
+          setIsMailSend(true);
+          const res = await dispatch(sendInvoiceEmail({ data: apiData }));
+
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 1800);
         } else {
           let apiData = {
             email: collectiveInvoiceDetails?.invoiceID?.customerDetail?.email,
@@ -388,15 +398,25 @@ export const useReceiptPdf = () => {
                 ?.receiptContent?.attachments,
             id: collectiveInvoiceDetails?.invoiceID?.contractID?.id,
           };
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendInvoiceEmail({ apiData }));
-          // if (res?.payload)
+
+          setIsMailSend(true);
+          const res = await dispatch(sendInvoiceEmail({ data: apiData }));
+
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 1800);
         }
       }
     } catch (error) {
       console.error("Error in handleEmailSend:", error);
     }
   };
+
   const handleSendByPost = async () => {
     setActiveButtonId("post");
     const apiData = {
@@ -440,8 +460,8 @@ export const useReceiptPdf = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const onSuccess = () => {
-    // router.push("/invoices");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -456,6 +476,7 @@ export const useReceiptPdf = () => {
       return true;
     } else return false;
   };
+
   const handleDescriptionUpdate = async (value: string) => {
     const apiData = {
       id: invoiceID,
@@ -469,7 +490,6 @@ export const useReceiptPdf = () => {
     } else return false;
   };
 
-  //resetting active button state
   useEffect(() => {
     if (!loading) {
       setActiveButtonId(null);

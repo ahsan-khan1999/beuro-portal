@@ -30,6 +30,7 @@ import {
 import { updateInvoiceDetials } from "@/api/slices/invoice/invoiceSlice";
 
 let prevDisAmount: number | string = "";
+
 export const useServiceInvoiceEditDetail = ({
   handleNext,
 }: {
@@ -171,11 +172,6 @@ export const useServiceInvoiceEditDetail = ({
 
     if (discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
-      console.log(
-        !+discountType && discountAmount > 100,
-        "test",
-        discountAmount
-      );
 
       if (!+discountType && discountAmount > 100) {
         setValue("discountAmount", 100);

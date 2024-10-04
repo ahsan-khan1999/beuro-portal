@@ -17,8 +17,11 @@ const ImagesUpload = ({
   handleImageSlider: Function;
   onClose: () => void;
 }) => {
+  const { refID, name, heading, id } = useAppSelector(
+    (state) => state.global.modal.data
+  );
+
   const {
-    error,
     translate,
     activeTab,
     handleTabChange,
@@ -29,18 +32,12 @@ const ImagesUpload = ({
     setEnteredLink,
     attachementTabs,
     handleAttachementAdd,
-    handleAttachementDelete,
     handleVideoAdd,
-    handleVideoDelete,
     handleimageAdd,
-    handleImageDelete,
     onSubmit,
     loading,
     loadingGlobal,
-  } = useUploadImage(handleImageSlider);
-  const { refID, name, heading } = useAppSelector(
-    (state) => state.global.modal.data
-  );
+  } = useUploadImage(handleImageSlider, id);
 
   const attachementLookUp = {
     img_tab: (
@@ -53,12 +50,7 @@ const ImagesUpload = ({
             {translate("common.images_modal.sub_title")}
           </p>
         </div>
-        {/* <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-      /> */}
+
         <ImageField
           id="attachement"
           attachements={enteredLinks?.images}
@@ -98,9 +90,6 @@ const ImagesUpload = ({
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.link_title")}
           </h2>
-          {/* <p className="text-xs font-normal text-[#8F8F8F]">
-            {translate("common.images_modal.link_sub_title")}
-          </p> */}
         </div>
         <LinkUpload
           inputLink={enteredLink}
@@ -167,7 +156,7 @@ const ImagesUpload = ({
         </div>
 
         <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
-          {attachementTabs.map((item, index) => (
+          {attachementTabs?.map((item, index) => (
             <button
               key={index}
               className={`${

@@ -28,7 +28,7 @@ export interface User {
   [UserResponse.role]: string;
   [UserResponse.bank]: string;
   [UserResponse.company]: UserCompany;
-  [UserResponse.employee]: string;
+  [UserResponse.employee]: UserEmployee;
   [UserResponse.addresses]: UserAddress;
   [UserResponse.isProfileComplete]: boolean;
   [UserResponse.isEmailVerified]: boolean;
@@ -47,7 +47,6 @@ export interface User {
   [UserResponse.isCommercialSellerRequested]: boolean;
   plan: Plan;
 }
-// [AddressType.primary]:{}
 
 export interface UserCompany {
   [UserResponse.companyName]: string;
@@ -56,8 +55,22 @@ export interface UserCompany {
   [UserResponse.taxNumber]: number;
   [UserResponse.phoneNumber]: string;
   [UserResponse.mobileNumber]: string;
+  [UserResponse.isAppointment]: boolean;
   [UserResponse.addresses]: UserAddress;
   [UserResponse.bank]: UserBankDetail;
+}
+
+export interface UserEmployee {
+  [UserResponse.id]: string;
+  [UserResponse.employeeID]: string;
+  [UserResponse.creationDate]: number;
+  [UserResponse.fullName]: UserAddress;
+  [UserResponse.picture]: string;
+  [UserResponse.designation]: string;
+  [UserResponse.email]: string;
+  [UserResponse.phoneNumber]: string;
+  [UserResponse.mobileNumber]: string;
+  [UserResponse.createdBy]: string;
 }
 export interface UserAddress {
   [AddressTypes.city]: string;

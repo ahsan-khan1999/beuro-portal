@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateOfferAddressEditDetailsValidation } from "@/validation/offersSchema";
 import { EditComponentsType } from "@/components/offers/edit/EditOffersDetailsData";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddOffAddressDetailsFormField,
   addressObject,

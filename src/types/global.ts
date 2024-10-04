@@ -12,6 +12,12 @@ export interface GlobalState {
     data?: any;
   };
   currentLanguage: string;
+  locationSearch: null;
+  advertLocation: string;
+  filter: {
+    location: string;
+  };
+  map: boolean;
 }
 
 export type TranslatorFunction = (value: any) => any;
@@ -42,6 +48,8 @@ export interface CheckFieldProps {
   type: keyof FilterType;
   value: string;
   onChange?: (val: string, checked: boolean) => void;
+  containerClassName?: string;
+  isMobile?: boolean;
 }
 
 export interface InputFieldProps {
@@ -49,6 +57,7 @@ export interface InputFieldProps {
   handleChange: (value: string) => void;
   onEnterPress?: () => void;
   containerClassName?: string;
+  inputDivClassName?: string;
   textClassName?: string;
   placeholder?: string;
   bgColor?: boolean;
@@ -66,10 +75,11 @@ export interface OptionsFieldProps {
   title?: string;
   label?: string;
   border?: number;
-  handleChange: (value: string) => void;
+  handleChange: (value: string, isAgent?: boolean) => void;
   options: { label: string; value: string }[];
   dropDownIconClassName?: string;
   containerClassName?: string;
+  dropdownClassName?: string;
   isSearch?: boolean;
   labelClassName?: string;
 }

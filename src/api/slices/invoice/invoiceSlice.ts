@@ -8,6 +8,9 @@ import {
 } from "@/types/invoice";
 import { DEFAULT_INVOICE, staticEnums } from "@/utils/static";
 import localStoreUtil from "@/utils/localstore.util";
+import { updateQuery } from "@/utils/update-query";
+import { updateModalType } from "../globalSlice/global";
+import { ModalType } from "@/enums/ui";
 
 interface InvoiceState {
   invoice: InvoiceTableRowTypes[];
@@ -132,6 +135,7 @@ export const createInvoice: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createRecuringInvoice: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/create/recurring", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -159,6 +163,7 @@ export const updateParentInvoice: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateInvoice: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -233,10 +238,17 @@ export const updateMainInvoice: AsyncThunk<boolean, object, object> | any =
 
 export const deleteInvoice: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("invoice/delete", async (args, thunkApi) => {
-    const { data, router, setError, translate } = args as any;
+    const { invoiceDetails: data, router, setError, translate } = args as any;
 
     try {
       await apiServices.deleteInvoice(data);
+      router.pathname = "/invoices";
+      updateQuery(router, router.locale);
+      thunkApi.dispatch(
+        updateModalType({
+          type: ModalType.NONE,
+        })
+      );
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -257,6 +269,7 @@ export const readCollectiveInvoice: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const readCollectiveReciept: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("collective/reciept/read", async (args, thunkApi) => {
     const { params } = args as any;
@@ -269,6 +282,7 @@ export const readCollectiveReciept: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const readCollectiveInvoiceDetails:
   | AsyncThunk<boolean, object, object>
   | any = createAsyncThunk(

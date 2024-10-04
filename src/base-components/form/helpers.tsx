@@ -15,18 +15,25 @@ import {
   AddFiled,
   ToggleButton,
   ColorPicker,
-  CustomerSelectField,
+  AgentSelectField,
+  QuantityInputField,
+  CustomCheckBoxField,
+  CustomFileUploadField,
+  IconLabelFeild,
+  CalendarDatePickerField,
+  ColourSelectField,
+  RemainderSelectField,
+  LocationSearchInputField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
 import { DivField } from "./fields/div-field";
-// import { CreditCardNumberField } from "./fields/credit-card-number-field";
-// import { CardType } from "@/enums";
 import { CreditCardExpiryDateField } from "./fields/credit-card-expiry-date-field";
 import { RadioButtonField } from "./fields/radioButton/radio-button-field";
 import { LinkField } from "./fields/link-field";
 import { CustomerInputField } from "./fields/customer-input-field";
 import { ProfileControllerField } from "./fields/profile_field/profile_upload_controller";
+import { TimePicker } from "./fields/time-picker";
 
 const fieldComponents: FieldComponents = {
   input: InputField,
@@ -34,7 +41,6 @@ const fieldComponents: FieldComponents = {
   textArea: TextAreaField,
   ckEditor: CkEditor,
   customerInput: CustomerInputField,
-  // creditCardNumberInput: CreditCardNumberField,
   creditCardExpiryDateInput: CreditCardExpiryDateField,
   password: PasswordField,
   select: SelectField,
@@ -46,6 +52,7 @@ const fieldComponents: FieldComponents = {
   dragAndDropPdfField: DragAndDropPdfField,
   profileUploadField: ProfileControllerField,
   imageUploadField: ImageUploadField,
+  customFileUpload: CustomFileUploadField,
   span: SpanField,
   div: DivField,
   button: Button,
@@ -53,7 +60,15 @@ const fieldComponents: FieldComponents = {
   link: LinkField,
   multiSelect: MultiSelectField,
   toggleButton: ToggleButton,
-  customerSelectField: CustomerSelectField,
+  agentSelectField: AgentSelectField,
+  timePicker: TimePicker,
+  quantityInput: QuantityInputField,
+  customCheckBox: CustomCheckBoxField,
+  iconLabel: IconLabelFeild,
+  calendarDatePicker: CalendarDatePickerField,
+  colourSelectField: ColourSelectField,
+  remainderSelectField: RemainderSelectField,
+  locationSearchInput: LocationSearchInputField,
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(
@@ -97,26 +112,17 @@ export function isFieldType(type: any): type is FieldType {
     "addField",
     "toggleButton",
     "customerSelectField",
+    "timePicker",
+    "quantityInput",
+    "customCheckBox",
+    "customFileUpload",
+    "iconLabel",
+    "calendarDatePicker",
+    "colourSelectField",
+    "remainderSelectField",
+    "locationSearchInput",
   ].includes(type);
 }
-
-// const cardPatterns = [
-//   { type: CardType.VISA, pattern: /^4/, format: [4, 4, 4, 4] },
-//   { type: CardType.MASTERCARD, pattern: /^5[1-5]/, format: [4, 4, 4, 4] },
-//   // Add more card patterns here...
-// ];
-
-// export const detectCardType = (cardNumber: string): DetectedCardInfo | null => {
-//   const cleanNumber = cardNumber.replace(/\D+/g, "");
-
-//   for (const card of cardPatterns) {
-//     if (card.pattern.test(cleanNumber)) {
-//       return { type: card.type, format: card.format };
-//     }
-//   }
-
-//   return null;
-// };
 
 export const formatCardNumber = (cardNumber: string, format: number[]) => {
   const cleanNumber = cardNumber.replace(/\D+/g, "");
@@ -129,25 +135,6 @@ export const formatCardNumber = (cardNumber: string, format: number[]) => {
     return section ? `${acc} ${section}`.trim() : acc;
   }, "");
 };
-
-// export const getCardIcon = ({
-//   cardType,
-//   icons: { visa, mastercard },
-// }: GetCreditCardIconProps) => {
-//   const creditCardIcons: CreditCardIconsType = {
-//     [CardType.VISA]: visa,
-//     [CardType.MASTERCARD]: mastercard,
-//   };
-//   const iconSrc = cardType && creditCardIcons[cardType?.type];
-//   if (!iconSrc) return null;
-//   return (
-//     <Image
-//       src={iconSrc}
-//       alt={`${cardType.type} Icon`}
-//       className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4"
-//     />
-//   );
-// };
 
 export const renderField = (
   fieldData: FormField,

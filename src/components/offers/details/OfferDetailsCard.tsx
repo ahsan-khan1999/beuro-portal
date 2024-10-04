@@ -57,6 +57,8 @@ const OfferDetailsCard = ({
   const handleBack = () => {
     router.pathname = "/offers";
     delete router.query["offer"];
+    delete router.query["offerID"];
+    delete router.query["isMail"];
     updateQuery(router, router.locale as string);
   };
 
@@ -160,12 +162,14 @@ const OfferDetailsCard = ({
             onClick={handlePrint}
           /> */}
 
-          <span className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center">
+          <span
+            onClick={offerDeleteHandler}
+            className="border-[#4A13E7] border w-10 h-10 rounded-lg flex items-center justify-center"
+          >
             <Image
               src={deleteIcon}
               alt="deleteIcon"
               className="cursor-pointer"
-              onClick={offerDeleteHandler}
               width={16}
               height={20}
             />
@@ -346,6 +350,28 @@ const OfferDetailsCard = ({
           <div className="flex justify-between gap-x-3 items-center mt-2 md:mt-0">
             <div className="flex items-center gap-[11px]">
               <span className="text-[#4D4D4D] font-normal text-base">
+                {translate("offers.card_content.images")}:
+              </span>
+
+              <span
+                className="cursor-pointer"
+                onClick={(e) =>
+                  handleImageUpload(
+                    offerDetails?.id,
+                    offerDetails?.offerNumber,
+                    name,
+                    heading,
+                    e
+                  )
+                }
+              >
+                <ImageUploadIcon
+                  pathClass={offerDetails?.isImageAdded ? "#FF0000" : "#4A13E7"}
+                />
+              </span>
+            </div>
+            <div className="flex items-center gap-[11px]">
+              <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("offers.card_content.notes")}:
               </span>
 
@@ -365,28 +391,6 @@ const OfferDetailsCard = ({
                   pathClass={
                     offerDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
                   }
-                />
-              </span>
-            </div>
-            <div className="flex items-center gap-[11px]">
-              <span className="text-[#4D4D4D] font-normal text-base">
-                {translate("offers.card_content.images")}:
-              </span>
-
-              <span
-                className="cursor-pointer"
-                onClick={(e) =>
-                  handleImageUpload(
-                    offerDetails?.id,
-                    offerDetails?.offerNumber,
-                    name,
-                    heading,
-                    e
-                  )
-                }
-              >
-                <ImageUploadIcon
-                  pathClass={offerDetails?.isImageAdded ? "#FF0000" : "#4A13E7"}
                 />
               </span>
             </div>

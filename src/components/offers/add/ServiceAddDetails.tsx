@@ -11,18 +11,8 @@ const ServiceAddDetails = ({
   onHandleNext: (currentComponent: ComponentsType) => void;
 }) => {
   const router = useRouter();
-  const defaultClassName = "";
-  const {
-    fields,
-    control,
-    onSubmit,
-    handleSubmit,
-    errors,
-    error,
-    translate,
-    systemSettings,
-    offerDetails,
-  } = useAddServiceDetails(onHandleNext);
+  const { fields, onSubmit, handleSubmit, errors, translate, offerDetails } =
+    useAddServiceDetails(onHandleNext);
 
   const handleCancel = () => {
     router.pathname = "/offers";
@@ -50,7 +40,6 @@ const ServiceAddDetails = ({
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
-        className={`${defaultClassName}`}
       />
     </>
   );

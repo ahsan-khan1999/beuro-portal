@@ -26,6 +26,7 @@ export default function Contract() {
     handlePaymentStatusUpdate,
     currentPage,
     totalCount,
+    handleTaskCreation,
   } = useContract();
 
   const CurrentComponent = useEmptyStates(
@@ -35,8 +36,8 @@ export default function Contract() {
       handleNotes={handleNotes}
       handlePaymentStatusUpdate={handlePaymentStatusUpdate}
       handleContractStatusUpdate={handleContractStatusUpdate}
+      onTaskCreate={handleTaskCreation}
     />,
-    // currentPageRows.length > 0,
     totalCount !== 0,
     isLoading
   );

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import InputField from "./fields/input-field";
-import { DropDownItem, FilterProps, FilterType, MoreFilterType } from "@/types";
+import { DropDownItem, FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import useFilter from "@/hooks/filter/hook";

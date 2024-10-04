@@ -112,7 +112,6 @@ export const createOffer: AsyncThunk<boolean, object, object> | any =
       };
       localStoreUtil.store_data("offer", objectToUpdate);
       thunkApi.dispatch(setOfferDetails(objectToUpdate));
-
       return response?.data?.data?.Offer;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -173,13 +172,13 @@ export const updatePaymentStatus: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const sendOfferEmail: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/email/", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
 
     try {
-      const response = await apiServices.sendOfferEmail(data);
-      // return response?.data?.Offer;
+      await apiServices.sendOfferEmail(data);
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
@@ -212,6 +211,7 @@ export const createOfferNotes: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const deleteOffer: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/delete", async (args, thunkApi) => {
     const { offerDetails: data, router, translate } = args as any;
@@ -228,7 +228,6 @@ export const deleteOffer: AsyncThunk<boolean, object, object> | any =
       return true;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
-      // setErrors(setError, e?.data.data, translate);
       return false;
     }
   });
@@ -259,7 +258,6 @@ export const signOffer: AsyncThunk<boolean, object, object> | any =
         globalThis.translate(`validationMessages.${e?.response?.data?.message}`)
       );
       thunkApi.dispatch(setErrorMessage(e?.response?.data?.message));
-      // toast.error(setErrorMessage(e?.response?.data?.message));
       setErrors(setError, e?.data.data, translate);
       return false;
     }
@@ -276,7 +274,6 @@ export const readOfferActivity: AsyncThunk<boolean, object, object> | any =
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
 
-      // setErrors(setError, e?.data.data, translate);
       return false;
     }
   });

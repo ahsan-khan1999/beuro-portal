@@ -10,7 +10,7 @@ import { FollowUpProp } from "@/types/settings";
 
 const FollowUpSetting = () => {
   const defaultClassName = "mt-0";
-  const { loading, followUps } = useAppSelector((state) => state.settings);
+  const { loading } = useAppSelector((state) => state.settings);
   const {
     toggleObj,
     setToggleObj,
@@ -28,7 +28,7 @@ const FollowUpSetting = () => {
   return (
     <>
       <section className="rounded-md bg-white pl-[32px] pr-[37px] py-5 w-full h-fit">
-        {Object.keys(toggleObj)
+        {Object?.keys(toggleObj)
           ?.slice(0, 2)
           ?.map((item, index) => (
             <div

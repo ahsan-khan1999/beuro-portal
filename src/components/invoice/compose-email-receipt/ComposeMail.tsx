@@ -1,5 +1,6 @@
 import { Form } from "@/base-components/form/form";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useReceiptEmail } from "@/hooks/invoice/useReceiptEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
@@ -8,13 +9,15 @@ import React from "react";
 
 const ComposeMail = () => {
   const router = useRouter();
-  const defaultClassName = "";
+
   const onNextHandle = () => {
     router.push("/contract/pdf-preview");
   };
+
   const backRouteHandler = () => {
     router.push("/contract/details");
   };
+
   const {
     fields,
     control,
@@ -39,10 +42,13 @@ const ComposeMail = () => {
         route={onSuccess}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
+
   return (
     <>
       <ContractFormCard>
@@ -56,7 +62,6 @@ const ComposeMail = () => {
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </ContractFormCard>

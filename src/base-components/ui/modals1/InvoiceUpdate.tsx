@@ -12,7 +12,6 @@ const InvoiceUpdate = ({
   onClose: () => void;
   invoiceCreated: Function;
 }) => {
-  const defaultClassName = "mt-0";
   const { fields, onSubmit, handleSubmit, errors, error, translate } =
     useInvoiceUpdateModal(invoiceCreated);
 
@@ -37,7 +36,6 @@ const InvoiceUpdate = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
     </BaseModal>

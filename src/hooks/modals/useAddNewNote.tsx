@@ -22,12 +22,14 @@ export interface AddNoteProps {
   ) => void;
   handleFilterChange?: (query: FilterType) => void;
   filter?: FilterType;
+  id?: string;
 }
 
 export const useAddNewNote = ({
   handleNotes,
   handleFilterChange,
   filter,
+  id: leadId,
 }: AddNoteProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -128,7 +130,7 @@ export const useAddNewNote = ({
     if (!data) {
       res = await dispatch(
         createNote({
-          data: { ...formData, id: id, type: type },
+          data: { ...formData, id: id ? id : leadId, type: type },
           router,
           setError,
           translate,
@@ -142,7 +144,7 @@ export const useAddNewNote = ({
           if (!isFilterLead?.isNoteCreated && handleFilterChange)
             handleFilterChange(filter || {});
           handleNotes(
-            leadDetails?.id,
+            leadId ? leadId : leadDetails?.id,
             leadDetails?.refID,
             leadName,
             leadHeading

@@ -5,7 +5,6 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
-  const defaultClassName = "";
   const { fields, onSubmit, handleSubmit, errors, renderModal, translate } =
     useCustomerDetail({ detail: false, idAddNewCustomer: true });
 
@@ -29,7 +28,6 @@ const AddCustomerForm = ({ handleCancel }: { handleCancel: () => void }) => {
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
       {renderModal()}

@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
@@ -24,8 +24,6 @@ export const useMailSettingsTemplate = (handleCreation: Function) => {
     setError,
     reset,
     setValue,
-    watch,
-    trigger,
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),

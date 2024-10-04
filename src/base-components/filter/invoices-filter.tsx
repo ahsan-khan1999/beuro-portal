@@ -293,7 +293,7 @@ export default function InvoicesFilter({
               />
             </div>
 
-            <div className="mt-5 my-5">
+            <div className="mt-5 mb-2">
               <div className="flex justify-between">
                 <label htmlFor="type" className="font-medium text-base">
                   {translate("contracts.table_headings.payment")}
@@ -309,7 +309,7 @@ export default function InvoicesFilter({
                 </label>
               </div>
               <div className="flex items-center gap-x-3 mt-4">
-                {checkbox.map((item, idx) => (
+                {checkbox?.map((item, idx) => (
                   <EmailCheckField
                     key={idx}
                     checkboxFilter={moreFilter as unknown as FilterType}
@@ -351,7 +351,7 @@ export default function InvoicesFilter({
             <BaseButton
               buttonText={translate("common.apply_button")}
               onClick={handleSave}
-              containerClassName="bg-primary my-2 px-8 py-2"
+              containerClassName="bg-primary my-2 px-8 py-2 hover:bg-buttonHover"
               textClassName="text-white"
             />
           </motion.div>

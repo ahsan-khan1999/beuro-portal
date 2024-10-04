@@ -10,14 +10,24 @@ import logo from "@/assets/svgs/logo.svg";
 import { logout } from "@/utils/auth.util";
 import { useTranslation } from "next-i18next";
 import { logoutUser } from "@/api/slices/authSlice/auth";
-import { readSystemSettings } from "@/api/slices/settingSlice/settings";
+import {
+  readNoteSettings,
+  readSystemSettings,
+} from "@/api/slices/settingSlice/settings";
 import { LanguageSelector } from "@/base-components/languageSelector/language-selector";
 import { NotificationIcon } from "@/assets/svgs/components/notification-icon";
 import { readFollowUp } from "@/api/slices/followUp/followUp";
 import moment from "moment";
 import { FollowUpNotification } from "./ui/follow-up-notification";
+import { HamburgerIcon } from "@/assets/svgs/components/hamburger-icon";
+import { isValidUrl } from "@/utils/utility";
 
-const Header = () => {
+export interface HeaderProps {
+  isDrawer?: boolean;
+  handleDrawer: (e: any) => void;
+}
+
+const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
   const { t: translate } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { systemSettings } = useAppSelector((state) => state.settings);
@@ -50,7 +60,20 @@ const Header = () => {
   }, [followUp]);
 
   useEffect(() => {
-    if (user && user?.role !== "Admin" && !systemSettings) {
+    if (user?.role === "Agent" && !systemSettings) {
+      dispatch(readSystemSettings());
+    }
+
+    if (user && user.role !== "Admin") {
+      dispatch(readNoteSettings());
+    }
+
+    if (
+      user &&
+      user?.role !== "Admin" &&
+      user?.role !== "Agent" &&
+      !systemSettings
+    ) {
       dispatch(readSystemSettings());
       dispatch(readFollowUp({ params: { filter: { status: "10" } } })).then(
         (response: any) => {
@@ -78,7 +101,6 @@ const Header = () => {
   useEffect(() => {
     const followUpTime = upcomingFollowUp ? upcomingFollowUp?.dateTime : null;
     const now = new Date();
-    // const end = new Date("2024-07-10T13:27:30Z");
     const end = new Date(followUpTime);
     const difference = end.getTime() - now.getTime();
 
@@ -92,50 +114,76 @@ const Header = () => {
   }, [upcomingFollowUp]);
 
   const isSVG = user?.company?.logo?.endsWith(".svg");
+
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/");
+
   return (
     <div className="fixed w-full top-0 p-4 flex justify-between items-center shadow-header z-50 bg-white col">
-      {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
-        <div className="flex items-center">
-          {user?.company?.logo && (
-            <>
-              {isSVG ? (
-                <object
-                  data={user?.company?.logo}
-                  width="150"
-                  height="50"
-                  type="image/svg+xml"
-                  className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-                ></object>
-              ) : (
-                <Image
-                  src={user?.company?.logo}
-                  alt="Company Logo"
-                  className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-                  height={50}
-                  width={150}
-                />
-              )}
-            </>
-          )}
-
-          <span className="font-medium text-2xl tracking-[0.15px] text-dark pl-8">
-            {user?.company?.companyName}{" "}
-          </span>
-        </div>
-      )) || (
-        <div className="flex items-center">
-          <Image
-            src={logo}
-            alt="Company Logo"
-            className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
-            height={50}
-            width={150}
+      <div className="flex items-center gap-x-3">
+        {isAgentRoute && (
+          <HamburgerIcon
+            onClick={handleDrawer}
+            strokeColor="#4A13E7"
+            containerClassName="xMini:block mlg:hidden"
           />
-        </div>
-      )}
+        )}
+
+        {(staticEnums["User"]["role"][user?.role as string] !== 0 && (
+          <div className="flex items-center">
+            {user?.company?.logo && isValidUrl(user.company.logo) && (
+              <>
+                {isSVG ? (
+                  <object
+                    data={user?.company?.logo}
+                    width="150"
+                    height="50"
+                    type="image/svg+xml"
+                    className={`${
+                      isAgentRoute
+                        ? "xMini:w-[100px] xMini:pr-4 mlg:w-[150px] mlg:pr-8"
+                        : "w-[150px]"
+                    } max-h-[50px] border-r-2 border-[#000000] border-opacity-10`}
+                  ></object>
+                ) : (
+                  <Image
+                    src={user?.company?.logo}
+                    alt="Company Logo"
+                    className={`${
+                      isAgentRoute
+                        ? "xMini:w-[100px] xMini:pr-4 mlg:w-[150px] mlg:pr-8"
+                        : "w-[150px]"
+                    } max-h-[50px] border-r-2 border-[#000000] border-opacity-10`}
+                    height={50}
+                    width={150}
+                  />
+                )}
+              </>
+            )}
+
+            <span
+              className={`font-medium text-xl mlg:text-2xl tracking-[0.15px] text-dark ${
+                isAgentRoute ? "xMini:pl-4 mlg:pl-8" : "pl-8"
+              } `}
+            >
+              {user?.company?.companyName}{" "}
+            </span>
+          </div>
+        )) || (
+          <div className="flex items-center">
+            <Image
+              src={logo}
+              alt="Company Logo"
+              className="pr-[50px] max-h-[50px] border-r-2 border-[#000000] border-opacity-10"
+              height={50}
+              width={150}
+            />
+          </div>
+        )}
+      </div>
       <div className="flex items-center">
-        <div className="flex items-center pr-8">
-          {user?.role !== "Admin" && (
+        <div className="flex items-center pr-4 mlg:pr-8">
+          {user?.role !== "Admin" && user?.role !== "Agent" && (
             <div className="relative menu mr-5">
               <NotificationIcon count={todayCount} />
               {showNotification && (
@@ -151,7 +199,15 @@ const Header = () => {
           <LanguageSelector />
         </div>
         <div className="border-l-2 border-[#000000] border-opacity-10 flex items-center pl-8">
-          <Image src={userIcon} alt="User Icon" className="mr-3" />
+          {isValidUrl(user?.employee?.picture) && (
+            <Image
+              src={user?.employee?.picture || userIcon}
+              alt="User Icon"
+              className="mr-3 rounded-full"
+              width={44}
+              height={44}
+            />
+          )}
           <div>
             <span className="font-semibold tracking-[0.5px] text-[#0A0A0A] block">
               {user?.fullName}

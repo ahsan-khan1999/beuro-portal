@@ -71,7 +71,6 @@ export const SignPdf = <T,>({
   };
 
   const onSuccess = () => {
-    // router.push("/thank-you");
     window.location.href = "/thank-you";
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
@@ -143,7 +142,7 @@ export const SignPdf = <T,>({
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col gap-y-[30px]">
-        {newPageData.length > 0 && (
+        {newPageData?.length > 0 && (
           <ProductPurchasedItemsDetails
             {...pdfData}
             serviceItem={newPageData[0]}
@@ -156,7 +155,7 @@ export const SignPdf = <T,>({
             handleEditDateModal={editDateHandler}
           />
         )}
-        {newPageData.slice(1).map((pageItems, index) => (
+        {newPageData?.slice(1).map((pageItems, index) => (
           <ProductItemNewPage
             key={index}
             serviceItem={pageItems}
@@ -175,7 +174,7 @@ export const SignPdf = <T,>({
           contactAddress={pdfData?.contactAddress}
           headerDetails={pdfData?.headerDetails}
           footerDetails={pdfData?.footerDetails}
-          aggrementDetails={pdfData?.aggrementDetails}
+          aggrementDetails={pdfData && pdfData?.aggrementDetails}
           templateSettings={templateSettings}
           totalPages={totalPages}
           currPage={totalPages}

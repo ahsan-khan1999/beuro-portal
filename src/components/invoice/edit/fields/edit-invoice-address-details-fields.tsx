@@ -1,8 +1,8 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateEditInvoiceAddressFormField } from "@/types";
 import editIcon from "@/assets/svgs/edit_primary.svg";
-
 import { useTranslation } from "next-i18next";
+import { FormField, GenerateEditInvoiceAddressFormField } from "@/types";
+
 export const addressObject = {
   streetNumber: "",
   postalCode: "",
@@ -31,8 +31,7 @@ export const EditInvoiceAddressDetailsFormField: GenerateEditInvoiceAddressFormF
     const { t: translate } = useTranslation();
     if (!fields) return null;
     for (let i = 0; i < count; i++) {
-      let valueIndex = i;
-      formField.push(
+      formField?.push(
         {
           containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
           field: {
@@ -40,13 +39,11 @@ export const EditInvoiceAddressDetailsFormField: GenerateEditInvoiceAddressFormF
             type: Field.select,
             id: `address.${i}.addressType`,
             name: `address.${i}.addressType`,
-            // value: addressSettings?.addresses?.[0] || "",
             options:
               addressSettings?.addresses?.map((item) => ({
                 label: item,
                 value: item,
               })) || [],
-
             control,
             onItemChange: (item) => handleChangeLabel(item, i),
           },
@@ -73,8 +70,6 @@ export const EditInvoiceAddressDetailsFormField: GenerateEditInvoiceAddressFormF
                         id: `address.${i}.label`,
                         name: `address.${i}.label`,
                         register,
-                        // value: `Adresse ${++valueIndex}`,
-                        // setValue,
                       },
                     }) || {
                       field: {
@@ -83,11 +78,9 @@ export const EditInvoiceAddressDetailsFormField: GenerateEditInvoiceAddressFormF
                         id: `address.${i}.label`,
                         name: `address.${i}.label`,
                         register,
-                        // value: `Adresse ${++valueIndex}`,
                         disabled: true,
                         className:
                           "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
-                        // setValue,
                       },
                     },
                     {
@@ -144,12 +137,12 @@ export const EditInvoiceAddressDetailsFormField: GenerateEditInvoiceAddressFormF
                   inputType: "text",
                   id: `address.${i}.streetNumber`,
                   name: `address.${i}.streetNumber`,
-                  placeholder: `Zweibrückenstraße, ${i}`,
+                  placeholder: translate("offers.placeholders.street"),
                   register,
                 },
               },
               {
-                containerClass: "mb-0 ",
+                containerClass: "mb-0",
                 label: {
                   text: translate("offers.address_details.post_code"),
                   htmlFor: `address.${i}.postalCode`,
@@ -161,7 +154,7 @@ export const EditInvoiceAddressDetailsFormField: GenerateEditInvoiceAddressFormF
                   inputType: "text",
                   id: `address.${i}.postalCode`,
                   name: `address.${i}.postalCode`,
-                  placeholder: `123${i}`,
+                  placeholder: translate("offers.placeholders.post_code"),
                   register,
                 },
               },
@@ -179,6 +172,9 @@ export const EditInvoiceAddressDetailsFormField: GenerateEditInvoiceAddressFormF
                   inputType: "text",
                   id: `address.${i}.country`,
                   name: `address.${i}.country`,
+                  placeholder: translate(
+                    "offers.placeholders.country_placeholder"
+                  ),
                   register,
                 },
               },
@@ -199,14 +195,14 @@ export const EditInvoiceAddressDetailsFormField: GenerateEditInvoiceAddressFormF
             rows: 2,
             id: `address.${i}.description`,
             name: `address.${i}.description`,
-            placeholder: "",
+            placeholder: translate("common.description_placeholder"),
             register,
           },
         }
       );
     }
 
-    formField.push({
+    formField?.push({
       containerClass: "mt-[30px]",
       field: {
         type: Field.div,

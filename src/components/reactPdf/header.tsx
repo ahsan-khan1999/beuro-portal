@@ -27,6 +27,7 @@ export const Header = ({
         contract: "Contract ",
         invoice: "Invoice ",
         receipt: "Receipt ",
+        report: "Report ",
       },
       HeaderLabel: {
         contract: "Create",
@@ -45,6 +46,7 @@ export const Header = ({
         contract: "Vertrag ",
         invoice: "Rechnung ",
         receipt: "Quittung ",
+        report: "Bericht ",
       },
       HeaderLabel: {
         contract: "Erstell",

@@ -10,8 +10,7 @@ import addIcon from "@/assets/svgs/plus_icon.svg";
 import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export default function OffersFilters({
   filter,
@@ -22,8 +21,6 @@ export default function OffersFilters({
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const { noteSettings } = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
-
   const [inputValue, setInputValue] = useState<string>("");
 
   const checkbox: CheckBoxType[] = [
@@ -173,14 +170,10 @@ export default function OffersFilters({
     setInputValue(textValue || "");
   }, [router.query.text]);
 
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
-
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
-        {checkbox.map((item, idx) => (
+        {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
             checkboxFilter={filter}
@@ -203,7 +196,7 @@ export default function OffersFilters({
           onEnterPress={onEnterPress}
         />
 
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-center gap-x-3 z-20">
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
             value=""
@@ -227,6 +220,7 @@ export default function OffersFilters({
               },
             ]}
             label={translate("common.sort_button")}
+            containerClassName="min-w-fit"
           />
           <span className="text-[#4B4B4B] font-semibold text-base">
             {translate("global_search.notes")}

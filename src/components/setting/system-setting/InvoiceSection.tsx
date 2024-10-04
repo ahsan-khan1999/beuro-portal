@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import React, { SetStateAction } from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import SettingLayout from "../SettingLayout";
 import { useTranslation } from "next-i18next";

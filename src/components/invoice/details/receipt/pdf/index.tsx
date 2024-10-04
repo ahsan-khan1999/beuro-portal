@@ -5,43 +5,22 @@ import { InvoiceEmailHeader } from "./invoice-email-header";
 import { useReceiptPdf } from "@/hooks/invoice/useReceiptPdf";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
-
-// const InvoicePdfPreview = dynamic(
-//   () => import("@/components/reactPdf/pdf-layout"),
-//   { ssr: false }
-// );
 
 const InvoicePdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
   {
     ssr: false,
-
-    // loading: () => <CustomLoader />
   }
-);
-
-// const PdfDownload = dynamic(
-//   () => import("@/components/reactPdf/generate-merged-pdf-download"),
-//   {
-//     ssr: false,
-//   }
-// );
-const PdfDownload = dynamic(
-  () => import("@/components/reactPdf/generate-Pdf-Download"),
-  { ssr: false }
 );
 
 const ReceiptPdfPreview = () => {
   const {
-    emailTemplateSettings,
     loading,
-    loadingGlobal,
     modal,
     receiptData,
-    templateSettings,
     activeButtonId,
-    router,
     mergedPdfUrl,
     isPdfRendering,
     handleDonwload,
@@ -52,7 +31,6 @@ const ReceiptPdfPreview = () => {
     onSuccess,
     dispatch,
     collectiveInvoiceDetails,
-    systemSetting,
   } = useReceiptPdf();
 
   const { t: translate } = useTranslation();
@@ -75,7 +53,9 @@ const ReceiptPdfPreview = () => {
         }}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
+
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
   };
@@ -89,7 +69,9 @@ const ReceiptPdfPreview = () => {
           <InvoiceEmailHeader
             {...receiptData?.emailHeader}
             contractStatus={collectiveInvoiceDetails?.emailStatus}
-            contentName={receiptData?.emailHeader.contentName}
+            contentName={
+              receiptData?.emailHeader && receiptData?.emailHeader.contentName
+            }
             onEmailSend={handleEmailSend}
             loading={loading}
             onDownload={handleDonwload}
@@ -99,10 +81,12 @@ const ReceiptPdfPreview = () => {
             title={translate("invoice.receipt_details")}
           />
 
-          <InvoicePdfPreview
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          />
+          <div className="mt-5">
+            <InvoicePdfPreview
+              mergedPdfFileUrl={mergedPdfUrl}
+              isPdfRendering={isPdfRendering}
+            />
+          </div>
         </>
       )}
 

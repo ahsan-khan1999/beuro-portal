@@ -30,9 +30,10 @@ const InvoiceDetails = () => {
     loading,
     systemSettings,
     handleInvoiceUpdate,
-    totalCount,
     loadingInvoice,
     loadingReceipt,
+    handlePaymentStatusChange,
+    handleDeleteInvoice,
   } = useInvoiceDetail();
 
   const invoiceComponent = {
@@ -44,6 +45,7 @@ const InvoiceDetails = () => {
           handlePaymentStatusUpdate={handlePaymentStatusUpdate}
           handleInvoiceEdit={handleInvoiceEdit}
           handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
+          onPaymentStatusChange={handlePaymentStatusChange}
         />
       ),
       isData: collectiveInvoice?.length > 0,
@@ -96,6 +98,7 @@ const InvoiceDetails = () => {
               handleSendEmail={handleSendEmail}
               currency={systemSettings?.currency}
               handleInvoiceEdit={handleInvoiceUpdate}
+              onDeleteHandler={handleDeleteInvoice}
             />
           </InvoiceCardLayout>
 

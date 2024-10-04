@@ -29,6 +29,8 @@ export interface DetailImgUploadProps {
   name: string;
   heading: string;
   className?: string;
+  isAgent?: boolean;
+  isOffer?: boolean;
 }
 
 const OfferEditImages = ({
@@ -41,6 +43,8 @@ const OfferEditImages = ({
   refID,
   heading,
   className,
+  isAgent,
+  isOffer,
 }: DetailImgUploadProps) => {
   const { t: translate } = useTranslation();
   const { images } = useAppSelector((state) => state.image);
@@ -100,24 +104,30 @@ const OfferEditImages = ({
           </div>
         ) : (
           <div className="pb-4 max-h-[400px] overflow-y-scroll border-t-4 border-t-[#4A13E7]">
-            <NoDataEmptyState
-              className="w-fit 2xl:w-[247px]"
-              containerClassName="py-0 px-2"
-              imgClassName="w-20 h-20"
-              textClassName="text-lg text-center"
-            />
+            {
+              <NoDataEmptyState
+                className={`w-fit mx-auto ${
+                  isOffer ? "2xl:w-[247px]" : "xlg:w-[247px]"
+                } my-2`}
+                containerClassName="py-0 px-2"
+                imgClassName="w-[80px] h-[80px]"
+                textClassName="text-lg text-center"
+              />
+            }
           </div>
         )}
 
-        <div className="flex justify-end items-center mx-[13px] pb-3">
-          <span
-            onClick={(e) => handleImagesUpload(id, refID, name, heading, e)}
-            className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer`}
-          >
-            {translate("offers.side_images.upload_button")}
-            <Image src={imageUpload} alt="imageUpload" className="ml-2" />
-          </span>
-        </div>
+        {
+          <div className="flex justify-end items-center mx-[13px] pb-3">
+            <span
+              onClick={(e) => handleImagesUpload(id, refID, name, heading, e)}
+              className={`border border-[#BFBFBF] rounded-md flex px-2 py-1 cursor-pointer`}
+            >
+              {translate("offers.side_images.upload_button")}
+              <Image src={imageUpload} alt="imageUpload" className="ml-2" />
+            </span>
+          </div>
+        }
       </div>
     </LeadsDetailImgLayout>
   );

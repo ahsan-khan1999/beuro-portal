@@ -35,10 +35,7 @@ const DetailsTab = ({
           : "border-[#EBEBEB] text-[#1E1E1E]"
       }`}
     >
-      <span
-        className="mr-[10px]"
-        dangerouslySetInnerHTML={{ __html: icon }}
-      ></span>
+      <span className="mr-[10px]" dangerouslySetInnerHTML={{ __html: icon }} />
       {name}
     </button>
   );

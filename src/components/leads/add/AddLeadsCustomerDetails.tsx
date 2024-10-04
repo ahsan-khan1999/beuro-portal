@@ -2,18 +2,16 @@ import { Form } from "@/base-components/form/form";
 import { useAddNewLeadCustomer } from "@/hooks/leads/useAddNewLeadCustomer";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
-import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
 
-const AddLeadsCustomerDetails = ({
-  onHandleNext,
-}: {
+export interface AddLeadProps {
   onHandleNext: Function;
-}) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+}
+
+const AddLeadsCustomerDetails = ({ onHandleNext }: AddLeadProps) => {
+  const { fields, onSubmit, handleSubmit, errors, translate, router } =
     useAddNewLeadCustomer(onHandleNext);
 
-  const router = useRouter();
   const handleCancel = () => {
     router.pathname = "/leads";
     router.query = { status: "None" };

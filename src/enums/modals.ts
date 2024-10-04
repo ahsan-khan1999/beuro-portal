@@ -20,6 +20,7 @@ export enum AddTaxField {
   name = "name",
   taxRate = "taxRate",
 }
+
 export enum AddGeneralNoteField {
   noteType = "noteType",
   description = "description",
@@ -39,4 +40,15 @@ export enum EditPaymentDetails {
   expiry = "expiry",
   cardNumber = "cardNumber",
   cvv = "cvv",
+}
+
+export enum AddCalendarTask {
+  title = "title",
+  date = "date",
+  startDate = "startDate",
+  endDate = "endDate",
+  allDay = "allDay",
+  colour = "colour",
+  alertTime = "alertTime",
+  note = "note",
 }

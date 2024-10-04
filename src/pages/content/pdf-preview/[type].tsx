@@ -42,9 +42,3 @@ const index = () => {
 };
 
 export default index;
-
-// export const getStaticProps = async ({ locale }: Locale) => ({
-//   props: {
-//     ...(await serverSideTranslations(locale, ["common"])),
-//   },
-// });

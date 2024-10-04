@@ -15,8 +15,8 @@ import {
 } from "react-hook-form";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
-import { getKeyByValue } from "@/utils/auth.util";
 import { InvoiceTableRowTypes } from "@/types/invoice";
+import { getKeyByValue } from "@/utils/auth.util";
 
 export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormField =
   (
@@ -109,7 +109,7 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
                 options:
                   Object.keys(staticEnums.CustomerType)
                     ?.slice(1)
-                    ?.map((item, key) => ({
+                    ?.map((item) => ({
                       value: item,
                       label: translate(`customer_type.${item}`),
                     })) || [],
@@ -129,7 +129,7 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
               label: {
                 text: `${translate("customers.details.gender")}`,
                 htmlFor: "gender",
-                className: "mb-[10px] ",
+                className: "mb-[10px]",
               },
               field: {
                 className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
@@ -158,7 +158,6 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
                 inputType: "text",
                 id: "fullName",
                 name: "fullName",
-
                 placeholder: `${translate("offers.placeholders.name")}`,
                 register,
                 // value: invoiceDetails && invoiceDetails.customerDetail?.fullName,
@@ -193,6 +192,9 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
                 className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
                 id: "phoneNumber",
                 name: "phoneNumber",
+                placeholder: `${translate(
+                  "offers.placeholders.phone_placeholder"
+                )}`,
                 inputType: "tel",
                 register,
                 value:
@@ -216,6 +218,9 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
                 className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
                 id: "mobileNumber",
                 name: "mobileNumber",
+                placeholder: `${translate(
+                  "offers.placeholders.mobile_placeholder"
+                )}`,
                 register,
                 value:
                   type === "New Customer"
@@ -309,7 +314,6 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
                 inputType: "text",
                 id: "address.streetNumber",
                 name: "address.streetNumber",
-
                 placeholder: `${translate("offers.placeholders.street")}`,
                 register,
                 value:
@@ -332,7 +336,6 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
                 id: "address.postalCode",
                 name: "address.postalCode",
                 placeholder: `${translate("offers.placeholders.post_code")}`,
-
                 register,
                 value:
                   invoiceDetails &&
@@ -353,6 +356,9 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
                 inputType: "text",
                 id: "address.country",
                 name: "address.country",
+                placeholder: `${translate(
+                  "offers.placeholders.country_placeholder"
+                )}`,
                 register,
               },
             },
@@ -360,7 +366,6 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
         },
       },
     ];
-    // customer type
     const fieldIndex = formField.findIndex(
       (field: any) =>
         field?.field?.type === Field.div &&
@@ -384,7 +389,9 @@ export const CreateInvoiceCustomerDetailsFormField: GenerateInvoiceCustomerFormF
           inputType: "text",
           id: "companyName",
           name: "companyName",
-          placeholder: "Please Enter Company Name",
+          placeholder: `${translate(
+            "offers.placeholders.company_placeholder"
+          )}`,
           register,
           setValue: setValue,
           value: invoiceDetails?.customerDetail?.companyName || "",
@@ -488,7 +495,7 @@ export const generateDateChildren = (
   const { t: translate } = useTranslation();
   const dateformFields = [];
   for (let i = 0; i < count; i++) {
-    dateformFields.push({
+    dateformFields?.push({
       containerClass: "mb-0 pt-5",
       field: {
         type: Field.div,
@@ -694,7 +701,7 @@ export const CreateInvoiceDetailsDateFormField = (
 ) => {
   const { t: translate } = useTranslation();
   const dateField = {
-    containerClass: "mb-0 ",
+    containerClass: "mb-0",
     label: {
       text: "Start Date",
       htmlFor: `date.startDate`,
@@ -705,12 +712,8 @@ export const CreateInvoiceDetailsDateFormField = (
       className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
       id: `date.startDate`,
       name: `date.startDate`,
-      // remove: key > 0 && "Remove",
-      // onRemove: () => handleRemoveDateField(key),
       register,
       dateType: "date",
-
-      // value: invoiceDetails?.date?.length > 0 && invoiceDetails?.date[key]?.startDate
     },
   };
   const dateField2 = {
@@ -729,7 +732,6 @@ export const CreateInvoiceDetailsDateFormField = (
       onRemove: () => handleRemoveDateField(count),
       register,
       dateType: "date",
-      // value: invoiceDetails?.date?.length > 0 && invoiceDetails?.date[key]?.endDate
     },
   };
   const fieldObj = { startDate: dateField, endDate: dateField2 };

@@ -26,6 +26,8 @@ import { EditDate } from "@/base-components/ui/modals1/editDate";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { IsContractTaskCreated } from "@/base-components/ui/modals1/IsContractTaskCreated";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 export default function useContractDetail() {
   const dispatch = useAppDispatch();
@@ -37,7 +39,12 @@ export default function useContractDetail() {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState<string>("");
-  const { contractDetails, loading, contract } = useAppSelector(
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
+  const [selectedContractId, setSelectedContractId] = useState<string | null>(
+    null
+  );
+
+  const { contractDetails, loading } = useAppSelector(
     (state) => state.contract
   );
 
@@ -54,7 +61,7 @@ export default function useContractDetail() {
     if (id) {
       dispatch(readContractDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
-          dispatch(setContractDetails(res.payload));
+          dispatch(setContractDetails(res?.payload));
         }
       );
     }
@@ -231,6 +238,69 @@ export default function useContractDetail() {
     );
   };
 
+  const handleStatusUpdate = async (status: string) => {
+    if (status === "Confirmed") {
+      setSelectedContractId(contractDetails?.id);
+      setSelectedStatus(status);
+      dispatch(updateModalType({ type: ModalType.IS_CONTRACT_TASK_CREATED }));
+    } else {
+      const res = await dispatch(
+        updateContractStatus({
+          data: {
+            id: contractDetails?.id,
+            contractStatus: staticEnums["ContractStatus"][status],
+          },
+        })
+      );
+      if (res?.payload) contractHandler();
+    }
+  };
+
+  const handleSendEmail = async () => {
+    setIsSendEmail(!isSendEmail);
+  };
+
+  const contractHandler = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handlePaymentStatusUpdate = async (paymentType: string) => {
+    const res = await dispatch(
+      updateContractPaymentStatus({
+        data: {
+          id: contractDetails?.id,
+          paymentType: staticEnums["PaymentType"][paymentType],
+        },
+      })
+    );
+    if (res?.payload) contractHandler();
+  };
+
+  const onNextHandle = () => {
+    router.pathname = "/contract/pdf-preview";
+  };
+
+  const handleViewPdf = () => {
+    window.open(contractDetails?.attachement as string);
+  };
+
+  const handleUpdateAdditionalDetailsModal = () => {
+    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
+  };
+
+  const handleChange = async () => {
+    const apiData = {
+      ...contractDetails,
+      id: contractDetails?.id,
+      title: value,
+    };
+
+    const response = await dispatch(
+      updateContractDetail({ data: apiData, router, translate })
+    );
+    if (response?.payload) handleUpdateContractDetail();
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -281,12 +351,15 @@ export default function useContractDetail() {
         mainHeading={translate("common.update_note")}
       />
     ),
-    // [ModalType.EDIT_CONTRACT_ADDITIONAL_DETAIL]: (
-    //   <EditContractAdditionalDetails
-    //     onClose={onClose}
-    //     heading="Update Additional Details"
-    //   />
-    // ),
+    [ModalType.IS_CONTRACT_TASK_CREATED]: (
+      <IsContractTaskCreated
+        onClose={onClose}
+        heading={translate("calendar.is_contract_task_des")}
+        contractId={selectedContractId}
+        status={selectedStatus}
+        onSuccess={contractHandler}
+      />
+    ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
         onClose={onClose}
@@ -294,9 +367,7 @@ export default function useContractDetail() {
         type="Contract"
       />
     ),
-    // [ModalType.IMAGE_SLIDER]: (
-    //   <ImageSlider onClose={onClose} details={images} />
-    // ),
+
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
@@ -325,67 +396,11 @@ export default function useContractDetail() {
     [ModalType.SHARE_IMAGES]: (
       <ShareImages onClose={onClose} offerId={contractDetails?.id} />
     ),
-  };
-
-  const handleSendEmail = async () => {
-    setIsSendEmail(!isSendEmail);
-  };
-
-  const offerCreatedHandler = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handlePaymentStatusUpdate = async (paymentType: string) => {
-    const res = await dispatch(
-      updateContractPaymentStatus({
-        data: {
-          id: contractDetails?.id,
-          paymentType: staticEnums["PaymentType"][paymentType],
-        },
-      })
-    );
-    if (res?.payload) offerCreatedHandler();
-  };
-
-  const handleStatusUpdate = async (offerStatus: string) => {
-    const res = await dispatch(
-      updateContractStatus({
-        data: {
-          id: contractDetails?.id,
-          contractStatus: staticEnums["ContractStatus"][offerStatus],
-        },
-      })
-    );
-    if (res?.payload) offerCreatedHandler();
-  };
-
-  const onNextHandle = () => {
-    router.pathname = "/contract/pdf-preview";
-  };
-
-  const handleViewPdf = () => {
-    window.open(contractDetails?.attachement as string);
-  };
-
-  const handleUpdateAdditionalDetailsModal = () => {
-    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
-  };
-
-  const handleChange = async () => {
-    const apiData = {
-      ...contractDetails,
-      id: contractDetails?.id,
-      title: value,
-    };
-
-    const response = await dispatch(
-      updateContractDetail({ data: apiData, router, translate })
-    );
-    if (response?.payload) handleUpdateContractDetail();
   };
 
   return {

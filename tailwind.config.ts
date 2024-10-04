@@ -2,16 +2,7 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx,mdx}"],
   theme: {
-    // screens: {
-    //   // xxs: "300px",
-    //   // xs: "475px",
-    //   // sm: "640px",
-    //   // md: "768px",
-    //   // 850: "850px",
-    //   // lg: "1024px",
-    //   // xl: "1160px",
-    //   maxSize: '1440px',
-    // },
+  
     fontFamily: {
       sans: ["Poppins", "Graphik", "sans-serif"],
     },
@@ -20,8 +11,13 @@ module.exports = {
         sans: ["Poppins", "sans-serif"],
       },
       screens: {
-        xs: "375px",
+        xs: "374px",
+        xsMini: "520px",
+        xMini: "730px",
+        xAirMini:"767px",
+        xAir: "820px",
         md: "900px",
+        xPro: "1025px",
         mlg: "1100px",
         xlg: "1200px",
         xlgg: "1220px",
@@ -85,6 +81,7 @@ module.exports = {
         overdueColor: "#FF376F",
       },
       boxShadow: (theme: any) => ({
+        calendarShadow: "0px 0px 33.6px 0px rgba(0, 0, 0, 0.20)",
         header: `0px 4px 4px 0px rgba(0, 0, 0, 0.03)`,
         followUp: `0px 3px 16px 6px rgba(0, 0, 0, 0.11)`,
         loginCard: `0px 0px 32px 0px rgba(0, 0, 0, 0.08)`,
@@ -113,9 +110,7 @@ module.exports = {
         "dashboardCard3-gradient":
           "linear-gradient(90deg, #FF3671 0.03%, #FE9841 100.05%)",
       },
-      // background: {
-      //   gradient: "linear-gradient(270deg, #4A13E7 -1.29%, #7B18FF 98.61%)",
-      // },
+    
       stroke: ["group-hover"],
       textColor: ["group-hover"],
     },

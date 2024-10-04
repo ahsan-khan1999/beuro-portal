@@ -11,13 +11,13 @@ import { Button } from "@/base-components/ui/button/button";
 import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 
 export default function LeadsFilter({
   filter,
   setFilter,
   handleFilterChange,
+  isAgent,
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -176,15 +176,12 @@ export default function LeadsFilter({
     });
   };
 
-
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
-
   return (
-    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
+    <div
+      className={`flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10`}
+    >
       <div className="flex items-center gap-[14px]">
-        {checkbox.map((item, idx) => (
+        {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
             checkboxFilter={filter}
@@ -207,7 +204,7 @@ export default function LeadsFilter({
           onEnterPress={onEnterPress}
         />
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-          <div className="flex items-center gap-x-4">
+          <div className="flex items-center gap-x-4 z-20">
             <SelectField
               handleChange={(value) => hanldeSortChange(value)}
               value=""
@@ -230,61 +227,59 @@ export default function LeadsFilter({
                 },
               ]}
               label={translate("common.sort_button")}
+              containerClassName="min-w-fit"
             />
-            <div className="flex items-center gap-x-3">
-              <span className="text-[#4B4B4B] font-semibold text-base">
-                {translate("global_search.notes")}
-              </span>
-              <SelectField
-                handleChange={(value) => hanldeNoteType(value)}
-                value=""
-                dropDownIconClassName=""
-                containerClassName="w-[225px]"
-                labelClassName="w-[225px]"
-                options={
-                  noteSettings
-                    ? noteSettings
-                        .slice()
-                        .reverse()
-                        .map((item) => ({
-                          label: item.notes.noteType,
-                          value: item.notes.noteType,
-                        }))
-                    : []
-                }
-                label={translate("add_note_dropdown.all_notes")}
-              />
-            </div>
+            {!isAgent && (
+              <div className="flex items-center gap-x-3">
+                <span className="text-[#4B4B4B] font-semibold text-base">
+                  {translate("global_search.notes")}
+                </span>
+                <SelectField
+                  handleChange={(value) => hanldeNoteType(value)}
+                  value=""
+                  dropDownIconClassName=""
+                  containerClassName="w-[225px]"
+                  labelClassName="w-[225px]"
+                  options={
+                    noteSettings
+                      ? noteSettings
+                          .slice()
+                          .reverse()
+                          .map((item) => ({
+                            label: item.notes.noteType,
+                            value: item.notes.noteType,
+                          }))
+                      : []
+                  }
+                  label={translate("add_note_dropdown.all_notes")}
+                />
+              </div>
+            )}
           </div>
-
           <div className="flex items-center gap-x-4">
-            <LeadsFilters
-              filter={filter}
-              setFilter={setFilter}
-              onFilterChange={handleFilterChange}
-            />
-            <Button
-              inputType="button"
-              onClick={() => {
-                dispatch(setLeadDetails(DEFAULT_LEAD));
-                router.push("/leads/add");
-              }}
-              className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
-              icon={addIcon}
-              text={translate("leads.add_button")}
-              id="add"
-              iconAlt="add button"
-            />
+            {!isAgent && (
+              <LeadsFilters
+                filter={filter}
+                setFilter={setFilter}
+                onFilterChange={handleFilterChange}
+              />
+            )}
+            {!isAgent && (
+              <Button
+                inputType="button"
+                onClick={() => {
+                  dispatch(setLeadDetails(DEFAULT_LEAD));
+                  router.push("/leads/add");
+                }}
+                className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+                icon={addIcon}
+                text={translate("leads.add_button")}
+                id="add"
+                iconAlt="add button"
+              />
+            )}
           </div>
         </div>
-
-        {/* <Button
-          id="apply"
-          inputType="button"
-          text="Apply"
-          onClick={() => handleFilterChange()}
-          className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        /> */}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export const generateChangeMailSettingValidationSchema = (
       .string()
       .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailPort]: yup
-      .string()
+      .number()
       .required(translate("validationMessages.required")),
     [ChangeMailSetting.mailEncryption]: yup
       .string()

@@ -10,7 +10,7 @@ export const PrintIcon = ({ onClick }: { onClick: () => void }) => {
       viewBox="0 0 41 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="cursor-pointer"
+      className="cursor-pointer w-6 h-6 xMini:w-[41px] xMini:h-[41px]"
     >
       <rect
         x="0.73584"

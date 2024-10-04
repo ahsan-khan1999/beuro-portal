@@ -49,18 +49,16 @@ export const SelectBox = ({
 
   const handleChange = (value: string) => {
     search.current = value;
-    if (value === "") {
-      setOption(options);
-    } else {
-      setOption(
-        options.filter((item) =>
-          item.label?.toLowerCase()?.includes(value?.toLowerCase())
-        )
-      );
-    }
+    setOption(
+      option?.filter((item) =>
+        item.label?.toLowerCase()?.includes(value?.toLowerCase())
+      )
+    );
   };
 
-  const defaultClasses = `placeholder:text-dark h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+  const defaultClasses = `${
+    disabled ? "cursor-default" : "cursor-pointer"
+  } placeholder:text-dark h-10 xMini:h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
 

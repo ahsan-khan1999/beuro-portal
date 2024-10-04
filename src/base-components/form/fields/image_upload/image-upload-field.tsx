@@ -1,9 +1,13 @@
 import Image from "next/image";
-import { ControllerRenderProps, FieldValues, UseFormSetValue } from "react-hook-form";
+import {
+  ControllerRenderProps,
+  FieldValues,
+  UseFormSetValue,
+} from "react-hook-form";
 import fileUploadIcon from "@/assets/svgs/file_uplaod.svg";
 import imgDelete from "@/assets/svgs/img_delete.svg";
 import { useAppDispatch } from "@/hooks/useRedux";
-import { uploadFileToFirebase, uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
+import { uploadFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useTranslation } from "next-i18next";
 
 export const ImageUpload = ({
@@ -14,7 +18,7 @@ export const ImageUpload = ({
   onClick,
   value,
   index,
-  setValue
+  setValue,
 }: {
   id: string;
   field: ControllerRenderProps<FieldValues, string>;
@@ -23,7 +27,7 @@ export const ImageUpload = ({
   onClick?: Function;
   value?: string;
   index?: number;
-  setValue?:UseFormSetValue<FieldValues>
+  setValue?: UseFormSetValue<FieldValues>;
 }) => {
   const dispatch = useAppDispatch();
 
@@ -100,9 +104,7 @@ export const ImageUpload = ({
           className="hidden"
           id={id}
           onChange={handleFileSelected}
-          
           data-index={index}
-
         />
       </label>
     </>

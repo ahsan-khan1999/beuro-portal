@@ -8,8 +8,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import InvoicesFilter from "@/base-components/filter/invoices-filter";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export default function InvoicesFilters({
   filter,
@@ -25,7 +24,6 @@ export default function InvoicesFilters({
   const router = useRouter();
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
 
   const checkbox: CheckBoxType[] = [
     {
@@ -178,14 +176,10 @@ export default function InvoicesFilters({
     setInputValue(textValue || "");
   }, [router.query.text]);
 
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
-
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
-      <div className="flex gap-[14px]">
-        {checkbox.map((item, idx) => (
+      <div className="flex gap-3">
+        {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
             checkboxFilter={filter}
@@ -200,7 +194,7 @@ export default function InvoicesFilters({
         ))}
       </div>
 
-      <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
+      <div className="flex flex-col maxSize:flex-row gap-3 maxSize:items-center">
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}
@@ -233,6 +227,7 @@ export default function InvoicesFilters({
               },
             ]}
             label={translate("common.sort_button")}
+            containerClassName="min-w-fit"
           />
           <span className="text-[#4B4B4B] font-semibold text-base">
             {translate("global_search.notes")}

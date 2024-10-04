@@ -10,7 +10,9 @@ import { useRouter } from "next/router";
 import { FilterType } from "@/types";
 import {
   readContract,
+  readContractDetails,
   setContractDetails,
+  setContractTaskDetails,
   updateContractPaymentStatus,
   updateContractStatus,
 } from "@/api/slices/contract/contractSlice";
@@ -19,23 +21,29 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
+import moment from "moment";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { IsContractTaskCreated } from "@/base-components/ui/modals1/IsContractTaskCreated";
+import { formatDateTimeToDate, pdfDateFormat } from "@/utils/utility";
+import { CustomerPromiseActionType } from "@/types/customer";
 
 const useContract = () => {
-  const {
-    lastPage,
-    contract,
-    loading,
-    isLoading,
-    totalCount,
-    contractDetails,
-  } = useAppSelector((state) => state.contract);
-  const { query } = useRouter();
+  const { contract, loading, isLoading, totalCount, contractDetails } =
+    useAppSelector((state) => state.contract);
+
+  const router = useRouter();
+  const page = router.query?.page as unknown as number;
+  const [currentPage, setCurrentPage] = useState<number>(page || 1);
+  const { currentLanguage } = useAppSelector((state) => state.global);
+  const { systemSettings } = useAppSelector((state) => state.settings);
+  const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
+    []
+  );
 
   useEffect(() => {
-    const parsedPage = parseInt(query.page as string, 10);
+    const parsedPage = parseInt(router.query.page as string, 10);
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -44,12 +52,13 @@ const useContract = () => {
       setCurrentPage(1);
     }
 
-    const queryStatus = query?.status;
-    const searchQuery = query?.text as string;
-    const sortedValue = query?.sort as string;
-    const searchDate = query?.date as string;
-    const searchLeadSource = query?.leadSource;
-    const searchNoteType = query?.noteType as string;
+    const queryStatus = router.query?.status;
+    const searchQuery = router.query?.text as string;
+    const sortedValue = router.query?.sort as string;
+    const searchDate = router.query?.date as string;
+    const searchLeadSource = router.query?.leadSource;
+    const searchEmailStatus = router.query?.emailStatus;
+    const searchNoteType = router.query?.noteType as string;
 
     const queryParams =
       queryStatus ||
@@ -57,11 +66,12 @@ const useContract = () => {
       sortedValue ||
       searchDate ||
       searchLeadSource ||
+      searchEmailStatus ||
       searchNoteType;
 
     if (queryParams !== undefined) {
       const filteredStatus =
-        query?.status === "None"
+        router.query?.status === "None"
           ? "None"
           : queryParams
               .toString()
@@ -78,6 +88,7 @@ const useContract = () => {
           $lte?: string;
         };
         leadSource?: string | string[];
+        emailStatus?: string | string[];
       } = {
         status: filteredStatus,
       };
@@ -87,12 +98,14 @@ const useContract = () => {
         sortedValue ||
         searchDate ||
         searchLeadSource ||
+        searchEmailStatus ||
         searchNoteType
       ) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.date = searchDate && JSON.parse(searchDate);
         updatedFilter.leadSource = searchLeadSource;
+        updatedFilter.emailStatus = searchEmailStatus;
         updatedFilter.noteType = searchNoteType;
       }
 
@@ -110,14 +123,7 @@ const useContract = () => {
         if (response?.payload) setCurrentPageRows(response?.payload?.Contract);
       });
     }
-  }, [query]);
-
-  const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
-    []
-  );
-
-  const page = query?.page as unknown as number;
-  const [currentPage, setCurrentPage] = useState<number>(page || 1);
+  }, [router.query]);
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -136,6 +142,10 @@ const useContract = () => {
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
+  const [selectedContractId, setSelectedContractId] = useState<string | null>(
+    null
+  );
 
   const handleFilterChange = (filter: FilterType) => {
     setCurrentPage(1);
@@ -302,6 +312,373 @@ const useContract = () => {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePaymentStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (type === "contracts") {
+      const currentItem = currentPageRows.find((item) => item.id === id);
+      if (!currentItem || currentItem.paymentType !== status) {
+        const res = await dispatch(
+          updateContractPaymentStatus({
+            data: { id: id, paymentType: staticEnums["PaymentType"][status] },
+          })
+        );
+
+        if (res?.payload) {
+          let index = currentPageRows.findIndex(
+            (item) => item.id === res.payload?.id
+          );
+
+          if (index !== -1) {
+            let prevPageRows = [...currentPageRows];
+            prevPageRows.splice(index, 1, res.payload);
+            setCurrentPageRows(prevPageRows);
+            contractHandler();
+          }
+        }
+      }
+    }
+  };
+
+  const handleContractStatusUpdate = async (
+    id: string,
+    status: string,
+    type: string
+  ) => {
+    if (status === "Confirmed") {
+      setSelectedContractId(id);
+      setSelectedStatus(status);
+      dispatch(updateModalType({ type: ModalType.IS_CONTRACT_TASK_CREATED }));
+    } else {
+      if (type === "contracts") {
+        const currentItem = currentPageRows.find((item) => item.id === id);
+        if (!currentItem || currentItem.contractStatus !== status) {
+          const res = await dispatch(
+            updateContractStatus({
+              data: {
+                id: id,
+                contractStatus: staticEnums["ContractStatus"][status],
+              },
+            })
+          );
+          if (res?.payload) {
+            let index = currentPageRows.findIndex(
+              (item) => item.id === res.payload?.id
+            );
+            if (index !== -1) {
+              let prevPageRows = [...currentPageRows];
+              prevPageRows.splice(index, 1, res.payload);
+              setCurrentPageRows(prevPageRows);
+              contractHandler();
+            }
+          }
+        }
+      }
+    }
+  };
+
+  const handleTaskCreation = (id: string) => {
+    if (id) {
+      dispatch(readContractDetails({ params: { filter: id } })).then(
+        (res: CustomerPromiseActionType) => {
+          const contractDetails = res?.payload;
+
+          const updatedDates = contractDetails?.offerID?.date?.map(
+            (dateItem: any) => {
+              const { startDate, endDate } = dateItem;
+              const taskTime = contractDetails?.offerID?.time || "00:00";
+
+              const startMoment = moment(startDate).set({
+                hour: parseInt(taskTime.split(":")[0], 10),
+                minute: parseInt(taskTime.split(":")[1], 10),
+              });
+
+              let endMoment;
+
+              if (endDate) {
+                endMoment = moment(endDate)
+                  .set({
+                    hour: parseInt(taskTime.split(":")[0], 10),
+                    minute: parseInt(taskTime.split(":")[1], 10),
+                  })
+                  .add(1, "hour");
+              } else {
+                endMoment = startMoment.clone().add(1, "hour");
+              }
+
+              return {
+                ...dateItem,
+                startDate: startMoment.format("YYYY-MM-DDTHH:mm"),
+                endDate: endMoment.format("YYYY-MM-DDTHH:mm"),
+              };
+            }
+          );
+
+          const customerName =
+            contractDetails?.offerID?.leadID?.customerDetail?.fullName;
+          const customerGender =
+            contractDetails?.offerID?.leadID?.customerDetail?.gender;
+          const customerEmail =
+            contractDetails?.offerID?.leadID?.customerDetail?.email;
+          const customerPhoneNumber =
+            contractDetails?.offerID?.leadID?.customerDetail?.phoneNumber;
+          const workDates = contractDetails?.offerID?.date;
+          const time = contractDetails?.offerID?.time;
+          const serviceItem =
+            contractDetails?.offerID?.serviceDetail?.serviceDetail;
+
+          const noteDetail = `
+              <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
+                  ${translate("contracts.card_content.heading")}.
+              </span>
+              
+              <div style="display: flex; flex-direction: column;">
+                  <div style="display: flex; align-items: center; gap: 4px;">
+                      <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                          ${translate("pdf.label_nr_contract")} ${translate(
+            "pdf.no"
+          )}:
+                      </span>
+                      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                          ${contractDetails?.contractNumber}
+                      </span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 4px;">
+                      <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                          ${translate("pdf.offer_date")}:
+                      </span>
+                      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                          ${pdfDateFormat(
+                            contractDetails?.createdAt || "",
+                            currentLanguage || "de"
+                          )}
+                      </span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 4px;">
+                      <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                          ${translate("pdf.created_by")}:
+                      </span>
+                      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                          ${contractDetails?.offerID?.createdBy?.fullName}
+                      </span>
+                  </div>
+              </div>
+              
+              <br />
+              
+              <span style="font-size: 16px; font-weight: 600; color: #FE9244;">
+                  ${translate("customers.tab_heading")}.
+              </span>
+              
+              <div style="display: flex; flex-direction: column;">
+              ${
+                customerName &&
+                customerName.trim() !== "" &&
+                `<div style="display: flex; align-items: center; gap: 4px;">
+                    <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                        ${translate("pdf.name")}:
+                    </span>
+                    <span style="font-size: 14px; font-weight: 400; color: #FE9244;">
+                        ${customerName}
+                    </span>
+                </div>`
+              }
+              
+                  ${
+                    customerEmail &&
+                    customerEmail.trim() !== "" &&
+                    `<div style="display: flex; align-items: center; gap: 4px;">
+                      <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                          ${translate("pdf.email")}:
+                      </span>
+                      <span style="font-size: 14px; font-weight: 400; color: #FE9244;">
+                          ${customerEmail}
+                      </span>
+                  </div>`
+                  }
+                  ${
+                    customerPhoneNumber &&
+                    customerPhoneNumber.trim() !== "" &&
+                    `<div style="display: flex; align-items: center; gap: 4px;">
+                      <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                          ${translate("pdf.phone")}:
+                      </span>
+                      <span style="font-size: 14px; font-weight: 400; color: #FE9244;">
+                          ${customerPhoneNumber}
+                      </span>
+                  </div>`
+                  }
+              </div>
+              
+              <br />
+              
+              <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
+                  ${translate("contracts.table_headings.title")}.
+              </span>
+              <p style="font-size: 16px; font-weight: 500; color: #2A2E3A;">
+                  ${contractDetails?.title}
+              </p>
+              
+              <br />
+              
+              ${
+                contractDetails?.offerID?.addressID?.address?.length > 0
+                  ? `
+                    <span style="font-size: 16px; font-weight: 600; color: #FE9244;">
+                      ${translate("customers.details.address_details")}.
+                    </span>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                      ${contractDetails?.offerID?.addressID?.address
+                        .map(
+                          (address: any, index: number) => `
+                          <div key=${index} style="display: flex; flex-direction: column; gap: 2px;">
+                            <p style="font-size: 14px; font-weight: 500; color: #2A2E3A;">
+                              ${address.label}:
+                            </p>
+                            <p style="font-size: 14px; font-weight: 500; color: #2A2E3A;">
+                              ${address.streetNumber}, ${address.postalCode}, ${
+                            address.country || ""
+                          }
+                            </p>
+                          </div>
+                        `
+                        )
+                        .join("")}
+                    </div>
+                  `
+                  : ""
+              }
+              
+              <br />
+              
+              
+              <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <span style="font-size: 14px; font-weight: 600; color: #45C769;">
+                      ${
+                        workDates?.length === 1
+                          ? translate("pdf.work_date")
+                          : translate("pdf.work_dates")
+                      }
+                      :
+                  </span>
+                 <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+      ${workDates
+        ?.map(
+          (date: any, index: number) =>
+            `${formatDateTimeToDate(date.startDate)}${
+              date.endDate
+                ? " bis " +
+                  formatDateTimeToDate(date.endDate) +
+                  (workDates?.length - 1 != index ? ", " : ".")
+                : workDates?.length - 1 != index
+                ? ", "
+                : "."
+            }`
+        )
+        .join("")}
+      ${time ? ` Um ${time} Uhr` : ""}
+    </span>
+    
+              </div>
+              
+              <br />
+              
+              ${
+                serviceItem?.length > 0
+                  ? `
+                <span style="font-size: 16px; font-weight: 600; color: #4A13E7;">
+                  ${translate("services.service_detail_tab")}
+                </span>
+              
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  ${serviceItem
+                    .map(
+                      (item: any, index: number) => `
+                      <div key=${index} style="display: flex; align-items: center; gap: 4px;">
+                        <p style="font-size: 14px; font-weight: 400; color: #2A2E3A;">${item?.serviceTitle}</p>
+                        <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                          ${item?.totalPrice}
+                        </span>
+                      </div>
+                    `
+                    )
+                    .join("")}
+                </div>
+              `
+                  : ""
+              }
+              
+    </div>
+    
+              <br />
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <div style="display: flex; align-items: center; gap:4px">
+                      <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
+                          ${translate("pdf.sub_total")}:
+                      </span>
+                      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                          ${Number(contractDetails?.offerID?.subTotal).toFixed(
+                            2
+                          )} ${systemSettings?.currency}
+                      </span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap:4px">
+                      <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
+                          Mwst (${contractDetails?.offerID?.taxAmount}%):
+                      </span>
+                      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                          ${Number(contractDetails?.offerID?.subTotal).toFixed(
+                            2
+                          )} ${systemSettings?.currency}
+                      </span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap:4px">
+                      <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
+                          ${translate("pdf.grand_total")}:
+                      </span>
+                      <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                          ${Number(contractDetails?.offerID?.total).toFixed(
+                            2
+                          )} ${systemSettings?.currency}
+                      </span>
+                  </div>
+              </div>
+              `;
+
+          dispatch(
+            setContractTaskDetails({
+              id: "convert",
+              colour: "#5CDD42",
+              contractID: {
+                id: contractDetails?.id,
+              },
+              date: updatedDates,
+              title:
+                (contractDetails?.title || "") +
+                " " +
+                translate(`gender.${customerGender}`) +
+                " " +
+                customerName,
+              isAllDay: false,
+              type: "Contract",
+              alertTime: 15,
+              note: noteDetail,
+            })
+          );
+
+          dispatch(updateModalType(ModalType.NONE));
+          router.push(`/calendar?isContractId=${id}`);
+        }
+      );
+    }
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -354,76 +731,21 @@ const useContract = () => {
         route={onClose}
       />
     ),
+    [ModalType.IS_CONTRACT_TASK_CREATED]: (
+      <IsContractTaskCreated
+        onClose={onClose}
+        heading={translate("calendar.is_contract_task_des")}
+        contractId={selectedContractId}
+        status={selectedStatus}
+        onSuccess={contractHandler}
+        currentPageRows={currentPageRows}
+        setCurrentPageRows={setCurrentPageRows}
+      />
+    ),
   };
 
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const handleContractStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "contracts") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
-      if (!currentItem || currentItem.contractStatus !== status) {
-        const res = await dispatch(
-          updateContractStatus({
-            data: {
-              id: id,
-              contractStatus: staticEnums["ContractStatus"][status],
-            },
-          })
-        );
-        if (res?.payload) {
-          let index = currentPageRows.findIndex(
-            (item) => item.id === res.payload?.id
-          );
-
-          if (index !== -1) {
-            let prevPageRows = [...currentPageRows];
-            prevPageRows.splice(index, 1, res.payload);
-            setCurrentPageRows(prevPageRows);
-            contractHandler();
-          }
-        }
-      }
-    }
-  };
-
-  const handlePaymentStatusUpdate = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "contracts") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
-      if (!currentItem || currentItem.paymentType !== status) {
-        const res = await dispatch(
-          updateContractPaymentStatus({
-            data: { id: id, paymentType: staticEnums["PaymentType"][status] },
-          })
-        );
-
-        if (res?.payload) {
-          let index = currentPageRows.findIndex(
-            (item) => item.id === res.payload?.id
-          );
-
-          if (index !== -1) {
-            let prevPageRows = [...currentPageRows];
-            prevPageRows.splice(index, 1, res.payload);
-            setCurrentPageRows(prevPageRows);
-            contractHandler();
-          }
-        }
-      }
-    }
   };
 
   return {
@@ -443,6 +765,7 @@ const useContract = () => {
     handlePaymentStatusUpdate,
     currentPage,
     totalCount,
+    handleTaskCreation,
   };
 };
 

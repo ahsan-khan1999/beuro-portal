@@ -1,10 +1,9 @@
 import { ArrowIcon } from "@/assets/svgs/components/arrow-icon";
-import { MultiSelectBoxProps, SelectBoxProps } from "@/types";
+import { MultiSelectBoxProps } from "@/types";
 import { getLabelByValue } from "@/utils/auth.util";
 import { useOutsideClick } from "@/utils/hooks";
 import { combineClasses } from "@/utils/utility";
 import { AnimatePresence, motion } from "framer-motion";
-import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useMemo, useRef, useState, useEffect } from "react";
 import searchIcon from "@/assets/svgs/search-icon.png";
@@ -42,10 +41,6 @@ export const MultiSelectBox = ({
 
   const search = useRef<string>("");
 
-  const toggleDropDown = () => {
-    setIsOpen((prevState) => !prevState);
-  };
-
   const selectBoxRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
   const selectedOptionHandler = (value: string) => {
     const isSelected = selectedOptions.includes(value);
@@ -59,8 +54,7 @@ export const MultiSelectBox = ({
     trigger?.(field?.name);
     onItemChange && onItemChange(updatedOptions);
 
-    // Remove the selected option from the available options
-    setOption(options.filter((item) => !updatedOptions.includes(item.value)));
+    setOption(options?.filter((item) => !updatedOptions.includes(item.value)));
   };
 
   const handleChange = (value: string) => {
@@ -72,11 +66,11 @@ export const MultiSelectBox = ({
     );
   };
 
-  const defaultClasses = `cursor-pointer placeholder:text-dark h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
+  const defaultClasses = `cursor-pointer placeholder:text-dark h-10 xMini:h-12 py-[10px] flex items-center justify-between text-left text-dark bg-white rounded-lg border border-lightGray focus:border-primary outline-none w-full ${
     success ? "pl-4 pr-10" : "pl-11 pr-4"
   }`;
+
   const classes = combineClasses(defaultClasses, className);
-  const { t: translate } = useTranslation();
 
   const handleDivScroll = (e: React.WheelEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
@@ -91,7 +85,7 @@ export const MultiSelectBox = ({
           className="flex overflow-x-auto multiSelectScrol truncate"
           onWheel={handleDivScroll}
         >
-          {selectedOptions.map((selectedValue) => (
+          {selectedOptions?.map((selectedValue) => (
             <span
               key={selectedValue}
               className="m-1 p-2 bg-gray-200 rounded flex-shrink-0 "
@@ -144,7 +138,7 @@ export const MultiSelectBox = ({
                   className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-2 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
-              {option.map(({ value, label }) => (
+              {option?.map(({ value, label }) => (
                 <li
                   key={value}
                   onClick={() => selectedOptionHandler(value)}

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import AddConfirmationContentDetails from "./AddConfirmationContentDetails";
 import AddInoviceContentDetails from "./AddInoviceContentDetails";
 import AddReceiptContentDetails from "./AddReceiptContentDetails";
@@ -163,11 +162,20 @@ const ContentAddDetailsData = () => {
     },
   ];
 
+  useEffect(() => {
+    if (tabType !== null) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [tabType]);
+
   return (
     <>
       <div className="xLarge:fixed mb-5">
         <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
-          {tabSection.map((item, index) => (
+          {tabSection?.map((item, index) => (
             <OfferTabs
               isSelected={tabType === index}
               isToggle={true}

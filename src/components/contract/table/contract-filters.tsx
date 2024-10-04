@@ -9,7 +9,6 @@ import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { readNoteSettings } from "@/api/slices/settingSlice/settings";
 
 export default function ContractFilters({
   filter,
@@ -167,14 +166,10 @@ export default function ContractFilters({
   };
   3;
 
-  useEffect(() => {
-    dispatch(readNoteSettings());
-  }, []);
-
   return (
     <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
-        {checkbox.map((item, idx) => (
+        {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
             checkboxFilter={filter}
@@ -189,7 +184,7 @@ export default function ContractFilters({
         ))}
       </div>
       <div className="flex flex-col xlg:flex-row  xlg:items-center gap-3">
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-center gap-x-3 z-20">
           <InputField
             handleChange={handleInputChange}
             ref={inputRef}
@@ -220,6 +215,7 @@ export default function ContractFilters({
               },
             ]}
             label={translate("common.sort_button")}
+            containerClassName="min-w-fit"
           />
         </div>
 

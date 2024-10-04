@@ -12,6 +12,7 @@ import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-stat
 import { BaseButton } from "../button/base-button";
 import editNoteIcon from "@/assets/svgs/edit_primary.svg";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
+import { Appointments } from "@/types/appointments";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -39,10 +40,11 @@ const ExistingNotes = ({
     | Lead
     | OffersTableRowTypes
     | contractTableTypes
-    | InvoiceTableRowTypes;
+    | InvoiceTableRowTypes
+    | Appointments;
 }) => {
   const { notes } = useAppSelector((state) => state.note);
-  const { refID, name, heading } = useAppSelector(
+  const { id, refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
   );
 
@@ -66,7 +68,7 @@ const ExistingNotes = ({
           <div className="flex justify-between items-center gap-[10px]">
             <BaseButton
               onClick={() =>
-                handleAddNote(leadDetails?.id, refID, name, heading)
+                handleAddNote(id ? id : leadDetails?.id, refID, name, heading)
               }
               buttonText={translate("common.notes_modal.button")}
               containerClassName="flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover"
@@ -150,9 +152,12 @@ const ExistingNotes = ({
             ))}
           </div>
         ) : (
-          <div className="flex justify-center items-center">
-            <NoDataEmptyState className="w-fit" containerClassName="py-5" />
-          </div>
+          <NoDataEmptyState
+            className="w-full"
+            containerClassName="py-5 px-6"
+            textClassName="text-lg xMini:text-2xl"
+            imgClassName="w-20 h-20 xMini:w-fit xMini:h-fit"
+          />
         )}
       </div>
     </BaseModal>

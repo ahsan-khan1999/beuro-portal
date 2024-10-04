@@ -27,8 +27,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
     const isEditable = addressType && addressType[i];
     const inputField: FormField = isEditable
       ? {
-          //editable address
-          containerClass: "",
           field: {
             type: Field.input,
             className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
@@ -36,12 +34,9 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            // value: `Adresse ${i + 1}`,
-            // setValue,
           },
         }
       : {
-          //non-editable address
           containerClass: "",
           field: {
             type: Field.input,
@@ -49,14 +44,12 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            // value: `Adresse ${i + 1}`,
             disabled: true,
             className:
               "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
-            // setValue,
           },
         };
-    formField.push(
+    formField?.push(
       {
         containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
         field: {
@@ -64,13 +57,12 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
           type: Field.select,
           id: `address.${i}.addressType`,
           name: `address.${i}.addressType`,
-          // value: translate("common.address_type"),
+
           options:
             addressSettings?.addresses?.map((item) => ({
               label: item,
               value: item,
             })) || [],
-
           control,
           onItemChange: (item) => handleChangeLabel(item, i),
         },
@@ -131,7 +123,6 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
 
             inputField,
             {
-              containerClass: "",
               field: {
                 type: Field.button,
                 className: "bg-white hover:bg-white",
@@ -167,7 +158,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.streetNumber`,
                 name: `address.${i}.streetNumber`,
-                placeholder: ``,
+                placeholder: `${translate("leads.placeholders.street")}`,
                 register,
               },
             },
@@ -184,7 +175,7 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.postalCode`,
                 name: `address.${i}.postalCode`,
-                placeholder: ``,
+                placeholder: `${translate("leads.placeholders.post_code")}`,
                 register,
               },
             },
@@ -195,24 +186,16 @@ export const AddLeadAddressDetailsFormField: GenerateLeadAddressFormField = (
                 htmlFor: `address.${i}.country`,
                 className: "mb-[10px]",
               },
-              // field: {
-              //   className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
-              //   type: Field.select,
-              //   id: `address.${i}.country`,
-              //   name: `address.${i}.country`,
-              //   options: Object.keys(staticEnums.Country).map((item) => ({
-              //     value: item,
-              //     label: translate(`countries.${item}`),
-              //   })),
-              //   control,
-              //   value: Object.keys(staticEnums.Country)[0],
-              // },
+
               field: {
                 type: Field.input,
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                 inputType: "text",
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
+                placeholder: `${translate(
+                  "offers.placeholders.country_placeholder"
+                )}`,
                 register,
               },
             },

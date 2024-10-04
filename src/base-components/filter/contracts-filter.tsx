@@ -1,6 +1,6 @@
 import React from "react";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { FilterProps, FilterType } from "@/types";
+import { CheckBoxType, FilterProps, FilterType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
@@ -51,6 +51,7 @@ export default function ContractsFilter({
           ...(moreFilter?.leadSource && {
             leadSource: moreFilter?.leadSource,
           }),
+          emailStatus: moreFilter?.emailStatus,
         },
       },
       undefined,
@@ -65,6 +66,7 @@ export default function ContractsFilter({
           $lte: moreFilter.date && moreFilter.date.$lte,
         },
         leadSource: moreFilter?.leadSource,
+        emailStatus: moreFilter?.emailStatus,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -119,8 +121,48 @@ export default function ContractsFilter({
     });
   };
 
+  const checkbox: CheckBoxType[] = [
+    {
+      label: `${translate("email_status.Pending")}`,
+      type: `${staticEnums.EmailStatus.Pending}`,
+    },
+    {
+      label: `${translate("email_status.Sent")}`,
+      type: `${staticEnums.EmailStatus.Sent}`,
+    },
+    {
+      label: `${translate("email_status.Post")}`,
+      type: `${staticEnums.EmailStatus.Post}`,
+    },
+    {
+      label: `${translate("email_status.Failed")}`,
+      type: `${staticEnums.EmailStatus.Failed}`,
+    },
+  ];
+
+  const handleEmailFilter = (value: string, isChecked: boolean) => {
+    setMoreFilter((prev: FilterType) => {
+      let updatedStatus = new Set(
+        prev.emailStatus !== FiltersDefaultValues.None ? prev.emailStatus : []
+      );
+
+      if (isChecked) {
+        updatedStatus.add(value);
+      } else {
+        updatedStatus.delete(value);
+      }
+
+      const emailStatus =
+        updatedStatus.size > 0
+          ? Array.from(updatedStatus)
+          : FiltersDefaultValues.None;
+
+      return { ...prev, emailStatus: emailStatus };
+    });
+  };
+
   return (
-    <div className="relative flex my-auto cursor-pointer z-50" ref={ref}>
+    <div className="relative flex my-auto z-10" ref={ref}>
       <Button
         inputType="button"
         onClick={handleExtraFilterToggle}
@@ -210,8 +252,8 @@ export default function ContractsFilter({
               />
             </div>
 
-            <div className="mt-5 mb-2">
-              <div className="flex justify-between">
+            <div className="mt-5 flex flex-col gap-y-3">
+              <div className="flex justify-between items-center">
                 <label htmlFor="type" className="font-medium text-base">
                   {translate("filters.extra_filters.leadSource")}
                 </label>
@@ -226,8 +268,8 @@ export default function ContractsFilter({
                 </label>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 mt-4">
-                {Object.keys(staticEnums["LeadSource"]).map((item, idx) => (
+              <div className="grid grid-cols-2 gap-2">
+                {Object?.keys(staticEnums["LeadSource"]).map((item, idx) => (
                   <EmailCheckField
                     key={idx}
                     checkboxFilter={moreFilter as unknown as FilterType}
@@ -242,11 +284,40 @@ export default function ContractsFilter({
                 ))}
               </div>
             </div>
+            <div className="mt-5 mb-2 flex flex-col gap-y-3">
+              <div className="flex justify-between">
+                <label htmlFor="type" className="font-medium text-base">
+                  {translate("agent.report_contact_fields.email")}
+                </label>
+                <label
+                  htmlFor="type"
+                  className="cursor-pointer text-red"
+                  onClick={() => handleFilterReset("emailStatus", [])}
+                >
+                  {translate("filters.extra_filters.reset")}
+                </label>
+              </div>
+              <div className="flex items-center gap-2">
+                {checkbox?.map((item, idx) => (
+                  <EmailCheckField
+                    key={idx}
+                    checkboxFilter={moreFilter as unknown as FilterType}
+                    setCheckBoxFilter={setFilter}
+                    type={"emailStatus"}
+                    label={item.label}
+                    value={item.type}
+                    onChange={(value, isChecked) =>
+                      handleEmailFilter(value, isChecked)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
 
             <BaseButton
               buttonText={translate("common.apply_button")}
               onClick={handleSave}
-              containerClassName="bg-primary my-2 px-8 py-2"
+              containerClassName="bg-primary my-2 px-8 py-2 hover:bg-buttonHover"
               textClassName="text-white"
             />
           </motion.div>

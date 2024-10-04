@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { tabArrayTypes } from "@/types";
-import AddressDetailsData from "./AddressDetailsData";
-import CustomerDetailsData from "./CustomerDetailsData";
-import ServiceDetailsData from "./ServiceDetailsData";
-import AdditionalDetails from "./AdditionalDetails";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import AddressEditDetails from "../edit/AddressEditDetails";
 import CustomerEditDetails from "../edit/CustomerEditDetails";
 import ServiceEditDetails from "../edit/ServiceEditDetails";
@@ -14,6 +9,11 @@ import { Lead } from "@/types/leads";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import { LeadsCustomerDetailData } from "./leads-customer-details";
+import { LeadsAddressDetailsData } from "./leads-address-details";
+import { LeadServiceDetailsData } from "./leads-service-details";
+import { LeadsAdditionalDetails } from "./leads-additional-details";
+import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 export enum ComponentsType {
   customer,
@@ -65,22 +65,24 @@ const LeadsDetailsData = ({
   };
 
   const componentArray = [
-    <CustomerDetailsData onClick={handleEdit} />,
-    <AddressDetailsData onClick={handleEdit} />,
-    <ServiceDetailsData onClick={handleEdit} />,
-    <AdditionalDetails onClick={handleEdit} />,
+    <LeadsCustomerDetailData onClick={handleEdit} />,
+    <LeadsAddressDetailsData onClick={handleEdit} />,
+    <LeadServiceDetailsData onClick={handleEdit} />,
+    <LeadsAdditionalDetails onClick={handleEdit} />,
   ];
 
   const [renderComponent, setRenderComponent] = useState(componentArray);
 
   const lookup = {
-    [ComponentsType.customer]: <CustomerDetailsData onClick={handleEdit} />,
+    [ComponentsType.customer]: <LeadsCustomerDetailData onClick={handleEdit} />,
     [ComponentsType.customerEdit]: <CustomerEditDetails onClick={handleEdit} />,
-    [ComponentsType.address]: <AddressDetailsData onClick={handleEdit} />,
+    [ComponentsType.address]: <LeadsAddressDetailsData onClick={handleEdit} />,
     [ComponentsType.addressEdit]: <AddressEditDetails onClick={handleEdit} />,
-    [ComponentsType.service]: <ServiceDetailsData onClick={handleEdit} />,
+    [ComponentsType.service]: <LeadServiceDetailsData onClick={handleEdit} />,
     [ComponentsType.serviceEdit]: <ServiceEditDetails onClick={handleEdit} />,
-    [ComponentsType.additional]: <AdditionalDetails onClick={handleEdit} />,
+    [ComponentsType.additional]: (
+      <LeadsAdditionalDetails onClick={handleEdit} />
+    ),
     [ComponentsType.additionalEdit]: (
       <AditionalEditDetails onClick={handleEdit} />
     ),
@@ -200,16 +202,17 @@ const LeadsDetailsData = ({
     <div className="mt-6">
       <div className="xlg:fixed mb-5">
         <div className="flex flex-row flex-wrap xlg:flex-col xlg:flex-nowrap gap-[14px] mb-5">
-          {tabSection.map((item, index) => (
-            <DetailsTab
+          {tabSection?.map((item, index) => (
+            <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}
+              index={index + 1}
               icon={item.icon}
               selectedTab={index}
               key={index}
-              // onScroll={scrollHandler}
               onItemSelected={handleScrollToTop}
             />
           ))}
@@ -224,24 +227,25 @@ const LeadsDetailsData = ({
           name={name}
           heading={heading}
           handleImageSlider={handleImageSlider}
-          className="xlg:w-[247px]"
         />
       </div>
 
-      <div className="w-full break-all flex">
-        <div className={`max-w-[280px] w-full hidden xlg:block`}></div>
+      <div className="grid grid-cols-1 xlg:grid-cols-[320px_1fr] w-full break-all">
+        <div className="max-w-[320px] hidden xlg:block" />
 
-        {loading ? (
-          <div className="flex justify-center items-center w-full">
-            <CustomLoader />
-          </div>
-        ) : (
-          <div className="flex flex-col gap-y-5 w-full">
-            {renderComponent.map((component, index) => (
-              <div key={index}>{component}</div>
-            ))}
-          </div>
-        )}
+        <div className="flex flex-col gap-y-5 w-full overflow-hidden">
+          {loading ? (
+            <div className="flex justify-center items-center w-full">
+              <CustomLoader />
+            </div>
+          ) : (
+            renderComponent?.map((component, index) => (
+              <div key={index} className="w-full">
+                {component}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

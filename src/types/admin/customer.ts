@@ -23,8 +23,8 @@ export interface CustomersAdmin {
   fullName: string;
   isProfileComplete: boolean;
   isEmailVerified: boolean;
-  refID:string;
-  plan:Plan
+  refID: string;
+  plan: Plan;
 }
 export interface Address {
   streetNo: string;

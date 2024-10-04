@@ -667,7 +667,7 @@ const generateServiceCalulationChildren = (
                       containerClass: "mb-1 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className: " !border-[#BFBFBF] focus:!border-primary ",
+                        className: "!border-[#BFBFBF] focus:!border-primary",
                         id: "taxType1",
                         text: "Sub Total",
                         name: "taxType",
@@ -675,18 +675,18 @@ const generateServiceCalulationChildren = (
                           "offers.service_details.detail_headings.Inclusive"
                         )}`,
                         register,
+                        colorClasses: "bg-transparent",
                         checked: isTax && taxType == 0 ? true : false,
                         value: 0,
                         setValue,
                         disabled: !isTax,
-                        // onClick: generateTotal
                       },
                     },
                     {
                       containerClass: "mb-0 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className: " !border-[#BFBFBF] focus:!border-primary ",
+                        className: "!border-[#BFBFBF] focus:!border-primary",
                         id: "taxType2",
                         text: "Sub Total",
                         name: "taxType",
@@ -694,11 +694,11 @@ const generateServiceCalulationChildren = (
                           "offers.service_details.detail_headings.exclusive"
                         )}`,
                         register,
+                        colorClasses: "bg-transparent",
                         checked: isTax && taxType == 1 ? true : false,
                         value: 1,
                         setValue,
                         disabled: !isTax,
-                        // onClick: generateTotal
                       },
                     },
                   ],
@@ -719,12 +719,11 @@ const generateServiceCalulationChildren = (
                 containerClass: "mb-0 px-0 mt-1",
                 field: {
                   type: Field.toggleButton,
-                  className: "!border-[#BFBFBF] focus:!border-primary ",
+                  className: "!border-[#BFBFBF] focus:!border-primary",
                   id: "span-field",
                   name: "isDiscount",
                   checked: false,
                   register,
-                  // onClick: generateTotal
                 },
               },
 
@@ -753,8 +752,6 @@ const generateServiceCalulationChildren = (
                   disabled: !isDiscount,
                   setValue,
                   step: "0.01",
-
-                  // onChange: generateTotal
                 },
               },
               {
@@ -767,7 +764,7 @@ const generateServiceCalulationChildren = (
                       containerClass: "mb-1 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className: " !border-[#BFBFBF] focus:!border-primary",
+                        className: "!border-[#BFBFBF] focus:!border-primary",
                         id: "discountType1",
                         text: "Sub Total",
                         name: "discountType",
@@ -775,18 +772,18 @@ const generateServiceCalulationChildren = (
                           "offers.service_details.detail_headings.percent"
                         )}`,
                         register,
+                        colorClasses: "bg-transparent",
                         checked: isDiscount && discountType == 0 ? true : false,
                         value: 0,
                         setValue,
                         disabled: !isDiscount,
-                        // onClick: generateTotal
                       },
                     },
                     {
                       containerClass: "mb-0 min-w-[100px]",
                       field: {
                         type: Field.radio,
-                        className: " !border-[#BFBFBF] focus:!border-primary ",
+                        className: "!border-[#BFBFBF] focus:!border-primary",
                         id: "discountType2",
                         text: "Sub Total",
                         name: "discountType",
@@ -794,12 +791,11 @@ const generateServiceCalulationChildren = (
                           "offers.service_details.detail_headings.amount"
                         )}`,
                         checked: isDiscount && discountType == 1 ? true : false,
-
+                        colorClasses: "bg-transparent",
                         register,
                         value: 1,
                         setValue,
                         disabled: !isDiscount,
-                        // onClick: generateTotal
                       },
                     },
                   ],
@@ -840,7 +836,7 @@ const generateServiceCalulationChildren = (
 };
 
 export const EditInvoiceDetailsServiceSubmitFormField: GenerateInvoiceServiceActionFormField =
-  (loading, OnClick) => {
+  (loading, onClick) => {
     const { t: translate } = useTranslation();
     const formField: FormField[] = [
       {
@@ -859,7 +855,7 @@ export const EditInvoiceDetailsServiceSubmitFormField: GenerateInvoiceServiceAct
                 inputType: "button",
                 className:
                   "rounded-lg bg-[#fff] px-4 border-[1px] border-[#C7C7C7] min-w-[152px] w-fit h-[50px] text-black hover-bg-none",
-                onClick: OnClick,
+                onClick: onClick,
               },
             },
             {

@@ -1,8 +1,7 @@
-import ContentDetails from "@/components/content/details";
 import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
-
+import { ContentDetails } from "@/components/content/details";
 
 const index = () => {
   return <ContentDetails />;

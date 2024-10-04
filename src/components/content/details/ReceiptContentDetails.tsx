@@ -3,7 +3,6 @@ import AttachmentsFiles from "./AttachmentsFiles";
 import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "./ContentDetailsData";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
-import { useRouter } from "next/router";
 
 const ReceiptContentDetails = ({
   contentDetail,
@@ -12,8 +11,6 @@ const ReceiptContentDetails = ({
   contentDetail: ContentTableRowTypes;
   onClick: (index: number, component: ComponentsType) => void;
 }) => {
-  const router = useRouter();
-
   return (
     <div
       className="rounded-md border-none bg-white w-full h-fit"
@@ -124,7 +121,7 @@ const ReceiptContentDetails = ({
             <span className="text-[#1E1E1E] font-semibold text-sm ">
               {translate("content.details.attachments")}
             </span>
-            {contentDetail?.offerContent?.attachments.length > 0 ? (
+            {contentDetail?.receiptContent?.attachments?.length > 0 ? (
               <div className="mt-5 grid grid-cols-2 xl:grid-cols-3 gap-2">
                 {contentDetail?.receiptContent?.attachments?.map(
                   (item, index) => (

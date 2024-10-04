@@ -52,6 +52,21 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   percentage?: string;
   step?: string;
 }
+export interface QuantityInputProps
+  extends BaseFieldProps<Field.quantityInput> {
+  inputType: "text" | "number";
+  inputLabelValue: string;
+  value?: string;
+  success?: boolean;
+  register: UseFormRegister<FieldValues>;
+  placeholder?: string;
+  disabled?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+  svg?: string;
+  fieldIndex?: number;
+  onChange?: (value?: number) => void;
+  step?: string;
+}
 
 export interface ColorPickerProps extends BaseFieldProps<Field.colorPicker> {
   value?: string;
@@ -118,6 +133,13 @@ export interface OptionType {
   value: string;
   label: string;
 }
+export interface AgentOptionType {
+  value: {
+    picture: string;
+    name: string;
+  };
+  label: { picture: string; name: string };
+}
 
 export interface SelectProps extends BaseFieldProps<Field.select> {
   control?: Control<FieldValues>;
@@ -132,10 +154,10 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   isLocalCustomer?:boolean
   onSearchCustomer?:(value:string) => void
 }
-export interface CustomerSelectProps
-  extends BaseFieldProps<Field.customerSelectField> {
+export interface AgentSelectProps
+  extends BaseFieldProps<Field.agentSelectField> {
   control?: Control<FieldValues>;
-  options: OptionType[];
+  options: AgentOptionType[];
   value?: string;
   svg?: string;
   onItemChange?: (id: string, index?: number) => void;
@@ -162,6 +184,33 @@ export interface SelectBoxProps {
   fieldIndex?: number;
   isLocalCustomer?:boolean
   onSearchCustomer?:(value:string) => void
+}
+export interface CustomLocationInputProps {
+  id: string;
+  setValue: UseFormSetValue<FieldValues>;
+  field: ControllerRenderProps<FieldValues, string>;
+}
+export interface CustomLocationMainInputProps {
+  id: string;
+  name: string;
+  control?: Control<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+}
+
+export interface AgentSelectBoxProps {
+  id: string;
+  options: AgentOptionType[];
+  value: string;
+  trigger?: UseFormTrigger<FieldValues>;
+  field?: ControllerRenderProps<FieldValues, string>;
+  svg?: string;
+  onItemChange?: (id: string, index?: number) => void;
+  onEnterPress?: (text: string) => void;
+  success?: boolean;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+  fieldIndex?: number;
 }
 
 export interface MultiSelectProps extends BaseFieldProps<Field.select> {
@@ -194,6 +243,15 @@ export interface CheckBoxProps extends BaseFieldProps<Field.checkbox> {
   containerClassName?: string;
   textClassName?: string;
   label?: string;
+}
+export interface CustomCheckBoxFieldProps
+  extends BaseFieldProps<Field.customCheckBox> {
+  description: string;
+  register: UseFormRegister<FieldValues>;
+  containerClassName?: string;
+  textClassName?: string;
+  label?: string;
+  checked?: boolean;
 }
 export interface RadioButtonProps extends BaseFieldProps<Field.radio> {
   register: UseFormRegister<FieldValues>;
@@ -234,6 +292,7 @@ export interface ProfileUploadFieldProps
   disabled?: boolean;
   isMailSetting?: boolean;
   isMailField?: boolean;
+  isAgent?: boolean;
 }
 
 // interface for the Image upload
@@ -245,8 +304,16 @@ export interface ImageUploadFieldProps
   index?: number;
   setValue?: UseFormSetValue<FieldValues>;
 }
+export interface CustomFileUploadFieldProps
+  extends BaseFieldProps<Field.customFileUpload> {
+  control?: Control<FieldValues>;
+  onClick?: Function;
+  value?: string;
+  index?: number;
+  setValue?: UseFormSetValue<FieldValues>;
+  attachements: Attachement[];
+}
 
-// Interface for the input field copy
 export interface InputWithCopyProps
   extends BaseFieldProps<Field.inputWithCopy> {
   inputType: "text" | "email" | "number" | "password";
@@ -302,6 +369,89 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   max?: string;
   disable?: boolean;
 }
+export interface CalendarDatePickerProps
+  extends BaseFieldProps<Field.calendarDatePicker> {
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  watch: UseFormWatch<FieldValues>;
+  value?: string;
+  className?: string;
+  svg?: string;
+  dateType?: string;
+  min?: string;
+  max?: string;
+  disable?: boolean;
+  onDateChange?: (name: string, value: string) => void;
+}
+
+export interface ColourSelectionOptions {
+  dotColor: string;
+  value: string;
+}
+export interface ColourSeclectionFieldProps
+  extends BaseFieldProps<Field.colourSelectField> {
+  value?: string;
+  options: string[];
+  containerClassName?: string;
+  control?: Control<FieldValues>; // This should match the type expected by Controller
+  onItemChange?: (id: string, index?: number) => void;
+  trigger?: UseFormTrigger<FieldValues>; // Optional, for triggering validation
+}
+
+export interface remainderOptionType {
+  label: string;
+  value: number;
+}
+export interface RemainderSeclectionFieldProps
+  extends BaseFieldProps<Field.remainderSelectField> {
+  value?: number;
+  options: remainderOptionType[];
+  containerClassName?: string;
+  control?: Control<FieldValues>;
+  onItemChange?: (id: string, index?: number) => void;
+  trigger?: UseFormTrigger<FieldValues>;
+}
+export interface LocationSearchInputFieldProps
+  extends BaseFieldProps<Field.locationSearchInput> {
+  id: string;
+  name: string;
+  // options: OptionType[];
+  // value: string;
+  setValue: UseFormSetValue<FieldValues>;
+  control?: Control<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+  field?: ControllerRenderProps<FieldValues, string>;
+  onItemChange?: (id: string, index?: number) => void;
+  onEnterPress?: (text: string) => void;
+  success?: boolean;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+}
+
+export interface RemainderSelectProps {
+  options: remainderOptionType[];
+  containerClassName?: string;
+  eventClassName?: string;
+  id: string;
+  name: string;
+  value?: number;
+  control?: Control<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+  register?: UseFormRegister<FieldValues>; // Change this to optional if not always needed
+  onChange?: (value: number) => void;
+}
+export interface ColourSelectProps {
+  options: string[];
+  containerClassName?: string;
+  id: string;
+  name: string;
+  value?: string;
+  control?: Control<FieldValues>;
+  trigger?: UseFormTrigger<FieldValues>;
+  register?: UseFormRegister<FieldValues>; // Change this to optional if not always needed
+  onChange?: (value: string) => void;
+}
 
 export interface SpanProps {
   type: Field.span;
@@ -315,6 +465,24 @@ export interface SpanProps {
   onClick?: Function;
   id: string;
   html?: string;
+}
+
+export interface IconLabelProps {
+  type: Field.iconLabel;
+  text?: string | number;
+  id: string;
+  name: string;
+  icon: string;
+  containerClassName?: string;
+  textClassName?: string;
+  iconClassName?: string;
+  isLocation?: boolean;
+  setValue?: UseFormSetValue<FieldValues>;
+}
+
+export interface Location {
+  lat: number | null;
+  lng: number | null;
 }
 
 export interface DivProps {
@@ -371,7 +539,16 @@ export type FieldType =
   | Field.multiSelect
   | Field.addField
   | Field.toggleButton
-  | Field.customerSelectField;
+  | Field.agentSelectField
+  | Field.timePicker
+  | Field.quantityInput
+  | Field.customCheckBox
+  | Field.customFileUpload
+  | Field.iconLabel
+  | Field.calendarDatePicker
+  | Field.colourSelectField
+  | Field.remainderSelectField
+  | Field.locationSearchInput;
 
 export type FieldProps =
   | InputProps
@@ -400,7 +577,16 @@ export type FieldProps =
   | MultiSelectProps
   | AddFieldProps
   | ToggleButtonFormProps
-  | CustomerSelectProps;
+  | AgentSelectProps
+  | TimePickerProps
+  | QuantityInputProps
+  | CustomCheckBoxFieldProps
+  | CustomFileUploadFieldProps
+  | IconLabelProps
+  | CalendarDatePickerProps
+  | ColourSeclectionFieldProps
+  | RemainderSeclectionFieldProps
+  | LocationSearchInputFieldProps;
 
 export interface FormField {
   containerClass?: string;
@@ -413,20 +599,20 @@ export interface FieldComponents {
   colorPicker: React.FC<ColorPickerProps>;
   textArea: React.FC<TextAreaProps>;
   ckEditor: React.FC<CKEditorProps>;
-  // ckEditorBox: React.FC<CKEditorBoxProps>;
   customerInput: React.FC<InputProps>;
-  // creditCardNumberInput: React.FC<CreditCardInputProps>;
   creditCardExpiryDateInput: React.FC<CreditCardExpiryDateInputProps>;
   password: React.FC<PasswordInputProps>;
   select: React.FC<SelectProps>;
   phone: React.FC<PhoneProps>;
   date: React.FC<DatePickerProps>;
   checkbox: React.FC<CheckBoxProps>;
+  customCheckBox: React.FC<CustomCheckBoxFieldProps>;
   radio: React.FC<RadioButtonProps>;
   dragAndDropFileField: React.FC<DragAndDropFileFieldProps>;
   dragAndDropPdfField: React.FC<DragAndDropPdfFieldProps>;
   profileUploadField: React.FC<ProfileUploadFieldProps>;
   imageUploadField: React.FC<ImageUploadFieldProps>;
+  customFileUpload: React.FC<CustomFileUploadFieldProps>;
   span: React.FC<SpanProps>;
   div: React.FC<DivProps>;
   button: React.FC<ButtonProps>;
@@ -434,7 +620,14 @@ export interface FieldComponents {
   link: React.FC<LinkProps>;
   multiSelect: React.FC<MultiSelectProps>;
   toggleButton: React.FC<ToggleButtonFormProps>;
-  customerSelectField: React.FC<CustomerSelectProps>;
+  agentSelectField: React.FC<AgentSelectProps>;
+  timePicker: React.FC<TimePickerProps>;
+  quantityInput: React.FC<QuantityInputProps>;
+  iconLabel: React.FC<IconLabelProps>;
+  calendarDatePicker: React.FC<CalendarDatePickerProps>;
+  colourSelectField: React.FC<ColourSeclectionFieldProps>;
+  remainderSelectField: React.FC<RemainderSeclectionFieldProps>;
+  locationSearchInput: React.FC<LocationSearchInputFieldProps>;
 }
 
 export interface FormProps {
@@ -499,4 +692,19 @@ export interface ToggleButtonFormProps
   className: string;
   checked: boolean;
   onClick?: () => void;
+}
+
+export interface TimePickerProps extends BaseFieldProps<Field.timePicker> {
+  register: UseFormRegister<FieldValues>;
+  value?: string;
+  className?: string;
+  remove?: string;
+  svg?: string;
+  success?: boolean;
+  onRemove?: () => void;
+  dateType?: string;
+  min?: string;
+  max?: string;
+  handleChange: (date: any) => void;
+  placeholder?: string;
 }

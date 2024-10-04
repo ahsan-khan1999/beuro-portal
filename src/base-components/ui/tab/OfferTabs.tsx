@@ -10,16 +10,23 @@ const OfferTabs = ({
   index,
   selectedTab,
   tabType,
+  onItemSelected,
+  onScroll,
 }: OfferTabsSectionTypes) => {
+  // const handleClickScroll = (name: string) => {
+  //   const element = document.getElementById(name);
+  //   if (element) {
+  //     element.setAttribute("data-scroll-target", "true");
+  //     element.scrollIntoView({ behavior: "smooth", block: "start" });
+  //     setTabType(selectedTab);
+  //   } else {
+  //     setTabType(selectedTab);
+  //   }
+  // };
+
   const handleClickScroll = (name: string) => {
-    const element = document.getElementById(name);
-    if (element) {
-      element.setAttribute("data-scroll-target", "true");
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setTabType(selectedTab);
-    } else {
-      setTabType(selectedTab);
-    }
+    onItemSelected && onItemSelected(name);
+    setTabType(selectedTab);
   };
 
   return (

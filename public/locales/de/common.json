@@ -160,6 +160,8 @@
     "file": "Bitte wählen Sie ein gültiges Dateiformat"
   },
   "validationMessages": {
+    "delete_dependency_deny": "Löschen nicht möglich: Das Element hat zugehörige Abhängigkeiten",
+    "unauthorized": "Sie haben keine Erlaubnis",
     "unauthenticated": "Melden Sie sich an oder erstellen Sie ein Konto, um fortzufahren",
     "required": "Dieses Feld ist erforderlich",
     "nonexistent": "nicht existent",
@@ -184,7 +186,7 @@
     "value_min": "{0} Minimum {1} ",
     "employee_creation_limit_reached": "Ihr Plan läuft aus!",
     "offer_already_signed": "Dieses Angebot ist bereits unterzeichnet",
-    "validation_failed": "Überprüfung fehlgeschlagen",
+    "validation_failed": "Überprüfung Gescheitert",
     "mixed": {
       "required": "Dieses Feld ist erforderlich",
       "oneOf": "Passwort muss übereinstimmen ",
@@ -239,7 +241,7 @@
     "cannot_create_recurring_invoice": "Die Erstellung wiederkehrender Rechnungen ist derzeit nicht möglich",
     "oauth_account_already_connected": "Der Benutzer mit diesem Konto ist bereits verbunden",
     "oauth_account_not_connected": "Der Benutzer mit diesem Konto ist nicht verbunden",
-    "oauth_apple_strict_checking_failed": "Die strenge Prüfung der Apple-Authentifizierung ist fehlgeschlagen",
+    "oauth_apple_strict_checking_failed": "Die strenge Prüfung der Apple-Authentifizierung ist Gescheitert",
     "oauth_invalid_code": "Der angegebene Authentifizierungscode ist ungültig",
     "Employee_has_been_created": "Der Mitarbeiter wurde erfolgreich angelegt",
     "Login_details_have_been_emailed_to_them": "Die Zugangsdaten wurden ihnen per E-Mail zugesandt",
@@ -250,6 +252,7 @@
   "sidebar": {
     "customer": {
       "dashboard": "Dashboard",
+      "calendar": "Kalender",
       "customers": "Kunden",
       "leads": {
         "leads": "Anfragen",
@@ -257,6 +260,12 @@
         "InProcess": "In Bearbeitung",
         "close": "Geschlossen",
         "expire": "Abgelaufen"
+      },
+      "appointments": {
+        "appointment": "Ernennungen",
+        "pending": "Entwurf",
+        "completed": "Vollendet",
+        "cancelled": "Abgebrochen"
       },
       "offers": {
         "offers": "Angebote",
@@ -293,6 +302,24 @@
       "payments": "Zahlungen",
       "support_requests": "Support",
       "Settings": "Einstellungen"
+    },
+    "agent": {
+      "dashboard": "Dashboard",
+      "leads": {
+        "leads": "Anfragen",
+        "open": "Offen",
+        "InProcess": "In Bearbeitung",
+        "close": "Geschlossen",
+        "expire": "Abgelaufen"
+      },
+      "appointments": {
+        "appointment": "Termine",
+        "pending": "Entwurf",
+        "completed": "Vollendet",
+        "cancelled": "Abgebrochen"
+      },
+      "settings": "Einstellungen",
+      "contact_supports": "Support"
     }
   },
 
@@ -783,7 +810,7 @@
     },
     "create_invoice_modal": {
       "total_amount": "Gesamtbetrag",
-      "remaining_amount": "VerLeadbender Betrag",
+      "remaining_amount": "verbleibender Betrag",
       "enter_amount": "Betrag eingeben",
       "amount": "Betrag",
       "percentage": "Prozentsatz",
@@ -959,7 +986,8 @@
     },
     "content_created_modal": {
       "main_heading": "Inhalt erfolgreich erstellt",
-      "sub_heading": "Vielen Dank für das Erstellen des Angebots. Wir freuen uns, Sie dabei zu haben.",
+      "sub_heading": "Vielen Dank für das Erstellen des Inhalts. Wir freuen uns, Sie dabei zu haben.",
+      "update_sub_heading": "Vielen Dank für das Aktualisieren des Inhalts. Wir freuen uns, Sie dabei zu haben.",
       "button": "Fertig"
     }
   },
@@ -968,6 +996,8 @@
     "main_heading": "Anfragen",
     "add_button": "Neu hinzufügen",
     "side_images_heading": "Bilder",
+    "created": "Erstellt",
+    "not_created": "Nicht Erstellt",
     "table_functions": {
       "open": "Offen",
       "inProcess": "In Bearbeitung",
@@ -978,17 +1008,20 @@
       "Open": "Offen",
       "InProcess": "In Bearbeitung",
       "Close": "Geschlossen",
-      "Expired": "Abgelaufen"
+      "Expired": "Abgelaufen",
+      "Appointment": "Termin"
     },
     "table_headings": {
       "id": "ID",
       "name": "Name",
+      "customer": "Kunde",
       "email": "E-Mail",
       "phone": "Telefon",
       "desire_date": "Wunschdatum",
       "creation_date": "Erstelldatum",
       "location": "Standort",
       "status": "Status",
+      "appointment": "Termin",
       "images": "Bilder",
       "note": "Notizen",
       "edit": "Bearbeiten"
@@ -996,6 +1029,7 @@
     "card_content": {
       "heading": "Anfragen details",
       "create_button": "Angebot erstellen",
+      "lead_create": "Blei erstellen",
       "lead_id": "Anfragen-ID",
       "status": "Status",
       "created_date": "Erstelldatum",
@@ -1027,7 +1061,8 @@
       "country": "Land",
       "cancel_button": "Abbrechen",
       "save_changes_button": "Änderungen speichern",
-      "next_button": "Weiter"
+      "next_button": "Weiter",
+      "address": "Adresse"
     },
     "placeholders": {
       "name": "Bitte geben Sie Ihren Namen ein",
@@ -1088,6 +1123,65 @@
       "without_images": "Ohne Bilder fortfahren"
     }
   },
+  "appointments": {
+    "view_reports_btn": "Berichte anzeigen",
+    "reschedule_btn": "Umplanen",
+    "sub_report": "Bericht einreichen",
+    "create_appointments": "Termin erstellen",
+    "view_appointments_btn": "Termine ansehen",
+    "schedule_appointment": "Termin vereinbaren",
+    "reschedule_appointment": "Termin verschieben",
+    "detail_heading": "Termin Details",
+    "details": "Details",
+    "appointment": "Termin",
+    "table_headings": {
+      "id": "ID",
+      "lead_id": "Lead ID",
+      "customer": "Kunde",
+      "company_name": "Firmenname",
+      "date": "Datum",
+      "time": "Zeit",
+      "agent": "Agent",
+      "status": "Status",
+      "offer_status": "Angebotsstatus",
+      "action": "Aktion",
+      "canton": "Kanton"
+    },
+    "appointment_status": {
+      "Pending": "Entwurf",
+      "Completed": "Vollendet",
+      "Cancelled": "Abgebrochen"
+    },
+    "successs_modal": {
+      "heading": "Termin erfolgreich erstellt",
+      "sub_heading": "Vielen Dank für die Erstellung von Appointments, wir freuen uns, Sie zu haben."
+    },
+    "appointments_field_label": {
+      "lead_id": "Lead ID",
+      "enter_date": "Datum eingeben",
+      "enter_time": "Zeit auswählen",
+      "select_agent": "Agent auswählen"
+    },
+    "detail_data": {
+      "assign_agent": "Agent zuweisen",
+      "lead_id": "Lead ID",
+      "appointment_id": "Termin ID",
+      "status": "Status",
+      "date": "Datum",
+      "time": "Zeit",
+      "no_data_found": "Keine Berichte eingereicht",
+      "no_report_found": "Kein Bericht gefunden",
+      "created_by": "Erstellt von"
+    },
+    "report_detail": {
+      "contact_tab": "Kontakt Details",
+      "contact_address_detail": "Kontakt und Adresse",
+      "house_detail": "Haus Details",
+      "service_detail": "Dienstleistung/Produkt Details",
+      "additional_detail": "Zusätzliche Details"
+    }
+  },
+
   "common": {
     "modals": {
       "contract_updating_description": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie da sind.",
@@ -1158,12 +1252,45 @@
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum",
-      "success_signed_offer": "Unterschrift eingerichtetde"
+      "success_signed_offer": "Unterschrift eingerichtetde",
+      "report_created": "Bericht erfolgreich erstellt!",
+      "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
-    "please_choose": "Bitte wählen Sie",
     "add_new_offer": "Neues Angebot hinzufügen",
     "add_new_invoice": "Neue Rechnung hinzufügen",
     "no_customer_found": "Kein Kunde gefunden",
+    "paid_invoice": "Rechnung wurde erfolgreich als bezahlt markiert",
+    "paid_invoice_date": "Wählen Sie das Zahlungsdatum der Rechnung",
+    "enter_location": "Ort eingeben",
+    "pay": "Bezahlen",
+    "paid": "Bezahlt",
+    "Paid": "Bezahlt",
+    "unPaid": "Unbezahlt",
+    "change_payment": "Zahlungsstatus ändern",
+    "are_sure_payment_status": "Sind Sie sicher, dass Sie die Rechnung als markieren möchten",
+    "notifications": "Benachrichtigungen",
+    "remaind_me": "Erinnere mich daran",
+    "starts_in": "Beginnt in",
+    "minute": "minute",
+    "_at": "unter",
+    "select_canton": "Kanton auswählen",
+    "before": "vor",
+    "hour": "Stunde",
+    "and": "und",
+    "hours": "Hours",
+    "minutes": "Protokoll",
+    "text_area_msg": "Geben Sie hier Ihre Nachricht ein",
+    "street_no_placeholder": "Straße Nr.",
+    "post_code_placeholder": "Postleitzahl",
+    "country_placeholder": "Land",
+    "logout": "Abmeldung",
+    "please_choose": "Bitte wählen Sie",
+    "yes": "Ja",
+    "no": "Nein",
+    "upload_button": "Hochladen",
+    "item": "Artikel",
+    "create_report_btn": "Bericht erstellen",
+    "schedule_btn": "Termin vereinbaren",
     "details": "Einzelheiten",
     "follow_up_completed": "Bitte kontaktieren Sie den Kunden nach 10 Minuten.",
     "invoice_cards": {
@@ -1229,6 +1356,7 @@
     "share": "Teilen Sie",
     "lead": "Anfragen",
     "add": "hinzufügen",
+    "added": "Hinzugefügt",
     "upload_link": "Laden Sie Ihren Link hier hoch",
     "time": "Zeit",
     "at": "Um",
@@ -1323,6 +1451,7 @@
     "add_note_modal": {
       "heading": "Notizen hinzufügen",
       "label": "Notiz Titel",
+      "description_title": "Hinweis Beschreibung",
       "button": "Speichern"
     },
     "images_modal": {
@@ -1530,7 +1659,6 @@
       "back_button": "Zurück",
       "next_button": "Weiter"
     },
-
     "additional_details": {
       "main_heading": "Zusätzliche Details",
       "edit_button": "Details Bearbeiten",
@@ -1571,7 +1699,11 @@
       "street": "Bitte geben Sie die Strasse+Nr ein",
       "post_code": "Bitte geben Sie Ihre Plz + Ort ein",
       "address_description": "",
-      "service_title": "Bitte geben Sie Ihren Dienstnamen ein"
+      "service_title": "Bitte geben Sie Ihren Dienstnamen ein",
+      "phone_placeholder": "Bitte geben Sie Ihre Telefonnummer ein.",
+      "mobile_placeholder": "Bitte geben Sie Ihre Mobilnummer ein.",
+      "country_placeholder": "Bitte geben Sie Ihr Land ein",
+      "company_placeholder": "Bitte geben Sie Ihren Firmennamen ein"
     }
   },
   "pdf_preview": {
@@ -1675,6 +1807,7 @@
         "subscription_date": "Abonnementdatum",
         "status": "Status",
         "company_logo": "Firmenlogo",
+        "appointment": "Termin-Modul",
         "customer_status": {
           "active": "Aktiv",
           "block": "Blockieren",
@@ -1962,6 +2095,7 @@
   },
   "dashboard_detail": {
     "main_heading": "Kunden-Dashboard",
+    "agent_dashboard": "Agenten-Dashboard",
     "overview": "Überblick",
     "sales_heading": "Verkaufsbericht",
     "plans": "Pläne",
@@ -2035,6 +2169,7 @@
     "offer_number": "Angebot Nr",
     "offer_date": "Erstell Datum",
     "created_by": "Erstellt Von",
+    "name": "Name",
     "email": "E-Mail",
     "phone": "Telefon",
     "mobile": "Handynummer",
@@ -2114,7 +2249,7 @@
       "email": "E-Mail",
       "send": "Senden",
       "draft": "Ausstehend",
-      "failed": "Fehlgeschlagen",
+      "failed": "Gescheitert",
       "pending": "Ausstehend",
       "overdue": "Überfällig",
       "paid": "Bezahlt",
@@ -2202,12 +2337,10 @@
     "Online": "Online",
     "Twint": "Twint"
   },
-
   "customer_status": {
-    "unBlock": "unBlock",
-    "block": "block"
+    "unBlock": "Entsperren",
+    "block": "Block"
   },
-
   "typeList": {
     "All": "Alle",
     "Individual": "Einzelne",
@@ -2217,12 +2350,13 @@
     "Post": "Gesendet",
     "Pending": "Ausstehend",
     "Sent": "Gesendet",
-    "Failed": "Gescheitert"
+    "Failed": "Gescheitert",
+    "opend": "Geöffnet"
   },
   "mail_tracker_status": {
     "pending": "Ausstehend",
     "opend": "Geöffnet",
-    "failed": "Fehlgeschlagen"
+    "failed": "Gescheitert"
   },
   "support_request_status": {
     "pending": "Ausstehend",
@@ -2318,5 +2452,156 @@
     "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten.",
     "warm_regards": "Mit freundlichen Grüßen",
     "team": "Das Buro-Team"
+  },
+  "agent": {
+    "main_heading": "Terminberichte einreichen",
+    "contact_detail_heading": "Kontakt Details",
+    "report_tabs_heading": {
+      "contact": "Kontakt und Adresse",
+      "house": "Details zum Haus",
+      "services": "Dienstleistungen",
+      "additional": "Zusätzliche Informationen"
+    },
+    "report_contact_fields": {
+      "name": "Name",
+      "email": "Email",
+      "telefon": "Telefon",
+      "move_out_addres_heading": "Auszugsadresse",
+      "street_no": "Str + Nr.",
+      "post_code": "PLZ + Ort",
+      "floor": "Stockwerk",
+      "room": "Zimmer",
+      "lift": "Lift",
+      "parking_permit": "Parkbewilligung",
+      "collection_address_heading": "Einzugsadresse"
+    },
+    "house_detail_fields": {
+      "item": "Artikel",
+      "qty": "Qty",
+      "living_room_heading": "Wohnzimmer(WZ))",
+      "sofa": "Sofa",
+      "puit": "Pult",
+      "tv_table": "Fernsehtisch",
+      "sessel": "Sessel",
+      "tisch": "Tisch",
+      "regal": "Regal",
+      "l_sofa": "L Sofa",
+      "fernseher": "Fernseher",
+      "deco_gross": "Deco gross",
+      "box": "Box",
+      "remark": "Bemerkung",
+      "kuche": "Küche",
+      "backofen": "Backofen",
+      "herd": "Herd",
+      "washchmashine": "Waschmaschine",
+      "kuhlschrank": "Kühlschrank",
+      "mikrowelle": "Mikrowelle",
+      "Tumbler": "Tumbler",
+      "tiefkuhler": "Tiefkühler",
+      "kaffeemaschine": "Kaffeemaschine",
+      "bedroom_heading": "Schlafzimmer(SZ)",
+      "bett": "Bett",
+      "schrank_klein": "Schrank klein",
+      "schminkanlage": "Schminkanlage",
+      "pult": "Pult",
+      "doppeltbett": "Doppelbett",
+      "schrank_mittel": "Schrank Mittel",
+      "nachttisch": "Nachttisch",
+      "pflanzen": "Pflanzen",
+      "schrank_gross": "Schrank Gross",
+      "zimmer_heading": "Zimmer(Z)",
+      "balcony_heading": "Balkon/Terrasse/Garten (B/T/G)",
+      "grill": "Grill",
+      "topfe": "Töpfe",
+      "rasenmaher": "Rasenmäher",
+      "stuhle": "Stühle",
+      "schirm": "Schirm",
+      "krauterbeet": "Kräuterbeet",
+      "keller_heading": "Keller/Estrich (K/E)",
+      "entsorgungen": "Entsorgungen",
+      "mobel": "Möbel",
+      "fahrrad": "Fahrrad",
+      "boxen": "Boxen",
+      "kinderwagen": "Kinderwagen",
+      "speziell": "Speziell",
+      "aquarium": "Aquarium",
+      "piano": "Piano",
+      "lampe": "Lampe",
+      "elektronisches": "Elektronisches",
+      "pool": "Pool",
+      "sportgerat": "Sportgerät",
+      "tressor": "Tressor"
+    },
+    "service_detail_fields": {
+      "heading": "Dienstleistung/Produkt Details",
+      "service": "Dienst",
+      "existng_service": "Bestehender Dienst",
+      "new_service": "Neuer Dienst",
+      "description": "Beschreibung",
+      "count": "Anzahl",
+      "unit": "Einheit",
+      "price": "Preis",
+      "discount": "Rabatt",
+      "total": "Gesamt"
+    },
+    "additional_details_fields": {
+      "heading": "Details Offerte",
+      "bemerkung": "Bemerkung",
+      "mitarbeiter": "Mitarbeiter",
+      "leiferwagen": "Lieferwage",
+      "stunden": "Stunden",
+      "reingung_mit": "Reinigung mit Abgabegarantiee",
+      "besenrein": "Besenrein",
+      "preis_chf": "Preis CHF",
+      "hinweis": "Hinweis und Angaben",
+      "images": "Upload Images"
+    },
+    "employee_type": {
+      "CEO": "CEO",
+      "Administration": "Verwaltung",
+      "HRManager": "HR Manager",
+      "Agent": "Agent",
+      "FinanceManager": "Finance Manager",
+      "OperationsManager": "Operations Manager",
+      "ITManager": "IT Manager",
+      "MarketingManager": "Marketing Manager",
+      "SalesManager": "Sales Manager",
+      "ProjectManager": "Projekt Manager",
+      "BusinessAnalyst": "Business Analyst",
+      "CustomerSupportRepresentative": "Kunden Support Vertreter",
+      "AdministrativeAssistant": "Verwaltungs Assistentin",
+      "Intern": "Intern"
+    }
+  },
+  "calendar": {
+    "main_heading": "Kalender",
+    "add_task": "Aufgabe hinzufügen",
+    "today": "Heute",
+    "edit": "bearbeiten",
+    "select_date": "Datum auswählen",
+    "select_color": "Farbe auswählen",
+    "remainder": "Restbetrag",
+    "address": "Adresse",
+    "location": "Standort",
+    "current_location": "Aktueller Standort",
+    "all_day_task": "Ganztägig",
+    "all_day": "Ganztägig",
+    "all_day_event": "Ganztägige Veranstaltung",
+    "is_contract_task_des": "Möchten Sie eine Aufgabe erstellen?",
+    "tab_headings": {
+      "day": "Tag",
+      "week": "Woche",
+      "month": "Monat",
+      "year": "Jahr"
+    },
+    "days": {
+      "Monday": "Montag",
+      "Tuesday": "Dienstag",
+      "Wednesday": "Mittwoch",
+      "Thursday": "Donnerstag",
+      "Friday": "Freitag",
+      "Saturday": "Samstag",
+      "Sunday": "Sonntag"
+    }
   }
 }

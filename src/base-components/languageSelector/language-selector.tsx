@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import { useLanguageSeleclor } from "@/hooks/languageSelector/useLanguageSelector";
 import { combineClasses } from "@/utils/utility";
+import { useEffect, useState } from "react";
 
 export const LanguageSelector = ({ className }: LanguageName) => {
   const {
@@ -22,24 +23,43 @@ export const LanguageSelector = ({ className }: LanguageName) => {
   };
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
+  const [isXMini, setIsXMini] = useState(false);
 
   const containerClasses = combineClasses(
     "relative flex items-center justify-center",
     className
   );
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 730px)"); // xMini breakpoint is 640px
+    setIsXMini(mediaQuery.matches);
+
+    const handleResize = (event: MediaQueryListEvent) => {
+      setIsXMini(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleResize);
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
+
   return (
-    <div className={containerClasses} ref={ref}>
+    <div
+      className={containerClasses}
+      ref={ref}
+      onClick={(e) => e.stopPropagation()}
+    >
       <FlagIcon countryCode={selectedLanguage?.code} />
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center ml-2 text-dark font-medium"
         ref={dropdownRef}
       >
-        {selectedLanguage?.name}
+        {isXMini && selectedLanguage?.name}
 
         <svg
-          className={`ml-2  ${isOpen ? "rotate-180" : ""} `}
+          className={`xMini:ml-2 ${isOpen ? "rotate-180" : ""} `}
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="11"
@@ -57,7 +77,7 @@ export const LanguageSelector = ({ className }: LanguageName) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute flex flex-col top-[42px] right-0 text-dark bg-white  rounded-lg  p-4 w-[241px] z-[999999] shadow-languagesDropDown"
+            className={`absolute flex flex-col top-[42px] right-0 text-dark bg-white rounded-lg p-4 xMini:w-[241px] z-[999999] shadow-languagesDropDown`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -83,10 +103,16 @@ export const LanguageSelector = ({ className }: LanguageName) => {
                 >
                   <div className="flex items-center">
                     <FlagIcon countryCode={language.code} />
-                    <span className="truncate ml-3">{language.name}</span>
+                    {isXMini && (
+                      <span className="truncate ml-3">{language.name}</span>
+                    )}
                   </div>
                   {selectedLanguage?.code === language.code && (
-                    <Image src={checkIcon} alt="Check Icon Selected" />
+                    <Image
+                      src={checkIcon}
+                      alt="Check Icon Selected"
+                      className="hidden xMini:block"
+                    />
                   )}
                 </button>
               );

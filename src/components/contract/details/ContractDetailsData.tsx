@@ -143,21 +143,6 @@ const ContractDetailsData = ({
     },
   ];
 
-  // const scrollHandler = (index: number) => {
-  //   if (index === 0) {
-  //     window.scrollTo({ behavior: "smooth", top: 0 });
-  //   }
-  //   if (index === 1) {
-  //     window.scrollTo({ behavior: "smooth", top: 590 });
-  //   }
-  //   if (index === 2) {
-  //     window.scrollTo({ behavior: "smooth", top: 970 });
-  //   }
-  //   if (index === 3) {
-  //     window.scrollTo({ behavior: "smooth", top: 1450 });
-  //   }
-  // };
-
   const handleScrollToTop = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     const offset = 380;
@@ -196,7 +181,7 @@ const ContractDetailsData = ({
     <>
       <div className="2xl:fixed mb-5">
         <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0">
-          {tabSection.map((item, index) => (
+          {tabSection?.map((item, index) => (
             <DetailsTab
               isSelected={tabType === index}
               setTabType={setTabType}
@@ -204,7 +189,6 @@ const ContractDetailsData = ({
               name={item.name}
               icon={item.icon}
               selectedTab={index}
-              // onScroll={scrollHandler}
               onItemSelected={handleScrollToTop}
               key={index}
             />
@@ -222,6 +206,7 @@ const ContractDetailsData = ({
             heading={heading}
             handleImageSlider={handleImageSlider}
             className="2xl:w-[247px]"
+            isOffer={true}
           />
         </div>
       </div>

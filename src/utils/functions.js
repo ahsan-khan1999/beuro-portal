@@ -152,11 +152,43 @@ export function formatDateString(dateString) {
   const year = date.getUTCFullYear();
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
   const day = String(date.getUTCDate()).padStart(2, "0");
-  // const hours = String(date.getUTCHours()).padStart(2, '0');
-  // const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-  // const seconds = String(date.getUTCSeconds()).padStart(2, '0');
-
   return `${day}/${month}/${year}`;
+}
+
+import { useState, useEffect } from "react";
+
+export function useIsSmallScreen() {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 1100);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  return isSmallScreen;
+}
+
+export function useIsSmallWeekScreen() {
+  const [isSmallWeekScreen, setIsSmallWeekScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallWeekScreen(window.innerWidth < 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  return isSmallWeekScreen;
 }
 
 export function formatDateToCustomString(dateString, ShowUTC = true) {

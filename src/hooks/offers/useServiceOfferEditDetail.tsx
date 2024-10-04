@@ -184,7 +184,6 @@ export const useServiceOfferEditDetail = ({
       setValue("discountAmount", prevDisAmount);
     }
 
-    // Calculate grand total after applying discount
     const discountedTotal = totalPrices - discount;
 
     let taxAmount = 0;
@@ -221,13 +220,6 @@ export const useServiceOfferEditDetail = ({
 
   useMemo(() => {
     if (offerDetails.id) {
-      // const tax = calculateTax(offerDetails?.subTotal, offerDetails?.taxAmount )
-      // setTotal({
-      //   taxAmount: tax,
-      //   subTotal: offerDetails.subTotal,
-      //   grandTotal: offerDetails.total,
-      // });
-
       reset({
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [
           {
@@ -250,7 +242,33 @@ export const useServiceOfferEditDetail = ({
         taxAmount: offerDetails?.taxAmount || 0,
       });
     }
-    // generateGrandTotal();
+  }, [offerDetails.id]);
+
+
+  useMemo(() => {
+    if (offerDetails.id) {
+      reset({
+        serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [
+          {
+            serviceTitle: "",
+            price: "",
+            unit: "",
+            count: "",
+            description: "",
+            totalPrice: "",
+            serviceType: "Existing Service",
+            discount: 0,
+          },
+        ],
+        isTax: offerDetails?.isTax,
+        isDiscount: offerDetails?.isDiscount,
+        discountType: staticEnums["DiscountType"][offerDetails?.discountType],
+        taxType: staticEnums["TaxType"][offerDetails?.taxType] || 0,
+        discountAmount: offerDetails?.discountAmount || "",
+        discountDescription: offerDetails?.discountDescription,
+        taxAmount: offerDetails?.taxAmount || 0,
+      });
+    }
   }, [offerDetails.id]);
 
   const {
@@ -335,9 +353,6 @@ export const useServiceOfferEditDetail = ({
     setServiceType((prev) => {
       const newlist = [...prev];
       newlist.splice(index, 1);
-
-      // newlist[index] =
-      //   data?.serviceDetail[index]?.serviceType === "New Service" ? 0 : 1;
 
       return newlist;
     });

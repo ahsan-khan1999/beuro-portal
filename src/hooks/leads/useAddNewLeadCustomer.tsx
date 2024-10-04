@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { AddNewCustomerLeadFormField } from "@/components/leads/fields/Add-customer-lead-fields";
 import { generateAddNewLeadCustomerDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   readCustomer,
   readCustomerDetail,
@@ -81,14 +81,17 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
   useEffect(() => {
     if (leadDetails?.id) {
       reset({
-        type: leadDetails.type,
         fullName: leadDetails.customerDetail?.fullName,
+        type: "Existing Customer",
         customer: leadDetails.customerID,
         customerID: leadDetails.customerID,
-        customerType: getKeyByValue(
-          staticEnums["CustomerType"],
-          leadDetails.customerDetail?.customerType
-        ),
+        customerType:
+          leadDetails?.id === "convert"
+            ? leadDetails.customerDetail?.customerType
+            : getKeyByValue(
+                staticEnums["CustomerType"],
+                leadDetails.customerDetail?.customerType
+              ),
         email: leadDetails.customerDetail?.email,
         phoneNumber: leadDetails.customerDetail?.phoneNumber,
         mobileNumber: leadDetails.customerDetail?.mobileNumber,
@@ -100,6 +103,44 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       setValue("type", "New Customer");
     }
   }, [leadDetails?.id]);
+
+  useMemo(() => {
+    if (type === "New Customer") {
+      reset({
+        fullName: null,
+        type: "New Customer",
+        customer: null,
+        // customerID: "",
+        customerType: null,
+        email: null,
+        phoneNumber: null,
+        mobileNumber: null,
+        address: null,
+        companyName: "",
+        gender: null,
+      });
+    } else if (type === "Existing Customer" && leadDetails?.id) {
+      reset({
+        fullName: leadDetails.customerDetail?.fullName,
+        type: "Existing Customer",
+        customer: leadDetails.customerID,
+        customerID: leadDetails.customerID,
+        customerType:
+          leadDetails?.id === "convert"
+            ? leadDetails.customerDetail?.customerType
+            : getKeyByValue(
+                staticEnums["CustomerType"],
+                leadDetails.customerDetail?.customerType
+              ),
+        email: leadDetails.customerDetail?.email,
+        phoneNumber: leadDetails.customerDetail?.phoneNumber,
+        mobileNumber: leadDetails.customerDetail?.mobileNumber,
+        address: leadDetails?.customerDetail?.address,
+        companyName: leadDetails?.customerDetail?.companyName,
+        gender: staticEnums["Gender"][leadDetails?.customerDetail?.gender],
+      });
+    }
+  }, [type]);
 
   const fields = AddNewCustomerLeadFormField(
     register,
@@ -123,11 +164,20 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
       let apiData: any = {
         ...data,
         step: 1,
-        leadId: leadDetails?.id,
+        leadId: leadDetails?.id === "convert" ? null : leadDetails?.id,
         stage: ComponentsType.addressAdd,
       };
-      if (leadDetails?.customerID)
-        apiData = { ...apiData, customerID: data?.customerID };
+
+      // Remove `customerID` if the type is "New Customer"
+      if (type === "New Customer") {
+        delete apiData.customerID;
+      } else {
+        // Include customerID from leadDetails if it exists
+        if (leadDetails?.customerID) {
+          apiData.customerID = leadDetails?.customerID;
+        }
+      }
+
       const res = await dispatch(
         createLead({ data: apiData, router, setError, translate })
       );
@@ -148,6 +198,7 @@ export const useAddNewLeadCustomer = (onHandleNext: Function) => {
     handleSubmit,
     errors,
     error,
+    router,
     translate,
   };
 };

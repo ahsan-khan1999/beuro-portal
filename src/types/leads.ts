@@ -3,13 +3,12 @@ import { Customers } from "./customer";
 import { User } from ".";
 import { ContentTableRowTypes } from "./content";
 
-// Leads Table
 export interface Lead {
   id: string;
   refID: string;
   customerDetail: Customers;
   lead: CustomerLeadDetail;
-  leadStatus: "Open" | "InProcess" | "Close" | "Expired";
+  leadStatus: "Open" | "InProcess" | "Close" | "Expired" | "Appointment";
   customerID: string;
   images: string[];
   createdAt: string;
@@ -28,6 +27,11 @@ export interface Lead {
   createdBy: User;
   isNoteCreated: boolean;
   isImageAdded: boolean;
+  isAppointmentCreated: boolean;
+  appointment: {
+    id: string;
+    isReportSubmitted: boolean;
+  };
 }
 interface CustomerDetails {
   Customer: Customers;
@@ -51,6 +55,10 @@ export interface CustomerAddress {
   postalCode: string;
   description: string;
   label: string;
+  floor?: number;
+  room?: number;
+  lift?: boolean;
+  parkingPermit?: boolean;
 }
 
 export interface LeadService {

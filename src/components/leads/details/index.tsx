@@ -1,8 +1,8 @@
 import { Layout } from "@/layout";
 import React from "react";
-import LeadsDetailsCardData from "../LeadsDetailsCardData";
 import LeadsDetailsData from "./LeadsDetailsData";
 import useLeadDetail from "@/hooks/leads/useLeadDetail";
+import LeadsDetailsCardData from "./LeadsDetailsCardData";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const LeadsDetails = () => {
@@ -16,6 +16,8 @@ const LeadsDetails = () => {
     defaultUpdateModal,
     handleUploadImages,
     shareImgModal,
+    handleNotes,
+    handleScheduleAppointments,
   } = useLeadDetail();
 
   return (
@@ -29,6 +31,9 @@ const LeadsDetails = () => {
               leadDeleteHandler={leadDeleteHandler}
               leadDetails={leadDetails}
               onStatusUpdate={handleStatusUpdate}
+              onCreateAppointment={handleScheduleAppointments}
+              handleNotes={handleNotes}
+              handleImageUpload={handleUploadImages}
             />
           </div>
           <div className="xlg:mt-[330px] w-full xlg:block mb-10">

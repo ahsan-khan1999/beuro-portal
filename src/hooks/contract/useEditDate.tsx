@@ -59,6 +59,7 @@ export const useEditDate = (
     control,
     name: "date",
   });
+
   useEffect(() => {
     setValue(
       "date",
@@ -72,6 +73,7 @@ export const useEditDate = (
     );
     trigger("time");
   }, []);
+
   const fields = AddDateFormFieldContract(
     register,
     append,

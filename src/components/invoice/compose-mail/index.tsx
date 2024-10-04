@@ -11,7 +11,7 @@ const InvoiceEmail = () => {
         <MailDetailsCard />
       </InvoiceCardLayout>
 
-      <div className="flex mt-[12px] mb-[18px]">
+      <div className="flex mt-5 mb-[18px]">
         <ComposeMail />
       </div>
     </Layout>

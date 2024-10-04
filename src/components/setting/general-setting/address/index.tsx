@@ -84,7 +84,10 @@ export const AddressDetailCard = ({
           </div>
         </div>
       ) : (
-        <NoDataEmptyState />
+        <NoDataEmptyState
+          containerClassName="xMini:py-[153px] w-full flex items-center justify-center"
+          className="py-5 px-3 xMini:py-10 xMini:px-6 w-[531px]"
+        />
       )}
     </div>
   );

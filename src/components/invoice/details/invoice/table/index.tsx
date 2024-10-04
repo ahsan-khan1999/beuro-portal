@@ -11,6 +11,7 @@ export default function InvoiceDetailsTable({
   handleInvoiceStatusUpdate,
   handleInvoiceEdit,
   handleRecurringInvoiceEdit,
+  onPaymentStatusChange,
 }: InvoiceDetailsTableProps) {
   return (
     <TableCardLayout>
@@ -22,6 +23,7 @@ export default function InvoiceDetailsTable({
           handlePaymentStatusUpdate={handlePaymentStatusUpdate}
           handleInvoiceEdit={handleInvoiceEdit}
           handleRecurringInvoiceEdit={handleRecurringInvoiceEdit}
+          onPaymentStatusChange={onPaymentStatusChange}
         />
       </TableLayout>
     </TableCardLayout>

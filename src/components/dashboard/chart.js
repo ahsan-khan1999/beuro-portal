@@ -46,12 +46,13 @@ const PieChart = ({ data }) => {
 
       <div className="border-t border-[#000] border-opacity-10 w-full">
         {!data ||
-        !data.datasets ||
-        data.datasets.length === 0 ||
-        data.datasets[0].data.length === 0 ? (
+        !data?.datasets ||
+        data?.datasets?.length === 0 ||
+        data?.datasets[0]?.data?.length === 0 ? (
           <NoDataEmptyState
-            className="w-[90%] mx-auto my-3"
-            containerClassName="py-0"
+            className="my-3 w-full"
+            imgClassName="w-[120px] h-[112px]"
+            containerClassName="px-6"
           />
         ) : (
           <div className="flex justify-center items-center h-[340px] py-5">

@@ -1,12 +1,12 @@
 import React from "react";
 import TableLayout from "@/layout/TableLayout";
 import { Pagination } from "@/base-components/ui/pagination/pagination";
-import TableFunctions from "./table/TableFunctions";
-import TableRows from "./table/TableRows";
-import TableHeadings from "./table/TableHeadings";
 import useLeads from "@/hooks/leads/useLeads";
 import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
+import { LeadsTableRows } from "./table/leads-table-rows";
+import { LeadsTableFunctions } from "./table/leads-table-functions";
+import { LeadsTableHeadings } from "./table/leads-table-headings";
 
 export default function Leads() {
   const {
@@ -26,30 +26,34 @@ export default function Leads() {
     currentPage,
     handleLeadStatusUpdate,
     totalCount,
+    handleScheduleAppointments,
+    shareImgModal,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
-    <TableRows
+    <LeadsTableRows
       dataToAdd={currentPageRows}
       handleAddNote={handleNotes}
       handleImageUpload={handleImageUpload}
       onStatusChange={handleLeadStatusUpdate}
+      onAppointment={handleScheduleAppointments}
+      onShareImages={shareImgModal}
+      isAgent={false}
     />,
-    // currentPageRows.length > 0,
     totalCount !== 0,
     isLoading
   );
 
   return (
     <>
-      <TableFunctions
+      <LeadsTableFunctions
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
       <TableCardLayout>
         <TableLayout>
-          <TableHeadings />
+          <LeadsTableHeadings />
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>

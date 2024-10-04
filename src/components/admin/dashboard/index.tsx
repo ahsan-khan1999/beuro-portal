@@ -122,17 +122,12 @@ const AdminDashboard = () => {
         tension: 0.4,
         borderColor: "#4A13E7",
         backgroundColor: "blue",
-        // borderColor: Utils.CHART_COLORS.red,
-        // backgroundColor: Utils.CHART_COLORS.red,
       },
       {
         label: "Dataset 2",
         data: [15, 25, 15, 45, 35, 45, 25, 45, 55, 35, 55, 65],
         tension: 0.4,
         borderColor: "#FE9244",
-
-        // borderColor: Utils.CHART_COLORS.blue,
-        // backgroundColor: Utils.CHART_COLORS.blue,
       },
     ],
   };
@@ -186,7 +181,7 @@ const AdminDashboard = () => {
             handleFilterChange={handleFilterChange}
           />
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-5">
-            {dashboardCards.map((item, index) => {
+            {dashboardCards?.map((item, index) => {
               return (
                 <DashboardCard
                   key={index}

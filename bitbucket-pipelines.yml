@@ -1,119 +1,191 @@
-image: node:18.12.1
+image: node:20.15.1
 
+definitions:
+  caches:
+    nextcache: .next/cache
 pipelines:
-  default:
-    - parallel:
-        - step:
-            name: Build and Test
-            caches:
-              - node
-            script:
-              - npm install
-              # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
-              # - npm test
-              - ls
-              -  npm run build
-        - step:
-            name: Lint the node package
-            script:
-              # Run your linter of choice here
-              # - npm run lint
-              - echo "Linting is disabled for now"
-            caches:
-              - node
   branches:
+    # Staging Branch Pipeline
     staging:
       - parallel:
           - step:
               name: Build and Test
               caches:
                 - node
+                - nextcache
               script:
-                - git submodule update --init --recursive
+                - export NEXT_PUBLIC_API_DOMAIN="$STAGING_API_DOMAIN"
                 - npm install
-                # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
-                # - npm test
-                - ls
                 - npm run build
-                - ls
               artifacts:
-                - build/**
-                # - deploy.sh
+                - .next/**
+                - public/**
           - step:
-              name: Security Scan
+              name: TruffleHog Secret Scan
+              services:
+                - docker
               script:
-                # Run a security scan for sensitive data.
-                # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-                - pipe: atlassian/git-secrets-scan:0.4.3
-                - ls
+                - docker run -v $(pwd):/repo trufflesecurity/trufflehog:latest filesystem /repo
       - step:
           name: Deploy to Staging
           deployment: Staging
-          # trigger: manual
-          # clone:
-          #   enabled: false
           script:
-            - ls
-            - pipe: atlassian/rsync-deploy:0.3.2
+            - apt-get update && apt-get install -y gettext-base
+            - envsubst < scripts/deploy.sh > deploy-out.sh
+            - pipe: atlassian/rsync-deploy:0.12.0
               variables:
                 USER: $USER
                 SERVER: $SERVER
                 REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
-                LOCAL_PATH:  "${BITBUCKET_CLONE_DIR}/"
-                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore"
+                LOCAL_PATH: "${BITBUCKET_CLONE_DIR}/"
+                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/  --exclude=node_modules/"
             - echo "Build Transported...!"
-            - pipe: atlassian/ssh-run:0.4.1
+            - pipe: atlassian/ssh-run:0.8.1
               variables:
                 SSH_USER: $USER
                 SERVER: $SERVER
-                COMMAND: 'deploy.sh'
-                MODE: 'script'
+                MODE: "script"
+                COMMAND: "deploy-out.sh"
             - echo "Deployment is done...!"
+
+    # Production Branch Pipeline
     prod:
       - parallel:
           - step:
               name: Build and Test
               caches:
                 - node
+                - nextcache
               script:
-                - git submodule update --init --recursive
+                - export NEXT_PUBLIC_API_DOMAIN="$PROD_API_DOMAIN"
                 - npm install
-                # CI=true in default variables for Bitbucket Pipelines https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/
-                # - npm test
-                - ls
                 - npm run build
-                - ls
               artifacts:
-                - build/**
-                # - deploy.sh
+                - .next/**
+                - public/**
           - step:
-              name: Security Scan
+              name: TruffleHog Secret Scan
+              services:
+                - docker
               script:
-                # Run a security scan for sensitive data.
-                # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-                - pipe: atlassian/git-secrets-scan:0.4.3
-                - ls
+                - docker run -v $(pwd):/repo trufflesecurity/trufflehog:latest filesystem /repo
       - step:
           name: Deploy to Production
           deployment: Production
-          trigger: manual
-          # clone:
-          #   enabled: false
+          trigger: manual # Manual trigger for production deployment
           script:
-            - ls
-            - pipe: atlassian/rsync-deploy:0.3.2
+            - apt-get update && apt-get install -y gettext-base
+            - envsubst < scripts/deploy.sh > deploy-out.sh
+            - pipe: atlassian/rsync-deploy:0.12.0
               variables:
                 USER: $USER
                 SERVER: $SERVER
                 REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
                 LOCAL_PATH: "${BITBUCKET_CLONE_DIR}/"
-                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore"
+                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/  --exclude=node_modules/"
             - echo "Build Transported...!"
-            - pipe: atlassian/ssh-run:0.4.1
+            - pipe: atlassian/ssh-run:0.8.1
               variables:
                 SSH_USER: $USER
                 SERVER: $SERVER
-                COMMAND: 'deploy.sh'
-                MODE: 'script'
+                COMMAND: "deploy-out.sh"
+                MODE: "script"
             - echo "Deployment is done...!"
-            
+
+    # Feature Branch Pipeline
+    "feature/*":
+      - parallel:
+          - step:
+              name: Build and Test
+              caches:
+                - node
+                - nextcache
+              script:
+                - export NEXT_PUBLIC_API_DOMAIN="$STAGING_API_DOMAIN"
+                - npm install
+                - npm run build
+              artifacts:
+                - .next/**
+                - public/**
+          - step:
+              name: TruffleHog Secret Scan
+              services:
+                - docker
+              script:
+                - docker run -v $(pwd):/repo trufflesecurity/trufflehog:latest filesystem /repo
+
+    # Bugfix Branch Pipeline
+    "bugfix/*":
+      - parallel:
+          - step:
+              name: Build and Test
+              caches:
+                - node
+                - nextcache
+              script:
+                - export NEXT_PUBLIC_API_DOMAIN="$STAGING_API_DOMAIN"
+                - npm install
+                - npm run build
+              artifacts:
+                - .next/**
+                - public/**
+          - step:
+              name: TruffleHog Secret Scan
+              services:
+                - docker
+              script:
+                - docker run -v $(pwd):/repo trufflesecurity/trufflehog:latest filesystem /repo
+      - step:
+          name: Create PRs for Bugfix
+          script:
+            - chmod +x ./scripts/create_pr.sh
+            - ./scripts/create_pr.sh
+
+    # Hotfix Branch Pipeline
+    "hotfix/*":
+      - parallel:
+          - step:
+              name: Build and Test
+              caches:
+                - node
+                - nextcache
+              script:
+                - export NEXT_PUBLIC_API_DOMAIN="$PROD_API_DOMAIN"
+                - npm install
+                - npm run build
+              artifacts:
+                - .next/**
+                - public/**
+          - step:
+              name: TruffleHog Secret Scan
+              services:
+                - docker
+              script:
+                - docker run -v $(pwd):/repo trufflesecurity/trufflehog:latest filesystem /repo
+      - step:
+          name: Create PRs for Bugfix
+          script:
+            - chmod +x ./scripts/create_pr.sh
+            - ./scripts/create_pr.sh
+      - step:
+          name: Deploy Hotfix to Production
+          deployment: Production
+          trigger: manual # Manual trigger for hotfix deployment
+          script:
+            - apt-get update && apt-get install -y gettext-base
+            - envsubst < scripts/deploy.sh > deploy-out.sh
+            - pipe: atlassian/rsync-deploy:0.12.0
+              variables:
+                USER: $USER
+                SERVER: $SERVER
+                REMOTE_PATH: "${REMOTE_DESTINATION_PATH}"
+                LOCAL_PATH: "${BITBUCKET_CLONE_DIR}/"
+                EXTRA_ARGS: "--exclude=.bitbucket/ --exclude=.git/ --exclude=bitbucket-pipelines.yml --exclude=.gitignore --exclude=*.env* --exclude=logs/  --exclude=node_modules/"
+            - echo "Build Transported...!"
+            - pipe: atlassian/ssh-run:0.8.1
+              variables:
+                SSH_USER: $USER
+                SERVER: $SERVER
+                COMMAND: "deploy-out.sh"
+                MODE: "script"
+            - echo "Hotfix Deployment is done...!"

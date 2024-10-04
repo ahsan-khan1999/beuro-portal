@@ -93,8 +93,9 @@ const ActivitiesNotificationBar = ({
         </div>
       ) : (
         <NoDataEmptyState
-          className="w-[90%] mx-auto my-3"
-          containerClassName="py-0"
+          className="my-3 w-full"
+          imgClassName="w-[120px] h-[112px]"
+          containerClassName="px-6"
         />
       )}
     </div>

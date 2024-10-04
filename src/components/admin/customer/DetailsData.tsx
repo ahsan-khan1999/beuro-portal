@@ -8,6 +8,7 @@ import { staticEnums } from "@/utils/static";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { useRouter } from "next/router";
 import { updateQuery } from "@/utils/update-query";
+import { ToggleButton } from "@/base-components/ui/button/toggle-button";
 
 export interface AdminCustomerProps {
   customerDetail: CustomersAdmin;
@@ -16,6 +17,7 @@ export interface AdminCustomerProps {
   handleAreYouSure: () => void;
   handleStatusChange: (id: string) => void;
   onDelete: () => void;
+  onCompanyUpdate: (isAppointment: boolean) => Promise<void>;
 }
 const DetailsData = ({
   customerDetail,
@@ -24,6 +26,7 @@ const DetailsData = ({
   handleAreYouSure,
   handleStatusChange,
   onDelete,
+  onCompanyUpdate,
 }: AdminCustomerProps) => {
   const customerStatus = [
     `${translate("customer_status.block")}`,
@@ -209,7 +212,7 @@ const DetailsData = ({
             </span>
           </div>
         </div>
-        <div className="mt-5 flex justify-between lg:grid lg:grid-cols-2 xl:grid-cols-5">
+        <div className="mt-5 grid gap-x-5 grid-cols-2 xLarge:grid-cols-[minmax(150px,_100%)_minmax(150px,_100%)_minmax(250px,_100%)_minmax(150px,_100%)_minmax(250px,_100%)] gap-y-2">
           <div className="flex items-center gap-x-3">
             <span className="text-[#4D4D4D] flex items-center">
               {translate("admin.customers_details.card_content.status")}:
@@ -217,7 +220,9 @@ const DetailsData = ({
 
             <DropDown
               items={items}
-              selectedItem={customerDetail?.status}
+              selectedItem={translate(
+                `customer_status.${customerDetail.status}`
+              )}
               onItemSelected={handleStatusChange}
               dropDownClassName={`w-fit border ${
                 customerDetail?.status === "block"
@@ -241,7 +246,6 @@ const DetailsData = ({
               }`}
             />
           </div>
-
           <div className="flex items-center gap-x-3">
             <span className="text-[#4D4D4D] flex items-center">
               {translate("admin.customers_details.card_content.company_logo")}:
@@ -252,6 +256,15 @@ const DetailsData = ({
               alt="company logo"
               height={50}
               width={40}
+            />
+          </div>
+          <div className="flex items-center gap-x-3">
+            <span className="text-[#4D4D4D] flex items-center">
+              {translate("admin.customers_details.card_content.appointment")}:
+            </span>
+            <ToggleButton
+              isChecked={customerDetail?.company?.isAppointment}
+              onChange={(e) => onCompanyUpdate(e.target.checked)}
             />
           </div>
         </div>

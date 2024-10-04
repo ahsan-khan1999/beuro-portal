@@ -52,7 +52,6 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
                 className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
                 id: "confirmationContent.description",
                 name: "confirmationContent.description",
-
                 control,
                 // value:
                 //   contentDetails?.id &&

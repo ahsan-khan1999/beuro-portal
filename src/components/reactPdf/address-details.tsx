@@ -122,39 +122,6 @@ export const AddressDetails = ({
       {
         <View style={{ flexDirection: "column" }}>
           {address?.map((address, index) => (
-            // <View
-            //   style={{ display: "flex", flexDirection: "row", }}
-            //   key={index}
-            // >
-            //   <View style={{overflow: 'hidden', maxWidth: 200}}>
-            //     <Text
-            //       style={{
-            //         fontSize: 10,
-            //         fontWeight: 500,
-            //         fontStyle: "medium",
-            //         color: "#000",width: (labelWidth - 100),
-            //         overflow: 'hidden',
-            //         backgroundColor: '#ccc',
-
-            //       }}
-            //     >
-            //       {address?.label}
-            //     </Text>
-            //   </View>
-            //   <View>
-            //     <Text
-            //       style={{
-            //         fontSize: 10,
-            //         fontWeight: 400,
-            //         fontStyle: "normal",
-            //         color: "#000",
-            //       }}
-            //     >
-            //       {` ${address.streetNumber}, ${address.postalCode}, ${address.country}`}
-            //       {address.description && ` - ${address.description}`}
-            //     </Text>
-            //   </View>
-            // </View>
             <Row key={index}>
               <GridItem width={labelWidth}>
                 <Text

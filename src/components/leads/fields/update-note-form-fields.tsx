@@ -13,7 +13,7 @@ export const UpdateNoteFormField: GenerateUpdateNoteFormField = (
     {
       containerClass: "rounded-lg px-2 py-3 bg-[#EDF4FF]",
       label: {
-        text: `${translate("common.add_note_modal.label")}`,
+        text: `${translate("common.add_note_modal.description_title")}`,
         htmlFor: "description",
         className: "mb-[10px] text-[#1E1E1E]",
       },

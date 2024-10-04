@@ -22,22 +22,27 @@ export const DropDown = ({
   isSecondLastIndex,
   isThirdLastIndex,
   isLead,
+  isPayment,
   isOffer,
   isAdminCustomer,
+  isContract,
+  isMobileLead,
 }: DropDownProps & {
   isLastIndex?: boolean;
   isSecondLastIndex?: boolean;
   isThirdLastIndex?: boolean;
   isLead?: boolean;
+  isPayment?: boolean;
   isOffer?: boolean;
   isAdminCustomer?: boolean;
+  isContract?: boolean;
+  isMobileLead?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
   const toggleDropDown = (item: string) => {
     onItemSelected(item);
-    // !shouldNotSelectItem && setSelectedItem(item);
     setIsOpen((prevState) => !prevState);
   };
 
@@ -59,13 +64,13 @@ export const DropDown = ({
 
   return (
     <div
-      className={`flex flex-col gap-y-2 w-full ${
+      className={`flex flex-col gap-y-2 ${isMobileLead ? "w-fit" : "w-full"} ${
         dropDownDisabled ? "pointer-events-none" : ""
       }`}
       ref={dropdownRef}
     >
       {label && <label className="text-sm text-gray">{label}</label>}
-      <div className="relative w-full">
+      <div className={`relative ${isMobileLead ? "w-fit" : "w-full"}`}>
         <div
           aria-expanded={isOpen}
           className={`${buttonClasses}`}
@@ -91,7 +96,9 @@ export const DropDown = ({
               isThirdLastIndex={isThirdLastIndex}
               isOffer={isOffer}
               isLead={isLead}
+              isPayment={isPayment}
               isAdminCustomer={isAdminCustomer}
+              isContract={isContract}
             />
           )}
         </AnimatePresence>

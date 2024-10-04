@@ -47,6 +47,7 @@ export const useEditOfferDetails = ({
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
+
   const { customer, customerDetails } = useAppSelector(
     (state) => state.customer
   );
@@ -79,7 +80,7 @@ export const useEditOfferDetails = ({
       dispatch(readOfferDetails({ params: { filter: offer } })).then(
         (res: OfferPromiseActionType) => {
           dispatch(
-            setOfferDetails({ ...res.payload, type: "Existing Customer" })
+            setOfferDetails({ ...res?.payload, type: "Existing Customer" })
           );
 
           reset({
@@ -115,7 +116,7 @@ export const useEditOfferDetails = ({
         fullName: offerDetails?.leadID?.customerDetail?.fullName,
         id: offerDetails?.leadID?.customerID,
       };
-      const isCustomerExist = customer.find(
+      const isCustomerExist = customer?.find(
         (item) => item.id === offerDetails?.leadID?.customerID
       );
       if (!isCustomerExist) {
@@ -161,7 +162,7 @@ export const useEditOfferDetails = ({
         phoneNumber: null,
         mobileNumber: null,
         address: null,
-        customerID: "",
+        // customerID: null,
         type: "New Customer",
         content: offerDetails?.content?.id,
         gender: null,

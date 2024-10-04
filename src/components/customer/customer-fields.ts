@@ -31,14 +31,14 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               className: `!px-4 !border-[#BFBFBF] ${
-                !isUpdate && "!border-light"
-              } focus:!border-primary`,
+                !isUpdate && "!border-light focus:!border-primary"
+              }`,
               type: Field.select,
               id: "customerType",
               name: "customerType",
-              options: Object.keys(staticEnums.CustomerType)
+              options: Object?.keys(staticEnums.CustomerType)
                 ?.slice(1)
-                .map((item, key) => ({
+                .map((item) => ({
                   value: item,
                   label: translate(`customer_type.${item}`),
                 })),
@@ -57,16 +57,15 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
             },
             field: {
               className: `!px-4 !border-[#BFBFBF] ${
-                !isUpdate && "!border-light"
-              } focus:!border-primary`,
+                !isUpdate && "!border-light focus:!border-primary"
+              }`,
               type: Field.select,
               id: "gender",
               name: "gender",
-              options: Object.keys(staticEnums.Gender).map((item) => ({
+              options: Object?.keys(staticEnums.Gender).map((item) => ({
                 value: staticEnums.Gender[item],
                 label: translate(`gender.${item}`),
               })),
-
               control,
               disabled: isUpdate,
               value: "",
@@ -126,6 +125,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
               inputType: "tel",
+              placeholder: `${translate(
+                "offers.placeholders.phone_placeholder"
+              )}`,
               register,
               disabled: isUpdate,
               value: customerDetails && customerDetails.phoneNumber,
@@ -144,6 +146,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
+              placeholder: `${translate(
+                "offers.placeholders.mobile_placeholder"
+              )}`,
               register,
               value: customerDetails && customerDetails.mobileNumber,
               disabled: isUpdate,
@@ -203,7 +208,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               placeholder: `${translate(
                 "customers.add_customer_placeholders.post_code"
               )}`,
-
               register,
               disabled: isUpdate,
             },
@@ -215,19 +219,6 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               htmlFor: "address.country",
               className: "mb-[10px]",
             },
-            // field: {
-            //   className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
-            //   type: Field.select,
-            //   id: "address.country",
-            //   name: "address.country",
-            //   options: Object.keys(staticEnums.Country).map((item) => ({
-            //     value: item,
-            //     label: translate(`countries.${item}`),
-            //   })),
-            //   control,
-            //   disabled: isUpdate,
-            //   value: Object.keys(staticEnums.Country)[0],
-            // },
 
             field: {
               type: Field.input,
@@ -235,6 +226,9 @@ export const customerDetailsFormField: GenerateCustomerFormField = (
               inputType: "text",
               id: "address.country",
               name: "address.country",
+              placeholder: `${translate(
+                "offers.placeholders.country_placeholder"
+              )}`,
               register,
               disabled: isUpdate,
             },

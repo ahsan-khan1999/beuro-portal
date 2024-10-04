@@ -27,8 +27,6 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
     const isEditable = addressType && addressType[i];
     const inputField: FormField = isEditable
       ? {
-          //editable address
-          containerClass: "",
           field: {
             type: Field.input,
             className: "!px-2 !border-[#BFBFBF] focus:!border-primary",
@@ -36,27 +34,22 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            // value: `Adresse ${i + 1}`,
-            // setValue,
           },
         }
       : {
-          //non-editable address
-          containerClass: "",
           field: {
             type: Field.input,
             inputType: "text",
             id: `address.${i}.label`,
             name: `address.${i}.label`,
             register,
-            // value: `Adresse ${i + 1}`,
+
             disabled: true,
             className:
               "!p-0 !bg-transparent !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
-            // setValue,
           },
         };
-    formField.push(
+    formField?.push(
       {
         containerClass: `rounded-lg px-2 py-3 bg-[#EDF4FF] my-5`,
         field: {
@@ -64,13 +57,11 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
           type: Field.select,
           id: `address.${i}.addressType`,
           name: `address.${i}.addressType`,
-          // value: translate("common.address_type"),
           options:
             addressSettings?.addresses?.map((item) => ({
               label: item,
               value: item,
             })) || [],
-
           control,
           onItemChange: (item) => handleChangeLabel(item, i),
         },
@@ -101,7 +92,6 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
           children: [
             inputField,
             {
-              containerClass: "",
               field: {
                 type: Field.button,
                 className: "bg-white hover:bg-white",
@@ -137,7 +127,7 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.streetNumber`,
                 name: `address.${i}.streetNumber`,
-                placeholder: `Zweibrückenstraße, ${i}`,
+                placeholder: `${translate("leads.placeholders.street")}`,
                 register,
               },
             },
@@ -154,7 +144,7 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.postalCode`,
                 name: `address.${i}.postalCode`,
-                placeholder: `123${i}`,
+                placeholder: `${translate("leads.placeholders.post_code")}`,
                 register,
               },
             },
@@ -172,6 +162,9 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
                 inputType: "text",
                 id: `address.${i}.country`,
                 name: `address.${i}.country`,
+                placeholder: `${translate(
+                  "offers.placeholders.country_placeholder"
+                )}`,
                 register,
               },
             },

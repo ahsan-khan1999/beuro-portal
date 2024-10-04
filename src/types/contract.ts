@@ -4,9 +4,7 @@ import { ContentTableRowTypes } from "./content";
 import { CustomerAddress, Customers } from "./customer";
 import { AddressID, Lead } from "./leads";
 import { OfferServiceDetails } from "./offers";
-import { StringifyOptions } from "querystring";
 
-// Interface for contract Table
 export interface contractTableTypes {
   id: string;
   contractNumber: string;
@@ -24,6 +22,7 @@ export interface contractTableTypes {
   signedContracts?: signedContracts[];
   isNoteCreated: boolean;
   isImageAdded: boolean;
+  isTaskCreated?: boolean;
 }
 
 export interface signedContracts {
@@ -116,4 +115,42 @@ export interface ContractDetailCardProps {
   isSendEmail: boolean;
   handleUpdateAdditionalDetailsModal: () => void;
   handleEditDateModal: () => void;
+}
+
+export interface Task {
+  id: string;
+  taskID: string;
+  isContrcatCreated: boolean;
+  title: string;
+  date: {
+    startDate: string;
+    endDate: string;
+  }[];
+  isAllDay: boolean;
+  colour: string;
+  createdAt: string;
+  createdBy: {
+    id: string;
+    fullName: string;
+    company: {
+      id: string;
+      companyName: string;
+    };
+  };
+  note: string;
+  alertTime: number;
+  address: {
+    streetNumber: string;
+    postalCode: string;
+    country: string;
+  };
+  type: string;
+  contractID: {
+    id: string;
+  };
+}
+
+export interface TaskWithSelectedDates extends Task {
+  selectedStartDate?: string;
+  selectedEndDate?: string;
 }

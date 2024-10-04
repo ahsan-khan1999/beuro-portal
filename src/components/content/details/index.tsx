@@ -5,7 +5,7 @@ import ContentDetailsData from "./ContentDetailsData";
 import useContentDetail from "@/hooks/content/useContentDetail";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
-const ContentDetails = () => {
+export const ContentDetails = () => {
   const { contentDetails, contentDeleteHandler, renderModal, loading } =
     useContentDetail();
 
@@ -31,5 +31,3 @@ const ContentDetails = () => {
     </Layout>
   );
 };
-
-export default ContentDetails;

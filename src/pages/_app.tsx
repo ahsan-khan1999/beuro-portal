@@ -1,5 +1,7 @@
 import { store } from "@/api/store";
 import "@/styles/globals.css";
+import "@/styles/calendarStyles.css";
+
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { appWithTranslation } from "next-i18next";

@@ -11,14 +11,6 @@ export const Merger = ({
     <CustomLoader />
   ) : (
     mergedPdfFileUrl && (
-      // <iframe
-      //   height="670"
-      //   src={mergedPdfFileUrl}
-      //   title="Merged PDF Document"
-      //   width="100%"
-      //   style={{ border: "none" }}
-      // />
-
       <embed
         src={mergedPdfFileUrl}
         width={"100%"}

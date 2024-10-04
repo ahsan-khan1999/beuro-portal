@@ -10,7 +10,8 @@ import { Attachement } from "@/types/global";
 
 export const useUploadImageOffer = (
   handleImageSlider: Function,
-  type: string
+  type: string,
+  id?: string
 ) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -20,7 +21,6 @@ export const useUploadImageOffer = (
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
-
   const [activeTab, setActiveTab] = useState("img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
   const [enteredLinks, setEnteredLinks] = useState<any>({
@@ -42,6 +42,8 @@ export const useUploadImageOffer = (
   };
 
   const handleLinkAdd = (e?: React.FormEvent<HTMLFormElement>) => {
+    console.log(enteredLinks, "enteredLinks");
+
     e?.preventDefault();
     if (enteredLink.trim() !== "") {
       let newArray = [...enteredLinks.links];
@@ -143,7 +145,7 @@ export const useUploadImageOffer = (
         links: formatLinks,
         attachments: formatAttachments,
         videos: formatVideos,
-        id: leadDetails?.id,
+        id: id ? id : leadDetails?.id,
         type: "leadID",
       };
 
@@ -153,9 +155,6 @@ export const useUploadImageOffer = (
 
       if (response?.payload) handleImageSlider();
     } else if (type === "Offer") {
-      // const filteredList = Object.values(data)
-      //   ?.filter((value) => value)
-      //   ?.reverse();
       const apiData = {
         images: formatImages,
         links: formatLinks,
@@ -167,12 +166,9 @@ export const useUploadImageOffer = (
       const response = await dispatch(
         createImage({ data: apiData, router, translate })
       );
-      // if (response?.payload) handleOnClose();
+
       if (response?.payload) handleImageSlider();
     } else if (type === "Contract") {
-      // const filteredList = Object.values(data)
-      //   ?.filter((value) => value)
-      //   ?.reverse();
       const apiData = {
         images: formatImages,
         links: formatLinks,

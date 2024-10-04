@@ -16,9 +16,9 @@ import { useTranslation } from "next-i18next";
 type ComponentLookupType = Record<string, JSX.Element>;
 
 const AddEmployeeDetails = () => {
+  const router = useRouter();
   const { t: translate } = useTranslation();
   const [tabType, setTabType] = useState<string>("Employee Details");
-  const router = useRouter();
 
   const handleCancel = () => {
     router.pathname = "/employees";
@@ -66,7 +66,6 @@ const AddEmployeeDetails = () => {
     dispatch(updateModalType(ModalType.PASSWORD_SET));
   };
 
-  // funtion for handling the route
   const routeHandler = () => {
     router.push("/employees/details");
   };
@@ -82,7 +81,6 @@ const AddEmployeeDetails = () => {
       <CreateNewPassword
         onClose={onClose}
         passwordSetSuccessfully={passwordSetSuccessfully}
-        // email={data}
       />
     ),
     [ModalType.PASSWORD_SET]: (

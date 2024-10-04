@@ -8,8 +8,7 @@ const SettingProfile = ({
 }: {
   handleChangePassword: Function;
 }) => {
-  const defaultClassName = "";
-  const { fields, onSubmit, handleSubmit, errors, error, renderModal } =
+  const { fields, onSubmit, handleSubmit, errors, renderModal } =
     useSettingProfile(handleChangePassword);
 
   return (
@@ -20,7 +19,6 @@ const SettingProfile = ({
           handleSubmit={handleSubmit}
           onSubmit={onSubmit}
           errors={errors}
-          className={`${defaultClassName}`}
         />
       </div>
       {renderModal()}

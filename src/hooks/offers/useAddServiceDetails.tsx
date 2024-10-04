@@ -27,6 +27,11 @@ import { staticEnums } from "@/utils/static";
 import { readTaxSettings } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { TAX_PERCENTAGE } from "@/services/HttpProvider";
+import {
+  readReportDetails,
+  setReportDetails,
+} from "@/api/slices/appointment/appointmentSlice";
+import { CustomerPromiseActionType } from "@/types/customer";
 
 let prevDisAmount: number | string = "";
 export const useAddServiceDetails = (
@@ -39,8 +44,10 @@ export const useAddServiceDetails = (
     taxAmount: 0,
   });
 
+  const appointmentId = router.query.appointmentId;
   const dispatch = useAppDispatch();
-  const { systemSettings } = useAppSelector((state) => state.settings);
+  const { systemSettings, tax } = useAppSelector((state) => state.settings);
+  const { reportDetails } = useAppSelector((state) => state.appointment);
   const { loading, error, offerDetails } = useAppSelector(
     (state) => state.offer
   );
@@ -53,13 +60,22 @@ export const useAddServiceDetails = (
     ) || [ServiceType.EXISTING_SERVICE]
   );
 
-  const { tax } = useAppSelector((state) => state.settings);
   const { service, serviceDetails } = useAppSelector((state) => state.service);
 
   useEffect(() => {
     dispatch(readService({ params: { filter: {}, paginate: 0 } }));
     dispatch(readTaxSettings({}));
   }, []);
+
+  useEffect(() => {
+    if (appointmentId) {
+      dispatch(readReportDetails({ params: { filter: appointmentId } })).then(
+        (res: CustomerPromiseActionType) => {
+          dispatch(setReportDetails(res?.payload));
+        }
+      );
+    }
+  }, [appointmentId]);
 
   const handleBack = () => {
     onHandleNext(ComponentsType.addressAdded);
@@ -94,8 +110,8 @@ export const useAddServiceDetails = (
 
   const onServiceSelect = (id: string, index: number) => {
     if (!id) return;
-    const selectedService: Service[] = service.filter(
-      (item) => item.serviceName === id
+    const selectedService: Service[] = service?.filter(
+      (item) => item?.serviceName === id
     );
 
     if (selectedService?.length > 0) {
@@ -153,7 +169,6 @@ export const useAddServiceDetails = (
       setValue("discountAmount", prevDisAmount);
     }
 
-    // Calculate grand total after applying discount
     const discountedTotal = totalPrices - discount;
 
     let taxAmount = 0;
@@ -190,13 +205,6 @@ export const useAddServiceDetails = (
 
   useMemo(() => {
     if (offerDetails.id) {
-      // setTotal({
-      //   taxAmount: Number(
-      //     (offerDetails?.total - offerDetails?.subTotal).toFixed(2)
-      //   ),
-      //   subTotal: offerDetails?.subTotal,
-      //   grandTotal: offerDetails?.total,
-      // });
       reset({
         serviceDetail: offerDetails?.serviceDetail?.serviceDetail || [
           {
@@ -219,8 +227,33 @@ export const useAddServiceDetails = (
         taxAmount: offerDetails?.taxAmount || 0,
       });
     }
-    // generateGrandTotal();
   }, [offerDetails.id]);
+
+  useMemo(() => {
+    if (appointmentId && reportDetails?.id) {
+      reset({
+        serviceDetail: reportDetails?.serviceDetail?.serviceDetail || [
+          {
+            serviceTitle: "",
+            price: "",
+            unit: "",
+            count: "",
+            description: "",
+            totalPrice: "",
+            serviceType: "Existing Service",
+            discount: 0,
+          },
+        ],
+        isTax: reportDetails?.isTax,
+        isDiscount: reportDetails?.isDiscount,
+        discountType: staticEnums["DiscountType"][reportDetails?.discountType],
+        taxType: staticEnums["TaxType"][reportDetails?.taxType] || 0,
+        discountAmount: reportDetails?.discountAmount || "",
+        discountDescription: reportDetails?.discountDescription,
+        taxAmount: reportDetails?.taxAmount || 0,
+      });
+    }
+  }, [reportDetails?.id]);
 
   const {
     fields: serviceFields,
@@ -350,6 +383,7 @@ export const useAddServiceDetails = (
       serviceDetails: serviceDetails,
       generatePrice: generateTotalPrice,
       offerDetails,
+      reportDetails,
     },
     append,
     handleRemoveService,
@@ -373,6 +407,8 @@ export const useAddServiceDetails = (
       isTax,
       isDiscount,
       offerDetails: offerDetails,
+      reportDetails,
+      appointmentId,
       taxType: taxType,
       discountType,
       tax: tax,
@@ -399,7 +435,6 @@ export const useAddServiceDetails = (
       id: offerDetails?.id,
       stage: ComponentsType.additionalAdded,
       taxAmount: !data?.taxType ? Number(TAX_PERCENTAGE) : data?.taxAmount,
-
       taxType: Number(data?.taxType),
       discountType: Number(data?.discountType),
     };
@@ -416,7 +451,15 @@ export const useAddServiceDetails = (
     const response = await dispatch(
       updateOffer({ data: apiData, router, setError, translate })
     );
-    if (response?.payload) handleNext();
+    if (response?.payload) {
+      handleNext();
+
+      const { pathname, query } = router;
+      if (query.appointmentId) {
+        delete query.appointmentId;
+        router.replace({ pathname, query }, undefined, { shallow: true });
+      }
+    }
   };
 
   return {

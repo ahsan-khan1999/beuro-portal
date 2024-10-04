@@ -1,4 +1,5 @@
 import {
+  AddCalendarTask,
   AddGeneralAddressField,
   AddGeneralNoteField,
   AddNewNote,
@@ -144,5 +145,33 @@ export const generateEnterCompanyNameValidationSchema = (
     [EnterComponayNameField.companyName]: yup
       .string()
       .required(translate("validationMessages.required")),
+  });
+};
+
+export const generateAddTaskValidationSchema = (translate: Function) => {
+  return yup.object().shape({
+    [AddCalendarTask.title]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    // [AddCalendarTask.date]: yup
+    //   .array()
+    //   .of(
+    //     yup
+    //       .object()
+    //       .shape({
+    //         startDate: yup
+    //           .string()
+    //           .required(translate("validationMessages.required")),
+    //         endDate: yup.string().notRequired(),
+    //       })
+    //       .required(translate("validationMessages.required"))
+    //   )
+    //   .min(1)
+    //   .required(translate("validationMessages.required")),
+    [AddCalendarTask.colour]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [AddCalendarTask.alertTime]: yup.number().notRequired(),
+    [AddCalendarTask.note]: yup.string().notRequired(),
   });
 };

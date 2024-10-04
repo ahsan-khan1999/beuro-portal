@@ -55,3 +55,7 @@ export enum CreateInvoiceAdditionalDetails {
   chooseFromExisting = "content",
   additionlData = "additionalDetails",
 }
+
+export enum PaidInvoiceDateFieldId {
+  paidDate = "paidDate",
+}

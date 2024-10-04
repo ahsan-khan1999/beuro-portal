@@ -24,22 +24,12 @@ const ContractDetailsCard = ({
   handleNotes,
   handlePaymentStatusUpdate,
   handleStatusUpdate,
-  offerDeleteHandler,
   handleSendEmail,
   isSendEmail,
-  handleUpdateAdditionalDetailsModal,
   handleEditDateModal,
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
-  const handleDonwload = () => {
-    window.open(contractDetails?.attachement);
-  };
-
-  const handlePrint = () => {
-    window.open(contractDetails?.attachement);
-  };
 
   const paymentMethod = [
     `${translate("payment_method.Cash")}`,
@@ -56,11 +46,14 @@ const ContractDetailsCard = ({
   const handleBack = () => {
     router.pathname = "/contract";
     delete router.query["offer"];
+    delete router.query["offerID"];
+    delete router.query["isMail"];
     updateQuery(router, router.locale as string);
   };
 
   const customerType = contractDetails?.offerID?.leadID?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
   const name =
     customerType === 1
       ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
@@ -73,13 +66,9 @@ const ContractDetailsCard = ({
 
   return (
     <div className="min-h-[218px]">
-      <div className="flex flex-col mlg:flex-row justify-between xl:items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
+      <div className="flex justify-between items-center gap-y-3 pb-5 border-b border-[#000] border-opacity-10">
         <div className="flex items-center">
-          <span
-            className="cursor-pointer"
-            // onClick={() => router.push("/contract")}
-            onClick={handleBack}
-          >
+          <span className="cursor-pointer" onClick={handleBack}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="41"
@@ -106,7 +95,6 @@ const ContractDetailsCard = ({
             {translate("contracts.card_content.heading")}
           </p>
         </div>
-
         <div className="flex justify-end gap-x-[22px]">
           <button
             onClick={handleSendEmail}
@@ -145,7 +133,6 @@ const ContractDetailsCard = ({
           </span> */}
         </div>
       </div>
-
       <div className="flex flex-col gap-4 mt-5">
         <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-2 w-full">
           <div className="flex items-center gap-x-3">
@@ -156,14 +143,14 @@ const ContractDetailsCard = ({
               {contractDetails.contractNumber}
             </span>
           </div>
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-x-3 overflow-hidden text-ellipsis whitespace-nowrap">
             <span className="text-base font-normal text-[#4D4D4D] min-w-[120px]">
               {translate("contracts.table_headings.title")}:
             </span>
 
-            <span className="text-base font-medium text-[#4B4B4B] truncate">
+            <p className="text-base font-medium text-[#4B4B4B] truncate">
               {contractDetails.offerID?.title}
-            </span>
+            </p>
           </div>
           <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
@@ -247,7 +234,7 @@ const ContractDetailsCard = ({
                   color: `${getEmailColor(contractDetails?.emailStatus)}`,
                 }}
               >
-                {translate(`contract_status.${contractDetails?.emailStatus}`)}
+                {translate(`email_status.${contractDetails?.emailStatus}`)}
               </div>
             )}
           </div>
@@ -330,29 +317,7 @@ const ContractDetailsCard = ({
           </div>
 
           <div className="flex gap-x-10">
-            <div
-              className="flex items-center gap-[11px] cursor-pointer"
-              onClick={(e) =>
-                handleNotes(
-                  contractDetails?.id,
-                  contractDetails?.contractNumber,
-                  name,
-                  heading,
-                  e
-                )
-              }
-            >
-              <span className="text-[#4D4D4D] font-normal text-base">
-                {translate("contracts.card_content.notes")}:
-              </span>
-
-              <WriteIcon
-                pathClass={
-                  contractDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
-                }
-              />
-            </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-x-3">
               <span className="text-[#4D4D4D] font-normal text-base">
                 {translate("contracts.card_content.images")}:
               </span>
@@ -375,6 +340,28 @@ const ContractDetailsCard = ({
                   }
                 />
               </span>
+            </div>
+            <div
+              className="flex items-center gap-[11px] cursor-pointer"
+              onClick={(e) =>
+                handleNotes(
+                  contractDetails?.id,
+                  contractDetails?.contractNumber,
+                  name,
+                  heading,
+                  e
+                )
+              }
+            >
+              <span className="text-[#4D4D4D] font-normal text-base">
+                {translate("contracts.card_content.notes")}:
+              </span>
+
+              <WriteIcon
+                pathClass={
+                  contractDetails?.isNoteCreated ? "#FF0000" : "#4A13E7"
+                }
+              />
             </div>
           </div>
         </div>

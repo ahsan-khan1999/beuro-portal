@@ -30,6 +30,10 @@ const SERVICE_URLS = {
   readLead: "/lead",
   lead: "/lead/lead-step/",
   updateLead: "/lead/lead-step/",
+  appointment: "/lead/report/report-step/",
+  companyLeadAppointment: "/lead/appointment",
+  appointmentStatus: "/lead/appointment/update-status",
+  readReport: "/lead/report",
   content: "/content",
   contentDetails: "/content/content-step/",
   leadStatus: "/lead/update-lead-status",
@@ -38,8 +42,9 @@ const SERVICE_URLS = {
   offer: "/offer/Offer-step/",
 
   contract: "/contract",
+  contractTask: "/contract/task",
   updateContract: "/contract/",
-  company: "/company",
+  adminCompany: "/company",
   invoice: "/invoice",
   downloadInvoiceRoute: "/invoice/download-excel",
   invoiceCalculationRoute: "/invoice/calculations",
@@ -246,6 +251,65 @@ const createLead = (data) => {
   });
 };
 
+// company lead appointment create
+const createCompanyAppointment = (params) =>
+  post(SERVICE_URLS.companyLeadAppointment, params, {
+    feature: featureConstants.login,
+  });
+
+const updateAppointment = (data) =>
+  put(SERVICE_URLS.companyLeadAppointment + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const readAppointment = (data) =>
+  get(SERVICE_URLS.companyLeadAppointment + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const readCompanyAppointments = (params) =>
+  get(
+    SERVICE_URLS.companyLeadAppointment,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const readAppointmentDetails = (params) =>
+  get(
+    SERVICE_URLS.companyLeadAppointment,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
+const updateAppointmentStatus = (data) =>
+  put(SERVICE_URLS.appointmentStatus + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const createAppointmentReport = (data) => {
+  // let route = data?.appointmentID
+  //   ? data?.step + "/" + data?.appointmentID
+  //   : data?.step;
+  return post(SERVICE_URLS.appointment + data.step, data, {
+    feature: featureConstants.login,
+  });
+};
+
+const readReportDetail = (params) =>
+  get(
+    SERVICE_URLS.readReport,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
+const updateAppointmentReport = (data) =>
+  put(SERVICE_URLS.appointment + `${data?.step}/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
 const updateLead = (data) =>
   put(SERVICE_URLS.updateLead + `${data?.step}/${data?.id}`, data, {
     feature: featureConstants.login,
@@ -364,6 +428,37 @@ const readContractDetail = (params) =>
 const createContract = (data) =>
   post(SERVICE_URLS.contract, data, { feature: featureConstants.login });
 
+const createContractTask = (data) =>
+  post(SERVICE_URLS.contractTask, data, { feature: featureConstants.login });
+
+const updateContractTask = (data) =>
+  put(SERVICE_URLS.contractTask + `/${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const readContractTask = (params) =>
+  get(
+    SERVICE_URLS.contractTask,
+    params,
+    { feature: featureConstants.login },
+    { detail: false }
+  );
+
+const readContractTaskDetail = (params) =>
+  get(
+    SERVICE_URLS.contractTask,
+    params,
+    { feature: featureConstants.login },
+    { detail: true }
+  );
+
+const deleteContractTask = (data) =>
+  del(
+    SERVICE_URLS.contractTask + `/${data?.id}`,
+    {},
+    { feature: featureConstants.login }
+  );
+
 const updateContractDate = (data) =>
   put(SERVICE_URLS.updateDate + `${data?.id}`, data, {
     feature: featureConstants.login,
@@ -434,8 +529,13 @@ const stopRecurringInvoice = (data) =>
   put(SERVICE_URLS.invoice + `/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteInvoice = (data) =>
-  del(SERVICE_URLS.invoice, data, { feature: featureConstants.login });
+  del(
+    SERVICE_URLS.invoice + `/${data?.id}`,
+    {},
+    { feature: featureConstants.login }
+  );
 
 // create main invoice
 const createMainInvoice = (data) => {
@@ -823,9 +923,10 @@ const createCompany = (data) =>
   post(SERVICE_URLS.company, data, { feature: featureConstants.login });
 
 const updateCompany = (data) =>
-  put(SERVICE_URLS.company + `/${data?.id}`, data, {
+  put(SERVICE_URLS.adminCompany + `/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteCompany = (data) =>
   del(
     SERVICE_URLS.company + `/${data?.id}`,
@@ -1188,5 +1289,20 @@ const apiServices = {
   deleteNotesSettings,
   calculateInvoiceData,
   readTableFollowUp,
+  createCompanyAppointment,
+  updateAppointment,
+  readCompanyAppointments,
+  readAppointment,
+  readAppointmentDetails,
+  updateAppointmentStatus,
+  createAppointmentReport,
+  updateAppointmentReport,
+  readReportDetail,
+  createContractTask,
+  updateContractTask,
+  readContractTask,
+  readContractTaskDetail,
+  deleteContractTask,
 };
+
 export default apiServices;

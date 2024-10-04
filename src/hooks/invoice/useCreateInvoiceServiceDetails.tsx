@@ -139,11 +139,6 @@ export const useCreateInvoiceServiceDetails = (
 
     if (discountAmount) {
       discount = calculateDiscount(totalPrices, discountAmount, !+discountType);
-      // console.log(
-      //   !+discountType && discountAmount > 100,
-      //   "test",
-      //   discountAmount
-      // );
 
       if (!+discountType && discountAmount > 100) {
         setValue("discountAmount", 100);

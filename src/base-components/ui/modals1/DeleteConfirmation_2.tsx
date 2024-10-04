@@ -5,25 +5,34 @@ import deleteConfirmIcon from "@/assets/svgs/delete_confirm_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { Button } from "../button/button";
 import { useTranslation } from "next-i18next";
+import { useAppSelector } from "@/hooks/useRedux";
+
+export interface DeleteConfProps {
+  onClose: () => void;
+  modelHeading: string;
+  routeHandler: Function;
+  loading: boolean;
+}
 
 const DeleteConfirmation_2 = ({
   onClose,
   modelHeading,
   routeHandler,
   loading,
-}: {
-  onClose: () => void;
-  modelHeading: string;
-  routeHandler: Function;
-  loading: boolean;
-}) => {
+}: DeleteConfProps) => {
   const { t: translate } = useTranslation();
+  const id = useAppSelector((state) => state.global.modal.data);
+
+  const handleDelete = () => {
+    routeHandler(id.id);
+  };
+
   return (
     <BaseModal
       onClose={onClose}
-      containerClassName="max-w-[480px] lg:max-w-[564.004px] min-h-fit"
+      containerClassName="max-w-[300px] xMini:max-w-[480px] lg:max-w-[564.004px] min-h-fit"
     >
-      <div className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center px-5">
         <Image
           src={crossIcon}
           alt="cross_icon"
@@ -33,16 +42,16 @@ const DeleteConfirmation_2 = ({
         <Image
           src={deleteConfirmIcon}
           alt="delete_icon"
-          className="mt-[59px]"
+          className="mt-10 xMini:mt-[59px]"
         />
-        <p className="text-2xlfont-medium mt-[44px] max-w-[290px] text-center">
+        <p className="text-2xlfont-medium mt-5 xMini:mt-[44px] max-w-[290px] text-center">
           {modelHeading}
         </p>
 
-        <div className="flex gap-[33px] mt-[27px] mb-[38px]">
+        <div className="flex gap-x-5 xMini:gap-[33px] mt-[27px] mb-[38px]">
           <button
             onClick={onClose}
-            className="py-[11px] px-[25px] text-[#fff] bg-[#BFBFBF] rounded-md"
+            className="h-8 xMini:h-[50px] px-2 xMini:px-[25px] text-dark hover:text-[#fff] bg-[#BFBFBF] rounded-md hover:bg-buttonHover"
           >
             {translate("email_tracker.email_delete_modal.cancel_button")}
           </button>
@@ -52,8 +61,14 @@ const DeleteConfirmation_2 = ({
             inputType="submit"
             loading={loading}
             text={translate("email_tracker.email_delete_modal.delete_button")}
-            onClick={routeHandler}
-            className=" px-[25px] !text-white bg-[#FF0000] rounded-md"
+            onClick={() => {
+              if (id) {
+                handleDelete();
+              } else {
+                routeHandler();
+              }
+            }}
+            className="px-2 xMini:px-[25px] !h-8 xMini:!h-[50px] !text-white bg-[#FF0000] rounded-md"
           />
         </div>
       </div>

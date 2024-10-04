@@ -10,6 +10,8 @@ import { Attachement } from "@/types/global";
 import { useState, useEffect } from "react";
 import { updateContent } from "@/api/slices/content/contentSlice";
 import { transformAttachments } from "@/utils/utility";
+import { ModalType } from "@/enums/ui";
+import { updateModalType } from "@/api/slices/globalSlice/global";
 
 export const useEditConfirmationContentDetails = (onClick: Function) => {
   const { t: translate } = useTranslation();
@@ -86,7 +88,10 @@ export const useEditConfirmationContentDetails = (onClick: Function) => {
     const res = await dispatch(
       updateContent({ data: apiData, router, setError, translate })
     );
-    if (res?.payload) onClick(1, ComponentsType.confirmationContent);
+    if (res?.payload) {
+      onClick(1, ComponentsType.confirmationContent);
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+    }
   };
 
   return {

@@ -7,7 +7,6 @@ import {
 } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
-import { useTransition } from "react";
 
 export const generateLoginFormField: GenerateRegistrationFormField = (
   register,

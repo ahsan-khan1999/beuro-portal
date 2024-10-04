@@ -76,7 +76,7 @@ export const useEditInvoiceDetails = ({
       dispatch(readInvoiceDetails({ params: { filter: invoice } })).then(
         (res: { payload: InvoiceDetailTableRowTypes }) => {
           dispatch(
-            setInvoiceDetails({ ...res.payload, type: "Existing Customer" })
+            setInvoiceDetails({ ...res?.payload, type: "Existing Customer" })
           );
           reset({
             type: "Existing Customer",
@@ -108,7 +108,7 @@ export const useEditInvoiceDetails = ({
         fullName: invoiceDetails?.customerDetail?.fullName,
         id: invoiceDetails?.customerID,
       };
-      const isCustomerExist = customer.find(
+      const isCustomerExist = customer?.find(
         (item) => item.id === invoiceDetails?.customerID
       );
       if (!isCustomerExist) {
@@ -133,14 +133,13 @@ export const useEditInvoiceDetails = ({
     if (type === "New Customer") {
       reset({
         ...invoiceDetails,
-        leadID: null,
         customerType: null,
         fullName: null,
         email: null,
         phoneNumber: null,
         mobileNumber: null,
         address: null,
-        customerID: "",
+        // customerID: null,
         type: "New Customer",
         content: invoiceDetails?.content?.id,
         gender: null,
@@ -154,7 +153,6 @@ export const useEditInvoiceDetails = ({
 
       reset({
         type: "Existing Customer",
-        // leadID: invoiceDetails?.leadID?.id,
         customerType: type,
         fullName: invoiceDetails?.customerDetail?.fullName,
         companyName: invoiceDetails?.customerDetail?.companyName,
@@ -260,16 +258,18 @@ export const useEditInvoiceDetails = ({
       step: 1,
       invoiceId: invoiceDetails?.id,
       stage: EditComponentsType.addressEdit,
-      // isLeadCreated: data?.leadID ? true : false,
     };
-    // if (!apiData?.isLeadCreated) delete apiData["leadID"];
+
+    if (data.type === "New Customer") {
+      delete apiData.customerID;
+    }
 
     const res = await dispatch(
       createInvoiceDetial({ data: apiData, router, setError, translate })
     );
+
     if (res?.payload) {
       if (data?.type === "New Customer") {
-        // dispatch(setLeads([...lead, res?.payload?.leadID]));
         dispatch(
           setCustomers([
             ...customer,

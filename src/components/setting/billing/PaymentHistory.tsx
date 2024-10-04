@@ -1,4 +1,3 @@
-import TableLayout from "@/layout/TableLayout";
 import { useTranslation } from "next-i18next";
 import React from "react";
 
@@ -59,7 +58,7 @@ const PaymentHistory = () => {
 
       <section className="bg-white   rounded-md">
         <div className="grid grid-cols-[minmax(300px,_100%)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(100px,_100px)]">
-          {paymentHistoryHeading.map((item, index) => (
+          {paymentHistoryHeading?.map((item, index) => (
             <span
               className={`bg-white pl-[32px] pr-[61px] py-4  text-base font-medium text-[#8F8F8F] ${
                 index === paymentHistoryHeading.length - 1 ? "text-center" : ""
@@ -74,7 +73,7 @@ const PaymentHistory = () => {
 
       <section className=" bg-white  rounded-md mt-1">
         <div className="grid grid-cols-[minmax(300px,_100%)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(100px,_100px)] items-center">
-          {planHistoryData.map((item, index) => (
+          {planHistoryData?.map((item, index) => (
             <>
               <span
                 className=" bg-white pl-[32px]   pr-[61px]  py-4 text-base font-medium text-[#4B4B4B]"

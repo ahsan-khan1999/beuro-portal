@@ -1,5 +1,4 @@
 import { View, StyleSheet } from "@react-pdf/renderer";
-import Html, { HtmlStyles } from "react-pdf-html";
 import { transformHtmlToPdf } from "./convert-tags-react-pdf-components";
 
 const styles = StyleSheet.create({
@@ -65,75 +64,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const stylesheet: HtmlStyles = {
-  body: {
-    fontFamily: "Poppins",
-  },
-  p: {
-    margin: 0,
-    // fontSize: 7,
-    color: "#272727",
-  },
-
-  h1: {
-    margin: 0,
-    padding: 0,
-    // fontSize: 7,
-  },
-  h2: {
-    margin: 0,
-    padding: 0,
-    // fontSize: 7,
-  },
-  h3: {
-    margin: 0,
-    padding: 0,
-    // fontSize: 7,
-  },
-  h4: {
-    margin: 0,
-    padding: 0,
-    // fontSize: 7,
-  },
-  h5: {
-    margin: 0,
-    padding: 0,
-    // fontSize: 7,
-  },
-  h6: {
-    margin: 0,
-    padding: 0,
-    // fontSize: 7,
-  },
-  ul: { marginLeft: 0, marginTop: 6 },
-  li: {
-    // fontSize: 7,
-    marginLeft: 0,
-    marginRight: 10,
-    marginTop: 0,
-    marginBottom: 0,
-    listStyle: "outside",
-  },
-  blockquote: {
-    borderLeft: 5,
-    borderColor: "#ccc",
-    borderStyle: "solid",
-
-    marginLeft: 0,
-    marginRight: 0,
-    overflow: "hidden",
-    paddingLeft: "20px",
-    "blockqoute p": {
-      margin: 10,
-    },
-  },
-  strong: {
-    // fontSize: 7,
-    fontWeight: 700,
-    fontStyle: "bold",
-  },
-};
-
 export const AdditionalDetails = ({
   description,
   signature,
@@ -141,37 +71,11 @@ export const AdditionalDetails = ({
   description?: string;
   signature?: any;
 }) => {
-  // const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-  // const onFileChange = () => {
-  //   if (signature) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setImageSrc(reader?.result);
-  //     };
-  //     reader.readAsDataURL(signature);
-  //   }
-  // };
-
-  // useMemo(() => signature && onFileChange(), [signature]);
-
-  // console.log(transformHtmlToPdf(description ?? ''));
   const content = transformHtmlToPdf(description ?? "");
-  //  const content = convertHtmlToPdf(description ?? '');
-
-  // const content = parseHTML(description ?? '');
 
   return (
     <View style={styles.borderDiv}>
-      <View>
-        {/* <Html
-          resetStyles={false}
-          stylesheet={stylesheet}
-          style={{ fontFamily: "Poppins" }}
-        >
-          {replaceFontSizes(description ?? "")}
-        </Html> */}
-        {content}
-      </View>
+      <View>{content}</View>
     </View>
   );
 };

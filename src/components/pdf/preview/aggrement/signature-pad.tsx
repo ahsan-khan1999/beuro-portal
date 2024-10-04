@@ -18,7 +18,6 @@ import ReactPDF, {
   Page,
   StyleSheet,
   View,
-  usePDF,
 } from "@react-pdf/renderer";
 import { Header } from "@/components/reactPdf/header";
 import { ContactAddress } from "@/components/reactPdf/contact-address";
@@ -30,9 +29,11 @@ import { Footer } from "@/components/reactPdf/footer";
 import { AdditionalDetails } from "@/components/reactPdf/additional-details";
 import { AggrementSignature } from "@/components/reactPdf/aggrement-signature";
 import { useRouter } from "next/router";
+import { pdf as reactPdf } from "@react-pdf/renderer";
+
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
-import { pdf as reactPdf } from "@react-pdf/renderer";
+
 
 Font.register({
   family: "Poppins",
@@ -131,7 +132,6 @@ export const SignaturePad = ({
       signaturePad.minWidth = scaledStrokeWidth;
       signaturePad.maxWidth = scaledStrokeWidth * 0.7;
 
-      // Redraw the signature from the existing data
       const data = signaturePad.toData();
       signaturePad.clear();
       signaturePad.fromData(data);
@@ -252,6 +252,11 @@ export const SignaturePad = ({
   }, [signaturePad]);
 
   const handleSave = async (signedFile: any, loading: boolean) => {
+    if (!signaturePad) {
+      console.error("Signature pad is not initialized");
+      return;
+    }
+
     if (signaturePad) {
       const canvasData = signaturePad.toData();
       if (canvasData?.length > 0) {
@@ -341,13 +346,8 @@ export const SignaturePad = ({
             </Page>
           </Document>
         );
-        const blobPdf = await reactPdf(newPdf).toBlob();
 
-        // setOfferSignature && setOfferSignature(file)
-        // setsignatureHolder(file as any)
-        // setTimeout(() => {
-        // updateInstance(pdfDoc);
-        // }, 10);
+        const blobPdf = await reactPdf(newPdf).toBlob();
 
         const convertedFile = blobToFile(
           blobPdf,
@@ -357,6 +357,7 @@ export const SignaturePad = ({
             pdfData?.headerDetails?.companyName
           }.pdf` || "offer.pdf"
         );
+        
         if (!svgContent) {
           alert("true");
           showError(translate("common.sign_first"));
@@ -370,19 +371,17 @@ export const SignaturePad = ({
           id: pdfData?.id,
         };
 
-        const response = await dispatch(signOffer({ data, formData }));
+        try {
+          const response = await dispatch(signOffer({ data, formData }));
 
-        if (response?.payload) {
-          dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+          if (response?.payload) {
+            dispatch(updateModalType({ type: ModalType.CREATE_SUCCESS }));
+          }
+        } catch (error) {
+          console.error(error, "sign pdf error");
         }
 
-        return true;
-
-        // smoothScrollToSection("#acceptOffer")
-
-        // Function to handle scrolling
-
-        // window.scrollTo(0, document.body.scrollHeight - window.innerHeight);
+        // return true;
       } else {
         showError(translate("common.sign_first"));
       }

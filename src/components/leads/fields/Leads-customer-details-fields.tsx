@@ -89,7 +89,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
-
               inputType: "tel",
               register,
               value:
@@ -105,11 +104,11 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
             },
             field: {
               type: Field.input,
-              className: " !border-[#BFBFBF] focus:!border-primary",
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
-              register,
               inputType: "tel",
+              register,
               value:
                 leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
             },

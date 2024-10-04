@@ -1,8 +1,6 @@
 import {
-  AcknowledgementSlipProps,
   ContractEmailHeaderProps,
   InvoiceEmailHeaderProps,
-  PayableToProps,
   PdfProps,
   TemplateType,
 } from "@/types";
@@ -36,46 +34,13 @@ import {
 } from "@/api/slices/invoice/invoiceSlice";
 import { MainInvoicePdfDetailTableRowTypes } from "@/types/invoice";
 
-const qrCodeAcknowledgementData: AcknowledgementSlipProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  currency: "CHF",
-  amount: 6418.92,
-};
-
-const qrCodePayableToData: PayableToProps = {
-  accountDetails: {
-    accountNumber: "CH48 0900 0000 1556 1356 9",
-    name: "Rahal GmbH",
-    street: "St.Urbanstrasse 79",
-    city: "4914 Roggwil",
-  },
-  referenceNumber: "27 12323 0000 0000 0006 22926",
-  payableByDetails: {
-    name: "Rahal GmbH",
-    street: "St. Urbanstrasse 79",
-    city: "4914 Roggwill BE",
-  },
-  additionalInformation: "R-2000 Umzugsfuchs",
-};
-
 let contractPdfInfo = {
   subject: "",
   description: "",
 };
 
 export const useMainInvoicePdf = () => {
-  const [invoiceData, setContractData] =
+  const [invoiceData, setInvoiceData] =
     useState<PdfProps<InvoiceEmailHeaderProps>>();
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
@@ -96,8 +61,8 @@ export const useMainInvoicePdf = () => {
     auth: { user },
     global: { modal, loading: loadingGlobal },
   } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   const { loading, invoiceDetails } = useAppSelector((state) => state.invoice);
 
   const maxItemsFirstPage = 6;
@@ -246,6 +211,7 @@ export const useMainInvoicePdf = () => {
               invoiceAmount: invoiceDetails?.paidAmount?.toString(),
               invoiceStatus: invoiceDetails?.invoiceStatus?.toString(),
               taxType: invoiceDetails?.taxType,
+              payments: invoiceDetails?.payments,
               serviceDiscountSum:
                 invoiceDetails?.serviceDetail?.serviceDetail?.reduce(
                   (acc, service) => {
@@ -293,7 +259,7 @@ export const useMainInvoicePdf = () => {
             isCanvas: false,
           };
 
-          setContractData(formatData);
+          setInvoiceData(formatData);
           contractPdfInfo = {
             ...contractPdfInfo,
             subject: invoiceDetails?.content?.confirmationContent?.title,
@@ -314,7 +280,6 @@ export const useMainInvoicePdf = () => {
     const remainingItems = totalItems - itemsOnFirstPage;
     const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
 
-    // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 
@@ -378,8 +343,6 @@ export const useMainInvoicePdf = () => {
           delete apiData["content"];
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
           await dispatch(sendContractEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
         } else {
           let apiData = {
             email: invoiceDetails?.customerDetail?.email,
@@ -398,8 +361,6 @@ export const useMainInvoicePdf = () => {
           };
           dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
           await dispatch(sendContractEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
         }
       }
     } catch (error) {
@@ -420,7 +381,6 @@ export const useMainInvoicePdf = () => {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-
       URL.revokeObjectURL(url);
     }
   };

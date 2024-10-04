@@ -54,7 +54,9 @@ const TableRows = ({
                 onClick={() => handleInvoicePdfPreview(item?.id)}
                 className={`${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(400px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)] border-t border-t-[#E7EAEE]`}
+                } pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-3 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(90px,_90px)_minmax(400px,_5fr)_minmax(250px,_4fr)_minmax(150px,_150px)_minmax(150px,_150px)_minmax(130px,_130px)_minmax(140px,_140px)_minmax(110px,_110px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(70px,_70px),minmax(120px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(120px,_120px)] maxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(100px,_100px)_minmax(100px,_100px)] xMaxSize:grid-cols-[minmax(70px,_70px),minmax(100px,_4fr)_minmax(110px,_3fr)_minmax(110px,_110px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(100px,_100px)_minmax(100px,_100px)] ${
+                  index !== 0 && "border-t border-t-[#E7EAEE]"
+                } ${index === 0 && "mt-2"}`}
               >
                 <span className="py-4 truncate">{item.invoiceNumber}</span>
                 <div className="flex items-center gap-x-1">
@@ -86,21 +88,21 @@ const TableRows = ({
                       item.sentEmail === item.totalEmail
                         ? "bg-[#FE9244]"
                         : "bg-[#4A13E7]"
-                    } text-white px-2 py-1 text-center rounded-md w-full text-sm`}
+                    } text-white px-2 py-2 text-center rounded-md w-full text-sm`}
                   >
                     {item.sentEmail + "/" + item.totalEmail + " Sent"}
                   </div>
                 </span>
                 <div className="py-4 flex justify-center items-center">
                   <span
-                    className={`bg-[#4A13E7] text-white px-2 py-1 rounded-tl-md rounded-bl-md text-center text-sm overflow-hidden max-w-[100px]`}
+                    className={`bg-[#4A13E7] text-white px-2 py-2 rounded-tl-md rounded-bl-md text-center text-sm overflow-hidden max-w-[100px]`}
                   >
                     {!Number.isInteger(item?.paidAmount)
                       ? Number(item?.paidAmount)?.toFixed(2)
                       : item?.paidAmount}
                   </span>
                   <span
-                    className={`bg-[#EDE7FD] text-[#393939] px-2 py-1 rounded-tr-md rounded-br-md text-center text-sm overflow-hidden max-w-[100px]`}
+                    className={`bg-[#EDE7FD] text-[#393939] px-2 py-2 rounded-tr-md rounded-br-md text-center text-sm overflow-hidden max-w-[100px]`}
                   >
                     {!Number.isInteger(item?.remainingAmount)
                       ? Number(item?.remainingAmount)?.toFixed(2)
@@ -112,7 +114,7 @@ const TableRows = ({
                   <div
                     className={`bg-[${getInvoiceStatusColor(
                       item.invoiceStatus
-                    )}] text-white px-2 py-1 text-center rounded-md min-w-[70px] w-full text-sm`}
+                    )}] text-white px-2 py-2 text-center rounded-md min-w-[70px] w-full text-sm`}
                   >
                     {translate(`invoice_status.${item.invoiceStatus}`)}
                   </div>
@@ -120,7 +122,11 @@ const TableRows = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)]">
+            <div
+              className={`grid items-center grid-cols-[minmax(50px,_50px)_minmax(50px,_50px)] ${
+                index === 0 && "mt-2"
+              }`}
+            >
               <span
                 onClick={(e) =>
                   handleNotes(item?.id, item?.invoiceNumber, name, heading, e)
@@ -181,7 +187,7 @@ const TableRows = ({
                         query: { ...router.query, invoice: item.id },
                       })
                     }
-                    className="p-[5px] rounded-md w-[33px] h-[33px] border border-primary flex justify-center items-center"
+                    className="p-[5px] rounded-md w-[32px] h-[32px] border border-primary flex justify-center items-center"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

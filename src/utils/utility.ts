@@ -16,15 +16,17 @@ import { NextRouter } from "next/router";
 import { updateQuery } from "./update-query";
 import { DEFAULT_SERVICE, staticEnums } from "./static";
 import { DetailScreensStages } from "@/enums/auth";
-import moment from "moment";
 import { CustomerAddress } from "@/types/customer";
 import { FieldValues, UseFormSetValue } from "react-hook-form";
 import { Service } from "@/types/service";
 import { useCallback, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { PDFDocument } from "pdf-lib";
+import moment, { Moment } from "moment";
 import "moment/locale/de";
 import { TFunction } from "next-i18next";
+import { contractTableTypes } from "@/types/contract";
+
 export const getNextFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -35,6 +37,7 @@ export const getNextFormStage = (
   }
   return null;
 };
+
 export const getBackFormStage = (
   current: DetailScreensStages
 ): DetailScreensStages | null => {
@@ -51,6 +54,7 @@ export function isFieldType(type: any): type is FieldType {
     type
   );
 }
+
 export const areFiltersEmpty = (filter: FilterType) => {
   return Object.values(filter).every((value) => {
     if (Array.isArray(value)) {
@@ -93,6 +97,27 @@ export const areFiltersEmpty = (filter: FilterType) => {
 //   }
 //   return cleanedFilter as FilterType;
 // };
+
+export const hasTimeComponent = (dateString: string) => {
+  return moment(dateString).format("HH:mm") !== "00:00";
+};
+
+export const hasTime = (date: string | Moment) => {
+  const momentDate = typeof date === "string" ? moment(date) : date;
+
+  return !(
+    momentDate.hours() === 0 &&
+    momentDate.minutes() === 0 &&
+    momentDate.seconds() === 0
+  );
+};
+
+export const isValidUrl = (url?: string): boolean => {
+  return (
+    typeof url === "string" &&
+    (url.startsWith("http://") || url.startsWith("https://"))
+  );
+};
 
 export const formatDateForDatePicker = (isoDateString: string) => {
   if (
@@ -276,6 +301,10 @@ export const conditionHandlerLogin = (
     } else {
       if (staticEnums["User"]["role"][response?.data?.data?.User?.role] === 0) {
         router.pathname = "/admin/dashboard";
+      } else if (
+        staticEnums["User"]["role"][response?.data?.data?.User?.role] === 3
+      ) {
+        router.pathname = "/agent/dashboard";
       } else {
         router.pathname = "/dashboard";
       }
@@ -402,14 +431,89 @@ export function formatDateReverse(date: string) {
   if (!date) return;
   return moment(date).format("HH:mm, DD/MM/YYYY");
 }
+
 export function formatDateTimeToDate(date: string) {
   if (!date) return null;
   return moment(date).format("DD/MM/YYYY");
 }
 
+export function fieldDateFormat(date: string) {
+  if (!date) return null;
+  return moment(date).format("YYYY-MM-DD");
+}
+
 export function pdfDateFormat(date: string, locale: string) {
   if (!date) return null;
   return moment(date).locale(locale).format("DD. MMMM YYYY");
+}
+
+export function calendarDayDateFormat(date: string, locale: string) {
+  return moment(date).locale(locale).format("dddd, DD MMMM");
+}
+
+export const calendarTaskformatDate = (date: string) => {
+  return moment(date).format("dddd, D MMMM");
+};
+
+export const calculateRemainingTime = (endDate: string) => {
+  const now = moment();
+  const endTime = moment(endDate);
+  const remainingMinutes = endTime.diff(now, "minutes");
+  const formattedEndTime = endTime.format("HH:mm");
+
+  return {
+    remainingMinutes,
+    formattedEndTime,
+  };
+};
+
+export const formatTimeDifference = (minutes: number) => {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  let timeString = "";
+
+  if (hours > 0) {
+    timeString += `${hours} ${translate("common.hour")}${hours > 1 ? "s" : ""}`;
+  }
+
+  if (remainingMinutes > 0) {
+    if (hours > 0) {
+      timeString += ` ${translate("common.and")} `;
+    }
+    timeString += `${remainingMinutes} ${translate("common.minute")}${
+      remainingMinutes > 1 ? "s" : ""
+    }`;
+  }
+
+  return timeString;
+};
+
+export const formatAlertTime = (alertTime: number) => {
+  switch (alertTime) {
+    case 15:
+    case 30:
+    case 60:
+      return `${alertTime} ${translate("common.minutes")} ${translate(
+        "common.before"
+      )}`;
+    case 120:
+      return `2 ${translate("common.hours")} ${translate("common.before")}`;
+    case 1440:
+      return `1 ${translate("common.day")} ${translate("common.before")}`;
+    case 2880:
+      return `2 ${translate("common.days")} ${translate("common.before")}`;
+    case 10080:
+      return `7 ${translate("common.days")} ${translate("common.before")}`;
+    default:
+      return `${alertTime} ${translate("common.minutes")} ${translate(
+        "common.before"
+      )}`;
+  }
+};
+
+export function calendarYearDateFormat(date: string, locale: string) {
+  return moment(date).locale(locale).format("MMMM YYYY");
 }
 
 export function formatDateTimeToDateMango(date: string) {
@@ -708,10 +812,10 @@ export function getFollowUpStatusColor(status: string) {
 }
 
 export function getMailStatusColor(status: string) {
-  if (staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["failed"])
+  if (staticEnums["MailStatus"][status] == staticEnums["MailStatus"]["failed"])
     return "#FF376F";
   else if (
-    staticEnums["mailStatus"][status] == staticEnums["mailStatus"]["pending"]
+    staticEnums["MailStatus"][status] == staticEnums["MailStatus"]["pending"]
   )
     return "#FE9244";
   else return "#45C769";
@@ -927,3 +1031,5 @@ export const downloadFile = (url: string) => {
       console.error("Error downloading file:", error);
     });
 };
+
+export const calenderFormattedDate = moment().format("dddd, DD MMMM");

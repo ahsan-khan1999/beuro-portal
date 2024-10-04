@@ -160,6 +160,8 @@
     "file": "Please Select a valid file format"
   },
   "validationMessages": {
+    "delete_dependency_deny": "Cannot delete: item has related dependencies",
+    "unauthorized": "You do not have permission",
     "required": "This field is required",
     "nonexistent": "nonexistent",
     "already_exists": "{0} with this {1} already exists",
@@ -250,6 +252,7 @@
   "sidebar": {
     "customer": {
       "dashboard": "Dashboard",
+      "calendar": "Calendar",
       "customers": "Customers",
       "leads": {
         "leads": "Leads",
@@ -257,6 +260,12 @@
         "InProcess": "InProcess",
         "close": "Close",
         "expire": "Expire"
+      },
+      "appointments": {
+        "appointment": "Appointments",
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
       },
       "offers": {
         "offers": "Offers",
@@ -269,7 +278,7 @@
         "contracts": "Contracts",
         "open": "Open",
         "confirmed": "Confirmed",
-        "cancelled": "Cacelled"
+        "cancelled": "Cancelled"
       },
       "invoices": {
         "invoices": "Invoices",
@@ -284,7 +293,7 @@
       "content": "Content",
       "mail_tracker": "Mail Tracker",
       "settings": "Settings",
-      "contact_supports": "Contact Supports"
+      "contact_supports": "Supports"
     },
     "admin": {
       "dashboard": "Dashboard",
@@ -293,6 +302,24 @@
       "payments": "Payments",
       "support_requests": "Support",
       "Settings": "Settings"
+    },
+    "agent": {
+      "dashboard": "Dashboard",
+      "leads": {
+        "leads": "Leads",
+        "open": "Open",
+        "InProcess": "InProcess",
+        "close": "Close",
+        "expire": "Expire"
+      },
+      "appointments": {
+        "appointment": "Appointments",
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "settings": "Settings",
+      "contact_supports": "Supports"
     }
   },
   "customers": {
@@ -965,8 +992,9 @@
       "save_button": "Save"
     },
     "content_created_modal": {
-      "main_heading": "Content Created Successful ",
-      "sub_heading": "Thanks for creating offer we are happy to have you. ",
+      "main_heading": "Content Created Successful",
+      "sub_heading": "Thanks for creating Content we are happy to have you.",
+      "update_sub_heading": "Thanks for updating Content we are happy to have you.",
       "button": "Done"
     }
   },
@@ -975,6 +1003,8 @@
     "main_heading": "Leads",
     "add_button": "Add New",
     "side_images_heading": "Images",
+    "created": "Created",
+    "not_created": "Not Created",
     "table_functions": {
       "open": "Open",
       "inProcess": "InProcess",
@@ -985,17 +1015,20 @@
       "Open": "Open",
       "InProcess": "InProcess",
       "Close": "Close",
-      "Expired": "Expired"
+      "Expired": "Expired",
+      "Appointment": "Appointment"
     },
     "table_headings": {
       "id": "ID",
       "name": "Name",
+      "customer": "Customer",
       "email": "Email",
       "phone": "Phone",
       "desire_date": "Desire Date",
       "creation_date": "Creation Date",
       "location": "Location",
       "status": "Status",
+      "appointment": "Appointment",
       "images": "Images",
       "note": "Notes",
       "edit": "Edit"
@@ -1003,6 +1036,7 @@
     "card_content": {
       "heading": "Leads Details",
       "create_button": "Create Offer",
+      "lead_create": "Create Lead",
       "lead_id": "Lead ID",
       "status": "Status",
       "created_date": "Creation Date",
@@ -1034,9 +1068,9 @@
       "country": "Country",
       "cancel_button": "Cancel",
       "save_changes_button": "Save Changes",
-      "next_button": "Next"
+      "next_button": "Next",
+      "address": "Address"
     },
-
     "placeholders": {
       "name": "Please Enter Your Name",
       "email": "Please Enter Your Email Address",
@@ -1094,6 +1128,64 @@
       "sub_heading": "Thanks for creating offer we are happy to have you.",
       "add_button": "Add Images",
       "without_images": "Continue without Images"
+    }
+  },
+  "appointments": {
+    "view_reports_btn": "View Reports",
+    "reschedule_btn": "Reschedule",
+    "create_appointments": "Create Appointment",
+    "appointment": "Appointment",
+    "sub_report": "Submit Report",
+    "view_appointments_btn": "View Appointments",
+    "schedule_appointment": "Schedule Appointment",
+    "reschedule_appointment": "Reschedule Appointment",
+    "detail_heading": "Appointment Details",
+    "details": "Details",
+    "table_headings": {
+      "id": "ID",
+      "lead_id": "Lead ID",
+      "customer": "Customer",
+      "company_name": "Company Name",
+      "date": "Date",
+      "time": "Time",
+      "agent": "Agent",
+      "status": "Status",
+      "offer_status": "Offer Status",
+      "action": "Action",
+      "canton": "Canton"
+    },
+    "appointment_status": {
+      "Pending": "Pending",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
+    },
+    "successs_modal": {
+      "heading": "Appointment create successfully",
+      "sub_heading": "Thanks for creating Appointments we are happy to have you."
+    },
+    "appointments_field_label": {
+      "lead_id": "Lead ID",
+      "enter_date": "Enter Date",
+      "enter_time": "Select Time",
+      "select_agent": "Select Agent"
+    },
+    "detail_data": {
+      "assign_agent": "Assign Agent",
+      "lead_id": "Lead ID",
+      "appointment_id": "Appointment ID",
+      "status": "Status",
+      "date": "Date",
+      "time": "Time",
+      "no_data_found": "No reports submitted",
+      "no_report_found": "No report Found",
+      "created_by": "Created by"
+    },
+    "report_detail": {
+      "contact_tab": "Contact Details",
+      "contact_address_detail": "Contact and address",
+      "house_detail": "House Details",
+      "service_detail": "Service/Product Details",
+      "additional_detail": "Additional Details"
     }
   },
   "common": {
@@ -1166,12 +1258,45 @@
       "delete_content": "Are you sure want to delete this content?",
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date",
-      "success_signed_offer": "Operation Successful"
+      "success_signed_offer": "Operation Successful",
+      "report_created": "Report created successfully!",
+      "report_created_des": "Thanks for creating Report we are happy to have you."
     },
-    "please_choose": "Please Choose",
     "add_new_offer": "Add New Offer",
     "add_new_invoice": "Add New Invoice",
     "no_customer_found": "No customer found",
+    "paid_invoice": "Invoice was successfully marked as paid",
+    "paid_invoice_date": "Select the paid date of invoice",
+    "enter_location": "Enter location",
+    "pay": "Pay",
+    "paid": "Paid",
+    "Paid": "Paid",
+    "unPaid": "Unpaid",
+    "change_payment": "Change payment status",
+    "are_sure_payment_status": "Are you sure you want to mark the invoice as",
+    "notifications": "Notifications",
+    "remaind_me": "Remind me in",
+    "starts_in": "Starts in",
+    "minute": "minute",
+    "_at": "at",
+    "and": "and",
+    "select_canton": "Select Canton",
+    "before": "before",
+    "hour": "Hour",
+    "text_area_msg": "Type your message here",
+    "street_no_placeholder": "Street No",
+    "post_code_placeholder": "Post Code",
+    "country_placeholder": "Country",
+    "logout": "Logout",
+    "please_choose": "Please Choose",
+    "yes": "Yes",
+    "no": "No",
+    "upload_button": "Upload",
+    "item": "Item",
+    "create_report_btn": "Create Report",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "schedule_btn": "Schedule Appointment",
     "details": "Details",
     "follow_up_completed": "Please contact the customer after 10 minutes.",
     "invoice_cards": {
@@ -1237,6 +1362,7 @@
     "share": "Share",
     "lead": "Lead",
     "add": "Add",
+    "added":"Added",
     "upload_link": "Upload your link here",
     "time": "Time",
     "at": "At",
@@ -1331,6 +1457,7 @@
     "add_note_modal": {
       "heading": "Add Notes",
       "label": "Note Title",
+      "description_title": "Note Description",
       "button": "Save"
     },
     "images_modal": {
@@ -1578,7 +1705,11 @@
       "street": "Please Enter Street Number",
       "post_code": "Please Enter Your Post Code + City",
       "address_description": "",
-      "service_title": "Please Enter Your service Name"
+      "service_title": "Please Enter Your service Name",
+      "phone_placeholder": "Please Enter Your phone no.",
+      "mobile_placeholder": "Please Enter Your mobile no.",
+      "country_placeholder": "Please Enter Your country",
+      "company_placeholder": "Please Enter Your company name"
     }
   },
   "pdf_preview": {
@@ -1681,6 +1812,7 @@
         "subscription_date": "Subscription Date",
         "status": "Status",
         "company_logo": "Company Logo",
+        "appointment": "Appointment Module",
         "customer_status": {
           "active": "Active",
           "block": "Block",
@@ -1966,6 +2098,7 @@
   },
   "dashboard_detail": {
     "main_heading": "Customer Dashboard",
+    "agent_dashboard": "Agent Dashboard",
     "overview": "Overview",
     "sales_heading": "Sales Report",
     "plans": "Plans",
@@ -2040,6 +2173,7 @@
     "offer_number": "Offer No",
     "offer_date": "Create Date",
     "created_by": "Created By",
+    "name": "Name",
     "email": "Email",
     "phone": "Phone",
     "mobile": "Mobile Number",
@@ -2207,6 +2341,10 @@
     "Online": "Online",
     "Twint": "Twint"
   },
+  "customer_status": {
+    "unBlock": "Unblock",
+    "block": "Block"
+  },
   "typeList": {
     "All": "All",
     "Individual": "Individual",
@@ -2216,7 +2354,8 @@
     "Post": "Post",
     "Pending": "Pending",
     "Sent": "Sent",
-    "Failed": "Failed"
+    "Failed": "Failed",
+    "opend": "Opened"
   },
   "mail_tracker_status": {
     "opend": "opend",
@@ -2317,5 +2456,158 @@
     "description": "We are thrilled to inform you that we have successfully received your signed contract. Your trust in Buro to meet your needs is greatl appreciated, and we are committed to delivering excellence every step of the way. This marks the beginning of our official partnership, and we assure you that our team is dedicated to providing you with outstanding service and support. As we proceed, you will receive a comprehensive guide on how to maximize the benefits of our services. Should you have any questions or need assistance, please feel free to reach out to our customer support at any time. Your satisfaction is our priority, and we are here to ensure a smooth and beneficial experience for you. Thank you for choosing Buro. We look forward to a fruitful collaboration and are excited about the opportunities ahead.",
     "warm_regards": "Warm Regards",
     "team": "The Buro Team"
+  },
+
+  "agent": {
+    "main_heading": "Submit Appointment Reports",
+    "contact_detail_heading": "Contact Details",
+    "report_tabs_heading": {
+      "contact": "Contact and Address",
+      "house": "House Details",
+      "services": "Services",
+      "additional": "Additional Info"
+    },
+    "report_contact_fields": {
+      "name": "Name",
+      "email": "Email",
+      "telefon": "Telefon",
+      "move_out_addres_heading": "Move-out Address",
+      "street_no": "Street No",
+      "post_code": "Post Code + City",
+      "floor": "Floor",
+      "room": "Room",
+      "lift": "Lift",
+      "parking_permit": "Parking Permit",
+      "collection_address_heading": "Collection Address"
+    },
+    "house_detail_fields": {
+      "item": "Item",
+      "qty": "Qty",
+      "living_room_heading": "Living room(WZ)",
+      "sofa": "Sofa",
+      "puit": "Desk",
+      "tv_table": "TV table",
+      "sessel": "Armchair",
+      "tisch": "Table",
+      "regal": "Shelf",
+      "l_sofa": "L Sofa",
+      "fernseher": "Television",
+      "deco_gross": "Deco large",
+      "box": "Box",
+      "remark": "Remark",
+      "kuche": "kitchen",
+      "backofen": "Oven",
+      "herd": "Stove",
+      "washchmashine": "Washing machine",
+      "kuhlschrank": "Refrigerator",
+      "mikrowelle": "Microwave",
+      "Tumbler": "Tumbler",
+      "tiefkuhler": "Deep Freezer",
+      "kaffeemaschine": "Coffee machine",
+      "bedroom_heading": "Bedroom(SZ)",
+      "bett": "Bed",
+      "schrank_klein": "Cupboard small",
+      "schminkanlage": "Dress Table",
+      "pult": "Desk",
+      "doppeltbett": "Double bed",
+      "schrank_mittel": "Medium wardrobe",
+      "nachttisch": "Bedside table",
+      "pflanzen": "Plants",
+      "schrank_gross": "Large wardrobe",
+      "zimmer_heading": "Room(z)",
+      "balcony_heading": "Balcony/terrace/garden (W/D/G)",
+      "grill": "Grill",
+      "topfe": "Pots",
+      "rasenmaher": "Lawn mower",
+      "stuhle": "Chairs",
+      "schirm": "Umbrella",
+      "krauterbeet": "Herb bed",
+      "keller_heading": "Cellar/screed (K/E)",
+      "entsorgungen": "Disposals",
+      "mobel": "Furniture",
+      "fahrrad": "Bicycle",
+      "boxen": "Boxes",
+      "kinderwagen": "Baby carriage",
+      "speziell": "Special",
+      "aquarium": "Aquarium",
+      "piano": "Piano",
+      "lampe": "Lampe",
+      "elektronisches": "Electronics",
+      "pool": "Pool",
+      "sportgerat": "Sports equipment",
+      "tressor": "Tressor"
+    },
+    "service_detail_fields": {
+      "heading": "Service/Product Details",
+      "service": "Service",
+      "existng_service": "Existing Service",
+      "new_service": "New Service",
+      "description": "Description",
+      "count": "Count",
+      "unit": "Unit",
+      "price": "Price",
+      "discount": "Discount",
+      "total": "Total"
+    },
+    "additional_details_fields": {
+      "heading": "Details Offer",
+      "bemerkung": "Remark",
+      "mitarbeiter": "Employees",
+      "leiferwagen": "Delivery van",
+      "stunden": "Hours",
+      "reingung_mit": "Cleaning with delivery guarantee",
+      "besenrein": "Broom clean",
+      "preis_chf": "Price CHF",
+      "hinweis": "Note and information",
+      "images": "Upload Images"
+    },
+    "employee_type": {
+      "CEO": "CEO",
+      "Administration": "Administration",
+      "HRManager": "HR Manager",
+      "Agent": "Agent",
+      "FinanceManager": "Finance Manager",
+      "OperationsManager": "Operations Manager",
+      "ITManager": "IT Manager",
+      "MarketingManager": "Marketing Manager",
+      "SalesManager": "Sales Manager",
+      "ProjectManager": "Project Manager",
+      "BusinessAnalyst": "Business Analyst",
+      "CustomerSupportRepresentative": "Customer Support Representative",
+      "AdministrativeAssistant": "Administrative Assistant",
+      "Intern": "Intern"
+    }
+  },
+
+  "calendar": {
+    "main_heading": "Calendar",
+    "add_task": "Add Task",
+    "today": "Today",
+    "edit": "Edit",
+    "all_day_task": "All Day",
+    "select_date": "Select Date",
+    "select_color": "Select Color",
+    "remainder": "Remainder",
+    "address": "Address",
+    "location": "Location",
+    "current_location": "Current Location",
+    "all_day": "All-Day",
+    "all_day_event": "All-day event",
+    "is_contract_task_des": "Would you like to create a task?",
+    "tab_headings": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
+    },
+    "days": {
+      "Monday": "Monday",
+      "Tuesday": "Tuesday",
+      "Wednesday": "Wednesday",
+      "Thursday": "Thursday",
+      "Friday": "Friday",
+      "Saturday": "Saturday",
+      "Sunday": "Sunday"
+    }
   }
 }

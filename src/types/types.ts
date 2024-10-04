@@ -28,6 +28,7 @@ import { OffersTableRowTypes, ServiceList, Total } from "./offers";
 import {
   InvoiceDetailTableRowTypes,
   InvoiceTableRowTypes,
+  PaymentsDataType,
   SubInvoiceTableRowTypes,
 } from "./invoice";
 import { Contract, contractTableTypes } from "./contract";
@@ -44,6 +45,7 @@ import {
 } from "@/api/slices/settingSlice/settings";
 import { ServiceType } from "@/enums/offers";
 import { staticEnums } from "@/utils/static";
+import { Appointments, Report } from "./appointments";
 
 export interface SideBar {
   icon?: keyof typeof svgs;
@@ -100,6 +102,20 @@ export interface tabArrayTypes {
   icon: string;
   id?: string;
 }
+export interface MobileTabArrayTypes {
+  name: string;
+  content?: React.ReactNode;
+  icon: string;
+  id?: string;
+  type: number;
+  backgroundColor?: string;
+}
+export interface stepFormArrayTypes {
+  name: string;
+  content?: React.ReactNode;
+  icon: string;
+  id?: string;
+}
 
 export interface tabsSectionTypes {
   tabsArray: tabArrayTypes[];
@@ -120,6 +136,7 @@ export interface detailScreenCardsLayout {
   currentFormStage?: string;
   children: ReactNode;
   containerClassName?: string;
+  isAgent?: boolean;
 }
 
 export interface TableCardLayoutProps {
@@ -300,6 +317,29 @@ export type GenerateAddTaxFormField = (
   onClick?: Function
 ) => FormField[];
 
+export type GenerateAddTaskFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  isRemainder: boolean,
+  count: number,
+  setValue: UseFormSetValue<FieldValues>,
+  watch: UseFormWatch<FieldValues>,
+  control: Control<FieldValues>,
+  isAllDay?: boolean,
+  colour?: string,
+  alertTime?: number,
+  trigger?: UseFormTrigger<FieldValues>,
+  date?: { startDate: string; endDate: string }[],
+  onDateChange?: (name: string, value: string) => void
+) => FormField[];
+
+export type GenerateRemainderFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  trigger?: UseFormTrigger<FieldValues>
+) => FormField[];
+
 export type GenerateGeneralAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -338,7 +378,31 @@ export type GenerateEmployeeFormField = (
   isUpdate: boolean,
   handleUpdateCancel: () => void,
   employeeDetails?: Employee,
+  isCreate?: boolean,
   control?: Control<FieldValues>
+) => FormField[];
+
+export type GenerateAgentSettingFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control?: Control<FieldValues>,
+  onCancel?: () => void,
+  onPasswordChange?: () => void
+) => FormField[];
+
+export type GenerateScheduleAppointmentsFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  properties: {
+    onClose: () => void;
+    appointmentDetails?: Appointments;
+    // employee: Employee[];
+    isUpdate?: boolean;
+    onClick?: Function;
+    handleChangeTimeField?: (type: string, date: string) => void;
+  },
+  trigger?: UseFormTrigger<FieldValues>
 ) => FormField[];
 
 // Notes formfield
@@ -398,6 +462,11 @@ export type GenerateInvoiceFormField = (
   invoiceDetails?: InvoiceTableRowTypes,
   type?: string,
   data?: SubInvoiceTableRowTypes
+) => FormField[];
+
+export type GeneratePaidDateInvoiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader?: boolean
 ) => FormField[];
 
 // Contract formfield
@@ -524,6 +593,121 @@ export type GenerateOfferServiceFormField = (
     taxType?: number;
     discountType?: number;
     offerDetails?: OffersTableRowTypes;
+    reportDetails?:Report,
+    appointmentId?:string | string[],
+    generateTotal?: () => void;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string, index: number) => void;
+    serviceDetails?: Service;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    generatePrice?: (index: number) => void;
+    total?: Total;
+    tax?: TaxSetting[] | null;
+    currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+  },
+  handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
+  handleRemoveService: (index: number) => void,
+  serviceType: ServiceType[],
+  onServiceChange: (index: number, value: ServiceType) => void,
+  fields?: object[],
+  setValue?: SetFieldValue<FieldValues>,
+  watch?: UseFormWatch<FieldValues>
+) => FormField[];
+
+export type GenerateReportServiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  properties: {
+    isTax?: boolean;
+    isDiscount?: boolean;
+    taxType?: number;
+    discountType?: number;
+    reportDetails?: Report;
+    generateTotal?: () => void;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string, index: number) => void;
+    serviceDetails?: Service;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    generatePrice?: (index: number) => void;
+    total?: Total;
+    tax?: TaxSetting[] | null;
+    currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+  },
+  handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
+  handleRemoveService: (index: number) => void,
+  serviceType: ServiceType[],
+  onServiceChange: (index: number, value: ServiceType) => void,
+  fields?: object[],
+  setValue?: SetFieldValue<FieldValues>,
+  watch?: UseFormWatch<FieldValues>
+) => FormField[];
+
+export type GenerateReportServiceDescriptionFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  properties: {
+    isTax?: boolean;
+    isDiscount?: boolean;
+    taxType?: number;
+    discountType?: number;
+    reportDetails?: Report;
+    generateTotal?: () => void;
+    customerType?: string;
+    type?: string;
+    customer?: Customers[];
+    onCustomerSelect?: (id: string, index: number) => void;
+    serviceDetails?: Service;
+    onCancel?: () => void;
+    leadDetails?: Lead;
+    service?: Service[];
+    handleRemove?: (id: string) => void;
+    generatePrice?: (index: number) => void;
+    total?: Total;
+    tax?: TaxSetting[] | null;
+    currency?: string;
+    invoiceDetails?: InvoiceDetailTableRowTypes;
+  },
+  handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
+  handleRemoveService: (index: number) => void,
+  serviceType: ServiceType[],
+  onServiceChange: (index: number, value: ServiceType) => void,
+  fields?: object[],
+  setValue?: SetFieldValue<FieldValues>,
+  isMobile?: boolean,
+  isTablet?: boolean,
+  watch?: UseFormWatch<FieldValues>
+) => FormField[];
+
+export type GenerateAgentReportServiceFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  count: number,
+  properties: {
+    isTax?: boolean;
+    isDiscount?: boolean;
+    taxType?: number;
+    discountType?: number;
+    offerDetails?: OffersTableRowTypes;
     generateTotal?: () => void;
     customerType?: string;
     type?: string;
@@ -589,6 +773,11 @@ export type GenerateInvoiceServiceFormField = (
 export type GenerateOffersServiceActionFormField = (
   loader: boolean,
   onClick: () => void
+) => FormField[];
+
+export type GenerateReportServiceActionFormField = (
+  loader: boolean,
+  onHandleBack?: Function
 ) => FormField[];
 
 export type GenerateInvoiceServiceActionFormField = (
@@ -767,7 +956,6 @@ export type GenerateFollowUpFormField = (
     customer: Customers[];
     lead: Lead[];
     followUps: FollowUp | null;
-    onCustomerSelect?: (id: string) => void;
   },
   onItemChange?: Function,
   trigger?: UseFormTrigger<FieldValues>
@@ -795,6 +983,39 @@ export type GeneratePaymentSettingFormField = (
   control: Control<FieldValues>,
   trigger?: UseFormTrigger<FieldValues>,
   onClick?: Function
+) => FormField[];
+
+// appointment form
+export type GenerateContactReportFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
+
+export type GenerateContactAddressReportFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  addressFieldsLength: number,
+  addressFields?: object[],
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
+
+export type GenerateHouseDetailReportFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onHandleBack?: Function,
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
+
+export type GenerateAdditionalInfoReportFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onHandleBack?: Function,
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 
 export interface PaginationProps {
@@ -838,7 +1059,8 @@ export interface FilterType {
     $lte?: string;
   };
   paymentType?: string[] | string;
-  email?: string[] | string;
+  emailStatus?: string[] | string;
+  mailStatus?: string[] | string;
   price?: string[];
   month?: number;
   leadSource?: string[] | string;
@@ -853,7 +1075,7 @@ export interface MoreFilterType {
     $gte?: string;
     $lte?: string;
   };
-  email?: string[] | string;
+  emailStatus?: string[] | string;
   price?: string[];
   paymentType?: string[] | string;
   leadSource?: string[] | string;
@@ -862,6 +1084,7 @@ export interface FilterProps {
   filter: FilterType;
   setFilter: React.Dispatch<SetStateAction<FilterType>>;
   onFilterChange: (filters: FilterType) => void;
+  containerClassName?: string;
 }
 
 interface ItemList {
@@ -879,12 +1102,12 @@ interface DateRangeSelectionProps {
 }
 
 export interface DocumentHeaderDetailsProps {
-  offerNo: string;
-  offerDate: string;
+  offerNo?: string;
+  offerDate?: string;
   createdBy: string;
   logo: string;
   emailTemplateSettings: EmailTemplate | null;
-  fileType?: "contract" | "invoice" | "receipt";
+  fileType?: "contract" | "invoice" | "receipt" | "report";
   companyName?: string;
   isReverseLogo?: boolean;
   language?: string;
@@ -918,12 +1141,15 @@ export interface ProductItemFooterProps {
   discountDescription?: string;
   language?: string;
   paymentType?: string;
+  paidDate?: string;
+  isBreakPage?: boolean;
+  payments?: PaymentsDataType[];
 }
 
 export interface ContactDetailsProps {
   address: {
     name: string;
-    companyName: string;
+    companyName?: string;
     streetWithNumber: string;
     postalCode: string;
     city: string;
@@ -935,9 +1161,9 @@ export interface ContactDetailsProps {
   isReverseInfo?: boolean;
 }
 export interface MovingDetailsProps {
-  header: string;
+  header?: string;
   address: CustomerAddress[];
-  workDates: DateRangeProps[];
+  workDates?: DateRangeProps[];
   isOffer?: boolean;
   handleTitleUpdate?: (value: string) => void;
   handleDescriptionUpdate?: (value: string) => void;
@@ -996,10 +1222,10 @@ interface CompanyDetailsFourthColumn {
 }
 
 export interface DocumentDetailFooterProps {
-  firstColumn: CompanyDetailsFirstColumn;
-  secondColumn: CompanyDetailsSecondColumn;
-  thirdColumn: CompanyDetailsThirdColumn;
-  fourthColumn: CompanyDetailsFourthColumn;
+  firstColumn?: CompanyDetailsFirstColumn;
+  secondColumn?: CompanyDetailsSecondColumn;
+  thirdColumn?: CompanyDetailsThirdColumn;
+  fourthColumn?: CompanyDetailsFourthColumn;
   columnSettings: TemplateType | null;
   totalPages?: number;
   currPage?: number;
@@ -1131,10 +1357,12 @@ export interface ContentPdfPreviewerProps {
 }
 
 export interface PdfProps<T = EmailHeaderProps> {
-  emailHeader: Partial<T>;
+  emailHeader?: Partial<T>;
   headerDetails: DocumentHeaderDetailsProps;
   contactAddress: ContactDetailsProps;
   movingDetails: MovingDetailsProps;
+  houseDetails?: ReportHouseDetailsProps;
+  offerDetails?: OfferDetailsProps;
   serviceItem: ServiceList[];
   serviceItemFooter: ProductItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
@@ -1162,6 +1390,17 @@ export interface PdfPreviewProps {
   companyName?: string;
   lang?: string | undefined;
   isOfferPdf?: boolean;
+}
+export interface ReportPdfPreviewProps {
+  data?: ReportPDFProps;
+  pdfFile?: any;
+  setPdfFile?: SetStateAction<any>;
+  fileName?: string;
+  remoteFileBlob?: Blob | null;
+  mergedPdfFileUrl?: string | null;
+  isPdfRendering?: boolean;
+  language?: string | undefined;
+  systemSetting?: SystemSetting | null;
 }
 
 export interface PdfPreviewFooterProps {
@@ -1248,6 +1487,7 @@ export interface FiltersComponentProps {
   filter: FilterType;
   setFilter: SetStateAction<any>;
   handleFilterChange: (filter: FilterType) => void;
+  isAgent?: boolean;
 }
 export interface ContractEmailHeaderProps {
   contractNo?: string;
@@ -1264,4 +1504,175 @@ export interface InvoiceEmailCardProps {
   loading?: boolean;
   onEmailSend: () => void;
   onSendViaPost: () => void;
+}
+
+export interface ReportHeaderProps {
+  date: string;
+}
+
+export interface ReportDocumentHeaderProps {
+  date: string;
+  language?: string;
+}
+
+export interface ReportPDFOfferDetailsProps {
+  language?: string;
+  employees: number;
+  deliveryVehicle: number;
+  hours: number;
+  cleaningWithHandoverGuarantee: number;
+  broomClean: number;
+  priceCHF: number;
+  remarks: string;
+  noteAndInformation: string;
+}
+
+export interface LivingRoomDetailsProps {
+  sofa: number;
+  teacherDesk: number;
+  tvTable: number;
+  armchair: number;
+  table: number;
+  shelf: number;
+  LSofa: number;
+  TV: number;
+  decoBig: number;
+  box: number;
+  descriptions: string;
+}
+
+export interface KitchenDetailsProps {
+  oven: number;
+  refrigerator: number;
+  freezer: number;
+  stove: number;
+  microwave: number;
+  coffeeMachine: number;
+  washingMachine: number;
+  tumbler: number;
+  shelf: number;
+  box: number;
+  descriptions: string;
+}
+
+export interface DedRoomDetailsProps {
+  bed: number;
+  doubleBed: number;
+  armchair: number;
+  smallWardrobe: number;
+  mediumWardrobe: number;
+  largeWardrobe: number;
+  dressingTable: number;
+  nightstand: number;
+  shelf: number;
+  desk: number;
+  plants: number;
+  box: number;
+  descriptions: string;
+}
+
+export interface RoomDetailsProps {
+  bed: number;
+  doubleBed: number;
+  armchair: number;
+  smallWardrobe: number;
+  mediumWardrobe: number;
+  largeWardrobe: number;
+  shelf: number;
+  desk: number;
+  tv: number;
+  tvTable: number;
+  nightstand: number;
+  box: number;
+  descriptions: string;
+}
+
+export interface OutDoorDetailsProps {
+  grill: number;
+  table: number;
+  chairs: number;
+  sofa: number;
+  shelf: number;
+  umbrella: number;
+  pots: number;
+  plants: number;
+  herbGarden: number;
+  lawnmower: number;
+  descriptions: string;
+}
+
+export interface BasementAtticDetailsProps {
+  washingMachine: number;
+  tumbler: number;
+  shelf: number;
+  disposal: number;
+  bicycle: number;
+  stroller: number;
+  furniture: number;
+  boxes: number;
+  descriptions: string;
+}
+
+export interface SpecialItemsDetailsProps {
+  aquarium: number;
+  piano: number;
+  gymEquipment: number;
+  electronics: number;
+  pool: number;
+  safe: number;
+  lamp: number;
+  descriptions: string;
+}
+
+export interface ReportHouseDetailsProps {
+  livingRoomDetails: LivingRoomDetailsProps;
+  kitchenDetails: KitchenDetailsProps;
+  bedRoomDetails: DedRoomDetailsProps;
+  roomDetails: RoomDetailsProps;
+  outDoorDetails: OutDoorDetailsProps;
+  basementAtticDetails: BasementAtticDetailsProps;
+  specialItemsDetails: SpecialItemsDetailsProps;
+}
+
+export interface OfferDetailsProps {
+  employees: number;
+  deliveryVehicle: number;
+  hours: number;
+  cleaningWithHandoverGuarantee: number;
+  broomClean: number;
+  priceCHF: number;
+  remarks: string;
+  noteAndInformation: string;
+}
+
+export interface ReportMovingDetailsProps {
+  address: CustomerAddress[];
+}
+
+export interface ReportContactDetailsProps {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface AppointmentProps {
+  id?: string;
+  date?: string;
+  leadID?: {
+    id?: string;
+    refID?: string;
+    createdBy?: {
+      fullName: string;
+    };
+  };
+}
+export interface ReportPDFProps {
+  appointmentID?: AppointmentProps;
+  headerDetails: ReportDocumentHeaderProps;
+  contactAddress: ReportContactDetailsProps;
+  movingDetails: ReportMovingDetailsProps;
+  houseDetails: ReportHouseDetailsProps;
+  offerDetails: OfferDetailsProps;
+  serviceItem: ServiceList[];
+  serviceItemFooter: ProductItemFooterProps;
 }

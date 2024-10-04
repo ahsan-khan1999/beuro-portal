@@ -277,7 +277,6 @@ const SignPdfPreview = () => {
     const remainingItems = totalItems - itemsOnFirstPage;
     const additionalPages = Math.ceil(remainingItems / maxItemsPerPage);
 
-    // Add 1 for the first page and 1 for the last page
     return 1 + 1 + additionalPages;
   }, [totalItems, maxItemsFirstPage, maxItemsPerPage]);
 

@@ -51,7 +51,11 @@ const useGeneralFollowUp = () => {
   });
 
   useEffect(() => {
-    if (user?.role !== "Admin" && followUp?.length === 0)
+    if (
+      user?.role !== "Admin" &&
+      user?.role !== "Agent" &&
+      followUp?.length === 0
+    )
       dispatch(readFollowUpTableData({ params: { filter: filter } }));
   }, []);
 
@@ -190,7 +194,7 @@ const useGeneralFollowUp = () => {
     ),
   };
 
-  const todayFollowUps = followUp.filter((item) =>
+  const todayFollowUps = followUp?.filter((item) =>
     moment(item?.dateTime).isSame(moment(), "day")
   );
 

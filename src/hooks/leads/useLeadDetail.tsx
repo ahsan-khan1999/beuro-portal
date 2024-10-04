@@ -18,6 +18,13 @@ import { staticEnums } from "@/utils/static";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
+import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
+import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
+import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
+import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
+import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
+import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 
 export default function useLeadDetail() {
   const dispatch = useAppDispatch();
@@ -68,8 +75,15 @@ export default function useLeadDetail() {
     dispatch(updateModalType({ type: ModalType.INFO_DELETED }));
   };
 
-  const routeHandler = () => {
-    dispatch(deleteLead({ leadDetails, router, translate }));
+  const routeHandler = async () => {
+    const res = await dispatch(deleteLead({ leadDetails, router, translate }));
+    if (!res?.payload) {
+      dispatch(
+        updateModalType({
+          type: ModalType.NONE,
+        })
+      );
+    }
   };
 
   const defaultUpdateModal = () => {
@@ -86,6 +100,77 @@ export default function useLeadDetail() {
       })
     );
     if (res?.payload) defaultUpdateModal();
+  };
+
+  const handleNotes = (
+    id: string,
+    refID?: string,
+    name?: string,
+    heading?: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+
+    dispatch(readNotes({ params: { type: "lead", id: leadDetails?.id } }));
+    dispatch(
+      updateModalType({
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleAddNote = (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.ADD_NOTE,
+        data: {
+          id: id,
+          type: "lead",
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleEditNote = (
+    id: string,
+    note: string,
+    refID: string,
+    name: string,
+    heading: string
+  ) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.EDIT_NOTE,
+        data: {
+          id: id,
+          type: "lead",
+          data: note,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
+  };
+
+  const handleDeleteNote = async (id: string) => {
+    if (!id) return;
+    const response = await dispatch(deleteNotes({ data: { id: id } }));
+    if (response?.payload)
+      dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleUploadImages = (
@@ -126,6 +211,33 @@ export default function useLeadDetail() {
     );
   };
 
+  const handleScheduleAppointments = () => {
+    dispatch(
+      updateModalType({
+        type: ModalType.SCHEDULE_APPOINTMENTS,
+        data: {
+          id: leadDetails?.id,
+          leadId: leadDetails?.id,
+          refID: leadDetails?.refID,
+        },
+      })
+    );
+  };
+
+  const handleAppointmentsSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
+  };
+
+  const handleConfirmDeleteNote = (id: string) => {
+    dispatch(
+      updateModalType({ type: ModalType.CONFIRM_DELETE_NOTE, data: id })
+    );
+  };
+
+  const handleCancelNote = () => {
+    dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -143,7 +255,6 @@ export default function useLeadDetail() {
         loading={loading}
       />
     ),
-
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
@@ -152,7 +263,6 @@ export default function useLeadDetail() {
         route={onClose}
       />
     ),
-
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
         onClose={onClose}
@@ -160,9 +270,56 @@ export default function useLeadDetail() {
         type={"Lead"}
       />
     ),
-
     [ModalType.SHARE_IMAGES]: (
       <ShareImages onClose={onClose} offerId={leadDetails?.id} />
+    ),
+    [ModalType.SCHEDULE_APPOINTMENTS]: (
+      <ScheduleAppointments
+        onClose={onClose}
+        heading={translate("appointments.schedule_appointment")}
+        onSuccess={handleAppointmentsSuccess}
+      />
+    ),
+    [ModalType.APPOINTMENT_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("appointments.successs_modal.heading")}
+        subHeading={translate("appointments.successs_modal.sub_heading")}
+        route={onClose}
+        imgSrc={reschudleIcon}
+      />
+    ),
+    [ModalType.EXISTING_NOTES]: (
+      <ExistingNotes
+        handleAddNote={handleAddNote}
+        onClose={onClose}
+        leadDetails={leadDetails}
+        onEditNote={handleEditNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
+      />
+    ),
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <ConfirmDeleteNote
+        onClose={onClose}
+        modelHeading={translate("common.modals.delete_note")}
+        onDeleteNote={handleDeleteNote}
+        loading={loading}
+        onCancel={handleCancelNote}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <UpdateNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        mainHeading={translate("common.update_note")}
+      />
+    ),
+    [ModalType.ADD_NOTE]: (
+      <AddNewNote
+        onClose={onClose}
+        handleNotes={handleNotes}
+        mainHeading={translate("common.add_note")}
+      />
     ),
   };
 
@@ -177,8 +334,10 @@ export default function useLeadDetail() {
     loading,
     loadingDetails,
     handleStatusUpdate,
+    handleNotes,
     handleUploadImages,
     shareImgModal,
     defaultUpdateModal,
+    handleScheduleAppointments,
   };
 }

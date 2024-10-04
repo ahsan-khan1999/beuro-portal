@@ -17,14 +17,19 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
   let totalCount = count;
   for (let i = 0; i < count; i++) {
     let indexValue = i;
-    formField.push({
-      containerClass: "rounded-lg px-2 py-3 bg-[#EDF4FF]",
+    const containerClass = `
+    ${i === 0 ? "rounded-t-lg" : ""} 
+    ${i === count - 1 ? "rounded-b-lg" : ""} 
+    px-2 py-3 bg-[#EDF4FF]
+  `;
+
+    formField?.push({
+      containerClass: containerClass,
       field: {
         type: Field.div,
         id: `QrCodeDetail_${i}`,
         children: [
           {
-            containerClass: "",
             field: {
               type: Field.div,
               id: "div-field",
@@ -40,7 +45,6 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                     label: `${translate(
                       "setting.qr_settings.company_info"
                     )} ${++indexValue}`,
-                    // checked: true,
                     name: `QrCodeDetail.${i}.QrCodeStatus`,
                     register,
                     fieldIndex: i,
@@ -68,7 +72,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                     inputType: "text",
                     id: `QrCodeDetail.${i}.companyName`,
                     name: `QrCodeDetail.${i}.companyName`,
@@ -128,7 +132,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                     inputType: "text",
                     id: `QrCodeDetail.${i}.address.streetNumber`,
                     name: `QrCodeDetail.${i}.address.streetNumber`,
@@ -168,7 +172,7 @@ export const QRCodeSettingsFields: GenerateQRCodeSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+                    className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
                     inputType: "text",
                     id: `QrCodeDetail.${i}.address.city`,
                     name: `QrCodeDetail.${i}.address.city`,
@@ -311,7 +315,6 @@ export const QRCodeSettingsAddField: GenerateQRCodeSettingFormField = (
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {
-      containerClass: "",
       field: {
         type: Field.div,
         className: "flex justify-end items-center mt-[30px]",
@@ -347,11 +350,9 @@ export const QRCodeSettingsLabelField: GenerateQRCodeSettingFormField = (
   const { t: translate } = useTranslation();
   let formField: FormField[] = [];
   for (let i = 0; i < count; i++) {
-    formField.push({
-      containerClass: "",
+    formField?.push({
       field: {
         type: Field.span,
-        containerClassName: "",
         id: "span-text",
         text: `${translate("setting.qr_settings.company_info")} ${i}`,
       },

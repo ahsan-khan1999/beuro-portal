@@ -35,6 +35,7 @@ export const useOfferPdf = () => {
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
+  const [isMailSend, setIsMailSend] = useState(false);
 
   const [emailTemplateSettings, setEmailTemplateSettings] =
     useState<EmailTemplate | null>(null);
@@ -262,6 +263,11 @@ export const useOfferPdf = () => {
     })();
   }, [offerID]);
 
+  useEffect(() => {
+    isMailSend &&
+      dispatch(updateModalType({ type: ModalType.LOADING_MAIL_GIF }));
+  }, [isMailSend]);
+
   const fileName = offerData?.emailHeader?.offerNo;
   const offerDataProps = useMemo(
     () => ({
@@ -311,15 +317,19 @@ export const useOfferPdf = () => {
         const data = await localStoreUtil.get_data("contractComposeEmail");
 
         if (data) {
-          // delete apiData["id"]
-
           let apiData = { ...data, pdf: fileUrl?.payload };
           delete apiData["content"];
 
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          dispatch(sendOfferEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
+          setIsMailSend(true);
+          const res = await dispatch(sendOfferEmail({ data: apiData }));
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 1800);
         } else {
           let apiData = {
             email: offerDetails?.leadID?.customerDetail?.email,
@@ -334,12 +344,17 @@ export const useOfferPdf = () => {
             attachments: offerDetails?.content?.offerContent?.attachments,
             id: offerDetails?.id,
             pdf: fileUrl?.payload,
-            // pdf: res?.payload
           };
-          dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
-          await dispatch(sendOfferEmail({ data: apiData }));
-          // if (res?.payload) {
-          // }
+          setIsMailSend(true);
+          const res = await dispatch(sendOfferEmail({ data: apiData }));
+          setTimeout(() => {
+            if (res?.payload) {
+              setIsMailSend(false);
+              dispatch(updateModalType({ type: ModalType.EMAIL_CONFIRMATION }));
+            } else {
+              setIsMailSend(false);
+            }
+          }, 1800);
         }
       }
     } catch (error) {

@@ -287,7 +287,6 @@ export const closeModal = (dispatch: Dispatch, type: keyof ModalType) => {
   dispatch(updateModalType(ModalType.NONE));
 };
 
-// Hook for the input field copy
 export const useClipboardCopy = <
   T extends HTMLElement = HTMLInputElement
 >() => {
@@ -330,12 +329,14 @@ export const useEmptyStates = (
     [EmptyStateType.hasData]: CurrentComponent,
     [EmptyStateType.loading]: <CustomLoader />,
     [EmptyStateType.hasNoData]: (
-      <div className="mt-6">
-        <NoDataEmptyState />
+      <div className="my-6">
+        <NoDataEmptyState
+          containerClassName="xMini:py-[153px] w-full flex items-center justify-center"
+          className="py-5 px-3 xMini:py-10 xMini:px-6 w-[531px]"
+        />
       </div>
     ),
   };
-  // const data = useMemo(() => lookup[isEmpty], [isEmpty]);
   const data = lookup[isEmpty];
   return data;
 };
@@ -355,12 +356,14 @@ export const useAdminEmptyStates = (
     [EmptyStateType.hasData]: CurrentComponent,
     [EmptyStateType.loading]: <CustomPuffLoader />,
     [EmptyStateType.hasNoData]: (
-      <div className="mt-6">
-        <NoDataEmptyState />
+      <div className="my-6">
+        <NoDataEmptyState
+          containerClassName="xMini:py-[153px] w-full flex items-center justify-center"
+          className="py-5 px-3 xMini:py-10 xMini:px-6 w-[531px]"
+        />
       </div>
     ),
   };
-  // const data = useMemo(() => lookup[isEmpty], [isEmpty]);
   const data = lookup[isEmpty];
   return data;
 };

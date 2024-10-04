@@ -31,6 +31,7 @@ import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNot
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 import { updateQuery } from "@/utils/update-query";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
 
 export default function useOfferDetails() {
   const dispatch = useAppDispatch();
@@ -92,8 +93,17 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.INFO_DELETED }));
   };
 
-  const routeHandler = () => {
-    dispatch(deleteOffer({ offerDetails, router, translate }));
+  const routeHandler = async () => {
+    const res = await dispatch(
+      deleteOffer({ offerDetails, router, translate })
+    );
+    if (!res?.payload) {
+      dispatch(
+        updateModalType({
+          type: ModalType.NONE,
+        })
+      );
+    }
   };
 
   const handleNotes = (
@@ -263,6 +273,66 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handlePaymentStatusUpdate = async (paymentType: string) => {
+    const res = await dispatch(
+      updatePaymentStatus({
+        data: {
+          id: offerDetails?.id,
+          paymentType: staticEnums["PaymentType"][paymentType],
+        },
+      })
+    );
+    if (res?.payload) defaultOfferCreatedHandler();
+  };
+
+  const handleStatusUpdate = async (offerStatus: string) => {
+    const res = await dispatch(
+      updateOfferStatus({
+        data: {
+          id: offerDetails?.id,
+          offerStatus: staticEnums["OfferStatus"][offerStatus],
+        },
+      })
+    );
+    if (res?.payload)
+      offerCreatedHandler(
+        staticEnums["OfferStatus"][offerStatus],
+        offerDetails?.id
+      );
+  };
+
+  const onNextHandle = () => {
+    router.pathname = "/offers/pdf-preview";
+  };
+
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: offerDetails?.id,
+    };
+    const response = await dispatch(sendOfferByPost({ data: apiData }));
+    if (response?.payload) defaultOfferCreatedHandler();
+  };
+
+  const handleUpdateDiscount = async (discount: number) => {
+    if (discount < 0)
+      showError("Negative values are not applicable for discounts");
+    else {
+      const response = await dispatch(
+        updateOfferDiscount({
+          params: { discountAmount: Number(discount), id: offerDetails?.id },
+        })
+      );
+      if (response?.payload)
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+      dispatch(readOfferActivity({ params: { filter: offerDetails?.id } }));
+    }
+  };
+
+  const handleUpdateAdditionalDetailsModal = () => {
+    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -364,73 +434,14 @@ export default function useOfferDetails() {
         route={onSuccess}
       />
     ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
     [ModalType.SHARE_IMAGES]: (
       <ShareImages onClose={onClose} offerId={offerDetails?.id} />
     ),
   };
 
-  const handleUpdateAdditionalDetailsModal = () => {
-    dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
-  };
-
   const renderModal = () => {
     return MODAL_CONFIG[modal.type] || null;
-  };
-
-  const handlePaymentStatusUpdate = async (paymentType: string) => {
-    const res = await dispatch(
-      updatePaymentStatus({
-        data: {
-          id: offerDetails?.id,
-          paymentType: staticEnums["PaymentType"][paymentType],
-        },
-      })
-    );
-    if (res?.payload) defaultOfferCreatedHandler();
-  };
-
-  const handleStatusUpdate = async (offerStatus: string) => {
-    const res = await dispatch(
-      updateOfferStatus({
-        data: {
-          id: offerDetails?.id,
-          offerStatus: staticEnums["OfferStatus"][offerStatus],
-        },
-      })
-    );
-    if (res?.payload)
-      offerCreatedHandler(
-        staticEnums["OfferStatus"][offerStatus],
-        offerDetails?.id
-      );
-  };
-
-  const onNextHandle = () => {
-    router.pathname = "/offers/pdf-preview";
-  };
-
-  const handleSendByPost = async () => {
-    const apiData = {
-      emailStatus: 2,
-      id: offerDetails?.id,
-    };
-    const response = await dispatch(sendOfferByPost({ data: apiData }));
-    if (response?.payload) defaultOfferCreatedHandler();
-  };
-
-  const handleUpdateDiscount = async (discount: number) => {
-    if (discount < 0)
-      showError("Negative values are not applicable for discounts");
-    else {
-      const response = await dispatch(
-        updateOfferDiscount({
-          params: { discountAmount: Number(discount), id: offerDetails?.id },
-        })
-      );
-      if (response?.payload)
-        dispatch(updateModalType({ type: ModalType.CREATION }));
-      dispatch(readOfferActivity({ params: { filter: offerDetails?.id } }));
-    }
   };
 
   return {

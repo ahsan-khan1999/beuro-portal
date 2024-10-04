@@ -229,10 +229,9 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
         phoneNumber: null,
         mobileNumber: null,
         address: null,
-        customerID: "",
+        // customerID: null,
         type: "New Customer",
         content: offerDetails?.content?.id,
-        // title: null,
         gender: null,
       });
     } else if (type === "Existing Customer" && offerDetails?.id) {
@@ -295,6 +294,7 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
       };
 
       if (!apiData?.isLeadCreated) delete apiData["leadID"];
+
       const res = await dispatch(
         createOffer({ data: apiData, router, setError, translate })
       );

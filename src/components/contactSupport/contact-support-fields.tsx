@@ -16,7 +16,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
         type: Field.div,
         id: "div-field",
         className:
-          "grid grid-cols-2 lg:grid-cols-3 gap-x-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
+          "grid xMini:grid-cols-2 mlg:grid-cols-3 gap-3 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0",
@@ -27,11 +27,11 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "text",
               id: "fullName",
               name: "fullName",
-              placeholder: "Rahal",
+              placeholder: `${translate("offers.placeholders.name")}`,
               register,
               disabled: true,
             },
@@ -45,17 +45,17 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
             },
             field: {
               type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
               inputType: "email",
               id: "email",
               name: "email",
-              placeholder: "rahal.ahmad@gmail.com",
+              placeholder: translate("offers.placeholders.email"),
               register,
               disabled: true,
             },
           },
           {
-            containerClass: "mb-0 mt-5 lg:mt-0",
+            containerClass: "mb-0",
             label: {
               text: `${translate("contact_support.form_fields.phone_number")}`,
               htmlFor: "phoneNumber",
@@ -66,6 +66,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "phoneNumber",
               name: "phoneNumber",
+              placeholder: translate("offers.placeholders.phone_placeholder"),
               register,
               value: "",
               disabled: false,
@@ -76,11 +77,10 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
     },
 
     {
-      containerClass: "",
       field: {
         type: Field.div,
         id: "div-field",
-        className: "grid grid-cols-3 px-2 pb-5 bg-[#EDF4FF]",
+        className: "grid grid-cols-1 xMini:grid-cols-3 px-2 pb-5 bg-[#EDF4FF]",
         children: [
           {
             containerClass: "mb-0 col-span-2",
@@ -90,7 +90,7 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
               className: "mb-[10px]",
             },
             field: {
-              className: "pl-4 !border-[#BFBFBF] focus:!border-primary ",
+              className: "pl-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
               value: "",
               id: "reason",
@@ -145,24 +145,24 @@ export const ContactSupportFormField: GenerateContactSupportFormField = (
       },
       field: {
         type: Field.textArea,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         rows: 2,
         id: "message",
         name: "message",
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
         placeholder: `${translate("common.type_message")}`,
         register,
       },
     },
 
     {
-      containerClass: "my-[30px] flex justify-end",
+      containerClass: "my-5 xMini:my-[30px] flex justify-end",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("contact_support.form_fields.request_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover:bg-none",
+          "rounded-lg px-4 min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
         loading,
       },
     },

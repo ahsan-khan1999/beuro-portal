@@ -16,6 +16,7 @@ import {
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { OffersTableRowTypes } from "@/types/offers";
+
 export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
@@ -42,7 +43,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
 
   let formField: FormField[] = [
     {
-      containerClass: "mt-3 ",
+      containerClass: "mt-3",
       field: {
         type: Field.div,
         id: "div-field",
@@ -101,9 +102,9 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "customerType",
               name: "customerType",
               options:
-                Object.keys(staticEnums.CustomerType)
+                Object?.keys(staticEnums.CustomerType)
                   ?.slice(1)
-                  ?.map((item, key) => ({
+                  ?.map((item) => ({
                     value: item,
                     label: translate(`customer_type.${item}`),
                   })) || [],
@@ -125,7 +126,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               type: Field.select,
               id: "gender",
               name: "gender",
-              options: Object.keys(staticEnums.Gender).map((item) => ({
+              options: Object?.keys(staticEnums.Gender).map((item) => ({
                 value: staticEnums.Gender[item],
                 label: translate(`gender.${item}`),
               })),
@@ -148,7 +149,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               name: "fullName",
               placeholder: `${translate("offers.placeholders.name")}`,
               register,
-              // value: leadDetails && leadDetails.customerDetail?.fullName
             },
           },
           {
@@ -163,8 +163,8 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "email",
               name: "email",
               inputType: "text",
-              placeholder: `${translate("offers.placeholders.email")}`,
               register,
+              placeholder: `${translate("offers.placeholders.email")}`,
               value: offerDetails && offerDetails.customerID?.email,
             },
           },
@@ -181,6 +181,9 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               id: "phoneNumber",
               name: "phoneNumber",
               inputType: "tel",
+              placeholder: `${translate(
+                "offers.placeholders.phone_placeholder"
+              )}`,
               register,
               value:
                 type === "New Customer"
@@ -203,6 +206,9 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               id: "mobileNumber",
               name: "mobileNumber",
+              placeholder: `${translate(
+                "offers.placeholders.mobile_placeholder"
+              )}`,
               register,
               value:
                 type === "New Customer"
@@ -244,7 +250,6 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
                 [],
               control,
               value: (offerDetails?.id && offerDetails?.content?.id) || "",
-              // onItemChange: handleContentSelect && handleContentSelect,
             },
           },
           {
@@ -350,6 +355,9 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
               inputType: "text",
               id: "address.country",
               name: "address.country",
+              placeholder: `${translate(
+                "offers.placeholders.country_placeholder"
+              )}`,
               register,
             },
           },
@@ -381,6 +389,7 @@ export const AddOfferDetailsFormField: GenerateLeadsCustomerFormField = (
         inputType: "text",
         id: "companyName",
         name: "companyName",
+        placeholder: `${translate("offers.placeholders.company_name")}`,
         register,
         setValue: setValue,
         value: offerDetails?.leadID?.customerDetail?.companyName || "",

@@ -12,17 +12,16 @@ import { updateLead } from "@/api/slices/lead/leadSlice";
 import { ContentTableRowTypes } from "@/types/content";
 
 export const useLeadsServiceEditDetails = (onClick: Function) => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
+  const { t: translate } = useTranslation();
   const { content } = useAppSelector((state) => state.content);
+  const { systemSettings } = useAppSelector((state) => state.settings);
+  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
 
   const handleBack = () => {
     onClick(2, ComponentsType.service);
   };
-
-  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const schema = generateLeadsServiceEditDetailsValidation(translate);
   const {
@@ -37,6 +36,7 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   const selectedContent = leadDetails?.requiredService as ContentTableRowTypes;
   const contentList = leadDetails?.otherServices as ContentTableRowTypes[];
 
@@ -61,6 +61,7 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     leadDetails,
     systemSettings
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       ...data,
@@ -73,6 +74,7 @@ export const useLeadsServiceEditDetails = (onClick: Function) => {
     );
     if (response?.payload) onClick(2, ComponentsType.service);
   };
+
   return {
     fields,
     onSubmit,

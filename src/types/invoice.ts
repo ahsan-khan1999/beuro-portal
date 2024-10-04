@@ -76,6 +76,7 @@ export interface SubInvoiceTableRowTypes {
   invoiceNumber: string;
   invoiceStatus: string;
   paymentType: string;
+  paidDate: string;
   createdAt: string;
   isInvoiceRecurring: boolean;
   title: string;
@@ -104,6 +105,7 @@ export interface InvoiceCardContentProps {
   handleStopInvoiceCreation: () => void;
   handleEditInvoiceFrequencyCreation: () => void;
   handleSendEmail: () => void;
+  onDeleteHandler: () => void;
   currency?: string;
   handleInvoiceEdit?: () => void;
 }
@@ -114,6 +116,13 @@ export interface InvoiceDetailsTableProps {
   handleInvoiceStatusUpdate: (id: string, status: string, type: string) => void;
   handleInvoiceEdit: (item: any) => void;
   handleRecurringInvoiceEdit: (item: any) => void;
+  onPaymentStatusChange: (id: string, status: string) => void;
+}
+
+export interface PaymentsDataType {
+  paidAmount: number;
+  paymentType: number;
+  paidDate: string;
 }
 
 export interface PdfSubInvoiceTypes {
@@ -130,6 +139,8 @@ export interface PdfSubInvoiceTypes {
   attachement?: string;
   createdBy: User;
   customerDetail: Customers;
+  paidDate: string;
+  payments: PaymentsDataType[];
 }
 
 export interface InvoiceTableRowTypesPdf {
@@ -247,6 +258,7 @@ export interface MainInvoicePdfDetailTableRowTypes {
   additionalDetails: string;
   stage: ComponentsType;
   leadID: Lead;
+  payments: PaymentsDataType[];
 }
 
 interface Customers {

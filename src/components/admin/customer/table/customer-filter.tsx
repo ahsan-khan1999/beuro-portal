@@ -139,7 +139,7 @@ export default function CustomerFilter({
   return (
     <div className="flex flex-col mlg:flex-row gap-4 z-10">
       <div className="flex items-center gap-x-4 xl:w-fit">
-        {checkbox.map((item, idx) => (
+        {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
             checkboxFilter={filter}
@@ -182,6 +182,7 @@ export default function CustomerFilter({
             { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
           ]}
           label={translate("common.sort_button")}
+          containerClassName="min-w-fit"
         />
       </div>
       {/* <CustomerFilters
