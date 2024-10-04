@@ -6,7 +6,6 @@ import { Appointments } from "@/types/appointments";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
-
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
   onStatusChange: (id: string, status: string, type: string) => void;
@@ -214,7 +213,7 @@ export const AppointmentTableRows = ({
                   </span>
 
                   <span className="py-4 truncate mlg:hidden maxSize:block">
-                    {item.leadID?.customerDetail?.companyName}
+                    {item?.createdBy?.company?.companyName}
                   </span>
 
                   <span className="py-4 mlg:hidden xMaxSize:block">

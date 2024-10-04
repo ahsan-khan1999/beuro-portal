@@ -129,6 +129,14 @@ export interface Task {
   isAllDay: boolean;
   colour: string;
   createdAt: string;
+  createdBy: {
+    id: string;
+    fullName: string;
+    company: {
+      id: string;
+      companyName: string;
+    };
+  };
   note: string;
   alertTime: number;
   address: {

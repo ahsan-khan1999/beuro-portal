@@ -652,7 +652,6 @@ const generateServiceCalulationChildren = (
                         value: 0,
                         setValue,
                         disabled: !isTax,
-                        // onClick: generateTotal
                       },
                     },
                     {

@@ -26,7 +26,7 @@ export const useAppointmentsDetails = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const { loading, appointmentDetails } = useAppSelector(
+  const { loading, isLoading, appointmentDetails } = useAppSelector(
     (state) => state.appointment
   );
 
@@ -181,14 +181,6 @@ export const useAppointmentsDetails = () => {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
-  // const handleScheduleAppointments = () => {
-  //   dispatch(updateModalType({ type: ModalType.SCHEDULE_APPOINTMENTS }));
-  // };
-
-  // const handleAppointmentsSuccess = () => {
-  //   dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
-  // };
-
   const handleCreateReport = () => {
     router.push({
       pathname: `/agent/appointments/create-report`,
@@ -205,13 +197,7 @@ export const useAppointmentsDetails = () => {
         route={onClose}
       />
     ),
-    // [ModalType.SCHEDULE_APPOINTMENTS]: (
-    //   <ScheduleAppointments
-    //     onClose={onClose}
-    //     heading={translate("appointments.schedule_appointment")}
-    //     onSuccess={handleAppointmentsSuccess}
-    //   />
-    // ),
+
     [ModalType.APPOINTMENT_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
@@ -269,6 +255,7 @@ export const useAppointmentsDetails = () => {
   return {
     router,
     loading,
+    isLoading,
     translate,
     renderModal,
     appointmentDetails,
@@ -276,6 +263,5 @@ export const useAppointmentsDetails = () => {
     handleCreateReport,
     handleNotes,
     handleUploadImages,
-    // handleScheduleAppointments,
   };
 };

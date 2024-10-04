@@ -62,8 +62,9 @@ export const ContractTaskDetail = ({
       customOpacity={true}
       containerClassName="max-w-[340px] xsMini:max-w-[384px] min-h-fit absolute top-[180px] rounded-lg bg-[#F3F3F3] calendarShadow"
     >
-      <div className="p-[10px]">
-        <div className="flex items-center gap-x-2">
+      <div className="pt-[15px] px-[10px] pb-[10px]">
+        {/* <div className="flex items-start justify-between"> */}
+        <div className="flex items-start gap-x-[8px]">
           <span
             className={`w-3 h-3 rounded-full`}
             style={{
@@ -73,16 +74,28 @@ export const ContractTaskDetail = ({
             }}
           />
           {taskDetail?.title && (
-            <span className="text-base font-semibold text-[#3C3C3C]">
+            <span className="text-base font-semibold text-[#3C3C3C] -mt-1">
               {taskDetail?.title}
             </span>
           )}
         </div>
 
-        <div className="flex items-center justify-between mt-2">
+        {/* {taskDetail?.type === "Contract" && (
+            <Button
+              onClick={handlePDFPreview}
+              className="!h-fit py-1 xMini:py-2 px-2 xMini:px-4 hidden xMini:flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+              text={translate("invoice.invoice_created_modal.button")}
+              id="preview PDF"
+              inputType="button"
+              iconAlt="button"
+            />
+          )} */}
+        {/* </div> */}
+
+        <div className="flex items-center justify-between mt-[9px]">
           <p
             style={{ color: `${taskDetail.colour || "#4A13E7"}` }}
-            className="text-sm font-normal ml-5"
+            className="text-sm font-medium ml-5"
           >
             {taskDetail?.type}
           </p>
@@ -99,7 +112,7 @@ export const ContractTaskDetail = ({
         </div>
 
         {isSameDateAlldayTask && (
-          <div className="ml-5 mt-3 mb-5">
+          <div className="ml-5 mt-[6px]">
             {taskDetail?.selectedStartDate && (
               <div className="flex flex-col gap-y-1">
                 <span className="text-[#7A7A7A] text-sm font-medium">
@@ -112,8 +125,9 @@ export const ContractTaskDetail = ({
             )}
           </div>
         )}
+
         {isSameDay && (
-          <div className="ml-5 mt-3 mb-5">
+          <div className="ml-5 mt-[6px]">
             {taskDetail?.selectedStartDate && (
               <div className="flex flex-col gap-y-1">
                 <span className="text-[#7A7A7A] text-sm font-medium">
@@ -134,7 +148,7 @@ export const ContractTaskDetail = ({
         )}
 
         {!isSameDay && !isSameDateAlldayTask && (
-          <div className="ml-5 flex flex-col gap-y-1 mt-3 mb-5">
+          <div className="ml-5 flex flex-col gap-y-1 mt-[6px]">
             {taskDetail?.selectedStartDate && (
               <div className="flex flex-col gap-y-1">
                 <div className="flex items-center gap-x-2">
@@ -159,31 +173,17 @@ export const ContractTaskDetail = ({
                   </span>
                 </div>
               </div>
-              // <div className="flex flex-col gap-y-1">
-              //   <span className="text-[#7A7A7A] text-sm font-medium">
-              //     {calendarTaskformatDate(taskDetail.selectedStartDate)}
-              //   </span>
-              //   {startTime && endTime ? (
-              //     <span className="text-[#272727] font-semibold text-sm">
-              //       {`${startTime} - ${endTime}`}
-              //     </span>
-              //   ) : startTime ? (
-              //     <span className="text-[#272727] font-semibold text-sm">{`${startTime}`}</span>
-              //   ) : endTime ? (
-              //     <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
-              //   ) : null}
-              // </div>
             )}
-            {/* {!isSameDay && taskDetail?.selectedEndDate && (
-              <div className="flex flex-col gap-y-1">
-                <span className="text-[#7A7A7A] text-sm font-medium">
-                  {calendarTaskformatDate(taskDetail.selectedEndDate)}
-                </span>
-                {endTime && (
-                  <span className="text-[#272727] font-semibold text-sm">{`${endTime}`}</span>
-                )}
-              </div>
-            )} */}
+          </div>
+        )}
+
+        {taskDetail?.createdBy?.company?.companyName && (
+          <div className="mt-[9px] mb-4 flex flex-col gap-y-1 ml-5">
+            <span className="text-[#7A7A7A] text-sm font-medium">Company</span>
+
+            <span className="text-[#272727] font-semibold text-sm">
+              {taskDetail?.createdBy?.company?.companyName}
+            </span>
           </div>
         )}
 
@@ -199,7 +199,7 @@ export const ContractTaskDetail = ({
           )}
         </div>
 
-        <div className="flex flex-col max-h-[300px] hide-scrollbar overflow-y-auto mb-[35px]">
+        <div className="flex flex-col max-h-[250px] hide-scrollbar overflow-y-auto mb-[35px]">
           {taskDetail?.note && (
             <div className="flex items-start gap-x-2">
               <CalendarNoteIcon />

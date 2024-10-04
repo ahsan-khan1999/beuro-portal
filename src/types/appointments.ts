@@ -48,6 +48,14 @@ export interface Appointments {
   canton: string;
   appointmentStatus: string;
   createdAt: string;
+  createdBy: {
+    id: string;
+    fullName: string;
+    company: {
+      id: string;
+      companyName: string;
+    };
+  };
 }
 
 export interface Report {
@@ -186,6 +194,14 @@ export interface Report {
     };
     appointmentStatus: string;
     createdAt: string;
+    createdBy: {
+      id: string;
+      fullName: string;
+      company: {
+        id: string;
+        companyName: string;
+      };
+    };
   };
   outDoorDetails: {
     grill: number;
