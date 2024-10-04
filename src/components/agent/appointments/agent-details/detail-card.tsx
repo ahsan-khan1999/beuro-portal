@@ -173,7 +173,7 @@ export const AppointmentsDetailCard = ({
             {translate("appointments.detail_heading")}
           </h1>
         </div>
-        <div>
+        <div className="flex items-center gap-x-4">
           <div className="hidden xMini:flex items-center gap-x-4">
             {!appointmentDetails?.leadID?.isOfferCreated &&
               !isAgent &&
@@ -189,7 +189,7 @@ export const AppointmentsDetailCard = ({
                 />
               )}
           </div>
-          {isReportCreated && (
+          {isAgent && isReportCreated && (
             <div className="flex items-center gap-x-2 xMini:gap-x-4">
               <PrintIcon onClick={handlePrint} />
               <DownloadIcon onClick={handleDonwload} />
@@ -235,7 +235,7 @@ export const AppointmentsDetailCard = ({
                       : appointmentDetails?.appointmentStatus === "Completed"
                       ? "bg-[#45C769]"
                       : "bg-[#D80027]"
-                  } w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                  } w-[140px] rounded-lg px-4 py-[5px] flex items-center justify-center`}
                   dropDownTextClassName="text-white text-sm xMini:text-base font-medium me-1"
                   dropDownItemsContainerClassName="w-[140px] text-sm xMini:text-base"
                   dropDownIconClassName="text-white"

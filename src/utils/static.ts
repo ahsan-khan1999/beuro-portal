@@ -624,7 +624,7 @@ export const staticEnums: Record<string, any> = {
     Pending: 0,
     Sent: 1,
     Post: 2,
-    Failed:3
+    Failed: 3,
   },
   TaxType: {
     Inclusive: 0,
@@ -1575,6 +1575,14 @@ export const DEFAULT_CONTRACT_TASK: Task = {
   isAllDay: true,
   colour: "",
   createdAt: "",
+  createdBy: {
+    id: "",
+    fullName: "",
+    company: {
+      id: "",
+      companyName: "",
+    },
+  },
   note: "",
   alertTime: 0,
   address: {
@@ -1669,6 +1677,14 @@ export const DEFAULT_APPOINTMETNS = {
   },
   appointmentRouter: "",
   createdAt: "",
+  createdBy: {
+    id: "",
+    fullName: "",
+    company: {
+      id: "",
+      companyName: "",
+    },
+  },
 };
 
 export const DEFAULT_REPOT = {
@@ -1782,6 +1798,14 @@ export const DEFAULT_REPOT = {
     },
     appointmentStatus: "",
     createdAt: "",
+    createdBy: {
+      id: "",
+      fullName: "",
+      company: {
+        id: "",
+        companyName: "",
+      },
+    },
   },
   addressID: {
     id: "",

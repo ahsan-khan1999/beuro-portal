@@ -87,7 +87,7 @@ export const AppointmentPdfCard = ({
                       "Completed"
                     ? "bg-[#45C769]"
                     : "bg-[#D80027]"
-                } w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                } w-[140px] rounded-lg px-4 py-2 flex items-center justify-center`}
               >
                 <span className="text-sm font-normal text-white">
                   {translate(

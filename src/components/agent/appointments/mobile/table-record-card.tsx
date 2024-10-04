@@ -4,7 +4,6 @@ import { LocationFilledIcon } from "@/assets/svgs/components/location-filled-ico
 import { UserIcon } from "@/assets/svgs/components/use-icon";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
-import { useAppSelector } from "@/hooks/useRedux";
 import { Appointments } from "@/types/appointments";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { useRouter } from "next/router";
@@ -17,11 +16,10 @@ export const AppointmentTableRecordCard = ({
   dataToAdd,
 }: AppointmentMobileRecordsProps) => {
   const router = useRouter();
-  const { user } = useAppSelector((state) => state.auth);
 
   return (
     <div className="flex flex-col gap-y-3">
-      {dataToAdd.map((item, index) => {
+      {dataToAdd?.map((item, index) => {
         const handleReportDetail = () => {
           router.push({
             pathname: "/agent/appointments/report-detail",
@@ -29,12 +27,12 @@ export const AppointmentTableRecordCard = ({
           });
         };
 
-        const handlePdfPreview = () => {
-          router.push({
-            pathname: `/agent/appointments/pdf`,
-            query: { ...router.query, reportId: item?.id },
-          });
-        };
+        // const handlePdfPreview = () => {
+        //   router.push({
+        //     pathname: `/agent/appointments/pdf`,
+        //     query: { ...router.query, reportId: item?.id },
+        //   });
+        // };
 
         const handleAppointmentRoute = () => {
           router.push({
@@ -122,11 +120,11 @@ export const AppointmentTableRecordCard = ({
               </div>
 
               <div className="flex flex-col gap-y-1">
-                {user?.company?.companyName && (
+                {item?.createdBy?.company?.companyName && (
                   <div className="flex items-center gap-x-[14px]">
                     <CompanyIcon />
                     <p className="text-[#616161] font-normal text-sm">
-                      {user?.company?.companyName}
+                      {item?.createdBy?.company?.companyName}
                     </p>
                   </div>
                 )}
