@@ -10,13 +10,13 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import { setImages } from "@/api/slices/imageSlice/image";
 import AddLeadAddressDetails from "./AddLeadAddressDetails";
 import AddLeadServiceDetails from "./AddLeadServiceDetails";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import AddLeadsCustomerDetails from "./AddLeadsCustomerDetails";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import AddLeadAdditionalDetails from "./AddLeadAdditionalDetails";
 import LeadCreated from "@/base-components/ui/modals1/LeadCreated";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
+import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 export enum ComponentsType {
   customerAdd,
@@ -224,33 +224,32 @@ const AddNewLeadsData = () => {
   }, [tabType]);
 
   return (
-    <div className="h-full">
-      <div className="xLarge:fixed mb-5 xLarge:-mt-12">
-        <p className="mb-5 text-2xl text-[#222B45] font-normal">
-          {translate("leads.add_new_lead")}
-        </p>
-        <div className="flex flex-row flex-wrap xLarge:flex-col xLarge:flex-nowrap  gap-[14px]">
+    <>
+      <div className="xLarge:fixed mb-5">
+        <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
           {tabSection?.map((item, index) => (
-            <DetailsTab
+            <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}
+              index={index + 1}
               icon={item.icon}
               selectedTab={index}
-              key={index}
             />
           ))}
         </div>
       </div>
-      <div className="w-full break-all xLarge:mt-[145px] flex mb-10">
-        <div className="max-w-[280px] w-full hidden xLarge:block"></div>
-        <div className="w-full xLarge:max-w-[80%]">
+
+      <div className="w-full break-all flex">
+        <div className="max-w-[320px] w-full hidden xLarge:block"></div>
+        <div className="w-full xLarge:max-w-[80%] mb-[40px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>
       {renderModal()}
-    </div>
+    </>
   );
 };
 

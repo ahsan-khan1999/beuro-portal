@@ -13,7 +13,7 @@ const AddFollowUp = ({
   handleAllCustomers,
   handleAllLeads,
 }: AddFollowUpProps) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
+  const { fields, onSubmit, handleSubmit, errors, error, translate } =
     useAddFollowUp(handleFollowUps, handleAllCustomers, handleAllLeads);
 
   return (

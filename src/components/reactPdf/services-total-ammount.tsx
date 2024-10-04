@@ -222,6 +222,11 @@ export const ServicesTotalAmount = ({
       amount_paid_last: "The amount you paid last time.",
       general_terms: "General Terms and Conditions",
       payment_method: "Payment Method",
+      payment_method_type: {
+        Cash: "Cash",
+        Online: "Online",
+        Twint: "Twint",
+      },
       terms_des:
         "Below you will find further information on the guidelines and conditions. Please take the time to understand the following terms and conditions.",
     },
@@ -238,6 +243,11 @@ export const ServicesTotalAmount = ({
       amount_paid_last: "Der Betrag, den Sie beim letzten Mal bezahlt haben.",
       general_terms: "Allgemeine Geschäftsbedingungen",
       payment_method: "Zahlungsmethode",
+      payment_method_type: {
+        Cash: "Bar",
+        Online: "Online",
+        Twint: "Twint",
+      },
       terms_des:
         "Unten finden Sie weitere Informationen zu den Richtlinien und Bedingungen. Bitte nehmen Sie sich die Zeit, um die folgenden Geschäftsbedingungen zu verstehen.",
     },

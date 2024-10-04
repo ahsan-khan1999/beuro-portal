@@ -77,7 +77,7 @@ const InvoiceSection = ({
                   {translate("setting.system_setting.invoice_days_limit")}
                 </p>
                 <DropDown
-                  items={Object.keys(staticEnums["InvoiceOverDueLimit"]).map(
+                  items={Object.keys(staticEnums["InvoiceOverDueLimit"])?.map(
                     (item) => ({
                       item: {
                         label: item,

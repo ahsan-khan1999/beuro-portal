@@ -40,10 +40,13 @@ export const AddFollowUpFormField: GenerateFollowUpFormField = (
               <path d="M19.6209 12.0855C18.6404 12.0855 17.8808 11.9949 17.0386 12.685C19.0629 14.7518 18.7211 16.8117 18.7211 19.9926C18.7211 20.1607 18.4483 20.1103 21.0794 20.1103C21.7339 20.1103 22.266 19.5801 22.266 18.9284V14.7146C22.266 13.265 21.0794 12.0855 19.6209 12.0855Z" fill="#4A13E7"/>
             </svg>`,
               options: customer?.map((item) => ({
-                label: item?.fullName + " " + `(${item?.refID})`,
+                // label: item?.fullName + " " + `(${item?.refID})`,
+                label: item?.fullName,
                 value: item?.id.toString(),
               })),
               onItemChange: () => onItemChange && onItemChange(),
+              isLocalCustomer: true,
+              // onSearchCustomer: (value) => onSearchCustomer(value),
               control,
             },
           },

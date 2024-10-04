@@ -42,7 +42,7 @@ export const WarningDays = ({
           </p>
 
           <DropDown
-            items={Object.keys(staticEnums["remainderDays"]).map((item) => ({
+            items={Object.keys(staticEnums["remainderDays"])?.map((item) => ({
               item: {
                 label: item,
                 value: item,

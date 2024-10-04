@@ -24,22 +24,12 @@ const ContractDetailsCard = ({
   handleNotes,
   handlePaymentStatusUpdate,
   handleStatusUpdate,
-  offerDeleteHandler,
   handleSendEmail,
   isSendEmail,
-  handleUpdateAdditionalDetailsModal,
   handleEditDateModal,
 }: ContractDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
-  const handleDonwload = () => {
-    window.open(contractDetails?.attachement);
-  };
-
-  const handlePrint = () => {
-    window.open(contractDetails?.attachement);
-  };
 
   const paymentMethod = [
     `${translate("payment_method.Cash")}`,
@@ -56,11 +46,14 @@ const ContractDetailsCard = ({
   const handleBack = () => {
     router.pathname = "/contract";
     delete router.query["offer"];
+    delete router.query["offerID"];
+    delete router.query["isMail"];
     updateQuery(router, router.locale as string);
   };
 
   const customerType = contractDetails?.offerID?.leadID?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
   const name =
     customerType === 1
       ? contractDetails?.offerID?.leadID?.customerDetail?.companyName
@@ -140,7 +133,6 @@ const ContractDetailsCard = ({
           </span> */}
         </div>
       </div>
-
       <div className="flex flex-col gap-4 mt-5">
         <div className="grid mlg:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] gap-y-2 w-full">
           <div className="flex items-center gap-x-3">

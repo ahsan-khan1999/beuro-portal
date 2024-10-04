@@ -23,31 +23,33 @@ const EmploysDetails = () => {
 
   return (
     <Layout>
-      <DetailsCard>
-        <DetailsData
-          date={employeeDetails?.creationDate}
-          id={employeeDetails?.employeeID}
-          name={employeeDetails?.createdBy}
-          isUpdate={isUpdate}
-          handleDelete={deleteHandler}
-          refID={employeeDetails?.employeeID}
-        />
-      </DetailsCard>
-      <div className="w-full mt-5">
-        {loading ? (
-          <CustomLoader />
-        ) : (
-          <EmployeeForm
-            isUpdate={isUpdate}
-            setIsUpdate={setIsUpdate}
-            handlePasswordReset={handlePasswordReset}
-            fields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-          />
-        )}
-      </div>
+      {loading ? (
+        <CustomLoader />
+      ) : (
+        <>
+          <DetailsCard>
+            <DetailsData
+              date={employeeDetails?.creationDate}
+              id={employeeDetails?.employeeID}
+              name={employeeDetails?.createdBy}
+              isUpdate={isUpdate}
+              handleDelete={deleteHandler}
+              refID={employeeDetails?.employeeID}
+            />
+          </DetailsCard>
+          <div className="w-full mt-5">
+            <EmployeeForm
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
+              handlePasswordReset={handlePasswordReset}
+              fields={fields}
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              errors={errors}
+            />
+          </div>
+        </>
+      )}
 
       {renderModal()}
     </Layout>

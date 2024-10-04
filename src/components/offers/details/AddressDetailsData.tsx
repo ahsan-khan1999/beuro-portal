@@ -12,7 +12,6 @@ const AddressDetailsData = ({
 }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
   const addressData = offerDetails?.addressID?.address || [{}];
 
   return (

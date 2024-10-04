@@ -8,6 +8,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   register,
   loading,
   control,
+  // onSearchCustomer,
   {
     customerType,
     type,
@@ -45,14 +46,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "New Customer",
-                    label: `${translate(
-                      "leads.customer_details.new_customer"
-                    )}`,
+                    label: `${translate("offers.offer_details.new_customer")}`,
                     id: "type",
                     name: "type",
                     register,
-                    checked: type === "New Customer",
                     colorClasses: "bg-transparent",
+                    checked: type === "New Customer",
                   },
                 },
                 {
@@ -60,14 +59,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
                   field: {
                     type: Field.radio,
                     value: "Existing Customer",
-                    label: `${translate(
-                      "leads.customer_details.exit_customer"
-                    )}`,
+                    label: `${translate("offers.offer_details.exit_customer")}`,
                     id: "type",
                     name: "type",
                     register,
-                    checked: type === "Existing Customer",
                     colorClasses: "bg-transparent",
+                    checked: type === "Existing Customer",
                   },
                 },
               ],
@@ -319,12 +316,12 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
   ];
 
   const fieldIndex = formField.findIndex(
-    (field) =>
+    (field: any) =>
       field?.field?.type === Field.div &&
-      //@ts-expect-error
       Array.isArray(field?.field?.children) &&
-      //@ts-expect-error
-      field?.field?.children.some((child) => child?.field?.id == "fullName")
+      field?.field?.children.some(
+        (child: any) => child?.field?.id == "fullName"
+      )
   );
 
   if (fieldIndex !== -1 && customerType === "company") {
@@ -349,18 +346,17 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
     };
     const divField = formField[fieldIndex]?.field as DivProps;
     if (divField && Array.isArray(divField.children)) {
-      //@ts-expect-error
-      divField.children.splice(fieldIndex + 3, 0, companyNameField);
+      divField.children.splice(fieldIndex + 3, 0, companyNameField as any);
     }
   }
 
   const fieldTypeIndex = formField.findIndex(
-    (field) =>
+    (field: any) =>
       field?.field?.type === Field.div &&
-      //@ts-expect-error
       Array.isArray(field?.field?.children) &&
-      //@ts-expect-error
-      field?.field?.children.some((child) => child?.field?.id == "customerType")
+      field?.field?.children.some(
+        (child: any) => child?.field?.id == "customerType"
+      )
   );
 
   if (fieldIndex !== -1 && type === "Existing Customer") {
@@ -380,8 +376,10 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
           value: item.id,
           label: item.fullName,
         })),
-        onItemChange: onCustomerSelect,
         control,
+        onItemChange: onCustomerSelect,
+        isLocalCustomer: true,
+        // onSearchCustomer: (value: string) => onSearchCustomer(value),
         value: leadDetails?.id
           ? leadDetails?.customerID
           : customerDetails && customerDetails?.id,
@@ -391,8 +389,7 @@ export const AddNewCustomerLeadFormField: GenerateLeadsCustomerFormField = (
 
     const divFieldCustomer = formField[fieldTypeIndex]?.field as DivProps;
     if (divFieldCustomer && Array.isArray(divFieldCustomer.children)) {
-      //@ts-expect-error
-      divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField);
+      divFieldCustomer.children.splice(fieldIndex + 1, 0, customerField as any);
     }
   }
 

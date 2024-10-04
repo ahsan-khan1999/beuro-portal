@@ -14,6 +14,8 @@ export const SelectField = ({
   className,
   disabled,
   fieldIndex,
+  isLocalCustomer,
+  onSearchCustomer,
 }: SelectProps) => {
   return (
     <Controller
@@ -33,6 +35,8 @@ export const SelectField = ({
           disabled={disabled}
           key={id}
           fieldIndex={fieldIndex}
+          isLocalCustomer={isLocalCustomer}
+          onSearchCustomer={onSearchCustomer}
         />
       )}
     />

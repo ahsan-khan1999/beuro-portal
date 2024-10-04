@@ -99,7 +99,7 @@ const Header = ({ isDrawer, handleDrawer }: HeaderProps) => {
   }, [followUp]);
 
   useEffect(() => {
-    const followUpTime = upcomingFollowUp ? upcomingFollowUp.dateTime : null;
+    const followUpTime = upcomingFollowUp ? upcomingFollowUp?.dateTime : null;
     const now = new Date();
     const end = new Date(followUpTime);
     const difference = end.getTime() - now.getTime();

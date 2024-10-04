@@ -29,7 +29,7 @@ const DetailsTab = ({
   return (
     <button
       onClick={() => handleClickScroll(name)}
-      className={`h-fit whitespace-nowrap rounded-lg py-[10px] border px-[14px] text-base font-normal flex items-center bg-white w-[247px]  ${
+      className={`h-fit whitespace-nowrap rounded-lg py-[10px] border px-[14px] text-base font-normal flex items-center bg-white w-[247px] ${
         isSelected
           ? "border-primary text-primary"
           : "border-[#EBEBEB] text-[#1E1E1E]"

@@ -20,35 +20,37 @@ const CustomerDetails = () => {
     deleteHandler,
     renderModal,
     loading,
-    isLoading,
   } = useCustomerDetail({ detail: true, idAddNewCustomer: false });
 
   return (
     <Layout>
-      <DetailsCard>
-        <CustomerDetailsData
-          date={formatDateTimeToDate(customerDetail?.createdAt) as string}
-          id={customerDetail?.refID}
-          name={customerDetail?.createdBy?.fullName}
-          handlePreviousClick={handlePreviousClick}
-          handleDelete={deleteHandler}
-          customerDetails={customerDetail}
-        />
-      </DetailsCard>
       {loading ? (
         <CustomLoader />
       ) : (
-        <div className="w-full my-5">
-          <CustomerForm
-            isUpdate={isUpdate}
-            setIsUpdate={setIsUpdate}
-            customerDetail={customerDetail}
-            fields={fields}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            errors={errors}
-          />
-        </div>
+        <>
+          <DetailsCard>
+            <CustomerDetailsData
+              date={formatDateTimeToDate(customerDetail?.createdAt) as string}
+              id={customerDetail?.refID}
+              name={customerDetail?.createdBy?.fullName}
+              handlePreviousClick={handlePreviousClick}
+              handleDelete={deleteHandler}
+              customerDetails={customerDetail}
+            />
+          </DetailsCard>
+
+          <div className="w-full my-5">
+            <CustomerForm
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
+              customerDetail={customerDetail}
+              fields={fields}
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              errors={errors}
+            />
+          </div>
+        </>
       )}
       {renderModal()}
     </Layout>

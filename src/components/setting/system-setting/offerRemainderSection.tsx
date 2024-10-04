@@ -77,7 +77,7 @@ export const OfferRemainderSection = ({
               </p>
 
               <DropDown
-                items={Object.keys(staticEnums["remainderDays"]).map(
+                items={Object.keys(staticEnums["remainderDays"])?.map(
                   (item) => ({
                     item: {
                       label: item,

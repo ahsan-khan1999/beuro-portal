@@ -454,7 +454,7 @@
     "main_heading": "Services",
     "add_button": "Add New",
     "heading": "Services Details",
-    "add_service_heading": "Add new Service",
+    "add_service_heading": "Add New Service",
     "service_detail_tab": "Service Details",
     "table_headings": {
       "id": "ID",
@@ -486,7 +486,7 @@
   "employees": {
     "main_heading": "Employees",
     "add_button": "Add New",
-    "add_new_employee": "Add Employee",
+    "add_new_employee": "Add New Employee",
     "employee_tab": "Employee Details",
     "table_headings": {
       "id": "ID",
@@ -945,7 +945,7 @@
   },
   "content": {
     "main_heading": "Content",
-    "create_content": "Create Content",
+    "create_content": "Add New Content",
     "add_button": "Add New",
     "content_card_detail": {
       "heading": "Content details",
@@ -1262,6 +1262,9 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+    "add_new_offer": "Add New Offer",
+    "add_new_invoice": "Add New Invoice",
+    "no_customer_found": "No customer found",
     "paid_invoice": "Invoice was successfully marked as paid",
     "paid_invoice_date": "Select the paid date of invoice",
     "enter_location": "Enter location",
@@ -2396,7 +2399,21 @@
   "admin_role": {
     "Admin": "Admin",
     "Company": "Company",
-    "Agent": "Agent"
+    "Employee": "Employee",
+    "Agent": "Agent",
+    "CEO": "CEO",
+    "Administration": "Administration",
+    "HRManager": "HR Manager",
+    "FinanceManager": "Finance Manager",
+    "OperationsManager": "Operations Manager",
+    "ITManager": "IT Manager",
+    "MarketingManager": "Marketing Manager",
+    "SalesManager": "Sales Manager",
+    "ProjectManager": "Project Manager",
+    "BusinessAnalyst": "Business Analyst",
+    "CustomerSupportRepresentative": "Customer Support Representative",
+    "AdministrativeAssistant": "Administrative Assistant",
+    "Intern": "Intern"
   },
   "header_alignment": {
     "header_heading": "Header Alignment",

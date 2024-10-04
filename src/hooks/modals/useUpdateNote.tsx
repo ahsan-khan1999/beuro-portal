@@ -122,7 +122,7 @@ export const useUpdateNote = ({
     if (res?.payload) {
       switch (type) {
         case "lead":
-          const isFilterLead = lead.find((item) => item.id === id);
+          const isFilterLead = lead?.find((item) => item.id === id);
           if (!isFilterLead?.isNoteCreated && handleFilterChange)
             handleFilterChange(filter || {});
           handleNotes(
@@ -133,7 +133,7 @@ export const useUpdateNote = ({
           );
           break;
         case "offer":
-          const isFilterOffer = offer.find((item) => item.id === id);
+          const isFilterOffer = offer?.find((item) => item.id === id);
           if (!isFilterOffer?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
             handleNotes(
@@ -154,7 +154,7 @@ export const useUpdateNote = ({
 
           break;
         case "contract":
-          const isFilterContract = contract.find((item) => item.id === id);
+          const isFilterContract = contract?.find((item) => item.id === id);
           if (!isFilterContract?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
             handleNotes(
@@ -177,7 +177,7 @@ export const useUpdateNote = ({
 
           break;
         case "invoice":
-          const isFilterInvoice = invoice.find((item) => item.id === id);
+          const isFilterInvoice = invoice?.find((item) => item.id === id);
           if (!isFilterInvoice?.isNoteCreated && handleFilterChange) {
             handleFilterChange(filter || {});
             handleNotes(

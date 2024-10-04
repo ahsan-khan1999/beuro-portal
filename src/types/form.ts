@@ -151,6 +151,8 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   className?: string;
   disabled?: boolean;
   fieldIndex?: number;
+  isLocalCustomer?:boolean
+  onSearchCustomer?:(value:string) => void
 }
 export interface AgentSelectProps
   extends BaseFieldProps<Field.agentSelectField> {
@@ -180,6 +182,8 @@ export interface SelectBoxProps {
   className?: string;
   disabled?: boolean;
   fieldIndex?: number;
+  isLocalCustomer?:boolean
+  onSearchCustomer?:(value:string) => void
 }
 export interface CustomLocationInputProps {
   id: string;
