@@ -1,6 +1,6 @@
 import { pdfDateFormat } from "@/utils/utility";
 import { Image, StyleSheet, Text, View } from "@react-pdf/renderer";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -56,18 +56,20 @@ export const AggrementSignature = ({
   showContractSign?: boolean;
   language?: string;
 }) => {
-  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-  const onFileChange = () => {
-    if (signature) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader?.result);
-      };
-      reader.readAsDataURL(signature);
-    }
-  };
+  // const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
+  // const onFileChange = () => {
+  //   if (signature) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImageSrc(reader?.result);
+  //     };
+  //     reader.readAsDataURL(signature);
+  //   }
+  // };
 
-  useMemo(() => signature && onFileChange(), [signature]);
+  // useMemo(() => signature && onFileChange(), [signature]);
+  // console.log(signature,"signature",imageSrc);
+  
   const date = pdfDateFormat(new Date().toString(), language || "de");
 
   const langContent = {
@@ -103,7 +105,7 @@ export const AggrementSignature = ({
             <View style={{ width: "40%" }}>
               {signature && (
                 <Image
-                  src={imageSrc as string}
+                  src={signature as string}
                   style={{ height: "100px", width: "100px" }}
                 />
               )}
