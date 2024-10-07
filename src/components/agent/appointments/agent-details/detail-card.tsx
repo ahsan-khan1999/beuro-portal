@@ -83,7 +83,7 @@ export const AppointmentsDetailCard = ({
         id: "convert",
         type: "Existing Customer",
         leadID: {
-          leadID: reportDetails?.appointmentID?.leadID?.id,
+          id: reportDetails?.appointmentID?.leadID?.id,
           customerID: reportDetails?.appointmentID?.leadID?.customerID,
           customerDetail: {
             fullName: reportDetails?.customerDetail?.fullName,
