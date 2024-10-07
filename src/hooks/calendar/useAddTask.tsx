@@ -82,7 +82,11 @@ export default function useAddTask({
         setDate(filteredDate);
         reset({
           title: taskDetail?.title,
-          date: filteredDate,
+          date: filteredDate?.map((dateItem) => ({
+            ...dateItem,
+            startDate: moment(dateItem.startDate).format("YYYY-MM-DDTHH:mm"),
+            endDate: moment(dateItem.endDate).format("YYYY-MM-DDTHH:mm"),
+          })),
           streetNumber: taskDetail?.address?.streetNumber,
           isAllDay: taskDetail?.isAllDay,
           note: taskDetail?.note,
@@ -171,15 +175,23 @@ export default function useAddTask({
         ? taskDetail?.date?.map((item) => {
             if (moment(item.startDate).isSame(clickedStartDate)) {
               return {
-                startDate: data.date[0].startDate,
-                endDate: data.date[0].endDate,
+                startDate: data.isAllDay
+                  ? moment(data.date[0].startDate).format("YYYY-MM-DD")
+                  : moment(data.date[0].startDate).toISOString(),
+                endDate: data.isAllDay
+                  ? moment(data.date[0].endDate).format("YYYY-MM-DD")
+                  : moment(data.date[0].endDate).toISOString(),
               };
             }
             return item;
           })
         : data.date?.map((dateItem: any) => ({
-            startDate: dateItem.startDate,
-            endDate: dateItem.endDate,
+            startDate: data.isAllDay
+              ? moment(dateItem.startDate).format("YYYY-MM-DD")
+              : moment(dateItem.startDate).toISOString(),
+            endDate: data.isAllDay
+              ? moment(dateItem.endDate).format("YYYY-MM-DD")
+              : moment(dateItem.endDate).toISOString(),
           })),
       isAllDay: data.isAllDay,
       colour: data.colour,

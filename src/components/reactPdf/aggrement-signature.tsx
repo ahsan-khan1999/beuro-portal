@@ -1,6 +1,5 @@
 import { pdfDateFormat } from "@/utils/utility";
 import { Image, StyleSheet, Text, View } from "@react-pdf/renderer";
-import { useEffect, useMemo, useState } from "react";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -86,7 +85,6 @@ export const AggrementSignature = ({
   return (
     <View style={styles.wrapper}>
       {showContractSign && (
-        // <View>
         <View style={{ ...styles.dateContainer }}>
           <View style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}>
             {
@@ -113,7 +111,6 @@ export const AggrementSignature = ({
                   "Unterschrift"}
               </Text>
             </View>
-            {/* </View> */}
           </View>
         </View>
       )}

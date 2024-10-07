@@ -65,13 +65,16 @@ export const Footer = ({
 }: PdfPreviewFooterProps) => {
   const { companyName, email, phoneNumber, taxNumber, website } =
     templateSettings?.firstColumn ?? {};
+
   const address = {
     streetNumber: templateSettings?.secondColumn?.streetNumber,
     postalCode: templateSettings?.secondColumn?.postCode,
   };
+
   const bankDetails = {
     bankName: templateSettings?.secondColumn?.bankName,
   };
+
   // const { address, bankDetails } = documentDetails?.secondColumn ?? {};
   const {
     row1: c3Row1,

@@ -116,6 +116,7 @@ export const SignaturePad = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [signaturePad, setSignaturePad] = useState<SignPad | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
   const resizeCanvas = () => {
     if (canvasRef.current && signaturePad) {
       const rect = canvasRef.current.getBoundingClientRect();
@@ -145,6 +146,7 @@ export const SignaturePad = ({
   const serviceItemFooter = pdfData?.serviceItemFooter;
   const aggrementDetails = pdfData?.aggrementDetails;
   const router = useRouter();
+
   const { action: pdfAction } = router.query;
 
   const isDiscount =
@@ -210,17 +212,17 @@ export const SignaturePad = ({
         />
       </Page>
 
-      <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
+      <Page style={{ paddingBottom: 100, fontFamily: "Poppins" }}>
         <View style={{ marginBottom: 10 }} fixed>
           <Header {...headerDetails} language={lang} />
         </View>
 
-        {/* <View style={{ paddingBottom: 110 }}> */}
-        <AdditionalDetails
-          description={aggrementDetails}
-          signature={mySignature}
-        />
-        {/* </View> */}
+        <View style={{ paddingBottom: mySignature ? 110 : 0 }}>
+          <AdditionalDetails
+            description={aggrementDetails}
+            signature={mySignature}
+          />
+        </View>
         <AggrementSignature
           showContractSign={true}
           signature={mySignature}
@@ -324,15 +326,15 @@ export const SignaturePad = ({
               />
             </Page>
 
-            <Page style={{ paddingBottom: 145, fontFamily: "Poppins" }}>
+            <Page style={{ paddingBottom: 100, fontFamily: "Poppins" }}>
               <View style={{ marginBottom: 10 }} fixed>
                 <Header {...headerDetails} language={lang} />
               </View>
-              <View style={{ paddingBottom: 110 }}>
-              <AdditionalDetails
-                description={aggrementDetails}
-                signature={file}
-              />
+              <View style={{ paddingBottom: file ? 110 : 0 }}>
+                <AdditionalDetails
+                  description={aggrementDetails}
+                  signature={file}
+                />
               </View>
               <AggrementSignature
                 showContractSign={true}
