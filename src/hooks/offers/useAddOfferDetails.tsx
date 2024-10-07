@@ -284,6 +284,8 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data, "data");
+
     if (offerDetails?.id) {
       const apiData: any = {
         ...data,

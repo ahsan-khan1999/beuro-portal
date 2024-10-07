@@ -262,7 +262,7 @@
         "expire": "Abgelaufen"
       },
       "appointments": {
-        "appointment": "Ernennungen",
+        "appointment": "Termin",
         "pending": "Entwurf",
         "completed": "Vollendet",
         "cancelled": "Abgebrochen"
@@ -313,7 +313,7 @@
         "expire": "Abgelaufen"
       },
       "appointments": {
-        "appointment": "Termine",
+        "appointment": "Termin",
         "pending": "Entwurf",
         "completed": "Vollendet",
         "cancelled": "Abgebrochen"
@@ -1128,7 +1128,7 @@
     "reschedule_btn": "Umplanen",
     "sub_report": "Bericht einreichen",
     "create_appointments": "Termin erstellen",
-    "view_appointments_btn": "Termine ansehen",
+    "view_appointments_btn": "Termin ansehen",
     "schedule_appointment": "Termin vereinbaren",
     "reschedule_appointment": "Termin verschieben",
     "detail_heading": "Termin Details",
@@ -1154,7 +1154,7 @@
     },
     "successs_modal": {
       "heading": "Termin erfolgreich erstellt",
-      "sub_heading": "Vielen Dank für die Erstellung von Appointments, wir freuen uns, Sie zu haben."
+      "sub_heading": "Vielen Dank für die Vereinbarung von Terminen. Wir freuen uns, Sie bei uns zu haben"
     },
     "appointments_field_label": {
       "lead_id": "Lead ID",

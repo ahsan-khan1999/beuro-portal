@@ -46,15 +46,6 @@ export const useAddFollowUp = (
 
   const customerID = watch("customer");
 
-  // const lookUpModals = {
-  //   [Modals.customer]: () => handleAllCustomers(),
-  //   [Modals.leads]: () => handleAllLeads(),
-  // };
-
-  // const handleModalPop = (item: Modals) => {
-  //   lookUpModals[item]();
-  // };
-
   useMemo(() => {
     if (customerID) {
       dispatch(
@@ -65,21 +56,11 @@ export const useAddFollowUp = (
     }
   }, [customerID]);
 
-  // const handleSearchCustomer = (value: string) => {
-  //   dispatch(readCustomer({ params: { filter: { text: value } } }));
-  // };
-
-  const fields = AddFollowUpFormField(
-    register,
-    loading,
-    control,
-    // handleSearchCustomer,
-    {
-      customer,
-      lead: lead,
-      followUps,
-    }
-  );
+  const fields = AddFollowUpFormField(register, loading, control, {
+    customer,
+    lead: lead,
+    followUps,
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await dispatch(
