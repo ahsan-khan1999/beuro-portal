@@ -14,6 +14,7 @@ import { fieldDateFormat } from "@/utils/utility";
 import { Appointments } from "@/types/appointments";
 import { readLeadDetails, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import { CustomerPromiseActionType } from "@/types/company";
+import moment from "moment";
 
 export interface AppointmentHookProps {
   onSuccess: () => void;
@@ -88,7 +89,13 @@ export const useScheduleAppointment = ({
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const apiData = { ...data, leadID: leadId };
+    const utcDate = moment.utc(data.date).format("YYYY-MM-DD");
+
+    const apiData = {
+      ...data,
+      leadID: leadId,
+      date: utcDate,
+    };
 
     const res = isUpdate
       ? await dispatch(
