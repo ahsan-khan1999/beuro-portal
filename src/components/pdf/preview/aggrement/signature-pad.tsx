@@ -34,7 +34,6 @@ import { pdf as reactPdf } from "@react-pdf/renderer";
 export const A4_WIDTH = 595; // 72dpi
 export const A4_HEIGHT = 842; // 72dpi
 
-
 Font.register({
   family: "Poppins",
   fonts: [
@@ -153,7 +152,9 @@ export const SignaturePad = ({
     Number(serviceItemFooter?.serviceDiscountSum) > 0
       ? true
       : false || false;
+
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
+
   const pdfDoc = (
     <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>
       <Page style={styles.body}>
@@ -214,13 +215,12 @@ export const SignaturePad = ({
           <Header {...headerDetails} language={lang} />
         </View>
 
-        {/* <ContactAddress {...{ ...contactAddress }} /> */}
-        <View style={{ paddingBottom: 110 }}>
-          <AdditionalDetails
-            description={aggrementDetails}
-            signature={mySignature}
-          />
-        </View>
+        {/* <View style={{ paddingBottom: 110 }}> */}
+        <AdditionalDetails
+          description={aggrementDetails}
+          signature={mySignature}
+        />
+        {/* </View> */}
         <AggrementSignature
           showContractSign={true}
           signature={mySignature}
@@ -268,6 +268,7 @@ export const SignaturePad = ({
         const blob = dataURLtoBlob(svgContent);
         const file = new File([blob], "signature.png", { type: "image/png" });
         mySignature = file;
+
         let newPdf = (
           <Document style={{ width: A4_WIDTH, height: A4_HEIGHT }}>
             <Page style={styles.body}>
@@ -328,10 +329,10 @@ export const SignaturePad = ({
                 <Header {...headerDetails} language={lang} />
               </View>
               <View style={{ paddingBottom: 110 }}>
-                <AdditionalDetails
-                  description={aggrementDetails}
-                  signature={file}
-                />
+              <AdditionalDetails
+                description={aggrementDetails}
+                signature={file}
+              />
               </View>
               <AggrementSignature
                 showContractSign={true}
@@ -357,7 +358,7 @@ export const SignaturePad = ({
             pdfData?.headerDetails?.companyName
           }.pdf` || "offer.pdf"
         );
-        
+
         if (!svgContent) {
           alert("true");
           showError(translate("common.sign_first"));
@@ -380,8 +381,6 @@ export const SignaturePad = ({
         } catch (error) {
           console.error(error, "sign pdf error");
         }
-
-        // return true;
       } else {
         showError(translate("common.sign_first"));
       }

@@ -55,32 +55,34 @@ const OfferPdfPriview = () => {
   };
 
   return (
-    <div>
-      <EmailCard
-        emailStatus={offerDetails?.emailStatus}
-        offerNo={offerData?.emailHeader?.offerNo}
-        onEmailSend={handleEmailSend}
-        loading={loading}
-        onDownload={handleDonwload}
-        onPrint={handlePrint}
-        handleSendByPost={handleSendByPost}
-        activeButtonId={activeButtonId}
-        offerId={offerData?.id}
-      />
-
+    <>
       {loading ? (
         <CustomLoader />
       ) : (
-        <div className="mt-5">
-          <OfferPdf
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
+        <>
+          <EmailCard
+            emailStatus={offerDetails?.emailStatus}
+            offerNo={offerData?.emailHeader?.offerNo}
+            onEmailSend={handleEmailSend}
+            loading={loading}
+            onDownload={handleDonwload}
+            onPrint={handlePrint}
+            handleSendByPost={handleSendByPost}
+            activeButtonId={activeButtonId}
+            offerId={offerData?.id}
           />
-        </div>
+
+          <div className="mt-5">
+            <OfferPdf
+              mergedPdfFileUrl={mergedPdfUrl}
+              isPdfRendering={isPdfRendering}
+            />
+          </div>
+        </>
       )}
 
       {renderModal()}
-    </div>
+    </>
   );
 };
 

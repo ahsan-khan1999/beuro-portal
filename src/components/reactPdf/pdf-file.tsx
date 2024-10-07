@@ -128,9 +128,10 @@ const PdfFile = ({
 
       <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
-        <View style={{ paddingBottom: isOfferPdf ? 110 : 0 }}>
-          <AdditionalDetails description={aggrementDetails} />
-        </View>
+        {/* <View style={{ paddingBottom: isOfferPdf ? 110 : 0 }}> */}
+        <AdditionalDetails description={aggrementDetails} />
+        {/* </View> */}
+
         {isOfferPdf && (
           <AggrementSignature
             showContractSign={showContractSign}

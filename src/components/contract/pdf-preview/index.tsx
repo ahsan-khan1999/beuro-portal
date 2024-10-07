@@ -7,6 +7,7 @@ import { useContractPdf } from "@/hooks/contract/useContractPdf";
 import { useTranslation } from "next-i18next";
 import { Layout } from "@/layout";
 import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const ContractPdfPreview = dynamic(
   () => import("@/components/reactPdf/pdf-layout"),
@@ -75,25 +76,31 @@ const PdfPriview = () => {
         />
       ) : (
         <Layout>
-          <EmailCard
-            contractStatus={contractDetails?.emailStatus}
-            contractNo={contractData?.emailHeader?.offerNo}
-            onEmailSend={handleEmailSend}
-            loading={loading}
-            onDownload={handleDonwload}
-            onPrint={handlePrint}
-            contractTitle={contractData?.emailHeader?.contractTitle || ""}
-            worker={contractData?.emailHeader?.worker || ""}
-            onSendViaPost={handleSendByPost}
-            activeButtonId={activeButtonId}
-          />
+          {loading ? (
+            <CustomLoader />
+          ) : (
+            <>
+              <EmailCard
+                contractStatus={contractDetails?.emailStatus}
+                contractNo={contractData?.emailHeader?.offerNo}
+                onEmailSend={handleEmailSend}
+                loading={loading}
+                onDownload={handleDonwload}
+                onPrint={handlePrint}
+                contractTitle={contractData?.emailHeader?.contractTitle || ""}
+                worker={contractData?.emailHeader?.worker || ""}
+                onSendViaPost={handleSendByPost}
+                activeButtonId={activeButtonId}
+              />
 
-          <div className="mt-5">
-            <ContractPdfPreview
-              mergedPdfFileUrl={mergedPdfUrl}
-              isPdfRendering={isPdfRendering}
-            />
-          </div>
+              <div className="mt-5">
+                <ContractPdfPreview
+                  mergedPdfFileUrl={mergedPdfUrl}
+                  isPdfRendering={isPdfRendering}
+                />
+              </div>
+            </>
+          )}
 
           {renderModal()}
         </Layout>

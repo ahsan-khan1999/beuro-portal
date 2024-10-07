@@ -69,7 +69,7 @@ export const AggrementSignature = ({
 
   // useMemo(() => signature && onFileChange(), [signature]);
   // console.log(signature,"signature",imageSrc);
-  
+
   const date = pdfDateFormat(new Date().toString(), language || "de");
 
   const langContent = {
@@ -86,36 +86,34 @@ export const AggrementSignature = ({
   return (
     <View style={styles.wrapper}>
       {showContractSign && (
-        <View>
-          <View style={{ ...styles.dateContainer }}>
-            <View
-              style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}
-            >
-              {
-                <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
-                  {date}
-                </Text>
-              }
+        // <View>
+        <View style={{ ...styles.dateContainer }}>
+          <View style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}>
+            {
+              <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
+                {date}
+              </Text>
+            }
+            <Text style={styles.dateText}>
+              {langContent[language as keyof typeof langContent]?.date ||
+                "Datum"}
+            </Text>
+          </View>
+
+          <View style={{ width: "40%" }}>
+            {signature && (
+              <Image
+                src={signature as string}
+                style={{ height: "100px", width: "100px" }}
+              />
+            )}
+            <View style={styles.signature}>
               <Text style={styles.dateText}>
-                {langContent[language as keyof typeof langContent]?.date ||
-                  "Datum"}
+                {langContent[language as keyof typeof langContent]?.signature ||
+                  "Unterschrift"}
               </Text>
             </View>
-
-            <View style={{ width: "40%" }}>
-              {signature && (
-                <Image
-                  src={signature as string}
-                  style={{ height: "100px", width: "100px" }}
-                />
-              )}
-              <View style={styles.signature}>
-                <Text style={styles.dateText}>
-                  {langContent[language as keyof typeof langContent]
-                    ?.signature || "Unterschrift"}
-                </Text>
-              </View>
-            </View>
+            {/* </View> */}
           </View>
         </View>
       )}
