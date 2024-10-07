@@ -116,7 +116,9 @@ export const ProfileUpload = ({
               <div className="flex flex-col items-center gap-y-[10px]">
                 <Image src={fileUploadIcon} alt="editIcon" />
                 <span
-                  className="bg-primary px-3 py-2 cursor-pointer text-white text-sm font-medium rounded-lg"
+                  className={`bg-primary px-3 py-2 ${
+                    !disabled && "cursor-pointer"
+                  } text-white text-sm font-medium rounded-lg`}
                   onClick={() => document.getElementById(id)?.click()}
                 >
                   {translate("common.upload_button")}
