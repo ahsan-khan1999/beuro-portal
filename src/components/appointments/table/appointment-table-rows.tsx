@@ -2,7 +2,7 @@ import React from "react";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
-import { convertToLocal, formatDateTimeToDate } from "@/utils/utility";
+import { convertToLocal, viewConvertUTCToLocalDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
@@ -100,6 +100,7 @@ export const AppointmentTableRows = ({
         const localStartTime = item?.startTime
           ? convertToLocal(item?.startTime).time
           : "";
+
         const localEndTime = item?.endTime
           ? convertToLocal(item?.endTime).time
           : "";
@@ -147,7 +148,7 @@ export const AppointmentTableRows = ({
                   )}
                 </span>
                 <span className="py-4 mlg:hidden xMaxSize:block">
-                  {formatDateTimeToDate(item.date)}
+                  {viewConvertUTCToLocalDate(item.startTime)}
                 </span>
 
                 <div className="py-4 flex items-center mlg:hidden xLarge:block">

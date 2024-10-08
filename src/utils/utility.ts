@@ -437,6 +437,22 @@ export const convertToLocal = (
   };
 };
 
+export const convertUTCToLocalDate = (utcDate: string): string => {
+  const localDateObj = new Date(utcDate);
+  const localDate = moment(localDateObj).format("YYYY-MM-DD");
+  return localDate;
+};
+
+export const viewConvertUTCToLocalDate = (utcDate: string): string => {
+  const localDateObj = new Date(utcDate);
+  const localDate = moment(localDateObj).format("DD/MM/YYYY");
+  return localDate;
+};
+
+export const formatTimeToHHMM = (utcDateTime: string): string => {
+  return moment(utcDateTime).local().format("HH:mm");
+};
+
 export function formatDate(date: string) {
   return moment(date).format("DD/MM/YYYY HH:mm");
 }

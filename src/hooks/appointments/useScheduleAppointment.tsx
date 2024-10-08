@@ -10,7 +10,12 @@ import {
   createAppointment,
   updateAppointment,
 } from "@/api/slices/appointment/appointmentSlice";
-import { convertToLocal, convertToUTC, fieldDateFormat } from "@/utils/utility";
+import {
+  convertToLocal,
+  convertToUTC,
+  convertUTCToLocalDate,
+  fieldDateFormat,
+} from "@/utils/utility";
 import { Appointments } from "@/types/appointments";
 import { readLeadDetails, setLeadDetails } from "@/api/slices/lead/leadSlice";
 import { CustomerPromiseActionType } from "@/types/company";
@@ -70,14 +75,15 @@ export const useScheduleAppointment = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
+  const localStartTime = startTime ? convertToLocal(startTime).time : "";
+  const localEndTime = endTime ? convertToLocal(endTime).time : "";
+  const localDate = convertUTCToLocalDate(startTime || "");
+
   useEffect(() => {
     if (id) {
-      const localStartTime = startTime ? convertToLocal(startTime).time : "";
-      const localEndTime = endTime ? convertToLocal(endTime).time : "";
-
       reset({
         leadID: refID,
-        date: fieldDateFormat(date) || "",
+        date: localDate || "",
         startTime: localStartTime,
         endTime: localEndTime,
         canton: canton,
@@ -85,7 +91,7 @@ export const useScheduleAppointment = ({
     } else {
       reset({
         leadID: refID,
-        date: fieldDateFormat(date) || "",
+        date: localDate || "",
         startTime: "",
         endTime: "",
         canton: canton,
@@ -100,14 +106,17 @@ export const useScheduleAppointment = ({
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const utcDate = moment.utc(data.date).format("YYYY-MM-DD");
-
     const utcStartTime = data.startTime
       ? convertToUTC(data.date, data.startTime)
       : null;
+
     const utcEndTime = data.endTime
       ? convertToUTC(data.date, data.endTime)
       : null;
+
+    const utcDate = utcStartTime
+      ? moment.utc(utcStartTime).format("YYYY-MM-DD")
+      : moment.utc(data.date).format("YYYY-MM-DD");
 
     const apiData = {
       ...data,

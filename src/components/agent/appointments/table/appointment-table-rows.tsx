@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
-import { formatDateTimeToDate } from "@/utils/utility";
+import {
+  convertToLocal,
+  formatDateTimeToDate,
+  viewConvertUTCToLocalDate,
+} from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 export interface ApointmentsTableProps {
@@ -90,6 +94,13 @@ export const AppointmentTableRows = ({
           customerType === 1
             ? translate("common.company_name")
             : translate("common.customer_name");
+
+        const localStartTime = item?.startTime
+          ? convertToLocal(item?.startTime).time
+          : "";
+        const localEndTime = item?.endTime
+          ? convertToLocal(item?.endTime).time
+          : "";
 
         return (
           <div>
@@ -217,16 +228,16 @@ export const AppointmentTableRows = ({
                   </span>
 
                   <span className="py-4 mlg:hidden xMaxSize:block">
-                    {formatDateTimeToDate(item.date)}
+                    {viewConvertUTCToLocalDate(item.startTime)}
                   </span>
 
                   <div className="py-4 flex items-center mlg:hidden xLarge:block">
                     <span className="text-sm text-[#191D23] font-semibold">
-                      {item.startTime}
+                      {localStartTime}
                     </span>{" "}
                     -{" "}
                     <span className="text-sm text-[#191D23] font-semibold">
-                      {item.endTime}
+                      {localEndTime}
                     </span>
                   </div>
 
