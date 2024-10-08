@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { Appointments, Report } from "@/types/appointments";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { formatTimeToHHMM, viewConvertUTCToLocalDate } from "@/utils/utility";
 import localStoreUtil from "@/utils/localstore.util";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
@@ -259,7 +259,7 @@ export const AppointmentsDetailCard = ({
                 {translate("appointments.detail_data.date")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                {formatDateTimeToDate(appointmentDetails?.date)}
+                {viewConvertUTCToLocalDate(appointmentDetails?.startTime)}
               </span>
             </div>
             <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
@@ -267,7 +267,8 @@ export const AppointmentsDetailCard = ({
                 {translate("appointments.detail_data.time")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                {appointmentDetails?.startTime} - {appointmentDetails?.endTime}
+                {formatTimeToHHMM(appointmentDetails?.startTime)} -{" "}
+                {formatTimeToHHMM(appointmentDetails?.endTime)}
               </span>
             </div>
 

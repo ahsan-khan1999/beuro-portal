@@ -61,10 +61,12 @@ export const IsContractTaskCreated = ({
           const { startDate, endDate } = dateItem;
           const taskTime = contractDetails?.offerID?.time || "00:00";
 
-          const startMoment = moment(startDate).set({
-            hour: parseInt(taskTime.split(":")[0], 10),
-            minute: parseInt(taskTime.split(":")[1], 10),
-          });
+          const startMoment = moment(startDate)
+            .set({
+              hour: parseInt(taskTime.split(":")[0], 10),
+              minute: parseInt(taskTime.split(":")[1], 10),
+            })
+            .utc();
 
           let endMoment;
 
@@ -74,15 +76,16 @@ export const IsContractTaskCreated = ({
                 hour: parseInt(taskTime.split(":")[0], 10),
                 minute: parseInt(taskTime.split(":")[1], 10),
               })
-              .add(1, "hour");
+              .add(1, "hour")
+              .utc();
           } else {
-            endMoment = startMoment.clone().add(1, "hour");
+            endMoment = startMoment.clone().add(1, "hour").utc();
           }
 
           return {
             ...dateItem,
-            startDate: startMoment.format("YYYY-MM-DDTHH:mm"),
-            endDate: endMoment.format("YYYY-MM-DDTHH:mm"),
+            startDate: startMoment.format("YYYY-MM-DDTHH:mm:ss[Z]"),
+            endDate: endMoment.format("YYYY-MM-DDTHH:mm:ss[Z]"),
           };
         }
       );

@@ -101,9 +101,15 @@ export default function useAddTask({
 
   useEffect(() => {
     if (isContractId) {
+      console.log(taskDetail?.date, "contract date");
+
       reset({
         title: taskDetail?.title,
-        date: taskDetail?.date,
+        date: taskDetail?.date?.map((dateItem) => ({
+          ...dateItem,
+          startDate: moment(dateItem.startDate).format("YYYY-MM-DDTHH:mm"),
+          endDate: moment(dateItem.endDate).format("YYYY-MM-DDTHH:mm"),
+        })),
         streetNumber: taskDetail?.address?.streetNumber,
         isAllDay: taskDetail?.isAllDay,
         note: taskDetail?.note,
