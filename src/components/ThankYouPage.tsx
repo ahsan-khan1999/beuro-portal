@@ -1,9 +1,14 @@
 import Image from "next/image";
 import aggrementIcon from "@/assets/pngs/agreement_icon.png";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 export const ThankYouPage = () => {
   const { t: translate } = useTranslation();
+
+  const router = useRouter();
+
+  const company_name = router?.query?.companyName;
   return (
     <div className="w-full px-5 sm:w-[600px] sm:py-[53px] sm:px-[60px]">
       <div
@@ -29,16 +34,31 @@ export const ThankYouPage = () => {
         <span className="text-sm sm:text-base font-normal text-left">
           {translate("thank_you_content.valued_csutomer")},
         </span>
+
+        <p className="text-sm sm:text-base font-normal text-justify mt-3">
+          {translate("thank_you_content.description_1")}
+        </p>
+        <p className="text-sm sm:text-base font-normal text-justify my-3">
+          {translate("thank_you_content.description_2")}
+        </p>
         <p className="text-sm sm:text-base font-normal text-justify">
-          {translate("thank_you_content.description")}
+          {translate("thank_you_content.description_3")}
         </p>
 
         <span className="text-sm sm:text-base font-normal mt-5">
           {translate("thank_you_content.warm_regards")},
         </span>
-        <span className="text-sm sm:text-base font-normal text-primary">
-          {translate("thank_you_content.team")}
-        </span>
+        <div className="flex items-center gap-x-1">
+          <span className="text-sm sm:text-base font-normal text-primary">
+            {translate("thank_you_content.your")}
+          </span>
+          <span className="text-sm sm:text-base font-normal text-primary">
+            {company_name}
+          </span>
+          <span className="text-sm sm:text-base font-normal text-primary">
+            {translate("thank_you_content.team")}
+          </span>
+        </div>
       </div>
     </div>
   );

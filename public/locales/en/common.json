@@ -1259,6 +1259,7 @@
       "update_success": "Congratulations! Your update was successful.",
       "date": "Date",
       "success_signed_offer": "Operation Successful",
+      "offer_signed_success_des": "Thank you for your order",
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
@@ -1362,7 +1363,7 @@
     "share": "Share",
     "lead": "Lead",
     "add": "Add",
-    "added":"Added",
+    "added": "Added",
     "upload_link": "Upload your link here",
     "time": "Time",
     "at": "At",
@@ -2451,11 +2452,14 @@
     "Other": "Other"
   },
   "thank_you_content": {
-    "heading": "Thanks for Signing the Contract",
-    "valued_csutomer": "Dear Valued Customer",
-    "description": "We are thrilled to inform you that we have successfully received your signed contract. Your trust in Buro to meet your needs is greatl appreciated, and we are committed to delivering excellence every step of the way. This marks the beginning of our official partnership, and we assure you that our team is dedicated to providing you with outstanding service and support. As we proceed, you will receive a comprehensive guide on how to maximize the benefits of our services. Should you have any questions or need assistance, please feel free to reach out to our customer support at any time. Your satisfaction is our priority, and we are here to ensure a smooth and beneficial experience for you. Thank you for choosing Buro. We look forward to a fruitful collaboration and are excited about the opportunities ahead.",
-    "warm_regards": "Warm Regards",
-    "team": "The Buro Team"
+    "heading": "Thank you for signing the offer",
+    "valued_csutomer": "Dear Customer",
+    "description_1": "Thank you very much for signing the offer. With this, you have successfully accepted our offer.",
+    "description_2": "You will receive a confirmation from us shortly. If you have any further questions regarding the offer, please do not hesitate to contact us at any time.",
+    "description_3": "We look forward to executing your order and a successful collaboration.",
+    "warm_regards": "Kind Regards",
+    "your": "Your",
+    "team": "Team"
   },
 
   "agent": {
