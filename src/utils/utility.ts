@@ -423,6 +423,20 @@ export function senitizeDataForm(inputObject: Record<string, any>) {
   return outputArray;
 }
 
+export const convertToUTC = (date: string, time: string): string => {
+  return moment(`${date} ${time}`, "YYYY-MM-DD HH:mm").utc().toISOString();
+};
+
+export const convertToLocal = (
+  utcDateTime: string
+): { date: string; time: string } => {
+  const localMoment = moment.utc(utcDateTime).local();
+  return {
+    date: localMoment.format("YYYY-MM-DD"),
+    time: localMoment.format("HH:mm"),
+  };
+};
+
 export function formatDate(date: string) {
   return moment(date).format("DD/MM/YYYY HH:mm");
 }

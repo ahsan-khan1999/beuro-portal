@@ -2,7 +2,7 @@ import React from "react";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { convertToLocal, formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
@@ -97,6 +97,13 @@ export const AppointmentTableRows = ({
             ? translate("common.company_name")
             : translate("common.customer_name");
 
+        const localStartTime = item?.startTime
+          ? convertToLocal(item?.startTime).time
+          : "";
+        const localEndTime = item?.endTime
+          ? convertToLocal(item?.endTime).time
+          : "";
+
         return (
           <div className="flex" key={index}>
             <div className="mlg:w-full">
@@ -145,11 +152,11 @@ export const AppointmentTableRows = ({
 
                 <div className="py-4 flex items-center mlg:hidden xLarge:block">
                   <span className="text-sm text-[#191D23] font-semibold">
-                    {item.startTime}
+                    {localStartTime}
                   </span>{" "}
                   -{" "}
                   <span className="text-sm text-[#191D23] font-semibold">
-                    {item.endTime}
+                    {localEndTime}
                   </span>
                 </div>
 
