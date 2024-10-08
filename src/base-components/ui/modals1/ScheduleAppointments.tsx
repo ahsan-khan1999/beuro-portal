@@ -6,7 +6,6 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { useScheduleAppointment } from "@/hooks/appointments/useScheduleAppointment";
 import { useAppSelector } from "@/hooks/useRedux";
 import { Appointments } from "@/types/appointments";
-import { Lead } from "@/types/leads";
 
 export interface AppointmentsModalProps {
   onClose: () => void;
@@ -28,9 +27,8 @@ export const ScheduleAppointments = ({
   setCurrentPageRows,
 }: AppointmentsModalProps) => {
   const defaultClassName = "mt-[25px]";
-  const { id, leadId, refID, date, startTime, endTime, agent,canton } = useAppSelector(
-    (state) => state.global.modal.data
-  );
+  const { id, leadId, refID, date, startTime, endTime, agent, canton } =
+    useAppSelector((state) => state.global.modal.data);
 
   const { fields, onSubmit, handleSubmit, errors } = useScheduleAppointment({
     onSuccess,
