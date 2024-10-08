@@ -5,7 +5,7 @@ import { UserIcon } from "@/assets/svgs/components/use-icon";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import { Appointments } from "@/types/appointments";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { viewConvertUTCToLocalDate } from "@/utils/utility";
 import { useRouter } from "next/router";
 
 export interface AppointmentMobileRecordsProps {
@@ -132,7 +132,7 @@ export const AppointmentTableRecordCard = ({
                   <div className="flex items-center gap-x-[14px]">
                     <DateIcon />
                     <p className="text-[#616161] font-normal text-sm">
-                      {formatDateTimeToDate(item.date)}
+                      {viewConvertUTCToLocalDate(item?.startTime)}
                     </p>
                   </div>
                   <div className="flex items-center gap-x-[14px]">

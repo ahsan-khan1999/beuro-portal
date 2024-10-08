@@ -86,7 +86,7 @@ export const AggrementSignature = ({
     <View style={styles.wrapper}>
       {showContractSign && (
         <View style={{ ...styles.dateContainer }}>
-          <View style={{ ...styles.innerDate, marginTop: signature ? 100 : 0 }}>
+          <View style={{ ...styles.innerDate, marginTop: signature ? 174 : 0 }}>
             {
               <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
                 {date}
@@ -100,10 +100,7 @@ export const AggrementSignature = ({
 
           <View style={{ width: "40%" }}>
             {signature && (
-              <Image
-                src={signature as string}
-                style={{ height: "100px", width: "100px" }}
-              />
+              <Image src={signature as string} style={{ height: "174px" }} />
             )}
             <View style={styles.signature}>
               <Text style={styles.dateText}>

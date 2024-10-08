@@ -5,11 +5,7 @@ import { useRouter } from "next/router";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { Appointments, Report } from "@/types/appointments";
-import {
-  formatDateTimeToDate,
-  formatTimeToHHMM,
-  viewConvertUTCToLocalDate,
-} from "@/utils/utility";
+import { formatTimeToHHMM, viewConvertUTCToLocalDate } from "@/utils/utility";
 import localStoreUtil from "@/utils/localstore.util";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
