@@ -1252,7 +1252,8 @@
       "plan_record_des": "Danke! Wir freuen uns, dass Sie da sind.",
       "update_success": "Herzlichen Glückwunsch! Ihre Aktualisierung war erfolgreich.",
       "date": "Datum",
-      "success_signed_offer": "Unterschrift eingerichtetde",
+      "success_signed_offer": "Unterschrift eingereicht",
+      "offer_signed_success_des": "Vielen Dank für Ihren Auftrag",
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
@@ -2447,11 +2448,14 @@
     "Other": "Andere"
   },
   "thank_you_content": {
-    "heading": "Danke für die Unterzeichnung des Vertrags",
+    "heading": "Danke für die Unterzeichnung der Offerte",
     "valued_csutomer": "Sehr geehrter Kunde",
-    "description": "Wir freuen uns, Ihnen mitteilen zu können, dass wir Ihren unterzeichneten Vertrag erfolgreich erhalten haben. Wir wissen Ihr Vertrauen in Buro sehr zu schätzen, und wir verpflichten uns, bei jedem Schritt hervorragende Leistungen zu erbringen. Dies ist der Beginn unserer offiziellen Partnerschaft, und wir versichern Ihnen, dass sich unser Team dafür einsetzt, Ihnen einen hervorragenden Service und Support zu bieten. Im weiteren Verlauf werden Sie einen umfassenden Leitfaden erhalten, der Ihnen zeigt, wie Sie die Vorteile unserer Dienstleistungen optimal nutzen können. Sollten Sie Fragen haben oder Hilfe benötigen, können Sie sich jederzeit an unseren Kundensupport wenden. Ihre Zufriedenheit ist unsere Priorität, und wir sind für Sie da, um eine reibungslose und vorteilhafte Erfahrung für Sie zu gewährleisten. Vielen Dank, dass Sie sich für Buro entschieden haben. Wir freuen uns auf eine fruchtbare Zusammenarbeit und sind gespannt auf die kommenden Möglichkeiten.",
-    "warm_regards": "Mit freundlichen Grüßen",
-    "team": "Das Buro-Team"
+    "description_1": "Herzlichen Dank für die Unterzeichnung der Offerte. Damit haben Sie unser Angebot erfolgreich angenommen.",
+    "description_2": "In Kürze werden Sie von uns eine Bestätigung erhalten. Sollten Sie noch Fragen zur Offerte haben, zögern Sie bitte nicht, sich jederzeit mit uns in Verbindung zu setzen.",
+    "description_3": "Wir freuen uns auf die Umsetzung Ihres Auftrags und auf eine erfolgreiche Zusammenarbeit.",
+    "warm_regards": "Freundliche Grüßen",
+    "your": "Your",
+    "team": "Team"
   },
   "agent": {
     "main_heading": "Terminberichte einreichen",
