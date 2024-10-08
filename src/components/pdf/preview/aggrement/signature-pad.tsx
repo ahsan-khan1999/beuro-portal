@@ -217,7 +217,7 @@ export const SignaturePad = ({
           <Header {...headerDetails} language={lang} />
         </View>
 
-        <View style={{ paddingBottom: mySignature ? 110 : 0 }}>
+        <View style={{ paddingBottom: mySignature ? 280 : 0 }}>
           <AdditionalDetails
             description={aggrementDetails}
             signature={mySignature}
@@ -330,7 +330,7 @@ export const SignaturePad = ({
               <View style={{ marginBottom: 10 }} fixed>
                 <Header {...headerDetails} language={lang} />
               </View>
-              <View style={{ paddingBottom: file ? 110 : 0 }}>
+              <View style={{ paddingBottom: file ? 280 : 0 }}>
                 <AdditionalDetails
                   description={aggrementDetails}
                   signature={file}
