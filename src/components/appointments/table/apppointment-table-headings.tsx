@@ -36,7 +36,7 @@ export const AppointmentTableHeadings = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-[minmax(140px,_140px)] xLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(140px,_140px)] bg-primary rounded-r-md py-4 gap-x-2">
+      <div className="grid grid-cols-[minmax(150px,_150px)] xLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(150px,_150px)] bg-primary rounded-r-md py-4 gap-x-2">
         <span className="font-semibold text-base text-white">
           {translate("common.actions")}
         </span>

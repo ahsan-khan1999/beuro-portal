@@ -57,6 +57,8 @@ export const SignPdf = <T,>({
     dispatch(updateModalType(ModalType.NONE));
   };
 
+  console.log(pdfData.headerDetails?.companyName, "pdfData");
+
   const handleUpdateSuccess = async () => {
     const res = await dispatch(
       updateOfferStatus({ data: { id: pdfData?.id, offerStatus: 3 } })
@@ -71,7 +73,7 @@ export const SignPdf = <T,>({
   };
 
   const onSuccess = () => {
-    window.location.href = "/thank-you";
+    window.location.href = `/thank-you?companyName=${pdfData?.headerDetails?.companyName}`;
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
@@ -94,7 +96,7 @@ export const SignPdf = <T,>({
       <RecordCreateSuccess
         onClose={onClose}
         modelHeading={translate("common.modals.success_signed_offer")}
-        modelSubHeading={translate("common.modals.admin_setting_des")}
+        modelSubHeading={translate("common.modals.offer_signed_success_des")}
         routeHandler={onSuccess}
       />
     ),

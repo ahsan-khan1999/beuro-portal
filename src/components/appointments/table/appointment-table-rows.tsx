@@ -216,7 +216,7 @@ export const AppointmentTableRows = ({
               </div>
             </div>
             <div
-              className={`grid grid-cols-[minmax(140px,_140px)] xLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(140px,_140px)] gap-x-2 ${
+              className={`grid grid-cols-[minmax(150px,_150px)] xLarge:grid-cols-[minmax(40px,_40px)_minmax(40px,_40px)_minmax(150px,_150px)] gap-x-2 ${
                 index === 0 && "mt-2"
               }`}
             >
