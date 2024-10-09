@@ -1066,6 +1066,7 @@ export interface FilterType {
   leadSource?: string[] | string;
   isAppointmentCreated?: boolean;
   isOfferCreated?: boolean;
+  isTaskCreated?: boolean;
 }
 
 export interface MoreFilterType {

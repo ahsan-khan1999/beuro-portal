@@ -48,7 +48,7 @@ export default function BooleanSelectField({
     selectedValue: boolean,
     selectedIndex: number
   ) => {
-    options?.forEach(({ label, value }, index) => {
+    options?.forEach(({ label }, index) => {
       if (selectedIndex === index) {
         setSelectedLabel(label);
         handleChange(selectedValue);
@@ -56,8 +56,9 @@ export default function BooleanSelectField({
     });
   };
 
-  const queryAppointment = router.query.isAppointmentCreated;
+  const queryTask = router.query.isTaskCreated;
   const queryOffer = router.query.isOfferCreated;
+  const queryAppointment = router.query.isAppointmentCreated;
 
   useEffect(() => {
     const queryAppointmentValue =
@@ -70,6 +71,9 @@ export default function BooleanSelectField({
     const queryOfferValue =
       queryOffer === "true" ? true : queryOffer === "false" ? false : undefined;
 
+    const queryTaskValue =
+      queryTask === "true" ? true : queryTask === "false" ? false : undefined;
+
     const selectedAppointmentOption = options?.find(
       (option) => option.value === queryAppointmentValue
     );
@@ -78,14 +82,20 @@ export default function BooleanSelectField({
       (option) => option.value === queryOfferValue
     );
 
+    const selectedTaskOption = options?.find(
+      (option) => option.value === queryTaskValue
+    );
+
     if (selectedAppointmentOption) {
       setSelectedLabel(selectedAppointmentOption.label);
     } else if (selectedOfferOption) {
       setSelectedLabel(selectedOfferOption.label);
+    } else if (selectedTaskOption) {
+      setSelectedLabel(selectedTaskOption.label);
     } else {
       setSelectedLabel(label || "");
     }
-  }, [queryAppointment, queryOffer, label, options]);
+  }, [queryAppointment, queryOffer, queryTask, label, options]);
 
   return (
     <div className={containerClasses} ref={ref}>
