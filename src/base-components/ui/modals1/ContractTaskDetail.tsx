@@ -179,7 +179,9 @@ export const ContractTaskDetail = ({
 
         {taskDetail?.createdBy?.company?.companyName && (
           <div className="mt-[9px] mb-4 flex flex-col gap-y-1 ml-5">
-            <span className="text-[#7A7A7A] text-sm font-medium">Company</span>
+            <span className="text-[#7A7A7A] text-sm font-medium">
+              {translate("common.user_rule")}
+            </span>
 
             <span className="text-[#272727] font-semibold text-sm">
               {taskDetail?.createdBy?.company?.companyName}
