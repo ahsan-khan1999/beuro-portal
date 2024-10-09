@@ -11,6 +11,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import CheckField from "@/base-components/filter/fields/check-field";
+import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 
 export default function TabletLeadsFilter({
   filter,
@@ -173,11 +174,31 @@ export default function TabletLeadsFilter({
     });
   };
 
+  const hanldeAppointmentFilter = (value: boolean) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          isAppointmentCreated: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["isAppointmentCreated"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
-    <div className="flex xMd:hidden items-center justify-between w-full z-10">
+    <div className="flex flex-col xLarge:flex-row xMd:hidden xLarge:items-center justify-between w-full z-10 gap-y-4">
       <h1 className="text-2xl font-medium text-[#222B45]">Leads</h1>
 
-      <div className="flex items-center gap-x-1 mlg:gap-x-3">
+      <div className="flex flex-col xLarge:flex-row xLarge:items-center gap-1 mlg:gap-4">
         <div className="hidden xlg:flex items-center gap-[14px]">
           {checkbox?.map((item, idx) => (
             <CheckField
@@ -193,73 +214,60 @@ export default function TabletLeadsFilter({
             />
           ))}
         </div>
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={true}
-          onEnterPress={onEnterPress}
-          textClassName="w-[177px]"
-        />
 
-        {/* <div className="block xlg:hidden">
-          <SelectField
-            handleChange={(value) => hanldeStatusChange(value)}
+        <div className="flex items-center gap-x-4">
+          <BooleanSelectField
+            handleChange={(value) => hanldeAppointmentFilter(value)}
             value=""
             options={[
               {
-                label: translate("leads.table_functions.open"),
-                value: `${staticEnums.LeadStatus.Open}`,
+                label: `${translate("leads.created")}`,
+                value: true,
               },
               {
-                label: translate("leads.table_functions.inProcess"),
-                value: `${staticEnums.LeadStatus.InProcess}`,
-              },
-              {
-                label: translate("leads.table_functions.close"),
-                value: `${staticEnums.LeadStatus.Close}`,
-              },
-              {
-                label: translate("leads.table_functions.expire"),
-                value: `${staticEnums.LeadStatus.Expired}`,
+                label: `${translate("leads.not_created")}`,
+                value: false,
               },
             ]}
-            label={translate("leads.table_functions.open")}
-            containerClassName="min-w-fit"
-            dropdownClassName="w-[160px]"
+            label={translate("leads.lead_dropdown_status.Appointment")}
+            containerClassName="w-[140px]"
+            labelClassName="w-[140px]"
           />
-        </div> */}
+          <InputField
+            handleChange={handleInputChange}
+            ref={inputRef}
+            value={inputValue}
+            iconDisplay={true}
+            onEnterPress={onEnterPress}
+            textClassName="w-[177px]"
+          />
 
-        <SelectField
-          handleChange={(value) => hanldeSortChange(value)}
-          value=""
-          options={[
-            {
-              label: `${translate("filters.sort_by.date")}`,
-              value: "createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.latest")}`,
-              value: "-createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.oldest")}`,
-              value: "createdAt",
-            },
-            {
-              label: `${translate("filters.sort_by.a_z")}`,
-              value: "customerDetail.fullName",
-            },
-          ]}
-          label={translate("common.sort_button")}
-          containerClassName="min-w-fit"
-        />
+          <SelectField
+            handleChange={(value) => hanldeSortChange(value)}
+            value=""
+            options={[
+              {
+                label: `${translate("filters.sort_by.date")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.latest")}`,
+                value: "-createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.oldest")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.a_z")}`,
+                value: "customerDetail.fullName",
+              },
+            ]}
+            label={translate("common.sort_button")}
+            containerClassName="min-w-fit"
+          />
+        </div>
 
-        {/* <LeadsFilters
-          filter={filter}
-          setFilter={setFilter}
-          onFilterChange={handleFilterChange}
-        /> */}
         {!isAgent && (
           <Button
             inputType="button"

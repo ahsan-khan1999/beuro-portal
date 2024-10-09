@@ -59,6 +59,7 @@ const useContract = () => {
     const searchLeadSource = router.query?.leadSource;
     const searchEmailStatus = router.query?.emailStatus;
     const searchNoteType = router.query?.noteType as string;
+    const queryTask = router.query?.isTaskCreated as unknown as boolean;
 
     const queryParams =
       queryStatus ||
@@ -67,6 +68,7 @@ const useContract = () => {
       searchDate ||
       searchLeadSource ||
       searchEmailStatus ||
+      queryTask ||
       searchNoteType;
 
     if (queryParams !== undefined) {
@@ -82,6 +84,7 @@ const useContract = () => {
         status: string | string[];
         text?: string;
         sort?: string;
+        isTaskCreated?: boolean;
         noteType?: string;
         date?: {
           $gte?: string;
@@ -99,6 +102,7 @@ const useContract = () => {
         searchDate ||
         searchLeadSource ||
         searchEmailStatus ||
+        queryTask ||
         searchNoteType
       ) {
         updatedFilter.text = searchQuery;
@@ -107,6 +111,7 @@ const useContract = () => {
         updatedFilter.leadSource = searchLeadSource;
         updatedFilter.emailStatus = searchEmailStatus;
         updatedFilter.noteType = searchNoteType;
+        updatedFilter.isTaskCreated = queryTask;
       }
 
       setFilter(updatedFilter);
