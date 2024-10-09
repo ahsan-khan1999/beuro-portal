@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import CheckField from "@/base-components/filter/fields/check-field";
+import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 
 export default function AppointmentsTabletFilters({
   filter,
@@ -144,8 +145,28 @@ export default function AppointmentsTabletFilters({
     });
   };
 
+  const hanldeOfferFilter = (value: boolean) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          isOfferCreated: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["isOfferCreated"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
-    <div className="flex items-center justify-between z-50">
+    <div className="flex flex-col xLarge:flex-row xLarge:items-center justify-between z-50 gap-y-4">
       <h1 className={`text-2xl font-medium text-[#222B45]`}>
         {translate("sidebar.customer.appointments.appointment")}
       </h1>
@@ -165,6 +186,25 @@ export default function AppointmentsTabletFilters({
             />
           ))}
         </div>
+
+        <BooleanSelectField
+          handleChange={(value) => hanldeOfferFilter(value)}
+          value=""
+          options={[
+            {
+              label: `${translate("leads.created")}`,
+              value: true,
+            },
+            {
+              label: `${translate("leads.not_created")}`,
+              value: false,
+            },
+          ]}
+          label={translate("appointments.table_headings.offer_status")}
+          containerClassName="w-[160px]"
+          labelClassName="w-[160px]"
+        />
+
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}
