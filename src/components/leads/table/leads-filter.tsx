@@ -12,6 +12,7 @@ import { DEFAULT_LEAD, staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
+import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 
 export default function LeadsFilter({
   filter,
@@ -176,6 +177,26 @@ export default function LeadsFilter({
     });
   };
 
+  const hanldeAppointmentFilter = (value: boolean) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          isAppointmentCreated: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["isAppointmentCreated"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
     <div
       className={`flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10`}
@@ -196,13 +217,32 @@ export default function LeadsFilter({
         ))}
       </div>
       <div className="flex flex-col xMaxSize:flex-row xMaxSize:items-center gap-4">
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={true}
-          onEnterPress={onEnterPress}
-        />
+        <div className="flex items-center gap-x-4">
+          <BooleanSelectField
+            handleChange={(value) => hanldeAppointmentFilter(value)}
+            value=""
+            options={[
+              {
+                label: `${translate("leads.created")}`,
+                value: true,
+              },
+              {
+                label: `${translate("leads.not_created")}`,
+                value: false,
+              },
+            ]}
+            label={translate("leads.lead_dropdown_status.Appointment")}
+            containerClassName="w-[140px]"
+            labelClassName="w-[140px]"
+          />
+          <InputField
+            handleChange={handleInputChange}
+            ref={inputRef}
+            value={inputValue}
+            iconDisplay={true}
+            onEnterPress={onEnterPress}
+          />
+        </div>
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
           <div className="flex items-center gap-x-4 z-20">
             <SelectField

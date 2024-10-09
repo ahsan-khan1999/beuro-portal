@@ -12,13 +12,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontFamily: "Poppins",
   },
-  shareHeading: {
-    fontSize: 14,
-    fontWeight: "medium",
-    color: "#000",
-    marginTop: 30,
-    marginBottom: 50,
-  },
+
   dateContainer: {
     display: "flex",
     flexDirection: "row",
@@ -36,7 +30,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopStyle: "solid",
     borderTopColor: "#000",
-    // width: "40%",
   },
   dateText: {
     paddingTop: 12,
@@ -86,7 +79,7 @@ export const AggrementSignature = ({
     <View style={styles.wrapper}>
       {showContractSign && (
         <View style={{ ...styles.dateContainer }}>
-          <View style={{ ...styles.innerDate, marginTop: signature ? 174 : 0 }}>
+          <View style={{ ...styles.innerDate, marginTop: signature ? 87 : 0 }}>
             {
               <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
                 {date}
@@ -99,9 +92,7 @@ export const AggrementSignature = ({
           </View>
 
           <View style={{ width: "40%" }}>
-            {signature && (
-              <Image src={signature as string} style={{ height: "174px" }} />
-            )}
+            {signature && <Image src={signature as string} />}
             <View style={styles.signature}>
               <Text style={styles.dateText}>
                 {langContent[language as keyof typeof langContent]?.signature ||
