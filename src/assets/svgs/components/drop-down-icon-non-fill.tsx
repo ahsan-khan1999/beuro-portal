@@ -19,7 +19,7 @@ export const DropDownNonFillIcon = ({
       height="8.322"
       viewBox="0 0 13.816 8.322"
       transform={rotateTransform}
-      className={`text-[#404040] ${classes} w-[13px] h-[9px]`}
+      className={`text-[#404040] ${classes} min-w-[13px] min-h-[9px]`}
       fill="currentColor"
     >
       <path

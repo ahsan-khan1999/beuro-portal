@@ -21,6 +21,8 @@ body {
   color: #1e1e1e;
   background: #f3f3f3;
   overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Poppins, "Graphik",
+    Arial, sans-serif;
 }
 
 .pricing-gradient {
@@ -578,6 +580,15 @@ input[type="number"] {
     text-decoration: underline !important;
   }
 }
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .text-white {
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+}
+
 .html-content > h1 {
   /* font-size: 18px; */
   margin: 0px;

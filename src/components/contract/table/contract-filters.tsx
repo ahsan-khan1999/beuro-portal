@@ -8,7 +8,8 @@ import ContractFilter from "@/base-components/filter/contracts-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useAppSelector } from "@/hooks/useRedux";
+import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 
 export default function ContractFilters({
   filter,
@@ -20,7 +21,6 @@ export default function ContractFilters({
   const router = useRouter();
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
 
   const checkbox: CheckBoxType[] = [
     {
@@ -164,7 +164,26 @@ export default function ContractFilters({
       return updatedFilter;
     });
   };
-  3;
+
+  const hanldeTaskFilter = (value: boolean) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          isTaskCreated: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["isTaskCreated"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
 
   return (
     <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
@@ -185,6 +204,24 @@ export default function ContractFilters({
       </div>
       <div className="flex flex-col xlg:flex-row  xlg:items-center gap-3">
         <div className="flex items-center gap-x-3 z-20">
+          <BooleanSelectField
+            handleChange={(value) => hanldeTaskFilter(value)}
+            value=""
+            options={[
+              {
+                label: `${translate("leads.created")}`,
+                value: true,
+              },
+              {
+                label: `${translate("leads.not_created")}`,
+                value: false,
+              },
+            ]}
+            label={translate("calendar.main_heading")}
+            containerClassName="w-[140px]"
+            labelClassName="w-[140px]"
+          />
+
           <InputField
             handleChange={handleInputChange}
             ref={inputRef}
@@ -250,13 +287,6 @@ export default function ContractFilters({
             onFilterChange={handleFilterChange}
           />
         </div>
-        {/* <Button
-          id="apply"
-          inputType="button"
-          text="Apply"
-          onClick={() => handleFilterChange()}
-          className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        /> */}
       </div>
     </div>
   );

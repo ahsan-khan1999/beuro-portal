@@ -8,7 +8,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
-import { useAppSelector } from "@/hooks/useRedux";
+import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
+
 export default function AppointmentsFilter({
   filter,
   setFilter,
@@ -18,7 +19,6 @@ export default function AppointmentsFilter({
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
-  const { noteSettings } = useAppSelector((state) => state.settings);
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -145,26 +145,25 @@ export default function AppointmentsFilter({
     });
   };
 
-  // const hanldeNoteType = (value: string) => {
-  //   router.push(
-  //     {
-  //       pathname: router.pathname,
-  //       query: {
-  //         ...router.query,
-  //         page: 1,
-  //         noteType: value,
-  //       },
-  //     },
-  //     undefined,
-  //     { shallow: false }
-  //   );
+  const hanldeOfferFilter = (value: boolean) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          isOfferCreated: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
 
-  //   setFilter((prev: FilterType) => {
-  //     const updatedFilter = { ...prev, ["noteType"]: value };
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["isOfferCreated"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
@@ -184,15 +183,34 @@ export default function AppointmentsFilter({
         ))}
       </div>
       <div className="flex flex-col xMaxSize:flex-row xMaxSize:items-center gap-4">
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={true}
-          onEnterPress={onEnterPress}
-        />
+        <div className="flex items-center gap-x-4">
+          <BooleanSelectField
+            handleChange={(value) => hanldeOfferFilter(value)}
+            value=""
+            options={[
+              {
+                label: `${translate("leads.created")}`,
+                value: true,
+              },
+              {
+                label: `${translate("leads.not_created")}`,
+                value: false,
+              },
+            ]}
+            label={translate("appointments.table_headings.offer_status")}
+            containerClassName="w-[160px]"
+            labelClassName="w-[160px]"
+          />
+          <InputField
+            handleChange={handleInputChange}
+            ref={inputRef}
+            value={inputValue}
+            iconDisplay={true}
+            onEnterPress={onEnterPress}
+          />
+        </div>
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-          <div className="flex items-center gap-x-4 z-20">
+          <div className="flex items-center gap-x-4">
             <SelectField
               handleChange={(value) => hanldeSortChange(value)}
               value=""
@@ -217,37 +235,11 @@ export default function AppointmentsFilter({
               label={translate("common.sort_button")}
               containerClassName="min-w-fit"
             />
-            {/* <div className="flex items-center gap-x-3">
-              <span className="text-[#4B4B4B] font-semibold text-base">
-                {translate("global_search.notes")}
-              </span>
-              <SelectField
-                handleChange={(value) => hanldeNoteType(value)}
-                value=""
-                dropDownIconClassName=""
-                containerClassName="w-[225px]"
-                labelClassName="w-[225px]"
-                options={
-                  noteSettings
-                    ? noteSettings
-                        .slice()
-                        .reverse()
-                        .map((item) => ({
-                          label: item.notes.noteType,
-                          value: item.notes.noteType,
-                        }))
-                    : []
-                }
-                label={translate("add_note_dropdown.all_notes")}
-              />
-            </div> */}
-          </div>
-
-          <div className="flex items-center gap-x-4">
             <LeadsFilters
               filter={filter}
               setFilter={setFilter}
               onFilterChange={handleFilterChange}
+              containerClassName="z-0"
             />
           </div>
         </div>

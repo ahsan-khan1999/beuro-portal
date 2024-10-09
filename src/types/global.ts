@@ -83,6 +83,19 @@ export interface OptionsFieldProps {
   isSearch?: boolean;
   labelClassName?: string;
 }
+export interface BooleanOptionsFieldProps {
+  value: string;
+  title?: string;
+  label?: string;
+  border?: number;
+  handleChange: (value: boolean, isAgent?: boolean) => void;
+  options: { label: string; value: boolean }[];
+  dropDownIconClassName?: string;
+  containerClassName?: string;
+  dropdownClassName?: string;
+  isSearch?: boolean;
+  labelClassName?: string;
+}
 
 export interface GlobalApiResponseType {
   [Header.header]: {

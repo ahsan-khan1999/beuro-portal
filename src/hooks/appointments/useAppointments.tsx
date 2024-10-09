@@ -84,12 +84,14 @@ export const useAppointments = () => {
     const sortedValue = router.query?.sort as string;
     const searchedDate = router.query?.date as string;
     const searchNoteType = router.query?.noteType as string;
+    const queryOffer = router.query?.isOfferCreated as unknown as boolean;
 
     const queryParams =
       queryStatus ||
       searchQuery ||
       sortedValue ||
       searchedDate ||
+      queryOffer ||
       searchNoteType;
 
     if (queryParams !== undefined) {
@@ -111,14 +113,22 @@ export const useAppointments = () => {
           $lte?: string;
         };
         today?: boolean;
+        isOfferCreated?: boolean;
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery || sortedValue || searchedDate || searchNoteType) {
+      if (
+        searchQuery ||
+        sortedValue ||
+        searchedDate ||
+        searchNoteType ||
+        queryOffer
+      ) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.noteType = searchNoteType;
+        updatedFilter.isOfferCreated = queryOffer;
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
 
@@ -516,6 +526,6 @@ export const useAppointments = () => {
     handleNotes,
     handleDeleteNote,
     handleImageUpload,
-    dispatch
+    dispatch,
   };
 };
