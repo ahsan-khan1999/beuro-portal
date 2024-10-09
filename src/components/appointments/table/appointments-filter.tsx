@@ -192,7 +192,7 @@ export default function AppointmentsFilter({
           onEnterPress={onEnterPress}
         />
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-          <div className="flex items-center gap-x-4">
+          <div className="flex items-center gap-x-4 z-20">
             <SelectField
               handleChange={(value) => hanldeSortChange(value)}
               value=""
@@ -249,28 +249,8 @@ export default function AppointmentsFilter({
               setFilter={setFilter}
               onFilterChange={handleFilterChange}
             />
-            {/* <Button
-              inputType="button"
-              onClick={() => {
-                dispatch(setLeadDetails(DEFAULT_LEAD));
-                router.push("/leads/add");
-              }}
-              className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
-              icon={addIcon}
-              text={translate("leads.add_button")}
-              id="add"
-              iconAlt="add button"
-            /> */}
           </div>
         </div>
-
-        {/* <Button
-          id="apply"
-          inputType="button"
-          text="Apply"
-          onClick={() => handleFilterChange()}
-          className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        /> */}
       </div>
     </div>
   );
