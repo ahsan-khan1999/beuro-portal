@@ -57,12 +57,15 @@ const useLeads = () => {
     const sortedValue = router.query?.sort as string;
     const searchedDate = router.query?.date as string;
     const searchNoteType = router.query?.noteType as string;
+    const queryAppointment = router.query
+      ?.isAppointmentCreated as unknown as boolean;
 
     const queryParams =
       queryStatus ||
       searchQuery ||
       sortedValue ||
       searchedDate ||
+      queryAppointment ||
       searchNoteType;
 
     if (queryParams !== undefined) {
@@ -84,14 +87,22 @@ const useLeads = () => {
           $lte?: string;
         };
         today?: boolean;
+        isAppointmentCreated?: boolean;
       } = {
         status: filteredStatus,
       };
 
-      if (searchQuery || sortedValue || searchedDate || searchNoteType) {
+      if (
+        searchQuery ||
+        sortedValue ||
+        searchedDate ||
+        searchNoteType ||
+        queryAppointment
+      ) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.noteType = searchNoteType;
+        updatedFilter.isAppointmentCreated = queryAppointment;
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
 

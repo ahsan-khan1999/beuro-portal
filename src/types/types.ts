@@ -593,8 +593,8 @@ export type GenerateOfferServiceFormField = (
     taxType?: number;
     discountType?: number;
     offerDetails?: OffersTableRowTypes;
-    reportDetails?:Report,
-    appointmentId?:string | string[],
+    reportDetails?: Report;
+    appointmentId?: string | string[];
     generateTotal?: () => void;
     customerType?: string;
     type?: string;
@@ -1064,6 +1064,8 @@ export interface FilterType {
   price?: string[];
   month?: number;
   leadSource?: string[] | string;
+  isAppointmentCreated?: boolean;
+  isOfferCreated?: boolean;
 }
 
 export interface MoreFilterType {
