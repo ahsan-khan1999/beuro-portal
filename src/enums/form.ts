@@ -50,6 +50,7 @@ export enum Field {
   creditCardExpiryDateInput = "creditCardExpiryDateInput",
   password = "password",
   select = "select",
+  reactTimePicker = "reactTimePicker",
   phone = "phone",
   date = "date",
   checkbox = "checkbox",

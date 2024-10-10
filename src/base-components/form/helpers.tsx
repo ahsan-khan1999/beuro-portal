@@ -24,6 +24,7 @@ import {
   ColourSelectField,
   RemainderSelectField,
   LocationSearchInputField,
+  CustomTimePicker,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -69,6 +70,7 @@ const fieldComponents: FieldComponents = {
   colourSelectField: ColourSelectField,
   remainderSelectField: RemainderSelectField,
   locationSearchInput: LocationSearchInputField,
+  reactTimePicker: CustomTimePicker,
 };
 
 export const getTypedFieldComponent = <T extends FieldProps>(

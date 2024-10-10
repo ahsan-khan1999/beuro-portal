@@ -151,9 +151,22 @@ export interface SelectProps extends BaseFieldProps<Field.select> {
   className?: string;
   disabled?: boolean;
   fieldIndex?: number;
-  isLocalCustomer?:boolean
-  onSearchCustomer?:(value:string) => void
+  isLocalCustomer?: boolean;
+  onSearchCustomer?: (value: string) => void;
 }
+
+export interface CustomTimePickerProps
+  extends BaseFieldProps<Field.reactTimePicker> {
+  control?: Control<FieldValues>;
+  field?: ControllerRenderProps<FieldValues, string>;
+  value?: string;
+  svg?: string;
+  dateType?: string;
+  trigger?: UseFormTrigger<FieldValues>;
+  className?: string;
+  disabled?: boolean;
+}
+
 export interface AgentSelectProps
   extends BaseFieldProps<Field.agentSelectField> {
   control?: Control<FieldValues>;
@@ -182,8 +195,8 @@ export interface SelectBoxProps {
   className?: string;
   disabled?: boolean;
   fieldIndex?: number;
-  isLocalCustomer?:boolean
-  onSearchCustomer?:(value:string) => void
+  isLocalCustomer?: boolean;
+  onSearchCustomer?: (value: string) => void;
 }
 export interface CustomLocationInputProps {
   id: string;
@@ -369,6 +382,8 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   max?: string;
   disable?: boolean;
 }
+
+
 export interface CalendarDatePickerProps
   extends BaseFieldProps<Field.calendarDatePicker> {
   register: UseFormRegister<FieldValues>;
@@ -548,7 +563,8 @@ export type FieldType =
   | Field.calendarDatePicker
   | Field.colourSelectField
   | Field.remainderSelectField
-  | Field.locationSearchInput;
+  | Field.locationSearchInput
+  | Field.reactTimePicker;
 
 export type FieldProps =
   | InputProps
@@ -586,7 +602,8 @@ export type FieldProps =
   | CalendarDatePickerProps
   | ColourSeclectionFieldProps
   | RemainderSeclectionFieldProps
-  | LocationSearchInputFieldProps;
+  | LocationSearchInputFieldProps
+  | CustomTimePickerProps;
 
 export interface FormField {
   containerClass?: string;
@@ -628,6 +645,7 @@ export interface FieldComponents {
   colourSelectField: React.FC<ColourSeclectionFieldProps>;
   remainderSelectField: React.FC<RemainderSeclectionFieldProps>;
   locationSearchInput: React.FC<LocationSearchInputFieldProps>;
+  reactTimePicker: React.FC<CustomTimePickerProps>;
 }
 
 export interface FormProps {
