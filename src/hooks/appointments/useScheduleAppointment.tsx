@@ -14,7 +14,6 @@ import {
   convertToLocal,
   convertToUTC,
   convertUTCToLocalDate,
-  fieldDateFormat,
 } from "@/utils/utility";
 import { Appointments } from "@/types/appointments";
 import { readLeadDetails, setLeadDetails } from "@/api/slices/lead/leadSlice";
@@ -84,8 +83,10 @@ export const useScheduleAppointment = ({
       reset({
         leadID: refID,
         date: localDate || "",
-        startTime: localStartTime,
-        endTime: localEndTime,
+        startTime: localStartTime
+          ? moment(localStartTime, "HH:mm").toDate()
+          : "",
+        endTime: localEndTime ? moment(localEndTime, "HH:mm").toDate() : "",
         canton: canton,
       });
     } else {
@@ -107,11 +108,11 @@ export const useScheduleAppointment = ({
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const utcStartTime = data.startTime
-      ? convertToUTC(data.date, data.startTime)
+      ? convertToUTC(data.date, moment(data.startTime).format("HH:mm"))
       : null;
 
     const utcEndTime = data.endTime
-      ? convertToUTC(data.date, data.endTime)
+      ? convertToUTC(data.date, moment(data.endTime).format("HH:mm"))
       : null;
 
     const utcDate = utcStartTime

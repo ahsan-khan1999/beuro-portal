@@ -84,6 +84,7 @@ export const useAppointments = () => {
     const sortedValue = router.query?.sort as string;
     const searchedDate = router.query?.date as string;
     const searchNoteType = router.query?.noteType as string;
+    const queryDate = router.query?.today as unknown as Date;
     const queryOffer = router.query?.isOfferCreated as unknown as boolean;
 
     const queryParams =
@@ -92,6 +93,7 @@ export const useAppointments = () => {
       sortedValue ||
       searchedDate ||
       queryOffer ||
+      queryDate ||
       searchNoteType;
 
     if (queryParams !== undefined) {
@@ -112,7 +114,7 @@ export const useAppointments = () => {
           $gte?: string;
           $lte?: string;
         };
-        today?: boolean;
+        today?: Date;
         isOfferCreated?: boolean;
       } = {
         status: filteredStatus,
@@ -123,17 +125,20 @@ export const useAppointments = () => {
         sortedValue ||
         searchedDate ||
         searchNoteType ||
+        queryDate ||
         queryOffer
       ) {
         updatedFilter.text = searchQuery;
         updatedFilter.sort = sortedValue;
         updatedFilter.noteType = searchNoteType;
         updatedFilter.isOfferCreated = queryOffer;
+        updatedFilter.today = queryDate;
         updatedFilter.date = searchedDate && JSON.parse(searchedDate);
       }
 
       if (isAgentRoute) {
-        updatedFilter.today = true;
+        const currentDate = new Date();
+        updatedFilter.today = currentDate;
       }
 
       setFilter(updatedFilter);

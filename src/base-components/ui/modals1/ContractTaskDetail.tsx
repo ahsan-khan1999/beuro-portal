@@ -63,7 +63,6 @@ export const ContractTaskDetail = ({
       containerClassName="max-w-[340px] xsMini:max-w-[384px] min-h-fit absolute top-[180px] rounded-lg bg-[#F3F3F3] calendarShadow"
     >
       <div className="pt-[15px] px-[10px] pb-[10px]">
-        {/* <div className="flex items-start justify-between"> */}
         <div className="flex items-start gap-x-[8px]">
           <span
             className={`w-3 h-3 rounded-full`}
@@ -79,18 +78,6 @@ export const ContractTaskDetail = ({
             </span>
           )}
         </div>
-
-        {/* {taskDetail?.type === "Contract" && (
-            <Button
-              onClick={handlePDFPreview}
-              className="!h-fit py-1 xMini:py-2 px-2 xMini:px-4 hidden xMini:flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-              text={translate("invoice.invoice_created_modal.button")}
-              id="preview PDF"
-              inputType="button"
-              iconAlt="button"
-            />
-          )} */}
-        {/* </div> */}
 
         <div className="flex items-center justify-between mt-[9px]">
           <p
