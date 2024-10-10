@@ -13,6 +13,7 @@ export const CustomTimePicker = ({
   dateType,
   className,
   disabled,
+  placeholder,
 }: CustomTimePickerProps) => {
   const defaultClasses = `w-full rounded-lg max-h-12 py-[10px] outline-none text-dark text-sm focus:border-primary`;
   const classes = combineClasses(defaultClasses, className);
@@ -35,9 +36,10 @@ export const CustomTimePicker = ({
                 timeIntervals={15}
                 timeCaption="time"
                 dateFormat={
-                  dateType === "datetime" ? "MMMM d, yyyy HH:mm" : "HH:mm"
+                  dateType === "datetime" ? "DD/MM/YYYY HH:mm" : "HH:mm"
                 }
                 className={classes}
+                placeholderText={placeholder}
               />
 
               {dateType === "time" ? (

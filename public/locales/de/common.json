@@ -1257,6 +1257,8 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
     },
+    "start_time": "Wählen Sie die Startzeit",
+    "end_time": "Wählen Sie die Endzeit",
     "add_new_offer": "Neues Angebot hinzufügen",
     "add_new_invoice": "Neue Rechnung hinzufügen",
     "no_customer_found": "Kein Kunde gefunden",
