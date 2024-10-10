@@ -101,8 +101,6 @@ export default function useAddTask({
 
   useEffect(() => {
     if (isContractId) {
-      console.log(taskDetail?.date, "contract date");
-
       reset({
         title: taskDetail?.title,
         date: taskDetail?.date?.map((dateItem) => ({

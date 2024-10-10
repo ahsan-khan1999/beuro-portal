@@ -397,7 +397,6 @@ export type GenerateScheduleAppointmentsFormField = (
   properties: {
     onClose: () => void;
     appointmentDetails?: Appointments;
-    // employee: Employee[];
     isUpdate?: boolean;
     onClick?: Function;
     handleChangeTimeField?: (type: string, date: string) => void;
@@ -1078,6 +1077,7 @@ export interface MoreFilterType {
     $gte?: string;
     $lte?: string;
   };
+  today?: Date;
   emailStatus?: string[] | string;
   price?: string[];
   paymentType?: string[] | string;

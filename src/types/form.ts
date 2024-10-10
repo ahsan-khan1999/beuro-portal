@@ -165,6 +165,7 @@ export interface CustomTimePickerProps
   trigger?: UseFormTrigger<FieldValues>;
   className?: string;
   disabled?: boolean;
+  placeholder?: string;
 }
 
 export interface AgentSelectProps
@@ -382,7 +383,6 @@ export interface DatePickerProps extends BaseFieldProps<Field.date> {
   max?: string;
   disable?: boolean;
 }
-
 
 export interface CalendarDatePickerProps
   extends BaseFieldProps<Field.calendarDatePicker> {
