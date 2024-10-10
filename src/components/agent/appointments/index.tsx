@@ -26,7 +26,6 @@ export default function AgentAppointments() {
     totalCount,
     handleNotes,
     handleImageUpload,
-    dispatch,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(

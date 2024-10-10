@@ -1077,6 +1077,7 @@ export interface MoreFilterType {
     $gte?: string;
     $lte?: string;
   };
+  today?: Date;
   emailStatus?: string[] | string;
   price?: string[];
   paymentType?: string[] | string;
