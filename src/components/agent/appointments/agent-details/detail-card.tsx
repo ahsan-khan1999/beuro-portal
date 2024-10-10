@@ -244,13 +244,13 @@ export const AppointmentsDetailCard = ({
             </div>
           </div>
           <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-3">
-            {appointmentDetails?.leadID?.customerDetail?.companyName && (
+            {appointmentDetails?.createdBy?.company?.companyName && (
               <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
                 <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[140px]">
                   {translate("appointments.table_headings.company_name")}:
                 </span>
                 <span className="text-base text-primary font-nomal truncate">
-                  {appointmentDetails?.leadID?.customerDetail?.companyName}
+                  {appointmentDetails?.createdBy?.company?.companyName}
                 </span>
               </div>
             )}

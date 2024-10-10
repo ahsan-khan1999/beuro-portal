@@ -214,29 +214,6 @@ export default function AppointmentsTabletFilters({
           textClassName="w-[177px]"
         />
 
-        {/* <div className="block xlg:hidden z-50">
-          <SelectField
-            handleChange={(value) => hanldeFilterStatus(value)}
-            value=""
-            options={[
-              {
-                label: translate("sidebar.customer.appointments.pending"),
-                value: `${staticEnums.AppointmentStatus.Pending}`,
-              },
-              {
-                label: translate("sidebar.customer.appointments.completed"),
-                value: `${staticEnums.AppointmentStatus.Completed}`,
-              },
-              {
-                label: translate("sidebar.customer.appointments.cancelled"),
-                value: `${staticEnums.AppointmentStatus.Cancelled}`,
-              },
-            ]}
-            label={translate("sidebar.customer.appointments.pending")}
-            containerClassName="min-w-fit"
-            dropdownClassName="w-fit"
-          />
-        </div> */}
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}
           value=""

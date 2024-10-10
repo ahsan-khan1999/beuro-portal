@@ -118,55 +118,21 @@ export const AppointmentTableRows = ({
                       index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
                     } ${index !== 0 && "border-t border-t-[#E7EAEE]"} ${
                       index === 0 && "mt-2"
-                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-1 grid xs:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(140px,_140px)_minmax(180px,180px)] xAir:grid-cols-[minmax(65px,_65px)_minmax(80px,100%)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(180px,180px)]`}
+                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-1 grid xs:grid-cols-[minmax(100px,100%)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(170px,170px)] xAir:grid-cols-[minmax(80px,100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(170px,170px)]`}
                   >
-                    <div className="flex items-center gap-x-1">
+                    {/* <div className="flex items-center gap-x-1">
                       {item?.leadID?.refID}
-                    </div>
+                    </div> */}
                     <span className="py-4 truncate">
                       {item.leadID?.customerDetail?.fullName}
                     </span>
                     <span className="py-4 hidden xAir:block">
                       {formatDateTimeToDate(item.date)}
                     </span>
+                    <span className="py-4">
+                      {localStartTime}- {localEndTime}
+                    </span>
                     <span className="py-4 truncate">{item?.canton}</span>
-
-                    {/* <div
-                      className="py-4 flex items-center"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <DropDown
-                        key={item?.id}
-                        items={items}
-                        selectedItem={translate(
-                          `appointments.appointment_status.${item?.appointmentStatus}`
-                        )}
-                        onItemSelected={(status) => {
-                          onStatusChange(item?.id, status, "appointment");
-                        }}
-                        dropDownClassName={`${
-                          item?.appointmentStatus === "Pending"
-                            ? "bg-[#4A13E7]"
-                            : item?.appointmentStatus === "Completed"
-                            ? "bg-[#45C769]"
-                            : "bg-[#D80027]"
-                        } w-full rounded-lg px-4 py-[5px] flex items-center justify-center`}
-                        dropDownTextClassName="text-white text-base font-medium me-1"
-                        dropDownItemsContainerClassName="w-full"
-                        dropDownIconClassName="text-white"
-                        isSecondLastIndex={
-                          dataToAdd &&
-                          dataToAdd.length > 5 &&
-                          index === dataToAdd.length - 2
-                        }
-                        isLastIndex={
-                          dataToAdd &&
-                          dataToAdd.length > 5 &&
-                          index === dataToAdd.length - 1
-                        }
-                        isContract={true}
-                      />
-                    </div> */}
 
                     <div
                       className="py-4 flex items-center"
