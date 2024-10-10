@@ -8,6 +8,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import CheckField from "@/base-components/filter/fields/check-field";
 import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
+import ExtraAppointmentFilter from "@/base-components/filter/appointment-filters";
 
 export default function AppointmentsTabletFilters({
   filter,
@@ -186,7 +187,6 @@ export default function AppointmentsTabletFilters({
             />
           ))}
         </div>
-
         <BooleanSelectField
           handleChange={(value) => hanldeOfferFilter(value)}
           value=""
@@ -204,7 +204,6 @@ export default function AppointmentsTabletFilters({
           containerClassName="w-[160px]"
           labelClassName="w-[160px]"
         />
-
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}
@@ -213,30 +212,6 @@ export default function AppointmentsTabletFilters({
           onEnterPress={onEnterPress}
           textClassName="w-[177px]"
         />
-
-        {/* <div className="block xlg:hidden z-50">
-          <SelectField
-            handleChange={(value) => hanldeFilterStatus(value)}
-            value=""
-            options={[
-              {
-                label: translate("sidebar.customer.appointments.pending"),
-                value: `${staticEnums.AppointmentStatus.Pending}`,
-              },
-              {
-                label: translate("sidebar.customer.appointments.completed"),
-                value: `${staticEnums.AppointmentStatus.Completed}`,
-              },
-              {
-                label: translate("sidebar.customer.appointments.cancelled"),
-                value: `${staticEnums.AppointmentStatus.Cancelled}`,
-              },
-            ]}
-            label={translate("sidebar.customer.appointments.pending")}
-            containerClassName="min-w-fit"
-            dropdownClassName="w-fit"
-          />
-        </div> */}
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}
           value=""
@@ -261,6 +236,11 @@ export default function AppointmentsTabletFilters({
           label={translate("common.sort_button")}
           containerClassName="min-w-fit"
         />
+        {/* <ExtraAppointmentFilter
+          filter={filter}
+          setFilter={setFilter}
+          onFilterChange={handleFilterChange}
+        /> */}
       </div>
     </div>
   );

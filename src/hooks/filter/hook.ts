@@ -1,6 +1,6 @@
 import { FilterType, MoreFilterType } from "@/types";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 export default function useFilter({
   filter,
