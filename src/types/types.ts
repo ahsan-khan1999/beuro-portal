@@ -397,7 +397,6 @@ export type GenerateScheduleAppointmentsFormField = (
   properties: {
     onClose: () => void;
     appointmentDetails?: Appointments;
-    // employee: Employee[];
     isUpdate?: boolean;
     onClick?: Function;
     handleChangeTimeField?: (type: string, date: string) => void;

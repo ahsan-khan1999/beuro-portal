@@ -1263,6 +1263,8 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you."
     },
+    "start_time": "Select start time",
+    "end_time": "Select end time",
     "add_new_offer": "Add New Offer",
     "add_new_invoice": "Add New Invoice",
     "no_customer_found": "No customer found",
