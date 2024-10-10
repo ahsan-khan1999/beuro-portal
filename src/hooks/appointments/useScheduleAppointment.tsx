@@ -84,8 +84,10 @@ export const useScheduleAppointment = ({
       reset({
         leadID: refID,
         date: localDate || "",
-        startTime: localStartTime,
-        endTime: localEndTime,
+        startTime: localStartTime
+          ? moment(localStartTime, "HH:mm").toDate()
+          : "", // Convert time to Date object
+        endTime: localEndTime ? moment(localEndTime, "HH:mm").toDate() : "", // Convert time to Date object
         canton: canton,
       });
     } else {
@@ -107,11 +109,11 @@ export const useScheduleAppointment = ({
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const utcStartTime = data.startTime
-      ? convertToUTC(data.date, data.startTime)
+      ? convertToUTC(data.date, moment(data.startTime).format("HH:mm")) // Convert Date object to "HH:mm" before sending
       : null;
 
     const utcEndTime = data.endTime
-      ? convertToUTC(data.date, data.endTime)
+      ? convertToUTC(data.date, moment(data.endTime).format("HH:mm")) // Convert Date object to "HH:mm" before sending
       : null;
 
     const utcDate = utcStartTime
