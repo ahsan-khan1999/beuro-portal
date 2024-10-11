@@ -1,17 +1,9 @@
 import { StaticImageData } from "next/image";
 import { User } from "./auth";
 import { Country, State } from "@/enums/auth";
-import { Dispatch, ReactNode, SetStateAction } from "react";
-import { Fields } from "@/enums";
+import { ChangeEvent, ReactNode } from "react";
 import { DropDownKeys } from "@/enums/ui";
 import { Field } from "@/enums/form";
-import {
-  FieldValues,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from "react-hook-form";
-import { FormField } from ".";
-import { Maybe } from "yup";
 
 export interface ContainerProps {
   children: ReactNode;
@@ -23,6 +15,14 @@ export interface DropDownItem {
     label: string;
     value: string;
   };
+}
+
+export interface UIDatePickerProps {
+  id: string;
+  name: string;
+  value?: string;
+  className?: string;
+  onInputChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface DropDownProps {

@@ -162,6 +162,7 @@ export default function EmailTrackerFilters({
         value={inputValue}
         iconDisplay={true}
         onEnterPress={onEnterPress}
+        textClassName="w-[177px]"
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}

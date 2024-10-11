@@ -217,7 +217,7 @@ export default function LeadsFilter({
         ))}
       </div>
       <div className="flex flex-col xMaxSize:flex-row xMaxSize:items-center gap-4">
-        <div className="flex items-center gap-x-4">
+        <div className="flex items-center gap-x-4 z-20">
           <BooleanSelectField
             handleChange={(value) => hanldeAppointmentFilter(value)}
             value=""
@@ -241,10 +241,11 @@ export default function LeadsFilter({
             value={inputValue}
             iconDisplay={true}
             onEnterPress={onEnterPress}
+            textClassName="w-[177px]"
           />
         </div>
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-          <div className="flex items-center gap-x-4 z-20">
+          <div className="flex items-center gap-x-4 z-10">
             <SelectField
               handleChange={(value) => hanldeSortChange(value)}
               value=""
@@ -302,6 +303,7 @@ export default function LeadsFilter({
                 filter={filter}
                 setFilter={setFilter}
                 onFilterChange={handleFilterChange}
+                containerClassName="!z-0"
               />
             )}
             {!isAgent && (

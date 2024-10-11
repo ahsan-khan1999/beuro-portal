@@ -83,6 +83,7 @@ export default function CustomerFilter({
         value={inputValue}
         iconDisplay={true}
         onEnterPress={onEnterPress}
+        textClassName="w-[177px]"
       />
       <div className="flex items-center gap-x-4">
         <SelectField

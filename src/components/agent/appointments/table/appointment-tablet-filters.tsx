@@ -1,6 +1,6 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
+import { AppointmentTableFunction, CheckBoxType, FilterType } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -8,14 +8,15 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { staticEnums } from "@/utils/static";
 import CheckField from "@/base-components/filter/fields/check-field";
 import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
-import ExtraAppointmentFilter from "@/base-components/filter/appointment-filters";
+import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
 
 export default function AppointmentsTabletFilters({
   filter,
   setFilter,
   handleFilterChange,
-  isAgent,
-}: FiltersComponentProps) {
+  currentDate,
+  onDateChange,
+}: AppointmentTableFunction) {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -236,11 +237,14 @@ export default function AppointmentsTabletFilters({
           label={translate("common.sort_button")}
           containerClassName="min-w-fit"
         />
-        {/* <ExtraAppointmentFilter
-          filter={filter}
-          setFilter={setFilter}
-          onFilterChange={handleFilterChange}
-        /> */}
+        <div className="w-[200px]">
+          <CustomDatePciker
+            id="today"
+            name="today"
+            value={currentDate}
+            onInputChange={onDateChange}
+          />
+        </div>
       </div>
     </div>
   );

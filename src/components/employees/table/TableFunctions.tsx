@@ -24,4 +24,5 @@ const TableFunctions = ({
     </div>
   );
 };
+
 export default TableFunctions;

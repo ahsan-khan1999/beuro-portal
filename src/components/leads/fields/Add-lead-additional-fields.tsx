@@ -15,7 +15,7 @@ export const AddLeadAdditionalDetailsFormField: GenerateLeadsAdditionalDetailsFo
           id: "additionalDetails",
           name: "additionalDetails",
           control,
-          value: leadDetails?.id && leadDetails?.additionalDetails,
+          // value: leadDetails?.id && leadDetails?.additionalDetails,
         },
       },
 

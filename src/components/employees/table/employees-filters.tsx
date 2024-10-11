@@ -103,13 +103,14 @@ export default function EmployeesFilters({
   };
 
   return (
-    <div className="flex flex-col mlg:flex-row mlg:items-center gap-4">
+    <div className="flex items-center gap-4">
       <InputField
         handleChange={handleInputChange}
         ref={inputRef}
         value={inputValue}
         iconDisplay={true}
         onEnterPress={onEnterPress}
+        textClassName="w-[177px]"
       />
       <div className="flex items-center gap-x-4">
         <SelectField

@@ -194,6 +194,7 @@ export default function OffersFilters({
           value={inputValue}
           iconDisplay={true}
           onEnterPress={onEnterPress}
+          textClassName="w-[177px]"
         />
 
         <div className="flex items-center gap-x-3 z-20">

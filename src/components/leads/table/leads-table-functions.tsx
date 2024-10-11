@@ -1,6 +1,6 @@
 import React from "react";
 import LeadsFilter from "./leads-filter";
-import { FiltersComponentProps } from "@/types";
+import { AppointmentTableFunction } from "@/types";
 import TabletLeadsFilter from "./tablet-leads-filter";
 import MobileLeadsFilters from "@/components/agent/leads/mobile/mobile-leads-filter";
 
@@ -9,7 +9,9 @@ export const LeadsTableFunctions = ({
   setFilter,
   handleFilterChange,
   isAgent,
-}: FiltersComponentProps) => {
+  currentDate,
+  onDateChange,
+}: AppointmentTableFunction) => {
   return (
     <div
       className={`flex flex-col ${
@@ -34,6 +36,8 @@ export const LeadsTableFunctions = ({
                 setFilter={setFilter}
                 handleFilterChange={handleFilterChange}
                 isAgent={isAgent}
+                onDateChange={onDateChange}
+                currentDate={currentDate}
               />
             </div>
           )}
@@ -55,6 +59,8 @@ export const LeadsTableFunctions = ({
               setFilter={setFilter}
               handleFilterChange={handleFilterChange}
               isAgent={isAgent}
+              onDateChange={onDateChange}
+                currentDate={currentDate}
             />
           </div>
         </>

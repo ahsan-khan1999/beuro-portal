@@ -2580,6 +2580,7 @@
     }
   },
   "calendar": {
+    "delete_appointment_des": "Sind SIe sich sicher, dass Sie den Termin löschen möchten?",
     "main_heading": "Kalender",
     "add_task": "Aufgabe hinzufügen",
     "today": "Heute",

@@ -1,4 +1,3 @@
-import { loginUser } from "@/api/slices/authSlice/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
@@ -30,12 +29,14 @@ export const useLeadAdditionalDetails = (onClick: Function) => {
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
   const fields = LeadAdditionalDetailsFormField(
     loading,
     control,
     handleBack,
     leadDetails
   );
+
   useMemo(() => {
     if (leadDetails.id) {
       reset({
