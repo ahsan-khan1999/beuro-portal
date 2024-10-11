@@ -8,7 +8,6 @@ import {
 import { EmailTemplate } from "./settings";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 
-// Interface for the content table
 export interface ContentTableRowTypes {
   refID: string;
   createdAt: string;

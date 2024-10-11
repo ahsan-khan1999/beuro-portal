@@ -275,7 +275,7 @@ export const useCalendar = () => {
     [ModalType.INFO_DELETED]: (
       <DeleteConfirmation_2
         onClose={onClose}
-        modelHeading="Are you sure you want to delete this event?"
+        modelHeading={translate("calendar.delete_appointment_des")}
         routeHandler={handleDeleteContractTask}
         loading={loading}
       />

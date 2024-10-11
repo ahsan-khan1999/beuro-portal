@@ -11,8 +11,8 @@ export const LeadsAdditionalDetails = ({
   onClick?: (index: number, component: ComponentsType) => void;
   isAgent?: boolean;
 }) => {
-  const { leadDetails } = useAppSelector((state) => state.lead);
   const { t: translate } = useTranslation();
+  const { leadDetails } = useAppSelector((state) => state.lead);
 
   return (
     <LeadsCardLayout>

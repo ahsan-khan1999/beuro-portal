@@ -228,6 +228,7 @@ export default function ContractFilters({
             value={inputValue}
             iconDisplay={true}
             onEnterPress={onEnterPress}
+            textClassName="w-[177px]"
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}

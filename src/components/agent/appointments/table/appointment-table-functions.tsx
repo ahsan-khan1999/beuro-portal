@@ -1,5 +1,4 @@
-import React from "react";
-import { FiltersComponentProps } from "@/types";
+import { AppointmentTableFunction } from "@/types";
 import { useTranslation } from "next-i18next";
 import AppointmentsFilter from "./appointments-filters";
 import AppointmentsTabletFilters from "./appointment-tablet-filters";
@@ -10,7 +9,9 @@ export const AppointmentTableFunctions = ({
   setFilter,
   handleFilterChange,
   isAgent,
-}: FiltersComponentProps) => {
+  currentDate,
+  onDateChange,
+}: AppointmentTableFunction) => {
   const { t: translate } = useTranslation();
 
   return (
@@ -37,6 +38,8 @@ export const AppointmentTableFunctions = ({
                 setFilter={setFilter}
                 handleFilterChange={handleFilterChange}
                 isAgent={isAgent}
+                onDateChange={onDateChange}
+                currentDate={currentDate}
               />
             </div>
           )}
@@ -57,6 +60,8 @@ export const AppointmentTableFunctions = ({
               setFilter={setFilter}
               handleFilterChange={handleFilterChange}
               isAgent={isAgent}
+              onDateChange={onDateChange}
+              currentDate={currentDate}
             />
           </div>
         </>

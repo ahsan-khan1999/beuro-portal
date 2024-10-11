@@ -1,20 +1,17 @@
-import LeadsFilters from "@/base-components/filter/leads-filter";
-import CheckField from "@/base-components/filter/fields/check-field";
 import InputField from "@/base-components/filter/fields/input-field";
-import SelectField from "@/base-components/filter/fields/select-field";
-import { CheckBoxType, FilterType, FiltersComponentProps } from "@/types";
-import { useTranslation } from "next-i18next";
+import { AppointmentTableFunction, FilterType } from "@/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
-import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
+import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
 
 export default function MobileLeadsFilters({
   filter,
   setFilter,
   handleFilterChange,
-}: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
+  currentDate,
+  onDateChange,
+}: AppointmentTableFunction) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
@@ -29,77 +26,77 @@ export default function MobileLeadsFilters({
     setInputValue(value);
   };
 
-  const checkbox: CheckBoxType[] = [
-    {
-      label: translate("leads.table_functions.open"),
-      type: `${staticEnums.LeadStatus.Open}`,
-    },
-    {
-      label: translate("leads.table_functions.inProcess"),
-      type: `${staticEnums.LeadStatus.InProcess}`,
-    },
-    {
-      label: translate("leads.table_functions.close"),
-      type: `${staticEnums.LeadStatus.Close}`,
-    },
-    {
-      label: translate("leads.table_functions.expire"),
-      type: `${staticEnums.LeadStatus.Expired}`,
-    },
-  ];
+  // const checkbox: CheckBoxType[] = [
+  //   {
+  //     label: translate("leads.table_functions.open"),
+  //     type: `${staticEnums.LeadStatus.Open}`,
+  //   },
+  //   {
+  //     label: translate("leads.table_functions.inProcess"),
+  //     type: `${staticEnums.LeadStatus.InProcess}`,
+  //   },
+  //   {
+  //     label: translate("leads.table_functions.close"),
+  //     type: `${staticEnums.LeadStatus.Close}`,
+  //   },
+  //   {
+  //     label: translate("leads.table_functions.expire"),
+  //     type: `${staticEnums.LeadStatus.Expired}`,
+  //   },
+  // ];
 
-  const handleStatusChange = (value: string, isChecked: boolean) => {
-    setFilter((prev: FilterType) => {
-      const updatedStatus = prev.status ? [...prev.status] : [];
-      const newStatus = updatedStatus;
+  // const handleStatusChange = (value: string, isChecked: boolean) => {
+  //   setFilter((prev: FilterType) => {
+  //     const updatedStatus = prev.status ? [...prev.status] : [];
+  //     const newStatus = updatedStatus;
 
-      if (isChecked) {
-        if (!updatedStatus.includes(value)) {
-          updatedStatus.push(value);
-        }
+  //     if (isChecked) {
+  //       if (!updatedStatus.includes(value)) {
+  //         updatedStatus.push(value);
+  //       }
 
-        router.push(
-          {
-            pathname: router.pathname,
-            query: {
-              status:
-                newStatus && newStatus.length > 0
-                  ? newStatus.join(",")
-                  : "None",
-            },
-          },
-          undefined,
-          { shallow: true }
-        );
-      } else {
-        const index = updatedStatus.indexOf(value);
-        if (index > -1) {
-          updatedStatus.splice(index, 1);
-        }
+  //       router.push(
+  //         {
+  //           pathname: router.pathname,
+  //           query: {
+  //             status:
+  //               newStatus && newStatus.length > 0
+  //                 ? newStatus.join(",")
+  //                 : "None",
+  //           },
+  //         },
+  //         undefined,
+  //         { shallow: true }
+  //       );
+  //     } else {
+  //       const index = updatedStatus.indexOf(value);
+  //       if (index > -1) {
+  //         updatedStatus.splice(index, 1);
+  //       }
 
-        router.push(
-          {
-            pathname: router.pathname,
-            query: {
-              status:
-                newStatus && newStatus.length > 0
-                  ? newStatus.join(",")
-                  : "None",
-            },
-          },
-          undefined,
-          { shallow: true }
-        );
-      }
+  //       router.push(
+  //         {
+  //           pathname: router.pathname,
+  //           query: {
+  //             status:
+  //               newStatus && newStatus.length > 0
+  //                 ? newStatus.join(",")
+  //                 : "None",
+  //           },
+  //         },
+  //         undefined,
+  //         { shallow: true }
+  //       );
+  //     }
 
-      const status =
-        updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
-      const updatedFilter = { ...prev, status: status };
+  //     const status =
+  //       updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
+  //     const updatedFilter = { ...prev, status: status };
 
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
@@ -152,9 +149,15 @@ export default function MobileLeadsFilters({
     <div className="flex flex-col gap-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-base font-medium text-[#1E1E1E]">Leads</h1>
-
-        {/* <div className="flex items-center gap-x-1"> */}
-        <SelectField
+        <div className="w-[200px]">
+          <CustomDatePciker
+            id="today"
+            name="today"
+            value={currentDate}
+            onInputChange={onDateChange}
+          />
+        </div>
+        {/* <SelectField
           handleChange={(value) => hanldeSortChange(value)}
           value=""
           options={[
@@ -177,32 +180,9 @@ export default function MobileLeadsFilters({
           ]}
           label={translate("common.sort_button")}
           containerClassName="z-10"
-        />
-
-        {/* <LeadsFilters
-            filter={filter}
-            setFilter={setFilter}
-            onFilterChange={handleFilterChange}
-          />
-        </div> */}
+        /> */}
       </div>
-      {/* <div className="grid grid-cols-2 xsMini:grid-cols-4 items-center gap-4 ml-5">
-        {checkbox.map((item, idx) => (
-          <CheckField
-            key={idx}
-            checkboxFilter={filter}
-            setCheckBoxFilter={setFilter}
-            type={"status"}
-            label={item.label}
-            value={item.type}
-            onChange={(value, isChecked) =>
-              handleStatusChange(value, isChecked)
-            }
-            containerClassName="rounded-full w-full py-[6px] pl-[7px] pr-[7px]"
-            isMobile={true}
-          />
-        ))}
-      </div> */}
+
       <InputField
         handleChange={handleInputChange}
         ref={inputRef}
