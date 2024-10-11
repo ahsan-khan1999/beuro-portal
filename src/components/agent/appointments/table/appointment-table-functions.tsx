@@ -1,16 +1,27 @@
-import React from "react";
-import { FiltersComponentProps } from "@/types";
+import React, { ChangeEvent, SetStateAction } from "react";
+import { FilterType } from "@/types";
 import { useTranslation } from "next-i18next";
 import AppointmentsFilter from "./appointments-filters";
 import AppointmentsTabletFilters from "./appointment-tablet-filters";
 import AppointmentsMobileFilters from "../mobile/appointment-mobile-filters";
+
+export interface AppointmentTableFunction {
+  onDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  currentDate: string;
+  filter: FilterType;
+  setFilter: SetStateAction<any>;
+  handleFilterChange: (filter: FilterType) => void;
+  isAgent?: boolean;
+}
 
 export const AppointmentTableFunctions = ({
   filter,
   setFilter,
   handleFilterChange,
   isAgent,
-}: FiltersComponentProps) => {
+  currentDate,
+  onDateChange,
+}: AppointmentTableFunction) => {
   const { t: translate } = useTranslation();
 
   return (
@@ -37,6 +48,8 @@ export const AppointmentTableFunctions = ({
                 setFilter={setFilter}
                 handleFilterChange={handleFilterChange}
                 isAgent={isAgent}
+                onDateChange={onDateChange}
+                currentDate={currentDate}
               />
             </div>
           )}
@@ -57,6 +70,8 @@ export const AppointmentTableFunctions = ({
               setFilter={setFilter}
               handleFilterChange={handleFilterChange}
               isAgent={isAgent}
+              onDateChange={onDateChange}
+              currentDate={currentDate}
             />
           </div>
         </>

@@ -1,17 +1,18 @@
-import LeadsFilters from "@/base-components/filter/leads-filter";
 import InputField from "@/base-components/filter/fields/input-field";
-import SelectField from "@/base-components/filter/fields/select-field";
-import { FilterType, FiltersComponentProps } from "@/types";
+import { FilterType } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
+import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
+import { AppointmentTableFunction } from "../table/appointment-table-functions";
 
 export default function AppointmentsMobileFilters({
-  filter,
   setFilter,
   handleFilterChange,
-}: FiltersComponentProps) {
+  currentDate,
+  onDateChange,
+}: AppointmentTableFunction) {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -54,25 +55,25 @@ export default function AppointmentsMobileFilters({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
-      },
-      undefined,
-      { shallow: false }
-    );
+  // const hanldeSortChange = (value: string) => {
+  //   router.push(
+  //     {
+  //       pathname: router.pathname,
+  //       query: {
+  //         ...router.query,
+  //         sort: value,
+  //       },
+  //     },
+  //     undefined,
+  //     { shallow: false }
+  //   );
 
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["sort"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
+  //   setFilter((prev: FilterType) => {
+  //     const updatedFilter = { ...prev, ["sort"]: value };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
 
   return (
     <div className="flex flex-col gap-y-4 w-full z-50">
@@ -81,7 +82,7 @@ export default function AppointmentsMobileFilters({
           {translate("sidebar.customer.appointments.appointment")}
         </h1>
 
-        <div className="flex items-center gap-x-2 z-10">
+        {/* <div className="flex items-center gap-x-2 z-10">
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
             value=""
@@ -105,14 +106,16 @@ export default function AppointmentsMobileFilters({
             ]}
             label={translate("common.sort_button")}
             containerClassName="min-w-fit"
-          />
-
-          {/* <LeadsFilters
-            filter={filter}
-            setFilter={setFilter}
-            onFilterChange={handleFilterChange}
           /> */}
+        <div className="w-fit z-10">
+          <CustomDatePciker
+            id="today"
+            name="today"
+            value={currentDate}
+            onInputChange={onDateChange}
+          />
         </div>
+        {/* </div> */}
       </div>
 
       <InputField

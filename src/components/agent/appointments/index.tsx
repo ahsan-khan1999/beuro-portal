@@ -8,6 +8,7 @@ import { AppointmentTableRows } from "./table/appointment-table-rows";
 import { AppointmentTableFunctions } from "./table/appointment-table-functions";
 import { AppointmentTableHeadings } from "./table/apppointment-table-headings";
 import { AppointmentTableRecordCard } from "./mobile/table-record-card";
+import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 export default function AgentAppointments() {
   const {
@@ -26,6 +27,8 @@ export default function AgentAppointments() {
     totalCount,
     handleNotes,
     handleImageUpload,
+    currentDate,
+    handleCurrentDateChange,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -48,10 +51,23 @@ export default function AgentAppointments() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
         isAgent={true}
+        onDateChange={handleCurrentDateChange}
+        currentDate={currentDate}
       />
 
       <div className="block xMini:hidden">
-        <AppointmentTableRecordCard dataToAdd={currentPageRows} />
+        {currentPageRows && currentPageRows.length > 0 ? (
+          <AppointmentTableRecordCard dataToAdd={currentPageRows} />
+        ) : (
+          <div className="xMini:bg-white mt-6 xMini:flex items-center justify-center">
+            <NoDataEmptyState
+              containerClassName="xMini:py-[153px]"
+              imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
+              textClassName="text-lg xMini:text-2xl"
+              className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[617px]"
+            />
+          </div>
+        )}
       </div>
 
       <div className="hidden xMini:block">

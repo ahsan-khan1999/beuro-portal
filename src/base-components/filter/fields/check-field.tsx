@@ -37,7 +37,7 @@ export default function CheckField({
   })();
 
   const defaultClasses = combineClasses(
-    `custom-checkbox py-2 pl-[10px] pr-[22px] h-fit ${
+    `custom-checkbox py-2 pl-[10px] pr-[22px] h-fit border border-[#ccc] ${
       isMobile && isCheckboxChecked ? "bg-primary" : "bg-white"
     } rounded-md relative cursor-pointer w-fit`,
     containerClassName

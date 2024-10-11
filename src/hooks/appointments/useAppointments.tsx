@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -32,6 +32,9 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
+import moment from "moment";
+import { updateQuery } from "@/utils/update-query";
+import { useQueryParams } from "@/utils/hooks";
 
 export const useAppointments = () => {
   const {
@@ -44,10 +47,17 @@ export const useAppointments = () => {
   } = useAppSelector((state) => state.appointment);
 
   const router = useRouter();
+  const params = useQueryParams();
   const { t: translate } = useTranslation();
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
+
+  const initialDate = params.today
+    ? params.today
+    : moment().utc().startOf("day").toISOString();
+
+  const [currentDate, setCurrentDate] = useState<string>(initialDate);
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
@@ -69,6 +79,19 @@ export const useAppointments = () => {
     dispatch(setReportDetails(DEFAULT_REPOT));
   }, []);
 
+  const handleCurrentDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newDate = e.target.value;
+    if (!newDate) {
+      console.error("Invalid date provided");
+      return;
+    }
+    const utcDate = moment.utc(newDate).startOf("day").toISOString();
+    setCurrentDate(utcDate);
+    router.query = { ...params, today: utcDate };
+    
+    updateQuery(router, router.locale as string);
+  };
+
   useEffect(() => {
     const parsedPage = parseInt(router.query.page as string, 10);
     let resetPage = null;
@@ -84,7 +107,7 @@ export const useAppointments = () => {
     const sortedValue = router.query?.sort as string;
     const searchedDate = router.query?.date as string;
     const searchNoteType = router.query?.noteType as string;
-    const queryDate = router.query?.today as unknown as Date;
+    const queryDate = router.query?.today as string;
     const queryOffer = router.query?.isOfferCreated as unknown as boolean;
 
     const queryParams =
@@ -114,7 +137,7 @@ export const useAppointments = () => {
           $gte?: string;
           $lte?: string;
         };
-        today?: Date;
+        today?: string;
         isOfferCreated?: boolean;
       } = {
         status: filteredStatus,
@@ -137,7 +160,6 @@ export const useAppointments = () => {
       }
 
       if (isAgentRoute) {
-        const currentDate = new Date();
         updatedFilter.today = currentDate;
       }
 
@@ -234,11 +256,6 @@ export const useAppointments = () => {
     startTime: string,
     endTime: string,
     canton: string
-    // agent: {
-    //   id: string;
-    //   picture: string;
-    //   fullName: string;
-    // }
   ) => {
     dispatch(
       updateModalType({
@@ -250,7 +267,6 @@ export const useAppointments = () => {
           date: date,
           startTime: startTime,
           endTime: endTime,
-          // agent: agent,
           canton: canton,
         },
       })
@@ -532,5 +548,7 @@ export const useAppointments = () => {
     handleDeleteNote,
     handleImageUpload,
     dispatch,
+    currentDate,
+    handleCurrentDateChange,
   };
 };
