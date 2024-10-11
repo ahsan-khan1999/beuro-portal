@@ -194,13 +194,14 @@ export default function InvoicesFilters({
         ))}
       </div>
 
-      <div className="flex flex-col maxSize:flex-row gap-3 maxSize:items-center">
+      <div className="flex gap-3 items-center">
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}
           value={inputValue}
           iconDisplay={true}
           onEnterPress={onEnterPress}
+          textClassName="w-[177px]"
         />
 
         <div className="flex items-center gap-x-3">

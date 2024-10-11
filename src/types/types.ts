@@ -1,5 +1,10 @@
 import { svgs } from "./../base-components/SideBar";
-import { ReactNode, SetStateAction, Dispatch as stateDispatch } from "react";
+import {
+  ChangeEvent,
+  ReactNode,
+  SetStateAction,
+  Dispatch as stateDispatch,
+} from "react";
 import { DateRangeProps, FormField } from "./form";
 import {
   Control,
@@ -1484,6 +1489,15 @@ export interface AggrementProps {
   systemSettings: SystemSetting | null;
   pdfData: PdfProps<any>;
   setComponentMounted: () => void;
+}
+
+export interface AppointmentTableFunction {
+  onDateChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  currentDate?: string;
+  filter: FilterType;
+  setFilter: SetStateAction<any>;
+  handleFilterChange: (filter: FilterType) => void;
+  isAgent?: boolean;
 }
 
 export interface FiltersComponentProps {
