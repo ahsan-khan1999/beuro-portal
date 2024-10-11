@@ -237,7 +237,7 @@ export default function AppointmentsTabletFilters({
           label={translate("common.sort_button")}
           containerClassName="min-w-fit"
         />
-        <div className="w-fit">
+        <div className="w-[200px]">
           <CustomDatePciker
             id="today"
             name="today"
