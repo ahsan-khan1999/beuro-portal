@@ -207,6 +207,7 @@ export default function AppointmentsFilter({
             value={inputValue}
             iconDisplay={true}
             onEnterPress={onEnterPress}
+            textClassName="w-[177px]"
           />
         </div>
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">

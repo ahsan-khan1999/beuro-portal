@@ -1,18 +1,8 @@
-import React, { ChangeEvent, SetStateAction } from "react";
-import { FilterType } from "@/types";
+import { AppointmentTableFunction } from "@/types";
 import { useTranslation } from "next-i18next";
 import AppointmentsFilter from "./appointments-filters";
 import AppointmentsTabletFilters from "./appointment-tablet-filters";
 import AppointmentsMobileFilters from "../mobile/appointment-mobile-filters";
-
-export interface AppointmentTableFunction {
-  onDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  currentDate: string;
-  filter: FilterType;
-  setFilter: SetStateAction<any>;
-  handleFilterChange: (filter: FilterType) => void;
-  isAgent?: boolean;
-}
 
 export const AppointmentTableFunctions = ({
   filter,

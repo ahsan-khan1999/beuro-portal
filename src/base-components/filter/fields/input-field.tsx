@@ -36,13 +36,10 @@ const InputField = forwardRef(
       textClassName
     );
 
-    const containerClasses = combineClasses(
-      "w-full xMini:w-fit",
-      containerClassName
-    );
+    const containerClasses = combineClasses("w-fit", containerClassName);
 
     const inputDivClasses = combineClasses(
-      "relative flex w-full xMini:w-fit",
+      "relative flex w-fit",
       inputDivClassName
     );
 

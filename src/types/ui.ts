@@ -20,9 +20,9 @@ export interface DropDownItem {
 export interface UIDatePickerProps {
   id: string;
   name: string;
-  value: string;
+  value?: string;
   className?: string;
-  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onInputChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface DropDownProps {

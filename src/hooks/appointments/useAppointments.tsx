@@ -88,7 +88,6 @@ export const useAppointments = () => {
     const utcDate = moment.utc(newDate).startOf("day").toISOString();
     setCurrentDate(utcDate);
     router.query = { ...params, today: utcDate };
-    
     updateQuery(router, router.locale as string);
   };
 

@@ -16,19 +16,19 @@ export default function AgentLeads() {
     totalItems,
     itemsPerPage,
     handleNotes,
-    handleDeleteNote,
     handleImageUpload,
     renderModal,
     filter,
     setFilter,
     handleFilterChange,
-    loading,
     isLoading,
     currentPage,
     handleLeadStatusUpdate,
     totalCount,
     shareImgModal,
     handleScheduleAppointments,
+    currentDate,
+    handleCurrentDateChange,
   } = useLeads();
 
   const CurrentComponent = useEmptyStates(
@@ -52,6 +52,8 @@ export default function AgentLeads() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
         isAgent={true}
+        currentDate={currentDate}
+        onDateChange={handleCurrentDateChange}
       />
 
       <div className="block xMini:hidden">

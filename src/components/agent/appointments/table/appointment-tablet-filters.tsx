@@ -1,6 +1,6 @@
 import InputField from "@/base-components/filter/fields/input-field";
 import SelectField from "@/base-components/filter/fields/select-field";
-import { CheckBoxType, FilterType } from "@/types";
+import { AppointmentTableFunction, CheckBoxType, FilterType } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -9,7 +9,6 @@ import { staticEnums } from "@/utils/static";
 import CheckField from "@/base-components/filter/fields/check-field";
 import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
-import { AppointmentTableFunction } from "./appointment-table-functions";
 
 export default function AppointmentsTabletFilters({
   filter,

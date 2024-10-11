@@ -22,7 +22,7 @@ export const CustomDatePciker: React.FC<UIDatePickerProps> = ({
 
   const classes = combineClasses(defaultClasses, className);
 
-  const formatedValue = convertUTCToLocalDate(value);
+  const formatedValue = convertUTCToLocalDate(value || "");
 
   return (
     <div className="relative w-full" onClick={handleFocus}>

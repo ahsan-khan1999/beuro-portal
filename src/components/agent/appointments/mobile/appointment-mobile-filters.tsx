@@ -1,11 +1,10 @@
 import InputField from "@/base-components/filter/fields/input-field";
-import { FilterType } from "@/types";
+import { AppointmentTableFunction, FilterType } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { FiltersDefaultValues } from "@/enums/static";
 import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
-import { AppointmentTableFunction } from "../table/appointment-table-functions";
 
 export default function AppointmentsMobileFilters({
   setFilter,

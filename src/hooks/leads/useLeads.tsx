@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -27,6 +27,9 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppointments";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
+import { useQueryParams } from "@/utils/hooks";
+import moment from "moment";
+import { updateQuery } from "@/utils/update-query";
 
 const useLeads = () => {
   const { lead, loading, isLoading, totalCount, leadDetails } = useAppSelector(
@@ -34,6 +37,7 @@ const useLeads = () => {
   );
 
   const router = useRouter();
+  const params = useQueryParams();
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
@@ -41,6 +45,24 @@ const useLeads = () => {
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
+
+  const initialDate = params.today
+    ? params.today
+    : moment().utc().startOf("day").toISOString();
+
+  const [currentDate, setCurrentDate] = useState<string>(initialDate);
+
+  const handleCurrentDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newDate = e.target.value;
+    if (!newDate) {
+      console.error("Invalid date provided");
+      return;
+    }
+    const utcDate = moment.utc(newDate).startOf("day").toISOString();
+    setCurrentDate(utcDate);
+    router.query = { ...params, today: utcDate };
+    updateQuery(router, router.locale as string);
+  };
 
   useEffect(() => {
     const parsedPage = parseInt(router.query.page as string, 10);
@@ -86,7 +108,7 @@ const useLeads = () => {
           $gte?: string;
           $lte?: string;
         };
-        today?: boolean;
+        today?: string;
         isAppointmentCreated?: boolean;
       } = {
         status: filteredStatus,
@@ -107,7 +129,7 @@ const useLeads = () => {
       }
 
       if (isAgentRoute) {
-        updatedFilter.today = true;
+        updatedFilter.today = currentDate;
       }
 
       setFilter(updatedFilter);
@@ -471,6 +493,8 @@ const useLeads = () => {
     totalCount,
     handleScheduleAppointments,
     shareImgModal,
+    currentDate,
+    handleCurrentDateChange,
   };
 };
 
