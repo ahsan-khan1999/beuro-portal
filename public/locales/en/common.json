@@ -2586,6 +2586,7 @@
   },
 
   "calendar": {
+    "delete_appointment_des": "Are you sure you want to delete the appointment?",
     "main_heading": "Calendar",
     "add_task": "Add Task",
     "today": "Today",

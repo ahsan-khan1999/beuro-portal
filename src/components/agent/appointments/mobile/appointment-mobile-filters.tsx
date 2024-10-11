@@ -106,7 +106,7 @@ export default function AppointmentsMobileFilters({
             label={translate("common.sort_button")}
             containerClassName="min-w-fit"
           /> */}
-        <div className="w-fit z-10">
+        <div className="w-[200px] z-10">
           <CustomDatePciker
             id="today"
             name="today"

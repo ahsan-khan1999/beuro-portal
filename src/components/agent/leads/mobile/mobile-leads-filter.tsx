@@ -149,7 +149,7 @@ export default function MobileLeadsFilters({
     <div className="flex flex-col gap-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-base font-medium text-[#1E1E1E]">Leads</h1>
-        <div className="w-fit">
+        <div className="w-[200px]">
           <CustomDatePciker
             id="today"
             name="today"
