@@ -252,7 +252,7 @@
   "sidebar": {
     "customer": {
       "dashboard": "Dashboard",
-      "calendar": "Termin",
+      "calendar": "Kalender",
       "customers": "Kunden",
       "leads": {
         "leads": "Anfragen",
@@ -1029,7 +1029,7 @@
     "card_content": {
       "heading": "Anfragen details",
       "create_button": "Angebot erstellen",
-      "lead_create": "Blei erstellen",
+      "lead_create": "Angebot erstellen",
       "lead_id": "Anfragen-ID",
       "status": "Status",
       "created_date": "Erstelldatum",
@@ -2581,7 +2581,7 @@
   },
   "calendar": {
     "delete_appointment_des": "Sind SIe sich sicher, dass Sie den Termin löschen möchten?",
-    "main_heading": "Termin",
+    "main_heading": "Kalender",
     "add_task": "Termin hinzufügen",
     "today": "Heute",
     "edit": "bearbeiten",
