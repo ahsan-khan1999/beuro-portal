@@ -235,9 +235,9 @@ export const AppointmentsDetailCard = ({
                       : appointmentDetails?.appointmentStatus === "Completed"
                       ? "bg-[#45C769]"
                       : "bg-[#D80027]"
-                  } w-[140px] rounded-lg px-4 py-[5px] flex items-center justify-center`}
+                  } min-w-[140px] rounded-lg px-4 py-[5px] flex items-center justify-center`}
                   dropDownTextClassName="text-white text-sm xMini:text-base font-medium me-1"
-                  dropDownItemsContainerClassName="w-[140px] text-sm xMini:text-base"
+                  dropDownItemsContainerClassName="min-w-[140px] text-sm xMini:text-base"
                   dropDownIconClassName="text-white"
                 />
               </div>

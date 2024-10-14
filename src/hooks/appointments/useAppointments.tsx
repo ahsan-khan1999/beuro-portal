@@ -35,6 +35,7 @@ import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import moment from "moment";
 import { updateQuery } from "@/utils/update-query";
 import { useQueryParams } from "@/utils/hooks";
+import { getCurrentUtcDate, handleUtcDateChange } from "@/utils/utility";
 
 export const useAppointments = () => {
   const {
@@ -52,12 +53,7 @@ export const useAppointments = () => {
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
-
-  const initialDate = params.today
-    ? params.today
-    : moment().utc().startOf("day").toISOString();
-
-  const [currentDate, setCurrentDate] = useState<string>(initialDate);
+  const [currentDate, setCurrentDate] = useState<string>(getCurrentUtcDate);
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
@@ -81,14 +77,7 @@ export const useAppointments = () => {
 
   const handleCurrentDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newDate = e.target.value;
-    if (!newDate) {
-      console.error("Invalid date provided");
-      return;
-    }
-    const utcDate = moment.utc(newDate).startOf("day").toISOString();
-    setCurrentDate(utcDate);
-    router.query = { ...params, today: utcDate };
-    updateQuery(router, router.locale as string);
+    handleUtcDateChange(newDate, setCurrentDate, router, params, updateQuery);
   };
 
   useEffect(() => {

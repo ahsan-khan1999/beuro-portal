@@ -28,8 +28,8 @@ import { ScheduleAppointments } from "@/base-components/ui/modals1/ScheduleAppoi
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import { ShareImages } from "@/base-components/ui/modals1/ShareImages";
 import { useQueryParams } from "@/utils/hooks";
-import moment from "moment";
 import { updateQuery } from "@/utils/update-query";
+import { getCurrentUtcDate, handleUtcDateChange } from "@/utils/utility";
 
 const useLeads = () => {
   const { lead, loading, isLoading, totalCount, leadDetails } = useAppSelector(
@@ -38,30 +38,18 @@ const useLeads = () => {
 
   const router = useRouter();
   const params = useQueryParams();
+  const { t: translate } = useTranslation();
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
-  const { t: translate } = useTranslation();
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
-
-  const initialDate = params.today
-    ? params.today
-    : moment().utc().startOf("day").toISOString();
-
-  const [currentDate, setCurrentDate] = useState<string>(initialDate);
+  const [currentDate, setCurrentDate] = useState<string>(getCurrentUtcDate);
 
   const handleCurrentDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newDate = e.target.value;
-    if (!newDate) {
-      console.error("Invalid date provided");
-      return;
-    }
-    const utcDate = moment.utc(newDate).startOf("day").toISOString();
-    setCurrentDate(utcDate);
-    router.query = { ...params, today: utcDate };
-    updateQuery(router, router.locale as string);
+    handleUtcDateChange(newDate, setCurrentDate, router, params, updateQuery);
   };
 
   useEffect(() => {
