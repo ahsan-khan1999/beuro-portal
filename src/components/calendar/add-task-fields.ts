@@ -200,14 +200,6 @@ export const addTaskFormField: GenerateAddTaskFormField = (
                     register,
                   },
                 },
-                // {
-                //   containerClass: `mb-0 ${isRemainder ? "block" : "hidden"}`,
-                //   field: {
-                //     type: Field.span,
-                //     id: "span-field",
-                //     text: `Done`,
-                //   },
-                // },
               ],
             },
           },
