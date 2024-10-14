@@ -443,6 +443,47 @@ export const convertUTCToLocalDate = (utcDate: string): string => {
   return localDate;
 };
 
+export const convertDateUTCToLocal = (utcDate: string): string => {
+  if (!utcDate) {
+    return "";
+  }
+
+  const localDate = moment.utc(utcDate).local().format("YYYY-MM-DD");
+
+  return localDate;
+};
+
+export const getCurrentUtcDate = (): string => {
+  const newDate = new Date();
+  return moment.utc(newDate).toISOString();
+};
+
+export const handleUtcDateChange = (
+  newDate: string,
+  setDate: React.Dispatch<React.SetStateAction<string>>,
+  router: any,
+  params: any,
+  updateQuery: (router: any, locale: string) => void
+) => {
+  if (!newDate) {
+    console.error("Invalid date provided");
+    return;
+  }
+
+  const currentTimeUtc = moment.utc().format("HH:mm:ss");
+  const dateWithUtcTime = `${newDate}T${currentTimeUtc}`;
+  const utcDate = moment.utc(dateWithUtcTime).toISOString();
+
+  setDate(utcDate);
+  router.query = { ...params, today: utcDate };
+  updateQuery(router, router.locale as string);
+};
+
+export const convertLocalDateToUTC = (localDate: string): string => {
+  if (!localDate) return "";
+  return moment(localDate).utc().startOf("day").toISOString();
+};
+
 export const viewConvertUTCToLocalDate = (utcDate: string): string => {
   const localDateObj = new Date(utcDate);
   const localDate = moment(localDateObj).format("DD/MM/YYYY");
