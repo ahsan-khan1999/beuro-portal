@@ -199,9 +199,9 @@ export default function LeadsFilter({
 
   return (
     <div
-      className={`flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10`}
+      className={`flex flex-col maxLargePro:flex-row maxLargePro:items-center w-full xl:w-fit gap-4 z-10`}
     >
-      <div className="flex items-center gap-[14px]">
+      <div className="flex items-center gap-4">
         {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
@@ -243,60 +243,61 @@ export default function LeadsFilter({
             onEnterPress={onEnterPress}
             textClassName="w-[177px]"
           />
+          <SelectField
+            handleChange={(value) => hanldeSortChange(value)}
+            value=""
+            options={[
+              {
+                label: `${translate("filters.sort_by.date")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.latest")}`,
+                value: "-createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.oldest")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.a_z")}`,
+                value: "customerDetail.fullName",
+              },
+            ]}
+            label={translate("common.sort_button")}
+            containerClassName="min-w-fit"
+          />
         </div>
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-          <div className="flex items-center gap-x-4 z-10">
-            <SelectField
-              handleChange={(value) => hanldeSortChange(value)}
-              value=""
-              options={[
-                {
-                  label: `${translate("filters.sort_by.date")}`,
-                  value: "createdAt",
-                },
-                {
-                  label: `${translate("filters.sort_by.latest")}`,
-                  value: "-createdAt",
-                },
-                {
-                  label: `${translate("filters.sort_by.oldest")}`,
-                  value: "createdAt",
-                },
-                {
-                  label: `${translate("filters.sort_by.a_z")}`,
-                  value: "customerDetail.fullName",
-                },
-              ]}
-              label={translate("common.sort_button")}
-              containerClassName="min-w-fit"
-            />
-            {!isAgent && (
-              <div className="flex items-center gap-x-3">
-                <span className="text-[#4B4B4B] font-semibold text-base">
-                  {translate("global_search.notes")}
-                </span>
-                <SelectField
-                  handleChange={(value) => hanldeNoteType(value)}
-                  value=""
-                  dropDownIconClassName=""
-                  containerClassName="w-[225px]"
-                  labelClassName="w-[225px]"
-                  options={
-                    noteSettings
-                      ? noteSettings
-                          .slice()
-                          .reverse()
-                          .map((item) => ({
-                            label: item.notes.noteType,
-                            value: item.notes.noteType,
-                          }))
-                      : []
-                  }
-                  label={translate("add_note_dropdown.all_notes")}
-                />
-              </div>
-            )}
-          </div>
+          {/* <div className="flex items-center gap-x-4 z-10"> */}
+
+          {!isAgent && (
+            <div className="flex items-center gap-x-3 z-10">
+              <span className="text-[#4B4B4B] font-semibold text-base">
+                {translate("global_search.notes")}
+              </span>
+              <SelectField
+                handleChange={(value) => hanldeNoteType(value)}
+                value=""
+                dropDownIconClassName=""
+                containerClassName="w-[225px]"
+                labelClassName="w-[225px]"
+                options={
+                  noteSettings
+                    ? noteSettings
+                        .slice()
+                        .reverse()
+                        .map((item) => ({
+                          label: item.notes.noteType,
+                          value: item.notes.noteType,
+                        }))
+                    : []
+                }
+                label={translate("add_note_dropdown.all_notes")}
+              />
+            </div>
+          )}
+          {/* </div> */}
           <div className="flex items-center gap-x-4">
             {!isAgent && (
               <LeadsFilters

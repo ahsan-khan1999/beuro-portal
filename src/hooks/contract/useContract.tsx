@@ -524,9 +524,8 @@ const useContract = () => {
               
               <div style="display: flex; flex-direction: column;">
               ${
-                customerName &&
-                customerName.trim() !== "" &&
-                `<div style="display: flex; align-items: center; gap: 4px;">
+                customerName && customerName.trim() !== ""
+                  ? `<div style="display: flex; align-items: center; gap: 4px;">
                     <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
                         ${translate("pdf.name")}:
                     </span>
@@ -534,12 +533,12 @@ const useContract = () => {
                         ${customerName}
                     </span>
                 </div>`
+                  : ""
               }
               
                   ${
-                    customerEmail &&
-                    customerEmail.trim() !== "" &&
-                    `<div style="display: flex; align-items: center; gap: 4px;">
+                    customerEmail && customerEmail.trim() !== ""
+                      ? `<div style="display: flex; align-items: center; gap: 4px;">
                       <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
                           ${translate("pdf.email")}:
                       </span>
@@ -547,11 +546,11 @@ const useContract = () => {
                           ${customerEmail}
                       </span>
                   </div>`
+                      : ""
                   }
                   ${
-                    customerPhoneNumber &&
-                    customerPhoneNumber.trim() !== "" &&
-                    `<div style="display: flex; align-items: center; gap: 4px;">
+                    customerPhoneNumber && customerPhoneNumber.trim() !== ""
+                      ? `<div style="display: flex; align-items: center; gap: 4px;">
                       <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
                           ${translate("pdf.phone")}:
                       </span>
@@ -559,6 +558,7 @@ const useContract = () => {
                           ${customerPhoneNumber}
                       </span>
                   </div>`
+                      : ""
                   }
               </div>
               
@@ -657,8 +657,8 @@ const useContract = () => {
       </div>
     
       ${
-        item?.description &&
-        `<div style="display: flex; gap: 8px;">
+        item?.description
+          ? `<div style="display: flex; gap: 8px;">
         <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
           ${translate("pdf.description")}:
         </span>
@@ -667,12 +667,13 @@ const useContract = () => {
           ${item?.description}
         </span>
       </div>`
+          : ""
       }
     
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px;">
         ${
-          item?.count &&
-          `<div style="display: flex; gap: 8px;">
+          item?.count
+            ? `<div style="display: flex; gap: 8px;">
           <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
             ${translate("contracts.service_details.count")}:
           </span>
@@ -680,10 +681,11 @@ const useContract = () => {
             ${item?.count}
           </span>
         </div>`
+            : ""
         }
         ${
-          item?.unit &&
-          `<div style="display: flex;  gap: 8px;">
+          item?.unit
+            ? `<div style="display: flex;  gap: 8px;">
           <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
             ${translate("contracts.service_details.unit")}:
           </span>
@@ -691,10 +693,11 @@ const useContract = () => {
             ${item?.unit}
           </span>
         </div>`
+            : ""
         }
         ${
-          item?.price &&
-          `<div div style="display: flex; gap: 4px;">
+          item?.price
+            ? `<div div style="display: flex; gap: 4px;">
           <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
             ${translate("contracts.service_details.price")}:
           </span>
@@ -702,20 +705,23 @@ const useContract = () => {
             ${item?.price}
           </span>
         </div>`
+            : ""
         }
-      
-          <div style="display: flex; gap: 4px;">
-          <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
-            ${translate("common.discount")}:
-          </span>
-          <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
-            ${item?.discount}
-          </span>
-        </div>
-        
         ${
-          item?.totalPrice &&
-          `<div style="display: flex; gap: 4px;">
+          discount
+            ? `<div style="display: flex; gap: 4px;">
+              <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
+                ${translate("common.discount")}:
+              </span>
+              <span style="font-size: 14px; font-weight: 400; color: #2A2E3A;">
+                ${item?.discount}
+              </span>
+            </div>`
+            : ""
+        }
+        ${
+          item?.totalPrice
+            ? `<div style="display: flex; gap: 4px;">
           <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
             ${translate("contracts.service_details.total_price")}:
           </span>
@@ -723,6 +729,7 @@ const useContract = () => {
             ${item?.totalPrice}
           </span>
         </div>`
+            : ""
         }
       </div>
     </div>
@@ -739,77 +746,79 @@ const useContract = () => {
                 subTotal != null && subTotal !== 0
                   ? `<div style="display: flex; flex-direction: column; gap: 8px;">
                   ${
-                    subTotal &&
-                    `<div style="display: flex; align-items: center; gap:4px">
+                    subTotal
+                      ? `<div style="display: flex; align-items: center; gap:4px">
                       <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
                           ${translate("pdf.sub_total")}: 
                       </span>
                       <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
                           ${Number(subTotal).toFixed(2)} ${
-                      systemSettings?.currency
-                    }
+                          systemSettings?.currency
+                        }
                       </span>
                   </div>`
+                      : ""
                   }
                   ${
-                    discount &&
-                    discount !== 0 &&
-                    discountValue &&
-                    `<div style="display: flex; align-items: center; gap:4px">
+                    discount && discount !== 0 && discountValue
+                      ? `<div style="display: flex; align-items: center; gap:4px">
                       <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
                           ${translate("pdf.discount")} ${
-                      discountType &&
-                      discountType === "Percent" &&
-                      `(${discount}%)`
-                    }: 
+                          discountType &&
+                          discountType === "Percent" &&
+                          `(${discount}%)`
+                        }: 
                       </span>
                       <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
                           - ${Number(discountValue).toFixed(2)} ${
-                      systemSettings?.currency
-                    }
+                          systemSettings?.currency
+                        }
                       </span>
                   </div>`
+                      : ""
                   }
                  ${
-                   totalAfterDiscount &&
-                   `<div style="display: flex; align-items: center; gap:4px">
+                   totalAfterDiscount
+                     ? `<div style="display: flex; align-items: center; gap:4px">
                       <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
                           ${translate("pdf.total_after_discount")}: 
                       </span>
                       <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
                            ${Number(totalAfterDiscount).toFixed(2)} ${
-                     systemSettings?.currency
-                   }
+                         systemSettings?.currency
+                       }
                       </span>
                   </div>`
+                     : ""
                  }
                   ${
-                    tax &&
-                    calculatedTax &&
-                    `<div style="display: flex; align-items: center; gap:4px">
+                    tax && calculatedTax
+                      ? `<div style="display: flex; align-items: center; gap:4px">
                       <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
                           Mwst (${tax}%): 
                       </span>
                      
                       <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
                           ${Number(calculatedTax).toFixed(2)} ${
-                      systemSettings?.currency
-                    }
+                          systemSettings?.currency
+                        }
                       </span>
                   </div>`
+                      : ""
                   }
                   ${
-                    grandTotal &&
-                    `<div style="display: flex; align-items: center; gap:4px">
+                    grandTotal
+                      ? `<div style="display: flex; align-items: center; gap:4px">
                       <span style="font-size: 14px; font-weight: 600; color: #2A2E3A;">
                           ${translate("pdf.grand_total")}: 
                       </span>
                       <span style="font-size: 14px; font-weight: 400; color: #4A13E7;">
                           ${Number(grandTotal).toFixed(2)} ${
-                      systemSettings?.currency
-                    }
+                          systemSettings?.currency
+                        }
                       </span>
                   </div>`
+                      : ""
                   }
               </div>`
                   : ""

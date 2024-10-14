@@ -2,7 +2,6 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx,mdx}"],
   theme: {
-  
     fontFamily: {
       sans: ["Poppins", "Graphik", "sans-serif"],
     },
@@ -14,7 +13,7 @@ module.exports = {
         xs: "374px",
         xsMini: "520px",
         xMini: "730px",
-        xAirMini:"767px",
+        xAirMini: "767px",
         xAir: "820px",
         md: "900px",
         xPro: "1025px",
@@ -27,6 +26,7 @@ module.exports = {
         maxLarge: "1600px",
         xMaxLarge: "1680px",
         xMaxProLarge: "1780px",
+        maxLargePro: "1900px",
       },
       margin: {
         "60px": "3.75rem",
@@ -110,7 +110,7 @@ module.exports = {
         "dashboardCard3-gradient":
           "linear-gradient(90deg, #FF3671 0.03%, #FE9841 100.05%)",
       },
-    
+
       stroke: ["group-hover"],
       textColor: ["group-hover"],
     },
