@@ -242,6 +242,7 @@ export const Calendar = () => {
       </div>
 
       <FullCalendar
+      
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView={isSmallScreen ? "dayGridMonth" : "timeGridDay"}
@@ -261,6 +262,8 @@ export const Calendar = () => {
             })}
           </>
         )}
+        // firstDay={1}
+        moreLinkText={translate("calendar.more_text")}
         eventClick={(info) => {
           const taskID = info.event.extendedProps.taskID;
           const isAllDay = info.event.allDay;

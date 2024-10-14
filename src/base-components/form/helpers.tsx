@@ -25,6 +25,7 @@ import {
   RemainderSelectField,
   LocationSearchInputField,
   CustomTimePicker,
+  ReactCalendarDatePickerField,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -66,7 +67,7 @@ const fieldComponents: FieldComponents = {
   quantityInput: QuantityInputField,
   customCheckBox: CustomCheckBoxField,
   iconLabel: IconLabelFeild,
-  calendarDatePicker: CalendarDatePickerField,
+  calendarDatePicker: ReactCalendarDatePickerField,
   colourSelectField: ColourSelectField,
   remainderSelectField: RemainderSelectField,
   locationSearchInput: LocationSearchInputField,

@@ -26,3 +26,4 @@ export { ColourSelectField } from "./colorSelection/colour-select-field";
 export { RemainderSelectField } from "./remainderSelect/colour-remainder-field";
 export { LocationSearchInputField } from "./locationSearchInput/location-search-field";
 export { CustomTimePicker } from "./timePicker/custom-time-picker-field";
+export { ReactCalendarDatePickerField } from "./react-date-picker-calendar";
