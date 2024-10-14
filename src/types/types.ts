@@ -1071,6 +1071,7 @@ export interface FilterType {
   isAppointmentCreated?: boolean;
   isOfferCreated?: boolean;
   isTaskCreated?: boolean;
+  today?: string;
 }
 
 export interface MoreFilterType {
@@ -1082,11 +1083,11 @@ export interface MoreFilterType {
     $gte?: string;
     $lte?: string;
   };
-  today?: Date;
   emailStatus?: string[] | string;
   price?: string[];
   paymentType?: string[] | string;
   leadSource?: string[] | string;
+  today?: string;
 }
 export interface FilterProps {
   filter: FilterType;

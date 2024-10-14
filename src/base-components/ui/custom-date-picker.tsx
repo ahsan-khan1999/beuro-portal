@@ -1,5 +1,5 @@
 import { UIDatePickerProps } from "@/types";
-import { combineClasses, convertUTCToLocalDate } from "@/utils/utility";
+import { combineClasses, convertDateUTCToLocal } from "@/utils/utility";
 import React, { useRef } from "react";
 
 export const CustomDatePciker: React.FC<UIDatePickerProps> = ({
@@ -22,7 +22,7 @@ export const CustomDatePciker: React.FC<UIDatePickerProps> = ({
 
   const classes = combineClasses(defaultClasses, className);
 
-  const formatedValue = convertUTCToLocalDate(value || "");
+  const formatedValue = convertDateUTCToLocal(value || "");
 
   return (
     <div className="relative w-full" onClick={handleFocus}>
