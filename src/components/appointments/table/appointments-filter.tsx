@@ -166,7 +166,7 @@ export default function AppointmentsFilter({
   };
 
   return (
-    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
+    <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex items-center gap-[14px]">
         {checkbox?.map((item, idx) => (
           <CheckField
@@ -209,8 +209,38 @@ export default function AppointmentsFilter({
             onEnterPress={onEnterPress}
             textClassName="w-[177px]"
           />
+          <SelectField
+            handleChange={(value) => hanldeSortChange(value)}
+            value=""
+            options={[
+              {
+                label: `${translate("filters.sort_by.date")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.latest")}`,
+                value: "-createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.oldest")}`,
+                value: "createdAt",
+              },
+              {
+                label: `${translate("filters.sort_by.a_z")}`,
+                value: "customerDetail.fullName",
+              },
+            ]}
+            label={translate("common.sort_button")}
+            containerClassName="min-w-fit"
+          />
+          <LeadsFilters
+            filter={filter}
+            setFilter={setFilter}
+            onFilterChange={handleFilterChange}
+            containerClassName="z-0"
+          />
         </div>
-        <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+        {/* <div className="flex flex-col lg:flex-row lg:items-center gap-4">
           <div className="flex items-center gap-x-4">
             <SelectField
               handleChange={(value) => hanldeSortChange(value)}
@@ -243,7 +273,7 @@ export default function AppointmentsFilter({
               containerClassName="z-0"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

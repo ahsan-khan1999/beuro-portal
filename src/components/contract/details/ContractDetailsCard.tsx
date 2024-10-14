@@ -304,13 +304,14 @@ const ContractDetailsCard = ({
                   onItemSelected={handleStatusUpdate}
                   dropDownClassName={`border border-[${getContractStatusColor(
                     contractDetails?.contractStatus
-                  )}] rounded-lg px-4 py-[3px] flex items-center`}
+                  )}] min-w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                   dropDownTextClassName={`text-[${getContractStatusColor(
                     contractDetails?.contractStatus
                   )}] text-base font-medium me-1`}
                   dropDownIconClassName={`text-[${getContractStatusColor(
                     contractDetails?.contractStatus
                   )}]`}
+                  dropDownItemsContainerClassName="min-w-[140px]"
                 />
               )) || <></>}
             </span>

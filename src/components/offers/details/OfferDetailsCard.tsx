@@ -314,13 +314,19 @@ const OfferDetailsCard = ({
                     `offer_status.${offerDetails?.offerStatus}`
                   )}
                   onItemSelected={handleStatusUpdate}
-                  dropDownClassName={`border border-[${getOfferStatusColor(
-                    offerDetails?.offerStatus
-                  )}] w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+                  dropDownClassName={`border ${
+                    offerDetails?.offerStatus === "Open"
+                      ? "border-[#4A13E7]"
+                      : offerDetails?.offerStatus === "Accepted"
+                      ? "border-[#45C769]"
+                      : offerDetails?.offerStatus === "Expired"
+                      ? "border-[#FF376F]"
+                      : "border-[#FF0000]"
+                  } min-w-[140px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
                   dropDownTextClassName={`text-[${getOfferStatusColor(
                     offerDetails?.offerStatus
                   )}] text-base font-medium me-1`}
-                  dropDownItemsContainerClassName="w-fit"
+                  dropDownItemsContainerClassName="min-w-[140px]"
                 />
               )) || (
                 <span

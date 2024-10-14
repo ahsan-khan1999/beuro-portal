@@ -83,7 +83,7 @@ export default function LeadsFilter({
   };
 
   const defaultClasses = combineClasses(
-    "relative flex my-auto w-[85px] z-10",
+    "relative flex my-auto z-10",
     containerClassName
   );
 
@@ -92,7 +92,7 @@ export default function LeadsFilter({
       <Button
         inputType="button"
         onClick={handleExtraFilterToggle}
-        className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
+        className="gap-x-2 !h-fit py-2 mt-0 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap min-w-[85px]"
         icon={filtersIcon}
         text={translate("common.filters")}
         id="add"

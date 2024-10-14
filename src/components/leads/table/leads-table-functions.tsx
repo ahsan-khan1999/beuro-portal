@@ -16,7 +16,7 @@ export const LeadsTableFunctions = ({
     <div
       className={`flex flex-col ${
         !isAgent &&
-        "xMaxProLarge:flex-row justify-between xMaxProLarge:items-center"
+        "maxLargePro:flex-row justify-between maxLargePro:items-center"
       } gap-y-3 mb-4`}
     >
       <h1
@@ -60,7 +60,7 @@ export const LeadsTableFunctions = ({
               handleFilterChange={handleFilterChange}
               isAgent={isAgent}
               onDateChange={onDateChange}
-                currentDate={currentDate}
+              currentDate={currentDate}
             />
           </div>
         </>

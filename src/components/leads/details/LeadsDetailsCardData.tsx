@@ -214,7 +214,7 @@ const LeadsDetailsCardData = ({
                   : leadDetails?.leadStatus === "Close"
                   ? "border-[#45C769]"
                   : "border-[#FF0000]"
-              } w-fit rounded-lg px-4 py-[3px] flex items-center justify-center`}
+              } w-fit min-w-[170px] rounded-lg px-4 py-[3px] flex items-center justify-center`}
               dropDownTextClassName={`${
                 leadDetails?.leadStatus === "Open"
                   ? "text-[#4A13E7]"
@@ -224,7 +224,7 @@ const LeadsDetailsCardData = ({
                   ? "text-[#45C769]"
                   : "text-[#FF0000]"
               } text-base font-medium me-1`}
-              dropDownItemsContainerClassName="w-fit"
+              dropDownItemsContainerClassName="min-w-[170px]"
               isMobileLead={true}
               dropDownIconClassName={`text-[${getStatusColor(
                 leadDetails?.leadStatus
