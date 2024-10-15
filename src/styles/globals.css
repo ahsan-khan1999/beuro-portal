@@ -753,3 +753,14 @@ input[type="date"] {
   background-color: #e9ecef;
   font-weight: bold;
 }
+
+.datetime-local-popper {
+  transform: none !important;
+  top: 70px !important;
+}
+
+.date-popper {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: 70px !important;
+}

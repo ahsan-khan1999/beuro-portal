@@ -23,6 +23,7 @@ import {
   calendarYearDateFormat,
   hasTime,
 } from "@/utils/utility";
+import { useAppSelector } from "@/hooks/useRedux";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
@@ -49,6 +50,9 @@ const prepareEvents = (rawEvents: EventType[]): EventType[] => {
         originalStart: event.start,
         originalEnd: event.end,
       };
+
+      // Fix: Add one day to endDate for multi-day all-day events
+      event.end = moment(event.end).add(1, "days").format("YYYY-MM-DD");
     } else {
       event.allDay = !hasTime(startDate);
     }
@@ -56,6 +60,7 @@ const prepareEvents = (rawEvents: EventType[]): EventType[] => {
     return event;
   });
 };
+
 
 export const Calendar = () => {
   const router = useRouter();
@@ -65,6 +70,7 @@ export const Calendar = () => {
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
   const isSmallScreen = useIsSmallScreen(); // 1100px check
   const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
+  const { currentLanguage } = useAppSelector((state) => state.global);
 
   const {
     events: rawEvents,
@@ -242,6 +248,7 @@ export const Calendar = () => {
       </div>
 
       <FullCalendar
+        locale={currentLanguage}
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView={isSmallScreen ? "dayGridMonth" : "timeGridDay"}
@@ -261,6 +268,8 @@ export const Calendar = () => {
             })}
           </>
         )}
+        firstDay={1}
+        moreLinkText={translate("calendar.more_text")}
         eventClick={(info) => {
           const taskID = info.event.extendedProps.taskID;
           const isAllDay = info.event.allDay;
