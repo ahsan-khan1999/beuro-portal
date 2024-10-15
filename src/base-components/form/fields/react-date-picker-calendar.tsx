@@ -96,6 +96,10 @@ export const ReactCalendarDatePickerField = ({
       timeIntervals={15}
       disabled={disable}
       customInput={<CustomInput value={formattedDate} />}
+      popperPlacement="bottom-start"
+      popperClassName={
+        dateType === "datetime-local" ? "datetime-local-popper" : "date-popper"
+      }
     />
   );
 };
