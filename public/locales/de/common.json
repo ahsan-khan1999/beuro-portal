@@ -1029,7 +1029,7 @@
     "card_content": {
       "heading": "Anfragen details",
       "create_button": "Angebot erstellen",
-      "lead_create": "Angebot erstellen",
+      "lead_create": "Anfragen erstellen",
       "lead_id": "Anfragen-ID",
       "status": "Status",
       "created_date": "Erstelldatum",
@@ -2580,6 +2580,7 @@
     }
   },
   "calendar": {
+    "more_text": "mehr",
     "delete_appointment_des": "Sind SIe sich sicher, dass Sie den Termin löschen möchten?",
     "main_heading": "Kalender",
     "add_task": "Termin hinzufügen",

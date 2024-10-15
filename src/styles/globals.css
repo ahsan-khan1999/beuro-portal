@@ -753,3 +753,8 @@ input[type="date"] {
   background-color: #e9ecef;
   font-weight: bold;
 }
+
+.react-datepicker-popper {
+  transform: none !important;
+  top: 60px !important;
+}
