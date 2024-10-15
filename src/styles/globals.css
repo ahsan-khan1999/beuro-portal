@@ -754,7 +754,13 @@ input[type="date"] {
   font-weight: bold;
 }
 
-.react-datepicker-popper {
+.datetime-local-popper {
   transform: none !important;
-  top: 60px !important;
+  top: 70px !important;
+}
+
+.date-popper {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: 70px !important;
 }
