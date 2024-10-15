@@ -23,10 +23,6 @@ export const ReactCalendarDatePickerField = ({
       : ""
   );
 
-  // const [selectedDate, setSelectedDate] = useState<Date | null>(
-  //   value ? new Date(value) : null
-  // );
-
   const inputVal = watch(name);
 
   useEffect(() => {
@@ -44,12 +40,6 @@ export const ReactCalendarDatePickerField = ({
       );
     }
   }, [value]);
-
-  // const handleOpenDatePicker = () => {
-  //   if (dateInputRef.current) {
-  //     dateInputRef.current.showPicker();
-  //   }
-  // };
 
   const handleDateChange = (date: Date | null) => {
     if (date) {
@@ -106,8 +96,6 @@ export const ReactCalendarDatePickerField = ({
       timeIntervals={15}
       disabled={disable}
       customInput={<CustomInput value={formattedDate} />}
-      withPortal
-      
     />
   );
 };
