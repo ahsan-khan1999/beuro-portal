@@ -31,10 +31,10 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
   ];
 
   const [moreFilter, setMoreFilter] = useState<{
-    emailStatus: string[];
+    emailStatus: string;
     price: string[];
   }>({
-    emailStatus: (filter.emailStatus as string[]) || [],
+    emailStatus: (filter.emailStatus as string),
     price: filter.price || [],
   });
 
@@ -47,13 +47,13 @@ export default function MailTrackerFilter({ filter, setFilter }: FilterProps) {
     handleExtraFiltersClose();
   };
 
-  const handleEmailChange = (value: string, isChecked: boolean) => {
-    const updatedEmails = isChecked
-      ? [...moreFilter.emailStatus, value]
-      : moreFilter.emailStatus.filter((email) => email !== value);
+  // const handleEmailChange = (value: string, isChecked: boolean) => {
+  //   const updatedEmails = isChecked
+  //     ? [...moreFilter.emailStatus, value]
+  //     : moreFilter.emailStatus.filter((email) => email !== value);
 
-    setMoreFilter({ ...moreFilter, emailStatus: updatedEmails });
-  };
+  //   setMoreFilter({ ...moreFilter, emailStatus: updatedEmails });
+  // };
 
   const handleLowPriceChange = (val: string) => {
     setMoreFilter((prev) => ({

@@ -50,7 +50,7 @@ export const ContractTaskDetail = ({
     .isSame(moment(taskDetail?.selectedEndDate).startOf("day"), "day");
 
   const handlePDFPreview = () => {
-    const pdfRoute = `/contract/pdf-preview?offerID=${taskDetail?.contractID?.id}&isCalendar=true`;
+    const pdfRoute = `/contract/pdf-preview?offerID=${taskDetail?.contractID}&isCalendar=true`;
     window.open(pdfRoute, "_blank");
   };
 

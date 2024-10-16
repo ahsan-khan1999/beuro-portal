@@ -1063,7 +1063,8 @@ export interface FilterType {
     $lte?: string;
   };
   paymentType?: string[] | string;
-  emailStatus?: string[] | string;
+  // emailStatus?: string[] | string;
+  emailStatus?: string;
   mailStatus?: string[] | string;
   price?: string[];
   month?: number;
@@ -1083,7 +1084,7 @@ export interface MoreFilterType {
     $gte?: string;
     $lte?: string;
   };
-  emailStatus?: string[] | string;
+  emailStatus?: string;
   price?: string[];
   paymentType?: string[] | string;
   leadSource?: string[] | string;

@@ -19,6 +19,7 @@ import { useMergedReportPdfDownload } from "@/components/reportPdf/report-merge-
 
 export const useReportUpdatedPdf = () => {
   const [reportData, setReportData] = useState<PdfProps>();
+  const { user } = useAppSelector((state) => state.auth);
   const [templateSettings, setTemplateSettings] = useState<TemplateType | null>(
     null
   );
@@ -135,7 +136,7 @@ export const useReportUpdatedPdf = () => {
             headerDetails: {
               offerNo: reportDetails?.appointmentID?.leadID?.refID,
               offerDate: reportDetails?.createdAt,
-              createdBy: reportDetails?.appointmentID?.createdBy?.fullName,
+              createdBy: user?.fullName || "",
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               isReverseLogo: template.payload.Template?.order,

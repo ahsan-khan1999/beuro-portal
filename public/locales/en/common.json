@@ -1150,6 +1150,7 @@
       "time": "Time",
       "agent": "Agent",
       "status": "Status",
+      "appointment_status": "Appointment Status",
       "offer_status": "Offer Status",
       "action": "Action",
       "canton": "Canton"

@@ -263,7 +263,7 @@
       },
       "appointments": {
         "appointment": "Termine",
-        "pending": "Entwurf",
+        "pending": "Ausstehend",
         "completed": "durchgeführt",
         "cancelled": "Abgebrochen"
       },
@@ -282,7 +282,7 @@
       },
       "invoices": {
         "invoices": "Rechnungen",
-        "pending": "Entwurf",
+        "pending": "Ausstehend",
         "overdue": "Überfällig",
         "paid": "Bezahlt",
         "open": "Offen",
@@ -314,7 +314,7 @@
       },
       "appointments": {
         "appointment": "Termin",
-        "pending": "Entwurf",
+        "pending": "Ausstehend",
         "completed": "durchgeführt",
         "cancelled": "Abgebrochen"
       },
@@ -746,7 +746,7 @@
       "total_amount": "Gesamtbetrag",
       "offer_id": "Angebot ID",
       "payment_status": "Zahlungsstatus",
-      "email_status": "E-Mail-Status",
+      "email_status": "E-Mail Status",
       "invoice_email_preview": "E-Mail-Rechnungsvorschau",
       "receipt_email_preview": "E-Mail-Vorschau der Quittung",
       "edit_invoice": "Rechnung Bearbeiten"
@@ -762,7 +762,7 @@
       "title": "Rechnungstitel",
       "work_date": "Arbeitsdatum",
       "price": "Gesamtpreis",
-      "email_status": "E-Mail-Status",
+      "email_status": "E-Mail Status",
       "paid": "Bezahlt",
       "status": "Status",
       "notes": "Notizen",
@@ -778,7 +778,7 @@
       "total_amount": "Gesamtbetrag",
       "contract_id": "Vertrags-ID",
       "worker": "Arbeiter",
-      "status": "E-Mail-Status",
+      "status": "E-Mail Status",
       "paid_amount": "Bezahlter Betrag",
       "offer_id": "Angebots-ID",
       "created_date": "Erstelldatum",
@@ -793,7 +793,7 @@
       "title": "Rechnungstitel",
       "issue_date": "Ausstellungsdatum",
       "amount": "Betrag",
-      "email_status": "E-Mail-Status",
+      "email_status": "E-Mail Status",
       "payment": "Zahlung",
       "status": "Status",
       "edit": "Bearbeiten"
@@ -805,7 +805,7 @@
       "paid_date": "Zahlungsdatum",
       "amount": "Betrag",
       "invoice": "Rechnung",
-      "email_status": "E-Mail-Status",
+      "email_status": "E-Mail Status",
       "payment": "Zahlung"
     },
     "create_invoice_modal": {
@@ -861,7 +861,7 @@
       "invoice_title": "Rechnung Titel",
       "worker": "Arbeiter",
       "offer_id": "Angebots-ID",
-      "email_status": "E-Mail-Status",
+      "email_status": "E-Mail Status",
       "created_date": "Erstelldatum",
       "service_date": "Auftrags-Datum",
       "offer_status": "Angebotestatus",
@@ -1143,12 +1143,13 @@
       "time": "Zeit",
       "agent": "Agent",
       "status": "Status",
+      "appointment_status": "Besichtigungstermine",
       "offer_status": "Angebotsstatus",
       "action": "Aktion",
       "canton": "Kanton"
     },
     "appointment_status": {
-      "Pending": "Entwurf",
+      "Pending": "Ausstehend",
       "Completed": "durchgeführt",
       "Cancelled": "Abgebrochen"
     },
@@ -1301,7 +1302,7 @@
       "paid_invoice": "Bezahlt Rechnung",
       "overdue_invoice": "Überfällig Rechnung",
       "sending_invoice": "Versandbereit Rechnung",
-      "pending_invoice": "Entwurf Rechnung",
+      "pending_invoice": "Ausstehend Rechnung",
       "invoice_total": "Insgesamt",
       "page_sum": "Seite Summe"
     },
@@ -1316,7 +1317,7 @@
     "customer_name": "Kundenname",
     "company_name": "Firmenname",
     "invoice_fitlers": {
-      "pending": "Entwurf",
+      "pending": "Ausstehend",
       "sending": "Versandbereit",
       "open": "Offen",
       "overdue": "Überfällig",
@@ -1571,7 +1572,7 @@
       "worker": "Arbeiter",
       "created_date": "Erstelldatum",
       "service_date": "Auftrags-Datum",
-      "email_status": "E-Mail-Status",
+      "email_status": "E-Mail Status",
       "payment_method": "Zahlungsmethode",
       "status": "Status",
       "notes": "Notizen",
@@ -1714,7 +1715,7 @@
       "heading": "Solar EEG",
       "send_mail": "E-Mail senden",
       "offer_id": "Angebots-ID",
-      "email_status": "E-Mail-Status"
+      "email_status": "E-Mail Status"
     },
     "pdf_header": {
       "offer_no": "ANGEBOTE-NR",
@@ -2297,7 +2298,7 @@
     "send_post": "Per Post versenden",
     "send_email": "E-Mail senden",
     "offer_id": "Angebot ID",
-    "email_status": "E-Mail-Status"
+    "email_status": "E-Mail Status"
   },
   "Pending": "Ausstehend",
   "Sent": "Gesendet",
@@ -2326,7 +2327,7 @@
     "Post": "Gesendet"
   },
   "invoice_status": {
-    "Pending": "Entwurf",
+    "Pending": "Ausstehend",
     "Overdue": "Überfällig",
     "Paid": "Bezahlt",
     "Open": "Offen"
@@ -2350,7 +2351,7 @@
     "Company": "Unternehmen"
   },
   "email_status": {
-    "Post": "Gesendet",
+    "Post": "zugestellt",
     "Pending": "Ausstehend",
     "Sent": "Gesendet",
     "Failed": "Gescheitert",

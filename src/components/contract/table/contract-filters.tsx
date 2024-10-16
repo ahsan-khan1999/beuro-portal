@@ -185,8 +185,28 @@ export default function ContractFilters({
     });
   };
 
+  const hanldeMailStatus = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          emailStatus: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["emailStatus"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
-    <div className="flex flex-col maxLarge:flex-row maxLarge:items-center w-full xl:w-fit gap-4 z-10">
+    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
         {checkbox?.map((item, idx) => (
           <CheckField
@@ -258,30 +278,56 @@ export default function ContractFilters({
         </div>
 
         <div className="flex items-center gap-x-3">
-          <div className="flex items-center gap-x-3">
-            <span className="text-[#4B4B4B] font-semibold text-base">
+          {/* <div className="flex items-center gap-x-3"> */}
+          {/* <span className="text-[#4B4B4B] font-semibold text-base">
               {translate("global_search.notes")}
-            </span>
-            <SelectField
-              handleChange={(value) => hanldeNoteType(value)}
-              value=""
-              dropDownIconClassName=""
-              containerClassName="w-[225px]"
-              labelClassName="w-[225px]"
-              options={
-                noteSettings
-                  ? noteSettings
-                      .slice()
-                      .reverse()
-                      .map((item) => ({
-                        label: item.notes.noteType,
-                        value: item.notes.noteType,
-                      }))
-                  : []
-              }
-              label={translate("add_note_dropdown.all_notes")}
-            />
-          </div>
+            </span> */}
+          <SelectField
+            handleChange={(value) => hanldeNoteType(value)}
+            value=""
+            dropDownIconClassName=""
+            containerClassName="w-[225px]"
+            labelClassName="w-[225px]"
+            options={
+              noteSettings
+                ? noteSettings
+                    .slice()
+                    .reverse()
+                    .map((item) => ({
+                      label: item.notes.noteType,
+                      value: item.notes.noteType,
+                    }))
+                : []
+            }
+            label={translate("add_note_dropdown.all_notes")}
+          />
+          <SelectField
+            handleChange={(value) => hanldeMailStatus(value)}
+            value=""
+            dropDownIconClassName=""
+            options={[
+              {
+                label: `${translate("email_status.Pending")}`,
+                value: `${staticEnums.EmailStatus.Pending}`,
+              },
+              {
+                label: `${translate("email_status.Sent")}`,
+                value: `${staticEnums.EmailStatus.Sent}`,
+              },
+              {
+                label: `${translate("email_status.Post")}`,
+                value: `${staticEnums.EmailStatus.Post}`,
+              },
+              {
+                label: `${translate("email_status.Failed")}`,
+                value: `${staticEnums.EmailStatus.Failed}`,
+              },
+            ]}
+            label={translate("offers.card_content.email_status")}
+            containerClassName="w-[160px]"
+            labelClassName="w-[160px]"
+          />
+          {/* </div> */}
           <ContractFilter
             filter={filter}
             setFilter={setFilter}
