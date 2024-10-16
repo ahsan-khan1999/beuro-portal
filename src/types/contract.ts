@@ -145,9 +145,7 @@ export interface Task {
     country: string;
   };
   type: string;
-  contractID: {
-    id: string;
-  };
+  contractID: string;
 }
 
 export interface TaskWithSelectedDates extends Task {

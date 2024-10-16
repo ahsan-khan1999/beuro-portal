@@ -61,7 +61,7 @@ const useContract = () => {
     const sortedValue = router.query?.sort as string;
     const searchDate = router.query?.date as string;
     const searchLeadSource = router.query?.leadSource;
-    const searchEmailStatus = router.query?.emailStatus;
+    const searchEmailStatus = router.query?.emailStatus as string;
     const searchNoteType = router.query?.noteType as string;
     const queryTask = router.query?.isTaskCreated as unknown as boolean;
 
@@ -95,7 +95,7 @@ const useContract = () => {
           $lte?: string;
         };
         leadSource?: string | string[];
-        emailStatus?: string | string[];
+        emailStatus?: string;
       } = {
         status: filteredStatus,
       };

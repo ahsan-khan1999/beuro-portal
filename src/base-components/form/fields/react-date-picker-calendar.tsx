@@ -1,8 +1,13 @@
+import { useAppSelector } from "@/hooks/useRedux";
 import { CalendarDatePickerProps } from "@/types";
 import moment from "moment";
-import { useState, useEffect, forwardRef, useRef } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { enUS, de, fr, es } from "date-fns/locale";
+import { Locale as DateFnsLocale } from "date-fns";
+
+type SupportedLocales = "en" | "de" | "fr" | "es";
 
 export const ReactCalendarDatePickerField = ({
   id,
@@ -14,7 +19,10 @@ export const ReactCalendarDatePickerField = ({
   setValue,
   watch,
   onDateChange,
+  placeholder,
 }: CalendarDatePickerProps) => {
+  const { currentLanguage } = useAppSelector((state) => state.global);
+
   const [formattedDate, setFormattedDate] = useState(
     value
       ? moment(value).format(
@@ -72,7 +80,7 @@ export const ReactCalendarDatePickerField = ({
           <span className="text-xs text-[#7A7A7A] font-medium cursor-pointer">
             {formattedDate
               ? moment(formattedDate).format("ddd, MMM D")
-              : `${translate("calendar.select_date")}`}
+              : `${placeholder}`}
           </span>
           {dateType === "datetime-local" && (
             <span className="text-sm font-medium text-[#3C3C3C] cursor-pointer">
@@ -83,6 +91,22 @@ export const ReactCalendarDatePickerField = ({
       </div>
     )
   );
+
+  const popperClassName =
+    dateType === "datetime-local"
+      ? formattedDate
+        ? "datetime-local-popper-with-value"
+        : "datetime-local-popper"
+      : "date-popper";
+
+  const locales: Record<SupportedLocales, DateFnsLocale> = {
+    en: enUS,
+    de: de,
+    fr: fr,
+    es: es,
+  };
+
+  const datePickerLocale = locales[currentLanguage as SupportedLocales] || enUS;
 
   return (
     <DatePicker
@@ -97,9 +121,8 @@ export const ReactCalendarDatePickerField = ({
       disabled={disable}
       customInput={<CustomInput value={formattedDate} />}
       popperPlacement="bottom-start"
-      popperClassName={
-        dateType === "datetime-local" ? "datetime-local-popper" : "date-popper"
-      }
+      popperClassName={popperClassName}
+      locale={datePickerLocale as any}
     />
   );
 };

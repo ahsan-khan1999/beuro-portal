@@ -50,6 +50,9 @@ export const CalendarFilters = ({
       value={inputValue}
       iconDisplay={true}
       onEnterPress={onEnterPress}
+      textClassName="w-full rounded-full xMini:rounded-lg"
+      containerClassName="w-full"
+      inputDivClassName="w-full"
     />
   );
 };

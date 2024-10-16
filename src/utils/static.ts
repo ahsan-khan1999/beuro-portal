@@ -1597,9 +1597,7 @@ export const DEFAULT_CONTRACT_TASK: Task = {
     country: "",
   },
   type: "",
-  contractID: {
-    id: "",
-  },
+  contractID: "",
 };
 
 export const DEFAULT_INVOICE = {

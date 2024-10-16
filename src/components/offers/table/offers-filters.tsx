@@ -11,6 +11,7 @@ import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppSelector } from "@/hooks/useRedux";
+import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 
 export default function OffersFilters({
   filter,
@@ -170,8 +171,28 @@ export default function OffersFilters({
     setInputValue(textValue || "");
   }, [router.query.text]);
 
+  const hanldeMailStatus = (value: string) => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          emailStatus: value,
+        },
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["emailStatus"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
   return (
-    <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
+    <div className="flex flex-col maxLargePro:flex-row maxLargePro:items-center w-full xl:w-fit gap-4 z-10">
       <div className="flex gap-[14px]">
         {checkbox?.map((item, idx) => (
           <CheckField
@@ -188,16 +209,15 @@ export default function OffersFilters({
         ))}
       </div>
       <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
-        <InputField
-          handleChange={handleInputChange}
-          ref={inputRef}
-          value={inputValue}
-          iconDisplay={true}
-          onEnterPress={onEnterPress}
-          textClassName="w-[177px]"
-        />
-
-        <div className="flex items-center gap-x-3 z-20">
+        <div className="flex items-center gap-x-4">
+          <InputField
+            handleChange={handleInputChange}
+            ref={inputRef}
+            value={inputValue}
+            iconDisplay={true}
+            onEnterPress={onEnterPress}
+            textClassName="w-[177px]"
+          />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
             value=""
@@ -223,9 +243,6 @@ export default function OffersFilters({
             label={translate("common.sort_button")}
             containerClassName="min-w-fit"
           />
-          <span className="text-[#4B4B4B] font-semibold text-base">
-            {translate("global_search.notes")}
-          </span>
           <SelectField
             handleChange={(value) => hanldeNoteType(value)}
             value=""
@@ -246,7 +263,38 @@ export default function OffersFilters({
             label={translate("add_note_dropdown.all_notes")}
           />
         </div>
-        <div className="flex items-center gap-x-4">
+
+        <div className="flex items-center gap-x-3 z-20">
+          {/* <span className="text-[#4B4B4B] font-semibold text-base">
+            {translate("global_search.notes")}
+          </span> */}
+
+          <SelectField
+            handleChange={(value) => hanldeMailStatus(value)}
+            value=""
+            dropDownIconClassName=""
+            options={[
+              {
+                label: `${translate("email_status.Pending")}`,
+                value: `${staticEnums.EmailStatus.Pending}`,
+              },
+              {
+                label: `${translate("email_status.Sent")}`,
+                value: `${staticEnums.EmailStatus.Sent}`,
+              },
+              {
+                label: `${translate("email_status.Post")}`,
+                value: `${staticEnums.EmailStatus.Post}`,
+              },
+              {
+                label: `${translate("email_status.Failed")}`,
+                value: `${staticEnums.EmailStatus.Failed}`,
+              },
+            ]}
+            label={translate("offers.card_content.email_status")}
+            containerClassName="w-[160px]"
+            labelClassName="w-[160px]"
+          />
           <OfferFilter
             filter={filter}
             setFilter={setFilter}
@@ -263,6 +311,23 @@ export default function OffersFilters({
             iconAlt="add button"
           />
         </div>
+        {/* <div className="flex items-center gap-x-4">
+          <OfferFilter
+            filter={filter}
+            setFilter={setFilter}
+            onFilterChange={handleFilterChange}
+          />
+
+          <Button
+            inputType="button"
+            onClick={() => router.push("/offers/add")}
+            className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+            icon={addIcon}
+            text={translate("offers.add_button")}
+            id="add"
+            iconAlt="add button"
+          />
+        </div> */}
       </div>
     </div>
   );

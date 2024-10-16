@@ -140,26 +140,26 @@ export default function ContractsFilter({
     },
   ];
 
-  const handleEmailFilter = (value: string, isChecked: boolean) => {
-    setMoreFilter((prev: FilterType) => {
-      let updatedStatus = new Set(
-        prev.emailStatus !== FiltersDefaultValues.None ? prev.emailStatus : []
-      );
+  // const handleEmailFilter = (value: string, isChecked: boolean) => {
+  //   setMoreFilter((prev: FilterType) => {
+  //     let updatedStatus = new Set(
+  //       prev.emailStatus !== FiltersDefaultValues.None ? prev.emailStatus : []
+  //     );
 
-      if (isChecked) {
-        updatedStatus.add(value);
-      } else {
-        updatedStatus.delete(value);
-      }
+  //     if (isChecked) {
+  //       updatedStatus.add(value);
+  //     } else {
+  //       updatedStatus.delete(value);
+  //     }
 
-      const emailStatus =
-        updatedStatus.size > 0
-          ? Array.from(updatedStatus)
-          : FiltersDefaultValues.None;
+  //     const emailStatus =
+  //       updatedStatus.size > 0
+  //         ? Array.from(updatedStatus)
+  //         : FiltersDefaultValues.None;
 
-      return { ...prev, emailStatus: emailStatus };
-    });
-  };
+  //     return { ...prev, emailStatus: emailStatus };
+  //   });
+  // };
 
   return (
     <div className="relative flex my-auto z-10" ref={ref}>
@@ -252,7 +252,7 @@ export default function ContractsFilter({
               />
             </div>
 
-            <div className="mt-5 flex flex-col gap-y-3">
+            <div className="mt-5 mb-2 flex flex-col gap-y-3">
               <div className="flex justify-between items-center">
                 <label htmlFor="type" className="font-medium text-base">
                   {translate("filters.extra_filters.leadSource")}
@@ -284,7 +284,7 @@ export default function ContractsFilter({
                 ))}
               </div>
             </div>
-            <div className="mt-5 mb-2 flex flex-col gap-y-3">
+            {/* <div className="mt-5 mb-2 flex flex-col gap-y-3">
               <div className="flex justify-between">
                 <label htmlFor="type" className="font-medium text-base">
                   {translate("agent.report_contact_fields.email")}
@@ -312,7 +312,7 @@ export default function ContractsFilter({
                   />
                 ))}
               </div>
-            </div>
+            </div> */}
 
             <BaseButton
               buttonText={translate("common.apply_button")}

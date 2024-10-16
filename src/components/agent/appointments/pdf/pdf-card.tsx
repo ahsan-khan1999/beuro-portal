@@ -6,6 +6,7 @@ import { Report } from "@/types/appointments";
 import { formatDateTimeToDate } from "@/utils/utility";
 import { PrintIcon } from "@/assets/svgs/components/print-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
+import { useAppSelector } from "@/hooks/useRedux";
 
 export interface AppointmentsDetailCardProps {
   appointmentDetails: Report;
@@ -20,6 +21,7 @@ export const AppointmentPdfCard = ({
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const { user } = useAppSelector((state) => state.auth);
 
   const handleBack = () => {
     if (router.query.isCompany) {
@@ -120,14 +122,14 @@ export const AppointmentPdfCard = ({
                 {formatDateTimeToDate(appointmentDetails?.appointmentID?.date)}
               </span>
             </div>
-            {/* <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
+            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[100px] w-fit">
                 {translate("appointments.detail_data.created_by")}:
               </span>
               <span className="text-base text-[#5C5C5C] font-nomal">
-                {appointmentDetails?.appointmentID?.agent?.fullName}
+                {user?.fullName}
               </span>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

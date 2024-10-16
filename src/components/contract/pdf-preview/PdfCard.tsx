@@ -27,7 +27,8 @@ const PdfCard = ({
   const { contractDetails } = useAppSelector((state) => state.contract);
 
   const handleBackToDetail = () => {
-    const { status, page, text, sort, date, leadSource } = router.query;
+    const { status, page, text, sort, date, emailStatus, leadSource } =
+      router.query;
 
     const queryParams = Object.entries({
       status,
@@ -35,6 +36,7 @@ const PdfCard = ({
       text,
       sort,
       date,
+      emailStatus,
       leadSource,
     }).reduce((acc, [key, value]) => {
       if (value) {
