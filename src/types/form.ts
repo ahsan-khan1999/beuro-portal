@@ -396,6 +396,7 @@ export interface CalendarDatePickerProps
   min?: string;
   max?: string;
   disable?: boolean;
+  placeholder?: string;
   onDateChange?: (name: string, value: string) => void;
 }
 

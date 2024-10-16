@@ -132,12 +132,10 @@ export const useReportUpdatedPdf = () => {
 
           let formatData: PdfProps<ContractEmailHeaderProps> = {
             id: reportDetails?.id,
-            //
             headerDetails: {
               offerNo: reportDetails?.appointmentID?.leadID?.refID,
-              // companyName: reportDetails?.createdBy?.company?.companyName,
               offerDate: reportDetails?.createdAt,
-              createdBy: reportDetails?.appointmentID?.agent?.fullName,
+              createdBy: reportDetails?.appointmentID?.createdBy?.fullName,
               logo: emailTemplate?.payload?.logo,
               emailTemplateSettings: emailTemplate?.payload,
               isReverseLogo: template.payload.Template?.order,
@@ -147,7 +145,6 @@ export const useReportUpdatedPdf = () => {
               address: {
                 name: reportDetails?.appointmentID?.leadID?.customerDetail
                   ?.fullName,
-                // companyName: reportDetails?.appointmentID?.leadID?.customerDetail?.companyName,
                 city: reportDetails?.appointmentID?.leadID?.customerDetail
                   ?.address?.country,
                 postalCode:

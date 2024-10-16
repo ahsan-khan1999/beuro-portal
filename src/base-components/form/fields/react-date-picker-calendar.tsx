@@ -14,6 +14,7 @@ export const ReactCalendarDatePickerField = ({
   setValue,
   watch,
   onDateChange,
+  placeholder,
 }: CalendarDatePickerProps) => {
   const [formattedDate, setFormattedDate] = useState(
     value
@@ -72,7 +73,7 @@ export const ReactCalendarDatePickerField = ({
           <span className="text-xs text-[#7A7A7A] font-medium cursor-pointer">
             {formattedDate
               ? moment(formattedDate).format("ddd, MMM D")
-              : `${translate("calendar.select_date")}`}
+              : `${placeholder}`}
           </span>
           {dateType === "datetime-local" && (
             <span className="text-sm font-medium text-[#3C3C3C] cursor-pointer">
