@@ -756,11 +756,37 @@ input[type="date"] {
 
 .datetime-local-popper {
   transform: none !important;
-  top: 70px !important;
+  top: 60px !important;
+  z-index: 9999 !important;
+}
+
+.datetime-local-popper-with-value {
+  transform: none !important;
+  top: 80px !important;
 }
 
 .date-popper {
   left: 50% !important;
   transform: translateX(-50%) !important;
-  top: 70px !important;
+  top: 65px !important;
+}
+
+.react-datepicker__header {
+  background-color: #4a13e7 !important;
+}
+.react-datepicker__triangle {
+  border-bottom-color: #4a13e7 !important;
+  box-shadow: none !important;
+}
+
+.react-datepicker__triangle {
+  fill: #4a13e7 !important;
+  color: #4a13e7 !important;
+  stroke: #4a13e7 !important;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__current-month,
+.react-datepicker-time__header {
+  color: #fff !important;
 }
