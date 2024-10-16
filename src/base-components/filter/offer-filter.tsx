@@ -50,7 +50,7 @@ export default function OfferFilter({
           ...(moreFilter?.leadSource && {
             leadSource: moreFilter?.leadSource,
           }),
-          emailStatus: moreFilter?.emailStatus,
+          // emailStatus: moreFilter?.emailStatus,
         },
       },
       undefined,
@@ -62,7 +62,7 @@ export default function OfferFilter({
         ...prev,
         date: { $gte: moreFilter.date?.$gte, $lte: moreFilter.date?.$lte },
         leadSource: moreFilter?.leadSource,
-        emailStatus: moreFilter?.emailStatus,
+        // emailStatus: moreFilter?.emailStatus,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -123,26 +123,26 @@ export default function OfferFilter({
     },
   ];
 
-  const handleEmailFilter = (value: string, isChecked: boolean) => {
-    setMoreFilter((prev: FilterType) => {
-      let updatedStatus = new Set(
-        prev.emailStatus !== FiltersDefaultValues.None ? prev.emailStatus : []
-      );
+  // const handleEmailFilter = (value: string, isChecked: boolean) => {
+  //   setMoreFilter((prev: FilterType) => {
+  //     let updatedStatus = new Set(
+  //       prev.emailStatus !== FiltersDefaultValues.None ? prev.emailStatus : []
+  //     );
 
-      if (isChecked) {
-        updatedStatus.add(value);
-      } else {
-        updatedStatus.delete(value);
-      }
+  //     if (isChecked) {
+  //       updatedStatus.add(value);
+  //     } else {
+  //       updatedStatus.delete(value);
+  //     }
 
-      const emailStatus =
-        updatedStatus.size > 0
-          ? Array.from(updatedStatus)
-          : FiltersDefaultValues.None;
+  //     const emailStatus =
+  //       updatedStatus.size > 0
+  //         ? Array.from(updatedStatus)
+  //         : FiltersDefaultValues.None;
 
-      return { ...prev, emailStatus: emailStatus };
-    });
-  };
+  //     return { ...prev, emailStatus: emailStatus };
+  //   });
+  // };
 
   return (
     <div className="relative flex my-auto z-10" ref={ref}>
@@ -322,7 +322,7 @@ export default function OfferFilter({
               </div> */}
             </div>
 
-            <div className="mt-5 flex flex-col gap-y-3">
+            <div className="mt-5 mb-2 flex flex-col gap-y-3">
               <div className="flex justify-between items-center">
                 <label htmlFor="type" className="font-medium text-base">
                   {translate("filters.extra_filters.leadSource")}
@@ -353,7 +353,7 @@ export default function OfferFilter({
                 ))}
               </div>
             </div>
-            <div className="mt-5 mb-2 flex flex-col gap-y-3">
+            {/* <div className="mt-5 mb-2 flex flex-col gap-y-3">
               <div className="flex justify-between">
                 <label htmlFor="type" className="font-medium text-base">
                   {translate("agent.report_contact_fields.email")}
@@ -381,7 +381,7 @@ export default function OfferFilter({
                   />
                 ))}
               </div>
-            </div>
+            </div> */}
 
             <BaseButton
               buttonText={translate("common.apply_button")}

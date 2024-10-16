@@ -60,7 +60,7 @@ const useOffers = () => {
     const sortedValue = query?.sort as string;
     const searchDate = query?.date as string;
     const searchLeadSource = query?.leadSource;
-    const searchEmailStatus = query?.emailStatus;
+    const searchEmailStatus = query?.emailStatus as string;
     const searchNoteType = query?.noteType as string;
 
     const queryParams =
@@ -91,7 +91,7 @@ const useOffers = () => {
           $lte?: string;
         };
         leadSource?: string | string[];
-        emailStatus?: string | string[];
+        emailStatus?: string;
       } = {
         status: filteredStatus,
       };

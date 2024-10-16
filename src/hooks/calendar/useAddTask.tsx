@@ -208,8 +208,8 @@ export default function useAddTask({
         staticEnums["TaskType"]["Task"],
     };
 
-    if (taskDetail?.contractID?.id) {
-      formattedData.contractID = taskDetail?.contractID?.id;
+    if (taskDetail?.contractID) {
+      formattedData.contractID = taskDetail?.contractID;
     }
 
     if (isRemainder) {

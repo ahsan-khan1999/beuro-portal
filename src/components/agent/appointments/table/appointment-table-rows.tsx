@@ -188,15 +188,12 @@ export const AppointmentTableRows = ({
                   <span className="py-4 truncate">
                     {item.leadID?.customerDetail?.fullName}
                   </span>
-
                   <span className="py-4 truncate mlg:hidden maxSize:block">
                     {item?.createdBy?.company?.companyName}
                   </span>
-
                   <span className="py-4 mlg:hidden xMaxSize:block">
                     {viewConvertUTCToLocalDate(item.startTime)}
                   </span>
-
                   <div className="py-4 flex items-center mlg:hidden xLarge:block">
                     <span className="text-sm text-[#191D23] font-semibold">
                       {localStartTime}
@@ -250,7 +247,7 @@ export const AppointmentTableRows = ({
                     <div
                       className={`${
                         item?.leadID?.isOfferCreated === true
-                          ? "bg-primary"
+                          ? "bg-[#45C769]"
                           : "bg-[#FB9600]"
                       }
                   } text-white px-2 py-2 text-center rounded-md min-w-[70px] w-full text-sm`}
@@ -398,7 +395,7 @@ export const AppointmentTableRows = ({
                     <OutlineButton
                       inputType="button"
                       onClick={handlePdfPreview}
-                      className="bg-white text-primary w-full border border-primary py-[5px] !h-fit"
+                      className="bg-white text-[#45C769] w-full border border-[#45C769] hover:border-buttonHover py-[5px] !h-fit"
                       text={translate("appointments.view_reports_btn")}
                       id="view reports"
                       iconAlt="view reports"

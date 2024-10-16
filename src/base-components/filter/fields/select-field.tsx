@@ -62,26 +62,44 @@ export default function SelectField({
   useEffect(() => {
     const querySort = router.query.sort as string;
     const queryNoteType = router.query.noteType as string;
+    const queryEmailStatus = router.query.emailStatus as string;
 
     const selectedSortOption = options.find(
       (option) => option.value === querySort
     );
+
     const selectedNoteTypeOption = options.find(
       (option) => option.value === queryNoteType
     );
 
-    if (selectedSortOption && selectedNoteTypeOption) {
+    const selectedEmailStatusOption = options.find(
+      (option) => option.value === queryEmailStatus
+    );
+
+    if (
+      selectedSortOption &&
+      selectedNoteTypeOption &&
+      selectedEmailStatusOption
+    ) {
       setSelectedLabel(
-        `${selectedSortOption.label}, ${selectedNoteTypeOption.label}`
+        `${selectedSortOption.label}, ${selectedNoteTypeOption.label}, ${selectedEmailStatusOption.label}`
       );
     } else if (selectedSortOption) {
       setSelectedLabel(selectedSortOption.label);
     } else if (selectedNoteTypeOption) {
       setSelectedLabel(selectedNoteTypeOption.label);
+    } else if (selectedEmailStatusOption) {
+      setSelectedLabel(selectedEmailStatusOption.label);
     } else {
       setSelectedLabel(label || "");
     }
-  }, [router.query.sort, router.query.noteType, label, options]);
+  }, [
+    router.query.sort,
+    router.query.noteType,
+    router.query.emailStatus,
+    label,
+    options,
+  ]);
 
   return (
     <div className={containerClasses} ref={ref}>
