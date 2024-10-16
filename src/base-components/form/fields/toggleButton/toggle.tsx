@@ -23,7 +23,7 @@ export const ToggleButton = ({
   return (
     <input
       {...register(name)}
-      className={combineClass}
+      className={`${combineClass} z-0`}
       type="checkbox"
       role="switch"
       id={id}
