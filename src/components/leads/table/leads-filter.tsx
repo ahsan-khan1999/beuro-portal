@@ -273,9 +273,9 @@ export default function LeadsFilter({
 
           {!isAgent && (
             <div className="flex items-center gap-x-3 z-10">
-              <span className="text-[#4B4B4B] font-semibold text-base">
+              {/* <span className="text-[#4B4B4B] font-semibold text-base">
                 {translate("global_search.notes")}
-              </span>
+              </span> */}
               <SelectField
                 handleChange={(value) => hanldeNoteType(value)}
                 value=""
