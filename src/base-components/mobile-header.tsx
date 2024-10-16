@@ -36,7 +36,7 @@ export const MobileHeader = ({ handleDrawer }: MobileHeaderProps) => {
       <Image
         src={user?.employee?.picture || userIcon}
         alt="User Icon"
-        className="mr-3 rounded-full"
+        className="mr-3 rounded-full w-[44px] h-[44px]"
         width={44}
         height={44}
       />
