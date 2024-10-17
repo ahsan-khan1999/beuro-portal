@@ -16,7 +16,7 @@ interface EmployeeState {
 
 const initialState: EmployeeState = {
   employee: [],
-  loading: false,
+  loading: true,
   isLoading: true,
   error: {},
   lastPage: 1,

@@ -11,6 +11,7 @@ import OfferEditImages from "@/components/offers/OfferEditImages";
 import { ContractAditionalEditDetails } from "../edit/editAdditionalDetails";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { staticEnums } from "@/utils/static";
+import OfferTabs from "@/base-components/ui/tab/OfferTabs";
 
 export enum ComponentsType {
   customer,
@@ -182,15 +183,17 @@ const ContractDetailsData = ({
       <div className="2xl:fixed mb-5">
         <div className="flex flex-row flex-wrap 2xl:flex-col 2xl:flex-nowrap gap-[14px] mb-5 mt-5 2xl:mt-0 2xl:mb-0">
           {tabSection?.map((item, index) => (
-            <DetailsTab
+            <OfferTabs
               isSelected={tabType === index}
+              isToggle={true}
               setTabType={setTabType}
               tabType={tabType}
               name={item.name}
+              index={index + 1}
               icon={item.icon}
               selectedTab={index}
-              onItemSelected={handleScrollToTop}
               key={index}
+              onItemSelected={handleScrollToTop}
             />
           ))}
         </div>
@@ -205,14 +208,14 @@ const ContractDetailsData = ({
             name={name}
             heading={heading}
             handleImageSlider={handleImageSlider}
-            className="2xl:w-[247px]"
+            // className="2xl:w-[247px]"
             isOffer={true}
           />
         </div>
       </div>
 
       <div className="overflow-y-auto w-full break-all flex">
-        <div className="max-w-[280px] w-full hidden 2xl:block"></div>
+        <div className="max-w-[320px] w-full hidden 2xl:block"></div>
         {loading ? (
           <div className="flex justify-center items-center w-full">
             <CustomLoader />
