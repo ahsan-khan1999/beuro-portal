@@ -487,9 +487,7 @@ export const IsContractTaskCreated = ({
         setContractTaskDetails({
           id: "convert",
           colour: "#5CDD42",
-          contractID: {
-            id: contractDetails?.id,
-          },
+          contractID: contractDetails?.id,
           date: updatedDates,
           title:
             (contractDetails?.title || "") +

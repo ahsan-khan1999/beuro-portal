@@ -17,11 +17,9 @@ export default function Appointments() {
     filter,
     setFilter,
     handleFilterChange,
-    loading,
     isLoading,
     currentPage,
     currentPageRows,
-    handleAppointmentCreate,
     handleStatusUpdate,
     totalCount,
     handleScheduleAppointments,
@@ -37,7 +35,7 @@ export default function Appointments() {
       handleNotes={handleNotes}
       handleImageUpload={handleImageUpload}
     />,
-    currentPageRows.length > 0,
+    totalCount !== 0,
     isLoading
   );
 
