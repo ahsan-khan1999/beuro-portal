@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../useRedux";
 import { LeadsCustomerDetailsFormField } from "@/components/leads/fields/Leads-customer-details-fields";
 import { generateLeadsCustomerEditDetailsValidation } from "@/validation/leadsSchema";
 import { ComponentsType } from "@/components/leads/details/LeadsDetailsData";
-import { useMemo } from "react";
+import { useEffect } from "react";
 import { createLead } from "@/api/slices/lead/leadSlice";
 import { staticEnums } from "@/utils/static";
 import { getKeyByValue } from "@/utils/auth.util";
@@ -36,7 +36,8 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
   });
 
   const customerType = watch("customerType");
-  useMemo(() => {
+
+  useEffect(() => {
     if (leadDetails.id) {
       reset({
         fullName: leadDetails.customerDetail?.fullName,
@@ -65,6 +66,7 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
     customerType,
     setValue
   );
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const apiData = {
       ...data,
@@ -78,6 +80,7 @@ export const useLeadCustomerEditDetails = (onClick: Function) => {
     );
     if (res?.payload) onClick(0, ComponentsType.customer);
   };
+
   return {
     fields,
     onSubmit,
