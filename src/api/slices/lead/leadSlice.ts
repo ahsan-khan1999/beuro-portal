@@ -28,7 +28,7 @@ const initialState: LeadState = {
   totalCount: 10,
   //@ts-expect-error
   leadDetails: DEFAULT_LEAD,
-  loadingDetails: false,
+  loadingDetails: true,
 };
 
 export const readLead: AsyncThunk<boolean, object, object> | any =
