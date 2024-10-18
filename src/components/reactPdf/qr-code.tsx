@@ -1,8 +1,6 @@
 import { qrCode } from "@/types";
-import { QRCodeProps } from "@/types/pdf";
 import { Text, View, Image, StyleSheet } from "@react-pdf/renderer";
 
-// Define your styles
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
@@ -86,6 +84,7 @@ const styles = StyleSheet.create({
     fontStyle: "medium",
   },
 });
+
 export const QRCode = ({ acknowledgementSlip, payableTo }: Partial<qrCode>) => {
   return (
     <View style={styles.container}>
