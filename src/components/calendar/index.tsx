@@ -26,7 +26,7 @@ import {
 import { useAppSelector } from "@/hooks/useRedux";
 
 const Moment = extendMoment(moment as any);
-type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth";
+type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth" | "dayGridWeek";
 
 type EventType = {
   start: string;
@@ -51,7 +51,6 @@ const prepareEvents = (rawEvents: EventType[]): EventType[] => {
         originalEnd: event.end,
       };
 
-      // Fix: Add one day to endDate for multi-day all-day events
       event.end = moment(event.end).add(1, "days").format("YYYY-MM-DD");
     } else {
       event.allDay = !hasTime(startDate);
@@ -60,7 +59,6 @@ const prepareEvents = (rawEvents: EventType[]): EventType[] => {
     return event;
   });
 };
-
 
 export const Calendar = () => {
   const router = useRouter();
@@ -93,15 +91,13 @@ export const Calendar = () => {
 
   const updateDateDisplay = (date: Date, viewType: ViewType) => {
     let formattedDate = "";
-
     if (viewType === "timeGridDay") {
       const currentDate = calendarDayDateFormat(
         date.toString(),
         router.locale as string
       );
-
       formattedDate = currentDate;
-    } else if (viewType === "timeGridWeek") {
+    } else if (viewType === "timeGridWeek" || viewType === "dayGridWeek") {
       const range = Moment.range(
         moment(date).startOf("week"),
         moment(date).endOf("week")
@@ -118,14 +114,34 @@ export const Calendar = () => {
     setCurrentDate(formattedDate);
   };
 
-  const switchView = (viewType: any) => {
+  const switchView = (viewType: ViewType) => {
     if (calendarRef.current) {
       const calendarApi: CalendarApi = calendarRef.current.getApi();
-      calendarApi.changeView(viewType);
+
+      if (viewType === "timeGridWeek" && isSmallScreen) {
+        calendarApi.changeView("dayGridWeek" as any);
+      } else {
+        calendarApi.changeView(viewType);
+      }
+
       setSelectedTab(viewType);
       updateDateDisplay(calendarApi.getDate(), viewType);
     }
   };
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      const calendarApi: CalendarApi = calendarRef.current.getApi();
+
+      if (selectedTab === "timeGridWeek") {
+        if (isSmallScreen) {
+          calendarApi.changeView("dayGridWeek");
+        } else {
+          calendarApi.changeView("timeGridWeek");
+        }
+      }
+    }
+  }, [isSmallScreen, selectedTab]);
 
   useEffect(() => {
     if (calendarRef.current) {
@@ -220,7 +236,7 @@ export const Calendar = () => {
                   heading={tab.label}
                   isSelected={selectedTab === tab.view}
                   selectedTab={index}
-                  setTabType={() => switchView(tab.view)}
+                  setTabType={() => switchView(tab.view as ViewType)}
                 />
               ))}
             </div>
@@ -240,7 +256,7 @@ export const Calendar = () => {
                 heading={tab.label}
                 isSelected={selectedTab === tab.view}
                 selectedTab={index}
-                setTabType={() => switchView(tab.view)}
+                setTabType={() => switchView(tab.view as ViewType)}
               />
             ))}
           </div>
@@ -251,7 +267,7 @@ export const Calendar = () => {
         locale={currentLanguage}
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView={isSmallScreen ? "dayGridMonth" : "timeGridDay"}
+        initialView={selectedTab}
         events={events}
         slotEventOverlap={false}
         headerToolbar={false}
@@ -315,8 +331,11 @@ export const Calendar = () => {
           timeGridDay: {
             dayMaxEvents: getDayMaxEvents(),
           },
+          dayGridWeek: {
+            dayMaxEvents: 12,
+          },
           timeGridWeek: {
-            dayMaxEvents: isSmallScreen ? 2 : 4,
+            dayMaxEvents: 4,
           },
           dayGridMonth: {
             dayMaxEvents: isSmallScreen ? 2 : 5,
@@ -389,6 +408,21 @@ export const Calendar = () => {
                 fixedHeight={fixedHeight}
               />
             );
+          } else if (viewType === "dayGridWeek") {
+            return (
+              <>
+                <DayView
+                  time={formattedTime}
+                  title={eventInfo.event.title}
+                  backrgoundColour={eventInfo.event.backgroundColor}
+                  borderColour={eventInfo.event.borderColor}
+                  timeColour={eventInfo.event.textColor}
+                  isMonthView={true}
+                  showOnlyTitle={showOnlyTitle}
+                  fixedHeight={fixedHeight}
+                />
+              </>
+            );
           } else {
             return null;
           }
@@ -412,7 +446,11 @@ export const Calendar = () => {
             info.el.style.boxShadow = "none";
           }
 
-          if (viewType === "dayGridMonth" || viewType === "timeGridWeek") {
+          if (
+            viewType === "dayGridMonth" ||
+            viewType === "timeGridWeek" ||
+            viewType === "dayGridWeek"
+          ) {
             info.el.style.width = "auto";
             info.el.style.display = "block";
           }
