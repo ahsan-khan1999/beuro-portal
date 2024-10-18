@@ -166,27 +166,31 @@
   }
 
   .fc-timeGridWeek-view .fc-daygrid-day-events {
-    display: none;
+    display: none !important;
   }
 
   .fc .fc-timegrid-axis-cushion {
     max-width: 80px !important;
-    padding: 0 10px;
+    padding: 0 10px !important;
     font-size: 12px !important;
   }
 
   .fc .fc-timeGridWeek-view .fc-timegrid-axis-cushion {
-    display: none;
+    display: none !important;
   }
 
-  .fc .fc-timeGridWeek-view .fc-timegrid-axis,
+  /* .fc .fc-timeGridWeek-view .fc-timegrid-axis,
   .fc-timeGridWeek-view .fc-timegrid-slot-label-frame {
-    display: none;
-  }
+    display: none !important;
+  } */
 
   .ck .ck-toolbar__separator,
   .ck-heading-dropdown {
     display: none !important;
+  }
+
+  .fc .fc-daygrid-more-link {
+    font-size: 8px !important;
   }
 }
 
