@@ -25,8 +25,16 @@ const EmailCard = ({
   const { t: translate } = useTranslation();
 
   const handleBackToDetail = () => {
-    const { status, page, text, sort, date, leadSource, emailStatus } =
-      router.query;
+    const {
+      status,
+      page,
+      text,
+      sort,
+      date,
+      leadSource,
+      emailStatus,
+      noteType,
+    } = router.query;
 
     const queryParams = Object.entries({
       status,
@@ -34,6 +42,7 @@ const EmailCard = ({
       text,
       sort,
       date,
+      noteType,
       emailStatus,
       leadSource,
     }).reduce((acc, [key, value]) => {
