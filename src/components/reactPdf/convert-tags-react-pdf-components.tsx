@@ -90,19 +90,7 @@ const tagMapping: any = {
   s: (props: any) => <Text style={props.style}>{props.children}</Text>,
   ul: (props: any) => <View style={props.style}>{props.children}</View>,
   ol: (props: any) => <View style={props.style}>{props.children}</View>,
-  li: (props: any) => (
-    // <View
-    //   style={{
-    //     display: "flex",
-    //     flexDirection: "row",
-    //     alignItems: "center",
-    //     rowGap: 0.5,
-    //   }}
-    // >
-    //   <Text>•</Text>
-    <Text style={props.style}>• {props.children}</Text>
-    // </View>
-  ),
+  li: (props: any) => <Text style={props.style}>• {props.children}</Text>,
   div: (props: any) => <View style={props.style}>{props.children}</View>,
   hr: (props: any) => <View style={props.style}>{props.children}</View>,
   nav: (props: any) => <View style={props.style}>{props.children}</View>,
@@ -157,7 +145,6 @@ const valueMaps: any = {
 };
 
 type FontSizeMap = { [key: string]: string };
-
 
 function adjustStyles(cssStyle: string): object {
   const styleObject: any = {};
