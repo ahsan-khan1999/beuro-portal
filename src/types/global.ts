@@ -71,12 +71,12 @@ export interface InputFieldProps {
 }
 
 export interface OptionsFieldProps {
-  value: string;
+  value?: string;
   title?: string;
   label?: string;
   border?: number;
-  handleChange: (value: string, isAgent?: boolean) => void;
-  options: { label: string; value: string }[];
+  handleChange: (value?: string, isAgent?: boolean) => void;
+  options: { label: string; value?: string }[];
   dropDownIconClassName?: string;
   containerClassName?: string;
   dropdownClassName?: string;

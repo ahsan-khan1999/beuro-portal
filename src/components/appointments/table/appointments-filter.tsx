@@ -127,14 +127,19 @@ export default function AppointmentsFilter({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -227,27 +232,35 @@ export default function AppointmentsFilter({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value=""
+            value={
+              Array.isArray(router.query.sort)
+                ? router.query.sort[0]
+                : router.query.sort
+            }
             options={[
               {
-                label: `${translate("filters.sort_by.date")}`,
+                label: "common.sort_button",
+                value: undefined,
+              },
+              {
+                label: "filters.sort_by.date",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.latest")}`,
+                label: "filters.sort_by.latest",
                 value: "-createdAt",
               },
               {
-                label: `${translate("filters.sort_by.oldest")}`,
+                label: "filters.sort_by.oldest",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.a_z")}`,
+                label: "filters.sort_by.a_z",
                 value: "customerDetail.fullName",
               },
             ]}
-            label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
+            containerClassName="w-[120px]"
+            labelClassName="w-[120px]"
           />
           <LeadsFilters
             filter={filter}

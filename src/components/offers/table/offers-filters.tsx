@@ -24,6 +24,12 @@ export default function OffersFilters({
   const { noteSettings } = useAppSelector((state) => state.settings);
   const [inputValue, setInputValue] = useState<string>("");
 
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   const checkbox: CheckBoxType[] = [
     {
       label: translate("offers.table_functions.open"),
@@ -124,14 +130,19 @@ export default function OffersFilters({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -144,15 +155,19 @@ export default function OffersFilters({
     });
   };
 
-  const hanldeNoteType = (value: string) => {
+  const hanldeNoteType = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.noteType;
+    } else {
+      updatedQuery.noteType = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          page: 1,
-          noteType: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -165,20 +180,19 @@ export default function OffersFilters({
     });
   };
 
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
+  const hanldeMailStatus = (value?: string) => {
+    const updatedQuery = { ...router.query };
 
-  const hanldeMailStatus = (value: string) => {
+    if (value === undefined) {
+      delete updatedQuery.emailStatus;
+    } else {
+      updatedQuery.emailStatus = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          emailStatus: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -190,6 +204,10 @@ export default function OffersFilters({
       return updatedFilter;
     });
   };
+
+  const emailStatus = Array.isArray(router.query.emailStatus)
+    ? router.query.emailStatus[0]
+    : router.query.emailStatus;
 
   return (
     <div className="flex flex-col maxLargePro:flex-row maxLargePro:items-center w-full xl:w-fit gap-4 z-10">
@@ -220,28 +238,35 @@ export default function OffersFilters({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value=""
-            dropDownIconClassName=""
+            value={
+              Array.isArray(router.query.sort)
+                ? router.query.sort[0]
+                : router.query.sort
+            }
             options={[
               {
-                label: `${translate("filters.sort_by.date")}`,
+                label: "common.sort_button",
+                value: undefined,
+              },
+              {
+                label: "filters.sort_by.date",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.latest")}`,
+                label: "filters.sort_by.latest",
                 value: "-createdAt",
               },
               {
-                label: `${translate("filters.sort_by.oldest")}`,
+                label: "filters.sort_by.oldest",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.a_z")}`,
+                label: "filters.sort_by.a_z",
                 value: "customerDetail.fullName",
               },
             ]}
-            label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
+            containerClassName="w-[120px]"
+            labelClassName="w-[120px]"
           />
           <SelectField
             handleChange={(value) => hanldeNoteType(value)}
@@ -271,27 +296,29 @@ export default function OffersFilters({
 
           <SelectField
             handleChange={(value) => hanldeMailStatus(value)}
-            value=""
-            dropDownIconClassName=""
+            value={emailStatus}
             options={[
               {
-                label: `${translate("email_status.Pending")}`,
+                label: "offers.card_content.email_status",
+                value: undefined,
+              },
+              {
+                label: "email_status.Pending",
                 value: `${staticEnums.EmailStatus.Pending}`,
               },
               {
-                label: `${translate("email_status.Sent")}`,
+                label: "email_status.Sent",
                 value: `${staticEnums.EmailStatus.Sent}`,
               },
               {
-                label: `${translate("email_status.Post")}`,
+                label: "email_status.Post",
                 value: `${staticEnums.EmailStatus.Post}`,
               },
               {
-                label: `${translate("email_status.Failed")}`,
+                label: "email_status.Failed",
                 value: `${staticEnums.EmailStatus.Failed}`,
               },
             ]}
-            label={translate("offers.card_content.email_status")}
             containerClassName="w-[160px]"
             labelClassName="w-[160px]"
           />

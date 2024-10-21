@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 export default function SelectField({
   label,
@@ -34,9 +34,9 @@ export default function SelectField({
     labelClassName
   );
 
-  const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
+  const { t: translate } = useTranslation();
+  const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -48,56 +48,65 @@ export default function SelectField({
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
 
-  const handleItemSelected = (selectedValue: string, selectedIndex: number) => {
-    options?.forEach(({ label, value }, index) => {
-      if (selectedIndex === index) {
-        setSelectedLabel(label);
-        handleChange(selectedValue);
-      }
-    });
+  const handleItemSelected = (
+    label: string,
+    selectedValue: string | undefined,
+    selectedIndex: number
+  ) => {
+    // options?.forEach(({ label, value }, index) => {
+    //   if (selectedIndex === index) {
+    setSelectedLabel(label);
+    handleChange(selectedValue);
+    //   }
+    // });
   };
 
   useEffect(() => {
-    const querySort = router.query.sort as string;
-    const queryNoteType = router.query.noteType as string;
-    const queryEmailStatus = router.query.emailStatus as string;
+    const newLabel = options.find((item, index) => item?.value === value);
+    setSelectedLabel(newLabel?.label || "");
+  }, [value]);
 
-    const selectedSortOption = options.find(
-      (option) => option.value === querySort
-    );
+  // useEffect(() => {
+  //   const querySort = router.query.sort as string;
+  //   const queryNoteType = router.query.noteType as string;
+  //   const queryEmailStatus = router.query.emailStatus as string;
 
-    const selectedNoteTypeOption = options.find(
-      (option) => option.value === queryNoteType
-    );
+  //   const selectedSortOption = options.find(
+  //     (option) => option.value === querySort
+  //   );
 
-    const selectedEmailStatusOption = options.find(
-      (option) => option.value === queryEmailStatus
-    );
+  //   const selectedNoteTypeOption = options.find(
+  //     (option) => option.value === queryNoteType
+  //   );
 
-    if (
-      selectedSortOption &&
-      selectedNoteTypeOption &&
-      selectedEmailStatusOption
-    ) {
-      setSelectedLabel(
-        `${selectedSortOption.label}, ${selectedNoteTypeOption.label}, ${selectedEmailStatusOption.label}`
-      );
-    } else if (selectedSortOption) {
-      setSelectedLabel(selectedSortOption.label);
-    } else if (selectedNoteTypeOption) {
-      setSelectedLabel(selectedNoteTypeOption.label);
-    } else if (selectedEmailStatusOption) {
-      setSelectedLabel(selectedEmailStatusOption.label);
-    } else {
-      setSelectedLabel(label || "");
-    }
-  }, [
-    router.query.sort,
-    router.query.noteType,
-    router.query.emailStatus,
-    label,
-    options,
-  ]);
+  //   const selectedEmailStatusOption = options.find(
+  //     (option) => option.value === queryEmailStatus
+  //   );
+
+  //   if (
+  //     selectedSortOption &&
+  //     selectedNoteTypeOption &&
+  //     selectedEmailStatusOption
+  //   ) {
+  //     setSelectedLabel(
+  //       `${selectedSortOption.label}, ${selectedNoteTypeOption.label}, ${selectedEmailStatusOption.label}`
+  //     );
+  //   } else if (selectedSortOption) {
+  //     setSelectedLabel(selectedSortOption.label);
+  //   } else if (selectedNoteTypeOption) {
+  //     setSelectedLabel(selectedNoteTypeOption.label);
+  //   } else if (selectedEmailStatusOption) {
+  //     setSelectedLabel(selectedEmailStatusOption.label);
+  //   } else {
+  //     setSelectedLabel(label || "");
+  //   }
+  // }, [
+  //   router.query.sort,
+  //   router.query.noteType,
+  //   router.query.emailStatus,
+  //   label,
+  //   options,
+  // ]);
 
   return (
     <div className={containerClasses} ref={ref}>
@@ -105,7 +114,7 @@ export default function SelectField({
         className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg border border-[#ccc] min-w-[105px] w-fit"
         onClick={handleToggle}
       >
-        <span className={labelDefualtClasses}>{selectedLabel}</span>
+        <span className={labelDefualtClasses}>{translate(selectedLabel)}</span>
         <DropDownNonFillIcon
           label={label}
           isOpen={isOpen}
@@ -155,11 +164,11 @@ export default function SelectField({
                       }`}
                       key={idx}
                       onClick={() => {
-                        handleItemSelected(value, idx);
+                        handleItemSelected(label, value, idx);
                         setIsOpen(false);
                       }}
                     >
-                      <span>{label}</span>
+                      <span>{translate(label)}</span>
                     </div>
                   );
                 })}

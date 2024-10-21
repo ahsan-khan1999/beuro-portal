@@ -22,14 +22,19 @@ export default function CustomerFilter({
     setInputValue(value);
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -85,44 +90,38 @@ export default function CustomerFilter({
         onEnterPress={onEnterPress}
         textClassName="w-[177px]"
       />
-      {/* <div className="flex items-center gap-x-4"> */}
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value={filter.sort || ""}
-        dropDownIconClassName=""
+        value={
+          Array.isArray(router.query.sort)
+            ? router.query.sort[0]
+            : router.query.sort
+        }
         options={[
           {
-            label: `${translate("filters.sort_by.date")}`,
+            label: "common.sort_button",
+            value: undefined,
+          },
+          {
+            label: "filters.sort_by.date",
             value: "createdAt",
           },
           {
-            label: `${translate("filters.sort_by.latest")}`,
+            label: "filters.sort_by.latest",
             value: "-createdAt",
           },
           {
-            label: `${translate("filters.sort_by.oldest")}`,
+            label: "filters.sort_by.oldest",
             value: "createdAt",
           },
-          { label: `${translate("filters.sort_by.a_z")}`, value: "fullName" },
+          {
+            label: "filters.sort_by.a_z",
+            value: "customerDetail.fullName",
+          },
         ]}
-        label={translate("common.sort_button")}
-        containerClassName="min-w-fit"
+        containerClassName="w-[120px]"
+        labelClassName="w-[120px]"
       />
-
-      {/* <CustomerFilters
-        filter={filter}
-        setFilter={setFilter}
-        onFilterChange={handleFilterChange}
-      /> */}
-
-      {/* <Button
-        onClick={() => handleFilterChange(filter)}
-        className="!h-fit py-2 px-[10px] mt-0 flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-        text="Apply"
-        id="apply"
-        inputType="button"
-        name=""
-      /> */}
 
       <Button
         onClick={() => router.push("/customers/add")}
