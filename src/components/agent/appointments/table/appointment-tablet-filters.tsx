@@ -22,6 +22,8 @@ export default function AppointmentsTabletFilters({
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
+  const queryOffer = router.query.isOfferCreated;
+
   useEffect(() => {
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
@@ -147,14 +149,19 @@ export default function AppointmentsTabletFilters({
     });
   };
 
-  const hanldeOfferFilter = (value: boolean) => {
+  const hanldeOfferFilter = (value?: boolean) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.isOfferCreated;
+    } else {
+      updatedQuery.isOfferCreated = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          isOfferCreated: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -190,18 +197,27 @@ export default function AppointmentsTabletFilters({
         </div>
         <BooleanSelectField
           handleChange={(value) => hanldeOfferFilter(value)}
-          value=""
+          value={
+            queryOffer === "true"
+              ? true
+              : queryOffer === "false"
+              ? false
+              : undefined
+          }
           options={[
             {
-              label: `${translate("leads.created")}`,
+              label: "appointments.table_headings.offer_status",
+              value: undefined,
+            },
+            {
+              label: "leads.created",
               value: true,
             },
             {
-              label: `${translate("leads.not_created")}`,
+              label: "leads.not_created",
               value: false,
             },
           ]}
-          label={translate("appointments.table_headings.offer_status")}
           containerClassName="w-[160px]"
           labelClassName="w-[160px]"
         />

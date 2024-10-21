@@ -22,10 +22,12 @@ export default function LeadsFilter({
 }: FiltersComponentProps) {
   const { t: translate } = useTranslation();
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
-  const dispatch = useAppDispatch();
+
+  const queryAppointment = router.query.isAppointmentCreated;
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -177,14 +179,19 @@ export default function LeadsFilter({
     });
   };
 
-  const hanldeAppointmentFilter = (value: boolean) => {
+  const hanldeAppointmentFilter = (value?: boolean) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.isAppointmentCreated;
+    } else {
+      updatedQuery.isAppointmentCreated = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          isAppointmentCreated: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -220,20 +227,29 @@ export default function LeadsFilter({
         <div className="flex items-center gap-x-4 z-20">
           <BooleanSelectField
             handleChange={(value) => hanldeAppointmentFilter(value)}
-            value=""
+            value={
+              queryAppointment === "true"
+                ? true
+                : queryAppointment === "false"
+                ? false
+                : undefined
+            }
             options={[
               {
-                label: `${translate("leads.created")}`,
+                label: "sidebar.customer.appointments.appointment",
+                value: undefined,
+              },
+              {
+                label: "leads.created",
                 value: true,
               },
               {
-                label: `${translate("leads.not_created")}`,
+                label: "leads.not_created",
                 value: false,
               },
             ]}
-            label={translate("leads.lead_dropdown_status.Appointment")}
-            containerClassName="w-[140px]"
-            labelClassName="w-[140px]"
+            containerClassName="w-[160px]"
+            labelClassName="w-[160px]"
           />
           <InputField
             handleChange={handleInputChange}
@@ -269,13 +285,8 @@ export default function LeadsFilter({
           />
         </div>
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-          {/* <div className="flex items-center gap-x-4 z-10"> */}
-
           {!isAgent && (
             <div className="flex items-center gap-x-3 z-10">
-              {/* <span className="text-[#4B4B4B] font-semibold text-base">
-                {translate("global_search.notes")}
-              </span> */}
               <SelectField
                 handleChange={(value) => hanldeNoteType(value)}
                 value=""
@@ -297,7 +308,6 @@ export default function LeadsFilter({
               />
             </div>
           )}
-          {/* </div> */}
           <div className="flex items-center gap-x-4">
             {!isAgent && (
               <LeadsFilters
