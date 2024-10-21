@@ -1312,6 +1312,7 @@
       "invoice_total": "Total",
       "page_sum": "Page Sum"
     },
+    "image_upload_error_message": "Please upload a image file.",
     "doc_upload_error_message": "Please upload a document file.",
     "video_upload_error_message": "Please upload a video file.",
     "svg_upload_not_allowed": "SVG files are not allowed. Please upload a different file format.",

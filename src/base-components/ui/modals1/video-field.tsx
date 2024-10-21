@@ -31,40 +31,7 @@ export const VideoField = ({
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
   const videoTypes = ["video/mp4", "video/avi", "video/mov", "video/wmv"];
-
-  // const handleFileInput = async (
-  //   e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
-  // ) => {
-  //   e.preventDefault();
-
-  //   let file: any = [];
-
-  //   if (e instanceof DragEvent && e.dataTransfer) {
-  //     for (let item of e.dataTransfer.files) {
-  //       formdata.append("files", item);
-  //     }
-
-  //     file.push(e.dataTransfer.files);
-  //   } else if (e.target instanceof HTMLInputElement && e.target.files) {
-  //     for (let item of e.target.files) {
-  //       formdata.append("files", item);
-  //     }
-  //     file.push(e.target.files);
-  //   }
-
-  //   const response = await dispatch(uploadMultiFileToFirebase(formdata));
-
-  //   let newAttachement = (attachements && [...attachements]) || [];
-  //   if (response?.payload) {
-  //     response?.payload?.forEach((element: any) => {
-  //       newAttachement.push({
-  //         name: getFileNameFromUrl(element),
-  //         value: element,
-  //       });
-  //     });
-  //     setAttachements && setAttachements(newAttachement);
-  //   }
-  // };
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
@@ -98,19 +65,39 @@ export const VideoField = ({
       }
     }
 
-    if (file.length > 0) {
-      const response = await dispatch(uploadMultiFileToFirebase(formdata));
-      let newAttachement = (attachements && [...attachements]) || [];
-      if (response?.payload) {
-        response?.payload?.forEach((element: any) => {
-          newAttachement.push({
-            name: getFileNameFromUrl(element),
-            value: element,
+    let progress = 0;
+    const interval = setInterval(() => {
+      setUploadProgress(progress);
+      progress += 10;
+      if (progress > 100) clearInterval(interval);
+    }, 100);
+
+    try {
+      if (file.length > 0) {
+        const response = await dispatch(
+          uploadMultiFileToFirebase({
+            data: formdata,
+            onProgress(percent: number) {},
+          })
+        );
+        let newAttachement = (attachements && [...attachements]) || [];
+        if (response?.payload) {
+          response?.payload?.forEach((element: any) => {
+            newAttachement.push({
+              name: getFileNameFromUrl(element),
+              value: element,
+            });
           });
-        });
-        setAttachements && setAttachements(newAttachement);
+
+          clearInterval(interval);
+          setUploadProgress(null);
+
+          setAttachements && setAttachements(newAttachement);
+        }
+        setErrorMessage("");
       }
-      setErrorMessage("");
+    } catch (error) {
+      console.error("upload failed: ", error);
     }
   };
 
@@ -186,7 +173,22 @@ export const VideoField = ({
           className="hidden"
           onChange={handleFileInput}
           multiple
+          accept="video/*"
         />
+
+        {uploadProgress !== null && (
+          <div className="relative w-full h-5 bg-borderColor rounded-lg mt-1">
+            <div
+              className="absolute top-0 left-0 h-full bg-primary rounded-lg"
+              style={{ width: `${uploadProgress}%` }}
+            />
+
+            <div className="absolute inset-0 flex justify-center items-center text-white">
+              <span>{uploadProgress}%</span>
+            </div>
+          </div>
+        )}
+
         {errorMessage && (
           <p className="text-red text-sm mt-2">{errorMessage}</p>
         )}

@@ -179,7 +179,7 @@ const ImagesUpload = ({
             containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
             textClassName="text-white"
             onClick={onSubmit}
-            loading={loading || loadingGlobal}
+            // loading={loading || loadingGlobal}
             disabled={loadingGlobal}
           />
         </div>

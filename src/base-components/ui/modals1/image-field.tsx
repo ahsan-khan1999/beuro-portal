@@ -8,15 +8,7 @@ import { getFileNameFromUrl } from "@/utils/utility";
 import imgDelete from "@/assets/svgs/img_delete.svg";
 import { Slider } from "../slider/slider";
 
-export const ImageField = ({
-  id,
-  text,
-  fileSupported,
-  isOpenedFile,
-  attachements,
-  setAttachements,
-  isAttachement,
-}: {
+export interface ImageUploadFieldProps {
   id: string;
   text?: string;
   fileSupported?: string;
@@ -24,13 +16,29 @@ export const ImageField = ({
   attachements: Attachement[];
   setAttachements?: (attachement?: Attachement[]) => void;
   isAttachement?: boolean;
-}) => {
+}
+
+export const ImageField = ({
+  id,
+  text,
+  fileSupported,
+  isOpenedFile,
+  attachements,
+  setAttachements,
+}: ImageUploadFieldProps) => {
   const [isZoomed, setIsZoomed] = useState({
     zoomed: false,
     currentImage: "",
     sliderImageData: [],
     currentIndex: 0,
   });
+
+  const router = useRouter();
+  const formdata = new FormData();
+  const dispatch = useAppDispatch();
+  const [errorMessage, setErrorMessage] = useState("");
+  const imageTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"];
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   const toggleZoom = (image: string, index: number) => {
     const imageList = [
@@ -45,10 +53,6 @@ export const ImageField = ({
     });
   };
 
-  const router = useRouter();
-  const formdata = new FormData();
-  const dispatch = useAppDispatch();
-
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
@@ -56,30 +60,64 @@ export const ImageField = ({
 
     let file: any = [];
 
+    const checkFileType = (file: File) => {
+      return imageTypes.includes(file.type);
+    };
+
     if (e instanceof DragEvent && e.dataTransfer) {
       for (let item of e.dataTransfer.files) {
-        formdata.append("files", item);
+        if (checkFileType(item)) {
+          formdata.append("files", item);
+          file.push(item);
+        } else {
+          setErrorMessage(translate("common.image_upload_error_message"));
+        }
       }
 
-      file.push(e.dataTransfer.files);
+      // file.push(e.dataTransfer.files);
     } else if (e.target instanceof HTMLInputElement && e.target.files) {
       for (let item of e.target.files) {
-        formdata.append("files", item);
+        if (checkFileType(item)) {
+          formdata.append("files", item);
+          file.push(item);
+        } else {
+          setErrorMessage(translate("common.image_upload_error_message"));
+        }
       }
-      file.push(e.target.files);
+      // file.push(e.target.files);
     }
 
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
+    let progress = 0;
+    const interval = setInterval(() => {
+      setUploadProgress(progress);
+      progress += 10;
+      if (progress > 100) clearInterval(interval);
+    }, 100);
 
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
+    try {
+      const response = await dispatch(
+        uploadMultiFileToFirebase({
+          data: formdata,
+          onProgress(percent: number) {},
+        })
+      );
+
+      let newAttachement = (attachements && [...attachements]) || [];
+      if (response?.payload) {
+        response?.payload?.forEach((element: any) => {
+          newAttachement.push({
+            name: getFileNameFromUrl(element),
+            value: element,
+          });
         });
-      });
-      setAttachements && setAttachements(newAttachement);
+
+        clearInterval(interval);
+        setUploadProgress(null);
+
+        setAttachements && setAttachements(newAttachement);
+      }
+    } catch (error) {
+      console.error("upload failed: ", error);
     }
   };
 
@@ -110,7 +148,6 @@ export const ImageField = ({
     const list = attachements && [...attachements];
     list?.splice(index, 1);
     setAttachements && setAttachements(list);
-    // field.onChange();
   };
 
   const SLIDER_IMAGES_DATA = {
@@ -160,8 +197,26 @@ export const ImageField = ({
           type="file"
           className="hidden"
           onChange={handleFileInput}
+          accept="image/*"
           multiple
         />
+
+        {uploadProgress !== null && (
+          <div className="relative w-full h-5 bg-borderColor rounded-lg mt-1">
+            <div
+              className="absolute top-0 left-0 h-full bg-primary rounded-lg"
+              style={{ width: `${uploadProgress}%` }}
+            />
+
+            <div className="absolute inset-0 flex justify-center items-center text-white">
+              <span>{uploadProgress}%</span>
+            </div>
+          </div>
+        )}
+
+        {errorMessage && (
+          <p className="text-red text-sm mt-2">{errorMessage}</p>
+        )}
       </label>
 
       <div className="col-span-2 mt-5">
