@@ -38,6 +38,7 @@ export const ImageField = ({
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
   const imageTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"];
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   const toggleZoom = (image: string, index: number) => {
     const imageList = [
@@ -86,17 +87,37 @@ export const ImageField = ({
       // file.push(e.target.files);
     }
 
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
+    let progress = 0;
+    const interval = setInterval(() => {
+      setUploadProgress(progress);
+      progress += 10;
+      if (progress > 100) clearInterval(interval);
+    }, 100);
 
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
+    try {
+      const response = await dispatch(
+        uploadMultiFileToFirebase({
+          data: formdata,
+          onProgress(percent: number) {},
+        })
+      );
+
+      let newAttachement = (attachements && [...attachements]) || [];
+      if (response?.payload) {
+        response?.payload?.forEach((element: any) => {
+          newAttachement.push({
+            name: getFileNameFromUrl(element),
+            value: element,
+          });
         });
-      });
-      setAttachements && setAttachements(newAttachement);
+
+        clearInterval(interval);
+        setUploadProgress(null);
+
+        setAttachements && setAttachements(newAttachement);
+      }
+    } catch (error) {
+      console.error("upload failed: ", error);
     }
   };
 
@@ -179,6 +200,20 @@ export const ImageField = ({
           accept="image/*"
           multiple
         />
+
+        {uploadProgress !== null && (
+          <div className="relative w-full h-5 bg-borderColor rounded-lg mt-1">
+            <div
+              className="absolute top-0 left-0 h-full bg-primary rounded-lg"
+              style={{ width: `${uploadProgress}%` }}
+            />
+
+            <div className="absolute inset-0 flex justify-center items-center text-white">
+              <span>{uploadProgress}%</span>
+            </div>
+          </div>
+        )}
+
         {errorMessage && (
           <p className="text-red text-sm mt-2">{errorMessage}</p>
         )}

@@ -53,36 +53,51 @@ export const uploadFileToFirebase: any = createAsyncThunk(
   }
 );
 
-export const uploadMultiFileToFirebase: any = createAsyncThunk(
-  "file/upload/multi",
-  async (data) => {
-    const [authToken, refreshToken] = await Promise.all([
-      getToken(),
-      getRefreshToken(),
-    ]);
-    try {
-      const response = await axios.post(
-        BASEURL + "/integrations/aws/storage/upload-multiple",
-        data,
-        {
-          headers: {
-            Accept: "multipart/form-data",
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
-            accessToken: authToken,
-            refreshToken: refreshToken,
-          },
-        }
-      );
-      return response?.data?.data;
-    } catch (response: any) {
-      if (response?.response?.data?.code === 401) {
-        logout();
+interface UploadArgs {
+  data: FormData;
+  onProgress: (percent: number | null) => void;
+}
+
+export const uploadMultiFileToFirebase: any = createAsyncThunk<
+  string | null,
+  UploadArgs
+>("file/upload/multi", async ({ data, onProgress }, thunkApi) => {
+  const [authToken, refreshToken] = await Promise.all([
+    getToken(),
+    getRefreshToken(),
+  ]);
+
+  try {
+    const response = await axios.post(
+      BASEURL + "/integrations/aws/storage/upload-multiple",
+      data,
+      {
+        headers: {
+          Accept: "multipart/form-data",
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+          accessToken: authToken,
+          refreshToken: refreshToken,
+        },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            onProgress(percentCompleted);
+          }
+        },
       }
-      return false;
+    );
+    return response?.data?.data;
+  } catch (response: any) {
+    if (response?.response?.data?.code === 401) {
+      logout();
     }
+    return false;
   }
-);
+});
+
 const globalSlice = createSlice({
   name: "global",
   initialState,

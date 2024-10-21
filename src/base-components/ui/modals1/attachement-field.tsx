@@ -29,6 +29,7 @@ export const AttachementField = ({
   const formdata = new FormData();
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   let validFiles = [];
   const documentTypes = [
@@ -50,19 +51,39 @@ export const AttachementField = ({
       }
     }
 
-    if (validFiles.length > 0) {
-      const response = await dispatch(uploadMultiFileToFirebase(formdata));
-      let newAttachement = (attachements && [...attachements]) || [];
-      if (response?.payload) {
-        response?.payload?.forEach((element: any) => {
-          newAttachement.push({
-            name: getFileNameFromUrl(element),
-            value: element,
+    let progress = 0;
+    const interval = setInterval(() => {
+      setUploadProgress(progress);
+      progress += 10;
+      if (progress > 100) clearInterval(interval);
+    }, 100);
+
+    try {
+      if (validFiles.length > 0) {
+        const response = await dispatch(
+          uploadMultiFileToFirebase({
+            data: formdata,
+            onProgress(percent: number) {},
+          })
+        );
+        let newAttachement = (attachements && [...attachements]) || [];
+        if (response?.payload) {
+          response?.payload?.forEach((element: any) => {
+            newAttachement.push({
+              name: getFileNameFromUrl(element),
+              value: element,
+            });
           });
-        });
-        setAttachements && setAttachements(newAttachement);
-        setErrorMessage("");
+
+          clearInterval(interval);
+          setUploadProgress(null);
+
+          setAttachements && setAttachements(newAttachement);
+          setErrorMessage("");
+        }
       }
+    } catch (error) {
+      console.error("upload failed: ", error);
     }
   };
 
@@ -198,6 +219,19 @@ export const AttachementField = ({
           multiple
           accept=".pdf, .doc, .docx, .xls, .xlsx, .txt"
         />
+
+        {uploadProgress !== null && (
+          <div className="relative w-full h-5 bg-borderColor rounded-lg mt-1">
+            <div
+              className="absolute top-0 left-0 h-full bg-primary rounded-lg"
+              style={{ width: `${uploadProgress}%` }}
+            />
+
+            <div className="absolute inset-0 flex justify-center items-center text-white">
+              <span>{uploadProgress}%</span>
+            </div>
+          </div>
+        )}
 
         {errorMessage && (
           <p className="text-red text-sm mt-2">{errorMessage}</p>
