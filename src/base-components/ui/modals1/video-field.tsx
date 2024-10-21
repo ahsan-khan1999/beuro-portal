@@ -65,19 +65,21 @@ export const VideoField = ({
       }
     }
 
-    let progress = 0;
-    const interval = setInterval(() => {
-      setUploadProgress(progress);
-      progress += 10;
-      if (progress > 100) clearInterval(interval);
-    }, 100);
+    // let progress = 0;
+    // const interval = setInterval(() => {
+    //   setUploadProgress(progress);
+    //   progress += 10;
+    //   if (progress > 100) clearInterval(interval);
+    // }, 100);
 
     try {
       if (file.length > 0) {
         const response = await dispatch(
           uploadMultiFileToFirebase({
             data: formdata,
-            onProgress(percent: number) {},
+            onProgress(percent: number) {
+              setUploadProgress(percent);
+            },
           })
         );
         let newAttachement = (attachements && [...attachements]) || [];
@@ -89,9 +91,7 @@ export const VideoField = ({
             });
           });
 
-          clearInterval(interval);
           setUploadProgress(null);
-
           setAttachements && setAttachements(newAttachement);
         }
         setErrorMessage("");

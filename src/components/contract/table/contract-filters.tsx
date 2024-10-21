@@ -21,6 +21,7 @@ export default function ContractFilters({
   const router = useRouter();
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
+  const queryTask = router.query.isTaskCreated;
 
   const checkbox: CheckBoxType[] = [
     {
@@ -165,26 +166,6 @@ export default function ContractFilters({
     });
   };
 
-  const hanldeTaskFilter = (value: boolean) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          isTaskCreated: value,
-        },
-      },
-      undefined,
-      { shallow: false }
-    );
-
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["isTaskCreated"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
-
   const hanldeMailStatus = (value: string) => {
     router.push(
       {
@@ -200,6 +181,33 @@ export default function ContractFilters({
 
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["emailStatus"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
+  const hanldeTaskFilter = (value?: boolean) => {
+    const updatedQuery = { ...router.query };
+
+    console.log(value, "value");
+
+    if (value === undefined) {
+      delete updatedQuery.isTaskCreated;
+    } else {
+      updatedQuery.isTaskCreated = String(value);
+    }
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: updatedQuery,
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["isTaskCreated"]: value };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
@@ -226,18 +234,27 @@ export default function ContractFilters({
         <div className="flex items-center gap-x-3 z-20">
           <BooleanSelectField
             handleChange={(value) => hanldeTaskFilter(value)}
-            value=""
+            value={
+              queryTask === "true"
+                ? true
+                : queryTask === "false"
+                ? false
+                : undefined
+            }
             options={[
               {
-                label: `${translate("leads.created")}`,
+                label: "calendar.main_heading",
+                value: undefined,
+              },
+              {
+                label: "leads.created",
                 value: true,
               },
               {
-                label: `${translate("leads.not_created")}`,
+                label: "leads.not_created",
                 value: false,
               },
             ]}
-            label={translate("calendar.main_heading")}
             containerClassName="w-[140px]"
             labelClassName="w-[140px]"
           />

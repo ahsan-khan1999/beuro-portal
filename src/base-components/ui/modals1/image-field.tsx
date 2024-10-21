@@ -87,18 +87,20 @@ export const ImageField = ({
       // file.push(e.target.files);
     }
 
-    let progress = 0;
-    const interval = setInterval(() => {
-      setUploadProgress(progress);
-      progress += 10;
-      if (progress > 100) clearInterval(interval);
-    }, 100);
+    // let progress = 0;
+    // const interval = setInterval(() => {
+    //   setUploadProgress(progress);
+    //   progress += 10;
+    //   if (progress > 100) clearInterval(interval);
+    // }, 100);
 
     try {
       const response = await dispatch(
         uploadMultiFileToFirebase({
           data: formdata,
-          onProgress(percent: number) {},
+          onProgress(percent: number) {
+            setUploadProgress(percent);
+          },
         })
       );
 
@@ -111,9 +113,8 @@ export const ImageField = ({
           });
         });
 
-        clearInterval(interval);
+        // clearInterval(interval);
         setUploadProgress(null);
-
         setAttachements && setAttachements(newAttachement);
       }
     } catch (error) {

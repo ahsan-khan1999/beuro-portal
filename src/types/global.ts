@@ -84,12 +84,12 @@ export interface OptionsFieldProps {
   labelClassName?: string;
 }
 export interface BooleanOptionsFieldProps {
-  value: string;
+  value?: boolean;
   title?: string;
   label?: string;
   border?: number;
-  handleChange: (value: boolean, isAgent?: boolean) => void;
-  options: { label: string; value: boolean }[];
+  handleChange: (value?: boolean, isAgent?: boolean) => void;
+  options: { label: string; value?: boolean }[];
   dropDownIconClassName?: string;
   containerClassName?: string;
   dropdownClassName?: string;

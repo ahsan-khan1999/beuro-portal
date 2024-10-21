@@ -20,6 +20,8 @@ export default function AppointmentsFilter({
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
+  const queryOffer = router.query.isOfferCreated;
+
   useEffect(() => {
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
@@ -145,14 +147,19 @@ export default function AppointmentsFilter({
     });
   };
 
-  const hanldeOfferFilter = (value: boolean) => {
+  const hanldeOfferFilter = (value?: boolean) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.isOfferCreated;
+    } else {
+      updatedQuery.isOfferCreated = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          isOfferCreated: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -186,20 +193,29 @@ export default function AppointmentsFilter({
         <div className="flex items-center gap-x-4">
           <BooleanSelectField
             handleChange={(value) => hanldeOfferFilter(value)}
-            value=""
+            value={
+              queryOffer === "true"
+                ? true
+                : queryOffer === "false"
+                ? false
+                : undefined
+            }
             options={[
               {
-                label: `${translate("leads.created")}`,
+                label: "appointments.table_headings.offer_status",
+                value: undefined,
+              },
+              {
+                label: "leads.created",
                 value: true,
               },
               {
-                label: `${translate("leads.not_created")}`,
+                label: "leads.not_created",
                 value: false,
               },
             ]}
-            label={translate("appointments.table_headings.offer_status")}
-            containerClassName="w-[160px]"
-            labelClassName="w-[160px]"
+            containerClassName="w-[170px]"
+            labelClassName="w-[170px]"
           />
           <InputField
             handleChange={handleInputChange}

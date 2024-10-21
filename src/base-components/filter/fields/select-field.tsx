@@ -9,10 +9,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function SelectField({
-  title,
   label,
   options,
-  border,
   handleChange,
   value,
   dropDownIconClassName,
@@ -145,18 +143,26 @@ export default function SelectField({
               id="dropdownSerchBar"
             >
               <div className="flex-col space-y-2">
-                {options?.map(({ label, value }, idx) => (
-                  <div
-                    className="flex justify-start px-2 py-1 hover:bg-[#eaebec] rounded-sm cursor-pointer mr-1 hoverTransetion"
-                    key={idx}
-                    onClick={() => {
-                      handleItemSelected(value, idx);
-                      setIsOpen(false);
-                    }}
-                  >
-                    <span>{label}</span>
-                  </div>
-                ))}
+                {options?.map(({ label, value }, idx) => {
+                  const isSelected = selectedLabel === label;
+
+                  return (
+                    <div
+                      className={`flex justify-start px-2 py-1 cursor-pointer mr-1 hoverTransetion rounded-md ${
+                        isSelected
+                          ? "bg-primary text-white hover:bg-buttonHover"
+                          : "bg-white hover:bg-[#eaebec]"
+                      }`}
+                      key={idx}
+                      onClick={() => {
+                        handleItemSelected(value, idx);
+                        setIsOpen(false);
+                      }}
+                    >
+                      <span>{label}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
