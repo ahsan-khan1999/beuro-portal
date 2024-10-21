@@ -32,40 +32,6 @@ export const VideoField = ({
   const [errorMessage, setErrorMessage] = useState("");
   const videoTypes = ["video/mp4", "video/avi", "video/mov", "video/wmv"];
 
-  // const handleFileInput = async (
-  //   e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
-  // ) => {
-  //   e.preventDefault();
-
-  //   let file: any = [];
-
-  //   if (e instanceof DragEvent && e.dataTransfer) {
-  //     for (let item of e.dataTransfer.files) {
-  //       formdata.append("files", item);
-  //     }
-
-  //     file.push(e.dataTransfer.files);
-  //   } else if (e.target instanceof HTMLInputElement && e.target.files) {
-  //     for (let item of e.target.files) {
-  //       formdata.append("files", item);
-  //     }
-  //     file.push(e.target.files);
-  //   }
-
-  //   const response = await dispatch(uploadMultiFileToFirebase(formdata));
-
-  //   let newAttachement = (attachements && [...attachements]) || [];
-  //   if (response?.payload) {
-  //     response?.payload?.forEach((element: any) => {
-  //       newAttachement.push({
-  //         name: getFileNameFromUrl(element),
-  //         value: element,
-  //       });
-  //     });
-  //     setAttachements && setAttachements(newAttachement);
-  //   }
-  // };
-
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
@@ -186,7 +152,9 @@ export const VideoField = ({
           className="hidden"
           onChange={handleFileInput}
           multiple
+          accept="video/*"
         />
+
         {errorMessage && (
           <p className="text-red text-sm mt-2">{errorMessage}</p>
         )}

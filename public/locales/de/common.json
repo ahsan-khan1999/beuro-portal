@@ -1306,6 +1306,7 @@
       "invoice_total": "Insgesamt",
       "page_sum": "Seite Summe"
     },
+    "image_upload_error_message": "Bitte laden Sie eine Bilddatei hoch.",
     "doc_upload_error_message": "Bitte laden Sie eine Dokumentendatei hoch.",
     "video_upload_error_message": "Bitte laden Sie eine Videodatei hoch.",
     "svg_upload_not_allowed": "SVG-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",

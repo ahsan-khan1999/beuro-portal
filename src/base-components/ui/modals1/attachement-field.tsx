@@ -147,7 +147,6 @@ export const AttachementField = ({
     const list = attachements && [...attachements];
     list?.splice(index, 1);
     setAttachements && setAttachements(list);
-    // field.onChange();
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -197,6 +196,7 @@ export const AttachementField = ({
           className="hidden"
           onChange={handleFileInput}
           multiple
+          accept=".pdf, .doc, .docx, .xls, .xlsx, .txt"
         />
 
         {errorMessage && (
