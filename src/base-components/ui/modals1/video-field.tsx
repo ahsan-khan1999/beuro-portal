@@ -30,7 +30,21 @@ export const VideoField = ({
   const formdata = new FormData();
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
-  const videoTypes = ["video/mp4", "video/avi", "video/mov", "video/wmv"];
+  const videoTypes = [
+    "video/mp4",
+    "video/avi",
+    "video/mov",
+    "video/wmv",
+    "video/mkv",
+    "video/flv",
+    "video/webm",
+    "video/ogg",
+    "video/3gp",
+    "video/3g2",
+    "video/mpeg",
+    "video/quicktime",
+  ];
+
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   const handleFileInput = async (

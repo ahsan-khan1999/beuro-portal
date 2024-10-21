@@ -37,7 +37,19 @@ export const ImageField = ({
   const formdata = new FormData();
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
-  const imageTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"];
+  const imageTypes = [
+    "image/png",
+    "image/jpeg",
+    "image/gif",
+    "image/webp",
+    "image/bmp",
+    "image/tiff",
+    "image/svg+xml",
+    "image/x-icon",
+    "image/heic",
+    "image/heif",
+  ];
+
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   const toggleZoom = (image: string, index: number) => {
