@@ -39,6 +39,22 @@ export const AttachementField = ({
     "text/plain",
     "application/vnd.ms-excel",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/vnd.ms-powerpoint",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "application/vnd.ms-access",
+    "application/rtf",
+    "application/xml",
+    "application/json",
+    "application/zip",
+    "application/x-rar-compressed",
+    "application/vnd.oasis.opendocument.text",
+    "application/vnd.oasis.opendocument.spreadsheet",
+    "application/vnd.oasis.opendocument.presentation",
+    "application/vnd.ms-works",
+    "application/x-7z-compressed",
+    "text/csv",
+    "application/x-sh",
+    "application/x-java-archive",
   ];
 
   const validateAndUploadFiles = async (files: FileList) => {
