@@ -57,7 +57,10 @@ export default function SelectField({
   };
 
   useEffect(() => {
-    const newLabel = options.find((item) => item?.value === value);
+    const stringValue =
+      typeof value === "string" || value === undefined ? value : String(value);
+
+    const newLabel = options.find((item) => item?.value === stringValue);
     setSelectedLabel(newLabel?.label || "");
   }, [value]);
 
@@ -101,7 +104,7 @@ export default function SelectField({
             )}
             <div
               style={{ maxHeight: "150px" }}
-              className="mt-2 min-h-fit overflow-x-hidden overflow-y-auto"
+              className="mt-2 overflow-x-hidden overflow-y-auto dashboard_scrollbar"
               id="dropdownSerchBar"
             >
               <div className="flex-col space-y-2">
