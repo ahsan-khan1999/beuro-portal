@@ -24,6 +24,12 @@ export default function OffersFilters({
   const { noteSettings } = useAppSelector((state) => state.settings);
   const [inputValue, setInputValue] = useState<string>("");
 
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
+
   const checkbox: CheckBoxType[] = [
     {
       label: translate("offers.table_functions.open"),
@@ -124,14 +130,19 @@ export default function OffersFilters({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -144,41 +155,48 @@ export default function OffersFilters({
     });
   };
 
-  const hanldeNoteType = (value: string) => {
+  const handleNoteType = (value: string | undefined) => {
+    const updatedQuery: { [key: string]: string | string[] | undefined } = {
+      ...router.query,
+    };
+
+    if (value === undefined) {
+      delete updatedQuery.noteType;
+    } else {
+      updatedQuery.noteType = String(value);
+    }
+
+    updatedQuery.page = "1";
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          page: 1,
-          noteType: value,
-        },
+        query: updatedQuery,
       },
       undefined,
-      { shallow: false }
+      { shallow: true }
     );
 
     setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["noteType"]: value };
+      const updatedFilter = { ...prev, noteType: value };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
   };
 
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
+  const hanldeMailStatus = (value?: string) => {
+    const updatedQuery = { ...router.query };
 
-  const hanldeMailStatus = (value: string) => {
+    if (value === undefined) {
+      delete updatedQuery.emailStatus;
+    } else {
+      updatedQuery.emailStatus = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          emailStatus: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -190,6 +208,10 @@ export default function OffersFilters({
       return updatedFilter;
     });
   };
+
+  const emailStatus = Array.isArray(router.query.emailStatus)
+    ? router.query.emailStatus[0]
+    : router.query.emailStatus;
 
   return (
     <div className="flex flex-col maxLargePro:flex-row maxLargePro:items-center w-full xl:w-fit gap-4 z-10">
@@ -220,78 +242,87 @@ export default function OffersFilters({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value=""
-            dropDownIconClassName=""
+            value={
+              Array.isArray(router.query.sort)
+                ? router.query.sort[0]
+                : router.query.sort
+            }
             options={[
               {
-                label: `${translate("filters.sort_by.date")}`,
+                label: "common.sort_button",
+                value: undefined,
+              },
+              {
+                label: "filters.sort_by.date",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.latest")}`,
+                label: "filters.sort_by.latest",
                 value: "-createdAt",
               },
               {
-                label: `${translate("filters.sort_by.oldest")}`,
+                label: "filters.sort_by.oldest",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.a_z")}`,
+                label: "filters.sort_by.a_z",
                 value: "customerDetail.fullName",
               },
             ]}
-            label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
+            containerClassName="w-[120px]"
+            labelClassName="w-[120px]"
           />
           <SelectField
-            handleChange={(value) => hanldeNoteType(value)}
-            value=""
+            handleChange={(value) => handleNoteType(value)}
+            value={
+              Array.isArray(router.query.noteType)
+                ? router.query.noteType[0]
+                : router.query.noteType
+            }
             dropDownIconClassName=""
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
-            options={
-              noteSettings
+            options={[
+              { label: "add_note_dropdown.all_notes", value: undefined },
+              ...(noteSettings
                 ? noteSettings
-                    .slice()
-                    .reverse()
-                    .map((item) => ({
+                    ?.slice()
+                    ?.reverse()
+                    ?.map((item) => ({
                       label: item.notes.noteType,
                       value: item.notes.noteType,
                     }))
-                : []
-            }
-            label={translate("add_note_dropdown.all_notes")}
+                : []),
+            ]}
           />
         </div>
 
         <div className="flex items-center gap-x-3 z-20">
-          {/* <span className="text-[#4B4B4B] font-semibold text-base">
-            {translate("global_search.notes")}
-          </span> */}
-
           <SelectField
             handleChange={(value) => hanldeMailStatus(value)}
-            value=""
-            dropDownIconClassName=""
+            value={emailStatus}
             options={[
               {
-                label: `${translate("email_status.Pending")}`,
+                label: "offers.card_content.email_status",
+                value: undefined,
+              },
+              {
+                label: "email_status.Pending",
                 value: `${staticEnums.EmailStatus.Pending}`,
               },
               {
-                label: `${translate("email_status.Sent")}`,
+                label: "email_status.Sent",
                 value: `${staticEnums.EmailStatus.Sent}`,
               },
               {
-                label: `${translate("email_status.Post")}`,
+                label: "email_status.Post",
                 value: `${staticEnums.EmailStatus.Post}`,
               },
               {
-                label: `${translate("email_status.Failed")}`,
+                label: "email_status.Failed",
                 value: `${staticEnums.EmailStatus.Failed}`,
               },
             ]}
-            label={translate("offers.card_content.email_status")}
             containerClassName="w-[160px]"
             labelClassName="w-[160px]"
           />
@@ -311,23 +342,6 @@ export default function OffersFilters({
             iconAlt="add button"
           />
         </div>
-        {/* <div className="flex items-center gap-x-4">
-          <OfferFilter
-            filter={filter}
-            setFilter={setFilter}
-            onFilterChange={handleFilterChange}
-          />
-
-          <Button
-            inputType="button"
-            onClick={() => router.push("/offers/add")}
-            className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-            icon={addIcon}
-            text={translate("offers.add_button")}
-            id="add"
-            iconAlt="add button"
-          />
-        </div> */}
       </div>
     </div>
   );

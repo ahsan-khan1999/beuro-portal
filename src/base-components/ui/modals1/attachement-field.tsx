@@ -67,13 +67,6 @@ export const AttachementField = ({
       }
     }
 
-    // let progress = 0;
-    // const interval = setInterval(() => {
-    //   setUploadProgress(progress);
-    //   progress += 10;
-    //   if (progress > 100) clearInterval(interval);
-    // }, 100);
-
     try {
       if (validFiles.length > 0) {
         const response = await dispatch(
@@ -94,7 +87,6 @@ export const AttachementField = ({
             });
           });
 
-          // clearInterval(interval);
           setUploadProgress(null);
           setAttachements && setAttachements(newAttachement);
           setErrorMessage("");
@@ -235,7 +227,7 @@ export const AttachementField = ({
           className="hidden"
           onChange={handleFileInput}
           multiple
-          accept=".pdf, .doc, .docx, .xls, .xlsx, .txt"
+          accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.rtf,.txt,.csv,.odt"
         />
 
         {uploadProgress !== null && (
@@ -265,9 +257,6 @@ export const AttachementField = ({
                   isOpenedFile ? "cursor-pointer" : "cursor-default"
                 }`}
                 key={index}
-                // onClick={() =>
-                //     isOpenedFile && router.push("/content/pdf-preview")
-                // }
               >
                 <div
                   className="flex items-center gap-3 cursor-pointer"

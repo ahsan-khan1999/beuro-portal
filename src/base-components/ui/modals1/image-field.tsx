@@ -85,8 +85,6 @@ export const ImageField = ({
           setErrorMessage(translate("common.image_upload_error_message"));
         }
       }
-
-      // file.push(e.dataTransfer.files);
     } else if (e.target instanceof HTMLInputElement && e.target.files) {
       for (let item of e.target.files) {
         if (checkFileType(item)) {
@@ -96,15 +94,7 @@ export const ImageField = ({
           setErrorMessage(translate("common.image_upload_error_message"));
         }
       }
-      // file.push(e.target.files);
     }
-
-    // let progress = 0;
-    // const interval = setInterval(() => {
-    //   setUploadProgress(progress);
-    //   progress += 10;
-    //   if (progress > 100) clearInterval(interval);
-    // }, 100);
 
     try {
       const response = await dispatch(
@@ -125,7 +115,6 @@ export const ImageField = ({
           });
         });
 
-        // clearInterval(interval);
         setUploadProgress(null);
         setAttachements && setAttachements(newAttachement);
       }
@@ -210,7 +199,7 @@ export const ImageField = ({
           type="file"
           className="hidden"
           onChange={handleFileInput}
-          accept="image/*"
+          accept="image/*,.heif,.heic"
           multiple
         />
 
@@ -237,10 +226,13 @@ export const ImageField = ({
           {attachements &&
             attachements?.map((item, index) => {
               const isSVG = item?.value?.endsWith(".svg");
+              const isHEIF =
+                item?.value?.endsWith(".heif") ||
+                item?.value?.endsWith(".heic");
 
               return (
                 <div
-                  className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+                  className={`relative flex flex-col gap-3 h-fit w-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
                     isOpenedFile ? "cursor-pointer" : "cursor-default"
                   }`}
                   key={index}
@@ -249,8 +241,11 @@ export const ImageField = ({
                   }
                 >
                   <div className="flex items-center gap-3">
-                    <div style={{ position: "relative" }}>
-                      {isSVG ? (
+                    <div
+                      style={{ position: "relative" }}
+                      onClick={() => toggleZoom(item.value, index)}
+                    >
+                      {isSVG || isHEIF ? (
                         <object
                           data={item.value}
                           width={100}
@@ -264,13 +259,15 @@ export const ImageField = ({
                           height={100}
                           alt="Uploaded Preview"
                           style={{ height: "100px", width: "100px" }}
-                          onClick={() => toggleZoom(item.value, index)}
                           className="cursor-pointer"
                         />
                       )}
                       <div
                         className="absolute top-[5px] right-[5px] cursor-pointer"
-                        onClick={(e) => handleDeleteFile(index)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteFile(index);
+                        }}
                       >
                         <Image src={imgDelete} alt="imgDelete" />
                       </div>
@@ -288,7 +285,7 @@ export const ImageField = ({
                             alignItems: "center",
                             justifyContent: "center",
                           }}
-                          onClick={() => toggleZoom(item.value, index)}
+                          // onClick={() => toggleZoom(item.value, index)}
                         >
                           <Slider
                             {...SLIDER_IMAGES_DATA}

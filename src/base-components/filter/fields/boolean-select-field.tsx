@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { combineClasses } from "@/utils/utility";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
+import { useTranslation } from "next-i18next";
 
 export default function BooleanSelectField({
   label,
@@ -31,6 +32,7 @@ export default function BooleanSelectField({
   );
 
   const [isOpen, setIsOpen] = useState(false);
+  const { t: translate } = useTranslation();
   const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
 
   const handleToggle = () => {
@@ -50,51 +52,7 @@ export default function BooleanSelectField({
   ) => {
     setSelectedLabel(label);
     handleChange(selectedValue);
-    // options?.forEach(({ label }, index) => {
-    //   if (selectedIndex === index) {
-
-    //   }
-    // });
   };
-
-  // useEffect(() => {
-  //   const queryAppointmentValue =
-  //     queryAppointment === "true"
-  //       ? true
-  //       : queryAppointment === "false"
-  //       ? false
-  //       : undefined;
-
-  //   const queryOfferValue =
-  //     queryOffer === "true" ? true : queryOffer === "false" ? false : undefined;
-
-  //   const queryTaskValue =
-  //     queryTask === "true" ? true : queryTask === "false" ? false : undefined;
-
-  //   const selectedAppointmentOption = options?.find(
-  //     (option) => option.value === queryAppointmentValue
-  //   );
-
-  //   const selectedOfferOption = options?.find(
-  //     (option) => option.value === queryOfferValue
-  //   );
-
-  //   const selectedTaskOption = options?.find(
-  //     (option) => option.value === queryTaskValue
-  //   );
-
-  //   console.log(selectedOfferOption, "selectedOfferOption");
-
-  //   if (selectedAppointmentOption) {
-  //     setSelectedLabel(selectedAppointmentOption.label);
-  //   } else if (selectedOfferOption) {
-  //     setSelectedLabel(selectedOfferOption.label);
-  //   } else if (selectedTaskOption) {
-  //     setSelectedLabel(selectedTaskOption.label);
-  //   } else {
-  //     setSelectedLabel(label || "");
-  //   }
-  // }, [queryAppointment, queryOffer, queryTask, label, options]);
 
   useEffect(() => {
     const newLabel = options.find((item, index) => item?.value === value);

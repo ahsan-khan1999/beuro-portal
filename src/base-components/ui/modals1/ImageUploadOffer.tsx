@@ -55,7 +55,7 @@ const ImagesUploadOffer = ({
         <ImageField
           id="attachement"
           attachements={enteredLinks?.images}
-          fileSupported="PNG, JPEG, JPG, WEBP "
+          fileSupported="PNG, JPEG, JPG, WEBP, HEIC, HEIF"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_image")}
@@ -77,7 +77,7 @@ const ImagesUploadOffer = ({
         <VideoField
           id="attachement"
           attachements={enteredLinks?.video}
-          fileSupported="MP4, MOV, AVI, WEBM"
+          fileSupported="MP4, MOV, AVI, WEBM, MKV, M4V, HEVC"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_video")}
@@ -114,7 +114,7 @@ const ImagesUploadOffer = ({
         <AttachementField
           id="attachement"
           attachements={enteredLinks?.attachements}
-          fileSupported="Pdf, ODT, DOC, XLXS"
+          fileSupported="PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, RTF, TXT, CSV"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_attachment")}
