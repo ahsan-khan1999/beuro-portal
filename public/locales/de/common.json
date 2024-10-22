@@ -2352,7 +2352,7 @@
     "Company": "Unternehmen"
   },
   "email_status": {
-    "Post": "zugestellt",
+    "Post": "Post",
     "Pending": "Ausstehend",
     "Sent": "Gesendet",
     "Failed": "Gescheitert",
