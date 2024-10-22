@@ -34,7 +34,7 @@ import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNot
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 
 const useOffers = () => {
-  const { lastPage, offer, loading, isLoading, totalCount, offerDetails } =
+  const { offer, loading, isLoading, totalCount, offerDetails } =
     useAppSelector((state) => state.offer);
 
   const { query } = useRouter();
@@ -273,26 +273,30 @@ const useOffers = () => {
       dispatch(setOfferDetails(filteredLead));
       dispatch(
         readImage({ params: { type: "offerID", id: filteredLead?.id } })
-      ).then((res: any) => {
-        if (
-          res.payload?.images.length > 0 ||
-          res.payload?.attachments.length > 0 ||
-          res.payload?.videos.length > 0 ||
-          res.payload?.links.length > 0
-        ) {
-          setCurrentPageRows((prev) =>
-            prev.map((offer) => {
-              return offer.id === filteredLead?.id
-                ? { ...offer, isImageAdded: true }
-                : offer;
-            })
-          );
-        }
-      });
+      );
+
+      // .then((res: any) => {
+      //   if (
+      //     res.payload?.images.length > 0 ||
+      //     res.payload?.attachments.length > 0 ||
+      //     res.payload?.videos.length > 0 ||
+      //     res.payload?.links.length > 0
+      //   ) {
+      //     setCurrentPageRows((prev) =>
+      //       prev.map((offer) => {
+      //         return offer.id === filteredLead?.id
+      //           ? { ...offer, isImageAdded: true }
+      //           : offer;
+      //       })
+      //     );
+      //   }
+      // });
+
       dispatch(
         updateModalType({
           type: ModalType.UPLOAD_OFFER_IMAGE,
           data: {
+            id: id,
             refID: refID,
             name: name,
             heading: heading,
@@ -346,6 +350,14 @@ const useOffers = () => {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handleUpdateRow = (id?: string) => {
+    setCurrentPageRows((prev) =>
+      prev?.map((offer) => {
+        return offer.id === id ? { ...offer, isImageAdded: true } : offer;
+      })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -388,6 +400,7 @@ const useOffers = () => {
         onClose={onClose}
         handleImageSlider={handleImageSlider}
         type={"Offer"}
+        onUpdateDetails={handleUpdateRow}
       />
     ),
     [ModalType.CREATION]: (
@@ -422,9 +435,6 @@ const useOffers = () => {
         onFileUploadSuccess={defaultOfferCreatedHandler}
       />
     ),
-    // [ModalType.IMAGE_SLIDER]: (
-    //   <ImageSlider onClose={onClose} details={images} />
-    // ),
   };
 
   const renderModal = () => {

@@ -9,15 +9,19 @@ import { VideoField } from "./video-field";
 import { AttachementField } from "./attachement-field";
 import { useAppSelector } from "@/hooks/useRedux";
 
+export interface ImageUploadProps {
+  handleImageSlider: Function;
+  onClose: () => void;
+  type: string;
+  onUpdateDetails?: (id: string) => void;
+}
+
 const ImagesUploadOffer = ({
   onClose,
   handleImageSlider,
   type,
-}: {
-  handleImageSlider: Function;
-  onClose: () => void;
-  type: string;
-}) => {
+  onUpdateDetails
+}: ImageUploadProps) => {
   const { id, refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
   );
@@ -36,9 +40,8 @@ const ImagesUploadOffer = ({
     handleAttachementAdd,
     handleVideoAdd,
     handleimageAdd,
-    loading,
     loadingGlobal,
-  } = useUploadImageOffer(handleImageSlider, type, id);
+  } = useUploadImageOffer(handleImageSlider, type, id, onUpdateDetails);
 
   const attachementLookUp = {
     img_tab: (

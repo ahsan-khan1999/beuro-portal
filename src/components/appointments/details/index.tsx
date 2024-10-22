@@ -21,7 +21,7 @@ export const AppointmentsDetails = () => {
 
   return (
     <>
-      {isLoading || loading ? (
+      {loading ? (
         <CustomLoader />
       ) : !appointmentDetails?.isReportSubmitted ? (
         <>
