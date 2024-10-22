@@ -73,8 +73,6 @@ export const ImageField = ({
           setErrorMessage(translate("common.image_upload_error_message"));
         }
       }
-
-      // file.push(e.dataTransfer.files);
     } else if (e.target instanceof HTMLInputElement && e.target.files) {
       for (let item of e.target.files) {
         if (checkFileType(item)) {
@@ -84,15 +82,7 @@ export const ImageField = ({
           setErrorMessage(translate("common.image_upload_error_message"));
         }
       }
-      // file.push(e.target.files);
     }
-
-    // let progress = 0;
-    // const interval = setInterval(() => {
-    //   setUploadProgress(progress);
-    //   progress += 10;
-    //   if (progress > 100) clearInterval(interval);
-    // }, 100);
 
     try {
       const response = await dispatch(
@@ -113,7 +103,6 @@ export const ImageField = ({
           });
         });
 
-        // clearInterval(interval);
         setUploadProgress(null);
         setAttachements && setAttachements(newAttachement);
       }

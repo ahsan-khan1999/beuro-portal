@@ -160,8 +160,10 @@ export default function InvoicesFilters({
     });
   };
 
-  const hanldeNoteType = (value?: string) => {
-    const updatedQuery = { ...router.query };
+  const handleNoteType = (value: string | undefined) => {
+    const updatedQuery: { [key: string]: string | string[] | undefined } = {
+      ...router.query,
+    };
 
     if (value === undefined) {
       delete updatedQuery.noteType;
@@ -169,17 +171,19 @@ export default function InvoicesFilters({
       updatedQuery.noteType = String(value);
     }
 
+    updatedQuery.page = "1";
+
     router.push(
       {
         pathname: router.pathname,
         query: updatedQuery,
       },
       undefined,
-      { shallow: false }
+      { shallow: true }
     );
 
     setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["noteType"]: value };
+      const updatedFilter = { ...prev, noteType: value };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
@@ -248,23 +252,27 @@ export default function InvoicesFilters({
           />
 
           <SelectField
-            handleChange={(value) => hanldeNoteType(value)}
-            value=""
+            handleChange={(value) => handleNoteType(value)}
+            value={
+              Array.isArray(router.query.noteType)
+                ? router.query.noteType[0]
+                : router.query.noteType
+            }
             dropDownIconClassName=""
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
-            options={
-              noteSettings
+            options={[
+              { label: "add_note_dropdown.all_notes", value: undefined },
+              ...(noteSettings
                 ? noteSettings
-                    .slice()
-                    .reverse()
-                    .map((item) => ({
+                    ?.slice()
+                    ?.reverse()
+                    ?.map((item) => ({
                       label: item.notes.noteType,
                       value: item.notes.noteType,
                     }))
-                : []
-            }
-            label={translate("add_note_dropdown.all_notes")}
+                : []),
+            ]}
           />
           <InvoicesFilter
             filter={filter}

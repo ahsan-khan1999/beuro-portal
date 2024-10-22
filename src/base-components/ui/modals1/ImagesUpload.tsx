@@ -35,7 +35,6 @@ const ImagesUpload = ({
     handleVideoAdd,
     handleimageAdd,
     onSubmit,
-    loading,
     loadingGlobal,
   } = useUploadImage(handleImageSlider, id);
 
@@ -54,7 +53,7 @@ const ImagesUpload = ({
         <ImageField
           id="attachement"
           attachements={enteredLinks?.images}
-          fileSupported="PNG, JPEG, JPG, WEBP"
+          fileSupported="PNG, JPEG, JPG, WEBP, HEIC, HEIF"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_image")}

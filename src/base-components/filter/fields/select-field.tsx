@@ -50,63 +50,16 @@ export default function SelectField({
 
   const handleItemSelected = (
     label: string,
-    selectedValue: string | undefined,
-    selectedIndex: number
+    selectedValue: string | undefined
   ) => {
-    // options?.forEach(({ label, value }, index) => {
-    //   if (selectedIndex === index) {
     setSelectedLabel(label);
     handleChange(selectedValue);
-    //   }
-    // });
   };
 
   useEffect(() => {
-    const newLabel = options.find((item, index) => item?.value === value);
+    const newLabel = options.find((item) => item?.value === value);
     setSelectedLabel(newLabel?.label || "");
   }, [value]);
-
-  // useEffect(() => {
-  //   const querySort = router.query.sort as string;
-  //   const queryNoteType = router.query.noteType as string;
-  //   const queryEmailStatus = router.query.emailStatus as string;
-
-  //   const selectedSortOption = options.find(
-  //     (option) => option.value === querySort
-  //   );
-
-  //   const selectedNoteTypeOption = options.find(
-  //     (option) => option.value === queryNoteType
-  //   );
-
-  //   const selectedEmailStatusOption = options.find(
-  //     (option) => option.value === queryEmailStatus
-  //   );
-
-  //   if (
-  //     selectedSortOption &&
-  //     selectedNoteTypeOption &&
-  //     selectedEmailStatusOption
-  //   ) {
-  //     setSelectedLabel(
-  //       `${selectedSortOption.label}, ${selectedNoteTypeOption.label}, ${selectedEmailStatusOption.label}`
-  //     );
-  //   } else if (selectedSortOption) {
-  //     setSelectedLabel(selectedSortOption.label);
-  //   } else if (selectedNoteTypeOption) {
-  //     setSelectedLabel(selectedNoteTypeOption.label);
-  //   } else if (selectedEmailStatusOption) {
-  //     setSelectedLabel(selectedEmailStatusOption.label);
-  //   } else {
-  //     setSelectedLabel(label || "");
-  //   }
-  // }, [
-  //   router.query.sort,
-  //   router.query.noteType,
-  //   router.query.emailStatus,
-  //   label,
-  //   options,
-  // ]);
 
   return (
     <div className={containerClasses} ref={ref}>
@@ -164,7 +117,7 @@ export default function SelectField({
                       }`}
                       key={idx}
                       onClick={() => {
-                        handleItemSelected(label, value, idx);
+                        handleItemSelected(label, value);
                         setIsOpen(false);
                       }}
                     >
