@@ -27,12 +27,12 @@ export default function TabletLeadsFilter({
   currentDate,
   onDateChange,
 }: AppointmentTableFunction) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { sort } = router.query as any;
+  const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
-
   const queryAppointment = router.query.isAppointmentCreated;
 
   useEffect(() => {
@@ -40,6 +40,25 @@ export default function TabletLeadsFilter({
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
   }, [router.query.text]);
+
+  const checkbox: CheckBoxType[] = [
+    {
+      label: translate("leads.table_functions.open"),
+      type: `${staticEnums.LeadStatus.Open}`,
+    },
+    {
+      label: translate("leads.table_functions.inProcess"),
+      type: `${staticEnums.LeadStatus.InProcess}`,
+    },
+    {
+      label: translate("leads.table_functions.close"),
+      type: `${staticEnums.LeadStatus.Close}`,
+    },
+    {
+      label: translate("leads.table_functions.expire"),
+      type: `${staticEnums.LeadStatus.Expired}`,
+    },
+  ];
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -75,7 +94,7 @@ export default function TabletLeadsFilter({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -96,45 +115,6 @@ export default function TabletLeadsFilter({
       return updatedFilter;
     });
   };
-
-  // const hanldeStatusChange = (value: string) => {
-  //   router.push(
-  //     {
-  //       pathname: router.pathname,
-  //       query: {
-  //         ...router.query,
-  //         status: value,
-  //       },
-  //     },
-  //     undefined,
-  //     { shallow: false }
-  //   );
-
-  //   setFilter((prev: FilterType) => {
-  //     const updatedFilter = { ...prev, ["status"]: value };
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
-
-  const checkbox: CheckBoxType[] = [
-    {
-      label: translate("leads.table_functions.open"),
-      type: `${staticEnums.LeadStatus.Open}`,
-    },
-    {
-      label: translate("leads.table_functions.inProcess"),
-      type: `${staticEnums.LeadStatus.InProcess}`,
-    },
-    {
-      label: translate("leads.table_functions.close"),
-      type: `${staticEnums.LeadStatus.Close}`,
-    },
-    {
-      label: translate("leads.table_functions.expire"),
-      type: `${staticEnums.LeadStatus.Expired}`,
-    },
-  ];
 
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
@@ -214,6 +194,13 @@ export default function TabletLeadsFilter({
     });
   };
 
+  const appointmentValue =
+    queryAppointment === "true"
+      ? true
+      : queryAppointment === "false"
+      ? false
+      : undefined;
+
   return (
     <div className="flex flex-col xLarge:flex-row xMd:hidden xLarge:items-center justify-between w-full z-10 gap-y-4">
       <h1 className="text-2xl font-medium text-[#222B45]">Leads</h1>
@@ -238,13 +225,7 @@ export default function TabletLeadsFilter({
         <div className="flex items-center gap-x-4">
           <BooleanSelectField
             handleChange={(value) => hanldeAppointmentFilter(value)}
-            value={
-              queryAppointment === "true"
-                ? true
-                : queryAppointment === "false"
-                ? false
-                : undefined
-            }
+            value={appointmentValue}
             options={[
               {
                 label: "sidebar.customer.appointments.appointment",
@@ -273,15 +254,11 @@ export default function TabletLeadsFilter({
 
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value={
-              Array.isArray(router.query.sort)
-                ? router.query.sort[0]
-                : router.query.sort
-            }
+            value={sort || "None"}
             options={[
               {
                 label: "common.sort_button",
-                value: undefined,
+                value: "None",
               },
               {
                 label: "filters.sort_by.date",

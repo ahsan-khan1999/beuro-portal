@@ -13,10 +13,17 @@ export default function CustomerFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { sort } = router.query as any;
+  const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -25,7 +32,7 @@ export default function CustomerFilter({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -74,12 +81,6 @@ export default function CustomerFilter({
     });
   };
 
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
-
   return (
     <div className="flex items-center gap-4">
       <InputField
@@ -92,15 +93,11 @@ export default function CustomerFilter({
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value={
-          Array.isArray(router.query.sort)
-            ? router.query.sort[0]
-            : router.query.sort
-        }
+        value={sort || "None"}
         options={[
           {
             label: "common.sort_button",
-            value: undefined,
+            value: "None",
           },
           {
             label: "filters.sort_by.date",

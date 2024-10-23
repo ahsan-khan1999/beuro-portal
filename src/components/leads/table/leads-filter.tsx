@@ -20,16 +20,15 @@ export default function LeadsFilter({
   handleFilterChange,
   isAgent,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
+  const { sort, noteType } = router.query as any;
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
 
   const queryAppointment = router.query.isAppointmentCreated;
-
-  const { sort, noteType } = router.query as any;
 
   useEffect(() => {
     const queryText = router.query.text;

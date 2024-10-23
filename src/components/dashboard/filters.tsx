@@ -40,7 +40,7 @@ export default function DashboardFilters({
           setFilter({ ...filter, month: Number(value) });
           handleFilterChange({ ...filter, month: Number(value) });
         }}
-        value={(filter?.month as any) || "1"}
+        value={filter?.month ? String(filter.month) : "1"}
         isSearch={false}
         options={[
           { label: "dashboard_detail.months.jan", value: "1" },

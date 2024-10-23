@@ -15,8 +15,9 @@ export default function AppointmentsFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { sort } = router.query as any;
+  const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -130,7 +131,7 @@ export default function AppointmentsFilter({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -232,15 +233,11 @@ export default function AppointmentsFilter({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value={
-              Array.isArray(router.query.sort)
-                ? router.query.sort[0]
-                : router.query.sort
-            }
+            value={sort || "None"}
             options={[
               {
                 label: "common.sort_button",
-                value: undefined,
+                value: "None",
               },
               {
                 label: "filters.sort_by.date",

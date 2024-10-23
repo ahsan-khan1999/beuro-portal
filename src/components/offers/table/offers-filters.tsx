@@ -11,16 +11,16 @@ import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppSelector } from "@/hooks/useRedux";
-import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 
 export default function OffersFilters({
   filter,
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { sort, noteType, emailStatus } = router.query as any;
   const { noteSettings } = useAppSelector((state) => state.settings);
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -208,8 +208,6 @@ export default function OffersFilters({
       return updatedFilter;
     });
   };
-
-  const { sort, noteType, emailStatus } = router.query as any;
 
   return (
     <div className="flex flex-col maxLargePro:flex-row maxLargePro:items-center w-full xl:w-fit gap-4 z-10">

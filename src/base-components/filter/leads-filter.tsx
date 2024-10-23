@@ -37,8 +37,8 @@ export default function LeadsFilter({
     handleExtraFiltersClose,
   } = useFilter({ filter, setFilter, moreFilters });
 
-  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
   const { t: translate } = useTranslation();
+  const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
   const handleSave = () => {
     router.push(
