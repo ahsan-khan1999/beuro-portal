@@ -12,6 +12,8 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
+  console.log(router.query, "router.query");
+
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
@@ -74,7 +76,7 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                   onClick={() =>
                     router.push({
                       pathname: "/email-tracker/view-mail",
-                      query: { email: item?.id },
+                      query: { ...router.query, email: item?.id },
                     })
                   }
                   className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg"

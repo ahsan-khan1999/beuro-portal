@@ -23,8 +23,14 @@ const DetailsData = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
+  // const handleBack = () => {
+  //   (router.pathname = "/email-tracker"), delete router.query["email"];
+  //   updateQuery(router, router.locale as string);
+  // };
+
   const handleBack = () => {
-    (router.pathname = "/email-tracker"), delete router.query["email"];
+    router.pathname = "/email-tracker";
+    delete router.query["email"];
     updateQuery(router, router.locale as string);
   };
 
