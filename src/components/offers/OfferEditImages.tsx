@@ -36,14 +36,11 @@ export interface DetailImgUploadProps {
 const OfferEditImages = ({
   shareImgModal,
   handleImagesUpload,
-  tabType,
-  handleImageSlider,
   id,
   name,
   refID,
   heading,
   className,
-  isAgent,
   isOffer,
 }: DetailImgUploadProps) => {
   const { t: translate } = useTranslation();

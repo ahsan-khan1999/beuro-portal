@@ -294,33 +294,19 @@ const useLeads = () => {
     if (e) {
       e?.stopPropagation();
     }
+
     dispatch(setImages([]));
     const filteredLead = lead.find((item_) => item_.id === id);
 
     if (filteredLead) {
       dispatch(setLeadDetails(filteredLead));
-      dispatch(
-        readImage({ params: { type: "leadID", id: filteredLead?.id } })
-      ).then((res: any) => {
-        if (
-          res.payload?.images?.length > 0 ||
-          res.payload?.attachments?.length > 0 ||
-          res.payload?.videos?.length > 0 ||
-          res.payload?.links?.length > 0
-        ) {
-          setCurrentPageRows((prev) =>
-            prev?.map((lead) => {
-              return lead.id === filteredLead?.id
-                ? { ...lead, isImageAdded: true }
-                : lead;
-            })
-          );
-        }
-      });
+      dispatch(readImage({ params: { type: "leadID", id: filteredLead?.id } }));
+
       dispatch(
         updateModalType({
           type: ModalType.UPLOAD_IMAGE,
           data: {
+            id: id,
             refID: refID,
             name: name,
             heading: heading,
@@ -389,6 +375,14 @@ const useLeads = () => {
     }
   };
 
+  const handleUpdateRow = (id?: string) => {
+    setCurrentPageRows((prev) =>
+      prev?.map((lead) => {
+        return lead.id === id ? { ...lead, isImageAdded: true } : lead;
+      })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -430,7 +424,11 @@ const useLeads = () => {
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (
-      <ImagesUpload onClose={onClose} handleImageSlider={defaultUpdateModal} />
+      <ImagesUpload
+        onClose={onClose}
+        onUpdateRow={handleUpdateRow}
+        handleImageSlider={defaultUpdateModal}
+      />
     ),
     [ModalType.CREATION]: (
       <CreationCreated
