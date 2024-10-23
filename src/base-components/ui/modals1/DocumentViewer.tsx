@@ -35,7 +35,12 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
         {images?.images && images?.images?.length > 0 ? (
           <ImagePreview images={images?.images} />
         ) : (
-          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
+          <NoDataEmptyState
+            className="w-full"
+            containerClassName="py-5 xMini:px-0"
+            textClassName="text-lg xMini:text-2xl"
+            imgClassName="w-20 h-20 xMini:w-fit xMini:h-fit"
+          />
         )}
       </>
     ),
@@ -51,7 +56,12 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
               ))}
           </div>
         ) : (
-          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
+          <NoDataEmptyState
+            className="w-full"
+            containerClassName="py-5 xMini:px-0"
+            textClassName="text-lg xMini:text-2xl"
+            imgClassName="w-20 h-20 xMini:w-fit xMini:h-fit"
+          />
         )}
       </>
     ),
@@ -80,7 +90,12 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
             ))}
           </div>
         ) : (
-          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
+          <NoDataEmptyState
+            className="w-full"
+            containerClassName="py-5 xMini:px-0"
+            textClassName="text-lg xMini:text-2xl"
+            imgClassName="w-20 h-20 xMini:w-fit xMini:h-fit"
+          />
         )}
       </>
     ),
@@ -103,7 +118,12 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
             ))}
           </div>
         ) : (
-          <NoDataEmptyState className="w-fit" containerClassName="py-5" />
+          <NoDataEmptyState
+            className="w-full"
+            containerClassName="py-5 xMini:px-0"
+            textClassName="text-lg xMini:text-2xl"
+            imgClassName="w-20 h-20 xMini:w-fit xMini:h-fit"
+          />
         )}
       </>
     ),
@@ -127,7 +147,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
         </p>
 
         <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
-          {attachementTabs.map((item, index) => (
+          {attachementTabs?.map((item, index) => (
             <button
               key={index}
               className={`${

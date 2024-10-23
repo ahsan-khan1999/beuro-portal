@@ -1,5 +1,11 @@
 import Image from "next/image";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
+import docIcon from "@/assets/pngs/doc-icon.png";
+import xxlIcon from "@/assets/pngs/xlx.png";
+import ppIcon from "@/assets/pngs/ppt-icon.png";
+import rtfIcon from "@/assets/pngs/rtf-icon.png";
+import txtIcon from "@/assets/pngs/txt-icon.png";
+import csvIcon from "@/assets/pngs/csv-icon.png";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useAppDispatch } from "@/hooks/useRedux";
@@ -17,6 +23,57 @@ export interface AttachFieldProps {
   isAttachement?: boolean;
 }
 
+const getFileTypeIcon = (fileName: string) => {
+  const fileExtension = fileName.split(".").pop()?.toLowerCase();
+
+  switch (fileExtension) {
+    case "pdf":
+      return pdfIcon;
+    case "doc":
+    case "docx":
+      return docIcon;
+    case "xls":
+    case "xlsx":
+      return xxlIcon;
+    case "ppt":
+    case "pptx":
+      return ppIcon;
+    case "rtf":
+      return rtfIcon;
+    case "txt":
+      return txtIcon;
+    case "csv":
+      return csvIcon;
+    default:
+      return pdfIcon;
+  }
+};
+
+const documentTypes = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "text/plain",
+  "application/vnd.ms-excel",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.ms-powerpoint",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  "application/vnd.ms-access",
+  "application/rtf",
+  "application/xml",
+  "application/json",
+  "application/zip",
+  "application/x-rar-compressed",
+  "application/vnd.oasis.opendocument.text",
+  "application/vnd.oasis.opendocument.spreadsheet",
+  "application/vnd.oasis.opendocument.presentation",
+  "application/vnd.ms-works",
+  "application/x-7z-compressed",
+  "text/csv",
+  "application/x-sh",
+  "application/x-java-archive",
+];
+
 export const AttachementField = ({
   id,
   text,
@@ -32,30 +89,6 @@ export const AttachementField = ({
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   let validFiles = [];
-  const documentTypes = [
-    "application/pdf",
-    "application/msword",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "text/plain",
-    "application/vnd.ms-excel",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    "application/vnd.ms-powerpoint",
-    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-    "application/vnd.ms-access",
-    "application/rtf",
-    "application/xml",
-    "application/json",
-    "application/zip",
-    "application/x-rar-compressed",
-    "application/vnd.oasis.opendocument.text",
-    "application/vnd.oasis.opendocument.spreadsheet",
-    "application/vnd.oasis.opendocument.presentation",
-    "application/vnd.ms-works",
-    "application/x-7z-compressed",
-    "text/csv",
-    "application/x-sh",
-    "application/x-java-archive",
-  ];
 
   const validateAndUploadFiles = async (files: FileList) => {
     for (let item of files) {
@@ -274,7 +307,11 @@ export const AttachementField = ({
                       handleDeleteFile(index);
                     }}
                   />
-                  <Image src={pdfIcon} alt="pdfIcon" />
+                  <Image
+                    src={getFileTypeIcon(item.value)}
+                    alt="file icon"
+                    className="min-w-5 min-h-6"
+                  />
                   <span>{item?.name?.slice(0, 20)}...</span>
                 </div>
               </div>
