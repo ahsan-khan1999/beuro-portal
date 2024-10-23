@@ -13,10 +13,10 @@ export default function EmailTrackerFilters({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { t: translate } = useTranslation();
   const router = useRouter();
-
+  const { sort } = router.query as any;
+  const { t: translate } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
   useEffect(() => {
@@ -24,6 +24,21 @@ export default function EmailTrackerFilters({
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
   }, [router.query.text]);
+
+  const checkbox: CheckBoxType[] = [
+    {
+      label: `${translate("email_status.Pending")}`,
+      type: `${staticEnums.MailStatus.pending}`,
+    },
+    {
+      label: `${translate("email_status.opend")}`,
+      type: `${staticEnums.MailStatus.opend}`,
+    },
+    {
+      label: `${translate("email_status.Failed")}`,
+      type: `${staticEnums.MailStatus.failed}`,
+    },
+  ];
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -59,7 +74,7 @@ export default function EmailTrackerFilters({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -80,20 +95,6 @@ export default function EmailTrackerFilters({
       return updatedFilter;
     });
   };
-  const checkbox: CheckBoxType[] = [
-    {
-      label: `${translate("email_status.Pending")}`,
-      type: `${staticEnums.MailStatus.pending}`,
-    },
-    {
-      label: `${translate("email_status.opend")}`,
-      type: `${staticEnums.MailStatus.opend}`,
-    },
-    {
-      label: `${translate("email_status.Failed")}`,
-      type: `${staticEnums.MailStatus.failed}`,
-    },
-  ];
 
   const handleEmailFilter = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
@@ -170,15 +171,11 @@ export default function EmailTrackerFilters({
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value={
-          Array.isArray(router.query.sort)
-            ? router.query.sort[0]
-            : router.query.sort
-        }
+        value={sort || "None"}
         options={[
           {
             label: "common.sort_button",
-            value: undefined,
+            value: "None",
           },
           {
             label: "filters.sort_by.date",

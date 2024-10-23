@@ -19,9 +19,10 @@ export default function InvoicesFilters({
   setFilter: SetStateAction<any>;
   handleFilterChange: (value: FilterType) => void;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { sort, noteType } = router.query as any;
+  const { t: translate } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
 
@@ -138,7 +139,7 @@ export default function InvoicesFilters({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -165,7 +166,7 @@ export default function InvoicesFilters({
       ...router.query,
     };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.noteType;
     } else {
       updatedQuery.noteType = String(value);
@@ -220,15 +221,11 @@ export default function InvoicesFilters({
         <div className="flex items-center gap-x-3">
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value={
-              Array.isArray(router.query.sort)
-                ? router.query.sort[0]
-                : router.query.sort
-            }
+            value={sort || "None"}
             options={[
               {
                 label: "common.sort_button",
-                value: undefined,
+                value: "None",
               },
               {
                 label: "filters.sort_by.date",
@@ -253,16 +250,12 @@ export default function InvoicesFilters({
 
           <SelectField
             handleChange={(value) => handleNoteType(value)}
-            value={
-              Array.isArray(router.query.noteType)
-                ? router.query.noteType[0]
-                : router.query.noteType
-            }
+            value={noteType || "None"}
             dropDownIconClassName=""
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
             options={[
-              { label: "add_note_dropdown.all_notes", value: undefined },
+              { label: "add_note_dropdown.all_notes", value: "None" },
               ...(noteSettings
                 ? noteSettings
                     ?.slice()

@@ -11,16 +11,16 @@ import OfferFilter from "@/base-components/filter/offer-filter";
 import { staticEnums } from "@/utils/static";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useAppSelector } from "@/hooks/useRedux";
-import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 
 export default function OffersFilters({
   filter,
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { sort, noteType, emailStatus } = router.query as any;
   const { noteSettings } = useAppSelector((state) => state.settings);
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -133,7 +133,7 @@ export default function OffersFilters({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -160,7 +160,7 @@ export default function OffersFilters({
       ...router.query,
     };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.noteType;
     } else {
       updatedQuery.noteType = String(value);
@@ -187,7 +187,7 @@ export default function OffersFilters({
   const hanldeMailStatus = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.emailStatus;
     } else {
       updatedQuery.emailStatus = String(value);
@@ -208,10 +208,6 @@ export default function OffersFilters({
       return updatedFilter;
     });
   };
-
-  const emailStatus = Array.isArray(router.query.emailStatus)
-    ? router.query.emailStatus[0]
-    : router.query.emailStatus;
 
   return (
     <div className="flex flex-col maxLargePro:flex-row maxLargePro:items-center w-full xl:w-fit gap-4 z-10">
@@ -242,15 +238,11 @@ export default function OffersFilters({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value={
-              Array.isArray(router.query.sort)
-                ? router.query.sort[0]
-                : router.query.sort
-            }
+            value={sort || "None"}
             options={[
               {
                 label: "common.sort_button",
-                value: undefined,
+                value: "None",
               },
               {
                 label: "filters.sort_by.date",
@@ -274,24 +266,16 @@ export default function OffersFilters({
           />
           <SelectField
             handleChange={(value) => handleNoteType(value)}
-            value={
-              Array.isArray(router.query.noteType)
-                ? router.query.noteType[0]
-                : router.query.noteType
-            }
-            dropDownIconClassName=""
+            value={noteType || "None"}
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
             options={[
-              { label: "add_note_dropdown.all_notes", value: undefined },
+              { label: "add_note_dropdown.all_notes", value: "None" },
               ...(noteSettings
-                ? noteSettings
-                    ?.slice()
-                    ?.reverse()
-                    ?.map((item) => ({
-                      label: item.notes.noteType,
-                      value: item.notes.noteType,
-                    }))
+                ? noteSettings?.map((item) => ({
+                    label: item.notes.noteType,
+                    value: item.notes.noteType,
+                  }))
                 : []),
             ]}
           />
@@ -300,11 +284,11 @@ export default function OffersFilters({
         <div className="flex items-center gap-x-3 z-20">
           <SelectField
             handleChange={(value) => hanldeMailStatus(value)}
-            value={emailStatus}
+            value={emailStatus || "None"}
             options={[
               {
                 label: "offers.card_content.email_status",
-                value: undefined,
+                value: "None",
               },
               {
                 label: "email_status.Pending",

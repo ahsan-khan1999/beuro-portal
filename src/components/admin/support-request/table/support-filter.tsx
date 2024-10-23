@@ -10,9 +10,10 @@ export default function SupportFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
+  const router = useRouter();
+  const { sort } = router.query as any;
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
-  const router = useRouter();
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -54,7 +55,7 @@ export default function SupportFilter({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -84,19 +85,15 @@ export default function SupportFilter({
         value={inputValue}
         iconDisplay={true}
         onEnterPress={onEnterPress}
-        options={[]}
+        textClassName="w-[177px]"
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value={
-          Array.isArray(router.query.sort)
-            ? router.query.sort[0]
-            : router.query.sort
-        }
+        value={sort || "None"}
         options={[
           {
             label: "common.sort_button",
-            value: undefined,
+            value: "None",
           },
           {
             label: "filters.sort_by.date",

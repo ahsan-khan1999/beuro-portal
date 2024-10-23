@@ -16,9 +16,10 @@ export default function ContractFilters({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
-  const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const { t: translate } = useTranslation();
+  const { sort, noteType, emailStatus } = router.query as any;
+  const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
   const queryTask = router.query.isTaskCreated;
@@ -128,7 +129,7 @@ export default function ContractFilters({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -155,7 +156,7 @@ export default function ContractFilters({
       ...router.query,
     };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.noteType;
     } else {
       updatedQuery.noteType = String(value);
@@ -182,7 +183,7 @@ export default function ContractFilters({
   const hanldeMailStatus = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.emailStatus;
     } else {
       updatedQuery.emailStatus = String(value);
@@ -228,10 +229,6 @@ export default function ContractFilters({
       return updatedFilter;
     });
   };
-
-  const emailStatus = Array.isArray(router.query.emailStatus)
-    ? router.query.emailStatus[0]
-    : router.query.emailStatus;
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
@@ -289,15 +286,11 @@ export default function ContractFilters({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value={
-              Array.isArray(router.query.sort)
-                ? router.query.sort[0]
-                : router.query.sort
-            }
+            value={sort || "None"}
             options={[
               {
                 label: "common.sort_button",
-                value: undefined,
+                value: "None",
               },
               {
                 label: "filters.sort_by.date",
@@ -324,16 +317,12 @@ export default function ContractFilters({
         <div className="flex items-center gap-x-3">
           <SelectField
             handleChange={(value) => handleNoteType(value)}
-            value={
-              Array.isArray(router.query.noteType)
-                ? router.query.noteType[0]
-                : router.query.noteType
-            }
+            value={noteType || "None"}
             dropDownIconClassName=""
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
             options={[
-              { label: "add_note_dropdown.all_notes", value: undefined },
+              { label: "add_note_dropdown.all_notes", value: "None" },
               ...(noteSettings
                 ? noteSettings
                     ?.slice()
@@ -347,11 +336,11 @@ export default function ContractFilters({
           />
           <SelectField
             handleChange={(value) => hanldeMailStatus(value)}
-            value={emailStatus}
+            value={emailStatus || "None"}
             options={[
               {
                 label: "offers.card_content.email_status",
-                value: undefined,
+                value: "None",
               },
               {
                 label: "email_status.Pending",

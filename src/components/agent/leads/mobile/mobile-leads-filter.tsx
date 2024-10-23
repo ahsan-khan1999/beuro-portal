@@ -26,78 +26,6 @@ export default function MobileLeadsFilters({
     setInputValue(value);
   };
 
-  // const checkbox: CheckBoxType[] = [
-  //   {
-  //     label: translate("leads.table_functions.open"),
-  //     type: `${staticEnums.LeadStatus.Open}`,
-  //   },
-  //   {
-  //     label: translate("leads.table_functions.inProcess"),
-  //     type: `${staticEnums.LeadStatus.InProcess}`,
-  //   },
-  //   {
-  //     label: translate("leads.table_functions.close"),
-  //     type: `${staticEnums.LeadStatus.Close}`,
-  //   },
-  //   {
-  //     label: translate("leads.table_functions.expire"),
-  //     type: `${staticEnums.LeadStatus.Expired}`,
-  //   },
-  // ];
-
-  // const handleStatusChange = (value: string, isChecked: boolean) => {
-  //   setFilter((prev: FilterType) => {
-  //     const updatedStatus = prev.status ? [...prev.status] : [];
-  //     const newStatus = updatedStatus;
-
-  //     if (isChecked) {
-  //       if (!updatedStatus.includes(value)) {
-  //         updatedStatus.push(value);
-  //       }
-
-  //       router.push(
-  //         {
-  //           pathname: router.pathname,
-  //           query: {
-  //             status:
-  //               newStatus && newStatus.length > 0
-  //                 ? newStatus.join(",")
-  //                 : "None",
-  //           },
-  //         },
-  //         undefined,
-  //         { shallow: true }
-  //       );
-  //     } else {
-  //       const index = updatedStatus.indexOf(value);
-  //       if (index > -1) {
-  //         updatedStatus.splice(index, 1);
-  //       }
-
-  //       router.push(
-  //         {
-  //           pathname: router.pathname,
-  //           query: {
-  //             status:
-  //               newStatus && newStatus.length > 0
-  //                 ? newStatus.join(",")
-  //                 : "None",
-  //           },
-  //         },
-  //         undefined,
-  //         { shallow: true }
-  //       );
-  //     }
-
-  //     const status =
-  //       updatedStatus.length > 0 ? updatedStatus : FiltersDefaultValues.None;
-  //     const updatedFilter = { ...prev, status: status };
-
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
-
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
 
@@ -125,25 +53,25 @@ export default function MobileLeadsFilters({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
-      },
-      undefined,
-      { shallow: false }
-    );
+  // const hanldeSortChange = (value: string) => {
+  //   router.push(
+  //     {
+  //       pathname: router.pathname,
+  //       query: {
+  //         ...router.query,
+  //         sort: value,
+  //       },
+  //     },
+  //     undefined,
+  //     { shallow: false }
+  //   );
 
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["sort"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
+  //   setFilter((prev: FilterType) => {
+  //     const updatedFilter = { ...prev, ["sort"]: value };
+  //     handleFilterChange(updatedFilter);
+  //     return updatedFilter;
+  //   });
+  // };
 
   return (
     <div className="flex flex-col gap-y-4">

@@ -20,9 +20,10 @@ export default function LeadsFilter({
   handleFilterChange,
   isAgent,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
+  const { sort, noteType } = router.query as any;
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
@@ -141,7 +142,7 @@ export default function LeadsFilter({
   const hanldeSortChange = (value?: string) => {
     const updatedQuery = { ...router.query };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
@@ -168,7 +169,7 @@ export default function LeadsFilter({
       ...router.query,
     };
 
-    if (value === undefined) {
+    if (value === "None") {
       delete updatedQuery.noteType;
     } else {
       updatedQuery.noteType = String(value);
@@ -274,15 +275,11 @@ export default function LeadsFilter({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value={
-              Array.isArray(router.query.sort)
-                ? router.query.sort[0]
-                : router.query.sort
-            }
+            value={sort || "None"}
             options={[
               {
                 label: "common.sort_button",
-                value: undefined,
+                value: "None",
               },
               {
                 label: "filters.sort_by.date",
@@ -310,16 +307,11 @@ export default function LeadsFilter({
             <div className="flex items-center gap-x-3 z-10">
               <SelectField
                 handleChange={(value) => handleNoteType(value)}
-                value={
-                  Array.isArray(router.query.noteType)
-                    ? router.query.noteType[0]
-                    : router.query.noteType
-                }
-                dropDownIconClassName=""
+                value={noteType || "None"}
                 containerClassName="w-[225px]"
                 labelClassName="w-[225px]"
                 options={[
-                  { label: "add_note_dropdown.all_notes", value: undefined },
+                  { label: "add_note_dropdown.all_notes", value: "None" },
                   ...(noteSettings
                     ? noteSettings
                         ?.slice()

@@ -34,9 +34,9 @@ export default function SelectField({
     labelClassName
   );
 
-  const [isOpen, setIsOpen] = useState(false);
   const { t: translate } = useTranslation();
-  const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState<string>(value || "");
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -57,12 +57,9 @@ export default function SelectField({
   };
 
   useEffect(() => {
-    const stringValue =
-      typeof value === "string" || value === undefined ? value : String(value);
-
-    const newLabel = options.find((item) => item?.value === stringValue);
+    const newLabel = options?.find((item) => item?.value === value);
     setSelectedLabel(newLabel?.label || "");
-  }, [value]);
+  }, [value, options]);
 
   return (
     <div className={containerClasses} ref={ref}>
