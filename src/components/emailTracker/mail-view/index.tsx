@@ -15,12 +15,12 @@ import { deleteEmail, readEmailDetail } from "@/api/slices/emailTracker/email";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 const ViewMails = () => {
-  const { modal } = useAppSelector((state) => state.global);
-  const { emailDetails, loading } = useAppSelector((state) => state.emailSlice);
   const router = useRouter();
   const id = router.query.email;
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
+  const { modal } = useAppSelector((state) => state.global);
+  const { emailDetails, loading } = useAppSelector((state) => state.emailSlice);
 
   useEffect(() => {
     if (id) {
