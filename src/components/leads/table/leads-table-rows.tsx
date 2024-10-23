@@ -7,6 +7,7 @@ import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
 import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
+import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
 
 export interface LeadTableProps {
   dataToAdd: Lead[];
@@ -40,8 +41,6 @@ export const LeadsTableRows = ({
   handleAddNote,
   handleImageUpload,
   onStatusChange,
-  onAppointment,
-  onShareImages,
   isAgent,
 }: LeadTableProps) => {
   const router = useRouter();
@@ -512,7 +511,8 @@ export const LeadsTableRows = ({
                   title={translate("leads.table_headings.note")}
                 >
                   <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                    <svg
+                    <AddNoteIcon isNoteCreated={item?.isNoteCreated} />
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="33"
                       height="33"
@@ -548,7 +548,7 @@ export const LeadsTableRows = ({
                         d="M19.4657 12.4092H13.0991C12.7577 12.4092 12.481 12.6859 12.481 13.0273C12.481 13.3687 12.7577 13.6454 13.0991 13.6454H19.4657C19.8071 13.6454 20.0838 13.3687 20.0838 13.0273C20.0838 12.6859 19.8071 12.4092 19.4657 12.4092Z"
                         fill={item.isNoteCreated ? "#FF0000" : "#4A13E7"}
                       />
-                    </svg>
+                    </svg> */}
                   </span>
                 </div>
 

@@ -10,6 +10,8 @@ import {
 } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
+import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
+import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
   onStatusChange: (id: string, status: string, type: string) => void;
@@ -279,7 +281,8 @@ export const AppointmentTableRows = ({
                   title={translate("leads.table_headings.images")}
                 >
                   <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                    <svg
+                    <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="34"
                       height="33"
@@ -321,7 +324,7 @@ export const AppointmentTableRows = ({
                           item?.leadID?.isImageAdded ? "#FF0000" : "#4A13E7"
                         }
                       />
-                    </svg>
+                    </svg> */}
                   </span>
                 </div>
                 <div
@@ -339,7 +342,8 @@ export const AppointmentTableRows = ({
                   title={translate("leads.table_headings.note")}
                 >
                   <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                    <svg
+                    <AddNoteIcon isNoteCreated={item?.leadID?.isNoteCreated} />
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="33"
                       height="33"
@@ -387,7 +391,7 @@ export const AppointmentTableRows = ({
                           item?.leadID?.isNoteCreated ? "#FF0000" : "#4A13E7"
                         }
                       />
-                    </svg>
+                    </svg> */}
                   </span>
                 </div>
                 <div className="py-4 flex items-center">

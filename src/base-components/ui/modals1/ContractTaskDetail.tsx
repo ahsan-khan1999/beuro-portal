@@ -14,6 +14,7 @@ import { useTranslation } from "next-i18next";
 import { Button } from "../button/button";
 import { TaskWithSelectedDates } from "@/types/contract";
 import { LocationIcon } from "@/assets/svgs/components/location-icon";
+import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
 export interface ContractTaskDetailProps {
   onDelete: (id: string) => void;
   onEditTask: (
@@ -87,14 +88,18 @@ export const ContractTaskDetail = ({
             {taskDetail?.type}
           </p>
           {taskDetail?.type === "Contract" && (
-            <Button
-              onClick={handlePDFPreview}
-              className="!h-fit py-1 xMini:py-2 px-2 xMini:px-4 hidden xMini:flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-              text={translate("invoice.invoice_created_modal.button")}
-              id="preview PDF"
-              inputType="button"
-              iconAlt="button"
-            />
+            <div className="flex items-center gap-x-3">
+              <AddImageIcon />
+
+              <Button
+                onClick={handlePDFPreview}
+                className="!h-fit py-1 xMini:py-2 px-2 xMini:px-4 hidden xMini:flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+                text={translate("invoice.invoice_created_modal.button")}
+                id="preview PDF"
+                inputType="button"
+                iconAlt="button"
+              />
+            </div>
           )}
         </div>
 
