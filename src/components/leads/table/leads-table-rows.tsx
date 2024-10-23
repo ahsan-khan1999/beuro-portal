@@ -6,6 +6,7 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { useAppSelector } from "@/hooks/useRedux";
+import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
 
 export interface LeadTableProps {
   dataToAdd: Lead[];
@@ -466,7 +467,8 @@ export const LeadsTableRows = ({
                   title={translate("leads.table_headings.images")}
                 >
                   <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                    <svg
+                    <AddImageIcon isImageAdded={item.isImageAdded} />
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="34"
                       height="33"
@@ -498,7 +500,7 @@ export const LeadsTableRows = ({
                         d="M19.3026 14.8806C18.2801 14.8806 17.4482 14.0488 17.4482 13.0263C17.4482 12.0038 18.2801 11.1719 19.3026 11.1719C20.3251 11.1719 21.157 12.0038 21.157 13.0263C21.157 14.0488 20.3251 14.8806 19.3026 14.8806ZM19.3026 12.4081C18.9618 12.4081 18.6845 12.6854 18.6845 13.0263C18.6845 13.3671 18.9618 13.6444 19.3026 13.6444C19.6435 13.6444 19.9208 13.3671 19.9208 13.0263C19.9208 12.6854 19.6435 12.4081 19.3026 12.4081Z"
                         fill={item.isImageAdded ? "#FF0000" : "#4A13E7"}
                       />
-                    </svg>
+                    </svg> */}
                   </span>
                 </div>
 
