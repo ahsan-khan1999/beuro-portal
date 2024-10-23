@@ -36,7 +36,6 @@ const ImagesUploadOffer = ({
     handleAttachementAdd,
     handleVideoAdd,
     handleimageAdd,
-    loading,
     loadingGlobal,
   } = useUploadImageOffer(handleImageSlider, type, id);
 
