@@ -18,11 +18,11 @@ export default function EmployeesFilters({
   handleFilterChange,
 }: FiltersComponentProps) {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { sort } = router.query as any;
   const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
-
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -61,35 +61,19 @@ export default function EmployeesFilters({
     });
   };
 
-  // useEffect(() => {
-  //   const sortOption = router.query.sort;
-  //   if (typeof sortOption === "string") {
-  //     const selectedLabel = getSelectedSortLabel(sortOption);
-  //     setSelectedSortLabel(selectedLabel);
-  //   }
-  // }, [router.query.sort]);
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
 
-  // const getSelectedSortLabel = (value: string): string => {
-  //   switch (value) {
-  //     case "createdAt":
-  //       return translate("filters.sort_by.date");
-  //     case "-createdAt":
-  //       return translate("filters.sort_by.latest");
-  //     case "fullName":
-  //       return translate("filters.sort_by.a_z");
-  //     default:
-  //       return "";
-  //   }
-  // };
+    if (value === "None") {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
 
-  const hanldeSortChange = (value: string) => {
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -115,39 +99,37 @@ export default function EmployeesFilters({
       <div className="flex items-center gap-x-4">
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}
-          value={filter?.sort || ""}
-          dropDownIconClassName=""
+          value={sort || "None"}
           options={[
             {
-              label: `${translate("filters.sort_by.date")}`,
+              label: "common.sort_button",
+              value: "None",
+            },
+            {
+              label: "filters.sort_by.date",
               value: "createdAt",
             },
             {
-              label: `${translate("filters.sort_by.latest")}`,
+              label: "filters.sort_by.latest",
               value: "-createdAt",
             },
             {
-              label: `${translate("filters.sort_by.oldest")}`,
+              label: "filters.sort_by.oldest",
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+            {
+              label: "filters.sort_by.a_z",
+              value: "customerDetail.fullName",
+            },
           ]}
-          label={translate("common.sort_button")}
-          containerClassName="min-w-fit"
+          containerClassName="w-[120px]"
+          labelClassName="w-[120px]"
         />
         <EmployeesFilter
           filter={filter}
           setFilter={setFilter}
           onFilterChange={handleFilterChange}
         />
-
-        {/* <Button
-        id="apply"
-        inputType="button"
-        text="Apply"
-        onClick={() => handleFilterChange()}
-        className="flex items-center gap-x-2 py-2 mr-2 !h-fit px-[10px]  text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-      /> */}
 
         <Button
           inputType="button"

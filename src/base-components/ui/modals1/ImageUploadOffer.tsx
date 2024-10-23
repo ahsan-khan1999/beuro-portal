@@ -34,12 +34,8 @@ const ImagesUploadOffer = ({
     setEnteredLink,
     attachementTabs,
     handleAttachementAdd,
-    handleAttachementDelete,
     handleVideoAdd,
-    handleVideoDelete,
     handleimageAdd,
-    handleImageDelete,
-    loading,
     loadingGlobal,
   } = useUploadImageOffer(handleImageSlider, type, id);
 
@@ -54,16 +50,11 @@ const ImagesUploadOffer = ({
             {translate("common.images_modal.sub_title")}
           </p>
         </div>
-        {/* <Form
-        formFields={fields}
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        errors={errors}
-      /> */}
+
         <ImageField
           id="attachement"
           attachements={enteredLinks?.images}
-          fileSupported="PNG, JPEG, JPG, WEBP "
+          fileSupported="PNG, JPEG, JPG, WEBP, HEIC, HEIF"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_image")}
@@ -85,7 +76,7 @@ const ImagesUploadOffer = ({
         <VideoField
           id="attachement"
           attachements={enteredLinks?.video}
-          fileSupported="MP4, MOV, AVI, WEBM"
+          fileSupported="MP4, MOV, AVI, WEBM, MKV, M4V, HEVC"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_video")}
@@ -99,9 +90,6 @@ const ImagesUploadOffer = ({
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.link_title")}
           </h2>
-          {/* <p className="text-xs font-normal text-[#8F8F8F]">
-            {translate("common.images_modal.link_sub_title")}
-          </p> */}
         </div>
         <LinkUpload
           inputLink={enteredLink}
@@ -125,7 +113,7 @@ const ImagesUploadOffer = ({
         <AttachementField
           id="attachement"
           attachements={enteredLinks?.attachements}
-          fileSupported="Pdf, ODT, DOC, XLXS"
+          fileSupported="PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, RTF, TXT, CSV"
           isAttachement={true}
           isOpenedFile={false}
           text={translate("common.images_modal.add_attachment")}
@@ -167,7 +155,7 @@ const ImagesUploadOffer = ({
         </div>
 
         <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
-          {attachementTabs.map((item, index) => (
+          {attachementTabs?.map((item, index) => (
             <button
               key={index}
               className={`${
@@ -190,7 +178,7 @@ const ImagesUploadOffer = ({
             containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
             textClassName="text-white"
             onClick={onSubmit}
-            loading={loading || loadingGlobal}
+            // loading={loading || loadingGlobal}
             disabled={loadingGlobal}
           />
         </div>

@@ -27,8 +27,17 @@ const PdfCard = ({
   const { contractDetails } = useAppSelector((state) => state.contract);
 
   const handleBackToDetail = () => {
-    const { status, page, text, sort, date, emailStatus, leadSource } =
-      router.query;
+    const {
+      status,
+      page,
+      text,
+      sort,
+      date,
+      noteType,
+      emailStatus,
+      leadSource,
+      isTaskCreated,
+    } = router.query;
 
     const queryParams = Object.entries({
       status,
@@ -36,8 +45,10 @@ const PdfCard = ({
       text,
       sort,
       date,
+      noteType,
       emailStatus,
       leadSource,
+      isTaskCreated,
     }).reduce((acc, [key, value]) => {
       if (value) {
         (acc as { [key: string]: string | string[] })[key] = value;

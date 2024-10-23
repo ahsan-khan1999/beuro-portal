@@ -19,11 +19,18 @@ export default function InvoicesFilters({
   setFilter: SetStateAction<any>;
   handleFilterChange: (value: FilterType) => void;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { sort, noteType } = router.query as any;
+  const { t: translate } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
+
+  useEffect(() => {
+    const queryText = router.query.text;
+    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
+    setInputValue(textValue || "");
+  }, [router.query.text]);
 
   const checkbox: CheckBoxType[] = [
     {
@@ -129,14 +136,19 @@ export default function InvoicesFilters({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === "None") {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -149,32 +161,34 @@ export default function InvoicesFilters({
     });
   };
 
-  const hanldeNoteType = (value: string) => {
+  const handleNoteType = (value: string | undefined) => {
+    const updatedQuery: { [key: string]: string | string[] | undefined } = {
+      ...router.query,
+    };
+
+    if (value === "None") {
+      delete updatedQuery.noteType;
+    } else {
+      updatedQuery.noteType = String(value);
+    }
+
+    updatedQuery.page = "1";
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          page: 1,
-          noteType: value,
-        },
+        query: updatedQuery,
       },
       undefined,
-      { shallow: false }
+      { shallow: true }
     );
 
     setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["noteType"]: value };
+      const updatedFilter = { ...prev, noteType: value };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
   };
-
-  useEffect(() => {
-    const queryText = router.query.text;
-    const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
-    setInputValue(textValue || "");
-  }, [router.query.text]);
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
@@ -207,50 +221,51 @@ export default function InvoicesFilters({
         <div className="flex items-center gap-x-3">
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value=""
-            dropDownIconClassName=""
+            value={sort || "None"}
             options={[
               {
-                label: `${translate("filters.sort_by.date")}`,
+                label: "common.sort_button",
+                value: "None",
+              },
+              {
+                label: "filters.sort_by.date",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.latest")}`,
+                label: "filters.sort_by.latest",
                 value: "-createdAt",
               },
               {
-                label: `${translate("filters.sort_by.oldest")}`,
+                label: "filters.sort_by.oldest",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.a_z")}`,
-                value: "customerDetial.fullName",
+                label: "filters.sort_by.a_z",
+                value: "customerDetail.fullName",
               },
             ]}
-            label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
+            containerClassName="w-[120px]"
+            labelClassName="w-[120px]"
           />
-          {/* <span className="text-[#4B4B4B] font-semibold text-base">
-            {translate("global_search.notes")}
-          </span> */}
+
           <SelectField
-            handleChange={(value) => hanldeNoteType(value)}
-            value=""
+            handleChange={(value) => handleNoteType(value)}
+            value={noteType || "None"}
             dropDownIconClassName=""
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
-            options={
-              noteSettings
+            options={[
+              { label: "add_note_dropdown.all_notes", value: "None" },
+              ...(noteSettings
                 ? noteSettings
-                    .slice()
-                    .reverse()
-                    .map((item) => ({
+                    ?.slice()
+                    ?.reverse()
+                    ?.map((item) => ({
                       label: item.notes.noteType,
                       value: item.notes.noteType,
                     }))
-                : []
-            }
-            label={translate("add_note_dropdown.all_notes")}
+                : []),
+            ]}
           />
           <InvoicesFilter
             filter={filter}

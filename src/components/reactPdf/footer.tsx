@@ -75,7 +75,6 @@ export const Footer = ({
     bankName: templateSettings?.secondColumn?.bankName,
   };
 
-  // const { address, bankDetails } = documentDetails?.secondColumn ?? {};
   const {
     row1: c3Row1,
     row2: c3Row2,

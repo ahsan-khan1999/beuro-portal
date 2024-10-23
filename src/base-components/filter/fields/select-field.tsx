@@ -6,13 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 export default function SelectField({
-  title,
   label,
   options,
-  border,
   handleChange,
   value,
   dropDownIconClassName,
@@ -36,9 +34,9 @@ export default function SelectField({
     labelClassName
   );
 
-  const [selectedLabel, setSelectedLabel] = useState<string>(label || "");
+  const { t: translate } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
+  const [selectedLabel, setSelectedLabel] = useState<string>(value || "");
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -50,56 +48,18 @@ export default function SelectField({
 
   const ref = useOutsideClick<HTMLDivElement>(hanldeClose);
 
-  const handleItemSelected = (selectedValue: string, selectedIndex: number) => {
-    options?.forEach(({ label, value }, index) => {
-      if (selectedIndex === index) {
-        setSelectedLabel(label);
-        handleChange(selectedValue);
-      }
-    });
+  const handleItemSelected = (
+    label: string,
+    selectedValue: string | undefined
+  ) => {
+    setSelectedLabel(label);
+    handleChange(selectedValue);
   };
 
   useEffect(() => {
-    const querySort = router.query.sort as string;
-    const queryNoteType = router.query.noteType as string;
-    const queryEmailStatus = router.query.emailStatus as string;
-
-    const selectedSortOption = options.find(
-      (option) => option.value === querySort
-    );
-
-    const selectedNoteTypeOption = options.find(
-      (option) => option.value === queryNoteType
-    );
-
-    const selectedEmailStatusOption = options.find(
-      (option) => option.value === queryEmailStatus
-    );
-
-    if (
-      selectedSortOption &&
-      selectedNoteTypeOption &&
-      selectedEmailStatusOption
-    ) {
-      setSelectedLabel(
-        `${selectedSortOption.label}, ${selectedNoteTypeOption.label}, ${selectedEmailStatusOption.label}`
-      );
-    } else if (selectedSortOption) {
-      setSelectedLabel(selectedSortOption.label);
-    } else if (selectedNoteTypeOption) {
-      setSelectedLabel(selectedNoteTypeOption.label);
-    } else if (selectedEmailStatusOption) {
-      setSelectedLabel(selectedEmailStatusOption.label);
-    } else {
-      setSelectedLabel(label || "");
-    }
-  }, [
-    router.query.sort,
-    router.query.noteType,
-    router.query.emailStatus,
-    label,
-    options,
-  ]);
+    const newLabel = options?.find((item) => item?.value === value);
+    setSelectedLabel(newLabel?.label || "");
+  }, [value, options]);
 
   return (
     <div className={containerClasses} ref={ref}>
@@ -107,7 +67,7 @@ export default function SelectField({
         className="flex justify-between items-center cursor-pointer px-[10px] py-2 bg-white rounded-lg border border-[#ccc] min-w-[105px] w-fit"
         onClick={handleToggle}
       >
-        <span className={labelDefualtClasses}>{selectedLabel}</span>
+        <span className={labelDefualtClasses}>{translate(selectedLabel)}</span>
         <DropDownNonFillIcon
           label={label}
           isOpen={isOpen}
@@ -141,22 +101,30 @@ export default function SelectField({
             )}
             <div
               style={{ maxHeight: "150px" }}
-              className="mt-2 min-h-fit overflow-x-hidden overflow-y-auto"
+              className="mt-2 overflow-x-hidden overflow-y-auto dashboard_scrollbar"
               id="dropdownSerchBar"
             >
               <div className="flex-col space-y-2">
-                {options?.map(({ label, value }, idx) => (
-                  <div
-                    className="flex justify-start px-2 py-1 hover:bg-[#eaebec] rounded-sm cursor-pointer mr-1 hoverTransetion"
-                    key={idx}
-                    onClick={() => {
-                      handleItemSelected(value, idx);
-                      setIsOpen(false);
-                    }}
-                  >
-                    <span>{label}</span>
-                  </div>
-                ))}
+                {options?.map(({ label, value }, idx) => {
+                  const isSelected = selectedLabel === label;
+
+                  return (
+                    <div
+                      className={`flex justify-start px-2 py-1 cursor-pointer mr-1 hoverTransetion rounded-md ${
+                        isSelected
+                          ? "bg-primary text-white hover:bg-buttonHover"
+                          : "bg-white hover:bg-[#eaebec]"
+                      }`}
+                      key={idx}
+                      onClick={() => {
+                        handleItemSelected(label, value);
+                        setIsOpen(false);
+                      }}
+                    >
+                      <span>{translate(label)}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

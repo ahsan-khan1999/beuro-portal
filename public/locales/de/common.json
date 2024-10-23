@@ -28,7 +28,7 @@
     "sign_up_button": "Registrieren",
     "dont_have_an_account": "Noch kein Konto?",
     "create": "Konto erstellen",
-    "or_login": "oder einloggen mit",
+    "or_login": "Oder einloggen mit",
     "remember_me": "Erinnere dich an mich",
     "forgot_password": "Passwort vergessen"
   },
@@ -153,7 +153,7 @@
     "backLogin": "Zurück zu Login",
     "dont_have_an_account": "Habe kein Konto ?",
     "create": "Konto erstellen",
-    "or_login": "oder loggen Sie sich ein mit"
+    "or_login": "Oder loggen Sie sich ein mit"
   },
   "toast": {
     "login": "Bitte einloggen",
@@ -176,7 +176,7 @@
     "invalid_format": "Ungültige Formate",
     "invalid_option": "Bitte eine gültige Option auswählen",
     "auth_invalid_credentials": "Ungültige Anmeldeinformationen",
-    "length_error": "längenfehler:{0}:{1}",
+    "length_error": "Längenfehler:{0}:{1}",
     "length_max": "{0} hat maximal die Länge {1}",
     "length_min": "{0} has min length of {1}",
     "otp_invalid": "Ungültige Otp",
@@ -202,7 +202,7 @@
     "user_profile_already_complete": "Benutzerprofil ist bereits vervollständigt",
     "offer_not_open": "ZurückgehenDieses Angebote ist bereits geschlossen oder unterzeichnet",
     "value_max": "value_max",
-    "discountLessThanTotalPrice": "muss geringer sein als der Gesamtpreis",
+    "discountLessThanTotalPrice": "Muss geringer sein als der Gesamtpreis",
     "auth_provider_mismatch": "Authentication Provider Mismatch",
     "otp_sent": "OPT Schicken",
     "otp_user_invalid_phone": "Die angegebene Telefonnummer ist für die OTP-Verifizierung ungültig",
@@ -264,7 +264,7 @@
       "appointments": {
         "appointment": "Termine",
         "pending": "Ausstehend",
-        "completed": "durchgeführt",
+        "completed": "Durchgeführt",
         "cancelled": "Abgebrochen"
       },
       "offers": {
@@ -315,7 +315,7 @@
       "appointments": {
         "appointment": "Termin",
         "pending": "Ausstehend",
-        "completed": "durchgeführt",
+        "completed": "Durchgeführt",
         "cancelled": "Abgebrochen"
       },
       "settings": "Einstellungen",
@@ -654,7 +654,7 @@
       "next_renew": "Nächste Erneuerung 24. January 2024",
       "card_type": "Visa",
       "package_name": "Silber",
-      "package_description": "Büro 360 Silver includes reports, requests, simplicity, and affordability.",
+      "package_description": "Büero 365 Silver includes reports, requests, simplicity, and affordability.",
       "request_services": {
         "heading": "Anfrage",
         "managers": "Manager",
@@ -810,7 +810,7 @@
     },
     "create_invoice_modal": {
       "total_amount": "Gesamtbetrag",
-      "remaining_amount": "verbleibender Betrag",
+      "remaining_amount": "Verbleibender Betrag",
       "enter_amount": "Betrag eingeben",
       "amount": "Betrag",
       "percentage": "Prozentsatz",
@@ -830,7 +830,7 @@
     "main_invoice_created_modal": {
       "main_heading": "Rechnung erfolgreich erstellt",
       "sub_heading": "Vielen Dank für die Erstellung der Rechnung, wir freuen uns, dass Sie dabei sind.",
-      "button": "Done"
+      "button": "Erledigt"
     }
   },
   "contracts": {
@@ -869,7 +869,7 @@
       "contract_status": "Vertragsstatus",
       "notes": "Notizen",
       "images": "Bilder",
-      "to": "bis"
+      "to": "Bis"
     },
     "tabs_headings": {
       "offer_details": "Angebotstitel",
@@ -1125,7 +1125,7 @@
   },
   "appointments": {
     "view_reports_btn": "Berichte anzeigen",
-    "reschedule_btn": "verschieben",
+    "reschedule_btn": "Verschieben",
     "sub_report": "Bericht einreichen",
     "create_appointments": "Termin erstellen",
     "view_appointments_btn": "Termin ansehen",
@@ -1150,7 +1150,7 @@
     },
     "appointment_status": {
       "Pending": "Ausstehend",
-      "Completed": "durchgeführt",
+      "Completed": "Durchgeführt",
       "Cancelled": "Abgebrochen"
     },
     "successs_modal": {
@@ -1275,12 +1275,12 @@
     "notifications": "Benachrichtigungen",
     "remaind_me": "Erinnere mich daran",
     "starts_in": "Beginnt in",
-    "minute": "minute",
-    "_at": "unter",
+    "minute": "Minute",
+    "_at": "Unter",
     "select_canton": "Kanton auswählen",
-    "before": "vor",
+    "before": "Vor",
     "hour": "Stunde",
-    "and": "und",
+    "and": "Und",
     "hours": "Hours",
     "minutes": "Protokoll",
     "text_area_msg": "Geben Sie hier Ihre Nachricht ein",
@@ -1306,6 +1306,7 @@
       "invoice_total": "Insgesamt",
       "page_sum": "Seite Summe"
     },
+    "image_upload_error_message": "Bitte laden Sie eine Bilddatei hoch.",
     "doc_upload_error_message": "Bitte laden Sie eine Dokumentendatei hoch.",
     "video_upload_error_message": "Bitte laden Sie eine Videodatei hoch.",
     "svg_upload_not_allowed": "SVG-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
@@ -1365,7 +1366,7 @@
     "time": "Zeit",
     "at": "Um",
     "clock": "Uhr",
-    "editor_placeholder": "fügen Sie ihren Text hier ein",
+    "editor_placeholder": "Fügen Sie ihren Text hier ein",
     "content_name": "Titel für Offerte",
     "content_text": "Text für Offerte",
     "general_inquery": "Allgemeine Anfrage",
@@ -1404,7 +1405,7 @@
     "help": "Hilfezentrum",
     "via_phone": "Per Telefonanruf",
     "via_post": "Über Post",
-    "via_internet": "über das Internet",
+    "via_internet": "Über das Internet",
     "via_email": "Über E-Mail",
     "via_whatsapp": "Über WhatsApp",
     "via_fb": "Über Facebook",
@@ -2334,7 +2335,7 @@
   },
   "support_req_status": {
     "pending": "Ausstehend",
-    "resolved": "aufgelöst"
+    "resolved": "Aufgelöst"
   },
   "payment_method": {
     "Cash": "Bar",
@@ -2351,7 +2352,7 @@
     "Company": "Unternehmen"
   },
   "email_status": {
-    "Post": "zugestellt",
+    "Post": "Post",
     "Pending": "Ausstehend",
     "Sent": "Gesendet",
     "Failed": "Gescheitert",
@@ -2364,7 +2365,7 @@
   },
   "support_request_status": {
     "pending": "Ausstehend",
-    "resolved": "aufgelöst"
+    "resolved": "Aufgelöst"
   },
   "customer_type": {
     "individual": "Privat",
@@ -2428,7 +2429,7 @@
     "enter_your_email": "Ihre E-Mail eingeben"
   },
   "rejected_offer": {
-    "heading": "Reject Offer",
+    "heading": "Angebot Ablehnen",
     "options": {
       "Cost Concerns": "Kostenaspekte",
       "Hidden Fees": "Versteckte Gebühren",
@@ -2581,12 +2582,12 @@
     }
   },
   "calendar": {
-    "more_text": "mehr",
+    "more_text": "Mehr",
     "delete_appointment_des": "Sind SIe sich sicher, dass Sie den Termin löschen möchten?",
     "main_heading": "Kalender",
     "add_task": "Termin hinzufügen",
     "today": "Heute",
-    "edit": "bearbeiten",
+    "edit": "Bearbeiten",
     "select_date": "Datum auswählen",
     "select_color": "Farbe auswählen",
     "remainder": "Restbetrag",

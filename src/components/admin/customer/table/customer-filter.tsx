@@ -11,9 +11,10 @@ export default function CustomerFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
+  const router = useRouter();
+  const { sort } = router.query as any;
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
-  const router = useRouter();
 
   const checkbox: CheckBoxType[] = [
     {
@@ -57,14 +58,19 @@ export default function CustomerFilter({
     setInputValue(value);
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === "None") {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -160,29 +166,35 @@ export default function CustomerFilter({
           value={inputValue}
           iconDisplay={true}
           onEnterPress={onEnterPress}
-          options={[]}
+          textClassName="w-[177px]"
         />
         <SelectField
           handleChange={(value) => hanldeSortChange(value)}
-          value={filter?.sort || ""}
-          dropDownIconClassName=""
+          value={sort || "None"}
           options={[
             {
-              label: `${translate("filters.sort_by.date")}`,
+              label: "common.sort_button",
+              value: "None",
+            },
+            {
+              label: "filters.sort_by.date",
               value: "createdAt",
             },
             {
-              label: `${translate("filters.sort_by.latest")}`,
+              label: "filters.sort_by.latest",
               value: "-createdAt",
             },
             {
-              label: `${translate("filters.sort_by.oldest")}`,
+              label: "filters.sort_by.oldest",
               value: "createdAt",
             },
-            { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+            {
+              label: "filters.sort_by.a_z",
+              value: "customerDetail.fullName",
+            },
           ]}
-          label={translate("common.sort_button")}
-          containerClassName="min-w-fit"
+          containerClassName="w-[120px]"
+          labelClassName="w-[120px]"
         />
       </div>
       {/* <CustomerFilters

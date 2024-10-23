@@ -1,5 +1,11 @@
 import Image from "next/image";
 import pdfIcon from "@/assets/svgs/PDF_file_icon.svg";
+import docIcon from "@/assets/pngs/doc-icon.png";
+import xxlIcon from "@/assets/pngs/xlx.png";
+import ppIcon from "@/assets/pngs/ppt-icon.png";
+import rtfIcon from "@/assets/pngs/rtf-icon.png";
+import txtIcon from "@/assets/pngs/txt-icon.png";
+import csvIcon from "@/assets/pngs/csv-icon.png";
 import deletePdfIcon from "@/assets/svgs/delete_file.svg";
 import { uploadMultiFileToFirebase } from "@/api/slices/globalSlice/global";
 import { useAppDispatch } from "@/hooks/useRedux";
@@ -17,6 +23,57 @@ export interface AttachFieldProps {
   isAttachement?: boolean;
 }
 
+const getFileTypeIcon = (fileName: string) => {
+  const fileExtension = fileName.split(".").pop()?.toLowerCase();
+
+  switch (fileExtension) {
+    case "pdf":
+      return pdfIcon;
+    case "doc":
+    case "docx":
+      return docIcon;
+    case "xls":
+    case "xlsx":
+      return xxlIcon;
+    case "ppt":
+    case "pptx":
+      return ppIcon;
+    case "rtf":
+      return rtfIcon;
+    case "txt":
+      return txtIcon;
+    case "csv":
+      return csvIcon;
+    default:
+      return pdfIcon;
+  }
+};
+
+const documentTypes = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "text/plain",
+  "application/vnd.ms-excel",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.ms-powerpoint",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  "application/vnd.ms-access",
+  "application/rtf",
+  "application/xml",
+  "application/json",
+  "application/zip",
+  "application/x-rar-compressed",
+  "application/vnd.oasis.opendocument.text",
+  "application/vnd.oasis.opendocument.spreadsheet",
+  "application/vnd.oasis.opendocument.presentation",
+  "application/vnd.ms-works",
+  "application/x-7z-compressed",
+  "text/csv",
+  "application/x-sh",
+  "application/x-java-archive",
+];
+
 export const AttachementField = ({
   id,
   text,
@@ -29,16 +86,9 @@ export const AttachementField = ({
   const formdata = new FormData();
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   let validFiles = [];
-  const documentTypes = [
-    "application/pdf",
-    "application/msword",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "text/plain",
-    "application/vnd.ms-excel",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  ];
 
   const validateAndUploadFiles = async (files: FileList) => {
     for (let item of files) {
@@ -50,19 +100,33 @@ export const AttachementField = ({
       }
     }
 
-    if (validFiles.length > 0) {
-      const response = await dispatch(uploadMultiFileToFirebase(formdata));
-      let newAttachement = (attachements && [...attachements]) || [];
-      if (response?.payload) {
-        response?.payload?.forEach((element: any) => {
-          newAttachement.push({
-            name: getFileNameFromUrl(element),
-            value: element,
+    try {
+      if (validFiles.length > 0) {
+        const response = await dispatch(
+          uploadMultiFileToFirebase({
+            data: formdata,
+            onProgress(percent: number) {
+              setUploadProgress(percent);
+            },
+          })
+        );
+
+        let newAttachement = (attachements && [...attachements]) || [];
+        if (response?.payload) {
+          response?.payload?.forEach((element: any) => {
+            newAttachement.push({
+              name: getFileNameFromUrl(element),
+              value: element,
+            });
           });
-        });
-        setAttachements && setAttachements(newAttachement);
-        setErrorMessage("");
+
+          setUploadProgress(null);
+          setAttachements && setAttachements(newAttachement);
+          setErrorMessage("");
+        }
       }
+    } catch (error) {
+      console.error("upload failed: ", error);
     }
   };
 
@@ -147,7 +211,6 @@ export const AttachementField = ({
     const list = attachements && [...attachements];
     list?.splice(index, 1);
     setAttachements && setAttachements(list);
-    // field.onChange();
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -197,7 +260,21 @@ export const AttachementField = ({
           className="hidden"
           onChange={handleFileInput}
           multiple
+          accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.rtf,.txt,.csv,.odt"
         />
+
+        {uploadProgress !== null && (
+          <div className="relative w-full h-5 bg-borderColor rounded-lg mt-1">
+            <div
+              className="absolute top-0 left-0 h-full bg-primary rounded-lg"
+              style={{ width: `${uploadProgress}%` }}
+            />
+
+            <div className="absolute inset-0 flex justify-center items-center text-white">
+              <span>{uploadProgress}%</span>
+            </div>
+          </div>
+        )}
 
         {errorMessage && (
           <p className="text-red text-sm mt-2">{errorMessage}</p>
@@ -213,9 +290,6 @@ export const AttachementField = ({
                   isOpenedFile ? "cursor-pointer" : "cursor-default"
                 }`}
                 key={index}
-                // onClick={() =>
-                //     isOpenedFile && router.push("/content/pdf-preview")
-                // }
               >
                 <div
                   className="flex items-center gap-3 cursor-pointer"
@@ -233,7 +307,11 @@ export const AttachementField = ({
                       handleDeleteFile(index);
                     }}
                   />
-                  <Image src={pdfIcon} alt="pdfIcon" />
+                  <Image
+                    src={getFileTypeIcon(item.value)}
+                    alt="file icon"
+                    className="min-w-5 min-h-6"
+                  />
                   <span>{item?.name?.slice(0, 20)}...</span>
                 </div>
               </div>

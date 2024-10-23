@@ -8,15 +8,7 @@ import { getFileNameFromUrl } from "@/utils/utility";
 import imgDelete from "@/assets/svgs/img_delete.svg";
 import { Slider } from "../slider/slider";
 
-export const ImageField = ({
-  id,
-  text,
-  fileSupported,
-  isOpenedFile,
-  attachements,
-  setAttachements,
-  isAttachement,
-}: {
+export interface ImageUploadFieldProps {
   id: string;
   text?: string;
   fileSupported?: string;
@@ -24,13 +16,41 @@ export const ImageField = ({
   attachements: Attachement[];
   setAttachements?: (attachement?: Attachement[]) => void;
   isAttachement?: boolean;
-}) => {
+}
+
+export const ImageField = ({
+  id,
+  text,
+  fileSupported,
+  isOpenedFile,
+  attachements,
+  setAttachements,
+}: ImageUploadFieldProps) => {
   const [isZoomed, setIsZoomed] = useState({
     zoomed: false,
     currentImage: "",
     sliderImageData: [],
     currentIndex: 0,
   });
+
+  const router = useRouter();
+  const formdata = new FormData();
+  const dispatch = useAppDispatch();
+  const [errorMessage, setErrorMessage] = useState("");
+  const imageTypes = [
+    "image/png",
+    "image/jpeg",
+    "image/gif",
+    "image/webp",
+    "image/bmp",
+    "image/tiff",
+    "image/svg+xml",
+    "image/x-icon",
+    "image/heic",
+    "image/heif",
+  ];
+
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   const toggleZoom = (image: string, index: number) => {
     const imageList = [
@@ -45,10 +65,6 @@ export const ImageField = ({
     });
   };
 
-  const router = useRouter();
-  const formdata = new FormData();
-  const dispatch = useAppDispatch();
-
   const handleFileInput = async (
     e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLLabelElement>
   ) => {
@@ -56,30 +72,54 @@ export const ImageField = ({
 
     let file: any = [];
 
+    const checkFileType = (file: File) => {
+      return imageTypes.includes(file.type);
+    };
+
     if (e instanceof DragEvent && e.dataTransfer) {
       for (let item of e.dataTransfer.files) {
-        formdata.append("files", item);
+        if (checkFileType(item)) {
+          formdata.append("files", item);
+          file.push(item);
+        } else {
+          setErrorMessage(translate("common.image_upload_error_message"));
+        }
       }
-
-      file.push(e.dataTransfer.files);
     } else if (e.target instanceof HTMLInputElement && e.target.files) {
       for (let item of e.target.files) {
-        formdata.append("files", item);
+        if (checkFileType(item)) {
+          formdata.append("files", item);
+          file.push(item);
+        } else {
+          setErrorMessage(translate("common.image_upload_error_message"));
+        }
       }
-      file.push(e.target.files);
     }
 
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
+    try {
+      const response = await dispatch(
+        uploadMultiFileToFirebase({
+          data: formdata,
+          onProgress(percent: number) {
+            setUploadProgress(percent);
+          },
+        })
+      );
 
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
+      let newAttachement = (attachements && [...attachements]) || [];
+      if (response?.payload) {
+        response?.payload?.forEach((element: any) => {
+          newAttachement.push({
+            name: getFileNameFromUrl(element),
+            value: element,
+          });
         });
-      });
-      setAttachements && setAttachements(newAttachement);
+
+        setUploadProgress(null);
+        setAttachements && setAttachements(newAttachement);
+      }
+    } catch (error) {
+      console.error("upload failed: ", error);
     }
   };
 
@@ -110,7 +150,6 @@ export const ImageField = ({
     const list = attachements && [...attachements];
     list?.splice(index, 1);
     setAttachements && setAttachements(list);
-    // field.onChange();
   };
 
   const SLIDER_IMAGES_DATA = {
@@ -160,8 +199,26 @@ export const ImageField = ({
           type="file"
           className="hidden"
           onChange={handleFileInput}
+          accept="image/*,.heif,.heic"
           multiple
         />
+
+        {uploadProgress !== null && (
+          <div className="relative w-full h-5 bg-borderColor rounded-lg mt-1">
+            <div
+              className="absolute top-0 left-0 h-full bg-primary rounded-lg"
+              style={{ width: `${uploadProgress}%` }}
+            />
+
+            <div className="absolute inset-0 flex justify-center items-center text-white">
+              <span>{uploadProgress}%</span>
+            </div>
+          </div>
+        )}
+
+        {errorMessage && (
+          <p className="text-red text-sm mt-2">{errorMessage}</p>
+        )}
       </label>
 
       <div className="col-span-2 mt-5">
@@ -169,10 +226,13 @@ export const ImageField = ({
           {attachements &&
             attachements?.map((item, index) => {
               const isSVG = item?.value?.endsWith(".svg");
+              const isHEIF =
+                item?.value?.endsWith(".heif") ||
+                item?.value?.endsWith(".heic");
 
               return (
                 <div
-                  className={`relative flex flex-col gap-3 h-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
+                  className={`relative flex flex-col gap-3 h-fit w-fit border border-[#EBEBEB] rounded-md px-3 py-2 break-all ${
                     isOpenedFile ? "cursor-pointer" : "cursor-default"
                   }`}
                   key={index}
@@ -181,8 +241,11 @@ export const ImageField = ({
                   }
                 >
                   <div className="flex items-center gap-3">
-                    <div style={{ position: "relative" }}>
-                      {isSVG ? (
+                    <div
+                      style={{ position: "relative" }}
+                      onClick={() => toggleZoom(item.value, index)}
+                    >
+                      {isSVG || isHEIF ? (
                         <object
                           data={item.value}
                           width={100}
@@ -196,13 +259,15 @@ export const ImageField = ({
                           height={100}
                           alt="Uploaded Preview"
                           style={{ height: "100px", width: "100px" }}
-                          onClick={() => toggleZoom(item.value, index)}
                           className="cursor-pointer"
                         />
                       )}
                       <div
                         className="absolute top-[5px] right-[5px] cursor-pointer"
-                        onClick={(e) => handleDeleteFile(index)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteFile(index);
+                        }}
                       >
                         <Image src={imgDelete} alt="imgDelete" />
                       </div>
@@ -220,7 +285,7 @@ export const ImageField = ({
                             alignItems: "center",
                             justifyContent: "center",
                           }}
-                          onClick={() => toggleZoom(item.value, index)}
+                          // onClick={() => toggleZoom(item.value, index)}
                         >
                           <Slider
                             {...SLIDER_IMAGES_DATA}

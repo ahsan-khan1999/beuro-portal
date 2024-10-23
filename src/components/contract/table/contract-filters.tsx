@@ -16,11 +16,13 @@ export default function ContractFilters({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
-  const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const { t: translate } = useTranslation();
+  const { sort, noteType, emailStatus } = router.query as any;
+  const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const { noteSettings } = useAppSelector((state) => state.settings);
+  const queryTask = router.query.isTaskCreated;
 
   const checkbox: CheckBoxType[] = [
     {
@@ -124,14 +126,19 @@ export default function ContractFilters({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === "None") {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -144,55 +151,48 @@ export default function ContractFilters({
     });
   };
 
-  const hanldeNoteType = (value: string) => {
+  const handleNoteType = (value: string | undefined) => {
+    const updatedQuery: { [key: string]: string | string[] | undefined } = {
+      ...router.query,
+    };
+
+    if (value === "None") {
+      delete updatedQuery.noteType;
+    } else {
+      updatedQuery.noteType = String(value);
+    }
+
+    updatedQuery.page = "1";
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          page: 1,
-          noteType: value,
-        },
+        query: updatedQuery,
       },
       undefined,
-      { shallow: false }
+      { shallow: true }
     );
 
     setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["noteType"]: value };
+      const updatedFilter = { ...prev, noteType: value };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
   };
 
-  const hanldeTaskFilter = (value: boolean) => {
+  const hanldeMailStatus = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === "None") {
+      delete updatedQuery.emailStatus;
+    } else {
+      updatedQuery.emailStatus = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          isTaskCreated: value,
-        },
-      },
-      undefined,
-      { shallow: false }
-    );
-
-    setFilter((prev: FilterType) => {
-      const updatedFilter = { ...prev, ["isTaskCreated"]: value };
-      handleFilterChange(updatedFilter);
-      return updatedFilter;
-    });
-  };
-
-  const hanldeMailStatus = (value: string) => {
-    router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          emailStatus: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -200,6 +200,31 @@ export default function ContractFilters({
 
     setFilter((prev: FilterType) => {
       const updatedFilter = { ...prev, ["emailStatus"]: value };
+      handleFilterChange(updatedFilter);
+      return updatedFilter;
+    });
+  };
+
+  const hanldeTaskFilter = (value?: boolean) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.isTaskCreated;
+    } else {
+      updatedQuery.isTaskCreated = String(value);
+    }
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: updatedQuery,
+      },
+      undefined,
+      { shallow: false }
+    );
+
+    setFilter((prev: FilterType) => {
+      const updatedFilter = { ...prev, ["isTaskCreated"]: value };
       handleFilterChange(updatedFilter);
       return updatedFilter;
     });
@@ -226,18 +251,27 @@ export default function ContractFilters({
         <div className="flex items-center gap-x-3 z-20">
           <BooleanSelectField
             handleChange={(value) => hanldeTaskFilter(value)}
-            value=""
+            value={
+              queryTask === "true"
+                ? true
+                : queryTask === "false"
+                ? false
+                : undefined
+            }
             options={[
               {
-                label: `${translate("leads.created")}`,
+                label: "calendar.main_heading",
+                value: undefined,
+              },
+              {
+                label: "leads.created",
                 value: true,
               },
               {
-                label: `${translate("leads.not_created")}`,
+                label: "leads.not_created",
                 value: false,
               },
             ]}
-            label={translate("calendar.main_heading")}
             containerClassName="w-[140px]"
             labelClassName="w-[140px]"
           />
@@ -252,82 +286,83 @@ export default function ContractFilters({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value=""
-            dropDownIconClassName=""
+            value={sort || "None"}
             options={[
               {
-                label: `${translate("filters.sort_by.date")}`,
+                label: "common.sort_button",
+                value: "None",
+              },
+              {
+                label: "filters.sort_by.date",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.latest")}`,
+                label: "filters.sort_by.latest",
                 value: "-createdAt",
               },
               {
-                label: `${translate("filters.sort_by.oldest")}`,
+                label: "filters.sort_by.oldest",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.a_z")}`,
+                label: "filters.sort_by.a_z",
                 value: "customerDetail.fullName",
               },
             ]}
-            label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
+            containerClassName="w-[120px]"
+            labelClassName="w-[120px]"
           />
         </div>
 
         <div className="flex items-center gap-x-3">
-          {/* <div className="flex items-center gap-x-3"> */}
-          {/* <span className="text-[#4B4B4B] font-semibold text-base">
-              {translate("global_search.notes")}
-            </span> */}
           <SelectField
-            handleChange={(value) => hanldeNoteType(value)}
-            value=""
+            handleChange={(value) => handleNoteType(value)}
+            value={noteType || "None"}
             dropDownIconClassName=""
             containerClassName="w-[225px]"
             labelClassName="w-[225px]"
-            options={
-              noteSettings
+            options={[
+              { label: "add_note_dropdown.all_notes", value: "None" },
+              ...(noteSettings
                 ? noteSettings
-                    .slice()
-                    .reverse()
-                    .map((item) => ({
+                    ?.slice()
+                    ?.reverse()
+                    ?.map((item) => ({
                       label: item.notes.noteType,
                       value: item.notes.noteType,
                     }))
-                : []
-            }
-            label={translate("add_note_dropdown.all_notes")}
+                : []),
+            ]}
           />
           <SelectField
             handleChange={(value) => hanldeMailStatus(value)}
-            value=""
-            dropDownIconClassName=""
+            value={emailStatus || "None"}
             options={[
               {
-                label: `${translate("email_status.Pending")}`,
+                label: "offers.card_content.email_status",
+                value: "None",
+              },
+              {
+                label: "email_status.Pending",
                 value: `${staticEnums.EmailStatus.Pending}`,
               },
               {
-                label: `${translate("email_status.Sent")}`,
+                label: "email_status.Sent",
                 value: `${staticEnums.EmailStatus.Sent}`,
               },
               {
-                label: `${translate("email_status.Post")}`,
+                label: "email_status.Post",
                 value: `${staticEnums.EmailStatus.Post}`,
               },
               {
-                label: `${translate("email_status.Failed")}`,
+                label: "email_status.Failed",
                 value: `${staticEnums.EmailStatus.Failed}`,
               },
             ]}
-            label={translate("offers.card_content.email_status")}
             containerClassName="w-[160px]"
             labelClassName="w-[160px]"
           />
-          {/* </div> */}
+
           <ContractFilter
             filter={filter}
             setFilter={setFilter}

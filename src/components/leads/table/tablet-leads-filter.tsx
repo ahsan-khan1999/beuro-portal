@@ -27,17 +27,38 @@ export default function TabletLeadsFilter({
   currentDate,
   onDateChange,
 }: AppointmentTableFunction) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { sort } = router.query as any;
+  const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
-  const dispatch = useAppDispatch();
+  const queryAppointment = router.query.isAppointmentCreated;
 
   useEffect(() => {
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
   }, [router.query.text]);
+
+  const checkbox: CheckBoxType[] = [
+    {
+      label: translate("leads.table_functions.open"),
+      type: `${staticEnums.LeadStatus.Open}`,
+    },
+    {
+      label: translate("leads.table_functions.inProcess"),
+      type: `${staticEnums.LeadStatus.InProcess}`,
+    },
+    {
+      label: translate("leads.table_functions.close"),
+      type: `${staticEnums.LeadStatus.Close}`,
+    },
+    {
+      label: translate("leads.table_functions.expire"),
+      type: `${staticEnums.LeadStatus.Expired}`,
+    },
+  ];
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -70,14 +91,19 @@ export default function TabletLeadsFilter({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === "None") {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -89,45 +115,6 @@ export default function TabletLeadsFilter({
       return updatedFilter;
     });
   };
-
-  // const hanldeStatusChange = (value: string) => {
-  //   router.push(
-  //     {
-  //       pathname: router.pathname,
-  //       query: {
-  //         ...router.query,
-  //         status: value,
-  //       },
-  //     },
-  //     undefined,
-  //     { shallow: false }
-  //   );
-
-  //   setFilter((prev: FilterType) => {
-  //     const updatedFilter = { ...prev, ["status"]: value };
-  //     handleFilterChange(updatedFilter);
-  //     return updatedFilter;
-  //   });
-  // };
-
-  const checkbox: CheckBoxType[] = [
-    {
-      label: translate("leads.table_functions.open"),
-      type: `${staticEnums.LeadStatus.Open}`,
-    },
-    {
-      label: translate("leads.table_functions.inProcess"),
-      type: `${staticEnums.LeadStatus.InProcess}`,
-    },
-    {
-      label: translate("leads.table_functions.close"),
-      type: `${staticEnums.LeadStatus.Close}`,
-    },
-    {
-      label: translate("leads.table_functions.expire"),
-      type: `${staticEnums.LeadStatus.Expired}`,
-    },
-  ];
 
   const handleStatusChange = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
@@ -182,14 +169,19 @@ export default function TabletLeadsFilter({
     });
   };
 
-  const hanldeAppointmentFilter = (value: boolean) => {
+  const hanldeAppointmentFilter = (value?: boolean) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.isAppointmentCreated;
+    } else {
+      updatedQuery.isAppointmentCreated = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          isAppointmentCreated: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -201,6 +193,13 @@ export default function TabletLeadsFilter({
       return updatedFilter;
     });
   };
+
+  const appointmentValue =
+    queryAppointment === "true"
+      ? true
+      : queryAppointment === "false"
+      ? false
+      : undefined;
 
   return (
     <div className="flex flex-col xLarge:flex-row xMd:hidden xLarge:items-center justify-between w-full z-10 gap-y-4">
@@ -226,20 +225,23 @@ export default function TabletLeadsFilter({
         <div className="flex items-center gap-x-4">
           <BooleanSelectField
             handleChange={(value) => hanldeAppointmentFilter(value)}
-            value=""
+            value={appointmentValue}
             options={[
               {
-                label: `${translate("leads.created")}`,
+                label: "sidebar.customer.appointments.appointment",
+                value: undefined,
+              },
+              {
+                label: "leads.created",
                 value: true,
               },
               {
-                label: `${translate("leads.not_created")}`,
+                label: "leads.not_created",
                 value: false,
               },
             ]}
-            label={translate("leads.lead_dropdown_status.Appointment")}
-            containerClassName="w-[140px]"
-            labelClassName="w-[140px]"
+            containerClassName="w-[160px]"
+            labelClassName="w-[160px]"
           />
           <InputField
             handleChange={handleInputChange}
@@ -252,27 +254,31 @@ export default function TabletLeadsFilter({
 
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value=""
+            value={sort || "None"}
             options={[
               {
-                label: `${translate("filters.sort_by.date")}`,
+                label: "common.sort_button",
+                value: "None",
+              },
+              {
+                label: "filters.sort_by.date",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.latest")}`,
+                label: "filters.sort_by.latest",
                 value: "-createdAt",
               },
               {
-                label: `${translate("filters.sort_by.oldest")}`,
+                label: "filters.sort_by.oldest",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.a_z")}`,
+                label: "filters.sort_by.a_z",
                 value: "customerDetail.fullName",
               },
             ]}
-            label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
+            containerClassName="w-[120px]"
+            labelClassName="w-[120px]"
           />
           <div className="w-[200px]">
             <CustomDatePciker

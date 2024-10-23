@@ -13,10 +13,10 @@ export default function EmailTrackerFilters({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { t: translate } = useTranslation();
   const router = useRouter();
-
+  const { sort } = router.query as any;
+  const { t: translate } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
 
   useEffect(() => {
@@ -24,6 +24,21 @@ export default function EmailTrackerFilters({
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
   }, [router.query.text]);
+
+  const checkbox: CheckBoxType[] = [
+    {
+      label: `${translate("email_status.Pending")}`,
+      type: `${staticEnums.MailStatus.pending}`,
+    },
+    {
+      label: `${translate("email_status.opend")}`,
+      type: `${staticEnums.MailStatus.opend}`,
+    },
+    {
+      label: `${translate("email_status.Failed")}`,
+      type: `${staticEnums.MailStatus.failed}`,
+    },
+  ];
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -56,14 +71,19 @@ export default function EmailTrackerFilters({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === "None") {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -75,21 +95,6 @@ export default function EmailTrackerFilters({
       return updatedFilter;
     });
   };
-
-  const checkbox: CheckBoxType[] = [
-    {
-      label: `${translate("email_status.Pending")}`,
-      type: `${staticEnums.MailStatus.pending}`,
-    },
-    {
-      label: `${translate("email_status.opend")}`,
-      type: `${staticEnums.MailStatus.opend}`,
-    },
-    {
-      label: `${translate("email_status.Failed")}`,
-      type: `${staticEnums.MailStatus.failed}`,
-    },
-  ];
 
   const handleEmailFilter = (value: string, isChecked: boolean) => {
     setFilter((prev: FilterType) => {
@@ -166,34 +171,32 @@ export default function EmailTrackerFilters({
       />
       <SelectField
         handleChange={(value) => hanldeSortChange(value)}
-        value={filter?.sort || ""}
-        dropDownIconClassName=""
+        value={sort || "None"}
         options={[
           {
-            label: `${translate("filters.sort_by.date")}`,
+            label: "common.sort_button",
+            value: "None",
+          },
+          {
+            label: "filters.sort_by.date",
             value: "createdAt",
           },
           {
-            label: `${translate("filters.sort_by.latest")}`,
+            label: "filters.sort_by.latest",
             value: "-createdAt",
           },
           {
-            label: `${translate("filters.sort_by.oldest")}`,
+            label: "filters.sort_by.oldest",
             value: "createdAt",
           },
-          { label: `${translate("filters.sort_by.a_z")}`, value: "title" },
+          {
+            label: "filters.sort_by.a_z",
+            value: "customerDetail.fullName",
+          },
         ]}
-        label={translate("common.sort_button")}
-        containerClassName="min-w-fit"
+        containerClassName="w-[120px]"
+        labelClassName="w-[120px]"
       />
-      {/* <Button
-          onClick={() => handleFilterChange()}
-          className="!h-fit py-2 px-[10px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-          text="Apply"
-          id="apply"
-          inputType="button"
-          name=""
-        /> */}
     </div>
   );
 }

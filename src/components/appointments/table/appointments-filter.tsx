@@ -15,10 +15,13 @@ export default function AppointmentsFilter({
   setFilter,
   handleFilterChange,
 }: FiltersComponentProps) {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { sort } = router.query as any;
+  const { t: translate } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState<string>("");
+
+  const queryOffer = router.query.isOfferCreated;
 
   useEffect(() => {
     const queryText = router.query.text;
@@ -125,14 +128,19 @@ export default function AppointmentsFilter({
     });
   };
 
-  const hanldeSortChange = (value: string) => {
+  const hanldeSortChange = (value?: string) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === "None") {
+      delete updatedQuery.sort;
+    } else {
+      updatedQuery.sort = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          sort: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -145,14 +153,19 @@ export default function AppointmentsFilter({
     });
   };
 
-  const hanldeOfferFilter = (value: boolean) => {
+  const hanldeOfferFilter = (value?: boolean) => {
+    const updatedQuery = { ...router.query };
+
+    if (value === undefined) {
+      delete updatedQuery.isOfferCreated;
+    } else {
+      updatedQuery.isOfferCreated = String(value);
+    }
+
     router.push(
       {
         pathname: router.pathname,
-        query: {
-          ...router.query,
-          isOfferCreated: value,
-        },
+        query: updatedQuery,
       },
       undefined,
       { shallow: false }
@@ -186,20 +199,29 @@ export default function AppointmentsFilter({
         <div className="flex items-center gap-x-4">
           <BooleanSelectField
             handleChange={(value) => hanldeOfferFilter(value)}
-            value=""
+            value={
+              queryOffer === "true"
+                ? true
+                : queryOffer === "false"
+                ? false
+                : undefined
+            }
             options={[
               {
-                label: `${translate("leads.created")}`,
+                label: "appointments.table_headings.offer_status",
+                value: undefined,
+              },
+              {
+                label: "leads.created",
                 value: true,
               },
               {
-                label: `${translate("leads.not_created")}`,
+                label: "leads.not_created",
                 value: false,
               },
             ]}
-            label={translate("appointments.table_headings.offer_status")}
-            containerClassName="w-[160px]"
-            labelClassName="w-[160px]"
+            containerClassName="w-[170px]"
+            labelClassName="w-[170px]"
           />
           <InputField
             handleChange={handleInputChange}
@@ -211,27 +233,31 @@ export default function AppointmentsFilter({
           />
           <SelectField
             handleChange={(value) => hanldeSortChange(value)}
-            value=""
+            value={sort || "None"}
             options={[
               {
-                label: `${translate("filters.sort_by.date")}`,
+                label: "common.sort_button",
+                value: "None",
+              },
+              {
+                label: "filters.sort_by.date",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.latest")}`,
+                label: "filters.sort_by.latest",
                 value: "-createdAt",
               },
               {
-                label: `${translate("filters.sort_by.oldest")}`,
+                label: "filters.sort_by.oldest",
                 value: "createdAt",
               },
               {
-                label: `${translate("filters.sort_by.a_z")}`,
+                label: "filters.sort_by.a_z",
                 value: "customerDetail.fullName",
               },
             ]}
-            label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
+            containerClassName="w-[120px]"
+            labelClassName="w-[120px]"
           />
           <LeadsFilters
             filter={filter}
