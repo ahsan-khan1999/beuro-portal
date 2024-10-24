@@ -55,9 +55,9 @@ export default function NoDataEmptyState({
           <h1 className={textClasses}>
             {heading || translate("empty_state.heading")}
           </h1>
-          <p className="text-[#909090] text-sm font-normal text-center">
+          {/* <p className="text-[#909090] text-sm font-normal text-center">
             {subHeading || translate("empty_state.description")}
-          </p>
+          </p> */}
           {isButton && (
             <Button
               inputType="button"

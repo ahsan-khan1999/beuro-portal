@@ -31,7 +31,7 @@ const FollowUpDropDown = () => {
             onClick={() => handleAddFollowUp()}
             id="button"
             inputType="button"
-            text={translate("follow_up.add_button")}
+            text={translate("follow_up.add_button_1")}
             className="text-white text-[13px] font-semibold rounded-md !h-8"
             icon={addIcon}
           />
