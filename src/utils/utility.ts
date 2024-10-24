@@ -892,6 +892,14 @@ export function getMailStatusColor(status: string) {
   else return "#45C769";
 }
 
+export const getPostalCode = (str: string) => {
+  if (!str) {
+    return "";
+  }
+  const match = str.match(/\d+/); // \d+ matches one or more digits
+  return match ? match[0] : null; // If match found, return the first match; otherwise return null
+};
+
 export function calculateTax(amount: number, taxPercentage: number) {
   const taxAmount = (amount * (taxPercentage / 100)).toFixed(2);
   return parseFloat(taxAmount);
