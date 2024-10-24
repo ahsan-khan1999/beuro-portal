@@ -333,7 +333,7 @@
       "phone": "Phone",
       "created_on": "Created On",
       "location": "Location",
-      "type": "Type",
+      "type": "Customer Type",
       "edit": "Edit"
     },
 
@@ -854,7 +854,7 @@
       "total_price": "Total Price",
       "created_on": "Created On",
       "payment": "Payment",
-      "status": "Status",
+      "status": "Contract Status",
       "images": "Images",
       "notes": "Notes",
       "edit": "Edit",
@@ -1029,9 +1029,11 @@
       "location": "Location",
       "status": "Status",
       "appointment": "Appointment",
+      "appointment_1": "Appointment",
       "images": "Images",
       "note": "Notes",
-      "edit": "Edit"
+      "edit": "Edit",
+      "postal_code": "Postal Code"
     },
     "card_content": {
       "heading": "Leads Details",
@@ -1563,9 +1565,9 @@
       "title": "Offer Title",
       "total_price": "Total Price",
       "created_on": "Created On",
-      "email": "E-Status",
-      "payment": "Payment",
-      "status": "Status",
+      "email": "Email Status",
+      "payment": "Payment Method",
+      "status": "Offer Status",
       "images": "Images",
       "note": "Notes",
       "edit": "Edit"
@@ -1966,6 +1968,7 @@
   "follow_up": {
     "heading": " Today Follow ups",
     "add_button": "Add Follow Up",
+    "add_button_1": "Add Follow Up",
     "upcoming_follow_up": "Up coming follow up",
     "view_all": "View all",
     "save_button": "Save",
