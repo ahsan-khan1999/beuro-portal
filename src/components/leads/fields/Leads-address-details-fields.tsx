@@ -240,9 +240,8 @@ export const LeadsEditAddressDetailsFormField: GenerateLeadAddressFormField = (
             id: "button",
             text: `${translate("offers.address_details.add_new_address")}`,
             inputType: "button",
-            className: `rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none ${
-              count === 3 && "hidden"
-            }`,
+            className:
+              "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
             onClick: () => {
               handleAddNewAddress && handleAddNewAddress();
             },
