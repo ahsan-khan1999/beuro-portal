@@ -40,7 +40,7 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                 "grid grid-cols-1 mlg:grid-cols-2 items-center gap-y-[10px] gap-x-4 rounded-lg p-4 bg-[#EDF4FF] w-full",
               children: [
                 {
-                  containerClass: "mb-0 EBEBE4",
+                  containerClass: "mb-0",
                   label: {
                     text: `${translate("employees.details.full_name")}`,
                     htmlFor: "fullName",
@@ -48,13 +48,12 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: `!p-4 !border-[#BFBFBF] focus:!border-primary bg-[rgba(118, 118, 118, 0.3)]`,
+                    className: `!p-4 !border-[#BFBFBF] focus:!border-primary`,
                     inputType: "text",
                     id: "fullName",
                     name: "fullName",
                     placeholder: "Jhon William",
                     register,
-                    disabled: true,
                   },
                 },
 
@@ -85,17 +84,16 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: `!px-4 !border-[#BFBFBF] focus:!border-primary bg-[rgba(118, 118, 118, 0.3)]`,
+                    className: `!px-4 !border-[#BFBFBF] focus:!border-primary`,
                     id: "phoneNumber",
                     name: "phoneNumber",
-                    disabled: true,
                     placeholder: "+49 234 23423",
                     inputType: "tel",
                     register,
                   },
                 },
                 {
-                  containerClass: "mb-0 bg-[#EDF4FF]",
+                  containerClass: "mb-0",
                   label: {
                     text: `${translate("employees.details.mobile_number")}`,
                     htmlFor: "mobileNumber",
@@ -103,12 +101,11 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: `!px-4 !border-[#BFBFBF] focus:!border-primary bg-[rgba(118, 118, 118, 0.3)]`,
+                    className: `!px-4 !border-[#BFBFBF] focus:!border-primary`,
                     id: "mobileNumber",
                     name: "mobileNumber",
                     inputType: "tel",
                     placeholder: "+49 234 23423",
-                    disabled: true,
                     register,
                   },
                 },

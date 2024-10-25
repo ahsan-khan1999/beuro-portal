@@ -423,7 +423,7 @@
       "recipient": "Recipient",
       "subject": "Subject",
       "send_at": "Send at",
-      "viewed_at": "Viewd at",
+      "viewed_at": "Viewed at",
       "status": "Status",
       "view_mail": "View Mail",
       "edit": "Edit"
@@ -435,7 +435,7 @@
       "subject": "Subject",
       "recipient": "Recipient",
       "send_at": "Send At",
-      "viewed_at": "Viewd At",
+      "viewed_at": "Viewed At",
       "attachments": "Attachments"
     },
     "email_confirmation_modal": {
