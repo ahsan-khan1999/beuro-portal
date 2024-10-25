@@ -13,7 +13,7 @@ export const AppointmentTableHeadings = () => {
             {translate("appointments.table_headings.id")}
           </span> */}
           <span className="font-semibold text-base text-white">
-            {translate("appointments.table_headings.lead_id")}
+            {translate("appointments.table_headings.id")}
           </span>
           <span className="font-semibold text-base text-white mlg:hidden xlg:block">
             {translate("appointments.table_headings.customer")}
