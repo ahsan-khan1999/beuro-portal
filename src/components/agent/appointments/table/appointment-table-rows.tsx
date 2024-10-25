@@ -405,7 +405,7 @@ export const AppointmentTableRows = ({
                       inputType="button"
                       onClick={handleAppointmentRoute}
                       className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap w-full"
-                      text={translate("appointments.sub_report")}
+                      text={translate("appointments.sub_report_1")}
                       id="view reports"
                       iconAlt="view reports"
                     />
