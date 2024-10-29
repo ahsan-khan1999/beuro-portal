@@ -66,12 +66,13 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                   },
                   field: {
                     type: Field.input,
-                    className: `!p-4 !border-[#BFBFBF] focus:!border-primary`,
+                    className: `!p-4 !border-[#BFBFBF] focus:!border-primary bg-[rgba(118, 118, 118, 0.3)]`,
                     inputType: "text",
                     id: "email",
                     name: "email",
                     placeholder: "jhonwilli65@gmail.com",
                     register,
+                    disabled: true,
                   },
                 },
                 {
@@ -86,7 +87,6 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                     className: `!px-4 !border-[#BFBFBF] focus:!border-primary`,
                     id: "phoneNumber",
                     name: "phoneNumber",
-
                     placeholder: "+49 234 23423",
                     inputType: "tel",
                     register,
@@ -106,7 +106,6 @@ export const AgentPrfoileSettingFormField: GenerateAgentSettingFormField = (
                     name: "mobileNumber",
                     inputType: "tel",
                     placeholder: "+49 234 23423",
-
                     register,
                   },
                 },
