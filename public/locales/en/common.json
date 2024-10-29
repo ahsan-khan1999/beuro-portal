@@ -423,7 +423,7 @@
       "recipient": "Recipient",
       "subject": "Subject",
       "send_at": "Send at",
-      "viewed_at": "Viewd at",
+      "viewed_at": "Viewed at",
       "status": "Status",
       "view_mail": "View Mail",
       "edit": "Edit"
@@ -435,7 +435,7 @@
       "subject": "Subject",
       "recipient": "Recipient",
       "send_at": "Send At",
-      "viewed_at": "Viewd At",
+      "viewed_at": "Viewed At",
       "attachments": "Attachments"
     },
     "email_confirmation_modal": {
@@ -853,7 +853,7 @@
       "customer": "Customer",
       "total_price": "Total Price",
       "created_on": "Created On",
-      "payment": "Payment",
+      "payment": "Payment Method",
       "status": "Contract Status",
       "images": "Images",
       "notes": "Notes",
@@ -1138,6 +1138,7 @@
     "create_appointments": "Create Appointment",
     "appointment": "Appointment",
     "sub_report": "Submit Report",
+    "sub_report_1": "Submit Report",
     "view_appointments_btn": "View Appointments",
     "schedule_appointment": "Schedule Appointment",
     "reschedule_appointment": "Reschedule Appointment",

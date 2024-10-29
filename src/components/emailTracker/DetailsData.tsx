@@ -138,7 +138,7 @@ const DetailsData = ({
             <span className="font-normal text-[#4D4D4D] text-base">
               {translate("email_tracker.card_content.send_at")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] text-base">
+            <span className="font-medium text-[#4B4B4B] text-base ml-2">
               {formatDateReverse(emailDetails?.createdAt as string)}
             </span>
           </div>
@@ -146,7 +146,7 @@ const DetailsData = ({
             <span className="font-normal text-[#4D4D4D] text-base">
               {translate("email_tracker.card_content.viewed_at")}:
             </span>
-            <span className="font-medium text-[#4B4B4B] text-base">
+            <span className="font-medium text-[#4B4B4B] text-base ml-2">
               {formatDateReverse(emailDetails?.viewedAt as string) || "-"}
             </span>
           </div>
