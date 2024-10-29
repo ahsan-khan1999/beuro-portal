@@ -853,7 +853,7 @@
       "customer": "Customer",
       "total_price": "Total Price",
       "created_on": "Created On",
-      "payment": "Payment",
+      "payment": "Payment Method",
       "status": "Contract Status",
       "images": "Images",
       "notes": "Notes",
