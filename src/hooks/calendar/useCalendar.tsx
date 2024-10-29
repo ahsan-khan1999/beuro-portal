@@ -27,6 +27,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType } from "@/types";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { DocumentViewerModal } from "@/base-components/ui/modals1/DocumentViewer";
 
 export const useCalendar = () => {
   const { loading, task, taskDetail } = useAppSelector(
@@ -152,6 +153,9 @@ export const useCalendar = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+  const onCloseSecond = () => {
+    dispatch(updateModalType({ type: ModalType.READ_CONTRACT_TASK_DETAIL }));
+  };
 
   const handleAddContractTask = () => {
     if (!isContractId) {
@@ -234,58 +238,19 @@ export const useCalendar = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
-  const handleImageUpload = async (
+  const handleViewImages = async (
     id: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
     e?.stopPropagation();
     dispatch(setImages([]));
 
-    let response = await dispatch(
-      readContractDetails({ params: { filter: id } })
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: { contractID: id },
+      })
     );
-
-    const customerType = response?.payload?.customerDetail
-      ?.customerType as keyof (typeof staticEnums)["CustomerType"];
-
-    const name =
-      customerType === 1
-        ? response?.payload?.customerDetail?.companyName
-        : response?.payload?.customerDetail?.fullName;
-
-    const heading =
-      customerType === 1
-        ? translate("common.company_name")
-        : translate("common.customer_name");
-
-    if (id && taskDetail) {
-      dispatch(
-        setContractTaskDetails({
-          ...taskDetail,
-          id: id,
-        })
-      );
-      dispatch(
-        readImage({
-          params: {
-            type: "contractID",
-            id: id,
-          },
-        })
-      );
-
-      dispatch(
-        updateModalType({
-          type: ModalType.UPLOAD_OFFER_IMAGE,
-          data: {
-            id: id,
-            refID: response?.payload?.contractNumber,
-            name: name,
-            heading: heading,
-          },
-        })
-      );
-    }
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -342,7 +307,7 @@ export const useCalendar = () => {
         onClose={onClose}
         onDelete={handleDelete}
         onEditTask={handleUpdateTask}
-        handleImageUpload={handleImageUpload}
+        handleViewImages={handleViewImages}
       />
     ),
     [ModalType.INFO_DELETED]: (
@@ -367,12 +332,7 @@ export const useCalendar = () => {
       </>
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer
-        onClose={onClose}
-        handleImageSlider={handleImageSlider}
-        type={"Contract"}
-        onUpdateDetails={() => {}}
-      />
+      <DocumentViewerModal onClose={onCloseSecond} />
     ),
   };
 

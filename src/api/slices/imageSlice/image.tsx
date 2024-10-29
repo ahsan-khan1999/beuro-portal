@@ -71,6 +71,7 @@ const imageSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(readImage.pending, (state) => {
       state.loading = true;
+      state.images = null;
     });
     builder.addCase(readImage.fulfilled, (state, action) => {
       state.images = action.payload;
