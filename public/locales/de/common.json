@@ -846,7 +846,7 @@
       "customer": "Kunde",
       "total_price": "Gesamtpreis",
       "created_on": "Erstellt am",
-      "payment": "Zahlung",
+      "payment": "Zahlungsart",
       "status": "Vertragsstatus",
       "images": "Bilder",
       "notes": "Notizen",
