@@ -11,7 +11,8 @@ import { Attachement } from "@/types/global";
 export const useUploadImageOffer = (
   handleImageSlider: Function,
   type: string,
-  id?: string
+  id?: string,
+  onUpdateDetails?: (id: string) => void
 ) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -43,8 +44,6 @@ export const useUploadImageOffer = (
   };
 
   const handleLinkAdd = (e?: React.FormEvent<HTMLFormElement>) => {
-    console.log(enteredLinks, "enteredLinks");
-
     e?.preventDefault();
     if (enteredLink.trim() !== "") {
       let newArray = [...enteredLinks.links];
@@ -126,6 +125,10 @@ export const useUploadImageOffer = (
     });
   }, [images]);
 
+  const handleTaskUpdateSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.IMAGE_UPDATED_SUCCESS }));
+  };
+
   const onSubmit = async () => {
     const formatImages = enteredLinks?.images?.map(
       (item: Attachement) => item.value
@@ -154,7 +157,12 @@ export const useUploadImageOffer = (
         createImage({ data: apiData, router, translate })
       );
 
-      if (response?.payload) handleImageSlider();
+      if (response?.payload) {
+        if (id) {
+          onUpdateDetails?.(id);
+          handleImageSlider();
+        }
+      }
     } else if (type === "Offer") {
       const apiData = {
         images: formatImages,
@@ -168,7 +176,12 @@ export const useUploadImageOffer = (
         createImage({ data: apiData, router, translate })
       );
 
-      if (response?.payload) handleImageSlider();
+      if (response?.payload) {
+        if (id) {
+          onUpdateDetails?.(id);
+          handleImageSlider();
+        }
+      }
     } else if (type === "Contract") {
       const apiData = {
         images: formatImages,
@@ -181,7 +194,16 @@ export const useUploadImageOffer = (
       const response = await dispatch(
         createImage({ data: apiData, router, translate })
       );
-      if (response?.payload) handleOnClose();
+
+      if (response?.payload) {
+        if (id) {
+          onUpdateDetails?.(id);
+          handleOnClose();
+          handleTaskUpdateSuccess();
+        }
+      } else {
+        handleOnClose();
+      }
     } else {
     }
   };

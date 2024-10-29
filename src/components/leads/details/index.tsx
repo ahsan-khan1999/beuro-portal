@@ -10,7 +10,6 @@ const LeadsDetails = () => {
     renderModal,
     leadDeleteHandler,
     leadDetails,
-    loading,
     loadingDetails,
     handleStatusUpdate,
     defaultUpdateModal,

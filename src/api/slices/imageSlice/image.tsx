@@ -70,26 +70,27 @@ const imageSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(readImage.pending, (state) => {
-      state.loading = true
+      state.loading = true;
+      state.images = null;
     });
     builder.addCase(readImage.fulfilled, (state, action) => {
-      state.images = action.payload
-      state.lastPage = action.payload?.lastPage
-      state.totalCount = action.payload?.totalCount
+      state.images = action.payload;
+      state.lastPage = action.payload?.lastPage;
+      state.totalCount = action.payload?.totalCount;
       state.loading = false;
     });
     builder.addCase(readImage.rejected, (state) => {
-      state.loading = false
+      state.loading = false;
     });
     builder.addCase(createImage.pending, (state) => {
-      state.loading = true
+      state.loading = true;
     });
     builder.addCase(createImage.fulfilled, (state, action) => {
-      if (action.payload) state.images = action.payload
+      if (action.payload) state.images = action.payload;
       state.loading = false;
     });
     builder.addCase(createImage.rejected, (state) => {
-      state.loading = false
+      state.loading = false;
     });
   },
 });

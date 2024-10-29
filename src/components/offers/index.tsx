@@ -21,7 +21,6 @@ export default function Offers() {
     handlePaymentStatusUpdate,
     isLoading,
     itemsPerPage,
-    loading,
     renderModal,
     setFilter,
     totalItems,

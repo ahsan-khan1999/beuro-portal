@@ -6,11 +6,13 @@ import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { AddContractTask } from "@/base-components/ui/modals1/AddTask";
 import localStoreUtil from "@/utils/localstore.util";
-import { DEFAULT_CONTRACT_TASK } from "@/utils/static";
+import { DEFAULT_CONTRACT_TASK, staticEnums } from "@/utils/static";
 import {
   deleteContractTask,
+  readContractDetails,
   readContractTaskDetail,
   readContractTasks,
+  setContractDetails,
   setContractTask,
   setContractTaskDetails,
 } from "@/api/slices/contract/contractSlice";
@@ -23,9 +25,14 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType } from "@/types";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
+import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { DocumentViewerModal } from "@/base-components/ui/modals1/DocumentViewer";
 
 export const useCalendar = () => {
-  const { loading, task } = useAppSelector((state) => state.contract);
+  const { loading, task, taskDetail } = useAppSelector(
+    (state) => state.contract
+  );
   const [reminderEvents, setReminderEvents] = useState<Task[]>([]);
   const [triggeredReminders, setTriggeredReminders] = useState<Set<string>>(
     new Set()
@@ -146,6 +153,9 @@ export const useCalendar = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+  const onCloseSecond = () => {
+    dispatch(updateModalType({ type: ModalType.READ_CONTRACT_TASK_DETAIL }));
+  };
 
   const handleAddContractTask = () => {
     if (!isContractId) {
@@ -224,6 +234,25 @@ export const useCalendar = () => {
     );
   };
 
+  const handleImageSlider = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleViewImages = async (
+    id: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+    dispatch(setImages([]));
+
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: { contractID: id },
+      })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATION]: (
       <CreationCreated
@@ -238,6 +267,14 @@ export const useCalendar = () => {
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading="Task Updated successfully"
+        route={onClose}
+      />
+    ),
+    [ModalType.IMAGE_UPDATED_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.images_updated")}
+        subHeading={translate("common.modals.images_updated_des")}
         route={onClose}
       />
     ),
@@ -270,6 +307,7 @@ export const useCalendar = () => {
         onClose={onClose}
         onDelete={handleDelete}
         onEditTask={handleUpdateTask}
+        handleViewImages={handleViewImages}
       />
     ),
     [ModalType.INFO_DELETED]: (
@@ -288,10 +326,13 @@ export const useCalendar = () => {
             onClose={onClose}
             remainderAlert={event}
             onUpdateSuccess={handleTaskUpdateSuccess}
-            onContractDetail={handleContractTaskDetail}
+            onContractDetail={() => {}}
           />
         ))}
       </>
+    ),
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <DocumentViewerModal onClose={onCloseSecond} />
     ),
   };
 

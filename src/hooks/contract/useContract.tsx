@@ -277,26 +277,30 @@ const useContract = () => {
       dispatch(setContractDetails(filteredLead));
       dispatch(
         readImage({ params: { type: "contractID", id: filteredLead?.id } })
-      ).then((res: any) => {
-        if (
-          res.payload?.images.length > 0 ||
-          res.payload?.attachments.length > 0 ||
-          res.payload?.videos.length > 0 ||
-          res.payload?.links.length > 0
-        ) {
-          setCurrentPageRows((prev) =>
-            prev.map((contract) => {
-              return contract.id === filteredLead?.id
-                ? { ...contract, isImageAdded: true }
-                : contract;
-            })
-          );
-        }
-      });
+      );
+
+      // .then((res: any) => {
+      //   if (
+      //     res.payload?.images.length > 0 ||
+      //     res.payload?.attachments.length > 0 ||
+      //     res.payload?.videos.length > 0 ||
+      //     res.payload?.links.length > 0
+      //   ) {
+      //     setCurrentPageRows((prev) =>
+      //       prev.map((contract) => {
+      //         return contract.id === filteredLead?.id
+      //           ? { ...contract, isImageAdded: true }
+      //           : contract;
+      //       })
+      //     );
+      //   }
+      // });
+
       dispatch(
         updateModalType({
           type: ModalType.UPLOAD_OFFER_IMAGE,
           data: {
+            id: id,
             refID: refID,
             name: name,
             heading: heading,
@@ -851,6 +855,16 @@ const useContract = () => {
     }
   };
 
+  const handleUpdateRow = (id?: string) => {
+    setCurrentPageRows((prev) =>
+      prev?.map((contract) => {
+        return contract.id === id
+          ? { ...contract, isImageAdded: true }
+          : contract;
+      })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -893,6 +907,7 @@ const useContract = () => {
         onClose={onClose}
         handleImageSlider={handleImageSlider}
         type={"Contract"}
+        onUpdateDetails={handleUpdateRow}
       />
     ),
     [ModalType.CREATION]: (

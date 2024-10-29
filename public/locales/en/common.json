@@ -1265,7 +1265,9 @@
       "success_signed_offer": "Operation Successful",
       "offer_signed_success_des": "Thank you for your order",
       "report_created": "Report created successfully!",
-      "report_created_des": "Thanks for creating Report we are happy to have you."
+      "report_created_des": "Thanks for creating Report we are happy to have you.",
+      "images_updated": "Operation Successful",
+      "images_updated_des": "Images updated successfully! "
     },
     "start_time": "Select start time",
     "end_time": "Select end time",

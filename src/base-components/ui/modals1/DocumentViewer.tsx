@@ -9,6 +9,7 @@ import { useDocumentViewer } from "@/hooks/modals/userDocumentViewer";
 import { useRouter } from "next/router";
 import { readImage } from "@/api/slices/imageSlice/image";
 import { ImagePreview } from "./image-preview";
+import { CompanyLogoLoader } from "../loader/company-logo-loader";
 
 export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
   const {
@@ -19,15 +20,22 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     translate,
   } = useDocumentViewer();
 
-  const { images } = useAppSelector((state) => state.image);
+  const { images, loading } = useAppSelector((state) => state.image);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { offerID } = router.query;
 
+  const contractID = useAppSelector(
+    (state) => state.global?.modal?.data?.contractID
+  );
+
   useEffect(() => {
-    if (offerID)
+    if (offerID) {
       dispatch(readImage({ params: { type: "offerID", id: offerID } }));
-  }, [offerID]);
+    } else if (contractID) {
+      dispatch(readImage({ params: { type: "contractID", id: contractID } }));
+    }
+  }, [offerID, contractID]);
 
   const attachementLookUp = {
     img_tab: (
@@ -162,9 +170,17 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
           ))}
         </div>
 
-        <div className="my-5">
-          {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
-        </div>
+        {loading && (
+          <div className="min-h-[300px] flex items-center justify-center">
+            <CompanyLogoLoader />
+          </div>
+        )}
+
+        {!loading && (
+          <div className="my-5">
+            {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
+          </div>
+        )}
       </div>
     </BaseModal>
   );

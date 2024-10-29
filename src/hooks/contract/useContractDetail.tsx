@@ -185,6 +185,7 @@ export default function useContractDetail() {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
+          id: id,
           refID: refID,
           name: name,
           heading: heading,
@@ -301,6 +302,14 @@ export default function useContractDetail() {
     if (response?.payload) handleUpdateContractDetail();
   };
 
+  const handleDetailUpdate = (id?: string) => {
+    dispatch(readContractDetails({ params: { filter: id } })).then(
+      (res: CustomerPromiseActionType) => {
+        dispatch(setContractDetails(res?.payload));
+      }
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -365,6 +374,7 @@ export default function useContractDetail() {
         onClose={onClose}
         handleImageSlider={handleImageSlider}
         type="Contract"
+        onUpdateDetails={handleDetailUpdate}
       />
     ),
 
