@@ -56,12 +56,14 @@ export default function Contract() {
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-        currentPage={currentPage}
-      />
+      {!isLoading && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+      )}
 
       {renderModal()}
     </>

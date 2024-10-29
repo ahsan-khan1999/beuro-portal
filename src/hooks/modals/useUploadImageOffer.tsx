@@ -44,8 +44,6 @@ export const useUploadImageOffer = (
   };
 
   const handleLinkAdd = (e?: React.FormEvent<HTMLFormElement>) => {
-    console.log(enteredLinks, "enteredLinks");
-
     e?.preventDefault();
     if (enteredLink.trim() !== "") {
       let newArray = [...enteredLinks.links];
@@ -127,6 +125,10 @@ export const useUploadImageOffer = (
     });
   }, [images]);
 
+  const handleTaskUpdateSuccess = () => {
+    dispatch(updateModalType({ type: ModalType.IMAGE_UPDATED_SUCCESS }));
+  };
+
   const onSubmit = async () => {
     const formatImages = enteredLinks?.images?.map(
       (item: Attachement) => item.value
@@ -192,11 +194,15 @@ export const useUploadImageOffer = (
       const response = await dispatch(
         createImage({ data: apiData, router, translate })
       );
+
       if (response?.payload) {
         if (id) {
           onUpdateDetails?.(id);
           handleOnClose();
+          handleTaskUpdateSuccess();
         }
+      } else {
+        handleOnClose();
       }
     } else {
     }

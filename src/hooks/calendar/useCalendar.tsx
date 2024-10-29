@@ -6,11 +6,13 @@ import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { AddContractTask } from "@/base-components/ui/modals1/AddTask";
 import localStoreUtil from "@/utils/localstore.util";
-import { DEFAULT_CONTRACT_TASK } from "@/utils/static";
+import { DEFAULT_CONTRACT_TASK, staticEnums } from "@/utils/static";
 import {
   deleteContractTask,
+  readContractDetails,
   readContractTaskDetail,
   readContractTasks,
+  setContractDetails,
   setContractTask,
   setContractTaskDetails,
 } from "@/api/slices/contract/contractSlice";
@@ -23,9 +25,13 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType } from "@/types";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
+import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 
 export const useCalendar = () => {
-  const { loading, task } = useAppSelector((state) => state.contract);
+  const { loading, task, taskDetail } = useAppSelector(
+    (state) => state.contract
+  );
   const [reminderEvents, setReminderEvents] = useState<Task[]>([]);
   const [triggeredReminders, setTriggeredReminders] = useState<Set<string>>(
     new Set()
@@ -224,6 +230,64 @@ export const useCalendar = () => {
     );
   };
 
+  const handleImageSlider = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleImageUpload = async (
+    id: string,
+    e?: React.MouseEvent<HTMLSpanElement>
+  ) => {
+    e?.stopPropagation();
+    dispatch(setImages([]));
+
+    let response = await dispatch(
+      readContractDetails({ params: { filter: id } })
+    );
+
+    const customerType = response?.payload?.customerDetail
+      ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
+    const name =
+      customerType === 1
+        ? response?.payload?.customerDetail?.companyName
+        : response?.payload?.customerDetail?.fullName;
+
+    const heading =
+      customerType === 1
+        ? translate("common.company_name")
+        : translate("common.customer_name");
+
+    if (id && taskDetail) {
+      dispatch(
+        setContractTaskDetails({
+          ...taskDetail,
+          id: id,
+        })
+      );
+      dispatch(
+        readImage({
+          params: {
+            type: "contractID",
+            id: id,
+          },
+        })
+      );
+
+      dispatch(
+        updateModalType({
+          type: ModalType.UPLOAD_OFFER_IMAGE,
+          data: {
+            id: id,
+            refID: response?.payload?.contractNumber,
+            name: name,
+            heading: heading,
+          },
+        })
+      );
+    }
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CREATION]: (
       <CreationCreated
@@ -238,6 +302,14 @@ export const useCalendar = () => {
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading="Task Updated successfully"
+        route={onClose}
+      />
+    ),
+    [ModalType.IMAGE_UPDATED_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.images_updated")}
+        subHeading={translate("common.modals.images_updated_des")}
         route={onClose}
       />
     ),
@@ -270,6 +342,7 @@ export const useCalendar = () => {
         onClose={onClose}
         onDelete={handleDelete}
         onEditTask={handleUpdateTask}
+        handleImageUpload={handleImageUpload}
       />
     ),
     [ModalType.INFO_DELETED]: (
@@ -288,10 +361,18 @@ export const useCalendar = () => {
             onClose={onClose}
             remainderAlert={event}
             onUpdateSuccess={handleTaskUpdateSuccess}
-            onContractDetail={handleContractTaskDetail}
+            onContractDetail={() => {}}
           />
         ))}
       </>
+    ),
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer
+        onClose={onClose}
+        handleImageSlider={handleImageSlider}
+        type={"Contract"}
+        onUpdateDetails={() => {}}
+      />
     ),
   };
 

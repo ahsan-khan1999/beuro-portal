@@ -20,7 +20,7 @@ const ImagesUploadOffer = ({
   onClose,
   handleImageSlider,
   type,
-  onUpdateDetails
+  onUpdateDetails,
 }: ImageUploadProps) => {
   const { id, refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data

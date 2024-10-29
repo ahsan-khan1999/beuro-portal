@@ -23,12 +23,14 @@ export interface ContractTaskDetailProps {
     clickedEndDate?: string
   ) => void;
   onClose: () => void;
+  handleImageUpload: (id: string, e: React.MouseEvent<HTMLSpanElement>) => void;
 }
 
 export const ContractTaskDetail = ({
   onClose,
   onDelete,
   onEditTask,
+  handleImageUpload,
 }: ContractTaskDetailProps) => {
   const { t: translate } = useTranslation();
   const taskDetail = useAppSelector(
@@ -89,7 +91,11 @@ export const ContractTaskDetail = ({
           </p>
           {taskDetail?.type === "Contract" && (
             <div className="flex items-center gap-x-3">
-              <AddImageIcon />
+              <div
+                onClick={(e) => handleImageUpload(taskDetail?.contractID, e)}
+              >
+                <AddImageIcon />
+              </div>
 
               <Button
                 onClick={handlePDFPreview}
