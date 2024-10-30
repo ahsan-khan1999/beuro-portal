@@ -28,7 +28,7 @@ export const ImageField = ({
 }: ImageUploadFieldProps) => {
   const [isZoomed, setIsZoomed] = useState({
     zoomed: false,
-    currentImage: "",
+    // currentImage: "",
     sliderImageData: [],
     currentIndex: 0,
   });
@@ -54,14 +54,22 @@ export const ImageField = ({
 
   const toggleZoom = (image: string, index: number) => {
     const imageList = [
-      { imageSrc: image },
+      // { imageSrc: image },
       ...attachements?.map((item) => ({ imageSrc: item.value })),
     ] as unknown[];
     setIsZoomed({
       zoomed: !isZoomed.zoomed,
-      currentImage: image,
+      // currentImage: image,
       sliderImageData: imageList as never[],
-      currentIndex: ++index,
+      currentIndex: index,
+    });
+  };
+  const onClose = () => {
+    setIsZoomed({
+      zoomed: false,
+      // currentImage: "",
+      sliderImageData: [],
+      currentIndex: 0,
     });
   };
 
@@ -271,31 +279,6 @@ export const ImageField = ({
                       >
                         <Image src={imgDelete} alt="imgDelete" />
                       </div>
-                      {isZoomed.zoomed && (
-                        <div
-                          style={{
-                            position: "fixed",
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            zIndex: 9999,
-                            backgroundColor: "rgba(0, 0, 0, 0.8)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                          // onClick={() => toggleZoom(item.value, index)}
-                        >
-                          <Slider
-                            {...SLIDER_IMAGES_DATA}
-                            images={isZoomed?.sliderImageData}
-                            activeIndex={isZoomed?.currentIndex}
-                            containerClasses="w-[80%]"
-                            mainImgSliderClasses="w-full h-[615px]"
-                          />
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -303,6 +286,32 @@ export const ImageField = ({
             })}
         </div>
       </div>
+      {isZoomed.zoomed && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          // onClick={() => toggleZoom(item.value, index)}
+        >
+          <Slider
+            {...SLIDER_IMAGES_DATA}
+            images={isZoomed?.sliderImageData}
+            activeIndex={isZoomed?.currentIndex}
+            containerClasses="w-[80%]"
+            mainImgSliderClasses="w-full h-[615px]"
+            onClose={onClose}
+          />
+        </div>
+      )}
     </>
   );
 };

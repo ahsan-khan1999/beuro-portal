@@ -4,13 +4,12 @@ import { useState } from "react";
 export const useSlider = ({
   images,
   noOfThumbNails,
-  activeIndex
+  activeIndex,
 }: SliderImagesDataProps): ImageSliderHook => {
   const [currentIndex, setCurrentIndex] = useState(activeIndex || 0);
   const [thumbnailStartIndex, setThumbnailStartIndex] = useState(0);
 
   const selectedImage = images[currentIndex]?.imageSrc;
-
   const moveThumbnails = (direction: "left" | "right") => {
     if (direction === "left") {
       setThumbnailStartIndex(Math.max(0, thumbnailStartIndex - 1));
@@ -92,5 +91,7 @@ export const useSlider = ({
     selectImage,
     handleMouseLeave,
     handleMouseMove,
+    isFirst: currentIndex === 0,
+    isLast: currentIndex === images.length - 1,
   };
 };

@@ -506,7 +506,11 @@ export const useAppointments = () => {
       />
     ),
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={appointmentDetails?.id} />
+      <ShareImages
+        onClose={onClose}
+        type="appointmentID"
+        id={appointmentDetails?.id}
+      />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote

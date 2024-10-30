@@ -6,6 +6,7 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { Attachement } from "@/types/global";
 import { getFileNameFromUrl } from "@/utils/utility";
 import { useState } from "react";
+import VideoPlayer from "./VideoPlayer";
 
 export interface VideoUploadFieldProps {
   id: string;
@@ -138,7 +139,7 @@ export const VideoField = ({
   };
 
   return (
-    <>
+    <div className="mx-1">
       <label
         htmlFor={id}
         onDragOver={handleDragOver}
@@ -215,7 +216,7 @@ export const VideoField = ({
                 }
               >
                 <div
-                  className="flex items-center gap-3 cursor-pointer"
+                  className="flex items-center gap-3 cursor-pointer h-fit"
                   onClick={(e) => {
                     e.stopPropagation();
                     window.open(item?.value, "_blank");
@@ -230,12 +231,16 @@ export const VideoField = ({
                       handleDeleteFile(index);
                     }}
                   />
-                  <video src={item.value} autoPlay={false}></video>
+                  <VideoPlayer
+                    videoFile={item.value}
+                    isControls={true}
+                    videoType="video/mp4"
+                  />
                 </div>
               </div>
             ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };

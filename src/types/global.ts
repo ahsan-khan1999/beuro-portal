@@ -192,3 +192,9 @@ export interface PdfPreviewProps {
   serviceItemFooter: ServiceItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
 }
+
+export interface ShareImagesProps {
+  onClose: () => void;
+  id: string;
+  type: string;
+}

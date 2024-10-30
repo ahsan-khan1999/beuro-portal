@@ -38,7 +38,7 @@ const EditInvoiceDetails = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={invoiceDetails?.id} />
+      <ShareImages onClose={onClose} type="invoiceID" id={invoiceDetails?.id} />
     ),
 
     [ModalType.UPLOAD_OFFER_IMAGE]: (
