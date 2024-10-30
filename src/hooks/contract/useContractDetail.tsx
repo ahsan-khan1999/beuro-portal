@@ -404,7 +404,11 @@ export default function useContractDetail() {
     ),
     [ModalType.EDIT_DATE]: <EditDate onClose={onClose} />,
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={contractDetails?.id} />
+      <ShareImages
+        onClose={onClose}
+        type="contractID"
+        id={contractDetails?.id}
+      />
     ),
     [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };

@@ -24,7 +24,6 @@ export const useUploadImageOffer = (
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
   const [activeTab, setActiveTab] = useState("img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
-  const [isInitialTabSet, setIsInitialTabSet] = useState(false);
   const [enteredLinks, setEnteredLinks] = useState<any>({
     images: [],
     links: [],
@@ -209,7 +208,7 @@ export const useUploadImageOffer = (
   };
 
   useEffect(() => {
-    if (isInitialTabSet && enteredLinks) {
+    if (enteredLinks) {
       const { images, links, attachements, video } = enteredLinks;
 
       if (images && images.length > 0) {
@@ -223,10 +222,8 @@ export const useUploadImageOffer = (
       } else {
         setActiveTab(attachementTabs[0]);
       }
-
-      setIsInitialTabSet(true);
     }
-  }, [enteredLinks, isInitialTabSet]);
+  }, [enteredLinks]);
 
   return {
     onSubmit,

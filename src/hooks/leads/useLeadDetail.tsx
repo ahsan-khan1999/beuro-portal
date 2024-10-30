@@ -281,7 +281,7 @@ export default function useLeadDetail() {
       />
     ),
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={leadDetails?.id} />
+      <ShareImages onClose={onClose} type="leadID" id={leadDetails?.id} />
     ),
     [ModalType.SCHEDULE_APPOINTMENTS]: (
       <ScheduleAppointments

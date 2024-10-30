@@ -10,6 +10,8 @@ export const MainImageSlider = ({
   goToNext,
   goToPrev,
   containerClassName,
+  isFirst,
+  isLast,
 }: MainImageSliderProps) => {
   const silderContainerClasses = combineClasses(
     `w-[670px] h-[453px] overflow-hidden relative rounded-lg`,
@@ -20,18 +22,20 @@ export const MainImageSlider = ({
 
   return (
     <div className={silderContainerClasses}>
-      <IconOnlyButton
-        onClick={goToPrev}
-        buttonClassName="absolute left-[30px] top-2/4 transform -translate-y-2/4 text-white w-[50px] h-[50px] z-10"
-        icon={
-          <Image
-            src={sliderLeftIcon}
-            alt="left arrow icon"
-            width={50}
-            height={50}
-          />
-        }
-      />
+      {!isFirst && (
+        <IconOnlyButton
+          onClick={goToPrev}
+          buttonClassName="absolute left-[30px] top-2/4 transform -translate-y-2/4 text-white w-[50px] h-[50px] z-10"
+          icon={
+            <Image
+              src={sliderLeftIcon}
+              alt="left arrow icon"
+              width={50}
+              height={50}
+            />
+          }
+        />
+      )}
       <div>
         {isSvg ? (
           <object
@@ -51,18 +55,20 @@ export const MainImageSlider = ({
           />
         )}
       </div>
-      <IconOnlyButton
-        onClick={goToNext}
-        buttonClassName="absolute top-2/4 right-[30px] transform -translate-y-2/4 text-white"
-        icon={
-          <Image
-            src={sliderRightIcon}
-            alt="right arrow icon"
-            width={50}
-            height={50}
-          />
-        }
-      />
+      {!isLast && (
+        <IconOnlyButton
+          onClick={goToNext}
+          buttonClassName="absolute top-2/4 right-[30px] transform -translate-y-2/4 text-white"
+          icon={
+            <Image
+              src={sliderRightIcon}
+              alt="right arrow icon"
+              width={50}
+              height={50}
+            />
+          }
+        />
+      )}
     </div>
   );
 };

@@ -444,7 +444,7 @@ export default function useOfferDetails() {
     ),
     [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={offerDetails?.id} />
+      <ShareImages onClose={onClose} type="offerID" id={offerDetails?.id} />
     ),
   };
 

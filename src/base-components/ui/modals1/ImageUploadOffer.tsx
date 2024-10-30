@@ -8,6 +8,7 @@ import { ImageField } from "./image-field";
 import { VideoField } from "./video-field";
 import { AttachementField } from "./attachement-field";
 import { useAppSelector } from "@/hooks/useRedux";
+import { CompanyLogoLoader } from "../loader/company-logo-loader";
 
 export interface ImageUploadProps {
   handleImageSlider: Function;
@@ -25,6 +26,8 @@ const ImagesUploadOffer = ({
   const { id, refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
   );
+
+  const { loading } = useAppSelector((state) => state.image);
 
   const {
     onSubmit,
@@ -45,7 +48,7 @@ const ImagesUploadOffer = ({
 
   const attachementLookUp = {
     img_tab: (
-      <div className="h-[415px] overflow-y-auto overflow-x-hidden">
+      <div className="my-1 h-[415px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.title")}
@@ -68,7 +71,7 @@ const ImagesUploadOffer = ({
     ),
 
     video_tab: (
-      <div className="my-0 w-full h-[415px] overflow-y-auto overflow-x-hidden">
+      <div className="my-1 w-full h-[415px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.video_title")}
@@ -89,7 +92,7 @@ const ImagesUploadOffer = ({
       </div>
     ),
     link_tab: (
-      <div className="my-0 w-full h-[415px] overflow-y-auto overflow-x-hidden">
+      <div className="my-1 w-full h-[415px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.link_title")}
@@ -105,7 +108,7 @@ const ImagesUploadOffer = ({
       </div>
     ),
     attachement_tab: (
-      <div className="my-0 w-full h-[415px] overflow-y-auto overflow-x-hidden">
+      <div className="my-1 w-full h-[415px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col gap-y-2 my-5">
           <h2 className="text-base font-medium text-[#393939]">
             {translate("common.images_modal.attachement_title")}
@@ -174,17 +177,28 @@ const ImagesUploadOffer = ({
           ))}
         </div>
 
-        {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
+        {loading && (
+          <div className="min-h-[415px] flex items-center justify-center">
+            <CompanyLogoLoader />
+          </div>
+        )}
+        {!loading && (
+          <div>
+            {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
+          </div>
+        )}
 
-        <div className="flex justify-end mt-5">
-          <BaseButton
-            buttonText={translate("pdf.submit")}
-            containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
-            textClassName="text-white"
-            onClick={onSubmit}
-            // loading={loading || loadingGlobal}
-            disabled={loadingGlobal}
-          />
+        <div className="flex justify-end mt-5 min-h-[50px]">
+          {!loading && (
+            <BaseButton
+              buttonText={translate("pdf.submit")}
+              containerClassName="rounded-lg px-4 min-w-[202px] flex justify-center align-middle items-center h-[50px] bg-primary hover:bg-buttonHover"
+              textClassName="text-white"
+              onClick={onSubmit}
+              // loading={loading || loadingGlobal}
+              disabled={loadingGlobal}
+            />
+          )}
         </div>
       </div>
     </BaseModal>

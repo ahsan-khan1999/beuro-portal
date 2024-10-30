@@ -10,14 +10,9 @@ import { ImagePreview } from "./image-preview";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useShareImages } from "@/hooks/modals/useShareImages";
 import { useAppSelector } from "@/hooks/useRedux";
+import { ShareImagesProps } from "@/types/global";
 
-export const ShareImages = ({
-  onClose,
-  offerId,
-}: {
-  onClose: () => void;
-  offerId: string;
-}) => {
+export const ShareImages = ({ onClose, id, type }: ShareImagesProps) => {
   const {
     translate,
     activeTab,
@@ -142,7 +137,7 @@ export const ShareImages = ({
 
   const handleShare = () => {
     window.open(
-      `https://api.whatsapp.com/send?text=https://portal.buero-365.com/document-viewer?offerID=${offerId}`,
+      `https://api.whatsapp.com/send?text=https://portal.buero-365.com/document-viewer?${type}=${id}`,
       "_blank"
     );
   };
@@ -203,7 +198,7 @@ export const ShareImages = ({
           {translate("common.share_on_whatsapp")}
         </p>
         <CopyField
-          value={`https://portal.buero-365.com/document-viewer?offerID=${offerId}`}
+          value={`https://portal.buero-365.com/document-viewer?${type}=${id}`}
         />
 
         <div className="flex justify-end mt-5">

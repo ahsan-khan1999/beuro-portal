@@ -316,6 +316,8 @@ export interface MainImageSliderProps extends SliderBaseProps {
   handleMouseLeave?: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
+  isFirst: boolean;
+  isLast: boolean;
 }
 
 interface SliderImagesData {
@@ -329,6 +331,7 @@ export interface SliderImagesDataProps {
   activeIndex?: number;
   containerClasses?: string;
   mainImgSliderClasses?: string;
+  onClose?: () => void;
 }
 
 export interface ThumbnailSliderProps extends SliderBaseProps {
@@ -352,6 +355,8 @@ export interface ImageSliderHook {
   selectImage: (index: number) => void;
   handleMouseMove: (event: React.MouseEvent<HTMLDivElement>) => void;
   handleMouseLeave: (event: React.MouseEvent<HTMLDivElement>) => void;
+  isFirst: boolean;
+  isLast: boolean;
 }
 export interface UsePaginationProps {
   totalItems: number;

@@ -75,7 +75,7 @@ const EditOffersDetails = () => {
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={offerDetails?.id} />
+      <ShareImages onClose={onClose} type="offerID" id={offerDetails?.id} />
     ),
 
     [ModalType.UPLOAD_OFFER_IMAGE]: (

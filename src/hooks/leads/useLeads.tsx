@@ -403,7 +403,7 @@ const useLeads = () => {
       />
     ),
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={leadDetails?.id} />
+      <ShareImages onClose={onClose} type="leadID" id={leadDetails?.id} />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
