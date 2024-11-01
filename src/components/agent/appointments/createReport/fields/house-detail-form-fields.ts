@@ -22,7 +22,7 @@ export const roomsObject = {
   decoBig: 0,
   box: 0,
   descriptions: "",
-  title: "",
+  mainHeading: "",
 };
 
 export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
@@ -2339,8 +2339,8 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
 
   for (let i = 0; i < total; i++) {
     const isEditable = i === roomType;
-    const title =
-      allRooms[i]?.title ||
+    const mainHeading =
+      allRooms[i]?.mainHeading ||
       translate("agent.house_detail_fields.living_room_heading");
 
     const inputField: FormField = {
@@ -2368,7 +2368,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
                         id: `rooms.${allRooms[i]}` || "test",
                         name: `rooms.${allRooms[i]}` || "test",
                         inputType: "text",
-                        value: allRooms[i]?.title || "",
+                        value: allRooms[i]?.mainHeading || "",
                         register,
                         onChange: (value) =>
                           handleChangeLabel && handleChangeLabel(value, i),
@@ -2381,7 +2381,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
                         containerClassName: "min-w-[100px]",
                         id: "test",
                         name: "test",
-                        text: title,
+                        text: mainHeading,
                       },
                     },
 
