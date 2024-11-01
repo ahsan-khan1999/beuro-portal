@@ -192,7 +192,7 @@ export default function InvoicesFilters({
 
   return (
     <div className="flex flex-col xMaxProLarge:flex-row xMaxProLarge:items-center w-full xl:w-fit gap-4 z-10">
-      <div className="flex gap-3">
+      <div className="flex gap-3 flex-wrap">
         {checkbox?.map((item, idx) => (
           <CheckField
             key={idx}
@@ -208,7 +208,7 @@ export default function InvoicesFilters({
         ))}
       </div>
 
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-3 items-center flex-wrap">
         <InputField
           handleChange={handleInputChange}
           ref={inputRef}
@@ -218,61 +218,59 @@ export default function InvoicesFilters({
           textClassName="w-[177px]"
         />
 
-        <div className="flex items-center gap-x-3">
-          <SelectField
-            handleChange={(value) => hanldeSortChange(value)}
-            value={sort || "None"}
-            options={[
-              {
-                label: "common.sort_button",
-                value: "None",
-              },
-              {
-                label: "filters.sort_by.date",
-                value: "createdAt",
-              },
-              {
-                label: "filters.sort_by.latest",
-                value: "-createdAt",
-              },
-              {
-                label: "filters.sort_by.oldest",
-                value: "createdAt",
-              },
-              {
-                label: "filters.sort_by.a_z",
-                value: "customerDetail.fullName",
-              },
-            ]}
-            containerClassName="w-[120px]"
-            labelClassName="w-[120px]"
-          />
+        <SelectField
+          handleChange={(value) => hanldeSortChange(value)}
+          value={sort || "None"}
+          options={[
+            {
+              label: "common.sort_button",
+              value: "None",
+            },
+            {
+              label: "filters.sort_by.date",
+              value: "createdAt",
+            },
+            {
+              label: "filters.sort_by.latest",
+              value: "-createdAt",
+            },
+            {
+              label: "filters.sort_by.oldest",
+              value: "createdAt",
+            },
+            {
+              label: "filters.sort_by.a_z",
+              value: "customerDetail.fullName",
+            },
+          ]}
+          containerClassName="w-[120px]"
+          labelClassName="w-[120px]"
+        />
 
-          <SelectField
-            handleChange={(value) => handleNoteType(value)}
-            value={noteType || "None"}
-            dropDownIconClassName=""
-            containerClassName="w-[225px]"
-            labelClassName="w-[225px]"
-            options={[
-              { label: "add_note_dropdown.all_notes", value: "None" },
-              ...(noteSettings
-                ? noteSettings
-                    ?.slice()
-                    ?.reverse()
-                    ?.map((item) => ({
-                      label: item.notes.noteType,
-                      value: item.notes.noteType,
-                    }))
-                : []),
-            ]}
-          />
-          <InvoicesFilter
-            filter={filter}
-            setFilter={setFilter}
-            onFilterChange={handleFilterChange}
-          />
-        </div>
+        <SelectField
+          handleChange={(value) => handleNoteType(value)}
+          value={noteType || "None"}
+          dropDownIconClassName=""
+          containerClassName="w-[225px]"
+          labelClassName="w-[225px]"
+          options={[
+            { label: "add_note_dropdown.all_notes", value: "None" },
+            ...(noteSettings
+              ? noteSettings
+                  ?.slice()
+                  ?.reverse()
+                  ?.map((item) => ({
+                    label: item.notes.noteType,
+                    value: item.notes.noteType,
+                  }))
+              : []),
+          ]}
+        />
+        <InvoicesFilter
+          filter={filter}
+          setFilter={setFilter}
+          onFilterChange={handleFilterChange}
+        />
       </div>
     </div>
   );
