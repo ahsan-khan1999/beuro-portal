@@ -164,14 +164,15 @@ export const useCreateReportHoseDetails = ({
           id: reportDetails?.id,
           appointmentID: reportDetails?.appointmentID?.id,
         };
+        console.log("apiData:", apiData);
 
-        const response = await dispatch(
-          updateReport({ data: apiData, router, setError, translate })
-        );
+        // const response = await dispatch(
+        //   updateReport({ data: apiData, router, setError, translate })
+        // );
 
-        if (response?.payload) {
-          onNextHandler(AppointmentReportsFormStages.SERVICES);
-        }
+        // if (response?.payload) {
+        //   onNextHandler(AppointmentReportsFormStages.SERVICES);
+        // }
       } else {
         const apiData = {
           ...convertedApiData,
@@ -179,14 +180,15 @@ export const useCreateReportHoseDetails = ({
           id: reportDetails?.id,
           appointmentID: appointmentDetails?.id,
         };
+        console.log("apiData:", apiData);
 
-        const response = await dispatch(
-          updateReport({ data: apiData, router, setError, translate })
-        );
+        // const response = await dispatch(
+        //   updateReport({ data: apiData, router, setError, translate })
+        // );
 
-        if (response?.payload) {
-          onNextHandler(AppointmentReportsFormStages.SERVICES);
-        }
+        // if (response?.payload) {
+        //   onNextHandler(AppointmentReportsFormStages.SERVICES);
+        // }
       }
     } catch (error) {
       console.error("Submission error:", error);

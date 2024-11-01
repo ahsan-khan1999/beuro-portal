@@ -2492,7 +2492,8 @@
     "house_detail_fields": {
       "item": "Artikel",
       "qty": "Qty",
-      "living_room_heading": "Wohnzimmer(WZ))",
+      "living_room_heading": "Zimmer",
+      "add_new_room": "Neuen Raum hinzufügen",
       "sofa": "Sofa",
       "puit": "Pult",
       "tv_table": "Fernsehtisch",

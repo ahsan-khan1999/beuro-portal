@@ -500,7 +500,7 @@ export interface IconProps {
   text?: string | number;
   id?: string;
   name?: string;
-  icon: string;
+  icon: string | React.FC<React.SVGProps<SVGSVGElement>> | React.ReactNode;
   containerClassName?: string;
   textClassName?: string;
   iconClassName?: string;

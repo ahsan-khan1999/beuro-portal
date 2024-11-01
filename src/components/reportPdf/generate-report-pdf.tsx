@@ -154,7 +154,7 @@ const ReportPdf = ({
 
   const langContent = {
     en: {
-      livingRoomHeading: "Living room(WZ)",
+      livingRoomHeading: "Room",
       kitchenHeading: "kitchen",
       bedRoomHeading: "Bedroom(SZ)",
       roomHeading: "Room(Z)",
@@ -231,7 +231,7 @@ const ReportPdf = ({
     },
 
     de: {
-      livingRoomHeading: "Wohnzimmer(WZ)",
+      livingRoomHeading: "Zimmer",
       kitchenHeading: "Küche",
       bedRoomHeading: "Schlafzimmer",
       roomHeading: "Zimmer(Z)",

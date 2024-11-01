@@ -1,4 +1,7 @@
-import { EditIconString } from "@/assets/svgs/strings/svg-strings";
+import {
+  DeleteIconString,
+  EditIconString,
+} from "@/assets/svgs/strings/svg-strings";
 import {
   AppointmentReportsFormStages,
   HouseDetailsFieldsId,
@@ -2362,10 +2365,10 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
                         type: Field.input,
                         className:
                           "!mx-0 !px-2 !border-[#BFBFBF] focus:!border-primary !h-[40px] w-[150px]",
-                        id: "test",
-                        name: "test",
+                        id: `rooms.${allRooms[i]}` || "test",
+                        name: `rooms.${allRooms[i]}` || "test",
                         inputType: "text",
-                        value: allRooms[i]?.title,
+                        value: allRooms[i]?.title || "",
                         register,
                         onChange: (value) =>
                           handleChangeLabel && handleChangeLabel(value, i),
@@ -2375,8 +2378,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
                       containerClass: "mb-0",
                       field: {
                         type: Field.span,
-                        // className: "min-w-[100px]",
-                        containerClassName: "min-w-[150px]",
+                        containerClassName: "min-w-[100px]",
                         id: "test",
                         name: "test",
                         text: title,
@@ -2389,7 +2391,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
                       field: {
                         type: Field.button,
                         id: "button",
-                        text: "Cancel",
+                        text: translate("common.cancel_button"),
                         className: "!h-[40px] !bg-[transparent] !text-[black]",
                         inputType: "button",
                         onClick: () => onEditTitle && onEditTitle(null),
@@ -2415,7 +2417,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
               id: "button",
               containerClassName: "!h-[40px]",
               onClick: () => onDeleteRoom && onDeleteRoom(i),
-              icon: EditIconString,
+              icon: DeleteIconString,
             },
           },
         ],
@@ -2780,7 +2782,7 @@ export const houseDetailReportFormField: GenerateHouseDetailReportFormField = (
           field: {
             type: Field.button,
             id: "button",
-            text: "Add New Room",
+            text: translate("agent.house_detail_fields.add_new_room"),
             inputType: "submit",
             className:
               "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",

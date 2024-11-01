@@ -2497,7 +2497,8 @@
     "house_detail_fields": {
       "item": "Item",
       "qty": "Qty",
-      "living_room_heading": "Living room(WZ)",
+      "living_room_heading": "Room",
+      "add_new_room": "Add New Room",
       "sofa": "Sofa",
       "puit": "Desk",
       "tv_table": "TV table",
