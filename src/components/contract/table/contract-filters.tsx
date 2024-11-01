@@ -247,8 +247,8 @@ export default function ContractFilters({
           />
         ))}
       </div>
-      <div className="flex flex-col xlg:flex-row  xlg:items-center gap-3">
-        <div className="flex items-center gap-x-3 z-20">
+      <div className="flex flex-col xlg:flex-row xlg:items-center gap-3">
+        <div className="flex items-center gap-3 z-20  flex-wrap">
           <BooleanSelectField
             handleChange={(value) => hanldeTaskFilter(value)}
             value={
@@ -314,7 +314,7 @@ export default function ContractFilters({
           />
         </div>
 
-        <div className="flex items-center gap-x-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <SelectField
             handleChange={(value) => handleNoteType(value)}
             value={noteType || "None"}
@@ -359,8 +359,8 @@ export default function ContractFilters({
                 value: `${staticEnums.EmailStatus.Failed}`,
               },
             ]}
-            containerClassName="w-[160px]"
-            labelClassName="w-[160px]"
+            containerClassName="w-[175px]"
+            labelClassName="w-[175px]"
           />
 
           <ContractFilter
