@@ -1011,6 +1011,13 @@ export type GenerateHouseDetailReportFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onHandleBack?: Function,
+  handleAddNewRoom?: () => void,
+  count?: number,
+  roomType?: number | null,
+  handleChangeLabel?: (value: string, index: number) => void,
+  rooms?: any[],
+  onEditTitle?: (idx: number | null) => void,
+  onDeleteRoom?: (index: number) => void,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 

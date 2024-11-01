@@ -48,7 +48,7 @@ export interface InputProps extends BaseFieldProps<Field.input> {
   remove?: string;
   onRemove?: () => void;
   fieldIndex?: number;
-  onChange?: (value?: number) => void;
+  onChange?: (value: string) => void;
   percentage?: string;
   step?: string;
 }
@@ -495,6 +495,17 @@ export interface IconLabelProps {
   isLocation?: boolean;
   setValue?: UseFormSetValue<FieldValues>;
 }
+export interface IconProps {
+  type: Field.icon;
+  text?: string | number;
+  id?: string;
+  name?: string;
+  icon: string;
+  containerClassName?: string;
+  textClassName?: string;
+  iconClassName?: string;
+  onClick?: () => void;
+}
 
 export interface Location {
   lat: number | null;
@@ -561,6 +572,7 @@ export type FieldType =
   | Field.customCheckBox
   | Field.customFileUpload
   | Field.iconLabel
+  | Field.icon
   | Field.calendarDatePicker
   | Field.colourSelectField
   | Field.remainderSelectField
@@ -600,6 +612,7 @@ export type FieldProps =
   | CustomCheckBoxFieldProps
   | CustomFileUploadFieldProps
   | IconLabelProps
+  | IconProps
   | CalendarDatePickerProps
   | ColourSeclectionFieldProps
   | RemainderSeclectionFieldProps
@@ -642,6 +655,7 @@ export interface FieldComponents {
   timePicker: React.FC<TimePickerProps>;
   quantityInput: React.FC<QuantityInputProps>;
   iconLabel: React.FC<IconLabelProps>;
+  icon: React.FC<IconProps>;
   calendarDatePicker: React.FC<CalendarDatePickerProps>;
   colourSelectField: React.FC<ColourSeclectionFieldProps>;
   remainderSelectField: React.FC<RemainderSeclectionFieldProps>;

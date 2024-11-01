@@ -26,6 +26,7 @@ import {
   LocationSearchInputField,
   CustomTimePicker,
   ReactCalendarDatePickerField,
+  IconFeild,
 } from "./fields";
 import { Button } from "../ui/button/button";
 import { DatePicker } from "./fields/date-picker";
@@ -67,6 +68,7 @@ const fieldComponents: FieldComponents = {
   quantityInput: QuantityInputField,
   customCheckBox: CustomCheckBoxField,
   iconLabel: IconLabelFeild,
+  icon: IconFeild,
   calendarDatePicker: ReactCalendarDatePickerField,
   colourSelectField: ColourSelectField,
   remainderSelectField: RemainderSelectField,
@@ -120,6 +122,7 @@ export function isFieldType(type: any): type is FieldType {
     "customCheckBox",
     "customFileUpload",
     "iconLabel",
+    "icon",
     "calendarDatePicker",
     "colourSelectField",
     "remainderSelectField",

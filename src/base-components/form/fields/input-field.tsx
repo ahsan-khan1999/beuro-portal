@@ -92,7 +92,7 @@ export const InputField = ({
           pattern={(inputType === "number" && "d+") || "*"}
           // onChangeCapture={}
           //@ts-expect-error
-          onChangeCapture={(e) => onChange && onChange(Number(e.target?.value))}
+          onChangeCapture={(e) => onChange && onChange(e.target?.value)}
           onKeyDown={handleKeyDown}
         />
         {percentage && (

@@ -1,14 +1,22 @@
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
-import { houseDetailReportFormField } from "@/components/agent/appointments/createReport/fields/house-detail-form-fields";
+import {
+  houseDetailReportFormField,
+  roomsObject,
+} from "@/components/agent/appointments/createReport/fields/house-detail-form-fields";
 import {
   readReportDetails,
   updateReport,
 } from "@/api/slices/appointment/appointmentSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ReportPromiseActionType } from "@/types/customer";
 
 export interface ReportHouseDetailsProps {
@@ -31,6 +39,8 @@ export const useCreateReportHoseDetails = ({
     (state) => state.appointment
   );
 
+  const [roomType, setRoomType] = useState<number | null>(null);
+
   // const schema = ReportHouseDetailsValidation(translate);
   const {
     register,
@@ -39,9 +49,18 @@ export const useCreateReportHoseDetails = ({
     setError,
     formState: { errors },
     reset,
+    setValue,
+    watch,
+    getValues,
   } = useForm<FieldValues>({
     // resolver: yupResolver<FieldValues>(schema),
   });
+
+  const {
+    append,
+    fields: roomsFields,
+    remove,
+  } = useFieldArray({ control, name: "rooms" });
 
   const { report } = router.query;
 
@@ -75,11 +94,40 @@ export const useCreateReportHoseDetails = ({
     }
   }, [reportDetails?.id, report]);
 
+  const addressFieldsLength = roomsFields?.length || 0;
+
+  const handleChangeLabel = (value: string, index: number) => {
+    setValue(`rooms.${index}.title`, value);
+  };
+  const onDeleteRoom = (index: number) => {
+    // setValue(`rooms.${index}.title`, value);
+    remove(index);
+    const data = getValues();
+    reset({
+      ...data,
+    });
+  };
+
+  const handleAddNewRoom = () => {
+    append(roomsObject);
+  };
+
+  const onEditTitle = (idx: number | null) => {
+    setRoomType(idx);
+  };
+
   const fields = houseDetailReportFormField(
     register,
     loading,
     control,
-    onBackHandler
+    onBackHandler,
+    handleAddNewRoom,
+    addressFieldsLength,
+    roomType,
+    handleChangeLabel,
+    watch()?.rooms || [],
+    onEditTitle,
+    onDeleteRoom
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
