@@ -6,7 +6,11 @@ import { getFileNameFromUrl } from "@/utils/utility";
 import { createImage } from "@/api/slices/imageSlice/image";
 import { Attachement } from "@/types/global";
 
-export const useUploadImage = (handleImageSlider: Function, id?: string) => {
+export const useUploadImage = (
+  handleImageSlider: Function,
+  id?: string,
+  onUpdateRow?: (id?: string) => void
+) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
@@ -144,7 +148,10 @@ export const useUploadImage = (handleImageSlider: Function, id?: string) => {
       createImage({ data: apiData, router, translate })
     );
 
-    if (response?.payload) handleImageSlider();
+    if (response?.payload) {
+      onUpdateRow?.(id);
+      handleImageSlider();
+    }
   };
 
   useEffect(() => {

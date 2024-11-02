@@ -6,6 +6,8 @@ import { PdfIcon } from "@/assets/svgs/components/pdf-icon";
 import { staticEnums } from "@/utils/static";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { useTranslation } from "next-i18next";
+import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
+import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 export interface ContractTableProps {
@@ -96,7 +98,7 @@ const TableRows = ({
                     : item?.isTaskCreated === false
                     ? "bg-[#FFE3E3]"
                     : "bg-[#fff]"
-                } mb-1 pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-5 mlg:gap-x-1 xMaxSize:gap-x-4 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(140px,_140px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(65px,_65px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(65px,_65px),minmax(110px,_3fr)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(100px,_100px)_minmax(140px,_140px)_minmax(150px,_150px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(80px,_3fr)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] maxLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(80px,_4fr)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] ${
+                } mb-1 pl-4 pr-1 cursor-pointer hover:bg-[#E9E1FF] rounded-md gap-x-5 mlg:gap-x-1 xMaxSize:gap-x-4 items-center xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(100px,_100px)_minmax(400px,_4fr)_minmax(300px,_3fr)_minmax(150px,_150px)_minmax(140px,_140px)_minmax(120px,_120px)_minmax(140px,_140px)_minmax(150px,_150px)] mlg:grid-cols-[minmax(65px,_65px),minmax(90px,_3fr)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] xlg:grid-cols-[minmax(65px,_65px),minmax(110px,_3fr)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_3fr)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(150px,_150px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_4fr)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(80px,_3fr)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] maxLarge:grid-cols-[minmax(65px,_65px)_minmax(100px,_3fr)_minmax(80px,_4fr)_minmax(120px,_120px)_minmax(110px,_110px)_minmax(110px,_110px)_minmax(140px,_140px)_minmax(140px,_140px)] ${
                   index !== 0 && "border-t border-t-[#E7EAEE]"
                 } ${index === 0 && "mt-2"}`}
               >
@@ -274,7 +276,8 @@ const TableRows = ({
                 title={translate("offers.table_headings.images")}
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                  <svg
+                  <AddImageIcon isImageAdded={item.isImageAdded} />
+                  {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="34"
                     height="34"
@@ -306,7 +309,7 @@ const TableRows = ({
                       d="M19.3026 14.8806C18.2801 14.8806 17.4482 14.0488 17.4482 13.0263C17.4482 12.0038 18.2801 11.1719 19.3026 11.1719C20.3251 11.1719 21.157 12.0038 21.157 13.0263C21.157 14.0488 20.3251 14.8806 19.3026 14.8806ZM19.3026 12.4081C18.9618 12.4081 18.6845 12.6854 18.6845 13.0263C18.6845 13.3671 18.9618 13.6444 19.3026 13.6444C19.6435 13.6444 19.9208 13.3671 19.9208 13.0263C19.9208 12.6854 19.6435 12.4081 19.3026 12.4081Z"
                       fill={item.isImageAdded ? "#FF0000" : "#4A13E7"}
                     />
-                  </svg>
+                  </svg> */}
                 </span>
               </div>
               {(item.signedContracts && item.signedContracts?.length > 0 && (
@@ -349,7 +352,8 @@ const TableRows = ({
                 className="py-3 flex justify-center items-center cursor-pointer"
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                  <svg
+                  <AddNoteIcon isNoteCreated={item?.isNoteCreated} />
+                  {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="34"
                     height="34"
@@ -385,7 +389,7 @@ const TableRows = ({
                       d="M19.4657 12.4092H13.0991C12.7577 12.4092 12.481 12.6859 12.481 13.0273C12.481 13.3687 12.7577 13.6454 13.0991 13.6454H19.4657C19.8071 13.6454 20.0838 13.3687 20.0838 13.0273C20.0838 12.6859 19.8071 12.4092 19.4657 12.4092Z"
                       fill={item?.isNoteCreated ? "#FF0000" : "#4A13E7"}
                     />
-                  </svg>
+                  </svg> */}
                 </span>
               </div>
               <div

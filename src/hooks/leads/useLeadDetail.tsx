@@ -185,6 +185,7 @@ export default function useLeadDetail() {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
+          id: id,
           refID: refID,
           name: name,
           heading: heading,
@@ -238,6 +239,14 @@ export default function useLeadDetail() {
     dispatch(updateModalType({ type: ModalType.EXISTING_NOTES }));
   };
 
+  const handleDetailUpdate = (id?: string) => {
+    dispatch(readLeadDetails({ params: { filter: id } })).then(
+      (res: CustomerPromiseActionType) => {
+        dispatch(setLeadDetails(res?.payload));
+      }
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -268,10 +277,11 @@ export default function useLeadDetail() {
         onClose={onClose}
         handleImageSlider={defaultUpdateModal}
         type={"Lead"}
+        onUpdateDetails={handleDetailUpdate}
       />
     ),
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={leadDetails?.id} />
+      <ShareImages onClose={onClose} type="leadID" id={leadDetails?.id} />
     ),
     [ModalType.SCHEDULE_APPOINTMENTS]: (
       <ScheduleAppointments

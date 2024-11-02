@@ -32,7 +32,6 @@ import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
-import moment from "moment";
 import { updateQuery } from "@/utils/update-query";
 import { useQueryParams } from "@/utils/hooks";
 import { getCurrentUtcDate, handleUtcDateChange } from "@/utils/utility";
@@ -397,28 +396,31 @@ export const useAppointments = () => {
         readImage({
           params: { type: "leadID", id: filteredAppointment?.leadID?.id },
         })
-      ).then((res: any) => {
-        if (
-          res.payload?.images?.length > 0 ||
-          res.payload?.attachments?.length > 0 ||
-          res.payload?.videos?.length > 0 ||
-          res.payload?.links?.length > 0
-        ) {
-          setCurrentPageRows((prev) =>
-            prev?.map((item) => {
-              return item.id === filteredAppointment?.id
-                ? {
-                    ...item,
-                    leadID: {
-                      ...item.leadID,
-                      isImageAdded: true,
-                    },
-                  }
-                : item;
-            })
-          );
-        }
-      });
+      );
+
+      // .then((res: any) => {
+      //   if (
+      //     res.payload?.images?.length > 0 ||
+      //     res.payload?.attachments?.length > 0 ||
+      //     res.payload?.videos?.length > 0 ||
+      //     res.payload?.links?.length > 0
+      //   ) {
+      //     setCurrentPageRows((prev) =>
+      //       prev?.map((item) => {
+      //         return item.id === filteredAppointment?.id
+      //           ? {
+      //               ...item,
+      //               leadID: {
+      //                 ...item.leadID,
+      //                 isImageAdded: true,
+      //               },
+      //             }
+      //           : item;
+      //       })
+      //     );
+      //   }
+      // });
+
       dispatch(
         updateModalType({
           type: ModalType.UPLOAD_IMAGE,
@@ -435,6 +437,24 @@ export const useAppointments = () => {
 
   const defaultUpdateModal = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleUpdateRow = (id?: string) => {
+    console.log(id, "appointment id ");
+
+    setCurrentPageRows((prev) =>
+      prev?.map((appointment) => {
+        return appointment?.leadID?.id === id
+          ? {
+              ...appointment,
+              leadID: {
+                ...appointment.leadID,
+                isImageAdded: true,
+              },
+            }
+          : appointment;
+      })
+    );
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -486,7 +506,11 @@ export const useAppointments = () => {
       />
     ),
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={appointmentDetails?.id} />
+      <ShareImages
+        onClose={onClose}
+        type="appointmentID"
+        id={appointmentDetails?.id}
+      />
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
@@ -507,7 +531,11 @@ export const useAppointments = () => {
       />
     ),
     [ModalType.UPLOAD_IMAGE]: (
-      <ImagesUpload onClose={onClose} handleImageSlider={defaultUpdateModal} />
+      <ImagesUpload
+        onClose={onClose}
+        onUpdateRow={handleUpdateRow}
+        handleImageSlider={defaultUpdateModal}
+      />
     ),
   };
 

@@ -127,18 +127,6 @@ export const ReportDetailData = ({
     }
   };
 
-  // const customerType = reportDetail?.leadID?.customerDetail
-  //   ?.customerType as keyof (typeof staticEnums)["CustomerType"];
-  // const name =
-  //   customerType === 1
-  //     ? reportDetail?.leadID?.customerDetail?.companyName
-  //     : reportDetail?.leadID?.customerDetail?.fullName;
-
-  // const heading =
-  //   customerType === 1
-  //     ? translate("common.company_name")
-  //     : translate("common.customer_name");
-
   return (
     <div className="mt-5 xMini:mt-0">
       <div className="hidden xMini:block 2xl:fixed mb-5 mt-5 2xl:mt-0">
@@ -158,19 +146,6 @@ export const ReportDetailData = ({
             />
           ))}
         </div>
-        {/* <div className="w-full mt-5">
-          <OfferEditImages
-            shareImgModal={shareImgModal}
-            handleImagesUpload={handleImagesUpload}
-            tabType={tabType}
-            id={reportDetail?.id}
-            refID={reportDetail?.id}
-            name={""}
-            heading={""}
-            handleImageSlider={handleImageSlider}
-            className="2xl:w-[247px]"
-          />
-        </div> */}
       </div>
 
       <div className="grid grid-cols-1 2xl:grid-cols-[320px_1fr] w-full break-all">

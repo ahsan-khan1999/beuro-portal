@@ -194,6 +194,7 @@ export default function useOfferDetails() {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
+          id: id,
           refID: refID,
           name: name,
           heading: heading,
@@ -333,6 +334,14 @@ export default function useOfferDetails() {
     dispatch(updateModalType({ type: ModalType.UPDATE_ADDITIONAL_DETAILS }));
   };
 
+  const handleLeadDetailUpdate = (id?: string) => {
+    dispatch(readOfferDetails({ params: { filter: id } })).then(
+      (res: CustomerPromiseActionType) => {
+        dispatch(setOfferDetails(res?.payload));
+      }
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -389,11 +398,10 @@ export default function useOfferDetails() {
         onClose={onClose}
         handleImageSlider={handleImageSlider}
         type={"Offer"}
+        onUpdateDetails={handleLeadDetailUpdate}
       />
     ),
-    // [ModalType.IMAGE_SLIDER]: (
-    //   <ImageSlider onClose={onClose} details={images} />
-    // ),
+
     [ModalType.CREATION]: (
       <CreationCreated
         onClose={onClose}
@@ -436,7 +444,7 @@ export default function useOfferDetails() {
     ),
     [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={offerDetails?.id} />
+      <ShareImages onClose={onClose} type="offerID" id={offerDetails?.id} />
     ),
   };
 

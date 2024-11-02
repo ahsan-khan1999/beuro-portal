@@ -1259,7 +1259,9 @@
       "success_signed_offer": "Unterschrift eingereicht",
       "offer_signed_success_des": "Vielen Dank für Ihren Auftrag",
       "report_created": "Bericht erfolgreich erstellt!",
-      "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind."
+      "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind.",
+      "images_updated": "Unterschrift eingereicht",
+      "images_updated_des": "Bilder erfolgreich aktualisiert!"
     },
     "start_time": "Wählen Sie die Startzeit",
     "end_time": "Wählen Sie die Endzeit",

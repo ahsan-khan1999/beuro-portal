@@ -5,6 +5,7 @@ import { getInvoiceStatusColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { formatDateString } from "@/utils/functions";
 import { useTranslation } from "next-i18next";
+import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 const TableRows = ({
   dataToAdd,
@@ -136,7 +137,8 @@ const TableRows = ({
                 className="py-3 cursor-pointer flex justify-center items-center"
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
-                  <svg
+                  <AddNoteIcon isNoteCreated={item?.isNoteCreated} />
+                  {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="33"
                     height="33"
@@ -172,7 +174,7 @@ const TableRows = ({
                       d="M19.4657 12.4092H13.0991C12.7577 12.4092 12.481 12.6859 12.481 13.0273C12.481 13.3687 12.7577 13.6454 13.0991 13.6454H19.4657C19.8071 13.6454 20.0838 13.3687 20.0838 13.0273C20.0838 12.6859 19.8071 12.4092 19.4657 12.4092Z"
                       fill={item?.isNoteCreated ? "#FF0000" : "#4A13E7"}
                     />
-                  </svg>
+                  </svg> */}
                 </span>
               </span>
               <span

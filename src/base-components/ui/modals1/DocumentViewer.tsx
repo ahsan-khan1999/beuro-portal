@@ -9,6 +9,7 @@ import { useDocumentViewer } from "@/hooks/modals/userDocumentViewer";
 import { useRouter } from "next/router";
 import { readImage } from "@/api/slices/imageSlice/image";
 import { ImagePreview } from "./image-preview";
+import { CompanyLogoLoader } from "../loader/company-logo-loader";
 
 export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
   const {
@@ -19,15 +20,28 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
     translate,
   } = useDocumentViewer();
 
-  const { images } = useAppSelector((state) => state.image);
+  const { images, loading } = useAppSelector((state) => state.image);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { offerID } = router.query;
+  const { offerID, contractID, leadID } = router.query;
+
+  const contract_ID = useAppSelector(
+    (state) => state.global?.modal?.data?.contractID
+  );
 
   useEffect(() => {
-    if (offerID)
+    if (offerID) {
       dispatch(readImage({ params: { type: "offerID", id: offerID } }));
-  }, [offerID]);
+    } else if (contractID || contract_ID) {
+      dispatch(
+        readImage({
+          params: { type: "contractID", id: contractID || contract_ID },
+        })
+      );
+    } else if (leadID) {
+      dispatch(readImage({ params: { type: "leadID", id: leadID } }));
+    }
+  }, [offerID, contractID, contract_ID, leadID]);
 
   const attachementLookUp = {
     img_tab: (
@@ -132,9 +146,9 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <BaseModal
       onClose={onClose}
-      containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[550px]"
+      containerClassName="max-w-[480px] xl:max-w-[624px] min-h-[480px]"
     >
-      <div className="relative flex flex-col px-4 sm:px-[26px] pt-5 pb-[36px]">
+      <div className="relative flex flex-col px-4 sm:px-[26px] py-5 ">
         <Image
           src={crossIcon}
           alt="cross_icon"
@@ -146,7 +160,7 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
           {translate("common.view_docs")}
         </p>
 
-        <div className="mt-[17px] flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
+        <div className="mt-[17px] mb-5 flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
           {attachementTabs?.map((item, index) => (
             <button
               key={index}
@@ -162,9 +176,16 @@ export const DocumentViewerModal = ({ onClose }: { onClose: () => void }) => {
           ))}
         </div>
 
-        <div className="my-5">
-          {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
-        </div>
+        {loading && (
+          <div className="min-h-[300px] flex items-center justify-center">
+            <CompanyLogoLoader />
+          </div>
+        )}
+        {!loading && (
+          <div className="w-full">
+            {attachementLookUp[activeTab as keyof typeof attachementLookUp]}
+          </div>
+        )}
       </div>
     </BaseModal>
   );

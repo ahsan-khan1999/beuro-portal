@@ -185,6 +185,7 @@ export default function useContractDetail() {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
+          id: id,
           refID: refID,
           name: name,
           heading: heading,
@@ -301,6 +302,14 @@ export default function useContractDetail() {
     if (response?.payload) handleUpdateContractDetail();
   };
 
+  const handleDetailUpdate = (id?: string) => {
+    dispatch(readContractDetails({ params: { filter: id } })).then(
+      (res: CustomerPromiseActionType) => {
+        dispatch(setContractDetails(res?.payload));
+      }
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -365,6 +374,7 @@ export default function useContractDetail() {
         onClose={onClose}
         handleImageSlider={handleImageSlider}
         type="Contract"
+        onUpdateDetails={handleDetailUpdate}
       />
     ),
 
@@ -394,7 +404,11 @@ export default function useContractDetail() {
     ),
     [ModalType.EDIT_DATE]: <EditDate onClose={onClose} />,
     [ModalType.SHARE_IMAGES]: (
-      <ShareImages onClose={onClose} offerId={contractDetails?.id} />
+      <ShareImages
+        onClose={onClose}
+        type="contractID"
+        id={contractDetails?.id}
+      />
     ),
     [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };

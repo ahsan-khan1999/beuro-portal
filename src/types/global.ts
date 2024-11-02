@@ -76,7 +76,7 @@ export interface OptionsFieldProps {
   label?: string;
   border?: number;
   handleChange: (value?: string, isAgent?: boolean) => void;
-  options: { label: string; value?: string  }[];
+  options: { label: string; value?: string }[];
   dropDownIconClassName?: string;
   containerClassName?: string;
   dropdownClassName?: string;
@@ -191,4 +191,10 @@ export interface PdfPreviewProps {
   serviceItem: ServiceItemProps[];
   serviceItemFooter: ServiceItemFooterProps;
   footerDetails: DocumentDetailFooterProps;
+}
+
+export interface ShareImagesProps {
+  onClose: () => void;
+  id: string;
+  type: string;
 }
