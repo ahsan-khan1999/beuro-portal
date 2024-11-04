@@ -8,10 +8,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
-import {
-  houseDetailReportFormField,
-  roomsObject,
-} from "@/components/agent/appointments/createReport/fields/house-detail-form-fields";
+import { houseDetailReportFormField } from "@/components/agent/appointments/createReport/fields/house-detail-form-fields";
 import {
   readReportDetails,
   updateReport,
@@ -60,7 +57,7 @@ export const useCreateReportHoseDetails = ({
     append,
     fields: roomsFields,
     remove,
-  } = useFieldArray({ control, name: "rooms" });
+  } = useFieldArray({ control, name: "generalRoomDetails" });
 
   const { report } = router.query;
 
@@ -71,6 +68,7 @@ export const useCreateReportHoseDetails = ({
           if (response?.payload) {
             reset({
               livingRoomDetails: response?.payload?.livingRoomDetails,
+              generalRoomDetails: response?.payload?.generalRoomDetails,
               kitchenDetails: response?.payload?.kitchenDetails,
               bedRoomDetails: response?.payload?.bedRoomDetails,
               roomDetails: response?.payload?.roomDetails,
@@ -84,6 +82,7 @@ export const useCreateReportHoseDetails = ({
     } else {
       reset({
         livingRoomDetails: reportDetails?.livingRoomDetails,
+        generalRoomDetails: reportDetails?.generalRoomDetails,
         kitchenDetails: reportDetails?.kitchenDetails,
         bedRoomDetails: reportDetails?.bedRoomDetails,
         roomDetails: reportDetails?.roomDetails,
@@ -97,19 +96,39 @@ export const useCreateReportHoseDetails = ({
   const addressFieldsLength = roomsFields?.length || 0;
 
   const handleChangeLabel = (value: string, index: number) => {
-    setValue(`rooms.${index}.title`, value);
+    setValue(`generalRoomDetails.${index}.mainHeading`, value);
   };
   const onDeleteRoom = (index: number) => {
-    // setValue(`rooms.${index}.title`, value);
     remove(index);
     const data = getValues();
-    reset({
-      ...data,
-    });
+    reset({ ...data });
   };
 
   const handleAddNewRoom = () => {
-    append(roomsObject);
+    append({
+      mainHeading: "Living Room",
+      descriptions: "",
+      label1: "Sofa",
+      label1Value: 0,
+      label2: "Teacher Desk",
+      label2Value: 0,
+      label3: "TV Table",
+      label3Value: 0,
+      label4: "Arm Chair",
+      label4Value: 0,
+      label5: "Table",
+      label5Value: 0,
+      label6: "Shelf",
+      label6Value: 0,
+      label7: "L Sofa",
+      label7Value: 0,
+      label8: "TV",
+      label8Value: 0,
+      label9: "Deco Big",
+      label9Value: 0,
+      label10: "Box",
+      label10Value: 0,
+    });
   };
 
   const onEditTitle = (idx: number | null) => {
@@ -125,7 +144,7 @@ export const useCreateReportHoseDetails = ({
     addressFieldsLength,
     roomType,
     handleChangeLabel,
-    watch()?.rooms || [],
+    watch()?.generalRoomDetails || [],
     onEditTitle,
     onDeleteRoom
   );
@@ -138,7 +157,15 @@ export const useCreateReportHoseDetails = ({
       ): DataType => {
         return Object.fromEntries(
           Object.entries(obj).map(([key, value]) => {
-            if (typeof value === "object" && value !== null) {
+            if (key === "generalRoomDetails" && Array.isArray(value)) {
+              // Process each item in the array without converting it to an object
+              const processedArray = value.map((item) =>
+                typeof item === "object" && item !== null
+                  ? convertValues(item, excludeKeys)
+                  : item
+              );
+              return [key, processedArray];
+            } else if (typeof value === "object" && value !== null) {
               return [key, convertValues(value, excludeKeys)];
             } else if (excludeKeys.includes(key)) {
               return [key, value];
@@ -164,15 +191,14 @@ export const useCreateReportHoseDetails = ({
           id: reportDetails?.id,
           appointmentID: reportDetails?.appointmentID?.id,
         };
-        console.log("apiData:", apiData);
 
-        // const response = await dispatch(
-        //   updateReport({ data: apiData, router, setError, translate })
-        // );
+        const response = await dispatch(
+          updateReport({ data: apiData, router, setError, translate })
+        );
 
-        // if (response?.payload) {
-        //   onNextHandler(AppointmentReportsFormStages.SERVICES);
-        // }
+        if (response?.payload) {
+          onNextHandler(AppointmentReportsFormStages.SERVICES);
+        }
       } else {
         const apiData = {
           ...convertedApiData,
@@ -180,15 +206,14 @@ export const useCreateReportHoseDetails = ({
           id: reportDetails?.id,
           appointmentID: appointmentDetails?.id,
         };
-        console.log("apiData:", apiData);
 
-        // const response = await dispatch(
-        //   updateReport({ data: apiData, router, setError, translate })
-        // );
+        const response = await dispatch(
+          updateReport({ data: apiData, router, setError, translate })
+        );
 
-        // if (response?.payload) {
-        //   onNextHandler(AppointmentReportsFormStages.SERVICES);
-        // }
+        if (response?.payload) {
+          onNextHandler(AppointmentReportsFormStages.SERVICES);
+        }
       }
     } catch (error) {
       console.error("Submission error:", error);

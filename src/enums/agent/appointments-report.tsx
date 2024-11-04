@@ -22,6 +22,7 @@ export enum ReportContactDetailsFieldsId {
 
 export enum HouseDetailsFieldsId {
   livingRoomDetails = "livingRoomDetails",
+  generalRoomDetails = "generalRoomDetails",
   sofa = "sofa",
   teacherDesk = "teacherDesk",
   tvTable = "tvTable",

@@ -143,6 +143,7 @@ const ReportPdf = ({
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
   const livingRoomDetails = data?.houseDetails?.livingRoomDetails;
+  const generalRoomDetails = data?.houseDetails?.livingRoomDetails;
   const kitchenDetails = data?.houseDetails?.kitchenDetails;
   const roomDetails = data?.houseDetails?.roomDetails;
   const bedRoomDetails = data?.houseDetails?.bedRoomDetails;
@@ -154,7 +155,7 @@ const ReportPdf = ({
 
   const langContent = {
     en: {
-      livingRoomHeading: "Room",
+      livingRoomHeading: "Living room(WZ)",
       kitchenHeading: "kitchen",
       bedRoomHeading: "Bedroom(SZ)",
       roomHeading: "Room(Z)",
@@ -231,7 +232,7 @@ const ReportPdf = ({
     },
 
     de: {
-      livingRoomHeading: "Zimmer",
+      livingRoomHeading: "Wohnzimmer(WZ)",
       kitchenHeading: "Küche",
       bedRoomHeading: "Schlafzimmer",
       roomHeading: "Zimmer(Z)",
@@ -316,6 +317,62 @@ const ReportPdf = ({
 
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
+  const generalRoomItem: HouseDetailObjectProps[] = [
+    {
+      icon: sofaIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.sofa}`,
+      quantity: livingRoomDetails?.sofa,
+    },
+    {
+      icon: teacherDesckIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.teacherDesk}`,
+      quantity: livingRoomDetails?.teacherDesk,
+    },
+    {
+      icon: tvTableIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.tvTable}`,
+      quantity: livingRoomDetails?.tvTable,
+    },
+    {
+      icon: armChairIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.armchair}`,
+      quantity: livingRoomDetails?.armchair,
+    },
+    {
+      icon: deskIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.desk}`,
+      quantity: livingRoomDetails?.table,
+    },
+    {
+      icon: shelfIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.shelf}`,
+      quantity: livingRoomDetails?.shelf,
+    },
+    {
+      icon: lSofaIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.livingRoomItem?.lSofa
+      }`,
+      quantity: livingRoomDetails?.LSofa,
+    },
+    {
+      icon: tvIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.tv}`,
+      quantity: livingRoomDetails?.TV,
+    },
+    {
+      icon: decoGrossIcon,
+      name: `${
+        langContent[lang as keyof typeof langContent]?.livingRoomItem?.decoGross
+      }`,
+      quantity: livingRoomDetails?.decoBig,
+    },
+    {
+      icon: boxIcon,
+      name: `${langContent[lang as keyof typeof langContent]?.box}`,
+      quantity: livingRoomDetails?.box,
+    },
+  ];
   const livingRoomItem: HouseDetailObjectProps[] = [
     {
       icon: sofaIcon,
