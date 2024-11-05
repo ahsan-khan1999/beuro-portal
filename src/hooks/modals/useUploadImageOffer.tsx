@@ -23,7 +23,6 @@ export const useUploadImageOffer = (
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
   const [activeTab, setActiveTab] = useState("img_tab");
-  console.log("activeTab:", activeTab);
   const [enteredLink, setEnteredLink] = useState<string>("");
   const [enteredLinks, setEnteredLinks] = useState<any>({
     images: [],
@@ -209,24 +208,20 @@ export const useUploadImageOffer = (
   };
 
   useEffect(() => {
-    if (enteredLinks) {
-      const { images, links, attachements, video } = enteredLinks;
+    const { images, links, attachements, video } = enteredLinks;
 
-      if (activeTab == "img_tab") {
-        if (images && images.length > 0) {
-          setActiveTab("img_tab");
-        } else if (video && video.length > 0) {
-          setActiveTab("video_tab");
-        } else if (attachements && attachements.length > 0) {
-          setActiveTab("attachement_tab");
-        } else if (links && links.length > 0) {
-          setActiveTab("link_tab");
-        } else {
-          setActiveTab(attachementTabs[0]);
-        }
-      }
+    if (images && images.length > 0) {
+      setActiveTab("img_tab");
+    } else if (video && video.length > 0) {
+      setActiveTab("video_tab");
+    } else if (attachements && attachements.length > 0) {
+      setActiveTab("attachement_tab");
+    } else if (links && links.length > 0) {
+      setActiveTab("link_tab");
+    } else {
+      setActiveTab(attachementTabs[0]);
     }
-  }, [enteredLinks]);
+  }, [images]);
 
   return {
     onSubmit,
