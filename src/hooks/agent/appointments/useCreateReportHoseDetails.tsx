@@ -1,4 +1,9 @@
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
@@ -8,7 +13,7 @@ import {
   readReportDetails,
   updateReport,
 } from "@/api/slices/appointment/appointmentSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ReportPromiseActionType } from "@/types/customer";
 
 export interface ReportHouseDetailsProps {
@@ -31,6 +36,8 @@ export const useCreateReportHoseDetails = ({
     (state) => state.appointment
   );
 
+  const [roomType, setRoomType] = useState<number | null>(null);
+
   // const schema = ReportHouseDetailsValidation(translate);
   const {
     register,
@@ -39,9 +46,18 @@ export const useCreateReportHoseDetails = ({
     setError,
     formState: { errors },
     reset,
+    setValue,
+    watch,
+    getValues,
   } = useForm<FieldValues>({
     // resolver: yupResolver<FieldValues>(schema),
   });
+
+  const {
+    append,
+    fields: roomsFields,
+    remove,
+  } = useFieldArray({ control, name: "generalRoomDetails" });
 
   const { report } = router.query;
 
@@ -52,6 +68,7 @@ export const useCreateReportHoseDetails = ({
           if (response?.payload) {
             reset({
               livingRoomDetails: response?.payload?.livingRoomDetails,
+              generalRoomDetails: response?.payload?.generalRoomDetails,
               kitchenDetails: response?.payload?.kitchenDetails,
               bedRoomDetails: response?.payload?.bedRoomDetails,
               roomDetails: response?.payload?.roomDetails,
@@ -65,6 +82,7 @@ export const useCreateReportHoseDetails = ({
     } else {
       reset({
         livingRoomDetails: reportDetails?.livingRoomDetails,
+        generalRoomDetails: reportDetails?.generalRoomDetails,
         kitchenDetails: reportDetails?.kitchenDetails,
         bedRoomDetails: reportDetails?.bedRoomDetails,
         roomDetails: reportDetails?.roomDetails,
@@ -75,11 +93,60 @@ export const useCreateReportHoseDetails = ({
     }
   }, [reportDetails?.id, report]);
 
+  const addressFieldsLength = roomsFields?.length || 0;
+
+  const handleChangeLabel = (value: string, index: number) => {
+    setValue(`generalRoomDetails.${index}.mainHeading`, value);
+  };
+  const onDeleteRoom = (index: number) => {
+    remove(index);
+    const data = getValues();
+    reset({ ...data });
+  };
+
+  const handleAddNewRoom = () => {
+    append({
+      mainHeading: "Living Room",
+      descriptions: "",
+      label1: "Sofa",
+      label1Value: 0,
+      label2: "Teacher Desk",
+      label2Value: 0,
+      label3: "TV Table",
+      label3Value: 0,
+      label4: "Arm Chair",
+      label4Value: 0,
+      label5: "Table",
+      label5Value: 0,
+      label6: "Shelf",
+      label6Value: 0,
+      label7: "L Sofa",
+      label7Value: 0,
+      label8: "TV",
+      label8Value: 0,
+      label9: "Deco Big",
+      label9Value: 0,
+      label10: "Box",
+      label10Value: 0,
+    });
+  };
+
+  const onEditTitle = (idx: number | null) => {
+    setRoomType(idx);
+  };
+
   const fields = houseDetailReportFormField(
     register,
     loading,
     control,
-    onBackHandler
+    onBackHandler,
+    handleAddNewRoom,
+    addressFieldsLength,
+    roomType,
+    handleChangeLabel,
+    watch()?.generalRoomDetails || [],
+    onEditTitle,
+    onDeleteRoom
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -90,7 +157,15 @@ export const useCreateReportHoseDetails = ({
       ): DataType => {
         return Object.fromEntries(
           Object.entries(obj).map(([key, value]) => {
-            if (typeof value === "object" && value !== null) {
+            if (key === "generalRoomDetails" && Array.isArray(value)) {
+              // Process each item in the array without converting it to an object
+              const processedArray = value.map((item) =>
+                typeof item === "object" && item !== null
+                  ? convertValues(item, excludeKeys)
+                  : item
+              );
+              return [key, processedArray];
+            } else if (typeof value === "object" && value !== null) {
               return [key, convertValues(value, excludeKeys)];
             } else if (excludeKeys.includes(key)) {
               return [key, value];

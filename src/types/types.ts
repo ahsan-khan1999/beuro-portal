@@ -1011,8 +1011,40 @@ export type GenerateHouseDetailReportFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   onHandleBack?: Function,
+  handleAddNewRoom?: () => void,
+  roomsLength?: number,
+  roomType?: number | null,
+  handleChangeLabel?: (value: string, index: number) => void,
+  generalRoomDetails?: RoomObject[],
+  onEditTitle?: (idx: number | null) => void,
+  onDeleteRoom?: (index: number) => void,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
+
+export interface RoomObject {
+  label1: string;
+  label1Value: number;
+  label2: string;
+  label2Value: number;
+  label3: string;
+  label3Value: number;
+  label4: string;
+  label4Value: number;
+  label5: string;
+  label5Value: number;
+  label6: string;
+  label6Value: number;
+  label7: string;
+  label7Value: number;
+  label8: string;
+  label8Value: number;
+  label9: string;
+  label9Value: number;
+  label10: string;
+  label10Value: number;
+  descriptions: string;
+  mainHeading: string;
+}
 
 export type GenerateAdditionalInfoReportFormField = (
   register: UseFormRegister<FieldValues>,
@@ -1651,6 +1683,7 @@ export interface ReportHouseDetailsProps {
   outDoorDetails: OutDoorDetailsProps;
   basementAtticDetails: BasementAtticDetailsProps;
   specialItemsDetails: SpecialItemsDetailsProps;
+  generalRoomDetails: RoomObject[];
 }
 
 export interface OfferDetailsProps {

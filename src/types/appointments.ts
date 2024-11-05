@@ -2,7 +2,7 @@ import { staticEnums } from "@/utils/static";
 import { AddressID } from "./leads";
 import { OfferServiceDetails } from "./offers";
 import { ContentTableRowTypes } from "./content";
-import { ReportPDFProps, User } from ".";
+import { ReportPDFProps, RoomObject, User } from ".";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 
 export interface Appointments {
@@ -89,6 +89,7 @@ export interface Report {
     box: number;
     descriptions: string;
   };
+  generalRoomDetails: RoomObject[];
   kitchenDetails: {
     oven: number;
     refrigerator: number;
