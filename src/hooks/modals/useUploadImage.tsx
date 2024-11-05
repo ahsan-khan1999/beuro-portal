@@ -20,6 +20,7 @@ export const useUploadImage = (
   const [isOpenedFile, setIsOpenedFile] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState("img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
+
   const [enteredLinks, setEnteredLinks] = useState<any>({
     images: [],
     links: [],
@@ -155,22 +156,19 @@ export const useUploadImage = (
   };
 
   useEffect(() => {
-    if (enteredLinks) {
-      const { images, links, attachements, video } = enteredLinks;
-
-      if (images && images.length > 0) {
-        setActiveTab("img_tab");
-      } else if (video && video.length > 0) {
-        setActiveTab("video_tab");
-      } else if (attachements && attachements.length > 0) {
-        setActiveTab("attachement_tab");
-      } else if (links && links.length > 0) {
-        setActiveTab("link_tab");
-      } else {
-        setActiveTab(attachementTabs[0]);
-      }
+    const { images, links, attachements, video } = enteredLinks;
+    if (images && images.length > 0) {
+      setActiveTab("img_tab");
+    } else if (video && video.length > 0) {
+      setActiveTab("video_tab");
+    } else if (attachements && attachements.length > 0) {
+      setActiveTab("attachement_tab");
+    } else if (links && links.length > 0) {
+      setActiveTab("link_tab");
+    } else {
+      setActiveTab(attachementTabs[0]);
     }
-  }, [enteredLinks]);
+  }, [images]);
 
   return {
     error,
