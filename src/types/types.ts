@@ -1683,6 +1683,7 @@ export interface ReportHouseDetailsProps {
   outDoorDetails: OutDoorDetailsProps;
   basementAtticDetails: BasementAtticDetailsProps;
   specialItemsDetails: SpecialItemsDetailsProps;
+  generalRoomDetails: RoomObject[];
 }
 
 export interface OfferDetailsProps {

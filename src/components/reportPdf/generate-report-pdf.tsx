@@ -53,6 +53,7 @@ import { Header } from "../reactPdf/header";
 import { Footer } from "../reactPdf/footer";
 import { ContactAddress } from "../reactPdf/contact-address";
 import { ReportPDFOfferDetails } from "./offer-details";
+import { DynamicItemWrapper } from "./dynamic-item-wrapper";
 
 export interface HouseDetailObjectProps {
   icon: StaticImageData;
@@ -143,7 +144,7 @@ const ReportPdf = ({
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
   const livingRoomDetails = data?.houseDetails?.livingRoomDetails;
-  const generalRoomDetails = data?.houseDetails?.livingRoomDetails;
+  const generalRoomDetails = data?.houseDetails?.generalRoomDetails;
   const kitchenDetails = data?.houseDetails?.kitchenDetails;
   const roomDetails = data?.houseDetails?.roomDetails;
   const bedRoomDetails = data?.houseDetails?.bedRoomDetails;
@@ -317,62 +318,6 @@ const ReportPdf = ({
 
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
-  const generalRoomItem: HouseDetailObjectProps[] = [
-    {
-      icon: sofaIcon,
-      name: `${langContent[lang as keyof typeof langContent]?.sofa}`,
-      quantity: livingRoomDetails?.sofa,
-    },
-    {
-      icon: teacherDesckIcon,
-      name: `${langContent[lang as keyof typeof langContent]?.teacherDesk}`,
-      quantity: livingRoomDetails?.teacherDesk,
-    },
-    {
-      icon: tvTableIcon,
-      name: `${langContent[lang as keyof typeof langContent]?.tvTable}`,
-      quantity: livingRoomDetails?.tvTable,
-    },
-    {
-      icon: armChairIcon,
-      name: `${langContent[lang as keyof typeof langContent]?.armchair}`,
-      quantity: livingRoomDetails?.armchair,
-    },
-    {
-      icon: deskIcon,
-      name: `${langContent[lang as keyof typeof langContent]?.desk}`,
-      quantity: livingRoomDetails?.table,
-    },
-    {
-      icon: shelfIcon,
-      name: `${langContent[lang as keyof typeof langContent]?.shelf}`,
-      quantity: livingRoomDetails?.shelf,
-    },
-    {
-      icon: lSofaIcon,
-      name: `${
-        langContent[lang as keyof typeof langContent]?.livingRoomItem?.lSofa
-      }`,
-      quantity: livingRoomDetails?.LSofa,
-    },
-    {
-      icon: tvIcon,
-      name: `${langContent[lang as keyof typeof langContent]?.tv}`,
-      quantity: livingRoomDetails?.TV,
-    },
-    {
-      icon: decoGrossIcon,
-      name: `${
-        langContent[lang as keyof typeof langContent]?.livingRoomItem?.decoGross
-      }`,
-      quantity: livingRoomDetails?.decoBig,
-    },
-    {
-      icon: boxIcon,
-      name: `${langContent[lang as keyof typeof langContent]?.box}`,
-      quantity: livingRoomDetails?.box,
-    },
-  ];
   const livingRoomItem: HouseDetailObjectProps[] = [
     {
       icon: sofaIcon,
@@ -791,6 +736,27 @@ const ReportPdf = ({
     },
   ];
 
+  // for dynamic room to put fix three room on every page
+
+  // const filterDynamicRooms = () => {
+  //   const dynamicRooms: any[] = [];
+  //   if (generalRoomDetails && generalRoomDetails?.length > 1) {
+  //     generalRoomDetails.slice(1, generalRoomDetails.length).forEach((item) => {
+  //       let count = dynamicRooms.length || 0;
+  //       if (count == 0) {
+  //         dynamicRooms[0] = [];
+  //         dynamicRooms[0].push(item);
+  //       } else if (dynamicRooms[count - 1].length < 3) {
+  //         dynamicRooms[count - 1].push(item);
+  //       } else {
+  //         dynamicRooms[count] = [];
+  //         dynamicRooms[count].push(item);
+  //       }
+  //     });
+  //   }
+  //   return dynamicRooms;
+  // };
+
   return (
     <Document>
       <Page style={styles.body} dpi={72} break={true}>
@@ -878,6 +844,13 @@ const ReportPdf = ({
           language={lang}
         />
 
+        {generalRoomDetails && generalRoomDetails?.length > 0 && (
+          <DynamicItemWrapper
+            generalRoom={generalRoomDetails[0]}
+            language={lang}
+          />
+        )}
+
         <Footer
           {...{
             emailTemplateSettings,
@@ -885,6 +858,25 @@ const ReportPdf = ({
           }}
         />
       </Page>
+
+      {generalRoomDetails && generalRoomDetails.length > 1 && (
+        <Page style={styles.body}>
+          <Header {...headerDetails} language={lang} />
+
+          {generalRoomDetails
+            .slice(1, generalRoomDetails.length)
+            .map((item) => (
+              <DynamicItemWrapper generalRoom={item} language={lang} />
+            ))}
+
+          <Footer
+            {...{
+              emailTemplateSettings,
+              templateSettings,
+            }}
+          />
+        </Page>
+      )}
       <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
         <ServiceTableHederRow

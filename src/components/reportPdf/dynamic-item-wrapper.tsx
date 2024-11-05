@@ -3,6 +3,16 @@ import { HouseItem } from "./house-item";
 import { HouseItemHeader } from "./house-item-header";
 import { HouseDetailObjectProps } from "./generate-report-pdf";
 import { RoomObject } from "@/types";
+import shelfIcon from "@/assets/pngs/shelf.png";
+import sofaIcon from "@/assets/pngs/safe.png";
+import boxIcon from "@/assets/pngs/box.png";
+import armChairIcon from "@/assets/pngs/arm-chair.png";
+import lSofaIcon from "@/assets/pngs/l-sofa.png";
+import tvTableIcon from "@/assets/pngs/tv-table.png";
+import teacherDesckIcon from "@/assets/pngs/teacher-desk.png";
+import deskIcon from "@/assets/pngs/desk.png";
+import tvIcon from "@/assets/pngs/tv.png";
+import decoGrossIcon from "@/assets/pngs/deco-gross.png";
 
 const styles = StyleSheet.create({
   container: {
@@ -49,11 +59,11 @@ const styles = StyleSheet.create({
 });
 
 interface RoomItem {
-  roomDetails?: RoomObject;
+  generalRoom?: RoomObject;
   language?: string;
 }
 
-export const DynamicItemWrapper = ({ roomDetails, language }: RoomItem) => {
+export const DynamicItemWrapper = ({ generalRoom, language }: RoomItem) => {
   const langContent = {
     en: {
       remarks: "Remarks",
@@ -64,21 +74,74 @@ export const DynamicItemWrapper = ({ roomDetails, language }: RoomItem) => {
     },
   };
 
+  const generalRoomItem: HouseDetailObjectProps[] = [
+    {
+      icon: sofaIcon,
+      name: generalRoom?.label1 || "",
+      quantity: generalRoom?.label1Value,
+    },
+    {
+      icon: teacherDesckIcon,
+      name: generalRoom?.label2 || "",
+      quantity: generalRoom?.label2Value,
+    },
+    {
+      icon: tvTableIcon,
+      name: generalRoom?.label3 || "",
+      quantity: generalRoom?.label3Value,
+    },
+    {
+      icon: armChairIcon,
+      name: generalRoom?.label4 || "",
+      quantity: generalRoom?.label4Value,
+    },
+    {
+      icon: deskIcon,
+      name: generalRoom?.label5 || "",
+      quantity: generalRoom?.label5Value,
+    },
+    {
+      icon: shelfIcon,
+      name: generalRoom?.label6 || "",
+      quantity: generalRoom?.label6Value,
+    },
+    {
+      icon: lSofaIcon,
+      name: generalRoom?.label7 || "",
+      quantity: generalRoom?.label7Value,
+    },
+    {
+      icon: tvIcon,
+      name: generalRoom?.label8 || "",
+      quantity: generalRoom?.label8Value,
+    },
+    {
+      icon: decoGrossIcon,
+      name: generalRoom?.label9 || "",
+      quantity: generalRoom?.label9Value,
+    },
+    {
+      icon: boxIcon,
+      name: generalRoom?.label10 || "",
+      quantity: generalRoom?.label10Value,
+    },
+  ];
+
   return (
     <View style={styles.container}>
-      <Text style={styles.mainHeading}>{roomDetails?.mainHeading}</Text>
+      <Text style={styles.mainHeading}>{generalRoom?.mainHeading}</Text>
       <View style={styles.remarksContainer}>
         <Text style={styles.remarksHeading}>
           {langContent[language as keyof typeof langContent]?.remarks}
         </Text>
         <Text style={styles.remarksDescription}>
-          {roomDetails?.descriptions}
+          {generalRoom?.descriptions}
         </Text>
       </View>
       <HouseItemHeader language={language} />
 
-      {/* <View style={styles.grid}>
-        {roomDetails.map((item, index) => (
+      <View style={styles.grid}>
+        {generalRoomItem?.map((item, index) => (
           <View key={index} style={styles.column}>
             <HouseItem
               icon={item.icon}
@@ -87,7 +150,7 @@ export const DynamicItemWrapper = ({ roomDetails, language }: RoomItem) => {
             />
           </View>
         ))}
-      </View> */}
+      </View>
     </View>
   );
 };
