@@ -498,7 +498,7 @@ export interface IconLabelProps {
 export interface IconProps {
   type: Field.icon;
   text?: string | number;
-  id?: string;
+  id: string;
   name?: string;
   icon: string;
   containerClassName?: string;
