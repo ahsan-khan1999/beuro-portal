@@ -254,7 +254,7 @@ export const ServicesTotalAmount = ({
   };
 
   return (
-    <View style={styles.container} break={isBreakPage ? false : true}>
+    <View style={styles.container} break={isBreakPage}>
       <View style={styles.contentContainer}>
         <View style={styles.topRow}>
           <View style={styles.subSection}>
