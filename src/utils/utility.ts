@@ -466,7 +466,10 @@ export const handleUtcDateChange = (
   updateQuery: (router: any, locale: string) => void
 ) => {
   if (!newDate) {
-    console.error("Invalid date provided");
+    if (router?.query?.today) {
+      delete router?.query?.today;
+    }
+    updateQuery(router, router.locale as string);
     return;
   }
 
@@ -476,6 +479,9 @@ export const handleUtcDateChange = (
 
   setDate(utcDate);
   router.query = { ...params, today: utcDate };
+  if (router?.query?.text) {
+    delete router?.query?.text;
+  }
   updateQuery(router, router.locale as string);
 };
 

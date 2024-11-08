@@ -27,7 +27,6 @@ export default function AgentAppointments() {
     totalCount,
     handleNotes,
     handleImageUpload,
-    currentDate,
     handleCurrentDateChange,
   } = useAppointments();
 
@@ -52,7 +51,6 @@ export default function AgentAppointments() {
         handleFilterChange={handleFilterChange}
         isAgent={true}
         onDateChange={handleCurrentDateChange}
-        currentDate={currentDate}
       />
 
       <div className="block xMini:hidden">

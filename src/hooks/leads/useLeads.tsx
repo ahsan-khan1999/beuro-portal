@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import { Lead } from "@/types/leads";
+import { Lead, LeadsFilterProps } from "@/types/leads";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { DEFAULT_CUSTOMER, DEFAULT_LEAD, staticEnums } from "@/utils/static";
@@ -32,28 +32,41 @@ import { updateQuery } from "@/utils/update-query";
 import { getCurrentUtcDate, handleUtcDateChange } from "@/utils/utility";
 
 const useLeads = () => {
+  const router = useRouter();
+  const params = useQueryParams();
+
   const { lead, loading, isLoading, totalCount, leadDetails } = useAppSelector(
     (state) => state.lead
   );
 
-  const router = useRouter();
-  const params = useQueryParams();
   const { t: translate } = useTranslation();
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
 
+  const [filter, setFilter] = useState<FilterType>({
+    sort: FiltersDefaultValues.None,
+    noteType: FiltersDefaultValues.None,
+    text: FiltersDefaultValues.None,
+    date: {
+      $gte: FiltersDefaultValues.$gte,
+      $lte: FiltersDefaultValues.$lte,
+    },
+    status: FiltersDefaultValues.None,
+    today: getCurrentUtcDate(),
+  });
+
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
-  const [currentDate, setCurrentDate] = useState<string>(getCurrentUtcDate);
 
   const handleCurrentDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newDate = e.target.value;
-    handleUtcDateChange(newDate, setCurrentDate, router, params, updateQuery);
+    handleUtcDateChange(newDate, () => {}, router, params, updateQuery);
   };
 
   useEffect(() => {
     const parsedPage = parseInt(router.query.page as string, 10);
+
     let resetPage = null;
     if (!isNaN(parsedPage)) {
       setCurrentPage(parsedPage);
@@ -66,6 +79,8 @@ const useLeads = () => {
     const searchQuery = router.query?.text as string;
     const sortedValue = router.query?.sort as string;
     const searchedDate = router.query?.date as string;
+    const searchedToday = router.query?.today as string;
+
     const searchNoteType = router.query?.noteType as string;
     const queryAppointment = router.query
       ?.isAppointmentCreated as unknown as boolean;
@@ -117,7 +132,7 @@ const useLeads = () => {
       }
 
       if (isAgentRoute) {
-        updatedFilter.today = currentDate;
+        updatedFilter.today = searchedToday;
       }
 
       setFilter(updatedFilter);
@@ -135,17 +150,6 @@ const useLeads = () => {
       });
     }
   }, [router.query]);
-
-  const [filter, setFilter] = useState<FilterType>({
-    sort: FiltersDefaultValues.None,
-    noteType: FiltersDefaultValues.None,
-    text: FiltersDefaultValues.None,
-    date: {
-      $gte: FiltersDefaultValues.$gte,
-      $lte: FiltersDefaultValues.$lte,
-    },
-    status: FiltersDefaultValues.None,
-  });
 
   const totalItems = totalCount;
   const itemsPerPage = 15;
@@ -479,7 +483,6 @@ const useLeads = () => {
     totalCount,
     handleScheduleAppointments,
     shareImgModal,
-    currentDate,
     handleCurrentDateChange,
   };
 };

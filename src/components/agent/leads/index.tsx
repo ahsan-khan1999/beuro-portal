@@ -27,7 +27,6 @@ export default function AgentLeads() {
     totalCount,
     shareImgModal,
     handleScheduleAppointments,
-    currentDate,
     handleCurrentDateChange,
   } = useLeads();
 
@@ -52,7 +51,6 @@ export default function AgentLeads() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
         isAgent={true}
-        currentDate={currentDate}
         onDateChange={handleCurrentDateChange}
       />
 

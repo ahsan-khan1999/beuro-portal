@@ -7,9 +7,9 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
 
 export default function AppointmentsMobileFilters({
+  filter,
   setFilter,
   handleFilterChange,
-  currentDate,
   onDateChange,
 }: AppointmentTableFunction) {
   const { t: translate } = useTranslation();
@@ -110,7 +110,7 @@ export default function AppointmentsMobileFilters({
           <CustomDatePciker
             id="today"
             name="today"
-            value={currentDate}
+            value={filter?.today}
             onInputChange={onDateChange}
           />
         </div>

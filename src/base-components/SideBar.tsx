@@ -29,6 +29,7 @@ import { logoutUser } from "@/api/slices/authSlice/auth";
 import { logout } from "@/utils/auth.util";
 import { LanguageSelector } from "./languageSelector/language-selector";
 import { CalenderIcon } from "@/assets/svgs/components/sideBar/Calender-icon";
+import { getCurrentUtcDate } from "@/utils/utility";
 
 export const svgs = {
   Dashboard: <DashboardIcon />,
@@ -161,9 +162,18 @@ const SideBar = ({
                   <Link
                     href={{
                       pathname: item.pathname,
-                      query: item.query
-                        ? { [String(item.queryName)]: item.query }
-                        : {},
+                      query:
+                        item.query &&
+                        (item.icon === "Leads" || item.icon === "Appointments")
+                          ? {
+                              [String(item.queryName)]: item.query,
+                              today: getCurrentUtcDate(),
+                            }
+                          : item.query
+                          ? {
+                              [String(item.queryName)]: item.query,
+                            }
+                          : {},
                     }}
                     onClick={() => routeChangeHandler(item)}
                     className={`hover:bg-[#E9E1FF] rounded-lg flex justify-between items-center px-3 py-2 w-full break-all ${
@@ -190,14 +200,17 @@ const SideBar = ({
                     {item.inner && (
                       <div
                         className={`
-      cursor-pointer 
-      ${
-        selected.parent.title === item.title &&
-        selected.parent.isActive &&
-        selected.child &&
-        "rotate-180"
-      }
-      ${selected.parent.title === item.title && "sidebar-svg"}`}
+                              cursor-pointer 
+                              ${
+                                selected.parent.title === item.title &&
+                                selected.parent.isActive &&
+                                selected.child &&
+                                "rotate-180"
+                              }
+                              ${
+                                selected.parent.title === item.title &&
+                                "sidebar-svg"
+                              }`}
                         onClick={() => {
                           if (
                             selected.parent.title === item.title &&

@@ -34,7 +34,7 @@ import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { updateQuery } from "@/utils/update-query";
 import { useQueryParams } from "@/utils/hooks";
-import { getCurrentUtcDate, handleUtcDateChange } from "@/utils/utility";
+import { handleUtcDateChange } from "@/utils/utility";
 
 export const useAppointments = () => {
   const {
@@ -52,7 +52,6 @@ export const useAppointments = () => {
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
-  const [currentDate, setCurrentDate] = useState<string>(getCurrentUtcDate);
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
@@ -66,6 +65,7 @@ export const useAppointments = () => {
       $lte: FiltersDefaultValues.$lte,
     },
     status: FiltersDefaultValues.None,
+    today: FiltersDefaultValues.None,
   });
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export const useAppointments = () => {
 
   const handleCurrentDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newDate = e.target.value;
-    handleUtcDateChange(newDate, setCurrentDate, router, params, updateQuery);
+    handleUtcDateChange(newDate, () => {}, router, params, updateQuery);
   };
 
   useEffect(() => {
@@ -93,6 +93,7 @@ export const useAppointments = () => {
     const searchQuery = router.query?.text as string;
     const sortedValue = router.query?.sort as string;
     const searchedDate = router.query?.date as string;
+    const searchedToday = router.query?.today as string;
     const searchNoteType = router.query?.noteType as string;
     const queryDate = router.query?.today as string;
     const queryOffer = router.query?.isOfferCreated as unknown as boolean;
@@ -104,7 +105,8 @@ export const useAppointments = () => {
       searchedDate ||
       queryOffer ||
       queryDate ||
-      searchNoteType;
+      searchNoteType ||
+      searchedToday;
 
     if (queryParams !== undefined) {
       const filteredStatus =
@@ -147,7 +149,7 @@ export const useAppointments = () => {
       }
 
       if (isAgentRoute) {
-        updatedFilter.today = currentDate;
+        updatedFilter.today = searchedToday;
       }
 
       setFilter(updatedFilter);
@@ -440,8 +442,6 @@ export const useAppointments = () => {
   };
 
   const handleUpdateRow = (id?: string) => {
-    console.log(id, "appointment id ");
-
     setCurrentPageRows((prev) =>
       prev?.map((appointment) => {
         return appointment?.leadID?.id === id
@@ -564,7 +564,6 @@ export const useAppointments = () => {
     handleDeleteNote,
     handleImageUpload,
     dispatch,
-    currentDate,
     handleCurrentDateChange,
   };
 };
