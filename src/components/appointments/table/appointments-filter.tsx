@@ -27,7 +27,7 @@ export default function AppointmentsFilter({
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
-  }, [router.query.text]);
+  }, [router.query.text, router.query.today]);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -103,7 +103,9 @@ export default function AppointmentsFilter({
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
-
+    if (router?.query?.today) {
+      delete router?.query?.today;
+    }
     router.push(
       {
         pathname: router.pathname,

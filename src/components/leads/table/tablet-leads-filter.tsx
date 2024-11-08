@@ -18,16 +18,17 @@ import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import CheckField from "@/base-components/filter/fields/check-field";
 import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
+import { getCurrentUtcDate } from "@/utils/utility";
 
 export default function TabletLeadsFilter({
   filter,
   setFilter,
   handleFilterChange,
   isAgent,
-  currentDate,
   onDateChange,
 }: AppointmentTableFunction) {
   const router = useRouter();
+
   const dispatch = useAppDispatch();
   const { sort } = router.query as any;
   const { t: translate } = useTranslation();
@@ -39,7 +40,7 @@ export default function TabletLeadsFilter({
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
-  }, [router.query.text]);
+  }, [router.query.text, router.query.today]);
 
   const checkbox: CheckBoxType[] = [
     {
@@ -66,7 +67,12 @@ export default function TabletLeadsFilter({
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
-
+    // if (!inputValue) {
+    //   router.query.today = getCurrentUtcDate();
+    // }
+    if (inputValue && router?.query?.today) {
+      delete router?.query?.today;
+    }
     router.push(
       {
         pathname: router.pathname,
@@ -284,7 +290,7 @@ export default function TabletLeadsFilter({
             <CustomDatePciker
               id="today"
               name="today"
-              value={currentDate}
+              value={filter.today}
               onInputChange={onDateChange}
             />
           </div>

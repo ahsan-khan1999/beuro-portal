@@ -2,6 +2,7 @@ import { ComponentsType } from "@/components/leads/add/AddNewLeadsData";
 import { Customers } from "./customer";
 import { User } from ".";
 import { ContentTableRowTypes } from "./content";
+import { globalEnums } from "@/enums/global-search";
 
 export interface Lead {
   id: string;
@@ -32,6 +33,11 @@ export interface Lead {
     id: string;
     isReportSubmitted: boolean;
   };
+}
+
+export interface LeadsFilterProps {
+  [globalEnums.text]: string;
+  [globalEnums.today]: string;
 }
 interface CustomerDetails {
   Customer: Customers;

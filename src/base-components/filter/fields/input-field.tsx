@@ -1,5 +1,5 @@
 import { InputFieldProps } from "@/types/global";
-import { combineClasses } from "@/utils/utility";
+import { combineClasses, getCurrentUtcDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { forwardRef, useState } from "react";
@@ -21,7 +21,6 @@ const InputField = forwardRef(
   ) => {
     const router = useRouter();
     const { t: translate } = useTranslation();
-    const [hasText, setHasText] = useState<boolean>(false);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter" && onEnterPress) {
@@ -45,7 +44,6 @@ const InputField = forwardRef(
 
     const handleInputChange = (newValue: string) => {
       handleChange(newValue);
-      setHasText(newValue.trim().length > 0);
     };
 
     const handleClearInput = () => {
@@ -60,6 +58,8 @@ const InputField = forwardRef(
       if (query?.text) {
         delete query.text;
       }
+
+      // router.query.today = getCurrentUtcDate();
 
       router.push({
         pathname,
@@ -80,7 +80,7 @@ const InputField = forwardRef(
             onKeyDown={handleKeyDown}
             ref={ref}
           />
-          {hasText && iconDisplay && (
+          {value && iconDisplay && (
             <div
               className={`absolute top-1/2 right-5 transform -translate-y-1/2 cursor-pointer`}
               onClick={handleClearInput}
