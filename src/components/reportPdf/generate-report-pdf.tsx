@@ -844,12 +844,12 @@ const ReportPdf = ({
           language={lang}
         />
 
-        {/* {generalRoomDetails && generalRoomDetails?.length > 0 && (
+        {generalRoomDetails && generalRoomDetails?.length > 0 && (
           <DynamicItemWrapper
             generalRoom={generalRoomDetails[0]}
             language={lang}
           />
-        )} */}
+        )}
 
         <Footer
           {...{
@@ -859,7 +859,7 @@ const ReportPdf = ({
         />
       </Page>
 
-      {/* {generalRoomDetails && generalRoomDetails.length > 1 && (
+      {generalRoomDetails && generalRoomDetails.length > 1 && (
         <Page style={styles.body}>
           <Header {...headerDetails} language={lang} />
 
@@ -876,7 +876,7 @@ const ReportPdf = ({
             }}
           />
         </Page>
-      )} */}
+      )}
       <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
         <ServiceTableHederRow
@@ -914,7 +914,7 @@ const ReportPdf = ({
           }}
         />
       </Page>
-      {/* <Page style={styles.body}>
+      <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
         <ReportPDFOfferDetails language={lang} {...offerDetails} />
         <Footer
@@ -923,7 +923,7 @@ const ReportPdf = ({
             templateSettings,
           }}
         />
-      </Page> */}
+      </Page>
     </Document>
   );
 };
