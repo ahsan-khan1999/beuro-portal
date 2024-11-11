@@ -180,7 +180,7 @@ export const useUploadImageOffer = (
         if (id) {
           onUpdateDetails?.(id);
           handleImageSlider();
-          handleTaskUpdateSuccess();
+          // handleTaskUpdateSuccess();
         }
       }
     } else if (type === "Contract") {
@@ -200,7 +200,7 @@ export const useUploadImageOffer = (
         if (id) {
           onUpdateDetails?.(id);
           handleImageSlider();
-          handleTaskUpdateSuccess();
+          // handleTaskUpdateSuccess();
         }
       } else {
         handleOnClose();
