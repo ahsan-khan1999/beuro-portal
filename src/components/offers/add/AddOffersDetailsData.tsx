@@ -163,7 +163,7 @@ const EditOffersDetailsData = () => {
         onClose={onClose}
         heading={translate("offers.offer_created_modal.main_heading")}
         subHeading={translate("offers.offer_created_modal.sub_heading")}
-        route={onClose}
+        route={route}
       />
     ),
   };
