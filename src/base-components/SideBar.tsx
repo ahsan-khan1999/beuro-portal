@@ -76,6 +76,7 @@ const SideBar = ({
   });
 
   const userRole = staticEnums["User"]["role"][user?.role as string];
+  console.log("userRole:", userRole);
 
   const router = useRouter();
   const routeChangeHandler = (item: any) => {
@@ -164,7 +165,9 @@ const SideBar = ({
                       pathname: item.pathname,
                       query:
                         item.query &&
-                        (item.icon === "Leads" || item.icon === "Appointments")
+                        (item.icon === "Leads" ||
+                          item.icon === "Appointments") &&
+                        userRole === 3
                           ? {
                               [String(item.queryName)]: item.query,
                               today: getCurrentUtcDate(),
