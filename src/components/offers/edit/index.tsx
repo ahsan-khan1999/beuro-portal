@@ -65,6 +65,7 @@ const EditOffersDetails = () => {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
+          id: id,
           refID: refID,
           name: name,
           heading: heading,
