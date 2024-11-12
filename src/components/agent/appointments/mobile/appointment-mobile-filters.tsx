@@ -81,31 +81,6 @@ export default function AppointmentsMobileFilters({
           {translate("sidebar.customer.appointments.appointment")}
         </h1>
 
-        {/* <div className="flex items-center gap-x-2 z-10">
-          <SelectField
-            handleChange={(value) => hanldeSortChange(value)}
-            value=""
-            options={[
-              {
-                label: `${translate("filters.sort_by.date")}`,
-                value: "createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.latest")}`,
-                value: "-createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.oldest")}`,
-                value: "createdAt",
-              },
-              {
-                label: `${translate("filters.sort_by.a_z")}`,
-                value: "customerDetail.fullName",
-              },
-            ]}
-            label={translate("common.sort_button")}
-            containerClassName="min-w-fit"
-          /> */}
         <div className="w-[200px] z-10">
           <CustomDatePciker
             id="today"

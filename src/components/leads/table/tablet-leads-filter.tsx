@@ -40,7 +40,7 @@ export default function TabletLeadsFilter({
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
-  }, [router.query.text, router.query.today]);
+  }, [router.query.text, router.query.today, router?.query?.sort]);
 
   const checkbox: CheckBoxType[] = [
     {
@@ -73,6 +73,9 @@ export default function TabletLeadsFilter({
     if (inputValue && router?.query?.today) {
       delete router?.query?.today;
     }
+    if (router?.query?.sort) {
+      delete router?.query?.sort;
+    }
     router.push(
       {
         pathname: router.pathname,
@@ -104,6 +107,13 @@ export default function TabletLeadsFilter({
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
+    }
+
+    if (updatedQuery.text) {
+      delete updatedQuery.text;
+    }
+    if (updatedQuery.today) {
+      delete updatedQuery.today;
     }
 
     router.push(
@@ -268,15 +278,15 @@ export default function TabletLeadsFilter({
               },
               {
                 label: "filters.sort_by.date",
-                value: "createdAt",
+                value: "date",
               },
               {
                 label: "filters.sort_by.latest",
-                value: "-createdAt",
+                value: "-date",
               },
               {
                 label: "filters.sort_by.oldest",
-                value: "createdAt",
+                value: "date",
               },
               {
                 label: "filters.sort_by.a_z",
