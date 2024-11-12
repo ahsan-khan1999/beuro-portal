@@ -765,120 +765,6 @@ const ReportPdf = ({
         <ContactAddress {...{ ...contactAddress }} />
         <ReportAddressDetails {...{ address }} language={lang} />
 
-        <HouseItemWrapper
-          mainHeading={
-            langContent[lang as keyof typeof langContent]?.livingRoomHeading
-          }
-          description={livingRoomDetails?.descriptions}
-          items={livingRoomItem}
-          language={lang}
-        />
-
-        <HouseItemWrapper
-          mainHeading={
-            langContent[lang as keyof typeof langContent]?.kitchenHeading
-          }
-          description={kitchenDetails?.descriptions}
-          items={kitchenRoomItem}
-          language={lang}
-        />
-
-        <Footer
-          {...{
-            emailTemplateSettings,
-            templateSettings,
-          }}
-        />
-      </Page>
-      <Page style={styles.body}>
-        <Header {...headerDetails} language={lang} />
-        <HouseItemWrapper
-          mainHeading={
-            langContent[lang as keyof typeof langContent]?.bedRoomHeading
-          }
-          description={bedRoomDetails?.descriptions}
-          items={bedRoomItem}
-          language={lang}
-        />
-
-        <HouseItemWrapper
-          mainHeading={
-            langContent[lang as keyof typeof langContent]?.roomHeading
-          }
-          description={roomDetails?.descriptions}
-          items={roomItem}
-          language={lang}
-        />
-        <HouseItemWrapper
-          mainHeading={
-            langContent[lang as keyof typeof langContent]?.outdoorHeading
-          }
-          description={outDoorDetails?.descriptions}
-          items={outdoorItem}
-          language={lang}
-        />
-
-        <Footer
-          {...{
-            emailTemplateSettings,
-            templateSettings,
-          }}
-        />
-      </Page>
-      <Page style={styles.body}>
-        <Header {...headerDetails} language={lang} />
-        <HouseItemWrapper
-          mainHeading={
-            langContent[lang as keyof typeof langContent]?.basementHeading
-          }
-          description={basementAtticDetails?.descriptions}
-          items={basementItem}
-          language={lang}
-        />
-        <HouseItemWrapper
-          mainHeading={
-            langContent[lang as keyof typeof langContent]?.specialHeading
-          }
-          description={specialItemsDetails?.descriptions}
-          items={specialItem}
-          language={lang}
-        />
-
-        {generalRoomDetails && generalRoomDetails?.length > 0 && (
-          <DynamicItemWrapper
-            generalRoom={generalRoomDetails[0]}
-            language={lang}
-          />
-        )}
-
-        <Footer
-          {...{
-            emailTemplateSettings,
-            templateSettings,
-          }}
-        />
-      </Page>
-
-      {generalRoomDetails && generalRoomDetails.length > 1 && (
-        <Page style={styles.body}>
-          <Header {...headerDetails} language={lang} />
-
-          {generalRoomDetails
-            .slice(1, generalRoomDetails.length)
-            .map((item) => (
-              <DynamicItemWrapper generalRoom={item} language={lang} />
-            ))}
-
-          <Footer
-            {...{
-              emailTemplateSettings,
-              templateSettings,
-            }}
-          />
-        </Page>
-      )}
-      <Page style={styles.body}>
-        <Header {...headerDetails} language={lang} />
         <ServiceTableHederRow
           isDiscount={isDiscount}
           language={lang}
@@ -914,6 +800,162 @@ const ReportPdf = ({
           }}
         />
       </Page>
+      <Page style={styles.body}>
+        <Header {...headerDetails} language={lang} />
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.livingRoomHeading
+          }
+          description={livingRoomDetails?.descriptions}
+          items={livingRoomItem}
+          language={lang}
+        />
+
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.kitchenHeading
+          }
+          description={kitchenDetails?.descriptions}
+          items={kitchenRoomItem}
+          language={lang}
+        />
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.bedRoomHeading
+          }
+          description={bedRoomDetails?.descriptions}
+          items={bedRoomItem}
+          language={lang}
+        />
+
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+      <Page style={styles.body}>
+        <Header {...headerDetails} language={lang} />
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.roomHeading
+          }
+          description={roomDetails?.descriptions}
+          items={roomItem}
+          language={lang}
+        />
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.outdoorHeading
+          }
+          description={outDoorDetails?.descriptions}
+          items={outdoorItem}
+          language={lang}
+        />
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.basementHeading
+          }
+          description={basementAtticDetails?.descriptions}
+          items={basementItem}
+          language={lang}
+        />
+
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+      <Page style={styles.body}>
+        <Header {...headerDetails} language={lang} />
+        <HouseItemWrapper
+          mainHeading={
+            langContent[lang as keyof typeof langContent]?.specialHeading
+          }
+          description={specialItemsDetails?.descriptions}
+          items={specialItem}
+          language={lang}
+        />
+
+        {generalRoomDetails && generalRoomDetails?.length > 0 && (
+          <DynamicItemWrapper
+            generalRoom={generalRoomDetails[0]}
+            language={lang}
+          />
+        )}
+        {generalRoomDetails && generalRoomDetails?.length > 1 && (
+          <DynamicItemWrapper
+            generalRoom={generalRoomDetails[1]}
+            language={lang}
+          />
+        )}
+
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page>
+
+      {generalRoomDetails && generalRoomDetails.length > 2 && (
+        <Page style={styles.body}>
+          <Header {...headerDetails} language={lang} />
+
+          {generalRoomDetails
+            .slice(2, generalRoomDetails.length)
+            .map((item) => (
+              <DynamicItemWrapper generalRoom={item} language={lang} />
+            ))}
+
+          <Footer
+            {...{
+              emailTemplateSettings,
+              templateSettings,
+            }}
+          />
+        </Page>
+      )}
+      {/* <Page style={styles.body}>
+        <Header {...headerDetails} language={lang} />
+        <ServiceTableHederRow
+          isDiscount={isDiscount}
+          language={lang}
+          // bgColor="#4A13E7"
+        />
+
+        {serviceItem?.map((item, index) => (
+          <ServiceTableRow
+            {...item}
+            key={index}
+            pagebreak={
+              !pageBreakCondition
+                ? serviceItem?.length === 1
+                  ? false
+                  : index === serviceItem?.length - 1
+                : false
+            }
+            isDiscount={isDiscount}
+          />
+        ))}
+
+        <ServicesTotalAmount
+          {...serviceItemFooter}
+          systemSettings={systemSetting}
+          language={lang}
+          isBreakPage={false}
+        />
+
+        <Footer
+          {...{
+            emailTemplateSettings,
+            templateSettings,
+          }}
+        />
+      </Page> */}
       <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
         <ReportPDFOfferDetails language={lang} {...offerDetails} />

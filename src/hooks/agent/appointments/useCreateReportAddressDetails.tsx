@@ -23,6 +23,7 @@ import {
 } from "@/api/slices/appointment/appointmentSlice";
 import { ReportPromiseActionType } from "@/types/customer";
 import { CustomerPromiseActionType } from "@/types/company";
+import { staticEnums } from "@/utils/static";
 
 export interface ReportAddressHookProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -71,9 +72,13 @@ export const useCreateReportAddressDetails = ({
     setError,
     reset,
     formState: { errors },
+    getValues,
+    watch,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
+
+  console.log(watch("gender"));
 
   const { fields: addressFields } = useFieldArray({ control, name: "address" });
 
@@ -99,9 +104,11 @@ export const useCreateReportAddressDetails = ({
     if (report) {
       dispatch(readReportDetails({ params: { filter: report } })).then(
         (response: ReportPromiseActionType) => {
+          console.log("response:", response);
           if (response?.payload) {
             const transformedData = transformData({
               fullName: response.payload?.customerDetail?.fullName,
+              gender: response.payload?.customerDetail?.fullName,
               email: response.payload.customerDetail?.email,
               phoneNumber: response.payload.customerDetail?.phoneNumber,
               address: resetFormWithAddresses(
@@ -132,11 +139,17 @@ export const useCreateReportAddressDetails = ({
           params: { filter: appointmentId },
         })
       ).then((response: CustomerPromiseActionType) => {
+        console.log("response:", response);
         if (response.payload) {
           const transformedData = transformData({
             fullName: response.payload?.leadID?.customerDetail?.fullName,
             email: response.payload?.leadID?.customerDetail?.email,
             phoneNumber: response.payload?.leadID?.customerDetail?.phoneNumber,
+            // gender: response.payload?.leadID?.customerDetail?.gender,
+            gender:
+              staticEnums["Gender"][
+                response.payload?.leadID?.customerDetail?.gender
+              ],
             address: resetFormWithAddresses(
               response.payload?.leadID?.addressID?.address || [],
               "Adresse"
@@ -162,7 +175,12 @@ export const useCreateReportAddressDetails = ({
 
   const addressFieldsLength = addressFields.length || 1;
 
-  const fields = contactAgentReportFormField(register, false, control);
+  const fields = contactAgentReportFormField(
+    register,
+    false,
+    control,
+    watch("gender")
+  );
 
   const address = ContactReportAddressFormField(
     register,
@@ -232,5 +250,6 @@ export const useCreateReportAddressDetails = ({
     errors,
     error,
     translate,
+    address: watch()?.address || [],
   };
 };

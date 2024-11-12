@@ -2,16 +2,20 @@ import { ReportContactDetailsFieldsId } from "@/enums/agent/appointments-report"
 import { Field } from "@/enums/form";
 import {
   FormField,
+  GenerateContactAddressFormField,
   GenerateContactAddressReportFormField,
   GenerateContactReportFormField,
 } from "@/types";
+import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
-export const contactAgentReportFormField: GenerateContactReportFormField = (
+export const contactAgentReportFormField: GenerateContactAddressFormField = (
   register,
   loading,
-  control
+  control,
+  gender
 ) => {
+  console.log("gender:", gender);
   const { t: translate } = useTranslation();
 
   const formField: FormField[] = [
@@ -22,6 +26,34 @@ export const contactAgentReportFormField: GenerateContactReportFormField = (
         className:
           "grid grid-cols-1 md:grid-cols-3 gap-[17px] bg-[#EDF4FF] rounded-lg p-2",
         children: [
+          {
+            label: {
+              text: "Gender",
+              htmlFor: ReportContactDetailsFieldsId.gender,
+              className: "mb-[10px]",
+            },
+            field: {
+              // type: Field.select,
+              // // inputType: "text",
+              // className: "!pl-4",
+              // id: ReportContactDetailsFieldsId.gender,
+              // name: ReportContactDetailsFieldsId.gender,
+              // register,
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+              type: Field.select,
+              // id: "gender",
+              // name: "gender",
+              options: Object?.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
+              id: ReportContactDetailsFieldsId.gender,
+              name: ReportContactDetailsFieldsId.gender,
+              control,
+              // value: (gender && staticEnums["Gender"][gender.]) || gender,
+              // register,
+            },
+          },
           {
             label: {
               text: `${translate("agent.report_contact_fields.name")}`,
@@ -100,10 +132,10 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
           type: Field.div,
           id: `div-field-${i}`,
           className:
-            "grid  md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
+            "grid grid-cols-12 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
           children: [
             {
-              containerClass: "mb-0",
+              containerClass: "mb-0 col-span-12 md:col-span-4",
               label: {
                 text: translate("leads.address_details.street_no"),
                 htmlFor: `address.${i}.streetNumber`,
@@ -120,7 +152,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
               },
             },
             {
-              containerClass: "mb-0",
+              containerClass: "mb-0 col-span-12 md:col-span-4",
               label: {
                 text: translate("leads.address_details.post_code"),
                 htmlFor: `address.${i}.postalCode`,
@@ -137,6 +169,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
               },
             },
             {
+              containerClass: "mb-0 col-span-12 md:col-span-4",
               label: {
                 text: `${translate("agent.report_contact_fields.floor")}`,
                 htmlFor: `address.${i}.floor`,
@@ -154,7 +187,9 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 control,
               },
             },
+
             {
+              containerClass: "mb-0 col-span-12 md:col-span-4",
               label: {
                 text: `${translate("agent.report_contact_fields.room")}`,
                 htmlFor: `address.${i}.room`,
@@ -173,6 +208,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
               },
             },
             {
+              containerClass: "mb-0 col-span-12 md:col-span-4",
               label: {
                 text: `${translate("agent.report_contact_fields.lift")}`,
                 htmlFor: `address.${i}.lift`,
@@ -197,7 +233,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
               },
             },
             {
-              containerClass: "xMini:mt-8",
+              containerClass: "xMini:mt-8 col-span-12 md:col-span-4",
               field: {
                 type: Field.customCheckBox,
                 id: `address.${i}.parkingPermit`,
@@ -208,6 +244,24 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 textClassName: "text-sm text-[#344054] font-medium",
                 register,
                 checked: true,
+              },
+            },
+            {
+              containerClass: "mb-0 col-span-12",
+              label: {
+                text: translate("leads.address_details.description"),
+                htmlFor: `address.${i}.description`,
+                className: "mb-[10px]",
+              },
+              field: {
+                type: Field.textArea,
+                className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+                id: `address.${i}.description`,
+                name: `address.${i}.description`,
+                placeholder: `${translate(
+                  "leads.address_details.description"
+                )}`,
+                register,
               },
             },
           ],

@@ -6,6 +6,7 @@ export enum AppointmentReportsFormStages {
 }
 
 export enum ReportContactDetailsFieldsId {
+  gender = "gender",
   fullName = "fullName",
   email = "email",
   phoneNumber = "phoneNumber",

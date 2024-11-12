@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 10,
+    paddingBottom: 10,
   },
 });
 
@@ -50,9 +51,9 @@ export const ReportAddressDetails = ({
                     paddingRight: 30,
                   }}
                 >
-                  {`${address.streetNumber}, ${address.postalCode}, ${
-                    [address.country as keyof typeof Country] || ""
-                  }`}
+                  {`${address.streetNumber}, ${address.postalCode}, ${[
+                    (address.country as keyof typeof Country) || "",
+                  ]}`}
                   {address.description && ` - ${address.description}`}
                 </Text>
               </GridItem>
