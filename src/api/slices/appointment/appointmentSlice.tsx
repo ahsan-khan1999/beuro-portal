@@ -130,7 +130,6 @@ export const readReportDetails: AsyncThunk<boolean, object, object> | any =
 export const updateReport: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("report/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
-    console.log("data:", data);
 
     try {
       const response = await apiServices.updateAppointmentReport(data);

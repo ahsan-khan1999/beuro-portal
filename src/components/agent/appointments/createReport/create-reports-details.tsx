@@ -17,6 +17,8 @@ const CreateReportDetails = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { modal } = useAppSelector((state) => state.global);
+  const { reportDetails } = useAppSelector((state) => state.appointment);
+
   let initialTab: AppointmentReportsFormStages =
     AppointmentReportsFormStages.CONTACT_AND_ADDRESS;
 
@@ -125,10 +127,21 @@ const CreateReportDetails = () => {
 
   const handleReportSuccessRoute = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
-    router.push({
-      pathname: companyAppointment ? "/appointments" : "/agent/appointments",
-      query: { status: "None" },
-    });
+    if (companyAppointment) {
+      router.push({
+        pathname: "/appointments",
+        query: { status: "None" },
+      });
+    } else {
+      router.push({
+        pathname: "/agent/appointments/pdf",
+        query: {
+          today: router.query.today,
+          status: "None",
+          reportId: reportDetails?.appointmentID?.id,
+        },
+      });
+    }
   };
 
   const handleReportCreated = () => {

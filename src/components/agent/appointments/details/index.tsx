@@ -13,13 +13,13 @@ export const AgentAppointmentsDetails = () => {
     appointmentDetails,
     handleNotes,
     handleUploadImages,
+    isLoading,
   } = useAppointmentsDetails();
 
   return (
     <>
-      {loading ? (
-        <CustomLoader />
-      ) : (
+      {isLoading && <CustomLoader />}
+      {!isLoading && (
         <>
           <AppointmentsDetailCard
             onStatusChange={handleStatusUpdate}
