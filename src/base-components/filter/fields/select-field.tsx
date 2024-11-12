@@ -19,6 +19,9 @@ export default function SelectField({
   labelClassName,
   dropdownClassName,
 }: OptionsFieldProps) {
+  console.log("label:", label);
+  console.log("options:", options);
+  console.log("value:", value);
   const containerClasses = combineClasses(
     "relative flex items-center justify-center min-w-[120px] w-fit",
     containerClassName
@@ -37,6 +40,7 @@ export default function SelectField({
   const { t: translate } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState<string>(value || "");
+  // console.log("selectedLabel:", selectedLabel);
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);

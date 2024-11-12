@@ -220,15 +220,15 @@ export default function AppointmentsFilter({
                 },
                 {
                   label: "filters.sort_by.date",
-                  value: "createdAt",
+                  value: "date",
                 },
                 {
                   label: "filters.sort_by.latest",
-                  value: "-createdAt",
+                  value: "-date",
                 },
                 {
                   label: "filters.sort_by.oldest",
-                  value: "createdAt",
+                  value: "date",
                 },
                 {
                   label: "filters.sort_by.a_z",

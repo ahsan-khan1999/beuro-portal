@@ -76,12 +76,14 @@ export default function AgentAppointments() {
           </TableLayout>
         </TableCardLayout>
       </div>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-        currentPage={currentPage}
-      />
+      {!isLoading && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+      )}
       {renderModal()}
     </>
   );

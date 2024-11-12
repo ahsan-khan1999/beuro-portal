@@ -469,6 +469,9 @@ export const handleUtcDateChange = (
     if (router?.query?.today) {
       delete router?.query?.today;
     }
+    if (router?.query?.sort) {
+      delete router?.query?.sort;
+    }
     updateQuery(router, router.locale as string);
     return;
   }
@@ -481,6 +484,9 @@ export const handleUtcDateChange = (
   router.query = { ...params, today: utcDate };
   if (router?.query?.text) {
     delete router?.query?.text;
+  }
+  if (router?.query?.sort) {
+    delete router?.query?.sort;
   }
   updateQuery(router, router.locale as string);
 };
