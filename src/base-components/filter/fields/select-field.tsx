@@ -19,9 +19,6 @@ export default function SelectField({
   labelClassName,
   dropdownClassName,
 }: OptionsFieldProps) {
-  console.log("label:", label);
-  console.log("options:", options);
-  console.log("value:", value);
   const containerClasses = combineClasses(
     "relative flex items-center justify-center min-w-[120px] w-fit",
     containerClassName

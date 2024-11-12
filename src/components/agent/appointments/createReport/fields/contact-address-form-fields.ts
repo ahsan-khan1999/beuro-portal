@@ -148,8 +148,8 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 id: `address.${i}.floor`,
                 name: `address.${i}.floor`,
                 options: Array?.from({ length: 10 }, (_, i) => ({
-                  label: (i + 1).toString(),
-                  value: (i + 1).toString(),
+                  label: i.toString(),
+                  value: i.toString(),
                 })),
                 control,
               },
