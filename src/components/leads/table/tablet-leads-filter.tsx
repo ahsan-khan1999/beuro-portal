@@ -18,16 +18,17 @@ import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import CheckField from "@/base-components/filter/fields/check-field";
 import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
+import { getCurrentUtcDate } from "@/utils/utility";
 
 export default function TabletLeadsFilter({
   filter,
   setFilter,
   handleFilterChange,
   isAgent,
-  currentDate,
   onDateChange,
 }: AppointmentTableFunction) {
   const router = useRouter();
+
   const dispatch = useAppDispatch();
   const { sort } = router.query as any;
   const { t: translate } = useTranslation();
@@ -39,7 +40,7 @@ export default function TabletLeadsFilter({
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
-  }, [router.query.text]);
+  }, [router.query.text, router.query.today, router?.query?.sort]);
 
   const checkbox: CheckBoxType[] = [
     {
@@ -66,7 +67,15 @@ export default function TabletLeadsFilter({
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
-
+    // if (!inputValue) {
+    //   router.query.today = getCurrentUtcDate();
+    // }
+    if (inputValue && router?.query?.today) {
+      delete router?.query?.today;
+    }
+    if (router?.query?.sort) {
+      delete router?.query?.sort;
+    }
     router.push(
       {
         pathname: router.pathname,
@@ -98,6 +107,13 @@ export default function TabletLeadsFilter({
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
+    }
+
+    if (updatedQuery.text) {
+      delete updatedQuery.text;
+    }
+    if (updatedQuery.today) {
+      delete updatedQuery.today;
     }
 
     router.push(
@@ -262,15 +278,15 @@ export default function TabletLeadsFilter({
               },
               {
                 label: "filters.sort_by.date",
-                value: "createdAt",
+                value: "date",
               },
               {
                 label: "filters.sort_by.latest",
-                value: "-createdAt",
+                value: "-date",
               },
               {
                 label: "filters.sort_by.oldest",
-                value: "createdAt",
+                value: "date",
               },
               {
                 label: "filters.sort_by.a_z",
@@ -284,7 +300,7 @@ export default function TabletLeadsFilter({
             <CustomDatePciker
               id="today"
               name="today"
-              value={currentDate}
+              value={filter.today}
               onInputChange={onDateChange}
             />
           </div>

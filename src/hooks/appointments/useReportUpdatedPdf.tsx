@@ -184,6 +184,7 @@ export const useReportUpdatedPdf = () => {
                 box: reportDetails?.livingRoomDetails?.box,
                 descriptions: reportDetails?.livingRoomDetails?.descriptions,
               },
+              generalRoomDetails: reportDetails?.generalRoomDetails,
               kitchenDetails: {
                 oven: reportDetails?.kitchenDetails?.oven,
                 refrigerator: reportDetails?.kitchenDetails?.refrigerator,

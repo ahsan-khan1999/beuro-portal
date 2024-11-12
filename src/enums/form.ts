@@ -76,6 +76,7 @@ export enum Field {
   colourSelectField = "colourSelectField",
   remainderSelectField = "remainderSelectField",
   locationSearchInput = "locationSearchInput",
+  icon = "icon",
 }
 
 export enum CardType {

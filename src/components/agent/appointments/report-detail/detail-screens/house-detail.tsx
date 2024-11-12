@@ -949,6 +949,129 @@ export const ReportHouseDetail = ({ reportDetail }: ReportHouseDetailProps) => {
             />
           </div>
         </div>
+        {reportDetail?.generalRoomDetails?.map((item) => (
+          <div className="mt-5 flex flex-col gap-y-2">
+            <p className="text-base font-medium xMini:font-semibold text-[#1E1E1E] mb-2">
+              {item?.mainHeading}
+            </p>
+            <div className="bg-[#EDF4FF] rounded-lg px-2 py-3">
+              <HouseFieldLabel />
+              <div className="grid grid-cols-1 md:grid-cols-2 xlg:grid-cols-3 md:gap-x-[71px] gap-y-2">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={safeIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label1}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label1Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={teacherDesckIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label2}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label2Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={tvTableIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label3}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label3Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={armChairIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label4}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label4Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={deskIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label5}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label5Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={shelfIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label6}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label6Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={lSofaIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label7}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label7Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={tvIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label8}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label8Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={decoGrossIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label9}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label9Value}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-x-3">
+                    <Image src={boxIcon} alt="house item icon" />
+                    <p className="text-[#1C1F35] text-base font-medium">
+                      {item?.label10}
+                    </p>
+                  </div>
+                  <p className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium flex items-center justify-center min-h-[40px] min-w-[40px] truncate">
+                    {item?.label10Value}
+                  </p>
+                </div>
+              </div>
+              <HouseDescriptionField descriptionValue={item?.descriptions} />
+            </div>
+          </div>
+        ))}
       </div>
     </LeadsCardLayout>
   );

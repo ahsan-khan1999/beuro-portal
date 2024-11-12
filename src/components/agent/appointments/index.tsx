@@ -27,7 +27,6 @@ export default function AgentAppointments() {
     totalCount,
     handleNotes,
     handleImageUpload,
-    currentDate,
     handleCurrentDateChange,
   } = useAppointments();
 
@@ -52,7 +51,6 @@ export default function AgentAppointments() {
         handleFilterChange={handleFilterChange}
         isAgent={true}
         onDateChange={handleCurrentDateChange}
-        currentDate={currentDate}
       />
 
       <div className="block xMini:hidden">
@@ -78,12 +76,14 @@ export default function AgentAppointments() {
           </TableLayout>
         </TableCardLayout>
       </div>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-        currentPage={currentPage}
-      />
+      {!isLoading && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+      )}
       {renderModal()}
     </>
   );

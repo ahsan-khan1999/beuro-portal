@@ -27,7 +27,6 @@ export default function AgentLeads() {
     totalCount,
     shareImgModal,
     handleScheduleAppointments,
-    currentDate,
     handleCurrentDateChange,
   } = useLeads();
 
@@ -52,7 +51,6 @@ export default function AgentLeads() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
         isAgent={true}
-        currentDate={currentDate}
         onDateChange={handleCurrentDateChange}
       />
 
@@ -67,12 +65,14 @@ export default function AgentLeads() {
           </TableLayout>
         </TableCardLayout>
       </div>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-        currentPage={currentPage}
-      />
+      {!isLoading && (
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+      )}
       {renderModal()}
     </>
   );

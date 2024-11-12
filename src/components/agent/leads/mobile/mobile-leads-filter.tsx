@@ -9,7 +9,6 @@ export default function MobileLeadsFilters({
   filter,
   setFilter,
   handleFilterChange,
-  currentDate,
   onDateChange,
 }: AppointmentTableFunction) {
   const router = useRouter();
@@ -81,7 +80,7 @@ export default function MobileLeadsFilters({
           <CustomDatePciker
             id="today"
             name="today"
-            value={currentDate}
+            value={filter?.today}
             onInputChange={onDateChange}
           />
         </div>

@@ -9,7 +9,6 @@ export const LeadsTableFunctions = ({
   setFilter,
   handleFilterChange,
   isAgent,
-  currentDate,
   onDateChange,
 }: AppointmentTableFunction) => {
   return (
@@ -37,7 +36,6 @@ export const LeadsTableFunctions = ({
                 handleFilterChange={handleFilterChange}
                 isAgent={isAgent}
                 onDateChange={onDateChange}
-                currentDate={currentDate}
               />
             </div>
           )}
@@ -60,7 +58,6 @@ export const LeadsTableFunctions = ({
               handleFilterChange={handleFilterChange}
               isAgent={isAgent}
               onDateChange={onDateChange}
-              currentDate={currentDate}
             />
           </div>
         </>

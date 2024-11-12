@@ -4,4 +4,8 @@ export enum TabsComponent {
   invoices,
   receipt,
 }
-    
+
+export enum globalEnums {
+  today = "today",
+  text = "text",
+}

@@ -262,7 +262,7 @@
         "expire": "Abgelaufen"
       },
       "appointments": {
-        "appointment": "Termine",
+        "appointment": "Besichtigungen",
         "pending": "Ausstehend",
         "completed": "Durchgeführt",
         "cancelled": "Abgebrochen"
@@ -313,7 +313,7 @@
         "expire": "Abgelaufen"
       },
       "appointments": {
-        "appointment": "Termin",
+        "appointment": "Besichtigung",
         "pending": "Ausstehend",
         "completed": "Durchgeführt",
         "cancelled": "Abgebrochen"
@@ -1009,7 +1009,7 @@
       "InProcess": "In Bearbeitung",
       "Close": "Geschlossen",
       "Expired": "Abgelaufen",
-      "Appointment": "Termin"
+      "Appointment": "Besichtigung"
     },
     "table_headings": {
       "id": "ID",
@@ -1020,8 +1020,8 @@
       "desire_date": "Wunschdatum",
       "creation_date": "Erstelldatum",
       "location": "Standort",
-      "status": "Status",
-      "appointment": "Termin",
+      "status": "Anfragen-Status",
+      "appointment": "Besichtigung",
       "appointment_1": "Besichtigungstermin",
       "images": "Bilder",
       "note": "Notizen",
@@ -1130,13 +1130,13 @@
     "reschedule_btn": "Verschieben",
     "sub_report": "Bericht einreichen",
     "sub_report_1": "Bericht erstellen",
-    "create_appointments": "Termin erstellen",
-    "view_appointments_btn": "Termin ansehen",
-    "schedule_appointment": "Termin vereinbaren",
-    "reschedule_appointment": "Termin verschieben",
-    "detail_heading": "Termin Details",
+    "create_appointments": "Besichtigung erstellen",
+    "view_appointments_btn": "Besichtigung ansehen",
+    "schedule_appointment": "Besichtigung vereinbaren",
+    "reschedule_appointment": "Besichtigung verschieben",
+    "detail_heading": "Besichtigung Details",
     "details": "Details",
-    "appointment": "Termin",
+    "appointment": "Besichtigung",
     "table_headings": {
       "id": "ID",
       "lead_id": "Lead ID",
@@ -1157,7 +1157,7 @@
       "Cancelled": "Abgebrochen"
     },
     "successs_modal": {
-      "heading": "Termin erfolgreich erstellt",
+      "heading": "Besichtigung erfolgreich erstellt",
       "sub_heading": "Vielen Dank für die Vereinbarung von Terminen. Wir freuen uns, Sie bei uns zu haben"
     },
     "appointments_field_label": {
@@ -1169,7 +1169,7 @@
     "detail_data": {
       "assign_agent": "Agent zuweisen",
       "lead_id": "Lead ID",
-      "appointment_id": "Termin ID",
+      "appointment_id": "Besichtigung ID",
       "status": "Status",
       "date": "Datum",
       "time": "Zeit",
@@ -1299,7 +1299,7 @@
     "upload_button": "Hochladen",
     "item": "Artikel",
     "create_report_btn": "Bericht erstellen",
-    "schedule_btn": "Termin vereinbaren",
+    "schedule_btn": "Besichtigung vereinbaren",
     "details": "Einzelheiten",
     "follow_up_completed": "Bitte kontaktieren Sie den Kunden nach 10 Minuten.",
     "invoice_cards": {
@@ -1817,7 +1817,7 @@
         "subscription_date": "Abonnementdatum",
         "status": "Status",
         "company_logo": "Firmenlogo",
-        "appointment": "Termin-Modul",
+        "appointment": "Besichtigung-Modul",
         "customer_status": {
           "active": "Aktiv",
           "block": "Blockieren",
@@ -2450,7 +2450,7 @@
   "add_note_dropdown": {
     "all_notes": "Alle Anfragen",
     "Sending pictures": "Sendet Fotos",
-    "Viewing date": "Besichtigungs Termin",
+    "Viewing date": "Besichtigung",
     "Approximate Offer open": "Schätzoﬀerte Oﬀen",
     "Will contact us": "Meldet sich noch",
     "Individual Note": "Individuelle Notiz",
@@ -2492,7 +2492,8 @@
     "house_detail_fields": {
       "item": "Artikel",
       "qty": "Qty",
-      "living_room_heading": "Wohnzimmer(WZ))",
+      "living_room_heading": "Wohnzimmer(WZ)",
+      "add_new_room": "Neuen Raum hinzufügen",
       "sofa": "Sofa",
       "puit": "Pult",
       "tv_table": "Fernsehtisch",
@@ -2589,9 +2590,9 @@
   },
   "calendar": {
     "more_text": "Mehr",
-    "delete_appointment_des": "Sind SIe sich sicher, dass Sie den Termin löschen möchten?",
+    "delete_appointment_des": "Sind Sie sich sicher, dass Sie den Besichtigung löschen möchten?",
     "main_heading": "Kalender",
-    "add_task": "Termin hinzufügen",
+    "add_task": "Besichtigung hinzufügen",
     "today": "Heute",
     "edit": "Bearbeiten",
     "select_date": "Datum auswählen",

@@ -27,7 +27,7 @@ export default function AppointmentsFilter({
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
-  }, [router.query.text]);
+  }, [router.query.text, router.query.today]);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -103,7 +103,9 @@ export default function AppointmentsFilter({
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
-
+    if (router?.query?.today) {
+      delete router?.query?.today;
+    }
     router.push(
       {
         pathname: router.pathname,
@@ -241,15 +243,15 @@ export default function AppointmentsFilter({
               },
               {
                 label: "filters.sort_by.date",
-                value: "createdAt",
+                value: "date",
               },
               {
                 label: "filters.sort_by.latest",
-                value: "-createdAt",
+                value: "-date",
               },
               {
                 label: "filters.sort_by.oldest",
-                value: "createdAt",
+                value: "date",
               },
               {
                 label: "filters.sort_by.a_z",
@@ -266,40 +268,6 @@ export default function AppointmentsFilter({
             containerClassName="z-0"
           />
         </div>
-        {/* <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-          <div className="flex items-center gap-x-4">
-            <SelectField
-              handleChange={(value) => hanldeSortChange(value)}
-              value=""
-              options={[
-                {
-                  label: `${translate("filters.sort_by.date")}`,
-                  value: "createdAt",
-                },
-                {
-                  label: `${translate("filters.sort_by.latest")}`,
-                  value: "-createdAt",
-                },
-                {
-                  label: `${translate("filters.sort_by.oldest")}`,
-                  value: "createdAt",
-                },
-                {
-                  label: `${translate("filters.sort_by.a_z")}`,
-                  value: "customerDetail.fullName",
-                },
-              ]}
-              label={translate("common.sort_button")}
-              containerClassName="min-w-fit"
-            />
-            <LeadsFilters
-              filter={filter}
-              setFilter={setFilter}
-              onFilterChange={handleFilterChange}
-              containerClassName="z-0"
-            />
-          </div>
-        </div> */}
       </div>
     </div>
   );

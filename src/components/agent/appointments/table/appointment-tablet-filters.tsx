@@ -14,7 +14,6 @@ export default function AppointmentsTabletFilters({
   filter,
   setFilter,
   handleFilterChange,
-  currentDate,
   onDateChange,
 }: AppointmentTableFunction) {
   const router = useRouter();
@@ -29,7 +28,7 @@ export default function AppointmentsTabletFilters({
     const queryText = router.query.text;
     const textValue = Array.isArray(queryText) ? queryText[0] : queryText;
     setInputValue(textValue || "");
-  }, [router.query.text]);
+  }, [router.query.text, router.query.today, router?.query?.sort]);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -37,7 +36,12 @@ export default function AppointmentsTabletFilters({
 
   const onEnterPress = () => {
     let inputValue = inputRef?.current?.value;
-
+    if (router?.query?.today) {
+      delete router?.query?.today;
+    }
+    if (router?.query?.sort) {
+      delete router?.query?.sort;
+    }
     router.push(
       {
         pathname: router.pathname,
@@ -69,6 +73,12 @@ export default function AppointmentsTabletFilters({
       delete updatedQuery.sort;
     } else {
       updatedQuery.sort = String(value);
+    }
+    if (updatedQuery.today) {
+      delete updatedQuery.today;
+    }
+    if (updatedQuery.text) {
+      delete updatedQuery.text;
     }
 
     router.push(
@@ -242,15 +252,15 @@ export default function AppointmentsTabletFilters({
             },
             {
               label: "filters.sort_by.date",
-              value: "createdAt",
+              value: "date",
             },
             {
               label: "filters.sort_by.latest",
-              value: "-createdAt",
+              value: "-date",
             },
             {
               label: "filters.sort_by.oldest",
-              value: "createdAt",
+              value: "date",
             },
             {
               label: "filters.sort_by.a_z",
@@ -264,7 +274,7 @@ export default function AppointmentsTabletFilters({
           <CustomDatePciker
             id="today"
             name="today"
-            value={currentDate}
+            value={filter?.today}
             onInputChange={onDateChange}
           />
         </div>

@@ -21,6 +21,7 @@ export { QuantityInputField } from "./quantity-input-field";
 export { CustomCheckBoxField } from "./custom-checkbox-field";
 export { CustomFileUploadField } from "./custom-file-upload";
 export { IconLabelFeild } from "./icon-label-field";
+export { IconFeild } from "./icon-field";
 export { CalendarDatePickerField } from "./calendar-date-picker-field";
 export { ColourSelectField } from "./colorSelection/colour-select-field";
 export { RemainderSelectField } from "./remainderSelect/colour-remainder-field";

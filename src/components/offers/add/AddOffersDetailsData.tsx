@@ -128,6 +128,7 @@ const EditOffersDetailsData = () => {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
+          id: offerDetails?.leadID?.id,
           refID: offerDetails?.offerNumber,
           name: name,
           heading: heading,
@@ -137,7 +138,7 @@ const EditOffersDetailsData = () => {
   };
 
   const handleOfferCreated = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    dispatch(updateModalType({ type: ModalType.IMAGE_UPDATED_SUCCESS }));
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -157,7 +158,7 @@ const EditOffersDetailsData = () => {
         type={"Offer"}
       />
     ),
-    [ModalType.CREATION]: (
+    [ModalType.IMAGE_UPDATED_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
         heading={translate("offers.offer_created_modal.main_heading")}

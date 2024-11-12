@@ -9,7 +9,6 @@ export const AppointmentTableFunctions = ({
   setFilter,
   handleFilterChange,
   isAgent,
-  currentDate,
   onDateChange,
 }: AppointmentTableFunction) => {
   const { t: translate } = useTranslation();
@@ -39,7 +38,6 @@ export const AppointmentTableFunctions = ({
                 handleFilterChange={handleFilterChange}
                 isAgent={isAgent}
                 onDateChange={onDateChange}
-                currentDate={currentDate}
               />
             </div>
           )}
@@ -61,7 +59,6 @@ export const AppointmentTableFunctions = ({
               handleFilterChange={handleFilterChange}
               isAgent={isAgent}
               onDateChange={onDateChange}
-              currentDate={currentDate}
             />
           </div>
         </>
