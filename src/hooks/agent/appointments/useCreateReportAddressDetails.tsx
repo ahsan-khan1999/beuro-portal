@@ -14,6 +14,7 @@ import {
   contactAgentReportFormField,
   ContactReportAddressFormField,
   ReportContactSubmitFormField,
+  ReportCustAddressFormField,
 } from "@/components/agent/appointments/createReport/fields/contact-address-form-fields";
 import { useEffect } from "react";
 import {
@@ -23,6 +24,8 @@ import {
 } from "@/api/slices/appointment/appointmentSlice";
 import { ReportPromiseActionType } from "@/types/customer";
 import { CustomerPromiseActionType } from "@/types/company";
+import { staticEnums } from "@/utils/static";
+import { convertUTCToLocalDate } from "@/utils/utility";
 
 export interface ReportAddressHookProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -71,10 +74,11 @@ export const useCreateReportAddressDetails = ({
     setError,
     reset,
     formState: { errors },
+    getValues,
+    watch,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-
   const { fields: addressFields } = useFieldArray({ control, name: "address" });
 
   useEffect(() => {
@@ -102,6 +106,7 @@ export const useCreateReportAddressDetails = ({
           if (response?.payload) {
             const transformedData = transformData({
               fullName: response.payload?.customerDetail?.fullName,
+              gender: response.payload?.customerDetail?.fullName,
               email: response.payload.customerDetail?.email,
               phoneNumber: response.payload.customerDetail?.phoneNumber,
               address: resetFormWithAddresses(
@@ -132,11 +137,38 @@ export const useCreateReportAddressDetails = ({
           params: { filter: appointmentId },
         })
       ).then((response: CustomerPromiseActionType) => {
+        console.log("response:", response);
         if (response.payload) {
           const transformedData = transformData({
+            // customerDetail: {
+            //   ...response.payload?.leadID?.customerDetail,
+            //   gender:
+            //     staticEnums["Gender"][
+            //       response.payload?.leadID?.customerDetail?.gender
+            //     ],
+            //   date: convertUTCToLocalDate(
+            //     response.payload?.leadID?.desireDate || ""
+            //   ),
+            // },
+            customerType:
+              response.payload?.leadID?.customerDetail?.customerType,
+            gender:
+              staticEnums["Gender"][
+                response.payload?.leadID?.customerDetail?.gender
+              ],
             fullName: response.payload?.leadID?.customerDetail?.fullName,
             email: response.payload?.leadID?.customerDetail?.email,
             phoneNumber: response.payload?.leadID?.customerDetail?.phoneNumber,
+            companyName: response.payload?.leadID?.customerDetail?.companyName,
+            date: convertUTCToLocalDate(
+              response.payload?.leadID?.desireDate || ""
+            ),
+            streetNumber:
+              response.payload?.leadID?.customerDetail?.address?.streetNumber,
+            country: response.payload?.leadID?.customerDetail?.address?.country,
+            postalCode:
+              response.payload?.leadID?.customerDetail?.address?.postalCode,
+
             address: resetFormWithAddresses(
               response.payload?.leadID?.addressID?.address || [],
               "Adresse"
@@ -146,6 +178,7 @@ export const useCreateReportAddressDetails = ({
           reset(transformedData);
         }
       });
+
       // const transformedData = transformData({
       //   fullName: appointmentDetails?.leadID?.customerDetail?.fullName,
       //   email: appointmentDetails?.leadID?.customerDetail?.email,
@@ -162,7 +195,12 @@ export const useCreateReportAddressDetails = ({
 
   const addressFieldsLength = addressFields.length || 1;
 
-  const fields = contactAgentReportFormField(register, false, control);
+  const fields = contactAgentReportFormField(
+    register,
+    false,
+    control,
+    watch("customerDetail.customerType")
+  );
 
   const address = ContactReportAddressFormField(
     register,
@@ -177,6 +215,11 @@ export const useCreateReportAddressDetails = ({
     loading,
     control,
     handleCancel
+  );
+  const customerAddress = ReportCustAddressFormField(
+    register,
+    loading,
+    control
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -203,10 +246,11 @@ export const useCreateReportAddressDetails = ({
       } else {
         const apiData = {
           ...data,
+          customerType: Number(data.customerType),
+          gender: Number(data.gender),
           step: 1,
           appointmentID: appointmentDetails?.id,
         };
-
         const response = await dispatch(
           createReport({
             data: apiData,
@@ -225,7 +269,7 @@ export const useCreateReportAddressDetails = ({
   };
 
   return {
-    fields: [...fields, ...address, ...submit],
+    fields: [...fields, ...customerAddress, ...address, ...submit],
     onSubmit,
     control,
     handleSubmit,

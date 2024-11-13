@@ -25,6 +25,7 @@ export default function Appointments() {
     handleScheduleAppointments,
     handleNotes,
     handleImageUpload,
+    handleCurrentDateChange,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -45,6 +46,7 @@ export default function Appointments() {
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
+        onDateChange={handleCurrentDateChange}
       />
       <TableCardLayout>
         <TableLayout>

@@ -990,6 +990,13 @@ export type GeneratePaymentSettingFormField = (
 ) => FormField[];
 
 // appointment form
+export type GenerateContactAddressFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  customerType?: number
+  // setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
 export type GenerateContactReportFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
@@ -1003,6 +1010,12 @@ export type GenerateContactAddressReportFormField = (
   control: Control<FieldValues>,
   addressFieldsLength: number,
   addressFields?: object[],
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
+export type CustAddressFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 

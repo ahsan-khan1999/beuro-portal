@@ -7,11 +7,18 @@ import * as yup from "yup";
 
 export const ReportContactAddressDetailsValidation = (translate: Function) => {
   return yup.object().shape({
+    [ReportContactDetailsFieldsId.customerType]: yup
+      .string()
+      .required(translate("validationMessages.required")),
+    [ReportContactDetailsFieldsId.gender]: yup
+      .string()
+      .required(translate("validationMessages.required")),
     [ReportContactDetailsFieldsId.fullName]: yup
       .string()
       .required(translate("validationMessages.required")),
     [ReportContactDetailsFieldsId.email]: yup.string().notRequired(),
     [ReportContactDetailsFieldsId.phoneNumber]: yup.string().notRequired(),
+
     [ReportContactDetailsFieldsId.address]: yup
       .array()
       .of(

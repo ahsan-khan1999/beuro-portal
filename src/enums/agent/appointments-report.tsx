@@ -6,7 +6,12 @@ export enum AppointmentReportsFormStages {
 }
 
 export enum ReportContactDetailsFieldsId {
+  customerDetail = "customerDetail",
+  gender = "gender",
+  companyType = "companyType",
+  customerType = "customerType",
   fullName = "fullName",
+  companyName = "companyName",
   email = "email",
   phoneNumber = "phoneNumber",
   address = "address",
@@ -18,6 +23,7 @@ export enum ReportContactDetailsFieldsId {
   room = "room",
   lift = "lift",
   parkingPermit = "parkingPermit",
+  date = "date",
 }
 
 export enum HouseDetailsFieldsId {
