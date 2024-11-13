@@ -76,7 +76,6 @@ const SideBar = ({
   });
 
   const userRole = staticEnums["User"]["role"][user?.role as string];
-  console.log("userRole:", userRole);
 
   const router = useRouter();
   const routeChangeHandler = (item: any) => {

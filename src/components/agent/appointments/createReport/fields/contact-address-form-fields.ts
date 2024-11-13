@@ -1,10 +1,12 @@
 import { ReportContactDetailsFieldsId } from "@/enums/agent/appointments-report";
 import { Field } from "@/enums/form";
 import {
+  DivProps,
   FormField,
   GenerateContactAddressFormField,
   GenerateContactAddressReportFormField,
   GenerateContactReportFormField,
+  CustAddressFormField,
 } from "@/types";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
@@ -13,9 +15,8 @@ export const contactAgentReportFormField: GenerateContactAddressFormField = (
   register,
   loading,
   control,
-  gender
+  customerType
 ) => {
-  console.log("gender:", gender);
   const { t: translate } = useTranslation();
 
   const formField: FormField[] = [
@@ -28,74 +29,99 @@ export const contactAgentReportFormField: GenerateContactAddressFormField = (
         children: [
           {
             label: {
-              text: "Gender",
-              htmlFor: ReportContactDetailsFieldsId.gender,
+              text: `${translate("leads.customer_details.customer_type")}`,
+              htmlFor: `customerDetail.${ReportContactDetailsFieldsId.customerType}`,
               className: "mb-[10px]",
             },
             field: {
-              // type: Field.select,
-              // // inputType: "text",
-              // className: "!pl-4",
-              // id: ReportContactDetailsFieldsId.gender,
-              // name: ReportContactDetailsFieldsId.gender,
-              // register,
               className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
               type: Field.select,
-              // id: "gender",
-              // name: "gender",
+              options:
+                Object?.keys(staticEnums.CustomerType)?.map((item) => ({
+                  value: staticEnums.CustomerType[item],
+                  label: translate(`customer_type.${item}`),
+                })) || [],
+              id: `customerDetail.${ReportContactDetailsFieldsId.customerType}`,
+              name: `customerDetail.${ReportContactDetailsFieldsId.customerType}`,
+              control,
+            },
+          },
+          {
+            label: {
+              text: `${translate("customers.details.gender")}`,
+              htmlFor: `customerDetail.${ReportContactDetailsFieldsId.gender}`,
+              className: "mb-[10px]",
+            },
+            field: {
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+              type: Field.select,
               options: Object?.keys(staticEnums.Gender).map((item) => ({
                 value: staticEnums.Gender[item],
                 label: translate(`gender.${item}`),
               })),
-              id: ReportContactDetailsFieldsId.gender,
-              name: ReportContactDetailsFieldsId.gender,
+              id: `customerDetail.${ReportContactDetailsFieldsId.gender}`,
+              name: `customerDetail.${ReportContactDetailsFieldsId.gender}`,
               control,
-              // value: (gender && staticEnums["Gender"][gender.]) || gender,
-              // register,
             },
           },
           {
             label: {
               text: `${translate("agent.report_contact_fields.name")}`,
-              htmlFor: ReportContactDetailsFieldsId.fullName,
+              htmlFor: `customerDetail.${ReportContactDetailsFieldsId.fullName}`,
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               inputType: "text",
               className: "!pl-4",
-              id: ReportContactDetailsFieldsId.fullName,
-              name: ReportContactDetailsFieldsId.fullName,
+              id: `customerDetail.${ReportContactDetailsFieldsId.fullName}`,
+              name: `customerDetail.${ReportContactDetailsFieldsId.fullName}`,
               register,
             },
           },
+
           {
             label: {
               text: `${translate("agent.report_contact_fields.email")}`,
-              htmlFor: ReportContactDetailsFieldsId.email,
+              htmlFor: `customerDetail.${ReportContactDetailsFieldsId.email}`,
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
-              inputType: ReportContactDetailsFieldsId.email,
+              inputType: "email",
               className: "!pl-4",
-              id: ReportContactDetailsFieldsId.email,
-              name: ReportContactDetailsFieldsId.email,
+              id: `customerDetail.${ReportContactDetailsFieldsId.email}`,
+              name: `customerDetail.${ReportContactDetailsFieldsId.email}`,
               register,
             },
           },
           {
             label: {
               text: `${translate("agent.report_contact_fields.telefon")}`,
-              htmlFor: ReportContactDetailsFieldsId.phoneNumber,
+              htmlFor: `customerDetail.${ReportContactDetailsFieldsId.phoneNumber}`,
               className: "mb-[10px]",
             },
             field: {
               type: Field.input,
               inputType: "tel",
               className: "!pl-4",
-              id: ReportContactDetailsFieldsId.phoneNumber,
-              name: ReportContactDetailsFieldsId.phoneNumber,
+              id: `customerDetail.${ReportContactDetailsFieldsId.phoneNumber}`,
+              name: `customerDetail.${ReportContactDetailsFieldsId.phoneNumber}`,
+              register,
+            },
+          },
+          {
+            label: {
+              text: `${translate("agent.report_contact_fields.date")}`,
+              htmlFor: `customerDetail.${ReportContactDetailsFieldsId.date}`,
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.date,
+              id: `customerDetail.${ReportContactDetailsFieldsId.date}`,
+              name: `customerDetail.${ReportContactDetailsFieldsId.date}`,
+              dateType: "date",
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
               register,
             },
           },
@@ -103,6 +129,42 @@ export const contactAgentReportFormField: GenerateContactAddressFormField = (
       },
     },
   ];
+  const fieldIndex = formField.findIndex(
+    (field: any) =>
+      field?.field?.type === Field.div &&
+      Array.isArray(field?.field?.children) &&
+      field?.field?.children.some(
+        (child: any) => child?.field?.id == "fullName"
+      )
+  );
+
+  if (fieldIndex !== -1 && customerType === 1) {
+    const companyNameField = {
+      containerClass: "mb-0",
+      label: {
+        text: `${translate("agent.report_contact_fields.company_name")}`,
+        htmlFor: `customerDetail.${ReportContactDetailsFieldsId.companyName}`,
+        className: "mb-[10px]",
+      },
+      field: {
+        type: Field.input,
+        className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+        inputType: "text",
+        id: `customerDetail.${ReportContactDetailsFieldsId.companyName}`,
+        name: `customerDetail.${ReportContactDetailsFieldsId.companyName}`,
+        placeholder: `${translate(
+          "agent.report_contact_fields.placeholders.company_name"
+        )}`,
+        register,
+        // setValue: setValue,
+        // value: leadDetails?.customerDetail?.companyName || "",
+      },
+    };
+    const divField = formField[fieldIndex]?.field as DivProps;
+    if (divField && Array.isArray(divField.children)) {
+      divField.children.splice(fieldIndex + 3, 0, companyNameField as any);
+    }
+  }
 
   return formField;
 };
@@ -271,6 +333,90 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
 
     return formField;
   };
+export const ReportCustAddressFormField: CustAddressFormField = (
+  register,
+  loading,
+  control
+) => {
+  const { t: translate } = useTranslation();
+
+  const formField: FormField[] = [
+    {
+      containerClass: "pt-[30px]",
+      label: {
+        text: `${translate("leads.customer_details.address_details")}`,
+        htmlFor: "details",
+        className: "mb-[10px] text-[#1E1E1E] text-base font-semibold",
+      },
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className:
+          "grid grid-cols-1 md:grid-cols-3 gap-[17px] bg-[#EDF4FF] rounded-lg p-2",
+        children: [
+          {
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("leads.customer_details.street_no")}`,
+              htmlFor: "customerDetail.address.streetNumber",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+              inputType: "text",
+              id: "customerDetail.address.streetNumber",
+              name: "customerDetail.address.streetNumber",
+              placeholder: `${translate("leads.placeholders.street")}`,
+              register,
+            },
+          },
+
+          {
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("leads.customer_details.post_code")}`,
+              htmlFor: "customerDetail.address.postalCode",
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              className:
+                "!p-4 !border-[#BFBFBF] focus:!border-primary focus:!border-primary",
+              inputType: "text",
+              id: "customerDetail.address.postalCode",
+              name: "customerDetail.address.postalCode",
+              placeholder: `${translate("leads.placeholders.post_code")}`,
+              register,
+            },
+          },
+          {
+            containerClass: "mb-0",
+            label: {
+              text: `${translate("leads.customer_details.country")}`,
+              htmlFor: "customerDetail.address.country",
+              className: "mb-[10px]",
+            },
+
+            field: {
+              type: Field.input,
+              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+              inputType: "text",
+              id: "customerDetail.address.country",
+              name: "customerDetail.address.country",
+              placeholder: `${translate(
+                "offers.placeholders.country_placeholder"
+              )}`,
+              register,
+            },
+          },
+        ],
+      },
+    },
+  ];
+
+  return formField;
+};
 
 export const ReportContactSubmitFormField: GenerateContactReportFormField = (
   register,

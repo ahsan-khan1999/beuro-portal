@@ -2492,7 +2492,13 @@
       "room": "Room",
       "lift": "Lift",
       "parking_permit": "Parking Permit",
-      "collection_address_heading": "Collection Address"
+      "collection_address_heading": "Collection Address",
+      "customer_type": "Customer Type",
+      "company_name": "Company Name",
+      "date": "Date",
+      "placeholder": {
+        "company_name": "Enter Company Neme"
+      }
     },
     "house_detail_fields": {
       "item": "Item",

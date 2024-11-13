@@ -37,7 +37,6 @@ export default function SelectField({
   const { t: translate } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState<string>(value || "");
-  // console.log("selectedLabel:", selectedLabel);
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);

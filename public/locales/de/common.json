@@ -2487,7 +2487,13 @@
       "room": "Zimmer",
       "lift": "Lift",
       "parking_permit": "Parkbewilligung",
-      "collection_address_heading": "Einzugsadresse"
+      "collection_address_heading": "Einzugsadresse",
+      "customer_type": "Kunden Typ",
+      "company_name": "Firmenname",
+      "date": "Datum",
+      "placeholder": {
+        "company_name": "Bitte geben Sie den Firmennamen ein"
+      }
     },
     "house_detail_fields": {
       "item": "Artikel",

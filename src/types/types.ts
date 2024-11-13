@@ -994,7 +994,7 @@ export type GenerateContactAddressFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,
   control: Control<FieldValues>,
-  gender?: number
+  customerType?: number
   // setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 export type GenerateContactReportFormField = (
@@ -1010,6 +1010,12 @@ export type GenerateContactAddressReportFormField = (
   control: Control<FieldValues>,
   addressFieldsLength: number,
   addressFields?: object[],
+  setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
+export type CustAddressFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 

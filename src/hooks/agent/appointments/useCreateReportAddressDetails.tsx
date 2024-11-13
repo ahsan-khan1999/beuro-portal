@@ -14,6 +14,7 @@ import {
   contactAgentReportFormField,
   ContactReportAddressFormField,
   ReportContactSubmitFormField,
+  ReportCustAddressFormField,
 } from "@/components/agent/appointments/createReport/fields/contact-address-form-fields";
 import { useEffect } from "react";
 import {
@@ -24,6 +25,7 @@ import {
 import { ReportPromiseActionType } from "@/types/customer";
 import { CustomerPromiseActionType } from "@/types/company";
 import { staticEnums } from "@/utils/static";
+import { convertUTCToLocalDate } from "@/utils/utility";
 
 export interface ReportAddressHookProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;
@@ -78,8 +80,6 @@ export const useCreateReportAddressDetails = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  console.log(watch("gender"));
-
   const { fields: addressFields } = useFieldArray({ control, name: "address" });
 
   useEffect(() => {
@@ -104,7 +104,6 @@ export const useCreateReportAddressDetails = ({
     if (report) {
       dispatch(readReportDetails({ params: { filter: report } })).then(
         (response: ReportPromiseActionType) => {
-          console.log("response:", response);
           if (response?.payload) {
             const transformedData = transformData({
               fullName: response.payload?.customerDetail?.fullName,
@@ -142,14 +141,29 @@ export const useCreateReportAddressDetails = ({
         console.log("response:", response);
         if (response.payload) {
           const transformedData = transformData({
-            fullName: response.payload?.leadID?.customerDetail?.fullName,
-            email: response.payload?.leadID?.customerDetail?.email,
-            phoneNumber: response.payload?.leadID?.customerDetail?.phoneNumber,
-            // gender: response.payload?.leadID?.customerDetail?.gender,
-            gender:
-              staticEnums["Gender"][
-                response.payload?.leadID?.customerDetail?.gender
-              ],
+            customerDetail: {
+              ...response.payload?.leadID?.customerDetail,
+              gender:
+                staticEnums["Gender"][
+                  response.payload?.leadID?.customerDetail?.gender
+                ],
+              date: convertUTCToLocalDate(
+                response.payload?.leadID?.desireDate || ""
+              ),
+            },
+            // fullName: response.payload?.leadID?.customerDetail?.fullName,
+            // email: response.payload?.leadID?.customerDetail?.email,
+            // phoneNumber: response.payload?.leadID?.customerDetail?.phoneNumber,
+            // companyName: response.payload?.leadID?.customerDetail?.companyName,
+            // customerType:
+            //   response.payload?.leadID?.customerDetail?.customerType,
+            // date: convertUTCToLocalDate(
+            //   response.payload?.leadID?.desireDate || ""
+            // ),
+            // gender:
+            //   staticEnums["Gender"][
+            //     response.payload?.leadID?.customerDetail?.gender
+            //   ],
             address: resetFormWithAddresses(
               response.payload?.leadID?.addressID?.address || [],
               "Adresse"
@@ -159,6 +173,7 @@ export const useCreateReportAddressDetails = ({
           reset(transformedData);
         }
       });
+
       // const transformedData = transformData({
       //   fullName: appointmentDetails?.leadID?.customerDetail?.fullName,
       //   email: appointmentDetails?.leadID?.customerDetail?.email,
@@ -179,7 +194,7 @@ export const useCreateReportAddressDetails = ({
     register,
     false,
     control,
-    watch("gender")
+    watch("customerDetail.customerType")
   );
 
   const address = ContactReportAddressFormField(
@@ -195,6 +210,11 @@ export const useCreateReportAddressDetails = ({
     loading,
     control,
     handleCancel
+  );
+  const customerAddress = ReportCustAddressFormField(
+    register,
+    loading,
+    control
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -243,13 +263,12 @@ export const useCreateReportAddressDetails = ({
   };
 
   return {
-    fields: [...fields, ...address, ...submit],
+    fields: [...fields, ...customerAddress, ...address, ...submit],
     onSubmit,
     control,
     handleSubmit,
     errors,
     error,
     translate,
-    address: watch()?.address || [],
   };
 };
