@@ -79,7 +79,6 @@ export const useCreateReportAddressDetails = ({
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
-
   const { fields: addressFields } = useFieldArray({ control, name: "address" });
 
   useEffect(() => {
@@ -141,29 +140,35 @@ export const useCreateReportAddressDetails = ({
         console.log("response:", response);
         if (response.payload) {
           const transformedData = transformData({
-            customerDetail: {
-              ...response.payload?.leadID?.customerDetail,
-              gender:
-                staticEnums["Gender"][
-                  response.payload?.leadID?.customerDetail?.gender
-                ],
-              date: convertUTCToLocalDate(
-                response.payload?.leadID?.desireDate || ""
-              ),
-            },
-            // fullName: response.payload?.leadID?.customerDetail?.fullName,
-            // email: response.payload?.leadID?.customerDetail?.email,
-            // phoneNumber: response.payload?.leadID?.customerDetail?.phoneNumber,
-            // companyName: response.payload?.leadID?.customerDetail?.companyName,
-            // customerType:
-            //   response.payload?.leadID?.customerDetail?.customerType,
-            // date: convertUTCToLocalDate(
-            //   response.payload?.leadID?.desireDate || ""
-            // ),
-            // gender:
-            //   staticEnums["Gender"][
-            //     response.payload?.leadID?.customerDetail?.gender
-            //   ],
+            // customerDetail: {
+            //   ...response.payload?.leadID?.customerDetail,
+            //   gender:
+            //     staticEnums["Gender"][
+            //       response.payload?.leadID?.customerDetail?.gender
+            //     ],
+            //   date: convertUTCToLocalDate(
+            //     response.payload?.leadID?.desireDate || ""
+            //   ),
+            // },
+            customerType:
+              response.payload?.leadID?.customerDetail?.customerType,
+            gender:
+              staticEnums["Gender"][
+                response.payload?.leadID?.customerDetail?.gender
+              ],
+            fullName: response.payload?.leadID?.customerDetail?.fullName,
+            email: response.payload?.leadID?.customerDetail?.email,
+            phoneNumber: response.payload?.leadID?.customerDetail?.phoneNumber,
+            companyName: response.payload?.leadID?.customerDetail?.companyName,
+            date: convertUTCToLocalDate(
+              response.payload?.leadID?.desireDate || ""
+            ),
+            streetNumber:
+              response.payload?.leadID?.customerDetail?.address?.streetNumber,
+            country: response.payload?.leadID?.customerDetail?.address?.country,
+            postalCode:
+              response.payload?.leadID?.customerDetail?.address?.postalCode,
+
             address: resetFormWithAddresses(
               response.payload?.leadID?.addressID?.address || [],
               "Adresse"
@@ -241,10 +246,11 @@ export const useCreateReportAddressDetails = ({
       } else {
         const apiData = {
           ...data,
+          customerType: Number(data.customerType),
+          gender: Number(data.gender),
           step: 1,
           appointmentID: appointmentDetails?.id,
         };
-
         const response = await dispatch(
           createReport({
             data: apiData,
