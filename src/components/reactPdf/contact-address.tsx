@@ -40,7 +40,7 @@ export const ContactAddress = ({
         </Text>
         <Text style={textBase}>{address?.streetWithNumber}</Text>
         <Text style={textBase}>{`${address?.postalCode} ${
-          [address?.city as keyof typeof Country] || ""
+          address?.city || ""
         }`}</Text>
       </View>
       <View
@@ -52,50 +52,17 @@ export const ContactAddress = ({
       >
         {email && (
           <View style={{ display: "flex", flexDirection: "row" }}>
-            {/* <Text
-              style={{
-                fontSize: 7,
-                fontWeight: 400,
-                fontStyle: "normal",
-                color: "#000",
-                marginRight: 1,
-              }}
-            >
-              E-Mail :
-            </Text> */}
             <Text style={textBase}>{email}</Text>
           </View>
         )}
 
         {phone !== "+" && phone && (
           <View style={{ display: "flex", flexDirection: "row" }}>
-            {/* <Text
-              style={{
-                fontSize: 7,
-                fontWeight: 400,
-                fontStyle: "normal",
-                color: "#000",
-                marginRight: 1,
-              }}
-            >
-              Telefon :
-            </Text> */}
             <Text style={textBase}>{phone}</Text>
           </View>
         )}
         {mobile !== "+" && mobile && (
           <View style={{ display: "flex", flexDirection: "row" }}>
-            {/* <Text
-              style={{
-                fontSize: 7,
-                fontWeight: 400,
-                fontStyle: "normal",
-                color: "#000",
-                marginRight: 1,
-              }}
-            >
-              Handynummer :
-            </Text> */}
             <Text style={textBase}>{mobile}</Text>
           </View>
         )}

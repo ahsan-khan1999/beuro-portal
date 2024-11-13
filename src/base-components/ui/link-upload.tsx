@@ -18,8 +18,6 @@ export const LinkUpload = ({
   const [validation, setValidation] = useState({ isValid: true, message: "" });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("clicked");
-
     setEnteredLink(event.target.value);
     setValidation(validateUrl(event.target.value, translate));
   };

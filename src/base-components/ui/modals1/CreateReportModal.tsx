@@ -14,14 +14,6 @@ export const CreateReportModal = ({ onClose }: CreateReportModalProps) => {
   const router = useRouter();
   const { id } = useAppSelector((state) => state.global.modal.data);
 
-  const handleCreateReport = () => {
-    onClose();
-    router.push({
-      pathname: `/agent/appointments/create-report`,
-      query: { report: id },
-    });
-  };
-
   return (
     <BaseModal
       onClose={onClose}

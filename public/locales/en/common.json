@@ -2485,6 +2485,7 @@
       "name": "Name",
       "email": "Email",
       "telefon": "Telefon",
+      "mobile": "Mobile Number",
       "move_out_addres_heading": "Move-out Address",
       "street_no": "Street No",
       "post_code": "Post Code + City",
@@ -2492,7 +2493,14 @@
       "room": "Room",
       "lift": "Lift",
       "parking_permit": "Parking Permit",
-      "collection_address_heading": "Collection Address"
+      "collection_address_heading": "Collection Address",
+      "customer_type": "Customer Type",
+      "company_name": "Company Name",
+      "add_new_address": "Add New Address",
+      "desire_date": "Desire Date",
+      "placeholder": {
+        "company_name": "Enter Company Neme"
+      }
     },
     "house_detail_fields": {
       "item": "Item",

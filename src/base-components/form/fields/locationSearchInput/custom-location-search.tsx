@@ -36,8 +36,6 @@ export const CustomLocationInput = ({
 
     try {
       const results = await getGeocode({ address: description });
-      // console.log(results);
-
       setValue("streetNumber", description);
     } catch (error) {
       console.error("Error fetching location details:", error);

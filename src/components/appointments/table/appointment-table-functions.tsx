@@ -1,5 +1,5 @@
 import React from "react";
-import { FiltersComponentProps } from "@/types";
+import { AppointmentTableFunction, FiltersComponentProps } from "@/types";
 import { useTranslation } from "next-i18next";
 import AppointmentsFilter from "./appointments-filter";
 
@@ -7,7 +7,8 @@ export const AppointmentTableFunctions = ({
   filter,
   setFilter,
   handleFilterChange,
-}: FiltersComponentProps) => {
+  onDateChange,
+}: AppointmentTableFunction) => {
   const { t: translate } = useTranslation();
   return (
     <div className="flex flex-col maxLarge:flex-row justify-between maxLarge:items-center gap-y-3 mb-4">
@@ -18,6 +19,7 @@ export const AppointmentTableFunctions = ({
         filter={filter}
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
+        onDateChange={onDateChange}
       />
     </div>
   );

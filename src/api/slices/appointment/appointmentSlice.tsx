@@ -17,8 +17,8 @@ export interface AppointmentState {
 
 const initialState: AppointmentState = {
   appointment: [],
-  loading: true,
-  isLoading: true,
+  loading: false,
+  isLoading: false,
   error: {},
   lastPage: 1,
   totalCount: 10,

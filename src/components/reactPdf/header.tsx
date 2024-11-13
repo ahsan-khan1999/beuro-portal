@@ -1,6 +1,6 @@
 import { DocumentHeaderDetailsProps } from "@/types";
 import { HeaderLabel, HeaderLabelNr } from "@/utils/static";
-import { pdfDateFormat } from "@/utils/utility";
+import { convertUTCToLocalDate, pdfDateFormat } from "@/utils/utility";
 import { View, Text, Image } from "@react-pdf/renderer";
 
 export const Header = ({
@@ -12,6 +12,7 @@ export const Header = ({
   isReverseLogo,
   language = "de",
   isOffer,
+  desireDate,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const { logo } = emailTemplateSettings ?? {};
 
@@ -22,6 +23,7 @@ export const Header = ({
       offer: "Offer ",
       create: "Create",
       date: "Date",
+      desire_date: "Desire Date",
       HeaderLabelNr: {
         offer: "Offer ",
         contract: "Contract ",
@@ -41,6 +43,7 @@ export const Header = ({
       create: "Erstell",
       date: "Datum",
       offer: "Angebot ",
+      desire_date: "Wunschdatum",
       HeaderLabelNr: {
         offer: "Angebot ",
         contract: "Vertrag ",
@@ -183,6 +186,31 @@ export const Header = ({
             {createdBy}
           </Text>
         </View>
+        {desireDate && (
+          <View style={{ display: "flex", flexDirection: "row", rowGap: 0 }}>
+            <Text
+              style={{
+                fontSize: 8,
+                fontWeight: 400,
+                fontStyle: "normal",
+                marginRight: 2,
+              }}
+            >
+              {langContent[language as keyof typeof langContent]?.desire_date ||
+                "Desire Date"}{" "}
+              :
+            </Text>
+            <Text
+              style={{
+                fontSize: 8,
+                fontWeight: 500,
+                fontStyle: "medium",
+              }}
+            >
+              {convertUTCToLocalDate(desireDate)}
+            </Text>
+          </View>
+        )}
       </View>
     </View>
   );

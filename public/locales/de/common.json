@@ -2480,6 +2480,7 @@
       "name": "Name",
       "email": "Email",
       "telefon": "Telefon",
+      "mobile": "Handynummer",
       "move_out_addres_heading": "Auszugsadresse",
       "street_no": "Str + Nr.",
       "post_code": "PLZ + Ort",
@@ -2487,7 +2488,14 @@
       "room": "Zimmer",
       "lift": "Lift",
       "parking_permit": "Parkbewilligung",
-      "collection_address_heading": "Einzugsadresse"
+      "collection_address_heading": "Einzugsadresse",
+      "customer_type": "Kunden Typ",
+      "company_name": "Firmenname",
+      "desire_date": "Wunschdatum",
+      "add_new_address": "Neue Adresse hinzufügen",
+      "placeholder": {
+        "company_name": "Bitte geben Sie den Firmennamen ein"
+      }
     },
     "house_detail_fields": {
       "item": "Artikel",

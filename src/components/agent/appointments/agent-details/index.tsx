@@ -17,9 +17,8 @@ export const AgentAppointmentsDetails = () => {
 
   return (
     <>
-      {loading ? (
-        <CustomLoader />
-      ) : (
+      {loading && <CustomLoader />}
+      {!loading && (
         <>
           <AppointmentsDetailCard
             onStatusChange={handleStatusUpdate}
@@ -44,7 +43,6 @@ export const AgentAppointmentsDetails = () => {
           )}
         </>
       )}
-
       {renderModal()}
     </>
   );
