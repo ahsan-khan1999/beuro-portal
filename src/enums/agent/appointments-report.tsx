@@ -23,7 +23,8 @@ export enum ReportContactDetailsFieldsId {
   room = "room",
   lift = "lift",
   parkingPermit = "parkingPermit",
-  date = "date",
+  desireDate = "desireDate",
+  mobileNumber = "mobileNumber",
 }
 
 export enum HouseDetailsFieldsId {

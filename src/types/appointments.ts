@@ -63,10 +63,22 @@ export interface Report {
   createdAt: string;
   serviceDetail: OfferServiceDetails;
   customerDetail: {
+    address?: {
+      streetNumber: string;
+      country: string;
+      postalCode: string;
+    };
     email: string;
     fullName: string;
     phoneNumber: string;
+    mobileNumber: string;
+    date?: string;
+    companyName?: string;
+    customerType?: number;
+    gender: number;
+    desireDate?: string;
   };
+  desireDate?: string;
   subTotal: number;
   total: number;
   discountAmount: number;

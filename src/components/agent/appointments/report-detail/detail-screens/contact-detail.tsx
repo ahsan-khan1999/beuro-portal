@@ -16,7 +16,11 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
   const { companyAppointment } = router.query;
 
   const handleEditClick = () => {
-    const query: any = { report: reportDetail?.appointmentID?.id, tab: 0 };
+    const query: any = {
+      today: router.query.today,
+      report: reportDetail?.appointmentID?.id,
+      tab: 0,
+    };
     if (companyAppointment) {
       query.companyAppointment = companyAppointment;
     }
