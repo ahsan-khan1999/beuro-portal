@@ -1010,6 +1010,12 @@ export type GenerateContactAddressReportFormField = (
   control: Control<FieldValues>,
   addressFieldsLength: number,
   addressFields?: object[],
+  address?: any[],
+  addressType?: number | null,
+  handleChangeLabel?: (value: string, index: number) => void,
+  onEditTitle?: (idx: number | null) => void,
+  onDeleteAddress?: (index: number) => void,
+  handleAddNewAddress?: () => void,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
 ) => FormField[];
 export type CustAddressFormField = (
@@ -1167,6 +1173,7 @@ export interface DocumentHeaderDetailsProps {
   isReverseLogo?: boolean;
   language?: string;
   isOffer?: boolean;
+  desireDate?: string;
 }
 
 export interface ProductItemFooterProps {
@@ -1203,17 +1210,20 @@ export interface ProductItemFooterProps {
 
 export interface ContactDetailsProps {
   address: {
-    name: string;
+    name?: string;
     companyName?: string;
-    streetWithNumber: string;
-    postalCode: string;
-    city: string;
+    streetWithNumber?: string;
+    postalCode?: string;
+    city?: string;
   };
   email: string;
   phone: string;
   gender?: string;
   mobile?: string;
   isReverseInfo?: boolean;
+  desireDate?: string;
+  customerType?: number;
+  companyName?: string;
 }
 export interface MovingDetailsProps {
   header?: string;

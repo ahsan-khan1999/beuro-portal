@@ -39,7 +39,6 @@ export const useReportUpdatedPdf = () => {
   const { isLoading, reportDetails } = useAppSelector(
     (state) => state.appointment
   );
-
   const { modal, loading: loadingGlobal } = useAppSelector(
     (state) => state.global
   );
@@ -141,30 +140,23 @@ export const useReportUpdatedPdf = () => {
               emailTemplateSettings: emailTemplate?.payload,
               isReverseLogo: template.payload.Template?.order,
               fileType: "report",
+              desireDate: reportDetails?.desireDate,
             },
             contactAddress: {
               address: {
-                name: reportDetails?.appointmentID?.leadID?.customerDetail
-                  ?.fullName,
-                city: reportDetails?.appointmentID?.leadID?.customerDetail
-                  ?.address?.country,
-                postalCode:
-                  reportDetails?.appointmentID?.leadID?.customerDetail?.address
-                    ?.postalCode,
+                name: reportDetails?.customerDetail?.fullName,
+                city: reportDetails?.customerDetail?.address?.country,
+                postalCode: reportDetails?.customerDetail?.address?.postalCode,
                 streetWithNumber:
-                  reportDetails?.appointmentID?.leadID?.customerDetail?.address
-                    ?.streetNumber,
+                  reportDetails?.customerDetail?.address?.streetNumber,
               },
-              email:
-                reportDetails?.appointmentID?.leadID?.customerDetail?.email,
-              phone:
-                reportDetails?.appointmentID?.leadID?.customerDetail
-                  ?.phoneNumber,
-              mobile:
-                reportDetails?.appointmentID?.leadID?.customerDetail
-                  ?.mobileNumber,
-              gender:
-                reportDetails?.appointmentID?.leadID?.customerDetail?.gender?.toString(),
+              email: reportDetails?.customerDetail?.email,
+              customerType: reportDetails?.customerDetail?.customerType,
+              companyName: reportDetails?.customerDetail?.companyName,
+              desireDate: reportDetails?.desireDate,
+              phone: reportDetails?.customerDetail?.phoneNumber,
+              mobile: reportDetails?.customerDetail?.mobileNumber,
+              gender: reportDetails?.customerDetail?.gender?.toString(),
               isReverseInfo: template.payload.Template?.order,
             },
             movingDetails: {

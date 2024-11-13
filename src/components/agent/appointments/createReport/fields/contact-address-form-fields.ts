@@ -1,3 +1,7 @@
+import {
+  DeleteIconString,
+  EditIconString,
+} from "@/assets/svgs/strings/svg-strings";
 import { ReportContactDetailsFieldsId } from "@/enums/agent/appointments-report";
 import { Field } from "@/enums/form";
 import {
@@ -114,14 +118,29 @@ export const contactAgentReportFormField: GenerateContactAddressFormField = (
           },
           {
             label: {
-              text: `${translate("agent.report_contact_fields.date")}`,
-              htmlFor: ReportContactDetailsFieldsId.date,
+              text: `${translate("agent.report_contact_fields.mobile")}`,
+              htmlFor: ReportContactDetailsFieldsId.mobileNumber,
+              className: "mb-[10px]",
+            },
+            field: {
+              type: Field.input,
+              inputType: "tel",
+              className: "!pl-4",
+              id: ReportContactDetailsFieldsId.mobileNumber,
+              name: ReportContactDetailsFieldsId.mobileNumber,
+              register,
+            },
+          },
+          {
+            label: {
+              text: `${translate("agent.report_contact_fields.desire_date")}`,
+              htmlFor: ReportContactDetailsFieldsId.desireDate,
               className: "mb-[10px]",
             },
             field: {
               type: Field.date,
-              id: ReportContactDetailsFieldsId.date,
-              name: ReportContactDetailsFieldsId.date,
+              id: ReportContactDetailsFieldsId.desireDate,
+              name: ReportContactDetailsFieldsId.desireDate,
               dateType: "date",
               className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
               register,
@@ -154,9 +173,9 @@ export const contactAgentReportFormField: GenerateContactAddressFormField = (
         inputType: "text",
         id: ReportContactDetailsFieldsId.companyName,
         name: ReportContactDetailsFieldsId.companyName,
-        placeholder: `${translate(
-          "agent.report_contact_fields.placeholders.company_name"
-        )}`,
+        placeholder: translate(
+          "agent.report_contact_fields.placeholder.company_name"
+        ),
         register,
         // setValue: setValue,
         // value: leadDetails?.customerDetail?.companyName || "",
@@ -172,24 +191,113 @@ export const contactAgentReportFormField: GenerateContactAddressFormField = (
 };
 
 export const ContactReportAddressFormField: GenerateContactAddressReportFormField =
-  (register, loading, control, addressFieldsLength, addressFields) => {
+  (
+    register,
+    loading,
+    control,
+    addressFieldsLength,
+    addressFields,
+    address,
+    addressType,
+    handleChangeLabel,
+    onEditTitle,
+    onDeleteAddress,
+    handleAddNewAddress,
+    OnClick
+  ) => {
     const formField: FormField[] = [];
     const { t: translate } = useTranslation();
 
+    let addresses: any[] = address || [];
+
     if (!addressFields) return formField;
     for (let i = 0; i < addressFieldsLength; i++) {
-      formField.push({
+      const isEditable = i === addressType;
+      const mainHeading = addresses[i]?.label;
+
+      const inputField: FormField = {
+        containerClass: "pt-5 mb-2",
         field: {
-          type: Field.input,
-          inputType: "text",
-          id: `address.${i}.label`,
-          name: `address.${i}.label`,
-          register,
-          disabled: true,
-          className:
-            "!p-0 !bg-transparent h-6 mt-5 mb-2 !border-none focus:!border-none !w-auto text-[#1E1E1E] text-base font-semibold",
+          type: Field.div,
+          id: "div-field",
+          className: "flex justify-between ",
+          children: [
+            {
+              containerClass: "mb-0",
+              field: {
+                type: Field.div,
+                id: "div-field",
+                className: "flex items-center gap-4",
+
+                children: [
+                  isEditable
+                    ? {
+                        containerClass: "mb-0",
+                        field: {
+                          type: Field.input,
+                          className:
+                            "!mx-0 !px-2 !border-[#BFBFBF] focus:!border-primary !h-[40px] w-[150px]",
+                          id: `address.${[i]}.label`,
+                          name: `address.${[i]}.label`,
+                          inputType: "text",
+                          value: addresses[i]?.label || "",
+                          register,
+                          onChange: (value) =>
+                            handleChangeLabel && handleChangeLabel(value, i),
+                        },
+                      }
+                    : {
+                        containerClass: "mb-0",
+                        field: {
+                          type: Field.span,
+                          containerClassName:
+                            "min-w-[100px] text-[#1E1E1E] text-base font-semibold",
+                          id: "test",
+                          name: "test",
+                          text: mainHeading,
+                        },
+                      },
+
+                  isEditable
+                    ? {
+                        containerClass: "mb-0",
+                        field: {
+                          type: Field.button,
+                          id: "button",
+                          text: translate("common.cancel_button"),
+                          className:
+                            "!h-[40px] !bg-[transparent] !text-[black]",
+                          inputType: "button",
+                          onClick: () => onEditTitle && onEditTitle(null),
+                        },
+                      }
+                    : {
+                        containerClass: "mb-0",
+                        field: {
+                          type: Field.icon,
+                          id: "button",
+                          containerClassName: "!h-[40px]",
+                          onClick: () => onEditTitle && onEditTitle(i),
+                          icon: EditIconString,
+                        },
+                      },
+                ],
+              },
+            },
+            {
+              containerClass: "mb-0",
+              field: {
+                type: Field.icon,
+                id: "button",
+                containerClassName: "!h-[40px]",
+                onClick: () => onDeleteAddress && onDeleteAddress(i),
+                icon: DeleteIconString,
+              },
+            },
+          ],
         },
-      });
+      };
+      formField?.push(inputField);
 
       formField?.push({
         field: {
@@ -300,8 +408,8 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
               containerClass: "xMini:mt-8 col-span-12 md:col-span-4",
               field: {
                 type: Field.customCheckBox,
-                id: `address.${i}.parkingPermit`,
-                name: `address.${i}.parkingPermit`,
+                id: `address.${i}.ParkingPermit`,
+                name: `address.${i}.ParkingPermit`,
                 description: `${translate(
                   "agent.report_contact_fields.parking_permit"
                 )}`,
@@ -332,6 +440,65 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
         },
       });
     }
+
+    formField.push({
+      containerClass: "mt-[30px]",
+      field: {
+        type: Field.div,
+        id: "div-field",
+        className: "flex justify-between flex-row-reverse",
+        children: [
+          {
+            field: {
+              type: Field.div,
+              id: "div-field",
+              className: "flex justify-between items-center space-x-[18px]",
+              children: [
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.button,
+                    id: "button",
+                    text: translate("content.details.cancel_button"),
+                    inputType: "button",
+                    className:
+                      "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:!h-[50px] text-dark hover:bg-none",
+                    onClick: OnClick,
+                  },
+                },
+                {
+                  containerClass: "mb-0",
+                  field: {
+                    type: Field.button,
+                    id: "button",
+                    text: translate("content.details.next_button"),
+                    inputType: "submit",
+                    className:
+                      "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
+                    loading,
+                  },
+                },
+              ],
+            },
+          },
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: translate("agent.report_contact_fields.add_new_address"),
+              inputType: "button",
+              className:
+                "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
+              // loading,
+              onClick: () => {
+                handleAddNewAddress && handleAddNewAddress();
+              },
+            },
+          },
+        ],
+      },
+    });
 
     return formField;
   };
@@ -410,53 +577,6 @@ export const ReportCustAddressFormField: CustAddressFormField = (
                 "offers.placeholders.country_placeholder"
               )}`,
               register,
-            },
-          },
-        ],
-      },
-    },
-  ];
-
-  return formField;
-};
-
-export const ReportContactSubmitFormField: GenerateContactReportFormField = (
-  register,
-  loading,
-  control,
-  OnClick
-) => {
-  const { t: translate } = useTranslation();
-  const formField: FormField[] = [
-    {
-      containerClass: "pt-[30px]",
-      field: {
-        type: Field.div,
-        id: "div-field",
-        className: "flex justify-end items-center space-x-[18px]",
-        children: [
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              text: translate("content.details.cancel_button"),
-              inputType: "button",
-              className:
-                "rounded-lg border border-[#C7C7C7] bg-white p-4 min-w-[100px] w-fit !h-10 xMini:!h-[50px] text-dark hover:bg-none",
-              onClick: OnClick,
-            },
-          },
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              text: translate("content.details.next_button"),
-              inputType: "submit",
-              className:
-                "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
-              loading,
             },
           },
         ],
