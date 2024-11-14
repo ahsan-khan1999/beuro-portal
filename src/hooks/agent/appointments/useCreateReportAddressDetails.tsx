@@ -121,9 +121,9 @@ export const useCreateReportAddressDetails = ({
               phoneNumber: response.payload?.customerDetail?.phoneNumber,
               mobileNumber: response.payload?.customerDetail?.mobileNumber,
               companyName: response.payload?.customerDetail?.companyName,
-              desireDate: convertUTCToLocalDate(
-                response.payload?.desireDate || ""
-              ),
+              desireDate: response.payload?.desireDate
+                ? convertUTCToLocalDate(response.payload?.desireDate)
+                : "",
               streetNumber:
                 response.payload?.customerDetail?.address?.streetNumber,
               country: response.payload?.customerDetail?.address?.country,
@@ -224,7 +224,7 @@ export const useCreateReportAddressDetails = ({
 
   const handleAddNewAddress = () => {
     append({
-      label: "Adresse",
+      label: `Adresse ${addressFieldsLength}`,
       streetNumber: "",
       postalCode: "",
       country: "",
@@ -274,9 +274,14 @@ export const useCreateReportAddressDetails = ({
           step: 1,
           appointmentID: reportDetails?.appointmentID?.id,
           companyName: data?.companyName,
+          desireDate: data?.desireDate,
         };
+
         if (apiData.customerType === 0) {
           delete apiData?.companyName;
+        }
+        if (!apiData?.desireDate) {
+          delete apiData?.desireDate;
         }
 
         const response = await dispatch(
@@ -298,10 +303,14 @@ export const useCreateReportAddressDetails = ({
           step: 1,
           appointmentID: appointmentDetails?.id,
           companyName: data?.companyName,
+          desireDate: data?.desireDate,
         };
 
         if (apiData.customerType === 0) {
           delete apiData?.companyName;
+        }
+        if (!apiData?.desireDate) {
+          delete apiData?.desireDate;
         }
 
         const response = await dispatch(
