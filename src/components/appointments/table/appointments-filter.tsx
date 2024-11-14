@@ -146,6 +146,10 @@ export default function AppointmentsFilter({
       updatedQuery.sort = String(value);
     }
 
+    if (router.query.today) {
+      delete updatedQuery.today;
+    }
+
     router.push(
       {
         pathname: router.pathname,
@@ -169,6 +173,10 @@ export default function AppointmentsFilter({
       delete updatedQuery.isOfferCreated;
     } else {
       updatedQuery.isOfferCreated = String(value);
+    }
+
+    if (router.query.today) {
+      delete updatedQuery.today;
     }
 
     router.push(

@@ -89,26 +89,15 @@ export const AppointmentsDetailCard = ({
             fullName: reportDetails?.customerDetail?.fullName,
             email: reportDetails?.customerDetail?.email,
             phoneNumber: reportDetails?.customerDetail?.phoneNumber,
-            mobileNumber:
-              reportDetails?.appointmentID?.leadID?.customerDetail
-                ?.mobileNumber,
-            gender:
-              reportDetails?.appointmentID?.leadID?.customerDetail?.gender,
-            customerType:
-              reportDetails?.appointmentID?.leadID?.customerDetail
-                ?.customerType,
-            companyName:
-              reportDetails?.appointmentID?.leadID?.customerDetail?.companyName,
+            mobileNumber: reportDetails?.customerDetail?.mobileNumber,
+            gender: reportDetails?.customerDetail?.gender,
+            customerType: reportDetails?.customerDetail?.customerType,
+            companyName: reportDetails?.customerDetail?.companyName,
             address: {
               streetNumber:
-                reportDetails?.appointmentID?.leadID?.customerDetail?.address
-                  ?.streetNumber,
-              postalCode:
-                reportDetails?.appointmentID?.leadID?.customerDetail?.address
-                  ?.postalCode,
-              country:
-                reportDetails?.appointmentID?.leadID?.customerDetail?.address
-                  ?.country,
+                reportDetails?.customerDetail?.address?.streetNumber,
+              postalCode: reportDetails?.customerDetail?.address?.postalCode,
+              country: reportDetails?.customerDetail?.address?.country,
             },
           },
         },
@@ -121,9 +110,7 @@ export const AppointmentsDetailCard = ({
         },
         date: [
           {
-            startDate: moment(
-              reportDetails?.appointmentID.leadID?.desireDate
-            ).format("YYYY-MM-DD"),
+            startDate: moment(reportDetails?.desireDate).format("YYYY-MM-DD"),
             endDate: "",
           },
         ],
@@ -134,13 +121,10 @@ export const AppointmentsDetailCard = ({
         fullName: reportDetails?.customerDetail?.fullName,
         email: reportDetails?.customerDetail?.email,
         phoneNumber: reportDetails?.customerDetail?.phoneNumber,
-        mobileNumber:
-          reportDetails?.appointmentID?.leadID?.customerDetail?.mobileNumber,
-        gender: reportDetails?.appointmentID?.leadID?.customerDetail?.gender,
-        customerType:
-          reportDetails?.appointmentID?.leadID?.customerDetail?.customerType,
-        companyName:
-          reportDetails?.appointmentID?.leadID?.customerDetail?.companyName,
+        mobileNumber: reportDetails?.customerDetail?.mobileNumber,
+        gender: reportDetails?.customerDetail?.gender,
+        customerType: reportDetails?.customerDetail?.customerType,
+        companyName: reportDetails?.customerDetail?.companyName,
       })
     );
     router.push({

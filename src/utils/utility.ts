@@ -466,12 +466,13 @@ export const handleUtcDateChange = (
   updateQuery: (router: any, locale: string) => void
 ) => {
   if (!newDate) {
-    if (router?.query?.today) {
-      delete router?.query?.today;
-    }
-    if (router?.query?.sort) {
-      delete router?.query?.sort;
-    }
+    // if (router?.query?.today) {
+    //   delete router?.query?.today;
+    // }
+    // if (router?.query?.sort) {
+    //   delete router?.query?.sort;
+    // }
+    router.query = { status: "None" };
     updateQuery(router, router.locale as string);
     return;
   }
@@ -481,13 +482,13 @@ export const handleUtcDateChange = (
   const utcDate = moment.utc(dateWithUtcTime).toISOString();
 
   setDate(utcDate);
-  router.query = { ...params, today: utcDate };
-  if (router?.query?.text) {
-    delete router?.query?.text;
-  }
-  if (router?.query?.sort) {
-    delete router?.query?.sort;
-  }
+  router.query = { status: "None", today: utcDate };
+  // if (router?.query?.text) {
+  //   delete router?.query?.text;
+  // }
+  // if (router?.query?.sort) {
+  //   delete router?.query?.sort;
+  // }
   updateQuery(router, router.locale as string);
 };
 
