@@ -115,15 +115,16 @@ export const useCreateReportAddressDetails = ({
           if (response?.payload) {
             const transformedData = transformData({
               customerType: response.payload?.customerDetail?.customerType,
-              gender: response.payload?.customerDetail?.gender,
+              gender:
+                staticEnums["Gender"][reportDetails?.customerDetail?.gender],
               fullName: response.payload?.customerDetail?.fullName,
               email: response.payload?.customerDetail?.email,
               phoneNumber: response.payload?.customerDetail?.phoneNumber,
               mobileNumber: response.payload?.customerDetail?.mobileNumber,
               companyName: response.payload?.customerDetail?.companyName,
-              desireDate: convertUTCToLocalDate(
-                response.payload?.desireDate || ""
-              ),
+              desireDate: response.payload?.desireDate
+                ? convertUTCToLocalDate(response.payload?.desireDate)
+                : "",
               streetNumber:
                 response.payload?.customerDetail?.address?.streetNumber,
               country: response.payload?.customerDetail?.address?.country,
@@ -149,6 +150,7 @@ export const useCreateReportAddressDetails = ({
         // ),
         customerType: reportDetails?.customerDetail?.customerType,
         gender: staticEnums["Gender"][reportDetails?.customerDetail?.gender],
+
         fullName: reportDetails?.customerDetail?.fullName,
         email: reportDetails?.customerDetail?.email,
         phoneNumber: reportDetails?.customerDetail?.phoneNumber,
@@ -224,7 +226,7 @@ export const useCreateReportAddressDetails = ({
 
   const handleAddNewAddress = () => {
     append({
-      label: "Adresse",
+      label: `Adresse ${addressFieldsLength}`,
       streetNumber: "",
       postalCode: "",
       country: "",
@@ -274,9 +276,14 @@ export const useCreateReportAddressDetails = ({
           step: 1,
           appointmentID: reportDetails?.appointmentID?.id,
           companyName: data?.companyName,
+          desireDate: data?.desireDate,
         };
+
         if (apiData.customerType === 0) {
           delete apiData?.companyName;
+        }
+        if (!apiData?.desireDate) {
+          delete apiData?.desireDate;
         }
 
         const response = await dispatch(
@@ -298,10 +305,14 @@ export const useCreateReportAddressDetails = ({
           step: 1,
           appointmentID: appointmentDetails?.id,
           companyName: data?.companyName,
+          desireDate: data?.desireDate,
         };
 
         if (apiData.customerType === 0) {
           delete apiData?.companyName;
+        }
+        if (!apiData?.desireDate) {
+          delete apiData?.desireDate;
         }
 
         const response = await dispatch(

@@ -163,10 +163,7 @@ const SideBar = ({
                     href={{
                       pathname: item.pathname,
                       query:
-                        item.query &&
-                        (item.icon === "Leads" ||
-                          item.icon === "Appointments") &&
-                        (userRole === 3 || userRole === 2)
+                        item.icon === "Leads" || item.icon === "Appointments"
                           ? {
                               [String(item.queryName)]: item.query,
                               today: getCurrentUtcDate(),

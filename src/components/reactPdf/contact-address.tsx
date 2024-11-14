@@ -31,17 +31,27 @@ export const ContactAddress = ({
           marginLeft: isReverseInfo ? "30" : 0,
         }}
       >
-        <Text style={textBase}>
-          {/* {address?.companyName && "c/o"} */}
-          {address?.companyName}
-        </Text>
-        <Text style={textBase}>
-          {GenderLabel[gender as keyof typeof GenderLabel]} {address?.name}
-        </Text>
-        <Text style={textBase}>{address?.streetWithNumber}</Text>
-        <Text style={textBase}>{`${address?.postalCode} ${
-          address?.city || ""
-        }`}</Text>
+        {address?.companyName && (
+          <Text style={textBase}>{address?.companyName}</Text>
+        )}
+
+        <View style={{ display: "flex", flexDirection: "row", gap: 2 }}>
+          {gender && (
+            <Text style={textBase}>
+              {GenderLabel[gender as keyof typeof GenderLabel]}
+            </Text>
+          )}
+          {address?.name && <Text style={textBase}>{address?.name}</Text>}
+        </View>
+        {address?.streetWithNumber && (
+          <Text style={textBase}>{address?.streetWithNumber}</Text>
+        )}
+        <View style={{ display: "flex", flexDirection: "row", gap: 2 }}>
+          {address?.postalCode && (
+            <Text style={textBase}>{address?.postalCode}</Text>
+          )}
+          {address?.city && <Text style={textBase}>{address?.city || ""}</Text>}
+        </View>
       </View>
       <View
         style={{

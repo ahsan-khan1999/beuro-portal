@@ -153,7 +153,6 @@ const ReportPdf = ({
   const specialItemsDetails = data?.houseDetails?.specialItemsDetails;
   const offerDetails = data?.offerDetails;
   const contactAddress = data?.contactAddress;
-  console.log("contactAddress:", contactAddress);
 
   const langContent = {
     en: {
