@@ -37,17 +37,13 @@ export const useReportDetails = () => {
     useAppSelector((state) => state.appointment);
 
   useEffect(() => {
-    if (id) {
+    if (id && !appointmentDetails?.isReportSubmitted) {
       dispatch(readAppointmentDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setAppointmentDetails(res.payload));
         }
       );
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (id && appointmentDetails?.isReportSubmitted) {
+    } else if (id && appointmentDetails?.isReportSubmitted) {
       dispatch(readReportDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setReportDetails(res.payload));
