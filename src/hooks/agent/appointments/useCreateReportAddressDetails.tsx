@@ -115,7 +115,8 @@ export const useCreateReportAddressDetails = ({
           if (response?.payload) {
             const transformedData = transformData({
               customerType: response.payload?.customerDetail?.customerType,
-              gender: response.payload?.customerDetail?.gender,
+              gender:
+                staticEnums["Gender"][reportDetails?.customerDetail?.gender],
               fullName: response.payload?.customerDetail?.fullName,
               email: response.payload?.customerDetail?.email,
               phoneNumber: response.payload?.customerDetail?.phoneNumber,
@@ -149,6 +150,7 @@ export const useCreateReportAddressDetails = ({
         // ),
         customerType: reportDetails?.customerDetail?.customerType,
         gender: staticEnums["Gender"][reportDetails?.customerDetail?.gender],
+
         fullName: reportDetails?.customerDetail?.fullName,
         email: reportDetails?.customerDetail?.email,
         phoneNumber: reportDetails?.customerDetail?.phoneNumber,
