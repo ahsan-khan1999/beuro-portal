@@ -282,7 +282,7 @@ export const useCreateReportAddressDetails = ({
         if (apiData.customerType === 0) {
           delete apiData?.companyName;
         }
-        if (!apiData?.desireDate) {
+        if (!apiData?.desireDate || apiData?.desireDate == "Invalid date") {
           delete apiData?.desireDate;
         }
 
@@ -311,7 +311,7 @@ export const useCreateReportAddressDetails = ({
         if (apiData.customerType === 0) {
           delete apiData?.companyName;
         }
-        if (!apiData?.desireDate) {
+        if (!apiData?.desireDate || apiData?.desireDate == "Invalid date") {
           delete apiData?.desireDate;
         }
 

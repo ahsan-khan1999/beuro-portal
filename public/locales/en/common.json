@@ -2498,6 +2498,8 @@
       "company_name": "Company Name",
       "add_new_address": "Add New Address",
       "desire_date": "Desire Date",
+      "gender": "Gender",
+      "description": "Description",
       "placeholder": {
         "company_name": "Enter Company Neme"
       }
