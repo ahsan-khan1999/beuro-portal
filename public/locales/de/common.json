@@ -2493,6 +2493,8 @@
       "company_name": "Firmenname",
       "desire_date": "Wunschdatum",
       "add_new_address": "Neue Adresse hinzufügen",
+      "gender": "Anrede",
+      "description": "Beschreibung",
       "placeholder": {
         "company_name": "Bitte geben Sie den Firmennamen ein"
       }
