@@ -1224,6 +1224,7 @@ export interface ContactDetailsProps {
   desireDate?: string;
   customerType?: number;
   companyName?: string;
+  language?: string;
 }
 export interface MovingDetailsProps {
   header?: string;

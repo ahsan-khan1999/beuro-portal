@@ -762,7 +762,7 @@ const ReportPdf = ({
       <Page style={styles.body} dpi={72} break={true}>
         <Header {...headerDetails} language={lang} />
 
-        <ContactAddress {...{ ...contactAddress }} />
+        <ContactAddress {...{ ...contactAddress, language: lang }} />
         <ReportAddressDetails {...{ address }} language={lang} />
 
         <ServiceTableHederRow
