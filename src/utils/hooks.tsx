@@ -34,6 +34,16 @@ export const useOutsideClick = <T extends HTMLElement = HTMLElement>(
   return ref;
 };
 
+export const useDeepCompareMemoize = (value: any) => {
+  const ref = useRef();
+
+  if (JSON.stringify(ref.current) !== JSON.stringify(value)) {
+    ref.current = value;
+  }
+
+  return ref.current;
+};
+
 export const useGlobalUser = (user: User | undefined, dispatch: Dispatch) => {
   const cookieUser = isJSON(getUser());
   if (!user) {

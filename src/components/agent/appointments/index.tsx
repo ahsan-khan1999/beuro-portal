@@ -28,6 +28,7 @@ export default function AgentAppointments() {
     handleNotes,
     handleImageUpload,
     handleCurrentDateChange,
+    handlePdfPreview,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -38,6 +39,7 @@ export default function AgentAppointments() {
       handleNotes={handleNotes}
       handleImageUpload={handleImageUpload}
       isAgent={true}
+      handlePdfPreview={handlePdfPreview}
     />,
     totalCount !== 0,
     isLoading

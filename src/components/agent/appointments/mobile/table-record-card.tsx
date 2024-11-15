@@ -27,13 +27,6 @@ export const AppointmentTableRecordCard = ({
           });
         };
 
-        // const handlePdfPreview = () => {
-        //   router.push({
-        //     pathname: `/agent/appointments/pdf`,
-        //     query: { ...router.query, reportId: item?.id },
-        //   });
-        // };
-
         const handleAppointmentRoute = () => {
           router.push({
             pathname: "/agent/appointments/details",
