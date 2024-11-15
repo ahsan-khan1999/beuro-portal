@@ -382,7 +382,7 @@ export const useReportUpdatedPdf = () => {
     systemSetting,
     reportDetails,
     mergedFile,
-    mergedPdfUrl,
+    mergedPdfUrl: reportId ? mergedPdfUrl : null,
     isPdfRendering,
     isLoading,
   };
