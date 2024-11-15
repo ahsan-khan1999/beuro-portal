@@ -40,16 +40,7 @@ const CreateReportDetails = () => {
     }
   }, [router?.query?.tab]);
 
-  // const { mergedPdfUrl, isLoading } = useReportUpdatedPdf();
-
-  // useEffect(() => {
-  //   if (mergedPdfUrl) {
-  //     window.open(mergedPdfUrl, "_blank");
-  //     // delete router.query.reportId;
-  //     // updateQuery(router, router.locale as string);
-  //     dispatch(updateModalType({ type: ModalType.CREATION }));
-  //   }
-  // }, [mergedPdfUrl]);
+  const { mergedPdfUrl } = useReportUpdatedPdf();
 
   const updateQueryParam = (tab: AppointmentReportsFormStages) => {
     const cleanQuery = { ...router.query, tab };
@@ -146,8 +137,11 @@ const CreateReportDetails = () => {
         query: { status: "None" },
       });
     } else {
+      if (mergedPdfUrl) {
+        window.open(mergedPdfUrl, "_blank");
+      }
       router.push({
-        pathname: "/agent/appointments/pdf",
+        pathname: "/agent/appointments/report-detail",
         query: {
           today: router.query.today,
           status: "None",
@@ -158,16 +152,14 @@ const CreateReportDetails = () => {
   };
 
   const handleReportCreated = () => {
-    // if (mergedPdfUrl) {
-    //   window.open(mergedPdfUrl, "_blank");
-    //   // delete router.query.reportId;
-    //   // updateQuery(router, router.locale as string);
-    //   // dispatch(updateModalType({ type: ModalType.CREATION }));
-    // }
+    router.query.reportId = router.query.report;
+    updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const updateSuccessModal = () => {
+    router.query.reportId = router.query.report;
+    updateQuery(router, router.locale as string);
     dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
   };
 
