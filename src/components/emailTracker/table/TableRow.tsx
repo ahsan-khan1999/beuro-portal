@@ -13,8 +13,6 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  console.log(router.query, "router.query");
-
   return (
     <div>
       {dataToAdd?.map((item, index: number) => {
