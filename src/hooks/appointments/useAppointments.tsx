@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../useRedux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
@@ -33,8 +33,9 @@ import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import ImagesUpload from "@/base-components/ui/modals1/ImagesUpload";
 import { readImage, setImages } from "@/api/slices/imageSlice/image";
 import { updateQuery } from "@/utils/update-query";
-import { useQueryParams } from "@/utils/hooks";
+import { useDeepCompareMemoize, useQueryParams } from "@/utils/hooks";
 import { handleUtcDateChange } from "@/utils/utility";
+import { useReportUpdatedPdf } from "./useReportUpdatedPdf";
 
 export const useAppointments = () => {
   const {
@@ -67,6 +68,13 @@ export const useAppointments = () => {
     status: FiltersDefaultValues.None,
     today: FiltersDefaultValues.None,
   });
+
+  const filteredQuery = useMemo(() => {
+    const { reportId, ...rest } = router.query; // Omit reportId
+    return rest;
+  }, [router.query]);
+
+  const memoizedQuery = useDeepCompareMemoize(filteredQuery);
 
   useEffect(() => {
     localStoreUtil.remove_data("appointment");
@@ -168,12 +176,27 @@ export const useAppointments = () => {
         }
       });
     }
-  }, [router.query]);
+  }, [memoizedQuery]);
 
   const totalItems = totalCount;
   const itemsPerPage = 15;
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
+
+  const { mergedPdfUrl, isLoading: load } = useReportUpdatedPdf();
+
+  useEffect(() => {
+    if (mergedPdfUrl) {
+      window.open(mergedPdfUrl, "_blank");
+      delete router.query.reportId;
+      updateQuery(router, router.locale as string);
+    }
+  }, [mergedPdfUrl]);
+
+  const handlePdfPreview = (item: any) => {
+    router.query = { ...router.query, reportId: item?.id };
+    updateQuery(router, router.locale as string);
+  };
 
   const handleFilterChange = () => {
     setCurrentPage(1);
@@ -553,7 +576,7 @@ export const useAppointments = () => {
     filter,
     setFilter,
     loading,
-    isLoading,
+    isLoading: isLoading || load,
     currentPage,
     totalCount,
     handleStatusUpdate,
@@ -565,5 +588,6 @@ export const useAppointments = () => {
     handleImageUpload,
     dispatch,
     handleCurrentDateChange,
+    handlePdfPreview,
   };
 };
