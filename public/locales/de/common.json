@@ -1261,7 +1261,10 @@
       "report_created": "Bericht erfolgreich erstellt!",
       "report_created_des": "Vielen Dank für die Erstellung des Berichts, wir freuen uns, dass Sie dabei sind.",
       "images_updated": "Unterschrift eingereicht",
-      "images_updated_des": "Bilder erfolgreich aktualisiert!"
+      "images_updated_des": "Bilder erfolgreich aktualisiert!",
+      "task_created_successfully": "Aufgabe erfolgreich erstellt",
+      "task_updated_successfully": "Aufgabe erfolgreich aktualisiert",
+      "task_deleted_successfully": "Aufgabe erfolgreich gelöscht"
     },
     "start_time": "Wählen Sie die Startzeit",
     "end_time": "Wählen Sie die Endzeit",
@@ -2615,6 +2618,7 @@
     "all_day": "Ganztägig",
     "all_day_event": "Ganztägige Veranstaltung",
     "is_contract_task_des": "Möchten Sie eine Aufgabe erstellen?",
+
     "tab_headings": {
       "day": "Tag",
       "week": "Woche",

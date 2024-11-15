@@ -12,13 +12,14 @@ import { AdditionalInfoReport } from "./forms/additional-detail-form";
 import { stepFormArrayTypes } from "@/types";
 import { useRouter } from "next/router";
 import { MobileStepperTab } from "@/base-components/ui/tab/stepper-tab";
+import { useReportUpdatedPdf } from "@/hooks/appointments/useReportUpdatedPdf";
+import { updateQuery } from "@/utils/update-query";
 
 const CreateReportDetails = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { modal } = useAppSelector((state) => state.global);
   const { reportDetails } = useAppSelector((state) => state.appointment);
-  console.log("reportDetails:", reportDetails);
 
   let initialTab: AppointmentReportsFormStages =
     AppointmentReportsFormStages.CONTACT_AND_ADDRESS;
@@ -38,6 +39,17 @@ const CreateReportDetails = () => {
       setTabType(tab);
     }
   }, [router?.query?.tab]);
+
+  // const { mergedPdfUrl, isLoading } = useReportUpdatedPdf();
+
+  // useEffect(() => {
+  //   if (mergedPdfUrl) {
+  //     window.open(mergedPdfUrl, "_blank");
+  //     // delete router.query.reportId;
+  //     // updateQuery(router, router.locale as string);
+  //     dispatch(updateModalType({ type: ModalType.CREATION }));
+  //   }
+  // }, [mergedPdfUrl]);
 
   const updateQueryParam = (tab: AppointmentReportsFormStages) => {
     const cleanQuery = { ...router.query, tab };
@@ -146,6 +158,12 @@ const CreateReportDetails = () => {
   };
 
   const handleReportCreated = () => {
+    // if (mergedPdfUrl) {
+    //   window.open(mergedPdfUrl, "_blank");
+    //   // delete router.query.reportId;
+    //   // updateQuery(router, router.locale as string);
+    //   // dispatch(updateModalType({ type: ModalType.CREATION }));
+    // }
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
