@@ -11,7 +11,23 @@ export const ContactAddress = ({
   gender,
   mobile,
   isReverseInfo,
+  language,
 }: Partial<ContactDetailsProps>) => {
+  const langContent = {
+    en: {
+      gender: {
+        Mr: "Mr",
+        Mrs: "Mrs",
+      },
+    },
+    de: {
+      gender: {
+        Mr: "Herr",
+        Mrs: "Frau",
+      },
+    },
+  };
+
   return (
     <View
       style={{
@@ -38,7 +54,11 @@ export const ContactAddress = ({
         <View style={{ display: "flex", flexDirection: "row", gap: 2 }}>
           {gender && (
             <Text style={textBase}>
-              {GenderLabel[gender as keyof typeof GenderLabel]}
+              {
+                langContent[language as keyof typeof langContent]?.gender[
+                  gender as keyof typeof GenderLabel
+                ]
+              }
             </Text>
           )}
           {address?.name && <Text style={textBase}>{address?.name}</Text>}
