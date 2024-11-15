@@ -18,6 +18,7 @@ const CreateReportDetails = () => {
   const router = useRouter();
   const { modal } = useAppSelector((state) => state.global);
   const { reportDetails } = useAppSelector((state) => state.appointment);
+  console.log("reportDetails:", reportDetails);
 
   let initialTab: AppointmentReportsFormStages =
     AppointmentReportsFormStages.CONTACT_AND_ADDRESS;
@@ -210,6 +211,22 @@ const CreateReportDetails = () => {
     }
   }, [tabType]);
 
+  const handleTab = (index: AppointmentReportsFormStages) => {
+    if (!reportDetails?.id) {
+      return;
+    }
+
+    if (tabType === 1 && index > tabType && !reportDetails?.bedRoomDetails) {
+      return;
+    }
+    if (tabType === 2 && index > tabType && !reportDetails?.serviceDetail) {
+      return;
+    }
+
+    setTabType(index);
+    updateQueryParam(index);
+  };
+
   return (
     <div>
       <div className="hidden xMini:flex border-y border-y-[#000] border-opacity-10 py-4 mb-6 items-center justify-center gap-x-4">
@@ -225,10 +242,7 @@ const CreateReportDetails = () => {
             heading={item.name}
             icon={item.icon}
             isToggle={true}
-            onClick={() => {
-              setTabType(index);
-              updateQueryParam(index as AppointmentReportsFormStages);
-            }}
+            onClick={() => handleTab(index)}
           />
         ))}
       </div>
