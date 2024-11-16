@@ -1267,7 +1267,10 @@
       "report_created": "Report created successfully!",
       "report_created_des": "Thanks for creating Report we are happy to have you.",
       "images_updated": "Operation Successful",
-      "images_updated_des": "Images updated successfully! "
+      "images_updated_des": "Images updated successfully! ",
+      "task_created_successfully": "Task created successfully",
+      "task_updated_successfully": "Task updated successfully",
+      "task_deleted_successfully": "Task deleted successfully"
     },
     "start_time": "Select start time",
     "end_time": "Select end time",
@@ -2621,6 +2624,7 @@
     "all_day": "All-Day",
     "all_day_event": "All-day event",
     "is_contract_task_des": "Would you like to create a task?",
+
     "tab_headings": {
       "day": "Day",
       "week": "Week",

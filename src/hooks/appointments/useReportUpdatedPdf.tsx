@@ -334,10 +334,16 @@ export const useReportUpdatedPdf = () => {
 
   const handleDonwload = () => {
     if (mergedPdfUrl) {
+      let isCompany = reportDetails?.customerDetail?.customerType === 1;
+
+      let title = isCompany
+        ? `${reportDetails?.customerDetail?.companyName} - ${reportDetails?.appointmentID?.leadID?.refID}`
+        : reportDetails?.appointmentID?.leadID?.refID;
+
       const url = mergedPdfUrl;
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${reportDetails?.appointmentID?.leadID?.refID}.pdf`;
+      a.download = `${title}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

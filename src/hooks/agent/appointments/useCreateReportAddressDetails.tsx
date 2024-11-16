@@ -97,7 +97,7 @@ export const useCreateReportAddressDetails = ({
         address: data?.address?.map((item: any) => ({
           ...item,
           lift: item?.lift === true ? "1" : "0",
-          ParkingPermit: item?.ParkingPermit === "true" ? true : false,
+          // ParkingPermit: item?.ParkingPermit === true ? true : false,
         })),
       };
     };

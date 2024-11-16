@@ -13,7 +13,6 @@ export interface ReportAddressProps {
 }
 
 export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
-  console.log("reportDetail:", reportDetail);
   const router = useRouter();
   const { t: translate } = useTranslation();
 

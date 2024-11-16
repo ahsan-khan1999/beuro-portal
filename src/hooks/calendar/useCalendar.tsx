@@ -258,7 +258,7 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading="Task created successfully"
+        subHeading={translate("common.modals.task_created_successfully")}
         route={onClose}
       />
     ),
@@ -266,7 +266,8 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading="Task Updated successfully"
+        subHeading=""
+        // subHeading={translate("common.modals.task_updated_successfully")}
         route={onClose}
       />
     ),
@@ -274,7 +275,8 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.images_updated")}
-        subHeading={translate("common.modals.images_updated_des")}
+        subHeading=""
+        // subHeading={translate("common.modals.images_updated_des")}
         route={onClose}
       />
     ),
@@ -282,7 +284,8 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading="Task deleted successfully"
+        subHeading=""
+        // subHeading={translate("common.modals.task_deleted_successfully")}
         route={onClose}
       />
     ),
