@@ -131,8 +131,7 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
                           name: `serviceDetail.${i}.serviceType`,
                           register,
                           colorClasses: "bg-transparent",
-                          onChange: (val) =>
-                            onServiceChange(i, ServiceType.NEW_SERVICE),
+                          onChange: (val) => onServiceChange(i, "New Service"),
                         },
                       },
                       {
@@ -148,7 +147,7 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
                           register,
                           colorClasses: "bg-transparent",
                           onChange: (val) =>
-                            onServiceChange(i, ServiceType.EXISTING_SERVICE),
+                            onServiceChange(i, "Existing Service"),
                         },
                       },
                     ],
