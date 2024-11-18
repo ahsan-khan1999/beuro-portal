@@ -13,7 +13,6 @@ export const useMergedReportPdfDownload = ({
   remoteFileBlob,
   fileName,
 }: PdfPreviewProps) => {
-  console.log("data:", data);
   const [mergedFile, setMergedFile] = useState<File | null>(null);
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
   const [isPdfRendering, setIsPdfRendering] = useState(false);
