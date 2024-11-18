@@ -385,7 +385,7 @@ export const useCreateReportServicesDetails = ({
     {
       service: service,
       onCustomerSelect: onServiceSelect,
-      serviceDetails: serviceDetails,
+      serviceDetails: watch().serviceDetail ? watch().serviceDetail : [],
       generatePrice: generateTotalPrice,
       reportDetails,
     },
