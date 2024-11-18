@@ -59,13 +59,7 @@ export const useCreateReportServicesDetails = ({
 
   const { report } = router.query;
 
-  const [serviceType, setServiceType] = useState<ServiceType[]>(
-    reportDetails?.serviceDetail?.serviceDetail?.map((item) =>
-      item.serviceType === "New Service"
-        ? ServiceType.NEW_SERVICE
-        : ServiceType.EXISTING_SERVICE
-    ) || [ServiceType.EXISTING_SERVICE]
-  );
+  const [serviceType, setServiceType] = useState<ServiceType[]>([]);
 
   const { tax } = useAppSelector((state) => state.settings);
   const { service, serviceDetails } = useAppSelector((state) => state.service);
@@ -270,18 +264,18 @@ export const useCreateReportServicesDetails = ({
   });
 
   useMemo(() => {
-    const currentLength = serviceType?.length;
-    const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
-    if (newLength > currentLength) {
-      setServiceType([
-        ...serviceType,
-        ...new Array(newLength - currentLength).fill(
-          ServiceType.EXISTING_SERVICE
-        ),
-      ]);
-    } else if (newLength < currentLength) {
-      setServiceType(serviceType.slice(0, newLength));
-    }
+    // const currentLength = serviceType?.length;
+    // const newLength = serviceFields?.length === 0 ? 1 : serviceFields?.length;
+    // if (newLength > currentLength) {
+    //   setServiceType([
+    //     ...serviceType,
+    //     ...new Array(newLength - currentLength).fill(
+    //       ServiceType.EXISTING_SERVICE
+    //     ),
+    //   ]);
+    // } else if (newLength < currentLength) {
+    //   setServiceType(serviceType.slice(0, newLength));
+    // }
     generateGrandTotal();
   }, [serviceFields?.length]);
 
@@ -292,12 +286,12 @@ export const useCreateReportServicesDetails = ({
       ...data,
     });
 
-    setServiceType((prev) => {
-      var newlist = [...prev];
-      newlist.splice(index, 1);
+    // setServiceType((prev) => {
+    //   var newlist = [...prev];
+    //   newlist.splice(index, 1);
 
-      return newlist;
-    });
+    //   return newlist;
+    // });
   };
 
   const onServiceSelectType = (index: number) => {
@@ -331,49 +325,52 @@ export const useCreateReportServicesDetails = ({
     );
   };
 
-  const handleServiceChange = (index: number, newServiceType: ServiceType) => {
-    const updatedService = serviceType.map((type, i) =>
-      i === index ? newServiceType : type
-    );
+  const handleServiceChange = (index: number, value: string) => {
+    // const updatedService = serviceType.map((type, i) =>
+    //   i === index ? value : type
+    // );
 
-    setServiceType(updatedService);
-    if (
-      newServiceType === ServiceType.NEW_SERVICE &&
-      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "New Service"
-    ) {
-      onServiceSelectType(index);
-    } else if (
-      newServiceType === ServiceType.EXISTING_SERVICE &&
-      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "New Service"
-    ) {
-      setValue(`serviceDetail.${index}.serviceTitle`, "");
-      setValue(`serviceDetail.${index}.price`, ``);
-      setValue(`serviceDetail.${index}.count`, ``);
-      setValue(`serviceDetail.${index}.unit`, ``);
-      setValue(`serviceDetail.${index}.totalPrice`, ``);
-      setValue(`serviceDetail.${index}.description`, ``);
-      setValue(`serviceDetail.${index}.discount`, ``);
-    } else if (
-      newServiceType === ServiceType.EXISTING_SERVICE &&
-      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "Existing Service"
-    ) {
-      onServiceSelectType(index);
-    } else if (
-      newServiceType === ServiceType.NEW_SERVICE &&
-      reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
-        "Existing Service"
-    ) {
-      setValue(`serviceDetail.${index}.serviceTitle`, "");
-      setValue(`serviceDetail.${index}.price`, ``);
-      setValue(`serviceDetail.${index}.count`, ``);
-      setValue(`serviceDetail.${index}.unit`, ``);
-      setValue(`serviceDetail.${index}.totalPrice`, ``);
-      setValue(`serviceDetail.${index}.description`, ``);
-      setValue(`serviceDetail.${index}.discount`, ``);
-    }
+    setValue(`serviceDetail.${index}.serviceType`, value);
+    setValue(`serviceDetail.${index}.serviceTitle`, "");
+
+    // setServiceType(updatedService);
+    // if (
+    //   newServiceType === ServiceType.NEW_SERVICE &&
+    //   reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+    //     "New Service"
+    // ) {
+    //   onServiceSelectType(index);
+    // } else if (
+    //   newServiceType === ServiceType.EXISTING_SERVICE &&
+    //   reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+    //     "New Service"
+    // ) {
+    //   setValue(`serviceDetail.${index}.serviceTitle`, "");
+    //   setValue(`serviceDetail.${index}.price`, ``);
+    //   setValue(`serviceDetail.${index}.count`, ``);
+    //   setValue(`serviceDetail.${index}.unit`, ``);
+    //   setValue(`serviceDetail.${index}.totalPrice`, ``);
+    //   setValue(`serviceDetail.${index}.description`, ``);
+    //   setValue(`serviceDetail.${index}.discount`, ``);
+    // } else if (
+    //   newServiceType === ServiceType.EXISTING_SERVICE &&
+    //   reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+    //     "Existing Service"
+    // ) {
+    //   onServiceSelectType(index);
+    // } else if (
+    //   newServiceType === ServiceType.NEW_SERVICE &&
+    //   reportDetails?.serviceDetail?.serviceDetail[index]?.serviceType ==
+    //     "Existing Service"
+    // ) {
+    //   setValue(`serviceDetail.${index}.serviceTitle`, "");
+    //   setValue(`serviceDetail.${index}.price`, ``);
+    //   setValue(`serviceDetail.${index}.count`, ``);
+    //   setValue(`serviceDetail.${index}.unit`, ``);
+    //   setValue(`serviceDetail.${index}.totalPrice`, ``);
+    //   setValue(`serviceDetail.${index}.description`, ``);
+    //   setValue(`serviceDetail.${index}.discount`, ``);
+    // }
   };
 
   const fields = ReportServiceDetailsFormField(
@@ -391,7 +388,7 @@ export const useCreateReportServicesDetails = ({
     },
     append,
     handleRemoveService,
-    serviceType,
+    [],
     handleServiceChange,
     serviceFields,
     setValue,
@@ -418,7 +415,7 @@ export const useCreateReportServicesDetails = ({
     },
     append,
     remove,
-    serviceType,
+    [],
     handleServiceChange,
     serviceFields,
     setValue,

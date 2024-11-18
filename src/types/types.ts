@@ -655,7 +655,7 @@ export type GenerateReportServiceFormField = (
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
   handleRemoveService: (index: number) => void,
   serviceType: ServiceType[],
-  onServiceChange: (index: number, value: ServiceType) => void,
+  onServiceChange: (index: number, value: string) => void,
   fields?: object[],
   setValue?: SetFieldValue<FieldValues>,
   watch?: UseFormWatch<FieldValues>
@@ -703,7 +703,7 @@ export type GenerateReportServiceDescriptionFormField = (
   handleAddNewAddress: UseFieldArrayAppend<FieldValues, "serviceDetail">,
   handleRemoveService: (index: number) => void,
   serviceType: ServiceType[],
-  onServiceChange: (index: number, value: ServiceType) => void,
+  onServiceChange: (index: number, value: string) => void,
   fields?: object[],
   setValue?: SetFieldValue<FieldValues>,
   isMobile?: boolean,
