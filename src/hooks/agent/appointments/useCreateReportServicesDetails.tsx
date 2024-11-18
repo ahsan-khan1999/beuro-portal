@@ -102,10 +102,10 @@ export const useCreateReportServicesDetails = ({
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const isTax = watch("isTax");
-  const isDiscount = watch("isDiscount");
-  const taxType = watch("taxType");
-  const discountType = watch("discountType");
+  const isTax = watch()?.isTax || false;
+  const isDiscount = watch()?.isDiscount;
+  const taxType = watch()?.taxType || 0;
+  const discountType = watch()?.discountType;
   const discountAmount = watch("discountAmount");
   const taxPercentage = watch("taxAmount");
 
