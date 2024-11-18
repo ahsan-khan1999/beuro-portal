@@ -641,7 +641,7 @@ export type GenerateReportServiceFormField = (
     type?: string;
     customer?: Customers[];
     onCustomerSelect?: (id: string, index: number) => void;
-    serviceDetails?: Service;
+    serviceDetails?: ServiceDetail[];
     onCancel?: () => void;
     leadDetails?: Lead;
     service?: Service[];
@@ -660,6 +660,17 @@ export type GenerateReportServiceFormField = (
   setValue?: SetFieldValue<FieldValues>,
   watch?: UseFormWatch<FieldValues>
 ) => FormField[];
+
+export interface ServiceDetail {
+  count?: number;
+  description: string;
+  discount?: number;
+  price: number;
+  serviceTitle?: string;
+  serviceType?: string;
+  totalPrice?: number;
+  unit?: string;
+}
 
 export type GenerateReportServiceDescriptionFormField = (
   register: UseFormRegister<FieldValues>,
