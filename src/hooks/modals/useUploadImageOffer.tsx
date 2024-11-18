@@ -160,7 +160,7 @@ export const useUploadImageOffer = (
         if (id) {
           onUpdateDetails?.(id);
           handleImageSlider();
-          handleTaskUpdateSuccess();
+          // handleTaskUpdateSuccess();
         }
       }
     } else if (type === "Offer") {
@@ -202,8 +202,6 @@ export const useUploadImageOffer = (
           handleImageSlider();
           // handleTaskUpdateSuccess();
         }
-      } else {
-        handleOnClose();
       }
     } else {
     }
