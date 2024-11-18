@@ -196,13 +196,15 @@ export const generateAddfferServiceDetailsValidation = (
             .typeError(translate("validationMessages.invalid_format")),
           [AddServiceOfferDetails.discount]: yup
             .number()
-            .notRequired()
+            .required("validationMessages.required")
             .typeError(translate("validationMessages.invalid_format")),
           [AddServiceOfferDetails.totalPrice]: yup
             .number()
             .required(translate("validationMessages.required"))
             .typeError(translate("validationMessages.invalid_format")),
-          [AddServiceOfferDetails.description]: yup.string().notRequired(),
+          [AddServiceOfferDetails.description]: yup
+            .string()
+            .required(translate("validationMessages.required")),
         })
         .required(translate("validationMessages.required"))
     )

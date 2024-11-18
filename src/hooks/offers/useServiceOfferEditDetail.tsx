@@ -244,7 +244,6 @@ export const useServiceOfferEditDetail = ({
     }
   }, [offerDetails.id]);
 
-
   useMemo(() => {
     if (offerDetails.id) {
       reset({

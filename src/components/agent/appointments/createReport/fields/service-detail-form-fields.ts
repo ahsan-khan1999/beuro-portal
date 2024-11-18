@@ -18,6 +18,7 @@ import { useTranslation } from "next-i18next";
 import { TaxSetting } from "@/api/slices/settingSlice/settings";
 import { Report } from "@/types/appointments";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
+import { Service } from "@/types/service";
 const serviceObject = {
   serviceTitle: "",
   price: "",
@@ -53,6 +54,8 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
     tax,
     currency,
   } = properties;
+
+  let services = serviceDetails ? serviceDetails : [];
 
   const formField: FormField[] = [];
   for (let i = 0; i < count; i++) {
@@ -128,8 +131,7 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
                           name: `serviceDetail.${i}.serviceType`,
                           register,
                           colorClasses: "bg-transparent",
-                          onChange: (val) =>
-                            onServiceChange(i, ServiceType.NEW_SERVICE),
+                          onChange: (val) => onServiceChange(i, "New Service"),
                         },
                       },
                       {
@@ -145,13 +147,14 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
                           register,
                           colorClasses: "bg-transparent",
                           onChange: (val) =>
-                            onServiceChange(i, ServiceType.EXISTING_SERVICE),
+                            onServiceChange(i, "Existing Service"),
                         },
                       },
                     ],
                   },
                 },
-                serviceType[i] === ServiceType.EXISTING_SERVICE && {
+
+                services[i]?.serviceType === "Existing Service" && {
                   containerClass: "mb-0 col-span-2",
                   label: {
                     text: `${translate(
@@ -175,7 +178,7 @@ export const ReportServiceDetailsFormField: GenerateReportServiceFormField = (
                     fieldIndex: i,
                   },
                 },
-                serviceType[i] === ServiceType.NEW_SERVICE && {
+                services[i]?.serviceType === "New Service" && {
                   containerClass:
                     "mb-0 row-start-1 col-start-2 col-end-4 col-span-2",
                   label: {
