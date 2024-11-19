@@ -40,7 +40,26 @@ const CreateReportDetails = () => {
     }
   }, [router?.query?.tab]);
 
-  const { mergedPdfUrl } = useReportUpdatedPdf();
+  const { mergedPdfUrl, isPdfRendering, clearMergedPdfUrl } =
+    useReportUpdatedPdf();
+
+  console.log("mergedPdfUrl:", mergedPdfUrl);
+
+  useEffect(() => {
+    if (mergedPdfUrl) {
+      window.open(mergedPdfUrl, "_blank");
+      clearMergedPdfUrl();
+
+      router.push({
+        pathname: "/agent/appointments/report-detail",
+        query: {
+          today: router.query.today,
+          status: "None",
+          reportId: reportDetails?.appointmentID?.id,
+        },
+      });
+    }
+  }, [mergedPdfUrl]);
 
   const updateQueryParam = (tab: AppointmentReportsFormStages) => {
     const cleanQuery = { ...router.query, tab };
@@ -131,36 +150,52 @@ const CreateReportDetails = () => {
 
   const handleReportSuccessRoute = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
+    // if (companyAppointment) {
+    //   router.push({
+    //     pathname: "/appointments",
+    //     query: { status: "None" },
+    //   });
+    // } else {
+    //   // if (mergedPdfUrl) {
+    //   //   window.open(mergedPdfUrl, "_blank");
+    //   // }
+    //   router.push({
+    //     pathname: "/agent/appointments/report-detail",
+    //     query: {
+    //       today: router.query.today,
+    //       status: "None",
+    //       reportId: reportDetails?.appointmentID?.id,
+    //     },
+    //   });
+    // }
+  };
+
+  const handleReportCreated = () => {
     if (companyAppointment) {
+      dispatch(updateModalType({ type: ModalType.CREATION }));
       router.push({
         pathname: "/appointments",
         query: { status: "None" },
       });
     } else {
-      if (mergedPdfUrl) {
-        window.open(mergedPdfUrl, "_blank");
-      }
-      router.push({
-        pathname: "/agent/appointments/report-detail",
-        query: {
-          today: router.query.today,
-          status: "None",
-          reportId: reportDetails?.appointmentID?.id,
-        },
-      });
+      router.query.reportId = router.query.appointmentId;
+      updateQuery(router, router.locale as string);
+      dispatch(updateModalType({ type: ModalType.CREATION }));
     }
   };
 
-  const handleReportCreated = () => {
-    router.query.reportId = router.query.report;
-    updateQuery(router, router.locale as string);
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
-
   const updateSuccessModal = () => {
-    router.query.reportId = router.query.report;
-    updateQuery(router, router.locale as string);
-    dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
+    if (companyAppointment) {
+      dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
+      router.push({
+        pathname: "/appointments",
+        query: { status: "None" },
+      });
+    } else {
+      router.query.reportId = router.query.report;
+      updateQuery(router, router.locale as string);
+      dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
+    }
   };
 
   const componentLookUp = {

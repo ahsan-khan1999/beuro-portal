@@ -59,7 +59,7 @@ export const useCreateReportServicesDetails = ({
 
   const { report } = router.query;
 
-  const [serviceType, setServiceType] = useState<ServiceType[]>([]);
+  // const [serviceType, setServiceType] = useState<ServiceType[]>([]);
 
   const { tax } = useAppSelector((state) => state.settings);
   const { service, serviceDetails } = useAppSelector((state) => state.service);
@@ -332,6 +332,12 @@ export const useCreateReportServicesDetails = ({
 
     setValue(`serviceDetail.${index}.serviceType`, value);
     setValue(`serviceDetail.${index}.serviceTitle`, "");
+    setValue(`serviceDetail.${index}.price`, ``);
+    setValue(`serviceDetail.${index}.count`, ``);
+    setValue(`serviceDetail.${index}.unit`, ``);
+    setValue(`serviceDetail.${index}.totalPrice`, ``);
+    setValue(`serviceDetail.${index}.description`, ``);
+    setValue(`serviceDetail.${index}.discount`, ``);
 
     // setServiceType(updatedService);
     // if (
@@ -377,7 +383,7 @@ export const useCreateReportServicesDetails = ({
     register,
     loading,
     control,
-    () => console.log(),
+    () => {},
     serviceFields?.length === 0 ? 1 : serviceFields?.length,
     {
       service: service,
@@ -399,7 +405,7 @@ export const useCreateReportServicesDetails = ({
     register,
     loading,
     control,
-    () => console.log(),
+    () => {},
     serviceFields?.length,
     {
       service: service,

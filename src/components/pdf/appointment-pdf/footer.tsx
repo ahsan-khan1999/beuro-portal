@@ -2,7 +2,7 @@ import { DocumentDetailFooterProps } from "@/types/types";
 import { useTranslation } from "next-i18next";
 import React, { useMemo } from "react";
 
-export const Footer = ({
+export const AppointmentFooter = ({
   firstColumn,
   fourthColumn,
   secondColumn,
@@ -293,27 +293,6 @@ export const Footer = ({
           </div>
         )}
       </div>
-
-      {currPage && (
-        <div className="self-end w-[80px] pb-2">
-          <span
-            className={`text-sm text-[${
-              "#" + emailTemplateSettings?.textColour
-            }] text-sm font-medium mr-[10px]`}
-            style={{ color: textColor }}
-          >
-            {translation("pdf.page")}
-          </span>
-          <span
-            className={`text-sm text-[${
-              "#" + emailTemplateSettings?.textColour
-            }] font-medium`}
-            style={{ color: textColor }}
-          >
-            {currPage}/{totalPages}
-          </span>
-        </div>
-      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { DocumentHeaderDetailsProps } from "@/types/types";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { convertUTCToLocalDate, formatDateTimeToDate } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 
 export const DocumentHeader = ({
@@ -11,9 +11,12 @@ export const DocumentHeader = ({
   logo,
   emailTemplateSettings,
   isReverseLogo,
+  desireDate,
 }: Partial<DocumentHeaderDetailsProps>) => {
   const { t: translate } = useTranslation();
-  const headerBackgroundColor = "#" + emailTemplateSettings?.FooterColour;
+  const headerBackgroundColor = emailTemplateSettings?.headerColour
+    ? "#" + emailTemplateSettings?.headerColour
+    : "#" + emailTemplateSettings?.FooterColour;
   const textColor = "#" + emailTemplateSettings?.textColour;
 
   return (
@@ -66,6 +69,22 @@ export const DocumentHeader = ({
                 {createdBy}
               </span>
             </div>
+            {desireDate && (
+              <div className="flex gap-[5px]">
+                <span
+                  className={`text-[${textColor}] text-sm font-medium`}
+                  style={{ color: textColor }}
+                >
+                  {translate("agent.report_contact_fields.desire_date")}:
+                </span>
+                <span
+                  className={`text-[${textColor}] text-sm font-medium`}
+                  style={{ color: textColor }}
+                >
+                  {convertUTCToLocalDate(desireDate)}
+                </span>
+              </div>
+            )}
           </div>
           <div className="col-span-3 flex justify-end">
             {emailTemplateSettings && (
@@ -135,6 +154,22 @@ export const DocumentHeader = ({
                 {createdBy}
               </span>
             </div>
+            {desireDate && (
+              <div className="flex gap-[5px]">
+                <span
+                  className={`text-[${textColor}] text-sm font-medium`}
+                  style={{ color: textColor }}
+                >
+                  {translate("agent.report_contact_fields.desire_date")}:
+                </span>
+                <span
+                  className={`text-[${textColor}] text-sm font-medium`}
+                  style={{ color: textColor }}
+                >
+                  {convertUTCToLocalDate(desireDate)}
+                </span>
+              </div>
+            )}
           </div>
         </>
       )}

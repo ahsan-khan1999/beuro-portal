@@ -1185,6 +1185,7 @@ export interface DocumentHeaderDetailsProps {
   language?: string;
   isOffer?: boolean;
   desireDate?: string;
+  bgColor?: string;
 }
 
 export interface ProductItemFooterProps {
