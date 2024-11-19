@@ -334,11 +334,10 @@ export const useReportUpdatedPdf = () => {
 
   const handleDonwload = () => {
     if (mergedPdfUrl) {
-      let isCompany = reportDetails?.customerDetail?.customerType === 1;
-
-      let title = isCompany
-        ? `${reportDetails?.customerDetail?.companyName} - ${reportDetails?.appointmentID?.leadID?.refID}`
-        : reportDetails?.appointmentID?.leadID?.refID;
+      let companyName =
+        reportDetails?.appointmentID?.createdBy?.company?.companyName;
+      let leadID = reportDetails?.appointmentID?.leadID?.refID;
+      let title = companyName ? `${companyName} - ${leadID}` : leadID;
 
       const url = mergedPdfUrl;
       const a = document.createElement("a");
