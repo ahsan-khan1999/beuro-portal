@@ -18,6 +18,10 @@ export const useMergedReportPdfDownload = ({
   const [isPdfRendering, setIsPdfRendering] = useState(false);
   const { currentLanguage } = useAppSelector((state) => state.global);
 
+  const clearMergedPdfUrl = () => {
+    setMergedPdfUrl(null);
+  };
+
   useEffect(() => {
     (async () => {
       try {
@@ -51,6 +55,7 @@ export const useMergedReportPdfDownload = ({
           );
           setMergedPdfUrl(url);
         }
+        setIsPdfRendering(false);
       } catch (err) {
         setIsPdfRendering(false);
         console.error("Error merging PDFs:", err);
@@ -66,8 +71,10 @@ export const useMergedReportPdfDownload = ({
   ]);
 
   useEffect(() => {
-    if (mergedPdfUrl) setIsPdfRendering(false);
+    if (mergedPdfUrl && isPdfRendering) {
+      setIsPdfRendering(false);
+    }
   }, [mergedPdfUrl]);
 
-  return { mergedFile, mergedPdfUrl, isPdfRendering };
+  return { mergedFile, mergedPdfUrl, isPdfRendering, clearMergedPdfUrl };
 };

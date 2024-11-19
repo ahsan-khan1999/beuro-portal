@@ -329,7 +329,7 @@ export const useReportUpdatedPdf = () => {
     ]
   );
 
-  const { mergedFile, mergedPdfUrl, isPdfRendering } =
+  const { mergedFile, mergedPdfUrl, isPdfRendering, clearMergedPdfUrl } =
     useMergedReportPdfDownload(reportDataProps);
 
   const handleDonwload = () => {
@@ -388,8 +388,9 @@ export const useReportUpdatedPdf = () => {
     systemSetting,
     reportDetails,
     mergedFile,
-    mergedPdfUrl: reportId ? mergedPdfUrl : null,
+    mergedPdfUrl: reportId && !isPdfRendering ? mergedPdfUrl : null,
     isPdfRendering,
-    isLoading,
+    isLoading: isLoading || isPdfRendering,
+    clearMergedPdfUrl,
   };
 };
