@@ -183,13 +183,18 @@ export const useAppointments = () => {
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
-  const { mergedPdfUrl, isLoading: load } = useReportUpdatedPdf();
+  const {
+    mergedPdfUrl,
+    isLoading: load,
+    clearMergedPdfUrl,
+  } = useReportUpdatedPdf();
 
   useEffect(() => {
     if (mergedPdfUrl) {
       window.open(mergedPdfUrl, "_blank");
       delete router.query.reportId;
       updateQuery(router, router.locale as string);
+      clearMergedPdfUrl();
     }
   }, [mergedPdfUrl]);
 

@@ -40,7 +40,7 @@ const CreateReportDetails = () => {
     }
   }, [router?.query?.tab]);
 
-  const { mergedPdfUrl } = useReportUpdatedPdf();
+  const { mergedPdfUrl, isPdfRendering } = useReportUpdatedPdf();
 
   const updateQueryParam = (tab: AppointmentReportsFormStages) => {
     const cleanQuery = { ...router.query, tab };

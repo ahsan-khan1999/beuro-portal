@@ -759,7 +759,7 @@ const ReportPdf = ({
 
   return (
     <Document>
-      <Page style={styles.body} dpi={72} break={true}>
+      <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
 
         <ContactAddress {...{ ...contactAddress, language: lang }} />
@@ -775,13 +775,15 @@ const ReportPdf = ({
           <ServiceTableRow
             {...item}
             key={index}
-            pagebreak={
-              !pageBreakCondition
-                ? serviceItem?.length === 1
-                  ? false
-                  : index === serviceItem?.length - 1
-                : false
-            }
+            pagebreak={false}
+            // pagebreak={
+            //   !pageBreakCondition
+            //     ? serviceItem?.length === 1
+            //       ? false
+            //       : index === serviceItem?.length - 1
+            //     : false
+            // }
+
             isDiscount={isDiscount}
           />
         ))}
