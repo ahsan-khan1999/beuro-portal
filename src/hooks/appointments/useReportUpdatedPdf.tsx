@@ -87,6 +87,7 @@ export const useReportUpdatedPdf = () => {
           setEmailTemplateSettings({
             logo: emailTemplate?.payload?.logo,
             FooterColour: emailTemplate?.payload?.FooterColour,
+            headerColour: "ffffff",
             email: emailTemplate?.payload?.email,
             mobileNumber: emailTemplate?.payload?.mobileNumber,
             phoneNumber: emailTemplate?.payload?.phoneNumber,
@@ -332,6 +333,52 @@ export const useReportUpdatedPdf = () => {
   const { mergedFile, mergedPdfUrl, isPdfRendering, clearMergedPdfUrl } =
     useMergedReportPdfDownload(reportDataProps);
 
+  function downloadPdf(pdfBlob: Blob, title: string): void {
+    // Check if the browser is Safari
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    if (isSafari) {
+      // Safari-specific handling
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        const link = document.createElement("a");
+        link.href = reader.result as string;
+        link.download = `safari browser.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+
+      reader.readAsDataURL(pdfBlob); // Convert Blob to a Data URL
+    } else {
+      // Non-Safari browsers
+      const url = URL.createObjectURL(pdfBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `other browser.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url); // Clean up the Blob URL
+    }
+  }
+  async function fetchAndDownloadPdf(
+    url: string,
+    title: string
+  ): Promise<void> {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch PDF: ${response.statusText}`);
+      }
+      const pdfBlob: Blob = await response.blob();
+      downloadPdf(pdfBlob, title);
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+    }
+  }
+
   const handleDonwload = () => {
     if (mergedPdfUrl) {
       let companyName =
@@ -339,6 +386,7 @@ export const useReportUpdatedPdf = () => {
       let leadID = reportDetails?.appointmentID?.leadID?.refID;
       let title = companyName ? `${companyName} - ${leadID}` : leadID;
 
+      // console.log("title:", title);
       const url = mergedPdfUrl;
       const a = document.createElement("a");
       a.href = url;
@@ -347,6 +395,7 @@ export const useReportUpdatedPdf = () => {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      // fetchAndDownloadPdf(mergedPdfUrl, title);
     }
   };
 
@@ -390,6 +439,7 @@ export const useReportUpdatedPdf = () => {
     mergedPdfUrl: reportId && !isPdfRendering ? mergedPdfUrl : null,
     isPdfRendering,
     isLoading: isLoading || isPdfRendering,
+    loading: isLoading,
     clearMergedPdfUrl,
   };
 };

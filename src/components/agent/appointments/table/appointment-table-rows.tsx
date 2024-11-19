@@ -61,6 +61,13 @@ export const AppointmentTableRows = ({
   //   })
   // );
 
+  const handlePreview = (id: string) => {
+    router.push({
+      pathname: `/agent/appointments/pdf`,
+      query: { ...router.query, reportId: id },
+    });
+  };
+
   return (
     <div className={`overflow-y-visible`}>
       {dataToAdd?.map((item, index) => {
@@ -140,7 +147,7 @@ export const AppointmentTableRows = ({
                       {item?.isReportSubmitted ? (
                         <OutlineButton
                           inputType="button"
-                          onClick={() => handlePdfPreview(item)}
+                          onClick={() => handlePreview(item?.id)}
                           className="bg-white text-primary w-full border border-primary py-[5px] !h-fit"
                           text={translate("appointments.view_reports_btn")}
                           id="view reports"
@@ -266,7 +273,7 @@ export const AppointmentTableRows = ({
                   {item?.isReportSubmitted ? (
                     <OutlineButton
                       inputType="button"
-                      onClick={() => handlePdfPreview(item)}
+                      onClick={() => handlePreview(item?.id)}
                       className="bg-white text-[#45C769] w-full border border-[#45C769] hover:border-buttonHover py-[5px] !h-fit"
                       text={translate("appointments.view_reports_btn")}
                       id="view reports"
