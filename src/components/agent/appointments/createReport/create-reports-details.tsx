@@ -40,26 +40,24 @@ const CreateReportDetails = () => {
     }
   }, [router?.query?.tab]);
 
-  const { mergedPdfUrl, isPdfRendering, clearMergedPdfUrl } =
-    useReportUpdatedPdf();
+  // const { mergedPdfUrl, isPdfRendering, clearMergedPdfUrl } =
+  //   useReportUpdatedPdf();
 
-  console.log("mergedPdfUrl:", mergedPdfUrl);
+  // useEffect(() => {
+  //   if (mergedPdfUrl) {
+  //     window.open(mergedPdfUrl, "_blank");
+  //     clearMergedPdfUrl();
 
-  useEffect(() => {
-    if (mergedPdfUrl) {
-      window.open(mergedPdfUrl, "_blank");
-      clearMergedPdfUrl();
-
-      router.push({
-        pathname: "/agent/appointments/report-detail",
-        query: {
-          today: router.query.today,
-          status: "None",
-          reportId: reportDetails?.appointmentID?.id,
-        },
-      });
-    }
-  }, [mergedPdfUrl]);
+  //     router.push({
+  //       pathname: "/agent/appointments/report-detail",
+  //       query: {
+  //         today: router.query.today,
+  //         status: "None",
+  //         reportId: reportDetails?.appointmentID?.id,
+  //       },
+  //     });
+  //   }
+  // }, [mergedPdfUrl]);
 
   const updateQueryParam = (tab: AppointmentReportsFormStages) => {
     const cleanQuery = { ...router.query, tab };
@@ -150,6 +148,23 @@ const CreateReportDetails = () => {
 
   const handleReportSuccessRoute = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
+
+    if (companyAppointment) {
+      router.push({
+        pathname: "/appointments",
+        query: { status: "None" },
+      });
+    } else {
+      router.push({
+        pathname: "/agent/appointments/pdf",
+        query: {
+          today: router.query.today,
+          status: "None",
+          reportId: reportDetails?.appointmentID?.id,
+        },
+      });
+    }
+
     // if (companyAppointment) {
     //   router.push({
     //     pathname: "/appointments",
@@ -171,31 +186,47 @@ const CreateReportDetails = () => {
   };
 
   const handleReportCreated = () => {
-    if (companyAppointment) {
-      dispatch(updateModalType({ type: ModalType.CREATION }));
-      router.push({
-        pathname: "/appointments",
-        query: { status: "None" },
-      });
-    } else {
-      router.query.reportId = router.query.appointmentId;
-      updateQuery(router, router.locale as string);
-      dispatch(updateModalType({ type: ModalType.CREATION }));
-    }
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+    // if (companyAppointment) {
+    //   router.push({
+    //     pathname: "/appointments",
+    //     query: { status: "None" },
+    //   });
+    // } else {
+    //   // router.query.reportId = router.query.appointmentId;
+    //   // updateQuery(router, router.locale as string);
+    //   dispatch(updateModalType({ type: ModalType.CREATION }));
+    //   router.push({
+    //     pathname: "/agent/appointments/pdf",
+    //     query: {
+    //       today: router.query.today,
+    //       status: "None",
+    //       reportId: reportDetails?.appointmentID?.id,
+    //     },
+    //   });
+    // }
   };
 
   const updateSuccessModal = () => {
-    if (companyAppointment) {
-      dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
-      router.push({
-        pathname: "/appointments",
-        query: { status: "None" },
-      });
-    } else {
-      router.query.reportId = router.query.report;
-      updateQuery(router, router.locale as string);
-      dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
-    }
+    dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
+    // if (companyAppointment) {
+    //   router.push({
+    //     pathname: "/appointments",
+    //     query: { status: "None" },
+    //   });
+    // } else {
+    //   // router.query.reportId = router.query.report;
+    //   // updateQuery(router, router.locale as string);
+    //   dispatch(updateModalType({ type: ModalType.UPDATE_REPORT }));
+    //   router.push({
+    //     pathname: "/agent/appointments/pdf",
+    //     query: {
+    //       today: router.query.today,
+    //       status: "None",
+    //       reportId: reportDetails?.appointmentID?.id,
+    //     },
+    //   });
+    // }
   };
 
   const componentLookUp = {
