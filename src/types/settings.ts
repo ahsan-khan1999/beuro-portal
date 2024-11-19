@@ -150,6 +150,7 @@ export interface EmailTemplate {
   mobileNumber: string;
   FooterColour: string;
   textColour: string;
+  headerColour?: string;
 }
 
 export interface QRSettings {

@@ -3,6 +3,21 @@ import { ContactDetailsProps } from "@/types/types";
 import { GenderLabel } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 
+const langContent = {
+  en: {
+    gender: {
+      Mr: "Mr",
+      Mrs: "Mrs",
+    },
+  },
+  de: {
+    gender: {
+      Mr: "Herr",
+      Mrs: "Frau",
+    },
+  },
+};
+
 export const ContactDetails = ({
   address,
   email,
@@ -10,10 +25,13 @@ export const ContactDetails = ({
   gender,
   mobile,
   isReverseInfo,
+  language,
 }: Partial<ContactDetailsProps>) => {
+  console.log("gender:", gender);
   const { t: translate } = useTranslation();
   const { city, name, postalCode, streetWithNumber, companyName } =
     address || {};
+
   return (
     <div className="grid grid-cols-4 items-center mt-5 mb-[37px]">
       {isReverseInfo ? (
@@ -46,13 +64,24 @@ export const ContactDetails = ({
           </div>
           <div className="col-span-1 ml-[80px]">
             <div className="flex flex-col gap-[0px] w-[185px]">
-              <span className="text-sm font-medium">
-                {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}{" "}
-                {companyName && "c/o" + " " + companyName}
-              </span>
+              {companyName && (
+                <span className="text-sm font-medium">{companyName}</span>
+              )}
+              <div className="flex gap-1">
+                {gender && (
+                  <span className="text-sm font-medium">
+                    {
+                      langContent[language as keyof typeof langContent]?.gender[
+                        gender as keyof typeof GenderLabel
+                      ]
+                    }
+                  </span>
+                )}
+                <span className="text-sm font-medium">{name}</span>
+              </div>
               <span className="text-sm font-medium">{streetWithNumber}</span>
               <span className="text-sm font-medium">
-                {postalCode} {[city as keyof typeof Country] || ""}
+                {postalCode} {city || ""}
               </span>
             </div>
           </div>
@@ -60,12 +89,22 @@ export const ContactDetails = ({
       ) : (
         <>
           <div className="flex flex-col gap-[0px] col-span-3">
-            <span className="text-sm font-medium">
-              {companyName && companyName}
-            </span>
-            <span className="text-sm font-medium">
-              {GenderLabel[gender as keyof typeof GenderLabel] || ""} {name}{" "}
-            </span>
+            {companyName && (
+              <span className="text-sm font-medium">{companyName}</span>
+            )}
+            <div className="flex gap-1">
+              {gender && (
+                <span className="text-sm font-medium">
+                  {
+                    langContent[language as keyof typeof langContent]?.gender[
+                      gender as keyof typeof GenderLabel
+                    ]
+                  }
+                </span>
+              )}
+              <span className="text-sm font-medium">{name}</span>
+            </div>
+
             <span className="text-sm font-medium">{streetWithNumber}</span>
             <span className="text-sm font-medium">
               {postalCode} {city || ""}
