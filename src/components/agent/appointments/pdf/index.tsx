@@ -9,8 +9,10 @@ import { useReportUpdatedPdf } from "@/hooks/appointments/useReportUpdatedPdf";
 import AppointmentPdfPreview from "@/components/pdf/appointment-pdf/appointment-pdf-preview";
 import { Container } from "@/components/pdf/container";
 import { useAppSelector } from "@/hooks/useRedux";
+import { useRouter } from "next/router";
 
 export const ReportPdfPreview = () => {
+  const router = useRouter();
   const {
     isLoading,
     handleDonwload,
@@ -24,6 +26,9 @@ export const ReportPdfPreview = () => {
     systemSetting,
     loading,
   } = useReportUpdatedPdf();
+
+  const path = router.asPath;
+  const isAgent = path.startsWith("/agent/");
 
   const { currentLanguage } = useAppSelector((state) => state.global);
 
@@ -39,19 +44,23 @@ export const ReportPdfPreview = () => {
             onPrint={handlePrint}
           />
 
-          {/* <ReportPDF
-            mergedPdfFileUrl={mergedPdfUrl}
-            isPdfRendering={isPdfRendering}
-          /> */}
-          {reportData && (
+          {!isAgent && (
+            <ReportPDF
+              mergedPdfFileUrl={mergedPdfUrl}
+              isPdfRendering={isPdfRendering}
+            />
+          )}
+          {isAgent && (
             <Container>
-              <AppointmentPdfPreview
-                pdfData={reportData}
-                templateSettings={templateSettings}
-                emailTemplateSettings={emailTemplateSettings}
-                systemSettings={systemSetting}
-                language={currentLanguage}
-              />
+              {reportData && (
+                <AppointmentPdfPreview
+                  pdfData={reportData}
+                  templateSettings={templateSettings}
+                  emailTemplateSettings={emailTemplateSettings}
+                  systemSettings={systemSetting}
+                  language={currentLanguage}
+                />
+              )}
             </Container>
           )}
         </>
