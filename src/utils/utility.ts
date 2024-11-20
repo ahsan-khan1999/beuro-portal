@@ -112,6 +112,14 @@ export const hasTime = (date: string | Moment) => {
   );
 };
 
+export const isInArithmeticSequence = (
+  number: number,
+  start: number,
+  step: number
+) => {
+  return number >= start && (number - start) % step === 0;
+};
+
 export const isValidUrl = (url?: string): boolean => {
   return (
     typeof url === "string" &&

@@ -27,7 +27,6 @@ export const ContactDetails = ({
   isReverseInfo,
   language,
 }: Partial<ContactDetailsProps>) => {
-  console.log("gender:", gender);
   const { t: translate } = useTranslation();
   const { city, name, postalCode, streetWithNumber, companyName } =
     address || {};
