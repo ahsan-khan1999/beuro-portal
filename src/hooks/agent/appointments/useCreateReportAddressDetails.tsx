@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import { ReportContactAddressDetailsValidation } from "@/validation/agent/agentReportSchema";
 import {
+  AddDateFormField,
   contactAgentReportFormField,
   ContactReportAddressFormField,
   ReportCustAddressFormField,
@@ -88,6 +89,15 @@ export const useCreateReportAddressDetails = ({
     name: "address",
   });
 
+  const {
+    fields: datesFields,
+    remove: dateRemove,
+    append: dateAppend,
+  } = useFieldArray({
+    control,
+    name: "date",
+  });
+
   const [addressType, setAddressType] = useState<number | null>(null);
 
   useEffect(() => {
@@ -122,9 +132,9 @@ export const useCreateReportAddressDetails = ({
               phoneNumber: response.payload?.customerDetail?.phoneNumber,
               mobileNumber: response.payload?.customerDetail?.mobileNumber,
               companyName: response.payload?.customerDetail?.companyName,
-              desireDate: response.payload?.desireDate
-                ? convertUTCToLocalDate(response.payload?.desireDate)
-                : "",
+              // desireDate: response.payload?.desireDate
+              //   ? convertUTCToLocalDate(response.payload?.desireDate)
+              //   : "",
               streetNumber:
                 response.payload?.customerDetail?.address?.streetNumber,
               country: response.payload?.customerDetail?.address?.country,
@@ -133,6 +143,8 @@ export const useCreateReportAddressDetails = ({
                 response.payload?.addressID?.address || [],
                 "Adresse"
               ),
+              date: response?.payload?.date,
+              time: response?.payload?.time,
             });
 
             reset(transformedData);
@@ -156,9 +168,9 @@ export const useCreateReportAddressDetails = ({
         phoneNumber: reportDetails?.customerDetail?.phoneNumber,
         mobileNumber: reportDetails?.customerDetail?.mobileNumber,
         companyName: reportDetails?.customerDetail?.companyName,
-        desireDate: convertUTCToLocalDate(
-          reportDetails?.customerDetail?.desireDate || ""
-        ),
+        // desireDate: convertUTCToLocalDate(
+        //   reportDetails?.customerDetail?.desireDate || ""
+        // ),
         streetNumber: reportDetails?.customerDetail?.address?.streetNumber,
         country: reportDetails?.customerDetail?.address?.country,
         postalCode: reportDetails?.customerDetail?.address?.postalCode,
@@ -166,6 +178,8 @@ export const useCreateReportAddressDetails = ({
           reportDetails?.addressID?.address || [],
           "Adresse"
         ),
+        date: reportDetails?.date,
+        time: reportDetails?.time,
       });
 
       reset(transformedData);
@@ -189,9 +203,9 @@ export const useCreateReportAddressDetails = ({
             mobileNumber:
               response.payload?.leadID?.customerDetail?.mobileNumber,
             companyName: response.payload?.leadID?.customerDetail?.companyName,
-            desireDate: convertUTCToLocalDate(
-              response.payload?.leadID?.desireDate || ""
-            ),
+            // desireDate: convertUTCToLocalDate(
+            //   response.payload?.leadID?.desireDate || ""
+            // ),
             streetNumber:
               response.payload?.leadID?.customerDetail?.address?.streetNumber,
             country: response.payload?.leadID?.customerDetail?.address?.country,
@@ -202,6 +216,8 @@ export const useCreateReportAddressDetails = ({
               response.payload?.leadID?.addressID?.address || [],
               "Adresse"
             ),
+            date: response?.payload?.leadID?.date,
+            time: response?.payload?.leadID?.time,
           });
 
           reset(transformedData);
@@ -243,6 +259,15 @@ export const useCreateReportAddressDetails = ({
     false,
     control,
     watch("customerType")
+  );
+
+  const dateFields = AddDateFormField(
+    register,
+    dateAppend,
+    datesFields?.length ? datesFields?.length : 1,
+    dateRemove,
+    loading,
+    control
   );
 
   const address = ContactReportAddressFormField(
@@ -333,7 +358,7 @@ export const useCreateReportAddressDetails = ({
   };
 
   return {
-    fields: [...fields, ...customerAddress, ...address],
+    fields: [...fields, ...dateFields, ...customerAddress, ...address],
     onSubmit,
     control,
     handleSubmit,

@@ -108,12 +108,8 @@ export const AppointmentsDetailCard = ({
         serviceDetail: {
           serviceDetail: reportDetails?.serviceDetail?.serviceDetail,
         },
-        date: [
-          {
-            startDate: moment(reportDetails?.desireDate).format("YYYY-MM-DD"),
-            endDate: "",
-          },
-        ],
+        date: reportDetails?.date,
+        time: reportDetails?.time,
       })
     );
     dispatch(

@@ -120,7 +120,7 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
               {reportDetail?.customerDetail?.mobileNumber}
             </div>
           </div>
-          <div className="flex flex-col gap-y-1">
+          {/* <div className="flex flex-col gap-y-1">
             <label className="text-[#344054] text-sm font-medium">
               {translate("agent.report_contact_fields.desire_date")}
             </label>
@@ -129,7 +129,7 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
                 ? convertUTCToLocalDate(reportDetail?.desireDate)
                 : ""}
             </div>
-          </div>
+          </div> */}
         </div>
 
         <h4 className="text-base font-medium xMini:font-semibold text-[#1E1E1E] mb-2">
