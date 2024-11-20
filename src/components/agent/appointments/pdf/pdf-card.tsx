@@ -2,22 +2,51 @@ import { BackIcon } from "@/assets/svgs/components/back-icon";
 import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { Report } from "@/types/appointments";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { Appointments, Report } from "@/types/appointments";
+import {
+  formatDateTimeToDate,
+  formatTimeToHHMM,
+  viewConvertUTCToLocalDate,
+} from "@/utils/utility";
 import { PrintIcon } from "@/assets/svgs/components/print-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useAppSelector } from "@/hooks/useRedux";
+import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
+import { WriteIcon } from "@/assets/svgs/components/write-icon";
+import { useReportDetails } from "@/hooks/appointments/useReportDetail";
+import { staticEnums } from "@/utils/static";
 
 export interface AppointmentsDetailCardProps {
   appointmentDetails: Report;
   onDownload: () => void;
   onPrint: () => void;
+  details?: Appointments;
+
+  handleNotes: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  handleUploadImages: (
+    id: string,
+    refID: string,
+    name: string,
+    heading: string,
+    e: React.MouseEvent<HTMLSpanElement>
+  ) => void;
+  isLoad: boolean;
 }
 
 export const AppointmentPdfCard = ({
   appointmentDetails,
   onDownload,
   onPrint,
+  details,
+  handleUploadImages,
+  isLoad,
+  handleNotes,
 }: AppointmentsDetailCardProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -41,6 +70,19 @@ export const AppointmentPdfCard = ({
     delete router.query["isCompanyLead"];
     updateQuery(router, router.locale as string);
   };
+
+  const customerType = details?.leadID?.customerDetail
+    ?.customerType as keyof (typeof staticEnums)["CustomerType"];
+
+  const name =
+    customerType === 1
+      ? details?.leadID?.customerDetail?.companyName
+      : details?.leadID?.customerDetail?.fullName;
+
+  const heading =
+    customerType === 1
+      ? translate("common.company_name")
+      : translate("common.customer_name");
 
   return (
     <div className="bg-white pt-5 pl-5 pr-6 pb-[37px] rounded-lg">
@@ -80,23 +122,26 @@ export const AppointmentPdfCard = ({
               <span className="text-base text-[#5C5C5C] font-medium min-w-[60px] w-fit">
                 {translate("appointments.detail_data.status")}:
               </span>
-              <div
-                className={`${
-                  appointmentDetails?.appointmentID?.appointmentStatus ===
-                  "Pending"
-                    ? "bg-[#4A13E7]"
-                    : appointmentDetails?.appointmentID?.appointmentStatus ===
-                      "Completed"
-                    ? "bg-[#45C769]"
-                    : "bg-[#D80027]"
-                } w-[140px] rounded-lg px-4 py-2 flex items-center justify-center`}
-              >
-                <span className="text-sm font-normal text-white">
-                  {translate(
-                    `appointments.appointment_status.${appointmentDetails?.appointmentID?.appointmentStatus}`
-                  )}
-                </span>
-              </div>
+              {!isLoad &&
+                appointmentDetails?.appointmentID?.appointmentStatus && (
+                  <div
+                    className={`${
+                      appointmentDetails?.appointmentID?.appointmentStatus ===
+                      "Pending"
+                        ? "bg-[#4A13E7]"
+                        : appointmentDetails?.appointmentID
+                            ?.appointmentStatus === "Completed"
+                        ? "bg-[#45C769]"
+                        : "bg-[#D80027]"
+                    } w-[140px] rounded-lg px-4 py-2 flex items-center justify-center`}
+                  >
+                    <span className="text-sm font-normal text-white">
+                      {translate(
+                        `appointments.appointment_status.${appointmentDetails?.appointmentID?.appointmentStatus}`
+                      )}
+                    </span>
+                  </div>
+                )}
             </div>
           </div>
           <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">
@@ -118,9 +163,13 @@ export const AppointmentPdfCard = ({
               <span className="text-base text-[#5C5C5C] font-medium">
                 {translate("appointments.detail_data.date")}:
               </span>
-              <span className="text-base text-[#5C5C5C] font-nomal">
-                {formatDateTimeToDate(appointmentDetails?.appointmentID?.date)}
-              </span>
+              {appointmentDetails?.appointmentID?.date && (
+                <span className="text-base text-[#5C5C5C] font-nomal">
+                  {formatDateTimeToDate(
+                    appointmentDetails?.appointmentID?.date
+                  )}
+                </span>
+              )}
             </div>
             <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[100px] w-fit">
@@ -129,6 +178,60 @@ export const AppointmentPdfCard = ({
               <span className="text-base text-[#5C5C5C] font-nomal">
                 {user?.fullName}
               </span>
+            </div>
+            <div className="flex justify-between gap-x-3 items-center mt-2 md:mt-0">
+              <div className="flex items-center gap-[11px] min-w-[100px]">
+                <span className="font-normal text-[#848484] text-sm mlg:text-base">
+                  {translate("offers.card_content.images")}:
+                </span>
+
+                {!isLoad && (
+                  <span
+                    className="cursor-pointer"
+                    onClick={(e) =>
+                      handleUploadImages(
+                        details?.leadID?.id || "",
+                        details?.leadID?.refID || "",
+                        name || "",
+                        heading,
+                        e
+                      )
+                    }
+                  >
+                    <ImageUploadIcon
+                      pathClass={
+                        details?.leadID?.isImageAdded ? "#FF0000" : "#4A13E7"
+                      }
+                    />
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-[11px]">
+                <span className="font-normal text-[#848484] text-sm mlg:text-base">
+                  {translate("offers.card_content.notes")}:
+                </span>
+
+                {!isLoad && (
+                  <span
+                    className="cursor-pointer"
+                    onClick={(e) =>
+                      handleNotes(
+                        details?.id || "",
+                        details?.leadID?.refID || "",
+                        name || "",
+                        heading,
+                        e
+                      )
+                    }
+                  >
+                    <WriteIcon
+                      pathClass={
+                        details?.leadID?.isNoteCreated ? "#FF0000" : "#4A13E7"
+                      }
+                    />
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>

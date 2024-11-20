@@ -10,6 +10,7 @@ import AppointmentPdfPreview from "@/components/pdf/appointment-pdf/appointment-
 import { Container } from "@/components/pdf/container";
 import { useAppSelector } from "@/hooks/useRedux";
 import { useRouter } from "next/router";
+import { useReportDetails } from "@/hooks/appointments/useReportDetail";
 
 export const ReportPdfPreview = () => {
   const router = useRouter();
@@ -27,6 +28,14 @@ export const ReportPdfPreview = () => {
     loading,
   } = useReportUpdatedPdf();
 
+  const {
+    handleNotes,
+    handleUploadImages,
+    appointmentDetails: details,
+    renderModal,
+    isLoading: isLoad,
+  } = useReportDetails();
+
   const path = router.asPath;
   const isAgent = path.startsWith("/agent/");
 
@@ -42,6 +51,10 @@ export const ReportPdfPreview = () => {
             appointmentDetails={reportDetails}
             onDownload={handleDonwload}
             onPrint={handlePrint}
+            handleUploadImages={handleUploadImages}
+            details={details}
+            handleNotes={handleNotes}
+            isLoad={isLoad}
           />
 
           {!isAgent && (
@@ -65,6 +78,8 @@ export const ReportPdfPreview = () => {
           )}
         </>
       )}
+
+      {renderModal()}
     </div>
   );
 };
