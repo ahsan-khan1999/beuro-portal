@@ -301,14 +301,10 @@ export const useCreateReportAddressDetails = ({
           step: 1,
           appointmentID: reportDetails?.appointmentID?.id,
           companyName: data?.companyName,
-          desireDate: data?.desireDate,
         };
 
         if (apiData.customerType === 0) {
           delete apiData?.companyName;
-        }
-        if (!apiData?.desireDate || apiData?.desireDate == "Invalid date") {
-          delete apiData?.desireDate;
         }
 
         const response = await dispatch(
@@ -330,14 +326,10 @@ export const useCreateReportAddressDetails = ({
           step: 1,
           appointmentID: appointmentDetails?.id,
           companyName: data?.companyName,
-          desireDate: data?.desireDate,
         };
 
         if (apiData.customerType === 0) {
           delete apiData?.companyName;
-        }
-        if (!apiData?.desireDate || apiData?.desireDate == "Invalid date") {
-          delete apiData?.desireDate;
         }
 
         const response = await dispatch(

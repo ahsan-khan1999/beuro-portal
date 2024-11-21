@@ -25,6 +25,9 @@ export enum ReportContactDetailsFieldsId {
   parkingPermit = "parkingPermit",
   desireDate = "desireDate",
   mobileNumber = "mobileNumber",
+  date = "date",
+  startDate = "startDate",
+  endDate = "endDate",
 }
 
 export enum HouseDetailsFieldsId {
