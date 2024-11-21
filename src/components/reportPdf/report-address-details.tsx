@@ -60,9 +60,9 @@ export const ReportAddressDetails = ({
                     paddingRight: 30,
                   }}
                 >
-                  {`${address.streetNumber}, ${address.postalCode}, ${[
-                    (address.country as keyof typeof Country) || "",
-                  ]}`}
+                  {address.streetNumber && `${address.streetNumber},`}
+                  {address.postalCode && `${address.postalCode},`}
+                  {`${[(address.country as keyof typeof Country) || ""]}`}
                   {address.description && ` - ${address.description}`}
                 </Text>
               </GridItem>
@@ -70,39 +70,41 @@ export const ReportAddressDetails = ({
           ))}
         </View>
       }
-      <DateRow>
-        <GridItem width={labelWidth}>
-          <Text
-            style={{
-              fontSize: 7,
-              fontWeight: 500,
-              fontStyle: "medium",
-              color: "#000",
-            }}
-          >
-            {workDates?.length === 1
-              ? translate("pdf.work_date")
-              : translate("pdf.work_dates")}
-            :
-          </Text>
-        </GridItem>
+      {workDates && workDates?.length > 0 && (
+        <DateRow>
+          <GridItem width={labelWidth}>
+            <Text
+              style={{
+                fontSize: 7,
+                fontWeight: 500,
+                fontStyle: "medium",
+                color: "#000",
+              }}
+            >
+              {workDates?.length === 1
+                ? translate("pdf.work_date")
+                : translate("pdf.work_dates")}
+              :
+            </Text>
+          </GridItem>
 
-        <GridItem width={valueWidth}>
-          <Text style={{ ...styles.dateText, paddingRight: 30 }}>
-            {workDates?.map(
-              (date, index) =>
-                `${formatDateTimeToDate(date.startDate)}${
-                  date.endDate
-                    ? " bis " +
-                      formatDateTimeToDate(date.endDate) +
-                      ((workDates?.length - 1 != index && ", ") || ".")
-                    : (workDates?.length - 1 != index && ", ") || "."
-                }`
-            )}
-            {time && ` Um ` + time + " Uhr"}
-          </Text>
-        </GridItem>
-      </DateRow>
+          <GridItem width={valueWidth}>
+            <Text style={{ ...styles.dateText, paddingRight: 30 }}>
+              {workDates?.map(
+                (date, index) =>
+                  `${formatDateTimeToDate(date.startDate)}${
+                    date.endDate
+                      ? " bis " +
+                        formatDateTimeToDate(date.endDate) +
+                        ((workDates?.length - 1 != index && ", ") || ".")
+                      : (workDates?.length - 1 != index && ", ") || "."
+                  }`
+              )}
+              {time && ` Um ` + time + " Uhr"}
+            </Text>
+          </GridItem>
+        </DateRow>
+      )}
     </View>
   );
 };

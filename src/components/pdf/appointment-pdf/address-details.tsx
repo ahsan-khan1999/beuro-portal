@@ -51,44 +51,60 @@ const AddressDetails: React.FC<ReportAddressDetailsProps> = ({
               {item.label}:
             </div>
 
-            <div
-              className="text-xs font-normal text-black"
-              style={{ width: `${valueWidth}px` }}
-            >
-              {`${item.streetNumber || ""}, ${item.postalCode || ""}, ${
-                Country[item.country || ""] || ""
-              }`}
-              {item.description && ` - ${item.description}`}
+            <div className="flex gap-1" style={{ width: `${valueWidth}px` }}>
+              {item.streetNumber && (
+                <span className="text-xs font-normal text-black ">
+                  {item.streetNumber + ","}
+                </span>
+              )}
+              {item.postalCode && (
+                <span className="text-xs font-normal text-black ">
+                  {item.postalCode + ","}
+                </span>
+              )}
+
+              {item.country && (
+                <span className="text-xs font-normal text-black ">
+                  {Country[item.country]}
+                </span>
+              )}
+              {item.description && (
+                <span className="text-xs font-normal text-black ">
+                  {"- " + item.description}
+                </span>
+              )}
             </div>
           </div>
         ))}
       </div>
-      <div className="flex flex-row gap-1">
-        <span className="min-w-[105px] mt-2 text-xs font-medium text-black">
-          {workDates?.length === 1
-            ? translate("pdf.work_date")
-            : translate("pdf.work_dates")}
-          :
-        </span>
-        <div className="flex flex-row flex-wrap mt-2 max-w-[850px]">
-          <span className="text-xs font-medium text-black">
-            {workDates?.map(
-              (item, index) =>
-                `${formatDateTimeToDate(item.startDate)}${
-                  item.endDate
-                    ? ` ${translate("contracts.card_content.to")} ` +
-                      formatDateTimeToDate(item.endDate) +
-                      ((workDates?.length - 1 != index && ", ") || ".")
-                    : (workDates?.length - 1 != index && ", ") || "."
-                }`
-            )}
-            {time &&
-              ` ${translate("common.at")} ` +
-                time +
-                ` ${translate("common.clock")} `}
+      {workDates && workDates?.length > 0 && (
+        <div className="flex flex-row gap-1">
+          <span className="min-w-[105px] mt-2 text-xs font-medium text-black">
+            {workDates?.length === 1
+              ? translate("pdf.work_date")
+              : translate("pdf.work_dates")}
+            :
           </span>
+          <div className="flex flex-row flex-wrap mt-2 max-w-[850px]">
+            <span className="text-xs font-medium text-black">
+              {workDates?.map(
+                (item, index) =>
+                  `${formatDateTimeToDate(item.startDate)}${
+                    item.endDate
+                      ? ` ${translate("contracts.card_content.to")} ` +
+                        formatDateTimeToDate(item.endDate) +
+                        ((workDates?.length - 1 != index && ", ") || ".")
+                      : (workDates?.length - 1 != index && ", ") || "."
+                  }`
+              )}
+              {time &&
+                ` ${translate("common.at")} ` +
+                  time +
+                  ` ${translate("common.clock")} `}
+            </span>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

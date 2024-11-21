@@ -148,20 +148,25 @@ const CreateReportDetails = () => {
 
   const handleReportSuccessRoute = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
-
+    const query = router.query;
+    delete query.report;
+    delete query.tab;
     if (companyAppointment) {
+      // if (router.query.today) {
+      //   query.today = router.query.today;
+      // }
+      // if (router.query.status && router.query.status != "None") {
+      //   query.status = router.query.status;
+      // }
       router.push({
         pathname: "/appointments",
-        query: { status: "None" },
+        query: query,
       });
     } else {
+      query.reportId = reportDetails?.appointmentID?.id;
       router.push({
         pathname: "/agent/appointments/pdf",
-        query: {
-          today: router.query.today,
-          status: "None",
-          reportId: reportDetails?.appointmentID?.id,
-        },
+        query: query,
       });
     }
 
