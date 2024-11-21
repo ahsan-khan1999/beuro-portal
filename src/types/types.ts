@@ -406,7 +406,9 @@ export type GenerateScheduleAppointmentsFormField = (
     onClick?: Function;
     handleChangeTimeField?: (type: string, date: string) => void;
   },
-  trigger?: UseFormTrigger<FieldValues>
+  append?: UseFieldArrayAppend<FieldValues, "date">,
+  count?: number,
+  remove?: UseFieldArrayRemove
 ) => FormField[];
 
 // Notes formfield
@@ -1034,6 +1036,16 @@ export type CustAddressFormField = (
   loader: boolean,
   control: Control<FieldValues>,
   setCurrentFormStage?: stateDispatch<SetStateAction<string>>
+) => FormField[];
+
+export type GenerateAppointmentDateFormField = (
+  register: UseFormRegister<FieldValues>,
+  dateAppend: UseFieldArrayAppend<FieldValues, "date">,
+  count: number,
+  dateRemove: UseFieldArrayRemove,
+  loading?: boolean,
+  control?: Control<FieldValues>,
+  workDates?: { startDate: string; endDate: string }[]
 ) => FormField[];
 
 export type GenerateHouseDetailReportFormField = (

@@ -1,3 +1,5 @@
+import { DateRangeProps } from "@/types";
+import { formatDateTimeToDate } from "@/utils/utility";
 import React from "react";
 
 export const Country: Record<string, string> = {
@@ -18,10 +20,15 @@ interface Address {
 
 interface ReportAddressDetailsProps {
   address?: Address[];
+  workDates?: DateRangeProps[];
+  isOffer?: boolean;
+  time?: string;
 }
 
 const AddressDetails: React.FC<ReportAddressDetailsProps> = ({
   address = [],
+  workDates,
+  time,
 }) => {
   let maxLength = 0;
   for (const item of address) {
@@ -33,19 +40,19 @@ const AddressDetails: React.FC<ReportAddressDetailsProps> = ({
   const valueWidth = 595 - labelWidth; // Remaining width for value
 
   return (
-    <div className="py-5">
+    <div className="pb-5">
       <div className="flex flex-col space-y-3">
         {address.map((item, index) => (
           <div key={index} className="flex">
             <div
-              className="text-xs font-medium text-black"
+              className="text-xs font-medium text-black min-w-[110px]"
               style={{ width: `${labelWidth}px` }}
             >
               {item.label}:
             </div>
 
             <div
-              className="text-xs font-normal text-black pr-8"
+              className="text-xs font-normal text-black"
               style={{ width: `${valueWidth}px` }}
             >
               {`${item.streetNumber || ""}, ${item.postalCode || ""}, ${
@@ -55,6 +62,32 @@ const AddressDetails: React.FC<ReportAddressDetailsProps> = ({
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex flex-row gap-1">
+        <span className="min-w-[105px] mt-2 text-xs font-medium text-black">
+          {workDates?.length === 1
+            ? translate("pdf.work_date")
+            : translate("pdf.work_dates")}
+          :
+        </span>
+        <div className="flex flex-row flex-wrap mt-2 max-w-[850px]">
+          <span className="text-xs font-medium text-black">
+            {workDates?.map(
+              (item, index) =>
+                `${formatDateTimeToDate(item.startDate)}${
+                  item.endDate
+                    ? ` ${translate("contracts.card_content.to")} ` +
+                      formatDateTimeToDate(item.endDate) +
+                      ((workDates?.length - 1 != index && ", ") || ".")
+                    : (workDates?.length - 1 != index && ", ") || "."
+                }`
+            )}
+            {time &&
+              ` ${translate("common.at")} ` +
+                time +
+                ` ${translate("common.clock")} `}
+          </span>
+        </div>
       </div>
     </div>
   );

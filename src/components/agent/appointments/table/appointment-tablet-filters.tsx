@@ -9,6 +9,7 @@ import { staticEnums } from "@/utils/static";
 import CheckField from "@/base-components/filter/fields/check-field";
 import BooleanSelectField from "@/base-components/filter/fields/boolean-select-field";
 import { CustomDatePciker } from "@/base-components/ui/custom-date-picker";
+import LeadsFilters from "@/base-components/filter/leads-filter";
 
 export default function AppointmentsTabletFilters({
   filter,
@@ -278,6 +279,12 @@ export default function AppointmentsTabletFilters({
             onInputChange={onDateChange}
           />
         </div>
+        <LeadsFilters
+          filter={filter}
+          setFilter={setFilter}
+          onFilterChange={handleFilterChange}
+          containerClassName="z-0"
+        />
       </div>
     </div>
   );

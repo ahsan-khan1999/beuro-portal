@@ -26,6 +26,7 @@ import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { readImage, setImages } from "@/api/slices/imageSlice/image";
 
 export const useReportDetails = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ export const useReportDetails = () => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const id = router.query.reportId || router.query.appointment;
 
-  const { isLoading, loading, reportDetails, appointmentDetails } =
+  const { isLoading, loading, reportDetails, appointmentDetails, appointment } =
     useAppSelector((state) => state.appointment);
 
   useEffect(() => {
@@ -199,16 +200,16 @@ export const useReportDetails = () => {
     heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e?.stopPropagation();
+    if (e) {
+      e?.stopPropagation();
+    }
+    dispatch(setImages([]));
+
+    dispatch(readImage({ params: { type: "leadID", id: id } }));
     dispatch(
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
-        data: {
-          id: appointmentDetails?.leadID?.id,
-          refID: refID,
-          name: name,
-          heading: heading,
-        },
+        data: { id: id, refID: refID, name: name, heading: heading },
       })
     );
   };

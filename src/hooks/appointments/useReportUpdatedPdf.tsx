@@ -141,7 +141,6 @@ export const useReportUpdatedPdf = () => {
               emailTemplateSettings: emailTemplate?.payload,
               isReverseLogo: template.payload.Template?.order,
               fileType: "report",
-              desireDate: reportDetails?.desireDate,
             },
             contactAddress: {
               address: {
@@ -154,7 +153,6 @@ export const useReportUpdatedPdf = () => {
               email: reportDetails?.customerDetail?.email,
               customerType: reportDetails?.customerDetail?.customerType,
               companyName: reportDetails?.customerDetail?.companyName,
-              desireDate: reportDetails?.desireDate,
               phone: reportDetails?.customerDetail?.phoneNumber,
               mobile: reportDetails?.customerDetail?.mobileNumber,
               gender: reportDetails?.customerDetail?.gender?.toString(),
@@ -162,6 +160,7 @@ export const useReportUpdatedPdf = () => {
             },
             movingDetails: {
               address: reportDetails?.addressID?.address,
+              workDates: reportDetails?.date,
             },
             houseDetails: {
               livingRoomDetails: {
