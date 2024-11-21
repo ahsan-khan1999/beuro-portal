@@ -2503,6 +2503,8 @@
       "desire_date": "Desire Date",
       "gender": "Gender",
       "description": "Description",
+      "start_date": "Start Date",
+      "end_date": "End Date",
       "placeholder": {
         "company_name": "Enter Company Neme"
       }

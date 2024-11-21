@@ -154,7 +154,7 @@ export const DocumentHeader = ({
                 {createdBy}
               </span>
             </div>
-            {desireDate && (
+            {/* {desireDate && (
               <div className="flex gap-[5px]">
                 <span
                   className={`text-[${textColor}] text-sm font-medium`}
@@ -169,7 +169,7 @@ export const DocumentHeader = ({
                   {convertUTCToLocalDate(desireDate)}
                 </span>
               </div>
-            )}
+            )} */}
           </div>
         </>
       )}

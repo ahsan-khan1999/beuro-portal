@@ -140,7 +140,7 @@ const ReportPdf = ({
   lang,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
-  const { address } = data?.movingDetails || {};
+  const { address, workDates } = data?.movingDetails || {};
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
   const livingRoomDetails = data?.houseDetails?.livingRoomDetails;
@@ -763,7 +763,7 @@ const ReportPdf = ({
         <Header {...headerDetails} language={lang} />
 
         <ContactAddress {...{ ...contactAddress, language: lang }} />
-        <ReportAddressDetails {...{ address }} language={lang} />
+        <ReportAddressDetails {...{ address, workDates }} language={lang} />
 
         <ServiceTableHederRow
           isDiscount={isDiscount}

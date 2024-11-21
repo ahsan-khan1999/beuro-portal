@@ -120,16 +120,37 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
               {reportDetail?.customerDetail?.mobileNumber}
             </div>
           </div>
-          {/* <div className="flex flex-col gap-y-1">
+
+          {reportDetail?.date?.map((item, index) => (
+            <div key={index} className="flex flex-col gap-y-1">
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-6 flex flex-col gap-y-1">
+                  <label className="text-[#344054] text-sm font-medium">
+                    {translate("agent.report_contact_fields.start_date")}
+                  </label>
+                  <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                    {convertUTCToLocalDate(item?.startDate)}
+                  </div>
+                </div>
+                <div className="col-span-6 flex flex-col gap-y-1">
+                  <label className="text-[#344054] text-sm font-medium">
+                    {translate("agent.report_contact_fields.end_date")}
+                  </label>
+                  <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                    {convertUTCToLocalDate(item?.endDate)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="flex flex-col gap-y-1">
             <label className="text-[#344054] text-sm font-medium">
-              {translate("agent.report_contact_fields.desire_date")}
+              {translate("common.time")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
-              {reportDetail?.desireDate
-                ? convertUTCToLocalDate(reportDetail?.desireDate)
-                : ""}
+              {reportDetail?.time || "08:00"}
             </div>
-          </div> */}
+          </div>
         </div>
 
         <h4 className="text-base font-medium xMini:font-semibold text-[#1E1E1E] mb-2">

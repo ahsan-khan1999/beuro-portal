@@ -79,6 +79,7 @@ const AppointmentPdfPreview = <T,>({
   templateSettings,
   language,
 }: AppointProps) => {
+  console.log("pdfData:", pdfData);
   const isDiscount =
     pdfData?.serviceItemFooter?.serviceDiscountSum &&
     Number(pdfData?.serviceItemFooter?.serviceDiscountSum) > 0
@@ -86,7 +87,7 @@ const AppointmentPdfPreview = <T,>({
       : false || false;
 
   const headerDetails = pdfData?.headerDetails;
-  const { address } = pdfData?.movingDetails || {};
+  const { address, workDates } = pdfData?.movingDetails || {};
   const serviceItem = pdfData?.serviceItem;
   const serviceItemFooter = pdfData?.serviceItemFooter;
   const livingRoomDetails = pdfData?.houseDetails?.livingRoomDetails;
@@ -98,7 +99,6 @@ const AppointmentPdfPreview = <T,>({
   const basementAtticDetails = pdfData?.houseDetails?.basementAtticDetails;
   const specialItemsDetails = pdfData?.houseDetails?.specialItemsDetails;
   const offerDetails = pdfData?.offerDetails;
-  const contactAddress = pdfData?.contactAddress;
 
   const langContent = {
     en: {
@@ -706,7 +706,7 @@ const AppointmentPdfPreview = <T,>({
         />
         <div className="px-[80px] flex flex-col bg-white">
           <ContactDetails {...{ ...pdfData?.contactAddress, language }} />
-          <AddressDetails {...{ address }} />
+          <AddressDetails {...{ address, workDates }} />
 
           <ServiceHeader isDiscount={isDiscount} />
           {pdfData?.serviceItem?.map((item, index) => (

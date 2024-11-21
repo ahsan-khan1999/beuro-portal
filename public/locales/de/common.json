@@ -2498,6 +2498,8 @@
       "add_new_address": "Neue Adresse hinzufügen",
       "gender": "Anrede",
       "description": "Beschreibung",
+      "start_date": "Startdatum",
+      "end_date": "Enddatum",
       "placeholder": {
         "company_name": "Bitte geben Sie den Firmennamen ein"
       }
