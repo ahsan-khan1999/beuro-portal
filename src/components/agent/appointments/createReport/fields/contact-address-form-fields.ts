@@ -456,8 +456,23 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
       field: {
         type: Field.div,
         id: "div-field",
-        className: "flex justify-between flex-row-reverse",
+        className: "flex flex-col sm:flex-row gap-4 justify-between",
         children: [
+          {
+            containerClass: "mb-0",
+            field: {
+              type: Field.button,
+              id: "button",
+              text: translate("agent.report_contact_fields.add_new_address"),
+              inputType: "button",
+              className:
+                "rounded-lg px-4 w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
+              // loading,
+              onClick: () => {
+                handleAddNewAddress && handleAddNewAddress();
+              },
+            },
+          },
           {
             field: {
               type: Field.div,
@@ -489,21 +504,6 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                   },
                 },
               ],
-            },
-          },
-          {
-            containerClass: "mb-0",
-            field: {
-              type: Field.button,
-              id: "button",
-              text: translate("agent.report_contact_fields.add_new_address"),
-              inputType: "button",
-              className:
-                "rounded-lg px-4 min-w-[100px] xMini:min-w-[152px] w-fit !h-10 xMini:!h-[50px] text-white hover:bg-none",
-              // loading,
-              onClick: () => {
-                handleAddNewAddress && handleAddNewAddress();
-              },
             },
           },
         ],
