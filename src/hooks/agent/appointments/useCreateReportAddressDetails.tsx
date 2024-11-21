@@ -144,7 +144,7 @@ export const useCreateReportAddressDetails = ({
                 "Adresse"
               ),
               date: response?.payload?.date,
-              time: response?.payload?.time,
+              time: response?.payload?.time || "08:00",
             });
 
             reset(transformedData);
@@ -179,7 +179,7 @@ export const useCreateReportAddressDetails = ({
           "Adresse"
         ),
         date: reportDetails?.date,
-        time: reportDetails?.time,
+        time: reportDetails?.time || "08:00",
       });
 
       reset(transformedData);
@@ -217,7 +217,7 @@ export const useCreateReportAddressDetails = ({
               "Adresse"
             ),
             date: response?.payload?.leadID?.date,
-            time: response?.payload?.leadID?.time,
+            time: response?.payload?.leadID?.time || "08:00",
           });
 
           reset(transformedData);
