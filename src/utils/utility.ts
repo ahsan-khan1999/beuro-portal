@@ -820,91 +820,73 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
   let ln = lang as keyof typeof lnContent;
 
   if (room?.washingMachine) {
-    if (ln in lnContent && "washMachine" in lnContent[ln]) {
-      const name =
-        lnContent[ln]["washMachine" as keyof (typeof lnContent)["en"]];
-      items.push({
-        icon: washMacIcon,
-        name: name,
-        quantity: room?.washingMachine,
-      });
-    }
+    const name = lnContent[ln]["washMachine" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: washMacIcon,
+      name: name || "",
+      quantity: room?.washingMachine,
+    });
   }
   if (room?.tumbler) {
-    if (ln in lnContent && "tumbler" in lnContent[ln]) {
-      const name = lnContent[ln]["tumbler" as keyof (typeof lnContent)["en"]];
-      items.push({
-        icon: tumblerIcon,
-        name: name,
-        quantity: room?.tumbler,
-      });
-    }
+    const name = lnContent[ln]["tumbler" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: tumblerIcon,
+      name: name || "",
+      quantity: room?.tumbler,
+    });
   }
 
   if (room?.shelf) {
-    if (ln in lnContent && "shelf" in lnContent[ln]) {
-      const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
-      items.push({
-        icon: shelfIcon,
-        name: name,
-        quantity: room?.shelf,
-      });
-    }
+    const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: shelfIcon,
+      name: name || "",
+      quantity: room?.shelf,
+    });
   }
   if (room?.disposal) {
-    if (ln in lnContent && "base_disposible" in lnContent[ln]) {
-      const name =
-        lnContent[ln]["base_disposible" as keyof (typeof lnContent)["en"]];
-      items.push({
-        icon: disposibleIcon,
-        name: name,
-        quantity: room?.disposal,
-      });
-    }
+    const name =
+      lnContent[ln]["base_disposible" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: disposibleIcon,
+      name: name || "",
+      quantity: room?.disposal,
+    });
   }
   if (room?.bicycle) {
-    if (ln in lnContent && "base_cycle" in lnContent[ln]) {
-      const name =
-        lnContent[ln]["base_cycle" as keyof (typeof lnContent)["en"]];
-      items.push({
-        icon: cycleIcon,
-        name: name,
-        quantity: room?.bicycle,
-      });
-    }
+    const name = lnContent[ln]["base_cycle" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: cycleIcon,
+      name: name || "",
+      quantity: room?.bicycle,
+    });
   }
   if (room?.stroller) {
-    if (ln in lnContent && "out_stroller" in lnContent[ln]) {
-      const name =
-        lnContent[ln]["out_stroller" as keyof (typeof lnContent)["en"]];
-      items.push({
-        icon: chilWalkerIcon,
-        name: name,
-        quantity: room?.stroller,
-      });
-    }
+    const name =
+      lnContent[ln]["base_stroller" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: chilWalkerIcon,
+      name: name || "",
+      quantity: room?.stroller,
+    });
   }
   if (room?.furniture) {
-    if (ln in lnContent && "out_furniture" in lnContent[ln]) {
-      const name =
-        lnContent[ln]["out_furniture" as keyof (typeof lnContent)["en"]];
-      items.push({
-        icon: mobelIcon,
-        name: name,
-        quantity: room?.furniture,
-      });
-    }
+    const name =
+      lnContent[ln]["base_furniture" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: mobelIcon,
+      name: name || "",
+      quantity: room?.furniture,
+    });
   }
 
   if (room?.boxes) {
-    if (ln in lnContent && "boxes" in lnContent[ln]) {
-      const name = lnContent[ln]["boxes" as keyof (typeof lnContent)["en"]];
-      items.push({
-        icon: boxIcon,
-        name: name,
-        quantity: room?.boxes,
-      });
-    }
+    const name = lnContent[ln]["base_boxes" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: boxIcon,
+      name: name || "",
+      quantity: room?.boxes,
+    });
   }
 
   return items;
@@ -1480,8 +1462,9 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
     }
   }
   if (room?.LSofa) {
-    if (ln in lnContent && "lSofa" in lnContent[ln]) {
-      const name = lnContent[ln]["lSofa" as keyof (typeof lnContent)["en"]];
+    if (ln in lnContent && "living_lSofa" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["living_lSofa" as keyof (typeof lnContent)["en"]];
       items.push({
         icon: lSofaIcon,
         name: name,
