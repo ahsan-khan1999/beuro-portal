@@ -78,10 +78,15 @@ export const ContactDetails = ({
                 )}
                 <span className="text-sm font-medium">{name}</span>
               </div>
-              <span className="text-sm font-medium">{streetWithNumber}</span>
-              <span className="text-sm font-medium">
-                {postalCode} {city || ""}
-              </span>
+              {streetWithNumber && (
+                <span className="text-sm font-medium">{streetWithNumber}</span>
+              )}
+              <div className="flex gap-1">
+                {postalCode && (
+                  <span className="text-sm font-medium">{postalCode}</span>
+                )}
+                {city && <span className="text-sm font-medium">{city}</span>}
+              </div>
             </div>
           </div>
         </>
@@ -104,34 +109,30 @@ export const ContactDetails = ({
               <span className="text-sm font-medium">{name}</span>
             </div>
 
-            <span className="text-sm font-medium">{streetWithNumber}</span>
-            <span className="text-sm font-medium">
-              {postalCode} {city || ""}
-            </span>
+            {streetWithNumber && (
+              <span className="text-sm font-medium">{streetWithNumber}</span>
+            )}
+            <div className="flex gap-1">
+              {postalCode && (
+                <span className="text-sm font-medium">{postalCode}</span>
+              )}
+              {city && <span className="text-sm font-medium">{city}</span>}
+            </div>
           </div>
 
           <div className="flex flex-col gap-y-[0px] col-span-1 ml-[6px]">
             {email && (
               <div className="space-x-0">
-                {/* <span className="text-sm font-medium">
-                  {translation("pdf.email")} :
-                </span> */}
                 <span className=" text-sm font-medium">{email}</span>
               </div>
             )}
             {phone !== "+" && phone && (
               <div className="space-x-0">
-                {/* <span className="text-[#404040] text-sm font-medium">
-                  {translation("pdf.phone")} :
-                </span> */}
                 <span className="text-sm font-medium">{phone}</span>
               </div>
             )}
             {mobile !== "+" && mobile && (
               <div className="space-x-0">
-                {/* <span className="text-[#404040] text-sm font-medium">
-                  {translation("pdf.mobile")} :
-                </span> */}
                 <span className="text-sm font-medium">{mobile}</span>
               </div>
             )}
