@@ -42,9 +42,7 @@ export const HouseItemWrapper: React.FC<HouseItemWrapperProps> = ({
 
       <HouseItemHeader language={language} />
 
-      <div
-        className={`flex flex-wrap justify-between gap-y-4 pb-6 ${className}`}
-      >
+      <div className={`flex flex-wrap gap-y-4 pb-6 ${className}`}>
         {items.map((item, index) => (
           <div key={index} className="w-1/3 pr-6">
             <HouseItem
