@@ -116,7 +116,10 @@ export const AppointmentTableRows = ({
               }   grid grid-cols-12  items-center gap-x-2 bg-primary rounded-lg px-2 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
             >
               <div className="col-span-2">
-                <span className="text-sm">
+                <span className="text-sm hidden md:flex">
+                  {item.leadID?.customerDetail?.fullName}
+                </span>
+                <span className="text-sm flex md:hidden">
                   {item.leadID?.customerDetail?.fullName?.length > 12
                     ? item.leadID?.customerDetail?.fullName.slice(0, 12) + ".."
                     : item.leadID?.customerDetail?.fullName}
@@ -124,7 +127,10 @@ export const AppointmentTableRows = ({
               </div>
 
               <div className="col-span-2">
-                <span className="text-sm truncate">
+                <span className="text-sm hidden md:flex">
+                  {item.leadID?.customerDetail?.companyName}
+                </span>
+                <span className="text-sm flex md:hidden">
                   {item.leadID?.customerDetail?.companyName?.length > 12
                     ? item.leadID?.customerDetail?.companyName.slice(0, 12) +
                       ".."
