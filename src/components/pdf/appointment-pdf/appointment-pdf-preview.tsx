@@ -123,118 +123,128 @@ const AppointmentPdfPreview = <T,>({
           emailTemplateSettings={emailTemplateSettings}
         />
       </div>
-      <div className="mb-10 bg-white">
-        <DocumentHeader
-          {...pdfData?.headerDetails}
-          emailTemplateSettings={emailTemplateSettings}
-        />
-        <div className="px-[80px]">
-          {getLivingRoom(language || "", livingRoomDetails)?.length > 0 && (
-            <HouseItemWrapper
-              mainHeading={
-                langContent[language as keyof typeof langContent]
-                  ?.livingRoomHeading
-              }
-              description={livingRoomDetails?.descriptions}
-              items={getLivingRoom(language || "", livingRoomDetails)}
-              language={language}
-              className="border-b border-b-[#ccc]"
-            />
-          )}
-          {getKitchenRoom(language || "", kitchenDetails)?.length > 0 && (
-            <HouseItemWrapper
-              mainHeading={
-                langContent[language as keyof typeof langContent]
-                  ?.kitchenHeading
-              }
-              description={kitchenDetails?.descriptions}
-              items={getKitchenRoom(language || "", kitchenDetails)}
-              language={language}
-              className="border-b border-b-[#ccc]"
-            />
-          )}
-          {getBedRoom(language || "", bedRoomDetails)?.length > 0 && (
-            <HouseItemWrapper
-              mainHeading={
-                langContent[language as keyof typeof langContent]
-                  ?.bedRoomHeading
-              }
-              description={bedRoomDetails?.descriptions}
-              items={getBedRoom(language || "", bedRoomDetails)}
-              language={language}
-              className="border-b border-b-[#ccc]"
-            />
-          )}
-          {getRoom(language || "", roomDetails)?.length > 0 && (
-            <HouseItemWrapper
-              mainHeading={
-                langContent[language as keyof typeof langContent]?.roomHeading
-              }
-              description={roomDetails?.descriptions}
-              items={getRoom(language || "", roomDetails)}
-              language={language}
-              className="border-b border-b-[#ccc]"
-            />
-          )}
+      {(getLivingRoom(language || "", livingRoomDetails)?.length > 0 ||
+        getKitchenRoom(language || "", kitchenDetails)?.length > 0 ||
+        getBedRoom(language || "", bedRoomDetails)?.length > 0 ||
+        getRoom(language || "", roomDetails)?.length > 0 ||
+        getOutdoorRoom(language || "", outDoorDetails)?.length > 0 ||
+        getBasement(language || "", basementAtticDetails)?.length > 0 ||
+        getSpecialRoom(language || "", specialItemsDetails)?.length > 0 ||
+        generalRooms().length > 0) && (
+        <div className="mb-10 bg-white">
+          <DocumentHeader
+            {...pdfData?.headerDetails}
+            emailTemplateSettings={emailTemplateSettings}
+          />
+          <div className="px-[80px]">
+            {getLivingRoom(language || "", livingRoomDetails)?.length > 0 && (
+              <HouseItemWrapper
+                mainHeading={
+                  langContent[language as keyof typeof langContent]
+                    ?.livingRoomHeading
+                }
+                description={livingRoomDetails?.descriptions}
+                items={getLivingRoom(language || "", livingRoomDetails)}
+                language={language}
+                className="border-b border-b-[#ccc]"
+              />
+            )}
+            {getKitchenRoom(language || "", kitchenDetails)?.length > 0 && (
+              <HouseItemWrapper
+                mainHeading={
+                  langContent[language as keyof typeof langContent]
+                    ?.kitchenHeading
+                }
+                description={kitchenDetails?.descriptions}
+                items={getKitchenRoom(language || "", kitchenDetails)}
+                language={language}
+                className="border-b border-b-[#ccc]"
+              />
+            )}
+            {getBedRoom(language || "", bedRoomDetails)?.length > 0 && (
+              <HouseItemWrapper
+                mainHeading={
+                  langContent[language as keyof typeof langContent]
+                    ?.bedRoomHeading
+                }
+                description={bedRoomDetails?.descriptions}
+                items={getBedRoom(language || "", bedRoomDetails)}
+                language={language}
+                className="border-b border-b-[#ccc]"
+              />
+            )}
+            {getRoom(language || "", roomDetails)?.length > 0 && (
+              <HouseItemWrapper
+                mainHeading={
+                  langContent[language as keyof typeof langContent]?.roomHeading
+                }
+                description={roomDetails?.descriptions}
+                items={getRoom(language || "", roomDetails)}
+                language={language}
+                className="border-b border-b-[#ccc]"
+              />
+            )}
 
-          {getOutdoorRoom(language || "", outDoorDetails)?.length > 0 && (
-            <HouseItemWrapper
-              mainHeading={
-                langContent[language as keyof typeof langContent]
-                  ?.outdoorHeading
-              }
-              description={outDoorDetails?.descriptions}
-              items={getOutdoorRoom(language || "", outDoorDetails)}
-              language={language}
-              className="border-b border-b-[#ccc]"
-            />
-          )}
-          {getBasement(language || "", basementAtticDetails)?.length > 0 && (
-            <HouseItemWrapper
-              mainHeading={
-                langContent[language as keyof typeof langContent]
-                  ?.basementHeading
-              }
-              description={basementAtticDetails?.descriptions}
-              items={getBasement(language || "", basementAtticDetails)}
-              language={language}
-              className="border-b border-b-[#ccc]"
-            />
-          )}
-          {getSpecialRoom(language || "", specialItemsDetails)?.length > 0 && (
-            <HouseItemWrapper
-              mainHeading={
-                langContent[language as keyof typeof langContent]
-                  ?.specialHeading
-              }
-              description={specialItemsDetails?.descriptions}
-              items={getSpecialRoom(language || "", specialItemsDetails)}
-              language={language}
-              className="border-b border-b-[#ccc]"
-            />
-          )}
-          {generalRooms() &&
-            generalRooms().map((item, index) => (
-              <div key={index}>
-                <DynamicItemWrapper
-                  generalRoom={item}
-                  language={language}
-                  className={
-                    Number(index) === generalRooms().length - 1
-                      ? ""
-                      : "border-b border-b-[#ccc]"
-                  }
-                />
-              </div>
-            ))}
+            {getOutdoorRoom(language || "", outDoorDetails)?.length > 0 && (
+              <HouseItemWrapper
+                mainHeading={
+                  langContent[language as keyof typeof langContent]
+                    ?.outdoorHeading
+                }
+                description={outDoorDetails?.descriptions}
+                items={getOutdoorRoom(language || "", outDoorDetails)}
+                language={language}
+                className="border-b border-b-[#ccc]"
+              />
+            )}
+            {getBasement(language || "", basementAtticDetails)?.length > 0 && (
+              <HouseItemWrapper
+                mainHeading={
+                  langContent[language as keyof typeof langContent]
+                    ?.basementHeading
+                }
+                description={basementAtticDetails?.descriptions}
+                items={getBasement(language || "", basementAtticDetails)}
+                language={language}
+                className="border-b border-b-[#ccc]"
+              />
+            )}
+            {getSpecialRoom(language || "", specialItemsDetails)?.length >
+              0 && (
+              <HouseItemWrapper
+                mainHeading={
+                  langContent[language as keyof typeof langContent]
+                    ?.specialHeading
+                }
+                description={specialItemsDetails?.descriptions}
+                items={getSpecialRoom(language || "", specialItemsDetails)}
+                language={language}
+                className="border-b border-b-[#ccc]"
+              />
+            )}
+            {generalRooms() &&
+              generalRooms().map((item, index) => (
+                <div key={index}>
+                  <DynamicItemWrapper
+                    generalRoom={item}
+                    language={language}
+                    className={
+                      Number(index) === generalRooms().length - 1
+                        ? ""
+                        : "border-b border-b-[#ccc]"
+                    }
+                  />
+                </div>
+              ))}
+          </div>
+          <Footer
+            {...pdfData?.footerDetails}
+            columnSettings={templateSettings}
+            currPage={undefined}
+            emailTemplateSettings={emailTemplateSettings}
+          />
         </div>
-        <Footer
-          {...pdfData?.footerDetails}
-          columnSettings={templateSettings}
-          currPage={undefined}
-          emailTemplateSettings={emailTemplateSettings}
-        />
-      </div>
+      )}
 
       <div className="mb-10 bg-white min-h-[100vh] flex flex-col justify-between">
         <div>
