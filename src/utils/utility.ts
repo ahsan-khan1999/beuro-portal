@@ -5,10 +5,18 @@ import {
 } from "@/api/slices/authSlice/auth";
 import {
   ApiResponseType,
+  BasementAtticDetailsProps,
   CheckProps,
+  DedRoomDetailsProps,
   Errors,
   FieldType,
   FilterType,
+  KitchenDetailsProps,
+  LivingRoomDetailsProps,
+  OutDoorDetailsProps,
+  RoomDetailsProps,
+  RoomObject,
+  SpecialItemsDetailsProps,
   User,
 } from "@/types";
 import { AsyncThunkAction } from "@reduxjs/toolkit";
@@ -26,6 +34,52 @@ import moment, { Moment } from "moment";
 import "moment/locale/de";
 import { TFunction } from "next-i18next";
 import { contractTableTypes } from "@/types/contract";
+import { StaticImageData } from "next/image";
+
+import shelfIcon from "@/assets/pngs/shelf.png";
+import sofaIcon from "@/assets/pngs/safe.png";
+import boxIcon from "@/assets/pngs/box.png";
+import armChairIcon from "@/assets/pngs/arm-chair.png";
+import lSofaIcon from "@/assets/pngs/l-sofa.png";
+import tvTableIcon from "@/assets/pngs/tv-table.png";
+import teacherDeskIcon from "@/assets/pngs/teacher-desk.png";
+import deskIcon from "@/assets/pngs/desk.png";
+import tvIcon from "@/assets/pngs/tv.png";
+import decoGrossIcon from "@/assets/pngs/deco-gross.png";
+import ovenIcon from "@/assets/pngs/oven.png";
+
+import aquairumIcon from "@/assets/pngs/aquarium.png";
+import poolIcon from "@/assets/pngs/pool.png";
+import washMacIcon from "@/assets/pngs/wash-machine.png";
+import coffeMacIcon from "@/assets/pngs/coffe-machine.png";
+import bedIcon from "@/assets/pngs/bed.png";
+import doublebedIcon from "@/assets/pngs/d-bed.png";
+import singWoodDrobeIcon from "@/assets/pngs/single-woodrobe.png";
+import medWoodDrobeIcon from "@/assets/pngs/medWoodDrobe.png";
+import largeWoodDrobeIcon from "@/assets/pngs/largeWoodDrobe.png";
+import pianoIcon from "@/assets/pngs/piano.png";
+import gymSportIcon from "@/assets/pngs/gym-exc.png";
+import gymEquIcon from "@/assets/pngs/gym-equ.png";
+import lampIcon from "@/assets/pngs/lamp.png";
+import electronicsIcon from "@/assets/pngs/electronics.png";
+import cycleIcon from "@/assets/pngs/cycle.png";
+import cupIcon from "@/assets/pngs/cup.png";
+import tumblerIcon from "@/assets/pngs/tumbler.png";
+import disposibleIcon from "@/assets/pngs/disposible.png";
+import mobelIcon from "@/assets/pngs/mobel.png";
+import chilWalkerIcon from "@/assets/pngs/child-walker.png";
+import chairIcon from "@/assets/pngs/chair.png";
+import grossyIcon from "@/assets/pngs/greenery.png";
+import plantIcon from "@/assets/pngs/flour.png";
+import umbellaIcon from "@/assets/pngs/umbella.png";
+import grillIcon from "@/assets/pngs/grill.png";
+import tableIcon from "@/assets/pngs/table.png";
+import macupTableIcon from "@/assets/pngs/macUpTable.png";
+import freezerIcon from "@/assets/pngs/freezer.png";
+import refrigeratorIcon from "@/assets/pngs/refregirator.png";
+import microOvenIcon from "@/assets/pngs/micro-oven.png";
+import herdIcon from "@/assets/pngs/herd.png";
+import safeIcon from "@/assets/pngs/safe-icon.png";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -498,6 +552,1085 @@ export const handleUtcDateChange = (
   //   delete router?.query?.sort;
   // }
   updateQuery(router, router.locale as string);
+};
+
+export const isRoomNotEmpty = (item: RoomObject) => {
+  if (
+    item.label1Value ||
+    item.label2Value ||
+    item.label3Value ||
+    item.label4Value ||
+    item.label5Value ||
+    item.label6Value ||
+    item.label7Value ||
+    item.label8Value ||
+    item.label9Value ||
+    item.label10Value
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+interface ResultItem {
+  name: string;
+  quantity?: number;
+  icon: StaticImageData;
+}
+
+const drContent = {
+  en: {
+    label1: "Sofa",
+    label2: "Teacher Desk",
+    label3: "TV Table",
+    label4: "Arm Chair",
+    label5: "Table",
+    label6: "Shelf",
+    label7: "L Sofa",
+    label8: "TV",
+    label9: "Deco Big",
+    label10: "Box",
+    remarks: "Remarks",
+  },
+
+  de: {
+    label1: "Sofa",
+    label2: "Pult",
+    label3: "Fernsehtisch",
+    label4: "Sessel",
+    label5: "Tisch",
+    label6: "Regal",
+    label7: "L Sofa",
+    label8: "Fernseher",
+    label9: "Deco gross",
+    label10: "Box",
+    remarks: "Bemerkung",
+  },
+};
+const lnContent = {
+  en: {
+    livingRoomHeading: "Living room(WZ)",
+    kitchenHeading: "kitchen",
+    bedRoomHeading: "Bedroom(SZ)",
+    roomHeading: "Room(Z)",
+    outdoorHeading: "Balcony/terrace/garden (W/D/G)",
+    basementHeading: "Cellar/screed (K/E)",
+    specialHeading: "Special",
+    remarks: "Remarks",
+    tumbler: "Tumbler",
+    washMachine: "Washing machine",
+    shelf: "Shelf",
+    box: "Box",
+    bed: "Bed",
+    doublebed: "Double bed",
+    armchair: "Armchair",
+    smallWoodDrobe: "Small wardrobe",
+    mediumWoodDrobe: "Medium wardrobe",
+    largeWoodDrobe: "Large wardrobe",
+    nightStand: "Bedside table",
+    plant: "Plants",
+    tv: "Television",
+    tvTable: "TV table",
+    desk: "Desk",
+    teacherDesk: "Teacher Desk",
+    sofa: "Sofa",
+
+    living_teacherDesk: "Desk",
+    living_lSofa: "L Sofa",
+    living_decoGross: "Deco large",
+
+    kitchen_oven: "Oven",
+    kitchen_refrigerator: "Refrigerator",
+    kitchen_freezer: "Deep Freezer",
+    kitchen_stove: "Stove",
+    kitchen_microOven: "Microwave",
+    kitchen_coffeMachine: "Coffee machine",
+
+    out_grill: "Grill",
+    out_chair: "Chairs",
+    out_umbrella: "Umbrella",
+    out_cup: "Pots",
+    out_herbGen: "Herb bed",
+    out_lawnmower: "Lawn mower",
+
+    base_disposible: "Disposals",
+    base_cycle: "Bicycle",
+    base_stroller: "Baby carriage",
+    base_furniture: "Furniture",
+    base_boxes: "Boxes",
+
+    spec_aquairum: "Aquarium",
+    spec_piano: "Piano",
+    spec_gymSport: "Sports equipment",
+    spec_electronics: "Electronics",
+    spec_pool: "Pool",
+    spec_safe: "Tressor",
+    spec_lamp: "Lampe",
+  },
+
+  de: {
+    livingRoomHeading: "Wohnzimmer(WZ)",
+    kitchenHeading: "Küche",
+    bedRoomHeading: "Schlafzimmer",
+    roomHeading: "Zimmer(Z)",
+    outdoorHeading: "Balkon/Terrasse/Garten (B/T/G)",
+    basementHeading: "Keller/Estrich (K/E)",
+    specialHeading: "Speziell",
+    remarks: "Bemerkung",
+    tumbler: "Tumbler",
+    washMachine: "Waschmaschine",
+    shelf: "Regal",
+    box: "Box",
+    bed: "Bett",
+    doublebed: "Doppelbett",
+    armchair: "Sessel",
+    smallWoodDrobe: "Schrank klein",
+    mediumWoodDrobe: "Schrank Mittel",
+    largeWoodDrobe: "Schrank Gross",
+    nightStand: "Nachttisch",
+    plant: "Pflanzen",
+    tv: "Fernseher",
+    tvTable: "Fernsehtisch",
+    desk: "Tisch",
+    teacherDesk: "Pult",
+    sofa: "Sofa",
+
+    living_teacherDesk: "Pult",
+    living_lSofa: "L Sofa",
+    living_decoGross: "Deco gross",
+
+    kitchen_oven: "Backofen",
+    kitchen_refrigerator: "Kühlschrank",
+    kitchen_freezer: "Tiefkühler",
+    kitchen_stove: "Herd",
+    kitchen_microOven: "Mikrowelle",
+    kitchen_coffeMachine: "Kaffeemaschine",
+
+    out_grill: "Grill",
+    out_chair: "Stühle",
+    out_umbrella: "Schirm",
+    out_cup: "Töpfe",
+    out_herbGen: "Kräuterbeet",
+    out_lawnmower: "Rasenmäher",
+
+    base_disposible: "Entsorgungen",
+    base_cycle: "Fahrrad",
+    base_stroller: "Kinderwagen",
+    base_furniture: "Möbel",
+    base_boxes: "Boxen",
+    spec_aquairum: "Aquarium",
+    spec_piano: "Piano",
+    spec_gymSport: "Sportgerät",
+    spec_electronics: "Elektronisches",
+    spec_pool: "Pool",
+    spec_safe: "Tressor",
+    spec_lamp: "Lampe",
+  },
+};
+export const getSpecialRoom = (
+  lang: string,
+  room?: SpecialItemsDetailsProps
+) => {
+  const items: ResultItem[] = [];
+
+  let ln = lang as keyof typeof lnContent;
+
+  if (room?.aquarium) {
+    if (ln in lnContent && "spec_aquairum" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["spec_aquairum" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: aquairumIcon,
+        name: name,
+        quantity: room?.aquarium,
+      });
+    }
+  }
+  if (room?.piano) {
+    if (ln in lnContent && "spec_piano" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["spec_piano" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: pianoIcon,
+        name: name,
+        quantity: room?.piano,
+      });
+    }
+  }
+
+  if (room?.gymEquipment) {
+    if (ln in lnContent && "spec_gymSport" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["spec_gymSport" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: gymSportIcon,
+        name: name,
+        quantity: room?.gymEquipment,
+      });
+    }
+  }
+  if (room?.electronics) {
+    if (ln in lnContent && "spec_electronics" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["spec_electronics" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: electronicsIcon,
+        name: name,
+        quantity: room?.electronics,
+      });
+    }
+  }
+  if (room?.pool) {
+    if (ln in lnContent && "spec_pool" in lnContent[ln]) {
+      const name = lnContent[ln]["spec_pool" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: poolIcon,
+        name: name,
+        quantity: room?.pool,
+      });
+    }
+  }
+  if (room?.safe) {
+    if (ln in lnContent && "spec_safe" in lnContent[ln]) {
+      const name = lnContent[ln]["spec_safe" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: safeIcon,
+        name: name,
+        quantity: room?.safe,
+      });
+    }
+  }
+  if (room?.lamp) {
+    if (ln in lnContent && "spec_lamp" in lnContent[ln]) {
+      const name = lnContent[ln]["spec_lamp" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: lampIcon,
+        name: name,
+        quantity: room?.lamp,
+      });
+    }
+  }
+
+  return items;
+};
+export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
+  const items: ResultItem[] = [];
+
+  let ln = lang as keyof typeof lnContent;
+
+  if (room?.washingMachine) {
+    const name = lnContent[ln]["washMachine" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: washMacIcon,
+      name: name || "",
+      quantity: room?.washingMachine,
+    });
+  }
+  if (room?.tumbler) {
+    const name = lnContent[ln]["tumbler" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: tumblerIcon,
+      name: name || "",
+      quantity: room?.tumbler,
+    });
+  }
+
+  if (room?.shelf) {
+    const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: shelfIcon,
+      name: name || "",
+      quantity: room?.shelf,
+    });
+  }
+  if (room?.disposal) {
+    const name =
+      lnContent[ln]["base_disposible" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: disposibleIcon,
+      name: name || "",
+      quantity: room?.disposal,
+    });
+  }
+  if (room?.bicycle) {
+    const name = lnContent[ln]["base_cycle" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: cycleIcon,
+      name: name || "",
+      quantity: room?.bicycle,
+    });
+  }
+  if (room?.stroller) {
+    const name =
+      lnContent[ln]["base_stroller" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: chilWalkerIcon,
+      name: name || "",
+      quantity: room?.stroller,
+    });
+  }
+  if (room?.furniture) {
+    const name =
+      lnContent[ln]["base_furniture" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: mobelIcon,
+      name: name || "",
+      quantity: room?.furniture,
+    });
+  }
+
+  if (room?.boxes) {
+    const name = lnContent[ln]["base_boxes" as keyof (typeof lnContent)["en"]];
+    items.push({
+      icon: boxIcon,
+      name: name || "",
+      quantity: room?.boxes,
+    });
+  }
+
+  return items;
+};
+export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
+  const items: ResultItem[] = [];
+
+  let ln = lang as keyof typeof lnContent;
+  if (room?.grill) {
+    if (ln in lnContent && "out_grill" in lnContent[ln]) {
+      const name = lnContent[ln]["out_grill" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: grillIcon,
+        name: name,
+        quantity: room?.grill,
+      });
+    }
+  }
+  if (room?.table) {
+    if (ln in lnContent && "desk" in lnContent[ln]) {
+      const name = lnContent[ln]["desk" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: deskIcon,
+        name: name,
+        quantity: room?.table,
+      });
+    }
+  }
+  if (room?.chairs) {
+    if (ln in lnContent && "out_chair" in lnContent[ln]) {
+      const name = lnContent[ln]["out_chair" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: chairIcon,
+        name: name,
+        quantity: room?.chairs,
+      });
+    }
+  }
+  if (room?.sofa) {
+    if (ln in lnContent && "sofa" in lnContent[ln]) {
+      const name = lnContent[ln]["sofa" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: sofaIcon,
+        name: name,
+        quantity: room?.sofa,
+      });
+    }
+  }
+  if (room?.shelf) {
+    if (ln in lnContent && "shelf" in lnContent[ln]) {
+      const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: shelfIcon,
+        name: name,
+        quantity: room?.shelf,
+      });
+    }
+  }
+  if (room?.umbrella) {
+    if (ln in lnContent && "out_umbrella" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["out_umbrella" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: umbellaIcon,
+        name: name,
+        quantity: room?.umbrella,
+      });
+    }
+  }
+  if (room?.pots) {
+    if (ln in lnContent && "out_cup" in lnContent[ln]) {
+      const name = lnContent[ln]["out_cup" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: cupIcon,
+        name: name,
+        quantity: room?.pots,
+      });
+    }
+  }
+
+  if (room?.plants) {
+    if (ln in lnContent && "plant" in lnContent[ln]) {
+      const name = lnContent[ln]["plant" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: plantIcon,
+        name: name,
+        quantity: room?.plants,
+      });
+    }
+  }
+
+  if (room?.herbGarden) {
+    if (ln in lnContent && "out_herbGen" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["out_herbGen" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: grossyIcon,
+        name: name,
+        quantity: room?.herbGarden,
+      });
+    }
+  }
+  if (room?.lawnmower) {
+    if (ln in lnContent && "out_lawnmower" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["out_lawnmower" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: gymEquIcon,
+        name: name,
+        quantity: room?.lawnmower,
+      });
+    }
+  }
+
+  return items;
+};
+export const getRoom = (lang: string, room?: RoomDetailsProps) => {
+  const items: ResultItem[] = [];
+
+  let ln = lang as keyof typeof lnContent;
+  if (room?.bed) {
+    if (ln in lnContent && "bed" in lnContent[ln]) {
+      const name = lnContent[ln]["bed" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: bedIcon,
+        name: name,
+        quantity: room?.bed,
+      });
+    }
+  }
+  if (room?.doubleBed) {
+    if (ln in lnContent && "doublebed" in lnContent[ln]) {
+      const name = lnContent[ln]["doublebed" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: doublebedIcon,
+        name: name,
+        quantity: room?.doubleBed,
+      });
+    }
+  }
+  if (room?.armchair) {
+    if (ln in lnContent && "armchair" in lnContent[ln]) {
+      const name = lnContent[ln]["armchair" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: armChairIcon,
+        name: name,
+        quantity: room?.armchair,
+      });
+    }
+  }
+  if (room?.smallWardrobe) {
+    if (ln in lnContent && "smallWoodDrobe" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["smallWoodDrobe" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: singWoodDrobeIcon,
+        name: name,
+        quantity: room?.smallWardrobe,
+      });
+    }
+  }
+  if (room?.mediumWardrobe) {
+    if (ln in lnContent && "mediumWoodDrobe" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["mediumWoodDrobe" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: medWoodDrobeIcon,
+        name: name,
+        quantity: room?.mediumWardrobe,
+      });
+    }
+  }
+  if (room?.largeWardrobe) {
+    if (ln in lnContent && "largeWoodDrobe" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["largeWoodDrobe" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: largeWoodDrobeIcon,
+        name: name,
+        quantity: room?.largeWardrobe,
+      });
+    }
+  }
+
+  if (room?.shelf) {
+    if (ln in lnContent && "shelf" in lnContent[ln]) {
+      const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: shelfIcon,
+        name: name,
+        quantity: room?.shelf,
+      });
+    }
+  }
+
+  if (room?.desk) {
+    if (ln in lnContent && "teacherDesk" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["teacherDesk" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: teacherDeskIcon,
+        name: name,
+        quantity: room?.desk,
+      });
+    }
+  }
+
+  if (room?.tv) {
+    if (ln in lnContent && "tv" in lnContent[ln]) {
+      const name = lnContent[ln]["tv" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: tvIcon,
+        name: name,
+        quantity: room?.tv,
+      });
+    }
+  }
+  if (room?.tvTable) {
+    if (ln in lnContent && "tvTable" in lnContent[ln]) {
+      const name = lnContent[ln]["tvTable" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: tvTableIcon,
+        name: name,
+        quantity: room?.tvTable,
+      });
+    }
+  }
+
+  if (room?.nightstand) {
+    if (ln in lnContent && "nightStand" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["nightStand" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: tableIcon,
+        name: name,
+        quantity: room?.nightstand,
+      });
+    }
+  }
+
+  if (room?.box) {
+    if (ln in lnContent && "box" in lnContent[ln]) {
+      const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: boxIcon,
+        name: name,
+        quantity: room?.box,
+      });
+    }
+  }
+
+  return items;
+};
+export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
+  const items: ResultItem[] = [];
+
+  let ln = lang as keyof typeof lnContent;
+  if (room?.bed) {
+    if (ln in lnContent && "bed" in lnContent[ln]) {
+      const name = lnContent[ln]["bed" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: bedIcon,
+        name: name,
+        quantity: room?.bed,
+      });
+    }
+  }
+  if (room?.doubleBed) {
+    if (ln in lnContent && "doublebed" in lnContent[ln]) {
+      const name = lnContent[ln]["doublebed" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: doublebedIcon,
+        name: name,
+        quantity: room?.doubleBed,
+      });
+    }
+  }
+  if (room?.armchair) {
+    if (ln in lnContent && "armchair" in lnContent[ln]) {
+      const name = lnContent[ln]["armchair" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: armChairIcon,
+        name: name,
+        quantity: room?.armchair,
+      });
+    }
+  }
+  if (room?.smallWardrobe) {
+    if (ln in lnContent && "smallWoodDrobe" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["smallWoodDrobe" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: singWoodDrobeIcon,
+        name: name,
+        quantity: room?.smallWardrobe,
+      });
+    }
+  }
+  if (room?.mediumWardrobe) {
+    if (ln in lnContent && "mediumWoodDrobe" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["mediumWoodDrobe" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: medWoodDrobeIcon,
+        name: name,
+        quantity: room?.mediumWardrobe,
+      });
+    }
+  }
+  if (room?.largeWardrobe) {
+    if (ln in lnContent && "largeWoodDrobe" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["largeWoodDrobe" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: largeWoodDrobeIcon,
+        name: name,
+        quantity: room?.largeWardrobe,
+      });
+    }
+  }
+  if (room?.dressingTable) {
+    if (ln in lnContent && "bedRoomItem" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["bedRoomItem" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: macupTableIcon,
+        name: name,
+        quantity: room?.dressingTable,
+      });
+    }
+  }
+  if (room?.nightstand) {
+    if (ln in lnContent && "nightStand" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["nightStand" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: tableIcon,
+        name: name,
+        quantity: room?.nightstand,
+      });
+    }
+  }
+  if (room?.shelf) {
+    if (ln in lnContent && "shelf" in lnContent[ln]) {
+      const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: shelfIcon,
+        name: name,
+        quantity: room?.shelf,
+      });
+    }
+  }
+
+  if (room?.desk) {
+    if (ln in lnContent && "teacherDesk" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["teacherDesk" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: teacherDeskIcon,
+        name: name,
+        quantity: room?.desk,
+      });
+    }
+  }
+  if (room?.plants) {
+    if (ln in lnContent && "plant" in lnContent[ln]) {
+      const name = lnContent[ln]["plant" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: plantIcon,
+        name: name,
+        quantity: room?.plants,
+      });
+    }
+  }
+
+  if (room?.box) {
+    if (ln in lnContent && "box" in lnContent[ln]) {
+      const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: boxIcon,
+        name: name,
+        quantity: room?.box,
+      });
+    }
+  }
+
+  return items;
+};
+
+export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
+  const items: ResultItem[] = [];
+  let lang = language as keyof typeof drContent;
+
+  if (generalRoom?.label1Value) {
+    if (lang in drContent && "label1" in drContent[lang]) {
+      const name = drContent[lang]["label1" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: sofaIcon,
+        name: name,
+        quantity: generalRoom?.label1Value,
+      });
+    }
+  }
+  if (generalRoom?.label2Value) {
+    if (lang in drContent && "label2" in drContent[lang]) {
+      const name = drContent[lang]["label2" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: teacherDeskIcon,
+        name: name,
+        quantity: generalRoom?.label2Value,
+      });
+    }
+  }
+  if (generalRoom?.label3Value) {
+    if (lang in drContent && "label3" in drContent[lang]) {
+      const name = drContent[lang]["label3" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: tvTableIcon,
+        name: name,
+        quantity: generalRoom?.label3Value,
+      });
+    }
+  }
+  if (generalRoom?.label4Value) {
+    if (lang in drContent && "label4" in drContent[lang]) {
+      const name = drContent[lang]["label4" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: armChairIcon,
+        name: name,
+        quantity: generalRoom?.label4Value,
+      });
+    }
+  }
+  if (generalRoom?.label5Value) {
+    if (lang in drContent && "label5" in drContent[lang]) {
+      const name = drContent[lang]["label5" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: deskIcon,
+        name: name,
+        quantity: generalRoom?.label5Value,
+      });
+    }
+  }
+  if (generalRoom?.label6Value) {
+    if (lang in drContent && "label6" in drContent[lang]) {
+      const name = drContent[lang]["label6" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: deskIcon,
+        name: name,
+        quantity: generalRoom?.label6Value,
+      });
+    }
+  }
+  if (generalRoom?.label7Value) {
+    if (lang in drContent && "label7" in drContent[lang]) {
+      const name = drContent[lang]["label7" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: shelfIcon,
+        name: name,
+        quantity: generalRoom?.label7Value,
+      });
+    }
+  }
+  if (generalRoom?.label8Value) {
+    if (lang in drContent && "label8" in drContent[lang]) {
+      const name = drContent[lang]["label8" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: tvIcon,
+        name: name,
+        quantity: generalRoom?.label8Value,
+      });
+    }
+  }
+  if (generalRoom?.label9Value) {
+    if (lang in drContent && "label9" in drContent[lang]) {
+      const name = drContent[lang]["label9" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: decoGrossIcon,
+        name: name,
+        quantity: generalRoom?.label9Value,
+      });
+    }
+  }
+  if (generalRoom?.label10Value) {
+    if (lang in drContent && "label10" in drContent[lang]) {
+      const name = drContent[lang]["label10" as keyof (typeof drContent)["en"]];
+      items.push({
+        icon: boxIcon,
+        name: name,
+        quantity: generalRoom?.label10Value,
+      });
+    }
+  }
+
+  // for (const key in generalRoom) {
+  //   if (key === "label1Value" && generalRoom[key]) {
+  //     if (lang in langContent && "label1" in langContent[lang]) {
+  //       const name =
+  //         langContent[lang]["label1" as keyof (typeof langContent)["en"]];
+  //       items.push({
+  //         icon: sofaIcon,
+  //         name: name,
+  //         quantity: generalRoom?.label1Value,
+  //       });
+  //     }
+  //   }
+  // }
+  return items;
+};
+
+export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
+  const items: ResultItem[] = [];
+  let ln = lang as keyof typeof lnContent;
+  if (room?.sofa) {
+    if (ln in lnContent && "sofa" in lnContent[ln]) {
+      const name = lnContent[ln]["sofa" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: sofaIcon,
+        name: name,
+        quantity: room?.sofa,
+      });
+    }
+  }
+  if (room?.teacherDesk) {
+    if (ln in lnContent && "teacherDesk" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["teacherDesk" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: teacherDeskIcon,
+        name: name,
+        quantity: room?.teacherDesk,
+      });
+    }
+  }
+  if (room?.tvTable) {
+    if (ln in lnContent && "tvTable" in lnContent[ln]) {
+      const name = lnContent[ln]["tvTable" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: tvTableIcon,
+        name: name,
+        quantity: room?.tvTable,
+      });
+    }
+  }
+  if (room?.armchair) {
+    if (ln in lnContent && "armchair" in lnContent[ln]) {
+      const name = lnContent[ln]["armchair" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: armChairIcon,
+        name: name,
+        quantity: room?.armchair,
+      });
+    }
+  }
+  if (room?.table) {
+    if (ln in lnContent && "desk" in lnContent[ln]) {
+      const name = lnContent[ln]["desk" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: deskIcon,
+        name: name,
+        quantity: room?.table,
+      });
+    }
+  }
+  if (room?.shelf) {
+    if (ln in lnContent && "shelf" in lnContent[ln]) {
+      const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: shelfIcon,
+        name: name,
+        quantity: room?.shelf,
+      });
+    }
+  }
+  if (room?.LSofa) {
+    if (ln in lnContent && "living_lSofa" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["living_lSofa" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: lSofaIcon,
+        name: name,
+        quantity: room?.LSofa,
+      });
+    }
+  }
+  if (room?.TV) {
+    if (ln in lnContent && "tv" in lnContent[ln]) {
+      const name = lnContent[ln]["tv" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: tvIcon,
+        name: name,
+        quantity: room?.TV,
+      });
+    }
+  }
+  if (room?.decoBig) {
+    if (ln in lnContent && "living_decoGross" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["living_decoGross" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: decoGrossIcon,
+        name: name,
+        quantity: room?.decoBig,
+      });
+    }
+  }
+  if (room?.box) {
+    if (ln in lnContent && "box" in lnContent[ln]) {
+      const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: boxIcon,
+        name: name,
+        quantity: room?.box,
+      });
+    }
+  }
+
+  return items;
+};
+export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
+  const items: ResultItem[] = [];
+  let ln = lang as keyof typeof lnContent;
+  if (room?.oven) {
+    if (ln in lnContent && "kitchen_oven" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["kitchen_oven" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: ovenIcon,
+        name: name,
+        quantity: room?.oven,
+      });
+    }
+  }
+  if (room?.refrigerator) {
+    if (ln in lnContent && "kitchen_refrigerator" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["kitchen_refrigerator" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: refrigeratorIcon,
+        name: name,
+        quantity: room?.refrigerator,
+      });
+    }
+  }
+  if (room?.freezer) {
+    if (ln in lnContent && "kitchen_freezer" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["kitchen_freezer" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: freezerIcon,
+        name: name,
+        quantity: room?.freezer,
+      });
+    }
+  }
+  if (room?.stove) {
+    if (ln in lnContent && "kitchen_stove" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["kitchen_stove" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: herdIcon,
+        name: name,
+        quantity: room?.stove,
+      });
+    }
+  }
+  if (room?.microwave) {
+    if (ln in lnContent && "kitchen_microOven" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["kitchen_microOven" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: microOvenIcon,
+        name: name,
+        quantity: room?.microwave,
+      });
+    }
+  }
+  if (room?.coffeeMachine) {
+    if (ln in lnContent && "kitchen_coffeMachine" in lnContent[ln]) {
+      const name =
+        lnContent[ln]["kitchen_coffeMachine" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: coffeMacIcon,
+        name: name,
+        quantity: room?.coffeeMachine,
+      });
+    }
+  }
+
+  if (room?.washingMachine) {
+    if (ln in lnContent && "kitchen_washingMachine" in lnContent[ln]) {
+      const name =
+        lnContent[ln][
+          "kitchen_washingMachine" as keyof (typeof lnContent)["en"]
+        ];
+      items.push({
+        icon: washMacIcon,
+        name: name,
+        quantity: room?.washingMachine,
+      });
+    }
+  }
+  if (room?.tumbler) {
+    if (ln in lnContent && "tumbler" in lnContent[ln]) {
+      const name = lnContent[ln]["tumbler" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: tumblerIcon,
+        name: name,
+        quantity: room?.tumbler,
+      });
+    }
+  }
+  if (room?.shelf) {
+    if (ln in lnContent && "shelf" in lnContent[ln]) {
+      const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: shelfIcon,
+        name: name,
+        quantity: room?.shelf,
+      });
+    }
+  }
+  if (room?.box) {
+    if (ln in lnContent && "box" in lnContent[ln]) {
+      const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: boxIcon,
+        name: name,
+        quantity: room?.box,
+      });
+    }
+  }
+  if (room?.box) {
+    if (ln in lnContent && "box" in lnContent[ln]) {
+      const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
+      items.push({
+        icon: boxIcon,
+        name: name,
+        quantity: room?.box,
+      });
+    }
+  }
+
+  return items;
 };
 
 export const convertLocalDateToUTC = (localDate: string): string => {

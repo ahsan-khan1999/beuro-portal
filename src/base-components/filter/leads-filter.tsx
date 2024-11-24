@@ -41,11 +41,16 @@ export default function LeadsFilter({
   const ref = useOutsideClick<HTMLDivElement>(handleExtraFiltersClose);
 
   const handleSave = () => {
+    let query = router.query;
+
+    if (router.query.today) {
+      delete query.today;
+    }
     router.push(
       {
         pathname: router.pathname,
         query: {
-          ...router.query,
+          ...query,
           page: 1,
           date: JSON.stringify(moreFilter.date),
         },
@@ -62,6 +67,9 @@ export default function LeadsFilter({
           $lte: moreFilter.date && moreFilter.date.$lte,
         },
       };
+      if (updatedFilter.today) {
+        delete updatedFilter.today;
+      }
       onFilterChange(updatedFilter);
       return updatedFilter;
     });

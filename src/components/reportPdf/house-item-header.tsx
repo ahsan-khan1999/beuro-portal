@@ -11,10 +11,11 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
   column: {
     width: "30%",
+    paddingRight: 10,
   },
   textbase: {
     fontSize: 8,

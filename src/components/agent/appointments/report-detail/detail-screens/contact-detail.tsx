@@ -13,17 +13,19 @@ export interface ReportAddressProps {
 }
 
 export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
+  console.log("dates:", reportDetail?.date);
   const router = useRouter();
   const { t: translate } = useTranslation();
 
   const { companyAppointment } = router.query;
 
   const handleEditClick = () => {
-    const query: any = {
-      today: router.query.today,
-      report: reportDetail?.appointmentID?.id,
-      tab: 0,
-    };
+    const query: any = router.query;
+
+    query.report = reportDetail?.appointmentID?.id;
+    query.tab = 0;
+    delete query.reportId;
+
     if (companyAppointment) {
       query.companyAppointment = companyAppointment;
     }
@@ -120,14 +122,39 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
               {reportDetail?.customerDetail?.mobileNumber}
             </div>
           </div>
+          {reportDetail?.date?.map((item, index) => (
+            <div key={index} className="flex flex-col gap-y-1">
+              <div className="grid grid-cols-12 gap-4">
+                {item?.startDate && (
+                  <div className="col-span-6 flex flex-col gap-y-1">
+                    <label className="text-[#344054] text-sm font-medium">
+                      {translate("agent.report_contact_fields.start_date")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                      {convertUTCToLocalDate(item?.startDate)}
+                    </div>
+                  </div>
+                )}
+                {item?.endDate && (
+                  <div className="col-span-6 flex flex-col gap-y-1">
+                    <label className="text-[#344054] text-sm font-medium">
+                      {translate("agent.report_contact_fields.end_date")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
+                      {convertUTCToLocalDate(item?.endDate)}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+
           <div className="flex flex-col gap-y-1">
             <label className="text-[#344054] text-sm font-medium">
-              {translate("agent.report_contact_fields.desire_date")}
+              {translate("common.time")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate">
-              {reportDetail?.desireDate
-                ? convertUTCToLocalDate(reportDetail?.desireDate)
-                : ""}
+              {reportDetail?.time}
             </div>
           </div>
         </div>

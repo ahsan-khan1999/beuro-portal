@@ -2,7 +2,7 @@ import { staticEnums } from "@/utils/static";
 import { AddressID } from "./leads";
 import { OfferServiceDetails } from "./offers";
 import { ContentTableRowTypes } from "./content";
-import { ReportPDFProps, RoomObject, User } from ".";
+import { DateRangeProps, ReportPDFProps, RoomObject, User } from ".";
 import { SystemSetting } from "@/api/slices/settingSlice/settings";
 
 export interface Appointments {
@@ -78,6 +78,8 @@ export interface Report {
     gender: number;
     desireDate?: string;
   };
+  date: DateRangeProps[];
+  time: string;
   desireDate?: string;
   subTotal: number;
   total: number;

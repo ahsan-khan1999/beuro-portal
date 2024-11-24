@@ -19,6 +19,21 @@ export const ReportContactAddressDetailsValidation = (translate: Function) => {
     [ReportContactDetailsFieldsId.email]: yup.string().notRequired(),
     [ReportContactDetailsFieldsId.phoneNumber]: yup.string().notRequired(),
 
+    [ReportContactDetailsFieldsId.date]: yup
+      .array()
+      .of(
+        yup
+          .object()
+          .shape({
+            startDate: yup
+              .string()
+              .required(translate("validationMessages.required")),
+            endDate: yup.string().notRequired(),
+          })
+          .required(translate("validationMessages.required"))
+      )
+      .min(1)
+      .required(translate("validationMessages.required")),
     [ReportContactDetailsFieldsId.address]: yup
       .array()
       .of(
