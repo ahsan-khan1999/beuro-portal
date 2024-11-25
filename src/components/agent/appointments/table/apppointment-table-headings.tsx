@@ -6,13 +6,17 @@ export const AppointmentTableHeadings = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-12 items-center gap-x-2 bg-primary rounded-lg px-2 py-4">
-        <div className="col-span-2">
+      <div
+        className="grid 
+      grid-cols-[minmax(100px,15%)_minmax(100px,_15%)_minmax(80px,_12%)_minmax(80px,_23%)_minmax(100px,15%)_minmax(150px,20%)] 
+      items-center gap-x-2 bg-primary rounded-lg px-2 py-4"
+      >
+        <div className="">
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.customer")}
           </span>
         </div>
-        <div className="col-span-2">
+        <div className="">
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white  hidden md:flex">
             {translate("appointments.table_headings.company_name")}
           </span>
@@ -21,24 +25,24 @@ export const AppointmentTableHeadings = () => {
             ..
           </span>
         </div>
-        <div className="col-span-2 flex items-center items-center justify-center">
+        <div className=" flex items-center items-center">
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.date")}/
             {translate("appointments.table_headings.time")}
           </span>
         </div>
 
-        <div className="col-span-2">
+        <div className="">
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.canton")}
           </span>
         </div>
-        <div className="col-span-2">
+        <div className="">
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.offer_status")}
           </span>
         </div>
-        <div className="col-span-2">
+        <div className="">
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("common.actions")}
           </span>
