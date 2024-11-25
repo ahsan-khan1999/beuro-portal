@@ -21,7 +21,9 @@ export const HouseItem: React.FC<HouseDetailObjectProps> = ({
       </div>
 
       <div className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded">
-        <span className="text-xs font-medium text-gray-900">{quantity}</span>
+        <span className="text-xs font-medium text-gray-900 max-w-8 block-inline overflow-x-hidden">
+          {quantity}
+        </span>
       </div>
     </div>
   );
