@@ -110,7 +110,142 @@ export const AppointmentTableRows = ({
 
         return (
           <div>
-            {isAgent ? (
+            <div
+              onClick={
+                item?.isReportSubmitted
+                  ? handleReportDetail
+                  : handleAppointmentRoute
+              }
+              className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
+                index !== 0 && "border-t border-t-[#E7EAEE]"
+              }   grid grid-cols-12  items-center gap-x-2 bg-primary rounded-lg px-2 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
+            >
+              <div className="col-span-2">
+                <span className="text-xs md:sm xl:text-base hidden md:flex">
+                  {item.leadID?.customerDetail?.fullName}
+                </span>
+                <span className="text-xs md:sm xl:text-base flex md:hidden">
+                  {item.leadID?.customerDetail?.fullName?.length > 12
+                    ? item.leadID?.customerDetail?.fullName.slice(0, 12) + ".."
+                    : item.leadID?.customerDetail?.fullName}
+                </span>
+              </div>
+
+              <div className="col-span-2">
+                <span className="text-xs md:sm xl:text-base hidden md:flex">
+                  {item.leadID?.customerDetail?.companyName}
+                </span>
+                <span className="text-xs md:sm xl:text-base flex md:hidden">
+                  {item.leadID?.customerDetail?.companyName?.length > 12
+                    ? item.leadID?.customerDetail?.companyName.slice(0, 12) +
+                      ".."
+                    : item.leadID?.customerDetail?.companyName}
+                </span>
+              </div>
+
+              <div className="col-span-2 flex flex-col items-center justify-center gap-y-1">
+                <span className="text-xs md:sm xl:text-base ml-1">
+                  {formatDateTimeToDate(item?.date)}
+                </span>
+                <div className="flex flex-wrap gap-x-1 items-center justify-center">
+                  <p className="text-xs leading-4 md:sm xl:text-base">
+                    {localStartTime}
+                  </p>
+
+                  <p className="text-xs md:sm xl:text-base   p-0 m-0">-</p>
+
+                  <p className="text-xs md:sm xl:text-base p-0 m-0">
+                    {localEndTime}
+                  </p>
+                </div>
+              </div>
+
+              <div className="col-span-2">
+                <p className="text-xs md:sm xl:text-base leading-5">
+                  {item?.canton}
+                </p>
+              </div>
+              <div className="col-span-2">
+                <div
+                  className={`${
+                    item?.leadID?.isOfferCreated === true
+                      ? "bg-[#45C769]"
+                      : "bg-[#FB9600]"
+                  } text-white px-2 py-2 text-center rounded-md w-fit min-w-[110px] text-xs`}
+                >
+                  <span className="text-white text-xs">
+                    {item.leadID?.isOfferCreated === true
+                      ? translate(`leads.created`)
+                      : translate(`leads.not_created`)}
+                  </span>
+                </div>
+              </div>
+              <div className="col-span-2 pl-1">
+                <div className="flex gap-x-1  lg: gap-x-2">
+                  <div
+                    className="flex justify-center items-center cursor-pointer hidden xl:flex"
+                    onClick={(e) =>
+                      handleImageUpload(
+                        item?.id,
+                        item?.leadID?.refID,
+                        name,
+                        heading,
+                        e as React.MouseEvent<HTMLSpanElement>
+                      )
+                    }
+                    title={translate("leads.table_headings.images")}
+                  >
+                    <span className="hover:bg-[#E9E1FF] rounded-lg hover:shadow-lg">
+                      <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
+                    </span>
+                  </div>
+                  <div
+                    className="flex justify-center items-center cursor-pointer hidden xl:flex"
+                    onClick={(e) =>
+                      handleNotes(
+                        item?.id,
+                        item?.leadID?.refID,
+                        name,
+                        heading,
+                        e,
+                        item?.leadID?.id
+                      )
+                    }
+                    title={translate("leads.table_headings.note")}
+                  >
+                    <span className="hover:bg-[#E9E1FF] rounded-lg hover:shadow-lg">
+                      <AddNoteIcon
+                        isNoteCreated={item?.leadID?.isNoteCreated}
+                      />
+                    </span>
+                  </div>
+
+                  <div className="flex items-center">
+                    {item?.isReportSubmitted ? (
+                      <OutlineButton
+                        inputType="button"
+                        onClick={() => handlePreview(item?.id)}
+                        className="bg-white text-primary xl:text-[#45C769] w-fit border border-primary xl:border-[#45C769] hover:border-buttonHover p-2 !text-xs !md:text-sm !xl:text-base !h-fit"
+                        text={translate("appointments.view_reports_btn")}
+                        id="view reports"
+                        iconAlt="view reports"
+                      />
+                    ) : (
+                      <Button
+                        inputType="button"
+                        onClick={handleAppointmentRoute}
+                        className="!h-fit p-2 flex items-center !text-xs !md:text-sm !xl:text-base font-medium bg-primary text-white rounded-md w-fit"
+                        text={translate("appointments.sub_report_1")}
+                        id="view reports"
+                        iconAlt="view reports"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* {isAgent ? (
               <>
                 <div className="mlg:hidden">
                   <div
@@ -126,9 +261,7 @@ export const AppointmentTableRows = ({
                       index === 0 && "mt-2"
                     } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-1 grid xs:grid-cols-[minmax(100px,100%)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(170px,170px)] xAir:grid-cols-[minmax(80px,100%)_minmax(100px,_100px)_minmax(100px,_100px)_minmax(130px,_130px)_minmax(170px,170px)]`}
                   >
-                    {/* <div className="flex items-center gap-x-1">
-                      {item?.leadID?.refID}
-                    </div> */}
+                    
                     <span className="py-4 truncate">
                       {item.leadID?.customerDetail?.fullName}
                     </span>
@@ -187,7 +320,7 @@ export const AppointmentTableRows = ({
                     index === 0 && "mt-2"
                   } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-4 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px)_minmax(200px,3fr)_minmax(250px,_3fr)_minmax(150px,_150px)_minmax(150px,150px)_minmax(180px,_180px)_minmax(160px,_160px)] mlg:grid-cols-[minmax(65px,_65px)_minmax(80px,_100%)_minmax(170px,_170px)_minmax(160px,_160px)] xlg:grid-cols-[minmax(65px,_65px)_minmax(60px,_4fr)_minmax(170px,_170px)_minmax(160px,_160px)] maxSize:grid-cols-[minmax(65px,_65px)_minmax(80px,_3fr)_minmax(100px,_4fr)_minmax(170px,_170px)_minmax(160px,_160px)] xMaxSize:grid-cols-[minmax(65px,_65px)_minmax(130px,_130px)_minmax(140px,_100%)_minmax(90px,_90px)_minmax(170px,_170px)_minmax(160px,_160px)] xLarge:grid-cols-[minmax(65px,_65px)_minmax(60px,_3fr)_minmax(70px,_4fr)_minmax(90px,_90px)_minmax(110px,_110px)_minmax(170px,_170px)_minmax(160px,_160px)]`}
                 >
-                  {/* <span className="py-4 truncate">{item?.leadID?.refID}</span> */}
+                  
                   <div className="flex items-center gap-x-1">
                     {item?.leadID?.refID}
                   </div>
@@ -291,7 +424,7 @@ export const AppointmentTableRows = ({
                   )}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         );
       })}

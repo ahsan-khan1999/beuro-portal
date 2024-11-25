@@ -13,7 +13,6 @@ export interface ReportAddressProps {
 }
 
 export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
-  console.log("dates:", reportDetail?.date);
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -148,6 +147,25 @@ export const ReportContactDetail = ({ reportDetail }: ReportAddressProps) => {
               </div>
             </div>
           ))}
+          {(!reportDetail?.date || reportDetail?.date.length == 0) && (
+            <div className="flex flex-col gap-y-1">
+              <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-6 flex flex-col gap-y-1">
+                  <label className="text-[#344054] text-sm font-medium">
+                    {translate("agent.report_contact_fields.start_date")}
+                  </label>
+                  <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate"></div>
+                </div>
+
+                <div className="col-span-6 flex flex-col gap-y-1">
+                  <label className="text-[#344054] text-sm font-medium">
+                    {translate("agent.report_contact_fields.end_date")}
+                  </label>
+                  <div className="rounded-lg border border-[#EBEBEB] bg-white text-[#4B4B4B] font-medium px-4 py-[6px] xMini:py-4 min-h-[40px] xMini:min-h-[58px] truncate"></div>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="flex flex-col gap-y-1">
             <label className="text-[#344054] text-sm font-medium">

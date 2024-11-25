@@ -79,7 +79,7 @@ export const AppointmentTableRecordCard = ({
                         : item?.appointmentStatus === "Completed"
                         ? "bg-[#45C769]"
                         : "bg-[#D80027]"
-                    } rounded-lg h-[21px] flex items-center justify-center`}
+                    } rounded-lg h-[30px] flex items-center justify-center`}
                   >
                     <span className="text-white text-xs font-medium">
                       {item?.appointmentStatus}
@@ -90,7 +90,7 @@ export const AppointmentTableRecordCard = ({
                     <OutlineButton
                       inputType="button"
                       onClick={handleReportDetail}
-                      className="bg-white text-primary w-full border border-primary !h-[21px] text-xs font-medium"
+                      className="bg-white text-primary w-full border border-primary !h-[30px] text-xs font-medium"
                       text={translate("appointments.view_reports_btn")}
                       id="view reports"
                       iconAlt="view reports"
@@ -103,7 +103,7 @@ export const AppointmentTableRecordCard = ({
                           ? handleReportDetail
                           : handleAppointmentRoute
                       }
-                      className="!h-[21px] text-xs font-medium text-white flex items-center bg-primary rounded-lg"
+                      className="!h-[30px] text-xs font-medium text-white flex items-center bg-primary rounded-lg"
                       text={translate("appointments.sub_report")}
                       id="view reports"
                       iconAlt="view reports"
