@@ -119,20 +119,29 @@ export const AppointmentTableRows = ({
               onClick={() => handleClickRow(item?.isReportSubmitted, item.id)}
               className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
                 index !== 0 && "border-t border-t-[#E7EAEE]"
-              }   grid grid-cols-12  items-center gap-x-2 bg-primary rounded-lg px-2 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
+              } gap-x-1  grid 
+              grid-cols-[minmax(100px,15%)_minmax(100px,_15%)_minmax(80px,_12%)_minmax(80px,_23%)_minmax(100px,15%)_minmax(150px,20%)] 
+              items-center gap-x-2 bg-primary rounded-lg px-2 py-1 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
             >
-              <div className="col-span-2">
-                <span className="text-xs md:sm xl:text-base hidden md:flex">
-                  {item.leadID?.customerDetail?.fullName}
+              <div className="">
+                <span className="text-xs md:sm xl:text-base hidden xl:flex">
+                  {item.leadID?.customerDetail?.fullName?.length > 24
+                    ? item.leadID?.customerDetail?.fullName.slice(0, 24) + ".."
+                    : item.leadID?.customerDetail?.fullName}
+                </span>
+                <span className="text-xs md:sm xl:text-base hidden md:flex xl:hidden">
+                  {item.leadID?.customerDetail?.fullName?.length > 18
+                    ? item.leadID?.customerDetail?.fullName.slice(0, 18) + ".."
+                    : item.leadID?.customerDetail?.fullName}
                 </span>
                 <span className="text-xs md:sm xl:text-base flex md:hidden">
-                  {item.leadID?.customerDetail?.fullName?.length > 12
-                    ? item.leadID?.customerDetail?.fullName.slice(0, 12) + ".."
+                  {item.leadID?.customerDetail?.fullName?.length > 14
+                    ? item.leadID?.customerDetail?.fullName.slice(0, 14) + ".."
                     : item.leadID?.customerDetail?.fullName}
                 </span>
               </div>
 
-              <div className="col-span-2">
+              <div className="">
                 <span className="text-xs md:sm xl:text-base hidden md:flex">
                   {item.leadID?.customerDetail?.companyName}
                 </span>
@@ -144,11 +153,11 @@ export const AppointmentTableRows = ({
                 </span>
               </div>
 
-              <div className="col-span-2 flex flex-col items-center justify-center gap-y-1">
+              <div className=" flex flex-col  gap-y-1">
                 <span className="text-xs md:sm xl:text-base ml-1">
                   {formatDateTimeToDate(item?.date)}
                 </span>
-                <div className="flex flex-wrap gap-x-1 items-center justify-center">
+                <div className="flex max-w-[150px] flex-wrap gap-x-1 items-center ">
                   <p className="text-xs leading-4 md:sm xl:text-base">
                     {localStartTime}
                   </p>
@@ -161,18 +170,18 @@ export const AppointmentTableRows = ({
                 </div>
               </div>
 
-              <div className="col-span-2">
+              <div className="">
                 <p className="text-xs md:sm xl:text-base leading-5">
                   {item?.canton}
                 </p>
               </div>
-              <div className="col-span-2">
+              <div className="">
                 <div
                   className={`${
                     item?.leadID?.isOfferCreated === true
                       ? "bg-[#45C769]"
                       : "bg-[#FB9600]"
-                  } text-white px-2 py-2 text-center rounded-md w-fit min-w-[110px] text-xs`}
+                  } text-white px-2 py-2 text-center rounded-md w-full min-w-[110px] max-w-[150px] text-xs`}
                 >
                   <span className="text-white text-xs">
                     {item.leadID?.isOfferCreated === true
@@ -181,13 +190,13 @@ export const AppointmentTableRows = ({
                   </span>
                 </div>
               </div>
-              <div className="col-span-2 pl-1">
+              <div className="pl-2">
                 <div
                   className="flex items-center gap-x-1 2xl:gap-x-2"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div
-                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex w-6 h-6 2xl:w-8 2xl:h-8"
+                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex"
                     onClick={(e) =>
                       handleImageUpload(
                         item?.id,
@@ -202,7 +211,7 @@ export const AppointmentTableRows = ({
                     <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
                   </div>
                   <div
-                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex w-6 h-6 2xl:w-8 2xl:h-8"
+                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex"
                     onClick={(e) =>
                       handleNotes(
                         item?.id,
@@ -223,7 +232,7 @@ export const AppointmentTableRows = ({
                       <OutlineButton
                         inputType="button"
                         onClick={() => handlePreview(item?.id)}
-                        className="bg-white py-2 px-1 md:px-2 text-primary xl:text-[#45C769] !min-w-[104px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover py-2 !text-xs !lg:text-sm !2xl:text-lg !h-fit"
+                        className="bg-white py-2 px-1 xl:px-2 text-primary xl:text-[#45C769] !min-w-[140px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover py-2 !text-xs !lg:text-sm !2xl:text-lg !h-fit"
                         text={translate("appointments.view_reports_btn")}
                         id="view reports"
                         iconAlt="view reports"
@@ -232,7 +241,7 @@ export const AppointmentTableRows = ({
                       <Button
                         inputType="button"
                         onClick={() => handleClickRow(false, item.id)}
-                        className="!h-fit py-2 px-1 md:px-2 flex items-center !min-w-[104px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-primary text-white rounded-md w-full"
+                        className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-primary text-white rounded-md w-full"
                         text={translate("appointments.sub_report_1")}
                         id="view reports"
                         iconAlt="view reports"
