@@ -133,17 +133,17 @@ const SideBar = ({
 
   return (
     <div
-      className={`fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full mlg:top-[92px] overflow-scroll`}
+      className={`fixed left-0 w-[247px] bg-white rounded-r-[6px] h-full xl:top-[92px] overflow-scroll`}
     >
       {isAgentRoute && (
-        <div className="absolute top-2 right-2 xMini:block mlg:hidden">
+        <div className="absolute top-2 right-2 xMini:block xl:hidden">
           <CrossIcon onClick={handleDrawer} />
         </div>
       )}
 
       <div
         className={`${
-          isAgentRoute ? "pt-10 mlg:pt-6" : "pt-6"
+          isAgentRoute ? "pt-10 xl:pt-6" : "pt-6"
         } px-4 pb-8 flex flex-col`}
       >
         <div className="space-y-3">

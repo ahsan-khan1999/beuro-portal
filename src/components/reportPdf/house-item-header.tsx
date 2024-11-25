@@ -25,9 +25,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HouseItemHeader = ({ language }: { language?: string }) => {
-  const headerLabel = [0, 1, 2];
-
+export const HouseItemHeader = ({
+  language,
+  count,
+}: {
+  language?: string;
+  count: number;
+}) => {
   const langContent = {
     en: {
       item: "Item",
@@ -40,16 +44,34 @@ export const HouseItemHeader = ({ language }: { language?: string }) => {
 
   return (
     <View style={styles.grid}>
-      {headerLabel.map((index) => (
-        <View key={index} style={styles.column}>
-          <View style={styles.container} key={index}>
+      <View style={styles.column}>
+        <View style={styles.container}>
+          <Text style={styles.textbase}>
+            {langContent[language as keyof typeof langContent]?.item}
+          </Text>
+          <Text style={styles.textbase}>Qty</Text>
+        </View>
+      </View>
+      {count > 1 && (
+        <View style={styles.column}>
+          <View style={styles.container}>
             <Text style={styles.textbase}>
               {langContent[language as keyof typeof langContent]?.item}
             </Text>
             <Text style={styles.textbase}>Qty</Text>
           </View>
         </View>
-      ))}
+      )}
+      {count > 2 && (
+        <View style={styles.column}>
+          <View style={styles.container}>
+            <Text style={styles.textbase}>
+              {langContent[language as keyof typeof langContent]?.item}
+            </Text>
+            <Text style={styles.textbase}>Qty</Text>
+          </View>
+        </View>
+      )}
     </View>
   );
 };

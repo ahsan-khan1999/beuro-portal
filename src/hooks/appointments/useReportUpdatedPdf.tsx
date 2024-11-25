@@ -58,6 +58,7 @@ export const useReportUpdatedPdf = () => {
             dispatch(readReportDetails({ params: { filter: reportId } })),
             dispatch(readSystemSettings()),
           ]);
+
         if (template?.payload?.Template) {
           const {
             firstColumn,
@@ -161,6 +162,7 @@ export const useReportUpdatedPdf = () => {
             movingDetails: {
               address: reportDetails?.addressID?.address,
               workDates: reportDetails?.date,
+              time: reportDetails?.time,
             },
             houseDetails: {
               livingRoomDetails: {

@@ -73,7 +73,7 @@ export default function AgentAppointments() {
       <div className="hidden xMini:block">
         <TableCardLayout>
           <TableLayout isAgent={true}>
-            <AppointmentTableHeadings isAgent={true} />
+            <AppointmentTableHeadings />
             {CurrentComponent}
           </TableLayout>
         </TableCardLayout>

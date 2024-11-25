@@ -40,7 +40,7 @@ export const HouseItemWrapper: React.FC<HouseItemWrapperProps> = ({
         <p className="text-xs font-normal text-gray-600">{description}</p>
       </div>
 
-      <HouseItemHeader language={language} />
+      <HouseItemHeader language={language} count={items.length} />
 
       <div className={`flex flex-wrap gap-y-4 pb-6 ${className}`}>
         {items.map((item, index) => (

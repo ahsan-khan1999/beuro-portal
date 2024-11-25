@@ -17,35 +17,38 @@ export const AppointmentTableRecordCard = ({
 }: AppointmentMobileRecordsProps) => {
   const router = useRouter();
 
+  const handleClickRow = (isSubmited: boolean, id: string) => {
+    if (isSubmited) {
+      router.push({
+        pathname: "/agent/appointments/report-detail",
+        query: { ...router.query, reportId: id },
+      });
+    } else {
+      router.push({
+        pathname: "/agent/appointments/details",
+        query: {
+          ...router.query,
+          appointment: id,
+        },
+      });
+    }
+  };
+
+  const handlePreview = (id: string) => {
+    router.push({
+      pathname: `/agent/appointments/pdf`,
+      query: { ...router.query, reportId: id },
+    });
+  };
+
   return (
     <div className="flex flex-col gap-y-3">
       {dataToAdd?.map((item, index) => {
-        const handleReportDetail = () => {
-          router.push({
-            pathname: "/agent/appointments/report-detail",
-            query: { ...router.query, reportId: item?.id },
-          });
-        };
-
-        const handleAppointmentRoute = () => {
-          router.push({
-            pathname: "/agent/appointments/details",
-            query: {
-              ...router.query,
-              appointment: item?.id,
-            },
-          });
-        };
-
         return (
           <div
             className="pl-5 pb-5 pt-[14px] pr-[14px] bg-white rounded-lg cursor-pointer"
             key={index}
-            onClick={
-              item?.isReportSubmitted
-                ? handleReportDetail
-                : handleAppointmentRoute
-            }
+            onClick={() => handleClickRow(item?.isReportSubmitted, item.id)}
           >
             <div className="flex flex-col gap-y-1">
               <div className="flex items-start justify-between gap-x-3">
@@ -79,7 +82,7 @@ export const AppointmentTableRecordCard = ({
                         : item?.appointmentStatus === "Completed"
                         ? "bg-[#45C769]"
                         : "bg-[#D80027]"
-                    } rounded-lg h-[21px] flex items-center justify-center`}
+                    } rounded-lg h-[30px] flex items-center justify-center`}
                   >
                     <span className="text-white text-xs font-medium">
                       {item?.appointmentStatus}
@@ -89,8 +92,8 @@ export const AppointmentTableRecordCard = ({
                   {item?.isReportSubmitted ? (
                     <OutlineButton
                       inputType="button"
-                      onClick={handleReportDetail}
-                      className="bg-white text-primary w-full border border-primary !h-[21px] text-xs font-medium"
+                      onClick={() => handlePreview(item.id)}
+                      className="bg-white text-primary w-full border border-primary !h-[30px] text-xs font-medium"
                       text={translate("appointments.view_reports_btn")}
                       id="view reports"
                       iconAlt="view reports"
@@ -98,12 +101,10 @@ export const AppointmentTableRecordCard = ({
                   ) : (
                     <Button
                       inputType="button"
-                      onClick={
-                        item?.isReportSubmitted
-                          ? handleReportDetail
-                          : handleAppointmentRoute
+                      onClick={() =>
+                        handleClickRow(item?.isReportSubmitted, item.id)
                       }
-                      className="!h-[21px] text-xs font-medium text-white flex items-center bg-primary rounded-lg"
+                      className="!h-[30px] text-xs font-medium text-white flex items-center bg-primary rounded-lg"
                       text={translate("appointments.sub_report")}
                       id="view reports"
                       iconAlt="view reports"

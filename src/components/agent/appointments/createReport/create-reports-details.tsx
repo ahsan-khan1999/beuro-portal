@@ -151,6 +151,9 @@ const CreateReportDetails = () => {
     const query = router.query;
     delete query.report;
     delete query.tab;
+    // if (query.appointmentId) {
+    //   delete query.appointmentId;
+    // }
     if (companyAppointment) {
       // if (router.query.today) {
       //   query.today = router.query.today;

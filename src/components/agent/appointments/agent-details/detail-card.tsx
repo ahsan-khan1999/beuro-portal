@@ -198,29 +198,32 @@ export const AppointmentsDetailCard = ({
                 {appointmentDetails?.leadID?.refID}
               </span>
             </div>
-            <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
+            <div className="flex xs:justify-between xMini:justify-start min-h-[36px] xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
               <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[60px] w-fit">
                 {translate("appointments.detail_data.status")}:
               </span>
-              <div>
-                <DropDown
-                  items={items}
-                  selectedItem={translate(
-                    `appointments.appointment_status.${appointmentDetails?.appointmentStatus}`
-                  )}
-                  onItemSelected={onStatusChange}
-                  dropDownClassName={`${
-                    appointmentDetails?.appointmentStatus === "Pending"
-                      ? "bg-[#4A13E7]"
-                      : appointmentDetails?.appointmentStatus === "Completed"
-                      ? "bg-[#45C769]"
-                      : "bg-[#D80027]"
-                  } min-w-[140px] rounded-lg px-4 py-[5px] flex items-center justify-center`}
-                  dropDownTextClassName="text-white text-sm xMini:text-base font-medium me-1"
-                  dropDownItemsContainerClassName="min-w-[140px] text-sm xMini:text-base"
-                  dropDownIconClassName="text-white"
-                />
-              </div>
+
+              {appointmentDetails?.appointmentStatus && (
+                <div>
+                  <DropDown
+                    items={items}
+                    selectedItem={translate(
+                      `appointments.appointment_status.${appointmentDetails?.appointmentStatus}`
+                    )}
+                    onItemSelected={onStatusChange}
+                    dropDownClassName={`min-h-[36px] ${
+                      appointmentDetails?.appointmentStatus === "Pending"
+                        ? "bg-[#4A13E7]"
+                        : appointmentDetails?.appointmentStatus === "Completed"
+                        ? "bg-[#45C769]"
+                        : "bg-[#D80027]"
+                    } min-w-[140px] rounded-lg px-4 py-[5px] flex items-center justify-center`}
+                    dropDownTextClassName="text-white text-sm xMini:text-base font-medium me-1"
+                    dropDownItemsContainerClassName="min-w-[140px] text-sm xMini:text-base"
+                    dropDownIconClassName="text-white"
+                  />
+                </div>
+              )}
             </div>
           </div>
           <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-3">
