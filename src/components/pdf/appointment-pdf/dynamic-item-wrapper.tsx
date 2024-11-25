@@ -37,7 +37,10 @@ export const DynamicItemWrapper: React.FC<RoomItem> = ({
           {generalRoom?.descriptions}
         </p>
       </div>
-      <HouseItemHeader language={language} />
+      <HouseItemHeader
+        language={language}
+        count={getDynamicRoom(language || "en", generalRoom)?.length}
+      />
       <div className={`flex flex-wrap gap-y-4 pb-6 ${className}`}>
         {getDynamicRoom(language || "en", generalRoom)?.map((item, index) => (
           <div key={index} className="w-1/3 pr-6">

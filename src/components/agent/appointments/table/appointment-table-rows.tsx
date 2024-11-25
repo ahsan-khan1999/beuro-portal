@@ -49,18 +49,6 @@ export const AppointmentTableRows = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  // const itemsValue = [
-  //   `${translate("appointments.appointment_status.Pending")}`,
-  //   `${translate("appointments.appointment_status.Completed")}`,
-  //   `${translate("appointments.appointment_status.Cancelled")}`,
-  // ];
-
-  // const items = Object.keys(staticEnums["AppointmentStatus"]).map(
-  //   (item, index) => ({
-  //     item: { label: itemsValue[index], value: item },
-  //   })
-  // );
-
   const handlePreview = (id: string) => {
     router.push({
       pathname: `/agent/appointments/pdf`,
@@ -68,26 +56,43 @@ export const AppointmentTableRows = ({
     });
   };
 
+  const handleClickRow = (isSubmited: boolean, id: string) => {
+    if (isSubmited) {
+      router.push({
+        pathname: "/agent/appointments/report-detail",
+        query: { ...router.query, reportId: id },
+      });
+    } else {
+      router.push({
+        pathname: "/agent/appointments/details",
+        query: {
+          ...router.query,
+          appointment: id,
+        },
+      });
+    }
+  };
+
+  const handleReportDetail = (id: string) => {
+    router.push({
+      pathname: "/agent/appointments/report-detail",
+      query: { ...router.query, reportId: id },
+    });
+  };
+
+  const handleAppointmentRoute = (id: string) => {
+    router.push({
+      pathname: "/agent/appointments/details",
+      query: {
+        ...router.query,
+        appointment: id,
+      },
+    });
+  };
+
   return (
     <div className={`overflow-y-visible`}>
       {dataToAdd?.map((item, index) => {
-        const handleReportDetail = () => {
-          router.push({
-            pathname: "/agent/appointments/report-detail",
-            query: { ...router.query, reportId: item?.id },
-          });
-        };
-
-        const handleAppointmentRoute = () => {
-          router.push({
-            pathname: "/agent/appointments/details",
-            query: {
-              ...router.query,
-              appointment: item?.id,
-            },
-          });
-        };
-
         const customerType = item?.leadID?.customerDetail
           ?.customerType as keyof (typeof staticEnums)["CustomerType"];
 
@@ -111,11 +116,7 @@ export const AppointmentTableRows = ({
         return (
           <div>
             <div
-              onClick={
-                item?.isReportSubmitted
-                  ? handleReportDetail
-                  : handleAppointmentRoute
-              }
+              onClick={() => handleClickRow(item?.isReportSubmitted, item.id)}
               className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
                 index !== 0 && "border-t border-t-[#E7EAEE]"
               }   grid grid-cols-12  items-center gap-x-2 bg-primary rounded-lg px-2 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
@@ -181,9 +182,12 @@ export const AppointmentTableRows = ({
                 </div>
               </div>
               <div className="col-span-2 pl-1">
-                <div className="flex gap-x-1  lg: gap-x-2">
+                <div
+                  className="flex items-center gap-x-1 2xl:gap-x-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <div
-                    className="flex justify-center items-center cursor-pointer hidden xl:flex"
+                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex w-6 h-6 2xl:w-8 2xl:h-8"
                     onClick={(e) =>
                       handleImageUpload(
                         item?.id,
@@ -195,12 +199,10 @@ export const AppointmentTableRows = ({
                     }
                     title={translate("leads.table_headings.images")}
                   >
-                    <span className="hover:bg-[#E9E1FF] rounded-lg hover:shadow-lg">
-                      <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
-                    </span>
+                    <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
                   </div>
                   <div
-                    className="flex justify-center items-center cursor-pointer hidden xl:flex"
+                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex w-6 h-6 2xl:w-8 2xl:h-8"
                     onClick={(e) =>
                       handleNotes(
                         item?.id,
@@ -213,19 +215,15 @@ export const AppointmentTableRows = ({
                     }
                     title={translate("leads.table_headings.note")}
                   >
-                    <span className="hover:bg-[#E9E1FF] rounded-lg hover:shadow-lg">
-                      <AddNoteIcon
-                        isNoteCreated={item?.leadID?.isNoteCreated}
-                      />
-                    </span>
+                    <AddNoteIcon isNoteCreated={item?.leadID?.isNoteCreated} />
                   </div>
 
-                  <div className="flex items-center">
+                  <div className="flex items-center w-full">
                     {item?.isReportSubmitted ? (
                       <OutlineButton
                         inputType="button"
                         onClick={() => handlePreview(item?.id)}
-                        className="bg-white text-primary xl:text-[#45C769] w-fit border border-primary xl:border-[#45C769] hover:border-buttonHover p-2 !text-xs !md:text-sm !xl:text-base !h-fit"
+                        className="bg-white py-2 px-1 md:px-2 text-primary xl:text-[#45C769] !min-w-[104px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover py-2 !text-xs !lg:text-sm !2xl:text-lg !h-fit"
                         text={translate("appointments.view_reports_btn")}
                         id="view reports"
                         iconAlt="view reports"
@@ -233,8 +231,8 @@ export const AppointmentTableRows = ({
                     ) : (
                       <Button
                         inputType="button"
-                        onClick={handleAppointmentRoute}
-                        className="!h-fit p-2 flex items-center !text-xs !md:text-sm !xl:text-base font-medium bg-primary text-white rounded-md w-fit"
+                        onClick={() => handleClickRow(false, item.id)}
+                        className="!h-fit py-2 px-1 md:px-2 flex items-center !min-w-[104px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-primary text-white rounded-md w-full"
                         text={translate("appointments.sub_report_1")}
                         id="view reports"
                         iconAlt="view reports"

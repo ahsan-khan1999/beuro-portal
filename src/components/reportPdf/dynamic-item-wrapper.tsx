@@ -76,7 +76,10 @@ export const DynamicItemWrapper = ({ generalRoom, language }: RoomItem) => {
           {generalRoom?.descriptions}
         </Text>
       </View>
-      <HouseItemHeader language={language} />
+      <HouseItemHeader
+        language={language}
+        count={getDynamicRoom(language || "en", generalRoom)?.length}
+      />
 
       <View style={styles.grid}>
         {getDynamicRoom(language || "en", generalRoom)?.map((item, index) => (

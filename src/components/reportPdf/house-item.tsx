@@ -37,12 +37,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HouseItem = ({
-  icon,
-  name,
-  quantity,
-}: HouseDetailObjectProps) => {
- 
+export const HouseItem = ({ icon, name, quantity }: HouseDetailObjectProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.labelContainer}>
@@ -51,7 +46,9 @@ export const HouseItem = ({
       </View>
 
       <View style={styles.qtyDiv}>
-        <Text style={styles.textbase}>{quantity}</Text>
+        <Text style={{ ...styles.textbase, overflow: "hidden" }}>
+          {quantity}
+        </Text>
       </View>
     </View>
   );
