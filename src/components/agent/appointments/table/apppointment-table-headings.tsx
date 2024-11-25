@@ -1,53 +1,45 @@
 import { useTranslation } from "next-i18next";
 import React from "react";
 
-export const AppointmentTableHeadings = ({
-  isAgent,
-}: {
-  isAgent?: boolean;
-}) => {
+export const AppointmentTableHeadings = () => {
   const { t: translate } = useTranslation();
 
   return (
     <div>
       <div className="grid grid-cols-12 items-center gap-x-2 bg-primary rounded-lg px-2 py-4">
         <div className="col-span-2">
-          <span className="font-semibold text-sm text-white">
+          <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.customer")}
           </span>
         </div>
         <div className="col-span-2">
-          <span className="font-semibold text-sm text-white  hidden md:flex">
+          <span className="font-semibold text-xs md:text-sm xl:text-base text-white  hidden md:flex">
             {translate("appointments.table_headings.company_name")}
           </span>
-          <span className="font-semibold text-sm text-white flex md:hidden truncate">
+          <span className="font-semibold text-xs md:text-sm xl:text-base text-white flex md:hidden truncate">
             {translate("appointments.table_headings.company_name").slice(0, 10)}
             ..
           </span>
         </div>
         <div className="col-span-2 flex items-center items-center justify-center">
-          <span className="font-semibold text-sm text-white">
+          <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.date")}/
             {translate("appointments.table_headings.time")}
           </span>
         </div>
-        {/* <div className="col-span-1">
-          <span className="font-semibold text-sm text-white">
-            {translate("appointments.table_headings.time")}
-          </span>
-        </div> */}
+
         <div className="col-span-2">
-          <span className="font-semibold text-sm text-white">
+          <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.canton")}
           </span>
         </div>
         <div className="col-span-2">
-          <span className="font-semibold text-sm text-white">
+          <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.offer_status")}
           </span>
         </div>
         <div className="col-span-2">
-          <span className="font-semibold text-sm text-white">
+          <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("common.actions")}
           </span>
         </div>

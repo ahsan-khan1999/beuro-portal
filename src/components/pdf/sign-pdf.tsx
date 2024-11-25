@@ -57,8 +57,6 @@ export const SignPdf = <T,>({
     dispatch(updateModalType(ModalType.NONE));
   };
 
-  console.log(pdfData.headerDetails?.companyName, "pdfData");
-
   const handleUpdateSuccess = async () => {
     const res = await dispatch(
       updateOfferStatus({ data: { id: pdfData?.id, offerStatus: 3 } })

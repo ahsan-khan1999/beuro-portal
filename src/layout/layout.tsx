@@ -97,7 +97,7 @@ export const Layout = ({ children }: MyComponentProp) => {
       </Head>
 
       <main className="bg-[#F3F3F3]">
-        <div className={`${isAgentRoute ? "hidden mlg:block" : "block"}`}>
+        <div className={`${isAgentRoute ? "hidden xl:block" : "block"}`}>
           <SideBar isDrawer={false} handleDrawer={handleDrawer} />
         </div>
         <Drawer />
@@ -112,7 +112,7 @@ export const Layout = ({ children }: MyComponentProp) => {
 
         <div
           className={`${
-            isAgentRoute ? "xs:ml-5 mlg:ml-[272px]" : "ml-[272px]"
+            isAgentRoute ? "xs:ml-5 xl:ml-[272px]" : "ml-[272px]"
           } mt-[150px] xMini:mt-[90px] mr-5`}
         >
           {children}

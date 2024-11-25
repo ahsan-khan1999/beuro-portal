@@ -102,7 +102,7 @@ const AppointmentPdfPreview = <T,>({
       ? true
       : false || false;
 
-  const { address, workDates } = pdfData?.movingDetails || {};
+  const { address, workDates, time } = pdfData?.movingDetails || {};
   const livingRoomDetails = pdfData?.houseDetails?.livingRoomDetails;
   const generalRoomDetails = pdfData?.houseDetails?.generalRoomDetails;
   const kitchenDetails = pdfData?.houseDetails?.kitchenDetails;
@@ -525,7 +525,7 @@ const AppointmentPdfPreview = <T,>({
         />
         <div className="px-[80px] flex flex-col bg-white">
           <ContactDetails {...{ ...pdfData?.contactAddress, language }} />
-          <AddressDetails {...{ address, workDates }} />
+          <AddressDetails {...{ address, workDates, time }} />
 
           <ServiceHeader isDiscount={isDiscount} />
           {pdfData?.serviceItem?.map((item, index) => (

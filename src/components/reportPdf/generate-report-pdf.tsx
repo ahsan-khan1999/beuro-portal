@@ -107,7 +107,7 @@ const ReportPdf = ({
   lang,
 }: PdfPreviewProps) => {
   const headerDetails = data?.headerDetails;
-  const { address, workDates } = data?.movingDetails || {};
+  const { address, workDates, time } = data?.movingDetails || {};
   const serviceItem = data?.serviceItem;
   const serviceItemFooter = data?.serviceItemFooter;
   const livingRoomDetails = data?.houseDetails?.livingRoomDetails;
@@ -292,9 +292,6 @@ const ReportPdf = ({
     });
     return items;
   };
-
-  // for dynamic room to put fix three room on every page
-  console.log(getBasement(lang || "", basementAtticDetails));
 
   const staticRooms = () => {
     const rooms: any[] = [];
@@ -489,7 +486,10 @@ const ReportPdf = ({
         <Header {...headerDetails} language={lang} />
 
         <ContactAddress {...{ ...contactAddress, language: lang }} />
-        <ReportAddressDetails {...{ address, workDates }} language={lang} />
+        <ReportAddressDetails
+          {...{ address, workDates, time }}
+          language={lang}
+        />
 
         <ServiceTableHederRow
           isDiscount={isDiscount}

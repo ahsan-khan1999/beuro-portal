@@ -111,15 +111,20 @@ export const AppointmentTableRows = ({
         return (
           <div>
             <div
+              onClick={
+                item?.isReportSubmitted
+                  ? handleReportDetail
+                  : handleAppointmentRoute
+              }
               className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
                 index !== 0 && "border-t border-t-[#E7EAEE]"
               }   grid grid-cols-12  items-center gap-x-2 bg-primary rounded-lg px-2 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
             >
               <div className="col-span-2">
-                <span className="text-sm hidden md:flex">
+                <span className="text-xs md:sm xl:text-base hidden md:flex">
                   {item.leadID?.customerDetail?.fullName}
                 </span>
-                <span className="text-sm flex md:hidden">
+                <span className="text-xs md:sm xl:text-base flex md:hidden">
                   {item.leadID?.customerDetail?.fullName?.length > 12
                     ? item.leadID?.customerDetail?.fullName.slice(0, 12) + ".."
                     : item.leadID?.customerDetail?.fullName}
@@ -127,10 +132,10 @@ export const AppointmentTableRows = ({
               </div>
 
               <div className="col-span-2">
-                <span className="text-sm hidden md:flex">
+                <span className="text-xs md:sm xl:text-base hidden md:flex">
                   {item.leadID?.customerDetail?.companyName}
                 </span>
-                <span className="text-sm flex md:hidden">
+                <span className="text-xs md:sm xl:text-base flex md:hidden">
                   {item.leadID?.customerDetail?.companyName?.length > 12
                     ? item.leadID?.customerDetail?.companyName.slice(0, 12) +
                       ".."
@@ -138,17 +143,27 @@ export const AppointmentTableRows = ({
                 </span>
               </div>
 
-              <div className="col-span-2 flex flex-col items-center justify-center">
-                <span className="text-sm ml-1">
+              <div className="col-span-2 flex flex-col items-center justify-center gap-y-1">
+                <span className="text-xs md:sm xl:text-base ml-1">
                   {formatDateTimeToDate(item?.date)}
                 </span>
-                <span className="text-sm">
-                  {localStartTime}- {localEndTime}
-                </span>
+                <div className="flex flex-wrap gap-x-1 items-center justify-center">
+                  <p className="text-xs leading-4 md:sm xl:text-base">
+                    {localStartTime}
+                  </p>
+
+                  <p className="text-xs md:sm xl:text-base   p-0 m-0">-</p>
+
+                  <p className="text-xs md:sm xl:text-base p-0 m-0">
+                    {localEndTime}
+                  </p>
+                </div>
               </div>
 
               <div className="col-span-2">
-                <span className="text-sm">{item?.canton}</span>
+                <p className="text-xs md:sm xl:text-base leading-5">
+                  {item?.canton}
+                </p>
               </div>
               <div className="col-span-2">
                 <div
@@ -165,34 +180,10 @@ export const AppointmentTableRows = ({
                   </span>
                 </div>
               </div>
-              <div className="col-span-2">
-                <div
-                  className="flex xl:hidden items-center"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {item?.isReportSubmitted ? (
-                    <OutlineButton
-                      inputType="button"
-                      onClick={() => handlePreview(item?.id)}
-                      className="bg-white text-primary w-fit border border-primary p-2 text-xs !h-fit"
-                      text={translate("appointments.view_reports_btn")}
-                      id="view reports"
-                      iconAlt="view reports"
-                    />
-                  ) : (
-                    <Button
-                      inputType="button"
-                      onClick={handleAppointmentRoute}
-                      className="!h-fit p-2 flex items-center text-xs font-semibold bg-primary text-white rounded-md whitespace-nowrap w-fit"
-                      text={translate("appointments.sub_report")}
-                      id="view reports"
-                      iconAlt="view reports"
-                    />
-                  )}
-                </div>
-                <div className="hidden xl:flex gap-x-1">
+              <div className="col-span-2 pl-1">
+                <div className="flex gap-x-1  lg: gap-x-2">
                   <div
-                    className="flex justify-center items-center cursor-pointer"
+                    className="flex justify-center items-center cursor-pointer hidden xl:flex"
                     onClick={(e) =>
                       handleImageUpload(
                         item?.id,
@@ -204,12 +195,12 @@ export const AppointmentTableRows = ({
                     }
                     title={translate("leads.table_headings.images")}
                   >
-                    <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
+                    <span className="hover:bg-[#E9E1FF] rounded-lg hover:shadow-lg">
                       <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
                     </span>
                   </div>
                   <div
-                    className="flex justify-center items-center cursor-pointer"
+                    className="flex justify-center items-center cursor-pointer hidden xl:flex"
                     onClick={(e) =>
                       handleNotes(
                         item?.id,
@@ -222,7 +213,7 @@ export const AppointmentTableRows = ({
                     }
                     title={translate("leads.table_headings.note")}
                   >
-                    <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
+                    <span className="hover:bg-[#E9E1FF] rounded-lg hover:shadow-lg">
                       <AddNoteIcon
                         isNoteCreated={item?.leadID?.isNoteCreated}
                       />
@@ -234,7 +225,7 @@ export const AppointmentTableRows = ({
                       <OutlineButton
                         inputType="button"
                         onClick={() => handlePreview(item?.id)}
-                        className="bg-white text-[#45C769] w-fit border border-[#45C769] hover:border-buttonHover p-2 text-xs !h-fit"
+                        className="bg-white text-primary xl:text-[#45C769] w-fit border border-primary xl:border-[#45C769] hover:border-buttonHover p-2 !text-xs !md:text-sm !xl:text-base !h-fit"
                         text={translate("appointments.view_reports_btn")}
                         id="view reports"
                         iconAlt="view reports"
@@ -243,7 +234,7 @@ export const AppointmentTableRows = ({
                       <Button
                         inputType="button"
                         onClick={handleAppointmentRoute}
-                        className="!h-fit p-2 flex items-center text-xs md:text-sm font-medium bg-primary text-white rounded-md whitespace-nowrap w-fit"
+                        className="!h-fit p-2 flex items-center !text-xs !md:text-sm !xl:text-base font-medium bg-primary text-white rounded-md w-fit"
                         text={translate("appointments.sub_report_1")}
                         id="view reports"
                         iconAlt="view reports"
