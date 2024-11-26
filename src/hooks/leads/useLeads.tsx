@@ -31,6 +31,20 @@ import { useQueryParams } from "@/utils/hooks";
 import { updateQuery } from "@/utils/update-query";
 import { getCurrentUtcDate, handleUtcDateChange } from "@/utils/utility";
 
+const initialNotes = {
+  id: "",
+  refID: "",
+  name: "",
+  heading: "",
+};
+const initialImages = {
+  id: "",
+  refID: "",
+  name: "",
+  heading: "",
+  tab: "",
+};
+
 const useLeads = () => {
   const router = useRouter();
   const params = useQueryParams();
@@ -43,6 +57,9 @@ const useLeads = () => {
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Lead[]>([]);
+
+  const [noteInfo, setNoteInfo] = useState(initialNotes);
+  const [imagesInfo, setImagesInfo] = useState(initialImages);
 
   const [filter, setFilter] = useState<FilterType>({
     sort: FiltersDefaultValues.None,
@@ -169,6 +186,58 @@ const useLeads = () => {
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
+
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    if (noteInfo.id) {
+      setNoteInfo(initialNotes);
+    }
+    if (imagesInfo.id) {
+      setImagesInfo(initialImages);
+    }
+  };
+
+  const handleBackToImages = () => {
+    if (imagesInfo.id)
+      handleImageUpload(
+        imagesInfo.id,
+        imagesInfo.refID,
+        imagesInfo.name,
+        imagesInfo.heading,
+        undefined
+      );
+  };
+
+  const updateSuccessModal = (tab?: string) => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+    if (tab) {
+      setImagesInfo((prev) => ({ ...prev, tab }));
+    }
+  };
+
+  const handleNotesUpdated = () => {
+    dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
+  };
+  const handleNotesAdded = () => {
+    dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
+    let found = currentPageRows.find((i) => i.id === noteInfo.id);
+    if (!found?.isNoteCreated) {
+      setCurrentPageRows((prev) =>
+        prev.map((item) =>
+          item.id === noteInfo.id ? { ...item, isNoteCreated: true } : item
+        )
+      );
+    }
+  };
+
+  const handleBackToNotes = () => {
+    if (noteInfo.id)
+      handleNotes(
+        noteInfo.id,
+        noteInfo.refID,
+        noteInfo.name,
+        noteInfo.heading,
+        undefined
+      );
   };
 
   const handleNotes = (
@@ -180,41 +249,25 @@ const useLeads = () => {
   ) => {
     e?.stopPropagation();
 
-    const filteredLead = lead?.filter((item_) => item_.id === id);
-    if (filteredLead?.length === 1) {
-      dispatch(setLeadDetails(filteredLead[0]));
-      dispatch(
-        readNotes({ params: { type: "lead", id: filteredLead[0]?.id } })
-      ).then((res: any) => {
-        if (res.payload.Note?.length > 0) {
-          setCurrentPageRows((prev) => {
-            const updatedLeads = prev.map((item) => {
-              if (item.id === filteredLead[0]?.id) {
-                const lead: Lead = {
-                  ...item,
-                  isNoteCreated: true,
-                };
-                return lead;
-              }
-              return item;
-            });
-            return updatedLeads;
-          });
-        }
-      });
-      dispatch(
-        updateModalType({
-          type: ModalType.EXISTING_NOTES,
-          data: {
-            refID: refID,
-            name: name,
-            heading: heading,
-          },
-        })
-      );
-    } else {
-      dispatch(updateModalType({ type: ModalType.CREATION }));
-    }
+    setNoteInfo({
+      id: id,
+      refID: refID || "",
+      name: name || "",
+      heading: heading || "",
+    });
+
+    dispatch(readNotes({ params: { type: "lead", id: id } }));
+    dispatch(
+      updateModalType({
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          id: id,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleAddNote = (
@@ -240,8 +293,23 @@ const useLeads = () => {
   const handleDeleteNote = async (id: string) => {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
-    if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+    if (response?.payload) {
+      dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
+
+      dispatch(readNotes({ params: { type: "lead", id: noteInfo.id } })).then(
+        (res: any) => {
+          if (!res?.payload?.Note?.length) {
+            setCurrentPageRows((prev) =>
+              prev.map((item) =>
+                item.id === noteInfo.id
+                  ? { ...item, isNoteCreated: false }
+                  : item
+              )
+            );
+          }
+        }
+      );
+    }
   };
 
   const handleEditNote = (
@@ -264,10 +332,6 @@ const useLeads = () => {
         },
       })
     );
-  };
-
-  const defaultUpdateModal = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const shareImgModal = (
@@ -299,25 +363,37 @@ const useLeads = () => {
       e?.stopPropagation();
     }
 
-    dispatch(setImages([]));
-    const filteredLead = lead.find((item_) => item_.id === id);
-
-    if (filteredLead) {
-      dispatch(setLeadDetails(filteredLead));
-      dispatch(readImage({ params: { type: "leadID", id: filteredLead?.id } }));
-
-      dispatch(
-        updateModalType({
-          type: ModalType.UPLOAD_IMAGE,
-          data: {
-            id: id,
-            refID: refID,
-            name: name,
-            heading: heading,
-          },
-        })
-      );
+    if (imagesInfo.tab) {
+      setImagesInfo((prev) => ({
+        ...prev,
+        id: id,
+        refID: refID || "",
+        name: name || "",
+        heading: heading || "",
+      }));
+    } else {
+      setImagesInfo({
+        id: id,
+        refID: refID || "",
+        name: name || "",
+        heading: heading || "",
+        tab: "",
+      });
     }
+
+    dispatch(readImage({ params: { type: "leadID", id: id } }));
+
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_IMAGE,
+        data: {
+          id: id,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleConfirmDeleteNote = (id: string) => {
@@ -372,22 +448,22 @@ const useLeads = () => {
             let prevPageRows = [...currentPageRows];
             prevPageRows.splice(index, 1, res.payload);
             setCurrentPageRows(prevPageRows);
-            defaultUpdateModal();
+            updateSuccessModal();
           }
         }
       }
     }
   };
 
-  const handleUpdateRow = (id?: string) => {
-    setCurrentPageRows((prev) =>
-      prev?.map((lead) => {
-        return lead.id === id ? { ...lead, isImageAdded: true } : lead;
-      })
-    );
-  };
-
   const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.NOTE_UPDATED_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={handleBackToNotes}
+      />
+    ),
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
         handleAddNote={handleAddNote}
@@ -399,8 +475,8 @@ const useLeads = () => {
     ),
     [ModalType.EDIT_NOTE]: (
       <UpdateNote
-        onClose={onClose}
-        handleNotes={handleNotes}
+        onClose={handleBackToNotes}
+        handleNotes={handleNotesUpdated}
         handleFilterChange={handleFilterChange}
         filter={filter}
         mainHeading={translate("common.update_note")}
@@ -411,8 +487,8 @@ const useLeads = () => {
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
-        onClose={onClose}
-        handleNotes={handleNotes}
+        onClose={handleBackToNotes}
+        handleNotes={handleNotesAdded}
         handleFilterChange={handleFilterChange}
         filter={filter}
         mainHeading={translate("common.add_note")}
@@ -420,7 +496,7 @@ const useLeads = () => {
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
       <ConfirmDeleteNote
-        onClose={onClose}
+        onClose={handleBackToNotes}
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
@@ -430,8 +506,9 @@ const useLeads = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload
         onClose={onClose}
-        onUpdateRow={handleUpdateRow}
-        handleImageSlider={defaultUpdateModal}
+        onUpdateRow={() => {}}
+        handleImageSlider={updateSuccessModal}
+        tab={imagesInfo.tab}
       />
     ),
     [ModalType.CREATION]: (
@@ -439,7 +516,7 @@ const useLeads = () => {
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
-        route={onClose}
+        route={handleBackToImages}
       />
     ),
     [ModalType.SCHEDULE_APPOINTMENTS]: (
