@@ -13,6 +13,7 @@ import { BaseButton } from "../button/base-button";
 import editNoteIcon from "@/assets/svgs/edit_primary.svg";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { Appointments } from "@/types/appointments";
+import CustomLoader from "../loader/customer-loader";
 
 const ExistingNotes = ({
   handleAddNote,
@@ -43,7 +44,7 @@ const ExistingNotes = ({
     | InvoiceTableRowTypes
     | Appointments;
 }) => {
-  const { notes } = useAppSelector((state) => state.note);
+  const { notes, loading } = useAppSelector((state) => state.note);
   const { id, refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
   );
@@ -73,6 +74,7 @@ const ExistingNotes = ({
               buttonText={translate("common.notes_modal.button")}
               containerClassName="flex items-center group gap-x-3 row-reverse bg-primary hover:bg-buttonHover"
               textClassName="text-white font-medium"
+              disabled={loading ? true : false}
             />
           </div>
         </div>
@@ -81,6 +83,7 @@ const ExistingNotes = ({
           <div className="flex items-center gap-x-[34px]">
             <div className="flex items-center gap-x-[14px]">
               <span className="text-sm font-normal text-[#4D4D4D]">ID:</span>
+
               <span className="text-sm font-medium text-primary">{refID}</span>
             </div>
             <div className="flex items-center gap-x-[14px]">
@@ -92,7 +95,7 @@ const ExistingNotes = ({
           </div>
         </div>
 
-        {notes && notes?.length > 0 ? (
+        {!loading && notes && notes?.length > 0 && (
           <div className="h-[550px] overflow-y-auto overflow-x-hidden">
             {notes?.map((item, key) => (
               <div
@@ -151,7 +154,9 @@ const ExistingNotes = ({
               </div>
             ))}
           </div>
-        ) : (
+        )}
+
+        {!loading && (!notes || notes.length === 0) && (
           <NoDataEmptyState
             className="w-full"
             containerClassName="py-5 px-6"
@@ -159,6 +164,7 @@ const ExistingNotes = ({
             imgClassName="w-20 h-20 xMini:w-fit xMini:h-fit"
           />
         )}
+        {loading && <CustomLoader />}
       </div>
     </BaseModal>
   );
