@@ -89,6 +89,8 @@ export enum ModalType {
   PAID_DATE_INVOICE,
   LOADING_MAIL_GIF,
   IMAGE_UPDATED_SUCCESS,
+  NOTE_ADDED_SUCCESS,
+  NOTE_UPDATED_SUCCESS,
 }
 
 export type ModalConfigType = {

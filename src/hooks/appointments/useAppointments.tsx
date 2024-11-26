@@ -37,6 +37,21 @@ import { useDeepCompareMemoize, useQueryParams } from "@/utils/hooks";
 import { handleUtcDateChange } from "@/utils/utility";
 import { useReportUpdatedPdf } from "./useReportUpdatedPdf";
 
+const initialNotes = {
+  id: "",
+  refID: "",
+  name: "",
+  heading: "",
+  leadId: "",
+};
+const initialImages = {
+  id: "",
+  refID: "",
+  name: "",
+  heading: "",
+  tab: "",
+};
+
 export const useAppointments = () => {
   const {
     loading,
@@ -53,15 +68,9 @@ export const useAppointments = () => {
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
-  console.log("currentPageRows:", currentPageRows);
 
-  const [noteInfo, setNoteInfo] = useState({
-    id: "",
-    refID: "",
-    name: "",
-    heading: "",
-    leadId: "",
-  });
+  const [noteInfo, setNoteInfo] = useState(initialNotes);
+  const [imagesInfo, setImagesInfo] = useState(initialImages);
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
@@ -218,10 +227,19 @@ export const useAppointments = () => {
 
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
+    if (noteInfo.id || noteInfo.leadId) {
+      setNoteInfo(initialNotes);
+    }
+    if (imagesInfo.id) {
+      setImagesInfo(initialImages);
+    }
   };
 
-  const updateSuccessModal = () => {
+  const updateSuccessModal = (tab?: string) => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
+    if (tab) {
+      setImagesInfo((prev) => ({ ...prev, tab }));
+    }
   };
 
   const handleAppointmentCreate = (id: string) => {
@@ -304,10 +322,10 @@ export const useAppointments = () => {
   };
 
   const handleNotesUpdated = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
   };
   const handleNotesAdded = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
     let found = currentPageRows.find((i) => i.id === noteInfo.id);
     if (!found?.leadID?.isNoteCreated) {
       setCurrentPageRows((prev) =>
@@ -348,32 +366,11 @@ export const useAppointments = () => {
       refID: refID || "",
       name: name || "",
       heading: heading || "",
-      leadId: leadId || "d",
+      leadId: leadId || "",
     });
 
     dispatch(readNotes({ params: { type: "lead", id: leadId } }));
-    // .then(
-    //   (res: any) => {
-    //     if (res?.payload?.Note?.length > 0) {
-    //       setCurrentPageRows((prev) => {
-    //         const updatedAppointment = prev?.map((item) => {
-    //           if (item.id === leadId) {
-    //             const appointment: Appointments = {
-    //               ...item,
-    //               leadID: {
-    //                 ...item.leadID,
-    //                 isNoteCreated: true,
-    //               },
-    //             };
-    //             return appointment;
-    //           }
-    //           return item;
-    //         });
-    //         return updatedAppointment;
-    //       });
-    //     }
-    //   }
-    // );
+
     dispatch(
       updateModalType({
         type: ModalType.EXISTING_NOTES,
@@ -412,7 +409,7 @@ export const useAppointments = () => {
     const response = await dispatch(deleteNotes({ data: { id: id } }));
 
     if (response?.payload) {
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+      dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
 
       dispatch(
         readNotes({ params: { type: "lead", id: noteInfo.leadId } })
@@ -462,6 +459,17 @@ export const useAppointments = () => {
     );
   };
 
+  const handleBackToImages = () => {
+    if (imagesInfo.id)
+      handleImageUpload(
+        imagesInfo.id,
+        imagesInfo.refID,
+        imagesInfo.name,
+        imagesInfo.heading,
+        undefined
+      );
+  };
+
   const handleImageUpload = (
     id: string,
     refID?: string,
@@ -471,6 +479,23 @@ export const useAppointments = () => {
   ) => {
     if (e) {
       e?.stopPropagation();
+    }
+    if (imagesInfo.tab) {
+      setImagesInfo((prev) => ({
+        ...prev,
+        id: id,
+        refID: refID || "",
+        name: name || "",
+        heading: heading || "",
+      }));
+    } else {
+      setImagesInfo({
+        id: id,
+        refID: refID || "",
+        name: name || "",
+        heading: heading || "",
+        tab: "",
+      });
     }
     dispatch(setImages([]));
     const filteredAppointment = appointment.find((item_) => item_.id === id);
@@ -482,29 +507,6 @@ export const useAppointments = () => {
           params: { type: "leadID", id: filteredAppointment?.leadID?.id },
         })
       );
-
-      // .then((res: any) => {
-      //   if (
-      //     res.payload?.images?.length > 0 ||
-      //     res.payload?.attachments?.length > 0 ||
-      //     res.payload?.videos?.length > 0 ||
-      //     res.payload?.links?.length > 0
-      //   ) {
-      //     setCurrentPageRows((prev) =>
-      //       prev?.map((item) => {
-      //         return item.id === filteredAppointment?.id
-      //           ? {
-      //               ...item,
-      //               leadID: {
-      //                 ...item.leadID,
-      //                 isImageAdded: true,
-      //               },
-      //             }
-      //           : item;
-      //       })
-      //     );
-      //   }
-      // });
 
       dispatch(
         updateModalType({
@@ -518,10 +520,6 @@ export const useAppointments = () => {
         })
       );
     }
-  };
-
-  const defaultUpdateModal = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleUpdateRow = (id?: string) => {
@@ -546,9 +544,18 @@ export const useAppointments = () => {
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
+        route={handleBackToImages}
+      />
+    ),
+    [ModalType.NOTE_UPDATED_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
         route={handleBackToNotes}
       />
     ),
+
     [ModalType.SCHEDULE_APPOINTMENTS]: (
       <ScheduleAppointments
         onClose={onClose}
@@ -616,8 +623,9 @@ export const useAppointments = () => {
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload
         onClose={onClose}
-        onUpdateRow={handleUpdateRow}
-        handleImageSlider={defaultUpdateModal}
+        onUpdateRow={() => {}}
+        handleImageSlider={updateSuccessModal}
+        tab={imagesInfo.tab}
       />
     ),
   };
