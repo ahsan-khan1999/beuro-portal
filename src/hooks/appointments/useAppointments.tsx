@@ -53,6 +53,15 @@ export const useAppointments = () => {
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
   const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
+  console.log("currentPageRows:", currentPageRows);
+
+  const [noteInfo, setNoteInfo] = useState({
+    id: "",
+    refID: "",
+    name: "",
+    heading: "",
+    leadId: "",
+  });
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
@@ -294,58 +303,88 @@ export const useAppointments = () => {
     dispatch(updateModalType({ type: ModalType.APPOINTMENT_SUCCESS }));
   };
 
+  const handleNotesUpdated = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+  const handleNotesAdded = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+    let found = currentPageRows.find((i) => i.id === noteInfo.id);
+    if (!found?.leadID?.isNoteCreated) {
+      setCurrentPageRows((prev) =>
+        prev.map((item) =>
+          item.id === noteInfo.id
+            ? { ...item, leadID: { ...item.leadID, isNoteCreated: true } }
+            : item
+        )
+      );
+    }
+  };
+  const handleBackToNotes = () => {
+    if (noteInfo.leadId)
+      handleNotes(
+        noteInfo.id,
+        noteInfo.refID,
+        noteInfo.name,
+        noteInfo.heading,
+        undefined,
+        noteInfo.leadId
+      );
+  };
+
   const handleNotes = (
     id: string,
     refID?: string,
     name?: string,
     heading?: string,
-    e?: React.MouseEvent<HTMLSpanElement>,
+    e?: React.MouseEvent<HTMLSpanElement> | undefined,
     leadId?: string
   ) => {
-    e?.stopPropagation();
-
-    const filteredAppointment = appointment?.filter((item_) => item_.id === id);
-    if (filteredAppointment?.length === 1) {
-      dispatch(setAppointmentDetails(filteredAppointment[0]));
-      dispatch(
-        readNotes({
-          params: { type: "lead", id: filteredAppointment[0]?.leadID?.id },
-        })
-      ).then((res: any) => {
-        if (res?.payload?.Note?.length > 0) {
-          setCurrentPageRows((prev) => {
-            const updatedAppointment = prev?.map((item) => {
-              if (item.id === filteredAppointment[0]?.id) {
-                const appointment: Appointments = {
-                  ...item,
-                  leadID: {
-                    ...item.leadID,
-                    isNoteCreated: true,
-                  },
-                };
-                return appointment;
-              }
-              return item;
-            });
-
-            return updatedAppointment;
-          });
-        }
-      });
-      dispatch(
-        updateModalType({
-          type: ModalType.EXISTING_NOTES,
-          data: {
-            id: leadId,
-            refID: refID,
-            name: name,
-            heading: heading,
-          },
-        })
-      );
-    } else {
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+    if (e) {
+      e?.stopPropagation();
     }
+
+    setNoteInfo({
+      id: id,
+      refID: refID || "",
+      name: name || "",
+      heading: heading || "",
+      leadId: leadId || "d",
+    });
+
+    dispatch(readNotes({ params: { type: "lead", id: leadId } }));
+    // .then(
+    //   (res: any) => {
+    //     if (res?.payload?.Note?.length > 0) {
+    //       setCurrentPageRows((prev) => {
+    //         const updatedAppointment = prev?.map((item) => {
+    //           if (item.id === leadId) {
+    //             const appointment: Appointments = {
+    //               ...item,
+    //               leadID: {
+    //                 ...item.leadID,
+    //                 isNoteCreated: true,
+    //               },
+    //             };
+    //             return appointment;
+    //           }
+    //           return item;
+    //         });
+    //         return updatedAppointment;
+    //       });
+    //     }
+    //   }
+    // );
+    dispatch(
+      updateModalType({
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          id: leadId,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleAddNote = (
@@ -371,8 +410,24 @@ export const useAppointments = () => {
   const handleDeleteNote = async (id: string) => {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
-    if (response?.payload)
+
+    if (response?.payload) {
       dispatch(updateModalType({ type: ModalType.CREATION }));
+
+      dispatch(
+        readNotes({ params: { type: "lead", id: noteInfo.leadId } })
+      ).then((res: any) => {
+        if (!res?.payload?.Note?.length) {
+          setCurrentPageRows((prev) =>
+            prev.map((item) =>
+              item.id === noteInfo.id
+                ? { ...item, leadID: { ...item.leadID, isNoteCreated: false } }
+                : item
+            )
+          );
+        }
+      });
+    }
   };
 
   const handleEditNote = (
@@ -491,7 +546,7 @@ export const useAppointments = () => {
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
-        route={onClose}
+        route={handleBackToNotes}
       />
     ),
     [ModalType.SCHEDULE_APPOINTMENTS]: (
@@ -526,8 +581,8 @@ export const useAppointments = () => {
     ),
     [ModalType.EDIT_NOTE]: (
       <UpdateNote
-        onClose={onClose}
-        handleNotes={handleNotes}
+        onClose={handleBackToNotes}
+        handleNotes={handleNotesUpdated}
         handleFilterChange={handleFilterChange}
         filter={filter}
         mainHeading={translate("common.update_note")}
@@ -542,8 +597,8 @@ export const useAppointments = () => {
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
-        onClose={onClose}
-        handleNotes={handleNotes}
+        onClose={handleBackToNotes}
+        handleNotes={handleNotesAdded}
         handleFilterChange={handleFilterChange}
         filter={filter}
         mainHeading={translate("common.add_note")}
@@ -551,7 +606,7 @@ export const useAppointments = () => {
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
       <ConfirmDeleteNote
-        onClose={onClose}
+        onClose={handleBackToNotes}
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}

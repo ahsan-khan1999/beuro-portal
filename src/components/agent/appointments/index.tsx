@@ -9,6 +9,7 @@ import { AppointmentTableFunctions } from "./table/appointment-table-functions";
 import { AppointmentTableHeadings } from "./table/apppointment-table-headings";
 import { AppointmentTableRecordCard } from "./mobile/table-record-card";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export default function AgentAppointments() {
   const {
@@ -29,6 +30,7 @@ export default function AgentAppointments() {
     handleImageUpload,
     handleCurrentDateChange,
     handlePdfPreview,
+    loading,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
@@ -55,30 +57,36 @@ export default function AgentAppointments() {
         onDateChange={handleCurrentDateChange}
       />
 
-      <div className="block xMini:hidden">
-        {currentPageRows && currentPageRows.length > 0 ? (
-          <AppointmentTableRecordCard dataToAdd={currentPageRows} />
-        ) : (
-          <div className="xMini:bg-white mt-6 xMini:flex items-center justify-center">
-            <NoDataEmptyState
-              containerClassName="xMini:py-[153px]"
-              imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
-              textClassName="text-lg xMini:text-2xl"
-              className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[617px]"
-            />
-          </div>
-        )}
-      </div>
+      {isLoading && <CustomLoader />}
 
-      <div className="hidden xMini:block">
-        <TableCardLayout>
-          <TableLayout isAgent={true}>
-            <AppointmentTableHeadings />
-            {CurrentComponent}
-          </TableLayout>
-        </TableCardLayout>
-      </div>
       {!isLoading && (
+        <div className="block xMini:hidden">
+          {currentPageRows && currentPageRows.length > 0 ? (
+            <AppointmentTableRecordCard dataToAdd={currentPageRows} />
+          ) : (
+            <div className="xMini:bg-white mt-6 xMini:flex items-center justify-center">
+              <NoDataEmptyState
+                containerClassName="xMini:py-[153px]"
+                imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
+                textClassName="text-lg xMini:text-2xl"
+                className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[617px]"
+              />
+            </div>
+          )}
+        </div>
+      )}
+
+      {!isLoading && (
+        <div className="hidden xMini:block">
+          <TableCardLayout>
+            <TableLayout isAgent={true}>
+              <AppointmentTableHeadings />
+              {CurrentComponent}
+            </TableLayout>
+          </TableCardLayout>
+        </div>
+      )}
+      {!isLoading && currentPageRows && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
