@@ -8,6 +8,7 @@ import { LeadsTableFunctions } from "@/components/leads/table/leads-table-functi
 import { LeadsTableHeadings } from "@/components/leads/table/leads-table-headings";
 import { LeadsTableRows } from "@/components/leads/table/leads-table-rows";
 import { LeadTableRecordCard } from "./mobile/leads-table-records";
+import CustomLoader from "@/base-components/ui/loader/customer-loader";
 
 export default function AgentLeads() {
   const {
@@ -54,17 +55,23 @@ export default function AgentLeads() {
         onDateChange={handleCurrentDateChange}
       />
 
-      <div className="block xMini:hidden">
-        <LeadTableRecordCard isAgent={true} dataToAdd={currentPageRows} />
-      </div>
-      <div className="hidden xMini:block">
-        <TableCardLayout>
-          <TableLayout isAgent={true}>
-            <LeadsTableHeadings isAgent={true} />
-            {CurrentComponent}
-          </TableLayout>
-        </TableCardLayout>
-      </div>
+      {isLoading && <CustomLoader />}
+
+      {!isLoading && (
+        <div className="block xMini:hidden">
+          <LeadTableRecordCard isAgent={true} dataToAdd={currentPageRows} />
+        </div>
+      )}
+      {!isLoading && (
+        <div className="hidden xMini:block">
+          <TableCardLayout>
+            <TableLayout isAgent={true}>
+              <LeadsTableHeadings isAgent={true} />
+              {CurrentComponent}
+            </TableLayout>
+          </TableCardLayout>
+        </div>
+      )}
       {!isLoading && (
         <Pagination
           totalItems={totalItems}
