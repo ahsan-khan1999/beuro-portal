@@ -160,7 +160,7 @@ export const useUploadImageOffer = (
       if (response?.payload) {
         if (id) {
           onUpdateDetails?.(id);
-          handleImageSlider();
+          handleImageSlider(activeTab);
           // handleTaskUpdateSuccess();
         }
       }
@@ -189,7 +189,7 @@ export const useUploadImageOffer = (
         links: formatLinks,
         attachments: formatAttachments,
         videos: formatVideos,
-        id: contractDetails?.id,
+        id: id ? id : contractDetails?.id,
         type: "contractID",
       };
       const response = await dispatch(
@@ -199,11 +199,10 @@ export const useUploadImageOffer = (
       if (response?.payload) {
         if (id) {
           onUpdateDetails?.(id);
-          handleImageSlider();
+          handleImageSlider(activeTab);
           // handleTaskUpdateSuccess();
         }
       }
-    } else {
     }
   };
 

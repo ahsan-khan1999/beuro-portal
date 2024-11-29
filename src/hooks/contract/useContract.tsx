@@ -33,6 +33,20 @@ import {
 } from "@/utils/utility";
 import { CustomerPromiseActionType } from "@/types/customer";
 
+const initialNotes = {
+  id: "",
+  refID: "",
+  name: "",
+  heading: "",
+};
+const initialImages = {
+  id: "",
+  refID: "",
+  name: "",
+  heading: "",
+  tab: "",
+};
+
 const useContract = () => {
   const { contract, loading, isLoading, totalCount, contractDetails } =
     useAppSelector((state) => state.contract);
@@ -45,6 +59,9 @@ const useContract = () => {
   const [currentPageRows, setCurrentPageRows] = useState<contractTableTypes[]>(
     []
   );
+
+  const [noteInfo, setNoteInfo] = useState(initialNotes);
+  const [imagesInfo, setImagesInfo] = useState(initialImages);
 
   useEffect(() => {
     const parsedPage = parseInt(router.query.page as string, 10);
@@ -161,7 +178,46 @@ const useContract = () => {
   };
 
   const onClose = () => {
-    dispatch(updateModalType(ModalType.NONE));
+    dispatch(updateModalType({ type: ModalType.NONE }));
+    if (noteInfo.id) {
+      setNoteInfo(initialNotes);
+    }
+    if (imagesInfo.id) {
+      setImagesInfo(initialImages);
+    }
+  };
+
+  const updateSuccessModal = (tab?: string) => {
+    console.log("tab:", tab);
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+    if (tab) {
+      setImagesInfo((prev) => ({ ...prev, tab }));
+    }
+  };
+
+  const handleNotesUpdated = () => {
+    dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
+  };
+  const handleNotesAdded = () => {
+    dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
+    let found = currentPageRows.find((i) => i.id === noteInfo.id);
+    if (!found?.isNoteCreated) {
+      setCurrentPageRows((prev) =>
+        prev.map((item) =>
+          item.id === noteInfo.id ? { ...item, isNoteCreated: true } : item
+        )
+      );
+    }
+  };
+  const handleBackToNotes = () => {
+    if (noteInfo.id)
+      handleNotes(
+        noteInfo.id,
+        noteInfo.refID,
+        noteInfo.name,
+        noteInfo.heading,
+        undefined
+      );
   };
 
   const handleNotes = (
@@ -171,42 +227,29 @@ const useContract = () => {
     heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e?.stopPropagation();
-
-    const filteredLead = contract?.filter((item_) => item_.id === id);
-
-    if (filteredLead?.length === 1) {
-      dispatch(setContractDetails(filteredLead[0]));
-      dispatch(
-        readNotes({ params: { type: "contract", id: filteredLead[0]?.id } })
-      ).then((res: any) => {
-        if (res.payload.Note?.length > 0) {
-          setCurrentPageRows((prev) => {
-            const updatedContracts = prev.map((item) => {
-              if (item.id === filteredLead[0]?.id) {
-                const contract: contractTableTypes = {
-                  ...item,
-                  isNoteCreated: true,
-                };
-                return contract;
-              }
-              return item;
-            });
-            return updatedContracts;
-          });
-        }
-      });
-      dispatch(
-        updateModalType({
-          type: ModalType.EXISTING_NOTES,
-          data: {
-            refID: refID,
-            name: name,
-            heading: heading,
-          },
-        })
-      );
+    if (e) {
+      e?.stopPropagation();
     }
+
+    setNoteInfo({
+      id: id,
+      refID: refID || "",
+      name: name || "",
+      heading: heading || "",
+    });
+
+    dispatch(readNotes({ params: { type: "contract", id: id } }));
+    dispatch(
+      updateModalType({
+        type: ModalType.EXISTING_NOTES,
+        data: {
+          id: id,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const handleAddNote = (
@@ -228,12 +271,35 @@ const useContract = () => {
       })
     );
   };
-
+  const handleBackToImages = () => {
+    console.log("imagesInfo:", imagesInfo);
+    if (imagesInfo.id)
+      handleImageUpload(
+        imagesInfo.id,
+        imagesInfo.refID,
+        imagesInfo.name,
+        imagesInfo.heading,
+        undefined
+      );
+  };
   const handleDeleteNote = async (id: string) => {
     if (!id) return;
     const response = await dispatch(deleteNotes({ data: { id: id } }));
-    if (response?.payload)
-      dispatch(updateModalType({ type: ModalType.CREATION }));
+    if (response?.payload) {
+      dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
+
+      dispatch(
+        readNotes({ params: { type: "contract", id: noteInfo.id } })
+      ).then((res: any) => {
+        if (!res?.payload?.Note?.length) {
+          setCurrentPageRows((prev) =>
+            prev.map((item) =>
+              item.id === noteInfo.id ? { ...item, isNoteCreated: false } : item
+            )
+          );
+        }
+      });
+    }
   };
 
   const handleEditNote = (
@@ -258,10 +324,6 @@ const useContract = () => {
     );
   };
 
-  const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
-
   const handleImageUpload = (
     id: string,
     refID?: string,
@@ -269,45 +331,41 @@ const useContract = () => {
     heading?: string,
     e?: React.MouseEvent<HTMLSpanElement>
   ) => {
-    e?.stopPropagation();
+    if (e) {
+      e?.stopPropagation();
+    }
+    if (imagesInfo.tab) {
+      setImagesInfo((prev) => ({
+        ...prev,
+        id: id,
+        refID: refID || "",
+        name: name || "",
+        heading: heading || "",
+      }));
+    } else {
+      setImagesInfo({
+        id: id,
+        refID: refID || "",
+        name: name || "",
+        heading: heading || "",
+        tab: "",
+      });
+    }
     dispatch(setImages([]));
 
-    const filteredLead = contract?.find((item_) => item_.id === id);
-    if (filteredLead) {
-      dispatch(setContractDetails(filteredLead));
-      dispatch(
-        readImage({ params: { type: "contractID", id: filteredLead?.id } })
-      );
+    dispatch(readImage({ params: { type: "contractID", id: id } }));
 
-      // .then((res: any) => {
-      //   if (
-      //     res.payload?.images.length > 0 ||
-      //     res.payload?.attachments.length > 0 ||
-      //     res.payload?.videos.length > 0 ||
-      //     res.payload?.links.length > 0
-      //   ) {
-      //     setCurrentPageRows((prev) =>
-      //       prev.map((contract) => {
-      //         return contract.id === filteredLead?.id
-      //           ? { ...contract, isImageAdded: true }
-      //           : contract;
-      //       })
-      //     );
-      //   }
-      // });
-
-      dispatch(
-        updateModalType({
-          type: ModalType.UPLOAD_OFFER_IMAGE,
-          data: {
-            id: id,
-            refID: refID,
-            name: name,
-            heading: heading,
-          },
-        })
-      );
-    }
+    dispatch(
+      updateModalType({
+        type: ModalType.UPLOAD_OFFER_IMAGE,
+        data: {
+          id: id,
+          refID: refID,
+          name: name,
+          heading: heading,
+        },
+      })
+    );
   };
 
   const contractHandler = () => {
@@ -855,16 +913,6 @@ const useContract = () => {
     }
   };
 
-  const handleUpdateRow = (id?: string) => {
-    setCurrentPageRows((prev) =>
-      prev?.map((contract) => {
-        return contract.id === id
-          ? { ...contract, isImageAdded: true }
-          : contract;
-      })
-    );
-  };
-
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -873,6 +921,14 @@ const useContract = () => {
         leadDetails={contractDetails}
         onEditNote={handleEditNote}
         onConfrimDeleteNote={handleConfirmDeleteNote}
+      />
+    ),
+    [ModalType.NOTE_UPDATED_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={handleBackToNotes}
       />
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
@@ -886,8 +942,8 @@ const useContract = () => {
     ),
     [ModalType.EDIT_NOTE]: (
       <UpdateNote
-        onClose={onClose}
-        handleNotes={handleNotes}
+        onClose={handleBackToNotes}
+        handleNotes={handleNotesUpdated}
         handleFilterChange={handleFilterChange}
         filter={filter}
         mainHeading={translate("common.add_note")}
@@ -895,8 +951,8 @@ const useContract = () => {
     ),
     [ModalType.ADD_NOTE]: (
       <AddNewNote
-        onClose={onClose}
-        handleNotes={handleNotes}
+        onClose={handleBackToNotes}
+        handleNotes={handleNotesAdded}
         handleFilterChange={handleFilterChange}
         filter={filter}
         mainHeading={translate("common.add_note")}
@@ -905,9 +961,10 @@ const useContract = () => {
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <ImagesUploadOffer
         onClose={onClose}
-        handleImageSlider={handleImageSlider}
         type={"Contract"}
-        onUpdateDetails={handleUpdateRow}
+        onUpdateDetails={() => {}}
+        handleImageSlider={updateSuccessModal}
+        tab={imagesInfo.tab}
       />
     ),
     [ModalType.CREATION]: (
@@ -915,7 +972,7 @@ const useContract = () => {
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
-        route={onClose}
+        route={handleBackToImages}
       />
     ),
     [ModalType.IS_CONTRACT_TASK_CREATED]: (
