@@ -622,7 +622,7 @@ export const useAppointments = () => {
     ),
     [ModalType.UPLOAD_IMAGE]: (
       <ImagesUpload
-        onClose={onClose}
+        onClose={handleBackToNotes}
         onUpdateRow={() => {}}
         handleImageSlider={updateSuccessModal}
         tab={imagesInfo.tab}

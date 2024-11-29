@@ -272,7 +272,6 @@ const useContract = () => {
     );
   };
   const handleBackToImages = () => {
-    console.log("imagesInfo:", imagesInfo);
     if (imagesInfo.id)
       handleImageUpload(
         imagesInfo.id,
@@ -933,7 +932,7 @@ const useContract = () => {
     ),
     [ModalType.CONFIRM_DELETE_NOTE]: (
       <ConfirmDeleteNote
-        onClose={onClose}
+        onClose={handleBackToNotes}
         modelHeading={translate("common.modals.delete_note")}
         onDeleteNote={handleDeleteNote}
         loading={loading}
