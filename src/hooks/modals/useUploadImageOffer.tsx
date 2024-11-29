@@ -12,7 +12,8 @@ export const useUploadImageOffer = (
   handleImageSlider: Function,
   type: string,
   id?: string,
-  onUpdateDetails?: (id: string) => void
+  onUpdateDetails?: (id: string) => void,
+  tab?: string
 ) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
@@ -22,7 +23,7 @@ export const useUploadImageOffer = (
   const { contractDetails } = useAppSelector((state) => state.contract);
   const { images, loading } = useAppSelector((state) => state.image);
   const { loading: loadingGlobal } = useAppSelector((state) => state.global);
-  const [activeTab, setActiveTab] = useState("img_tab");
+  const [activeTab, setActiveTab] = useState(tab ? tab : "img_tab");
   const [enteredLink, setEnteredLink] = useState<string>("");
   const [enteredLinks, setEnteredLinks] = useState<any>({
     images: [],
@@ -159,7 +160,7 @@ export const useUploadImageOffer = (
       if (response?.payload) {
         if (id) {
           onUpdateDetails?.(id);
-          handleImageSlider();
+          handleImageSlider(activeTab);
           // handleTaskUpdateSuccess();
         }
       }
@@ -169,7 +170,7 @@ export const useUploadImageOffer = (
         links: formatLinks,
         attachments: formatAttachments,
         videos: formatVideos,
-        id: offerDetails?.id,
+        id: id ? id : offerDetails?.id,
         type: "offerID",
       };
       const response = await dispatch(
@@ -179,8 +180,7 @@ export const useUploadImageOffer = (
       if (response?.payload) {
         if (id) {
           onUpdateDetails?.(id);
-          handleImageSlider();
-          // handleTaskUpdateSuccess();
+          handleImageSlider(activeTab);
         }
       }
     } else if (type === "Contract") {
@@ -189,7 +189,7 @@ export const useUploadImageOffer = (
         links: formatLinks,
         attachments: formatAttachments,
         videos: formatVideos,
-        id: contractDetails?.id,
+        id: id ? id : contractDetails?.id,
         type: "contractID",
       };
       const response = await dispatch(
@@ -199,27 +199,28 @@ export const useUploadImageOffer = (
       if (response?.payload) {
         if (id) {
           onUpdateDetails?.(id);
-          handleImageSlider();
+          handleImageSlider(activeTab);
           // handleTaskUpdateSuccess();
         }
       }
-    } else {
     }
   };
 
   useEffect(() => {
-    const { images, links, attachements, video } = enteredLinks;
+    if (!tab) {
+      const { images, links, attachements, video } = enteredLinks;
 
-    if (images && images.length > 0) {
-      setActiveTab("img_tab");
-    } else if (video && video.length > 0) {
-      setActiveTab("video_tab");
-    } else if (attachements && attachements.length > 0) {
-      setActiveTab("attachement_tab");
-    } else if (links && links.length > 0) {
-      setActiveTab("link_tab");
-    } else {
-      setActiveTab(attachementTabs[0]);
+      if (images && images.length > 0) {
+        setActiveTab("img_tab");
+      } else if (video && video.length > 0) {
+        setActiveTab("video_tab");
+      } else if (attachements && attachements.length > 0) {
+        setActiveTab("attachement_tab");
+      } else if (links && links.length > 0) {
+        setActiveTab("link_tab");
+      } else {
+        setActiveTab(attachementTabs[0]);
+      }
     }
   }, [images]);
 

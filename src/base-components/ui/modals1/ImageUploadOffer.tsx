@@ -15,6 +15,7 @@ export interface ImageUploadProps {
   onClose: () => void;
   type: string;
   onUpdateDetails?: (id: string) => void;
+  tab?: string;
 }
 
 const ImagesUploadOffer = ({
@@ -22,6 +23,7 @@ const ImagesUploadOffer = ({
   handleImageSlider,
   type,
   onUpdateDetails,
+  tab,
 }: ImageUploadProps) => {
   const { id, refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
@@ -44,7 +46,7 @@ const ImagesUploadOffer = ({
     handleVideoAdd,
     handleimageAdd,
     loadingGlobal,
-  } = useUploadImageOffer(handleImageSlider, type, id, onUpdateDetails);
+  } = useUploadImageOffer(handleImageSlider, type, id, onUpdateDetails, tab);
 
   const attachementLookUp = {
     img_tab: (
