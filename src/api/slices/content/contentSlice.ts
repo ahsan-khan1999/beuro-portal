@@ -21,7 +21,7 @@ interface ContentState {
 const initialState: ContentState = {
   content: [],
   loading: false,
-  isLoading: false,
+  isLoading: true,
   error: {},
   lastPage: 1,
   totalCount: 10,

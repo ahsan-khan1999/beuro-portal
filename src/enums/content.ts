@@ -1,5 +1,5 @@
 export enum LeadContentDetails {
-  contentName = "contentName",
+  // contentName = "contentName",
   leadTitle = "title",
   leadDescription = "description",
   emailBody = "body",

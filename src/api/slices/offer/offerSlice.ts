@@ -31,7 +31,7 @@ interface OfferState {
 const initialState: OfferState = {
   offer: [],
   loading: false,
-  isLoading: false,
+  isLoading: true,
   error: {},
   lastPage: 1,
   totalCount: 10,

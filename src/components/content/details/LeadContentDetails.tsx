@@ -5,27 +5,29 @@ import { ComponentsType } from "./ContentDetailsData";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
-const OfferContentDetailsData = ({
-  onClick,
-  contentDetail,
-}: {
+export interface LeadContentDetailsProps {
   onClick: (index: number, component: ComponentsType) => void;
   contentDetail: ContentTableRowTypes;
-}) => {
+}
+
+const LeadContentDetails = ({
+  onClick,
+  contentDetail,
+}: LeadContentDetailsProps) => {
   const { t: translate } = useTranslation();
 
   return (
     <div
       className="rounded-lg border-none bg-white border w-full h-fit"
-      id={translate("content.tabs_headings.offer_content")}
+      id={translate("content.tabs_headings.lead_content")}
     >
-      <div className="flex justify-between items-center bg-[#4A13E7] rounded-t-lg pt-[17px] pb-[22px] pl-[29px] pr-6">
+      <div className="flex justify-between items-center bg-[#7b18ff] rounded-t-lg pt-[17px] pb-[22px] pl-[29px] pr-6">
         <h2 className="text-white text-xl font-medium">
-          {translate("content.details.offer_heading")}
+          {translate("content.details.lead_heading")}
         </h2>
 
         <button
-          onClick={() => onClick(1, ComponentsType.editOfferContent)}
+          onClick={() => onClick(0, ComponentsType.editLeadContent)}
           className="bg-white flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
         >
           <EditIcon />
@@ -35,68 +37,34 @@ const OfferContentDetailsData = ({
 
       <div className="px-5 py-3">
         <div className="grid grid-cols-1 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
-          <div>
+          {/* <div>
             <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
               {translate("content.details.content_name")}
             </p>
             <p className="border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] truncate bg-white">
               {contentDetail?.contentName}
             </p>
-          </div>
-
-          {/* <div className="flex flex-col">
-            <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
-              {translate("content.details.address_labels")}
-            </p>
-            <div className="grid grid-cols-2 xl:grid-cols-3 gap-6">
-              {contentDetail?.offerContent?.address?.map((item, key) => (
-                <span
-                  className="border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]"
-                  key={key}
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
           </div> */}
 
           <div className="flex flex-col">
             <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
-              {translate("content.details.offer_title")}
+              {translate("content.details.lead_title")}
             </p>
             <p className="border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] truncate bg-white">
-              {contentDetail?.offerContent?.title}
+              {contentDetail?.leadContent?.title}
             </p>
           </div>
 
           <div className="flex flex-col">
             <div className="flex items-center justify-between">
               <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
-                {translate("content.details.offer_description")}
+                {translate("content.details.lead_description")}
               </p>
-
-              {/* <Button
-                inputType="button"
-                onClick={() =>
-                  router.push({
-                    pathname: `/content/pdf-preview`,
-                    query: {
-                      ...router.query,
-                      contentID: contentDetail?.id,
-                      contentPdfType: ContentPDFComponents.OFFER_CONTENT_PDF,
-                    },
-                  })
-                }
-                className="gap-x-2 !h-fit py-2 px-[10px] flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap mb-[10px]"
-                text={translate("common.pdf_preview")}
-                id="pdf"
-                iconAlt="content PDF"
-              /> */}
             </div>
             <div
               className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"
               dangerouslySetInnerHTML={{
-                __html: contentDetail?.offerContent?.description,
+                __html: contentDetail?.leadContent?.description,
               }}
             />
           </div>
@@ -108,7 +76,7 @@ const OfferContentDetailsData = ({
             <div
               className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"
               dangerouslySetInnerHTML={{
-                __html: contentDetail?.offerContent?.body,
+                __html: contentDetail?.leadContent?.body,
               }}
             />
           </div>
@@ -117,9 +85,9 @@ const OfferContentDetailsData = ({
             <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
-            {contentDetail?.offerContent?.attachments.length > 0 ? (
+            {contentDetail?.leadContent?.attachments.length > 0 ? (
               <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-                {contentDetail?.offerContent?.attachments.map((item, index) => (
+                {contentDetail?.leadContent?.attachments?.map((item, index) => (
                   <AttachmentsFiles fileName={item} key={index} />
                 ))}
               </div>
@@ -135,4 +103,4 @@ const OfferContentDetailsData = ({
   );
 };
 
-export default OfferContentDetailsData;
+export default LeadContentDetails;

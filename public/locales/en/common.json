@@ -969,6 +969,7 @@
       "receipt_content": "Receipt Content"
     },
     "details": {
+      "lead_heading": "Lead Content",
       "offer_heading": "Offer Content",
       "confirmation_heading": "Confirmation Content",
       "invoice_heading": "Invoice Content",

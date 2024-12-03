@@ -21,23 +21,23 @@ export const AddLeadContentDetailsFormField: GenerateContentFormField = (
         id: "div-field",
         className: "grid grid-cols-1 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]",
         children: [
-          {
-            containerClass: "mb-0",
-            label: {
-              text: `${translate("content.details.content_name")}`,
-              htmlFor: "contentName",
-              className: "mb-[10px]",
-            },
-            field: {
-              type: Field.input,
-              className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
-              inputType: "text",
-              id: "contentName",
-              name: "contentName",
-              placeholder: translate("common.content_name"),
-              register,
-            },
-          },
+          // {
+          //   containerClass: "mb-0",
+          //   label: {
+          //     text: `${translate("content.details.content_name")}`,
+          //     htmlFor: "contentName",
+          //     className: "mb-[10px]",
+          //   },
+          //   field: {
+          //     type: Field.input,
+          //     className: "!p-4 !border-[#BFBFBF] focus:!border-primary",
+          //     inputType: "text",
+          //     id: "contentName",
+          //     name: "contentName",
+          //     placeholder: translate("common.content_name"),
+          //     register,
+          //   },
+          // },
           {
             containerClass: "mb-0",
             label: {

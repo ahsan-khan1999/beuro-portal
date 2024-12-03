@@ -12,9 +12,9 @@ export const generateLeadContentDetailsValidation = (translate: Function) => {
   return yup
     .object()
     .shape({
-      [LeadContentDetails.contentName]: yup
-        .string()
-        .required(translate("validationMessages.required")),
+      // [LeadContentDetails.contentName]: yup
+      //   .string()
+      //   .required(translate("validationMessages.required")),
       leadContent: yup.object().shape({
         [LeadContentDetails.leadTitle]: yup
           .string()

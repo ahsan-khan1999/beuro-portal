@@ -36,7 +36,7 @@ const EditReceiptContentDetails = ({
             {translate("content.tabs_headings.receipt_content")}
           </h2>
           <button
-            onClick={() => onClick(3, ComponentsType.receiptContent)}
+            onClick={() => onClick(4, ComponentsType.receiptContent)}
             className="text-[#4B4B4B] bg-white font-medium rounded-lg border border-[#C7C7C7] py-2 px-9"
           >
             {translate("content.details.cancel_button")}
@@ -75,7 +75,7 @@ const EditReceiptContentDetails = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="w-fit"
+            className="w-full"
             imgClassName="w-14 h-14"
             textClassName="text-base"
             containerClassName="py-3"

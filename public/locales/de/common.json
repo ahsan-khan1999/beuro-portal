@@ -962,6 +962,7 @@
       "receipt_content": "Quittungsinhalt"
     },
     "details": {
+      "lead_heading": "Leadinhalt",
       "offer_heading": "Angebotinhalt",
       "confirmation_heading": "Bestätigungsinhalt",
       "invoice_heading": "Rechnungsinhalt",

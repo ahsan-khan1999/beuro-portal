@@ -19,7 +19,7 @@ interface ServiceState {
 
 const initialState: ServiceState = {
   service: [],
-  loading: true,
+  loading: false,
   isLoading: true,
   error: {},
   lastPage: 1,
