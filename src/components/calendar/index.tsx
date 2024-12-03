@@ -352,12 +352,21 @@ export const Calendar = () => {
           const startMoment = moment(eventInfo.event.start);
           const endMoment = moment(eventInfo.event.end);
           const duration = endMoment.diff(startMoment, "minutes");
+          const daysDuration = endMoment.diff(startMoment, "days");
 
           const formattedTime = event?.end
             ? `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
                 eventInfo.event.end
               ).format("HH:mm")}`
             : `${moment(eventInfo.event.start).format("HH:mm")}`;
+
+          const formattedStartTime = startMoment.format("HH:mm");
+          const formattedEndTime = endMoment.format("HH:mm");
+
+          const showEndTime = daysDuration > 0;
+          const timeDisplay = showEndTime
+            ? `${formattedEndTime}`
+            : formattedStartTime;
 
           const showOnlyTitle = duration < 60;
           const fixedHeight = duration < 1;
@@ -380,6 +389,10 @@ export const Calendar = () => {
               return (
                 <AllDayEvent
                   title={event?.title}
+                  showEndTime={showEndTime}
+                  time={timeDisplay}
+                  startTime={formattedStartTime}
+                  endTime={formattedEndTime}
                   backrgoundColour={eventInfo.event.backgroundColor}
                   dotColour={eventInfo.event.textColor}
                 />

@@ -6,6 +6,10 @@ export interface AllDayEventsProps {
   backrgoundColour?: string;
   dotClassName?: string;
   dotColour?: string;
+  time?: string;
+  startTime?: string;
+  endTime?: string;
+  showEndTime?: boolean;
 }
 
 export const AllDayEvent = ({
@@ -14,6 +18,10 @@ export const AllDayEvent = ({
   backrgoundColour,
   dotClassName,
   dotColour,
+  time,
+  startTime,
+  endTime,
+  showEndTime,
 }: AllDayEventsProps) => {
   const containerClasses = combineClasses(
     `flex items-center gap-x-1 px-2 py-[6px] rounded-[4px] cursor-pointer`,
@@ -34,10 +42,15 @@ export const AllDayEvent = ({
         className={dotDefaultClasses}
         style={{ backgroundColor: dotColour || "#ccc" }}
       />
+      <div className="flex items-center justify-between w-full">
+        <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">
+          {title}
+        </span>
 
-      <p className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
-        {title}
-      </p>
+        <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm">
+          {time}
+        </span>
+      </div>
     </div>
   );
 };

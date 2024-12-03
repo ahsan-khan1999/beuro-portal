@@ -37,7 +37,8 @@ export const ContractTaskDetail = ({
   const taskDetail = useAppSelector(
     (state) => state.contract.taskDetail
   ) as TaskWithSelectedDates;
-  const { isLoading, loading } = useAppSelector((state) => state.contract);
+
+  const { loading } = useAppSelector((state) => state.contract);
 
   const startTime =
     taskDetail?.selectedStartDate &&
