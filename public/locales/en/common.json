@@ -962,6 +962,7 @@
       "edit": "Edit"
     },
     "tabs_headings": {
+      "lead_content": "Lead Content",
       "offer_content": "Offers Content",
       "confirmation_content": "Confirmation Content",
       "invoice_content": "Invoice Content",
@@ -975,6 +976,8 @@
       "edit_button": "Edit Details",
       "content_name": "Content Name",
       "address_labels": "Address Labels",
+      "lead_title": "Lead Title",
+      "lead_description": "Lead Description",
       "offer_title": "Offer Title",
       "offer_description": "Offer Description",
       "email_body": "Email Body",
@@ -1326,6 +1329,7 @@
     "svg_upload_not_allowed": "SVG files are not allowed. Please upload a different file format.",
     "img_upload_error_message": "WebP files are not allowed. Please upload a different file format.",
     "offer_PDF_PREVIEW": "Offer PDF Preview",
+    "lead_PDF_PREVIEW": "Lead PDF Preview",
     "confirmation_PDF_PREVIEW": "Confirmation PDF Preview",
     "invoice_PDF_PREVIEW": "Invoice PDF Preview",
     "receipt_PDF_PREVIEW": "Receipt PDF Preview",

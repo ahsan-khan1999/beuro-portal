@@ -1,20 +1,20 @@
 import { Form } from "@/base-components/form/form";
-import { useAddOfferContentDetails } from "@/hooks/content/useAddOfferContent";
 import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 import { OfferContentPdf } from "./pdf-preview/offer-content-pdf";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { updateQuery } from "@/utils/update-query";
+import { useAddLeadContentDetails } from "@/hooks/content/useAddLeadContentDetails";
 
-export interface AddOfferContentProps {
+export interface AddLeadContentProps {
   onHandleNext: Function;
   onCancel: () => void;
 }
 
-const OfferContentAddDetails = ({
+const AddLeadContentDetails = ({
   onHandleNext,
   onCancel,
-}: AddOfferContentProps) => {
+}: AddLeadContentProps) => {
   const {
     fields,
     router,
@@ -22,8 +22,8 @@ const OfferContentAddDetails = ({
     handleSubmit,
     errors,
     translate,
-    offerDescriptionCount,
-  } = useAddOfferContentDetails(onHandleNext);
+    leadDescriptionCount,
+  } = useAddLeadContentDetails(onHandleNext);
 
   const handleCancel = () => {
     router.pathname = "/content";
@@ -60,7 +60,7 @@ const OfferContentAddDetails = ({
               </svg>
             </span>
             <h2 className="text-[#fff] text-xl font-medium">
-              {translate("content.tabs_headings.offer_content")}
+              {translate("content.tabs_headings.lead_content")}
             </h2>
           </div>
           <button
@@ -83,11 +83,11 @@ const OfferContentAddDetails = ({
 
       <div className="bg-white rounded-lg w-[500px] h-fit p-[6px] hidden xlg:block">
         <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-2 pb-2 border-b-2 border-b-primary">
-          {translate("common.offer_PDF_PREVIEW")}
+          {translate("common.lead_PDF_PREVIEW")}
         </h1>
-        {offerDescriptionCount ? (
+        {leadDescriptionCount ? (
           <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
-            <OfferContentPdf description={offerDescriptionCount} />
+            <OfferContentPdf description={leadDescriptionCount} />
           </div>
         ) : (
           <NoDataEmptyState
@@ -102,4 +102,4 @@ const OfferContentAddDetails = ({
   );
 };
 
-export default OfferContentAddDetails;
+export default AddLeadContentDetails;

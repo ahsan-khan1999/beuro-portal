@@ -15,6 +15,14 @@ export interface ContentTableRowTypes {
   contentName: string;
   contentTitle: string;
   createdOn: string;
+  leadContent: {
+    name: string;
+    address: string[];
+    title: string;
+    description: string;
+    body: string;
+    attachments: string[];
+  };
   offerContent: {
     name: string;
     address: string[];

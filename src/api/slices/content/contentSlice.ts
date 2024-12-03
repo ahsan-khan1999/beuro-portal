@@ -20,8 +20,8 @@ interface ContentState {
 
 const initialState: ContentState = {
   content: [],
-  loading: true,
-  isLoading: true,
+  loading: false,
+  isLoading: false,
   error: {},
   lastPage: 1,
   totalCount: 10,
@@ -54,9 +54,10 @@ export const readContentDetails: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createContent: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("content/create", async (args, thunkApi) => {
-    const { data, router, setError, translate, isUpdate } = args as any;
+    const { data, setError, translate } = args as any;
 
     try {
       const { contentId, step, stage } = data;
@@ -70,16 +71,9 @@ export const createContent: AsyncThunk<boolean, object, object> | any =
       };
       thunkApi.dispatch(setContentDetails(objectToUpdate));
       localStoreUtil.store_data("content", objectToUpdate);
-      // thunkApi.dispatch(setContentDetails(data));
 
       return response?.data?.data?.Content;
     } catch (e: any) {
-      // if (Array.isArray(e?.data?.data?.offerContent.address)) {
-      //     let transformedValidationMessages = transformValidationMessages(e?.data?.data?.offerContent.address)
-      //     setErrors(setError, transformedValidationMessages, translate);
-      //     setErrors(setError, e?.data?.data, translate);
-
-      // }
       setErrors(setError, e?.data?.data, translate);
 
       thunkApi.dispatch(setErrorMessage(e?.data?.message));

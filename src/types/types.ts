@@ -376,6 +376,7 @@ export type GenerateContentFormField = (
   onRemove?: UseFieldArrayRemove,
   offerDescriptionCount?: string
 ) => FormField[];
+
 // Employee formfield
 export type GenerateEmployeeFormField = (
   register: UseFormRegister<FieldValues>,

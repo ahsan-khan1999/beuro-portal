@@ -199,7 +199,6 @@ export const useAddOfferDetails = (onHandleNext: Function) => {
     register,
     loading,
     control,
-    // handleSearchCustomer,
     {
       customerType,
       type,

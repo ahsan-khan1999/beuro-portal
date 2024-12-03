@@ -955,6 +955,7 @@
       "edit": "Bearbeiten"
     },
     "tabs_headings": {
+      "lead_content": "Leadinhalt",
       "offer_content": "Angebotinhalt",
       "confirmation_content": "Bestätigungsinhalt",
       "invoice_content": "Rechnungsinhalt",
@@ -968,6 +969,8 @@
       "edit_button": "Details Bearbeiten",
       "content_name": "Inhaltsname",
       "address_labels": "Adressetiketten",
+      "lead_title": "Titel",
+      "lead_description": "Leadbeschreibung",
       "offer_title": "Titel",
       "offer_description": "Angebotbeschreibung",
       "email_body": "E-Mail-Text",
@@ -1320,6 +1323,7 @@
     "svg_upload_not_allowed": "SVG-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
     "img_upload_error_message": "WebP-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
     "offer_PDF_PREVIEW": "Angebot PDF-Vorschau",
+    "lead_PDF_PREVIEW": "Lead PDF-Vorschau",
     "confirmation_PDF_PREVIEW": "Bestätigungs-PDF-Vorschau",
     "invoice_PDF_PREVIEW": "Rechnungs-PDF-Vorschau",
     "receipt_PDF_PREVIEW": "Quittung PDF-Vorschau",

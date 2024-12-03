@@ -3,17 +3,19 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
-import { AddOfferContentDetailsFormField } from "@/components/content/add/fields/add-offer-content-details-fields";
-import { generateOfferEditContentDetailsValidation } from "@/validation/contentSchema";
+import { generateLeadContentDetailsValidation } from "@/validation/contentSchema";
 import { useState, useEffect } from "react";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { createContent } from "@/api/slices/content/contentSlice";
 import { ComponentsType } from "@/enums/content";
+import { AddLeadContentDetailsFormField } from "@/components/content/add/fields/add-lead-content-details-fields";
 
-export const useAddOfferContentDetails = (onHandleNext: Function) => {
+export const useAddLeadContentDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
-  const { loading, contentDetails } = useAppSelector((state) => state.content);
+  const { loading, error, contentDetails } = useAppSelector(
+    (state) => state.content
+  );
 
   const [attachements, setAttachements] = useState<Attachement[]>(
     (contentDetails?.id &&
@@ -23,12 +25,7 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-
-  const backHandler = () => {
-    onHandleNext(ComponentsType.addLeadContent);
-  };
-
-  const schema = generateOfferEditContentDetailsValidation(translate);
+  const schema = generateLeadContentDetailsValidation(translate);
 
   const {
     register,
@@ -43,42 +40,43 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     resolver: yupResolver<FieldValues>(schema),
   });
 
-  const offerDescriptionCount = watch("offerContent.description");
+  const leadDescriptionCount = watch("leadContent.description");
 
   useEffect(() => {
     if (contentDetails.id) {
       reset({
         contentName: contentDetails?.contentName,
-        offerContent: {
-          ...contentDetails?.offerContent,
+        leadContent: {
+          ...contentDetails?.leadContent,
         },
       });
     }
   }, [contentDetails?.id]);
 
-  const fields = AddOfferContentDetailsFormField(
+  const fields = AddLeadContentDetailsFormField(
     register,
     loading,
     control,
-    backHandler,
+    () => console.log(),
     trigger,
     0,
     attachements,
     setAttachements,
-    contentDetails
+    contentDetails,
+    leadDescriptionCount
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       contentName: data.contentName,
-      offerContent: {
-        body: data.offerContent.body,
-        description: data.offerContent.description,
-        title: data.offerContent.title,
+      leadContent: {
+        body: data.leadContent.body,
+        description: data.leadContent.description,
+        title: data.leadContent.title,
         attachments: attachements?.map((item) => item.value),
       },
       step: 1,
-      stage: ComponentsType.addConfirmationContent,
+      stage: ComponentsType.addOffer,
       contentId: "",
     };
     if (contentDetails?.id) {
@@ -90,12 +88,12 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
       const res = await dispatch(
         createContent({ data: apiData, router, setError, translate })
       );
-      if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
+      if (res?.payload) onHandleNext(ComponentsType.addOffer);
     } else {
       const res = await dispatch(
         createContent({ data: apiData, router, setError, translate })
       );
-      if (res?.payload) onHandleNext(ComponentsType.addConfirmationContent);
+      if (res?.payload) onHandleNext(ComponentsType.addOffer);
     }
   };
 
@@ -106,8 +104,9 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     control,
     handleSubmit,
     errors,
+    error,
     translate,
-    offerDescriptionCount,
+    leadDescriptionCount,
     watch,
   };
 };
