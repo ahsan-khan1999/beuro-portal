@@ -18,10 +18,9 @@ export const AllDayEvent = ({
   backrgoundColour,
   dotClassName,
   dotColour,
-  time,
+  showEndTime,
   startTime,
   endTime,
-  showEndTime,
 }: AllDayEventsProps) => {
   const containerClasses = combineClasses(
     `flex items-center gap-x-1 px-2 py-[6px] rounded-[4px] cursor-pointer`,
@@ -46,10 +45,20 @@ export const AllDayEvent = ({
         <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">
           {title}
         </span>
-
-        <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm">
-          {time}
-        </span>
+        {showEndTime ? (
+          <>
+            <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm">
+              {startTime}
+            </span>
+            <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm">
+              {translate("calendar.ends_text")} {endTime}
+            </span>
+          </>
+        ) : (
+          <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm">
+            {startTime}
+          </span>
+        )}
       </div>
     </div>
   );

@@ -51,7 +51,8 @@ const prepareEvents = (rawEvents: EventType[]): EventType[] => {
         originalEnd: event.end,
       };
 
-      event.end = moment(event.end).add(1, "days").format("YYYY-MM-DD");
+      event.start = startDate.format("YYYY-MM-DD HH:mm");
+      event.end = moment(event.end).add(1, "days").format("YYYY-MM-DD HH:mm");
     } else {
       event.allDay = !hasTime(startDate);
     }
@@ -349,24 +350,26 @@ export const Calendar = () => {
         eventContent={(eventInfo) => {
           const { event, view } = eventInfo;
           const viewType = view?.type;
-          const startMoment = moment(eventInfo.event.start);
-          const endMoment = moment(eventInfo.event.end);
+          const startMoment = moment(event.start);
+          const endMoment = moment(event.end);
           const duration = endMoment.diff(startMoment, "minutes");
           const daysDuration = endMoment.diff(startMoment, "days");
 
           const formattedTime = event?.end
-            ? `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
-                eventInfo.event.end
+            ? `${moment(event.start).format("HH:mm")} - ${moment(
+                event.end
               ).format("HH:mm")}`
-            : `${moment(eventInfo.event.start).format("HH:mm")}`;
+            : `${moment(event.start).format("HH:mm")}`;
 
-          const formattedStartTime = startMoment.format("HH:mm");
-          const formattedEndTime = endMoment.format("HH:mm");
+          const formattedStartTime = moment(
+            event.extendedProps?.originalStart
+          ).format("HH:mm");
+
+          const formattedEndTime = moment(
+            event.extendedProps?.originalEnd
+          ).format("HH:mm");
 
           const showEndTime = daysDuration > 0;
-          const timeDisplay = showEndTime
-            ? `${formattedEndTime}`
-            : formattedStartTime;
 
           const showOnlyTitle = duration < 60;
           const fixedHeight = duration < 1;
@@ -376,10 +379,10 @@ export const Calendar = () => {
               return (
                 <DayView
                   time={formattedTime}
-                  title={eventInfo.event.title}
-                  backrgoundColour={eventInfo.event.backgroundColor}
-                  borderColour={eventInfo.event.borderColor}
-                  timeColour={eventInfo.event.textColor}
+                  title={event.title}
+                  backrgoundColour={event.backgroundColor}
+                  borderColour={event.borderColor}
+                  timeColour={event.textColor}
                   isMonthView={true}
                   showOnlyTitle={showOnlyTitle}
                   fixedHeight={fixedHeight}
@@ -390,11 +393,10 @@ export const Calendar = () => {
                 <AllDayEvent
                   title={event?.title}
                   showEndTime={showEndTime}
-                  time={timeDisplay}
                   startTime={formattedStartTime}
                   endTime={formattedEndTime}
-                  backrgoundColour={eventInfo.event.backgroundColor}
-                  dotColour={eventInfo.event.textColor}
+                  backrgoundColour={event.backgroundColor}
+                  dotColour={event.textColor}
                 />
               );
             }
@@ -402,8 +404,8 @@ export const Calendar = () => {
             return (
               <AllDayEvent
                 title={event?.title}
-                backrgoundColour={eventInfo.event.backgroundColor}
-                dotColour={eventInfo.event.textColor}
+                backrgoundColour={event.backgroundColor}
+                dotColour={event.textColor}
               />
             );
           } else if (
@@ -413,10 +415,10 @@ export const Calendar = () => {
             return (
               <DayView
                 time={formattedTime}
-                title={eventInfo.event.title}
-                backrgoundColour={eventInfo.event.backgroundColor}
-                borderColour={eventInfo.event.borderColor}
-                timeColour={eventInfo.event.textColor}
+                title={event.title}
+                backrgoundColour={event.backgroundColor}
+                borderColour={event.borderColor}
+                timeColour={event.textColor}
                 showOnlyTitle={showOnlyTitle}
                 fixedHeight={fixedHeight}
               />
@@ -426,10 +428,10 @@ export const Calendar = () => {
               <>
                 <DayView
                   time={formattedTime}
-                  title={eventInfo.event.title}
-                  backrgoundColour={eventInfo.event.backgroundColor}
-                  borderColour={eventInfo.event.borderColor}
-                  timeColour={eventInfo.event.textColor}
+                  title={event.title}
+                  backrgoundColour={event.backgroundColor}
+                  borderColour={event.borderColor}
+                  timeColour={event.textColor}
                   isMonthView={true}
                   showOnlyTitle={showOnlyTitle}
                   fixedHeight={fixedHeight}

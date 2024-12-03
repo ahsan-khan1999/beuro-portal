@@ -2615,6 +2615,7 @@
   },
 
   "calendar": {
+    "ends_text":"ends",
     "more_text": "more",
     "delete_appointment_des": "Are you sure you want to delete the appointment?",
     "main_heading": "Calendar",
