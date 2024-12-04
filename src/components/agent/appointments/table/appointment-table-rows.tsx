@@ -119,11 +119,11 @@ export const AppointmentTableRows = ({
               onClick={() => handleClickRow(item?.isReportSubmitted, item.id)}
               className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
                 index !== 0 && "border-t border-t-[#E7EAEE]"
-              } gap-x-1  grid 
+              } grid 
               grid-cols-[minmax(100px,15%)_minmax(100px,_15%)_minmax(80px,_12%)_minmax(80px,_23%)_minmax(100px,15%)_minmax(150px,20%)] 
               items-center gap-x-2 bg-primary rounded-lg px-2 py-1 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
             >
-              <div className="">
+              <div>
                 <span className="text-xs md:sm xl:text-base hidden xl:flex">
                   {item.leadID?.customerDetail?.fullName?.length > 24
                     ? item.leadID?.customerDetail?.fullName.slice(0, 24) + ".."
@@ -141,7 +141,7 @@ export const AppointmentTableRows = ({
                 </span>
               </div>
 
-              <div className="">
+              <div>
                 <span className="text-xs md:sm xl:text-base hidden md:flex">
                   {item.leadID?.customerDetail?.companyName}
                 </span>
@@ -153,7 +153,7 @@ export const AppointmentTableRows = ({
                 </span>
               </div>
 
-              <div className=" flex flex-col  gap-y-1">
+              <div className="flex flex-col  gap-y-1">
                 <span className="text-xs md:sm xl:text-base ml-1">
                   {formatDateTimeToDate(item?.date)}
                 </span>
@@ -162,7 +162,7 @@ export const AppointmentTableRows = ({
                     {localStartTime}
                   </p>
 
-                  <p className="text-xs md:sm xl:text-base   p-0 m-0">-</p>
+                  <p className="text-xs md:sm xl:text-base p-0 m-0">-</p>
 
                   <p className="text-xs md:sm xl:text-base p-0 m-0">
                     {localEndTime}
@@ -170,12 +170,12 @@ export const AppointmentTableRows = ({
                 </div>
               </div>
 
-              <div className="">
+              <div>
                 <p className="text-xs md:sm xl:text-base leading-5">
                   {item?.canton}
                 </p>
               </div>
-              <div className="">
+              <div>
                 <div
                   className={`${
                     item?.leadID?.isOfferCreated === true
@@ -196,7 +196,7 @@ export const AppointmentTableRows = ({
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div
-                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex"
+                    className="justify-center items-center cursor-pointer hidden 2xl:flex"
                     onClick={(e) =>
                       handleImageUpload(
                         item?.id,
@@ -211,7 +211,7 @@ export const AppointmentTableRows = ({
                     <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
                   </div>
                   <div
-                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex"
+                    className="justify-center items-center cursor-pointer hidden 2xl:flex"
                     onClick={(e) =>
                       handleNotes(
                         item?.id,
@@ -232,7 +232,7 @@ export const AppointmentTableRows = ({
                       <OutlineButton
                         inputType="button"
                         onClick={() => handlePreview(item?.id)}
-                        className="bg-white py-2 px-1 xl:px-2 text-primary xl:text-[#45C769] !min-w-[140px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover py-2 !text-xs !lg:text-sm !2xl:text-lg !h-fit"
+                        className="bg-white py-2 px-1 xl:px-2 text-primary xl:text-[#45C769] !min-w-[140px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover !text-xs !lg:text-sm !2xl:text-lg !h-fit"
                         text={translate("appointments.view_reports_btn")}
                         id="view reports"
                         iconAlt="view reports"

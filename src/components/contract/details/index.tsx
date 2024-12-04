@@ -17,8 +17,6 @@ const ContractDetails = () => {
     handleStatusUpdate,
     handleSendEmail,
     isSendEmail,
-    setIsSendEmail,
-    onNextHandle,
     loading,
     handleViewPdf,
     handleUpdateAdditionalDetailsModal,

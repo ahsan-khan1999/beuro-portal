@@ -62,19 +62,19 @@ export const LeadEmailFormField: GenerateLeadFormField = (
                         },
                       },
                       {
-                        containerClass: "col-span-1 flex my-auto ",
+                        containerClass: "col-span-1 flex my-auto",
                         field: {
                           type: Field.div,
                           className: "flex space-x-2 items-center",
                           id: "text",
                           children: [
                             {
-                              containerClass: "mb-0  ",
+                              containerClass: "mb-0",
                               field: {
                                 type: Field.span,
                                 text: `Cc`,
                                 containerClassName:
-                                  "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                                  "underline text-[14px] text-[#393939] font-normal cursor-pointer",
                                 id: "cc",
                                 onClick: () => {
                                   if (setValue) {
@@ -95,7 +95,7 @@ export const LeadEmailFormField: GenerateLeadFormField = (
                                 type: Field.span,
                                 text: `Bcc`,
                                 containerClassName:
-                                  "underline text-[14px] text-[#393939] font-normal cursor-pointer ",
+                                  "underline text-[14px] text-[#393939] font-normal cursor-pointer",
                                 id: "bcc",
                                 onClick: () => {
                                   if (setValue) {
@@ -123,7 +123,7 @@ export const LeadEmailFormField: GenerateLeadFormField = (
                         },
                         field: {
                           className:
-                            "!p-4 !border-[#EBEBEB]  focus:!border-primary",
+                            "!p-4 !border-[#EBEBEB] focus:!border-primary",
                           type: Field.select,
                           id: "content",
                           name: "content",

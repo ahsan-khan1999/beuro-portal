@@ -77,8 +77,14 @@ const DashboardCard = ({
       className={`cursor-pointer rounded-[20px] py-[22px] px-4 hover:shadow-lg ${backgroundColor}`}
     >
       <div className="flex items-center mb-8">
-        <Image src={icon} alt={alt} />
-        <div className="ml-2 space-y-1">
+        <Image
+          src={icon}
+          alt={alt}
+          width={41}
+          height={41}
+          className="mr-3 min-w-[41px] min-h-[41px]"
+        />
+        <div className="space-y-1">
           <h3 className="text-xlMonthly text-white font-semibold ">{title}</h3>
           <span className="text-xs text-white">{subTitle}</span>
         </div>

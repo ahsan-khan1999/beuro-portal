@@ -82,7 +82,13 @@ const DashboardCard = ({
       className={`rounded-[20px] pt-[37px] p-4 lg:pl-[39px] lg:pr-[31px] lg:pb-[42px] hover:shadow-lg ${backgroundColor}`}
     >
       <div className="flex items-center mb-8">
-        <Image src={icon} alt={alt} className="mr-3" />
+        <Image
+          src={icon}
+          alt={alt}
+          width={41}
+          height={41}
+          className="mr-3 min-w-[41px] min-h-[41px]"
+        />
         <h3 className="text-xl text-white font-semibold">{title}</h3>
       </div>
       <div className="flex items-center justify-between">

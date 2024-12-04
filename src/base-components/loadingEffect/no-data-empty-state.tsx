@@ -15,6 +15,7 @@ export interface EmptyDataStateProps {
   isButton?: boolean;
   onButtonClick?: () => void;
   buttonHeading?: string;
+  isFollowUp?: boolean;
 }
 
 export default function NoDataEmptyState({
@@ -27,11 +28,14 @@ export default function NoDataEmptyState({
   isButton,
   onButtonClick,
   buttonHeading,
+  isFollowUp,
 }: EmptyDataStateProps) {
   const { t: translate } = useTranslation();
 
   const defaultClasses = combineClasses(
-    "py-10 px-6 bg-[#E5EFFF] rounded-3xl w-fit",
+    `py-10 px-6 bg-[#E5EFFF] rounded-3xl w-fit ${
+      isFollowUp && "min-h-[290px]"
+    }`,
     className
   );
 

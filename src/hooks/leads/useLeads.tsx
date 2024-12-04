@@ -49,7 +49,7 @@ const useLeads = () => {
   const router = useRouter();
   const params = useQueryParams();
 
-  const { lead, loading, isLoading, totalCount, leadDetails } = useAppSelector(
+  const { loading, isLoading, totalCount, leadDetails } = useAppSelector(
     (state) => state.lead
   );
 
