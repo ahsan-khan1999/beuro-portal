@@ -302,9 +302,9 @@ export default function useOfferDetails() {
       );
   };
 
-  const onNextHandle = () => {
-    router.pathname = "/offers/pdf-preview";
-  };
+  // const onNextHandle = () => {
+  //   router.pathname = "/offers/pdf-preview";
+  // };
 
   const handleSendByPost = async () => {
     const apiData = {
@@ -463,7 +463,7 @@ export default function useOfferDetails() {
     handleSendEmail,
     setIsSendEmail,
     isSendEmail,
-    onNextHandle,
+    // onNextHandle,
     offerActivity,
     loading,
     handleSendByPost,

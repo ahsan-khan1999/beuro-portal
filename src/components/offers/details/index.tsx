@@ -16,7 +16,6 @@ const OfferDetails = () => {
     handleStatusUpdate,
     handleSendEmail,
     isSendEmail,
-    onNextHandle,
     loading,
     handleSendByPost,
     handleUpdateDiscount,
@@ -47,10 +46,7 @@ const OfferDetails = () => {
       <div className="2xl:mt-[395px] w-full 2xl:block mb-10">
         {isSendEmail ? (
           <div className="mt-5">
-            <ComposeMail
-              backRouteHandler={handleSendEmail}
-              onNextHandle={onNextHandle}
-            />
+            <ComposeMail backRouteHandler={handleSendEmail} />
           </div>
         ) : (
           <OffersDetailsData

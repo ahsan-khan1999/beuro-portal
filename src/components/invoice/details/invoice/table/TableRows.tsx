@@ -288,7 +288,7 @@ const TableRows = ({
               </div>
               <div
                 title={translate("common.mail")}
-                className="py-3 flex justify-center items-center cursor-pointer"
+                className="py-3 flex justify-center items-center cursor-default"
               >
                 <span className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
                   <svg

@@ -8,28 +8,26 @@ import { useEffect, useMemo, useState } from "react";
 import { setContentDetails } from "@/api/slices/content/contentSlice";
 import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
-import { sendOfferEmail } from "@/api/slices/offer/offerSlice";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { updateQuery } from "@/utils/update-query";
-import { OfferEmailFormField } from "@/components/offers/compose-mail/fields";
 import localStoreUtil from "@/utils/localstore.util";
+import { LeadEmailFormField } from "@/components/leads/compose-mail/leads-email-formfields";
+import { sendLeadEmail } from "@/api/slices/lead/leadSlice";
 
-export const useSendEmail = (backRouteHandler: Function) => {
-  const { t: translate } = useTranslation();
+export const useSendLeadEmail = (backRouteHandler: Function) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { loading, error, offerDetails } = useAppSelector(
-    (state) => state.offer
-  );
   const isMail = router.query?.isMail;
+  const { t: translate } = useTranslation();
+  const [isMailSend, setIsMailSend] = useState(false);
   const [isMoreEmail, setIsMoreEmail] = useState({ isCc: false, isBcc: false });
   const { content, contentDetails } = useAppSelector((state) => state.content);
-  const [isMailSend, setIsMailSend] = useState(false);
+  const { loading, error, leadDetails } = useAppSelector((state) => state.lead);
   const [attachements, setAttachements] = useState<Attachement[]>(
-    (offerDetails?.id &&
+    (leadDetails?.id &&
       transformAttachments(
-        offerDetails?.content?.offerContent?.attachments as string[]
+        leadDetails?.content?.leadContent?.attachments as string[]
       )) ||
       []
   );
@@ -39,7 +37,6 @@ export const useSendEmail = (backRouteHandler: Function) => {
     register,
     handleSubmit,
     control,
-    setError,
     reset,
     formState: { errors },
     setValue,
@@ -49,20 +46,20 @@ export const useSendEmail = (backRouteHandler: Function) => {
 
   useEffect(() => {
     reset({
-      email: offerDetails?.leadID?.customerDetail?.email,
-      content: offerDetails?.content?.id,
+      email: leadDetails?.customerDetail?.email,
+      content: leadDetails?.content?.id,
       subject:
-        offerDetails?.title ||
+        leadDetails?.title ||
         "" +
           " " +
-          offerDetails?.offerNumber +
+          leadDetails?.refID +
           " " +
-          offerDetails?.createdBy?.company?.companyName,
+          leadDetails?.createdBy?.company?.companyName,
 
-      description: offerDetails?.content?.offerContent?.body || "",
-      attachments: offerDetails?.content?.offerContent?.attachments,
-      title: offerDetails?.title,
-      additionalDetails: offerDetails?.additionalDetails || "",
+      description: leadDetails?.content?.leadContent?.body || "",
+      attachments: leadDetails?.content?.leadContent?.attachments,
+      title: leadDetails?.title,
+      additionalDetails: leadDetails?.additionalDetails || "",
     });
   }, []);
 
@@ -70,30 +67,30 @@ export const useSendEmail = (backRouteHandler: Function) => {
     const selectedContent = content.find((item) => item.id === id);
     if (selectedContent) {
       reset({
-        email: offerDetails?.leadID?.customerDetail?.email,
+        email: leadDetails?.customerDetail?.email,
         content: selectedContent?.id,
         subject:
-          selectedContent?.offerContent?.title ||
+          selectedContent?.leadContent?.title ||
           "" +
             " " +
-            offerDetails?.offerNumber +
+            leadDetails?.refID +
             " " +
-            offerDetails?.createdBy?.company?.companyName,
-        description: selectedContent?.offerContent?.body || "",
-        attachments: selectedContent?.offerContent?.attachments,
-        title: offerDetails?.title,
-        additionalDetails: offerDetails?.additionalDetails || "",
+            leadDetails?.createdBy?.company?.companyName,
+        description: selectedContent?.leadContent?.body || "",
+        attachments: selectedContent?.leadContent?.attachments,
+        title: leadDetails?.title,
+        additionalDetails: leadDetails?.additionalDetails || "",
       });
       setAttachements(
         transformAttachments(
-          selectedContent?.offerContent?.attachments as string[]
+          selectedContent?.leadContent?.attachments as string[]
         ) || []
       );
       dispatch(setContentDetails(selectedContent));
     }
   };
 
-  const fields = OfferEmailFormField(
+  const fields = LeadEmailFormField(
     register,
     loading,
     control,
@@ -104,7 +101,7 @@ export const useSendEmail = (backRouteHandler: Function) => {
     onContentSelect,
     attachements,
     setAttachements,
-    offerDetails,
+    leadDetails,
     isMoreEmail,
     setIsMoreEmail,
     setValue
@@ -121,12 +118,12 @@ export const useSendEmail = (backRouteHandler: Function) => {
 
       let apiData = {
         ...data,
-        id: offerDetails?.id,
+        id: leadDetails?.id,
         pdf: fileUrl,
       };
 
       setIsMailSend(true);
-      const res = await dispatch(sendOfferEmail({ data: apiData }));
+      const res = await dispatch(sendLeadEmail({ data: apiData }));
       setTimeout(() => {
         if (res?.payload) {
           setIsMailSend(false);
@@ -138,12 +135,12 @@ export const useSendEmail = (backRouteHandler: Function) => {
     } else {
       const updatedData = {
         ...data,
-        id: offerDetails?.id,
+        id: leadDetails?.id,
         attachments: attachements?.map((item) => item.value),
       };
       localStoreUtil.store_data("contractComposeEmail", updatedData);
-      router.pathname = "/offers/pdf-preview";
-      router.query = { ...router.query, offerID: offerDetails?.id };
+      //   router.pathname = "/offers/pdf-preview";
+      router.query = { ...router.query, leadID: leadDetails?.id };
       updateQuery(router, router.locale as string);
     }
   };

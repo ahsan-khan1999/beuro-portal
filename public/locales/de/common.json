@@ -1397,6 +1397,7 @@
     "update": "Update",
     "mail": "Mail",
     "offer_mail_preview": "E-Mail-Vorschau anbieten",
+    "lead_mail_preview": "Lead E-Mail-Vorschau",
     "address": "Adresse",
     "add_new_date": "Neues Datum hinzufügen",
     "add_company_info": "Unternehmensinformationen hinzufügen",
@@ -2609,7 +2610,7 @@
     }
   },
   "calendar": {
-    "ends_text":"endet",
+    "ends_text": "endet",
     "more_text": "Mehr",
     "delete_appointment_des": "Sind Sie sich sicher, dass Sie den Besichtigung löschen möchten?",
     "main_heading": "Kalender",

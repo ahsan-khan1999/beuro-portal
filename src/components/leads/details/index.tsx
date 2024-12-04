@@ -4,6 +4,7 @@ import LeadsDetailsData from "./LeadsDetailsData";
 import useLeadDetail from "@/hooks/leads/useLeadDetail";
 import LeadsDetailsCardData from "./LeadsDetailsCardData";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import ComposeLeadMail from "../compose-mail/ComposeMail";
 
 const LeadsDetails = () => {
   const {
@@ -17,6 +18,10 @@ const LeadsDetails = () => {
     shareImgModal,
     handleNotes,
     handleScheduleAppointments,
+    loading,
+    handleSendByPost,
+    handleSendEmail,
+    isSendEmail,
   } = useLeadDetail();
 
   return (
@@ -32,17 +37,27 @@ const LeadsDetails = () => {
               onStatusUpdate={handleStatusUpdate}
               onCreateAppointment={handleScheduleAppointments}
               handleNotes={handleNotes}
+              loading={loading}
               handleImageUpload={handleUploadImages}
+              handleSendByPost={handleSendByPost}
+              handleSendEmail={handleSendEmail}
+              isSendEmail={isSendEmail}
             />
           </div>
           <div className="xlg:mt-[330px] w-full xlg:block mb-10">
-            <LeadsDetailsData
-              leadDetails={leadDetails}
-              loading={loadingDetails}
-              shareImgModal={shareImgModal}
-              handleImagesUpload={handleUploadImages}
-              handleImageSlider={defaultUpdateModal}
-            />
+            {isSendEmail ? (
+              <div className="mt-5">
+                <ComposeLeadMail backRouteHandler={handleSendEmail} />
+              </div>
+            ) : (
+              <LeadsDetailsData
+                leadDetails={leadDetails}
+                loading={loadingDetails}
+                shareImgModal={shareImgModal}
+                handleImagesUpload={handleUploadImages}
+                handleImageSlider={defaultUpdateModal}
+              />
+            )}
           </div>
         </>
       )}

@@ -57,6 +57,34 @@ export const readLeadDetails: AsyncThunk<boolean, object, object> | any =
     }
   });
 
+// send lead by post
+export const sendLeadByPost: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("lead/post/", async (args, thunkApi) => {
+    const { data } = args as any;
+
+    try {
+      const response = await apiServices.leadSendByPost(data);
+      return response?.data?.lead;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
+// send lead via email
+export const sendLeadEmail: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("lead/email/", async (args, thunkApi) => {
+    const { data } = args as any;
+
+    try {
+      await apiServices.sendLeadEmail(data);
+      return true;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      return false;
+    }
+  });
+
 export const createLead: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("lead/create", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

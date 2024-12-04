@@ -19,6 +19,9 @@ import appointmentIcon from "@/assets/pngs/appoinment-icon.png";
 import { BackIcon } from "@/assets/svgs/components/back-icon";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
+import { BaseButton } from "@/base-components/ui/button/base-button";
+import { PostIcon } from "@/assets/svgs/components/post-icon";
+import colorFullEmailIcon from "@/assets/svgs/color_ful_input_email.svg";
 
 export interface LeadDetailCardProps {
   leadDeleteHandler: Function;
@@ -40,6 +43,10 @@ export interface LeadDetailCardProps {
     heading: string,
     e: React.MouseEvent<HTMLSpanElement>
   ) => void;
+  loading?: boolean;
+  isSendEmail?: boolean;
+  handleSendEmail?: () => void;
+  handleSendByPost?: () => void;
 }
 const LeadsDetailsCardData = ({
   leadDeleteHandler,
@@ -49,6 +56,10 @@ const LeadsDetailsCardData = ({
   isAgent,
   handleImageUpload,
   handleNotes,
+  loading,
+  handleSendByPost,
+  handleSendEmail,
+  isSendEmail,
 }: LeadDetailCardProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -98,13 +109,6 @@ const LeadsDetailsCardData = ({
     dispatch(setCustomerDetails({ ...leadDetails?.customerDetail }));
     router.push("/offers/add");
   };
-
-  // const handleReportPDF = () => {
-  //   router.push({
-  //     pathname: `/appointments/pdf`,
-  //     query: { ...router.query, reportId: leadDetails?.id, isCompany: true },
-  //   });
-  // };
 
   const customerType = leadDetails?.customerDetail
     ?.customerType as keyof (typeof staticEnums)["CustomerType"];
@@ -167,6 +171,38 @@ const LeadsDetailsCardData = ({
                 icon={createOfferIcon}
               />
             )}
+
+            <div className="flex items-center gap-x-4">
+              {handleSendByPost && (
+                <BaseButton
+                  buttonText={translate("offers.card_content.send_via_post")}
+                  onClick={handleSendByPost}
+                  containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
+                  textClassName="text-[#4B4B4B] font-semibold group-hover:text-primary"
+                  loading={loading}
+                  loaderColor="#4A13E7"
+                >
+                  <PostIcon className="text-primary group-hover:text-primary" />
+                </BaseButton>
+              )}
+
+              <button
+                className={`w-fit border border-primary rounded-lg flex items-center px-4 py-2 cursor-pointer group ${
+                  isSendEmail && "hidden"
+                }`}
+                onClick={handleSendEmail}
+              >
+                <Image src={colorFullEmailIcon} alt="create_offer_icon" />
+                <p className="font-semibold text-base text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
+                  {leadDetails &&
+                    (leadDetails.emailStatus === "Sent" ? (
+                      <>{translate("common.send_again")}</>
+                    ) : (
+                      <>{translate("offers.card_content.send_button")}</>
+                    ))}
+                </p>
+              </button>
+            </div>
 
             <div
               onClick={() => leadDeleteHandler()}

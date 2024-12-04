@@ -1,6 +1,6 @@
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
@@ -8,6 +8,7 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import {
   deleteLead,
   readLeadDetails,
+  sendLeadByPost,
   setLeadDetails,
   updateLeadStatus,
 } from "@/api/slices/lead/leadSlice";
@@ -35,6 +36,9 @@ export default function useLeadDetail() {
 
   const router = useRouter();
   const id = router.query.lead;
+
+  const isMail = Boolean(router.query?.isMail);
+  const [isSendEmail, setIsSendEmail] = useState(isMail || false);
 
   useEffect(() => {
     if (leadDetails?.id)
@@ -75,6 +79,23 @@ export default function useLeadDetail() {
     dispatch(updateModalType({ type: ModalType.INFO_DELETED }));
   };
 
+  const defaultUpdateModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: leadDetails?.id,
+    };
+    const response = await dispatch(sendLeadByPost({ data: apiData }));
+    if (response?.payload) defaultUpdateModal();
+  };
+
+  const handleSendEmail = async () => {
+    setIsSendEmail(!isSendEmail);
+  };
+
   const routeHandler = async () => {
     const res = await dispatch(deleteLead({ leadDetails, router, translate }));
     if (!res?.payload) {
@@ -84,10 +105,6 @@ export default function useLeadDetail() {
         })
       );
     }
-  };
-
-  const defaultUpdateModal = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleStatusUpdate = async (leadStatus: string) => {
@@ -349,5 +366,8 @@ export default function useLeadDetail() {
     shareImgModal,
     defaultUpdateModal,
     handleScheduleAppointments,
+    handleSendByPost,
+    handleSendEmail,
+    isSendEmail
   };
 }

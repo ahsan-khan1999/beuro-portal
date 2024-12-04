@@ -71,10 +71,7 @@ const ContractDetails = () => {
             />
           </div>
           <div className="mt-5">
-            <ComposeMail
-              backRouteHandler={handleSendEmail}
-              onNextHandle={onNextHandle}
-            />
+            <ComposeMail backRouteHandler={handleSendEmail} />
           </div>
         </>
       ) : (

@@ -111,7 +111,7 @@ const OfferDetailsCard = ({
             buttonText={translate("offers.card_content.send_via_post")}
             onClick={handleSendByPost}
             containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+            textClassName="text-[#4B4B4B] font-semibold group-hover:text-primary"
             loading={loading}
             loaderColor="#4A13E7"
           >
@@ -125,7 +125,7 @@ const OfferDetailsCard = ({
             onClick={handleSendEmail}
           >
             <Image src={colorFullEmailIcon} alt="create_offer_icon" />
-            <p className="font-medium text-base text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
+            <p className="font-semibold text-base text-[#4B4B4B] group-hover:text-primary ml-[10px] flex items-center">
               {offerDetails &&
                 (offerDetails.emailStatus === "Sent" ? (
                   <>{translate("common.send_again")}</>

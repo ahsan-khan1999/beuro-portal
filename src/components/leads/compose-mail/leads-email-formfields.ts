@@ -1,9 +1,9 @@
 import { Field } from "@/enums/form";
-import { FormField, GenerateOfferFormField } from "@/types";
+import { FormField, GenerateLeadFormField } from "@/types";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
-export const OfferEmailFormField: GenerateOfferFormField = (
+export const LeadEmailFormField: GenerateLeadFormField = (
   register,
   loading,
   control,
@@ -62,14 +62,14 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                         },
                       },
                       {
-                        containerClass: "col-span-1 flex my-auto",
+                        containerClass: "col-span-1 flex my-auto ",
                         field: {
                           type: Field.div,
                           className: "flex space-x-2 items-center",
                           id: "text",
                           children: [
                             {
-                              containerClass: "mb-0",
+                              containerClass: "mb-0  ",
                               field: {
                                 type: Field.span,
                                 text: `Cc`,
