@@ -29,8 +29,6 @@ export const ShareImages = ({ onClose, id, type }: ShareImagesProps) => {
     (state) => state.global.modal.data
   );
 
-  console.log(images, "images");
-
   const handleFileLink = (fileName: string) => {
     window.open(fileName);
   };
@@ -144,8 +142,6 @@ export const ShareImages = ({ onClose, id, type }: ShareImagesProps) => {
       "_blank"
     );
   };
-
-  console.log(images?.videos?.length, "videos");
 
   return (
     <BaseModal
