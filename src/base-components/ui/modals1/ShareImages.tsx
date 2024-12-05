@@ -11,6 +11,7 @@ import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useShareImages } from "@/hooks/modals/useShareImages";
 import { useAppSelector } from "@/hooks/useRedux";
 import { ShareImagesProps } from "@/types/global";
+import { hasData } from "@/utils/utility";
 
 export const ShareImages = ({ onClose, id, type }: ShareImagesProps) => {
   const {
@@ -27,6 +28,8 @@ export const ShareImages = ({ onClose, id, type }: ShareImagesProps) => {
   const { refID, name, heading } = useAppSelector(
     (state) => state.global.modal.data
   );
+
+  console.log(images, "images");
 
   const handleFileLink = (fileName: string) => {
     window.open(fileName);
@@ -142,6 +145,8 @@ export const ShareImages = ({ onClose, id, type }: ShareImagesProps) => {
     );
   };
 
+  console.log(images?.videos?.length, "videos");
+
   return (
     <BaseModal
       onClose={onClose}
@@ -175,19 +180,32 @@ export const ShareImages = ({ onClose, id, type }: ShareImagesProps) => {
         </div>
 
         <div className="flex items-center gap-x-6 border-b-2 border-[#E5E5E5]">
-          {attachementTabs?.map((item, index) => (
-            <button
-              key={index}
-              className={`${
-                activeTab === item ? "text-primary" : "text-[#393939]"
-              } text-base font-medium pb-[10px] ${
-                activeTab === item ? "border-b-2 border-primary" : ""
-              }`}
-              onClick={() => handleTabChange(item)}
-            >
-              {translate(`common.images_modal.${item}`)}
-            </button>
-          ))}
+          {attachementTabs?.map((item, index) => {
+            const isActive = activeTab === item;
+            const hasTabData = hasData(item, images, true);
+
+            return (
+              <button
+                key={index}
+                className={`
+                   ${
+                     isActive
+                       ? hasTabData
+                         ? "text-[#45C769]"
+                         : "text-primary"
+                       : hasTabData
+                       ? "text-[#45C769]"
+                       : "text-[#393939]"
+                   }
+                  text-base font-medium pb-[10px] 
+                  ${isActive ? "border-b-2 border-primary" : ""}
+                `}
+                onClick={() => handleTabChange(item)}
+              >
+                {translate(`common.images_modal.${item}`)}
+              </button>
+            );
+          })}
         </div>
 
         <div className="my-5">
