@@ -23,7 +23,7 @@ export const AllDayEvent = ({
   endTime,
 }: AllDayEventsProps) => {
   const containerClasses = combineClasses(
-    `flex items-center gap-x-1 px-2 py-[6px] rounded-[4px] cursor-pointer`,
+    `px-2 py-[6px] rounded-[4px] cursor-pointer`,
     containerClassName
   );
 
@@ -34,30 +34,34 @@ export const AllDayEvent = ({
 
   return (
     <div
-      className={containerClasses}
+      className={`${containerClasses}`}
       style={{ backgroundColor: `${backrgoundColour || "#cccccc"}4D` }}
     >
-      <span
-        className={dotDefaultClasses}
-        style={{ backgroundColor: dotColour || "#ccc" }}
-      />
-      <div className="flex items-center justify-between w-full">
-        <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">
+      <div className="flex items-center ">
+        <span
+          className={dotDefaultClasses}
+          style={{ backgroundColor: dotColour || "#ccc" }}
+        />
+        <p
+          className={`text-[#3C3C3C] font-medium text-xs ml-1 xAirMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis w-full`}
+        >
           {title}
-        </span>
-        {showEndTime ? (
-          <>
+        </p>
+        {!showEndTime && (
+          <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm ml-2">
+            {startTime}
+          </span>
+        )}
+
+        {showEndTime && (
+          <div className="flex items-center justify-between gap-x-2">
             <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm">
               {startTime}
             </span>
             <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm">
               {translate("calendar.ends_text")} {endTime}
             </span>
-          </>
-        ) : (
-          <span className="text-[#3C3C3C] font-medium text-xs xAirMini:text-sm">
-            {startTime}
-          </span>
+          </div>
         )}
       </div>
     </div>

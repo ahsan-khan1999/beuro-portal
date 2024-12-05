@@ -7,10 +7,12 @@ export interface DayViewProps {
   timeColour?: string;
   title: string;
   time?: string;
+  startTime?: string;
   backrgoundColour?: string;
   isMonthView?: boolean;
   showOnlyTitle?: boolean;
   fixedHeight?: boolean;
+  showEndTime?: boolean;
 }
 
 export const DayView = ({
@@ -20,10 +22,12 @@ export const DayView = ({
   titleColour,
   backrgoundColour,
   time,
+  startTime,
   title,
   isMonthView,
   showOnlyTitle = false,
   fixedHeight = false,
+  showEndTime,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
     `flex flex-col gap-y-1 p-1 cursor-pointer`,
