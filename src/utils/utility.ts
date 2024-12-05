@@ -120,6 +120,29 @@ export const areFiltersEmpty = (filter: FilterType) => {
   });
 };
 
+export const hasData = (
+  item: string,
+  enteredLinks: any,
+  isShareModal?: boolean
+) => {
+  switch (item) {
+    case "img_tab":
+      return enteredLinks?.images?.length > 0;
+    case "video_tab":
+      return isShareModal
+        ? enteredLinks?.videos?.length > 0
+        : enteredLinks?.video?.length > 0;
+    case "attachement_tab":
+      return isShareModal
+        ? enteredLinks?.attachments?.length > 0
+        : enteredLinks?.attachements?.length > 0;
+    case "link_tab":
+      return enteredLinks?.links?.length > 0;
+    default:
+      return false;
+  }
+};
+
 //filtering filter
 
 // export const cleanFilter = (filterObj: FilterType): FilterType => {
