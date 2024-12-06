@@ -12,73 +12,58 @@ export const AppointmentsDetails = () => {
     handleStatusUpdate,
     handleUpdateDiscount,
     isLoading,
-    loading,
     reportDetails,
     systemSettings,
     handleNotes,
     handleUploadImages,
   } = useReportDetails();
 
+  const cardClass = appointmentDetails?.isReportSubmitted
+    ? "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[295px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
+    : "";
+
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <CustomLoader />
-      ) : !appointmentDetails?.isReportSubmitted ? (
-        <>
-          <div
-            className={`${
-              !appointmentDetails?.isReportSubmitted
-                ? ""
-                : "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[295px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
-            }`}
-          >
-            <AppointmentsDetailCard
-              onStatusChange={handleStatusUpdate}
-              appointmentDetails={appointmentDetails}
-              handleImageUpload={handleUploadImages}
-              handleNotes={handleNotes}
-              reportDetails={reportDetails}
-            />
-          </div>
-          <div className="xMini:bg-white mt-6 xMini:flex items-center justify-center">
-            <NoDataEmptyState
-              heading={translate("appointments.detail_data.no_data_found")}
-              containerClassName="xMini:py-[153px]"
-              imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
-              textClassName="text-lg xMini:text-2xl"
-              className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[617px]"
-            />
-          </div>
-        </>
       ) : (
         <>
-          <div
-            className={`${
-              !appointmentDetails?.isReportSubmitted
-                ? ""
-                : "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[285px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
-            }`}
-          >
+          <div className={cardClass}>
             <AppointmentsDetailCard
-              appointmentDetails={appointmentDetails}
               onStatusChange={handleStatusUpdate}
+              appointmentDetails={appointmentDetails}
               handleImageUpload={handleUploadImages}
               handleNotes={handleNotes}
               reportDetails={reportDetails}
             />
           </div>
-          <div className="2xl:mt-[365px] w-full 2xl:block mb-10">
-            <ReportDetailData
-              reportDetail={reportDetails}
-              loading={isLoading}
-              handleUpdateDiscount={handleUpdateDiscount}
-              currency={systemSettings?.currency}
-            />
-          </div>
+
+          {appointmentDetails?.isReportSubmitted ? (
+            <div className="2xl:mt-[365px] w-full 2xl:block mb-10">
+              <ReportDetailData
+                reportDetail={reportDetails}
+                loading={isLoading}
+                handleUpdateDiscount={handleUpdateDiscount}
+                currency={systemSettings?.currency}
+              />
+            </div>
+          ) : (
+            !isLoading && (
+              <div className="xMini:bg-white mt-6 xMini:flex items-center justify-center">
+                <NoDataEmptyState
+                  heading={translate("appointments.detail_data.no_data_found")}
+                  containerClassName="xMini:py-[153px]"
+                  imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
+                  textClassName="text-lg xMini:text-2xl"
+                  className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[617px]"
+                />
+              </div>
+            )
+          )}
+
+          {renderModal()}
         </>
       )}
-
-      {renderModal()}
     </>
   );
 };

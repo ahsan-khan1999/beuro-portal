@@ -45,8 +45,10 @@ export const FollowUpNotificationBar = ({
 </svg>`,
     id: item?.id,
   }));
-  const { t: translate } = useTranslation();
+
+
   const dispatch = useDispatch();
+  const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
   const { followUpDetails } = useAppSelector((state) => state.followUp);
 

@@ -6,13 +6,11 @@ import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { AddContractTask } from "@/base-components/ui/modals1/AddTask";
 import localStoreUtil from "@/utils/localstore.util";
-import { DEFAULT_CONTRACT_TASK, staticEnums } from "@/utils/static";
+import { DEFAULT_CONTRACT_TASK } from "@/utils/static";
 import {
   deleteContractTask,
-  readContractDetails,
   readContractTaskDetail,
   readContractTasks,
-  setContractDetails,
   setContractTask,
   setContractTaskDetails,
 } from "@/api/slices/contract/contractSlice";
@@ -25,14 +23,11 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType } from "@/types";
-import { readImage, setImages } from "@/api/slices/imageSlice/image";
-import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
+import { setImages } from "@/api/slices/imageSlice/image";
 import { DocumentViewerModal } from "@/base-components/ui/modals1/DocumentViewer";
 
 export const useCalendar = () => {
-  const { loading, task, taskDetail } = useAppSelector(
-    (state) => state.contract
-  );
+  const { loading, task } = useAppSelector((state) => state.contract);
   const [reminderEvents, setReminderEvents] = useState<Task[]>([]);
   const [triggeredReminders, setTriggeredReminders] = useState<Set<string>>(
     new Set()

@@ -17,7 +17,7 @@ export default function Appointments() {
     filter,
     setFilter,
     handleFilterChange,
-    isLoading,
+    loading,
     currentPage,
     currentPageRows,
     handleStatusUpdate,
@@ -37,7 +37,7 @@ export default function Appointments() {
       handleImageUpload={handleImageUpload}
     />,
     totalCount !== 0,
-    isLoading
+    loading
   );
 
   return (

@@ -25,7 +25,7 @@ export enum ComponentsType {
   additionalAddedSucces,
 }
 
-const EditOffersDetailsData = () => {
+const AddOffersDetailsData = () => {
   const { offerDetails } = useAppSelector((state) => state.offer);
   const { t: translate } = useTranslation();
 
@@ -148,7 +148,6 @@ const EditOffersDetailsData = () => {
         onClose={onClose}
         routeHandler={route}
         heading={translate("common.offer_create")}
-        subHeading=""
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
@@ -248,4 +247,4 @@ const EditOffersDetailsData = () => {
   );
 };
 
-export default EditOffersDetailsData;
+export default AddOffersDetailsData;
