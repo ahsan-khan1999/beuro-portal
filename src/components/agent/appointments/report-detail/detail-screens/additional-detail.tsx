@@ -16,8 +16,9 @@ export const ReportAdditionalInfoDetail = ({
   const handleEditClick = () => {
     const query: any = router.query;
 
-    query.report = reportDetail?.appointmentID?.id;
     query.tab = 3;
+    delete query.reportId;
+    query.report = reportDetail?.appointmentID?.id;
 
     if (companyAppointment) {
       query.companyAppointment = companyAppointment;
