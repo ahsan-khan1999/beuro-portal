@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { useAppSelector } from "@/hooks/useRedux";
@@ -6,6 +6,7 @@ import {
   calendarTaskformatDate,
   formatAlertTime,
   hasTimeComponent,
+  setMaxHeightOnResize,
 } from "@/utils/utility";
 import { CalendarAlertIcon } from "@/assets/svgs/components/calendar-alert-icon";
 import { CalendarNoteIcon } from "@/assets/svgs/components/calendar-note-icon";
@@ -34,6 +35,7 @@ export const ContractTaskDetail = ({
   handleViewImages,
 }: ContractTaskDetailProps) => {
   const { t: translate } = useTranslation();
+  const [maxHeight, setMaxHeight] = useState("700px");
   const taskDetail = useAppSelector(
     (state) => state.contract.taskDetail
   ) as TaskWithSelectedDates;
@@ -62,11 +64,17 @@ export const ContractTaskDetail = ({
 
   const isSameDateAlldayTask = taskDetail?.selectedEndDate === "Invalid date";
 
+  useEffect(() => {
+    const cleanup = setMaxHeightOnResize(setMaxHeight);
+
+    return cleanup;
+  }, []);
+
   return (
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName="max-w-[340px] xsMini:max-w-[384px] min-h-fit absolute top-[180px] rounded-lg bg-[#F3F3F3] calendarShadow"
+      containerClassName={`max-w-[340px] xsMini:max-w-[384px] min-h-fit absolute top-[180px] rounded-lg bg-[#F3F3F3] calendarShadow`}
     >
       {loading && (
         <div className="min-h-[300px] flex items-center justify-center">
@@ -74,7 +82,14 @@ export const ContractTaskDetail = ({
         </div>
       )}
       {!loading && (
-        <div className="pt-[15px] px-[10px] pb-[10px]">
+        <div
+          className={`pt-[15px] px-[10px] pb-[10px] hide-scrollbar`}
+          style={{
+            maxHeight: maxHeight,
+            overflowY: "auto",
+            overflowX: "hidden",
+          }}
+        >
           <div className="flex items-start gap-x-[8px]">
             <span
               className={`w-3 h-3 rounded-full`}

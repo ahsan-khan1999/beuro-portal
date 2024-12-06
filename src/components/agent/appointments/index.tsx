@@ -20,7 +20,6 @@ export default function AgentAppointments() {
     filter,
     setFilter,
     handleFilterChange,
-    isLoading,
     currentPage,
     handleStatusUpdate,
     currentPageRows,
@@ -44,7 +43,7 @@ export default function AgentAppointments() {
       handlePdfPreview={handlePdfPreview}
     />,
     totalCount !== 0,
-    isLoading
+    loading
   );
 
   return (
@@ -57,9 +56,9 @@ export default function AgentAppointments() {
         onDateChange={handleCurrentDateChange}
       />
 
-      {isLoading && <CustomLoader />}
+      {loading && <CustomLoader />}
 
-      {!isLoading && (
+      {!loading && (
         <div className="block xMini:hidden">
           {currentPageRows && currentPageRows.length > 0 ? (
             <AppointmentTableRecordCard dataToAdd={currentPageRows} />
@@ -76,7 +75,7 @@ export default function AgentAppointments() {
         </div>
       )}
 
-      {!isLoading && (
+      {!loading && (
         <div className="hidden xMini:block">
           <TableCardLayout>
             <TableLayout isAgent={true}>
@@ -86,7 +85,7 @@ export default function AgentAppointments() {
           </TableCardLayout>
         </div>
       )}
-      {!isLoading && currentPageRows && (
+      {!loading && currentPageRows && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}

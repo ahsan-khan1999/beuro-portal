@@ -229,9 +229,9 @@ export const useCalendar = () => {
     );
   };
 
-  const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
+  // const handleImageSlider = () => {
+  //   dispatch(updateModalType({ type: ModalType.CREATION }));
+  // };
 
   const handleViewImages = async (
     id: string,
@@ -261,7 +261,6 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading=""
         // subHeading={translate("common.modals.task_updated_successfully")}
         route={onClose}
       />
@@ -270,7 +269,6 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.images_updated")}
-        subHeading=""
         // subHeading={translate("common.modals.images_updated_des")}
         route={onClose}
       />
@@ -279,7 +277,6 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        subHeading=""
         // subHeading={translate("common.modals.task_deleted_successfully")}
         route={onClose}
       />

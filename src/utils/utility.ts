@@ -47,7 +47,6 @@ import deskIcon from "@/assets/pngs/desk.png";
 import tvIcon from "@/assets/pngs/tv.png";
 import decoGrossIcon from "@/assets/pngs/deco-gross.png";
 import ovenIcon from "@/assets/pngs/oven.png";
-
 import aquairumIcon from "@/assets/pngs/aquarium.png";
 import poolIcon from "@/assets/pngs/pool.png";
 import washMacIcon from "@/assets/pngs/wash-machine.png";
@@ -151,6 +150,21 @@ export const areFiltersEmpty = (filter: FilterType) => {
 //   }
 //   return cleanedFilter as FilterType;
 // };
+
+export const setMaxHeightOnResize = (setMaxHeightCallback: any) => {
+  const updateMaxHeight = () => {
+    const browserHeight = window.innerHeight;
+    const newMaxHeight = browserHeight < 830 ? "500px" : "700px";
+    setMaxHeightCallback(newMaxHeight);
+  };
+
+  updateMaxHeight();
+  window.addEventListener("resize", updateMaxHeight);
+
+  return () => {
+    window.removeEventListener("resize", updateMaxHeight);
+  };
+};
 
 export const hasTimeComponent = (dateString: string) => {
   return moment(dateString).format("HH:mm") !== "00:00";

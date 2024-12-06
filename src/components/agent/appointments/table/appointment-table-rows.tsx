@@ -1,19 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
-import {
-  convertToLocal,
-  formatDateTimeToDate,
-  viewConvertUTCToLocalDate,
-} from "@/utils/utility";
+import { convertToLocal, formatDateTimeToDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
 import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
-import { useReportUpdatedPdf } from "@/hooks/appointments/useReportUpdatedPdf";
-import { updateQuery } from "@/utils/update-query";
+
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
   onStatusChange: (id: string, status: string, type: string) => void;
@@ -39,12 +34,8 @@ export interface ApointmentsTableProps {
 
 export const AppointmentTableRows = ({
   dataToAdd,
-  onStatusChange,
-  onAppointmentCreate,
-  isAgent,
   handleNotes,
   handleImageUpload,
-  handlePdfPreview,
 }: ApointmentsTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -73,22 +64,22 @@ export const AppointmentTableRows = ({
     }
   };
 
-  const handleReportDetail = (id: string) => {
-    router.push({
-      pathname: "/agent/appointments/report-detail",
-      query: { ...router.query, reportId: id },
-    });
-  };
+  // const handleReportDetail = (id: string) => {
+  //   router.push({
+  //     pathname: "/agent/appointments/report-detail",
+  //     query: { ...router.query, reportId: id },
+  //   });
+  // };
 
-  const handleAppointmentRoute = (id: string) => {
-    router.push({
-      pathname: "/agent/appointments/details",
-      query: {
-        ...router.query,
-        appointment: id,
-      },
-    });
-  };
+  // const handleAppointmentRoute = (id: string) => {
+  //   router.push({
+  //     pathname: "/agent/appointments/details",
+  //     query: {
+  //       ...router.query,
+  //       appointment: id,
+  //     },
+  //   });
+  // };
 
   return (
     <div className={`overflow-y-visible`}>
@@ -114,7 +105,7 @@ export const AppointmentTableRows = ({
           : "";
 
         return (
-          <div>
+          <>
             <div
               onClick={() => handleClickRow(item?.isReportSubmitted, item.id)}
               className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
@@ -364,7 +355,7 @@ export const AppointmentTableRows = ({
                       {item.leadID?.isOfferCreated === true
                         ? translate(`leads.created`)
                         : translate(`leads.not_created`)}
-                    </div>
+                    </>
                   </span>
                 </div>
               </div>
@@ -432,7 +423,7 @@ export const AppointmentTableRows = ({
                 </div>
               </div>
             </div> */}
-          </div>
+          </>
         );
       })}
     </div>

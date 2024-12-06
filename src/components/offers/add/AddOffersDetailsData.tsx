@@ -26,8 +26,8 @@ export enum ComponentsType {
 }
 
 const AddOffersDetailsData = () => {
-  const { offerDetails } = useAppSelector((state) => state.offer);
   const { t: translate } = useTranslation();
+  const { offerDetails } = useAppSelector((state) => state.offer);
 
   const [tabType, setTabType] = useState<ComponentsType>(
     offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded
@@ -86,8 +86,8 @@ const AddOffersDetailsData = () => {
     },
   ];
 
-  const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
   const customerType = offerDetails?.leadID?.customerDetail
