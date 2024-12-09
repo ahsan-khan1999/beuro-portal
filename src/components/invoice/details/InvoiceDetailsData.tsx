@@ -2,7 +2,7 @@ import React from "react";
 import plusIcon from "@/assets/svgs/plus_icon.svg";
 import { useRouter } from "next/router";
 import { InvoiceCardContentProps } from "@/types/invoice";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import recurring from "@/assets/svgs/recurring icon.svg";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
@@ -238,7 +238,7 @@ const InvoiceDetailsData = ({
                 {translate("invoice.card_content.created_date")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
-                {formatDateTimeToDate(invoiceDetails?.createdAt)}
+                {germanDateFormat(invoiceDetails?.createdAt)}
               </span>
             </div>
             <div

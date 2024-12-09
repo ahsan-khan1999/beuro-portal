@@ -152,7 +152,7 @@ export function formatDateString(dateString) {
   const year = date.getUTCFullYear();
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
   const day = String(date.getUTCDate()).padStart(2, "0");
-  return `${day}/${month}/${year}`;
+  return `${day}.${month}.${year}`;
 }
 
 import { useState, useEffect } from "react";
@@ -191,32 +191,43 @@ export function useIsSmallWeekScreen() {
   return isSmallWeekScreen;
 }
 
-export function formatDateToCustomString(dateString, ShowUTC = true) {
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+// export function formatDateToCustomString(dateString, ShowUTC = true) {
+//   const months = [
+//     "Jan",
+//     "Feb",
+//     "Mar",
+//     "Apr",
+//     "May",
+//     "Jun",
+//     "Jul",
+//     "Aug",
+//     "Sep",
+//     "Oct",
+//     "Nov",
+//     "Dec",
+//   ];
 
+//   const dateObj = new Date(dateString);
+//   const day = dateObj.getUTCDate();
+//   const month = months[dateObj.getUTCMonth()];
+//   const year = dateObj.getUTCFullYear();
+//   const hours = String(dateObj.getUTCHours()).padStart(2, "0");
+//   const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
+
+//   return `${day} ${month} ${year}, ${hours}:${minutes} ${
+//     (ShowUTC && "UTC") || ""
+//   }`;
+// }
+
+export function formatDateToCustomString(dateString, ShowUTC = true) {
   const dateObj = new Date(dateString);
-  const day = dateObj.getUTCDate();
-  const month = months[dateObj.getUTCMonth()];
+  const day = String(dateObj.getUTCDate()).padStart(2, "0"); // Zero-padded day
+  const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0"); // Zero-padded month (Month is zero-indexed)
   const year = dateObj.getUTCFullYear();
   const hours = String(dateObj.getUTCHours()).padStart(2, "0");
   const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
 
-  return `${day} ${month} ${year}, ${hours}:${minutes} ${
-    (ShowUTC && "UTC") || ""
-  }`;
+  return `${day}.${month}.${year}, ${hours}:${minutes} ${ShowUTC ? "UTC" : ""}`;
 }
 
 export const generateUniqueId = () => {

@@ -3,7 +3,11 @@ import React from "react";
 import timeIcon from "@/assets/svgs/time.svg";
 import { useTranslation } from "next-i18next";
 import { Dashboard } from "@/types";
-import { formatDateTimeToDate, formatDateTimeToTime } from "@/utils/utility";
+import {
+  formatDateTimeToDate,
+  formatDateTimeToTime,
+  germanDateFormat,
+} from "@/utils/utility";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
 const ActivitiesNotificationBar = ({
@@ -54,7 +58,8 @@ const ActivitiesNotificationBar = ({
                         className="mr-[10px]"
                       />
                       <span className="text-[#393939] text-xs">
-                        {item?.time},{item?.date}
+                        {item?.time},
+                        {item?.date ? germanDateFormat(item?.date) : ""}
                       </span>
                     </div>
                     <div className="lg:flex justify-between items-center hidden">

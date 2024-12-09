@@ -3,7 +3,7 @@ import Image from "next/image";
 import cofirmation_icon from "@/assets/svgs/confirmation_icon.svg";
 import { useRouter } from "next/router";
 import {
-  formatDateTimeToDate,
+  germanDateFormat,
   getContractStatusColor,
   getEmailColor,
   getPaymentTypeColor,
@@ -189,10 +189,10 @@ const ContractDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {contractDetails?.offerID?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${
+                    `${germanDateFormat(item.startDate)}${
                       item.endDate
                         ? ` ${translate("contracts.card_content.to")} ` +
-                          formatDateTimeToDate(item.endDate) +
+                          germanDateFormat(item.endDate) +
                           ((contractDetails?.offerID?.date?.length - 1 !=
                             index &&
                             ", ") ||

@@ -1,5 +1,5 @@
 import { MovingDetailsProps } from "@/types/types";
-import { formatAddress, formatDateTimeToDate } from "@/utils/utility";
+import { formatAddress, germanDateFormat } from "@/utils/utility";
 import writeIcon from "@/assets/svgs/write_icon.svg";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -16,9 +16,9 @@ export const MovingDetails = ({
   handleEditDateModal,
   time,
 }: Partial<MovingDetailsProps>) => {
-  const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(header);
   const [tempText, setTempText] = useState(text);
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -120,10 +120,10 @@ export const MovingDetails = ({
             <span className="text-sm font-medium text-[#4B4B4B]">
               {workDates?.map(
                 (item, index) =>
-                  `${formatDateTimeToDate(item.startDate)}${
+                  `${germanDateFormat(item.startDate)}${
                     item.endDate
                       ? ` ${translate("contracts.card_content.to")} ` +
-                        formatDateTimeToDate(item.endDate) +
+                        germanDateFormat(item.endDate) +
                         ((workDates?.length - 1 != index && ", ") || ".")
                       : (workDates?.length - 1 != index && ", ") || "."
                   }`

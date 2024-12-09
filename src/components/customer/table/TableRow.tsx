@@ -1,6 +1,6 @@
 import React from "react";
 import { CustomerTable } from "@/types/customer";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { formatDateTimeToDate, germanDateFormat } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
@@ -46,7 +46,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                 <span className="py-4 truncate">{item.email}</span>
                 <span className="py-4 truncate">{item.phoneNumber}</span>
                 <span className="py-4 maxSize:flex items-center mlg:hidden">
-                  {formatDateTimeToDate(item.createdAt)}
+                  {germanDateFormat(item.createdAt)}
                 </span>
                 <span className="py-4 flex items-center truncate">
                   {item?.address?.country}

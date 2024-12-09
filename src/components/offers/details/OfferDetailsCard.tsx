@@ -11,7 +11,7 @@ import { PostIcon } from "@/assets/svgs/components/post-icon";
 import { BaseButton } from "@/base-components/ui/button/base-button";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
 import {
-  formatDateTimeToDate,
+  germanDateFormat,
   getEmailColor,
   getOfferStatusColor,
   getPaymentTypeColor,
@@ -223,10 +223,10 @@ const OfferDetailsCard = ({
               <span className="text-base font-medium text-[#4B4B4B]">
                 {offerDetails?.date?.map(
                   (item, index) =>
-                    `${formatDateTimeToDate(item.startDate)}${
+                    `${germanDateFormat(item.startDate)}${
                       item.endDate
                         ? ` ${translate("contracts.card_content.to")} ` +
-                          formatDateTimeToDate(item.endDate) +
+                          germanDateFormat(item.endDate) +
                           ((offerDetails?.date?.length - 1 != index && ", ") ||
                             ".")
                         : (offerDetails?.date?.length - 1 != index && ", ") ||

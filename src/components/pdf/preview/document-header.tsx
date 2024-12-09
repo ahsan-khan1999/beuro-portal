@@ -1,7 +1,11 @@
 import Image from "next/image";
 import React from "react";
 import { DocumentHeaderDetailsProps } from "@/types/types";
-import { convertUTCToLocalDate, formatDateTimeToDate } from "@/utils/utility";
+import {
+  convertUTCToLocalDate,
+  formatDateTimeToDate,
+  germanDateFormat,
+} from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 
 export const DocumentHeader = ({
@@ -137,7 +141,7 @@ export const DocumentHeader = ({
                 className={`text-[${textColor}] text-sm font-medium`}
                 style={{ color: textColor }}
               >
-                {formatDateTimeToDate(offerDate || "")}
+                {germanDateFormat(offerDate || "")}
               </span>
             </div>
             <div className="flex gap-[5px]">

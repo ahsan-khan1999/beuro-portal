@@ -30,7 +30,6 @@ export default function AgentAppointments() {
     handleImageUpload,
     handleCurrentDateChange,
     handlePdfPreview,
-    loading,
   } = useAppointments();
 
   const CurrentComponent = useEmptyStates(
