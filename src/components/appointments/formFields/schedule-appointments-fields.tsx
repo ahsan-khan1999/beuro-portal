@@ -128,12 +128,12 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                     value: "Bern (BE)",
                   },
                   {
-                    label: "Fribourg (FR)",
-                    value: "Fribourg (FR)",
+                    label: "Freiburg (FR)",
+                    value: "Freiburg (FR)",
                   },
                   {
-                    label: "Geneva (GE)",
-                    value: "Geneva (GE)",
+                    label: "Genf (GE)",
+                    value: "Genf (GE)",
                   },
                   {
                     label: "Glarus (GL)",
@@ -148,12 +148,12 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                     value: "Jura (JU)",
                   },
                   {
-                    label: "Lucerne (LU)",
-                    value: "Lucerne (LU)",
+                    label: "Luzern (LU)",
+                    value: "Luzern (LU)",
                   },
                   {
-                    label: "Neuchâtel (NE)",
-                    value: "Neuchâtel (NE)",
+                    label: "Neuenburg (NE)",
+                    value: "Neuenburg (NE)",
                   },
                   {
                     label: "Nidwalden (NW)",
@@ -180,8 +180,8 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                     value: "St. Gallen (SG)",
                   },
                   {
-                    label: "Ticino (TI)",
-                    value: "Ticino (TI)",
+                    label: "Tessin (TI)",
+                    value: "Tessin (TI)",
                   },
                   {
                     label: "Thurgau (TG)",
@@ -192,12 +192,12 @@ export const scheduleAppointmentsFormField: GenerateScheduleAppointmentsFormFiel
                     value: "Uri (UR)",
                   },
                   {
-                    label: "Valais (VS)",
-                    value: "Valais (VS)",
+                    label: "Wallis (VS)",
+                    value: "Wallis (VS)",
                   },
                   {
-                    label: "Vaud (VD)",
-                    value: "Vaud (VD)",
+                    label: "Waadt (VD)",
+                    value: "Waadt (VD)",
                   },
                   {
                     label: "Zug (ZG)",

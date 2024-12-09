@@ -44,7 +44,7 @@ export const DayView = ({
         height: fixedHeight ? "50px" : "auto",
       }}
     >
-      <p className="text-[#3C3C3C] font-normal text-xs xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+      <p className="text-[#3C3C3C] font-normal text-[10px] xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
         {title}
       </p>
       {!showOnlyTitle && (

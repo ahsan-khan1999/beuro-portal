@@ -410,18 +410,17 @@ export const Calendar = () => {
             );
           } else if (viewType === "dayGridWeek") {
             return (
-              <>
-                <DayView
-                  time={formattedTime}
-                  title={eventInfo.event.title}
-                  backrgoundColour={eventInfo.event.backgroundColor}
-                  borderColour={eventInfo.event.borderColor}
-                  timeColour={eventInfo.event.textColor}
-                  isMonthView={true}
-                  showOnlyTitle={showOnlyTitle}
-                  fixedHeight={fixedHeight}
-                />
-              </>
+              <DayView
+                time={formattedTime}
+                title={eventInfo.event.title}
+                backrgoundColour={eventInfo.event.backgroundColor}
+                borderColour={eventInfo.event.borderColor}
+                timeColour={eventInfo.event.textColor}
+                isMonthView={false}
+                showOnlyTitle={showOnlyTitle}
+                fixedHeight={fixedHeight}
+                // isWeekView={true}
+              />
             );
           } else {
             return null;

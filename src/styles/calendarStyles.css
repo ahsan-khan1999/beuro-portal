@@ -138,6 +138,11 @@
   display: none;
 }
 
+.fc-more-popover {
+  overflow: hidden !important;
+  max-height: none !important;
+}
+
 @media (min-width: 768px) {
   .timeGridDay-flex {
     display: flex !important;
