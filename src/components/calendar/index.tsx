@@ -69,6 +69,7 @@ export const Calendar = () => {
   const isSmallScreen = useIsSmallScreen(); // 1100px check
   const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
   const { currentLanguage } = useAppSelector((state) => state.global);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     events: rawEvents,
@@ -286,7 +287,12 @@ export const Calendar = () => {
         )}
         firstDay={1}
         moreLinkText={translate("calendar.more_text")}
+        moreLinkClick={(info) => {
+          setIsModalOpen(true);
+          info.jsEvent.preventDefault();
+        }}
         eventClick={(info) => {
+          setIsModalOpen(false);
           const taskID = info.event.extendedProps.taskID;
           const isAllDay = info.event.allDay;
 
@@ -419,7 +425,8 @@ export const Calendar = () => {
                 isMonthView={false}
                 showOnlyTitle={showOnlyTitle}
                 fixedHeight={fixedHeight}
-                // isWeekView={true}
+                isWeekView={true}
+                isModal={isModalOpen}
               />
             );
           } else {

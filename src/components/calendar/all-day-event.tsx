@@ -21,7 +21,7 @@ export const AllDayEvent = ({
   );
 
   const dotDefaultClasses = combineClasses(
-    `h-3 w-3 rounded-full flex-shrink-0`,
+    `h-2 w-2 xMini:h-3 xMini:w-3 rounded-full flex-shrink-0`,
     dotClassName
   );
 
@@ -35,7 +35,7 @@ export const AllDayEvent = ({
         style={{ backgroundColor: dotColour || "#ccc" }}
       />
 
-      <p className="text-[#3C3C3C] font-medium text-[10px] xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+      <p className="text-[#3C3C3C] font-medium text-[8px] xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
         {title}
       </p>
     </div>

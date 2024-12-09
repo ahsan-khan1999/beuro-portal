@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import { MovingDetailsProps } from "@/types";
 import { GridItem } from "./grid-item";
 import { Row } from "./row";
-import { formatDateTimeToDate, germanDateFormat } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import { DateRow } from "./date-row";
 
 const styles = StyleSheet.create({
