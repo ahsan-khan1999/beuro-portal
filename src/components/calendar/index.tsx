@@ -426,7 +426,6 @@ export const Calendar = () => {
                 showOnlyTitle={showOnlyTitle}
                 fixedHeight={fixedHeight}
                 isWeekView={true}
-                isModal={isModalOpen}
               />
             );
           } else {
@@ -459,6 +458,15 @@ export const Calendar = () => {
           ) {
             info.el.style.width = "auto";
             info.el.style.display = "block";
+          }
+
+          if (isModalOpen) {
+            info.el.style.height = "auto";
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
           }
         }}
       />

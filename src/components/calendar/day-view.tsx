@@ -34,6 +34,8 @@ export const DayView = ({
     containerClassName
   );
 
+  const eventHeight = isWeekView ? "100px" : fixedHeight ? "50px" : "auto";
+
   return (
     <div
       className={containerClasses}
@@ -45,13 +47,7 @@ export const DayView = ({
         borderTop: !isMonthView
           ? `3px solid ${borderColour || "#000"}`
           : undefined,
-        height: isModal
-          ? "auto" // Dynamic height for modal events
-          : fixedHeight
-          ? "50px"
-          : isWeekView
-          ? "100px" // Fixed height for week view
-          : "auto",
+        height: eventHeight,
       }}
     >
       {isWeekView ? (
