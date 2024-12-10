@@ -173,7 +173,7 @@ const LeadsDetailsCardData = ({
             )}
 
             <div className="flex items-center gap-x-4">
-              {handleSendByPost && (
+              {/* {handleSendByPost && (
                 <BaseButton
                   buttonText={translate("offers.card_content.send_via_post")}
                   onClick={handleSendByPost}
@@ -184,7 +184,7 @@ const LeadsDetailsCardData = ({
                 >
                   <PostIcon className="text-primary group-hover:text-primary" />
                 </BaseButton>
-              )}
+              )} */}
 
               <button
                 className={`w-fit border border-primary rounded-lg flex items-center px-4 py-2 cursor-pointer group ${

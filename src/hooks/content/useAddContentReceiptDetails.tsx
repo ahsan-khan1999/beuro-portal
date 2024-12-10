@@ -52,10 +52,6 @@ export const useAddContentReceiptDetails = (
       reset({
         receiptContent: {
           ...contentDetails?.receiptContent,
-          // attachments:
-          //   (contentDetails?.receiptContent?.attachments?.length > 0 &&
-          //     contentDetails?.receiptContent?.attachments[0]) ||
-          //   null,
         },
       });
     }
@@ -69,8 +65,7 @@ export const useAddContentReceiptDetails = (
     trigger,
     0,
     attachements,
-    setAttachements,
-    contentDetails
+    setAttachements
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

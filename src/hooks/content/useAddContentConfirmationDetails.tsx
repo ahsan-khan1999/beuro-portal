@@ -63,8 +63,7 @@ export const useAddContentConfirmationDetails = (onHandleNext: Function) => {
     trigger,
     0,
     attachements,
-    setAttachements,
-    contentDetails
+    setAttachements
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

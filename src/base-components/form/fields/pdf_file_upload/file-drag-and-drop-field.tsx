@@ -135,7 +135,9 @@ export const PdfFileUpload = ({
                       onClick={() => handleDeleteFile(index)}
                     />
                     <Image src={pdfIcon} alt="pdfIcon" />
-                    <span>{item?.name.slice(0, 20)}...</span>
+                    <span className="truncate text-[#4B4B4B] font-normal text-sm">
+                      {item?.name}
+                    </span>
                   </div>
                 </div>
               ))}

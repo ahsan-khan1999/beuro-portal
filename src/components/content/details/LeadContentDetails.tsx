@@ -37,15 +37,6 @@ const LeadContentDetails = ({
 
       <div className="px-5 py-3">
         <div className="grid grid-cols-1 gap-x-3 gap-y-5 rounded-lg px-2 py-3 bg-[#EDF4FF]">
-          {/* <div>
-            <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
-              {translate("content.details.content_name")}
-            </p>
-            <p className="border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] truncate bg-white">
-              {contentDetail?.contentName}
-            </p>
-          </div> */}
-
           <div className="flex flex-col">
             <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
               {translate("content.details.lead_title")}
@@ -53,20 +44,6 @@ const LeadContentDetails = ({
             <p className="border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] truncate bg-white">
               {contentDetail?.leadContent?.title}
             </p>
-          </div>
-
-          <div className="flex flex-col">
-            <div className="flex items-center justify-between">
-              <p className="text-[#1E1E1E] font-semibold text-sm mb-[10px]">
-                {translate("content.details.lead_description")}
-              </p>
-            </div>
-            <div
-              className="html-content border border-[#c4c4c4] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] bg-white break-all"
-              dangerouslySetInnerHTML={{
-                __html: contentDetail?.leadContent?.description,
-              }}
-            />
           </div>
 
           <div className="flex flex-col">

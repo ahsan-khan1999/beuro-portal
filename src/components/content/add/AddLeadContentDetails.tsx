@@ -1,29 +1,20 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import FormCard from "@/layout/customers/FormCard";
-import React from "react";
-import { OfferContentPdf } from "./pdf-preview/offer-content-pdf";
-import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { updateQuery } from "@/utils/update-query";
 import { useAddLeadContentDetails } from "@/hooks/content/useAddLeadContentDetails";
 
 export interface AddLeadContentProps {
   onHandleNext: Function;
-  onCancel: () => void;
+  onCancel?: () => void;
 }
 
 const AddLeadContentDetails = ({
   onHandleNext,
   onCancel,
 }: AddLeadContentProps) => {
-  const {
-    fields,
-    router,
-    onSubmit,
-    handleSubmit,
-    errors,
-    translate,
-    leadDescriptionCount,
-  } = useAddLeadContentDetails(onHandleNext);
+  const { fields, router, onSubmit, handleSubmit, errors, translate } =
+    useAddLeadContentDetails(onHandleNext);
 
   const handleCancel = () => {
     router.pathname = "/content";
@@ -36,7 +27,7 @@ const AddLeadContentDetails = ({
       <FormCard>
         <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
           <div className="flex items-center gap-x-[26px]">
-            <span className="cursor-pointer" onClick={handleCancel}>
+            <span className="cursor-pointer" onClick={() => handleCancel}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="41"
@@ -80,24 +71,6 @@ const AddLeadContentDetails = ({
           />
         </div>
       </FormCard>
-
-      <div className="bg-white rounded-lg w-[500px] h-fit p-[6px] hidden xlg:block">
-        <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px] pt-2 pb-2 border-b-2 border-b-primary">
-          {translate("common.lead_PDF_PREVIEW")}
-        </h1>
-        {leadDescriptionCount ? (
-          <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
-            <OfferContentPdf description={leadDescriptionCount} />
-          </div>
-        ) : (
-          <NoDataEmptyState
-            className="w-full"
-            imgClassName="w-14 h-14"
-            textClassName="text-base"
-            containerClassName="py-3"
-          />
-        )}
-      </div>
     </div>
   );
 };

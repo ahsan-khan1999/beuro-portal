@@ -1040,9 +1040,6 @@ const offerSendByPost = (data) =>
     feature: featureConstants.login,
   });
 
-
-
-
 const leadSendByPost = (data) =>
   put(SERVICE_URLS.sendByPostLead + `${data?.id}`, data, {
     feature: featureConstants.login,
@@ -1321,7 +1318,7 @@ const apiServices = {
   readContractTaskDetail,
   deleteContractTask,
   leadSendByPost,
-  sendLeadEmail
+  sendLeadEmail,
 };
 
 export default apiServices;

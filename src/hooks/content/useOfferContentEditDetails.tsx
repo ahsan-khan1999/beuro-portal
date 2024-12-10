@@ -1,10 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  FieldValues,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -67,27 +62,15 @@ export const useOfferContentEditDetails = (onClick: Function) => {
     }
   }, [contentDetails?.id]);
 
-  const {
-    fields: addressFields,
-    append,
-    remove,
-  } = useFieldArray({
-    control,
-    name: "offerContent.address",
-  });
-
   const fields = OfferEditContentDetailsFormField(
     register,
     loading,
     control,
     handleBack,
     trigger,
-    addressFields?.length === 0 ? 1 : addressFields?.length,
+    0,
     attachements,
-    setAttachements,
-    contentDetails,
-    append,
-    remove
+    setAttachements
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

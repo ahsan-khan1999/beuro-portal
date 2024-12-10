@@ -1,10 +1,7 @@
 export enum LeadContentDetails {
-  // contentName = "contentName",
   leadTitle = "title",
-  leadDescription = "description",
   emailBody = "body",
   attachments = "attachments",
-  address = "address",
 }
 
 // offer edit content enum

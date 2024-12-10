@@ -16,8 +16,7 @@ export const AddOfferContentDetailsFormField: GenerateContentFormField = (
   trigger,
   count,
   attachements,
-  setAttachements,
-  contentDetails
+  setAttachements
 ) => {
   const { t: translate } = useTranslation();
 

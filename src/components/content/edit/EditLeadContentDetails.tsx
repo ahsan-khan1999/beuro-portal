@@ -2,30 +2,19 @@ import { Form } from "@/base-components/form/form";
 import { ContentTableRowTypes } from "@/types/content";
 import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
-import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
-import { OfferContentPdf } from "../add/pdf-preview/offer-content-pdf";
-import { Button } from "@/base-components/ui/button/button";
-import { useAddLeadContentDetails } from "@/hooks/content/useAddLeadContentDetails";
+import { useEditLeadContentDetails } from "@/hooks/content/useEditLeadContentDetails";
 
 export interface EditLeadContentDetailsProps {
   onClick: (index: number, component: ComponentsType) => void;
-  contentDetail: ContentTableRowTypes;
+  isUpdate?: boolean;
 }
 
-const EditLeadContentDetails = ({ onClick }: EditLeadContentDetailsProps) => {
-  const {
-    fields,
-    onSubmit,
-    handleSubmit,
-    errors,
-    translate,
-    leadDescriptionCount,
-  } = useAddLeadContentDetails(onClick);
-
-  const handlePreviewClick = (type: string) => {
-    localStorage.setItem("description", leadDescriptionCount);
-    window.open(`/content/pdf-preview/${type}`, "_blank");
-  };
+const EditLeadContentDetails = ({
+  onClick,
+  isUpdate,
+}: EditLeadContentDetailsProps) => {
+  const { fields, onSubmit, handleSubmit, errors, translate } =
+    useEditLeadContentDetails({ onClick, isUpdate });
 
   return (
     <div className="flex gap-x-5">
@@ -50,35 +39,6 @@ const EditLeadContentDetails = ({ onClick }: EditLeadContentDetailsProps) => {
             errors={errors}
           />
         </div>
-      </div>
-      <div className="bg-white rounded-lg w-[500px] h-fit p-[6px] hidden xMaxSize:block">
-        <div className="flex items-center justify-between pt-2 pb-2 border-b-2 border-b-primary">
-          <h1 className="text-sm font-medium text-[#1E1E1E] pl-[14px]">
-            {translate("common.lead_PDF_PREVIEW")}
-          </h1>
-
-          <Button
-            inputType="button"
-            onClick={() => handlePreviewClick("offer")}
-            className="gap-x-2 !h-fit py-2 p-4 w-fit flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
-            text={translate("invoice.invoice_created_modal.button")}
-            id="preview"
-            iconAlt="button"
-          />
-        </div>
-
-        {leadDescriptionCount ? (
-          <div className="p-[6px] mt-2 rounded-lg bg-[#EDF4FF]">
-            <OfferContentPdf description={leadDescriptionCount} />
-          </div>
-        ) : (
-          <NoDataEmptyState
-            className="w-full"
-            imgClassName="w-14 h-14"
-            textClassName="text-base"
-            containerClassName="py-3"
-          />
-        )}
       </div>
     </div>
   );

@@ -4,14 +4,24 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { generateLeadContentDetailsValidation } from "@/validation/contentSchema";
+import { ComponentsType } from "@/components/content/details/ContentDetailsData";
 import { useState, useEffect } from "react";
-import { Attachement } from "@/types/global";
 import { transformAttachments } from "@/utils/utility";
 import { createContent } from "@/api/slices/content/contentSlice";
-import { ComponentsType } from "@/enums/content";
+import { Attachement } from "@/types/global";
+import { updateModalType } from "@/api/slices/globalSlice/global";
+import { ModalType } from "@/enums/ui";
 import { AddLeadContentDetailsFormField } from "@/components/content/add/fields/add-lead-content-details-fields";
 
-export const useAddLeadContentDetails = (onHandleNext: Function) => {
+export const useEditLeadContentDetails = ({
+  onClick,
+  isUpdate,
+}: {
+  onClick: Function;
+  isUpdate?: boolean;
+}) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
@@ -23,8 +33,10 @@ export const useAddLeadContentDetails = (onHandleNext: Function) => {
       []
   );
 
-  const router = useRouter();
-  const dispatch = useAppDispatch();
+  const handleBack = () => {
+    onClick(0, ComponentsType.leadContent);
+  };
+
   const schema = generateLeadContentDetailsValidation(translate);
 
   const {
@@ -32,20 +44,18 @@ export const useAddLeadContentDetails = (onHandleNext: Function) => {
     handleSubmit,
     control,
     setError,
-    trigger,
-    reset,
-    watch,
     formState: { errors },
+    reset,
+    trigger,
   } = useForm<FieldValues>({
     resolver: yupResolver<FieldValues>(schema),
   });
 
   useEffect(() => {
-    if (contentDetails.id) {
+    if (contentDetails?.id) {
       reset({
         leadContent: {
           ...contentDetails?.leadContent,
-          attachements: contentDetails?.leadContent?.attachments,
         },
       });
     }
@@ -55,51 +65,55 @@ export const useAddLeadContentDetails = (onHandleNext: Function) => {
     register,
     loading,
     control,
-    () => console.log(),
+    handleBack,
     trigger,
     0,
     attachements,
-    setAttachements
+    setAttachements,
+    isUpdate
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = {
       leadContent: {
-        body: data.leadContent.body,
-        title: data.leadContent.title,
+        body: data?.leadContent.body,
+        title: data?.leadContent.title,
         attachments: attachements?.map((item) => item.value),
       },
       step: 5,
-      stage: ComponentsType.addOffer,
-      contentId: "",
+      stage: ComponentsType.editOfferContent,
+      contentId: contentDetails?.id,
+      id: contentDetails?.id,
     };
     if (contentDetails?.id) {
       apiData = {
         ...apiData,
         contentId: contentDetails?.id,
       };
-
       const res = await dispatch(
-        createContent({ data: apiData, router, setError, translate })
+        createContent({
+          data: apiData,
+          router,
+          setError,
+          translate,
+          isUpdate: isUpdate,
+        })
       );
-      if (res?.payload) onHandleNext(ComponentsType.addOffer);
-    } else {
-      const res = await dispatch(
-        createContent({ data: apiData, router, setError, translate })
-      );
-      if (res?.payload) onHandleNext(ComponentsType.addOffer);
+      if (res?.payload) {
+        onClick(0, ComponentsType.offerContent);
+        dispatch(updateModalType({ type: ModalType.CREATION }));
+      }
     }
   };
 
   return {
     fields,
-    router,
     onSubmit,
     control,
     handleSubmit,
     errors,
     error,
     translate,
-    watch,
+    router,
   };
 };

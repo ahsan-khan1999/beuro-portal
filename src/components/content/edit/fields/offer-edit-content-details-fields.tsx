@@ -1,11 +1,5 @@
 import { Field } from "@/enums/form";
 import { FormField, GenerateContentFormField } from "@/types";
-import {
-  FieldValues,
-  UseFieldArrayAppend,
-  UseFieldArrayRemove,
-  UseFormRegister,
-} from "react-hook-form";
 import { useTranslation } from "next-i18next";
 
 export const OfferEditContentDetailsFormField: GenerateContentFormField = (
@@ -16,10 +10,7 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   trigger,
   count,
   attachements,
-  setAttachements,
-  contentDetails,
-  append,
-  remove
+  setAttachements
 ) => {
   const { t: translate } = useTranslation();
 
@@ -163,46 +154,4 @@ export const OfferEditContentDetailsFormField: GenerateContentFormField = (
   ];
 
   return formField;
-};
-
-const generateAddressChildren = (
-  register: UseFormRegister<FieldValues>,
-  count: number,
-  translate: Function,
-  append?: UseFieldArrayAppend<FieldValues, "offerContent.address">,
-  remove?: UseFieldArrayRemove
-) => {
-  const addressformFields = [];
-  for (let i = 0; i < count; i++) {
-    addressformFields.push({
-      containerClass: "mb-0 ",
-      label: {
-        text: translate("content.details.address_labels"),
-        htmlFor: `offerContent.address.${i}.value`,
-        className: "mb-[10px]",
-      },
-      field: {
-        register,
-        type: Field.input,
-        className: "!p-4 !border-[#BFBFBF] focus:!border-primary w-full",
-        id: `offerContent.address.${i}.value`,
-        name: `offerContent.address.${i}.value`,
-        remove: i > 0 && `${translate("common.remove")}`,
-        onRemove: () => i > 0 && remove && remove(i),
-      },
-    });
-  }
-  // addressformFields.push({
-  //   containerClass: "mb-0 mt-8",
-  //   field: {
-  //     type: Field.button,
-  //     id: "button",
-  //     text: `${translate("common.add_new_address")}`,
-  //     inputType: "button",
-  //     className:
-  //       "rounded-lg px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
-  //     onClick: () => append && append({ address: "" }),
-  //   },
-  // });
-  return addressformFields;
 };

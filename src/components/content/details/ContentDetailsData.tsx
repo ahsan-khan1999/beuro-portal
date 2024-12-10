@@ -74,10 +74,7 @@ const ContentDetailsData = () => {
       <LeadContentDetails onClick={handleEdit} contentDetail={contentDetails} />
     ),
     [ComponentsType.editLeadContent]: (
-      <EditLeadContentDetails
-        onClick={handleEdit}
-        contentDetail={contentDetails}
-      />
+      <EditLeadContentDetails onClick={handleEdit} isUpdate={true} />
     ),
     [ComponentsType.offerContent]: (
       <OfferContentDetailsData
