@@ -4,7 +4,7 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Lead } from "@/types/leads";
-import { formatDateTimeToDate, getStatusColor } from "@/utils/utility";
+import { germanDateFormat, getStatusColor } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
@@ -311,7 +311,7 @@ const LeadsDetailsCardData = ({
             {translate("leads.card_content.created_date")}:
           </span>
           <span className="font-medium text-[#4B4B4B] text-base">
-            {formatDateTimeToDate(leadDetails?.createdAt)}
+            {germanDateFormat(leadDetails?.createdAt)}
           </span>
         </div>
         <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">

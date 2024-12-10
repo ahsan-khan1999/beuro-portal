@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import { MovingDetailsProps } from "@/types";
 import { GridItem } from "./grid-item";
 import { Row } from "./row";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import { DateRow } from "./date-row";
 
 const styles = StyleSheet.create({
@@ -145,9 +145,17 @@ export const AddressDetails = ({
                     paddingRight: 30,
                   }}
                 >
-                  {`${address.streetNumber}, ${address.postalCode}, ${
+                  {/* {`${address.streetNumber}, ${address.postalCode}, ${
                     [address.country as keyof typeof Country] || ""
+                  }`} */}
+
+                  {`${address.streetNumber}, ${address.postalCode}, ${
+                    address.country &&
+                    Country[address.country as keyof typeof Country]
+                      ? Country[address.country as keyof typeof Country]
+                      : ""
                   }`}
+
                   {address.description && ` - ${address.description}`}
                 </Text>
               </GridItem>
@@ -192,10 +200,10 @@ export const AddressDetails = ({
           <Text style={{ ...styles.dateText, paddingRight: 30 }}>
             {workDates?.map(
               (date, index) =>
-                `${formatDateTimeToDate(date.startDate)}${
+                `${germanDateFormat(date.startDate)}${
                   date.endDate
                     ? " bis " +
-                      formatDateTimeToDate(date.endDate) +
+                      germanDateFormat(date.endDate) +
                       ((workDates?.length - 1 != index && ", ") || ".")
                     : (workDates?.length - 1 != index && ", ") || "."
                 }`

@@ -2,8 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import { TableRowEmailTracker } from "@/types/emailTracker";
 import {
-  formatDateTimeToDate,
   formatDateTimeToTime,
+  germanDateFormat,
   getMailStatusColor,
 } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
@@ -42,13 +42,13 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                 </span>
                 <div className="py-4 flex flex-col">
                   <span>{formatDateTimeToTime(item.createdAt)}</span>
-                  <span>{formatDateTimeToDate(item.createdAt)}</span>
+                  <span>{germanDateFormat(item.createdAt)}</span>
                 </div>
                 <div className="py-4 flex flex-col mlg:hidden xMaxSize:flex">
                   {(item.viewedAt && (
                     <>
                       <span>{formatDateTimeToTime(item.viewedAt)}</span>
-                      <span>{formatDateTimeToDate(item.viewedAt)}</span>
+                      <span>{germanDateFormat(item.viewedAt)}</span>
                     </>
                   )) || <span className="flex my-auto align-middle">-</span>}
                 </div>

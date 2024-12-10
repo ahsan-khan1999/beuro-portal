@@ -3,7 +3,7 @@ import React from "react";
 import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { FollowUpDetailsProps } from "@/types/follow-up";
-import { formatAddress } from "@/utils/utility";
+import { formatAddress, formatDate } from "@/utils/utility";
 import moment from "moment";
 import { useTranslation } from "next-i18next";
 
@@ -56,11 +56,15 @@ const FollowUpDetails = ({
     },
     {
       label: `${translate("follow_up.follow_up_details.desire_date")}`,
-      value: moment(followUpDetails?.lead?.createdAt).format("DD/MM/YYY hh:mm"),
+      value:
+        followUpDetails?.lead?.createdAt &&
+        formatDate(followUpDetails?.lead?.createdAt),
     },
     {
       label: `${translate("follow_up.follow_up_details.flexibility")}`,
-      value: moment(followUpDetails?.lead?.createdAt).format("DD/MM/YYY hh:mm"),
+      value:
+        followUpDetails?.lead?.createdAt &&
+        formatDate(followUpDetails?.lead?.createdAt),
     },
     {
       label: `${translate("follow_up.follow_up_details.budget")}`,

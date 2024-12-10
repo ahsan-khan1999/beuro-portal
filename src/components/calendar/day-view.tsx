@@ -13,6 +13,8 @@ export interface DayViewProps {
   showOnlyTitle?: boolean;
   fixedHeight?: boolean;
   showEndTime?: boolean;
+  isWeekView?: boolean;
+  isModal?: boolean;
 }
 
 export const DayView = ({
@@ -28,11 +30,15 @@ export const DayView = ({
   showOnlyTitle = false,
   fixedHeight = false,
   showEndTime,
+  isWeekView,
+  isModal,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
-    `flex flex-col gap-y-1 p-1 cursor-pointer`,
+    `flex flex-col  ${isWeekView ? "gap-y-2" : "gap-y-1"} p-1 cursor-pointer`,
     containerClassName
   );
+
+  const eventHeight = isWeekView ? "100px" : fixedHeight ? "50px" : "auto";
 
   return (
     <div
@@ -45,18 +51,36 @@ export const DayView = ({
         borderTop: !isMonthView
           ? `3px solid ${borderColour || "#000"}`
           : undefined,
-        height: fixedHeight ? "50px" : "auto",
+        height: eventHeight,
       }}
     >
-      <p className="text-[#3C3C3C] font-normal text-xs xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
-        {title}
-      </p>
+      {isWeekView ? (
+        <p
+          className={`text-[#3C3C3C] font-normal text-[8px] xMini:text-sm break-all`}
+          style={{
+            color: titleColour || "#3C3C3C",
+            height: "100%",
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 2,
+            whiteSpace: "normal",
+          }}
+        >
+          {title}
+        </p>
+      ) : (
+        <p className="text-[#3C3C3C] font-normal text-[8px] xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+          {title}
+        </p>
+      )}
+
       {!showOnlyTitle && (
         <p
           style={{
             color: timeColour || "#3C3C3C",
           }}
-          className="text-[10px] xMini:text-xs whitespace-nowrap overflow-hidden text-ellipsis"
+          className="text-[5px] xMini:text-xs whitespace-nowrap overflow-hidden text-ellipsis"
         >
           {time}
         </p>

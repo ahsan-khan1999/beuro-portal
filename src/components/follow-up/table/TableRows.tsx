@@ -1,7 +1,7 @@
 import React from "react";
 import { FollowUps, FollowUpsTable } from "@/types/follow-up";
-import moment from "moment";
 import { StatusColors } from "@/enums/follow-up";
+import { formatDate } from "@/utils/utility";
 
 const TableRows = ({
   currentPageRows,
@@ -27,7 +27,7 @@ const TableRows = ({
                   {item?.customer?.fullName}
                 </span>
                 <span className="py-4 lex items-center">
-                  {moment(item?.dateTime).format("DD/MM/YYYY hh:mm")}
+                  {item?.dateTime && formatDate(item?.dateTime)}
                 </span>
                 <span className="py-4 flex items-center">{item?.title}</span>
 

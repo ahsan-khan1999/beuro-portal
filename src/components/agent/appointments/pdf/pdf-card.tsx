@@ -3,17 +3,12 @@ import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { Appointments, Report } from "@/types/appointments";
-import {
-  formatDateTimeToDate,
-  formatTimeToHHMM,
-  viewConvertUTCToLocalDate,
-} from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import { PrintIcon } from "@/assets/svgs/components/print-icon";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 import { useAppSelector } from "@/hooks/useRedux";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
-import { useReportDetails } from "@/hooks/appointments/useReportDetail";
 import { staticEnums } from "@/utils/static";
 
 export interface AppointmentsDetailCardProps {
@@ -165,9 +160,8 @@ export const AppointmentPdfCard = ({
               </span>
               {appointmentDetails?.appointmentID?.date && (
                 <span className="text-base text-[#5C5C5C] font-nomal">
-                  {formatDateTimeToDate(
-                    appointmentDetails?.appointmentID?.date
-                  )}
+                  {appointmentDetails?.appointmentID?.date &&
+                    germanDateFormat(appointmentDetails?.appointmentID?.date)}
                 </span>
               )}
             </div>

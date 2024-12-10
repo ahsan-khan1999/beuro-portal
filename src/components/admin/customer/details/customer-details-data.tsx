@@ -1,7 +1,7 @@
 import React from "react";
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { CustomersAdmin } from "@/types/admin/customer";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { formatDateTimeToDate, germanDateFormat } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 
 const CustomerDetailsData = ({
@@ -55,7 +55,8 @@ const CustomerDetailsData = ({
               {translate("admin.customers_details.customer_details.created_on")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {formatDateTimeToDate(customerDetail?.createdAt)}
+              {customerDetail?.createdAt &&
+                germanDateFormat(customerDetail?.createdAt)}
             </div>
           </div>
           <div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
@@ -31,9 +31,7 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <span className="py-4 truncate">{item.serviceName}</span>
-                <span className="py-4">
-                  {formatDateTimeToDate(item.createdAt)}
-                </span>
+                <span className="py-4">{germanDateFormat(item.createdAt)}</span>
                 <span className="py-4 ">{item.price}</span>
                 <span className="py-4">{item?.unit}</span>
                 <span className="py-4 mr-1 truncate">{item.description}</span>

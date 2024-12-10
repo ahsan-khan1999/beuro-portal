@@ -70,6 +70,7 @@ export const Calendar = () => {
   const isSmallScreen = useIsSmallScreen(); // 1100px check
   const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
   const { currentLanguage } = useAppSelector((state) => state.global);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     events: rawEvents,
@@ -287,7 +288,12 @@ export const Calendar = () => {
         )}
         firstDay={1}
         moreLinkText={translate("calendar.more_text")}
+        moreLinkClick={(info) => {
+          setIsModalOpen(true);
+          info.jsEvent.preventDefault();
+        }}
         eventClick={(info) => {
+          setIsModalOpen(false);
           const taskID = info.event.extendedProps.taskID;
           const isAllDay = info.event.allDay;
 
@@ -430,13 +436,14 @@ export const Calendar = () => {
             return (
               <DayView
                 time={formattedTime}
-                title={event.title}
-                backrgoundColour={event.backgroundColor}
-                borderColour={event.borderColor}
-                timeColour={event.textColor}
-                isMonthView={true}
+                title={eventInfo.event.title}
+                backrgoundColour={eventInfo.event.backgroundColor}
+                borderColour={eventInfo.event.borderColor}
+                timeColour={eventInfo.event.textColor}
+                isMonthView={false}
                 showOnlyTitle={showOnlyTitle}
                 fixedHeight={fixedHeight}
+                isWeekView={true}
               />
             );
           } else {
@@ -469,6 +476,15 @@ export const Calendar = () => {
           ) {
             info.el.style.width = "auto";
             info.el.style.display = "block";
+          }
+
+          if (isModalOpen) {
+            info.el.style.height = "auto";
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
           }
         }}
       />

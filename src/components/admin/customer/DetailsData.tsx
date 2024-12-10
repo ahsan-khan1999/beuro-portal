@@ -2,7 +2,7 @@ import { CustomersAdmin } from "@/types/admin/customer";
 import Image from "next/image";
 import React from "react";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { formatDateTimeToDate, germanDateFormat } from "@/utils/utility";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { staticEnums } from "@/utils/static";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
@@ -208,7 +208,8 @@ const DetailsData = ({
               :
             </span>
             <span className="text-[#4B4B4B] font-medium">
-              {formatDateTimeToDate(customerDetail?.plan?.createdAt)}
+              {customerDetail?.plan?.createdAt &&
+                germanDateFormat(customerDetail?.plan?.createdAt)}
             </span>
           </div>
         </div>

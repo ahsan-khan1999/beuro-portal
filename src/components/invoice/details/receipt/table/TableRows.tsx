@@ -1,7 +1,7 @@
 import React from "react";
 import { SubInvoiceTableRowTypes } from "@/types/invoice";
 import { useRouter } from "next/router";
-import { formatDateTimeToDate, getInvoiceEmailColor } from "@/utils/utility";
+import { germanDateFormat, getInvoiceEmailColor } from "@/utils/utility";
 import { staticEnums } from "@/utils/static";
 import { useAppSelector } from "@/hooks/useRedux";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
@@ -84,7 +84,7 @@ const TableRows = ({
                   {item?.invoiceID?.content?.contentName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
-                  {formatDateTimeToDate(item.paidDate)}
+                  {germanDateFormat(item.paidDate)}
                 </span>
                 <span className="py-4 truncate mlg:hidden xlg:block">
                   {item.amount + " " + systemSettings?.currency}
