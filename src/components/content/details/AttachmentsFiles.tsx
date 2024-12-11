@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
 import { getFileNameFromUrl } from "@/utils/utility";
+import pdfFileIcon from "@/assets/svgs/PDF_file_icon.svg";
 import { DownloadIcon } from "@/assets/svgs/components/download-icon";
 
 const AttachmentsFiles = ({ fileName }: { fileName: string }) => {

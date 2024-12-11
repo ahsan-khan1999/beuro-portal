@@ -171,6 +171,10 @@
   background-color: white !important;
 }
 
+.fc-popover-body .fc-daygrid-event-harness > a > div#selected {
+  height: auto !important;
+}
+
 @media (min-width: 768px) {
   .timeGridDay-flex {
     display: flex !important;

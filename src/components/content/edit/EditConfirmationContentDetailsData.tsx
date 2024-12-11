@@ -1,7 +1,6 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { useEditConfirmationContentDetails } from "@/hooks/content/useEditConfirmationContentDetails";
-import { ContentTableRowTypes } from "@/types/content";
-import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
 import { ConfirmationContentPdf } from "../add/pdf-preview/confirmation-content-pdf";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
@@ -9,10 +8,8 @@ import { Button } from "@/base-components/ui/button/button";
 
 const EditConfirmationContentDetailsData = ({
   onClick,
-  contentDetail,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
-  contentDetail: ContentTableRowTypes;
 }) => {
   const {
     fields,

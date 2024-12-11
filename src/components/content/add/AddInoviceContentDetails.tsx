@@ -10,7 +10,6 @@ const AddInoviceContentDetails = ({
 }: {
   onHandleNext: Function;
 }) => {
-  const defaultClassName = "";
   const {
     fields,
     control,
@@ -37,7 +36,6 @@ const AddInoviceContentDetails = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </FormCard>

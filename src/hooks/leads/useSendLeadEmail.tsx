@@ -69,8 +69,8 @@ export const useSendLeadEmail = (backRouteHandler: Function) => {
         subject:
           selectedContent?.leadContent?.title ||
           "" +
-            " " +
-            leadDetails?.refID +
+            // " " +
+            // leadDetails?.refID +
             " " +
             leadDetails?.createdBy?.company?.companyName,
         description: selectedContent?.leadContent?.body || "",

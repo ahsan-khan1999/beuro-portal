@@ -14,7 +14,6 @@ export interface DayViewProps {
   fixedHeight?: boolean;
   showEndTime?: boolean;
   isWeekView?: boolean;
-  isModal?: boolean;
 }
 
 export const DayView = ({
@@ -24,14 +23,11 @@ export const DayView = ({
   titleColour,
   backrgoundColour,
   time,
-  startTime,
   title,
   isMonthView,
   showOnlyTitle = false,
   fixedHeight = false,
-  showEndTime,
   isWeekView,
-  isModal,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
     `flex flex-col  ${isWeekView ? "gap-y-2" : "gap-y-1"} p-1 cursor-pointer`,
@@ -43,6 +39,7 @@ export const DayView = ({
   return (
     <div
       className={containerClasses}
+      id="selected"
       style={{
         backgroundColor: `${backrgoundColour || "#cccccc"}4D`,
         borderLeft: isMonthView
@@ -56,7 +53,7 @@ export const DayView = ({
     >
       {isWeekView ? (
         <p
-          className={`text-[#3C3C3C] font-normal text-[8px] xMini:text-sm break-all`}
+          className={`text-[#3C3C3C] font-normal text-[10px] xMini:text-sm break-all`}
           style={{
             color: titleColour || "#3C3C3C",
             height: "100%",
@@ -70,7 +67,7 @@ export const DayView = ({
           {title}
         </p>
       ) : (
-        <p className="text-[#3C3C3C] font-normal text-[8px] xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+        <p className="text-[#3C3C3C] font-normal text-[10px] xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
           {title}
         </p>
       )}
@@ -80,7 +77,7 @@ export const DayView = ({
           style={{
             color: timeColour || "#3C3C3C",
           }}
-          className="text-[5px] xMini:text-xs whitespace-nowrap overflow-hidden text-ellipsis"
+          className="text-[8px] xMini:text-xs whitespace-nowrap overflow-hidden text-ellipsis"
         >
           {time}
         </p>

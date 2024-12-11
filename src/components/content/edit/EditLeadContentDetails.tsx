@@ -1,6 +1,5 @@
-import { Form } from "@/base-components/form/form";
-import { ContentTableRowTypes } from "@/types/content";
 import React from "react";
+import { Form } from "@/base-components/form/form";
 import { ComponentsType } from "../details/ContentDetailsData";
 import { useEditLeadContentDetails } from "@/hooks/content/useEditLeadContentDetails";
 
@@ -19,8 +18,8 @@ const EditLeadContentDetails = ({
   return (
     <div className="flex gap-x-5">
       <div className="rounded-lg border border-primary bg-white w-full h-fit">
-        <div className="flex justify-between items-center bg-[#7b18ff] py-5 px-6 rounded-t-lg">
-          <h2 className="text-white text-xl font-medium">
+        <div className="flex justify-between items-center bg-[#f5d60f] py-5 px-6 rounded-t-lg">
+          <h2 className="text-dark text-xl font-medium">
             {translate("content.details.lead_heading")}
           </h2>
           <button

@@ -1,7 +1,6 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { useOfferContentEditDetails } from "@/hooks/content/useOfferContentEditDetails";
-import { ContentTableRowTypes } from "@/types/content";
-import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { OfferContentPdf } from "../add/pdf-preview/offer-content-pdf";
@@ -9,10 +8,8 @@ import { Button } from "@/base-components/ui/button/button";
 
 const OfferContentEditDetails = ({
   onClick,
-  contentDetail,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
-  contentDetail: ContentTableRowTypes;
 }) => {
   const {
     fields,

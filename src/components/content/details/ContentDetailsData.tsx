@@ -83,10 +83,7 @@ const ContentDetailsData = () => {
       />
     ),
     [ComponentsType.editOfferContent]: (
-      <OfferContentEditDetails
-        onClick={handleEdit}
-        contentDetail={contentDetails}
-      />
+      <OfferContentEditDetails onClick={handleEdit} />
     ),
     [ComponentsType.confirmationContent]: (
       <ConfirmationContentDetailsData
@@ -95,10 +92,7 @@ const ContentDetailsData = () => {
       />
     ),
     [ComponentsType.editConfirmationContent]: (
-      <EditConfirmationContentDetailsData
-        onClick={handleEdit}
-        contentDetail={contentDetails}
-      />
+      <EditConfirmationContentDetailsData onClick={handleEdit} />
     ),
     [ComponentsType.invoiceContent]: (
       <InoviceContentDetails
@@ -107,10 +101,7 @@ const ContentDetailsData = () => {
       />
     ),
     [ComponentsType.editInvoiceContent]: (
-      <EditInoviceContentDetails
-        onClick={handleEdit}
-        contentDetail={contentDetails}
-      />
+      <EditInoviceContentDetails onClick={handleEdit} />
     ),
     [ComponentsType.receiptContent]: (
       <ReceiptContentDetails
@@ -119,10 +110,7 @@ const ContentDetailsData = () => {
       />
     ),
     [ComponentsType.editReceiptContent]: (
-      <EditReceiptContentDetails
-        onClick={handleEdit}
-        contentDetail={contentDetails}
-      />
+      <EditReceiptContentDetails onClick={handleEdit} />
     ),
   };
 

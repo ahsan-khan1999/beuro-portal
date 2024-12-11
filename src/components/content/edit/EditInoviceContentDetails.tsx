@@ -1,6 +1,5 @@
 import React from "react";
 import { Form } from "@/base-components/form/form";
-import { ContentTableRowTypes } from "@/types/content";
 import { ComponentsType } from "../details/ContentDetailsData";
 import { useEditInvoiceContentDetails } from "@/hooks/content/useEditInvoiceContentDetails";
 import { InvoiceContentPdf } from "../add/pdf-preview/invoice-content-pdf";
@@ -9,10 +8,8 @@ import { Button } from "@/base-components/ui/button/button";
 
 const EditInoviceContentDetails = ({
   onClick,
-  contentDetail,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
-  contentDetail: ContentTableRowTypes;
 }) => {
   const {
     fields,

@@ -12,14 +12,11 @@ const AddReceiptContentDetails = ({
   onHandleBack: Function;
   onHandleNext: Function;
 }) => {
-  const defaultClassName = "";
   const {
     fields,
-    control,
     onSubmit,
     handleSubmit,
     errors,
-    error,
     translate,
     receiptDescription,
   } = useAddContentReceiptDetails(onHandleBack, onHandleNext);
@@ -39,7 +36,6 @@ const AddReceiptContentDetails = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </FormCard>

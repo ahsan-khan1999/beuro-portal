@@ -21,8 +21,8 @@ const LeadContentDetails = ({
       className="rounded-lg border-none bg-white border w-full h-fit"
       id={translate("content.tabs_headings.lead_content")}
     >
-      <div className="flex justify-between items-center bg-[#7b18ff] rounded-t-lg pt-[17px] pb-[22px] pl-[29px] pr-6">
-        <h2 className="text-white text-xl font-medium">
+      <div className="flex justify-between items-center bg-[#f5d60f] rounded-t-lg pt-[17px] pb-[22px] pl-[29px] pr-6">
+        <h2 className="text-dark text-xl font-medium">
           {translate("content.details.lead_heading")}
         </h2>
 
@@ -62,7 +62,7 @@ const LeadContentDetails = ({
             <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
-            {contentDetail?.leadContent?.attachments.length > 0 ? (
+            {contentDetail?.leadContent?.attachments?.length > 0 ? (
               <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
                 {contentDetail?.leadContent?.attachments?.map((item, index) => (
                   <AttachmentsFiles fileName={item} key={index} />
