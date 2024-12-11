@@ -25,7 +25,7 @@ const OfferContentDetailsData = ({
         </h2>
 
         <button
-          onClick={() => onClick(0, ComponentsType.editOfferContent)}
+          onClick={() => onClick(1, ComponentsType.editOfferContent)}
           className="bg-white flex items-center gap-x-4 text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
         >
           <EditIcon />
@@ -117,11 +117,13 @@ const OfferContentDetailsData = ({
             <span className="text-[#1E1E1E] font-semibold text-sm">
               {translate("content.details.attachments")}
             </span>
-            {contentDetail?.offerContent?.attachments.length > 0 ? (
+            {contentDetail?.offerContent?.attachments?.length > 0 ? (
               <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-                {contentDetail?.offerContent?.attachments.map((item, index) => (
-                  <AttachmentsFiles fileName={item} key={index} />
-                ))}
+                {contentDetail?.offerContent?.attachments?.map(
+                  (item, index) => (
+                    <AttachmentsFiles fileName={item} key={index} />
+                  )
+                )}
               </div>
             ) : (
               <p className="text-center text-xl font-medium text-primary">

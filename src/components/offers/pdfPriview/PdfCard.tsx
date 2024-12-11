@@ -104,7 +104,7 @@ const EmailCard = ({
             buttonText={translate("offer_pdf_card.send_post")}
             onClick={handleSendByPost}
             containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+            textClassName="text-[#4B4B4B] font-semibold group-hover:text-primary"
             loading={loading && activeButtonId === "post"}
             loaderColor="#4A13E7"
           >
@@ -118,7 +118,7 @@ const EmailCard = ({
             }
             onClick={onEmailSend}
             containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-            textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+            textClassName="text-[#4B4B4B] font-semibold group-hover:text-primary"
             loading={loading && activeButtonId === "email"}
             loaderColor="#4A13E7"
           >

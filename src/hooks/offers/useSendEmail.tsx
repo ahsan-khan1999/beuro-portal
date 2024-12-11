@@ -15,10 +15,7 @@ import { updateQuery } from "@/utils/update-query";
 import { OfferEmailFormField } from "@/components/offers/compose-mail/fields";
 import localStoreUtil from "@/utils/localstore.util";
 
-export const useSendEmail = (
-  backRouteHandler: Function,
-  onNextHandle: Function
-) => {
+export const useSendEmail = (backRouteHandler: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -42,7 +39,6 @@ export const useSendEmail = (
     register,
     handleSubmit,
     control,
-    setError,
     reset,
     formState: { errors },
     setValue,

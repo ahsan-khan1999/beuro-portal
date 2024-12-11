@@ -9,7 +9,7 @@ export interface LeadCreatedProps {
   onClose: () => void;
   routeHandler: Function;
   heading: string;
-  subHeading: string;
+  subHeading?: string;
 }
 
 const LeadCreated = ({

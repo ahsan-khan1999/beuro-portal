@@ -25,7 +25,6 @@ export const ReportPdfPreview = () => {
     reportData,
     templateSettings,
     systemSetting,
-    loading,
   } = useReportUpdatedPdf();
 
   const {
@@ -43,7 +42,7 @@ export const ReportPdfPreview = () => {
 
   return (
     <div className="flex flex-col gap-y-5 pb-5">
-      {loading ? (
+      {isLoading ? (
         <CustomLoader />
       ) : (
         <>

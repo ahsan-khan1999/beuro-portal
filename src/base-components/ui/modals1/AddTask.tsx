@@ -3,6 +3,7 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import { Form } from "@/base-components/form/form";
 import useAddTask from "@/hooks/calendar/useAddTask";
 import { useRouter } from "next/router";
+import { setMaxHeightOnResize } from "@/utils/utility";
 
 export interface AddTaskModalProps {
   onSuccess: () => void;
@@ -17,8 +18,8 @@ export const AddContractTask = ({
   onSuccess,
   onUpdateSuccess,
 }: AddTaskModalProps) => {
-  const [maxHeight, setMaxHeight] = useState("750px");
   const { locale } = useRouter();
+  const [maxHeight, setMaxHeight] = useState("700px");
 
   const { fields, onSubmit, handleSubmit, errors } = useAddTask({
     isUpdate,
@@ -28,16 +29,22 @@ export const AddContractTask = ({
 
   const rightValue = locale === "en" ? "right-[180px]" : "right-[250px]";
 
-  useEffect(() => {
-    const updateMaxHeight = () => {
-      const browserHeight = window.innerHeight;
-      const newMaxHeight = browserHeight < 830 ? "500px" : "750px";
-      setMaxHeight(newMaxHeight);
-    };
+  // useEffect(() => {
+  //   const updateMaxHeight = () => {
+  //     const browserHeight = window.innerHeight;
+  //     const newMaxHeight = browserHeight < 830 ? "500px" : "750px";
+  //     setMaxHeight(newMaxHeight);
+  //   };
 
-    updateMaxHeight();
-    window.addEventListener("resize", updateMaxHeight);
-    return () => window.removeEventListener("resize", updateMaxHeight);
+  //   updateMaxHeight();
+  //   window.addEventListener("resize", updateMaxHeight);
+  //   return () => window.removeEventListener("resize", updateMaxHeight);
+  // }, []);
+
+  useEffect(() => {
+    const cleanup = setMaxHeightOnResize(setMaxHeight);
+
+    return cleanup;
   }, []);
 
   return (

@@ -48,7 +48,7 @@ export const Pagination = React.memo(
           disabled={isFirst}
         />
 
-        {pagesToShow.map((pageNumber, index, array) => {
+        {pagesToShow?.map((pageNumber, index, array) => {
           if (index > 0 && pageNumber - array[index - 1] > 1) {
             return (
               <React.Fragment key={pageNumber}>

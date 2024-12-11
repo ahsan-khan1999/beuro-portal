@@ -1,10 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  FieldValues,
-  SubmitHandler,
-  useFieldArray,
-  useForm,
-} from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "../useRedux";
@@ -18,9 +13,7 @@ import { ComponentsType } from "@/enums/content";
 
 export const useAddOfferContentDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
-  const { loading, error, contentDetails } = useAppSelector(
-    (state) => state.content
-  );
+  const { loading, contentDetails } = useAppSelector((state) => state.content);
 
   const [attachements, setAttachements] = useState<Attachement[]>(
     (contentDetails?.id &&
@@ -30,7 +23,11 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const handleAddAddressField = () => {};
+
+  const backHandler = () => {
+    onHandleNext(ComponentsType.addLeadContent);
+  };
+
   const schema = generateOfferEditContentDetailsValidation(translate);
 
   const {
@@ -40,7 +37,6 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     setError,
     trigger,
     reset,
-    setValue,
     watch,
     formState: { errors },
   } = useForm<FieldValues>({
@@ -55,36 +51,20 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
         contentName: contentDetails?.contentName,
         offerContent: {
           ...contentDetails?.offerContent,
-          // address: contentDetails?.offerContent?.address?.map((item) => ({
-          //   value: item,
-          // })),
         },
       });
     }
   }, [contentDetails?.id]);
 
-  const {
-    fields: addressFields,
-    append,
-    remove,
-  } = useFieldArray({
-    control,
-    name: "offerContent.address",
-  });
-
   const fields = AddOfferContentDetailsFormField(
     register,
     loading,
     control,
-    handleAddAddressField,
+    backHandler,
     trigger,
-    addressFields?.length === 0 ? 1 : addressFields?.length,
+    0,
     attachements,
-    setAttachements,
-    contentDetails,
-    append,
-    remove,
-    offerDescriptionCount
+    setAttachements
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -95,8 +75,6 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
         description: data.offerContent.description,
         title: data.offerContent.title,
         attachments: attachements?.map((item) => item.value),
-        // address: transformFieldsToValues(data.offerContent, addressField),
-        // address: data?.offerContent?.address?.map((item: any) => item.value),
       },
       step: 1,
       stage: ComponentsType.addConfirmationContent,
@@ -127,7 +105,6 @@ export const useAddOfferContentDetails = (onHandleNext: Function) => {
     control,
     handleSubmit,
     errors,
-    error,
     translate,
     offerDescriptionCount,
     watch,

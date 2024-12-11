@@ -1,19 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
-import {
-  convertToLocal,
-  formatDateTimeToDate,
-  viewConvertUTCToLocalDate,
-} from "@/utils/utility";
+import { convertToLocal, germanDateFormat } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
 import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
-import { useReportUpdatedPdf } from "@/hooks/appointments/useReportUpdatedPdf";
-import { updateQuery } from "@/utils/update-query";
+
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
   onStatusChange: (id: string, status: string, type: string) => void;
@@ -39,12 +34,8 @@ export interface ApointmentsTableProps {
 
 export const AppointmentTableRows = ({
   dataToAdd,
-  onStatusChange,
-  onAppointmentCreate,
-  isAgent,
   handleNotes,
   handleImageUpload,
-  handlePdfPreview,
 }: ApointmentsTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -73,22 +64,22 @@ export const AppointmentTableRows = ({
     }
   };
 
-  const handleReportDetail = (id: string) => {
-    router.push({
-      pathname: "/agent/appointments/report-detail",
-      query: { ...router.query, reportId: id },
-    });
-  };
+  // const handleReportDetail = (id: string) => {
+  //   router.push({
+  //     pathname: "/agent/appointments/report-detail",
+  //     query: { ...router.query, reportId: id },
+  //   });
+  // };
 
-  const handleAppointmentRoute = (id: string) => {
-    router.push({
-      pathname: "/agent/appointments/details",
-      query: {
-        ...router.query,
-        appointment: id,
-      },
-    });
-  };
+  // const handleAppointmentRoute = (id: string) => {
+  //   router.push({
+  //     pathname: "/agent/appointments/details",
+  //     query: {
+  //       ...router.query,
+  //       appointment: id,
+  //     },
+  //   });
+  // };
 
   return (
     <div className={`overflow-y-visible`}>
@@ -114,16 +105,16 @@ export const AppointmentTableRows = ({
           : "";
 
         return (
-          <div>
+          <>
             <div
               onClick={() => handleClickRow(item?.isReportSubmitted, item.id)}
               className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
                 index !== 0 && "border-t border-t-[#E7EAEE]"
-              } gap-x-1  grid 
+              } grid 
               grid-cols-[minmax(100px,15%)_minmax(100px,_15%)_minmax(80px,_12%)_minmax(80px,_23%)_minmax(100px,15%)_minmax(150px,20%)] 
               items-center gap-x-2 bg-primary rounded-lg px-2 py-1 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
             >
-              <div className="">
+              <div>
                 <span className="text-xs md:sm xl:text-base hidden xl:flex">
                   {item.leadID?.customerDetail?.fullName?.length > 24
                     ? item.leadID?.customerDetail?.fullName.slice(0, 24) + ".."
@@ -141,7 +132,7 @@ export const AppointmentTableRows = ({
                 </span>
               </div>
 
-              <div className="">
+              <div>
                 <span className="text-xs md:sm xl:text-base hidden md:flex">
                   {item.leadID?.customerDetail?.companyName}
                 </span>
@@ -153,16 +144,16 @@ export const AppointmentTableRows = ({
                 </span>
               </div>
 
-              <div className=" flex flex-col  gap-y-1">
+              <div className="flex flex-col  gap-y-1">
                 <span className="text-xs md:sm xl:text-base ml-1">
-                  {formatDateTimeToDate(item?.date)}
+                  {item?.date && germanDateFormat(item?.date)}
                 </span>
                 <div className="flex max-w-[150px] flex-wrap gap-x-1 items-center ">
                   <p className="text-xs leading-4 md:sm xl:text-base">
                     {localStartTime}
                   </p>
 
-                  <p className="text-xs md:sm xl:text-base   p-0 m-0">-</p>
+                  <p className="text-xs md:sm xl:text-base p-0 m-0">-</p>
 
                   <p className="text-xs md:sm xl:text-base p-0 m-0">
                     {localEndTime}
@@ -170,12 +161,12 @@ export const AppointmentTableRows = ({
                 </div>
               </div>
 
-              <div className="">
+              <div>
                 <p className="text-xs md:sm xl:text-base leading-5">
                   {item?.canton}
                 </p>
               </div>
-              <div className="">
+              <div>
                 <div
                   className={`${
                     item?.leadID?.isOfferCreated === true
@@ -196,7 +187,7 @@ export const AppointmentTableRows = ({
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div
-                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex"
+                    className="justify-center items-center cursor-pointer hidden 2xl:flex"
                     onClick={(e) =>
                       handleImageUpload(
                         item?.id,
@@ -211,7 +202,7 @@ export const AppointmentTableRows = ({
                     <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
                   </div>
                   <div
-                    className="flex justify-center items-center cursor-pointer hidden 2xl:flex"
+                    className="justify-center items-center cursor-pointer hidden 2xl:flex"
                     onClick={(e) =>
                       handleNotes(
                         item?.id,
@@ -232,7 +223,7 @@ export const AppointmentTableRows = ({
                       <OutlineButton
                         inputType="button"
                         onClick={() => handlePreview(item?.id)}
-                        className="bg-white py-2 px-1 xl:px-2 text-primary xl:text-[#45C769] !min-w-[140px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover py-2 !text-xs !lg:text-sm !2xl:text-lg !h-fit"
+                        className="bg-white py-2 px-1 xl:px-2 text-primary xl:text-[#45C769] !min-w-[140px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover !text-xs !lg:text-sm !2xl:text-lg !h-fit"
                         text={translate("appointments.view_reports_btn")}
                         id="view reports"
                         iconAlt="view reports"
@@ -364,7 +355,7 @@ export const AppointmentTableRows = ({
                       {item.leadID?.isOfferCreated === true
                         ? translate(`leads.created`)
                         : translate(`leads.not_created`)}
-                    </div>
+                    </>
                   </span>
                 </div>
               </div>
@@ -432,7 +423,7 @@ export const AppointmentTableRows = ({
                 </div>
               </div>
             </div> */}
-          </div>
+          </>
         );
       })}
     </div>

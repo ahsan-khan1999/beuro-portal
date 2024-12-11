@@ -34,7 +34,7 @@ export const useReportDetails = () => {
   const { systemSettings } = useAppSelector((state) => state.settings);
   const id = router.query.reportId || router.query.appointment;
 
-  const { isLoading, loading, reportDetails, appointmentDetails, appointment } =
+  const { isLoading, loading, reportDetails, appointmentDetails } =
     useAppSelector((state) => state.appointment);
 
   useEffect(() => {

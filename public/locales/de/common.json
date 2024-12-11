@@ -955,12 +955,14 @@
       "edit": "Bearbeiten"
     },
     "tabs_headings": {
+      "lead_content": "Leadinhalt",
       "offer_content": "Angebotinhalt",
       "confirmation_content": "Bestätigungsinhalt",
       "invoice_content": "Rechnungsinhalt",
       "receipt_content": "Quittungsinhalt"
     },
     "details": {
+      "lead_heading": "Leadinhalt",
       "offer_heading": "Angebotinhalt",
       "confirmation_heading": "Bestätigungsinhalt",
       "invoice_heading": "Rechnungsinhalt",
@@ -968,6 +970,8 @@
       "edit_button": "Details Bearbeiten",
       "content_name": "Inhaltsname",
       "address_labels": "Adressetiketten",
+      "lead_title": "Titel",
+      "lead_description": "Leadbeschreibung",
       "offer_title": "Titel",
       "offer_description": "Angebotbeschreibung",
       "email_body": "E-Mail-Text",
@@ -1248,6 +1252,7 @@
       "lead_created_des": "Vielen Dank für die Erstellung von Lead, wir freuen uns, dass Sie dabei sind.",
       "offer_email_sent": "E-Mail erfolgreich Gesendet",
       "email_sent_des": "Vielen Dank für die Aktualisierung des Angebot. Wir freuen uns, Sie als Kunden zu haben.",
+      "lead_email_sent_des": "Vielen Dank für die Aktualisierung des Leads. Wir freuen uns, Sie bei uns zu haben.",
       "updating_contract": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie dabei sind.",
       "content_confirmation": "Bitte Bestätigen die Inhalts-ID",
       "content_ID": "Inhalts-ID eingeben",
@@ -1320,6 +1325,7 @@
     "svg_upload_not_allowed": "SVG-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
     "img_upload_error_message": "WebP-Dateien sind nicht erlaubt. Bitte laden Sie ein anderes Dateiformat hoch.",
     "offer_PDF_PREVIEW": "Angebot PDF-Vorschau",
+    "lead_PDF_PREVIEW": "Lead PDF-Vorschau",
     "confirmation_PDF_PREVIEW": "Bestätigungs-PDF-Vorschau",
     "invoice_PDF_PREVIEW": "Rechnungs-PDF-Vorschau",
     "receipt_PDF_PREVIEW": "Quittung PDF-Vorschau",
@@ -1392,6 +1398,7 @@
     "update": "Update",
     "mail": "Mail",
     "offer_mail_preview": "E-Mail-Vorschau anbieten",
+    "lead_mail_preview": "Lead E-Mail-Vorschau",
     "address": "Adresse",
     "add_new_date": "Neues Datum hinzufügen",
     "add_company_info": "Unternehmensinformationen hinzufügen",
@@ -1400,7 +1407,7 @@
     "resend_button": "Erneut senden?",
     "continue": "Weiter",
     "remove": "entfernen",
-    "drop_or_attach": "Hier können Sie Ihre Datei ablegen oder anhängen",
+    "drop_or_attach": "Legen Sie Ihre Dateien hier ab oder hängen Sie sie an",
     "file_support": "Unterstützte Dateien: PDF, JPG, PNG, GIF",
     "online": "Online",
     "cash": "Bar",
@@ -2604,6 +2611,7 @@
     }
   },
   "calendar": {
+    "ends_text": "endet",
     "more_text": "Mehr",
     "delete_appointment_des": "Sind Sie sich sicher, dass Sie den Besichtigung löschen möchten?",
     "main_heading": "Kalender",

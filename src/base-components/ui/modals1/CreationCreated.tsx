@@ -7,7 +7,7 @@ import { useTranslation } from "next-i18next";
 export interface SuccessCreationModalProps {
   onClose: () => void;
   heading: string;
-  subHeading: string;
+  subHeading?: string;
   route: () => void;
   imgSrc?: StaticImageData;
 }

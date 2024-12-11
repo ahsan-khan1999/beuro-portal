@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
 import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
+import { germanDateFormat } from "@/utils/utility";
 
 export const CustomerDetailsData = ({
   date,
@@ -37,7 +38,7 @@ export const CustomerDetailsData = ({
       type: "Existing Customer",
       customerID: customerDetails?.id,
       customer: customerDetails?.id,
-      
+
       customerDetail: {
         fullName: customerDetails?.fullName,
         customerType: customerDetails?.customerType,
@@ -130,7 +131,9 @@ export const CustomerDetailsData = ({
         <span className="text-[#4B4B4B] font-medium">
           {translate("customers.card_content.created_date")}:
         </span>
-        <span className="text-primary font-medium">{date}</span>
+        <span className="text-primary font-medium">
+          {date && germanDateFormat(date)}
+        </span>
       </div>
     </>
   );

@@ -51,7 +51,8 @@ const prepareEvents = (rawEvents: EventType[]): EventType[] => {
         originalEnd: event.end,
       };
 
-      event.end = moment(event.end).add(1, "days").format("YYYY-MM-DD");
+      event.start = startDate.format("YYYY-MM-DD HH:mm");
+      event.end = endDate.add(1, "days").format("YYYY-MM-DD HH:mm");
     } else {
       event.allDay = !hasTime(startDate);
     }
@@ -69,6 +70,7 @@ export const Calendar = () => {
   const isSmallScreen = useIsSmallScreen(); // 1100px check
   const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
   const { currentLanguage } = useAppSelector((state) => state.global);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     events: rawEvents,
@@ -286,7 +288,12 @@ export const Calendar = () => {
         )}
         firstDay={1}
         moreLinkText={translate("calendar.more_text")}
+        moreLinkClick={(info) => {
+          setIsModalOpen(true);
+          info.jsEvent.preventDefault();
+        }}
         eventClick={(info) => {
+          setIsModalOpen(false);
           const taskID = info.event.extendedProps.taskID;
           const isAllDay = info.event.allDay;
 
@@ -349,16 +356,28 @@ export const Calendar = () => {
         eventContent={(eventInfo) => {
           const { event, view } = eventInfo;
           const viewType = view?.type;
-          const startMoment = moment(eventInfo.event.start);
-          const endMoment = moment(eventInfo.event.end);
+
+          const startMoment = moment(
+            event.extendedProps?.originalStart || event.start
+          );
+
+          const endMoment = moment(
+            event.extendedProps?.originalEnd || event.end
+          );
+
+          const formattedStartTime = startMoment.format("HH:mm");
+          const formattedEndTime = endMoment.format("HH:mm");
+
           const duration = endMoment.diff(startMoment, "minutes");
+          const daysDuration = endMoment.diff(startMoment, "days");
+          const isValidEndDate = formattedEndTime !== "Invalid date";
 
-          const formattedTime = event?.end
-            ? `${moment(eventInfo.event.start).format("HH:mm")} - ${moment(
-                eventInfo.event.end
-              ).format("HH:mm")}`
-            : `${moment(eventInfo.event.start).format("HH:mm")}`;
+          const formattedTime =
+            formattedEndTime && isValidEndDate
+              ? `${formattedStartTime} - ${formattedEndTime}`
+              : `${formattedStartTime}`;
 
+          const showEndTime = daysDuration > 0;
           const showOnlyTitle = duration < 60;
           const fixedHeight = duration < 1;
 
@@ -366,11 +385,13 @@ export const Calendar = () => {
             if (isSmallScreen) {
               return (
                 <DayView
+                  showEndTime={showEndTime}
+                  startTime={formattedStartTime}
                   time={formattedTime}
-                  title={eventInfo.event.title}
-                  backrgoundColour={eventInfo.event.backgroundColor}
-                  borderColour={eventInfo.event.borderColor}
-                  timeColour={eventInfo.event.textColor}
+                  title={event.title}
+                  backrgoundColour={event.backgroundColor}
+                  borderColour={event.borderColor}
+                  timeColour={event.textColor}
                   isMonthView={true}
                   showOnlyTitle={showOnlyTitle}
                   fixedHeight={fixedHeight}
@@ -380,8 +401,11 @@ export const Calendar = () => {
               return (
                 <AllDayEvent
                   title={event?.title}
-                  backrgoundColour={eventInfo.event.backgroundColor}
-                  dotColour={eventInfo.event.textColor}
+                  showEndTime={showEndTime}
+                  startTime={formattedStartTime}
+                  endTime={formattedEndTime}
+                  backrgoundColour={event.backgroundColor}
+                  dotColour={event.textColor}
                 />
               );
             }
@@ -389,8 +413,8 @@ export const Calendar = () => {
             return (
               <AllDayEvent
                 title={event?.title}
-                backrgoundColour={eventInfo.event.backgroundColor}
-                dotColour={eventInfo.event.textColor}
+                backrgoundColour={event.backgroundColor}
+                dotColour={event.textColor}
               />
             );
           } else if (
@@ -400,28 +424,27 @@ export const Calendar = () => {
             return (
               <DayView
                 time={formattedTime}
-                title={eventInfo.event.title}
-                backrgoundColour={eventInfo.event.backgroundColor}
-                borderColour={eventInfo.event.borderColor}
-                timeColour={eventInfo.event.textColor}
+                title={event.title}
+                backrgoundColour={event.backgroundColor}
+                borderColour={event.borderColor}
+                timeColour={event.textColor}
                 showOnlyTitle={showOnlyTitle}
                 fixedHeight={fixedHeight}
               />
             );
           } else if (viewType === "dayGridWeek") {
             return (
-              <>
-                <DayView
-                  time={formattedTime}
-                  title={eventInfo.event.title}
-                  backrgoundColour={eventInfo.event.backgroundColor}
-                  borderColour={eventInfo.event.borderColor}
-                  timeColour={eventInfo.event.textColor}
-                  isMonthView={true}
-                  showOnlyTitle={showOnlyTitle}
-                  fixedHeight={fixedHeight}
-                />
-              </>
+              <DayView
+                time={formattedTime}
+                title={eventInfo.event.title}
+                backrgoundColour={eventInfo.event.backgroundColor}
+                borderColour={eventInfo.event.borderColor}
+                timeColour={eventInfo.event.textColor}
+                isMonthView={false}
+                showOnlyTitle={showOnlyTitle}
+                fixedHeight={fixedHeight}
+                isWeekView={true}
+              />
             );
           } else {
             return null;
@@ -453,6 +476,15 @@ export const Calendar = () => {
           ) {
             info.el.style.width = "auto";
             info.el.style.display = "block";
+          }
+
+          if (isModalOpen) {
+            info.el.style.height = "auto";
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
           }
         }}
       />

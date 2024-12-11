@@ -175,7 +175,7 @@ export const updatePaymentStatus: AsyncThunk<boolean, object, object> | any =
 
 export const sendOfferEmail: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/email/", async (args, thunkApi) => {
-    const { data, router, setError, translate } = args as any;
+    const { data } = args as any;
 
     try {
       await apiServices.sendOfferEmail(data);
@@ -198,6 +198,7 @@ export const sendOfferByPost: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createOfferNotes: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("offer/notes", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

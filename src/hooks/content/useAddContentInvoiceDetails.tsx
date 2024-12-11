@@ -59,9 +59,6 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
       reset({
         invoiceContent: {
           ...contentDetails?.invoiceContent,
-          // attachments:
-          //   contentDetails?.offerContent?.attachments?.length > 0 &&
-          //   contentDetails?.offerContent?.attachments[0] || null,
         },
       });
     }
@@ -75,8 +72,7 @@ export const useAddContentInvoiceDetails = (onHandleNext: Function) => {
     trigger,
     0,
     attachements,
-    setAttachements,
-    contentDetails
+    setAttachements
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

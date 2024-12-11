@@ -1,5 +1,5 @@
 import { ProductItemFooterProps } from "@/types";
-import { calculateTax, pdfDateFormat } from "@/utils/utility";
+import { calculateTax, germanDateFormat, pdfDateFormat } from "@/utils/utility";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -406,7 +406,9 @@ export const ServicesTotalAmount = ({
                                 :
                               </Text>
                               <Text style={styles.paidValue}>
-                                {pdfDateFormat(item.paidDate, language || "de")}
+                                {/* {pdfDateFormat(item.paidDate, language || "de")} */}
+                                {item.paidDate &&
+                                  germanDateFormat(item.paidDate)}
                               </Text>
                             </View>
                           )}
@@ -554,10 +556,8 @@ export const ServicesTotalAmount = ({
                                     :
                                   </Text>
                                   <Text style={styles.paidValue}>
-                                    {pdfDateFormat(
-                                      item.paidDate,
-                                      language || "de"
-                                    )}
+                                    {item.paidDate &&
+                                      germanDateFormat(item.paidDate)}
                                   </Text>
                                 </View>
                               )}
@@ -655,10 +655,8 @@ export const ServicesTotalAmount = ({
                                   :
                                 </Text>
                                 <Text style={styles.paidValue}>
-                                  {pdfDateFormat(
-                                    item.paidDate,
-                                    language || "de"
-                                  )}
+                                  {item.paidDate &&
+                                    germanDateFormat(item.paidDate)}
                                 </Text>
                               </View>
                             )}

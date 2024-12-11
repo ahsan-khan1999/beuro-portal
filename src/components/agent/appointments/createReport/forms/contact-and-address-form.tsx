@@ -2,7 +2,6 @@ import React from "react";
 import { Form } from "@/base-components/form/form";
 import { AppointmentReportsFormStages } from "@/enums/agent/appointments-report";
 import { useCreateReportAddressDetails } from "@/hooks/agent/appointments/useCreateReportAddressDetails";
-import { combineClasses } from "@/utils/utility";
 
 export interface ReportAddressProps {
   onNextHandler: (currentComponent: AppointmentReportsFormStages) => void;

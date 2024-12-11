@@ -1,3 +1,9 @@
+export enum LeadContentDetails {
+  leadTitle = "title",
+  emailBody = "body",
+  attachments = "attachments",
+}
+
 // offer edit content enum
 export enum OfferEditContentDetails {
   contentName = "contentName",
@@ -40,6 +46,7 @@ export enum ContentPDFComponents {
 }
 
 export enum ComponentsType {
+  addLeadContent,
   addOffer,
   addConfirmationContent,
   addInvoiceContent,

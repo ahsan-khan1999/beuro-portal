@@ -12,7 +12,6 @@ export const AddContentConfirmationDetailsFormField: GenerateContentFormField =
     count,
     attachements,
     setAttachements,
-    contentDetails
   ) => {
     const { t: translate } = useTranslation();
     const formField: FormField[] = [

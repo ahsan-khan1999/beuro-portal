@@ -11,10 +11,7 @@ import { transformAttachments } from "@/utils/utility";
 import { updateContent } from "@/api/slices/content/contentSlice";
 import { ComponentsType } from "@/enums/content";
 
-export const useAddContentConfirmationDetails = (
-  onHandleNext: Function,
-  onHandleBack: Function
-) => {
+export const useAddContentConfirmationDetails = (onHandleNext: Function) => {
   const { t: translate } = useTranslation();
   const { loading, error, contentDetails } = useAppSelector(
     (state) => state.content
@@ -66,8 +63,7 @@ export const useAddContentConfirmationDetails = (
     trigger,
     0,
     attachements,
-    setAttachements,
-    contentDetails
+    setAttachements
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

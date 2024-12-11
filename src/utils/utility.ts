@@ -33,7 +33,6 @@ import { PDFDocument } from "pdf-lib";
 import moment, { Moment } from "moment";
 import "moment/locale/de";
 import { TFunction } from "next-i18next";
-import { contractTableTypes } from "@/types/contract";
 import { StaticImageData } from "next/image";
 
 import shelfIcon from "@/assets/pngs/shelf.png";
@@ -47,7 +46,6 @@ import deskIcon from "@/assets/pngs/desk.png";
 import tvIcon from "@/assets/pngs/tv.png";
 import decoGrossIcon from "@/assets/pngs/deco-gross.png";
 import ovenIcon from "@/assets/pngs/oven.png";
-
 import aquairumIcon from "@/assets/pngs/aquarium.png";
 import poolIcon from "@/assets/pngs/pool.png";
 import washMacIcon from "@/assets/pngs/wash-machine.png";
@@ -151,6 +149,36 @@ export const areFiltersEmpty = (filter: FilterType) => {
 //   }
 //   return cleanedFilter as FilterType;
 // };
+
+export const setMaxHeightOnResize = (setMaxHeightCallback: any) => {
+  const updateMaxHeight = () => {
+    const browserHeight = window.innerHeight;
+    const newMaxHeight = browserHeight < 830 ? "500px" : "700px";
+    setMaxHeightCallback(newMaxHeight);
+  };
+
+  updateMaxHeight();
+  window.addEventListener("resize", updateMaxHeight);
+
+  return () => {
+    window.removeEventListener("resize", updateMaxHeight);
+  };
+};
+
+export function germanDateFormat(dateString: string): string {
+  if (dateString?.includes("/")) {
+    // Format for `DD/MM/YYYY`
+    const [day, month, year] = dateString.split("/");
+    return `${day}.${month}.${year}`;
+  } else {
+    // Format for ISO 8601 date strings
+    const date = new Date(dateString); // Parse ISO 8601 date
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is zero-indexed
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  }
+}
 
 export const hasTimeComponent = (dateString: string) => {
   return moment(dateString).format("HH:mm") !== "00:00";
@@ -501,7 +529,7 @@ export const convertToLocal = (
 
 export const convertUTCToLocalDate = (utcDate: string): string => {
   const localDateObj = new Date(utcDate);
-  const localDate = moment(localDateObj).format("YYYY-MM-DD");
+  const localDate = moment(localDateObj).format("DD.MM.YYYY");
   return localDate;
 };
 
@@ -1640,7 +1668,7 @@ export const convertLocalDateToUTC = (localDate: string): string => {
 
 export const viewConvertUTCToLocalDate = (utcDate: string): string => {
   const localDateObj = new Date(utcDate);
-  const localDate = moment(localDateObj).format("DD/MM/YYYY");
+  const localDate = moment(localDateObj).format("DD.MM.YYYY");
   return localDate;
 };
 
@@ -1649,12 +1677,12 @@ export const formatTimeToHHMM = (utcDateTime: string): string => {
 };
 
 export function formatDate(date: string) {
-  return moment(date).format("DD/MM/YYYY HH:mm");
+  return moment(date).format("DD.MM.YYYY HH:mm");
 }
 
 export function formatDateReverse(date: string) {
   if (!date) return;
-  return moment(date).format("HH:mm, DD/MM/YYYY");
+  return moment(date).format("HH:mm, DD.MM.YYYY");
 }
 
 export function formatDateTimeToDate(date: string) {

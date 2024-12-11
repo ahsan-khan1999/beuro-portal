@@ -12,8 +12,8 @@ import { ReportServiceMobileDetail } from "../../mobile/service-detail-mobile";
 export interface ServiceDetailDataProps {
   reportDetail: Report;
   currency?: string;
-  calculatedTax?:number
-  discountValue?:number
+  calculatedTax?: number;
+  discountValue?: number;
 }
 
 export const ReportServicesDetail = ({
@@ -82,7 +82,11 @@ export const ReportServicesDetail = ({
   const { companyAppointment } = router.query;
 
   const handleEditClick = () => {
-    const query: any = { report: reportDetail?.appointmentID?.id, tab: 2 };
+    const query: any = router.query;
+
+    query.tab = 2;
+    delete query.reportId;
+    query.report = reportDetail?.appointmentID?.id;
     if (companyAppointment) {
       query.companyAppointment = companyAppointment;
     }

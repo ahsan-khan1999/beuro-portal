@@ -45,8 +45,10 @@ export const FollowUpNotificationBar = ({
 </svg>`,
     id: item?.id,
   }));
-  const { t: translate } = useTranslation();
+
+
   const dispatch = useDispatch();
+  const { t: translate } = useTranslation();
   const { modal } = useAppSelector((state) => state.global);
   const { followUpDetails } = useAppSelector((state) => state.followUp);
 
@@ -203,9 +205,10 @@ export const FollowUpNotificationBar = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="my-3 w-full"
+            className="mt-3 w-full"
             imgClassName="w-[120px] h-[112px]"
             containerClassName="px-6"
+            isFollowUp={true}
           />
         )}
 

@@ -18,10 +18,7 @@ import { ModalType } from "@/enums/ui";
 import localStoreUtil from "@/utils/localstore.util";
 import { updateQuery } from "@/utils/update-query";
 
-export const useContractEmail = (
-  backRouteHandler: Function,
-  onNextHandle: Function
-) => {
+export const useContractEmail = (backRouteHandler: Function) => {
   const { t: translate } = useTranslation();
   const router = useRouter();
   const dispatch = useAppDispatch();

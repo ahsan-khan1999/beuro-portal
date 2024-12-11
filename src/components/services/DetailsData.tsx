@@ -3,7 +3,7 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Service } from "@/types/service";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 import { updateQuery } from "@/utils/update-query";
 
@@ -95,7 +95,7 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] mt-4">
             {translate("services.card_content.created_date")}:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{formatDateTimeToDate(serviceDetail?.createdAt)}
+              &nbsp;&nbsp;{germanDateFormat(serviceDetail?.createdAt)}
             </span>
           </h3>
         )}

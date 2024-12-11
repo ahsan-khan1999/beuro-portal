@@ -962,12 +962,14 @@
       "edit": "Edit"
     },
     "tabs_headings": {
+      "lead_content": "Lead Content",
       "offer_content": "Offers Content",
       "confirmation_content": "Confirmation Content",
       "invoice_content": "Invoice Content",
       "receipt_content": "Receipt Content"
     },
     "details": {
+      "lead_heading": "Lead Content",
       "offer_heading": "Offer Content",
       "confirmation_heading": "Confirmation Content",
       "invoice_heading": "Invoice Content",
@@ -975,6 +977,8 @@
       "edit_button": "Edit Details",
       "content_name": "Content Name",
       "address_labels": "Address Labels",
+      "lead_title": "Lead Title",
+      "lead_description": "Lead Description",
       "offer_title": "Offer Title",
       "offer_description": "Offer Description",
       "email_body": "Email Body",
@@ -1256,6 +1260,7 @@
       "lead_created_des": "Thanks for creating Lead we are happy to have you.",
       "offer_email_sent": "Email Sent Successfully",
       "email_sent_des": "Thanks for updating offer we are happy to have you.",
+      "lead_email_sent_des": "Thanks for updating lead we are happy to have you.",
       "updating_contract": "Thanks for updating contract we are happy to have you.",
       "content_confirmation": "Please Confirm Content ID",
       "content_ID": "Enter Content ID",
@@ -1326,6 +1331,7 @@
     "svg_upload_not_allowed": "SVG files are not allowed. Please upload a different file format.",
     "img_upload_error_message": "WebP files are not allowed. Please upload a different file format.",
     "offer_PDF_PREVIEW": "Offer PDF Preview",
+    "lead_PDF_PREVIEW": "Lead PDF Preview",
     "confirmation_PDF_PREVIEW": "Confirmation PDF Preview",
     "invoice_PDF_PREVIEW": "Invoice PDF Preview",
     "receipt_PDF_PREVIEW": "Receipt PDF Preview",
@@ -1398,6 +1404,7 @@
     "update": "Update",
     "mail": "Mail",
     "offer_mail_preview": "Offer Email Preview",
+    "lead_mail_preview": "Lead Email Preview",
     "address": "Address",
     "add_new_date": "Add New Date",
     "add_company_info": "Add Company Information",
@@ -2610,6 +2617,7 @@
   },
 
   "calendar": {
+    "ends_text":"ends",
     "more_text": "more",
     "delete_appointment_des": "Are you sure you want to delete the appointment?",
     "main_heading": "Calendar",

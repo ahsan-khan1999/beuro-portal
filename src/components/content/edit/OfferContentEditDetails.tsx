@@ -1,7 +1,6 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { useOfferContentEditDetails } from "@/hooks/content/useOfferContentEditDetails";
-import { ContentTableRowTypes } from "@/types/content";
-import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { OfferContentPdf } from "../add/pdf-preview/offer-content-pdf";
@@ -9,10 +8,8 @@ import { Button } from "@/base-components/ui/button/button";
 
 const OfferContentEditDetails = ({
   onClick,
-  contentDetail,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
-  contentDetail: ContentTableRowTypes;
 }) => {
   const {
     fields,
@@ -32,13 +29,13 @@ const OfferContentEditDetails = ({
 
   return (
     <div className="flex gap-x-5">
-      <div className="rounded-md border border-primary bg-white w-full h-fit">
+      <div className="rounded-lg border border-primary bg-white w-full h-fit">
         <div className="flex justify-between items-center bg-primary py-5 px-6 rounded-t-lg">
           <h2 className="text-white text-xl font-medium">
             {translate("content.details.offer_heading")}
           </h2>
           <button
-            onClick={() => onClick(0, ComponentsType.offerContent)}
+            onClick={() => onClick(1, ComponentsType.offerContent)}
             className="text-[#4B4B4B] bg-white font-medium rounded-lg border border-[#C7C7C7] py-2 px-9"
           >
             {translate("content.details.cancel_button")}
@@ -76,7 +73,7 @@ const OfferContentEditDetails = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="w-fit"
+            className="w-full"
             imgClassName="w-14 h-14"
             textClassName="text-base"
             containerClassName="py-3"

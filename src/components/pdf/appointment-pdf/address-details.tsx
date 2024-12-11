@@ -1,5 +1,5 @@
 import { DateRangeProps } from "@/types";
-import { formatDateTimeToDate } from "@/utils/utility";
+import { formatDateTimeToDate, germanDateFormat } from "@/utils/utility";
 import React from "react";
 
 export const Country: Record<string, string> = {
@@ -89,10 +89,10 @@ const AddressDetails: React.FC<ReportAddressDetailsProps> = ({
             <span className="text-xs font-medium text-black">
               {workDates?.map(
                 (item, index) =>
-                  `${formatDateTimeToDate(item.startDate)}${
+                  `${germanDateFormat(item.startDate)}${
                     item.endDate
                       ? ` ${translate("contracts.card_content.to")} ` +
-                        formatDateTimeToDate(item.endDate) +
+                        germanDateFormat(item.endDate) +
                         ((workDates?.length - 1 != index && ", ") || ".")
                       : (workDates?.length - 1 != index && ", ") || "."
                   }`

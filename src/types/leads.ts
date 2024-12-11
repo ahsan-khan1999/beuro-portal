@@ -8,6 +8,7 @@ export interface Lead {
   id: string;
   refID: string;
   customerDetail: Customers;
+  emailStatus?: string;
   lead: CustomerLeadDetail;
   leadStatus: "Open" | "InProcess" | "Close" | "Expired" | "Appointment";
   customerID: string;
@@ -23,12 +24,14 @@ export interface Lead {
   budget: string;
   leadSource: string;
   otherServices: string[] | ContentTableRowTypes[];
-  requiredService: string | ContentTableRowTypes;
+  requiredService: ContentTableRowTypes;
   additionalDetails: string;
   createdBy: User;
   isNoteCreated: boolean;
   isImageAdded: boolean;
   isAppointmentCreated: boolean;
+  content?: ContentTableRowTypes;
+  title?: string;
   appointment: {
     id: string;
     isReportSubmitted: boolean;

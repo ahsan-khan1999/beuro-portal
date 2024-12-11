@@ -25,9 +25,9 @@ export enum ComponentsType {
   additionalAddedSucces,
 }
 
-const EditOffersDetailsData = () => {
-  const { offerDetails } = useAppSelector((state) => state.offer);
+const AddOffersDetailsData = () => {
   const { t: translate } = useTranslation();
+  const { offerDetails } = useAppSelector((state) => state.offer);
 
   const [tabType, setTabType] = useState<ComponentsType>(
     offerDetails?.stage ? offerDetails?.stage : ComponentsType.customerAdded
@@ -86,8 +86,8 @@ const EditOffersDetailsData = () => {
     },
   ];
 
-  const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
   const customerType = offerDetails?.leadID?.customerDetail
@@ -148,7 +148,6 @@ const EditOffersDetailsData = () => {
         onClose={onClose}
         routeHandler={route}
         heading={translate("common.offer_create")}
-        subHeading=""
       />
     ),
     [ModalType.UPLOAD_OFFER_IMAGE]: (
@@ -248,4 +247,4 @@ const EditOffersDetailsData = () => {
   );
 };
 
-export default EditOffersDetailsData;
+export default AddOffersDetailsData;

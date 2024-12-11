@@ -10,7 +10,6 @@ const AddInoviceContentDetails = ({
 }: {
   onHandleNext: Function;
 }) => {
-  const defaultClassName = "";
   const {
     fields,
     control,
@@ -37,7 +36,6 @@ const AddInoviceContentDetails = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </FormCard>
@@ -53,7 +51,7 @@ const AddInoviceContentDetails = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="w-fit"
+            className="w-full"
             imgClassName="w-14 h-14"
             textClassName="text-base"
             containerClassName="py-3"

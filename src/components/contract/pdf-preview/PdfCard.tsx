@@ -109,7 +109,7 @@ const PdfCard = ({
               buttonText={translate("contracts.pdf_card_details.send_via_post")}
               onClick={onSendViaPost}
               containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-              textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+              textClassName="text-[#4B4B4B] font-semibold group-hover:text-primary"
               loading={loading && activeButtonId === "post"}
               loaderColor="#4A13E7"
             >
@@ -124,7 +124,7 @@ const PdfCard = ({
               }
               onClick={onEmailSend}
               containerClassName="flex items-center group gap-x-3 row-reverse border border-primary"
-              textClassName="text-[#4B4B4B] font-medium group-hover:text-primary"
+              textClassName="text-[#4B4B4B] font-semibold group-hover:text-primary"
               loading={loading && activeButtonId === "email"}
               loaderColor="#4A13E7"
             >

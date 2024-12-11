@@ -371,11 +371,9 @@ export type GenerateContentFormField = (
   count?: number,
   attachements?: Attachement[],
   setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
-  contentDetails?: ContentTableRowTypes,
-  append?: UseFieldArrayAppend<FieldValues, "offerContent.address">,
-  onRemove?: UseFieldArrayRemove,
-  offerDescriptionCount?: string
+  isUpdate?: boolean
 ) => FormField[];
+
 // Employee formfield
 export type GenerateEmployeeFormField = (
   register: UseFormRegister<FieldValues>,
@@ -492,6 +490,24 @@ export type GenerateOfferFormField = (
   setMoreEmail?: SetStateAction<any>,
   setValue?: UseFormSetValue<FieldValues>
 ) => FormField[];
+
+export type GenerateLeadFormField = (
+  register: UseFormRegister<FieldValues>,
+  loader: boolean,
+  control: Control<FieldValues>,
+  onClick: Function,
+  onBack?: Function,
+  content?: ContentTableRowTypes[],
+  contentDetails?: ContentTableRowTypes,
+  onContentSelect?: (id: string) => void,
+  attachements?: Attachement[],
+  setAttachements?: React.Dispatch<SetStateAction<Attachement[]>>,
+  details?: Lead,
+  moreEmail?: { isCc: boolean; isBcc: boolean },
+  setMoreEmail?: SetStateAction<any>,
+  setValue?: UseFormSetValue<FieldValues>
+) => FormField[];
+
 export type GenerateContractFormField = (
   register: UseFormRegister<FieldValues>,
   loader: boolean,

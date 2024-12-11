@@ -1,6 +1,6 @@
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../useRedux";
 import { useRouter } from "next/router";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
@@ -8,6 +8,7 @@ import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmatio
 import {
   deleteLead,
   readLeadDetails,
+  sendLeadByPost,
   setLeadDetails,
   updateLeadStatus,
 } from "@/api/slices/lead/leadSlice";
@@ -25,6 +26,8 @@ import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
+import { MailSendLoadingGif } from "@/base-components/ui/modals1/MailLoadingGif";
+import { updateQuery } from "@/utils/update-query";
 
 export default function useLeadDetail() {
   const dispatch = useAppDispatch();
@@ -35,6 +38,8 @@ export default function useLeadDetail() {
 
   const router = useRouter();
   const id = router.query.lead;
+
+  const [isSendEmail, setIsSendEmail] = useState(false);
 
   useEffect(() => {
     if (leadDetails?.id)
@@ -75,6 +80,23 @@ export default function useLeadDetail() {
     dispatch(updateModalType({ type: ModalType.INFO_DELETED }));
   };
 
+  const defaultUpdateModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
+  const handleSendByPost = async () => {
+    const apiData = {
+      emailStatus: 2,
+      id: leadDetails?.id,
+    };
+    const response = await dispatch(sendLeadByPost({ data: apiData }));
+    if (response?.payload) defaultUpdateModal();
+  };
+
+  const handleSendEmail = async () => {
+    setIsSendEmail(!isSendEmail);
+  };
+
   const routeHandler = async () => {
     const res = await dispatch(deleteLead({ leadDetails, router, translate }));
     if (!res?.payload) {
@@ -84,10 +106,6 @@ export default function useLeadDetail() {
         })
       );
     }
-  };
-
-  const defaultUpdateModal = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleStatusUpdate = async (leadStatus: string) => {
@@ -247,6 +265,13 @@ export default function useLeadDetail() {
     );
   };
 
+  const handleMailSuccess = () => {
+    router.pathname = "/leads";
+    delete router.query["lead"];
+    updateQuery(router, router.locale as string);
+    dispatch(updateModalType({ type: ModalType.NONE }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.CONFIRM_DELETION]: (
       <DeleteConfirmation_1
@@ -331,6 +356,15 @@ export default function useLeadDetail() {
         mainHeading={translate("common.add_note")}
       />
     ),
+    [ModalType.EMAIL_CONFIRMATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_email_sent")}
+        subHeading={translate("common.modals.lead_email_sent_des")}
+        route={handleMailSuccess}
+      />
+    ),
+    [ModalType.LOADING_MAIL_GIF]: <MailSendLoadingGif onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -349,5 +383,8 @@ export default function useLeadDetail() {
     shareImgModal,
     defaultUpdateModal,
     handleScheduleAppointments,
+    handleSendByPost,
+    handleSendEmail,
+    isSendEmail,
   };
 }

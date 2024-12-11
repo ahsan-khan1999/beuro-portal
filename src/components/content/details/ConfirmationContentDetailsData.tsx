@@ -22,7 +22,7 @@ const ConfirmationContentDetailsData = ({
         </h2>
 
         <button
-          onClick={() => onClick(1, ComponentsType.editConfirmationContent)}
+          onClick={() => onClick(2, ComponentsType.editConfirmationContent)}
           className="flex gap-x-4 items-center bg-white text-[#4B4B4B] font-medium rounded-lg border border-[#C7C7C7] py-[7px] px-4 min-w-[161px] w-fit"
         >
           <EditIcon />

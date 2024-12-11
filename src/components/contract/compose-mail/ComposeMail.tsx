@@ -3,15 +3,9 @@ import { useContractEmail } from "@/hooks/contract/useContractEmail";
 import ContractFormCard from "@/layout/contract/ContractFormCard";
 import React from "react";
 
-const ComposeMail = ({
-  backRouteHandler,
-  onNextHandle,
-}: {
-  backRouteHandler: Function;
-  onNextHandle: Function;
-}) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useContractEmail(backRouteHandler, onNextHandle);
+const ComposeMail = ({ backRouteHandler }: { backRouteHandler: Function }) => {
+  const { fields, onSubmit, handleSubmit, errors, translate } =
+    useContractEmail(backRouteHandler);
 
   return (
     <div className="mb-5">

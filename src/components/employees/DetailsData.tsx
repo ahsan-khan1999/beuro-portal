@@ -2,10 +2,10 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { EmployeeDetail } from "@/types/employee";
-import moment from "moment";
 import { useTranslation } from "next-i18next";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
 import { updateQuery } from "@/utils/update-query";
+import { germanDateFormat } from "@/utils/utility";
 
 const DetailsData = ({
   date,
@@ -89,7 +89,7 @@ const DetailsData = ({
           {translate("employees.card_content.created_date")}:
         </span>
         <span className="text-[#4B4B4B] font-medium">
-          {moment(date).format("DD/MM/YYYY")}
+          {date && germanDateFormat(date)}
         </span>
       </div>
     </>

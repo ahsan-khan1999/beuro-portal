@@ -12,7 +12,7 @@ import { Button } from "@/base-components/ui/button/button";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { pdfDateFormat } from "@/utils/utility";
+import { germanDateFormat, pdfDateFormat } from "@/utils/utility";
 
 export const Aggrement = ({
   contactAddress,
@@ -37,7 +37,8 @@ export const Aggrement = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
   const currentDate = new Date().toString();
-  const date = pdfDateFormat(currentDate, router.locale as string);
+  // const date = pdfDateFormat(currentDate, router.locale as string);
+  const date = germanDateFormat(currentDate);
   const dispatch = useAppDispatch();
   const { action: pdfAction } = router.query;
   const { currentLanguage } = useAppSelector((state) => state.global);

@@ -62,14 +62,14 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                         },
                       },
                       {
-                        containerClass: "col-span-1 flex my-auto ",
+                        containerClass: "col-span-1 flex my-auto",
                         field: {
                           type: Field.div,
                           className: "flex space-x-2 items-center",
                           id: "text",
                           children: [
                             {
-                              containerClass: "mb-0  ",
+                              containerClass: "mb-0",
                               field: {
                                 type: Field.span,
                                 text: `Cc`,
@@ -267,8 +267,8 @@ export const OfferEmailFormField: GenerateOfferFormField = (
                     type: Field.dragAndDropPdfField,
                     id: "attachments",
                     isOpenedFile: false,
-                    text: "Drop or Attach your files here",
-                    fileSupported: "Files supported: PDF,JPG, PNG,GIF",
+                    text: translate("common.image_upload_heading"),
+                    fileSupported: translate("common.file_support"),
                     name: "attachments",
                     control,
                     attachements,

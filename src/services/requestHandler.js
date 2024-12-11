@@ -114,6 +114,10 @@ const SERVICE_URLS = {
   dashbaord: "/dashboard/company",
   adminDashboard: "/dashboard/admin",
   sendByPost: "/offer/send-By-Post/",
+
+  sendByPostLead: "/lead/send-By-Post/",
+  leadSendEmail: "/lead/send-email/",
+
   contractSendByPost: "/contract/send-By-Post/",
   invoiceSendByPost: "/invoice/invoice-collection/send-By-Post/",
   readOfferPublic: "/offer/public-read",
@@ -406,10 +410,12 @@ const updatePaymentStatus = (data) =>
   put(SERVICE_URLS.offerPaymentStatus + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const sendOfferEmail = (data) =>
   put(SERVICE_URLS.offerSendEmail + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const readContract = (params) =>
   get(
     SERVICE_URLS.contract,
@@ -1036,6 +1042,16 @@ const offerSendByPost = (data) =>
     feature: featureConstants.login,
   });
 
+const leadSendByPost = (data) =>
+  put(SERVICE_URLS.sendByPostLead + `${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
+const sendLeadEmail = (data) =>
+  put(SERVICE_URLS.leadSendEmail + `${data?.id}`, data, {
+    feature: featureConstants.login,
+  });
+
 const contractSendByPost = (data) =>
   put(SERVICE_URLS.contractSendByPost + `${data?.id}`, data, {
     feature: featureConstants.login,
@@ -1303,6 +1319,8 @@ const apiServices = {
   readContractTask,
   readContractTaskDetail,
   deleteContractTask,
+  leadSendByPost,
+  sendLeadEmail,
 };
 
 export default apiServices;

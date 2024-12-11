@@ -18,7 +18,7 @@ export interface AppointmentState {
 const initialState: AppointmentState = {
   appointment: [],
   loading: false,
-  isLoading: false,
+  isLoading: true,
   error: {},
   lastPage: 1,
   totalCount: 10,
@@ -170,17 +170,17 @@ const appointmentSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(readAppointments.pending, (state) => {
-      state.isLoading = true;
+      state.loading = true;
     });
     builder.addCase(readAppointments.fulfilled, (state, action) => {
       const { Appointment, totalCount, lastPage } = action.payload;
       state.appointment = Appointment || [];
       state.lastPage = lastPage || 1;
       state.totalCount = totalCount || 0;
-      state.isLoading = false;
+      state.loading = false;
     });
     builder.addCase(readAppointments.rejected, (state) => {
-      state.isLoading = false;
+      state.loading = false;
     });
     builder.addCase(readReportDetails.pending, (state) => {
       state.isLoading = true;
@@ -193,14 +193,14 @@ const appointmentSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(readAppointmentDetails.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(readAppointmentDetails.fulfilled, (state, action) => {
       state.appointmentDetails = action.payload;
-      state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(readAppointmentDetails.rejected, (state) => {
-      state.loading = false;
+      state.isLoading = false;
     });
 
     builder.addCase(createAppointment.pending, (state) => {

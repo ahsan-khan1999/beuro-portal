@@ -1,8 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Employee } from "@/types/employee";
-import moment from "moment";
 import { useTranslation } from "next-i18next";
+import { germanDateFormat } from "@/utils/utility";
 
 const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
                   {item.designation}
                 </span>
                 <span className="py-4 mlg:hidden xlg:flex">
-                  {moment(item?.creationDate).format("DD/MM/YYYY")}
+                  {germanDateFormat(item?.creationDate)}
                 </span>
               </div>
             </div>

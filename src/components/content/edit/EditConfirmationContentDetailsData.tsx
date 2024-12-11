@@ -1,7 +1,6 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { useEditConfirmationContentDetails } from "@/hooks/content/useEditConfirmationContentDetails";
-import { ContentTableRowTypes } from "@/types/content";
-import React from "react";
 import { ComponentsType } from "../details/ContentDetailsData";
 import { ConfirmationContentPdf } from "../add/pdf-preview/confirmation-content-pdf";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
@@ -9,10 +8,8 @@ import { Button } from "@/base-components/ui/button/button";
 
 const EditConfirmationContentDetailsData = ({
   onClick,
-  contentDetail,
 }: {
   onClick: (index: number, component: ComponentsType) => void;
-  contentDetail: ContentTableRowTypes;
 }) => {
   const {
     fields,
@@ -36,7 +33,7 @@ const EditConfirmationContentDetailsData = ({
             {translate("content.details.confirmation_heading")}
           </h2>
           <button
-            onClick={() => onClick(1, ComponentsType.confirmationContent)}
+            onClick={() => onClick(2, ComponentsType.confirmationContent)}
             className="text-[#4B4B4B] bg-white font-medium rounded-lg border border-[#C7C7C7] py-2 px-9"
           >
             {translate("content.details.cancel_button")}
@@ -73,7 +70,7 @@ const EditConfirmationContentDetailsData = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="w-fit"
+            className="w-full"
             imgClassName="w-14 h-14"
             textClassName="text-base"
             containerClassName="py-3"

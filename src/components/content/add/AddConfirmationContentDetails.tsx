@@ -5,24 +5,21 @@ import FormCard from "@/layout/customers/FormCard";
 import { ConfirmationContentPdf } from "./pdf-preview/confirmation-content-pdf";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
-const AddConfirmationContentDetails = ({
-  onHandleNext,
-  onHandleBack,
-}: {
+export interface AddConfirmationContentProps {
   onHandleNext: Function;
   onHandleBack: Function;
-}) => {
-  const defaultClassName = "";
+}
+const AddConfirmationContentDetails = ({
+  onHandleNext,
+}: AddConfirmationContentProps) => {
   const {
     fields,
-    control,
     onSubmit,
     handleSubmit,
     errors,
-    error,
     translate,
     confirmationDescription,
-  } = useAddContentConfirmationDetails(onHandleNext, onHandleBack);
+  } = useAddContentConfirmationDetails(onHandleNext);
 
   return (
     <div className="flex gap-x-5">
@@ -38,7 +35,6 @@ const AddConfirmationContentDetails = ({
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
             errors={errors}
-            className={`${defaultClassName}`}
           />
         </div>
       </FormCard>
@@ -54,7 +50,7 @@ const AddConfirmationContentDetails = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="w-fit"
+            className="w-full"
             imgClassName="w-14 h-14"
             textClassName="text-base"
             containerClassName="py-3"

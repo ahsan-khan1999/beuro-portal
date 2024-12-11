@@ -5,7 +5,6 @@ import {
 import { EditOfferDetails } from "@/enums/offers";
 import * as yup from "yup";
 
-// Contract email preview validation is here
 export const generateContractEmailValidationSchema = (translate: Function) => {
   return yup.object().shape({
     [ContractEmailPreview.email]: yup
@@ -20,12 +19,6 @@ export const generateContractEmailValidationSchema = (translate: Function) => {
     [ContractEmailPreview.description]: yup
       .string()
       .required(translate("validationMessages.required")),
-    // [ContractEmailPreview.additionalDetails]: yup
-    //   .string()
-    //   .required(translate("validationMessages.required")),
-    // [ContractEmailPreview.title]: yup
-    //   .string()
-    //   .required(translate("validationMessages.required")),
 
     [ContractEmailPreview.fileUpload]: yup
       .array()

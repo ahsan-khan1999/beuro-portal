@@ -6,21 +6,21 @@ import { OfferContentPdf } from "./pdf-preview/offer-content-pdf";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { updateQuery } from "@/utils/update-query";
 
+export interface AddOfferContentProps {
+  onHandleNext: Function;
+  onCancel: () => void;
+}
+
 const OfferContentAddDetails = ({
   onHandleNext,
   onCancel,
-}: {
-  onHandleNext: Function;
-  onCancel: () => void;
-}) => {
+}: AddOfferContentProps) => {
   const {
     fields,
     router,
-    control,
     onSubmit,
     handleSubmit,
     errors,
-    error,
     translate,
     offerDescriptionCount,
   } = useAddOfferContentDetails(onHandleNext);
@@ -91,7 +91,7 @@ const OfferContentAddDetails = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="w-fit"
+            className="w-full"
             imgClassName="w-14 h-14"
             textClassName="text-base"
             containerClassName="py-3"
