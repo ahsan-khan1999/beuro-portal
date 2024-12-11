@@ -1260,6 +1260,7 @@
       "lead_created_des": "Thanks for creating Lead we are happy to have you.",
       "offer_email_sent": "Email Sent Successfully",
       "email_sent_des": "Thanks for updating offer we are happy to have you.",
+      "lead_email_sent_des": "Thanks for updating lead we are happy to have you.",
       "updating_contract": "Thanks for updating contract we are happy to have you.",
       "content_confirmation": "Please Confirm Content ID",
       "content_ID": "Enter Content ID",

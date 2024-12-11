@@ -54,7 +54,7 @@ const AddReceiptContentDetails = ({
           </div>
         ) : (
           <NoDataEmptyState
-            className="w-fit"
+            className="w-full"
             imgClassName="w-14 h-14"
             textClassName="text-base"
             containerClassName="py-3"

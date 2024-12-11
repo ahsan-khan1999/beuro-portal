@@ -152,36 +152,30 @@ const DetailsData = ({
           </div>
         </div>
 
-        <div className="mt-5">
-          <span className="text-[#4B4B4B] text-lg font-semibold">
-            {translate("email_tracker.card_content.attachments")}:
-          </span>
-        </div>
-        <div className="mt-5 flex items-end">
+        <p className="my-5 text-[#4B4B4B] text-lg font-semibold">
+          {translate("email_tracker.card_content.attachments")}:
+        </p>
+
+        <div className="flex items-center flex-wrap gap-4">
           {emailDetails?.attachments?.map((item) => {
             return (
-              <>
-                <Link
-                  href={typeof item === "string" ? item : item?.href}
-                  target="_blank"
-                  className="border-[1px] py-2 px-[10px] rounded-lg border-[#C7C7C7] flex items-center"
-                >
-                  <Image
-                    src={pdfFileIcon}
-                    alt="PDF_FILE_ICON"
-                    className="mr-[11px]"
-                  />
-                  <span className="text-[#BFBFBF] text-base font-normal">
-                    {getFileNameFromUrl(
-                      typeof item === "string" ? item : item?.href,
-                      typeof item === "string"
-                        ? item?.length
-                        : item?.href?.length
-                    )}
-                  </span>
-                </Link>
-                &nbsp;&nbsp;
-              </>
+              <Link
+                href={typeof item === "string" ? item : item?.href}
+                target="_blank"
+                className="border-[1px] py-2 px-[10px] rounded-lg border-[#C7C7C7] flex items-center"
+              >
+                <Image
+                  src={pdfFileIcon}
+                  alt="PDF_FILE_ICON"
+                  className="mr-[11px]"
+                />
+                <span className="text-[#BFBFBF] text-base font-normal truncate">
+                  {getFileNameFromUrl(
+                    typeof item === "string" ? item : item?.href,
+                    typeof item === "string" ? item?.length : item?.href?.length
+                  )}
+                </span>
+              </Link>
             );
           })}
         </div>

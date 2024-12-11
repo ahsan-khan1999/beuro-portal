@@ -52,21 +52,6 @@ const ContentAddDetailsData = () => {
     updateQuery(router, router.locale as string);
   };
 
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.CREATION]: (
-      <CreationCreated
-        onClose={onCloseRoute}
-        heading={translate("content.content_created_modal.main_heading")}
-        subHeading={translate("content.content_created_modal.sub_heading")}
-        route={route}
-      />
-    ),
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
-
   const onHandleBack = (currentComponent: ComponentsType) => {
     setTabType(currentComponent);
   };
@@ -210,6 +195,21 @@ const ContentAddDetailsData = () => {
       });
     }
   }, [tabType]);
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onCloseRoute}
+        heading={translate("content.content_created_modal.main_heading")}
+        subHeading={translate("content.content_created_modal.sub_heading")}
+        route={route}
+      />
+    ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
 
   return (
     <>

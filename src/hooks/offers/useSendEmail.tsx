@@ -39,7 +39,6 @@ export const useSendEmail = (backRouteHandler: Function) => {
     register,
     handleSubmit,
     control,
-    setError,
     reset,
     formState: { errors },
     setValue,

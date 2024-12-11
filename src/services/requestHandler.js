@@ -410,10 +410,12 @@ const updatePaymentStatus = (data) =>
   put(SERVICE_URLS.offerPaymentStatus + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const sendOfferEmail = (data) =>
   put(SERVICE_URLS.offerSendEmail + `${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const readContract = (params) =>
   get(
     SERVICE_URLS.contract,

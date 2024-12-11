@@ -24,7 +24,7 @@ export interface Lead {
   budget: string;
   leadSource: string;
   otherServices: string[] | ContentTableRowTypes[];
-  requiredService: string | ContentTableRowTypes;
+  requiredService: ContentTableRowTypes;
   additionalDetails: string;
   createdBy: User;
   isNoteCreated: boolean;
