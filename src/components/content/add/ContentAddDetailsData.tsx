@@ -214,6 +214,9 @@ const ContentAddDetailsData = () => {
   return (
     <>
       <div className="xLarge:fixed mb-5">
+        <p className="mb-5 text-2xl text-[#222B45] font-semibold">
+          {translate("content.create_content")}
+        </p>
         <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
           {tabSection?.map((item, index) => (
             <OfferTabs
@@ -230,9 +233,9 @@ const ContentAddDetailsData = () => {
         </div>
       </div>
 
-      <div className="w-full break-all flex mb-10" ref={ref}>
+      <div className="w-full break-all flex" ref={ref}>
         <div className="max-w-[340px] w-full hidden xLarge:block"></div>
-        <div className="w-full">
+        <div className="w-full mb-10 xLarge:mt-[52px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

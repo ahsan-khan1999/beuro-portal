@@ -25,7 +25,7 @@ const AddLeadContentDetails = ({
   return (
     <div className="flex gap-x-5">
       <FormCard>
-        <div className="flex justify-between items-center bg-[#4A13E7] py-5 px-6 rounded-t-lg">
+        <div className="flex justify-between items-center bg-[#f5d60f] py-5 px-6 rounded-t-lg">
           <div className="flex items-center gap-x-[26px]">
             <span className="cursor-pointer" onClick={() => handleCancel}>
               <svg
@@ -50,7 +50,7 @@ const AddLeadContentDetails = ({
                 />
               </svg>
             </span>
-            <h2 className="text-[#fff] text-xl font-medium">
+            <h2 className="text-dark text-xl font-medium">
               {translate("content.tabs_headings.lead_content")}
             </h2>
           </div>

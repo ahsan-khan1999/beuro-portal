@@ -10,6 +10,7 @@ export interface AllDayEventsProps {
   startTime?: string;
   endTime?: string;
   showEndTime?: boolean;
+  hasStartTime?: boolean;
 }
 
 export const AllDayEvent = ({
@@ -21,6 +22,7 @@ export const AllDayEvent = ({
   showEndTime,
   startTime,
   endTime,
+  hasStartTime,
 }: AllDayEventsProps) => {
   const containerClasses = combineClasses(
     `px-2 py-[6px] rounded-[4px] cursor-pointer`,
@@ -53,7 +55,7 @@ export const AllDayEvent = ({
           </span>
         )}
 
-        {showEndTime && (
+        {showEndTime && hasStartTime && (
           <div className="flex items-center justify-between gap-x-2">
             <span className="text-[#3C3C3C] font-medium text-[10px] xMini:text-sm">
               {startTime}
