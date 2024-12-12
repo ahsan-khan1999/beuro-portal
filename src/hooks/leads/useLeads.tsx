@@ -208,10 +208,14 @@ const useLeads = () => {
   };
 
   const updateSuccessModal = (tab?: string) => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_SUCCESS }));
     if (tab) {
       setImagesInfo((prev) => ({ ...prev, tab }));
     }
+  };
+
+  const defaultSuccessModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleNotesUpdated = () => {
@@ -448,7 +452,7 @@ const useLeads = () => {
             let prevPageRows = [...currentPageRows];
             prevPageRows.splice(index, 1, res.payload);
             setCurrentPageRows(prevPageRows);
-            updateSuccessModal();
+            defaultSuccessModal();
           }
         }
       }
@@ -511,12 +515,20 @@ const useLeads = () => {
         tab={imagesInfo.tab}
       />
     ),
-    [ModalType.CREATION]: (
+    [ModalType.UPLOAD_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
         route={handleBackToImages}
+      />
+    ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={onClose}
       />
     ),
     [ModalType.SCHEDULE_APPOINTMENTS]: (

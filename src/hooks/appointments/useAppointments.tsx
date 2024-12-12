@@ -88,7 +88,7 @@ export const useAppointments = () => {
   });
 
   const filteredQuery = useMemo(() => {
-    const { reportId, ...rest } = router.query; // Omit reportId
+    const { reportId, ...rest } = router.query;
     return rest;
   }, [router.query]);
 
@@ -236,10 +236,14 @@ export const useAppointments = () => {
   };
 
   const updateSuccessModal = (tab?: string) => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_SUCCESS }));
     if (tab) {
       setImagesInfo((prev) => ({ ...prev, tab }));
     }
+  };
+
+  const defaultSuccessModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
   const handleAppointmentCreate = (id: string) => {
@@ -285,7 +289,7 @@ export const useAppointments = () => {
             let prevPageRows = [...currentPageRows];
             prevPageRows.splice(index, 1, res.payload);
             setCurrentPageRows(prevPageRows);
-            updateSuccessModal();
+            defaultSuccessModal();
           }
         }
       }
@@ -324,6 +328,7 @@ export const useAppointments = () => {
   const handleNotesUpdated = () => {
     dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
   };
+
   const handleNotesAdded = () => {
     dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
     let found = currentPageRows.find((i) => i.id === noteInfo.id);
@@ -337,6 +342,7 @@ export const useAppointments = () => {
       );
     }
   };
+
   const handleBackToNotes = () => {
     if (noteInfo.leadId)
       handleNotes(
@@ -539,12 +545,20 @@ export const useAppointments = () => {
   };
 
   const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.CREATION]: (
+    [ModalType.UPLOAD_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
         route={handleBackToImages}
+      />
+    ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={onClose}
       />
     ),
     [ModalType.NOTE_UPDATED_SUCCESS]: (
@@ -561,7 +575,7 @@ export const useAppointments = () => {
         onClose={onClose}
         heading={translate("appointments.reschedule_appointment")}
         onSuccess={handleAppointmentsSuccess}
-        onUpdateSuccess={updateSuccessModal}
+        onUpdateSuccess={defaultSuccessModal}
         isUpdate={true}
         currentPageRows={currentPageRows}
         setCurrentPageRows={setCurrentPageRows}

@@ -280,7 +280,7 @@ const TableRows = ({
                 </span>
               </span>
 
-              <span
+              <div
                 onClick={(e) => e.stopPropagation()}
                 title={translate("common.mail")}
                 className="py-3 flex justify-center items-center cursor-pointer"
@@ -332,7 +332,7 @@ const TableRows = ({
                     />
                   </svg>
                 </span>
-              </span>
+              </div>
               <span
                 onClick={(e) => e.stopPropagation()}
                 title={translate("offers.table_headings.edit")}

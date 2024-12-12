@@ -11,7 +11,6 @@ import { FilterType } from "@/types";
 import {
   readContract,
   readContractDetails,
-  setContractDetails,
   setContractTaskDetails,
   updateContractPaymentStatus,
   updateContractStatus,
@@ -188,8 +187,7 @@ const useContract = () => {
   };
 
   const updateSuccessModal = (tab?: string) => {
-    console.log("tab:", tab);
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_SUCCESS }));
     if (tab) {
       setImagesInfo((prev) => ({ ...prev, tab }));
     }
@@ -198,6 +196,7 @@ const useContract = () => {
   const handleNotesUpdated = () => {
     dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
   };
+
   const handleNotesAdded = () => {
     dispatch(updateModalType({ type: ModalType.NOTE_UPDATED_SUCCESS }));
     let found = currentPageRows.find((i) => i.id === noteInfo.id);
@@ -912,6 +911,10 @@ const useContract = () => {
     }
   };
 
+  const defaultSuccessModal = () => {
+    dispatch(updateModalType({ type: ModalType.CREATION }));
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.EXISTING_NOTES]: (
       <ExistingNotes
@@ -966,12 +969,20 @@ const useContract = () => {
         tab={imagesInfo.tab}
       />
     ),
-    [ModalType.CREATION]: (
+    [ModalType.UPLOAD_SUCCESS]: (
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
         subHeading={translate("common.modals.update_success")}
         route={handleBackToImages}
+      />
+    ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={onClose}
       />
     ),
     [ModalType.IS_CONTRACT_TASK_CREATED]: (

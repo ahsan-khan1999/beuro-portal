@@ -15,6 +15,7 @@ export enum DropDownKeys {
 export enum ModalType {
   NONE,
   CONFIRM_DELETION,
+  UPLOAD_SUCCESS,
   CREATION,
   UPLOAD_FILE,
   OFFER_ACCEPTED,

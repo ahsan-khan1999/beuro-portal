@@ -83,10 +83,14 @@ export const useScheduleAppointment = ({
       reset({
         leadID: refID,
         date: localDate || "",
-        startTime: localStartTime
-          ? moment(localStartTime, "HH:mm").toDate()
-          : "",
-        endTime: localEndTime ? moment(localEndTime, "HH:mm").toDate() : "",
+        startTime:
+          localStartTime && moment(localStartTime, "HH:mm").isValid()
+            ? moment(localStartTime, "HH:mm").toDate()
+            : null,
+        endTime:
+          localEndTime && moment(localEndTime, "HH:mm").isValid()
+            ? moment(localEndTime, "HH:mm").toDate()
+            : null,
         canton: canton,
       });
     } else {

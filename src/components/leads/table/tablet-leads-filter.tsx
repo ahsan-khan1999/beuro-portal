@@ -219,10 +219,10 @@ export default function TabletLeadsFilter({
       : undefined;
 
   return (
-    <div className="flex flex-col xLarge:flex-row xMd:hidden xLarge:items-center justify-between w-full z-10 gap-y-4">
+    <div className="flex flex-col xMaxLarge:flex-row xMd:hidden xMaxLarge:items-center justify-between w-full z-10 gap-y-4">
       <h1 className="text-2xl font-medium text-[#222B45]">Leads</h1>
 
-      <div className="flex flex-col xLarge:flex-row xLarge:items-center gap-1 mlg:gap-4">
+      <div className="flex flex-col xMaxLarge:flex-row xMaxLarge:items-center gap-1 mlg:gap-4">
         <div className="hidden xlg:flex items-center gap-[14px]">
           {checkbox?.map((item, idx) => (
             <CheckField
@@ -239,7 +239,7 @@ export default function TabletLeadsFilter({
           ))}
         </div>
 
-        <div className="flex items-center gap-x-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <BooleanSelectField
             handleChange={(value) => hanldeAppointmentFilter(value)}
             value={appointmentValue}

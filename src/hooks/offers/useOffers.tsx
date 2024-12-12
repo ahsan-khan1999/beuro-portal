@@ -145,6 +145,13 @@ const useOffers = () => {
     }
   }, [query]);
 
+  useEffect(() => {
+    localStoreUtil.remove_data("offer");
+    dispatch(setOfferDetails(DEFAULT_OFFER));
+    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
+    dispatch(setLeadDetails(DEFAULT_LEAD));
+  }, []);
+
   const [filter, setFilter] = useState<FilterType>({
     text: FiltersDefaultValues.None,
     sort: FiltersDefaultValues.None,
@@ -167,13 +174,6 @@ const useOffers = () => {
   const handleFilterChange = (query: FilterType) => {
     setCurrentPage(1);
   };
-
-  useEffect(() => {
-    localStoreUtil.remove_data("offer");
-    dispatch(setOfferDetails(DEFAULT_OFFER));
-    dispatch(setCustomerDetails(DEFAULT_CUSTOMER));
-    dispatch(setLeadDetails(DEFAULT_LEAD));
-  }, []);
 
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
@@ -307,10 +307,6 @@ const useOffers = () => {
     );
   };
 
-  const handleImageSlider = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
-
   const handleImageUpload = (
     id: string,
     refID?: string,
@@ -377,7 +373,7 @@ const useOffers = () => {
     handleFilterChange(filter);
   };
 
-  const defaultOfferCreatedHandler = () => {
+  const defaultSuccessModal = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
@@ -414,104 +410,12 @@ const useOffers = () => {
         undefined
       );
   };
+
   const updateSuccessModal = (tab?: string) => {
-    console.log("tab:", tab);
-    dispatch(updateModalType({ type: ModalType.CREATION }));
+    dispatch(updateModalType({ type: ModalType.UPLOAD_SUCCESS }));
     if (tab) {
       setImagesInfo((prev) => ({ ...prev, tab }));
     }
-  };
-
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.EXISTING_NOTES]: (
-      <ExistingNotes
-        handleAddNote={handleAddNote}
-        onClose={onClose}
-        leadDetails={offerDetails}
-        onEditNote={handleEditNote}
-        onConfrimDeleteNote={handleConfirmDeleteNote}
-      />
-    ),
-    [ModalType.NOTE_UPDATED_SUCCESS]: (
-      <CreationCreated
-        onClose={onClose}
-        heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.update_success")}
-        route={handleBackToNotes}
-      />
-    ),
-    [ModalType.EDIT_NOTE]: (
-      <UpdateNote
-        onClose={handleBackToNotes}
-        handleNotes={handleNotesUpdated}
-        handleFilterChange={handleFilterChange}
-        filter={filter}
-        mainHeading={translate("common.update_note")}
-      />
-    ),
-    [ModalType.CONFIRM_DELETE_NOTE]: (
-      <ConfirmDeleteNote
-        onClose={handleBackToNotes}
-        modelHeading={translate("common.modals.delete_note")}
-        onDeleteNote={handleDeleteNote}
-        loading={loading}
-        onCancel={handleCancelNote}
-      />
-    ),
-    [ModalType.ADD_NOTE]: (
-      <AddNewNote
-        onClose={handleBackToNotes}
-        handleNotes={handleNotesAdded}
-        handleFilterChange={handleFilterChange}
-        filter={filter}
-        mainHeading={translate("common.add_note")}
-      />
-    ),
-    [ModalType.UPLOAD_OFFER_IMAGE]: (
-      <ImagesUploadOffer
-        onClose={onClose}
-        type={"Offer"}
-        onUpdateDetails={() => {}}
-        handleImageSlider={updateSuccessModal}
-        tab={imagesInfo.tab}
-      />
-    ),
-    [ModalType.CREATION]: (
-      <CreationCreated
-        onClose={onClose}
-        heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
-        route={handleBackToImages}
-      />
-    ),
-    [ModalType.OFFER_REJECTED]: (
-      <CreationCreated
-        onClose={onClose}
-        heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_rejected_des")}
-        route={onClose}
-      />
-    ),
-    [ModalType.OFFER_ACCEPTED]: (
-      <OfferAccepted
-        onClose={onClose}
-        heading={translate("common.modals.offer_created")}
-        subHeading={translate("common.modals.offer_created_des")}
-        route={onClose}
-        onFileUpload={handleUploadFile}
-      />
-    ),
-    [ModalType.UPLOAD_FILE]: (
-      <UploadFile
-        onClose={onClose}
-        heading={translate("common.modals.offer_created")}
-        onFileUploadSuccess={defaultOfferCreatedHandler}
-      />
-    ),
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
   };
 
   const handlePageChange = (page: number) => {
@@ -574,11 +478,111 @@ const useOffers = () => {
             let prevPageRows = [...currentPageRows];
             prevPageRows.splice(index, 1, res.payload);
             setCurrentPageRows(prevPageRows);
-            defaultOfferCreatedHandler();
+            defaultSuccessModal();
           }
         }
       }
     }
+  };
+
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.EXISTING_NOTES]: (
+      <ExistingNotes
+        handleAddNote={handleAddNote}
+        onClose={onClose}
+        leadDetails={offerDetails}
+        onEditNote={handleEditNote}
+        onConfrimDeleteNote={handleConfirmDeleteNote}
+      />
+    ),
+    [ModalType.NOTE_UPDATED_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.update_success")}
+        route={handleBackToNotes}
+      />
+    ),
+    [ModalType.EDIT_NOTE]: (
+      <UpdateNote
+        onClose={handleBackToNotes}
+        handleNotes={handleNotesUpdated}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        mainHeading={translate("common.update_note")}
+      />
+    ),
+    [ModalType.CONFIRM_DELETE_NOTE]: (
+      <ConfirmDeleteNote
+        onClose={handleBackToNotes}
+        modelHeading={translate("common.modals.delete_note")}
+        onDeleteNote={handleDeleteNote}
+        loading={loading}
+        onCancel={handleCancelNote}
+      />
+    ),
+    [ModalType.ADD_NOTE]: (
+      <AddNewNote
+        onClose={handleBackToNotes}
+        handleNotes={handleNotesAdded}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        mainHeading={translate("common.add_note")}
+      />
+    ),
+    [ModalType.UPLOAD_OFFER_IMAGE]: (
+      <ImagesUploadOffer
+        onClose={onClose}
+        type={"Offer"}
+        onUpdateDetails={() => {}}
+        handleImageSlider={updateSuccessModal}
+        tab={imagesInfo.tab}
+      />
+    ),
+    [ModalType.UPLOAD_SUCCESS]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={handleBackToImages}
+      />
+    ),
+    [ModalType.CREATION]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+      />
+    ),
+    [ModalType.OFFER_REJECTED]: (
+      <CreationCreated
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_rejected_des")}
+        route={onClose}
+      />
+    ),
+    [ModalType.OFFER_ACCEPTED]: (
+      <OfferAccepted
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        subHeading={translate("common.modals.offer_created_des")}
+        route={onClose}
+        onFileUpload={handleUploadFile}
+      />
+    ),
+    [ModalType.UPLOAD_FILE]: (
+      <UploadFile
+        onClose={onClose}
+        heading={translate("common.modals.offer_created")}
+        onFileUploadSuccess={defaultSuccessModal}
+      />
+    ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
   };
 
   return {
