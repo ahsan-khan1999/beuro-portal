@@ -1,7 +1,7 @@
 import React from "react";
 import { Lead } from "@/types/leads";
 import { useRouter } from "next/router";
-import { formatDate, getPostalCode } from "@/utils/utility";
+import { formatDate, getEmailColor, getPostalCode } from "@/utils/utility";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
@@ -154,7 +154,7 @@ export const LeadsTableRows = ({
                     key={index}
                     className={`${
                       index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-2 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(220px,4fr)_minmax(300px,_3fr)_minmax(200px,200px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(180px,_180px)_minmax(170px,_170px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(170px,_170px)_minmax(170px,_170px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(170px,_170px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(170px,_170px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(150px,_150px)_minmax(170px,_170px)_minmax(170px,_170px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(170px,_170px)] maxLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(140px,_140px)_minmax(150px,_150px)_minmax(100px,_100px)_minmax(170px,_170px)_minmax(_170px,_170px)] ${
+                    } pl-4 pr-1 cursor-pointer rounded-md items-center hover:bg-[#E9E1FF] gap-x-2 xs:w-fit mlg:w-full grid xs:grid-cols-[minmax(80px,_80px),minmax(220px,4fr)_minmax(300px,_3fr)_minmax(200px,200px)_minmax(160px,_160px)_minmax(120px,_120px)_minmax(130px,_130px)_minmax(180px,_180px)_minmax(170px,_170px)] mlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(115px,_115px)_minmax(170px,_170px)_minmax(170px,_170px)] xlg:grid-cols-[minmax(70px,_70px)_minmax(80px,_3fr)_minmax(115px,_115px)_minmax(170px,_170px)_minmax(170px,_170px)] maxSize:grid-cols-[minmax(70px,_70px)_minmax(70px,_3fr)_minmax(115px,_115px)_minmax(170px,_170px)_minmax(170px,_170px)] xMaxSize:grid-cols-[minmax(70px,_70px)_minmax(100px,_100%)_minmax(140px,_140px)_minmax(115px,_115px)_minmax(170px,_170px)_minmax(170px,_170px)] xLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(115px,_115px)_minmax(170px,_170px)_minmax(170px,_170px)] maxLarge:grid-cols-[minmax(70px,_70px),minmax(60px,4fr)_minmax(120px,_120px)_minmax(140px,_140px)_minmax(100px,_100px)_minmax(115px,_115px)_minmax(170px,_170px)_minmax(170px,_170px)] ${
                       index !== 0 && "border-t border-t-[#E7EAEE]"
                     } ${index === 0 && "mt-2"}`}
                   >
@@ -178,12 +178,23 @@ export const LeadsTableRows = ({
                     <span className="py-4 truncate mlg:hidden maxLarge:block">
                       {item?.customerDetail?.phoneNumber}
                     </span>
-                    <span className="py-4 flex items-center mlg:hidden xlg:flex">
+                    <span className="py-4 flex items-center mlg:hidden xMaxSize:flex">
                       {formatDate(item.createdAt)}
                     </span>
                     <span className="py-4 truncate mlg:hidden xLarge:block">
                       {getPostalCode(item?.customerDetail?.address?.postalCode)}
                     </span>
+                    {item.emailStatus && (
+                      <div className="py-4 flex justify-center items-center">
+                        <span
+                          className={`bg-[${getEmailColor(
+                            item.emailStatus
+                          )}] text-white px-2 py-2 text-center rounded-md min-w-[70px] w-full text-sm`}
+                        >
+                          {translate(`email_status.${item?.emailStatus}`)}
+                        </span>
+                      </div>
+                    )}
 
                     {isAgent ? (
                       <div className={`py-4`}>
