@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/utils/hooks";
 import DatePicker from "./fields/date-picker";
 import useFilter from "@/hooks/filter/hook";
-import { formatDateForDatePicker } from "@/utils/utility";
+import { combineClasses, formatDateForDatePicker } from "@/utils/utility";
 import { FiltersDefaultValues } from "@/enums/static";
 import { useTranslation } from "next-i18next";
 import { staticEnums } from "@/utils/static";
@@ -17,6 +17,7 @@ export default function OfferFilter({
   filter,
   setFilter,
   onFilterChange,
+  containerClassName,
 }: FilterProps) {
   const moreFilters = {
     date: {
@@ -50,7 +51,6 @@ export default function OfferFilter({
           ...(moreFilter?.leadSource && {
             leadSource: moreFilter?.leadSource,
           }),
-          // emailStatus: moreFilter?.emailStatus,
         },
       },
       undefined,
@@ -62,7 +62,6 @@ export default function OfferFilter({
         ...prev,
         date: { $gte: moreFilter.date?.$gte, $lte: moreFilter.date?.$lte },
         leadSource: moreFilter?.leadSource,
-        // emailStatus: moreFilter?.emailStatus,
       };
       onFilterChange(updatedFilters);
       return updatedFilters;
@@ -144,8 +143,12 @@ export default function OfferFilter({
   //   });
   // };
 
+  const containerClass = combineClasses(
+    `relative flex my-auto`,
+    containerClassName
+  );
   return (
-    <div className="relative flex my-auto z-10" ref={ref}>
+    <div className={containerClass} ref={ref}>
       <Button
         inputType="button"
         onClick={handleExtraFilterToggle}

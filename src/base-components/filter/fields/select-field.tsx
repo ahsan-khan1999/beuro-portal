@@ -1,4 +1,3 @@
-import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
 import { OptionsFieldProps } from "@/types/global";
 import React, { useEffect, useState } from "react";
 import { combineClasses } from "@/utils/utility";
@@ -7,6 +6,7 @@ import { useOutsideClick } from "@/utils/hooks";
 import searchIcon from "@/assets/svgs/search-icon.png";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { DropDownNonFillIcon } from "@/assets/svgs/components/drop-down-icon-non-fill";
 
 export default function SelectField({
   label,
@@ -25,7 +25,7 @@ export default function SelectField({
   );
 
   const dropdownClasses = combineClasses(
-    "bg-white flex-col absolute top-[40px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2 shadow-lg",
+    "bg-white flex-col absolute top-[40px] border-[1px] border-lightGray rounded-lg w-full right-0 p-2 shadow-lg z-10",
     dropdownClassName
   );
 
@@ -95,7 +95,7 @@ export default function SelectField({
                 />
                 <input
                   placeholder={translate("common.search")}
-                  className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-1 placeholder:text-sm bg-[#f6f6f7] "
+                  className="w-full ps-6 focus:outline-primary focus:outline rounded-md p-1 placeholder:text-sm bg-[#f6f6f7]"
                 />
               </div>
             )}

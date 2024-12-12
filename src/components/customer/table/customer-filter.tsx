@@ -130,6 +130,5 @@ export default function CustomerFilter({
         iconAlt="button"
       />
     </div>
-    // </div>
   );
 }

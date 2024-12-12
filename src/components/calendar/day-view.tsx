@@ -14,6 +14,7 @@ export interface DayViewProps {
   fixedHeight?: boolean;
   showEndTime?: boolean;
   isWeekView?: boolean;
+  hasStartTime?: boolean;
 }
 
 export const DayView = ({
@@ -28,6 +29,7 @@ export const DayView = ({
   showOnlyTitle = false,
   fixedHeight = false,
   isWeekView,
+  hasStartTime,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
     `flex flex-col  ${isWeekView ? "gap-y-2" : "gap-y-1"} p-1 cursor-pointer`,
@@ -72,7 +74,7 @@ export const DayView = ({
         </p>
       )}
 
-      {!showOnlyTitle && (
+      {!showOnlyTitle && hasStartTime && (
         <p
           style={{
             color: timeColour || "#3C3C3C",

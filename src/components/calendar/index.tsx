@@ -367,10 +367,10 @@ export const Calendar = () => {
 
           const formattedStartTime = startMoment.format("HH:mm");
           const formattedEndTime = endMoment.format("HH:mm");
-
           const duration = endMoment.diff(startMoment, "minutes");
           const daysDuration = endMoment.diff(startMoment, "days");
           const isValidEndDate = formattedEndTime !== "Invalid date";
+          const hasStartTime = startMoment.format("HH:mm") !== "00:00";
 
           const formattedTime =
             formattedEndTime && isValidEndDate
@@ -395,6 +395,7 @@ export const Calendar = () => {
                   isMonthView={true}
                   showOnlyTitle={showOnlyTitle}
                   fixedHeight={fixedHeight}
+                  hasStartTime={hasStartTime}
                 />
               );
             } else {
@@ -406,6 +407,7 @@ export const Calendar = () => {
                   endTime={formattedEndTime}
                   backrgoundColour={event.backgroundColor}
                   dotColour={event.textColor}
+                  hasStartTime={hasStartTime}
                 />
               );
             }

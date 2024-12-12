@@ -210,7 +210,7 @@ export default function OffersFilters({
   };
 
   return (
-    <div className="flex flex-col maxLargePro:flex-row maxLargePro:items-center w-full xl:w-fit gap-4 z-10">
+    <div className="flex flex-col maxLargePro:flex-row maxLargePro:items-center w-full xl:w-fit gap-4">
       <div className="flex gap-[14px]">
         {checkbox?.map((item, idx) => (
           <CheckField
@@ -226,7 +226,7 @@ export default function OffersFilters({
           />
         ))}
       </div>
-      <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center">
+      <div className="flex flex-col maxSize:flex-row gap-4 maxSize:items-center z-10">
         <div className="flex items-center gap-x-4">
           <InputField
             handleChange={handleInputChange}
@@ -281,7 +281,7 @@ export default function OffersFilters({
           />
         </div>
 
-        <div className="flex items-center gap-x-3 z-20">
+        <div className="flex items-center gap-x-3">
           <SelectField
             handleChange={(value) => hanldeMailStatus(value)}
             value={emailStatus || "None"}

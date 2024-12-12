@@ -160,6 +160,9 @@ export const CreateInvoice = () => {
   return (
     <>
       <div className="xLarge:fixed mb-5">
+        <p className="mb-5 text-2xl text-[#222B45] font-semibold">
+          {translate("common.add_new_invoice")}
+        </p>
         <div className="flex flex-wrap xLarge:flex-col gap-[14px] w-full">
           {tabSection?.map((item, index) => (
             <OfferTabs
@@ -180,7 +183,7 @@ export const CreateInvoice = () => {
       <div className="w-full break-all flex">
         <div className="max-w-[330px] w-full hidden xLarge:block"></div>
 
-        <div className="w-full xLarge:max-w-[80%] mb-[40px]">
+        <div className="w-full xLarge:max-w-[80%] mb-[40px] xLarge:mt-[52px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>

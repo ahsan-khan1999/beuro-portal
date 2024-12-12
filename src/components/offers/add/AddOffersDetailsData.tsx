@@ -219,6 +219,9 @@ const AddOffersDetailsData = () => {
   return (
     <>
       <div className="xLarge:fixed mb-5">
+        <p className="mb-5 text-2xl text-[#222B45] font-semibold">
+          {translate("common.add_new_offer")}
+        </p>
         <div className="flex flex-wrap xLarge:flex-col gap-[14px]">
           {tabSection?.map((item, index) => (
             <OfferTabs
@@ -237,7 +240,7 @@ const AddOffersDetailsData = () => {
 
       <div className="w-full break-all flex">
         <div className="max-w-[320px] w-full hidden xLarge:block"></div>
-        <div className="w-full xLarge:max-w-[80%] mb-10">
+        <div className="w-full xLarge:max-w-[80%] mb-10 xLarge:mt-[52px]">
           {componentsLookUp[tabType as keyof typeof componentsLookUp]}
         </div>
       </div>
