@@ -32,6 +32,9 @@ export interface Lead {
   isAppointmentCreated: boolean;
   content?: ContentTableRowTypes;
   title?: string;
+  mail: {
+    mailStatus: number;
+  };
   appointment: {
     id: string;
     isReportSubmitted: boolean;
