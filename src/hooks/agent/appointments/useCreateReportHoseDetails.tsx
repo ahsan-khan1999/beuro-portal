@@ -150,34 +150,48 @@ export const useCreateReportHoseDetails = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data, "data");
+
     try {
       const convertValues = (
         obj: DataType,
         excludeKeys: string[] = []
       ): DataType => {
         return Object.fromEntries(
-          Object.entries(obj).map(([key, value]) => {
-            if (key === "generalRoomDetails" && Array.isArray(value)) {
-              // Process each item in the array without converting it to an object
-              const processedArray = value.map((item) =>
-                typeof item === "object" && item !== null
-                  ? convertValues(item, excludeKeys)
-                  : item
-              );
-              return [key, processedArray];
-            } else if (typeof value === "object" && value !== null) {
-              return [key, convertValues(value, excludeKeys)];
-            } else if (excludeKeys.includes(key)) {
-              return [key, value];
-            } else if (value === "") {
-              return [key, value];
-            } else {
-              const convertedValue = isNaN(Number(value))
-                ? value
-                : Number(value);
-              return [key, convertedValue];
-            }
-          })
+          Object.entries(obj)
+            .filter(([key, value]) => {
+              // Exclude generalRoomDetails if it's an empty array
+              if (
+                key === "generalRoomDetails" &&
+                Array.isArray(value) &&
+                value.length === 0
+              ) {
+                return false;
+              }
+              return true;
+            })
+            .map(([key, value]) => {
+              if (key === "generalRoomDetails" && Array.isArray(value)) {
+                // Process each item in the array without converting it to an object
+                const processedArray = value.map((item) =>
+                  typeof item === "object" && item !== null
+                    ? convertValues(item, excludeKeys)
+                    : item
+                );
+                return [key, processedArray];
+              } else if (typeof value === "object" && value !== null) {
+                return [key, convertValues(value, excludeKeys)];
+              } else if (excludeKeys.includes(key)) {
+                return [key, value];
+              } else if (value === "") {
+                return [key, value];
+              } else {
+                const convertedValue = isNaN(Number(value))
+                  ? value
+                  : Number(value);
+                return [key, convertedValue];
+              }
+            })
         );
       };
 

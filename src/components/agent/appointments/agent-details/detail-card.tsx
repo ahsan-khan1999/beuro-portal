@@ -177,11 +177,11 @@ export const AppointmentsDetailCard = ({
           )}
         </div>
       </div>
-      <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
+      <div className="flex flex-col mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
         <div
-          className={`flex flex-col gap-y-3 mlg:gap-y-[34px] mt-[10px] mlg:mt-[34px]`}
+          className={`flex flex-col gap-y-4 mt-[10px] mlg:mt-[34px]`}
         >
-          <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-3">
+          <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-4">
             <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
               <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[65px] w-fit">
                 {translate("appointments.detail_data.lead_id")}:
@@ -226,7 +226,7 @@ export const AppointmentsDetailCard = ({
               )}
             </div>
           </div>
-          <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-3">
+          <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-4">
             {appointmentDetails?.createdBy?.company?.companyName && (
               <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
                 <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[140px]">

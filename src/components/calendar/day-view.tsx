@@ -74,7 +74,7 @@ export const DayView = ({
         </p>
       )}
 
-      {!showOnlyTitle && hasStartTime && (
+      {!showOnlyTitle && (
         <p
           style={{
             color: timeColour || "#3C3C3C",
