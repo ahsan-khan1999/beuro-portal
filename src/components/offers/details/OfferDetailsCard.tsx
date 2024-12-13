@@ -177,8 +177,8 @@ const OfferDetailsCard = ({
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 mt-5">
-        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
+      <div className="flex flex-col gap-3 mt-5">
+        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-2">
           <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.offer_id")}:
@@ -187,12 +187,12 @@ const OfferDetailsCard = ({
               {offerDetails?.offerNumber}
             </span>
           </div>
-          <div className="flex items-center gap-x-3">
-            <span className="text-base font-normal text-[#4D4D4D]">
+          <div className="flex mlg:items-center gap-x-3">
+            <span className="text-base font-normal text-[#4D4D4D] min-w-[80px]">
               {translate("offers.card_content.offer_title")}:
             </span>
 
-            <span className="text-base font-medium text-[#4B4B4B] flex overflow-clip text-ellipsis">
+            <span className="text-base font-medium text-[#4B4B4B] mlg:truncate">
               {offerDetails?.title}
             </span>
           </div>
@@ -206,7 +206,7 @@ const OfferDetailsCard = ({
           </div>
         </div>
 
-        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-1">
+        <div className="grid mlg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-[minmax(350px,_350px)_minmax(450px,_100%)_minmax(230px,_230px)] items-center gap-y-2">
           <div className="flex items-center gap-x-3">
             <span className="text-base font-normal text-[#4D4D4D]">
               {translate("offers.card_content.created_date")}:
@@ -327,6 +327,9 @@ const OfferDetailsCard = ({
                     offerDetails?.offerStatus
                   )}] text-base font-medium me-1`}
                   dropDownItemsContainerClassName="min-w-[140px]"
+                  dropDownIconClassName={`text-[${getOfferStatusColor(
+                    offerDetails?.offerStatus
+                  )}]`}
                 />
               )) || (
                 <span

@@ -30,7 +30,7 @@ export const ImagePreview = ({ images }: { images: string[] }) => {
 
   return (
     <div style={{ position: "relative" }}>
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-[14px] max-h-[350px] overflow-y-scroll">
+      <div className="flex gap-4 flex-wrap max-h-[350px] overflow-y-scroll">
         {images?.map((item, index) => {
           const isSvg = item?.endsWith(".svg");
           return (

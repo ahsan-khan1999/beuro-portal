@@ -12,15 +12,15 @@ import {
   setAppointmentDetails,
   updateAppointmentStatus,
 } from "@/api/slices/appointment/appointmentSlice";
-import { CustomerPromiseActionType } from "@/types/company";
 import { staticEnums } from "@/utils/static";
+import { CustomerPromiseActionType } from "@/types/company";
+import { readImage } from "@/api/slices/imageSlice/image";
 import { deleteNotes, readNotes } from "@/api/slices/noteSlice/noteSlice";
 import { ConfirmDeleteNote } from "@/base-components/ui/modals1/ConfirmDeleteNote";
 import { UpdateNote } from "@/base-components/ui/modals1/UpdateNote";
 import AddNewNote from "@/base-components/ui/modals1/AddNewNote";
 import ExistingNotes from "@/base-components/ui/modals1/ExistingNotes";
 import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
-import { readImage } from "@/api/slices/imageSlice/image";
 
 export const useAppointmentsDetails = () => {
   const router = useRouter();

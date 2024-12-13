@@ -81,7 +81,6 @@ export const AttachementField = ({
   isOpenedFile,
   attachements,
   setAttachements,
-  isAttachement,
 }: AttachFieldProps) => {
   const formdata = new FormData();
   const dispatch = useAppDispatch();
@@ -312,7 +311,9 @@ export const AttachementField = ({
                     alt="file icon"
                     className="min-w-5 min-h-6"
                   />
-                  <span>{item?.name?.slice(0, 20)}...</span>
+                  <span className="text-sm font-medium truncate">
+                    {item?.name}
+                  </span>
                 </div>
               </div>
             ))}
