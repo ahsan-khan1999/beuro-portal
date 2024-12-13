@@ -1,14 +1,14 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
-import { convertToLocal, viewConvertUTCToLocalDate } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
-import { useRouter } from "next/router";
 import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
 import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
+import { convertToLocal, viewConvertUTCToLocalDate } from "@/utils/utility";                    
 
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];

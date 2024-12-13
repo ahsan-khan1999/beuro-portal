@@ -73,9 +73,10 @@ const OfferEditImages = ({
         </div>
 
         {images?.images && images?.images?.length > 0 ? (
-          <div className="grid max-h-[400px] overflow-y-scroll grid-cols-2 gap-[14px] p-3 border-t-4 border-t-[#4A13E7]">
+          <div className="flex flex-wrap gap-4 max-h-[400px] overflow-y-scroll 2xl:grid 2xl:grid-cols-2 p-3 border-t-4 border-t-[#4A13E7]">
             {images?.images?.map((item, index) => {
               const isSvg = item?.endsWith(".svg");
+
               return (
                 <>
                   {isSvg ? (

@@ -87,8 +87,14 @@ export const ShareImages = ({ onClose, id, type }: ShareImagesProps) => {
                       window.open(item, "_blank");
                     }}
                   >
-                    <Image src={pdfIcon} alt="pdfIcon" />
-                    <span>{item?.slice(0, 20)}...</span>
+                    <Image
+                      className="min-w-5 min-h-6"
+                      width={20}
+                      height={24}
+                      src={pdfIcon}
+                      alt="pdfIcon"
+                    />
+                    <span className="text-sm font-medium truncate">{item}</span>
                   </div>
                 </div>
                 <DownloadIcon onClick={() => handleFileLink(item)} />

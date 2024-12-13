@@ -12,8 +12,6 @@ import { AdditionalInfoReport } from "./forms/additional-detail-form";
 import { stepFormArrayTypes } from "@/types";
 import { useRouter } from "next/router";
 import { MobileStepperTab } from "@/base-components/ui/tab/stepper-tab";
-import { useReportUpdatedPdf } from "@/hooks/appointments/useReportUpdatedPdf";
-import { updateQuery } from "@/utils/update-query";
 
 const CreateReportDetails = () => {
   const dispatch = useAppDispatch();
@@ -312,7 +310,7 @@ const CreateReportDetails = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="hidden xMini:flex border-y border-y-[#000] border-opacity-10 py-4 mb-6 items-center justify-center gap-x-4">
         {tabSection?.map((item, index) => (
           <SteperFormTab
@@ -348,7 +346,7 @@ const CreateReportDetails = () => {
       {componentLookUp[tabType as keyof typeof componentLookUp]}
 
       {renderModal()}
-    </div>
+    </>
   );
 };
 

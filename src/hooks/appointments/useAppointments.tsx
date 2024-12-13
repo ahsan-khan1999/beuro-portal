@@ -67,10 +67,9 @@ export const useAppointments = () => {
   const { t: translate } = useTranslation();
   const page = router.query?.page as unknown as number;
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
-  const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
-
   const [noteInfo, setNoteInfo] = useState(initialNotes);
   const [imagesInfo, setImagesInfo] = useState(initialImages);
+  const [currentPageRows, setCurrentPageRows] = useState<Appointments[]>([]);
 
   const path = router.asPath;
   const isAgentRoute = path.startsWith("/agent");
@@ -266,6 +265,7 @@ export const useAppointments = () => {
     appointmentStatus: string,
     type: string
   ) => {
+
     if (type === "appointment") {
       const currentItem = currentPageRows.find((item) => item.id === id);
 

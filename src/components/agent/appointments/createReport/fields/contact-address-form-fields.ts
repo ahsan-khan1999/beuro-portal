@@ -9,12 +9,9 @@ import {
   FormField,
   GenerateContactAddressFormField,
   GenerateContactAddressReportFormField,
-  GenerateContactReportFormField,
   CustAddressFormField,
-  GenerateOfferDateFormField,
   GenerateAppointmentDateFormField,
 } from "@/types";
-import { OffersTableRowTypes } from "@/types/offers";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import {
@@ -639,7 +636,7 @@ export const generateDateChildren = (
   const dateformFields: any = [];
 
   for (let i = 0; i < count; i++) {
-    dateformFields.push({
+    dateformFields?.push({
       containerClass: "mb-0 pt-5",
       field: {
         type: Field.div,

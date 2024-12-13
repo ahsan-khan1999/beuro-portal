@@ -142,7 +142,6 @@
 }
 
 .fc-more-popover {
-  /* overflow: hidden !important; */
   max-height: none !important;
 }
 
@@ -175,13 +174,19 @@
   height: auto !important;
 }
 
+.fc-daygrid-day-events .timeGridDay-flex {
+  padding-right: 50px;
+}
+
 @media (min-width: 768px) {
   .timeGridDay-flex {
     display: flex !important;
     align-items: center !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
     align-items: flex-start !important;
-    gap: 10px !important;
+    /* gap: 10px !important; */
+    padding: 10px;
+    margin-bottom: 0 !important;
   }
 
   .fc-daygrid-day-events {

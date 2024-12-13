@@ -72,7 +72,7 @@ export const useReportDetails = () => {
     const res = await dispatch(
       updateAppointmentStatus({
         data: {
-          id: reportDetails?.appointmentID?.id,
+          id: appointmentDetails?.id,
           appointmentStatus:
             staticEnums["AppointmentStatus"][appointmentStatus],
         },

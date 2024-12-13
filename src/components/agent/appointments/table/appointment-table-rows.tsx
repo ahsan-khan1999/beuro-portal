@@ -110,8 +110,8 @@ export const AppointmentTableRows = ({
               onClick={() => handleClickRow(item?.isReportSubmitted, item.id)}
               className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
                 index !== 0 && "border-t border-t-[#E7EAEE]"
-              } grid 
-              grid-cols-[minmax(100px,15%)_minmax(100px,_15%)_minmax(80px,_12%)_minmax(80px,_23%)_minmax(100px,15%)_minmax(150px,20%)] 
+              } ${index === 0 && "mt-2"}  
+              grid grid-cols-[minmax(100px,15%)_minmax(100px,_15%)_minmax(80px,_12%)_minmax(80px,_23%)_minmax(100px,15%)_minmax(150px,20%)] 
               items-center gap-x-2 bg-primary rounded-lg px-2 py-1 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
             >
               <div>
