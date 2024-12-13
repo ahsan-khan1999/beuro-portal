@@ -481,7 +481,7 @@ export const Calendar = () => {
           }
 
           if (isModalOpen) {
-            info.el.style.height = "auto";
+            // info.el.style.height = "auto";
             window.scrollTo({
               top: 0,
               left: 0,

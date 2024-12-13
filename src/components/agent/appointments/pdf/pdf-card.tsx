@@ -94,9 +94,9 @@ export const AppointmentPdfCard = ({
         </div>
       </div>
 
-      <div className="flex flex-col gap-y-5 mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
-        <div className="flex flex-col gap-y-3 mlg:gap-y-[34px] mt-[10px] mlg:mt-[34px]">
-          <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">
+      <div className="flex flex-col mlg:flex-row justify-between mlg:items-center">
+        <div className="flex flex-col gap-y-4 mt-[10px] mlg:mt-[34px]">
+          <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-4">
             <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
               <span className="text-base text-[#5C5C5C] font-medium min-w-[65px] w-fit">
                 {translate("appointments.detail_data.lead_id")}:
@@ -139,7 +139,7 @@ export const AppointmentPdfCard = ({
                 )}
             </div>
           </div>
-          <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-3">
+          <div className="grid grid-cols-1 xMini:grid-cols-3 items-center mlg:gap-x-20 gap-y-4">
             {appointmentDetails?.appointmentID?.leadID?.customerDetail
               ?.companyName && (
               <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px]">
