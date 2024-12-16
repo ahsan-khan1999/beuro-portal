@@ -2,6 +2,7 @@ import { Country } from "@/components/reactPdf/address-details";
 import { ContactDetailsProps } from "@/types/types";
 import { GenderLabel } from "@/utils/static";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const langContent = {
   en: {
@@ -25,12 +26,12 @@ export const ContactDetails = ({
   gender,
   mobile,
   isReverseInfo,
-  language,
 }: Partial<ContactDetailsProps>) => {
   const { t: translate } = useTranslation();
+  const locale = useRouter().locale || "de"
   const { city, name, postalCode, streetWithNumber, companyName } =
     address || {};
-
+  
   return (
     <div className="grid grid-cols-4 items-center mt-5 mb-[37px]">
       {isReverseInfo ? (
@@ -70,7 +71,7 @@ export const ContactDetails = ({
                 {gender && (
                   <span className="text-sm font-medium">
                     {
-                      langContent[language as keyof typeof langContent]?.gender[
+                      langContent[locale as keyof typeof langContent]?.gender[
                         gender as keyof typeof GenderLabel
                       ]
                     }
@@ -100,7 +101,7 @@ export const ContactDetails = ({
               {gender && (
                 <span className="text-sm font-medium">
                   {
-                    langContent[language as keyof typeof langContent]?.gender[
+                    langContent[locale as keyof typeof langContent]?.gender[
                       gender as keyof typeof GenderLabel
                     ]
                   }
