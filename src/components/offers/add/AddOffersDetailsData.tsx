@@ -124,11 +124,12 @@ const AddOffersDetailsData = () => {
     dispatch(
       readImage({ params: { type: "leadID", id: offerDetails?.leadID?.id } })
     );
+
     dispatch(
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: {
-          id: offerDetails?.leadID?.id,
+          id: offerDetails?.id,
           refID: offerDetails?.offerNumber,
           name: name,
           heading: heading,

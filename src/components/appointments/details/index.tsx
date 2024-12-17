@@ -19,7 +19,7 @@ export const AppointmentsDetails = () => {
   } = useReportDetails();
 
   const cardClass = appointmentDetails?.isReportSubmitted
-    ? "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[295px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
+    ? "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[285px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
     : "";
 
   return (

@@ -458,7 +458,6 @@ export const LeadsTableRows = ({
                     <AddNoteIcon isNoteCreated={item?.isNoteCreated} />
                   </span>
                 </div>
-
                 <div
                   onClick={(e) => e.stopPropagation()}
                   title={translate("common.mail")}
@@ -473,8 +472,10 @@ export const LeadsTableRows = ({
                       fill="none"
                       onClick={() =>
                         router.push({
-                          pathname: `/offers/details`,
-                          query: { ...router.query, offer: item?.id },
+                          pathname: isAgent
+                            ? "/agent/leads/details"
+                            : "/leads/details",
+                          query: { ...router.query, lead: item?.id },
                         })
                       }
                     >
@@ -512,7 +513,6 @@ export const LeadsTableRows = ({
                     </svg>
                   </span>
                 </div>
-
                 <span
                   className="flex justify-center items-center cursor-pointer"
                   onClick={() =>
