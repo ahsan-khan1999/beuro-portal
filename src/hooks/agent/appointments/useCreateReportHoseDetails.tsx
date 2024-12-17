@@ -150,8 +150,6 @@ export const useCreateReportHoseDetails = ({
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data, "data");
-
     try {
       const convertValues = (
         obj: DataType,
@@ -160,7 +158,6 @@ export const useCreateReportHoseDetails = ({
         return Object.fromEntries(
           Object.entries(obj)
             .filter(([key, value]) => {
-              // Exclude generalRoomDetails if it's an empty array
               if (
                 key === "generalRoomDetails" &&
                 Array.isArray(value) &&
@@ -172,7 +169,6 @@ export const useCreateReportHoseDetails = ({
             })
             .map(([key, value]) => {
               if (key === "generalRoomDetails" && Array.isArray(value)) {
-                // Process each item in the array without converting it to an object
                 const processedArray = value.map((item) =>
                   typeof item === "object" && item !== null
                     ? convertValues(item, excludeKeys)

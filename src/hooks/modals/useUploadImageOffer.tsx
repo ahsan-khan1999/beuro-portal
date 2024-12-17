@@ -125,9 +125,9 @@ export const useUploadImageOffer = (
     });
   }, [images]);
 
-  const handleTaskUpdateSuccess = () => {
-    dispatch(updateModalType({ type: ModalType.IMAGE_UPDATED_SUCCESS }));
-  };
+  // const handleTaskUpdateSuccess = () => {
+  //   dispatch(updateModalType({ type: ModalType.IMAGE_UPDATED_SUCCESS }));
+  // };
 
   const onSubmit = async () => {
     const formatImages = enteredLinks?.images?.map(
@@ -161,7 +161,6 @@ export const useUploadImageOffer = (
         if (id) {
           onUpdateDetails?.(id);
           handleImageSlider(activeTab);
-          // handleTaskUpdateSuccess();
         }
       }
     } else if (type === "Offer") {
