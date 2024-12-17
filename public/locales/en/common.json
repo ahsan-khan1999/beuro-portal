@@ -30,7 +30,8 @@
     "create": "Create Account",
     "or_login": "or login with",
     "remember_me": "Remember me",
-    "forgot_password": "Forgot Password"
+    "forgot_password": "Forgot Password",
+    "companyName": "Company name is required"
   },
   "login_detail": {
     "back_button": "Back",
@@ -160,6 +161,7 @@
     "file": "Please Select a valid file format"
   },
   "validationMessages": {
+    "companyName": "Company name is required",
     "delete_dependency_deny": "Cannot delete: item has related dependencies",
     "unauthorized": "You do not have permission",
     "required": "This field is required",
@@ -1729,7 +1731,9 @@
       "phone_placeholder": "Please Enter Your phone no.",
       "mobile_placeholder": "Please Enter Your mobile no.",
       "country_placeholder": "Please Enter Your country",
-      "company_placeholder": "Please Enter Your company name"
+      "company_placeholder": "Please Enter Your company name",
+      "web_placeholder": "Enter Your Website",
+      "mwst_placeholder": "Please Enter Your Mwst number"
     }
   },
   "pdf_preview": {
@@ -2617,7 +2621,7 @@
   },
 
   "calendar": {
-    "ends_text":"ends",
+    "ends_text": "ends",
     "more_text": "more",
     "delete_appointment_des": "Are you sure you want to delete the appointment?",
     "main_heading": "Calendar",

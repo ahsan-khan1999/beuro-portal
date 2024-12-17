@@ -954,8 +954,9 @@ export const ReportHouseDetail = ({ reportDetail }: ReportHouseDetailProps) => {
             />
           </div>
         </div>
-        {reportDetail?.generalRoomDetails?.map((item) => (
-          <div className="mt-5 flex flex-col gap-y-2">
+
+        {reportDetail?.generalRoomDetails?.map((item, index) => (
+          <div className="mt-5 flex flex-col gap-y-2" key={index}>
             <p className="text-base font-medium xMini:font-semibold text-[#1E1E1E] mb-2">
               {item?.mainHeading}
             </p>

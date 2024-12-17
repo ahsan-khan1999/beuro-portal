@@ -230,11 +230,13 @@ export const useCreateReportAddressDetails = ({
   const handleChangeLabel = (value: string, index: number) => {
     setValue(`address.${index}.label`, value);
   };
+
   const onDeleteAddress = (index: number) => {
     remove(index);
     const data = getValues();
     reset({ ...data });
   };
+
   const onEditTitle = (idx: number | null) => {
     setAddressType(idx);
   };

@@ -31,8 +31,8 @@ import { readImage, setImages } from "@/api/slices/imageSlice/image";
 export const useReportDetails = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-  const { systemSettings } = useAppSelector((state) => state.settings);
   const id = router.query.reportId || router.query.appointment;
+  const { systemSettings } = useAppSelector((state) => state.settings);
 
   const { isLoading, loading, reportDetails, appointmentDetails } =
     useAppSelector((state) => state.appointment);

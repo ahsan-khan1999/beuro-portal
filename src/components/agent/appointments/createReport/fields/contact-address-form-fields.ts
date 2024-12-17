@@ -214,7 +214,6 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
   ) => {
     const formField: FormField[] = [];
     const { t: translate } = useTranslation();
-
     let addresses: any[] = address || [];
 
     if (!addressFields) return formField;
@@ -227,7 +226,7 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
         field: {
           type: Field.div,
           id: "div-field",
-          className: "flex justify-between ",
+          className: "flex justify-between",
           children: [
             {
               containerClass: "mb-0",
@@ -271,9 +270,8 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                         field: {
                           type: Field.button,
                           id: "button",
-                          text: translate("common.cancel_button"),
-                          className:
-                            "!h-[40px] !bg-[transparent] !text-[black]",
+                          text: translate("common.save_button"),
+                          className: "!h-[40px] text-white hover:bg-none",
                           inputType: "button",
                           onClick: () => onEditTitle && onEditTitle(null),
                         },

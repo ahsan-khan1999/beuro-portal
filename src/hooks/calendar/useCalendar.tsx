@@ -321,7 +321,7 @@ export const useCalendar = () => {
             onClose={onClose}
             remainderAlert={event}
             onUpdateSuccess={handleTaskUpdateSuccess}
-            onContractDetail={() => {}}
+            onContractDetail={handleContractTaskDetail}
           />
         ))}
       </>

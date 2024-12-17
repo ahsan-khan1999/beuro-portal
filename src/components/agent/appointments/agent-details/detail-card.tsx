@@ -9,7 +9,6 @@ import { formatTimeToHHMM, viewConvertUTCToLocalDate } from "@/utils/utility";
 import localStoreUtil from "@/utils/localstore.util";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setOfferDetails } from "@/api/slices/offer/offerSlice";
-import moment from "moment";
 import { setCustomerDetails } from "@/api/slices/customer/customerSlice";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
@@ -178,9 +177,7 @@ export const AppointmentsDetailCard = ({
         </div>
       </div>
       <div className="flex flex-col mlg:gap-y-0 mlg:flex-row justify-between mlg:items-center">
-        <div
-          className={`flex flex-col gap-y-4 mt-[10px] mlg:mt-[34px]`}
-        >
+        <div className={`flex flex-col gap-y-4 mt-[10px] mlg:mt-[34px]`}>
           <div className="grid grid-cols-1 xMini:grid-cols-3 xMaxSize:grid-cols-4 items-center mlg:gap-x-20 gap-y-4">
             <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">
               <span className="font-normal text-[#848484] text-sm mlg:text-base min-w-[65px] w-fit">

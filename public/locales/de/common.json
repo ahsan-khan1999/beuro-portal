@@ -30,7 +30,8 @@
     "create": "Konto erstellen",
     "or_login": "Oder einloggen mit",
     "remember_me": "Erinnere dich an mich",
-    "forgot_password": "Passwort vergessen"
+    "forgot_password": "Passwort vergessen",
+    "companyName": "Firmenname ist erforderlich"
   },
   "login_detail": {
     "back_button": "Zurück",
@@ -160,6 +161,7 @@
     "file": "Bitte wählen Sie ein gültiges Dateiformat"
   },
   "validationMessages": {
+    "companyName": "Firmenname ist erforderlich",
     "delete_dependency_deny": "Löschen nicht möglich: Das Element hat zugehörige Abhängigkeiten",
     "unauthorized": "Sie haben keine Erlaubnis",
     "unauthenticated": "Melden Sie sich an oder erstellen Sie ein Konto, um fortzufahren",
@@ -1723,7 +1725,9 @@
       "phone_placeholder": "Bitte geben Sie Ihre Telefonnummer ein.",
       "mobile_placeholder": "Bitte geben Sie Ihre Mobilnummer ein.",
       "country_placeholder": "Bitte geben Sie Ihr Land ein",
-      "company_placeholder": "Bitte geben Sie Ihren Firmennamen ein"
+      "company_placeholder": "Bitte geben Sie Ihren Firmennamen ein",
+      "web_placeholder": "Geben Sie Ihre Website ein",
+      "mwst_placeholder": "Bitte geben Sie Ihre Mwst-Nummer ein"
     }
   },
   "pdf_preview": {
