@@ -53,7 +53,9 @@ export const generateLoginValidation = (translate: Function) => {
 
 export const detailScreensValidation = (translate: Function) => {
   return yup.object().shape({
-    [CompanyFields.name]: yup.string().required("tdguy"),
+    [CompanyFields.name]: yup
+      .string()
+      .required(translate("validationMessages.required")),
     // [CompanyFields.phoneNumber]: yup
     //   .string()
     //   .required(translate("validationMessages.required")),
@@ -66,7 +68,9 @@ export const detailScreensValidation = (translate: Function) => {
     // [CompanyFields.mwstNumber]: yup
     //   .string()
     //   .required(translate("validationMessages.required")),
-    [CompanyFields.companyLogo]: yup.string().required(),
+    [CompanyFields.companyLogo]: yup
+      .string()
+      .required(translate("validationMessages.required")),
   });
 };
 export const detailLocationValidation = (translate: Function) => {

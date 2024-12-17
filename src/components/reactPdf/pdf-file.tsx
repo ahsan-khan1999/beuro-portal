@@ -88,7 +88,7 @@ const PdfFile = ({
             top: 120,
           }}
         >
-          <ContactAddress {...{ ...contactAddress }} />
+          <ContactAddress {...{ ...contactAddress, language: lang }} />
 
           <AddressDetails
             {...{ address, header, workDates, time }}

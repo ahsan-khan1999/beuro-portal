@@ -50,64 +50,62 @@ export const InputField = ({
   }, [id]);
 
   return (
-    <div>
-      <div className={`relative w-full flex items-center`}>
-        {img && (
-          <Image
-            src={addtionalDetailImg}
-            alt="paragraph_icon"
-            className="absolute top-4 left-4"
-          />
-        )}
-        {svg && (
-          <span
-            className={`mr-3 absolute left-4 ${
-              (inputFocus && "tests") || "test"
-            }`}
-            dangerouslySetInnerHTML={{ __html: svg }}
-          />
-        )}
-        {remove && (
-          <div
-            className="cursor-pointer -top-9 absolute right-0 bg-red px-3 py-1 mt-1 text-white rounded-t-md"
-            onClick={onRemove}
-          >
-            {remove}
-          </div>
-        )}
-
-        <input
-          onFocus={() => setInputFocus(true)}
-          onBlurCapture={() => setInputFocus(false)}
-          id={id}
-          type={inputType}
-          className={`${classes}`}
-          defaultValue={value}
-          {...register(name)}
-          placeholder={placeholder}
-          disabled={disabled}
-          key={id}
-          step={step}
-          min={0}
-          pattern={(inputType === "number" && "d+") || "*"}
-          // onChangeCapture={}
-          //@ts-expect-error
-          onChangeCapture={(e) => onChange && onChange(e.target?.value)}
-          onKeyDown={handleKeyDown}
+    <div className={`relative w-full flex items-center`}>
+      {img && (
+        <Image
+          src={addtionalDetailImg}
+          alt="paragraph_icon"
+          className="absolute top-4 left-4"
         />
-        {percentage && (
-          <span
-            className={`mr-3 absolute left-14 ${
-              (inputFocus && "tests") || "test"
-            }`}
-          >
-            {percentage}
-          </span>
-        )}
-        {/* {success && (
+      )}
+      {svg && (
+        <span
+          className={`mr-3 absolute left-4 ${
+            (inputFocus && "tests") || "test"
+          }`}
+          dangerouslySetInnerHTML={{ __html: svg }}
+        />
+      )}
+      {remove && (
+        <div
+          className="cursor-pointer -top-9 absolute right-0 bg-red px-3 py-1 mt-1 text-white rounded-t-md"
+          onClick={onRemove}
+        >
+          {remove}
+        </div>
+      )}
+
+      <input
+        onFocus={() => setInputFocus(true)}
+        onBlurCapture={() => setInputFocus(false)}
+        id={id}
+        type={inputType}
+        className={`${classes}`}
+        defaultValue={value}
+        {...register(name)}
+        placeholder={placeholder}
+        disabled={disabled}
+        key={id}
+        step={step}
+        min={0}
+        pattern={(inputType === "number" && "d+") || "*"}
+        // onChangeCapture={}
+        //@ts-expect-error
+        onChangeCapture={(e) => onChange && onChange(e.target?.value)}
+        onKeyDown={handleKeyDown}
+      />
+      {percentage && (
+        <span
+          className={`mr-3 absolute left-14 ${
+            (inputFocus && "tests") || "test"
+          }`}
+        >
+          {percentage}
+        </span>
+      )}
+      {/* {success && (
         <InputSuccessIcon className="text-middle-green absolute top-2/4 right-4 transform -translate-y-2/4" />
       )} */}
-      </div>
     </div>
   );
 };

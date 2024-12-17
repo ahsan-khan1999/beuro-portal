@@ -208,7 +208,6 @@ const ContractDetailsData = ({
             name={name}
             heading={heading}
             handleImageSlider={handleImageSlider}
-            // className="2xl:w-[247px]"
             isOffer={true}
           />
         </div>
