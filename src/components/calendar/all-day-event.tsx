@@ -56,7 +56,7 @@ export const AllDayEvent = ({
         >
           {title}
         </p>
-        {!showEndTime && (
+        {!showEndTime && hasStartTime && (
           <span className="text-[#3C3C3C] font-medium text-[10px] xMini:text-sm ml-2">
             {startTime}
           </span>

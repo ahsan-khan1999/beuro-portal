@@ -324,7 +324,8 @@ export const addTaskFormField: GenerateAddTaskFormField = (
       },
     },
     {
-      containerClass: "mb-0 mt-[14px] flex items-center justify-end",
+      containerClass:
+        "mb-0 absolute right-[35px] bottom-[30px] bg-[#00000014] p-2 rounded-lg",
       field: {
         type: Field.button,
         id: "button",
