@@ -27,7 +27,7 @@ export const AddContractTask = ({
     onUpdateSuccess,
   });
 
-  const rightValue = locale === "en" ? "right-[180px]" : "right-[250px]";
+  const rightValue = locale === "en" ? "right-[170px]" : "right-[270px]";
 
   // useEffect(() => {
   //   const updateMaxHeight = () => {

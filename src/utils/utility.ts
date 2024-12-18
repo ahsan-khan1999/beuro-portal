@@ -190,16 +190,10 @@ export const setMaxHeightOnResize = (setMaxHeightCallback: any) => {
 
 export function germanDateFormat(dateString: string): string {
   if (dateString?.includes("/")) {
-    // Format for `DD/MM/YYYY`
     const [day, month, year] = dateString.split("/");
     return `${day}.${month}.${year}`;
   } else {
-    // Format for ISO 8601 date strings
-    const date = new Date(dateString); // Parse ISO 8601 date
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is zero-indexed
-    const year = date.getFullYear();
-    return `${day}.${month}.${year}`;
+    return moment(dateString).format("DD.MM.YYYY");
   }
 }
 

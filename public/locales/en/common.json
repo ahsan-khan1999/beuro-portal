@@ -161,6 +161,7 @@
     "file": "Please Select a valid file format"
   },
   "validationMessages": {
+    "endDateGreater": "End date must come later",
     "companyName": "Company name is required",
     "delete_dependency_deny": "Cannot delete: item has related dependencies",
     "unauthorized": "You do not have permission",

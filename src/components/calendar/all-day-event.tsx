@@ -7,6 +7,7 @@ export interface AllDayEventsProps {
   dotClassName?: string;
   dotColour?: string;
   time?: string;
+  viewType?: string;
   startTime?: string;
   endTime?: string;
   showEndTime?: boolean;
@@ -22,15 +23,21 @@ export const AllDayEvent = ({
   showEndTime,
   startTime,
   endTime,
+  viewType,
   hasStartTime,
 }: AllDayEventsProps) => {
+  const weekView = viewType === "dayGridWeek";
   const containerClasses = combineClasses(
-    `px-2 py-[6px] rounded-[4px] cursor-pointer`,
+    `${
+      weekView ? "xsMini:px-2" : "px-2"
+    } py-[6px] rounded-[4px] cursor-pointer`,
     containerClassName
   );
 
   const dotDefaultClasses = combineClasses(
-    `h-2 w-2 xMini:h-3 xMini:w-3 rounded-full flex-shrink-0`,
+    `${
+      weekView ? "w-0 h-0 xsMini:h-2 xsMini:w-2" : "h-2 w-2"
+    } xMini:h-3 xMini:w-3 rounded-full flex-shrink-0`,
     dotClassName
   );
 
@@ -49,7 +56,7 @@ export const AllDayEvent = ({
         >
           {title}
         </p>
-        {!showEndTime && (
+        {!showEndTime && hasStartTime && (
           <span className="text-[#3C3C3C] font-medium text-[10px] xMini:text-sm ml-2">
             {startTime}
           </span>
