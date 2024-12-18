@@ -9,6 +9,7 @@ import {
   EnterComponayNameField,
   UpdateNoteId,
 } from "@/enums/modals";
+import moment from "moment";
 import * as yup from "yup";
 
 // Password Change validation is here
@@ -153,21 +154,30 @@ export const generateAddTaskValidationSchema = (translate: Function) => {
     [AddCalendarTask.title]: yup
       .string()
       .required(translate("validationMessages.required")),
-    // [AddCalendarTask.date]: yup
-    //   .array()
-    //   .of(
-    //     yup
-    //       .object()
-    //       .shape({
-    //         startDate: yup
-    //           .string()
-    //           .required(translate("validationMessages.required")),
-    //         endDate: yup.string().notRequired(),
-    //       })
-    //       .required(translate("validationMessages.required"))
-    //   )
-    //   .min(1)
-    //   .required(translate("validationMessages.required")),
+    [AddCalendarTask.date]: yup
+      .array()
+      .of(
+        yup.object().shape({
+          startDate: yup
+            .string()
+            .required(translate("validationMessages.required")),
+          endDate: yup
+            .string()
+            .required(translate("validationMessages.required")),
+        })
+      )
+      .test(
+        "endDate-greater-than-startDate",
+        translate("validationMessages.endDateGreater"),
+        (dates) => {
+          if (!dates || !Array.isArray(dates)) return false;
+
+          return dates.every((dateItem) =>
+            moment(dateItem.endDate).isAfter(moment(dateItem.startDate))
+          );
+        }
+      )
+      .min(1, translate("validationMessages.required")),
     [AddCalendarTask.colour]: yup
       .string()
       .required(translate("validationMessages.required")),

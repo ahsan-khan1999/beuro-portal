@@ -358,7 +358,8 @@ export const generateDateChildren = (
 
     field: {
       type: Field.div,
-      id: "div-field",
+      id: "date",
+      name: "date",
       className:
         "flex justify-between bg-white rounded-lg py-[5px] px-[10px] mt-[14px]",
       children: [
