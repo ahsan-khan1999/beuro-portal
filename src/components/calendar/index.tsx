@@ -456,6 +456,61 @@ export const Calendar = () => {
           const viewType = info.view.type;
           const containerEl = document.querySelector(".fc-daygrid-day-events");
 
+          const currentDay = document.querySelectorAll(
+            ".fc-daygrid-day-number"
+          );
+          const currentDayBorder = document.querySelectorAll(
+            ".fc-daygrid-day-frame"
+          );
+
+          if (viewType === "dayGridMonth") {
+            // Apply `currentDayBorder` only for the `dayGridMonth` view
+            const currentDate = new Date().getDate();
+
+            currentDay.forEach((element, index) => {
+              if (
+                element.textContent != null &&
+                Number(element.textContent.trim()) === currentDate
+              ) {
+                element.classList.add("currentDay");
+
+                if (currentDayBorder[index]) {
+                  currentDayBorder[index].classList.add("currentDayBorder");
+                }
+              } else {
+                if (currentDayBorder[index]) {
+                  currentDayBorder[index].classList.remove("currentDayBorder");
+                }
+              }
+            });
+          }
+
+          const currentFullDate = new Date().toISOString().split("T")[0];
+          const columnHeaders = document.querySelectorAll("th[data-date]");
+
+          columnHeaders.forEach((header) => {
+            if (
+              document.querySelector(".fc-timeGridWeek-view") ||
+              document.querySelector(".fc-dayGridWeek-view")
+            ) {
+              if (header.getAttribute("data-date") === currentFullDate) {
+                const innerElement = header.querySelector(
+                  ".fc-scrollgrid-sync-inner"
+                );
+                if (innerElement) {
+                  innerElement.classList.add("currentWeekDay");
+                }
+              }
+            } else {
+              const innerElement = header.querySelector(
+                ".fc-scrollgrid-sync-inner"
+              );
+              if (innerElement) {
+                innerElement.classList.remove("currentWeekDay");
+              }
+            }
+          });
+
           if (viewType === "timeGridDay" && containerEl) {
             containerEl.classList.add("timeGridDay-flex");
           } else if (containerEl) {
@@ -481,7 +536,6 @@ export const Calendar = () => {
           }
 
           if (isModalOpen) {
-            // info.el.style.height = "auto";
             window.scrollTo({
               top: 0,
               left: 0,

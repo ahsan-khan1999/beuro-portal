@@ -13,8 +13,10 @@ export const LeadsCustomerDetailData = ({
   onClick?: (index: number, component: ComponentsType) => void;
   isAgent?: boolean;
 }) => {
-  const { leadDetails } = useAppSelector((state) => state.lead);
   const { t: translate } = useTranslation();
+  const { leadDetails } = useAppSelector((state) => state.lead);
+
+  console.log(leadDetails?.customerDetail?.gender, "gender");
 
   return (
     <LeadsCardLayout>

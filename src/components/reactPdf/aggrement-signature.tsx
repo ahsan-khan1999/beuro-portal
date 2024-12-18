@@ -1,5 +1,6 @@
 import { germanDateFormat, pdfDateFormat } from "@/utils/utility";
 import { Image, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { log } from "node:console";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -62,7 +63,8 @@ export const AggrementSignature = ({
   // useMemo(() => signature && onFileChange(), [signature]);
   // console.log(signature,"signature",imageSrc);
 
-  const date = pdfDateFormat(new Date().toString(), language || "de");
+  // const date = pdfDateFormat(new Date().toString(), language || "de");
+  const newData = new Date().toString();
 
   const langContent = {
     en: {
@@ -82,7 +84,7 @@ export const AggrementSignature = ({
           <View style={{ ...styles.innerDate, marginTop: signature ? 87 : 0 }}>
             {
               <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
-                {date && germanDateFormat(date)}
+                {newData && germanDateFormat(newData)}
               </Text>
             }
             <Text style={styles.dateText}>

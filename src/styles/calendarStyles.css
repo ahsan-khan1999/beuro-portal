@@ -170,6 +170,26 @@
   background-color: white !important;
 }
 
+.currentDay {
+  color: white !important;
+  padding: 3px 10px !important;
+  border-bottom-left-radius: 10px;
+  background-color: #3b76e2 !important;
+}
+
+.currentDayBorder {
+  border: 2px solid #3b76e2 !important;
+  border-radius: 10px !important;
+}
+
+.currentWeekDay {
+  background-color: #3b76e2 !important;
+}
+
+.currentWeekDay span {
+  color: white !important;
+}
+
 .fc-popover-body .fc-daygrid-event-harness > a > div#selected {
   height: auto !important;
 }
@@ -184,7 +204,6 @@
     align-items: center !important;
     flex-wrap: wrap !important;
     align-items: flex-start !important;
-    /* gap: 10px !important; */
     padding: 10px;
     margin-bottom: 0 !important;
   }
@@ -229,10 +248,20 @@
   .fc .fc-daygrid-more-link {
     font-size: 8px !important;
   }
+
+  .currentDay {
+    padding: 0 5px !important;
+  }
+
+  .currentDayBorder {
+    border: 2px solid #3b76e2 !important;
+    border-radius: 10px !important;
+  }
 }
 
 @media (max-width: 620px) {
   .fc-popover {
     min-width: 90% !important;
+    max-width: 90% !important;
   }
 }
