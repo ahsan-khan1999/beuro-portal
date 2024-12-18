@@ -417,6 +417,7 @@ export const Calendar = () => {
                 title={event?.title}
                 backrgoundColour={event.backgroundColor}
                 dotColour={event.textColor}
+                viewType={viewType}
               />
             );
           } else if (

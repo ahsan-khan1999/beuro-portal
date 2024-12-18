@@ -198,6 +198,10 @@
   padding-right: 50px;
 }
 
+.fc .fc-timegrid-slot {
+  height: 80px !important;
+}
+
 @media (min-width: 768px) {
   .timeGridDay-flex {
     display: flex !important;
