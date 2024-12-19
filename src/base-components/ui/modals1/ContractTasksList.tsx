@@ -101,7 +101,7 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
                         ? item?.formattedStartTime
                         : translate("calendar.all_day_task")}
                     </span>
-                    <div className="flex items-center gap-x-4 w-full">
+                    <div className="flex items-center gap-x-4 max-w-[210px] xMini:max-w-[430px]">
                       <span
                         className="w-3 h-3 rounded-full"
                         style={{
@@ -113,7 +113,7 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
 
                       {item?.title && (
                         <p
-                          className="text-[#393939] font-semibold text-[10px] xMini:text-sm whitespace-nowrap overflow-hidden text-ellipsis w-[calc(80%-50px)]"
+                          className="text-[#393939] font-semibold text-[10px] xMini:text-sm truncate whitespace-nowrap overflow-hidden text-ellipsis w-full"
                           title={item?.title}
                         >
                           {item?.title}
