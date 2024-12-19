@@ -69,8 +69,8 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
               </span>
               {currentDate.includes(",") && (
                 <>
-                  {", "}
                   <span className="text-[#adadad] text-xs xMini:text-lg font-medium">
+                    {", "}
                     {currentDate.split(",")[1]}
                   </span>
                 </>

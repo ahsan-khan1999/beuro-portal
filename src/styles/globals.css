@@ -775,6 +775,7 @@ input[type="date"] {
 .react-datepicker__header {
   background-color: #4a13e7 !important;
 }
+
 .react-datepicker__triangle {
   border-bottom-color: #4a13e7 !important;
   box-shadow: none !important;
@@ -804,3 +805,4 @@ input[type="date"] {
   align-items: center;
   justify-content: center;
 }
+

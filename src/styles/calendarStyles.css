@@ -173,7 +173,10 @@
 .currentDay {
   color: white !important;
   padding: 3px 10px !important;
-  border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-right: -1px;
+  margin-top: -1px;
   background-color: #3b76e2 !important;
 }
 
