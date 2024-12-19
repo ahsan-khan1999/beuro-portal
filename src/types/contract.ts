@@ -128,8 +128,8 @@ export interface Task {
   }[];
   isAllDay: boolean;
   colour: string;
-  createdAt: string;
-  createdBy: {
+  createdAt?: string;
+  createdBy?: {
     id: string;
     fullName: string;
     company: {
@@ -137,15 +137,19 @@ export interface Task {
       companyName: string;
     };
   };
-  note: string;
-  alertTime: number;
-  address: {
+  note?: string;
+  alertTime?: number;
+  address?: {
     streetNumber: string;
     postalCode: string;
     country: string;
   };
   type: string;
   contractID: string;
+  formattedStartTime?: string;
+  hasStartTime?: boolean;
+  clickedStartDate?: string;
+  clickedEndDate?: string;
 }
 
 export interface TaskWithSelectedDates extends Task {

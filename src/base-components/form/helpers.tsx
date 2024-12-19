@@ -20,7 +20,6 @@ import {
   CustomCheckBoxField,
   CustomFileUploadField,
   IconLabelFeild,
-  CalendarDatePickerField,
   ColourSelectField,
   RemainderSelectField,
   LocationSearchInputField,

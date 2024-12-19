@@ -323,16 +323,17 @@ export const addTaskFormField: GenerateAddTaskFormField = (
         control,
       },
     },
+
     {
       containerClass:
-        "mb-0 absolute right-[35px] bottom-[30px] bg-[#00000014] p-2 rounded-lg",
+        "mb-0 sticky left-[65%] bottom-0 bg-[#00000014] p-2 rounded-lg w-fit",
       field: {
         type: Field.button,
         id: "button",
         text: `${translate("common.save_button")}`,
         inputType: "submit",
         className:
-          "rounded-lg text-white hover:bg-none w-fit min-w-[84px] py-2 !h-[33px] ",
+          "rounded-lg text-white hover:bg-none w-fit min-w-[84px] py-2 !h-[33px]",
         loading: false,
       },
     },

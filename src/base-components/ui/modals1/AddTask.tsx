@@ -29,18 +29,6 @@ export const AddContractTask = ({
 
   const rightValue = locale === "en" ? "right-[170px]" : "right-[270px]";
 
-  // useEffect(() => {
-  //   const updateMaxHeight = () => {
-  //     const browserHeight = window.innerHeight;
-  //     const newMaxHeight = browserHeight < 830 ? "500px" : "750px";
-  //     setMaxHeight(newMaxHeight);
-  //   };
-
-  //   updateMaxHeight();
-  //   window.addEventListener("resize", updateMaxHeight);
-  //   return () => window.removeEventListener("resize", updateMaxHeight);
-  // }, []);
-
   useEffect(() => {
     const cleanup = setMaxHeightOnResize(setMaxHeight);
 
@@ -51,7 +39,7 @@ export const AddContractTask = ({
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName={`max-w-[350px] xMini:max-w-[375px] min-h-fit rounded-lg xMini:absolute xMini:top-[105px] ${rightValue} add-task-modal bg-[#F3F3F3] calendarShadow`}
+      containerClassName={`max-w-[365px] xMini:max-w-[375px] min-h-fit rounded-lg xMini:absolute xMini:top-[105px] ${rightValue} add-task-modal bg-[#F3F3F3] calendarShadow`}
     >
       <div
         className="px-3 xMini:px-[18px] py-4 hide-scrollbar"
@@ -59,6 +47,7 @@ export const AddContractTask = ({
           maxHeight: maxHeight,
           overflowY: "auto",
           overflowX: "hidden",
+          position: "relative",
         }}
       >
         <Form

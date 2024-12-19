@@ -17,6 +17,9 @@ import { TaskWithSelectedDates } from "@/types/contract";
 import { LocationIcon } from "@/assets/svgs/components/location-icon";
 import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
 import { CompanyLogoLoader } from "../loader/company-logo-loader";
+// import Image from "next/image";
+// import crossIcon from "@/assets/svgs/cross_icon.svg";
+
 export interface ContractTaskDetailProps {
   onDelete: (id: string) => void;
   onEditTask: (
@@ -90,6 +93,12 @@ export const ContractTaskDetail = ({
             overflowX: "hidden",
           }}
         >
+          {/* <Image
+            src={crossIcon}
+            alt="crossIcon"
+            className="absolute right-5 top-5 cursor-pointer"
+            onClick={onClose}
+          /> */}
           <div className="flex items-start gap-x-[8px]">
             <span
               className={`w-3 h-3 rounded-full`}

@@ -23,7 +23,7 @@ const initialState: ContractState = {
   contract: [],
   task: [],
   loading: false,
-  isLoading: true,
+  isLoading: false,
   error: {},
   lastPage: 1,
   totalCount: 10,
