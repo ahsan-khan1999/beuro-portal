@@ -25,6 +25,7 @@ import { FiltersDefaultValues } from "@/enums/static";
 import { FilterType } from "@/types";
 import { setImages } from "@/api/slices/imageSlice/image";
 import { DocumentViewerModal } from "@/base-components/ui/modals1/DocumentViewer";
+import { ContractTasksList } from "@/base-components/ui/modals1/ContractTasksList";
 
 export const useCalendar = () => {
   const { loading, task } = useAppSelector((state) => state.contract);
@@ -148,6 +149,7 @@ export const useCalendar = () => {
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const onCloseSecond = () => {
     dispatch(updateModalType({ type: ModalType.READ_CONTRACT_TASK_DETAIL }));
   };
@@ -229,10 +231,6 @@ export const useCalendar = () => {
     );
   };
 
-  // const handleImageSlider = () => {
-  //   dispatch(updateModalType({ type: ModalType.CREATION }));
-  // };
-
   const handleViewImages = async (
     id: string,
     e?: React.MouseEvent<HTMLSpanElement>
@@ -244,6 +242,15 @@ export const useCalendar = () => {
       updateModalType({
         type: ModalType.UPLOAD_OFFER_IMAGE,
         data: { contractID: id },
+      })
+    );
+  };
+
+  const handleMoreTasks = (tasks: Task[], currentDate: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.CONTRACT_TASK_LIST,
+        data: { tasks, currentDate },
       })
     );
   };
@@ -261,7 +268,6 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        // subHeading={translate("common.modals.task_updated_successfully")}
         route={onClose}
       />
     ),
@@ -269,7 +275,6 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.images_updated")}
-        // subHeading={translate("common.modals.images_updated_des")}
         route={onClose}
       />
     ),
@@ -277,7 +282,6 @@ export const useCalendar = () => {
       <CreationCreated
         onClose={onClose}
         heading={translate("common.modals.offer_created")}
-        // subHeading={translate("common.modals.task_deleted_successfully")}
         route={onClose}
       />
     ),
@@ -329,6 +333,7 @@ export const useCalendar = () => {
     [ModalType.UPLOAD_OFFER_IMAGE]: (
       <DocumentViewerModal onClose={onCloseSecond} />
     ),
+    [ModalType.CONTRACT_TASK_LIST]: <ContractTasksList onClose={onClose} />,
   };
 
   const renderModal = () => {
@@ -347,5 +352,6 @@ export const useCalendar = () => {
     setFilter,
     dispatch,
     handleFilterChange,
+    handleMoreTasks,
   };
 };

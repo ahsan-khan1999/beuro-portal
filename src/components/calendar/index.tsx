@@ -24,6 +24,7 @@ import {
   hasTime,
 } from "@/utils/utility";
 import { useAppSelector } from "@/hooks/useRedux";
+import { Task } from "@/types/contract";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth" | "dayGridWeek";
@@ -66,6 +67,7 @@ export const Calendar = () => {
   const { t: translate } = useTranslation();
   const calendarRef = useRef<FullCalendar>(null);
   const [currentDate, setCurrentDate] = useState<string>("");
+  const [moreModalDate, setMoreModalDate] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState<ViewType>("timeGridDay");
   const isSmallScreen = useIsSmallScreen(); // 1100px check
   const isSmallWeekScreen = useIsSmallWeekScreen(); // 768px check
@@ -81,6 +83,7 @@ export const Calendar = () => {
     filter,
     setFilter,
     handleFilterChange,
+    handleMoreTasks,
   } = useCalendar();
 
   const events = prepareEvents(rawEvents);
@@ -114,6 +117,14 @@ export const Calendar = () => {
       );
     }
     setCurrentDate(formattedDate);
+
+    const currentDate = calendarDayDateFormat(
+      date.toString(),
+      router.locale as string
+    );
+    formattedDate = currentDate;
+
+    setMoreModalDate(formattedDate);
   };
 
   const switchView = (viewType: ViewType) => {
@@ -160,6 +171,19 @@ export const Calendar = () => {
     }
   }, [router.locale]);
 
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const defaultModal = document.querySelector(".fc-more-popover");
+      if (defaultModal) {
+        defaultModal.remove();
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
   const handlePrviousClick = () => {
     if (calendarRef.current) {
       const calendarApi = calendarRef.current.getApi();
@@ -178,6 +202,37 @@ export const Calendar = () => {
 
   const getDayMaxEvents = () => {
     return isSmallScreen ? 2 : true;
+  };
+
+  const calculateEventDates = (event: any) => {
+    const originalStart = moment(
+      event.extendedProps?.originalStart || event.start
+    );
+    const originalEnd = moment(event.extendedProps?.originalEnd || event.end);
+    const isAllDay = event.allDay;
+    const isMultiDayEvent = originalStart.isBefore(originalEnd, "day");
+    const hasStartTime = originalStart.format("HH:mm") !== "00:00";
+
+    let clickedStartDate, clickedEndDate;
+
+    if (isMultiDayEvent && hasStartTime) {
+      clickedStartDate = originalStart.toISOString();
+      clickedEndDate = originalEnd
+        ? originalEnd.toISOString()
+        : clickedStartDate;
+    } else if (isAllDay) {
+      clickedStartDate = originalStart.format("YYYY-MM-DD");
+      clickedEndDate = originalEnd
+        ? originalEnd.format("YYYY-MM-DD")
+        : clickedStartDate;
+    } else {
+      clickedStartDate = originalStart.toISOString();
+      clickedEndDate = originalEnd
+        ? originalEnd.toISOString()
+        : clickedStartDate;
+    }
+
+    return { clickedStartDate, clickedEndDate };
   };
 
   return (
@@ -289,43 +344,55 @@ export const Calendar = () => {
         firstDay={1}
         moreLinkText={translate("calendar.more_text")}
         moreLinkClick={(info) => {
-          setIsModalOpen(true);
           info.jsEvent.preventDefault();
+          info.jsEvent.stopPropagation();
+
+          setIsModalOpen(true);
+
+          const moreTasks: Task[] = info.allSegs.map((seg) => {
+            const event = seg.event;
+            const { clickedStartDate, clickedEndDate } =
+              calculateEventDates(event);
+
+            const startMoment = moment(
+              event.extendedProps?.originalStart || event.start
+            );
+
+            const formattedStartTime = startMoment.format("HH:mm");
+            const hasStartTime = startMoment.format("HH:mm") !== "00:00";
+
+            return {
+              id: event.extendedProps?.id || event.id || "",
+              taskID: event.extendedProps.taskID || "",
+              isContrcatCreated: event.extendedProps.isContrcatCreated || false,
+              title: event.title || "",
+              date: [
+                {
+                  startDate: event.start?.toISOString() || "",
+                  endDate: event.end?.toISOString() || "",
+                },
+              ],
+              isAllDay: event.allDay || false,
+              colour: event.backgroundColor || "",
+              createdAt: event.extendedProps.createdAt || "",
+              type: event.extendedProps.type || "",
+              contractID: event.extendedProps.contractID || "",
+              formattedStartTime,
+              hasStartTime,
+              clickedStartDate,
+              clickedEndDate,
+            };
+          });
+
+          handleMoreTasks(moreTasks, moreModalDate);
         }}
         eventClick={(info) => {
           setIsModalOpen(false);
           const taskID = info.event.extendedProps.taskID;
-          const isAllDay = info.event.allDay;
 
-          const originalStart = moment(
-            info.event.extendedProps.originalStart || info.event.start
+          const { clickedStartDate, clickedEndDate } = calculateEventDates(
+            info.event
           );
-
-          const originalEnd = moment(
-            info.event.extendedProps.originalEnd || info.event.end
-          );
-
-          const isMultiDayEvent = originalStart.isBefore(originalEnd, "day");
-          const hasStartTime = originalStart.format("HH:mm") !== "00:00";
-
-          let clickedStartDate, clickedEndDate;
-
-          if (isMultiDayEvent && hasStartTime) {
-            clickedStartDate = originalStart.toISOString();
-            clickedEndDate = originalEnd
-              ? originalEnd.toISOString()
-              : clickedStartDate;
-          } else if (isAllDay) {
-            clickedStartDate = originalStart.format("YYYY-MM-DD");
-            clickedEndDate = originalEnd
-              ? originalEnd.format("YYYY-MM-DD")
-              : clickedStartDate;
-          } else {
-            clickedStartDate = originalStart.toISOString();
-            clickedEndDate = originalEnd
-              ? originalEnd.toISOString()
-              : clickedStartDate;
-          }
 
           handleContractTaskDetail(taskID, clickedStartDate, clickedEndDate);
         }}
@@ -465,7 +532,6 @@ export const Calendar = () => {
           );
 
           if (viewType === "dayGridMonth") {
-            // Apply `currentDayBorder` only for the `dayGridMonth` view
             const currentDate = new Date().getDate();
 
             currentDay.forEach((element, index) => {
