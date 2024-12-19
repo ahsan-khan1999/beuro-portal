@@ -253,7 +253,7 @@ export const Calendar = () => {
 
           <Button
             onClick={handleAddContractTask}
-            className="!h-fit py-2 px-4 xMini:px-[34px] flex items-center text-[13px] font-semibold bg-primary text-white rounded-md whitespace-nowrap"
+            className="!h-fit py-2 px-4 xMini:px-[34px] flex items-center text-sm font-semibold bg-primary text-white rounded-md whitespace-nowrap"
             text={translate("calendar.add_task")}
             id="add task"
             inputType="button"
