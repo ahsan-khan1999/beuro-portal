@@ -1280,6 +1280,7 @@
       "task_updated_successfully": "Task updated successfully",
       "task_deleted_successfully": "Task deleted successfully"
     },
+    "scroll_down":"Scroll down for more",
     "start_time": "Select start time",
     "end_time": "Select end time",
     "add_new_offer": "Add New Offer",
@@ -2384,9 +2385,9 @@
     "opend": "Opened"
   },
   "mail_tracker_status": {
-    "opend": "opend",
-    "failed": "failed",
-    "pending": "pending"
+    "opend": "Opened",
+    "failed": "Failed",
+    "pending": "Pending"
   },
   "support_request_status": {
     "pending": "pending",
