@@ -93,12 +93,12 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
         ) : (
           <>
             <div className="border-b border-b-black border-opacity-20 py-3">
-              <span className="text-[#adadad] text-xs xMini:text-lg font-medium pl-4">
+              <span className="text-[#393939] text-xs xMini:text-lg font-medium pl-4">
                 {currentDate?.split(",")[0]}
               </span>
               {currentDate?.includes(",") && (
                 <>
-                  <span className="text-[#adadad] text-xs xMini:text-lg font-medium">
+                  <span className="text-[#393939] text-xs xMini:text-lg font-medium">
                     {", "}
                     {currentDate?.split(",")[1]}
                   </span>
@@ -127,7 +127,7 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
                     } py-2`}
                   >
                     <span
-                      className={`text-[#adadad] text-xs xMini:text-lg font-normal min-w-[80px] xMini:min-w-[120px]`}
+                      className={`text-[#393939] text-xs xMini:text-lg font-normal min-w-[80px] xMini:min-w-[120px]`}
                     >
                       {item?.hasStartTime
                         ? item?.formattedStartTime

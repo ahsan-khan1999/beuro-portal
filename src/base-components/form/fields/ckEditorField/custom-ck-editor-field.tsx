@@ -8,8 +8,7 @@ const CustomCKEditor = ({
   field,
   trigger,
   data,
-  name,
-  type,
+  isTaskEditor,
 }: CKEditorBoxProps) => {
   return (
     <CKEditor
@@ -19,6 +18,43 @@ const CustomCKEditor = ({
       key={data}
       onReady={(editor) => {
         field.onChange(field.value);
+
+        const ckContent = editor.ui.getEditableElement();
+
+        if (isTaskEditor && ckContent) {
+          // Apply the custom class initially
+          ckContent.classList.add("custom-task-content");
+
+          // Ensure the class persists with a MutationObserver
+          const observer = new MutationObserver(() => {
+            if (!ckContent.classList.contains("custom-task-content")) {
+              ckContent.classList.add("custom-task-content");
+            }
+          });
+
+          observer.observe(ckContent, {
+            attributes: true, // Watch for attribute changes
+            attributeFilter: ["class"], // Specifically monitor the "class" attribute
+          });
+
+          // Reapply class on specific CKEditor events
+          editor.model.document.on("change:data", () => {
+            ckContent.classList.add("custom-task-content");
+          });
+
+          editor.editing.view.document.on("blur", () => {
+            ckContent.classList.add("custom-task-content");
+          });
+
+          editor.editing.view.document.on("focus", () => {
+            ckContent.classList.add("custom-task-content");
+          });
+
+          // Cleanup the observer when the editor is destroyed
+          editor.on("destroy", () => {
+            observer.disconnect();
+          });
+        }
       }}
       onChange={(event, editor) => {
         field.onChange(editor.getData());
@@ -38,54 +74,26 @@ const CustomCKEditor = ({
             "|",
             "heading",
             "|",
-            // "fontfamily",
             "fontsize",
-            // "fontColor",
-            // "fontBackgroundColor",
             "|",
             "bold",
             "italic",
-            // "underline",
             "strikethrough",
-            // "subscript",
-            // "superscript",
-            // "code",
             "|",
-            // "alignment",
             "link",
             "blockQuote",
-            // "codeBlock",
             "|",
             "bulletedList",
             "numberedList",
-            // "todoList",
             "outdent",
             "indent",
           ],
           shouldNotGroupWhenFull: true,
         },
         placeholder: translate("common.editor_placeholder"),
-        // exportPdf: {
-        //   stylesheets: ["EDITOR_STYLES"],
-        //   fileName: "talha.pdf",
-        //   converterUrl: "https://pdf-converter.cke-cs.com/v1/convert",
-        //   converterOptions: {
-        //     format: "A4",
-        //     margin_top: "10mm",
-        //     margin_bottom: "10mm",
-        //     margin_right: "10mm",
-        //     margin_left: "10mm",
-        //     page_orientation: "portrait",
-        //     header_html: undefined,
-        //     footer_html: undefined,
-        //     header_and_footer_css: undefined,
-        //     wait_for_network: true,
-        //     wait_time: 0,
-        //   },
-        //   dataCallback: (editor) => editor.getData(),
-        // },
       }}
     />
   );
 };
+
 export default CustomCKEditor;

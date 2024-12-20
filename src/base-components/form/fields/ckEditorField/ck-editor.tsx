@@ -12,7 +12,7 @@ export const CkEditor = ({
   control,
   name,
   trigger,
-  className,
+  isTaskEditor,
 }: CKEditorProps) => {
   return (
     <Controller
@@ -28,6 +28,7 @@ export const CkEditor = ({
             id={id}
             type="Editor"
             data={defaultValue}
+            isTaskEditor={isTaskEditor}
           />
         );
       }}

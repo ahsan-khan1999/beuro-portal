@@ -108,6 +108,7 @@
   border: none !important;
   padding: 0 !important;
   max-width: 100% !important;
+  border-radius: 0 !important;
 }
 
 .fc .fc-timegrid-axis-cushion {
@@ -158,9 +159,9 @@
   margin: 10px 0;
 }
 
-.fc-event-main {
+/* .fc-event-main {
   height: max-content;
-}
+} */
 
 .fc {
   background-color: white;

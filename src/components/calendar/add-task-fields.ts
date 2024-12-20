@@ -320,13 +320,15 @@ export const addTaskFormField: GenerateAddTaskFormField = (
         className: `!py-4 !border-[#fff] focus:!border-primary`,
         id: "note",
         name: "note",
+        isTaskEditor: true,
         control,
       },
     },
 
     {
-      containerClass:
-        "mb-0 sticky left-[65%] bottom-0 bg-[#00000014] p-2 rounded-lg w-fit",
+      // containerClass:
+      //   "mb-0 sticky left-[65%] bottom-0 bg-[#00000014] p-2 rounded-lg w-fit",
+      containerClass: "mb-0 flex justify-end mt-5",
       field: {
         type: Field.button,
         id: "button",
