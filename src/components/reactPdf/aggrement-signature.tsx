@@ -1,6 +1,5 @@
-import { germanDateFormat, pdfDateFormat } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import { Image, StyleSheet, Text, View } from "@react-pdf/renderer";
-import { log } from "node:console";
 
 const styles = StyleSheet.create({
   wrapper: {

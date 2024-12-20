@@ -29,14 +29,13 @@ export const DayView = ({
   showOnlyTitle = false,
   fixedHeight = false,
   isWeekView,
-  hasStartTime,
 }: DayViewProps) => {
   const containerClasses = combineClasses(
     `flex flex-col  ${isWeekView ? "gap-y-2" : "gap-y-1"} p-1 cursor-pointer`,
     containerClassName
   );
 
-  const eventHeight = isWeekView ? "100px" : fixedHeight ? "50px" : "auto";
+  const eventHeight = isWeekView ? "100px" : fixedHeight ? "50px" : "100%";
 
   return (
     <div

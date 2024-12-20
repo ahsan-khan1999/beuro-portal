@@ -183,7 +183,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .scrollhost {
   overflow: auto;
   -ms-overflow-style: none;
-  scrollbar-color: transparent transparent; /*just hides the scrollbar for firefox */
+  scrollbar-color: transparent transparent;
 }
 
 .suggestions-list {
@@ -806,3 +806,10 @@ input[type="date"] {
   justify-content: center;
 }
 
+.custom-task-content {
+  min-height: 150px !important;
+  max-height: 150px !important;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -446,7 +446,7 @@ export const Calendar = () => {
 
           const showEndTime = daysDuration > 0;
           const showOnlyTitle = duration < 60;
-          const fixedHeight = duration < 1;
+          const fixedHeight = duration < 15;
 
           if (viewType === "dayGridMonth") {
             if (isSmallScreen) {
@@ -522,11 +522,17 @@ export const Calendar = () => {
         }}
         eventDidMount={(info) => {
           const viewType = info.view.type;
+          const { event } = info;
+          // const backgroundColor = event.backgroundColor || "#cccccc";
+
+          // info.el.style.backgroundColor = `${backgroundColor}4D`;
+
           const containerEl = document.querySelector(".fc-daygrid-day-events");
 
           const currentDay = document.querySelectorAll(
             ".fc-daygrid-day-number"
           );
+
           const currentDayBorder = document.querySelectorAll(
             ".fc-daygrid-day-frame"
           );

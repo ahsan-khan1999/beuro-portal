@@ -90,6 +90,7 @@ export interface TextAreaProps extends BaseFieldProps<Field.textArea> {
 // ckEditor is added
 export interface CKEditorProps extends BaseFieldProps<Field.ckEditor> {
   value?: string;
+  isTaskEditor?: boolean;
   control: Control<FieldValues>;
   trigger?: UseFormTrigger<FieldValues>;
 }
@@ -102,6 +103,7 @@ export interface CKEditorBoxProps {
   trigger?: UseFormTrigger<FieldValues>;
   name?: string;
   type: string;
+  isTaskEditor?: boolean;
 }
 
 export interface CreditCardInputProps

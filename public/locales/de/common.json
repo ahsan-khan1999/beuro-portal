@@ -1274,6 +1274,7 @@
       "task_updated_successfully": "Aufgabe erfolgreich aktualisiert",
       "task_deleted_successfully": "Aufgabe erfolgreich gelöscht"
     },
+    "scroll_down": "Scrollen Sie nach unten, um mehr zu erfahren",
     "start_time": "Wählen Sie die Startzeit",
     "end_time": "Wählen Sie die Endzeit",
     "add_new_offer": "Neues Angebot hinzufügen",
@@ -2326,7 +2327,8 @@
   "Sent": "Gesendet",
   "gender": {
     "Mr": "Herr",
-    "Mrs": "Frau"
+    "Mrs": "Frau",
+    "undefined": "undefiniert"
   },
   "lead_status": {
     "Open": "Offen",
@@ -2390,7 +2392,8 @@
   },
   "customer_type": {
     "individual": "Privat",
-    "company": "Unternehmen"
+    "company": "Unternehmen",
+    "undefined": "undefiniert"
   },
   "frequency": {
     "Weekly": "Wöchentlich",

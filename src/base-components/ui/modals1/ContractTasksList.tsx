@@ -10,6 +10,7 @@ import { CustomerPromiseActionType } from "@/types/customer";
 import Image from "next/image";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { CompanyLogoLoader } from "../loader/company-logo-loader";
+import { useEffect, useRef, useState } from "react";
 
 export interface ContractTasksListProps {
   onClose: () => void;
@@ -19,8 +20,32 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.contract);
   const { tasks, currentDate } = useAppSelector(
-    (state) => state.global.modal.data
+    (state) => state.global.modal.data || {}
   );
+
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  const checkOverflow = () => {
+    if (contentRef.current) {
+      setIsOverflowing(
+        contentRef.current.scrollHeight > contentRef.current.clientHeight
+      );
+    }
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => checkOverflow(), 0);
+
+    checkOverflow();
+
+    window.addEventListener("resize", checkOverflow);
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener("resize", checkOverflow);
+    };
+  }, [tasks]);
 
   const handleContractTaskDetail = (
     taskID: string,
@@ -49,7 +74,11 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
       customOpacity={true}
       containerClassName={`max-w-[340px] xMini:max-w-[600px] min-h-fit rounded-lg bg-[#F3F3F3] calendarShadow`}
     >
-      <div className="rounded-lg bg-white pb-10 relative">
+      <div
+        className={`rounded-lg bg-white ${
+          isOverflowing ? "pb-4" : "pb-8"
+        } relative`}
+      >
         <Image
           src={crossIcon}
           alt="crossIcon"
@@ -64,48 +93,51 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
         ) : (
           <>
             <div className="border-b border-b-black border-opacity-20 py-3">
-              <span className="text-[#adadad] text-xs xMini:text-lg font-medium  pl-4">
-                {currentDate.split(",")[0]}
+              <span className="text-[#393939] text-xs xMini:text-lg font-medium pl-4">
+                {currentDate?.split(",")[0]}
               </span>
-              {currentDate.includes(",") && (
+              {currentDate?.includes(",") && (
                 <>
-                  <span className="text-[#adadad] text-xs xMini:text-lg font-medium">
+                  <span className="text-[#393939] text-xs xMini:text-lg font-medium">
                     {", "}
-                    {currentDate.split(",")[1]}
+                    {currentDate?.split(",")[1]}
                   </span>
                 </>
               )}
             </div>
-            <div className="pl-10 max-h-[500px] overflow-y-scroll overflow-x-hidden hide-scrollbar">
+            <div
+              ref={contentRef}
+              className="pl-4 xMini:pl-10 max-h-[500px] overflow-y-scroll overflow-x-hidden hide-scrollbar"
+            >
               {tasks?.map((item: any, index: any) => {
                 return (
                   <div
                     key={index}
                     onClick={() =>
                       handleContractTaskDetail(
-                        item.taskID,
+                        item?.taskID,
                         item?.clickedStartDate,
                         item?.clickedEndDate
                       )
                     }
                     className={`flex items-center cursor-pointer ${
-                      index !== tasks.length - 1
+                      index !== tasks?.length - 1
                         ? "border-b border-b-black border-opacity-20"
                         : ""
                     } py-2`}
                   >
                     <span
-                      className={`text-[#adadad] text-xs xMini:text-lg font-normal min-w-[80px] xMini:min-w-[120px]`}
+                      className={`text-[#393939] text-xs xMini:text-lg font-normal min-w-[80px] xMini:min-w-[120px]`}
                     >
                       {item?.hasStartTime
                         ? item?.formattedStartTime
                         : translate("calendar.all_day_task")}
                     </span>
-                    <div className="flex items-center gap-x-4 max-w-[210px] xMini:max-w-[430px]">
+                    <div className="flex items-center gap-x-4 max-w-[230px] xMini:max-w-[430px]">
                       <span
                         className="w-3 h-3 rounded-full"
                         style={{
-                          backgroundColor: `${item.colour || "#4A13E7"}`,
+                          backgroundColor: `${item?.colour || "#4A13E7"}`,
                           minHeight: "12px",
                           minWidth: "12px",
                         }}
@@ -124,6 +156,12 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
                 );
               })}
             </div>
+
+            {isOverflowing && (
+              <div className="text-center text-xs xMini:text-sm font-medium text-[#393939] py-3">
+                {translate("common.scroll_down")}...
+              </div>
+            )}
           </>
         )}
       </div>
