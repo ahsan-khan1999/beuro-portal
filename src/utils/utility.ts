@@ -546,7 +546,8 @@ export const convertToLocal = (
 
 export const convertUTCToLocalDate = (utcDate: string): string => {
   const localDateObj = new Date(utcDate);
-  const localDate = moment(localDateObj).format("DD.MM.YYYY");
+  // const localDate = moment(localDateObj).format("DD.MM.YYYY");
+  const localDate = moment(localDateObj).format("YYYY-MM-DD");
   return localDate;
 };
 
@@ -1790,6 +1791,7 @@ export function formatDateTimeToDateMango(date: string) {
   if (!date) return null;
   return moment(date).format("YYYY-MM-DD");
 }
+
 export function formatDateTimeToTime(date: string) {
   return moment(date).format("HH:mm");
 }

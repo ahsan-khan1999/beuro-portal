@@ -2331,7 +2331,8 @@
   "Sent": "Sent",
   "gender": {
     "Mr": "Mr",
-    "Mrs": "Mrs"
+    "Mrs": "Mrs",
+    "undefined":"Undefined"
   },
   "lead_status": {
     "Open": "Open",
@@ -2395,7 +2396,8 @@
   },
   "customer_type": {
     "individual": "individual",
-    "company": "company"
+    "company": "company",
+    "undefined":"undefined"
   },
   "frequency": {
     "Weekly": "Weekly",

@@ -2327,7 +2327,8 @@
   "Sent": "Gesendet",
   "gender": {
     "Mr": "Herr",
-    "Mrs": "Frau"
+    "Mrs": "Frau",
+    "undefined": "undefiniert"
   },
   "lead_status": {
     "Open": "Offen",
@@ -2391,7 +2392,8 @@
   },
   "customer_type": {
     "individual": "Privat",
-    "company": "Unternehmen"
+    "company": "Unternehmen",
+    "undefined": "undefiniert"
   },
   "frequency": {
     "Weekly": "Wöchentlich",

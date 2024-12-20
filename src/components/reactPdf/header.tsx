@@ -1,10 +1,6 @@
 import { DocumentHeaderDetailsProps } from "@/types";
 import { HeaderLabel, HeaderLabelNr } from "@/utils/static";
-import {
-  convertUTCToLocalDate,
-  germanDateFormat,
-  pdfDateFormat,
-} from "@/utils/utility";
+import { convertUTCToLocalDate, germanDateFormat } from "@/utils/utility";
 import { View, Text, Image } from "@react-pdf/renderer";
 
 export const Header = ({

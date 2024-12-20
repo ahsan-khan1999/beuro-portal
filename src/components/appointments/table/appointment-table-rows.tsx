@@ -8,7 +8,7 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
 import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
 import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
-import { convertToLocal, viewConvertUTCToLocalDate } from "@/utils/utility";                    
+import { convertToLocal, viewConvertUTCToLocalDate } from "@/utils/utility";
 
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
