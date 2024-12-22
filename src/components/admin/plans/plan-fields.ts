@@ -297,7 +297,7 @@ export const planDetailsFormField: GeneratePlansFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: `flex space-x-[18px] mt-8 ${isUpdate && "hidden"}`,
+        className: `flex space-x-[18px] mt-8 pb-6 ${isUpdate && "hidden"}`,
         children: [
           {
             containerClass: "mb-0",

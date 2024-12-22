@@ -94,7 +94,7 @@ export default function useCustomerDetailAdmin() {
     console.log("delete company");
   };
 
-  const handleCompanyUpdate = async (isAppointment: boolean) => {
+  const handleCompanyUpdate = async (isAppointment?: boolean) => {
     if (!companyDetails?.id) return;
 
     const response = await dispatch(
@@ -125,6 +125,17 @@ export default function useCustomerDetailAdmin() {
     if (res?.payload) handleDefaultModal();
   };
 
+  const handleAddAppointment = (isAppointment?: boolean) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.ARE_ADD_APPOINTMENTS,
+        data: {
+          isAppointment,
+        },
+      })
+    );
+  };
+
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.ARE_YOU_SURE_CUSTOMER]: (
       <WarningModal handleCreated={handleCreated} onClose={onClose} />
@@ -135,6 +146,14 @@ export default function useCustomerDetailAdmin() {
         onSuccess={handleAreYouSure}
         heading={translate("common.are_you_sure_modal.title")}
         sub_heading={translate("common.are_you_sure_modal.sub_heading")}
+      />
+    ),
+    [ModalType.ARE_ADD_APPOINTMENTS]: (
+      <AreYouSureMakeAccountFree
+        onClose={onClose}
+        onSuccess={handleCompanyUpdate}
+        heading={translate("common.are_you_sure_modal.title")}
+        sub_heading={translate("common.are_you_sure_modal.appointment_heading")}
       />
     ),
     [ModalType.CREATION]: (
@@ -183,5 +202,6 @@ export default function useCustomerDetailAdmin() {
     handleMakeAccountFree,
     deleteHandler,
     handleCompanyUpdate,
+    handleAddAppointment,
   };
 }

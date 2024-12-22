@@ -1506,7 +1506,8 @@
     },
     "are_you_sure_modal": {
       "title": "Sind Sie sicher",
-      "sub_heading": "Sie wollen dieses Konto kostenlos machen",
+      "sub_heading": "Sie möchten dieses Konto kostenlos machen",
+      "appointment_heading": "Sie möchten Termine hinzufügen",
       "cancel_button": "Abbrechen",
       "yes_button": "Ja",
       "confirm_heading": "Bitte Bestätigen das Unternehmen",
@@ -2406,7 +2407,8 @@
     "Diamond": "Diamant",
     "Free": "Kostenlos",
     "Gold": "Gold",
-    "Platinium": "Platinium"
+    "Platinium": "Platin",
+    "Platinum": "Platin"
   },
   "selected_month": {
     "January": "Januar",

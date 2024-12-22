@@ -53,7 +53,7 @@ const TableRow = ({
                 <div className="py-4 flex items-center justify-center">
                   <span className="border-2 border-[#D9D9D9] rounded-full p-1 h-[40px] w-[40px] flex items-center justify-center">
                     <Image
-                      src={item?.company?.logo || userIcon}
+                      src={userIcon}
                       alt="company logo"
                       height={29}
                       width={28}
