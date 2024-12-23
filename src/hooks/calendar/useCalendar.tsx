@@ -155,12 +155,12 @@ export const useCalendar = () => {
     dispatch(updateModalType({ type: ModalType.READ_CONTRACT_TASK_DETAIL }));
   };
 
-  const handleAddContractTask = () => {
-    if (!isContractId) {
-      dispatch(setContractTaskDetails(DEFAULT_CONTRACT_TASK));
-    }
-    dispatch(updateModalType({ type: ModalType.ADD_CONTRACT_TASK }));
-  };
+  // const handleAddContractTask = () => {
+  //   if (!isContractId) {
+  //     dispatch(setContractTaskDetails(DEFAULT_CONTRACT_TASK));
+  //   }
+  //   dispatch(updateModalType({ type: ModalType.ADD_CONTRACT_TASK }));
+  // };
 
   const handleContractTaskDetail = (
     taskID: string,
@@ -382,7 +382,7 @@ export const useCalendar = () => {
     tabs,
     renderModal,
     loading,
-    handleAddContractTask,
+    // handleAddContractTask,
     task,
     events,
     handleContractTaskDetail,

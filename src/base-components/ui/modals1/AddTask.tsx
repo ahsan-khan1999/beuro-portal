@@ -4,6 +4,7 @@ import { Form } from "@/base-components/form/form";
 import useAddTask from "@/hooks/calendar/useAddTask";
 import { useRouter } from "next/router";
 import { useOutsideClick } from "@/utils/hooks";
+import { useEffect, useState } from "react";
 // import { setMaxHeightOnResize } from "@/utils/utility";
 
 export interface AddTaskModalProps {
@@ -34,13 +35,28 @@ export const AddContractTask = ({
     onIsModal,
   });
 
-  const rightValue = locale === "en" ? "right-[170px]" : "right-[280px]";
+  const rightValue =
+    locale === "en" ? "xMini:right-[170px]" : "xMini:right-[280px]";
 
   // useEffect(() => {
   //   const cleanup = setMaxHeightOnResize(setMaxHeight);
 
   //   return cleanup;
   // }, []);
+
+  // State to track screen width
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 730);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWideScreen(window.innerWidth > 730);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     // <BaseModal
@@ -50,7 +66,10 @@ export const AddContractTask = ({
     // >
     <div
       ref={ref}
-      className={`shadow-followUp absolute px-3 xMini:px-[18px] py-4 max-w-[365px] xMini:max-w-[375px] bg-[#f3f3f3] !z-40 rounded-lg top-[105px] add-task-modal ${rightValue}`}
+      className={`task-modal shadow-followUp absolute px-3 xMini:px-[18px] py-4 w-[90%] xMini:w-[375px] bg-[#f3f3f3] !z-40 rounded-lg top-[200px] xMini:top-[110px] ${rightValue} ${
+        isWideScreen ? "add-task-modal" : "follow-up-container"
+      }`}
+
       // style={{
       //   maxHeight: maxHeight,
       //   overflowY: "auto",

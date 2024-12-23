@@ -33,9 +33,6 @@ export const CustomColorSelectionField = ({
     rows?.push(options?.slice(i, i + 3));
   }
 
-  console.log(value, "value");
-  console.log(selectedTime, "selectedTime");
-
   const formatTime = (value: number) => {
     if (value === 60) return "1";
     if (value === 120) return "2";
@@ -60,8 +57,6 @@ export const CustomColorSelectionField = ({
           <div className={rowClasses} key={rowIndex}>
             {row?.map((item, index) => {
               const isSelected = selectedTime === item?.value;
-
-              console.log(isSelected, "isSelected");
 
               const eventSelectClasses = combineClasses(
                 `p-1 cursor-pointer flex flex-col items-center gap-y-1 border-r border-r-[#000] border-opacity-30 ${
