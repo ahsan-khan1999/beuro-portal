@@ -24,6 +24,8 @@ export const addTaskFormField: GenerateAddTaskFormField = (
   date,
   onDateChange
 ) => {
+  console.log(alertTime, "alertTime");
+
   const { t: translate } = useTranslation();
   const formField: FormField[] = [
     {

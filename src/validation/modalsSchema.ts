@@ -167,14 +167,16 @@ export const generateAddTaskValidationSchema = (translate: Function) => {
         })
       )
       .test(
-        "endDate-greater-than-startDate",
+        "endDate-greater-or-equal-startDate",
         translate("validationMessages.endDateGreater"),
         (dates) => {
           if (!dates || !Array.isArray(dates)) return false;
 
-          return dates.every((dateItem) =>
-            moment(dateItem.endDate).isAfter(moment(dateItem.startDate))
-          );
+          return dates.every((dateItem) => {
+            const startDate = moment(dateItem.startDate).startOf("day");
+            const endDate = moment(dateItem.endDate).startOf("day");
+            return endDate.isSameOrAfter(startDate);
+          });
         }
       )
       .min(1, translate("validationMessages.required")),

@@ -1,3 +1,7 @@
+import "moment/locale/de";
+import moment from "moment";
+import { DayView } from "./day-view";
+import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -8,11 +12,7 @@ import { CalendarTab } from "@/base-components/ui/tab/calendarTab";
 import { useTranslation } from "next-i18next";
 import { CalendarApi } from "@fullcalendar/core";
 import { ActionsTab } from "@/base-components/ui/tab/actions-tab";
-import "moment/locale/de";
-import moment from "moment";
 import { extendMoment } from "moment-range";
-import { useRouter } from "next/router";
-import { DayView } from "./day-view";
 import { AllDayEvent } from "./all-day-event";
 import { useCalendar } from "@/hooks/calendar/useCalendar";
 import { DayHeaderContent } from "./day-header-content";
@@ -25,6 +25,7 @@ import {
 } from "@/utils/utility";
 import { useAppSelector } from "@/hooks/useRedux";
 import { Task } from "@/types/contract";
+import { AddContractTask } from "@/base-components/ui/modals1/AddTask";
 
 const Moment = extendMoment(moment as any);
 type ViewType = "timeGridDay" | "timeGridWeek" | "dayGridMonth" | "dayGridWeek";
@@ -63,7 +64,7 @@ const prepareEvents = (rawEvents: EventType[]): EventType[] => {
 };
 
 export const Calendar = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const { t: translate } = useTranslation();
   const calendarRef = useRef<FullCalendar>(null);
   const [currentDate, setCurrentDate] = useState<string>("");
@@ -76,23 +77,42 @@ export const Calendar = () => {
 
   const {
     events: rawEvents,
-    handleAddContractTask,
     handleContractTaskDetail,
     renderModal,
     tabs,
+    router,
     filter,
     setFilter,
     handleFilterChange,
     handleMoreTasks,
+    handleTaskUpdateSuccess,
+    handleTaskSuccess,
+    dispatch,
+    setContractTaskDetails,
+    DEFAULT_CONTRACT_TASK,
+    isModal,
+    setIsModal,
+    isContractId,
+    handleClickedOutSide,
   } = useCalendar();
 
   const events = prepareEvents(rawEvents);
 
+  const isEditTask = router.query.isUpdateTask;
+
   useEffect(() => {
-    if (router.query.isContractId) {
+    if (isContractId) {
       handleAddContractTask();
     }
-  }, [router.query.isContractId]);
+  }, [isContractId]);
+
+  const handleAddContractTask = () => {
+    if (!isContractId) {
+      dispatch(setContractTaskDetails(DEFAULT_CONTRACT_TASK));
+    }
+
+    setIsModal(!isModal);
+  };
 
   const updateDateDisplay = (date: Date, viewType: ViewType) => {
     let formattedDate = "";
@@ -183,6 +203,12 @@ export const Calendar = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (isEditTask === "true") {
+      setIsModal(true);
+    }
+  }, [router.query]);
 
   const handlePrviousClick = () => {
     if (calendarRef.current) {
@@ -319,6 +345,16 @@ export const Calendar = () => {
           </div>
         </div>
       </div>
+
+      {isModal && (
+        <AddContractTask
+          isUpdate={isEditTask ? true : false}
+          onSuccess={handleTaskSuccess}
+          onUpdateSuccess={handleTaskUpdateSuccess}
+          onIsModal={setIsModal}
+          onClose={handleClickedOutSide}
+        />
+      )}
 
       <FullCalendar
         locale={currentLanguage}

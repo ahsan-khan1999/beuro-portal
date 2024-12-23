@@ -1,6 +1,6 @@
 import { RemainderSelectProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const CustomColorSelectionField = ({
   options,
@@ -12,7 +12,11 @@ export const CustomColorSelectionField = ({
   trigger,
   onChange,
 }: RemainderSelectProps) => {
-  const [selectedTime, setSelectedTime] = useState(value || 0);
+  const [selectedTime, setSelectedTime] = useState(value);
+
+  useEffect(() => {
+    setSelectedTime(value);
+  }, [value]);
 
   const handleColorSelect = (value: number) => {
     setSelectedTime(value);
@@ -28,6 +32,9 @@ export const CustomColorSelectionField = ({
   for (let i = 0; i < options?.length; i += 3) {
     rows?.push(options?.slice(i, i + 3));
   }
+
+  console.log(value, "value");
+  console.log(selectedTime, "selectedTime");
 
   const formatTime = (value: number) => {
     if (value === 60) return "1";
@@ -53,6 +60,8 @@ export const CustomColorSelectionField = ({
           <div className={rowClasses} key={rowIndex}>
             {row?.map((item, index) => {
               const isSelected = selectedTime === item?.value;
+
+              console.log(isSelected, "isSelected");
 
               const eventSelectClasses = combineClasses(
                 `p-1 cursor-pointer flex flex-col items-center gap-y-1 border-r border-r-[#000] border-opacity-30 ${
