@@ -1,6 +1,6 @@
 import { RemainderSelectProps } from "@/types";
 import { combineClasses } from "@/utils/utility";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const CustomColorSelectionField = ({
   options,
@@ -12,7 +12,11 @@ export const CustomColorSelectionField = ({
   trigger,
   onChange,
 }: RemainderSelectProps) => {
-  const [selectedTime, setSelectedTime] = useState(value || 0);
+  const [selectedTime, setSelectedTime] = useState(value);
+
+  useEffect(() => {
+    setSelectedTime(value);
+  }, [value]);
 
   const handleColorSelect = (value: number) => {
     setSelectedTime(value);

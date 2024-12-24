@@ -11,8 +11,6 @@ import {
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Locale } from "@/types";
 import { BaseButton } from "@/base-components/ui/button/base-button";
-import { isJSON } from "@/utils/functions";
-import { getUser } from "@/utils/auth.util";
 import { useTranslation } from "next-i18next";
 
 const VerifyEmail = () => {
@@ -21,9 +19,9 @@ const VerifyEmail = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.auth);
-  const user = isJSON(getUser());
   const [isContinue, setIsContinue] = useState(false);
   const { otp } = router.query;
+
   useEffect(() => {
     if (otp) {
       dispatch(verifyOtp(router)).then((response: any) => {
@@ -34,9 +32,11 @@ const VerifyEmail = () => {
       });
     }
   }, [dispatch, otp]);
+
   const handleSendOtp = () => {
     dispatch(sendOtpViaEmail({}));
   };
+
   const handleRouteChange = () => {
     // conditionHandlerProfile(router, user)
     router.push("/login");
@@ -79,7 +79,6 @@ const VerifyEmail = () => {
 };
 
 export default VerifyEmail;
-
 
 export const getStaticProps = async ({ locale }: Locale) => ({
   props: {

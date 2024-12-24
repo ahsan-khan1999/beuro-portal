@@ -1280,7 +1280,7 @@
       "task_updated_successfully": "Task updated successfully",
       "task_deleted_successfully": "Task deleted successfully"
     },
-    "scroll_down":"Scroll down for more",
+    "scroll_down": "Scroll down for more",
     "start_time": "Select start time",
     "end_time": "Select end time",
     "add_new_offer": "Add New Offer",
@@ -1512,7 +1512,8 @@
     },
     "are_you_sure_modal": {
       "title": "Are You Sure",
-      "sub_heading": "You want yo make this account free",
+      "sub_heading": "You want to make this account free",
+      "appointment_heading": "You want to add appointments",
       "cancel_button": "Cancel",
       "yes_button": "Yes",
       "confirm_heading": "Please confirm Company",
@@ -2332,7 +2333,7 @@
   "gender": {
     "Mr": "Mr",
     "Mrs": "Mrs",
-    "undefined":"Undefined"
+    "undefined": "Undefined"
   },
   "lead_status": {
     "Open": "Open",
@@ -2397,7 +2398,7 @@
   "customer_type": {
     "individual": "individual",
     "company": "company",
-    "undefined":"undefined"
+    "undefined": "undefined"
   },
   "frequency": {
     "Weekly": "Weekly",
@@ -2410,7 +2411,8 @@
     "Diamond": "Diamond",
     "Free": "Free",
     "Gold": "Gold",
-    "Platinium": "Platinium"
+    "Platinium": "Platinium",
+    "Platinum": "Platinum"
   },
   "selected_month": {
     "January": "January",

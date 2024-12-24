@@ -4,7 +4,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useTranslation } from "next-i18next";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
-import { AddContractTask } from "@/base-components/ui/modals1/AddTask";
+// import { AddContractTask } from "@/base-components/ui/modals1/AddTask";
 import localStoreUtil from "@/utils/localstore.util";
 import { DEFAULT_CONTRACT_TASK } from "@/utils/static";
 import {
@@ -28,8 +28,8 @@ import { DocumentViewerModal } from "@/base-components/ui/modals1/DocumentViewer
 import { ContractTasksList } from "@/base-components/ui/modals1/ContractTasksList";
 
 export const useCalendar = () => {
-  const { loading, task } = useAppSelector((state) => state.contract);
   const [reminderEvents, setReminderEvents] = useState<Task[]>([]);
+  const { loading, task } = useAppSelector((state) => state.contract);
   const [triggeredReminders, setTriggeredReminders] = useState<Set<string>>(
     new Set()
   );
@@ -40,8 +40,9 @@ export const useCalendar = () => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { t: translate } = useTranslation();
   const { isContractId } = router.query;
+  const { t: translate } = useTranslation();
+  const [isModal, setIsModal] = useState<boolean>(false);
   const { modal } = useAppSelector((state) => state.global);
   const [currentTask, setCurrentTask] = useState<Task[]>(task || []);
 
@@ -154,12 +155,12 @@ export const useCalendar = () => {
     dispatch(updateModalType({ type: ModalType.READ_CONTRACT_TASK_DETAIL }));
   };
 
-  const handleAddContractTask = () => {
-    if (!isContractId) {
-      dispatch(setContractTaskDetails(DEFAULT_CONTRACT_TASK));
-    }
-    dispatch(updateModalType({ type: ModalType.ADD_CONTRACT_TASK }));
-  };
+  // const handleAddContractTask = () => {
+  //   if (!isContractId) {
+  //     dispatch(setContractTaskDetails(DEFAULT_CONTRACT_TASK));
+  //   }
+  //   dispatch(updateModalType({ type: ModalType.ADD_CONTRACT_TASK }));
+  // };
 
   const handleContractTaskDetail = (
     taskID: string,
@@ -219,15 +220,36 @@ export const useCalendar = () => {
     clickedStartDate?: string,
     clickedEndDate?: string
   ) => {
-    dispatch(
-      updateModalType({
-        type: ModalType.UPDATE_ADD_CONTRACT_TASK,
-        data: {
-          id: id,
-          clickedStartDate: clickedStartDate,
-          clickedEndDate: clickedEndDate,
-        },
-      })
+    // dispatch(
+    //   updateModalType({
+    //     type: ModalType.UPDATE_ADD_CONTRACT_TASK,
+    //     data: {
+    //       id: id,
+    //       clickedStartDate: clickedStartDate,
+    //       clickedEndDate: clickedEndDate,
+    //     },
+    //   })
+    // );
+
+    dispatch(updateModalType({ type: ModalType.NONE }));
+
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, isUpdateTask: "true", taskId: id },
+    });
+
+    dispatch(readContractTaskDetail({ params: { filter: id } })).then(
+      (res: CustomerPromiseActionType) => {
+        if (res?.payload) {
+          dispatch(
+            setContractTaskDetails({
+              ...res.payload,
+              clickedStartDate: clickedStartDate,
+              clickedEndDate: clickedEndDate,
+            })
+          );
+        }
+      }
     );
   };
 
@@ -253,6 +275,21 @@ export const useCalendar = () => {
         data: { tasks, currentDate },
       })
     );
+  };
+
+  const handleClickedOutSide = () => {
+    const { isUpdateTask, taskId, ...remainingQuery } = router?.query;
+
+    router?.replace(
+      {
+        pathname: router?.pathname,
+        query: remainingQuery,
+      },
+      undefined,
+      { shallow: true }
+    );
+
+    setIsModal(false);
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -285,22 +322,22 @@ export const useCalendar = () => {
         route={onClose}
       />
     ),
-    [ModalType.ADD_CONTRACT_TASK]: (
-      <AddContractTask
-        onClose={onClose}
-        isUpdate={false}
-        onSuccess={handleTaskSuccess}
-        onUpdateSuccess={handleTaskUpdateSuccess}
-      />
-    ),
-    [ModalType.UPDATE_ADD_CONTRACT_TASK]: (
-      <AddContractTask
-        onClose={onClose}
-        isUpdate={true}
-        onSuccess={handleTaskSuccess}
-        onUpdateSuccess={handleTaskUpdateSuccess}
-      />
-    ),
+    // [ModalType.ADD_CONTRACT_TASK]: (
+    //   <AddContractTask
+    //     onClose={onClose}
+    //     isUpdate={false}
+    //     onSuccess={handleTaskSuccess}
+    //     onUpdateSuccess={handleTaskUpdateSuccess}
+    //   />
+    // ),
+    // [ModalType.UPDATE_ADD_CONTRACT_TASK]: (
+    //   <AddContractTask
+    //     onClose={onClose}
+    //     isUpdate={true}
+    //     onSuccess={handleTaskSuccess}
+    //     onUpdateSuccess={handleTaskUpdateSuccess}
+    //   />
+    // ),
     [ModalType.READ_CONTRACT_TASK_DETAIL]: (
       <ContractTaskDetail
         onClose={onClose}
@@ -341,10 +378,11 @@ export const useCalendar = () => {
   };
 
   return {
+    router,
     tabs,
     renderModal,
     loading,
-    handleAddContractTask,
+    // handleAddContractTask,
     task,
     events,
     handleContractTaskDetail,
@@ -353,5 +391,13 @@ export const useCalendar = () => {
     dispatch,
     handleFilterChange,
     handleMoreTasks,
+    handleTaskSuccess,
+    handleTaskUpdateSuccess,
+    setContractTaskDetails,
+    DEFAULT_CONTRACT_TASK,
+    isModal,
+    setIsModal,
+    isContractId,
+    handleClickedOutSide,
   };
 };

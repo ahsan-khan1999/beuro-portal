@@ -33,7 +33,7 @@ const PlansForm = ({
       />
 
       {isUpdate && (
-        <div className="flex items-center space-x-5 mt-8">
+        <div className="flex items-center space-x-5 mt-8 pb-6">
           <Button
             text={translate("admin.plan_details.back_button")}
             onClick={() => router.push("/admin/plans")}

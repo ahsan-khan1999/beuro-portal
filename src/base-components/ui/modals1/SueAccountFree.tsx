@@ -5,11 +5,12 @@ import warningIcon from "@/assets/svgs/warning_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 
 import Image from "next/image";
+import { useAppSelector } from "@/hooks/useRedux";
 
 interface AreYouSureInfo {
   heading: string;
   sub_heading: string;
-  onSuccess: () => void;
+  onSuccess: (isAppointment?: boolean) => void;
   onClose: () => void;
 }
 
@@ -19,6 +20,9 @@ export const AreYouSureMakeAccountFree = ({
   onSuccess,
   sub_heading,
 }: AreYouSureInfo) => {
+  const { isAppointment } =
+    useAppSelector((state) => state.global.modal.data) || {};
+
   return (
     <BaseModal
       onClose={onClose}
@@ -50,7 +54,7 @@ export const AreYouSureMakeAccountFree = ({
             className="p-4 w-[100px] md:w-[174px] rounded-lg"
             id="yes"
             inputType="button"
-            onClick={onSuccess}
+            onClick={() => onSuccess(isAppointment)}
             text={translate("common.are_you_sure_modal.yes_button")}
           />
         </div>

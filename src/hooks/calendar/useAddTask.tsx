@@ -21,12 +21,14 @@ import { staticEnums } from "@/utils/static";
 
 export interface AddTaskHookProps {
   isUpdate?: boolean;
+  onIsModal?: React.Dispatch<React.SetStateAction<boolean>>;
   onSuccess: () => void;
   onUpdateSuccess: () => void;
 }
 
 export default function useAddTask({
   isUpdate,
+  onIsModal,
   onSuccess,
   onUpdateSuccess,
 }: AddTaskHookProps) {
@@ -37,15 +39,15 @@ export default function useAddTask({
     (state) => state.contract
   );
 
-  const { id, clickedStartDate, clickedEndDate } = useAppSelector(
-    (state) => state.global.modal.data ?? {}
-  );
+  // const { id, clickedStartDate, clickedEndDate } = useAppSelector(
+  //   (state) => state.global.modal.data ?? {}
+  // );
 
   const [date, setDate] = useState(taskDetail?.date);
   const startDateRef = useRef<string | null>(null);
   const schema = generateAddTaskValidationSchema(translate);
 
-  const { isContractId } = router.query;
+  const { isContractId, taskId } = router.query;
   const {
     register,
     handleSubmit,
@@ -69,12 +71,16 @@ export default function useAddTask({
   const endDate = watch("date.0.endDate");
 
   useEffect(() => {
-    if (id && taskDetail) {
+    if (taskId && taskDetail) {
       let filteredDate = taskDetail?.date;
 
-      if (isUpdate && clickedStartDate && clickedEndDate) {
-        filteredDate = taskDetail?.date.filter((date) =>
-          moment(date.startDate).isSame(clickedStartDate)
+      if (
+        isUpdate &&
+        taskDetail?.clickedStartDate &&
+        taskDetail?.clickedEndDate
+      ) {
+        filteredDate = taskDetail?.date?.filter((date) =>
+          moment(date.startDate).isSame(taskDetail?.clickedStartDate)
         );
       }
 
@@ -94,10 +100,16 @@ export default function useAddTask({
           colour: taskDetail?.colour,
         });
 
+
         startDateRef.current = filteredDate[0].startDate;
       }
     }
-  }, [id, taskDetail, clickedStartDate, clickedEndDate]);
+  }, [
+    taskId,
+    taskDetail,
+    taskDetail?.clickedStartDate,
+    taskDetail?.clickedEndDate,
+  ]);
 
   useEffect(() => {
     if (isContractId) {
@@ -177,7 +189,7 @@ export default function useAddTask({
       title: data.title,
       date: isUpdate
         ? taskDetail?.date?.map((item) => {
-            if (moment(item.startDate).isSame(clickedStartDate)) {
+            if (moment(item.startDate).isSame(taskDetail?.clickedStartDate)) {
               return {
                 startDate: data.isAllDay
                   ? moment(data.date[0].startDate).format("YYYY-MM-DD")
@@ -219,7 +231,7 @@ export default function useAddTask({
     const res = isUpdate
       ? await dispatch(
           updateContractTask({
-            data: { ...formattedData, id: id },
+            data: { ...formattedData, id: taskDetail?.id },
             router,
             translate,
           })
@@ -244,11 +256,23 @@ export default function useAddTask({
           readContractTasks({ params: { filter: {}, paginate: 0 } })
         );
 
+        onIsModal && onIsModal(false);
         onSuccess();
       } else {
+        const { isUpdateTask, taskId, ...restQuery } = router.query;
+        router.replace(
+          {
+            pathname: router.pathname,
+            query: restQuery,
+          },
+          undefined,
+          { shallow: true }
+        );
+
         await dispatch(
           readContractTasks({ params: { filter: {}, paginate: 0 } })
         );
+        onIsModal && onIsModal(false);
         onUpdateSuccess();
       }
     }

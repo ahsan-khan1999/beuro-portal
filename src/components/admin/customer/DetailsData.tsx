@@ -17,15 +17,13 @@ export interface AdminCustomerProps {
   handleAreYouSure: () => void;
   handleStatusChange: (id: string) => void;
   onDelete: () => void;
-  onCompanyUpdate: (isAppointment: boolean) => Promise<void>;
+  onCompanyUpdate: (isAppointment?: boolean) => void;
 }
 const DetailsData = ({
   customerDetail,
   isCustomerFree,
-  onHandleBack,
   handleAreYouSure,
   handleStatusChange,
-  onDelete,
   onCompanyUpdate,
 }: AdminCustomerProps) => {
   const customerStatus = [
@@ -252,12 +250,7 @@ const DetailsData = ({
               {translate("admin.customers_details.card_content.company_logo")}:
             </span>
 
-            <Image
-              src={customerDetail?.company?.logo || userIcon}
-              alt="company logo"
-              height={50}
-              width={40}
-            />
+            <Image src={userIcon} alt="company logo" height={50} width={40} />
           </div>
           <div className="flex items-center gap-x-3">
             <span className="text-[#4D4D4D] flex items-center">
