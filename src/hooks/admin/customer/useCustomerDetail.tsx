@@ -41,6 +41,14 @@ export default function useCustomerDetailAdmin() {
       dispatch(readCompanyDetail({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
           dispatch(setCompanyDetails(res?.payload));
+
+          const isAppointment = res.payload?.company?.isAppointment || false;
+          setIsToggleChecked(isAppointment);
+          setSubHeading(
+            isAppointment
+              ? translate("common.are_you_sure_modal.remove_appointments")
+              : translate("common.are_you_sure_modal.appointment_heading")
+          );
         }
       );
     }
@@ -48,7 +56,7 @@ export default function useCustomerDetailAdmin() {
 
   useEffect(() => {
     if (companyDetails?.company?.isAppointment !== undefined) {
-      setIsToggleChecked(companyDetails.company.isAppointment);
+      setIsToggleChecked(companyDetails?.company?.isAppointment);
     }
   }, [companyDetails?.company?.isAppointment]);
 
