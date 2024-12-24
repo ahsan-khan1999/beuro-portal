@@ -1,8 +1,8 @@
-import { CustomersAdmin } from "@/types/admin/customer";
 import Image from "next/image";
 import React from "react";
+import { CustomersAdmin } from "@/types/admin/customer";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { formatDateTimeToDate, germanDateFormat } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { staticEnums } from "@/utils/static";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
@@ -13,6 +13,7 @@ import { ToggleButton } from "@/base-components/ui/button/toggle-button";
 export interface AdminCustomerProps {
   customerDetail: CustomersAdmin;
   isCustomerFree: boolean;
+  isToggleChecked: boolean;
   onHandleBack: () => void;
   handleAreYouSure: () => void;
   handleStatusChange: (id: string) => void;
@@ -25,6 +26,7 @@ const DetailsData = ({
   handleAreYouSure,
   handleStatusChange,
   onCompanyUpdate,
+  isToggleChecked,
 }: AdminCustomerProps) => {
   const customerStatus = [
     `${translate("customer_status.block")}`,
@@ -257,7 +259,7 @@ const DetailsData = ({
               {translate("admin.customers_details.card_content.appointment")}:
             </span>
             <ToggleButton
-              isChecked={customerDetail?.company?.isAppointment}
+              isChecked={isToggleChecked}
               onChange={(e) => onCompanyUpdate(e.target.checked)}
             />
           </div>

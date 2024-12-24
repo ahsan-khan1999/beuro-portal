@@ -17,6 +17,7 @@ const CustomerDetails = () => {
     handleMakeAccountFree,
     deleteHandler,
     handleAddAppointment,
+    isToggleChecked
   } = useCustomerDetailAdmin();
 
   return (
@@ -30,6 +31,7 @@ const CustomerDetails = () => {
           handleStatusChange={handleStatusChange}
           onDelete={deleteHandler}
           onCompanyUpdate={handleAddAppointment}
+          isToggleChecked={isToggleChecked}
         />
       </DetailsCard>
       <div className="mt-5">

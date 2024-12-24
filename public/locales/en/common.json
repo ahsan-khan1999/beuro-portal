@@ -1514,6 +1514,7 @@
       "title": "Are You Sure",
       "sub_heading": "You want to make this account free",
       "appointment_heading": "You want to add appointments",
+      "remove_appointments": "You want to remove appointments",
       "cancel_button": "Cancel",
       "yes_button": "Yes",
       "confirm_heading": "Please confirm Company",

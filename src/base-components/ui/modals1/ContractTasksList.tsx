@@ -72,7 +72,7 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
     <BaseModal
       onClose={onClose}
       customOpacity={true}
-      containerClassName={`max-w-[340px] xMini:max-w-[600px] min-h-fit rounded-lg bg-[#F3F3F3] calendarShadow`}
+      containerClassName={`max-w-[340px] xMini:max-w-[650px] min-h-fit rounded-lg bg-[#F3F3F3] calendarShadow`}
     >
       <div
         className={`rounded-lg bg-white ${
@@ -113,6 +113,7 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
                 return (
                   <div
                     key={index}
+                    title={item?.title}
                     onClick={() =>
                       handleContractTaskDetail(
                         item?.taskID,
@@ -120,14 +121,14 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
                         item?.clickedEndDate
                       )
                     }
-                    className={`flex items-center cursor-pointer ${
+                    className={`flex items-center cursor-pointer hover:bg-tableRowBg ${
                       index !== tasks?.length - 1
                         ? "border-b border-b-black border-opacity-20"
                         : ""
                     } py-2`}
                   >
                     <span
-                      className={`text-[#393939] text-xs xMini:text-lg font-normal min-w-[80px] xMini:min-w-[120px]`}
+                      className={`text-[#393939] pl-2 text-xs xMini:text-lg font-normal min-w-[80px] xMini:min-w-[120px]`}
                     >
                       {item?.hasStartTime
                         ? item?.formattedStartTime
@@ -144,10 +145,7 @@ export const ContractTasksList = ({ onClose }: ContractTasksListProps) => {
                       />
 
                       {item?.title && (
-                        <p
-                          className="text-[#393939] font-semibold text-[10px] xMini:text-sm truncate whitespace-nowrap overflow-hidden text-ellipsis w-full"
-                          title={item?.title}
-                        >
+                        <p className="text-[#393939] font-semibold text-[10px] xMini:text-sm truncate whitespace-nowrap overflow-hidden text-ellipsis w-full">
                           {item?.title}
                         </p>
                       )}

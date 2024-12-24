@@ -150,7 +150,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                 },
 
                 {
-                  containerClass: "mb-0 mt-5",
+                  containerClass: "my-5",
                   field: {
                     type: Field.button,
                     text: `${translate(
