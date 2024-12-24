@@ -100,6 +100,7 @@ export default function useAddTask({
           colour: taskDetail?.colour,
         });
 
+
         startDateRef.current = filteredDate[0].startDate;
       }
     }

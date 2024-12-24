@@ -61,7 +61,7 @@ const OfferDetailsData = ({
                 />
               )}
               <div className="flex items-center">
-                {isEditing  ? (
+                {!isEditing ? (
                   <Image
                     src={editIcon}
                     alt="edit"
@@ -70,7 +70,6 @@ const OfferDetailsData = ({
                     className="cursor-pointer"
                     onClick={() => onComponentChange(true)}
                   />
-                  
                 ) : (
                   <div className="flex items-center gap-x-2">
                     <button
