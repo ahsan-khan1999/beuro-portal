@@ -20,25 +20,37 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function useCustomerDetailAdmin() {
-  const [isCustomerFree, setIsCustomerFree] = useState(false);
   const router = useRouter();
-  const { companyDetails, loading } = useAppSelector((state) => state.company);
-
-  const { modal } = useAppSelector((state) => state.global);
-  const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
+  const [isCustomerFree, setIsCustomerFree] = useState(false);
+  const { companyDetails, loading } = useAppSelector((state) => state.company);
+  const [isToggleChecked, setIsToggleChecked] = useState(
+    companyDetails?.company?.isAppointment || false
+  );
+
+  const [subHeading, setSubHeading] = useState(
+    translate("common.are_you_sure_modal.appointment_heading")
+  );
 
   const id = router.query.customer;
+  const dispatch = useAppDispatch();
+  const { modal } = useAppSelector((state) => state.global);
 
   useEffect(() => {
     if (id) {
       dispatch(readCompanyDetail({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
-          dispatch(setCompanyDetails(res.payload));
+          dispatch(setCompanyDetails(res?.payload));
         }
       );
     }
   }, [id]);
+
+  useEffect(() => {
+    if (companyDetails?.company?.isAppointment !== undefined) {
+      setIsToggleChecked(companyDetails.company.isAppointment);
+    }
+  }, [companyDetails?.company?.isAppointment]);
 
   const handleBack = () => {
     router.pathname = "/admin/customers";
@@ -104,13 +116,39 @@ export default function useCustomerDetailAdmin() {
     );
 
     if (response?.payload) {
+      isAppointment && setIsToggleChecked(isAppointment);
+
+      setSubHeading(
+        isAppointment
+          ? translate("common.are_you_sure_modal.remove_appointments")
+          : translate("common.are_you_sure_modal.appointment_heading")
+      );
+
       dispatch(
         readCompanyDetail({ params: { filter: companyDetails?.id } })
       ).then((res: CustomerPromiseActionType) => {
         dispatch(setCompanyDetails(res.payload));
       });
       dispatch(updateModalType({ type: ModalType.CREATION }));
+    } else {
+      setIsToggleChecked(!isAppointment);
+      setSubHeading(
+        !isAppointment
+          ? translate("common.are_you_sure_modal.remove_appointments")
+          : translate("common.are_you_sure_modal.appointment_heading")
+      );
     }
+  };
+
+  const handleAddAppointment = (isAppointment?: boolean) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.ARE_ADD_APPOINTMENTS,
+        data: {
+          isAppointment,
+        },
+      })
+    );
   };
 
   const handleStatusChange = async (custmerStatus: string) => {
@@ -123,17 +161,6 @@ export default function useCustomerDetailAdmin() {
       })
     );
     if (res?.payload) handleDefaultModal();
-  };
-
-  const handleAddAppointment = (isAppointment?: boolean) => {
-    dispatch(
-      updateModalType({
-        type: ModalType.ARE_ADD_APPOINTMENTS,
-        data: {
-          isAppointment,
-        },
-      })
-    );
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -153,7 +180,7 @@ export default function useCustomerDetailAdmin() {
         onClose={onClose}
         onSuccess={handleCompanyUpdate}
         heading={translate("common.are_you_sure_modal.title")}
-        sub_heading={translate("common.are_you_sure_modal.appointment_heading")}
+        sub_heading={subHeading}
       />
     ),
     [ModalType.CREATION]: (
@@ -203,5 +230,6 @@ export default function useCustomerDetailAdmin() {
     deleteHandler,
     handleCompanyUpdate,
     handleAddAppointment,
+    isToggleChecked,
   };
 }

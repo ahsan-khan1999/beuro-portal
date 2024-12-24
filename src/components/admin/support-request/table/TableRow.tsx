@@ -21,7 +21,7 @@ const TableRow = ({
     `${translate("support_request_status.resolved")}`,
   ];
 
-  const items = Object.keys(staticEnums["SupportRequest"]).map(
+  const items = Object?.keys(staticEnums["SupportRequest"]).map(
     (item, index) => ({
       item: { label: itemStatus[index], value: item },
     })
@@ -30,7 +30,7 @@ const TableRow = ({
   return (
     <div
       className={`overflow-y-visible ${
-        currentPageRows && currentPageRows.length <= 4 ? "h-[550px]" : ""
+        currentPageRows && currentPageRows?.length <= 4 ? "h-[550px]" : ""
       }`}
     >
       {currentPageRows?.map((item, index) => {
@@ -46,7 +46,9 @@ const TableRow = ({
                 }
                 className={` ${
                   index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } hover:bg-[#E9E1FF] pl-4 pr-1 border-t border-t-[#E7EAEE] cursor-pointer xs:w-fit xlg:w-auto mlg:w-full grid gap-x-4 xs:grid-cols-[minmax(70px,_70px),minmax(200px,_3fr)_minmax(300px,_4fr)_minmax(180px,_180px)_minmax(160px,_160px)] mlg:grid-cols-[minmax(60px,_60px),minmax(100px,_100%)_minmax(160px,_160px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px),minmax(150px,_3fr)_minmax(150px,_4fr)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(60px,_60px),minmax(150px,_3fr)_minmax(150px,_4fr)_minmax(140px,_140px)_minmax(130px,_130px)]`}
+                } ${index !== 0 && "border-t border-t-[#E7EAEE]"} ${
+                  index === 0 && "mt-2"
+                } hover:bg-[#E9E1FF] pl-4 pr-1 items-center cursor-pointer rounded-md xs:w-fit xlg:w-auto mlg:w-full grid gap-x-4 xs:grid-cols-[minmax(70px,_70px),minmax(200px,_3fr)_minmax(300px,_4fr)_minmax(180px,_180px)_minmax(160px,_160px)] mlg:grid-cols-[minmax(60px,_60px),minmax(100px,_100%)_minmax(160px,_160px)_minmax(130px,_130px)] xlg:grid-cols-[minmax(60px,_60px),minmax(150px,_3fr)_minmax(150px,_4fr)_minmax(130px,_130px)] maxSize:grid-cols-[minmax(60px,_60px),minmax(150px,_3fr)_minmax(150px,_4fr)_minmax(140px,_140px)_minmax(130px,_130px)]`}
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <span className="py-4 truncate">

@@ -29,9 +29,11 @@ const TableRow = ({
                     query: { plans: item.id },
                   })
                 }
-                className={`${
-                  index % 2 === 0 ? "bg-white" : "bg-tableRowBg"
-                } items-center cursor-pointer hover:bg-[#E9E1FF] rounded-md pl-4 pr-1 gap-x-4 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px),minmax(200px,_200px)_minmax(400px,_4fr)_minmax(100px,_100px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(50px,_50px),minmax(200px,_200px)_minmax(150px,_4fr)_minmax(80px,_80px)_minmax(100px,_100px)] xlg:grid-cols-[minmax(60px,_60px),minmax(200px,_200px)_minmax(200px,_4fr)_minmax(100px,_100px)_minmax(120px,_120px)] border-t border-t-[#E7EAEE]`}
+                className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
+                  index === 0 && "mt-2"
+                } items-center cursor-pointer hover:bg-[#E9E1FF] rounded-md pl-4 pr-1 gap-x-4 xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px),minmax(200px,_200px)_minmax(400px,_4fr)_minmax(100px,_100px)_minmax(130px,_130px)] mlg:grid-cols-[minmax(50px,_50px),minmax(200px,_200px)_minmax(150px,_4fr)_minmax(80px,_80px)_minmax(100px,_100px)] xlg:grid-cols-[minmax(60px,_60px),minmax(200px,_200px)_minmax(200px,_4fr)_minmax(100px,_100px)_minmax(120px,_120px)] ${
+                  index !== 0 && "border-t border-t-[#E7EAEE]"
+                }`}
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <span className="py-4 truncate">
