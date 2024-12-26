@@ -16,6 +16,7 @@ import { CustomerPromiseActionType } from "@/types/customer";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { updateQuery } from "@/utils/update-query";
 
 export default function usePlanDetail(stage: boolean) {
   const { t: translate } = useTranslation();
@@ -62,32 +63,16 @@ export default function usePlanDetail(stage: boolean) {
     handleUpdateCancel,
     control
   );
+
   const handleOnSave = () => {
     router.push("/admin/plans");
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
+
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
-  
-  const handleDelete = () => {
-    dispatch(updateModalType({ type: ModalType.DELETE_MAIL }));
-  };
 
-  const MODAL_CONFIG: ModalConfigType = {
-    [ModalType.CREATE_SUCCESS]: (
-      <RecordCreateSuccess
-        onClose={onClose}
-        modelHeading={translate("common.modals.plan_created")}
-        modelSubHeading={translate("common.modals.plan_record_des")}
-        routeHandler={handleOnSave}
-      />
-    ),
-  };
-
-  const renderModal = () => {
-    return MODAL_CONFIG[modal.type] || null;
-  };
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (stage) {
       const response = await dispatch(
@@ -104,11 +89,33 @@ export default function usePlanDetail(stage: boolean) {
     }
   };
 
-  const handlePreviousClick = () => {
-    router.push("/admin/support-request");
+  const handleBack = () => {
+    router.pathname = "/admin/plans";
+    delete router.query["plans"];
+    updateQuery(router, router.locale as string);
   };
 
+  const MODAL_CONFIG: ModalConfigType = {
+    [ModalType.CREATE_SUCCESS]: (
+      <RecordCreateSuccess
+        onClose={onClose}
+        modelHeading={translate("common.modals.plan_created")}
+        modelSubHeading={translate("common.modals.plan_record_des")}
+        routeHandler={handleOnSave}
+      />
+    ),
+  };
+
+  const renderModal = () => {
+    return MODAL_CONFIG[modal.type] || null;
+  };
+
+  // const handlePreviousClick = () => {
+  //   router.push("/admin/support-request");
+  // };
+
   return {
+    handleBack,
     planDetails,
     isUpdate,
     setIsUpdate,
@@ -116,10 +123,10 @@ export default function usePlanDetail(stage: boolean) {
     onSubmit,
     handleSubmit,
     errors,
-    handlePreviousClick,
+    // handlePreviousClick,
     handleUpdateCancel,
     renderModal,
     loading,
-    translate
+    translate,
   };
 }

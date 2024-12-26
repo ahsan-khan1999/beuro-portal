@@ -2,6 +2,8 @@ import { Layout } from "@/layout";
 import React from "react";
 import PlansForm from "../Form";
 import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
+import FormCard from "@/layout/customers/FormCard";
+import { BackIcon } from "@/assets/svgs/components/back-icon";
 
 const CreatePlan = () => {
   const {
@@ -12,16 +14,20 @@ const CreatePlan = () => {
     handleSubmit,
     onSubmit,
     errors,
-    handlePreviousClick,
     renderModal,
+    handleBack,
   } = usePlanDetail(false);
 
   return (
     <Layout>
-      <div>
-        <h2 className="text-xl font-normal text-[#222B45] mb-4">
-          {translate("common.new_plan")}
-        </h2>
+      <FormCard containerClassName="p-5">
+        <div className="flex items-center gap-x-4 pb-5">
+          <BackIcon onClick={handleBack} />
+          <p className="font-semibold text-lg xMini:text-2xl">
+            {translate("common.new_plan")}
+          </p>
+        </div>
+
         <PlansForm
           isUpdate={isUpdate}
           setIsUpdate={setIsUpdate}
@@ -31,7 +37,7 @@ const CreatePlan = () => {
           errors={errors}
           planDetail={planDetails}
         />
-      </div>
+      </FormCard>
 
       {renderModal()}
     </Layout>
