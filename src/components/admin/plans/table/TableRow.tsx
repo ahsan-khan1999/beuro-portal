@@ -4,16 +4,15 @@ import { useRouter } from "next/router";
 import React from "react";
 import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
-const TableRow = ({
-  currentPageRows,
-  handleDelete,
-}: {
+export interface AdminPlansProps {
   currentPageRows: Plan[];
   handleDelete: (index: string) => void;
-}) => {
-  const router = useRouter();
+}
 
+const TableRow = ({ currentPageRows }: AdminPlansProps) => {
+  const router = useRouter();
   const { t: translate } = useTranslation();
 
   return (
@@ -26,7 +25,7 @@ const TableRow = ({
                 onClick={() =>
                   router.push({
                     pathname: "/admin/plans/details",
-                    query: { plans: item.id },
+                    query: { plans: item?.id },
                   })
                 }
                 className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
@@ -56,7 +55,7 @@ const TableRow = ({
                   />
                 </div>
               </div>
-              <div
+              {/* <div
                 className="flex justify-center items-center"
                 onClick={() =>
                   router.push({
@@ -80,6 +79,23 @@ const TableRow = ({
                       />
                     </svg>
                   </div>
+                </div>
+              </div> */}
+
+              <div
+                className="flex justify-center items-center cursor-pointer"
+                onClick={() =>
+                  router.push({
+                    pathname: "/admin/plans/details",
+                    query: { plans: item?.id },
+                  })
+                }
+                title={translate("leads.table_headings.edit")}
+              >
+                <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
+                  <span className="p-[5px] rounded-md w-[32px] h-[32px] border border-primary flex justify-center items-center">
+                    <EditIcon />
+                  </span>
                 </div>
               </div>
             </div>

@@ -29,7 +29,7 @@ const AdminSettings = () => {
 
   return (
     <Layout>
-      <h1 className="text-[#222B45] font-normal text-xl">
+      <h1 className="text-2xl font-medium text-[#222B45]">
         {translate("admin.settings.main_heading")}
       </h1>
       <div className="mt-[22px]">

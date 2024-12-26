@@ -7,16 +7,16 @@ import { staticEnums } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
 
-export const DetailsData = ({
-  supportDetail,
-  // status,
-  handlePreviousClick,
-  handleStatusUpadte,
-}: {
+export interface AdminSupportDetailsProps {
   supportDetail: ContactSupport | null;
   handlePreviousClick: () => void;
   handleStatusUpadte: (value: string) => void;
-}) => {
+}
+
+export const DetailsData = ({
+  supportDetail,
+  handleStatusUpadte,
+}: AdminSupportDetailsProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -25,7 +25,7 @@ export const DetailsData = ({
     `${translate("support_request_status.resolved")}`,
   ];
 
-  const items = Object.keys(staticEnums["SupportRequest"]).map(
+  const items = Object?.keys(staticEnums["SupportRequest"]).map(
     (item, index) => ({
       item: { label: itemStatus[index], value: item },
     })
@@ -160,7 +160,7 @@ export const DetailsData = ({
                 supportDetail?.status === "resolved"
                   ? "border-[#4A13E7]"
                   : "border-[#FE9244]"
-              }y w-full`}
+              } w-full`}
             />
           </span>
         </div>

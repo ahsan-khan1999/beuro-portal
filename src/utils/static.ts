@@ -590,7 +590,7 @@ export const staticEnums: Record<string, any> = {
     none: "None",
     individual: 0,
     company: 1,
-    undefined: "Undefined",
+    // undefined: "Undefined",
   },
 
   TaskType: {

@@ -10,13 +10,13 @@ export const planDetailsFormField: GeneratePlansFormField = (
   control
 ) => {
   const { t: translate } = useTranslation();
+
   const formField: FormField[] = [
     {
       containerClass: "mt-0",
       field: {
         type: Field.div,
         id: "div-field",
-
         className:
           "grid grid-cols-1 md:grid-cols-2 xMaxSize:grid-cols-4 gap-x-3 gap-y-5 rounded-t-lg px-2 pt-3 pb-5 bg-[#EDF4FF]",
         children: [
@@ -297,7 +297,9 @@ export const planDetailsFormField: GeneratePlansFormField = (
       field: {
         type: Field.div,
         id: "div-field",
-        className: `flex space-x-[18px] mt-8 pb-6 ${isUpdate && "hidden"}`,
+        className: `flex items-center justify-end space-x-5 mt-8 pb-6 ${
+          isUpdate && "hidden"
+        }`,
         children: [
           {
             containerClass: "mb-0",

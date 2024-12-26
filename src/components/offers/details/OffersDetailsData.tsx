@@ -3,7 +3,6 @@ import { tabArrayTypes } from "@/types";
 import AddressDetailsData from "./AddressDetailsData";
 import ServiceDetailsData from "./ServiceDetailsData";
 import AdditionalDetails from "./AdditionalDetails";
-import DetailsTab from "@/base-components/ui/tab/DetailsTab";
 import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
 import OfferEditImages from "../OfferEditImages";
@@ -43,7 +42,6 @@ export interface OfferDetailsProps {
 const OffersDetailsData = ({
   offerDetails,
   loading,
-  handleUpdateDiscount,
   currency,
   shareImgModal,
   handleImagesUpload,
@@ -121,7 +119,7 @@ const OffersDetailsData = ({
 
   const handleScrollToTop = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    const offset = 380;
+    const offset = 355;
     if (element) {
       const elementPosition =
         element.getBoundingClientRect().top + window.scrollY;

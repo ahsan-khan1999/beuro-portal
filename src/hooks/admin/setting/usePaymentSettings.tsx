@@ -9,9 +9,9 @@ import { changePaymentSettingsFormField } from "@/components/admin/setting/field
 
 export default function usePaymentSettings() {
   const router = useRouter();
-  const { loading, error } = useAppSelector((state) => state.auth);
-  const { t: translate } = useTranslation();
   const dispatch = useAppDispatch();
+  const { t: translate } = useTranslation();
+  const { loading, error } = useAppSelector((state) => state.auth);
   const schema = generatePaymentSettingsValidation(translate);
 
   const {

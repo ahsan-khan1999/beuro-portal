@@ -1,8 +1,10 @@
 import { Layout } from "@/layout";
 import React from "react";
 import PlansForm from "../Form";
+import FormCard from "@/layout/customers/FormCard";
 import usePlanDetail from "@/hooks/admin/plans/usePlanDetail";
 import { CustomPuffLoader } from "@/base-components/ui/loader/puff-loader";
+import { BackIcon } from "@/assets/svgs/components/back-icon";
 
 const PlanDetails = () => {
   const {
@@ -13,10 +15,10 @@ const PlanDetails = () => {
     handleSubmit,
     onSubmit,
     errors,
-    handlePreviousClick,
     renderModal,
     loading,
     translate,
+    handleBack,
   } = usePlanDetail(true);
 
   return (
@@ -24,10 +26,14 @@ const PlanDetails = () => {
       {loading ? (
         <CustomPuffLoader />
       ) : (
-        <div>
-          <h2 className="text-xl font-normal text-[#222B45] mb-4">
-            {translate("common.plan_detail")}
-          </h2>
+        <FormCard containerClassName="p-5">
+          <div className="flex items-center gap-x-4 border-b border-b-[#000] border-opacity-10 pb-5">
+            <BackIcon onClick={handleBack} />
+            <p className="font-semibold text-lg xMini:text-2xl">
+              {translate("common.plan_detail")}
+            </p>
+          </div>
+
           <PlansForm
             isUpdate={isUpdate}
             setIsUpdate={setIsUpdate}
@@ -37,7 +43,7 @@ const PlanDetails = () => {
             errors={errors}
             planDetail={planDetails}
           />
-        </div>
+        </FormCard>
       )}
 
       {renderModal()}

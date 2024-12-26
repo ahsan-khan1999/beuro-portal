@@ -10,7 +10,7 @@ const TableFunctions = () => {
 
   return (
     <div className="flex justify-between items-center mb-4">
-      <h1 className="text-xl text-[#222B45] ">
+      <h1 className="text-2xl font-medium text-[#222B45]">
         {translate("admin.plans_management.main_heading")}
       </h1>
 

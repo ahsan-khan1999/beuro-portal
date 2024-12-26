@@ -265,7 +265,6 @@ export const useAppointments = () => {
     appointmentStatus: string,
     type: string
   ) => {
-
     if (type === "appointment") {
       const currentItem = currentPageRows.find((item) => item.id === id);
 
@@ -344,6 +343,8 @@ export const useAppointments = () => {
   };
 
   const handleBackToNotes = () => {
+    dispatch(updateModalType({ type: ModalType.NONE }));
+
     if (noteInfo.leadId)
       handleNotes(
         noteInfo.id,
@@ -528,21 +529,21 @@ export const useAppointments = () => {
     }
   };
 
-  const handleUpdateRow = (id?: string) => {
-    setCurrentPageRows((prev) =>
-      prev?.map((appointment) => {
-        return appointment?.leadID?.id === id
-          ? {
-              ...appointment,
-              leadID: {
-                ...appointment.leadID,
-                isImageAdded: true,
-              },
-            }
-          : appointment;
-      })
-    );
-  };
+  // const handleUpdateRow = (id?: string) => {
+  //   setCurrentPageRows((prev) =>
+  //     prev?.map((appointment) => {
+  //       return appointment?.leadID?.id === id
+  //         ? {
+  //             ...appointment,
+  //             leadID: {
+  //               ...appointment.leadID,
+  //               isImageAdded: true,
+  //             },
+  //           }
+  //         : appointment;
+  //     })
+  //   );
+  // };
 
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.UPLOAD_SUCCESS]: (

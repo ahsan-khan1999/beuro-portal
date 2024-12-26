@@ -14,26 +14,21 @@ const PlansForm = ({
   onSubmit,
   handleSubmit,
   errors,
-  planDetail,
 }: FormDataProps) => {
-  const defaultClassName = "";
   const router = useRouter();
   const { t: translate } = useTranslation();
 
   return (
-    <FormCard
-      containerClassName={`px-4 py-6 ${!isUpdate && "border border-primary"}`}
-    >
+    <FormCard containerClassName={`px-4 py-6`}>
       <Form
         formFields={fields}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
-        className={`${defaultClassName}`}
       />
 
       {isUpdate && (
-        <div className="flex items-center space-x-5 mt-8 pb-6">
+        <div className="flex items-center justify-end space-x-5 mt-8 pb-6">
           <Button
             text={translate("admin.plan_details.back_button")}
             onClick={() => router.push("/admin/plans")}

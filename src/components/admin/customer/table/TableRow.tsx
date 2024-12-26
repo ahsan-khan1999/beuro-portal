@@ -6,6 +6,7 @@ import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { useTranslation } from "next-i18next";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
 const TableRow = ({
   currentPageRows,
@@ -55,10 +56,11 @@ const TableRow = ({
                 <div className="py-4 flex items-center justify-center">
                   <span className="border-2 border-[#D9D9D9] rounded-full p-1 h-[40px] w-[40px] flex items-center justify-center">
                     <Image
-                      src={userIcon}
+                      src={item?.company?.logo || userIcon}
                       alt="company logo"
                       height={29}
                       width={28}
+                      className="rounded-full"
                     />
                   </span>
                 </div>
@@ -88,7 +90,7 @@ const TableRow = ({
               </span> */}
 
               <span
-                className="py-4 flex items-center"
+                className="py-4 flex items-center pl-1"
                 onClick={(e) => e.stopPropagation()}
               >
                 <DropDown
@@ -97,7 +99,7 @@ const TableRow = ({
                     onStatusChange(item.id, status, "admin_customer")
                   }
                   selectedItem={translate(`customer_status.${item.status}`)}
-                  dropDownClassName={`w-full rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-1 ${
+                  dropDownClassName={`w-full rounded-lg px-4 py-[5px] flex items-center justify-center gap-x-1 ${
                     item?.status === "block" ? "bg-[#F00]" : "bg-primary"
                   }`}
                   dropDownTextClassName="text-white"
@@ -117,7 +119,7 @@ const TableRow = ({
                 />
               </span>
 
-              <div className="flex justify-center items-center">
+              {/* <div className="flex justify-center items-center">
                 <div
                   onClick={() =>
                     router.push({
@@ -140,6 +142,22 @@ const TableRow = ({
                         fill="#4A13E7"
                       />
                     </svg>
+                  </span>
+                </div>
+              </div> */}
+              <div
+                className="flex justify-center items-center cursor-pointer"
+                onClick={() =>
+                  router.push({
+                    pathname: "/admin/customers/details",
+                    query: { ...router.query, customer: item.id },
+                  })
+                }
+                title={translate("leads.table_headings.edit")}
+              >
+                <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
+                  <span className="p-[5px] rounded-md w-[32px] h-[32px] border border-primary flex justify-center items-center">
+                    <EditIcon />
                   </span>
                 </div>
               </div>

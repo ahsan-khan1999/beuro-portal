@@ -1,6 +1,6 @@
-import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { useReportDetails } from "@/hooks/appointments/useReportDetail";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
+import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 import { ReportDetailData } from "@/components/agent/appointments/report-detail/detail-screens";
 import { AppointmentsDetailCard } from "@/components/agent/appointments/agent-details/detail-card";
 
@@ -19,7 +19,7 @@ export const AppointmentsDetails = () => {
   } = useReportDetails();
 
   const cardClass = appointmentDetails?.isReportSubmitted
-    ? "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[285px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
+    ? "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[270px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground"
     : "";
 
   return (
@@ -39,7 +39,7 @@ export const AppointmentsDetails = () => {
           </div>
 
           {appointmentDetails?.isReportSubmitted ? (
-            <div className="2xl:mt-[365px] w-full 2xl:block mb-10">
+            <div className="2xl:mt-[350px] w-full 2xl:block mb-10">
               <ReportDetailData
                 reportDetail={reportDetails}
                 loading={isLoading}

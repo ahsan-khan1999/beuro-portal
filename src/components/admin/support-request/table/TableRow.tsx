@@ -5,14 +5,17 @@ import { useTranslation } from "next-i18next";
 import { staticEnums } from "@/utils/static";
 import { ContactSupport } from "@/api/slices/contactSupport/contactSupportSlice";
 import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+import { EditIcon } from "@/assets/svgs/components/edit-icon";
+
+export interface AdminSupportRequestProps {
+  currentPageRows: ContactSupport[];
+  onStatusChange: (id: string, status: string, type: string) => void;
+}
 
 const TableRow = ({
   currentPageRows,
   onStatusChange,
-}: {
-  currentPageRows: ContactSupport[];
-  onStatusChange: (id: string, status: string, type: string) => void;
-}) => {
+}: AdminSupportRequestProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -68,7 +71,7 @@ const TableRow = ({
 
             <div className="gap-x-3 grid grid-cols-[minmax(140px,_140px)_minmax(50px,_50px)]">
               <span
-                className="py-4 flex justify-center items-center"
+                className="py-4 flex justify-center items-center pl-1"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* <div
@@ -86,7 +89,7 @@ const TableRow = ({
                   selectedItem={translate(
                     `support_request_status.${item.status}`
                   )}
-                  dropDownClassName={`w-full rounded-lg px-4 py-[3px] flex items-center justify-center gap-x-1 ${
+                  dropDownClassName={`w-full rounded-lg px-4 py-[5px] flex items-center justify-center gap-x-1 ${
                     item?.status == "resolved" ? "bg-[#4A13E7]" : "bg-[#FE9244]"
                   }`}
                   dropDownTextClassName="text-white"
@@ -94,18 +97,18 @@ const TableRow = ({
                   dropDownItemsContainerClassName="w-full"
                   isSecondLastIndex={
                     currentPageRows &&
-                    currentPageRows.length > 5 &&
-                    index === currentPageRows.length - 2
+                    currentPageRows?.length > 5 &&
+                    index === currentPageRows?.length - 2
                   }
                   isLastIndex={
                     currentPageRows &&
-                    currentPageRows.length > 5 &&
-                    index === currentPageRows.length - 1
+                    currentPageRows?.length > 5 &&
+                    index === currentPageRows?.length - 1
                   }
                   isAdminCustomer={true}
                 />
               </span>
-              <div className="flex justify-center items-center">
+              {/* <div className="flex justify-center items-center">
                 <div
                   onClick={() =>
                     router.push({
@@ -128,6 +131,23 @@ const TableRow = ({
                         fill="#4A13E7"
                       />
                     </svg>
+                  </span>
+                </div>
+              </div> */}
+
+              <div
+                className="flex justify-center items-center cursor-pointer"
+                onClick={() =>
+                  router.push({
+                    pathname: "/admin/support-request/details",
+                    query: { ...router.query, supportRequest: item.id },
+                  })
+                }
+                title={translate("leads.table_headings.edit")}
+              >
+                <div className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg">
+                  <span className="p-[5px] rounded-md w-[32px] h-[32px] border border-primary flex justify-center items-center">
+                    <EditIcon />
                   </span>
                 </div>
               </div>
