@@ -8,6 +8,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
   control
 ) => {
   const { t: translate } = useTranslation();
+
   const formField: FormField[] = [
     {
       field: {
@@ -150,7 +151,7 @@ export const changePaymentSettingsFormField: GeneratePaymentSettingFormField = (
                 },
 
                 {
-                  containerClass: "my-5",
+                  containerClass: "my-5 flex items-center justify-end",
                   field: {
                     type: Field.button,
                     text: `${translate(

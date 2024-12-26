@@ -6,15 +6,13 @@ import deleteIcon from "@/assets/pngs/delet-icon.png";
 import Image from "next/image";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
-const TableRow = ({
-  currentPageRows,
-  handleDelete,
-}: {
+export interface AdminPlansProps {
   currentPageRows: Plan[];
   handleDelete: (index: string) => void;
-}) => {
-  const router = useRouter();
+}
 
+const TableRow = ({ currentPageRows }: AdminPlansProps) => {
+  const router = useRouter();
   const { t: translate } = useTranslation();
 
   return (
@@ -27,7 +25,7 @@ const TableRow = ({
                 onClick={() =>
                   router.push({
                     pathname: "/admin/plans/details",
-                    query: { plans: item.id },
+                    query: { plans: item?.id },
                   })
                 }
                 className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
@@ -89,7 +87,7 @@ const TableRow = ({
                 onClick={() =>
                   router.push({
                     pathname: "/admin/plans/details",
-                    query: { plans: item.id },
+                    query: { plans: item?.id },
                   })
                 }
                 title={translate("leads.table_headings.edit")}
