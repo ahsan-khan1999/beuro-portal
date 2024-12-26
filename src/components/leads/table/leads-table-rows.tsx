@@ -56,7 +56,7 @@ export const LeadsTableRows = ({
     `${translate("leads.lead_dropdown_status.Expired")}`,
   ];
 
-  const items = Object.keys(staticEnums["LeadStatus"]).map((item, index) => ({
+  const items = Object?.keys(staticEnums["LeadStatus"]).map((item, index) => ({
     item: { label: itemsValue[index], value: item },
   }));
 

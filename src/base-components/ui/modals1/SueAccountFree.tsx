@@ -1,11 +1,10 @@
-import { BaseModal } from "@/base-components/ui/modals/base-modal";
 import React from "react";
+import Image from "next/image";
 import { Button } from "../button/button";
 import warningIcon from "@/assets/svgs/warning_icon.svg";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
-
-import Image from "next/image";
 import { useAppSelector } from "@/hooks/useRedux";
+import { BaseModal } from "@/base-components/ui/modals/base-modal";
 
 interface AreYouSureInfo {
   heading: string;
@@ -20,7 +19,7 @@ export const AreYouSureMakeAccountFree = ({
   onSuccess,
   sub_heading,
 }: AreYouSureInfo) => {
-  const { isAppointment } =
+  const { isAppointment, companyName } =
     useAppSelector((state) => state.global.modal.data) || {};
 
   return (
@@ -39,11 +38,11 @@ export const AreYouSureMakeAccountFree = ({
         <p className="font-medium text-base md:text-2xl mt-10 text-center">
           {heading}
         </p>
-        <span className="text-[#1E1E1E] font-normal text-sm text-center mt-5">
-          {sub_heading}
+        <span className="text-[#1E1E1E] font-normal text-sm text-center max-w-[300px] mt-3">
+          {sub_heading} {companyName && `${companyName} ?`}
         </span>
 
-        <div className="flex items-center gap-x-5 mt-5">
+        <div className="flex items-center gap-x-5 mt-8">
           <button
             className="p-4 w-[100px] md:w-[174px] text-black hover:text-white bg-[#BFBFBF] hover:bg-buttonHover flex items-center justify-center rounded-lg !h-[50px]"
             onClick={onClose}

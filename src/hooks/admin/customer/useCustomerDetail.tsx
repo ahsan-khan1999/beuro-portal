@@ -148,12 +148,16 @@ export default function useCustomerDetailAdmin() {
     }
   };
 
-  const handleAddAppointment = (isAppointment?: boolean) => {
+  const handleAddAppointment = (
+    isAppointment?: boolean,
+    companyName?: string
+  ) => {
     dispatch(
       updateModalType({
         type: ModalType.ARE_ADD_APPOINTMENTS,
         data: {
           isAppointment,
+          companyName,
         },
       })
     );

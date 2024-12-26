@@ -29,7 +29,7 @@ const TableHeading = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-[minmax(130px,_130px)_minmax(50px,_50px)] bg-primary rounded-r-lg py-4 gap-x-4">
+      <div className="grid grid-cols-[minmax(130px,_130px)_minmax(50px,_50px)] bg-primary rounded-r-lg py-4 pl-1 gap-x-4">
         <span className="font-semibold text-base text-white pl-3">
           {translate("common.actions")}
         </span>

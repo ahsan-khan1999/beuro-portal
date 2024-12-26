@@ -1513,8 +1513,8 @@
     "are_you_sure_modal": {
       "title": "Are You Sure",
       "sub_heading": "You want to make this account free",
-      "appointment_heading": "You want to add appointments",
-      "remove_appointments": "You want to remove appointments",
+      "appointment_heading": "Would you like to enable appointments for this company, ",
+      "remove_appointments": "Would you like to disable appointments for this company, ",
       "cancel_button": "Cancel",
       "yes_button": "Yes",
       "confirm_heading": "Please confirm Company",

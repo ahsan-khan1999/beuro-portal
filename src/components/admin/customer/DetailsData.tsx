@@ -18,7 +18,7 @@ export interface AdminCustomerProps {
   handleAreYouSure: () => void;
   handleStatusChange: (id: string) => void;
   onDelete: () => void;
-  onCompanyUpdate: (isAppointment?: boolean) => void;
+  onCompanyUpdate: (isAppointment?: boolean, companyName?: string) => void;
 }
 const DetailsData = ({
   customerDetail,
@@ -252,7 +252,13 @@ const DetailsData = ({
               {translate("admin.customers_details.card_content.company_logo")}:
             </span>
 
-            <Image src={userIcon} alt="company logo" height={50} width={40} />
+            <Image
+              src={customerDetail?.company?.logo || userIcon}
+              alt="company logo"
+              height={50}
+              width={40}
+              className="rounded-full"
+            />
           </div>
           <div className="flex items-center gap-x-3">
             <span className="text-[#4D4D4D] flex items-center">
@@ -260,7 +266,12 @@ const DetailsData = ({
             </span>
             <ToggleButton
               isChecked={isToggleChecked}
-              onChange={(e) => onCompanyUpdate(e.target.checked)}
+              onChange={(e) =>
+                onCompanyUpdate(
+                  e.target.checked,
+                  customerDetail?.company?.companyName
+                )
+              }
             />
           </div>
         </div>
