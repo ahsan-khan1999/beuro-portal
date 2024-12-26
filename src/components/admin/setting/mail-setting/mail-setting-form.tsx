@@ -1,6 +1,6 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { useChangeMailSetting } from "@/hooks/admin/setting/useChangeMailSetting";
-import React from "react";
 
 const MailSettingForm = ({
   handleCreation,
@@ -9,8 +9,7 @@ const MailSettingForm = ({
   handleCreation: () => void;
   selectedTab: number;
 }) => {
-  const defaultClassName = "";
-  const { fields, control, onSubmit, handleSubmit, errors, error } =
+  const { fields, onSubmit, handleSubmit, errors, error } =
     useChangeMailSetting({ handleCreation, selectedTab });
 
   return (
@@ -20,7 +19,6 @@ const MailSettingForm = ({
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         errors={errors}
-        className={`${defaultClassName}`}
       />
     </>
   );

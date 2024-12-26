@@ -1,7 +1,7 @@
 import React from "react";
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { CustomersAdmin } from "@/types/admin/customer";
-import { formatDateTimeToDate, germanDateFormat } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import { useTranslation } from "next-i18next";
 
 const CustomerDetailsData = ({

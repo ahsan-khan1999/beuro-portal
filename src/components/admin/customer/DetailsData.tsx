@@ -35,7 +35,7 @@ const DetailsData = ({
 
   const router = useRouter();
 
-  const items = Object.keys(staticEnums["User"]["accountStatus"]).map(
+  const items = Object?.keys(staticEnums["User"]["accountStatus"]).map(
     (item, index) => ({
       item: { label: customerStatus[index], value: item },
     })
@@ -254,7 +254,7 @@ const DetailsData = ({
 
             <Image
               src={customerDetail?.company?.logo || userIcon}
-              alt="company logo"
+              alt=""
               height={50}
               width={40}
               className="rounded-full"

@@ -16,14 +16,18 @@ import DownloadModal from "@/base-components/ui/modals1/DownloadModal";
 import { GetYearAndMonth } from "@/types/admin/payments";
 
 export default function Payments() {
-  const { currentPageRows, handlePageChange, totalItems, itemsPerPage,currentPage } =
-    usePayments();
+  const {
+    currentPageRows,
+    handlePageChange,
+    totalItems,
+    itemsPerPage,
+    currentPage,
+  } = usePayments();
   const { t: translate } = useTranslation();
 
   const dispatch = useDispatch();
   const { modal } = useAppSelector((state) => state.global);
 
-  // Function for close the modal
   const onClose = () => {
     dispatch(updateModalType(ModalType.NONE));
   };
@@ -41,7 +45,6 @@ export default function Payments() {
     onClose();
   };
 
-  // METHOD FOR HANDLING THE MODALS
   const MODAL_CONFIG: ModalConfigType = {
     [ModalType.SELECT_MONTH]: (
       <MonthSelect onClose={onClose} handleDownload={handleDownload} />
@@ -62,23 +65,19 @@ export default function Payments() {
   };
 
   return (
-    <>
-      <Layout>
-        <TableFunctions handleSelectMonth={handleSelectMonth} />
-        <TableLayout>
-          <TableHeading />
-          <TableRow currentPageRows={currentPageRows} />
-        </TableLayout>
-        <Pagination
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-
-        />
-      </Layout>
-
+    <Layout>
+      <TableFunctions handleSelectMonth={handleSelectMonth} />
+      <TableLayout>
+        <TableHeading />
+        <TableRow currentPageRows={currentPageRows} />
+      </TableLayout>
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       {renderModal()}
-    </>
+    </Layout>
   );
 }

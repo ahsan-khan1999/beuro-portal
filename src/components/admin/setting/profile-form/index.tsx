@@ -4,7 +4,7 @@ import FormCard from "@/layout/customers/FormCard";
 import React from "react";
 
 const SettingProfile = () => {
-  const { fields, onSubmit, handleSubmit, errors, error, renderModal } =
+  const { fields, onSubmit, handleSubmit, errors, renderModal } =
     useSettingProfile();
 
   return (
