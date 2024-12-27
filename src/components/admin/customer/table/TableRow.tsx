@@ -8,13 +8,15 @@ import { DropDown } from "@/base-components/ui/dropDown/drop-down";
 import { staticEnums } from "@/utils/static";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 
+export interface AdminCustomerTableProps {
+  currentPageRows: CustomersAdmin[];
+  onStatusChange: (id: string, status: string, type: string) => void;
+}
+
 const TableRow = ({
   currentPageRows,
   onStatusChange,
-}: {
-  currentPageRows: CustomersAdmin[];
-  onStatusChange: (id: string, status: string, type: string) => void;
-}) => {
+}: AdminCustomerTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
 
@@ -23,7 +25,7 @@ const TableRow = ({
     `${translate("customer_status.unBlock")}`,
   ];
 
-  const items = Object.keys(staticEnums["User"]["accountStatus"]).map(
+  const items = Object?.keys(staticEnums["User"]["accountStatus"]).map(
     (item, index) => ({
       item: { label: customerStatus[index], value: item },
     })
@@ -32,7 +34,7 @@ const TableRow = ({
   return (
     <div
       className={`overflow-y-visible ${
-        currentPageRows && currentPageRows.length <= 4 ? "h-[550px]" : ""
+        currentPageRows && currentPageRows?.length <= 4 ? "h-[550px]" : ""
       }`}
     >
       {currentPageRows?.map((item, index) => {
@@ -43,7 +45,7 @@ const TableRow = ({
                 onClick={() =>
                   router.push({
                     pathname: "/admin/customers/details",
-                    query: { ...router.query, customer: item.id },
+                    query: { ...router.query, customer: item?.id },
                   })
                 }
                 className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
@@ -57,7 +59,7 @@ const TableRow = ({
                   <span className="border-2 border-[#D9D9D9] rounded-full p-1 h-[40px] w-[40px] flex items-center justify-center">
                     <Image
                       src={item?.company?.logo || userIcon}
-                      alt="company logo"
+                      alt=""
                       height={29}
                       width={28}
                       className="rounded-full"
@@ -71,9 +73,9 @@ const TableRow = ({
                 <span className="truncate py-4">{item?.email}</span>
                 <span className="py-4 truncate">
                   {item &&
-                    item.plan &&
-                    item.plan.planName &&
-                    translate(`plan_status.${item.plan.planName}`)}
+                    item?.plan &&
+                    item?.plan?.planName &&
+                    translate(`plan_status.${item?.plan?.planName}`)}
                 </span>
               </div>
             </div>
@@ -98,7 +100,7 @@ const TableRow = ({
                   onItemSelected={(status) =>
                     onStatusChange(item.id, status, "admin_customer")
                   }
-                  selectedItem={translate(`customer_status.${item.status}`)}
+                  selectedItem={translate(`customer_status.${item?.status}`)}
                   dropDownClassName={`w-full rounded-lg px-4 py-[5px] flex items-center justify-center gap-x-1 ${
                     item?.status === "block" ? "bg-[#F00]" : "bg-primary"
                   }`}
@@ -107,13 +109,13 @@ const TableRow = ({
                   dropDownItemsContainerClassName="w-full"
                   isSecondLastIndex={
                     currentPageRows &&
-                    currentPageRows.length > 5 &&
-                    index === currentPageRows.length - 2
+                    currentPageRows?.length > 5 &&
+                    index === currentPageRows?.length - 2
                   }
                   isLastIndex={
                     currentPageRows &&
-                    currentPageRows.length > 5 &&
-                    index === currentPageRows.length - 1
+                    currentPageRows?.length > 5 &&
+                    index === currentPageRows?.length - 1
                   }
                   isAdminCustomer={true}
                 />
@@ -150,7 +152,7 @@ const TableRow = ({
                 onClick={() =>
                   router.push({
                     pathname: "/admin/customers/details",
-                    query: { ...router.query, customer: item.id },
+                    query: { ...router.query, customer: item?.id },
                   })
                 }
                 title={translate("leads.table_headings.edit")}

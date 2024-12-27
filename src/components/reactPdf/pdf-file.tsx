@@ -1,5 +1,4 @@
 import { PdfPreviewProps } from "@/types";
-import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 import { Header } from "./header";
 import { ContactAddress } from "./contact-address";
 import { AddressDetails } from "./address-details";
@@ -9,6 +8,7 @@ import { ServicesTotalAmount } from "./services-total-ammount";
 import { Footer } from "./footer";
 import { AdditionalDetails } from "./additional-details";
 import { AggrementSignature } from "./aggrement-signature";
+import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 
 Font.register({
   family: "Poppins",

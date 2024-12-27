@@ -35,7 +35,7 @@ const DetailsData = ({
 
   const router = useRouter();
 
-  const items = Object.keys(staticEnums["User"]["accountStatus"]).map(
+  const items = Object?.keys(staticEnums["User"]["accountStatus"]).map(
     (item, index) => ({
       item: { label: customerStatus[index], value: item },
     })
@@ -74,7 +74,7 @@ const DetailsData = ({
               />
             </svg>
           </div>
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
+          <h1 className="font-semibold text-lg xMini:text-2xl ml-6">
             {translate("admin.customers_details.card_content.main_heading")}
           </h1>
         </div>
@@ -254,7 +254,7 @@ const DetailsData = ({
 
             <Image
               src={customerDetail?.company?.logo || userIcon}
-              alt="company logo"
+              alt=""
               height={50}
               width={40}
               className="rounded-full"

@@ -181,66 +181,66 @@ export const AppointmentTableRows = ({
                   </span>
                 </div>
               </div>
-              <div className="pl-2">
+              {/* <div> */}
+              <div
+                className="flex items-center gap-x-1 2xl:gap-x-3"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div
-                  className="flex items-center gap-x-1 2xl:gap-x-2"
-                  onClick={(e) => e.stopPropagation()}
+                  className="justify-center items-center cursor-pointer hidden 2xl:flex"
+                  onClick={(e) =>
+                    handleImageUpload(
+                      item?.id,
+                      item?.leadID?.refID,
+                      name,
+                      heading,
+                      e as React.MouseEvent<HTMLSpanElement>
+                    )
+                  }
+                  title={translate("leads.table_headings.images")}
                 >
-                  <div
-                    className="justify-center items-center cursor-pointer hidden 2xl:flex"
-                    onClick={(e) =>
-                      handleImageUpload(
-                        item?.id,
-                        item?.leadID?.refID,
-                        name,
-                        heading,
-                        e as React.MouseEvent<HTMLSpanElement>
-                      )
-                    }
-                    title={translate("leads.table_headings.images")}
-                  >
-                    <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
-                  </div>
-                  <div
-                    className="justify-center items-center cursor-pointer hidden 2xl:flex"
-                    onClick={(e) =>
-                      handleNotes(
-                        item?.id,
-                        item?.leadID?.refID,
-                        name,
-                        heading,
-                        e,
-                        item?.leadID?.id
-                      )
-                    }
-                    title={translate("leads.table_headings.note")}
-                  >
-                    <AddNoteIcon isNoteCreated={item?.leadID?.isNoteCreated} />
-                  </div>
+                  <AddImageIcon isImageAdded={item?.leadID?.isImageAdded} />
+                </div>
+                <div
+                  className="justify-center items-center cursor-pointer hidden 2xl:flex"
+                  onClick={(e) =>
+                    handleNotes(
+                      item?.id,
+                      item?.leadID?.refID,
+                      name,
+                      heading,
+                      e,
+                      item?.leadID?.id
+                    )
+                  }
+                  title={translate("leads.table_headings.note")}
+                >
+                  <AddNoteIcon isNoteCreated={item?.leadID?.isNoteCreated} />
+                </div>
 
-                  <div className="flex items-center w-full">
-                    {item?.isReportSubmitted ? (
-                      <OutlineButton
-                        inputType="button"
-                        onClick={() => handlePreview(item?.id)}
-                        className="bg-white py-2 px-1 xl:px-2 text-primary xl:text-[#45C769] !min-w-[140px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover !text-xs !lg:text-sm !2xl:text-lg !h-fit"
-                        text={translate("appointments.view_reports_btn")}
-                        id="view reports"
-                        iconAlt="view reports"
-                      />
-                    ) : (
-                      <Button
-                        inputType="button"
-                        onClick={() => handleClickRow(false, item.id)}
-                        className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-primary text-white rounded-md w-full"
-                        text={translate("appointments.sub_report_1")}
-                        id="view reports"
-                        iconAlt="view reports"
-                      />
-                    )}
-                  </div>
+                <div className="flex items-center">
+                  {item?.isReportSubmitted ? (
+                    <OutlineButton
+                      inputType="button"
+                      onClick={() => handlePreview(item?.id)}
+                      className="bg-white py-2 px-1 xl:px-2 text-primary xl:text-[#45C769] !min-w-[140px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover !text-xs !lg:text-sm !2xl:text-lg !h-fit"
+                      text={translate("appointments.view_reports_btn")}
+                      id="view reports"
+                      iconAlt="view reports"
+                    />
+                  ) : (
+                    <Button
+                      inputType="button"
+                      onClick={() => handleClickRow(false, item.id)}
+                      className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-primary text-white rounded-md w-full"
+                      text={translate("appointments.sub_report_1")}
+                      id="view reports"
+                      iconAlt="view reports"
+                    />
+                  )}
                 </div>
               </div>
+              {/* </div> */}
             </div>
 
             {/* {isAgent ? (

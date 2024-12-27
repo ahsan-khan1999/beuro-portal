@@ -1,6 +1,6 @@
+import { ReportDetailData } from "./detail-screens";
 import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { AppointmentsDetailCard } from "../agent-details/detail-card";
-import { ReportDetailData } from "./detail-screens";
 import { useReportDetails } from "@/hooks/appointments/useReportDetail";
 import NoDataEmptyState from "@/base-components/loadingEffect/no-data-empty-state";
 
@@ -21,7 +21,7 @@ export const ReportDetails = () => {
   } = useReportDetails();
 
   const styles =
-    "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[285px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground";
+    "2xl:fixed offerCardCalWidth z-10 2xl:-mt-[275px] 2xl:border-t-[14px] 2xl:border-t-defaultBackground";
 
   return (
     <>
@@ -56,7 +56,7 @@ export const ReportDetails = () => {
               />
             </div>
           ) : (
-            <div className="2xl:mt-[365px] w-full 2xl:block mb-10">
+            <div className="2xl:mt-[355px] w-full 2xl:block mb-10">
               <ReportDetailData
                 reportDetail={reportDetails}
                 loading={isLoading}

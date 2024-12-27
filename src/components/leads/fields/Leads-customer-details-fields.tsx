@@ -47,6 +47,27 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
           {
             containerClass: "mb-0",
             label: {
+              text: `${translate("customers.details.gender")}`,
+              htmlFor: "gender",
+              className: "mb-[10px]",
+            },
+            field: {
+              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
+              type: Field.select,
+              id: "gender",
+              name: "gender",
+              options: Object.keys(staticEnums.Gender).map((item) => ({
+                value: staticEnums.Gender[item],
+                label: translate(`gender.${item}`),
+              })),
+
+              control,
+              value: "",
+            },
+          },
+          {
+            containerClass: "mb-0",
+            label: {
               text: `${translate("leads.customer_details.full_name")}`,
               htmlFor: "fullName",
               className: "mb-[10px]",
@@ -111,27 +132,6 @@ export const LeadsCustomerDetailsFormField: GenerateCustomerLeadFormField = (
               register,
               value:
                 leadDetails?.id && leadDetails?.customerDetail?.mobileNumber,
-            },
-          },
-          {
-            containerClass: "mb-0",
-            label: {
-              text: `${translate("customers.details.gender")}`,
-              htmlFor: "gender",
-              className: "mb-[10px]",
-            },
-            field: {
-              className: "!px-4 !border-[#BFBFBF] focus:!border-primary",
-              type: Field.select,
-              id: "gender",
-              name: "gender",
-              options: Object.keys(staticEnums.Gender).map((item) => ({
-                value: staticEnums.Gender[item],
-                label: translate(`gender.${item}`),
-              })),
-
-              control,
-              value: "",
             },
           },
         ],

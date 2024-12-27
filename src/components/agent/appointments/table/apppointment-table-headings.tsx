@@ -1,5 +1,5 @@
-import { useTranslation } from "next-i18next";
 import React from "react";
+import { useTranslation } from "next-i18next";
 
 export const AppointmentTableHeadings = () => {
   const { t: translate } = useTranslation();
@@ -11,12 +11,12 @@ export const AppointmentTableHeadings = () => {
       grid-cols-[minmax(100px,15%)_minmax(100px,_15%)_minmax(80px,_12%)_minmax(80px,_23%)_minmax(100px,15%)_minmax(150px,20%)] 
       items-center gap-x-2 bg-primary rounded-lg px-2 py-4"
       >
-        <div className="">
+        <div>
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.customer")}
           </span>
         </div>
-        <div className="">
+        <div>
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white  hidden md:flex">
             {translate("appointments.table_headings.company_name")}
           </span>
@@ -25,28 +25,28 @@ export const AppointmentTableHeadings = () => {
             ..
           </span>
         </div>
-        <div className=" flex items-center items-center">
+        <div className="flex items-center">
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.date")}/
             {translate("appointments.table_headings.time")}
           </span>
         </div>
 
-        <div className="">
+        <div>
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.canton")}
           </span>
         </div>
-        <div className="">
+        <div>
           <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
             {translate("appointments.table_headings.offer_status")}
           </span>
         </div>
-        <div className="">
-          <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
-            {translate("common.actions")}
-          </span>
-        </div>
+        {/* <div className="w-fit"> */}
+        <span className="font-semibold text-xs md:text-sm xl:text-base text-white">
+          {translate("common.actions")}
+        </span>
+        {/* </div> */}
       </div>
       {/* {isAgent ? (
         <>
