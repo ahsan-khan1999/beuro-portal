@@ -6,6 +6,7 @@ import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
 import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+import { germanDateFormat } from "@/utils/utility";
 
 const CustomerDetailsData = ({
   offerDetails,
@@ -62,6 +63,15 @@ const CustomerDetailsData = ({
               )}
             </div>
           </div>
+
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("customers.details.gender")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+              {offerDetails?.leadID?.customerDetail?.gender}
+            </div>
+          </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.full_name")}
@@ -82,6 +92,7 @@ const CustomerDetailsData = ({
               </div>
             </div>
           )}
+
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("offers.offer_details.email_address")}
@@ -106,14 +117,7 @@ const CustomerDetailsData = ({
               {offerDetails?.leadID?.customerDetail?.mobileNumber}
             </div>
           </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("customers.details.gender")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {offerDetails?.leadID?.customerDetail?.gender}
-            </div>
-          </div>
+
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("common.lead")}
@@ -122,6 +126,81 @@ const CustomerDetailsData = ({
               {offerDetails?.leadID?.refID}
             </div>
           </div>
+
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("common.time")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+              {offerDetails?.time}
+            </div>
+          </div>
+
+          {/* <div className="flex flex-col gap-y-5">
+            {offerDetails?.date?.map((item, index) => {
+              return (
+                <div key={index} className="flex items-center gap-x-3">
+                  {item?.startDate && (
+                    <div className="w-full">
+                      <label className="text-[#4D4D4D] mb-3 block text-sm">
+                        {translate("common.start_date")}
+                      </label>
+                      <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                        {item.startDate}
+                      </div>
+                    </div>
+                  )}
+
+                  {item?.endDate && (
+                    <div className="w-full">
+                      <label className="text-[#4D4D4D] mb-3 block text-sm">
+                        {translate("common.end_date")}
+                      </label>
+                      <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                        {item.endDate}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div> */}
+        </div>
+
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-5 rounded-t-lg px-2 py-3 bg-[#EDF4FF]">
+          {offerDetails?.date?.map((item, index) => {
+            const isPair = item?.startDate && item?.endDate;
+
+            return (
+              <div
+                key={index}
+                className={`flex gap-3 ${
+                  index % 2 === 0 ? "col-start-1" : "col-start-2"
+                }`}
+              >
+                {item?.startDate && (
+                  <div className={isPair ? "w-full" : "w-fit"}>
+                    <label className="text-[#4D4D4D] mb-3 block text-sm">
+                      {translate("common.start_date")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                      {germanDateFormat(item.startDate)}
+                    </div>
+                  </div>
+                )}
+                {item?.endDate && (
+                  <div className={isPair ? "w-full" : "w-fit"}>
+                    <label className="text-[#4D4D4D] mb-3 block text-sm">
+                      {translate("common.end_date")}
+                    </label>
+                    <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
+                      {germanDateFormat(item.endDate)}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-5">

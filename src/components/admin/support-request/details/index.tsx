@@ -21,7 +21,6 @@ const SupportRequestDetails = () => {
       <DetailsCard>
         <DetailsData
           supportDetail={contactSupportDetails}
-          // status={status}
           handlePreviousClick={handlePreviousClick}
           handleStatusUpadte={handleStatusUpadte}
         />
