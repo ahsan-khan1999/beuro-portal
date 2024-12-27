@@ -6,17 +6,17 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { useTranslation } from "next-i18next";
 import { getKeyByValue } from "@/utils/auth.util";
 
+export interface LeadsCustomerDetailsProps {
+  onClick?: (index: number, component: ComponentsType) => void;
+  isAgent?: boolean;
+}
+
 export const LeadsCustomerDetailData = ({
   onClick,
   isAgent,
-}: {
-  onClick?: (index: number, component: ComponentsType) => void;
-  isAgent?: boolean;
-}) => {
+}: LeadsCustomerDetailsProps) => {
   const { t: translate } = useTranslation();
   const { leadDetails } = useAppSelector((state) => state.lead);
-
-  console.log(leadDetails?.customerDetail?.gender, "gender");
 
   return (
     <LeadsCardLayout>
@@ -89,6 +89,14 @@ export const LeadsCustomerDetailData = ({
           </div>
           <div>
             <label className="text-[#4D4D4D] mb-3 block text-sm">
+              {translate("customers.details.gender")}
+            </label>
+            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
+              {translate(`gender.${leadDetails?.customerDetail?.gender}`)}
+            </div>
+          </div>
+          <div>
+            <label className="text-[#4D4D4D] mb-3 block text-sm">
               {translate("leads.customer_details.full_name")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
@@ -127,14 +135,6 @@ export const LeadsCustomerDetailData = ({
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
               {leadDetails?.customerDetail?.mobileNumber}
-            </div>
-          </div>
-          <div>
-            <label className="text-[#4D4D4D] mb-3 block text-sm">
-              {translate("customers.details.gender")}
-            </label>
-            <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px]">
-              {translate(`gender.${leadDetails?.customerDetail?.gender}`)}
             </div>
           </div>
         </div>

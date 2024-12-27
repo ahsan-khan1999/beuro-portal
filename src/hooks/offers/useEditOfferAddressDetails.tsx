@@ -112,14 +112,7 @@ export const useEditOfferAddressDetails = ({
 
   const handleAddNewAddress = () => {
     append(addressObject);
-    // const currentAddressItem = addressSettings?.addresses[addressFieldsLength];
-
-    setValue(
-      `address.${addressFieldsLength}.addressType`,
-      ``
-      // currentAddressItem || `Address ${addressFieldsLength}`
-    );
-
+    setValue(`address.${addressFieldsLength}.addressType`, ``);
     setValue(
       `address.${addressFieldsLength}.label`,
       `Adresse ${addressFieldsLength + 1}`
