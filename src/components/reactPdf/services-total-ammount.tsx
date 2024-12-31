@@ -407,8 +407,9 @@ export const ServicesTotalAmount = ({
                               </Text>
                               <Text style={styles.paidValue}>
                                 {/* {pdfDateFormat(item.paidDate, language || "de")} */}
-                                {item.paidDate &&
-                                  germanDateFormat(item.paidDate)}
+                                {item.paidDate
+                                  ? germanDateFormat(item.paidDate)
+                                  : ""}
                               </Text>
                             </View>
                           )}
@@ -556,8 +557,9 @@ export const ServicesTotalAmount = ({
                                     :
                                   </Text>
                                   <Text style={styles.paidValue}>
-                                    {item.paidDate &&
-                                      germanDateFormat(item.paidDate)}
+                                    {item.paidDate
+                                      ? germanDateFormat(item.paidDate)
+                                      : ""}
                                   </Text>
                                 </View>
                               )}
@@ -655,8 +657,9 @@ export const ServicesTotalAmount = ({
                                   :
                                 </Text>
                                 <Text style={styles.paidValue}>
-                                  {item.paidDate &&
-                                    germanDateFormat(item.paidDate)}
+                                  {item.paidDate
+                                    ? germanDateFormat(item.paidDate)
+                                    : ""}
                                 </Text>
                               </View>
                             )}

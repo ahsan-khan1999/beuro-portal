@@ -238,7 +238,9 @@ const InvoiceDetailsData = ({
                 {translate("invoice.card_content.created_date")}:
               </span>
               <span className="text-[#393939] font-medium text-base">
-                {germanDateFormat(invoiceDetails?.createdAt)}
+                {invoiceDetails?.createdAt
+                  ? germanDateFormat(invoiceDetails?.createdAt)
+                  : ""}
               </span>
             </div>
             <div

@@ -38,7 +38,9 @@ const TableHeadings = ({ employsData }: { employsData: Employee[] }) => {
                   {item.designation}
                 </span>
                 <span className="py-4 mlg:hidden xlg:flex">
-                  {germanDateFormat(item?.creationDate)}
+                  {item?.creationDate
+                    ? germanDateFormat(item?.creationDate)
+                    : ""}
                 </span>
               </div>
             </div>

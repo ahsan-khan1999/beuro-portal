@@ -19,8 +19,6 @@ import appointmentIcon from "@/assets/pngs/appoinment-icon.png";
 import { BackIcon } from "@/assets/svgs/components/back-icon";
 import { ImageUploadIcon } from "@/assets/svgs/components/image-upload-icon";
 import { WriteIcon } from "@/assets/svgs/components/write-icon";
-import { BaseButton } from "@/base-components/ui/button/base-button";
-import { PostIcon } from "@/assets/svgs/components/post-icon";
 import colorFullEmailIcon from "@/assets/svgs/color_ful_input_email.svg";
 
 export interface LeadDetailCardProps {
@@ -311,7 +309,9 @@ const LeadsDetailsCardData = ({
             {translate("leads.card_content.created_date")}:
           </span>
           <span className="font-medium text-[#4B4B4B] text-base">
-            {germanDateFormat(leadDetails?.createdAt)}
+            {leadDetails?.createdAt
+              ? germanDateFormat(leadDetails?.createdAt)
+              : ""}
           </span>
         </div>
         <div className="flex xs:justify-between xMini:justify-start xMini:flex-col mlg:flex-row mlg:items-center gap-x-[10px] gap-y-2 mlg:gap-y-0">

@@ -208,8 +208,9 @@ const DetailsData = ({
               :
             </span>
             <span className="text-[#4B4B4B] font-medium">
-              {customerDetail?.plan?.createdAt &&
-                germanDateFormat(customerDetail?.plan?.createdAt)}
+              {customerDetail?.plan?.createdAt
+                ? germanDateFormat(customerDetail?.plan?.createdAt)
+                : ""}
             </span>
           </div>
         </div>

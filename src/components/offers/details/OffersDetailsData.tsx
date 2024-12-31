@@ -6,7 +6,6 @@ import AdditionalDetails from "./AdditionalDetails";
 import CustomerDetailsData from "./CustomerDetailsData";
 import { OffersTableRowTypes } from "@/types/offers";
 import OfferEditImages from "../OfferEditImages";
-import CustomLoader from "@/base-components/ui/loader/customer-loader";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import OfferTabs from "@/base-components/ui/tab/OfferTabs";
@@ -182,17 +181,17 @@ const OffersDetailsData = ({
       <div className="grid grid-cols-1 2xl:grid-cols-[320px_1fr] w-full break-all">
         <div className="max-w-[320px] hidden xlg:block" />
         <div className="flex flex-col gap-y-5 w-full overflow-hidden">
-          {loading ? (
+          {/* {loading ? (
             <div className="flex justify-center items-center w-full">
               <CustomLoader />
             </div>
-          ) : (
-            componentArray?.map((component, index) => (
-              <div key={index} className="w-full">
-                {component}
-              </div>
-            ))
-          )}
+          ) : ( */}
+          {componentArray?.map((component, index) => (
+            <div key={index} className="w-full">
+              {component}
+            </div>
+          ))}
+          {/* )} */}
         </div>
       </div>
     </div>

@@ -84,8 +84,9 @@ export const LeadServiceDetailsData = ({
               {translate("leads.service_details.desire_date")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4  text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {leadDetails?.desireDate &&
-                germanDateFormat(leadDetails?.desireDate)}
+              {leadDetails?.desireDate
+                ? germanDateFormat(leadDetails?.desireDate)
+                : ""}
             </div>
           </div>
           <div>

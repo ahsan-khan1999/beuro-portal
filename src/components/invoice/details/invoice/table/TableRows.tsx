@@ -96,7 +96,7 @@ const TableRows = ({
                   {item?.invoiceID?.content?.contentName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xMaxLarge:block">
-                  {germanDateFormat(item.createdAt)}
+                  {item.createdAt ? germanDateFormat(item.createdAt) : ""}
                 </span>
                 <span className="py-4 truncate mlg:hidden maxSize:block">
                   {item.amount + " " + systemSettings?.currency}

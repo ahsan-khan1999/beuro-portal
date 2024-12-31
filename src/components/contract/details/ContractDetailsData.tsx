@@ -215,17 +215,17 @@ const ContractDetailsData = ({
 
       <div className="overflow-y-auto w-full break-all flex">
         <div className="max-w-[320px] w-full hidden 2xl:block"></div>
-        {loading ? (
+        {/* {loading ? (
           <div className="flex justify-center items-center w-full">
             <CustomLoader />
           </div>
-        ) : (
-          <div className="flex flex-col gap-y-5 w-full">
-            {componentArray.map((component, index) => (
-              <div key={index}>{component}</div>
-            ))}
-          </div>
-        )}
+        ) : ( */}
+        <div className="flex flex-col gap-y-5 w-full">
+          {componentArray?.map((component, index) => (
+            <div key={index}>{component}</div>
+          ))}
+        </div>
+        {/* )} */}
       </div>
     </>
   );

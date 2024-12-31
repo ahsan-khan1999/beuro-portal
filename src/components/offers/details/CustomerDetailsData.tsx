@@ -184,7 +184,7 @@ const CustomerDetailsData = ({
                       {translate("common.start_date")}
                     </label>
                     <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                      {germanDateFormat(item.startDate)}
+                      {item.startDate ? germanDateFormat(item.startDate) : ""}
                     </div>
                   </div>
                 )}
@@ -194,7 +194,7 @@ const CustomerDetailsData = ({
                       {translate("common.end_date")}
                     </label>
                     <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-                      {germanDateFormat(item.endDate)}
+                      {item.endDate ? germanDateFormat(item.endDate) : ""}
                     </div>
                   </div>
                 )}

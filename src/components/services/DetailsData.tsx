@@ -95,7 +95,10 @@ const DetailsData = ({
           <h3 className="text-[#4D4D4D] mt-4">
             {translate("services.card_content.created_date")}:
             <span className="text-[#4B4B4B] font-medium">
-              &nbsp;&nbsp;{germanDateFormat(serviceDetail?.createdAt)}
+              &nbsp;&nbsp;{" "}
+              {serviceDetail?.createdAt
+                ? germanDateFormat(serviceDetail?.createdAt)
+                : ""}
             </span>
           </h3>
         )}

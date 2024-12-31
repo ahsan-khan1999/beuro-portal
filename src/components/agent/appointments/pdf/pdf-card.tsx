@@ -160,8 +160,9 @@ export const AppointmentPdfCard = ({
               </span>
               {appointmentDetails?.appointmentID?.date && (
                 <span className="text-base text-[#5C5C5C] font-nomal">
-                  {appointmentDetails?.appointmentID?.date &&
-                    germanDateFormat(appointmentDetails?.appointmentID?.date)}
+                  {appointmentDetails?.appointmentID?.date
+                    ? germanDateFormat(appointmentDetails?.appointmentID?.date)
+                    : ""}
                 </span>
               )}
             </div>

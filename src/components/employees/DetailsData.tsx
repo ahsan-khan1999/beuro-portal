@@ -89,7 +89,7 @@ const DetailsData = ({
           {translate("employees.card_content.created_date")}:
         </span>
         <span className="text-[#4B4B4B] font-medium">
-          {date && germanDateFormat(date)}
+          {date ? germanDateFormat(date) : ""}
         </span>
       </div>
     </>

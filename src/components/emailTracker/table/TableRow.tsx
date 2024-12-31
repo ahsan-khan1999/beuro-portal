@@ -42,13 +42,17 @@ const TableRow = ({ dataToAdd }: { dataToAdd: TableRowEmailTracker[] }) => {
                 </span>
                 <div className="py-4 flex flex-col">
                   <span>{formatDateTimeToTime(item.createdAt)}</span>
-                  <span>{germanDateFormat(item.createdAt)}</span>
+                  <span>
+                    {item.createdAt ? germanDateFormat(item.createdAt) : ""}
+                  </span>
                 </div>
                 <div className="py-4 flex flex-col mlg:hidden xMaxSize:flex">
                   {(item.viewedAt && (
                     <>
                       <span>{formatDateTimeToTime(item.viewedAt)}</span>
-                      <span>{germanDateFormat(item.viewedAt)}</span>
+                      <span>
+                        {item.viewedAt ? germanDateFormat(item.viewedAt) : ""}
+                      </span>
                     </>
                   )) || <span className="flex my-auto align-middle">-</span>}
                 </div>

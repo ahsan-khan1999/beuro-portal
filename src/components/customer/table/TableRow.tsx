@@ -46,7 +46,7 @@ const TableRow = ({ currentPageRows }: CustomerTable) => {
                 <span className="py-4 truncate">{item.email}</span>
                 <span className="py-4 truncate">{item.phoneNumber}</span>
                 <span className="py-4 maxSize:flex items-center mlg:hidden">
-                  {germanDateFormat(item.createdAt)}
+                  {item.createdAt ? germanDateFormat(item.createdAt) : ""}
                 </span>
                 <span className="py-4 flex items-center truncate">
                   {item?.address?.country}

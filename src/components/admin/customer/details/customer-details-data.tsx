@@ -55,8 +55,9 @@ const CustomerDetailsData = ({
               {translate("admin.customers_details.customer_details.created_on")}
             </label>
             <div className="rounded-lg border border-[#EBEBEB] bg-white p-4 text-[#4B4B4B] font-medium min-h-[58px] truncate">
-              {customerDetail?.createdAt &&
-                germanDateFormat(customerDetail?.createdAt)}
+              {customerDetail?.createdAt
+                ? germanDateFormat(customerDetail?.createdAt)
+                : ""}
             </div>
           </div>
           <div>

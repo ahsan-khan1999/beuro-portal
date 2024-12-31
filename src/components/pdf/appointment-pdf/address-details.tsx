@@ -1,5 +1,5 @@
 import { DateRangeProps } from "@/types";
-import { formatDateTimeToDate, germanDateFormat } from "@/utils/utility";
+import { germanDateFormat } from "@/utils/utility";
 import React from "react";
 
 export const Country: Record<string, string> = {

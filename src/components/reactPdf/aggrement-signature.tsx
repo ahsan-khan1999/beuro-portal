@@ -83,7 +83,7 @@ export const AggrementSignature = ({
           <View style={{ ...styles.innerDate, marginTop: signature ? 87 : 0 }}>
             {
               <Text style={{ position: "absolute", top: -30, fontSize: 14 }}>
-                {newData && germanDateFormat(newData)}
+                {newData ? germanDateFormat(newData) : ""}
               </Text>
             }
             <Text style={styles.dateText}>

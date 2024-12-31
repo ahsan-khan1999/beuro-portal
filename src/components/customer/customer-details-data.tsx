@@ -6,11 +6,8 @@ import { updateQuery } from "@/utils/update-query";
 import { useRouter } from "next/router";
 import createOfferIcon from "@/assets/svgs/create_offer_icon.png";
 import { OutlineButton } from "@/base-components/ui/button/outline-button";
-import localStoreUtil from "@/utils/localstore.util";
 import { useAppDispatch } from "@/hooks/useRedux";
 import { setLeadDetails } from "@/api/slices/lead/leadSlice";
-import { getKeyByValue } from "@/utils/auth.util";
-import { staticEnums } from "@/utils/static";
 import { germanDateFormat } from "@/utils/utility";
 
 export const CustomerDetailsData = ({
@@ -132,7 +129,7 @@ export const CustomerDetailsData = ({
           {translate("customers.card_content.created_date")}:
         </span>
         <span className="text-primary font-medium">
-          {date && germanDateFormat(date)}
+          {date ? germanDateFormat(date) : ""}
         </span>
       </div>
     </>

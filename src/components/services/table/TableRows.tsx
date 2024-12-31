@@ -31,8 +31,10 @@ const TableRowServices = ({ servicesData }: { servicesData: Service[] }) => {
               >
                 <span className="py-4 truncate">{item?.refID}</span>
                 <span className="py-4 truncate">{item.serviceName}</span>
-                <span className="py-4">{germanDateFormat(item.createdAt)}</span>
-                <span className="py-4 ">{item.price}</span>
+                <span className="py-4">
+                  {item.createdAt ? germanDateFormat(item.createdAt) : ""}
+                </span>
+                <span className="py-4">{item.price}</span>
                 <span className="py-4">{item?.unit}</span>
                 <span className="py-4 mr-1 truncate">{item.description}</span>
               </div>

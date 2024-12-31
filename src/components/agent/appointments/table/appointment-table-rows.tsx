@@ -89,7 +89,7 @@ export const AppointmentTableRows = ({
 
         const name =
           customerType === 1
-            ? item?.leadID?.customerDetail?.companyName
+            ? item?.createdBy?.company?.companyName
             : item?.leadID?.customerDetail?.fullName;
 
         const heading =
@@ -134,13 +134,12 @@ export const AppointmentTableRows = ({
 
               <div>
                 <span className="text-xs md:sm xl:text-base hidden md:flex">
-                  {item.leadID?.customerDetail?.companyName}
+                  {item.createdBy?.company?.companyName}
                 </span>
                 <span className="text-xs md:sm xl:text-base flex md:hidden">
-                  {item.leadID?.customerDetail?.companyName?.length > 12
-                    ? item.leadID?.customerDetail?.companyName.slice(0, 12) +
-                      ".."
-                    : item.leadID?.customerDetail?.companyName}
+                  {item.createdBy?.company?.companyName?.length > 12
+                    ? item.createdBy?.company?.companyName.slice(0, 12) + ".."
+                    : item.createdBy?.company?.companyName}
                 </span>
               </div>
 
