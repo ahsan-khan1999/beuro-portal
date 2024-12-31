@@ -37,19 +37,37 @@ export const useReportDetails = () => {
   const { isLoading, loading, reportDetails, appointmentDetails } =
     useAppSelector((state) => state.appointment);
 
+  // useEffect(() => {
+  //   if (id && !appointmentDetails?.isReportSubmitted) {
+  //     dispatch(readAppointmentDetails({ params: { filter: id } })).then(
+  //       (res: CustomerPromiseActionType) => {
+  //         dispatch(setAppointmentDetails(res.payload));
+  //       }
+  //     );
+  //   } else if (id && appointmentDetails?.isReportSubmitted) {
+  //     dispatch(readReportDetails({ params: { filter: id } })).then(
+  //       (res: CustomerPromiseActionType) => {
+  //         dispatch(setReportDetails(res.payload));
+  //       }
+  //     );
+  //   }
+  // }, [id, appointmentDetails?.isReportSubmitted]);
+
   useEffect(() => {
-    if (id && !appointmentDetails?.isReportSubmitted) {
-      dispatch(readAppointmentDetails({ params: { filter: id } })).then(
-        (res: CustomerPromiseActionType) => {
-          dispatch(setAppointmentDetails(res.payload));
-        }
-      );
-    } else if (id && appointmentDetails?.isReportSubmitted) {
-      dispatch(readReportDetails({ params: { filter: id } })).then(
-        (res: CustomerPromiseActionType) => {
-          dispatch(setReportDetails(res.payload));
-        }
-      );
+    if (id) {
+      if (!appointmentDetails?.isReportSubmitted) {
+        dispatch(readAppointmentDetails({ params: { filter: id } })).then(
+          (res: CustomerPromiseActionType) => {
+            dispatch(setAppointmentDetails(res.payload));
+          }
+        );
+      } else {
+        dispatch(readReportDetails({ params: { filter: id } })).then(
+          (res: CustomerPromiseActionType) => {
+            dispatch(setReportDetails(res.payload));
+          }
+        );
+      }
     }
   }, [id, appointmentDetails?.isReportSubmitted]);
 

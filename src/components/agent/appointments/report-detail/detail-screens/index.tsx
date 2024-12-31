@@ -18,14 +18,14 @@ export enum ComponentsType {
 
 export interface ReportDetailProps {
   reportDetail: Report;
-  loading: boolean;
+  // loading: boolean;
   handleUpdateDiscount: (discount: number) => void;
   currency?: string;
 }
 
 export const ReportDetailData = ({
   reportDetail,
-  loading,
+  // loading,
   currency,
 }: ReportDetailProps) => {
   const [tabType, setTabType] = useState<number>(0);
@@ -151,17 +151,17 @@ export const ReportDetailData = ({
       <div className="grid grid-cols-1 2xl:grid-cols-[320px_1fr] w-full break-all">
         <div className="max-w-[320px] hidden 2xl:block" />
         <div className="flex flex-col gap-y-5 w-full overflow-hidden">
-          {loading ? (
+          {/* {loading ? (
             <div className="flex justify-center items-center w-full">
               <CustomLoader />
             </div>
-          ) : (
-            componentArray?.map((component, index) => (
-              <div key={index} className="w-full">
-                {component}
-              </div>
-            ))
-          )}
+          ) : ( */}
+          {componentArray?.map((component, index) => (
+            <div key={index} className="w-full">
+              {component}
+            </div>
+          ))}
+          {/* )} */}
         </div>
       </div>
     </div>

@@ -9,13 +9,12 @@ import { useReportUpdatedPdf } from "@/hooks/appointments/useReportUpdatedPdf";
 import AppointmentPdfPreview from "@/components/pdf/appointment-pdf/appointment-pdf-preview";
 import { Container } from "@/components/pdf/container";
 import { useAppSelector } from "@/hooks/useRedux";
-import { useRouter } from "next/router";
 import { useReportDetails } from "@/hooks/appointments/useReportDetail";
 
 export const ReportPdfPreview = () => {
-  const router = useRouter();
   const {
-    isLoading,
+    router,
+    loading,
     handleDonwload,
     handlePrint,
     reportDetails,
@@ -42,7 +41,7 @@ export const ReportPdfPreview = () => {
 
   return (
     <div className="flex flex-col gap-y-5 pb-5">
-      {isLoading ? (
+      {loading ? (
         <CustomLoader />
       ) : (
         <>

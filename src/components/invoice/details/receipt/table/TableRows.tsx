@@ -84,7 +84,9 @@ const TableRows = ({
                   {item?.invoiceID?.content?.contentName}
                 </span>
                 <span className="py-4 truncate mlg:hidden xLarge:block">
-                  {germanDateFormat(item.paidDate)}
+                  {item.paidDate !== null && item.paidDate !== undefined
+                    ? germanDateFormat(item.paidDate)
+                    : ""}
                 </span>
                 <span className="py-4 truncate mlg:hidden xlg:block">
                   {item.amount + " " + systemSettings?.currency}

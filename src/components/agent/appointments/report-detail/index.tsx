@@ -25,9 +25,9 @@ export const ReportDetails = () => {
 
   return (
     <>
-      {(loading || isLoading) && <CustomLoader />}
-
-      {!loading && (
+      {loading && isLoading ? (
+        <CustomLoader />
+      ) : (
         <>
           <div
             className={`${
@@ -59,7 +59,7 @@ export const ReportDetails = () => {
             <div className="2xl:mt-[355px] w-full 2xl:block mb-10">
               <ReportDetailData
                 reportDetail={reportDetails}
-                loading={isLoading}
+                // loading={isLoading}
                 handleUpdateDiscount={handleUpdateDiscount}
                 currency={systemSettings?.currency}
               />

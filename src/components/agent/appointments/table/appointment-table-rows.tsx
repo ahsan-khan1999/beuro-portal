@@ -146,17 +146,17 @@ export const AppointmentTableRows = ({
 
               <div className="flex flex-col  gap-y-1">
                 <span className="text-xs md:sm xl:text-base ml-1">
-                  {item?.date && germanDateFormat(item?.date)}
+                  {item?.date ? germanDateFormat(item?.date) : ""}
                 </span>
                 <div className="flex max-w-[150px] flex-wrap gap-x-1 items-center ">
                   <p className="text-xs leading-4 md:sm xl:text-base">
-                    {localStartTime}
+                    {localStartTime ? localStartTime : ""}
                   </p>
 
                   <p className="text-xs md:sm xl:text-base p-0 m-0">-</p>
 
                   <p className="text-xs md:sm xl:text-base p-0 m-0">
-                    {localEndTime}
+                    {localEndTime ? localEndTime : ""}
                   </p>
                 </div>
               </div>

@@ -108,7 +108,7 @@ export const useEditOfferAddressDetails = ({
     setValue(`address.${index}.label`, item);
   };
 
-  const addressFieldsLength = addressFields.length || 1;
+  const addressFieldsLength = addressFields?.length || 1;
 
   const handleAddNewAddress = () => {
     append(addressObject);

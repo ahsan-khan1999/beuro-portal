@@ -182,16 +182,7 @@ const appointmentSlice = createSlice({
     builder.addCase(readAppointments.rejected, (state) => {
       state.loading = false;
     });
-    builder.addCase(readReportDetails.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(readReportDetails.fulfilled, (state, action) => {
-      state.reportDetails = action.payload;
-      state.isLoading = false;
-    });
-    builder.addCase(readReportDetails.rejected, (state) => {
-      state.isLoading = false;
-    });
+
     builder.addCase(readAppointmentDetails.pending, (state) => {
       state.isLoading = true;
     });
@@ -201,6 +192,17 @@ const appointmentSlice = createSlice({
     });
     builder.addCase(readAppointmentDetails.rejected, (state) => {
       state.isLoading = false;
+    });
+
+    builder.addCase(readReportDetails.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(readReportDetails.fulfilled, (state, action) => {
+      state.reportDetails = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(readReportDetails.rejected, (state) => {
+      state.loading = false;
     });
 
     builder.addCase(createAppointment.pending, (state) => {

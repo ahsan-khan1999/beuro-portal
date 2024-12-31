@@ -36,7 +36,7 @@ export const useReportUpdatedPdf = () => {
     null
   );
 
-  const { isLoading, reportDetails } = useAppSelector(
+  const { isLoading, loading, reportDetails } = useAppSelector(
     (state) => state.appointment
   );
   const { modal, loading: loadingGlobal } = useAppSelector(
@@ -422,6 +422,7 @@ export const useReportUpdatedPdf = () => {
   };
 
   return {
+    router,
     reportData,
     templateSettings,
     emailTemplateSettings,
@@ -440,7 +441,7 @@ export const useReportUpdatedPdf = () => {
     mergedPdfUrl: reportId && !isPdfRendering ? mergedPdfUrl : null,
     isPdfRendering,
     isLoading: isLoading || isPdfRendering,
-    loading: isLoading,
+    loading,
     clearMergedPdfUrl,
   };
 };

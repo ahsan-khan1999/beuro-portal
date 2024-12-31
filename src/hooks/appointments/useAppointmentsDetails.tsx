@@ -45,7 +45,7 @@ export const useAppointmentsDetails = () => {
     if (id) {
       dispatch(readAppointmentDetails({ params: { filter: id } })).then(
         (res: CustomerPromiseActionType) => {
-          dispatch(setAppointmentDetails(res.payload));
+          dispatch(setAppointmentDetails(res?.payload));
         }
       );
     }

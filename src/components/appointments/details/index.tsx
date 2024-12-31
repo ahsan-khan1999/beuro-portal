@@ -42,7 +42,7 @@ export const AppointmentsDetails = () => {
             <div className="2xl:mt-[350px] w-full 2xl:block mb-10">
               <ReportDetailData
                 reportDetail={reportDetails}
-                loading={isLoading}
+                // loading={isLoading}
                 handleUpdateDiscount={handleUpdateDiscount}
                 currency={systemSettings?.currency}
               />

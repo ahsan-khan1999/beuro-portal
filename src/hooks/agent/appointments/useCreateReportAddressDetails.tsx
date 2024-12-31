@@ -112,7 +112,7 @@ export const useCreateReportAddressDetails = ({
     };
 
     const resetFormWithAddresses = (addresses: any[], labelPrefix: string) => {
-      return addresses.map((item, index) => ({
+      return addresses?.map((item, index) => ({
         ...item,
         label: item?.label || `${labelPrefix} ${++index}`,
       }));
@@ -188,7 +188,7 @@ export const useCreateReportAddressDetails = ({
           params: { filter: appointmentId },
         })
       ).then((response: CustomerPromiseActionType) => {
-        if (response.payload) {
+        if (response?.payload) {
           const transformedData = transformData({
             customerType:
               response.payload?.leadID?.customerDetail?.customerType,
@@ -225,7 +225,7 @@ export const useCreateReportAddressDetails = ({
     }
   }, [appointmentDetails?.id, reportDetails?.id, report, appointmentId]);
 
-  const addressFieldsLength = addressFields.length || 1;
+  const addressFieldsLength = addressFields?.length || 1;
 
   const handleChangeLabel = (value: string, index: number) => {
     setValue(`address.${index}.label`, value);
