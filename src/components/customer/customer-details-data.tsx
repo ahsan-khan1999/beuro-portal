@@ -80,7 +80,7 @@ export const CustomerDetailsData = ({
               />
             </svg>
           </div>
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
+          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-sm xMini:text-2xl ml-6">
             {translate("customers.card_content.heading")}
           </h1>
         </div>

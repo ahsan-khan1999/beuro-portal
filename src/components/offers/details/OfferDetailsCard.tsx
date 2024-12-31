@@ -101,7 +101,7 @@ const OfferDetailsCard = ({
               fill="#4A13E7"
             />
           </svg>
-          <p className="font-medium text-2xl ml-[27px]">
+          <p className="text-[#222B45] font-medium xMini:font-semibold text-sm xMini:text-2xl ml-6">
             {translate("offers.card_content.main_heading")}
           </p>
         </div>

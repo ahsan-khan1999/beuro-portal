@@ -50,7 +50,7 @@ const ContentCard = ({
               />
             </svg>
           </span>
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
+          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-sm xMini:text-2xl ml-6">
             {translate("content.content_card_detail.heading")}
           </h1>
         </div>

@@ -125,7 +125,7 @@ const LeadsDetailsCardData = ({
       <div className="flex flex-col xlg:flex-row justify-between xlg:items-center gap-y-3 pb-5 border-b border-[#e5e5e5]">
         <div className="flex items-center gap-x-3 xMini:gap-x-[27px]">
           <BackIcon onClick={handleBack} />
-          <p className="font-medium text-base xMini:text-2xl">
+          <p className="text-[#222B45] font-medium xMini:font-semibold text-sm xMini:text-2xl">
             {translate("leads.card_content.heading")}
           </p>
         </div>

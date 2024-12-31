@@ -53,9 +53,9 @@ export default function useInvoiceDetail() {
 
   const router = useRouter();
   const id = router.query.invoice;
+  const invoiceDetailTabs = ["invoice", "receipt"];
   const [isSendEmail, setIsSendEmail] = useState(false);
   const [activeTab, setActiveTab] = useState("invoice");
-  const invoiceDetailTabs = ["invoice", "receipt"];
   const { modal } = useAppSelector((state) => state.global);
   const { systemSettings } = useAppSelector((state) => state.settings);
 

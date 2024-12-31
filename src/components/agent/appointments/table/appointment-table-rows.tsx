@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { staticEnums } from "@/utils/static";
 import { useTranslation } from "next-i18next";
 import { Appointments } from "@/types/appointments";
-import { convertToLocal, germanDateFormat } from "@/utils/utility";
 import { Button } from "@/base-components/ui/button/button";
-import { OutlineButton } from "@/base-components/ui/button/outline-button";
-import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
+import { convertToLocal, germanDateFormat } from "@/utils/utility";
 import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
+import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
+import { OutlineButton } from "@/base-components/ui/button/outline-button";
 
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];

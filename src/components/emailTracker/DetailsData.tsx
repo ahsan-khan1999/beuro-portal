@@ -61,7 +61,7 @@ const DetailsData = ({
               />
             </svg>
           </span>
-          <h1 className="text-[#4B4B4B] text-2xl font-medium ml-6">
+          <h1 className="text-[#222B45] font-medium xMini:font-semibold text-sm xMini:text-2xl ml-6">
             {translate("email_tracker.card_content.main_heading")}
           </h1>
         </div>

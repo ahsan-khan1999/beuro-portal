@@ -135,22 +135,77 @@ export const ImageField = ({
     e.preventDefault();
   };
 
+  // const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
+  //   e.preventDefault();
+  //   for (let item of e.dataTransfer.files) {
+  //     formdata.append("files", item);
+  //   }
+
+  //   const response = await dispatch(uploadMultiFileToFirebase(formdata));
+  //   let newAttachement = (attachements && [...attachements]) || [];
+  //   if (response?.payload) {
+  //     response?.payload?.forEach((element: any) => {
+  //       newAttachement.push({
+  //         name: getFileNameFromUrl(element),
+  //         value: element,
+  //       });
+  //     });
+  //     setAttachements && setAttachements(newAttachement);
+  //   }
+  // };
+
   const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
-    for (let item of e.dataTransfer.files) {
-      formdata.append("files", item);
+
+    const files = Array?.from(e.dataTransfer.files);
+    const validFiles: File[] = [];
+    const invalidFiles: File[] = [];
+
+    files.forEach((file) => {
+      if (imageTypes?.includes(file?.type)) {
+        validFiles?.push(file);
+      } else {
+        invalidFiles?.push(file);
+      }
+    });
+
+    if (invalidFiles?.length > 0) {
+      setErrorMessage(translate("common.image_upload_error_message"));
+      return;
     }
 
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
+    if (validFiles?.length === 0) {
+      return;
+    }
+
+    validFiles?.forEach((file) => {
+      formdata?.append("files", file);
+    });
+
+    try {
+      const response = await dispatch(
+        uploadMultiFileToFirebase({
+          data: formdata,
+          onProgress(percent: number) {
+            setUploadProgress(percent);
+          },
+        })
+      );
+
+      let newAttachement = (attachements && [...attachements]) || [];
+      if (response?.payload) {
+        response?.payload?.forEach((element: any) => {
+          newAttachement.push({
+            name: getFileNameFromUrl(element),
+            value: element,
+          });
         });
-      });
-      setAttachements && setAttachements(newAttachement);
+
+        setUploadProgress(null);
+        setAttachements && setAttachements(newAttachement);
+      }
+    } catch (error) {
+      console.error("upload failed: ", error);
     }
   };
 

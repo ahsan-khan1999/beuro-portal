@@ -187,24 +187,24 @@ export const AttachementField = ({
   //   // }
   // };
 
-  const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    for (let item of e.dataTransfer.files) {
-      formdata.append("files", item);
-    }
+  // const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
+  //   e.preventDefault();
+  //   for (let item of e.dataTransfer.files) {
+  //     formdata.append("files", item);
+  //   }
 
-    const response = await dispatch(uploadMultiFileToFirebase(formdata));
-    let newAttachement = (attachements && [...attachements]) || [];
-    if (response?.payload) {
-      response?.payload?.forEach((element: any) => {
-        newAttachement.push({
-          name: getFileNameFromUrl(element),
-          value: element,
-        });
-      });
-      setAttachements && setAttachements(newAttachement);
-    }
-  };
+  //   const response = await dispatch(uploadMultiFileToFirebase(formdata));
+  //   let newAttachement = (attachements && [...attachements]) || [];
+  //   if (response?.payload) {
+  //     response?.payload?.forEach((element: any) => {
+  //       newAttachement.push({
+  //         name: getFileNameFromUrl(element),
+  //         value: element,
+  //       });
+  //     });
+  //     setAttachements && setAttachements(newAttachement);
+  //   }
+  // };
 
   const handleDeleteFile = (index: number) => {
     const list = attachements && [...attachements];
@@ -214,6 +214,61 @@ export const AttachementField = ({
 
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
+  };
+
+  const handleDrop = async (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+
+    const files = Array?.from(e.dataTransfer.files);
+    const validFiles: File[] = [];
+    const invalidFiles: File[] = [];
+
+    files?.forEach((file) => {
+      if (documentTypes?.includes(file?.type)) {
+        validFiles?.push(file);
+      } else {
+        invalidFiles?.push(file);
+      }
+    });
+
+    if (invalidFiles?.length > 0) {
+      setErrorMessage(translate("common.doc_upload_error_message"));
+    }
+
+    if (validFiles?.length === 0) {
+      return;
+    }
+
+    const formdata = new FormData();
+    validFiles?.forEach((file) => formdata?.append("files", file));
+
+    try {
+      const response = await dispatch(
+        uploadMultiFileToFirebase({
+          data: formdata,
+          onProgress(percent: number) {
+            setUploadProgress(percent);
+          },
+        })
+      );
+
+      let newAttachement = (attachements && [...attachements]) || [];
+      if (response?.payload) {
+        response?.payload?.forEach((element: any) => {
+          newAttachement.push({
+            name: getFileNameFromUrl(element),
+            value: element,
+          });
+        });
+
+        setUploadProgress(null);
+        setAttachements && setAttachements(newAttachement);
+        setErrorMessage("");
+      }
+    } catch (error) {
+      console.error("Upload failed:", error);
+      setErrorMessage("File upload failed. Please try again.");
+    }
   };
 
   return (

@@ -75,7 +75,7 @@ const InvoiceDetailsData = ({
               />
             </svg>
           </span>
-          <p className="font-medium text-2xl ml-[27px]">
+          <p className="text-[#222B45] font-medium xMini:font-semibold text-sm xMini:text-2xl ml-6">
             {translate("invoice.card_content.heading")}
           </p>
         </div>
