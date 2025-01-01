@@ -65,7 +65,7 @@ const documentTypes = [
   "application/zip",
   "application/x-rar-compressed",
   "application/vnd.oasis.opendocument.text",
-  "application/vnd.oasis.opendocument.spreadsheet",
+  "application/vnd.oasis.opendocument.spreadsheet", 
   "application/vnd.oasis.opendocument.presentation",
   "application/vnd.ms-works",
   "application/x-7z-compressed",

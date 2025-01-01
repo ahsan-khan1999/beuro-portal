@@ -40,6 +40,7 @@ export default function useEmployeePasswordReset({
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     let apiData = { ...data, id: id ? id : employeeDetails?.id };
+
     const res = await dispatch(
       updateEmployeePassword({ apiData, router, setError, translate })
     );

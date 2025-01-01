@@ -1,19 +1,21 @@
 import React from "react";
-import { BaseModal } from "@/base-components/ui/modals/base-modal";
-import { Form } from "@/base-components/form/form";
-import useEmployeePasswordReset from "@/hooks/employee/useEmployeePasswordReset";
 import Image from "next/image";
-import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { useAppSelector } from "@/hooks/useRedux";
+import { Form } from "@/base-components/form/form";
+import crossIcon from "@/assets/svgs/cross_icon.svg";
+import { BaseModal } from "@/base-components/ui/modals/base-modal";
+import useEmployeePasswordReset from "@/hooks/employee/useEmployeePasswordReset";
+
+export interface PasswordResetProps {
+  onClose: () => void;
+  passwordResetSuccessfully: Function;
+}
 
 const PasswordReset = ({
   onClose,
   passwordResetSuccessfully,
-}: {
-  onClose: () => void;
-  passwordResetSuccessfully: Function;
-}) => {
-  const id = useAppSelector((state) => state.global.modal.data);
+}: PasswordResetProps) => {
+  const { id } = useAppSelector((state) => state.global.modal.data) || {};
 
   const { fields, onSubmit, handleSubmit, errors, translate } =
     useEmployeePasswordReset({ passwordResetSuccessfully, id });

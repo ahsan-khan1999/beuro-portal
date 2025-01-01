@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { updateModalType } from "@/api/slices/globalSlice/global";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import PasswordReset from "@/base-components/ui/modals1/PasswordReset";
-import PasswordChangeSuccessfully from "@/base-components/ui/modals1/PasswordChangeSuccessfully";
 import { useTranslation } from "next-i18next";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -14,11 +13,12 @@ import {
 } from "@/api/slices/employee/emplyeeSlice";
 import { User } from "@/types";
 import { isJSON } from "@/utils/functions";
-import { useAppSelector } from "@/hooks/useRedux";
 import { getUser } from "@/utils/auth.util";
-import { AgentPrfoileSettingFormField } from "@/components/agent/setting/setting-profile-fields";
 import { staticEnums } from "@/utils/static";
+import { useAppSelector } from "@/hooks/useRedux";
 import RecordCreateSuccess from "@/base-components/ui/modals1/OfferCreated";
+import { AgentPrfoileSettingFormField } from "@/components/agent/setting/setting-profile-fields";
+import PasswordChangeSuccessfully from "@/base-components/ui/modals1/PasswordChangeSuccessfully";
 
 export const useAgentProfileSetting = () => {
   const router = useRouter();
@@ -61,7 +61,6 @@ export const useAgentProfileSetting = () => {
     formState: { errors },
     setError,
     control,
-    setValue,
   } = useForm<FieldValues>({});
 
   useEffect(() => {

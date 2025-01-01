@@ -604,10 +604,12 @@ const updateEmployee = (data) =>
   put(SERVICE_URLS.updateEmployee + `/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const updateEmployeePassword = (data) =>
   patch(SERVICE_URLS.updateEmployeePassword + `/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteEmployee = (data) =>
   del(
     SERVICE_URLS.employee + `/${data}`,
@@ -637,6 +639,7 @@ const updateService = (data) =>
   put(SERVICE_URLS.service + `/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteService = (data) =>
   del(
     SERVICE_URLS.service + `/${data?.id}`,

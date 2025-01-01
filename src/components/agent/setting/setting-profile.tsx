@@ -1,6 +1,6 @@
+import React from "react";
 import { Form } from "@/base-components/form/form";
 import { useAgentProfileSetting } from "@/hooks/agent/setting/useAgentProfileSetting";
-import React from "react";
 
 export const AgentProfileSetting = () => {
   const { fields, onSubmit, handleSubmit, errors, renderModal } =

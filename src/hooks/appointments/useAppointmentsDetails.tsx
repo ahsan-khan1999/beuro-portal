@@ -6,7 +6,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   readAppointmentDetails,
   setAppointmentDetails,
@@ -25,7 +25,7 @@ import ImagesUploadOffer from "@/base-components/ui/modals1/ImageUploadOffer";
 export const useAppointmentsDetails = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
-
+  const [initialLoading, setInitialLoading] = useState(true);
   const { loading, isLoading, appointmentDetails } = useAppSelector(
     (state) => state.appointment
   );
@@ -271,5 +271,7 @@ export const useAppointmentsDetails = () => {
     handleCreateReport,
     handleNotes,
     handleUploadImages,
+    initialLoading,
+    setInitialLoading,
   };
 };

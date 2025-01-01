@@ -37,6 +37,7 @@ export const readEmployee: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const readEmployeeDetail: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("employee/read/details", async (args, thunkApi) => {
     const { params, router, setError, translate } = args as any;
@@ -50,6 +51,7 @@ export const readEmployeeDetail: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const createEmployee: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("employee/create", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -63,6 +65,7 @@ export const createEmployee: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateEmployee: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("employee/update", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;
@@ -76,9 +79,10 @@ export const updateEmployee: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const updateEmployeePassword: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("employee/update/passowrd", async (args, thunkApi) => {
-    const { apiData, router, setError, translate } = args as any;
+    const { apiData, setError, translate } = args as any;
 
     try {
       await apiServices.updateEmployeePassword(apiData);
@@ -89,6 +93,7 @@ export const updateEmployeePassword: AsyncThunk<boolean, object, object> | any =
       return false;
     }
   });
+
 export const deleteEmployee: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("employee/delete", async (args, thunkApi) => {
     const { data, router, setError, translate } = args as any;

@@ -6,7 +6,7 @@ import { ModalConfigType, ModalType } from "@/enums/ui";
 import reschudleIcon from "@/assets/pngs/reschdule-icon.png";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   readAppointmentDetails,
   readReportDetails,
@@ -31,6 +31,7 @@ import { readImage, setImages } from "@/api/slices/imageSlice/image";
 export const useReportDetails = () => {
   const router = useRouter();
   const { t: translate } = useTranslation();
+  const [initialLoading, setInitialLoading] = useState(true);
   const id = router.query.reportId || router.query.appointment;
   const { systemSettings } = useAppSelector((state) => state.settings);
 
@@ -325,5 +326,7 @@ export const useReportDetails = () => {
     handleCreateReport,
     handleNotes,
     handleUploadImages,
+    initialLoading,
+    setInitialLoading,
   };
 };

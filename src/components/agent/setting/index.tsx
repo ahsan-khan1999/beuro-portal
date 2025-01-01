@@ -1,13 +1,13 @@
 import React from "react";
-import { useTranslation } from "next-i18next";
-import { AgentProfileSetting } from "./setting-profile";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import FormCard from "@/layout/customers/FormCard";
+import { AgentProfileSetting } from "./setting-profile";
 import { BackIcon } from "@/assets/svgs/components/back-icon";
 
 export const AgentSetting = () => {
-  const { t: translate } = useTranslation();
   const router = useRouter();
+  const { t: translate } = useTranslation();
 
   const handleBack = () => {
     router.push({

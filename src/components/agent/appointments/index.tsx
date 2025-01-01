@@ -46,8 +46,16 @@ export default function AgentAppointments() {
     loading
   );
 
+  if (loading) {
+    return <CustomLoader />;
+  }
+
   return (
     <>
+      {/* {loading ? (
+        <CustomLoader />
+      ) : (
+        <> */}
       <AppointmentTableFunctions
         filter={filter}
         setFilter={setFilter}
@@ -56,36 +64,31 @@ export default function AgentAppointments() {
         onDateChange={handleCurrentDateChange}
       />
 
-      {loading && <CustomLoader />}
+      <div className="block xMini:hidden">
+        {currentPageRows && currentPageRows.length > 0 ? (
+          <AppointmentTableRecordCard dataToAdd={currentPageRows} />
+        ) : (
+          <div className="xMini:bg-white mt-6 xMini:flex items-center justify-center">
+            <NoDataEmptyState
+              containerClassName="xMini:py-[153px]"
+              imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
+              textClassName="text-lg xMini:text-2xl"
+              className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[617px]"
+            />
+          </div>
+        )}
+      </div>
 
-      {!loading && (
-        <div className="block xMini:hidden">
-          {currentPageRows && currentPageRows.length > 0 ? (
-            <AppointmentTableRecordCard dataToAdd={currentPageRows} />
-          ) : (
-            <div className="xMini:bg-white mt-6 xMini:flex items-center justify-center">
-              <NoDataEmptyState
-                containerClassName="xMini:py-[153px]"
-                imgClassName="w-14 h-14 xMini:w-fit xMini:h-fit"
-                textClassName="text-lg xMini:text-2xl"
-                className="py-5 px-3 w-full xMini:py-10 xMini:px-6 xMini:w-[617px]"
-              />
-            </div>
-          )}
-        </div>
-      )}
+      <div className="hidden xMini:block">
+        <TableCardLayout>
+          <TableLayout isAgent={true}>
+            <AppointmentTableHeadings />
+            {CurrentComponent}
+          </TableLayout>
+        </TableCardLayout>
+      </div>
 
-      {!loading && (
-        <div className="hidden xMini:block">
-          <TableCardLayout>
-            <TableLayout isAgent={true}>
-              <AppointmentTableHeadings />
-              {CurrentComponent}
-            </TableLayout>
-          </TableCardLayout>
-        </div>
-      )}
-      {!loading && currentPageRows && (
+      {currentPageRows && (
         <Pagination
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
@@ -93,6 +96,9 @@ export default function AgentAppointments() {
           currentPage={currentPage}
         />
       )}
+      {/* </>
+      )} */}
+
       {renderModal()}
     </>
   );
