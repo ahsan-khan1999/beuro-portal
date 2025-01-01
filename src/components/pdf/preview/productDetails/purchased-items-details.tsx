@@ -70,6 +70,7 @@ export const ProductPurchasedItemsDetails = ({
         {isShowTotal && (
           <ProductItemFooter
             {...serviceItemFooter}
+            isBreakPage={pageBreakCondition}
             systemSettings={systemSettings}
           />
         )}

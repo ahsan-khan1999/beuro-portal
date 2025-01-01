@@ -17,7 +17,6 @@ export default function EmailTracker() {
     filter,
     setFilter,
     handleFilterChange,
-    loading,
     isLoading,
     currentPage,
     totalCount,
@@ -36,12 +35,14 @@ export default function EmailTracker() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
+
       <TableCardLayout>
         <TableLayout>
           <TableHeading />
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>
+
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

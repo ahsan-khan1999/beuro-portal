@@ -76,6 +76,8 @@ const PdfFile = ({
 
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
 
+  console.log(serviceItemFooter?.isDiscount, "isDiscount");
+
   return (
     <Document title={headerDetails?.offerNo || ""}>
       <Page style={styles.body} dpi={72}>
@@ -114,6 +116,7 @@ const PdfFile = ({
           <ServicesTotalAmount
             {...serviceItemFooter}
             systemSettings={systemSetting}
+            isBreakPage={pageBreakCondition}
             language={lang}
           />
         </View>

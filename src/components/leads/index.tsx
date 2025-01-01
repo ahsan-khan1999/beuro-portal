@@ -1,12 +1,12 @@
 import React from "react";
 import TableLayout from "@/layout/TableLayout";
-import { Pagination } from "@/base-components/ui/pagination/pagination";
 import useLeads from "@/hooks/leads/useLeads";
 import { useEmptyStates } from "@/utils/hooks";
 import { TableCardLayout } from "@/layout/TableCardLayout";
 import { LeadsTableRows } from "./table/leads-table-rows";
 import { LeadsTableFunctions } from "./table/leads-table-functions";
 import { LeadsTableHeadings } from "./table/leads-table-headings";
+import { Pagination } from "@/base-components/ui/pagination/pagination";
 
 export default function Leads() {
   const {

@@ -19,29 +19,31 @@ export const ProductItemNewPage = ({
 }: Partial<PurchasedItemDetailsNextPageProps>) => {
   const { t: translate } = useTranslation();
 
-  const disscountTableRow = {
-    serviceTitle: translate("pdf_preview.discount"),
-    price: Number(serviceItemFooter?.discount),
-    unit: "-",
-    totalPrice: Number(serviceItemFooter?.discount),
-    serviceType: "",
-    description: serviceItemFooter?.discountDescription || "",
-    count: "-",
-    pagebreak: true,
-    discount: Number(serviceItemFooter?.discount),
-    discountType: serviceItemFooter?.discountType,
-    discountPercentage: Number(serviceItemFooter?.discountPercentage),
-    updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
-    totalDiscount: Number(serviceItemFooter?.serviceDiscountSum),
-    isGlobalDiscount: serviceItemFooter?.isDiscount,
-  };
+  // const disscountTableRow = {
+  //   serviceTitle: translate("pdf_preview.discount"),
+  //   price: Number(serviceItemFooter?.discount),
+  //   unit: "-",
+  //   totalPrice: Number(serviceItemFooter?.discount),
+  //   serviceType: "",
+  //   description: serviceItemFooter?.discountDescription || "",
+  //   count: "-",
+  //   pagebreak: true,
+  //   discount: Number(serviceItemFooter?.discount),
+  //   discountType: serviceItemFooter?.discountType,
+  //   discountPercentage: Number(serviceItemFooter?.discountPercentage),
+  //   updatedDiscountAmount: Number(serviceItemFooter?.updatedDiscountAmount),
+  //   totalDiscount: Number(serviceItemFooter?.serviceDiscountSum),
+  //   isGlobalDiscount: serviceItemFooter?.isDiscount,
+  // };
 
   const isDiscount =
     serviceItemFooter?.serviceDiscountSum &&
     Number(serviceItemFooter?.serviceDiscountSum) > 0
       ? true
       : false || false;
+
   const pageBreakCondition = isDiscount || serviceItemFooter?.isDiscount;
+
   return (
     <div>
       <DocumentHeader
@@ -74,6 +76,7 @@ export const ProductItemNewPage = ({
         {isShowTotal && (
           <ProductItemFooter
             {...serviceItemFooter}
+            isBreakPage={pageBreakCondition}
             systemSettings={systemSettings}
           />
         )}

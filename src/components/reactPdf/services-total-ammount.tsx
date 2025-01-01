@@ -1,5 +1,5 @@
 import { ProductItemFooterProps } from "@/types";
-import { calculateTax, germanDateFormat, pdfDateFormat } from "@/utils/utility";
+import { calculateTax, germanDateFormat } from "@/utils/utility";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -152,15 +152,12 @@ export const ServicesTotalAmount = ({
   grandTotal,
   subTotal,
   tax,
-  invoiceCreatedAmount,
   invoicePaidAmount,
   isShowExtraAmount,
   systemSettings,
   invoiceAmount,
-  invoiceStatus,
   discountType,
   taxType,
-  serviceDiscountSum,
   isTax,
   isDiscount,
   isMainInvoice,
@@ -171,7 +168,6 @@ export const ServicesTotalAmount = ({
   discountDescription,
   dueAmount,
   language,
-  paymentType,
   isBreakPage,
   payments,
 }: Partial<ProductItemFooterProps>) => {
@@ -311,7 +307,8 @@ export const ServicesTotalAmount = ({
               <View
                 style={{
                   ...styles.totalSection,
-                  backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                  // backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                  backgroundColor: "#404F6A",
                 }}
               >
                 <Text style={styles.whiteText}>
@@ -355,7 +352,8 @@ export const ServicesTotalAmount = ({
                 <View
                   style={{
                     ...styles.totalSection,
-                    backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                    // backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                    backgroundColor: "#404F6A",
                   }}
                 >
                   <Text style={styles.whiteText}>
@@ -428,7 +426,8 @@ export const ServicesTotalAmount = ({
                   <View
                     style={{
                       ...styles.totalSection,
-                      backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                      // backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                      backgroundColor: "#404F6A",
                     }}
                   >
                     <Text style={styles.whiteText}>
@@ -463,7 +462,8 @@ export const ServicesTotalAmount = ({
               <View
                 style={{
                   ...styles.totalSection,
-                  backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                  // backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                  backgroundColor: "#404F6A",
                 }}
               >
                 <Text style={styles.whiteText}>
@@ -504,7 +504,8 @@ export const ServicesTotalAmount = ({
                     <View
                       style={{
                         ...styles.totalSection,
-                        backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                        // backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                        backgroundColor: "#404F6A",
                       }}
                     >
                       <Text style={styles.whiteText}>
@@ -577,7 +578,8 @@ export const ServicesTotalAmount = ({
                     <View
                       style={{
                         ...styles.totalSection,
-                        backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                        // backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                        backgroundColor: "#404F6A",
                       }}
                     >
                       <Text style={styles.whiteText}>
@@ -612,7 +614,8 @@ export const ServicesTotalAmount = ({
               <View
                 style={{
                   ...styles.totalSection,
-                  backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                  // backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                  backgroundColor: "#404F6A",
                 }}
               >
                 <Text style={styles.whiteText}>
@@ -677,7 +680,8 @@ export const ServicesTotalAmount = ({
                   <View
                     style={{
                       ...styles.totalSection,
-                      backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                      // backgroundColor: isBreakPage ? "#4A13E7" : "#404F6A",
+                      backgroundColor: "#404F6A",
                     }}
                   >
                     <Text style={styles.whiteText}>

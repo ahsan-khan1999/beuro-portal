@@ -17,7 +17,6 @@ export default function Customers() {
     filter,
     setFilter,
     handleFilterChange,
-    loading,
     isLoading,
     currentPage,
     totalCount,
@@ -43,6 +42,7 @@ export default function Customers() {
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>
+
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

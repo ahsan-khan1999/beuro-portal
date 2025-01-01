@@ -20,7 +20,6 @@ export default function Invoices() {
     handleNotes,
     renderModal,
     filter,
-    loading,
     isLoading,
     setFilter,
     handleFilterChange,
@@ -111,6 +110,7 @@ export default function Invoices() {
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>
+
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}

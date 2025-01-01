@@ -20,7 +20,6 @@ export default function Contract() {
     handleFilterChange,
     filter,
     setFilter,
-    loading,
     isLoading,
     handleContractStatusUpdate,
     handlePaymentStatusUpdate,
@@ -56,6 +55,7 @@ export default function Contract() {
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>
+
       {!isLoading && (
         <Pagination
           totalItems={totalItems}

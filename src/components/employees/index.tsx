@@ -35,12 +35,14 @@ export default function Employees() {
         setFilter={setFilter}
         handleFilterChange={handleFilterChange}
       />
+
       <TableCardLayout>
         <TableLayout>
           <TableHeadings />
           {CurrentComponent}
         </TableLayout>
       </TableCardLayout>
+
       <Pagination
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
