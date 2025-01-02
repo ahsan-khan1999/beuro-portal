@@ -1221,8 +1221,8 @@ export interface ProductItemFooterProps {
   tax: string;
   discount: string;
   discountPercentage: string;
-  updatedDiscountAmount: string;
   grandTotal: string;
+  updatedDiscountAmount: string;
   invoiceStatus?: keyof (typeof staticEnums)["InvoiceStatus"];
   invoiceAmount?: string;
   dueAmount?: string;
@@ -1258,8 +1258,8 @@ export interface ContactDetailsProps {
   };
   email: string;
   phone: string;
-  gender?: string;
   mobile?: string;
+  gender?: string;
   isReverseInfo?: boolean;
   desireDate?: string;
   customerType?: number;
@@ -1412,12 +1412,12 @@ export interface EmailHeaderProps {
   offerNo?: string;
   emailStatus?: string;
   loading?: boolean;
+  offerId?: string;
   onEmailSend: () => void;
   onDownload: () => void;
   onPrint: () => void;
   handleSendByPost: () => void;
   activeButtonId: string | null;
-  offerId?: string;
 }
 export interface InvoiceEmailHeaderProps {
   contractId?: string;

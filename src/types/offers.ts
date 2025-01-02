@@ -176,14 +176,14 @@ export interface OfferServiceDetails {
 }
 export interface ServiceList {
   serviceTitle: string;
-  price: number;
-  unit: string;
-  totalPrice: number;
-  serviceType: string;
   description: string;
   count: number | string;
-  pagebreak: boolean;
+  unit: string;
+  price: number;
   discount: number;
+  totalPrice: number;
+  serviceType: string;
+  pagebreak: boolean;
   discountType?: keyof (typeof staticEnums)["DiscountType"];
   discountPercentage: number;
   updatedDiscountAmount: number;

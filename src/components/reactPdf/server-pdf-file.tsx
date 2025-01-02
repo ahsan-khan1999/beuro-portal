@@ -1,57 +1,60 @@
-import { PdfPreviewProps } from "@/types";
+import { Footer } from "./footer";
 import { Header } from "./header";
+import { PdfPreviewProps } from "@/types";
 import { ContactAddress } from "./contact-address";
 import { AddressDetails } from "./address-details";
 import { ServiceTableHederRow } from "./service-table-header-row";
 import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
-import { Footer } from "./footer";
-import { AdditionalDetails } from "./additional-details";
 import { AggrementSignature } from "./aggrement-signature";
 import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
+import path from "path";
+// import { AdditionalDetails } from "./additional-details";
+
+const fontPath = path.resolve("./public/assets/fonts");
 
 Font.register({
   family: "Poppins",
   fonts: [
     {
-      src: "/assets/fonts/Poppins-Thin.ttf",
+      src: `${fontPath}/Poppins-Thin.ttf`,
       fontStyle: "thin",
       fontWeight: 100,
     },
     {
-      src: "/assets/fonts/Poppins-Regular.ttf",
+      src: `${fontPath}/Poppins-Regular.ttf`,
       fontStyle: "normal",
       fontWeight: 400,
     },
     {
-      src: "/assets/fonts/Poppins-Medium.ttf",
+      src: `${fontPath}/Poppins-Medium.ttf`,
       fontStyle: "medium",
       fontWeight: 500,
     },
     {
-      src: "/assets/fonts/Poppins-Light.ttf",
+      src: `${fontPath}/Poppins-Light.ttf"`,
       fontStyle: "light",
       fontWeight: 300,
     },
     {
-      src: "/assets/fonts/Poppins-SemiBold.ttf",
+      src: `${fontPath}/Poppins-SemiBold.ttf`,
       fontStyle: "semibold",
       fontWeight: 600,
     },
     {
-      src: "/assets/fonts/Poppins-Bold.ttf",
+      src: `${fontPath}/Poppins-Bold.ttf`,
       fontStyle: "bold",
       fontWeight: 700,
     },
     {
-      src: "/assets/fonts/Poppins-Black.ttf",
+      src: `${fontPath}/Poppins-Black.ttf`,
       fontStyle: "black",
       fontWeight: 800,
     },
   ],
 });
 
-const PdfFile = ({
+export const ServerPdf = ({
   data,
   templateSettings,
   emailTemplateSettings,
@@ -129,9 +132,9 @@ const PdfFile = ({
 
       <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
-        <View style={{ paddingBottom: isOfferPdf ? 110 : 0 }}>
+        {/* <View style={{ paddingBottom: isOfferPdf ? 110 : 0 }}>
           <AdditionalDetails description={aggrementDetails} />
-        </View>
+        </View> */}
         {isOfferPdf && (
           <AggrementSignature
             showContractSign={showContractSign}
@@ -157,5 +160,3 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
 });
-
-export default PdfFile;

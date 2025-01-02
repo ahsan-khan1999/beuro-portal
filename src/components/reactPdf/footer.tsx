@@ -82,6 +82,7 @@ export const Footer = ({
     row4: c3Row4,
     row5: c3Row5,
   } = templateSettings?.thirdColumn ?? {};
+
   const {
     row1: c4Row1,
     row2: c4Row2,
@@ -89,7 +90,9 @@ export const Footer = ({
     row4: c4Row4,
     row5: c4Row5,
   } = templateSettings?.fourthColumn ?? {};
+
   const ibanNumber = insertBreaks(templateSettings?.secondColumn?.iban, 32);
+
   const accountNumber = insertBreaks(
     templateSettings?.secondColumn?.accountNumber,
     32
@@ -109,8 +112,10 @@ export const Footer = ({
 
   const { isCompanyName, isEmail, isPhoneNumber, isTaxNumber, isWebsite } =
     firstColumn ?? {};
+
   const { isAccountNumber, isBankName, isIBAN, isPostCode, isStreetNumber } =
     secondColumn ?? {};
+
   const {
     isRow1: isC3Row1,
     isRow2: isC3Row2,
@@ -118,6 +123,7 @@ export const Footer = ({
     isRow4: isC3Row4,
     isRow5: isC3Row5,
   } = thirdColumn ?? {};
+
   const {
     isRow1: isC4Row1,
     isRow2: isC4Row2,
@@ -152,12 +158,14 @@ export const Footer = ({
       borderRight: showBorder ? 1 : 0,
     };
   };
+
   const getFirstColumnFooterSection = (showBorder?: boolean) => {
     return {
       ...styles.firstColumnFooterSection,
       borderRight: showBorder ? 1 : 0,
     };
   };
+
   const shouldAlignRight =
     showFirstColumnBorder && !showSecondColumnBorder && !showThirdColumnBorder;
 

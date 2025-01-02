@@ -200,7 +200,6 @@ export const useOfferPdf = () => {
                 offerDetails?.serviceDetail?.serviceDetail?.reduce(
                   (acc, service) => {
                     const price = service?.discount || 0;
-
                     return acc + price;
                   },
                   0
