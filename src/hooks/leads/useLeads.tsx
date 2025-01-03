@@ -185,8 +185,6 @@ const useLeads = () => {
   }, []);
 
   const onClose = () => {
-    // dispatch(updateModalType(ModalType.NONE));
-
     dispatch(updateModalType({ type: ModalType.NONE }));
     if (noteInfo.id) {
       setNoteInfo(initialNotes);

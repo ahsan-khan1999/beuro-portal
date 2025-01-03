@@ -9,6 +9,7 @@ import { ServicesTotalAmount } from "./services-total-ammount";
 import { AggrementSignature } from "./aggrement-signature";
 import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 import path from "path";
+import { AdditionalDetails } from "./additional-details";
 // import { AdditionalDetails } from "./additional-details";
 
 const fontPath = path.resolve("./public/assets/fonts");
@@ -132,9 +133,9 @@ export const ServerPdf = ({
 
       <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
-        {/* <View style={{ paddingBottom: isOfferPdf ? 110 : 0 }}>
+        <View style={{ paddingBottom: isOfferPdf ? 110 : 0 }}>
           <AdditionalDetails description={aggrementDetails} />
-        </View> */}
+        </View>
         {isOfferPdf && (
           <AggrementSignature
             showContractSign={showContractSign}

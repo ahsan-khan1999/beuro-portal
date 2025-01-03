@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import { parseDocument } from "htmlparser2";
 import DOMPurify from "dompurify";
+let purify: DOMPurify.DOMPurifyI;
 
 const styles: any = StyleSheet.create({
   h1: {
@@ -164,8 +165,17 @@ function adjustStyles(cssStyle: string): object {
   return styleObject;
 }
 
+if (typeof window !== "undefined") {
+  // Client-side: Use DOMPurify with the global window object
+  purify = DOMPurify(window);
+} else {
+  // Server-side: Use jsdom to create a mock window
+  const { JSDOM } = require("jsdom");
+  const { window } = new JSDOM("");
+  purify = DOMPurify(window);
+}
 export const transformHtmlToPdf = (htmlContent: string) => {
-  const cleanHtml = DOMPurify.sanitize(htmlContent);
+  const cleanHtml = purify.sanitize(htmlContent);
   const document = parseDocument(cleanHtml);
 
   const transformNode = (node: any) => {
