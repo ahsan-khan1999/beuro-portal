@@ -33,7 +33,7 @@ export default async function handler(
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       `Content-Disposition`,
-      `attachment; filename=Angebot-${offer?.headerDetails?.offerNo}.pdf`
+      `attachment; filename=${offer?.headerDetails?.companyName}-Angebot-${offer?.headerDetails?.offerNo}.pdf`
     );
 
     pdfStream.pipe(res);

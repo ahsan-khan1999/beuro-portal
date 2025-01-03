@@ -55,7 +55,7 @@ export const useContractPdf = () => {
   const {
     auth: { user },
     global: { modal, loading: loadingGlobal },
-    contract: { loading, contractDetails },
+    contract: { error, loading, contractDetails },
   } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();

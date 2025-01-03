@@ -1,11 +1,10 @@
-import Image from "next/image";
 import React from "react";
-import { BaseModal } from "@/base-components/ui/modals/base-modal";
+import Image from "next/image";
+import { useTranslation } from "next-i18next";
 import crossIcon from "@/assets/svgs/cross_icon.svg";
 import { FollowUpDetailsProps } from "@/types/follow-up";
 import { formatAddress, formatDate } from "@/utils/utility";
-import moment from "moment";
-import { useTranslation } from "next-i18next";
+import { BaseModal } from "@/base-components/ui/modals/base-modal";
 
 export interface details {
   label: string;
@@ -242,7 +241,7 @@ const FollowUpDetails = ({
                     <p className="text-sm font-normal text-[#4D4D4D]">
                       {item?.label}
                     </p>
-                    <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
+                    <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] truncate">
                       {item?.value}
                     </span>
                   </div>
@@ -259,7 +258,7 @@ const FollowUpDetails = ({
                 <p className="text-sm font-normal text-[#4D4D4D]">
                   {translate("follow_up.additional_detail_heading")}
                 </p>
-                <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base min-h-[58px]">
+                <p className="border border-[#EBEBEB] rounded-lg p-4 handleFollowUpsDetailstext-[#4B4B4B] font-medium text-base min-h-[58px] truncate">
                   {followUpDetails?.additionalDetails}
                 </p>
               </div>
@@ -284,7 +283,7 @@ const FollowUpDetails = ({
                     <p className="text-sm font-normal text-[#4D4D4D]">
                       {item?.label}
                     </p>
-                    <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px]">
+                    <span className="border border-[#EBEBEB] rounded-lg p-4 text-[#4B4B4B] font-medium text-base min-h-[58px] truncate">
                       {item?.value}
                     </span>
                   </div>

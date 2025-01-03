@@ -55,7 +55,7 @@ export default async function handler(
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=Angebot-${
+      `attachment; filename=${pdfData?.headerDetails?.companyName}-Vertrag-${
         pdfData?.headerDetails?.offerNo || "file"
       }.pdf`
     );
