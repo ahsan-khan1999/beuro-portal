@@ -1,8 +1,9 @@
 import React from "react";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import { parseDocument } from "htmlparser2";
-import DOMPurify from "dompurify";
-let purify: DOMPurify.DOMPurifyI;
+import createDOMPurify from "dompurify";
+
+let purify: ReturnType<typeof createDOMPurify>;
 
 const styles: any = StyleSheet.create({
   h1: {
@@ -166,14 +167,13 @@ function adjustStyles(cssStyle: string): object {
 }
 
 if (typeof window !== "undefined") {
-  // Client-side: Use DOMPurify with the global window object
-  purify = DOMPurify(window);
+  purify = createDOMPurify(window);
 } else {
-  // Server-side: Use jsdom to create a mock window
   const { JSDOM } = require("jsdom");
   const { window } = new JSDOM("");
-  purify = DOMPurify(window);
+  purify = createDOMPurify(window);
 }
+
 export const transformHtmlToPdf = (htmlContent: string) => {
   const cleanHtml = purify.sanitize(htmlContent);
   const document = parseDocument(cleanHtml);
