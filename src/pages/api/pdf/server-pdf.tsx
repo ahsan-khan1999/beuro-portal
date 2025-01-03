@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { renderToStream } from "@react-pdf/renderer";
+import { NextApiRequest, NextApiResponse } from "next";
 import { ServerPdf } from "@/components/reactPdf/server-pdf-file";
 
 export default async function handler(
@@ -13,18 +13,18 @@ export default async function handler(
         .json({ message: "Only POST requests are allowed" });
     }
 
-    const { emailTemplateSettings, templateSettings, offer, systemSetting } =
+    const { emailTemplateSettings, templateSettings, pdfData, systemSetting } =
       req.body;
 
     const pdfStream = await renderToStream(
       <ServerPdf
         {...{
-          data: offer,
+          data: pdfData,
           emailTemplateSettings,
           templateSettings,
           systemSetting,
-          lang: "de",
-          isOfferPdf: true,
+          lang: pdfData?.currentLanguage,
+          ispdfDataPdf: pdfData.ispdfData,
           showContractSign: true,
         }}
       />
@@ -33,7 +33,7 @@ export default async function handler(
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       `Content-Disposition`,
-      `attachment; filename=${offer?.headerDetails?.companyName}-Angebot-${offer?.headerDetails?.offerNo}.pdf`
+      `attachment; filename=${pdfData?.headerDetails?.companyName}-Angebot-${pdfData?.headerDetails?.pdfDataNo}.pdf`
     );
 
     pdfStream.pipe(res);

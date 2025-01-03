@@ -31,7 +31,7 @@ export default async function handler(
           emailTemplateSettings,
           templateSettings,
           systemSetting,
-          lang: "de",
+          lang: pdfData?.currentLanguage,
           isOfferPdf: true,
           showContractSign: true,
         }}

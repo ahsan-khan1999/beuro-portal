@@ -11,8 +11,7 @@ import { AggrementSignature } from "./aggrement-signature";
 import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 import { AdditionalDetails } from "./additional-details";
 
-
-const fontPath = path.resolve("./public/assets/fonts");
+const fontPath = path.resolve(process.cwd(), "public/assets/fonts");
 
 Font.register({
   family: "Poppins",
