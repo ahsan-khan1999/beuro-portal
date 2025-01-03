@@ -1,3 +1,4 @@
+import path from "path";
 import { Footer } from "./footer";
 import { Header } from "./header";
 import { PdfPreviewProps } from "@/types";
@@ -8,9 +9,7 @@ import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { AggrementSignature } from "./aggrement-signature";
 import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
-import path from "path";
 import { AdditionalDetails } from "./additional-details";
-// import { AdditionalDetails } from "./additional-details";
 
 const fontPath = path.resolve("./public/assets/fonts");
 

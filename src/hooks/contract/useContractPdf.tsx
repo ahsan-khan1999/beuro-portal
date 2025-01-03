@@ -55,7 +55,7 @@ export const useContractPdf = () => {
   const {
     auth: { user },
     global: { modal, loading: loadingGlobal },
-    contract: { error, loading, contractDetails },
+    contract: { loading, contractDetails },
   } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
@@ -261,40 +261,7 @@ export const useContractPdf = () => {
             signature: contractDetails?.offerID?.signature,
             isCanvas: false,
           };
-          // const distributeItems = (): ServiceList[][] => {
-          //   const totalItems =
-          //     contractDetails?.offerID?.serviceDetail?.serviceDetail?.length;
-          //   let pages: ServiceList[][] = [];
 
-          //   if (totalItems > maxItemsFirstPage) {
-          //     pages.push(
-          //       contractDetails?.offerID?.serviceDetail?.serviceDetail?.slice(
-          //         0,
-          //         maxItemsFirstPage
-          //       )
-          //     );
-          //     for (
-          //       let i = maxItemsFirstPage;
-          //       i < totalItems;
-          //       i += maxItemsPerPage
-          //     ) {
-          //       pages.push(
-          //         contractDetails?.offerID?.serviceDetail?.serviceDetail?.slice(
-          //           i,
-          //           i + maxItemsPerPage
-          //         )
-          //       );
-          //     }
-          //   } else {
-          //     pages.push(
-          //       contractDetails?.offerID?.serviceDetail?.serviceDetail
-          //     );
-          //   }
-
-          //   return pages;
-          // };
-
-          // setNewPageData(distributeItems());
           setContractData(formatData);
           contractPdfInfo = {
             ...contractPdfInfo,
