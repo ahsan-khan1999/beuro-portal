@@ -1,6 +1,6 @@
 import { renderToStream } from "@react-pdf/renderer";
 import { NextApiRequest, NextApiResponse } from "next";
-import ReportPdf from "@/components/reportPdf/generate-report-pdf";
+import { ServerReportPdf } from "@/components/reportPdf/server-report-pdf";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,7 +17,7 @@ export default async function handler(
       req.body;
 
     const pdfStream = await renderToStream(
-      <ReportPdf
+      <ServerReportPdf
         {...{
           data: pdfData,
           emailTemplateSettings,

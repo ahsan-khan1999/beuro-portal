@@ -860,6 +860,7 @@ export const getSpecialRoom = (
 
   return items;
 };
+
 export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
   const items: ResultItem[] = [];
 
@@ -938,6 +939,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
 
   return items;
 };
+
 export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
   const items: ResultItem[] = [];
 

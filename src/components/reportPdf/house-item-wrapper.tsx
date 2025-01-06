@@ -82,7 +82,7 @@ export const HouseItemWrapper: React.FC<HouseItemWrapperProps> = ({
       <HouseItemHeader language={language} count={items.length} />
 
       <View style={styles.grid}>
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <View key={index} style={styles.column}>
             <HouseItem
               icon={item.icon}

@@ -13,8 +13,6 @@ import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 
 const fontPath = path.resolve("./public/assets/fonts");
 
-console.log("Resolved font path:", fontPath);
-
 Font.register({
   family: "Poppins",
   fonts: [
@@ -24,7 +22,7 @@ Font.register({
       fontWeight: 100,
     },
     {
-      src: `${fontPath}/Poppins-Medium.ttf`,
+      src: `${fontPath}/Poppins-Regular.ttf`,
       fontStyle: "normal",
       fontWeight: 400,
     },

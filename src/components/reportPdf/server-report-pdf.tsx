@@ -21,6 +21,7 @@ import {
   getSpecialRoom,
   isRoomNotEmpty,
 } from "@/utils/utility";
+import path from "path";
 
 export interface HouseDetailObjectProps {
   icon: StaticImageData;
@@ -28,78 +29,50 @@ export interface HouseDetailObjectProps {
   quantity?: number;
 }
 
+const fontPath = path.resolve("./public/assets/fonts");
+
 Font.register({
   family: "Poppins",
   fonts: [
     {
-      src: "/assets/fonts/Poppins-Thin.ttf",
+      src: `${fontPath}/Poppins-Thin.ttf`,
       fontStyle: "thin",
       fontWeight: 100,
     },
     {
-      src: "/assets/fonts/Poppins-ThinItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 100,
-    },
-    {
-      src: "/assets/fonts/Poppins-Regular.ttf",
+      src: `${fontPath}/Poppins-Regular.ttf`,
       fontStyle: "normal",
       fontWeight: 400,
     },
     {
-      src: "/assets/fonts/Poppins-Light.ttf",
-      fontStyle: "light",
-      fontWeight: 300,
-    },
-    {
-      src: "/assets/fonts/Poppins-LightItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 300,
-    },
-    {
-      src: "/assets/fonts/Poppins-Medium.ttf",
+      src: `${fontPath}/Poppins-Medium.ttf`,
       fontStyle: "medium",
       fontWeight: 500,
     },
     {
-      src: "/assets/fonts/Poppins-MediumItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 500,
+      src: `${fontPath}/Poppins-Light.ttf"`,
+      fontStyle: "light",
+      fontWeight: 300,
     },
     {
-      src: "/assets/fonts/Poppins-SemiBold.ttf",
+      src: `${fontPath}/Poppins-SemiBold.ttf`,
       fontStyle: "semibold",
       fontWeight: 600,
     },
     {
-      src: "/assets/fonts/Poppins-SemiBoldItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 600,
-    },
-    {
-      src: "/assets/fonts/Poppins-Bold.ttf",
+      src: `${fontPath}/Poppins-Bold.ttf`,
       fontStyle: "bold",
       fontWeight: 700,
     },
     {
-      src: "/assets/fonts/Poppins-BoldItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 700,
-    },
-    {
-      src: "/assets/fonts/Poppins-Black.ttf",
+      src: `${fontPath}/Poppins-Black.ttf`,
       fontStyle: "black",
-      fontWeight: 800,
-    },
-    {
-      src: "/assets/fonts/Poppins-BlackItalic.ttf",
-      fontStyle: "italic",
       fontWeight: 800,
     },
   ],
 });
 
-const ReportPdf = ({
+export const ServerReportPdf = ({
   data,
   templateSettings,
   emailTemplateSettings,
@@ -491,25 +464,13 @@ const ReportPdf = ({
           language={lang}
         />
 
-        <ServiceTableHederRow
-          isDiscount={isDiscount}
-          language={lang}
-          // bgColor="#4A13E7"
-        />
+        <ServiceTableHederRow isDiscount={isDiscount} language={lang} />
 
         {serviceItem?.map((item, index) => (
           <ServiceTableRow
             {...item}
             key={index}
             pagebreak={false}
-            // pagebreak={
-            //   !pageBreakCondition
-            //     ? serviceItem?.length === 1
-            //       ? false
-            //       : index === serviceItem?.length - 1
-            //     : false
-            // }
-
             isDiscount={isDiscount}
           />
         ))}
@@ -607,9 +568,6 @@ const ReportPdf = ({
 
 const styles = StyleSheet.create({
   body: {
-    fontFamily: "Poppins",
     paddingBottom: 100,
   },
 });
-
-export default ReportPdf;

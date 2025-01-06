@@ -15,18 +15,12 @@ import { EmailTemplate } from "@/types/settings";
 import React from "react";
 import { DocumentHeader } from "../preview/document-header";
 import { ContactDetails } from "../preview/contact-details";
-import { MovingDetails } from "../preview/movng-details";
 import { Footer } from "../footer";
-import { ProductItem } from "../preview/productDetails/product-item";
-import { ProcutItemHeader } from "../preview/productDetails/product-item-header";
-import { ProductItemFooter } from "../preview/productDetails/product-item-footer";
 import { ServicesTotalAmount } from "./sevices-total";
-import { AddressDetailCard } from "@/components/setting/general-setting/address";
 import AddressDetails from "./address-details";
 import { ServiceItem } from "./service-item";
 import { ServiceHeader } from "./service-header";
 import { HouseItemWrapper } from "./house-item-wrapper";
-import { HouseDetailObjectProps } from "@/components/reportPdf/generate-report-pdf";
 
 import shelfIcon from "@/assets/pngs/shelf.png";
 import sofaIcon from "@/assets/pngs/safe.png";
@@ -69,16 +63,14 @@ import dressingTableIcon from "@/assets/pngs/macUpTable.png";
 import freezerIcon from "@/assets/pngs/freezer.png";
 import refrigeratorIcon from "@/assets/pngs/refregirator.png";
 import ovenIcon from "@/assets/pngs/oven.png";
-import microOvenIcon from "@/assets/pngs/micro-oven.png";
 import microwaveIcon from "@/assets/pngs/micro-oven.png";
-import herdIcon from "@/assets/pngs/herd.png";
 import stoveIcon from "@/assets/pngs/herd.png";
 import decoBigIcon from "@/assets/pngs/deco-gross.png";
 import teacherDeskIcon from "@/assets/pngs/teacher-desk.png";
 import safeIcon from "@/assets/pngs/safe-icon.png";
 import { DynamicItemWrapper } from "./dynamic-item-wrapper";
 import { AppointmentDetails } from "./appointment-details";
-import { isRoomNotEmpty, isInArithmeticSequence } from "@/utils/utility";
+import { isRoomNotEmpty } from "@/utils/utility";
 import { StaticImageData } from "next/image";
 
 export interface AppointProps {
@@ -306,15 +298,11 @@ const AppointmentPdfPreview = <T,>({
     disposalIcon,
     furnitureIcon,
     strollerIcon,
-
     aquariumIcon,
-
     electronicsIcon,
     gymEquipmentIcon,
     lampIcon,
-
     pianoIcon,
-
     poolIcon,
     safeIcon,
   };
@@ -545,7 +533,6 @@ const AppointmentPdfPreview = <T,>({
         <Footer
           {...pdfData?.footerDetails}
           columnSettings={templateSettings}
-          // totalPages={totalPages}
           currPage={undefined}
           emailTemplateSettings={emailTemplateSettings}
         />
