@@ -665,7 +665,7 @@ const lnContent = {
     specialHeading: "Special",
     remarks: "Remarks",
     tumbler: "Tumbler",
-    washMachine: "Washing machine",
+    washingMachine: "Washing machine",
     shelf: "Shelf",
     box: "Box",
     bed: "Bed",
@@ -725,7 +725,7 @@ const lnContent = {
     specialHeading: "Speziell",
     remarks: "Bemerkung",
     tumbler: "Tumbler",
-    washMachine: "Waschmaschine",
+    washingMachine: "Waschmaschine",
     shelf: "Regal",
     box: "Box",
     bed: "Bett",
@@ -866,7 +866,8 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
   let ln = lang as keyof typeof lnContent;
 
   if (room?.washingMachine) {
-    const name = lnContent[ln]["washMachine" as keyof (typeof lnContent)["en"]];
+    const name =
+      lnContent[ln]["washingMachine" as keyof (typeof lnContent)["en"]];
     items.push({
       icon: washMacIcon,
       name: name || "",

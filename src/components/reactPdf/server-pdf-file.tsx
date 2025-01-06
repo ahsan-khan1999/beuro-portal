@@ -11,7 +11,9 @@ import { AggrementSignature } from "./aggrement-signature";
 import { AdditionalDetails } from "./additional-details";
 import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 
-const fontPath = path.resolve(process.cwd(), "public/assets/fonts");
+const fontPath = path.resolve("./public/assets/fonts");
+
+console.log("Resolved font path:", fontPath);
 
 Font.register({
   family: "Poppins",
@@ -22,7 +24,7 @@ Font.register({
       fontWeight: 100,
     },
     {
-      src: `${fontPath}/Poppins-Regular.ttf`,
+      src: `${fontPath}/Poppins-Medium.ttf`,
       fontStyle: "normal",
       fontWeight: 400,
     },
@@ -156,7 +158,7 @@ export const ServerPdf = ({
 
 const styles = StyleSheet.create({
   body: {
-    fontFamily: "Poppins",
+    // fontFamily: "Poppins",
     paddingBottom: 100,
   },
 });

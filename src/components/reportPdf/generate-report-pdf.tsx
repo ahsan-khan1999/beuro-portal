@@ -2,6 +2,7 @@ import { Document, Font, Page, StyleSheet } from "@react-pdf/renderer";
 import { ReportAddressDetails } from "./report-address-details";
 import { HouseItemWrapper } from "./house-item-wrapper";
 import { StaticImageData } from "next/image";
+import path from "path";
 import { ServiceTableHederRow } from "../reactPdf/service-table-header-row";
 import { ServiceTableRow } from "../reactPdf/service-table-row";
 import { ServicesTotalAmount } from "../reactPdf/services-total-ammount";
@@ -28,72 +29,44 @@ export interface HouseDetailObjectProps {
   quantity?: number;
 }
 
+const fontPath = path.resolve(process.cwd(), "public/assets/fonts");
+
 Font.register({
   family: "Poppins",
   fonts: [
     {
-      src: "/assets/fonts/Poppins-Thin.ttf",
+      src: `${fontPath}/Poppins-Thin.ttf`,
       fontStyle: "thin",
       fontWeight: 100,
     },
     {
-      src: "/assets/fonts/Poppins-ThinItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 100,
-    },
-    {
-      src: "/assets/fonts/Poppins-Regular.ttf",
+      src: `${fontPath}/Poppins-Regular.ttf`,
       fontStyle: "normal",
       fontWeight: 400,
     },
     {
-      src: "/assets/fonts/Poppins-Light.ttf",
-      fontStyle: "light",
-      fontWeight: 300,
-    },
-    {
-      src: "/assets/fonts/Poppins-LightItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 300,
-    },
-    {
-      src: "/assets/fonts/Poppins-Medium.ttf",
+      src: `${fontPath}/Poppins-Medium.ttf`,
       fontStyle: "medium",
       fontWeight: 500,
     },
     {
-      src: "/assets/fonts/Poppins-MediumItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 500,
+      src: `${fontPath}/Poppins-Light.ttf"`,
+      fontStyle: "light",
+      fontWeight: 300,
     },
     {
-      src: "/assets/fonts/Poppins-SemiBold.ttf",
+      src: `${fontPath}/Poppins-SemiBold.ttf`,
       fontStyle: "semibold",
       fontWeight: 600,
     },
     {
-      src: "/assets/fonts/Poppins-SemiBoldItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 600,
-    },
-    {
-      src: "/assets/fonts/Poppins-Bold.ttf",
+      src: `${fontPath}/Poppins-Bold.ttf`,
       fontStyle: "bold",
       fontWeight: 700,
     },
     {
-      src: "/assets/fonts/Poppins-BoldItalic.ttf",
-      fontStyle: "italic",
-      fontWeight: 700,
-    },
-    {
-      src: "/assets/fonts/Poppins-Black.ttf",
+      src: `${fontPath}/Poppins-Black.ttf`,
       fontStyle: "black",
-      fontWeight: 800,
-    },
-    {
-      src: "/assets/fonts/Poppins-BlackItalic.ttf",
-      fontStyle: "italic",
       fontWeight: 800,
     },
   ],
@@ -132,7 +105,7 @@ const ReportPdf = ({
       specialHeading: "Special",
       remarks: "Remarks",
       tumbler: "Tumbler",
-      washMachine: "Washing machine",
+      washingMachine: "Washing machine",
       shelf: "Shelf",
       box: "Box",
       bed: "Bed",
@@ -209,7 +182,7 @@ const ReportPdf = ({
       specialHeading: "Speziell",
       remarks: "Bemerkung",
       tumbler: "Tumbler",
-      washMachine: "Waschmaschine",
+      washingMachine: "Waschmaschine",
       shelf: "Regal",
       box: "Box",
       bed: "Bett",
@@ -298,7 +271,7 @@ const ReportPdf = ({
 
     if (getLivingRoom(lang || "", livingRoomDetails)?.length > 0) {
       rooms[0] = [];
-      rooms[0].push({
+      rooms[0]?.push({
         items: getLivingRoom(lang || "", livingRoomDetails),
         mainHeading:
           langContent[lang as keyof typeof langContent]?.livingRoomHeading,
@@ -309,14 +282,14 @@ const ReportPdf = ({
       let length = rooms?.length || 0;
       if (length == 0) {
         rooms[0] = [];
-        rooms[0].push({
+        rooms[0]?.push({
           items: getKitchenRoom(lang || "", kitchenDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.kitchenHeading,
           description: kitchenDetails?.descriptions,
         });
       } else {
-        rooms[0].push({
+        rooms[0]?.push({
           items: getKitchenRoom(lang || "", kitchenDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.kitchenHeading,
@@ -329,14 +302,14 @@ const ReportPdf = ({
       let length = rooms?.length || 0;
       if (length == 0) {
         rooms[0] = [];
-        rooms[0].push({
+        rooms[0]?.push({
           items: getBedRoom(lang || "", bedRoomDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.bedRoomHeading,
           description: bedRoomDetails?.descriptions,
         });
       } else {
-        rooms[0].push({
+        rooms[0]?.push({
           items: getBedRoom(lang || "", bedRoomDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.bedRoomHeading,
@@ -349,7 +322,7 @@ const ReportPdf = ({
       let length = rooms?.length || 0;
       if (length == 0) {
         rooms[0] = [];
-        rooms[0].push({
+        rooms[0]?.push({
           items: getRoom(lang || "", roomDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.roomHeading,
@@ -364,7 +337,7 @@ const ReportPdf = ({
         });
       } else {
         rooms[length] = [];
-        rooms[length].push({
+        rooms[length]?.push({
           items: getRoom(lang || "", roomDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.roomHeading,
@@ -377,13 +350,13 @@ const ReportPdf = ({
       let length = rooms?.length || 0;
       if (length == 0) {
         rooms[0] = [];
-        rooms[0].push({
+        rooms[0]?.push({
           items: getOutdoorRoom(lang || "", outDoorDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.outdoorHeading,
           description: outDoorDetails?.descriptions,
         });
-      } else if (rooms[length - 1].length < 3) {
+      } else if (rooms[length - 1]?.length < 3) {
         rooms[length - 1].push({
           items: getOutdoorRoom(lang || "", outDoorDetails),
           mainHeading:
@@ -406,13 +379,13 @@ const ReportPdf = ({
       let length = rooms?.length || 0;
       if (length == 0) {
         rooms[0] = [];
-        rooms[0].push({
+        rooms[0]?.push({
           items: getBasement(lang || "", basementAtticDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.basementHeading,
           description: basementAtticDetails?.descriptions,
         });
-      } else if (rooms[length - 1].length < 3) {
+      } else if (rooms[length - 1]?.length < 3) {
         rooms[length - 1].push({
           items: getBasement(lang || "", basementAtticDetails),
           mainHeading:
@@ -421,7 +394,7 @@ const ReportPdf = ({
         });
       } else {
         rooms[length] = [];
-        rooms[length].push({
+        rooms[length]?.push({
           items: getBasement(lang || "", basementAtticDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.basementHeading,
@@ -434,7 +407,7 @@ const ReportPdf = ({
       let length = rooms?.length || 0;
       if (length == 0) {
         rooms[0] = [];
-        rooms[0].push({
+        rooms[0]?.push({
           items: getSpecialRoom(lang || "", specialItemsDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.specialHeading,
@@ -449,7 +422,7 @@ const ReportPdf = ({
         });
       } else {
         rooms[length] = [];
-        rooms[length].push({
+        rooms[length]?.push({
           items: getSpecialRoom(lang || "", specialItemsDetails),
           mainHeading:
             langContent[lang as keyof typeof langContent]?.specialHeading,
@@ -491,25 +464,13 @@ const ReportPdf = ({
           language={lang}
         />
 
-        <ServiceTableHederRow
-          isDiscount={isDiscount}
-          language={lang}
-          // bgColor="#4A13E7"
-        />
+        <ServiceTableHederRow isDiscount={isDiscount} language={lang} />
 
         {serviceItem?.map((item, index) => (
           <ServiceTableRow
             {...item}
             key={index}
             pagebreak={false}
-            // pagebreak={
-            //   !pageBreakCondition
-            //     ? serviceItem?.length === 1
-            //       ? false
-            //       : index === serviceItem?.length - 1
-            //     : false
-            // }
-
             isDiscount={isDiscount}
           />
         ))}
@@ -530,7 +491,7 @@ const ReportPdf = ({
       </Page>
 
       {staticRooms() &&
-        staticRooms().map((item, index) => (
+        staticRooms()?.map((item, index) => (
           <Page style={styles.body} key={index}>
             <Header {...headerDetails} language={lang} />
 
