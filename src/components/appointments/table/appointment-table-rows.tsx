@@ -344,7 +344,7 @@ export const AppointmentTableRows = ({
                   <Button
                     inputType="button"
                     onClick={handleViewReport}
-                    className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-[#45C769] text-white rounded-md whitespace-nowrap w-full"
+                    className="!h-fit py-2 px-3 flex items-center text-sm font-semibold bg-[#45C769] text-white rounded-md whitespace-nowrap w-full border border-transparent hover:bg-white hover:!text-[#45C769] hover:!border-[#45C769]"
                     text={translate("appointments.view_reports_btn")}
                     id="view reports"
                     iconAlt="view reports"

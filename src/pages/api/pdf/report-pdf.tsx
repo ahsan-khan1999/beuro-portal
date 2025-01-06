@@ -1,6 +1,6 @@
+import { mergePDFs } from "@/utils/utility";
 import { NextApiRequest, NextApiResponse } from "next";
 import { pdf as reactPdf } from "@react-pdf/renderer";
-import { mergePDFs } from "@/utils/utility";
 import ReportPdf from "@/components/reportPdf/generate-report-pdf";
 
 export default async function handler(

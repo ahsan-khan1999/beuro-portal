@@ -7,7 +7,6 @@ import { Button } from "@/base-components/ui/button/button";
 import { convertToLocal, germanDateFormat } from "@/utils/utility";
 import { AddNoteIcon } from "@/assets/svgs/components/add-note-icon";
 import { AddImageIcon } from "@/assets/svgs/components/add-image-icon";
-import { OutlineButton } from "@/base-components/ui/button/outline-button";
 
 export interface ApointmentsTableProps {
   dataToAdd: Appointments[];
@@ -147,7 +146,7 @@ export const AppointmentTableRows = ({
                 <span className="text-xs md:sm xl:text-base ml-1">
                   {item?.date ? germanDateFormat(item?.date) : ""}
                 </span>
-                <div className="flex max-w-[150px] flex-wrap gap-x-1 items-center ">
+                <div className="flex max-w-[150px] flex-wrap gap-x-1 items-center">
                   <p className="text-xs leading-4 md:sm xl:text-base">
                     {localStartTime ? localStartTime : ""}
                   </p>
@@ -221,7 +220,7 @@ export const AppointmentTableRows = ({
                     <Button
                       inputType="button"
                       onClick={() => handlePreview(item?.id)}
-                      className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-[#45C769] text-white border border-transparent rounded-md w-full"
+                      className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-[#45C769] text-white rounded-md w-full border border-transparent hover:bg-white hover:!text-[#45C769] hover:!border-[#45C769]"
                       text={translate("appointments.view_reports_btn")}
                       id="view reports"
                       iconAlt="view reports"
