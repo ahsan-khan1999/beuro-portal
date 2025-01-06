@@ -121,7 +121,7 @@ export const DocumentHeader = ({
                 className={`text-[${textColor}] text-sm font-medium`}
                 style={{ color: textColor }}
               >
-                {translate("pdf.report_number")}:
+                {translate("pdf.offer_number")}:
               </span>
               <span
                 className={`text-[${textColor}] text-sm font-medium`}
