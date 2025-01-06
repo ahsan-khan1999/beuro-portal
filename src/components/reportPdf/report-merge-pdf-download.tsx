@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { pdf as reactPdf } from "@react-pdf/renderer";
-import { PdfPreviewProps, ReportPdfPreviewProps } from "@/types";
+import { PdfPreviewProps } from "@/types";
 import { blobToFile, mergePDFs } from "@/utils/utility";
 import { useAppSelector } from "@/hooks/useRedux";
 import ReportPdf from "./generate-report-pdf";

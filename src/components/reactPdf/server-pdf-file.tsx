@@ -8,8 +8,8 @@ import { ServiceTableHederRow } from "./service-table-header-row";
 import { ServiceTableRow } from "./service-table-row";
 import { ServicesTotalAmount } from "./services-total-ammount";
 import { AggrementSignature } from "./aggrement-signature";
-import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 import { AdditionalDetails } from "./additional-details";
+import { Document, Font, Page, StyleSheet, View } from "@react-pdf/renderer";
 
 const fontPath = path.resolve(process.cwd(), "public/assets/fonts");
 
