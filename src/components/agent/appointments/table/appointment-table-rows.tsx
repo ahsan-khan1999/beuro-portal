@@ -230,7 +230,7 @@ export const AppointmentTableRows = ({
                     <Button
                       inputType="button"
                       onClick={() => handleClickRow(false, item.id)}
-                      className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-[#FF0000] text-white rounded-md w-full border border-transparent hover:bg-white hover:text-[#FF0000] hover:border-[#FF0000]"
+                      className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-[#FF0000] text-white rounded-md w-full border border-transparent hover:bg-white hover:!text-[#FF0000] hover:!border-[#FF0000]"
                       text={translate("appointments.sub_report_1")}
                       id="view reports"
                       iconAlt="submit report"
