@@ -377,10 +377,16 @@ export const ContactReportAddressFormField: GenerateContactAddressReportFormFiel
                 className: "!pl-4",
                 id: `address.${i}.room`,
                 name: `address.${i}.room`,
-                options: Array?.from({ length: 10 }, (_, i) => ({
-                  label: (i + 1).toString(),
-                  value: (i + 1).toString(),
-                })),
+                options: Array.from(
+                  { length: (6.5 - 1) / 0.5 + 1 },
+                  (_, index) => {
+                    const value = 1 + index * 0.5;
+                    return {
+                      label: value.toString(),
+                      value: value.toString(),
+                    };
+                  }
+                ),
                 control,
               },
             },

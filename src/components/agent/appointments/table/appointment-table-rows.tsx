@@ -180,7 +180,6 @@ export const AppointmentTableRows = ({
                   </span>
                 </div>
               </div>
-              {/* <div> */}
               <div
                 className="flex items-center gap-x-1 2xl:gap-x-3"
                 onClick={(e) => e.stopPropagation()}
@@ -219,10 +218,10 @@ export const AppointmentTableRows = ({
 
                 <div className="flex items-center">
                   {item?.isReportSubmitted ? (
-                    <OutlineButton
+                    <Button
                       inputType="button"
                       onClick={() => handlePreview(item?.id)}
-                      className="bg-white py-2 px-1 xl:px-2 text-primary xl:text-[#45C769] !min-w-[140px] w-full border border-primary xl:border-[#45C769] hover:border-buttonHover !text-xs !lg:text-sm !2xl:text-lg !h-fit"
+                      className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-[#45C769] text-white rounded-md w-full"
                       text={translate("appointments.view_reports_btn")}
                       id="view reports"
                       iconAlt="view reports"
@@ -231,7 +230,7 @@ export const AppointmentTableRows = ({
                     <Button
                       inputType="button"
                       onClick={() => handleClickRow(false, item.id)}
-                      className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-primary text-white rounded-md w-full"
+                      className="!h-fit py-[10px] px-1 md:px-2 flex items-center !min-w-[140px] !text-xs !lg:text-sm !2xl:text-base font-medium bg-[#FF0000] text-white rounded-md w-full"
                       text={translate("appointments.sub_report_1")}
                       id="view reports"
                       iconAlt="view reports"
@@ -239,7 +238,6 @@ export const AppointmentTableRows = ({
                   )}
                 </div>
               </div>
-              {/* </div> */}
             </div>
 
             {/* {isAgent ? (
