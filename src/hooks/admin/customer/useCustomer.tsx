@@ -54,11 +54,11 @@ export default function useCustomer() {
 
     const filteredStatus =
       query?.status === "None"
-        ? "1"
+        ? "None"
         : queryParams
             ?.toString()
-            .split(",")
-            .filter((item) => item !== "None");
+            ?.split(",")
+            ?.filter((item) => item !== "None");
 
     let updatedFilter: {
       status: string | string[];
