@@ -2,6 +2,7 @@ import LeadsCardLayout from "@/layout/Leads/LeadsCardLayout";
 import { Report } from "@/types/appointments";
 import { useRouter } from "next/router";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+
 import shelfIcon from "@/assets/pngs/shelf.png";
 import sofaIcon from "@/assets/pngs/safe.png";
 import aquairumIcon from "@/assets/pngs/aquarium.png";

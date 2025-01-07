@@ -35,6 +35,7 @@ import "moment/locale/de";
 import { TFunction } from "next-i18next";
 import { StaticImageData } from "next/image";
 
+// import shelf2 from "../../public/assets/images/shelf.png"
 import shelfIcon from "@/assets/pngs/shelf.png";
 import sofaIcon from "@/assets/pngs/safe.png";
 import boxIcon from "@/assets/pngs/box.png";
