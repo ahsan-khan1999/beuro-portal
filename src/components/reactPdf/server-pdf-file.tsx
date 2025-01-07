@@ -22,7 +22,7 @@ Font.register({
       fontWeight: 100,
     },
     {
-      src: `${fontPath}/Poppins-Regular.ttf`,
+      src: `${fontPath}/PoppinsRegular.ttf`,
       fontStyle: "normal",
       fontWeight: 400,
     },
@@ -83,7 +83,7 @@ export const ServerPdf = ({
     <Document title={headerDetails?.offerNo || ""}>
       <Page style={styles.body} dpi={72}>
         <Header {...headerDetails} language={lang} />
-        <View
+        {/* <View
           style={{
             position: "absolute",
             left: 0,
@@ -127,10 +127,10 @@ export const ServerPdf = ({
             emailTemplateSettings,
             templateSettings,
           }}
-        />
+        /> */}
       </Page>
 
-      <Page style={styles.body}>
+      {/* <Page style={styles.body}>
         <Header {...headerDetails} language={lang} />
         <View style={{ paddingBottom: isOfferPdf ? 110 : 0 }}>
           <AdditionalDetails description={aggrementDetails} />
@@ -149,7 +149,7 @@ export const ServerPdf = ({
             templateSettings,
           }}
         />
-      </Page>
+      </Page> */}
     </Document>
   );
 };

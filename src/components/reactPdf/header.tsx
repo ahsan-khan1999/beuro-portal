@@ -106,8 +106,8 @@ export const Header = ({
           <Text
             style={{
               fontSize: 8,
-              fontWeight: 400,
-              fontStyle: "normal",
+              // fontWeight: 400,
+              // fontStyle: "normal",
               marginRight: 1,
             }}
           >
@@ -139,8 +139,8 @@ export const Header = ({
           <Text
             style={{
               fontSize: 8,
-              fontWeight: 400,
-              fontStyle: "normal",
+              // fontWeight: 400,
+              // fontStyle: "normal",
               marginRight: 1,
             }}
           >
@@ -167,8 +167,8 @@ export const Header = ({
           <Text
             style={{
               fontSize: 8,
-              fontWeight: 400,
-              fontStyle: "normal",
+              // fontWeight: 400,
+              // fontStyle: "normal",
               marginRight: 1,
             }}
           >
