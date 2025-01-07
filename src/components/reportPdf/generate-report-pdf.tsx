@@ -42,7 +42,7 @@ Font.register({
       fontWeight: 100,
     },
     {
-      src: "/assets/fonts/Poppins-Regular.ttf",
+      src: "/assets/fonts/PoppinsRegular.ttf",
       fontStyle: "normal",
       fontWeight: 400,
     },
