@@ -24,7 +24,7 @@ import {
 import path from "path";
 
 export interface HouseDetailObjectProps {
-  icon: StaticImageData;
+  icon: string;
   name: string;
   quantity?: number;
 }

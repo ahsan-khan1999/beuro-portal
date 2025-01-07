@@ -1,7 +1,6 @@
 import { Document, Font, Page, StyleSheet } from "@react-pdf/renderer";
 import { ReportAddressDetails } from "./report-address-details";
 import { HouseItemWrapper } from "./house-item-wrapper";
-import { StaticImageData } from "next/image";
 import { ServiceTableHederRow } from "../reactPdf/service-table-header-row";
 import { ServiceTableRow } from "../reactPdf/service-table-row";
 import { ServicesTotalAmount } from "../reactPdf/services-total-ammount";
@@ -23,7 +22,7 @@ import {
 } from "@/utils/utility";
 
 export interface HouseDetailObjectProps {
-  icon: StaticImageData;
+  icon: string;
   name: string;
   quantity?: number;
 }

@@ -41,7 +41,7 @@ export const HouseItem = ({ icon, name, quantity }: HouseDetailObjectProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.labelContainer}>
-        <Image src={icon.src} style={styles.img} />
+        <Image src={icon} style={styles.img} />
         <Text style={styles.textbase}>{name}</Text>
       </View>
 

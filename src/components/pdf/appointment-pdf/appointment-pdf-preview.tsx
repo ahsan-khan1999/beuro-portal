@@ -23,7 +23,6 @@ import {
   getBasement,
   getSpecialRoom,
 } from "@/utils/utility";
-import { StaticImageData } from "next/image";
 
 export interface AppointProps {
   pdfData?: PdfProps;

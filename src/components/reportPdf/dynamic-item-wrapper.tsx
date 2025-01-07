@@ -82,15 +82,19 @@ export const DynamicItemWrapper = ({ generalRoom, language }: RoomItem) => {
       />
 
       <View style={styles.grid}>
-        {getDynamicRoom(language || "en", generalRoom)?.map((item, index) => (
-          <View key={index} style={styles.column}>
-            <HouseItem
-              icon={item.icon}
-              name={item.name}
-              quantity={item.quantity}
-            />
-          </View>
-        ))}
+        {getDynamicRoom(language || "en", generalRoom)?.map((item, index) => {
+          console.log(item.icon);
+
+          return (
+            <View key={index} style={styles.column}>
+              <HouseItem
+                icon={item.icon}
+                name={item.name}
+                quantity={item.quantity}
+              />
+            </View>
+          );
+        })}
       </View>
     </View>
   );

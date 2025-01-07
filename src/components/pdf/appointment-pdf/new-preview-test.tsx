@@ -255,7 +255,7 @@ const AppointmentPdfPreview = <T,>({
   interface ResultItem {
     name: string;
     quantity?: number;
-    icon: StaticImageData;
+    icon: string;
   }
 
   const iconMap: Record<string, any> = {

@@ -1,9 +1,7 @@
 import React from "react";
 
 interface HouseDetailObjectProps {
-  icon: {
-    src: string;
-  };
+  icon: string;
   name: string;
   quantity: number | string;
 }
@@ -16,7 +14,7 @@ export const HouseItem: React.FC<HouseDetailObjectProps> = ({
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2">
-        <img src={icon.src} alt={name} className="w-6 h-6" />
+        <img src={icon} alt={name} className="w-6 h-6" />
         <span className="text-xs font-medium text-gray-900">{name}</span>
       </div>
 
