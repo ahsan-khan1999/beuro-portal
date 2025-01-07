@@ -29,13 +29,13 @@ const DetailsData = ({
   isToggleChecked,
 }: AdminCustomerProps) => {
   const customerStatus = [
-    `${translate("customer_status.block")}`,
-    `${translate("customer_status.unBlock")}`,
+    `${translate("customer_status.Block")}`,
+    `${translate("customer_status.Active")}`,
   ];
 
   const router = useRouter();
 
-  const items = Object?.keys(staticEnums["User"]["accountStatus"]).map(
+  const items = Object?.keys(staticEnums["User"]["status"]).map(
     (item, index) => ({
       item: { label: customerStatus[index], value: item },
     })
@@ -255,10 +255,10 @@ const DetailsData = ({
 
             <Image
               src={customerDetail?.company?.logo || userIcon}
-              alt=""
+              alt="Company Logo"
               height={50}
-              width={40}
-              className="rounded-full"
+              width={50}
+              className="rounded-full h-[50px] w-[50px] object-cover"
             />
           </div>
           <div className="flex items-center gap-x-3">

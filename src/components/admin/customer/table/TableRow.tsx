@@ -4,9 +4,13 @@ import { useRouter } from "next/router";
 import React from "react";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { useTranslation } from "next-i18next";
-import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-import { staticEnums } from "@/utils/static";
+// import { DropDown } from "@/base-components/ui/dropDown/drop-down";
+// import { staticEnums } from "@/utils/static";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
+import { WithTooltip } from "@/base-components/ui/tooltip/tooltip";
+import { IconButton } from "@/base-components/ui/button/icon-button";
+import { BlockIcon } from "@/assets/svgs/components/block-icon";
+import { UnBlockIcon } from "@/assets/svgs/components/unblock-icon";
 
 export interface AdminCustomerTableProps {
   currentPageRows: CustomersAdmin[];
@@ -20,16 +24,16 @@ const TableRow = ({
   const router = useRouter();
   const { t: translate } = useTranslation();
 
-  const customerStatus = [
-    `${translate("customer_status.block")}`,
-    `${translate("customer_status.unBlock")}`,
-  ];
+  // const customerStatus = [
+  //   `${translate("customer_status.Block")}`,
+  //   `${translate("customer_status.Active")}`,
+  // ];
 
-  const items = Object?.keys(staticEnums["User"]["accountStatus"]).map(
-    (item, index) => ({
-      item: { label: customerStatus[index], value: item },
-    })
-  );
+  // const items = Object?.keys(staticEnums["User"]["status"]).map(
+  //   (item, index) => ({
+  //     item: { label: customerStatus[index], value: item },
+  //   })
+  // );
 
   return (
     <div
@@ -50,7 +54,7 @@ const TableRow = ({
                 }
                 className={`${index % 2 === 0 ? "bg-white" : "bg-tableRowBg"} ${
                   index === 0 && "mt-2"
-                } hover:bg-[#E9E1FF] pl-4 pr-1 gap-x-4 items-center rounded-md cursor-pointer xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px),minmax(100px,_100px)_minmax(200px,_2fr)_minmax(200px,_2fr)_minmax(300px,_4fr)_minmax(120px,_120px)] mlg:grid-cols-[minmax(50px,_50px),minmax(80px,_80px)_minmax(150px,2fr)_minmax(100px,_3fr)_minmax(100px,_100px)] maxSize:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(150px,3fr)_minmax(150px,3fr)_minmax(100px,_4fr)_minmax(100px,_100px)] ${
+                } hover:bg-[#E9E1FF] pl-4 pr-1 gap-x-4 items-center rounded-md cursor-pointer xs:w-fit xlg:w-auto mlg:w-full grid xs:grid-cols-[minmax(70px,_70px),minmax(100px,_100px)_minmax(200px,_2fr)_minmax(200px,_2fr)_minmax(300px,_4fr)_minmax(120px,_120px)_minmax(120px,_120px)] mlg:grid-cols-[minmax(50px,_50px),minmax(80px,_80px)_minmax(120px,2fr)_minmax(80px,_3fr)_minmax(120px,_120px)_minmax(100px,_100px)] maxSize:grid-cols-[minmax(50px,_50px),minmax(100px,_100px)_minmax(120px,3fr)_minmax(120px,3fr)_minmax(80px,_4fr)_minmax(120px,_120px)_minmax(100px,_100px)] ${
                   index !== 0 && "border-t border-t-[#E7EAEE]"
                 }`}
               >
@@ -60,9 +64,9 @@ const TableRow = ({
                     <Image
                       src={item?.company?.logo || userIcon}
                       alt=""
-                      height={29}
+                      height={28}
                       width={28}
-                      className="rounded-full"
+                      className="rounded-full h-[28px] w-[28px] object-cover"
                     />
                   </span>
                 </div>
@@ -77,21 +81,20 @@ const TableRow = ({
                     item?.plan?.planName &&
                     translate(`plan_status.${item?.plan?.planName}`)}
                 </span>
+                <span className="py-4 flex items-center">
+                  <div
+                    className={`${
+                      item.status == "Active" ? "bg-[#45C769]" : "bg-[#FF0000]"
+                    } text-white px-2 py-2 text-center rounded-md w-full text-sm`}
+                  >
+                    {translate(`customer_status.${item.status}`)}
+                  </div>
+                </span>
               </div>
             </div>
 
-            <div className="gap-x-4 grid grid-cols-[minmax(120px,_120px)_minmax(50px,_50px)]">
-              {/* <span className="py-4 flex items-center">
-                <div
-                  className={`${
-                    item.status == "unBlock" ? "bg-[#4A13E7]" : "bg-[#FF0000]"
-                  } text-white px-2 py-1 text-center rounded-md  w-[90px] text-sm `}
-                >
-                  {translate(`customer_status.${item.status}`)}
-                </div>
-              </span> */}
-
-              <span
+            <div className="gap-x-2 grid grid-cols-[minmax(32px,_32px)_minmax(50px,_50px)] pl-4">
+              {/* <span
                 className="py-4 flex items-center pl-1"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -119,34 +122,34 @@ const TableRow = ({
                   }
                   isAdminCustomer={true}
                 />
-              </span>
+              </span> */}
 
-              {/* <div className="flex justify-center items-center">
-                <div
-                  onClick={() =>
-                    router.push({
-                      pathname: "/admin/customers/details",
-                      query: { ...router.query, customer: item.id },
-                    })
+              {item?.status === "Active" ? (
+                <WithTooltip
+                  children={
+                    <IconButton
+                      icon={<BlockIcon className="w-8 h-8" />}
+                      onClick={() =>
+                        onStatusChange(item.id, item?.status, "admin_customer")
+                      }
+                    />
                   }
-                  className="hover:bg-[#E9E1FF] p-1 rounded-lg hover:shadow-lg cursor-pointer"
-                >
-                  <span className="p-[5px] rounded-md w-[34px] h-[34px] border border-primary flex justify-center items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="8"
-                      height="15"
-                      viewBox="0 0 8 15"
-                      fill="#4A13E7"
-                    >
-                      <path
-                        d="M0.461667 14.0655C0.291259 13.8825 0.206055 13.6659 0.206055 13.4156C0.206055 13.1653 0.291259 12.9489 0.461667 12.7665L5.45463 7.40568L0.444626 2.0266C0.285579 1.85583 0.206055 1.64238 0.206055 1.38623C0.206055 1.13008 0.291259 0.91053 0.461667 0.727568C0.632076 0.544606 0.833839 0.453125 1.06696 0.453125C1.30008 0.453125 1.50161 0.544606 1.67157 0.727568L7.39729 6.89338C7.46545 6.96657 7.51385 7.04585 7.54247 7.13123C7.5711 7.21662 7.58519 7.3081 7.58474 7.40568C7.58474 7.50326 7.57042 7.59474 7.54179 7.68012C7.51316 7.7655 7.465 7.84478 7.39729 7.91797L1.65453 14.0838C1.49548 14.2545 1.29939 14.3399 1.06628 14.3399C0.833157 14.3399 0.631621 14.2485 0.461667 14.0655Z"
-                        fill="#4A13E7"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </div> */}
+                  tooltipContent={translate("customer_status.Block")}
+                />
+              ) : (
+                <WithTooltip
+                  children={
+                    <IconButton
+                      icon={<UnBlockIcon />}
+                      onClick={() =>
+                        onStatusChange(item.id, item?.status, "admin_customer")
+                      }
+                    />
+                  }
+                  tooltipContent={translate("customer_status.Active")}
+                />
+              )}
+
               <div
                 className="flex justify-center items-center cursor-pointer"
                 onClick={() =>

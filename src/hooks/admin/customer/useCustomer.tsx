@@ -13,6 +13,7 @@ import { CustomersAdmin } from "@/types/admin/customer";
 import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
 
 export default function useCustomer() {
   const { company, totalCount, loading } = useAppSelector(
@@ -114,30 +115,23 @@ export default function useCustomer() {
     type: string
   ) => {
     if (type === "admin_customer") {
-      const currentItem = currentPageRows.find((item) => item.id === id);
+      const newStatus = status === "Active" ? "Block" : "Active";
 
-      if (!currentItem || currentItem.status !== status) {
-        const res = await dispatch(
-          updateCompanyStatus({
-            data: {
-              id: id,
-              status: staticEnums["User"]["accountStatus"][status],
-            },
-          })
+      const res = await dispatch(
+        updateCompanyStatus({
+          data: {
+            id: id,
+            status: staticEnums["User"]["status"][newStatus],
+          },
+        })
+      );
+
+      if (res?.payload?.success) {
+        setCurrentPageRows((prevRows) =>
+          prevRows.map((row) =>
+            row.id === id ? { ...row, status: newStatus } : row
+          )
         );
-
-        if (res?.payload) {
-          let index = currentPageRows.findIndex(
-            (item) => item.id === res.payload?.id
-          );
-
-          if (index !== -1) {
-            let prevPageRows = [...currentPageRows];
-            prevPageRows.splice(index, 1, res.payload);
-            setCurrentPageRows(prevPageRows);
-            handleDefaultModal();
-          }
-        }
       }
     }
   };
@@ -149,6 +143,14 @@ export default function useCustomer() {
         subHeading={translate("common.modals.record_update_des")}
         onClose={onClose}
         route={onClose}
+      />
+    ),
+    [ModalType.INFO_DELETED]: (
+      <DeleteConfirmation_2
+        onClose={onClose}
+        modelHeading={translate("calendar.delete_appointment_des")}
+        routeHandler={handleStatusChange}
+        loading={loading}
       />
     ),
   };

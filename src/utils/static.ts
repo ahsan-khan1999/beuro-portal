@@ -534,9 +534,9 @@ export const staticEnums: Record<string, any> = {
       Ms: 1,
       Other: 2,
     },
-    accountStatus: {
-      block: 0,
-      unBlock: 1,
+    status: {
+      Block: 0,
+      Active: 1,
     },
     oAuthIds: {
       google: "google",

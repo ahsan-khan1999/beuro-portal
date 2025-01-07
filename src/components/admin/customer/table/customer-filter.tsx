@@ -18,11 +18,11 @@ export default function CustomerFilter({
 
   const checkbox: CheckBoxType[] = [
     {
-      label: `${translate("customer_status.block")}`,
+      label: `${translate("customer_status.Block")}`,
       type: "0",
     },
     {
-      label: `${translate("customer_status.unBlock")}`,
+      label: `${translate("customer_status.Active")}`,
       type: "1",
     },
   ];

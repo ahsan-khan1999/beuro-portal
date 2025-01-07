@@ -1201,6 +1201,8 @@
   },
   "common": {
     "modals": {
+      "block_user": "Would you like to block this user?",
+      "un_block_user": "Would you like to activate this user?",
       "contract_updating_description": "Thanks for updating Contract we are happy to have you.",
       "offer_rejected_des": "Your change has been made successfully",
       "update_password": "Thanks for updating password, we are happy to have you.",
@@ -2373,8 +2375,8 @@
     "Twint": "Twint"
   },
   "customer_status": {
-    "unBlock": "Unblock",
-    "block": "Block"
+    "Active": "Active",
+    "Block": "Block"
   },
   "typeList": {
     "All": "All",

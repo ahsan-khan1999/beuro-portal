@@ -189,11 +189,11 @@ export const deletePlan: AsyncThunk<boolean, object, object> | any =
 
 export const updateCompanyStatus: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("company/update/status", async (args, thunkApi) => {
-    const { data, router, setError, translate } = args as any;
+    const { data, setError, translate } = args as any;
 
     try {
-      await apiServices.updateUserStatus(data);
-      return getKeyByValue(staticEnums["User"]["accountStatus"], data.status);
+      const response = await apiServices.updateUserStatus(data);
+      return response;
     } catch (e: any) {
       thunkApi.dispatch(setErrorMessage(e?.data?.message));
       setErrors(setError, e?.data.data, translate);

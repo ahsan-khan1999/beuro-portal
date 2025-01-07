@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image";
 import { User } from "./auth";
 import { Country, State } from "@/enums/auth";
-import { ChangeEvent, ReactNode } from "react";
+import { ChangeEvent, MouseEventHandler, ReactNode } from "react";
 import { DropDownKeys } from "@/enums/ui";
 import { Field } from "@/enums/form";
 
@@ -254,6 +254,11 @@ export interface IInfoModalProps extends IBaseModalProps {
   modalTitle: string;
 }
 
+export interface InfoModalProps extends IBaseModalProps {
+  modalTitle?: string;
+  infoModalClassName?: string;
+  modalTitleClassName?: string;
+}
 export interface IConfirmationBaseModalProps {
   onCancel: ButtonClickFunction;
   imageSrc: StaticImageData;
@@ -299,6 +304,18 @@ export interface IconOnlyButtonProps {
   onClick: () => void;
   disabled?: boolean;
   buttonClassName?: string;
+}
+
+export interface IconButtonProps {
+  icon: ReactNode;
+  type?: "button" | "submit";
+  onClick?: () => void;
+  disabled?: boolean;
+  buttonClassName?: string;
+  onMouseDown?: MouseEventHandler<HTMLButtonElement>;
+  onMouseUp?: MouseEventHandler<HTMLButtonElement>;
+  onMouseLeave?: MouseEventHandler<HTMLButtonElement>;
+  onMouseEnter?: MouseEventHandler<HTMLButtonElement>;
 }
 // sliderBase props
 interface SliderBaseProps {

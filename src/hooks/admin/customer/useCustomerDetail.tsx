@@ -13,6 +13,7 @@ import WarningModal from "@/base-components/ui/modals1/WarningModal";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { CustomerPromiseActionType } from "@/types/customer";
+import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
@@ -168,11 +169,18 @@ export default function useCustomerDetailAdmin() {
       updateCompanyStatus({
         data: {
           id: companyDetails?.id,
-          status: staticEnums["User"]["accountStatus"][custmerStatus],
+          status: staticEnums["User"]["status"][custmerStatus],
         },
       })
     );
-    if (res?.payload) handleDefaultModal();
+    if (res?.payload?.success) {
+      dispatch(
+        readCompanyDetail({ params: { filter: companyDetails?.id } })
+      ).then((res: CustomerPromiseActionType) => {
+        dispatch(setCompanyDetails(res?.payload));
+      });
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+    }
   };
 
   const MODAL_CONFIG: ModalConfigType = {
