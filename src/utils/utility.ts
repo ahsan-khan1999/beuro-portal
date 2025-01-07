@@ -47,7 +47,7 @@ import { TFunction } from "next-i18next";
 // import tvIcon from "@/assets/pngs/tv.png";
 // import decoGrossIcon from "@/assets/pngs/deco-gross.png";
 // import ovenIcon from "@/assets/pngs/oven.png";
-// // import "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-aquarium.png" from "@/assets/pngs/aquarium.png";
+// // import "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-aquarium.png" from "@/assets/pngs/aquarium.png";
 // import poolIcon from "@/assets/pngs/pool.png";
 // import washMacIcon from "@/assets/pngs/wash-machine.png";
 // import coffeMacIcon from "@/assets/pngs/coffe-machine.png";
@@ -78,7 +78,7 @@ import { TFunction } from "next-i18next";
 // import refrigeratorIcon from "@/assets/pngs/refregirator.png";
 // import microOvenIcon from "@/assets/pngs/micro-oven.png";
 // import herdIcon from "@/assets/pngs/herd.png";
-// import "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-safe.png" from "@/assets/pngs/safe-icon.png";
+// import "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-safe.png" from "@/assets/pngs/safe-icon.png";
 
 export const getNextFormStage = (
   current: DetailScreensStages
@@ -788,7 +788,7 @@ export const getSpecialRoom = (
       const name =
         lnContent[ln]["spec_aquairum" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-aquarium.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-aquarium.png",
         name: name,
         quantity: room?.aquarium,
       });
@@ -799,7 +799,7 @@ export const getSpecialRoom = (
       const name =
         lnContent[ln]["spec_piano" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-piano.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-piano.png",
         name: name,
         quantity: room?.piano,
       });
@@ -811,7 +811,7 @@ export const getSpecialRoom = (
       const name =
         lnContent[ln]["spec_gymSport" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-gym-exc.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-gym-exc.png",
         name: name,
         quantity: room?.gymEquipment,
       });
@@ -822,7 +822,7 @@ export const getSpecialRoom = (
       const name =
         lnContent[ln]["spec_electronics" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-electronics.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-electronics.png",
         name: name,
         quantity: room?.electronics,
       });
@@ -832,7 +832,7 @@ export const getSpecialRoom = (
     if (ln in lnContent && "spec_pool" in lnContent[ln]) {
       const name = lnContent[ln]["spec_pool" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-pool.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-pool.png",
         name: name,
         quantity: room?.pool,
       });
@@ -842,7 +842,7 @@ export const getSpecialRoom = (
     if (ln in lnContent && "spec_safe" in lnContent[ln]) {
       const name = lnContent[ln]["spec_safe" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-safe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-safe.png",
         name: name,
         quantity: room?.safe,
       });
@@ -852,7 +852,7 @@ export const getSpecialRoom = (
     if (ln in lnContent && "spec_lamp" in lnContent[ln]) {
       const name = lnContent[ln]["spec_lamp" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-lamp.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-lamp.png",
         name: name,
         quantity: room?.lamp,
       });
@@ -871,7 +871,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
     const name =
       lnContent[ln]["washingMachine" as keyof (typeof lnContent)["en"]];
     items.push({
-      icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-wash-machine.png",
+      icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-wash-machine.png",
       name: name || "",
       quantity: room?.washingMachine,
     });
@@ -879,7 +879,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
   if (room?.tumbler) {
     const name = lnContent[ln]["tumbler" as keyof (typeof lnContent)["en"]];
     items.push({
-      icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-tumbler.png",
+      icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-tumbler.png",
       name: name || "",
       quantity: room?.tumbler,
     });
@@ -888,7 +888,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
   if (room?.shelf) {
     const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
     items.push({
-      icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-shelf.png",
+      icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-shelf.png",
       name: name || "",
       quantity: room?.shelf,
     });
@@ -897,7 +897,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
     const name =
       lnContent[ln]["base_disposible" as keyof (typeof lnContent)["en"]];
     items.push({
-      icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-disposible.png",
+      icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-disposible.png",
       name: name || "",
       quantity: room?.disposal,
     });
@@ -905,7 +905,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
   if (room?.bicycle) {
     const name = lnContent[ln]["base_cycle" as keyof (typeof lnContent)["en"]];
     items.push({
-      icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-cycle.png",
+      icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-cycle.png",
       name: name || "",
       quantity: room?.bicycle,
     });
@@ -914,7 +914,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
     const name =
       lnContent[ln]["base_stroller" as keyof (typeof lnContent)["en"]];
     items.push({
-      icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-child-walker.png",
+      icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-child-walker.png",
       name: name || "",
       quantity: room?.stroller,
     });
@@ -923,7 +923,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
     const name =
       lnContent[ln]["base_furniture" as keyof (typeof lnContent)["en"]];
     items.push({
-      icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-mobel.png",
+      icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-mobel.png",
       name: name || "",
       quantity: room?.furniture,
     });
@@ -932,7 +932,7 @@ export const getBasement = (lang: string, room?: BasementAtticDetailsProps) => {
   if (room?.boxes) {
     const name = lnContent[ln]["base_boxes" as keyof (typeof lnContent)["en"]];
     items.push({
-      icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-box.png",
+      icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-box.png",
       name: name || "",
       quantity: room?.boxes,
     });
@@ -949,7 +949,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
     if (ln in lnContent && "out_grill" in lnContent[ln]) {
       const name = lnContent[ln]["out_grill" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-grill.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-grill.png",
         name: name,
         quantity: room?.grill,
       });
@@ -959,7 +959,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
     if (ln in lnContent && "desk" in lnContent[ln]) {
       const name = lnContent[ln]["desk" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-desk.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-desk.png",
         name: name,
         quantity: room?.table,
       });
@@ -969,7 +969,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
     if (ln in lnContent && "out_chair" in lnContent[ln]) {
       const name = lnContent[ln]["out_chair" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-chair.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-chair.png",
         name: name,
         quantity: room?.chairs,
       });
@@ -979,7 +979,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
     if (ln in lnContent && "sofa" in lnContent[ln]) {
       const name = lnContent[ln]["sofa" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-safe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-safe.png",
         name: name,
         quantity: room?.sofa,
       });
@@ -989,7 +989,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
     if (ln in lnContent && "shelf" in lnContent[ln]) {
       const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-shelf.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-shelf.png",
         name: name,
         quantity: room?.shelf,
       });
@@ -1000,7 +1000,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
       const name =
         lnContent[ln]["out_umbrella" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-umbella.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-umbella.png",
         name: name,
         quantity: room?.umbrella,
       });
@@ -1010,7 +1010,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
     if (ln in lnContent && "out_cup" in lnContent[ln]) {
       const name = lnContent[ln]["out_cup" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-cup.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-cup.png",
         name: name,
         quantity: room?.pots,
       });
@@ -1021,7 +1021,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
     if (ln in lnContent && "plant" in lnContent[ln]) {
       const name = lnContent[ln]["plant" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-flour.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-flour.png",
         name: name,
         quantity: room?.plants,
       });
@@ -1033,7 +1033,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
       const name =
         lnContent[ln]["out_herbGen" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-greenery.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-greenery.png",
         name: name,
         quantity: room?.herbGarden,
       });
@@ -1044,7 +1044,7 @@ export const getOutdoorRoom = (lang: string, room?: OutDoorDetailsProps) => {
       const name =
         lnContent[ln]["out_lawnmower" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-gym-equ.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-gym-equ.png",
         name: name,
         quantity: room?.lawnmower,
       });
@@ -1061,7 +1061,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
     if (ln in lnContent && "bed" in lnContent[ln]) {
       const name = lnContent[ln]["bed" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-bed.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-bed.png",
         name: name,
         quantity: room?.bed,
       });
@@ -1071,7 +1071,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
     if (ln in lnContent && "doublebed" in lnContent[ln]) {
       const name = lnContent[ln]["doublebed" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-d-bed.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-d-bed.png",
         name: name,
         quantity: room?.doubleBed,
       });
@@ -1081,7 +1081,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
     if (ln in lnContent && "armchair" in lnContent[ln]) {
       const name = lnContent[ln]["armchair" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-arm-chair.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-arm-chair.png",
         name: name,
         quantity: room?.armchair,
       });
@@ -1092,7 +1092,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
       const name =
         lnContent[ln]["smallWoodDrobe" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-single-woodrobe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-single-woodrobe.png",
         name: name,
         quantity: room?.smallWardrobe,
       });
@@ -1103,7 +1103,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
       const name =
         lnContent[ln]["mediumWoodDrobe" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-medWoodDrobe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-medWoodDrobe.png",
         name: name,
         quantity: room?.mediumWardrobe,
       });
@@ -1114,7 +1114,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
       const name =
         lnContent[ln]["largeWoodDrobe" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-largeWoodDrobe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-largeWoodDrobe.png",
         name: name,
         quantity: room?.largeWardrobe,
       });
@@ -1125,7 +1125,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
     if (ln in lnContent && "shelf" in lnContent[ln]) {
       const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-shelf.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-shelf.png",
         name: name,
         quantity: room?.shelf,
       });
@@ -1137,7 +1137,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
       const name =
         lnContent[ln]["teacherDesk" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-teacher-desk.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-teacher-desk.png",
         name: name,
         quantity: room?.desk,
       });
@@ -1148,7 +1148,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
     if (ln in lnContent && "tv" in lnContent[ln]) {
       const name = lnContent[ln]["tv" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-tv.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-tv.png",
         name: name,
         quantity: room?.tv,
       });
@@ -1158,7 +1158,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
     if (ln in lnContent && "tvTable" in lnContent[ln]) {
       const name = lnContent[ln]["tvTable" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-tv-table.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-tv-table.png",
         name: name,
         quantity: room?.tvTable,
       });
@@ -1170,7 +1170,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
       const name =
         lnContent[ln]["nightStand" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-table.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-table.png",
         name: name,
         quantity: room?.nightstand,
       });
@@ -1181,7 +1181,7 @@ export const getRoom = (lang: string, room?: RoomDetailsProps) => {
     if (ln in lnContent && "box" in lnContent[ln]) {
       const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-box.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-box.png",
         name: name,
         quantity: room?.box,
       });
@@ -1198,7 +1198,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
     if (ln in lnContent && "bed" in lnContent[ln]) {
       const name = lnContent[ln]["bed" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-bed.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-bed.png",
         name: name,
         quantity: room?.bed,
       });
@@ -1208,7 +1208,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
     if (ln in lnContent && "doublebed" in lnContent[ln]) {
       const name = lnContent[ln]["doublebed" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-d-bed.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-d-bed.png",
         name: name,
         quantity: room?.doubleBed,
       });
@@ -1218,7 +1218,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
     if (ln in lnContent && "armchair" in lnContent[ln]) {
       const name = lnContent[ln]["armchair" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-arm-chair.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-arm-chair.png",
         name: name,
         quantity: room?.armchair,
       });
@@ -1229,7 +1229,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
       const name =
         lnContent[ln]["smallWoodDrobe" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-single-woodrobe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-single-woodrobe.png",
         name: name,
         quantity: room?.smallWardrobe,
       });
@@ -1240,7 +1240,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
       const name =
         lnContent[ln]["mediumWoodDrobe" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-medWoodDrobe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-medWoodDrobe.png",
         name: name,
         quantity: room?.mediumWardrobe,
       });
@@ -1251,7 +1251,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
       const name =
         lnContent[ln]["largeWoodDrobe" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-largeWoodDrobe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-largeWoodDrobe.png",
         name: name,
         quantity: room?.largeWardrobe,
       });
@@ -1262,7 +1262,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
       const name =
         lnContent[ln]["bedRoomItem" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-macUpTable.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-macUpTable.png",
         name: name,
         quantity: room?.dressingTable,
       });
@@ -1273,7 +1273,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
       const name =
         lnContent[ln]["nightStand" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-table.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-table.png",
         name: name,
         quantity: room?.nightstand,
       });
@@ -1283,7 +1283,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
     if (ln in lnContent && "shelf" in lnContent[ln]) {
       const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-shelf.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-shelf.png",
         name: name,
         quantity: room?.shelf,
       });
@@ -1295,7 +1295,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
       const name =
         lnContent[ln]["teacherDesk" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-teacher-desk.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-teacher-desk.png",
         name: name,
         quantity: room?.desk,
       });
@@ -1305,7 +1305,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
     if (ln in lnContent && "plant" in lnContent[ln]) {
       const name = lnContent[ln]["plant" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-flour.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-flour.png",
         name: name,
         quantity: room?.plants,
       });
@@ -1316,7 +1316,7 @@ export const getBedRoom = (lang: string, room?: DedRoomDetailsProps) => {
     if (ln in lnContent && "box" in lnContent[ln]) {
       const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-box.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-box.png",
         name: name,
         quantity: room?.box,
       });
@@ -1334,7 +1334,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label1" in drContent[lang]) {
       const name = drContent[lang]["label1" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-safe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-safe.png",
         name: name,
         quantity: generalRoom?.label1Value,
       });
@@ -1344,7 +1344,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label2" in drContent[lang]) {
       const name = drContent[lang]["label2" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-teacher-desk.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-teacher-desk.png",
         name: name,
         quantity: generalRoom?.label2Value,
       });
@@ -1354,7 +1354,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label3" in drContent[lang]) {
       const name = drContent[lang]["label3" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-tv-table.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-tv-table.png",
         name: name,
         quantity: generalRoom?.label3Value,
       });
@@ -1364,7 +1364,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label4" in drContent[lang]) {
       const name = drContent[lang]["label4" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-arm-chair.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-arm-chair.png",
         name: name,
         quantity: generalRoom?.label4Value,
       });
@@ -1374,7 +1374,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label5" in drContent[lang]) {
       const name = drContent[lang]["label5" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-desk.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-desk.png",
         name: name,
         quantity: generalRoom?.label5Value,
       });
@@ -1384,7 +1384,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label6" in drContent[lang]) {
       const name = drContent[lang]["label6" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-desk.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-desk.png",
         name: name,
         quantity: generalRoom?.label6Value,
       });
@@ -1394,7 +1394,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label7" in drContent[lang]) {
       const name = drContent[lang]["label7" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-shelf.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-shelf.png",
         name: name,
         quantity: generalRoom?.label7Value,
       });
@@ -1404,7 +1404,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label8" in drContent[lang]) {
       const name = drContent[lang]["label8" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-tv.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-tv.png",
         name: name,
         quantity: generalRoom?.label8Value,
       });
@@ -1414,7 +1414,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label9" in drContent[lang]) {
       const name = drContent[lang]["label9" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-deco-gross.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-deco-gross.png",
         name: name,
         quantity: generalRoom?.label9Value,
       });
@@ -1424,7 +1424,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
     if (lang in drContent && "label10" in drContent[lang]) {
       const name = drContent[lang]["label10" as keyof (typeof drContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-box.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-box.png",
         name: name,
         quantity: generalRoom?.label10Value,
       });
@@ -1437,7 +1437,7 @@ export const getDynamicRoom = (language: string, generalRoom: RoomObject) => {
   //       const name =
   //         langContent[lang]["label1" as keyof (typeof langContent)["en"]];
   //       items.push({
-  //         icon:"https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-safe.png",
+  //         icon:"https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-safe.png",
   //         name: name,
   //         quantity: generalRoom?.label1Value,
   //       });
@@ -1454,7 +1454,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
     if (ln in lnContent && "sofa" in lnContent[ln]) {
       const name = lnContent[ln]["sofa" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-safe.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-safe.png",
         name: name,
         quantity: room?.sofa,
       });
@@ -1465,7 +1465,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
       const name =
         lnContent[ln]["teacherDesk" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-teacher-desk.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-teacher-desk.png",
         name: name,
         quantity: room?.teacherDesk,
       });
@@ -1475,7 +1475,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
     if (ln in lnContent && "tvTable" in lnContent[ln]) {
       const name = lnContent[ln]["tvTable" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-tv-table.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-tv-table.png",
         name: name,
         quantity: room?.tvTable,
       });
@@ -1485,7 +1485,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
     if (ln in lnContent && "armchair" in lnContent[ln]) {
       const name = lnContent[ln]["armchair" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-arm-chair.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-arm-chair.png",
         name: name,
         quantity: room?.armchair,
       });
@@ -1495,7 +1495,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
     if (ln in lnContent && "desk" in lnContent[ln]) {
       const name = lnContent[ln]["desk" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-desk.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-desk.png",
         name: name,
         quantity: room?.table,
       });
@@ -1505,7 +1505,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
     if (ln in lnContent && "shelf" in lnContent[ln]) {
       const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-shelf.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-shelf.png",
         name: name,
         quantity: room?.shelf,
       });
@@ -1516,7 +1516,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
       const name =
         lnContent[ln]["living_lSofa" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-l-sofa.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-l-sofa.png",
         name: name,
         quantity: room?.LSofa,
       });
@@ -1526,7 +1526,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
     if (ln in lnContent && "tv" in lnContent[ln]) {
       const name = lnContent[ln]["tv" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-tv.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-tv.png",
         name: name,
         quantity: room?.TV,
       });
@@ -1537,7 +1537,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
       const name =
         lnContent[ln]["living_decoGross" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-deco-gross.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-deco-gross.png",
         name: name,
         quantity: room?.decoBig,
       });
@@ -1547,7 +1547,7 @@ export const getLivingRoom = (lang: string, room?: LivingRoomDetailsProps) => {
     if (ln in lnContent && "box" in lnContent[ln]) {
       const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-box.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-box.png",
         name: name,
         quantity: room?.box,
       });
@@ -1564,7 +1564,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
       const name =
         lnContent[ln]["kitchen_oven" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-oven.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-oven.png",
         name: name,
         quantity: room?.oven,
       });
@@ -1575,7 +1575,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
       const name =
         lnContent[ln]["kitchen_refrigerator" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-refregirator.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-refregirator.png",
         name: name,
         quantity: room?.refrigerator,
       });
@@ -1586,7 +1586,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
       const name =
         lnContent[ln]["kitchen_freezer" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-freezer.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-freezer.png",
         name: name,
         quantity: room?.freezer,
       });
@@ -1597,7 +1597,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
       const name =
         lnContent[ln]["kitchen_stove" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-herd.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-herd.png",
         name: name,
         quantity: room?.stove,
       });
@@ -1608,7 +1608,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
       const name =
         lnContent[ln]["kitchen_microOven" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-micro-oven.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-micro-oven.png",
         name: name,
         quantity: room?.microwave,
       });
@@ -1619,7 +1619,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
       const name =
         lnContent[ln]["kitchen_coffeMachine" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-coffe-machine.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-coffe-machine.png",
         name: name,
         quantity: room?.coffeeMachine,
       });
@@ -1633,7 +1633,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
           "kitchen_washingMachine" as keyof (typeof lnContent)["en"]
         ];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-wash-machine.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-wash-machine.png",
         name: name,
         quantity: room?.washingMachine,
       });
@@ -1643,7 +1643,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
     if (ln in lnContent && "tumbler" in lnContent[ln]) {
       const name = lnContent[ln]["tumbler" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-tumbler.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-tumbler.png",
         name: name,
         quantity: room?.tumbler,
       });
@@ -1653,7 +1653,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
     if (ln in lnContent && "shelf" in lnContent[ln]) {
       const name = lnContent[ln]["shelf" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-shelf.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-shelf.png",
         name: name,
         quantity: room?.shelf,
       });
@@ -1663,7 +1663,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
     if (ln in lnContent && "box" in lnContent[ln]) {
       const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-box.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-box.png",
         name: name,
         quantity: room?.box,
       });
@@ -1673,7 +1673,7 @@ export const getKitchenRoom = (lang: string, room?: KitchenDetailsProps) => {
     if (ln in lnContent && "box" in lnContent[ln]) {
       const name = lnContent[ln]["box" as keyof (typeof lnContent)["en"]];
       items.push({
-        icon: "https://www.staging.buero-365.cloudmeshsolutions.com/api/integrations/aws/storage/get/Abbruchfuchs-box.png",
+        icon: "https://kaufes-dev-v2.s3.me-south-1.amazonaws.com/Abbruchfuchs-box.png",
         name: name,
         quantity: room?.box,
       });

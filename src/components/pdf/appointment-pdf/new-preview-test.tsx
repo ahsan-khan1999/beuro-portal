@@ -71,7 +71,6 @@ import safeIcon from "@/assets/pngs/safe-icon.png";
 import { DynamicItemWrapper } from "./dynamic-item-wrapper";
 import { AppointmentDetails } from "./appointment-details";
 import { isRoomNotEmpty } from "@/utils/utility";
-import { StaticImageData } from "next/image";
 
 export interface AppointProps {
   pdfData?: PdfProps;
