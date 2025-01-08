@@ -99,6 +99,7 @@ export const DropDown = ({
               isPayment={isPayment}
               isAdminCustomer={isAdminCustomer}
               isContract={isContract}
+              selectedItem={selectedItem}
             />
           )}
         </AnimatePresence>

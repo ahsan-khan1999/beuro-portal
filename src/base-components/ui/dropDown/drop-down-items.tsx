@@ -14,6 +14,7 @@ export const DropDownItems = ({
   isPayment,
   isAdminCustomer,
   isContract,
+  selectedItem,
 }: DropDownItemsProps & {
   isLastIndex?: boolean;
   isSecondLastIndex?: boolean;
@@ -23,6 +24,7 @@ export const DropDownItems = ({
   isOffer?: boolean;
   isAdminCustomer?: boolean;
   isContract?: boolean;
+  selectedItem?: String;
 }) => {
   const handleItemClick = (item: string) => {
     onItemClick(item);
@@ -56,11 +58,14 @@ export const DropDownItems = ({
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4 }}
     >
-      {items.map(({ item }, idx) => {
+      {items?.map(({ item }, idx) => {
+        const isSelected = selectedItem === item.label;
         return (
           <li
             key={idx}
-            className="text-gray hover:text-white font-medium hover:bg-borderColor cursor-pointer px-3 py-2 "
+            className={`text-gray hover:text-white font-medium hover:bg-borderColor cursor-pointer px-3 py-2 ${
+              isSelected ? "text-primary" : ""
+            }`}
             onClick={() => handleItemClick(`${item.value}` || "")}
           >
             {item.label}

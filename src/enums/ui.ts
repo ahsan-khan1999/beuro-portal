@@ -94,7 +94,8 @@ export enum ModalType {
   IMAGE_UPDATED_SUCCESS,
   NOTE_ADDED_SUCCESS,
   NOTE_UPDATED_SUCCESS,
-  ARE_YOU_BLOCK
+  ARE_YOU_BLOCK,
+  DELETE_COMPANY
 }
 
 export type ModalConfigType = {

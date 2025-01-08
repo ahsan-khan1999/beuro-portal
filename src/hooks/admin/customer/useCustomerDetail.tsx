@@ -1,4 +1,5 @@
 import {
+  deActivateCompany,
   readCompanyDetail,
   setCompanyDetails,
   updateAdminCompany,
@@ -8,7 +9,7 @@ import { updateModalType } from "@/api/slices/globalSlice/global";
 import CreationCreated from "@/base-components/ui/modals1/CreationCreated";
 import DeleteConfirmation_1 from "@/base-components/ui/modals1/DeleteConfirmation_1";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
-import { AreYouSureMakeAccountFree } from "@/base-components/ui/modals1/SueAccountFree";
+import { AreYouSureMakeAccountFree } from "@/base-components/ui/modals1/SureAccountFree";
 import WarningModal from "@/base-components/ui/modals1/WarningModal";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
@@ -178,15 +179,18 @@ export default function useCustomerDetailAdmin() {
   //   );
   // };
 
-  const handleStatusChange = async (custmerStatus: string) => {
+  const handleStatusChange = async (customerStatus: string) => {
+    if (customerStatus === companyDetails?.status) return;
+
     const res = await dispatch(
       updateCompanyStatus({
         data: {
           id: companyDetails?.id,
-          status: staticEnums["User"]["status"][custmerStatus],
+          status: staticEnums["User"]["status"][customerStatus],
         },
       })
     );
+
     if (res?.payload?.success) {
       dispatch(
         readCompanyDetail({ params: { filter: companyDetails?.id } })
@@ -194,6 +198,33 @@ export default function useCustomerDetailAdmin() {
         dispatch(setCompanyDetails(res?.payload));
       });
       dispatch(updateModalType({ type: ModalType.CREATION }));
+    }
+  };
+
+  const handleDeleteCompany = (id: string, companyName: string) => {
+    dispatch(
+      updateModalType({
+        type: ModalType.DELETE_COMPANY,
+        data: {
+          id,
+          companyName,
+        },
+      })
+    );
+  };
+
+  const handleCompanyDeleted = async (id: string) => {
+    if (!id) return;
+
+    const res = await dispatch(deActivateCompany({ data: { id } }));
+    if (res) {
+      dispatch(updateModalType({ type: ModalType.CREATION }));
+
+      setTimeout(() => {
+        router.pathname = "/admin/customers";
+        delete router.query["customer"];
+        updateQuery(router, router.locale as string);
+      }, 1000);
     }
   };
 
@@ -215,6 +246,14 @@ export default function useCustomerDetailAdmin() {
         onSuccess={handleCompanyUpdate}
         heading={translate("common.are_you_sure_modal.title")}
         sub_heading={subHeading}
+      />
+    ),
+    [ModalType.DELETE_COMPANY]: (
+      <AreYouSureMakeAccountFree
+        onClose={onClose}
+        onDeactivateCompany={handleCompanyDeleted}
+        heading={translate("common.are_you_sure_modal.title")}
+        sub_heading={translate("common.modals.deactivate_company")}
       />
     ),
 
@@ -274,6 +313,6 @@ export default function useCustomerDetailAdmin() {
     handleCompanyUpdate,
     handleAddAppointment,
     isToggleChecked,
-    // handleUserBlock
+    handleDeleteCompany,
   };
 }

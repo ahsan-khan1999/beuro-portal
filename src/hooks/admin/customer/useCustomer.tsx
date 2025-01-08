@@ -14,7 +14,7 @@ import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
-import { AreYouSureMakeAccountFree } from "@/base-components/ui/modals1/SueAccountFree";
+import { AreYouSureMakeAccountFree } from "@/base-components/ui/modals1/SureAccountFree";
 
 export default function useCustomer() {
   const { company, totalCount, loading } = useAppSelector(
@@ -143,7 +143,7 @@ export default function useCustomer() {
         ? translate("common.modals.un_block_user")
         : translate("common.modals.block_user");
 
-    setSubHeading(heading); 
+    setSubHeading(heading);
 
     dispatch(
       updateModalType({

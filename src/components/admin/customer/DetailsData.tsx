@@ -19,6 +19,7 @@ export interface AdminCustomerProps {
   onStatusChange: (id: string) => void;
   onDelete: () => void;
   onCompanyUpdate: (isAppointment?: boolean, companyName?: string) => void;
+  onDeleteCompany: (id: string, companyName: string) => void;
 }
 const DetailsData = ({
   customerDetail,
@@ -27,6 +28,7 @@ const DetailsData = ({
   onStatusChange,
   onCompanyUpdate,
   isToggleChecked,
+  onDeleteCompany,
 }: AdminCustomerProps) => {
   const customerStatus = [
     `${translate("customer_status.Block")}`,
@@ -147,7 +149,15 @@ const DetailsData = ({
                   "admin.customers_details.card_content.make_button_unchecked"
                 )}`}
           </button>
-          <span className="border-primary border w-10 h-10 rounded-lg flex items-center justify-center ">
+          <span
+            className="border-primary border w-10 h-10 rounded-lg flex items-center justify-center"
+            onClick={() =>
+              onDeleteCompany(
+                customerDetail?.id,
+                customerDetail?.company?.companyName
+              )
+            }
+          >
             <Image
               src={deleteIcon}
               alt="deleteIcon"
@@ -227,22 +237,22 @@ const DetailsData = ({
               )}
               onItemSelected={onStatusChange}
               dropDownClassName={`w-fit border ${
-                customerDetail?.status === "block"
+                customerDetail?.status === "Block"
                   ? "border-[#F00]"
                   : "border-primary"
               } px-4 py-[3px] flex items-center justify-center gap-x-1`}
               dropDownTextClassName={`${
-                customerDetail?.status === "block"
+                customerDetail?.status === "Block"
                   ? "text-[#F00]"
                   : "text-primary"
               } font-medium text-base`}
               dropDownIconClassName={`${
-                customerDetail?.status === "block"
+                customerDetail?.status === "Block"
                   ? "text-[#F00]"
                   : "text-primary"
               }`}
               dropDownItemsContainerClassName={`border w-fit ${
-                customerDetail?.status === "block"
+                customerDetail?.status === "Block"
                   ? "border-[#F00]"
                   : "border-primary"
               }`}

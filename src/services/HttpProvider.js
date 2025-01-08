@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getRefreshToken, getToken, logout } from "../utils/auth.util";
 
-
 const API_DOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN;
 
 export const BASEURL = API_DOMAIN + "/api";
@@ -35,6 +34,29 @@ export async function updateHeaders() {
 }
 
 export async function request({ method, url, data, headers }) {
+  if (headers === undefined) {
+    await updateHeaders();
+  }
+
+  const promise = instance[method](url, data);
+  let response;
+  try {
+    response = await promise;
+  } catch (error) {
+    showError(
+      translate(`validationMessages.${error?.response?.data?.message}`)
+    );
+
+    if (error?.response?.data?.code === 401) {
+      logout();
+      window.location = "/";
+    }
+    throw error.response;
+  }
+  return response;
+}
+
+export async function deleteRequestWithBody({ method, url, data, headers }) {
   if (headers === undefined) {
     await updateHeaders();
   }
@@ -141,6 +163,15 @@ export async function get(url, params, featureAndAction, config) {
 
 export async function del(url, params, config) {
   return request({ method: "delete", url, data: { params }, ...config });
+}
+
+export async function delWithReqBody(url, data, config) {
+  return deleteRequestWithBody({
+    method: "delete",
+    url,
+    data: { data },
+    ...config,
+  });
 }
 
 export async function post(url, data, featureAndAction, config, file) {

@@ -20,7 +20,6 @@ export default function Customers() {
     loading,
     setFilter,
     currentPage,
-    handleStatusChange,
     totalCount,
     renderModal,
     handleUserBlock,

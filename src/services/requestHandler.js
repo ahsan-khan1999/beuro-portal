@@ -1,4 +1,13 @@
-import { del, get, patch, post, put } from "./HttpProvider";
+import {
+  del,
+  get,
+  patch,
+  post,
+  put,
+  independentRequest,
+  deleteRequestWithBody,
+  delWithReqBody,
+} from "./HttpProvider";
 import featureConstants from "./features-constants";
 
 const SERVICE_URLS = {
@@ -27,6 +36,7 @@ const SERVICE_URLS = {
   idVarificationReq: "/profile/id-verification-request",
   profileNotifications: "/profile/notification-settings",
   customer: "/customer",
+  deActivateCompany: "/user/deactivate-company",
   readLead: "/lead",
   lead: "/lead/lead-step/",
   updateLead: "/lead/lead-step/",
@@ -228,12 +238,17 @@ const updateCustomer = (data) =>
   put(SERVICE_URLS.customer + `/${data?.id}`, data, {
     feature: featureConstants.login,
   });
+
 const deleteCustomer = (data) =>
-  del(
-    SERVICE_URLS.customer + `/${data?.id}`,
-    {},
-    { feature: featureConstants.login }
-  );
+  del(SERVICE_URLS.customer + `/${data?.id}`, data?.id, {
+    feature: featureConstants.login,
+  });
+
+const deActivateCompany = (data) =>
+  delWithReqBody(SERVICE_URLS.deActivateCompany, data, {
+    feature: featureConstants.login,
+  });
+
 const readLead = (params) =>
   get(
     SERVICE_URLS.readLead,
@@ -1324,6 +1339,7 @@ const apiServices = {
   deleteContractTask,
   leadSendByPost,
   sendLeadEmail,
+  deActivateCompany,
 };
 
 export default apiServices;

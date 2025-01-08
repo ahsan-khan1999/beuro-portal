@@ -117,6 +117,25 @@ export const deleteCompany: AsyncThunk<boolean, object, object> | any =
     }
   });
 
+export const deActivateCompany: AsyncThunk<boolean, object, object> | any =
+  createAsyncThunk("company/deactivate", async (args, thunkApi) => {
+    const { data, setError, translate } = args as any;
+
+    console.log(data, "data");
+
+    try {
+      const response = await apiServices.deActivateCompany(data);
+
+      console.log(response, "response");
+
+      return response?.data?.success;
+    } catch (e: any) {
+      thunkApi.dispatch(setErrorMessage(e?.data?.message));
+      setErrors(setError, e?.data.data, translate);
+      return false;
+    }
+  });
+
 export const readPlan: AsyncThunk<boolean, object, object> | any =
   createAsyncThunk("Plan/read", async (args, thunkApi) => {
     const { params, router, setError, translate } = args as any;
@@ -270,6 +289,15 @@ const companySlice = createSlice({
       state.loading = false;
     });
     builder.addCase(deleteCompany.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(deActivateCompany.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deActivateCompany.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(deActivateCompany.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(readCompanyDetail.pending, (state) => {

@@ -11,6 +11,7 @@ interface AreYouSureInfo {
   sub_heading: string;
   onSuccess?: (isAppointment?: boolean) => void;
   onBlockUser?: (id: string, status: string) => void;
+  onDeactivateCompany?: (id: string) => void;
   onClose: () => void;
 }
 
@@ -20,15 +21,18 @@ export const AreYouSureMakeAccountFree = ({
   onSuccess,
   onBlockUser,
   sub_heading,
+  onDeactivateCompany,
 }: AreYouSureInfo) => {
   const { isAppointment, companyName, id, status } =
     useAppSelector((state) => state.global.modal.data) || {};
 
   const handleConfirmation = () => {
-    if (!status) {
-      onSuccess && onSuccess(isAppointment);
-    } else {
-      onBlockUser && onBlockUser(id, status);
+    if (onDeactivateCompany) {
+      onDeactivateCompany(id);
+    } else if (status && onBlockUser) {
+      onBlockUser(id, status);
+    } else if (onSuccess) {
+      onSuccess(isAppointment);
     }
   };
 

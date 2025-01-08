@@ -1201,6 +1201,7 @@
   },
   "common": {
     "modals": {
+      "deactivate_company": "Do you want to deactivate this company, ",
       "block_user": "Would you like to block this user?",
       "un_block_user": "Would you like to activate this user?",
       "contract_updating_description": "Thanks for updating Contract we are happy to have you.",

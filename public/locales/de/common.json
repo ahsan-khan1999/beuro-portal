@@ -1195,6 +1195,7 @@
 
   "common": {
     "modals": {
+      "deactivate_company": "Möchten Sie dieses Unternehmen deaktivieren, ",
       "block_user": "Möchten Sie diesen Benutzer blockieren?",
       "un_block_user": "Möchten Sie diesen Benutzer aktivieren?",
       "contract_updating_description": "Vielen Dank für die Aktualisierung des Vertrags, wir freuen uns, dass Sie da sind.",
