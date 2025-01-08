@@ -57,14 +57,16 @@ const TableRow = ({
                 }`}
               >
                 <span className="py-4">{item?.company?.refID}</span>
-                <div className="py-4 flex items-center justify-center">
-                  <span className="border-2 border-[#D9D9D9] rounded-full p-1 h-[40px] w-[40px] flex items-center justify-center">
+                <div className="flex items-center justify-center">
+                  <span className="border-2 border-[#D9D9D9] rounded-full p-1 h-[55px] w-[55px] flex items-center justify-center">
                     <Image
                       src={item?.company?.logo || userIcon}
                       alt=""
-                      height={28}
-                      width={28}
-                      className="rounded-full h-[28px] w-[28px] object-cover"
+                      className="rounded-full"
+                      quality={100}
+                      layout="responsive"
+                      width={48}
+                      height={48}
                     />
                   </span>
                 </div>

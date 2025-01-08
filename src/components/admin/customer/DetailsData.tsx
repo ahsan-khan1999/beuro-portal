@@ -262,14 +262,17 @@ const DetailsData = ({
             <span className="text-[#4D4D4D] flex items-center">
               {translate("admin.customers_details.card_content.company_logo")}:
             </span>
-
-            <Image
-              src={customerDetail?.company?.logo || userIcon}
-              alt="Company Logo"
-              height={50}
-              width={50}
-              className="rounded-full h-[50px] w-[50px] object-cover"
-            />
+            <span className="rounded-full p-1 h-[55px] w-[55px] flex items-center justify-center">
+              <Image
+                src={customerDetail?.company?.logo || userIcon}
+                alt=""
+                className="rounded-full"
+                quality={100}
+                layout="responsive"
+                width={48}
+                height={48}
+              />
+            </span>
           </div>
           <div className="flex items-center gap-x-3">
             <span className="text-[#4D4D4D] flex items-center">
