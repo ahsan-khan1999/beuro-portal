@@ -9,7 +9,8 @@ import { BaseModal } from "@/base-components/ui/modals/base-modal";
 interface AreYouSureInfo {
   heading: string;
   sub_heading: string;
-  onSuccess: (isAppointment?: boolean) => void;
+  onSuccess?: (isAppointment?: boolean) => void;
+  onBlockUser?: (id: string, status: string) => void;
   onClose: () => void;
 }
 
@@ -17,10 +18,19 @@ export const AreYouSureMakeAccountFree = ({
   onClose,
   heading,
   onSuccess,
+  onBlockUser,
   sub_heading,
 }: AreYouSureInfo) => {
-  const { isAppointment, companyName } =
+  const { isAppointment, companyName, id, status } =
     useAppSelector((state) => state.global.modal.data) || {};
+
+  const handleConfirmation = () => {
+    if (!status) {
+      onSuccess && onSuccess(isAppointment);
+    } else {
+      onBlockUser && onBlockUser(id, status);
+    }
+  };
 
   return (
     <BaseModal
@@ -53,7 +63,7 @@ export const AreYouSureMakeAccountFree = ({
             className="p-4 w-[100px] md:w-[174px] rounded-lg"
             id="yes"
             inputType="button"
-            onClick={() => onSuccess(isAppointment)}
+            onClick={handleConfirmation}
             text={translate("common.are_you_sure_modal.yes_button")}
           />
         </div>

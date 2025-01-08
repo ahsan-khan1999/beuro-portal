@@ -17,7 +17,8 @@ const CustomerDetails = () => {
     handleMakeAccountFree,
     deleteHandler,
     handleAddAppointment,
-    isToggleChecked
+    isToggleChecked,
+    // handleUserBlock
   } = useCustomerDetailAdmin();
 
   return (
@@ -28,7 +29,7 @@ const CustomerDetails = () => {
           onHandleBack={handleBack}
           handleAreYouSure={handleMakeAccountFree}
           isCustomerFree={isCustomerFree}
-          handleStatusChange={handleStatusChange}
+          onStatusChange={handleStatusChange}
           onDelete={deleteHandler}
           onCompanyUpdate={handleAddAppointment}
           isToggleChecked={isToggleChecked}

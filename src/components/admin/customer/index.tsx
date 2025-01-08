@@ -23,12 +23,13 @@ export default function Customers() {
     handleStatusChange,
     totalCount,
     renderModal,
+    handleUserBlock,
   } = useCustomer();
 
   const CurrentComponent = useAdminEmptyStates(
     <TableRow
       currentPageRows={currentPageRows}
-      onStatusChange={handleStatusChange}
+      onBlockUser={handleUserBlock}
     />,
     totalCount !== 0,
     loading

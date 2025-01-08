@@ -16,7 +16,7 @@ export interface AdminCustomerProps {
   isToggleChecked: boolean;
   onHandleBack: () => void;
   handleAreYouSure: () => void;
-  handleStatusChange: (id: string) => void;
+  onStatusChange: (id: string) => void;
   onDelete: () => void;
   onCompanyUpdate: (isAppointment?: boolean, companyName?: string) => void;
 }
@@ -24,7 +24,7 @@ const DetailsData = ({
   customerDetail,
   isCustomerFree,
   handleAreYouSure,
-  handleStatusChange,
+  onStatusChange,
   onCompanyUpdate,
   isToggleChecked,
 }: AdminCustomerProps) => {
@@ -225,7 +225,7 @@ const DetailsData = ({
               selectedItem={translate(
                 `customer_status.${customerDetail.status}`
               )}
-              onItemSelected={handleStatusChange}
+              onItemSelected={onStatusChange}
               dropDownClassName={`w-fit border ${
                 customerDetail?.status === "block"
                   ? "border-[#F00]"

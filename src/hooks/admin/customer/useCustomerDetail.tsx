@@ -13,7 +13,6 @@ import WarningModal from "@/base-components/ui/modals1/WarningModal";
 import { ModalConfigType, ModalType } from "@/enums/ui";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { CustomerPromiseActionType } from "@/types/customer";
-import { getKeyByValue } from "@/utils/auth.util";
 import { staticEnums } from "@/utils/static";
 import { updateQuery } from "@/utils/update-query";
 import { useTranslation } from "next-i18next";
@@ -82,10 +81,6 @@ export default function useCustomerDetailAdmin() {
   const handleCreated = () => {
     onClose();
     setIsCustomerFree(true);
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
-
-  const handleDefaultModal = () => {
     dispatch(updateModalType({ type: ModalType.CREATION }));
   };
 
@@ -164,6 +159,25 @@ export default function useCustomerDetailAdmin() {
     );
   };
 
+  // const handleUserBlock = (id: string, status: string) => {
+  //   const heading =
+  //     status === "Block"
+  //       ? translate("common.modals.un_block_user")
+  //       : translate("common.modals.block_user");
+
+  //   setSubHeading(heading);
+
+  //   dispatch(
+  //     updateModalType({
+  //       type: ModalType.ARE_YOU_BLOCK,
+  //       data: {
+  //         id,
+  //         status,
+  //       },
+  //     })
+  //   );
+  // };
+
   const handleStatusChange = async (custmerStatus: string) => {
     const res = await dispatch(
       updateCompanyStatus({
@@ -203,6 +217,7 @@ export default function useCustomerDetailAdmin() {
         sub_heading={subHeading}
       />
     ),
+
     [ModalType.CREATION]: (
       <CreationCreated
         heading={translate("common.modals.offer_created")}
@@ -227,6 +242,14 @@ export default function useCustomerDetailAdmin() {
         loading={loading}
       />
     ),
+    // [ModalType.ARE_YOU_BLOCK]: (
+    //   <AreYouSureMakeAccountFree
+    //     onClose={onClose}
+    //     onBlockUser={handleStatusChange}
+    //     heading={translate("common.are_you_sure_modal.title")}
+    //     sub_heading={subHeading}
+    //   />
+    // ),
   };
 
   const renderModal = () => {
@@ -251,5 +274,6 @@ export default function useCustomerDetailAdmin() {
     handleCompanyUpdate,
     handleAddAppointment,
     isToggleChecked,
+    // handleUserBlock
   };
 }

@@ -14,6 +14,7 @@ import { DEFAULT_CUSTOMER, staticEnums } from "@/utils/static";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DeleteConfirmation_2 from "@/base-components/ui/modals1/DeleteConfirmation_2";
+import { AreYouSureMakeAccountFree } from "@/base-components/ui/modals1/SueAccountFree";
 
 export default function useCustomer() {
   const { company, totalCount, loading } = useAppSelector(
@@ -24,6 +25,9 @@ export default function useCustomer() {
   const page = query?.page as unknown as number;
   const { modal } = useAppSelector((state) => state.global);
   const [currentPage, setCurrentPage] = useState<number>(page || 1);
+  const [subHeading, setSubHeading] = useState(
+    translate("common.modals.block_user")
+  );
   const [currentPageRows, setCurrentPageRows] =
     useState<CustomersAdmin[]>(company);
 
@@ -101,39 +105,55 @@ export default function useCustomer() {
     setCurrentPage(1);
   };
 
-  const handleDefaultModal = () => {
-    dispatch(updateModalType({ type: ModalType.CREATION }));
-  };
-
   const onClose = () => {
     dispatch(updateModalType({ type: ModalType.NONE }));
   };
 
-  const handleStatusChange = async (
-    id: string,
-    status: string,
-    type: string
-  ) => {
-    if (type === "admin_customer") {
-      const newStatus = status === "Active" ? "Block" : "Active";
+  const handleStatusChange = async (id: string, status: string) => {
+    if (!id || !status) {
+      console.error("ID or status is missing.");
+      return;
+    }
 
-      const res = await dispatch(
-        updateCompanyStatus({
-          data: {
-            id: id,
-            status: staticEnums["User"]["status"][newStatus],
-          },
-        })
+    const newStatus = status === "Active" ? "Block" : "Active";
+
+    const res = await dispatch(
+      updateCompanyStatus({
+        data: {
+          id: id,
+          status: staticEnums["User"]["status"][newStatus],
+        },
+      })
+    );
+
+    if (res?.payload?.success) {
+      setCurrentPageRows((prevRows) =>
+        prevRows.map((row) =>
+          row.id === id ? { ...row, status: newStatus } : row
+        )
       );
 
-      if (res?.payload?.success) {
-        setCurrentPageRows((prevRows) =>
-          prevRows.map((row) =>
-            row.id === id ? { ...row, status: newStatus } : row
-          )
-        );
-      }
+      dispatch(updateModalType({ type: ModalType.CREATION }));
     }
+  };
+
+  const handleUserBlock = (id: string, status: string) => {
+    const heading =
+      status === "Block"
+        ? translate("common.modals.un_block_user")
+        : translate("common.modals.block_user");
+
+    setSubHeading(heading); 
+
+    dispatch(
+      updateModalType({
+        type: ModalType.ARE_YOU_BLOCK,
+        data: {
+          id,
+          status,
+        },
+      })
+    );
   };
 
   const MODAL_CONFIG: ModalConfigType = {
@@ -151,6 +171,14 @@ export default function useCustomer() {
         modelHeading={translate("calendar.delete_appointment_des")}
         routeHandler={handleStatusChange}
         loading={loading}
+      />
+    ),
+    [ModalType.ARE_YOU_BLOCK]: (
+      <AreYouSureMakeAccountFree
+        onClose={onClose}
+        onBlockUser={handleStatusChange}
+        heading={translate("common.are_you_sure_modal.title")}
+        sub_heading={subHeading}
       />
     ),
   };
@@ -172,5 +200,6 @@ export default function useCustomer() {
     totalCount,
     handleStatusChange,
     renderModal,
+    handleUserBlock,
   };
 }

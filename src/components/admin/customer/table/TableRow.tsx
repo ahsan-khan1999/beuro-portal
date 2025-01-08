@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 import React from "react";
 import userIcon from "@/assets/svgs/Group 48095860.svg";
 import { useTranslation } from "next-i18next";
-// import { DropDown } from "@/base-components/ui/dropDown/drop-down";
-// import { staticEnums } from "@/utils/static";
 import { EditIcon } from "@/assets/svgs/components/edit-icon";
 import { WithTooltip } from "@/base-components/ui/tooltip/tooltip";
 import { IconButton } from "@/base-components/ui/button/icon-button";
@@ -14,12 +12,12 @@ import { UnBlockIcon } from "@/assets/svgs/components/unblock-icon";
 
 export interface AdminCustomerTableProps {
   currentPageRows: CustomersAdmin[];
-  onStatusChange: (id: string, status: string, type: string) => void;
+  onBlockUser: (id: string, status: string) => void;
 }
 
 const TableRow = ({
   currentPageRows,
-  onStatusChange,
+  onBlockUser,
 }: AdminCustomerTableProps) => {
   const router = useRouter();
   const { t: translate } = useTranslation();
@@ -129,9 +127,7 @@ const TableRow = ({
                   children={
                     <IconButton
                       icon={<BlockIcon className="w-8 h-8" />}
-                      onClick={() =>
-                        onStatusChange(item.id, item?.status, "admin_customer")
-                      }
+                      onClick={() => onBlockUser(item.id, item?.status)}
                     />
                   }
                   tooltipContent={translate("customer_status.Block")}
@@ -141,9 +137,7 @@ const TableRow = ({
                   children={
                     <IconButton
                       icon={<UnBlockIcon />}
-                      onClick={() =>
-                        onStatusChange(item.id, item?.status, "admin_customer")
-                      }
+                      onClick={() => onBlockUser(item.id, item?.status)}
                     />
                   }
                   tooltipContent={translate("customer_status.Active")}
