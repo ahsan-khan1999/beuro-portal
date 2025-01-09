@@ -219,7 +219,7 @@ export default function TabletLeadsFilter({
       : undefined;
 
   return (
-    <div className="flex flex-col xMaxLarge:flex-row xMd:hidden xMaxLarge:items-center justify-between w-full z-10 gap-y-4">
+    <div className="flex flex-col xMaxLarge:flex-row xMaxLarge:items-center justify-between w-full z-10 gap-y-4">
       <h1 className="text-2xl font-medium text-[#222B45]">Leads</h1>
 
       <div className="flex flex-col xMaxLarge:flex-row xMaxLarge:items-center gap-1 mlg:gap-4">
@@ -305,12 +305,15 @@ export default function TabletLeadsFilter({
               onInputChange={onDateChange}
             />
           </div>
-          <LeadsFilters
-            filter={filter}
-            setFilter={setFilter}
-            onFilterChange={handleFilterChange}
-            containerClassName="z-0"
-          />
+
+          <div className="hidden md:block">
+            <LeadsFilters
+              filter={filter}
+              setFilter={setFilter}
+              onFilterChange={handleFilterChange}
+              containerClassName="z-0"
+            />
+          </div>
         </div>
 
         {!isAgent && (

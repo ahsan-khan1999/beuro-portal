@@ -111,7 +111,7 @@ export const AppointmentTableRows = ({
                 index !== 0 && "border-t border-t-[#E7EAEE]"
               } ${index === 0 && "mt-2"}  
               grid grid-cols-[minmax(100px,15%)_minmax(100px,_15%)_minmax(80px,_12%)_minmax(80px,_23%)_minmax(100px,15%)_minmax(150px,20%)] 
-              items-center gap-x-2 bg-primary rounded-lg px-2 py-1 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF]`}
+              items-center bg-primary rounded-lg px-2 py-1 !min-h-[70px] cursor-pointer hover:bg-[#E9E1FF] gap-x-3`}
             >
               <div>
                 <span className="text-xs md:sm xl:text-base hidden xl:flex">
@@ -159,18 +159,16 @@ export const AppointmentTableRows = ({
                 </div>
               </div>
 
-              <div>
-                <p className="text-xs md:sm xl:text-base leading-5">
-                  {item?.canton}
-                </p>
-              </div>
+              <p className="text-xs md:sm xl:text-base leading-5">
+                {item?.canton}
+              </p>
               <div>
                 <div
                   className={`${
                     item?.leadID?.isOfferCreated === true
                       ? "bg-[#45C769]"
                       : "bg-[#FB9600]"
-                  } text-white px-2 py-2 text-center rounded-md w-full min-w-[110px] max-w-[150px] text-xs`}
+                  } text-white px-2 py-[11px] text-center rounded-md w-full min-w-[110px] max-w-[150px] text-xs`}
                 >
                   <span className="text-white text-xs">
                     {item.leadID?.isOfferCreated === true

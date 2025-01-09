@@ -30,7 +30,7 @@ export const DatePicker = ({
     <div className={`relative w-full flex items-center`}>
       {remove && (
         <div
-          className="cursor-pointer -top-9 absolute right-0 bg-red px-3 py-1 mt-1 text-white rounded-t-md"
+          className="cursor-pointer -top-[28px] md:-top-8 absolute right-2 bg-red px-1 text-sm md:px-3 py-[2px] md:py-1 mt-1 text-white rounded-t-md"
           onClick={onRemove}
         >
           {remove}

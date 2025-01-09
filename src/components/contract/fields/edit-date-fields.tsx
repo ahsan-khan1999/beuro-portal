@@ -199,7 +199,7 @@ export const generateDateChildren = (
             },
           },
           {
-            containerClass: "mb-0 ",
+            containerClass: "mb-0",
             label: {
               text: `${translate("common.end_date")}`,
               htmlFor: `date.${i}.endDate`,
@@ -208,7 +208,7 @@ export const generateDateChildren = (
             field: {
               type: Field.date,
               className:
-                "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full ",
+                "!py-4 !pr-8 pl-4 !border-[#BFBFBF] focus:!border-primary w-full",
               name: `date.${i}.endDate`,
               remove: i > 0 && `${translate("common.remove")}`,
               onRemove: () => handleRemoveDateField(i),
@@ -231,7 +231,7 @@ export const generateDateChildren = (
     field: {
       type: Field.div,
       id: "date-field",
-      className: "flex space-x-3  justify-between",
+      className: "flex space-x-3 justify-between",
       children: [
         {
           containerClass: "flex",
@@ -241,7 +241,7 @@ export const generateDateChildren = (
             text: `${translate("common.add_new_date")}`,
             inputType: "button",
             className:
-              "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+              "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit !h-[40px] md:!h-[50px] text-white hover-bg-none",
             onClick: () => OnClick({ startDate: "", endDate: "" }),
           },
         },
@@ -254,7 +254,7 @@ export const generateDateChildren = (
             inputType: "submit",
             loading,
             className:
-              "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit h-[50px] text-white hover-bg-none",
+              "rounded-lg bg-[#4A13E7] px-4 min-w-[152px] w-fit !h-[40px] md:!h-[50px] text-white hover-bg-none",
           },
         },
       ],

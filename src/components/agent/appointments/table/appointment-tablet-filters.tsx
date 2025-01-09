@@ -195,12 +195,12 @@ export default function AppointmentsTabletFilters({
     queryOffer === "true" ? true : queryOffer === "false" ? false : undefined;
 
   return (
-    <div className="flex flex-col xLarge:flex-row xLarge:items-center justify-between z-50 gap-y-4">
+    <div className="flex flex-col maxLarge:flex-row maxLarge:items-center justify-between z-50 gap-y-4">
       <h1 className={`text-2xl font-medium text-[#222B45]`}>
         {translate("sidebar.customer.appointments.appointment")}
       </h1>
       <div className="flex items-center gap-x-2">
-        <div className="hidden maxSize:flex items-center gap-[14px]">
+        <div className="hidden xMaxSize:flex items-center gap-[14px]">
           {checkbox?.map((item, idx) => (
             <CheckField
               key={idx}
@@ -279,12 +279,14 @@ export default function AppointmentsTabletFilters({
             onInputChange={onDateChange}
           />
         </div>
-        <LeadsFilters
-          filter={filter}
-          setFilter={setFilter}
-          onFilterChange={handleFilterChange}
-          containerClassName="z-0"
-        />
+        <div className="hidden md:block">
+          <LeadsFilters
+            filter={filter}
+            setFilter={setFilter}
+            onFilterChange={handleFilterChange}
+            containerClassName="z-0"
+          />
+        </div>
       </div>
     </div>
   );

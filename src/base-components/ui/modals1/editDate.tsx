@@ -6,24 +6,28 @@ import { Form } from "@/base-components/form/form";
 import { useEditDate } from "@/hooks/contract/useEditDate";
 import { EmailHeaderProps, PdfProps } from "@/types";
 
+export interface EditContractDateProps {
+  onClose: () => void;
+  setOfferData?: SetStateAction<any>;
+  pdfData?: PdfProps<EmailHeaderProps>;
+}
+
 export const EditDate = ({
   onClose,
   setOfferData,
   pdfData,
-}: {
-  onClose: () => void;
-  setOfferData?: SetStateAction<any>;
-  pdfData?: PdfProps<EmailHeaderProps>;
-}) => {
-  const { fields, control, onSubmit, handleSubmit, errors, error, translate } =
-    useEditDate(setOfferData, pdfData);
+}: EditContractDateProps) => {
+  const { fields, onSubmit, handleSubmit, errors, translate } = useEditDate(
+    setOfferData,
+    pdfData
+  );
 
   return (
     <BaseModal
       onClose={onClose}
-      containerClassName="max-w-[320px] md:max-w-[480px] lg:max-w-[624px] min-h-auto max-h-[600px] overflow-y-scroll"
+      containerClassName="max-w-[380px] md:max-w-[480px] lg:max-w-[624px] min-h-auto max-h-[600px] overflow-y-scroll"
     >
-      <main className="relative pt-[18px] pb-[47px] pl-[32px] pr-[25px]">
+      <main className="relative px-2 py-3 md:pt-[18px] md:pb-[47px] md:pl-[32px] md:pr-[25px]">
         <Image
           src={crossIcon}
           alt="cross_icon"
