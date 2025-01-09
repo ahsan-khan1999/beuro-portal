@@ -1,18 +1,18 @@
-import { SystemSetting } from "@/api/slices/settingSlice/settings";
-import { PdfProps, RoomObject, TemplateType } from "@/types";
-import { EmailTemplate } from "@/types/settings";
 import React from "react";
+import { Footer } from "../footer";
+import { useRouter } from "next/router";
+import { ServiceItem } from "./service-item";
+import AddressDetails from "./address-details";
+import { EmailTemplate } from "@/types/settings";
+import { ServiceHeader } from "./service-header";
+import { ServicesTotalAmount } from "./sevices-total";
+import { PdfProps, RoomObject, TemplateType } from "@/types";
 import { DocumentHeader } from "../preview/document-header";
 import { ContactDetails } from "../preview/contact-details";
-import { Footer } from "../footer";
-import { ServicesTotalAmount } from "./sevices-total";
-import AddressDetails from "./address-details";
-import { ServiceItem } from "./service-item";
-import { ServiceHeader } from "./service-header";
 import { HouseItemWrapper } from "./house-item-wrapper";
-
 import { DynamicItemWrapper } from "./dynamic-item-wrapper";
 import { AppointmentDetails } from "./appointment-details";
+import { SystemSetting } from "@/api/slices/settingSlice/settings";
 import {
   isRoomNotEmpty,
   getLivingRoom,
@@ -39,6 +39,10 @@ const AppointmentPdfPreview = <T,>({
   templateSettings,
   language,
 }: AppointProps) => {
+  const router = useRouter();
+  const path = router.asPath;
+  const isAgentRoute = path.startsWith("/agent");
+
   const isDiscount =
     pdfData?.serviceItemFooter?.serviceDiscountSum &&
     Number(pdfData?.serviceItemFooter?.serviceDiscountSum) > 0
@@ -94,6 +98,7 @@ const AppointmentPdfPreview = <T,>({
         <DocumentHeader
           {...pdfData?.headerDetails}
           emailTemplateSettings={emailTemplateSettings}
+          isOffer={isAgentRoute}
         />
         <div className="px-[80px] flex flex-col bg-white">
           <ContactDetails {...{ ...pdfData?.contactAddress, language }} />

@@ -1,7 +1,6 @@
 import { Document, Font, Page, StyleSheet } from "@react-pdf/renderer";
 import { ReportAddressDetails } from "./report-address-details";
 import { HouseItemWrapper } from "./house-item-wrapper";
-import { StaticImageData } from "next/image";
 import { ServiceTableHederRow } from "../reactPdf/service-table-header-row";
 import { ServiceTableRow } from "../reactPdf/service-table-row";
 import { ServicesTotalAmount } from "../reactPdf/services-total-ammount";
@@ -39,11 +38,11 @@ Font.register({
       fontStyle: "thin",
       fontWeight: 100,
     },
-    {
-      src: `${fontPath}/PoppinsRegular.ttf`,
-      fontStyle: "normal",
-      fontWeight: 400,
-    },
+    // {
+    //   src: `${fontPath}/PoppinsRegular.ttf`,
+    //   fontStyle: "normal",
+    //   fontWeight: 400,
+    // },
     {
       src: `${fontPath}/Poppins-Medium.ttf`,
       fontStyle: "medium",
