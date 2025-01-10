@@ -21,11 +21,11 @@ Font.register({
       fontStyle: "thin",
       fontWeight: 100,
     },
-    // {
-    //   src: `${fontPath}/PoppinsRegular.ttf`,
-    //   fontStyle: "normal",
-    //   fontWeight: 400,
-    // },
+    {
+      src: `${fontPath}/PoppinsRegular.ttf`,
+      fontStyle: "normal",
+      fontWeight: 400,
+    },
     {
       src: `${fontPath}/Poppins-Medium.ttf`,
       fontStyle: "medium",
