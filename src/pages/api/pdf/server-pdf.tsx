@@ -86,8 +86,8 @@ export default async function handler(
     if (qrCodeData) blobArray.push(qrCodeData);
 
     const mergedPdfBlob =
-      blobArray.length > 1
-        ? await mergePDFs(blobArray, pdfData?.headerDetails?.offerNo)
+      blobArray?.length > 1
+        ? await mergePDFs(blobArray, pdfData?.offerNumber)
         : pdfBlob;
 
     const buffer = Buffer.from(await mergedPdfBlob.arrayBuffer());
@@ -95,9 +95,7 @@ export default async function handler(
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=${pdfData?.headerDetails?.companyName}-Vertrag-${
-        pdfData?.headerDetails?.offerNo || "file"
-      }.pdf`
+      `attachment; filename=${pdfData?.createdBy?.company?.companyName}-Angebot-${pdfData?.offerNumber}.pdf`
     );
     res.send(buffer);
   } catch (error) {

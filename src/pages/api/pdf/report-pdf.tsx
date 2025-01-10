@@ -14,9 +14,6 @@ export default async function handler(
         .json({ message: "Only POST requests are allowed" });
     }
 
-    const { emailTemplateSettings, templateSettings, pdfData, systemSetting } =
-      req.body;
-
     const { id, currentLanguage } = req.body;
     const { refreshtoken: refreshToken, accesstoken: accessToken } =
       req.headers;
@@ -38,19 +35,12 @@ export default async function handler(
     const endpoints = [
       `${BASEURL}/setting/template`,
       `${BASEURL}/setting/mail-setting/mail-setting`,
-      `${BASEURL}/offer/${id}`,
+      `${BASEURL}/lead/report/${id}`,
       `${BASEURL}/setting/system-setting/`,
     ];
 
-    const [template, emailTemplate, offerData, settings] = await Promise.all(
+    const [template, emailTemplate, reportData, settings] = await Promise.all(
       endpoints.map((url) => fetch(url, { headers: commonHeaders }))
-    );
-
-    const qrCodeResponse = await fetch(
-      `${BASEURL}/contract/generate-QrCode/${id}`,
-      {
-        headers: commonHeaders,
-      }
     );
 
     const [
@@ -58,23 +48,23 @@ export default async function handler(
       responseMailTemplate,
       responseOffer,
       responseSettings,
-      qrCodeData,
     ] = await Promise.all([
       template.json(),
       emailTemplate.json(),
-      offerData.json(),
+      reportData.json(),
       settings.json(),
-      qrCodeResponse.ok ? qrCodeResponse.blob() : null,
     ]);
+
+    const report = responseOffer?.data?.Report;
 
     const pdfStream = await renderToStream(
       <ServerReportPdf
         {...{
-          data: pdfData,
-          emailTemplateSettings,
-          templateSettings,
-          systemSetting,
-          lang: pdfData?.currentLanguage,
+          data: report,
+          emailTemplateSettings: responseMailTemplate?.MailSetting,
+          templateSettings: responseTemplate?.Template,
+          systemSetting: responseSettings?.Setting,
+          lang: currentLanguage,
         }}
       />
     );
@@ -82,7 +72,7 @@ export default async function handler(
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       `Content-Disposition`,
-      `attachment; filename=${pdfData?.headerDetails?.companyName}-Angebot-${pdfData?.headerDetails?.offerNo}.pdf`
+      `attachment; filename=${report?.appointmentID?.createdBy?.company?.companyName}-Bericht-${report?.appointmentID?.leadID?.refID}.pdf`
     );
 
     pdfStream.pipe(res);
