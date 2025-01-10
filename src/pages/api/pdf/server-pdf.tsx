@@ -15,7 +15,7 @@ export default async function handler(
         .json({ message: "Only POST requests are allowed" });
     }
 
-    const { offerID, currentLanguage } = req.body;
+    const { id, currentLanguage } = req.body;
     const { refreshtoken: refreshToken, accesstoken: accessToken } =
       req.headers;
 
@@ -36,7 +36,7 @@ export default async function handler(
     const endpoints = [
       `${BASEURL}/setting/template`,
       `${BASEURL}/setting/mail-setting/mail-setting`,
-      `${BASEURL}/offer/${offerID}`,
+      `${BASEURL}/offer/${id}`,
       `${BASEURL}/setting/system-setting/`,
     ];
 
@@ -45,7 +45,7 @@ export default async function handler(
     );
 
     const qrCodeResponse = await fetch(
-      `${BASEURL}/contract/generate-QrCode/${offerID}`,
+      `${BASEURL}/contract/generate-QrCode/${id}`,
       {
         headers: commonHeaders,
       }
