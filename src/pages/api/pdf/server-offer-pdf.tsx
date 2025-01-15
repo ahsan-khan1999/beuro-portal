@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { pdf as reactPdf, renderToStream } from "@react-pdf/renderer";
+import { renderToStream } from "@react-pdf/renderer";
 import { ServerPdf } from "@/components/reactPdf/server-pdf-file";
-import { mergePDFs } from "@/utils/utility";
 import { BASEURL } from "@/services/HttpProvider";
 import { staticEnums } from "@/utils/static";
 
