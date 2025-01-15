@@ -272,8 +272,6 @@ export const useInvoicePdf = () => {
             },
             aggrementDetails: invoiceDetails?.additionalDetails || "",
             isOffer: true,
-            // signature:
-            //   invoiceDetails?.invoiceID?.signature,
             isCanvas: false,
           };
 

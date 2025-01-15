@@ -101,9 +101,9 @@ export default async function handler(
         companyName: pdfData?.createdBy?.company?.companyName,
         offerDate: pdfData?.createdAt,
         createdBy: pdfData?.createdBy?.fullName,
-        logo: mailSetting?.logo,
         emailTemplateSettings: mailSetting,
         isReverseLogo: templateSetting?.order,
+        logo: mailSetting?.logo,
       },
       contactAddress: {
         address: {

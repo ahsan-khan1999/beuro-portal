@@ -134,7 +134,7 @@ const SERVICE_URLS = {
   rejectOfferPublic: "/offer/reject-offer",
   updateDiscount: "/offer/update-discount/",
   readContractQrCode: "/contract/generate-QrCode",
-  readInvoiceQrCode: "/invoice/invoice-collection/generate-pdf",
+  readInvoiceQrCode: "",
   readMainInvoiceQrCode: "/invoice/generate-QrCode",
   settingsQrCode: "/setting/qrcode/qrCode-setting",
   offerContent: "/offer/update-content/",
