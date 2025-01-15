@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     // paddingTop: 15,
   },
   container: {
-    fontFamily: "Poppins",
     display: "flex",
     flexDirection: "column",
     rowGap: 60,

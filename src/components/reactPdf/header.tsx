@@ -66,7 +66,6 @@ export const Header = ({
         flexDirection: isReverseLogo ? "row-reverse" : "row",
         alignItems: "center",
         padding: 20,
-        fontFamily: "Poppins",
       }}
       key={language}
       fixed

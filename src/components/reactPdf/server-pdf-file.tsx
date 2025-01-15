@@ -156,6 +156,7 @@ export const ServerPdf = ({
 
 const styles = StyleSheet.create({
   body: {
+    fontFamily: "Poppins",
     paddingBottom: 100,
   },
 });
